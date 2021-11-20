@@ -35,13 +35,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const query = graphql`
   query devApproachSection {
-    allSanityDevelopersPage {
-      nodes {
-        approachSection {
-          caption
-          header
-          _rawBody
-        }
+    sanityDevelopersPage {
+      approachSection {
+        caption
+        header
+        _rawBody
       }
     }
   }
@@ -49,13 +47,13 @@ const query = graphql`
 
 const ApproachSection: React.FC = () => {
   const styles = useStyles();
-  const data: DevApproachSectionQuery = useStaticQuery(query);
-  const content = data?.allSanityDevelopersPage?.nodes?.[0].approachSection;
+  const { sanityDevelopersPage } = useStaticQuery<DevApproachSectionQuery>(query);
+  const data = sanityDevelopersPage?.approachSection;
 
   return (
     <Section className={styles.section}>
-      <div className={styles.caption}>{content?.caption}</div>
-      <TitleDescription title={`${content?.header}`} description={content?._rawBody} />
+      <div className={styles.caption}>{data?.caption}</div>
+      <TitleDescription title={`${data?.header}`} description={data?._rawBody} />
     </Section>
   );
 };

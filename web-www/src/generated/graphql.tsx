@@ -11450,6 +11450,8 @@ export type Query = {
   allSanityEcologicalOutcome: SanityEcologicalOutcomeConnection;
   sanityFaq: Maybe<SanityFaq>;
   allSanityFaq: SanityFaqConnection;
+  sanityFaqPage: Maybe<SanityFaqPage>;
+  allSanityFaqPage: SanityFaqPageConnection;
   sanityFeaturedSection: Maybe<SanityFeaturedSection>;
   allSanityFeaturedSection: SanityFeaturedSectionConnection;
   sanityHomePage: Maybe<SanityHomePage>;
@@ -12139,6 +12141,30 @@ export type QuerySanityFaqArgs = {
 export type QueryAllSanityFaqArgs = {
   filter: Maybe<SanityFaqFilterInput>;
   sort: Maybe<SanityFaqSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QuerySanityFaqPageArgs = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  categories: Maybe<SanityFaqCategoryFilterListInput>;
+  _rawCategories: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSanityFaqPageArgs = {
+  filter: Maybe<SanityFaqPageFilterInput>;
+  sort: Maybe<SanityFaqPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -20476,6 +20502,32 @@ export type SanityFaq_RawAnswerArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
+export type SanityFaqCategory = {
+  __typename?: 'SanityFaqCategory';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  questions: Maybe<Array<Maybe<SanityFaq>>>;
+  _rawQuestions: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityFaqCategory_RawQuestionsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityFaqCategoryFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  questions: Maybe<SanityFaqFilterListInput>;
+  _rawQuestions: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityFaqCategoryFilterListInput = {
+  elemMatch: Maybe<SanityFaqCategoryFilterInput>;
+};
+
 export type SanityFaqConnection = {
   __typename?: 'SanityFaqConnection';
   totalCount: Scalars['Int'];
@@ -20641,6 +20693,233 @@ export type SanityFaqGroupConnection = {
   pageInfo: PageInfo;
   field: Scalars['String'];
   fieldValue: Maybe<Scalars['String']>;
+};
+
+export type SanityFaqPage = SanityDocument & Node & {
+  __typename?: 'SanityFaqPage';
+  _id: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  _createdAt: Maybe<Scalars['Date']>;
+  _updatedAt: Maybe<Scalars['Date']>;
+  _rev: Maybe<Scalars['String']>;
+  _key: Maybe<Scalars['String']>;
+  categories: Maybe<Array<Maybe<SanityFaqCategory>>>;
+  _rawCategories: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type SanityFaqPage_CreatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityFaqPage_UpdatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityFaqPage_RawCategoriesArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityFaqPageConnection = {
+  __typename?: 'SanityFaqPageConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityFaqPageEdge>;
+  nodes: Array<SanityFaqPage>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<SanityFaqPageGroupConnection>;
+};
+
+
+export type SanityFaqPageConnectionDistinctArgs = {
+  field: SanityFaqPageFieldsEnum;
+};
+
+
+export type SanityFaqPageConnectionGroupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: SanityFaqPageFieldsEnum;
+};
+
+export type SanityFaqPageEdge = {
+  __typename?: 'SanityFaqPageEdge';
+  next: Maybe<SanityFaqPage>;
+  node: SanityFaqPage;
+  previous: Maybe<SanityFaqPage>;
+};
+
+export enum SanityFaqPageFieldsEnum {
+  Id = '_id',
+  Type = '_type',
+  CreatedAt = '_createdAt',
+  UpdatedAt = '_updatedAt',
+  Rev = '_rev',
+  Key = '_key',
+  Categories = 'categories',
+  CategoriesKey = 'categories____key',
+  CategoriesType = 'categories____type',
+  CategoriesHeader = 'categories___header',
+  CategoriesQuestions = 'categories___questions',
+  CategoriesQuestionsId = 'categories___questions____id',
+  CategoriesQuestionsType = 'categories___questions____type',
+  CategoriesQuestionsCreatedAt = 'categories___questions____createdAt',
+  CategoriesQuestionsUpdatedAt = 'categories___questions____updatedAt',
+  CategoriesQuestionsRev = 'categories___questions____rev',
+  CategoriesQuestionsKey = 'categories___questions____key',
+  CategoriesQuestionsQuestion = 'categories___questions___question',
+  CategoriesQuestionsAnswer = 'categories___questions___answer',
+  CategoriesQuestionsAnswerKey = 'categories___questions___answer____key',
+  CategoriesQuestionsAnswerType = 'categories___questions___answer____type',
+  CategoriesQuestionsAnswerChildren = 'categories___questions___answer___children',
+  CategoriesQuestionsAnswerStyle = 'categories___questions___answer___style',
+  CategoriesQuestionsAnswerList = 'categories___questions___answer___list',
+  CategoriesQuestionsAnswerRawChildren = 'categories___questions___answer____rawChildren',
+  CategoriesQuestionsRawAnswer = 'categories___questions____rawAnswer',
+  CategoriesQuestionsId = 'categories___questions___id',
+  CategoriesQuestionsParentId = 'categories___questions___parent___id',
+  CategoriesQuestionsParentChildren = 'categories___questions___parent___children',
+  CategoriesQuestionsChildren = 'categories___questions___children',
+  CategoriesQuestionsChildrenId = 'categories___questions___children___id',
+  CategoriesQuestionsChildrenChildren = 'categories___questions___children___children',
+  CategoriesQuestionsInternalContent = 'categories___questions___internal___content',
+  CategoriesQuestionsInternalContentDigest = 'categories___questions___internal___contentDigest',
+  CategoriesQuestionsInternalDescription = 'categories___questions___internal___description',
+  CategoriesQuestionsInternalFieldOwners = 'categories___questions___internal___fieldOwners',
+  CategoriesQuestionsInternalIgnoreType = 'categories___questions___internal___ignoreType',
+  CategoriesQuestionsInternalMediaType = 'categories___questions___internal___mediaType',
+  CategoriesQuestionsInternalOwner = 'categories___questions___internal___owner',
+  CategoriesQuestionsInternalType = 'categories___questions___internal___type',
+  CategoriesRawQuestions = 'categories____rawQuestions',
+  RawCategories = '_rawCategories',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type SanityFaqPageFilterInput = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  categories: Maybe<SanityFaqCategoryFilterListInput>;
+  _rawCategories: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+export type SanityFaqPageGroupConnection = {
+  __typename?: 'SanityFaqPageGroupConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityFaqPageEdge>;
+  nodes: Array<SanityFaqPage>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue: Maybe<Scalars['String']>;
+};
+
+export type SanityFaqPageSortInput = {
+  fields: Maybe<Array<Maybe<SanityFaqPageFieldsEnum>>>;
+  order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
 export type SanityFaqSortInput = {
@@ -21290,13 +21569,6 @@ export type SanityHomeFoldSection = {
   _type: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
   body: Maybe<Scalars['String']>;
-  image: Maybe<SanityCustomImage>;
-  _rawImage: Maybe<Scalars['JSON']>;
-};
-
-
-export type SanityHomeFoldSection_RawImageArgs = {
-  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
 export type SanityHomeFoldSectionFilterInput = {
@@ -21304,8 +21576,6 @@ export type SanityHomeFoldSectionFilterInput = {
   _type: Maybe<StringQueryOperatorInput>;
   title: Maybe<StringQueryOperatorInput>;
   body: Maybe<StringQueryOperatorInput>;
-  image: Maybe<SanityCustomImageFilterInput>;
-  _rawImage: Maybe<JsonQueryOperatorInput>;
 };
 
 export type SanityHomePage = SanityDocument & Node & {
@@ -21680,17 +21950,6 @@ export enum SanityHomePageWebFieldsEnum {
   HomeFoldSectionType = 'homeFoldSection____type',
   HomeFoldSectionTitle = 'homeFoldSection___title',
   HomeFoldSectionBody = 'homeFoldSection___body',
-  HomeFoldSectionImageKey = 'homeFoldSection___image____key',
-  HomeFoldSectionImageType = 'homeFoldSection___image____type',
-  HomeFoldSectionImageImageHref = 'homeFoldSection___image___imageHref',
-  HomeFoldSectionImageImageKey = 'homeFoldSection___image___image____key',
-  HomeFoldSectionImageImageType = 'homeFoldSection___image___image____type',
-  HomeFoldSectionImageImageRawAsset = 'homeFoldSection___image___image____rawAsset',
-  HomeFoldSectionImageImageRawHotspot = 'homeFoldSection___image___image____rawHotspot',
-  HomeFoldSectionImageImageRawCrop = 'homeFoldSection___image___image____rawCrop',
-  HomeFoldSectionImageImageAlt = 'homeFoldSection___image___imageAlt',
-  HomeFoldSectionImageRawImage = 'homeFoldSection___image____rawImage',
-  HomeFoldSectionRawImage = 'homeFoldSection____rawImage',
   MarketplaceSectionKey = 'marketplaceSection____key',
   MarketplaceSectionType = 'marketplaceSection____type',
   MarketplaceSectionHeader = 'marketplaceSection___header',
@@ -31144,28 +31403,28 @@ export type Unnamed_5_Query = (
   )> }
 );
 
-export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
+export type FaqPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_6_Query = (
+export type FaqPageQuery = (
   { __typename?: 'Query' }
-  & { faqYaml: Maybe<(
-    { __typename?: 'FaqYaml' }
+  & { sanityFaqPage: Maybe<(
+    { __typename?: 'SanityFaqPage' }
     & { categories: Maybe<Array<Maybe<(
-      { __typename?: 'FaqYamlCategories' }
-      & Pick<FaqYamlCategories, 'header'>
+      { __typename?: 'SanityFaqCategory' }
+      & Pick<SanityFaqCategory, 'header'>
       & { questions: Maybe<Array<Maybe<(
-        { __typename?: 'FaqYamlCategoriesQuestions' }
-        & Pick<FaqYamlCategoriesQuestions, 'question' | 'answer'>
+        { __typename?: 'SanityFaq' }
+        & Pick<SanityFaq, 'question' | '_rawAnswer'>
       )>>> }
     )>>> }
   )> }
 );
 
-export type Unnamed_7_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_7_Query = (
+export type Unnamed_6_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -31208,10 +31467,10 @@ export type HomePageWebQuery = (
   )> }
 );
 
-export type Unnamed_8_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_7_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_8_Query = (
+export type Unnamed_7_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -31239,10 +31498,10 @@ export type MainnetPageQuery = (
   )> }
 );
 
-export type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_8_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_9_Query = (
+export type Unnamed_8_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'MediaYaml' }
@@ -31262,10 +31521,10 @@ export type Unnamed_9_Query = (
   )> }
 );
 
-export type Unnamed_10_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_10_Query = (
+export type Unnamed_9_Query = (
   { __typename?: 'Query' }
   & { allPartnersYaml: (
     { __typename?: 'PartnersYamlConnection' }
@@ -31290,10 +31549,10 @@ export type Unnamed_10_Query = (
   ) }
 );
 
-export type Unnamed_11_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_10_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_11_Query = (
+export type Unnamed_10_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -31307,10 +31566,10 @@ export type Unnamed_11_Query = (
   )> }
 );
 
-export type Unnamed_12_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_11_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_12_Query = (
+export type Unnamed_11_Query = (
   { __typename?: 'Query' }
   & { markdownRemark: Maybe<(
     { __typename?: 'MarkdownRemark' }
@@ -31318,10 +31577,10 @@ export type Unnamed_12_Query = (
   )> }
 );
 
-export type Unnamed_13_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_12_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_13_Query = (
+export type Unnamed_12_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -31329,10 +31588,10 @@ export type Unnamed_13_Query = (
   )> }
 );
 
-export type Unnamed_14_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_13_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_14_Query = (
+export type Unnamed_13_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -31349,10 +31608,10 @@ export type Unnamed_14_Query = (
   )> }
 );
 
-export type Unnamed_15_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_14_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_15_Query = (
+export type Unnamed_14_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -31360,10 +31619,10 @@ export type Unnamed_15_Query = (
   )> }
 );
 
-export type Unnamed_16_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_15_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_16_Query = (
+export type Unnamed_15_Query = (
   { __typename?: 'Query' }
   & { markdownRemark: Maybe<(
     { __typename?: 'MarkdownRemark' }
@@ -31371,10 +31630,10 @@ export type Unnamed_16_Query = (
   )> }
 );
 
-export type Unnamed_17_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_16_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_17_Query = (
+export type Unnamed_16_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -31400,10 +31659,10 @@ export type Unnamed_17_Query = (
   )> }
 );
 
-export type Unnamed_18_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_17_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_18_Query = (
+export type Unnamed_17_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -31411,10 +31670,10 @@ export type Unnamed_18_Query = (
   )> }
 );
 
-export type Unnamed_19_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_18_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_19_Query = (
+export type Unnamed_18_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -31690,16 +31949,13 @@ export type DevApproachSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type DevApproachSectionQuery = (
   { __typename?: 'Query' }
-  & { allSanityDevelopersPage: (
-    { __typename?: 'SanityDevelopersPageConnection' }
-    & { nodes: Array<(
-      { __typename?: 'SanityDevelopersPage' }
-      & { approachSection: Maybe<(
-        { __typename?: 'SanityDevApproachSection' }
-        & Pick<SanityDevApproachSection, 'caption' | 'header' | '_rawBody'>
-      )> }
+  & { sanityDevelopersPage: Maybe<(
+    { __typename?: 'SanityDevelopersPage' }
+    & { approachSection: Maybe<(
+      { __typename?: 'SanityDevApproachSection' }
+      & Pick<SanityDevApproachSection, 'caption' | 'header' | '_rawBody'>
     )> }
-  ) }
+  )> }
 );
 
 export type DevCareersSectionQueryVariables = Exact<{ [key: string]: never; }>;
@@ -31716,20 +31972,17 @@ export type DevCareersSectionQuery = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, allSanityDevelopersPage: (
-    { __typename?: 'SanityDevelopersPageConnection' }
-    & { nodes: Array<(
-      { __typename?: 'SanityDevelopersPage' }
-      & { careersSection: Maybe<(
-        { __typename?: 'SanityDevCareersSection' }
-        & Pick<SanityDevCareersSection, 'caption' | 'header' | '_rawBody'>
-        & { button: Maybe<(
-          { __typename?: 'SanityButton' }
-          & ButtonFieldsFragment
-        )> }
+  )>, sanityDevelopersPage: Maybe<(
+    { __typename?: 'SanityDevelopersPage' }
+    & { careersSection: Maybe<(
+      { __typename?: 'SanityDevCareersSection' }
+      & Pick<SanityDevCareersSection, 'caption' | 'header' | '_rawBody'>
+      & { button: Maybe<(
+        { __typename?: 'SanityButton' }
+        & ButtonFieldsFragment
       )> }
     )> }
-  ) }
+  )> }
 );
 
 export type DevConnectSectionQueryVariables = Exact<{ [key: string]: never; }>;
@@ -31746,13 +31999,10 @@ export type DevConnectSectionQuery = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, allSanityDevelopersPage: (
-    { __typename?: 'SanityDevelopersPageConnection' }
-    & { nodes: Array<(
-      { __typename?: 'SanityDevelopersPage' }
-      & Pick<SanityDevelopersPage, 'connectSectionHeader'>
-    )> }
-  ) }
+  )>, sanityDevelopersPage: Maybe<(
+    { __typename?: 'SanityDevelopersPage' }
+    & Pick<SanityDevelopersPage, 'connectSectionHeader'>
+  )> }
 );
 
 export type DevInvolvedSectionQueryVariables = Exact<{ [key: string]: never; }>;
@@ -31769,13 +32019,10 @@ export type DevInvolvedSectionQuery = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, allSanityDevelopersPage: (
-    { __typename?: 'SanityDevelopersPageConnection' }
-    & { nodes: Array<(
-      { __typename?: 'SanityDevelopersPage' }
-      & Pick<SanityDevelopersPage, 'involvedSectionHeader'>
-    )> }
-  ) }
+  )>, sanityDevelopersPage: Maybe<(
+    { __typename?: 'SanityDevelopersPage' }
+    & Pick<SanityDevelopersPage, 'involvedSectionHeader'>
+  )> }
 );
 
 export type DevLedgerSectionQueryVariables = Exact<{ [key: string]: never; }>;
@@ -31792,20 +32039,17 @@ export type DevLedgerSectionQuery = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, allSanityDevelopersPage: (
-    { __typename?: 'SanityDevelopersPageConnection' }
-    & { nodes: Array<(
-      { __typename?: 'SanityDevelopersPage' }
-      & { ledgerSection: Maybe<(
-        { __typename?: 'SanityDevLedgerSection' }
-        & Pick<SanityDevLedgerSection, 'header' | '_rawBody'>
-        & { cosmosImage: Maybe<(
-          { __typename?: 'SanityImage' }
-          & ImageWithPreviewFragment
-        )> }
+  )>, sanityDevelopersPage: Maybe<(
+    { __typename?: 'SanityDevelopersPage' }
+    & { ledgerSection: Maybe<(
+      { __typename?: 'SanityDevLedgerSection' }
+      & Pick<SanityDevLedgerSection, 'header' | '_rawBody'>
+      & { cosmosImage: Maybe<(
+        { __typename?: 'SanityImage' }
+        & ImageWithPreviewFragment
       )> }
     )> }
-  ) }
+  )> }
 );
 
 export type DevOpenAgSectionQueryVariables = Exact<{ [key: string]: never; }>;
@@ -31822,26 +32066,23 @@ export type DevOpenAgSectionQuery = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, allSanityDevelopersPage: (
-    { __typename?: 'SanityDevelopersPageConnection' }
-    & { nodes: Array<(
-      { __typename?: 'SanityDevelopersPage' }
-      & { openAgSection: Maybe<(
-        { __typename?: 'SanityDevOpenAgSection' }
-        & Pick<SanityDevOpenAgSection, 'header' | '_rawBody'>
-        & { image: Maybe<(
-          { __typename?: 'SanityImage' }
-          & ImageWithPreviewFragment
-        )> }
+  )>, sanityDevelopersPage: Maybe<(
+    { __typename?: 'SanityDevelopersPage' }
+    & { openAgSection: Maybe<(
+      { __typename?: 'SanityDevOpenAgSection' }
+      & Pick<SanityDevOpenAgSection, 'header' | '_rawBody'>
+      & { image: Maybe<(
+        { __typename?: 'SanityImage' }
+        & ImageWithPreviewFragment
       )> }
     )> }
-  ) }
+  )> }
 );
 
-export type Unnamed_20_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_19_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_20_Query = (
+export type Unnamed_19_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -31875,22 +32116,19 @@ export type DevelopersTopSectionQuery = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, allSanityDevelopersPage: (
-    { __typename?: 'SanityDevelopersPageConnection' }
-    & { nodes: Array<(
-      { __typename?: 'SanityDevelopersPage' }
-      & { topSection: Maybe<(
-        { __typename?: 'SanityTitleBody' }
-        & Pick<SanityTitleBody, 'title' | 'body'>
-      )> }
+  )>, sanityDevelopersPage: Maybe<(
+    { __typename?: 'SanityDevelopersPage' }
+    & { topSection: Maybe<(
+      { __typename?: 'SanityTitleBody' }
+      & Pick<SanityTitleBody, 'title' | 'body'>
     )> }
-  ) }
+  )> }
 );
 
-export type Unnamed_21_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_20_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_21_Query = (
+export type Unnamed_20_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'FundYaml' }
@@ -31917,10 +32155,10 @@ export type Unnamed_21_Query = (
   )> }
 );
 
-export type Unnamed_22_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_21_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_22_Query = (
+export type Unnamed_21_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'FundYaml' }
@@ -31931,10 +32169,10 @@ export type Unnamed_22_Query = (
   )> }
 );
 
-export type Unnamed_23_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_22_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_23_Query = (
+export type Unnamed_22_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32105,10 +32343,10 @@ export type HomeValuesSectionQuery = (
   )> }
 );
 
-export type Unnamed_24_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_23_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_24_Query = (
+export type Unnamed_23_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32176,10 +32414,10 @@ export type MainnetLaunchInfoQuery = (
   )> }
 );
 
-export type Unnamed_25_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_24_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_25_Query = (
+export type Unnamed_24_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'MediaYaml' }
@@ -32260,10 +32498,10 @@ export type MainnetWhatsNextSectionQuery = (
   )> }
 );
 
-export type Unnamed_26_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_25_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_26_Query = (
+export type Unnamed_25_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'PressKitYaml' }
@@ -32288,10 +32526,10 @@ export type Unnamed_26_Query = (
   )> }
 );
 
-export type Unnamed_27_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_26_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_27_Query = (
+export type Unnamed_26_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32311,10 +32549,10 @@ export type Unnamed_27_Query = (
   )> }
 );
 
-export type Unnamed_28_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_27_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_28_Query = (
+export type Unnamed_27_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32344,10 +32582,10 @@ export type Unnamed_28_Query = (
   )> }
 );
 
-export type Unnamed_29_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_28_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_29_Query = (
+export type Unnamed_28_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'PressKitYaml' }
@@ -32366,10 +32604,10 @@ export type Unnamed_29_Query = (
   )> }
 );
 
-export type Unnamed_30_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_29_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_30_Query = (
+export type Unnamed_29_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'PressKitYaml' }
@@ -32380,10 +32618,10 @@ export type Unnamed_30_Query = (
   )> }
 );
 
-export type Unnamed_31_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_30_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_31_Query = (
+export type Unnamed_30_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'PressKitYaml' }
@@ -32401,10 +32639,10 @@ export type Unnamed_31_Query = (
   )> }
 );
 
-export type Unnamed_32_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_31_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_32_Query = (
+export type Unnamed_31_Query = (
   { __typename?: 'Query' }
   & { teamBackground: Maybe<(
     { __typename?: 'File' }
@@ -32435,10 +32673,10 @@ export type Unnamed_32_Query = (
   )> }
 );
 
-export type Unnamed_33_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_32_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_33_Query = (
+export type Unnamed_32_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'PressKitYaml' }
@@ -32453,10 +32691,10 @@ export type Unnamed_33_Query = (
   )> }
 );
 
-export type Unnamed_34_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_33_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_34_Query = (
+export type Unnamed_33_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'PressKitYaml' }
@@ -32467,10 +32705,10 @@ export type Unnamed_34_Query = (
   )> }
 );
 
-export type Unnamed_35_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_34_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_35_Query = (
+export type Unnamed_34_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32490,10 +32728,10 @@ export type Unnamed_35_Query = (
   )> }
 );
 
-export type Unnamed_36_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_35_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_36_Query = (
+export type Unnamed_35_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'ResourcesYaml' }
@@ -32512,10 +32750,10 @@ export type Unnamed_36_Query = (
   )> }
 );
 
-export type Unnamed_37_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_36_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_37_Query = (
+export type Unnamed_36_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32550,10 +32788,10 @@ export type Unnamed_37_Query = (
   )> }
 );
 
-export type Unnamed_38_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_37_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_38_Query = (
+export type Unnamed_37_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32582,10 +32820,10 @@ export type Unnamed_38_Query = (
   )> }
 );
 
-export type Unnamed_39_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_38_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_39_Query = (
+export type Unnamed_38_Query = (
   { __typename?: 'Query' }
   & { arrow: Maybe<(
     { __typename?: 'File' }
@@ -32622,10 +32860,10 @@ export type Unnamed_39_Query = (
   )> }
 );
 
-export type Unnamed_40_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_39_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_40_Query = (
+export type Unnamed_39_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32652,10 +32890,10 @@ export type Unnamed_40_Query = (
   )> }
 );
 
-export type Unnamed_41_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_40_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_41_Query = (
+export type Unnamed_40_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32689,10 +32927,10 @@ export type Unnamed_41_Query = (
   )> }
 );
 
-export type Unnamed_42_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_41_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_42_Query = (
+export type Unnamed_41_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'ScienceYaml' }
@@ -32717,10 +32955,10 @@ export type Unnamed_42_Query = (
   )> }
 );
 
-export type Unnamed_43_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_42_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_43_Query = (
+export type Unnamed_42_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32794,10 +33032,10 @@ export type EmailSubmitSectionQuery = (
   )> }
 );
 
-export type Unnamed_44_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_43_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_44_Query = (
+export type Unnamed_43_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32819,10 +33057,10 @@ export type Unnamed_44_Query = (
   )> }
 );
 
-export type Unnamed_45_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_44_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_45_Query = (
+export type Unnamed_44_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32844,10 +33082,10 @@ export type Unnamed_45_Query = (
   )> }
 );
 
-export type Unnamed_46_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_45_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_46_Query = (
+export type Unnamed_45_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32869,10 +33107,10 @@ export type Unnamed_46_Query = (
   )> }
 );
 
-export type Unnamed_47_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_46_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_47_Query = (
+export type Unnamed_46_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32901,10 +33139,10 @@ export type Unnamed_47_Query = (
   )> }
 );
 
-export type Unnamed_48_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_47_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_48_Query = (
+export type Unnamed_47_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32924,10 +33162,10 @@ export type Unnamed_48_Query = (
   )> }
 );
 
-export type Unnamed_49_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_48_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_49_Query = (
+export type Unnamed_48_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -32947,10 +33185,10 @@ export type Unnamed_49_Query = (
   )> }
 );
 
-export type Unnamed_50_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_49_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_50_Query = (
+export type Unnamed_49_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -32971,10 +33209,10 @@ export type Unnamed_50_Query = (
   )> }
 );
 
-export type Unnamed_51_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_50_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_51_Query = (
+export type Unnamed_50_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'MediaYaml' }
@@ -32994,10 +33232,10 @@ export type Unnamed_51_Query = (
   )> }
 );
 
-export type Unnamed_52_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_51_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_52_Query = (
+export type Unnamed_51_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -33008,10 +33246,10 @@ export type Unnamed_52_Query = (
   )> }
 );
 
-export type Unnamed_53_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_52_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_53_Query = (
+export type Unnamed_52_Query = (
   { __typename?: 'Query' }
   & { bg: Maybe<(
     { __typename?: 'File' }
@@ -33025,10 +33263,10 @@ export type Unnamed_53_Query = (
   )> }
 );
 
-export type Unnamed_54_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_53_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_54_Query = (
+export type Unnamed_53_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -33039,10 +33277,10 @@ export type Unnamed_54_Query = (
   )> }
 );
 
-export type Unnamed_55_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_54_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_55_Query = (
+export type Unnamed_54_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -33053,10 +33291,10 @@ export type Unnamed_55_Query = (
   )> }
 );
 
-export type Unnamed_56_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_55_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_56_Query = (
+export type Unnamed_55_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -33076,16 +33314,39 @@ export type Unnamed_56_Query = (
   )> }
 );
 
-export type Unnamed_57_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_56_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_57_Query = (
+export type Unnamed_56_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
     & { unlockSchedule: Maybe<(
       { __typename?: 'TokenYamlUnlockSchedule' }
       & Pick<TokenYamlUnlockSchedule, 'title' | 'subtitle'>
+    )> }
+  )> }
+);
+
+export type Unnamed_57_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_57_Query = (
+  { __typename?: 'Query' }
+  & { background: Maybe<(
+    { __typename?: 'File' }
+    & { childImageSharp: Maybe<(
+      { __typename?: 'ImageSharp' }
+      & { fluid: Maybe<(
+        { __typename?: 'ImageSharpFluid' }
+        & GatsbyImageSharpFluid_WithWebpFragment
+      )> }
+    )> }
+  )>, text: Maybe<(
+    { __typename?: 'ValidatorsYaml' }
+    & { connectSection: Maybe<(
+      { __typename?: 'ValidatorsYamlConnectSection' }
+      & Pick<ValidatorsYamlConnectSection, 'header'>
     )> }
   )> }
 );
@@ -33106,9 +33367,9 @@ export type Unnamed_58_Query = (
     )> }
   )>, text: Maybe<(
     { __typename?: 'ValidatorsYaml' }
-    & { connectSection: Maybe<(
-      { __typename?: 'ValidatorsYamlConnectSection' }
-      & Pick<ValidatorsYamlConnectSection, 'header'>
+    & { topSection: Maybe<(
+      { __typename?: 'ValidatorsYamlTopSection' }
+      & Pick<ValidatorsYamlTopSection, 'header' | 'body'>
     )> }
   )> }
 );
@@ -33129,9 +33390,9 @@ export type Unnamed_59_Query = (
     )> }
   )>, text: Maybe<(
     { __typename?: 'ValidatorsYaml' }
-    & { topSection: Maybe<(
-      { __typename?: 'ValidatorsYamlTopSection' }
-      & Pick<ValidatorsYamlTopSection, 'header' | 'body'>
+    & { whatSection: Maybe<(
+      { __typename?: 'ValidatorsYamlWhatSection' }
+      & Pick<ValidatorsYamlWhatSection, 'header' | 'body'>
     )> }
   )> }
 );
@@ -33140,29 +33401,6 @@ export type Unnamed_60_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type Unnamed_60_Query = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, text: Maybe<(
-    { __typename?: 'ValidatorsYaml' }
-    & { whatSection: Maybe<(
-      { __typename?: 'ValidatorsYamlWhatSection' }
-      & Pick<ValidatorsYamlWhatSection, 'header' | 'body'>
-    )> }
-  )> }
-);
-
-export type Unnamed_61_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_61_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -33201,10 +33439,10 @@ export type Unnamed_61_Query = (
   )> }
 );
 
-export type Unnamed_62_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_61_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_62_Query = (
+export type Unnamed_61_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -33224,10 +33462,10 @@ export type Unnamed_62_Query = (
   )> }
 );
 
-export type Unnamed_63_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_62_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_63_Query = (
+export type Unnamed_62_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'WalletAddressRegistrationYaml' }
@@ -33238,10 +33476,10 @@ export type Unnamed_63_Query = (
   )> }
 );
 
-export type Unnamed_64_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_63_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_64_Query = (
+export type Unnamed_63_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'WalletAddressRegistrationYaml' }
@@ -33252,10 +33490,10 @@ export type Unnamed_64_Query = (
   )> }
 );
 
-export type Unnamed_65_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_64_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_65_Query = (
+export type Unnamed_64_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -33275,10 +33513,10 @@ export type Unnamed_65_Query = (
   )> }
 );
 
-export type Unnamed_66_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_65_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_66_Query = (
+export type Unnamed_65_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'WalletAddressRegistrationYaml' }
@@ -33378,10 +33616,10 @@ export type CaseStudyTemplateQuery = (
   )> }
 );
 
-export type Unnamed_67_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_66_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_67_Query = (
+export type Unnamed_66_Query = (
   { __typename?: 'Query' }
   & { faqYaml: Maybe<(
     { __typename?: 'FaqYaml' }

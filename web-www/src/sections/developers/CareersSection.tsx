@@ -74,15 +74,13 @@ const query = graphql`
         }
       }
     }
-    allSanityDevelopersPage {
-      nodes {
-        careersSection {
-          caption
-          header
-          _rawBody
-          button {
-            ...buttonFields
-          }
+    sanityDevelopersPage {
+      careersSection {
+        caption
+        header
+        _rawBody
+        button {
+          ...buttonFields
         }
       }
     }
@@ -91,29 +89,29 @@ const query = graphql`
 
 const CareersSection: React.FC = () => {
   const styles = useStyles();
-  const data: DevCareersSectionQuery = useStaticQuery(query);
-  const content = data?.allSanityDevelopersPage?.nodes?.[0].careersSection;
+  const { background, sanityDevelopersPage } = useStaticQuery<DevCareersSectionQuery>(query);
+  const data = sanityDevelopersPage?.careersSection;
   return (
     <BackgroundSection
       linearGradient="unset"
       topSection={false}
       className={styles.section}
-      imageData={data?.background?.childImageSharp?.fluid}
+      imageData={background?.childImageSharp?.fluid}
     >
-      <div className={styles.caption}>{content?.caption}</div>
+      <div className={styles.caption}>{data?.caption}</div>
       <Title align="center" className={styles.title} variant="h2">
-        {content?.header}
+        {data?.header}
       </Title>
       <Description align="center" className={styles.description}>
-        <BlockContent content={content?._rawBody} />
+        <BlockContent content={data?._rawBody} />
       </Description>
       <div className={styles.buttonContainer}>
         <OutlinedButton
           className={styles.button}
           target="_blank"
-          href={`${content?.button?.buttonLink?.buttonHref}`}
+          href={`${data?.button?.buttonLink?.buttonHref}`}
         >
-          {content?.button?.buttonText}
+          {data?.button?.buttonText}
         </OutlinedButton>
       </div>
     </BackgroundSection>

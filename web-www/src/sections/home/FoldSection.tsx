@@ -105,7 +105,7 @@ const query = graphql`
 `;
 
 const HomeFoldSection: React.FC<{ className?: string }> = ({ className }) => {
-  const styles = useStyles({});
+  const styles = useStyles();
   const data = useStaticQuery<HomeFoldSectionQuery>(query);
   const content = data.sanityHomePageWeb?.homeFoldSection;
 

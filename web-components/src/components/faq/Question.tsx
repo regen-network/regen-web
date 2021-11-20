@@ -8,6 +8,7 @@ import LinkIcon from '../icons/LinkIcon';
 import Banner from '../banner';
 import copyTextToClipboard from '../../utils/copy';
 import { parseText } from '../../utils/textParser';
+import { BlockContent } from '../block-content';
 
 export interface QuestionItem {
   classNames?: ClassNames;
@@ -225,8 +226,7 @@ const Question = ({
             !open && classNames?.collapsed,
           )}
         >
-          {/* This can be removed once we migrate the website to Sanity */}
-          {parseText(answer)}
+          <BlockContent content={answer} />
           {open ? (
             isShareable && (
               <a

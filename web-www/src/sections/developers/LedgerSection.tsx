@@ -50,14 +50,12 @@ const query = graphql`
         }
       }
     }
-    allSanityDevelopersPage {
-      nodes {
-        ledgerSection {
-          header
-          _rawBody
-          cosmosImage {
-            ...ImageWithPreview
-          }
+    sanityDevelopersPage {
+      ledgerSection {
+        header
+        _rawBody
+        cosmosImage {
+          ...ImageWithPreview
         }
       }
     }
@@ -65,20 +63,22 @@ const query = graphql`
 `;
 
 const LedgerSection = (): JSX.Element => {
-  const data: DevLedgerSectionQuery = useStaticQuery(query);
-  const content = data?.allSanityDevelopersPage?.nodes[0]?.ledgerSection;
-  const backgroundImg = data?.background?.childImageSharp?.fluid;
+  const { background, sanityDevelopersPage } = useStaticQuery<DevLedgerSectionQuery>(query);
+  const data = sanityDevelopersPage?.ledgerSection;
+  const backgroundImg = background?.childImageSharp?.fluid;
   const styles = useStyles();
   return (
     <div className={styles.root}>
       <Section>
         <Box display="flex" justifyContent="center">
-          <SanityImage className={styles.cosmosImg} alt="cosmos image" {...(content?.cosmosImage as any)} />
+          {data?.cosmosImage && (
+            <SanityImage className={styles.cosmosImg} alt="cosmos image" {...(data.cosmosImage as any)} />
+          )}
         </Box>
         <TitleDescription
           className={styles.titleDesc}
-          title={`${content?.header}`}
-          description={content?._rawBody}
+          title={`${data?.header}`}
+          description={data?._rawBody}
         />
       </Section>
       <div className={styles.bgGradient}>

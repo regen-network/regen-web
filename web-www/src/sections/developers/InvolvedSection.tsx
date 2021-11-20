@@ -30,10 +30,8 @@ const query = graphql`
         }
       }
     }
-    allSanityDevelopersPage {
-      nodes {
-        involvedSectionHeader
-      }
+    sanityDevelopersPage {
+      involvedSectionHeader
     }
   }
 `;
@@ -42,7 +40,7 @@ const InvolvedSection = (): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
 
-  const data: DevInvolvedSectionQuery = useStaticQuery(query);
+  const { sanityDevelopersPage: data, background } = useStaticQuery<DevInvolvedSectionQuery>(query);
   const icons: IconLabelProps[] = [
     {
       icon: <GithubIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
@@ -70,8 +68,8 @@ const InvolvedSection = (): JSX.Element => {
   ];
   return (
     <ConnectSection
-      header={`${data?.allSanityDevelopersPage?.nodes?.[0]?.involvedSectionHeader}`}
-      background={data?.background as any}
+      header={`${data?.involvedSectionHeader}`}
+      background={background as any}
       icons={icons}
       titleClassName={styles.title}
       className={styles.section}

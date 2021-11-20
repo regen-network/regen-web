@@ -32,17 +32,15 @@ const query = graphql`
         }
       }
     }
-    allSanityDevelopersPage {
-      nodes {
-        connectSectionHeader
-      }
+    sanityDevelopersPage {
+      connectSectionHeader
     }
   }
 `;
 
 const DevelopersConnectSection: React.FC = () => {
-  const data: DevConnectSectionQuery = useStaticQuery(query);
   const styles = useStyles();
+  const { background, sanityDevelopersPage: data } = useStaticQuery<DevConnectSectionQuery>(query);
   const theme = useTheme();
   const icons: IconLabelProps[] = [
     {
@@ -75,8 +73,8 @@ const DevelopersConnectSection: React.FC = () => {
   return (
     <ConnectSection
       itemClassName={styles.item}
-      header={`${data?.allSanityDevelopersPage?.nodes[0]?.connectSectionHeader}`}
-      background={data?.background as any}
+      header={`${data?.connectSectionHeader}`}
+      background={background as any}
       icons={icons}
       titleClassName={styles.title}
     />

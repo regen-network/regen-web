@@ -1,4 +1,5 @@
 import React from 'react';
+import { FluidObject } from 'gatsby-image';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -47,14 +48,12 @@ const query = graphql`
         }
       }
     }
-    allSanityDevelopersPage {
-      nodes {
-        openAgSection {
-          header
-          _rawBody
-          image {
-            ...ImageWithPreview
-          }
+    sanityDevelopersPage {
+      openAgSection {
+        header
+        _rawBody
+        image {
+          ...ImageWithPreview
         }
       }
     }
@@ -63,26 +62,28 @@ const query = graphql`
 
 const OpenAgSection: React.FC = () => {
   const styles = useStyles();
-  const data = useStaticQuery<DevOpenAgSectionQuery>(query);
-  const content = data?.allSanityDevelopersPage?.nodes[0].openAgSection;
+  const { background, sanityDevelopersPage } = useStaticQuery<DevOpenAgSectionQuery>(query);
+  const data = sanityDevelopersPage?.openAgSection;
 
   return (
     <BackgroundSection
       linearGradient="unset"
       topSection={false}
-      imageData={data?.background?.childImageSharp?.fluid as any}
+      imageData={background?.childImageSharp?.fluid as FluidObject}
       className={styles.section}
     >
       <Grid container alignItems="center" spacing={8}>
         <Grid item xs={12} sm={6}>
-          <SanityImage alt={`${content?.header}`} className={styles.image} {...(content?.image as any)} />
+          {data?.image && (
+            <SanityImage alt={`${data?.header}`} className={styles.image} {...(data.image as any)} />
+          )}
         </Grid>
         <Grid item xs={12} sm={6}>
           <Title className={styles.title} variant="h3">
-            {content?.header}
+            {data?.header}
           </Title>
           <Description className={styles.description}>
-            <BlockContent content={content?._rawBody} />
+            <BlockContent content={data?._rawBody} />
           </Description>
         </Grid>
       </Grid>

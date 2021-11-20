@@ -32,12 +32,10 @@ const query = graphql`
         }
       }
     }
-    allSanityDevelopersPage {
-      nodes {
-        topSection {
-          title
-          body
-        }
+    sanityDevelopersPage {
+      topSection {
+        title
+        body
       }
     }
   }
@@ -45,15 +43,14 @@ const query = graphql`
 
 const TopSection = (): JSX.Element => {
   const styles = useStyles();
-  const data: DevelopersTopSectionQuery = useStaticQuery(query);
-
-  const content = data?.allSanityDevelopersPage?.nodes?.[0]?.topSection;
-  const imageData = data?.background?.childImageSharp?.fluid;
+  const { sanityDevelopersPage, background } = useStaticQuery<DevelopersTopSectionQuery>(query);
+  const data = sanityDevelopersPage?.topSection;
+  const imageData = background?.childImageSharp?.fluid;
   return (
     <BackgroundSection
       linearGradient="linear-gradient(220.67deg, rgba(250, 235, 209, 0.6) 21.4%, rgba(125, 201, 191, 0.6) 46.63%, rgba(81, 93, 137, 0.6) 71.86%), linear-gradient(180deg, rgba(0, 0, 0, 0.684) 0%, rgba(0, 0, 0, 0) 97.78%)"
-      header={content?.title}
-      body={content?.body}
+      header={data?.title}
+      body={data?.body}
       imageData={imageData}
       titleClassName={styles.title}
       titleVariant="h2"

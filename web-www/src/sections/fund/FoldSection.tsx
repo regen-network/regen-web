@@ -1,37 +1,38 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
+import { Theme, makeStyles } from '@material-ui/core';
 
 import Section from 'web-components/src/components/section';
 import TitleDescription from 'web-components/src/components/title-description';
+import { FundFoldSectionQuery } from '../../generated/graphql';
 
-type QueryData = {
-  text: {
-    foldSection: {
-      title: string;
-      body: string;
-    };
-  };
-};
-
-const FoldSection = (): JSX.Element => {
-  const {
-    text: {
-      foldSection: { title, body },
+const useStyles = makeStyles<Theme>(theme => ({
+  spacing: {
+    '& > div': {
+      paddingBottom: 0,
     },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      text: fundYaml {
-        foldSection {
-          title
-          body
-        }
+  },
+}));
+
+const query = graphql`
+  query fundFoldSection {
+    sanityFundPage {
+      foldSection {
+        title
+        _rawBody
       }
     }
-  `);
+  }
+`;
+
+const FoldSection = (): JSX.Element => {
+  const styles = useStyles();
+  const { sanityFundPage } = useStaticQuery<FundFoldSectionQuery>(query);
+  const data = sanityFundPage?.foldSection;
 
   return (
     <Section>
-      <TitleDescription title={title} description={body} />
+      <TitleDescription className={styles.spacing} title={data?.title || ''} description={data?._rawBody} />
     </Section>
   );
 };

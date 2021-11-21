@@ -27,10 +27,12 @@ const CustomBlockContent: React.FC<{
       link: (props: any) => {
         const { mark, children } = props;
         const { blank, href, modal } = mark;
+        // the CMS has a field for opening links from portable text in a modal,
+        // but the behavior requires a callback to handle
         if (modal && onClickModalLink) {
-          // href tag missing - modal shhould be opened by callback
           return (
             <a
+              href="#"
               onClick={e => {
                 e.preventDefault();
                 onClickModalLink(href);

@@ -2,20 +2,11 @@ import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
 import DropdownIcon from '../icons/DropdownIcon';
+import { User } from '../user/UserInfo';
 
-export interface PartyNameAddress {
+interface PartyAddressProps {
   name: string;
   address: string;
-}
-
-export interface Party extends PartyNameAddress {
-  role: string;
-  individual: string;
-  location: string;
-  description?: string;
-}
-
-interface PartyAddressProps extends PartyNameAddress {
   onClick: () => void;
 }
 

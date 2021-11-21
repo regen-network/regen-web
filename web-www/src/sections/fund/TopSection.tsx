@@ -3,6 +3,8 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core';
 
 import BackgroundSection from '../../components/BackgroundSection';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { FundTopSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>(theme => ({
   section: {
@@ -13,33 +15,36 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
 }));
 
-const TopSection = (): JSX.Element => {
-  const styles = useStyles();
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "waterfall.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: fundYaml {
-        topSection {
-          header
+const query = graphql`
+  query fundTopSection {
+    background: file(relativePath: { eq: "waterfall.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
-  const content = data?.text?.topSection;
-  const imageData = data?.background?.childImageSharp?.fluid;
+    sanityFundPage {
+      topSection {
+        title
+        _rawBody
+      }
+    }
+  }
+`;
+
+const TopSection = (): JSX.Element => {
+  const styles = useStyles();
+  const { background, sanityFundPage } = useStaticQuery<FundTopSectionQuery>(query);
+  const data = sanityFundPage?.topSection;
 
   return (
     <BackgroundSection
       className={styles.section}
       linearGradient="linear-gradient(209.83deg, rgba(250, 235, 209, 0.8) 11.05%, rgba(125, 201, 191, 0.8) 43.17%, rgba(81, 93, 137, 0.8) 75.29%)"
-      header={content.header}
-      imageData={imageData}
+      header={data?.title}
+      body={<BlockContent content={data?._rawBody} />}
+      imageData={background?.childImageSharp?.fluid}
     />
   );
 };

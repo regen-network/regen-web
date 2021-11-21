@@ -1,6 +1,9 @@
 query allCreditClass {
   allCreditClass {
     path
+    iri {
+      current
+    }
     nameRaw
     descriptionRaw
     shortDescriptionRaw

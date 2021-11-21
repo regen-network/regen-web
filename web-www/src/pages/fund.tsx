@@ -4,35 +4,36 @@ import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import SEO from '../components/seo';
 import TopSection from '../sections/fund/TopSection';
 import FoldSection from '../sections/fund/FoldSection';
+import ThesisSection from '../sections/fund/ThesisSection';
 import CallToAction from '../sections/fund/CallToAction';
+import { FundPageQuery } from '../generated/graphql';
 
 const query = graphql`
-  query {
+  query fundPage {
     seoImage: file(relativePath: { eq: "waterfall.png" }) {
       publicURL
     }
-    text: fundYaml {
-      seo {
-        title
-        description
-      }
+    sanityFundPage {
+      seoTitle
+      seoDescription
     }
   }
 `;
 
-const FundPage = ({ location }: PageProps): JSX.Element => {
-  const data = useStaticQuery(query);
+const FundPage: React.FC<PageProps> = ({ location }) => {
+  const { seoImage, sanityFundPage: data } = useStaticQuery<FundPageQuery>(query);
 
   return (
     <>
       <SEO
-        description={data?.text?.seo?.description}
-        title={data?.text?.seo?.title}
+        description={data?.seoDescription || ''}
+        title={data?.seoTitle || ''}
         location={location}
-        imageUrl={data?.seoImage?.publicURL}
+        imageUrl={seoImage?.publicURL || ''}
       />
       <TopSection />
       <FoldSection />
+      <ThesisSection />
       <CallToAction />
     </>
   );

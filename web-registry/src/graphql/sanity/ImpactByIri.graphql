@@ -1,0 +1,12 @@
+query EcologicalImpactByIri($iris: [String!]) {
+  allEcologicalImpact(where: { iri: { current: { in: $iris } } }) {
+    name
+    descriptionRaw
+    image {
+      ...customImageFields
+    }
+    standard {
+      ...customImageFields
+    }
+  }
+}

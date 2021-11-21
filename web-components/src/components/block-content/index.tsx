@@ -15,14 +15,31 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CustomBlockContent: React.FC<{ content?: any; tooltipText?: string }> = ({ content, tooltipText }) => {
+const CustomBlockContent: React.FC<{
+  content?: any;
+  tooltipText?: string;
+  onClickModalLink?: (href: string) => any;
+}> = ({ onClickModalLink, content, tooltipText }) => {
   const styles = useStyles();
 
   const serializers = {
     marks: {
       link: (props: any) => {
         const { mark, children } = props;
-        const { blank, href } = mark;
+        const { blank, href, modal } = mark;
+        if (modal && onClickModalLink) {
+          // href tag missing - modal shhould be opened by callback
+          return (
+            <a
+              onClick={e => {
+                e.preventDefault();
+                onClickModalLink(href);
+              }}
+            >
+              {children}
+            </a>
+          );
+        }
         return blank ? (
           <a href={href} target="_blank" rel="noreferrer noopener">
             {children}

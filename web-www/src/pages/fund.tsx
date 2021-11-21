@@ -6,20 +6,22 @@ import TopSection from '../sections/fund/TopSection';
 import FoldSection from '../sections/fund/FoldSection';
 import CallToAction from '../sections/fund/CallToAction';
 
-const TokenPage = ({ location }: PageProps): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      seoImage: file(relativePath: { eq: "waterfall.png" }) {
-        publicURL
-      }
-      text: fundYaml {
-        seo {
-          title
-          description
-        }
+const query = graphql`
+  query {
+    seoImage: file(relativePath: { eq: "waterfall.png" }) {
+      publicURL
+    }
+    text: fundYaml {
+      seo {
+        title
+        description
       }
     }
-  `);
+  }
+`;
+
+const FundPage = ({ location }: PageProps): JSX.Element => {
+  const data = useStaticQuery(query);
 
   return (
     <>
@@ -36,4 +38,4 @@ const TokenPage = ({ location }: PageProps): JSX.Element => {
   );
 };
 
-export default TokenPage;
+export default FundPage;

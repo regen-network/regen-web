@@ -62,34 +62,35 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
 }));
 
-const CallToAction = (): JSX.Element => {
-  const styles = useStyles();
-
-  const data = useStaticQuery(graphql`
-    query {
-      text: fundYaml {
-        calltoActionSection {
-          callToActions {
-            image {
-              childImageSharp {
-                fixed(quality: 90, width: 159) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
+const query = graphql`
+  query fundCallToAction {
+    text: fundYaml {
+      calltoActionSection {
+        callToActions {
+          image {
+            childImageSharp {
+              fixed(quality: 90, width: 159) {
+                ...GatsbyImageSharpFixed_withWebp
               }
             }
-            header
-            description
-            descriptionWithModalLink {
-              beginning
-              linkText
-              linkUrl
-              end
-            }
+          }
+          header
+          description
+          descriptionWithModalLink {
+            beginning
+            linkText
+            linkUrl
+            end
           }
         }
       }
     }
-  `);
+  }
+`;
+
+const CallToAction = (): JSX.Element => {
+  const styles = useStyles();
+  const data = useStaticQuery(query);
 
   const content = data.text.calltoActionSection;
   const [modalIframeLink, setModalIframeLink] = useState<string>('');

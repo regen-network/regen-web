@@ -38,13 +38,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const FormSection = (): JSX.Element => {
-  const classes = useStyles();
+  const styles = useStyles();
 
   return (
-    <Section className={classes.section}>
+    <Section className={styles.section}>
       <iframe
         title="form"
-        className={classes.form}
+        className={styles.form}
         src="https://airtable.com/embed/shrY8kWzjn2kDKtl7?backgroundColor=yellow"
         frameBorder="0"
         width="100%"

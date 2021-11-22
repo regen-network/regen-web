@@ -122,7 +122,8 @@ const MediaSection: React.FC = () => {
       url={item.url}
       name={item.title}
       author={item.author}
-      buttonText={item.buttonText}
+      // buttonText={item.buttonText}
+      type={'changeme'}
       imgSrc={item.image.publicURL}
       date={item.date}
       play={item.type === 'videos'}

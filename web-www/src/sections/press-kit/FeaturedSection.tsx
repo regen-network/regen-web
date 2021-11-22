@@ -63,7 +63,14 @@ const FeaturedSection = (): JSX.Element => {
       render={data => {
         const content = data.content.featuredSection;
         const items: JSX.Element[] = content.articles.map(({ image, header, author, date, url }) => (
-          <ArticleCard name={header} imgSrc={image.publicURL} author={author} date={date} url={url} />
+          <ArticleCard
+            name={header}
+            type={'changeme'}
+            imgSrc={image.publicURL}
+            author={author}
+            date={date}
+            url={url}
+          />
         ));
         return (
           <Section withSlider title={content.header} classes={{ title: classes.title }}>

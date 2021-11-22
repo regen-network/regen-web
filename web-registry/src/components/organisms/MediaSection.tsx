@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 
-import ArticleCard, { getBtnText } from 'web-components/lib/components/cards/ArticleCard';
+import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import { getFormattedDate } from 'web-components/lib/utils/format';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
 
@@ -35,7 +35,7 @@ const MediaSection: React.FC<MediaSectionProps> = ({ header, items }) => {
               url={item?.href || ''}
               name={item?.title || ''}
               author={item?.author || ''}
-              buttonText={getBtnText(item?.type)}
+              type={item?.type || ''}
               imgSrc={getSanityImgSrc(item?.image)}
               date={getFormattedDate(item?.date)}
               play={item?.type === 'video'}

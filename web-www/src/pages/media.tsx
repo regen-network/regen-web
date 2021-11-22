@@ -1,17 +1,14 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import { Formik, Form, Field } from 'formik';
 
 import SEO from '../components/seo';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import Section from 'web-components/lib/components/section';
-import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
-
-interface props {
-  location: Location;
-}
+import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
+import { MediaPageQuery, SanityMedia } from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   background: {
@@ -65,58 +62,61 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Item {
-  title: string;
-  date: string;
-  author: string;
-  url: string;
-  image: {
-    publicURL: string;
-  };
-}
+type ItemMap = {
+  [type: string]: SanityMedia[];
+};
 
-interface ItemWithCategory extends Item {
-  category: string;
-  buttonText: string;
-  showPlay: boolean;
-}
-
-interface Category {
-  name: string;
-  buttonText: string;
-  showPlay: boolean;
-  items: Item[];
-}
-
-const MediaPage = ({ location }: props): JSX.Element => {
-  const classes = useStyles();
-
-  const data = useStaticQuery(graphql`
-    query {
-      text: mediaYaml {
-        header
-        categories {
-          name
-          buttonText
-          showPlay
-          items {
-            title
-            date
-            author
-            url
-            image {
-              publicURL
+const query = graphql`
+  query mediaPage {
+    allSanityMedia {
+      nodes {
+        title
+        author
+        date
+        type
+        href
+        author
+        image {
+          image {
+            asset {
+              url
             }
           }
         }
       }
     }
-  `);
-  const content = data.text;
-  const categories: Option[] = content.categories.map((c: Category) => ({
-    value: c.name,
-    label: c.name.charAt(0).toUpperCase() + c.name.slice(1),
+  }
+`;
+
+const uppercase = (str: string | null) => {
+  if (!str) return '';
+  return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+const MediaPage: React.FC<PageProps> = ({ location }) => {
+  const styles = useStyles();
+
+  const { allSanityMedia } = useStaticQuery<MediaPageQuery>(query);
+  const items = allSanityMedia?.nodes || [];
+  const types = Array.from(new Set(items.map(item => item.type)));
+
+  const categories = types.map(c => ({
+    value: c,
+    label: uppercase(c),
   }));
+
+  const grouped: ItemMap = items
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .reduce((acc: ItemMap, item) => {
+      const type = item.type || 'all';
+      if (acc[type]) {
+        acc[type].push(item as SanityMedia);
+      } else {
+        acc[type] = [item as SanityMedia];
+      }
+      return acc;
+    }, {});
+
   categories.unshift({
     value: 'all',
     label: 'All',
@@ -125,12 +125,8 @@ const MediaPage = ({ location }: props): JSX.Element => {
   return (
     <>
       <SEO title="Media" location={location} />
-      <div className={classes.background}>
-        <Section
-          title={content.header}
-          titleVariant="h1"
-          classes={{ root: classes.section, title: classes.title }}
-        >
+      <div className={styles.background}>
+        <Section title="Media" titleVariant="h1" classes={{ root: styles.section, title: styles.title }}>
           <Formik
             initialValues={{
               category: 'all',
@@ -138,16 +134,14 @@ const MediaPage = ({ location }: props): JSX.Element => {
             onSubmit={() => {}}
           >
             {({ values }) => {
-              const category: Category | undefined = content.categories.find(
-                (c: Category) => c.name === values.category,
-              );
+              const currItems = values.category === 'all' ? items : grouped[values.category];
               return (
                 <>
                   <Form>
                     <Grid container wrap="nowrap" alignItems="center">
-                      <span className={classes.show}>show me:</span>
+                      <span className={styles.show}>show me:</span>
                       <Field
-                        className={classes.select}
+                        className={styles.select}
                         options={categories}
                         component={SelectTextField}
                         name="category"
@@ -155,48 +149,20 @@ const MediaPage = ({ location }: props): JSX.Element => {
                     </Grid>
                   </Form>
                   <Grid container spacing={6}>
-                    {values.category !== 'all'
-                      ? content.categories
-                          .find((c: Category) => c.name === values.category)
-                          .items.map((item: Item, index: number) => (
-                            <Grid item xs={12} sm={6} md={4} key={index}>
-                              <ArticleCard
-                                className={classes.card}
-                                buttonText={category && category.buttonText}
-                                play={category && category.showPlay}
-                                name={item.title}
-                                author={item.author}
-                                date={item.date}
-                                url={item.url}
-                                imgSrc={item.image.publicURL}
-                              />
-                            </Grid>
-                          ))
-                      : content.categories
-                          .map((c: Category) =>
-                            c.items.map((i: Item) => ({
-                              buttonText: c.buttonText,
-                              showPlay: c.showPlay,
-                              category: c.name,
-                              ...i,
-                            })),
-                          )
-                          .flat()
-                          .sort((a: Item, b: Item) => new Date(b.date) - new Date(a.date))
-                          .map((item: ItemWithCategory, index: number) => (
-                            <Grid item xs={12} sm={6} md={4} key={index}>
-                              <ArticleCard
-                                className={classes.card}
-                                buttonText={item.buttonText}
-                                play={item.showPlay}
-                                name={item.title}
-                                author={item.author}
-                                date={item.date}
-                                url={item.url}
-                                imgSrc={item.image.publicURL}
-                              />
-                            </Grid>
-                          ))}
+                    {currItems.map((item, i) => (
+                      <Grid item xs={12} sm={6} md={4} key={i}>
+                        <ArticleCard
+                          className={styles.card}
+                          type={item?.type}
+                          play={item?.type === 'video'}
+                          name={item?.title || ''}
+                          author={item?.author || ''}
+                          date={item.date}
+                          url={item?.href || ''}
+                          imgSrc={item?.image?.image?.asset?.url || ''}
+                        />
+                      </Grid>
+                    ))}
                   </Grid>
                 </>
               );

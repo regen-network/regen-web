@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
 import TopSection from '../sections/invest/TopSection';
 import FormSection from '../sections/invest/FormSection';
@@ -81,12 +81,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface props {
-  location: Location;
-}
+const query = graphql`
+  query {
+    seoImage: file(relativePath: { eq: "investors-top.jpg" }) {
+      publicURL
+    }
+  }
+`;
 
-const InvestPage = ({ location }: props): JSX.Element => {
-  const classes = useStyles();
+const InvestPage: React.FC<PageProps> = ({ location }) => {
+  const styles = useStyles();
   const [open, setOpen] = useState(true);
   const [interested, setInterested] = useState(true);
 
@@ -99,13 +103,7 @@ const InvestPage = ({ location }: props): JSX.Element => {
     handleClose();
   };
 
-  const data = useStaticQuery(graphql`
-    query {
-      seoImage: file(relativePath: { eq: "investors-top.jpg" }) {
-        publicURL
-      }
-    }
-  `);
+  const data = useStaticQuery(query);
 
   return (
     <>
@@ -122,21 +120,21 @@ const InvestPage = ({ location }: props): JSX.Element => {
         </>
       ) : (
         <Section>
-          <Title className={classes.notInterestedTitle} align="center" variant="h2">
+          <Title className={styles.notInterestedTitle} align="center" variant="h2">
             Sorry, this page is only for people interested in the token sale.
           </Title>
         </Section>
       )}
-      <Modal open={open} onClose={handleClose} className={classes.modal}>
+      <Modal open={open} onClose={handleClose} className={styles.modal}>
         <div>
-          <Title className={classes.title} align="center" variant="h4">
+          <Title className={styles.title} align="center" variant="h4">
             Are you interested in the Regen Network token sale?
           </Title>
-          <Grid container className={classes.grid} wrap="nowrap" alignItems="center" spacing={2}>
-            <div onClick={handleNotInterested} className={classes.notInterested}>
+          <Grid container className={styles.grid} wrap="nowrap" alignItems="center" spacing={2}>
+            <div onClick={handleNotInterested} className={styles.notInterested}>
               no, I'm not interested
             </div>
-            <ContainedButton className={classes.button} onClick={handleClose}>
+            <ContainedButton className={styles.button} onClick={handleClose}>
               yes, I'm interested
             </ContainedButton>
           </Grid>

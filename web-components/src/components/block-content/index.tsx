@@ -16,10 +16,11 @@ const useStyles = makeStyles(() => ({
 }));
 
 const CustomBlockContent: React.FC<{
+  className?: string;
   content?: any;
   tooltipText?: string;
   onClickModalLink?: (href: string) => any;
-}> = ({ onClickModalLink, content, tooltipText }) => {
+}> = ({ onClickModalLink, content, tooltipText, className }) => {
   const styles = useStyles();
 
   const serializers = {
@@ -57,7 +58,7 @@ const CustomBlockContent: React.FC<{
   if (content) {
     return (
       <div className={styles.root}>
-        <BlockContent blocks={content} serializers={serializers} />
+        <BlockContent className={className} blocks={content} serializers={serializers} />
       </div>
     );
   }

@@ -23,7 +23,7 @@ export function getBtnText(type?: string | null): string {
 }
 
 export interface ArticleCardProps {
-  buttonText?: string;
+  type: string;
   name: string;
   date: string;
   author: string;
@@ -84,30 +84,30 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function ArticleCard({
-  buttonText = 'read article',
   className,
   name,
   date,
   author,
   imgSrc,
   url,
+  type,
   play = false,
 }: ArticleCardProps): JSX.Element {
-  const classes = useStyles({});
+  const styles = useStyles({});
   return (
     <MediaCard className={className} name={name} imgSrc={imgSrc} backgroundGradient={false} elevation={1}>
       {play && (
-        <div className={classes.play}>
-          <PlayIcon className={classes.icon} />
+        <div className={styles.play}>
+          <PlayIcon className={styles.icon} />
         </div>
       )}
-      <Description className={classes.description}>
-        <span className={classes.author}>{author}</span>
-        <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <Description className={styles.description}>
+        <span className={styles.author}>{author}</span>
+        <span className={styles.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         <span>{date}</span>
       </Description>
-      <OutlinedButton className={classes.button} href={url} target="_blank">
-        {buttonText}
+      <OutlinedButton className={styles.button} href={url} target="_blank">
+        {getBtnText(type)}
       </OutlinedButton>
     </MediaCard>
   );

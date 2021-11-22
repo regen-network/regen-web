@@ -11,10 +11,12 @@ import {
 } from '@material-ui/core';
 import Img, { FluidObject } from 'gatsby-image';
 import { getFormattedDate } from 'web-components/src/utils/format';
-import clsx from 'clsx';
 
 import Section from 'web-components/src/components/section';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import { MainnetLaunchInfoSectionQuery, SanityMainnetActionItem } from '../../generated/graphql';
+import SanityImage from 'gatsby-plugin-sanity-image';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 const StyledLinearProgress = withStyles((theme: Theme) =>
   createStyles({
@@ -96,19 +98,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.main,
     fontWeight: 700,
   },
-  listItem: {
-    marginLeft: theme.spacing(5),
-    position: 'relative',
-    display: 'list-item',
-    listStyleType: 'disc',
-    listStylePositio: 'inside',
-    '&::marker': {
-      fontSize: theme.spacing(3),
-    },
-  },
   listText: {
     color: theme.palette.info.dark,
     fontSize: theme.spacing(5),
+    lineHeight: '120%',
+    '& > ul > li': {
+      marginLeft: theme.spacing(5),
+      position: 'relative',
+      display: 'list-item',
+      listStyleType: 'disc',
+      listStylePositio: 'inside',
+      '&::marker': {
+        fontSize: theme.spacing(3),
+      },
+    },
   },
   progressWrap: {
     display: 'flex',
@@ -124,110 +127,65 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-type ActionItem = {
-  title: string;
-  description: string;
-  linkText: string;
-  linkUrl: string;
-  icon: {
-    publicURL: string;
-  };
-};
-
-type ListItem = {
-  text: string;
-};
-
-type QueryData = {
-  text: {
-    launchDate: string;
-    launchInfoSection: {
-      title: string;
-      image: {
-        childImageSharp: {
-          fluid: FluidObject;
-        };
-      };
-      card: {
-        title: string;
-        listTitle: string;
-        progress: number;
-        listItems: ListItem[];
-        actionItems: ActionItem[];
-      };
-    };
-  };
-};
-
-const LaunchInfoSection: React.FC = () => {
-  const {
-    text: {
-      launchDate,
-      launchInfoSection: { card, image, title },
-    },
-  } = useStaticQuery<QueryData>(graphql`
-    query mainnetLaunchInfo {
-      text: mainnetYaml {
-        launchDate
-        launchInfoSection {
+const query = graphql`
+  query mainnetLaunchInfoSection {
+    sanityMainnetPage {
+      launchDate
+      launchInfoSection {
+        title
+        image {
+          ...fluidImageWebPFields
+        }
+        cardTitle
+        _rawCardBody
+        actionItems {
           title
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          card {
-            title
-            listTitle
-            progress
-            listItems {
-              text
-            }
-            actionItems {
-              title
-              linkUrl
-              linkText
-              description
-              icon {
-                extension
-                publicURL
-              }
+          linkText
+          linkUrl
+          description
+          icon {
+            imageAlt
+            image {
+              ...Image
             }
           }
         }
       }
     }
-  `);
-  const classes = useStyles();
+  }
+`;
+
+const LaunchInfoSection: React.FC = () => {
+  const { sanityMainnetPage } = useStaticQuery<MainnetLaunchInfoSectionQuery>(query);
+  const data = sanityMainnetPage?.launchInfoSection;
+  const styles = useStyles();
   return (
-    <Section className={classes.root}>
-      <Typography variant="h1" className={classes.title}>
-        {title}
+    <Section className={styles.root}>
+      <Typography variant="h1" className={styles.title}>
+        {data?.title}
       </Typography>
-      <Grid container justify="center" className={classes.actionItems}>
-        {card.actionItems.map((item, i) => (
-          <ActionItem key={i} {...item} />
+      <Grid container justify="center" className={styles.actionItems}>
+        {data?.actionItems?.map((item, i) => (
+          <ActionItem key={i} {...(item as SanityMainnetActionItem)} />
         ))}
       </Grid>
 
-      <div className={classes.card}>
-        <Img className={classes.image} fluid={image.childImageSharp.fluid} />
-        <Grid container direction="column" className={classes.cardMain}>
-          <Typography className={classes.cardTitle}>{card.title}</Typography>
-          <Typography className={classes.launchDate}>
-            Release date: {getFormattedDate(launchDate, { month: 'long', day: 'numeric', year: 'numeric' })}
+      <div className={styles.card}>
+        <Img className={styles.image} fluid={data?.image?.image?.asset?.fluid as FluidObject} />
+        <Grid container direction="column" className={styles.cardMain}>
+          <Typography className={styles.cardTitle}>{data?.cardTitle}</Typography>
+          <Typography className={styles.launchDate}>
+            Release date:{' '}
+            {getFormattedDate(sanityMainnetPage?.launchDate, {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric',
+            })}
           </Typography>
-          <Typography className={classes.listText}>{card.listTitle}</Typography>
-          {card.listItems.map((item, i) => (
-            <Typography key={i} className={clsx(classes.listText, classes.listItem)}>
-              {item.text}
-            </Typography>
-          ))}
-          <div className={classes.progressWrap}>
-            <Typography className={classes.progressText}>{card.progress}% complete</Typography>
-            <StyledLinearProgress variant="determinate" value={card.progress} />
+          <BlockContent className={styles.listText} content={data?._rawCardBody} />
+          <div className={styles.progressWrap}>
+            <Typography className={styles.progressText}>100% complete</Typography>
+            <StyledLinearProgress variant="determinate" value={100} />
           </div>
         </Grid>
       </div>
@@ -248,7 +206,6 @@ const useActionItemStyles = makeStyles((theme: Theme) => ({
     },
   },
   img: {
-    minWidth: '100%',
     height: theme.spacing(20),
   },
   title: {
@@ -276,19 +233,19 @@ const useActionItemStyles = makeStyles((theme: Theme) => ({
 /**
  * TODO: This is very similar to the `ImageItems` component, and they could probably be consolodated but when I first tried it was creating issues so I opted to re-create
  */
-const ActionItem: React.FC<ActionItem> = props => {
-  const classes = useActionItemStyles();
+const ActionItem: React.FC<SanityMainnetActionItem> = props => {
+  const styles = useActionItemStyles();
   return (
-    <div className={classes.root}>
-      <img src={props.icon.publicURL} alt={props.description} className={classes.img} />
-      <Typography variant="h1" className={classes.title}>
+    <div className={styles.root}>
+      <SanityImage {...(props.icon?.image as any)} alt={props.icon?.imageAlt} className={styles.img} />
+      <Typography variant="h1" className={styles.title}>
         {props.title}
       </Typography>
-      <Typography className={classes.description}>{props.description}</Typography>
-      <div className={classes.btnWrap}>
+      <Typography className={styles.description}>{props.description}</Typography>
+      <div className={styles.btnWrap}>
         <ContainedButton
-          className={classes.btn}
-          href={props.linkUrl}
+          className={styles.btn}
+          href={props.linkUrl || ''}
           disabled={!props.linkUrl}
           target="_blank"
           rel="noopener noreferrer"

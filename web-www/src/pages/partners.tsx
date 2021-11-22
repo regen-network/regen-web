@@ -2,8 +2,7 @@ import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { useStaticQuery, graphql } from 'gatsby';
-import ReactHtmlParser from 'react-html-parser';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import clsx from 'clsx';
 
 import Title from 'web-components/lib/components/title';
@@ -11,6 +10,8 @@ import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import Section from 'web-components/lib/components/section';
 import SEO from '../components/seo';
+import { PartnersPageQuery } from '../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -76,61 +77,53 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface props {
-  location: Location;
-}
-
-const PartnersPage = ({ location }: props): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    {
-      allPartnersYaml {
-        edges {
-          node {
-            id
-            header
-            contactCard {
-              body
-              header
-            }
-            partnerLogos {
-              link
-              image {
-                publicURL
-              }
-            }
+const query = graphql`
+  query partnersPage {
+    sanityPartnersPage {
+      header
+      contactHeader
+      _rawContactBody
+      partners {
+        link
+        image {
+          asset {
+            url
           }
         }
       }
     }
-  `);
-  const partners = data.allPartnersYaml.edges[0].node.partnerLogos;
-  const header = data.allPartnersYaml.edges[0].node.header;
-  const contactCard = data.allPartnersYaml.edges[0].node.contactCard;
-  const classes = useStyles();
+  }
+`;
+
+const PartnersPage: React.FC<PageProps> = ({ location }) => {
+  const { sanityPartnersPage: data } = useStaticQuery<PartnersPageQuery>(query);
+  const styles = useStyles();
   return (
     <>
       <SEO title="Partners" location={location} />
-      <div className={classes.sectionWrapper}>
-        <Section className={classes.section}>
-          <Title className={classes.title} align="center" variant="h1">
-            {header}
+      <div className={styles.sectionWrapper}>
+        <Section className={styles.section}>
+          <Title className={styles.title} align="center" variant="h1">
+            {data?.header}
           </Title>
           <Grid spacing={7} justify="center" direction="row" alignItems="center" container>
-            {partners.map((partner: any, i: number) => (
-              <Grid className={classes.item} xs={12} sm={4} item key={i}>
+            {data?.partners?.map((partner, i) => (
+              <Grid className={styles.item} xs={12} sm={4} item key={i}>
                 <GreenMediaCard
-                  className={classes.card}
-                  imageUrl={partner.image.publicURL}
-                  link={partner.link}
+                  className={styles.card}
+                  imageUrl={partner?.image?.asset?.url || ''}
+                  link={partner?.link || ''}
                 />
               </Grid>
             ))}
-            <Grid className={classes.item} xs={12} sm={6} md={4} item key="contact">
-              <GreenCard className={clsx(classes.card, classes.contactCard)}>
+            <Grid className={styles.item} xs={12} sm={6} md={4} item key="contact">
+              <GreenCard className={clsx(styles.card, styles.contactCard)}>
                 <Title align="center" variant="h4">
-                  {contactCard.header}
+                  {data?.contactHeader}
                 </Title>
-                <Typography className={classes.contactText}>{ReactHtmlParser(contactCard.body)}</Typography>
+                <Typography className={styles.contactText}>
+                  <BlockContent content={data?._rawContactBody} />
+                </Typography>
               </GreenCard>
             </Grid>
           </Grid>

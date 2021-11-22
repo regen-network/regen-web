@@ -4,7 +4,6 @@ import { Formik, Form, Field } from 'formik';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import Modal from 'web-components/lib/components/modal';
 import Title from 'web-components/lib/components/title';
@@ -23,10 +22,12 @@ import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import getApiUri from '../../lib/apiUri';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { urlType } from './MediaForm';
+import { ProjectPageFooter } from '../molecules';
 
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
   initialValues?: EntityDisplayValues;
+  isEdit?: boolean;
 }
 
 interface IndividualDisplayValues extends IndividualFormValues, IndividualDisplayShape {}
@@ -352,7 +353,7 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
   }
 }
 
-const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialValues }) => {
+const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialValues, isEdit }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const styles = useStyles();
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -421,17 +422,18 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
           }
           return errors;
         }}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting, setTouched }) => {
           setSubmitting(true);
           try {
             await submit(values);
             setSubmitting(false);
+            setTouched({});
           } catch (e) {
             setSubmitting(false);
           }
         }}
       >
-        {({ submitForm, isValid, isSubmitting, values, setFieldValue, setFieldTouched }) => {
+        {({ submitForm, isValid, isSubmitting, values, setFieldValue, setFieldTouched, touched }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard>
@@ -453,15 +455,10 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                 {values['http://regen.network/projectOriginator'] &&
                   getToggle('http://regen.network/projectOriginator', values, setFieldValue, setFieldTouched)}
               </OnBoardingCard>
-
-              <OnboardingFooter
+              <ProjectPageFooter
+                isEdit={isEdit}
                 onSave={submitForm}
-                saveText={'Save and Next'}
-                onPrev={() => null} // TODO
-                onNext={() => null} // TODO
-                hideProgress={false} // TODO
-                saveDisabled={!isValid || isSubmitting}
-                percentComplete={0} // TODO
+                saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
               />
             </Form>
           );

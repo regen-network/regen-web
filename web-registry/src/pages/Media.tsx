@@ -1,25 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useParams } from 'react-router-dom';
 
-import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
 import { MediaForm, MediaValues } from '../components/organisms';
 import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import { ProjectFormProps } from './BasicInfo';
 
-const exampleProjectUrl = '/projects/wilmot';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  description: {
-    fontSize: theme.typography.pxToRem(16),
-    padding: theme.spacing(2, 0, 1),
-  },
-}));
-
-const Media: React.FC = () => {
-  const styles = useStyles();
-  const activeStep = 0;
+const Media: React.FC<ProjectFormProps> = ({ isEdit }) => {
   const { projectId } = useParams();
 
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -56,7 +43,6 @@ const Media: React.FC = () => {
           },
         },
       });
-      // TODO: go to next step
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -64,14 +50,10 @@ const Media: React.FC = () => {
     }
   }
 
-  return (
-    <OnboardingFormTemplate activeStep={activeStep} title="Media" saveAndExit={saveAndExit}>
-      <Description className={styles.description}>
-        See an example{' '}
-        <Link to={exampleProjectUrl} target="_blank">
-          project page»
-        </Link>
-      </Description>
+  return isEdit ? (
+    <MediaForm submit={submit} initialValues={initialFieldValues} isEdit />
+  ) : (
+    <OnboardingFormTemplate activeStep={0} title="Media" saveAndExit={saveAndExit}>
       <MediaForm submit={submit} initialValues={initialFieldValues} />
     </OnboardingFormTemplate>
   );

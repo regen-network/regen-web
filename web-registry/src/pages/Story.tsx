@@ -1,26 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useParams, useHistory } from 'react-router-dom';
 
-import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
 import { StoryForm, StoryValues } from '../components/organisms';
 import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import { ProjectFormProps } from './BasicInfo';
 
-const exampleProjectUrl = '/projects/wilmot';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  description: {
-    fontSize: theme.typography.pxToRem(16),
-    padding: theme.spacing(2, 0, 1),
-  },
-}));
-
-const Story: React.FC = () => {
-  const styles = useStyles();
+const Story: React.FC<ProjectFormProps> = ({ isEdit }) => {
   const history = useHistory();
-  const activeStep = 0;
   const { projectId } = useParams();
 
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -57,7 +44,7 @@ const Story: React.FC = () => {
           },
         },
       });
-      history.push(`/project-pages/${projectId}/media`);
+      !isEdit && history.push(`/project-pages/${projectId}/media`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -65,15 +52,11 @@ const Story: React.FC = () => {
     }
   }
 
-  return (
-    <OnboardingFormTemplate activeStep={activeStep} title="Story" saveAndExit={saveAndExit}>
-      <Description className={styles.description}>
-        See an example{' '}
-        <Link to={exampleProjectUrl} target="_blank">
-          project page»
-        </Link>
-      </Description>
-      <StoryForm submit={submit} initialValues={initialFieldValues} exampleProjectUrl={exampleProjectUrl} />
+  return isEdit ? (
+    <StoryForm submit={submit} initialValues={initialFieldValues} isEdit />
+  ) : (
+    <OnboardingFormTemplate activeStep={0} title="Story" saveAndExit={saveAndExit}>
+      <StoryForm submit={submit} initialValues={initialFieldValues} />
     </OnboardingFormTemplate>
   );
 };

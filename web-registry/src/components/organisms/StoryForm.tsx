@@ -4,19 +4,19 @@ import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 import Modal from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
+import { ProjectPageFooter } from '../molecules';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 
 interface StoryFormProps {
   submit: (values: StoryValues) => Promise<void>;
-  exampleProjectUrl: string;
   initialValues?: StoryValues;
+  isEdit?: boolean;
 }
 
 export interface StoryValues {
@@ -174,7 +174,7 @@ const ModalContent: React.FC<{ exampleProjectUrl: string; fieldName: exampleFiel
   );
 };
 
-const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl, initialValues }) => {
+const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues, isEdit }) => {
   const styles = useStyles();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -185,7 +185,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl, initia
   const [modalContent, setModalContent] = useState<JSX.Element | null>(null);
 
   const showExample = (fieldName: exampleFieldName): void => {
-    const content = <ModalContent fieldName={fieldName} exampleProjectUrl={exampleProjectUrl} />;
+    const content = <ModalContent fieldName={fieldName} exampleProjectUrl={'/projects/wilmot'} />;
     setModalContent(content);
   };
 
@@ -233,17 +233,18 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl, initia
           }
           return errors;
         }}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting, setTouched }) => {
           setSubmitting(true);
           try {
             await submit(values);
             setSubmitting(false);
+            setTouched({});
           } catch (e) {
             setSubmitting(false);
           }
         }}
       >
-        {({ submitForm, submitCount, isValid, isSubmitting }) => {
+        {({ submitForm, submitCount, isValid, isSubmitting, touched }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
@@ -315,14 +316,10 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, exampleProjectUrl, initia
                 />
               </OnBoardingCard>
 
-              <OnboardingFooter
+              <ProjectPageFooter
+                isEdit={isEdit}
                 onSave={submitForm}
-                saveText={'Save and Next'}
-                onPrev={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
-                onNext={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
-                hideProgress={false} // TODO
-                saveDisabled={!isValid || isSubmitting}
-                percentComplete={0} // TODO
+                saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
               />
             </Form>
           );

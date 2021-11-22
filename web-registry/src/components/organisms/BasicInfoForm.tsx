@@ -9,9 +9,9 @@ import TextField from 'web-components/lib/components/inputs/TextField';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
-import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import { ProjectPageFooter } from '../molecules';
 
 export interface BasicInfoFormValues {
   'http://schema.org/name': string;
@@ -68,7 +68,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const BasicInfoForm: React.FC<{
   submit: (values: BasicInfoFormValues) => Promise<void>;
   initialValues?: BasicInfoFormValues;
-}> = ({ submit, initialValues }) => {
+  isEdit?: boolean;
+}> = ({ submit, initialValues, isEdit }) => {
   const classes = useStyles();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -117,17 +118,18 @@ const BasicInfoForm: React.FC<{
         }
         return errors;
       }}
-      onSubmit={async (values, { setSubmitting }) => {
+      onSubmit={async (values, { setSubmitting, setTouched }) => {
         setSubmitting(true);
         try {
           await submit(values);
           setSubmitting(false);
+          setTouched({});
         } catch (e) {
           setSubmitting(false);
         }
       }}
     >
-      {({ submitForm, submitCount, isValid, isSubmitting }) => {
+      {({ submitForm, submitCount, isValid, isSubmitting, touched }) => {
         return (
           <Form>
             <OnBoardingCard>
@@ -159,14 +161,10 @@ const BasicInfoForm: React.FC<{
                 </div>
               </div>
             </OnBoardingCard>
-            <OnboardingFooter
-              saveText={'Save and Next'}
+            <ProjectPageFooter
+              isEdit={isEdit}
               onSave={submitForm}
-              onPrev={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
-              onNext={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
-              hideProgress={false} // TODO
-              saveDisabled={!isValid || isSubmitting}
-              percentComplete={0} // TODO
+              saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
             />
           </Form>
         );

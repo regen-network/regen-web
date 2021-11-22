@@ -46,6 +46,7 @@ import {
   Story,
   UserProfile,
   VerifyEmail,
+  ProjectEdit,
 } from './pages';
 
 import './App.css';
@@ -129,6 +130,8 @@ const App: React.FC = (): JSX.Element => {
             render={({ match: { path } }) => (
               <>
                 <ProtectedRoute path={path} exact component={ProjectList} />
+                <ProtectedRoute exact path={`${path}/edit/:projectId`} component={ProjectEdit} />
+                <ProtectedRoute path={`${path}/edit/:projectId/:section`} component={ProjectEdit} />
                 <ProtectedRoute
                   path={`${path}/:projectId/choose-credit-class`}
                   component={ChooseCreditClass}

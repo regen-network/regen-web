@@ -1,5 +1,6 @@
 fragment project on ProjectsConnection {
   nodes {
+    id
     creditClassId
     metadata
   }

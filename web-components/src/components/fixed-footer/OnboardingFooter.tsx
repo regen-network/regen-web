@@ -5,7 +5,7 @@ import { withStyles, createStyles, makeStyles, useTheme } from '@material-ui/sty
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Grid from '@material-ui/core/Grid';
 
-import FixedFooter from './';
+import FixedFooter from '../fixed-footer';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
 import ContainedButton from '../buttons/ContainedButton';

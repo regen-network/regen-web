@@ -4,13 +4,20 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Box from '@material-ui/core/Box';
+import cx from 'clsx';
 
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 
 interface NavigationProps {
+  className?: string;
+  classes?: {
+    root?: string;
+    listItem?: string;
+  };
   categories: string[];
   onClick: (c: string) => void;
   category?: string;
+  showIcon?: boolean;
 }
 
 const StyledList = withStyles(theme => ({
@@ -60,6 +67,10 @@ const StyledListItem = withStyles(theme => ({
 }))(ListItem);
 
 const useStyles = makeStyles((theme: Theme) => ({
+  action: {
+    display: 'flex',
+    alignItems: 'center',
+  },
   icon: {
     [theme.breakpoints.down('xs')]: {
       height: theme.spacing(3.5),
@@ -68,14 +79,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Navigation = ({ categories, onClick, category }: NavigationProps): JSX.Element => {
-  const classes = useStyles();
+const Navigation = ({
+  className,
+  classes,
+  categories,
+  onClick,
+  category,
+  showIcon,
+}: NavigationProps): JSX.Element => {
+  const styles = useStyles();
 
   return (
-    <StyledList>
+    <StyledList className={cx(className, classes?.root)}>
       {categories.map((name, i) => (
         <StyledListItem
           key={i}
+          className={classes?.listItem}
           button
           selected={category ? category === name : false}
           onClick={() => {
@@ -83,9 +102,14 @@ const Navigation = ({ categories, onClick, category }: NavigationProps): JSX.Ele
           }}
         >
           {name}
-          <Box display={{ xs: 'block', sm: 'none' }}>
-            <ListItemSecondaryAction>
-              <BreadcrumbIcon className={classes.icon} direction="next" />
+          <Box
+            display={{
+              xs: 'block',
+              sm: showIcon || 'none',
+            }}
+          >
+            <ListItemSecondaryAction className={styles.action}>
+              <BreadcrumbIcon className={styles.icon} direction="next" />
             </ListItemSecondaryAction>
           </Box>
         </StyledListItem>

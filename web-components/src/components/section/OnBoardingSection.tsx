@@ -1,14 +1,18 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Link } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
+
 import cx from 'clsx';
 
 import Section from './index';
+import Description from '../description';
 
 interface OnBoardingSectionProps {
   title: string;
   formContainer?: boolean; // set max width and center
   linkText?: string;
+  exampleProjectUrl?: string;
   onLinkClick?: () => void;
   classes?: {
     root?: string;
@@ -68,12 +72,22 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginLeft: theme.spacing(4),
     },
   },
+  description: {
+    fontSize: theme.typography.pxToRem(16),
+    padding: theme.spacing(2, 0, 1),
+  },
+  topRight: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+  },
 }));
 
 const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
   formContainer = false,
   linkText,
   onLinkClick,
+  exampleProjectUrl = '/projects/wilmot',
   classes,
   ...p
 }) => {
@@ -98,7 +112,15 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
         )
       }
     >
-      <div className={cx(formContainer && styles.formWrap, !!classes && classes.formWrap)}>{p.children}</div>
+      <div className={cx(formContainer && styles.formWrap, !!classes && classes.formWrap)}>
+        <Description className={styles.description}>
+          See an example{' '}
+          <RouterLink to={exampleProjectUrl} target="_blank">
+            project page»
+          </RouterLink>
+        </Description>
+        {p.children}
+      </div>
     </Section>
   );
 };

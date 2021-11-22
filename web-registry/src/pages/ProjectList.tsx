@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { Typography, useMediaQuery } from '@material-ui/core';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useHistory } from 'react-router-dom';
 
@@ -34,6 +34,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ProjectList: React.FC = () => {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const history = useHistory();
 
   // TODO Create provider to get directly user data if logged in
@@ -74,6 +76,11 @@ const ProjectList: React.FC = () => {
     }
   }
 
+  const edit = (projectId: string): void => {
+    const editUrl = `/project-pages/edit/${projectId}`;
+    history.push(isMobile ? editUrl : `${editUrl}/basic-info`);
+  };
+
   return (
     <OnBoardingSection formContainer title={isFirstProject ? 'Create a Project' : 'Projects'}>
       {isFirstProject && (
@@ -81,9 +88,13 @@ const ProjectList: React.FC = () => {
       )}
       <div className={classes.cards}>
         {/* TODO: Existing Projects. see regen-network/regen-registry#360 */}
-        {/* {projects?.map(project => (
-          <div></div>
-        ))} */}
+        {/* TODO: DEBUG CODE: delete before merge: */}
+        {projects?.map(project => (
+          <div>
+            <div>{project?.metadata?.['http://schema.org/name']}</div>
+            <div onClick={() => edit(project?.id)}>edit</div>
+          </div>
+        ))}
         <CreateProjectCard
           className={classes.createCard}
           onClick={submitCreateProject}

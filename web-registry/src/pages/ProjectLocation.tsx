@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { ProjectLocationForm, ProjectLocationFormValues } from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
+import { ProjectFormProps } from './BasicInfo';
 import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
@@ -10,7 +11,7 @@ import {
   useCreateAddressMutation,
 } from '../generated/graphql';
 
-const ProjectLocation: React.FC = () => {
+const ProjectLocation: React.FC<ProjectFormProps> = ({ isEdit }) => {
   const history = useHistory();
   const { projectId } = useParams<{ projectId: string }>();
 
@@ -38,7 +39,7 @@ const ProjectLocation: React.FC = () => {
   async function submit(values: ProjectLocationFormValues): Promise<void> {
     try {
       await saveValues(values);
-      history.push(`/project-pages/${projectId}/roles`);
+      !isEdit && history.push(`/project-pages/${projectId}/roles`);
     } catch (e) {
       //   // TODO: Should we display the error banner here?
       //   // https://github.com/regen-network/regen-registry/issues/554
@@ -88,7 +89,15 @@ const ProjectLocation: React.FC = () => {
     });
   }
 
-  return (
+  return isEdit ? (
+    <ProjectLocationForm
+      submit={submit}
+      saveAndExit={saveAndExit}
+      mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
+      initialValues={initialFieldValues}
+      isEdit
+    />
+  ) : (
     <OnboardingFormTemplate activeStep={0} title="Location" saveAndExit={saveAndExit}>
       <ProjectLocationForm
         submit={submit}

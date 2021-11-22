@@ -5,7 +5,11 @@ import { BasicInfoForm, BasicInfoFormValues } from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
 import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
 
-const BasicInfo: React.FC = () => {
+export interface ProjectFormProps {
+  isEdit?: boolean;
+}
+
+const BasicInfo: React.FC<ProjectFormProps> = ({ isEdit }) => {
   const history = useHistory();
   const { projectId } = useParams<{ projectId: string }>();
 
@@ -40,7 +44,7 @@ const BasicInfo: React.FC = () => {
           },
         },
       });
-      history.push(`/project-pages/${projectId}/location`);
+      !isEdit && history.push(`/project-pages/${projectId}/location`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -48,7 +52,9 @@ const BasicInfo: React.FC = () => {
     }
   }
 
-  return (
+  return isEdit ? (
+    <BasicInfoForm submit={submit} initialValues={initialFieldValues} isEdit />
+  ) : (
     <OnboardingFormTemplate activeStep={0} title="Basic Info" saveAndExit={saveAndExit}>
       <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
     </OnboardingFormTemplate>

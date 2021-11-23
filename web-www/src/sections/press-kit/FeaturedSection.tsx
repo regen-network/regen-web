@@ -37,29 +37,31 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const query = graphql`
+  query presskitFeaturedSection {
+    content: pressKitYaml {
+      featuredSection {
+        header
+        articles {
+          title
+          author
+          date
+          # image {
+          #   publicURL
+          # }
+          # href
+        }
+      }
+    }
+  }
+`;
+
 const FeaturedSection = (): JSX.Element => {
-  const classes = useStyles();
+  const styles = useStyles();
 
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          content: pressKitYaml {
-            featuredSection {
-              header
-              articles {
-                header
-                author
-                date
-                image {
-                  publicURL
-                }
-                url
-              }
-            }
-          }
-        }
-      `}
+      query={query}
       render={data => {
         const content = data.content.featuredSection;
         const items: JSX.Element[] = content.articles.map(({ image, header, author, date, url }) => (
@@ -73,10 +75,10 @@ const FeaturedSection = (): JSX.Element => {
           />
         ));
         return (
-          <Section withSlider title={content.header} classes={{ title: classes.title }}>
+          <Section withSlider title={content.header} classes={{ title: styles.title }}>
             <ResponsiveSlider
               infinite={false}
-              className={classes.slider}
+              className={styles.slider}
               itemWidth="90%"
               slidesToShow={3}
               items={items}

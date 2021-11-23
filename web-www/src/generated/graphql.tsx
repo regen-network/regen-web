@@ -11505,6 +11505,10 @@ export type Query = {
   allSanityMethodologyReviewProcessPage: SanityMethodologyReviewProcessPageConnection;
   sanityPartnersPage: Maybe<SanityPartnersPage>;
   allSanityPartnersPage: SanityPartnersPageConnection;
+  sanityPresskitPage: Maybe<SanityPresskitPage>;
+  allSanityPresskitPage: SanityPresskitPageConnection;
+  sanityRegenTeamMember: Maybe<SanityRegenTeamMember>;
+  allSanityRegenTeamMember: SanityRegenTeamMemberConnection;
   sanityResource: Maybe<SanityResource>;
   allSanityResource: SanityResourceConnection;
   sanityFileAsset: Maybe<SanityFileAsset>;
@@ -11521,12 +11525,14 @@ export type Query = {
   allMarkdownRemark: MarkdownRemarkConnection;
   imageSharp: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
+  teamYaml: Maybe<TeamYaml>;
+  allTeamYaml: TeamYamlConnection;
+  pressKitYaml: Maybe<PressKitYaml>;
+  allPressKitYaml: PressKitYamlConnection;
   mediaYaml: Maybe<MediaYaml>;
   allMediaYaml: MediaYamlConnection;
   validatorsYaml: Maybe<ValidatorsYaml>;
   allValidatorsYaml: ValidatorsYamlConnection;
-  teamYaml: Maybe<TeamYaml>;
-  allTeamYaml: TeamYamlConnection;
   walletAddressRegistrationYaml: Maybe<WalletAddressRegistrationYaml>;
   allWalletAddressRegistrationYaml: WalletAddressRegistrationYamlConnection;
   scienceYaml: Maybe<ScienceYaml>;
@@ -11537,8 +11543,6 @@ export type Query = {
   allTokenYaml: TokenYamlConnection;
   partnersYaml: Maybe<PartnersYaml>;
   allPartnersYaml: PartnersYamlConnection;
-  pressKitYaml: Maybe<PressKitYaml>;
-  allPressKitYaml: PressKitYamlConnection;
   fundYaml: Maybe<FundYaml>;
   allFundYaml: FundYamlConnection;
   resourcesYaml: Maybe<ResourcesYaml>;
@@ -12602,6 +12606,77 @@ export type QueryAllSanityPartnersPageArgs = {
 };
 
 
+export type QuerySanityPresskitPageArgs = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  titleDescriptionSection: Maybe<SanityTitleCustomBodyFilterInput>;
+  enableSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  timelineSection: Maybe<SanityPresskitTimelineSectionFilterInput>;
+  teamSection: Maybe<SanityPresskitTeamSectionFilterInput>;
+  featuredSection: Maybe<SanityPresskitFeaturedSectionFilterInput>;
+  awardsSection: Maybe<SanityPresskitAwardsSectionFilterInput>;
+  logosSection: Maybe<SanityPresskitLogosSectionFilterInput>;
+  connectSectionHeader: Maybe<StringQueryOperatorInput>;
+  photosSection: Maybe<SanityPresskitPhotosSectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawTitleDescriptionSection: Maybe<JsonQueryOperatorInput>;
+  _rawEnableSection: Maybe<JsonQueryOperatorInput>;
+  _rawTimelineSection: Maybe<JsonQueryOperatorInput>;
+  _rawTeamSection: Maybe<JsonQueryOperatorInput>;
+  _rawFeaturedSection: Maybe<JsonQueryOperatorInput>;
+  _rawAwardsSection: Maybe<JsonQueryOperatorInput>;
+  _rawLogosSection: Maybe<JsonQueryOperatorInput>;
+  _rawPhotosSection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSanityPresskitPageArgs = {
+  filter: Maybe<SanityPresskitPageFilterInput>;
+  sort: Maybe<SanityPresskitPageSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QuerySanityRegenTeamMemberArgs = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  name: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  image: Maybe<SanityImageFilterInput>;
+  linkedinUrl: Maybe<StringQueryOperatorInput>;
+  twitterUrl: Maybe<StringQueryOperatorInput>;
+  githubUrl: Maybe<StringQueryOperatorInput>;
+  _rawImage: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSanityRegenTeamMemberArgs = {
+  filter: Maybe<SanityRegenTeamMemberFilterInput>;
+  sort: Maybe<SanityRegenTeamMemberSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
 export type QuerySanityResourceArgs = {
   _id: Maybe<StringQueryOperatorInput>;
   _type: Maybe<StringQueryOperatorInput>;
@@ -12836,6 +12911,54 @@ export type QueryAllImageSharpArgs = {
 };
 
 
+export type QueryTeamYamlArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  topSection: Maybe<TeamYamlTopSectionFilterInput>;
+  coreSection: Maybe<TeamYamlCoreSectionFilterInput>;
+  contributorSection: Maybe<TeamYamlContributorSectionFilterInput>;
+  advisorSection: Maybe<TeamYamlAdvisorSectionFilterInput>;
+  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllTeamYamlArgs = {
+  filter: Maybe<TeamYamlFilterInput>;
+  sort: Maybe<TeamYamlSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryPressKitYamlArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  topSection: Maybe<PressKitYamlTopSectionFilterInput>;
+  titleDescriptionSection: Maybe<PressKitYamlTitleDescriptionSectionFilterInput>;
+  enableSection: Maybe<PressKitYamlEnableSectionFilterInput>;
+  timelineSection: Maybe<PressKitYamlTimelineSectionFilterInput>;
+  teamSection: Maybe<PressKitYamlTeamSectionFilterInput>;
+  featuredSection: Maybe<PressKitYamlFeaturedSectionFilterInput>;
+  awardsSection: Maybe<PressKitYamlAwardsSectionFilterInput>;
+  logosSection: Maybe<PressKitYamlLogosSectionFilterInput>;
+  connectSection: Maybe<PressKitYamlConnectSectionFilterInput>;
+  photosSection: Maybe<PressKitYamlPhotosSectionFilterInput>;
+  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllPressKitYamlArgs = {
+  filter: Maybe<PressKitYamlFilterInput>;
+  sort: Maybe<PressKitYamlSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryMediaYamlArgs = {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
@@ -12872,27 +12995,6 @@ export type QueryValidatorsYamlArgs = {
 export type QueryAllValidatorsYamlArgs = {
   filter: Maybe<ValidatorsYamlFilterInput>;
   sort: Maybe<ValidatorsYamlSortInput>;
-  skip: Maybe<Scalars['Int']>;
-  limit: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryTeamYamlArgs = {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  topSection: Maybe<TeamYamlTopSectionFilterInput>;
-  coreSection: Maybe<TeamYamlCoreSectionFilterInput>;
-  contributorSection: Maybe<TeamYamlContributorSectionFilterInput>;
-  advisorSection: Maybe<TeamYamlAdvisorSectionFilterInput>;
-  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
-};
-
-
-export type QueryAllTeamYamlArgs = {
-  filter: Maybe<TeamYamlFilterInput>;
-  sort: Maybe<TeamYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -13005,33 +13107,6 @@ export type QueryPartnersYamlArgs = {
 export type QueryAllPartnersYamlArgs = {
   filter: Maybe<PartnersYamlFilterInput>;
   sort: Maybe<PartnersYamlSortInput>;
-  skip: Maybe<Scalars['Int']>;
-  limit: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryPressKitYamlArgs = {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  topSection: Maybe<PressKitYamlTopSectionFilterInput>;
-  titleDescriptionSection: Maybe<PressKitYamlTitleDescriptionSectionFilterInput>;
-  enableSection: Maybe<PressKitYamlEnableSectionFilterInput>;
-  timelineSection: Maybe<PressKitYamlTimelineSectionFilterInput>;
-  teamSection: Maybe<PressKitYamlTeamSectionFilterInput>;
-  featuredSection: Maybe<PressKitYamlFeaturedSectionFilterInput>;
-  awardsSection: Maybe<PressKitYamlAwardsSectionFilterInput>;
-  logosSection: Maybe<PressKitYamlLogosSectionFilterInput>;
-  connectSection: Maybe<PressKitYamlConnectSectionFilterInput>;
-  photosSection: Maybe<PressKitYamlPhotosSectionFilterInput>;
-  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
-};
-
-
-export type QueryAllPressKitYamlArgs = {
-  filter: Maybe<PressKitYamlFilterInput>;
-  sort: Maybe<PressKitYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -23228,6 +23303,10 @@ export type SanityImageFilterInput = {
   _rawCrop: Maybe<JsonQueryOperatorInput>;
 };
 
+export type SanityImageFilterListInput = {
+  elemMatch: Maybe<SanityImageFilterInput>;
+};
+
 export type SanityImageFixed = {
   __typename?: 'SanityImageFixed';
   width: Scalars['Float'];
@@ -26789,6 +26868,21 @@ export type SanityMethodologySortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type SanityNameTitleImage = {
+  __typename?: 'SanityNameTitleImage';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  name: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  image: Maybe<SanityCustomImage>;
+  _rawImage: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityNameTitleImage_RawImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
 export type SanityPageMetadata = {
   __typename?: 'SanityPageMetadata';
   _key: Maybe<Scalars['String']>;
@@ -27131,6 +27225,924 @@ export type SanityPracticesOutcomesSectionFilterInput = {
   outcomes: Maybe<SanityEcologicalOutcomeFilterListInput>;
   _rawPractices: Maybe<JsonQueryOperatorInput>;
   _rawOutcomes: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityPresskitAwardsSection = {
+  __typename?: 'SanityPresskitAwardsSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  items: Maybe<Array<Maybe<SanityTitleImageLink>>>;
+  _rawItems: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityPresskitAwardsSection_RawItemsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityPresskitAwardsSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  items: Maybe<SanityTitleImageLinkFilterListInput>;
+  _rawItems: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityPresskitFeaturedSection = {
+  __typename?: 'SanityPresskitFeaturedSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  articles: Maybe<Array<Maybe<SanityMedia>>>;
+  _rawArticles: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityPresskitFeaturedSection_RawArticlesArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityPresskitFeaturedSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  articles: Maybe<SanityMediaFilterListInput>;
+  _rawArticles: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityPresskitLogosSection = {
+  __typename?: 'SanityPresskitLogosSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  buttonText: Maybe<Scalars['String']>;
+  buttonLink: Maybe<Scalars['String']>;
+};
+
+export type SanityPresskitLogosSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  buttonText: Maybe<StringQueryOperatorInput>;
+  buttonLink: Maybe<StringQueryOperatorInput>;
+};
+
+export type SanityPresskitPage = SanityDocument & Node & {
+  __typename?: 'SanityPresskitPage';
+  _id: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  _createdAt: Maybe<Scalars['Date']>;
+  _updatedAt: Maybe<Scalars['Date']>;
+  _rev: Maybe<Scalars['String']>;
+  _key: Maybe<Scalars['String']>;
+  topSection: Maybe<SanityTitleBody>;
+  titleDescriptionSection: Maybe<SanityTitleCustomBody>;
+  enableSection: Maybe<SanityTitleImageCustomBody>;
+  timelineSection: Maybe<SanityPresskitTimelineSection>;
+  teamSection: Maybe<SanityPresskitTeamSection>;
+  featuredSection: Maybe<SanityPresskitFeaturedSection>;
+  awardsSection: Maybe<SanityPresskitAwardsSection>;
+  logosSection: Maybe<SanityPresskitLogosSection>;
+  connectSectionHeader: Maybe<Scalars['String']>;
+  photosSection: Maybe<SanityPresskitPhotosSection>;
+  _rawTopSection: Maybe<Scalars['JSON']>;
+  _rawTitleDescriptionSection: Maybe<Scalars['JSON']>;
+  _rawEnableSection: Maybe<Scalars['JSON']>;
+  _rawTimelineSection: Maybe<Scalars['JSON']>;
+  _rawTeamSection: Maybe<Scalars['JSON']>;
+  _rawFeaturedSection: Maybe<Scalars['JSON']>;
+  _rawAwardsSection: Maybe<Scalars['JSON']>;
+  _rawLogosSection: Maybe<Scalars['JSON']>;
+  _rawPhotosSection: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type SanityPresskitPage_CreatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityPresskitPage_UpdatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityPresskitPage_RawTopSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityPresskitPage_RawTitleDescriptionSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityPresskitPage_RawEnableSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityPresskitPage_RawTimelineSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityPresskitPage_RawTeamSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityPresskitPage_RawFeaturedSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityPresskitPage_RawAwardsSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityPresskitPage_RawLogosSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityPresskitPage_RawPhotosSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityPresskitPageConnection = {
+  __typename?: 'SanityPresskitPageConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityPresskitPageEdge>;
+  nodes: Array<SanityPresskitPage>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<SanityPresskitPageGroupConnection>;
+};
+
+
+export type SanityPresskitPageConnectionDistinctArgs = {
+  field: SanityPresskitPageFieldsEnum;
+};
+
+
+export type SanityPresskitPageConnectionGroupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: SanityPresskitPageFieldsEnum;
+};
+
+export type SanityPresskitPageEdge = {
+  __typename?: 'SanityPresskitPageEdge';
+  next: Maybe<SanityPresskitPage>;
+  node: SanityPresskitPage;
+  previous: Maybe<SanityPresskitPage>;
+};
+
+export enum SanityPresskitPageFieldsEnum {
+  Id = '_id',
+  Type = '_type',
+  CreatedAt = '_createdAt',
+  UpdatedAt = '_updatedAt',
+  Rev = '_rev',
+  Key = '_key',
+  TopSectionKey = 'topSection____key',
+  TopSectionType = 'topSection____type',
+  TopSectionTitle = 'topSection___title',
+  TopSectionBody = 'topSection___body',
+  TitleDescriptionSectionKey = 'titleDescriptionSection____key',
+  TitleDescriptionSectionType = 'titleDescriptionSection____type',
+  TitleDescriptionSectionTitle = 'titleDescriptionSection___title',
+  TitleDescriptionSectionBody = 'titleDescriptionSection___body',
+  TitleDescriptionSectionBodyKey = 'titleDescriptionSection___body____key',
+  TitleDescriptionSectionBodyType = 'titleDescriptionSection___body____type',
+  TitleDescriptionSectionBodyChildren = 'titleDescriptionSection___body___children',
+  TitleDescriptionSectionBodyChildrenKey = 'titleDescriptionSection___body___children____key',
+  TitleDescriptionSectionBodyChildrenType = 'titleDescriptionSection___body___children____type',
+  TitleDescriptionSectionBodyChildrenMarks = 'titleDescriptionSection___body___children___marks',
+  TitleDescriptionSectionBodyChildrenText = 'titleDescriptionSection___body___children___text',
+  TitleDescriptionSectionBodyStyle = 'titleDescriptionSection___body___style',
+  TitleDescriptionSectionBodyList = 'titleDescriptionSection___body___list',
+  TitleDescriptionSectionBodyRawChildren = 'titleDescriptionSection___body____rawChildren',
+  TitleDescriptionSectionRawBody = 'titleDescriptionSection____rawBody',
+  EnableSectionKey = 'enableSection____key',
+  EnableSectionType = 'enableSection____type',
+  EnableSectionTitle = 'enableSection___title',
+  EnableSectionImageKey = 'enableSection___image____key',
+  EnableSectionImageType = 'enableSection___image____type',
+  EnableSectionImageImageHref = 'enableSection___image___imageHref',
+  EnableSectionImageImageKey = 'enableSection___image___image____key',
+  EnableSectionImageImageType = 'enableSection___image___image____type',
+  EnableSectionImageImageRawAsset = 'enableSection___image___image____rawAsset',
+  EnableSectionImageImageRawHotspot = 'enableSection___image___image____rawHotspot',
+  EnableSectionImageImageRawCrop = 'enableSection___image___image____rawCrop',
+  EnableSectionImageImageAlt = 'enableSection___image___imageAlt',
+  EnableSectionImageRawImage = 'enableSection___image____rawImage',
+  EnableSectionBody = 'enableSection___body',
+  EnableSectionBodyKey = 'enableSection___body____key',
+  EnableSectionBodyType = 'enableSection___body____type',
+  EnableSectionBodyChildren = 'enableSection___body___children',
+  EnableSectionBodyChildrenKey = 'enableSection___body___children____key',
+  EnableSectionBodyChildrenType = 'enableSection___body___children____type',
+  EnableSectionBodyChildrenMarks = 'enableSection___body___children___marks',
+  EnableSectionBodyChildrenText = 'enableSection___body___children___text',
+  EnableSectionBodyStyle = 'enableSection___body___style',
+  EnableSectionBodyList = 'enableSection___body___list',
+  EnableSectionBodyRawChildren = 'enableSection___body____rawChildren',
+  EnableSectionRawImage = 'enableSection____rawImage',
+  EnableSectionRawBody = 'enableSection____rawBody',
+  TimelineSectionKey = 'timelineSection____key',
+  TimelineSectionType = 'timelineSection____type',
+  TimelineSectionHeader = 'timelineSection___header',
+  TimelineSectionDescription = 'timelineSection___description',
+  TimelineSectionCompletedItemIndex = 'timelineSection___completedItemIndex',
+  TimelineSectionItems = 'timelineSection___items',
+  TimelineSectionItemsKey = 'timelineSection___items____key',
+  TimelineSectionItemsType = 'timelineSection___items____type',
+  TimelineSectionItemsDate = 'timelineSection___items___date',
+  TimelineSectionItemsSummary = 'timelineSection___items___summary',
+  TimelineSectionItemsDescription = 'timelineSection___items___description',
+  TimelineSectionRawItems = 'timelineSection____rawItems',
+  TeamSectionKey = 'teamSection____key',
+  TeamSectionType = 'teamSection____type',
+  TeamSectionHeader = 'teamSection___header',
+  TeamSectionButtonText = 'teamSection___buttonText',
+  TeamSectionMembers = 'teamSection___members',
+  TeamSectionMembersId = 'teamSection___members____id',
+  TeamSectionMembersType = 'teamSection___members____type',
+  TeamSectionMembersCreatedAt = 'teamSection___members____createdAt',
+  TeamSectionMembersUpdatedAt = 'teamSection___members____updatedAt',
+  TeamSectionMembersRev = 'teamSection___members____rev',
+  TeamSectionMembersKey = 'teamSection___members____key',
+  TeamSectionMembersName = 'teamSection___members___name',
+  TeamSectionMembersTitle = 'teamSection___members___title',
+  TeamSectionMembersDescription = 'teamSection___members___description',
+  TeamSectionMembersImageKey = 'teamSection___members___image____key',
+  TeamSectionMembersImageType = 'teamSection___members___image____type',
+  TeamSectionMembersImageRawAsset = 'teamSection___members___image____rawAsset',
+  TeamSectionMembersImageRawHotspot = 'teamSection___members___image____rawHotspot',
+  TeamSectionMembersImageRawCrop = 'teamSection___members___image____rawCrop',
+  TeamSectionMembersLinkedinUrl = 'teamSection___members___linkedinUrl',
+  TeamSectionMembersTwitterUrl = 'teamSection___members___twitterUrl',
+  TeamSectionMembersGithubUrl = 'teamSection___members___githubUrl',
+  TeamSectionMembersRawImage = 'teamSection___members____rawImage',
+  TeamSectionMembersId = 'teamSection___members___id',
+  TeamSectionMembersParentId = 'teamSection___members___parent___id',
+  TeamSectionMembersParentChildren = 'teamSection___members___parent___children',
+  TeamSectionMembersChildren = 'teamSection___members___children',
+  TeamSectionMembersChildrenId = 'teamSection___members___children___id',
+  TeamSectionMembersChildrenChildren = 'teamSection___members___children___children',
+  TeamSectionMembersInternalContent = 'teamSection___members___internal___content',
+  TeamSectionMembersInternalContentDigest = 'teamSection___members___internal___contentDigest',
+  TeamSectionMembersInternalDescription = 'teamSection___members___internal___description',
+  TeamSectionMembersInternalFieldOwners = 'teamSection___members___internal___fieldOwners',
+  TeamSectionMembersInternalIgnoreType = 'teamSection___members___internal___ignoreType',
+  TeamSectionMembersInternalMediaType = 'teamSection___members___internal___mediaType',
+  TeamSectionMembersInternalOwner = 'teamSection___members___internal___owner',
+  TeamSectionMembersInternalType = 'teamSection___members___internal___type',
+  TeamSectionRawMembers = 'teamSection____rawMembers',
+  FeaturedSectionKey = 'featuredSection____key',
+  FeaturedSectionType = 'featuredSection____type',
+  FeaturedSectionHeader = 'featuredSection___header',
+  FeaturedSectionArticles = 'featuredSection___articles',
+  FeaturedSectionArticlesId = 'featuredSection___articles____id',
+  FeaturedSectionArticlesType = 'featuredSection___articles____type',
+  FeaturedSectionArticlesCreatedAt = 'featuredSection___articles____createdAt',
+  FeaturedSectionArticlesUpdatedAt = 'featuredSection___articles____updatedAt',
+  FeaturedSectionArticlesRev = 'featuredSection___articles____rev',
+  FeaturedSectionArticlesKey = 'featuredSection___articles____key',
+  FeaturedSectionArticlesTitle = 'featuredSection___articles___title',
+  FeaturedSectionArticlesAuthor = 'featuredSection___articles___author',
+  FeaturedSectionArticlesDate = 'featuredSection___articles___date',
+  FeaturedSectionArticlesImageKey = 'featuredSection___articles___image____key',
+  FeaturedSectionArticlesImageType = 'featuredSection___articles___image____type',
+  FeaturedSectionArticlesImageImageHref = 'featuredSection___articles___image___imageHref',
+  FeaturedSectionArticlesImageImageAlt = 'featuredSection___articles___image___imageAlt',
+  FeaturedSectionArticlesImageRawImage = 'featuredSection___articles___image____rawImage',
+  FeaturedSectionArticlesHref = 'featuredSection___articles___href',
+  FeaturedSectionArticlesType = 'featuredSection___articles___type',
+  FeaturedSectionArticlesRawImage = 'featuredSection___articles____rawImage',
+  FeaturedSectionArticlesId = 'featuredSection___articles___id',
+  FeaturedSectionArticlesParentId = 'featuredSection___articles___parent___id',
+  FeaturedSectionArticlesParentChildren = 'featuredSection___articles___parent___children',
+  FeaturedSectionArticlesChildren = 'featuredSection___articles___children',
+  FeaturedSectionArticlesChildrenId = 'featuredSection___articles___children___id',
+  FeaturedSectionArticlesChildrenChildren = 'featuredSection___articles___children___children',
+  FeaturedSectionArticlesInternalContent = 'featuredSection___articles___internal___content',
+  FeaturedSectionArticlesInternalContentDigest = 'featuredSection___articles___internal___contentDigest',
+  FeaturedSectionArticlesInternalDescription = 'featuredSection___articles___internal___description',
+  FeaturedSectionArticlesInternalFieldOwners = 'featuredSection___articles___internal___fieldOwners',
+  FeaturedSectionArticlesInternalIgnoreType = 'featuredSection___articles___internal___ignoreType',
+  FeaturedSectionArticlesInternalMediaType = 'featuredSection___articles___internal___mediaType',
+  FeaturedSectionArticlesInternalOwner = 'featuredSection___articles___internal___owner',
+  FeaturedSectionArticlesInternalType = 'featuredSection___articles___internal___type',
+  FeaturedSectionRawArticles = 'featuredSection____rawArticles',
+  AwardsSectionKey = 'awardsSection____key',
+  AwardsSectionType = 'awardsSection____type',
+  AwardsSectionHeader = 'awardsSection___header',
+  AwardsSectionItems = 'awardsSection___items',
+  AwardsSectionItemsKey = 'awardsSection___items____key',
+  AwardsSectionItemsType = 'awardsSection___items____type',
+  AwardsSectionItemsTitle = 'awardsSection___items___title',
+  AwardsSectionItemsLink = 'awardsSection___items___link',
+  AwardsSectionItemsImageKey = 'awardsSection___items___image____key',
+  AwardsSectionItemsImageType = 'awardsSection___items___image____type',
+  AwardsSectionItemsImageRawAsset = 'awardsSection___items___image____rawAsset',
+  AwardsSectionItemsImageRawHotspot = 'awardsSection___items___image____rawHotspot',
+  AwardsSectionItemsImageRawCrop = 'awardsSection___items___image____rawCrop',
+  AwardsSectionItemsRawImage = 'awardsSection___items____rawImage',
+  AwardsSectionRawItems = 'awardsSection____rawItems',
+  LogosSectionKey = 'logosSection____key',
+  LogosSectionType = 'logosSection____type',
+  LogosSectionHeader = 'logosSection___header',
+  LogosSectionButtonText = 'logosSection___buttonText',
+  LogosSectionButtonLink = 'logosSection___buttonLink',
+  ConnectSectionHeader = 'connectSectionHeader',
+  PhotosSectionKey = 'photosSection____key',
+  PhotosSectionType = 'photosSection____type',
+  PhotosSectionHeader = 'photosSection___header',
+  PhotosSectionPhotos = 'photosSection___photos',
+  PhotosSectionPhotosKey = 'photosSection___photos____key',
+  PhotosSectionPhotosType = 'photosSection___photos____type',
+  PhotosSectionPhotosAssetId = 'photosSection___photos___asset____id',
+  PhotosSectionPhotosAssetType = 'photosSection___photos___asset____type',
+  PhotosSectionPhotosAssetCreatedAt = 'photosSection___photos___asset____createdAt',
+  PhotosSectionPhotosAssetUpdatedAt = 'photosSection___photos___asset____updatedAt',
+  PhotosSectionPhotosAssetRev = 'photosSection___photos___asset____rev',
+  PhotosSectionPhotosAssetKey = 'photosSection___photos___asset____key',
+  PhotosSectionPhotosAssetOriginalFilename = 'photosSection___photos___asset___originalFilename',
+  PhotosSectionPhotosAssetLabel = 'photosSection___photos___asset___label',
+  PhotosSectionPhotosAssetTitle = 'photosSection___photos___asset___title',
+  PhotosSectionPhotosAssetDescription = 'photosSection___photos___asset___description',
+  PhotosSectionPhotosAssetAltText = 'photosSection___photos___asset___altText',
+  PhotosSectionPhotosAssetSha1hash = 'photosSection___photos___asset___sha1hash',
+  PhotosSectionPhotosAssetExtension = 'photosSection___photos___asset___extension',
+  PhotosSectionPhotosAssetMimeType = 'photosSection___photos___asset___mimeType',
+  PhotosSectionPhotosAssetSize = 'photosSection___photos___asset___size',
+  PhotosSectionPhotosAssetAssetId = 'photosSection___photos___asset___assetId',
+  PhotosSectionPhotosAssetPath = 'photosSection___photos___asset___path',
+  PhotosSectionPhotosAssetUrl = 'photosSection___photos___asset___url',
+  PhotosSectionPhotosAssetRawMetadata = 'photosSection___photos___asset____rawMetadata',
+  PhotosSectionPhotosAssetRawSource = 'photosSection___photos___asset____rawSource',
+  PhotosSectionPhotosAssetId = 'photosSection___photos___asset___id',
+  PhotosSectionPhotosAssetChildren = 'photosSection___photos___asset___children',
+  PhotosSectionPhotosHotspotKey = 'photosSection___photos___hotspot____key',
+  PhotosSectionPhotosHotspotType = 'photosSection___photos___hotspot____type',
+  PhotosSectionPhotosHotspotX = 'photosSection___photos___hotspot___x',
+  PhotosSectionPhotosHotspotY = 'photosSection___photos___hotspot___y',
+  PhotosSectionPhotosHotspotHeight = 'photosSection___photos___hotspot___height',
+  PhotosSectionPhotosHotspotWidth = 'photosSection___photos___hotspot___width',
+  PhotosSectionPhotosCropKey = 'photosSection___photos___crop____key',
+  PhotosSectionPhotosCropType = 'photosSection___photos___crop____type',
+  PhotosSectionPhotosCropTop = 'photosSection___photos___crop___top',
+  PhotosSectionPhotosCropBottom = 'photosSection___photos___crop___bottom',
+  PhotosSectionPhotosCropLeft = 'photosSection___photos___crop___left',
+  PhotosSectionPhotosCropRight = 'photosSection___photos___crop___right',
+  PhotosSectionPhotosRawAsset = 'photosSection___photos____rawAsset',
+  PhotosSectionPhotosRawHotspot = 'photosSection___photos____rawHotspot',
+  PhotosSectionPhotosRawCrop = 'photosSection___photos____rawCrop',
+  PhotosSectionRawPhotos = 'photosSection____rawPhotos',
+  RawTopSection = '_rawTopSection',
+  RawTitleDescriptionSection = '_rawTitleDescriptionSection',
+  RawEnableSection = '_rawEnableSection',
+  RawTimelineSection = '_rawTimelineSection',
+  RawTeamSection = '_rawTeamSection',
+  RawFeaturedSection = '_rawFeaturedSection',
+  RawAwardsSection = '_rawAwardsSection',
+  RawLogosSection = '_rawLogosSection',
+  RawPhotosSection = '_rawPhotosSection',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type SanityPresskitPageFilterInput = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  titleDescriptionSection: Maybe<SanityTitleCustomBodyFilterInput>;
+  enableSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  timelineSection: Maybe<SanityPresskitTimelineSectionFilterInput>;
+  teamSection: Maybe<SanityPresskitTeamSectionFilterInput>;
+  featuredSection: Maybe<SanityPresskitFeaturedSectionFilterInput>;
+  awardsSection: Maybe<SanityPresskitAwardsSectionFilterInput>;
+  logosSection: Maybe<SanityPresskitLogosSectionFilterInput>;
+  connectSectionHeader: Maybe<StringQueryOperatorInput>;
+  photosSection: Maybe<SanityPresskitPhotosSectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawTitleDescriptionSection: Maybe<JsonQueryOperatorInput>;
+  _rawEnableSection: Maybe<JsonQueryOperatorInput>;
+  _rawTimelineSection: Maybe<JsonQueryOperatorInput>;
+  _rawTeamSection: Maybe<JsonQueryOperatorInput>;
+  _rawFeaturedSection: Maybe<JsonQueryOperatorInput>;
+  _rawAwardsSection: Maybe<JsonQueryOperatorInput>;
+  _rawLogosSection: Maybe<JsonQueryOperatorInput>;
+  _rawPhotosSection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+export type SanityPresskitPageGroupConnection = {
+  __typename?: 'SanityPresskitPageGroupConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityPresskitPageEdge>;
+  nodes: Array<SanityPresskitPage>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue: Maybe<Scalars['String']>;
+};
+
+export type SanityPresskitPageSortInput = {
+  fields: Maybe<Array<Maybe<SanityPresskitPageFieldsEnum>>>;
+  order: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type SanityPresskitPhotosSection = {
+  __typename?: 'SanityPresskitPhotosSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  photos: Maybe<Array<Maybe<SanityImage>>>;
+  _rawPhotos: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityPresskitPhotosSection_RawPhotosArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityPresskitPhotosSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  photos: Maybe<SanityImageFilterListInput>;
+  _rawPhotos: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityPresskitTeamSection = {
+  __typename?: 'SanityPresskitTeamSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  buttonText: Maybe<Scalars['String']>;
+  members: Maybe<Array<Maybe<SanityRegenTeamMember>>>;
+  _rawMembers: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityPresskitTeamSection_RawMembersArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityPresskitTeamSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  buttonText: Maybe<StringQueryOperatorInput>;
+  members: Maybe<SanityRegenTeamMemberFilterListInput>;
+  _rawMembers: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityPresskitTimelineItem = {
+  __typename?: 'SanityPresskitTimelineItem';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  date: Maybe<Scalars['String']>;
+  summary: Maybe<Scalars['String']>;
+  description: Maybe<Scalars['String']>;
+};
+
+export type SanityPresskitTimelineItemFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  date: Maybe<StringQueryOperatorInput>;
+  summary: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+};
+
+export type SanityPresskitTimelineItemFilterListInput = {
+  elemMatch: Maybe<SanityPresskitTimelineItemFilterInput>;
+};
+
+export type SanityPresskitTimelineSection = {
+  __typename?: 'SanityPresskitTimelineSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  description: Maybe<Scalars['String']>;
+  completedItemIndex: Maybe<Scalars['Float']>;
+  items: Maybe<Array<Maybe<SanityPresskitTimelineItem>>>;
+  _rawItems: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityPresskitTimelineSection_RawItemsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityPresskitTimelineSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  completedItemIndex: Maybe<FloatQueryOperatorInput>;
+  items: Maybe<SanityPresskitTimelineItemFilterListInput>;
+  _rawItems: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityRegenTeamMember = SanityDocument & Node & {
+  __typename?: 'SanityRegenTeamMember';
+  _id: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  _createdAt: Maybe<Scalars['Date']>;
+  _updatedAt: Maybe<Scalars['Date']>;
+  _rev: Maybe<Scalars['String']>;
+  _key: Maybe<Scalars['String']>;
+  name: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  description: Maybe<Scalars['String']>;
+  image: Maybe<SanityImage>;
+  linkedinUrl: Maybe<Scalars['String']>;
+  twitterUrl: Maybe<Scalars['String']>;
+  githubUrl: Maybe<Scalars['String']>;
+  _rawImage: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type SanityRegenTeamMember_CreatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityRegenTeamMember_UpdatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityRegenTeamMember_RawImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityRegenTeamMemberConnection = {
+  __typename?: 'SanityRegenTeamMemberConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityRegenTeamMemberEdge>;
+  nodes: Array<SanityRegenTeamMember>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<SanityRegenTeamMemberGroupConnection>;
+};
+
+
+export type SanityRegenTeamMemberConnectionDistinctArgs = {
+  field: SanityRegenTeamMemberFieldsEnum;
+};
+
+
+export type SanityRegenTeamMemberConnectionGroupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: SanityRegenTeamMemberFieldsEnum;
+};
+
+export type SanityRegenTeamMemberEdge = {
+  __typename?: 'SanityRegenTeamMemberEdge';
+  next: Maybe<SanityRegenTeamMember>;
+  node: SanityRegenTeamMember;
+  previous: Maybe<SanityRegenTeamMember>;
+};
+
+export enum SanityRegenTeamMemberFieldsEnum {
+  Id = '_id',
+  Type = '_type',
+  CreatedAt = '_createdAt',
+  UpdatedAt = '_updatedAt',
+  Rev = '_rev',
+  Key = '_key',
+  Name = 'name',
+  Title = 'title',
+  Description = 'description',
+  ImageKey = 'image____key',
+  ImageType = 'image____type',
+  ImageAssetId = 'image___asset____id',
+  ImageAssetType = 'image___asset____type',
+  ImageAssetCreatedAt = 'image___asset____createdAt',
+  ImageAssetUpdatedAt = 'image___asset____updatedAt',
+  ImageAssetRev = 'image___asset____rev',
+  ImageAssetKey = 'image___asset____key',
+  ImageAssetOriginalFilename = 'image___asset___originalFilename',
+  ImageAssetLabel = 'image___asset___label',
+  ImageAssetTitle = 'image___asset___title',
+  ImageAssetDescription = 'image___asset___description',
+  ImageAssetAltText = 'image___asset___altText',
+  ImageAssetSha1hash = 'image___asset___sha1hash',
+  ImageAssetExtension = 'image___asset___extension',
+  ImageAssetMimeType = 'image___asset___mimeType',
+  ImageAssetSize = 'image___asset___size',
+  ImageAssetAssetId = 'image___asset___assetId',
+  ImageAssetPath = 'image___asset___path',
+  ImageAssetUrl = 'image___asset___url',
+  ImageAssetMetadataKey = 'image___asset___metadata____key',
+  ImageAssetMetadataType = 'image___asset___metadata____type',
+  ImageAssetMetadataLqip = 'image___asset___metadata___lqip',
+  ImageAssetMetadataHasAlpha = 'image___asset___metadata___hasAlpha',
+  ImageAssetMetadataIsOpaque = 'image___asset___metadata___isOpaque',
+  ImageAssetMetadataRawLocation = 'image___asset___metadata____rawLocation',
+  ImageAssetMetadataRawDimensions = 'image___asset___metadata____rawDimensions',
+  ImageAssetMetadataRawPalette = 'image___asset___metadata____rawPalette',
+  ImageAssetSourceKey = 'image___asset___source____key',
+  ImageAssetSourceType = 'image___asset___source____type',
+  ImageAssetSourceName = 'image___asset___source___name',
+  ImageAssetSourceId = 'image___asset___source___id',
+  ImageAssetSourceUrl = 'image___asset___source___url',
+  ImageAssetRawMetadata = 'image___asset____rawMetadata',
+  ImageAssetRawSource = 'image___asset____rawSource',
+  ImageAssetFixedWidth = 'image___asset___fixed___width',
+  ImageAssetFixedHeight = 'image___asset___fixed___height',
+  ImageAssetFixedSrc = 'image___asset___fixed___src',
+  ImageAssetFixedSrcSet = 'image___asset___fixed___srcSet',
+  ImageAssetFixedBase64 = 'image___asset___fixed___base64',
+  ImageAssetFixedSrcWebp = 'image___asset___fixed___srcWebp',
+  ImageAssetFixedSrcSetWebp = 'image___asset___fixed___srcSetWebp',
+  ImageAssetFluidAspectRatio = 'image___asset___fluid___aspectRatio',
+  ImageAssetFluidSrc = 'image___asset___fluid___src',
+  ImageAssetFluidSrcSet = 'image___asset___fluid___srcSet',
+  ImageAssetFluidSizes = 'image___asset___fluid___sizes',
+  ImageAssetFluidBase64 = 'image___asset___fluid___base64',
+  ImageAssetFluidSrcWebp = 'image___asset___fluid___srcWebp',
+  ImageAssetFluidSrcSetWebp = 'image___asset___fluid___srcSetWebp',
+  ImageAssetId = 'image___asset___id',
+  ImageAssetParentId = 'image___asset___parent___id',
+  ImageAssetParentChildren = 'image___asset___parent___children',
+  ImageAssetChildren = 'image___asset___children',
+  ImageAssetChildrenId = 'image___asset___children___id',
+  ImageAssetChildrenChildren = 'image___asset___children___children',
+  ImageAssetInternalContent = 'image___asset___internal___content',
+  ImageAssetInternalContentDigest = 'image___asset___internal___contentDigest',
+  ImageAssetInternalDescription = 'image___asset___internal___description',
+  ImageAssetInternalFieldOwners = 'image___asset___internal___fieldOwners',
+  ImageAssetInternalIgnoreType = 'image___asset___internal___ignoreType',
+  ImageAssetInternalMediaType = 'image___asset___internal___mediaType',
+  ImageAssetInternalOwner = 'image___asset___internal___owner',
+  ImageAssetInternalType = 'image___asset___internal___type',
+  ImageAssetChildImageSharpId = 'image___asset___childImageSharp___id',
+  ImageAssetChildImageSharpChildren = 'image___asset___childImageSharp___children',
+  ImageHotspotKey = 'image___hotspot____key',
+  ImageHotspotType = 'image___hotspot____type',
+  ImageHotspotX = 'image___hotspot___x',
+  ImageHotspotY = 'image___hotspot___y',
+  ImageHotspotHeight = 'image___hotspot___height',
+  ImageHotspotWidth = 'image___hotspot___width',
+  ImageCropKey = 'image___crop____key',
+  ImageCropType = 'image___crop____type',
+  ImageCropTop = 'image___crop___top',
+  ImageCropBottom = 'image___crop___bottom',
+  ImageCropLeft = 'image___crop___left',
+  ImageCropRight = 'image___crop___right',
+  ImageRawAsset = 'image____rawAsset',
+  ImageRawHotspot = 'image____rawHotspot',
+  ImageRawCrop = 'image____rawCrop',
+  LinkedinUrl = 'linkedinUrl',
+  TwitterUrl = 'twitterUrl',
+  GithubUrl = 'githubUrl',
+  RawImage = '_rawImage',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type SanityRegenTeamMemberFilterInput = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  name: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  image: Maybe<SanityImageFilterInput>;
+  linkedinUrl: Maybe<StringQueryOperatorInput>;
+  twitterUrl: Maybe<StringQueryOperatorInput>;
+  githubUrl: Maybe<StringQueryOperatorInput>;
+  _rawImage: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+export type SanityRegenTeamMemberFilterListInput = {
+  elemMatch: Maybe<SanityRegenTeamMemberFilterInput>;
+};
+
+export type SanityRegenTeamMemberGroupConnection = {
+  __typename?: 'SanityRegenTeamMemberGroupConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityRegenTeamMemberEdge>;
+  nodes: Array<SanityRegenTeamMember>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue: Maybe<Scalars['String']>;
+};
+
+export type SanityRegenTeamMemberSortInput = {
+  fields: Maybe<Array<Maybe<SanityRegenTeamMemberFieldsEnum>>>;
+  order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
 export type SanityRequestType = {
@@ -28525,6 +29537,34 @@ export type SanityTitleImageFilterInput = {
   title: Maybe<StringQueryOperatorInput>;
   image: Maybe<SanityCustomImageFilterInput>;
   _rawImage: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityTitleImageLink = {
+  __typename?: 'SanityTitleImageLink';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  link: Maybe<Scalars['String']>;
+  image: Maybe<SanityImage>;
+  _rawImage: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityTitleImageLink_RawImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityTitleImageLinkFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  link: Maybe<StringQueryOperatorInput>;
+  image: Maybe<SanityImageFilterInput>;
+  _rawImage: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityTitleImageLinkFilterListInput = {
+  elemMatch: Maybe<SanityTitleImageLinkFilterInput>;
 };
 
 export type SanityValuesImageItem = {
@@ -33586,10 +34626,10 @@ export type Unnamed_18_Query = (
   )> }
 );
 
-export type Unnamed_19_QueryVariables = Exact<{ [key: string]: never; }>;
+export type PresskitEnableSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_19_Query = (
+export type PresskitEnableSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -33600,29 +34640,23 @@ export type Unnamed_19_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, content: Maybe<(
-    { __typename?: 'PressKitYaml' }
+  )>, sanityPresskitPage: Maybe<(
+    { __typename?: 'SanityPresskitPage' }
     & { enableSection: Maybe<(
-      { __typename?: 'PressKitYamlEnableSection' }
-      & Pick<PressKitYamlEnableSection, 'header' | 'description'>
+      { __typename?: 'SanityTitleImageCustomBody' }
+      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
       & { image: Maybe<(
-        { __typename?: 'File' }
-        & { childImageSharp: Maybe<(
-          { __typename?: 'ImageSharp' }
-          & { fluid: Maybe<(
-            { __typename?: 'ImageSharpFluid' }
-            & GatsbyImageSharpFluid_WithWebpFragment
-          )> }
-        )> }
+        { __typename?: 'SanityCustomImage' }
+        & FluidImageWebPFieldsFragment
       )> }
     )> }
   )> }
 );
 
-export type Unnamed_20_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_19_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_20_Query = (
+export type Unnamed_19_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'PressKitYaml' }
@@ -33641,10 +34675,10 @@ export type Unnamed_20_Query = (
   )> }
 );
 
-export type Unnamed_21_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_20_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_21_Query = (
+export type Unnamed_20_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'PressKitYaml' }
@@ -33655,10 +34689,10 @@ export type Unnamed_21_Query = (
   )> }
 );
 
-export type Unnamed_22_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_21_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_22_Query = (
+export type Unnamed_21_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'PressKitYaml' }
@@ -33676,10 +34710,10 @@ export type Unnamed_22_Query = (
   )> }
 );
 
-export type Unnamed_23_QueryVariables = Exact<{ [key: string]: never; }>;
+export type PresskitTeamSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_23_Query = (
+export type PresskitTeamSectionQuery = (
   { __typename?: 'Query' }
   & { teamBackground: Maybe<(
     { __typename?: 'File' }
@@ -33693,59 +34727,62 @@ export type Unnamed_23_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'PressKitYaml' }
+  )>, sanityPresskitPage: Maybe<(
+    { __typename?: 'SanityPresskitPage' }
     & { teamSection: Maybe<(
-      { __typename?: 'PressKitYamlTeamSection' }
-      & Pick<PressKitYamlTeamSection, 'header' | 'buttonText'>
+      { __typename?: 'SanityPresskitTeamSection' }
+      & Pick<SanityPresskitTeamSection, 'header' | 'buttonText'>
       & { members: Maybe<Array<Maybe<(
-        { __typename?: 'PressKitYamlTeamSectionMembers' }
-        & Pick<PressKitYamlTeamSectionMembers, 'name' | 'title'>
+        { __typename?: 'SanityRegenTeamMember' }
+        & Pick<SanityRegenTeamMember, 'name' | 'title'>
         & { image: Maybe<(
-          { __typename?: 'File' }
-          & Pick<File, 'publicURL'>
+          { __typename?: 'SanityImage' }
+          & { asset: Maybe<(
+            { __typename?: 'SanityImageAsset' }
+            & Pick<SanityImageAsset, 'url'>
+          )> }
         )> }
       )>>> }
     )> }
   )> }
 );
 
-export type Unnamed_24_QueryVariables = Exact<{ [key: string]: never; }>;
+export type PresskitTimelineSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_24_Query = (
+export type PresskitTimelineSectionQuery = (
   { __typename?: 'Query' }
-  & { content: Maybe<(
-    { __typename?: 'PressKitYaml' }
+  & { sanityPresskitPage: Maybe<(
+    { __typename?: 'SanityPresskitPage' }
     & { timelineSection: Maybe<(
-      { __typename?: 'PressKitYamlTimelineSection' }
-      & Pick<PressKitYamlTimelineSection, 'header' | 'description' | 'completedItemIndex'>
+      { __typename?: 'SanityPresskitTimelineSection' }
+      & Pick<SanityPresskitTimelineSection, 'header' | 'description' | 'completedItemIndex'>
       & { items: Maybe<Array<Maybe<(
-        { __typename?: 'PressKitYamlTimelineSectionItems' }
-        & Pick<PressKitYamlTimelineSectionItems, 'date' | 'summary' | 'description'>
+        { __typename?: 'SanityPresskitTimelineItem' }
+        & Pick<SanityPresskitTimelineItem, 'date' | 'summary' | 'description'>
       )>>> }
     )> }
   )> }
 );
 
-export type Unnamed_25_QueryVariables = Exact<{ [key: string]: never; }>;
+export type PresskitTitleDescriptionSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_25_Query = (
+export type PresskitTitleDescriptionSectionQuery = (
   { __typename?: 'Query' }
-  & { content: Maybe<(
-    { __typename?: 'PressKitYaml' }
+  & { sanityPresskitPage: Maybe<(
+    { __typename?: 'SanityPresskitPage' }
     & { titleDescriptionSection: Maybe<(
-      { __typename?: 'PressKitYamlTitleDescriptionSection' }
-      & Pick<PressKitYamlTitleDescriptionSection, 'header' | 'description'>
+      { __typename?: 'SanityTitleCustomBody' }
+      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
     )> }
   )> }
 );
 
-export type Unnamed_26_QueryVariables = Exact<{ [key: string]: never; }>;
+export type PresskitTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_26_Query = (
+export type PresskitTopSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -33756,19 +34793,19 @@ export type Unnamed_26_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'PressKitYaml' }
+  )>, sanityPresskitPage: Maybe<(
+    { __typename?: 'SanityPresskitPage' }
     & { topSection: Maybe<(
-      { __typename?: 'PressKitYamlTopSection' }
-      & Pick<PressKitYamlTopSection, 'header' | 'body'>
+      { __typename?: 'SanityTitleBody' }
+      & Pick<SanityTitleBody, 'title' | 'body'>
     )> }
   )> }
 );
 
-export type Unnamed_27_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_22_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_27_Query = (
+export type Unnamed_22_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'ResourcesYaml' }
@@ -33787,10 +34824,10 @@ export type Unnamed_27_Query = (
   )> }
 );
 
-export type Unnamed_28_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_23_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_28_Query = (
+export type Unnamed_23_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -33825,10 +34862,10 @@ export type Unnamed_28_Query = (
   )> }
 );
 
-export type Unnamed_29_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_24_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_29_Query = (
+export type Unnamed_24_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -33857,10 +34894,10 @@ export type Unnamed_29_Query = (
   )> }
 );
 
-export type Unnamed_30_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_25_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_30_Query = (
+export type Unnamed_25_Query = (
   { __typename?: 'Query' }
   & { arrow: Maybe<(
     { __typename?: 'File' }
@@ -33897,10 +34934,10 @@ export type Unnamed_30_Query = (
   )> }
 );
 
-export type Unnamed_31_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_26_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_31_Query = (
+export type Unnamed_26_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -33927,10 +34964,10 @@ export type Unnamed_31_Query = (
   )> }
 );
 
-export type Unnamed_32_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_27_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_32_Query = (
+export type Unnamed_27_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -33964,10 +35001,10 @@ export type Unnamed_32_Query = (
   )> }
 );
 
-export type Unnamed_33_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_28_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_33_Query = (
+export type Unnamed_28_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'ScienceYaml' }
@@ -33992,10 +35029,10 @@ export type Unnamed_33_Query = (
   )> }
 );
 
-export type Unnamed_34_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_29_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_34_Query = (
+export type Unnamed_29_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34069,10 +35106,10 @@ export type EmailSubmitSectionQuery = (
   )> }
 );
 
-export type Unnamed_35_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_30_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_35_Query = (
+export type Unnamed_30_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34094,10 +35131,10 @@ export type Unnamed_35_Query = (
   )> }
 );
 
-export type Unnamed_36_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_31_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_36_Query = (
+export type Unnamed_31_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34119,10 +35156,10 @@ export type Unnamed_36_Query = (
   )> }
 );
 
-export type Unnamed_37_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_32_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_37_Query = (
+export type Unnamed_32_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34144,10 +35181,10 @@ export type Unnamed_37_Query = (
   )> }
 );
 
-export type Unnamed_38_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_33_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_38_Query = (
+export type Unnamed_33_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34176,10 +35213,10 @@ export type Unnamed_38_Query = (
   )> }
 );
 
-export type Unnamed_39_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_34_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_39_Query = (
+export type Unnamed_34_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34199,10 +35236,10 @@ export type Unnamed_39_Query = (
   )> }
 );
 
-export type Unnamed_40_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_35_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_40_Query = (
+export type Unnamed_35_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34222,10 +35259,10 @@ export type Unnamed_40_Query = (
   )> }
 );
 
-export type Unnamed_41_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_36_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_41_Query = (
+export type Unnamed_36_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -34246,10 +35283,10 @@ export type Unnamed_41_Query = (
   )> }
 );
 
-export type Unnamed_42_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_37_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_42_Query = (
+export type Unnamed_37_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'MediaYaml' }
@@ -34269,10 +35306,10 @@ export type Unnamed_42_Query = (
   )> }
 );
 
-export type Unnamed_43_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_38_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_43_Query = (
+export type Unnamed_38_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -34283,10 +35320,10 @@ export type Unnamed_43_Query = (
   )> }
 );
 
-export type Unnamed_44_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_39_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_44_Query = (
+export type Unnamed_39_Query = (
   { __typename?: 'Query' }
   & { bg: Maybe<(
     { __typename?: 'File' }
@@ -34300,10 +35337,10 @@ export type Unnamed_44_Query = (
   )> }
 );
 
-export type Unnamed_45_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_40_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_45_Query = (
+export type Unnamed_40_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -34314,10 +35351,10 @@ export type Unnamed_45_Query = (
   )> }
 );
 
-export type Unnamed_46_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_41_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_46_Query = (
+export type Unnamed_41_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -34328,10 +35365,10 @@ export type Unnamed_46_Query = (
   )> }
 );
 
-export type Unnamed_47_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_42_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_47_Query = (
+export type Unnamed_42_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34351,10 +35388,10 @@ export type Unnamed_47_Query = (
   )> }
 );
 
-export type Unnamed_48_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_43_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_48_Query = (
+export type Unnamed_43_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -34365,10 +35402,10 @@ export type Unnamed_48_Query = (
   )> }
 );
 
-export type Unnamed_49_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_44_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_49_Query = (
+export type Unnamed_44_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34388,10 +35425,10 @@ export type Unnamed_49_Query = (
   )> }
 );
 
-export type Unnamed_50_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_45_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_50_Query = (
+export type Unnamed_45_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34411,10 +35448,10 @@ export type Unnamed_50_Query = (
   )> }
 );
 
-export type Unnamed_51_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_46_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_51_Query = (
+export type Unnamed_46_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34434,10 +35471,10 @@ export type Unnamed_51_Query = (
   )> }
 );
 
-export type Unnamed_52_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_47_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_52_Query = (
+export type Unnamed_47_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34476,10 +35513,10 @@ export type Unnamed_52_Query = (
   )> }
 );
 
-export type Unnamed_53_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_48_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_53_Query = (
+export type Unnamed_48_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34499,10 +35536,10 @@ export type Unnamed_53_Query = (
   )> }
 );
 
-export type Unnamed_54_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_49_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_54_Query = (
+export type Unnamed_49_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'WalletAddressRegistrationYaml' }
@@ -34513,10 +35550,10 @@ export type Unnamed_54_Query = (
   )> }
 );
 
-export type Unnamed_55_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_50_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_55_Query = (
+export type Unnamed_50_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'WalletAddressRegistrationYaml' }
@@ -34527,10 +35564,10 @@ export type Unnamed_55_Query = (
   )> }
 );
 
-export type Unnamed_56_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_51_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_56_Query = (
+export type Unnamed_51_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34550,10 +35587,10 @@ export type Unnamed_56_Query = (
   )> }
 );
 
-export type Unnamed_57_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_52_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_57_Query = (
+export type Unnamed_52_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'WalletAddressRegistrationYaml' }
@@ -34653,10 +35690,10 @@ export type CaseStudyTemplateQuery = (
   )> }
 );
 
-export type Unnamed_58_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_53_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_58_Query = (
+export type Unnamed_53_Query = (
   { __typename?: 'Query' }
   & { sanityFaqPage: Maybe<(
     { __typename?: 'SanityFaqPage' }

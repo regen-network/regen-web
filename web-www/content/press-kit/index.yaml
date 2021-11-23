@@ -1,7 +1,6 @@
 topSection:
   header: Press Kit
-  body: "Regen Network vision: a global marketplace and contracting platform for
-    Earth’s ecosystem assets, services, and data."
+  body: "Regen Network vision: a global marketplace and contracting platform for Earth’s ecosystem assets, services, and data."
 titleDescriptionSection:
   header: Platform for a thriving planet
   description: >-
@@ -33,10 +32,7 @@ enableSection:
     ...all with a much lower cost than our competition. No middlemen, no double-counting, and no fuzzy claims. Regen Network is building the platform to help farmers and ranchers sell more than their produce; we’re giving farmers the ability to monetize their ecosystem services. For deeper understanding of how our platform functions, <a href="https://www.youtube.com/watch?v=-qyV8mO70bI" target="_blank">watch CEO Christian Shearer pitch Regen Network at Techstars Demo Day</a>.
 timelineSection:
   header: Timeline
-  description: "Two years ago, Regen Network started building the platform to help
-    farmers and ranchers sell more than their produce, giving farmers the
-    ability to monetize their ecosystem services. Since then, the team has grown
-    to more than 20 core members from across the globe. "
+  description: "Two years ago, Regen Network started building the platform to help farmers and ranchers sell more than their produce, giving farmers the ability to monetize their ecosystem services. Since then, the team has grown to more than 20 core members from across the globe. "
   completedItemIndex: 3
   items:
     - date: Q4 2018

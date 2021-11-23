@@ -8,23 +8,14 @@ coreSection:
   coreMembers:
     - name: Gregory Landua
       title: Chief Executive Officer
-      description: Gregory is co-author of Regenerative Enterprise and co-creator of
-        the 8-forms of capital framework. Gregory is a Regenerative Agriculture
-        Practitioner and farmer. As co-founder and CEO of Terra Genesis
-        International, he helped to grow an ecosystem of organizations dedicated
-        to regenerative agriculture. Gregory is a member of the Board of
-        Directors.
+      description: Gregory is co-author of Regenerative Enterprise and co-creator of the 8-forms of capital framework. Gregory is a Regenerative Agriculture Practitioner and farmer. As co-founder and CEO of Terra Genesis International, he helped to grow an ecosystem of organizations dedicated to regenerative agriculture. Gregory is a member of the Board of Directors.
       image: ../../static/media/team/gregory.jpg
       linkedUrl: https://www.linkedin.com/in/gregory-landua-4953b29/
       twitterUrl: https://twitter.com/gregory_landua
       githubUrl: null
     - name: Sara Johnstone
       title: Chief Operations Officer
-      description: Sara is strategic operator and executor who has over a decade of
-        experience in tech startups. She runs marketing, operations, community
-        management, strategy and business development. She is thrilled to have
-        recently found her way into regenerative agriculture and committed to
-        expanding her knowledge around regenerative business practices.
+      description: Sara is strategic operator and executor who has over a decade of experience in tech startups. She runs marketing, operations, community management, strategy and business development. She is thrilled to have recently found her way into regenerative agriculture and committed to expanding her knowledge around regenerative business practices.
       image: ../../static/media/sara-johnstone.png
       linkedUrl: https://www.linkedin.com/in/sara-johnstone-b3677254/
       twitterUrl: ""
@@ -163,7 +154,7 @@ coreSection:
       linkedUrl: https://www.linkedin.com/in/erika-logie-3a15647/
       twitterUrl: https://twitter.com/erikalogie
       githubUrl: https://github.com/erikalogie
-    - name: "Sam Bennetts "
+    - name: "Sam Bennetts"
       title: Science and Registry Program Manager
       description: Sam is a GIS and remote sensing specialist focused on designing
         programmatic solutions to geospatial problems. Sam's work includes

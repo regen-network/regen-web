@@ -124,7 +124,8 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
   const theme = useTheme();
   const apiUri = getApiUri();
-  const { projectId } = useParams();
+  // const { projectId } = useParams();
+  const projectId = 'test';
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
   const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
   const { data: graphData } = useShaclGraphByUriQuery({

@@ -102,6 +102,7 @@ const App: React.FC = (): JSX.Element => {
           <Route exact path="/create-methodology" component={CreateMethodology} />
           <Route exact path="/create-credit-class" component={CreateCreditClass} />
           <Route exact path="/land-stewards" component={LandStewards} />
+          <Route exact path="/test" component={Media} />
           <Route exact path="/methodology-review-process" component={MethodologyReviewProcess} />
           <Route
             path="/projects"

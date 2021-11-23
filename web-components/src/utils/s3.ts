@@ -9,7 +9,7 @@ export async function uploadImage(
   formData.append('image', image);
   formData.append('filePath', filePath);
 
-  const resp = await axios.post(`${apiServerUrl}/images`, formData, {
+  const resp = await axios.post(`${apiServerUrl}/file`, formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
 
@@ -28,5 +28,5 @@ export async function deleteImage(
   fileName: string,
   apiServerUrl: string | undefined,
 ): Promise<void> {
-  return axios.delete(`${apiServerUrl}/images/${projectId}/${fileName}`);
+  return axios.delete(`${apiServerUrl}/file/${projectId}/${fileName}`);
 }

@@ -97,60 +97,82 @@ const App: React.FC = (): JSX.Element => {
             path="post-purchase/:projectId/:walletId/:name"
             element={<PostPurchase />}
           />
-          {/* <ProtectedRoute path="/user-profile" component={UserProfile} />
-          <ProtectedRoute
-            path="/organization-profile"
-            component={OrganizationProfile}
-          /> */}
-          <Route path="/project-pages" element={<ProjectList />}>
-            {/* <ProtectedRoute component={ProjectList} />
-            <ProtectedRoute
-              path=":projectId/choose-credit-class"
-              component={ChooseCreditClass}
+          <Route
+            path="user-profile"
+            element={<ProtectedRoute component={UserProfile} />}
+          />
+          <Route
+            path="organization-profile"
+            element={<ProtectedRoute component={OrganizationProfile} />}
+          />
+          <Route
+            path="project-pages"
+            element={<ProtectedRoute component={ProjectList} />}
+          />
+          <Route path="project-pages/:projectId">
+            <Route
+              path="choose-credit-class"
+              element={<ProtectedRoute component={ChooseCreditClass} />}
             />
-            <ProtectedRoute
-              path=":projectId/basic-info"
-              component={BasicInfo}
+            <Route
+              path="basic-info"
+              element={<ProtectedRoute component={BasicInfo} />}
             />
-            <ProtectedRoute
-              path=":projectId/location"
-              component={ProjectLocation}
+            <Route
+              path="location"
+              element={<ProtectedRoute component={ProjectLocation} />}
             />
-            <ProtectedRoute path=":projectId/story" component={Story} />
-            <ProtectedRoute path=":projectId/media" component={Media} />
-            <ProtectedRoute path=":projectId/roles" component={Roles} />
-            <ProtectedRoute
-              path=":projectId/entity-display"
-              component={EntityDisplay}
-            /> */}
+            <Route
+              path="story"
+              element={<ProtectedRoute component={Story} />}
+            />
+            <Route
+              path="media"
+              element={<ProtectedRoute component={Media} />}
+            />
+            <Route
+              path="roles"
+              element={<ProtectedRoute component={Roles} />}
+            />
+            <Route
+              path="entity-display"
+              element={<ProtectedRoute component={EntityDisplay} />}
+            />
           </Route>
-          <Route path="/admin" element={<Admin />}>
-            {isAdmin(user) && (
-              <>
-                {/* <ProtectedRoute
-                  path="credits/create-and-transfer"
-                  component={BuyerCreditsTransfer}
+          <Route path="admin" element={<Admin />} />
+          {isAdmin(user) && (
+            <>
+              <Route path="admin/credits">
+                <Route
+                  path="create-and-transfer"
+                  element={<ProtectedRoute component={BuyerCreditsTransfer} />}
                 />
-                <ProtectedRoute path="credits/issue" component={CreditsIssue} />
-                <ProtectedRoute
-                  path="credits/transfer"
-                  component={CreditsTransfer}
+                <Route
+                  path="issue"
+                  element={<ProtectedRoute component={CreditsIssue} />}
                 />
-                <ProtectedRoute
-                  path="credits/retire"
-                  component={CreditsRetire}
+                <Route
+                  path="transfer"
+                  element={<ProtectedRoute component={CreditsTransfer} />}
                 />
-                <ProtectedRoute path="buyer/create" component={BuyerCreate} /> */}
-              </>
-            )}
-          </Route>
+                <Route
+                  path="retire"
+                  element={<ProtectedRoute component={CreditsRetire} />}
+                />
+              </Route>
+              <Route
+                path="admin/buyer/create"
+                element={<ProtectedRoute component={BuyerCreate} />}
+              />
+            </>
+          )}
           {/* <Route path="methodologies" element={<MethodologiesList />} /> TODO */}
           <Route
             path="methodologies/:methodologyId"
             element={<MethodologyDetails />}
           />
           <Route
-            path="credit-classes/:creditClassId"
+            path="credit-classes/:creditClassId/*"
             element={<CreditClassDetails />}
           />
           <Route path="*" element={<NotFoundPage />} />

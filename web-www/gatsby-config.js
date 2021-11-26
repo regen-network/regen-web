@@ -44,11 +44,11 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-material-ui`,
-      options: {
-        stylesProvider: {
-          injectFirst: true,
-        },
-      },
+      // options: {
+      //   stylesProvider: {
+      //     injectFirst: true,
+      //   },
+      // },
     },
     `gatsby-background-image`,
     `gatsby-plugin-react-helmet`,

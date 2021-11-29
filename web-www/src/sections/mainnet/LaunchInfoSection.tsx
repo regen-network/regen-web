@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Grid, createStyles, withStyles, makeStyles, Theme, Typography, LinearProgress } from '@mui/material';
-import Img, { FluidObject } from 'gatsby-image';
+import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
 import { getFormattedDate } from 'web-components/src/utils/format';
 import clsx from 'clsx';
 
@@ -137,7 +137,7 @@ type QueryData = {
       title: string;
       image: {
         childImageSharp: {
-          fluid: FluidObject;
+          gatsbyImageData: GatsbyImageData;
         };
       };
       card: {
@@ -157,41 +157,38 @@ const LaunchInfoSection: React.FC = () => {
       launchDate,
       launchInfoSection: { card, image, title },
     },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      text: mainnetYaml {
-        launchDate
-        launchInfoSection {
+  } = useStaticQuery<QueryData>(graphql`{
+  text: mainnetYaml {
+    launchDate
+    launchInfoSection {
+      title
+      image {
+        childImageSharp {
+          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+        }
+      }
+      card {
+        title
+        listTitle
+        progress
+        listItems {
+          text
+        }
+        actionItems {
           title
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          card {
-            title
-            listTitle
-            progress
-            listItems {
-              text
-            }
-            actionItems {
-              title
-              linkUrl
-              linkText
-              description
-              icon {
-                extension
-                publicURL
-              }
-            }
+          linkUrl
+          linkText
+          description
+          icon {
+            extension
+            publicURL
           }
         }
       }
     }
-  `);
+  }
+}
+`);
   const classes = useStyles();
   return (
     <Section className={classes.root}>
@@ -205,7 +202,7 @@ const LaunchInfoSection: React.FC = () => {
       </Grid>
 
       <div className={classes.card}>
-        <Img className={classes.image} fluid={image.childImageSharp.fluid} />
+        <GatsbyImage image={image.childImageSharp.gatsbyImageData} className={classes.image} />
         <Grid container direction="column" className={classes.cardMain}>
           <Typography className={classes.cardTitle}>{card.title}</Typography>
           <Typography className={classes.launchDate}>

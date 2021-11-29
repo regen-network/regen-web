@@ -5,7 +5,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import { useStaticQuery, graphql } from 'gatsby';
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/src/components/section';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import Tooltip from 'web-components/lib/components/tooltip';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -122,36 +122,33 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const MarketplaceSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      text: homeYaml {
-        marketplaceSection {
-          header
-          tooltip
-          body {
-            green
-            middle
-            popover
-            end
-          }
-          callToActions {
-            image {
-              childImageSharp {
-                fixed(quality: 90, width: 159) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-            }
-            caption
-            header
-            description
-            linkText
-            linkUrl
+  const data = useStaticQuery(graphql`{
+  text: homeYaml {
+    marketplaceSection {
+      header
+      tooltip
+      body {
+        green
+        middle
+        popover
+        end
+      }
+      callToActions {
+        image {
+          childImageSharp {
+            gatsbyImageData(quality: 90, width: 159, layout: FIXED)
           }
         }
+        caption
+        header
+        description
+        linkText
+        linkUrl
       }
     }
-  `);
+  }
+}
+`);
 
   const content = data.text.marketplaceSection;
 
@@ -172,7 +169,7 @@ const MarketplaceSection = (): JSX.Element => {
           {content.callToActions.map(cta => {
             return (
               <Grid key={cta.header} className={classes.gridItem} item xs>
-                <Img fixed={cta.image.childImageSharp.fixed} />
+                <GatsbyImage image={cta.image.childImageSharp.gatsbyImageData} />
                 <div className={classes.smallTitle}>{cta.caption}</div>
                 <Title className={classes.h3} variant="h3" align="center">
                   {cta.header}

@@ -4,7 +4,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Grid, Typography } from '@mui/material';
 
 import BackgroundSection from '../../components/BackgroundSection';
-import { FluidObject } from 'gatsby-image';
+import { GatsbyImageData } from 'gatsby-plugin-image';
 import GreenTopIconCard from 'web-components/src/components/cards/GreenTopIconCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -49,7 +49,7 @@ type InfoItem = {
 type QueryData = {
   background: {
     childImageSharp: {
-      fluid: FluidObject;
+      gatsbyImageData: GatsbyImageData;
     };
   };
   text: {
@@ -67,32 +67,29 @@ const WhatsNextSection: React.FC = () => {
     text: {
       whatsNextSection: { title, description, infoItems },
     },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      background: file(relativePath: { eq: "mainnet-whats-next.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: mainnetYaml {
-        whatsNextSection {
-          title
-          description
-          infoItems {
-            title
-            description
-            gitLink
-            icon {
-              extension
-              publicURL
-            }
-          }
+  } = useStaticQuery<QueryData>(graphql`{
+  background: file(relativePath: {eq: "mainnet-whats-next.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  text: mainnetYaml {
+    whatsNextSection {
+      title
+      description
+      infoItems {
+        title
+        description
+        gitLink
+        icon {
+          extension
+          publicURL
         }
       }
     }
-  `);
+  }
+}
+`);
   const classes = useStyles();
   return (
     <BackgroundSection

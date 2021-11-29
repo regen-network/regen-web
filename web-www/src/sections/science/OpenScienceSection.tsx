@@ -70,30 +70,27 @@ const OpenScienceSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          background: file(relativePath: { eq: "open-science.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: scienceYaml {
-            openScienceSection {
-              header {
-                start
-                green
-              }
-              caption
-              phases {
-                title
-                description
-              }
-            }
-          }
-        }
-      `}
+      query={graphql`{
+  background: file(relativePath: {eq: "open-science.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  content: scienceYaml {
+    openScienceSection {
+      header {
+        start
+        green
+      }
+      caption
+      phases {
+        title
+        description
+      }
+    }
+  }
+}
+`}
       render={data => {
         const content = data.content.openScienceSection;
         return (
@@ -102,7 +99,7 @@ const OpenScienceSection = (): JSX.Element => {
             className={classes.root}
             linearGradient="unset"
             topSection={false}
-            imageData={data.background.childImageSharp.fluid}
+            imageData={data.background.childImageSharp.gatsbyImageData}
           >
             <Title className={classes.caption} variant="h6">
               {content.caption}

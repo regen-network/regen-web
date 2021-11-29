@@ -18,42 +18,37 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const ComingSoonSection: React.FC = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "coming-soon-bg.jpg" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`{
+  background: file(relativePath: {eq: "coming-soon-bg.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  text: sharedYaml {
+    comingSoonSection {
+      header
+      projects {
+        name
+        location
+        area
+        areaUnit
+        handle
+        comingSoon
+        image {
+          childImageSharp {
+            gatsbyImageData(quality: 90, layout: FIXED)
           }
-        }
-      }
-      text: sharedYaml {
-        comingSoonSection {
-          header
-          projects {
-            name
-            location
-            area
-            areaUnit
-            handle
-            comingSoon
-            image {
-              childImageSharp {
-                fixed(quality: 90) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-              publicURL
-            }
-          }
+          publicURL
         }
       }
     }
-  `);
+  }
+}
+`);
   const content = data.text.comingSoonSection;
   const classes = useStyles({});
   const theme = useTheme();
-  const imageData = data.background.childImageSharp.fluid;
+  const imageData = data.background.childImageSharp.gatsbyImageData;
 
   return (
     <BackgroundImage Tag="section" fluid={imageData} backgroundColor={theme.palette.grey['50']}>

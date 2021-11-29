@@ -18,22 +18,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const ValidatorsConnectSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "validators-connect-bg.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: validatorsYaml {
-        connectSection {
-          header
-        }
-      }
+  const data = useStaticQuery(graphql`{
+  background: file(relativePath: {eq: "validators-connect-bg.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
+  }
+  text: validatorsYaml {
+    connectSection {
+      header
+    }
+  }
+}
+`);
   const content = data.text.connectSection;
   const classes = useStyles();
   const theme = useTheme();

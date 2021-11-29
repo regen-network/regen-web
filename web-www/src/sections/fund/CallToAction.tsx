@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Link, Grid, Avatar } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import ReactHtmlParser from 'react-html-parser';
 import cx from 'clsx';
 
@@ -66,31 +66,28 @@ const useStyles = makeStyles<Theme>(theme => ({
 const CallToAction = (): JSX.Element => {
   const styles = useStyles();
 
-  const data = useStaticQuery(graphql`
-    query {
-      text: fundYaml {
-        calltoActionSection {
-          callToActions {
-            image {
-              childImageSharp {
-                fixed(quality: 90, width: 159) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-            }
-            header
-            description
-            descriptionWithModalLink {
-              beginning
-              linkText
-              linkUrl
-              end
-            }
+  const data = useStaticQuery(graphql`{
+  text: fundYaml {
+    calltoActionSection {
+      callToActions {
+        image {
+          childImageSharp {
+            gatsbyImageData(quality: 90, width: 159, layout: FIXED)
           }
+        }
+        header
+        description
+        descriptionWithModalLink {
+          beginning
+          linkText
+          linkUrl
+          end
         }
       }
     }
-  `);
+  }
+}
+`);
 
   const content = data.text.calltoActionSection;
   const [modalIframeLink, setModalIframeLink] = useState<string>('');
@@ -103,7 +100,7 @@ const CallToAction = (): JSX.Element => {
             <Grid key={cta.header} item sm={6}>
               <Card className={styles.card}>
                 <Avatar className={cx(styles.greenCircle, styles.verticalSpacing)}>
-                  <Img fixed={cta.image.childImageSharp.fixed} />
+                  <GatsbyImage image={cta.image.childImageSharp.gatsbyImageData} />
                 </Avatar>
                 <Title className={cx(styles.title, styles.verticalSpacing)} variant="h4" align="center">
                   {cta.header}

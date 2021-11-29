@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { graphql, StaticQuery } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
-import { FluidObject } from 'gatsby-image';
+import { GatsbyImageData } from 'gatsby-plugin-image';
 import BackgroundImage from 'gatsby-background-image';
 
 import MediaCard from 'web-components/lib/components/cards/MediaCard';
@@ -19,7 +19,7 @@ interface AboutSectionProps {
   };
   mapImage: {
     childImageSharp: {
-      fluid: FluidObject;
+      gatsbyImageData: GatsbyImageData;
     };
   };
   practice: string;
@@ -179,7 +179,10 @@ const AboutSection = ({
             </Box>
             <Grid container spacing={10}>
               <Grid item xs={12} md={6}>
-                <BackgroundImage className={classes.background} fluid={mapImage.childImageSharp.fluid}>
+                <BackgroundImage
+                  className={classes.background}
+                  fluid={mapImage.childImageSharp.gatsbyImageData}
+                >
                   <div className={classes.cardContainer}>
                     <MediaCard
                       borderColor={theme.palette.grey[100]}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Theme, makeStyles, TypographyVariant } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import clsx from 'clsx';
-import { FluidObject } from 'gatsby-image';
+import { GatsbyImageData } from 'gatsby-plugin-image';
 
 import BackgroundSection from './BackgroundSection';
 
@@ -119,7 +119,7 @@ interface ConnectSectionProps {
   className?: string;
   background: {
     childImageSharp: {
-      fluid: FluidObject;
+      gatsbyImageData: GatsbyImageData;
     };
   };
 }
@@ -152,7 +152,7 @@ const ConnectSection = ({
       className={clsx(className, classes.root)}
       linearGradient="unset"
       topSection={false}
-      imageData={background.childImageSharp.fluid}
+      imageData={background.childImageSharp.gatsbyImageData}
       header={header}
       titleClassName={clsx(titleClassName, classes.title)}
       titleVariant={titleVariant}

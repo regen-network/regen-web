@@ -26,22 +26,19 @@ const Mainnet: React.FC<PageProps> = ({ location }) => {
   const {
     background,
     text: { livecastLink, launchDate, seoDescription },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      background: file(relativePath: { eq: "mainnet-globe.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: mainnetYaml {
-        launchDate
-        seoDescription
-        livecastLink
-      }
+  } = useStaticQuery<QueryData>(graphql`{
+  background: file(relativePath: {eq: "mainnet-globe.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
+  }
+  text: mainnetYaml {
+    launchDate
+    seoDescription
+    livecastLink
+  }
+}
+`);
 
   return (
     <>

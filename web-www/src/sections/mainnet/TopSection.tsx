@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { FluidObject } from 'gatsby-image';
+import { GatsbyImageData } from 'gatsby-plugin-image';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Typography } from '@mui/material';
 
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type QueryData = {
-  desktop: { childImageSharp: { fluid: FluidObject } };
+  desktop: { childImageSharp: { gatsbyImageData: GatsbyImageData } };
   text: {
     launchDate: string;
     topSection: {
@@ -36,24 +36,21 @@ const TopSection: React.FC = () => {
   const {
     desktop: { childImageSharp },
     text: { topSection, launchDate },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      desktop: file(relativePath: { eq: "mainnet-globe.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: mainnetYaml {
-        launchDate
-        topSection {
-          header
-          body
-        }
-      }
+  } = useStaticQuery<QueryData>(graphql`{
+  desktop: file(relativePath: {eq: "mainnet-globe.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
+  }
+  text: mainnetYaml {
+    launchDate
+    topSection {
+      header
+      body
+    }
+  }
+}
+`);
   const { body, header } = topSection;
   const classes = useStyles();
   return (

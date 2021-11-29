@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles, CardContent, Typography } from '@mui/material';
-import Img, { FluidObject } from 'gatsby-image';
+import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/src/components/section';
@@ -88,7 +88,7 @@ type QueryData = {
       imageTitle: string;
       image: {
         childImageSharp: {
-          fluid: FluidObject;
+          gatsbyImageData: GatsbyImageData;
         };
       };
     };
@@ -102,27 +102,24 @@ const InfoSection = (): JSX.Element => {
     text: {
       infoSection: { image, title, subtitle, body, signupText, imageAltText, imageTitle },
     },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      text: tokenYaml {
-        infoSection {
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          title
-          subtitle
-          body
-          signupText
-          imageAltText
-          imageTitle
+  } = useStaticQuery<QueryData>(graphql`{
+  text: tokenYaml {
+    infoSection {
+      image {
+        childImageSharp {
+          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
         }
       }
+      title
+      subtitle
+      body
+      signupText
+      imageAltText
+      imageTitle
     }
-  `);
+  }
+}
+`);
 
   const scrollToSignup = (): void => {
     const signup = document.getElementById('newsletter-signup');
@@ -132,12 +129,11 @@ const InfoSection = (): JSX.Element => {
   return (
     <Section>
       <Card className={styles.card}>
-        <Img
+        <GatsbyImage
+          image={image?.childImageSharp?.gatsbyImageData}
           className={styles.image}
-          fluid={image?.childImageSharp?.fluid}
           title={imageTitle}
-          alt={imageAltText}
-        />
+          alt={imageAltText} />
         <CardContent className={styles.cardContent}>
           <Title variant="h3">{title}</Title>
           <Typography className={styles.subtitle}>{subtitle}</Typography>

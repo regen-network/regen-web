@@ -61,25 +61,22 @@ const EmailSubmitSection = ({ image, altContent, classes }: Props): JSX.Element 
   const styles = useStyles({});
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          text: sharedYaml {
-            newsletterSection {
-              header
-              description
-            }
-          }
-          desktop: file(relativePath: { eq: "regen-handshake.png" }) {
-            childImageSharp {
-              fluid(quality: 90, maxWidth: 1920) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-      `}
+      query={graphql`{
+  text: sharedYaml {
+    newsletterSection {
+      header
+      description
+    }
+  }
+  desktop: file(relativePath: {eq: "regen-handshake.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+}
+`}
       render={data => {
-        const imageData = image || data.desktop.childImageSharp.fluid;
+        const imageData = image || data.desktop.childImageSharp.gatsbyImageData;
         const content: Content = altContent || data.text.newsletterSection;
 
         return (

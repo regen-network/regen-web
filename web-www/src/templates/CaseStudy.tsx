@@ -43,136 +43,115 @@ const CaseStudy = ({ data, location }: Props): JSX.Element => {
   );
 };
 
-export const query = graphql`
-  query ($slug: String!) {
-    allCaseStudyItemsYaml(filter: { slug: { eq: $slug } }) {
-      nodes {
-        id
-        name
-        slug
+export const query = graphql`query ($slug: String!) {
+  allCaseStudyItemsYaml(filter: {slug: {eq: $slug}}) {
+    nodes {
+      id
+      name
+      slug
+      description
+      background {
+        childImageSharp {
+          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+        }
+      }
+      aboutSection {
+        about
+        practice
+        biome
+        region
+        lineRotate
+        lineWidth
+        aboutImage {
+          publicURL
+        }
+        mapImage {
+          childImageSharp {
+            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+          }
+        }
+      }
+      contextSection {
         description
+        image {
+          childImageSharp {
+            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+          }
+        }
+        challenges {
+          text
+        }
+      }
+      approachSection {
+        description
+        details
+        results
+        next
+        figureTitle
+        figureImage {
+          childImageSharp {
+            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+          }
+        }
+      }
+      figureSection {
+        title
         background {
           childImageSharp {
-            fluid(quality: 90) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
+            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
           }
         }
-        aboutSection {
-          about
-          practice
-          biome
-          region
-          lineRotate
-          lineWidth
-          aboutImage {
-            publicURL
-          }
-          mapImage {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-        contextSection {
-          description
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          challenges {
-            text
-          }
-        }
-        approachSection {
-          description
-          details
-          results
-          next
-          figureTitle
-          figureImage {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-        figureSection {
+        figures {
           title
-          background {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          figures {
-            title
-            spacing
-            image {
-              childImageSharp {
-                fluid(quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-          }
-        }
-        fundingSection {
-          details
-          results
-          next
+          spacing
           image {
             childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
+              gatsbyImageData(quality: 90, layout: FULL_WIDTH)
             }
           }
         }
-        conclusionSection {
-          description
-          images {
-            title
-            image {
-              childImageSharp {
-                fluid(quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
+      }
+      fundingSection {
+        details
+        results
+        next
+        image {
+          childImageSharp {
+            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
           }
         }
-        bottomSection {
-          quote
-          background {
+      }
+      conclusionSection {
+        description
+        images {
+          title
+          image {
             childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
+              gatsbyImageData(quality: 90, layout: FULL_WIDTH)
             }
           }
-          person {
-            name
-            role
-            image {
-              childImageSharp {
-                fluid(quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
+        }
+      }
+      bottomSection {
+        quote
+        background {
+          childImageSharp {
+            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+          }
+        }
+        person {
+          name
+          role
+          image {
+            childImageSharp {
+              gatsbyImageData(quality: 90, layout: FULL_WIDTH)
             }
           }
         }
       }
     }
   }
+}
 `;
 
 export default CaseStudy;

@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { graphql, StaticQuery } from 'gatsby';
 import Grid from '@mui/material/Grid';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import Title from 'web-components/lib/components/title';
@@ -90,39 +90,36 @@ const EnableSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          background: file(relativePath: { eq: "image-topo-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: pressKitYaml {
-            enableSection {
-              header
-              description
-              image {
-                childImageSharp {
-                  fluid(quality: 90) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
-              }
-            }
-          }
+      query={graphql`{
+  background: file(relativePath: {eq: "image-topo-bg.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  content: pressKitYaml {
+    enableSection {
+      header
+      description
+      image {
+        childImageSharp {
+          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
         }
-      `}
+      }
+    }
+  }
+}
+`}
       render={data => {
         const content = data.content.enableSection;
         return (
           <div className={classes.root}>
             <Grid container alignItems="center">
               <Grid xs={12} item className={classes.imageContainer}>
-                <Img className={classes.image} fluid={content.image.childImageSharp.fluid} />
+                <GatsbyImage
+                  image={content.image.childImageSharp.gatsbyImageData}
+                  className={classes.image} />
                 <div className={classes.imageBackground}>
-                  <Img fluid={data.background.childImageSharp.fluid} />
+                  <GatsbyImage image={data.background.childImageSharp.gatsbyImageData} />
                 </div>
               </Grid>
               <Grid xs={12} item className={classes.text}>

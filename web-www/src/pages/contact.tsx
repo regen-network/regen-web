@@ -4,7 +4,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 import { useStaticQuery, graphql } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import clsx from 'clsx';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
@@ -181,207 +181,200 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
-  const data = useStaticQuery(graphql`
-    query {
-      text: contactYaml {
-        header
-        body
-        form {
-          messageForPartners
-          requestTypes {
-            label
-            value
-          }
-        }
-        location {
-          header
-          body
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-        email {
-          header
-          body
-        }
-        faq {
-          header
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
+  const data = useStaticQuery(graphql`{
+  text: contactYaml {
+    header
+    body
+    form {
+      messageForPartners
+      requestTypes {
+        label
+        value
+      }
+    }
+    location {
+      header
+      body
+      image {
+        childImageSharp {
+          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
         }
       }
     }
-  `);
+    email {
+      header
+      body
+    }
+    faq {
+      header
+      image {
+        childImageSharp {
+          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+        }
+      }
+    }
+  }
+}
+`);
   const content = data.text;
 
-  return (
-    <>
-      <SEO title="Contact" location={location} />
-      <div className={classes.background}>
-        <Section
-          title={content.header}
-          titleVariant="h1"
-          classes={{ root: classes.section, title: classes.title }}
-        >
-          <Description align="center" className={classes.subtitle}>
-            {ReactHtmlParser(content.body)}
-          </Description>
-          <div className={classes.container}>
-            <Card elevation={1} className={classes.card}>
-              <Formik
-                initialValues={{
-                  name: '',
-                  orgName: '',
-                  email: '',
-                  requestType: '',
-                  message: '',
-                }}
-                validate={(values: Values) => {
-                  const errors: Partial<Values> = {};
-                  if (!values.email) {
-                    errors.email = requiredMessage;
-                  } else if (!validateEmail(values.email)) {
-                    errors.email = invalidEmailMessage;
-                  }
-                  if (!values.name) {
-                    errors.name = requiredMessage;
-                  }
-                  if (!values.requestType) {
-                    errors.requestType = requiredMessage;
-                  }
-                  if (!values.message) {
-                    errors.message = requiredMessage;
-                  }
-                  return errors;
-                }}
-                onSubmit={({ requestType, email, name, orgName, message }, { setSubmitting, resetForm }) => {
-                  setSubmitting(true);
-                  const apiUri: string = process.env.GATSBY_API_URI || 'http://localhost:5000';
-                  axios
-                    .post(`${apiUri}/contact`, {
-                      email,
-                      name,
-                      orgName,
-                      requestType,
-                      message,
-                    })
-                    .then(resp => {
-                      setSubmitting(false);
-                      setTimeout(resetForm, bannerDuration);
-                    })
-                    .catch(e => {
-                      setSubmitting(false);
-                    });
-                }}
-              >
-                {({ values, isValid, submitForm, isSubmitting, submitCount }) => {
-                  return (
-                    <div>
-                      <Form translate="yes">
-                        <div>
-                          <Grid container>
-                            <Grid item xs={12} sm={6} className={classes.gridLeft}>
-                              <Field
-                                className={classes.textField}
-                                component={TextField}
-                                label="Your full name"
-                                name="name"
-                              />
-                            </Grid>
-                            <Grid item xs={12} sm={6} className={classes.gridRight}>
-                              <Field
-                                component={TextField}
-                                className={classes.textField}
-                                type="email"
-                                label="Your email address"
-                                name="email"
-                              />
-                            </Grid>
+  return <>
+    <SEO title="Contact" location={location} />
+    <div className={classes.background}>
+      <Section
+        title={content.header}
+        titleVariant="h1"
+        classes={{ root: classes.section, title: classes.title }}
+      >
+        <Description align="center" className={classes.subtitle}>
+          {ReactHtmlParser(content.body)}
+        </Description>
+        <div className={classes.container}>
+          <Card elevation={1} className={classes.card}>
+            <Formik
+              initialValues={{
+                name: '',
+                orgName: '',
+                email: '',
+                requestType: '',
+                message: '',
+              }}
+              validate={(values: Values) => {
+                const errors: Partial<Values> = {};
+                if (!values.email) {
+                  errors.email = requiredMessage;
+                } else if (!validateEmail(values.email)) {
+                  errors.email = invalidEmailMessage;
+                }
+                if (!values.name) {
+                  errors.name = requiredMessage;
+                }
+                if (!values.requestType) {
+                  errors.requestType = requiredMessage;
+                }
+                if (!values.message) {
+                  errors.message = requiredMessage;
+                }
+                return errors;
+              }}
+              onSubmit={({ requestType, email, name, orgName, message }, { setSubmitting, resetForm }) => {
+                setSubmitting(true);
+                const apiUri: string = process.env.GATSBY_API_URI || 'http://localhost:5000';
+                axios
+                  .post(`${apiUri}/contact`, {
+                    email,
+                    name,
+                    orgName,
+                    requestType,
+                    message,
+                  })
+                  .then(resp => {
+                    setSubmitting(false);
+                    setTimeout(resetForm, bannerDuration);
+                  })
+                  .catch(e => {
+                    setSubmitting(false);
+                  });
+              }}
+            >
+              {({ values, isValid, submitForm, isSubmitting, submitCount }) => {
+                return (
+                  <div>
+                    <Form translate="yes">
+                      <div>
+                        <Grid container>
+                          <Grid item xs={12} sm={6} className={classes.gridLeft}>
+                            <Field
+                              className={classes.textField}
+                              component={TextField}
+                              label="Your full name"
+                              name="name"
+                            />
                           </Grid>
-                          <Grid container>
-                            <Grid item xs={12} sm={6} className={classes.gridLeft}>
-                              <Field
-                                component={TextField}
-                                className={classes.textField}
-                                label="Your organization's name"
-                                name="orgName"
-                                optional
-                              />
-                            </Grid>
-                            <Grid item xs={12} sm={6} className={classes.gridRight}>
-                              <Field
-                                options={[{ value: '', label: 'Select one' }, ...content.form.requestTypes]}
-                                component={SelectTextField}
-                                label="I am a:"
-                                name="requestType"
-                                className={
-                                  values.requestType === ''
-                                    ? clsx(classes.defaultSelect, classes.textField)
-                                    : classes.textField
-                                }
-                              />
-                            </Grid>
+                          <Grid item xs={12} sm={6} className={classes.gridRight}>
+                            <Field
+                              component={TextField}
+                              className={classes.textField}
+                              type="email"
+                              label="Your email address"
+                              name="email"
+                            />
                           </Grid>
-                        </div>
-                        {values.requestType === 'partnerships@regen.network' && (
-                          <Description className={classes.messageForPartners}>
-                            {ReactHtmlParser(content.form.messageForPartners)}
-                          </Description>
-                        )}
-                        <Field
-                          component={TextField}
-                          name="message"
-                          className={clsx(classes.textAreaField, classes.textField)}
-                          label="Message"
-                          multiline
-                          rows={matches ? 6 : 4}
-                        />
-                        <ContainedButton
-                          disabled={(submitCount > 0 && !isValid) || isSubmitting}
-                          className={classes.button}
-                          onClick={submitForm}
-                        >
-                          send
-                        </ContainedButton>
-                      </Form>
-                      {submitCount > 0 && !isSubmitting && (
-                        <Banner duration={bannerDuration} text="Your message was sent to the Regen team!" />
+                        </Grid>
+                        <Grid container>
+                          <Grid item xs={12} sm={6} className={classes.gridLeft}>
+                            <Field
+                              component={TextField}
+                              className={classes.textField}
+                              label="Your organization's name"
+                              name="orgName"
+                              optional
+                            />
+                          </Grid>
+                          <Grid item xs={12} sm={6} className={classes.gridRight}>
+                            <Field
+                              options={[{ value: '', label: 'Select one' }, ...content.form.requestTypes]}
+                              component={SelectTextField}
+                              label="I am a:"
+                              name="requestType"
+                              className={
+                                values.requestType === ''
+                                  ? clsx(classes.defaultSelect, classes.textField)
+                                  : classes.textField
+                              }
+                            />
+                          </Grid>
+                        </Grid>
+                      </div>
+                      {values.requestType === 'partnerships@regen.network' && (
+                        <Description className={classes.messageForPartners}>
+                          {ReactHtmlParser(content.form.messageForPartners)}
+                        </Description>
                       )}
-                    </div>
-                  );
-                }}
-              </Formik>
-            </Card>
-            <Grid container>
-              <Grid item xs={12} sm={6} className={classes.contactInfo}>
-                <Title variant="h4">{content.location.header}</Title>
-                <Description className={classes.body}>{ReactHtmlParser(content.location.body)}</Description>
-                <Title className={classes.email} variant="h4">
-                  {content.email.header}
-                </Title>
-                <Description className={clsx(classes.emailBody, classes.body)}>
-                  {ReactHtmlParser(content.email.body)}
-                </Description>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Img fluid={content.location.image.childImageSharp.fluid} />
-              </Grid>
+                      <Field
+                        component={TextField}
+                        name="message"
+                        className={clsx(classes.textAreaField, classes.textField)}
+                        label="Message"
+                        multiline
+                        rows={matches ? 6 : 4}
+                      />
+                      <ContainedButton
+                        disabled={(submitCount > 0 && !isValid) || isSubmitting}
+                        className={classes.button}
+                        onClick={submitForm}
+                      >
+                        send
+                      </ContainedButton>
+                    </Form>
+                    {submitCount > 0 && !isSubmitting && (
+                      <Banner duration={bannerDuration} text="Your message was sent to the Regen team!" />
+                    )}
+                  </div>
+                );
+              }}
+            </Formik>
+          </Card>
+          <Grid container>
+            <Grid item xs={12} sm={6} className={classes.contactInfo}>
+              <Title variant="h4">{content.location.header}</Title>
+              <Description className={classes.body}>{ReactHtmlParser(content.location.body)}</Description>
+              <Title className={classes.email} variant="h4">
+                {content.email.header}
+              </Title>
+              <Description className={clsx(classes.emailBody, classes.body)}>
+                {ReactHtmlParser(content.email.body)}
+              </Description>
             </Grid>
-          </div>
-        </Section>
-        <FAQSection header={content.faq.header} imageData={content.faq.image.childImageSharp.fluid} />
-      </div>
-    </>
-  );
+            <Grid item xs={12} sm={6}>
+              <GatsbyImage image={content.location.image.childImageSharp.gatsbyImageData} />
+            </Grid>
+          </Grid>
+        </div>
+      </Section>
+      <FAQSection header={content.faq.header} imageData={content.faq.image.childImageSharp.gatsbyImageData} />
+    </div>
+  </>;
 };
 
 export default ContactPage;

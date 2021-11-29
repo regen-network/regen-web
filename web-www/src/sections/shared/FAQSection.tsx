@@ -2,7 +2,7 @@ import React, { ReactChild } from 'react';
 import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
 import BackgroundImage from 'gatsby-background-image';
 import { Link } from 'gatsby';
-import { FluidObject } from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import clsx from 'clsx';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -10,7 +10,7 @@ import Section from 'web-components/src/components/section';
 
 interface FAQSectionProps {
   category?: string;
-  imageData: FluidObject;
+  imageData: GatsbyImage;
   header: string;
   children?: ReactChild;
 }

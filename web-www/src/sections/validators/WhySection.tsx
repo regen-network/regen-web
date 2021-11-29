@@ -18,30 +18,27 @@ const WhySection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          background: file(relativePath: { eq: "developers-topo-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: validatorsYaml {
-            whySection {
-              header
-              body
-            }
-          }
-        }
-      `}
+      query={graphql`{
+  background: file(relativePath: {eq: "developers-topo-bg.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  content: validatorsYaml {
+    whySection {
+      header
+      body
+    }
+  }
+}
+`}
       render={data => {
         const content = data.content.whySection;
         return (
           <BackgroundSection
             linearGradient="unset"
             topSection={false}
-            imageData={data.background.childImageSharp.fluid}
+            imageData={data.background.childImageSharp.gatsbyImageData}
             className={classes.section}
           >
             <TitleDescription title={content.header} description={content.body} />

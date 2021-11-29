@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 import Section from 'web-components/lib/components/section';
 import TitleDescription from 'web-components/lib/components/title-description';
@@ -39,37 +39,34 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const LedgerSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "developers-ledger-bg.jpg" }) {
+  const data = useStaticQuery(graphql`{
+  background: file(relativePath: {eq: "developers-ledger-bg.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  text: developersYaml {
+    ledgerSection {
+      header
+      body
+      cosmosImage {
         childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: developersYaml {
-        ledgerSection {
-          header
-          body
-          cosmosImage {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
+          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
         }
       }
     }
-  `);
+  }
+}
+`);
   const content = data.text.ledgerSection;
-  const imageData = data.background.childImageSharp.fluid;
+  const imageData = data.background.childImageSharp.gatsbyImageData;
   const classes = useStyles();
   return (
     <div className={classes.sectionWrapper}>
       <Section>
-        <Img className={classes.cosmosImg} fluid={content.cosmosImage.childImageSharp.fluid} />
+        <GatsbyImage
+          image={content.cosmosImage.childImageSharp.gatsbyImageData}
+          className={classes.cosmosImg} />
         <TitleDescription
           className={classes.titleDesc}
           title={content.header}
@@ -77,7 +74,7 @@ const LedgerSection = (): JSX.Element => {
         ></TitleDescription>
       </Section>
       <div className={classes.bgGradient}>
-        <Img className={classes.img} fluid={imageData} />
+        <GatsbyImage image={imageData} className={classes.img} />
       </div>
     </div>
   );

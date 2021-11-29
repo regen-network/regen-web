@@ -20,62 +20,55 @@ interface props {
 
 const IndexPage = ({ location }: props): JSX.Element => {
   const theme = useTheme();
-  const data = useStaticQuery(graphql`
-    query {
-      seoImage: file(relativePath: { eq: "science.png" }) {
-        publicURL
-      }
-      background: file(relativePath: { eq: "home-climate-bg.jpg" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      backgroundMobile: file(relativePath: { eq: "home-climate-bg-mobile.jpg" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
+  const data = useStaticQuery(graphql`{
+  seoImage: file(relativePath: {eq: "science.png"}) {
+    publicURL
+  }
+  background: file(relativePath: {eq: "home-climate-bg.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
+  }
+  backgroundMobile: file(relativePath: {eq: "home-climate-bg-mobile.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+}
+`);
 
-  return (
-    <>
-      <SEO location={location} title="Regen Network" imageUrl={data.seoImage.publicURL} />
-      <HomeFoldSection />
-      <MarketplaceSection />
-      <EmailSubmitSection />
-      <Box display={{ xs: 'block', sm: 'none' }}>
-        <BackgroundImage
-          Tag="div"
-          fluid={data.backgroundMobile.childImageSharp.fluid}
-          backgroundColor={theme.palette.grey['50']}
-          style={{
-            backgroundPosition: 'left 70%',
-          }}
-        >
-          <ClimateSection />
-        </BackgroundImage>
+  return <>
+    <SEO location={location} title="Regen Network" imageUrl={data.seoImage.publicURL} />
+    <HomeFoldSection />
+    <MarketplaceSection />
+    <EmailSubmitSection />
+    <Box display={{ xs: 'block', sm: 'none' }}>
+      <BackgroundImage
+        Tag="div"
+        fluid={data.backgroundMobile.childImageSharp.gatsbyImageData}
+        backgroundColor={theme.palette.grey['50']}
+        style={{
+          backgroundPosition: 'left 70%',
+        }}
+      >
+        <ClimateSection />
+      </BackgroundImage>
+      <CarbonPlusSection />
+    </Box>
+    <Box display={{ xs: 'none', sm: 'block' }}>
+      <BackgroundImage
+        Tag="div"
+        fluid={data.background.childImageSharp.gatsbyImageData}
+        backgroundColor={theme.palette.grey['50']}
+      >
+        <ClimateSection />
         <CarbonPlusSection />
-      </Box>
-      <Box display={{ xs: 'none', sm: 'block' }}>
-        <BackgroundImage
-          Tag="div"
-          fluid={data.background.childImageSharp.fluid}
-          backgroundColor={theme.palette.grey['50']}
-        >
-          <ClimateSection />
-          <CarbonPlusSection />
-        </BackgroundImage>
-      </Box>
-      <HomeLedger />
-      <HomeValuesSection />
-      <BlogSection />
-    </>
-  );
+      </BackgroundImage>
+    </Box>
+    <HomeLedger />
+    <HomeValuesSection />
+    <BlogSection />
+  </>;
 };
 
 export default IndexPage;

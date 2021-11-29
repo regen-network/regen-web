@@ -21,22 +21,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const InvolvedSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "developers-involved-bg.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: developersYaml {
-        involvedSection {
-          header
-        }
-      }
+  const data = useStaticQuery(graphql`{
+  background: file(relativePath: {eq: "developers-involved-bg.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
+  }
+  text: developersYaml {
+    involvedSection {
+      header
+    }
+  }
+}
+`);
   const content = data.text.involvedSection;
   const classes = useStyles();
   const theme = useTheme();

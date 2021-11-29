@@ -19,38 +19,33 @@ interface props {
 }
 
 const PressKitPage = ({ location }: props): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "press-kit-topo-bg.jpg" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
+  const data = useStaticQuery(graphql`{
+  background: file(relativePath: {eq: "press-kit-topo-bg.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
-  return (
-    <>
-      <SEO
-        title="Press Kit"
-        location={location}
-        description="Regen Network aligns economics with ecology to drive regenerative land management."
-      />
-      <TopSection />
-      <TitleDescriptionSection />
-      <EnableSection />
-      <TimelineSection />
-      <TeamSection />
-      <BackgroundImage fluid={data.background.childImageSharp.fluid}>
-        <FeaturedSection />
-        <AwardsSection />
-        <LogosSection />
-      </BackgroundImage>
-      <ConnectSection />
-      <PhotosSection />
-    </>
-  );
+  }
+}
+`);
+  return <>
+    <SEO
+      title="Press Kit"
+      location={location}
+      description="Regen Network aligns economics with ecology to drive regenerative land management."
+    />
+    <TopSection />
+    <TitleDescriptionSection />
+    <EnableSection />
+    <TimelineSection />
+    <TeamSection />
+    <BackgroundImage fluid={data.background.childImageSharp.gatsbyImageData}>
+      <FeaturedSection />
+      <AwardsSection />
+      <LogosSection />
+    </BackgroundImage>
+    <ConnectSection />
+    <PhotosSection />
+  </>;
 };
 
 export default PressKitPage;

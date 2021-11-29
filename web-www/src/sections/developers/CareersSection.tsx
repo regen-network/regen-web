@@ -68,26 +68,23 @@ const CareersSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          background: file(relativePath: { eq: "developers-careers-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: developersYaml {
-            careersSection {
-              header
-              body
-              caption
-              buttonLink
-              buttonText
-            }
-          }
-        }
-      `}
+      query={graphql`{
+  background: file(relativePath: {eq: "developers-careers-bg.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  content: developersYaml {
+    careersSection {
+      header
+      body
+      caption
+      buttonLink
+      buttonText
+    }
+  }
+}
+`}
       render={data => {
         const content = data.content.careersSection;
         return (
@@ -95,7 +92,7 @@ const CareersSection = (): JSX.Element => {
             linearGradient="unset"
             topSection={false}
             className={classes.section}
-            imageData={data.background.childImageSharp.fluid}
+            imageData={data.background.childImageSharp.gatsbyImageData}
           >
             <div className={classes.caption}>{content.caption}</div>
             <Title align="center" className={classes.title} variant="h2">

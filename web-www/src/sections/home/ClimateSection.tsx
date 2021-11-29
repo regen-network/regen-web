@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import { useStaticQuery, graphql } from 'gatsby';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
@@ -170,31 +170,28 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const ClimateSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      text: homeYaml {
-        climateSection {
-          header
-          description
-          solution {
-            header
-            description
-          }
-          problem {
-            header
-            description
-          }
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
+  const data = useStaticQuery(graphql`{
+  text: homeYaml {
+    climateSection {
+      header
+      description
+      solution {
+        header
+        description
+      }
+      problem {
+        header
+        description
+      }
+      image {
+        childImageSharp {
+          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
         }
       }
     }
-  `);
+  }
+}
+`);
   const classes = useStyles();
   const theme = useTheme();
   const downSm = useMediaQuery(theme.breakpoints.down('sm'));
@@ -213,7 +210,9 @@ const ClimateSection = (): JSX.Element => {
         </Title>
         <div className={classes.cardContent}>{content.problem.description}</div>
       </Card>
-      <Img className={classes.image} fluid={content.image.childImageSharp.fluid} />
+      <GatsbyImage
+        image={content.image.childImageSharp.gatsbyImageData}
+        className={classes.image} />
       {!downSm && <hr className={clsx(classes.line, classes.solutionLine)} />}
       <Card
         className={clsx(classes.card, classes.solutionCard)}

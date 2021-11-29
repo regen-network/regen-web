@@ -3,7 +3,7 @@ import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { graphql, StaticQuery } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
-import Img, { FluidObject } from 'gatsby-image';
+import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
 import clsx from 'clsx';
 
 import BackgroundSection from '../../../components/BackgroundSection';
@@ -13,7 +13,7 @@ import Description from 'web-components/lib/components/description';
 interface Image {
   image: {
     childImageSharp: {
-      fluid: FluidObject;
+      gatsbyImageData: GatsbyImageData;
     };
   };
   title?: string;
@@ -72,43 +72,39 @@ const ConclusionSection = ({ description, images }: ConclusionSectionProps): JSX
 
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          bg: file(relativePath: { eq: "topo-bg-top.png" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          text: caseStudiesYaml {
-            caseStudies {
-              conclusionSection {
-                header
-              }
-            }
-          }
-        }
-      `}
+      query={graphql`{
+  bg: file(relativePath: {eq: "topo-bg-top.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  text: caseStudiesYaml {
+    caseStudies {
+      conclusionSection {
+        header
+      }
+    }
+  }
+}
+`}
       render={data => {
         const content = data.text.caseStudies.conclusionSection;
         return (
           <BackgroundSection
             topSection={false}
             linearGradient="unset"
-            imageData={data.bg.childImageSharp.fluid}
+            imageData={data.bg.childImageSharp.gatsbyImageData}
             className={classes.root}
           >
             <Grid container spacing={8} alignItems="center">
               <Grid item xs={12} sm={5}>
                 {images.map((img: Image, i: number) => (
                   <div key={i}>
-                    <Img
-                      fluid={img.image.childImageSharp.fluid}
+                    <GatsbyImage
+                      image={img.image.childImageSharp.gatsbyImageData}
                       className={
                         images.length > 1 && i > 0 ? clsx(classes.withMargin, classes.image) : classes.image
-                      }
-                    />
+                      } />
                     {img.title && <Description className={classes.imageTitle}>{img.title}</Description>}
                   </div>
                 ))}

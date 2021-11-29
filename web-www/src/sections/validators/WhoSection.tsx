@@ -3,7 +3,7 @@ import { graphql, StaticQuery } from 'gatsby';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import TitleDescription from 'web-components/lib/components/title-description';
@@ -57,45 +57,40 @@ const WhoSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          background: file(relativePath: { eq: "who-validators-bg.jpg" }) {
+      query={graphql`{
+  background: file(relativePath: {eq: "who-validators-bg.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  text: validatorsYaml {
+    whoSection {
+      header
+      body
+      validators {
+        header
+        description
+        members {
+          image {
+            publicURL
             childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
+              gatsbyImageData(quality: 90, layout: FULL_WIDTH)
             }
           }
-          text: validatorsYaml {
-            whoSection {
-              header
-              body
-              validators {
-                header
-                description
-                members {
-                  image {
-                    publicURL
-                    childImageSharp {
-                      fluid(quality: 90) {
-                        ...GatsbyImageSharpFluid_withWebp
-                      }
-                    }
-                  }
-                  link
-                }
-              }
-            }
-          }
+          link
         }
-      `}
+      }
+    }
+  }
+}
+`}
       render={data => {
         const content = data.text.whoSection;
         return (
           <BackgroundSection
             linearGradient="unset"
             className={classes.section}
-            imageData={data.background.childImageSharp.fluid}
+            imageData={data.background.childImageSharp.gatsbyImageData}
             topSection={false}
           >
             <TitleDescription title={content.header} description={content.body} />

@@ -23,60 +23,55 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const TokenPage = ({ location }: PageProps): JSX.Element => {
   const styles = useStyles();
-  const data = useStaticQuery(graphql`
-    query {
-      seoImage: file(relativePath: { eq: "token-aurora.png" }) {
-        publicURL
-      }
-      emailImage: file(relativePath: { eq: "deer-newsletter-bg.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      text: tokenYaml {
-        seo {
-          title
-          description
-        }
-        newsletterSection {
-          header
-          buttonText
-          inputText
-        }
-      }
+  const data = useStaticQuery(graphql`{
+  seoImage: file(relativePath: {eq: "token-aurora.png"}) {
+    publicURL
+  }
+  emailImage: file(relativePath: {eq: "deer-newsletter-bg.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
+  }
+  text: tokenYaml {
+    seo {
+      title
+      description
+    }
+    newsletterSection {
+      header
+      buttonText
+      inputText
+    }
+  }
+}
+`);
   const newsletterContent = data?.text?.newsletterSection;
 
-  return (
-    <>
-      <SEO
-        description={data?.text?.seo?.description}
-        title={data?.text?.seo?.title}
-        location={location}
-        imageUrl={data?.seoImage?.publicURL}
-      />
-      <TopSection />
-      <TokenEconomics />
-      <InfoSection />
-      <TokenDetails />
-      <BlockExplorerSection />
-      <Staking />
-      <ConnectSection />
-      <MediaSection />
-      <EmailSubmitSection
-        classes={{ title: styles.newsletterTitle }}
-        image={data?.emailImage?.childImageSharp?.fluid}
-        altContent={{
-          header: newsletterContent?.header,
-          buttonText: newsletterContent?.buttonText,
-          inputText: newsletterContent?.inputText,
-        }}
-      />
-    </>
-  );
+  return <>
+    <SEO
+      description={data?.text?.seo?.description}
+      title={data?.text?.seo?.title}
+      location={location}
+      imageUrl={data?.seoImage?.publicURL}
+    />
+    <TopSection />
+    <TokenEconomics />
+    <InfoSection />
+    <TokenDetails />
+    <BlockExplorerSection />
+    <Staking />
+    <ConnectSection />
+    <MediaSection />
+    <EmailSubmitSection
+      classes={{ title: styles.newsletterTitle }}
+      image={data?.emailImage?.childImageSharp?.gatsbyImageData}
+      altContent={{
+        header: newsletterContent?.header,
+        buttonText: newsletterContent?.buttonText,
+        inputText: newsletterContent?.inputText,
+      }}
+    />
+  </>;
 };
 
 export default TokenPage;

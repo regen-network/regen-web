@@ -4,24 +4,21 @@ import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundSection from '../../components/BackgroundSection';
 
 const TopSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      desktop: file(relativePath: { eq: "community-header.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: communityYaml {
-        topSection {
-          header
-          body
-        }
-      }
+  const data = useStaticQuery(graphql`{
+  desktop: file(relativePath: {eq: "community-header.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
-  const imageData = data?.desktop?.childImageSharp?.fluid;
+  }
+  text: communityYaml {
+    topSection {
+      header
+      body
+    }
+  }
+}
+`);
+  const imageData = data?.desktop?.childImageSharp?.gatsbyImageData;
   const content = data?.text?.topSection;
   return (
     <>

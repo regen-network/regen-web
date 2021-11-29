@@ -9,30 +9,27 @@ const TopSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          background: file(relativePath: { eq: "case-studies-top-bg.png" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          text: caseStudiesYaml {
-            topSection {
-              header
-              body
-            }
-          }
-        }
-      `}
+      query={graphql`{
+  background: file(relativePath: {eq: "case-studies-top-bg.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  text: caseStudiesYaml {
+    topSection {
+      header
+      body
+    }
+  }
+}
+`}
       render={data => {
         return (
           <BackgroundSection
             linearGradient={gradient}
             header={data.text.topSection.header}
             body={data.text.topSection.body}
-            imageData={data.background.childImageSharp.fluid}
+            imageData={data.background.childImageSharp.gatsbyImageData}
           />
         );
       }}

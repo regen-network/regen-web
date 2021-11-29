@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
@@ -51,7 +51,7 @@ const AwardsSection = (): JSX.Element => {
   return (
     <StaticQuery
       query={graphql`
-        query {
+        {
           content: pressKitYaml {
             awardsSection {
               header
@@ -60,9 +60,7 @@ const AwardsSection = (): JSX.Element => {
                 url
                 image {
                   childImageSharp {
-                    fluid(quality: 90) {
-                      ...GatsbyImageSharpFluid_withWebp
-                    }
+                    gatsbyImageData(quality: 90, layout: FULL_WIDTH)
                   }
                 }
               }
@@ -74,7 +72,7 @@ const AwardsSection = (): JSX.Element => {
         const content = data.content.awardsSection;
         const items: JSX.Element[] = content.items.map(({ image, url, title }) => (
           <a href={url} target="_blank" rel="noopener noreferrer">
-            <Img className={classes.image} fluid={image.childImageSharp.fluid}></Img>
+            <GatsbyImage image={image.childImageSharp.gatsbyImageData} className={classes.image} />
             <Title className={classes.itemTitle} variant="h5">
               {title}
             </Title>

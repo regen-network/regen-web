@@ -19,22 +19,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const TokenConnectSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "birds-background.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: tokenYaml {
-        connectSection {
-          header
-        }
-      }
+  const data = useStaticQuery(graphql`{
+  background: file(relativePath: {eq: "birds-background.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
+  }
+  text: tokenYaml {
+    connectSection {
+      header
+    }
+  }
+}
+`);
   const content = data.text.connectSection;
   const styles = useStyles();
   const theme = useTheme();

@@ -3,7 +3,7 @@ import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { graphql, StaticQuery } from 'gatsby';
-import Img, { FluidObject } from 'gatsby-image';
+import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/lib/components/section';
@@ -15,7 +15,7 @@ interface FundingSectionProps {
   next: string;
   image: {
     childImageSharp: {
-      fluid: FluidObject;
+      gatsbyImageData: GatsbyImageData;
     };
   };
 }
@@ -69,7 +69,7 @@ const FundingSection = ({ details, results, next, image }: FundingSectionProps):
         return (
           <Section className={classes.root}>
             <Box display={{ xs: 'block', sm: 'none' }}>
-              <Img className={classes.image} fluid={image.childImageSharp.fluid} />
+              <GatsbyImage image={image.childImageSharp.gatsbyImageData} className={classes.image} />
             </Box>
             <Grid container spacing={10}>
               <Grid item xs={12} md={6}>
@@ -84,7 +84,7 @@ const FundingSection = ({ details, results, next, image }: FundingSectionProps):
               </Grid>
               <Grid item xs={12} md={6}>
                 <Box display={{ xs: 'none', sm: 'block' }}>
-                  <Img className={classes.image} fluid={image.childImageSharp.fluid} />
+                  <GatsbyImage image={image.childImageSharp.gatsbyImageData} className={classes.image} />
                 </Box>
               </Grid>
             </Grid>

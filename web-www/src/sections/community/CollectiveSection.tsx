@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles, useTheme } from '@mui/styles';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import { FluidObject } from 'gatsby-image';
+import { GatsbyImageData } from 'gatsby-plugin-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import Section from 'web-components/src/components/section';
@@ -51,7 +51,7 @@ const useStyles = makeStyles<Theme>(theme => ({
 type QueryData = {
   bg: {
     childImageSharp: {
-      fluid: FluidObject;
+      gatsbyImageData: GatsbyImageData;
     };
   };
   text: {
@@ -76,25 +76,22 @@ const CollectiveSection = (): JSX.Element => {
     text: {
       collectiveSection: { title, body, buttonText, signupFormUrl },
     },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      bg: file(relativePath: { eq: "topo-bg-portrait.jpg" }) {
-        childImageSharp {
-          fluid(quality: 90, maxWidth: 1920) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: communityYaml {
-        collectiveSection {
-          title
-          body
-          buttonText
-          signupFormUrl
-        }
-      }
+  } = useStaticQuery<QueryData>(graphql`{
+  bg: file(relativePath: {eq: "topo-bg-portrait.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
+  }
+  text: communityYaml {
+    collectiveSection {
+      title
+      body
+      buttonText
+      signupFormUrl
+    }
+  }
+}
+`);
   const topo = fluid;
 
   return (

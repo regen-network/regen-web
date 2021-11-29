@@ -86,30 +86,27 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const TestnetSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "testnet-bg.jpg" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: developersYaml {
-        testnetSection {
-          header
-          description
-          address
-          leftColumnLabel
-          leftColumnContent
-          rightColumnLabel
-          rightColumnContent
-          buttonText
-          buttonLink
-        }
-      }
+  const data = useStaticQuery(graphql`{
+  background: file(relativePath: {eq: "testnet-bg.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
+  }
+  text: developersYaml {
+    testnetSection {
+      header
+      description
+      address
+      leftColumnLabel
+      leftColumnContent
+      rightColumnLabel
+      rightColumnContent
+      buttonText
+      buttonLink
+    }
+  }
+}
+`);
   const content = data.text.testnetSection;
   const classes = useStyles();
   return (
@@ -117,7 +114,7 @@ const TestnetSection = (): JSX.Element => {
       className={classes.root}
       linearGradient="unset"
       topSection={false}
-      imageData={data.background.childImageSharp.fluid}
+      imageData={data.background.childImageSharp.gatsbyImageData}
       header={content.header}
       titleClassName={classes.title}
       titleVariant="h2"

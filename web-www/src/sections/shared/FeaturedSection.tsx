@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useStaticQuery, graphql } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -75,25 +75,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const ApproachSection = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      text: sharedYaml {
-        featuredSection {
-          header
-          title
-          link
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          description
+  const data = useStaticQuery(graphql`{
+  text: sharedYaml {
+    featuredSection {
+      header
+      title
+      link
+      image {
+        childImageSharp {
+          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
         }
       }
+      description
     }
-  `);
+  }
+}
+`);
   const classes = useStyles();
 
   const content = data.text.featuredSection;
@@ -115,7 +112,7 @@ const ApproachSection = () => {
               </ContainedButton>
             </Grid>
             <Grid item xs={12}>
-              <Img fluid={content.image.childImageSharp.fluid} />
+              <GatsbyImage image={content.image.childImageSharp.gatsbyImageData} />
             </Grid>
           </Grid>
         </GreenCard>

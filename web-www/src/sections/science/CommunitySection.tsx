@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 import Title from 'web-components/lib/components/title';
 import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
@@ -122,38 +122,33 @@ const CommunitySection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          arrow: file(relativePath: { eq: "Arrow.png" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          background: file(relativePath: { eq: "science-community-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: scienceYaml {
-            communitySection {
-              caption
-              header
-              members {
-                name
-                role
-                image {
-                  publicURL
-                }
-                description
-              }
-            }
-          }
+      query={graphql`{
+  arrow: file(relativePath: {eq: "Arrow.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  background: file(relativePath: {eq: "science-community-bg.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  content: scienceYaml {
+    communitySection {
+      caption
+      header
+      members {
+        name
+        role
+        image {
+          publicURL
         }
-      `}
+        description
+      }
+    }
+  }
+}
+`}
       render={data => {
         const content = data.content.communitySection;
         return (
@@ -161,14 +156,16 @@ const CommunitySection = (): JSX.Element => {
             className={classes.root}
             linearGradient="unset"
             topSection={false}
-            imageData={data.background.childImageSharp.fluid}
+            imageData={data.background.childImageSharp.gatsbyImageData}
           >
             <Grid container alignItems="center">
               <Grid xs={12} sm={6} item container wrap="nowrap" className={classes.connect}>
                 <Title className={classes.caption} variant="h3">
                   {content.caption}
                 </Title>
-                <Img className={classes.arrow} fluid={data.arrow.childImageSharp.fluid} />
+                <GatsbyImage
+                  image={data.arrow.childImageSharp.gatsbyImageData}
+                  className={classes.arrow} />
               </Grid>
               <Grid xs={12} sm={6} item container justify="flex-end" className={classes.icons}>
                 <a

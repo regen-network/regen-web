@@ -1,7 +1,7 @@
 import React from 'react';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Img, { FluidObject } from 'gatsby-image';
+import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
 
 import BackgroundSection from '../../../components/BackgroundSection';
 import Description from 'web-components/lib/components/description';
@@ -11,7 +11,7 @@ interface Figure {
   spacing?: string;
   image: {
     childImageSharp: {
-      fluid: FluidObject;
+      gatsbyImageData: GatsbyImageData;
     };
   };
 }
@@ -20,7 +20,7 @@ interface FigureSectionProps {
   title?: string;
   background: {
     childImageSharp: {
-      fluid: FluidObject;
+      gatsbyImageData: GatsbyImageData;
     };
   };
   figures: Figure[];
@@ -64,11 +64,13 @@ const FigureSection = ({ background, title, figures }: FigureSectionProps): JSX.
   const classes = useStyles({ figures });
 
   return (
-    <BackgroundSection topSection={false} linearGradient="unset" imageData={background.childImageSharp.fluid}>
+    <BackgroundSection topSection={false} linearGradient="unset" imageData={background.childImageSharp.gatsbyImageData}>
       <Grid container spacing={4}>
         {figures.map((figure: Figure, i: number) => (
           <Grid key={i} item xs={12} className={classes.item}>
-            <Img fluid={figure.image.childImageSharp.fluid} className={classes.image} />
+            <GatsbyImage
+              image={figure.image.childImageSharp.gatsbyImageData}
+              className={classes.image} />
             {figure.title && <Description className={classes.figureTitle}>{figure.title}</Description>}
           </Grid>
         ))}

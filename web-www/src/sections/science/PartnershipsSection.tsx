@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import Title from 'web-components/lib/components/title';
@@ -66,32 +66,27 @@ const PartnershipsSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          background: file(relativePath: { eq: "science-partnerships-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: scienceYaml {
-            partnershipsSection {
-              header
-              partners {
-                image {
-                  childImageSharp {
-                    fluid(quality: 90) {
-                      ...GatsbyImageSharpFluid_withWebp
-                    }
-                  }
-                }
-                description
-              }
-            }
+      query={graphql`{
+  background: file(relativePath: {eq: "science-partnerships-bg.jpg"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  content: scienceYaml {
+    partnershipsSection {
+      header
+      partners {
+        image {
+          childImageSharp {
+            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
           }
         }
-      `}
+        description
+      }
+    }
+  }
+}
+`}
       render={data => {
         const content = data.content.partnershipsSection;
         return (
@@ -109,7 +104,7 @@ const PartnershipsSection = (): JSX.Element => {
                     sm={6}
                     className={i % 2 === 0 ? classes.itemLeft : classes.itemRight}
                   >
-                    <Img className={classes.image} fluid={p.image.childImageSharp.fluid} />
+                    <GatsbyImage image={p.image.childImageSharp.gatsbyImageData} className={classes.image} />
                     <Description className={classes.description}>
                       {ReactHtmlParser(p.description)}
                     </Description>

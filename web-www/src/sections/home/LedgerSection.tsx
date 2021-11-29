@@ -6,7 +6,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Title from 'web-components/lib/components/title';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 
 let useStyles = makeStyles((theme: Theme) => ({
   grid: {
@@ -86,37 +86,34 @@ let useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const HomeLedger = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      bg: file(relativePath: { eq: "farm-background.png" }) {
-        childImageSharp {
-          fluid(quality: 90, maxWidth: 1920) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      ledger: file(relativePath: { eq: "ledger.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: homeYaml {
-        ledgerSection {
-          description
-        }
-      }
+  const data = useStaticQuery(graphql`{
+  bg: file(relativePath: {eq: "farm-background.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
     }
-  `);
+  }
+  ledger: file(relativePath: {eq: "ledger.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  text: homeYaml {
+    ledgerSection {
+      description
+    }
+  }
+}
+`);
   const classes = useStyles();
   const content = data.text.ledgerSection; // TODO add title content to yaml once structure for styling set
 
   return (
-    <BackgroundImage Tag="section" fluid={data.bg.childImageSharp.fluid}>
+    <BackgroundImage Tag="section" fluid={data.bg.childImageSharp.gatsbyImageData}>
       <Grid className={classes.grid} container alignItems="center" wrap="nowrap">
         <Grid className={classes.imgContainer} item xs={12}>
-          <Img className={classes.img} fluid={data.ledger.childImageSharp.fluid} />
+          <GatsbyImage
+            image={data.ledger.childImageSharp.gatsbyImageData}
+            className={classes.img} />
         </Grid>
         <Grid item xs={12} className={classes.text}>
           <Title align="left" variant="h1" className={classes.title}>

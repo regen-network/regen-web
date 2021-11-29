@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import BackgroundImage from 'gatsby-background-image';
 
 import BlogPosts from 'web-components/lib/components/sliders/BlogPosts';
@@ -36,27 +36,24 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const BlogSection = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      text: sharedYaml {
-        blogSection {
-          header
-          posts {
-            image {
-              childImageSharp {
-                fluid(quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-            header
-            url
-            description
+  const data = useStaticQuery(graphql`{
+  text: sharedYaml {
+    blogSection {
+      header
+      posts {
+        image {
+          childImageSharp {
+            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
           }
         }
+        header
+        url
+        description
       }
     }
-  `);
+  }
+}
+`);
   const classes = useStyles();
 
   const content = data.text.blogSection;
@@ -68,7 +65,7 @@ const BlogSection = () => {
             header,
             description,
             url,
-            img: <BackgroundImage className={classes.image} Tag="div" fluid={image.childImageSharp.fluid} />,
+            img: <BackgroundImage className={classes.image} Tag="div" fluid={image.childImageSharp.gatsbyImageData} />,
           }))}
         />
       </Section>

@@ -46,50 +46,47 @@ const RegistrySection = (): JSX.Element => {
   const classes = useStyles();
   return (
     <StaticQuery
-      query={graphql`
-        query {
-          background: file(relativePath: { eq: "image-grid-bg.png" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
+      query={graphql`{
+  background: file(relativePath: {eq: "image-grid-bg.png"}) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+  text: resourcesYaml {
+    registrySection {
+      header
+      documentTableTitle
+      documents {
+        name
+        type
+        date
+        url
+      }
+      subsections {
+        title
+        cards {
+          image {
+            extension
+            publicURL
           }
-          text: resourcesYaml {
-            registrySection {
-              header
-              documentTableTitle
-              documents {
-                name
-                type
-                date
-                url
-              }
-              subsections {
-                title
-                cards {
-                  image {
-                    extension
-                    publicURL
-                  }
-                  title
-                  updated
-                  description
-                  buttonText
-                  link
-                }
-              }
-            }
-          }
+          title
+          updated
+          description
+          buttonText
+          link
         }
-      `}
+      }
+    }
+  }
+}
+`}
       render={data => {
         const content = data.text.registrySection;
         return (
           <BackgroundSection
             className={classes.section}
             linearGradient="unset"
-            imageData={data.background.childImageSharp.fluid}
+            imageData={data.background.childImageSharp.gatsbyImageData}
             topSection={false}
           >
             <Title className={classes.title} variant="h3" align="left">

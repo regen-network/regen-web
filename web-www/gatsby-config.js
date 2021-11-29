@@ -16,30 +16,12 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics-gdpr`,
+      resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: 'UA-119338253-2',
-        enableDevelopment: true, // default false
-        anonymizeIP: true,
-        autoStartWithCookiesEnabled: false,
-        // Optional parameter - Configuration for react-ga and google analytics
-        reactGaOptions: {
-          debug: true,
-          gaOptions: {
-            sampleRate: 10,
-          },
-        },
-      },
-    },
-    {
-      resolve: `gatsby-plugin-advanced-sitemap`,
-      options: {
-        additionalSitemaps: [
-          {
-            name: `registry`,
-            url: `/registry/sitemap.xml`,
-          },
-        ],
+        anonymize: true,
+        sampleRate: 10,
+        // cookieName: 'use old cookieName',
       },
     },
     {
@@ -62,9 +44,9 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        commonmark: true,
+        // commonmark: true,
         footnotes: true,
-        pedantic: true,
+        // pedantic: true,
         gfm: true,
         // Plugins configs
         plugins: [
@@ -84,6 +66,7 @@ module.exports = {
         path: `${__dirname}/content/`,
       },
     },
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-typescript`,

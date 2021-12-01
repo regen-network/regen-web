@@ -159,13 +159,11 @@ function ImageDrop({
   };
 
   const handleCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
-    let result = '';
+    let result = croppedImage.src;
 
     if (onUpload) {
       const imageFile = await srcToFile(croppedImage.src, fileName, 'image/png');
       result = await onUpload(imageFile);
-    } else {
-      result = croppedImage.src;
     }
 
     if (result) {

@@ -59,7 +59,7 @@ export const query = graphql`
       name
       description
       background {
-        ...fluidImageWebPFields
+        ...fluidCustomImageFields_withWebp
       }
       aboutSection {
         _rawAbout
@@ -76,13 +76,13 @@ export const query = graphql`
           }
         }
         mapImage {
-          ...fluidImageWebPFields
+          ...fluidCustomImageFields_withWebp
         }
       }
       contextSection {
         _rawDescription
         image {
-          ...fluidImageWebPFields
+          ...fluidCustomImageFields_withWebp
         }
         challenges
       }
@@ -93,19 +93,19 @@ export const query = graphql`
         _rawNext
         _rawFigureTitle
         figureImage {
-          ...fluidImageWebPFields
+          ...fluidCustomImageFields_withWebp
         }
       }
       figureSection {
         title
         background {
-          ...fluidImageWebPFields
+          ...fluidCustomImageFields_withWebp
         }
         figures {
           title
           spacing
           image {
-            ...fluidImageWebPFields
+            ...fluidCustomImageFields_withWebp
           }
         }
       }
@@ -114,7 +114,7 @@ export const query = graphql`
         _rawResults
         _rawNext
         image {
-          ...fluidImageWebPFields
+          ...fluidCustomImageFields_withWebp
         }
       }
       conclusionSection {
@@ -122,7 +122,7 @@ export const query = graphql`
         images {
           title
           image {
-            ...fluidImageWebPFields
+            ...fluidCustomImageFields_withWebp
           }
         }
       }
@@ -131,10 +131,10 @@ export const query = graphql`
         personName
         personRole
         personImage {
-          ...fluidImageWebPFields
+          ...fluidCustomImageFields_withWebp
         }
         background {
-          ...fluidImageWebPFields
+          ...fluidCustomImageFields_withWebp
         }
       }
     }

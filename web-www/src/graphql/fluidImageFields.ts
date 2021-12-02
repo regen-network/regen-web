@@ -1,27 +1,39 @@
 import { graphql } from 'gatsby';
 
-export const fluidImage = graphql`
-  fragment fluidImageFields on SanityCustomImage {
-    imageAlt
-    image {
-      asset {
-        fluid {
-          ...GatsbySanityImageFluid
-        }
+export const fluidSanityImage = graphql`
+  fragment fluidSanityImageFields on SanityImage {
+    asset {
+      fluid {
+        ...GatsbySanityImageFluid
       }
     }
   }
 `;
 
-export const fluidImageWebP = graphql`
-  fragment fluidImageWebPFields on SanityCustomImage {
+export const fluidSanityImageWebP = graphql`
+  fragment fluidSanityImageFields_withWebp on SanityImage {
+    asset {
+      fluid {
+        ...GatsbySanityImageFluid_withWebp
+      }
+    }
+  }
+`;
+
+export const fluidImage = graphql`
+  fragment fluidCustomImageFields on SanityCustomImage {
     imageAlt
     image {
-      asset {
-        fluid {
-          ...GatsbySanityImageFluid_withWebp
-        }
-      }
+      ...fluidSanityImageFields
+    }
+  }
+`;
+
+export const fluidImageWebP = graphql`
+  fragment fluidCustomImageFields_withWebp on SanityCustomImage {
+    imageAlt
+    image {
+      ...fluidSanityImageFields_withWebp
     }
   }
 `;

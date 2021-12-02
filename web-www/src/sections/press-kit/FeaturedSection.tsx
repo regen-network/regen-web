@@ -1,10 +1,11 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
+import { PresskitFeaturedSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -39,17 +40,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const query = graphql`
   query presskitFeaturedSection {
-    content: pressKitYaml {
+    sanityPresskitPage {
       featuredSection {
         header
         articles {
           title
           author
           date
-          # image {
-          #   publicURL
-          # }
-          # href
+          href
+          type
+          image {
+            image {
+              asset {
+                url
+              }
+            }
+          }
         }
       }
     }
@@ -58,35 +64,30 @@ const query = graphql`
 
 const FeaturedSection = (): JSX.Element => {
   const styles = useStyles();
+  const { sanityPresskitPage } = useStaticQuery<PresskitFeaturedSectionQuery>(query);
+  const data = sanityPresskitPage?.featuredSection;
+
+  const items: JSX.Element[] = (data?.articles || []).map(item => (
+    <ArticleCard
+      name={item?.title || ''}
+      type={item?.type || 'article'}
+      imgSrc={item?.image?.image?.asset?.url || ''}
+      author={item?.author || ''}
+      date={item?.date || ''}
+      url={item?.href || ''}
+    />
+  ));
 
   return (
-    <StaticQuery
-      query={query}
-      render={data => {
-        const content = data.content.featuredSection;
-        const items: JSX.Element[] = content.articles.map(({ image, header, author, date, url }) => (
-          <ArticleCard
-            name={header}
-            type={'changeme'}
-            imgSrc={image.publicURL}
-            author={author}
-            date={date}
-            url={url}
-          />
-        ));
-        return (
-          <Section withSlider title={content.header} classes={{ title: styles.title }}>
-            <ResponsiveSlider
-              infinite={false}
-              className={styles.slider}
-              itemWidth="90%"
-              slidesToShow={3}
-              items={items}
-            />
-          </Section>
-        );
-      }}
-    />
+    <Section withSlider title={data?.header || ''} classes={{ title: styles.title }}>
+      <ResponsiveSlider
+        infinite={false}
+        className={styles.slider}
+        itemWidth="90%"
+        slidesToShow={3}
+        items={items}
+      />
+    </Section>
   );
 };
 

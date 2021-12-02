@@ -134,7 +134,7 @@ const query = graphql`
       launchInfoSection {
         title
         image {
-          ...fluidImageWebPFields
+          ...fluidCustomImageFields_withWebp
         }
         cardTitle
         _rawCardBody

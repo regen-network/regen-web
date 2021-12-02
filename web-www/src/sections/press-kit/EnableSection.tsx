@@ -101,7 +101,7 @@ const query = graphql`
         title
         _rawBody
         image {
-          ...fluidImageWebPFields
+          ...fluidCustomImageFields_withWebp
         }
       }
     }

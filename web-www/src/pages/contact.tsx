@@ -193,7 +193,7 @@ const query = graphql`
         title
         _rawBody
         image {
-          ...fluidImageFields
+          ...fluidCustomImageFields
         }
       }
       email {
@@ -203,7 +203,7 @@ const query = graphql`
       faq {
         title
         image {
-          ...fluidImageFields
+          ...fluidCustomImageFields
         }
       }
     }

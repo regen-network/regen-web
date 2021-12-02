@@ -11511,6 +11511,8 @@ export type Query = {
   allSanityRegenTeamMember: SanityRegenTeamMemberConnection;
   sanityResource: Maybe<SanityResource>;
   allSanityResource: SanityResourceConnection;
+  sanityResourcesPage: Maybe<SanityResourcesPage>;
+  allSanityResourcesPage: SanityResourcesPageConnection;
   sanityFileAsset: Maybe<SanityFileAsset>;
   allSanityFileAsset: SanityFileAssetConnection;
   sanityImageAsset: Maybe<SanityImageAsset>;
@@ -11525,6 +11527,8 @@ export type Query = {
   allMarkdownRemark: MarkdownRemarkConnection;
   imageSharp: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
+  resourcesYaml: Maybe<ResourcesYaml>;
+  allResourcesYaml: ResourcesYamlConnection;
   teamYaml: Maybe<TeamYaml>;
   allTeamYaml: TeamYamlConnection;
   pressKitYaml: Maybe<PressKitYaml>;
@@ -11545,8 +11549,6 @@ export type Query = {
   allPartnersYaml: PartnersYamlConnection;
   fundYaml: Maybe<FundYaml>;
   allFundYaml: FundYamlConnection;
-  resourcesYaml: Maybe<ResourcesYaml>;
-  allResourcesYaml: ResourcesYamlConnection;
   faqYaml: Maybe<FaqYaml>;
   allFaqYaml: FaqYamlConnection;
   mainnetYaml: Maybe<MainnetYaml>;
@@ -12084,6 +12086,7 @@ export type QuerySanityDocArgs = {
   _key: Maybe<StringQueryOperatorInput>;
   href: Maybe<StringQueryOperatorInput>;
   name: Maybe<StringQueryOperatorInput>;
+  date: Maybe<DateQueryOperatorInput>;
   type: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
@@ -12708,6 +12711,34 @@ export type QueryAllSanityResourceArgs = {
 };
 
 
+export type QuerySanityResourcesPageArgs = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  registrySection: Maybe<SanityResourcesRegistrySectionFilterInput>;
+  ledgerSection: Maybe<SanityResourcesLedgerSectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawRegistrySection: Maybe<JsonQueryOperatorInput>;
+  _rawLedgerSection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSanityResourcesPageArgs = {
+  filter: Maybe<SanityResourcesPageFilterInput>;
+  sort: Maybe<SanityResourcesPageSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
 export type QuerySanityFileAssetArgs = {
   _id: Maybe<StringQueryOperatorInput>;
   _type: Maybe<StringQueryOperatorInput>;
@@ -12906,6 +12937,26 @@ export type QueryImageSharpArgs = {
 export type QueryAllImageSharpArgs = {
   filter: Maybe<ImageSharpFilterInput>;
   sort: Maybe<ImageSharpSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryResourcesYamlArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  topSection: Maybe<ResourcesYamlTopSectionFilterInput>;
+  registrySection: Maybe<ResourcesYamlRegistrySectionFilterInput>;
+  ledgerSection: Maybe<ResourcesYamlLedgerSectionFilterInput>;
+  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllResourcesYamlArgs = {
+  filter: Maybe<ResourcesYamlFilterInput>;
+  sort: Maybe<ResourcesYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -13129,26 +13180,6 @@ export type QueryFundYamlArgs = {
 export type QueryAllFundYamlArgs = {
   filter: Maybe<FundYamlFilterInput>;
   sort: Maybe<FundYamlSortInput>;
-  skip: Maybe<Scalars['Int']>;
-  limit: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryResourcesYamlArgs = {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  topSection: Maybe<ResourcesYamlTopSectionFilterInput>;
-  registrySection: Maybe<ResourcesYamlRegistrySectionFilterInput>;
-  ledgerSection: Maybe<ResourcesYamlLedgerSectionFilterInput>;
-  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
-};
-
-
-export type QueryAllResourcesYamlArgs = {
-  filter: Maybe<ResourcesYamlFilterInput>;
-  sort: Maybe<ResourcesYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -16488,6 +16519,7 @@ export enum SanityCommunityPageFieldsEnum {
   CollaborateSectionCardsTitle = 'collaborateSection___cards___title',
   CollaborateSectionCardsDescription = 'collaborateSection___cards___description',
   CollaborateSectionCardsButtonText = 'collaborateSection___cards___buttonText',
+  CollaborateSectionCardsUpdated = 'collaborateSection___cards___updated',
   CollaborateSectionCardsButtonHref = 'collaborateSection___cards___buttonHref',
   CollaborateSectionCardsRawImage = 'collaborateSection___cards____rawImage',
   CollaborateSectionRawTitleBody = 'collaborateSection____rawTitleBody',
@@ -19790,6 +19822,7 @@ export type SanityDoc = SanityDocument & Node & {
   _key: Maybe<Scalars['String']>;
   href: Maybe<Scalars['String']>;
   name: Maybe<Scalars['String']>;
+  date: Maybe<Scalars['Date']>;
   type: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent: Maybe<Node>;
@@ -19807,6 +19840,14 @@ export type SanityDoc_CreatedAtArgs = {
 
 
 export type SanityDoc_UpdatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityDocDateArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
@@ -19851,6 +19892,7 @@ export enum SanityDocFieldsEnum {
   Key = '_key',
   Href = 'href',
   Name = 'name',
+  Date = 'date',
   Type = 'type',
   Id = 'id',
   ParentId = 'parent___id',
@@ -19949,11 +19991,16 @@ export type SanityDocFilterInput = {
   _key: Maybe<StringQueryOperatorInput>;
   href: Maybe<StringQueryOperatorInput>;
   name: Maybe<StringQueryOperatorInput>;
+  date: Maybe<DateQueryOperatorInput>;
   type: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
+};
+
+export type SanityDocFilterListInput = {
+  elemMatch: Maybe<SanityDocFilterInput>;
 };
 
 export type SanityDocGroupConnection = {
@@ -21232,6 +21279,7 @@ export enum SanityFeaturedSectionFieldsEnum {
   ButtonButtonLinkButtonDocKey = 'button___buttonLink___buttonDoc____key',
   ButtonButtonLinkButtonDocHref = 'button___buttonLink___buttonDoc___href',
   ButtonButtonLinkButtonDocName = 'button___buttonLink___buttonDoc___name',
+  ButtonButtonLinkButtonDocDate = 'button___buttonLink___buttonDoc___date',
   ButtonButtonLinkButtonDocType = 'button___buttonLink___buttonDoc___type',
   ButtonButtonLinkButtonDocId = 'button___buttonLink___buttonDoc___id',
   ButtonButtonLinkButtonDocChildren = 'button___buttonLink___buttonDoc___children',
@@ -24887,6 +24935,7 @@ export enum SanityLandStewardsPageFieldsEnum {
   FooterButtonButtonLinkButtonDocKey = 'footerButton___buttonLink___buttonDoc____key',
   FooterButtonButtonLinkButtonDocHref = 'footerButton___buttonLink___buttonDoc___href',
   FooterButtonButtonLinkButtonDocName = 'footerButton___buttonLink___buttonDoc___name',
+  FooterButtonButtonLinkButtonDocDate = 'footerButton___buttonLink___buttonDoc___date',
   FooterButtonButtonLinkButtonDocType = 'footerButton___buttonLink___buttonDoc___type',
   FooterButtonButtonLinkButtonDocId = 'footerButton___buttonLink___buttonDoc___id',
   FooterButtonButtonLinkButtonDocChildren = 'footerButton___buttonLink___buttonDoc___children',
@@ -28330,6 +28379,7 @@ export enum SanityResourceFieldsEnum {
   ButtonButtonLinkButtonDocKey = 'button___buttonLink___buttonDoc____key',
   ButtonButtonLinkButtonDocHref = 'button___buttonLink___buttonDoc___href',
   ButtonButtonLinkButtonDocName = 'button___buttonLink___buttonDoc___name',
+  ButtonButtonLinkButtonDocDate = 'button___buttonLink___buttonDoc___date',
   ButtonButtonLinkButtonDocType = 'button___buttonLink___buttonDoc___type',
   ButtonButtonLinkButtonDocId = 'button___buttonLink___buttonDoc___id',
   ButtonButtonLinkButtonDocChildren = 'button___buttonLink___buttonDoc___children',
@@ -28501,6 +28551,7 @@ export type SanityResourcesCard = {
   title: Maybe<Scalars['String']>;
   description: Maybe<Scalars['String']>;
   buttonText: Maybe<Scalars['String']>;
+  updated: Maybe<Scalars['String']>;
   buttonHref: Maybe<Scalars['String']>;
   _rawImage: Maybe<Scalars['JSON']>;
 };
@@ -28517,12 +28568,417 @@ export type SanityResourcesCardFilterInput = {
   title: Maybe<StringQueryOperatorInput>;
   description: Maybe<StringQueryOperatorInput>;
   buttonText: Maybe<StringQueryOperatorInput>;
+  updated: Maybe<StringQueryOperatorInput>;
   buttonHref: Maybe<StringQueryOperatorInput>;
   _rawImage: Maybe<JsonQueryOperatorInput>;
 };
 
 export type SanityResourcesCardFilterListInput = {
   elemMatch: Maybe<SanityResourcesCardFilterInput>;
+};
+
+export type SanityResourcesLedgerSection = {
+  __typename?: 'SanityResourcesLedgerSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  cards: Maybe<Array<Maybe<SanityResource>>>;
+  _rawCards: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityResourcesLedgerSection_RawCardsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityResourcesLedgerSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  cards: Maybe<SanityResourceFilterListInput>;
+  _rawCards: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityResourcesPage = SanityDocument & Node & {
+  __typename?: 'SanityResourcesPage';
+  _id: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  _createdAt: Maybe<Scalars['Date']>;
+  _updatedAt: Maybe<Scalars['Date']>;
+  _rev: Maybe<Scalars['String']>;
+  _key: Maybe<Scalars['String']>;
+  topSection: Maybe<SanityTitleBody>;
+  registrySection: Maybe<SanityResourcesRegistrySection>;
+  ledgerSection: Maybe<SanityResourcesLedgerSection>;
+  _rawTopSection: Maybe<Scalars['JSON']>;
+  _rawRegistrySection: Maybe<Scalars['JSON']>;
+  _rawLedgerSection: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type SanityResourcesPage_CreatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityResourcesPage_UpdatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityResourcesPage_RawTopSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityResourcesPage_RawRegistrySectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityResourcesPage_RawLedgerSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityResourcesPageConnection = {
+  __typename?: 'SanityResourcesPageConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityResourcesPageEdge>;
+  nodes: Array<SanityResourcesPage>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<SanityResourcesPageGroupConnection>;
+};
+
+
+export type SanityResourcesPageConnectionDistinctArgs = {
+  field: SanityResourcesPageFieldsEnum;
+};
+
+
+export type SanityResourcesPageConnectionGroupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: SanityResourcesPageFieldsEnum;
+};
+
+export type SanityResourcesPageEdge = {
+  __typename?: 'SanityResourcesPageEdge';
+  next: Maybe<SanityResourcesPage>;
+  node: SanityResourcesPage;
+  previous: Maybe<SanityResourcesPage>;
+};
+
+export enum SanityResourcesPageFieldsEnum {
+  Id = '_id',
+  Type = '_type',
+  CreatedAt = '_createdAt',
+  UpdatedAt = '_updatedAt',
+  Rev = '_rev',
+  Key = '_key',
+  TopSectionKey = 'topSection____key',
+  TopSectionType = 'topSection____type',
+  TopSectionTitle = 'topSection___title',
+  TopSectionBody = 'topSection___body',
+  RegistrySectionKey = 'registrySection____key',
+  RegistrySectionType = 'registrySection____type',
+  RegistrySectionHeader = 'registrySection___header',
+  RegistrySectionDocumentTableTitle = 'registrySection___documentTableTitle',
+  RegistrySectionDocuments = 'registrySection___documents',
+  RegistrySectionDocumentsId = 'registrySection___documents____id',
+  RegistrySectionDocumentsType = 'registrySection___documents____type',
+  RegistrySectionDocumentsCreatedAt = 'registrySection___documents____createdAt',
+  RegistrySectionDocumentsUpdatedAt = 'registrySection___documents____updatedAt',
+  RegistrySectionDocumentsRev = 'registrySection___documents____rev',
+  RegistrySectionDocumentsKey = 'registrySection___documents____key',
+  RegistrySectionDocumentsHref = 'registrySection___documents___href',
+  RegistrySectionDocumentsName = 'registrySection___documents___name',
+  RegistrySectionDocumentsDate = 'registrySection___documents___date',
+  RegistrySectionDocumentsType = 'registrySection___documents___type',
+  RegistrySectionDocumentsId = 'registrySection___documents___id',
+  RegistrySectionDocumentsParentId = 'registrySection___documents___parent___id',
+  RegistrySectionDocumentsParentChildren = 'registrySection___documents___parent___children',
+  RegistrySectionDocumentsChildren = 'registrySection___documents___children',
+  RegistrySectionDocumentsChildrenId = 'registrySection___documents___children___id',
+  RegistrySectionDocumentsChildrenChildren = 'registrySection___documents___children___children',
+  RegistrySectionDocumentsInternalContent = 'registrySection___documents___internal___content',
+  RegistrySectionDocumentsInternalContentDigest = 'registrySection___documents___internal___contentDigest',
+  RegistrySectionDocumentsInternalDescription = 'registrySection___documents___internal___description',
+  RegistrySectionDocumentsInternalFieldOwners = 'registrySection___documents___internal___fieldOwners',
+  RegistrySectionDocumentsInternalIgnoreType = 'registrySection___documents___internal___ignoreType',
+  RegistrySectionDocumentsInternalMediaType = 'registrySection___documents___internal___mediaType',
+  RegistrySectionDocumentsInternalOwner = 'registrySection___documents___internal___owner',
+  RegistrySectionDocumentsInternalType = 'registrySection___documents___internal___type',
+  RegistrySectionSubsections = 'registrySection___subsections',
+  RegistrySectionSubsectionsKey = 'registrySection___subsections____key',
+  RegistrySectionSubsectionsType = 'registrySection___subsections____type',
+  RegistrySectionSubsectionsTitle = 'registrySection___subsections___title',
+  RegistrySectionSubsectionsCards = 'registrySection___subsections___cards',
+  RegistrySectionSubsectionsCardsId = 'registrySection___subsections___cards____id',
+  RegistrySectionSubsectionsCardsType = 'registrySection___subsections___cards____type',
+  RegistrySectionSubsectionsCardsCreatedAt = 'registrySection___subsections___cards____createdAt',
+  RegistrySectionSubsectionsCardsUpdatedAt = 'registrySection___subsections___cards____updatedAt',
+  RegistrySectionSubsectionsCardsRev = 'registrySection___subsections___cards____rev',
+  RegistrySectionSubsectionsCardsKey = 'registrySection___subsections___cards____key',
+  RegistrySectionSubsectionsCardsLastUpdated = 'registrySection___subsections___cards___lastUpdated',
+  RegistrySectionSubsectionsCardsTitle = 'registrySection___subsections___cards___title',
+  RegistrySectionSubsectionsCardsDescription = 'registrySection___subsections___cards___description',
+  RegistrySectionSubsectionsCardsRawTitle = 'registrySection___subsections___cards____rawTitle',
+  RegistrySectionSubsectionsCardsRawDescription = 'registrySection___subsections___cards____rawDescription',
+  RegistrySectionSubsectionsCardsRawImage = 'registrySection___subsections___cards____rawImage',
+  RegistrySectionSubsectionsCardsRawButton = 'registrySection___subsections___cards____rawButton',
+  RegistrySectionSubsectionsCardsId = 'registrySection___subsections___cards___id',
+  RegistrySectionSubsectionsCardsChildren = 'registrySection___subsections___cards___children',
+  RegistrySectionSubsectionsRawCards = 'registrySection___subsections____rawCards',
+  RegistrySectionRawDocuments = 'registrySection____rawDocuments',
+  RegistrySectionRawSubsections = 'registrySection____rawSubsections',
+  LedgerSectionKey = 'ledgerSection____key',
+  LedgerSectionType = 'ledgerSection____type',
+  LedgerSectionHeader = 'ledgerSection___header',
+  LedgerSectionCards = 'ledgerSection___cards',
+  LedgerSectionCardsId = 'ledgerSection___cards____id',
+  LedgerSectionCardsType = 'ledgerSection___cards____type',
+  LedgerSectionCardsCreatedAt = 'ledgerSection___cards____createdAt',
+  LedgerSectionCardsUpdatedAt = 'ledgerSection___cards____updatedAt',
+  LedgerSectionCardsRev = 'ledgerSection___cards____rev',
+  LedgerSectionCardsKey = 'ledgerSection___cards____key',
+  LedgerSectionCardsImageKey = 'ledgerSection___cards___image____key',
+  LedgerSectionCardsImageType = 'ledgerSection___cards___image____type',
+  LedgerSectionCardsImageImageHref = 'ledgerSection___cards___image___imageHref',
+  LedgerSectionCardsImageImageAlt = 'ledgerSection___cards___image___imageAlt',
+  LedgerSectionCardsImageRawImage = 'ledgerSection___cards___image____rawImage',
+  LedgerSectionCardsButtonKey = 'ledgerSection___cards___button____key',
+  LedgerSectionCardsButtonType = 'ledgerSection___cards___button____type',
+  LedgerSectionCardsButtonButtonText = 'ledgerSection___cards___button___buttonText',
+  LedgerSectionCardsButtonButtonModal = 'ledgerSection___cards___button___buttonModal',
+  LedgerSectionCardsButtonButtonBlankTarget = 'ledgerSection___cards___button___buttonBlankTarget',
+  LedgerSectionCardsButtonRawButtonLink = 'ledgerSection___cards___button____rawButtonLink',
+  LedgerSectionCardsLastUpdated = 'ledgerSection___cards___lastUpdated',
+  LedgerSectionCardsTitle = 'ledgerSection___cards___title',
+  LedgerSectionCardsTitleKey = 'ledgerSection___cards___title____key',
+  LedgerSectionCardsTitleType = 'ledgerSection___cards___title____type',
+  LedgerSectionCardsTitleChildren = 'ledgerSection___cards___title___children',
+  LedgerSectionCardsTitleStyle = 'ledgerSection___cards___title___style',
+  LedgerSectionCardsTitleList = 'ledgerSection___cards___title___list',
+  LedgerSectionCardsTitleRawChildren = 'ledgerSection___cards___title____rawChildren',
+  LedgerSectionCardsDescription = 'ledgerSection___cards___description',
+  LedgerSectionCardsDescriptionKey = 'ledgerSection___cards___description____key',
+  LedgerSectionCardsDescriptionType = 'ledgerSection___cards___description____type',
+  LedgerSectionCardsDescriptionChildren = 'ledgerSection___cards___description___children',
+  LedgerSectionCardsDescriptionStyle = 'ledgerSection___cards___description___style',
+  LedgerSectionCardsDescriptionList = 'ledgerSection___cards___description___list',
+  LedgerSectionCardsDescriptionRawChildren = 'ledgerSection___cards___description____rawChildren',
+  LedgerSectionCardsRawTitle = 'ledgerSection___cards____rawTitle',
+  LedgerSectionCardsRawDescription = 'ledgerSection___cards____rawDescription',
+  LedgerSectionCardsRawImage = 'ledgerSection___cards____rawImage',
+  LedgerSectionCardsRawButton = 'ledgerSection___cards____rawButton',
+  LedgerSectionCardsId = 'ledgerSection___cards___id',
+  LedgerSectionCardsParentId = 'ledgerSection___cards___parent___id',
+  LedgerSectionCardsParentChildren = 'ledgerSection___cards___parent___children',
+  LedgerSectionCardsChildren = 'ledgerSection___cards___children',
+  LedgerSectionCardsChildrenId = 'ledgerSection___cards___children___id',
+  LedgerSectionCardsChildrenChildren = 'ledgerSection___cards___children___children',
+  LedgerSectionCardsInternalContent = 'ledgerSection___cards___internal___content',
+  LedgerSectionCardsInternalContentDigest = 'ledgerSection___cards___internal___contentDigest',
+  LedgerSectionCardsInternalDescription = 'ledgerSection___cards___internal___description',
+  LedgerSectionCardsInternalFieldOwners = 'ledgerSection___cards___internal___fieldOwners',
+  LedgerSectionCardsInternalIgnoreType = 'ledgerSection___cards___internal___ignoreType',
+  LedgerSectionCardsInternalMediaType = 'ledgerSection___cards___internal___mediaType',
+  LedgerSectionCardsInternalOwner = 'ledgerSection___cards___internal___owner',
+  LedgerSectionCardsInternalType = 'ledgerSection___cards___internal___type',
+  LedgerSectionRawCards = 'ledgerSection____rawCards',
+  RawTopSection = '_rawTopSection',
+  RawRegistrySection = '_rawRegistrySection',
+  RawLedgerSection = '_rawLedgerSection',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type SanityResourcesPageFilterInput = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  registrySection: Maybe<SanityResourcesRegistrySectionFilterInput>;
+  ledgerSection: Maybe<SanityResourcesLedgerSectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawRegistrySection: Maybe<JsonQueryOperatorInput>;
+  _rawLedgerSection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+export type SanityResourcesPageGroupConnection = {
+  __typename?: 'SanityResourcesPageGroupConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityResourcesPageEdge>;
+  nodes: Array<SanityResourcesPage>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue: Maybe<Scalars['String']>;
+};
+
+export type SanityResourcesPageSortInput = {
+  fields: Maybe<Array<Maybe<SanityResourcesPageFieldsEnum>>>;
+  order: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type SanityResourcesRegistrySection = {
+  __typename?: 'SanityResourcesRegistrySection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  documentTableTitle: Maybe<Scalars['String']>;
+  documents: Maybe<Array<Maybe<SanityDoc>>>;
+  subsections: Maybe<Array<Maybe<SanityResourcesRegistrySubSection>>>;
+  _rawDocuments: Maybe<Scalars['JSON']>;
+  _rawSubsections: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityResourcesRegistrySection_RawDocumentsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityResourcesRegistrySection_RawSubsectionsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityResourcesRegistrySectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  documentTableTitle: Maybe<StringQueryOperatorInput>;
+  documents: Maybe<SanityDocFilterListInput>;
+  subsections: Maybe<SanityResourcesRegistrySubSectionFilterListInput>;
+  _rawDocuments: Maybe<JsonQueryOperatorInput>;
+  _rawSubsections: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityResourcesRegistrySubSection = {
+  __typename?: 'SanityResourcesRegistrySubSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  cards: Maybe<Array<Maybe<SanityResource>>>;
+  _rawCards: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityResourcesRegistrySubSection_RawCardsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityResourcesRegistrySubSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  cards: Maybe<SanityResourceFilterListInput>;
+  _rawCards: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityResourcesRegistrySubSectionFilterListInput = {
+  elemMatch: Maybe<SanityResourcesRegistrySubSectionFilterInput>;
 };
 
 export type SanityReviewSection = {
@@ -33317,33 +33773,43 @@ export type CustomImageFieldsFragment = (
   )> }
 );
 
-export type FluidImageFieldsFragment = (
-  { __typename?: 'SanityCustomImage' }
-  & Pick<SanityCustomImage, 'imageAlt'>
-  & { image: Maybe<(
-    { __typename?: 'SanityImage' }
-    & { asset: Maybe<(
-      { __typename?: 'SanityImageAsset' }
-      & { fluid: Maybe<(
-        { __typename?: 'SanityImageFluid' }
-        & GatsbySanityImageFluidFragment
-      )> }
+export type FluidSanityImageFieldsFragment = (
+  { __typename?: 'SanityImage' }
+  & { asset: Maybe<(
+    { __typename?: 'SanityImageAsset' }
+    & { fluid: Maybe<(
+      { __typename?: 'SanityImageFluid' }
+      & GatsbySanityImageFluidFragment
     )> }
   )> }
 );
 
-export type FluidImageWebPFieldsFragment = (
+export type FluidSanityImageFields_WithWebpFragment = (
+  { __typename?: 'SanityImage' }
+  & { asset: Maybe<(
+    { __typename?: 'SanityImageAsset' }
+    & { fluid: Maybe<(
+      { __typename?: 'SanityImageFluid' }
+      & GatsbySanityImageFluid_WithWebpFragment
+    )> }
+  )> }
+);
+
+export type FluidCustomImageFieldsFragment = (
   { __typename?: 'SanityCustomImage' }
   & Pick<SanityCustomImage, 'imageAlt'>
   & { image: Maybe<(
     { __typename?: 'SanityImage' }
-    & { asset: Maybe<(
-      { __typename?: 'SanityImageAsset' }
-      & { fluid: Maybe<(
-        { __typename?: 'SanityImageFluid' }
-        & GatsbySanityImageFluid_WithWebpFragment
-      )> }
-    )> }
+    & FluidSanityImageFieldsFragment
+  )> }
+);
+
+export type FluidCustomImageFields_WithWebpFragment = (
+  { __typename?: 'SanityCustomImage' }
+  & Pick<SanityCustomImage, 'imageAlt'>
+  & { image: Maybe<(
+    { __typename?: 'SanityImage' }
+    & FluidSanityImageFields_WithWebpFragment
   )> }
 );
 
@@ -33467,7 +33933,7 @@ export type ContactPageQuery = (
       & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
       & { image: Maybe<(
         { __typename?: 'SanityCustomImage' }
-        & FluidImageFieldsFragment
+        & FluidCustomImageFieldsFragment
       )> }
     )>, email: Maybe<(
       { __typename?: 'SanityTitleCustomBody' }
@@ -33477,7 +33943,7 @@ export type ContactPageQuery = (
       & Pick<SanityTitleImage, 'title'>
       & { image: Maybe<(
         { __typename?: 'SanityCustomImage' }
-        & FluidImageFieldsFragment
+        & FluidCustomImageFieldsFragment
       )> }
     )> }
   )> }
@@ -34473,7 +34939,7 @@ export type MainnetLaunchInfoSectionQuery = (
       & Pick<SanityMainnetLaunchInfoSection, 'title' | 'cardTitle' | '_rawCardBody'>
       & { image: Maybe<(
         { __typename?: 'SanityCustomImage' }
-        & FluidImageWebPFieldsFragment
+        & FluidCustomImageFields_WithWebpFragment
       )>, actionItems: Maybe<Array<Maybe<(
         { __typename?: 'SanityMainnetActionItem' }
         & Pick<SanityMainnetActionItem, 'title' | 'linkText' | 'linkUrl' | 'description'>
@@ -34575,38 +35041,32 @@ export type MainnetWhatsNextSectionQuery = (
   )> }
 );
 
-export type Unnamed_17_QueryVariables = Exact<{ [key: string]: never; }>;
+export type PresskitAwardsSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_17_Query = (
+export type PresskitAwardsSectionQuery = (
   { __typename?: 'Query' }
-  & { content: Maybe<(
-    { __typename?: 'PressKitYaml' }
+  & { sanityPresskitPage: Maybe<(
+    { __typename?: 'SanityPresskitPage' }
     & { awardsSection: Maybe<(
-      { __typename?: 'PressKitYamlAwardsSection' }
-      & Pick<PressKitYamlAwardsSection, 'header'>
+      { __typename?: 'SanityPresskitAwardsSection' }
+      & Pick<SanityPresskitAwardsSection, 'header'>
       & { items: Maybe<Array<Maybe<(
-        { __typename?: 'PressKitYamlAwardsSectionItems' }
-        & Pick<PressKitYamlAwardsSectionItems, 'title' | 'url'>
+        { __typename?: 'SanityTitleImageLink' }
+        & Pick<SanityTitleImageLink, 'title' | 'link'>
         & { image: Maybe<(
-          { __typename?: 'File' }
-          & { childImageSharp: Maybe<(
-            { __typename?: 'ImageSharp' }
-            & { fluid: Maybe<(
-              { __typename?: 'ImageSharpFluid' }
-              & GatsbyImageSharpFluid_WithWebpFragment
-            )> }
-          )> }
+          { __typename?: 'SanityImage' }
+          & FluidSanityImageFields_WithWebpFragment
         )> }
       )>>> }
     )> }
   )> }
 );
 
-export type Unnamed_18_QueryVariables = Exact<{ [key: string]: never; }>;
+export type PresskitConnectSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_18_Query = (
+export type PresskitConnectSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34617,12 +35077,9 @@ export type Unnamed_18_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'PressKitYaml' }
-    & { connectSection: Maybe<(
-      { __typename?: 'PressKitYamlConnectSection' }
-      & Pick<PressKitYamlConnectSection, 'header'>
-    )> }
+  )>, sanityPresskitPage: Maybe<(
+    { __typename?: 'SanityPresskitPage' }
+    & Pick<SanityPresskitPage, 'connectSectionHeader'>
   )> }
 );
 
@@ -34647,63 +35104,69 @@ export type PresskitEnableSectionQuery = (
       & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
       & { image: Maybe<(
         { __typename?: 'SanityCustomImage' }
-        & FluidImageWebPFieldsFragment
+        & FluidCustomImageFields_WithWebpFragment
       )> }
     )> }
   )> }
 );
 
-export type Unnamed_19_QueryVariables = Exact<{ [key: string]: never; }>;
+export type PresskitFeaturedSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_19_Query = (
+export type PresskitFeaturedSectionQuery = (
   { __typename?: 'Query' }
-  & { content: Maybe<(
-    { __typename?: 'PressKitYaml' }
+  & { sanityPresskitPage: Maybe<(
+    { __typename?: 'SanityPresskitPage' }
     & { featuredSection: Maybe<(
-      { __typename?: 'PressKitYamlFeaturedSection' }
-      & Pick<PressKitYamlFeaturedSection, 'header'>
+      { __typename?: 'SanityPresskitFeaturedSection' }
+      & Pick<SanityPresskitFeaturedSection, 'header'>
       & { articles: Maybe<Array<Maybe<(
-        { __typename?: 'PressKitYamlFeaturedSectionArticles' }
-        & Pick<PressKitYamlFeaturedSectionArticles, 'header' | 'author' | 'date' | 'url'>
+        { __typename?: 'SanityMedia' }
+        & Pick<SanityMedia, 'title' | 'author' | 'date' | 'href' | 'type'>
         & { image: Maybe<(
-          { __typename?: 'File' }
-          & Pick<File, 'publicURL'>
+          { __typename?: 'SanityCustomImage' }
+          & { image: Maybe<(
+            { __typename?: 'SanityImage' }
+            & { asset: Maybe<(
+              { __typename?: 'SanityImageAsset' }
+              & Pick<SanityImageAsset, 'url'>
+            )> }
+          )> }
         )> }
       )>>> }
     )> }
   )> }
 );
 
-export type Unnamed_20_QueryVariables = Exact<{ [key: string]: never; }>;
+export type PresskitLogosSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_20_Query = (
+export type PresskitLogosSectionQuery = (
   { __typename?: 'Query' }
-  & { content: Maybe<(
-    { __typename?: 'PressKitYaml' }
+  & { sanityPresskitPage: Maybe<(
+    { __typename?: 'SanityPresskitPage' }
     & { logosSection: Maybe<(
-      { __typename?: 'PressKitYamlLogosSection' }
-      & Pick<PressKitYamlLogosSection, 'header' | 'buttonText' | 'buttonLink'>
+      { __typename?: 'SanityPresskitLogosSection' }
+      & Pick<SanityPresskitLogosSection, 'header' | 'buttonText' | 'buttonLink'>
     )> }
   )> }
 );
 
-export type Unnamed_21_QueryVariables = Exact<{ [key: string]: never; }>;
+export type PresskitPhotosSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_21_Query = (
+export type PresskitPhotosSectionQuery = (
   { __typename?: 'Query' }
-  & { content: Maybe<(
-    { __typename?: 'PressKitYaml' }
+  & { sanityPresskitPage: Maybe<(
+    { __typename?: 'SanityPresskitPage' }
     & { photosSection: Maybe<(
-      { __typename?: 'PressKitYamlPhotosSection' }
-      & Pick<PressKitYamlPhotosSection, 'header'>
+      { __typename?: 'SanityPresskitPhotosSection' }
+      & Pick<SanityPresskitPhotosSection, 'header'>
       & { photos: Maybe<Array<Maybe<(
-        { __typename?: 'PressKitYamlPhotosSectionPhotos' }
-        & { image: Maybe<(
-          { __typename?: 'File' }
-          & Pick<File, 'publicURL'>
+        { __typename?: 'SanityImage' }
+        & { asset: Maybe<(
+          { __typename?: 'SanityImageAsset' }
+          & Pick<SanityImageAsset, 'url'>
         )> }
       )>>> }
     )> }
@@ -34802,32 +35265,50 @@ export type PresskitTopSectionQuery = (
   )> }
 );
 
-export type Unnamed_22_QueryVariables = Exact<{ [key: string]: never; }>;
+export type ResourcesLedgerSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_22_Query = (
+export type ResourcesLedgerSectionQuery = (
   { __typename?: 'Query' }
-  & { text: Maybe<(
-    { __typename?: 'ResourcesYaml' }
+  & { sanityResourcesPage: Maybe<(
+    { __typename?: 'SanityResourcesPage' }
     & { ledgerSection: Maybe<(
-      { __typename?: 'ResourcesYamlLedgerSection' }
-      & Pick<ResourcesYamlLedgerSection, 'header'>
+      { __typename?: 'SanityResourcesLedgerSection' }
+      & Pick<SanityResourcesLedgerSection, 'header'>
       & { cards: Maybe<Array<Maybe<(
-        { __typename?: 'ResourcesYamlLedgerSectionCards' }
-        & Pick<ResourcesYamlLedgerSectionCards, 'title' | 'updated' | 'description' | 'buttonText' | 'link'>
-        & { image: Maybe<(
-          { __typename?: 'File' }
-          & Pick<File, 'extension' | 'publicURL'>
+        { __typename?: 'SanityResource' }
+        & Pick<SanityResource, '_rawTitle' | '_rawDescription' | 'lastUpdated'>
+        & { button: Maybe<(
+          { __typename?: 'SanityButton' }
+          & Pick<SanityButton, 'buttonText'>
+          & { buttonLink: Maybe<(
+            { __typename?: 'SanityLink' }
+            & Pick<SanityLink, 'buttonHref'>
+            & { buttonDoc: Maybe<(
+              { __typename?: 'SanityDoc' }
+              & Pick<SanityDoc, 'href'>
+            )> }
+          )> }
+        )>, image: Maybe<(
+          { __typename?: 'SanityCustomImage' }
+          & Pick<SanityCustomImage, 'imageHref'>
+          & { image: Maybe<(
+            { __typename?: 'SanityImage' }
+            & { asset: Maybe<(
+              { __typename?: 'SanityImageAsset' }
+              & Pick<SanityImageAsset, 'extension' | 'url'>
+            )> }
+          )> }
         )> }
       )>>> }
     )> }
   )> }
 );
 
-export type Unnamed_23_QueryVariables = Exact<{ [key: string]: never; }>;
+export type ResourcesRegistrySectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_23_Query = (
+export type ResourcesRegistrySectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34838,23 +35319,40 @@ export type Unnamed_23_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'ResourcesYaml' }
+  )>, sanityResourcesPage: Maybe<(
+    { __typename?: 'SanityResourcesPage' }
     & { registrySection: Maybe<(
-      { __typename?: 'ResourcesYamlRegistrySection' }
-      & Pick<ResourcesYamlRegistrySection, 'header' | 'documentTableTitle'>
+      { __typename?: 'SanityResourcesRegistrySection' }
+      & Pick<SanityResourcesRegistrySection, 'header' | 'documentTableTitle'>
       & { documents: Maybe<Array<Maybe<(
-        { __typename?: 'ResourcesYamlRegistrySectionDocuments' }
-        & Pick<ResourcesYamlRegistrySectionDocuments, 'name' | 'type' | 'date' | 'url'>
+        { __typename?: 'SanityDoc' }
+        & Pick<SanityDoc, 'name' | 'type' | 'date' | 'href'>
       )>>>, subsections: Maybe<Array<Maybe<(
-        { __typename?: 'ResourcesYamlRegistrySectionSubsections' }
-        & Pick<ResourcesYamlRegistrySectionSubsections, 'title'>
+        { __typename?: 'SanityResourcesRegistrySubSection' }
+        & Pick<SanityResourcesRegistrySubSection, 'title'>
         & { cards: Maybe<Array<Maybe<(
-          { __typename?: 'ResourcesYamlRegistrySectionSubsectionsCards' }
-          & Pick<ResourcesYamlRegistrySectionSubsectionsCards, 'title' | 'updated' | 'description' | 'buttonText' | 'link'>
+          { __typename?: 'SanityResource' }
+          & Pick<SanityResource, '_rawTitle' | 'lastUpdated' | '_rawDescription'>
           & { image: Maybe<(
-            { __typename?: 'File' }
-            & Pick<File, 'extension' | 'publicURL'>
+            { __typename?: 'SanityCustomImage' }
+            & Pick<SanityCustomImage, 'imageHref'>
+            & { image: Maybe<(
+              { __typename?: 'SanityImage' }
+              & { asset: Maybe<(
+                { __typename?: 'SanityImageAsset' }
+                & Pick<SanityImageAsset, 'extension' | 'url'>
+              )> }
+            )> }
+          )>, button: Maybe<(
+            { __typename?: 'SanityButton' }
+            & Pick<SanityButton, 'buttonText'>
+            & { buttonLink: Maybe<(
+              { __typename?: 'SanityLink' }
+              & { buttonDoc: Maybe<(
+                { __typename?: 'SanityDoc' }
+                & Pick<SanityDoc, 'href'>
+              )> }
+            )> }
           )> }
         )>>> }
       )>>> }
@@ -34862,10 +35360,10 @@ export type Unnamed_23_Query = (
   )> }
 );
 
-export type Unnamed_24_QueryVariables = Exact<{ [key: string]: never; }>;
+export type ResourcesTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_24_Query = (
+export type ResourcesTopSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34885,19 +35383,19 @@ export type Unnamed_24_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'ResourcesYaml' }
+  )>, sanityResourcesPage: Maybe<(
+    { __typename?: 'SanityResourcesPage' }
     & { topSection: Maybe<(
-      { __typename?: 'ResourcesYamlTopSection' }
-      & Pick<ResourcesYamlTopSection, 'header' | 'body'>
+      { __typename?: 'SanityTitleBody' }
+      & Pick<SanityTitleBody, 'title' | 'body'>
     )> }
   )> }
 );
 
-export type Unnamed_25_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_17_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_25_Query = (
+export type Unnamed_17_Query = (
   { __typename?: 'Query' }
   & { arrow: Maybe<(
     { __typename?: 'File' }
@@ -34934,10 +35432,10 @@ export type Unnamed_25_Query = (
   )> }
 );
 
-export type Unnamed_26_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_18_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_26_Query = (
+export type Unnamed_18_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -34964,10 +35462,10 @@ export type Unnamed_26_Query = (
   )> }
 );
 
-export type Unnamed_27_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_19_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_27_Query = (
+export type Unnamed_19_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35001,10 +35499,10 @@ export type Unnamed_27_Query = (
   )> }
 );
 
-export type Unnamed_28_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_20_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_28_Query = (
+export type Unnamed_20_Query = (
   { __typename?: 'Query' }
   & { content: Maybe<(
     { __typename?: 'ScienceYaml' }
@@ -35029,10 +35527,10 @@ export type Unnamed_28_Query = (
   )> }
 );
 
-export type Unnamed_29_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_21_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_29_Query = (
+export type Unnamed_21_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35106,10 +35604,10 @@ export type EmailSubmitSectionQuery = (
   )> }
 );
 
-export type Unnamed_30_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_22_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_30_Query = (
+export type Unnamed_22_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35131,10 +35629,10 @@ export type Unnamed_30_Query = (
   )> }
 );
 
-export type Unnamed_31_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_23_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_31_Query = (
+export type Unnamed_23_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35156,10 +35654,10 @@ export type Unnamed_31_Query = (
   )> }
 );
 
-export type Unnamed_32_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_24_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_32_Query = (
+export type Unnamed_24_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35181,10 +35679,10 @@ export type Unnamed_32_Query = (
   )> }
 );
 
-export type Unnamed_33_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_25_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_33_Query = (
+export type Unnamed_25_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35213,10 +35711,10 @@ export type Unnamed_33_Query = (
   )> }
 );
 
-export type Unnamed_34_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_26_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_34_Query = (
+export type Unnamed_26_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35236,10 +35734,10 @@ export type Unnamed_34_Query = (
   )> }
 );
 
-export type Unnamed_35_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_27_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_35_Query = (
+export type Unnamed_27_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35259,10 +35757,10 @@ export type Unnamed_35_Query = (
   )> }
 );
 
-export type Unnamed_36_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_28_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_36_Query = (
+export type Unnamed_28_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -35283,10 +35781,10 @@ export type Unnamed_36_Query = (
   )> }
 );
 
-export type Unnamed_37_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_29_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_37_Query = (
+export type Unnamed_29_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'MediaYaml' }
@@ -35306,10 +35804,10 @@ export type Unnamed_37_Query = (
   )> }
 );
 
-export type Unnamed_38_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_30_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_38_Query = (
+export type Unnamed_30_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -35320,10 +35818,10 @@ export type Unnamed_38_Query = (
   )> }
 );
 
-export type Unnamed_39_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_31_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_39_Query = (
+export type Unnamed_31_Query = (
   { __typename?: 'Query' }
   & { bg: Maybe<(
     { __typename?: 'File' }
@@ -35337,10 +35835,10 @@ export type Unnamed_39_Query = (
   )> }
 );
 
-export type Unnamed_40_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_32_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_40_Query = (
+export type Unnamed_32_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -35351,10 +35849,10 @@ export type Unnamed_40_Query = (
   )> }
 );
 
-export type Unnamed_41_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_33_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_41_Query = (
+export type Unnamed_33_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -35365,10 +35863,10 @@ export type Unnamed_41_Query = (
   )> }
 );
 
-export type Unnamed_42_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_34_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_42_Query = (
+export type Unnamed_34_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35388,10 +35886,10 @@ export type Unnamed_42_Query = (
   )> }
 );
 
-export type Unnamed_43_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_35_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_43_Query = (
+export type Unnamed_35_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'TokenYaml' }
@@ -35402,10 +35900,10 @@ export type Unnamed_43_Query = (
   )> }
 );
 
-export type Unnamed_44_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_36_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_44_Query = (
+export type Unnamed_36_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35425,10 +35923,10 @@ export type Unnamed_44_Query = (
   )> }
 );
 
-export type Unnamed_45_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_37_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_45_Query = (
+export type Unnamed_37_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35448,10 +35946,10 @@ export type Unnamed_45_Query = (
   )> }
 );
 
-export type Unnamed_46_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_38_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_46_Query = (
+export type Unnamed_38_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35471,10 +35969,10 @@ export type Unnamed_46_Query = (
   )> }
 );
 
-export type Unnamed_47_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_39_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_47_Query = (
+export type Unnamed_39_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35513,10 +36011,10 @@ export type Unnamed_47_Query = (
   )> }
 );
 
-export type Unnamed_48_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_40_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_48_Query = (
+export type Unnamed_40_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35536,10 +36034,10 @@ export type Unnamed_48_Query = (
   )> }
 );
 
-export type Unnamed_49_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_41_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_49_Query = (
+export type Unnamed_41_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'WalletAddressRegistrationYaml' }
@@ -35550,10 +36048,10 @@ export type Unnamed_49_Query = (
   )> }
 );
 
-export type Unnamed_50_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_42_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_50_Query = (
+export type Unnamed_42_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'WalletAddressRegistrationYaml' }
@@ -35564,10 +36062,10 @@ export type Unnamed_50_Query = (
   )> }
 );
 
-export type Unnamed_51_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_43_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_51_Query = (
+export type Unnamed_43_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35587,10 +36085,10 @@ export type Unnamed_51_Query = (
   )> }
 );
 
-export type Unnamed_52_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_44_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_52_Query = (
+export type Unnamed_44_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'WalletAddressRegistrationYaml' }
@@ -35613,7 +36111,7 @@ export type CaseStudyTemplateQuery = (
     & Pick<SanityCaseStudyPage, 'name' | 'description'>
     & { background: Maybe<(
       { __typename?: 'SanityCustomImage' }
-      & FluidImageWebPFieldsFragment
+      & FluidCustomImageFields_WithWebpFragment
     )>, aboutSection: Maybe<(
       { __typename?: 'SanityCaseStudyAboutSection' }
       & Pick<SanityCaseStudyAboutSection, '_rawAbout' | 'practice' | 'biome' | 'region' | 'lineRotate' | 'lineWidth'>
@@ -35628,34 +36126,34 @@ export type CaseStudyTemplateQuery = (
         )> }
       )>, mapImage: Maybe<(
         { __typename?: 'SanityCustomImage' }
-        & FluidImageWebPFieldsFragment
+        & FluidCustomImageFields_WithWebpFragment
       )> }
     )>, contextSection: Maybe<(
       { __typename?: 'SanityCaseStudyContextSection' }
       & Pick<SanityCaseStudyContextSection, '_rawDescription' | 'challenges'>
       & { image: Maybe<(
         { __typename?: 'SanityCustomImage' }
-        & FluidImageWebPFieldsFragment
+        & FluidCustomImageFields_WithWebpFragment
       )> }
     )>, approachSection: Maybe<(
       { __typename?: 'SanityCaseStudyApproachSection' }
       & Pick<SanityCaseStudyApproachSection, 'description' | '_rawDetails' | '_rawResults' | '_rawNext' | '_rawFigureTitle'>
       & { figureImage: Maybe<(
         { __typename?: 'SanityCustomImage' }
-        & FluidImageWebPFieldsFragment
+        & FluidCustomImageFields_WithWebpFragment
       )> }
     )>, figureSection: Maybe<(
       { __typename?: 'SanityCaseStudyFigureSection' }
       & Pick<SanityCaseStudyFigureSection, 'title'>
       & { background: Maybe<(
         { __typename?: 'SanityCustomImage' }
-        & FluidImageWebPFieldsFragment
+        & FluidCustomImageFields_WithWebpFragment
       )>, figures: Maybe<Array<Maybe<(
         { __typename?: 'SanityCaseStudyFigure' }
         & Pick<SanityCaseStudyFigure, 'title' | 'spacing'>
         & { image: Maybe<(
           { __typename?: 'SanityCustomImage' }
-          & FluidImageWebPFieldsFragment
+          & FluidCustomImageFields_WithWebpFragment
         )> }
       )>>> }
     )>, fundingSection: Maybe<(
@@ -35663,7 +36161,7 @@ export type CaseStudyTemplateQuery = (
       & Pick<SanityCaseStudyFundingSection, '_rawDetails' | '_rawResults' | '_rawNext'>
       & { image: Maybe<(
         { __typename?: 'SanityCustomImage' }
-        & FluidImageWebPFieldsFragment
+        & FluidCustomImageFields_WithWebpFragment
       )> }
     )>, conclusionSection: Maybe<(
       { __typename?: 'SanityCaseStudyConclusionSection' }
@@ -35673,7 +36171,7 @@ export type CaseStudyTemplateQuery = (
         & Pick<SanityImageWithTitle, 'title'>
         & { image: Maybe<(
           { __typename?: 'SanityCustomImage' }
-          & FluidImageWebPFieldsFragment
+          & FluidCustomImageFields_WithWebpFragment
         )> }
       )>>> }
     )>, bottomSection: Maybe<(
@@ -35681,19 +36179,19 @@ export type CaseStudyTemplateQuery = (
       & Pick<SanityCaseStudyBottomSection, 'quote' | 'personName' | 'personRole'>
       & { personImage: Maybe<(
         { __typename?: 'SanityCustomImage' }
-        & FluidImageWebPFieldsFragment
+        & FluidCustomImageFields_WithWebpFragment
       )>, background: Maybe<(
         { __typename?: 'SanityCustomImage' }
-        & FluidImageWebPFieldsFragment
+        & FluidCustomImageFields_WithWebpFragment
       )> }
     )> }
   )> }
 );
 
-export type Unnamed_53_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_45_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_53_Query = (
+export type Unnamed_45_Query = (
   { __typename?: 'Query' }
   & { sanityFaqPage: Maybe<(
     { __typename?: 'SanityFaqPage' }

@@ -1,16 +1,12 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
 import TopSection from '../sections/resources/TopSection';
 import RegistrySection from '../sections/resources/RegistrySection';
 import LedgerSection from '../sections/resources/LedgerSection';
 import SEO from '../components/seo';
 
-interface props {
-  location: Location;
-}
-
-const ResourcesPage = ({ location }: props): JSX.Element => {
+const ResourcesPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`
     query {
       seoImage: file(relativePath: { eq: "resources-ledger-whitepaper-image.jpg" }) {
@@ -18,6 +14,7 @@ const ResourcesPage = ({ location }: props): JSX.Element => {
       }
     }
   `);
+
   return (
     <>
       <SEO

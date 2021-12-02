@@ -78,7 +78,7 @@ export default function ImageField({
   }
 
   const onCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
-    const result = await getImageSrc(croppedImage, onUpload);
+    const result = await getImageSrc(croppedImage, onUpload, fileName);
 
     setInitialImage('');
     form.setFieldValue(name, result);

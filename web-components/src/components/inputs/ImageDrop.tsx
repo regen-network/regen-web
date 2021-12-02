@@ -159,7 +159,7 @@ function ImageDrop({
   };
 
   const onCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
-    const result = await getImageSrc(croppedImage, onUpload);
+    const result = await getImageSrc(croppedImage, onUpload, fileName);
 
     if (result) {
       form.setFieldValue(field.name, result);

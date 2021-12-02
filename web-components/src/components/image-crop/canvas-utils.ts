@@ -61,3 +61,17 @@ export function srcToFile(src: string, fileName: string, mimeType: string): Prom
     .then(res => res.arrayBuffer())
     .then(buf => new File([buf], fileName, { type: mimeType }));
 }
+
+export async function getImageSrc(
+  croppedImage: HTMLImageElement,
+  onUpload?: (file: File) => Promise<string>,
+  fileName?: string,
+): Promise<string> {
+  let result = croppedImage.src;
+
+  if (onUpload && fileName) {
+    const imageFile = await srcToFile(croppedImage.src, fileName, 'image/png');
+    result = await onUpload(imageFile);
+  }
+  return result;
+}

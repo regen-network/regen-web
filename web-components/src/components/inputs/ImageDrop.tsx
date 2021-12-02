@@ -12,7 +12,7 @@ import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
 import { Label } from '../label';
-import { srcToFile } from '../image-crop/canvas-utils';
+import { getImageSrc } from '../image-crop/canvas-utils';
 
 export interface ImageDropProps extends FieldProps {
   className?: string;
@@ -158,13 +158,8 @@ function ImageDrop({
     setCropModalOpen(false);
   };
 
-  const handleCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
-    let result = croppedImage.src;
-
-    if (onUpload) {
-      const imageFile = await srcToFile(croppedImage.src, fileName, 'image/png');
-      result = await onUpload(imageFile);
-    }
+  const onCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
+    const result = await getImageSrc(croppedImage, onUpload);
 
     if (result) {
       form.setFieldValue(field.name, result);
@@ -241,7 +236,7 @@ function ImageDrop({
       <CropImageModal
         open={cropModalOpen}
         onClose={handleCropModalClose}
-        onSubmit={handleCropModalSubmit}
+        onSubmit={onCropModalSubmit}
         initialImage={initialImage}
         fixedCrop={fixedCrop}
       />

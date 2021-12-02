@@ -6,7 +6,7 @@ import OutlinedButton from '../buttons/OutlinedButton';
 import FieldFormControl from './FieldFormControl';
 import CropImageModal from '../modal/CropImageModal';
 import AvatarIcon from '../icons/AvatarIcon';
-import { srcToFile } from '../image-crop/canvas-utils';
+import { getImageSrc } from '../image-crop/canvas-utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
@@ -77,13 +77,8 @@ export default function ImageField({
     });
   }
 
-  const handleCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
-    let result = croppedImage.src;
-
-    if (onUpload) {
-      const imageFile = await srcToFile(croppedImage.src, fileName, 'image/png');
-      result = await onUpload(imageFile);
-    }
+  const onCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
+    const result = await getImageSrc(croppedImage, onUpload);
 
     setInitialImage('');
     form.setFieldValue(name, result);
@@ -141,7 +136,7 @@ export default function ImageField({
         initialImage={initialImage}
         open={!!initialImage}
         onClose={handleCropModalClose}
-        onSubmit={handleCropModalSubmit}
+        onSubmit={onCropModalSubmit}
       />
     </>
   );

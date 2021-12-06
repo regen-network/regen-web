@@ -1,11 +1,12 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { useStaticQuery, graphql } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Grid, createStyles, withStyles, makeStyles, Theme, Typography, LinearProgress } from '@mui/material';
+import { Grid, createStyles, Typography, LinearProgress, Theme } from '@mui/material';
+import { withStyles, makeStyles } from '@mui/styles';
 import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
 import { getFormattedDate } from 'web-components/src/utils/format';
 import clsx from 'clsx';

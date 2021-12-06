@@ -23,7 +23,7 @@
     "@types/rdfjs__parser-jsonld": "^1.2.3",
     "@types/react-router-dom": "^5.1.3",
     "auth0-js": "^9.18.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "clientjs": "^0.1.11",
     "date-fns": "^2.21.3",
     "formik": "2.2.9",

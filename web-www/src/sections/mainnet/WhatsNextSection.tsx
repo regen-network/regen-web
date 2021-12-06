@@ -1,10 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { Grid, Typography } from '@mui/material';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { GatsbyImageData } from 'gatsby-plugin-image';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import GreenTopIconCard from 'web-components/src/components/cards/GreenTopIconCard';
 
 const useStyles = makeStyles((theme: Theme) => ({

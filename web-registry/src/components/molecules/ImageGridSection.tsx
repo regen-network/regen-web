@@ -1,7 +1,8 @@
 import React from 'react';
 import { CardMedia } from '@mui/material';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ImageGrid from 'web-components/lib/components/image-grid';
 import Card from 'web-components/lib/components/cards/Card';
 import { Image } from 'web-components/lib/components/image';

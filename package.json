@@ -13,13 +13,15 @@
   "dependencies": {
     "serve": "^11.2.0"
   },
-  "workspaces": [
-    "web-registry",
-    "web-components",
-    "web-storybook",
-    "web-www",
-    "web-auth"
-  ],
+  "workspaces": {
+    "packages": [
+      "web-registry",
+      "web-components",
+      "web-storybook",
+      "web-www",
+      "web-auth"
+    ]
+  },
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "yarn build-components && lerna run --scope web-registry build --stream",

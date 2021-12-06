@@ -1,9 +1,10 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import Table from 'web-components/lib/components/table';

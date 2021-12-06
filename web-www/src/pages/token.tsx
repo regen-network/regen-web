@@ -1,7 +1,8 @@
 import React from 'react';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import SEO from '../components/seo';
 import TopSection from '../sections/token/TopSection';
 import TokenEconomics from '../sections/token/TokenEconomics';

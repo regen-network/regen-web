@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';

@@ -1,8 +1,9 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 
 import ConnectSection, { IconLabelProps } from '../../components/ConnectSection';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import RegenLogoIcon from 'web-components/lib/components/icons/RegenLogoIcon';
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';

@@ -1,18 +1,18 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { TypographyVariant } from '@mui/material/styles';
+import { Variant } from '@mui/material/styles/createTypography';
 import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import Box from '@mui/material/Box';
 
 import Title from 'web-components/lib/components/title';
-import { DefaultTheme as Theme } from 'web-components/lib/theme/muiTheme';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 interface Props {
   className?: string;
   titleClassName?: string;
-  titleVariant?: TypographyVariant;
+  titleVariant?: Variant;
   body?: React.ReactNode;
   header?: React.ReactNode;
   linearGradient?: string;

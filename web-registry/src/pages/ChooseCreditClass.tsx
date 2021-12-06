@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
 import { validate, getProjectPageBaseData } from '../lib/rdf';

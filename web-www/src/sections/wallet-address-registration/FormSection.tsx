@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, Collapse } from '@mui/material';
+import { Collapse } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import WalletConnectionButton from './WalletConnectionButton';

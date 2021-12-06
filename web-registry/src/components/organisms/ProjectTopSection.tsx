@@ -1,11 +1,12 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import ReactHtmlParser from 'react-html-parser';
 import Link from '@mui/material/Link';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';

@@ -1,13 +1,14 @@
 {
   "name": "web-www",
   "version": "0.0.1",
+  "private": true,
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mui/material": "^5.1.0",
     "@mui/lab": "^5.0.0-alpha.54",
     "@mui/styles": "^5.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-plugin-styled-components": "1.10.7",
     "clsx": "1.1.0",
     "eslint-config-react-app": "^5.2.1",

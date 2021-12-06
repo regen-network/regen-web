@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import TopSection from '../sections/invest/TopSection';
 import FormSection from '../sections/invest/FormSection';
 import SEO from '../components/seo';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';

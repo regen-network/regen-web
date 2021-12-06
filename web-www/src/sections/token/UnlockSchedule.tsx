@@ -1,8 +1,9 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/src/components/section';
 import BarChart from 'web-components/src/components/charts/BarChart';
 import { MarketingDescription as Description } from '../../components/Description';

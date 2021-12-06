@@ -1,11 +1,12 @@
 import React, { useCallback, useRef } from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import LazyLoad from 'react-lazyload';
 import Slider from 'react-slick';
 import cx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpactCard';
 import Section from 'web-components/lib/components/section';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';

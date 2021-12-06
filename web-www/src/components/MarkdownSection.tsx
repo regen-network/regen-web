@@ -1,7 +1,9 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 import { Variant } from '@mui/material/styles/createTypography';
+
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 
 interface SectionProps {

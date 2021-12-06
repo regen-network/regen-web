@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import ReactToPrint from 'react-to-print';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Certificate, {
   StakeholderInfo,
 } from 'web-components/lib/components/certificate';

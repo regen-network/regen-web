@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 import { useStaticQuery, graphql } from 'gatsby';
@@ -11,6 +11,8 @@ import axios from 'axios';
 
 import SEO from '../components/seo';
 import FAQSection from '../sections/shared/FAQSection';
+
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';

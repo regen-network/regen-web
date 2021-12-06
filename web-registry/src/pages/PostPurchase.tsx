@@ -1,10 +1,11 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import Description from 'web-components/lib/components/description';

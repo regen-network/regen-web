@@ -1,9 +1,10 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import cx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 
 import { MoreProjectFieldsFragment, Maybe } from '../../generated/graphql';

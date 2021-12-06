@@ -2,8 +2,9 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { GatsbyImageData } from 'gatsby-plugin-image';
-import { Theme, makeStyles } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import TokenPool from './TokenPool';
 
 type QueryData = {

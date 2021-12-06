@@ -1,9 +1,10 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-mui';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { Typography } from '@mui/material';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import DatePickField from 'web-components/lib/components/inputs/DatePickField';

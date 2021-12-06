@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
 import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
 import InterfaceIcon from 'web-components/lib/components/icons/InterfaceIcon';

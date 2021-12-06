@@ -1,9 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, CardContent, Typography } from '@mui/material';
+import { CardContent, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
 import ReactHtmlParser from 'react-html-parser';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/src/components/section';
 import Title from 'web-components/src/components/title';
 import Card from 'web-components/src/components/cards/Card';

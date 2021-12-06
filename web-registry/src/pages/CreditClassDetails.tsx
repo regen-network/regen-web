@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { useParams, useNavigate, Routes, Route } from 'react-router-dom';
 import cx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import Modal from 'web-components/lib/components/modal';

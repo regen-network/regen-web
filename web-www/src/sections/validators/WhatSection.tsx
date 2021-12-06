@@ -1,8 +1,9 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@mui/material/';
+import { makeStyles } from '@mui/styles';
 
 import BackgroundSection from '../../components/BackgroundSection';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import TitleDescription from 'web-components/lib/components/title-description';
 
 const useStyles = makeStyles((theme: Theme) => ({

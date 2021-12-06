@@ -1,5 +1,5 @@
 import React, { useRef, useCallback } from 'react';
-import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 import Slider from 'react-slick';
@@ -8,6 +8,7 @@ import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
 import Action, { ActionProps } from 'web-components/lib/components/action';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 export interface LandManagementActionsProps {
   actions: ActionProps[];

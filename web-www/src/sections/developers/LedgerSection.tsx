@@ -1,8 +1,9 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import TitleDescription from 'web-components/lib/components/title-description';
 

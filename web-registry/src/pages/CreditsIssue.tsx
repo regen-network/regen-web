@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
 import TextField from '@mui/material/TextField';
@@ -17,6 +17,7 @@ import TableRow from '@mui/material/TableRow';
 import { DatePicker } from '@mui/lab';
 import ReactHtmlParser from 'react-html-parser';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import { useAllProjectsQuery } from '../generated/graphql';
 

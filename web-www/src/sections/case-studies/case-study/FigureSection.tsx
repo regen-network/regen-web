@@ -1,8 +1,9 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../../components/BackgroundSection';
 import Description from 'web-components/lib/components/description';
 

@@ -1,9 +1,12 @@
 import React from 'react';
-import { Theme, makeStyles, TypographyVariant } from '@mui/material/styles';
+import { Variant } from '@mui/material/styles/createTypography';
+import { makeStyles } from '@mui/styles';
+
 import Grid from '@mui/material/Grid';
 import clsx from 'clsx';
 import { GatsbyImageData } from 'gatsby-plugin-image';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from './BackgroundSection';
 
 interface StyleProps {
@@ -115,7 +118,7 @@ interface ConnectSectionProps {
   icons: IconLabelProps[];
   itemClassName?: string;
   titleClassName?: string;
-  titleVariant?: TypographyVariant;
+  titleVariant?: Variant;
   className?: string;
   background: {
     childImageSharp: {

@@ -1,11 +1,12 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { graphql, StaticQuery } from 'gatsby';
 import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
 import ReactHtmlParser from 'react-html-parser';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import { TitleWithParagraphs } from './ApproachSection';
 

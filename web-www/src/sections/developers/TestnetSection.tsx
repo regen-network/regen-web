@@ -1,10 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';

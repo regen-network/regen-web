@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { useParams } from 'react-router-dom';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
 import { MediaForm, MediaValues } from '../components/organisms';

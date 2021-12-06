@@ -1,10 +1,11 @@
 import React, { ReactChild } from 'react';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import BackgroundImage from 'gatsby-background-image';
 import { Link } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Section from 'web-components/src/components/section';
 

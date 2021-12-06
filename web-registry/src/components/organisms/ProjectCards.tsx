@@ -2,9 +2,10 @@ import React from 'react';
 import clsx from 'clsx';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
 import { MoreProjectFieldsFragment, Maybe } from '../../generated/graphql';

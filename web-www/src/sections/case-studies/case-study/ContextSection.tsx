@@ -1,5 +1,5 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { graphql, StaticQuery } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
@@ -7,6 +7,7 @@ import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
 import BackgroundImage from 'gatsby-background-image';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 

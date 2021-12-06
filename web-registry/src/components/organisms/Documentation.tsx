@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Table, { Document } from 'web-components/lib/components/table';
 import Section from 'web-components/lib/components/section';
 

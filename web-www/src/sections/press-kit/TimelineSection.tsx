@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { graphql, StaticQuery } from 'gatsby';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Timeline from 'web-components/lib/components/timeline';
 import Description from 'web-components/lib/components/description';

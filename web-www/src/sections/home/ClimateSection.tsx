@@ -1,11 +1,12 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import { useStaticQuery, graphql } from 'gatsby';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Card from 'web-components/lib/components/cards/Card';
 

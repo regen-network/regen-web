@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
 import Title from 'web-components/lib/components/title';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { ConnectSection, Maybe } from '../../generated/sanity-graphql';
 import { BackgroundImgSection } from '../molecules/BackgroundImgSection';

@@ -3,8 +3,9 @@ import BackgroundImage from 'gatsby-background-image';
 import { graphql, useStaticQuery } from 'gatsby';
 import Grid from '@mui/material/Grid';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import { GatsbyImage } from 'gatsby-plugin-image';
 

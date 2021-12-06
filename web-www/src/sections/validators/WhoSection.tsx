@@ -1,11 +1,12 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
 import BackgroundSection from '../../components/BackgroundSection';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import TitleDescription from 'web-components/lib/components/title-description';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';

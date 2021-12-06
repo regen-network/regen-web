@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/src/components/section';
 import ProjectCardsSlider from 'web-components/lib/components/sliders/ProjectCardsSlider';
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { BackgroundImgSection } from './BackgroundImgSection';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';

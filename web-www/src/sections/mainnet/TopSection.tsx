@@ -1,9 +1,10 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImageData } from 'gatsby-plugin-image';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { Typography } from '@mui/material';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Countdown from 'web-components/src/components/countdown';
 import BackgroundSection from '../../components/BackgroundSection';
 

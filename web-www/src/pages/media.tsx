@@ -1,10 +1,11 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Formik, Form, Field } from 'formik';
 
 import SEO from '../components/seo';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import Section from 'web-components/lib/components/section';
 import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';

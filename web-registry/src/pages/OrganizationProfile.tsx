@@ -11,8 +11,9 @@ import {
   Collapse,
   Zoom,
 } from '@mui/material';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';

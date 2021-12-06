@@ -1,7 +1,9 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
+
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import Section from 'web-components/lib/components/section';
 

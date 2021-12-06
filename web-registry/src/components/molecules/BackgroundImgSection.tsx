@@ -1,8 +1,9 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import CardMedia from '@mui/material/CardMedia';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 
 type Props = {

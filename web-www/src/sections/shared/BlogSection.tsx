@@ -1,9 +1,10 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { useStaticQuery, graphql } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import BackgroundImage from 'gatsby-background-image';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import BlogPosts from 'web-components/lib/components/sliders/BlogPosts';
 import Section from 'web-components/src/components/section';
 

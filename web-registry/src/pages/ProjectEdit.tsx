@@ -16,33 +16,33 @@ import { toTitleCase } from '../lib/titleCase';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    flexDirection: 'column',
-    padding: theme.spacing(8.75),
+    justifyContent: 'center',
     [theme.breakpoints.up('sm')]: {
+      justifyContent: 'space-evenly',
       padding: theme.spacing(8.75),
     },
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(6, 3.75),
     },
   },
-  top: {
+  left: {
     display: 'flex',
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(9.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: theme.spacing(6),
-    },
+    flexDirection: 'column',
   },
-  bottom: {
+  right: {
     display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(7.5),
+      flex: 1,
+    },
   },
   back: {
     display: 'flex',
-    alignItems: 'center',
     color: theme.palette.secondary.main,
     fontSize: theme.typography.pxToRem(12),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       width: theme.spacing(74.25),
     },
     [theme.breakpoints.down('xs')]: {
@@ -59,28 +59,31 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flex: 1,
-    justifyContent: 'center',
   },
   nav: {
     border: `1px solid ${theme.palette.grey[100]}`,
     borderRadius: '10px',
     height: 'fit-content',
-    [theme.breakpoints.up('sm')]: {
+
+    [theme.breakpoints.up('md')]: {
       width: theme.spacing(74.25),
+      // flex: 0,
+    },
+    [theme.breakpoints.between('xs', 'md')]: {
+      minWidth: theme.spacing(47.5),
+      // flex: 1,
     },
     [theme.breakpoints.down('xs')]: {
-      flex: 1,
+      // flex: 1,
+      width: theme.spacing(74.25),
     },
   },
   sectionContainer: {
     display: 'flex',
-    flex: 1,
     justifyContent: 'center',
+    flex: 1,
     '& form > div': {
       marginTop: 0,
-    },
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(0, 7.5),
     },
     [theme.breakpoints.down('xs')]: {
       padding: 'none',
@@ -95,6 +98,17 @@ const useStyles = makeStyles(theme => ({
     borderLeft: 'none !important', //todo: maybe style selected instead
     '&:last-child': {
       borderBottom: 'none',
+    },
+  },
+  topAlign: {
+    display: 'flex',
+    alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(10),
+      marginBottom: theme.spacing(9.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(6),
     },
   },
 }));
@@ -127,24 +141,28 @@ function ProjectEdit(): JSX.Element {
 
   return (
     <div className={styles.root}>
-      <div className={styles.top}>
-        <Link
-          href={section && isMobile ? `/project-pages/edit/${projectId}` : '/project-pages'}
-          className={styles.back}
-        >
-          <ArrowDownIcon className={styles.arrow} color={theme.palette.secondary.main} direction="prev" />
-          {!isMobile && <Label>back to projects</Label>}
-        </Link>
-        <Title className={styles.title} variant="h3" align="center">
-          {section && isMobile ? titleCase(section) : 'Edit Project Page'}
-        </Title>
-      </div>
-      <div className={styles.bottom}>
-        <Hidden smDown>
+      <div className={styles.left}>
+        <div className={styles.topAlign}>
+          <Link
+            href={section && isMobile ? `/project-pages/edit/${projectId}` : '/project-pages'}
+            className={styles.back}
+          >
+            <ArrowDownIcon className={styles.arrow} color={theme.palette.secondary.main} direction="prev" />
+            {!isMobile && <Label>back to projects</Label>}
+          </Link>
+        </div>
+        <Hidden xsDown>
           <Nav />
         </Hidden>
+      </div>
+      <div className={styles.right}>
         <div className={styles.sectionContainer}>
           <div className={styles.section}>
+            <div className={styles.topAlign}>
+              <Title className={styles.title} variant="h3" align="center">
+                {section && isMobile ? titleCase(section) : 'Edit Project Page'}
+              </Title>
+            </div>
             <Route
               path="/project-pages/edit/:projectId"
               render={({ match: { path } }) => (

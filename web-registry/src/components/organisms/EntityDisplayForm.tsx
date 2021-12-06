@@ -427,7 +427,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
           try {
             await submit(values);
             setSubmitting(false);
-            setTouched({});
+            setTouched({}); // reset to untouched
           } catch (e) {
             setSubmitting(false);
           }

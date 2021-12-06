@@ -123,7 +123,7 @@ const BasicInfoForm: React.FC<{
         try {
           await submit(values);
           setSubmitting(false);
-          setTouched({});
+          setTouched({}); // reset to untouched
         } catch (e) {
           setSubmitting(false);
         }

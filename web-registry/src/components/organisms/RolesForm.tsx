@@ -353,7 +353,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
           try {
             await submit(values);
             setSubmitting(false);
-            setTouched({});
+            setTouched({}); // reset to untouched
           } catch (e) {
             setSubmitting(false);
           }

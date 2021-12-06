@@ -11,6 +11,7 @@ import { Label } from 'web-components/lib/components/label';
 import { BasicInfo, ProjectLocation, Roles, EntityDisplay, Media, Story } from '../pages';
 import { Link } from '../components/atoms';
 import { ProtectedRoute } from '../components/atoms';
+import { toTitleCase } from '../lib/titleCase';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -120,10 +121,8 @@ function ProjectEdit(): JSX.Element {
     />
   );
 
-  const toTitleCase = (str: string): string => {
-    return str.replace('-', ' ').replace(/\w\S*/g, txt => {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-    });
+  const titleCase = (str: string): string => {
+    return toTitleCase(str.replace('-', ' '));
   };
 
   return (
@@ -137,7 +136,7 @@ function ProjectEdit(): JSX.Element {
           {!isMobile && <Label>back to projects</Label>}
         </Link>
         <Title className={styles.title} variant="h3" align="center">
-          {section && isMobile ? toTitleCase(section) : 'Edit Project Page'}
+          {section && isMobile ? titleCase(section) : 'Edit Project Page'}
         </Title>
       </div>
       <div className={styles.bottom}>

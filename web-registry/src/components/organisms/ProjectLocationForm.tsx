@@ -58,7 +58,7 @@ const ProjectLocationForm: React.FC<{
         try {
           await submit(values);
           setSubmitting(false);
-          setTouched({});
+          setTouched({}); // reset to untouched
         } catch (e) {
           setSubmitting(false);
         }
@@ -77,7 +77,11 @@ const ProjectLocationForm: React.FC<{
                 token={mapToken}
               />
             </OnBoardingCard>
-            <ProjectPageFooter isEdit={isEdit} onSave={submitForm} saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length} />
+            <ProjectPageFooter
+              isEdit={isEdit}
+              onSave={submitForm}
+              saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
+            />
           </Form>
         );
       }}

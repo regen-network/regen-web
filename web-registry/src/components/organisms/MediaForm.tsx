@@ -184,7 +184,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues, isEdit }) 
           try {
             await submit(values);
             setSubmitting(false);
-            setTouched({});
+            setTouched({}); // reset to untouched
           } catch (e) {
             setSubmitting(false);
           }

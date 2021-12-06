@@ -238,7 +238,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues, isEdit }) 
           try {
             await submit(values);
             setSubmitting(false);
-            setTouched({});
+            setTouched({}); // reset to untouched
           } catch (e) {
             setSubmitting(false);
           }

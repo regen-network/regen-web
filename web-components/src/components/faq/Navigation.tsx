@@ -96,7 +96,7 @@ const Navigation = ({
   return (
     <StyledList className={cx(className, classes?.root)}>
       {categories.map((name, i) => {
-        const selected = category && category === name;
+        const selected = !!category && category === name;
         return (
           <StyledListItem
             key={i}
@@ -118,7 +118,7 @@ const Navigation = ({
                 <BreadcrumbIcon
                   className={styles.icon}
                   direction="next"
-                  color={selected ? theme.palette.info.main : ''}
+                  color={selected ? theme.palette.info.main : theme.palette.secondary.main}
                 />
               </ListItemSecondaryAction>
             </Box>

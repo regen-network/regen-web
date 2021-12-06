@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, makeStyles, Theme } from '@material-ui/core';
+import { withStyles, makeStyles, Theme, useTheme } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -77,6 +77,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: theme.spacing(5.75),
     },
   },
+  selectedIcon: {
+    color: theme.palette.grey[100],
+  },
 }));
 
 const Navigation = ({
@@ -88,32 +91,40 @@ const Navigation = ({
   showIcon,
 }: NavigationProps): JSX.Element => {
   const styles = useStyles();
+  const theme = useTheme();
 
   return (
     <StyledList className={cx(className, classes?.root)}>
-      {categories.map((name, i) => (
-        <StyledListItem
-          key={i}
-          className={classes?.listItem}
-          button
-          selected={category ? category === name : false}
-          onClick={() => {
-            onClick(name);
-          }}
-        >
-          {name}
-          <Box
-            display={{
-              xs: 'block',
-              sm: showIcon || 'none',
+      {categories.map((name, i) => {
+        const selected = category && category === name;
+        return (
+          <StyledListItem
+            key={i}
+            className={classes?.listItem}
+            button
+            selected={selected}
+            onClick={() => {
+              onClick(name);
             }}
           >
-            <ListItemSecondaryAction className={styles.action}>
-              <BreadcrumbIcon className={styles.icon} direction="next" />
-            </ListItemSecondaryAction>
-          </Box>
-        </StyledListItem>
-      ))}
+            {name}
+            <Box
+              display={{
+                xs: 'block',
+                sm: showIcon || 'none',
+              }}
+            >
+              <ListItemSecondaryAction className={styles.action}>
+                <BreadcrumbIcon
+                  className={styles.icon}
+                  direction="next"
+                  color={selected ? theme.palette.info.main : ''}
+                />
+              </ListItemSecondaryAction>
+            </Box>
+          </StyledListItem>
+        );
+      })}
     </StyledList>
   );
 };

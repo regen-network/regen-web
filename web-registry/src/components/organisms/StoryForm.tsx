@@ -73,6 +73,7 @@ type exampleFieldName =
 const useStyles = makeStyles((theme: Theme) => ({
   storyCard: {
     paddingBottom: 0,
+    marginBottom: theme.spacing(5),
   },
   quoteTitle: {
     marginBottom: theme.spacing(5),

@@ -170,9 +170,7 @@ function ImageDrop({
 
   const handleDelete = async (imageUrl: string): Promise<void> => {
     form.setFieldValue(field.name, undefined);
-    if (onDelete) {
-      await onDelete(imageUrl);
-    }
+    if (onDelete) await onDelete(imageUrl);
     setInitialImage('');
     setFileName('');
   };
@@ -187,9 +185,8 @@ function ImageDrop({
         labelSubText={labelSubText}
         {...fieldProps}
       >
-        {() => {
-          console.log('field', field);
-          return field.value ? (
+        {() =>
+          field.value ? (
             <div className={cx(styles.preview, classes?.main)}>
               <Image className={styles.previewImage} src={field.value} backgroundImage />
               <IconButton
@@ -235,8 +232,8 @@ function ImageDrop({
                 </label>
               </div>
             </div>
-          );
-        }}
+          )
+        }
       </FieldFormControl>
       <CropImageModal
         open={cropModalOpen}

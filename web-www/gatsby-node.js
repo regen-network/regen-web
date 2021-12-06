@@ -15,15 +15,6 @@ exports.onCreateWebpackConfig = ({ actions }) => {
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  // const faqResult = await graphql(`
-  //   query {
-  //     faqYaml {
-  //       categories {
-  //         header
-  //       }
-  //     }
-  //   }
-  // `);
   const faqResult = await graphql(`
     query {
       sanityFaqPage {
@@ -45,19 +36,6 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     });
   });
-
-  // faqResult.data.faqYaml.categories.forEach(item => {
-  //   createPage({
-  //     path: `faq/${item.header}`,
-  //     component: path.resolve(`./src/templates/Faq.tsx`),
-  //     context: {
-  //       // Data passed to context is available
-  //       // in page queries as GraphQL variables
-  //       // and in this.props.pageContext.
-  //       header: item.header,
-  //     },
-  //   });
-  // });
 
   // Case studies
   const caseStudyResult = await graphql(`

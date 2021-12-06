@@ -4,10 +4,10 @@ import { Theme, makeStyles } from '@material-ui/core';
 import ReactHtmlParser from 'react-html-parser';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { Alert, AlertTitle } from '@material-ui/lab';
+import { WalletConnectButtonQuery } from '../../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
 
-interface WalletConnectionButtonProps {
-  isKeplrDetected: boolean;
-}
+interface WalletConnectionButtonProps {}
 interface Keplr {
   enable: (chainId: string) => Promise<any>;
   experimentalSuggestChain: (chainOptions: object) => Promise<void>;
@@ -42,21 +42,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const WalletConnectionButton = ({ isKeplrDetected }: WalletConnectionButtonProps): JSX.Element => {
-  const classes = useStyles();
-  const [isChainDetected, setIsChainDetected] = useState(false);
-  const data = useStaticQuery(graphql`
-    query {
-      text: walletAddressRegistrationYaml {
-        wallet {
-          buttonText
-          walletFoundButtonText
-          noWalletFoundMessage
-        }
+const query = graphql`
+  query walletConnectButton {
+    sanityWalletAddressRegistrationPage {
+      walletSection {
+        buttonText
+        walletFoundButtonText
+        _rawNoWalletFound
       }
     }
-  `);
-  const content = data?.text?.wallet;
+  }
+`;
+
+const WalletConnectionButton: React.FC<{ isKeplrDetected: boolean }> = ({ isKeplrDetected }) => {
+  const styles = useStyles();
+  const [isChainDetected, setIsChainDetected] = useState(false);
+  const { sanityWalletAddressRegistrationPage } = useStaticQuery<WalletConnectButtonQuery>(query);
+  const data = sanityWalletAddressRegistrationPage?.walletSection;
   const chainId = 'regen-devnet-5';
 
   const connectToKeplr = async (): Promise<any> => {
@@ -165,21 +167,23 @@ const WalletConnectionButton = ({ isKeplrDetected }: WalletConnectionButtonProps
   };
 
   return (
-    <div className={classes.walletButton}>
+    <div className={styles.walletButton}>
       {isKeplrDetected ? (
         <ContainedButton onClick={connectToKeplr} disabled={isChainDetected}>
-          {isChainDetected ? content?.walletFoundButtonText : content?.buttonText}
+          {isChainDetected ? data?.walletFoundButtonText : data?.buttonText}
         </ContainedButton>
       ) : (
         <Alert
           severity="error"
           classes={{
-            root: classes.alert,
-            icon: classes.alertIcon,
-            message: classes.alertMessage,
+            root: styles.alert,
+            icon: styles.alertIcon,
+            message: styles.alertMessage,
           }}
         >
-          <AlertTitle>{ReactHtmlParser(content?.noWalletFoundMessage)}</AlertTitle>
+          <AlertTitle>
+            <BlockContent content={data?._rawNoWalletFound} />
+          </AlertTitle>
         </Alert>
       )}
     </div>

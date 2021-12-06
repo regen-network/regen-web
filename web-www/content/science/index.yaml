@@ -22,15 +22,11 @@ openScienceSection:
     green: "#OpenScience"
   phases:
     - title: Phase I
-      description: Develop cutting edge earth observation and remote sensing
-        methodologies to verify ecological state.
+      description: Develop cutting edge earth observation and remote sensing methodologies to verify ecological state.
     - title: Phase II
-      description: Methodology registry where different methodologies, both mature and
-        nascent, are registered on the Regen Ledger for scientific comparison,
-        peer review and rating.
+      description: Methodology registry where different methodologies, both mature and nascent, are registered on the Regen Ledger for scientific comparison, peer review and rating.
     - title: Phase III
-      description: Develop robust, peer-to-peer methodology and scientific data market
-        place and tailored user experience for scientists.
+      description: Develop robust, peer-to-peer methodology and scientific data market place and tailored user experience for scientists.
 partnershipsSection:
   header: Partnerships
   partners:
@@ -104,8 +100,7 @@ communitySection:
         [science@regen.network](mailto:science@regen.network)
 practicesOutcomesSection:
   header: Get paid for these practices, outcomes, and more:*
-  note: "*These credits are not yet ready. Sign up now to get notified when
-    available!"
+  note: "*These credits are not yet ready. Sign up now to get notified when available!"
   practices:
     header: land management practices
     items:

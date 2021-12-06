@@ -352,21 +352,21 @@ export type CaseStudyItemsYamlAboutSectionFilterInput = {
 
 export type CaseStudyItemsYamlApproachSection = {
   __typename?: 'CaseStudyItemsYamlApproachSection';
-  description: Maybe<Scalars['String']>;
   details: Maybe<Scalars['String']>;
   results: Maybe<Scalars['String']>;
   next: Maybe<Scalars['String']>;
   figureImage: Maybe<File>;
   figureTitle: Maybe<Scalars['String']>;
+  description: Maybe<Scalars['String']>;
 };
 
 export type CaseStudyItemsYamlApproachSectionFilterInput = {
-  description: Maybe<StringQueryOperatorInput>;
   details: Maybe<StringQueryOperatorInput>;
   results: Maybe<StringQueryOperatorInput>;
   next: Maybe<StringQueryOperatorInput>;
   figureImage: Maybe<FileFilterInput>;
   figureTitle: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
 };
 
 export type CaseStudyItemsYamlBottomSection = {
@@ -704,46 +704,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   CardImageInternalMediaType = 'cardImage___internal___mediaType',
   CardImageInternalOwner = 'cardImage___internal___owner',
   CardImageInternalType = 'cardImage___internal___type',
-  CardImageChildCommunityYamlId = 'cardImage___childCommunityYaml___id',
-  CardImageChildCommunityYamlParentId = 'cardImage___childCommunityYaml___parent___id',
-  CardImageChildCommunityYamlParentChildren = 'cardImage___childCommunityYaml___parent___children',
-  CardImageChildCommunityYamlChildren = 'cardImage___childCommunityYaml___children',
-  CardImageChildCommunityYamlChildrenId = 'cardImage___childCommunityYaml___children___id',
-  CardImageChildCommunityYamlChildrenChildren = 'cardImage___childCommunityYaml___children___children',
-  CardImageChildCommunityYamlInternalContent = 'cardImage___childCommunityYaml___internal___content',
-  CardImageChildCommunityYamlInternalContentDigest = 'cardImage___childCommunityYaml___internal___contentDigest',
-  CardImageChildCommunityYamlInternalDescription = 'cardImage___childCommunityYaml___internal___description',
-  CardImageChildCommunityYamlInternalFieldOwners = 'cardImage___childCommunityYaml___internal___fieldOwners',
-  CardImageChildCommunityYamlInternalIgnoreType = 'cardImage___childCommunityYaml___internal___ignoreType',
-  CardImageChildCommunityYamlInternalMediaType = 'cardImage___childCommunityYaml___internal___mediaType',
-  CardImageChildCommunityYamlInternalOwner = 'cardImage___childCommunityYaml___internal___owner',
-  CardImageChildCommunityYamlInternalType = 'cardImage___childCommunityYaml___internal___type',
-  CardImageChildCommunityYamlTopSectionHeader = 'cardImage___childCommunityYaml___topSection___header',
-  CardImageChildCommunityYamlTopSectionBody = 'cardImage___childCommunityYaml___topSection___body',
-  CardImageChildCommunityYamlConnectSectionHeader = 'cardImage___childCommunityYaml___connectSection___header',
-  CardImageChildCommunityYamlConnectSectionTelegramSubLabel = 'cardImage___childCommunityYaml___connectSection___telegramSubLabel',
-  CardImageChildCommunityYamlConnectSectionTelegramUrl = 'cardImage___childCommunityYaml___connectSection___telegramUrl',
-  CardImageChildCommunityYamlConnectSectionTwitterSubLabel = 'cardImage___childCommunityYaml___connectSection___twitterSubLabel',
-  CardImageChildCommunityYamlConnectSectionTwitterUrl = 'cardImage___childCommunityYaml___connectSection___twitterUrl',
-  CardImageChildCommunityYamlConnectSectionDiscordSubLabel = 'cardImage___childCommunityYaml___connectSection___discordSubLabel',
-  CardImageChildCommunityYamlConnectSectionDiscordUrl = 'cardImage___childCommunityYaml___connectSection___discordUrl',
-  CardImageChildCommunityYamlGoToSectionBlogButtonText = 'cardImage___childCommunityYaml___goToSection___blogButtonText',
-  CardImageChildCommunityYamlGoToSectionDiscussionButtonHref = 'cardImage___childCommunityYaml___goToSection___discussionButtonHref',
-  CardImageChildCommunityYamlGoToSectionDiscussionButtonText = 'cardImage___childCommunityYaml___goToSection___discussionButtonText',
-  CardImageChildCommunityYamlGoToSectionDiscussionLabel = 'cardImage___childCommunityYaml___goToSection___discussionLabel',
-  CardImageChildCommunityYamlGoToSectionBlogLabel = 'cardImage___childCommunityYaml___goToSection___blogLabel',
-  CardImageChildCommunityYamlGoToSectionVideoButtonHref = 'cardImage___childCommunityYaml___goToSection___videoButtonHref',
-  CardImageChildCommunityYamlGoToSectionVideoLabel = 'cardImage___childCommunityYaml___goToSection___videoLabel',
-  CardImageChildCommunityYamlGoToSectionVideoButtonText = 'cardImage___childCommunityYaml___goToSection___videoButtonText',
-  CardImageChildCommunityYamlGoToSectionBlogButtonHref = 'cardImage___childCommunityYaml___goToSection___blogButtonHref',
-  CardImageChildCommunityYamlCollectiveSectionTitle = 'cardImage___childCommunityYaml___collectiveSection___title',
-  CardImageChildCommunityYamlCollectiveSectionBody = 'cardImage___childCommunityYaml___collectiveSection___body',
-  CardImageChildCommunityYamlCollectiveSectionButtonText = 'cardImage___childCommunityYaml___collectiveSection___buttonText',
-  CardImageChildCommunityYamlCollectiveSectionSignupFormUrl = 'cardImage___childCommunityYaml___collectiveSection___signupFormUrl',
-  CardImageChildCommunityYamlCollaborateSectionHeader = 'cardImage___childCommunityYaml___collaborateSection___header',
-  CardImageChildCommunityYamlCollaborateSectionBody = 'cardImage___childCommunityYaml___collaborateSection___body',
-  CardImageChildCommunityYamlCollaborateSectionCards = 'cardImage___childCommunityYaml___collaborateSection___cards',
-  CardImageChildCommunityYamlFileAbsolutePath = 'cardImage___childCommunityYaml___fileAbsolutePath',
   CardImageChildCaseStudiesYamlId = 'cardImage___childCaseStudiesYaml___id',
   CardImageChildCaseStudiesYamlParentId = 'cardImage___childCaseStudiesYaml___parent___id',
   CardImageChildCaseStudiesYamlParentChildren = 'cardImage___childCaseStudiesYaml___parent___children',
@@ -763,46 +723,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   CardImageChildCaseStudiesYamlCaseStudiesHeader = 'cardImage___childCaseStudiesYaml___caseStudies___header',
   CardImageChildCaseStudiesYamlCaseStudiesView = 'cardImage___childCaseStudiesYaml___caseStudies___view',
   CardImageChildCaseStudiesYamlFileAbsolutePath = 'cardImage___childCaseStudiesYaml___fileAbsolutePath',
-  CardImageChildDevelopersYamlId = 'cardImage___childDevelopersYaml___id',
-  CardImageChildDevelopersYamlParentId = 'cardImage___childDevelopersYaml___parent___id',
-  CardImageChildDevelopersYamlParentChildren = 'cardImage___childDevelopersYaml___parent___children',
-  CardImageChildDevelopersYamlChildren = 'cardImage___childDevelopersYaml___children',
-  CardImageChildDevelopersYamlChildrenId = 'cardImage___childDevelopersYaml___children___id',
-  CardImageChildDevelopersYamlChildrenChildren = 'cardImage___childDevelopersYaml___children___children',
-  CardImageChildDevelopersYamlInternalContent = 'cardImage___childDevelopersYaml___internal___content',
-  CardImageChildDevelopersYamlInternalContentDigest = 'cardImage___childDevelopersYaml___internal___contentDigest',
-  CardImageChildDevelopersYamlInternalDescription = 'cardImage___childDevelopersYaml___internal___description',
-  CardImageChildDevelopersYamlInternalFieldOwners = 'cardImage___childDevelopersYaml___internal___fieldOwners',
-  CardImageChildDevelopersYamlInternalIgnoreType = 'cardImage___childDevelopersYaml___internal___ignoreType',
-  CardImageChildDevelopersYamlInternalMediaType = 'cardImage___childDevelopersYaml___internal___mediaType',
-  CardImageChildDevelopersYamlInternalOwner = 'cardImage___childDevelopersYaml___internal___owner',
-  CardImageChildDevelopersYamlInternalType = 'cardImage___childDevelopersYaml___internal___type',
-  CardImageChildDevelopersYamlTopSectionHeader = 'cardImage___childDevelopersYaml___topSection___header',
-  CardImageChildDevelopersYamlTopSectionBody = 'cardImage___childDevelopersYaml___topSection___body',
-  CardImageChildDevelopersYamlApproachSectionCaption = 'cardImage___childDevelopersYaml___approachSection___caption',
-  CardImageChildDevelopersYamlApproachSectionHeader = 'cardImage___childDevelopersYaml___approachSection___header',
-  CardImageChildDevelopersYamlApproachSectionBody = 'cardImage___childDevelopersYaml___approachSection___body',
-  CardImageChildDevelopersYamlInvolvedSectionHeader = 'cardImage___childDevelopersYaml___involvedSection___header',
-  CardImageChildDevelopersYamlLedgerSectionHeader = 'cardImage___childDevelopersYaml___ledgerSection___header',
-  CardImageChildDevelopersYamlLedgerSectionBody = 'cardImage___childDevelopersYaml___ledgerSection___body',
-  CardImageChildDevelopersYamlOpenAgSectionHeader = 'cardImage___childDevelopersYaml___openAgSection___header',
-  CardImageChildDevelopersYamlOpenAgSectionBody = 'cardImage___childDevelopersYaml___openAgSection___body',
-  CardImageChildDevelopersYamlConnectSectionHeader = 'cardImage___childDevelopersYaml___connectSection___header',
-  CardImageChildDevelopersYamlCareersSectionCaption = 'cardImage___childDevelopersYaml___careersSection___caption',
-  CardImageChildDevelopersYamlCareersSectionHeader = 'cardImage___childDevelopersYaml___careersSection___header',
-  CardImageChildDevelopersYamlCareersSectionBody = 'cardImage___childDevelopersYaml___careersSection___body',
-  CardImageChildDevelopersYamlCareersSectionButtonLink = 'cardImage___childDevelopersYaml___careersSection___buttonLink',
-  CardImageChildDevelopersYamlCareersSectionButtonText = 'cardImage___childDevelopersYaml___careersSection___buttonText',
-  CardImageChildDevelopersYamlTestnetSectionRightColumnLabel = 'cardImage___childDevelopersYaml___testnetSection___rightColumnLabel',
-  CardImageChildDevelopersYamlTestnetSectionRightColumnContent = 'cardImage___childDevelopersYaml___testnetSection___rightColumnContent',
-  CardImageChildDevelopersYamlTestnetSectionButtonLink = 'cardImage___childDevelopersYaml___testnetSection___buttonLink',
-  CardImageChildDevelopersYamlTestnetSectionHeader = 'cardImage___childDevelopersYaml___testnetSection___header',
-  CardImageChildDevelopersYamlTestnetSectionAddress = 'cardImage___childDevelopersYaml___testnetSection___address',
-  CardImageChildDevelopersYamlTestnetSectionLeftColumnLabel = 'cardImage___childDevelopersYaml___testnetSection___leftColumnLabel',
-  CardImageChildDevelopersYamlTestnetSectionLeftColumnContent = 'cardImage___childDevelopersYaml___testnetSection___leftColumnContent',
-  CardImageChildDevelopersYamlTestnetSectionDescription = 'cardImage___childDevelopersYaml___testnetSection___description',
-  CardImageChildDevelopersYamlTestnetSectionButtonText = 'cardImage___childDevelopersYaml___testnetSection___buttonText',
-  CardImageChildDevelopersYamlFileAbsolutePath = 'cardImage___childDevelopersYaml___fileAbsolutePath',
   CardImageChildCaseStudyItemsYamlId = 'cardImage___childCaseStudyItemsYaml___id',
   CardImageChildCaseStudyItemsYamlParentId = 'cardImage___childCaseStudyItemsYaml___parent___id',
   CardImageChildCaseStudyItemsYamlParentChildren = 'cardImage___childCaseStudyItemsYaml___parent___children',
@@ -900,13 +820,13 @@ export enum CaseStudyItemsYamlFieldsEnum {
   CardImageChildCaseStudyItemsYamlAboutSectionLineWidth = 'cardImage___childCaseStudyItemsYaml___aboutSection___lineWidth',
   CardImageChildCaseStudyItemsYamlContextSectionDescription = 'cardImage___childCaseStudyItemsYaml___contextSection___description',
   CardImageChildCaseStudyItemsYamlContextSectionChallenges = 'cardImage___childCaseStudyItemsYaml___contextSection___challenges',
-  CardImageChildCaseStudyItemsYamlApproachSectionDescription = 'cardImage___childCaseStudyItemsYaml___approachSection___description',
   CardImageChildCaseStudyItemsYamlApproachSectionDetails = 'cardImage___childCaseStudyItemsYaml___approachSection___details',
   CardImageChildCaseStudyItemsYamlApproachSectionResults = 'cardImage___childCaseStudyItemsYaml___approachSection___results',
   CardImageChildCaseStudyItemsYamlApproachSectionNext = 'cardImage___childCaseStudyItemsYaml___approachSection___next',
   CardImageChildCaseStudyItemsYamlApproachSectionFigureTitle = 'cardImage___childCaseStudyItemsYaml___approachSection___figureTitle',
-  CardImageChildCaseStudyItemsYamlFigureSectionTitle = 'cardImage___childCaseStudyItemsYaml___figureSection___title',
+  CardImageChildCaseStudyItemsYamlApproachSectionDescription = 'cardImage___childCaseStudyItemsYaml___approachSection___description',
   CardImageChildCaseStudyItemsYamlFigureSectionFigures = 'cardImage___childCaseStudyItemsYaml___figureSection___figures',
+  CardImageChildCaseStudyItemsYamlFigureSectionTitle = 'cardImage___childCaseStudyItemsYaml___figureSection___title',
   CardImageChildCaseStudyItemsYamlFundingSectionDetails = 'cardImage___childCaseStudyItemsYaml___fundingSection___details',
   CardImageChildCaseStudyItemsYamlFundingSectionResults = 'cardImage___childCaseStudyItemsYaml___fundingSection___results',
   CardImageChildCaseStudyItemsYamlFundingSectionNext = 'cardImage___childCaseStudyItemsYaml___fundingSection___next',
@@ -914,35 +834,86 @@ export enum CaseStudyItemsYamlFieldsEnum {
   CardImageChildCaseStudyItemsYamlConclusionSectionImages = 'cardImage___childCaseStudyItemsYaml___conclusionSection___images',
   CardImageChildCaseStudyItemsYamlBottomSectionQuote = 'cardImage___childCaseStudyItemsYaml___bottomSection___quote',
   CardImageChildCaseStudyItemsYamlFileAbsolutePath = 'cardImage___childCaseStudyItemsYaml___fileAbsolutePath',
-  CardImageChildHomeYamlId = 'cardImage___childHomeYaml___id',
-  CardImageChildHomeYamlParentId = 'cardImage___childHomeYaml___parent___id',
-  CardImageChildHomeYamlParentChildren = 'cardImage___childHomeYaml___parent___children',
-  CardImageChildHomeYamlChildren = 'cardImage___childHomeYaml___children',
-  CardImageChildHomeYamlChildrenId = 'cardImage___childHomeYaml___children___id',
-  CardImageChildHomeYamlChildrenChildren = 'cardImage___childHomeYaml___children___children',
-  CardImageChildHomeYamlInternalContent = 'cardImage___childHomeYaml___internal___content',
-  CardImageChildHomeYamlInternalContentDigest = 'cardImage___childHomeYaml___internal___contentDigest',
-  CardImageChildHomeYamlInternalDescription = 'cardImage___childHomeYaml___internal___description',
-  CardImageChildHomeYamlInternalFieldOwners = 'cardImage___childHomeYaml___internal___fieldOwners',
-  CardImageChildHomeYamlInternalIgnoreType = 'cardImage___childHomeYaml___internal___ignoreType',
-  CardImageChildHomeYamlInternalMediaType = 'cardImage___childHomeYaml___internal___mediaType',
-  CardImageChildHomeYamlInternalOwner = 'cardImage___childHomeYaml___internal___owner',
-  CardImageChildHomeYamlInternalType = 'cardImage___childHomeYaml___internal___type',
-  CardImageChildHomeYamlFoldSectionTagline = 'cardImage___childHomeYaml___foldSection___tagline',
-  CardImageChildHomeYamlFoldSectionDescription = 'cardImage___childHomeYaml___foldSection___description',
-  CardImageChildHomeYamlMarketplaceSectionHeader = 'cardImage___childHomeYaml___marketplaceSection___header',
-  CardImageChildHomeYamlMarketplaceSectionTooltip = 'cardImage___childHomeYaml___marketplaceSection___tooltip',
-  CardImageChildHomeYamlMarketplaceSectionCallToActions = 'cardImage___childHomeYaml___marketplaceSection___callToActions',
-  CardImageChildHomeYamlClimateSectionHeader = 'cardImage___childHomeYaml___climateSection___header',
-  CardImageChildHomeYamlClimateSectionDescription = 'cardImage___childHomeYaml___climateSection___description',
-  CardImageChildHomeYamlCarbonPlusSectionHeader = 'cardImage___childHomeYaml___carbonPlusSection___header',
-  CardImageChildHomeYamlCarbonPlusSectionDescription = 'cardImage___childHomeYaml___carbonPlusSection___description',
-  CardImageChildHomeYamlCarbonPlusSectionLinkText = 'cardImage___childHomeYaml___carbonPlusSection___linkText',
-  CardImageChildHomeYamlCarbonPlusSectionLinkUrl = 'cardImage___childHomeYaml___carbonPlusSection___linkUrl',
-  CardImageChildHomeYamlLedgerSectionDescription = 'cardImage___childHomeYaml___ledgerSection___description',
-  CardImageChildHomeYamlValuesSectionHeader = 'cardImage___childHomeYaml___valuesSection___header',
-  CardImageChildHomeYamlValuesSectionImageItems = 'cardImage___childHomeYaml___valuesSection___imageItems',
-  CardImageChildHomeYamlFileAbsolutePath = 'cardImage___childHomeYaml___fileAbsolutePath',
+  CardImageChildDevelopersYamlId = 'cardImage___childDevelopersYaml___id',
+  CardImageChildDevelopersYamlParentId = 'cardImage___childDevelopersYaml___parent___id',
+  CardImageChildDevelopersYamlParentChildren = 'cardImage___childDevelopersYaml___parent___children',
+  CardImageChildDevelopersYamlChildren = 'cardImage___childDevelopersYaml___children',
+  CardImageChildDevelopersYamlChildrenId = 'cardImage___childDevelopersYaml___children___id',
+  CardImageChildDevelopersYamlChildrenChildren = 'cardImage___childDevelopersYaml___children___children',
+  CardImageChildDevelopersYamlInternalContent = 'cardImage___childDevelopersYaml___internal___content',
+  CardImageChildDevelopersYamlInternalContentDigest = 'cardImage___childDevelopersYaml___internal___contentDigest',
+  CardImageChildDevelopersYamlInternalDescription = 'cardImage___childDevelopersYaml___internal___description',
+  CardImageChildDevelopersYamlInternalFieldOwners = 'cardImage___childDevelopersYaml___internal___fieldOwners',
+  CardImageChildDevelopersYamlInternalIgnoreType = 'cardImage___childDevelopersYaml___internal___ignoreType',
+  CardImageChildDevelopersYamlInternalMediaType = 'cardImage___childDevelopersYaml___internal___mediaType',
+  CardImageChildDevelopersYamlInternalOwner = 'cardImage___childDevelopersYaml___internal___owner',
+  CardImageChildDevelopersYamlInternalType = 'cardImage___childDevelopersYaml___internal___type',
+  CardImageChildDevelopersYamlTopSectionHeader = 'cardImage___childDevelopersYaml___topSection___header',
+  CardImageChildDevelopersYamlTopSectionBody = 'cardImage___childDevelopersYaml___topSection___body',
+  CardImageChildDevelopersYamlApproachSectionCaption = 'cardImage___childDevelopersYaml___approachSection___caption',
+  CardImageChildDevelopersYamlApproachSectionHeader = 'cardImage___childDevelopersYaml___approachSection___header',
+  CardImageChildDevelopersYamlApproachSectionBody = 'cardImage___childDevelopersYaml___approachSection___body',
+  CardImageChildDevelopersYamlInvolvedSectionHeader = 'cardImage___childDevelopersYaml___involvedSection___header',
+  CardImageChildDevelopersYamlLedgerSectionHeader = 'cardImage___childDevelopersYaml___ledgerSection___header',
+  CardImageChildDevelopersYamlLedgerSectionBody = 'cardImage___childDevelopersYaml___ledgerSection___body',
+  CardImageChildDevelopersYamlOpenAgSectionHeader = 'cardImage___childDevelopersYaml___openAgSection___header',
+  CardImageChildDevelopersYamlOpenAgSectionBody = 'cardImage___childDevelopersYaml___openAgSection___body',
+  CardImageChildDevelopersYamlConnectSectionHeader = 'cardImage___childDevelopersYaml___connectSection___header',
+  CardImageChildDevelopersYamlCareersSectionCaption = 'cardImage___childDevelopersYaml___careersSection___caption',
+  CardImageChildDevelopersYamlCareersSectionHeader = 'cardImage___childDevelopersYaml___careersSection___header',
+  CardImageChildDevelopersYamlCareersSectionBody = 'cardImage___childDevelopersYaml___careersSection___body',
+  CardImageChildDevelopersYamlCareersSectionButtonLink = 'cardImage___childDevelopersYaml___careersSection___buttonLink',
+  CardImageChildDevelopersYamlCareersSectionButtonText = 'cardImage___childDevelopersYaml___careersSection___buttonText',
+  CardImageChildDevelopersYamlTestnetSectionRightColumnLabel = 'cardImage___childDevelopersYaml___testnetSection___rightColumnLabel',
+  CardImageChildDevelopersYamlTestnetSectionRightColumnContent = 'cardImage___childDevelopersYaml___testnetSection___rightColumnContent',
+  CardImageChildDevelopersYamlTestnetSectionButtonLink = 'cardImage___childDevelopersYaml___testnetSection___buttonLink',
+  CardImageChildDevelopersYamlTestnetSectionHeader = 'cardImage___childDevelopersYaml___testnetSection___header',
+  CardImageChildDevelopersYamlTestnetSectionAddress = 'cardImage___childDevelopersYaml___testnetSection___address',
+  CardImageChildDevelopersYamlTestnetSectionLeftColumnLabel = 'cardImage___childDevelopersYaml___testnetSection___leftColumnLabel',
+  CardImageChildDevelopersYamlTestnetSectionLeftColumnContent = 'cardImage___childDevelopersYaml___testnetSection___leftColumnContent',
+  CardImageChildDevelopersYamlTestnetSectionDescription = 'cardImage___childDevelopersYaml___testnetSection___description',
+  CardImageChildDevelopersYamlTestnetSectionButtonText = 'cardImage___childDevelopersYaml___testnetSection___buttonText',
+  CardImageChildDevelopersYamlFileAbsolutePath = 'cardImage___childDevelopersYaml___fileAbsolutePath',
+  CardImageChildCommunityYamlId = 'cardImage___childCommunityYaml___id',
+  CardImageChildCommunityYamlParentId = 'cardImage___childCommunityYaml___parent___id',
+  CardImageChildCommunityYamlParentChildren = 'cardImage___childCommunityYaml___parent___children',
+  CardImageChildCommunityYamlChildren = 'cardImage___childCommunityYaml___children',
+  CardImageChildCommunityYamlChildrenId = 'cardImage___childCommunityYaml___children___id',
+  CardImageChildCommunityYamlChildrenChildren = 'cardImage___childCommunityYaml___children___children',
+  CardImageChildCommunityYamlInternalContent = 'cardImage___childCommunityYaml___internal___content',
+  CardImageChildCommunityYamlInternalContentDigest = 'cardImage___childCommunityYaml___internal___contentDigest',
+  CardImageChildCommunityYamlInternalDescription = 'cardImage___childCommunityYaml___internal___description',
+  CardImageChildCommunityYamlInternalFieldOwners = 'cardImage___childCommunityYaml___internal___fieldOwners',
+  CardImageChildCommunityYamlInternalIgnoreType = 'cardImage___childCommunityYaml___internal___ignoreType',
+  CardImageChildCommunityYamlInternalMediaType = 'cardImage___childCommunityYaml___internal___mediaType',
+  CardImageChildCommunityYamlInternalOwner = 'cardImage___childCommunityYaml___internal___owner',
+  CardImageChildCommunityYamlInternalType = 'cardImage___childCommunityYaml___internal___type',
+  CardImageChildCommunityYamlTopSectionHeader = 'cardImage___childCommunityYaml___topSection___header',
+  CardImageChildCommunityYamlTopSectionBody = 'cardImage___childCommunityYaml___topSection___body',
+  CardImageChildCommunityYamlConnectSectionHeader = 'cardImage___childCommunityYaml___connectSection___header',
+  CardImageChildCommunityYamlConnectSectionTelegramSubLabel = 'cardImage___childCommunityYaml___connectSection___telegramSubLabel',
+  CardImageChildCommunityYamlConnectSectionTelegramUrl = 'cardImage___childCommunityYaml___connectSection___telegramUrl',
+  CardImageChildCommunityYamlConnectSectionTwitterSubLabel = 'cardImage___childCommunityYaml___connectSection___twitterSubLabel',
+  CardImageChildCommunityYamlConnectSectionTwitterUrl = 'cardImage___childCommunityYaml___connectSection___twitterUrl',
+  CardImageChildCommunityYamlConnectSectionDiscordSubLabel = 'cardImage___childCommunityYaml___connectSection___discordSubLabel',
+  CardImageChildCommunityYamlConnectSectionDiscordUrl = 'cardImage___childCommunityYaml___connectSection___discordUrl',
+  CardImageChildCommunityYamlGoToSectionBlogButtonText = 'cardImage___childCommunityYaml___goToSection___blogButtonText',
+  CardImageChildCommunityYamlGoToSectionDiscussionButtonHref = 'cardImage___childCommunityYaml___goToSection___discussionButtonHref',
+  CardImageChildCommunityYamlGoToSectionDiscussionButtonText = 'cardImage___childCommunityYaml___goToSection___discussionButtonText',
+  CardImageChildCommunityYamlGoToSectionDiscussionLabel = 'cardImage___childCommunityYaml___goToSection___discussionLabel',
+  CardImageChildCommunityYamlGoToSectionBlogLabel = 'cardImage___childCommunityYaml___goToSection___blogLabel',
+  CardImageChildCommunityYamlGoToSectionVideoButtonHref = 'cardImage___childCommunityYaml___goToSection___videoButtonHref',
+  CardImageChildCommunityYamlGoToSectionVideoLabel = 'cardImage___childCommunityYaml___goToSection___videoLabel',
+  CardImageChildCommunityYamlGoToSectionVideoButtonText = 'cardImage___childCommunityYaml___goToSection___videoButtonText',
+  CardImageChildCommunityYamlGoToSectionBlogButtonHref = 'cardImage___childCommunityYaml___goToSection___blogButtonHref',
+  CardImageChildCommunityYamlCollectiveSectionTitle = 'cardImage___childCommunityYaml___collectiveSection___title',
+  CardImageChildCommunityYamlCollectiveSectionBody = 'cardImage___childCommunityYaml___collectiveSection___body',
+  CardImageChildCommunityYamlCollectiveSectionButtonText = 'cardImage___childCommunityYaml___collectiveSection___buttonText',
+  CardImageChildCommunityYamlCollectiveSectionSignupFormUrl = 'cardImage___childCommunityYaml___collectiveSection___signupFormUrl',
+  CardImageChildCommunityYamlCollaborateSectionHeader = 'cardImage___childCommunityYaml___collaborateSection___header',
+  CardImageChildCommunityYamlCollaborateSectionBody = 'cardImage___childCommunityYaml___collaborateSection___body',
+  CardImageChildCommunityYamlCollaborateSectionCards = 'cardImage___childCommunityYaml___collaborateSection___cards',
+  CardImageChildCommunityYamlFileAbsolutePath = 'cardImage___childCommunityYaml___fileAbsolutePath',
   CardImageChildContactYamlId = 'cardImage___childContactYaml___id',
   CardImageChildContactYamlParentId = 'cardImage___childContactYaml___parent___id',
   CardImageChildContactYamlParentChildren = 'cardImage___childContactYaml___parent___children',
@@ -967,24 +938,68 @@ export enum CaseStudyItemsYamlFieldsEnum {
   CardImageChildContactYamlEmailBody = 'cardImage___childContactYaml___email___body',
   CardImageChildContactYamlFaqHeader = 'cardImage___childContactYaml___faq___header',
   CardImageChildContactYamlFileAbsolutePath = 'cardImage___childContactYaml___fileAbsolutePath',
-  CardImageChildFaqYamlId = 'cardImage___childFaqYaml___id',
-  CardImageChildFaqYamlParentId = 'cardImage___childFaqYaml___parent___id',
-  CardImageChildFaqYamlParentChildren = 'cardImage___childFaqYaml___parent___children',
-  CardImageChildFaqYamlChildren = 'cardImage___childFaqYaml___children',
-  CardImageChildFaqYamlChildrenId = 'cardImage___childFaqYaml___children___id',
-  CardImageChildFaqYamlChildrenChildren = 'cardImage___childFaqYaml___children___children',
-  CardImageChildFaqYamlInternalContent = 'cardImage___childFaqYaml___internal___content',
-  CardImageChildFaqYamlInternalContentDigest = 'cardImage___childFaqYaml___internal___contentDigest',
-  CardImageChildFaqYamlInternalDescription = 'cardImage___childFaqYaml___internal___description',
-  CardImageChildFaqYamlInternalFieldOwners = 'cardImage___childFaqYaml___internal___fieldOwners',
-  CardImageChildFaqYamlInternalIgnoreType = 'cardImage___childFaqYaml___internal___ignoreType',
-  CardImageChildFaqYamlInternalMediaType = 'cardImage___childFaqYaml___internal___mediaType',
-  CardImageChildFaqYamlInternalOwner = 'cardImage___childFaqYaml___internal___owner',
-  CardImageChildFaqYamlInternalType = 'cardImage___childFaqYaml___internal___type',
-  CardImageChildFaqYamlCategories = 'cardImage___childFaqYaml___categories',
-  CardImageChildFaqYamlCategoriesHeader = 'cardImage___childFaqYaml___categories___header',
-  CardImageChildFaqYamlCategoriesQuestions = 'cardImage___childFaqYaml___categories___questions',
-  CardImageChildFaqYamlFileAbsolutePath = 'cardImage___childFaqYaml___fileAbsolutePath',
+  CardImageChildPressKitYamlId = 'cardImage___childPressKitYaml___id',
+  CardImageChildPressKitYamlParentId = 'cardImage___childPressKitYaml___parent___id',
+  CardImageChildPressKitYamlParentChildren = 'cardImage___childPressKitYaml___parent___children',
+  CardImageChildPressKitYamlChildren = 'cardImage___childPressKitYaml___children',
+  CardImageChildPressKitYamlChildrenId = 'cardImage___childPressKitYaml___children___id',
+  CardImageChildPressKitYamlChildrenChildren = 'cardImage___childPressKitYaml___children___children',
+  CardImageChildPressKitYamlInternalContent = 'cardImage___childPressKitYaml___internal___content',
+  CardImageChildPressKitYamlInternalContentDigest = 'cardImage___childPressKitYaml___internal___contentDigest',
+  CardImageChildPressKitYamlInternalDescription = 'cardImage___childPressKitYaml___internal___description',
+  CardImageChildPressKitYamlInternalFieldOwners = 'cardImage___childPressKitYaml___internal___fieldOwners',
+  CardImageChildPressKitYamlInternalIgnoreType = 'cardImage___childPressKitYaml___internal___ignoreType',
+  CardImageChildPressKitYamlInternalMediaType = 'cardImage___childPressKitYaml___internal___mediaType',
+  CardImageChildPressKitYamlInternalOwner = 'cardImage___childPressKitYaml___internal___owner',
+  CardImageChildPressKitYamlInternalType = 'cardImage___childPressKitYaml___internal___type',
+  CardImageChildPressKitYamlTopSectionHeader = 'cardImage___childPressKitYaml___topSection___header',
+  CardImageChildPressKitYamlTopSectionBody = 'cardImage___childPressKitYaml___topSection___body',
+  CardImageChildPressKitYamlTitleDescriptionSectionHeader = 'cardImage___childPressKitYaml___titleDescriptionSection___header',
+  CardImageChildPressKitYamlTitleDescriptionSectionDescription = 'cardImage___childPressKitYaml___titleDescriptionSection___description',
+  CardImageChildPressKitYamlEnableSectionHeader = 'cardImage___childPressKitYaml___enableSection___header',
+  CardImageChildPressKitYamlEnableSectionDescription = 'cardImage___childPressKitYaml___enableSection___description',
+  CardImageChildPressKitYamlTimelineSectionHeader = 'cardImage___childPressKitYaml___timelineSection___header',
+  CardImageChildPressKitYamlTimelineSectionDescription = 'cardImage___childPressKitYaml___timelineSection___description',
+  CardImageChildPressKitYamlTimelineSectionCompletedItemIndex = 'cardImage___childPressKitYaml___timelineSection___completedItemIndex',
+  CardImageChildPressKitYamlTimelineSectionItems = 'cardImage___childPressKitYaml___timelineSection___items',
+  CardImageChildPressKitYamlTeamSectionHeader = 'cardImage___childPressKitYaml___teamSection___header',
+  CardImageChildPressKitYamlTeamSectionButtonText = 'cardImage___childPressKitYaml___teamSection___buttonText',
+  CardImageChildPressKitYamlTeamSectionMembers = 'cardImage___childPressKitYaml___teamSection___members',
+  CardImageChildPressKitYamlFeaturedSectionHeader = 'cardImage___childPressKitYaml___featuredSection___header',
+  CardImageChildPressKitYamlFeaturedSectionArticles = 'cardImage___childPressKitYaml___featuredSection___articles',
+  CardImageChildPressKitYamlAwardsSectionHeader = 'cardImage___childPressKitYaml___awardsSection___header',
+  CardImageChildPressKitYamlAwardsSectionItems = 'cardImage___childPressKitYaml___awardsSection___items',
+  CardImageChildPressKitYamlLogosSectionHeader = 'cardImage___childPressKitYaml___logosSection___header',
+  CardImageChildPressKitYamlLogosSectionButtonText = 'cardImage___childPressKitYaml___logosSection___buttonText',
+  CardImageChildPressKitYamlLogosSectionButtonLink = 'cardImage___childPressKitYaml___logosSection___buttonLink',
+  CardImageChildPressKitYamlConnectSectionHeader = 'cardImage___childPressKitYaml___connectSection___header',
+  CardImageChildPressKitYamlPhotosSectionHeader = 'cardImage___childPressKitYaml___photosSection___header',
+  CardImageChildPressKitYamlPhotosSectionPhotos = 'cardImage___childPressKitYaml___photosSection___photos',
+  CardImageChildPressKitYamlFileAbsolutePath = 'cardImage___childPressKitYaml___fileAbsolutePath',
+  CardImageChildFundYamlId = 'cardImage___childFundYaml___id',
+  CardImageChildFundYamlParentId = 'cardImage___childFundYaml___parent___id',
+  CardImageChildFundYamlParentChildren = 'cardImage___childFundYaml___parent___children',
+  CardImageChildFundYamlChildren = 'cardImage___childFundYaml___children',
+  CardImageChildFundYamlChildrenId = 'cardImage___childFundYaml___children___id',
+  CardImageChildFundYamlChildrenChildren = 'cardImage___childFundYaml___children___children',
+  CardImageChildFundYamlInternalContent = 'cardImage___childFundYaml___internal___content',
+  CardImageChildFundYamlInternalContentDigest = 'cardImage___childFundYaml___internal___contentDigest',
+  CardImageChildFundYamlInternalDescription = 'cardImage___childFundYaml___internal___description',
+  CardImageChildFundYamlInternalFieldOwners = 'cardImage___childFundYaml___internal___fieldOwners',
+  CardImageChildFundYamlInternalIgnoreType = 'cardImage___childFundYaml___internal___ignoreType',
+  CardImageChildFundYamlInternalMediaType = 'cardImage___childFundYaml___internal___mediaType',
+  CardImageChildFundYamlInternalOwner = 'cardImage___childFundYaml___internal___owner',
+  CardImageChildFundYamlInternalType = 'cardImage___childFundYaml___internal___type',
+  CardImageChildFundYamlSeoTitle = 'cardImage___childFundYaml___seo___title',
+  CardImageChildFundYamlSeoDescription = 'cardImage___childFundYaml___seo___description',
+  CardImageChildFundYamlTopSectionHeader = 'cardImage___childFundYaml___topSection___header',
+  CardImageChildFundYamlTopSectionBody = 'cardImage___childFundYaml___topSection___body',
+  CardImageChildFundYamlFoldSectionTitle = 'cardImage___childFundYaml___foldSection___title',
+  CardImageChildFundYamlFoldSectionBody = 'cardImage___childFundYaml___foldSection___body',
+  CardImageChildFundYamlThesisSectionTitle = 'cardImage___childFundYaml___thesisSection___title',
+  CardImageChildFundYamlThesisSectionBody = 'cardImage___childFundYaml___thesisSection___body',
+  CardImageChildFundYamlCalltoActionSectionCallToActions = 'cardImage___childFundYaml___calltoActionSection___callToActions',
+  CardImageChildFundYamlFileAbsolutePath = 'cardImage___childFundYaml___fileAbsolutePath',
   CardImageChildInvestYamlId = 'cardImage___childInvestYaml___id',
   CardImageChildInvestYamlParentId = 'cardImage___childInvestYaml___parent___id',
   CardImageChildInvestYamlParentChildren = 'cardImage___childInvestYaml___parent___children',
@@ -1026,6 +1041,24 @@ export enum CaseStudyItemsYamlFieldsEnum {
   CardImageChildMainnetYamlWhatsNextSectionDescription = 'cardImage___childMainnetYaml___whatsNextSection___description',
   CardImageChildMainnetYamlWhatsNextSectionInfoItems = 'cardImage___childMainnetYaml___whatsNextSection___infoItems',
   CardImageChildMainnetYamlFileAbsolutePath = 'cardImage___childMainnetYaml___fileAbsolutePath',
+  CardImageChildFaqYamlId = 'cardImage___childFaqYaml___id',
+  CardImageChildFaqYamlParentId = 'cardImage___childFaqYaml___parent___id',
+  CardImageChildFaqYamlParentChildren = 'cardImage___childFaqYaml___parent___children',
+  CardImageChildFaqYamlChildren = 'cardImage___childFaqYaml___children',
+  CardImageChildFaqYamlChildrenId = 'cardImage___childFaqYaml___children___id',
+  CardImageChildFaqYamlChildrenChildren = 'cardImage___childFaqYaml___children___children',
+  CardImageChildFaqYamlInternalContent = 'cardImage___childFaqYaml___internal___content',
+  CardImageChildFaqYamlInternalContentDigest = 'cardImage___childFaqYaml___internal___contentDigest',
+  CardImageChildFaqYamlInternalDescription = 'cardImage___childFaqYaml___internal___description',
+  CardImageChildFaqYamlInternalFieldOwners = 'cardImage___childFaqYaml___internal___fieldOwners',
+  CardImageChildFaqYamlInternalIgnoreType = 'cardImage___childFaqYaml___internal___ignoreType',
+  CardImageChildFaqYamlInternalMediaType = 'cardImage___childFaqYaml___internal___mediaType',
+  CardImageChildFaqYamlInternalOwner = 'cardImage___childFaqYaml___internal___owner',
+  CardImageChildFaqYamlInternalType = 'cardImage___childFaqYaml___internal___type',
+  CardImageChildFaqYamlCategories = 'cardImage___childFaqYaml___categories',
+  CardImageChildFaqYamlCategoriesHeader = 'cardImage___childFaqYaml___categories___header',
+  CardImageChildFaqYamlCategoriesQuestions = 'cardImage___childFaqYaml___categories___questions',
+  CardImageChildFaqYamlFileAbsolutePath = 'cardImage___childFaqYaml___fileAbsolutePath',
   CardImageChildPartnersYamlId = 'cardImage___childPartnersYaml___id',
   CardImageChildPartnersYamlParentId = 'cardImage___childPartnersYaml___parent___id',
   CardImageChildPartnersYamlParentChildren = 'cardImage___childPartnersYaml___parent___children',
@@ -1046,116 +1079,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   CardImageChildPartnersYamlContactCardHeader = 'cardImage___childPartnersYaml___contactCard___header',
   CardImageChildPartnersYamlContactCardBody = 'cardImage___childPartnersYaml___contactCard___body',
   CardImageChildPartnersYamlFileAbsolutePath = 'cardImage___childPartnersYaml___fileAbsolutePath',
-  CardImageChildFundYamlId = 'cardImage___childFundYaml___id',
-  CardImageChildFundYamlParentId = 'cardImage___childFundYaml___parent___id',
-  CardImageChildFundYamlParentChildren = 'cardImage___childFundYaml___parent___children',
-  CardImageChildFundYamlChildren = 'cardImage___childFundYaml___children',
-  CardImageChildFundYamlChildrenId = 'cardImage___childFundYaml___children___id',
-  CardImageChildFundYamlChildrenChildren = 'cardImage___childFundYaml___children___children',
-  CardImageChildFundYamlInternalContent = 'cardImage___childFundYaml___internal___content',
-  CardImageChildFundYamlInternalContentDigest = 'cardImage___childFundYaml___internal___contentDigest',
-  CardImageChildFundYamlInternalDescription = 'cardImage___childFundYaml___internal___description',
-  CardImageChildFundYamlInternalFieldOwners = 'cardImage___childFundYaml___internal___fieldOwners',
-  CardImageChildFundYamlInternalIgnoreType = 'cardImage___childFundYaml___internal___ignoreType',
-  CardImageChildFundYamlInternalMediaType = 'cardImage___childFundYaml___internal___mediaType',
-  CardImageChildFundYamlInternalOwner = 'cardImage___childFundYaml___internal___owner',
-  CardImageChildFundYamlInternalType = 'cardImage___childFundYaml___internal___type',
-  CardImageChildFundYamlSeoTitle = 'cardImage___childFundYaml___seo___title',
-  CardImageChildFundYamlSeoDescription = 'cardImage___childFundYaml___seo___description',
-  CardImageChildFundYamlTopSectionHeader = 'cardImage___childFundYaml___topSection___header',
-  CardImageChildFundYamlTopSectionBody = 'cardImage___childFundYaml___topSection___body',
-  CardImageChildFundYamlFoldSectionTitle = 'cardImage___childFundYaml___foldSection___title',
-  CardImageChildFundYamlFoldSectionBody = 'cardImage___childFundYaml___foldSection___body',
-  CardImageChildFundYamlThesisSectionTitle = 'cardImage___childFundYaml___thesisSection___title',
-  CardImageChildFundYamlThesisSectionBody = 'cardImage___childFundYaml___thesisSection___body',
-  CardImageChildFundYamlCalltoActionSectionCallToActions = 'cardImage___childFundYaml___calltoActionSection___callToActions',
-  CardImageChildFundYamlFileAbsolutePath = 'cardImage___childFundYaml___fileAbsolutePath',
-  CardImageChildResourcesYamlId = 'cardImage___childResourcesYaml___id',
-  CardImageChildResourcesYamlParentId = 'cardImage___childResourcesYaml___parent___id',
-  CardImageChildResourcesYamlParentChildren = 'cardImage___childResourcesYaml___parent___children',
-  CardImageChildResourcesYamlChildren = 'cardImage___childResourcesYaml___children',
-  CardImageChildResourcesYamlChildrenId = 'cardImage___childResourcesYaml___children___id',
-  CardImageChildResourcesYamlChildrenChildren = 'cardImage___childResourcesYaml___children___children',
-  CardImageChildResourcesYamlInternalContent = 'cardImage___childResourcesYaml___internal___content',
-  CardImageChildResourcesYamlInternalContentDigest = 'cardImage___childResourcesYaml___internal___contentDigest',
-  CardImageChildResourcesYamlInternalDescription = 'cardImage___childResourcesYaml___internal___description',
-  CardImageChildResourcesYamlInternalFieldOwners = 'cardImage___childResourcesYaml___internal___fieldOwners',
-  CardImageChildResourcesYamlInternalIgnoreType = 'cardImage___childResourcesYaml___internal___ignoreType',
-  CardImageChildResourcesYamlInternalMediaType = 'cardImage___childResourcesYaml___internal___mediaType',
-  CardImageChildResourcesYamlInternalOwner = 'cardImage___childResourcesYaml___internal___owner',
-  CardImageChildResourcesYamlInternalType = 'cardImage___childResourcesYaml___internal___type',
-  CardImageChildResourcesYamlTopSectionHeader = 'cardImage___childResourcesYaml___topSection___header',
-  CardImageChildResourcesYamlTopSectionBody = 'cardImage___childResourcesYaml___topSection___body',
-  CardImageChildResourcesYamlRegistrySectionHeader = 'cardImage___childResourcesYaml___registrySection___header',
-  CardImageChildResourcesYamlRegistrySectionDocumentTableTitle = 'cardImage___childResourcesYaml___registrySection___documentTableTitle',
-  CardImageChildResourcesYamlRegistrySectionDocuments = 'cardImage___childResourcesYaml___registrySection___documents',
-  CardImageChildResourcesYamlRegistrySectionSubsections = 'cardImage___childResourcesYaml___registrySection___subsections',
-  CardImageChildResourcesYamlLedgerSectionHeader = 'cardImage___childResourcesYaml___ledgerSection___header',
-  CardImageChildResourcesYamlLedgerSectionCards = 'cardImage___childResourcesYaml___ledgerSection___cards',
-  CardImageChildResourcesYamlFileAbsolutePath = 'cardImage___childResourcesYaml___fileAbsolutePath',
-  CardImageChildPressKitYamlId = 'cardImage___childPressKitYaml___id',
-  CardImageChildPressKitYamlParentId = 'cardImage___childPressKitYaml___parent___id',
-  CardImageChildPressKitYamlParentChildren = 'cardImage___childPressKitYaml___parent___children',
-  CardImageChildPressKitYamlChildren = 'cardImage___childPressKitYaml___children',
-  CardImageChildPressKitYamlChildrenId = 'cardImage___childPressKitYaml___children___id',
-  CardImageChildPressKitYamlChildrenChildren = 'cardImage___childPressKitYaml___children___children',
-  CardImageChildPressKitYamlInternalContent = 'cardImage___childPressKitYaml___internal___content',
-  CardImageChildPressKitYamlInternalContentDigest = 'cardImage___childPressKitYaml___internal___contentDigest',
-  CardImageChildPressKitYamlInternalDescription = 'cardImage___childPressKitYaml___internal___description',
-  CardImageChildPressKitYamlInternalFieldOwners = 'cardImage___childPressKitYaml___internal___fieldOwners',
-  CardImageChildPressKitYamlInternalIgnoreType = 'cardImage___childPressKitYaml___internal___ignoreType',
-  CardImageChildPressKitYamlInternalMediaType = 'cardImage___childPressKitYaml___internal___mediaType',
-  CardImageChildPressKitYamlInternalOwner = 'cardImage___childPressKitYaml___internal___owner',
-  CardImageChildPressKitYamlInternalType = 'cardImage___childPressKitYaml___internal___type',
-  CardImageChildPressKitYamlTopSectionHeader = 'cardImage___childPressKitYaml___topSection___header',
-  CardImageChildPressKitYamlTopSectionBody = 'cardImage___childPressKitYaml___topSection___body',
-  CardImageChildPressKitYamlTitleDescriptionSectionHeader = 'cardImage___childPressKitYaml___titleDescriptionSection___header',
-  CardImageChildPressKitYamlTitleDescriptionSectionDescription = 'cardImage___childPressKitYaml___titleDescriptionSection___description',
-  CardImageChildPressKitYamlEnableSectionHeader = 'cardImage___childPressKitYaml___enableSection___header',
-  CardImageChildPressKitYamlEnableSectionDescription = 'cardImage___childPressKitYaml___enableSection___description',
-  CardImageChildPressKitYamlTimelineSectionHeader = 'cardImage___childPressKitYaml___timelineSection___header',
-  CardImageChildPressKitYamlTimelineSectionDescription = 'cardImage___childPressKitYaml___timelineSection___description',
-  CardImageChildPressKitYamlTimelineSectionCompletedItemIndex = 'cardImage___childPressKitYaml___timelineSection___completedItemIndex',
-  CardImageChildPressKitYamlTimelineSectionItems = 'cardImage___childPressKitYaml___timelineSection___items',
-  CardImageChildPressKitYamlTeamSectionHeader = 'cardImage___childPressKitYaml___teamSection___header',
-  CardImageChildPressKitYamlTeamSectionButtonText = 'cardImage___childPressKitYaml___teamSection___buttonText',
-  CardImageChildPressKitYamlTeamSectionMembers = 'cardImage___childPressKitYaml___teamSection___members',
-  CardImageChildPressKitYamlFeaturedSectionHeader = 'cardImage___childPressKitYaml___featuredSection___header',
-  CardImageChildPressKitYamlFeaturedSectionArticles = 'cardImage___childPressKitYaml___featuredSection___articles',
-  CardImageChildPressKitYamlAwardsSectionHeader = 'cardImage___childPressKitYaml___awardsSection___header',
-  CardImageChildPressKitYamlAwardsSectionItems = 'cardImage___childPressKitYaml___awardsSection___items',
-  CardImageChildPressKitYamlLogosSectionHeader = 'cardImage___childPressKitYaml___logosSection___header',
-  CardImageChildPressKitYamlLogosSectionButtonText = 'cardImage___childPressKitYaml___logosSection___buttonText',
-  CardImageChildPressKitYamlLogosSectionButtonLink = 'cardImage___childPressKitYaml___logosSection___buttonLink',
-  CardImageChildPressKitYamlConnectSectionHeader = 'cardImage___childPressKitYaml___connectSection___header',
-  CardImageChildPressKitYamlPhotosSectionHeader = 'cardImage___childPressKitYaml___photosSection___header',
-  CardImageChildPressKitYamlPhotosSectionPhotos = 'cardImage___childPressKitYaml___photosSection___photos',
-  CardImageChildPressKitYamlFileAbsolutePath = 'cardImage___childPressKitYaml___fileAbsolutePath',
-  CardImageChildSharedYamlId = 'cardImage___childSharedYaml___id',
-  CardImageChildSharedYamlParentId = 'cardImage___childSharedYaml___parent___id',
-  CardImageChildSharedYamlParentChildren = 'cardImage___childSharedYaml___parent___children',
-  CardImageChildSharedYamlChildren = 'cardImage___childSharedYaml___children',
-  CardImageChildSharedYamlChildrenId = 'cardImage___childSharedYaml___children___id',
-  CardImageChildSharedYamlChildrenChildren = 'cardImage___childSharedYaml___children___children',
-  CardImageChildSharedYamlInternalContent = 'cardImage___childSharedYaml___internal___content',
-  CardImageChildSharedYamlInternalContentDigest = 'cardImage___childSharedYaml___internal___contentDigest',
-  CardImageChildSharedYamlInternalDescription = 'cardImage___childSharedYaml___internal___description',
-  CardImageChildSharedYamlInternalFieldOwners = 'cardImage___childSharedYaml___internal___fieldOwners',
-  CardImageChildSharedYamlInternalIgnoreType = 'cardImage___childSharedYaml___internal___ignoreType',
-  CardImageChildSharedYamlInternalMediaType = 'cardImage___childSharedYaml___internal___mediaType',
-  CardImageChildSharedYamlInternalOwner = 'cardImage___childSharedYaml___internal___owner',
-  CardImageChildSharedYamlInternalType = 'cardImage___childSharedYaml___internal___type',
-  CardImageChildSharedYamlNewsletterSectionHeader = 'cardImage___childSharedYaml___newsletterSection___header',
-  CardImageChildSharedYamlNewsletterSectionDescription = 'cardImage___childSharedYaml___newsletterSection___description',
-  CardImageChildSharedYamlFeaturedSectionHeader = 'cardImage___childSharedYaml___featuredSection___header',
-  CardImageChildSharedYamlFeaturedSectionTitle = 'cardImage___childSharedYaml___featuredSection___title',
-  CardImageChildSharedYamlFeaturedSectionLink = 'cardImage___childSharedYaml___featuredSection___link',
-  CardImageChildSharedYamlFeaturedSectionDescription = 'cardImage___childSharedYaml___featuredSection___description',
-  CardImageChildSharedYamlBlogSectionHeader = 'cardImage___childSharedYaml___blogSection___header',
-  CardImageChildSharedYamlBlogSectionPosts = 'cardImage___childSharedYaml___blogSection___posts',
-  CardImageChildSharedYamlComingSoonSectionHeader = 'cardImage___childSharedYaml___comingSoonSection___header',
-  CardImageChildSharedYamlComingSoonSectionProjects = 'cardImage___childSharedYaml___comingSoonSection___projects',
-  CardImageChildSharedYamlFileAbsolutePath = 'cardImage___childSharedYaml___fileAbsolutePath',
   CardImageChildMediaYamlId = 'cardImage___childMediaYaml___id',
   CardImageChildMediaYamlParentId = 'cardImage___childMediaYaml___parent___id',
   CardImageChildMediaYamlParentChildren = 'cardImage___childMediaYaml___parent___children',
@@ -1177,34 +1100,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   CardImageChildMediaYamlCategoriesShowPlay = 'cardImage___childMediaYaml___categories___showPlay',
   CardImageChildMediaYamlCategoriesItems = 'cardImage___childMediaYaml___categories___items',
   CardImageChildMediaYamlFileAbsolutePath = 'cardImage___childMediaYaml___fileAbsolutePath',
-  CardImageChildScienceYamlId = 'cardImage___childScienceYaml___id',
-  CardImageChildScienceYamlParentId = 'cardImage___childScienceYaml___parent___id',
-  CardImageChildScienceYamlParentChildren = 'cardImage___childScienceYaml___parent___children',
-  CardImageChildScienceYamlChildren = 'cardImage___childScienceYaml___children',
-  CardImageChildScienceYamlChildrenId = 'cardImage___childScienceYaml___children___id',
-  CardImageChildScienceYamlChildrenChildren = 'cardImage___childScienceYaml___children___children',
-  CardImageChildScienceYamlInternalContent = 'cardImage___childScienceYaml___internal___content',
-  CardImageChildScienceYamlInternalContentDigest = 'cardImage___childScienceYaml___internal___contentDigest',
-  CardImageChildScienceYamlInternalDescription = 'cardImage___childScienceYaml___internal___description',
-  CardImageChildScienceYamlInternalFieldOwners = 'cardImage___childScienceYaml___internal___fieldOwners',
-  CardImageChildScienceYamlInternalIgnoreType = 'cardImage___childScienceYaml___internal___ignoreType',
-  CardImageChildScienceYamlInternalMediaType = 'cardImage___childScienceYaml___internal___mediaType',
-  CardImageChildScienceYamlInternalOwner = 'cardImage___childScienceYaml___internal___owner',
-  CardImageChildScienceYamlInternalType = 'cardImage___childScienceYaml___internal___type',
-  CardImageChildScienceYamlTopSectionHeader = 'cardImage___childScienceYaml___topSection___header',
-  CardImageChildScienceYamlTopSectionBody = 'cardImage___childScienceYaml___topSection___body',
-  CardImageChildScienceYamlTitleDescriptionSectionHeader = 'cardImage___childScienceYaml___titleDescriptionSection___header',
-  CardImageChildScienceYamlTitleDescriptionSectionDescription = 'cardImage___childScienceYaml___titleDescriptionSection___description',
-  CardImageChildScienceYamlOpenScienceSectionCaption = 'cardImage___childScienceYaml___openScienceSection___caption',
-  CardImageChildScienceYamlOpenScienceSectionPhases = 'cardImage___childScienceYaml___openScienceSection___phases',
-  CardImageChildScienceYamlPartnershipsSectionHeader = 'cardImage___childScienceYaml___partnershipsSection___header',
-  CardImageChildScienceYamlPartnershipsSectionPartners = 'cardImage___childScienceYaml___partnershipsSection___partners',
-  CardImageChildScienceYamlCommunitySectionCaption = 'cardImage___childScienceYaml___communitySection___caption',
-  CardImageChildScienceYamlCommunitySectionHeader = 'cardImage___childScienceYaml___communitySection___header',
-  CardImageChildScienceYamlCommunitySectionMembers = 'cardImage___childScienceYaml___communitySection___members',
-  CardImageChildScienceYamlPracticesOutcomesSectionHeader = 'cardImage___childScienceYaml___practicesOutcomesSection___header',
-  CardImageChildScienceYamlPracticesOutcomesSectionNote = 'cardImage___childScienceYaml___practicesOutcomesSection___note',
-  CardImageChildScienceYamlFileAbsolutePath = 'cardImage___childScienceYaml___fileAbsolutePath',
   CardImageChildMarkdownRemarkId = 'cardImage___childMarkdownRemark___id',
   CardImageChildMarkdownRemarkFrontmatterTitle = 'cardImage___childMarkdownRemark___frontmatter___title',
   CardImageChildMarkdownRemarkExcerpt = 'cardImage___childMarkdownRemark___excerpt',
@@ -1235,6 +1130,183 @@ export enum CaseStudyItemsYamlFieldsEnum {
   CardImageChildMarkdownRemarkInternalMediaType = 'cardImage___childMarkdownRemark___internal___mediaType',
   CardImageChildMarkdownRemarkInternalOwner = 'cardImage___childMarkdownRemark___internal___owner',
   CardImageChildMarkdownRemarkInternalType = 'cardImage___childMarkdownRemark___internal___type',
+  CardImageChildHomeYamlId = 'cardImage___childHomeYaml___id',
+  CardImageChildHomeYamlParentId = 'cardImage___childHomeYaml___parent___id',
+  CardImageChildHomeYamlParentChildren = 'cardImage___childHomeYaml___parent___children',
+  CardImageChildHomeYamlChildren = 'cardImage___childHomeYaml___children',
+  CardImageChildHomeYamlChildrenId = 'cardImage___childHomeYaml___children___id',
+  CardImageChildHomeYamlChildrenChildren = 'cardImage___childHomeYaml___children___children',
+  CardImageChildHomeYamlInternalContent = 'cardImage___childHomeYaml___internal___content',
+  CardImageChildHomeYamlInternalContentDigest = 'cardImage___childHomeYaml___internal___contentDigest',
+  CardImageChildHomeYamlInternalDescription = 'cardImage___childHomeYaml___internal___description',
+  CardImageChildHomeYamlInternalFieldOwners = 'cardImage___childHomeYaml___internal___fieldOwners',
+  CardImageChildHomeYamlInternalIgnoreType = 'cardImage___childHomeYaml___internal___ignoreType',
+  CardImageChildHomeYamlInternalMediaType = 'cardImage___childHomeYaml___internal___mediaType',
+  CardImageChildHomeYamlInternalOwner = 'cardImage___childHomeYaml___internal___owner',
+  CardImageChildHomeYamlInternalType = 'cardImage___childHomeYaml___internal___type',
+  CardImageChildHomeYamlFoldSectionTagline = 'cardImage___childHomeYaml___foldSection___tagline',
+  CardImageChildHomeYamlFoldSectionDescription = 'cardImage___childHomeYaml___foldSection___description',
+  CardImageChildHomeYamlMarketplaceSectionHeader = 'cardImage___childHomeYaml___marketplaceSection___header',
+  CardImageChildHomeYamlMarketplaceSectionTooltip = 'cardImage___childHomeYaml___marketplaceSection___tooltip',
+  CardImageChildHomeYamlMarketplaceSectionCallToActions = 'cardImage___childHomeYaml___marketplaceSection___callToActions',
+  CardImageChildHomeYamlClimateSectionHeader = 'cardImage___childHomeYaml___climateSection___header',
+  CardImageChildHomeYamlClimateSectionDescription = 'cardImage___childHomeYaml___climateSection___description',
+  CardImageChildHomeYamlCarbonPlusSectionHeader = 'cardImage___childHomeYaml___carbonPlusSection___header',
+  CardImageChildHomeYamlCarbonPlusSectionDescription = 'cardImage___childHomeYaml___carbonPlusSection___description',
+  CardImageChildHomeYamlCarbonPlusSectionLinkText = 'cardImage___childHomeYaml___carbonPlusSection___linkText',
+  CardImageChildHomeYamlCarbonPlusSectionLinkUrl = 'cardImage___childHomeYaml___carbonPlusSection___linkUrl',
+  CardImageChildHomeYamlLedgerSectionDescription = 'cardImage___childHomeYaml___ledgerSection___description',
+  CardImageChildHomeYamlValuesSectionHeader = 'cardImage___childHomeYaml___valuesSection___header',
+  CardImageChildHomeYamlValuesSectionImageItems = 'cardImage___childHomeYaml___valuesSection___imageItems',
+  CardImageChildHomeYamlFileAbsolutePath = 'cardImage___childHomeYaml___fileAbsolutePath',
+  CardImageChildResourcesYamlId = 'cardImage___childResourcesYaml___id',
+  CardImageChildResourcesYamlParentId = 'cardImage___childResourcesYaml___parent___id',
+  CardImageChildResourcesYamlParentChildren = 'cardImage___childResourcesYaml___parent___children',
+  CardImageChildResourcesYamlChildren = 'cardImage___childResourcesYaml___children',
+  CardImageChildResourcesYamlChildrenId = 'cardImage___childResourcesYaml___children___id',
+  CardImageChildResourcesYamlChildrenChildren = 'cardImage___childResourcesYaml___children___children',
+  CardImageChildResourcesYamlInternalContent = 'cardImage___childResourcesYaml___internal___content',
+  CardImageChildResourcesYamlInternalContentDigest = 'cardImage___childResourcesYaml___internal___contentDigest',
+  CardImageChildResourcesYamlInternalDescription = 'cardImage___childResourcesYaml___internal___description',
+  CardImageChildResourcesYamlInternalFieldOwners = 'cardImage___childResourcesYaml___internal___fieldOwners',
+  CardImageChildResourcesYamlInternalIgnoreType = 'cardImage___childResourcesYaml___internal___ignoreType',
+  CardImageChildResourcesYamlInternalMediaType = 'cardImage___childResourcesYaml___internal___mediaType',
+  CardImageChildResourcesYamlInternalOwner = 'cardImage___childResourcesYaml___internal___owner',
+  CardImageChildResourcesYamlInternalType = 'cardImage___childResourcesYaml___internal___type',
+  CardImageChildResourcesYamlTopSectionHeader = 'cardImage___childResourcesYaml___topSection___header',
+  CardImageChildResourcesYamlTopSectionBody = 'cardImage___childResourcesYaml___topSection___body',
+  CardImageChildResourcesYamlRegistrySectionHeader = 'cardImage___childResourcesYaml___registrySection___header',
+  CardImageChildResourcesYamlRegistrySectionDocumentTableTitle = 'cardImage___childResourcesYaml___registrySection___documentTableTitle',
+  CardImageChildResourcesYamlRegistrySectionDocuments = 'cardImage___childResourcesYaml___registrySection___documents',
+  CardImageChildResourcesYamlRegistrySectionSubsections = 'cardImage___childResourcesYaml___registrySection___subsections',
+  CardImageChildResourcesYamlLedgerSectionHeader = 'cardImage___childResourcesYaml___ledgerSection___header',
+  CardImageChildResourcesYamlLedgerSectionCards = 'cardImage___childResourcesYaml___ledgerSection___cards',
+  CardImageChildResourcesYamlFileAbsolutePath = 'cardImage___childResourcesYaml___fileAbsolutePath',
+  CardImageChildScienceYamlId = 'cardImage___childScienceYaml___id',
+  CardImageChildScienceYamlParentId = 'cardImage___childScienceYaml___parent___id',
+  CardImageChildScienceYamlParentChildren = 'cardImage___childScienceYaml___parent___children',
+  CardImageChildScienceYamlChildren = 'cardImage___childScienceYaml___children',
+  CardImageChildScienceYamlChildrenId = 'cardImage___childScienceYaml___children___id',
+  CardImageChildScienceYamlChildrenChildren = 'cardImage___childScienceYaml___children___children',
+  CardImageChildScienceYamlInternalContent = 'cardImage___childScienceYaml___internal___content',
+  CardImageChildScienceYamlInternalContentDigest = 'cardImage___childScienceYaml___internal___contentDigest',
+  CardImageChildScienceYamlInternalDescription = 'cardImage___childScienceYaml___internal___description',
+  CardImageChildScienceYamlInternalFieldOwners = 'cardImage___childScienceYaml___internal___fieldOwners',
+  CardImageChildScienceYamlInternalIgnoreType = 'cardImage___childScienceYaml___internal___ignoreType',
+  CardImageChildScienceYamlInternalMediaType = 'cardImage___childScienceYaml___internal___mediaType',
+  CardImageChildScienceYamlInternalOwner = 'cardImage___childScienceYaml___internal___owner',
+  CardImageChildScienceYamlInternalType = 'cardImage___childScienceYaml___internal___type',
+  CardImageChildScienceYamlTopSectionHeader = 'cardImage___childScienceYaml___topSection___header',
+  CardImageChildScienceYamlTopSectionBody = 'cardImage___childScienceYaml___topSection___body',
+  CardImageChildScienceYamlTitleDescriptionSectionHeader = 'cardImage___childScienceYaml___titleDescriptionSection___header',
+  CardImageChildScienceYamlTitleDescriptionSectionDescription = 'cardImage___childScienceYaml___titleDescriptionSection___description',
+  CardImageChildScienceYamlOpenScienceSectionCaption = 'cardImage___childScienceYaml___openScienceSection___caption',
+  CardImageChildScienceYamlOpenScienceSectionPhases = 'cardImage___childScienceYaml___openScienceSection___phases',
+  CardImageChildScienceYamlPartnershipsSectionHeader = 'cardImage___childScienceYaml___partnershipsSection___header',
+  CardImageChildScienceYamlPartnershipsSectionPartners = 'cardImage___childScienceYaml___partnershipsSection___partners',
+  CardImageChildScienceYamlCommunitySectionCaption = 'cardImage___childScienceYaml___communitySection___caption',
+  CardImageChildScienceYamlCommunitySectionHeader = 'cardImage___childScienceYaml___communitySection___header',
+  CardImageChildScienceYamlCommunitySectionMembers = 'cardImage___childScienceYaml___communitySection___members',
+  CardImageChildScienceYamlPracticesOutcomesSectionHeader = 'cardImage___childScienceYaml___practicesOutcomesSection___header',
+  CardImageChildScienceYamlPracticesOutcomesSectionNote = 'cardImage___childScienceYaml___practicesOutcomesSection___note',
+  CardImageChildScienceYamlFileAbsolutePath = 'cardImage___childScienceYaml___fileAbsolutePath',
+  CardImageChildWalletAddressRegistrationYamlId = 'cardImage___childWalletAddressRegistrationYaml___id',
+  CardImageChildWalletAddressRegistrationYamlParentId = 'cardImage___childWalletAddressRegistrationYaml___parent___id',
+  CardImageChildWalletAddressRegistrationYamlParentChildren = 'cardImage___childWalletAddressRegistrationYaml___parent___children',
+  CardImageChildWalletAddressRegistrationYamlChildren = 'cardImage___childWalletAddressRegistrationYaml___children',
+  CardImageChildWalletAddressRegistrationYamlChildrenId = 'cardImage___childWalletAddressRegistrationYaml___children___id',
+  CardImageChildWalletAddressRegistrationYamlChildrenChildren = 'cardImage___childWalletAddressRegistrationYaml___children___children',
+  CardImageChildWalletAddressRegistrationYamlInternalContent = 'cardImage___childWalletAddressRegistrationYaml___internal___content',
+  CardImageChildWalletAddressRegistrationYamlInternalContentDigest = 'cardImage___childWalletAddressRegistrationYaml___internal___contentDigest',
+  CardImageChildWalletAddressRegistrationYamlInternalDescription = 'cardImage___childWalletAddressRegistrationYaml___internal___description',
+  CardImageChildWalletAddressRegistrationYamlInternalFieldOwners = 'cardImage___childWalletAddressRegistrationYaml___internal___fieldOwners',
+  CardImageChildWalletAddressRegistrationYamlInternalIgnoreType = 'cardImage___childWalletAddressRegistrationYaml___internal___ignoreType',
+  CardImageChildWalletAddressRegistrationYamlInternalMediaType = 'cardImage___childWalletAddressRegistrationYaml___internal___mediaType',
+  CardImageChildWalletAddressRegistrationYamlInternalOwner = 'cardImage___childWalletAddressRegistrationYaml___internal___owner',
+  CardImageChildWalletAddressRegistrationYamlInternalType = 'cardImage___childWalletAddressRegistrationYaml___internal___type',
+  CardImageChildWalletAddressRegistrationYamlTopSectionHeader = 'cardImage___childWalletAddressRegistrationYaml___topSection___header',
+  CardImageChildWalletAddressRegistrationYamlTopSectionBody = 'cardImage___childWalletAddressRegistrationYaml___topSection___body',
+  CardImageChildWalletAddressRegistrationYamlInstructionsSectionHeader = 'cardImage___childWalletAddressRegistrationYaml___instructionsSection___header',
+  CardImageChildWalletAddressRegistrationYamlInstructionsSectionBody = 'cardImage___childWalletAddressRegistrationYaml___instructionsSection___body',
+  CardImageChildWalletAddressRegistrationYamlWalletButtonText = 'cardImage___childWalletAddressRegistrationYaml___wallet___buttonText',
+  CardImageChildWalletAddressRegistrationYamlWalletWalletFoundButtonText = 'cardImage___childWalletAddressRegistrationYaml___wallet___walletFoundButtonText',
+  CardImageChildWalletAddressRegistrationYamlWalletNoWalletFoundMessage = 'cardImage___childWalletAddressRegistrationYaml___wallet___noWalletFoundMessage',
+  CardImageChildWalletAddressRegistrationYamlFormAirtableLink = 'cardImage___childWalletAddressRegistrationYaml___form___airtableLink',
+  CardImageChildWalletAddressRegistrationYamlFormRecaptchaMessage = 'cardImage___childWalletAddressRegistrationYaml___form___recaptchaMessage',
+  CardImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'cardImage___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  CardImageChildSharedYamlId = 'cardImage___childSharedYaml___id',
+  CardImageChildSharedYamlParentId = 'cardImage___childSharedYaml___parent___id',
+  CardImageChildSharedYamlParentChildren = 'cardImage___childSharedYaml___parent___children',
+  CardImageChildSharedYamlChildren = 'cardImage___childSharedYaml___children',
+  CardImageChildSharedYamlChildrenId = 'cardImage___childSharedYaml___children___id',
+  CardImageChildSharedYamlChildrenChildren = 'cardImage___childSharedYaml___children___children',
+  CardImageChildSharedYamlInternalContent = 'cardImage___childSharedYaml___internal___content',
+  CardImageChildSharedYamlInternalContentDigest = 'cardImage___childSharedYaml___internal___contentDigest',
+  CardImageChildSharedYamlInternalDescription = 'cardImage___childSharedYaml___internal___description',
+  CardImageChildSharedYamlInternalFieldOwners = 'cardImage___childSharedYaml___internal___fieldOwners',
+  CardImageChildSharedYamlInternalIgnoreType = 'cardImage___childSharedYaml___internal___ignoreType',
+  CardImageChildSharedYamlInternalMediaType = 'cardImage___childSharedYaml___internal___mediaType',
+  CardImageChildSharedYamlInternalOwner = 'cardImage___childSharedYaml___internal___owner',
+  CardImageChildSharedYamlInternalType = 'cardImage___childSharedYaml___internal___type',
+  CardImageChildSharedYamlNewsletterSectionHeader = 'cardImage___childSharedYaml___newsletterSection___header',
+  CardImageChildSharedYamlNewsletterSectionDescription = 'cardImage___childSharedYaml___newsletterSection___description',
+  CardImageChildSharedYamlFeaturedSectionHeader = 'cardImage___childSharedYaml___featuredSection___header',
+  CardImageChildSharedYamlFeaturedSectionTitle = 'cardImage___childSharedYaml___featuredSection___title',
+  CardImageChildSharedYamlFeaturedSectionLink = 'cardImage___childSharedYaml___featuredSection___link',
+  CardImageChildSharedYamlFeaturedSectionDescription = 'cardImage___childSharedYaml___featuredSection___description',
+  CardImageChildSharedYamlBlogSectionHeader = 'cardImage___childSharedYaml___blogSection___header',
+  CardImageChildSharedYamlBlogSectionPosts = 'cardImage___childSharedYaml___blogSection___posts',
+  CardImageChildSharedYamlComingSoonSectionHeader = 'cardImage___childSharedYaml___comingSoonSection___header',
+  CardImageChildSharedYamlComingSoonSectionProjects = 'cardImage___childSharedYaml___comingSoonSection___projects',
+  CardImageChildSharedYamlFileAbsolutePath = 'cardImage___childSharedYaml___fileAbsolutePath',
+  CardImageChildTeamYamlId = 'cardImage___childTeamYaml___id',
+  CardImageChildTeamYamlParentId = 'cardImage___childTeamYaml___parent___id',
+  CardImageChildTeamYamlParentChildren = 'cardImage___childTeamYaml___parent___children',
+  CardImageChildTeamYamlChildren = 'cardImage___childTeamYaml___children',
+  CardImageChildTeamYamlChildrenId = 'cardImage___childTeamYaml___children___id',
+  CardImageChildTeamYamlChildrenChildren = 'cardImage___childTeamYaml___children___children',
+  CardImageChildTeamYamlInternalContent = 'cardImage___childTeamYaml___internal___content',
+  CardImageChildTeamYamlInternalContentDigest = 'cardImage___childTeamYaml___internal___contentDigest',
+  CardImageChildTeamYamlInternalDescription = 'cardImage___childTeamYaml___internal___description',
+  CardImageChildTeamYamlInternalFieldOwners = 'cardImage___childTeamYaml___internal___fieldOwners',
+  CardImageChildTeamYamlInternalIgnoreType = 'cardImage___childTeamYaml___internal___ignoreType',
+  CardImageChildTeamYamlInternalMediaType = 'cardImage___childTeamYaml___internal___mediaType',
+  CardImageChildTeamYamlInternalOwner = 'cardImage___childTeamYaml___internal___owner',
+  CardImageChildTeamYamlInternalType = 'cardImage___childTeamYaml___internal___type',
+  CardImageChildTeamYamlTopSectionHeader = 'cardImage___childTeamYaml___topSection___header',
+  CardImageChildTeamYamlTopSectionBody = 'cardImage___childTeamYaml___topSection___body',
+  CardImageChildTeamYamlCoreSectionTitle = 'cardImage___childTeamYaml___coreSection___title',
+  CardImageChildTeamYamlCoreSectionCoreMembers = 'cardImage___childTeamYaml___coreSection___coreMembers',
+  CardImageChildTeamYamlContributorSectionTitle = 'cardImage___childTeamYaml___contributorSection___title',
+  CardImageChildTeamYamlContributorSectionContributors = 'cardImage___childTeamYaml___contributorSection___contributors',
+  CardImageChildTeamYamlAdvisorSectionTitle = 'cardImage___childTeamYaml___advisorSection___title',
+  CardImageChildTeamYamlAdvisorSectionAdvisors = 'cardImage___childTeamYaml___advisorSection___advisors',
+  CardImageChildTeamYamlFileAbsolutePath = 'cardImage___childTeamYaml___fileAbsolutePath',
+  CardImageChildValidatorsYamlId = 'cardImage___childValidatorsYaml___id',
+  CardImageChildValidatorsYamlParentId = 'cardImage___childValidatorsYaml___parent___id',
+  CardImageChildValidatorsYamlParentChildren = 'cardImage___childValidatorsYaml___parent___children',
+  CardImageChildValidatorsYamlChildren = 'cardImage___childValidatorsYaml___children',
+  CardImageChildValidatorsYamlChildrenId = 'cardImage___childValidatorsYaml___children___id',
+  CardImageChildValidatorsYamlChildrenChildren = 'cardImage___childValidatorsYaml___children___children',
+  CardImageChildValidatorsYamlInternalContent = 'cardImage___childValidatorsYaml___internal___content',
+  CardImageChildValidatorsYamlInternalContentDigest = 'cardImage___childValidatorsYaml___internal___contentDigest',
+  CardImageChildValidatorsYamlInternalDescription = 'cardImage___childValidatorsYaml___internal___description',
+  CardImageChildValidatorsYamlInternalFieldOwners = 'cardImage___childValidatorsYaml___internal___fieldOwners',
+  CardImageChildValidatorsYamlInternalIgnoreType = 'cardImage___childValidatorsYaml___internal___ignoreType',
+  CardImageChildValidatorsYamlInternalMediaType = 'cardImage___childValidatorsYaml___internal___mediaType',
+  CardImageChildValidatorsYamlInternalOwner = 'cardImage___childValidatorsYaml___internal___owner',
+  CardImageChildValidatorsYamlInternalType = 'cardImage___childValidatorsYaml___internal___type',
+  CardImageChildValidatorsYamlTopSectionHeader = 'cardImage___childValidatorsYaml___topSection___header',
+  CardImageChildValidatorsYamlTopSectionBody = 'cardImage___childValidatorsYaml___topSection___body',
+  CardImageChildValidatorsYamlWhatSectionHeader = 'cardImage___childValidatorsYaml___whatSection___header',
+  CardImageChildValidatorsYamlWhatSectionBody = 'cardImage___childValidatorsYaml___whatSection___body',
+  CardImageChildValidatorsYamlWhoSectionHeader = 'cardImage___childValidatorsYaml___whoSection___header',
+  CardImageChildValidatorsYamlWhoSectionBody = 'cardImage___childValidatorsYaml___whoSection___body',
+  CardImageChildValidatorsYamlWhoSectionValidators = 'cardImage___childValidatorsYaml___whoSection___validators',
+  CardImageChildValidatorsYamlConnectSectionHeader = 'cardImage___childValidatorsYaml___connectSection___header',
+  CardImageChildValidatorsYamlWhySectionHeader = 'cardImage___childValidatorsYaml___whySection___header',
+  CardImageChildValidatorsYamlWhySectionBody = 'cardImage___childValidatorsYaml___whySection___body',
+  CardImageChildValidatorsYamlFileAbsolutePath = 'cardImage___childValidatorsYaml___fileAbsolutePath',
   CardImageChildTokenYamlId = 'cardImage___childTokenYaml___id',
   CardImageChildTokenYamlParentId = 'cardImage___childTokenYaml___parent___id',
   CardImageChildTokenYamlParentChildren = 'cardImage___childTokenYaml___parent___children',
@@ -1263,8 +1335,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   CardImageChildTokenYamlInfoSectionImageTitle = 'cardImage___childTokenYaml___infoSection___imageTitle',
   CardImageChildTokenYamlTokenPoolTitle = 'cardImage___childTokenYaml___tokenPool___title',
   CardImageChildTokenYamlTokenPoolSubtitle = 'cardImage___childTokenYaml___tokenPool___subtitle',
-  CardImageChildTokenYamlUnlockScheduleTitle = 'cardImage___childTokenYaml___unlockSchedule___title',
-  CardImageChildTokenYamlUnlockScheduleSubtitle = 'cardImage___childTokenYaml___unlockSchedule___subtitle',
   CardImageChildTokenYamlStakingTitle = 'cardImage___childTokenYaml___staking___title',
   CardImageChildTokenYamlStakingBody = 'cardImage___childTokenYaml___staking___body',
   CardImageChildTokenYamlStakingButtonText = 'cardImage___childTokenYaml___staking___buttonText',
@@ -1278,78 +1348,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   CardImageChildTokenYamlNewsletterSectionButtonText = 'cardImage___childTokenYaml___newsletterSection___buttonText',
   CardImageChildTokenYamlNewsletterSectionInputText = 'cardImage___childTokenYaml___newsletterSection___inputText',
   CardImageChildTokenYamlFileAbsolutePath = 'cardImage___childTokenYaml___fileAbsolutePath',
-  CardImageChildTeamYamlId = 'cardImage___childTeamYaml___id',
-  CardImageChildTeamYamlParentId = 'cardImage___childTeamYaml___parent___id',
-  CardImageChildTeamYamlParentChildren = 'cardImage___childTeamYaml___parent___children',
-  CardImageChildTeamYamlChildren = 'cardImage___childTeamYaml___children',
-  CardImageChildTeamYamlChildrenId = 'cardImage___childTeamYaml___children___id',
-  CardImageChildTeamYamlChildrenChildren = 'cardImage___childTeamYaml___children___children',
-  CardImageChildTeamYamlInternalContent = 'cardImage___childTeamYaml___internal___content',
-  CardImageChildTeamYamlInternalContentDigest = 'cardImage___childTeamYaml___internal___contentDigest',
-  CardImageChildTeamYamlInternalDescription = 'cardImage___childTeamYaml___internal___description',
-  CardImageChildTeamYamlInternalFieldOwners = 'cardImage___childTeamYaml___internal___fieldOwners',
-  CardImageChildTeamYamlInternalIgnoreType = 'cardImage___childTeamYaml___internal___ignoreType',
-  CardImageChildTeamYamlInternalMediaType = 'cardImage___childTeamYaml___internal___mediaType',
-  CardImageChildTeamYamlInternalOwner = 'cardImage___childTeamYaml___internal___owner',
-  CardImageChildTeamYamlInternalType = 'cardImage___childTeamYaml___internal___type',
-  CardImageChildTeamYamlTopSectionHeader = 'cardImage___childTeamYaml___topSection___header',
-  CardImageChildTeamYamlTopSectionBody = 'cardImage___childTeamYaml___topSection___body',
-  CardImageChildTeamYamlCoreSectionTitle = 'cardImage___childTeamYaml___coreSection___title',
-  CardImageChildTeamYamlCoreSectionCoreMembers = 'cardImage___childTeamYaml___coreSection___coreMembers',
-  CardImageChildTeamYamlContributorSectionTitle = 'cardImage___childTeamYaml___contributorSection___title',
-  CardImageChildTeamYamlContributorSectionContributors = 'cardImage___childTeamYaml___contributorSection___contributors',
-  CardImageChildTeamYamlAdvisorSectionTitle = 'cardImage___childTeamYaml___advisorSection___title',
-  CardImageChildTeamYamlAdvisorSectionAdvisors = 'cardImage___childTeamYaml___advisorSection___advisors',
-  CardImageChildTeamYamlFileAbsolutePath = 'cardImage___childTeamYaml___fileAbsolutePath',
-  CardImageChildWalletAddressRegistrationYamlId = 'cardImage___childWalletAddressRegistrationYaml___id',
-  CardImageChildWalletAddressRegistrationYamlParentId = 'cardImage___childWalletAddressRegistrationYaml___parent___id',
-  CardImageChildWalletAddressRegistrationYamlParentChildren = 'cardImage___childWalletAddressRegistrationYaml___parent___children',
-  CardImageChildWalletAddressRegistrationYamlChildren = 'cardImage___childWalletAddressRegistrationYaml___children',
-  CardImageChildWalletAddressRegistrationYamlChildrenId = 'cardImage___childWalletAddressRegistrationYaml___children___id',
-  CardImageChildWalletAddressRegistrationYamlChildrenChildren = 'cardImage___childWalletAddressRegistrationYaml___children___children',
-  CardImageChildWalletAddressRegistrationYamlInternalContent = 'cardImage___childWalletAddressRegistrationYaml___internal___content',
-  CardImageChildWalletAddressRegistrationYamlInternalContentDigest = 'cardImage___childWalletAddressRegistrationYaml___internal___contentDigest',
-  CardImageChildWalletAddressRegistrationYamlInternalDescription = 'cardImage___childWalletAddressRegistrationYaml___internal___description',
-  CardImageChildWalletAddressRegistrationYamlInternalFieldOwners = 'cardImage___childWalletAddressRegistrationYaml___internal___fieldOwners',
-  CardImageChildWalletAddressRegistrationYamlInternalIgnoreType = 'cardImage___childWalletAddressRegistrationYaml___internal___ignoreType',
-  CardImageChildWalletAddressRegistrationYamlInternalMediaType = 'cardImage___childWalletAddressRegistrationYaml___internal___mediaType',
-  CardImageChildWalletAddressRegistrationYamlInternalOwner = 'cardImage___childWalletAddressRegistrationYaml___internal___owner',
-  CardImageChildWalletAddressRegistrationYamlInternalType = 'cardImage___childWalletAddressRegistrationYaml___internal___type',
-  CardImageChildWalletAddressRegistrationYamlTopSectionHeader = 'cardImage___childWalletAddressRegistrationYaml___topSection___header',
-  CardImageChildWalletAddressRegistrationYamlTopSectionBody = 'cardImage___childWalletAddressRegistrationYaml___topSection___body',
-  CardImageChildWalletAddressRegistrationYamlInstructionsSectionHeader = 'cardImage___childWalletAddressRegistrationYaml___instructionsSection___header',
-  CardImageChildWalletAddressRegistrationYamlInstructionsSectionBody = 'cardImage___childWalletAddressRegistrationYaml___instructionsSection___body',
-  CardImageChildWalletAddressRegistrationYamlWalletButtonText = 'cardImage___childWalletAddressRegistrationYaml___wallet___buttonText',
-  CardImageChildWalletAddressRegistrationYamlWalletWalletFoundButtonText = 'cardImage___childWalletAddressRegistrationYaml___wallet___walletFoundButtonText',
-  CardImageChildWalletAddressRegistrationYamlWalletNoWalletFoundMessage = 'cardImage___childWalletAddressRegistrationYaml___wallet___noWalletFoundMessage',
-  CardImageChildWalletAddressRegistrationYamlFormAirtableLink = 'cardImage___childWalletAddressRegistrationYaml___form___airtableLink',
-  CardImageChildWalletAddressRegistrationYamlFormRecaptchaMessage = 'cardImage___childWalletAddressRegistrationYaml___form___recaptchaMessage',
-  CardImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'cardImage___childWalletAddressRegistrationYaml___fileAbsolutePath',
-  CardImageChildValidatorsYamlId = 'cardImage___childValidatorsYaml___id',
-  CardImageChildValidatorsYamlParentId = 'cardImage___childValidatorsYaml___parent___id',
-  CardImageChildValidatorsYamlParentChildren = 'cardImage___childValidatorsYaml___parent___children',
-  CardImageChildValidatorsYamlChildren = 'cardImage___childValidatorsYaml___children',
-  CardImageChildValidatorsYamlChildrenId = 'cardImage___childValidatorsYaml___children___id',
-  CardImageChildValidatorsYamlChildrenChildren = 'cardImage___childValidatorsYaml___children___children',
-  CardImageChildValidatorsYamlInternalContent = 'cardImage___childValidatorsYaml___internal___content',
-  CardImageChildValidatorsYamlInternalContentDigest = 'cardImage___childValidatorsYaml___internal___contentDigest',
-  CardImageChildValidatorsYamlInternalDescription = 'cardImage___childValidatorsYaml___internal___description',
-  CardImageChildValidatorsYamlInternalFieldOwners = 'cardImage___childValidatorsYaml___internal___fieldOwners',
-  CardImageChildValidatorsYamlInternalIgnoreType = 'cardImage___childValidatorsYaml___internal___ignoreType',
-  CardImageChildValidatorsYamlInternalMediaType = 'cardImage___childValidatorsYaml___internal___mediaType',
-  CardImageChildValidatorsYamlInternalOwner = 'cardImage___childValidatorsYaml___internal___owner',
-  CardImageChildValidatorsYamlInternalType = 'cardImage___childValidatorsYaml___internal___type',
-  CardImageChildValidatorsYamlTopSectionHeader = 'cardImage___childValidatorsYaml___topSection___header',
-  CardImageChildValidatorsYamlTopSectionBody = 'cardImage___childValidatorsYaml___topSection___body',
-  CardImageChildValidatorsYamlWhatSectionHeader = 'cardImage___childValidatorsYaml___whatSection___header',
-  CardImageChildValidatorsYamlWhatSectionBody = 'cardImage___childValidatorsYaml___whatSection___body',
-  CardImageChildValidatorsYamlWhoSectionHeader = 'cardImage___childValidatorsYaml___whoSection___header',
-  CardImageChildValidatorsYamlWhoSectionBody = 'cardImage___childValidatorsYaml___whoSection___body',
-  CardImageChildValidatorsYamlWhoSectionValidators = 'cardImage___childValidatorsYaml___whoSection___validators',
-  CardImageChildValidatorsYamlConnectSectionHeader = 'cardImage___childValidatorsYaml___connectSection___header',
-  CardImageChildValidatorsYamlWhySectionHeader = 'cardImage___childValidatorsYaml___whySection___header',
-  CardImageChildValidatorsYamlWhySectionBody = 'cardImage___childValidatorsYaml___whySection___body',
-  CardImageChildValidatorsYamlFileAbsolutePath = 'cardImage___childValidatorsYaml___fileAbsolutePath',
   BackgroundSourceInstanceName = 'background___sourceInstanceName',
   BackgroundAbsolutePath = 'background___absolutePath',
   BackgroundRelativePath = 'background___relativePath',
@@ -1489,46 +1487,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BackgroundInternalMediaType = 'background___internal___mediaType',
   BackgroundInternalOwner = 'background___internal___owner',
   BackgroundInternalType = 'background___internal___type',
-  BackgroundChildCommunityYamlId = 'background___childCommunityYaml___id',
-  BackgroundChildCommunityYamlParentId = 'background___childCommunityYaml___parent___id',
-  BackgroundChildCommunityYamlParentChildren = 'background___childCommunityYaml___parent___children',
-  BackgroundChildCommunityYamlChildren = 'background___childCommunityYaml___children',
-  BackgroundChildCommunityYamlChildrenId = 'background___childCommunityYaml___children___id',
-  BackgroundChildCommunityYamlChildrenChildren = 'background___childCommunityYaml___children___children',
-  BackgroundChildCommunityYamlInternalContent = 'background___childCommunityYaml___internal___content',
-  BackgroundChildCommunityYamlInternalContentDigest = 'background___childCommunityYaml___internal___contentDigest',
-  BackgroundChildCommunityYamlInternalDescription = 'background___childCommunityYaml___internal___description',
-  BackgroundChildCommunityYamlInternalFieldOwners = 'background___childCommunityYaml___internal___fieldOwners',
-  BackgroundChildCommunityYamlInternalIgnoreType = 'background___childCommunityYaml___internal___ignoreType',
-  BackgroundChildCommunityYamlInternalMediaType = 'background___childCommunityYaml___internal___mediaType',
-  BackgroundChildCommunityYamlInternalOwner = 'background___childCommunityYaml___internal___owner',
-  BackgroundChildCommunityYamlInternalType = 'background___childCommunityYaml___internal___type',
-  BackgroundChildCommunityYamlTopSectionHeader = 'background___childCommunityYaml___topSection___header',
-  BackgroundChildCommunityYamlTopSectionBody = 'background___childCommunityYaml___topSection___body',
-  BackgroundChildCommunityYamlConnectSectionHeader = 'background___childCommunityYaml___connectSection___header',
-  BackgroundChildCommunityYamlConnectSectionTelegramSubLabel = 'background___childCommunityYaml___connectSection___telegramSubLabel',
-  BackgroundChildCommunityYamlConnectSectionTelegramUrl = 'background___childCommunityYaml___connectSection___telegramUrl',
-  BackgroundChildCommunityYamlConnectSectionTwitterSubLabel = 'background___childCommunityYaml___connectSection___twitterSubLabel',
-  BackgroundChildCommunityYamlConnectSectionTwitterUrl = 'background___childCommunityYaml___connectSection___twitterUrl',
-  BackgroundChildCommunityYamlConnectSectionDiscordSubLabel = 'background___childCommunityYaml___connectSection___discordSubLabel',
-  BackgroundChildCommunityYamlConnectSectionDiscordUrl = 'background___childCommunityYaml___connectSection___discordUrl',
-  BackgroundChildCommunityYamlGoToSectionBlogButtonText = 'background___childCommunityYaml___goToSection___blogButtonText',
-  BackgroundChildCommunityYamlGoToSectionDiscussionButtonHref = 'background___childCommunityYaml___goToSection___discussionButtonHref',
-  BackgroundChildCommunityYamlGoToSectionDiscussionButtonText = 'background___childCommunityYaml___goToSection___discussionButtonText',
-  BackgroundChildCommunityYamlGoToSectionDiscussionLabel = 'background___childCommunityYaml___goToSection___discussionLabel',
-  BackgroundChildCommunityYamlGoToSectionBlogLabel = 'background___childCommunityYaml___goToSection___blogLabel',
-  BackgroundChildCommunityYamlGoToSectionVideoButtonHref = 'background___childCommunityYaml___goToSection___videoButtonHref',
-  BackgroundChildCommunityYamlGoToSectionVideoLabel = 'background___childCommunityYaml___goToSection___videoLabel',
-  BackgroundChildCommunityYamlGoToSectionVideoButtonText = 'background___childCommunityYaml___goToSection___videoButtonText',
-  BackgroundChildCommunityYamlGoToSectionBlogButtonHref = 'background___childCommunityYaml___goToSection___blogButtonHref',
-  BackgroundChildCommunityYamlCollectiveSectionTitle = 'background___childCommunityYaml___collectiveSection___title',
-  BackgroundChildCommunityYamlCollectiveSectionBody = 'background___childCommunityYaml___collectiveSection___body',
-  BackgroundChildCommunityYamlCollectiveSectionButtonText = 'background___childCommunityYaml___collectiveSection___buttonText',
-  BackgroundChildCommunityYamlCollectiveSectionSignupFormUrl = 'background___childCommunityYaml___collectiveSection___signupFormUrl',
-  BackgroundChildCommunityYamlCollaborateSectionHeader = 'background___childCommunityYaml___collaborateSection___header',
-  BackgroundChildCommunityYamlCollaborateSectionBody = 'background___childCommunityYaml___collaborateSection___body',
-  BackgroundChildCommunityYamlCollaborateSectionCards = 'background___childCommunityYaml___collaborateSection___cards',
-  BackgroundChildCommunityYamlFileAbsolutePath = 'background___childCommunityYaml___fileAbsolutePath',
   BackgroundChildCaseStudiesYamlId = 'background___childCaseStudiesYaml___id',
   BackgroundChildCaseStudiesYamlParentId = 'background___childCaseStudiesYaml___parent___id',
   BackgroundChildCaseStudiesYamlParentChildren = 'background___childCaseStudiesYaml___parent___children',
@@ -1548,46 +1506,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BackgroundChildCaseStudiesYamlCaseStudiesHeader = 'background___childCaseStudiesYaml___caseStudies___header',
   BackgroundChildCaseStudiesYamlCaseStudiesView = 'background___childCaseStudiesYaml___caseStudies___view',
   BackgroundChildCaseStudiesYamlFileAbsolutePath = 'background___childCaseStudiesYaml___fileAbsolutePath',
-  BackgroundChildDevelopersYamlId = 'background___childDevelopersYaml___id',
-  BackgroundChildDevelopersYamlParentId = 'background___childDevelopersYaml___parent___id',
-  BackgroundChildDevelopersYamlParentChildren = 'background___childDevelopersYaml___parent___children',
-  BackgroundChildDevelopersYamlChildren = 'background___childDevelopersYaml___children',
-  BackgroundChildDevelopersYamlChildrenId = 'background___childDevelopersYaml___children___id',
-  BackgroundChildDevelopersYamlChildrenChildren = 'background___childDevelopersYaml___children___children',
-  BackgroundChildDevelopersYamlInternalContent = 'background___childDevelopersYaml___internal___content',
-  BackgroundChildDevelopersYamlInternalContentDigest = 'background___childDevelopersYaml___internal___contentDigest',
-  BackgroundChildDevelopersYamlInternalDescription = 'background___childDevelopersYaml___internal___description',
-  BackgroundChildDevelopersYamlInternalFieldOwners = 'background___childDevelopersYaml___internal___fieldOwners',
-  BackgroundChildDevelopersYamlInternalIgnoreType = 'background___childDevelopersYaml___internal___ignoreType',
-  BackgroundChildDevelopersYamlInternalMediaType = 'background___childDevelopersYaml___internal___mediaType',
-  BackgroundChildDevelopersYamlInternalOwner = 'background___childDevelopersYaml___internal___owner',
-  BackgroundChildDevelopersYamlInternalType = 'background___childDevelopersYaml___internal___type',
-  BackgroundChildDevelopersYamlTopSectionHeader = 'background___childDevelopersYaml___topSection___header',
-  BackgroundChildDevelopersYamlTopSectionBody = 'background___childDevelopersYaml___topSection___body',
-  BackgroundChildDevelopersYamlApproachSectionCaption = 'background___childDevelopersYaml___approachSection___caption',
-  BackgroundChildDevelopersYamlApproachSectionHeader = 'background___childDevelopersYaml___approachSection___header',
-  BackgroundChildDevelopersYamlApproachSectionBody = 'background___childDevelopersYaml___approachSection___body',
-  BackgroundChildDevelopersYamlInvolvedSectionHeader = 'background___childDevelopersYaml___involvedSection___header',
-  BackgroundChildDevelopersYamlLedgerSectionHeader = 'background___childDevelopersYaml___ledgerSection___header',
-  BackgroundChildDevelopersYamlLedgerSectionBody = 'background___childDevelopersYaml___ledgerSection___body',
-  BackgroundChildDevelopersYamlOpenAgSectionHeader = 'background___childDevelopersYaml___openAgSection___header',
-  BackgroundChildDevelopersYamlOpenAgSectionBody = 'background___childDevelopersYaml___openAgSection___body',
-  BackgroundChildDevelopersYamlConnectSectionHeader = 'background___childDevelopersYaml___connectSection___header',
-  BackgroundChildDevelopersYamlCareersSectionCaption = 'background___childDevelopersYaml___careersSection___caption',
-  BackgroundChildDevelopersYamlCareersSectionHeader = 'background___childDevelopersYaml___careersSection___header',
-  BackgroundChildDevelopersYamlCareersSectionBody = 'background___childDevelopersYaml___careersSection___body',
-  BackgroundChildDevelopersYamlCareersSectionButtonLink = 'background___childDevelopersYaml___careersSection___buttonLink',
-  BackgroundChildDevelopersYamlCareersSectionButtonText = 'background___childDevelopersYaml___careersSection___buttonText',
-  BackgroundChildDevelopersYamlTestnetSectionRightColumnLabel = 'background___childDevelopersYaml___testnetSection___rightColumnLabel',
-  BackgroundChildDevelopersYamlTestnetSectionRightColumnContent = 'background___childDevelopersYaml___testnetSection___rightColumnContent',
-  BackgroundChildDevelopersYamlTestnetSectionButtonLink = 'background___childDevelopersYaml___testnetSection___buttonLink',
-  BackgroundChildDevelopersYamlTestnetSectionHeader = 'background___childDevelopersYaml___testnetSection___header',
-  BackgroundChildDevelopersYamlTestnetSectionAddress = 'background___childDevelopersYaml___testnetSection___address',
-  BackgroundChildDevelopersYamlTestnetSectionLeftColumnLabel = 'background___childDevelopersYaml___testnetSection___leftColumnLabel',
-  BackgroundChildDevelopersYamlTestnetSectionLeftColumnContent = 'background___childDevelopersYaml___testnetSection___leftColumnContent',
-  BackgroundChildDevelopersYamlTestnetSectionDescription = 'background___childDevelopersYaml___testnetSection___description',
-  BackgroundChildDevelopersYamlTestnetSectionButtonText = 'background___childDevelopersYaml___testnetSection___buttonText',
-  BackgroundChildDevelopersYamlFileAbsolutePath = 'background___childDevelopersYaml___fileAbsolutePath',
   BackgroundChildCaseStudyItemsYamlId = 'background___childCaseStudyItemsYaml___id',
   BackgroundChildCaseStudyItemsYamlParentId = 'background___childCaseStudyItemsYaml___parent___id',
   BackgroundChildCaseStudyItemsYamlParentChildren = 'background___childCaseStudyItemsYaml___parent___children',
@@ -1685,13 +1603,13 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BackgroundChildCaseStudyItemsYamlAboutSectionLineWidth = 'background___childCaseStudyItemsYaml___aboutSection___lineWidth',
   BackgroundChildCaseStudyItemsYamlContextSectionDescription = 'background___childCaseStudyItemsYaml___contextSection___description',
   BackgroundChildCaseStudyItemsYamlContextSectionChallenges = 'background___childCaseStudyItemsYaml___contextSection___challenges',
-  BackgroundChildCaseStudyItemsYamlApproachSectionDescription = 'background___childCaseStudyItemsYaml___approachSection___description',
   BackgroundChildCaseStudyItemsYamlApproachSectionDetails = 'background___childCaseStudyItemsYaml___approachSection___details',
   BackgroundChildCaseStudyItemsYamlApproachSectionResults = 'background___childCaseStudyItemsYaml___approachSection___results',
   BackgroundChildCaseStudyItemsYamlApproachSectionNext = 'background___childCaseStudyItemsYaml___approachSection___next',
   BackgroundChildCaseStudyItemsYamlApproachSectionFigureTitle = 'background___childCaseStudyItemsYaml___approachSection___figureTitle',
-  BackgroundChildCaseStudyItemsYamlFigureSectionTitle = 'background___childCaseStudyItemsYaml___figureSection___title',
+  BackgroundChildCaseStudyItemsYamlApproachSectionDescription = 'background___childCaseStudyItemsYaml___approachSection___description',
   BackgroundChildCaseStudyItemsYamlFigureSectionFigures = 'background___childCaseStudyItemsYaml___figureSection___figures',
+  BackgroundChildCaseStudyItemsYamlFigureSectionTitle = 'background___childCaseStudyItemsYaml___figureSection___title',
   BackgroundChildCaseStudyItemsYamlFundingSectionDetails = 'background___childCaseStudyItemsYaml___fundingSection___details',
   BackgroundChildCaseStudyItemsYamlFundingSectionResults = 'background___childCaseStudyItemsYaml___fundingSection___results',
   BackgroundChildCaseStudyItemsYamlFundingSectionNext = 'background___childCaseStudyItemsYaml___fundingSection___next',
@@ -1699,35 +1617,86 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BackgroundChildCaseStudyItemsYamlConclusionSectionImages = 'background___childCaseStudyItemsYaml___conclusionSection___images',
   BackgroundChildCaseStudyItemsYamlBottomSectionQuote = 'background___childCaseStudyItemsYaml___bottomSection___quote',
   BackgroundChildCaseStudyItemsYamlFileAbsolutePath = 'background___childCaseStudyItemsYaml___fileAbsolutePath',
-  BackgroundChildHomeYamlId = 'background___childHomeYaml___id',
-  BackgroundChildHomeYamlParentId = 'background___childHomeYaml___parent___id',
-  BackgroundChildHomeYamlParentChildren = 'background___childHomeYaml___parent___children',
-  BackgroundChildHomeYamlChildren = 'background___childHomeYaml___children',
-  BackgroundChildHomeYamlChildrenId = 'background___childHomeYaml___children___id',
-  BackgroundChildHomeYamlChildrenChildren = 'background___childHomeYaml___children___children',
-  BackgroundChildHomeYamlInternalContent = 'background___childHomeYaml___internal___content',
-  BackgroundChildHomeYamlInternalContentDigest = 'background___childHomeYaml___internal___contentDigest',
-  BackgroundChildHomeYamlInternalDescription = 'background___childHomeYaml___internal___description',
-  BackgroundChildHomeYamlInternalFieldOwners = 'background___childHomeYaml___internal___fieldOwners',
-  BackgroundChildHomeYamlInternalIgnoreType = 'background___childHomeYaml___internal___ignoreType',
-  BackgroundChildHomeYamlInternalMediaType = 'background___childHomeYaml___internal___mediaType',
-  BackgroundChildHomeYamlInternalOwner = 'background___childHomeYaml___internal___owner',
-  BackgroundChildHomeYamlInternalType = 'background___childHomeYaml___internal___type',
-  BackgroundChildHomeYamlFoldSectionTagline = 'background___childHomeYaml___foldSection___tagline',
-  BackgroundChildHomeYamlFoldSectionDescription = 'background___childHomeYaml___foldSection___description',
-  BackgroundChildHomeYamlMarketplaceSectionHeader = 'background___childHomeYaml___marketplaceSection___header',
-  BackgroundChildHomeYamlMarketplaceSectionTooltip = 'background___childHomeYaml___marketplaceSection___tooltip',
-  BackgroundChildHomeYamlMarketplaceSectionCallToActions = 'background___childHomeYaml___marketplaceSection___callToActions',
-  BackgroundChildHomeYamlClimateSectionHeader = 'background___childHomeYaml___climateSection___header',
-  BackgroundChildHomeYamlClimateSectionDescription = 'background___childHomeYaml___climateSection___description',
-  BackgroundChildHomeYamlCarbonPlusSectionHeader = 'background___childHomeYaml___carbonPlusSection___header',
-  BackgroundChildHomeYamlCarbonPlusSectionDescription = 'background___childHomeYaml___carbonPlusSection___description',
-  BackgroundChildHomeYamlCarbonPlusSectionLinkText = 'background___childHomeYaml___carbonPlusSection___linkText',
-  BackgroundChildHomeYamlCarbonPlusSectionLinkUrl = 'background___childHomeYaml___carbonPlusSection___linkUrl',
-  BackgroundChildHomeYamlLedgerSectionDescription = 'background___childHomeYaml___ledgerSection___description',
-  BackgroundChildHomeYamlValuesSectionHeader = 'background___childHomeYaml___valuesSection___header',
-  BackgroundChildHomeYamlValuesSectionImageItems = 'background___childHomeYaml___valuesSection___imageItems',
-  BackgroundChildHomeYamlFileAbsolutePath = 'background___childHomeYaml___fileAbsolutePath',
+  BackgroundChildDevelopersYamlId = 'background___childDevelopersYaml___id',
+  BackgroundChildDevelopersYamlParentId = 'background___childDevelopersYaml___parent___id',
+  BackgroundChildDevelopersYamlParentChildren = 'background___childDevelopersYaml___parent___children',
+  BackgroundChildDevelopersYamlChildren = 'background___childDevelopersYaml___children',
+  BackgroundChildDevelopersYamlChildrenId = 'background___childDevelopersYaml___children___id',
+  BackgroundChildDevelopersYamlChildrenChildren = 'background___childDevelopersYaml___children___children',
+  BackgroundChildDevelopersYamlInternalContent = 'background___childDevelopersYaml___internal___content',
+  BackgroundChildDevelopersYamlInternalContentDigest = 'background___childDevelopersYaml___internal___contentDigest',
+  BackgroundChildDevelopersYamlInternalDescription = 'background___childDevelopersYaml___internal___description',
+  BackgroundChildDevelopersYamlInternalFieldOwners = 'background___childDevelopersYaml___internal___fieldOwners',
+  BackgroundChildDevelopersYamlInternalIgnoreType = 'background___childDevelopersYaml___internal___ignoreType',
+  BackgroundChildDevelopersYamlInternalMediaType = 'background___childDevelopersYaml___internal___mediaType',
+  BackgroundChildDevelopersYamlInternalOwner = 'background___childDevelopersYaml___internal___owner',
+  BackgroundChildDevelopersYamlInternalType = 'background___childDevelopersYaml___internal___type',
+  BackgroundChildDevelopersYamlTopSectionHeader = 'background___childDevelopersYaml___topSection___header',
+  BackgroundChildDevelopersYamlTopSectionBody = 'background___childDevelopersYaml___topSection___body',
+  BackgroundChildDevelopersYamlApproachSectionCaption = 'background___childDevelopersYaml___approachSection___caption',
+  BackgroundChildDevelopersYamlApproachSectionHeader = 'background___childDevelopersYaml___approachSection___header',
+  BackgroundChildDevelopersYamlApproachSectionBody = 'background___childDevelopersYaml___approachSection___body',
+  BackgroundChildDevelopersYamlInvolvedSectionHeader = 'background___childDevelopersYaml___involvedSection___header',
+  BackgroundChildDevelopersYamlLedgerSectionHeader = 'background___childDevelopersYaml___ledgerSection___header',
+  BackgroundChildDevelopersYamlLedgerSectionBody = 'background___childDevelopersYaml___ledgerSection___body',
+  BackgroundChildDevelopersYamlOpenAgSectionHeader = 'background___childDevelopersYaml___openAgSection___header',
+  BackgroundChildDevelopersYamlOpenAgSectionBody = 'background___childDevelopersYaml___openAgSection___body',
+  BackgroundChildDevelopersYamlConnectSectionHeader = 'background___childDevelopersYaml___connectSection___header',
+  BackgroundChildDevelopersYamlCareersSectionCaption = 'background___childDevelopersYaml___careersSection___caption',
+  BackgroundChildDevelopersYamlCareersSectionHeader = 'background___childDevelopersYaml___careersSection___header',
+  BackgroundChildDevelopersYamlCareersSectionBody = 'background___childDevelopersYaml___careersSection___body',
+  BackgroundChildDevelopersYamlCareersSectionButtonLink = 'background___childDevelopersYaml___careersSection___buttonLink',
+  BackgroundChildDevelopersYamlCareersSectionButtonText = 'background___childDevelopersYaml___careersSection___buttonText',
+  BackgroundChildDevelopersYamlTestnetSectionRightColumnLabel = 'background___childDevelopersYaml___testnetSection___rightColumnLabel',
+  BackgroundChildDevelopersYamlTestnetSectionRightColumnContent = 'background___childDevelopersYaml___testnetSection___rightColumnContent',
+  BackgroundChildDevelopersYamlTestnetSectionButtonLink = 'background___childDevelopersYaml___testnetSection___buttonLink',
+  BackgroundChildDevelopersYamlTestnetSectionHeader = 'background___childDevelopersYaml___testnetSection___header',
+  BackgroundChildDevelopersYamlTestnetSectionAddress = 'background___childDevelopersYaml___testnetSection___address',
+  BackgroundChildDevelopersYamlTestnetSectionLeftColumnLabel = 'background___childDevelopersYaml___testnetSection___leftColumnLabel',
+  BackgroundChildDevelopersYamlTestnetSectionLeftColumnContent = 'background___childDevelopersYaml___testnetSection___leftColumnContent',
+  BackgroundChildDevelopersYamlTestnetSectionDescription = 'background___childDevelopersYaml___testnetSection___description',
+  BackgroundChildDevelopersYamlTestnetSectionButtonText = 'background___childDevelopersYaml___testnetSection___buttonText',
+  BackgroundChildDevelopersYamlFileAbsolutePath = 'background___childDevelopersYaml___fileAbsolutePath',
+  BackgroundChildCommunityYamlId = 'background___childCommunityYaml___id',
+  BackgroundChildCommunityYamlParentId = 'background___childCommunityYaml___parent___id',
+  BackgroundChildCommunityYamlParentChildren = 'background___childCommunityYaml___parent___children',
+  BackgroundChildCommunityYamlChildren = 'background___childCommunityYaml___children',
+  BackgroundChildCommunityYamlChildrenId = 'background___childCommunityYaml___children___id',
+  BackgroundChildCommunityYamlChildrenChildren = 'background___childCommunityYaml___children___children',
+  BackgroundChildCommunityYamlInternalContent = 'background___childCommunityYaml___internal___content',
+  BackgroundChildCommunityYamlInternalContentDigest = 'background___childCommunityYaml___internal___contentDigest',
+  BackgroundChildCommunityYamlInternalDescription = 'background___childCommunityYaml___internal___description',
+  BackgroundChildCommunityYamlInternalFieldOwners = 'background___childCommunityYaml___internal___fieldOwners',
+  BackgroundChildCommunityYamlInternalIgnoreType = 'background___childCommunityYaml___internal___ignoreType',
+  BackgroundChildCommunityYamlInternalMediaType = 'background___childCommunityYaml___internal___mediaType',
+  BackgroundChildCommunityYamlInternalOwner = 'background___childCommunityYaml___internal___owner',
+  BackgroundChildCommunityYamlInternalType = 'background___childCommunityYaml___internal___type',
+  BackgroundChildCommunityYamlTopSectionHeader = 'background___childCommunityYaml___topSection___header',
+  BackgroundChildCommunityYamlTopSectionBody = 'background___childCommunityYaml___topSection___body',
+  BackgroundChildCommunityYamlConnectSectionHeader = 'background___childCommunityYaml___connectSection___header',
+  BackgroundChildCommunityYamlConnectSectionTelegramSubLabel = 'background___childCommunityYaml___connectSection___telegramSubLabel',
+  BackgroundChildCommunityYamlConnectSectionTelegramUrl = 'background___childCommunityYaml___connectSection___telegramUrl',
+  BackgroundChildCommunityYamlConnectSectionTwitterSubLabel = 'background___childCommunityYaml___connectSection___twitterSubLabel',
+  BackgroundChildCommunityYamlConnectSectionTwitterUrl = 'background___childCommunityYaml___connectSection___twitterUrl',
+  BackgroundChildCommunityYamlConnectSectionDiscordSubLabel = 'background___childCommunityYaml___connectSection___discordSubLabel',
+  BackgroundChildCommunityYamlConnectSectionDiscordUrl = 'background___childCommunityYaml___connectSection___discordUrl',
+  BackgroundChildCommunityYamlGoToSectionBlogButtonText = 'background___childCommunityYaml___goToSection___blogButtonText',
+  BackgroundChildCommunityYamlGoToSectionDiscussionButtonHref = 'background___childCommunityYaml___goToSection___discussionButtonHref',
+  BackgroundChildCommunityYamlGoToSectionDiscussionButtonText = 'background___childCommunityYaml___goToSection___discussionButtonText',
+  BackgroundChildCommunityYamlGoToSectionDiscussionLabel = 'background___childCommunityYaml___goToSection___discussionLabel',
+  BackgroundChildCommunityYamlGoToSectionBlogLabel = 'background___childCommunityYaml___goToSection___blogLabel',
+  BackgroundChildCommunityYamlGoToSectionVideoButtonHref = 'background___childCommunityYaml___goToSection___videoButtonHref',
+  BackgroundChildCommunityYamlGoToSectionVideoLabel = 'background___childCommunityYaml___goToSection___videoLabel',
+  BackgroundChildCommunityYamlGoToSectionVideoButtonText = 'background___childCommunityYaml___goToSection___videoButtonText',
+  BackgroundChildCommunityYamlGoToSectionBlogButtonHref = 'background___childCommunityYaml___goToSection___blogButtonHref',
+  BackgroundChildCommunityYamlCollectiveSectionTitle = 'background___childCommunityYaml___collectiveSection___title',
+  BackgroundChildCommunityYamlCollectiveSectionBody = 'background___childCommunityYaml___collectiveSection___body',
+  BackgroundChildCommunityYamlCollectiveSectionButtonText = 'background___childCommunityYaml___collectiveSection___buttonText',
+  BackgroundChildCommunityYamlCollectiveSectionSignupFormUrl = 'background___childCommunityYaml___collectiveSection___signupFormUrl',
+  BackgroundChildCommunityYamlCollaborateSectionHeader = 'background___childCommunityYaml___collaborateSection___header',
+  BackgroundChildCommunityYamlCollaborateSectionBody = 'background___childCommunityYaml___collaborateSection___body',
+  BackgroundChildCommunityYamlCollaborateSectionCards = 'background___childCommunityYaml___collaborateSection___cards',
+  BackgroundChildCommunityYamlFileAbsolutePath = 'background___childCommunityYaml___fileAbsolutePath',
   BackgroundChildContactYamlId = 'background___childContactYaml___id',
   BackgroundChildContactYamlParentId = 'background___childContactYaml___parent___id',
   BackgroundChildContactYamlParentChildren = 'background___childContactYaml___parent___children',
@@ -1752,24 +1721,68 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BackgroundChildContactYamlEmailBody = 'background___childContactYaml___email___body',
   BackgroundChildContactYamlFaqHeader = 'background___childContactYaml___faq___header',
   BackgroundChildContactYamlFileAbsolutePath = 'background___childContactYaml___fileAbsolutePath',
-  BackgroundChildFaqYamlId = 'background___childFaqYaml___id',
-  BackgroundChildFaqYamlParentId = 'background___childFaqYaml___parent___id',
-  BackgroundChildFaqYamlParentChildren = 'background___childFaqYaml___parent___children',
-  BackgroundChildFaqYamlChildren = 'background___childFaqYaml___children',
-  BackgroundChildFaqYamlChildrenId = 'background___childFaqYaml___children___id',
-  BackgroundChildFaqYamlChildrenChildren = 'background___childFaqYaml___children___children',
-  BackgroundChildFaqYamlInternalContent = 'background___childFaqYaml___internal___content',
-  BackgroundChildFaqYamlInternalContentDigest = 'background___childFaqYaml___internal___contentDigest',
-  BackgroundChildFaqYamlInternalDescription = 'background___childFaqYaml___internal___description',
-  BackgroundChildFaqYamlInternalFieldOwners = 'background___childFaqYaml___internal___fieldOwners',
-  BackgroundChildFaqYamlInternalIgnoreType = 'background___childFaqYaml___internal___ignoreType',
-  BackgroundChildFaqYamlInternalMediaType = 'background___childFaqYaml___internal___mediaType',
-  BackgroundChildFaqYamlInternalOwner = 'background___childFaqYaml___internal___owner',
-  BackgroundChildFaqYamlInternalType = 'background___childFaqYaml___internal___type',
-  BackgroundChildFaqYamlCategories = 'background___childFaqYaml___categories',
-  BackgroundChildFaqYamlCategoriesHeader = 'background___childFaqYaml___categories___header',
-  BackgroundChildFaqYamlCategoriesQuestions = 'background___childFaqYaml___categories___questions',
-  BackgroundChildFaqYamlFileAbsolutePath = 'background___childFaqYaml___fileAbsolutePath',
+  BackgroundChildPressKitYamlId = 'background___childPressKitYaml___id',
+  BackgroundChildPressKitYamlParentId = 'background___childPressKitYaml___parent___id',
+  BackgroundChildPressKitYamlParentChildren = 'background___childPressKitYaml___parent___children',
+  BackgroundChildPressKitYamlChildren = 'background___childPressKitYaml___children',
+  BackgroundChildPressKitYamlChildrenId = 'background___childPressKitYaml___children___id',
+  BackgroundChildPressKitYamlChildrenChildren = 'background___childPressKitYaml___children___children',
+  BackgroundChildPressKitYamlInternalContent = 'background___childPressKitYaml___internal___content',
+  BackgroundChildPressKitYamlInternalContentDigest = 'background___childPressKitYaml___internal___contentDigest',
+  BackgroundChildPressKitYamlInternalDescription = 'background___childPressKitYaml___internal___description',
+  BackgroundChildPressKitYamlInternalFieldOwners = 'background___childPressKitYaml___internal___fieldOwners',
+  BackgroundChildPressKitYamlInternalIgnoreType = 'background___childPressKitYaml___internal___ignoreType',
+  BackgroundChildPressKitYamlInternalMediaType = 'background___childPressKitYaml___internal___mediaType',
+  BackgroundChildPressKitYamlInternalOwner = 'background___childPressKitYaml___internal___owner',
+  BackgroundChildPressKitYamlInternalType = 'background___childPressKitYaml___internal___type',
+  BackgroundChildPressKitYamlTopSectionHeader = 'background___childPressKitYaml___topSection___header',
+  BackgroundChildPressKitYamlTopSectionBody = 'background___childPressKitYaml___topSection___body',
+  BackgroundChildPressKitYamlTitleDescriptionSectionHeader = 'background___childPressKitYaml___titleDescriptionSection___header',
+  BackgroundChildPressKitYamlTitleDescriptionSectionDescription = 'background___childPressKitYaml___titleDescriptionSection___description',
+  BackgroundChildPressKitYamlEnableSectionHeader = 'background___childPressKitYaml___enableSection___header',
+  BackgroundChildPressKitYamlEnableSectionDescription = 'background___childPressKitYaml___enableSection___description',
+  BackgroundChildPressKitYamlTimelineSectionHeader = 'background___childPressKitYaml___timelineSection___header',
+  BackgroundChildPressKitYamlTimelineSectionDescription = 'background___childPressKitYaml___timelineSection___description',
+  BackgroundChildPressKitYamlTimelineSectionCompletedItemIndex = 'background___childPressKitYaml___timelineSection___completedItemIndex',
+  BackgroundChildPressKitYamlTimelineSectionItems = 'background___childPressKitYaml___timelineSection___items',
+  BackgroundChildPressKitYamlTeamSectionHeader = 'background___childPressKitYaml___teamSection___header',
+  BackgroundChildPressKitYamlTeamSectionButtonText = 'background___childPressKitYaml___teamSection___buttonText',
+  BackgroundChildPressKitYamlTeamSectionMembers = 'background___childPressKitYaml___teamSection___members',
+  BackgroundChildPressKitYamlFeaturedSectionHeader = 'background___childPressKitYaml___featuredSection___header',
+  BackgroundChildPressKitYamlFeaturedSectionArticles = 'background___childPressKitYaml___featuredSection___articles',
+  BackgroundChildPressKitYamlAwardsSectionHeader = 'background___childPressKitYaml___awardsSection___header',
+  BackgroundChildPressKitYamlAwardsSectionItems = 'background___childPressKitYaml___awardsSection___items',
+  BackgroundChildPressKitYamlLogosSectionHeader = 'background___childPressKitYaml___logosSection___header',
+  BackgroundChildPressKitYamlLogosSectionButtonText = 'background___childPressKitYaml___logosSection___buttonText',
+  BackgroundChildPressKitYamlLogosSectionButtonLink = 'background___childPressKitYaml___logosSection___buttonLink',
+  BackgroundChildPressKitYamlConnectSectionHeader = 'background___childPressKitYaml___connectSection___header',
+  BackgroundChildPressKitYamlPhotosSectionHeader = 'background___childPressKitYaml___photosSection___header',
+  BackgroundChildPressKitYamlPhotosSectionPhotos = 'background___childPressKitYaml___photosSection___photos',
+  BackgroundChildPressKitYamlFileAbsolutePath = 'background___childPressKitYaml___fileAbsolutePath',
+  BackgroundChildFundYamlId = 'background___childFundYaml___id',
+  BackgroundChildFundYamlParentId = 'background___childFundYaml___parent___id',
+  BackgroundChildFundYamlParentChildren = 'background___childFundYaml___parent___children',
+  BackgroundChildFundYamlChildren = 'background___childFundYaml___children',
+  BackgroundChildFundYamlChildrenId = 'background___childFundYaml___children___id',
+  BackgroundChildFundYamlChildrenChildren = 'background___childFundYaml___children___children',
+  BackgroundChildFundYamlInternalContent = 'background___childFundYaml___internal___content',
+  BackgroundChildFundYamlInternalContentDigest = 'background___childFundYaml___internal___contentDigest',
+  BackgroundChildFundYamlInternalDescription = 'background___childFundYaml___internal___description',
+  BackgroundChildFundYamlInternalFieldOwners = 'background___childFundYaml___internal___fieldOwners',
+  BackgroundChildFundYamlInternalIgnoreType = 'background___childFundYaml___internal___ignoreType',
+  BackgroundChildFundYamlInternalMediaType = 'background___childFundYaml___internal___mediaType',
+  BackgroundChildFundYamlInternalOwner = 'background___childFundYaml___internal___owner',
+  BackgroundChildFundYamlInternalType = 'background___childFundYaml___internal___type',
+  BackgroundChildFundYamlSeoTitle = 'background___childFundYaml___seo___title',
+  BackgroundChildFundYamlSeoDescription = 'background___childFundYaml___seo___description',
+  BackgroundChildFundYamlTopSectionHeader = 'background___childFundYaml___topSection___header',
+  BackgroundChildFundYamlTopSectionBody = 'background___childFundYaml___topSection___body',
+  BackgroundChildFundYamlFoldSectionTitle = 'background___childFundYaml___foldSection___title',
+  BackgroundChildFundYamlFoldSectionBody = 'background___childFundYaml___foldSection___body',
+  BackgroundChildFundYamlThesisSectionTitle = 'background___childFundYaml___thesisSection___title',
+  BackgroundChildFundYamlThesisSectionBody = 'background___childFundYaml___thesisSection___body',
+  BackgroundChildFundYamlCalltoActionSectionCallToActions = 'background___childFundYaml___calltoActionSection___callToActions',
+  BackgroundChildFundYamlFileAbsolutePath = 'background___childFundYaml___fileAbsolutePath',
   BackgroundChildInvestYamlId = 'background___childInvestYaml___id',
   BackgroundChildInvestYamlParentId = 'background___childInvestYaml___parent___id',
   BackgroundChildInvestYamlParentChildren = 'background___childInvestYaml___parent___children',
@@ -1811,6 +1824,24 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BackgroundChildMainnetYamlWhatsNextSectionDescription = 'background___childMainnetYaml___whatsNextSection___description',
   BackgroundChildMainnetYamlWhatsNextSectionInfoItems = 'background___childMainnetYaml___whatsNextSection___infoItems',
   BackgroundChildMainnetYamlFileAbsolutePath = 'background___childMainnetYaml___fileAbsolutePath',
+  BackgroundChildFaqYamlId = 'background___childFaqYaml___id',
+  BackgroundChildFaqYamlParentId = 'background___childFaqYaml___parent___id',
+  BackgroundChildFaqYamlParentChildren = 'background___childFaqYaml___parent___children',
+  BackgroundChildFaqYamlChildren = 'background___childFaqYaml___children',
+  BackgroundChildFaqYamlChildrenId = 'background___childFaqYaml___children___id',
+  BackgroundChildFaqYamlChildrenChildren = 'background___childFaqYaml___children___children',
+  BackgroundChildFaqYamlInternalContent = 'background___childFaqYaml___internal___content',
+  BackgroundChildFaqYamlInternalContentDigest = 'background___childFaqYaml___internal___contentDigest',
+  BackgroundChildFaqYamlInternalDescription = 'background___childFaqYaml___internal___description',
+  BackgroundChildFaqYamlInternalFieldOwners = 'background___childFaqYaml___internal___fieldOwners',
+  BackgroundChildFaqYamlInternalIgnoreType = 'background___childFaqYaml___internal___ignoreType',
+  BackgroundChildFaqYamlInternalMediaType = 'background___childFaqYaml___internal___mediaType',
+  BackgroundChildFaqYamlInternalOwner = 'background___childFaqYaml___internal___owner',
+  BackgroundChildFaqYamlInternalType = 'background___childFaqYaml___internal___type',
+  BackgroundChildFaqYamlCategories = 'background___childFaqYaml___categories',
+  BackgroundChildFaqYamlCategoriesHeader = 'background___childFaqYaml___categories___header',
+  BackgroundChildFaqYamlCategoriesQuestions = 'background___childFaqYaml___categories___questions',
+  BackgroundChildFaqYamlFileAbsolutePath = 'background___childFaqYaml___fileAbsolutePath',
   BackgroundChildPartnersYamlId = 'background___childPartnersYaml___id',
   BackgroundChildPartnersYamlParentId = 'background___childPartnersYaml___parent___id',
   BackgroundChildPartnersYamlParentChildren = 'background___childPartnersYaml___parent___children',
@@ -1831,116 +1862,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BackgroundChildPartnersYamlContactCardHeader = 'background___childPartnersYaml___contactCard___header',
   BackgroundChildPartnersYamlContactCardBody = 'background___childPartnersYaml___contactCard___body',
   BackgroundChildPartnersYamlFileAbsolutePath = 'background___childPartnersYaml___fileAbsolutePath',
-  BackgroundChildFundYamlId = 'background___childFundYaml___id',
-  BackgroundChildFundYamlParentId = 'background___childFundYaml___parent___id',
-  BackgroundChildFundYamlParentChildren = 'background___childFundYaml___parent___children',
-  BackgroundChildFundYamlChildren = 'background___childFundYaml___children',
-  BackgroundChildFundYamlChildrenId = 'background___childFundYaml___children___id',
-  BackgroundChildFundYamlChildrenChildren = 'background___childFundYaml___children___children',
-  BackgroundChildFundYamlInternalContent = 'background___childFundYaml___internal___content',
-  BackgroundChildFundYamlInternalContentDigest = 'background___childFundYaml___internal___contentDigest',
-  BackgroundChildFundYamlInternalDescription = 'background___childFundYaml___internal___description',
-  BackgroundChildFundYamlInternalFieldOwners = 'background___childFundYaml___internal___fieldOwners',
-  BackgroundChildFundYamlInternalIgnoreType = 'background___childFundYaml___internal___ignoreType',
-  BackgroundChildFundYamlInternalMediaType = 'background___childFundYaml___internal___mediaType',
-  BackgroundChildFundYamlInternalOwner = 'background___childFundYaml___internal___owner',
-  BackgroundChildFundYamlInternalType = 'background___childFundYaml___internal___type',
-  BackgroundChildFundYamlSeoTitle = 'background___childFundYaml___seo___title',
-  BackgroundChildFundYamlSeoDescription = 'background___childFundYaml___seo___description',
-  BackgroundChildFundYamlTopSectionHeader = 'background___childFundYaml___topSection___header',
-  BackgroundChildFundYamlTopSectionBody = 'background___childFundYaml___topSection___body',
-  BackgroundChildFundYamlFoldSectionTitle = 'background___childFundYaml___foldSection___title',
-  BackgroundChildFundYamlFoldSectionBody = 'background___childFundYaml___foldSection___body',
-  BackgroundChildFundYamlThesisSectionTitle = 'background___childFundYaml___thesisSection___title',
-  BackgroundChildFundYamlThesisSectionBody = 'background___childFundYaml___thesisSection___body',
-  BackgroundChildFundYamlCalltoActionSectionCallToActions = 'background___childFundYaml___calltoActionSection___callToActions',
-  BackgroundChildFundYamlFileAbsolutePath = 'background___childFundYaml___fileAbsolutePath',
-  BackgroundChildResourcesYamlId = 'background___childResourcesYaml___id',
-  BackgroundChildResourcesYamlParentId = 'background___childResourcesYaml___parent___id',
-  BackgroundChildResourcesYamlParentChildren = 'background___childResourcesYaml___parent___children',
-  BackgroundChildResourcesYamlChildren = 'background___childResourcesYaml___children',
-  BackgroundChildResourcesYamlChildrenId = 'background___childResourcesYaml___children___id',
-  BackgroundChildResourcesYamlChildrenChildren = 'background___childResourcesYaml___children___children',
-  BackgroundChildResourcesYamlInternalContent = 'background___childResourcesYaml___internal___content',
-  BackgroundChildResourcesYamlInternalContentDigest = 'background___childResourcesYaml___internal___contentDigest',
-  BackgroundChildResourcesYamlInternalDescription = 'background___childResourcesYaml___internal___description',
-  BackgroundChildResourcesYamlInternalFieldOwners = 'background___childResourcesYaml___internal___fieldOwners',
-  BackgroundChildResourcesYamlInternalIgnoreType = 'background___childResourcesYaml___internal___ignoreType',
-  BackgroundChildResourcesYamlInternalMediaType = 'background___childResourcesYaml___internal___mediaType',
-  BackgroundChildResourcesYamlInternalOwner = 'background___childResourcesYaml___internal___owner',
-  BackgroundChildResourcesYamlInternalType = 'background___childResourcesYaml___internal___type',
-  BackgroundChildResourcesYamlTopSectionHeader = 'background___childResourcesYaml___topSection___header',
-  BackgroundChildResourcesYamlTopSectionBody = 'background___childResourcesYaml___topSection___body',
-  BackgroundChildResourcesYamlRegistrySectionHeader = 'background___childResourcesYaml___registrySection___header',
-  BackgroundChildResourcesYamlRegistrySectionDocumentTableTitle = 'background___childResourcesYaml___registrySection___documentTableTitle',
-  BackgroundChildResourcesYamlRegistrySectionDocuments = 'background___childResourcesYaml___registrySection___documents',
-  BackgroundChildResourcesYamlRegistrySectionSubsections = 'background___childResourcesYaml___registrySection___subsections',
-  BackgroundChildResourcesYamlLedgerSectionHeader = 'background___childResourcesYaml___ledgerSection___header',
-  BackgroundChildResourcesYamlLedgerSectionCards = 'background___childResourcesYaml___ledgerSection___cards',
-  BackgroundChildResourcesYamlFileAbsolutePath = 'background___childResourcesYaml___fileAbsolutePath',
-  BackgroundChildPressKitYamlId = 'background___childPressKitYaml___id',
-  BackgroundChildPressKitYamlParentId = 'background___childPressKitYaml___parent___id',
-  BackgroundChildPressKitYamlParentChildren = 'background___childPressKitYaml___parent___children',
-  BackgroundChildPressKitYamlChildren = 'background___childPressKitYaml___children',
-  BackgroundChildPressKitYamlChildrenId = 'background___childPressKitYaml___children___id',
-  BackgroundChildPressKitYamlChildrenChildren = 'background___childPressKitYaml___children___children',
-  BackgroundChildPressKitYamlInternalContent = 'background___childPressKitYaml___internal___content',
-  BackgroundChildPressKitYamlInternalContentDigest = 'background___childPressKitYaml___internal___contentDigest',
-  BackgroundChildPressKitYamlInternalDescription = 'background___childPressKitYaml___internal___description',
-  BackgroundChildPressKitYamlInternalFieldOwners = 'background___childPressKitYaml___internal___fieldOwners',
-  BackgroundChildPressKitYamlInternalIgnoreType = 'background___childPressKitYaml___internal___ignoreType',
-  BackgroundChildPressKitYamlInternalMediaType = 'background___childPressKitYaml___internal___mediaType',
-  BackgroundChildPressKitYamlInternalOwner = 'background___childPressKitYaml___internal___owner',
-  BackgroundChildPressKitYamlInternalType = 'background___childPressKitYaml___internal___type',
-  BackgroundChildPressKitYamlTopSectionHeader = 'background___childPressKitYaml___topSection___header',
-  BackgroundChildPressKitYamlTopSectionBody = 'background___childPressKitYaml___topSection___body',
-  BackgroundChildPressKitYamlTitleDescriptionSectionHeader = 'background___childPressKitYaml___titleDescriptionSection___header',
-  BackgroundChildPressKitYamlTitleDescriptionSectionDescription = 'background___childPressKitYaml___titleDescriptionSection___description',
-  BackgroundChildPressKitYamlEnableSectionHeader = 'background___childPressKitYaml___enableSection___header',
-  BackgroundChildPressKitYamlEnableSectionDescription = 'background___childPressKitYaml___enableSection___description',
-  BackgroundChildPressKitYamlTimelineSectionHeader = 'background___childPressKitYaml___timelineSection___header',
-  BackgroundChildPressKitYamlTimelineSectionDescription = 'background___childPressKitYaml___timelineSection___description',
-  BackgroundChildPressKitYamlTimelineSectionCompletedItemIndex = 'background___childPressKitYaml___timelineSection___completedItemIndex',
-  BackgroundChildPressKitYamlTimelineSectionItems = 'background___childPressKitYaml___timelineSection___items',
-  BackgroundChildPressKitYamlTeamSectionHeader = 'background___childPressKitYaml___teamSection___header',
-  BackgroundChildPressKitYamlTeamSectionButtonText = 'background___childPressKitYaml___teamSection___buttonText',
-  BackgroundChildPressKitYamlTeamSectionMembers = 'background___childPressKitYaml___teamSection___members',
-  BackgroundChildPressKitYamlFeaturedSectionHeader = 'background___childPressKitYaml___featuredSection___header',
-  BackgroundChildPressKitYamlFeaturedSectionArticles = 'background___childPressKitYaml___featuredSection___articles',
-  BackgroundChildPressKitYamlAwardsSectionHeader = 'background___childPressKitYaml___awardsSection___header',
-  BackgroundChildPressKitYamlAwardsSectionItems = 'background___childPressKitYaml___awardsSection___items',
-  BackgroundChildPressKitYamlLogosSectionHeader = 'background___childPressKitYaml___logosSection___header',
-  BackgroundChildPressKitYamlLogosSectionButtonText = 'background___childPressKitYaml___logosSection___buttonText',
-  BackgroundChildPressKitYamlLogosSectionButtonLink = 'background___childPressKitYaml___logosSection___buttonLink',
-  BackgroundChildPressKitYamlConnectSectionHeader = 'background___childPressKitYaml___connectSection___header',
-  BackgroundChildPressKitYamlPhotosSectionHeader = 'background___childPressKitYaml___photosSection___header',
-  BackgroundChildPressKitYamlPhotosSectionPhotos = 'background___childPressKitYaml___photosSection___photos',
-  BackgroundChildPressKitYamlFileAbsolutePath = 'background___childPressKitYaml___fileAbsolutePath',
-  BackgroundChildSharedYamlId = 'background___childSharedYaml___id',
-  BackgroundChildSharedYamlParentId = 'background___childSharedYaml___parent___id',
-  BackgroundChildSharedYamlParentChildren = 'background___childSharedYaml___parent___children',
-  BackgroundChildSharedYamlChildren = 'background___childSharedYaml___children',
-  BackgroundChildSharedYamlChildrenId = 'background___childSharedYaml___children___id',
-  BackgroundChildSharedYamlChildrenChildren = 'background___childSharedYaml___children___children',
-  BackgroundChildSharedYamlInternalContent = 'background___childSharedYaml___internal___content',
-  BackgroundChildSharedYamlInternalContentDigest = 'background___childSharedYaml___internal___contentDigest',
-  BackgroundChildSharedYamlInternalDescription = 'background___childSharedYaml___internal___description',
-  BackgroundChildSharedYamlInternalFieldOwners = 'background___childSharedYaml___internal___fieldOwners',
-  BackgroundChildSharedYamlInternalIgnoreType = 'background___childSharedYaml___internal___ignoreType',
-  BackgroundChildSharedYamlInternalMediaType = 'background___childSharedYaml___internal___mediaType',
-  BackgroundChildSharedYamlInternalOwner = 'background___childSharedYaml___internal___owner',
-  BackgroundChildSharedYamlInternalType = 'background___childSharedYaml___internal___type',
-  BackgroundChildSharedYamlNewsletterSectionHeader = 'background___childSharedYaml___newsletterSection___header',
-  BackgroundChildSharedYamlNewsletterSectionDescription = 'background___childSharedYaml___newsletterSection___description',
-  BackgroundChildSharedYamlFeaturedSectionHeader = 'background___childSharedYaml___featuredSection___header',
-  BackgroundChildSharedYamlFeaturedSectionTitle = 'background___childSharedYaml___featuredSection___title',
-  BackgroundChildSharedYamlFeaturedSectionLink = 'background___childSharedYaml___featuredSection___link',
-  BackgroundChildSharedYamlFeaturedSectionDescription = 'background___childSharedYaml___featuredSection___description',
-  BackgroundChildSharedYamlBlogSectionHeader = 'background___childSharedYaml___blogSection___header',
-  BackgroundChildSharedYamlBlogSectionPosts = 'background___childSharedYaml___blogSection___posts',
-  BackgroundChildSharedYamlComingSoonSectionHeader = 'background___childSharedYaml___comingSoonSection___header',
-  BackgroundChildSharedYamlComingSoonSectionProjects = 'background___childSharedYaml___comingSoonSection___projects',
-  BackgroundChildSharedYamlFileAbsolutePath = 'background___childSharedYaml___fileAbsolutePath',
   BackgroundChildMediaYamlId = 'background___childMediaYaml___id',
   BackgroundChildMediaYamlParentId = 'background___childMediaYaml___parent___id',
   BackgroundChildMediaYamlParentChildren = 'background___childMediaYaml___parent___children',
@@ -1962,34 +1883,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BackgroundChildMediaYamlCategoriesShowPlay = 'background___childMediaYaml___categories___showPlay',
   BackgroundChildMediaYamlCategoriesItems = 'background___childMediaYaml___categories___items',
   BackgroundChildMediaYamlFileAbsolutePath = 'background___childMediaYaml___fileAbsolutePath',
-  BackgroundChildScienceYamlId = 'background___childScienceYaml___id',
-  BackgroundChildScienceYamlParentId = 'background___childScienceYaml___parent___id',
-  BackgroundChildScienceYamlParentChildren = 'background___childScienceYaml___parent___children',
-  BackgroundChildScienceYamlChildren = 'background___childScienceYaml___children',
-  BackgroundChildScienceYamlChildrenId = 'background___childScienceYaml___children___id',
-  BackgroundChildScienceYamlChildrenChildren = 'background___childScienceYaml___children___children',
-  BackgroundChildScienceYamlInternalContent = 'background___childScienceYaml___internal___content',
-  BackgroundChildScienceYamlInternalContentDigest = 'background___childScienceYaml___internal___contentDigest',
-  BackgroundChildScienceYamlInternalDescription = 'background___childScienceYaml___internal___description',
-  BackgroundChildScienceYamlInternalFieldOwners = 'background___childScienceYaml___internal___fieldOwners',
-  BackgroundChildScienceYamlInternalIgnoreType = 'background___childScienceYaml___internal___ignoreType',
-  BackgroundChildScienceYamlInternalMediaType = 'background___childScienceYaml___internal___mediaType',
-  BackgroundChildScienceYamlInternalOwner = 'background___childScienceYaml___internal___owner',
-  BackgroundChildScienceYamlInternalType = 'background___childScienceYaml___internal___type',
-  BackgroundChildScienceYamlTopSectionHeader = 'background___childScienceYaml___topSection___header',
-  BackgroundChildScienceYamlTopSectionBody = 'background___childScienceYaml___topSection___body',
-  BackgroundChildScienceYamlTitleDescriptionSectionHeader = 'background___childScienceYaml___titleDescriptionSection___header',
-  BackgroundChildScienceYamlTitleDescriptionSectionDescription = 'background___childScienceYaml___titleDescriptionSection___description',
-  BackgroundChildScienceYamlOpenScienceSectionCaption = 'background___childScienceYaml___openScienceSection___caption',
-  BackgroundChildScienceYamlOpenScienceSectionPhases = 'background___childScienceYaml___openScienceSection___phases',
-  BackgroundChildScienceYamlPartnershipsSectionHeader = 'background___childScienceYaml___partnershipsSection___header',
-  BackgroundChildScienceYamlPartnershipsSectionPartners = 'background___childScienceYaml___partnershipsSection___partners',
-  BackgroundChildScienceYamlCommunitySectionCaption = 'background___childScienceYaml___communitySection___caption',
-  BackgroundChildScienceYamlCommunitySectionHeader = 'background___childScienceYaml___communitySection___header',
-  BackgroundChildScienceYamlCommunitySectionMembers = 'background___childScienceYaml___communitySection___members',
-  BackgroundChildScienceYamlPracticesOutcomesSectionHeader = 'background___childScienceYaml___practicesOutcomesSection___header',
-  BackgroundChildScienceYamlPracticesOutcomesSectionNote = 'background___childScienceYaml___practicesOutcomesSection___note',
-  BackgroundChildScienceYamlFileAbsolutePath = 'background___childScienceYaml___fileAbsolutePath',
   BackgroundChildMarkdownRemarkId = 'background___childMarkdownRemark___id',
   BackgroundChildMarkdownRemarkFrontmatterTitle = 'background___childMarkdownRemark___frontmatter___title',
   BackgroundChildMarkdownRemarkExcerpt = 'background___childMarkdownRemark___excerpt',
@@ -2020,6 +1913,183 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BackgroundChildMarkdownRemarkInternalMediaType = 'background___childMarkdownRemark___internal___mediaType',
   BackgroundChildMarkdownRemarkInternalOwner = 'background___childMarkdownRemark___internal___owner',
   BackgroundChildMarkdownRemarkInternalType = 'background___childMarkdownRemark___internal___type',
+  BackgroundChildHomeYamlId = 'background___childHomeYaml___id',
+  BackgroundChildHomeYamlParentId = 'background___childHomeYaml___parent___id',
+  BackgroundChildHomeYamlParentChildren = 'background___childHomeYaml___parent___children',
+  BackgroundChildHomeYamlChildren = 'background___childHomeYaml___children',
+  BackgroundChildHomeYamlChildrenId = 'background___childHomeYaml___children___id',
+  BackgroundChildHomeYamlChildrenChildren = 'background___childHomeYaml___children___children',
+  BackgroundChildHomeYamlInternalContent = 'background___childHomeYaml___internal___content',
+  BackgroundChildHomeYamlInternalContentDigest = 'background___childHomeYaml___internal___contentDigest',
+  BackgroundChildHomeYamlInternalDescription = 'background___childHomeYaml___internal___description',
+  BackgroundChildHomeYamlInternalFieldOwners = 'background___childHomeYaml___internal___fieldOwners',
+  BackgroundChildHomeYamlInternalIgnoreType = 'background___childHomeYaml___internal___ignoreType',
+  BackgroundChildHomeYamlInternalMediaType = 'background___childHomeYaml___internal___mediaType',
+  BackgroundChildHomeYamlInternalOwner = 'background___childHomeYaml___internal___owner',
+  BackgroundChildHomeYamlInternalType = 'background___childHomeYaml___internal___type',
+  BackgroundChildHomeYamlFoldSectionTagline = 'background___childHomeYaml___foldSection___tagline',
+  BackgroundChildHomeYamlFoldSectionDescription = 'background___childHomeYaml___foldSection___description',
+  BackgroundChildHomeYamlMarketplaceSectionHeader = 'background___childHomeYaml___marketplaceSection___header',
+  BackgroundChildHomeYamlMarketplaceSectionTooltip = 'background___childHomeYaml___marketplaceSection___tooltip',
+  BackgroundChildHomeYamlMarketplaceSectionCallToActions = 'background___childHomeYaml___marketplaceSection___callToActions',
+  BackgroundChildHomeYamlClimateSectionHeader = 'background___childHomeYaml___climateSection___header',
+  BackgroundChildHomeYamlClimateSectionDescription = 'background___childHomeYaml___climateSection___description',
+  BackgroundChildHomeYamlCarbonPlusSectionHeader = 'background___childHomeYaml___carbonPlusSection___header',
+  BackgroundChildHomeYamlCarbonPlusSectionDescription = 'background___childHomeYaml___carbonPlusSection___description',
+  BackgroundChildHomeYamlCarbonPlusSectionLinkText = 'background___childHomeYaml___carbonPlusSection___linkText',
+  BackgroundChildHomeYamlCarbonPlusSectionLinkUrl = 'background___childHomeYaml___carbonPlusSection___linkUrl',
+  BackgroundChildHomeYamlLedgerSectionDescription = 'background___childHomeYaml___ledgerSection___description',
+  BackgroundChildHomeYamlValuesSectionHeader = 'background___childHomeYaml___valuesSection___header',
+  BackgroundChildHomeYamlValuesSectionImageItems = 'background___childHomeYaml___valuesSection___imageItems',
+  BackgroundChildHomeYamlFileAbsolutePath = 'background___childHomeYaml___fileAbsolutePath',
+  BackgroundChildResourcesYamlId = 'background___childResourcesYaml___id',
+  BackgroundChildResourcesYamlParentId = 'background___childResourcesYaml___parent___id',
+  BackgroundChildResourcesYamlParentChildren = 'background___childResourcesYaml___parent___children',
+  BackgroundChildResourcesYamlChildren = 'background___childResourcesYaml___children',
+  BackgroundChildResourcesYamlChildrenId = 'background___childResourcesYaml___children___id',
+  BackgroundChildResourcesYamlChildrenChildren = 'background___childResourcesYaml___children___children',
+  BackgroundChildResourcesYamlInternalContent = 'background___childResourcesYaml___internal___content',
+  BackgroundChildResourcesYamlInternalContentDigest = 'background___childResourcesYaml___internal___contentDigest',
+  BackgroundChildResourcesYamlInternalDescription = 'background___childResourcesYaml___internal___description',
+  BackgroundChildResourcesYamlInternalFieldOwners = 'background___childResourcesYaml___internal___fieldOwners',
+  BackgroundChildResourcesYamlInternalIgnoreType = 'background___childResourcesYaml___internal___ignoreType',
+  BackgroundChildResourcesYamlInternalMediaType = 'background___childResourcesYaml___internal___mediaType',
+  BackgroundChildResourcesYamlInternalOwner = 'background___childResourcesYaml___internal___owner',
+  BackgroundChildResourcesYamlInternalType = 'background___childResourcesYaml___internal___type',
+  BackgroundChildResourcesYamlTopSectionHeader = 'background___childResourcesYaml___topSection___header',
+  BackgroundChildResourcesYamlTopSectionBody = 'background___childResourcesYaml___topSection___body',
+  BackgroundChildResourcesYamlRegistrySectionHeader = 'background___childResourcesYaml___registrySection___header',
+  BackgroundChildResourcesYamlRegistrySectionDocumentTableTitle = 'background___childResourcesYaml___registrySection___documentTableTitle',
+  BackgroundChildResourcesYamlRegistrySectionDocuments = 'background___childResourcesYaml___registrySection___documents',
+  BackgroundChildResourcesYamlRegistrySectionSubsections = 'background___childResourcesYaml___registrySection___subsections',
+  BackgroundChildResourcesYamlLedgerSectionHeader = 'background___childResourcesYaml___ledgerSection___header',
+  BackgroundChildResourcesYamlLedgerSectionCards = 'background___childResourcesYaml___ledgerSection___cards',
+  BackgroundChildResourcesYamlFileAbsolutePath = 'background___childResourcesYaml___fileAbsolutePath',
+  BackgroundChildScienceYamlId = 'background___childScienceYaml___id',
+  BackgroundChildScienceYamlParentId = 'background___childScienceYaml___parent___id',
+  BackgroundChildScienceYamlParentChildren = 'background___childScienceYaml___parent___children',
+  BackgroundChildScienceYamlChildren = 'background___childScienceYaml___children',
+  BackgroundChildScienceYamlChildrenId = 'background___childScienceYaml___children___id',
+  BackgroundChildScienceYamlChildrenChildren = 'background___childScienceYaml___children___children',
+  BackgroundChildScienceYamlInternalContent = 'background___childScienceYaml___internal___content',
+  BackgroundChildScienceYamlInternalContentDigest = 'background___childScienceYaml___internal___contentDigest',
+  BackgroundChildScienceYamlInternalDescription = 'background___childScienceYaml___internal___description',
+  BackgroundChildScienceYamlInternalFieldOwners = 'background___childScienceYaml___internal___fieldOwners',
+  BackgroundChildScienceYamlInternalIgnoreType = 'background___childScienceYaml___internal___ignoreType',
+  BackgroundChildScienceYamlInternalMediaType = 'background___childScienceYaml___internal___mediaType',
+  BackgroundChildScienceYamlInternalOwner = 'background___childScienceYaml___internal___owner',
+  BackgroundChildScienceYamlInternalType = 'background___childScienceYaml___internal___type',
+  BackgroundChildScienceYamlTopSectionHeader = 'background___childScienceYaml___topSection___header',
+  BackgroundChildScienceYamlTopSectionBody = 'background___childScienceYaml___topSection___body',
+  BackgroundChildScienceYamlTitleDescriptionSectionHeader = 'background___childScienceYaml___titleDescriptionSection___header',
+  BackgroundChildScienceYamlTitleDescriptionSectionDescription = 'background___childScienceYaml___titleDescriptionSection___description',
+  BackgroundChildScienceYamlOpenScienceSectionCaption = 'background___childScienceYaml___openScienceSection___caption',
+  BackgroundChildScienceYamlOpenScienceSectionPhases = 'background___childScienceYaml___openScienceSection___phases',
+  BackgroundChildScienceYamlPartnershipsSectionHeader = 'background___childScienceYaml___partnershipsSection___header',
+  BackgroundChildScienceYamlPartnershipsSectionPartners = 'background___childScienceYaml___partnershipsSection___partners',
+  BackgroundChildScienceYamlCommunitySectionCaption = 'background___childScienceYaml___communitySection___caption',
+  BackgroundChildScienceYamlCommunitySectionHeader = 'background___childScienceYaml___communitySection___header',
+  BackgroundChildScienceYamlCommunitySectionMembers = 'background___childScienceYaml___communitySection___members',
+  BackgroundChildScienceYamlPracticesOutcomesSectionHeader = 'background___childScienceYaml___practicesOutcomesSection___header',
+  BackgroundChildScienceYamlPracticesOutcomesSectionNote = 'background___childScienceYaml___practicesOutcomesSection___note',
+  BackgroundChildScienceYamlFileAbsolutePath = 'background___childScienceYaml___fileAbsolutePath',
+  BackgroundChildWalletAddressRegistrationYamlId = 'background___childWalletAddressRegistrationYaml___id',
+  BackgroundChildWalletAddressRegistrationYamlParentId = 'background___childWalletAddressRegistrationYaml___parent___id',
+  BackgroundChildWalletAddressRegistrationYamlParentChildren = 'background___childWalletAddressRegistrationYaml___parent___children',
+  BackgroundChildWalletAddressRegistrationYamlChildren = 'background___childWalletAddressRegistrationYaml___children',
+  BackgroundChildWalletAddressRegistrationYamlChildrenId = 'background___childWalletAddressRegistrationYaml___children___id',
+  BackgroundChildWalletAddressRegistrationYamlChildrenChildren = 'background___childWalletAddressRegistrationYaml___children___children',
+  BackgroundChildWalletAddressRegistrationYamlInternalContent = 'background___childWalletAddressRegistrationYaml___internal___content',
+  BackgroundChildWalletAddressRegistrationYamlInternalContentDigest = 'background___childWalletAddressRegistrationYaml___internal___contentDigest',
+  BackgroundChildWalletAddressRegistrationYamlInternalDescription = 'background___childWalletAddressRegistrationYaml___internal___description',
+  BackgroundChildWalletAddressRegistrationYamlInternalFieldOwners = 'background___childWalletAddressRegistrationYaml___internal___fieldOwners',
+  BackgroundChildWalletAddressRegistrationYamlInternalIgnoreType = 'background___childWalletAddressRegistrationYaml___internal___ignoreType',
+  BackgroundChildWalletAddressRegistrationYamlInternalMediaType = 'background___childWalletAddressRegistrationYaml___internal___mediaType',
+  BackgroundChildWalletAddressRegistrationYamlInternalOwner = 'background___childWalletAddressRegistrationYaml___internal___owner',
+  BackgroundChildWalletAddressRegistrationYamlInternalType = 'background___childWalletAddressRegistrationYaml___internal___type',
+  BackgroundChildWalletAddressRegistrationYamlTopSectionHeader = 'background___childWalletAddressRegistrationYaml___topSection___header',
+  BackgroundChildWalletAddressRegistrationYamlTopSectionBody = 'background___childWalletAddressRegistrationYaml___topSection___body',
+  BackgroundChildWalletAddressRegistrationYamlInstructionsSectionHeader = 'background___childWalletAddressRegistrationYaml___instructionsSection___header',
+  BackgroundChildWalletAddressRegistrationYamlInstructionsSectionBody = 'background___childWalletAddressRegistrationYaml___instructionsSection___body',
+  BackgroundChildWalletAddressRegistrationYamlWalletButtonText = 'background___childWalletAddressRegistrationYaml___wallet___buttonText',
+  BackgroundChildWalletAddressRegistrationYamlWalletWalletFoundButtonText = 'background___childWalletAddressRegistrationYaml___wallet___walletFoundButtonText',
+  BackgroundChildWalletAddressRegistrationYamlWalletNoWalletFoundMessage = 'background___childWalletAddressRegistrationYaml___wallet___noWalletFoundMessage',
+  BackgroundChildWalletAddressRegistrationYamlFormAirtableLink = 'background___childWalletAddressRegistrationYaml___form___airtableLink',
+  BackgroundChildWalletAddressRegistrationYamlFormRecaptchaMessage = 'background___childWalletAddressRegistrationYaml___form___recaptchaMessage',
+  BackgroundChildWalletAddressRegistrationYamlFileAbsolutePath = 'background___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  BackgroundChildSharedYamlId = 'background___childSharedYaml___id',
+  BackgroundChildSharedYamlParentId = 'background___childSharedYaml___parent___id',
+  BackgroundChildSharedYamlParentChildren = 'background___childSharedYaml___parent___children',
+  BackgroundChildSharedYamlChildren = 'background___childSharedYaml___children',
+  BackgroundChildSharedYamlChildrenId = 'background___childSharedYaml___children___id',
+  BackgroundChildSharedYamlChildrenChildren = 'background___childSharedYaml___children___children',
+  BackgroundChildSharedYamlInternalContent = 'background___childSharedYaml___internal___content',
+  BackgroundChildSharedYamlInternalContentDigest = 'background___childSharedYaml___internal___contentDigest',
+  BackgroundChildSharedYamlInternalDescription = 'background___childSharedYaml___internal___description',
+  BackgroundChildSharedYamlInternalFieldOwners = 'background___childSharedYaml___internal___fieldOwners',
+  BackgroundChildSharedYamlInternalIgnoreType = 'background___childSharedYaml___internal___ignoreType',
+  BackgroundChildSharedYamlInternalMediaType = 'background___childSharedYaml___internal___mediaType',
+  BackgroundChildSharedYamlInternalOwner = 'background___childSharedYaml___internal___owner',
+  BackgroundChildSharedYamlInternalType = 'background___childSharedYaml___internal___type',
+  BackgroundChildSharedYamlNewsletterSectionHeader = 'background___childSharedYaml___newsletterSection___header',
+  BackgroundChildSharedYamlNewsletterSectionDescription = 'background___childSharedYaml___newsletterSection___description',
+  BackgroundChildSharedYamlFeaturedSectionHeader = 'background___childSharedYaml___featuredSection___header',
+  BackgroundChildSharedYamlFeaturedSectionTitle = 'background___childSharedYaml___featuredSection___title',
+  BackgroundChildSharedYamlFeaturedSectionLink = 'background___childSharedYaml___featuredSection___link',
+  BackgroundChildSharedYamlFeaturedSectionDescription = 'background___childSharedYaml___featuredSection___description',
+  BackgroundChildSharedYamlBlogSectionHeader = 'background___childSharedYaml___blogSection___header',
+  BackgroundChildSharedYamlBlogSectionPosts = 'background___childSharedYaml___blogSection___posts',
+  BackgroundChildSharedYamlComingSoonSectionHeader = 'background___childSharedYaml___comingSoonSection___header',
+  BackgroundChildSharedYamlComingSoonSectionProjects = 'background___childSharedYaml___comingSoonSection___projects',
+  BackgroundChildSharedYamlFileAbsolutePath = 'background___childSharedYaml___fileAbsolutePath',
+  BackgroundChildTeamYamlId = 'background___childTeamYaml___id',
+  BackgroundChildTeamYamlParentId = 'background___childTeamYaml___parent___id',
+  BackgroundChildTeamYamlParentChildren = 'background___childTeamYaml___parent___children',
+  BackgroundChildTeamYamlChildren = 'background___childTeamYaml___children',
+  BackgroundChildTeamYamlChildrenId = 'background___childTeamYaml___children___id',
+  BackgroundChildTeamYamlChildrenChildren = 'background___childTeamYaml___children___children',
+  BackgroundChildTeamYamlInternalContent = 'background___childTeamYaml___internal___content',
+  BackgroundChildTeamYamlInternalContentDigest = 'background___childTeamYaml___internal___contentDigest',
+  BackgroundChildTeamYamlInternalDescription = 'background___childTeamYaml___internal___description',
+  BackgroundChildTeamYamlInternalFieldOwners = 'background___childTeamYaml___internal___fieldOwners',
+  BackgroundChildTeamYamlInternalIgnoreType = 'background___childTeamYaml___internal___ignoreType',
+  BackgroundChildTeamYamlInternalMediaType = 'background___childTeamYaml___internal___mediaType',
+  BackgroundChildTeamYamlInternalOwner = 'background___childTeamYaml___internal___owner',
+  BackgroundChildTeamYamlInternalType = 'background___childTeamYaml___internal___type',
+  BackgroundChildTeamYamlTopSectionHeader = 'background___childTeamYaml___topSection___header',
+  BackgroundChildTeamYamlTopSectionBody = 'background___childTeamYaml___topSection___body',
+  BackgroundChildTeamYamlCoreSectionTitle = 'background___childTeamYaml___coreSection___title',
+  BackgroundChildTeamYamlCoreSectionCoreMembers = 'background___childTeamYaml___coreSection___coreMembers',
+  BackgroundChildTeamYamlContributorSectionTitle = 'background___childTeamYaml___contributorSection___title',
+  BackgroundChildTeamYamlContributorSectionContributors = 'background___childTeamYaml___contributorSection___contributors',
+  BackgroundChildTeamYamlAdvisorSectionTitle = 'background___childTeamYaml___advisorSection___title',
+  BackgroundChildTeamYamlAdvisorSectionAdvisors = 'background___childTeamYaml___advisorSection___advisors',
+  BackgroundChildTeamYamlFileAbsolutePath = 'background___childTeamYaml___fileAbsolutePath',
+  BackgroundChildValidatorsYamlId = 'background___childValidatorsYaml___id',
+  BackgroundChildValidatorsYamlParentId = 'background___childValidatorsYaml___parent___id',
+  BackgroundChildValidatorsYamlParentChildren = 'background___childValidatorsYaml___parent___children',
+  BackgroundChildValidatorsYamlChildren = 'background___childValidatorsYaml___children',
+  BackgroundChildValidatorsYamlChildrenId = 'background___childValidatorsYaml___children___id',
+  BackgroundChildValidatorsYamlChildrenChildren = 'background___childValidatorsYaml___children___children',
+  BackgroundChildValidatorsYamlInternalContent = 'background___childValidatorsYaml___internal___content',
+  BackgroundChildValidatorsYamlInternalContentDigest = 'background___childValidatorsYaml___internal___contentDigest',
+  BackgroundChildValidatorsYamlInternalDescription = 'background___childValidatorsYaml___internal___description',
+  BackgroundChildValidatorsYamlInternalFieldOwners = 'background___childValidatorsYaml___internal___fieldOwners',
+  BackgroundChildValidatorsYamlInternalIgnoreType = 'background___childValidatorsYaml___internal___ignoreType',
+  BackgroundChildValidatorsYamlInternalMediaType = 'background___childValidatorsYaml___internal___mediaType',
+  BackgroundChildValidatorsYamlInternalOwner = 'background___childValidatorsYaml___internal___owner',
+  BackgroundChildValidatorsYamlInternalType = 'background___childValidatorsYaml___internal___type',
+  BackgroundChildValidatorsYamlTopSectionHeader = 'background___childValidatorsYaml___topSection___header',
+  BackgroundChildValidatorsYamlTopSectionBody = 'background___childValidatorsYaml___topSection___body',
+  BackgroundChildValidatorsYamlWhatSectionHeader = 'background___childValidatorsYaml___whatSection___header',
+  BackgroundChildValidatorsYamlWhatSectionBody = 'background___childValidatorsYaml___whatSection___body',
+  BackgroundChildValidatorsYamlWhoSectionHeader = 'background___childValidatorsYaml___whoSection___header',
+  BackgroundChildValidatorsYamlWhoSectionBody = 'background___childValidatorsYaml___whoSection___body',
+  BackgroundChildValidatorsYamlWhoSectionValidators = 'background___childValidatorsYaml___whoSection___validators',
+  BackgroundChildValidatorsYamlConnectSectionHeader = 'background___childValidatorsYaml___connectSection___header',
+  BackgroundChildValidatorsYamlWhySectionHeader = 'background___childValidatorsYaml___whySection___header',
+  BackgroundChildValidatorsYamlWhySectionBody = 'background___childValidatorsYaml___whySection___body',
+  BackgroundChildValidatorsYamlFileAbsolutePath = 'background___childValidatorsYaml___fileAbsolutePath',
   BackgroundChildTokenYamlId = 'background___childTokenYaml___id',
   BackgroundChildTokenYamlParentId = 'background___childTokenYaml___parent___id',
   BackgroundChildTokenYamlParentChildren = 'background___childTokenYaml___parent___children',
@@ -2048,8 +2118,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BackgroundChildTokenYamlInfoSectionImageTitle = 'background___childTokenYaml___infoSection___imageTitle',
   BackgroundChildTokenYamlTokenPoolTitle = 'background___childTokenYaml___tokenPool___title',
   BackgroundChildTokenYamlTokenPoolSubtitle = 'background___childTokenYaml___tokenPool___subtitle',
-  BackgroundChildTokenYamlUnlockScheduleTitle = 'background___childTokenYaml___unlockSchedule___title',
-  BackgroundChildTokenYamlUnlockScheduleSubtitle = 'background___childTokenYaml___unlockSchedule___subtitle',
   BackgroundChildTokenYamlStakingTitle = 'background___childTokenYaml___staking___title',
   BackgroundChildTokenYamlStakingBody = 'background___childTokenYaml___staking___body',
   BackgroundChildTokenYamlStakingButtonText = 'background___childTokenYaml___staking___buttonText',
@@ -2063,78 +2131,6 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BackgroundChildTokenYamlNewsletterSectionButtonText = 'background___childTokenYaml___newsletterSection___buttonText',
   BackgroundChildTokenYamlNewsletterSectionInputText = 'background___childTokenYaml___newsletterSection___inputText',
   BackgroundChildTokenYamlFileAbsolutePath = 'background___childTokenYaml___fileAbsolutePath',
-  BackgroundChildTeamYamlId = 'background___childTeamYaml___id',
-  BackgroundChildTeamYamlParentId = 'background___childTeamYaml___parent___id',
-  BackgroundChildTeamYamlParentChildren = 'background___childTeamYaml___parent___children',
-  BackgroundChildTeamYamlChildren = 'background___childTeamYaml___children',
-  BackgroundChildTeamYamlChildrenId = 'background___childTeamYaml___children___id',
-  BackgroundChildTeamYamlChildrenChildren = 'background___childTeamYaml___children___children',
-  BackgroundChildTeamYamlInternalContent = 'background___childTeamYaml___internal___content',
-  BackgroundChildTeamYamlInternalContentDigest = 'background___childTeamYaml___internal___contentDigest',
-  BackgroundChildTeamYamlInternalDescription = 'background___childTeamYaml___internal___description',
-  BackgroundChildTeamYamlInternalFieldOwners = 'background___childTeamYaml___internal___fieldOwners',
-  BackgroundChildTeamYamlInternalIgnoreType = 'background___childTeamYaml___internal___ignoreType',
-  BackgroundChildTeamYamlInternalMediaType = 'background___childTeamYaml___internal___mediaType',
-  BackgroundChildTeamYamlInternalOwner = 'background___childTeamYaml___internal___owner',
-  BackgroundChildTeamYamlInternalType = 'background___childTeamYaml___internal___type',
-  BackgroundChildTeamYamlTopSectionHeader = 'background___childTeamYaml___topSection___header',
-  BackgroundChildTeamYamlTopSectionBody = 'background___childTeamYaml___topSection___body',
-  BackgroundChildTeamYamlCoreSectionTitle = 'background___childTeamYaml___coreSection___title',
-  BackgroundChildTeamYamlCoreSectionCoreMembers = 'background___childTeamYaml___coreSection___coreMembers',
-  BackgroundChildTeamYamlContributorSectionTitle = 'background___childTeamYaml___contributorSection___title',
-  BackgroundChildTeamYamlContributorSectionContributors = 'background___childTeamYaml___contributorSection___contributors',
-  BackgroundChildTeamYamlAdvisorSectionTitle = 'background___childTeamYaml___advisorSection___title',
-  BackgroundChildTeamYamlAdvisorSectionAdvisors = 'background___childTeamYaml___advisorSection___advisors',
-  BackgroundChildTeamYamlFileAbsolutePath = 'background___childTeamYaml___fileAbsolutePath',
-  BackgroundChildWalletAddressRegistrationYamlId = 'background___childWalletAddressRegistrationYaml___id',
-  BackgroundChildWalletAddressRegistrationYamlParentId = 'background___childWalletAddressRegistrationYaml___parent___id',
-  BackgroundChildWalletAddressRegistrationYamlParentChildren = 'background___childWalletAddressRegistrationYaml___parent___children',
-  BackgroundChildWalletAddressRegistrationYamlChildren = 'background___childWalletAddressRegistrationYaml___children',
-  BackgroundChildWalletAddressRegistrationYamlChildrenId = 'background___childWalletAddressRegistrationYaml___children___id',
-  BackgroundChildWalletAddressRegistrationYamlChildrenChildren = 'background___childWalletAddressRegistrationYaml___children___children',
-  BackgroundChildWalletAddressRegistrationYamlInternalContent = 'background___childWalletAddressRegistrationYaml___internal___content',
-  BackgroundChildWalletAddressRegistrationYamlInternalContentDigest = 'background___childWalletAddressRegistrationYaml___internal___contentDigest',
-  BackgroundChildWalletAddressRegistrationYamlInternalDescription = 'background___childWalletAddressRegistrationYaml___internal___description',
-  BackgroundChildWalletAddressRegistrationYamlInternalFieldOwners = 'background___childWalletAddressRegistrationYaml___internal___fieldOwners',
-  BackgroundChildWalletAddressRegistrationYamlInternalIgnoreType = 'background___childWalletAddressRegistrationYaml___internal___ignoreType',
-  BackgroundChildWalletAddressRegistrationYamlInternalMediaType = 'background___childWalletAddressRegistrationYaml___internal___mediaType',
-  BackgroundChildWalletAddressRegistrationYamlInternalOwner = 'background___childWalletAddressRegistrationYaml___internal___owner',
-  BackgroundChildWalletAddressRegistrationYamlInternalType = 'background___childWalletAddressRegistrationYaml___internal___type',
-  BackgroundChildWalletAddressRegistrationYamlTopSectionHeader = 'background___childWalletAddressRegistrationYaml___topSection___header',
-  BackgroundChildWalletAddressRegistrationYamlTopSectionBody = 'background___childWalletAddressRegistrationYaml___topSection___body',
-  BackgroundChildWalletAddressRegistrationYamlInstructionsSectionHeader = 'background___childWalletAddressRegistrationYaml___instructionsSection___header',
-  BackgroundChildWalletAddressRegistrationYamlInstructionsSectionBody = 'background___childWalletAddressRegistrationYaml___instructionsSection___body',
-  BackgroundChildWalletAddressRegistrationYamlWalletButtonText = 'background___childWalletAddressRegistrationYaml___wallet___buttonText',
-  BackgroundChildWalletAddressRegistrationYamlWalletWalletFoundButtonText = 'background___childWalletAddressRegistrationYaml___wallet___walletFoundButtonText',
-  BackgroundChildWalletAddressRegistrationYamlWalletNoWalletFoundMessage = 'background___childWalletAddressRegistrationYaml___wallet___noWalletFoundMessage',
-  BackgroundChildWalletAddressRegistrationYamlFormAirtableLink = 'background___childWalletAddressRegistrationYaml___form___airtableLink',
-  BackgroundChildWalletAddressRegistrationYamlFormRecaptchaMessage = 'background___childWalletAddressRegistrationYaml___form___recaptchaMessage',
-  BackgroundChildWalletAddressRegistrationYamlFileAbsolutePath = 'background___childWalletAddressRegistrationYaml___fileAbsolutePath',
-  BackgroundChildValidatorsYamlId = 'background___childValidatorsYaml___id',
-  BackgroundChildValidatorsYamlParentId = 'background___childValidatorsYaml___parent___id',
-  BackgroundChildValidatorsYamlParentChildren = 'background___childValidatorsYaml___parent___children',
-  BackgroundChildValidatorsYamlChildren = 'background___childValidatorsYaml___children',
-  BackgroundChildValidatorsYamlChildrenId = 'background___childValidatorsYaml___children___id',
-  BackgroundChildValidatorsYamlChildrenChildren = 'background___childValidatorsYaml___children___children',
-  BackgroundChildValidatorsYamlInternalContent = 'background___childValidatorsYaml___internal___content',
-  BackgroundChildValidatorsYamlInternalContentDigest = 'background___childValidatorsYaml___internal___contentDigest',
-  BackgroundChildValidatorsYamlInternalDescription = 'background___childValidatorsYaml___internal___description',
-  BackgroundChildValidatorsYamlInternalFieldOwners = 'background___childValidatorsYaml___internal___fieldOwners',
-  BackgroundChildValidatorsYamlInternalIgnoreType = 'background___childValidatorsYaml___internal___ignoreType',
-  BackgroundChildValidatorsYamlInternalMediaType = 'background___childValidatorsYaml___internal___mediaType',
-  BackgroundChildValidatorsYamlInternalOwner = 'background___childValidatorsYaml___internal___owner',
-  BackgroundChildValidatorsYamlInternalType = 'background___childValidatorsYaml___internal___type',
-  BackgroundChildValidatorsYamlTopSectionHeader = 'background___childValidatorsYaml___topSection___header',
-  BackgroundChildValidatorsYamlTopSectionBody = 'background___childValidatorsYaml___topSection___body',
-  BackgroundChildValidatorsYamlWhatSectionHeader = 'background___childValidatorsYaml___whatSection___header',
-  BackgroundChildValidatorsYamlWhatSectionBody = 'background___childValidatorsYaml___whatSection___body',
-  BackgroundChildValidatorsYamlWhoSectionHeader = 'background___childValidatorsYaml___whoSection___header',
-  BackgroundChildValidatorsYamlWhoSectionBody = 'background___childValidatorsYaml___whoSection___body',
-  BackgroundChildValidatorsYamlWhoSectionValidators = 'background___childValidatorsYaml___whoSection___validators',
-  BackgroundChildValidatorsYamlConnectSectionHeader = 'background___childValidatorsYaml___connectSection___header',
-  BackgroundChildValidatorsYamlWhySectionHeader = 'background___childValidatorsYaml___whySection___header',
-  BackgroundChildValidatorsYamlWhySectionBody = 'background___childValidatorsYaml___whySection___body',
-  BackgroundChildValidatorsYamlFileAbsolutePath = 'background___childValidatorsYaml___fileAbsolutePath',
   Description = 'description',
   AboutSectionAbout = 'aboutSection___about',
   AboutSectionMapImageSourceInstanceName = 'aboutSection___mapImage___sourceInstanceName',
@@ -2187,33 +2183,32 @@ export enum CaseStudyItemsYamlFieldsEnum {
   AboutSectionMapImageInternalMediaType = 'aboutSection___mapImage___internal___mediaType',
   AboutSectionMapImageInternalOwner = 'aboutSection___mapImage___internal___owner',
   AboutSectionMapImageInternalType = 'aboutSection___mapImage___internal___type',
-  AboutSectionMapImageChildCommunityYamlId = 'aboutSection___mapImage___childCommunityYaml___id',
-  AboutSectionMapImageChildCommunityYamlChildren = 'aboutSection___mapImage___childCommunityYaml___children',
-  AboutSectionMapImageChildCommunityYamlFileAbsolutePath = 'aboutSection___mapImage___childCommunityYaml___fileAbsolutePath',
   AboutSectionMapImageChildCaseStudiesYamlId = 'aboutSection___mapImage___childCaseStudiesYaml___id',
   AboutSectionMapImageChildCaseStudiesYamlChildren = 'aboutSection___mapImage___childCaseStudiesYaml___children',
   AboutSectionMapImageChildCaseStudiesYamlFileAbsolutePath = 'aboutSection___mapImage___childCaseStudiesYaml___fileAbsolutePath',
-  AboutSectionMapImageChildDevelopersYamlId = 'aboutSection___mapImage___childDevelopersYaml___id',
-  AboutSectionMapImageChildDevelopersYamlChildren = 'aboutSection___mapImage___childDevelopersYaml___children',
-  AboutSectionMapImageChildDevelopersYamlFileAbsolutePath = 'aboutSection___mapImage___childDevelopersYaml___fileAbsolutePath',
   AboutSectionMapImageChildCaseStudyItemsYamlId = 'aboutSection___mapImage___childCaseStudyItemsYaml___id',
   AboutSectionMapImageChildCaseStudyItemsYamlChildren = 'aboutSection___mapImage___childCaseStudyItemsYaml___children',
   AboutSectionMapImageChildCaseStudyItemsYamlName = 'aboutSection___mapImage___childCaseStudyItemsYaml___name',
   AboutSectionMapImageChildCaseStudyItemsYamlSlug = 'aboutSection___mapImage___childCaseStudyItemsYaml___slug',
   AboutSectionMapImageChildCaseStudyItemsYamlDescription = 'aboutSection___mapImage___childCaseStudyItemsYaml___description',
   AboutSectionMapImageChildCaseStudyItemsYamlFileAbsolutePath = 'aboutSection___mapImage___childCaseStudyItemsYaml___fileAbsolutePath',
-  AboutSectionMapImageChildHomeYamlId = 'aboutSection___mapImage___childHomeYaml___id',
-  AboutSectionMapImageChildHomeYamlChildren = 'aboutSection___mapImage___childHomeYaml___children',
-  AboutSectionMapImageChildHomeYamlFileAbsolutePath = 'aboutSection___mapImage___childHomeYaml___fileAbsolutePath',
+  AboutSectionMapImageChildDevelopersYamlId = 'aboutSection___mapImage___childDevelopersYaml___id',
+  AboutSectionMapImageChildDevelopersYamlChildren = 'aboutSection___mapImage___childDevelopersYaml___children',
+  AboutSectionMapImageChildDevelopersYamlFileAbsolutePath = 'aboutSection___mapImage___childDevelopersYaml___fileAbsolutePath',
+  AboutSectionMapImageChildCommunityYamlId = 'aboutSection___mapImage___childCommunityYaml___id',
+  AboutSectionMapImageChildCommunityYamlChildren = 'aboutSection___mapImage___childCommunityYaml___children',
+  AboutSectionMapImageChildCommunityYamlFileAbsolutePath = 'aboutSection___mapImage___childCommunityYaml___fileAbsolutePath',
   AboutSectionMapImageChildContactYamlId = 'aboutSection___mapImage___childContactYaml___id',
   AboutSectionMapImageChildContactYamlChildren = 'aboutSection___mapImage___childContactYaml___children',
   AboutSectionMapImageChildContactYamlHeader = 'aboutSection___mapImage___childContactYaml___header',
   AboutSectionMapImageChildContactYamlBody = 'aboutSection___mapImage___childContactYaml___body',
   AboutSectionMapImageChildContactYamlFileAbsolutePath = 'aboutSection___mapImage___childContactYaml___fileAbsolutePath',
-  AboutSectionMapImageChildFaqYamlId = 'aboutSection___mapImage___childFaqYaml___id',
-  AboutSectionMapImageChildFaqYamlChildren = 'aboutSection___mapImage___childFaqYaml___children',
-  AboutSectionMapImageChildFaqYamlCategories = 'aboutSection___mapImage___childFaqYaml___categories',
-  AboutSectionMapImageChildFaqYamlFileAbsolutePath = 'aboutSection___mapImage___childFaqYaml___fileAbsolutePath',
+  AboutSectionMapImageChildPressKitYamlId = 'aboutSection___mapImage___childPressKitYaml___id',
+  AboutSectionMapImageChildPressKitYamlChildren = 'aboutSection___mapImage___childPressKitYaml___children',
+  AboutSectionMapImageChildPressKitYamlFileAbsolutePath = 'aboutSection___mapImage___childPressKitYaml___fileAbsolutePath',
+  AboutSectionMapImageChildFundYamlId = 'aboutSection___mapImage___childFundYaml___id',
+  AboutSectionMapImageChildFundYamlChildren = 'aboutSection___mapImage___childFundYaml___children',
+  AboutSectionMapImageChildFundYamlFileAbsolutePath = 'aboutSection___mapImage___childFundYaml___fileAbsolutePath',
   AboutSectionMapImageChildInvestYamlId = 'aboutSection___mapImage___childInvestYaml___id',
   AboutSectionMapImageChildInvestYamlChildren = 'aboutSection___mapImage___childInvestYaml___children',
   AboutSectionMapImageChildInvestYamlFileAbsolutePath = 'aboutSection___mapImage___childInvestYaml___fileAbsolutePath',
@@ -2223,31 +2218,20 @@ export enum CaseStudyItemsYamlFieldsEnum {
   AboutSectionMapImageChildMainnetYamlLivecastLink = 'aboutSection___mapImage___childMainnetYaml___livecastLink',
   AboutSectionMapImageChildMainnetYamlSeoDescription = 'aboutSection___mapImage___childMainnetYaml___seoDescription',
   AboutSectionMapImageChildMainnetYamlFileAbsolutePath = 'aboutSection___mapImage___childMainnetYaml___fileAbsolutePath',
+  AboutSectionMapImageChildFaqYamlId = 'aboutSection___mapImage___childFaqYaml___id',
+  AboutSectionMapImageChildFaqYamlChildren = 'aboutSection___mapImage___childFaqYaml___children',
+  AboutSectionMapImageChildFaqYamlCategories = 'aboutSection___mapImage___childFaqYaml___categories',
+  AboutSectionMapImageChildFaqYamlFileAbsolutePath = 'aboutSection___mapImage___childFaqYaml___fileAbsolutePath',
   AboutSectionMapImageChildPartnersYamlId = 'aboutSection___mapImage___childPartnersYaml___id',
   AboutSectionMapImageChildPartnersYamlChildren = 'aboutSection___mapImage___childPartnersYaml___children',
   AboutSectionMapImageChildPartnersYamlHeader = 'aboutSection___mapImage___childPartnersYaml___header',
   AboutSectionMapImageChildPartnersYamlPartnerLogos = 'aboutSection___mapImage___childPartnersYaml___partnerLogos',
   AboutSectionMapImageChildPartnersYamlFileAbsolutePath = 'aboutSection___mapImage___childPartnersYaml___fileAbsolutePath',
-  AboutSectionMapImageChildFundYamlId = 'aboutSection___mapImage___childFundYaml___id',
-  AboutSectionMapImageChildFundYamlChildren = 'aboutSection___mapImage___childFundYaml___children',
-  AboutSectionMapImageChildFundYamlFileAbsolutePath = 'aboutSection___mapImage___childFundYaml___fileAbsolutePath',
-  AboutSectionMapImageChildResourcesYamlId = 'aboutSection___mapImage___childResourcesYaml___id',
-  AboutSectionMapImageChildResourcesYamlChildren = 'aboutSection___mapImage___childResourcesYaml___children',
-  AboutSectionMapImageChildResourcesYamlFileAbsolutePath = 'aboutSection___mapImage___childResourcesYaml___fileAbsolutePath',
-  AboutSectionMapImageChildPressKitYamlId = 'aboutSection___mapImage___childPressKitYaml___id',
-  AboutSectionMapImageChildPressKitYamlChildren = 'aboutSection___mapImage___childPressKitYaml___children',
-  AboutSectionMapImageChildPressKitYamlFileAbsolutePath = 'aboutSection___mapImage___childPressKitYaml___fileAbsolutePath',
-  AboutSectionMapImageChildSharedYamlId = 'aboutSection___mapImage___childSharedYaml___id',
-  AboutSectionMapImageChildSharedYamlChildren = 'aboutSection___mapImage___childSharedYaml___children',
-  AboutSectionMapImageChildSharedYamlFileAbsolutePath = 'aboutSection___mapImage___childSharedYaml___fileAbsolutePath',
   AboutSectionMapImageChildMediaYamlId = 'aboutSection___mapImage___childMediaYaml___id',
   AboutSectionMapImageChildMediaYamlChildren = 'aboutSection___mapImage___childMediaYaml___children',
   AboutSectionMapImageChildMediaYamlHeader = 'aboutSection___mapImage___childMediaYaml___header',
   AboutSectionMapImageChildMediaYamlCategories = 'aboutSection___mapImage___childMediaYaml___categories',
   AboutSectionMapImageChildMediaYamlFileAbsolutePath = 'aboutSection___mapImage___childMediaYaml___fileAbsolutePath',
-  AboutSectionMapImageChildScienceYamlId = 'aboutSection___mapImage___childScienceYaml___id',
-  AboutSectionMapImageChildScienceYamlChildren = 'aboutSection___mapImage___childScienceYaml___children',
-  AboutSectionMapImageChildScienceYamlFileAbsolutePath = 'aboutSection___mapImage___childScienceYaml___fileAbsolutePath',
   AboutSectionMapImageChildMarkdownRemarkId = 'aboutSection___mapImage___childMarkdownRemark___id',
   AboutSectionMapImageChildMarkdownRemarkExcerpt = 'aboutSection___mapImage___childMarkdownRemark___excerpt',
   AboutSectionMapImageChildMarkdownRemarkRawMarkdownBody = 'aboutSection___mapImage___childMarkdownRemark___rawMarkdownBody',
@@ -2259,18 +2243,30 @@ export enum CaseStudyItemsYamlFieldsEnum {
   AboutSectionMapImageChildMarkdownRemarkTimeToRead = 'aboutSection___mapImage___childMarkdownRemark___timeToRead',
   AboutSectionMapImageChildMarkdownRemarkTableOfContents = 'aboutSection___mapImage___childMarkdownRemark___tableOfContents',
   AboutSectionMapImageChildMarkdownRemarkChildren = 'aboutSection___mapImage___childMarkdownRemark___children',
-  AboutSectionMapImageChildTokenYamlId = 'aboutSection___mapImage___childTokenYaml___id',
-  AboutSectionMapImageChildTokenYamlChildren = 'aboutSection___mapImage___childTokenYaml___children',
-  AboutSectionMapImageChildTokenYamlFileAbsolutePath = 'aboutSection___mapImage___childTokenYaml___fileAbsolutePath',
-  AboutSectionMapImageChildTeamYamlId = 'aboutSection___mapImage___childTeamYaml___id',
-  AboutSectionMapImageChildTeamYamlChildren = 'aboutSection___mapImage___childTeamYaml___children',
-  AboutSectionMapImageChildTeamYamlFileAbsolutePath = 'aboutSection___mapImage___childTeamYaml___fileAbsolutePath',
+  AboutSectionMapImageChildHomeYamlId = 'aboutSection___mapImage___childHomeYaml___id',
+  AboutSectionMapImageChildHomeYamlChildren = 'aboutSection___mapImage___childHomeYaml___children',
+  AboutSectionMapImageChildHomeYamlFileAbsolutePath = 'aboutSection___mapImage___childHomeYaml___fileAbsolutePath',
+  AboutSectionMapImageChildResourcesYamlId = 'aboutSection___mapImage___childResourcesYaml___id',
+  AboutSectionMapImageChildResourcesYamlChildren = 'aboutSection___mapImage___childResourcesYaml___children',
+  AboutSectionMapImageChildResourcesYamlFileAbsolutePath = 'aboutSection___mapImage___childResourcesYaml___fileAbsolutePath',
+  AboutSectionMapImageChildScienceYamlId = 'aboutSection___mapImage___childScienceYaml___id',
+  AboutSectionMapImageChildScienceYamlChildren = 'aboutSection___mapImage___childScienceYaml___children',
+  AboutSectionMapImageChildScienceYamlFileAbsolutePath = 'aboutSection___mapImage___childScienceYaml___fileAbsolutePath',
   AboutSectionMapImageChildWalletAddressRegistrationYamlId = 'aboutSection___mapImage___childWalletAddressRegistrationYaml___id',
   AboutSectionMapImageChildWalletAddressRegistrationYamlChildren = 'aboutSection___mapImage___childWalletAddressRegistrationYaml___children',
   AboutSectionMapImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'aboutSection___mapImage___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  AboutSectionMapImageChildSharedYamlId = 'aboutSection___mapImage___childSharedYaml___id',
+  AboutSectionMapImageChildSharedYamlChildren = 'aboutSection___mapImage___childSharedYaml___children',
+  AboutSectionMapImageChildSharedYamlFileAbsolutePath = 'aboutSection___mapImage___childSharedYaml___fileAbsolutePath',
+  AboutSectionMapImageChildTeamYamlId = 'aboutSection___mapImage___childTeamYaml___id',
+  AboutSectionMapImageChildTeamYamlChildren = 'aboutSection___mapImage___childTeamYaml___children',
+  AboutSectionMapImageChildTeamYamlFileAbsolutePath = 'aboutSection___mapImage___childTeamYaml___fileAbsolutePath',
   AboutSectionMapImageChildValidatorsYamlId = 'aboutSection___mapImage___childValidatorsYaml___id',
   AboutSectionMapImageChildValidatorsYamlChildren = 'aboutSection___mapImage___childValidatorsYaml___children',
   AboutSectionMapImageChildValidatorsYamlFileAbsolutePath = 'aboutSection___mapImage___childValidatorsYaml___fileAbsolutePath',
+  AboutSectionMapImageChildTokenYamlId = 'aboutSection___mapImage___childTokenYaml___id',
+  AboutSectionMapImageChildTokenYamlChildren = 'aboutSection___mapImage___childTokenYaml___children',
+  AboutSectionMapImageChildTokenYamlFileAbsolutePath = 'aboutSection___mapImage___childTokenYaml___fileAbsolutePath',
   AboutSectionAboutImageSourceInstanceName = 'aboutSection___aboutImage___sourceInstanceName',
   AboutSectionAboutImageAbsolutePath = 'aboutSection___aboutImage___absolutePath',
   AboutSectionAboutImageRelativePath = 'aboutSection___aboutImage___relativePath',
@@ -2321,33 +2317,32 @@ export enum CaseStudyItemsYamlFieldsEnum {
   AboutSectionAboutImageInternalMediaType = 'aboutSection___aboutImage___internal___mediaType',
   AboutSectionAboutImageInternalOwner = 'aboutSection___aboutImage___internal___owner',
   AboutSectionAboutImageInternalType = 'aboutSection___aboutImage___internal___type',
-  AboutSectionAboutImageChildCommunityYamlId = 'aboutSection___aboutImage___childCommunityYaml___id',
-  AboutSectionAboutImageChildCommunityYamlChildren = 'aboutSection___aboutImage___childCommunityYaml___children',
-  AboutSectionAboutImageChildCommunityYamlFileAbsolutePath = 'aboutSection___aboutImage___childCommunityYaml___fileAbsolutePath',
   AboutSectionAboutImageChildCaseStudiesYamlId = 'aboutSection___aboutImage___childCaseStudiesYaml___id',
   AboutSectionAboutImageChildCaseStudiesYamlChildren = 'aboutSection___aboutImage___childCaseStudiesYaml___children',
   AboutSectionAboutImageChildCaseStudiesYamlFileAbsolutePath = 'aboutSection___aboutImage___childCaseStudiesYaml___fileAbsolutePath',
-  AboutSectionAboutImageChildDevelopersYamlId = 'aboutSection___aboutImage___childDevelopersYaml___id',
-  AboutSectionAboutImageChildDevelopersYamlChildren = 'aboutSection___aboutImage___childDevelopersYaml___children',
-  AboutSectionAboutImageChildDevelopersYamlFileAbsolutePath = 'aboutSection___aboutImage___childDevelopersYaml___fileAbsolutePath',
   AboutSectionAboutImageChildCaseStudyItemsYamlId = 'aboutSection___aboutImage___childCaseStudyItemsYaml___id',
   AboutSectionAboutImageChildCaseStudyItemsYamlChildren = 'aboutSection___aboutImage___childCaseStudyItemsYaml___children',
   AboutSectionAboutImageChildCaseStudyItemsYamlName = 'aboutSection___aboutImage___childCaseStudyItemsYaml___name',
   AboutSectionAboutImageChildCaseStudyItemsYamlSlug = 'aboutSection___aboutImage___childCaseStudyItemsYaml___slug',
   AboutSectionAboutImageChildCaseStudyItemsYamlDescription = 'aboutSection___aboutImage___childCaseStudyItemsYaml___description',
   AboutSectionAboutImageChildCaseStudyItemsYamlFileAbsolutePath = 'aboutSection___aboutImage___childCaseStudyItemsYaml___fileAbsolutePath',
-  AboutSectionAboutImageChildHomeYamlId = 'aboutSection___aboutImage___childHomeYaml___id',
-  AboutSectionAboutImageChildHomeYamlChildren = 'aboutSection___aboutImage___childHomeYaml___children',
-  AboutSectionAboutImageChildHomeYamlFileAbsolutePath = 'aboutSection___aboutImage___childHomeYaml___fileAbsolutePath',
+  AboutSectionAboutImageChildDevelopersYamlId = 'aboutSection___aboutImage___childDevelopersYaml___id',
+  AboutSectionAboutImageChildDevelopersYamlChildren = 'aboutSection___aboutImage___childDevelopersYaml___children',
+  AboutSectionAboutImageChildDevelopersYamlFileAbsolutePath = 'aboutSection___aboutImage___childDevelopersYaml___fileAbsolutePath',
+  AboutSectionAboutImageChildCommunityYamlId = 'aboutSection___aboutImage___childCommunityYaml___id',
+  AboutSectionAboutImageChildCommunityYamlChildren = 'aboutSection___aboutImage___childCommunityYaml___children',
+  AboutSectionAboutImageChildCommunityYamlFileAbsolutePath = 'aboutSection___aboutImage___childCommunityYaml___fileAbsolutePath',
   AboutSectionAboutImageChildContactYamlId = 'aboutSection___aboutImage___childContactYaml___id',
   AboutSectionAboutImageChildContactYamlChildren = 'aboutSection___aboutImage___childContactYaml___children',
   AboutSectionAboutImageChildContactYamlHeader = 'aboutSection___aboutImage___childContactYaml___header',
   AboutSectionAboutImageChildContactYamlBody = 'aboutSection___aboutImage___childContactYaml___body',
   AboutSectionAboutImageChildContactYamlFileAbsolutePath = 'aboutSection___aboutImage___childContactYaml___fileAbsolutePath',
-  AboutSectionAboutImageChildFaqYamlId = 'aboutSection___aboutImage___childFaqYaml___id',
-  AboutSectionAboutImageChildFaqYamlChildren = 'aboutSection___aboutImage___childFaqYaml___children',
-  AboutSectionAboutImageChildFaqYamlCategories = 'aboutSection___aboutImage___childFaqYaml___categories',
-  AboutSectionAboutImageChildFaqYamlFileAbsolutePath = 'aboutSection___aboutImage___childFaqYaml___fileAbsolutePath',
+  AboutSectionAboutImageChildPressKitYamlId = 'aboutSection___aboutImage___childPressKitYaml___id',
+  AboutSectionAboutImageChildPressKitYamlChildren = 'aboutSection___aboutImage___childPressKitYaml___children',
+  AboutSectionAboutImageChildPressKitYamlFileAbsolutePath = 'aboutSection___aboutImage___childPressKitYaml___fileAbsolutePath',
+  AboutSectionAboutImageChildFundYamlId = 'aboutSection___aboutImage___childFundYaml___id',
+  AboutSectionAboutImageChildFundYamlChildren = 'aboutSection___aboutImage___childFundYaml___children',
+  AboutSectionAboutImageChildFundYamlFileAbsolutePath = 'aboutSection___aboutImage___childFundYaml___fileAbsolutePath',
   AboutSectionAboutImageChildInvestYamlId = 'aboutSection___aboutImage___childInvestYaml___id',
   AboutSectionAboutImageChildInvestYamlChildren = 'aboutSection___aboutImage___childInvestYaml___children',
   AboutSectionAboutImageChildInvestYamlFileAbsolutePath = 'aboutSection___aboutImage___childInvestYaml___fileAbsolutePath',
@@ -2357,31 +2352,20 @@ export enum CaseStudyItemsYamlFieldsEnum {
   AboutSectionAboutImageChildMainnetYamlLivecastLink = 'aboutSection___aboutImage___childMainnetYaml___livecastLink',
   AboutSectionAboutImageChildMainnetYamlSeoDescription = 'aboutSection___aboutImage___childMainnetYaml___seoDescription',
   AboutSectionAboutImageChildMainnetYamlFileAbsolutePath = 'aboutSection___aboutImage___childMainnetYaml___fileAbsolutePath',
+  AboutSectionAboutImageChildFaqYamlId = 'aboutSection___aboutImage___childFaqYaml___id',
+  AboutSectionAboutImageChildFaqYamlChildren = 'aboutSection___aboutImage___childFaqYaml___children',
+  AboutSectionAboutImageChildFaqYamlCategories = 'aboutSection___aboutImage___childFaqYaml___categories',
+  AboutSectionAboutImageChildFaqYamlFileAbsolutePath = 'aboutSection___aboutImage___childFaqYaml___fileAbsolutePath',
   AboutSectionAboutImageChildPartnersYamlId = 'aboutSection___aboutImage___childPartnersYaml___id',
   AboutSectionAboutImageChildPartnersYamlChildren = 'aboutSection___aboutImage___childPartnersYaml___children',
   AboutSectionAboutImageChildPartnersYamlHeader = 'aboutSection___aboutImage___childPartnersYaml___header',
   AboutSectionAboutImageChildPartnersYamlPartnerLogos = 'aboutSection___aboutImage___childPartnersYaml___partnerLogos',
   AboutSectionAboutImageChildPartnersYamlFileAbsolutePath = 'aboutSection___aboutImage___childPartnersYaml___fileAbsolutePath',
-  AboutSectionAboutImageChildFundYamlId = 'aboutSection___aboutImage___childFundYaml___id',
-  AboutSectionAboutImageChildFundYamlChildren = 'aboutSection___aboutImage___childFundYaml___children',
-  AboutSectionAboutImageChildFundYamlFileAbsolutePath = 'aboutSection___aboutImage___childFundYaml___fileAbsolutePath',
-  AboutSectionAboutImageChildResourcesYamlId = 'aboutSection___aboutImage___childResourcesYaml___id',
-  AboutSectionAboutImageChildResourcesYamlChildren = 'aboutSection___aboutImage___childResourcesYaml___children',
-  AboutSectionAboutImageChildResourcesYamlFileAbsolutePath = 'aboutSection___aboutImage___childResourcesYaml___fileAbsolutePath',
-  AboutSectionAboutImageChildPressKitYamlId = 'aboutSection___aboutImage___childPressKitYaml___id',
-  AboutSectionAboutImageChildPressKitYamlChildren = 'aboutSection___aboutImage___childPressKitYaml___children',
-  AboutSectionAboutImageChildPressKitYamlFileAbsolutePath = 'aboutSection___aboutImage___childPressKitYaml___fileAbsolutePath',
-  AboutSectionAboutImageChildSharedYamlId = 'aboutSection___aboutImage___childSharedYaml___id',
-  AboutSectionAboutImageChildSharedYamlChildren = 'aboutSection___aboutImage___childSharedYaml___children',
-  AboutSectionAboutImageChildSharedYamlFileAbsolutePath = 'aboutSection___aboutImage___childSharedYaml___fileAbsolutePath',
   AboutSectionAboutImageChildMediaYamlId = 'aboutSection___aboutImage___childMediaYaml___id',
   AboutSectionAboutImageChildMediaYamlChildren = 'aboutSection___aboutImage___childMediaYaml___children',
   AboutSectionAboutImageChildMediaYamlHeader = 'aboutSection___aboutImage___childMediaYaml___header',
   AboutSectionAboutImageChildMediaYamlCategories = 'aboutSection___aboutImage___childMediaYaml___categories',
   AboutSectionAboutImageChildMediaYamlFileAbsolutePath = 'aboutSection___aboutImage___childMediaYaml___fileAbsolutePath',
-  AboutSectionAboutImageChildScienceYamlId = 'aboutSection___aboutImage___childScienceYaml___id',
-  AboutSectionAboutImageChildScienceYamlChildren = 'aboutSection___aboutImage___childScienceYaml___children',
-  AboutSectionAboutImageChildScienceYamlFileAbsolutePath = 'aboutSection___aboutImage___childScienceYaml___fileAbsolutePath',
   AboutSectionAboutImageChildMarkdownRemarkId = 'aboutSection___aboutImage___childMarkdownRemark___id',
   AboutSectionAboutImageChildMarkdownRemarkExcerpt = 'aboutSection___aboutImage___childMarkdownRemark___excerpt',
   AboutSectionAboutImageChildMarkdownRemarkRawMarkdownBody = 'aboutSection___aboutImage___childMarkdownRemark___rawMarkdownBody',
@@ -2393,18 +2377,30 @@ export enum CaseStudyItemsYamlFieldsEnum {
   AboutSectionAboutImageChildMarkdownRemarkTimeToRead = 'aboutSection___aboutImage___childMarkdownRemark___timeToRead',
   AboutSectionAboutImageChildMarkdownRemarkTableOfContents = 'aboutSection___aboutImage___childMarkdownRemark___tableOfContents',
   AboutSectionAboutImageChildMarkdownRemarkChildren = 'aboutSection___aboutImage___childMarkdownRemark___children',
-  AboutSectionAboutImageChildTokenYamlId = 'aboutSection___aboutImage___childTokenYaml___id',
-  AboutSectionAboutImageChildTokenYamlChildren = 'aboutSection___aboutImage___childTokenYaml___children',
-  AboutSectionAboutImageChildTokenYamlFileAbsolutePath = 'aboutSection___aboutImage___childTokenYaml___fileAbsolutePath',
-  AboutSectionAboutImageChildTeamYamlId = 'aboutSection___aboutImage___childTeamYaml___id',
-  AboutSectionAboutImageChildTeamYamlChildren = 'aboutSection___aboutImage___childTeamYaml___children',
-  AboutSectionAboutImageChildTeamYamlFileAbsolutePath = 'aboutSection___aboutImage___childTeamYaml___fileAbsolutePath',
+  AboutSectionAboutImageChildHomeYamlId = 'aboutSection___aboutImage___childHomeYaml___id',
+  AboutSectionAboutImageChildHomeYamlChildren = 'aboutSection___aboutImage___childHomeYaml___children',
+  AboutSectionAboutImageChildHomeYamlFileAbsolutePath = 'aboutSection___aboutImage___childHomeYaml___fileAbsolutePath',
+  AboutSectionAboutImageChildResourcesYamlId = 'aboutSection___aboutImage___childResourcesYaml___id',
+  AboutSectionAboutImageChildResourcesYamlChildren = 'aboutSection___aboutImage___childResourcesYaml___children',
+  AboutSectionAboutImageChildResourcesYamlFileAbsolutePath = 'aboutSection___aboutImage___childResourcesYaml___fileAbsolutePath',
+  AboutSectionAboutImageChildScienceYamlId = 'aboutSection___aboutImage___childScienceYaml___id',
+  AboutSectionAboutImageChildScienceYamlChildren = 'aboutSection___aboutImage___childScienceYaml___children',
+  AboutSectionAboutImageChildScienceYamlFileAbsolutePath = 'aboutSection___aboutImage___childScienceYaml___fileAbsolutePath',
   AboutSectionAboutImageChildWalletAddressRegistrationYamlId = 'aboutSection___aboutImage___childWalletAddressRegistrationYaml___id',
   AboutSectionAboutImageChildWalletAddressRegistrationYamlChildren = 'aboutSection___aboutImage___childWalletAddressRegistrationYaml___children',
   AboutSectionAboutImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'aboutSection___aboutImage___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  AboutSectionAboutImageChildSharedYamlId = 'aboutSection___aboutImage___childSharedYaml___id',
+  AboutSectionAboutImageChildSharedYamlChildren = 'aboutSection___aboutImage___childSharedYaml___children',
+  AboutSectionAboutImageChildSharedYamlFileAbsolutePath = 'aboutSection___aboutImage___childSharedYaml___fileAbsolutePath',
+  AboutSectionAboutImageChildTeamYamlId = 'aboutSection___aboutImage___childTeamYaml___id',
+  AboutSectionAboutImageChildTeamYamlChildren = 'aboutSection___aboutImage___childTeamYaml___children',
+  AboutSectionAboutImageChildTeamYamlFileAbsolutePath = 'aboutSection___aboutImage___childTeamYaml___fileAbsolutePath',
   AboutSectionAboutImageChildValidatorsYamlId = 'aboutSection___aboutImage___childValidatorsYaml___id',
   AboutSectionAboutImageChildValidatorsYamlChildren = 'aboutSection___aboutImage___childValidatorsYaml___children',
   AboutSectionAboutImageChildValidatorsYamlFileAbsolutePath = 'aboutSection___aboutImage___childValidatorsYaml___fileAbsolutePath',
+  AboutSectionAboutImageChildTokenYamlId = 'aboutSection___aboutImage___childTokenYaml___id',
+  AboutSectionAboutImageChildTokenYamlChildren = 'aboutSection___aboutImage___childTokenYaml___children',
+  AboutSectionAboutImageChildTokenYamlFileAbsolutePath = 'aboutSection___aboutImage___childTokenYaml___fileAbsolutePath',
   AboutSectionPractice = 'aboutSection___practice',
   AboutSectionBiome = 'aboutSection___biome',
   AboutSectionRegion = 'aboutSection___region',
@@ -2460,33 +2456,32 @@ export enum CaseStudyItemsYamlFieldsEnum {
   ContextSectionImageInternalMediaType = 'contextSection___image___internal___mediaType',
   ContextSectionImageInternalOwner = 'contextSection___image___internal___owner',
   ContextSectionImageInternalType = 'contextSection___image___internal___type',
-  ContextSectionImageChildCommunityYamlId = 'contextSection___image___childCommunityYaml___id',
-  ContextSectionImageChildCommunityYamlChildren = 'contextSection___image___childCommunityYaml___children',
-  ContextSectionImageChildCommunityYamlFileAbsolutePath = 'contextSection___image___childCommunityYaml___fileAbsolutePath',
   ContextSectionImageChildCaseStudiesYamlId = 'contextSection___image___childCaseStudiesYaml___id',
   ContextSectionImageChildCaseStudiesYamlChildren = 'contextSection___image___childCaseStudiesYaml___children',
   ContextSectionImageChildCaseStudiesYamlFileAbsolutePath = 'contextSection___image___childCaseStudiesYaml___fileAbsolutePath',
-  ContextSectionImageChildDevelopersYamlId = 'contextSection___image___childDevelopersYaml___id',
-  ContextSectionImageChildDevelopersYamlChildren = 'contextSection___image___childDevelopersYaml___children',
-  ContextSectionImageChildDevelopersYamlFileAbsolutePath = 'contextSection___image___childDevelopersYaml___fileAbsolutePath',
   ContextSectionImageChildCaseStudyItemsYamlId = 'contextSection___image___childCaseStudyItemsYaml___id',
   ContextSectionImageChildCaseStudyItemsYamlChildren = 'contextSection___image___childCaseStudyItemsYaml___children',
   ContextSectionImageChildCaseStudyItemsYamlName = 'contextSection___image___childCaseStudyItemsYaml___name',
   ContextSectionImageChildCaseStudyItemsYamlSlug = 'contextSection___image___childCaseStudyItemsYaml___slug',
   ContextSectionImageChildCaseStudyItemsYamlDescription = 'contextSection___image___childCaseStudyItemsYaml___description',
   ContextSectionImageChildCaseStudyItemsYamlFileAbsolutePath = 'contextSection___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  ContextSectionImageChildHomeYamlId = 'contextSection___image___childHomeYaml___id',
-  ContextSectionImageChildHomeYamlChildren = 'contextSection___image___childHomeYaml___children',
-  ContextSectionImageChildHomeYamlFileAbsolutePath = 'contextSection___image___childHomeYaml___fileAbsolutePath',
+  ContextSectionImageChildDevelopersYamlId = 'contextSection___image___childDevelopersYaml___id',
+  ContextSectionImageChildDevelopersYamlChildren = 'contextSection___image___childDevelopersYaml___children',
+  ContextSectionImageChildDevelopersYamlFileAbsolutePath = 'contextSection___image___childDevelopersYaml___fileAbsolutePath',
+  ContextSectionImageChildCommunityYamlId = 'contextSection___image___childCommunityYaml___id',
+  ContextSectionImageChildCommunityYamlChildren = 'contextSection___image___childCommunityYaml___children',
+  ContextSectionImageChildCommunityYamlFileAbsolutePath = 'contextSection___image___childCommunityYaml___fileAbsolutePath',
   ContextSectionImageChildContactYamlId = 'contextSection___image___childContactYaml___id',
   ContextSectionImageChildContactYamlChildren = 'contextSection___image___childContactYaml___children',
   ContextSectionImageChildContactYamlHeader = 'contextSection___image___childContactYaml___header',
   ContextSectionImageChildContactYamlBody = 'contextSection___image___childContactYaml___body',
   ContextSectionImageChildContactYamlFileAbsolutePath = 'contextSection___image___childContactYaml___fileAbsolutePath',
-  ContextSectionImageChildFaqYamlId = 'contextSection___image___childFaqYaml___id',
-  ContextSectionImageChildFaqYamlChildren = 'contextSection___image___childFaqYaml___children',
-  ContextSectionImageChildFaqYamlCategories = 'contextSection___image___childFaqYaml___categories',
-  ContextSectionImageChildFaqYamlFileAbsolutePath = 'contextSection___image___childFaqYaml___fileAbsolutePath',
+  ContextSectionImageChildPressKitYamlId = 'contextSection___image___childPressKitYaml___id',
+  ContextSectionImageChildPressKitYamlChildren = 'contextSection___image___childPressKitYaml___children',
+  ContextSectionImageChildPressKitYamlFileAbsolutePath = 'contextSection___image___childPressKitYaml___fileAbsolutePath',
+  ContextSectionImageChildFundYamlId = 'contextSection___image___childFundYaml___id',
+  ContextSectionImageChildFundYamlChildren = 'contextSection___image___childFundYaml___children',
+  ContextSectionImageChildFundYamlFileAbsolutePath = 'contextSection___image___childFundYaml___fileAbsolutePath',
   ContextSectionImageChildInvestYamlId = 'contextSection___image___childInvestYaml___id',
   ContextSectionImageChildInvestYamlChildren = 'contextSection___image___childInvestYaml___children',
   ContextSectionImageChildInvestYamlFileAbsolutePath = 'contextSection___image___childInvestYaml___fileAbsolutePath',
@@ -2496,31 +2491,20 @@ export enum CaseStudyItemsYamlFieldsEnum {
   ContextSectionImageChildMainnetYamlLivecastLink = 'contextSection___image___childMainnetYaml___livecastLink',
   ContextSectionImageChildMainnetYamlSeoDescription = 'contextSection___image___childMainnetYaml___seoDescription',
   ContextSectionImageChildMainnetYamlFileAbsolutePath = 'contextSection___image___childMainnetYaml___fileAbsolutePath',
+  ContextSectionImageChildFaqYamlId = 'contextSection___image___childFaqYaml___id',
+  ContextSectionImageChildFaqYamlChildren = 'contextSection___image___childFaqYaml___children',
+  ContextSectionImageChildFaqYamlCategories = 'contextSection___image___childFaqYaml___categories',
+  ContextSectionImageChildFaqYamlFileAbsolutePath = 'contextSection___image___childFaqYaml___fileAbsolutePath',
   ContextSectionImageChildPartnersYamlId = 'contextSection___image___childPartnersYaml___id',
   ContextSectionImageChildPartnersYamlChildren = 'contextSection___image___childPartnersYaml___children',
   ContextSectionImageChildPartnersYamlHeader = 'contextSection___image___childPartnersYaml___header',
   ContextSectionImageChildPartnersYamlPartnerLogos = 'contextSection___image___childPartnersYaml___partnerLogos',
   ContextSectionImageChildPartnersYamlFileAbsolutePath = 'contextSection___image___childPartnersYaml___fileAbsolutePath',
-  ContextSectionImageChildFundYamlId = 'contextSection___image___childFundYaml___id',
-  ContextSectionImageChildFundYamlChildren = 'contextSection___image___childFundYaml___children',
-  ContextSectionImageChildFundYamlFileAbsolutePath = 'contextSection___image___childFundYaml___fileAbsolutePath',
-  ContextSectionImageChildResourcesYamlId = 'contextSection___image___childResourcesYaml___id',
-  ContextSectionImageChildResourcesYamlChildren = 'contextSection___image___childResourcesYaml___children',
-  ContextSectionImageChildResourcesYamlFileAbsolutePath = 'contextSection___image___childResourcesYaml___fileAbsolutePath',
-  ContextSectionImageChildPressKitYamlId = 'contextSection___image___childPressKitYaml___id',
-  ContextSectionImageChildPressKitYamlChildren = 'contextSection___image___childPressKitYaml___children',
-  ContextSectionImageChildPressKitYamlFileAbsolutePath = 'contextSection___image___childPressKitYaml___fileAbsolutePath',
-  ContextSectionImageChildSharedYamlId = 'contextSection___image___childSharedYaml___id',
-  ContextSectionImageChildSharedYamlChildren = 'contextSection___image___childSharedYaml___children',
-  ContextSectionImageChildSharedYamlFileAbsolutePath = 'contextSection___image___childSharedYaml___fileAbsolutePath',
   ContextSectionImageChildMediaYamlId = 'contextSection___image___childMediaYaml___id',
   ContextSectionImageChildMediaYamlChildren = 'contextSection___image___childMediaYaml___children',
   ContextSectionImageChildMediaYamlHeader = 'contextSection___image___childMediaYaml___header',
   ContextSectionImageChildMediaYamlCategories = 'contextSection___image___childMediaYaml___categories',
   ContextSectionImageChildMediaYamlFileAbsolutePath = 'contextSection___image___childMediaYaml___fileAbsolutePath',
-  ContextSectionImageChildScienceYamlId = 'contextSection___image___childScienceYaml___id',
-  ContextSectionImageChildScienceYamlChildren = 'contextSection___image___childScienceYaml___children',
-  ContextSectionImageChildScienceYamlFileAbsolutePath = 'contextSection___image___childScienceYaml___fileAbsolutePath',
   ContextSectionImageChildMarkdownRemarkId = 'contextSection___image___childMarkdownRemark___id',
   ContextSectionImageChildMarkdownRemarkExcerpt = 'contextSection___image___childMarkdownRemark___excerpt',
   ContextSectionImageChildMarkdownRemarkRawMarkdownBody = 'contextSection___image___childMarkdownRemark___rawMarkdownBody',
@@ -2532,22 +2516,33 @@ export enum CaseStudyItemsYamlFieldsEnum {
   ContextSectionImageChildMarkdownRemarkTimeToRead = 'contextSection___image___childMarkdownRemark___timeToRead',
   ContextSectionImageChildMarkdownRemarkTableOfContents = 'contextSection___image___childMarkdownRemark___tableOfContents',
   ContextSectionImageChildMarkdownRemarkChildren = 'contextSection___image___childMarkdownRemark___children',
-  ContextSectionImageChildTokenYamlId = 'contextSection___image___childTokenYaml___id',
-  ContextSectionImageChildTokenYamlChildren = 'contextSection___image___childTokenYaml___children',
-  ContextSectionImageChildTokenYamlFileAbsolutePath = 'contextSection___image___childTokenYaml___fileAbsolutePath',
-  ContextSectionImageChildTeamYamlId = 'contextSection___image___childTeamYaml___id',
-  ContextSectionImageChildTeamYamlChildren = 'contextSection___image___childTeamYaml___children',
-  ContextSectionImageChildTeamYamlFileAbsolutePath = 'contextSection___image___childTeamYaml___fileAbsolutePath',
+  ContextSectionImageChildHomeYamlId = 'contextSection___image___childHomeYaml___id',
+  ContextSectionImageChildHomeYamlChildren = 'contextSection___image___childHomeYaml___children',
+  ContextSectionImageChildHomeYamlFileAbsolutePath = 'contextSection___image___childHomeYaml___fileAbsolutePath',
+  ContextSectionImageChildResourcesYamlId = 'contextSection___image___childResourcesYaml___id',
+  ContextSectionImageChildResourcesYamlChildren = 'contextSection___image___childResourcesYaml___children',
+  ContextSectionImageChildResourcesYamlFileAbsolutePath = 'contextSection___image___childResourcesYaml___fileAbsolutePath',
+  ContextSectionImageChildScienceYamlId = 'contextSection___image___childScienceYaml___id',
+  ContextSectionImageChildScienceYamlChildren = 'contextSection___image___childScienceYaml___children',
+  ContextSectionImageChildScienceYamlFileAbsolutePath = 'contextSection___image___childScienceYaml___fileAbsolutePath',
   ContextSectionImageChildWalletAddressRegistrationYamlId = 'contextSection___image___childWalletAddressRegistrationYaml___id',
   ContextSectionImageChildWalletAddressRegistrationYamlChildren = 'contextSection___image___childWalletAddressRegistrationYaml___children',
   ContextSectionImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'contextSection___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  ContextSectionImageChildSharedYamlId = 'contextSection___image___childSharedYaml___id',
+  ContextSectionImageChildSharedYamlChildren = 'contextSection___image___childSharedYaml___children',
+  ContextSectionImageChildSharedYamlFileAbsolutePath = 'contextSection___image___childSharedYaml___fileAbsolutePath',
+  ContextSectionImageChildTeamYamlId = 'contextSection___image___childTeamYaml___id',
+  ContextSectionImageChildTeamYamlChildren = 'contextSection___image___childTeamYaml___children',
+  ContextSectionImageChildTeamYamlFileAbsolutePath = 'contextSection___image___childTeamYaml___fileAbsolutePath',
   ContextSectionImageChildValidatorsYamlId = 'contextSection___image___childValidatorsYaml___id',
   ContextSectionImageChildValidatorsYamlChildren = 'contextSection___image___childValidatorsYaml___children',
   ContextSectionImageChildValidatorsYamlFileAbsolutePath = 'contextSection___image___childValidatorsYaml___fileAbsolutePath',
+  ContextSectionImageChildTokenYamlId = 'contextSection___image___childTokenYaml___id',
+  ContextSectionImageChildTokenYamlChildren = 'contextSection___image___childTokenYaml___children',
+  ContextSectionImageChildTokenYamlFileAbsolutePath = 'contextSection___image___childTokenYaml___fileAbsolutePath',
   ContextSectionDescription = 'contextSection___description',
   ContextSectionChallenges = 'contextSection___challenges',
   ContextSectionChallengesText = 'contextSection___challenges___text',
-  ApproachSectionDescription = 'approachSection___description',
   ApproachSectionDetails = 'approachSection___details',
   ApproachSectionResults = 'approachSection___results',
   ApproachSectionNext = 'approachSection___next',
@@ -2601,33 +2596,32 @@ export enum CaseStudyItemsYamlFieldsEnum {
   ApproachSectionFigureImageInternalMediaType = 'approachSection___figureImage___internal___mediaType',
   ApproachSectionFigureImageInternalOwner = 'approachSection___figureImage___internal___owner',
   ApproachSectionFigureImageInternalType = 'approachSection___figureImage___internal___type',
-  ApproachSectionFigureImageChildCommunityYamlId = 'approachSection___figureImage___childCommunityYaml___id',
-  ApproachSectionFigureImageChildCommunityYamlChildren = 'approachSection___figureImage___childCommunityYaml___children',
-  ApproachSectionFigureImageChildCommunityYamlFileAbsolutePath = 'approachSection___figureImage___childCommunityYaml___fileAbsolutePath',
   ApproachSectionFigureImageChildCaseStudiesYamlId = 'approachSection___figureImage___childCaseStudiesYaml___id',
   ApproachSectionFigureImageChildCaseStudiesYamlChildren = 'approachSection___figureImage___childCaseStudiesYaml___children',
   ApproachSectionFigureImageChildCaseStudiesYamlFileAbsolutePath = 'approachSection___figureImage___childCaseStudiesYaml___fileAbsolutePath',
-  ApproachSectionFigureImageChildDevelopersYamlId = 'approachSection___figureImage___childDevelopersYaml___id',
-  ApproachSectionFigureImageChildDevelopersYamlChildren = 'approachSection___figureImage___childDevelopersYaml___children',
-  ApproachSectionFigureImageChildDevelopersYamlFileAbsolutePath = 'approachSection___figureImage___childDevelopersYaml___fileAbsolutePath',
   ApproachSectionFigureImageChildCaseStudyItemsYamlId = 'approachSection___figureImage___childCaseStudyItemsYaml___id',
   ApproachSectionFigureImageChildCaseStudyItemsYamlChildren = 'approachSection___figureImage___childCaseStudyItemsYaml___children',
   ApproachSectionFigureImageChildCaseStudyItemsYamlName = 'approachSection___figureImage___childCaseStudyItemsYaml___name',
   ApproachSectionFigureImageChildCaseStudyItemsYamlSlug = 'approachSection___figureImage___childCaseStudyItemsYaml___slug',
   ApproachSectionFigureImageChildCaseStudyItemsYamlDescription = 'approachSection___figureImage___childCaseStudyItemsYaml___description',
   ApproachSectionFigureImageChildCaseStudyItemsYamlFileAbsolutePath = 'approachSection___figureImage___childCaseStudyItemsYaml___fileAbsolutePath',
-  ApproachSectionFigureImageChildHomeYamlId = 'approachSection___figureImage___childHomeYaml___id',
-  ApproachSectionFigureImageChildHomeYamlChildren = 'approachSection___figureImage___childHomeYaml___children',
-  ApproachSectionFigureImageChildHomeYamlFileAbsolutePath = 'approachSection___figureImage___childHomeYaml___fileAbsolutePath',
+  ApproachSectionFigureImageChildDevelopersYamlId = 'approachSection___figureImage___childDevelopersYaml___id',
+  ApproachSectionFigureImageChildDevelopersYamlChildren = 'approachSection___figureImage___childDevelopersYaml___children',
+  ApproachSectionFigureImageChildDevelopersYamlFileAbsolutePath = 'approachSection___figureImage___childDevelopersYaml___fileAbsolutePath',
+  ApproachSectionFigureImageChildCommunityYamlId = 'approachSection___figureImage___childCommunityYaml___id',
+  ApproachSectionFigureImageChildCommunityYamlChildren = 'approachSection___figureImage___childCommunityYaml___children',
+  ApproachSectionFigureImageChildCommunityYamlFileAbsolutePath = 'approachSection___figureImage___childCommunityYaml___fileAbsolutePath',
   ApproachSectionFigureImageChildContactYamlId = 'approachSection___figureImage___childContactYaml___id',
   ApproachSectionFigureImageChildContactYamlChildren = 'approachSection___figureImage___childContactYaml___children',
   ApproachSectionFigureImageChildContactYamlHeader = 'approachSection___figureImage___childContactYaml___header',
   ApproachSectionFigureImageChildContactYamlBody = 'approachSection___figureImage___childContactYaml___body',
   ApproachSectionFigureImageChildContactYamlFileAbsolutePath = 'approachSection___figureImage___childContactYaml___fileAbsolutePath',
-  ApproachSectionFigureImageChildFaqYamlId = 'approachSection___figureImage___childFaqYaml___id',
-  ApproachSectionFigureImageChildFaqYamlChildren = 'approachSection___figureImage___childFaqYaml___children',
-  ApproachSectionFigureImageChildFaqYamlCategories = 'approachSection___figureImage___childFaqYaml___categories',
-  ApproachSectionFigureImageChildFaqYamlFileAbsolutePath = 'approachSection___figureImage___childFaqYaml___fileAbsolutePath',
+  ApproachSectionFigureImageChildPressKitYamlId = 'approachSection___figureImage___childPressKitYaml___id',
+  ApproachSectionFigureImageChildPressKitYamlChildren = 'approachSection___figureImage___childPressKitYaml___children',
+  ApproachSectionFigureImageChildPressKitYamlFileAbsolutePath = 'approachSection___figureImage___childPressKitYaml___fileAbsolutePath',
+  ApproachSectionFigureImageChildFundYamlId = 'approachSection___figureImage___childFundYaml___id',
+  ApproachSectionFigureImageChildFundYamlChildren = 'approachSection___figureImage___childFundYaml___children',
+  ApproachSectionFigureImageChildFundYamlFileAbsolutePath = 'approachSection___figureImage___childFundYaml___fileAbsolutePath',
   ApproachSectionFigureImageChildInvestYamlId = 'approachSection___figureImage___childInvestYaml___id',
   ApproachSectionFigureImageChildInvestYamlChildren = 'approachSection___figureImage___childInvestYaml___children',
   ApproachSectionFigureImageChildInvestYamlFileAbsolutePath = 'approachSection___figureImage___childInvestYaml___fileAbsolutePath',
@@ -2637,31 +2631,20 @@ export enum CaseStudyItemsYamlFieldsEnum {
   ApproachSectionFigureImageChildMainnetYamlLivecastLink = 'approachSection___figureImage___childMainnetYaml___livecastLink',
   ApproachSectionFigureImageChildMainnetYamlSeoDescription = 'approachSection___figureImage___childMainnetYaml___seoDescription',
   ApproachSectionFigureImageChildMainnetYamlFileAbsolutePath = 'approachSection___figureImage___childMainnetYaml___fileAbsolutePath',
+  ApproachSectionFigureImageChildFaqYamlId = 'approachSection___figureImage___childFaqYaml___id',
+  ApproachSectionFigureImageChildFaqYamlChildren = 'approachSection___figureImage___childFaqYaml___children',
+  ApproachSectionFigureImageChildFaqYamlCategories = 'approachSection___figureImage___childFaqYaml___categories',
+  ApproachSectionFigureImageChildFaqYamlFileAbsolutePath = 'approachSection___figureImage___childFaqYaml___fileAbsolutePath',
   ApproachSectionFigureImageChildPartnersYamlId = 'approachSection___figureImage___childPartnersYaml___id',
   ApproachSectionFigureImageChildPartnersYamlChildren = 'approachSection___figureImage___childPartnersYaml___children',
   ApproachSectionFigureImageChildPartnersYamlHeader = 'approachSection___figureImage___childPartnersYaml___header',
   ApproachSectionFigureImageChildPartnersYamlPartnerLogos = 'approachSection___figureImage___childPartnersYaml___partnerLogos',
   ApproachSectionFigureImageChildPartnersYamlFileAbsolutePath = 'approachSection___figureImage___childPartnersYaml___fileAbsolutePath',
-  ApproachSectionFigureImageChildFundYamlId = 'approachSection___figureImage___childFundYaml___id',
-  ApproachSectionFigureImageChildFundYamlChildren = 'approachSection___figureImage___childFundYaml___children',
-  ApproachSectionFigureImageChildFundYamlFileAbsolutePath = 'approachSection___figureImage___childFundYaml___fileAbsolutePath',
-  ApproachSectionFigureImageChildResourcesYamlId = 'approachSection___figureImage___childResourcesYaml___id',
-  ApproachSectionFigureImageChildResourcesYamlChildren = 'approachSection___figureImage___childResourcesYaml___children',
-  ApproachSectionFigureImageChildResourcesYamlFileAbsolutePath = 'approachSection___figureImage___childResourcesYaml___fileAbsolutePath',
-  ApproachSectionFigureImageChildPressKitYamlId = 'approachSection___figureImage___childPressKitYaml___id',
-  ApproachSectionFigureImageChildPressKitYamlChildren = 'approachSection___figureImage___childPressKitYaml___children',
-  ApproachSectionFigureImageChildPressKitYamlFileAbsolutePath = 'approachSection___figureImage___childPressKitYaml___fileAbsolutePath',
-  ApproachSectionFigureImageChildSharedYamlId = 'approachSection___figureImage___childSharedYaml___id',
-  ApproachSectionFigureImageChildSharedYamlChildren = 'approachSection___figureImage___childSharedYaml___children',
-  ApproachSectionFigureImageChildSharedYamlFileAbsolutePath = 'approachSection___figureImage___childSharedYaml___fileAbsolutePath',
   ApproachSectionFigureImageChildMediaYamlId = 'approachSection___figureImage___childMediaYaml___id',
   ApproachSectionFigureImageChildMediaYamlChildren = 'approachSection___figureImage___childMediaYaml___children',
   ApproachSectionFigureImageChildMediaYamlHeader = 'approachSection___figureImage___childMediaYaml___header',
   ApproachSectionFigureImageChildMediaYamlCategories = 'approachSection___figureImage___childMediaYaml___categories',
   ApproachSectionFigureImageChildMediaYamlFileAbsolutePath = 'approachSection___figureImage___childMediaYaml___fileAbsolutePath',
-  ApproachSectionFigureImageChildScienceYamlId = 'approachSection___figureImage___childScienceYaml___id',
-  ApproachSectionFigureImageChildScienceYamlChildren = 'approachSection___figureImage___childScienceYaml___children',
-  ApproachSectionFigureImageChildScienceYamlFileAbsolutePath = 'approachSection___figureImage___childScienceYaml___fileAbsolutePath',
   ApproachSectionFigureImageChildMarkdownRemarkId = 'approachSection___figureImage___childMarkdownRemark___id',
   ApproachSectionFigureImageChildMarkdownRemarkExcerpt = 'approachSection___figureImage___childMarkdownRemark___excerpt',
   ApproachSectionFigureImageChildMarkdownRemarkRawMarkdownBody = 'approachSection___figureImage___childMarkdownRemark___rawMarkdownBody',
@@ -2673,19 +2656,32 @@ export enum CaseStudyItemsYamlFieldsEnum {
   ApproachSectionFigureImageChildMarkdownRemarkTimeToRead = 'approachSection___figureImage___childMarkdownRemark___timeToRead',
   ApproachSectionFigureImageChildMarkdownRemarkTableOfContents = 'approachSection___figureImage___childMarkdownRemark___tableOfContents',
   ApproachSectionFigureImageChildMarkdownRemarkChildren = 'approachSection___figureImage___childMarkdownRemark___children',
-  ApproachSectionFigureImageChildTokenYamlId = 'approachSection___figureImage___childTokenYaml___id',
-  ApproachSectionFigureImageChildTokenYamlChildren = 'approachSection___figureImage___childTokenYaml___children',
-  ApproachSectionFigureImageChildTokenYamlFileAbsolutePath = 'approachSection___figureImage___childTokenYaml___fileAbsolutePath',
-  ApproachSectionFigureImageChildTeamYamlId = 'approachSection___figureImage___childTeamYaml___id',
-  ApproachSectionFigureImageChildTeamYamlChildren = 'approachSection___figureImage___childTeamYaml___children',
-  ApproachSectionFigureImageChildTeamYamlFileAbsolutePath = 'approachSection___figureImage___childTeamYaml___fileAbsolutePath',
+  ApproachSectionFigureImageChildHomeYamlId = 'approachSection___figureImage___childHomeYaml___id',
+  ApproachSectionFigureImageChildHomeYamlChildren = 'approachSection___figureImage___childHomeYaml___children',
+  ApproachSectionFigureImageChildHomeYamlFileAbsolutePath = 'approachSection___figureImage___childHomeYaml___fileAbsolutePath',
+  ApproachSectionFigureImageChildResourcesYamlId = 'approachSection___figureImage___childResourcesYaml___id',
+  ApproachSectionFigureImageChildResourcesYamlChildren = 'approachSection___figureImage___childResourcesYaml___children',
+  ApproachSectionFigureImageChildResourcesYamlFileAbsolutePath = 'approachSection___figureImage___childResourcesYaml___fileAbsolutePath',
+  ApproachSectionFigureImageChildScienceYamlId = 'approachSection___figureImage___childScienceYaml___id',
+  ApproachSectionFigureImageChildScienceYamlChildren = 'approachSection___figureImage___childScienceYaml___children',
+  ApproachSectionFigureImageChildScienceYamlFileAbsolutePath = 'approachSection___figureImage___childScienceYaml___fileAbsolutePath',
   ApproachSectionFigureImageChildWalletAddressRegistrationYamlId = 'approachSection___figureImage___childWalletAddressRegistrationYaml___id',
   ApproachSectionFigureImageChildWalletAddressRegistrationYamlChildren = 'approachSection___figureImage___childWalletAddressRegistrationYaml___children',
   ApproachSectionFigureImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'approachSection___figureImage___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  ApproachSectionFigureImageChildSharedYamlId = 'approachSection___figureImage___childSharedYaml___id',
+  ApproachSectionFigureImageChildSharedYamlChildren = 'approachSection___figureImage___childSharedYaml___children',
+  ApproachSectionFigureImageChildSharedYamlFileAbsolutePath = 'approachSection___figureImage___childSharedYaml___fileAbsolutePath',
+  ApproachSectionFigureImageChildTeamYamlId = 'approachSection___figureImage___childTeamYaml___id',
+  ApproachSectionFigureImageChildTeamYamlChildren = 'approachSection___figureImage___childTeamYaml___children',
+  ApproachSectionFigureImageChildTeamYamlFileAbsolutePath = 'approachSection___figureImage___childTeamYaml___fileAbsolutePath',
   ApproachSectionFigureImageChildValidatorsYamlId = 'approachSection___figureImage___childValidatorsYaml___id',
   ApproachSectionFigureImageChildValidatorsYamlChildren = 'approachSection___figureImage___childValidatorsYaml___children',
   ApproachSectionFigureImageChildValidatorsYamlFileAbsolutePath = 'approachSection___figureImage___childValidatorsYaml___fileAbsolutePath',
+  ApproachSectionFigureImageChildTokenYamlId = 'approachSection___figureImage___childTokenYaml___id',
+  ApproachSectionFigureImageChildTokenYamlChildren = 'approachSection___figureImage___childTokenYaml___children',
+  ApproachSectionFigureImageChildTokenYamlFileAbsolutePath = 'approachSection___figureImage___childTokenYaml___fileAbsolutePath',
   ApproachSectionFigureTitle = 'approachSection___figureTitle',
+  ApproachSectionDescription = 'approachSection___description',
   FigureSectionBackgroundSourceInstanceName = 'figureSection___background___sourceInstanceName',
   FigureSectionBackgroundAbsolutePath = 'figureSection___background___absolutePath',
   FigureSectionBackgroundRelativePath = 'figureSection___background___relativePath',
@@ -2736,33 +2732,32 @@ export enum CaseStudyItemsYamlFieldsEnum {
   FigureSectionBackgroundInternalMediaType = 'figureSection___background___internal___mediaType',
   FigureSectionBackgroundInternalOwner = 'figureSection___background___internal___owner',
   FigureSectionBackgroundInternalType = 'figureSection___background___internal___type',
-  FigureSectionBackgroundChildCommunityYamlId = 'figureSection___background___childCommunityYaml___id',
-  FigureSectionBackgroundChildCommunityYamlChildren = 'figureSection___background___childCommunityYaml___children',
-  FigureSectionBackgroundChildCommunityYamlFileAbsolutePath = 'figureSection___background___childCommunityYaml___fileAbsolutePath',
   FigureSectionBackgroundChildCaseStudiesYamlId = 'figureSection___background___childCaseStudiesYaml___id',
   FigureSectionBackgroundChildCaseStudiesYamlChildren = 'figureSection___background___childCaseStudiesYaml___children',
   FigureSectionBackgroundChildCaseStudiesYamlFileAbsolutePath = 'figureSection___background___childCaseStudiesYaml___fileAbsolutePath',
-  FigureSectionBackgroundChildDevelopersYamlId = 'figureSection___background___childDevelopersYaml___id',
-  FigureSectionBackgroundChildDevelopersYamlChildren = 'figureSection___background___childDevelopersYaml___children',
-  FigureSectionBackgroundChildDevelopersYamlFileAbsolutePath = 'figureSection___background___childDevelopersYaml___fileAbsolutePath',
   FigureSectionBackgroundChildCaseStudyItemsYamlId = 'figureSection___background___childCaseStudyItemsYaml___id',
   FigureSectionBackgroundChildCaseStudyItemsYamlChildren = 'figureSection___background___childCaseStudyItemsYaml___children',
   FigureSectionBackgroundChildCaseStudyItemsYamlName = 'figureSection___background___childCaseStudyItemsYaml___name',
   FigureSectionBackgroundChildCaseStudyItemsYamlSlug = 'figureSection___background___childCaseStudyItemsYaml___slug',
   FigureSectionBackgroundChildCaseStudyItemsYamlDescription = 'figureSection___background___childCaseStudyItemsYaml___description',
   FigureSectionBackgroundChildCaseStudyItemsYamlFileAbsolutePath = 'figureSection___background___childCaseStudyItemsYaml___fileAbsolutePath',
-  FigureSectionBackgroundChildHomeYamlId = 'figureSection___background___childHomeYaml___id',
-  FigureSectionBackgroundChildHomeYamlChildren = 'figureSection___background___childHomeYaml___children',
-  FigureSectionBackgroundChildHomeYamlFileAbsolutePath = 'figureSection___background___childHomeYaml___fileAbsolutePath',
+  FigureSectionBackgroundChildDevelopersYamlId = 'figureSection___background___childDevelopersYaml___id',
+  FigureSectionBackgroundChildDevelopersYamlChildren = 'figureSection___background___childDevelopersYaml___children',
+  FigureSectionBackgroundChildDevelopersYamlFileAbsolutePath = 'figureSection___background___childDevelopersYaml___fileAbsolutePath',
+  FigureSectionBackgroundChildCommunityYamlId = 'figureSection___background___childCommunityYaml___id',
+  FigureSectionBackgroundChildCommunityYamlChildren = 'figureSection___background___childCommunityYaml___children',
+  FigureSectionBackgroundChildCommunityYamlFileAbsolutePath = 'figureSection___background___childCommunityYaml___fileAbsolutePath',
   FigureSectionBackgroundChildContactYamlId = 'figureSection___background___childContactYaml___id',
   FigureSectionBackgroundChildContactYamlChildren = 'figureSection___background___childContactYaml___children',
   FigureSectionBackgroundChildContactYamlHeader = 'figureSection___background___childContactYaml___header',
   FigureSectionBackgroundChildContactYamlBody = 'figureSection___background___childContactYaml___body',
   FigureSectionBackgroundChildContactYamlFileAbsolutePath = 'figureSection___background___childContactYaml___fileAbsolutePath',
-  FigureSectionBackgroundChildFaqYamlId = 'figureSection___background___childFaqYaml___id',
-  FigureSectionBackgroundChildFaqYamlChildren = 'figureSection___background___childFaqYaml___children',
-  FigureSectionBackgroundChildFaqYamlCategories = 'figureSection___background___childFaqYaml___categories',
-  FigureSectionBackgroundChildFaqYamlFileAbsolutePath = 'figureSection___background___childFaqYaml___fileAbsolutePath',
+  FigureSectionBackgroundChildPressKitYamlId = 'figureSection___background___childPressKitYaml___id',
+  FigureSectionBackgroundChildPressKitYamlChildren = 'figureSection___background___childPressKitYaml___children',
+  FigureSectionBackgroundChildPressKitYamlFileAbsolutePath = 'figureSection___background___childPressKitYaml___fileAbsolutePath',
+  FigureSectionBackgroundChildFundYamlId = 'figureSection___background___childFundYaml___id',
+  FigureSectionBackgroundChildFundYamlChildren = 'figureSection___background___childFundYaml___children',
+  FigureSectionBackgroundChildFundYamlFileAbsolutePath = 'figureSection___background___childFundYaml___fileAbsolutePath',
   FigureSectionBackgroundChildInvestYamlId = 'figureSection___background___childInvestYaml___id',
   FigureSectionBackgroundChildInvestYamlChildren = 'figureSection___background___childInvestYaml___children',
   FigureSectionBackgroundChildInvestYamlFileAbsolutePath = 'figureSection___background___childInvestYaml___fileAbsolutePath',
@@ -2772,31 +2767,20 @@ export enum CaseStudyItemsYamlFieldsEnum {
   FigureSectionBackgroundChildMainnetYamlLivecastLink = 'figureSection___background___childMainnetYaml___livecastLink',
   FigureSectionBackgroundChildMainnetYamlSeoDescription = 'figureSection___background___childMainnetYaml___seoDescription',
   FigureSectionBackgroundChildMainnetYamlFileAbsolutePath = 'figureSection___background___childMainnetYaml___fileAbsolutePath',
+  FigureSectionBackgroundChildFaqYamlId = 'figureSection___background___childFaqYaml___id',
+  FigureSectionBackgroundChildFaqYamlChildren = 'figureSection___background___childFaqYaml___children',
+  FigureSectionBackgroundChildFaqYamlCategories = 'figureSection___background___childFaqYaml___categories',
+  FigureSectionBackgroundChildFaqYamlFileAbsolutePath = 'figureSection___background___childFaqYaml___fileAbsolutePath',
   FigureSectionBackgroundChildPartnersYamlId = 'figureSection___background___childPartnersYaml___id',
   FigureSectionBackgroundChildPartnersYamlChildren = 'figureSection___background___childPartnersYaml___children',
   FigureSectionBackgroundChildPartnersYamlHeader = 'figureSection___background___childPartnersYaml___header',
   FigureSectionBackgroundChildPartnersYamlPartnerLogos = 'figureSection___background___childPartnersYaml___partnerLogos',
   FigureSectionBackgroundChildPartnersYamlFileAbsolutePath = 'figureSection___background___childPartnersYaml___fileAbsolutePath',
-  FigureSectionBackgroundChildFundYamlId = 'figureSection___background___childFundYaml___id',
-  FigureSectionBackgroundChildFundYamlChildren = 'figureSection___background___childFundYaml___children',
-  FigureSectionBackgroundChildFundYamlFileAbsolutePath = 'figureSection___background___childFundYaml___fileAbsolutePath',
-  FigureSectionBackgroundChildResourcesYamlId = 'figureSection___background___childResourcesYaml___id',
-  FigureSectionBackgroundChildResourcesYamlChildren = 'figureSection___background___childResourcesYaml___children',
-  FigureSectionBackgroundChildResourcesYamlFileAbsolutePath = 'figureSection___background___childResourcesYaml___fileAbsolutePath',
-  FigureSectionBackgroundChildPressKitYamlId = 'figureSection___background___childPressKitYaml___id',
-  FigureSectionBackgroundChildPressKitYamlChildren = 'figureSection___background___childPressKitYaml___children',
-  FigureSectionBackgroundChildPressKitYamlFileAbsolutePath = 'figureSection___background___childPressKitYaml___fileAbsolutePath',
-  FigureSectionBackgroundChildSharedYamlId = 'figureSection___background___childSharedYaml___id',
-  FigureSectionBackgroundChildSharedYamlChildren = 'figureSection___background___childSharedYaml___children',
-  FigureSectionBackgroundChildSharedYamlFileAbsolutePath = 'figureSection___background___childSharedYaml___fileAbsolutePath',
   FigureSectionBackgroundChildMediaYamlId = 'figureSection___background___childMediaYaml___id',
   FigureSectionBackgroundChildMediaYamlChildren = 'figureSection___background___childMediaYaml___children',
   FigureSectionBackgroundChildMediaYamlHeader = 'figureSection___background___childMediaYaml___header',
   FigureSectionBackgroundChildMediaYamlCategories = 'figureSection___background___childMediaYaml___categories',
   FigureSectionBackgroundChildMediaYamlFileAbsolutePath = 'figureSection___background___childMediaYaml___fileAbsolutePath',
-  FigureSectionBackgroundChildScienceYamlId = 'figureSection___background___childScienceYaml___id',
-  FigureSectionBackgroundChildScienceYamlChildren = 'figureSection___background___childScienceYaml___children',
-  FigureSectionBackgroundChildScienceYamlFileAbsolutePath = 'figureSection___background___childScienceYaml___fileAbsolutePath',
   FigureSectionBackgroundChildMarkdownRemarkId = 'figureSection___background___childMarkdownRemark___id',
   FigureSectionBackgroundChildMarkdownRemarkExcerpt = 'figureSection___background___childMarkdownRemark___excerpt',
   FigureSectionBackgroundChildMarkdownRemarkRawMarkdownBody = 'figureSection___background___childMarkdownRemark___rawMarkdownBody',
@@ -2808,19 +2792,30 @@ export enum CaseStudyItemsYamlFieldsEnum {
   FigureSectionBackgroundChildMarkdownRemarkTimeToRead = 'figureSection___background___childMarkdownRemark___timeToRead',
   FigureSectionBackgroundChildMarkdownRemarkTableOfContents = 'figureSection___background___childMarkdownRemark___tableOfContents',
   FigureSectionBackgroundChildMarkdownRemarkChildren = 'figureSection___background___childMarkdownRemark___children',
-  FigureSectionBackgroundChildTokenYamlId = 'figureSection___background___childTokenYaml___id',
-  FigureSectionBackgroundChildTokenYamlChildren = 'figureSection___background___childTokenYaml___children',
-  FigureSectionBackgroundChildTokenYamlFileAbsolutePath = 'figureSection___background___childTokenYaml___fileAbsolutePath',
-  FigureSectionBackgroundChildTeamYamlId = 'figureSection___background___childTeamYaml___id',
-  FigureSectionBackgroundChildTeamYamlChildren = 'figureSection___background___childTeamYaml___children',
-  FigureSectionBackgroundChildTeamYamlFileAbsolutePath = 'figureSection___background___childTeamYaml___fileAbsolutePath',
+  FigureSectionBackgroundChildHomeYamlId = 'figureSection___background___childHomeYaml___id',
+  FigureSectionBackgroundChildHomeYamlChildren = 'figureSection___background___childHomeYaml___children',
+  FigureSectionBackgroundChildHomeYamlFileAbsolutePath = 'figureSection___background___childHomeYaml___fileAbsolutePath',
+  FigureSectionBackgroundChildResourcesYamlId = 'figureSection___background___childResourcesYaml___id',
+  FigureSectionBackgroundChildResourcesYamlChildren = 'figureSection___background___childResourcesYaml___children',
+  FigureSectionBackgroundChildResourcesYamlFileAbsolutePath = 'figureSection___background___childResourcesYaml___fileAbsolutePath',
+  FigureSectionBackgroundChildScienceYamlId = 'figureSection___background___childScienceYaml___id',
+  FigureSectionBackgroundChildScienceYamlChildren = 'figureSection___background___childScienceYaml___children',
+  FigureSectionBackgroundChildScienceYamlFileAbsolutePath = 'figureSection___background___childScienceYaml___fileAbsolutePath',
   FigureSectionBackgroundChildWalletAddressRegistrationYamlId = 'figureSection___background___childWalletAddressRegistrationYaml___id',
   FigureSectionBackgroundChildWalletAddressRegistrationYamlChildren = 'figureSection___background___childWalletAddressRegistrationYaml___children',
   FigureSectionBackgroundChildWalletAddressRegistrationYamlFileAbsolutePath = 'figureSection___background___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  FigureSectionBackgroundChildSharedYamlId = 'figureSection___background___childSharedYaml___id',
+  FigureSectionBackgroundChildSharedYamlChildren = 'figureSection___background___childSharedYaml___children',
+  FigureSectionBackgroundChildSharedYamlFileAbsolutePath = 'figureSection___background___childSharedYaml___fileAbsolutePath',
+  FigureSectionBackgroundChildTeamYamlId = 'figureSection___background___childTeamYaml___id',
+  FigureSectionBackgroundChildTeamYamlChildren = 'figureSection___background___childTeamYaml___children',
+  FigureSectionBackgroundChildTeamYamlFileAbsolutePath = 'figureSection___background___childTeamYaml___fileAbsolutePath',
   FigureSectionBackgroundChildValidatorsYamlId = 'figureSection___background___childValidatorsYaml___id',
   FigureSectionBackgroundChildValidatorsYamlChildren = 'figureSection___background___childValidatorsYaml___children',
   FigureSectionBackgroundChildValidatorsYamlFileAbsolutePath = 'figureSection___background___childValidatorsYaml___fileAbsolutePath',
-  FigureSectionTitle = 'figureSection___title',
+  FigureSectionBackgroundChildTokenYamlId = 'figureSection___background___childTokenYaml___id',
+  FigureSectionBackgroundChildTokenYamlChildren = 'figureSection___background___childTokenYaml___children',
+  FigureSectionBackgroundChildTokenYamlFileAbsolutePath = 'figureSection___background___childTokenYaml___fileAbsolutePath',
   FigureSectionFigures = 'figureSection___figures',
   FigureSectionFiguresImageSourceInstanceName = 'figureSection___figures___image___sourceInstanceName',
   FigureSectionFiguresImageAbsolutePath = 'figureSection___figures___image___absolutePath',
@@ -2860,6 +2855,7 @@ export enum CaseStudyItemsYamlFieldsEnum {
   FigureSectionFiguresImageChildren = 'figureSection___figures___image___children',
   FigureSectionFiguresTitle = 'figureSection___figures___title',
   FigureSectionFiguresSpacing = 'figureSection___figures___spacing',
+  FigureSectionTitle = 'figureSection___title',
   FundingSectionImageSourceInstanceName = 'fundingSection___image___sourceInstanceName',
   FundingSectionImageAbsolutePath = 'fundingSection___image___absolutePath',
   FundingSectionImageRelativePath = 'fundingSection___image___relativePath',
@@ -2910,33 +2906,32 @@ export enum CaseStudyItemsYamlFieldsEnum {
   FundingSectionImageInternalMediaType = 'fundingSection___image___internal___mediaType',
   FundingSectionImageInternalOwner = 'fundingSection___image___internal___owner',
   FundingSectionImageInternalType = 'fundingSection___image___internal___type',
-  FundingSectionImageChildCommunityYamlId = 'fundingSection___image___childCommunityYaml___id',
-  FundingSectionImageChildCommunityYamlChildren = 'fundingSection___image___childCommunityYaml___children',
-  FundingSectionImageChildCommunityYamlFileAbsolutePath = 'fundingSection___image___childCommunityYaml___fileAbsolutePath',
   FundingSectionImageChildCaseStudiesYamlId = 'fundingSection___image___childCaseStudiesYaml___id',
   FundingSectionImageChildCaseStudiesYamlChildren = 'fundingSection___image___childCaseStudiesYaml___children',
   FundingSectionImageChildCaseStudiesYamlFileAbsolutePath = 'fundingSection___image___childCaseStudiesYaml___fileAbsolutePath',
-  FundingSectionImageChildDevelopersYamlId = 'fundingSection___image___childDevelopersYaml___id',
-  FundingSectionImageChildDevelopersYamlChildren = 'fundingSection___image___childDevelopersYaml___children',
-  FundingSectionImageChildDevelopersYamlFileAbsolutePath = 'fundingSection___image___childDevelopersYaml___fileAbsolutePath',
   FundingSectionImageChildCaseStudyItemsYamlId = 'fundingSection___image___childCaseStudyItemsYaml___id',
   FundingSectionImageChildCaseStudyItemsYamlChildren = 'fundingSection___image___childCaseStudyItemsYaml___children',
   FundingSectionImageChildCaseStudyItemsYamlName = 'fundingSection___image___childCaseStudyItemsYaml___name',
   FundingSectionImageChildCaseStudyItemsYamlSlug = 'fundingSection___image___childCaseStudyItemsYaml___slug',
   FundingSectionImageChildCaseStudyItemsYamlDescription = 'fundingSection___image___childCaseStudyItemsYaml___description',
   FundingSectionImageChildCaseStudyItemsYamlFileAbsolutePath = 'fundingSection___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  FundingSectionImageChildHomeYamlId = 'fundingSection___image___childHomeYaml___id',
-  FundingSectionImageChildHomeYamlChildren = 'fundingSection___image___childHomeYaml___children',
-  FundingSectionImageChildHomeYamlFileAbsolutePath = 'fundingSection___image___childHomeYaml___fileAbsolutePath',
+  FundingSectionImageChildDevelopersYamlId = 'fundingSection___image___childDevelopersYaml___id',
+  FundingSectionImageChildDevelopersYamlChildren = 'fundingSection___image___childDevelopersYaml___children',
+  FundingSectionImageChildDevelopersYamlFileAbsolutePath = 'fundingSection___image___childDevelopersYaml___fileAbsolutePath',
+  FundingSectionImageChildCommunityYamlId = 'fundingSection___image___childCommunityYaml___id',
+  FundingSectionImageChildCommunityYamlChildren = 'fundingSection___image___childCommunityYaml___children',
+  FundingSectionImageChildCommunityYamlFileAbsolutePath = 'fundingSection___image___childCommunityYaml___fileAbsolutePath',
   FundingSectionImageChildContactYamlId = 'fundingSection___image___childContactYaml___id',
   FundingSectionImageChildContactYamlChildren = 'fundingSection___image___childContactYaml___children',
   FundingSectionImageChildContactYamlHeader = 'fundingSection___image___childContactYaml___header',
   FundingSectionImageChildContactYamlBody = 'fundingSection___image___childContactYaml___body',
   FundingSectionImageChildContactYamlFileAbsolutePath = 'fundingSection___image___childContactYaml___fileAbsolutePath',
-  FundingSectionImageChildFaqYamlId = 'fundingSection___image___childFaqYaml___id',
-  FundingSectionImageChildFaqYamlChildren = 'fundingSection___image___childFaqYaml___children',
-  FundingSectionImageChildFaqYamlCategories = 'fundingSection___image___childFaqYaml___categories',
-  FundingSectionImageChildFaqYamlFileAbsolutePath = 'fundingSection___image___childFaqYaml___fileAbsolutePath',
+  FundingSectionImageChildPressKitYamlId = 'fundingSection___image___childPressKitYaml___id',
+  FundingSectionImageChildPressKitYamlChildren = 'fundingSection___image___childPressKitYaml___children',
+  FundingSectionImageChildPressKitYamlFileAbsolutePath = 'fundingSection___image___childPressKitYaml___fileAbsolutePath',
+  FundingSectionImageChildFundYamlId = 'fundingSection___image___childFundYaml___id',
+  FundingSectionImageChildFundYamlChildren = 'fundingSection___image___childFundYaml___children',
+  FundingSectionImageChildFundYamlFileAbsolutePath = 'fundingSection___image___childFundYaml___fileAbsolutePath',
   FundingSectionImageChildInvestYamlId = 'fundingSection___image___childInvestYaml___id',
   FundingSectionImageChildInvestYamlChildren = 'fundingSection___image___childInvestYaml___children',
   FundingSectionImageChildInvestYamlFileAbsolutePath = 'fundingSection___image___childInvestYaml___fileAbsolutePath',
@@ -2946,31 +2941,20 @@ export enum CaseStudyItemsYamlFieldsEnum {
   FundingSectionImageChildMainnetYamlLivecastLink = 'fundingSection___image___childMainnetYaml___livecastLink',
   FundingSectionImageChildMainnetYamlSeoDescription = 'fundingSection___image___childMainnetYaml___seoDescription',
   FundingSectionImageChildMainnetYamlFileAbsolutePath = 'fundingSection___image___childMainnetYaml___fileAbsolutePath',
+  FundingSectionImageChildFaqYamlId = 'fundingSection___image___childFaqYaml___id',
+  FundingSectionImageChildFaqYamlChildren = 'fundingSection___image___childFaqYaml___children',
+  FundingSectionImageChildFaqYamlCategories = 'fundingSection___image___childFaqYaml___categories',
+  FundingSectionImageChildFaqYamlFileAbsolutePath = 'fundingSection___image___childFaqYaml___fileAbsolutePath',
   FundingSectionImageChildPartnersYamlId = 'fundingSection___image___childPartnersYaml___id',
   FundingSectionImageChildPartnersYamlChildren = 'fundingSection___image___childPartnersYaml___children',
   FundingSectionImageChildPartnersYamlHeader = 'fundingSection___image___childPartnersYaml___header',
   FundingSectionImageChildPartnersYamlPartnerLogos = 'fundingSection___image___childPartnersYaml___partnerLogos',
   FundingSectionImageChildPartnersYamlFileAbsolutePath = 'fundingSection___image___childPartnersYaml___fileAbsolutePath',
-  FundingSectionImageChildFundYamlId = 'fundingSection___image___childFundYaml___id',
-  FundingSectionImageChildFundYamlChildren = 'fundingSection___image___childFundYaml___children',
-  FundingSectionImageChildFundYamlFileAbsolutePath = 'fundingSection___image___childFundYaml___fileAbsolutePath',
-  FundingSectionImageChildResourcesYamlId = 'fundingSection___image___childResourcesYaml___id',
-  FundingSectionImageChildResourcesYamlChildren = 'fundingSection___image___childResourcesYaml___children',
-  FundingSectionImageChildResourcesYamlFileAbsolutePath = 'fundingSection___image___childResourcesYaml___fileAbsolutePath',
-  FundingSectionImageChildPressKitYamlId = 'fundingSection___image___childPressKitYaml___id',
-  FundingSectionImageChildPressKitYamlChildren = 'fundingSection___image___childPressKitYaml___children',
-  FundingSectionImageChildPressKitYamlFileAbsolutePath = 'fundingSection___image___childPressKitYaml___fileAbsolutePath',
-  FundingSectionImageChildSharedYamlId = 'fundingSection___image___childSharedYaml___id',
-  FundingSectionImageChildSharedYamlChildren = 'fundingSection___image___childSharedYaml___children',
-  FundingSectionImageChildSharedYamlFileAbsolutePath = 'fundingSection___image___childSharedYaml___fileAbsolutePath',
   FundingSectionImageChildMediaYamlId = 'fundingSection___image___childMediaYaml___id',
   FundingSectionImageChildMediaYamlChildren = 'fundingSection___image___childMediaYaml___children',
   FundingSectionImageChildMediaYamlHeader = 'fundingSection___image___childMediaYaml___header',
   FundingSectionImageChildMediaYamlCategories = 'fundingSection___image___childMediaYaml___categories',
   FundingSectionImageChildMediaYamlFileAbsolutePath = 'fundingSection___image___childMediaYaml___fileAbsolutePath',
-  FundingSectionImageChildScienceYamlId = 'fundingSection___image___childScienceYaml___id',
-  FundingSectionImageChildScienceYamlChildren = 'fundingSection___image___childScienceYaml___children',
-  FundingSectionImageChildScienceYamlFileAbsolutePath = 'fundingSection___image___childScienceYaml___fileAbsolutePath',
   FundingSectionImageChildMarkdownRemarkId = 'fundingSection___image___childMarkdownRemark___id',
   FundingSectionImageChildMarkdownRemarkExcerpt = 'fundingSection___image___childMarkdownRemark___excerpt',
   FundingSectionImageChildMarkdownRemarkRawMarkdownBody = 'fundingSection___image___childMarkdownRemark___rawMarkdownBody',
@@ -2982,18 +2966,30 @@ export enum CaseStudyItemsYamlFieldsEnum {
   FundingSectionImageChildMarkdownRemarkTimeToRead = 'fundingSection___image___childMarkdownRemark___timeToRead',
   FundingSectionImageChildMarkdownRemarkTableOfContents = 'fundingSection___image___childMarkdownRemark___tableOfContents',
   FundingSectionImageChildMarkdownRemarkChildren = 'fundingSection___image___childMarkdownRemark___children',
-  FundingSectionImageChildTokenYamlId = 'fundingSection___image___childTokenYaml___id',
-  FundingSectionImageChildTokenYamlChildren = 'fundingSection___image___childTokenYaml___children',
-  FundingSectionImageChildTokenYamlFileAbsolutePath = 'fundingSection___image___childTokenYaml___fileAbsolutePath',
-  FundingSectionImageChildTeamYamlId = 'fundingSection___image___childTeamYaml___id',
-  FundingSectionImageChildTeamYamlChildren = 'fundingSection___image___childTeamYaml___children',
-  FundingSectionImageChildTeamYamlFileAbsolutePath = 'fundingSection___image___childTeamYaml___fileAbsolutePath',
+  FundingSectionImageChildHomeYamlId = 'fundingSection___image___childHomeYaml___id',
+  FundingSectionImageChildHomeYamlChildren = 'fundingSection___image___childHomeYaml___children',
+  FundingSectionImageChildHomeYamlFileAbsolutePath = 'fundingSection___image___childHomeYaml___fileAbsolutePath',
+  FundingSectionImageChildResourcesYamlId = 'fundingSection___image___childResourcesYaml___id',
+  FundingSectionImageChildResourcesYamlChildren = 'fundingSection___image___childResourcesYaml___children',
+  FundingSectionImageChildResourcesYamlFileAbsolutePath = 'fundingSection___image___childResourcesYaml___fileAbsolutePath',
+  FundingSectionImageChildScienceYamlId = 'fundingSection___image___childScienceYaml___id',
+  FundingSectionImageChildScienceYamlChildren = 'fundingSection___image___childScienceYaml___children',
+  FundingSectionImageChildScienceYamlFileAbsolutePath = 'fundingSection___image___childScienceYaml___fileAbsolutePath',
   FundingSectionImageChildWalletAddressRegistrationYamlId = 'fundingSection___image___childWalletAddressRegistrationYaml___id',
   FundingSectionImageChildWalletAddressRegistrationYamlChildren = 'fundingSection___image___childWalletAddressRegistrationYaml___children',
   FundingSectionImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'fundingSection___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  FundingSectionImageChildSharedYamlId = 'fundingSection___image___childSharedYaml___id',
+  FundingSectionImageChildSharedYamlChildren = 'fundingSection___image___childSharedYaml___children',
+  FundingSectionImageChildSharedYamlFileAbsolutePath = 'fundingSection___image___childSharedYaml___fileAbsolutePath',
+  FundingSectionImageChildTeamYamlId = 'fundingSection___image___childTeamYaml___id',
+  FundingSectionImageChildTeamYamlChildren = 'fundingSection___image___childTeamYaml___children',
+  FundingSectionImageChildTeamYamlFileAbsolutePath = 'fundingSection___image___childTeamYaml___fileAbsolutePath',
   FundingSectionImageChildValidatorsYamlId = 'fundingSection___image___childValidatorsYaml___id',
   FundingSectionImageChildValidatorsYamlChildren = 'fundingSection___image___childValidatorsYaml___children',
   FundingSectionImageChildValidatorsYamlFileAbsolutePath = 'fundingSection___image___childValidatorsYaml___fileAbsolutePath',
+  FundingSectionImageChildTokenYamlId = 'fundingSection___image___childTokenYaml___id',
+  FundingSectionImageChildTokenYamlChildren = 'fundingSection___image___childTokenYaml___children',
+  FundingSectionImageChildTokenYamlFileAbsolutePath = 'fundingSection___image___childTokenYaml___fileAbsolutePath',
   FundingSectionDetails = 'fundingSection___details',
   FundingSectionResults = 'fundingSection___results',
   FundingSectionNext = 'fundingSection___next',
@@ -3086,33 +3082,32 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BottomSectionBackgroundInternalMediaType = 'bottomSection___background___internal___mediaType',
   BottomSectionBackgroundInternalOwner = 'bottomSection___background___internal___owner',
   BottomSectionBackgroundInternalType = 'bottomSection___background___internal___type',
-  BottomSectionBackgroundChildCommunityYamlId = 'bottomSection___background___childCommunityYaml___id',
-  BottomSectionBackgroundChildCommunityYamlChildren = 'bottomSection___background___childCommunityYaml___children',
-  BottomSectionBackgroundChildCommunityYamlFileAbsolutePath = 'bottomSection___background___childCommunityYaml___fileAbsolutePath',
   BottomSectionBackgroundChildCaseStudiesYamlId = 'bottomSection___background___childCaseStudiesYaml___id',
   BottomSectionBackgroundChildCaseStudiesYamlChildren = 'bottomSection___background___childCaseStudiesYaml___children',
   BottomSectionBackgroundChildCaseStudiesYamlFileAbsolutePath = 'bottomSection___background___childCaseStudiesYaml___fileAbsolutePath',
-  BottomSectionBackgroundChildDevelopersYamlId = 'bottomSection___background___childDevelopersYaml___id',
-  BottomSectionBackgroundChildDevelopersYamlChildren = 'bottomSection___background___childDevelopersYaml___children',
-  BottomSectionBackgroundChildDevelopersYamlFileAbsolutePath = 'bottomSection___background___childDevelopersYaml___fileAbsolutePath',
   BottomSectionBackgroundChildCaseStudyItemsYamlId = 'bottomSection___background___childCaseStudyItemsYaml___id',
   BottomSectionBackgroundChildCaseStudyItemsYamlChildren = 'bottomSection___background___childCaseStudyItemsYaml___children',
   BottomSectionBackgroundChildCaseStudyItemsYamlName = 'bottomSection___background___childCaseStudyItemsYaml___name',
   BottomSectionBackgroundChildCaseStudyItemsYamlSlug = 'bottomSection___background___childCaseStudyItemsYaml___slug',
   BottomSectionBackgroundChildCaseStudyItemsYamlDescription = 'bottomSection___background___childCaseStudyItemsYaml___description',
   BottomSectionBackgroundChildCaseStudyItemsYamlFileAbsolutePath = 'bottomSection___background___childCaseStudyItemsYaml___fileAbsolutePath',
-  BottomSectionBackgroundChildHomeYamlId = 'bottomSection___background___childHomeYaml___id',
-  BottomSectionBackgroundChildHomeYamlChildren = 'bottomSection___background___childHomeYaml___children',
-  BottomSectionBackgroundChildHomeYamlFileAbsolutePath = 'bottomSection___background___childHomeYaml___fileAbsolutePath',
+  BottomSectionBackgroundChildDevelopersYamlId = 'bottomSection___background___childDevelopersYaml___id',
+  BottomSectionBackgroundChildDevelopersYamlChildren = 'bottomSection___background___childDevelopersYaml___children',
+  BottomSectionBackgroundChildDevelopersYamlFileAbsolutePath = 'bottomSection___background___childDevelopersYaml___fileAbsolutePath',
+  BottomSectionBackgroundChildCommunityYamlId = 'bottomSection___background___childCommunityYaml___id',
+  BottomSectionBackgroundChildCommunityYamlChildren = 'bottomSection___background___childCommunityYaml___children',
+  BottomSectionBackgroundChildCommunityYamlFileAbsolutePath = 'bottomSection___background___childCommunityYaml___fileAbsolutePath',
   BottomSectionBackgroundChildContactYamlId = 'bottomSection___background___childContactYaml___id',
   BottomSectionBackgroundChildContactYamlChildren = 'bottomSection___background___childContactYaml___children',
   BottomSectionBackgroundChildContactYamlHeader = 'bottomSection___background___childContactYaml___header',
   BottomSectionBackgroundChildContactYamlBody = 'bottomSection___background___childContactYaml___body',
   BottomSectionBackgroundChildContactYamlFileAbsolutePath = 'bottomSection___background___childContactYaml___fileAbsolutePath',
-  BottomSectionBackgroundChildFaqYamlId = 'bottomSection___background___childFaqYaml___id',
-  BottomSectionBackgroundChildFaqYamlChildren = 'bottomSection___background___childFaqYaml___children',
-  BottomSectionBackgroundChildFaqYamlCategories = 'bottomSection___background___childFaqYaml___categories',
-  BottomSectionBackgroundChildFaqYamlFileAbsolutePath = 'bottomSection___background___childFaqYaml___fileAbsolutePath',
+  BottomSectionBackgroundChildPressKitYamlId = 'bottomSection___background___childPressKitYaml___id',
+  BottomSectionBackgroundChildPressKitYamlChildren = 'bottomSection___background___childPressKitYaml___children',
+  BottomSectionBackgroundChildPressKitYamlFileAbsolutePath = 'bottomSection___background___childPressKitYaml___fileAbsolutePath',
+  BottomSectionBackgroundChildFundYamlId = 'bottomSection___background___childFundYaml___id',
+  BottomSectionBackgroundChildFundYamlChildren = 'bottomSection___background___childFundYaml___children',
+  BottomSectionBackgroundChildFundYamlFileAbsolutePath = 'bottomSection___background___childFundYaml___fileAbsolutePath',
   BottomSectionBackgroundChildInvestYamlId = 'bottomSection___background___childInvestYaml___id',
   BottomSectionBackgroundChildInvestYamlChildren = 'bottomSection___background___childInvestYaml___children',
   BottomSectionBackgroundChildInvestYamlFileAbsolutePath = 'bottomSection___background___childInvestYaml___fileAbsolutePath',
@@ -3122,31 +3117,20 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BottomSectionBackgroundChildMainnetYamlLivecastLink = 'bottomSection___background___childMainnetYaml___livecastLink',
   BottomSectionBackgroundChildMainnetYamlSeoDescription = 'bottomSection___background___childMainnetYaml___seoDescription',
   BottomSectionBackgroundChildMainnetYamlFileAbsolutePath = 'bottomSection___background___childMainnetYaml___fileAbsolutePath',
+  BottomSectionBackgroundChildFaqYamlId = 'bottomSection___background___childFaqYaml___id',
+  BottomSectionBackgroundChildFaqYamlChildren = 'bottomSection___background___childFaqYaml___children',
+  BottomSectionBackgroundChildFaqYamlCategories = 'bottomSection___background___childFaqYaml___categories',
+  BottomSectionBackgroundChildFaqYamlFileAbsolutePath = 'bottomSection___background___childFaqYaml___fileAbsolutePath',
   BottomSectionBackgroundChildPartnersYamlId = 'bottomSection___background___childPartnersYaml___id',
   BottomSectionBackgroundChildPartnersYamlChildren = 'bottomSection___background___childPartnersYaml___children',
   BottomSectionBackgroundChildPartnersYamlHeader = 'bottomSection___background___childPartnersYaml___header',
   BottomSectionBackgroundChildPartnersYamlPartnerLogos = 'bottomSection___background___childPartnersYaml___partnerLogos',
   BottomSectionBackgroundChildPartnersYamlFileAbsolutePath = 'bottomSection___background___childPartnersYaml___fileAbsolutePath',
-  BottomSectionBackgroundChildFundYamlId = 'bottomSection___background___childFundYaml___id',
-  BottomSectionBackgroundChildFundYamlChildren = 'bottomSection___background___childFundYaml___children',
-  BottomSectionBackgroundChildFundYamlFileAbsolutePath = 'bottomSection___background___childFundYaml___fileAbsolutePath',
-  BottomSectionBackgroundChildResourcesYamlId = 'bottomSection___background___childResourcesYaml___id',
-  BottomSectionBackgroundChildResourcesYamlChildren = 'bottomSection___background___childResourcesYaml___children',
-  BottomSectionBackgroundChildResourcesYamlFileAbsolutePath = 'bottomSection___background___childResourcesYaml___fileAbsolutePath',
-  BottomSectionBackgroundChildPressKitYamlId = 'bottomSection___background___childPressKitYaml___id',
-  BottomSectionBackgroundChildPressKitYamlChildren = 'bottomSection___background___childPressKitYaml___children',
-  BottomSectionBackgroundChildPressKitYamlFileAbsolutePath = 'bottomSection___background___childPressKitYaml___fileAbsolutePath',
-  BottomSectionBackgroundChildSharedYamlId = 'bottomSection___background___childSharedYaml___id',
-  BottomSectionBackgroundChildSharedYamlChildren = 'bottomSection___background___childSharedYaml___children',
-  BottomSectionBackgroundChildSharedYamlFileAbsolutePath = 'bottomSection___background___childSharedYaml___fileAbsolutePath',
   BottomSectionBackgroundChildMediaYamlId = 'bottomSection___background___childMediaYaml___id',
   BottomSectionBackgroundChildMediaYamlChildren = 'bottomSection___background___childMediaYaml___children',
   BottomSectionBackgroundChildMediaYamlHeader = 'bottomSection___background___childMediaYaml___header',
   BottomSectionBackgroundChildMediaYamlCategories = 'bottomSection___background___childMediaYaml___categories',
   BottomSectionBackgroundChildMediaYamlFileAbsolutePath = 'bottomSection___background___childMediaYaml___fileAbsolutePath',
-  BottomSectionBackgroundChildScienceYamlId = 'bottomSection___background___childScienceYaml___id',
-  BottomSectionBackgroundChildScienceYamlChildren = 'bottomSection___background___childScienceYaml___children',
-  BottomSectionBackgroundChildScienceYamlFileAbsolutePath = 'bottomSection___background___childScienceYaml___fileAbsolutePath',
   BottomSectionBackgroundChildMarkdownRemarkId = 'bottomSection___background___childMarkdownRemark___id',
   BottomSectionBackgroundChildMarkdownRemarkExcerpt = 'bottomSection___background___childMarkdownRemark___excerpt',
   BottomSectionBackgroundChildMarkdownRemarkRawMarkdownBody = 'bottomSection___background___childMarkdownRemark___rawMarkdownBody',
@@ -3158,18 +3142,30 @@ export enum CaseStudyItemsYamlFieldsEnum {
   BottomSectionBackgroundChildMarkdownRemarkTimeToRead = 'bottomSection___background___childMarkdownRemark___timeToRead',
   BottomSectionBackgroundChildMarkdownRemarkTableOfContents = 'bottomSection___background___childMarkdownRemark___tableOfContents',
   BottomSectionBackgroundChildMarkdownRemarkChildren = 'bottomSection___background___childMarkdownRemark___children',
-  BottomSectionBackgroundChildTokenYamlId = 'bottomSection___background___childTokenYaml___id',
-  BottomSectionBackgroundChildTokenYamlChildren = 'bottomSection___background___childTokenYaml___children',
-  BottomSectionBackgroundChildTokenYamlFileAbsolutePath = 'bottomSection___background___childTokenYaml___fileAbsolutePath',
-  BottomSectionBackgroundChildTeamYamlId = 'bottomSection___background___childTeamYaml___id',
-  BottomSectionBackgroundChildTeamYamlChildren = 'bottomSection___background___childTeamYaml___children',
-  BottomSectionBackgroundChildTeamYamlFileAbsolutePath = 'bottomSection___background___childTeamYaml___fileAbsolutePath',
+  BottomSectionBackgroundChildHomeYamlId = 'bottomSection___background___childHomeYaml___id',
+  BottomSectionBackgroundChildHomeYamlChildren = 'bottomSection___background___childHomeYaml___children',
+  BottomSectionBackgroundChildHomeYamlFileAbsolutePath = 'bottomSection___background___childHomeYaml___fileAbsolutePath',
+  BottomSectionBackgroundChildResourcesYamlId = 'bottomSection___background___childResourcesYaml___id',
+  BottomSectionBackgroundChildResourcesYamlChildren = 'bottomSection___background___childResourcesYaml___children',
+  BottomSectionBackgroundChildResourcesYamlFileAbsolutePath = 'bottomSection___background___childResourcesYaml___fileAbsolutePath',
+  BottomSectionBackgroundChildScienceYamlId = 'bottomSection___background___childScienceYaml___id',
+  BottomSectionBackgroundChildScienceYamlChildren = 'bottomSection___background___childScienceYaml___children',
+  BottomSectionBackgroundChildScienceYamlFileAbsolutePath = 'bottomSection___background___childScienceYaml___fileAbsolutePath',
   BottomSectionBackgroundChildWalletAddressRegistrationYamlId = 'bottomSection___background___childWalletAddressRegistrationYaml___id',
   BottomSectionBackgroundChildWalletAddressRegistrationYamlChildren = 'bottomSection___background___childWalletAddressRegistrationYaml___children',
   BottomSectionBackgroundChildWalletAddressRegistrationYamlFileAbsolutePath = 'bottomSection___background___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  BottomSectionBackgroundChildSharedYamlId = 'bottomSection___background___childSharedYaml___id',
+  BottomSectionBackgroundChildSharedYamlChildren = 'bottomSection___background___childSharedYaml___children',
+  BottomSectionBackgroundChildSharedYamlFileAbsolutePath = 'bottomSection___background___childSharedYaml___fileAbsolutePath',
+  BottomSectionBackgroundChildTeamYamlId = 'bottomSection___background___childTeamYaml___id',
+  BottomSectionBackgroundChildTeamYamlChildren = 'bottomSection___background___childTeamYaml___children',
+  BottomSectionBackgroundChildTeamYamlFileAbsolutePath = 'bottomSection___background___childTeamYaml___fileAbsolutePath',
   BottomSectionBackgroundChildValidatorsYamlId = 'bottomSection___background___childValidatorsYaml___id',
   BottomSectionBackgroundChildValidatorsYamlChildren = 'bottomSection___background___childValidatorsYaml___children',
   BottomSectionBackgroundChildValidatorsYamlFileAbsolutePath = 'bottomSection___background___childValidatorsYaml___fileAbsolutePath',
+  BottomSectionBackgroundChildTokenYamlId = 'bottomSection___background___childTokenYaml___id',
+  BottomSectionBackgroundChildTokenYamlChildren = 'bottomSection___background___childTokenYaml___children',
+  BottomSectionBackgroundChildTokenYamlFileAbsolutePath = 'bottomSection___background___childTokenYaml___fileAbsolutePath',
   BottomSectionQuote = 'bottomSection___quote',
   BottomSectionPersonName = 'bottomSection___person___name',
   BottomSectionPersonImageSourceInstanceName = 'bottomSection___person___image___sourceInstanceName',
@@ -3215,8 +3211,8 @@ export enum CaseStudyItemsYamlFieldsEnum {
 export type CaseStudyItemsYamlFigureSection = {
   __typename?: 'CaseStudyItemsYamlFigureSection';
   background: Maybe<File>;
-  title: Maybe<Scalars['String']>;
   figures: Maybe<Array<Maybe<CaseStudyItemsYamlFigureSectionFigures>>>;
+  title: Maybe<Scalars['String']>;
 };
 
 export type CaseStudyItemsYamlFigureSectionFigures = {
@@ -3238,8 +3234,8 @@ export type CaseStudyItemsYamlFigureSectionFiguresFilterListInput = {
 
 export type CaseStudyItemsYamlFigureSectionFilterInput = {
   background: Maybe<FileFilterInput>;
-  title: Maybe<StringQueryOperatorInput>;
   figures: Maybe<CaseStudyItemsYamlFigureSectionFiguresFilterListInput>;
+  title: Maybe<StringQueryOperatorInput>;
 };
 
 export type CaseStudyItemsYamlFilterInput = {
@@ -3834,33 +3830,32 @@ export enum ContactYamlFieldsEnum {
   LocationImageInternalMediaType = 'location___image___internal___mediaType',
   LocationImageInternalOwner = 'location___image___internal___owner',
   LocationImageInternalType = 'location___image___internal___type',
-  LocationImageChildCommunityYamlId = 'location___image___childCommunityYaml___id',
-  LocationImageChildCommunityYamlChildren = 'location___image___childCommunityYaml___children',
-  LocationImageChildCommunityYamlFileAbsolutePath = 'location___image___childCommunityYaml___fileAbsolutePath',
   LocationImageChildCaseStudiesYamlId = 'location___image___childCaseStudiesYaml___id',
   LocationImageChildCaseStudiesYamlChildren = 'location___image___childCaseStudiesYaml___children',
   LocationImageChildCaseStudiesYamlFileAbsolutePath = 'location___image___childCaseStudiesYaml___fileAbsolutePath',
-  LocationImageChildDevelopersYamlId = 'location___image___childDevelopersYaml___id',
-  LocationImageChildDevelopersYamlChildren = 'location___image___childDevelopersYaml___children',
-  LocationImageChildDevelopersYamlFileAbsolutePath = 'location___image___childDevelopersYaml___fileAbsolutePath',
   LocationImageChildCaseStudyItemsYamlId = 'location___image___childCaseStudyItemsYaml___id',
   LocationImageChildCaseStudyItemsYamlChildren = 'location___image___childCaseStudyItemsYaml___children',
   LocationImageChildCaseStudyItemsYamlName = 'location___image___childCaseStudyItemsYaml___name',
   LocationImageChildCaseStudyItemsYamlSlug = 'location___image___childCaseStudyItemsYaml___slug',
   LocationImageChildCaseStudyItemsYamlDescription = 'location___image___childCaseStudyItemsYaml___description',
   LocationImageChildCaseStudyItemsYamlFileAbsolutePath = 'location___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  LocationImageChildHomeYamlId = 'location___image___childHomeYaml___id',
-  LocationImageChildHomeYamlChildren = 'location___image___childHomeYaml___children',
-  LocationImageChildHomeYamlFileAbsolutePath = 'location___image___childHomeYaml___fileAbsolutePath',
+  LocationImageChildDevelopersYamlId = 'location___image___childDevelopersYaml___id',
+  LocationImageChildDevelopersYamlChildren = 'location___image___childDevelopersYaml___children',
+  LocationImageChildDevelopersYamlFileAbsolutePath = 'location___image___childDevelopersYaml___fileAbsolutePath',
+  LocationImageChildCommunityYamlId = 'location___image___childCommunityYaml___id',
+  LocationImageChildCommunityYamlChildren = 'location___image___childCommunityYaml___children',
+  LocationImageChildCommunityYamlFileAbsolutePath = 'location___image___childCommunityYaml___fileAbsolutePath',
   LocationImageChildContactYamlId = 'location___image___childContactYaml___id',
   LocationImageChildContactYamlChildren = 'location___image___childContactYaml___children',
   LocationImageChildContactYamlHeader = 'location___image___childContactYaml___header',
   LocationImageChildContactYamlBody = 'location___image___childContactYaml___body',
   LocationImageChildContactYamlFileAbsolutePath = 'location___image___childContactYaml___fileAbsolutePath',
-  LocationImageChildFaqYamlId = 'location___image___childFaqYaml___id',
-  LocationImageChildFaqYamlChildren = 'location___image___childFaqYaml___children',
-  LocationImageChildFaqYamlCategories = 'location___image___childFaqYaml___categories',
-  LocationImageChildFaqYamlFileAbsolutePath = 'location___image___childFaqYaml___fileAbsolutePath',
+  LocationImageChildPressKitYamlId = 'location___image___childPressKitYaml___id',
+  LocationImageChildPressKitYamlChildren = 'location___image___childPressKitYaml___children',
+  LocationImageChildPressKitYamlFileAbsolutePath = 'location___image___childPressKitYaml___fileAbsolutePath',
+  LocationImageChildFundYamlId = 'location___image___childFundYaml___id',
+  LocationImageChildFundYamlChildren = 'location___image___childFundYaml___children',
+  LocationImageChildFundYamlFileAbsolutePath = 'location___image___childFundYaml___fileAbsolutePath',
   LocationImageChildInvestYamlId = 'location___image___childInvestYaml___id',
   LocationImageChildInvestYamlChildren = 'location___image___childInvestYaml___children',
   LocationImageChildInvestYamlFileAbsolutePath = 'location___image___childInvestYaml___fileAbsolutePath',
@@ -3870,31 +3865,20 @@ export enum ContactYamlFieldsEnum {
   LocationImageChildMainnetYamlLivecastLink = 'location___image___childMainnetYaml___livecastLink',
   LocationImageChildMainnetYamlSeoDescription = 'location___image___childMainnetYaml___seoDescription',
   LocationImageChildMainnetYamlFileAbsolutePath = 'location___image___childMainnetYaml___fileAbsolutePath',
+  LocationImageChildFaqYamlId = 'location___image___childFaqYaml___id',
+  LocationImageChildFaqYamlChildren = 'location___image___childFaqYaml___children',
+  LocationImageChildFaqYamlCategories = 'location___image___childFaqYaml___categories',
+  LocationImageChildFaqYamlFileAbsolutePath = 'location___image___childFaqYaml___fileAbsolutePath',
   LocationImageChildPartnersYamlId = 'location___image___childPartnersYaml___id',
   LocationImageChildPartnersYamlChildren = 'location___image___childPartnersYaml___children',
   LocationImageChildPartnersYamlHeader = 'location___image___childPartnersYaml___header',
   LocationImageChildPartnersYamlPartnerLogos = 'location___image___childPartnersYaml___partnerLogos',
   LocationImageChildPartnersYamlFileAbsolutePath = 'location___image___childPartnersYaml___fileAbsolutePath',
-  LocationImageChildFundYamlId = 'location___image___childFundYaml___id',
-  LocationImageChildFundYamlChildren = 'location___image___childFundYaml___children',
-  LocationImageChildFundYamlFileAbsolutePath = 'location___image___childFundYaml___fileAbsolutePath',
-  LocationImageChildResourcesYamlId = 'location___image___childResourcesYaml___id',
-  LocationImageChildResourcesYamlChildren = 'location___image___childResourcesYaml___children',
-  LocationImageChildResourcesYamlFileAbsolutePath = 'location___image___childResourcesYaml___fileAbsolutePath',
-  LocationImageChildPressKitYamlId = 'location___image___childPressKitYaml___id',
-  LocationImageChildPressKitYamlChildren = 'location___image___childPressKitYaml___children',
-  LocationImageChildPressKitYamlFileAbsolutePath = 'location___image___childPressKitYaml___fileAbsolutePath',
-  LocationImageChildSharedYamlId = 'location___image___childSharedYaml___id',
-  LocationImageChildSharedYamlChildren = 'location___image___childSharedYaml___children',
-  LocationImageChildSharedYamlFileAbsolutePath = 'location___image___childSharedYaml___fileAbsolutePath',
   LocationImageChildMediaYamlId = 'location___image___childMediaYaml___id',
   LocationImageChildMediaYamlChildren = 'location___image___childMediaYaml___children',
   LocationImageChildMediaYamlHeader = 'location___image___childMediaYaml___header',
   LocationImageChildMediaYamlCategories = 'location___image___childMediaYaml___categories',
   LocationImageChildMediaYamlFileAbsolutePath = 'location___image___childMediaYaml___fileAbsolutePath',
-  LocationImageChildScienceYamlId = 'location___image___childScienceYaml___id',
-  LocationImageChildScienceYamlChildren = 'location___image___childScienceYaml___children',
-  LocationImageChildScienceYamlFileAbsolutePath = 'location___image___childScienceYaml___fileAbsolutePath',
   LocationImageChildMarkdownRemarkId = 'location___image___childMarkdownRemark___id',
   LocationImageChildMarkdownRemarkExcerpt = 'location___image___childMarkdownRemark___excerpt',
   LocationImageChildMarkdownRemarkRawMarkdownBody = 'location___image___childMarkdownRemark___rawMarkdownBody',
@@ -3906,18 +3890,30 @@ export enum ContactYamlFieldsEnum {
   LocationImageChildMarkdownRemarkTimeToRead = 'location___image___childMarkdownRemark___timeToRead',
   LocationImageChildMarkdownRemarkTableOfContents = 'location___image___childMarkdownRemark___tableOfContents',
   LocationImageChildMarkdownRemarkChildren = 'location___image___childMarkdownRemark___children',
-  LocationImageChildTokenYamlId = 'location___image___childTokenYaml___id',
-  LocationImageChildTokenYamlChildren = 'location___image___childTokenYaml___children',
-  LocationImageChildTokenYamlFileAbsolutePath = 'location___image___childTokenYaml___fileAbsolutePath',
-  LocationImageChildTeamYamlId = 'location___image___childTeamYaml___id',
-  LocationImageChildTeamYamlChildren = 'location___image___childTeamYaml___children',
-  LocationImageChildTeamYamlFileAbsolutePath = 'location___image___childTeamYaml___fileAbsolutePath',
+  LocationImageChildHomeYamlId = 'location___image___childHomeYaml___id',
+  LocationImageChildHomeYamlChildren = 'location___image___childHomeYaml___children',
+  LocationImageChildHomeYamlFileAbsolutePath = 'location___image___childHomeYaml___fileAbsolutePath',
+  LocationImageChildResourcesYamlId = 'location___image___childResourcesYaml___id',
+  LocationImageChildResourcesYamlChildren = 'location___image___childResourcesYaml___children',
+  LocationImageChildResourcesYamlFileAbsolutePath = 'location___image___childResourcesYaml___fileAbsolutePath',
+  LocationImageChildScienceYamlId = 'location___image___childScienceYaml___id',
+  LocationImageChildScienceYamlChildren = 'location___image___childScienceYaml___children',
+  LocationImageChildScienceYamlFileAbsolutePath = 'location___image___childScienceYaml___fileAbsolutePath',
   LocationImageChildWalletAddressRegistrationYamlId = 'location___image___childWalletAddressRegistrationYaml___id',
   LocationImageChildWalletAddressRegistrationYamlChildren = 'location___image___childWalletAddressRegistrationYaml___children',
   LocationImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'location___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  LocationImageChildSharedYamlId = 'location___image___childSharedYaml___id',
+  LocationImageChildSharedYamlChildren = 'location___image___childSharedYaml___children',
+  LocationImageChildSharedYamlFileAbsolutePath = 'location___image___childSharedYaml___fileAbsolutePath',
+  LocationImageChildTeamYamlId = 'location___image___childTeamYaml___id',
+  LocationImageChildTeamYamlChildren = 'location___image___childTeamYaml___children',
+  LocationImageChildTeamYamlFileAbsolutePath = 'location___image___childTeamYaml___fileAbsolutePath',
   LocationImageChildValidatorsYamlId = 'location___image___childValidatorsYaml___id',
   LocationImageChildValidatorsYamlChildren = 'location___image___childValidatorsYaml___children',
   LocationImageChildValidatorsYamlFileAbsolutePath = 'location___image___childValidatorsYaml___fileAbsolutePath',
+  LocationImageChildTokenYamlId = 'location___image___childTokenYaml___id',
+  LocationImageChildTokenYamlChildren = 'location___image___childTokenYaml___children',
+  LocationImageChildTokenYamlFileAbsolutePath = 'location___image___childTokenYaml___fileAbsolutePath',
   LocationBody = 'location___body',
   EmailHeader = 'email___header',
   EmailBody = 'email___body',
@@ -3972,33 +3968,32 @@ export enum ContactYamlFieldsEnum {
   FaqImageInternalMediaType = 'faq___image___internal___mediaType',
   FaqImageInternalOwner = 'faq___image___internal___owner',
   FaqImageInternalType = 'faq___image___internal___type',
-  FaqImageChildCommunityYamlId = 'faq___image___childCommunityYaml___id',
-  FaqImageChildCommunityYamlChildren = 'faq___image___childCommunityYaml___children',
-  FaqImageChildCommunityYamlFileAbsolutePath = 'faq___image___childCommunityYaml___fileAbsolutePath',
   FaqImageChildCaseStudiesYamlId = 'faq___image___childCaseStudiesYaml___id',
   FaqImageChildCaseStudiesYamlChildren = 'faq___image___childCaseStudiesYaml___children',
   FaqImageChildCaseStudiesYamlFileAbsolutePath = 'faq___image___childCaseStudiesYaml___fileAbsolutePath',
-  FaqImageChildDevelopersYamlId = 'faq___image___childDevelopersYaml___id',
-  FaqImageChildDevelopersYamlChildren = 'faq___image___childDevelopersYaml___children',
-  FaqImageChildDevelopersYamlFileAbsolutePath = 'faq___image___childDevelopersYaml___fileAbsolutePath',
   FaqImageChildCaseStudyItemsYamlId = 'faq___image___childCaseStudyItemsYaml___id',
   FaqImageChildCaseStudyItemsYamlChildren = 'faq___image___childCaseStudyItemsYaml___children',
   FaqImageChildCaseStudyItemsYamlName = 'faq___image___childCaseStudyItemsYaml___name',
   FaqImageChildCaseStudyItemsYamlSlug = 'faq___image___childCaseStudyItemsYaml___slug',
   FaqImageChildCaseStudyItemsYamlDescription = 'faq___image___childCaseStudyItemsYaml___description',
   FaqImageChildCaseStudyItemsYamlFileAbsolutePath = 'faq___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  FaqImageChildHomeYamlId = 'faq___image___childHomeYaml___id',
-  FaqImageChildHomeYamlChildren = 'faq___image___childHomeYaml___children',
-  FaqImageChildHomeYamlFileAbsolutePath = 'faq___image___childHomeYaml___fileAbsolutePath',
+  FaqImageChildDevelopersYamlId = 'faq___image___childDevelopersYaml___id',
+  FaqImageChildDevelopersYamlChildren = 'faq___image___childDevelopersYaml___children',
+  FaqImageChildDevelopersYamlFileAbsolutePath = 'faq___image___childDevelopersYaml___fileAbsolutePath',
+  FaqImageChildCommunityYamlId = 'faq___image___childCommunityYaml___id',
+  FaqImageChildCommunityYamlChildren = 'faq___image___childCommunityYaml___children',
+  FaqImageChildCommunityYamlFileAbsolutePath = 'faq___image___childCommunityYaml___fileAbsolutePath',
   FaqImageChildContactYamlId = 'faq___image___childContactYaml___id',
   FaqImageChildContactYamlChildren = 'faq___image___childContactYaml___children',
   FaqImageChildContactYamlHeader = 'faq___image___childContactYaml___header',
   FaqImageChildContactYamlBody = 'faq___image___childContactYaml___body',
   FaqImageChildContactYamlFileAbsolutePath = 'faq___image___childContactYaml___fileAbsolutePath',
-  FaqImageChildFaqYamlId = 'faq___image___childFaqYaml___id',
-  FaqImageChildFaqYamlChildren = 'faq___image___childFaqYaml___children',
-  FaqImageChildFaqYamlCategories = 'faq___image___childFaqYaml___categories',
-  FaqImageChildFaqYamlFileAbsolutePath = 'faq___image___childFaqYaml___fileAbsolutePath',
+  FaqImageChildPressKitYamlId = 'faq___image___childPressKitYaml___id',
+  FaqImageChildPressKitYamlChildren = 'faq___image___childPressKitYaml___children',
+  FaqImageChildPressKitYamlFileAbsolutePath = 'faq___image___childPressKitYaml___fileAbsolutePath',
+  FaqImageChildFundYamlId = 'faq___image___childFundYaml___id',
+  FaqImageChildFundYamlChildren = 'faq___image___childFundYaml___children',
+  FaqImageChildFundYamlFileAbsolutePath = 'faq___image___childFundYaml___fileAbsolutePath',
   FaqImageChildInvestYamlId = 'faq___image___childInvestYaml___id',
   FaqImageChildInvestYamlChildren = 'faq___image___childInvestYaml___children',
   FaqImageChildInvestYamlFileAbsolutePath = 'faq___image___childInvestYaml___fileAbsolutePath',
@@ -4008,31 +4003,20 @@ export enum ContactYamlFieldsEnum {
   FaqImageChildMainnetYamlLivecastLink = 'faq___image___childMainnetYaml___livecastLink',
   FaqImageChildMainnetYamlSeoDescription = 'faq___image___childMainnetYaml___seoDescription',
   FaqImageChildMainnetYamlFileAbsolutePath = 'faq___image___childMainnetYaml___fileAbsolutePath',
+  FaqImageChildFaqYamlId = 'faq___image___childFaqYaml___id',
+  FaqImageChildFaqYamlChildren = 'faq___image___childFaqYaml___children',
+  FaqImageChildFaqYamlCategories = 'faq___image___childFaqYaml___categories',
+  FaqImageChildFaqYamlFileAbsolutePath = 'faq___image___childFaqYaml___fileAbsolutePath',
   FaqImageChildPartnersYamlId = 'faq___image___childPartnersYaml___id',
   FaqImageChildPartnersYamlChildren = 'faq___image___childPartnersYaml___children',
   FaqImageChildPartnersYamlHeader = 'faq___image___childPartnersYaml___header',
   FaqImageChildPartnersYamlPartnerLogos = 'faq___image___childPartnersYaml___partnerLogos',
   FaqImageChildPartnersYamlFileAbsolutePath = 'faq___image___childPartnersYaml___fileAbsolutePath',
-  FaqImageChildFundYamlId = 'faq___image___childFundYaml___id',
-  FaqImageChildFundYamlChildren = 'faq___image___childFundYaml___children',
-  FaqImageChildFundYamlFileAbsolutePath = 'faq___image___childFundYaml___fileAbsolutePath',
-  FaqImageChildResourcesYamlId = 'faq___image___childResourcesYaml___id',
-  FaqImageChildResourcesYamlChildren = 'faq___image___childResourcesYaml___children',
-  FaqImageChildResourcesYamlFileAbsolutePath = 'faq___image___childResourcesYaml___fileAbsolutePath',
-  FaqImageChildPressKitYamlId = 'faq___image___childPressKitYaml___id',
-  FaqImageChildPressKitYamlChildren = 'faq___image___childPressKitYaml___children',
-  FaqImageChildPressKitYamlFileAbsolutePath = 'faq___image___childPressKitYaml___fileAbsolutePath',
-  FaqImageChildSharedYamlId = 'faq___image___childSharedYaml___id',
-  FaqImageChildSharedYamlChildren = 'faq___image___childSharedYaml___children',
-  FaqImageChildSharedYamlFileAbsolutePath = 'faq___image___childSharedYaml___fileAbsolutePath',
   FaqImageChildMediaYamlId = 'faq___image___childMediaYaml___id',
   FaqImageChildMediaYamlChildren = 'faq___image___childMediaYaml___children',
   FaqImageChildMediaYamlHeader = 'faq___image___childMediaYaml___header',
   FaqImageChildMediaYamlCategories = 'faq___image___childMediaYaml___categories',
   FaqImageChildMediaYamlFileAbsolutePath = 'faq___image___childMediaYaml___fileAbsolutePath',
-  FaqImageChildScienceYamlId = 'faq___image___childScienceYaml___id',
-  FaqImageChildScienceYamlChildren = 'faq___image___childScienceYaml___children',
-  FaqImageChildScienceYamlFileAbsolutePath = 'faq___image___childScienceYaml___fileAbsolutePath',
   FaqImageChildMarkdownRemarkId = 'faq___image___childMarkdownRemark___id',
   FaqImageChildMarkdownRemarkExcerpt = 'faq___image___childMarkdownRemark___excerpt',
   FaqImageChildMarkdownRemarkRawMarkdownBody = 'faq___image___childMarkdownRemark___rawMarkdownBody',
@@ -4044,18 +4028,30 @@ export enum ContactYamlFieldsEnum {
   FaqImageChildMarkdownRemarkTimeToRead = 'faq___image___childMarkdownRemark___timeToRead',
   FaqImageChildMarkdownRemarkTableOfContents = 'faq___image___childMarkdownRemark___tableOfContents',
   FaqImageChildMarkdownRemarkChildren = 'faq___image___childMarkdownRemark___children',
-  FaqImageChildTokenYamlId = 'faq___image___childTokenYaml___id',
-  FaqImageChildTokenYamlChildren = 'faq___image___childTokenYaml___children',
-  FaqImageChildTokenYamlFileAbsolutePath = 'faq___image___childTokenYaml___fileAbsolutePath',
-  FaqImageChildTeamYamlId = 'faq___image___childTeamYaml___id',
-  FaqImageChildTeamYamlChildren = 'faq___image___childTeamYaml___children',
-  FaqImageChildTeamYamlFileAbsolutePath = 'faq___image___childTeamYaml___fileAbsolutePath',
+  FaqImageChildHomeYamlId = 'faq___image___childHomeYaml___id',
+  FaqImageChildHomeYamlChildren = 'faq___image___childHomeYaml___children',
+  FaqImageChildHomeYamlFileAbsolutePath = 'faq___image___childHomeYaml___fileAbsolutePath',
+  FaqImageChildResourcesYamlId = 'faq___image___childResourcesYaml___id',
+  FaqImageChildResourcesYamlChildren = 'faq___image___childResourcesYaml___children',
+  FaqImageChildResourcesYamlFileAbsolutePath = 'faq___image___childResourcesYaml___fileAbsolutePath',
+  FaqImageChildScienceYamlId = 'faq___image___childScienceYaml___id',
+  FaqImageChildScienceYamlChildren = 'faq___image___childScienceYaml___children',
+  FaqImageChildScienceYamlFileAbsolutePath = 'faq___image___childScienceYaml___fileAbsolutePath',
   FaqImageChildWalletAddressRegistrationYamlId = 'faq___image___childWalletAddressRegistrationYaml___id',
   FaqImageChildWalletAddressRegistrationYamlChildren = 'faq___image___childWalletAddressRegistrationYaml___children',
   FaqImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'faq___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  FaqImageChildSharedYamlId = 'faq___image___childSharedYaml___id',
+  FaqImageChildSharedYamlChildren = 'faq___image___childSharedYaml___children',
+  FaqImageChildSharedYamlFileAbsolutePath = 'faq___image___childSharedYaml___fileAbsolutePath',
+  FaqImageChildTeamYamlId = 'faq___image___childTeamYaml___id',
+  FaqImageChildTeamYamlChildren = 'faq___image___childTeamYaml___children',
+  FaqImageChildTeamYamlFileAbsolutePath = 'faq___image___childTeamYaml___fileAbsolutePath',
   FaqImageChildValidatorsYamlId = 'faq___image___childValidatorsYaml___id',
   FaqImageChildValidatorsYamlChildren = 'faq___image___childValidatorsYaml___children',
   FaqImageChildValidatorsYamlFileAbsolutePath = 'faq___image___childValidatorsYaml___fileAbsolutePath',
+  FaqImageChildTokenYamlId = 'faq___image___childTokenYaml___id',
+  FaqImageChildTokenYamlChildren = 'faq___image___childTokenYaml___children',
+  FaqImageChildTokenYamlFileAbsolutePath = 'faq___image___childTokenYaml___fileAbsolutePath',
   FileAbsolutePath = 'fileAbsolutePath'
 }
 
@@ -4367,33 +4363,32 @@ export enum DevelopersYamlFieldsEnum {
   LedgerSectionCosmosImageInternalMediaType = 'ledgerSection___cosmosImage___internal___mediaType',
   LedgerSectionCosmosImageInternalOwner = 'ledgerSection___cosmosImage___internal___owner',
   LedgerSectionCosmosImageInternalType = 'ledgerSection___cosmosImage___internal___type',
-  LedgerSectionCosmosImageChildCommunityYamlId = 'ledgerSection___cosmosImage___childCommunityYaml___id',
-  LedgerSectionCosmosImageChildCommunityYamlChildren = 'ledgerSection___cosmosImage___childCommunityYaml___children',
-  LedgerSectionCosmosImageChildCommunityYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childCommunityYaml___fileAbsolutePath',
   LedgerSectionCosmosImageChildCaseStudiesYamlId = 'ledgerSection___cosmosImage___childCaseStudiesYaml___id',
   LedgerSectionCosmosImageChildCaseStudiesYamlChildren = 'ledgerSection___cosmosImage___childCaseStudiesYaml___children',
   LedgerSectionCosmosImageChildCaseStudiesYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childCaseStudiesYaml___fileAbsolutePath',
-  LedgerSectionCosmosImageChildDevelopersYamlId = 'ledgerSection___cosmosImage___childDevelopersYaml___id',
-  LedgerSectionCosmosImageChildDevelopersYamlChildren = 'ledgerSection___cosmosImage___childDevelopersYaml___children',
-  LedgerSectionCosmosImageChildDevelopersYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childDevelopersYaml___fileAbsolutePath',
   LedgerSectionCosmosImageChildCaseStudyItemsYamlId = 'ledgerSection___cosmosImage___childCaseStudyItemsYaml___id',
   LedgerSectionCosmosImageChildCaseStudyItemsYamlChildren = 'ledgerSection___cosmosImage___childCaseStudyItemsYaml___children',
   LedgerSectionCosmosImageChildCaseStudyItemsYamlName = 'ledgerSection___cosmosImage___childCaseStudyItemsYaml___name',
   LedgerSectionCosmosImageChildCaseStudyItemsYamlSlug = 'ledgerSection___cosmosImage___childCaseStudyItemsYaml___slug',
   LedgerSectionCosmosImageChildCaseStudyItemsYamlDescription = 'ledgerSection___cosmosImage___childCaseStudyItemsYaml___description',
   LedgerSectionCosmosImageChildCaseStudyItemsYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childCaseStudyItemsYaml___fileAbsolutePath',
-  LedgerSectionCosmosImageChildHomeYamlId = 'ledgerSection___cosmosImage___childHomeYaml___id',
-  LedgerSectionCosmosImageChildHomeYamlChildren = 'ledgerSection___cosmosImage___childHomeYaml___children',
-  LedgerSectionCosmosImageChildHomeYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childHomeYaml___fileAbsolutePath',
+  LedgerSectionCosmosImageChildDevelopersYamlId = 'ledgerSection___cosmosImage___childDevelopersYaml___id',
+  LedgerSectionCosmosImageChildDevelopersYamlChildren = 'ledgerSection___cosmosImage___childDevelopersYaml___children',
+  LedgerSectionCosmosImageChildDevelopersYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childDevelopersYaml___fileAbsolutePath',
+  LedgerSectionCosmosImageChildCommunityYamlId = 'ledgerSection___cosmosImage___childCommunityYaml___id',
+  LedgerSectionCosmosImageChildCommunityYamlChildren = 'ledgerSection___cosmosImage___childCommunityYaml___children',
+  LedgerSectionCosmosImageChildCommunityYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childCommunityYaml___fileAbsolutePath',
   LedgerSectionCosmosImageChildContactYamlId = 'ledgerSection___cosmosImage___childContactYaml___id',
   LedgerSectionCosmosImageChildContactYamlChildren = 'ledgerSection___cosmosImage___childContactYaml___children',
   LedgerSectionCosmosImageChildContactYamlHeader = 'ledgerSection___cosmosImage___childContactYaml___header',
   LedgerSectionCosmosImageChildContactYamlBody = 'ledgerSection___cosmosImage___childContactYaml___body',
   LedgerSectionCosmosImageChildContactYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childContactYaml___fileAbsolutePath',
-  LedgerSectionCosmosImageChildFaqYamlId = 'ledgerSection___cosmosImage___childFaqYaml___id',
-  LedgerSectionCosmosImageChildFaqYamlChildren = 'ledgerSection___cosmosImage___childFaqYaml___children',
-  LedgerSectionCosmosImageChildFaqYamlCategories = 'ledgerSection___cosmosImage___childFaqYaml___categories',
-  LedgerSectionCosmosImageChildFaqYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childFaqYaml___fileAbsolutePath',
+  LedgerSectionCosmosImageChildPressKitYamlId = 'ledgerSection___cosmosImage___childPressKitYaml___id',
+  LedgerSectionCosmosImageChildPressKitYamlChildren = 'ledgerSection___cosmosImage___childPressKitYaml___children',
+  LedgerSectionCosmosImageChildPressKitYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childPressKitYaml___fileAbsolutePath',
+  LedgerSectionCosmosImageChildFundYamlId = 'ledgerSection___cosmosImage___childFundYaml___id',
+  LedgerSectionCosmosImageChildFundYamlChildren = 'ledgerSection___cosmosImage___childFundYaml___children',
+  LedgerSectionCosmosImageChildFundYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childFundYaml___fileAbsolutePath',
   LedgerSectionCosmosImageChildInvestYamlId = 'ledgerSection___cosmosImage___childInvestYaml___id',
   LedgerSectionCosmosImageChildInvestYamlChildren = 'ledgerSection___cosmosImage___childInvestYaml___children',
   LedgerSectionCosmosImageChildInvestYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childInvestYaml___fileAbsolutePath',
@@ -4403,31 +4398,20 @@ export enum DevelopersYamlFieldsEnum {
   LedgerSectionCosmosImageChildMainnetYamlLivecastLink = 'ledgerSection___cosmosImage___childMainnetYaml___livecastLink',
   LedgerSectionCosmosImageChildMainnetYamlSeoDescription = 'ledgerSection___cosmosImage___childMainnetYaml___seoDescription',
   LedgerSectionCosmosImageChildMainnetYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childMainnetYaml___fileAbsolutePath',
+  LedgerSectionCosmosImageChildFaqYamlId = 'ledgerSection___cosmosImage___childFaqYaml___id',
+  LedgerSectionCosmosImageChildFaqYamlChildren = 'ledgerSection___cosmosImage___childFaqYaml___children',
+  LedgerSectionCosmosImageChildFaqYamlCategories = 'ledgerSection___cosmosImage___childFaqYaml___categories',
+  LedgerSectionCosmosImageChildFaqYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childFaqYaml___fileAbsolutePath',
   LedgerSectionCosmosImageChildPartnersYamlId = 'ledgerSection___cosmosImage___childPartnersYaml___id',
   LedgerSectionCosmosImageChildPartnersYamlChildren = 'ledgerSection___cosmosImage___childPartnersYaml___children',
   LedgerSectionCosmosImageChildPartnersYamlHeader = 'ledgerSection___cosmosImage___childPartnersYaml___header',
   LedgerSectionCosmosImageChildPartnersYamlPartnerLogos = 'ledgerSection___cosmosImage___childPartnersYaml___partnerLogos',
   LedgerSectionCosmosImageChildPartnersYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childPartnersYaml___fileAbsolutePath',
-  LedgerSectionCosmosImageChildFundYamlId = 'ledgerSection___cosmosImage___childFundYaml___id',
-  LedgerSectionCosmosImageChildFundYamlChildren = 'ledgerSection___cosmosImage___childFundYaml___children',
-  LedgerSectionCosmosImageChildFundYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childFundYaml___fileAbsolutePath',
-  LedgerSectionCosmosImageChildResourcesYamlId = 'ledgerSection___cosmosImage___childResourcesYaml___id',
-  LedgerSectionCosmosImageChildResourcesYamlChildren = 'ledgerSection___cosmosImage___childResourcesYaml___children',
-  LedgerSectionCosmosImageChildResourcesYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childResourcesYaml___fileAbsolutePath',
-  LedgerSectionCosmosImageChildPressKitYamlId = 'ledgerSection___cosmosImage___childPressKitYaml___id',
-  LedgerSectionCosmosImageChildPressKitYamlChildren = 'ledgerSection___cosmosImage___childPressKitYaml___children',
-  LedgerSectionCosmosImageChildPressKitYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childPressKitYaml___fileAbsolutePath',
-  LedgerSectionCosmosImageChildSharedYamlId = 'ledgerSection___cosmosImage___childSharedYaml___id',
-  LedgerSectionCosmosImageChildSharedYamlChildren = 'ledgerSection___cosmosImage___childSharedYaml___children',
-  LedgerSectionCosmosImageChildSharedYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childSharedYaml___fileAbsolutePath',
   LedgerSectionCosmosImageChildMediaYamlId = 'ledgerSection___cosmosImage___childMediaYaml___id',
   LedgerSectionCosmosImageChildMediaYamlChildren = 'ledgerSection___cosmosImage___childMediaYaml___children',
   LedgerSectionCosmosImageChildMediaYamlHeader = 'ledgerSection___cosmosImage___childMediaYaml___header',
   LedgerSectionCosmosImageChildMediaYamlCategories = 'ledgerSection___cosmosImage___childMediaYaml___categories',
   LedgerSectionCosmosImageChildMediaYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childMediaYaml___fileAbsolutePath',
-  LedgerSectionCosmosImageChildScienceYamlId = 'ledgerSection___cosmosImage___childScienceYaml___id',
-  LedgerSectionCosmosImageChildScienceYamlChildren = 'ledgerSection___cosmosImage___childScienceYaml___children',
-  LedgerSectionCosmosImageChildScienceYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childScienceYaml___fileAbsolutePath',
   LedgerSectionCosmosImageChildMarkdownRemarkId = 'ledgerSection___cosmosImage___childMarkdownRemark___id',
   LedgerSectionCosmosImageChildMarkdownRemarkExcerpt = 'ledgerSection___cosmosImage___childMarkdownRemark___excerpt',
   LedgerSectionCosmosImageChildMarkdownRemarkRawMarkdownBody = 'ledgerSection___cosmosImage___childMarkdownRemark___rawMarkdownBody',
@@ -4439,18 +4423,30 @@ export enum DevelopersYamlFieldsEnum {
   LedgerSectionCosmosImageChildMarkdownRemarkTimeToRead = 'ledgerSection___cosmosImage___childMarkdownRemark___timeToRead',
   LedgerSectionCosmosImageChildMarkdownRemarkTableOfContents = 'ledgerSection___cosmosImage___childMarkdownRemark___tableOfContents',
   LedgerSectionCosmosImageChildMarkdownRemarkChildren = 'ledgerSection___cosmosImage___childMarkdownRemark___children',
-  LedgerSectionCosmosImageChildTokenYamlId = 'ledgerSection___cosmosImage___childTokenYaml___id',
-  LedgerSectionCosmosImageChildTokenYamlChildren = 'ledgerSection___cosmosImage___childTokenYaml___children',
-  LedgerSectionCosmosImageChildTokenYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childTokenYaml___fileAbsolutePath',
-  LedgerSectionCosmosImageChildTeamYamlId = 'ledgerSection___cosmosImage___childTeamYaml___id',
-  LedgerSectionCosmosImageChildTeamYamlChildren = 'ledgerSection___cosmosImage___childTeamYaml___children',
-  LedgerSectionCosmosImageChildTeamYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childTeamYaml___fileAbsolutePath',
+  LedgerSectionCosmosImageChildHomeYamlId = 'ledgerSection___cosmosImage___childHomeYaml___id',
+  LedgerSectionCosmosImageChildHomeYamlChildren = 'ledgerSection___cosmosImage___childHomeYaml___children',
+  LedgerSectionCosmosImageChildHomeYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childHomeYaml___fileAbsolutePath',
+  LedgerSectionCosmosImageChildResourcesYamlId = 'ledgerSection___cosmosImage___childResourcesYaml___id',
+  LedgerSectionCosmosImageChildResourcesYamlChildren = 'ledgerSection___cosmosImage___childResourcesYaml___children',
+  LedgerSectionCosmosImageChildResourcesYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childResourcesYaml___fileAbsolutePath',
+  LedgerSectionCosmosImageChildScienceYamlId = 'ledgerSection___cosmosImage___childScienceYaml___id',
+  LedgerSectionCosmosImageChildScienceYamlChildren = 'ledgerSection___cosmosImage___childScienceYaml___children',
+  LedgerSectionCosmosImageChildScienceYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childScienceYaml___fileAbsolutePath',
   LedgerSectionCosmosImageChildWalletAddressRegistrationYamlId = 'ledgerSection___cosmosImage___childWalletAddressRegistrationYaml___id',
   LedgerSectionCosmosImageChildWalletAddressRegistrationYamlChildren = 'ledgerSection___cosmosImage___childWalletAddressRegistrationYaml___children',
   LedgerSectionCosmosImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  LedgerSectionCosmosImageChildSharedYamlId = 'ledgerSection___cosmosImage___childSharedYaml___id',
+  LedgerSectionCosmosImageChildSharedYamlChildren = 'ledgerSection___cosmosImage___childSharedYaml___children',
+  LedgerSectionCosmosImageChildSharedYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childSharedYaml___fileAbsolutePath',
+  LedgerSectionCosmosImageChildTeamYamlId = 'ledgerSection___cosmosImage___childTeamYaml___id',
+  LedgerSectionCosmosImageChildTeamYamlChildren = 'ledgerSection___cosmosImage___childTeamYaml___children',
+  LedgerSectionCosmosImageChildTeamYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childTeamYaml___fileAbsolutePath',
   LedgerSectionCosmosImageChildValidatorsYamlId = 'ledgerSection___cosmosImage___childValidatorsYaml___id',
   LedgerSectionCosmosImageChildValidatorsYamlChildren = 'ledgerSection___cosmosImage___childValidatorsYaml___children',
   LedgerSectionCosmosImageChildValidatorsYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childValidatorsYaml___fileAbsolutePath',
+  LedgerSectionCosmosImageChildTokenYamlId = 'ledgerSection___cosmosImage___childTokenYaml___id',
+  LedgerSectionCosmosImageChildTokenYamlChildren = 'ledgerSection___cosmosImage___childTokenYaml___children',
+  LedgerSectionCosmosImageChildTokenYamlFileAbsolutePath = 'ledgerSection___cosmosImage___childTokenYaml___fileAbsolutePath',
   LedgerSectionHeader = 'ledgerSection___header',
   LedgerSectionBody = 'ledgerSection___body',
   OpenAgSectionImageSourceInstanceName = 'openAgSection___image___sourceInstanceName',
@@ -4503,33 +4499,32 @@ export enum DevelopersYamlFieldsEnum {
   OpenAgSectionImageInternalMediaType = 'openAgSection___image___internal___mediaType',
   OpenAgSectionImageInternalOwner = 'openAgSection___image___internal___owner',
   OpenAgSectionImageInternalType = 'openAgSection___image___internal___type',
-  OpenAgSectionImageChildCommunityYamlId = 'openAgSection___image___childCommunityYaml___id',
-  OpenAgSectionImageChildCommunityYamlChildren = 'openAgSection___image___childCommunityYaml___children',
-  OpenAgSectionImageChildCommunityYamlFileAbsolutePath = 'openAgSection___image___childCommunityYaml___fileAbsolutePath',
   OpenAgSectionImageChildCaseStudiesYamlId = 'openAgSection___image___childCaseStudiesYaml___id',
   OpenAgSectionImageChildCaseStudiesYamlChildren = 'openAgSection___image___childCaseStudiesYaml___children',
   OpenAgSectionImageChildCaseStudiesYamlFileAbsolutePath = 'openAgSection___image___childCaseStudiesYaml___fileAbsolutePath',
-  OpenAgSectionImageChildDevelopersYamlId = 'openAgSection___image___childDevelopersYaml___id',
-  OpenAgSectionImageChildDevelopersYamlChildren = 'openAgSection___image___childDevelopersYaml___children',
-  OpenAgSectionImageChildDevelopersYamlFileAbsolutePath = 'openAgSection___image___childDevelopersYaml___fileAbsolutePath',
   OpenAgSectionImageChildCaseStudyItemsYamlId = 'openAgSection___image___childCaseStudyItemsYaml___id',
   OpenAgSectionImageChildCaseStudyItemsYamlChildren = 'openAgSection___image___childCaseStudyItemsYaml___children',
   OpenAgSectionImageChildCaseStudyItemsYamlName = 'openAgSection___image___childCaseStudyItemsYaml___name',
   OpenAgSectionImageChildCaseStudyItemsYamlSlug = 'openAgSection___image___childCaseStudyItemsYaml___slug',
   OpenAgSectionImageChildCaseStudyItemsYamlDescription = 'openAgSection___image___childCaseStudyItemsYaml___description',
   OpenAgSectionImageChildCaseStudyItemsYamlFileAbsolutePath = 'openAgSection___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  OpenAgSectionImageChildHomeYamlId = 'openAgSection___image___childHomeYaml___id',
-  OpenAgSectionImageChildHomeYamlChildren = 'openAgSection___image___childHomeYaml___children',
-  OpenAgSectionImageChildHomeYamlFileAbsolutePath = 'openAgSection___image___childHomeYaml___fileAbsolutePath',
+  OpenAgSectionImageChildDevelopersYamlId = 'openAgSection___image___childDevelopersYaml___id',
+  OpenAgSectionImageChildDevelopersYamlChildren = 'openAgSection___image___childDevelopersYaml___children',
+  OpenAgSectionImageChildDevelopersYamlFileAbsolutePath = 'openAgSection___image___childDevelopersYaml___fileAbsolutePath',
+  OpenAgSectionImageChildCommunityYamlId = 'openAgSection___image___childCommunityYaml___id',
+  OpenAgSectionImageChildCommunityYamlChildren = 'openAgSection___image___childCommunityYaml___children',
+  OpenAgSectionImageChildCommunityYamlFileAbsolutePath = 'openAgSection___image___childCommunityYaml___fileAbsolutePath',
   OpenAgSectionImageChildContactYamlId = 'openAgSection___image___childContactYaml___id',
   OpenAgSectionImageChildContactYamlChildren = 'openAgSection___image___childContactYaml___children',
   OpenAgSectionImageChildContactYamlHeader = 'openAgSection___image___childContactYaml___header',
   OpenAgSectionImageChildContactYamlBody = 'openAgSection___image___childContactYaml___body',
   OpenAgSectionImageChildContactYamlFileAbsolutePath = 'openAgSection___image___childContactYaml___fileAbsolutePath',
-  OpenAgSectionImageChildFaqYamlId = 'openAgSection___image___childFaqYaml___id',
-  OpenAgSectionImageChildFaqYamlChildren = 'openAgSection___image___childFaqYaml___children',
-  OpenAgSectionImageChildFaqYamlCategories = 'openAgSection___image___childFaqYaml___categories',
-  OpenAgSectionImageChildFaqYamlFileAbsolutePath = 'openAgSection___image___childFaqYaml___fileAbsolutePath',
+  OpenAgSectionImageChildPressKitYamlId = 'openAgSection___image___childPressKitYaml___id',
+  OpenAgSectionImageChildPressKitYamlChildren = 'openAgSection___image___childPressKitYaml___children',
+  OpenAgSectionImageChildPressKitYamlFileAbsolutePath = 'openAgSection___image___childPressKitYaml___fileAbsolutePath',
+  OpenAgSectionImageChildFundYamlId = 'openAgSection___image___childFundYaml___id',
+  OpenAgSectionImageChildFundYamlChildren = 'openAgSection___image___childFundYaml___children',
+  OpenAgSectionImageChildFundYamlFileAbsolutePath = 'openAgSection___image___childFundYaml___fileAbsolutePath',
   OpenAgSectionImageChildInvestYamlId = 'openAgSection___image___childInvestYaml___id',
   OpenAgSectionImageChildInvestYamlChildren = 'openAgSection___image___childInvestYaml___children',
   OpenAgSectionImageChildInvestYamlFileAbsolutePath = 'openAgSection___image___childInvestYaml___fileAbsolutePath',
@@ -4539,31 +4534,20 @@ export enum DevelopersYamlFieldsEnum {
   OpenAgSectionImageChildMainnetYamlLivecastLink = 'openAgSection___image___childMainnetYaml___livecastLink',
   OpenAgSectionImageChildMainnetYamlSeoDescription = 'openAgSection___image___childMainnetYaml___seoDescription',
   OpenAgSectionImageChildMainnetYamlFileAbsolutePath = 'openAgSection___image___childMainnetYaml___fileAbsolutePath',
+  OpenAgSectionImageChildFaqYamlId = 'openAgSection___image___childFaqYaml___id',
+  OpenAgSectionImageChildFaqYamlChildren = 'openAgSection___image___childFaqYaml___children',
+  OpenAgSectionImageChildFaqYamlCategories = 'openAgSection___image___childFaqYaml___categories',
+  OpenAgSectionImageChildFaqYamlFileAbsolutePath = 'openAgSection___image___childFaqYaml___fileAbsolutePath',
   OpenAgSectionImageChildPartnersYamlId = 'openAgSection___image___childPartnersYaml___id',
   OpenAgSectionImageChildPartnersYamlChildren = 'openAgSection___image___childPartnersYaml___children',
   OpenAgSectionImageChildPartnersYamlHeader = 'openAgSection___image___childPartnersYaml___header',
   OpenAgSectionImageChildPartnersYamlPartnerLogos = 'openAgSection___image___childPartnersYaml___partnerLogos',
   OpenAgSectionImageChildPartnersYamlFileAbsolutePath = 'openAgSection___image___childPartnersYaml___fileAbsolutePath',
-  OpenAgSectionImageChildFundYamlId = 'openAgSection___image___childFundYaml___id',
-  OpenAgSectionImageChildFundYamlChildren = 'openAgSection___image___childFundYaml___children',
-  OpenAgSectionImageChildFundYamlFileAbsolutePath = 'openAgSection___image___childFundYaml___fileAbsolutePath',
-  OpenAgSectionImageChildResourcesYamlId = 'openAgSection___image___childResourcesYaml___id',
-  OpenAgSectionImageChildResourcesYamlChildren = 'openAgSection___image___childResourcesYaml___children',
-  OpenAgSectionImageChildResourcesYamlFileAbsolutePath = 'openAgSection___image___childResourcesYaml___fileAbsolutePath',
-  OpenAgSectionImageChildPressKitYamlId = 'openAgSection___image___childPressKitYaml___id',
-  OpenAgSectionImageChildPressKitYamlChildren = 'openAgSection___image___childPressKitYaml___children',
-  OpenAgSectionImageChildPressKitYamlFileAbsolutePath = 'openAgSection___image___childPressKitYaml___fileAbsolutePath',
-  OpenAgSectionImageChildSharedYamlId = 'openAgSection___image___childSharedYaml___id',
-  OpenAgSectionImageChildSharedYamlChildren = 'openAgSection___image___childSharedYaml___children',
-  OpenAgSectionImageChildSharedYamlFileAbsolutePath = 'openAgSection___image___childSharedYaml___fileAbsolutePath',
   OpenAgSectionImageChildMediaYamlId = 'openAgSection___image___childMediaYaml___id',
   OpenAgSectionImageChildMediaYamlChildren = 'openAgSection___image___childMediaYaml___children',
   OpenAgSectionImageChildMediaYamlHeader = 'openAgSection___image___childMediaYaml___header',
   OpenAgSectionImageChildMediaYamlCategories = 'openAgSection___image___childMediaYaml___categories',
   OpenAgSectionImageChildMediaYamlFileAbsolutePath = 'openAgSection___image___childMediaYaml___fileAbsolutePath',
-  OpenAgSectionImageChildScienceYamlId = 'openAgSection___image___childScienceYaml___id',
-  OpenAgSectionImageChildScienceYamlChildren = 'openAgSection___image___childScienceYaml___children',
-  OpenAgSectionImageChildScienceYamlFileAbsolutePath = 'openAgSection___image___childScienceYaml___fileAbsolutePath',
   OpenAgSectionImageChildMarkdownRemarkId = 'openAgSection___image___childMarkdownRemark___id',
   OpenAgSectionImageChildMarkdownRemarkExcerpt = 'openAgSection___image___childMarkdownRemark___excerpt',
   OpenAgSectionImageChildMarkdownRemarkRawMarkdownBody = 'openAgSection___image___childMarkdownRemark___rawMarkdownBody',
@@ -4575,18 +4559,30 @@ export enum DevelopersYamlFieldsEnum {
   OpenAgSectionImageChildMarkdownRemarkTimeToRead = 'openAgSection___image___childMarkdownRemark___timeToRead',
   OpenAgSectionImageChildMarkdownRemarkTableOfContents = 'openAgSection___image___childMarkdownRemark___tableOfContents',
   OpenAgSectionImageChildMarkdownRemarkChildren = 'openAgSection___image___childMarkdownRemark___children',
-  OpenAgSectionImageChildTokenYamlId = 'openAgSection___image___childTokenYaml___id',
-  OpenAgSectionImageChildTokenYamlChildren = 'openAgSection___image___childTokenYaml___children',
-  OpenAgSectionImageChildTokenYamlFileAbsolutePath = 'openAgSection___image___childTokenYaml___fileAbsolutePath',
-  OpenAgSectionImageChildTeamYamlId = 'openAgSection___image___childTeamYaml___id',
-  OpenAgSectionImageChildTeamYamlChildren = 'openAgSection___image___childTeamYaml___children',
-  OpenAgSectionImageChildTeamYamlFileAbsolutePath = 'openAgSection___image___childTeamYaml___fileAbsolutePath',
+  OpenAgSectionImageChildHomeYamlId = 'openAgSection___image___childHomeYaml___id',
+  OpenAgSectionImageChildHomeYamlChildren = 'openAgSection___image___childHomeYaml___children',
+  OpenAgSectionImageChildHomeYamlFileAbsolutePath = 'openAgSection___image___childHomeYaml___fileAbsolutePath',
+  OpenAgSectionImageChildResourcesYamlId = 'openAgSection___image___childResourcesYaml___id',
+  OpenAgSectionImageChildResourcesYamlChildren = 'openAgSection___image___childResourcesYaml___children',
+  OpenAgSectionImageChildResourcesYamlFileAbsolutePath = 'openAgSection___image___childResourcesYaml___fileAbsolutePath',
+  OpenAgSectionImageChildScienceYamlId = 'openAgSection___image___childScienceYaml___id',
+  OpenAgSectionImageChildScienceYamlChildren = 'openAgSection___image___childScienceYaml___children',
+  OpenAgSectionImageChildScienceYamlFileAbsolutePath = 'openAgSection___image___childScienceYaml___fileAbsolutePath',
   OpenAgSectionImageChildWalletAddressRegistrationYamlId = 'openAgSection___image___childWalletAddressRegistrationYaml___id',
   OpenAgSectionImageChildWalletAddressRegistrationYamlChildren = 'openAgSection___image___childWalletAddressRegistrationYaml___children',
   OpenAgSectionImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'openAgSection___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  OpenAgSectionImageChildSharedYamlId = 'openAgSection___image___childSharedYaml___id',
+  OpenAgSectionImageChildSharedYamlChildren = 'openAgSection___image___childSharedYaml___children',
+  OpenAgSectionImageChildSharedYamlFileAbsolutePath = 'openAgSection___image___childSharedYaml___fileAbsolutePath',
+  OpenAgSectionImageChildTeamYamlId = 'openAgSection___image___childTeamYaml___id',
+  OpenAgSectionImageChildTeamYamlChildren = 'openAgSection___image___childTeamYaml___children',
+  OpenAgSectionImageChildTeamYamlFileAbsolutePath = 'openAgSection___image___childTeamYaml___fileAbsolutePath',
   OpenAgSectionImageChildValidatorsYamlId = 'openAgSection___image___childValidatorsYaml___id',
   OpenAgSectionImageChildValidatorsYamlChildren = 'openAgSection___image___childValidatorsYaml___children',
   OpenAgSectionImageChildValidatorsYamlFileAbsolutePath = 'openAgSection___image___childValidatorsYaml___fileAbsolutePath',
+  OpenAgSectionImageChildTokenYamlId = 'openAgSection___image___childTokenYaml___id',
+  OpenAgSectionImageChildTokenYamlChildren = 'openAgSection___image___childTokenYaml___children',
+  OpenAgSectionImageChildTokenYamlFileAbsolutePath = 'openAgSection___image___childTokenYaml___fileAbsolutePath',
   OpenAgSectionHeader = 'openAgSection___header',
   OpenAgSectionBody = 'openAgSection___body',
   ConnectSectionHeader = 'connectSection___header',
@@ -5252,27 +5248,27 @@ export type File = Node & {
   parent: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
-  childCommunityYaml: Maybe<CommunityYaml>;
   childCaseStudiesYaml: Maybe<CaseStudiesYaml>;
-  childDevelopersYaml: Maybe<DevelopersYaml>;
   childCaseStudyItemsYaml: Maybe<CaseStudyItemsYaml>;
-  childHomeYaml: Maybe<HomeYaml>;
+  childDevelopersYaml: Maybe<DevelopersYaml>;
+  childCommunityYaml: Maybe<CommunityYaml>;
   childContactYaml: Maybe<ContactYaml>;
-  childFaqYaml: Maybe<FaqYaml>;
+  childPressKitYaml: Maybe<PressKitYaml>;
+  childFundYaml: Maybe<FundYaml>;
   childInvestYaml: Maybe<InvestYaml>;
   childMainnetYaml: Maybe<MainnetYaml>;
+  childFaqYaml: Maybe<FaqYaml>;
   childPartnersYaml: Maybe<PartnersYaml>;
-  childFundYaml: Maybe<FundYaml>;
-  childResourcesYaml: Maybe<ResourcesYaml>;
-  childPressKitYaml: Maybe<PressKitYaml>;
-  childSharedYaml: Maybe<SharedYaml>;
   childMediaYaml: Maybe<MediaYaml>;
-  childScienceYaml: Maybe<ScienceYaml>;
   childMarkdownRemark: Maybe<MarkdownRemark>;
-  childTokenYaml: Maybe<TokenYaml>;
-  childTeamYaml: Maybe<TeamYaml>;
+  childHomeYaml: Maybe<HomeYaml>;
+  childResourcesYaml: Maybe<ResourcesYaml>;
+  childScienceYaml: Maybe<ScienceYaml>;
   childWalletAddressRegistrationYaml: Maybe<WalletAddressRegistrationYaml>;
+  childSharedYaml: Maybe<SharedYaml>;
+  childTeamYaml: Maybe<TeamYaml>;
   childValidatorsYaml: Maybe<ValidatorsYaml>;
+  childTokenYaml: Maybe<TokenYaml>;
 };
 
 
@@ -5572,74 +5568,6 @@ export enum FileFieldsEnum {
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
   InternalType = 'internal___type',
-  ChildCommunityYamlId = 'childCommunityYaml___id',
-  ChildCommunityYamlParentId = 'childCommunityYaml___parent___id',
-  ChildCommunityYamlParentParentId = 'childCommunityYaml___parent___parent___id',
-  ChildCommunityYamlParentParentChildren = 'childCommunityYaml___parent___parent___children',
-  ChildCommunityYamlParentChildren = 'childCommunityYaml___parent___children',
-  ChildCommunityYamlParentChildrenId = 'childCommunityYaml___parent___children___id',
-  ChildCommunityYamlParentChildrenChildren = 'childCommunityYaml___parent___children___children',
-  ChildCommunityYamlParentInternalContent = 'childCommunityYaml___parent___internal___content',
-  ChildCommunityYamlParentInternalContentDigest = 'childCommunityYaml___parent___internal___contentDigest',
-  ChildCommunityYamlParentInternalDescription = 'childCommunityYaml___parent___internal___description',
-  ChildCommunityYamlParentInternalFieldOwners = 'childCommunityYaml___parent___internal___fieldOwners',
-  ChildCommunityYamlParentInternalIgnoreType = 'childCommunityYaml___parent___internal___ignoreType',
-  ChildCommunityYamlParentInternalMediaType = 'childCommunityYaml___parent___internal___mediaType',
-  ChildCommunityYamlParentInternalOwner = 'childCommunityYaml___parent___internal___owner',
-  ChildCommunityYamlParentInternalType = 'childCommunityYaml___parent___internal___type',
-  ChildCommunityYamlChildren = 'childCommunityYaml___children',
-  ChildCommunityYamlChildrenId = 'childCommunityYaml___children___id',
-  ChildCommunityYamlChildrenParentId = 'childCommunityYaml___children___parent___id',
-  ChildCommunityYamlChildrenParentChildren = 'childCommunityYaml___children___parent___children',
-  ChildCommunityYamlChildrenChildren = 'childCommunityYaml___children___children',
-  ChildCommunityYamlChildrenChildrenId = 'childCommunityYaml___children___children___id',
-  ChildCommunityYamlChildrenChildrenChildren = 'childCommunityYaml___children___children___children',
-  ChildCommunityYamlChildrenInternalContent = 'childCommunityYaml___children___internal___content',
-  ChildCommunityYamlChildrenInternalContentDigest = 'childCommunityYaml___children___internal___contentDigest',
-  ChildCommunityYamlChildrenInternalDescription = 'childCommunityYaml___children___internal___description',
-  ChildCommunityYamlChildrenInternalFieldOwners = 'childCommunityYaml___children___internal___fieldOwners',
-  ChildCommunityYamlChildrenInternalIgnoreType = 'childCommunityYaml___children___internal___ignoreType',
-  ChildCommunityYamlChildrenInternalMediaType = 'childCommunityYaml___children___internal___mediaType',
-  ChildCommunityYamlChildrenInternalOwner = 'childCommunityYaml___children___internal___owner',
-  ChildCommunityYamlChildrenInternalType = 'childCommunityYaml___children___internal___type',
-  ChildCommunityYamlInternalContent = 'childCommunityYaml___internal___content',
-  ChildCommunityYamlInternalContentDigest = 'childCommunityYaml___internal___contentDigest',
-  ChildCommunityYamlInternalDescription = 'childCommunityYaml___internal___description',
-  ChildCommunityYamlInternalFieldOwners = 'childCommunityYaml___internal___fieldOwners',
-  ChildCommunityYamlInternalIgnoreType = 'childCommunityYaml___internal___ignoreType',
-  ChildCommunityYamlInternalMediaType = 'childCommunityYaml___internal___mediaType',
-  ChildCommunityYamlInternalOwner = 'childCommunityYaml___internal___owner',
-  ChildCommunityYamlInternalType = 'childCommunityYaml___internal___type',
-  ChildCommunityYamlTopSectionHeader = 'childCommunityYaml___topSection___header',
-  ChildCommunityYamlTopSectionBody = 'childCommunityYaml___topSection___body',
-  ChildCommunityYamlConnectSectionHeader = 'childCommunityYaml___connectSection___header',
-  ChildCommunityYamlConnectSectionTelegramSubLabel = 'childCommunityYaml___connectSection___telegramSubLabel',
-  ChildCommunityYamlConnectSectionTelegramUrl = 'childCommunityYaml___connectSection___telegramUrl',
-  ChildCommunityYamlConnectSectionTwitterSubLabel = 'childCommunityYaml___connectSection___twitterSubLabel',
-  ChildCommunityYamlConnectSectionTwitterUrl = 'childCommunityYaml___connectSection___twitterUrl',
-  ChildCommunityYamlConnectSectionDiscordSubLabel = 'childCommunityYaml___connectSection___discordSubLabel',
-  ChildCommunityYamlConnectSectionDiscordUrl = 'childCommunityYaml___connectSection___discordUrl',
-  ChildCommunityYamlGoToSectionBlogButtonText = 'childCommunityYaml___goToSection___blogButtonText',
-  ChildCommunityYamlGoToSectionDiscussionButtonHref = 'childCommunityYaml___goToSection___discussionButtonHref',
-  ChildCommunityYamlGoToSectionDiscussionButtonText = 'childCommunityYaml___goToSection___discussionButtonText',
-  ChildCommunityYamlGoToSectionDiscussionLabel = 'childCommunityYaml___goToSection___discussionLabel',
-  ChildCommunityYamlGoToSectionBlogLabel = 'childCommunityYaml___goToSection___blogLabel',
-  ChildCommunityYamlGoToSectionVideoButtonHref = 'childCommunityYaml___goToSection___videoButtonHref',
-  ChildCommunityYamlGoToSectionVideoLabel = 'childCommunityYaml___goToSection___videoLabel',
-  ChildCommunityYamlGoToSectionVideoButtonText = 'childCommunityYaml___goToSection___videoButtonText',
-  ChildCommunityYamlGoToSectionBlogButtonHref = 'childCommunityYaml___goToSection___blogButtonHref',
-  ChildCommunityYamlCollectiveSectionTitle = 'childCommunityYaml___collectiveSection___title',
-  ChildCommunityYamlCollectiveSectionBody = 'childCommunityYaml___collectiveSection___body',
-  ChildCommunityYamlCollectiveSectionButtonText = 'childCommunityYaml___collectiveSection___buttonText',
-  ChildCommunityYamlCollectiveSectionSignupFormUrl = 'childCommunityYaml___collectiveSection___signupFormUrl',
-  ChildCommunityYamlCollaborateSectionHeader = 'childCommunityYaml___collaborateSection___header',
-  ChildCommunityYamlCollaborateSectionBody = 'childCommunityYaml___collaborateSection___body',
-  ChildCommunityYamlCollaborateSectionCards = 'childCommunityYaml___collaborateSection___cards',
-  ChildCommunityYamlCollaborateSectionCardsTitle = 'childCommunityYaml___collaborateSection___cards___title',
-  ChildCommunityYamlCollaborateSectionCardsDescription = 'childCommunityYaml___collaborateSection___cards___description',
-  ChildCommunityYamlCollaborateSectionCardsButtonText = 'childCommunityYaml___collaborateSection___cards___buttonText',
-  ChildCommunityYamlCollaborateSectionCardsLink = 'childCommunityYaml___collaborateSection___cards___link',
-  ChildCommunityYamlFileAbsolutePath = 'childCommunityYaml___fileAbsolutePath',
   ChildCaseStudiesYamlId = 'childCaseStudiesYaml___id',
   ChildCaseStudiesYamlParentId = 'childCaseStudiesYaml___parent___id',
   ChildCaseStudiesYamlParentParentId = 'childCaseStudiesYaml___parent___parent___id',
@@ -5699,6 +5627,595 @@ export enum FileFieldsEnum {
   ChildCaseStudiesYamlCaseStudiesFundingSectionNext = 'childCaseStudiesYaml___caseStudies___fundingSection___next',
   ChildCaseStudiesYamlCaseStudiesConclusionSectionHeader = 'childCaseStudiesYaml___caseStudies___conclusionSection___header',
   ChildCaseStudiesYamlFileAbsolutePath = 'childCaseStudiesYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlId = 'childCaseStudyItemsYaml___id',
+  ChildCaseStudyItemsYamlParentId = 'childCaseStudyItemsYaml___parent___id',
+  ChildCaseStudyItemsYamlParentParentId = 'childCaseStudyItemsYaml___parent___parent___id',
+  ChildCaseStudyItemsYamlParentParentChildren = 'childCaseStudyItemsYaml___parent___parent___children',
+  ChildCaseStudyItemsYamlParentChildren = 'childCaseStudyItemsYaml___parent___children',
+  ChildCaseStudyItemsYamlParentChildrenId = 'childCaseStudyItemsYaml___parent___children___id',
+  ChildCaseStudyItemsYamlParentChildrenChildren = 'childCaseStudyItemsYaml___parent___children___children',
+  ChildCaseStudyItemsYamlParentInternalContent = 'childCaseStudyItemsYaml___parent___internal___content',
+  ChildCaseStudyItemsYamlParentInternalContentDigest = 'childCaseStudyItemsYaml___parent___internal___contentDigest',
+  ChildCaseStudyItemsYamlParentInternalDescription = 'childCaseStudyItemsYaml___parent___internal___description',
+  ChildCaseStudyItemsYamlParentInternalFieldOwners = 'childCaseStudyItemsYaml___parent___internal___fieldOwners',
+  ChildCaseStudyItemsYamlParentInternalIgnoreType = 'childCaseStudyItemsYaml___parent___internal___ignoreType',
+  ChildCaseStudyItemsYamlParentInternalMediaType = 'childCaseStudyItemsYaml___parent___internal___mediaType',
+  ChildCaseStudyItemsYamlParentInternalOwner = 'childCaseStudyItemsYaml___parent___internal___owner',
+  ChildCaseStudyItemsYamlParentInternalType = 'childCaseStudyItemsYaml___parent___internal___type',
+  ChildCaseStudyItemsYamlChildren = 'childCaseStudyItemsYaml___children',
+  ChildCaseStudyItemsYamlChildrenId = 'childCaseStudyItemsYaml___children___id',
+  ChildCaseStudyItemsYamlChildrenParentId = 'childCaseStudyItemsYaml___children___parent___id',
+  ChildCaseStudyItemsYamlChildrenParentChildren = 'childCaseStudyItemsYaml___children___parent___children',
+  ChildCaseStudyItemsYamlChildrenChildren = 'childCaseStudyItemsYaml___children___children',
+  ChildCaseStudyItemsYamlChildrenChildrenId = 'childCaseStudyItemsYaml___children___children___id',
+  ChildCaseStudyItemsYamlChildrenChildrenChildren = 'childCaseStudyItemsYaml___children___children___children',
+  ChildCaseStudyItemsYamlChildrenInternalContent = 'childCaseStudyItemsYaml___children___internal___content',
+  ChildCaseStudyItemsYamlChildrenInternalContentDigest = 'childCaseStudyItemsYaml___children___internal___contentDigest',
+  ChildCaseStudyItemsYamlChildrenInternalDescription = 'childCaseStudyItemsYaml___children___internal___description',
+  ChildCaseStudyItemsYamlChildrenInternalFieldOwners = 'childCaseStudyItemsYaml___children___internal___fieldOwners',
+  ChildCaseStudyItemsYamlChildrenInternalIgnoreType = 'childCaseStudyItemsYaml___children___internal___ignoreType',
+  ChildCaseStudyItemsYamlChildrenInternalMediaType = 'childCaseStudyItemsYaml___children___internal___mediaType',
+  ChildCaseStudyItemsYamlChildrenInternalOwner = 'childCaseStudyItemsYaml___children___internal___owner',
+  ChildCaseStudyItemsYamlChildrenInternalType = 'childCaseStudyItemsYaml___children___internal___type',
+  ChildCaseStudyItemsYamlInternalContent = 'childCaseStudyItemsYaml___internal___content',
+  ChildCaseStudyItemsYamlInternalContentDigest = 'childCaseStudyItemsYaml___internal___contentDigest',
+  ChildCaseStudyItemsYamlInternalDescription = 'childCaseStudyItemsYaml___internal___description',
+  ChildCaseStudyItemsYamlInternalFieldOwners = 'childCaseStudyItemsYaml___internal___fieldOwners',
+  ChildCaseStudyItemsYamlInternalIgnoreType = 'childCaseStudyItemsYaml___internal___ignoreType',
+  ChildCaseStudyItemsYamlInternalMediaType = 'childCaseStudyItemsYaml___internal___mediaType',
+  ChildCaseStudyItemsYamlInternalOwner = 'childCaseStudyItemsYaml___internal___owner',
+  ChildCaseStudyItemsYamlInternalType = 'childCaseStudyItemsYaml___internal___type',
+  ChildCaseStudyItemsYamlName = 'childCaseStudyItemsYaml___name',
+  ChildCaseStudyItemsYamlSlug = 'childCaseStudyItemsYaml___slug',
+  ChildCaseStudyItemsYamlCardImageSourceInstanceName = 'childCaseStudyItemsYaml___cardImage___sourceInstanceName',
+  ChildCaseStudyItemsYamlCardImageAbsolutePath = 'childCaseStudyItemsYaml___cardImage___absolutePath',
+  ChildCaseStudyItemsYamlCardImageRelativePath = 'childCaseStudyItemsYaml___cardImage___relativePath',
+  ChildCaseStudyItemsYamlCardImageExtension = 'childCaseStudyItemsYaml___cardImage___extension',
+  ChildCaseStudyItemsYamlCardImageSize = 'childCaseStudyItemsYaml___cardImage___size',
+  ChildCaseStudyItemsYamlCardImagePrettySize = 'childCaseStudyItemsYaml___cardImage___prettySize',
+  ChildCaseStudyItemsYamlCardImageModifiedTime = 'childCaseStudyItemsYaml___cardImage___modifiedTime',
+  ChildCaseStudyItemsYamlCardImageAccessTime = 'childCaseStudyItemsYaml___cardImage___accessTime',
+  ChildCaseStudyItemsYamlCardImageChangeTime = 'childCaseStudyItemsYaml___cardImage___changeTime',
+  ChildCaseStudyItemsYamlCardImageBirthTime = 'childCaseStudyItemsYaml___cardImage___birthTime',
+  ChildCaseStudyItemsYamlCardImageRoot = 'childCaseStudyItemsYaml___cardImage___root',
+  ChildCaseStudyItemsYamlCardImageDir = 'childCaseStudyItemsYaml___cardImage___dir',
+  ChildCaseStudyItemsYamlCardImageBase = 'childCaseStudyItemsYaml___cardImage___base',
+  ChildCaseStudyItemsYamlCardImageExt = 'childCaseStudyItemsYaml___cardImage___ext',
+  ChildCaseStudyItemsYamlCardImageName = 'childCaseStudyItemsYaml___cardImage___name',
+  ChildCaseStudyItemsYamlCardImageRelativeDirectory = 'childCaseStudyItemsYaml___cardImage___relativeDirectory',
+  ChildCaseStudyItemsYamlCardImageDev = 'childCaseStudyItemsYaml___cardImage___dev',
+  ChildCaseStudyItemsYamlCardImageMode = 'childCaseStudyItemsYaml___cardImage___mode',
+  ChildCaseStudyItemsYamlCardImageNlink = 'childCaseStudyItemsYaml___cardImage___nlink',
+  ChildCaseStudyItemsYamlCardImageUid = 'childCaseStudyItemsYaml___cardImage___uid',
+  ChildCaseStudyItemsYamlCardImageGid = 'childCaseStudyItemsYaml___cardImage___gid',
+  ChildCaseStudyItemsYamlCardImageRdev = 'childCaseStudyItemsYaml___cardImage___rdev',
+  ChildCaseStudyItemsYamlCardImageIno = 'childCaseStudyItemsYaml___cardImage___ino',
+  ChildCaseStudyItemsYamlCardImageAtimeMs = 'childCaseStudyItemsYaml___cardImage___atimeMs',
+  ChildCaseStudyItemsYamlCardImageMtimeMs = 'childCaseStudyItemsYaml___cardImage___mtimeMs',
+  ChildCaseStudyItemsYamlCardImageCtimeMs = 'childCaseStudyItemsYaml___cardImage___ctimeMs',
+  ChildCaseStudyItemsYamlCardImageAtime = 'childCaseStudyItemsYaml___cardImage___atime',
+  ChildCaseStudyItemsYamlCardImageMtime = 'childCaseStudyItemsYaml___cardImage___mtime',
+  ChildCaseStudyItemsYamlCardImageCtime = 'childCaseStudyItemsYaml___cardImage___ctime',
+  ChildCaseStudyItemsYamlCardImageBirthtime = 'childCaseStudyItemsYaml___cardImage___birthtime',
+  ChildCaseStudyItemsYamlCardImageBirthtimeMs = 'childCaseStudyItemsYaml___cardImage___birthtimeMs',
+  ChildCaseStudyItemsYamlCardImageBlksize = 'childCaseStudyItemsYaml___cardImage___blksize',
+  ChildCaseStudyItemsYamlCardImageBlocks = 'childCaseStudyItemsYaml___cardImage___blocks',
+  ChildCaseStudyItemsYamlCardImagePublicUrl = 'childCaseStudyItemsYaml___cardImage___publicURL',
+  ChildCaseStudyItemsYamlCardImageChildImageSharpId = 'childCaseStudyItemsYaml___cardImage___childImageSharp___id',
+  ChildCaseStudyItemsYamlCardImageChildImageSharpChildren = 'childCaseStudyItemsYaml___cardImage___childImageSharp___children',
+  ChildCaseStudyItemsYamlCardImageId = 'childCaseStudyItemsYaml___cardImage___id',
+  ChildCaseStudyItemsYamlCardImageParentId = 'childCaseStudyItemsYaml___cardImage___parent___id',
+  ChildCaseStudyItemsYamlCardImageParentChildren = 'childCaseStudyItemsYaml___cardImage___parent___children',
+  ChildCaseStudyItemsYamlCardImageChildren = 'childCaseStudyItemsYaml___cardImage___children',
+  ChildCaseStudyItemsYamlCardImageChildrenId = 'childCaseStudyItemsYaml___cardImage___children___id',
+  ChildCaseStudyItemsYamlCardImageChildrenChildren = 'childCaseStudyItemsYaml___cardImage___children___children',
+  ChildCaseStudyItemsYamlCardImageInternalContent = 'childCaseStudyItemsYaml___cardImage___internal___content',
+  ChildCaseStudyItemsYamlCardImageInternalContentDigest = 'childCaseStudyItemsYaml___cardImage___internal___contentDigest',
+  ChildCaseStudyItemsYamlCardImageInternalDescription = 'childCaseStudyItemsYaml___cardImage___internal___description',
+  ChildCaseStudyItemsYamlCardImageInternalFieldOwners = 'childCaseStudyItemsYaml___cardImage___internal___fieldOwners',
+  ChildCaseStudyItemsYamlCardImageInternalIgnoreType = 'childCaseStudyItemsYaml___cardImage___internal___ignoreType',
+  ChildCaseStudyItemsYamlCardImageInternalMediaType = 'childCaseStudyItemsYaml___cardImage___internal___mediaType',
+  ChildCaseStudyItemsYamlCardImageInternalOwner = 'childCaseStudyItemsYaml___cardImage___internal___owner',
+  ChildCaseStudyItemsYamlCardImageInternalType = 'childCaseStudyItemsYaml___cardImage___internal___type',
+  ChildCaseStudyItemsYamlCardImageChildCaseStudiesYamlId = 'childCaseStudyItemsYaml___cardImage___childCaseStudiesYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildCaseStudiesYamlChildren = 'childCaseStudyItemsYaml___cardImage___childCaseStudiesYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildCaseStudiesYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childCaseStudiesYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlId = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlChildren = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlName = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___name',
+  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlSlug = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___slug',
+  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlDescription = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___description',
+  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildDevelopersYamlId = 'childCaseStudyItemsYaml___cardImage___childDevelopersYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildDevelopersYamlChildren = 'childCaseStudyItemsYaml___cardImage___childDevelopersYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildDevelopersYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childDevelopersYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildCommunityYamlId = 'childCaseStudyItemsYaml___cardImage___childCommunityYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildCommunityYamlChildren = 'childCaseStudyItemsYaml___cardImage___childCommunityYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildCommunityYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childCommunityYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildContactYamlId = 'childCaseStudyItemsYaml___cardImage___childContactYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildContactYamlChildren = 'childCaseStudyItemsYaml___cardImage___childContactYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildContactYamlHeader = 'childCaseStudyItemsYaml___cardImage___childContactYaml___header',
+  ChildCaseStudyItemsYamlCardImageChildContactYamlBody = 'childCaseStudyItemsYaml___cardImage___childContactYaml___body',
+  ChildCaseStudyItemsYamlCardImageChildContactYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childContactYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildPressKitYamlId = 'childCaseStudyItemsYaml___cardImage___childPressKitYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildPressKitYamlChildren = 'childCaseStudyItemsYaml___cardImage___childPressKitYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildPressKitYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childPressKitYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildFundYamlId = 'childCaseStudyItemsYaml___cardImage___childFundYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildFundYamlChildren = 'childCaseStudyItemsYaml___cardImage___childFundYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildFundYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childFundYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildInvestYamlId = 'childCaseStudyItemsYaml___cardImage___childInvestYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildInvestYamlChildren = 'childCaseStudyItemsYaml___cardImage___childInvestYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildInvestYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childInvestYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildMainnetYamlId = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildMainnetYamlChildren = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildMainnetYamlLaunchDate = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___launchDate',
+  ChildCaseStudyItemsYamlCardImageChildMainnetYamlLivecastLink = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___livecastLink',
+  ChildCaseStudyItemsYamlCardImageChildMainnetYamlSeoDescription = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___seoDescription',
+  ChildCaseStudyItemsYamlCardImageChildMainnetYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildFaqYamlId = 'childCaseStudyItemsYaml___cardImage___childFaqYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildFaqYamlChildren = 'childCaseStudyItemsYaml___cardImage___childFaqYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildFaqYamlCategories = 'childCaseStudyItemsYaml___cardImage___childFaqYaml___categories',
+  ChildCaseStudyItemsYamlCardImageChildFaqYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childFaqYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildPartnersYamlId = 'childCaseStudyItemsYaml___cardImage___childPartnersYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildPartnersYamlChildren = 'childCaseStudyItemsYaml___cardImage___childPartnersYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildPartnersYamlHeader = 'childCaseStudyItemsYaml___cardImage___childPartnersYaml___header',
+  ChildCaseStudyItemsYamlCardImageChildPartnersYamlPartnerLogos = 'childCaseStudyItemsYaml___cardImage___childPartnersYaml___partnerLogos',
+  ChildCaseStudyItemsYamlCardImageChildPartnersYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childPartnersYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildMediaYamlId = 'childCaseStudyItemsYaml___cardImage___childMediaYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildMediaYamlChildren = 'childCaseStudyItemsYaml___cardImage___childMediaYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildMediaYamlHeader = 'childCaseStudyItemsYaml___cardImage___childMediaYaml___header',
+  ChildCaseStudyItemsYamlCardImageChildMediaYamlCategories = 'childCaseStudyItemsYaml___cardImage___childMediaYaml___categories',
+  ChildCaseStudyItemsYamlCardImageChildMediaYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childMediaYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkId = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___id',
+  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkExcerpt = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___excerpt',
+  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkRawMarkdownBody = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___rawMarkdownBody',
+  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkHtml = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___html',
+  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkHtmlAst = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___htmlAst',
+  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkExcerptAst = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___excerptAst',
+  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkHeadings = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___headings',
+  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkTimeToRead = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___timeToRead',
+  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkTableOfContents = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___tableOfContents',
+  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkChildren = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___children',
+  ChildCaseStudyItemsYamlCardImageChildHomeYamlId = 'childCaseStudyItemsYaml___cardImage___childHomeYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildHomeYamlChildren = 'childCaseStudyItemsYaml___cardImage___childHomeYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildHomeYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childHomeYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildResourcesYamlId = 'childCaseStudyItemsYaml___cardImage___childResourcesYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildResourcesYamlChildren = 'childCaseStudyItemsYaml___cardImage___childResourcesYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildResourcesYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childResourcesYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildScienceYamlId = 'childCaseStudyItemsYaml___cardImage___childScienceYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildScienceYamlChildren = 'childCaseStudyItemsYaml___cardImage___childScienceYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildScienceYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childScienceYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildWalletAddressRegistrationYamlId = 'childCaseStudyItemsYaml___cardImage___childWalletAddressRegistrationYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildWalletAddressRegistrationYamlChildren = 'childCaseStudyItemsYaml___cardImage___childWalletAddressRegistrationYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildSharedYamlId = 'childCaseStudyItemsYaml___cardImage___childSharedYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildSharedYamlChildren = 'childCaseStudyItemsYaml___cardImage___childSharedYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildSharedYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childSharedYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildTeamYamlId = 'childCaseStudyItemsYaml___cardImage___childTeamYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildTeamYamlChildren = 'childCaseStudyItemsYaml___cardImage___childTeamYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildTeamYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childTeamYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildValidatorsYamlId = 'childCaseStudyItemsYaml___cardImage___childValidatorsYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildValidatorsYamlChildren = 'childCaseStudyItemsYaml___cardImage___childValidatorsYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildValidatorsYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childValidatorsYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlCardImageChildTokenYamlId = 'childCaseStudyItemsYaml___cardImage___childTokenYaml___id',
+  ChildCaseStudyItemsYamlCardImageChildTokenYamlChildren = 'childCaseStudyItemsYaml___cardImage___childTokenYaml___children',
+  ChildCaseStudyItemsYamlCardImageChildTokenYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childTokenYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundSourceInstanceName = 'childCaseStudyItemsYaml___background___sourceInstanceName',
+  ChildCaseStudyItemsYamlBackgroundAbsolutePath = 'childCaseStudyItemsYaml___background___absolutePath',
+  ChildCaseStudyItemsYamlBackgroundRelativePath = 'childCaseStudyItemsYaml___background___relativePath',
+  ChildCaseStudyItemsYamlBackgroundExtension = 'childCaseStudyItemsYaml___background___extension',
+  ChildCaseStudyItemsYamlBackgroundSize = 'childCaseStudyItemsYaml___background___size',
+  ChildCaseStudyItemsYamlBackgroundPrettySize = 'childCaseStudyItemsYaml___background___prettySize',
+  ChildCaseStudyItemsYamlBackgroundModifiedTime = 'childCaseStudyItemsYaml___background___modifiedTime',
+  ChildCaseStudyItemsYamlBackgroundAccessTime = 'childCaseStudyItemsYaml___background___accessTime',
+  ChildCaseStudyItemsYamlBackgroundChangeTime = 'childCaseStudyItemsYaml___background___changeTime',
+  ChildCaseStudyItemsYamlBackgroundBirthTime = 'childCaseStudyItemsYaml___background___birthTime',
+  ChildCaseStudyItemsYamlBackgroundRoot = 'childCaseStudyItemsYaml___background___root',
+  ChildCaseStudyItemsYamlBackgroundDir = 'childCaseStudyItemsYaml___background___dir',
+  ChildCaseStudyItemsYamlBackgroundBase = 'childCaseStudyItemsYaml___background___base',
+  ChildCaseStudyItemsYamlBackgroundExt = 'childCaseStudyItemsYaml___background___ext',
+  ChildCaseStudyItemsYamlBackgroundName = 'childCaseStudyItemsYaml___background___name',
+  ChildCaseStudyItemsYamlBackgroundRelativeDirectory = 'childCaseStudyItemsYaml___background___relativeDirectory',
+  ChildCaseStudyItemsYamlBackgroundDev = 'childCaseStudyItemsYaml___background___dev',
+  ChildCaseStudyItemsYamlBackgroundMode = 'childCaseStudyItemsYaml___background___mode',
+  ChildCaseStudyItemsYamlBackgroundNlink = 'childCaseStudyItemsYaml___background___nlink',
+  ChildCaseStudyItemsYamlBackgroundUid = 'childCaseStudyItemsYaml___background___uid',
+  ChildCaseStudyItemsYamlBackgroundGid = 'childCaseStudyItemsYaml___background___gid',
+  ChildCaseStudyItemsYamlBackgroundRdev = 'childCaseStudyItemsYaml___background___rdev',
+  ChildCaseStudyItemsYamlBackgroundIno = 'childCaseStudyItemsYaml___background___ino',
+  ChildCaseStudyItemsYamlBackgroundAtimeMs = 'childCaseStudyItemsYaml___background___atimeMs',
+  ChildCaseStudyItemsYamlBackgroundMtimeMs = 'childCaseStudyItemsYaml___background___mtimeMs',
+  ChildCaseStudyItemsYamlBackgroundCtimeMs = 'childCaseStudyItemsYaml___background___ctimeMs',
+  ChildCaseStudyItemsYamlBackgroundAtime = 'childCaseStudyItemsYaml___background___atime',
+  ChildCaseStudyItemsYamlBackgroundMtime = 'childCaseStudyItemsYaml___background___mtime',
+  ChildCaseStudyItemsYamlBackgroundCtime = 'childCaseStudyItemsYaml___background___ctime',
+  ChildCaseStudyItemsYamlBackgroundBirthtime = 'childCaseStudyItemsYaml___background___birthtime',
+  ChildCaseStudyItemsYamlBackgroundBirthtimeMs = 'childCaseStudyItemsYaml___background___birthtimeMs',
+  ChildCaseStudyItemsYamlBackgroundBlksize = 'childCaseStudyItemsYaml___background___blksize',
+  ChildCaseStudyItemsYamlBackgroundBlocks = 'childCaseStudyItemsYaml___background___blocks',
+  ChildCaseStudyItemsYamlBackgroundPublicUrl = 'childCaseStudyItemsYaml___background___publicURL',
+  ChildCaseStudyItemsYamlBackgroundChildImageSharpId = 'childCaseStudyItemsYaml___background___childImageSharp___id',
+  ChildCaseStudyItemsYamlBackgroundChildImageSharpChildren = 'childCaseStudyItemsYaml___background___childImageSharp___children',
+  ChildCaseStudyItemsYamlBackgroundId = 'childCaseStudyItemsYaml___background___id',
+  ChildCaseStudyItemsYamlBackgroundParentId = 'childCaseStudyItemsYaml___background___parent___id',
+  ChildCaseStudyItemsYamlBackgroundParentChildren = 'childCaseStudyItemsYaml___background___parent___children',
+  ChildCaseStudyItemsYamlBackgroundChildren = 'childCaseStudyItemsYaml___background___children',
+  ChildCaseStudyItemsYamlBackgroundChildrenId = 'childCaseStudyItemsYaml___background___children___id',
+  ChildCaseStudyItemsYamlBackgroundChildrenChildren = 'childCaseStudyItemsYaml___background___children___children',
+  ChildCaseStudyItemsYamlBackgroundInternalContent = 'childCaseStudyItemsYaml___background___internal___content',
+  ChildCaseStudyItemsYamlBackgroundInternalContentDigest = 'childCaseStudyItemsYaml___background___internal___contentDigest',
+  ChildCaseStudyItemsYamlBackgroundInternalDescription = 'childCaseStudyItemsYaml___background___internal___description',
+  ChildCaseStudyItemsYamlBackgroundInternalFieldOwners = 'childCaseStudyItemsYaml___background___internal___fieldOwners',
+  ChildCaseStudyItemsYamlBackgroundInternalIgnoreType = 'childCaseStudyItemsYaml___background___internal___ignoreType',
+  ChildCaseStudyItemsYamlBackgroundInternalMediaType = 'childCaseStudyItemsYaml___background___internal___mediaType',
+  ChildCaseStudyItemsYamlBackgroundInternalOwner = 'childCaseStudyItemsYaml___background___internal___owner',
+  ChildCaseStudyItemsYamlBackgroundInternalType = 'childCaseStudyItemsYaml___background___internal___type',
+  ChildCaseStudyItemsYamlBackgroundChildCaseStudiesYamlId = 'childCaseStudyItemsYaml___background___childCaseStudiesYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildCaseStudiesYamlChildren = 'childCaseStudyItemsYaml___background___childCaseStudiesYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildCaseStudiesYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childCaseStudiesYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlId = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlChildren = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlName = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___name',
+  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlSlug = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___slug',
+  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlDescription = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___description',
+  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildDevelopersYamlId = 'childCaseStudyItemsYaml___background___childDevelopersYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildDevelopersYamlChildren = 'childCaseStudyItemsYaml___background___childDevelopersYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildDevelopersYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childDevelopersYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildCommunityYamlId = 'childCaseStudyItemsYaml___background___childCommunityYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildCommunityYamlChildren = 'childCaseStudyItemsYaml___background___childCommunityYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildCommunityYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childCommunityYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildContactYamlId = 'childCaseStudyItemsYaml___background___childContactYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildContactYamlChildren = 'childCaseStudyItemsYaml___background___childContactYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildContactYamlHeader = 'childCaseStudyItemsYaml___background___childContactYaml___header',
+  ChildCaseStudyItemsYamlBackgroundChildContactYamlBody = 'childCaseStudyItemsYaml___background___childContactYaml___body',
+  ChildCaseStudyItemsYamlBackgroundChildContactYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childContactYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildPressKitYamlId = 'childCaseStudyItemsYaml___background___childPressKitYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildPressKitYamlChildren = 'childCaseStudyItemsYaml___background___childPressKitYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildPressKitYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childPressKitYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildFundYamlId = 'childCaseStudyItemsYaml___background___childFundYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildFundYamlChildren = 'childCaseStudyItemsYaml___background___childFundYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildFundYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childFundYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildInvestYamlId = 'childCaseStudyItemsYaml___background___childInvestYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildInvestYamlChildren = 'childCaseStudyItemsYaml___background___childInvestYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildInvestYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childInvestYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlId = 'childCaseStudyItemsYaml___background___childMainnetYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlChildren = 'childCaseStudyItemsYaml___background___childMainnetYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlLaunchDate = 'childCaseStudyItemsYaml___background___childMainnetYaml___launchDate',
+  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlLivecastLink = 'childCaseStudyItemsYaml___background___childMainnetYaml___livecastLink',
+  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlSeoDescription = 'childCaseStudyItemsYaml___background___childMainnetYaml___seoDescription',
+  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childMainnetYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildFaqYamlId = 'childCaseStudyItemsYaml___background___childFaqYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildFaqYamlChildren = 'childCaseStudyItemsYaml___background___childFaqYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildFaqYamlCategories = 'childCaseStudyItemsYaml___background___childFaqYaml___categories',
+  ChildCaseStudyItemsYamlBackgroundChildFaqYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childFaqYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildPartnersYamlId = 'childCaseStudyItemsYaml___background___childPartnersYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildPartnersYamlChildren = 'childCaseStudyItemsYaml___background___childPartnersYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildPartnersYamlHeader = 'childCaseStudyItemsYaml___background___childPartnersYaml___header',
+  ChildCaseStudyItemsYamlBackgroundChildPartnersYamlPartnerLogos = 'childCaseStudyItemsYaml___background___childPartnersYaml___partnerLogos',
+  ChildCaseStudyItemsYamlBackgroundChildPartnersYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childPartnersYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildMediaYamlId = 'childCaseStudyItemsYaml___background___childMediaYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildMediaYamlChildren = 'childCaseStudyItemsYaml___background___childMediaYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildMediaYamlHeader = 'childCaseStudyItemsYaml___background___childMediaYaml___header',
+  ChildCaseStudyItemsYamlBackgroundChildMediaYamlCategories = 'childCaseStudyItemsYaml___background___childMediaYaml___categories',
+  ChildCaseStudyItemsYamlBackgroundChildMediaYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childMediaYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkId = 'childCaseStudyItemsYaml___background___childMarkdownRemark___id',
+  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkExcerpt = 'childCaseStudyItemsYaml___background___childMarkdownRemark___excerpt',
+  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkRawMarkdownBody = 'childCaseStudyItemsYaml___background___childMarkdownRemark___rawMarkdownBody',
+  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkFileAbsolutePath = 'childCaseStudyItemsYaml___background___childMarkdownRemark___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkHtml = 'childCaseStudyItemsYaml___background___childMarkdownRemark___html',
+  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkHtmlAst = 'childCaseStudyItemsYaml___background___childMarkdownRemark___htmlAst',
+  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkExcerptAst = 'childCaseStudyItemsYaml___background___childMarkdownRemark___excerptAst',
+  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkHeadings = 'childCaseStudyItemsYaml___background___childMarkdownRemark___headings',
+  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkTimeToRead = 'childCaseStudyItemsYaml___background___childMarkdownRemark___timeToRead',
+  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkTableOfContents = 'childCaseStudyItemsYaml___background___childMarkdownRemark___tableOfContents',
+  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkChildren = 'childCaseStudyItemsYaml___background___childMarkdownRemark___children',
+  ChildCaseStudyItemsYamlBackgroundChildHomeYamlId = 'childCaseStudyItemsYaml___background___childHomeYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildHomeYamlChildren = 'childCaseStudyItemsYaml___background___childHomeYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildHomeYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childHomeYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildResourcesYamlId = 'childCaseStudyItemsYaml___background___childResourcesYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildResourcesYamlChildren = 'childCaseStudyItemsYaml___background___childResourcesYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildResourcesYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childResourcesYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildScienceYamlId = 'childCaseStudyItemsYaml___background___childScienceYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildScienceYamlChildren = 'childCaseStudyItemsYaml___background___childScienceYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildScienceYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childScienceYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildWalletAddressRegistrationYamlId = 'childCaseStudyItemsYaml___background___childWalletAddressRegistrationYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildWalletAddressRegistrationYamlChildren = 'childCaseStudyItemsYaml___background___childWalletAddressRegistrationYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildWalletAddressRegistrationYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildSharedYamlId = 'childCaseStudyItemsYaml___background___childSharedYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildSharedYamlChildren = 'childCaseStudyItemsYaml___background___childSharedYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildSharedYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childSharedYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildTeamYamlId = 'childCaseStudyItemsYaml___background___childTeamYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildTeamYamlChildren = 'childCaseStudyItemsYaml___background___childTeamYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildTeamYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childTeamYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildValidatorsYamlId = 'childCaseStudyItemsYaml___background___childValidatorsYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildValidatorsYamlChildren = 'childCaseStudyItemsYaml___background___childValidatorsYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildValidatorsYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childValidatorsYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlBackgroundChildTokenYamlId = 'childCaseStudyItemsYaml___background___childTokenYaml___id',
+  ChildCaseStudyItemsYamlBackgroundChildTokenYamlChildren = 'childCaseStudyItemsYaml___background___childTokenYaml___children',
+  ChildCaseStudyItemsYamlBackgroundChildTokenYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childTokenYaml___fileAbsolutePath',
+  ChildCaseStudyItemsYamlDescription = 'childCaseStudyItemsYaml___description',
+  ChildCaseStudyItemsYamlAboutSectionAbout = 'childCaseStudyItemsYaml___aboutSection___about',
+  ChildCaseStudyItemsYamlAboutSectionMapImageSourceInstanceName = 'childCaseStudyItemsYaml___aboutSection___mapImage___sourceInstanceName',
+  ChildCaseStudyItemsYamlAboutSectionMapImageAbsolutePath = 'childCaseStudyItemsYaml___aboutSection___mapImage___absolutePath',
+  ChildCaseStudyItemsYamlAboutSectionMapImageRelativePath = 'childCaseStudyItemsYaml___aboutSection___mapImage___relativePath',
+  ChildCaseStudyItemsYamlAboutSectionMapImageExtension = 'childCaseStudyItemsYaml___aboutSection___mapImage___extension',
+  ChildCaseStudyItemsYamlAboutSectionMapImageSize = 'childCaseStudyItemsYaml___aboutSection___mapImage___size',
+  ChildCaseStudyItemsYamlAboutSectionMapImagePrettySize = 'childCaseStudyItemsYaml___aboutSection___mapImage___prettySize',
+  ChildCaseStudyItemsYamlAboutSectionMapImageModifiedTime = 'childCaseStudyItemsYaml___aboutSection___mapImage___modifiedTime',
+  ChildCaseStudyItemsYamlAboutSectionMapImageAccessTime = 'childCaseStudyItemsYaml___aboutSection___mapImage___accessTime',
+  ChildCaseStudyItemsYamlAboutSectionMapImageChangeTime = 'childCaseStudyItemsYaml___aboutSection___mapImage___changeTime',
+  ChildCaseStudyItemsYamlAboutSectionMapImageBirthTime = 'childCaseStudyItemsYaml___aboutSection___mapImage___birthTime',
+  ChildCaseStudyItemsYamlAboutSectionMapImageRoot = 'childCaseStudyItemsYaml___aboutSection___mapImage___root',
+  ChildCaseStudyItemsYamlAboutSectionMapImageDir = 'childCaseStudyItemsYaml___aboutSection___mapImage___dir',
+  ChildCaseStudyItemsYamlAboutSectionMapImageBase = 'childCaseStudyItemsYaml___aboutSection___mapImage___base',
+  ChildCaseStudyItemsYamlAboutSectionMapImageExt = 'childCaseStudyItemsYaml___aboutSection___mapImage___ext',
+  ChildCaseStudyItemsYamlAboutSectionMapImageName = 'childCaseStudyItemsYaml___aboutSection___mapImage___name',
+  ChildCaseStudyItemsYamlAboutSectionMapImageRelativeDirectory = 'childCaseStudyItemsYaml___aboutSection___mapImage___relativeDirectory',
+  ChildCaseStudyItemsYamlAboutSectionMapImageDev = 'childCaseStudyItemsYaml___aboutSection___mapImage___dev',
+  ChildCaseStudyItemsYamlAboutSectionMapImageMode = 'childCaseStudyItemsYaml___aboutSection___mapImage___mode',
+  ChildCaseStudyItemsYamlAboutSectionMapImageNlink = 'childCaseStudyItemsYaml___aboutSection___mapImage___nlink',
+  ChildCaseStudyItemsYamlAboutSectionMapImageUid = 'childCaseStudyItemsYaml___aboutSection___mapImage___uid',
+  ChildCaseStudyItemsYamlAboutSectionMapImageGid = 'childCaseStudyItemsYaml___aboutSection___mapImage___gid',
+  ChildCaseStudyItemsYamlAboutSectionMapImageRdev = 'childCaseStudyItemsYaml___aboutSection___mapImage___rdev',
+  ChildCaseStudyItemsYamlAboutSectionMapImageIno = 'childCaseStudyItemsYaml___aboutSection___mapImage___ino',
+  ChildCaseStudyItemsYamlAboutSectionMapImageAtimeMs = 'childCaseStudyItemsYaml___aboutSection___mapImage___atimeMs',
+  ChildCaseStudyItemsYamlAboutSectionMapImageMtimeMs = 'childCaseStudyItemsYaml___aboutSection___mapImage___mtimeMs',
+  ChildCaseStudyItemsYamlAboutSectionMapImageCtimeMs = 'childCaseStudyItemsYaml___aboutSection___mapImage___ctimeMs',
+  ChildCaseStudyItemsYamlAboutSectionMapImageAtime = 'childCaseStudyItemsYaml___aboutSection___mapImage___atime',
+  ChildCaseStudyItemsYamlAboutSectionMapImageMtime = 'childCaseStudyItemsYaml___aboutSection___mapImage___mtime',
+  ChildCaseStudyItemsYamlAboutSectionMapImageCtime = 'childCaseStudyItemsYaml___aboutSection___mapImage___ctime',
+  ChildCaseStudyItemsYamlAboutSectionMapImageBirthtime = 'childCaseStudyItemsYaml___aboutSection___mapImage___birthtime',
+  ChildCaseStudyItemsYamlAboutSectionMapImageBirthtimeMs = 'childCaseStudyItemsYaml___aboutSection___mapImage___birthtimeMs',
+  ChildCaseStudyItemsYamlAboutSectionMapImageBlksize = 'childCaseStudyItemsYaml___aboutSection___mapImage___blksize',
+  ChildCaseStudyItemsYamlAboutSectionMapImageBlocks = 'childCaseStudyItemsYaml___aboutSection___mapImage___blocks',
+  ChildCaseStudyItemsYamlAboutSectionMapImagePublicUrl = 'childCaseStudyItemsYaml___aboutSection___mapImage___publicURL',
+  ChildCaseStudyItemsYamlAboutSectionMapImageId = 'childCaseStudyItemsYaml___aboutSection___mapImage___id',
+  ChildCaseStudyItemsYamlAboutSectionMapImageChildren = 'childCaseStudyItemsYaml___aboutSection___mapImage___children',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageSourceInstanceName = 'childCaseStudyItemsYaml___aboutSection___aboutImage___sourceInstanceName',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageAbsolutePath = 'childCaseStudyItemsYaml___aboutSection___aboutImage___absolutePath',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageRelativePath = 'childCaseStudyItemsYaml___aboutSection___aboutImage___relativePath',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageExtension = 'childCaseStudyItemsYaml___aboutSection___aboutImage___extension',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageSize = 'childCaseStudyItemsYaml___aboutSection___aboutImage___size',
+  ChildCaseStudyItemsYamlAboutSectionAboutImagePrettySize = 'childCaseStudyItemsYaml___aboutSection___aboutImage___prettySize',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageModifiedTime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___modifiedTime',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageAccessTime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___accessTime',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageChangeTime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___changeTime',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageBirthTime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___birthTime',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageRoot = 'childCaseStudyItemsYaml___aboutSection___aboutImage___root',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageDir = 'childCaseStudyItemsYaml___aboutSection___aboutImage___dir',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageBase = 'childCaseStudyItemsYaml___aboutSection___aboutImage___base',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageExt = 'childCaseStudyItemsYaml___aboutSection___aboutImage___ext',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageName = 'childCaseStudyItemsYaml___aboutSection___aboutImage___name',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageRelativeDirectory = 'childCaseStudyItemsYaml___aboutSection___aboutImage___relativeDirectory',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageDev = 'childCaseStudyItemsYaml___aboutSection___aboutImage___dev',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageMode = 'childCaseStudyItemsYaml___aboutSection___aboutImage___mode',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageNlink = 'childCaseStudyItemsYaml___aboutSection___aboutImage___nlink',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageUid = 'childCaseStudyItemsYaml___aboutSection___aboutImage___uid',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageGid = 'childCaseStudyItemsYaml___aboutSection___aboutImage___gid',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageRdev = 'childCaseStudyItemsYaml___aboutSection___aboutImage___rdev',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageIno = 'childCaseStudyItemsYaml___aboutSection___aboutImage___ino',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageAtimeMs = 'childCaseStudyItemsYaml___aboutSection___aboutImage___atimeMs',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageMtimeMs = 'childCaseStudyItemsYaml___aboutSection___aboutImage___mtimeMs',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageCtimeMs = 'childCaseStudyItemsYaml___aboutSection___aboutImage___ctimeMs',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageAtime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___atime',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageMtime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___mtime',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageCtime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___ctime',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageBirthtime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___birthtime',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageBirthtimeMs = 'childCaseStudyItemsYaml___aboutSection___aboutImage___birthtimeMs',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageBlksize = 'childCaseStudyItemsYaml___aboutSection___aboutImage___blksize',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageBlocks = 'childCaseStudyItemsYaml___aboutSection___aboutImage___blocks',
+  ChildCaseStudyItemsYamlAboutSectionAboutImagePublicUrl = 'childCaseStudyItemsYaml___aboutSection___aboutImage___publicURL',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageId = 'childCaseStudyItemsYaml___aboutSection___aboutImage___id',
+  ChildCaseStudyItemsYamlAboutSectionAboutImageChildren = 'childCaseStudyItemsYaml___aboutSection___aboutImage___children',
+  ChildCaseStudyItemsYamlAboutSectionPractice = 'childCaseStudyItemsYaml___aboutSection___practice',
+  ChildCaseStudyItemsYamlAboutSectionBiome = 'childCaseStudyItemsYaml___aboutSection___biome',
+  ChildCaseStudyItemsYamlAboutSectionRegion = 'childCaseStudyItemsYaml___aboutSection___region',
+  ChildCaseStudyItemsYamlAboutSectionLineRotate = 'childCaseStudyItemsYaml___aboutSection___lineRotate',
+  ChildCaseStudyItemsYamlAboutSectionLineWidth = 'childCaseStudyItemsYaml___aboutSection___lineWidth',
+  ChildCaseStudyItemsYamlContextSectionImageSourceInstanceName = 'childCaseStudyItemsYaml___contextSection___image___sourceInstanceName',
+  ChildCaseStudyItemsYamlContextSectionImageAbsolutePath = 'childCaseStudyItemsYaml___contextSection___image___absolutePath',
+  ChildCaseStudyItemsYamlContextSectionImageRelativePath = 'childCaseStudyItemsYaml___contextSection___image___relativePath',
+  ChildCaseStudyItemsYamlContextSectionImageExtension = 'childCaseStudyItemsYaml___contextSection___image___extension',
+  ChildCaseStudyItemsYamlContextSectionImageSize = 'childCaseStudyItemsYaml___contextSection___image___size',
+  ChildCaseStudyItemsYamlContextSectionImagePrettySize = 'childCaseStudyItemsYaml___contextSection___image___prettySize',
+  ChildCaseStudyItemsYamlContextSectionImageModifiedTime = 'childCaseStudyItemsYaml___contextSection___image___modifiedTime',
+  ChildCaseStudyItemsYamlContextSectionImageAccessTime = 'childCaseStudyItemsYaml___contextSection___image___accessTime',
+  ChildCaseStudyItemsYamlContextSectionImageChangeTime = 'childCaseStudyItemsYaml___contextSection___image___changeTime',
+  ChildCaseStudyItemsYamlContextSectionImageBirthTime = 'childCaseStudyItemsYaml___contextSection___image___birthTime',
+  ChildCaseStudyItemsYamlContextSectionImageRoot = 'childCaseStudyItemsYaml___contextSection___image___root',
+  ChildCaseStudyItemsYamlContextSectionImageDir = 'childCaseStudyItemsYaml___contextSection___image___dir',
+  ChildCaseStudyItemsYamlContextSectionImageBase = 'childCaseStudyItemsYaml___contextSection___image___base',
+  ChildCaseStudyItemsYamlContextSectionImageExt = 'childCaseStudyItemsYaml___contextSection___image___ext',
+  ChildCaseStudyItemsYamlContextSectionImageName = 'childCaseStudyItemsYaml___contextSection___image___name',
+  ChildCaseStudyItemsYamlContextSectionImageRelativeDirectory = 'childCaseStudyItemsYaml___contextSection___image___relativeDirectory',
+  ChildCaseStudyItemsYamlContextSectionImageDev = 'childCaseStudyItemsYaml___contextSection___image___dev',
+  ChildCaseStudyItemsYamlContextSectionImageMode = 'childCaseStudyItemsYaml___contextSection___image___mode',
+  ChildCaseStudyItemsYamlContextSectionImageNlink = 'childCaseStudyItemsYaml___contextSection___image___nlink',
+  ChildCaseStudyItemsYamlContextSectionImageUid = 'childCaseStudyItemsYaml___contextSection___image___uid',
+  ChildCaseStudyItemsYamlContextSectionImageGid = 'childCaseStudyItemsYaml___contextSection___image___gid',
+  ChildCaseStudyItemsYamlContextSectionImageRdev = 'childCaseStudyItemsYaml___contextSection___image___rdev',
+  ChildCaseStudyItemsYamlContextSectionImageIno = 'childCaseStudyItemsYaml___contextSection___image___ino',
+  ChildCaseStudyItemsYamlContextSectionImageAtimeMs = 'childCaseStudyItemsYaml___contextSection___image___atimeMs',
+  ChildCaseStudyItemsYamlContextSectionImageMtimeMs = 'childCaseStudyItemsYaml___contextSection___image___mtimeMs',
+  ChildCaseStudyItemsYamlContextSectionImageCtimeMs = 'childCaseStudyItemsYaml___contextSection___image___ctimeMs',
+  ChildCaseStudyItemsYamlContextSectionImageAtime = 'childCaseStudyItemsYaml___contextSection___image___atime',
+  ChildCaseStudyItemsYamlContextSectionImageMtime = 'childCaseStudyItemsYaml___contextSection___image___mtime',
+  ChildCaseStudyItemsYamlContextSectionImageCtime = 'childCaseStudyItemsYaml___contextSection___image___ctime',
+  ChildCaseStudyItemsYamlContextSectionImageBirthtime = 'childCaseStudyItemsYaml___contextSection___image___birthtime',
+  ChildCaseStudyItemsYamlContextSectionImageBirthtimeMs = 'childCaseStudyItemsYaml___contextSection___image___birthtimeMs',
+  ChildCaseStudyItemsYamlContextSectionImageBlksize = 'childCaseStudyItemsYaml___contextSection___image___blksize',
+  ChildCaseStudyItemsYamlContextSectionImageBlocks = 'childCaseStudyItemsYaml___contextSection___image___blocks',
+  ChildCaseStudyItemsYamlContextSectionImagePublicUrl = 'childCaseStudyItemsYaml___contextSection___image___publicURL',
+  ChildCaseStudyItemsYamlContextSectionImageId = 'childCaseStudyItemsYaml___contextSection___image___id',
+  ChildCaseStudyItemsYamlContextSectionImageChildren = 'childCaseStudyItemsYaml___contextSection___image___children',
+  ChildCaseStudyItemsYamlContextSectionDescription = 'childCaseStudyItemsYaml___contextSection___description',
+  ChildCaseStudyItemsYamlContextSectionChallenges = 'childCaseStudyItemsYaml___contextSection___challenges',
+  ChildCaseStudyItemsYamlContextSectionChallengesText = 'childCaseStudyItemsYaml___contextSection___challenges___text',
+  ChildCaseStudyItemsYamlApproachSectionDetails = 'childCaseStudyItemsYaml___approachSection___details',
+  ChildCaseStudyItemsYamlApproachSectionResults = 'childCaseStudyItemsYaml___approachSection___results',
+  ChildCaseStudyItemsYamlApproachSectionNext = 'childCaseStudyItemsYaml___approachSection___next',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageSourceInstanceName = 'childCaseStudyItemsYaml___approachSection___figureImage___sourceInstanceName',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageAbsolutePath = 'childCaseStudyItemsYaml___approachSection___figureImage___absolutePath',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageRelativePath = 'childCaseStudyItemsYaml___approachSection___figureImage___relativePath',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageExtension = 'childCaseStudyItemsYaml___approachSection___figureImage___extension',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageSize = 'childCaseStudyItemsYaml___approachSection___figureImage___size',
+  ChildCaseStudyItemsYamlApproachSectionFigureImagePrettySize = 'childCaseStudyItemsYaml___approachSection___figureImage___prettySize',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageModifiedTime = 'childCaseStudyItemsYaml___approachSection___figureImage___modifiedTime',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageAccessTime = 'childCaseStudyItemsYaml___approachSection___figureImage___accessTime',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageChangeTime = 'childCaseStudyItemsYaml___approachSection___figureImage___changeTime',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageBirthTime = 'childCaseStudyItemsYaml___approachSection___figureImage___birthTime',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageRoot = 'childCaseStudyItemsYaml___approachSection___figureImage___root',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageDir = 'childCaseStudyItemsYaml___approachSection___figureImage___dir',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageBase = 'childCaseStudyItemsYaml___approachSection___figureImage___base',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageExt = 'childCaseStudyItemsYaml___approachSection___figureImage___ext',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageName = 'childCaseStudyItemsYaml___approachSection___figureImage___name',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageRelativeDirectory = 'childCaseStudyItemsYaml___approachSection___figureImage___relativeDirectory',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageDev = 'childCaseStudyItemsYaml___approachSection___figureImage___dev',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageMode = 'childCaseStudyItemsYaml___approachSection___figureImage___mode',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageNlink = 'childCaseStudyItemsYaml___approachSection___figureImage___nlink',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageUid = 'childCaseStudyItemsYaml___approachSection___figureImage___uid',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageGid = 'childCaseStudyItemsYaml___approachSection___figureImage___gid',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageRdev = 'childCaseStudyItemsYaml___approachSection___figureImage___rdev',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageIno = 'childCaseStudyItemsYaml___approachSection___figureImage___ino',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageAtimeMs = 'childCaseStudyItemsYaml___approachSection___figureImage___atimeMs',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageMtimeMs = 'childCaseStudyItemsYaml___approachSection___figureImage___mtimeMs',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageCtimeMs = 'childCaseStudyItemsYaml___approachSection___figureImage___ctimeMs',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageAtime = 'childCaseStudyItemsYaml___approachSection___figureImage___atime',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageMtime = 'childCaseStudyItemsYaml___approachSection___figureImage___mtime',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageCtime = 'childCaseStudyItemsYaml___approachSection___figureImage___ctime',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageBirthtime = 'childCaseStudyItemsYaml___approachSection___figureImage___birthtime',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageBirthtimeMs = 'childCaseStudyItemsYaml___approachSection___figureImage___birthtimeMs',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageBlksize = 'childCaseStudyItemsYaml___approachSection___figureImage___blksize',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageBlocks = 'childCaseStudyItemsYaml___approachSection___figureImage___blocks',
+  ChildCaseStudyItemsYamlApproachSectionFigureImagePublicUrl = 'childCaseStudyItemsYaml___approachSection___figureImage___publicURL',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageId = 'childCaseStudyItemsYaml___approachSection___figureImage___id',
+  ChildCaseStudyItemsYamlApproachSectionFigureImageChildren = 'childCaseStudyItemsYaml___approachSection___figureImage___children',
+  ChildCaseStudyItemsYamlApproachSectionFigureTitle = 'childCaseStudyItemsYaml___approachSection___figureTitle',
+  ChildCaseStudyItemsYamlApproachSectionDescription = 'childCaseStudyItemsYaml___approachSection___description',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundSourceInstanceName = 'childCaseStudyItemsYaml___figureSection___background___sourceInstanceName',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundAbsolutePath = 'childCaseStudyItemsYaml___figureSection___background___absolutePath',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundRelativePath = 'childCaseStudyItemsYaml___figureSection___background___relativePath',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundExtension = 'childCaseStudyItemsYaml___figureSection___background___extension',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundSize = 'childCaseStudyItemsYaml___figureSection___background___size',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundPrettySize = 'childCaseStudyItemsYaml___figureSection___background___prettySize',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundModifiedTime = 'childCaseStudyItemsYaml___figureSection___background___modifiedTime',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundAccessTime = 'childCaseStudyItemsYaml___figureSection___background___accessTime',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundChangeTime = 'childCaseStudyItemsYaml___figureSection___background___changeTime',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundBirthTime = 'childCaseStudyItemsYaml___figureSection___background___birthTime',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundRoot = 'childCaseStudyItemsYaml___figureSection___background___root',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundDir = 'childCaseStudyItemsYaml___figureSection___background___dir',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundBase = 'childCaseStudyItemsYaml___figureSection___background___base',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundExt = 'childCaseStudyItemsYaml___figureSection___background___ext',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundName = 'childCaseStudyItemsYaml___figureSection___background___name',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundRelativeDirectory = 'childCaseStudyItemsYaml___figureSection___background___relativeDirectory',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundDev = 'childCaseStudyItemsYaml___figureSection___background___dev',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundMode = 'childCaseStudyItemsYaml___figureSection___background___mode',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundNlink = 'childCaseStudyItemsYaml___figureSection___background___nlink',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundUid = 'childCaseStudyItemsYaml___figureSection___background___uid',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundGid = 'childCaseStudyItemsYaml___figureSection___background___gid',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundRdev = 'childCaseStudyItemsYaml___figureSection___background___rdev',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundIno = 'childCaseStudyItemsYaml___figureSection___background___ino',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundAtimeMs = 'childCaseStudyItemsYaml___figureSection___background___atimeMs',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundMtimeMs = 'childCaseStudyItemsYaml___figureSection___background___mtimeMs',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundCtimeMs = 'childCaseStudyItemsYaml___figureSection___background___ctimeMs',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundAtime = 'childCaseStudyItemsYaml___figureSection___background___atime',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundMtime = 'childCaseStudyItemsYaml___figureSection___background___mtime',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundCtime = 'childCaseStudyItemsYaml___figureSection___background___ctime',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundBirthtime = 'childCaseStudyItemsYaml___figureSection___background___birthtime',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundBirthtimeMs = 'childCaseStudyItemsYaml___figureSection___background___birthtimeMs',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundBlksize = 'childCaseStudyItemsYaml___figureSection___background___blksize',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundBlocks = 'childCaseStudyItemsYaml___figureSection___background___blocks',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundPublicUrl = 'childCaseStudyItemsYaml___figureSection___background___publicURL',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundId = 'childCaseStudyItemsYaml___figureSection___background___id',
+  ChildCaseStudyItemsYamlFigureSectionBackgroundChildren = 'childCaseStudyItemsYaml___figureSection___background___children',
+  ChildCaseStudyItemsYamlFigureSectionFigures = 'childCaseStudyItemsYaml___figureSection___figures',
+  ChildCaseStudyItemsYamlFigureSectionFiguresTitle = 'childCaseStudyItemsYaml___figureSection___figures___title',
+  ChildCaseStudyItemsYamlFigureSectionFiguresSpacing = 'childCaseStudyItemsYaml___figureSection___figures___spacing',
+  ChildCaseStudyItemsYamlFigureSectionTitle = 'childCaseStudyItemsYaml___figureSection___title',
+  ChildCaseStudyItemsYamlFundingSectionImageSourceInstanceName = 'childCaseStudyItemsYaml___fundingSection___image___sourceInstanceName',
+  ChildCaseStudyItemsYamlFundingSectionImageAbsolutePath = 'childCaseStudyItemsYaml___fundingSection___image___absolutePath',
+  ChildCaseStudyItemsYamlFundingSectionImageRelativePath = 'childCaseStudyItemsYaml___fundingSection___image___relativePath',
+  ChildCaseStudyItemsYamlFundingSectionImageExtension = 'childCaseStudyItemsYaml___fundingSection___image___extension',
+  ChildCaseStudyItemsYamlFundingSectionImageSize = 'childCaseStudyItemsYaml___fundingSection___image___size',
+  ChildCaseStudyItemsYamlFundingSectionImagePrettySize = 'childCaseStudyItemsYaml___fundingSection___image___prettySize',
+  ChildCaseStudyItemsYamlFundingSectionImageModifiedTime = 'childCaseStudyItemsYaml___fundingSection___image___modifiedTime',
+  ChildCaseStudyItemsYamlFundingSectionImageAccessTime = 'childCaseStudyItemsYaml___fundingSection___image___accessTime',
+  ChildCaseStudyItemsYamlFundingSectionImageChangeTime = 'childCaseStudyItemsYaml___fundingSection___image___changeTime',
+  ChildCaseStudyItemsYamlFundingSectionImageBirthTime = 'childCaseStudyItemsYaml___fundingSection___image___birthTime',
+  ChildCaseStudyItemsYamlFundingSectionImageRoot = 'childCaseStudyItemsYaml___fundingSection___image___root',
+  ChildCaseStudyItemsYamlFundingSectionImageDir = 'childCaseStudyItemsYaml___fundingSection___image___dir',
+  ChildCaseStudyItemsYamlFundingSectionImageBase = 'childCaseStudyItemsYaml___fundingSection___image___base',
+  ChildCaseStudyItemsYamlFundingSectionImageExt = 'childCaseStudyItemsYaml___fundingSection___image___ext',
+  ChildCaseStudyItemsYamlFundingSectionImageName = 'childCaseStudyItemsYaml___fundingSection___image___name',
+  ChildCaseStudyItemsYamlFundingSectionImageRelativeDirectory = 'childCaseStudyItemsYaml___fundingSection___image___relativeDirectory',
+  ChildCaseStudyItemsYamlFundingSectionImageDev = 'childCaseStudyItemsYaml___fundingSection___image___dev',
+  ChildCaseStudyItemsYamlFundingSectionImageMode = 'childCaseStudyItemsYaml___fundingSection___image___mode',
+  ChildCaseStudyItemsYamlFundingSectionImageNlink = 'childCaseStudyItemsYaml___fundingSection___image___nlink',
+  ChildCaseStudyItemsYamlFundingSectionImageUid = 'childCaseStudyItemsYaml___fundingSection___image___uid',
+  ChildCaseStudyItemsYamlFundingSectionImageGid = 'childCaseStudyItemsYaml___fundingSection___image___gid',
+  ChildCaseStudyItemsYamlFundingSectionImageRdev = 'childCaseStudyItemsYaml___fundingSection___image___rdev',
+  ChildCaseStudyItemsYamlFundingSectionImageIno = 'childCaseStudyItemsYaml___fundingSection___image___ino',
+  ChildCaseStudyItemsYamlFundingSectionImageAtimeMs = 'childCaseStudyItemsYaml___fundingSection___image___atimeMs',
+  ChildCaseStudyItemsYamlFundingSectionImageMtimeMs = 'childCaseStudyItemsYaml___fundingSection___image___mtimeMs',
+  ChildCaseStudyItemsYamlFundingSectionImageCtimeMs = 'childCaseStudyItemsYaml___fundingSection___image___ctimeMs',
+  ChildCaseStudyItemsYamlFundingSectionImageAtime = 'childCaseStudyItemsYaml___fundingSection___image___atime',
+  ChildCaseStudyItemsYamlFundingSectionImageMtime = 'childCaseStudyItemsYaml___fundingSection___image___mtime',
+  ChildCaseStudyItemsYamlFundingSectionImageCtime = 'childCaseStudyItemsYaml___fundingSection___image___ctime',
+  ChildCaseStudyItemsYamlFundingSectionImageBirthtime = 'childCaseStudyItemsYaml___fundingSection___image___birthtime',
+  ChildCaseStudyItemsYamlFundingSectionImageBirthtimeMs = 'childCaseStudyItemsYaml___fundingSection___image___birthtimeMs',
+  ChildCaseStudyItemsYamlFundingSectionImageBlksize = 'childCaseStudyItemsYaml___fundingSection___image___blksize',
+  ChildCaseStudyItemsYamlFundingSectionImageBlocks = 'childCaseStudyItemsYaml___fundingSection___image___blocks',
+  ChildCaseStudyItemsYamlFundingSectionImagePublicUrl = 'childCaseStudyItemsYaml___fundingSection___image___publicURL',
+  ChildCaseStudyItemsYamlFundingSectionImageId = 'childCaseStudyItemsYaml___fundingSection___image___id',
+  ChildCaseStudyItemsYamlFundingSectionImageChildren = 'childCaseStudyItemsYaml___fundingSection___image___children',
+  ChildCaseStudyItemsYamlFundingSectionDetails = 'childCaseStudyItemsYaml___fundingSection___details',
+  ChildCaseStudyItemsYamlFundingSectionResults = 'childCaseStudyItemsYaml___fundingSection___results',
+  ChildCaseStudyItemsYamlFundingSectionNext = 'childCaseStudyItemsYaml___fundingSection___next',
+  ChildCaseStudyItemsYamlConclusionSectionDescription = 'childCaseStudyItemsYaml___conclusionSection___description',
+  ChildCaseStudyItemsYamlConclusionSectionImages = 'childCaseStudyItemsYaml___conclusionSection___images',
+  ChildCaseStudyItemsYamlConclusionSectionImagesTitle = 'childCaseStudyItemsYaml___conclusionSection___images___title',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundSourceInstanceName = 'childCaseStudyItemsYaml___bottomSection___background___sourceInstanceName',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundAbsolutePath = 'childCaseStudyItemsYaml___bottomSection___background___absolutePath',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundRelativePath = 'childCaseStudyItemsYaml___bottomSection___background___relativePath',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundExtension = 'childCaseStudyItemsYaml___bottomSection___background___extension',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundSize = 'childCaseStudyItemsYaml___bottomSection___background___size',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundPrettySize = 'childCaseStudyItemsYaml___bottomSection___background___prettySize',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundModifiedTime = 'childCaseStudyItemsYaml___bottomSection___background___modifiedTime',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundAccessTime = 'childCaseStudyItemsYaml___bottomSection___background___accessTime',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundChangeTime = 'childCaseStudyItemsYaml___bottomSection___background___changeTime',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundBirthTime = 'childCaseStudyItemsYaml___bottomSection___background___birthTime',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundRoot = 'childCaseStudyItemsYaml___bottomSection___background___root',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundDir = 'childCaseStudyItemsYaml___bottomSection___background___dir',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundBase = 'childCaseStudyItemsYaml___bottomSection___background___base',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundExt = 'childCaseStudyItemsYaml___bottomSection___background___ext',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundName = 'childCaseStudyItemsYaml___bottomSection___background___name',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundRelativeDirectory = 'childCaseStudyItemsYaml___bottomSection___background___relativeDirectory',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundDev = 'childCaseStudyItemsYaml___bottomSection___background___dev',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundMode = 'childCaseStudyItemsYaml___bottomSection___background___mode',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundNlink = 'childCaseStudyItemsYaml___bottomSection___background___nlink',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundUid = 'childCaseStudyItemsYaml___bottomSection___background___uid',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundGid = 'childCaseStudyItemsYaml___bottomSection___background___gid',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundRdev = 'childCaseStudyItemsYaml___bottomSection___background___rdev',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundIno = 'childCaseStudyItemsYaml___bottomSection___background___ino',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundAtimeMs = 'childCaseStudyItemsYaml___bottomSection___background___atimeMs',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundMtimeMs = 'childCaseStudyItemsYaml___bottomSection___background___mtimeMs',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundCtimeMs = 'childCaseStudyItemsYaml___bottomSection___background___ctimeMs',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundAtime = 'childCaseStudyItemsYaml___bottomSection___background___atime',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundMtime = 'childCaseStudyItemsYaml___bottomSection___background___mtime',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundCtime = 'childCaseStudyItemsYaml___bottomSection___background___ctime',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundBirthtime = 'childCaseStudyItemsYaml___bottomSection___background___birthtime',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundBirthtimeMs = 'childCaseStudyItemsYaml___bottomSection___background___birthtimeMs',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundBlksize = 'childCaseStudyItemsYaml___bottomSection___background___blksize',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundBlocks = 'childCaseStudyItemsYaml___bottomSection___background___blocks',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundPublicUrl = 'childCaseStudyItemsYaml___bottomSection___background___publicURL',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundId = 'childCaseStudyItemsYaml___bottomSection___background___id',
+  ChildCaseStudyItemsYamlBottomSectionBackgroundChildren = 'childCaseStudyItemsYaml___bottomSection___background___children',
+  ChildCaseStudyItemsYamlBottomSectionQuote = 'childCaseStudyItemsYaml___bottomSection___quote',
+  ChildCaseStudyItemsYamlBottomSectionPersonName = 'childCaseStudyItemsYaml___bottomSection___person___name',
+  ChildCaseStudyItemsYamlBottomSectionPersonRole = 'childCaseStudyItemsYaml___bottomSection___person___role',
+  ChildCaseStudyItemsYamlFileAbsolutePath = 'childCaseStudyItemsYaml___fileAbsolutePath',
   ChildDevelopersYamlId = 'childDevelopersYaml___id',
   ChildDevelopersYamlParentId = 'childDevelopersYaml___parent___id',
   ChildDevelopersYamlParentParentId = 'childDevelopersYaml___parent___parent___id',
@@ -5835,701 +6352,74 @@ export enum FileFieldsEnum {
   ChildDevelopersYamlTestnetSectionDescription = 'childDevelopersYaml___testnetSection___description',
   ChildDevelopersYamlTestnetSectionButtonText = 'childDevelopersYaml___testnetSection___buttonText',
   ChildDevelopersYamlFileAbsolutePath = 'childDevelopersYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlId = 'childCaseStudyItemsYaml___id',
-  ChildCaseStudyItemsYamlParentId = 'childCaseStudyItemsYaml___parent___id',
-  ChildCaseStudyItemsYamlParentParentId = 'childCaseStudyItemsYaml___parent___parent___id',
-  ChildCaseStudyItemsYamlParentParentChildren = 'childCaseStudyItemsYaml___parent___parent___children',
-  ChildCaseStudyItemsYamlParentChildren = 'childCaseStudyItemsYaml___parent___children',
-  ChildCaseStudyItemsYamlParentChildrenId = 'childCaseStudyItemsYaml___parent___children___id',
-  ChildCaseStudyItemsYamlParentChildrenChildren = 'childCaseStudyItemsYaml___parent___children___children',
-  ChildCaseStudyItemsYamlParentInternalContent = 'childCaseStudyItemsYaml___parent___internal___content',
-  ChildCaseStudyItemsYamlParentInternalContentDigest = 'childCaseStudyItemsYaml___parent___internal___contentDigest',
-  ChildCaseStudyItemsYamlParentInternalDescription = 'childCaseStudyItemsYaml___parent___internal___description',
-  ChildCaseStudyItemsYamlParentInternalFieldOwners = 'childCaseStudyItemsYaml___parent___internal___fieldOwners',
-  ChildCaseStudyItemsYamlParentInternalIgnoreType = 'childCaseStudyItemsYaml___parent___internal___ignoreType',
-  ChildCaseStudyItemsYamlParentInternalMediaType = 'childCaseStudyItemsYaml___parent___internal___mediaType',
-  ChildCaseStudyItemsYamlParentInternalOwner = 'childCaseStudyItemsYaml___parent___internal___owner',
-  ChildCaseStudyItemsYamlParentInternalType = 'childCaseStudyItemsYaml___parent___internal___type',
-  ChildCaseStudyItemsYamlChildren = 'childCaseStudyItemsYaml___children',
-  ChildCaseStudyItemsYamlChildrenId = 'childCaseStudyItemsYaml___children___id',
-  ChildCaseStudyItemsYamlChildrenParentId = 'childCaseStudyItemsYaml___children___parent___id',
-  ChildCaseStudyItemsYamlChildrenParentChildren = 'childCaseStudyItemsYaml___children___parent___children',
-  ChildCaseStudyItemsYamlChildrenChildren = 'childCaseStudyItemsYaml___children___children',
-  ChildCaseStudyItemsYamlChildrenChildrenId = 'childCaseStudyItemsYaml___children___children___id',
-  ChildCaseStudyItemsYamlChildrenChildrenChildren = 'childCaseStudyItemsYaml___children___children___children',
-  ChildCaseStudyItemsYamlChildrenInternalContent = 'childCaseStudyItemsYaml___children___internal___content',
-  ChildCaseStudyItemsYamlChildrenInternalContentDigest = 'childCaseStudyItemsYaml___children___internal___contentDigest',
-  ChildCaseStudyItemsYamlChildrenInternalDescription = 'childCaseStudyItemsYaml___children___internal___description',
-  ChildCaseStudyItemsYamlChildrenInternalFieldOwners = 'childCaseStudyItemsYaml___children___internal___fieldOwners',
-  ChildCaseStudyItemsYamlChildrenInternalIgnoreType = 'childCaseStudyItemsYaml___children___internal___ignoreType',
-  ChildCaseStudyItemsYamlChildrenInternalMediaType = 'childCaseStudyItemsYaml___children___internal___mediaType',
-  ChildCaseStudyItemsYamlChildrenInternalOwner = 'childCaseStudyItemsYaml___children___internal___owner',
-  ChildCaseStudyItemsYamlChildrenInternalType = 'childCaseStudyItemsYaml___children___internal___type',
-  ChildCaseStudyItemsYamlInternalContent = 'childCaseStudyItemsYaml___internal___content',
-  ChildCaseStudyItemsYamlInternalContentDigest = 'childCaseStudyItemsYaml___internal___contentDigest',
-  ChildCaseStudyItemsYamlInternalDescription = 'childCaseStudyItemsYaml___internal___description',
-  ChildCaseStudyItemsYamlInternalFieldOwners = 'childCaseStudyItemsYaml___internal___fieldOwners',
-  ChildCaseStudyItemsYamlInternalIgnoreType = 'childCaseStudyItemsYaml___internal___ignoreType',
-  ChildCaseStudyItemsYamlInternalMediaType = 'childCaseStudyItemsYaml___internal___mediaType',
-  ChildCaseStudyItemsYamlInternalOwner = 'childCaseStudyItemsYaml___internal___owner',
-  ChildCaseStudyItemsYamlInternalType = 'childCaseStudyItemsYaml___internal___type',
-  ChildCaseStudyItemsYamlName = 'childCaseStudyItemsYaml___name',
-  ChildCaseStudyItemsYamlSlug = 'childCaseStudyItemsYaml___slug',
-  ChildCaseStudyItemsYamlCardImageSourceInstanceName = 'childCaseStudyItemsYaml___cardImage___sourceInstanceName',
-  ChildCaseStudyItemsYamlCardImageAbsolutePath = 'childCaseStudyItemsYaml___cardImage___absolutePath',
-  ChildCaseStudyItemsYamlCardImageRelativePath = 'childCaseStudyItemsYaml___cardImage___relativePath',
-  ChildCaseStudyItemsYamlCardImageExtension = 'childCaseStudyItemsYaml___cardImage___extension',
-  ChildCaseStudyItemsYamlCardImageSize = 'childCaseStudyItemsYaml___cardImage___size',
-  ChildCaseStudyItemsYamlCardImagePrettySize = 'childCaseStudyItemsYaml___cardImage___prettySize',
-  ChildCaseStudyItemsYamlCardImageModifiedTime = 'childCaseStudyItemsYaml___cardImage___modifiedTime',
-  ChildCaseStudyItemsYamlCardImageAccessTime = 'childCaseStudyItemsYaml___cardImage___accessTime',
-  ChildCaseStudyItemsYamlCardImageChangeTime = 'childCaseStudyItemsYaml___cardImage___changeTime',
-  ChildCaseStudyItemsYamlCardImageBirthTime = 'childCaseStudyItemsYaml___cardImage___birthTime',
-  ChildCaseStudyItemsYamlCardImageRoot = 'childCaseStudyItemsYaml___cardImage___root',
-  ChildCaseStudyItemsYamlCardImageDir = 'childCaseStudyItemsYaml___cardImage___dir',
-  ChildCaseStudyItemsYamlCardImageBase = 'childCaseStudyItemsYaml___cardImage___base',
-  ChildCaseStudyItemsYamlCardImageExt = 'childCaseStudyItemsYaml___cardImage___ext',
-  ChildCaseStudyItemsYamlCardImageName = 'childCaseStudyItemsYaml___cardImage___name',
-  ChildCaseStudyItemsYamlCardImageRelativeDirectory = 'childCaseStudyItemsYaml___cardImage___relativeDirectory',
-  ChildCaseStudyItemsYamlCardImageDev = 'childCaseStudyItemsYaml___cardImage___dev',
-  ChildCaseStudyItemsYamlCardImageMode = 'childCaseStudyItemsYaml___cardImage___mode',
-  ChildCaseStudyItemsYamlCardImageNlink = 'childCaseStudyItemsYaml___cardImage___nlink',
-  ChildCaseStudyItemsYamlCardImageUid = 'childCaseStudyItemsYaml___cardImage___uid',
-  ChildCaseStudyItemsYamlCardImageGid = 'childCaseStudyItemsYaml___cardImage___gid',
-  ChildCaseStudyItemsYamlCardImageRdev = 'childCaseStudyItemsYaml___cardImage___rdev',
-  ChildCaseStudyItemsYamlCardImageIno = 'childCaseStudyItemsYaml___cardImage___ino',
-  ChildCaseStudyItemsYamlCardImageAtimeMs = 'childCaseStudyItemsYaml___cardImage___atimeMs',
-  ChildCaseStudyItemsYamlCardImageMtimeMs = 'childCaseStudyItemsYaml___cardImage___mtimeMs',
-  ChildCaseStudyItemsYamlCardImageCtimeMs = 'childCaseStudyItemsYaml___cardImage___ctimeMs',
-  ChildCaseStudyItemsYamlCardImageAtime = 'childCaseStudyItemsYaml___cardImage___atime',
-  ChildCaseStudyItemsYamlCardImageMtime = 'childCaseStudyItemsYaml___cardImage___mtime',
-  ChildCaseStudyItemsYamlCardImageCtime = 'childCaseStudyItemsYaml___cardImage___ctime',
-  ChildCaseStudyItemsYamlCardImageBirthtime = 'childCaseStudyItemsYaml___cardImage___birthtime',
-  ChildCaseStudyItemsYamlCardImageBirthtimeMs = 'childCaseStudyItemsYaml___cardImage___birthtimeMs',
-  ChildCaseStudyItemsYamlCardImageBlksize = 'childCaseStudyItemsYaml___cardImage___blksize',
-  ChildCaseStudyItemsYamlCardImageBlocks = 'childCaseStudyItemsYaml___cardImage___blocks',
-  ChildCaseStudyItemsYamlCardImagePublicUrl = 'childCaseStudyItemsYaml___cardImage___publicURL',
-  ChildCaseStudyItemsYamlCardImageChildImageSharpId = 'childCaseStudyItemsYaml___cardImage___childImageSharp___id',
-  ChildCaseStudyItemsYamlCardImageChildImageSharpChildren = 'childCaseStudyItemsYaml___cardImage___childImageSharp___children',
-  ChildCaseStudyItemsYamlCardImageId = 'childCaseStudyItemsYaml___cardImage___id',
-  ChildCaseStudyItemsYamlCardImageParentId = 'childCaseStudyItemsYaml___cardImage___parent___id',
-  ChildCaseStudyItemsYamlCardImageParentChildren = 'childCaseStudyItemsYaml___cardImage___parent___children',
-  ChildCaseStudyItemsYamlCardImageChildren = 'childCaseStudyItemsYaml___cardImage___children',
-  ChildCaseStudyItemsYamlCardImageChildrenId = 'childCaseStudyItemsYaml___cardImage___children___id',
-  ChildCaseStudyItemsYamlCardImageChildrenChildren = 'childCaseStudyItemsYaml___cardImage___children___children',
-  ChildCaseStudyItemsYamlCardImageInternalContent = 'childCaseStudyItemsYaml___cardImage___internal___content',
-  ChildCaseStudyItemsYamlCardImageInternalContentDigest = 'childCaseStudyItemsYaml___cardImage___internal___contentDigest',
-  ChildCaseStudyItemsYamlCardImageInternalDescription = 'childCaseStudyItemsYaml___cardImage___internal___description',
-  ChildCaseStudyItemsYamlCardImageInternalFieldOwners = 'childCaseStudyItemsYaml___cardImage___internal___fieldOwners',
-  ChildCaseStudyItemsYamlCardImageInternalIgnoreType = 'childCaseStudyItemsYaml___cardImage___internal___ignoreType',
-  ChildCaseStudyItemsYamlCardImageInternalMediaType = 'childCaseStudyItemsYaml___cardImage___internal___mediaType',
-  ChildCaseStudyItemsYamlCardImageInternalOwner = 'childCaseStudyItemsYaml___cardImage___internal___owner',
-  ChildCaseStudyItemsYamlCardImageInternalType = 'childCaseStudyItemsYaml___cardImage___internal___type',
-  ChildCaseStudyItemsYamlCardImageChildCommunityYamlId = 'childCaseStudyItemsYaml___cardImage___childCommunityYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildCommunityYamlChildren = 'childCaseStudyItemsYaml___cardImage___childCommunityYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildCommunityYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childCommunityYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildCaseStudiesYamlId = 'childCaseStudyItemsYaml___cardImage___childCaseStudiesYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildCaseStudiesYamlChildren = 'childCaseStudyItemsYaml___cardImage___childCaseStudiesYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildCaseStudiesYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childCaseStudiesYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildDevelopersYamlId = 'childCaseStudyItemsYaml___cardImage___childDevelopersYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildDevelopersYamlChildren = 'childCaseStudyItemsYaml___cardImage___childDevelopersYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildDevelopersYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childDevelopersYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlId = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlChildren = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlName = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___name',
-  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlSlug = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___slug',
-  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlDescription = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___description',
-  ChildCaseStudyItemsYamlCardImageChildCaseStudyItemsYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childCaseStudyItemsYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildHomeYamlId = 'childCaseStudyItemsYaml___cardImage___childHomeYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildHomeYamlChildren = 'childCaseStudyItemsYaml___cardImage___childHomeYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildHomeYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childHomeYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildContactYamlId = 'childCaseStudyItemsYaml___cardImage___childContactYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildContactYamlChildren = 'childCaseStudyItemsYaml___cardImage___childContactYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildContactYamlHeader = 'childCaseStudyItemsYaml___cardImage___childContactYaml___header',
-  ChildCaseStudyItemsYamlCardImageChildContactYamlBody = 'childCaseStudyItemsYaml___cardImage___childContactYaml___body',
-  ChildCaseStudyItemsYamlCardImageChildContactYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childContactYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildFaqYamlId = 'childCaseStudyItemsYaml___cardImage___childFaqYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildFaqYamlChildren = 'childCaseStudyItemsYaml___cardImage___childFaqYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildFaqYamlCategories = 'childCaseStudyItemsYaml___cardImage___childFaqYaml___categories',
-  ChildCaseStudyItemsYamlCardImageChildFaqYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childFaqYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildInvestYamlId = 'childCaseStudyItemsYaml___cardImage___childInvestYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildInvestYamlChildren = 'childCaseStudyItemsYaml___cardImage___childInvestYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildInvestYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childInvestYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildMainnetYamlId = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildMainnetYamlChildren = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildMainnetYamlLaunchDate = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___launchDate',
-  ChildCaseStudyItemsYamlCardImageChildMainnetYamlLivecastLink = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___livecastLink',
-  ChildCaseStudyItemsYamlCardImageChildMainnetYamlSeoDescription = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___seoDescription',
-  ChildCaseStudyItemsYamlCardImageChildMainnetYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childMainnetYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildPartnersYamlId = 'childCaseStudyItemsYaml___cardImage___childPartnersYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildPartnersYamlChildren = 'childCaseStudyItemsYaml___cardImage___childPartnersYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildPartnersYamlHeader = 'childCaseStudyItemsYaml___cardImage___childPartnersYaml___header',
-  ChildCaseStudyItemsYamlCardImageChildPartnersYamlPartnerLogos = 'childCaseStudyItemsYaml___cardImage___childPartnersYaml___partnerLogos',
-  ChildCaseStudyItemsYamlCardImageChildPartnersYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childPartnersYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildFundYamlId = 'childCaseStudyItemsYaml___cardImage___childFundYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildFundYamlChildren = 'childCaseStudyItemsYaml___cardImage___childFundYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildFundYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childFundYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildResourcesYamlId = 'childCaseStudyItemsYaml___cardImage___childResourcesYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildResourcesYamlChildren = 'childCaseStudyItemsYaml___cardImage___childResourcesYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildResourcesYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childResourcesYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildPressKitYamlId = 'childCaseStudyItemsYaml___cardImage___childPressKitYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildPressKitYamlChildren = 'childCaseStudyItemsYaml___cardImage___childPressKitYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildPressKitYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childPressKitYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildSharedYamlId = 'childCaseStudyItemsYaml___cardImage___childSharedYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildSharedYamlChildren = 'childCaseStudyItemsYaml___cardImage___childSharedYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildSharedYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childSharedYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildMediaYamlId = 'childCaseStudyItemsYaml___cardImage___childMediaYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildMediaYamlChildren = 'childCaseStudyItemsYaml___cardImage___childMediaYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildMediaYamlHeader = 'childCaseStudyItemsYaml___cardImage___childMediaYaml___header',
-  ChildCaseStudyItemsYamlCardImageChildMediaYamlCategories = 'childCaseStudyItemsYaml___cardImage___childMediaYaml___categories',
-  ChildCaseStudyItemsYamlCardImageChildMediaYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childMediaYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildScienceYamlId = 'childCaseStudyItemsYaml___cardImage___childScienceYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildScienceYamlChildren = 'childCaseStudyItemsYaml___cardImage___childScienceYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildScienceYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childScienceYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkId = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___id',
-  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkExcerpt = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___excerpt',
-  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkRawMarkdownBody = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___rawMarkdownBody',
-  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkHtml = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___html',
-  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkHtmlAst = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___htmlAst',
-  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkExcerptAst = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___excerptAst',
-  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkHeadings = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___headings',
-  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkTimeToRead = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___timeToRead',
-  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkTableOfContents = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___tableOfContents',
-  ChildCaseStudyItemsYamlCardImageChildMarkdownRemarkChildren = 'childCaseStudyItemsYaml___cardImage___childMarkdownRemark___children',
-  ChildCaseStudyItemsYamlCardImageChildTokenYamlId = 'childCaseStudyItemsYaml___cardImage___childTokenYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildTokenYamlChildren = 'childCaseStudyItemsYaml___cardImage___childTokenYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildTokenYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childTokenYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildTeamYamlId = 'childCaseStudyItemsYaml___cardImage___childTeamYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildTeamYamlChildren = 'childCaseStudyItemsYaml___cardImage___childTeamYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildTeamYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childTeamYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildWalletAddressRegistrationYamlId = 'childCaseStudyItemsYaml___cardImage___childWalletAddressRegistrationYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildWalletAddressRegistrationYamlChildren = 'childCaseStudyItemsYaml___cardImage___childWalletAddressRegistrationYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childWalletAddressRegistrationYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlCardImageChildValidatorsYamlId = 'childCaseStudyItemsYaml___cardImage___childValidatorsYaml___id',
-  ChildCaseStudyItemsYamlCardImageChildValidatorsYamlChildren = 'childCaseStudyItemsYaml___cardImage___childValidatorsYaml___children',
-  ChildCaseStudyItemsYamlCardImageChildValidatorsYamlFileAbsolutePath = 'childCaseStudyItemsYaml___cardImage___childValidatorsYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundSourceInstanceName = 'childCaseStudyItemsYaml___background___sourceInstanceName',
-  ChildCaseStudyItemsYamlBackgroundAbsolutePath = 'childCaseStudyItemsYaml___background___absolutePath',
-  ChildCaseStudyItemsYamlBackgroundRelativePath = 'childCaseStudyItemsYaml___background___relativePath',
-  ChildCaseStudyItemsYamlBackgroundExtension = 'childCaseStudyItemsYaml___background___extension',
-  ChildCaseStudyItemsYamlBackgroundSize = 'childCaseStudyItemsYaml___background___size',
-  ChildCaseStudyItemsYamlBackgroundPrettySize = 'childCaseStudyItemsYaml___background___prettySize',
-  ChildCaseStudyItemsYamlBackgroundModifiedTime = 'childCaseStudyItemsYaml___background___modifiedTime',
-  ChildCaseStudyItemsYamlBackgroundAccessTime = 'childCaseStudyItemsYaml___background___accessTime',
-  ChildCaseStudyItemsYamlBackgroundChangeTime = 'childCaseStudyItemsYaml___background___changeTime',
-  ChildCaseStudyItemsYamlBackgroundBirthTime = 'childCaseStudyItemsYaml___background___birthTime',
-  ChildCaseStudyItemsYamlBackgroundRoot = 'childCaseStudyItemsYaml___background___root',
-  ChildCaseStudyItemsYamlBackgroundDir = 'childCaseStudyItemsYaml___background___dir',
-  ChildCaseStudyItemsYamlBackgroundBase = 'childCaseStudyItemsYaml___background___base',
-  ChildCaseStudyItemsYamlBackgroundExt = 'childCaseStudyItemsYaml___background___ext',
-  ChildCaseStudyItemsYamlBackgroundName = 'childCaseStudyItemsYaml___background___name',
-  ChildCaseStudyItemsYamlBackgroundRelativeDirectory = 'childCaseStudyItemsYaml___background___relativeDirectory',
-  ChildCaseStudyItemsYamlBackgroundDev = 'childCaseStudyItemsYaml___background___dev',
-  ChildCaseStudyItemsYamlBackgroundMode = 'childCaseStudyItemsYaml___background___mode',
-  ChildCaseStudyItemsYamlBackgroundNlink = 'childCaseStudyItemsYaml___background___nlink',
-  ChildCaseStudyItemsYamlBackgroundUid = 'childCaseStudyItemsYaml___background___uid',
-  ChildCaseStudyItemsYamlBackgroundGid = 'childCaseStudyItemsYaml___background___gid',
-  ChildCaseStudyItemsYamlBackgroundRdev = 'childCaseStudyItemsYaml___background___rdev',
-  ChildCaseStudyItemsYamlBackgroundIno = 'childCaseStudyItemsYaml___background___ino',
-  ChildCaseStudyItemsYamlBackgroundAtimeMs = 'childCaseStudyItemsYaml___background___atimeMs',
-  ChildCaseStudyItemsYamlBackgroundMtimeMs = 'childCaseStudyItemsYaml___background___mtimeMs',
-  ChildCaseStudyItemsYamlBackgroundCtimeMs = 'childCaseStudyItemsYaml___background___ctimeMs',
-  ChildCaseStudyItemsYamlBackgroundAtime = 'childCaseStudyItemsYaml___background___atime',
-  ChildCaseStudyItemsYamlBackgroundMtime = 'childCaseStudyItemsYaml___background___mtime',
-  ChildCaseStudyItemsYamlBackgroundCtime = 'childCaseStudyItemsYaml___background___ctime',
-  ChildCaseStudyItemsYamlBackgroundBirthtime = 'childCaseStudyItemsYaml___background___birthtime',
-  ChildCaseStudyItemsYamlBackgroundBirthtimeMs = 'childCaseStudyItemsYaml___background___birthtimeMs',
-  ChildCaseStudyItemsYamlBackgroundBlksize = 'childCaseStudyItemsYaml___background___blksize',
-  ChildCaseStudyItemsYamlBackgroundBlocks = 'childCaseStudyItemsYaml___background___blocks',
-  ChildCaseStudyItemsYamlBackgroundPublicUrl = 'childCaseStudyItemsYaml___background___publicURL',
-  ChildCaseStudyItemsYamlBackgroundChildImageSharpId = 'childCaseStudyItemsYaml___background___childImageSharp___id',
-  ChildCaseStudyItemsYamlBackgroundChildImageSharpChildren = 'childCaseStudyItemsYaml___background___childImageSharp___children',
-  ChildCaseStudyItemsYamlBackgroundId = 'childCaseStudyItemsYaml___background___id',
-  ChildCaseStudyItemsYamlBackgroundParentId = 'childCaseStudyItemsYaml___background___parent___id',
-  ChildCaseStudyItemsYamlBackgroundParentChildren = 'childCaseStudyItemsYaml___background___parent___children',
-  ChildCaseStudyItemsYamlBackgroundChildren = 'childCaseStudyItemsYaml___background___children',
-  ChildCaseStudyItemsYamlBackgroundChildrenId = 'childCaseStudyItemsYaml___background___children___id',
-  ChildCaseStudyItemsYamlBackgroundChildrenChildren = 'childCaseStudyItemsYaml___background___children___children',
-  ChildCaseStudyItemsYamlBackgroundInternalContent = 'childCaseStudyItemsYaml___background___internal___content',
-  ChildCaseStudyItemsYamlBackgroundInternalContentDigest = 'childCaseStudyItemsYaml___background___internal___contentDigest',
-  ChildCaseStudyItemsYamlBackgroundInternalDescription = 'childCaseStudyItemsYaml___background___internal___description',
-  ChildCaseStudyItemsYamlBackgroundInternalFieldOwners = 'childCaseStudyItemsYaml___background___internal___fieldOwners',
-  ChildCaseStudyItemsYamlBackgroundInternalIgnoreType = 'childCaseStudyItemsYaml___background___internal___ignoreType',
-  ChildCaseStudyItemsYamlBackgroundInternalMediaType = 'childCaseStudyItemsYaml___background___internal___mediaType',
-  ChildCaseStudyItemsYamlBackgroundInternalOwner = 'childCaseStudyItemsYaml___background___internal___owner',
-  ChildCaseStudyItemsYamlBackgroundInternalType = 'childCaseStudyItemsYaml___background___internal___type',
-  ChildCaseStudyItemsYamlBackgroundChildCommunityYamlId = 'childCaseStudyItemsYaml___background___childCommunityYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildCommunityYamlChildren = 'childCaseStudyItemsYaml___background___childCommunityYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildCommunityYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childCommunityYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildCaseStudiesYamlId = 'childCaseStudyItemsYaml___background___childCaseStudiesYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildCaseStudiesYamlChildren = 'childCaseStudyItemsYaml___background___childCaseStudiesYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildCaseStudiesYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childCaseStudiesYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildDevelopersYamlId = 'childCaseStudyItemsYaml___background___childDevelopersYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildDevelopersYamlChildren = 'childCaseStudyItemsYaml___background___childDevelopersYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildDevelopersYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childDevelopersYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlId = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlChildren = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlName = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___name',
-  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlSlug = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___slug',
-  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlDescription = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___description',
-  ChildCaseStudyItemsYamlBackgroundChildCaseStudyItemsYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childCaseStudyItemsYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildHomeYamlId = 'childCaseStudyItemsYaml___background___childHomeYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildHomeYamlChildren = 'childCaseStudyItemsYaml___background___childHomeYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildHomeYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childHomeYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildContactYamlId = 'childCaseStudyItemsYaml___background___childContactYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildContactYamlChildren = 'childCaseStudyItemsYaml___background___childContactYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildContactYamlHeader = 'childCaseStudyItemsYaml___background___childContactYaml___header',
-  ChildCaseStudyItemsYamlBackgroundChildContactYamlBody = 'childCaseStudyItemsYaml___background___childContactYaml___body',
-  ChildCaseStudyItemsYamlBackgroundChildContactYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childContactYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildFaqYamlId = 'childCaseStudyItemsYaml___background___childFaqYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildFaqYamlChildren = 'childCaseStudyItemsYaml___background___childFaqYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildFaqYamlCategories = 'childCaseStudyItemsYaml___background___childFaqYaml___categories',
-  ChildCaseStudyItemsYamlBackgroundChildFaqYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childFaqYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildInvestYamlId = 'childCaseStudyItemsYaml___background___childInvestYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildInvestYamlChildren = 'childCaseStudyItemsYaml___background___childInvestYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildInvestYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childInvestYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlId = 'childCaseStudyItemsYaml___background___childMainnetYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlChildren = 'childCaseStudyItemsYaml___background___childMainnetYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlLaunchDate = 'childCaseStudyItemsYaml___background___childMainnetYaml___launchDate',
-  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlLivecastLink = 'childCaseStudyItemsYaml___background___childMainnetYaml___livecastLink',
-  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlSeoDescription = 'childCaseStudyItemsYaml___background___childMainnetYaml___seoDescription',
-  ChildCaseStudyItemsYamlBackgroundChildMainnetYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childMainnetYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildPartnersYamlId = 'childCaseStudyItemsYaml___background___childPartnersYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildPartnersYamlChildren = 'childCaseStudyItemsYaml___background___childPartnersYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildPartnersYamlHeader = 'childCaseStudyItemsYaml___background___childPartnersYaml___header',
-  ChildCaseStudyItemsYamlBackgroundChildPartnersYamlPartnerLogos = 'childCaseStudyItemsYaml___background___childPartnersYaml___partnerLogos',
-  ChildCaseStudyItemsYamlBackgroundChildPartnersYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childPartnersYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildFundYamlId = 'childCaseStudyItemsYaml___background___childFundYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildFundYamlChildren = 'childCaseStudyItemsYaml___background___childFundYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildFundYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childFundYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildResourcesYamlId = 'childCaseStudyItemsYaml___background___childResourcesYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildResourcesYamlChildren = 'childCaseStudyItemsYaml___background___childResourcesYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildResourcesYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childResourcesYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildPressKitYamlId = 'childCaseStudyItemsYaml___background___childPressKitYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildPressKitYamlChildren = 'childCaseStudyItemsYaml___background___childPressKitYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildPressKitYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childPressKitYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildSharedYamlId = 'childCaseStudyItemsYaml___background___childSharedYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildSharedYamlChildren = 'childCaseStudyItemsYaml___background___childSharedYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildSharedYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childSharedYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildMediaYamlId = 'childCaseStudyItemsYaml___background___childMediaYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildMediaYamlChildren = 'childCaseStudyItemsYaml___background___childMediaYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildMediaYamlHeader = 'childCaseStudyItemsYaml___background___childMediaYaml___header',
-  ChildCaseStudyItemsYamlBackgroundChildMediaYamlCategories = 'childCaseStudyItemsYaml___background___childMediaYaml___categories',
-  ChildCaseStudyItemsYamlBackgroundChildMediaYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childMediaYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildScienceYamlId = 'childCaseStudyItemsYaml___background___childScienceYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildScienceYamlChildren = 'childCaseStudyItemsYaml___background___childScienceYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildScienceYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childScienceYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkId = 'childCaseStudyItemsYaml___background___childMarkdownRemark___id',
-  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkExcerpt = 'childCaseStudyItemsYaml___background___childMarkdownRemark___excerpt',
-  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkRawMarkdownBody = 'childCaseStudyItemsYaml___background___childMarkdownRemark___rawMarkdownBody',
-  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkFileAbsolutePath = 'childCaseStudyItemsYaml___background___childMarkdownRemark___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkHtml = 'childCaseStudyItemsYaml___background___childMarkdownRemark___html',
-  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkHtmlAst = 'childCaseStudyItemsYaml___background___childMarkdownRemark___htmlAst',
-  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkExcerptAst = 'childCaseStudyItemsYaml___background___childMarkdownRemark___excerptAst',
-  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkHeadings = 'childCaseStudyItemsYaml___background___childMarkdownRemark___headings',
-  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkTimeToRead = 'childCaseStudyItemsYaml___background___childMarkdownRemark___timeToRead',
-  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkTableOfContents = 'childCaseStudyItemsYaml___background___childMarkdownRemark___tableOfContents',
-  ChildCaseStudyItemsYamlBackgroundChildMarkdownRemarkChildren = 'childCaseStudyItemsYaml___background___childMarkdownRemark___children',
-  ChildCaseStudyItemsYamlBackgroundChildTokenYamlId = 'childCaseStudyItemsYaml___background___childTokenYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildTokenYamlChildren = 'childCaseStudyItemsYaml___background___childTokenYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildTokenYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childTokenYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildTeamYamlId = 'childCaseStudyItemsYaml___background___childTeamYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildTeamYamlChildren = 'childCaseStudyItemsYaml___background___childTeamYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildTeamYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childTeamYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildWalletAddressRegistrationYamlId = 'childCaseStudyItemsYaml___background___childWalletAddressRegistrationYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildWalletAddressRegistrationYamlChildren = 'childCaseStudyItemsYaml___background___childWalletAddressRegistrationYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildWalletAddressRegistrationYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childWalletAddressRegistrationYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlBackgroundChildValidatorsYamlId = 'childCaseStudyItemsYaml___background___childValidatorsYaml___id',
-  ChildCaseStudyItemsYamlBackgroundChildValidatorsYamlChildren = 'childCaseStudyItemsYaml___background___childValidatorsYaml___children',
-  ChildCaseStudyItemsYamlBackgroundChildValidatorsYamlFileAbsolutePath = 'childCaseStudyItemsYaml___background___childValidatorsYaml___fileAbsolutePath',
-  ChildCaseStudyItemsYamlDescription = 'childCaseStudyItemsYaml___description',
-  ChildCaseStudyItemsYamlAboutSectionAbout = 'childCaseStudyItemsYaml___aboutSection___about',
-  ChildCaseStudyItemsYamlAboutSectionMapImageSourceInstanceName = 'childCaseStudyItemsYaml___aboutSection___mapImage___sourceInstanceName',
-  ChildCaseStudyItemsYamlAboutSectionMapImageAbsolutePath = 'childCaseStudyItemsYaml___aboutSection___mapImage___absolutePath',
-  ChildCaseStudyItemsYamlAboutSectionMapImageRelativePath = 'childCaseStudyItemsYaml___aboutSection___mapImage___relativePath',
-  ChildCaseStudyItemsYamlAboutSectionMapImageExtension = 'childCaseStudyItemsYaml___aboutSection___mapImage___extension',
-  ChildCaseStudyItemsYamlAboutSectionMapImageSize = 'childCaseStudyItemsYaml___aboutSection___mapImage___size',
-  ChildCaseStudyItemsYamlAboutSectionMapImagePrettySize = 'childCaseStudyItemsYaml___aboutSection___mapImage___prettySize',
-  ChildCaseStudyItemsYamlAboutSectionMapImageModifiedTime = 'childCaseStudyItemsYaml___aboutSection___mapImage___modifiedTime',
-  ChildCaseStudyItemsYamlAboutSectionMapImageAccessTime = 'childCaseStudyItemsYaml___aboutSection___mapImage___accessTime',
-  ChildCaseStudyItemsYamlAboutSectionMapImageChangeTime = 'childCaseStudyItemsYaml___aboutSection___mapImage___changeTime',
-  ChildCaseStudyItemsYamlAboutSectionMapImageBirthTime = 'childCaseStudyItemsYaml___aboutSection___mapImage___birthTime',
-  ChildCaseStudyItemsYamlAboutSectionMapImageRoot = 'childCaseStudyItemsYaml___aboutSection___mapImage___root',
-  ChildCaseStudyItemsYamlAboutSectionMapImageDir = 'childCaseStudyItemsYaml___aboutSection___mapImage___dir',
-  ChildCaseStudyItemsYamlAboutSectionMapImageBase = 'childCaseStudyItemsYaml___aboutSection___mapImage___base',
-  ChildCaseStudyItemsYamlAboutSectionMapImageExt = 'childCaseStudyItemsYaml___aboutSection___mapImage___ext',
-  ChildCaseStudyItemsYamlAboutSectionMapImageName = 'childCaseStudyItemsYaml___aboutSection___mapImage___name',
-  ChildCaseStudyItemsYamlAboutSectionMapImageRelativeDirectory = 'childCaseStudyItemsYaml___aboutSection___mapImage___relativeDirectory',
-  ChildCaseStudyItemsYamlAboutSectionMapImageDev = 'childCaseStudyItemsYaml___aboutSection___mapImage___dev',
-  ChildCaseStudyItemsYamlAboutSectionMapImageMode = 'childCaseStudyItemsYaml___aboutSection___mapImage___mode',
-  ChildCaseStudyItemsYamlAboutSectionMapImageNlink = 'childCaseStudyItemsYaml___aboutSection___mapImage___nlink',
-  ChildCaseStudyItemsYamlAboutSectionMapImageUid = 'childCaseStudyItemsYaml___aboutSection___mapImage___uid',
-  ChildCaseStudyItemsYamlAboutSectionMapImageGid = 'childCaseStudyItemsYaml___aboutSection___mapImage___gid',
-  ChildCaseStudyItemsYamlAboutSectionMapImageRdev = 'childCaseStudyItemsYaml___aboutSection___mapImage___rdev',
-  ChildCaseStudyItemsYamlAboutSectionMapImageIno = 'childCaseStudyItemsYaml___aboutSection___mapImage___ino',
-  ChildCaseStudyItemsYamlAboutSectionMapImageAtimeMs = 'childCaseStudyItemsYaml___aboutSection___mapImage___atimeMs',
-  ChildCaseStudyItemsYamlAboutSectionMapImageMtimeMs = 'childCaseStudyItemsYaml___aboutSection___mapImage___mtimeMs',
-  ChildCaseStudyItemsYamlAboutSectionMapImageCtimeMs = 'childCaseStudyItemsYaml___aboutSection___mapImage___ctimeMs',
-  ChildCaseStudyItemsYamlAboutSectionMapImageAtime = 'childCaseStudyItemsYaml___aboutSection___mapImage___atime',
-  ChildCaseStudyItemsYamlAboutSectionMapImageMtime = 'childCaseStudyItemsYaml___aboutSection___mapImage___mtime',
-  ChildCaseStudyItemsYamlAboutSectionMapImageCtime = 'childCaseStudyItemsYaml___aboutSection___mapImage___ctime',
-  ChildCaseStudyItemsYamlAboutSectionMapImageBirthtime = 'childCaseStudyItemsYaml___aboutSection___mapImage___birthtime',
-  ChildCaseStudyItemsYamlAboutSectionMapImageBirthtimeMs = 'childCaseStudyItemsYaml___aboutSection___mapImage___birthtimeMs',
-  ChildCaseStudyItemsYamlAboutSectionMapImageBlksize = 'childCaseStudyItemsYaml___aboutSection___mapImage___blksize',
-  ChildCaseStudyItemsYamlAboutSectionMapImageBlocks = 'childCaseStudyItemsYaml___aboutSection___mapImage___blocks',
-  ChildCaseStudyItemsYamlAboutSectionMapImagePublicUrl = 'childCaseStudyItemsYaml___aboutSection___mapImage___publicURL',
-  ChildCaseStudyItemsYamlAboutSectionMapImageId = 'childCaseStudyItemsYaml___aboutSection___mapImage___id',
-  ChildCaseStudyItemsYamlAboutSectionMapImageChildren = 'childCaseStudyItemsYaml___aboutSection___mapImage___children',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageSourceInstanceName = 'childCaseStudyItemsYaml___aboutSection___aboutImage___sourceInstanceName',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageAbsolutePath = 'childCaseStudyItemsYaml___aboutSection___aboutImage___absolutePath',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageRelativePath = 'childCaseStudyItemsYaml___aboutSection___aboutImage___relativePath',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageExtension = 'childCaseStudyItemsYaml___aboutSection___aboutImage___extension',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageSize = 'childCaseStudyItemsYaml___aboutSection___aboutImage___size',
-  ChildCaseStudyItemsYamlAboutSectionAboutImagePrettySize = 'childCaseStudyItemsYaml___aboutSection___aboutImage___prettySize',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageModifiedTime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___modifiedTime',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageAccessTime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___accessTime',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageChangeTime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___changeTime',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageBirthTime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___birthTime',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageRoot = 'childCaseStudyItemsYaml___aboutSection___aboutImage___root',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageDir = 'childCaseStudyItemsYaml___aboutSection___aboutImage___dir',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageBase = 'childCaseStudyItemsYaml___aboutSection___aboutImage___base',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageExt = 'childCaseStudyItemsYaml___aboutSection___aboutImage___ext',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageName = 'childCaseStudyItemsYaml___aboutSection___aboutImage___name',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageRelativeDirectory = 'childCaseStudyItemsYaml___aboutSection___aboutImage___relativeDirectory',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageDev = 'childCaseStudyItemsYaml___aboutSection___aboutImage___dev',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageMode = 'childCaseStudyItemsYaml___aboutSection___aboutImage___mode',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageNlink = 'childCaseStudyItemsYaml___aboutSection___aboutImage___nlink',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageUid = 'childCaseStudyItemsYaml___aboutSection___aboutImage___uid',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageGid = 'childCaseStudyItemsYaml___aboutSection___aboutImage___gid',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageRdev = 'childCaseStudyItemsYaml___aboutSection___aboutImage___rdev',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageIno = 'childCaseStudyItemsYaml___aboutSection___aboutImage___ino',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageAtimeMs = 'childCaseStudyItemsYaml___aboutSection___aboutImage___atimeMs',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageMtimeMs = 'childCaseStudyItemsYaml___aboutSection___aboutImage___mtimeMs',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageCtimeMs = 'childCaseStudyItemsYaml___aboutSection___aboutImage___ctimeMs',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageAtime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___atime',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageMtime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___mtime',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageCtime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___ctime',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageBirthtime = 'childCaseStudyItemsYaml___aboutSection___aboutImage___birthtime',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageBirthtimeMs = 'childCaseStudyItemsYaml___aboutSection___aboutImage___birthtimeMs',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageBlksize = 'childCaseStudyItemsYaml___aboutSection___aboutImage___blksize',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageBlocks = 'childCaseStudyItemsYaml___aboutSection___aboutImage___blocks',
-  ChildCaseStudyItemsYamlAboutSectionAboutImagePublicUrl = 'childCaseStudyItemsYaml___aboutSection___aboutImage___publicURL',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageId = 'childCaseStudyItemsYaml___aboutSection___aboutImage___id',
-  ChildCaseStudyItemsYamlAboutSectionAboutImageChildren = 'childCaseStudyItemsYaml___aboutSection___aboutImage___children',
-  ChildCaseStudyItemsYamlAboutSectionPractice = 'childCaseStudyItemsYaml___aboutSection___practice',
-  ChildCaseStudyItemsYamlAboutSectionBiome = 'childCaseStudyItemsYaml___aboutSection___biome',
-  ChildCaseStudyItemsYamlAboutSectionRegion = 'childCaseStudyItemsYaml___aboutSection___region',
-  ChildCaseStudyItemsYamlAboutSectionLineRotate = 'childCaseStudyItemsYaml___aboutSection___lineRotate',
-  ChildCaseStudyItemsYamlAboutSectionLineWidth = 'childCaseStudyItemsYaml___aboutSection___lineWidth',
-  ChildCaseStudyItemsYamlContextSectionImageSourceInstanceName = 'childCaseStudyItemsYaml___contextSection___image___sourceInstanceName',
-  ChildCaseStudyItemsYamlContextSectionImageAbsolutePath = 'childCaseStudyItemsYaml___contextSection___image___absolutePath',
-  ChildCaseStudyItemsYamlContextSectionImageRelativePath = 'childCaseStudyItemsYaml___contextSection___image___relativePath',
-  ChildCaseStudyItemsYamlContextSectionImageExtension = 'childCaseStudyItemsYaml___contextSection___image___extension',
-  ChildCaseStudyItemsYamlContextSectionImageSize = 'childCaseStudyItemsYaml___contextSection___image___size',
-  ChildCaseStudyItemsYamlContextSectionImagePrettySize = 'childCaseStudyItemsYaml___contextSection___image___prettySize',
-  ChildCaseStudyItemsYamlContextSectionImageModifiedTime = 'childCaseStudyItemsYaml___contextSection___image___modifiedTime',
-  ChildCaseStudyItemsYamlContextSectionImageAccessTime = 'childCaseStudyItemsYaml___contextSection___image___accessTime',
-  ChildCaseStudyItemsYamlContextSectionImageChangeTime = 'childCaseStudyItemsYaml___contextSection___image___changeTime',
-  ChildCaseStudyItemsYamlContextSectionImageBirthTime = 'childCaseStudyItemsYaml___contextSection___image___birthTime',
-  ChildCaseStudyItemsYamlContextSectionImageRoot = 'childCaseStudyItemsYaml___contextSection___image___root',
-  ChildCaseStudyItemsYamlContextSectionImageDir = 'childCaseStudyItemsYaml___contextSection___image___dir',
-  ChildCaseStudyItemsYamlContextSectionImageBase = 'childCaseStudyItemsYaml___contextSection___image___base',
-  ChildCaseStudyItemsYamlContextSectionImageExt = 'childCaseStudyItemsYaml___contextSection___image___ext',
-  ChildCaseStudyItemsYamlContextSectionImageName = 'childCaseStudyItemsYaml___contextSection___image___name',
-  ChildCaseStudyItemsYamlContextSectionImageRelativeDirectory = 'childCaseStudyItemsYaml___contextSection___image___relativeDirectory',
-  ChildCaseStudyItemsYamlContextSectionImageDev = 'childCaseStudyItemsYaml___contextSection___image___dev',
-  ChildCaseStudyItemsYamlContextSectionImageMode = 'childCaseStudyItemsYaml___contextSection___image___mode',
-  ChildCaseStudyItemsYamlContextSectionImageNlink = 'childCaseStudyItemsYaml___contextSection___image___nlink',
-  ChildCaseStudyItemsYamlContextSectionImageUid = 'childCaseStudyItemsYaml___contextSection___image___uid',
-  ChildCaseStudyItemsYamlContextSectionImageGid = 'childCaseStudyItemsYaml___contextSection___image___gid',
-  ChildCaseStudyItemsYamlContextSectionImageRdev = 'childCaseStudyItemsYaml___contextSection___image___rdev',
-  ChildCaseStudyItemsYamlContextSectionImageIno = 'childCaseStudyItemsYaml___contextSection___image___ino',
-  ChildCaseStudyItemsYamlContextSectionImageAtimeMs = 'childCaseStudyItemsYaml___contextSection___image___atimeMs',
-  ChildCaseStudyItemsYamlContextSectionImageMtimeMs = 'childCaseStudyItemsYaml___contextSection___image___mtimeMs',
-  ChildCaseStudyItemsYamlContextSectionImageCtimeMs = 'childCaseStudyItemsYaml___contextSection___image___ctimeMs',
-  ChildCaseStudyItemsYamlContextSectionImageAtime = 'childCaseStudyItemsYaml___contextSection___image___atime',
-  ChildCaseStudyItemsYamlContextSectionImageMtime = 'childCaseStudyItemsYaml___contextSection___image___mtime',
-  ChildCaseStudyItemsYamlContextSectionImageCtime = 'childCaseStudyItemsYaml___contextSection___image___ctime',
-  ChildCaseStudyItemsYamlContextSectionImageBirthtime = 'childCaseStudyItemsYaml___contextSection___image___birthtime',
-  ChildCaseStudyItemsYamlContextSectionImageBirthtimeMs = 'childCaseStudyItemsYaml___contextSection___image___birthtimeMs',
-  ChildCaseStudyItemsYamlContextSectionImageBlksize = 'childCaseStudyItemsYaml___contextSection___image___blksize',
-  ChildCaseStudyItemsYamlContextSectionImageBlocks = 'childCaseStudyItemsYaml___contextSection___image___blocks',
-  ChildCaseStudyItemsYamlContextSectionImagePublicUrl = 'childCaseStudyItemsYaml___contextSection___image___publicURL',
-  ChildCaseStudyItemsYamlContextSectionImageId = 'childCaseStudyItemsYaml___contextSection___image___id',
-  ChildCaseStudyItemsYamlContextSectionImageChildren = 'childCaseStudyItemsYaml___contextSection___image___children',
-  ChildCaseStudyItemsYamlContextSectionDescription = 'childCaseStudyItemsYaml___contextSection___description',
-  ChildCaseStudyItemsYamlContextSectionChallenges = 'childCaseStudyItemsYaml___contextSection___challenges',
-  ChildCaseStudyItemsYamlContextSectionChallengesText = 'childCaseStudyItemsYaml___contextSection___challenges___text',
-  ChildCaseStudyItemsYamlApproachSectionDescription = 'childCaseStudyItemsYaml___approachSection___description',
-  ChildCaseStudyItemsYamlApproachSectionDetails = 'childCaseStudyItemsYaml___approachSection___details',
-  ChildCaseStudyItemsYamlApproachSectionResults = 'childCaseStudyItemsYaml___approachSection___results',
-  ChildCaseStudyItemsYamlApproachSectionNext = 'childCaseStudyItemsYaml___approachSection___next',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageSourceInstanceName = 'childCaseStudyItemsYaml___approachSection___figureImage___sourceInstanceName',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageAbsolutePath = 'childCaseStudyItemsYaml___approachSection___figureImage___absolutePath',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageRelativePath = 'childCaseStudyItemsYaml___approachSection___figureImage___relativePath',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageExtension = 'childCaseStudyItemsYaml___approachSection___figureImage___extension',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageSize = 'childCaseStudyItemsYaml___approachSection___figureImage___size',
-  ChildCaseStudyItemsYamlApproachSectionFigureImagePrettySize = 'childCaseStudyItemsYaml___approachSection___figureImage___prettySize',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageModifiedTime = 'childCaseStudyItemsYaml___approachSection___figureImage___modifiedTime',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageAccessTime = 'childCaseStudyItemsYaml___approachSection___figureImage___accessTime',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageChangeTime = 'childCaseStudyItemsYaml___approachSection___figureImage___changeTime',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageBirthTime = 'childCaseStudyItemsYaml___approachSection___figureImage___birthTime',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageRoot = 'childCaseStudyItemsYaml___approachSection___figureImage___root',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageDir = 'childCaseStudyItemsYaml___approachSection___figureImage___dir',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageBase = 'childCaseStudyItemsYaml___approachSection___figureImage___base',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageExt = 'childCaseStudyItemsYaml___approachSection___figureImage___ext',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageName = 'childCaseStudyItemsYaml___approachSection___figureImage___name',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageRelativeDirectory = 'childCaseStudyItemsYaml___approachSection___figureImage___relativeDirectory',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageDev = 'childCaseStudyItemsYaml___approachSection___figureImage___dev',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageMode = 'childCaseStudyItemsYaml___approachSection___figureImage___mode',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageNlink = 'childCaseStudyItemsYaml___approachSection___figureImage___nlink',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageUid = 'childCaseStudyItemsYaml___approachSection___figureImage___uid',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageGid = 'childCaseStudyItemsYaml___approachSection___figureImage___gid',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageRdev = 'childCaseStudyItemsYaml___approachSection___figureImage___rdev',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageIno = 'childCaseStudyItemsYaml___approachSection___figureImage___ino',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageAtimeMs = 'childCaseStudyItemsYaml___approachSection___figureImage___atimeMs',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageMtimeMs = 'childCaseStudyItemsYaml___approachSection___figureImage___mtimeMs',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageCtimeMs = 'childCaseStudyItemsYaml___approachSection___figureImage___ctimeMs',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageAtime = 'childCaseStudyItemsYaml___approachSection___figureImage___atime',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageMtime = 'childCaseStudyItemsYaml___approachSection___figureImage___mtime',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageCtime = 'childCaseStudyItemsYaml___approachSection___figureImage___ctime',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageBirthtime = 'childCaseStudyItemsYaml___approachSection___figureImage___birthtime',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageBirthtimeMs = 'childCaseStudyItemsYaml___approachSection___figureImage___birthtimeMs',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageBlksize = 'childCaseStudyItemsYaml___approachSection___figureImage___blksize',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageBlocks = 'childCaseStudyItemsYaml___approachSection___figureImage___blocks',
-  ChildCaseStudyItemsYamlApproachSectionFigureImagePublicUrl = 'childCaseStudyItemsYaml___approachSection___figureImage___publicURL',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageId = 'childCaseStudyItemsYaml___approachSection___figureImage___id',
-  ChildCaseStudyItemsYamlApproachSectionFigureImageChildren = 'childCaseStudyItemsYaml___approachSection___figureImage___children',
-  ChildCaseStudyItemsYamlApproachSectionFigureTitle = 'childCaseStudyItemsYaml___approachSection___figureTitle',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundSourceInstanceName = 'childCaseStudyItemsYaml___figureSection___background___sourceInstanceName',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundAbsolutePath = 'childCaseStudyItemsYaml___figureSection___background___absolutePath',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundRelativePath = 'childCaseStudyItemsYaml___figureSection___background___relativePath',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundExtension = 'childCaseStudyItemsYaml___figureSection___background___extension',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundSize = 'childCaseStudyItemsYaml___figureSection___background___size',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundPrettySize = 'childCaseStudyItemsYaml___figureSection___background___prettySize',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundModifiedTime = 'childCaseStudyItemsYaml___figureSection___background___modifiedTime',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundAccessTime = 'childCaseStudyItemsYaml___figureSection___background___accessTime',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundChangeTime = 'childCaseStudyItemsYaml___figureSection___background___changeTime',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundBirthTime = 'childCaseStudyItemsYaml___figureSection___background___birthTime',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundRoot = 'childCaseStudyItemsYaml___figureSection___background___root',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundDir = 'childCaseStudyItemsYaml___figureSection___background___dir',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundBase = 'childCaseStudyItemsYaml___figureSection___background___base',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundExt = 'childCaseStudyItemsYaml___figureSection___background___ext',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundName = 'childCaseStudyItemsYaml___figureSection___background___name',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundRelativeDirectory = 'childCaseStudyItemsYaml___figureSection___background___relativeDirectory',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundDev = 'childCaseStudyItemsYaml___figureSection___background___dev',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundMode = 'childCaseStudyItemsYaml___figureSection___background___mode',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundNlink = 'childCaseStudyItemsYaml___figureSection___background___nlink',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundUid = 'childCaseStudyItemsYaml___figureSection___background___uid',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundGid = 'childCaseStudyItemsYaml___figureSection___background___gid',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundRdev = 'childCaseStudyItemsYaml___figureSection___background___rdev',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundIno = 'childCaseStudyItemsYaml___figureSection___background___ino',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundAtimeMs = 'childCaseStudyItemsYaml___figureSection___background___atimeMs',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundMtimeMs = 'childCaseStudyItemsYaml___figureSection___background___mtimeMs',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundCtimeMs = 'childCaseStudyItemsYaml___figureSection___background___ctimeMs',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundAtime = 'childCaseStudyItemsYaml___figureSection___background___atime',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundMtime = 'childCaseStudyItemsYaml___figureSection___background___mtime',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundCtime = 'childCaseStudyItemsYaml___figureSection___background___ctime',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundBirthtime = 'childCaseStudyItemsYaml___figureSection___background___birthtime',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundBirthtimeMs = 'childCaseStudyItemsYaml___figureSection___background___birthtimeMs',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundBlksize = 'childCaseStudyItemsYaml___figureSection___background___blksize',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundBlocks = 'childCaseStudyItemsYaml___figureSection___background___blocks',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundPublicUrl = 'childCaseStudyItemsYaml___figureSection___background___publicURL',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundId = 'childCaseStudyItemsYaml___figureSection___background___id',
-  ChildCaseStudyItemsYamlFigureSectionBackgroundChildren = 'childCaseStudyItemsYaml___figureSection___background___children',
-  ChildCaseStudyItemsYamlFigureSectionTitle = 'childCaseStudyItemsYaml___figureSection___title',
-  ChildCaseStudyItemsYamlFigureSectionFigures = 'childCaseStudyItemsYaml___figureSection___figures',
-  ChildCaseStudyItemsYamlFigureSectionFiguresTitle = 'childCaseStudyItemsYaml___figureSection___figures___title',
-  ChildCaseStudyItemsYamlFigureSectionFiguresSpacing = 'childCaseStudyItemsYaml___figureSection___figures___spacing',
-  ChildCaseStudyItemsYamlFundingSectionImageSourceInstanceName = 'childCaseStudyItemsYaml___fundingSection___image___sourceInstanceName',
-  ChildCaseStudyItemsYamlFundingSectionImageAbsolutePath = 'childCaseStudyItemsYaml___fundingSection___image___absolutePath',
-  ChildCaseStudyItemsYamlFundingSectionImageRelativePath = 'childCaseStudyItemsYaml___fundingSection___image___relativePath',
-  ChildCaseStudyItemsYamlFundingSectionImageExtension = 'childCaseStudyItemsYaml___fundingSection___image___extension',
-  ChildCaseStudyItemsYamlFundingSectionImageSize = 'childCaseStudyItemsYaml___fundingSection___image___size',
-  ChildCaseStudyItemsYamlFundingSectionImagePrettySize = 'childCaseStudyItemsYaml___fundingSection___image___prettySize',
-  ChildCaseStudyItemsYamlFundingSectionImageModifiedTime = 'childCaseStudyItemsYaml___fundingSection___image___modifiedTime',
-  ChildCaseStudyItemsYamlFundingSectionImageAccessTime = 'childCaseStudyItemsYaml___fundingSection___image___accessTime',
-  ChildCaseStudyItemsYamlFundingSectionImageChangeTime = 'childCaseStudyItemsYaml___fundingSection___image___changeTime',
-  ChildCaseStudyItemsYamlFundingSectionImageBirthTime = 'childCaseStudyItemsYaml___fundingSection___image___birthTime',
-  ChildCaseStudyItemsYamlFundingSectionImageRoot = 'childCaseStudyItemsYaml___fundingSection___image___root',
-  ChildCaseStudyItemsYamlFundingSectionImageDir = 'childCaseStudyItemsYaml___fundingSection___image___dir',
-  ChildCaseStudyItemsYamlFundingSectionImageBase = 'childCaseStudyItemsYaml___fundingSection___image___base',
-  ChildCaseStudyItemsYamlFundingSectionImageExt = 'childCaseStudyItemsYaml___fundingSection___image___ext',
-  ChildCaseStudyItemsYamlFundingSectionImageName = 'childCaseStudyItemsYaml___fundingSection___image___name',
-  ChildCaseStudyItemsYamlFundingSectionImageRelativeDirectory = 'childCaseStudyItemsYaml___fundingSection___image___relativeDirectory',
-  ChildCaseStudyItemsYamlFundingSectionImageDev = 'childCaseStudyItemsYaml___fundingSection___image___dev',
-  ChildCaseStudyItemsYamlFundingSectionImageMode = 'childCaseStudyItemsYaml___fundingSection___image___mode',
-  ChildCaseStudyItemsYamlFundingSectionImageNlink = 'childCaseStudyItemsYaml___fundingSection___image___nlink',
-  ChildCaseStudyItemsYamlFundingSectionImageUid = 'childCaseStudyItemsYaml___fundingSection___image___uid',
-  ChildCaseStudyItemsYamlFundingSectionImageGid = 'childCaseStudyItemsYaml___fundingSection___image___gid',
-  ChildCaseStudyItemsYamlFundingSectionImageRdev = 'childCaseStudyItemsYaml___fundingSection___image___rdev',
-  ChildCaseStudyItemsYamlFundingSectionImageIno = 'childCaseStudyItemsYaml___fundingSection___image___ino',
-  ChildCaseStudyItemsYamlFundingSectionImageAtimeMs = 'childCaseStudyItemsYaml___fundingSection___image___atimeMs',
-  ChildCaseStudyItemsYamlFundingSectionImageMtimeMs = 'childCaseStudyItemsYaml___fundingSection___image___mtimeMs',
-  ChildCaseStudyItemsYamlFundingSectionImageCtimeMs = 'childCaseStudyItemsYaml___fundingSection___image___ctimeMs',
-  ChildCaseStudyItemsYamlFundingSectionImageAtime = 'childCaseStudyItemsYaml___fundingSection___image___atime',
-  ChildCaseStudyItemsYamlFundingSectionImageMtime = 'childCaseStudyItemsYaml___fundingSection___image___mtime',
-  ChildCaseStudyItemsYamlFundingSectionImageCtime = 'childCaseStudyItemsYaml___fundingSection___image___ctime',
-  ChildCaseStudyItemsYamlFundingSectionImageBirthtime = 'childCaseStudyItemsYaml___fundingSection___image___birthtime',
-  ChildCaseStudyItemsYamlFundingSectionImageBirthtimeMs = 'childCaseStudyItemsYaml___fundingSection___image___birthtimeMs',
-  ChildCaseStudyItemsYamlFundingSectionImageBlksize = 'childCaseStudyItemsYaml___fundingSection___image___blksize',
-  ChildCaseStudyItemsYamlFundingSectionImageBlocks = 'childCaseStudyItemsYaml___fundingSection___image___blocks',
-  ChildCaseStudyItemsYamlFundingSectionImagePublicUrl = 'childCaseStudyItemsYaml___fundingSection___image___publicURL',
-  ChildCaseStudyItemsYamlFundingSectionImageId = 'childCaseStudyItemsYaml___fundingSection___image___id',
-  ChildCaseStudyItemsYamlFundingSectionImageChildren = 'childCaseStudyItemsYaml___fundingSection___image___children',
-  ChildCaseStudyItemsYamlFundingSectionDetails = 'childCaseStudyItemsYaml___fundingSection___details',
-  ChildCaseStudyItemsYamlFundingSectionResults = 'childCaseStudyItemsYaml___fundingSection___results',
-  ChildCaseStudyItemsYamlFundingSectionNext = 'childCaseStudyItemsYaml___fundingSection___next',
-  ChildCaseStudyItemsYamlConclusionSectionDescription = 'childCaseStudyItemsYaml___conclusionSection___description',
-  ChildCaseStudyItemsYamlConclusionSectionImages = 'childCaseStudyItemsYaml___conclusionSection___images',
-  ChildCaseStudyItemsYamlConclusionSectionImagesTitle = 'childCaseStudyItemsYaml___conclusionSection___images___title',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundSourceInstanceName = 'childCaseStudyItemsYaml___bottomSection___background___sourceInstanceName',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundAbsolutePath = 'childCaseStudyItemsYaml___bottomSection___background___absolutePath',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundRelativePath = 'childCaseStudyItemsYaml___bottomSection___background___relativePath',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundExtension = 'childCaseStudyItemsYaml___bottomSection___background___extension',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundSize = 'childCaseStudyItemsYaml___bottomSection___background___size',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundPrettySize = 'childCaseStudyItemsYaml___bottomSection___background___prettySize',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundModifiedTime = 'childCaseStudyItemsYaml___bottomSection___background___modifiedTime',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundAccessTime = 'childCaseStudyItemsYaml___bottomSection___background___accessTime',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundChangeTime = 'childCaseStudyItemsYaml___bottomSection___background___changeTime',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundBirthTime = 'childCaseStudyItemsYaml___bottomSection___background___birthTime',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundRoot = 'childCaseStudyItemsYaml___bottomSection___background___root',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundDir = 'childCaseStudyItemsYaml___bottomSection___background___dir',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundBase = 'childCaseStudyItemsYaml___bottomSection___background___base',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundExt = 'childCaseStudyItemsYaml___bottomSection___background___ext',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundName = 'childCaseStudyItemsYaml___bottomSection___background___name',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundRelativeDirectory = 'childCaseStudyItemsYaml___bottomSection___background___relativeDirectory',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundDev = 'childCaseStudyItemsYaml___bottomSection___background___dev',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundMode = 'childCaseStudyItemsYaml___bottomSection___background___mode',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundNlink = 'childCaseStudyItemsYaml___bottomSection___background___nlink',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundUid = 'childCaseStudyItemsYaml___bottomSection___background___uid',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundGid = 'childCaseStudyItemsYaml___bottomSection___background___gid',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundRdev = 'childCaseStudyItemsYaml___bottomSection___background___rdev',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundIno = 'childCaseStudyItemsYaml___bottomSection___background___ino',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundAtimeMs = 'childCaseStudyItemsYaml___bottomSection___background___atimeMs',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundMtimeMs = 'childCaseStudyItemsYaml___bottomSection___background___mtimeMs',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundCtimeMs = 'childCaseStudyItemsYaml___bottomSection___background___ctimeMs',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundAtime = 'childCaseStudyItemsYaml___bottomSection___background___atime',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundMtime = 'childCaseStudyItemsYaml___bottomSection___background___mtime',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundCtime = 'childCaseStudyItemsYaml___bottomSection___background___ctime',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundBirthtime = 'childCaseStudyItemsYaml___bottomSection___background___birthtime',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundBirthtimeMs = 'childCaseStudyItemsYaml___bottomSection___background___birthtimeMs',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundBlksize = 'childCaseStudyItemsYaml___bottomSection___background___blksize',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundBlocks = 'childCaseStudyItemsYaml___bottomSection___background___blocks',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundPublicUrl = 'childCaseStudyItemsYaml___bottomSection___background___publicURL',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundId = 'childCaseStudyItemsYaml___bottomSection___background___id',
-  ChildCaseStudyItemsYamlBottomSectionBackgroundChildren = 'childCaseStudyItemsYaml___bottomSection___background___children',
-  ChildCaseStudyItemsYamlBottomSectionQuote = 'childCaseStudyItemsYaml___bottomSection___quote',
-  ChildCaseStudyItemsYamlBottomSectionPersonName = 'childCaseStudyItemsYaml___bottomSection___person___name',
-  ChildCaseStudyItemsYamlBottomSectionPersonRole = 'childCaseStudyItemsYaml___bottomSection___person___role',
-  ChildCaseStudyItemsYamlFileAbsolutePath = 'childCaseStudyItemsYaml___fileAbsolutePath',
-  ChildHomeYamlId = 'childHomeYaml___id',
-  ChildHomeYamlParentId = 'childHomeYaml___parent___id',
-  ChildHomeYamlParentParentId = 'childHomeYaml___parent___parent___id',
-  ChildHomeYamlParentParentChildren = 'childHomeYaml___parent___parent___children',
-  ChildHomeYamlParentChildren = 'childHomeYaml___parent___children',
-  ChildHomeYamlParentChildrenId = 'childHomeYaml___parent___children___id',
-  ChildHomeYamlParentChildrenChildren = 'childHomeYaml___parent___children___children',
-  ChildHomeYamlParentInternalContent = 'childHomeYaml___parent___internal___content',
-  ChildHomeYamlParentInternalContentDigest = 'childHomeYaml___parent___internal___contentDigest',
-  ChildHomeYamlParentInternalDescription = 'childHomeYaml___parent___internal___description',
-  ChildHomeYamlParentInternalFieldOwners = 'childHomeYaml___parent___internal___fieldOwners',
-  ChildHomeYamlParentInternalIgnoreType = 'childHomeYaml___parent___internal___ignoreType',
-  ChildHomeYamlParentInternalMediaType = 'childHomeYaml___parent___internal___mediaType',
-  ChildHomeYamlParentInternalOwner = 'childHomeYaml___parent___internal___owner',
-  ChildHomeYamlParentInternalType = 'childHomeYaml___parent___internal___type',
-  ChildHomeYamlChildren = 'childHomeYaml___children',
-  ChildHomeYamlChildrenId = 'childHomeYaml___children___id',
-  ChildHomeYamlChildrenParentId = 'childHomeYaml___children___parent___id',
-  ChildHomeYamlChildrenParentChildren = 'childHomeYaml___children___parent___children',
-  ChildHomeYamlChildrenChildren = 'childHomeYaml___children___children',
-  ChildHomeYamlChildrenChildrenId = 'childHomeYaml___children___children___id',
-  ChildHomeYamlChildrenChildrenChildren = 'childHomeYaml___children___children___children',
-  ChildHomeYamlChildrenInternalContent = 'childHomeYaml___children___internal___content',
-  ChildHomeYamlChildrenInternalContentDigest = 'childHomeYaml___children___internal___contentDigest',
-  ChildHomeYamlChildrenInternalDescription = 'childHomeYaml___children___internal___description',
-  ChildHomeYamlChildrenInternalFieldOwners = 'childHomeYaml___children___internal___fieldOwners',
-  ChildHomeYamlChildrenInternalIgnoreType = 'childHomeYaml___children___internal___ignoreType',
-  ChildHomeYamlChildrenInternalMediaType = 'childHomeYaml___children___internal___mediaType',
-  ChildHomeYamlChildrenInternalOwner = 'childHomeYaml___children___internal___owner',
-  ChildHomeYamlChildrenInternalType = 'childHomeYaml___children___internal___type',
-  ChildHomeYamlInternalContent = 'childHomeYaml___internal___content',
-  ChildHomeYamlInternalContentDigest = 'childHomeYaml___internal___contentDigest',
-  ChildHomeYamlInternalDescription = 'childHomeYaml___internal___description',
-  ChildHomeYamlInternalFieldOwners = 'childHomeYaml___internal___fieldOwners',
-  ChildHomeYamlInternalIgnoreType = 'childHomeYaml___internal___ignoreType',
-  ChildHomeYamlInternalMediaType = 'childHomeYaml___internal___mediaType',
-  ChildHomeYamlInternalOwner = 'childHomeYaml___internal___owner',
-  ChildHomeYamlInternalType = 'childHomeYaml___internal___type',
-  ChildHomeYamlFoldSectionTagline = 'childHomeYaml___foldSection___tagline',
-  ChildHomeYamlFoldSectionDescription = 'childHomeYaml___foldSection___description',
-  ChildHomeYamlMarketplaceSectionHeader = 'childHomeYaml___marketplaceSection___header',
-  ChildHomeYamlMarketplaceSectionTooltip = 'childHomeYaml___marketplaceSection___tooltip',
-  ChildHomeYamlMarketplaceSectionBodyGreen = 'childHomeYaml___marketplaceSection___body___green',
-  ChildHomeYamlMarketplaceSectionBodyMiddle = 'childHomeYaml___marketplaceSection___body___middle',
-  ChildHomeYamlMarketplaceSectionBodyPopover = 'childHomeYaml___marketplaceSection___body___popover',
-  ChildHomeYamlMarketplaceSectionBodyEnd = 'childHomeYaml___marketplaceSection___body___end',
-  ChildHomeYamlMarketplaceSectionCallToActions = 'childHomeYaml___marketplaceSection___callToActions',
-  ChildHomeYamlMarketplaceSectionCallToActionsCaption = 'childHomeYaml___marketplaceSection___callToActions___caption',
-  ChildHomeYamlMarketplaceSectionCallToActionsHeader = 'childHomeYaml___marketplaceSection___callToActions___header',
-  ChildHomeYamlMarketplaceSectionCallToActionsDescription = 'childHomeYaml___marketplaceSection___callToActions___description',
-  ChildHomeYamlMarketplaceSectionCallToActionsLinkText = 'childHomeYaml___marketplaceSection___callToActions___linkText',
-  ChildHomeYamlMarketplaceSectionCallToActionsLinkUrl = 'childHomeYaml___marketplaceSection___callToActions___linkUrl',
-  ChildHomeYamlClimateSectionHeader = 'childHomeYaml___climateSection___header',
-  ChildHomeYamlClimateSectionDescription = 'childHomeYaml___climateSection___description',
-  ChildHomeYamlClimateSectionImageSourceInstanceName = 'childHomeYaml___climateSection___image___sourceInstanceName',
-  ChildHomeYamlClimateSectionImageAbsolutePath = 'childHomeYaml___climateSection___image___absolutePath',
-  ChildHomeYamlClimateSectionImageRelativePath = 'childHomeYaml___climateSection___image___relativePath',
-  ChildHomeYamlClimateSectionImageExtension = 'childHomeYaml___climateSection___image___extension',
-  ChildHomeYamlClimateSectionImageSize = 'childHomeYaml___climateSection___image___size',
-  ChildHomeYamlClimateSectionImagePrettySize = 'childHomeYaml___climateSection___image___prettySize',
-  ChildHomeYamlClimateSectionImageModifiedTime = 'childHomeYaml___climateSection___image___modifiedTime',
-  ChildHomeYamlClimateSectionImageAccessTime = 'childHomeYaml___climateSection___image___accessTime',
-  ChildHomeYamlClimateSectionImageChangeTime = 'childHomeYaml___climateSection___image___changeTime',
-  ChildHomeYamlClimateSectionImageBirthTime = 'childHomeYaml___climateSection___image___birthTime',
-  ChildHomeYamlClimateSectionImageRoot = 'childHomeYaml___climateSection___image___root',
-  ChildHomeYamlClimateSectionImageDir = 'childHomeYaml___climateSection___image___dir',
-  ChildHomeYamlClimateSectionImageBase = 'childHomeYaml___climateSection___image___base',
-  ChildHomeYamlClimateSectionImageExt = 'childHomeYaml___climateSection___image___ext',
-  ChildHomeYamlClimateSectionImageName = 'childHomeYaml___climateSection___image___name',
-  ChildHomeYamlClimateSectionImageRelativeDirectory = 'childHomeYaml___climateSection___image___relativeDirectory',
-  ChildHomeYamlClimateSectionImageDev = 'childHomeYaml___climateSection___image___dev',
-  ChildHomeYamlClimateSectionImageMode = 'childHomeYaml___climateSection___image___mode',
-  ChildHomeYamlClimateSectionImageNlink = 'childHomeYaml___climateSection___image___nlink',
-  ChildHomeYamlClimateSectionImageUid = 'childHomeYaml___climateSection___image___uid',
-  ChildHomeYamlClimateSectionImageGid = 'childHomeYaml___climateSection___image___gid',
-  ChildHomeYamlClimateSectionImageRdev = 'childHomeYaml___climateSection___image___rdev',
-  ChildHomeYamlClimateSectionImageIno = 'childHomeYaml___climateSection___image___ino',
-  ChildHomeYamlClimateSectionImageAtimeMs = 'childHomeYaml___climateSection___image___atimeMs',
-  ChildHomeYamlClimateSectionImageMtimeMs = 'childHomeYaml___climateSection___image___mtimeMs',
-  ChildHomeYamlClimateSectionImageCtimeMs = 'childHomeYaml___climateSection___image___ctimeMs',
-  ChildHomeYamlClimateSectionImageAtime = 'childHomeYaml___climateSection___image___atime',
-  ChildHomeYamlClimateSectionImageMtime = 'childHomeYaml___climateSection___image___mtime',
-  ChildHomeYamlClimateSectionImageCtime = 'childHomeYaml___climateSection___image___ctime',
-  ChildHomeYamlClimateSectionImageBirthtime = 'childHomeYaml___climateSection___image___birthtime',
-  ChildHomeYamlClimateSectionImageBirthtimeMs = 'childHomeYaml___climateSection___image___birthtimeMs',
-  ChildHomeYamlClimateSectionImageBlksize = 'childHomeYaml___climateSection___image___blksize',
-  ChildHomeYamlClimateSectionImageBlocks = 'childHomeYaml___climateSection___image___blocks',
-  ChildHomeYamlClimateSectionImagePublicUrl = 'childHomeYaml___climateSection___image___publicURL',
-  ChildHomeYamlClimateSectionImageId = 'childHomeYaml___climateSection___image___id',
-  ChildHomeYamlClimateSectionImageChildren = 'childHomeYaml___climateSection___image___children',
-  ChildHomeYamlClimateSectionSolutionHeader = 'childHomeYaml___climateSection___solution___header',
-  ChildHomeYamlClimateSectionSolutionDescription = 'childHomeYaml___climateSection___solution___description',
-  ChildHomeYamlClimateSectionProblemHeader = 'childHomeYaml___climateSection___problem___header',
-  ChildHomeYamlClimateSectionProblemDescription = 'childHomeYaml___climateSection___problem___description',
-  ChildHomeYamlCarbonPlusSectionSmallHeaderFeatured = 'childHomeYaml___carbonPlusSection___smallHeader___featured',
-  ChildHomeYamlCarbonPlusSectionSmallHeaderCreditName = 'childHomeYaml___carbonPlusSection___smallHeader___creditName',
-  ChildHomeYamlCarbonPlusSectionHeader = 'childHomeYaml___carbonPlusSection___header',
-  ChildHomeYamlCarbonPlusSectionDescription = 'childHomeYaml___carbonPlusSection___description',
-  ChildHomeYamlCarbonPlusSectionLinkText = 'childHomeYaml___carbonPlusSection___linkText',
-  ChildHomeYamlCarbonPlusSectionLinkUrl = 'childHomeYaml___carbonPlusSection___linkUrl',
-  ChildHomeYamlLedgerSectionDescription = 'childHomeYaml___ledgerSection___description',
-  ChildHomeYamlValuesSectionHeader = 'childHomeYaml___valuesSection___header',
-  ChildHomeYamlValuesSectionImageItems = 'childHomeYaml___valuesSection___imageItems',
-  ChildHomeYamlValuesSectionImageItemsHeader = 'childHomeYaml___valuesSection___imageItems___header',
-  ChildHomeYamlValuesSectionImageItemsDescription = 'childHomeYaml___valuesSection___imageItems___description',
-  ChildHomeYamlFileAbsolutePath = 'childHomeYaml___fileAbsolutePath',
+  ChildCommunityYamlId = 'childCommunityYaml___id',
+  ChildCommunityYamlParentId = 'childCommunityYaml___parent___id',
+  ChildCommunityYamlParentParentId = 'childCommunityYaml___parent___parent___id',
+  ChildCommunityYamlParentParentChildren = 'childCommunityYaml___parent___parent___children',
+  ChildCommunityYamlParentChildren = 'childCommunityYaml___parent___children',
+  ChildCommunityYamlParentChildrenId = 'childCommunityYaml___parent___children___id',
+  ChildCommunityYamlParentChildrenChildren = 'childCommunityYaml___parent___children___children',
+  ChildCommunityYamlParentInternalContent = 'childCommunityYaml___parent___internal___content',
+  ChildCommunityYamlParentInternalContentDigest = 'childCommunityYaml___parent___internal___contentDigest',
+  ChildCommunityYamlParentInternalDescription = 'childCommunityYaml___parent___internal___description',
+  ChildCommunityYamlParentInternalFieldOwners = 'childCommunityYaml___parent___internal___fieldOwners',
+  ChildCommunityYamlParentInternalIgnoreType = 'childCommunityYaml___parent___internal___ignoreType',
+  ChildCommunityYamlParentInternalMediaType = 'childCommunityYaml___parent___internal___mediaType',
+  ChildCommunityYamlParentInternalOwner = 'childCommunityYaml___parent___internal___owner',
+  ChildCommunityYamlParentInternalType = 'childCommunityYaml___parent___internal___type',
+  ChildCommunityYamlChildren = 'childCommunityYaml___children',
+  ChildCommunityYamlChildrenId = 'childCommunityYaml___children___id',
+  ChildCommunityYamlChildrenParentId = 'childCommunityYaml___children___parent___id',
+  ChildCommunityYamlChildrenParentChildren = 'childCommunityYaml___children___parent___children',
+  ChildCommunityYamlChildrenChildren = 'childCommunityYaml___children___children',
+  ChildCommunityYamlChildrenChildrenId = 'childCommunityYaml___children___children___id',
+  ChildCommunityYamlChildrenChildrenChildren = 'childCommunityYaml___children___children___children',
+  ChildCommunityYamlChildrenInternalContent = 'childCommunityYaml___children___internal___content',
+  ChildCommunityYamlChildrenInternalContentDigest = 'childCommunityYaml___children___internal___contentDigest',
+  ChildCommunityYamlChildrenInternalDescription = 'childCommunityYaml___children___internal___description',
+  ChildCommunityYamlChildrenInternalFieldOwners = 'childCommunityYaml___children___internal___fieldOwners',
+  ChildCommunityYamlChildrenInternalIgnoreType = 'childCommunityYaml___children___internal___ignoreType',
+  ChildCommunityYamlChildrenInternalMediaType = 'childCommunityYaml___children___internal___mediaType',
+  ChildCommunityYamlChildrenInternalOwner = 'childCommunityYaml___children___internal___owner',
+  ChildCommunityYamlChildrenInternalType = 'childCommunityYaml___children___internal___type',
+  ChildCommunityYamlInternalContent = 'childCommunityYaml___internal___content',
+  ChildCommunityYamlInternalContentDigest = 'childCommunityYaml___internal___contentDigest',
+  ChildCommunityYamlInternalDescription = 'childCommunityYaml___internal___description',
+  ChildCommunityYamlInternalFieldOwners = 'childCommunityYaml___internal___fieldOwners',
+  ChildCommunityYamlInternalIgnoreType = 'childCommunityYaml___internal___ignoreType',
+  ChildCommunityYamlInternalMediaType = 'childCommunityYaml___internal___mediaType',
+  ChildCommunityYamlInternalOwner = 'childCommunityYaml___internal___owner',
+  ChildCommunityYamlInternalType = 'childCommunityYaml___internal___type',
+  ChildCommunityYamlTopSectionHeader = 'childCommunityYaml___topSection___header',
+  ChildCommunityYamlTopSectionBody = 'childCommunityYaml___topSection___body',
+  ChildCommunityYamlConnectSectionHeader = 'childCommunityYaml___connectSection___header',
+  ChildCommunityYamlConnectSectionTelegramSubLabel = 'childCommunityYaml___connectSection___telegramSubLabel',
+  ChildCommunityYamlConnectSectionTelegramUrl = 'childCommunityYaml___connectSection___telegramUrl',
+  ChildCommunityYamlConnectSectionTwitterSubLabel = 'childCommunityYaml___connectSection___twitterSubLabel',
+  ChildCommunityYamlConnectSectionTwitterUrl = 'childCommunityYaml___connectSection___twitterUrl',
+  ChildCommunityYamlConnectSectionDiscordSubLabel = 'childCommunityYaml___connectSection___discordSubLabel',
+  ChildCommunityYamlConnectSectionDiscordUrl = 'childCommunityYaml___connectSection___discordUrl',
+  ChildCommunityYamlGoToSectionBlogButtonText = 'childCommunityYaml___goToSection___blogButtonText',
+  ChildCommunityYamlGoToSectionDiscussionButtonHref = 'childCommunityYaml___goToSection___discussionButtonHref',
+  ChildCommunityYamlGoToSectionDiscussionButtonText = 'childCommunityYaml___goToSection___discussionButtonText',
+  ChildCommunityYamlGoToSectionDiscussionLabel = 'childCommunityYaml___goToSection___discussionLabel',
+  ChildCommunityYamlGoToSectionBlogLabel = 'childCommunityYaml___goToSection___blogLabel',
+  ChildCommunityYamlGoToSectionVideoButtonHref = 'childCommunityYaml___goToSection___videoButtonHref',
+  ChildCommunityYamlGoToSectionVideoLabel = 'childCommunityYaml___goToSection___videoLabel',
+  ChildCommunityYamlGoToSectionVideoButtonText = 'childCommunityYaml___goToSection___videoButtonText',
+  ChildCommunityYamlGoToSectionBlogButtonHref = 'childCommunityYaml___goToSection___blogButtonHref',
+  ChildCommunityYamlCollectiveSectionTitle = 'childCommunityYaml___collectiveSection___title',
+  ChildCommunityYamlCollectiveSectionBody = 'childCommunityYaml___collectiveSection___body',
+  ChildCommunityYamlCollectiveSectionButtonText = 'childCommunityYaml___collectiveSection___buttonText',
+  ChildCommunityYamlCollectiveSectionSignupFormUrl = 'childCommunityYaml___collectiveSection___signupFormUrl',
+  ChildCommunityYamlCollaborateSectionHeader = 'childCommunityYaml___collaborateSection___header',
+  ChildCommunityYamlCollaborateSectionBody = 'childCommunityYaml___collaborateSection___body',
+  ChildCommunityYamlCollaborateSectionCards = 'childCommunityYaml___collaborateSection___cards',
+  ChildCommunityYamlCollaborateSectionCardsTitle = 'childCommunityYaml___collaborateSection___cards___title',
+  ChildCommunityYamlCollaborateSectionCardsDescription = 'childCommunityYaml___collaborateSection___cards___description',
+  ChildCommunityYamlCollaborateSectionCardsButtonText = 'childCommunityYaml___collaborateSection___cards___buttonText',
+  ChildCommunityYamlCollaborateSectionCardsLink = 'childCommunityYaml___collaborateSection___cards___link',
+  ChildCommunityYamlFileAbsolutePath = 'childCommunityYaml___fileAbsolutePath',
   ChildContactYamlId = 'childContactYaml___id',
   ChildContactYamlParentId = 'childContactYaml___parent___id',
   ChildContactYamlParentParentId = 'childContactYaml___parent___parent___id',
@@ -6652,50 +6542,165 @@ export enum FileFieldsEnum {
   ChildContactYamlFaqImageId = 'childContactYaml___faq___image___id',
   ChildContactYamlFaqImageChildren = 'childContactYaml___faq___image___children',
   ChildContactYamlFileAbsolutePath = 'childContactYaml___fileAbsolutePath',
-  ChildFaqYamlId = 'childFaqYaml___id',
-  ChildFaqYamlParentId = 'childFaqYaml___parent___id',
-  ChildFaqYamlParentParentId = 'childFaqYaml___parent___parent___id',
-  ChildFaqYamlParentParentChildren = 'childFaqYaml___parent___parent___children',
-  ChildFaqYamlParentChildren = 'childFaqYaml___parent___children',
-  ChildFaqYamlParentChildrenId = 'childFaqYaml___parent___children___id',
-  ChildFaqYamlParentChildrenChildren = 'childFaqYaml___parent___children___children',
-  ChildFaqYamlParentInternalContent = 'childFaqYaml___parent___internal___content',
-  ChildFaqYamlParentInternalContentDigest = 'childFaqYaml___parent___internal___contentDigest',
-  ChildFaqYamlParentInternalDescription = 'childFaqYaml___parent___internal___description',
-  ChildFaqYamlParentInternalFieldOwners = 'childFaqYaml___parent___internal___fieldOwners',
-  ChildFaqYamlParentInternalIgnoreType = 'childFaqYaml___parent___internal___ignoreType',
-  ChildFaqYamlParentInternalMediaType = 'childFaqYaml___parent___internal___mediaType',
-  ChildFaqYamlParentInternalOwner = 'childFaqYaml___parent___internal___owner',
-  ChildFaqYamlParentInternalType = 'childFaqYaml___parent___internal___type',
-  ChildFaqYamlChildren = 'childFaqYaml___children',
-  ChildFaqYamlChildrenId = 'childFaqYaml___children___id',
-  ChildFaqYamlChildrenParentId = 'childFaqYaml___children___parent___id',
-  ChildFaqYamlChildrenParentChildren = 'childFaqYaml___children___parent___children',
-  ChildFaqYamlChildrenChildren = 'childFaqYaml___children___children',
-  ChildFaqYamlChildrenChildrenId = 'childFaqYaml___children___children___id',
-  ChildFaqYamlChildrenChildrenChildren = 'childFaqYaml___children___children___children',
-  ChildFaqYamlChildrenInternalContent = 'childFaqYaml___children___internal___content',
-  ChildFaqYamlChildrenInternalContentDigest = 'childFaqYaml___children___internal___contentDigest',
-  ChildFaqYamlChildrenInternalDescription = 'childFaqYaml___children___internal___description',
-  ChildFaqYamlChildrenInternalFieldOwners = 'childFaqYaml___children___internal___fieldOwners',
-  ChildFaqYamlChildrenInternalIgnoreType = 'childFaqYaml___children___internal___ignoreType',
-  ChildFaqYamlChildrenInternalMediaType = 'childFaqYaml___children___internal___mediaType',
-  ChildFaqYamlChildrenInternalOwner = 'childFaqYaml___children___internal___owner',
-  ChildFaqYamlChildrenInternalType = 'childFaqYaml___children___internal___type',
-  ChildFaqYamlInternalContent = 'childFaqYaml___internal___content',
-  ChildFaqYamlInternalContentDigest = 'childFaqYaml___internal___contentDigest',
-  ChildFaqYamlInternalDescription = 'childFaqYaml___internal___description',
-  ChildFaqYamlInternalFieldOwners = 'childFaqYaml___internal___fieldOwners',
-  ChildFaqYamlInternalIgnoreType = 'childFaqYaml___internal___ignoreType',
-  ChildFaqYamlInternalMediaType = 'childFaqYaml___internal___mediaType',
-  ChildFaqYamlInternalOwner = 'childFaqYaml___internal___owner',
-  ChildFaqYamlInternalType = 'childFaqYaml___internal___type',
-  ChildFaqYamlCategories = 'childFaqYaml___categories',
-  ChildFaqYamlCategoriesHeader = 'childFaqYaml___categories___header',
-  ChildFaqYamlCategoriesQuestions = 'childFaqYaml___categories___questions',
-  ChildFaqYamlCategoriesQuestionsQuestion = 'childFaqYaml___categories___questions___question',
-  ChildFaqYamlCategoriesQuestionsAnswer = 'childFaqYaml___categories___questions___answer',
-  ChildFaqYamlFileAbsolutePath = 'childFaqYaml___fileAbsolutePath',
+  ChildPressKitYamlId = 'childPressKitYaml___id',
+  ChildPressKitYamlParentId = 'childPressKitYaml___parent___id',
+  ChildPressKitYamlParentParentId = 'childPressKitYaml___parent___parent___id',
+  ChildPressKitYamlParentParentChildren = 'childPressKitYaml___parent___parent___children',
+  ChildPressKitYamlParentChildren = 'childPressKitYaml___parent___children',
+  ChildPressKitYamlParentChildrenId = 'childPressKitYaml___parent___children___id',
+  ChildPressKitYamlParentChildrenChildren = 'childPressKitYaml___parent___children___children',
+  ChildPressKitYamlParentInternalContent = 'childPressKitYaml___parent___internal___content',
+  ChildPressKitYamlParentInternalContentDigest = 'childPressKitYaml___parent___internal___contentDigest',
+  ChildPressKitYamlParentInternalDescription = 'childPressKitYaml___parent___internal___description',
+  ChildPressKitYamlParentInternalFieldOwners = 'childPressKitYaml___parent___internal___fieldOwners',
+  ChildPressKitYamlParentInternalIgnoreType = 'childPressKitYaml___parent___internal___ignoreType',
+  ChildPressKitYamlParentInternalMediaType = 'childPressKitYaml___parent___internal___mediaType',
+  ChildPressKitYamlParentInternalOwner = 'childPressKitYaml___parent___internal___owner',
+  ChildPressKitYamlParentInternalType = 'childPressKitYaml___parent___internal___type',
+  ChildPressKitYamlChildren = 'childPressKitYaml___children',
+  ChildPressKitYamlChildrenId = 'childPressKitYaml___children___id',
+  ChildPressKitYamlChildrenParentId = 'childPressKitYaml___children___parent___id',
+  ChildPressKitYamlChildrenParentChildren = 'childPressKitYaml___children___parent___children',
+  ChildPressKitYamlChildrenChildren = 'childPressKitYaml___children___children',
+  ChildPressKitYamlChildrenChildrenId = 'childPressKitYaml___children___children___id',
+  ChildPressKitYamlChildrenChildrenChildren = 'childPressKitYaml___children___children___children',
+  ChildPressKitYamlChildrenInternalContent = 'childPressKitYaml___children___internal___content',
+  ChildPressKitYamlChildrenInternalContentDigest = 'childPressKitYaml___children___internal___contentDigest',
+  ChildPressKitYamlChildrenInternalDescription = 'childPressKitYaml___children___internal___description',
+  ChildPressKitYamlChildrenInternalFieldOwners = 'childPressKitYaml___children___internal___fieldOwners',
+  ChildPressKitYamlChildrenInternalIgnoreType = 'childPressKitYaml___children___internal___ignoreType',
+  ChildPressKitYamlChildrenInternalMediaType = 'childPressKitYaml___children___internal___mediaType',
+  ChildPressKitYamlChildrenInternalOwner = 'childPressKitYaml___children___internal___owner',
+  ChildPressKitYamlChildrenInternalType = 'childPressKitYaml___children___internal___type',
+  ChildPressKitYamlInternalContent = 'childPressKitYaml___internal___content',
+  ChildPressKitYamlInternalContentDigest = 'childPressKitYaml___internal___contentDigest',
+  ChildPressKitYamlInternalDescription = 'childPressKitYaml___internal___description',
+  ChildPressKitYamlInternalFieldOwners = 'childPressKitYaml___internal___fieldOwners',
+  ChildPressKitYamlInternalIgnoreType = 'childPressKitYaml___internal___ignoreType',
+  ChildPressKitYamlInternalMediaType = 'childPressKitYaml___internal___mediaType',
+  ChildPressKitYamlInternalOwner = 'childPressKitYaml___internal___owner',
+  ChildPressKitYamlInternalType = 'childPressKitYaml___internal___type',
+  ChildPressKitYamlTopSectionHeader = 'childPressKitYaml___topSection___header',
+  ChildPressKitYamlTopSectionBody = 'childPressKitYaml___topSection___body',
+  ChildPressKitYamlTitleDescriptionSectionHeader = 'childPressKitYaml___titleDescriptionSection___header',
+  ChildPressKitYamlTitleDescriptionSectionDescription = 'childPressKitYaml___titleDescriptionSection___description',
+  ChildPressKitYamlEnableSectionHeader = 'childPressKitYaml___enableSection___header',
+  ChildPressKitYamlEnableSectionImageSourceInstanceName = 'childPressKitYaml___enableSection___image___sourceInstanceName',
+  ChildPressKitYamlEnableSectionImageAbsolutePath = 'childPressKitYaml___enableSection___image___absolutePath',
+  ChildPressKitYamlEnableSectionImageRelativePath = 'childPressKitYaml___enableSection___image___relativePath',
+  ChildPressKitYamlEnableSectionImageExtension = 'childPressKitYaml___enableSection___image___extension',
+  ChildPressKitYamlEnableSectionImageSize = 'childPressKitYaml___enableSection___image___size',
+  ChildPressKitYamlEnableSectionImagePrettySize = 'childPressKitYaml___enableSection___image___prettySize',
+  ChildPressKitYamlEnableSectionImageModifiedTime = 'childPressKitYaml___enableSection___image___modifiedTime',
+  ChildPressKitYamlEnableSectionImageAccessTime = 'childPressKitYaml___enableSection___image___accessTime',
+  ChildPressKitYamlEnableSectionImageChangeTime = 'childPressKitYaml___enableSection___image___changeTime',
+  ChildPressKitYamlEnableSectionImageBirthTime = 'childPressKitYaml___enableSection___image___birthTime',
+  ChildPressKitYamlEnableSectionImageRoot = 'childPressKitYaml___enableSection___image___root',
+  ChildPressKitYamlEnableSectionImageDir = 'childPressKitYaml___enableSection___image___dir',
+  ChildPressKitYamlEnableSectionImageBase = 'childPressKitYaml___enableSection___image___base',
+  ChildPressKitYamlEnableSectionImageExt = 'childPressKitYaml___enableSection___image___ext',
+  ChildPressKitYamlEnableSectionImageName = 'childPressKitYaml___enableSection___image___name',
+  ChildPressKitYamlEnableSectionImageRelativeDirectory = 'childPressKitYaml___enableSection___image___relativeDirectory',
+  ChildPressKitYamlEnableSectionImageDev = 'childPressKitYaml___enableSection___image___dev',
+  ChildPressKitYamlEnableSectionImageMode = 'childPressKitYaml___enableSection___image___mode',
+  ChildPressKitYamlEnableSectionImageNlink = 'childPressKitYaml___enableSection___image___nlink',
+  ChildPressKitYamlEnableSectionImageUid = 'childPressKitYaml___enableSection___image___uid',
+  ChildPressKitYamlEnableSectionImageGid = 'childPressKitYaml___enableSection___image___gid',
+  ChildPressKitYamlEnableSectionImageRdev = 'childPressKitYaml___enableSection___image___rdev',
+  ChildPressKitYamlEnableSectionImageIno = 'childPressKitYaml___enableSection___image___ino',
+  ChildPressKitYamlEnableSectionImageAtimeMs = 'childPressKitYaml___enableSection___image___atimeMs',
+  ChildPressKitYamlEnableSectionImageMtimeMs = 'childPressKitYaml___enableSection___image___mtimeMs',
+  ChildPressKitYamlEnableSectionImageCtimeMs = 'childPressKitYaml___enableSection___image___ctimeMs',
+  ChildPressKitYamlEnableSectionImageAtime = 'childPressKitYaml___enableSection___image___atime',
+  ChildPressKitYamlEnableSectionImageMtime = 'childPressKitYaml___enableSection___image___mtime',
+  ChildPressKitYamlEnableSectionImageCtime = 'childPressKitYaml___enableSection___image___ctime',
+  ChildPressKitYamlEnableSectionImageBirthtime = 'childPressKitYaml___enableSection___image___birthtime',
+  ChildPressKitYamlEnableSectionImageBirthtimeMs = 'childPressKitYaml___enableSection___image___birthtimeMs',
+  ChildPressKitYamlEnableSectionImageBlksize = 'childPressKitYaml___enableSection___image___blksize',
+  ChildPressKitYamlEnableSectionImageBlocks = 'childPressKitYaml___enableSection___image___blocks',
+  ChildPressKitYamlEnableSectionImagePublicUrl = 'childPressKitYaml___enableSection___image___publicURL',
+  ChildPressKitYamlEnableSectionImageId = 'childPressKitYaml___enableSection___image___id',
+  ChildPressKitYamlEnableSectionImageChildren = 'childPressKitYaml___enableSection___image___children',
+  ChildPressKitYamlEnableSectionDescription = 'childPressKitYaml___enableSection___description',
+  ChildPressKitYamlTimelineSectionHeader = 'childPressKitYaml___timelineSection___header',
+  ChildPressKitYamlTimelineSectionDescription = 'childPressKitYaml___timelineSection___description',
+  ChildPressKitYamlTimelineSectionCompletedItemIndex = 'childPressKitYaml___timelineSection___completedItemIndex',
+  ChildPressKitYamlTimelineSectionItems = 'childPressKitYaml___timelineSection___items',
+  ChildPressKitYamlTimelineSectionItemsDate = 'childPressKitYaml___timelineSection___items___date',
+  ChildPressKitYamlTimelineSectionItemsSummary = 'childPressKitYaml___timelineSection___items___summary',
+  ChildPressKitYamlTimelineSectionItemsDescription = 'childPressKitYaml___timelineSection___items___description',
+  ChildPressKitYamlTeamSectionHeader = 'childPressKitYaml___teamSection___header',
+  ChildPressKitYamlTeamSectionButtonText = 'childPressKitYaml___teamSection___buttonText',
+  ChildPressKitYamlTeamSectionMembers = 'childPressKitYaml___teamSection___members',
+  ChildPressKitYamlTeamSectionMembersName = 'childPressKitYaml___teamSection___members___name',
+  ChildPressKitYamlTeamSectionMembersTitle = 'childPressKitYaml___teamSection___members___title',
+  ChildPressKitYamlFeaturedSectionHeader = 'childPressKitYaml___featuredSection___header',
+  ChildPressKitYamlFeaturedSectionArticles = 'childPressKitYaml___featuredSection___articles',
+  ChildPressKitYamlFeaturedSectionArticlesHeader = 'childPressKitYaml___featuredSection___articles___header',
+  ChildPressKitYamlFeaturedSectionArticlesAuthor = 'childPressKitYaml___featuredSection___articles___author',
+  ChildPressKitYamlFeaturedSectionArticlesDate = 'childPressKitYaml___featuredSection___articles___date',
+  ChildPressKitYamlFeaturedSectionArticlesUrl = 'childPressKitYaml___featuredSection___articles___url',
+  ChildPressKitYamlAwardsSectionHeader = 'childPressKitYaml___awardsSection___header',
+  ChildPressKitYamlAwardsSectionItems = 'childPressKitYaml___awardsSection___items',
+  ChildPressKitYamlAwardsSectionItemsTitle = 'childPressKitYaml___awardsSection___items___title',
+  ChildPressKitYamlAwardsSectionItemsUrl = 'childPressKitYaml___awardsSection___items___url',
+  ChildPressKitYamlLogosSectionHeader = 'childPressKitYaml___logosSection___header',
+  ChildPressKitYamlLogosSectionButtonText = 'childPressKitYaml___logosSection___buttonText',
+  ChildPressKitYamlLogosSectionButtonLink = 'childPressKitYaml___logosSection___buttonLink',
+  ChildPressKitYamlConnectSectionHeader = 'childPressKitYaml___connectSection___header',
+  ChildPressKitYamlPhotosSectionHeader = 'childPressKitYaml___photosSection___header',
+  ChildPressKitYamlPhotosSectionPhotos = 'childPressKitYaml___photosSection___photos',
+  ChildPressKitYamlFileAbsolutePath = 'childPressKitYaml___fileAbsolutePath',
+  ChildFundYamlId = 'childFundYaml___id',
+  ChildFundYamlParentId = 'childFundYaml___parent___id',
+  ChildFundYamlParentParentId = 'childFundYaml___parent___parent___id',
+  ChildFundYamlParentParentChildren = 'childFundYaml___parent___parent___children',
+  ChildFundYamlParentChildren = 'childFundYaml___parent___children',
+  ChildFundYamlParentChildrenId = 'childFundYaml___parent___children___id',
+  ChildFundYamlParentChildrenChildren = 'childFundYaml___parent___children___children',
+  ChildFundYamlParentInternalContent = 'childFundYaml___parent___internal___content',
+  ChildFundYamlParentInternalContentDigest = 'childFundYaml___parent___internal___contentDigest',
+  ChildFundYamlParentInternalDescription = 'childFundYaml___parent___internal___description',
+  ChildFundYamlParentInternalFieldOwners = 'childFundYaml___parent___internal___fieldOwners',
+  ChildFundYamlParentInternalIgnoreType = 'childFundYaml___parent___internal___ignoreType',
+  ChildFundYamlParentInternalMediaType = 'childFundYaml___parent___internal___mediaType',
+  ChildFundYamlParentInternalOwner = 'childFundYaml___parent___internal___owner',
+  ChildFundYamlParentInternalType = 'childFundYaml___parent___internal___type',
+  ChildFundYamlChildren = 'childFundYaml___children',
+  ChildFundYamlChildrenId = 'childFundYaml___children___id',
+  ChildFundYamlChildrenParentId = 'childFundYaml___children___parent___id',
+  ChildFundYamlChildrenParentChildren = 'childFundYaml___children___parent___children',
+  ChildFundYamlChildrenChildren = 'childFundYaml___children___children',
+  ChildFundYamlChildrenChildrenId = 'childFundYaml___children___children___id',
+  ChildFundYamlChildrenChildrenChildren = 'childFundYaml___children___children___children',
+  ChildFundYamlChildrenInternalContent = 'childFundYaml___children___internal___content',
+  ChildFundYamlChildrenInternalContentDigest = 'childFundYaml___children___internal___contentDigest',
+  ChildFundYamlChildrenInternalDescription = 'childFundYaml___children___internal___description',
+  ChildFundYamlChildrenInternalFieldOwners = 'childFundYaml___children___internal___fieldOwners',
+  ChildFundYamlChildrenInternalIgnoreType = 'childFundYaml___children___internal___ignoreType',
+  ChildFundYamlChildrenInternalMediaType = 'childFundYaml___children___internal___mediaType',
+  ChildFundYamlChildrenInternalOwner = 'childFundYaml___children___internal___owner',
+  ChildFundYamlChildrenInternalType = 'childFundYaml___children___internal___type',
+  ChildFundYamlInternalContent = 'childFundYaml___internal___content',
+  ChildFundYamlInternalContentDigest = 'childFundYaml___internal___contentDigest',
+  ChildFundYamlInternalDescription = 'childFundYaml___internal___description',
+  ChildFundYamlInternalFieldOwners = 'childFundYaml___internal___fieldOwners',
+  ChildFundYamlInternalIgnoreType = 'childFundYaml___internal___ignoreType',
+  ChildFundYamlInternalMediaType = 'childFundYaml___internal___mediaType',
+  ChildFundYamlInternalOwner = 'childFundYaml___internal___owner',
+  ChildFundYamlInternalType = 'childFundYaml___internal___type',
+  ChildFundYamlSeoTitle = 'childFundYaml___seo___title',
+  ChildFundYamlSeoDescription = 'childFundYaml___seo___description',
+  ChildFundYamlTopSectionHeader = 'childFundYaml___topSection___header',
+  ChildFundYamlTopSectionBody = 'childFundYaml___topSection___body',
+  ChildFundYamlFoldSectionTitle = 'childFundYaml___foldSection___title',
+  ChildFundYamlFoldSectionBody = 'childFundYaml___foldSection___body',
+  ChildFundYamlThesisSectionTitle = 'childFundYaml___thesisSection___title',
+  ChildFundYamlThesisSectionBody = 'childFundYaml___thesisSection___body',
+  ChildFundYamlCalltoActionSectionCallToActions = 'childFundYaml___calltoActionSection___callToActions',
+  ChildFundYamlCalltoActionSectionCallToActionsHeader = 'childFundYaml___calltoActionSection___callToActions___header',
+  ChildFundYamlCalltoActionSectionCallToActionsDescription = 'childFundYaml___calltoActionSection___callToActions___description',
+  ChildFundYamlFileAbsolutePath = 'childFundYaml___fileAbsolutePath',
   ChildInvestYamlId = 'childInvestYaml___id',
   ChildInvestYamlParentId = 'childInvestYaml___parent___id',
   ChildInvestYamlParentParentId = 'childInvestYaml___parent___parent___id',
@@ -6829,6 +6834,50 @@ export enum FileFieldsEnum {
   ChildMainnetYamlWhatsNextSectionInfoItemsDescription = 'childMainnetYaml___whatsNextSection___infoItems___description',
   ChildMainnetYamlWhatsNextSectionInfoItemsGitLink = 'childMainnetYaml___whatsNextSection___infoItems___gitLink',
   ChildMainnetYamlFileAbsolutePath = 'childMainnetYaml___fileAbsolutePath',
+  ChildFaqYamlId = 'childFaqYaml___id',
+  ChildFaqYamlParentId = 'childFaqYaml___parent___id',
+  ChildFaqYamlParentParentId = 'childFaqYaml___parent___parent___id',
+  ChildFaqYamlParentParentChildren = 'childFaqYaml___parent___parent___children',
+  ChildFaqYamlParentChildren = 'childFaqYaml___parent___children',
+  ChildFaqYamlParentChildrenId = 'childFaqYaml___parent___children___id',
+  ChildFaqYamlParentChildrenChildren = 'childFaqYaml___parent___children___children',
+  ChildFaqYamlParentInternalContent = 'childFaqYaml___parent___internal___content',
+  ChildFaqYamlParentInternalContentDigest = 'childFaqYaml___parent___internal___contentDigest',
+  ChildFaqYamlParentInternalDescription = 'childFaqYaml___parent___internal___description',
+  ChildFaqYamlParentInternalFieldOwners = 'childFaqYaml___parent___internal___fieldOwners',
+  ChildFaqYamlParentInternalIgnoreType = 'childFaqYaml___parent___internal___ignoreType',
+  ChildFaqYamlParentInternalMediaType = 'childFaqYaml___parent___internal___mediaType',
+  ChildFaqYamlParentInternalOwner = 'childFaqYaml___parent___internal___owner',
+  ChildFaqYamlParentInternalType = 'childFaqYaml___parent___internal___type',
+  ChildFaqYamlChildren = 'childFaqYaml___children',
+  ChildFaqYamlChildrenId = 'childFaqYaml___children___id',
+  ChildFaqYamlChildrenParentId = 'childFaqYaml___children___parent___id',
+  ChildFaqYamlChildrenParentChildren = 'childFaqYaml___children___parent___children',
+  ChildFaqYamlChildrenChildren = 'childFaqYaml___children___children',
+  ChildFaqYamlChildrenChildrenId = 'childFaqYaml___children___children___id',
+  ChildFaqYamlChildrenChildrenChildren = 'childFaqYaml___children___children___children',
+  ChildFaqYamlChildrenInternalContent = 'childFaqYaml___children___internal___content',
+  ChildFaqYamlChildrenInternalContentDigest = 'childFaqYaml___children___internal___contentDigest',
+  ChildFaqYamlChildrenInternalDescription = 'childFaqYaml___children___internal___description',
+  ChildFaqYamlChildrenInternalFieldOwners = 'childFaqYaml___children___internal___fieldOwners',
+  ChildFaqYamlChildrenInternalIgnoreType = 'childFaqYaml___children___internal___ignoreType',
+  ChildFaqYamlChildrenInternalMediaType = 'childFaqYaml___children___internal___mediaType',
+  ChildFaqYamlChildrenInternalOwner = 'childFaqYaml___children___internal___owner',
+  ChildFaqYamlChildrenInternalType = 'childFaqYaml___children___internal___type',
+  ChildFaqYamlInternalContent = 'childFaqYaml___internal___content',
+  ChildFaqYamlInternalContentDigest = 'childFaqYaml___internal___contentDigest',
+  ChildFaqYamlInternalDescription = 'childFaqYaml___internal___description',
+  ChildFaqYamlInternalFieldOwners = 'childFaqYaml___internal___fieldOwners',
+  ChildFaqYamlInternalIgnoreType = 'childFaqYaml___internal___ignoreType',
+  ChildFaqYamlInternalMediaType = 'childFaqYaml___internal___mediaType',
+  ChildFaqYamlInternalOwner = 'childFaqYaml___internal___owner',
+  ChildFaqYamlInternalType = 'childFaqYaml___internal___type',
+  ChildFaqYamlCategories = 'childFaqYaml___categories',
+  ChildFaqYamlCategoriesHeader = 'childFaqYaml___categories___header',
+  ChildFaqYamlCategoriesQuestions = 'childFaqYaml___categories___questions',
+  ChildFaqYamlCategoriesQuestionsQuestion = 'childFaqYaml___categories___questions___question',
+  ChildFaqYamlCategoriesQuestionsAnswer = 'childFaqYaml___categories___questions___answer',
+  ChildFaqYamlFileAbsolutePath = 'childFaqYaml___fileAbsolutePath',
   ChildPartnersYamlId = 'childPartnersYaml___id',
   ChildPartnersYamlParentId = 'childPartnersYaml___parent___id',
   ChildPartnersYamlParentParentId = 'childPartnersYaml___parent___parent___id',
@@ -6909,56 +6958,217 @@ export enum FileFieldsEnum {
   ChildPartnersYamlContactCardHeader = 'childPartnersYaml___contactCard___header',
   ChildPartnersYamlContactCardBody = 'childPartnersYaml___contactCard___body',
   ChildPartnersYamlFileAbsolutePath = 'childPartnersYaml___fileAbsolutePath',
-  ChildFundYamlId = 'childFundYaml___id',
-  ChildFundYamlParentId = 'childFundYaml___parent___id',
-  ChildFundYamlParentParentId = 'childFundYaml___parent___parent___id',
-  ChildFundYamlParentParentChildren = 'childFundYaml___parent___parent___children',
-  ChildFundYamlParentChildren = 'childFundYaml___parent___children',
-  ChildFundYamlParentChildrenId = 'childFundYaml___parent___children___id',
-  ChildFundYamlParentChildrenChildren = 'childFundYaml___parent___children___children',
-  ChildFundYamlParentInternalContent = 'childFundYaml___parent___internal___content',
-  ChildFundYamlParentInternalContentDigest = 'childFundYaml___parent___internal___contentDigest',
-  ChildFundYamlParentInternalDescription = 'childFundYaml___parent___internal___description',
-  ChildFundYamlParentInternalFieldOwners = 'childFundYaml___parent___internal___fieldOwners',
-  ChildFundYamlParentInternalIgnoreType = 'childFundYaml___parent___internal___ignoreType',
-  ChildFundYamlParentInternalMediaType = 'childFundYaml___parent___internal___mediaType',
-  ChildFundYamlParentInternalOwner = 'childFundYaml___parent___internal___owner',
-  ChildFundYamlParentInternalType = 'childFundYaml___parent___internal___type',
-  ChildFundYamlChildren = 'childFundYaml___children',
-  ChildFundYamlChildrenId = 'childFundYaml___children___id',
-  ChildFundYamlChildrenParentId = 'childFundYaml___children___parent___id',
-  ChildFundYamlChildrenParentChildren = 'childFundYaml___children___parent___children',
-  ChildFundYamlChildrenChildren = 'childFundYaml___children___children',
-  ChildFundYamlChildrenChildrenId = 'childFundYaml___children___children___id',
-  ChildFundYamlChildrenChildrenChildren = 'childFundYaml___children___children___children',
-  ChildFundYamlChildrenInternalContent = 'childFundYaml___children___internal___content',
-  ChildFundYamlChildrenInternalContentDigest = 'childFundYaml___children___internal___contentDigest',
-  ChildFundYamlChildrenInternalDescription = 'childFundYaml___children___internal___description',
-  ChildFundYamlChildrenInternalFieldOwners = 'childFundYaml___children___internal___fieldOwners',
-  ChildFundYamlChildrenInternalIgnoreType = 'childFundYaml___children___internal___ignoreType',
-  ChildFundYamlChildrenInternalMediaType = 'childFundYaml___children___internal___mediaType',
-  ChildFundYamlChildrenInternalOwner = 'childFundYaml___children___internal___owner',
-  ChildFundYamlChildrenInternalType = 'childFundYaml___children___internal___type',
-  ChildFundYamlInternalContent = 'childFundYaml___internal___content',
-  ChildFundYamlInternalContentDigest = 'childFundYaml___internal___contentDigest',
-  ChildFundYamlInternalDescription = 'childFundYaml___internal___description',
-  ChildFundYamlInternalFieldOwners = 'childFundYaml___internal___fieldOwners',
-  ChildFundYamlInternalIgnoreType = 'childFundYaml___internal___ignoreType',
-  ChildFundYamlInternalMediaType = 'childFundYaml___internal___mediaType',
-  ChildFundYamlInternalOwner = 'childFundYaml___internal___owner',
-  ChildFundYamlInternalType = 'childFundYaml___internal___type',
-  ChildFundYamlSeoTitle = 'childFundYaml___seo___title',
-  ChildFundYamlSeoDescription = 'childFundYaml___seo___description',
-  ChildFundYamlTopSectionHeader = 'childFundYaml___topSection___header',
-  ChildFundYamlTopSectionBody = 'childFundYaml___topSection___body',
-  ChildFundYamlFoldSectionTitle = 'childFundYaml___foldSection___title',
-  ChildFundYamlFoldSectionBody = 'childFundYaml___foldSection___body',
-  ChildFundYamlThesisSectionTitle = 'childFundYaml___thesisSection___title',
-  ChildFundYamlThesisSectionBody = 'childFundYaml___thesisSection___body',
-  ChildFundYamlCalltoActionSectionCallToActions = 'childFundYaml___calltoActionSection___callToActions',
-  ChildFundYamlCalltoActionSectionCallToActionsHeader = 'childFundYaml___calltoActionSection___callToActions___header',
-  ChildFundYamlCalltoActionSectionCallToActionsDescription = 'childFundYaml___calltoActionSection___callToActions___description',
-  ChildFundYamlFileAbsolutePath = 'childFundYaml___fileAbsolutePath',
+  ChildMediaYamlId = 'childMediaYaml___id',
+  ChildMediaYamlParentId = 'childMediaYaml___parent___id',
+  ChildMediaYamlParentParentId = 'childMediaYaml___parent___parent___id',
+  ChildMediaYamlParentParentChildren = 'childMediaYaml___parent___parent___children',
+  ChildMediaYamlParentChildren = 'childMediaYaml___parent___children',
+  ChildMediaYamlParentChildrenId = 'childMediaYaml___parent___children___id',
+  ChildMediaYamlParentChildrenChildren = 'childMediaYaml___parent___children___children',
+  ChildMediaYamlParentInternalContent = 'childMediaYaml___parent___internal___content',
+  ChildMediaYamlParentInternalContentDigest = 'childMediaYaml___parent___internal___contentDigest',
+  ChildMediaYamlParentInternalDescription = 'childMediaYaml___parent___internal___description',
+  ChildMediaYamlParentInternalFieldOwners = 'childMediaYaml___parent___internal___fieldOwners',
+  ChildMediaYamlParentInternalIgnoreType = 'childMediaYaml___parent___internal___ignoreType',
+  ChildMediaYamlParentInternalMediaType = 'childMediaYaml___parent___internal___mediaType',
+  ChildMediaYamlParentInternalOwner = 'childMediaYaml___parent___internal___owner',
+  ChildMediaYamlParentInternalType = 'childMediaYaml___parent___internal___type',
+  ChildMediaYamlChildren = 'childMediaYaml___children',
+  ChildMediaYamlChildrenId = 'childMediaYaml___children___id',
+  ChildMediaYamlChildrenParentId = 'childMediaYaml___children___parent___id',
+  ChildMediaYamlChildrenParentChildren = 'childMediaYaml___children___parent___children',
+  ChildMediaYamlChildrenChildren = 'childMediaYaml___children___children',
+  ChildMediaYamlChildrenChildrenId = 'childMediaYaml___children___children___id',
+  ChildMediaYamlChildrenChildrenChildren = 'childMediaYaml___children___children___children',
+  ChildMediaYamlChildrenInternalContent = 'childMediaYaml___children___internal___content',
+  ChildMediaYamlChildrenInternalContentDigest = 'childMediaYaml___children___internal___contentDigest',
+  ChildMediaYamlChildrenInternalDescription = 'childMediaYaml___children___internal___description',
+  ChildMediaYamlChildrenInternalFieldOwners = 'childMediaYaml___children___internal___fieldOwners',
+  ChildMediaYamlChildrenInternalIgnoreType = 'childMediaYaml___children___internal___ignoreType',
+  ChildMediaYamlChildrenInternalMediaType = 'childMediaYaml___children___internal___mediaType',
+  ChildMediaYamlChildrenInternalOwner = 'childMediaYaml___children___internal___owner',
+  ChildMediaYamlChildrenInternalType = 'childMediaYaml___children___internal___type',
+  ChildMediaYamlInternalContent = 'childMediaYaml___internal___content',
+  ChildMediaYamlInternalContentDigest = 'childMediaYaml___internal___contentDigest',
+  ChildMediaYamlInternalDescription = 'childMediaYaml___internal___description',
+  ChildMediaYamlInternalFieldOwners = 'childMediaYaml___internal___fieldOwners',
+  ChildMediaYamlInternalIgnoreType = 'childMediaYaml___internal___ignoreType',
+  ChildMediaYamlInternalMediaType = 'childMediaYaml___internal___mediaType',
+  ChildMediaYamlInternalOwner = 'childMediaYaml___internal___owner',
+  ChildMediaYamlInternalType = 'childMediaYaml___internal___type',
+  ChildMediaYamlHeader = 'childMediaYaml___header',
+  ChildMediaYamlCategories = 'childMediaYaml___categories',
+  ChildMediaYamlCategoriesName = 'childMediaYaml___categories___name',
+  ChildMediaYamlCategoriesButtonText = 'childMediaYaml___categories___buttonText',
+  ChildMediaYamlCategoriesShowPlay = 'childMediaYaml___categories___showPlay',
+  ChildMediaYamlCategoriesItems = 'childMediaYaml___categories___items',
+  ChildMediaYamlCategoriesItemsTitle = 'childMediaYaml___categories___items___title',
+  ChildMediaYamlCategoriesItemsAuthor = 'childMediaYaml___categories___items___author',
+  ChildMediaYamlCategoriesItemsUrl = 'childMediaYaml___categories___items___url',
+  ChildMediaYamlCategoriesItemsDate = 'childMediaYaml___categories___items___date',
+  ChildMediaYamlCategoriesItemsIsMainnet = 'childMediaYaml___categories___items___isMainnet',
+  ChildMediaYamlCategoriesItemsIsTokenSale = 'childMediaYaml___categories___items___isTokenSale',
+  ChildMediaYamlFileAbsolutePath = 'childMediaYaml___fileAbsolutePath',
+  ChildMarkdownRemarkId = 'childMarkdownRemark___id',
+  ChildMarkdownRemarkFrontmatterTitle = 'childMarkdownRemark___frontmatter___title',
+  ChildMarkdownRemarkExcerpt = 'childMarkdownRemark___excerpt',
+  ChildMarkdownRemarkRawMarkdownBody = 'childMarkdownRemark___rawMarkdownBody',
+  ChildMarkdownRemarkFileAbsolutePath = 'childMarkdownRemark___fileAbsolutePath',
+  ChildMarkdownRemarkHtml = 'childMarkdownRemark___html',
+  ChildMarkdownRemarkHtmlAst = 'childMarkdownRemark___htmlAst',
+  ChildMarkdownRemarkExcerptAst = 'childMarkdownRemark___excerptAst',
+  ChildMarkdownRemarkHeadings = 'childMarkdownRemark___headings',
+  ChildMarkdownRemarkHeadingsId = 'childMarkdownRemark___headings___id',
+  ChildMarkdownRemarkHeadingsValue = 'childMarkdownRemark___headings___value',
+  ChildMarkdownRemarkHeadingsDepth = 'childMarkdownRemark___headings___depth',
+  ChildMarkdownRemarkTimeToRead = 'childMarkdownRemark___timeToRead',
+  ChildMarkdownRemarkTableOfContents = 'childMarkdownRemark___tableOfContents',
+  ChildMarkdownRemarkWordCountParagraphs = 'childMarkdownRemark___wordCount___paragraphs',
+  ChildMarkdownRemarkWordCountSentences = 'childMarkdownRemark___wordCount___sentences',
+  ChildMarkdownRemarkWordCountWords = 'childMarkdownRemark___wordCount___words',
+  ChildMarkdownRemarkParentId = 'childMarkdownRemark___parent___id',
+  ChildMarkdownRemarkParentParentId = 'childMarkdownRemark___parent___parent___id',
+  ChildMarkdownRemarkParentParentChildren = 'childMarkdownRemark___parent___parent___children',
+  ChildMarkdownRemarkParentChildren = 'childMarkdownRemark___parent___children',
+  ChildMarkdownRemarkParentChildrenId = 'childMarkdownRemark___parent___children___id',
+  ChildMarkdownRemarkParentChildrenChildren = 'childMarkdownRemark___parent___children___children',
+  ChildMarkdownRemarkParentInternalContent = 'childMarkdownRemark___parent___internal___content',
+  ChildMarkdownRemarkParentInternalContentDigest = 'childMarkdownRemark___parent___internal___contentDigest',
+  ChildMarkdownRemarkParentInternalDescription = 'childMarkdownRemark___parent___internal___description',
+  ChildMarkdownRemarkParentInternalFieldOwners = 'childMarkdownRemark___parent___internal___fieldOwners',
+  ChildMarkdownRemarkParentInternalIgnoreType = 'childMarkdownRemark___parent___internal___ignoreType',
+  ChildMarkdownRemarkParentInternalMediaType = 'childMarkdownRemark___parent___internal___mediaType',
+  ChildMarkdownRemarkParentInternalOwner = 'childMarkdownRemark___parent___internal___owner',
+  ChildMarkdownRemarkParentInternalType = 'childMarkdownRemark___parent___internal___type',
+  ChildMarkdownRemarkChildren = 'childMarkdownRemark___children',
+  ChildMarkdownRemarkChildrenId = 'childMarkdownRemark___children___id',
+  ChildMarkdownRemarkChildrenParentId = 'childMarkdownRemark___children___parent___id',
+  ChildMarkdownRemarkChildrenParentChildren = 'childMarkdownRemark___children___parent___children',
+  ChildMarkdownRemarkChildrenChildren = 'childMarkdownRemark___children___children',
+  ChildMarkdownRemarkChildrenChildrenId = 'childMarkdownRemark___children___children___id',
+  ChildMarkdownRemarkChildrenChildrenChildren = 'childMarkdownRemark___children___children___children',
+  ChildMarkdownRemarkChildrenInternalContent = 'childMarkdownRemark___children___internal___content',
+  ChildMarkdownRemarkChildrenInternalContentDigest = 'childMarkdownRemark___children___internal___contentDigest',
+  ChildMarkdownRemarkChildrenInternalDescription = 'childMarkdownRemark___children___internal___description',
+  ChildMarkdownRemarkChildrenInternalFieldOwners = 'childMarkdownRemark___children___internal___fieldOwners',
+  ChildMarkdownRemarkChildrenInternalIgnoreType = 'childMarkdownRemark___children___internal___ignoreType',
+  ChildMarkdownRemarkChildrenInternalMediaType = 'childMarkdownRemark___children___internal___mediaType',
+  ChildMarkdownRemarkChildrenInternalOwner = 'childMarkdownRemark___children___internal___owner',
+  ChildMarkdownRemarkChildrenInternalType = 'childMarkdownRemark___children___internal___type',
+  ChildMarkdownRemarkInternalContent = 'childMarkdownRemark___internal___content',
+  ChildMarkdownRemarkInternalContentDigest = 'childMarkdownRemark___internal___contentDigest',
+  ChildMarkdownRemarkInternalDescription = 'childMarkdownRemark___internal___description',
+  ChildMarkdownRemarkInternalFieldOwners = 'childMarkdownRemark___internal___fieldOwners',
+  ChildMarkdownRemarkInternalIgnoreType = 'childMarkdownRemark___internal___ignoreType',
+  ChildMarkdownRemarkInternalMediaType = 'childMarkdownRemark___internal___mediaType',
+  ChildMarkdownRemarkInternalOwner = 'childMarkdownRemark___internal___owner',
+  ChildMarkdownRemarkInternalType = 'childMarkdownRemark___internal___type',
+  ChildHomeYamlId = 'childHomeYaml___id',
+  ChildHomeYamlParentId = 'childHomeYaml___parent___id',
+  ChildHomeYamlParentParentId = 'childHomeYaml___parent___parent___id',
+  ChildHomeYamlParentParentChildren = 'childHomeYaml___parent___parent___children',
+  ChildHomeYamlParentChildren = 'childHomeYaml___parent___children',
+  ChildHomeYamlParentChildrenId = 'childHomeYaml___parent___children___id',
+  ChildHomeYamlParentChildrenChildren = 'childHomeYaml___parent___children___children',
+  ChildHomeYamlParentInternalContent = 'childHomeYaml___parent___internal___content',
+  ChildHomeYamlParentInternalContentDigest = 'childHomeYaml___parent___internal___contentDigest',
+  ChildHomeYamlParentInternalDescription = 'childHomeYaml___parent___internal___description',
+  ChildHomeYamlParentInternalFieldOwners = 'childHomeYaml___parent___internal___fieldOwners',
+  ChildHomeYamlParentInternalIgnoreType = 'childHomeYaml___parent___internal___ignoreType',
+  ChildHomeYamlParentInternalMediaType = 'childHomeYaml___parent___internal___mediaType',
+  ChildHomeYamlParentInternalOwner = 'childHomeYaml___parent___internal___owner',
+  ChildHomeYamlParentInternalType = 'childHomeYaml___parent___internal___type',
+  ChildHomeYamlChildren = 'childHomeYaml___children',
+  ChildHomeYamlChildrenId = 'childHomeYaml___children___id',
+  ChildHomeYamlChildrenParentId = 'childHomeYaml___children___parent___id',
+  ChildHomeYamlChildrenParentChildren = 'childHomeYaml___children___parent___children',
+  ChildHomeYamlChildrenChildren = 'childHomeYaml___children___children',
+  ChildHomeYamlChildrenChildrenId = 'childHomeYaml___children___children___id',
+  ChildHomeYamlChildrenChildrenChildren = 'childHomeYaml___children___children___children',
+  ChildHomeYamlChildrenInternalContent = 'childHomeYaml___children___internal___content',
+  ChildHomeYamlChildrenInternalContentDigest = 'childHomeYaml___children___internal___contentDigest',
+  ChildHomeYamlChildrenInternalDescription = 'childHomeYaml___children___internal___description',
+  ChildHomeYamlChildrenInternalFieldOwners = 'childHomeYaml___children___internal___fieldOwners',
+  ChildHomeYamlChildrenInternalIgnoreType = 'childHomeYaml___children___internal___ignoreType',
+  ChildHomeYamlChildrenInternalMediaType = 'childHomeYaml___children___internal___mediaType',
+  ChildHomeYamlChildrenInternalOwner = 'childHomeYaml___children___internal___owner',
+  ChildHomeYamlChildrenInternalType = 'childHomeYaml___children___internal___type',
+  ChildHomeYamlInternalContent = 'childHomeYaml___internal___content',
+  ChildHomeYamlInternalContentDigest = 'childHomeYaml___internal___contentDigest',
+  ChildHomeYamlInternalDescription = 'childHomeYaml___internal___description',
+  ChildHomeYamlInternalFieldOwners = 'childHomeYaml___internal___fieldOwners',
+  ChildHomeYamlInternalIgnoreType = 'childHomeYaml___internal___ignoreType',
+  ChildHomeYamlInternalMediaType = 'childHomeYaml___internal___mediaType',
+  ChildHomeYamlInternalOwner = 'childHomeYaml___internal___owner',
+  ChildHomeYamlInternalType = 'childHomeYaml___internal___type',
+  ChildHomeYamlFoldSectionTagline = 'childHomeYaml___foldSection___tagline',
+  ChildHomeYamlFoldSectionDescription = 'childHomeYaml___foldSection___description',
+  ChildHomeYamlMarketplaceSectionHeader = 'childHomeYaml___marketplaceSection___header',
+  ChildHomeYamlMarketplaceSectionTooltip = 'childHomeYaml___marketplaceSection___tooltip',
+  ChildHomeYamlMarketplaceSectionBodyGreen = 'childHomeYaml___marketplaceSection___body___green',
+  ChildHomeYamlMarketplaceSectionBodyMiddle = 'childHomeYaml___marketplaceSection___body___middle',
+  ChildHomeYamlMarketplaceSectionBodyPopover = 'childHomeYaml___marketplaceSection___body___popover',
+  ChildHomeYamlMarketplaceSectionBodyEnd = 'childHomeYaml___marketplaceSection___body___end',
+  ChildHomeYamlMarketplaceSectionCallToActions = 'childHomeYaml___marketplaceSection___callToActions',
+  ChildHomeYamlMarketplaceSectionCallToActionsCaption = 'childHomeYaml___marketplaceSection___callToActions___caption',
+  ChildHomeYamlMarketplaceSectionCallToActionsHeader = 'childHomeYaml___marketplaceSection___callToActions___header',
+  ChildHomeYamlMarketplaceSectionCallToActionsDescription = 'childHomeYaml___marketplaceSection___callToActions___description',
+  ChildHomeYamlMarketplaceSectionCallToActionsLinkText = 'childHomeYaml___marketplaceSection___callToActions___linkText',
+  ChildHomeYamlMarketplaceSectionCallToActionsLinkUrl = 'childHomeYaml___marketplaceSection___callToActions___linkUrl',
+  ChildHomeYamlClimateSectionHeader = 'childHomeYaml___climateSection___header',
+  ChildHomeYamlClimateSectionDescription = 'childHomeYaml___climateSection___description',
+  ChildHomeYamlClimateSectionImageSourceInstanceName = 'childHomeYaml___climateSection___image___sourceInstanceName',
+  ChildHomeYamlClimateSectionImageAbsolutePath = 'childHomeYaml___climateSection___image___absolutePath',
+  ChildHomeYamlClimateSectionImageRelativePath = 'childHomeYaml___climateSection___image___relativePath',
+  ChildHomeYamlClimateSectionImageExtension = 'childHomeYaml___climateSection___image___extension',
+  ChildHomeYamlClimateSectionImageSize = 'childHomeYaml___climateSection___image___size',
+  ChildHomeYamlClimateSectionImagePrettySize = 'childHomeYaml___climateSection___image___prettySize',
+  ChildHomeYamlClimateSectionImageModifiedTime = 'childHomeYaml___climateSection___image___modifiedTime',
+  ChildHomeYamlClimateSectionImageAccessTime = 'childHomeYaml___climateSection___image___accessTime',
+  ChildHomeYamlClimateSectionImageChangeTime = 'childHomeYaml___climateSection___image___changeTime',
+  ChildHomeYamlClimateSectionImageBirthTime = 'childHomeYaml___climateSection___image___birthTime',
+  ChildHomeYamlClimateSectionImageRoot = 'childHomeYaml___climateSection___image___root',
+  ChildHomeYamlClimateSectionImageDir = 'childHomeYaml___climateSection___image___dir',
+  ChildHomeYamlClimateSectionImageBase = 'childHomeYaml___climateSection___image___base',
+  ChildHomeYamlClimateSectionImageExt = 'childHomeYaml___climateSection___image___ext',
+  ChildHomeYamlClimateSectionImageName = 'childHomeYaml___climateSection___image___name',
+  ChildHomeYamlClimateSectionImageRelativeDirectory = 'childHomeYaml___climateSection___image___relativeDirectory',
+  ChildHomeYamlClimateSectionImageDev = 'childHomeYaml___climateSection___image___dev',
+  ChildHomeYamlClimateSectionImageMode = 'childHomeYaml___climateSection___image___mode',
+  ChildHomeYamlClimateSectionImageNlink = 'childHomeYaml___climateSection___image___nlink',
+  ChildHomeYamlClimateSectionImageUid = 'childHomeYaml___climateSection___image___uid',
+  ChildHomeYamlClimateSectionImageGid = 'childHomeYaml___climateSection___image___gid',
+  ChildHomeYamlClimateSectionImageRdev = 'childHomeYaml___climateSection___image___rdev',
+  ChildHomeYamlClimateSectionImageIno = 'childHomeYaml___climateSection___image___ino',
+  ChildHomeYamlClimateSectionImageAtimeMs = 'childHomeYaml___climateSection___image___atimeMs',
+  ChildHomeYamlClimateSectionImageMtimeMs = 'childHomeYaml___climateSection___image___mtimeMs',
+  ChildHomeYamlClimateSectionImageCtimeMs = 'childHomeYaml___climateSection___image___ctimeMs',
+  ChildHomeYamlClimateSectionImageAtime = 'childHomeYaml___climateSection___image___atime',
+  ChildHomeYamlClimateSectionImageMtime = 'childHomeYaml___climateSection___image___mtime',
+  ChildHomeYamlClimateSectionImageCtime = 'childHomeYaml___climateSection___image___ctime',
+  ChildHomeYamlClimateSectionImageBirthtime = 'childHomeYaml___climateSection___image___birthtime',
+  ChildHomeYamlClimateSectionImageBirthtimeMs = 'childHomeYaml___climateSection___image___birthtimeMs',
+  ChildHomeYamlClimateSectionImageBlksize = 'childHomeYaml___climateSection___image___blksize',
+  ChildHomeYamlClimateSectionImageBlocks = 'childHomeYaml___climateSection___image___blocks',
+  ChildHomeYamlClimateSectionImagePublicUrl = 'childHomeYaml___climateSection___image___publicURL',
+  ChildHomeYamlClimateSectionImageId = 'childHomeYaml___climateSection___image___id',
+  ChildHomeYamlClimateSectionImageChildren = 'childHomeYaml___climateSection___image___children',
+  ChildHomeYamlClimateSectionSolutionHeader = 'childHomeYaml___climateSection___solution___header',
+  ChildHomeYamlClimateSectionSolutionDescription = 'childHomeYaml___climateSection___solution___description',
+  ChildHomeYamlClimateSectionProblemHeader = 'childHomeYaml___climateSection___problem___header',
+  ChildHomeYamlClimateSectionProblemDescription = 'childHomeYaml___climateSection___problem___description',
+  ChildHomeYamlCarbonPlusSectionSmallHeaderFeatured = 'childHomeYaml___carbonPlusSection___smallHeader___featured',
+  ChildHomeYamlCarbonPlusSectionSmallHeaderCreditName = 'childHomeYaml___carbonPlusSection___smallHeader___creditName',
+  ChildHomeYamlCarbonPlusSectionHeader = 'childHomeYaml___carbonPlusSection___header',
+  ChildHomeYamlCarbonPlusSectionDescription = 'childHomeYaml___carbonPlusSection___description',
+  ChildHomeYamlCarbonPlusSectionLinkText = 'childHomeYaml___carbonPlusSection___linkText',
+  ChildHomeYamlCarbonPlusSectionLinkUrl = 'childHomeYaml___carbonPlusSection___linkUrl',
+  ChildHomeYamlLedgerSectionDescription = 'childHomeYaml___ledgerSection___description',
+  ChildHomeYamlValuesSectionHeader = 'childHomeYaml___valuesSection___header',
+  ChildHomeYamlValuesSectionImageItems = 'childHomeYaml___valuesSection___imageItems',
+  ChildHomeYamlValuesSectionImageItemsHeader = 'childHomeYaml___valuesSection___imageItems___header',
+  ChildHomeYamlValuesSectionImageItemsDescription = 'childHomeYaml___valuesSection___imageItems___description',
+  ChildHomeYamlFileAbsolutePath = 'childHomeYaml___fileAbsolutePath',
   ChildResourcesYamlId = 'childResourcesYaml___id',
   ChildResourcesYamlParentId = 'childResourcesYaml___parent___id',
   ChildResourcesYamlParentParentId = 'childResourcesYaml___parent___parent___id',
@@ -7017,115 +7227,118 @@ export enum FileFieldsEnum {
   ChildResourcesYamlLedgerSectionCardsButtonText = 'childResourcesYaml___ledgerSection___cards___buttonText',
   ChildResourcesYamlLedgerSectionCardsLink = 'childResourcesYaml___ledgerSection___cards___link',
   ChildResourcesYamlFileAbsolutePath = 'childResourcesYaml___fileAbsolutePath',
-  ChildPressKitYamlId = 'childPressKitYaml___id',
-  ChildPressKitYamlParentId = 'childPressKitYaml___parent___id',
-  ChildPressKitYamlParentParentId = 'childPressKitYaml___parent___parent___id',
-  ChildPressKitYamlParentParentChildren = 'childPressKitYaml___parent___parent___children',
-  ChildPressKitYamlParentChildren = 'childPressKitYaml___parent___children',
-  ChildPressKitYamlParentChildrenId = 'childPressKitYaml___parent___children___id',
-  ChildPressKitYamlParentChildrenChildren = 'childPressKitYaml___parent___children___children',
-  ChildPressKitYamlParentInternalContent = 'childPressKitYaml___parent___internal___content',
-  ChildPressKitYamlParentInternalContentDigest = 'childPressKitYaml___parent___internal___contentDigest',
-  ChildPressKitYamlParentInternalDescription = 'childPressKitYaml___parent___internal___description',
-  ChildPressKitYamlParentInternalFieldOwners = 'childPressKitYaml___parent___internal___fieldOwners',
-  ChildPressKitYamlParentInternalIgnoreType = 'childPressKitYaml___parent___internal___ignoreType',
-  ChildPressKitYamlParentInternalMediaType = 'childPressKitYaml___parent___internal___mediaType',
-  ChildPressKitYamlParentInternalOwner = 'childPressKitYaml___parent___internal___owner',
-  ChildPressKitYamlParentInternalType = 'childPressKitYaml___parent___internal___type',
-  ChildPressKitYamlChildren = 'childPressKitYaml___children',
-  ChildPressKitYamlChildrenId = 'childPressKitYaml___children___id',
-  ChildPressKitYamlChildrenParentId = 'childPressKitYaml___children___parent___id',
-  ChildPressKitYamlChildrenParentChildren = 'childPressKitYaml___children___parent___children',
-  ChildPressKitYamlChildrenChildren = 'childPressKitYaml___children___children',
-  ChildPressKitYamlChildrenChildrenId = 'childPressKitYaml___children___children___id',
-  ChildPressKitYamlChildrenChildrenChildren = 'childPressKitYaml___children___children___children',
-  ChildPressKitYamlChildrenInternalContent = 'childPressKitYaml___children___internal___content',
-  ChildPressKitYamlChildrenInternalContentDigest = 'childPressKitYaml___children___internal___contentDigest',
-  ChildPressKitYamlChildrenInternalDescription = 'childPressKitYaml___children___internal___description',
-  ChildPressKitYamlChildrenInternalFieldOwners = 'childPressKitYaml___children___internal___fieldOwners',
-  ChildPressKitYamlChildrenInternalIgnoreType = 'childPressKitYaml___children___internal___ignoreType',
-  ChildPressKitYamlChildrenInternalMediaType = 'childPressKitYaml___children___internal___mediaType',
-  ChildPressKitYamlChildrenInternalOwner = 'childPressKitYaml___children___internal___owner',
-  ChildPressKitYamlChildrenInternalType = 'childPressKitYaml___children___internal___type',
-  ChildPressKitYamlInternalContent = 'childPressKitYaml___internal___content',
-  ChildPressKitYamlInternalContentDigest = 'childPressKitYaml___internal___contentDigest',
-  ChildPressKitYamlInternalDescription = 'childPressKitYaml___internal___description',
-  ChildPressKitYamlInternalFieldOwners = 'childPressKitYaml___internal___fieldOwners',
-  ChildPressKitYamlInternalIgnoreType = 'childPressKitYaml___internal___ignoreType',
-  ChildPressKitYamlInternalMediaType = 'childPressKitYaml___internal___mediaType',
-  ChildPressKitYamlInternalOwner = 'childPressKitYaml___internal___owner',
-  ChildPressKitYamlInternalType = 'childPressKitYaml___internal___type',
-  ChildPressKitYamlTopSectionHeader = 'childPressKitYaml___topSection___header',
-  ChildPressKitYamlTopSectionBody = 'childPressKitYaml___topSection___body',
-  ChildPressKitYamlTitleDescriptionSectionHeader = 'childPressKitYaml___titleDescriptionSection___header',
-  ChildPressKitYamlTitleDescriptionSectionDescription = 'childPressKitYaml___titleDescriptionSection___description',
-  ChildPressKitYamlEnableSectionHeader = 'childPressKitYaml___enableSection___header',
-  ChildPressKitYamlEnableSectionImageSourceInstanceName = 'childPressKitYaml___enableSection___image___sourceInstanceName',
-  ChildPressKitYamlEnableSectionImageAbsolutePath = 'childPressKitYaml___enableSection___image___absolutePath',
-  ChildPressKitYamlEnableSectionImageRelativePath = 'childPressKitYaml___enableSection___image___relativePath',
-  ChildPressKitYamlEnableSectionImageExtension = 'childPressKitYaml___enableSection___image___extension',
-  ChildPressKitYamlEnableSectionImageSize = 'childPressKitYaml___enableSection___image___size',
-  ChildPressKitYamlEnableSectionImagePrettySize = 'childPressKitYaml___enableSection___image___prettySize',
-  ChildPressKitYamlEnableSectionImageModifiedTime = 'childPressKitYaml___enableSection___image___modifiedTime',
-  ChildPressKitYamlEnableSectionImageAccessTime = 'childPressKitYaml___enableSection___image___accessTime',
-  ChildPressKitYamlEnableSectionImageChangeTime = 'childPressKitYaml___enableSection___image___changeTime',
-  ChildPressKitYamlEnableSectionImageBirthTime = 'childPressKitYaml___enableSection___image___birthTime',
-  ChildPressKitYamlEnableSectionImageRoot = 'childPressKitYaml___enableSection___image___root',
-  ChildPressKitYamlEnableSectionImageDir = 'childPressKitYaml___enableSection___image___dir',
-  ChildPressKitYamlEnableSectionImageBase = 'childPressKitYaml___enableSection___image___base',
-  ChildPressKitYamlEnableSectionImageExt = 'childPressKitYaml___enableSection___image___ext',
-  ChildPressKitYamlEnableSectionImageName = 'childPressKitYaml___enableSection___image___name',
-  ChildPressKitYamlEnableSectionImageRelativeDirectory = 'childPressKitYaml___enableSection___image___relativeDirectory',
-  ChildPressKitYamlEnableSectionImageDev = 'childPressKitYaml___enableSection___image___dev',
-  ChildPressKitYamlEnableSectionImageMode = 'childPressKitYaml___enableSection___image___mode',
-  ChildPressKitYamlEnableSectionImageNlink = 'childPressKitYaml___enableSection___image___nlink',
-  ChildPressKitYamlEnableSectionImageUid = 'childPressKitYaml___enableSection___image___uid',
-  ChildPressKitYamlEnableSectionImageGid = 'childPressKitYaml___enableSection___image___gid',
-  ChildPressKitYamlEnableSectionImageRdev = 'childPressKitYaml___enableSection___image___rdev',
-  ChildPressKitYamlEnableSectionImageIno = 'childPressKitYaml___enableSection___image___ino',
-  ChildPressKitYamlEnableSectionImageAtimeMs = 'childPressKitYaml___enableSection___image___atimeMs',
-  ChildPressKitYamlEnableSectionImageMtimeMs = 'childPressKitYaml___enableSection___image___mtimeMs',
-  ChildPressKitYamlEnableSectionImageCtimeMs = 'childPressKitYaml___enableSection___image___ctimeMs',
-  ChildPressKitYamlEnableSectionImageAtime = 'childPressKitYaml___enableSection___image___atime',
-  ChildPressKitYamlEnableSectionImageMtime = 'childPressKitYaml___enableSection___image___mtime',
-  ChildPressKitYamlEnableSectionImageCtime = 'childPressKitYaml___enableSection___image___ctime',
-  ChildPressKitYamlEnableSectionImageBirthtime = 'childPressKitYaml___enableSection___image___birthtime',
-  ChildPressKitYamlEnableSectionImageBirthtimeMs = 'childPressKitYaml___enableSection___image___birthtimeMs',
-  ChildPressKitYamlEnableSectionImageBlksize = 'childPressKitYaml___enableSection___image___blksize',
-  ChildPressKitYamlEnableSectionImageBlocks = 'childPressKitYaml___enableSection___image___blocks',
-  ChildPressKitYamlEnableSectionImagePublicUrl = 'childPressKitYaml___enableSection___image___publicURL',
-  ChildPressKitYamlEnableSectionImageId = 'childPressKitYaml___enableSection___image___id',
-  ChildPressKitYamlEnableSectionImageChildren = 'childPressKitYaml___enableSection___image___children',
-  ChildPressKitYamlEnableSectionDescription = 'childPressKitYaml___enableSection___description',
-  ChildPressKitYamlTimelineSectionHeader = 'childPressKitYaml___timelineSection___header',
-  ChildPressKitYamlTimelineSectionDescription = 'childPressKitYaml___timelineSection___description',
-  ChildPressKitYamlTimelineSectionCompletedItemIndex = 'childPressKitYaml___timelineSection___completedItemIndex',
-  ChildPressKitYamlTimelineSectionItems = 'childPressKitYaml___timelineSection___items',
-  ChildPressKitYamlTimelineSectionItemsDate = 'childPressKitYaml___timelineSection___items___date',
-  ChildPressKitYamlTimelineSectionItemsSummary = 'childPressKitYaml___timelineSection___items___summary',
-  ChildPressKitYamlTimelineSectionItemsDescription = 'childPressKitYaml___timelineSection___items___description',
-  ChildPressKitYamlTeamSectionHeader = 'childPressKitYaml___teamSection___header',
-  ChildPressKitYamlTeamSectionButtonText = 'childPressKitYaml___teamSection___buttonText',
-  ChildPressKitYamlTeamSectionMembers = 'childPressKitYaml___teamSection___members',
-  ChildPressKitYamlTeamSectionMembersName = 'childPressKitYaml___teamSection___members___name',
-  ChildPressKitYamlTeamSectionMembersTitle = 'childPressKitYaml___teamSection___members___title',
-  ChildPressKitYamlFeaturedSectionHeader = 'childPressKitYaml___featuredSection___header',
-  ChildPressKitYamlFeaturedSectionArticles = 'childPressKitYaml___featuredSection___articles',
-  ChildPressKitYamlFeaturedSectionArticlesHeader = 'childPressKitYaml___featuredSection___articles___header',
-  ChildPressKitYamlFeaturedSectionArticlesAuthor = 'childPressKitYaml___featuredSection___articles___author',
-  ChildPressKitYamlFeaturedSectionArticlesDate = 'childPressKitYaml___featuredSection___articles___date',
-  ChildPressKitYamlFeaturedSectionArticlesUrl = 'childPressKitYaml___featuredSection___articles___url',
-  ChildPressKitYamlAwardsSectionHeader = 'childPressKitYaml___awardsSection___header',
-  ChildPressKitYamlAwardsSectionItems = 'childPressKitYaml___awardsSection___items',
-  ChildPressKitYamlAwardsSectionItemsTitle = 'childPressKitYaml___awardsSection___items___title',
-  ChildPressKitYamlAwardsSectionItemsUrl = 'childPressKitYaml___awardsSection___items___url',
-  ChildPressKitYamlLogosSectionHeader = 'childPressKitYaml___logosSection___header',
-  ChildPressKitYamlLogosSectionButtonText = 'childPressKitYaml___logosSection___buttonText',
-  ChildPressKitYamlLogosSectionButtonLink = 'childPressKitYaml___logosSection___buttonLink',
-  ChildPressKitYamlConnectSectionHeader = 'childPressKitYaml___connectSection___header',
-  ChildPressKitYamlPhotosSectionHeader = 'childPressKitYaml___photosSection___header',
-  ChildPressKitYamlPhotosSectionPhotos = 'childPressKitYaml___photosSection___photos',
-  ChildPressKitYamlFileAbsolutePath = 'childPressKitYaml___fileAbsolutePath',
+  ChildScienceYamlId = 'childScienceYaml___id',
+  ChildScienceYamlParentId = 'childScienceYaml___parent___id',
+  ChildScienceYamlParentParentId = 'childScienceYaml___parent___parent___id',
+  ChildScienceYamlParentParentChildren = 'childScienceYaml___parent___parent___children',
+  ChildScienceYamlParentChildren = 'childScienceYaml___parent___children',
+  ChildScienceYamlParentChildrenId = 'childScienceYaml___parent___children___id',
+  ChildScienceYamlParentChildrenChildren = 'childScienceYaml___parent___children___children',
+  ChildScienceYamlParentInternalContent = 'childScienceYaml___parent___internal___content',
+  ChildScienceYamlParentInternalContentDigest = 'childScienceYaml___parent___internal___contentDigest',
+  ChildScienceYamlParentInternalDescription = 'childScienceYaml___parent___internal___description',
+  ChildScienceYamlParentInternalFieldOwners = 'childScienceYaml___parent___internal___fieldOwners',
+  ChildScienceYamlParentInternalIgnoreType = 'childScienceYaml___parent___internal___ignoreType',
+  ChildScienceYamlParentInternalMediaType = 'childScienceYaml___parent___internal___mediaType',
+  ChildScienceYamlParentInternalOwner = 'childScienceYaml___parent___internal___owner',
+  ChildScienceYamlParentInternalType = 'childScienceYaml___parent___internal___type',
+  ChildScienceYamlChildren = 'childScienceYaml___children',
+  ChildScienceYamlChildrenId = 'childScienceYaml___children___id',
+  ChildScienceYamlChildrenParentId = 'childScienceYaml___children___parent___id',
+  ChildScienceYamlChildrenParentChildren = 'childScienceYaml___children___parent___children',
+  ChildScienceYamlChildrenChildren = 'childScienceYaml___children___children',
+  ChildScienceYamlChildrenChildrenId = 'childScienceYaml___children___children___id',
+  ChildScienceYamlChildrenChildrenChildren = 'childScienceYaml___children___children___children',
+  ChildScienceYamlChildrenInternalContent = 'childScienceYaml___children___internal___content',
+  ChildScienceYamlChildrenInternalContentDigest = 'childScienceYaml___children___internal___contentDigest',
+  ChildScienceYamlChildrenInternalDescription = 'childScienceYaml___children___internal___description',
+  ChildScienceYamlChildrenInternalFieldOwners = 'childScienceYaml___children___internal___fieldOwners',
+  ChildScienceYamlChildrenInternalIgnoreType = 'childScienceYaml___children___internal___ignoreType',
+  ChildScienceYamlChildrenInternalMediaType = 'childScienceYaml___children___internal___mediaType',
+  ChildScienceYamlChildrenInternalOwner = 'childScienceYaml___children___internal___owner',
+  ChildScienceYamlChildrenInternalType = 'childScienceYaml___children___internal___type',
+  ChildScienceYamlInternalContent = 'childScienceYaml___internal___content',
+  ChildScienceYamlInternalContentDigest = 'childScienceYaml___internal___contentDigest',
+  ChildScienceYamlInternalDescription = 'childScienceYaml___internal___description',
+  ChildScienceYamlInternalFieldOwners = 'childScienceYaml___internal___fieldOwners',
+  ChildScienceYamlInternalIgnoreType = 'childScienceYaml___internal___ignoreType',
+  ChildScienceYamlInternalMediaType = 'childScienceYaml___internal___mediaType',
+  ChildScienceYamlInternalOwner = 'childScienceYaml___internal___owner',
+  ChildScienceYamlInternalType = 'childScienceYaml___internal___type',
+  ChildScienceYamlTopSectionHeader = 'childScienceYaml___topSection___header',
+  ChildScienceYamlTopSectionBody = 'childScienceYaml___topSection___body',
+  ChildScienceYamlTitleDescriptionSectionHeader = 'childScienceYaml___titleDescriptionSection___header',
+  ChildScienceYamlTitleDescriptionSectionDescription = 'childScienceYaml___titleDescriptionSection___description',
+  ChildScienceYamlOpenScienceSectionCaption = 'childScienceYaml___openScienceSection___caption',
+  ChildScienceYamlOpenScienceSectionHeaderStart = 'childScienceYaml___openScienceSection___header___start',
+  ChildScienceYamlOpenScienceSectionHeaderGreen = 'childScienceYaml___openScienceSection___header___green',
+  ChildScienceYamlOpenScienceSectionPhases = 'childScienceYaml___openScienceSection___phases',
+  ChildScienceYamlOpenScienceSectionPhasesTitle = 'childScienceYaml___openScienceSection___phases___title',
+  ChildScienceYamlOpenScienceSectionPhasesDescription = 'childScienceYaml___openScienceSection___phases___description',
+  ChildScienceYamlPartnershipsSectionHeader = 'childScienceYaml___partnershipsSection___header',
+  ChildScienceYamlPartnershipsSectionPartners = 'childScienceYaml___partnershipsSection___partners',
+  ChildScienceYamlPartnershipsSectionPartnersDescription = 'childScienceYaml___partnershipsSection___partners___description',
+  ChildScienceYamlCommunitySectionCaption = 'childScienceYaml___communitySection___caption',
+  ChildScienceYamlCommunitySectionHeader = 'childScienceYaml___communitySection___header',
+  ChildScienceYamlCommunitySectionMembers = 'childScienceYaml___communitySection___members',
+  ChildScienceYamlCommunitySectionMembersName = 'childScienceYaml___communitySection___members___name',
+  ChildScienceYamlCommunitySectionMembersRole = 'childScienceYaml___communitySection___members___role',
+  ChildScienceYamlCommunitySectionMembersDescription = 'childScienceYaml___communitySection___members___description',
+  ChildScienceYamlPracticesOutcomesSectionHeader = 'childScienceYaml___practicesOutcomesSection___header',
+  ChildScienceYamlPracticesOutcomesSectionNote = 'childScienceYaml___practicesOutcomesSection___note',
+  ChildScienceYamlPracticesOutcomesSectionPracticesHeader = 'childScienceYaml___practicesOutcomesSection___practices___header',
+  ChildScienceYamlPracticesOutcomesSectionPracticesItems = 'childScienceYaml___practicesOutcomesSection___practices___items',
+  ChildScienceYamlPracticesOutcomesSectionOutcomesHeader = 'childScienceYaml___practicesOutcomesSection___outcomes___header',
+  ChildScienceYamlPracticesOutcomesSectionOutcomesItems = 'childScienceYaml___practicesOutcomesSection___outcomes___items',
+  ChildScienceYamlFileAbsolutePath = 'childScienceYaml___fileAbsolutePath',
+  ChildWalletAddressRegistrationYamlId = 'childWalletAddressRegistrationYaml___id',
+  ChildWalletAddressRegistrationYamlParentId = 'childWalletAddressRegistrationYaml___parent___id',
+  ChildWalletAddressRegistrationYamlParentParentId = 'childWalletAddressRegistrationYaml___parent___parent___id',
+  ChildWalletAddressRegistrationYamlParentParentChildren = 'childWalletAddressRegistrationYaml___parent___parent___children',
+  ChildWalletAddressRegistrationYamlParentChildren = 'childWalletAddressRegistrationYaml___parent___children',
+  ChildWalletAddressRegistrationYamlParentChildrenId = 'childWalletAddressRegistrationYaml___parent___children___id',
+  ChildWalletAddressRegistrationYamlParentChildrenChildren = 'childWalletAddressRegistrationYaml___parent___children___children',
+  ChildWalletAddressRegistrationYamlParentInternalContent = 'childWalletAddressRegistrationYaml___parent___internal___content',
+  ChildWalletAddressRegistrationYamlParentInternalContentDigest = 'childWalletAddressRegistrationYaml___parent___internal___contentDigest',
+  ChildWalletAddressRegistrationYamlParentInternalDescription = 'childWalletAddressRegistrationYaml___parent___internal___description',
+  ChildWalletAddressRegistrationYamlParentInternalFieldOwners = 'childWalletAddressRegistrationYaml___parent___internal___fieldOwners',
+  ChildWalletAddressRegistrationYamlParentInternalIgnoreType = 'childWalletAddressRegistrationYaml___parent___internal___ignoreType',
+  ChildWalletAddressRegistrationYamlParentInternalMediaType = 'childWalletAddressRegistrationYaml___parent___internal___mediaType',
+  ChildWalletAddressRegistrationYamlParentInternalOwner = 'childWalletAddressRegistrationYaml___parent___internal___owner',
+  ChildWalletAddressRegistrationYamlParentInternalType = 'childWalletAddressRegistrationYaml___parent___internal___type',
+  ChildWalletAddressRegistrationYamlChildren = 'childWalletAddressRegistrationYaml___children',
+  ChildWalletAddressRegistrationYamlChildrenId = 'childWalletAddressRegistrationYaml___children___id',
+  ChildWalletAddressRegistrationYamlChildrenParentId = 'childWalletAddressRegistrationYaml___children___parent___id',
+  ChildWalletAddressRegistrationYamlChildrenParentChildren = 'childWalletAddressRegistrationYaml___children___parent___children',
+  ChildWalletAddressRegistrationYamlChildrenChildren = 'childWalletAddressRegistrationYaml___children___children',
+  ChildWalletAddressRegistrationYamlChildrenChildrenId = 'childWalletAddressRegistrationYaml___children___children___id',
+  ChildWalletAddressRegistrationYamlChildrenChildrenChildren = 'childWalletAddressRegistrationYaml___children___children___children',
+  ChildWalletAddressRegistrationYamlChildrenInternalContent = 'childWalletAddressRegistrationYaml___children___internal___content',
+  ChildWalletAddressRegistrationYamlChildrenInternalContentDigest = 'childWalletAddressRegistrationYaml___children___internal___contentDigest',
+  ChildWalletAddressRegistrationYamlChildrenInternalDescription = 'childWalletAddressRegistrationYaml___children___internal___description',
+  ChildWalletAddressRegistrationYamlChildrenInternalFieldOwners = 'childWalletAddressRegistrationYaml___children___internal___fieldOwners',
+  ChildWalletAddressRegistrationYamlChildrenInternalIgnoreType = 'childWalletAddressRegistrationYaml___children___internal___ignoreType',
+  ChildWalletAddressRegistrationYamlChildrenInternalMediaType = 'childWalletAddressRegistrationYaml___children___internal___mediaType',
+  ChildWalletAddressRegistrationYamlChildrenInternalOwner = 'childWalletAddressRegistrationYaml___children___internal___owner',
+  ChildWalletAddressRegistrationYamlChildrenInternalType = 'childWalletAddressRegistrationYaml___children___internal___type',
+  ChildWalletAddressRegistrationYamlInternalContent = 'childWalletAddressRegistrationYaml___internal___content',
+  ChildWalletAddressRegistrationYamlInternalContentDigest = 'childWalletAddressRegistrationYaml___internal___contentDigest',
+  ChildWalletAddressRegistrationYamlInternalDescription = 'childWalletAddressRegistrationYaml___internal___description',
+  ChildWalletAddressRegistrationYamlInternalFieldOwners = 'childWalletAddressRegistrationYaml___internal___fieldOwners',
+  ChildWalletAddressRegistrationYamlInternalIgnoreType = 'childWalletAddressRegistrationYaml___internal___ignoreType',
+  ChildWalletAddressRegistrationYamlInternalMediaType = 'childWalletAddressRegistrationYaml___internal___mediaType',
+  ChildWalletAddressRegistrationYamlInternalOwner = 'childWalletAddressRegistrationYaml___internal___owner',
+  ChildWalletAddressRegistrationYamlInternalType = 'childWalletAddressRegistrationYaml___internal___type',
+  ChildWalletAddressRegistrationYamlTopSectionHeader = 'childWalletAddressRegistrationYaml___topSection___header',
+  ChildWalletAddressRegistrationYamlTopSectionBody = 'childWalletAddressRegistrationYaml___topSection___body',
+  ChildWalletAddressRegistrationYamlInstructionsSectionHeader = 'childWalletAddressRegistrationYaml___instructionsSection___header',
+  ChildWalletAddressRegistrationYamlInstructionsSectionBody = 'childWalletAddressRegistrationYaml___instructionsSection___body',
+  ChildWalletAddressRegistrationYamlWalletButtonText = 'childWalletAddressRegistrationYaml___wallet___buttonText',
+  ChildWalletAddressRegistrationYamlWalletWalletFoundButtonText = 'childWalletAddressRegistrationYaml___wallet___walletFoundButtonText',
+  ChildWalletAddressRegistrationYamlWalletNoWalletFoundMessage = 'childWalletAddressRegistrationYaml___wallet___noWalletFoundMessage',
+  ChildWalletAddressRegistrationYamlFormAirtableLink = 'childWalletAddressRegistrationYaml___form___airtableLink',
+  ChildWalletAddressRegistrationYamlFormRecaptchaMessage = 'childWalletAddressRegistrationYaml___form___recaptchaMessage',
+  ChildWalletAddressRegistrationYamlFileAbsolutePath = 'childWalletAddressRegistrationYaml___fileAbsolutePath',
   ChildSharedYamlId = 'childSharedYaml___id',
   ChildSharedYamlParentId = 'childSharedYaml___parent___id',
   ChildSharedYamlParentParentId = 'childSharedYaml___parent___parent___id',
@@ -7220,175 +7433,123 @@ export enum FileFieldsEnum {
   ChildSharedYamlComingSoonSectionProjectsAreaUnit = 'childSharedYaml___comingSoonSection___projects___areaUnit',
   ChildSharedYamlComingSoonSectionProjectsComingSoon = 'childSharedYaml___comingSoonSection___projects___comingSoon',
   ChildSharedYamlFileAbsolutePath = 'childSharedYaml___fileAbsolutePath',
-  ChildMediaYamlId = 'childMediaYaml___id',
-  ChildMediaYamlParentId = 'childMediaYaml___parent___id',
-  ChildMediaYamlParentParentId = 'childMediaYaml___parent___parent___id',
-  ChildMediaYamlParentParentChildren = 'childMediaYaml___parent___parent___children',
-  ChildMediaYamlParentChildren = 'childMediaYaml___parent___children',
-  ChildMediaYamlParentChildrenId = 'childMediaYaml___parent___children___id',
-  ChildMediaYamlParentChildrenChildren = 'childMediaYaml___parent___children___children',
-  ChildMediaYamlParentInternalContent = 'childMediaYaml___parent___internal___content',
-  ChildMediaYamlParentInternalContentDigest = 'childMediaYaml___parent___internal___contentDigest',
-  ChildMediaYamlParentInternalDescription = 'childMediaYaml___parent___internal___description',
-  ChildMediaYamlParentInternalFieldOwners = 'childMediaYaml___parent___internal___fieldOwners',
-  ChildMediaYamlParentInternalIgnoreType = 'childMediaYaml___parent___internal___ignoreType',
-  ChildMediaYamlParentInternalMediaType = 'childMediaYaml___parent___internal___mediaType',
-  ChildMediaYamlParentInternalOwner = 'childMediaYaml___parent___internal___owner',
-  ChildMediaYamlParentInternalType = 'childMediaYaml___parent___internal___type',
-  ChildMediaYamlChildren = 'childMediaYaml___children',
-  ChildMediaYamlChildrenId = 'childMediaYaml___children___id',
-  ChildMediaYamlChildrenParentId = 'childMediaYaml___children___parent___id',
-  ChildMediaYamlChildrenParentChildren = 'childMediaYaml___children___parent___children',
-  ChildMediaYamlChildrenChildren = 'childMediaYaml___children___children',
-  ChildMediaYamlChildrenChildrenId = 'childMediaYaml___children___children___id',
-  ChildMediaYamlChildrenChildrenChildren = 'childMediaYaml___children___children___children',
-  ChildMediaYamlChildrenInternalContent = 'childMediaYaml___children___internal___content',
-  ChildMediaYamlChildrenInternalContentDigest = 'childMediaYaml___children___internal___contentDigest',
-  ChildMediaYamlChildrenInternalDescription = 'childMediaYaml___children___internal___description',
-  ChildMediaYamlChildrenInternalFieldOwners = 'childMediaYaml___children___internal___fieldOwners',
-  ChildMediaYamlChildrenInternalIgnoreType = 'childMediaYaml___children___internal___ignoreType',
-  ChildMediaYamlChildrenInternalMediaType = 'childMediaYaml___children___internal___mediaType',
-  ChildMediaYamlChildrenInternalOwner = 'childMediaYaml___children___internal___owner',
-  ChildMediaYamlChildrenInternalType = 'childMediaYaml___children___internal___type',
-  ChildMediaYamlInternalContent = 'childMediaYaml___internal___content',
-  ChildMediaYamlInternalContentDigest = 'childMediaYaml___internal___contentDigest',
-  ChildMediaYamlInternalDescription = 'childMediaYaml___internal___description',
-  ChildMediaYamlInternalFieldOwners = 'childMediaYaml___internal___fieldOwners',
-  ChildMediaYamlInternalIgnoreType = 'childMediaYaml___internal___ignoreType',
-  ChildMediaYamlInternalMediaType = 'childMediaYaml___internal___mediaType',
-  ChildMediaYamlInternalOwner = 'childMediaYaml___internal___owner',
-  ChildMediaYamlInternalType = 'childMediaYaml___internal___type',
-  ChildMediaYamlHeader = 'childMediaYaml___header',
-  ChildMediaYamlCategories = 'childMediaYaml___categories',
-  ChildMediaYamlCategoriesName = 'childMediaYaml___categories___name',
-  ChildMediaYamlCategoriesButtonText = 'childMediaYaml___categories___buttonText',
-  ChildMediaYamlCategoriesShowPlay = 'childMediaYaml___categories___showPlay',
-  ChildMediaYamlCategoriesItems = 'childMediaYaml___categories___items',
-  ChildMediaYamlCategoriesItemsTitle = 'childMediaYaml___categories___items___title',
-  ChildMediaYamlCategoriesItemsAuthor = 'childMediaYaml___categories___items___author',
-  ChildMediaYamlCategoriesItemsUrl = 'childMediaYaml___categories___items___url',
-  ChildMediaYamlCategoriesItemsDate = 'childMediaYaml___categories___items___date',
-  ChildMediaYamlCategoriesItemsIsMainnet = 'childMediaYaml___categories___items___isMainnet',
-  ChildMediaYamlCategoriesItemsIsTokenSale = 'childMediaYaml___categories___items___isTokenSale',
-  ChildMediaYamlFileAbsolutePath = 'childMediaYaml___fileAbsolutePath',
-  ChildScienceYamlId = 'childScienceYaml___id',
-  ChildScienceYamlParentId = 'childScienceYaml___parent___id',
-  ChildScienceYamlParentParentId = 'childScienceYaml___parent___parent___id',
-  ChildScienceYamlParentParentChildren = 'childScienceYaml___parent___parent___children',
-  ChildScienceYamlParentChildren = 'childScienceYaml___parent___children',
-  ChildScienceYamlParentChildrenId = 'childScienceYaml___parent___children___id',
-  ChildScienceYamlParentChildrenChildren = 'childScienceYaml___parent___children___children',
-  ChildScienceYamlParentInternalContent = 'childScienceYaml___parent___internal___content',
-  ChildScienceYamlParentInternalContentDigest = 'childScienceYaml___parent___internal___contentDigest',
-  ChildScienceYamlParentInternalDescription = 'childScienceYaml___parent___internal___description',
-  ChildScienceYamlParentInternalFieldOwners = 'childScienceYaml___parent___internal___fieldOwners',
-  ChildScienceYamlParentInternalIgnoreType = 'childScienceYaml___parent___internal___ignoreType',
-  ChildScienceYamlParentInternalMediaType = 'childScienceYaml___parent___internal___mediaType',
-  ChildScienceYamlParentInternalOwner = 'childScienceYaml___parent___internal___owner',
-  ChildScienceYamlParentInternalType = 'childScienceYaml___parent___internal___type',
-  ChildScienceYamlChildren = 'childScienceYaml___children',
-  ChildScienceYamlChildrenId = 'childScienceYaml___children___id',
-  ChildScienceYamlChildrenParentId = 'childScienceYaml___children___parent___id',
-  ChildScienceYamlChildrenParentChildren = 'childScienceYaml___children___parent___children',
-  ChildScienceYamlChildrenChildren = 'childScienceYaml___children___children',
-  ChildScienceYamlChildrenChildrenId = 'childScienceYaml___children___children___id',
-  ChildScienceYamlChildrenChildrenChildren = 'childScienceYaml___children___children___children',
-  ChildScienceYamlChildrenInternalContent = 'childScienceYaml___children___internal___content',
-  ChildScienceYamlChildrenInternalContentDigest = 'childScienceYaml___children___internal___contentDigest',
-  ChildScienceYamlChildrenInternalDescription = 'childScienceYaml___children___internal___description',
-  ChildScienceYamlChildrenInternalFieldOwners = 'childScienceYaml___children___internal___fieldOwners',
-  ChildScienceYamlChildrenInternalIgnoreType = 'childScienceYaml___children___internal___ignoreType',
-  ChildScienceYamlChildrenInternalMediaType = 'childScienceYaml___children___internal___mediaType',
-  ChildScienceYamlChildrenInternalOwner = 'childScienceYaml___children___internal___owner',
-  ChildScienceYamlChildrenInternalType = 'childScienceYaml___children___internal___type',
-  ChildScienceYamlInternalContent = 'childScienceYaml___internal___content',
-  ChildScienceYamlInternalContentDigest = 'childScienceYaml___internal___contentDigest',
-  ChildScienceYamlInternalDescription = 'childScienceYaml___internal___description',
-  ChildScienceYamlInternalFieldOwners = 'childScienceYaml___internal___fieldOwners',
-  ChildScienceYamlInternalIgnoreType = 'childScienceYaml___internal___ignoreType',
-  ChildScienceYamlInternalMediaType = 'childScienceYaml___internal___mediaType',
-  ChildScienceYamlInternalOwner = 'childScienceYaml___internal___owner',
-  ChildScienceYamlInternalType = 'childScienceYaml___internal___type',
-  ChildScienceYamlTopSectionHeader = 'childScienceYaml___topSection___header',
-  ChildScienceYamlTopSectionBody = 'childScienceYaml___topSection___body',
-  ChildScienceYamlTitleDescriptionSectionHeader = 'childScienceYaml___titleDescriptionSection___header',
-  ChildScienceYamlTitleDescriptionSectionDescription = 'childScienceYaml___titleDescriptionSection___description',
-  ChildScienceYamlOpenScienceSectionCaption = 'childScienceYaml___openScienceSection___caption',
-  ChildScienceYamlOpenScienceSectionHeaderStart = 'childScienceYaml___openScienceSection___header___start',
-  ChildScienceYamlOpenScienceSectionHeaderGreen = 'childScienceYaml___openScienceSection___header___green',
-  ChildScienceYamlOpenScienceSectionPhases = 'childScienceYaml___openScienceSection___phases',
-  ChildScienceYamlOpenScienceSectionPhasesTitle = 'childScienceYaml___openScienceSection___phases___title',
-  ChildScienceYamlOpenScienceSectionPhasesDescription = 'childScienceYaml___openScienceSection___phases___description',
-  ChildScienceYamlPartnershipsSectionHeader = 'childScienceYaml___partnershipsSection___header',
-  ChildScienceYamlPartnershipsSectionPartners = 'childScienceYaml___partnershipsSection___partners',
-  ChildScienceYamlPartnershipsSectionPartnersDescription = 'childScienceYaml___partnershipsSection___partners___description',
-  ChildScienceYamlCommunitySectionCaption = 'childScienceYaml___communitySection___caption',
-  ChildScienceYamlCommunitySectionHeader = 'childScienceYaml___communitySection___header',
-  ChildScienceYamlCommunitySectionMembers = 'childScienceYaml___communitySection___members',
-  ChildScienceYamlCommunitySectionMembersName = 'childScienceYaml___communitySection___members___name',
-  ChildScienceYamlCommunitySectionMembersRole = 'childScienceYaml___communitySection___members___role',
-  ChildScienceYamlCommunitySectionMembersDescription = 'childScienceYaml___communitySection___members___description',
-  ChildScienceYamlPracticesOutcomesSectionHeader = 'childScienceYaml___practicesOutcomesSection___header',
-  ChildScienceYamlPracticesOutcomesSectionNote = 'childScienceYaml___practicesOutcomesSection___note',
-  ChildScienceYamlPracticesOutcomesSectionPracticesHeader = 'childScienceYaml___practicesOutcomesSection___practices___header',
-  ChildScienceYamlPracticesOutcomesSectionPracticesItems = 'childScienceYaml___practicesOutcomesSection___practices___items',
-  ChildScienceYamlPracticesOutcomesSectionOutcomesHeader = 'childScienceYaml___practicesOutcomesSection___outcomes___header',
-  ChildScienceYamlPracticesOutcomesSectionOutcomesItems = 'childScienceYaml___practicesOutcomesSection___outcomes___items',
-  ChildScienceYamlFileAbsolutePath = 'childScienceYaml___fileAbsolutePath',
-  ChildMarkdownRemarkId = 'childMarkdownRemark___id',
-  ChildMarkdownRemarkFrontmatterTitle = 'childMarkdownRemark___frontmatter___title',
-  ChildMarkdownRemarkExcerpt = 'childMarkdownRemark___excerpt',
-  ChildMarkdownRemarkRawMarkdownBody = 'childMarkdownRemark___rawMarkdownBody',
-  ChildMarkdownRemarkFileAbsolutePath = 'childMarkdownRemark___fileAbsolutePath',
-  ChildMarkdownRemarkHtml = 'childMarkdownRemark___html',
-  ChildMarkdownRemarkHtmlAst = 'childMarkdownRemark___htmlAst',
-  ChildMarkdownRemarkExcerptAst = 'childMarkdownRemark___excerptAst',
-  ChildMarkdownRemarkHeadings = 'childMarkdownRemark___headings',
-  ChildMarkdownRemarkHeadingsId = 'childMarkdownRemark___headings___id',
-  ChildMarkdownRemarkHeadingsValue = 'childMarkdownRemark___headings___value',
-  ChildMarkdownRemarkHeadingsDepth = 'childMarkdownRemark___headings___depth',
-  ChildMarkdownRemarkTimeToRead = 'childMarkdownRemark___timeToRead',
-  ChildMarkdownRemarkTableOfContents = 'childMarkdownRemark___tableOfContents',
-  ChildMarkdownRemarkWordCountParagraphs = 'childMarkdownRemark___wordCount___paragraphs',
-  ChildMarkdownRemarkWordCountSentences = 'childMarkdownRemark___wordCount___sentences',
-  ChildMarkdownRemarkWordCountWords = 'childMarkdownRemark___wordCount___words',
-  ChildMarkdownRemarkParentId = 'childMarkdownRemark___parent___id',
-  ChildMarkdownRemarkParentParentId = 'childMarkdownRemark___parent___parent___id',
-  ChildMarkdownRemarkParentParentChildren = 'childMarkdownRemark___parent___parent___children',
-  ChildMarkdownRemarkParentChildren = 'childMarkdownRemark___parent___children',
-  ChildMarkdownRemarkParentChildrenId = 'childMarkdownRemark___parent___children___id',
-  ChildMarkdownRemarkParentChildrenChildren = 'childMarkdownRemark___parent___children___children',
-  ChildMarkdownRemarkParentInternalContent = 'childMarkdownRemark___parent___internal___content',
-  ChildMarkdownRemarkParentInternalContentDigest = 'childMarkdownRemark___parent___internal___contentDigest',
-  ChildMarkdownRemarkParentInternalDescription = 'childMarkdownRemark___parent___internal___description',
-  ChildMarkdownRemarkParentInternalFieldOwners = 'childMarkdownRemark___parent___internal___fieldOwners',
-  ChildMarkdownRemarkParentInternalIgnoreType = 'childMarkdownRemark___parent___internal___ignoreType',
-  ChildMarkdownRemarkParentInternalMediaType = 'childMarkdownRemark___parent___internal___mediaType',
-  ChildMarkdownRemarkParentInternalOwner = 'childMarkdownRemark___parent___internal___owner',
-  ChildMarkdownRemarkParentInternalType = 'childMarkdownRemark___parent___internal___type',
-  ChildMarkdownRemarkChildren = 'childMarkdownRemark___children',
-  ChildMarkdownRemarkChildrenId = 'childMarkdownRemark___children___id',
-  ChildMarkdownRemarkChildrenParentId = 'childMarkdownRemark___children___parent___id',
-  ChildMarkdownRemarkChildrenParentChildren = 'childMarkdownRemark___children___parent___children',
-  ChildMarkdownRemarkChildrenChildren = 'childMarkdownRemark___children___children',
-  ChildMarkdownRemarkChildrenChildrenId = 'childMarkdownRemark___children___children___id',
-  ChildMarkdownRemarkChildrenChildrenChildren = 'childMarkdownRemark___children___children___children',
-  ChildMarkdownRemarkChildrenInternalContent = 'childMarkdownRemark___children___internal___content',
-  ChildMarkdownRemarkChildrenInternalContentDigest = 'childMarkdownRemark___children___internal___contentDigest',
-  ChildMarkdownRemarkChildrenInternalDescription = 'childMarkdownRemark___children___internal___description',
-  ChildMarkdownRemarkChildrenInternalFieldOwners = 'childMarkdownRemark___children___internal___fieldOwners',
-  ChildMarkdownRemarkChildrenInternalIgnoreType = 'childMarkdownRemark___children___internal___ignoreType',
-  ChildMarkdownRemarkChildrenInternalMediaType = 'childMarkdownRemark___children___internal___mediaType',
-  ChildMarkdownRemarkChildrenInternalOwner = 'childMarkdownRemark___children___internal___owner',
-  ChildMarkdownRemarkChildrenInternalType = 'childMarkdownRemark___children___internal___type',
-  ChildMarkdownRemarkInternalContent = 'childMarkdownRemark___internal___content',
-  ChildMarkdownRemarkInternalContentDigest = 'childMarkdownRemark___internal___contentDigest',
-  ChildMarkdownRemarkInternalDescription = 'childMarkdownRemark___internal___description',
-  ChildMarkdownRemarkInternalFieldOwners = 'childMarkdownRemark___internal___fieldOwners',
-  ChildMarkdownRemarkInternalIgnoreType = 'childMarkdownRemark___internal___ignoreType',
-  ChildMarkdownRemarkInternalMediaType = 'childMarkdownRemark___internal___mediaType',
-  ChildMarkdownRemarkInternalOwner = 'childMarkdownRemark___internal___owner',
-  ChildMarkdownRemarkInternalType = 'childMarkdownRemark___internal___type',
+  ChildTeamYamlId = 'childTeamYaml___id',
+  ChildTeamYamlParentId = 'childTeamYaml___parent___id',
+  ChildTeamYamlParentParentId = 'childTeamYaml___parent___parent___id',
+  ChildTeamYamlParentParentChildren = 'childTeamYaml___parent___parent___children',
+  ChildTeamYamlParentChildren = 'childTeamYaml___parent___children',
+  ChildTeamYamlParentChildrenId = 'childTeamYaml___parent___children___id',
+  ChildTeamYamlParentChildrenChildren = 'childTeamYaml___parent___children___children',
+  ChildTeamYamlParentInternalContent = 'childTeamYaml___parent___internal___content',
+  ChildTeamYamlParentInternalContentDigest = 'childTeamYaml___parent___internal___contentDigest',
+  ChildTeamYamlParentInternalDescription = 'childTeamYaml___parent___internal___description',
+  ChildTeamYamlParentInternalFieldOwners = 'childTeamYaml___parent___internal___fieldOwners',
+  ChildTeamYamlParentInternalIgnoreType = 'childTeamYaml___parent___internal___ignoreType',
+  ChildTeamYamlParentInternalMediaType = 'childTeamYaml___parent___internal___mediaType',
+  ChildTeamYamlParentInternalOwner = 'childTeamYaml___parent___internal___owner',
+  ChildTeamYamlParentInternalType = 'childTeamYaml___parent___internal___type',
+  ChildTeamYamlChildren = 'childTeamYaml___children',
+  ChildTeamYamlChildrenId = 'childTeamYaml___children___id',
+  ChildTeamYamlChildrenParentId = 'childTeamYaml___children___parent___id',
+  ChildTeamYamlChildrenParentChildren = 'childTeamYaml___children___parent___children',
+  ChildTeamYamlChildrenChildren = 'childTeamYaml___children___children',
+  ChildTeamYamlChildrenChildrenId = 'childTeamYaml___children___children___id',
+  ChildTeamYamlChildrenChildrenChildren = 'childTeamYaml___children___children___children',
+  ChildTeamYamlChildrenInternalContent = 'childTeamYaml___children___internal___content',
+  ChildTeamYamlChildrenInternalContentDigest = 'childTeamYaml___children___internal___contentDigest',
+  ChildTeamYamlChildrenInternalDescription = 'childTeamYaml___children___internal___description',
+  ChildTeamYamlChildrenInternalFieldOwners = 'childTeamYaml___children___internal___fieldOwners',
+  ChildTeamYamlChildrenInternalIgnoreType = 'childTeamYaml___children___internal___ignoreType',
+  ChildTeamYamlChildrenInternalMediaType = 'childTeamYaml___children___internal___mediaType',
+  ChildTeamYamlChildrenInternalOwner = 'childTeamYaml___children___internal___owner',
+  ChildTeamYamlChildrenInternalType = 'childTeamYaml___children___internal___type',
+  ChildTeamYamlInternalContent = 'childTeamYaml___internal___content',
+  ChildTeamYamlInternalContentDigest = 'childTeamYaml___internal___contentDigest',
+  ChildTeamYamlInternalDescription = 'childTeamYaml___internal___description',
+  ChildTeamYamlInternalFieldOwners = 'childTeamYaml___internal___fieldOwners',
+  ChildTeamYamlInternalIgnoreType = 'childTeamYaml___internal___ignoreType',
+  ChildTeamYamlInternalMediaType = 'childTeamYaml___internal___mediaType',
+  ChildTeamYamlInternalOwner = 'childTeamYaml___internal___owner',
+  ChildTeamYamlInternalType = 'childTeamYaml___internal___type',
+  ChildTeamYamlTopSectionHeader = 'childTeamYaml___topSection___header',
+  ChildTeamYamlTopSectionBody = 'childTeamYaml___topSection___body',
+  ChildTeamYamlCoreSectionTitle = 'childTeamYaml___coreSection___title',
+  ChildTeamYamlCoreSectionCoreMembers = 'childTeamYaml___coreSection___coreMembers',
+  ChildTeamYamlCoreSectionCoreMembersName = 'childTeamYaml___coreSection___coreMembers___name',
+  ChildTeamYamlCoreSectionCoreMembersTitle = 'childTeamYaml___coreSection___coreMembers___title',
+  ChildTeamYamlCoreSectionCoreMembersDescription = 'childTeamYaml___coreSection___coreMembers___description',
+  ChildTeamYamlCoreSectionCoreMembersLinkedUrl = 'childTeamYaml___coreSection___coreMembers___linkedUrl',
+  ChildTeamYamlCoreSectionCoreMembersTwitterUrl = 'childTeamYaml___coreSection___coreMembers___twitterUrl',
+  ChildTeamYamlCoreSectionCoreMembersGithubUrl = 'childTeamYaml___coreSection___coreMembers___githubUrl',
+  ChildTeamYamlContributorSectionTitle = 'childTeamYaml___contributorSection___title',
+  ChildTeamYamlContributorSectionContributors = 'childTeamYaml___contributorSection___contributors',
+  ChildTeamYamlContributorSectionContributorsName = 'childTeamYaml___contributorSection___contributors___name',
+  ChildTeamYamlContributorSectionContributorsDescription = 'childTeamYaml___contributorSection___contributors___description',
+  ChildTeamYamlContributorSectionContributorsTitle = 'childTeamYaml___contributorSection___contributors___title',
+  ChildTeamYamlContributorSectionContributorsLinkedUrl = 'childTeamYaml___contributorSection___contributors___linkedUrl',
+  ChildTeamYamlContributorSectionContributorsTwitterUrl = 'childTeamYaml___contributorSection___contributors___twitterUrl',
+  ChildTeamYamlContributorSectionContributorsGithubUrl = 'childTeamYaml___contributorSection___contributors___githubUrl',
+  ChildTeamYamlAdvisorSectionTitle = 'childTeamYaml___advisorSection___title',
+  ChildTeamYamlAdvisorSectionAdvisors = 'childTeamYaml___advisorSection___advisors',
+  ChildTeamYamlAdvisorSectionAdvisorsName = 'childTeamYaml___advisorSection___advisors___name',
+  ChildTeamYamlAdvisorSectionAdvisorsTitle = 'childTeamYaml___advisorSection___advisors___title',
+  ChildTeamYamlAdvisorSectionAdvisorsLinkedUrl = 'childTeamYaml___advisorSection___advisors___linkedUrl',
+  ChildTeamYamlAdvisorSectionAdvisorsTwitterUrl = 'childTeamYaml___advisorSection___advisors___twitterUrl',
+  ChildTeamYamlAdvisorSectionAdvisorsGithubUrl = 'childTeamYaml___advisorSection___advisors___githubUrl',
+  ChildTeamYamlAdvisorSectionAdvisorsDescription = 'childTeamYaml___advisorSection___advisors___description',
+  ChildTeamYamlFileAbsolutePath = 'childTeamYaml___fileAbsolutePath',
+  ChildValidatorsYamlId = 'childValidatorsYaml___id',
+  ChildValidatorsYamlParentId = 'childValidatorsYaml___parent___id',
+  ChildValidatorsYamlParentParentId = 'childValidatorsYaml___parent___parent___id',
+  ChildValidatorsYamlParentParentChildren = 'childValidatorsYaml___parent___parent___children',
+  ChildValidatorsYamlParentChildren = 'childValidatorsYaml___parent___children',
+  ChildValidatorsYamlParentChildrenId = 'childValidatorsYaml___parent___children___id',
+  ChildValidatorsYamlParentChildrenChildren = 'childValidatorsYaml___parent___children___children',
+  ChildValidatorsYamlParentInternalContent = 'childValidatorsYaml___parent___internal___content',
+  ChildValidatorsYamlParentInternalContentDigest = 'childValidatorsYaml___parent___internal___contentDigest',
+  ChildValidatorsYamlParentInternalDescription = 'childValidatorsYaml___parent___internal___description',
+  ChildValidatorsYamlParentInternalFieldOwners = 'childValidatorsYaml___parent___internal___fieldOwners',
+  ChildValidatorsYamlParentInternalIgnoreType = 'childValidatorsYaml___parent___internal___ignoreType',
+  ChildValidatorsYamlParentInternalMediaType = 'childValidatorsYaml___parent___internal___mediaType',
+  ChildValidatorsYamlParentInternalOwner = 'childValidatorsYaml___parent___internal___owner',
+  ChildValidatorsYamlParentInternalType = 'childValidatorsYaml___parent___internal___type',
+  ChildValidatorsYamlChildren = 'childValidatorsYaml___children',
+  ChildValidatorsYamlChildrenId = 'childValidatorsYaml___children___id',
+  ChildValidatorsYamlChildrenParentId = 'childValidatorsYaml___children___parent___id',
+  ChildValidatorsYamlChildrenParentChildren = 'childValidatorsYaml___children___parent___children',
+  ChildValidatorsYamlChildrenChildren = 'childValidatorsYaml___children___children',
+  ChildValidatorsYamlChildrenChildrenId = 'childValidatorsYaml___children___children___id',
+  ChildValidatorsYamlChildrenChildrenChildren = 'childValidatorsYaml___children___children___children',
+  ChildValidatorsYamlChildrenInternalContent = 'childValidatorsYaml___children___internal___content',
+  ChildValidatorsYamlChildrenInternalContentDigest = 'childValidatorsYaml___children___internal___contentDigest',
+  ChildValidatorsYamlChildrenInternalDescription = 'childValidatorsYaml___children___internal___description',
+  ChildValidatorsYamlChildrenInternalFieldOwners = 'childValidatorsYaml___children___internal___fieldOwners',
+  ChildValidatorsYamlChildrenInternalIgnoreType = 'childValidatorsYaml___children___internal___ignoreType',
+  ChildValidatorsYamlChildrenInternalMediaType = 'childValidatorsYaml___children___internal___mediaType',
+  ChildValidatorsYamlChildrenInternalOwner = 'childValidatorsYaml___children___internal___owner',
+  ChildValidatorsYamlChildrenInternalType = 'childValidatorsYaml___children___internal___type',
+  ChildValidatorsYamlInternalContent = 'childValidatorsYaml___internal___content',
+  ChildValidatorsYamlInternalContentDigest = 'childValidatorsYaml___internal___contentDigest',
+  ChildValidatorsYamlInternalDescription = 'childValidatorsYaml___internal___description',
+  ChildValidatorsYamlInternalFieldOwners = 'childValidatorsYaml___internal___fieldOwners',
+  ChildValidatorsYamlInternalIgnoreType = 'childValidatorsYaml___internal___ignoreType',
+  ChildValidatorsYamlInternalMediaType = 'childValidatorsYaml___internal___mediaType',
+  ChildValidatorsYamlInternalOwner = 'childValidatorsYaml___internal___owner',
+  ChildValidatorsYamlInternalType = 'childValidatorsYaml___internal___type',
+  ChildValidatorsYamlTopSectionHeader = 'childValidatorsYaml___topSection___header',
+  ChildValidatorsYamlTopSectionBody = 'childValidatorsYaml___topSection___body',
+  ChildValidatorsYamlWhatSectionHeader = 'childValidatorsYaml___whatSection___header',
+  ChildValidatorsYamlWhatSectionBody = 'childValidatorsYaml___whatSection___body',
+  ChildValidatorsYamlWhoSectionHeader = 'childValidatorsYaml___whoSection___header',
+  ChildValidatorsYamlWhoSectionBody = 'childValidatorsYaml___whoSection___body',
+  ChildValidatorsYamlWhoSectionValidators = 'childValidatorsYaml___whoSection___validators',
+  ChildValidatorsYamlWhoSectionValidatorsHeader = 'childValidatorsYaml___whoSection___validators___header',
+  ChildValidatorsYamlWhoSectionValidatorsDescription = 'childValidatorsYaml___whoSection___validators___description',
+  ChildValidatorsYamlWhoSectionValidatorsMembers = 'childValidatorsYaml___whoSection___validators___members',
+  ChildValidatorsYamlConnectSectionHeader = 'childValidatorsYaml___connectSection___header',
+  ChildValidatorsYamlWhySectionHeader = 'childValidatorsYaml___whySection___header',
+  ChildValidatorsYamlWhySectionBody = 'childValidatorsYaml___whySection___body',
+  ChildValidatorsYamlFileAbsolutePath = 'childValidatorsYaml___fileAbsolutePath',
   ChildTokenYamlId = 'childTokenYaml___id',
   ChildTokenYamlParentId = 'childTokenYaml___parent___id',
   ChildTokenYamlParentParentId = 'childTokenYaml___parent___parent___id',
@@ -7549,8 +7710,6 @@ export enum FileFieldsEnum {
   ChildTokenYamlTokenPoolMobileImagePublicUrl = 'childTokenYaml___tokenPool___mobileImage___publicURL',
   ChildTokenYamlTokenPoolMobileImageId = 'childTokenYaml___tokenPool___mobileImage___id',
   ChildTokenYamlTokenPoolMobileImageChildren = 'childTokenYaml___tokenPool___mobileImage___children',
-  ChildTokenYamlUnlockScheduleTitle = 'childTokenYaml___unlockSchedule___title',
-  ChildTokenYamlUnlockScheduleSubtitle = 'childTokenYaml___unlockSchedule___subtitle',
   ChildTokenYamlStakingTitle = 'childTokenYaml___staking___title',
   ChildTokenYamlStakingBody = 'childTokenYaml___staking___body',
   ChildTokenYamlStakingButtonText = 'childTokenYaml___staking___buttonText',
@@ -7563,172 +7722,7 @@ export enum FileFieldsEnum {
   ChildTokenYamlNewsletterSectionHeader = 'childTokenYaml___newsletterSection___header',
   ChildTokenYamlNewsletterSectionButtonText = 'childTokenYaml___newsletterSection___buttonText',
   ChildTokenYamlNewsletterSectionInputText = 'childTokenYaml___newsletterSection___inputText',
-  ChildTokenYamlFileAbsolutePath = 'childTokenYaml___fileAbsolutePath',
-  ChildTeamYamlId = 'childTeamYaml___id',
-  ChildTeamYamlParentId = 'childTeamYaml___parent___id',
-  ChildTeamYamlParentParentId = 'childTeamYaml___parent___parent___id',
-  ChildTeamYamlParentParentChildren = 'childTeamYaml___parent___parent___children',
-  ChildTeamYamlParentChildren = 'childTeamYaml___parent___children',
-  ChildTeamYamlParentChildrenId = 'childTeamYaml___parent___children___id',
-  ChildTeamYamlParentChildrenChildren = 'childTeamYaml___parent___children___children',
-  ChildTeamYamlParentInternalContent = 'childTeamYaml___parent___internal___content',
-  ChildTeamYamlParentInternalContentDigest = 'childTeamYaml___parent___internal___contentDigest',
-  ChildTeamYamlParentInternalDescription = 'childTeamYaml___parent___internal___description',
-  ChildTeamYamlParentInternalFieldOwners = 'childTeamYaml___parent___internal___fieldOwners',
-  ChildTeamYamlParentInternalIgnoreType = 'childTeamYaml___parent___internal___ignoreType',
-  ChildTeamYamlParentInternalMediaType = 'childTeamYaml___parent___internal___mediaType',
-  ChildTeamYamlParentInternalOwner = 'childTeamYaml___parent___internal___owner',
-  ChildTeamYamlParentInternalType = 'childTeamYaml___parent___internal___type',
-  ChildTeamYamlChildren = 'childTeamYaml___children',
-  ChildTeamYamlChildrenId = 'childTeamYaml___children___id',
-  ChildTeamYamlChildrenParentId = 'childTeamYaml___children___parent___id',
-  ChildTeamYamlChildrenParentChildren = 'childTeamYaml___children___parent___children',
-  ChildTeamYamlChildrenChildren = 'childTeamYaml___children___children',
-  ChildTeamYamlChildrenChildrenId = 'childTeamYaml___children___children___id',
-  ChildTeamYamlChildrenChildrenChildren = 'childTeamYaml___children___children___children',
-  ChildTeamYamlChildrenInternalContent = 'childTeamYaml___children___internal___content',
-  ChildTeamYamlChildrenInternalContentDigest = 'childTeamYaml___children___internal___contentDigest',
-  ChildTeamYamlChildrenInternalDescription = 'childTeamYaml___children___internal___description',
-  ChildTeamYamlChildrenInternalFieldOwners = 'childTeamYaml___children___internal___fieldOwners',
-  ChildTeamYamlChildrenInternalIgnoreType = 'childTeamYaml___children___internal___ignoreType',
-  ChildTeamYamlChildrenInternalMediaType = 'childTeamYaml___children___internal___mediaType',
-  ChildTeamYamlChildrenInternalOwner = 'childTeamYaml___children___internal___owner',
-  ChildTeamYamlChildrenInternalType = 'childTeamYaml___children___internal___type',
-  ChildTeamYamlInternalContent = 'childTeamYaml___internal___content',
-  ChildTeamYamlInternalContentDigest = 'childTeamYaml___internal___contentDigest',
-  ChildTeamYamlInternalDescription = 'childTeamYaml___internal___description',
-  ChildTeamYamlInternalFieldOwners = 'childTeamYaml___internal___fieldOwners',
-  ChildTeamYamlInternalIgnoreType = 'childTeamYaml___internal___ignoreType',
-  ChildTeamYamlInternalMediaType = 'childTeamYaml___internal___mediaType',
-  ChildTeamYamlInternalOwner = 'childTeamYaml___internal___owner',
-  ChildTeamYamlInternalType = 'childTeamYaml___internal___type',
-  ChildTeamYamlTopSectionHeader = 'childTeamYaml___topSection___header',
-  ChildTeamYamlTopSectionBody = 'childTeamYaml___topSection___body',
-  ChildTeamYamlCoreSectionTitle = 'childTeamYaml___coreSection___title',
-  ChildTeamYamlCoreSectionCoreMembers = 'childTeamYaml___coreSection___coreMembers',
-  ChildTeamYamlCoreSectionCoreMembersName = 'childTeamYaml___coreSection___coreMembers___name',
-  ChildTeamYamlCoreSectionCoreMembersTitle = 'childTeamYaml___coreSection___coreMembers___title',
-  ChildTeamYamlCoreSectionCoreMembersDescription = 'childTeamYaml___coreSection___coreMembers___description',
-  ChildTeamYamlCoreSectionCoreMembersLinkedUrl = 'childTeamYaml___coreSection___coreMembers___linkedUrl',
-  ChildTeamYamlCoreSectionCoreMembersTwitterUrl = 'childTeamYaml___coreSection___coreMembers___twitterUrl',
-  ChildTeamYamlCoreSectionCoreMembersGithubUrl = 'childTeamYaml___coreSection___coreMembers___githubUrl',
-  ChildTeamYamlContributorSectionTitle = 'childTeamYaml___contributorSection___title',
-  ChildTeamYamlContributorSectionContributors = 'childTeamYaml___contributorSection___contributors',
-  ChildTeamYamlContributorSectionContributorsName = 'childTeamYaml___contributorSection___contributors___name',
-  ChildTeamYamlContributorSectionContributorsDescription = 'childTeamYaml___contributorSection___contributors___description',
-  ChildTeamYamlContributorSectionContributorsTitle = 'childTeamYaml___contributorSection___contributors___title',
-  ChildTeamYamlContributorSectionContributorsLinkedUrl = 'childTeamYaml___contributorSection___contributors___linkedUrl',
-  ChildTeamYamlContributorSectionContributorsTwitterUrl = 'childTeamYaml___contributorSection___contributors___twitterUrl',
-  ChildTeamYamlContributorSectionContributorsGithubUrl = 'childTeamYaml___contributorSection___contributors___githubUrl',
-  ChildTeamYamlAdvisorSectionTitle = 'childTeamYaml___advisorSection___title',
-  ChildTeamYamlAdvisorSectionAdvisors = 'childTeamYaml___advisorSection___advisors',
-  ChildTeamYamlAdvisorSectionAdvisorsName = 'childTeamYaml___advisorSection___advisors___name',
-  ChildTeamYamlAdvisorSectionAdvisorsTitle = 'childTeamYaml___advisorSection___advisors___title',
-  ChildTeamYamlAdvisorSectionAdvisorsLinkedUrl = 'childTeamYaml___advisorSection___advisors___linkedUrl',
-  ChildTeamYamlAdvisorSectionAdvisorsTwitterUrl = 'childTeamYaml___advisorSection___advisors___twitterUrl',
-  ChildTeamYamlAdvisorSectionAdvisorsGithubUrl = 'childTeamYaml___advisorSection___advisors___githubUrl',
-  ChildTeamYamlAdvisorSectionAdvisorsDescription = 'childTeamYaml___advisorSection___advisors___description',
-  ChildTeamYamlFileAbsolutePath = 'childTeamYaml___fileAbsolutePath',
-  ChildWalletAddressRegistrationYamlId = 'childWalletAddressRegistrationYaml___id',
-  ChildWalletAddressRegistrationYamlParentId = 'childWalletAddressRegistrationYaml___parent___id',
-  ChildWalletAddressRegistrationYamlParentParentId = 'childWalletAddressRegistrationYaml___parent___parent___id',
-  ChildWalletAddressRegistrationYamlParentParentChildren = 'childWalletAddressRegistrationYaml___parent___parent___children',
-  ChildWalletAddressRegistrationYamlParentChildren = 'childWalletAddressRegistrationYaml___parent___children',
-  ChildWalletAddressRegistrationYamlParentChildrenId = 'childWalletAddressRegistrationYaml___parent___children___id',
-  ChildWalletAddressRegistrationYamlParentChildrenChildren = 'childWalletAddressRegistrationYaml___parent___children___children',
-  ChildWalletAddressRegistrationYamlParentInternalContent = 'childWalletAddressRegistrationYaml___parent___internal___content',
-  ChildWalletAddressRegistrationYamlParentInternalContentDigest = 'childWalletAddressRegistrationYaml___parent___internal___contentDigest',
-  ChildWalletAddressRegistrationYamlParentInternalDescription = 'childWalletAddressRegistrationYaml___parent___internal___description',
-  ChildWalletAddressRegistrationYamlParentInternalFieldOwners = 'childWalletAddressRegistrationYaml___parent___internal___fieldOwners',
-  ChildWalletAddressRegistrationYamlParentInternalIgnoreType = 'childWalletAddressRegistrationYaml___parent___internal___ignoreType',
-  ChildWalletAddressRegistrationYamlParentInternalMediaType = 'childWalletAddressRegistrationYaml___parent___internal___mediaType',
-  ChildWalletAddressRegistrationYamlParentInternalOwner = 'childWalletAddressRegistrationYaml___parent___internal___owner',
-  ChildWalletAddressRegistrationYamlParentInternalType = 'childWalletAddressRegistrationYaml___parent___internal___type',
-  ChildWalletAddressRegistrationYamlChildren = 'childWalletAddressRegistrationYaml___children',
-  ChildWalletAddressRegistrationYamlChildrenId = 'childWalletAddressRegistrationYaml___children___id',
-  ChildWalletAddressRegistrationYamlChildrenParentId = 'childWalletAddressRegistrationYaml___children___parent___id',
-  ChildWalletAddressRegistrationYamlChildrenParentChildren = 'childWalletAddressRegistrationYaml___children___parent___children',
-  ChildWalletAddressRegistrationYamlChildrenChildren = 'childWalletAddressRegistrationYaml___children___children',
-  ChildWalletAddressRegistrationYamlChildrenChildrenId = 'childWalletAddressRegistrationYaml___children___children___id',
-  ChildWalletAddressRegistrationYamlChildrenChildrenChildren = 'childWalletAddressRegistrationYaml___children___children___children',
-  ChildWalletAddressRegistrationYamlChildrenInternalContent = 'childWalletAddressRegistrationYaml___children___internal___content',
-  ChildWalletAddressRegistrationYamlChildrenInternalContentDigest = 'childWalletAddressRegistrationYaml___children___internal___contentDigest',
-  ChildWalletAddressRegistrationYamlChildrenInternalDescription = 'childWalletAddressRegistrationYaml___children___internal___description',
-  ChildWalletAddressRegistrationYamlChildrenInternalFieldOwners = 'childWalletAddressRegistrationYaml___children___internal___fieldOwners',
-  ChildWalletAddressRegistrationYamlChildrenInternalIgnoreType = 'childWalletAddressRegistrationYaml___children___internal___ignoreType',
-  ChildWalletAddressRegistrationYamlChildrenInternalMediaType = 'childWalletAddressRegistrationYaml___children___internal___mediaType',
-  ChildWalletAddressRegistrationYamlChildrenInternalOwner = 'childWalletAddressRegistrationYaml___children___internal___owner',
-  ChildWalletAddressRegistrationYamlChildrenInternalType = 'childWalletAddressRegistrationYaml___children___internal___type',
-  ChildWalletAddressRegistrationYamlInternalContent = 'childWalletAddressRegistrationYaml___internal___content',
-  ChildWalletAddressRegistrationYamlInternalContentDigest = 'childWalletAddressRegistrationYaml___internal___contentDigest',
-  ChildWalletAddressRegistrationYamlInternalDescription = 'childWalletAddressRegistrationYaml___internal___description',
-  ChildWalletAddressRegistrationYamlInternalFieldOwners = 'childWalletAddressRegistrationYaml___internal___fieldOwners',
-  ChildWalletAddressRegistrationYamlInternalIgnoreType = 'childWalletAddressRegistrationYaml___internal___ignoreType',
-  ChildWalletAddressRegistrationYamlInternalMediaType = 'childWalletAddressRegistrationYaml___internal___mediaType',
-  ChildWalletAddressRegistrationYamlInternalOwner = 'childWalletAddressRegistrationYaml___internal___owner',
-  ChildWalletAddressRegistrationYamlInternalType = 'childWalletAddressRegistrationYaml___internal___type',
-  ChildWalletAddressRegistrationYamlTopSectionHeader = 'childWalletAddressRegistrationYaml___topSection___header',
-  ChildWalletAddressRegistrationYamlTopSectionBody = 'childWalletAddressRegistrationYaml___topSection___body',
-  ChildWalletAddressRegistrationYamlInstructionsSectionHeader = 'childWalletAddressRegistrationYaml___instructionsSection___header',
-  ChildWalletAddressRegistrationYamlInstructionsSectionBody = 'childWalletAddressRegistrationYaml___instructionsSection___body',
-  ChildWalletAddressRegistrationYamlWalletButtonText = 'childWalletAddressRegistrationYaml___wallet___buttonText',
-  ChildWalletAddressRegistrationYamlWalletWalletFoundButtonText = 'childWalletAddressRegistrationYaml___wallet___walletFoundButtonText',
-  ChildWalletAddressRegistrationYamlWalletNoWalletFoundMessage = 'childWalletAddressRegistrationYaml___wallet___noWalletFoundMessage',
-  ChildWalletAddressRegistrationYamlFormAirtableLink = 'childWalletAddressRegistrationYaml___form___airtableLink',
-  ChildWalletAddressRegistrationYamlFormRecaptchaMessage = 'childWalletAddressRegistrationYaml___form___recaptchaMessage',
-  ChildWalletAddressRegistrationYamlFileAbsolutePath = 'childWalletAddressRegistrationYaml___fileAbsolutePath',
-  ChildValidatorsYamlId = 'childValidatorsYaml___id',
-  ChildValidatorsYamlParentId = 'childValidatorsYaml___parent___id',
-  ChildValidatorsYamlParentParentId = 'childValidatorsYaml___parent___parent___id',
-  ChildValidatorsYamlParentParentChildren = 'childValidatorsYaml___parent___parent___children',
-  ChildValidatorsYamlParentChildren = 'childValidatorsYaml___parent___children',
-  ChildValidatorsYamlParentChildrenId = 'childValidatorsYaml___parent___children___id',
-  ChildValidatorsYamlParentChildrenChildren = 'childValidatorsYaml___parent___children___children',
-  ChildValidatorsYamlParentInternalContent = 'childValidatorsYaml___parent___internal___content',
-  ChildValidatorsYamlParentInternalContentDigest = 'childValidatorsYaml___parent___internal___contentDigest',
-  ChildValidatorsYamlParentInternalDescription = 'childValidatorsYaml___parent___internal___description',
-  ChildValidatorsYamlParentInternalFieldOwners = 'childValidatorsYaml___parent___internal___fieldOwners',
-  ChildValidatorsYamlParentInternalIgnoreType = 'childValidatorsYaml___parent___internal___ignoreType',
-  ChildValidatorsYamlParentInternalMediaType = 'childValidatorsYaml___parent___internal___mediaType',
-  ChildValidatorsYamlParentInternalOwner = 'childValidatorsYaml___parent___internal___owner',
-  ChildValidatorsYamlParentInternalType = 'childValidatorsYaml___parent___internal___type',
-  ChildValidatorsYamlChildren = 'childValidatorsYaml___children',
-  ChildValidatorsYamlChildrenId = 'childValidatorsYaml___children___id',
-  ChildValidatorsYamlChildrenParentId = 'childValidatorsYaml___children___parent___id',
-  ChildValidatorsYamlChildrenParentChildren = 'childValidatorsYaml___children___parent___children',
-  ChildValidatorsYamlChildrenChildren = 'childValidatorsYaml___children___children',
-  ChildValidatorsYamlChildrenChildrenId = 'childValidatorsYaml___children___children___id',
-  ChildValidatorsYamlChildrenChildrenChildren = 'childValidatorsYaml___children___children___children',
-  ChildValidatorsYamlChildrenInternalContent = 'childValidatorsYaml___children___internal___content',
-  ChildValidatorsYamlChildrenInternalContentDigest = 'childValidatorsYaml___children___internal___contentDigest',
-  ChildValidatorsYamlChildrenInternalDescription = 'childValidatorsYaml___children___internal___description',
-  ChildValidatorsYamlChildrenInternalFieldOwners = 'childValidatorsYaml___children___internal___fieldOwners',
-  ChildValidatorsYamlChildrenInternalIgnoreType = 'childValidatorsYaml___children___internal___ignoreType',
-  ChildValidatorsYamlChildrenInternalMediaType = 'childValidatorsYaml___children___internal___mediaType',
-  ChildValidatorsYamlChildrenInternalOwner = 'childValidatorsYaml___children___internal___owner',
-  ChildValidatorsYamlChildrenInternalType = 'childValidatorsYaml___children___internal___type',
-  ChildValidatorsYamlInternalContent = 'childValidatorsYaml___internal___content',
-  ChildValidatorsYamlInternalContentDigest = 'childValidatorsYaml___internal___contentDigest',
-  ChildValidatorsYamlInternalDescription = 'childValidatorsYaml___internal___description',
-  ChildValidatorsYamlInternalFieldOwners = 'childValidatorsYaml___internal___fieldOwners',
-  ChildValidatorsYamlInternalIgnoreType = 'childValidatorsYaml___internal___ignoreType',
-  ChildValidatorsYamlInternalMediaType = 'childValidatorsYaml___internal___mediaType',
-  ChildValidatorsYamlInternalOwner = 'childValidatorsYaml___internal___owner',
-  ChildValidatorsYamlInternalType = 'childValidatorsYaml___internal___type',
-  ChildValidatorsYamlTopSectionHeader = 'childValidatorsYaml___topSection___header',
-  ChildValidatorsYamlTopSectionBody = 'childValidatorsYaml___topSection___body',
-  ChildValidatorsYamlWhatSectionHeader = 'childValidatorsYaml___whatSection___header',
-  ChildValidatorsYamlWhatSectionBody = 'childValidatorsYaml___whatSection___body',
-  ChildValidatorsYamlWhoSectionHeader = 'childValidatorsYaml___whoSection___header',
-  ChildValidatorsYamlWhoSectionBody = 'childValidatorsYaml___whoSection___body',
-  ChildValidatorsYamlWhoSectionValidators = 'childValidatorsYaml___whoSection___validators',
-  ChildValidatorsYamlWhoSectionValidatorsHeader = 'childValidatorsYaml___whoSection___validators___header',
-  ChildValidatorsYamlWhoSectionValidatorsDescription = 'childValidatorsYaml___whoSection___validators___description',
-  ChildValidatorsYamlWhoSectionValidatorsMembers = 'childValidatorsYaml___whoSection___validators___members',
-  ChildValidatorsYamlConnectSectionHeader = 'childValidatorsYaml___connectSection___header',
-  ChildValidatorsYamlWhySectionHeader = 'childValidatorsYaml___whySection___header',
-  ChildValidatorsYamlWhySectionBody = 'childValidatorsYaml___whySection___body',
-  ChildValidatorsYamlFileAbsolutePath = 'childValidatorsYaml___fileAbsolutePath'
+  ChildTokenYamlFileAbsolutePath = 'childTokenYaml___fileAbsolutePath'
 }
 
 export type FileFilterInput = {
@@ -7771,27 +7765,27 @@ export type FileFilterInput = {
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  childCommunityYaml: Maybe<CommunityYamlFilterInput>;
   childCaseStudiesYaml: Maybe<CaseStudiesYamlFilterInput>;
-  childDevelopersYaml: Maybe<DevelopersYamlFilterInput>;
   childCaseStudyItemsYaml: Maybe<CaseStudyItemsYamlFilterInput>;
-  childHomeYaml: Maybe<HomeYamlFilterInput>;
+  childDevelopersYaml: Maybe<DevelopersYamlFilterInput>;
+  childCommunityYaml: Maybe<CommunityYamlFilterInput>;
   childContactYaml: Maybe<ContactYamlFilterInput>;
-  childFaqYaml: Maybe<FaqYamlFilterInput>;
+  childPressKitYaml: Maybe<PressKitYamlFilterInput>;
+  childFundYaml: Maybe<FundYamlFilterInput>;
   childInvestYaml: Maybe<InvestYamlFilterInput>;
   childMainnetYaml: Maybe<MainnetYamlFilterInput>;
+  childFaqYaml: Maybe<FaqYamlFilterInput>;
   childPartnersYaml: Maybe<PartnersYamlFilterInput>;
-  childFundYaml: Maybe<FundYamlFilterInput>;
-  childResourcesYaml: Maybe<ResourcesYamlFilterInput>;
-  childPressKitYaml: Maybe<PressKitYamlFilterInput>;
-  childSharedYaml: Maybe<SharedYamlFilterInput>;
   childMediaYaml: Maybe<MediaYamlFilterInput>;
-  childScienceYaml: Maybe<ScienceYamlFilterInput>;
   childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
-  childTokenYaml: Maybe<TokenYamlFilterInput>;
-  childTeamYaml: Maybe<TeamYamlFilterInput>;
+  childHomeYaml: Maybe<HomeYamlFilterInput>;
+  childResourcesYaml: Maybe<ResourcesYamlFilterInput>;
+  childScienceYaml: Maybe<ScienceYamlFilterInput>;
   childWalletAddressRegistrationYaml: Maybe<WalletAddressRegistrationYamlFilterInput>;
+  childSharedYaml: Maybe<SharedYamlFilterInput>;
+  childTeamYaml: Maybe<TeamYamlFilterInput>;
   childValidatorsYaml: Maybe<ValidatorsYamlFilterInput>;
+  childTokenYaml: Maybe<TokenYamlFilterInput>;
 };
 
 export type FileGroupConnection = {
@@ -8419,33 +8413,32 @@ export enum HomeYamlFieldsEnum {
   ClimateSectionImageInternalMediaType = 'climateSection___image___internal___mediaType',
   ClimateSectionImageInternalOwner = 'climateSection___image___internal___owner',
   ClimateSectionImageInternalType = 'climateSection___image___internal___type',
-  ClimateSectionImageChildCommunityYamlId = 'climateSection___image___childCommunityYaml___id',
-  ClimateSectionImageChildCommunityYamlChildren = 'climateSection___image___childCommunityYaml___children',
-  ClimateSectionImageChildCommunityYamlFileAbsolutePath = 'climateSection___image___childCommunityYaml___fileAbsolutePath',
   ClimateSectionImageChildCaseStudiesYamlId = 'climateSection___image___childCaseStudiesYaml___id',
   ClimateSectionImageChildCaseStudiesYamlChildren = 'climateSection___image___childCaseStudiesYaml___children',
   ClimateSectionImageChildCaseStudiesYamlFileAbsolutePath = 'climateSection___image___childCaseStudiesYaml___fileAbsolutePath',
-  ClimateSectionImageChildDevelopersYamlId = 'climateSection___image___childDevelopersYaml___id',
-  ClimateSectionImageChildDevelopersYamlChildren = 'climateSection___image___childDevelopersYaml___children',
-  ClimateSectionImageChildDevelopersYamlFileAbsolutePath = 'climateSection___image___childDevelopersYaml___fileAbsolutePath',
   ClimateSectionImageChildCaseStudyItemsYamlId = 'climateSection___image___childCaseStudyItemsYaml___id',
   ClimateSectionImageChildCaseStudyItemsYamlChildren = 'climateSection___image___childCaseStudyItemsYaml___children',
   ClimateSectionImageChildCaseStudyItemsYamlName = 'climateSection___image___childCaseStudyItemsYaml___name',
   ClimateSectionImageChildCaseStudyItemsYamlSlug = 'climateSection___image___childCaseStudyItemsYaml___slug',
   ClimateSectionImageChildCaseStudyItemsYamlDescription = 'climateSection___image___childCaseStudyItemsYaml___description',
   ClimateSectionImageChildCaseStudyItemsYamlFileAbsolutePath = 'climateSection___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  ClimateSectionImageChildHomeYamlId = 'climateSection___image___childHomeYaml___id',
-  ClimateSectionImageChildHomeYamlChildren = 'climateSection___image___childHomeYaml___children',
-  ClimateSectionImageChildHomeYamlFileAbsolutePath = 'climateSection___image___childHomeYaml___fileAbsolutePath',
+  ClimateSectionImageChildDevelopersYamlId = 'climateSection___image___childDevelopersYaml___id',
+  ClimateSectionImageChildDevelopersYamlChildren = 'climateSection___image___childDevelopersYaml___children',
+  ClimateSectionImageChildDevelopersYamlFileAbsolutePath = 'climateSection___image___childDevelopersYaml___fileAbsolutePath',
+  ClimateSectionImageChildCommunityYamlId = 'climateSection___image___childCommunityYaml___id',
+  ClimateSectionImageChildCommunityYamlChildren = 'climateSection___image___childCommunityYaml___children',
+  ClimateSectionImageChildCommunityYamlFileAbsolutePath = 'climateSection___image___childCommunityYaml___fileAbsolutePath',
   ClimateSectionImageChildContactYamlId = 'climateSection___image___childContactYaml___id',
   ClimateSectionImageChildContactYamlChildren = 'climateSection___image___childContactYaml___children',
   ClimateSectionImageChildContactYamlHeader = 'climateSection___image___childContactYaml___header',
   ClimateSectionImageChildContactYamlBody = 'climateSection___image___childContactYaml___body',
   ClimateSectionImageChildContactYamlFileAbsolutePath = 'climateSection___image___childContactYaml___fileAbsolutePath',
-  ClimateSectionImageChildFaqYamlId = 'climateSection___image___childFaqYaml___id',
-  ClimateSectionImageChildFaqYamlChildren = 'climateSection___image___childFaqYaml___children',
-  ClimateSectionImageChildFaqYamlCategories = 'climateSection___image___childFaqYaml___categories',
-  ClimateSectionImageChildFaqYamlFileAbsolutePath = 'climateSection___image___childFaqYaml___fileAbsolutePath',
+  ClimateSectionImageChildPressKitYamlId = 'climateSection___image___childPressKitYaml___id',
+  ClimateSectionImageChildPressKitYamlChildren = 'climateSection___image___childPressKitYaml___children',
+  ClimateSectionImageChildPressKitYamlFileAbsolutePath = 'climateSection___image___childPressKitYaml___fileAbsolutePath',
+  ClimateSectionImageChildFundYamlId = 'climateSection___image___childFundYaml___id',
+  ClimateSectionImageChildFundYamlChildren = 'climateSection___image___childFundYaml___children',
+  ClimateSectionImageChildFundYamlFileAbsolutePath = 'climateSection___image___childFundYaml___fileAbsolutePath',
   ClimateSectionImageChildInvestYamlId = 'climateSection___image___childInvestYaml___id',
   ClimateSectionImageChildInvestYamlChildren = 'climateSection___image___childInvestYaml___children',
   ClimateSectionImageChildInvestYamlFileAbsolutePath = 'climateSection___image___childInvestYaml___fileAbsolutePath',
@@ -8455,31 +8448,20 @@ export enum HomeYamlFieldsEnum {
   ClimateSectionImageChildMainnetYamlLivecastLink = 'climateSection___image___childMainnetYaml___livecastLink',
   ClimateSectionImageChildMainnetYamlSeoDescription = 'climateSection___image___childMainnetYaml___seoDescription',
   ClimateSectionImageChildMainnetYamlFileAbsolutePath = 'climateSection___image___childMainnetYaml___fileAbsolutePath',
+  ClimateSectionImageChildFaqYamlId = 'climateSection___image___childFaqYaml___id',
+  ClimateSectionImageChildFaqYamlChildren = 'climateSection___image___childFaqYaml___children',
+  ClimateSectionImageChildFaqYamlCategories = 'climateSection___image___childFaqYaml___categories',
+  ClimateSectionImageChildFaqYamlFileAbsolutePath = 'climateSection___image___childFaqYaml___fileAbsolutePath',
   ClimateSectionImageChildPartnersYamlId = 'climateSection___image___childPartnersYaml___id',
   ClimateSectionImageChildPartnersYamlChildren = 'climateSection___image___childPartnersYaml___children',
   ClimateSectionImageChildPartnersYamlHeader = 'climateSection___image___childPartnersYaml___header',
   ClimateSectionImageChildPartnersYamlPartnerLogos = 'climateSection___image___childPartnersYaml___partnerLogos',
   ClimateSectionImageChildPartnersYamlFileAbsolutePath = 'climateSection___image___childPartnersYaml___fileAbsolutePath',
-  ClimateSectionImageChildFundYamlId = 'climateSection___image___childFundYaml___id',
-  ClimateSectionImageChildFundYamlChildren = 'climateSection___image___childFundYaml___children',
-  ClimateSectionImageChildFundYamlFileAbsolutePath = 'climateSection___image___childFundYaml___fileAbsolutePath',
-  ClimateSectionImageChildResourcesYamlId = 'climateSection___image___childResourcesYaml___id',
-  ClimateSectionImageChildResourcesYamlChildren = 'climateSection___image___childResourcesYaml___children',
-  ClimateSectionImageChildResourcesYamlFileAbsolutePath = 'climateSection___image___childResourcesYaml___fileAbsolutePath',
-  ClimateSectionImageChildPressKitYamlId = 'climateSection___image___childPressKitYaml___id',
-  ClimateSectionImageChildPressKitYamlChildren = 'climateSection___image___childPressKitYaml___children',
-  ClimateSectionImageChildPressKitYamlFileAbsolutePath = 'climateSection___image___childPressKitYaml___fileAbsolutePath',
-  ClimateSectionImageChildSharedYamlId = 'climateSection___image___childSharedYaml___id',
-  ClimateSectionImageChildSharedYamlChildren = 'climateSection___image___childSharedYaml___children',
-  ClimateSectionImageChildSharedYamlFileAbsolutePath = 'climateSection___image___childSharedYaml___fileAbsolutePath',
   ClimateSectionImageChildMediaYamlId = 'climateSection___image___childMediaYaml___id',
   ClimateSectionImageChildMediaYamlChildren = 'climateSection___image___childMediaYaml___children',
   ClimateSectionImageChildMediaYamlHeader = 'climateSection___image___childMediaYaml___header',
   ClimateSectionImageChildMediaYamlCategories = 'climateSection___image___childMediaYaml___categories',
   ClimateSectionImageChildMediaYamlFileAbsolutePath = 'climateSection___image___childMediaYaml___fileAbsolutePath',
-  ClimateSectionImageChildScienceYamlId = 'climateSection___image___childScienceYaml___id',
-  ClimateSectionImageChildScienceYamlChildren = 'climateSection___image___childScienceYaml___children',
-  ClimateSectionImageChildScienceYamlFileAbsolutePath = 'climateSection___image___childScienceYaml___fileAbsolutePath',
   ClimateSectionImageChildMarkdownRemarkId = 'climateSection___image___childMarkdownRemark___id',
   ClimateSectionImageChildMarkdownRemarkExcerpt = 'climateSection___image___childMarkdownRemark___excerpt',
   ClimateSectionImageChildMarkdownRemarkRawMarkdownBody = 'climateSection___image___childMarkdownRemark___rawMarkdownBody',
@@ -8491,18 +8473,30 @@ export enum HomeYamlFieldsEnum {
   ClimateSectionImageChildMarkdownRemarkTimeToRead = 'climateSection___image___childMarkdownRemark___timeToRead',
   ClimateSectionImageChildMarkdownRemarkTableOfContents = 'climateSection___image___childMarkdownRemark___tableOfContents',
   ClimateSectionImageChildMarkdownRemarkChildren = 'climateSection___image___childMarkdownRemark___children',
-  ClimateSectionImageChildTokenYamlId = 'climateSection___image___childTokenYaml___id',
-  ClimateSectionImageChildTokenYamlChildren = 'climateSection___image___childTokenYaml___children',
-  ClimateSectionImageChildTokenYamlFileAbsolutePath = 'climateSection___image___childTokenYaml___fileAbsolutePath',
-  ClimateSectionImageChildTeamYamlId = 'climateSection___image___childTeamYaml___id',
-  ClimateSectionImageChildTeamYamlChildren = 'climateSection___image___childTeamYaml___children',
-  ClimateSectionImageChildTeamYamlFileAbsolutePath = 'climateSection___image___childTeamYaml___fileAbsolutePath',
+  ClimateSectionImageChildHomeYamlId = 'climateSection___image___childHomeYaml___id',
+  ClimateSectionImageChildHomeYamlChildren = 'climateSection___image___childHomeYaml___children',
+  ClimateSectionImageChildHomeYamlFileAbsolutePath = 'climateSection___image___childHomeYaml___fileAbsolutePath',
+  ClimateSectionImageChildResourcesYamlId = 'climateSection___image___childResourcesYaml___id',
+  ClimateSectionImageChildResourcesYamlChildren = 'climateSection___image___childResourcesYaml___children',
+  ClimateSectionImageChildResourcesYamlFileAbsolutePath = 'climateSection___image___childResourcesYaml___fileAbsolutePath',
+  ClimateSectionImageChildScienceYamlId = 'climateSection___image___childScienceYaml___id',
+  ClimateSectionImageChildScienceYamlChildren = 'climateSection___image___childScienceYaml___children',
+  ClimateSectionImageChildScienceYamlFileAbsolutePath = 'climateSection___image___childScienceYaml___fileAbsolutePath',
   ClimateSectionImageChildWalletAddressRegistrationYamlId = 'climateSection___image___childWalletAddressRegistrationYaml___id',
   ClimateSectionImageChildWalletAddressRegistrationYamlChildren = 'climateSection___image___childWalletAddressRegistrationYaml___children',
   ClimateSectionImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'climateSection___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  ClimateSectionImageChildSharedYamlId = 'climateSection___image___childSharedYaml___id',
+  ClimateSectionImageChildSharedYamlChildren = 'climateSection___image___childSharedYaml___children',
+  ClimateSectionImageChildSharedYamlFileAbsolutePath = 'climateSection___image___childSharedYaml___fileAbsolutePath',
+  ClimateSectionImageChildTeamYamlId = 'climateSection___image___childTeamYaml___id',
+  ClimateSectionImageChildTeamYamlChildren = 'climateSection___image___childTeamYaml___children',
+  ClimateSectionImageChildTeamYamlFileAbsolutePath = 'climateSection___image___childTeamYaml___fileAbsolutePath',
   ClimateSectionImageChildValidatorsYamlId = 'climateSection___image___childValidatorsYaml___id',
   ClimateSectionImageChildValidatorsYamlChildren = 'climateSection___image___childValidatorsYaml___children',
   ClimateSectionImageChildValidatorsYamlFileAbsolutePath = 'climateSection___image___childValidatorsYaml___fileAbsolutePath',
+  ClimateSectionImageChildTokenYamlId = 'climateSection___image___childTokenYaml___id',
+  ClimateSectionImageChildTokenYamlChildren = 'climateSection___image___childTokenYaml___children',
+  ClimateSectionImageChildTokenYamlFileAbsolutePath = 'climateSection___image___childTokenYaml___fileAbsolutePath',
   ClimateSectionSolutionHeader = 'climateSection___solution___header',
   ClimateSectionSolutionDescription = 'climateSection___solution___description',
   ClimateSectionProblemHeader = 'climateSection___problem___header',
@@ -9595,33 +9589,32 @@ export enum MainnetYamlFieldsEnum {
   LaunchInfoSectionImageInternalMediaType = 'launchInfoSection___image___internal___mediaType',
   LaunchInfoSectionImageInternalOwner = 'launchInfoSection___image___internal___owner',
   LaunchInfoSectionImageInternalType = 'launchInfoSection___image___internal___type',
-  LaunchInfoSectionImageChildCommunityYamlId = 'launchInfoSection___image___childCommunityYaml___id',
-  LaunchInfoSectionImageChildCommunityYamlChildren = 'launchInfoSection___image___childCommunityYaml___children',
-  LaunchInfoSectionImageChildCommunityYamlFileAbsolutePath = 'launchInfoSection___image___childCommunityYaml___fileAbsolutePath',
   LaunchInfoSectionImageChildCaseStudiesYamlId = 'launchInfoSection___image___childCaseStudiesYaml___id',
   LaunchInfoSectionImageChildCaseStudiesYamlChildren = 'launchInfoSection___image___childCaseStudiesYaml___children',
   LaunchInfoSectionImageChildCaseStudiesYamlFileAbsolutePath = 'launchInfoSection___image___childCaseStudiesYaml___fileAbsolutePath',
-  LaunchInfoSectionImageChildDevelopersYamlId = 'launchInfoSection___image___childDevelopersYaml___id',
-  LaunchInfoSectionImageChildDevelopersYamlChildren = 'launchInfoSection___image___childDevelopersYaml___children',
-  LaunchInfoSectionImageChildDevelopersYamlFileAbsolutePath = 'launchInfoSection___image___childDevelopersYaml___fileAbsolutePath',
   LaunchInfoSectionImageChildCaseStudyItemsYamlId = 'launchInfoSection___image___childCaseStudyItemsYaml___id',
   LaunchInfoSectionImageChildCaseStudyItemsYamlChildren = 'launchInfoSection___image___childCaseStudyItemsYaml___children',
   LaunchInfoSectionImageChildCaseStudyItemsYamlName = 'launchInfoSection___image___childCaseStudyItemsYaml___name',
   LaunchInfoSectionImageChildCaseStudyItemsYamlSlug = 'launchInfoSection___image___childCaseStudyItemsYaml___slug',
   LaunchInfoSectionImageChildCaseStudyItemsYamlDescription = 'launchInfoSection___image___childCaseStudyItemsYaml___description',
   LaunchInfoSectionImageChildCaseStudyItemsYamlFileAbsolutePath = 'launchInfoSection___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  LaunchInfoSectionImageChildHomeYamlId = 'launchInfoSection___image___childHomeYaml___id',
-  LaunchInfoSectionImageChildHomeYamlChildren = 'launchInfoSection___image___childHomeYaml___children',
-  LaunchInfoSectionImageChildHomeYamlFileAbsolutePath = 'launchInfoSection___image___childHomeYaml___fileAbsolutePath',
+  LaunchInfoSectionImageChildDevelopersYamlId = 'launchInfoSection___image___childDevelopersYaml___id',
+  LaunchInfoSectionImageChildDevelopersYamlChildren = 'launchInfoSection___image___childDevelopersYaml___children',
+  LaunchInfoSectionImageChildDevelopersYamlFileAbsolutePath = 'launchInfoSection___image___childDevelopersYaml___fileAbsolutePath',
+  LaunchInfoSectionImageChildCommunityYamlId = 'launchInfoSection___image___childCommunityYaml___id',
+  LaunchInfoSectionImageChildCommunityYamlChildren = 'launchInfoSection___image___childCommunityYaml___children',
+  LaunchInfoSectionImageChildCommunityYamlFileAbsolutePath = 'launchInfoSection___image___childCommunityYaml___fileAbsolutePath',
   LaunchInfoSectionImageChildContactYamlId = 'launchInfoSection___image___childContactYaml___id',
   LaunchInfoSectionImageChildContactYamlChildren = 'launchInfoSection___image___childContactYaml___children',
   LaunchInfoSectionImageChildContactYamlHeader = 'launchInfoSection___image___childContactYaml___header',
   LaunchInfoSectionImageChildContactYamlBody = 'launchInfoSection___image___childContactYaml___body',
   LaunchInfoSectionImageChildContactYamlFileAbsolutePath = 'launchInfoSection___image___childContactYaml___fileAbsolutePath',
-  LaunchInfoSectionImageChildFaqYamlId = 'launchInfoSection___image___childFaqYaml___id',
-  LaunchInfoSectionImageChildFaqYamlChildren = 'launchInfoSection___image___childFaqYaml___children',
-  LaunchInfoSectionImageChildFaqYamlCategories = 'launchInfoSection___image___childFaqYaml___categories',
-  LaunchInfoSectionImageChildFaqYamlFileAbsolutePath = 'launchInfoSection___image___childFaqYaml___fileAbsolutePath',
+  LaunchInfoSectionImageChildPressKitYamlId = 'launchInfoSection___image___childPressKitYaml___id',
+  LaunchInfoSectionImageChildPressKitYamlChildren = 'launchInfoSection___image___childPressKitYaml___children',
+  LaunchInfoSectionImageChildPressKitYamlFileAbsolutePath = 'launchInfoSection___image___childPressKitYaml___fileAbsolutePath',
+  LaunchInfoSectionImageChildFundYamlId = 'launchInfoSection___image___childFundYaml___id',
+  LaunchInfoSectionImageChildFundYamlChildren = 'launchInfoSection___image___childFundYaml___children',
+  LaunchInfoSectionImageChildFundYamlFileAbsolutePath = 'launchInfoSection___image___childFundYaml___fileAbsolutePath',
   LaunchInfoSectionImageChildInvestYamlId = 'launchInfoSection___image___childInvestYaml___id',
   LaunchInfoSectionImageChildInvestYamlChildren = 'launchInfoSection___image___childInvestYaml___children',
   LaunchInfoSectionImageChildInvestYamlFileAbsolutePath = 'launchInfoSection___image___childInvestYaml___fileAbsolutePath',
@@ -9631,31 +9624,20 @@ export enum MainnetYamlFieldsEnum {
   LaunchInfoSectionImageChildMainnetYamlLivecastLink = 'launchInfoSection___image___childMainnetYaml___livecastLink',
   LaunchInfoSectionImageChildMainnetYamlSeoDescription = 'launchInfoSection___image___childMainnetYaml___seoDescription',
   LaunchInfoSectionImageChildMainnetYamlFileAbsolutePath = 'launchInfoSection___image___childMainnetYaml___fileAbsolutePath',
+  LaunchInfoSectionImageChildFaqYamlId = 'launchInfoSection___image___childFaqYaml___id',
+  LaunchInfoSectionImageChildFaqYamlChildren = 'launchInfoSection___image___childFaqYaml___children',
+  LaunchInfoSectionImageChildFaqYamlCategories = 'launchInfoSection___image___childFaqYaml___categories',
+  LaunchInfoSectionImageChildFaqYamlFileAbsolutePath = 'launchInfoSection___image___childFaqYaml___fileAbsolutePath',
   LaunchInfoSectionImageChildPartnersYamlId = 'launchInfoSection___image___childPartnersYaml___id',
   LaunchInfoSectionImageChildPartnersYamlChildren = 'launchInfoSection___image___childPartnersYaml___children',
   LaunchInfoSectionImageChildPartnersYamlHeader = 'launchInfoSection___image___childPartnersYaml___header',
   LaunchInfoSectionImageChildPartnersYamlPartnerLogos = 'launchInfoSection___image___childPartnersYaml___partnerLogos',
   LaunchInfoSectionImageChildPartnersYamlFileAbsolutePath = 'launchInfoSection___image___childPartnersYaml___fileAbsolutePath',
-  LaunchInfoSectionImageChildFundYamlId = 'launchInfoSection___image___childFundYaml___id',
-  LaunchInfoSectionImageChildFundYamlChildren = 'launchInfoSection___image___childFundYaml___children',
-  LaunchInfoSectionImageChildFundYamlFileAbsolutePath = 'launchInfoSection___image___childFundYaml___fileAbsolutePath',
-  LaunchInfoSectionImageChildResourcesYamlId = 'launchInfoSection___image___childResourcesYaml___id',
-  LaunchInfoSectionImageChildResourcesYamlChildren = 'launchInfoSection___image___childResourcesYaml___children',
-  LaunchInfoSectionImageChildResourcesYamlFileAbsolutePath = 'launchInfoSection___image___childResourcesYaml___fileAbsolutePath',
-  LaunchInfoSectionImageChildPressKitYamlId = 'launchInfoSection___image___childPressKitYaml___id',
-  LaunchInfoSectionImageChildPressKitYamlChildren = 'launchInfoSection___image___childPressKitYaml___children',
-  LaunchInfoSectionImageChildPressKitYamlFileAbsolutePath = 'launchInfoSection___image___childPressKitYaml___fileAbsolutePath',
-  LaunchInfoSectionImageChildSharedYamlId = 'launchInfoSection___image___childSharedYaml___id',
-  LaunchInfoSectionImageChildSharedYamlChildren = 'launchInfoSection___image___childSharedYaml___children',
-  LaunchInfoSectionImageChildSharedYamlFileAbsolutePath = 'launchInfoSection___image___childSharedYaml___fileAbsolutePath',
   LaunchInfoSectionImageChildMediaYamlId = 'launchInfoSection___image___childMediaYaml___id',
   LaunchInfoSectionImageChildMediaYamlChildren = 'launchInfoSection___image___childMediaYaml___children',
   LaunchInfoSectionImageChildMediaYamlHeader = 'launchInfoSection___image___childMediaYaml___header',
   LaunchInfoSectionImageChildMediaYamlCategories = 'launchInfoSection___image___childMediaYaml___categories',
   LaunchInfoSectionImageChildMediaYamlFileAbsolutePath = 'launchInfoSection___image___childMediaYaml___fileAbsolutePath',
-  LaunchInfoSectionImageChildScienceYamlId = 'launchInfoSection___image___childScienceYaml___id',
-  LaunchInfoSectionImageChildScienceYamlChildren = 'launchInfoSection___image___childScienceYaml___children',
-  LaunchInfoSectionImageChildScienceYamlFileAbsolutePath = 'launchInfoSection___image___childScienceYaml___fileAbsolutePath',
   LaunchInfoSectionImageChildMarkdownRemarkId = 'launchInfoSection___image___childMarkdownRemark___id',
   LaunchInfoSectionImageChildMarkdownRemarkExcerpt = 'launchInfoSection___image___childMarkdownRemark___excerpt',
   LaunchInfoSectionImageChildMarkdownRemarkRawMarkdownBody = 'launchInfoSection___image___childMarkdownRemark___rawMarkdownBody',
@@ -9667,18 +9649,30 @@ export enum MainnetYamlFieldsEnum {
   LaunchInfoSectionImageChildMarkdownRemarkTimeToRead = 'launchInfoSection___image___childMarkdownRemark___timeToRead',
   LaunchInfoSectionImageChildMarkdownRemarkTableOfContents = 'launchInfoSection___image___childMarkdownRemark___tableOfContents',
   LaunchInfoSectionImageChildMarkdownRemarkChildren = 'launchInfoSection___image___childMarkdownRemark___children',
-  LaunchInfoSectionImageChildTokenYamlId = 'launchInfoSection___image___childTokenYaml___id',
-  LaunchInfoSectionImageChildTokenYamlChildren = 'launchInfoSection___image___childTokenYaml___children',
-  LaunchInfoSectionImageChildTokenYamlFileAbsolutePath = 'launchInfoSection___image___childTokenYaml___fileAbsolutePath',
-  LaunchInfoSectionImageChildTeamYamlId = 'launchInfoSection___image___childTeamYaml___id',
-  LaunchInfoSectionImageChildTeamYamlChildren = 'launchInfoSection___image___childTeamYaml___children',
-  LaunchInfoSectionImageChildTeamYamlFileAbsolutePath = 'launchInfoSection___image___childTeamYaml___fileAbsolutePath',
+  LaunchInfoSectionImageChildHomeYamlId = 'launchInfoSection___image___childHomeYaml___id',
+  LaunchInfoSectionImageChildHomeYamlChildren = 'launchInfoSection___image___childHomeYaml___children',
+  LaunchInfoSectionImageChildHomeYamlFileAbsolutePath = 'launchInfoSection___image___childHomeYaml___fileAbsolutePath',
+  LaunchInfoSectionImageChildResourcesYamlId = 'launchInfoSection___image___childResourcesYaml___id',
+  LaunchInfoSectionImageChildResourcesYamlChildren = 'launchInfoSection___image___childResourcesYaml___children',
+  LaunchInfoSectionImageChildResourcesYamlFileAbsolutePath = 'launchInfoSection___image___childResourcesYaml___fileAbsolutePath',
+  LaunchInfoSectionImageChildScienceYamlId = 'launchInfoSection___image___childScienceYaml___id',
+  LaunchInfoSectionImageChildScienceYamlChildren = 'launchInfoSection___image___childScienceYaml___children',
+  LaunchInfoSectionImageChildScienceYamlFileAbsolutePath = 'launchInfoSection___image___childScienceYaml___fileAbsolutePath',
   LaunchInfoSectionImageChildWalletAddressRegistrationYamlId = 'launchInfoSection___image___childWalletAddressRegistrationYaml___id',
   LaunchInfoSectionImageChildWalletAddressRegistrationYamlChildren = 'launchInfoSection___image___childWalletAddressRegistrationYaml___children',
   LaunchInfoSectionImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'launchInfoSection___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  LaunchInfoSectionImageChildSharedYamlId = 'launchInfoSection___image___childSharedYaml___id',
+  LaunchInfoSectionImageChildSharedYamlChildren = 'launchInfoSection___image___childSharedYaml___children',
+  LaunchInfoSectionImageChildSharedYamlFileAbsolutePath = 'launchInfoSection___image___childSharedYaml___fileAbsolutePath',
+  LaunchInfoSectionImageChildTeamYamlId = 'launchInfoSection___image___childTeamYaml___id',
+  LaunchInfoSectionImageChildTeamYamlChildren = 'launchInfoSection___image___childTeamYaml___children',
+  LaunchInfoSectionImageChildTeamYamlFileAbsolutePath = 'launchInfoSection___image___childTeamYaml___fileAbsolutePath',
   LaunchInfoSectionImageChildValidatorsYamlId = 'launchInfoSection___image___childValidatorsYaml___id',
   LaunchInfoSectionImageChildValidatorsYamlChildren = 'launchInfoSection___image___childValidatorsYaml___children',
   LaunchInfoSectionImageChildValidatorsYamlFileAbsolutePath = 'launchInfoSection___image___childValidatorsYaml___fileAbsolutePath',
+  LaunchInfoSectionImageChildTokenYamlId = 'launchInfoSection___image___childTokenYaml___id',
+  LaunchInfoSectionImageChildTokenYamlChildren = 'launchInfoSection___image___childTokenYaml___children',
+  LaunchInfoSectionImageChildTokenYamlFileAbsolutePath = 'launchInfoSection___image___childTokenYaml___fileAbsolutePath',
   LaunchInfoSectionCardTitle = 'launchInfoSection___card___title',
   LaunchInfoSectionCardProgress = 'launchInfoSection___card___progress',
   LaunchInfoSectionCardListTitle = 'launchInfoSection___card___listTitle',
@@ -10603,33 +10597,32 @@ export enum PartnersYamlFieldsEnum {
   PartnerLogosImageInternalMediaType = 'partnerLogos___image___internal___mediaType',
   PartnerLogosImageInternalOwner = 'partnerLogos___image___internal___owner',
   PartnerLogosImageInternalType = 'partnerLogos___image___internal___type',
-  PartnerLogosImageChildCommunityYamlId = 'partnerLogos___image___childCommunityYaml___id',
-  PartnerLogosImageChildCommunityYamlChildren = 'partnerLogos___image___childCommunityYaml___children',
-  PartnerLogosImageChildCommunityYamlFileAbsolutePath = 'partnerLogos___image___childCommunityYaml___fileAbsolutePath',
   PartnerLogosImageChildCaseStudiesYamlId = 'partnerLogos___image___childCaseStudiesYaml___id',
   PartnerLogosImageChildCaseStudiesYamlChildren = 'partnerLogos___image___childCaseStudiesYaml___children',
   PartnerLogosImageChildCaseStudiesYamlFileAbsolutePath = 'partnerLogos___image___childCaseStudiesYaml___fileAbsolutePath',
-  PartnerLogosImageChildDevelopersYamlId = 'partnerLogos___image___childDevelopersYaml___id',
-  PartnerLogosImageChildDevelopersYamlChildren = 'partnerLogos___image___childDevelopersYaml___children',
-  PartnerLogosImageChildDevelopersYamlFileAbsolutePath = 'partnerLogos___image___childDevelopersYaml___fileAbsolutePath',
   PartnerLogosImageChildCaseStudyItemsYamlId = 'partnerLogos___image___childCaseStudyItemsYaml___id',
   PartnerLogosImageChildCaseStudyItemsYamlChildren = 'partnerLogos___image___childCaseStudyItemsYaml___children',
   PartnerLogosImageChildCaseStudyItemsYamlName = 'partnerLogos___image___childCaseStudyItemsYaml___name',
   PartnerLogosImageChildCaseStudyItemsYamlSlug = 'partnerLogos___image___childCaseStudyItemsYaml___slug',
   PartnerLogosImageChildCaseStudyItemsYamlDescription = 'partnerLogos___image___childCaseStudyItemsYaml___description',
   PartnerLogosImageChildCaseStudyItemsYamlFileAbsolutePath = 'partnerLogos___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  PartnerLogosImageChildHomeYamlId = 'partnerLogos___image___childHomeYaml___id',
-  PartnerLogosImageChildHomeYamlChildren = 'partnerLogos___image___childHomeYaml___children',
-  PartnerLogosImageChildHomeYamlFileAbsolutePath = 'partnerLogos___image___childHomeYaml___fileAbsolutePath',
+  PartnerLogosImageChildDevelopersYamlId = 'partnerLogos___image___childDevelopersYaml___id',
+  PartnerLogosImageChildDevelopersYamlChildren = 'partnerLogos___image___childDevelopersYaml___children',
+  PartnerLogosImageChildDevelopersYamlFileAbsolutePath = 'partnerLogos___image___childDevelopersYaml___fileAbsolutePath',
+  PartnerLogosImageChildCommunityYamlId = 'partnerLogos___image___childCommunityYaml___id',
+  PartnerLogosImageChildCommunityYamlChildren = 'partnerLogos___image___childCommunityYaml___children',
+  PartnerLogosImageChildCommunityYamlFileAbsolutePath = 'partnerLogos___image___childCommunityYaml___fileAbsolutePath',
   PartnerLogosImageChildContactYamlId = 'partnerLogos___image___childContactYaml___id',
   PartnerLogosImageChildContactYamlChildren = 'partnerLogos___image___childContactYaml___children',
   PartnerLogosImageChildContactYamlHeader = 'partnerLogos___image___childContactYaml___header',
   PartnerLogosImageChildContactYamlBody = 'partnerLogos___image___childContactYaml___body',
   PartnerLogosImageChildContactYamlFileAbsolutePath = 'partnerLogos___image___childContactYaml___fileAbsolutePath',
-  PartnerLogosImageChildFaqYamlId = 'partnerLogos___image___childFaqYaml___id',
-  PartnerLogosImageChildFaqYamlChildren = 'partnerLogos___image___childFaqYaml___children',
-  PartnerLogosImageChildFaqYamlCategories = 'partnerLogos___image___childFaqYaml___categories',
-  PartnerLogosImageChildFaqYamlFileAbsolutePath = 'partnerLogos___image___childFaqYaml___fileAbsolutePath',
+  PartnerLogosImageChildPressKitYamlId = 'partnerLogos___image___childPressKitYaml___id',
+  PartnerLogosImageChildPressKitYamlChildren = 'partnerLogos___image___childPressKitYaml___children',
+  PartnerLogosImageChildPressKitYamlFileAbsolutePath = 'partnerLogos___image___childPressKitYaml___fileAbsolutePath',
+  PartnerLogosImageChildFundYamlId = 'partnerLogos___image___childFundYaml___id',
+  PartnerLogosImageChildFundYamlChildren = 'partnerLogos___image___childFundYaml___children',
+  PartnerLogosImageChildFundYamlFileAbsolutePath = 'partnerLogos___image___childFundYaml___fileAbsolutePath',
   PartnerLogosImageChildInvestYamlId = 'partnerLogos___image___childInvestYaml___id',
   PartnerLogosImageChildInvestYamlChildren = 'partnerLogos___image___childInvestYaml___children',
   PartnerLogosImageChildInvestYamlFileAbsolutePath = 'partnerLogos___image___childInvestYaml___fileAbsolutePath',
@@ -10639,31 +10632,20 @@ export enum PartnersYamlFieldsEnum {
   PartnerLogosImageChildMainnetYamlLivecastLink = 'partnerLogos___image___childMainnetYaml___livecastLink',
   PartnerLogosImageChildMainnetYamlSeoDescription = 'partnerLogos___image___childMainnetYaml___seoDescription',
   PartnerLogosImageChildMainnetYamlFileAbsolutePath = 'partnerLogos___image___childMainnetYaml___fileAbsolutePath',
+  PartnerLogosImageChildFaqYamlId = 'partnerLogos___image___childFaqYaml___id',
+  PartnerLogosImageChildFaqYamlChildren = 'partnerLogos___image___childFaqYaml___children',
+  PartnerLogosImageChildFaqYamlCategories = 'partnerLogos___image___childFaqYaml___categories',
+  PartnerLogosImageChildFaqYamlFileAbsolutePath = 'partnerLogos___image___childFaqYaml___fileAbsolutePath',
   PartnerLogosImageChildPartnersYamlId = 'partnerLogos___image___childPartnersYaml___id',
   PartnerLogosImageChildPartnersYamlChildren = 'partnerLogos___image___childPartnersYaml___children',
   PartnerLogosImageChildPartnersYamlHeader = 'partnerLogos___image___childPartnersYaml___header',
   PartnerLogosImageChildPartnersYamlPartnerLogos = 'partnerLogos___image___childPartnersYaml___partnerLogos',
   PartnerLogosImageChildPartnersYamlFileAbsolutePath = 'partnerLogos___image___childPartnersYaml___fileAbsolutePath',
-  PartnerLogosImageChildFundYamlId = 'partnerLogos___image___childFundYaml___id',
-  PartnerLogosImageChildFundYamlChildren = 'partnerLogos___image___childFundYaml___children',
-  PartnerLogosImageChildFundYamlFileAbsolutePath = 'partnerLogos___image___childFundYaml___fileAbsolutePath',
-  PartnerLogosImageChildResourcesYamlId = 'partnerLogos___image___childResourcesYaml___id',
-  PartnerLogosImageChildResourcesYamlChildren = 'partnerLogos___image___childResourcesYaml___children',
-  PartnerLogosImageChildResourcesYamlFileAbsolutePath = 'partnerLogos___image___childResourcesYaml___fileAbsolutePath',
-  PartnerLogosImageChildPressKitYamlId = 'partnerLogos___image___childPressKitYaml___id',
-  PartnerLogosImageChildPressKitYamlChildren = 'partnerLogos___image___childPressKitYaml___children',
-  PartnerLogosImageChildPressKitYamlFileAbsolutePath = 'partnerLogos___image___childPressKitYaml___fileAbsolutePath',
-  PartnerLogosImageChildSharedYamlId = 'partnerLogos___image___childSharedYaml___id',
-  PartnerLogosImageChildSharedYamlChildren = 'partnerLogos___image___childSharedYaml___children',
-  PartnerLogosImageChildSharedYamlFileAbsolutePath = 'partnerLogos___image___childSharedYaml___fileAbsolutePath',
   PartnerLogosImageChildMediaYamlId = 'partnerLogos___image___childMediaYaml___id',
   PartnerLogosImageChildMediaYamlChildren = 'partnerLogos___image___childMediaYaml___children',
   PartnerLogosImageChildMediaYamlHeader = 'partnerLogos___image___childMediaYaml___header',
   PartnerLogosImageChildMediaYamlCategories = 'partnerLogos___image___childMediaYaml___categories',
   PartnerLogosImageChildMediaYamlFileAbsolutePath = 'partnerLogos___image___childMediaYaml___fileAbsolutePath',
-  PartnerLogosImageChildScienceYamlId = 'partnerLogos___image___childScienceYaml___id',
-  PartnerLogosImageChildScienceYamlChildren = 'partnerLogos___image___childScienceYaml___children',
-  PartnerLogosImageChildScienceYamlFileAbsolutePath = 'partnerLogos___image___childScienceYaml___fileAbsolutePath',
   PartnerLogosImageChildMarkdownRemarkId = 'partnerLogos___image___childMarkdownRemark___id',
   PartnerLogosImageChildMarkdownRemarkExcerpt = 'partnerLogos___image___childMarkdownRemark___excerpt',
   PartnerLogosImageChildMarkdownRemarkRawMarkdownBody = 'partnerLogos___image___childMarkdownRemark___rawMarkdownBody',
@@ -10675,18 +10657,30 @@ export enum PartnersYamlFieldsEnum {
   PartnerLogosImageChildMarkdownRemarkTimeToRead = 'partnerLogos___image___childMarkdownRemark___timeToRead',
   PartnerLogosImageChildMarkdownRemarkTableOfContents = 'partnerLogos___image___childMarkdownRemark___tableOfContents',
   PartnerLogosImageChildMarkdownRemarkChildren = 'partnerLogos___image___childMarkdownRemark___children',
-  PartnerLogosImageChildTokenYamlId = 'partnerLogos___image___childTokenYaml___id',
-  PartnerLogosImageChildTokenYamlChildren = 'partnerLogos___image___childTokenYaml___children',
-  PartnerLogosImageChildTokenYamlFileAbsolutePath = 'partnerLogos___image___childTokenYaml___fileAbsolutePath',
-  PartnerLogosImageChildTeamYamlId = 'partnerLogos___image___childTeamYaml___id',
-  PartnerLogosImageChildTeamYamlChildren = 'partnerLogos___image___childTeamYaml___children',
-  PartnerLogosImageChildTeamYamlFileAbsolutePath = 'partnerLogos___image___childTeamYaml___fileAbsolutePath',
+  PartnerLogosImageChildHomeYamlId = 'partnerLogos___image___childHomeYaml___id',
+  PartnerLogosImageChildHomeYamlChildren = 'partnerLogos___image___childHomeYaml___children',
+  PartnerLogosImageChildHomeYamlFileAbsolutePath = 'partnerLogos___image___childHomeYaml___fileAbsolutePath',
+  PartnerLogosImageChildResourcesYamlId = 'partnerLogos___image___childResourcesYaml___id',
+  PartnerLogosImageChildResourcesYamlChildren = 'partnerLogos___image___childResourcesYaml___children',
+  PartnerLogosImageChildResourcesYamlFileAbsolutePath = 'partnerLogos___image___childResourcesYaml___fileAbsolutePath',
+  PartnerLogosImageChildScienceYamlId = 'partnerLogos___image___childScienceYaml___id',
+  PartnerLogosImageChildScienceYamlChildren = 'partnerLogos___image___childScienceYaml___children',
+  PartnerLogosImageChildScienceYamlFileAbsolutePath = 'partnerLogos___image___childScienceYaml___fileAbsolutePath',
   PartnerLogosImageChildWalletAddressRegistrationYamlId = 'partnerLogos___image___childWalletAddressRegistrationYaml___id',
   PartnerLogosImageChildWalletAddressRegistrationYamlChildren = 'partnerLogos___image___childWalletAddressRegistrationYaml___children',
   PartnerLogosImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'partnerLogos___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  PartnerLogosImageChildSharedYamlId = 'partnerLogos___image___childSharedYaml___id',
+  PartnerLogosImageChildSharedYamlChildren = 'partnerLogos___image___childSharedYaml___children',
+  PartnerLogosImageChildSharedYamlFileAbsolutePath = 'partnerLogos___image___childSharedYaml___fileAbsolutePath',
+  PartnerLogosImageChildTeamYamlId = 'partnerLogos___image___childTeamYaml___id',
+  PartnerLogosImageChildTeamYamlChildren = 'partnerLogos___image___childTeamYaml___children',
+  PartnerLogosImageChildTeamYamlFileAbsolutePath = 'partnerLogos___image___childTeamYaml___fileAbsolutePath',
   PartnerLogosImageChildValidatorsYamlId = 'partnerLogos___image___childValidatorsYaml___id',
   PartnerLogosImageChildValidatorsYamlChildren = 'partnerLogos___image___childValidatorsYaml___children',
   PartnerLogosImageChildValidatorsYamlFileAbsolutePath = 'partnerLogos___image___childValidatorsYaml___fileAbsolutePath',
+  PartnerLogosImageChildTokenYamlId = 'partnerLogos___image___childTokenYaml___id',
+  PartnerLogosImageChildTokenYamlChildren = 'partnerLogos___image___childTokenYaml___children',
+  PartnerLogosImageChildTokenYamlFileAbsolutePath = 'partnerLogos___image___childTokenYaml___fileAbsolutePath',
   PartnerLogosLink = 'partnerLogos___link',
   ContactCardHeader = 'contactCard___header',
   ContactCardBody = 'contactCard___body',
@@ -11027,33 +11021,32 @@ export enum PressKitYamlFieldsEnum {
   EnableSectionImageInternalMediaType = 'enableSection___image___internal___mediaType',
   EnableSectionImageInternalOwner = 'enableSection___image___internal___owner',
   EnableSectionImageInternalType = 'enableSection___image___internal___type',
-  EnableSectionImageChildCommunityYamlId = 'enableSection___image___childCommunityYaml___id',
-  EnableSectionImageChildCommunityYamlChildren = 'enableSection___image___childCommunityYaml___children',
-  EnableSectionImageChildCommunityYamlFileAbsolutePath = 'enableSection___image___childCommunityYaml___fileAbsolutePath',
   EnableSectionImageChildCaseStudiesYamlId = 'enableSection___image___childCaseStudiesYaml___id',
   EnableSectionImageChildCaseStudiesYamlChildren = 'enableSection___image___childCaseStudiesYaml___children',
   EnableSectionImageChildCaseStudiesYamlFileAbsolutePath = 'enableSection___image___childCaseStudiesYaml___fileAbsolutePath',
-  EnableSectionImageChildDevelopersYamlId = 'enableSection___image___childDevelopersYaml___id',
-  EnableSectionImageChildDevelopersYamlChildren = 'enableSection___image___childDevelopersYaml___children',
-  EnableSectionImageChildDevelopersYamlFileAbsolutePath = 'enableSection___image___childDevelopersYaml___fileAbsolutePath',
   EnableSectionImageChildCaseStudyItemsYamlId = 'enableSection___image___childCaseStudyItemsYaml___id',
   EnableSectionImageChildCaseStudyItemsYamlChildren = 'enableSection___image___childCaseStudyItemsYaml___children',
   EnableSectionImageChildCaseStudyItemsYamlName = 'enableSection___image___childCaseStudyItemsYaml___name',
   EnableSectionImageChildCaseStudyItemsYamlSlug = 'enableSection___image___childCaseStudyItemsYaml___slug',
   EnableSectionImageChildCaseStudyItemsYamlDescription = 'enableSection___image___childCaseStudyItemsYaml___description',
   EnableSectionImageChildCaseStudyItemsYamlFileAbsolutePath = 'enableSection___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  EnableSectionImageChildHomeYamlId = 'enableSection___image___childHomeYaml___id',
-  EnableSectionImageChildHomeYamlChildren = 'enableSection___image___childHomeYaml___children',
-  EnableSectionImageChildHomeYamlFileAbsolutePath = 'enableSection___image___childHomeYaml___fileAbsolutePath',
+  EnableSectionImageChildDevelopersYamlId = 'enableSection___image___childDevelopersYaml___id',
+  EnableSectionImageChildDevelopersYamlChildren = 'enableSection___image___childDevelopersYaml___children',
+  EnableSectionImageChildDevelopersYamlFileAbsolutePath = 'enableSection___image___childDevelopersYaml___fileAbsolutePath',
+  EnableSectionImageChildCommunityYamlId = 'enableSection___image___childCommunityYaml___id',
+  EnableSectionImageChildCommunityYamlChildren = 'enableSection___image___childCommunityYaml___children',
+  EnableSectionImageChildCommunityYamlFileAbsolutePath = 'enableSection___image___childCommunityYaml___fileAbsolutePath',
   EnableSectionImageChildContactYamlId = 'enableSection___image___childContactYaml___id',
   EnableSectionImageChildContactYamlChildren = 'enableSection___image___childContactYaml___children',
   EnableSectionImageChildContactYamlHeader = 'enableSection___image___childContactYaml___header',
   EnableSectionImageChildContactYamlBody = 'enableSection___image___childContactYaml___body',
   EnableSectionImageChildContactYamlFileAbsolutePath = 'enableSection___image___childContactYaml___fileAbsolutePath',
-  EnableSectionImageChildFaqYamlId = 'enableSection___image___childFaqYaml___id',
-  EnableSectionImageChildFaqYamlChildren = 'enableSection___image___childFaqYaml___children',
-  EnableSectionImageChildFaqYamlCategories = 'enableSection___image___childFaqYaml___categories',
-  EnableSectionImageChildFaqYamlFileAbsolutePath = 'enableSection___image___childFaqYaml___fileAbsolutePath',
+  EnableSectionImageChildPressKitYamlId = 'enableSection___image___childPressKitYaml___id',
+  EnableSectionImageChildPressKitYamlChildren = 'enableSection___image___childPressKitYaml___children',
+  EnableSectionImageChildPressKitYamlFileAbsolutePath = 'enableSection___image___childPressKitYaml___fileAbsolutePath',
+  EnableSectionImageChildFundYamlId = 'enableSection___image___childFundYaml___id',
+  EnableSectionImageChildFundYamlChildren = 'enableSection___image___childFundYaml___children',
+  EnableSectionImageChildFundYamlFileAbsolutePath = 'enableSection___image___childFundYaml___fileAbsolutePath',
   EnableSectionImageChildInvestYamlId = 'enableSection___image___childInvestYaml___id',
   EnableSectionImageChildInvestYamlChildren = 'enableSection___image___childInvestYaml___children',
   EnableSectionImageChildInvestYamlFileAbsolutePath = 'enableSection___image___childInvestYaml___fileAbsolutePath',
@@ -11063,31 +11056,20 @@ export enum PressKitYamlFieldsEnum {
   EnableSectionImageChildMainnetYamlLivecastLink = 'enableSection___image___childMainnetYaml___livecastLink',
   EnableSectionImageChildMainnetYamlSeoDescription = 'enableSection___image___childMainnetYaml___seoDescription',
   EnableSectionImageChildMainnetYamlFileAbsolutePath = 'enableSection___image___childMainnetYaml___fileAbsolutePath',
+  EnableSectionImageChildFaqYamlId = 'enableSection___image___childFaqYaml___id',
+  EnableSectionImageChildFaqYamlChildren = 'enableSection___image___childFaqYaml___children',
+  EnableSectionImageChildFaqYamlCategories = 'enableSection___image___childFaqYaml___categories',
+  EnableSectionImageChildFaqYamlFileAbsolutePath = 'enableSection___image___childFaqYaml___fileAbsolutePath',
   EnableSectionImageChildPartnersYamlId = 'enableSection___image___childPartnersYaml___id',
   EnableSectionImageChildPartnersYamlChildren = 'enableSection___image___childPartnersYaml___children',
   EnableSectionImageChildPartnersYamlHeader = 'enableSection___image___childPartnersYaml___header',
   EnableSectionImageChildPartnersYamlPartnerLogos = 'enableSection___image___childPartnersYaml___partnerLogos',
   EnableSectionImageChildPartnersYamlFileAbsolutePath = 'enableSection___image___childPartnersYaml___fileAbsolutePath',
-  EnableSectionImageChildFundYamlId = 'enableSection___image___childFundYaml___id',
-  EnableSectionImageChildFundYamlChildren = 'enableSection___image___childFundYaml___children',
-  EnableSectionImageChildFundYamlFileAbsolutePath = 'enableSection___image___childFundYaml___fileAbsolutePath',
-  EnableSectionImageChildResourcesYamlId = 'enableSection___image___childResourcesYaml___id',
-  EnableSectionImageChildResourcesYamlChildren = 'enableSection___image___childResourcesYaml___children',
-  EnableSectionImageChildResourcesYamlFileAbsolutePath = 'enableSection___image___childResourcesYaml___fileAbsolutePath',
-  EnableSectionImageChildPressKitYamlId = 'enableSection___image___childPressKitYaml___id',
-  EnableSectionImageChildPressKitYamlChildren = 'enableSection___image___childPressKitYaml___children',
-  EnableSectionImageChildPressKitYamlFileAbsolutePath = 'enableSection___image___childPressKitYaml___fileAbsolutePath',
-  EnableSectionImageChildSharedYamlId = 'enableSection___image___childSharedYaml___id',
-  EnableSectionImageChildSharedYamlChildren = 'enableSection___image___childSharedYaml___children',
-  EnableSectionImageChildSharedYamlFileAbsolutePath = 'enableSection___image___childSharedYaml___fileAbsolutePath',
   EnableSectionImageChildMediaYamlId = 'enableSection___image___childMediaYaml___id',
   EnableSectionImageChildMediaYamlChildren = 'enableSection___image___childMediaYaml___children',
   EnableSectionImageChildMediaYamlHeader = 'enableSection___image___childMediaYaml___header',
   EnableSectionImageChildMediaYamlCategories = 'enableSection___image___childMediaYaml___categories',
   EnableSectionImageChildMediaYamlFileAbsolutePath = 'enableSection___image___childMediaYaml___fileAbsolutePath',
-  EnableSectionImageChildScienceYamlId = 'enableSection___image___childScienceYaml___id',
-  EnableSectionImageChildScienceYamlChildren = 'enableSection___image___childScienceYaml___children',
-  EnableSectionImageChildScienceYamlFileAbsolutePath = 'enableSection___image___childScienceYaml___fileAbsolutePath',
   EnableSectionImageChildMarkdownRemarkId = 'enableSection___image___childMarkdownRemark___id',
   EnableSectionImageChildMarkdownRemarkExcerpt = 'enableSection___image___childMarkdownRemark___excerpt',
   EnableSectionImageChildMarkdownRemarkRawMarkdownBody = 'enableSection___image___childMarkdownRemark___rawMarkdownBody',
@@ -11099,18 +11081,30 @@ export enum PressKitYamlFieldsEnum {
   EnableSectionImageChildMarkdownRemarkTimeToRead = 'enableSection___image___childMarkdownRemark___timeToRead',
   EnableSectionImageChildMarkdownRemarkTableOfContents = 'enableSection___image___childMarkdownRemark___tableOfContents',
   EnableSectionImageChildMarkdownRemarkChildren = 'enableSection___image___childMarkdownRemark___children',
-  EnableSectionImageChildTokenYamlId = 'enableSection___image___childTokenYaml___id',
-  EnableSectionImageChildTokenYamlChildren = 'enableSection___image___childTokenYaml___children',
-  EnableSectionImageChildTokenYamlFileAbsolutePath = 'enableSection___image___childTokenYaml___fileAbsolutePath',
-  EnableSectionImageChildTeamYamlId = 'enableSection___image___childTeamYaml___id',
-  EnableSectionImageChildTeamYamlChildren = 'enableSection___image___childTeamYaml___children',
-  EnableSectionImageChildTeamYamlFileAbsolutePath = 'enableSection___image___childTeamYaml___fileAbsolutePath',
+  EnableSectionImageChildHomeYamlId = 'enableSection___image___childHomeYaml___id',
+  EnableSectionImageChildHomeYamlChildren = 'enableSection___image___childHomeYaml___children',
+  EnableSectionImageChildHomeYamlFileAbsolutePath = 'enableSection___image___childHomeYaml___fileAbsolutePath',
+  EnableSectionImageChildResourcesYamlId = 'enableSection___image___childResourcesYaml___id',
+  EnableSectionImageChildResourcesYamlChildren = 'enableSection___image___childResourcesYaml___children',
+  EnableSectionImageChildResourcesYamlFileAbsolutePath = 'enableSection___image___childResourcesYaml___fileAbsolutePath',
+  EnableSectionImageChildScienceYamlId = 'enableSection___image___childScienceYaml___id',
+  EnableSectionImageChildScienceYamlChildren = 'enableSection___image___childScienceYaml___children',
+  EnableSectionImageChildScienceYamlFileAbsolutePath = 'enableSection___image___childScienceYaml___fileAbsolutePath',
   EnableSectionImageChildWalletAddressRegistrationYamlId = 'enableSection___image___childWalletAddressRegistrationYaml___id',
   EnableSectionImageChildWalletAddressRegistrationYamlChildren = 'enableSection___image___childWalletAddressRegistrationYaml___children',
   EnableSectionImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'enableSection___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  EnableSectionImageChildSharedYamlId = 'enableSection___image___childSharedYaml___id',
+  EnableSectionImageChildSharedYamlChildren = 'enableSection___image___childSharedYaml___children',
+  EnableSectionImageChildSharedYamlFileAbsolutePath = 'enableSection___image___childSharedYaml___fileAbsolutePath',
+  EnableSectionImageChildTeamYamlId = 'enableSection___image___childTeamYaml___id',
+  EnableSectionImageChildTeamYamlChildren = 'enableSection___image___childTeamYaml___children',
+  EnableSectionImageChildTeamYamlFileAbsolutePath = 'enableSection___image___childTeamYaml___fileAbsolutePath',
   EnableSectionImageChildValidatorsYamlId = 'enableSection___image___childValidatorsYaml___id',
   EnableSectionImageChildValidatorsYamlChildren = 'enableSection___image___childValidatorsYaml___children',
   EnableSectionImageChildValidatorsYamlFileAbsolutePath = 'enableSection___image___childValidatorsYaml___fileAbsolutePath',
+  EnableSectionImageChildTokenYamlId = 'enableSection___image___childTokenYaml___id',
+  EnableSectionImageChildTokenYamlChildren = 'enableSection___image___childTokenYaml___children',
+  EnableSectionImageChildTokenYamlFileAbsolutePath = 'enableSection___image___childTokenYaml___fileAbsolutePath',
   EnableSectionDescription = 'enableSection___description',
   TimelineSectionHeader = 'timelineSection___header',
   TimelineSectionDescription = 'timelineSection___description',
@@ -11517,56 +11511,66 @@ export type Query = {
   allSanityFileAsset: SanityFileAssetConnection;
   sanityImageAsset: Maybe<SanityImageAsset>;
   allSanityImageAsset: SanityImageAssetConnection;
+  sanitySciencePage: Maybe<SanitySciencePage>;
+  allSanitySciencePage: SanitySciencePageConnection;
   sanitySdg: Maybe<SanitySdg>;
   allSanitySdg: SanitySdgConnection;
   sanitySharedSections: Maybe<SanitySharedSections>;
   allSanitySharedSections: SanitySharedSectionsConnection;
   sanityTag: Maybe<SanityTag>;
   allSanityTag: SanityTagConnection;
+  sanityTeamPage: Maybe<SanityTeamPage>;
+  allSanityTeamPage: SanityTeamPageConnection;
+  sanityTokenPage: Maybe<SanityTokenPage>;
+  allSanityTokenPage: SanityTokenPageConnection;
+  sanityValidatorsPage: Maybe<SanityValidatorsPage>;
+  allSanityValidatorsPage: SanityValidatorsPageConnection;
+  sanityWalletAddressRegistrationPage: Maybe<SanityWalletAddressRegistrationPage>;
+  allSanityWalletAddressRegistrationPage: SanityWalletAddressRegistrationPageConnection;
   markdownRemark: Maybe<MarkdownRemark>;
   allMarkdownRemark: MarkdownRemarkConnection;
   imageSharp: Maybe<ImageSharp>;
   allImageSharp: ImageSharpConnection;
-  resourcesYaml: Maybe<ResourcesYaml>;
-  allResourcesYaml: ResourcesYamlConnection;
+  homeYaml: Maybe<HomeYaml>;
+  allHomeYaml: HomeYamlConnection;
   teamYaml: Maybe<TeamYaml>;
   allTeamYaml: TeamYamlConnection;
-  pressKitYaml: Maybe<PressKitYaml>;
-  allPressKitYaml: PressKitYamlConnection;
-  mediaYaml: Maybe<MediaYaml>;
-  allMediaYaml: MediaYamlConnection;
-  validatorsYaml: Maybe<ValidatorsYaml>;
-  allValidatorsYaml: ValidatorsYamlConnection;
-  walletAddressRegistrationYaml: Maybe<WalletAddressRegistrationYaml>;
-  allWalletAddressRegistrationYaml: WalletAddressRegistrationYamlConnection;
-  scienceYaml: Maybe<ScienceYaml>;
-  allScienceYaml: ScienceYamlConnection;
-  sharedYaml: Maybe<SharedYaml>;
-  allSharedYaml: SharedYamlConnection;
   tokenYaml: Maybe<TokenYaml>;
   allTokenYaml: TokenYamlConnection;
-  partnersYaml: Maybe<PartnersYaml>;
-  allPartnersYaml: PartnersYamlConnection;
-  fundYaml: Maybe<FundYaml>;
-  allFundYaml: FundYamlConnection;
+  validatorsYaml: Maybe<ValidatorsYaml>;
+  allValidatorsYaml: ValidatorsYamlConnection;
+  sharedYaml: Maybe<SharedYaml>;
+  allSharedYaml: SharedYamlConnection;
+  pressKitYaml: Maybe<PressKitYaml>;
+  allPressKitYaml: PressKitYamlConnection;
+  scienceYaml: Maybe<ScienceYaml>;
+  allScienceYaml: ScienceYamlConnection;
+  walletAddressRegistrationYaml: Maybe<WalletAddressRegistrationYaml>;
+  allWalletAddressRegistrationYaml: WalletAddressRegistrationYamlConnection;
+  mediaYaml: Maybe<MediaYaml>;
+  allMediaYaml: MediaYamlConnection;
+  resourcesYaml: Maybe<ResourcesYaml>;
+  allResourcesYaml: ResourcesYamlConnection;
   faqYaml: Maybe<FaqYaml>;
   allFaqYaml: FaqYamlConnection;
+  partnersYaml: Maybe<PartnersYaml>;
+  allPartnersYaml: PartnersYamlConnection;
   mainnetYaml: Maybe<MainnetYaml>;
   allMainnetYaml: MainnetYamlConnection;
   investYaml: Maybe<InvestYaml>;
   allInvestYaml: InvestYamlConnection;
-  homeYaml: Maybe<HomeYaml>;
-  allHomeYaml: HomeYamlConnection;
+  fundYaml: Maybe<FundYaml>;
+  allFundYaml: FundYamlConnection;
   contactYaml: Maybe<ContactYaml>;
   allContactYaml: ContactYamlConnection;
-  caseStudyItemsYaml: Maybe<CaseStudyItemsYaml>;
-  allCaseStudyItemsYaml: CaseStudyItemsYamlConnection;
-  developersYaml: Maybe<DevelopersYaml>;
-  allDevelopersYaml: DevelopersYamlConnection;
-  caseStudiesYaml: Maybe<CaseStudiesYaml>;
-  allCaseStudiesYaml: CaseStudiesYamlConnection;
   communityYaml: Maybe<CommunityYaml>;
   allCommunityYaml: CommunityYamlConnection;
+  developersYaml: Maybe<DevelopersYaml>;
+  allDevelopersYaml: DevelopersYamlConnection;
+  caseStudyItemsYaml: Maybe<CaseStudyItemsYaml>;
+  allCaseStudyItemsYaml: CaseStudyItemsYamlConnection;
+  caseStudiesYaml: Maybe<CaseStudiesYaml>;
+  allCaseStudiesYaml: CaseStudiesYamlConnection;
   siteBuildMetadata: Maybe<SiteBuildMetadata>;
   allSiteBuildMetadata: SiteBuildMetadataConnection;
   sitePlugin: Maybe<SitePlugin>;
@@ -11614,27 +11618,27 @@ export type QueryFileArgs = {
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  childCommunityYaml: Maybe<CommunityYamlFilterInput>;
   childCaseStudiesYaml: Maybe<CaseStudiesYamlFilterInput>;
-  childDevelopersYaml: Maybe<DevelopersYamlFilterInput>;
   childCaseStudyItemsYaml: Maybe<CaseStudyItemsYamlFilterInput>;
-  childHomeYaml: Maybe<HomeYamlFilterInput>;
+  childDevelopersYaml: Maybe<DevelopersYamlFilterInput>;
+  childCommunityYaml: Maybe<CommunityYamlFilterInput>;
   childContactYaml: Maybe<ContactYamlFilterInput>;
-  childFaqYaml: Maybe<FaqYamlFilterInput>;
+  childPressKitYaml: Maybe<PressKitYamlFilterInput>;
+  childFundYaml: Maybe<FundYamlFilterInput>;
   childInvestYaml: Maybe<InvestYamlFilterInput>;
   childMainnetYaml: Maybe<MainnetYamlFilterInput>;
+  childFaqYaml: Maybe<FaqYamlFilterInput>;
   childPartnersYaml: Maybe<PartnersYamlFilterInput>;
-  childFundYaml: Maybe<FundYamlFilterInput>;
-  childResourcesYaml: Maybe<ResourcesYamlFilterInput>;
-  childPressKitYaml: Maybe<PressKitYamlFilterInput>;
-  childSharedYaml: Maybe<SharedYamlFilterInput>;
   childMediaYaml: Maybe<MediaYamlFilterInput>;
-  childScienceYaml: Maybe<ScienceYamlFilterInput>;
   childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
-  childTokenYaml: Maybe<TokenYamlFilterInput>;
-  childTeamYaml: Maybe<TeamYamlFilterInput>;
+  childHomeYaml: Maybe<HomeYamlFilterInput>;
+  childResourcesYaml: Maybe<ResourcesYamlFilterInput>;
+  childScienceYaml: Maybe<ScienceYamlFilterInput>;
   childWalletAddressRegistrationYaml: Maybe<WalletAddressRegistrationYamlFilterInput>;
+  childSharedYaml: Maybe<SharedYamlFilterInput>;
+  childTeamYaml: Maybe<TeamYamlFilterInput>;
   childValidatorsYaml: Maybe<ValidatorsYamlFilterInput>;
+  childTokenYaml: Maybe<TokenYamlFilterInput>;
 };
 
 
@@ -12816,6 +12820,38 @@ export type QueryAllSanityImageAssetArgs = {
 };
 
 
+export type QuerySanitySciencePageArgs = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  titleDescriptionSection: Maybe<SanityScienceTitleDescriptionSectionFilterInput>;
+  openScienceSection: Maybe<SanityScienceOpenScienceSectionFilterInput>;
+  partnershipSection: Maybe<SanitySciencePartnershipSectionFilterInput>;
+  communitySection: Maybe<SanityScienceCommunitySectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawTitleDescriptionSection: Maybe<JsonQueryOperatorInput>;
+  _rawOpenScienceSection: Maybe<JsonQueryOperatorInput>;
+  _rawPartnershipSection: Maybe<JsonQueryOperatorInput>;
+  _rawCommunitySection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSanitySciencePageArgs = {
+  filter: Maybe<SanitySciencePageFilterInput>;
+  sort: Maybe<SanitySciencePageSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
 export type QuerySanitySdgArgs = {
   _id: Maybe<StringQueryOperatorInput>;
   _type: Maybe<StringQueryOperatorInput>;
@@ -12893,6 +12929,136 @@ export type QueryAllSanityTagArgs = {
 };
 
 
+export type QuerySanityTeamPageArgs = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  coreSection: Maybe<SanityTeamSectionFilterInput>;
+  contributorSection: Maybe<SanityTeamSectionFilterInput>;
+  advisorSection: Maybe<SanityTeamSectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawCoreSection: Maybe<JsonQueryOperatorInput>;
+  _rawContributorSection: Maybe<JsonQueryOperatorInput>;
+  _rawAdvisorSection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSanityTeamPageArgs = {
+  filter: Maybe<SanityTeamPageFilterInput>;
+  sort: Maybe<SanityTeamPageSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QuerySanityTokenPageArgs = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  tokenEconomics: Maybe<SanityTitleCustomBodyFilterInput>;
+  infoSection: Maybe<SanityTokenInfoSectionFilterInput>;
+  poolSection: Maybe<SanityTokenPoolSectionFilterInput>;
+  stakingSection: Maybe<SanityTitleBodyButtonFilterInput>;
+  blockExplorerSection: Maybe<SanityTitleBodyButtonFilterInput>;
+  connectSectionHeader: Maybe<StringQueryOperatorInput>;
+  mediaCards: Maybe<SanityMediaFilterListInput>;
+  newsletterSection: Maybe<SanityTokenNewsletterSectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawTokenEconomics: Maybe<JsonQueryOperatorInput>;
+  _rawInfoSection: Maybe<JsonQueryOperatorInput>;
+  _rawPoolSection: Maybe<JsonQueryOperatorInput>;
+  _rawStakingSection: Maybe<JsonQueryOperatorInput>;
+  _rawBlockExplorerSection: Maybe<JsonQueryOperatorInput>;
+  _rawMediaCards: Maybe<JsonQueryOperatorInput>;
+  _rawNewsletterSection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSanityTokenPageArgs = {
+  filter: Maybe<SanityTokenPageFilterInput>;
+  sort: Maybe<SanityTokenPageSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QuerySanityValidatorsPageArgs = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  whatSection: Maybe<SanityTitleCustomBodyFilterInput>;
+  whoSection: Maybe<SanityValidatorWhoSectionFilterInput>;
+  connectSectionHeader: Maybe<StringQueryOperatorInput>;
+  whySection: Maybe<SanityTitleCustomBodyFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawWhatSection: Maybe<JsonQueryOperatorInput>;
+  _rawWhoSection: Maybe<JsonQueryOperatorInput>;
+  _rawWhySection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSanityValidatorsPageArgs = {
+  filter: Maybe<SanityValidatorsPageFilterInput>;
+  sort: Maybe<SanityValidatorsPageSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QuerySanityWalletAddressRegistrationPageArgs = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  instructionSection: Maybe<SanityTitleCustomBodyFilterInput>;
+  walletSection: Maybe<SanityWalletAddressRegistrationWalletSectionFilterInput>;
+  formSection: Maybe<SanityWalletAddressRegistrationFormSectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawInstructionSection: Maybe<JsonQueryOperatorInput>;
+  _rawWalletSection: Maybe<JsonQueryOperatorInput>;
+  _rawFormSection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSanityWalletAddressRegistrationPageArgs = {
+  filter: Maybe<SanityWalletAddressRegistrationPageFilterInput>;
+  sort: Maybe<SanityWalletAddressRegistrationPageSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
 export type QueryMarkdownRemarkArgs = {
   id: Maybe<StringQueryOperatorInput>;
   frontmatter: Maybe<MarkdownRemarkFrontmatterFilterInput>;
@@ -12942,21 +13108,24 @@ export type QueryAllImageSharpArgs = {
 };
 
 
-export type QueryResourcesYamlArgs = {
+export type QueryHomeYamlArgs = {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  topSection: Maybe<ResourcesYamlTopSectionFilterInput>;
-  registrySection: Maybe<ResourcesYamlRegistrySectionFilterInput>;
-  ledgerSection: Maybe<ResourcesYamlLedgerSectionFilterInput>;
+  foldSection: Maybe<HomeYamlFoldSectionFilterInput>;
+  marketplaceSection: Maybe<HomeYamlMarketplaceSectionFilterInput>;
+  climateSection: Maybe<HomeYamlClimateSectionFilterInput>;
+  carbonPlusSection: Maybe<HomeYamlCarbonPlusSectionFilterInput>;
+  ledgerSection: Maybe<HomeYamlLedgerSectionFilterInput>;
+  valuesSection: Maybe<HomeYamlValuesSectionFilterInput>;
   fileAbsolutePath: Maybe<StringQueryOperatorInput>;
 };
 
 
-export type QueryAllResourcesYamlArgs = {
-  filter: Maybe<ResourcesYamlFilterInput>;
-  sort: Maybe<ResourcesYamlSortInput>;
+export type QueryAllHomeYamlArgs = {
+  filter: Maybe<HomeYamlFilterInput>;
+  sort: Maybe<HomeYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -12978,6 +13147,75 @@ export type QueryTeamYamlArgs = {
 export type QueryAllTeamYamlArgs = {
   filter: Maybe<TeamYamlFilterInput>;
   sort: Maybe<TeamYamlSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryTokenYamlArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  seo: Maybe<TokenYamlSeoFilterInput>;
+  topSection: Maybe<TokenYamlTopSectionFilterInput>;
+  tokenEconomics: Maybe<TokenYamlTokenEconomicsFilterInput>;
+  infoSection: Maybe<TokenYamlInfoSectionFilterInput>;
+  tokenPool: Maybe<TokenYamlTokenPoolFilterInput>;
+  staking: Maybe<TokenYamlStakingFilterInput>;
+  blockExplorerSection: Maybe<TokenYamlBlockExplorerSectionFilterInput>;
+  connectSection: Maybe<TokenYamlConnectSectionFilterInput>;
+  newsletterSection: Maybe<TokenYamlNewsletterSectionFilterInput>;
+  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllTokenYamlArgs = {
+  filter: Maybe<TokenYamlFilterInput>;
+  sort: Maybe<TokenYamlSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryValidatorsYamlArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  topSection: Maybe<ValidatorsYamlTopSectionFilterInput>;
+  whatSection: Maybe<ValidatorsYamlWhatSectionFilterInput>;
+  whoSection: Maybe<ValidatorsYamlWhoSectionFilterInput>;
+  connectSection: Maybe<ValidatorsYamlConnectSectionFilterInput>;
+  whySection: Maybe<ValidatorsYamlWhySectionFilterInput>;
+  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllValidatorsYamlArgs = {
+  filter: Maybe<ValidatorsYamlFilterInput>;
+  sort: Maybe<ValidatorsYamlSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QuerySharedYamlArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  newsletterSection: Maybe<SharedYamlNewsletterSectionFilterInput>;
+  featuredSection: Maybe<SharedYamlFeaturedSectionFilterInput>;
+  blogSection: Maybe<SharedYamlBlogSectionFilterInput>;
+  comingSoonSection: Maybe<SharedYamlComingSoonSectionFilterInput>;
+  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllSharedYamlArgs = {
+  filter: Maybe<SharedYamlFilterInput>;
+  sort: Maybe<SharedYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -13010,42 +13248,24 @@ export type QueryAllPressKitYamlArgs = {
 };
 
 
-export type QueryMediaYamlArgs = {
+export type QueryScienceYamlArgs = {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  header: Maybe<StringQueryOperatorInput>;
-  categories: Maybe<MediaYamlCategoriesFilterListInput>;
+  topSection: Maybe<ScienceYamlTopSectionFilterInput>;
+  titleDescriptionSection: Maybe<ScienceYamlTitleDescriptionSectionFilterInput>;
+  openScienceSection: Maybe<ScienceYamlOpenScienceSectionFilterInput>;
+  partnershipsSection: Maybe<ScienceYamlPartnershipsSectionFilterInput>;
+  communitySection: Maybe<ScienceYamlCommunitySectionFilterInput>;
+  practicesOutcomesSection: Maybe<ScienceYamlPracticesOutcomesSectionFilterInput>;
   fileAbsolutePath: Maybe<StringQueryOperatorInput>;
 };
 
 
-export type QueryAllMediaYamlArgs = {
-  filter: Maybe<MediaYamlFilterInput>;
-  sort: Maybe<MediaYamlSortInput>;
-  skip: Maybe<Scalars['Int']>;
-  limit: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryValidatorsYamlArgs = {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  topSection: Maybe<ValidatorsYamlTopSectionFilterInput>;
-  whatSection: Maybe<ValidatorsYamlWhatSectionFilterInput>;
-  whoSection: Maybe<ValidatorsYamlWhoSectionFilterInput>;
-  connectSection: Maybe<ValidatorsYamlConnectSectionFilterInput>;
-  whySection: Maybe<ValidatorsYamlWhySectionFilterInput>;
-  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
-};
-
-
-export type QueryAllValidatorsYamlArgs = {
-  filter: Maybe<ValidatorsYamlFilterInput>;
-  sort: Maybe<ValidatorsYamlSortInput>;
+export type QueryAllScienceYamlArgs = {
+  filter: Maybe<ScienceYamlFilterInput>;
+  sort: Maybe<ScienceYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -13072,72 +13292,58 @@ export type QueryAllWalletAddressRegistrationYamlArgs = {
 };
 
 
-export type QueryScienceYamlArgs = {
+export type QueryMediaYamlArgs = {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  topSection: Maybe<ScienceYamlTopSectionFilterInput>;
-  titleDescriptionSection: Maybe<ScienceYamlTitleDescriptionSectionFilterInput>;
-  openScienceSection: Maybe<ScienceYamlOpenScienceSectionFilterInput>;
-  partnershipsSection: Maybe<ScienceYamlPartnershipsSectionFilterInput>;
-  communitySection: Maybe<ScienceYamlCommunitySectionFilterInput>;
-  practicesOutcomesSection: Maybe<ScienceYamlPracticesOutcomesSectionFilterInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  categories: Maybe<MediaYamlCategoriesFilterListInput>;
   fileAbsolutePath: Maybe<StringQueryOperatorInput>;
 };
 
 
-export type QueryAllScienceYamlArgs = {
-  filter: Maybe<ScienceYamlFilterInput>;
-  sort: Maybe<ScienceYamlSortInput>;
+export type QueryAllMediaYamlArgs = {
+  filter: Maybe<MediaYamlFilterInput>;
+  sort: Maybe<MediaYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
 
 
-export type QuerySharedYamlArgs = {
+export type QueryResourcesYamlArgs = {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  newsletterSection: Maybe<SharedYamlNewsletterSectionFilterInput>;
-  featuredSection: Maybe<SharedYamlFeaturedSectionFilterInput>;
-  blogSection: Maybe<SharedYamlBlogSectionFilterInput>;
-  comingSoonSection: Maybe<SharedYamlComingSoonSectionFilterInput>;
+  topSection: Maybe<ResourcesYamlTopSectionFilterInput>;
+  registrySection: Maybe<ResourcesYamlRegistrySectionFilterInput>;
+  ledgerSection: Maybe<ResourcesYamlLedgerSectionFilterInput>;
   fileAbsolutePath: Maybe<StringQueryOperatorInput>;
 };
 
 
-export type QueryAllSharedYamlArgs = {
-  filter: Maybe<SharedYamlFilterInput>;
-  sort: Maybe<SharedYamlSortInput>;
+export type QueryAllResourcesYamlArgs = {
+  filter: Maybe<ResourcesYamlFilterInput>;
+  sort: Maybe<ResourcesYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
 
 
-export type QueryTokenYamlArgs = {
+export type QueryFaqYamlArgs = {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  seo: Maybe<TokenYamlSeoFilterInput>;
-  topSection: Maybe<TokenYamlTopSectionFilterInput>;
-  tokenEconomics: Maybe<TokenYamlTokenEconomicsFilterInput>;
-  infoSection: Maybe<TokenYamlInfoSectionFilterInput>;
-  tokenPool: Maybe<TokenYamlTokenPoolFilterInput>;
-  unlockSchedule: Maybe<TokenYamlUnlockScheduleFilterInput>;
-  staking: Maybe<TokenYamlStakingFilterInput>;
-  blockExplorerSection: Maybe<TokenYamlBlockExplorerSectionFilterInput>;
-  connectSection: Maybe<TokenYamlConnectSectionFilterInput>;
-  newsletterSection: Maybe<TokenYamlNewsletterSectionFilterInput>;
+  categories: Maybe<FaqYamlCategoriesFilterListInput>;
   fileAbsolutePath: Maybe<StringQueryOperatorInput>;
 };
 
 
-export type QueryAllTokenYamlArgs = {
-  filter: Maybe<TokenYamlFilterInput>;
-  sort: Maybe<TokenYamlSortInput>;
+export type QueryAllFaqYamlArgs = {
+  filter: Maybe<FaqYamlFilterInput>;
+  sort: Maybe<FaqYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -13158,46 +13364,6 @@ export type QueryPartnersYamlArgs = {
 export type QueryAllPartnersYamlArgs = {
   filter: Maybe<PartnersYamlFilterInput>;
   sort: Maybe<PartnersYamlSortInput>;
-  skip: Maybe<Scalars['Int']>;
-  limit: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryFundYamlArgs = {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  seo: Maybe<FundYamlSeoFilterInput>;
-  topSection: Maybe<FundYamlTopSectionFilterInput>;
-  foldSection: Maybe<FundYamlFoldSectionFilterInput>;
-  thesisSection: Maybe<FundYamlThesisSectionFilterInput>;
-  calltoActionSection: Maybe<FundYamlCalltoActionSectionFilterInput>;
-  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
-};
-
-
-export type QueryAllFundYamlArgs = {
-  filter: Maybe<FundYamlFilterInput>;
-  sort: Maybe<FundYamlSortInput>;
-  skip: Maybe<Scalars['Int']>;
-  limit: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryFaqYamlArgs = {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  categories: Maybe<FaqYamlCategoriesFilterListInput>;
-  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
-};
-
-
-export type QueryAllFaqYamlArgs = {
-  filter: Maybe<FaqYamlFilterInput>;
-  sort: Maybe<FaqYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -13244,24 +13410,23 @@ export type QueryAllInvestYamlArgs = {
 };
 
 
-export type QueryHomeYamlArgs = {
+export type QueryFundYamlArgs = {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  foldSection: Maybe<HomeYamlFoldSectionFilterInput>;
-  marketplaceSection: Maybe<HomeYamlMarketplaceSectionFilterInput>;
-  climateSection: Maybe<HomeYamlClimateSectionFilterInput>;
-  carbonPlusSection: Maybe<HomeYamlCarbonPlusSectionFilterInput>;
-  ledgerSection: Maybe<HomeYamlLedgerSectionFilterInput>;
-  valuesSection: Maybe<HomeYamlValuesSectionFilterInput>;
+  seo: Maybe<FundYamlSeoFilterInput>;
+  topSection: Maybe<FundYamlTopSectionFilterInput>;
+  foldSection: Maybe<FundYamlFoldSectionFilterInput>;
+  thesisSection: Maybe<FundYamlThesisSectionFilterInput>;
+  calltoActionSection: Maybe<FundYamlCalltoActionSectionFilterInput>;
   fileAbsolutePath: Maybe<StringQueryOperatorInput>;
 };
 
 
-export type QueryAllHomeYamlArgs = {
-  filter: Maybe<HomeYamlFilterInput>;
-  sort: Maybe<HomeYamlSortInput>;
+export type QueryAllFundYamlArgs = {
+  filter: Maybe<FundYamlFilterInput>;
+  sort: Maybe<FundYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -13285,6 +13450,53 @@ export type QueryContactYamlArgs = {
 export type QueryAllContactYamlArgs = {
   filter: Maybe<ContactYamlFilterInput>;
   sort: Maybe<ContactYamlSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryCommunityYamlArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  topSection: Maybe<CommunityYamlTopSectionFilterInput>;
+  connectSection: Maybe<CommunityYamlConnectSectionFilterInput>;
+  goToSection: Maybe<CommunityYamlGoToSectionFilterInput>;
+  collectiveSection: Maybe<CommunityYamlCollectiveSectionFilterInput>;
+  collaborateSection: Maybe<CommunityYamlCollaborateSectionFilterInput>;
+  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllCommunityYamlArgs = {
+  filter: Maybe<CommunityYamlFilterInput>;
+  sort: Maybe<CommunityYamlSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryDevelopersYamlArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  topSection: Maybe<DevelopersYamlTopSectionFilterInput>;
+  approachSection: Maybe<DevelopersYamlApproachSectionFilterInput>;
+  involvedSection: Maybe<DevelopersYamlInvolvedSectionFilterInput>;
+  ledgerSection: Maybe<DevelopersYamlLedgerSectionFilterInput>;
+  openAgSection: Maybe<DevelopersYamlOpenAgSectionFilterInput>;
+  connectSection: Maybe<DevelopersYamlConnectSectionFilterInput>;
+  careersSection: Maybe<DevelopersYamlCareersSectionFilterInput>;
+  testnetSection: Maybe<DevelopersYamlTestnetSectionFilterInput>;
+  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
+};
+
+
+export type QueryAllDevelopersYamlArgs = {
+  filter: Maybe<DevelopersYamlFilterInput>;
+  sort: Maybe<DevelopersYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -13319,31 +13531,6 @@ export type QueryAllCaseStudyItemsYamlArgs = {
 };
 
 
-export type QueryDevelopersYamlArgs = {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  topSection: Maybe<DevelopersYamlTopSectionFilterInput>;
-  approachSection: Maybe<DevelopersYamlApproachSectionFilterInput>;
-  involvedSection: Maybe<DevelopersYamlInvolvedSectionFilterInput>;
-  ledgerSection: Maybe<DevelopersYamlLedgerSectionFilterInput>;
-  openAgSection: Maybe<DevelopersYamlOpenAgSectionFilterInput>;
-  connectSection: Maybe<DevelopersYamlConnectSectionFilterInput>;
-  careersSection: Maybe<DevelopersYamlCareersSectionFilterInput>;
-  testnetSection: Maybe<DevelopersYamlTestnetSectionFilterInput>;
-  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
-};
-
-
-export type QueryAllDevelopersYamlArgs = {
-  filter: Maybe<DevelopersYamlFilterInput>;
-  sort: Maybe<DevelopersYamlSortInput>;
-  skip: Maybe<Scalars['Int']>;
-  limit: Maybe<Scalars['Int']>;
-};
-
-
 export type QueryCaseStudiesYamlArgs = {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
@@ -13358,28 +13545,6 @@ export type QueryCaseStudiesYamlArgs = {
 export type QueryAllCaseStudiesYamlArgs = {
   filter: Maybe<CaseStudiesYamlFilterInput>;
   sort: Maybe<CaseStudiesYamlSortInput>;
-  skip: Maybe<Scalars['Int']>;
-  limit: Maybe<Scalars['Int']>;
-};
-
-
-export type QueryCommunityYamlArgs = {
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-  topSection: Maybe<CommunityYamlTopSectionFilterInput>;
-  connectSection: Maybe<CommunityYamlConnectSectionFilterInput>;
-  goToSection: Maybe<CommunityYamlGoToSectionFilterInput>;
-  collectiveSection: Maybe<CommunityYamlCollectiveSectionFilterInput>;
-  collaborateSection: Maybe<CommunityYamlCollaborateSectionFilterInput>;
-  fileAbsolutePath: Maybe<StringQueryOperatorInput>;
-};
-
-
-export type QueryAllCommunityYamlArgs = {
-  filter: Maybe<CommunityYamlFilterInput>;
-  sort: Maybe<CommunityYamlSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -23323,6 +23488,39 @@ export type SanityImageCropFilterInput = {
   right: Maybe<FloatQueryOperatorInput>;
 };
 
+export type SanityImageCustomBody = {
+  __typename?: 'SanityImageCustomBody';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  image: Maybe<SanityCustomImage>;
+  body: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawImage: Maybe<Scalars['JSON']>;
+  _rawBody: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityImageCustomBody_RawImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityImageCustomBody_RawBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityImageCustomBodyFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  image: Maybe<SanityCustomImageFilterInput>;
+  body: Maybe<SanityBlockFilterListInput>;
+  _rawImage: Maybe<JsonQueryOperatorInput>;
+  _rawBody: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityImageCustomBodyFilterListInput = {
+  elemMatch: Maybe<SanityImageCustomBodyFilterInput>;
+};
+
 export type SanityImageDimensions = {
   __typename?: 'SanityImageDimensions';
   _key: Maybe<Scalars['String']>;
@@ -23736,6 +23934,39 @@ export type SanityImageItemsSectionFilterInput = {
   title: Maybe<StringQueryOperatorInput>;
   imageCards: Maybe<SanityCardFilterListInput>;
   _rawImageCards: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityImageLink = {
+  __typename?: 'SanityImageLink';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  link: Maybe<SanityLink>;
+  image: Maybe<SanityCustomImage>;
+  _rawLink: Maybe<Scalars['JSON']>;
+  _rawImage: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityImageLink_RawLinkArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityImageLink_RawImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityImageLinkFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  link: Maybe<SanityLinkFilterInput>;
+  image: Maybe<SanityCustomImageFilterInput>;
+  _rawLink: Maybe<JsonQueryOperatorInput>;
+  _rawImage: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityImageLinkFilterListInput = {
+  elemMatch: Maybe<SanityImageLinkFilterInput>;
 };
 
 export type SanityImageMetadata = {
@@ -29027,6 +29258,504 @@ export type SanityReviewSectionFilterInput = {
   _rawStepCardsSubsections: Maybe<JsonQueryOperatorInput>;
 };
 
+export type SanityScienceCommunityMember = {
+  __typename?: 'SanityScienceCommunityMember';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  name: Maybe<Scalars['String']>;
+  image: Maybe<SanityCustomImage>;
+  role: Maybe<Array<Maybe<SanityBlock>>>;
+  description: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawImage: Maybe<Scalars['JSON']>;
+  _rawRole: Maybe<Scalars['JSON']>;
+  _rawDescription: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityScienceCommunityMember_RawImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityScienceCommunityMember_RawRoleArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityScienceCommunityMember_RawDescriptionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityScienceCommunityMemberFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  name: Maybe<StringQueryOperatorInput>;
+  image: Maybe<SanityCustomImageFilterInput>;
+  role: Maybe<SanityBlockFilterListInput>;
+  description: Maybe<SanityBlockFilterListInput>;
+  _rawImage: Maybe<JsonQueryOperatorInput>;
+  _rawRole: Maybe<JsonQueryOperatorInput>;
+  _rawDescription: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityScienceCommunityMemberFilterListInput = {
+  elemMatch: Maybe<SanityScienceCommunityMemberFilterInput>;
+};
+
+export type SanityScienceCommunitySection = {
+  __typename?: 'SanityScienceCommunitySection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  caption: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  members: Maybe<Array<Maybe<SanityScienceCommunityMember>>>;
+  _rawMembers: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityScienceCommunitySection_RawMembersArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityScienceCommunitySectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  caption: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  members: Maybe<SanityScienceCommunityMemberFilterListInput>;
+  _rawMembers: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityScienceOpenScienceSection = {
+  __typename?: 'SanityScienceOpenScienceSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  caption: Maybe<Scalars['String']>;
+  headerStart: Maybe<Scalars['String']>;
+  headerGreen: Maybe<Scalars['String']>;
+  phases: Maybe<Array<Maybe<SanityTitleBody>>>;
+  _rawPhases: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityScienceOpenScienceSection_RawPhasesArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityScienceOpenScienceSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  caption: Maybe<StringQueryOperatorInput>;
+  headerStart: Maybe<StringQueryOperatorInput>;
+  headerGreen: Maybe<StringQueryOperatorInput>;
+  phases: Maybe<SanityTitleBodyFilterListInput>;
+  _rawPhases: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanitySciencePage = SanityDocument & Node & {
+  __typename?: 'SanitySciencePage';
+  _id: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  _createdAt: Maybe<Scalars['Date']>;
+  _updatedAt: Maybe<Scalars['Date']>;
+  _rev: Maybe<Scalars['String']>;
+  _key: Maybe<Scalars['String']>;
+  topSection: Maybe<SanityTitleBody>;
+  titleDescriptionSection: Maybe<SanityScienceTitleDescriptionSection>;
+  openScienceSection: Maybe<SanityScienceOpenScienceSection>;
+  partnershipSection: Maybe<SanitySciencePartnershipSection>;
+  communitySection: Maybe<SanityScienceCommunitySection>;
+  _rawTopSection: Maybe<Scalars['JSON']>;
+  _rawTitleDescriptionSection: Maybe<Scalars['JSON']>;
+  _rawOpenScienceSection: Maybe<Scalars['JSON']>;
+  _rawPartnershipSection: Maybe<Scalars['JSON']>;
+  _rawCommunitySection: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type SanitySciencePage_CreatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanitySciencePage_UpdatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanitySciencePage_RawTopSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanitySciencePage_RawTitleDescriptionSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanitySciencePage_RawOpenScienceSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanitySciencePage_RawPartnershipSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanitySciencePage_RawCommunitySectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanitySciencePageConnection = {
+  __typename?: 'SanitySciencePageConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanitySciencePageEdge>;
+  nodes: Array<SanitySciencePage>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<SanitySciencePageGroupConnection>;
+};
+
+
+export type SanitySciencePageConnectionDistinctArgs = {
+  field: SanitySciencePageFieldsEnum;
+};
+
+
+export type SanitySciencePageConnectionGroupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: SanitySciencePageFieldsEnum;
+};
+
+export type SanitySciencePageEdge = {
+  __typename?: 'SanitySciencePageEdge';
+  next: Maybe<SanitySciencePage>;
+  node: SanitySciencePage;
+  previous: Maybe<SanitySciencePage>;
+};
+
+export enum SanitySciencePageFieldsEnum {
+  Id = '_id',
+  Type = '_type',
+  CreatedAt = '_createdAt',
+  UpdatedAt = '_updatedAt',
+  Rev = '_rev',
+  Key = '_key',
+  TopSectionKey = 'topSection____key',
+  TopSectionType = 'topSection____type',
+  TopSectionTitle = 'topSection___title',
+  TopSectionBody = 'topSection___body',
+  TitleDescriptionSectionKey = 'titleDescriptionSection____key',
+  TitleDescriptionSectionType = 'titleDescriptionSection____type',
+  TitleDescriptionSectionTitle = 'titleDescriptionSection___title',
+  TitleDescriptionSectionOutcomes = 'titleDescriptionSection___outcomes',
+  TitleDescriptionSectionOutcomesId = 'titleDescriptionSection___outcomes____id',
+  TitleDescriptionSectionOutcomesType = 'titleDescriptionSection___outcomes____type',
+  TitleDescriptionSectionOutcomesCreatedAt = 'titleDescriptionSection___outcomes____createdAt',
+  TitleDescriptionSectionOutcomesUpdatedAt = 'titleDescriptionSection___outcomes____updatedAt',
+  TitleDescriptionSectionOutcomesRev = 'titleDescriptionSection___outcomes____rev',
+  TitleDescriptionSectionOutcomesKey = 'titleDescriptionSection___outcomes____key',
+  TitleDescriptionSectionOutcomesTitle = 'titleDescriptionSection___outcomes___title',
+  TitleDescriptionSectionOutcomesImageKey = 'titleDescriptionSection___outcomes___image____key',
+  TitleDescriptionSectionOutcomesImageType = 'titleDescriptionSection___outcomes___image____type',
+  TitleDescriptionSectionOutcomesImageImageHref = 'titleDescriptionSection___outcomes___image___imageHref',
+  TitleDescriptionSectionOutcomesImageImageAlt = 'titleDescriptionSection___outcomes___image___imageAlt',
+  TitleDescriptionSectionOutcomesImageRawImage = 'titleDescriptionSection___outcomes___image____rawImage',
+  TitleDescriptionSectionOutcomesDescription = 'titleDescriptionSection___outcomes___description',
+  TitleDescriptionSectionOutcomesDescriptionKey = 'titleDescriptionSection___outcomes___description____key',
+  TitleDescriptionSectionOutcomesDescriptionType = 'titleDescriptionSection___outcomes___description____type',
+  TitleDescriptionSectionOutcomesDescriptionChildren = 'titleDescriptionSection___outcomes___description___children',
+  TitleDescriptionSectionOutcomesDescriptionStyle = 'titleDescriptionSection___outcomes___description___style',
+  TitleDescriptionSectionOutcomesDescriptionList = 'titleDescriptionSection___outcomes___description___list',
+  TitleDescriptionSectionOutcomesDescriptionRawChildren = 'titleDescriptionSection___outcomes___description____rawChildren',
+  TitleDescriptionSectionOutcomesRawDescription = 'titleDescriptionSection___outcomes____rawDescription',
+  TitleDescriptionSectionOutcomesRawImage = 'titleDescriptionSection___outcomes____rawImage',
+  TitleDescriptionSectionOutcomesId = 'titleDescriptionSection___outcomes___id',
+  TitleDescriptionSectionOutcomesParentId = 'titleDescriptionSection___outcomes___parent___id',
+  TitleDescriptionSectionOutcomesParentChildren = 'titleDescriptionSection___outcomes___parent___children',
+  TitleDescriptionSectionOutcomesChildren = 'titleDescriptionSection___outcomes___children',
+  TitleDescriptionSectionOutcomesChildrenId = 'titleDescriptionSection___outcomes___children___id',
+  TitleDescriptionSectionOutcomesChildrenChildren = 'titleDescriptionSection___outcomes___children___children',
+  TitleDescriptionSectionOutcomesInternalContent = 'titleDescriptionSection___outcomes___internal___content',
+  TitleDescriptionSectionOutcomesInternalContentDigest = 'titleDescriptionSection___outcomes___internal___contentDigest',
+  TitleDescriptionSectionOutcomesInternalDescription = 'titleDescriptionSection___outcomes___internal___description',
+  TitleDescriptionSectionOutcomesInternalFieldOwners = 'titleDescriptionSection___outcomes___internal___fieldOwners',
+  TitleDescriptionSectionOutcomesInternalIgnoreType = 'titleDescriptionSection___outcomes___internal___ignoreType',
+  TitleDescriptionSectionOutcomesInternalMediaType = 'titleDescriptionSection___outcomes___internal___mediaType',
+  TitleDescriptionSectionOutcomesInternalOwner = 'titleDescriptionSection___outcomes___internal___owner',
+  TitleDescriptionSectionOutcomesInternalType = 'titleDescriptionSection___outcomes___internal___type',
+  TitleDescriptionSectionDescription = 'titleDescriptionSection___description',
+  TitleDescriptionSectionDescriptionKey = 'titleDescriptionSection___description____key',
+  TitleDescriptionSectionDescriptionType = 'titleDescriptionSection___description____type',
+  TitleDescriptionSectionDescriptionChildren = 'titleDescriptionSection___description___children',
+  TitleDescriptionSectionDescriptionChildrenKey = 'titleDescriptionSection___description___children____key',
+  TitleDescriptionSectionDescriptionChildrenType = 'titleDescriptionSection___description___children____type',
+  TitleDescriptionSectionDescriptionChildrenMarks = 'titleDescriptionSection___description___children___marks',
+  TitleDescriptionSectionDescriptionChildrenText = 'titleDescriptionSection___description___children___text',
+  TitleDescriptionSectionDescriptionStyle = 'titleDescriptionSection___description___style',
+  TitleDescriptionSectionDescriptionList = 'titleDescriptionSection___description___list',
+  TitleDescriptionSectionDescriptionRawChildren = 'titleDescriptionSection___description____rawChildren',
+  TitleDescriptionSectionRawDescription = 'titleDescriptionSection____rawDescription',
+  TitleDescriptionSectionRawOutcomes = 'titleDescriptionSection____rawOutcomes',
+  OpenScienceSectionKey = 'openScienceSection____key',
+  OpenScienceSectionType = 'openScienceSection____type',
+  OpenScienceSectionCaption = 'openScienceSection___caption',
+  OpenScienceSectionHeaderStart = 'openScienceSection___headerStart',
+  OpenScienceSectionHeaderGreen = 'openScienceSection___headerGreen',
+  OpenScienceSectionPhases = 'openScienceSection___phases',
+  OpenScienceSectionPhasesKey = 'openScienceSection___phases____key',
+  OpenScienceSectionPhasesType = 'openScienceSection___phases____type',
+  OpenScienceSectionPhasesTitle = 'openScienceSection___phases___title',
+  OpenScienceSectionPhasesBody = 'openScienceSection___phases___body',
+  OpenScienceSectionRawPhases = 'openScienceSection____rawPhases',
+  PartnershipSectionKey = 'partnershipSection____key',
+  PartnershipSectionType = 'partnershipSection____type',
+  PartnershipSectionHeader = 'partnershipSection___header',
+  PartnershipSectionPartners = 'partnershipSection___partners',
+  PartnershipSectionPartnersKey = 'partnershipSection___partners____key',
+  PartnershipSectionPartnersType = 'partnershipSection___partners____type',
+  PartnershipSectionPartnersImageKey = 'partnershipSection___partners___image____key',
+  PartnershipSectionPartnersImageType = 'partnershipSection___partners___image____type',
+  PartnershipSectionPartnersImageImageHref = 'partnershipSection___partners___image___imageHref',
+  PartnershipSectionPartnersImageImageAlt = 'partnershipSection___partners___image___imageAlt',
+  PartnershipSectionPartnersImageRawImage = 'partnershipSection___partners___image____rawImage',
+  PartnershipSectionPartnersBody = 'partnershipSection___partners___body',
+  PartnershipSectionPartnersBodyKey = 'partnershipSection___partners___body____key',
+  PartnershipSectionPartnersBodyType = 'partnershipSection___partners___body____type',
+  PartnershipSectionPartnersBodyChildren = 'partnershipSection___partners___body___children',
+  PartnershipSectionPartnersBodyStyle = 'partnershipSection___partners___body___style',
+  PartnershipSectionPartnersBodyList = 'partnershipSection___partners___body___list',
+  PartnershipSectionPartnersBodyRawChildren = 'partnershipSection___partners___body____rawChildren',
+  PartnershipSectionPartnersRawImage = 'partnershipSection___partners____rawImage',
+  PartnershipSectionPartnersRawBody = 'partnershipSection___partners____rawBody',
+  PartnershipSectionRawPartners = 'partnershipSection____rawPartners',
+  CommunitySectionKey = 'communitySection____key',
+  CommunitySectionType = 'communitySection____type',
+  CommunitySectionCaption = 'communitySection___caption',
+  CommunitySectionHeader = 'communitySection___header',
+  CommunitySectionMembers = 'communitySection___members',
+  CommunitySectionMembersKey = 'communitySection___members____key',
+  CommunitySectionMembersType = 'communitySection___members____type',
+  CommunitySectionMembersName = 'communitySection___members___name',
+  CommunitySectionMembersImageKey = 'communitySection___members___image____key',
+  CommunitySectionMembersImageType = 'communitySection___members___image____type',
+  CommunitySectionMembersImageImageHref = 'communitySection___members___image___imageHref',
+  CommunitySectionMembersImageImageAlt = 'communitySection___members___image___imageAlt',
+  CommunitySectionMembersImageRawImage = 'communitySection___members___image____rawImage',
+  CommunitySectionMembersRole = 'communitySection___members___role',
+  CommunitySectionMembersRoleKey = 'communitySection___members___role____key',
+  CommunitySectionMembersRoleType = 'communitySection___members___role____type',
+  CommunitySectionMembersRoleChildren = 'communitySection___members___role___children',
+  CommunitySectionMembersRoleStyle = 'communitySection___members___role___style',
+  CommunitySectionMembersRoleList = 'communitySection___members___role___list',
+  CommunitySectionMembersRoleRawChildren = 'communitySection___members___role____rawChildren',
+  CommunitySectionMembersDescription = 'communitySection___members___description',
+  CommunitySectionMembersDescriptionKey = 'communitySection___members___description____key',
+  CommunitySectionMembersDescriptionType = 'communitySection___members___description____type',
+  CommunitySectionMembersDescriptionChildren = 'communitySection___members___description___children',
+  CommunitySectionMembersDescriptionStyle = 'communitySection___members___description___style',
+  CommunitySectionMembersDescriptionList = 'communitySection___members___description___list',
+  CommunitySectionMembersDescriptionRawChildren = 'communitySection___members___description____rawChildren',
+  CommunitySectionMembersRawImage = 'communitySection___members____rawImage',
+  CommunitySectionMembersRawRole = 'communitySection___members____rawRole',
+  CommunitySectionMembersRawDescription = 'communitySection___members____rawDescription',
+  CommunitySectionRawMembers = 'communitySection____rawMembers',
+  RawTopSection = '_rawTopSection',
+  RawTitleDescriptionSection = '_rawTitleDescriptionSection',
+  RawOpenScienceSection = '_rawOpenScienceSection',
+  RawPartnershipSection = '_rawPartnershipSection',
+  RawCommunitySection = '_rawCommunitySection',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type SanitySciencePageFilterInput = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  titleDescriptionSection: Maybe<SanityScienceTitleDescriptionSectionFilterInput>;
+  openScienceSection: Maybe<SanityScienceOpenScienceSectionFilterInput>;
+  partnershipSection: Maybe<SanitySciencePartnershipSectionFilterInput>;
+  communitySection: Maybe<SanityScienceCommunitySectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawTitleDescriptionSection: Maybe<JsonQueryOperatorInput>;
+  _rawOpenScienceSection: Maybe<JsonQueryOperatorInput>;
+  _rawPartnershipSection: Maybe<JsonQueryOperatorInput>;
+  _rawCommunitySection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+export type SanitySciencePageGroupConnection = {
+  __typename?: 'SanitySciencePageGroupConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanitySciencePageEdge>;
+  nodes: Array<SanitySciencePage>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue: Maybe<Scalars['String']>;
+};
+
+export type SanitySciencePageSortInput = {
+  fields: Maybe<Array<Maybe<SanitySciencePageFieldsEnum>>>;
+  order: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type SanitySciencePartnershipSection = {
+  __typename?: 'SanitySciencePartnershipSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  partners: Maybe<Array<Maybe<SanityImageCustomBody>>>;
+  _rawPartners: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanitySciencePartnershipSection_RawPartnersArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanitySciencePartnershipSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  partners: Maybe<SanityImageCustomBodyFilterListInput>;
+  _rawPartners: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityScienceTitleDescriptionSection = {
+  __typename?: 'SanityScienceTitleDescriptionSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  outcomes: Maybe<Array<Maybe<SanityEcologicalOutcome>>>;
+  description: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawDescription: Maybe<Scalars['JSON']>;
+  _rawOutcomes: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityScienceTitleDescriptionSection_RawDescriptionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityScienceTitleDescriptionSection_RawOutcomesArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityScienceTitleDescriptionSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  outcomes: Maybe<SanityEcologicalOutcomeFilterListInput>;
+  description: Maybe<SanityBlockFilterListInput>;
+  _rawDescription: Maybe<JsonQueryOperatorInput>;
+  _rawOutcomes: Maybe<JsonQueryOperatorInput>;
+};
+
 export type SanitySdg = SanityDocument & Node & {
   __typename?: 'SanitySdg';
   _id: Maybe<Scalars['String']>;
@@ -29846,6 +30575,365 @@ export type SanityTagSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
+export type SanityTeamPage = SanityDocument & Node & {
+  __typename?: 'SanityTeamPage';
+  _id: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  _createdAt: Maybe<Scalars['Date']>;
+  _updatedAt: Maybe<Scalars['Date']>;
+  _rev: Maybe<Scalars['String']>;
+  _key: Maybe<Scalars['String']>;
+  topSection: Maybe<SanityTitleBody>;
+  coreSection: Maybe<SanityTeamSection>;
+  contributorSection: Maybe<SanityTeamSection>;
+  advisorSection: Maybe<SanityTeamSection>;
+  _rawTopSection: Maybe<Scalars['JSON']>;
+  _rawCoreSection: Maybe<Scalars['JSON']>;
+  _rawContributorSection: Maybe<Scalars['JSON']>;
+  _rawAdvisorSection: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type SanityTeamPage_CreatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityTeamPage_UpdatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityTeamPage_RawTopSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTeamPage_RawCoreSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTeamPage_RawContributorSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTeamPage_RawAdvisorSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityTeamPageConnection = {
+  __typename?: 'SanityTeamPageConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityTeamPageEdge>;
+  nodes: Array<SanityTeamPage>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<SanityTeamPageGroupConnection>;
+};
+
+
+export type SanityTeamPageConnectionDistinctArgs = {
+  field: SanityTeamPageFieldsEnum;
+};
+
+
+export type SanityTeamPageConnectionGroupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: SanityTeamPageFieldsEnum;
+};
+
+export type SanityTeamPageEdge = {
+  __typename?: 'SanityTeamPageEdge';
+  next: Maybe<SanityTeamPage>;
+  node: SanityTeamPage;
+  previous: Maybe<SanityTeamPage>;
+};
+
+export enum SanityTeamPageFieldsEnum {
+  Id = '_id',
+  Type = '_type',
+  CreatedAt = '_createdAt',
+  UpdatedAt = '_updatedAt',
+  Rev = '_rev',
+  Key = '_key',
+  TopSectionKey = 'topSection____key',
+  TopSectionType = 'topSection____type',
+  TopSectionTitle = 'topSection___title',
+  TopSectionBody = 'topSection___body',
+  CoreSectionKey = 'coreSection____key',
+  CoreSectionType = 'coreSection____type',
+  CoreSectionTitle = 'coreSection___title',
+  CoreSectionMembers = 'coreSection___members',
+  CoreSectionMembersId = 'coreSection___members____id',
+  CoreSectionMembersType = 'coreSection___members____type',
+  CoreSectionMembersCreatedAt = 'coreSection___members____createdAt',
+  CoreSectionMembersUpdatedAt = 'coreSection___members____updatedAt',
+  CoreSectionMembersRev = 'coreSection___members____rev',
+  CoreSectionMembersKey = 'coreSection___members____key',
+  CoreSectionMembersName = 'coreSection___members___name',
+  CoreSectionMembersTitle = 'coreSection___members___title',
+  CoreSectionMembersDescription = 'coreSection___members___description',
+  CoreSectionMembersImageKey = 'coreSection___members___image____key',
+  CoreSectionMembersImageType = 'coreSection___members___image____type',
+  CoreSectionMembersImageRawAsset = 'coreSection___members___image____rawAsset',
+  CoreSectionMembersImageRawHotspot = 'coreSection___members___image____rawHotspot',
+  CoreSectionMembersImageRawCrop = 'coreSection___members___image____rawCrop',
+  CoreSectionMembersLinkedinUrl = 'coreSection___members___linkedinUrl',
+  CoreSectionMembersTwitterUrl = 'coreSection___members___twitterUrl',
+  CoreSectionMembersGithubUrl = 'coreSection___members___githubUrl',
+  CoreSectionMembersRawImage = 'coreSection___members____rawImage',
+  CoreSectionMembersId = 'coreSection___members___id',
+  CoreSectionMembersParentId = 'coreSection___members___parent___id',
+  CoreSectionMembersParentChildren = 'coreSection___members___parent___children',
+  CoreSectionMembersChildren = 'coreSection___members___children',
+  CoreSectionMembersChildrenId = 'coreSection___members___children___id',
+  CoreSectionMembersChildrenChildren = 'coreSection___members___children___children',
+  CoreSectionMembersInternalContent = 'coreSection___members___internal___content',
+  CoreSectionMembersInternalContentDigest = 'coreSection___members___internal___contentDigest',
+  CoreSectionMembersInternalDescription = 'coreSection___members___internal___description',
+  CoreSectionMembersInternalFieldOwners = 'coreSection___members___internal___fieldOwners',
+  CoreSectionMembersInternalIgnoreType = 'coreSection___members___internal___ignoreType',
+  CoreSectionMembersInternalMediaType = 'coreSection___members___internal___mediaType',
+  CoreSectionMembersInternalOwner = 'coreSection___members___internal___owner',
+  CoreSectionMembersInternalType = 'coreSection___members___internal___type',
+  CoreSectionRawMembers = 'coreSection____rawMembers',
+  ContributorSectionKey = 'contributorSection____key',
+  ContributorSectionType = 'contributorSection____type',
+  ContributorSectionTitle = 'contributorSection___title',
+  ContributorSectionMembers = 'contributorSection___members',
+  ContributorSectionMembersId = 'contributorSection___members____id',
+  ContributorSectionMembersType = 'contributorSection___members____type',
+  ContributorSectionMembersCreatedAt = 'contributorSection___members____createdAt',
+  ContributorSectionMembersUpdatedAt = 'contributorSection___members____updatedAt',
+  ContributorSectionMembersRev = 'contributorSection___members____rev',
+  ContributorSectionMembersKey = 'contributorSection___members____key',
+  ContributorSectionMembersName = 'contributorSection___members___name',
+  ContributorSectionMembersTitle = 'contributorSection___members___title',
+  ContributorSectionMembersDescription = 'contributorSection___members___description',
+  ContributorSectionMembersImageKey = 'contributorSection___members___image____key',
+  ContributorSectionMembersImageType = 'contributorSection___members___image____type',
+  ContributorSectionMembersImageRawAsset = 'contributorSection___members___image____rawAsset',
+  ContributorSectionMembersImageRawHotspot = 'contributorSection___members___image____rawHotspot',
+  ContributorSectionMembersImageRawCrop = 'contributorSection___members___image____rawCrop',
+  ContributorSectionMembersLinkedinUrl = 'contributorSection___members___linkedinUrl',
+  ContributorSectionMembersTwitterUrl = 'contributorSection___members___twitterUrl',
+  ContributorSectionMembersGithubUrl = 'contributorSection___members___githubUrl',
+  ContributorSectionMembersRawImage = 'contributorSection___members____rawImage',
+  ContributorSectionMembersId = 'contributorSection___members___id',
+  ContributorSectionMembersParentId = 'contributorSection___members___parent___id',
+  ContributorSectionMembersParentChildren = 'contributorSection___members___parent___children',
+  ContributorSectionMembersChildren = 'contributorSection___members___children',
+  ContributorSectionMembersChildrenId = 'contributorSection___members___children___id',
+  ContributorSectionMembersChildrenChildren = 'contributorSection___members___children___children',
+  ContributorSectionMembersInternalContent = 'contributorSection___members___internal___content',
+  ContributorSectionMembersInternalContentDigest = 'contributorSection___members___internal___contentDigest',
+  ContributorSectionMembersInternalDescription = 'contributorSection___members___internal___description',
+  ContributorSectionMembersInternalFieldOwners = 'contributorSection___members___internal___fieldOwners',
+  ContributorSectionMembersInternalIgnoreType = 'contributorSection___members___internal___ignoreType',
+  ContributorSectionMembersInternalMediaType = 'contributorSection___members___internal___mediaType',
+  ContributorSectionMembersInternalOwner = 'contributorSection___members___internal___owner',
+  ContributorSectionMembersInternalType = 'contributorSection___members___internal___type',
+  ContributorSectionRawMembers = 'contributorSection____rawMembers',
+  AdvisorSectionKey = 'advisorSection____key',
+  AdvisorSectionType = 'advisorSection____type',
+  AdvisorSectionTitle = 'advisorSection___title',
+  AdvisorSectionMembers = 'advisorSection___members',
+  AdvisorSectionMembersId = 'advisorSection___members____id',
+  AdvisorSectionMembersType = 'advisorSection___members____type',
+  AdvisorSectionMembersCreatedAt = 'advisorSection___members____createdAt',
+  AdvisorSectionMembersUpdatedAt = 'advisorSection___members____updatedAt',
+  AdvisorSectionMembersRev = 'advisorSection___members____rev',
+  AdvisorSectionMembersKey = 'advisorSection___members____key',
+  AdvisorSectionMembersName = 'advisorSection___members___name',
+  AdvisorSectionMembersTitle = 'advisorSection___members___title',
+  AdvisorSectionMembersDescription = 'advisorSection___members___description',
+  AdvisorSectionMembersImageKey = 'advisorSection___members___image____key',
+  AdvisorSectionMembersImageType = 'advisorSection___members___image____type',
+  AdvisorSectionMembersImageRawAsset = 'advisorSection___members___image____rawAsset',
+  AdvisorSectionMembersImageRawHotspot = 'advisorSection___members___image____rawHotspot',
+  AdvisorSectionMembersImageRawCrop = 'advisorSection___members___image____rawCrop',
+  AdvisorSectionMembersLinkedinUrl = 'advisorSection___members___linkedinUrl',
+  AdvisorSectionMembersTwitterUrl = 'advisorSection___members___twitterUrl',
+  AdvisorSectionMembersGithubUrl = 'advisorSection___members___githubUrl',
+  AdvisorSectionMembersRawImage = 'advisorSection___members____rawImage',
+  AdvisorSectionMembersId = 'advisorSection___members___id',
+  AdvisorSectionMembersParentId = 'advisorSection___members___parent___id',
+  AdvisorSectionMembersParentChildren = 'advisorSection___members___parent___children',
+  AdvisorSectionMembersChildren = 'advisorSection___members___children',
+  AdvisorSectionMembersChildrenId = 'advisorSection___members___children___id',
+  AdvisorSectionMembersChildrenChildren = 'advisorSection___members___children___children',
+  AdvisorSectionMembersInternalContent = 'advisorSection___members___internal___content',
+  AdvisorSectionMembersInternalContentDigest = 'advisorSection___members___internal___contentDigest',
+  AdvisorSectionMembersInternalDescription = 'advisorSection___members___internal___description',
+  AdvisorSectionMembersInternalFieldOwners = 'advisorSection___members___internal___fieldOwners',
+  AdvisorSectionMembersInternalIgnoreType = 'advisorSection___members___internal___ignoreType',
+  AdvisorSectionMembersInternalMediaType = 'advisorSection___members___internal___mediaType',
+  AdvisorSectionMembersInternalOwner = 'advisorSection___members___internal___owner',
+  AdvisorSectionMembersInternalType = 'advisorSection___members___internal___type',
+  AdvisorSectionRawMembers = 'advisorSection____rawMembers',
+  RawTopSection = '_rawTopSection',
+  RawCoreSection = '_rawCoreSection',
+  RawContributorSection = '_rawContributorSection',
+  RawAdvisorSection = '_rawAdvisorSection',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type SanityTeamPageFilterInput = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  coreSection: Maybe<SanityTeamSectionFilterInput>;
+  contributorSection: Maybe<SanityTeamSectionFilterInput>;
+  advisorSection: Maybe<SanityTeamSectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawCoreSection: Maybe<JsonQueryOperatorInput>;
+  _rawContributorSection: Maybe<JsonQueryOperatorInput>;
+  _rawAdvisorSection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+export type SanityTeamPageGroupConnection = {
+  __typename?: 'SanityTeamPageGroupConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityTeamPageEdge>;
+  nodes: Array<SanityTeamPage>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue: Maybe<Scalars['String']>;
+};
+
+export type SanityTeamPageSortInput = {
+  fields: Maybe<Array<Maybe<SanityTeamPageFieldsEnum>>>;
+  order: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type SanityTeamSection = {
+  __typename?: 'SanityTeamSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  members: Maybe<Array<Maybe<SanityRegenTeamMember>>>;
+  _rawMembers: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityTeamSection_RawMembersArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityTeamSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  members: Maybe<SanityRegenTeamMemberFilterListInput>;
+  _rawMembers: Maybe<JsonQueryOperatorInput>;
+};
+
 export type SanityTimelineItem = {
   __typename?: 'SanityTimelineItem';
   _key: Maybe<Scalars['String']>;
@@ -29913,11 +31001,46 @@ export type SanityTitleBody = {
   body: Maybe<Scalars['String']>;
 };
 
+export type SanityTitleBodyButton = {
+  __typename?: 'SanityTitleBodyButton';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  button: Maybe<SanityButton>;
+  body: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawBody: Maybe<Scalars['JSON']>;
+  _rawButton: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityTitleBodyButton_RawBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTitleBodyButton_RawButtonArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityTitleBodyButtonFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  button: Maybe<SanityButtonFilterInput>;
+  body: Maybe<SanityBlockFilterListInput>;
+  _rawBody: Maybe<JsonQueryOperatorInput>;
+  _rawButton: Maybe<JsonQueryOperatorInput>;
+};
+
 export type SanityTitleBodyFilterInput = {
   _key: Maybe<StringQueryOperatorInput>;
   _type: Maybe<StringQueryOperatorInput>;
   title: Maybe<StringQueryOperatorInput>;
   body: Maybe<StringQueryOperatorInput>;
+};
+
+export type SanityTitleBodyFilterListInput = {
+  elemMatch: Maybe<SanityTitleBodyFilterInput>;
 };
 
 export type SanityTitleCustomBody = {
@@ -29953,6 +31076,21 @@ export type SanityTitleImage = {
 
 
 export type SanityTitleImage_RawImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityTitleImageBody = {
+  __typename?: 'SanityTitleImageBody';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  image: Maybe<SanityCustomImage>;
+  body: Maybe<Scalars['String']>;
+  _rawImage: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityTitleImageBody_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
@@ -30023,6 +31161,968 @@ export type SanityTitleImageLinkFilterListInput = {
   elemMatch: Maybe<SanityTitleImageLinkFilterInput>;
 };
 
+export type SanityTokenInfoSection = {
+  __typename?: 'SanityTokenInfoSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  subtitle: Maybe<Scalars['String']>;
+  image: Maybe<SanityCustomImage>;
+  body: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawBody: Maybe<Scalars['JSON']>;
+  _rawImage: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityTokenInfoSection_RawBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTokenInfoSection_RawImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityTokenInfoSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  subtitle: Maybe<StringQueryOperatorInput>;
+  image: Maybe<SanityCustomImageFilterInput>;
+  body: Maybe<SanityBlockFilterListInput>;
+  _rawBody: Maybe<JsonQueryOperatorInput>;
+  _rawImage: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityTokenNewsletterSection = {
+  __typename?: 'SanityTokenNewsletterSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  buttonText: Maybe<Scalars['String']>;
+  inputText: Maybe<Scalars['String']>;
+};
+
+export type SanityTokenNewsletterSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  buttonText: Maybe<StringQueryOperatorInput>;
+  inputText: Maybe<StringQueryOperatorInput>;
+};
+
+export type SanityTokenPage = SanityDocument & Node & {
+  __typename?: 'SanityTokenPage';
+  _id: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  _createdAt: Maybe<Scalars['Date']>;
+  _updatedAt: Maybe<Scalars['Date']>;
+  _rev: Maybe<Scalars['String']>;
+  _key: Maybe<Scalars['String']>;
+  topSection: Maybe<SanityTitleBody>;
+  tokenEconomics: Maybe<SanityTitleCustomBody>;
+  infoSection: Maybe<SanityTokenInfoSection>;
+  poolSection: Maybe<SanityTokenPoolSection>;
+  stakingSection: Maybe<SanityTitleBodyButton>;
+  blockExplorerSection: Maybe<SanityTitleBodyButton>;
+  connectSectionHeader: Maybe<Scalars['String']>;
+  mediaCards: Maybe<Array<Maybe<SanityMedia>>>;
+  newsletterSection: Maybe<SanityTokenNewsletterSection>;
+  _rawTopSection: Maybe<Scalars['JSON']>;
+  _rawTokenEconomics: Maybe<Scalars['JSON']>;
+  _rawInfoSection: Maybe<Scalars['JSON']>;
+  _rawPoolSection: Maybe<Scalars['JSON']>;
+  _rawStakingSection: Maybe<Scalars['JSON']>;
+  _rawBlockExplorerSection: Maybe<Scalars['JSON']>;
+  _rawMediaCards: Maybe<Scalars['JSON']>;
+  _rawNewsletterSection: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type SanityTokenPage_CreatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityTokenPage_UpdatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityTokenPage_RawTopSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTokenPage_RawTokenEconomicsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTokenPage_RawInfoSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTokenPage_RawPoolSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTokenPage_RawStakingSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTokenPage_RawBlockExplorerSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTokenPage_RawMediaCardsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTokenPage_RawNewsletterSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityTokenPageConnection = {
+  __typename?: 'SanityTokenPageConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityTokenPageEdge>;
+  nodes: Array<SanityTokenPage>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<SanityTokenPageGroupConnection>;
+};
+
+
+export type SanityTokenPageConnectionDistinctArgs = {
+  field: SanityTokenPageFieldsEnum;
+};
+
+
+export type SanityTokenPageConnectionGroupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: SanityTokenPageFieldsEnum;
+};
+
+export type SanityTokenPageEdge = {
+  __typename?: 'SanityTokenPageEdge';
+  next: Maybe<SanityTokenPage>;
+  node: SanityTokenPage;
+  previous: Maybe<SanityTokenPage>;
+};
+
+export enum SanityTokenPageFieldsEnum {
+  Id = '_id',
+  Type = '_type',
+  CreatedAt = '_createdAt',
+  UpdatedAt = '_updatedAt',
+  Rev = '_rev',
+  Key = '_key',
+  TopSectionKey = 'topSection____key',
+  TopSectionType = 'topSection____type',
+  TopSectionTitle = 'topSection___title',
+  TopSectionBody = 'topSection___body',
+  TokenEconomicsKey = 'tokenEconomics____key',
+  TokenEconomicsType = 'tokenEconomics____type',
+  TokenEconomicsTitle = 'tokenEconomics___title',
+  TokenEconomicsBody = 'tokenEconomics___body',
+  TokenEconomicsBodyKey = 'tokenEconomics___body____key',
+  TokenEconomicsBodyType = 'tokenEconomics___body____type',
+  TokenEconomicsBodyChildren = 'tokenEconomics___body___children',
+  TokenEconomicsBodyChildrenKey = 'tokenEconomics___body___children____key',
+  TokenEconomicsBodyChildrenType = 'tokenEconomics___body___children____type',
+  TokenEconomicsBodyChildrenMarks = 'tokenEconomics___body___children___marks',
+  TokenEconomicsBodyChildrenText = 'tokenEconomics___body___children___text',
+  TokenEconomicsBodyStyle = 'tokenEconomics___body___style',
+  TokenEconomicsBodyList = 'tokenEconomics___body___list',
+  TokenEconomicsBodyRawChildren = 'tokenEconomics___body____rawChildren',
+  TokenEconomicsRawBody = 'tokenEconomics____rawBody',
+  InfoSectionKey = 'infoSection____key',
+  InfoSectionType = 'infoSection____type',
+  InfoSectionTitle = 'infoSection___title',
+  InfoSectionSubtitle = 'infoSection___subtitle',
+  InfoSectionImageKey = 'infoSection___image____key',
+  InfoSectionImageType = 'infoSection___image____type',
+  InfoSectionImageImageHref = 'infoSection___image___imageHref',
+  InfoSectionImageImageKey = 'infoSection___image___image____key',
+  InfoSectionImageImageType = 'infoSection___image___image____type',
+  InfoSectionImageImageRawAsset = 'infoSection___image___image____rawAsset',
+  InfoSectionImageImageRawHotspot = 'infoSection___image___image____rawHotspot',
+  InfoSectionImageImageRawCrop = 'infoSection___image___image____rawCrop',
+  InfoSectionImageImageAlt = 'infoSection___image___imageAlt',
+  InfoSectionImageRawImage = 'infoSection___image____rawImage',
+  InfoSectionBody = 'infoSection___body',
+  InfoSectionBodyKey = 'infoSection___body____key',
+  InfoSectionBodyType = 'infoSection___body____type',
+  InfoSectionBodyChildren = 'infoSection___body___children',
+  InfoSectionBodyChildrenKey = 'infoSection___body___children____key',
+  InfoSectionBodyChildrenType = 'infoSection___body___children____type',
+  InfoSectionBodyChildrenMarks = 'infoSection___body___children___marks',
+  InfoSectionBodyChildrenText = 'infoSection___body___children___text',
+  InfoSectionBodyStyle = 'infoSection___body___style',
+  InfoSectionBodyList = 'infoSection___body___list',
+  InfoSectionBodyRawChildren = 'infoSection___body____rawChildren',
+  InfoSectionRawBody = 'infoSection____rawBody',
+  InfoSectionRawImage = 'infoSection____rawImage',
+  PoolSectionKey = 'poolSection____key',
+  PoolSectionType = 'poolSection____type',
+  PoolSectionTitle = 'poolSection___title',
+  PoolSectionSubtitle = 'poolSection___subtitle',
+  PoolSectionImageKey = 'poolSection___image____key',
+  PoolSectionImageType = 'poolSection___image____type',
+  PoolSectionImageAssetId = 'poolSection___image___asset____id',
+  PoolSectionImageAssetType = 'poolSection___image___asset____type',
+  PoolSectionImageAssetCreatedAt = 'poolSection___image___asset____createdAt',
+  PoolSectionImageAssetUpdatedAt = 'poolSection___image___asset____updatedAt',
+  PoolSectionImageAssetRev = 'poolSection___image___asset____rev',
+  PoolSectionImageAssetKey = 'poolSection___image___asset____key',
+  PoolSectionImageAssetOriginalFilename = 'poolSection___image___asset___originalFilename',
+  PoolSectionImageAssetLabel = 'poolSection___image___asset___label',
+  PoolSectionImageAssetTitle = 'poolSection___image___asset___title',
+  PoolSectionImageAssetDescription = 'poolSection___image___asset___description',
+  PoolSectionImageAssetAltText = 'poolSection___image___asset___altText',
+  PoolSectionImageAssetSha1hash = 'poolSection___image___asset___sha1hash',
+  PoolSectionImageAssetExtension = 'poolSection___image___asset___extension',
+  PoolSectionImageAssetMimeType = 'poolSection___image___asset___mimeType',
+  PoolSectionImageAssetSize = 'poolSection___image___asset___size',
+  PoolSectionImageAssetAssetId = 'poolSection___image___asset___assetId',
+  PoolSectionImageAssetPath = 'poolSection___image___asset___path',
+  PoolSectionImageAssetUrl = 'poolSection___image___asset___url',
+  PoolSectionImageAssetRawMetadata = 'poolSection___image___asset____rawMetadata',
+  PoolSectionImageAssetRawSource = 'poolSection___image___asset____rawSource',
+  PoolSectionImageAssetId = 'poolSection___image___asset___id',
+  PoolSectionImageAssetChildren = 'poolSection___image___asset___children',
+  PoolSectionImageHotspotKey = 'poolSection___image___hotspot____key',
+  PoolSectionImageHotspotType = 'poolSection___image___hotspot____type',
+  PoolSectionImageHotspotX = 'poolSection___image___hotspot___x',
+  PoolSectionImageHotspotY = 'poolSection___image___hotspot___y',
+  PoolSectionImageHotspotHeight = 'poolSection___image___hotspot___height',
+  PoolSectionImageHotspotWidth = 'poolSection___image___hotspot___width',
+  PoolSectionImageCropKey = 'poolSection___image___crop____key',
+  PoolSectionImageCropType = 'poolSection___image___crop____type',
+  PoolSectionImageCropTop = 'poolSection___image___crop___top',
+  PoolSectionImageCropBottom = 'poolSection___image___crop___bottom',
+  PoolSectionImageCropLeft = 'poolSection___image___crop___left',
+  PoolSectionImageCropRight = 'poolSection___image___crop___right',
+  PoolSectionImageRawAsset = 'poolSection___image____rawAsset',
+  PoolSectionImageRawHotspot = 'poolSection___image____rawHotspot',
+  PoolSectionImageRawCrop = 'poolSection___image____rawCrop',
+  PoolSectionMobileImageKey = 'poolSection___mobileImage____key',
+  PoolSectionMobileImageType = 'poolSection___mobileImage____type',
+  PoolSectionMobileImageAssetId = 'poolSection___mobileImage___asset____id',
+  PoolSectionMobileImageAssetType = 'poolSection___mobileImage___asset____type',
+  PoolSectionMobileImageAssetCreatedAt = 'poolSection___mobileImage___asset____createdAt',
+  PoolSectionMobileImageAssetUpdatedAt = 'poolSection___mobileImage___asset____updatedAt',
+  PoolSectionMobileImageAssetRev = 'poolSection___mobileImage___asset____rev',
+  PoolSectionMobileImageAssetKey = 'poolSection___mobileImage___asset____key',
+  PoolSectionMobileImageAssetOriginalFilename = 'poolSection___mobileImage___asset___originalFilename',
+  PoolSectionMobileImageAssetLabel = 'poolSection___mobileImage___asset___label',
+  PoolSectionMobileImageAssetTitle = 'poolSection___mobileImage___asset___title',
+  PoolSectionMobileImageAssetDescription = 'poolSection___mobileImage___asset___description',
+  PoolSectionMobileImageAssetAltText = 'poolSection___mobileImage___asset___altText',
+  PoolSectionMobileImageAssetSha1hash = 'poolSection___mobileImage___asset___sha1hash',
+  PoolSectionMobileImageAssetExtension = 'poolSection___mobileImage___asset___extension',
+  PoolSectionMobileImageAssetMimeType = 'poolSection___mobileImage___asset___mimeType',
+  PoolSectionMobileImageAssetSize = 'poolSection___mobileImage___asset___size',
+  PoolSectionMobileImageAssetAssetId = 'poolSection___mobileImage___asset___assetId',
+  PoolSectionMobileImageAssetPath = 'poolSection___mobileImage___asset___path',
+  PoolSectionMobileImageAssetUrl = 'poolSection___mobileImage___asset___url',
+  PoolSectionMobileImageAssetRawMetadata = 'poolSection___mobileImage___asset____rawMetadata',
+  PoolSectionMobileImageAssetRawSource = 'poolSection___mobileImage___asset____rawSource',
+  PoolSectionMobileImageAssetId = 'poolSection___mobileImage___asset___id',
+  PoolSectionMobileImageAssetChildren = 'poolSection___mobileImage___asset___children',
+  PoolSectionMobileImageHotspotKey = 'poolSection___mobileImage___hotspot____key',
+  PoolSectionMobileImageHotspotType = 'poolSection___mobileImage___hotspot____type',
+  PoolSectionMobileImageHotspotX = 'poolSection___mobileImage___hotspot___x',
+  PoolSectionMobileImageHotspotY = 'poolSection___mobileImage___hotspot___y',
+  PoolSectionMobileImageHotspotHeight = 'poolSection___mobileImage___hotspot___height',
+  PoolSectionMobileImageHotspotWidth = 'poolSection___mobileImage___hotspot___width',
+  PoolSectionMobileImageCropKey = 'poolSection___mobileImage___crop____key',
+  PoolSectionMobileImageCropType = 'poolSection___mobileImage___crop____type',
+  PoolSectionMobileImageCropTop = 'poolSection___mobileImage___crop___top',
+  PoolSectionMobileImageCropBottom = 'poolSection___mobileImage___crop___bottom',
+  PoolSectionMobileImageCropLeft = 'poolSection___mobileImage___crop___left',
+  PoolSectionMobileImageCropRight = 'poolSection___mobileImage___crop___right',
+  PoolSectionMobileImageRawAsset = 'poolSection___mobileImage____rawAsset',
+  PoolSectionMobileImageRawHotspot = 'poolSection___mobileImage____rawHotspot',
+  PoolSectionMobileImageRawCrop = 'poolSection___mobileImage____rawCrop',
+  PoolSectionRawImage = 'poolSection____rawImage',
+  PoolSectionRawMobileImage = 'poolSection____rawMobileImage',
+  StakingSectionKey = 'stakingSection____key',
+  StakingSectionType = 'stakingSection____type',
+  StakingSectionTitle = 'stakingSection___title',
+  StakingSectionButtonKey = 'stakingSection___button____key',
+  StakingSectionButtonType = 'stakingSection___button____type',
+  StakingSectionButtonButtonText = 'stakingSection___button___buttonText',
+  StakingSectionButtonButtonLinkKey = 'stakingSection___button___buttonLink____key',
+  StakingSectionButtonButtonLinkType = 'stakingSection___button___buttonLink____type',
+  StakingSectionButtonButtonLinkButtonHref = 'stakingSection___button___buttonLink___buttonHref',
+  StakingSectionButtonButtonLinkRawButtonDoc = 'stakingSection___button___buttonLink____rawButtonDoc',
+  StakingSectionButtonButtonModal = 'stakingSection___button___buttonModal',
+  StakingSectionButtonButtonBlankTarget = 'stakingSection___button___buttonBlankTarget',
+  StakingSectionButtonRawButtonLink = 'stakingSection___button____rawButtonLink',
+  StakingSectionBody = 'stakingSection___body',
+  StakingSectionBodyKey = 'stakingSection___body____key',
+  StakingSectionBodyType = 'stakingSection___body____type',
+  StakingSectionBodyChildren = 'stakingSection___body___children',
+  StakingSectionBodyChildrenKey = 'stakingSection___body___children____key',
+  StakingSectionBodyChildrenType = 'stakingSection___body___children____type',
+  StakingSectionBodyChildrenMarks = 'stakingSection___body___children___marks',
+  StakingSectionBodyChildrenText = 'stakingSection___body___children___text',
+  StakingSectionBodyStyle = 'stakingSection___body___style',
+  StakingSectionBodyList = 'stakingSection___body___list',
+  StakingSectionBodyRawChildren = 'stakingSection___body____rawChildren',
+  StakingSectionRawBody = 'stakingSection____rawBody',
+  StakingSectionRawButton = 'stakingSection____rawButton',
+  BlockExplorerSectionKey = 'blockExplorerSection____key',
+  BlockExplorerSectionType = 'blockExplorerSection____type',
+  BlockExplorerSectionTitle = 'blockExplorerSection___title',
+  BlockExplorerSectionButtonKey = 'blockExplorerSection___button____key',
+  BlockExplorerSectionButtonType = 'blockExplorerSection___button____type',
+  BlockExplorerSectionButtonButtonText = 'blockExplorerSection___button___buttonText',
+  BlockExplorerSectionButtonButtonLinkKey = 'blockExplorerSection___button___buttonLink____key',
+  BlockExplorerSectionButtonButtonLinkType = 'blockExplorerSection___button___buttonLink____type',
+  BlockExplorerSectionButtonButtonLinkButtonHref = 'blockExplorerSection___button___buttonLink___buttonHref',
+  BlockExplorerSectionButtonButtonLinkRawButtonDoc = 'blockExplorerSection___button___buttonLink____rawButtonDoc',
+  BlockExplorerSectionButtonButtonModal = 'blockExplorerSection___button___buttonModal',
+  BlockExplorerSectionButtonButtonBlankTarget = 'blockExplorerSection___button___buttonBlankTarget',
+  BlockExplorerSectionButtonRawButtonLink = 'blockExplorerSection___button____rawButtonLink',
+  BlockExplorerSectionBody = 'blockExplorerSection___body',
+  BlockExplorerSectionBodyKey = 'blockExplorerSection___body____key',
+  BlockExplorerSectionBodyType = 'blockExplorerSection___body____type',
+  BlockExplorerSectionBodyChildren = 'blockExplorerSection___body___children',
+  BlockExplorerSectionBodyChildrenKey = 'blockExplorerSection___body___children____key',
+  BlockExplorerSectionBodyChildrenType = 'blockExplorerSection___body___children____type',
+  BlockExplorerSectionBodyChildrenMarks = 'blockExplorerSection___body___children___marks',
+  BlockExplorerSectionBodyChildrenText = 'blockExplorerSection___body___children___text',
+  BlockExplorerSectionBodyStyle = 'blockExplorerSection___body___style',
+  BlockExplorerSectionBodyList = 'blockExplorerSection___body___list',
+  BlockExplorerSectionBodyRawChildren = 'blockExplorerSection___body____rawChildren',
+  BlockExplorerSectionRawBody = 'blockExplorerSection____rawBody',
+  BlockExplorerSectionRawButton = 'blockExplorerSection____rawButton',
+  ConnectSectionHeader = 'connectSectionHeader',
+  MediaCards = 'mediaCards',
+  MediaCardsId = 'mediaCards____id',
+  MediaCardsType = 'mediaCards____type',
+  MediaCardsCreatedAt = 'mediaCards____createdAt',
+  MediaCardsUpdatedAt = 'mediaCards____updatedAt',
+  MediaCardsRev = 'mediaCards____rev',
+  MediaCardsKey = 'mediaCards____key',
+  MediaCardsTitle = 'mediaCards___title',
+  MediaCardsAuthor = 'mediaCards___author',
+  MediaCardsDate = 'mediaCards___date',
+  MediaCardsImageKey = 'mediaCards___image____key',
+  MediaCardsImageType = 'mediaCards___image____type',
+  MediaCardsImageImageHref = 'mediaCards___image___imageHref',
+  MediaCardsImageImageKey = 'mediaCards___image___image____key',
+  MediaCardsImageImageType = 'mediaCards___image___image____type',
+  MediaCardsImageImageRawAsset = 'mediaCards___image___image____rawAsset',
+  MediaCardsImageImageRawHotspot = 'mediaCards___image___image____rawHotspot',
+  MediaCardsImageImageRawCrop = 'mediaCards___image___image____rawCrop',
+  MediaCardsImageImageAlt = 'mediaCards___image___imageAlt',
+  MediaCardsImageRawImage = 'mediaCards___image____rawImage',
+  MediaCardsHref = 'mediaCards___href',
+  MediaCardsType = 'mediaCards___type',
+  MediaCardsRawImage = 'mediaCards____rawImage',
+  MediaCardsId = 'mediaCards___id',
+  MediaCardsParentId = 'mediaCards___parent___id',
+  MediaCardsParentParentId = 'mediaCards___parent___parent___id',
+  MediaCardsParentParentChildren = 'mediaCards___parent___parent___children',
+  MediaCardsParentChildren = 'mediaCards___parent___children',
+  MediaCardsParentChildrenId = 'mediaCards___parent___children___id',
+  MediaCardsParentChildrenChildren = 'mediaCards___parent___children___children',
+  MediaCardsParentInternalContent = 'mediaCards___parent___internal___content',
+  MediaCardsParentInternalContentDigest = 'mediaCards___parent___internal___contentDigest',
+  MediaCardsParentInternalDescription = 'mediaCards___parent___internal___description',
+  MediaCardsParentInternalFieldOwners = 'mediaCards___parent___internal___fieldOwners',
+  MediaCardsParentInternalIgnoreType = 'mediaCards___parent___internal___ignoreType',
+  MediaCardsParentInternalMediaType = 'mediaCards___parent___internal___mediaType',
+  MediaCardsParentInternalOwner = 'mediaCards___parent___internal___owner',
+  MediaCardsParentInternalType = 'mediaCards___parent___internal___type',
+  MediaCardsChildren = 'mediaCards___children',
+  MediaCardsChildrenId = 'mediaCards___children___id',
+  MediaCardsChildrenParentId = 'mediaCards___children___parent___id',
+  MediaCardsChildrenParentChildren = 'mediaCards___children___parent___children',
+  MediaCardsChildrenChildren = 'mediaCards___children___children',
+  MediaCardsChildrenChildrenId = 'mediaCards___children___children___id',
+  MediaCardsChildrenChildrenChildren = 'mediaCards___children___children___children',
+  MediaCardsChildrenInternalContent = 'mediaCards___children___internal___content',
+  MediaCardsChildrenInternalContentDigest = 'mediaCards___children___internal___contentDigest',
+  MediaCardsChildrenInternalDescription = 'mediaCards___children___internal___description',
+  MediaCardsChildrenInternalFieldOwners = 'mediaCards___children___internal___fieldOwners',
+  MediaCardsChildrenInternalIgnoreType = 'mediaCards___children___internal___ignoreType',
+  MediaCardsChildrenInternalMediaType = 'mediaCards___children___internal___mediaType',
+  MediaCardsChildrenInternalOwner = 'mediaCards___children___internal___owner',
+  MediaCardsChildrenInternalType = 'mediaCards___children___internal___type',
+  MediaCardsInternalContent = 'mediaCards___internal___content',
+  MediaCardsInternalContentDigest = 'mediaCards___internal___contentDigest',
+  MediaCardsInternalDescription = 'mediaCards___internal___description',
+  MediaCardsInternalFieldOwners = 'mediaCards___internal___fieldOwners',
+  MediaCardsInternalIgnoreType = 'mediaCards___internal___ignoreType',
+  MediaCardsInternalMediaType = 'mediaCards___internal___mediaType',
+  MediaCardsInternalOwner = 'mediaCards___internal___owner',
+  MediaCardsInternalType = 'mediaCards___internal___type',
+  NewsletterSectionKey = 'newsletterSection____key',
+  NewsletterSectionType = 'newsletterSection____type',
+  NewsletterSectionHeader = 'newsletterSection___header',
+  NewsletterSectionButtonText = 'newsletterSection___buttonText',
+  NewsletterSectionInputText = 'newsletterSection___inputText',
+  RawTopSection = '_rawTopSection',
+  RawTokenEconomics = '_rawTokenEconomics',
+  RawInfoSection = '_rawInfoSection',
+  RawPoolSection = '_rawPoolSection',
+  RawStakingSection = '_rawStakingSection',
+  RawBlockExplorerSection = '_rawBlockExplorerSection',
+  RawMediaCards = '_rawMediaCards',
+  RawNewsletterSection = '_rawNewsletterSection',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type SanityTokenPageFilterInput = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  tokenEconomics: Maybe<SanityTitleCustomBodyFilterInput>;
+  infoSection: Maybe<SanityTokenInfoSectionFilterInput>;
+  poolSection: Maybe<SanityTokenPoolSectionFilterInput>;
+  stakingSection: Maybe<SanityTitleBodyButtonFilterInput>;
+  blockExplorerSection: Maybe<SanityTitleBodyButtonFilterInput>;
+  connectSectionHeader: Maybe<StringQueryOperatorInput>;
+  mediaCards: Maybe<SanityMediaFilterListInput>;
+  newsletterSection: Maybe<SanityTokenNewsletterSectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawTokenEconomics: Maybe<JsonQueryOperatorInput>;
+  _rawInfoSection: Maybe<JsonQueryOperatorInput>;
+  _rawPoolSection: Maybe<JsonQueryOperatorInput>;
+  _rawStakingSection: Maybe<JsonQueryOperatorInput>;
+  _rawBlockExplorerSection: Maybe<JsonQueryOperatorInput>;
+  _rawMediaCards: Maybe<JsonQueryOperatorInput>;
+  _rawNewsletterSection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+export type SanityTokenPageGroupConnection = {
+  __typename?: 'SanityTokenPageGroupConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityTokenPageEdge>;
+  nodes: Array<SanityTokenPage>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue: Maybe<Scalars['String']>;
+};
+
+export type SanityTokenPageSortInput = {
+  fields: Maybe<Array<Maybe<SanityTokenPageFieldsEnum>>>;
+  order: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type SanityTokenPoolSection = {
+  __typename?: 'SanityTokenPoolSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  subtitle: Maybe<Scalars['String']>;
+  image: Maybe<SanityImage>;
+  mobileImage: Maybe<SanityImage>;
+  _rawImage: Maybe<Scalars['JSON']>;
+  _rawMobileImage: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityTokenPoolSection_RawImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTokenPoolSection_RawMobileImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityTokenPoolSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  subtitle: Maybe<StringQueryOperatorInput>;
+  image: Maybe<SanityImageFilterInput>;
+  mobileImage: Maybe<SanityImageFilterInput>;
+  _rawImage: Maybe<JsonQueryOperatorInput>;
+  _rawMobileImage: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityTokenUnlockSection = {
+  __typename?: 'SanityTokenUnlockSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  button: Maybe<SanityButton>;
+  body: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawBody: Maybe<Scalars['JSON']>;
+  _rawButton: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityTokenUnlockSection_RawBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityTokenUnlockSection_RawButtonArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityValidator = {
+  __typename?: 'SanityValidator';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  description: Maybe<Scalars['String']>;
+  members: Maybe<Array<Maybe<SanityImageLink>>>;
+  _rawMembers: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityValidator_RawMembersArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityValidatorFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  members: Maybe<SanityImageLinkFilterListInput>;
+  _rawMembers: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityValidatorFilterListInput = {
+  elemMatch: Maybe<SanityValidatorFilterInput>;
+};
+
+export type SanityValidatorWhoSection = {
+  __typename?: 'SanityValidatorWhoSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  header: Maybe<Scalars['String']>;
+  validators: Maybe<Array<Maybe<SanityValidator>>>;
+  body: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawBody: Maybe<Scalars['JSON']>;
+  _rawValidators: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityValidatorWhoSection_RawBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityValidatorWhoSection_RawValidatorsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityValidatorWhoSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  header: Maybe<StringQueryOperatorInput>;
+  validators: Maybe<SanityValidatorFilterListInput>;
+  body: Maybe<SanityBlockFilterListInput>;
+  _rawBody: Maybe<JsonQueryOperatorInput>;
+  _rawValidators: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityValidatorsPage = SanityDocument & Node & {
+  __typename?: 'SanityValidatorsPage';
+  _id: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  _createdAt: Maybe<Scalars['Date']>;
+  _updatedAt: Maybe<Scalars['Date']>;
+  _rev: Maybe<Scalars['String']>;
+  _key: Maybe<Scalars['String']>;
+  topSection: Maybe<SanityTitleBody>;
+  whatSection: Maybe<SanityTitleCustomBody>;
+  whoSection: Maybe<SanityValidatorWhoSection>;
+  connectSectionHeader: Maybe<Scalars['String']>;
+  whySection: Maybe<SanityTitleCustomBody>;
+  _rawTopSection: Maybe<Scalars['JSON']>;
+  _rawWhatSection: Maybe<Scalars['JSON']>;
+  _rawWhoSection: Maybe<Scalars['JSON']>;
+  _rawWhySection: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type SanityValidatorsPage_CreatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityValidatorsPage_UpdatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityValidatorsPage_RawTopSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityValidatorsPage_RawWhatSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityValidatorsPage_RawWhoSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityValidatorsPage_RawWhySectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityValidatorsPageConnection = {
+  __typename?: 'SanityValidatorsPageConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityValidatorsPageEdge>;
+  nodes: Array<SanityValidatorsPage>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<SanityValidatorsPageGroupConnection>;
+};
+
+
+export type SanityValidatorsPageConnectionDistinctArgs = {
+  field: SanityValidatorsPageFieldsEnum;
+};
+
+
+export type SanityValidatorsPageConnectionGroupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: SanityValidatorsPageFieldsEnum;
+};
+
+export type SanityValidatorsPageEdge = {
+  __typename?: 'SanityValidatorsPageEdge';
+  next: Maybe<SanityValidatorsPage>;
+  node: SanityValidatorsPage;
+  previous: Maybe<SanityValidatorsPage>;
+};
+
+export enum SanityValidatorsPageFieldsEnum {
+  Id = '_id',
+  Type = '_type',
+  CreatedAt = '_createdAt',
+  UpdatedAt = '_updatedAt',
+  Rev = '_rev',
+  Key = '_key',
+  TopSectionKey = 'topSection____key',
+  TopSectionType = 'topSection____type',
+  TopSectionTitle = 'topSection___title',
+  TopSectionBody = 'topSection___body',
+  WhatSectionKey = 'whatSection____key',
+  WhatSectionType = 'whatSection____type',
+  WhatSectionTitle = 'whatSection___title',
+  WhatSectionBody = 'whatSection___body',
+  WhatSectionBodyKey = 'whatSection___body____key',
+  WhatSectionBodyType = 'whatSection___body____type',
+  WhatSectionBodyChildren = 'whatSection___body___children',
+  WhatSectionBodyChildrenKey = 'whatSection___body___children____key',
+  WhatSectionBodyChildrenType = 'whatSection___body___children____type',
+  WhatSectionBodyChildrenMarks = 'whatSection___body___children___marks',
+  WhatSectionBodyChildrenText = 'whatSection___body___children___text',
+  WhatSectionBodyStyle = 'whatSection___body___style',
+  WhatSectionBodyList = 'whatSection___body___list',
+  WhatSectionBodyRawChildren = 'whatSection___body____rawChildren',
+  WhatSectionRawBody = 'whatSection____rawBody',
+  WhoSectionKey = 'whoSection____key',
+  WhoSectionType = 'whoSection____type',
+  WhoSectionHeader = 'whoSection___header',
+  WhoSectionValidators = 'whoSection___validators',
+  WhoSectionValidatorsKey = 'whoSection___validators____key',
+  WhoSectionValidatorsType = 'whoSection___validators____type',
+  WhoSectionValidatorsHeader = 'whoSection___validators___header',
+  WhoSectionValidatorsDescription = 'whoSection___validators___description',
+  WhoSectionValidatorsMembers = 'whoSection___validators___members',
+  WhoSectionValidatorsMembersKey = 'whoSection___validators___members____key',
+  WhoSectionValidatorsMembersType = 'whoSection___validators___members____type',
+  WhoSectionValidatorsMembersRawLink = 'whoSection___validators___members____rawLink',
+  WhoSectionValidatorsMembersRawImage = 'whoSection___validators___members____rawImage',
+  WhoSectionValidatorsRawMembers = 'whoSection___validators____rawMembers',
+  WhoSectionBody = 'whoSection___body',
+  WhoSectionBodyKey = 'whoSection___body____key',
+  WhoSectionBodyType = 'whoSection___body____type',
+  WhoSectionBodyChildren = 'whoSection___body___children',
+  WhoSectionBodyChildrenKey = 'whoSection___body___children____key',
+  WhoSectionBodyChildrenType = 'whoSection___body___children____type',
+  WhoSectionBodyChildrenMarks = 'whoSection___body___children___marks',
+  WhoSectionBodyChildrenText = 'whoSection___body___children___text',
+  WhoSectionBodyStyle = 'whoSection___body___style',
+  WhoSectionBodyList = 'whoSection___body___list',
+  WhoSectionBodyRawChildren = 'whoSection___body____rawChildren',
+  WhoSectionRawBody = 'whoSection____rawBody',
+  WhoSectionRawValidators = 'whoSection____rawValidators',
+  ConnectSectionHeader = 'connectSectionHeader',
+  WhySectionKey = 'whySection____key',
+  WhySectionType = 'whySection____type',
+  WhySectionTitle = 'whySection___title',
+  WhySectionBody = 'whySection___body',
+  WhySectionBodyKey = 'whySection___body____key',
+  WhySectionBodyType = 'whySection___body____type',
+  WhySectionBodyChildren = 'whySection___body___children',
+  WhySectionBodyChildrenKey = 'whySection___body___children____key',
+  WhySectionBodyChildrenType = 'whySection___body___children____type',
+  WhySectionBodyChildrenMarks = 'whySection___body___children___marks',
+  WhySectionBodyChildrenText = 'whySection___body___children___text',
+  WhySectionBodyStyle = 'whySection___body___style',
+  WhySectionBodyList = 'whySection___body___list',
+  WhySectionBodyRawChildren = 'whySection___body____rawChildren',
+  WhySectionRawBody = 'whySection____rawBody',
+  RawTopSection = '_rawTopSection',
+  RawWhatSection = '_rawWhatSection',
+  RawWhoSection = '_rawWhoSection',
+  RawWhySection = '_rawWhySection',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type SanityValidatorsPageFilterInput = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  whatSection: Maybe<SanityTitleCustomBodyFilterInput>;
+  whoSection: Maybe<SanityValidatorWhoSectionFilterInput>;
+  connectSectionHeader: Maybe<StringQueryOperatorInput>;
+  whySection: Maybe<SanityTitleCustomBodyFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawWhatSection: Maybe<JsonQueryOperatorInput>;
+  _rawWhoSection: Maybe<JsonQueryOperatorInput>;
+  _rawWhySection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+export type SanityValidatorsPageGroupConnection = {
+  __typename?: 'SanityValidatorsPageGroupConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityValidatorsPageEdge>;
+  nodes: Array<SanityValidatorsPage>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue: Maybe<Scalars['String']>;
+};
+
+export type SanityValidatorsPageSortInput = {
+  fields: Maybe<Array<Maybe<SanityValidatorsPageFieldsEnum>>>;
+  order: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
 export type SanityValuesImageItem = {
   __typename?: 'SanityValuesImageItem';
   _key: Maybe<Scalars['String']>;
@@ -30049,6 +32149,306 @@ export type SanityValuesImageItemFilterInput = {
 
 export type SanityValuesImageItemFilterListInput = {
   elemMatch: Maybe<SanityValuesImageItemFilterInput>;
+};
+
+export type SanityWalletAddressRegistrationFormSection = {
+  __typename?: 'SanityWalletAddressRegistrationFormSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  airtableLink: Maybe<Scalars['String']>;
+  recaptchaMessage: Maybe<Scalars['String']>;
+};
+
+export type SanityWalletAddressRegistrationFormSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  airtableLink: Maybe<StringQueryOperatorInput>;
+  recaptchaMessage: Maybe<StringQueryOperatorInput>;
+};
+
+export type SanityWalletAddressRegistrationPage = SanityDocument & Node & {
+  __typename?: 'SanityWalletAddressRegistrationPage';
+  _id: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  _createdAt: Maybe<Scalars['Date']>;
+  _updatedAt: Maybe<Scalars['Date']>;
+  _rev: Maybe<Scalars['String']>;
+  _key: Maybe<Scalars['String']>;
+  topSection: Maybe<SanityTitleBody>;
+  instructionSection: Maybe<SanityTitleCustomBody>;
+  walletSection: Maybe<SanityWalletAddressRegistrationWalletSection>;
+  formSection: Maybe<SanityWalletAddressRegistrationFormSection>;
+  _rawTopSection: Maybe<Scalars['JSON']>;
+  _rawInstructionSection: Maybe<Scalars['JSON']>;
+  _rawWalletSection: Maybe<Scalars['JSON']>;
+  _rawFormSection: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type SanityWalletAddressRegistrationPage_CreatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityWalletAddressRegistrationPage_UpdatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityWalletAddressRegistrationPage_RawTopSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityWalletAddressRegistrationPage_RawInstructionSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityWalletAddressRegistrationPage_RawWalletSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityWalletAddressRegistrationPage_RawFormSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityWalletAddressRegistrationPageConnection = {
+  __typename?: 'SanityWalletAddressRegistrationPageConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityWalletAddressRegistrationPageEdge>;
+  nodes: Array<SanityWalletAddressRegistrationPage>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<SanityWalletAddressRegistrationPageGroupConnection>;
+};
+
+
+export type SanityWalletAddressRegistrationPageConnectionDistinctArgs = {
+  field: SanityWalletAddressRegistrationPageFieldsEnum;
+};
+
+
+export type SanityWalletAddressRegistrationPageConnectionGroupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: SanityWalletAddressRegistrationPageFieldsEnum;
+};
+
+export type SanityWalletAddressRegistrationPageEdge = {
+  __typename?: 'SanityWalletAddressRegistrationPageEdge';
+  next: Maybe<SanityWalletAddressRegistrationPage>;
+  node: SanityWalletAddressRegistrationPage;
+  previous: Maybe<SanityWalletAddressRegistrationPage>;
+};
+
+export enum SanityWalletAddressRegistrationPageFieldsEnum {
+  Id = '_id',
+  Type = '_type',
+  CreatedAt = '_createdAt',
+  UpdatedAt = '_updatedAt',
+  Rev = '_rev',
+  Key = '_key',
+  TopSectionKey = 'topSection____key',
+  TopSectionType = 'topSection____type',
+  TopSectionTitle = 'topSection___title',
+  TopSectionBody = 'topSection___body',
+  InstructionSectionKey = 'instructionSection____key',
+  InstructionSectionType = 'instructionSection____type',
+  InstructionSectionTitle = 'instructionSection___title',
+  InstructionSectionBody = 'instructionSection___body',
+  InstructionSectionBodyKey = 'instructionSection___body____key',
+  InstructionSectionBodyType = 'instructionSection___body____type',
+  InstructionSectionBodyChildren = 'instructionSection___body___children',
+  InstructionSectionBodyChildrenKey = 'instructionSection___body___children____key',
+  InstructionSectionBodyChildrenType = 'instructionSection___body___children____type',
+  InstructionSectionBodyChildrenMarks = 'instructionSection___body___children___marks',
+  InstructionSectionBodyChildrenText = 'instructionSection___body___children___text',
+  InstructionSectionBodyStyle = 'instructionSection___body___style',
+  InstructionSectionBodyList = 'instructionSection___body___list',
+  InstructionSectionBodyRawChildren = 'instructionSection___body____rawChildren',
+  InstructionSectionRawBody = 'instructionSection____rawBody',
+  WalletSectionKey = 'walletSection____key',
+  WalletSectionType = 'walletSection____type',
+  WalletSectionButtonText = 'walletSection___buttonText',
+  WalletSectionWalletFoundButtonText = 'walletSection___walletFoundButtonText',
+  WalletSectionNoWalletFound = 'walletSection___noWalletFound',
+  WalletSectionNoWalletFoundKey = 'walletSection___noWalletFound____key',
+  WalletSectionNoWalletFoundType = 'walletSection___noWalletFound____type',
+  WalletSectionNoWalletFoundChildren = 'walletSection___noWalletFound___children',
+  WalletSectionNoWalletFoundChildrenKey = 'walletSection___noWalletFound___children____key',
+  WalletSectionNoWalletFoundChildrenType = 'walletSection___noWalletFound___children____type',
+  WalletSectionNoWalletFoundChildrenMarks = 'walletSection___noWalletFound___children___marks',
+  WalletSectionNoWalletFoundChildrenText = 'walletSection___noWalletFound___children___text',
+  WalletSectionNoWalletFoundStyle = 'walletSection___noWalletFound___style',
+  WalletSectionNoWalletFoundList = 'walletSection___noWalletFound___list',
+  WalletSectionNoWalletFoundRawChildren = 'walletSection___noWalletFound____rawChildren',
+  WalletSectionRawNoWalletFound = 'walletSection____rawNoWalletFound',
+  FormSectionKey = 'formSection____key',
+  FormSectionType = 'formSection____type',
+  FormSectionAirtableLink = 'formSection___airtableLink',
+  FormSectionRecaptchaMessage = 'formSection___recaptchaMessage',
+  RawTopSection = '_rawTopSection',
+  RawInstructionSection = '_rawInstructionSection',
+  RawWalletSection = '_rawWalletSection',
+  RawFormSection = '_rawFormSection',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type SanityWalletAddressRegistrationPageFilterInput = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  topSection: Maybe<SanityTitleBodyFilterInput>;
+  instructionSection: Maybe<SanityTitleCustomBodyFilterInput>;
+  walletSection: Maybe<SanityWalletAddressRegistrationWalletSectionFilterInput>;
+  formSection: Maybe<SanityWalletAddressRegistrationFormSectionFilterInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawInstructionSection: Maybe<JsonQueryOperatorInput>;
+  _rawWalletSection: Maybe<JsonQueryOperatorInput>;
+  _rawFormSection: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+export type SanityWalletAddressRegistrationPageGroupConnection = {
+  __typename?: 'SanityWalletAddressRegistrationPageGroupConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityWalletAddressRegistrationPageEdge>;
+  nodes: Array<SanityWalletAddressRegistrationPage>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue: Maybe<Scalars['String']>;
+};
+
+export type SanityWalletAddressRegistrationPageSortInput = {
+  fields: Maybe<Array<Maybe<SanityWalletAddressRegistrationPageFieldsEnum>>>;
+  order: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type SanityWalletAddressRegistrationWalletSection = {
+  __typename?: 'SanityWalletAddressRegistrationWalletSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  buttonText: Maybe<Scalars['String']>;
+  walletFoundButtonText: Maybe<Scalars['String']>;
+  noWalletFound: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawNoWalletFound: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityWalletAddressRegistrationWalletSection_RawNoWalletFoundArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityWalletAddressRegistrationWalletSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  buttonText: Maybe<StringQueryOperatorInput>;
+  walletFoundButtonText: Maybe<StringQueryOperatorInput>;
+  noWalletFound: Maybe<SanityBlockFilterListInput>;
+  _rawNoWalletFound: Maybe<JsonQueryOperatorInput>;
 };
 
 export type ScienceYaml = Node & {
@@ -30772,33 +33172,32 @@ export enum SharedYamlFieldsEnum {
   FeaturedSectionImageInternalMediaType = 'featuredSection___image___internal___mediaType',
   FeaturedSectionImageInternalOwner = 'featuredSection___image___internal___owner',
   FeaturedSectionImageInternalType = 'featuredSection___image___internal___type',
-  FeaturedSectionImageChildCommunityYamlId = 'featuredSection___image___childCommunityYaml___id',
-  FeaturedSectionImageChildCommunityYamlChildren = 'featuredSection___image___childCommunityYaml___children',
-  FeaturedSectionImageChildCommunityYamlFileAbsolutePath = 'featuredSection___image___childCommunityYaml___fileAbsolutePath',
   FeaturedSectionImageChildCaseStudiesYamlId = 'featuredSection___image___childCaseStudiesYaml___id',
   FeaturedSectionImageChildCaseStudiesYamlChildren = 'featuredSection___image___childCaseStudiesYaml___children',
   FeaturedSectionImageChildCaseStudiesYamlFileAbsolutePath = 'featuredSection___image___childCaseStudiesYaml___fileAbsolutePath',
-  FeaturedSectionImageChildDevelopersYamlId = 'featuredSection___image___childDevelopersYaml___id',
-  FeaturedSectionImageChildDevelopersYamlChildren = 'featuredSection___image___childDevelopersYaml___children',
-  FeaturedSectionImageChildDevelopersYamlFileAbsolutePath = 'featuredSection___image___childDevelopersYaml___fileAbsolutePath',
   FeaturedSectionImageChildCaseStudyItemsYamlId = 'featuredSection___image___childCaseStudyItemsYaml___id',
   FeaturedSectionImageChildCaseStudyItemsYamlChildren = 'featuredSection___image___childCaseStudyItemsYaml___children',
   FeaturedSectionImageChildCaseStudyItemsYamlName = 'featuredSection___image___childCaseStudyItemsYaml___name',
   FeaturedSectionImageChildCaseStudyItemsYamlSlug = 'featuredSection___image___childCaseStudyItemsYaml___slug',
   FeaturedSectionImageChildCaseStudyItemsYamlDescription = 'featuredSection___image___childCaseStudyItemsYaml___description',
   FeaturedSectionImageChildCaseStudyItemsYamlFileAbsolutePath = 'featuredSection___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  FeaturedSectionImageChildHomeYamlId = 'featuredSection___image___childHomeYaml___id',
-  FeaturedSectionImageChildHomeYamlChildren = 'featuredSection___image___childHomeYaml___children',
-  FeaturedSectionImageChildHomeYamlFileAbsolutePath = 'featuredSection___image___childHomeYaml___fileAbsolutePath',
+  FeaturedSectionImageChildDevelopersYamlId = 'featuredSection___image___childDevelopersYaml___id',
+  FeaturedSectionImageChildDevelopersYamlChildren = 'featuredSection___image___childDevelopersYaml___children',
+  FeaturedSectionImageChildDevelopersYamlFileAbsolutePath = 'featuredSection___image___childDevelopersYaml___fileAbsolutePath',
+  FeaturedSectionImageChildCommunityYamlId = 'featuredSection___image___childCommunityYaml___id',
+  FeaturedSectionImageChildCommunityYamlChildren = 'featuredSection___image___childCommunityYaml___children',
+  FeaturedSectionImageChildCommunityYamlFileAbsolutePath = 'featuredSection___image___childCommunityYaml___fileAbsolutePath',
   FeaturedSectionImageChildContactYamlId = 'featuredSection___image___childContactYaml___id',
   FeaturedSectionImageChildContactYamlChildren = 'featuredSection___image___childContactYaml___children',
   FeaturedSectionImageChildContactYamlHeader = 'featuredSection___image___childContactYaml___header',
   FeaturedSectionImageChildContactYamlBody = 'featuredSection___image___childContactYaml___body',
   FeaturedSectionImageChildContactYamlFileAbsolutePath = 'featuredSection___image___childContactYaml___fileAbsolutePath',
-  FeaturedSectionImageChildFaqYamlId = 'featuredSection___image___childFaqYaml___id',
-  FeaturedSectionImageChildFaqYamlChildren = 'featuredSection___image___childFaqYaml___children',
-  FeaturedSectionImageChildFaqYamlCategories = 'featuredSection___image___childFaqYaml___categories',
-  FeaturedSectionImageChildFaqYamlFileAbsolutePath = 'featuredSection___image___childFaqYaml___fileAbsolutePath',
+  FeaturedSectionImageChildPressKitYamlId = 'featuredSection___image___childPressKitYaml___id',
+  FeaturedSectionImageChildPressKitYamlChildren = 'featuredSection___image___childPressKitYaml___children',
+  FeaturedSectionImageChildPressKitYamlFileAbsolutePath = 'featuredSection___image___childPressKitYaml___fileAbsolutePath',
+  FeaturedSectionImageChildFundYamlId = 'featuredSection___image___childFundYaml___id',
+  FeaturedSectionImageChildFundYamlChildren = 'featuredSection___image___childFundYaml___children',
+  FeaturedSectionImageChildFundYamlFileAbsolutePath = 'featuredSection___image___childFundYaml___fileAbsolutePath',
   FeaturedSectionImageChildInvestYamlId = 'featuredSection___image___childInvestYaml___id',
   FeaturedSectionImageChildInvestYamlChildren = 'featuredSection___image___childInvestYaml___children',
   FeaturedSectionImageChildInvestYamlFileAbsolutePath = 'featuredSection___image___childInvestYaml___fileAbsolutePath',
@@ -30808,31 +33207,20 @@ export enum SharedYamlFieldsEnum {
   FeaturedSectionImageChildMainnetYamlLivecastLink = 'featuredSection___image___childMainnetYaml___livecastLink',
   FeaturedSectionImageChildMainnetYamlSeoDescription = 'featuredSection___image___childMainnetYaml___seoDescription',
   FeaturedSectionImageChildMainnetYamlFileAbsolutePath = 'featuredSection___image___childMainnetYaml___fileAbsolutePath',
+  FeaturedSectionImageChildFaqYamlId = 'featuredSection___image___childFaqYaml___id',
+  FeaturedSectionImageChildFaqYamlChildren = 'featuredSection___image___childFaqYaml___children',
+  FeaturedSectionImageChildFaqYamlCategories = 'featuredSection___image___childFaqYaml___categories',
+  FeaturedSectionImageChildFaqYamlFileAbsolutePath = 'featuredSection___image___childFaqYaml___fileAbsolutePath',
   FeaturedSectionImageChildPartnersYamlId = 'featuredSection___image___childPartnersYaml___id',
   FeaturedSectionImageChildPartnersYamlChildren = 'featuredSection___image___childPartnersYaml___children',
   FeaturedSectionImageChildPartnersYamlHeader = 'featuredSection___image___childPartnersYaml___header',
   FeaturedSectionImageChildPartnersYamlPartnerLogos = 'featuredSection___image___childPartnersYaml___partnerLogos',
   FeaturedSectionImageChildPartnersYamlFileAbsolutePath = 'featuredSection___image___childPartnersYaml___fileAbsolutePath',
-  FeaturedSectionImageChildFundYamlId = 'featuredSection___image___childFundYaml___id',
-  FeaturedSectionImageChildFundYamlChildren = 'featuredSection___image___childFundYaml___children',
-  FeaturedSectionImageChildFundYamlFileAbsolutePath = 'featuredSection___image___childFundYaml___fileAbsolutePath',
-  FeaturedSectionImageChildResourcesYamlId = 'featuredSection___image___childResourcesYaml___id',
-  FeaturedSectionImageChildResourcesYamlChildren = 'featuredSection___image___childResourcesYaml___children',
-  FeaturedSectionImageChildResourcesYamlFileAbsolutePath = 'featuredSection___image___childResourcesYaml___fileAbsolutePath',
-  FeaturedSectionImageChildPressKitYamlId = 'featuredSection___image___childPressKitYaml___id',
-  FeaturedSectionImageChildPressKitYamlChildren = 'featuredSection___image___childPressKitYaml___children',
-  FeaturedSectionImageChildPressKitYamlFileAbsolutePath = 'featuredSection___image___childPressKitYaml___fileAbsolutePath',
-  FeaturedSectionImageChildSharedYamlId = 'featuredSection___image___childSharedYaml___id',
-  FeaturedSectionImageChildSharedYamlChildren = 'featuredSection___image___childSharedYaml___children',
-  FeaturedSectionImageChildSharedYamlFileAbsolutePath = 'featuredSection___image___childSharedYaml___fileAbsolutePath',
   FeaturedSectionImageChildMediaYamlId = 'featuredSection___image___childMediaYaml___id',
   FeaturedSectionImageChildMediaYamlChildren = 'featuredSection___image___childMediaYaml___children',
   FeaturedSectionImageChildMediaYamlHeader = 'featuredSection___image___childMediaYaml___header',
   FeaturedSectionImageChildMediaYamlCategories = 'featuredSection___image___childMediaYaml___categories',
   FeaturedSectionImageChildMediaYamlFileAbsolutePath = 'featuredSection___image___childMediaYaml___fileAbsolutePath',
-  FeaturedSectionImageChildScienceYamlId = 'featuredSection___image___childScienceYaml___id',
-  FeaturedSectionImageChildScienceYamlChildren = 'featuredSection___image___childScienceYaml___children',
-  FeaturedSectionImageChildScienceYamlFileAbsolutePath = 'featuredSection___image___childScienceYaml___fileAbsolutePath',
   FeaturedSectionImageChildMarkdownRemarkId = 'featuredSection___image___childMarkdownRemark___id',
   FeaturedSectionImageChildMarkdownRemarkExcerpt = 'featuredSection___image___childMarkdownRemark___excerpt',
   FeaturedSectionImageChildMarkdownRemarkRawMarkdownBody = 'featuredSection___image___childMarkdownRemark___rawMarkdownBody',
@@ -30844,18 +33232,30 @@ export enum SharedYamlFieldsEnum {
   FeaturedSectionImageChildMarkdownRemarkTimeToRead = 'featuredSection___image___childMarkdownRemark___timeToRead',
   FeaturedSectionImageChildMarkdownRemarkTableOfContents = 'featuredSection___image___childMarkdownRemark___tableOfContents',
   FeaturedSectionImageChildMarkdownRemarkChildren = 'featuredSection___image___childMarkdownRemark___children',
-  FeaturedSectionImageChildTokenYamlId = 'featuredSection___image___childTokenYaml___id',
-  FeaturedSectionImageChildTokenYamlChildren = 'featuredSection___image___childTokenYaml___children',
-  FeaturedSectionImageChildTokenYamlFileAbsolutePath = 'featuredSection___image___childTokenYaml___fileAbsolutePath',
-  FeaturedSectionImageChildTeamYamlId = 'featuredSection___image___childTeamYaml___id',
-  FeaturedSectionImageChildTeamYamlChildren = 'featuredSection___image___childTeamYaml___children',
-  FeaturedSectionImageChildTeamYamlFileAbsolutePath = 'featuredSection___image___childTeamYaml___fileAbsolutePath',
+  FeaturedSectionImageChildHomeYamlId = 'featuredSection___image___childHomeYaml___id',
+  FeaturedSectionImageChildHomeYamlChildren = 'featuredSection___image___childHomeYaml___children',
+  FeaturedSectionImageChildHomeYamlFileAbsolutePath = 'featuredSection___image___childHomeYaml___fileAbsolutePath',
+  FeaturedSectionImageChildResourcesYamlId = 'featuredSection___image___childResourcesYaml___id',
+  FeaturedSectionImageChildResourcesYamlChildren = 'featuredSection___image___childResourcesYaml___children',
+  FeaturedSectionImageChildResourcesYamlFileAbsolutePath = 'featuredSection___image___childResourcesYaml___fileAbsolutePath',
+  FeaturedSectionImageChildScienceYamlId = 'featuredSection___image___childScienceYaml___id',
+  FeaturedSectionImageChildScienceYamlChildren = 'featuredSection___image___childScienceYaml___children',
+  FeaturedSectionImageChildScienceYamlFileAbsolutePath = 'featuredSection___image___childScienceYaml___fileAbsolutePath',
   FeaturedSectionImageChildWalletAddressRegistrationYamlId = 'featuredSection___image___childWalletAddressRegistrationYaml___id',
   FeaturedSectionImageChildWalletAddressRegistrationYamlChildren = 'featuredSection___image___childWalletAddressRegistrationYaml___children',
   FeaturedSectionImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'featuredSection___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  FeaturedSectionImageChildSharedYamlId = 'featuredSection___image___childSharedYaml___id',
+  FeaturedSectionImageChildSharedYamlChildren = 'featuredSection___image___childSharedYaml___children',
+  FeaturedSectionImageChildSharedYamlFileAbsolutePath = 'featuredSection___image___childSharedYaml___fileAbsolutePath',
+  FeaturedSectionImageChildTeamYamlId = 'featuredSection___image___childTeamYaml___id',
+  FeaturedSectionImageChildTeamYamlChildren = 'featuredSection___image___childTeamYaml___children',
+  FeaturedSectionImageChildTeamYamlFileAbsolutePath = 'featuredSection___image___childTeamYaml___fileAbsolutePath',
   FeaturedSectionImageChildValidatorsYamlId = 'featuredSection___image___childValidatorsYaml___id',
   FeaturedSectionImageChildValidatorsYamlChildren = 'featuredSection___image___childValidatorsYaml___children',
   FeaturedSectionImageChildValidatorsYamlFileAbsolutePath = 'featuredSection___image___childValidatorsYaml___fileAbsolutePath',
+  FeaturedSectionImageChildTokenYamlId = 'featuredSection___image___childTokenYaml___id',
+  FeaturedSectionImageChildTokenYamlChildren = 'featuredSection___image___childTokenYaml___children',
+  FeaturedSectionImageChildTokenYamlFileAbsolutePath = 'featuredSection___image___childTokenYaml___fileAbsolutePath',
   FeaturedSectionDescription = 'featuredSection___description',
   BlogSectionHeader = 'blogSection___header',
   BlogSectionPosts = 'blogSection___posts',
@@ -32514,7 +34914,6 @@ export type TokenYaml = Node & {
   tokenEconomics: Maybe<TokenYamlTokenEconomics>;
   infoSection: Maybe<TokenYamlInfoSection>;
   tokenPool: Maybe<TokenYamlTokenPool>;
-  unlockSchedule: Maybe<TokenYamlUnlockSchedule>;
   staking: Maybe<TokenYamlStaking>;
   blockExplorerSection: Maybe<TokenYamlBlockExplorerSection>;
   connectSection: Maybe<TokenYamlConnectSection>;
@@ -32722,33 +35121,32 @@ export enum TokenYamlFieldsEnum {
   InfoSectionImageInternalMediaType = 'infoSection___image___internal___mediaType',
   InfoSectionImageInternalOwner = 'infoSection___image___internal___owner',
   InfoSectionImageInternalType = 'infoSection___image___internal___type',
-  InfoSectionImageChildCommunityYamlId = 'infoSection___image___childCommunityYaml___id',
-  InfoSectionImageChildCommunityYamlChildren = 'infoSection___image___childCommunityYaml___children',
-  InfoSectionImageChildCommunityYamlFileAbsolutePath = 'infoSection___image___childCommunityYaml___fileAbsolutePath',
   InfoSectionImageChildCaseStudiesYamlId = 'infoSection___image___childCaseStudiesYaml___id',
   InfoSectionImageChildCaseStudiesYamlChildren = 'infoSection___image___childCaseStudiesYaml___children',
   InfoSectionImageChildCaseStudiesYamlFileAbsolutePath = 'infoSection___image___childCaseStudiesYaml___fileAbsolutePath',
-  InfoSectionImageChildDevelopersYamlId = 'infoSection___image___childDevelopersYaml___id',
-  InfoSectionImageChildDevelopersYamlChildren = 'infoSection___image___childDevelopersYaml___children',
-  InfoSectionImageChildDevelopersYamlFileAbsolutePath = 'infoSection___image___childDevelopersYaml___fileAbsolutePath',
   InfoSectionImageChildCaseStudyItemsYamlId = 'infoSection___image___childCaseStudyItemsYaml___id',
   InfoSectionImageChildCaseStudyItemsYamlChildren = 'infoSection___image___childCaseStudyItemsYaml___children',
   InfoSectionImageChildCaseStudyItemsYamlName = 'infoSection___image___childCaseStudyItemsYaml___name',
   InfoSectionImageChildCaseStudyItemsYamlSlug = 'infoSection___image___childCaseStudyItemsYaml___slug',
   InfoSectionImageChildCaseStudyItemsYamlDescription = 'infoSection___image___childCaseStudyItemsYaml___description',
   InfoSectionImageChildCaseStudyItemsYamlFileAbsolutePath = 'infoSection___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  InfoSectionImageChildHomeYamlId = 'infoSection___image___childHomeYaml___id',
-  InfoSectionImageChildHomeYamlChildren = 'infoSection___image___childHomeYaml___children',
-  InfoSectionImageChildHomeYamlFileAbsolutePath = 'infoSection___image___childHomeYaml___fileAbsolutePath',
+  InfoSectionImageChildDevelopersYamlId = 'infoSection___image___childDevelopersYaml___id',
+  InfoSectionImageChildDevelopersYamlChildren = 'infoSection___image___childDevelopersYaml___children',
+  InfoSectionImageChildDevelopersYamlFileAbsolutePath = 'infoSection___image___childDevelopersYaml___fileAbsolutePath',
+  InfoSectionImageChildCommunityYamlId = 'infoSection___image___childCommunityYaml___id',
+  InfoSectionImageChildCommunityYamlChildren = 'infoSection___image___childCommunityYaml___children',
+  InfoSectionImageChildCommunityYamlFileAbsolutePath = 'infoSection___image___childCommunityYaml___fileAbsolutePath',
   InfoSectionImageChildContactYamlId = 'infoSection___image___childContactYaml___id',
   InfoSectionImageChildContactYamlChildren = 'infoSection___image___childContactYaml___children',
   InfoSectionImageChildContactYamlHeader = 'infoSection___image___childContactYaml___header',
   InfoSectionImageChildContactYamlBody = 'infoSection___image___childContactYaml___body',
   InfoSectionImageChildContactYamlFileAbsolutePath = 'infoSection___image___childContactYaml___fileAbsolutePath',
-  InfoSectionImageChildFaqYamlId = 'infoSection___image___childFaqYaml___id',
-  InfoSectionImageChildFaqYamlChildren = 'infoSection___image___childFaqYaml___children',
-  InfoSectionImageChildFaqYamlCategories = 'infoSection___image___childFaqYaml___categories',
-  InfoSectionImageChildFaqYamlFileAbsolutePath = 'infoSection___image___childFaqYaml___fileAbsolutePath',
+  InfoSectionImageChildPressKitYamlId = 'infoSection___image___childPressKitYaml___id',
+  InfoSectionImageChildPressKitYamlChildren = 'infoSection___image___childPressKitYaml___children',
+  InfoSectionImageChildPressKitYamlFileAbsolutePath = 'infoSection___image___childPressKitYaml___fileAbsolutePath',
+  InfoSectionImageChildFundYamlId = 'infoSection___image___childFundYaml___id',
+  InfoSectionImageChildFundYamlChildren = 'infoSection___image___childFundYaml___children',
+  InfoSectionImageChildFundYamlFileAbsolutePath = 'infoSection___image___childFundYaml___fileAbsolutePath',
   InfoSectionImageChildInvestYamlId = 'infoSection___image___childInvestYaml___id',
   InfoSectionImageChildInvestYamlChildren = 'infoSection___image___childInvestYaml___children',
   InfoSectionImageChildInvestYamlFileAbsolutePath = 'infoSection___image___childInvestYaml___fileAbsolutePath',
@@ -32758,31 +35156,20 @@ export enum TokenYamlFieldsEnum {
   InfoSectionImageChildMainnetYamlLivecastLink = 'infoSection___image___childMainnetYaml___livecastLink',
   InfoSectionImageChildMainnetYamlSeoDescription = 'infoSection___image___childMainnetYaml___seoDescription',
   InfoSectionImageChildMainnetYamlFileAbsolutePath = 'infoSection___image___childMainnetYaml___fileAbsolutePath',
+  InfoSectionImageChildFaqYamlId = 'infoSection___image___childFaqYaml___id',
+  InfoSectionImageChildFaqYamlChildren = 'infoSection___image___childFaqYaml___children',
+  InfoSectionImageChildFaqYamlCategories = 'infoSection___image___childFaqYaml___categories',
+  InfoSectionImageChildFaqYamlFileAbsolutePath = 'infoSection___image___childFaqYaml___fileAbsolutePath',
   InfoSectionImageChildPartnersYamlId = 'infoSection___image___childPartnersYaml___id',
   InfoSectionImageChildPartnersYamlChildren = 'infoSection___image___childPartnersYaml___children',
   InfoSectionImageChildPartnersYamlHeader = 'infoSection___image___childPartnersYaml___header',
   InfoSectionImageChildPartnersYamlPartnerLogos = 'infoSection___image___childPartnersYaml___partnerLogos',
   InfoSectionImageChildPartnersYamlFileAbsolutePath = 'infoSection___image___childPartnersYaml___fileAbsolutePath',
-  InfoSectionImageChildFundYamlId = 'infoSection___image___childFundYaml___id',
-  InfoSectionImageChildFundYamlChildren = 'infoSection___image___childFundYaml___children',
-  InfoSectionImageChildFundYamlFileAbsolutePath = 'infoSection___image___childFundYaml___fileAbsolutePath',
-  InfoSectionImageChildResourcesYamlId = 'infoSection___image___childResourcesYaml___id',
-  InfoSectionImageChildResourcesYamlChildren = 'infoSection___image___childResourcesYaml___children',
-  InfoSectionImageChildResourcesYamlFileAbsolutePath = 'infoSection___image___childResourcesYaml___fileAbsolutePath',
-  InfoSectionImageChildPressKitYamlId = 'infoSection___image___childPressKitYaml___id',
-  InfoSectionImageChildPressKitYamlChildren = 'infoSection___image___childPressKitYaml___children',
-  InfoSectionImageChildPressKitYamlFileAbsolutePath = 'infoSection___image___childPressKitYaml___fileAbsolutePath',
-  InfoSectionImageChildSharedYamlId = 'infoSection___image___childSharedYaml___id',
-  InfoSectionImageChildSharedYamlChildren = 'infoSection___image___childSharedYaml___children',
-  InfoSectionImageChildSharedYamlFileAbsolutePath = 'infoSection___image___childSharedYaml___fileAbsolutePath',
   InfoSectionImageChildMediaYamlId = 'infoSection___image___childMediaYaml___id',
   InfoSectionImageChildMediaYamlChildren = 'infoSection___image___childMediaYaml___children',
   InfoSectionImageChildMediaYamlHeader = 'infoSection___image___childMediaYaml___header',
   InfoSectionImageChildMediaYamlCategories = 'infoSection___image___childMediaYaml___categories',
   InfoSectionImageChildMediaYamlFileAbsolutePath = 'infoSection___image___childMediaYaml___fileAbsolutePath',
-  InfoSectionImageChildScienceYamlId = 'infoSection___image___childScienceYaml___id',
-  InfoSectionImageChildScienceYamlChildren = 'infoSection___image___childScienceYaml___children',
-  InfoSectionImageChildScienceYamlFileAbsolutePath = 'infoSection___image___childScienceYaml___fileAbsolutePath',
   InfoSectionImageChildMarkdownRemarkId = 'infoSection___image___childMarkdownRemark___id',
   InfoSectionImageChildMarkdownRemarkExcerpt = 'infoSection___image___childMarkdownRemark___excerpt',
   InfoSectionImageChildMarkdownRemarkRawMarkdownBody = 'infoSection___image___childMarkdownRemark___rawMarkdownBody',
@@ -32794,18 +35181,30 @@ export enum TokenYamlFieldsEnum {
   InfoSectionImageChildMarkdownRemarkTimeToRead = 'infoSection___image___childMarkdownRemark___timeToRead',
   InfoSectionImageChildMarkdownRemarkTableOfContents = 'infoSection___image___childMarkdownRemark___tableOfContents',
   InfoSectionImageChildMarkdownRemarkChildren = 'infoSection___image___childMarkdownRemark___children',
-  InfoSectionImageChildTokenYamlId = 'infoSection___image___childTokenYaml___id',
-  InfoSectionImageChildTokenYamlChildren = 'infoSection___image___childTokenYaml___children',
-  InfoSectionImageChildTokenYamlFileAbsolutePath = 'infoSection___image___childTokenYaml___fileAbsolutePath',
-  InfoSectionImageChildTeamYamlId = 'infoSection___image___childTeamYaml___id',
-  InfoSectionImageChildTeamYamlChildren = 'infoSection___image___childTeamYaml___children',
-  InfoSectionImageChildTeamYamlFileAbsolutePath = 'infoSection___image___childTeamYaml___fileAbsolutePath',
+  InfoSectionImageChildHomeYamlId = 'infoSection___image___childHomeYaml___id',
+  InfoSectionImageChildHomeYamlChildren = 'infoSection___image___childHomeYaml___children',
+  InfoSectionImageChildHomeYamlFileAbsolutePath = 'infoSection___image___childHomeYaml___fileAbsolutePath',
+  InfoSectionImageChildResourcesYamlId = 'infoSection___image___childResourcesYaml___id',
+  InfoSectionImageChildResourcesYamlChildren = 'infoSection___image___childResourcesYaml___children',
+  InfoSectionImageChildResourcesYamlFileAbsolutePath = 'infoSection___image___childResourcesYaml___fileAbsolutePath',
+  InfoSectionImageChildScienceYamlId = 'infoSection___image___childScienceYaml___id',
+  InfoSectionImageChildScienceYamlChildren = 'infoSection___image___childScienceYaml___children',
+  InfoSectionImageChildScienceYamlFileAbsolutePath = 'infoSection___image___childScienceYaml___fileAbsolutePath',
   InfoSectionImageChildWalletAddressRegistrationYamlId = 'infoSection___image___childWalletAddressRegistrationYaml___id',
   InfoSectionImageChildWalletAddressRegistrationYamlChildren = 'infoSection___image___childWalletAddressRegistrationYaml___children',
   InfoSectionImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'infoSection___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  InfoSectionImageChildSharedYamlId = 'infoSection___image___childSharedYaml___id',
+  InfoSectionImageChildSharedYamlChildren = 'infoSection___image___childSharedYaml___children',
+  InfoSectionImageChildSharedYamlFileAbsolutePath = 'infoSection___image___childSharedYaml___fileAbsolutePath',
+  InfoSectionImageChildTeamYamlId = 'infoSection___image___childTeamYaml___id',
+  InfoSectionImageChildTeamYamlChildren = 'infoSection___image___childTeamYaml___children',
+  InfoSectionImageChildTeamYamlFileAbsolutePath = 'infoSection___image___childTeamYaml___fileAbsolutePath',
   InfoSectionImageChildValidatorsYamlId = 'infoSection___image___childValidatorsYaml___id',
   InfoSectionImageChildValidatorsYamlChildren = 'infoSection___image___childValidatorsYaml___children',
   InfoSectionImageChildValidatorsYamlFileAbsolutePath = 'infoSection___image___childValidatorsYaml___fileAbsolutePath',
+  InfoSectionImageChildTokenYamlId = 'infoSection___image___childTokenYaml___id',
+  InfoSectionImageChildTokenYamlChildren = 'infoSection___image___childTokenYaml___children',
+  InfoSectionImageChildTokenYamlFileAbsolutePath = 'infoSection___image___childTokenYaml___fileAbsolutePath',
   InfoSectionImageAltText = 'infoSection___imageAltText',
   InfoSectionImageTitle = 'infoSection___imageTitle',
   TokenPoolTitle = 'tokenPool___title',
@@ -32860,33 +35259,32 @@ export enum TokenYamlFieldsEnum {
   TokenPoolImageInternalMediaType = 'tokenPool___image___internal___mediaType',
   TokenPoolImageInternalOwner = 'tokenPool___image___internal___owner',
   TokenPoolImageInternalType = 'tokenPool___image___internal___type',
-  TokenPoolImageChildCommunityYamlId = 'tokenPool___image___childCommunityYaml___id',
-  TokenPoolImageChildCommunityYamlChildren = 'tokenPool___image___childCommunityYaml___children',
-  TokenPoolImageChildCommunityYamlFileAbsolutePath = 'tokenPool___image___childCommunityYaml___fileAbsolutePath',
   TokenPoolImageChildCaseStudiesYamlId = 'tokenPool___image___childCaseStudiesYaml___id',
   TokenPoolImageChildCaseStudiesYamlChildren = 'tokenPool___image___childCaseStudiesYaml___children',
   TokenPoolImageChildCaseStudiesYamlFileAbsolutePath = 'tokenPool___image___childCaseStudiesYaml___fileAbsolutePath',
-  TokenPoolImageChildDevelopersYamlId = 'tokenPool___image___childDevelopersYaml___id',
-  TokenPoolImageChildDevelopersYamlChildren = 'tokenPool___image___childDevelopersYaml___children',
-  TokenPoolImageChildDevelopersYamlFileAbsolutePath = 'tokenPool___image___childDevelopersYaml___fileAbsolutePath',
   TokenPoolImageChildCaseStudyItemsYamlId = 'tokenPool___image___childCaseStudyItemsYaml___id',
   TokenPoolImageChildCaseStudyItemsYamlChildren = 'tokenPool___image___childCaseStudyItemsYaml___children',
   TokenPoolImageChildCaseStudyItemsYamlName = 'tokenPool___image___childCaseStudyItemsYaml___name',
   TokenPoolImageChildCaseStudyItemsYamlSlug = 'tokenPool___image___childCaseStudyItemsYaml___slug',
   TokenPoolImageChildCaseStudyItemsYamlDescription = 'tokenPool___image___childCaseStudyItemsYaml___description',
   TokenPoolImageChildCaseStudyItemsYamlFileAbsolutePath = 'tokenPool___image___childCaseStudyItemsYaml___fileAbsolutePath',
-  TokenPoolImageChildHomeYamlId = 'tokenPool___image___childHomeYaml___id',
-  TokenPoolImageChildHomeYamlChildren = 'tokenPool___image___childHomeYaml___children',
-  TokenPoolImageChildHomeYamlFileAbsolutePath = 'tokenPool___image___childHomeYaml___fileAbsolutePath',
+  TokenPoolImageChildDevelopersYamlId = 'tokenPool___image___childDevelopersYaml___id',
+  TokenPoolImageChildDevelopersYamlChildren = 'tokenPool___image___childDevelopersYaml___children',
+  TokenPoolImageChildDevelopersYamlFileAbsolutePath = 'tokenPool___image___childDevelopersYaml___fileAbsolutePath',
+  TokenPoolImageChildCommunityYamlId = 'tokenPool___image___childCommunityYaml___id',
+  TokenPoolImageChildCommunityYamlChildren = 'tokenPool___image___childCommunityYaml___children',
+  TokenPoolImageChildCommunityYamlFileAbsolutePath = 'tokenPool___image___childCommunityYaml___fileAbsolutePath',
   TokenPoolImageChildContactYamlId = 'tokenPool___image___childContactYaml___id',
   TokenPoolImageChildContactYamlChildren = 'tokenPool___image___childContactYaml___children',
   TokenPoolImageChildContactYamlHeader = 'tokenPool___image___childContactYaml___header',
   TokenPoolImageChildContactYamlBody = 'tokenPool___image___childContactYaml___body',
   TokenPoolImageChildContactYamlFileAbsolutePath = 'tokenPool___image___childContactYaml___fileAbsolutePath',
-  TokenPoolImageChildFaqYamlId = 'tokenPool___image___childFaqYaml___id',
-  TokenPoolImageChildFaqYamlChildren = 'tokenPool___image___childFaqYaml___children',
-  TokenPoolImageChildFaqYamlCategories = 'tokenPool___image___childFaqYaml___categories',
-  TokenPoolImageChildFaqYamlFileAbsolutePath = 'tokenPool___image___childFaqYaml___fileAbsolutePath',
+  TokenPoolImageChildPressKitYamlId = 'tokenPool___image___childPressKitYaml___id',
+  TokenPoolImageChildPressKitYamlChildren = 'tokenPool___image___childPressKitYaml___children',
+  TokenPoolImageChildPressKitYamlFileAbsolutePath = 'tokenPool___image___childPressKitYaml___fileAbsolutePath',
+  TokenPoolImageChildFundYamlId = 'tokenPool___image___childFundYaml___id',
+  TokenPoolImageChildFundYamlChildren = 'tokenPool___image___childFundYaml___children',
+  TokenPoolImageChildFundYamlFileAbsolutePath = 'tokenPool___image___childFundYaml___fileAbsolutePath',
   TokenPoolImageChildInvestYamlId = 'tokenPool___image___childInvestYaml___id',
   TokenPoolImageChildInvestYamlChildren = 'tokenPool___image___childInvestYaml___children',
   TokenPoolImageChildInvestYamlFileAbsolutePath = 'tokenPool___image___childInvestYaml___fileAbsolutePath',
@@ -32896,31 +35294,20 @@ export enum TokenYamlFieldsEnum {
   TokenPoolImageChildMainnetYamlLivecastLink = 'tokenPool___image___childMainnetYaml___livecastLink',
   TokenPoolImageChildMainnetYamlSeoDescription = 'tokenPool___image___childMainnetYaml___seoDescription',
   TokenPoolImageChildMainnetYamlFileAbsolutePath = 'tokenPool___image___childMainnetYaml___fileAbsolutePath',
+  TokenPoolImageChildFaqYamlId = 'tokenPool___image___childFaqYaml___id',
+  TokenPoolImageChildFaqYamlChildren = 'tokenPool___image___childFaqYaml___children',
+  TokenPoolImageChildFaqYamlCategories = 'tokenPool___image___childFaqYaml___categories',
+  TokenPoolImageChildFaqYamlFileAbsolutePath = 'tokenPool___image___childFaqYaml___fileAbsolutePath',
   TokenPoolImageChildPartnersYamlId = 'tokenPool___image___childPartnersYaml___id',
   TokenPoolImageChildPartnersYamlChildren = 'tokenPool___image___childPartnersYaml___children',
   TokenPoolImageChildPartnersYamlHeader = 'tokenPool___image___childPartnersYaml___header',
   TokenPoolImageChildPartnersYamlPartnerLogos = 'tokenPool___image___childPartnersYaml___partnerLogos',
   TokenPoolImageChildPartnersYamlFileAbsolutePath = 'tokenPool___image___childPartnersYaml___fileAbsolutePath',
-  TokenPoolImageChildFundYamlId = 'tokenPool___image___childFundYaml___id',
-  TokenPoolImageChildFundYamlChildren = 'tokenPool___image___childFundYaml___children',
-  TokenPoolImageChildFundYamlFileAbsolutePath = 'tokenPool___image___childFundYaml___fileAbsolutePath',
-  TokenPoolImageChildResourcesYamlId = 'tokenPool___image___childResourcesYaml___id',
-  TokenPoolImageChildResourcesYamlChildren = 'tokenPool___image___childResourcesYaml___children',
-  TokenPoolImageChildResourcesYamlFileAbsolutePath = 'tokenPool___image___childResourcesYaml___fileAbsolutePath',
-  TokenPoolImageChildPressKitYamlId = 'tokenPool___image___childPressKitYaml___id',
-  TokenPoolImageChildPressKitYamlChildren = 'tokenPool___image___childPressKitYaml___children',
-  TokenPoolImageChildPressKitYamlFileAbsolutePath = 'tokenPool___image___childPressKitYaml___fileAbsolutePath',
-  TokenPoolImageChildSharedYamlId = 'tokenPool___image___childSharedYaml___id',
-  TokenPoolImageChildSharedYamlChildren = 'tokenPool___image___childSharedYaml___children',
-  TokenPoolImageChildSharedYamlFileAbsolutePath = 'tokenPool___image___childSharedYaml___fileAbsolutePath',
   TokenPoolImageChildMediaYamlId = 'tokenPool___image___childMediaYaml___id',
   TokenPoolImageChildMediaYamlChildren = 'tokenPool___image___childMediaYaml___children',
   TokenPoolImageChildMediaYamlHeader = 'tokenPool___image___childMediaYaml___header',
   TokenPoolImageChildMediaYamlCategories = 'tokenPool___image___childMediaYaml___categories',
   TokenPoolImageChildMediaYamlFileAbsolutePath = 'tokenPool___image___childMediaYaml___fileAbsolutePath',
-  TokenPoolImageChildScienceYamlId = 'tokenPool___image___childScienceYaml___id',
-  TokenPoolImageChildScienceYamlChildren = 'tokenPool___image___childScienceYaml___children',
-  TokenPoolImageChildScienceYamlFileAbsolutePath = 'tokenPool___image___childScienceYaml___fileAbsolutePath',
   TokenPoolImageChildMarkdownRemarkId = 'tokenPool___image___childMarkdownRemark___id',
   TokenPoolImageChildMarkdownRemarkExcerpt = 'tokenPool___image___childMarkdownRemark___excerpt',
   TokenPoolImageChildMarkdownRemarkRawMarkdownBody = 'tokenPool___image___childMarkdownRemark___rawMarkdownBody',
@@ -32932,18 +35319,30 @@ export enum TokenYamlFieldsEnum {
   TokenPoolImageChildMarkdownRemarkTimeToRead = 'tokenPool___image___childMarkdownRemark___timeToRead',
   TokenPoolImageChildMarkdownRemarkTableOfContents = 'tokenPool___image___childMarkdownRemark___tableOfContents',
   TokenPoolImageChildMarkdownRemarkChildren = 'tokenPool___image___childMarkdownRemark___children',
-  TokenPoolImageChildTokenYamlId = 'tokenPool___image___childTokenYaml___id',
-  TokenPoolImageChildTokenYamlChildren = 'tokenPool___image___childTokenYaml___children',
-  TokenPoolImageChildTokenYamlFileAbsolutePath = 'tokenPool___image___childTokenYaml___fileAbsolutePath',
-  TokenPoolImageChildTeamYamlId = 'tokenPool___image___childTeamYaml___id',
-  TokenPoolImageChildTeamYamlChildren = 'tokenPool___image___childTeamYaml___children',
-  TokenPoolImageChildTeamYamlFileAbsolutePath = 'tokenPool___image___childTeamYaml___fileAbsolutePath',
+  TokenPoolImageChildHomeYamlId = 'tokenPool___image___childHomeYaml___id',
+  TokenPoolImageChildHomeYamlChildren = 'tokenPool___image___childHomeYaml___children',
+  TokenPoolImageChildHomeYamlFileAbsolutePath = 'tokenPool___image___childHomeYaml___fileAbsolutePath',
+  TokenPoolImageChildResourcesYamlId = 'tokenPool___image___childResourcesYaml___id',
+  TokenPoolImageChildResourcesYamlChildren = 'tokenPool___image___childResourcesYaml___children',
+  TokenPoolImageChildResourcesYamlFileAbsolutePath = 'tokenPool___image___childResourcesYaml___fileAbsolutePath',
+  TokenPoolImageChildScienceYamlId = 'tokenPool___image___childScienceYaml___id',
+  TokenPoolImageChildScienceYamlChildren = 'tokenPool___image___childScienceYaml___children',
+  TokenPoolImageChildScienceYamlFileAbsolutePath = 'tokenPool___image___childScienceYaml___fileAbsolutePath',
   TokenPoolImageChildWalletAddressRegistrationYamlId = 'tokenPool___image___childWalletAddressRegistrationYaml___id',
   TokenPoolImageChildWalletAddressRegistrationYamlChildren = 'tokenPool___image___childWalletAddressRegistrationYaml___children',
   TokenPoolImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'tokenPool___image___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  TokenPoolImageChildSharedYamlId = 'tokenPool___image___childSharedYaml___id',
+  TokenPoolImageChildSharedYamlChildren = 'tokenPool___image___childSharedYaml___children',
+  TokenPoolImageChildSharedYamlFileAbsolutePath = 'tokenPool___image___childSharedYaml___fileAbsolutePath',
+  TokenPoolImageChildTeamYamlId = 'tokenPool___image___childTeamYaml___id',
+  TokenPoolImageChildTeamYamlChildren = 'tokenPool___image___childTeamYaml___children',
+  TokenPoolImageChildTeamYamlFileAbsolutePath = 'tokenPool___image___childTeamYaml___fileAbsolutePath',
   TokenPoolImageChildValidatorsYamlId = 'tokenPool___image___childValidatorsYaml___id',
   TokenPoolImageChildValidatorsYamlChildren = 'tokenPool___image___childValidatorsYaml___children',
   TokenPoolImageChildValidatorsYamlFileAbsolutePath = 'tokenPool___image___childValidatorsYaml___fileAbsolutePath',
+  TokenPoolImageChildTokenYamlId = 'tokenPool___image___childTokenYaml___id',
+  TokenPoolImageChildTokenYamlChildren = 'tokenPool___image___childTokenYaml___children',
+  TokenPoolImageChildTokenYamlFileAbsolutePath = 'tokenPool___image___childTokenYaml___fileAbsolutePath',
   TokenPoolMobileImageSourceInstanceName = 'tokenPool___mobileImage___sourceInstanceName',
   TokenPoolMobileImageAbsolutePath = 'tokenPool___mobileImage___absolutePath',
   TokenPoolMobileImageRelativePath = 'tokenPool___mobileImage___relativePath',
@@ -32994,33 +35393,32 @@ export enum TokenYamlFieldsEnum {
   TokenPoolMobileImageInternalMediaType = 'tokenPool___mobileImage___internal___mediaType',
   TokenPoolMobileImageInternalOwner = 'tokenPool___mobileImage___internal___owner',
   TokenPoolMobileImageInternalType = 'tokenPool___mobileImage___internal___type',
-  TokenPoolMobileImageChildCommunityYamlId = 'tokenPool___mobileImage___childCommunityYaml___id',
-  TokenPoolMobileImageChildCommunityYamlChildren = 'tokenPool___mobileImage___childCommunityYaml___children',
-  TokenPoolMobileImageChildCommunityYamlFileAbsolutePath = 'tokenPool___mobileImage___childCommunityYaml___fileAbsolutePath',
   TokenPoolMobileImageChildCaseStudiesYamlId = 'tokenPool___mobileImage___childCaseStudiesYaml___id',
   TokenPoolMobileImageChildCaseStudiesYamlChildren = 'tokenPool___mobileImage___childCaseStudiesYaml___children',
   TokenPoolMobileImageChildCaseStudiesYamlFileAbsolutePath = 'tokenPool___mobileImage___childCaseStudiesYaml___fileAbsolutePath',
-  TokenPoolMobileImageChildDevelopersYamlId = 'tokenPool___mobileImage___childDevelopersYaml___id',
-  TokenPoolMobileImageChildDevelopersYamlChildren = 'tokenPool___mobileImage___childDevelopersYaml___children',
-  TokenPoolMobileImageChildDevelopersYamlFileAbsolutePath = 'tokenPool___mobileImage___childDevelopersYaml___fileAbsolutePath',
   TokenPoolMobileImageChildCaseStudyItemsYamlId = 'tokenPool___mobileImage___childCaseStudyItemsYaml___id',
   TokenPoolMobileImageChildCaseStudyItemsYamlChildren = 'tokenPool___mobileImage___childCaseStudyItemsYaml___children',
   TokenPoolMobileImageChildCaseStudyItemsYamlName = 'tokenPool___mobileImage___childCaseStudyItemsYaml___name',
   TokenPoolMobileImageChildCaseStudyItemsYamlSlug = 'tokenPool___mobileImage___childCaseStudyItemsYaml___slug',
   TokenPoolMobileImageChildCaseStudyItemsYamlDescription = 'tokenPool___mobileImage___childCaseStudyItemsYaml___description',
   TokenPoolMobileImageChildCaseStudyItemsYamlFileAbsolutePath = 'tokenPool___mobileImage___childCaseStudyItemsYaml___fileAbsolutePath',
-  TokenPoolMobileImageChildHomeYamlId = 'tokenPool___mobileImage___childHomeYaml___id',
-  TokenPoolMobileImageChildHomeYamlChildren = 'tokenPool___mobileImage___childHomeYaml___children',
-  TokenPoolMobileImageChildHomeYamlFileAbsolutePath = 'tokenPool___mobileImage___childHomeYaml___fileAbsolutePath',
+  TokenPoolMobileImageChildDevelopersYamlId = 'tokenPool___mobileImage___childDevelopersYaml___id',
+  TokenPoolMobileImageChildDevelopersYamlChildren = 'tokenPool___mobileImage___childDevelopersYaml___children',
+  TokenPoolMobileImageChildDevelopersYamlFileAbsolutePath = 'tokenPool___mobileImage___childDevelopersYaml___fileAbsolutePath',
+  TokenPoolMobileImageChildCommunityYamlId = 'tokenPool___mobileImage___childCommunityYaml___id',
+  TokenPoolMobileImageChildCommunityYamlChildren = 'tokenPool___mobileImage___childCommunityYaml___children',
+  TokenPoolMobileImageChildCommunityYamlFileAbsolutePath = 'tokenPool___mobileImage___childCommunityYaml___fileAbsolutePath',
   TokenPoolMobileImageChildContactYamlId = 'tokenPool___mobileImage___childContactYaml___id',
   TokenPoolMobileImageChildContactYamlChildren = 'tokenPool___mobileImage___childContactYaml___children',
   TokenPoolMobileImageChildContactYamlHeader = 'tokenPool___mobileImage___childContactYaml___header',
   TokenPoolMobileImageChildContactYamlBody = 'tokenPool___mobileImage___childContactYaml___body',
   TokenPoolMobileImageChildContactYamlFileAbsolutePath = 'tokenPool___mobileImage___childContactYaml___fileAbsolutePath',
-  TokenPoolMobileImageChildFaqYamlId = 'tokenPool___mobileImage___childFaqYaml___id',
-  TokenPoolMobileImageChildFaqYamlChildren = 'tokenPool___mobileImage___childFaqYaml___children',
-  TokenPoolMobileImageChildFaqYamlCategories = 'tokenPool___mobileImage___childFaqYaml___categories',
-  TokenPoolMobileImageChildFaqYamlFileAbsolutePath = 'tokenPool___mobileImage___childFaqYaml___fileAbsolutePath',
+  TokenPoolMobileImageChildPressKitYamlId = 'tokenPool___mobileImage___childPressKitYaml___id',
+  TokenPoolMobileImageChildPressKitYamlChildren = 'tokenPool___mobileImage___childPressKitYaml___children',
+  TokenPoolMobileImageChildPressKitYamlFileAbsolutePath = 'tokenPool___mobileImage___childPressKitYaml___fileAbsolutePath',
+  TokenPoolMobileImageChildFundYamlId = 'tokenPool___mobileImage___childFundYaml___id',
+  TokenPoolMobileImageChildFundYamlChildren = 'tokenPool___mobileImage___childFundYaml___children',
+  TokenPoolMobileImageChildFundYamlFileAbsolutePath = 'tokenPool___mobileImage___childFundYaml___fileAbsolutePath',
   TokenPoolMobileImageChildInvestYamlId = 'tokenPool___mobileImage___childInvestYaml___id',
   TokenPoolMobileImageChildInvestYamlChildren = 'tokenPool___mobileImage___childInvestYaml___children',
   TokenPoolMobileImageChildInvestYamlFileAbsolutePath = 'tokenPool___mobileImage___childInvestYaml___fileAbsolutePath',
@@ -33030,31 +35428,20 @@ export enum TokenYamlFieldsEnum {
   TokenPoolMobileImageChildMainnetYamlLivecastLink = 'tokenPool___mobileImage___childMainnetYaml___livecastLink',
   TokenPoolMobileImageChildMainnetYamlSeoDescription = 'tokenPool___mobileImage___childMainnetYaml___seoDescription',
   TokenPoolMobileImageChildMainnetYamlFileAbsolutePath = 'tokenPool___mobileImage___childMainnetYaml___fileAbsolutePath',
+  TokenPoolMobileImageChildFaqYamlId = 'tokenPool___mobileImage___childFaqYaml___id',
+  TokenPoolMobileImageChildFaqYamlChildren = 'tokenPool___mobileImage___childFaqYaml___children',
+  TokenPoolMobileImageChildFaqYamlCategories = 'tokenPool___mobileImage___childFaqYaml___categories',
+  TokenPoolMobileImageChildFaqYamlFileAbsolutePath = 'tokenPool___mobileImage___childFaqYaml___fileAbsolutePath',
   TokenPoolMobileImageChildPartnersYamlId = 'tokenPool___mobileImage___childPartnersYaml___id',
   TokenPoolMobileImageChildPartnersYamlChildren = 'tokenPool___mobileImage___childPartnersYaml___children',
   TokenPoolMobileImageChildPartnersYamlHeader = 'tokenPool___mobileImage___childPartnersYaml___header',
   TokenPoolMobileImageChildPartnersYamlPartnerLogos = 'tokenPool___mobileImage___childPartnersYaml___partnerLogos',
   TokenPoolMobileImageChildPartnersYamlFileAbsolutePath = 'tokenPool___mobileImage___childPartnersYaml___fileAbsolutePath',
-  TokenPoolMobileImageChildFundYamlId = 'tokenPool___mobileImage___childFundYaml___id',
-  TokenPoolMobileImageChildFundYamlChildren = 'tokenPool___mobileImage___childFundYaml___children',
-  TokenPoolMobileImageChildFundYamlFileAbsolutePath = 'tokenPool___mobileImage___childFundYaml___fileAbsolutePath',
-  TokenPoolMobileImageChildResourcesYamlId = 'tokenPool___mobileImage___childResourcesYaml___id',
-  TokenPoolMobileImageChildResourcesYamlChildren = 'tokenPool___mobileImage___childResourcesYaml___children',
-  TokenPoolMobileImageChildResourcesYamlFileAbsolutePath = 'tokenPool___mobileImage___childResourcesYaml___fileAbsolutePath',
-  TokenPoolMobileImageChildPressKitYamlId = 'tokenPool___mobileImage___childPressKitYaml___id',
-  TokenPoolMobileImageChildPressKitYamlChildren = 'tokenPool___mobileImage___childPressKitYaml___children',
-  TokenPoolMobileImageChildPressKitYamlFileAbsolutePath = 'tokenPool___mobileImage___childPressKitYaml___fileAbsolutePath',
-  TokenPoolMobileImageChildSharedYamlId = 'tokenPool___mobileImage___childSharedYaml___id',
-  TokenPoolMobileImageChildSharedYamlChildren = 'tokenPool___mobileImage___childSharedYaml___children',
-  TokenPoolMobileImageChildSharedYamlFileAbsolutePath = 'tokenPool___mobileImage___childSharedYaml___fileAbsolutePath',
   TokenPoolMobileImageChildMediaYamlId = 'tokenPool___mobileImage___childMediaYaml___id',
   TokenPoolMobileImageChildMediaYamlChildren = 'tokenPool___mobileImage___childMediaYaml___children',
   TokenPoolMobileImageChildMediaYamlHeader = 'tokenPool___mobileImage___childMediaYaml___header',
   TokenPoolMobileImageChildMediaYamlCategories = 'tokenPool___mobileImage___childMediaYaml___categories',
   TokenPoolMobileImageChildMediaYamlFileAbsolutePath = 'tokenPool___mobileImage___childMediaYaml___fileAbsolutePath',
-  TokenPoolMobileImageChildScienceYamlId = 'tokenPool___mobileImage___childScienceYaml___id',
-  TokenPoolMobileImageChildScienceYamlChildren = 'tokenPool___mobileImage___childScienceYaml___children',
-  TokenPoolMobileImageChildScienceYamlFileAbsolutePath = 'tokenPool___mobileImage___childScienceYaml___fileAbsolutePath',
   TokenPoolMobileImageChildMarkdownRemarkId = 'tokenPool___mobileImage___childMarkdownRemark___id',
   TokenPoolMobileImageChildMarkdownRemarkExcerpt = 'tokenPool___mobileImage___childMarkdownRemark___excerpt',
   TokenPoolMobileImageChildMarkdownRemarkRawMarkdownBody = 'tokenPool___mobileImage___childMarkdownRemark___rawMarkdownBody',
@@ -33066,20 +35453,30 @@ export enum TokenYamlFieldsEnum {
   TokenPoolMobileImageChildMarkdownRemarkTimeToRead = 'tokenPool___mobileImage___childMarkdownRemark___timeToRead',
   TokenPoolMobileImageChildMarkdownRemarkTableOfContents = 'tokenPool___mobileImage___childMarkdownRemark___tableOfContents',
   TokenPoolMobileImageChildMarkdownRemarkChildren = 'tokenPool___mobileImage___childMarkdownRemark___children',
-  TokenPoolMobileImageChildTokenYamlId = 'tokenPool___mobileImage___childTokenYaml___id',
-  TokenPoolMobileImageChildTokenYamlChildren = 'tokenPool___mobileImage___childTokenYaml___children',
-  TokenPoolMobileImageChildTokenYamlFileAbsolutePath = 'tokenPool___mobileImage___childTokenYaml___fileAbsolutePath',
-  TokenPoolMobileImageChildTeamYamlId = 'tokenPool___mobileImage___childTeamYaml___id',
-  TokenPoolMobileImageChildTeamYamlChildren = 'tokenPool___mobileImage___childTeamYaml___children',
-  TokenPoolMobileImageChildTeamYamlFileAbsolutePath = 'tokenPool___mobileImage___childTeamYaml___fileAbsolutePath',
+  TokenPoolMobileImageChildHomeYamlId = 'tokenPool___mobileImage___childHomeYaml___id',
+  TokenPoolMobileImageChildHomeYamlChildren = 'tokenPool___mobileImage___childHomeYaml___children',
+  TokenPoolMobileImageChildHomeYamlFileAbsolutePath = 'tokenPool___mobileImage___childHomeYaml___fileAbsolutePath',
+  TokenPoolMobileImageChildResourcesYamlId = 'tokenPool___mobileImage___childResourcesYaml___id',
+  TokenPoolMobileImageChildResourcesYamlChildren = 'tokenPool___mobileImage___childResourcesYaml___children',
+  TokenPoolMobileImageChildResourcesYamlFileAbsolutePath = 'tokenPool___mobileImage___childResourcesYaml___fileAbsolutePath',
+  TokenPoolMobileImageChildScienceYamlId = 'tokenPool___mobileImage___childScienceYaml___id',
+  TokenPoolMobileImageChildScienceYamlChildren = 'tokenPool___mobileImage___childScienceYaml___children',
+  TokenPoolMobileImageChildScienceYamlFileAbsolutePath = 'tokenPool___mobileImage___childScienceYaml___fileAbsolutePath',
   TokenPoolMobileImageChildWalletAddressRegistrationYamlId = 'tokenPool___mobileImage___childWalletAddressRegistrationYaml___id',
   TokenPoolMobileImageChildWalletAddressRegistrationYamlChildren = 'tokenPool___mobileImage___childWalletAddressRegistrationYaml___children',
   TokenPoolMobileImageChildWalletAddressRegistrationYamlFileAbsolutePath = 'tokenPool___mobileImage___childWalletAddressRegistrationYaml___fileAbsolutePath',
+  TokenPoolMobileImageChildSharedYamlId = 'tokenPool___mobileImage___childSharedYaml___id',
+  TokenPoolMobileImageChildSharedYamlChildren = 'tokenPool___mobileImage___childSharedYaml___children',
+  TokenPoolMobileImageChildSharedYamlFileAbsolutePath = 'tokenPool___mobileImage___childSharedYaml___fileAbsolutePath',
+  TokenPoolMobileImageChildTeamYamlId = 'tokenPool___mobileImage___childTeamYaml___id',
+  TokenPoolMobileImageChildTeamYamlChildren = 'tokenPool___mobileImage___childTeamYaml___children',
+  TokenPoolMobileImageChildTeamYamlFileAbsolutePath = 'tokenPool___mobileImage___childTeamYaml___fileAbsolutePath',
   TokenPoolMobileImageChildValidatorsYamlId = 'tokenPool___mobileImage___childValidatorsYaml___id',
   TokenPoolMobileImageChildValidatorsYamlChildren = 'tokenPool___mobileImage___childValidatorsYaml___children',
   TokenPoolMobileImageChildValidatorsYamlFileAbsolutePath = 'tokenPool___mobileImage___childValidatorsYaml___fileAbsolutePath',
-  UnlockScheduleTitle = 'unlockSchedule___title',
-  UnlockScheduleSubtitle = 'unlockSchedule___subtitle',
+  TokenPoolMobileImageChildTokenYamlId = 'tokenPool___mobileImage___childTokenYaml___id',
+  TokenPoolMobileImageChildTokenYamlChildren = 'tokenPool___mobileImage___childTokenYaml___children',
+  TokenPoolMobileImageChildTokenYamlFileAbsolutePath = 'tokenPool___mobileImage___childTokenYaml___fileAbsolutePath',
   StakingTitle = 'staking___title',
   StakingBody = 'staking___body',
   StakingButtonText = 'staking___buttonText',
@@ -33105,7 +35502,6 @@ export type TokenYamlFilterInput = {
   tokenEconomics: Maybe<TokenYamlTokenEconomicsFilterInput>;
   infoSection: Maybe<TokenYamlInfoSectionFilterInput>;
   tokenPool: Maybe<TokenYamlTokenPoolFilterInput>;
-  unlockSchedule: Maybe<TokenYamlUnlockScheduleFilterInput>;
   staking: Maybe<TokenYamlStakingFilterInput>;
   blockExplorerSection: Maybe<TokenYamlBlockExplorerSectionFilterInput>;
   connectSection: Maybe<TokenYamlConnectSectionFilterInput>;
@@ -33223,17 +35619,6 @@ export type TokenYamlTopSection = {
 export type TokenYamlTopSectionFilterInput = {
   header: Maybe<StringQueryOperatorInput>;
   body: Maybe<StringQueryOperatorInput>;
-};
-
-export type TokenYamlUnlockSchedule = {
-  __typename?: 'TokenYamlUnlockSchedule';
-  title: Maybe<Scalars['String']>;
-  subtitle: Maybe<Scalars['String']>;
-};
-
-export type TokenYamlUnlockScheduleFilterInput = {
-  title: Maybe<StringQueryOperatorInput>;
-  subtitle: Maybe<StringQueryOperatorInput>;
 };
 
 export type ValidatorsYaml = Node & {
@@ -33889,6 +36274,22 @@ export type ImageWithPreviewFragment = (
   & ImageFragment
 );
 
+export type TeamSectionFieldsFragment = (
+  { __typename?: 'SanityTeamSection' }
+  & Pick<SanityTeamSection, 'title'>
+  & { members: Maybe<Array<Maybe<(
+    { __typename?: 'SanityRegenTeamMember' }
+    & Pick<SanityRegenTeamMember, 'name' | 'title' | 'description' | 'linkedinUrl' | 'twitterUrl' | 'githubUrl'>
+    & { image: Maybe<(
+      { __typename?: 'SanityImage' }
+      & { asset: Maybe<(
+        { __typename?: 'SanityImageAsset' }
+        & Pick<SanityImageAsset, 'url' | 'extension'>
+      )> }
+    )> }
+  )>>> }
+);
+
 export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -34179,10 +36580,10 @@ export type Unnamed_12_Query = (
   )> }
 );
 
-export type Unnamed_13_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TokenPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_13_Query = (
+export type TokenPageQuery = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -34196,22 +36597,22 @@ export type Unnamed_13_Query = (
         & GatsbyImageSharpFluidFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'TokenYaml' }
-    & { seo: Maybe<(
-      { __typename?: 'TokenYamlSeo' }
-      & Pick<TokenYamlSeo, 'title' | 'description'>
+  )>, sanityTokenPage: Maybe<(
+    { __typename?: 'SanityTokenPage' }
+    & { topSection: Maybe<(
+      { __typename?: 'SanityTitleBody' }
+      & Pick<SanityTitleBody, 'title' | 'body'>
     )>, newsletterSection: Maybe<(
-      { __typename?: 'TokenYamlNewsletterSection' }
-      & Pick<TokenYamlNewsletterSection, 'header' | 'buttonText' | 'inputText'>
+      { __typename?: 'SanityTokenNewsletterSection' }
+      & Pick<SanityTokenNewsletterSection, 'header' | 'buttonText' | 'inputText'>
     )> }
   )> }
 );
 
-export type Unnamed_14_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_13_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_14_Query = (
+export type Unnamed_13_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -34219,10 +36620,10 @@ export type Unnamed_14_Query = (
   )> }
 );
 
-export type Unnamed_15_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_14_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_15_Query = (
+export type Unnamed_14_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -34628,10 +37029,10 @@ export type DevOpenAgSectionQuery = (
   )> }
 );
 
-export type Unnamed_16_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_15_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_16_Query = (
+export type Unnamed_15_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35392,10 +37793,10 @@ export type ResourcesTopSectionQuery = (
   )> }
 );
 
-export type Unnamed_17_QueryVariables = Exact<{ [key: string]: never; }>;
+export type ScienceCommunitySectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_17_Query = (
+export type ScienceCommunitySectionQuery = (
   { __typename?: 'Query' }
   & { arrow: Maybe<(
     { __typename?: 'File' }
@@ -35415,82 +37816,22 @@ export type Unnamed_17_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, content: Maybe<(
-    { __typename?: 'ScienceYaml' }
+  )>, sanitySciencePage: Maybe<(
+    { __typename?: 'SanitySciencePage' }
     & { communitySection: Maybe<(
-      { __typename?: 'ScienceYamlCommunitySection' }
-      & Pick<ScienceYamlCommunitySection, 'caption' | 'header'>
+      { __typename?: 'SanityScienceCommunitySection' }
+      & Pick<SanityScienceCommunitySection, 'caption' | 'header'>
       & { members: Maybe<Array<Maybe<(
-        { __typename?: 'ScienceYamlCommunitySectionMembers' }
-        & Pick<ScienceYamlCommunitySectionMembers, 'name' | 'role' | 'description'>
+        { __typename?: 'SanityScienceCommunityMember' }
+        & Pick<SanityScienceCommunityMember, 'name' | '_rawRole' | '_rawDescription'>
         & { image: Maybe<(
-          { __typename?: 'File' }
-          & Pick<File, 'publicURL'>
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type Unnamed_18_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_18_Query = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, content: Maybe<(
-    { __typename?: 'ScienceYaml' }
-    & { openScienceSection: Maybe<(
-      { __typename?: 'ScienceYamlOpenScienceSection' }
-      & Pick<ScienceYamlOpenScienceSection, 'caption'>
-      & { header: Maybe<(
-        { __typename?: 'ScienceYamlOpenScienceSectionHeader' }
-        & Pick<ScienceYamlOpenScienceSectionHeader, 'start' | 'green'>
-      )>, phases: Maybe<Array<Maybe<(
-        { __typename?: 'ScienceYamlOpenScienceSectionPhases' }
-        & Pick<ScienceYamlOpenScienceSectionPhases, 'title' | 'description'>
-      )>>> }
-    )> }
-  )> }
-);
-
-export type Unnamed_19_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_19_Query = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, content: Maybe<(
-    { __typename?: 'ScienceYaml' }
-    & { partnershipsSection: Maybe<(
-      { __typename?: 'ScienceYamlPartnershipsSection' }
-      & Pick<ScienceYamlPartnershipsSection, 'header'>
-      & { partners: Maybe<Array<Maybe<(
-        { __typename?: 'ScienceYamlPartnershipsSectionPartners' }
-        & Pick<ScienceYamlPartnershipsSectionPartners, 'description'>
-        & { image: Maybe<(
-          { __typename?: 'File' }
-          & { childImageSharp: Maybe<(
-            { __typename?: 'ImageSharp' }
-            & { fluid: Maybe<(
-              { __typename?: 'ImageSharpFluid' }
-              & GatsbyImageSharpFluid_WithWebpFragment
+          { __typename?: 'SanityCustomImage' }
+          & Pick<SanityCustomImage, 'imageHref'>
+          & { image: Maybe<(
+            { __typename?: 'SanityImage' }
+            & { asset: Maybe<(
+              { __typename?: 'SanityImageAsset' }
+              & Pick<SanityImageAsset, 'url'>
             )> }
           )> }
         )> }
@@ -35499,38 +37840,97 @@ export type Unnamed_19_Query = (
   )> }
 );
 
-export type Unnamed_20_QueryVariables = Exact<{ [key: string]: never; }>;
+export type ScienceOpenScienceSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_20_Query = (
+export type ScienceOpenScienceSectionQuery = (
   { __typename?: 'Query' }
-  & { content: Maybe<(
-    { __typename?: 'ScienceYaml' }
-    & { titleDescriptionSection: Maybe<(
-      { __typename?: 'ScienceYamlTitleDescriptionSection' }
-      & Pick<ScienceYamlTitleDescriptionSection, 'header' | 'description'>
-    )>, practicesOutcomesSection: Maybe<(
-      { __typename?: 'ScienceYamlPracticesOutcomesSection' }
-      & { outcomes: Maybe<(
-        { __typename?: 'ScienceYamlPracticesOutcomesSectionOutcomes' }
-        & Pick<ScienceYamlPracticesOutcomesSectionOutcomes, 'header'>
-        & { items: Maybe<Array<Maybe<(
-          { __typename?: 'ScienceYamlPracticesOutcomesSectionOutcomesItems' }
-          & Pick<ScienceYamlPracticesOutcomesSectionOutcomesItems, 'header' | 'description'>
-          & { image: Maybe<(
-            { __typename?: 'File' }
-            & Pick<File, 'extension' | 'publicURL'>
-          )> }
-        )>>> }
+  & { background: Maybe<(
+    { __typename?: 'File' }
+    & { childImageSharp: Maybe<(
+      { __typename?: 'ImageSharp' }
+      & { fluid: Maybe<(
+        { __typename?: 'ImageSharpFluid' }
+        & GatsbyImageSharpFluid_WithWebpFragment
       )> }
+    )> }
+  )>, sanitySciencePage: Maybe<(
+    { __typename?: 'SanitySciencePage' }
+    & { openScienceSection: Maybe<(
+      { __typename?: 'SanityScienceOpenScienceSection' }
+      & Pick<SanityScienceOpenScienceSection, 'headerStart' | 'headerGreen' | 'caption'>
+      & { phases: Maybe<Array<Maybe<(
+        { __typename?: 'SanityTitleBody' }
+        & Pick<SanityTitleBody, 'title' | 'body'>
+      )>>> }
     )> }
   )> }
 );
 
-export type Unnamed_21_QueryVariables = Exact<{ [key: string]: never; }>;
+export type SciencePartnershipsSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_21_Query = (
+export type SciencePartnershipsSectionQuery = (
+  { __typename?: 'Query' }
+  & { background: Maybe<(
+    { __typename?: 'File' }
+    & { childImageSharp: Maybe<(
+      { __typename?: 'ImageSharp' }
+      & { fluid: Maybe<(
+        { __typename?: 'ImageSharpFluid' }
+        & GatsbyImageSharpFluid_WithWebpFragment
+      )> }
+    )> }
+  )>, sanitySciencePage: Maybe<(
+    { __typename?: 'SanitySciencePage' }
+    & { partnershipSection: Maybe<(
+      { __typename?: 'SanitySciencePartnershipSection' }
+      & Pick<SanitySciencePartnershipSection, 'header'>
+      & { partners: Maybe<Array<Maybe<(
+        { __typename?: 'SanityImageCustomBody' }
+        & Pick<SanityImageCustomBody, '_rawBody'>
+        & { image: Maybe<(
+          { __typename?: 'SanityCustomImage' }
+          & FluidCustomImageFields_WithWebpFragment
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
+export type ScienceTitleDescriptionSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ScienceTitleDescriptionSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanitySciencePage: Maybe<(
+    { __typename?: 'SanitySciencePage' }
+    & { titleDescriptionSection: Maybe<(
+      { __typename?: 'SanityScienceTitleDescriptionSection' }
+      & Pick<SanityScienceTitleDescriptionSection, 'title' | '_rawDescription'>
+      & { outcomes: Maybe<Array<Maybe<(
+        { __typename?: 'SanityEcologicalOutcome' }
+        & Pick<SanityEcologicalOutcome, 'title' | '_rawDescription'>
+        & { image: Maybe<(
+          { __typename?: 'SanityCustomImage' }
+          & Pick<SanityCustomImage, 'imageHref'>
+          & { image: Maybe<(
+            { __typename?: 'SanityImage' }
+            & { asset: Maybe<(
+              { __typename?: 'SanityImageAsset' }
+              & Pick<SanityImageAsset, 'extension' | 'url'>
+            )> }
+          )> }
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
+export type ScienceTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ScienceTopSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35550,11 +37950,11 @@ export type Unnamed_21_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'ScienceYaml' }
+  )>, sanitySciencePage: Maybe<(
+    { __typename?: 'SanitySciencePage' }
     & { topSection: Maybe<(
-      { __typename?: 'ScienceYamlTopSection' }
-      & Pick<ScienceYamlTopSection, 'header' | 'body'>
+      { __typename?: 'SanityTitleBody' }
+      & Pick<SanityTitleBody, 'title' | 'body'>
     )> }
   )> }
 );
@@ -35604,85 +38004,61 @@ export type EmailSubmitSectionQuery = (
   )> }
 );
 
-export type Unnamed_22_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TeamAdvisorSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_22_Query = (
+export type TeamAdvisorSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
     & Pick<File, 'publicURL'>
-  )>, text: Maybe<(
-    { __typename?: 'TeamYaml' }
+  )>, sanityTeamPage: Maybe<(
+    { __typename?: 'SanityTeamPage' }
     & { advisorSection: Maybe<(
-      { __typename?: 'TeamYamlAdvisorSection' }
-      & Pick<TeamYamlAdvisorSection, 'title'>
-      & { advisors: Maybe<Array<Maybe<(
-        { __typename?: 'TeamYamlAdvisorSectionAdvisors' }
-        & Pick<TeamYamlAdvisorSectionAdvisors, 'name' | 'title' | 'description' | 'linkedUrl' | 'twitterUrl' | 'githubUrl'>
-        & { image: Maybe<(
-          { __typename?: 'File' }
-          & Pick<File, 'publicURL'>
-        )> }
-      )>>> }
+      { __typename?: 'SanityTeamSection' }
+      & TeamSectionFieldsFragment
     )> }
   )> }
 );
 
-export type Unnamed_23_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TeamContributorSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_23_Query = (
+export type TeamContributorSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
     & Pick<File, 'publicURL'>
-  )>, text: Maybe<(
-    { __typename?: 'TeamYaml' }
+  )>, sanityTeamPage: Maybe<(
+    { __typename?: 'SanityTeamPage' }
     & { contributorSection: Maybe<(
-      { __typename?: 'TeamYamlContributorSection' }
-      & Pick<TeamYamlContributorSection, 'title'>
-      & { contributors: Maybe<Array<Maybe<(
-        { __typename?: 'TeamYamlContributorSectionContributors' }
-        & Pick<TeamYamlContributorSectionContributors, 'name' | 'title' | 'description' | 'linkedUrl' | 'twitterUrl' | 'githubUrl'>
-        & { image: Maybe<(
-          { __typename?: 'File' }
-          & Pick<File, 'extension' | 'publicURL'>
-        )> }
-      )>>> }
+      { __typename?: 'SanityTeamSection' }
+      & TeamSectionFieldsFragment
     )> }
   )> }
 );
 
-export type Unnamed_24_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TeamCoreTeamSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_24_Query = (
+export type TeamCoreTeamSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
     & Pick<File, 'publicURL'>
-  )>, text: Maybe<(
-    { __typename?: 'TeamYaml' }
+  )>, sanityTeamPage: Maybe<(
+    { __typename?: 'SanityTeamPage' }
     & { coreSection: Maybe<(
-      { __typename?: 'TeamYamlCoreSection' }
-      & Pick<TeamYamlCoreSection, 'title'>
-      & { coreMembers: Maybe<Array<Maybe<(
-        { __typename?: 'TeamYamlCoreSectionCoreMembers' }
-        & Pick<TeamYamlCoreSectionCoreMembers, 'name' | 'title' | 'description' | 'linkedUrl' | 'twitterUrl' | 'githubUrl'>
-        & { image: Maybe<(
-          { __typename?: 'File' }
-          & Pick<File, 'extension' | 'publicURL'>
-        )> }
-      )>>> }
+      { __typename?: 'SanityTeamSection' }
+      & TeamSectionFieldsFragment
     )> }
   )> }
 );
 
-export type Unnamed_25_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TeamTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_25_Query = (
+export type TeamTopSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35702,19 +38078,19 @@ export type Unnamed_25_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'TeamYaml' }
+  )>, sanityTeamPage: Maybe<(
+    { __typename?: 'SanityTeamPage' }
     & { topSection: Maybe<(
-      { __typename?: 'TeamYamlTopSection' }
-      & Pick<TeamYamlTopSection, 'header' | 'body'>
+      { __typename?: 'SanityTitleBody' }
+      & Pick<SanityTitleBody, 'title' | 'body'>
     )> }
   )> }
 );
 
-export type Unnamed_26_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TokenBlockExplorerSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_26_Query = (
+export type TokenBlockExplorerSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35725,19 +38101,27 @@ export type Unnamed_26_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'TokenYaml' }
+  )>, sanityTokenPage: Maybe<(
+    { __typename?: 'SanityTokenPage' }
     & { blockExplorerSection: Maybe<(
-      { __typename?: 'TokenYamlBlockExplorerSection' }
-      & Pick<TokenYamlBlockExplorerSection, 'header' | 'description' | 'buttonText' | 'buttonUrl'>
+      { __typename?: 'SanityTitleBodyButton' }
+      & Pick<SanityTitleBodyButton, 'title' | '_rawBody'>
+      & { button: Maybe<(
+        { __typename?: 'SanityButton' }
+        & Pick<SanityButton, 'buttonText'>
+        & { buttonLink: Maybe<(
+          { __typename?: 'SanityLink' }
+          & Pick<SanityLink, 'buttonHref'>
+        )> }
+      )> }
     )> }
   )> }
 );
 
-export type Unnamed_27_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TokenConnectSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_27_Query = (
+export type TokenConnectSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35748,80 +38132,80 @@ export type Unnamed_27_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'TokenYaml' }
-    & { connectSection: Maybe<(
-      { __typename?: 'TokenYamlConnectSection' }
-      & Pick<TokenYamlConnectSection, 'header'>
+  )>, sanityTokenPage: Maybe<(
+    { __typename?: 'SanityTokenPage' }
+    & Pick<SanityTokenPage, 'connectSectionHeader'>
+  )> }
+);
+
+export type TokenInfoSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TokenInfoSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityTokenPage: Maybe<(
+    { __typename?: 'SanityTokenPage' }
+    & { infoSection: Maybe<(
+      { __typename?: 'SanityTokenInfoSection' }
+      & Pick<SanityTokenInfoSection, 'title' | 'subtitle' | '_rawBody'>
+      & { image: Maybe<(
+        { __typename?: 'SanityCustomImage' }
+        & FluidCustomImageFields_WithWebpFragment
+      )> }
     )> }
   )> }
 );
 
-export type Unnamed_28_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TokenMediaSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_28_Query = (
+export type TokenMediaSectionQuery = (
   { __typename?: 'Query' }
-  & { text: Maybe<(
-    { __typename?: 'TokenYaml' }
-    & { infoSection: Maybe<(
-      { __typename?: 'TokenYamlInfoSection' }
-      & Pick<TokenYamlInfoSection, 'title' | 'subtitle' | 'body' | 'signupText' | 'imageAltText' | 'imageTitle'>
+  & { sanityTokenPage: Maybe<(
+    { __typename?: 'SanityTokenPage' }
+    & { mediaCards: Maybe<Array<Maybe<(
+      { __typename?: 'SanityMedia' }
+      & Pick<SanityMedia, 'title' | 'author' | 'date' | 'href' | 'type'>
       & { image: Maybe<(
-        { __typename?: 'File' }
-        & { childImageSharp: Maybe<(
-          { __typename?: 'ImageSharp' }
-          & { fluid: Maybe<(
-            { __typename?: 'ImageSharpFluid' }
-            & GatsbyImageSharpFluid_WithWebpFragment
+        { __typename?: 'SanityCustomImage' }
+        & { image: Maybe<(
+          { __typename?: 'SanityImage' }
+          & { asset: Maybe<(
+            { __typename?: 'SanityImageAsset' }
+            & Pick<SanityImageAsset, 'url'>
           )> }
         )> }
       )> }
-    )> }
-  )> }
-);
-
-export type Unnamed_29_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_29_Query = (
-  { __typename?: 'Query' }
-  & { text: Maybe<(
-    { __typename?: 'MediaYaml' }
-    & Pick<MediaYaml, 'header'>
-    & { categories: Maybe<Array<Maybe<(
-      { __typename?: 'MediaYamlCategories' }
-      & Pick<MediaYamlCategories, 'name' | 'buttonText' | 'showPlay'>
-      & { items: Maybe<Array<Maybe<(
-        { __typename?: 'MediaYamlCategoriesItems' }
-        & Pick<MediaYamlCategoriesItems, 'title' | 'date' | 'author' | 'url' | 'isTokenSale'>
-        & { image: Maybe<(
-          { __typename?: 'File' }
-          & Pick<File, 'publicURL'>
-        )> }
-      )>>> }
     )>>> }
   )> }
 );
 
-export type Unnamed_30_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TokenStakingQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_30_Query = (
+export type TokenStakingQuery = (
   { __typename?: 'Query' }
-  & { text: Maybe<(
-    { __typename?: 'TokenYaml' }
-    & { staking: Maybe<(
-      { __typename?: 'TokenYamlStaking' }
-      & Pick<TokenYamlStaking, 'title' | 'body' | 'buttonText' | 'buttonUrl'>
+  & { sanityTokenPage: Maybe<(
+    { __typename?: 'SanityTokenPage' }
+    & { stakingSection: Maybe<(
+      { __typename?: 'SanityTitleBodyButton' }
+      & Pick<SanityTitleBodyButton, 'title' | '_rawBody'>
+      & { button: Maybe<(
+        { __typename?: 'SanityButton' }
+        & Pick<SanityButton, 'buttonText'>
+        & { buttonLink: Maybe<(
+          { __typename?: 'SanityLink' }
+          & Pick<SanityLink, 'buttonHref'>
+        )> }
+      )> }
     )> }
   )> }
 );
 
-export type Unnamed_31_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_16_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_31_Query = (
+export type Unnamed_16_Query = (
   { __typename?: 'Query' }
   & { bg: Maybe<(
     { __typename?: 'File' }
@@ -35835,38 +38219,45 @@ export type Unnamed_31_Query = (
   )> }
 );
 
-export type Unnamed_32_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TokenEconomicsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_32_Query = (
+export type TokenEconomicsQuery = (
   { __typename?: 'Query' }
-  & { text: Maybe<(
-    { __typename?: 'TokenYaml' }
+  & { sanityTokenPage: Maybe<(
+    { __typename?: 'SanityTokenPage' }
     & { tokenEconomics: Maybe<(
-      { __typename?: 'TokenYamlTokenEconomics' }
-      & Pick<TokenYamlTokenEconomics, 'title' | 'body'>
+      { __typename?: 'SanityTitleCustomBody' }
+      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
     )> }
   )> }
 );
 
-export type Unnamed_33_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TokenPoolQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_33_Query = (
+export type TokenPoolQuery = (
   { __typename?: 'Query' }
-  & { text: Maybe<(
-    { __typename?: 'TokenYaml' }
-    & { tokenPool: Maybe<(
-      { __typename?: 'TokenYamlTokenPool' }
-      & Pick<TokenYamlTokenPool, 'title' | 'subtitle'>
+  & { sanityTokenPage: Maybe<(
+    { __typename?: 'SanityTokenPage' }
+    & { poolSection: Maybe<(
+      { __typename?: 'SanityTokenPoolSection' }
+      & Pick<SanityTokenPoolSection, 'title' | 'subtitle'>
+      & { image: Maybe<(
+        { __typename?: 'SanityImage' }
+        & ImageFragment
+      )>, mobileImage: Maybe<(
+        { __typename?: 'SanityImage' }
+        & ImageFragment
+      )> }
     )> }
   )> }
 );
 
-export type Unnamed_34_QueryVariables = Exact<{ [key: string]: never; }>;
+export type TokenTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_34_Query = (
+export type TokenTopSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35877,33 +38268,19 @@ export type Unnamed_34_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'TokenYaml' }
+  )>, sanityTokenPage: Maybe<(
+    { __typename?: 'SanityTokenPage' }
     & { topSection: Maybe<(
-      { __typename?: 'TokenYamlTopSection' }
-      & Pick<TokenYamlTopSection, 'header' | 'body'>
+      { __typename?: 'SanityTitleBody' }
+      & Pick<SanityTitleBody, 'title' | 'body'>
     )> }
   )> }
 );
 
-export type Unnamed_35_QueryVariables = Exact<{ [key: string]: never; }>;
+export type ValidatorsConnectSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_35_Query = (
-  { __typename?: 'Query' }
-  & { text: Maybe<(
-    { __typename?: 'TokenYaml' }
-    & { unlockSchedule: Maybe<(
-      { __typename?: 'TokenYamlUnlockSchedule' }
-      & Pick<TokenYamlUnlockSchedule, 'title' | 'subtitle'>
-    )> }
-  )> }
-);
-
-export type Unnamed_36_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_36_Query = (
+export type ValidatorsConnectSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35914,19 +38291,16 @@ export type Unnamed_36_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'ValidatorsYaml' }
-    & { connectSection: Maybe<(
-      { __typename?: 'ValidatorsYamlConnectSection' }
-      & Pick<ValidatorsYamlConnectSection, 'header'>
-    )> }
+  )>, sanityValidatorsPage: Maybe<(
+    { __typename?: 'SanityValidatorsPage' }
+    & Pick<SanityValidatorsPage, 'connectSectionHeader'>
   )> }
 );
 
-export type Unnamed_37_QueryVariables = Exact<{ [key: string]: never; }>;
+export type ValidatorsTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_37_Query = (
+export type ValidatorsTopSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35937,19 +38311,19 @@ export type Unnamed_37_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'ValidatorsYaml' }
+  )>, sanityValidatorsPage: Maybe<(
+    { __typename?: 'SanityValidatorsPage' }
     & { topSection: Maybe<(
-      { __typename?: 'ValidatorsYamlTopSection' }
-      & Pick<ValidatorsYamlTopSection, 'header' | 'body'>
+      { __typename?: 'SanityTitleBody' }
+      & Pick<SanityTitleBody, 'title' | 'body'>
     )> }
   )> }
 );
 
-export type Unnamed_38_QueryVariables = Exact<{ [key: string]: never; }>;
+export type ValidatorsWhatSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_38_Query = (
+export type ValidatorsWhatSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35960,19 +38334,19 @@ export type Unnamed_38_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'ValidatorsYaml' }
+  )>, sanityValidatorsPage: Maybe<(
+    { __typename?: 'SanityValidatorsPage' }
     & { whatSection: Maybe<(
-      { __typename?: 'ValidatorsYamlWhatSection' }
-      & Pick<ValidatorsYamlWhatSection, 'header' | 'body'>
+      { __typename?: 'SanityTitleCustomBody' }
+      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
     )> }
   )> }
 );
 
-export type Unnamed_39_QueryVariables = Exact<{ [key: string]: never; }>;
+export type ValidatorsWhoSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_39_Query = (
+export type ValidatorsWhoSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -35983,25 +38357,26 @@ export type Unnamed_39_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'ValidatorsYaml' }
+  )>, sanityValidatorsPage: Maybe<(
+    { __typename?: 'SanityValidatorsPage' }
     & { whoSection: Maybe<(
-      { __typename?: 'ValidatorsYamlWhoSection' }
-      & Pick<ValidatorsYamlWhoSection, 'header' | 'body'>
+      { __typename?: 'SanityValidatorWhoSection' }
+      & Pick<SanityValidatorWhoSection, 'header' | '_rawBody'>
       & { validators: Maybe<Array<Maybe<(
-        { __typename?: 'ValidatorsYamlWhoSectionValidators' }
-        & Pick<ValidatorsYamlWhoSectionValidators, 'header' | 'description'>
+        { __typename?: 'SanityValidator' }
+        & Pick<SanityValidator, 'header' | 'description'>
         & { members: Maybe<Array<Maybe<(
-          { __typename?: 'ValidatorsYamlWhoSectionValidatorsMembers' }
-          & Pick<ValidatorsYamlWhoSectionValidatorsMembers, 'link'>
-          & { image: Maybe<(
-            { __typename?: 'File' }
-            & Pick<File, 'publicURL'>
-            & { childImageSharp: Maybe<(
-              { __typename?: 'ImageSharp' }
-              & { fluid: Maybe<(
-                { __typename?: 'ImageSharpFluid' }
-                & GatsbyImageSharpFluid_WithWebpFragment
+          { __typename?: 'SanityImageLink' }
+          & { link: Maybe<(
+            { __typename?: 'SanityLink' }
+            & Pick<SanityLink, 'buttonHref'>
+          )>, image: Maybe<(
+            { __typename?: 'SanityCustomImage' }
+            & { image: Maybe<(
+              { __typename?: 'SanityImage' }
+              & { asset: Maybe<(
+                { __typename?: 'SanityImageAsset' }
+                & Pick<SanityImageAsset, 'url'>
               )> }
             )> }
           )> }
@@ -36011,10 +38386,10 @@ export type Unnamed_39_Query = (
   )> }
 );
 
-export type Unnamed_40_QueryVariables = Exact<{ [key: string]: never; }>;
+export type ValidatorsWhySectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_40_Query = (
+export type ValidatorsWhySectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -36025,47 +38400,47 @@ export type Unnamed_40_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, content: Maybe<(
-    { __typename?: 'ValidatorsYaml' }
+  )>, sanityValidatorsPage: Maybe<(
+    { __typename?: 'SanityValidatorsPage' }
     & { whySection: Maybe<(
-      { __typename?: 'ValidatorsYamlWhySection' }
-      & Pick<ValidatorsYamlWhySection, 'header' | 'body'>
+      { __typename?: 'SanityTitleCustomBody' }
+      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
     )> }
   )> }
 );
 
-export type Unnamed_41_QueryVariables = Exact<{ [key: string]: never; }>;
+export type WalletAddrRegFormSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_41_Query = (
+export type WalletAddrRegFormSectionQuery = (
   { __typename?: 'Query' }
-  & { text: Maybe<(
-    { __typename?: 'WalletAddressRegistrationYaml' }
-    & { form: Maybe<(
-      { __typename?: 'WalletAddressRegistrationYamlForm' }
-      & Pick<WalletAddressRegistrationYamlForm, 'airtableLink' | 'recaptchaMessage'>
+  & { sanityWalletAddressRegistrationPage: Maybe<(
+    { __typename?: 'SanityWalletAddressRegistrationPage' }
+    & { formSection: Maybe<(
+      { __typename?: 'SanityWalletAddressRegistrationFormSection' }
+      & Pick<SanityWalletAddressRegistrationFormSection, 'airtableLink' | 'recaptchaMessage'>
     )> }
   )> }
 );
 
-export type Unnamed_42_QueryVariables = Exact<{ [key: string]: never; }>;
+export type WalletAddrRegInstructionsSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_42_Query = (
+export type WalletAddrRegInstructionsSectionQuery = (
   { __typename?: 'Query' }
-  & { text: Maybe<(
-    { __typename?: 'WalletAddressRegistrationYaml' }
-    & { instructionsSection: Maybe<(
-      { __typename?: 'WalletAddressRegistrationYamlInstructionsSection' }
-      & Pick<WalletAddressRegistrationYamlInstructionsSection, 'header' | 'body'>
+  & { sanityWalletAddressRegistrationPage: Maybe<(
+    { __typename?: 'SanityWalletAddressRegistrationPage' }
+    & { instructionSection: Maybe<(
+      { __typename?: 'SanityTitleCustomBody' }
+      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
     )> }
   )> }
 );
 
-export type Unnamed_43_QueryVariables = Exact<{ [key: string]: never; }>;
+export type WalletAddrRegTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_43_Query = (
+export type WalletAddrRegTopSectionQuery = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -36076,19 +38451,19 @@ export type Unnamed_43_Query = (
         & GatsbyImageSharpFluid_WithWebpFragment
       )> }
     )> }
-  )>, text: Maybe<(
-    { __typename?: 'WalletAddressRegistrationYaml' }
+  )>, sanityWalletAddressRegistrationPage: Maybe<(
+    { __typename?: 'SanityWalletAddressRegistrationPage' }
     & { topSection: Maybe<(
-      { __typename?: 'WalletAddressRegistrationYamlTopSection' }
-      & Pick<WalletAddressRegistrationYamlTopSection, 'header' | 'body'>
+      { __typename?: 'SanityTitleBody' }
+      & Pick<SanityTitleBody, 'title' | 'body'>
     )> }
   )> }
 );
 
-export type Unnamed_44_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_17_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_44_Query = (
+export type Unnamed_17_Query = (
   { __typename?: 'Query' }
   & { text: Maybe<(
     { __typename?: 'WalletAddressRegistrationYaml' }
@@ -36188,10 +38563,10 @@ export type CaseStudyTemplateQuery = (
   )> }
 );
 
-export type Unnamed_45_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_18_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_45_Query = (
+export type Unnamed_18_Query = (
   { __typename?: 'Query' }
   & { sanityFaqPage: Maybe<(
     { __typename?: 'SanityFaqPage' }

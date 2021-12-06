@@ -6,6 +6,7 @@ import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSl
 import Section from 'web-components/src/components/section';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import Title from 'web-components/lib/components/title';
+import { TokenMediaSectionQuery } from '../../generated/graphql';
 
 type Item = {
   title: string;
@@ -80,53 +81,43 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const MediaSection: React.FC = () => {
-  const {
-    text: { header, categories },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      text: mediaYaml {
-        header
-        categories {
-          name
-          buttonText
-          showPlay
-          items {
-            title
-            date
-            author
-            url
-            isTokenSale
-            image {
-              publicURL
+const query = graphql`
+  query tokenMediaSection {
+    sanityTokenPage {
+      mediaCards {
+        title
+        author
+        date
+        href
+        type
+        image {
+          image {
+            asset {
+              url
             }
           }
         }
       }
     }
-  `);
+  }
+`;
+
+const MediaSection: React.FC = () => {
+  const { sanityTokenPage: data } = useStaticQuery<TokenMediaSectionQuery>(query);
   const styles = useStyles();
   const theme = useTheme();
-  const allItems: CardItem[] = categories.reduce((prev: CardItem[], curr) => {
-    const { showPlay, buttonText, name } = curr;
-    const items = curr.items
-      .filter(item => item.isTokenSale)
-      .map(item => ({ ...item, showPlay, buttonText, type: name }));
-    return prev.concat(items);
-  }, []);
 
-  const itemCards: JSX.Element[] = allItems.map((item, i) => (
+  const itemCards: JSX.Element[] = (data?.mediaCards || []).map((item, i) => (
     <ArticleCard
       className={styles.card}
       key={i}
-      url={item.url}
-      name={item.title}
-      author={item.author}
-      // buttonText={item.buttonText}
-      type={'changeme'}
-      imgSrc={item.image.publicURL}
-      date={item.date}
-      play={item.type === 'videos'}
+      url={item?.href || ''}
+      name={item?.title || ''}
+      author={item?.author || ''}
+      type={item?.type || ''}
+      imgSrc={item?.image?.image?.asset?.url || ''}
+      date={item?.date}
+      play={item?.type === 'videos'}
     />
   ));
   const slidesToShow = itemCards && itemCards.length < 3 ? itemCards.length : 3;
@@ -144,7 +135,7 @@ const MediaSection: React.FC = () => {
           padding={theme.spacing(2.5)}
           slidesToShow={slidesToShow}
           items={itemCards}
-          renderTitle={() => <Title className={styles.title}>{header}</Title>}
+          renderTitle={() => <Title className={styles.title}>Media</Title>}
         />
       </div>
     </Section>

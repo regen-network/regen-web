@@ -39,9 +39,6 @@ tokenPool:
   subtitle: The total supply at mainnet launch was 100 million tokens.
   image: ../../static/media/token-pool.svg
   mobileImage: ../../static/media/token-pool-mobile.svg
-unlockSchedule:
-  title: REGEN unlock schedule
-  subtitle: At Genesis 22,041,983 REGEN tokens are unlocked
 staking:
   title: Staking
   body: >-

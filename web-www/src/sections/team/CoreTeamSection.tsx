@@ -1,39 +1,30 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import TeamSection from 'web-components/lib/components/team-section';
+import { TeamCoreTeamSectionQuery } from '../../generated/graphql';
+import { TeamItemProps } from 'web-components/lib/components/team-item';
 
-const CoreTeamSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "team-bg.png" }) {
-        publicURL
-      }
-      text: teamYaml {
-        coreSection {
-          title
-          coreMembers {
-            name
-            title
-            description
-            image {
-              extension
-              publicURL
-            }
-            linkedUrl
-            twitterUrl
-            githubUrl
-          }
-        }
+const query = graphql`
+  query teamCoreTeamSection {
+    background: file(relativePath: { eq: "team-bg.png" }) {
+      publicURL
+    }
+    sanityTeamPage {
+      coreSection {
+        ...teamSectionFields
       }
     }
-  `);
-  const members = data.text.coreSection.coreMembers;
-  const title = data.text.coreSection.title;
+  }
+`;
+
+const CoreTeamSection = (): JSX.Element => {
+  const { background, sanityTeamPage } = useStaticQuery<TeamCoreTeamSectionQuery>(query);
+  const data = sanityTeamPage?.coreSection;
   return (
     <TeamSection
-      bgUrl={data.background.publicURL}
-      members={members.map(m => ({ imgUrl: m.image.publicURL, ...m }))}
-      title={title}
+      bgUrl={background?.publicURL || ''}
+      members={(data?.members || []).map(m => ({ imgUrl: m?.image?.asset?.url, ...m } as TeamItemProps))}
+      title={data?.title || ''}
     />
   );
 };

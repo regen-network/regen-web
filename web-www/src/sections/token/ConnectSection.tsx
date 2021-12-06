@@ -6,6 +6,7 @@ import ConnectSection, { IconLabelProps } from '../../components/ConnectSection'
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
 import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
+import { TokenConnectSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   connect: {
@@ -18,24 +19,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const TokenConnectSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "birds-background.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: tokenYaml {
-        connectSection {
-          header
+const query = graphql`
+  query tokenConnectSection {
+    background: file(relativePath: { eq: "birds-background.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
-  const content = data.text.connectSection;
+    sanityTokenPage {
+      connectSectionHeader
+    }
+  }
+`;
+
+const TokenConnectSection = (): JSX.Element => {
+  const { background, sanityTokenPage: data } = useStaticQuery<TokenConnectSectionQuery>(query);
   const styles = useStyles();
   const theme = useTheme();
   const icons: IconLabelProps[] = [
@@ -60,8 +60,8 @@ const TokenConnectSection = (): JSX.Element => {
     <ConnectSection
       className={styles.connect}
       titleClassName={styles.title}
-      header={content.header}
-      background={data.background}
+      header={data?.connectSectionHeader || ''}
+      background={background as any} // TODO fix this type - should be able to use `FluidObject`
       icons={icons}
     />
   );

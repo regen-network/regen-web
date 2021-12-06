@@ -5,12 +5,13 @@ import ReactHtmlParser from 'react-html-parser';
 
 import Title from '../title';
 import Description from '../description';
+import { BlockContent } from '../block-content';
 
 interface HexaImage {
   name: string;
   imgSrc: string;
-  role: string;
-  description: string;
+  role: string | any[]; // optionally pass block content from sanity
+  description: string | any[];
 }
 
 interface HexaImagesProps {
@@ -201,6 +202,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+function renderText(text: string | any[]) {
+  if (typeof text === 'string') {
+    return ReactHtmlParser(text);
+  }
+  return <BlockContent content={text} />;
+}
+
 export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
   const classes = useStyles();
   const [selected, setSelected] = useState(0);
@@ -212,11 +220,9 @@ export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
           {items[selected].name}
         </Title>
         <Title variant="h6" className={classes.role}>
-          {ReactHtmlParser(items[selected].role)}
+          {renderText(items[selected].role)}
         </Title>
-        <Description className={classes.description}>
-          {ReactHtmlParser(items[selected].description)}
-        </Description>
+        <Description className={classes.description}>{renderText(items[selected].description)}</Description>
       </Grid>
       <Grid container className={classes.images}>
         {items.map((item, i) => (

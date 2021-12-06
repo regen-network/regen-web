@@ -35,7 +35,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(7.5),
-      flex: 1,
     },
   },
   back: {
@@ -44,9 +43,6 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.pxToRem(12),
     [theme.breakpoints.up('md')]: {
       width: theme.spacing(74.25),
-    },
-    [theme.breakpoints.down('xs')]: {
-      flex: 0,
     },
   },
   arrow: {
@@ -64,17 +60,13 @@ const useStyles = makeStyles(theme => ({
     border: `1px solid ${theme.palette.grey[100]}`,
     borderRadius: '10px',
     height: 'fit-content',
-
     [theme.breakpoints.up('md')]: {
       width: theme.spacing(74.25),
-      // flex: 0,
     },
     [theme.breakpoints.between('xs', 'md')]: {
       minWidth: theme.spacing(47.5),
-      // flex: 1,
     },
     [theme.breakpoints.down('xs')]: {
-      // flex: 1,
       width: theme.spacing(74.25),
     },
   },
@@ -95,7 +87,7 @@ const useStyles = makeStyles(theme => ({
   },
   navItem: {
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
-    borderLeft: 'none !important', //todo: maybe style selected instead
+    borderLeft: 'none !important',
     '&:last-child': {
       borderBottom: 'none',
     },

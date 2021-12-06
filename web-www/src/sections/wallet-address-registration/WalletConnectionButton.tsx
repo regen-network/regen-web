@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core';
-import ReactHtmlParser from 'react-html-parser';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { Alert, AlertTitle } from '@material-ui/lab';
 import { WalletConnectButtonQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
 
-interface WalletConnectionButtonProps {}
 interface Keplr {
   enable: (chainId: string) => Promise<any>;
   experimentalSuggestChain: (chainOptions: object) => Promise<void>;

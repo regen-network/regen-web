@@ -36,6 +36,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(7.5),
     },
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
+    },
   },
   back: {
     display: 'flex',
@@ -60,6 +63,7 @@ const useStyles = makeStyles(theme => ({
     border: `1px solid ${theme.palette.grey[100]}`,
     borderRadius: '10px',
     height: 'fit-content',
+    backgroundColor: theme.palette.primary.main,
     [theme.breakpoints.up('md')]: {
       width: theme.spacing(74.25),
     },
@@ -67,7 +71,7 @@ const useStyles = makeStyles(theme => ({
       minWidth: theme.spacing(47.5),
     },
     [theme.breakpoints.down('xs')]: {
-      width: theme.spacing(74.25),
+      width: '100%',
     },
   },
   sectionContainer: {

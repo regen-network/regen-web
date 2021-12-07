@@ -43,13 +43,18 @@ const StyledListItem = withStyles(theme => ({
     letterSpacing: '1px',
     textTransform: 'uppercase',
     fontWeight: 800,
+    '&:first-child': {
+      borderRadius: '10px 10px 0 0',
+    },
+    '&:last-child': {
+      borderRadius: '0 0 10px 10px ',
+    },
     [theme.breakpoints.up('sm')]: {
       borderLeft: '6px solid transparent',
       paddingLeft: theme.spacing(4.75),
       paddingRight: theme.spacing(4.75),
       lineHeight: theme.spacing(13.75),
       '&.Mui-selected': {
-        borderRadius: '3px',
         borderLeft: `6px solid ${theme.palette.secondary.dark}`,
         backgroundColor: theme.palette.info.light,
         color: theme.palette.grey[500],

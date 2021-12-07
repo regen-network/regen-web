@@ -143,7 +143,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
   const classes = useStyles({});
-  console.log('ITEMS', items);
   return (
     <div className={classes.footerItem}>
       <Title className={classes.title} variant="h5">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Hidden } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -7,6 +7,7 @@ import { useHistory, useParams, Route } from 'react-router-dom';
 import Navigation from 'web-components/lib/components/faq/Navigation';
 import Title from 'web-components/lib/components/title';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import Banner from 'web-components/lib/components/banner';
 import { Label } from 'web-components/lib/components/label';
 import { BasicInfo, ProjectLocation, Roles, EntityDisplay, Media, Story } from '../pages';
 import { Link } from '../components/atoms';
@@ -111,10 +112,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+type ContextType = {
+  confirmSave?: () => void;
+};
+
+const ProjectEditContext = createContext<ContextType>({
+  confirmSave: () => {},
+});
+
 function ProjectEdit(): JSX.Element {
   const styles = useStyles();
   const theme = useTheme();
   const history = useHistory();
+  const [saved, setSaved] = useState(false);
   const { projectId, section } = useParams<{ projectId: string; section: string }>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -137,60 +147,72 @@ function ProjectEdit(): JSX.Element {
     return toTitleCase(str.replace('-', ' '));
   };
 
+  const confirmSave = (): void => {
+    setSaved(true);
+    setTimeout(() => {
+      setSaved(false);
+    }, 5000);
+  };
+
   return (
-    <div className={styles.root}>
-      <div className={styles.left}>
-        <div className={styles.topAlign}>
-          <Link
-            href={section && isMobile ? `/project-pages/edit/${projectId}` : '/project-pages'}
-            className={styles.back}
-          >
-            <ArrowDownIcon className={styles.arrow} color={theme.palette.secondary.main} direction="prev" />
-            {!isMobile && <Label>back to projects</Label>}
-          </Link>
+    <ProjectEditContext.Provider value={{ confirmSave }}>
+      <div className={styles.root}>
+        <div className={styles.left}>
+          <div className={styles.topAlign}>
+            <Link
+              href={section && isMobile ? `/project-pages/edit/${projectId}` : '/project-pages'}
+              className={styles.back}
+            >
+              <ArrowDownIcon className={styles.arrow} color={theme.palette.secondary.main} direction="prev" />
+              {!isMobile && <Label>back to projects</Label>}
+            </Link>
+          </div>
+          <Hidden xsDown>
+            <Nav />
+          </Hidden>
         </div>
-        <Hidden xsDown>
-          <Nav />
-        </Hidden>
-      </div>
-      <div className={styles.right}>
-        <div className={styles.sectionContainer}>
-          <div className={styles.section}>
-            <div className={styles.topAlign}>
-              <Title className={styles.title} variant="h3" align="center">
-                {section && isMobile ? titleCase(section) : 'Edit Project Page'}
-              </Title>
+        <div className={styles.right}>
+          <div className={styles.sectionContainer}>
+            <div className={styles.section}>
+              <div className={styles.topAlign}>
+                <Title className={styles.title} variant="h3" align="center">
+                  {section && isMobile ? titleCase(section) : 'Edit Project Page'}
+                </Title>
+              </div>
+              <Route
+                path="/project-pages/edit/:projectId"
+                render={({ match: { path } }) => (
+                  <>
+                    <ProtectedRoute
+                      path={path}
+                      exact
+                      component={() => (
+                        <Hidden smUp>
+                          <Nav />
+                        </Hidden>
+                      )}
+                    />
+                    <ProtectedRoute path={`${path}/basic-info`} component={() => <BasicInfo isEdit />} />
+                    <ProtectedRoute path={`${path}/location`} component={() => <ProjectLocation isEdit />} />
+                    <ProtectedRoute path={`${path}/story`} component={() => <Story isEdit />} />
+                    <ProtectedRoute path={`${path}/media`} component={() => <Media isEdit />} />
+                    <ProtectedRoute path={`${path}/roles`} component={() => <Roles isEdit />} />
+                    <ProtectedRoute
+                      path={`${path}/entity-display`}
+                      component={() => <EntityDisplay isEdit />}
+                    />
+                  </>
+                )}
+              />
             </div>
-            <Route
-              path="/project-pages/edit/:projectId"
-              render={({ match: { path } }) => (
-                <>
-                  <ProtectedRoute
-                    path={path}
-                    exact
-                    component={() => (
-                      <Hidden smUp>
-                        <Nav />
-                      </Hidden>
-                    )}
-                  />
-                  <ProtectedRoute path={`${path}/basic-info`} component={() => <BasicInfo isEdit />} />
-                  <ProtectedRoute path={`${path}/location`} component={() => <ProjectLocation isEdit />} />
-                  <ProtectedRoute path={`${path}/story`} component={() => <Story isEdit />} />
-                  <ProtectedRoute path={`${path}/media`} component={() => <Media isEdit />} />
-                  <ProtectedRoute path={`${path}/roles`} component={() => <Roles isEdit />} />
-                  <ProtectedRoute
-                    path={`${path}/entity-display`}
-                    component={() => <EntityDisplay isEdit />}
-                  />
-                </>
-              )}
-            />
           </div>
         </div>
+        {saved && <Banner text="Changes have been saved" />}
       </div>
-    </div>
+    </ProjectEditContext.Provider>
   );
 }
 
-export { ProjectEdit };
+const useProjectEditContext = (): ContextType => useContext(ProjectEditContext);
+
+export { ProjectEdit, useProjectEditContext };

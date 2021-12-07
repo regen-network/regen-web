@@ -12,6 +12,7 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import { ProjectPageFooter } from '../molecules';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 export interface BasicInfoFormValues {
   'http://schema.org/name': string;
@@ -71,6 +72,7 @@ const BasicInfoForm: React.FC<{
   isEdit?: boolean;
 }> = ({ submit, initialValues, isEdit }) => {
   const classes = useStyles();
+  const { confirmSave } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -124,6 +126,7 @@ const BasicInfoForm: React.FC<{
           await submit(values);
           setSubmitting(false);
           setTouched({}); // reset to untouched
+          if (isEdit && confirmSave) confirmSave();
         } catch (e) {
           setSubmitting(false);
         }

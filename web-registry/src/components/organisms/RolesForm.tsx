@@ -22,6 +22,7 @@ import {
   useShaclGraphByUriQuery,
   GetOrganizationProfileByEmailQuery,
 } from '../../generated/graphql';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
@@ -103,6 +104,7 @@ function getEntity(query?: GetOrganizationProfileByEmailQuery): FormValues | nul
 const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCreator, isEdit }) => {
   const [entities, setEntities] = useState<Array<FormValues>>([]);
   const styles = useStyles();
+  const { confirmSave } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -354,6 +356,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
             await submit(values);
             setSubmitting(false);
             setTouched({}); // reset to untouched
+            if (isEdit && confirmSave) confirmSave();
           } catch (e) {
             setSubmitting(false);
           }

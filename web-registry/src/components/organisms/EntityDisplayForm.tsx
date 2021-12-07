@@ -23,6 +23,7 @@ import getApiUri from '../../lib/apiUri';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { urlType } from './MediaForm';
 import { ProjectPageFooter } from '../molecules';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
@@ -356,6 +357,7 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
 const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialValues, isEdit }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const styles = useStyles();
+  const { confirmSave } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -428,6 +430,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
             await submit(values);
             setSubmitting(false);
             setTouched({}); // reset to untouched
+            if (isEdit && confirmSave) confirmSave();
           } catch (e) {
             setSubmitting(false);
           }

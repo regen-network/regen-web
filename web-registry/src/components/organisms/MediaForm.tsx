@@ -13,6 +13,7 @@ import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
 import { ProjectPageFooter } from '../molecules';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
@@ -126,6 +127,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues, isEdit }) 
   const theme = useTheme();
   const apiUri = getApiUri();
   const { projectId } = useParams();
+  const { confirmSave } = useProjectEditContext();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
   const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -185,6 +187,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues, isEdit }) 
             await submit(values);
             setSubmitting(false);
             setTouched({}); // reset to untouched
+            if (isEdit && confirmSave) confirmSave();
           } catch (e) {
             setSubmitting(false);
           }

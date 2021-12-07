@@ -12,6 +12,7 @@ import Card from 'web-components/lib/components/cards/Card';
 import { ProjectPageFooter } from '../molecules';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface StoryFormProps {
   submit: (values: StoryValues) => Promise<void>;
@@ -177,6 +178,7 @@ const ModalContent: React.FC<{ exampleProjectUrl: string; fieldName: exampleFiel
 
 const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues, isEdit }) => {
   const styles = useStyles();
+  const { confirmSave } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -240,6 +242,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues, isEdit }) 
             await submit(values);
             setSubmitting(false);
             setTouched({}); // reset to untouched
+            if (isEdit && confirmSave) confirmSave();
           } catch (e) {
             setSubmitting(false);
           }

@@ -9,6 +9,7 @@ import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import { ProjectPageFooter } from '../molecules';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 export interface ProjectLocationFormValues {
   'http://schema.org/location': Partial<GeocodeFeature>;
@@ -21,6 +22,7 @@ const ProjectLocationForm: React.FC<{
   initialValues?: ProjectLocationFormValues;
   isEdit?: boolean;
 }> = ({ submit, initialValues, mapToken, isEdit }) => {
+  const { confirmSave } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -59,6 +61,7 @@ const ProjectLocationForm: React.FC<{
           await submit(values);
           setSubmitting(false);
           setTouched({}); // reset to untouched
+          if (isEdit && confirmSave) confirmSave();
         } catch (e) {
           setSubmitting(false);
         }

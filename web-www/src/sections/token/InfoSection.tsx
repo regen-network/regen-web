@@ -116,7 +116,9 @@ const InfoSection = (): JSX.Element => {
         <CardContent className={styles.cardContent}>
           <Title variant="h3">{data?.title}</Title>
           <Typography className={styles.subtitle}>{data?.subtitle}</Typography>
-          <Description className={styles.body}>{<BlockContent content={data?._rawBody} />}</Description>
+          <Description>
+            <BlockContent className={styles.body} content={data?._rawBody} />
+          </Description>
           {/* <Description className={styles.body}>
             <div onClick={() => scrollToSignup()}>{ReactHtmlParser(signupText)}</div>
           </Description> */}

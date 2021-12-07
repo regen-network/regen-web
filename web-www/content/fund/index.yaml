@@ -1,26 +1,50 @@
 seo:
   title: Regen Ecosystem Fund
-  description: The Regen Ecosystem Fund is dedicated to identifying and investing in early-stage ventures that
-    have massive upside and strategic network value. We believe this program will supercharge Regen Network’s
-    strategy to out-cooperate the competition, by allowing for seamless issuance of top-tier quality ecosystem service credits. 
-    Our goal is to build a strong, diverse platform that can serve as the backbone for an emerging economy based on living capital.
+  description: Regen Ecosystem Fund (REF) is the ecosystem venture fund of Regen
+    Network. REF will fund the rapid, decentralized global growth of the Regen
+    Network ecosystem.
 topSection:
   header: Regen Ecosystem Fund
+  body: Regen Ecosystem Fund (REF) is the ecosystem venture fund of Regen Network.
+    REF will fund the rapid, decentralized global growth of the Regen Network
+    ecosystem.
 foldSection:
-  title: Regen Ecosystem Fund 
-  body: The Regen Ecosystem Fund is dedicated to identifying and investing in early-stage ventures that
-    have massive upside and strategic network value. We believe this program will supercharge Regen Network’s
-    strategy to out-cooperate the competition, by allowing for seamless issuance of top-tier quality ecosystem service credits. 
-    <br/><br/>Our goal is to build a strong, diverse platform that can serve as the backbone for an emerging economy based on living capital.
+  title: Fund Strategy
+  body: Regen Network is a community dedicated to building the Payments for
+    Ecosystem Services (PES) markets and foundational climate finance
+    infrastructure to regenerate ecological health, with the carbon markets
+    being our beachhead market. Launched in April of 2021, the Regen Ledger is
+    our open-source Proof-of-Stake ecological blockchain, built on the Cosmos
+    SDK. <br/><br/> The Regen Ecosystem Fund will focus on strategic early-stage
+    investments to accelerate the adoption of Regen Network.This will create a
+    vibrant ecosystem of companies using Regen Ledger and the $REGEN token as
+    their backbone for ecological accounting, eco-credit provisioning, and
+    Payments for Ecosystem Services.
+thesisSection:
+  title: Fund Thesis
+  body: >-
+    Scaling PES markets by at least two orders of magnitude is imperative to
+    meet the existential risk of climate and ecological collapse. We need more
+    than a handful of startups to address these issues—we need an entire
+    economy. Regen Network is poised—across its technical assets and community
+    of builders and land stewards—to serve as the epicenter and springboard for
+    this movement. The Regen Ecosystem Fund strategically invests in primarily
+    software and high growth opportunities in the Regen, Cosmos or adjacent
+    ecosystem in defi, dMRV and eco-fintech. 
+
+
+    If the Fund is successful, it will drive the value of the $REGEN token. To keep LP incentives aligned and get them access to this potential upside, the Fund’s portfolio will partially consist of a crypto hedge fund, heavily composed of $REGEN tokens.
 calltoActionSection:
   callToActions:
     - image: ../../static/media/handshake.png
-      header: Are you an early stage start-up in the ecocredit space looking for investment?
-      description: Contact us at <a href="mailto:ecosystemfund@regen.network">ecosystemfund@regen.network</a>.
+      header: Are you an early stage start-up in the ecocredit space looking for
+        investment?
+      description: Contact us at <a
+        href="mailto:ecosystemfund@regen.network">ecosystemfund@regen.network</a>
     - image: ../../static/media/credits-available.png
-      header: Interested in investing in the Regen Ecosystem Fund? 
+      header: Interested in investing in the Regen Ecosystem Fund?
       descriptionWithModalLink:
-        beginning: Fill out 
+        beginning: Fill out
         linkText: this form
-        linkUrl: todo
+        linkUrl: https://docs.google.com/forms/d/e/1FAIpQLScFxloz5laPKWRcYamhxqn7sPS1nKK_fvQvU3fPxExGxRakpg/viewform?embedded=true
         end: to get started.

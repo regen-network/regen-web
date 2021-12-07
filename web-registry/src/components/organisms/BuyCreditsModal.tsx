@@ -199,7 +199,7 @@ export interface Credits {
 }
 
 interface BuyCreditsModalProps extends RegenModalProps {
-  onClose: () => void;
+  onTxQueued: (txBytes: Uint8Array) => void;
   initialValues?: BuyCreditsValues;
   project: {
     id: string;
@@ -224,6 +224,7 @@ export interface BuyCreditsValues {
 const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   open,
   onClose,
+  onTxQueued,
   initialValues,
   project,
   apiServerUrl,
@@ -262,9 +263,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   const submit = async (values: BuyCreditsValues): Promise<void> => {
     const recipient = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'; // test account
     const amount = values.creditCount;
-    if (walletContext.sendTokens) {
-      const txHash = await walletContext.sendTokens(amount, recipient);
-      alert(`TX Hash: ${txHash}`);
+    if (walletContext.signSend && walletContext.broadcast) {
+      const txBytes = await walletContext.signSend(amount, recipient);
+      onTxQueued(txBytes);
+      onClose();
     }
   };
 

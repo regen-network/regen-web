@@ -1,8 +1,18 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import TitleDescription from 'web-components/lib/components/title-description';
+
+const useStyles = makeStyles<Theme>(theme => ({
+  spacing: {
+    '& > div': {
+      paddingBottom: 0,
+    },
+  },
+}));
 
 type QueryData = {
   text: {
@@ -14,6 +24,7 @@ type QueryData = {
 };
 
 const FoldSection = (): JSX.Element => {
+  const styles = useStyles();
   const {
     text: {
       foldSection: { title, body },
@@ -31,7 +42,7 @@ const FoldSection = (): JSX.Element => {
 
   return (
     <Section>
-      <TitleDescription title={title} description={body} />
+      <TitleDescription className={styles.spacing} title={title} description={body} />
     </Section>
   );
 };

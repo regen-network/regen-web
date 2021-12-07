@@ -12,6 +12,7 @@ import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
 import { Label } from '../label';
+import { getImageSrc } from '../image-crop/canvas-utils';
 
 export interface ImageDropProps extends FieldProps {
   className?: string;
@@ -26,6 +27,8 @@ export interface ImageDropProps extends FieldProps {
   buttonText?: string;
   fixedCrop: Partial<Crop>;
   hideDragText?: boolean;
+  onDelete?: (fileName: string) => Promise<void>;
+  onUpload?: (imageFile: File) => Promise<string>;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -92,10 +95,13 @@ function ImageDrop({
   buttonText,
   fixedCrop,
   hideDragText,
+  onUpload,
+  onDelete,
   ...fieldProps
 }: ImageDropProps): JSX.Element {
   const [cropModalOpen, setCropModalOpen] = useState(false);
   const [initialImage, setInitialImage] = useState('');
+  const [fileName, setFileName] = useState('');
   const styles = useStyles();
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
@@ -132,6 +138,7 @@ function ImageDrop({
       event.target.files.length > 0
     ) {
       const file = event.target.files[0];
+      setFileName(file.name);
       toBase64(file).then(base64String => {
         if (typeof base64String === 'string') {
           setCropModalOpen(true);
@@ -153,19 +160,28 @@ function ImageDrop({
 
   const handleCropModalClose = (): void => {
     setInitialImage('');
+    setFileName('');
     form.setFieldTouched(field.name, true);
     setCropModalOpen(false);
   };
 
-  const handleCropModalSubmit = (croppedImage: HTMLImageElement): void => {
-    form.setFieldValue(field.name, croppedImage.src);
-    form.setFieldTouched(field.name, true);
-    setCropModalOpen(false);
+  const onCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
+    const result = await getImageSrc(croppedImage, onUpload, fileName);
+
+    if (result) {
+      form.setFieldValue(field.name, result);
+      form.setFieldTouched(field.name, true);
+      setCropModalOpen(false);
+    }
   };
 
-  const handleDelete = (): void => {
+  const handleDelete = async (): Promise<void> => {
+    if (onDelete) {
+      await onDelete(fileName);
+    }
     form.setFieldValue(field.name, undefined);
     setInitialImage('');
+    setFileName('');
   };
 
   return (
@@ -239,7 +255,7 @@ function ImageDrop({
       <CropImageModal
         open={cropModalOpen}
         onClose={handleCropModalClose}
-        onSubmit={handleCropModalSubmit}
+        onSubmit={onCropModalSubmit}
         initialImage={initialImage}
         fixedCrop={fixedCrop}
       />

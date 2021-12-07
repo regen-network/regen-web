@@ -7,6 +7,7 @@ import OutlinedButton from '../buttons/OutlinedButton';
 import FieldFormControl from './FieldFormControl';
 import CropImageModal from '../modal/CropImageModal';
 import AvatarIcon from '../icons/AvatarIcon';
+import { getImageSrc } from '../image-crop/canvas-utils';
 
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
@@ -45,6 +46,7 @@ interface Props extends FieldProps {
   fallbackAvatar?: JSX.Element;
   transformValue?: (v: any) => any;
   triggerOnChange?: (v: any) => Promise<void>;
+  onUpload?: (imageFile: File) => Promise<string>;
 }
 
 export default function ImageField({
@@ -55,9 +57,11 @@ export default function ImageField({
   fallbackAvatar,
   transformValue,
   triggerOnChange,
+  onUpload,
   ...fieldProps
 }: Props): JSX.Element {
   const [initialImage, setInitialImage] = useState('');
+  const [fileName, setFileName] = useState('');
   const styles = useStyles();
   const {
     form,
@@ -73,6 +77,20 @@ export default function ImageField({
       reader.onerror = error => reject(error);
     });
   }
+
+  const onCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
+    const result = await getImageSrc(croppedImage, onUpload, fileName);
+
+    setInitialImage('');
+    form.setFieldValue(name, result);
+    form.setFieldTouched(name, true);
+  };
+
+  const handleCropModalClose = (): void => {
+    setInitialImage('');
+    setFileName('');
+    form.setFieldTouched(name, true);
+  };
 
   return (
     <>
@@ -98,6 +116,7 @@ export default function ImageField({
                   toBase64(file).then(image => {
                     if (typeof image === 'string') {
                       setInitialImage(image);
+                      setFileName(file.name);
                     }
                   });
                 }
@@ -117,15 +136,8 @@ export default function ImageField({
         circularCrop
         initialImage={initialImage}
         open={!!initialImage}
-        onClose={() => {
-          setInitialImage('');
-          form.setFieldTouched(name, true);
-        }}
-        onSubmit={croppedImage => {
-          setInitialImage('');
-          form.setFieldValue(name, croppedImage.src);
-          form.setFieldTouched(name, true);
-        }}
+        onClose={handleCropModalClose}
+        onSubmit={onCropModalSubmit}
       />
     </>
   );

@@ -27,7 +27,7 @@ import { setPageView } from '../../lib/ga';
 import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
 import { useLedger, ContextType } from '../../ledger';
-import { chainId } from '../../wallet';
+import { chainId, useWallet } from '../../wallet';
 import {
   Documentation,
   ProjectTopSection,
@@ -36,6 +36,8 @@ import {
   CreditsPurchaseForm,
   LandManagementActions,
   BuyCreditsModal,
+  ProcessingModal,
+  ConfirmationModal,
 } from '../organisms';
 import { Credits } from '../organisms/BuyCreditsModal';
 import { DisplayValues } from '../organisms/EntityDisplayForm';
@@ -242,6 +244,9 @@ function ProjectDetails(): JSX.Element {
   const { api }: ContextType = useLedger();
   const { projectId } = useParams();
 
+  const walletContext = useWallet();
+  const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
@@ -305,7 +310,7 @@ function ProjectDetails(): JSX.Element {
   const [issuanceModalData, setIssuanceModalData] =
     useState<IssuanceModalData | null>(null);
   const [issuanceModalOpen, setIssuanceModalOpen] = useState(false);
-  const [isBuyCreditsModalOpen, setBuyCreditsModalOpen] = useState(false);
+  const [isBuyCreditsModalOpen, setIsBuyCreditsModalOpen] = useState(false);
 
   const viewOnLedger = (creditVintage: any): void => {
     if (creditVintage?.txHash) {
@@ -314,6 +319,26 @@ function ProjectDetails(): JSX.Element {
         setIssuanceModalData(issuanceData);
       }
       setIssuanceModalOpen(true);
+    }
+  };
+
+  const handleProcessingModalClose = (): void => {
+    if (walletContext?.txResult?.transactionHash) {
+      setIsConfirmationModalOpen(true);
+    }
+    setIsProcessingModalOpen(false);
+  };
+
+  const handleConfirmationModalClose = (): void => {
+    setIsProcessingModalOpen(false);
+    setIsConfirmationModalOpen(false);
+    walletContext.setTxResult(undefined);
+  };
+
+  const handleTxQueued = (txBytes: Uint8Array): void => {
+    setIsProcessingModalOpen(true);
+    if (walletContext?.broadcast) {
+      walletContext.broadcast(txBytes);
     }
   };
 
@@ -458,24 +483,12 @@ function ProjectDetails(): JSX.Element {
         </div>
       )}
 
-      {chainId && project.creditPrice && (
+      {chainId && project.creditPrice ? (
         <BuyFooter
-          onClick={() => setBuyCreditsModalOpen(true)}
+          onClick={() => setIsBuyCreditsModalOpen(true)}
           creditPrice={project.creditPrice}
         />
-      )}
-      {project.creditPrice && project.stripePrice && (
-        <Modal open={open} onClose={handleClose}>
-          <CreditsPurchaseForm
-            onClose={handleClose}
-            creditPrice={project.creditPrice}
-            stripePrice={project.stripePrice}
-          />
-          {/*<iframe title="airtable-presale-form" src={project.presaleUrl} />*/}
-        </Modal>
-      )}
-
-      {!project.creditPrice && (
+      ) : (
         <FixedFooter justifyContent="flex-end">
           <>
             <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
@@ -488,6 +501,16 @@ function ProjectDetails(): JSX.Element {
           */}
           </>
         </FixedFooter>
+      )}
+
+      {project.creditPrice && project.stripePrice && (
+        <Modal open={open} onClose={handleClose}>
+          <CreditsPurchaseForm
+            onClose={handleClose}
+            creditPrice={project.creditPrice}
+            stripePrice={project.stripePrice}
+          />
+        </Modal>
       )}
       <Modal open={open} onClose={handleClose}>
         <MoreInfoForm
@@ -508,25 +531,43 @@ function ProjectDetails(): JSX.Element {
         />
       )}
       {data && creditClassVersion && chainId && project.creditPrice && (
-        <BuyCreditsModal
-          open={isBuyCreditsModalOpen}
-          onClose={() => setBuyCreditsModalOpen(false)}
-          project={{
-            id: projectId as string,
-            name: data.projectByHandle?.metadata?.['http://schema.org/name'],
-            image:
-              data.projectByHandle?.metadata?.[
-                'http://regen.network/previewPhoto'
-              ],
-            creditDenom:
-              creditClassVersion.metadata?.[
-                'http://regen.network/creditDenom'
-              ] || creditClassName,
-            credits: project.credits,
-          }}
-          imageStorageBaseUrl={imageStorageBaseUrl}
-          apiServerUrl={apiServerUrl}
-        />
+        <>
+          <BuyCreditsModal
+            open={isBuyCreditsModalOpen}
+            onClose={() => setIsBuyCreditsModalOpen(false)}
+            onTxQueued={txRaw => handleTxQueued(txRaw)}
+            project={{
+              id: projectId as string,
+              name: data.projectByHandle?.metadata?.['http://schema.org/name'],
+              image:
+                data.projectByHandle?.metadata?.[
+                  'http://regen.network/previewPhoto'
+                ],
+              creditDenom:
+                creditClassVersion.metadata?.[
+                  'http://regen.network/creditDenom'
+                ] || creditClassName,
+              credits: project.credits,
+            }}
+            imageStorageBaseUrl={imageStorageBaseUrl}
+            apiServerUrl={apiServerUrl}
+          />
+          <ProcessingModal
+            open={
+              !walletContext?.txResult?.transactionHash && isProcessingModalOpen
+            }
+            txHash={walletContext?.txResult?.transactionHash}
+            onClose={handleProcessingModalClose}
+          />
+          <ConfirmationModal
+            open={
+              !!isConfirmationModalOpen ||
+              !!walletContext?.txResult?.transactionHash
+            }
+            onClose={handleConfirmationModalClose}
+            data={walletContext.txResult}
+          />
+        </>
       )}
       {submitted && <Banner text="Thanks for submitting your information!" />}
     </div>

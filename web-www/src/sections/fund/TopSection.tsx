@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
+import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../components/BackgroundSection';
@@ -28,6 +29,7 @@ const TopSection = (): JSX.Element => {
       text: fundYaml {
         topSection {
           header
+          body
         }
       }
     }
@@ -40,6 +42,7 @@ const TopSection = (): JSX.Element => {
       className={styles.section}
       linearGradient="linear-gradient(209.83deg, rgba(250, 235, 209, 0.8) 11.05%, rgba(125, 201, 191, 0.8) 43.17%, rgba(81, 93, 137, 0.8) 75.29%)"
       header={content.header}
+      body={ReactHtmlParser(content?.body)}
       imageData={imageData}
     />
   );

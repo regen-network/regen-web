@@ -2,16 +2,18 @@ import React from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import { useMediaQuery, Grid, FormHelperText } from '@mui/material';
 import { Formik, Form, Field, getIn } from 'formik';
+import { useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
-import { ImageDrop } from 'web-components/lib/components/inputs/ImageDrop';
+import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
 // import { VideoInput } from 'web-components/lib/components/inputs/VideoInput'; //TODO: make this component easier to use with share links from youtube, vimeo, etc
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
+import getApiUri from '../../lib/apiUri';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
@@ -122,6 +124,8 @@ const useStyles = makeStyles(theme => ({
 const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
   const theme = useTheme();
+  const apiUri = getApiUri();
+  const { projectId } = useParams();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
   const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -194,12 +198,15 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
               <OnBoardingCard className={styles.storyCard}>
                 <Field
                   classes={{ root: styles.field, main: styles.fullSizeMedia }}
-                  component={ImageDrop}
+                  component={ImageUpload}
                   label="Preview photo"
                   description="Choose the summary photo that will show up in project previews."
                   buttonText="+ Add preview Photo"
                   fixedCrop={cropAspect}
                   name="['http://regen.network/previewPhoto'].@value"
+                  apiServerUrl={apiUri}
+                  projectId={projectId}
+                  isDrop
                 />
                 <div className={styles.field}>
                   <FormLabel
@@ -211,10 +218,13 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     <Grid item xs={6} sm="auto" className={styles.galleryImage}>
                       <Field
                         classes={{ button: styles.smallButton }}
-                        component={ImageDrop}
+                        component={ImageUpload}
                         buttonText="+ Add Photo"
                         fixedCrop={cropAspect}
                         name="['http://regen.network/galleryPhotos'].@list[0].@value" // left
+                        apiServerUrl={apiUri}
+                        projectId={projectId}
+                        isDrop
                       />
                     </Grid>
                     {isTabletOrLarger ? (
@@ -227,19 +237,25 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         <Grid item sm={12} className={styles.centerSmall}>
                           <Field
                             classes={{ button: styles.smallButton }}
-                            component={ImageDrop}
+                            component={ImageUpload}
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryPhotos'].@list[1].@value" // top
                             hideDragText
+                            apiServerUrl={apiUri}
+                            projectId={projectId}
+                            isDrop
                           />
                         </Grid>
                         <Grid item sm={12} className={styles.centerSmall}>
                           <Field
                             classes={{ button: styles.smallButton }}
-                            component={ImageDrop}
+                            component={ImageUpload}
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryPhotos'].@list[2].@value" // bottom
                             hideDragText
+                            apiServerUrl={apiUri}
+                            projectId={projectId}
+                            isDrop
                           />
                         </Grid>
                       </Grid>
@@ -253,10 +269,13 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         >
                           <Field
                             classes={{ button: styles.smallButton }}
-                            component={ImageDrop}
+                            component={ImageUpload}
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryTop']"
                             buttonText="+ Add Photo"
+                            apiServerUrl={apiUri}
+                            projectId={projectId}
+                            isDrop
                           />
                         </Grid>
                         <Grid
@@ -267,10 +286,13 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         >
                           <Field
                             classes={{ button: styles.smallButton }}
-                            component={ImageDrop}
+                            component={ImageUpload}
                             fixedCrop={cropAspect}
                             name="['http://regen.network/galleryBottom']"
                             buttonText="+ Add Photo"
+                            apiServerUrl={apiUri}
+                            projectId={projectId}
+                            isDrop
                           />
                         </Grid>
                       </>
@@ -279,10 +301,13 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     <Grid item xs={6} sm="auto" className={styles.galleryImage}>
                       <Field
                         classes={{ button: styles.smallButton }}
-                        component={ImageDrop}
+                        component={ImageUpload}
                         buttonText="+ Add Photo"
                         fixedCrop={cropAspect}
                         name="['http://regen.network/galleryPhotos'].@list[3].@value" // right
+                        apiServerUrl={apiUri}
+                        projectId={projectId}
+                        isDrop
                       />
                     </Grid>
                   </Grid>
@@ -318,13 +343,16 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                 /> */}
                 <Field
                   classes={{ root: styles.field, main: styles.fullSizeMedia }}
-                  component={ImageDrop}
+                  component={ImageUpload}
                   label="Land Steward photo"
                   // labelSubText="(required if you don’t add a video)" TODO: uncomment when video input is ready
                   description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."
                   buttonText="+ Add Photo"
                   fixedCrop={cropAspect}
                   name="['http://regen.network/landStewardPhoto'].@value"
+                  apiServerUrl={apiUri}
+                  projectId={projectId}
+                  isDrop
                 />
               </OnBoardingCard>
 

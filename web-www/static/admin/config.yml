@@ -968,9 +968,15 @@ collections:
             widget: object
             fields:
               - {label: "Header", name: header, widget: string}
-              - {label: "Body", name: body, widget: string}
+              - {label: "Body", name: body, widget: markdown, required: false}
           - label: "Above the Fold Section"
             name: foldSection
+            widget: object
+            fields:
+              - {label: "Title", name: title, widget: string}
+              - {label: "Body", name: body, widget: markdown}
+          - label: "Thesis Section"
+            name: thesisSection
             widget: object
             fields:
               - {label: "Title", name: title, widget: string}
@@ -992,10 +998,10 @@ collections:
                     widget: object
                     required: false
                     fields:
-                      - {label: "Beginning", name: beginning, widget: string}
-                      - {label: "Link Text", name: linkText, widget: string}
-                      - {label: "Link URL", name: linkUrl, widget: string}
-                      - {label: "End", name: end, widget: string}
+                      - {label: "Beginning", name: beginning, widget: string, required: false}
+                      - {label: "Link Text", name: linkText, widget: string, required: false}
+                      - {label: "Link URL", name: linkUrl, widget: string, required: false}
+                      - {label: "End", name: end, widget: string, required: false}
   - label: "Case Studies content"
     name: "case-study-items"
     media_folder: '../../static/media'

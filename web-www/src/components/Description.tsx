@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Description, { DescriptionProps } from 'web-components/src/components/description';
+import Description, { DescriptionProps } from 'web-components/lib/components/description';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {

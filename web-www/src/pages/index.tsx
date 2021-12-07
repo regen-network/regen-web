@@ -26,12 +26,16 @@ const IndexPage = ({ location }: props): JSX.Element => {
   }
   background: file(relativePath: {eq: "home-climate-bg.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   backgroundMobile: file(relativePath: {eq: "home-climate-bg-mobile.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
 }
@@ -45,7 +49,7 @@ const IndexPage = ({ location }: props): JSX.Element => {
     <Box display={{ xs: 'block', sm: 'none' }}>
       <BackgroundImage
         Tag="div"
-        fluid={data.backgroundMobile.childImageSharp.gatsbyImageData}
+        fluid={data.backgroundMobile.childImageSharp.fluid}
         backgroundColor={theme.palette.grey['50']}
         style={{
           backgroundPosition: 'left 70%',
@@ -58,7 +62,7 @@ const IndexPage = ({ location }: props): JSX.Element => {
     <Box display={{ xs: 'none', sm: 'block' }}>
       <BackgroundImage
         Tag="div"
-        fluid={data.background.childImageSharp.gatsbyImageData}
+        fluid={data.background.childImageSharp.fluid}
         backgroundColor={theme.palette.grey['50']}
       >
         <ClimateSection />

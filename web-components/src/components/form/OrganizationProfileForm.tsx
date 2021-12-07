@@ -124,6 +124,7 @@ const OrganizationProfileForm: React.FC<FormProps> = props => {
                 label="Short organization description"
                 name="description"
                 rows={3}
+                minRows={3}
                 multiline
                 optional
               />

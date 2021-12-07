@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 
 import Grid from '@mui/material/Grid';
 import clsx from 'clsx';
-import { GatsbyImageData } from 'gatsby-plugin-image';
+import { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from './BackgroundSection';
@@ -122,7 +122,7 @@ interface ConnectSectionProps {
   className?: string;
   background: {
     childImageSharp: {
-      gatsbyImageData: GatsbyImageData;
+      fluid: FluidObject;
     };
   };
 }
@@ -155,12 +155,12 @@ const ConnectSection = ({
       className={clsx(className, classes.root)}
       linearGradient="unset"
       topSection={false}
-      imageData={background.childImageSharp.gatsbyImageData}
+      imageData={background.childImageSharp.fluid}
       header={header}
       titleClassName={clsx(titleClassName, classes.title)}
       titleVariant={titleVariant}
     >
-      <Grid container spacing={4} justify="space-between">
+      <Grid container spacing={4} justifyContent="space-between">
         {icons.map((item, i) => (
           <Grid item xs={4} sm={3} className={itemClassName} key={i}>
             <IconLabel

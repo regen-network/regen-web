@@ -2,16 +2,16 @@ import React, { ReactChild } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import BackgroundImage from 'gatsby-background-image';
 import { Link } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { FluidObject } from 'gatsby-image';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Section from 'web-components/src/components/section';
+import Section from 'web-components/lib/components/section';
 
 interface FAQSectionProps {
   category?: string;
-  imageData: GatsbyImage;
+  imageData: FluidObject;
   header: string;
   children?: ReactChild;
 }

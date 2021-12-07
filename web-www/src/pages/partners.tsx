@@ -116,7 +116,7 @@ const PartnersPage = ({ location }: props): JSX.Element => {
           <Title className={classes.title} align="center" variant="h1">
             {header}
           </Title>
-          <Grid spacing={7} justify="center" direction="row" alignItems="center" container>
+          <Grid spacing={7} justifyContent="center" direction="row" alignItems="center" container>
             {partners.map((partner: any, i: number) => (
               <Grid className={classes.item} xs={12} sm={4} item key={i}>
                 <GreenMediaCard

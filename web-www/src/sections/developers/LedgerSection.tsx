@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
@@ -43,7 +43,9 @@ const LedgerSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`{
   background: file(relativePath: {eq: "developers-ledger-bg.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: developersYaml {
@@ -52,7 +54,9 @@ const LedgerSection = (): JSX.Element => {
       body
       cosmosImage {
         childImageSharp {
-          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+          fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
         }
       }
     }
@@ -60,13 +64,13 @@ const LedgerSection = (): JSX.Element => {
 }
 `);
   const content = data.text.ledgerSection;
-  const imageData = data.background.childImageSharp.gatsbyImageData;
+  const imageData = data.background.childImageSharp.fluid;
   const classes = useStyles();
   return (
     <div className={classes.sectionWrapper}>
       <Section>
-        <GatsbyImage
-          image={content.cosmosImage.childImageSharp.gatsbyImageData}
+        <Img
+          fluid={content.cosmosImage.childImageSharp.fluid}
           className={classes.cosmosImg} />
         <TitleDescription
           className={classes.titleDesc}
@@ -75,7 +79,7 @@ const LedgerSection = (): JSX.Element => {
         ></TitleDescription>
       </Section>
       <div className={classes.bgGradient}>
-        <GatsbyImage image={imageData} className={classes.img} />
+        <Img fluid={imageData} className={classes.img} />
       </div>
     </div>
   );

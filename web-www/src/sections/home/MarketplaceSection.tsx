@@ -5,8 +5,8 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import { useStaticQuery, graphql } from 'gatsby';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
-import Section from 'web-components/src/components/section';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Section from 'web-components/lib/components/section';
+import Img from 'gatsby-image';
 import Tooltip from 'web-components/lib/components/tooltip';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -137,7 +137,9 @@ const MarketplaceSection = (): JSX.Element => {
       callToActions {
         image {
           childImageSharp {
-            gatsbyImageData(quality: 90, width: 159, layout: FIXED)
+            fixed(quality: 90, width: 159) {
+              ...GatsbyImageSharpFixed_withWebp
+            }
           }
         }
         caption
@@ -170,7 +172,7 @@ const MarketplaceSection = (): JSX.Element => {
           {content.callToActions.map(cta => {
             return (
               <Grid key={cta.header} className={classes.gridItem} item xs>
-                <GatsbyImage image={cta.image.childImageSharp.gatsbyImageData} />
+                <Img fixed={cta.image.childImageSharp.fixed} />
                 <div className={classes.smallTitle}>{cta.caption}</div>
                 <Title className={classes.h3} variant="h3" align="center">
                   {cta.header}

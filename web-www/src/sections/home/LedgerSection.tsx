@@ -7,7 +7,7 @@ import { makeStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 
 let useStyles = makeStyles((theme: Theme) => ({
   grid: {
@@ -90,12 +90,16 @@ const HomeLedger = () => {
   const data = useStaticQuery(graphql`{
   bg: file(relativePath: {eq: "farm-background.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   ledger: file(relativePath: {eq: "ledger.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: homeYaml {
@@ -109,11 +113,11 @@ const HomeLedger = () => {
   const content = data.text.ledgerSection; // TODO add title content to yaml once structure for styling set
 
   return (
-    <BackgroundImage Tag="section" fluid={data.bg.childImageSharp.gatsbyImageData}>
+    <BackgroundImage Tag="section" fluid={data.bg.childImageSharp.fluid}>
       <Grid className={classes.grid} container alignItems="center" wrap="nowrap">
         <Grid className={classes.imgContainer} item xs={12}>
-          <GatsbyImage
-            image={data.ledger.childImageSharp.gatsbyImageData}
+          <Img
+            fluid={data.ledger.childImageSharp.fluid}
             className={classes.img} />
         </Grid>
         <Grid item xs={12} className={classes.text}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { graphql, StaticQuery } from 'gatsby';
 import Grid from '@mui/material/Grid';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -94,7 +94,9 @@ const EnableSection = (): JSX.Element => {
       query={graphql`{
   background: file(relativePath: {eq: "image-topo-bg.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   content: pressKitYaml {
@@ -103,7 +105,9 @@ const EnableSection = (): JSX.Element => {
       description
       image {
         childImageSharp {
-          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+          fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
         }
       }
     }
@@ -116,11 +120,11 @@ const EnableSection = (): JSX.Element => {
           <div className={classes.root}>
             <Grid container alignItems="center">
               <Grid xs={12} item className={classes.imageContainer}>
-                <GatsbyImage
-                  image={content.image.childImageSharp.gatsbyImageData}
+                <Img
+                  fluid={content.image.childImageSharp.fluid}
                   className={classes.image} />
                 <div className={classes.imageBackground}>
-                  <GatsbyImage image={data.background.childImageSharp.gatsbyImageData} />
+                  <Img fluid={data.background.childImageSharp.fluid} />
                 </div>
               </Grid>
               <Grid xs={12} item className={classes.text}>

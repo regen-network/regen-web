@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import { GatsbyImageData } from 'gatsby-plugin-image';
+import { FluidObject } from 'gatsby-image';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -10,7 +10,7 @@ import TokenPool from './TokenPool';
 type QueryData = {
   bg: {
     childImageSharp: {
-      gatsbyImageData: GatsbyImageData;
+      fluid: FluidObject;
     };
   };
 };
@@ -29,12 +29,14 @@ const TokenEconomics = (): JSX.Element => {
   const data = useStaticQuery<QueryData>(graphql`{
   bg: file(relativePath: {eq: "topo-bg-portrait.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
 }
 `);
-  const topo = data?.bg?.childImageSharp?.gatsbyImageData;
+  const topo = data?.bg?.childImageSharp?.fluid;
 
   return (
     <BackgroundImage fluid={topo} className={styles.root}>

@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { graphql, StaticQuery } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
-import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
+import Img, { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 import clsx from 'clsx';
 
@@ -15,7 +15,7 @@ interface ContextSectionProps {
   description: string;
   image: {
     childImageSharp: {
-      gatsbyImageData: GatsbyImageData;
+      fluid: FluidObject;
     };
   };
   challenges: {
@@ -141,12 +141,16 @@ const ContextSection = ({ description, image, challenges }: ContextSectionProps)
       query={graphql`{
   bg: file(relativePath: {eq: "topo-bg-top.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   imageBg: file(relativePath: {eq: "image-bg.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: caseStudiesYaml {
@@ -162,7 +166,7 @@ const ContextSection = ({ description, image, challenges }: ContextSectionProps)
       render={data => {
         const content = data.text.caseStudies.contextSection;
         return (
-          <BackgroundImage fluid={data.bg.childImageSharp.gatsbyImageData}>
+          <BackgroundImage fluid={data.bg.childImageSharp.fluid}>
             <div className={classes.root}>
               <Grid className={classes.grid} container wrap="nowrap">
                 <Grid item xs={12} className={classes.text}>
@@ -182,7 +186,7 @@ const ContextSection = ({ description, image, challenges }: ContextSectionProps)
                   </ol>
                 </Grid>
                 <Grid item xs={12} className={classes.imageContainer}>
-                  <GatsbyImage image={image.childImageSharp.gatsbyImageData} className={classes.image} />
+                  <Img fluid={image.childImageSharp.fluid} className={classes.image} />
                 </Grid>
               </Grid>
             </div>

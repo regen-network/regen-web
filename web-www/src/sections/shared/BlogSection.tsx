@@ -1,12 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { useStaticQuery, graphql } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import BlogPosts from 'web-components/lib/components/sliders/BlogPosts';
-import Section from 'web-components/src/components/section';
+import Section from 'web-components/lib/components/section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -44,7 +44,9 @@ const BlogSection = () => {
       posts {
         image {
           childImageSharp {
-            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+            fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
           }
         }
         header
@@ -66,7 +68,7 @@ const BlogSection = () => {
             header,
             description,
             url,
-            img: <BackgroundImage className={classes.image} Tag="div" fluid={image.childImageSharp.gatsbyImageData} />,
+            img: <BackgroundImage className={classes.image} Tag="div" fluid={image.childImageSharp.fluid} />,
           }))}
         />
       </Section>

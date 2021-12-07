@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -70,7 +70,9 @@ const PartnershipsSection = (): JSX.Element => {
       query={graphql`{
   background: file(relativePath: {eq: "science-partnerships-bg.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   content: scienceYaml {
@@ -79,7 +81,9 @@ const PartnershipsSection = (): JSX.Element => {
       partners {
         image {
           childImageSharp {
-            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+            fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
           }
         }
         description
@@ -105,7 +109,7 @@ const PartnershipsSection = (): JSX.Element => {
                     sm={6}
                     className={i % 2 === 0 ? classes.itemLeft : classes.itemRight}
                   >
-                    <GatsbyImage image={p.image.childImageSharp.gatsbyImageData} className={classes.image} />
+                    <Img fluid={p.image.childImageSharp.fluid} className={classes.image} />
                     <Description className={classes.description}>
                       {ReactHtmlParser(p.description)}
                     </Description>

@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import SEO from '../components/seo';
-import Section from 'web-components/src/components/section';
+import Section from 'web-components/lib/components/section';
 import FAQ, { FAQProps } from 'web-components/lib/components/faq';
 
 interface Props extends PageProps, FAQProps {}

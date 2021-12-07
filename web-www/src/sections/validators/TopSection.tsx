@@ -21,7 +21,9 @@ const TopSection = (): JSX.Element => {
       query={graphql`{
   background: file(relativePath: {eq: "validators-top-bg.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: validatorsYaml {
@@ -39,7 +41,7 @@ const TopSection = (): JSX.Element => {
             header={data.text.topSection.header}
             body={data.text.topSection.body}
             className={classes.section}
-            imageData={data.background.childImageSharp.gatsbyImageData}
+            imageData={data.background.childImageSharp.fluid}
           />
         );
       }}

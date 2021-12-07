@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
+import Img, { FluidObject } from 'gatsby-image';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -14,14 +14,14 @@ interface BottomSectionProps {
     name: string;
     image: {
       childImageSharp: {
-        gatsbyImageData: GatsbyImageData;
+        fluid: FluidObject;
       };
     };
     role: string;
   };
   background: {
     childImageSharp: {
-      gatsbyImageData: GatsbyImageData;
+      fluid: FluidObject;
     };
   };
 }
@@ -131,7 +131,7 @@ const BottomSection = ({ background, quote, person }: BottomSectionProps): JSX.E
     <BackgroundSection
       topSection={false}
       linearGradient="linear-gradient(209.5deg, rgba(250, 235, 209, 0.5) 12.63%, rgba(125, 201, 191, 0.5) 44.03%, rgba(81, 93, 137, 0.5) 75.43%)"
-      imageData={background.childImageSharp.gatsbyImageData}
+      imageData={background.childImageSharp.fluid}
       className={classes.root}
     >
       <Title variant="h3" className={classes.title}>
@@ -140,8 +140,8 @@ const BottomSection = ({ background, quote, person }: BottomSectionProps): JSX.E
         <span className={clsx(classes.secondQuote, classes.quotes)}>”</span>
       </Title>
       <Grid className={classes.person} container alignItems="center">
-        <GatsbyImage
-          image={person.image.childImageSharp.gatsbyImageData}
+        <Img
+          fluid={person.image.childImageSharp.fluid}
           className={classes.image} />
         <div className={classes.text}>
           <Title variant="h5" className={classes.name}>

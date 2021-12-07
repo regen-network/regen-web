@@ -4,10 +4,10 @@ import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Section from 'web-components/src/components/section';
-import Title from 'web-components/src/components/title';
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
-import DecentralizeIcon from 'web-components/src/components/icons/DecentralizeIcon';
+import Section from 'web-components/lib/components/section';
+import Title from 'web-components/lib/components/title';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import DecentralizeIcon from 'web-components/lib/components/icons/DecentralizeIcon';
 import { MarketingDescription as Description } from '../../components/Description';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -74,7 +74,9 @@ const BlockExplorerSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`{
   background: file(relativePath: {eq: "stones-bg.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: tokenYaml {
@@ -88,7 +90,7 @@ const BlockExplorerSection = (): JSX.Element => {
 }
 `);
   const content = data.text.blockExplorerSection;
-  const imageData = data.background.childImageSharp.gatsbyImageData;
+  const imageData = data.background.childImageSharp.fluid;
 
   return (
     <BackgroundImage Tag="div" fluid={imageData}>

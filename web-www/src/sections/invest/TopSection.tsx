@@ -29,12 +29,16 @@ const TopSection = ({ paddingLR }: Props): JSX.Element => {
       query={graphql`{
   background: file(relativePath: {eq: "investors-top.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   backgroundMobile: file(relativePath: {eq: "investors-top-mobile.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: investYaml {
@@ -52,8 +56,8 @@ const TopSection = ({ paddingLR }: Props): JSX.Element => {
             header={data.text.topSection.header}
             body={data.text.topSection.body}
             className={classes.section}
-            imageData={data.background.childImageSharp.gatsbyImageData}
-            imageDataMobile={data.backgroundMobile.childImageSharp.gatsbyImageData}
+            imageData={data.background.childImageSharp.fluid}
+            imageDataMobile={data.backgroundMobile.childImageSharp.fluid}
           />
         </>;
       }}

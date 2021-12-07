@@ -23,7 +23,9 @@ const TokenConnectSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`{
   background: file(relativePath: {eq: "birds-background.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: tokenYaml {

@@ -281,6 +281,7 @@ const StoryForm: React.FC<StoryFormProps> = ({
                   }
                   name="['http://regen.network/landStory']"
                   rows={5}
+                  minRows={5}
                   multiline
                 />
               </OnBoardingCard>
@@ -296,6 +297,7 @@ const StoryForm: React.FC<StoryFormProps> = ({
                   }
                   name="['http://regen.network/landStewardStory']"
                   rows={16}
+                  minRows={16}
                   multiline
                 />
                 <Field
@@ -309,6 +311,7 @@ const StoryForm: React.FC<StoryFormProps> = ({
                   }
                   name="['http://regen.network/landStewardStoryTitle']"
                   rows={2}
+                  minRows={2}
                   multiline
                 />
               </OnBoardingCard>
@@ -332,6 +335,7 @@ const StoryForm: React.FC<StoryFormProps> = ({
                   }
                   name="['http://regen.network/projectQuote'].['http://regen.network/quote']"
                   rows={16}
+                  minRows={16}
                   multiline
                 />
                 <Field

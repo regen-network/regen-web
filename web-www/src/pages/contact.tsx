@@ -4,7 +4,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 import { useStaticQuery, graphql } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 import clsx from 'clsx';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
@@ -183,41 +183,46 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
-  const data = useStaticQuery(graphql`{
-  text: contactYaml {
-    header
-    body
-    form {
-      messageForPartners
-      requestTypes {
-        label
-        value
-      }
-    }
-    location {
-      header
-      body
-      image {
-        childImageSharp {
-          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+  const data = useStaticQuery(graphql`
+    query {
+      text: contactYaml {
+        header
+        body
+        form {
+          messageForPartners
+          requestTypes {
+            label
+            value
+          }
+        }
+        location {
+          header
+          body
+          image {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+        }
+        email {
+          header
+          body
+        }
+        faq {
+          header
+          image {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
         }
       }
     }
-    email {
-      header
-      body
-    }
-    faq {
-      header
-      image {
-        childImageSharp {
-          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
-        }
-      }
-    }
-  }
-}
-`);
+  `);
   const content = data.text;
 
   return <>
@@ -340,6 +345,7 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
                         label="Message"
                         multiline
                         rows={matches ? 6 : 4}
+                        minRows={matches ? 6 : 4}
                       />
                       <ContainedButton
                         disabled={(submitCount > 0 && !isValid) || isSubmitting}
@@ -369,12 +375,12 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
               </Description>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <GatsbyImage image={content.location.image.childImageSharp.gatsbyImageData} />
+              <Img fluid={content.location.image.childImageSharp.fluid} />
             </Grid>
           </Grid>
         </div>
       </Section>
-      <FAQSection header={content.faq.header} imageData={content.faq.image.childImageSharp.gatsbyImageData} />
+      <FAQSection header={content.faq.header} imageData={content.faq.image.childImageSharp.fluid} />
     </div>
   </>;
 };

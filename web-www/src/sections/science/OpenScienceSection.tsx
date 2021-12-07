@@ -74,7 +74,9 @@ const OpenScienceSection = (): JSX.Element => {
       query={graphql`{
   background: file(relativePath: {eq: "open-science.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   content: scienceYaml {
@@ -100,7 +102,7 @@ const OpenScienceSection = (): JSX.Element => {
             className={classes.root}
             linearGradient="unset"
             topSection={false}
-            imageData={data.background.childImageSharp.gatsbyImageData}
+            imageData={data.background.childImageSharp.fluid}
           >
             <Title className={classes.caption} variant="h6">
               {content.caption}

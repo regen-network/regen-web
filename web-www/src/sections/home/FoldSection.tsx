@@ -94,7 +94,9 @@ const HomeFoldSection = ({ className }: Props) => {
   const data = useStaticQuery(graphql`{
   desktop: file(relativePath: {eq: "image43.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: homeYaml {
@@ -105,7 +107,7 @@ const HomeFoldSection = ({ className }: Props) => {
   }
 }
 `);
-  const imageData = data.desktop.childImageSharp.gatsbyImageData;
+  const imageData = data.desktop.childImageSharp.fluid;
   const content = data.text.foldSection;
   return (
     <BackgroundImage

@@ -71,13 +71,15 @@ const EmailSubmitSection = ({ image, altContent, classes }: Props): JSX.Element 
   }
   desktop: file(relativePath: {eq: "regen-handshake.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
 }
 `}
       render={data => {
-        const imageData = image || data.desktop.childImageSharp.gatsbyImageData;
+        const imageData = image || data.desktop.childImageSharp.fluid;
         const content: Content = altContent || data.text.newsletterSection;
 
         return (

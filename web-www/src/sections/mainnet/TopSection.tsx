@@ -1,11 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { GatsbyImageData } from 'gatsby-plugin-image';
+import { FluidObject } from 'gatsby-image';
 import { makeStyles } from '@mui/styles';
 import { Typography } from '@mui/material';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Countdown from 'web-components/src/components/countdown';
+import Countdown from 'web-components/lib/components/countdown';
 import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type QueryData = {
-  desktop: { childImageSharp: { gatsbyImageData: GatsbyImageData } };
+  desktop: { childImageSharp: { fluid: FluidObject } };
   text: {
     launchDate: string;
     topSection: {
@@ -40,7 +40,9 @@ const TopSection: React.FC = () => {
   } = useStaticQuery<QueryData>(graphql`{
   desktop: file(relativePath: {eq: "mainnet-globe.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: mainnetYaml {

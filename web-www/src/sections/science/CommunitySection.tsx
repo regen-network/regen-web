@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
@@ -126,12 +126,16 @@ const CommunitySection = (): JSX.Element => {
       query={graphql`{
   arrow: file(relativePath: {eq: "Arrow.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   background: file(relativePath: {eq: "science-community-bg.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   content: scienceYaml {
@@ -157,18 +161,18 @@ const CommunitySection = (): JSX.Element => {
             className={classes.root}
             linearGradient="unset"
             topSection={false}
-            imageData={data.background.childImageSharp.gatsbyImageData}
+            imageData={data.background.childImageSharp.fluid}
           >
             <Grid container alignItems="center">
               <Grid xs={12} sm={6} item container wrap="nowrap" className={classes.connect}>
                 <Title className={classes.caption} variant="h3">
                   {content.caption}
                 </Title>
-                <GatsbyImage
-                  image={data.arrow.childImageSharp.gatsbyImageData}
+                <Img
+                  fluid={data.arrow.childImageSharp.fluid}
                   className={classes.arrow} />
               </Grid>
-              <Grid xs={12} sm={6} item container justify="flex-end" className={classes.icons}>
+              <Grid xs={12} sm={6} item container justifyContent="flex-end" className={classes.icons}>
                 <a
                   href="https://t.me/regennetwork_science"
                   rel="noopener noreferrer"

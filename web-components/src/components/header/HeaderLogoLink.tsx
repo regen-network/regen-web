@@ -28,14 +28,14 @@ export const HeaderLogoLink: React.FC<{ color: string }> = ({ color }) => {
   // perfect solution but should work until we can dedicate time to find
   // something more long-term. You can see the bug by visiting the /community
   // page in safari
-  useEffect(() => {
-    if (
-      typeof window !== 'undefined' &&
-      window.location &&
-      window.location.href
-    )
-      setIsLoaded(!isLoaded);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // useEffect(() => {
+  //   if (
+  //     typeof window !== 'undefined' &&
+  //     window.location &&
+  //     window.location.href
+  //   )
+  //     setIsLoaded(!isLoaded);
+  // }, [setIsLoaded, isLoaded]);
 
   return (
     <a href="/">

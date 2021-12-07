@@ -26,7 +26,9 @@ const PressKitTeamSection = (): JSX.Element => {
   }
   background: file(relativePath: {eq: "waterfall-bg.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: pressKitYaml {
@@ -47,7 +49,7 @@ const PressKitTeamSection = (): JSX.Element => {
       render={data => {
         const content = data.text.teamSection;
         return (
-          <BackgroundImage fluid={data.background.childImageSharp.gatsbyImageData}>
+          <BackgroundImage fluid={data.background.childImageSharp.fluid}>
             <TeamSection
               gridMd={3}
               titleClassName={classes.title}

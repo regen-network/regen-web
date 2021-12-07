@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { graphql, StaticQuery } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
-import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
+import Img, { FluidObject } from 'gatsby-image';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -14,7 +14,7 @@ import Description from 'web-components/lib/components/description';
 interface Image {
   image: {
     childImageSharp: {
-      gatsbyImageData: GatsbyImageData;
+      fluid: FluidObject;
     };
   };
   title?: string;
@@ -76,7 +76,9 @@ const ConclusionSection = ({ description, images }: ConclusionSectionProps): JSX
       query={graphql`{
   bg: file(relativePath: {eq: "topo-bg-top.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: caseStudiesYaml {
@@ -94,15 +96,15 @@ const ConclusionSection = ({ description, images }: ConclusionSectionProps): JSX
           <BackgroundSection
             topSection={false}
             linearGradient="unset"
-            imageData={data.bg.childImageSharp.gatsbyImageData}
+            imageData={data.bg.childImageSharp.fluid}
             className={classes.root}
           >
             <Grid container spacing={8} alignItems="center">
               <Grid item xs={12} sm={5}>
                 {images.map((img: Image, i: number) => (
                   <div key={i}>
-                    <GatsbyImage
-                      image={img.image.childImageSharp.gatsbyImageData}
+                    <Img
+                      fluid={img.image.childImageSharp.fluid}
                       className={
                         images.length > 1 && i > 0 ? clsx(classes.withMargin, classes.image) : classes.image
                       } />

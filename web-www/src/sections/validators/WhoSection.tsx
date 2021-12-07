@@ -3,7 +3,7 @@ import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -61,7 +61,9 @@ const WhoSection = (): JSX.Element => {
       query={graphql`{
   background: file(relativePath: {eq: "who-validators-bg.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: validatorsYaml {
@@ -75,7 +77,9 @@ const WhoSection = (): JSX.Element => {
           image {
             publicURL
             childImageSharp {
-              gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+              fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
             }
           }
           link
@@ -91,7 +95,7 @@ const WhoSection = (): JSX.Element => {
           <BackgroundSection
             linearGradient="unset"
             className={classes.section}
-            imageData={data.background.childImageSharp.gatsbyImageData}
+            imageData={data.background.childImageSharp.fluid}
             topSection={false}
           >
             <TitleDescription title={content.header} description={content.body} />
@@ -109,7 +113,7 @@ const WhoSection = (): JSX.Element => {
                   </Description>
 
                   <Box display={{ xs: 'none', sm: 'block' }}>
-                    <Grid container justify="center" spacing={7}>
+                    <Grid container justifyContent="center" spacing={7}>
                       {items.map((item: JSX.Element, index: number) => (
                         <Grid key={index} item xs={6} md={4}>
                           {item}

@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { graphql, StaticQuery } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
-import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
+import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
@@ -28,7 +28,7 @@ interface ApproachSectionProps {
   figureTitle: string;
   figureImage: {
     childImageSharp: {
-      gatsbyImageData: GatsbyImageData;
+      fluid: FluidObject;
     };
   };
 }
@@ -201,7 +201,7 @@ const ApproachSection = ({
             {description && <Description className={classes.description}>{description}</Description>}
             <Grid container spacing={10}>
               <Grid item xs={12} md={6}>
-                <GatsbyImage image={figureImage.childImageSharp.gatsbyImageData} className={classes.image} />
+                <Img fluid={figureImage.childImageSharp.fluid} className={classes.image} />
                 <Description className={classes.figureTitle}>{figureTitle}</Description>
               </Grid>
               <Grid item xs={12} md={6}>

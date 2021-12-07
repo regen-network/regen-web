@@ -21,7 +21,9 @@ const SciencePage = ({ location }: props): JSX.Element => {
   }
   image: file(relativePath: {eq: "science-newsletter-bg.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
 }
@@ -38,7 +40,7 @@ const SciencePage = ({ location }: props): JSX.Element => {
     <OpenScienceSection />
     <PartnershipsSection />
     <CommunitySection />
-    <EmailSubmitSection image={data.image.childImageSharp.gatsbyImageData} />
+    <EmailSubmitSection image={data.image.childImageSharp.fluid} />
     <BlogSection />
   </>;
 };

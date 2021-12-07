@@ -72,7 +72,9 @@ const CareersSection = (): JSX.Element => {
       query={graphql`{
   background: file(relativePath: {eq: "developers-careers-bg.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   content: developersYaml {
@@ -93,7 +95,7 @@ const CareersSection = (): JSX.Element => {
             linearGradient="unset"
             topSection={false}
             className={classes.section}
-            imageData={data.background.childImageSharp.gatsbyImageData}
+            imageData={data.background.childImageSharp.fluid}
           >
             <div className={classes.caption}>{content.caption}</div>
             <Title align="center" className={classes.title} variant="h2">

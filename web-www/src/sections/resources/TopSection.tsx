@@ -16,12 +16,16 @@ const TopSection = (): JSX.Element => {
       query={graphql`{
   background: file(relativePath: {eq: "resources-top-image.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   backgroundMobile: file(relativePath: {eq: "resources-top-image-mobile.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: resourcesYaml {
@@ -38,8 +42,8 @@ const TopSection = (): JSX.Element => {
             linearGradient={gradient}
             header={data.text.topSection.header}
             body={data.text.topSection.body}
-            imageData={data.background.childImageSharp.gatsbyImageData}
-            imageDataMobile={data.backgroundMobile.childImageSharp.gatsbyImageData}
+            imageData={data.background.childImageSharp.fluid}
+            imageDataMobile={data.backgroundMobile.childImageSharp.fluid}
           />
         </>;
       }}

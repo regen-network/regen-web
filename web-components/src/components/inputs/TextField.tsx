@@ -41,7 +41,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         display: 'block',
       },
     },
-    '& .MuiInput-formControl': {
+    '& .MuiInputBase-formControl': {
       marginTop: props.label ? theme.spacing(4) : 0,
       [theme.breakpoints.up('sm')]: {
         marginBottom: props.errors ? theme.spacing(5.25) : 0,
@@ -165,6 +165,7 @@ export default function RegenTextField({
   return (
     <TriggerTextField
       {...props}
+      variant="standard"
       transformValue={transformValue}
       triggerOnChange={triggerOnChange}
       className={clsx(classes.root, props.className)}

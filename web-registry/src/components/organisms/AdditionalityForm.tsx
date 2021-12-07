@@ -224,6 +224,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
                 description="Relevant environmental changes within the project area. These include changes in vegetation such as clearing or planting, hydrology, soil conditions, or other."
                 name="environmentalConditions"
                 rows={6}
+                minRows={6}
                 multiline
                 optional
               />

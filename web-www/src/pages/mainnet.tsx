@@ -29,7 +29,9 @@ const Mainnet: React.FC<PageProps> = ({ location }) => {
   } = useStaticQuery<QueryData>(graphql`{
   background: file(relativePath: {eq: "mainnet-globe.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: mainnetYaml {
@@ -53,7 +55,7 @@ const Mainnet: React.FC<PageProps> = ({ location }) => {
       <WhatsNextSection />
       <MediaSection />
       {new Date() < new Date(launchDate) && livecastLink && (
-        <FixedFooter justify="flex-end">
+        <FixedFooter justifyContent="flex-end">
           <ContainedButton href={livecastLink} target="_blank" rel="noopener noreferrer">
             Register for Mainnet Livecast
           </ContainedButton>

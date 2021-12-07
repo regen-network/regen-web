@@ -25,7 +25,9 @@ const InvolvedSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`{
   background: file(relativePath: {eq: "developers-involved-bg.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: developersYaml {

@@ -3,12 +3,12 @@ import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
-import Section from 'web-components/src/components/section';
+import Section from 'web-components/lib/components/section';
 
 interface Props {
   className?: string;
@@ -58,35 +58,42 @@ let useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const HomeValues = ({ className }: Props) => {
-  const data = useStaticQuery(graphql`{
-  bg: file(relativePath: {eq: "topo-bg-top.png"}) {
-    childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
-    }
-  }
-  ellipse: file(relativePath: {eq: "green-ellipse.png"}) {
-    childImageSharp {
-      gatsbyImageData(quality: 90, width: 120, layout: FIXED)
-    }
-  }
-  text: homeYaml {
-    valuesSection {
-      header
-      imageItems {
-        image {
-          childImageSharp {
-            gatsbyImageData(quality: 90, width: 120, layout: FIXED)
+  const data = useStaticQuery(graphql`
+    query {
+      bg: file(relativePath: { eq: "topo-bg-top.png" }) {
+        childImageSharp {
+          fluid(quality: 90, maxWidth: 1920) {
+            ...GatsbyImageSharpFluid_withWebp
           }
-          extension
-          publicURL
         }
-        header
-        description
+      }
+      ellipse: file(relativePath: { eq: "green-ellipse.png" }) {
+        childImageSharp {
+          fixed(quality: 90, width: 120) {
+            ...GatsbyImageSharpFixed_withWebp
+          }
+        }
+      }
+      text: homeYaml {
+        valuesSection {
+          header
+          imageItems {
+            image {
+              childImageSharp {
+                fixed(quality: 90, width: 120) {
+                  ...GatsbyImageSharpFixed_withWebp
+                }
+              }
+              extension
+              publicURL
+            }
+            header
+            description
+          }
+        }
       }
     }
-  }
-}
-`);
+  `);
   const content = data.text.valuesSection;
   const classes = useStyles();
 
@@ -95,7 +102,7 @@ const HomeValues = ({ className }: Props) => {
       !image.childImageSharp && image.extension === 'svg' ? (
         <img src={image.publicURL} alt={image.publicURL} />
       ) : (
-        <GatsbyImage image={image.childImageSharp.gatsbyImageData} />
+        <Img fixed={image.childImageSharp.fixed} />
       ),
     title,
     description,
@@ -105,7 +112,7 @@ const HomeValues = ({ className }: Props) => {
     <BackgroundImage
       Tag="section"
       className={clsx(className, classes.section)}
-      fluid={data.bg.childImageSharp.gatsbyImageData}
+      fluid={data.bg.childImageSharp.fluid}
     >
       <Section
         withSlider

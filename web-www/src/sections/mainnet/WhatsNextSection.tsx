@@ -4,9 +4,9 @@ import { makeStyles } from '@mui/styles';
 import { Grid, Typography } from '@mui/material';
 
 import BackgroundSection from '../../components/BackgroundSection';
-import { GatsbyImageData } from 'gatsby-plugin-image';
+import { FluidObject } from 'gatsby-image';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import GreenTopIconCard from 'web-components/src/components/cards/GreenTopIconCard';
+import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -50,7 +50,7 @@ type InfoItem = {
 type QueryData = {
   background: {
     childImageSharp: {
-      gatsbyImageData: GatsbyImageData;
+      fluid: FluidObject;
     };
   };
   text: {
@@ -71,7 +71,9 @@ const WhatsNextSection: React.FC = () => {
   } = useStaticQuery<QueryData>(graphql`{
   background: file(relativePath: {eq: "mainnet-whats-next.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: mainnetYaml {
@@ -103,7 +105,7 @@ const WhatsNextSection: React.FC = () => {
           {title}
         </Typography>
         <Typography className={classes.description}>{description}</Typography>
-        <Grid container direction="row" justify="center">
+        <Grid container direction="row" justifyContent="center">
           {infoItems.map(({ description, title, gitLink, icon }, i) => (
             <GreenTopIconCard
               key={i}

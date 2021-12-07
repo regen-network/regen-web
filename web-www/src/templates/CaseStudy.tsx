@@ -52,7 +52,9 @@ export const query = graphql`query ($slug: String!) {
       description
       background {
         childImageSharp {
-          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+          fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
         }
       }
       aboutSection {
@@ -67,7 +69,9 @@ export const query = graphql`query ($slug: String!) {
         }
         mapImage {
           childImageSharp {
-            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+            fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
           }
         }
       }
@@ -75,7 +79,9 @@ export const query = graphql`query ($slug: String!) {
         description
         image {
           childImageSharp {
-            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+            fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
           }
         }
         challenges {
@@ -90,7 +96,9 @@ export const query = graphql`query ($slug: String!) {
         figureTitle
         figureImage {
           childImageSharp {
-            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+            fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
           }
         }
       }
@@ -98,7 +106,9 @@ export const query = graphql`query ($slug: String!) {
         title
         background {
           childImageSharp {
-            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+            fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
           }
         }
         figures {
@@ -106,7 +116,9 @@ export const query = graphql`query ($slug: String!) {
           spacing
           image {
             childImageSharp {
-              gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+              fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
             }
           }
         }
@@ -117,7 +129,9 @@ export const query = graphql`query ($slug: String!) {
         next
         image {
           childImageSharp {
-            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+            fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
           }
         }
       }
@@ -127,7 +141,9 @@ export const query = graphql`query ($slug: String!) {
           title
           image {
             childImageSharp {
-              gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+              fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
             }
           }
         }
@@ -136,7 +152,9 @@ export const query = graphql`query ($slug: String!) {
         quote
         background {
           childImageSharp {
-            gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+            fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
           }
         }
         person {
@@ -144,7 +162,9 @@ export const query = graphql`query ($slug: String!) {
           role
           image {
             childImageSharp {
-              gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+              fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
             }
           }
         }

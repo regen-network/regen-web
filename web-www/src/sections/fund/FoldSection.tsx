@@ -1,8 +1,8 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import Section from 'web-components/src/components/section';
-import TitleDescription from 'web-components/src/components/title-description';
+import Section from 'web-components/lib/components/section';
+import TitleDescription from 'web-components/lib/components/title-description';
 
 type QueryData = {
   text: {

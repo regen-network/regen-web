@@ -43,7 +43,6 @@ export default function Title({
       align={align || 'left'}
       variant={variant}
       onClick={onClick}
-      component="div"
     >
       {children}
     </Typography>

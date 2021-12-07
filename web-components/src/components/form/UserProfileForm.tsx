@@ -116,6 +116,7 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({
                 label="Short personal description"
                 name="description"
                 rows={3}
+                minRows={3}
                 multiline
                 optional
               />

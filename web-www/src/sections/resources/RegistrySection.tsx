@@ -50,7 +50,9 @@ const RegistrySection = (): JSX.Element => {
       query={graphql`{
   background: file(relativePath: {eq: "image-grid-bg.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: resourcesYaml {
@@ -87,7 +89,7 @@ const RegistrySection = (): JSX.Element => {
           <BackgroundSection
             className={classes.section}
             linearGradient="unset"
-            imageData={data.background.childImageSharp.gatsbyImageData}
+            imageData={data.background.childImageSharp.fluid}
             topSection={false}
           >
             <Title className={classes.title} variant="h3" align="left">

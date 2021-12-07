@@ -28,7 +28,9 @@ const TopSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`{
   background: file(relativePath: {eq: "developers-top-image.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: developersYaml {
@@ -40,7 +42,7 @@ const TopSection = (): JSX.Element => {
 }
 `);
   const content = data.text.topSection;
-  const imageData = data.background.childImageSharp.gatsbyImageData;
+  const imageData = data.background.childImageSharp.fluid;
   return (
     <BackgroundSection
       linearGradient="linear-gradient(220.67deg, rgba(250, 235, 209, 0.6) 21.4%, rgba(125, 201, 191, 0.6) 46.63%, rgba(81, 93, 137, 0.6) 71.86%), linear-gradient(180deg, rgba(0, 0, 0, 0.684) 0%, rgba(0, 0, 0, 0) 97.78%)"

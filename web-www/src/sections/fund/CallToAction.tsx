@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Link, Grid, Avatar } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 import cx from 'clsx';
 
@@ -10,8 +10,8 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
-import Section from 'web-components/src/components/section';
-import Modal from 'web-components/src/components/modal';
+import Section from 'web-components/lib/components/section';
+import Modal from 'web-components/lib/components/modal';
 
 const useStyles = makeStyles<Theme>(theme => ({
   root: {
@@ -73,7 +73,9 @@ const CallToAction = (): JSX.Element => {
       callToActions {
         image {
           childImageSharp {
-            gatsbyImageData(quality: 90, width: 159, layout: FIXED)
+            fixed(quality: 90, width: 159) {
+              ...GatsbyImageSharpFixed_withWebp
+            }
           }
         }
         header
@@ -101,7 +103,7 @@ const CallToAction = (): JSX.Element => {
             <Grid key={cta.header} item sm={6}>
               <Card className={styles.card}>
                 <Avatar className={cx(styles.greenCircle, styles.verticalSpacing)}>
-                  <GatsbyImage image={cta.image.childImageSharp.gatsbyImageData} />
+                  <Img fixed={cta.image.childImageSharp.fixed} />
                 </Avatar>
                 <Title className={cx(styles.title, styles.verticalSpacing)} variant="h4" align="center">
                   {cta.header}

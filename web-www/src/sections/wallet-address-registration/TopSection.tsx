@@ -20,7 +20,9 @@ const TopSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`{
   background: file(relativePath: {eq: "wallet-address-registration.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: walletAddressRegistrationYaml {
@@ -32,7 +34,7 @@ const TopSection = (): JSX.Element => {
 }
 `);
   const content = data?.text?.topSection;
-  const imageData = data?.background?.childImageSharp?.gatsbyImageData;
+  const imageData = data?.background?.childImageSharp?.fluid;
   return (
     <BackgroundSection
       className={classes.section}

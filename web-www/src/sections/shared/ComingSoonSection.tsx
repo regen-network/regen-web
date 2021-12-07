@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Section from 'web-components/src/components/section';
+import Section from 'web-components/lib/components/section';
 import ProjectCardsSlider from 'web-components/lib/components/sliders/ProjectCardsSlider';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -19,37 +19,42 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const ComingSoonSection: React.FC = () => {
-  const data = useStaticQuery(graphql`{
-  background: file(relativePath: {eq: "coming-soon-bg.jpg"}) {
-    childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+  const data = useStaticQuery(graphql`
+  query {
+    background: file(relativePath: { eq: "coming-soon-bg.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
     }
-  }
-  text: sharedYaml {
-    comingSoonSection {
-      header
-      projects {
-        name
-        location
-        area
-        areaUnit
-        handle
-        comingSoon
-        image {
-          childImageSharp {
-            gatsbyImageData(quality: 90, layout: FIXED)
+    text: sharedYaml {
+      comingSoonSection {
+        header
+        projects {
+          name
+          location
+          area
+          areaUnit
+          handle
+          comingSoon
+          image {
+            childImageSharp {
+              fixed(quality: 90) {
+                ...GatsbyImageSharpFixed_withWebp
+              }
+            }
+            publicURL
           }
-          publicURL
         }
       }
     }
   }
-}
 `);
   const content = data.text.comingSoonSection;
   const classes = useStyles({});
   const theme = useTheme();
-  const imageData = data.background.childImageSharp.gatsbyImageData;
+  const imageData = data.background.childImageSharp.fluid;
 
   return (
     <BackgroundImage Tag="section" fluid={imageData} backgroundColor={theme.palette.grey['50']}>

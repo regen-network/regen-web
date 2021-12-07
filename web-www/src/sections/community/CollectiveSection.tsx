@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import { GatsbyImageData } from 'gatsby-plugin-image';
+import { FluidObject } from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
-import Section from 'web-components/src/components/section';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { MarketingDescription } from '../../components/Description';
 
 const useStyles = makeStyles<Theme>(theme => ({
@@ -51,7 +52,7 @@ const useStyles = makeStyles<Theme>(theme => ({
 type QueryData = {
   bg: {
     childImageSharp: {
-      gatsbyImageData: GatsbyImageData;
+      fluid: FluidObject;
     };
   };
   text: {
@@ -79,7 +80,9 @@ const CollectiveSection = (): JSX.Element => {
   } = useStaticQuery<QueryData>(graphql`{
   bg: file(relativePath: {eq: "topo-bg-portrait.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: communityYaml {

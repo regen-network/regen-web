@@ -30,7 +30,9 @@ const TokenPage = ({ location }: PageProps): JSX.Element => {
   }
   emailImage: file(relativePath: {eq: "deer-newsletter-bg.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: tokenYaml {
@@ -65,7 +67,7 @@ const TokenPage = ({ location }: PageProps): JSX.Element => {
     <MediaSection />
     <EmailSubmitSection
       classes={{ title: styles.newsletterTitle }}
-      image={data?.emailImage?.childImageSharp?.gatsbyImageData}
+      image={data?.emailImage?.childImageSharp?.fluid}
       altContent={{
         header: newsletterContent?.header,
         buttonText: newsletterContent?.buttonText,

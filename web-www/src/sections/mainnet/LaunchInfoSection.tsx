@@ -2,12 +2,12 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Grid, createStyles, Typography, LinearProgress, Theme } from '@mui/material';
 import { withStyles, makeStyles } from '@mui/styles';
-import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
-import { getFormattedDate } from 'web-components/src/utils/format';
+import Img, { FluidObject } from 'gatsby-image';
+import { getFormattedDate } from 'web-components/lib/utils/format';
 import clsx from 'clsx';
 
-import Section from 'web-components/src/components/section';
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import Section from 'web-components/lib/components/section';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
 const StyledLinearProgress = withStyles((theme: Theme) =>
   createStyles({
@@ -138,7 +138,7 @@ type QueryData = {
       title: string;
       image: {
         childImageSharp: {
-          gatsbyImageData: GatsbyImageData;
+          fluid: FluidObject;
         };
       };
       card: {
@@ -165,7 +165,9 @@ const LaunchInfoSection: React.FC = () => {
       title
       image {
         childImageSharp {
-          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+          fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
         }
       }
       card {
@@ -196,14 +198,14 @@ const LaunchInfoSection: React.FC = () => {
       <Typography variant="h1" className={classes.title}>
         {title}
       </Typography>
-      <Grid container justify="center" className={classes.actionItems}>
+      <Grid container justifyContent="center" className={classes.actionItems}>
         {card.actionItems.map((item, i) => (
           <ActionItem key={i} {...item} />
         ))}
       </Grid>
 
       <div className={classes.card}>
-        <GatsbyImage image={image.childImageSharp.gatsbyImageData} className={classes.image} />
+        <Img fluid={image.childImageSharp.fluid} className={classes.image} />
         <Grid container direction="column" className={classes.cardMain}>
           <Typography className={classes.cardTitle}>{card.title}</Typography>
           <Typography className={classes.launchDate}>

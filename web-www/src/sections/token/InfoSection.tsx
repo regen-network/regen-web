@@ -2,14 +2,14 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { CardContent, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { GatsbyImage, GatsbyImageData } from 'gatsby-plugin-image';
+import Img, { FluidObject } from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Section from 'web-components/src/components/section';
-import Title from 'web-components/src/components/title';
-import Card from 'web-components/src/components/cards/Card';
-import Description from 'web-components/src/components/description';
+import Section from 'web-components/lib/components/section';
+import Title from 'web-components/lib/components/title';
+import Card from 'web-components/lib/components/cards/Card';
+import Description from 'web-components/lib/components/description';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   card: {
@@ -90,7 +90,7 @@ type QueryData = {
       imageTitle: string;
       image: {
         childImageSharp: {
-          gatsbyImageData: GatsbyImageData;
+          fluid: FluidObject;
         };
       };
     };
@@ -109,7 +109,9 @@ const InfoSection = (): JSX.Element => {
     infoSection {
       image {
         childImageSharp {
-          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+          fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
         }
       }
       title
@@ -131,8 +133,8 @@ const InfoSection = (): JSX.Element => {
   return (
     <Section>
       <Card className={styles.card}>
-        <GatsbyImage
-          image={image?.childImageSharp?.gatsbyImageData}
+        <Img
+          fluid={image?.childImageSharp?.fluid}
           className={styles.image}
           title={imageTitle}
           alt={imageAltText} />

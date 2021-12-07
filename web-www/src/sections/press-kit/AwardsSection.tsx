@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
@@ -61,7 +61,9 @@ const AwardsSection = (): JSX.Element => {
                 url
                 image {
                   childImageSharp {
-                    gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+                    fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
                   }
                 }
               }
@@ -73,7 +75,7 @@ const AwardsSection = (): JSX.Element => {
         const content = data.content.awardsSection;
         const items: JSX.Element[] = content.items.map(({ image, url, title }) => (
           <a href={url} target="_blank" rel="noopener noreferrer">
-            <GatsbyImage image={image.childImageSharp.gatsbyImageData} className={classes.image} />
+            <Img fluid={image.childImageSharp.fluid} className={classes.image} />
             <Title className={classes.itemTitle} variant="h5">
               {title}
             </Title>

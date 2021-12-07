@@ -22,7 +22,9 @@ const PressKitPage = ({ location }: props): JSX.Element => {
   const data = useStaticQuery(graphql`{
   background: file(relativePath: {eq: "press-kit-topo-bg.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
 }
@@ -38,7 +40,7 @@ const PressKitPage = ({ location }: props): JSX.Element => {
     <EnableSection />
     <TimelineSection />
     <TeamSection />
-    <BackgroundImage fluid={data.background.childImageSharp.gatsbyImageData}>
+    <BackgroundImage fluid={data.background.childImageSharp.fluid}>
       <FeaturedSection />
       <AwardsSection />
       <LogosSection />

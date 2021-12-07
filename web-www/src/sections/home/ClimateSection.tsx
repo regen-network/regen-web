@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import { useStaticQuery, graphql } from 'gatsby';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
@@ -186,7 +186,9 @@ const ClimateSection = (): JSX.Element => {
       }
       image {
         childImageSharp {
-          gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+          fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
         }
       }
     }
@@ -211,8 +213,8 @@ const ClimateSection = (): JSX.Element => {
         </Title>
         <div className={classes.cardContent}>{content.problem.description}</div>
       </Card>
-      <GatsbyImage
-        image={content.image.childImageSharp.gatsbyImageData}
+      <Img
+        fluid={content.image.childImageSharp.fluid}
         className={classes.image} />
       {!downSm && <hr className={clsx(classes.line, classes.solutionLine)} />}
       <Card

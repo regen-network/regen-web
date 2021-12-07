@@ -22,7 +22,9 @@ const WhySection = (): JSX.Element => {
       query={graphql`{
   background: file(relativePath: {eq: "developers-topo-bg.jpg"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   content: validatorsYaml {
@@ -39,7 +41,7 @@ const WhySection = (): JSX.Element => {
           <BackgroundSection
             linearGradient="unset"
             topSection={false}
-            imageData={data.background.childImageSharp.gatsbyImageData}
+            imageData={data.background.childImageSharp.fluid}
             className={classes.section}
           >
             <TitleDescription title={content.header} description={content.body} />

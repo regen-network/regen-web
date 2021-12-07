@@ -7,7 +7,9 @@ const TopSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`{
   desktop: file(relativePath: {eq: "community-header.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: communityYaml {
@@ -18,7 +20,7 @@ const TopSection = (): JSX.Element => {
   }
 }
 `);
-  const imageData = data?.desktop?.childImageSharp?.gatsbyImageData;
+  const imageData = data?.desktop?.childImageSharp?.fluid;
   const content = data?.text?.topSection;
   return (
     <>

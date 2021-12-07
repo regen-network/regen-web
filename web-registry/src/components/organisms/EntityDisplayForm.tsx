@@ -255,6 +255,7 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
             label="Short organization description"
             name={`['${role}'].['http://schema.org/description']`}
             rows={4}
+            minRows={4}
             multiline
           />
         </div>
@@ -299,6 +300,7 @@ const IndividualFormlet: React.FC<IndividualFormletProps> = ({
             description="Describe any relevant background and experience."
             name={`['${role}'].['http://schema.org/description']`}
             rows={4}
+            minRows={4}
             multiline
           />
         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -94,7 +94,9 @@ const CarbonplusSection = (): JSX.Element => {
   const data = useStaticQuery(graphql`{
   cow: file(relativePath: {eq: "cow.png"}) {
     childImageSharp {
-      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+      fluid(quality: 90) {
+        ...GatsbyImageSharpFluid_withWebp
+      }
     }
   }
   text: homeYaml {
@@ -131,8 +133,8 @@ const CarbonplusSection = (): JSX.Element => {
           </ContainedButton>
         </Grid>
         <Grid className={classes.imageContainer} item xs={12}>
-          <GatsbyImage
-            image={data.cow.childImageSharp.gatsbyImageData}
+          <Img
+            fluid={data.cow.childImageSharp.fluid}
             className={classes.image} />
         </Grid>
       </Grid>

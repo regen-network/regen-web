@@ -22,14 +22,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     padding: theme.spacing(2, 4),
     minWidth: 0,
-    height: '100%',
     justifyContent: 'center',
     [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4),
+      fontSize: theme.typography.pxToRem(18),
+      height: theme.typography.pxToRem(60),
       width: theme.typography.pxToRem(181),
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: theme.spacing(3),
+      fontSize: theme.typography.pxToRem(21),
+      height: theme.typography.pxToRem(50),
       width: theme.typography.pxToRem(131),
     },
   },

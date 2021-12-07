@@ -1,8 +1,13 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Footer, FooterItemProps as FooterItem } from 'web-components/lib/components/footer/footer-new';
 import { RegistryIconLink, Link } from '../atoms';
 
 const AppFooter: React.FC = () => {
+  const history = useHistory();
+  const { pathname } = history.location;
+  const isHidden = ['/project-pages'].some(route => pathname.startsWith(route));
+
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
       title: 'Regen Registry',
@@ -49,7 +54,7 @@ const AppFooter: React.FC = () => {
     },
   ];
 
-  return (
+  return isHidden ? null : (
     <Footer
       footerItems={footerItems}
       iconLink={RegistryIconLink}

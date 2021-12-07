@@ -205,6 +205,7 @@ export const WalletProvider: React.FC = ({ children }) => {
           fee,
           'test',
         );
+        // eslint-disable-next-line no-console
         console.log('result', result);
         assertIsBroadcastTxSuccess(result);
 

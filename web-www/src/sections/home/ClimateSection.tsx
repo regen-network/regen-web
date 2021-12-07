@@ -171,30 +171,31 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const ClimateSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`{
-  text: homeYaml {
-    climateSection {
-      header
-      description
-      solution {
-        header
-        description
-      }
-      problem {
-        header
-        description
-      }
-      image {
-        childImageSharp {
-          fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+  const data = useStaticQuery(graphql`
+    {
+      text: homeYaml {
+        climateSection {
+          header
+          description
+          solution {
+            header
+            description
+          }
+          problem {
+            header
+            description
+          }
+          image {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
         }
       }
     }
-  }
-}
-`);
+  `);
   const classes = useStyles();
   const theme = useTheme();
   const downSm = useMediaQuery(theme.breakpoints.down('sm'));
@@ -213,9 +214,7 @@ const ClimateSection = (): JSX.Element => {
         </Title>
         <div className={classes.cardContent}>{content.problem.description}</div>
       </Card>
-      <Img
-        fluid={content.image.childImageSharp.fluid}
-        className={classes.image} />
+      <Img fluid={content.image.childImageSharp.fluid} className={classes.image} />
       {!downSm && <hr className={clsx(classes.line, classes.solutionLine)} />}
       <Card
         className={clsx(classes.card, classes.solutionCard)}

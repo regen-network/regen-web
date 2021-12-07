@@ -77,24 +77,25 @@ const CollectiveSection = (): JSX.Element => {
     text: {
       collectiveSection: { title, body, buttonText, signupFormUrl },
     },
-  } = useStaticQuery<QueryData>(graphql`{
-  bg: file(relativePath: {eq: "topo-bg-portrait.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  } = useStaticQuery<QueryData>(graphql`
+    {
+      bg: file(relativePath: { eq: "topo-bg-portrait.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: communityYaml {
+        collectiveSection {
+          title
+          body
+          buttonText
+          signupFormUrl
+        }
       }
     }
-  }
-  text: communityYaml {
-    collectiveSection {
-      title
-      body
-      buttonText
-      signupFormUrl
-    }
-  }
-}
-`);
+  `);
   const topo = fluid;
 
   return (

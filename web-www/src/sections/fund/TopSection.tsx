@@ -16,21 +16,22 @@ const useStyles = makeStyles<Theme>(theme => ({
 
 const TopSection = (): JSX.Element => {
   const styles = useStyles();
-  const data = useStaticQuery(graphql`{
-  background: file(relativePath: {eq: "waterfall.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      background: file(relativePath: { eq: "waterfall.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: fundYaml {
+        topSection {
+          header
+        }
       }
     }
-  }
-  text: fundYaml {
-    topSection {
-      header
-    }
-  }
-}
-`);
+  `);
   const content = data?.text?.topSection;
   const imageData = data?.background?.childImageSharp?.fluid;
 

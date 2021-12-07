@@ -25,22 +25,23 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 
 const TopSection = (): JSX.Element => {
   const classes = useStyles();
-  const data = useStaticQuery(graphql`{
-  background: file(relativePath: {eq: "developers-top-image.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      background: file(relativePath: { eq: "developers-top-image.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: developersYaml {
+        topSection {
+          header
+          body
+        }
       }
     }
-  }
-  text: developersYaml {
-    topSection {
-      header
-      body
-    }
-  }
-}
-`);
+  `);
   const content = data.text.topSection;
   const imageData = data.background.childImageSharp.fluid;
   return (

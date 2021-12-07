@@ -76,24 +76,25 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const ApproachSection = () => {
-  const data = useStaticQuery(graphql`{
-  text: sharedYaml {
-    featuredSection {
-      header
-      title
-      link
-      image {
-        childImageSharp {
-          fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+  const data = useStaticQuery(graphql`
+    {
+      text: sharedYaml {
+        featuredSection {
+          header
+          title
+          link
+          image {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          description
         }
       }
-      description
     }
-  }
-}
-`);
+  `);
   const classes = useStyles();
 
   const content = data.text.featuredSection;

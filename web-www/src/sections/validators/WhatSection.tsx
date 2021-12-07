@@ -24,22 +24,23 @@ const WhatSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`{
-  background: file(relativePath: {eq: "what-validators-bg.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  text: validatorsYaml {
-    whatSection {
-      header
-      body
-    }
-  }
-}
-`}
+      query={graphql`
+        {
+          background: file(relativePath: { eq: "what-validators-bg.jpg" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          text: validatorsYaml {
+            whatSection {
+              header
+              body
+            }
+          }
+        }
+      `}
       render={data => {
         return (
           <BackgroundSection

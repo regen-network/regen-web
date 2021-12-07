@@ -91,22 +91,23 @@ let useStyles = makeStyles((theme: Theme) => ({
 
 const HomeFoldSection = ({ className }: Props) => {
   const classes = useStyles({});
-  const data = useStaticQuery(graphql`{
-  desktop: file(relativePath: {eq: "image43.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      desktop: file(relativePath: { eq: "image43.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: homeYaml {
+        foldSection {
+          tagline
+          description
+        }
       }
     }
-  }
-  text: homeYaml {
-    foldSection {
-      tagline
-      description
-    }
-  }
-}
-`);
+  `);
   const imageData = data.desktop.childImageSharp.fluid;
   const content = data.text.foldSection;
   return (

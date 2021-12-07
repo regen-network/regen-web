@@ -104,26 +104,27 @@ const InfoSection = (): JSX.Element => {
     text: {
       infoSection: { image, title, subtitle, body, signupText, imageAltText, imageTitle },
     },
-  } = useStaticQuery<QueryData>(graphql`{
-  text: tokenYaml {
-    infoSection {
-      image {
-        childImageSharp {
-          fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+  } = useStaticQuery<QueryData>(graphql`
+    {
+      text: tokenYaml {
+        infoSection {
+          image {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          title
+          subtitle
+          body
+          signupText
+          imageAltText
+          imageTitle
         }
       }
-      title
-      subtitle
-      body
-      signupText
-      imageAltText
-      imageTitle
     }
-  }
-}
-`);
+  `);
 
   const scrollToSignup = (): void => {
     const signup = document.getElementById('newsletter-signup');
@@ -137,7 +138,8 @@ const InfoSection = (): JSX.Element => {
           fluid={image?.childImageSharp?.fluid}
           className={styles.image}
           title={imageTitle}
-          alt={imageAltText} />
+          alt={imageAltText}
+        />
         <CardContent className={styles.cardContent}>
           <Title variant="h3">{title}</Title>
           <Typography className={styles.subtitle}>{subtitle}</Typography>

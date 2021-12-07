@@ -40,38 +40,37 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const LedgerSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`{
-  background: file(relativePath: {eq: "developers-ledger-bg.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  text: developersYaml {
-    ledgerSection {
-      header
-      body
-      cosmosImage {
+  const data = useStaticQuery(graphql`
+    {
+      background: file(relativePath: { eq: "developers-ledger-bg.jpg" }) {
         childImageSharp {
           fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
       }
+      text: developersYaml {
+        ledgerSection {
+          header
+          body
+          cosmosImage {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
         }
       }
     }
-  }
-}
-`);
+  `);
   const content = data.text.ledgerSection;
   const imageData = data.background.childImageSharp.fluid;
   const classes = useStyles();
   return (
     <div className={classes.sectionWrapper}>
       <Section>
-        <Img
-          fluid={content.cosmosImage.childImageSharp.fluid}
-          className={classes.cosmosImg} />
+        <Img fluid={content.cosmosImage.childImageSharp.fluid} className={classes.cosmosImg} />
         <TitleDescription
           className={classes.titleDesc}
           title={content.header}

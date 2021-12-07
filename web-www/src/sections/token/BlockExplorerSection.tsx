@@ -71,24 +71,25 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const BlockExplorerSection = (): JSX.Element => {
   const styles = useStyles();
-  const data = useStaticQuery(graphql`{
-  background: file(relativePath: {eq: "stones-bg.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      background: file(relativePath: { eq: "stones-bg.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: tokenYaml {
+        blockExplorerSection {
+          header
+          description
+          buttonText
+          buttonUrl
+        }
       }
     }
-  }
-  text: tokenYaml {
-    blockExplorerSection {
-      header
-      description
-      buttonText
-      buttonUrl
-    }
-  }
-}
-`);
+  `);
   const content = data.text.blockExplorerSection;
   const imageData = data.background.childImageSharp.fluid;
 

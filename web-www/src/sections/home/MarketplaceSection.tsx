@@ -123,35 +123,36 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const MarketplaceSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`{
-  text: homeYaml {
-    marketplaceSection {
-      header
-      tooltip
-      body {
-        green
-        middle
-        popover
-        end
-      }
-      callToActions {
-        image {
-          childImageSharp {
-            fixed(quality: 90, width: 159) {
-              ...GatsbyImageSharpFixed_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      text: homeYaml {
+        marketplaceSection {
+          header
+          tooltip
+          body {
+            green
+            middle
+            popover
+            end
+          }
+          callToActions {
+            image {
+              childImageSharp {
+                fixed(quality: 90, width: 159) {
+                  ...GatsbyImageSharpFixed_withWebp
+                }
+              }
             }
+            caption
+            header
+            description
+            linkText
+            linkUrl
           }
         }
-        caption
-        header
-        description
-        linkText
-        linkUrl
       }
     }
-  }
-}
-`);
+  `);
 
   const content = data.text.marketplaceSection;
 

@@ -62,8 +62,8 @@ const AwardsSection = (): JSX.Element => {
                 image {
                   childImageSharp {
                     fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+                      ...GatsbyImageSharpFluid_withWebp
+                    }
                   }
                 }
               }

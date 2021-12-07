@@ -123,37 +123,38 @@ const CommunitySection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`{
-  arrow: file(relativePath: {eq: "Arrow.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  background: file(relativePath: {eq: "science-community-bg.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  content: scienceYaml {
-    communitySection {
-      caption
-      header
-      members {
-        name
-        role
-        image {
-          publicURL
+      query={graphql`
+        {
+          arrow: file(relativePath: { eq: "Arrow.png" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          background: file(relativePath: { eq: "science-community-bg.jpg" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          content: scienceYaml {
+            communitySection {
+              caption
+              header
+              members {
+                name
+                role
+                image {
+                  publicURL
+                }
+                description
+              }
+            }
+          }
         }
-        description
-      }
-    }
-  }
-}
-`}
+      `}
       render={data => {
         const content = data.content.communitySection;
         return (
@@ -168,9 +169,7 @@ const CommunitySection = (): JSX.Element => {
                 <Title className={classes.caption} variant="h3">
                   {content.caption}
                 </Title>
-                <Img
-                  fluid={data.arrow.childImageSharp.fluid}
-                  className={classes.arrow} />
+                <Img fluid={data.arrow.childImageSharp.fluid} className={classes.arrow} />
               </Grid>
               <Grid xs={12} sm={6} item container justifyContent="flex-end" className={classes.icons}>
                 <a

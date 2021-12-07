@@ -68,31 +68,32 @@ const WhatsNextSection: React.FC = () => {
     text: {
       whatsNextSection: { title, description, infoItems },
     },
-  } = useStaticQuery<QueryData>(graphql`{
-  background: file(relativePath: {eq: "mainnet-whats-next.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  } = useStaticQuery<QueryData>(graphql`
+    {
+      background: file(relativePath: { eq: "mainnet-whats-next.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
       }
-    }
-  }
-  text: mainnetYaml {
-    whatsNextSection {
-      title
-      description
-      infoItems {
-        title
-        description
-        gitLink
-        icon {
-          extension
-          publicURL
+      text: mainnetYaml {
+        whatsNextSection {
+          title
+          description
+          infoItems {
+            title
+            description
+            gitLink
+            icon {
+              extension
+              publicURL
+            }
+          }
         }
       }
     }
-  }
-}
-`);
+  `);
   const classes = useStyles();
   return (
     <BackgroundSection

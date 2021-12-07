@@ -114,9 +114,10 @@ const OrganizationProfile: React.FC = () => {
   });
 
   function handleSkip(): void {
+    // eslint-disable-next-line no-console
     console.log(
       'TODO: save that a user bypassed this step / is personal? Or just go to next',
-    ); // eslint-disable-line no-console
+    );
   }
 
   async function submitOrgProfile(values: OrgProfileFormValues): Promise<void> {

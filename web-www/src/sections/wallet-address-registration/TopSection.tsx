@@ -17,22 +17,23 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 
 const TopSection = (): JSX.Element => {
   const classes = useStyles();
-  const data = useStaticQuery(graphql`{
-  background: file(relativePath: {eq: "wallet-address-registration.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      background: file(relativePath: { eq: "wallet-address-registration.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: walletAddressRegistrationYaml {
+        topSection {
+          header
+          body
+        }
       }
     }
-  }
-  text: walletAddressRegistrationYaml {
-    topSection {
-      header
-      body
-    }
-  }
-}
-`);
+  `);
   const content = data?.text?.topSection;
   const imageData = data?.background?.childImageSharp?.fluid;
   return (

@@ -67,31 +67,32 @@ const PartnershipsSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`{
-  background: file(relativePath: {eq: "science-partnerships-bg.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  content: scienceYaml {
-    partnershipsSection {
-      header
-      partners {
-        image {
-          childImageSharp {
-            fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+      query={graphql`
+        {
+          background: file(relativePath: { eq: "science-partnerships-bg.jpg" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          content: scienceYaml {
+            partnershipsSection {
+              header
+              partners {
+                image {
+                  childImageSharp {
+                    fluid(quality: 90) {
+                      ...GatsbyImageSharpFluid_withWebp
+                    }
+                  }
+                }
+                description
+              }
+            }
           }
         }
-        description
-      }
-    }
-  }
-}
-`}
+      `}
       render={data => {
         const content = data.content.partnershipsSection;
         return (

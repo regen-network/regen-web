@@ -3,7 +3,6 @@ import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Img from 'gatsby-image';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -58,37 +57,38 @@ const WhoSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`{
-  background: file(relativePath: {eq: "who-validators-bg.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  text: validatorsYaml {
-    whoSection {
-      header
-      body
-      validators {
-        header
-        description
-        members {
-          image {
-            publicURL
+      query={graphql`
+        {
+          background: file(relativePath: { eq: "who-validators-bg.jpg" }) {
             childImageSharp {
               fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+                ...GatsbyImageSharpFluid_withWebp
+              }
             }
           }
-          link
+          text: validatorsYaml {
+            whoSection {
+              header
+              body
+              validators {
+                header
+                description
+                members {
+                  image {
+                    publicURL
+                    childImageSharp {
+                      fluid(quality: 90) {
+                        ...GatsbyImageSharpFluid_withWebp
+                      }
+                    }
+                  }
+                  link
+                }
+              }
+            }
+          }
         }
-      }
-    }
-  }
-}
-`}
+      `}
       render={data => {
         const content = data.text.whoSection;
         return (

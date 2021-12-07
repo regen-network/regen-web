@@ -140,9 +140,7 @@ const BottomSection = ({ background, quote, person }: BottomSectionProps): JSX.E
         <span className={clsx(classes.secondQuote, classes.quotes)}>”</span>
       </Title>
       <Grid className={classes.person} container alignItems="center">
-        <Img
-          fluid={person.image.childImageSharp.fluid}
-          className={classes.image} />
+        <Img fluid={person.image.childImageSharp.fluid} className={classes.image} />
         <div className={classes.text}>
           <Title variant="h5" className={classes.name}>
             {person.name}

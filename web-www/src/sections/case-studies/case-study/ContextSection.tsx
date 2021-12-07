@@ -138,31 +138,32 @@ const ContextSection = ({ description, image, challenges }: ContextSectionProps)
 
   return (
     <StaticQuery
-      query={graphql`{
-  bg: file(relativePath: {eq: "topo-bg-top.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  imageBg: file(relativePath: {eq: "image-bg.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  text: caseStudiesYaml {
-    caseStudies {
-      contextSection {
-        header
-        challenges
-      }
-    }
-  }
-}
-`}
+      query={graphql`
+        {
+          bg: file(relativePath: { eq: "topo-bg-top.png" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          imageBg: file(relativePath: { eq: "image-bg.png" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          text: caseStudiesYaml {
+            caseStudies {
+              contextSection {
+                header
+                challenges
+              }
+            }
+          }
+        }
+      `}
       render={data => {
         const content = data.text.caseStudies.contextSection;
         return (

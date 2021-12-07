@@ -9,21 +9,24 @@ interface props {
 }
 
 const NotFoundPage = ({ location }: props): JSX.Element => {
-  const data = useStaticQuery(graphql`{
-  grazing: file(relativePath: {eq: "rotational-grazing.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      grazing: file(relativePath: { eq: "rotational-grazing.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
       }
     }
-  }
-}
-`);
+  `);
 
-  return <>
-    <SEO location={location} title="404: Not found" />
-    <NotFound img={<Img fluid={data.grazing.childImageSharp.fluid} />} />
-  </>;
+  return (
+    <>
+      <SEO location={location} title="404: Not found" />
+      <NotFound img={<Img fluid={data.grazing.childImageSharp.fluid} />} />
+    </>
+  );
 };
 
 export default NotFoundPage;

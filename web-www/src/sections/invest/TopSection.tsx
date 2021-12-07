@@ -26,40 +26,43 @@ const TopSection = ({ paddingLR }: Props): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`{
-  background: file(relativePath: {eq: "investors-top.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  backgroundMobile: file(relativePath: {eq: "investors-top-mobile.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  text: investYaml {
-    topSection {
-      header
-      body
-    }
-  }
-}
-`}
+      query={graphql`
+        {
+          background: file(relativePath: { eq: "investors-top.jpg" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          backgroundMobile: file(relativePath: { eq: "investors-top-mobile.jpg" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          text: investYaml {
+            topSection {
+              header
+              body
+            }
+          }
+        }
+      `}
       render={data => {
-        return <>
-          <BackgroundSection
-            linearGradient={gradient}
-            header={data.text.topSection.header}
-            body={data.text.topSection.body}
-            className={classes.section}
-            imageData={data.background.childImageSharp.fluid}
-            imageDataMobile={data.backgroundMobile.childImageSharp.fluid}
-          />
-        </>;
+        return (
+          <>
+            <BackgroundSection
+              linearGradient={gradient}
+              header={data.text.topSection.header}
+              body={data.text.topSection.body}
+              className={classes.section}
+              imageData={data.background.childImageSharp.fluid}
+              imageDataMobile={data.backgroundMobile.childImageSharp.fluid}
+            />
+          </>
+        );
       }}
     />
   );

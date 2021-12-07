@@ -73,23 +73,24 @@ const ConclusionSection = ({ description, images }: ConclusionSectionProps): JSX
 
   return (
     <StaticQuery
-      query={graphql`{
-  bg: file(relativePath: {eq: "topo-bg-top.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  text: caseStudiesYaml {
-    caseStudies {
-      conclusionSection {
-        header
-      }
-    }
-  }
-}
-`}
+      query={graphql`
+        {
+          bg: file(relativePath: { eq: "topo-bg-top.png" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          text: caseStudiesYaml {
+            caseStudies {
+              conclusionSection {
+                header
+              }
+            }
+          }
+        }
+      `}
       render={data => {
         const content = data.text.caseStudies.conclusionSection;
         return (
@@ -107,7 +108,8 @@ const ConclusionSection = ({ description, images }: ConclusionSectionProps): JSX
                       fluid={img.image.childImageSharp.fluid}
                       className={
                         images.length > 1 && i > 0 ? clsx(classes.withMargin, classes.image) : classes.image
-                      } />
+                      }
+                    />
                     {img.title && <Description className={classes.imageTitle}>{img.title}</Description>}
                   </div>
                 ))}

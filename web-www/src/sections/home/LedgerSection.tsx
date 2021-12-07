@@ -87,28 +87,29 @@ let useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const HomeLedger = () => {
-  const data = useStaticQuery(graphql`{
-  bg: file(relativePath: {eq: "farm-background.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      bg: file(relativePath: { eq: "farm-background.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      ledger: file(relativePath: { eq: "ledger.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: homeYaml {
+        ledgerSection {
+          description
+        }
       }
     }
-  }
-  ledger: file(relativePath: {eq: "ledger.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  text: homeYaml {
-    ledgerSection {
-      description
-    }
-  }
-}
-`);
+  `);
   const classes = useStyles();
   const content = data.text.ledgerSection; // TODO add title content to yaml once structure for styling set
 
@@ -116,9 +117,7 @@ const HomeLedger = () => {
     <BackgroundImage Tag="section" fluid={data.bg.childImageSharp.fluid}>
       <Grid className={classes.grid} container alignItems="center" wrap="nowrap">
         <Grid className={classes.imgContainer} item xs={12}>
-          <Img
-            fluid={data.ledger.childImageSharp.fluid}
-            className={classes.img} />
+          <Img fluid={data.ledger.childImageSharp.fluid} className={classes.img} />
         </Grid>
         <Grid item xs={12} className={classes.text}>
           <Title align="left" variant="h1" className={classes.title}>

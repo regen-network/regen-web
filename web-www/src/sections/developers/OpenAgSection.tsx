@@ -43,29 +43,30 @@ const OpenAgSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`{
-  background: file(relativePath: {eq: "developers-topo-bg.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  content: developersYaml {
-    openAgSection {
-      header
-      image {
-        childImageSharp {
-          fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+      query={graphql`
+        {
+          background: file(relativePath: { eq: "developers-topo-bg.jpg" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          content: developersYaml {
+            openAgSection {
+              header
+              image {
+                childImageSharp {
+                  fluid(quality: 90) {
+                    ...GatsbyImageSharpFluid_withWebp
+                  }
+                }
+              }
+              body
+            }
+          }
         }
-      }
-      body
-    }
-  }
-}
-`}
+      `}
       render={data => {
         const content = data.content.openAgSection;
         return (
@@ -77,9 +78,7 @@ const OpenAgSection = (): JSX.Element => {
           >
             <Grid container alignItems="center" spacing={8}>
               <Grid item xs={12} sm={6}>
-                <Img
-                  fluid={content.image.childImageSharp.fluid}
-                  className={classes.image} />
+                <Img fluid={content.image.childImageSharp.fluid} className={classes.image} />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Title className={classes.title} variant="h3">

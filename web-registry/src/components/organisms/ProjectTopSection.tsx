@@ -432,7 +432,7 @@ function ProjectTopSection({
               ) ? (
                 <iframe
                   className={cx(classes.iframe, classes.media)}
-                  title={metadata?.['http://schema.org/name']}
+                  title={metadata?.['http://schema.org/name'] || 'project'}
                   src={videoURL}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 ></iframe>

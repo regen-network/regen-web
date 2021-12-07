@@ -91,28 +91,29 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const CarbonplusSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`{
-  cow: file(relativePath: {eq: "cow.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      cow: file(relativePath: { eq: "cow.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: homeYaml {
+        carbonPlusSection {
+          smallHeader {
+            featured
+            creditName
+          }
+          header
+          description
+          linkText
+          linkUrl
+        }
       }
     }
-  }
-  text: homeYaml {
-    carbonPlusSection {
-      smallHeader {
-        featured
-        creditName
-      }
-      header
-      description
-      linkText
-      linkUrl
-    }
-  }
-}
-`);
+  `);
   const classes = useStyles({});
   const content = data.text.carbonPlusSection;
 
@@ -133,9 +134,7 @@ const CarbonplusSection = (): JSX.Element => {
           </ContainedButton>
         </Grid>
         <Grid className={classes.imageContainer} item xs={12}>
-          <Img
-            fluid={data.cow.childImageSharp.fluid}
-            className={classes.image} />
+          <Img fluid={data.cow.childImageSharp.fluid} className={classes.image} />
         </Grid>
       </Grid>
     </div>

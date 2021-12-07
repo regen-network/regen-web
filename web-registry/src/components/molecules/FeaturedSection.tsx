@@ -121,6 +121,7 @@ const FeaturedSection: React.FC<Props> = ({ content }) => {
       </Section>
     );
   } else {
+    // eslint-disable-next-line no-console
     console.error('Missing some fields. Please check Sanity');
     return <></>;
   }

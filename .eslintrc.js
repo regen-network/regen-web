@@ -7,12 +7,11 @@ module.exports = {
     'no-empty': 'off',
     'no-console': 'warn',
     'no-useless-escape': 'off',
-    // '@typescript-eslint/explicit-function-return-type': [
-    //   'error',
-    //   {
-    //     allowExpressions: true,
-    //   },
-    // ],
-    '@typescript-eslint/no-explicit-any': 'off'
+    '@typescript-eslint/explicit-function-return-type': [
+      'error',
+      {
+        allowExpressions: true,
+      },
+    ],
   },
 };

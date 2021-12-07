@@ -158,40 +158,41 @@ const LaunchInfoSection: React.FC = () => {
       launchDate,
       launchInfoSection: { card, image, title },
     },
-  } = useStaticQuery<QueryData>(graphql`{
-  text: mainnetYaml {
-    launchDate
-    launchInfoSection {
-      title
-      image {
-        childImageSharp {
-          fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-        }
-      }
-      card {
-        title
-        listTitle
-        progress
-        listItems {
-          text
-        }
-        actionItems {
+  } = useStaticQuery<QueryData>(graphql`
+    {
+      text: mainnetYaml {
+        launchDate
+        launchInfoSection {
           title
-          linkUrl
-          linkText
-          description
-          icon {
-            extension
-            publicURL
+          image {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          card {
+            title
+            listTitle
+            progress
+            listItems {
+              text
+            }
+            actionItems {
+              title
+              linkUrl
+              linkText
+              description
+              icon {
+                extension
+                publicURL
+              }
+            }
           }
         }
       }
     }
-  }
-}
-`);
+  `);
   const classes = useStyles();
   return (
     <Section className={classes.root}>

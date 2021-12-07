@@ -24,21 +24,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const DevelopersConnectSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`{
-  background: file(relativePath: {eq: "developers-connect-bg.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      background: file(relativePath: { eq: "developers-connect-bg.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: developersYaml {
+        connectSection {
+          header
+        }
       }
     }
-  }
-  text: developersYaml {
-    connectSection {
-      header
-    }
-  }
-}
-`);
+  `);
   const content = data.text.connectSection;
   const classes = useStyles();
   const theme = useTheme();

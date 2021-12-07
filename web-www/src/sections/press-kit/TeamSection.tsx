@@ -20,32 +20,33 @@ const PressKitTeamSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`{
-  teamBackground: file(relativePath: {eq: "press-kit-team-bg.png"}) {
-    publicURL
-  }
-  background: file(relativePath: {eq: "waterfall-bg.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  text: pressKitYaml {
-    teamSection {
-      header
-      buttonText
-      members {
-        name
-        title
-        image {
-          publicURL
+      query={graphql`
+        {
+          teamBackground: file(relativePath: { eq: "press-kit-team-bg.png" }) {
+            publicURL
+          }
+          background: file(relativePath: { eq: "waterfall-bg.png" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          text: pressKitYaml {
+            teamSection {
+              header
+              buttonText
+              members {
+                name
+                title
+                image {
+                  publicURL
+                }
+              }
+            }
+          }
         }
-      }
-    }
-  }
-}
-`}
+      `}
       render={data => {
         const content = data.text.teamSection;
         return (

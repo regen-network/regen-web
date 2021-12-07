@@ -37,26 +37,27 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const BlogSection = () => {
-  const data = useStaticQuery(graphql`{
-  text: sharedYaml {
-    blogSection {
-      header
-      posts {
-        image {
-          childImageSharp {
-            fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+  const data = useStaticQuery(graphql`
+    {
+      text: sharedYaml {
+        blogSection {
+          header
+          posts {
+            image {
+              childImageSharp {
+                fluid(quality: 90) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
+            header
+            url
+            description
           }
         }
-        header
-        url
-        description
       }
     }
-  }
-}
-`);
+  `);
   const classes = useStyles();
 
   const content = data.text.blogSection;

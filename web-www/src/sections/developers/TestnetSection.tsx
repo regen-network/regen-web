@@ -87,29 +87,30 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const TestnetSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`{
-  background: file(relativePath: {eq: "testnet-bg.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      background: file(relativePath: { eq: "testnet-bg.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: developersYaml {
+        testnetSection {
+          header
+          description
+          address
+          leftColumnLabel
+          leftColumnContent
+          rightColumnLabel
+          rightColumnContent
+          buttonText
+          buttonLink
+        }
       }
     }
-  }
-  text: developersYaml {
-    testnetSection {
-      header
-      description
-      address
-      leftColumnLabel
-      leftColumnContent
-      rightColumnLabel
-      rightColumnContent
-      buttonText
-      buttonLink
-    }
-  }
-}
-`);
+  `);
   const content = data.text.testnetSection;
   const classes = useStyles();
   return (

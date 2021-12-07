@@ -69,25 +69,26 @@ const CareersSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`{
-  background: file(relativePath: {eq: "developers-careers-bg.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  content: developersYaml {
-    careersSection {
-      header
-      body
-      caption
-      buttonLink
-      buttonText
-    }
-  }
-}
-`}
+      query={graphql`
+        {
+          background: file(relativePath: { eq: "developers-careers-bg.jpg" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          content: developersYaml {
+            careersSection {
+              header
+              body
+              caption
+              buttonLink
+              buttonText
+            }
+          }
+        }
+      `}
       render={data => {
         const content = data.content.careersSection;
         return (

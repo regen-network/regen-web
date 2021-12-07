@@ -37,23 +37,24 @@ const TopSection: React.FC = () => {
   const {
     desktop: { childImageSharp },
     text: { topSection, launchDate },
-  } = useStaticQuery<QueryData>(graphql`{
-  desktop: file(relativePath: {eq: "mainnet-globe.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  } = useStaticQuery<QueryData>(graphql`
+    {
+      desktop: file(relativePath: { eq: "mainnet-globe.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: mainnetYaml {
+        launchDate
+        topSection {
+          header
+          body
+        }
       }
     }
-  }
-  text: mainnetYaml {
-    launchDate
-    topSection {
-      header
-      body
-    }
-  }
-}
-`);
+  `);
   const { body, header } = topSection;
   const classes = useStyles();
   return (

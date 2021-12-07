@@ -26,27 +26,28 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const CommunityConnectSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`{
-  background: file(relativePath: {eq: "developers-connect-bg.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      background: file(relativePath: { eq: "developers-connect-bg.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: communityYaml {
+        connectSection {
+          header
+          telegramSubLabel
+          telegramUrl
+          twitterSubLabel
+          twitterUrl
+          discordSubLabel
+          discordUrl
+        }
       }
     }
-  }
-  text: communityYaml {
-    connectSection {
-      header
-      telegramSubLabel
-      telegramUrl
-      twitterSubLabel
-      twitterUrl
-      discordSubLabel
-      discordUrl
-    }
-  }
-}
-`);
+  `);
   const content = data.text.connectSection;
   const styles = useStyles();
   const theme = useTheme();

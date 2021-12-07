@@ -180,10 +180,7 @@ const AboutSection = ({
             </Box>
             <Grid container spacing={10}>
               <Grid item xs={12} md={6}>
-                <BackgroundImage
-                  className={classes.background}
-                  fluid={mapImage.childImageSharp.fluid}
-                >
+                <BackgroundImage className={classes.background} fluid={mapImage.childImageSharp.fluid}>
                   <div className={classes.cardContainer}>
                     <MediaCard
                       borderColor={theme.palette.grey[100]}

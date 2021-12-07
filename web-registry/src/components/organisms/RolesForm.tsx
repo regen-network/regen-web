@@ -239,6 +239,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
+        // eslint-disable-next-line no-console
         console.log(e);
       }
       const newEntities = [...entities, { ...updatedEntity }];
@@ -258,6 +259,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
+        // eslint-disable-next-line no-console
         console.log(e);
       }
       const updatedEntities = entities.map((existingEntity: FormValues) =>
@@ -313,6 +315,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
+        // eslint-disable-next-line no-console
         console.log(e);
       }
       const newEntities = [...entities, { ...updatedEntity }];
@@ -352,6 +355,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
+        // eslint-disable-next-line no-console
         console.log(e);
       }
       const updatedEntities = entities.map((existingEntity: FormValues) =>

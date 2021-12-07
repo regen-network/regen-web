@@ -26,16 +26,17 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 
 const TokenEconomics = (): JSX.Element => {
   const styles = useStyles();
-  const data = useStaticQuery<QueryData>(graphql`{
-  bg: file(relativePath: {eq: "topo-bg-portrait.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery<QueryData>(graphql`
+    {
+      bg: file(relativePath: { eq: "topo-bg-portrait.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
       }
     }
-  }
-}
-`);
+  `);
   const topo = data?.bg?.childImageSharp?.fluid;
 
   return (

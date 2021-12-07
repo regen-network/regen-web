@@ -47,42 +47,43 @@ const RegistrySection = (): JSX.Element => {
   const classes = useStyles();
   return (
     <StaticQuery
-      query={graphql`{
-  background: file(relativePath: {eq: "image-grid-bg.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  text: resourcesYaml {
-    registrySection {
-      header
-      documentTableTitle
-      documents {
-        name
-        type
-        date
-        url
-      }
-      subsections {
-        title
-        cards {
-          image {
-            extension
-            publicURL
+      query={graphql`
+        {
+          background: file(relativePath: { eq: "image-grid-bg.png" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
           }
-          title
-          updated
-          description
-          buttonText
-          link
+          text: resourcesYaml {
+            registrySection {
+              header
+              documentTableTitle
+              documents {
+                name
+                type
+                date
+                url
+              }
+              subsections {
+                title
+                cards {
+                  image {
+                    extension
+                    publicURL
+                  }
+                  title
+                  updated
+                  description
+                  buttonText
+                  link
+                }
+              }
+            }
+          }
         }
-      }
-    }
-  }
-}
-`}
+      `}
       render={data => {
         const content = data.text.registrySection;
         return (

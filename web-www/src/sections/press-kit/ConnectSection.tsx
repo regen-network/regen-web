@@ -24,21 +24,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const PressKitConnectSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`{
-  background: file(relativePath: {eq: "press-kit-connect-bg.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  const data = useStaticQuery(graphql`
+    {
+      background: file(relativePath: { eq: "press-kit-connect-bg.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: pressKitYaml {
+        connectSection {
+          header
+        }
       }
     }
-  }
-  text: pressKitYaml {
-    connectSection {
-      header
-    }
-  }
-}
-`);
+  `);
   const content = data.text.connectSection;
   const theme = useTheme();
   const classes = useStyles();

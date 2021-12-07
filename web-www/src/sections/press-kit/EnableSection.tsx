@@ -91,38 +91,37 @@ const EnableSection = (): JSX.Element => {
 
   return (
     <StaticQuery
-      query={graphql`{
-  background: file(relativePath: {eq: "image-topo-bg.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  content: pressKitYaml {
-    enableSection {
-      header
-      description
-      image {
-        childImageSharp {
-          fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
+      query={graphql`
+        {
+          background: file(relativePath: { eq: "image-topo-bg.jpg" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          content: pressKitYaml {
+            enableSection {
+              header
+              description
+              image {
+                childImageSharp {
+                  fluid(quality: 90) {
+                    ...GatsbyImageSharpFluid_withWebp
+                  }
+                }
+              }
+            }
+          }
         }
-      }
-    }
-  }
-}
-`}
+      `}
       render={data => {
         const content = data.content.enableSection;
         return (
           <div className={classes.root}>
             <Grid container alignItems="center">
               <Grid xs={12} item className={classes.imageContainer}>
-                <Img
-                  fluid={content.image.childImageSharp.fluid}
-                  className={classes.image} />
+                <Img fluid={content.image.childImageSharp.fluid} className={classes.image} />
                 <div className={classes.imageBackground}>
                   <Img fluid={data.background.childImageSharp.fluid} />
                 </div>

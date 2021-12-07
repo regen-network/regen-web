@@ -47,6 +47,7 @@ const ProjectList: React.FC = () => {
     variables: {
       email: userEmail,
     },
+    fetchPolicy: 'cache-and-network',
   });
 
   const [createProject] = useCreateProjectMutation();

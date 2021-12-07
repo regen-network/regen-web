@@ -76,6 +76,7 @@ const Roles: React.FC<ProjectFormProps> = ({ isEdit }) => {
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
+    fetchPolicy: 'cache-and-network',
   });
   const { data: userProfileData } = useGetOrganizationProfileByEmailQuery({
     skip: !userEmail,

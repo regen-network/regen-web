@@ -12,10 +12,11 @@ export interface ProjectFormProps {
 const BasicInfo: React.FC<ProjectFormProps> = ({ isEdit }) => {
   const history = useHistory();
   const { projectId } = useParams<{ projectId: string }>();
-
   const [updateProject] = useUpdateProjectByIdMutation();
+
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
+    fetchPolicy: 'cache-and-network',
   });
 
   let initialFieldValues: BasicInfoFormValues | undefined;

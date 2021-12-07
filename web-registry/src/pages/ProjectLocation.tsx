@@ -20,6 +20,7 @@ const ProjectLocation: React.FC<ProjectFormProps> = ({ isEdit }) => {
   const [updateAddress] = useUpdateAddressByIdMutation();
   const { data: projectData } = useProjectByIdQuery({
     variables: { id: projectId },
+    fetchPolicy: 'cache-and-network',
   });
 
   let initialFieldValues: any | undefined;

@@ -83,7 +83,9 @@ const useStyles = makeStyles(theme => ({
   },
   section: {
     flex: 1,
-    maxWidth: theme.spacing(185.75),
+    [theme.breakpoints.up('md')]: {
+      width: theme.spacing(185.75),
+    },
   },
   navItem: {
     borderBottom: `1px solid ${theme.palette.grey[100]}`,

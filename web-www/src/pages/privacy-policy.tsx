@@ -19,7 +19,7 @@ const PrivacyPolicy: React.FC<PageProps> = ({ location }) => {
         location={location}
         description="Regen Network aligns economics with ecology to drive regenerative land management."
       />
-      <MarkdownSection title="Privacy Policy" mdContent={data.markdownRemark.html} />
+      <MarkdownSection title="Privacy Policy" mdContent={data?.markdownRemark?.html || ''} />
     </>
   );
 };

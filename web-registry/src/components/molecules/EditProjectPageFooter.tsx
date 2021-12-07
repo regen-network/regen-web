@@ -24,12 +24,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     minWidth: 0,
     justifyContent: 'center',
     [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
+      fontSize: theme.typography.pxToRem(21),
       height: theme.typography.pxToRem(60),
-      width: theme.typography.pxToRem(181),
+      width: theme.typography.pxToRem(181.11),
     },
     [theme.breakpoints.down('xs')]: {
-      fontSize: theme.typography.pxToRem(21),
+      fontSize: theme.typography.pxToRem(18),
       height: theme.typography.pxToRem(50),
       width: theme.typography.pxToRem(131),
     },
@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   saveIcon: {
     marginRight: theme.spacing(1),
     height: theme.typography.pxToRem(15),
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: theme.spacing(0.25),
+    },
   },
 }));
 

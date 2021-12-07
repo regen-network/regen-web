@@ -14,7 +14,7 @@ export interface ActionProps {
   className?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',

@@ -17,7 +17,7 @@ interface Props {
   readonly children: React.ReactNode;
 }
 
-const MedulasThemeProvider = ({
+const RegenThemeProvider = ({
   injectFonts = false,
   injectStyles,
   children,
@@ -37,4 +37,4 @@ const MedulasThemeProvider = ({
   );
 };
 
-export default MedulasThemeProvider;
+export default RegenThemeProvider;

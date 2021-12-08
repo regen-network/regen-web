@@ -48,7 +48,8 @@ function App(): JSX.Element {
       return new Promise(async (resolve, reject) => {
         try {
           const token = await executeRecaptcha('login_page');
-          const apiUri: string = process.env.REACT_APP_API_URI || 'http://localhost:5000';
+          const apiUri: string =
+            process.env.REACT_APP_API_URI || 'http://localhost:5000';
           const res = await axios({
             method: 'POST',
             url: `${apiUri}/recaptcha/v3/verify`,
@@ -68,7 +69,7 @@ function App(): JSX.Element {
                 responseMode,
                 state,
               },
-              function(err) {
+              function (err) {
                 if (err) {
                   reject(err);
                 } else {
@@ -96,7 +97,10 @@ function App(): JSX.Element {
       />
       <OnBoardingSection formContainer title="Log in">
         <LoginForm
-          signupFromLogin={process.env.REACT_APP_SIGNUP_LINK || 'https://www.regen.network/registry/signup'}
+          signupFromLogin={
+            process.env.REACT_APP_SIGNUP_LINK ||
+            'https://www.regen.network/registry/signup'
+          }
           submit={submit}
         />
       </OnBoardingSection>

@@ -81,6 +81,7 @@ const LocationField: React.FC<Props> = ({
                     .then(({ body }) => {
                       setFeatures(body.features);
                       setShowResults(true);
+                      form.setFieldTouched(field.name, true);
                     });
                 } else {
                   geocoderService
@@ -93,6 +94,7 @@ const LocationField: React.FC<Props> = ({
                     .then(res => {
                       setFeatures(res.body.features);
                       setShowResults(true);
+                      form.setFieldTouched(field.name, true);
                     });
                 }
               }

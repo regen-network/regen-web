@@ -69,6 +69,7 @@ const LocationField: React.FC<Props> = ({
                 const isCoordinates = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/.test(
                   value,
                 );
+                form.setFieldTouched(field.name, true);
                 if (isCoordinates) {
                   const [longitude, latitude] = value.split(',').map(Number) as [number, number];
                   const coordinates: [number, number] = [longitude, latitude];
@@ -81,7 +82,6 @@ const LocationField: React.FC<Props> = ({
                     .then(({ body }) => {
                       setFeatures(body.features);
                       setShowResults(true);
-                      form.setFieldTouched(field.name, true);
                     });
                 } else {
                   geocoderService
@@ -94,7 +94,6 @@ const LocationField: React.FC<Props> = ({
                     .then(res => {
                       setFeatures(res.body.features);
                       setShowResults(true);
-                      form.setFieldTouched(field.name, true);
                     });
                 }
               }

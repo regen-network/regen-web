@@ -33,6 +33,7 @@ const ProjectLocationForm: React.FC<{
       enableReinitialize
       validateOnMount
       validateOnBlur
+      validateOnChange
       initialValues={{
         'http://schema.org/location': initialValues?.['http://schema.org/location'] || {},
       }}

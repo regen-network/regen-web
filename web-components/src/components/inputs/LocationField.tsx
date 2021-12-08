@@ -63,13 +63,14 @@ const LocationField: React.FC<Props> = ({
               handleBlur(value);
               setTimeout(() => setShowResults(false), 200); // without the timeout, `onBlur` fires before the click event on the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
             }}
+            onFocus={() => form.setFieldTouched(field.name, true)}
             onChange={({ target: { value } }) => {
               handleChange(value);
+              form.setFieldTouched(field.name, true);
               if (value.length > 1) {
                 const isCoordinates = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/.test(
                   value,
                 );
-                form.setFieldTouched(field.name, true);
                 if (isCoordinates) {
                   const [longitude, latitude] = value.split(',').map(Number) as [number, number];
                   const coordinates: [number, number] = [longitude, latitude];

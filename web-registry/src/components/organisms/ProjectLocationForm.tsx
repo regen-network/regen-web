@@ -67,6 +67,8 @@ const ProjectLocationForm: React.FC<{
       }}
     >
       {({ submitForm, isValid, isSubmitting, touched }) => {
+        console.log('isValid', isValid); //TODO: delete after testing
+        console.log('touched', !!Object.keys(touched).length);
         return (
           <Form>
             <OnBoardingCard>

@@ -31,9 +31,6 @@ const ProjectLocationForm: React.FC<{
   return (
     <Formik
       enableReinitialize
-      // validateOnMount
-      // validateOnBlur todo
-      // validateOnChange
       initialValues={{
         'http://schema.org/location': initialValues?.['http://schema.org/location'] || {},
       }}
@@ -41,11 +38,6 @@ const ProjectLocationForm: React.FC<{
         const errors: FormikErrors<ProjectLocationFormValues | { [path: string]: string }> = {};
         if (graphData?.shaclGraphByUri?.graph) {
           const projectPageData = { ...getProjectPageBaseData(), ...values };
-          console.log(
-            'projectPageData http://schema.org/location',
-            projectPageData?.['http://schema.org/location'],
-          );
-
           const report = await validate(
             graphData.shaclGraphByUri.graph,
             projectPageData,
@@ -72,7 +64,6 @@ const ProjectLocationForm: React.FC<{
       }}
     >
       {({ submitForm, isValid, isSubmitting, touched }) => {
-        console.log('render isValid', isValid); //TODO: delete after testing
         return (
           <Form>
             <OnBoardingCard>

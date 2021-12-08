@@ -64,9 +64,7 @@ const LocationField: React.FC<Props> = ({
                 handleBlur(value);
                 setShowResults(false);
                 // without the timeout, `onBlur` fires before the click event on the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
-                // form.validateField();
-                console.log('after blur field.value', field.value);
-              }, 700);
+              }, 800);
             }}
             onSelect={() => form.setFieldTouched(field.name, true)}
             onChange={({ target: { value } }) => {

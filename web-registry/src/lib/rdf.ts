@@ -28,17 +28,17 @@ export async function validate(shapesJSON: any, dataJSON: any, group?: string): 
   const validator = new SHACLValidator(shapes, { factory, group });
   const report = validator.validate(data);
 
-  console.log(report);
-  for (const result of report.results) {
-    // See https://www.w3.org/TR/shacl/#results-validation-result for details
-    // about each property
-    console.log(result.message);
-    console.log(result.path);
-    console.log(result.focusNode);
-    console.log(result.severity);
-    console.log(result.sourceConstraintComponent);
-    console.log(result.sourceShape);
-  }
+  // console.log(report);
+  // for (const result of report.results) {
+  //   // See https://www.w3.org/TR/shacl/#results-validation-result for details
+  //   // about each property
+  //   console.log(result.message);
+  //   console.log(result.path);
+  //   console.log(result.focusNode);
+  //   console.log(result.severity);
+  //   console.log(result.sourceConstraintComponent);
+  //   console.log(result.sourceShape);
+  // }
 
   return report;
 }

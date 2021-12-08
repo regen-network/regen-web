@@ -53,16 +53,18 @@ const LocationField: React.FC<Props> = ({
       optional={optional}
       {...fieldProps}
     >
-      {({ handleChange }) => (
+      {({ handleChange, handleBlur }) => (
         <>
           <Input
             {...fieldProps}
             placeholder={placeholder}
             value={field.value ? field.value.place_name : undefined}
-            // onBlur={({ target: { value } }) => {
-            //   handleBlur(value);
-            //   setTimeout(() => setShowResults(false), 200); // without the timeout, `onBlur` fires before the click event on the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
-            // }}
+            onBlur={({ target: { value } }) => {
+              // console.log('onBlur', value);
+              // handleBlur(value);
+              setTimeout(() => setShowResults(false), 200); // without the timeout, `onBlur` fires before the click event on the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
+            }}
+            onSelect={() => form.setFieldTouched(field.name, true)}
             onChange={({ target: { value } }) => {
               handleChange(value);
               if (value.length > 1) {

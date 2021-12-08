@@ -32,8 +32,7 @@ const ProjectLocationForm: React.FC<{
     <Formik
       enableReinitialize
       validateOnMount
-      validateOnBlur
-      validateOnChange
+      // validateOnBlur
       initialValues={{
         'http://schema.org/location': initialValues?.['http://schema.org/location'] || {},
       }}
@@ -48,6 +47,8 @@ const ProjectLocationForm: React.FC<{
             'http://regen.network/ProjectPageLocationGroup',
           );
 
+          console.log('validate report', report);
+          console.log('values', values);
           for (const result of report.results) {
             const path: keyof ProjectLocationFormValues = result.path.value;
             errors[path] = requiredMessage;

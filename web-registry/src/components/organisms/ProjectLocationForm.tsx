@@ -32,7 +32,7 @@ const ProjectLocationForm: React.FC<{
     <Formik
       enableReinitialize
       validateOnMount
-      validateOnBlur
+      // validateOnBlur
       initialValues={{
         'http://schema.org/location': initialValues?.['http://schema.org/location'] || {},
       }}

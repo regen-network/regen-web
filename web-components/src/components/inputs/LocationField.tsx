@@ -61,7 +61,12 @@ const LocationField: React.FC<Props> = ({
             value={field.value ? field.value.place_name : undefined}
             onBlur={({ target: { value } }) => {
               handleBlur(value);
-              setTimeout(() => setShowResults(false), 200); // without the timeout, `onBlur` fires before the click event on the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
+              setTimeout(() => {
+                setShowResults(false);
+                // without the timeout, `onBlur` fires before the click event on the results list, so the value doesn't properly update. There's probably a better solution to this, but it works fo rnow
+                form.validateField(field.name);
+                console.log('after blur');
+              }, 200);
             }}
             onSelect={() => form.setFieldTouched(field.name, true)}
             onChange={({ target: { value } }) => {
@@ -114,7 +119,6 @@ const LocationField: React.FC<Props> = ({
                     ...item,
                   });
                   setShowResults(false);
-                  form.validateField(field.name); //TODO test
                 }}
               >
                 {item.place_name}

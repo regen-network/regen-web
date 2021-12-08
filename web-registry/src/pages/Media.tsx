@@ -4,10 +4,11 @@ import { useParams } from 'react-router-dom';
 import { OnboardingFormTemplate } from '../components/templates';
 import { MediaForm, MediaValues } from '../components/organisms';
 import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
-import { ProjectFormProps } from './BasicInfo';
+import { useProjectEditContext } from '../pages/ProjectEdit';
 
-const Media: React.FC<ProjectFormProps> = ({ isEdit }) => {
+const Media: React.FC = () => {
   const { projectId } = useParams();
+  const { isEdit } = useProjectEditContext();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({
@@ -52,7 +53,7 @@ const Media: React.FC<ProjectFormProps> = ({ isEdit }) => {
   }
 
   return isEdit ? (
-    <MediaForm submit={submit} initialValues={initialFieldValues} isEdit />
+    <MediaForm submit={submit} initialValues={initialFieldValues} />
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Media" saveAndExit={saveAndExit}>
       <MediaForm submit={submit} initialValues={initialFieldValues} />

@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 import { ProjectLocationForm, ProjectLocationFormValues } from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
-import { ProjectFormProps } from './BasicInfo';
+import { useProjectEditContext } from '../pages/ProjectEdit';
 import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
@@ -11,9 +11,10 @@ import {
   useCreateAddressMutation,
 } from '../generated/graphql';
 
-const ProjectLocation: React.FC<ProjectFormProps> = ({ isEdit }) => {
+const ProjectLocation: React.FC = () => {
   const history = useHistory();
   const { projectId } = useParams<{ projectId: string }>();
+  const { isEdit } = useProjectEditContext();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const [createAddress] = useCreateAddressMutation();
@@ -96,7 +97,6 @@ const ProjectLocation: React.FC<ProjectFormProps> = ({ isEdit }) => {
       saveAndExit={saveAndExit}
       mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
       initialValues={initialFieldValues}
-      isEdit
     />
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Location" saveAndExit={saveAndExit}>

@@ -5,7 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { FormValues, isIndividual } from 'web-components/lib/components/inputs/RoleField';
 import { OnboardingFormTemplate } from '../components/templates';
 import { RolesForm, RolesValues } from '../components/organisms';
-import { ProjectFormProps } from './BasicInfo';
+import { useProjectEditContext } from '../pages/ProjectEdit';
 import {
   useProjectByIdQuery,
   useGetOrganizationProfileByEmailQuery,
@@ -67,9 +67,10 @@ function stripIds(values: RolesValues): RolesValues {
   return values;
 }
 
-const Roles: React.FC<ProjectFormProps> = ({ isEdit }) => {
+const Roles: React.FC = () => {
   const history = useHistory();
   const { projectId } = useParams();
+  const { isEdit } = useProjectEditContext();
   const { user } = useAuth0();
   const userEmail = user?.email;
 
@@ -160,7 +161,7 @@ const Roles: React.FC<ProjectFormProps> = ({ isEdit }) => {
   }
 
   return isEdit ? (
-    <RolesForm submit={submit} initialValues={initialFieldValues} projectCreator={userProfileData} isEdit />
+    <RolesForm submit={submit} initialValues={initialFieldValues} projectCreator={userProfileData} />
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Roles" saveAndExit={saveAndExit}>
       <RolesForm submit={submit} initialValues={initialFieldValues} projectCreator={userProfileData} />

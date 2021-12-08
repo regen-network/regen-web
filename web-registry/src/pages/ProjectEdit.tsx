@@ -114,10 +114,12 @@ const useStyles = makeStyles(theme => ({
 
 type ContextType = {
   confirmSave?: () => void;
+  isEdit?: boolean;
 };
 
 const ProjectEditContext = createContext<ContextType>({
   confirmSave: () => {},
+  isEdit: false,
 });
 
 function ProjectEdit(): JSX.Element {
@@ -155,7 +157,7 @@ function ProjectEdit(): JSX.Element {
   };
 
   return (
-    <ProjectEditContext.Provider value={{ confirmSave }}>
+    <ProjectEditContext.Provider value={{ confirmSave, isEdit: true }}>
       <div className={styles.root}>
         <div className={styles.left}>
           <div className={styles.topAlign}>
@@ -192,15 +194,12 @@ function ProjectEdit(): JSX.Element {
                         </Hidden>
                       )}
                     />
-                    <ProtectedRoute path={`${path}/basic-info`} component={() => <BasicInfo isEdit />} />
-                    <ProtectedRoute path={`${path}/location`} component={() => <ProjectLocation isEdit />} />
-                    <ProtectedRoute path={`${path}/story`} component={() => <Story isEdit />} />
-                    <ProtectedRoute path={`${path}/media`} component={() => <Media isEdit />} />
-                    <ProtectedRoute path={`${path}/roles`} component={() => <Roles isEdit />} />
-                    <ProtectedRoute
-                      path={`${path}/entity-display`}
-                      component={() => <EntityDisplay isEdit />}
-                    />
+                    <ProtectedRoute path={`${path}/basic-info`} component={() => <BasicInfo />} />
+                    <ProtectedRoute path={`${path}/location`} component={() => <ProjectLocation />} />
+                    <ProtectedRoute path={`${path}/story`} component={() => <Story />} />
+                    <ProtectedRoute path={`${path}/media`} component={() => <Media />} />
+                    <ProtectedRoute path={`${path}/roles`} component={() => <Roles />} />
+                    <ProtectedRoute path={`${path}/entity-display`} component={() => <EntityDisplay />} />
                   </>
                 )}
               />

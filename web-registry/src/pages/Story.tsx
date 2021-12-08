@@ -4,11 +4,12 @@ import { useParams, useHistory } from 'react-router-dom';
 import { OnboardingFormTemplate } from '../components/templates';
 import { StoryForm, StoryValues } from '../components/organisms';
 import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
-import { ProjectFormProps } from './BasicInfo';
+import { useProjectEditContext } from '../pages/ProjectEdit';
 
-const Story: React.FC<ProjectFormProps> = ({ isEdit }) => {
+const Story: React.FC = () => {
   const history = useHistory();
   const { projectId } = useParams();
+  const { isEdit } = useProjectEditContext();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({
@@ -54,7 +55,7 @@ const Story: React.FC<ProjectFormProps> = ({ isEdit }) => {
   }
 
   return isEdit ? (
-    <StoryForm submit={submit} initialValues={initialFieldValues} isEdit />
+    <StoryForm submit={submit} initialValues={initialFieldValues} />
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Story" saveAndExit={saveAndExit}>
       <StoryForm submit={submit} initialValues={initialFieldValues} />

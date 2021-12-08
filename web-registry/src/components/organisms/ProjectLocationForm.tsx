@@ -20,9 +20,8 @@ const ProjectLocationForm: React.FC<{
   submit: (values: ProjectLocationFormValues) => Promise<void>;
   saveAndExit: (values: ProjectLocationFormValues) => Promise<void>;
   initialValues?: ProjectLocationFormValues;
-  isEdit?: boolean;
-}> = ({ submit, initialValues, mapToken, isEdit }) => {
-  const { confirmSave } = useProjectEditContext();
+}> = ({ submit, initialValues, mapToken }) => {
+  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -81,7 +80,6 @@ const ProjectLocationForm: React.FC<{
               />
             </OnBoardingCard>
             <ProjectPageFooter
-              isEdit={isEdit}
               onSave={submitForm}
               saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
             />

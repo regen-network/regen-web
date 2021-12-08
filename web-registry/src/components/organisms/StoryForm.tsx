@@ -17,7 +17,6 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 interface StoryFormProps {
   submit: (values: StoryValues) => Promise<void>;
   initialValues?: StoryValues;
-  isEdit?: boolean;
 }
 
 export interface StoryValues {
@@ -176,9 +175,9 @@ const ModalContent: React.FC<{ exampleProjectUrl: string; fieldName: exampleFiel
   );
 };
 
-const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues, isEdit }) => {
+const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
-  const { confirmSave } = useProjectEditContext();
+  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -321,7 +320,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues, isEdit }) 
               </OnBoardingCard>
 
               <ProjectPageFooter
-                isEdit={isEdit}
                 onSave={submitForm}
                 saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
               />

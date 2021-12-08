@@ -28,7 +28,6 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
   initialValues?: EntityDisplayValues;
-  isEdit?: boolean;
 }
 
 interface IndividualDisplayValues extends IndividualFormValues, IndividualDisplayShape {}
@@ -354,10 +353,10 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
   }
 }
 
-const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialValues, isEdit }) => {
+const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialValues }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const styles = useStyles();
-  const { confirmSave } = useProjectEditContext();
+  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -459,7 +458,6 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({ submit, initialVa
                   getToggle('http://regen.network/projectOriginator', values, setFieldValue, setFieldTouched)}
               </OnBoardingCard>
               <ProjectPageFooter
-                isEdit={isEdit}
                 onSave={submitForm}
                 saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
               />

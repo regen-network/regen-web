@@ -14,7 +14,7 @@ import {
   useUpdateProjectByIdMutation,
   useUpdatePartyByIdMutation,
 } from '../generated/graphql';
-import { ProjectFormProps } from './BasicInfo';
+import { useProjectEditContext } from '../pages/ProjectEdit';
 
 type roleIdField = 'developerId' | 'stewardId' | 'landOwnerId' | 'originatorId';
 const rolesMap: { [key in EntityFieldName]: roleIdField } = {
@@ -28,8 +28,9 @@ function getInitialValues(value: any): any {
   return value?.['@type'] ? value : undefined;
 }
 
-const EntityDisplay: React.FC<ProjectFormProps> = ({ isEdit }) => {
+const EntityDisplay: React.FC = () => {
   const { projectId } = useParams();
+  const { isEdit } = useProjectEditContext();
   const history = useHistory();
   const [initialValues, setInitialValues] = useState<EntityDisplayValues | undefined>();
 
@@ -106,7 +107,7 @@ const EntityDisplay: React.FC<ProjectFormProps> = ({ isEdit }) => {
   }
 
   return isEdit ? (
-    <EntityDisplayForm submit={submit} initialValues={initialValues} isEdit />
+    <EntityDisplayForm submit={submit} initialValues={initialValues} />
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Entity Display" saveAndExit={saveAndExit}>
       <EntityDisplayForm submit={submit} initialValues={initialValues} />

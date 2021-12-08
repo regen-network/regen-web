@@ -2,15 +2,17 @@ import React from 'react';
 
 import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { EditProjectPageFooter } from './EditProjectPageFooter';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface Props {
   onSave: () => void;
   saveText?: string;
-  isEdit?: boolean;
   saveDisabled: boolean;
 }
 
-const ProjectPageFooter: React.FC<Props> = ({ saveText, isEdit, saveDisabled, onSave, ...props }) => {
+const ProjectPageFooter: React.FC<Props> = ({ saveText, saveDisabled, onSave, ...props }) => {
+  const { isEdit } = useProjectEditContext();
+
   return isEdit ? (
     <EditProjectPageFooter saveText={saveText || 'Save'} onSave={onSave} saveDisabled={saveDisabled} />
   ) : (

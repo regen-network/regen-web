@@ -28,7 +28,6 @@ interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
   initialValues?: RolesValues;
   projectCreator?: GetOrganizationProfileByEmailQuery;
-  isEdit?: boolean;
 }
 
 export interface RolesValues {
@@ -101,10 +100,10 @@ function getEntity(query?: GetOrganizationProfileByEmailQuery): FormValues | nul
   return null;
 }
 
-const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCreator, isEdit }) => {
+const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCreator }) => {
   const [entities, setEntities] = useState<Array<FormValues>>([]);
   const styles = useStyles();
-  const { confirmSave } = useProjectEditContext();
+  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -424,7 +423,6 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
                 />
               </OnBoardingCard>
               <ProjectPageFooter
-                isEdit={isEdit}
                 onSave={submitForm}
                 saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
               />

@@ -4,15 +4,13 @@ import { useHistory, useParams } from 'react-router-dom';
 import { BasicInfoForm, BasicInfoFormValues } from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
 import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import { useProjectEditContext } from '../pages/ProjectEdit';
 
-export interface ProjectFormProps {
-  isEdit?: boolean;
-}
-
-const BasicInfo: React.FC<ProjectFormProps> = ({ isEdit }) => {
+const BasicInfo: React.FC = () => {
   const history = useHistory();
   const { projectId } = useParams<{ projectId: string }>();
   const [updateProject] = useUpdateProjectByIdMutation();
+  const { isEdit } = useProjectEditContext();
 
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
@@ -54,7 +52,7 @@ const BasicInfo: React.FC<ProjectFormProps> = ({ isEdit }) => {
   }
 
   return isEdit ? (
-    <BasicInfoForm submit={submit} initialValues={initialFieldValues} isEdit />
+    <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Basic Info" saveAndExit={saveAndExit}>
       <BasicInfoForm submit={submit} initialValues={initialFieldValues} />

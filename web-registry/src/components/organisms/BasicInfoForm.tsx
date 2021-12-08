@@ -69,10 +69,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 const BasicInfoForm: React.FC<{
   submit: (values: BasicInfoFormValues) => Promise<void>;
   initialValues?: BasicInfoFormValues;
-  isEdit?: boolean;
-}> = ({ submit, initialValues, isEdit }) => {
+}> = ({ submit, initialValues }) => {
   const classes = useStyles();
-  const { confirmSave } = useProjectEditContext();
+  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -165,7 +164,6 @@ const BasicInfoForm: React.FC<{
               </div>
             </OnBoardingCard>
             <ProjectPageFooter
-              isEdit={isEdit}
               onSave={submitForm}
               saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
             />

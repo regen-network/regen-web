@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
+import cx from 'clsx';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
@@ -89,7 +90,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.typography.pxToRem(16),
   },
   field: {
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(8),
+  },
+  paddingTop: {
+    paddingTop: theme.spacing(4),
   },
   error: {
     marginTop: 0,
@@ -312,7 +316,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   name="['http://regen.network/projectQuote'].['http://schema.org/name']"
                 />
                 <Field
-                  className={styles.field}
+                  className={cx(styles.field, styles.paddingTop)}
                   component={ControlledTextField}
                   label="Title of person quoted"
                   name="['http://regen.network/projectQuote'].['http://schema.org/jobTitle']"

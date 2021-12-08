@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(5),
+      paddingTop: theme.spacing(12),
     },
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(3),

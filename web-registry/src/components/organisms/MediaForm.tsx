@@ -261,7 +261,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
                             fixedCrop={cropAspect}
-                            name="['http://regen.network/galleryTop']"
+                            name="['http://regen.network/galleryPhotos'].@list[1].@value" // top
                             buttonText="+ Add Photo"
                             apiServerUrl={apiUri}
                             projectId={projectId}
@@ -273,7 +273,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
                             fixedCrop={cropAspect}
-                            name="['http://regen.network/galleryBottom']"
+                            name="['http://regen.network/galleryPhotos'].@list[2].@value" // bottom
                             buttonText="+ Add Photo"
                             apiServerUrl={apiUri}
                             projectId={projectId}

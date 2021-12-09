@@ -59,28 +59,33 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function VideoPopup() {
-  const classes = useStyles();
+interface Props {
+  videoSrc?: string;
+  videoTitle?: string;
+}
+
+const VideoPopup: React.FC<Props> = ({ videoSrc, videoTitle }) => {
+  const styles = useStyles();
   const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => {
+  const handleOpen = (): void => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
     setOpen(false);
   };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.play} onClick={handleOpen}>
-        <PlayIcon className={classes.icon} />
+    <div className={styles.root}>
+      <div className={styles.play} onClick={handleOpen}>
+        <PlayIcon className={styles.icon} />
       </div>
       <Modal open={open} onClose={handleClose}>
-        <div className={classes.vid}>
+        <div className={styles.vid}>
           <iframe
-            title="Kiss the Ground Video"
-            src="https://player.vimeo.com/video/299326236?autoplay=1"
+            title={videoTitle}
+            src={videoSrc}
             style={{
               width: '100%',
               height: '100%',
@@ -93,4 +98,6 @@ export default function VideoPopup() {
       </Modal>
     </div>
   );
-}
+};
+
+export { VideoPopup };

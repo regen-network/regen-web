@@ -1,9 +1,8 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import VideoPopup from '../../components/videoPopup';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 
@@ -11,44 +10,44 @@ interface Props {
   className?: string;
 }
 
-let useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.1)',
-    'text-align': 'center',
+    textShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+    textAlign: 'center',
     color: theme.palette.primary.main,
     width: '100%',
     height: '90vh',
-    'background-position': 'bottom center',
-    'background-repeat': 'repeat-y',
-    'background-size': 'cover',
+    backgroundPosition: 'bottom center',
+    backgroundRepeat: 'repeat-y',
+    backgroundSize: 'cover',
     [theme.breakpoints.up('sm')]: {
-      'padding-top': '29vh',
-      'padding-bottom': '40vh',
+      paddingTop: '29vh',
+      paddingBottom: '40vh',
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: '12vh',
     },
     [theme.breakpoints.down('xs')]: {
-      'padding-top': '15vh',
+      paddingTop: '15vh',
       height: '80vh',
     },
   },
   tag: {
     '& p': {
-      'line-height': '160%',
-      'font-family': 'Lato',
+      lineHeight: '160%',
+      fontFamily: 'Lato',
       [theme.breakpoints.up('sm')]: {
-        'font-size': '1.62rem',
+        fontSize: '1.62rem',
         width: '650px',
       },
       [theme.breakpoints.down('xs')]: {
         width: '90%',
-        'font-size': '1.125em',
+        fontSize: '1.125em',
       },
       margin: '0 auto',
     },
-    'text-shadow': '0px 4px 10px rgba(0, 0, 0, 0.3)',
-    'text-align': 'center',
+    textShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
+    textAlign: 'center',
     margin: '0 auto',
   },
   icon: {
@@ -63,17 +62,17 @@ let useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.main,
   },
   title: {
-    'font-family': 'Muli',
-    'line-height': '130%',
-    'margin-bottom': '12px',
+    fontFamily: 'Muli',
+    lineHeight: '130%',
+    marginBottom: '12px',
     [theme.breakpoints.down('xs')]: {
       margin: '0 auto',
-      'margin-top': '25px',
-      'margin-bottom': '12px',
+      marginTop: theme.spacing(13.5),
+      marginBottom: theme.spacing(3),
       width: '80%',
     },
     [theme.breakpoints.up('sm')]: {
-      'margin-top': '37px',
+      marginTop: theme.spacing(21.5),
     },
   },
   backgroundGradient: {
@@ -88,8 +87,8 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeFoldSection = ({ className }: Props) => {
-  const classes = useStyles({});
+const HomeFoldSection = ({ className }: Props): JSX.Element => {
+  const styles = useStyles({});
   const data = useStaticQuery(graphql`
     query {
       desktop: file(relativePath: { eq: "image43.jpg" }) {
@@ -112,16 +111,15 @@ const HomeFoldSection = ({ className }: Props) => {
   return (
     <BackgroundImage
       Tag="section"
-      className={clsx(classes.root, className)}
+      className={clsx(styles.root, className)}
       fluid={imageData}
       backgroundColor={`#040e18`}
     >
-      <div className={classes.backgroundGradient}></div>
-      <VideoPopup />
-      <Title align="center" color="primary" variant="h1" className={classes.title}>
+      <div className={styles.backgroundGradient}></div>
+      <Title align="center" color="primary" variant="h1" className={styles.title}>
         {content.tagline}
       </Title>
-      <div className={classes.tag}>
+      <div className={styles.tag}>
         <Typography variant="body1">{content.description}</Typography>
       </div>
     </BackgroundImage>

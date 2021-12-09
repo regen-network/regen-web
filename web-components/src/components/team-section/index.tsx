@@ -82,6 +82,7 @@ const TeamSection = ({
   );
 };
 
-const firstName = (name: string): string => name.toLowerCase().split(' ')[0];
+// sorting by first name alone was causing weird firefox behavior
+const firstName = (name: string): string => name.toLowerCase().replace(' ', '');
 
 export default TeamSection;

@@ -31,6 +31,7 @@ const CoreTeamSection = (): JSX.Element => {
   const title = data.text.coreSection.title;
   return (
     <TeamSection
+      alphabetized
       bgUrl={data.background.publicURL}
       members={members.map(m => ({ imgUrl: m.image.publicURL, ...m }))}
       title={title}

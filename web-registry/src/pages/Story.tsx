@@ -22,7 +22,7 @@ const Story: React.FC = () => {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
       'http://regen.network/landStory': metadata['http://regen.network/landStory'],
-      'http://regen.network/landStewardStory': metadata['http://regen.network/landStory'],
+      'http://regen.network/landStewardStory': metadata['http://regen.network/landStewardStory'],
       'http://regen.network/landStewardStoryTitle': metadata['http://regen.network/landStewardStoryTitle'],
       'http://regen.network/projectQuote': metadata['http://regen.network/projectQuote'],
     };

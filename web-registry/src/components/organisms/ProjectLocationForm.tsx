@@ -63,7 +63,7 @@ const ProjectLocationForm: React.FC<{
         }
       }}
     >
-      {({ submitForm, isValid, isSubmitting, touched }) => {
+      {({ submitForm, isValid, isSubmitting, touched, dirty }) => {
         return (
           <Form>
             <OnBoardingCard>
@@ -78,7 +78,7 @@ const ProjectLocationForm: React.FC<{
             </OnBoardingCard>
             <ProjectPageFooter
               onSave={submitForm}
-              saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
+              saveDisabled={!isValid || isSubmitting || !dirty || !Object.keys(touched).length}
             />
           </Form>
         );

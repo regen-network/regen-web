@@ -3,7 +3,6 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import VideoPopup from '../../components/videoPopup';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 
@@ -88,7 +87,7 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeFoldSection = ({ className }: Props) => {
+const HomeFoldSection = ({ className }: Props): JSX.Element => {
   const classes = useStyles({});
   const data = useStaticQuery(graphql`
     query {
@@ -117,7 +116,6 @@ const HomeFoldSection = ({ className }: Props) => {
       backgroundColor={`#040e18`}
     >
       <div className={classes.backgroundGradient}></div>
-      <VideoPopup />
       <Title align="center" color="primary" variant="h1" className={classes.title}>
         {content.tagline}
       </Title>

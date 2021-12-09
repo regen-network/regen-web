@@ -22,6 +22,7 @@ const AdvisorSection = (): JSX.Element => {
   const data = sanityTeamPage?.advisorSection;
   return (
     <TeamSection
+      alphabetized
       bgUrl={background?.publicURL || ''}
       members={(data?.members || []).map(m => ({ imgUrl: m?.image?.asset?.url, ...m } as TeamItemProps))}
       title={data?.title || ''}

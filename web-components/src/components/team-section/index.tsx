@@ -7,6 +7,7 @@ import TeamItem, { TeamItemProps } from '../team-item';
 import Section from '../section';
 
 export interface TeamSectionProps {
+  alphabetized?: boolean;
   members: TeamItemProps[];
   title: string;
   children?: React.ReactNode;
@@ -42,9 +43,12 @@ const TeamSection = ({
   className,
   bgUrl,
   gridMd = 4,
+  alphabetized = false,
   children,
 }: TeamSectionProps): JSX.Element => {
   const classes = useStyles();
+  const sorted = members.sort((a, b) => (firstName(a.name) > firstName(b.name) ? 1 : -1));
+  const teamMembers = alphabetized ? sorted : members;
 
   return (
     <Section
@@ -56,7 +60,7 @@ const TeamSection = ({
       }}
     >
       <Grid justify="center" container direction="row">
-        {members.map((m: any, index: any) => {
+        {teamMembers.map((m: any, index: any) => {
           return (
             <Grid className={classes.item} xs={12} sm={6} md={gridMd} item key={index}>
               <TeamItem
@@ -77,5 +81,8 @@ const TeamSection = ({
     </Section>
   );
 };
+
+// sorting by first name alone was causing weird firefox behavior
+const firstName = (name: string): string => name.toLowerCase().replace(' ', '');
 
 export default TeamSection;

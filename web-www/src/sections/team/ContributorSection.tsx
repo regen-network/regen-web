@@ -33,6 +33,7 @@ const ContributorSection = (): JSX.Element => {
   return (
     <div className={styles.root}>
       <TeamSection
+        alphabetized
         bgUrl={background?.publicURL || ''}
         members={(data?.members || []).map(m => ({ imgUrl: m?.image?.asset?.url, ...m } as TeamItemProps))}
         title={data?.title || ''}

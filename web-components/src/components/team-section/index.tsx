@@ -47,7 +47,7 @@ const TeamSection = ({
   children,
 }: TeamSectionProps): JSX.Element => {
   const classes = useStyles();
-  const sorted = members.sort((a, b) => (lastName(a.name) > lastName(b.name) ? 1 : -1));
+  const sorted = members.sort((a, b) => (firstName(a.name) > firstName(b.name) ? 1 : -1));
   const teamMembers = alphabetized ? sorted : members;
 
   return (
@@ -82,6 +82,6 @@ const TeamSection = ({
   );
 };
 
-const lastName = (name: string): string => name.toLowerCase().split(' ')[1];
+const firstName = (name: string): string => name.toLowerCase().split(' ')[0];
 
 export default TeamSection;

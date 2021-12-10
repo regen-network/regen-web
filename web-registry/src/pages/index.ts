@@ -25,6 +25,7 @@ export * from './NotFound';
 export * from './OrganizationProfile';
 export * from './PostPurchase';
 export * from './Project';
+export * from './ProjectEdit';
 export * from './ProjectList';
 export * from './ProjectLocation';
 export * from './Roles';

@@ -168,11 +168,9 @@ function ImageDrop({
     }
   };
 
-  const handleDelete = async (): Promise<void> => {
-    if (onDelete) {
-      await onDelete(fileName);
-    }
+  const handleDelete = async (imageUrl: string): Promise<void> => {
     form.setFieldValue(field.name, undefined);
+    if (onDelete) await onDelete(imageUrl);
     setInitialImage('');
     setFileName('');
   };
@@ -191,7 +189,11 @@ function ImageDrop({
           field.value ? (
             <div className={cx(styles.preview, classes?.main)}>
               <Image className={styles.previewImage} src={field.value} backgroundImage />
-              <IconButton classes={{ root: styles.deleteButton }} onClick={handleDelete} aria-label="delete">
+              <IconButton
+                classes={{ root: styles.deleteButton }}
+                onClick={() => handleDelete(field.value)}
+                aria-label="delete"
+              >
                 <TrashIcon color={theme.palette.error.light} />
               </IconButton>
             </div>

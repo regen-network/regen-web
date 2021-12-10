@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import { Typography, useMediaQuery } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useHistory } from 'react-router-dom';
 
@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ProjectList: React.FC = () => {
   const classes = useStyles();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  // const theme = useTheme();
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm')); used for navigating to edit
   const history = useHistory();
 
   // TODO Create provider to get directly user data if logged in

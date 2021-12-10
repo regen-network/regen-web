@@ -6,7 +6,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import { HeroTitle, HeroAction } from '../components/molecules';
-import { ProjectCards, CreditClassCards } from '../components/organisms';
+import { ProjectCards, CreditClassCards, CreditBatches } from '../components/organisms';
 import { creditClasses } from '../mocks';
 
 import cowsImg from '../assets/cows-by-barn.png';
@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.spacing(165),
   },
   section: {
+    backgroundColor: theme.palette.primary.main,
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22.25),
     },
@@ -83,15 +84,14 @@ const Home: React.FC = () => {
       />
 
       {projectsData?.allProjects?.nodes && (
-        <CardMedia image={topographyImg}>
-          <Section title="Projects" classes={{ root: styles.section, title: styles.title }}>
-            <ProjectCards
-              projects={projectsData?.allProjects?.nodes}
-              classes={{ root: styles.projectCards }}
-            />
-          </Section>
-        </CardMedia>
+        <Section title="Projects" titleAlign="left" classes={{ root: styles.section, title: styles.title }}>
+          <ProjectCards projects={projectsData?.allProjects?.nodes} classes={{ root: styles.projectCards }} />
+        </Section>
       )}
+
+      <CardMedia image={topographyImg}>
+        <CreditBatches />
+      </CardMedia>
 
       <Section
         title="Credit Classes"

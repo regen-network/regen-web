@@ -13,6 +13,7 @@ export interface SectionProps {
     root?: string;
     title?: string;
     titleWrap?: string;
+    wrap?: string;
   };
   title?: string | JSX.Element;
   titleVariant?: Variant;
@@ -33,9 +34,6 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
-    maxWidth: theme.breakpoints.values.lg,
-    margin: '0 auto',
-    overflow: 'hidden',
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(22.25),
     },
@@ -73,6 +71,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     justifyContent: 'space-between',
     alignItems: 'baseline',
   },
+  wrap: {
+    maxWidth: theme.breakpoints.values.lg,
+    margin: '0 auto',
+    overflow: 'hidden',
+  },
 }));
 
 const Section = ({
@@ -90,19 +93,21 @@ const Section = ({
   const styles = useStyles({ withSlider, titleLineHeight, titleAlign, titleColor, topRight: !!topRight });
   return (
     <section className={clsx(styles.root, className || (classes && classes.root))}>
-      {title && (
-        <div className={clsx(classes && classes.titleWrap, topRight && styles.spaceBetween)}>
-          <Title
-            className={clsx(styles.title, classes && classes.title)}
-            variant={titleVariant}
-            align={titleAlign}
-          >
-            {parseText(title)}
-          </Title>
-          {titleAlign === 'left' && topRight}
-        </div>
-      )}
-      {children}
+      <div className={clsx(styles.wrap, classes && classes.wrap)}>
+        {title && (
+          <div className={clsx(classes && classes.titleWrap, topRight && styles.spaceBetween)}>
+            <Title
+              className={clsx(styles.title, classes && classes.title)}
+              variant={titleVariant}
+              align={titleAlign}
+            >
+              {parseText(title)}
+            </Title>
+            {titleAlign === 'left' && topRight}
+          </div>
+        )}
+        {children}
+      </div>
     </section>
   );
 };

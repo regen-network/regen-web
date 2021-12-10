@@ -3,7 +3,7 @@ import { useTheme, makeStyles, IconButton } from '@material-ui/core';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
-import { useWallet, chainId } from '../../wallet';
+import { useWallet, chainId } from '../../lib/wallet';
 
 const useStyles = makeStyles(theme => ({
   root: {

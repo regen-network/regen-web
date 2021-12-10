@@ -42734,7 +42734,7 @@ exports[`Storyshots Components|Sliders Protected Species 1`] = `
 </ContextProvider>
 `;
 
-exports[`Storyshots Components|Table Mrv Table 1`] = `
+exports[`Storyshots Components|Table Documentation Table 1`] = `
 <ContextProvider
   value={
     Object {
@@ -43108,7 +43108,7 @@ exports[`Storyshots Components|Table Mrv Table 1`] = `
   }
 >
   <WithStyles(CssBaseline) />
-  <RegenTable
+  <DocumentationTable
     rows={
       Array [
         Object {
@@ -43535,7 +43535,7 @@ exports[`Storyshots Components|Tabs Mrv Tabs 1`] = `
           "label": "Overview",
         },
         Object {
-          "children": <RegenTable
+          "children": <DocumentationTable
             rows={
               Array [
                 Object {

@@ -1,6 +1,7 @@
 import React from 'react';
-import { withStyles, DefaultTheme as Theme } from '@mui/styles';
+import { withStyles } from '@mui/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
+import { Theme } from '../../theme/muiTheme';
 
 interface ContainedButtonProps extends ButtonProps {
   target?: string;

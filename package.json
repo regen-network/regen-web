@@ -65,7 +65,7 @@
     "**/@typescript-eslint/eslint-plugin": "^4.5.0",
     "**/@typescript-eslint/parser": "^4.5.0",
     "webpack-dev-server": "3.11.1",
-    "@babel/plugin-transform-classes": "^7.12.13"
+    "**/@emotion/styled": "^11.0.0"
   },
   "husky": {
     "hooks": {}

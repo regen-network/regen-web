@@ -172,6 +172,7 @@ coreSection:
         for carbon sequestration in hardwood forests that address climate
         change.
       image: ../../static/media/sam-bennetts.png
+      linkedUrl: https://www.linkedin.com/in/sam-bennetts-a044681a1/
     - image: ../../static/media/daniel-pittman.jpg
       name: Daniel Pittman
       description: Daniel is a highly motivated software engineer experienced with
@@ -233,43 +234,6 @@ coreSection:
         decentralization and he is deeply committed to ecological regeneration.
       twitterUrl: https://twitter.com/ryanchrypto
       githubUrl: https://github.com/ryanchrypto
-    - image: ../../static/media/ru.png
-      description: >+
-        Ru has a background in Computer Science, focusing on mathematical stuff
-        like type theory and formal proof. He has a lot of energy for nature,
-        community building, and social change, which he channels through work
-        with Extinction Rebellion. He is in the early stages of a regenerative
-        land project, combining rewilding and syntropic agroforestry, to
-        help  soils and biodiversity flourish.
-         
-      name: Ru Horlick
-      title: Blockchain Engineer
-      linkedUrl: https://www.linkedin.com/in/rupert-horlick/
-      githubUrl: https://github.com/ruhatch
-    - image: ../../static/media/john-kemp.png
-      name: John Kemp
-      title: Lead Software Engineer
-      description: John has a twenty-year history of developing security software
-        products, most recently as the lead architect for a set of web
-        applications and specialized hardware for providing cryptographic
-        signing, encryption, and public-key infrastructure for automobile
-        mapping and location services. He lives with his family in rural western
-        Massachusetts and is excited to bring his experience of security
-        software engineering together to support regenerative agriculture
-        practices.
-      linkedUrl: https://www.linkedin.com/in/john-kemp-0xdeadbabe/
-      twitterUrl: https://twitter.com/frumioj
-      githubUrl: https://github.com/frumioj
-    - image: ../../static/media/alex.png
-      linkedUrl: linkedIn.com/in/alexkarana
-      description: "Alex is a licensed attorney in Illinois and holds a chemical
-        engineering degree. Alex practices intellectual property law and worked
-        in automotive prior to law school with brands like Jeep, Polaris,
-        Toyota, and GM.  Alex has a passion for working with startups and is
-        interested in blockchain, NFTs, and cryptography.  Alex currently lives
-        in Chicago and is from Detroit. "
-      name: Alex Karana
-      title: Product Legal Assistant
     - image: ../../static/media/ned.png
       title: Remote Sensing Specialist
       name: Ned Horning
@@ -467,6 +431,20 @@ contributorSection:
         supports the science team in methodology development and project
         management.
       title: Geospatial Environmental Researcher and Project Analyst
+    - description: John has a twenty-year history of developing security software
+        products, most recently as the lead architect for a set of web
+        applications and specialized hardware for providing cryptographic
+        signing, encryption, and public-key infrastructure for automobile
+        mapping and location services. He lives with his family in rural western
+        Massachusetts and is excited to bring his experience of security
+        software engineering together to support regenerative agriculture
+        practices.
+      name: John Kemp
+      title: Lead Software Engineer
+      linkedUrl: https://www.linkedin.com/in/john-kemp-0xdeadbabe/
+      twitterUrl: https://twitter.com/frumioj
+      githubUrl: https://github.com/frumioj
+      image: ../../static/media/john-kemp.png
 advisorSection:
   title: Advisors
   advisors:

@@ -43,6 +43,7 @@ const ContributorSection = (): JSX.Element => {
   return (
     <div className={classes.root}>
       <TeamSection
+        alphabetized
         bgUrl={data.background.publicURL}
         members={members.map(m => ({ imgUrl: m.image.publicURL, ...m }))}
         title={title}

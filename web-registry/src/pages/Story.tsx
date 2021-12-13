@@ -1,35 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import Description from 'web-components/lib/components/description';
 import { OnboardingFormTemplate } from '../components/templates';
 import { StoryForm, StoryValues } from '../components/organisms';
 import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
 } from '../generated/graphql';
-
-const exampleProjectUrl = '/projects/wilmot';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  description: {
-    fontSize: theme.typography.pxToRem(16),
-    padding: theme.spacing(2, 0, 1),
-  },
-}));
+import { useProjectEditContext } from '../pages/ProjectEdit';
 
 const Story: React.FC = () => {
-  const styles = useStyles();
   const navigate = useNavigate();
-  const activeStep = 0;
   const { projectId } = useParams();
+  const { isEdit } = useProjectEditContext();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
+    fetchPolicy: 'cache-and-network',
   });
 
   let initialFieldValues: StoryValues | undefined;
@@ -65,7 +53,7 @@ const Story: React.FC = () => {
           },
         },
       });
-      navigate(`/project-pages/${projectId}/media`);
+      !isEdit && navigate(`/project-pages/${projectId}/media`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -73,23 +61,15 @@ const Story: React.FC = () => {
     }
   }
 
-  return (
+  return isEdit ? (
+    <StoryForm submit={submit} initialValues={initialFieldValues} />
+  ) : (
     <OnboardingFormTemplate
-      activeStep={activeStep}
+      activeStep={0}
       title="Story"
       saveAndExit={saveAndExit}
     >
-      <Description className={styles.description}>
-        See an example{' '}
-        <Link to={exampleProjectUrl} target="_blank">
-          project page»
-        </Link>
-      </Description>
-      <StoryForm
-        submit={submit}
-        initialValues={initialFieldValues}
-        exampleProjectUrl={exampleProjectUrl}
-      />
+      <StoryForm submit={submit} initialValues={initialFieldValues} />
     </OnboardingFormTemplate>
   );
 };

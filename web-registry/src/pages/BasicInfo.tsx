@@ -7,14 +7,17 @@ import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
 } from '../generated/graphql';
+import { useProjectEditContext } from '../pages/ProjectEdit';
 
 const BasicInfo: React.FC = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
-
   const [updateProject] = useUpdateProjectByIdMutation();
+  const { isEdit } = useProjectEditContext();
+
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
+    fetchPolicy: 'cache-and-network',
   });
 
   let initialFieldValues: BasicInfoFormValues | undefined;
@@ -43,7 +46,7 @@ const BasicInfo: React.FC = () => {
           },
         },
       });
-      navigate(`/project-pages/${projectId}/location`);
+      !isEdit && navigate(`/project-pages/${projectId}/location`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -52,7 +55,9 @@ const BasicInfo: React.FC = () => {
     }
   }
 
-  return (
+  return isEdit ? (
+    <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
+  ) : (
     <OnboardingFormTemplate
       activeStep={0}
       title="Basic Info"

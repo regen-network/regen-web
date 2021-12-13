@@ -38,6 +38,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ProjectList: React.FC = () => {
   const classes = useStyles();
+  // const theme = useTheme();
+  // const isMobile = useMediaQuery(theme.breakpoints.down('sm')); used for navigating to edit
   const navigate = useNavigate();
 
   // TODO Create provider to get directly user data if logged in
@@ -49,6 +51,7 @@ const ProjectList: React.FC = () => {
     variables: {
       email: userEmail as string,
     },
+    fetchPolicy: 'cache-and-network',
   });
 
   const [createProject] = useCreateProjectMutation();
@@ -79,6 +82,12 @@ const ProjectList: React.FC = () => {
     }
   }
 
+  // TODO: when existing project is clicked for editing, use this
+  // const editProjectPage = (projectId: string): void => {
+  //   const editUrl = `/project-pages/${projectId}/edit/`;
+  //   navigate(isMobile ? editUrl : `${editUrl}/basic-info`);
+  // };
+
   return (
     <OnBoardingSection
       formContainer
@@ -91,9 +100,6 @@ const ProjectList: React.FC = () => {
       )}
       <div className={classes.cards}>
         {/* TODO: Existing Projects. see regen-network/regen-registry#360 */}
-        {/* {projects?.map(project => (
-          <div></div>
-        ))} */}
         <CreateProjectCard
           className={classes.createCard}
           onClick={submitCreateProject}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';

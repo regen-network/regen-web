@@ -22,10 +22,7 @@ export type Scalars = {
   BigFloat: any;
   /** A location in a connection that can be used for resuming pagination. */
   Cursor: any;
-  /**
-   * A point in time as described by the [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
-   */
+  /** A point in time as described by the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone. */
   Datetime: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
@@ -50,10 +47,7 @@ export type AccountBalance = Node & {
   walletByWalletId?: Maybe<Wallet>;
 };
 
-/**
- * A condition to be used against `AccountBalance` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `AccountBalance` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type AccountBalanceCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -1103,10 +1097,7 @@ export enum AdminsOrderBy {
 
 /** All input for the create `AccountBalance` mutation. */
 export type CreateAccountBalanceInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `AccountBalance` to be created by this mutation. */
   accountBalance: AccountBalanceInput;
@@ -1115,10 +1106,7 @@ export type CreateAccountBalanceInput = {
 /** The output of our create `AccountBalance` mutation. */
 export type CreateAccountBalancePayload = {
   __typename?: 'CreateAccountBalancePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `AccountBalance` that was created by this mutation. */
   accountBalance?: Maybe<AccountBalance>;
@@ -1139,10 +1127,7 @@ export type CreateAccountBalancePayloadAccountBalanceEdgeArgs = {
 
 /** All input for the create `Address` mutation. */
 export type CreateAddressInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Address` to be created by this mutation. */
   address: AddressInput;
@@ -1151,10 +1136,7 @@ export type CreateAddressInput = {
 /** The output of our create `Address` mutation. */
 export type CreateAddressPayload = {
   __typename?: 'CreateAddressPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Address` that was created by this mutation. */
   address?: Maybe<Address>;
@@ -1171,10 +1153,7 @@ export type CreateAddressPayloadAddressEdgeArgs = {
 
 /** All input for the create `Admin` mutation. */
 export type CreateAdminInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Admin` to be created by this mutation. */
   admin: AdminInput;
@@ -1183,10 +1162,7 @@ export type CreateAdminInput = {
 /** The output of our create `Admin` mutation. */
 export type CreateAdminPayload = {
   __typename?: 'CreateAdminPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Admin` that was created by this mutation. */
   admin?: Maybe<Admin>;
@@ -1203,10 +1179,7 @@ export type CreateAdminPayloadAdminEdgeArgs = {
 
 /** All input for the create `CreditClass` mutation. */
 export type CreateCreditClassInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditClass` to be created by this mutation. */
   creditClass: CreditClassInput;
@@ -1214,10 +1187,7 @@ export type CreateCreditClassInput = {
 
 /** All input for the create `CreditClassIssuer` mutation. */
 export type CreateCreditClassIssuerInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditClassIssuer` to be created by this mutation. */
   creditClassIssuer: CreditClassIssuerInput;
@@ -1226,10 +1196,7 @@ export type CreateCreditClassIssuerInput = {
 /** The output of our create `CreditClassIssuer` mutation. */
 export type CreateCreditClassIssuerPayload = {
   __typename?: 'CreateCreditClassIssuerPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditClassIssuer` that was created by this mutation. */
   creditClassIssuer?: Maybe<CreditClassIssuer>;
@@ -1251,10 +1218,7 @@ export type CreateCreditClassIssuerPayloadCreditClassIssuerEdgeArgs = {
 /** The output of our create `CreditClass` mutation. */
 export type CreateCreditClassPayload = {
   __typename?: 'CreateCreditClassPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditClass` that was created by this mutation. */
   creditClass?: Maybe<CreditClass>;
@@ -1275,10 +1239,7 @@ export type CreateCreditClassPayloadCreditClassEdgeArgs = {
 
 /** All input for the create `CreditClassVersion` mutation. */
 export type CreateCreditClassVersionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditClassVersion` to be created by this mutation. */
   creditClassVersion: CreditClassVersionInput;
@@ -1287,10 +1248,7 @@ export type CreateCreditClassVersionInput = {
 /** The output of our create `CreditClassVersion` mutation. */
 export type CreateCreditClassVersionPayload = {
   __typename?: 'CreateCreditClassVersionPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditClassVersion` that was created by this mutation. */
   creditClassVersion?: Maybe<CreditClassVersion>;
@@ -1309,10 +1267,7 @@ export type CreateCreditClassVersionPayloadCreditClassVersionEdgeArgs = {
 
 /** All input for the create `CreditVintage` mutation. */
 export type CreateCreditVintageInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditVintage` to be created by this mutation. */
   creditVintage: CreditVintageInput;
@@ -1321,10 +1276,7 @@ export type CreateCreditVintageInput = {
 /** The output of our create `CreditVintage` mutation. */
 export type CreateCreditVintagePayload = {
   __typename?: 'CreateCreditVintagePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditVintage` that was created by this mutation. */
   creditVintage?: Maybe<CreditVintage>;
@@ -1357,10 +1309,7 @@ export type CreateCreditVintagePayloadCreditVintageEdgeArgs = {
 
 /** All input for the create `Document` mutation. */
 export type CreateDocumentInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Document` to be created by this mutation. */
   document: DocumentInput;
@@ -1369,10 +1318,7 @@ export type CreateDocumentInput = {
 /** The output of our create `Document` mutation. */
 export type CreateDocumentPayload = {
   __typename?: 'CreateDocumentPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Document` that was created by this mutation. */
   document?: Maybe<Document>;
@@ -1393,10 +1339,7 @@ export type CreateDocumentPayloadDocumentEdgeArgs = {
 
 /** All input for the create `Event` mutation. */
 export type CreateEventInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Event` to be created by this mutation. */
   event: EventInput;
@@ -1405,10 +1348,7 @@ export type CreateEventInput = {
 /** The output of our create `Event` mutation. */
 export type CreateEventPayload = {
   __typename?: 'CreateEventPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Event` that was created by this mutation. */
   event?: Maybe<Event>;
@@ -1427,10 +1367,7 @@ export type CreateEventPayloadEventEdgeArgs = {
 
 /** All input for the create `FlywaySchemaHistory` mutation. */
 export type CreateFlywaySchemaHistoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `FlywaySchemaHistory` to be created by this mutation. */
   flywaySchemaHistory: FlywaySchemaHistoryInput;
@@ -1439,10 +1376,7 @@ export type CreateFlywaySchemaHistoryInput = {
 /** The output of our create `FlywaySchemaHistory` mutation. */
 export type CreateFlywaySchemaHistoryPayload = {
   __typename?: 'CreateFlywaySchemaHistoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `FlywaySchemaHistory` that was created by this mutation. */
   flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
@@ -1459,10 +1393,7 @@ export type CreateFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
 
 /** All input for the create `Methodology` mutation. */
 export type CreateMethodologyInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Methodology` to be created by this mutation. */
   methodology: MethodologyInput;
@@ -1471,10 +1402,7 @@ export type CreateMethodologyInput = {
 /** The output of our create `Methodology` mutation. */
 export type CreateMethodologyPayload = {
   __typename?: 'CreateMethodologyPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Methodology` that was created by this mutation. */
   methodology?: Maybe<Methodology>;
@@ -1493,10 +1421,7 @@ export type CreateMethodologyPayloadMethodologyEdgeArgs = {
 
 /** All input for the create `MethodologyVersion` mutation. */
 export type CreateMethodologyVersionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `MethodologyVersion` to be created by this mutation. */
   methodologyVersion: MethodologyVersionInput;
@@ -1505,10 +1430,7 @@ export type CreateMethodologyVersionInput = {
 /** The output of our create `MethodologyVersion` mutation. */
 export type CreateMethodologyVersionPayload = {
   __typename?: 'CreateMethodologyVersionPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `MethodologyVersion` that was created by this mutation. */
   methodologyVersion?: Maybe<MethodologyVersion>;
@@ -1527,10 +1449,7 @@ export type CreateMethodologyVersionPayloadMethodologyVersionEdgeArgs = {
 
 /** All input for the create `Mrv` mutation. */
 export type CreateMrvInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Mrv` to be created by this mutation. */
   mrv: MrvInput;
@@ -1539,10 +1458,7 @@ export type CreateMrvInput = {
 /** The output of our create `Mrv` mutation. */
 export type CreateMrvPayload = {
   __typename?: 'CreateMrvPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Mrv` that was created by this mutation. */
   mrv?: Maybe<Mrv>;
@@ -1561,10 +1477,7 @@ export type CreateMrvPayloadMrvEdgeArgs = {
 
 /** All input for the create `Organization` mutation. */
 export type CreateOrganizationInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Organization` to be created by this mutation. */
   organization: OrganizationInput;
@@ -1572,10 +1485,7 @@ export type CreateOrganizationInput = {
 
 /** All input for the create `OrganizationMember` mutation. */
 export type CreateOrganizationMemberInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `OrganizationMember` to be created by this mutation. */
   organizationMember: OrganizationMemberInput;
@@ -1584,10 +1494,7 @@ export type CreateOrganizationMemberInput = {
 /** The output of our create `OrganizationMember` mutation. */
 export type CreateOrganizationMemberPayload = {
   __typename?: 'CreateOrganizationMemberPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `OrganizationMember` that was created by this mutation. */
   organizationMember?: Maybe<OrganizationMember>;
@@ -1609,10 +1516,7 @@ export type CreateOrganizationMemberPayloadOrganizationMemberEdgeArgs = {
 /** The output of our create `Organization` mutation. */
 export type CreateOrganizationPayload = {
   __typename?: 'CreateOrganizationPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Organization` that was created by this mutation. */
   organization?: Maybe<Organization>;
@@ -1631,10 +1535,7 @@ export type CreateOrganizationPayloadOrganizationEdgeArgs = {
 
 /** All input for the create `Party` mutation. */
 export type CreatePartyInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Party` to be created by this mutation. */
   party: PartyInput;
@@ -1643,10 +1544,7 @@ export type CreatePartyInput = {
 /** The output of our create `Party` mutation. */
 export type CreatePartyPayload = {
   __typename?: 'CreatePartyPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Party` that was created by this mutation. */
   party?: Maybe<Party>;
@@ -1667,10 +1565,7 @@ export type CreatePartyPayloadPartyEdgeArgs = {
 
 /** All input for the create `ProjectBroker` mutation. */
 export type CreateProjectBrokerInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `ProjectBroker` to be created by this mutation. */
   projectBroker: ProjectBrokerInput;
@@ -1679,10 +1574,7 @@ export type CreateProjectBrokerInput = {
 /** The output of our create `ProjectBroker` mutation. */
 export type CreateProjectBrokerPayload = {
   __typename?: 'CreateProjectBrokerPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `ProjectBroker` that was created by this mutation. */
   projectBroker?: Maybe<ProjectBroker>;
@@ -1707,10 +1599,7 @@ export type CreateProjectBrokerPayloadProjectBrokerEdgeArgs = {
 
 /** All input for the create `Project` mutation. */
 export type CreateProjectInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Project` to be created by this mutation. */
   project: ProjectInput;
@@ -1719,10 +1608,7 @@ export type CreateProjectInput = {
 /** The output of our create `Project` mutation. */
 export type CreateProjectPayload = {
   __typename?: 'CreateProjectPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Project` that was created by this mutation. */
   project?: Maybe<Project>;
@@ -1759,10 +1645,7 @@ export type CreateProjectPayloadProjectEdgeArgs = {
 
 /** All input for the create `Purchase` mutation. */
 export type CreatePurchaseInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Purchase` to be created by this mutation. */
   purchase: PurchaseInput;
@@ -1771,10 +1654,7 @@ export type CreatePurchaseInput = {
 /** The output of our create `Purchase` mutation. */
 export type CreatePurchasePayload = {
   __typename?: 'CreatePurchasePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Purchase` that was created by this mutation. */
   purchase?: Maybe<Purchase>;
@@ -1801,10 +1681,7 @@ export type CreatePurchasePayloadPurchaseEdgeArgs = {
 
 /** All input for the create `Retirement` mutation. */
 export type CreateRetirementInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Retirement` to be created by this mutation. */
   retirement: RetirementInput;
@@ -1813,10 +1690,7 @@ export type CreateRetirementInput = {
 /** The output of our create `Retirement` mutation. */
 export type CreateRetirementPayload = {
   __typename?: 'CreateRetirementPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Retirement` that was created by this mutation. */
   retirement?: Maybe<Retirement>;
@@ -1839,10 +1713,7 @@ export type CreateRetirementPayloadRetirementEdgeArgs = {
 
 /** All input for the create `ShaclGraph` mutation. */
 export type CreateShaclGraphInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `ShaclGraph` to be created by this mutation. */
   shaclGraph: ShaclGraphInput;
@@ -1851,10 +1722,7 @@ export type CreateShaclGraphInput = {
 /** The output of our create `ShaclGraph` mutation. */
 export type CreateShaclGraphPayload = {
   __typename?: 'CreateShaclGraphPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `ShaclGraph` that was created by this mutation. */
   shaclGraph?: Maybe<ShaclGraph>;
@@ -1871,10 +1739,7 @@ export type CreateShaclGraphPayloadShaclGraphEdgeArgs = {
 
 /** All input for the create `Transaction` mutation. */
 export type CreateTransactionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Transaction` to be created by this mutation. */
   transaction: TransactionInput;
@@ -1883,10 +1748,7 @@ export type CreateTransactionInput = {
 /** The output of our create `Transaction` mutation. */
 export type CreateTransactionPayload = {
   __typename?: 'CreateTransactionPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Transaction` that was created by this mutation. */
   transaction?: Maybe<Transaction>;
@@ -1913,10 +1775,7 @@ export type CreateTransactionPayloadTransactionEdgeArgs = {
 
 /** All input for the create `User` mutation. */
 export type CreateUserInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `User` to be created by this mutation. */
   user: UserInput;
@@ -1924,10 +1783,7 @@ export type CreateUserInput = {
 
 /** All input for the `createUserOrganizationIfNeeded` mutation. */
 export type CreateUserOrganizationIfNeededInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -1942,10 +1798,7 @@ export type CreateUserOrganizationIfNeededInput = {
 /** The output of our `createUserOrganizationIfNeeded` mutation. */
 export type CreateUserOrganizationIfNeededPayload = {
   __typename?: 'CreateUserOrganizationIfNeededPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   organization?: Maybe<Organization>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -1963,10 +1816,7 @@ export type CreateUserOrganizationIfNeededPayloadOrganizationEdgeArgs = {
 
 /** All input for the `createUserOrganization` mutation. */
 export type CreateUserOrganizationInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -1980,10 +1830,7 @@ export type CreateUserOrganizationInput = {
 /** The output of our `createUserOrganization` mutation. */
 export type CreateUserOrganizationPayload = {
   __typename?: 'CreateUserOrganizationPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   organization?: Maybe<Organization>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -2002,10 +1849,7 @@ export type CreateUserOrganizationPayloadOrganizationEdgeArgs = {
 /** The output of our create `User` mutation. */
 export type CreateUserPayload = {
   __typename?: 'CreateUserPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `User` that was created by this mutation. */
   user?: Maybe<User>;
@@ -2024,10 +1868,7 @@ export type CreateUserPayloadUserEdgeArgs = {
 
 /** All input for the create `Wallet` mutation. */
 export type CreateWalletInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Wallet` to be created by this mutation. */
   wallet: WalletInput;
@@ -2036,10 +1877,7 @@ export type CreateWalletInput = {
 /** The output of our create `Wallet` mutation. */
 export type CreateWalletPayload = {
   __typename?: 'CreateWalletPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Wallet` that was created by this mutation. */
   wallet?: Maybe<Wallet>;
@@ -2326,10 +2164,7 @@ export type CreditClassAddressesByProjectCreditClassIdAndAddressIdManyToManyEdge
     condition?: Maybe<ProjectCondition>;
   };
 
-/**
- * A condition to be used against `CreditClass` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `CreditClass` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type CreditClassCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -2370,10 +2205,7 @@ export type CreditClassIssuer = {
   walletByIssuerId?: Maybe<Wallet>;
 };
 
-/**
- * A condition to be used against `CreditClassIssuer` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `CreditClassIssuer` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type CreditClassIssuerCondition = {
   /** Checks for equality with the object’s `createdAt` field. */
   createdAt?: Maybe<Scalars['Datetime']>;
@@ -2849,10 +2681,7 @@ export type CreditClassVersionCreditVintagesByCreditClassVersionIdAndCreditClass
     condition?: Maybe<CreditVintageCondition>;
   };
 
-/**
- * A condition to be used against `CreditClassVersion` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `CreditClassVersion` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type CreditClassVersionCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -3413,10 +3242,7 @@ export type CreditVintageAddressesByRetirementCreditVintageIdAndAddressIdManyToM
     condition?: Maybe<RetirementCondition>;
   };
 
-/**
- * A condition to be used against `CreditVintage` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `CreditVintage` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type CreditVintageCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -3906,10 +3732,7 @@ export enum CreditVintagesOrderBy {
 
 /** All input for the `deleteAccountBalanceByCreditVintageIdAndWalletId` mutation. */
 export type DeleteAccountBalanceByCreditVintageIdAndWalletIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   creditVintageId: Scalars['UUID'];
   walletId: Scalars['UUID'];
@@ -3917,20 +3740,14 @@ export type DeleteAccountBalanceByCreditVintageIdAndWalletIdInput = {
 
 /** All input for the `deleteAccountBalanceById` mutation. */
 export type DeleteAccountBalanceByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteAccountBalance` mutation. */
 export type DeleteAccountBalanceInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `AccountBalance` to be deleted. */
   nodeId: Scalars['ID'];
@@ -3939,10 +3756,7 @@ export type DeleteAccountBalanceInput = {
 /** The output of our delete `AccountBalance` mutation. */
 export type DeleteAccountBalancePayload = {
   __typename?: 'DeleteAccountBalancePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `AccountBalance` that was deleted by this mutation. */
   accountBalance?: Maybe<AccountBalance>;
@@ -3964,20 +3778,14 @@ export type DeleteAccountBalancePayloadAccountBalanceEdgeArgs = {
 
 /** All input for the `deleteAddressById` mutation. */
 export type DeleteAddressByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteAddress` mutation. */
 export type DeleteAddressInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Address` to be deleted. */
   nodeId: Scalars['ID'];
@@ -3986,10 +3794,7 @@ export type DeleteAddressInput = {
 /** The output of our delete `Address` mutation. */
 export type DeleteAddressPayload = {
   __typename?: 'DeleteAddressPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Address` that was deleted by this mutation. */
   address?: Maybe<Address>;
@@ -4007,30 +3812,21 @@ export type DeleteAddressPayloadAddressEdgeArgs = {
 
 /** All input for the `deleteAdminByAuth0Sub` mutation. */
 export type DeleteAdminByAuth0SubInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   auth0Sub: Scalars['String'];
 };
 
 /** All input for the `deleteAdminById` mutation. */
 export type DeleteAdminByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteAdmin` mutation. */
 export type DeleteAdminInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Admin` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4039,10 +3835,7 @@ export type DeleteAdminInput = {
 /** The output of our delete `Admin` mutation. */
 export type DeleteAdminPayload = {
   __typename?: 'DeleteAdminPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Admin` that was deleted by this mutation. */
   admin?: Maybe<Admin>;
@@ -4060,20 +3853,14 @@ export type DeleteAdminPayloadAdminEdgeArgs = {
 
 /** All input for the `deleteCreditClassById` mutation. */
 export type DeleteCreditClassByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteCreditClass` mutation. */
 export type DeleteCreditClassInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `CreditClass` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4082,10 +3869,7 @@ export type DeleteCreditClassInput = {
 /** The output of our delete `CreditClass` mutation. */
 export type DeleteCreditClassPayload = {
   __typename?: 'DeleteCreditClassPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditClass` that was deleted by this mutation. */
   creditClass?: Maybe<CreditClass>;
@@ -4107,10 +3891,7 @@ export type DeleteCreditClassPayloadCreditClassEdgeArgs = {
 
 /** All input for the `deleteCreditClassVersionByIdAndCreatedAt` mutation. */
 export type DeleteCreditClassVersionByIdAndCreatedAtInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   createdAt: Scalars['Datetime'];
@@ -4118,10 +3899,7 @@ export type DeleteCreditClassVersionByIdAndCreatedAtInput = {
 
 /** All input for the `deleteCreditClassVersion` mutation. */
 export type DeleteCreditClassVersionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `CreditClassVersion` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4130,10 +3908,7 @@ export type DeleteCreditClassVersionInput = {
 /** The output of our delete `CreditClassVersion` mutation. */
 export type DeleteCreditClassVersionPayload = {
   __typename?: 'DeleteCreditClassVersionPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditClassVersion` that was deleted by this mutation. */
   creditClassVersion?: Maybe<CreditClassVersion>;
@@ -4153,30 +3928,21 @@ export type DeleteCreditClassVersionPayloadCreditClassVersionEdgeArgs = {
 
 /** All input for the `deleteCreditVintageByEventId` mutation. */
 export type DeleteCreditVintageByEventIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   eventId: Scalars['UUID'];
 };
 
 /** All input for the `deleteCreditVintageById` mutation. */
 export type DeleteCreditVintageByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteCreditVintage` mutation. */
 export type DeleteCreditVintageInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `CreditVintage` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4185,10 +3951,7 @@ export type DeleteCreditVintageInput = {
 /** The output of our delete `CreditVintage` mutation. */
 export type DeleteCreditVintagePayload = {
   __typename?: 'DeleteCreditVintagePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditVintage` that was deleted by this mutation. */
   creditVintage?: Maybe<CreditVintage>;
@@ -4222,20 +3985,14 @@ export type DeleteCreditVintagePayloadCreditVintageEdgeArgs = {
 
 /** All input for the `deleteDocumentById` mutation. */
 export type DeleteDocumentByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteDocument` mutation. */
 export type DeleteDocumentInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Document` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4244,10 +4001,7 @@ export type DeleteDocumentInput = {
 /** The output of our delete `Document` mutation. */
 export type DeleteDocumentPayload = {
   __typename?: 'DeleteDocumentPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Document` that was deleted by this mutation. */
   document?: Maybe<Document>;
@@ -4269,20 +4023,14 @@ export type DeleteDocumentPayloadDocumentEdgeArgs = {
 
 /** All input for the `deleteEventById` mutation. */
 export type DeleteEventByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteEvent` mutation. */
 export type DeleteEventInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Event` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4291,10 +4039,7 @@ export type DeleteEventInput = {
 /** The output of our delete `Event` mutation. */
 export type DeleteEventPayload = {
   __typename?: 'DeleteEventPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Event` that was deleted by this mutation. */
   event?: Maybe<Event>;
@@ -4314,20 +4059,14 @@ export type DeleteEventPayloadEventEdgeArgs = {
 
 /** All input for the `deleteFlywaySchemaHistoryByInstalledRank` mutation. */
 export type DeleteFlywaySchemaHistoryByInstalledRankInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   installedRank: Scalars['Int'];
 };
 
 /** All input for the `deleteFlywaySchemaHistory` mutation. */
 export type DeleteFlywaySchemaHistoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `FlywaySchemaHistory` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4336,10 +4075,7 @@ export type DeleteFlywaySchemaHistoryInput = {
 /** The output of our delete `FlywaySchemaHistory` mutation. */
 export type DeleteFlywaySchemaHistoryPayload = {
   __typename?: 'DeleteFlywaySchemaHistoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `FlywaySchemaHistory` that was deleted by this mutation. */
   flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
@@ -4357,20 +4093,14 @@ export type DeleteFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
 
 /** All input for the `deleteMethodologyById` mutation. */
 export type DeleteMethodologyByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteMethodology` mutation. */
 export type DeleteMethodologyInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Methodology` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4379,10 +4109,7 @@ export type DeleteMethodologyInput = {
 /** The output of our delete `Methodology` mutation. */
 export type DeleteMethodologyPayload = {
   __typename?: 'DeleteMethodologyPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Methodology` that was deleted by this mutation. */
   methodology?: Maybe<Methodology>;
@@ -4402,10 +4129,7 @@ export type DeleteMethodologyPayloadMethodologyEdgeArgs = {
 
 /** All input for the `deleteMethodologyVersionByIdAndCreatedAt` mutation. */
 export type DeleteMethodologyVersionByIdAndCreatedAtInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   createdAt: Scalars['Datetime'];
@@ -4413,10 +4137,7 @@ export type DeleteMethodologyVersionByIdAndCreatedAtInput = {
 
 /** All input for the `deleteMethodologyVersion` mutation. */
 export type DeleteMethodologyVersionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `MethodologyVersion` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4425,10 +4146,7 @@ export type DeleteMethodologyVersionInput = {
 /** The output of our delete `MethodologyVersion` mutation. */
 export type DeleteMethodologyVersionPayload = {
   __typename?: 'DeleteMethodologyVersionPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `MethodologyVersion` that was deleted by this mutation. */
   methodologyVersion?: Maybe<MethodologyVersion>;
@@ -4448,20 +4166,14 @@ export type DeleteMethodologyVersionPayloadMethodologyVersionEdgeArgs = {
 
 /** All input for the `deleteMrvById` mutation. */
 export type DeleteMrvByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteMrv` mutation. */
 export type DeleteMrvInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Mrv` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4470,10 +4182,7 @@ export type DeleteMrvInput = {
 /** The output of our delete `Mrv` mutation. */
 export type DeleteMrvPayload = {
   __typename?: 'DeleteMrvPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Mrv` that was deleted by this mutation. */
   mrv?: Maybe<Mrv>;
@@ -4493,20 +4202,14 @@ export type DeleteMrvPayloadMrvEdgeArgs = {
 
 /** All input for the `deleteOrganizationById` mutation. */
 export type DeleteOrganizationByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteOrganizationByPartyIdAndType` mutation. */
 export type DeleteOrganizationByPartyIdAndTypeInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   partyId: Scalars['UUID'];
   type: PartyType;
@@ -4514,20 +4217,14 @@ export type DeleteOrganizationByPartyIdAndTypeInput = {
 
 /** All input for the `deleteOrganizationByPartyId` mutation. */
 export type DeleteOrganizationByPartyIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   partyId: Scalars['UUID'];
 };
 
 /** All input for the `deleteOrganization` mutation. */
 export type DeleteOrganizationInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Organization` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4535,10 +4232,7 @@ export type DeleteOrganizationInput = {
 
 /** All input for the `deleteOrganizationMemberByMemberIdAndOrganizationId` mutation. */
 export type DeleteOrganizationMemberByMemberIdAndOrganizationIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   memberId: Scalars['UUID'];
   organizationId: Scalars['UUID'];
@@ -4546,10 +4240,7 @@ export type DeleteOrganizationMemberByMemberIdAndOrganizationIdInput = {
 
 /** All input for the `deleteOrganizationMember` mutation. */
 export type DeleteOrganizationMemberInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `OrganizationMember` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4558,10 +4249,7 @@ export type DeleteOrganizationMemberInput = {
 /** The output of our delete `OrganizationMember` mutation. */
 export type DeleteOrganizationMemberPayload = {
   __typename?: 'DeleteOrganizationMemberPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `OrganizationMember` that was deleted by this mutation. */
   organizationMember?: Maybe<OrganizationMember>;
@@ -4584,10 +4272,7 @@ export type DeleteOrganizationMemberPayloadOrganizationMemberEdgeArgs = {
 /** The output of our delete `Organization` mutation. */
 export type DeleteOrganizationPayload = {
   __typename?: 'DeleteOrganizationPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Organization` that was deleted by this mutation. */
   organization?: Maybe<Organization>;
@@ -4607,20 +4292,14 @@ export type DeleteOrganizationPayloadOrganizationEdgeArgs = {
 
 /** All input for the `deletePartyById` mutation. */
 export type DeletePartyByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteParty` mutation. */
 export type DeletePartyInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Party` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4629,10 +4308,7 @@ export type DeletePartyInput = {
 /** The output of our delete `Party` mutation. */
 export type DeletePartyPayload = {
   __typename?: 'DeletePartyPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Party` that was deleted by this mutation. */
   party?: Maybe<Party>;
@@ -4654,20 +4330,14 @@ export type DeletePartyPayloadPartyEdgeArgs = {
 
 /** All input for the `deleteProjectBrokerById` mutation. */
 export type DeleteProjectBrokerByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteProjectBroker` mutation. */
 export type DeleteProjectBrokerInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `ProjectBroker` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4676,10 +4346,7 @@ export type DeleteProjectBrokerInput = {
 /** The output of our delete `ProjectBroker` mutation. */
 export type DeleteProjectBrokerPayload = {
   __typename?: 'DeleteProjectBrokerPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `ProjectBroker` that was deleted by this mutation. */
   projectBroker?: Maybe<ProjectBroker>;
@@ -4705,30 +4372,21 @@ export type DeleteProjectBrokerPayloadProjectBrokerEdgeArgs = {
 
 /** All input for the `deleteProjectByHandle` mutation. */
 export type DeleteProjectByHandleInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   handle: Scalars['String'];
 };
 
 /** All input for the `deleteProjectById` mutation. */
 export type DeleteProjectByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteProject` mutation. */
 export type DeleteProjectInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Project` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4737,10 +4395,7 @@ export type DeleteProjectInput = {
 /** The output of our delete `Project` mutation. */
 export type DeleteProjectPayload = {
   __typename?: 'DeleteProjectPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Project` that was deleted by this mutation. */
   project?: Maybe<Project>;
@@ -4778,20 +4433,14 @@ export type DeleteProjectPayloadProjectEdgeArgs = {
 
 /** All input for the `deletePurchaseById` mutation. */
 export type DeletePurchaseByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deletePurchase` mutation. */
 export type DeletePurchaseInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Purchase` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4800,10 +4449,7 @@ export type DeletePurchaseInput = {
 /** The output of our delete `Purchase` mutation. */
 export type DeletePurchasePayload = {
   __typename?: 'DeletePurchasePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Purchase` that was deleted by this mutation. */
   purchase?: Maybe<Purchase>;
@@ -4831,20 +4477,14 @@ export type DeletePurchasePayloadPurchaseEdgeArgs = {
 
 /** All input for the `deleteRetirementById` mutation. */
 export type DeleteRetirementByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteRetirement` mutation. */
 export type DeleteRetirementInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Retirement` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4853,10 +4493,7 @@ export type DeleteRetirementInput = {
 /** The output of our delete `Retirement` mutation. */
 export type DeleteRetirementPayload = {
   __typename?: 'DeleteRetirementPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Retirement` that was deleted by this mutation. */
   retirement?: Maybe<Retirement>;
@@ -4880,20 +4517,14 @@ export type DeleteRetirementPayloadRetirementEdgeArgs = {
 
 /** All input for the `deleteShaclGraphByUri` mutation. */
 export type DeleteShaclGraphByUriInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   uri: Scalars['String'];
 };
 
 /** All input for the `deleteShaclGraph` mutation. */
 export type DeleteShaclGraphInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `ShaclGraph` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4902,10 +4533,7 @@ export type DeleteShaclGraphInput = {
 /** The output of our delete `ShaclGraph` mutation. */
 export type DeleteShaclGraphPayload = {
   __typename?: 'DeleteShaclGraphPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `ShaclGraph` that was deleted by this mutation. */
   shaclGraph?: Maybe<ShaclGraph>;
@@ -4923,20 +4551,14 @@ export type DeleteShaclGraphPayloadShaclGraphEdgeArgs = {
 
 /** All input for the `deleteTransactionById` mutation. */
 export type DeleteTransactionByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteTransaction` mutation. */
 export type DeleteTransactionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Transaction` to be deleted. */
   nodeId: Scalars['ID'];
@@ -4945,10 +4567,7 @@ export type DeleteTransactionInput = {
 /** The output of our delete `Transaction` mutation. */
 export type DeleteTransactionPayload = {
   __typename?: 'DeleteTransactionPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Transaction` that was deleted by this mutation. */
   transaction?: Maybe<Transaction>;
@@ -4976,40 +4595,28 @@ export type DeleteTransactionPayloadTransactionEdgeArgs = {
 
 /** All input for the `deleteUserByAuth0Sub` mutation. */
 export type DeleteUserByAuth0SubInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   auth0Sub: Scalars['String'];
 };
 
 /** All input for the `deleteUserByEmail` mutation. */
 export type DeleteUserByEmailInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   email: Scalars['String'];
 };
 
 /** All input for the `deleteUserById` mutation. */
 export type DeleteUserByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteUserByPartyIdAndType` mutation. */
 export type DeleteUserByPartyIdAndTypeInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   partyId: Scalars['UUID'];
   type: PartyType;
@@ -5017,20 +4624,14 @@ export type DeleteUserByPartyIdAndTypeInput = {
 
 /** All input for the `deleteUserByPartyId` mutation. */
 export type DeleteUserByPartyIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   partyId: Scalars['UUID'];
 };
 
 /** All input for the `deleteUser` mutation. */
 export type DeleteUserInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `User` to be deleted. */
   nodeId: Scalars['ID'];
@@ -5039,10 +4640,7 @@ export type DeleteUserInput = {
 /** The output of our delete `User` mutation. */
 export type DeleteUserPayload = {
   __typename?: 'DeleteUserPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `User` that was deleted by this mutation. */
   user?: Maybe<User>;
@@ -5062,20 +4660,14 @@ export type DeleteUserPayloadUserEdgeArgs = {
 
 /** All input for the `deleteWalletById` mutation. */
 export type DeleteWalletByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
 };
 
 /** All input for the `deleteWallet` mutation. */
 export type DeleteWalletInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Wallet` to be deleted. */
   nodeId: Scalars['ID'];
@@ -5084,10 +4676,7 @@ export type DeleteWalletInput = {
 /** The output of our delete `Wallet` mutation. */
 export type DeleteWalletPayload = {
   __typename?: 'DeleteWalletPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Wallet` that was deleted by this mutation. */
   wallet?: Maybe<Wallet>;
@@ -5122,10 +4711,7 @@ export type Document = Node & {
   eventByEventId?: Maybe<Event>;
 };
 
-/**
- * A condition to be used against `Document` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `Document` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type DocumentCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -5474,10 +5060,7 @@ export type FlywaySchemaHistory = Node & {
   success: Scalars['Boolean'];
 };
 
-/**
- * A condition to be used against `FlywaySchemaHistory` object types. All fields
- * are tested for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `FlywaySchemaHistory` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type FlywaySchemaHistoryCondition = {
   /** Checks for equality with the object’s `installedRank` field. */
   installedRank?: Maybe<Scalars['Int']>;
@@ -5531,10 +5114,7 @@ export type FlywaySchemaHistoryPatch = {
 
 /** All input for the `getUserFirstOrganization` mutation. */
 export type GetUserFirstOrganizationInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   userId: Scalars['UUID'];
 };
@@ -5542,10 +5122,7 @@ export type GetUserFirstOrganizationInput = {
 /** The output of our `getUserFirstOrganization` mutation. */
 export type GetUserFirstOrganizationPayload = {
   __typename?: 'GetUserFirstOrganizationPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   organization?: Maybe<Organization>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -5563,10 +5140,7 @@ export type GetUserFirstOrganizationPayloadOrganizationEdgeArgs = {
 
 /** All input for the `getWalletContactEmail` mutation. */
 export type GetWalletContactEmailInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   vWalletId: Scalars['UUID'];
 };
@@ -5574,10 +5148,7 @@ export type GetWalletContactEmailInput = {
 /** The output of our `getWalletContactEmail` mutation. */
 export type GetWalletContactEmailPayload = {
   __typename?: 'GetWalletContactEmailPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   string?: Maybe<Scalars['String']>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -5586,20 +5157,14 @@ export type GetWalletContactEmailPayload = {
 
 /** All input for the `isAdmin` mutation. */
 export type IsAdminInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** The output of our `isAdmin` mutation. */
 export type IsAdminPayload = {
   __typename?: 'IsAdminPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   boolean?: Maybe<Scalars['Boolean']>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -5608,10 +5173,7 @@ export type IsAdminPayload = {
 
 /** All input for the `issueCredits` mutation. */
 export type IssueCreditsInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   projectId: Scalars['UUID'];
   creditClassVersionId: Scalars['UUID'];
@@ -5630,10 +5192,7 @@ export type IssueCreditsInput = {
 /** The output of our `issueCredits` mutation. */
 export type IssueCreditsPayload = {
   __typename?: 'IssueCreditsPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   json?: Maybe<Scalars['JSON']>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -5725,10 +5284,7 @@ export type MethodologyPartiesByCreditClassMethodologyIdAndDesignerIdArgs = {
   condition?: Maybe<PartyCondition>;
 };
 
-/**
- * A condition to be used against `Methodology` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `Methodology` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type MethodologyCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -5825,10 +5381,7 @@ export type MethodologyVersionCreditVintagesByMethodologyVersionIdAndMethodology
     condition?: Maybe<CreditVintageCondition>;
   };
 
-/**
- * A condition to be used against `MethodologyVersion` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `MethodologyVersion` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type MethodologyVersionCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -7087,10 +6640,7 @@ export type OrganizationUsersByOrganizationMemberOrganizationIdAndMemberIdArgs =
     condition?: Maybe<UserCondition>;
   };
 
-/**
- * A condition to be used against `Organization` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `Organization` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type OrganizationCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -7135,10 +6685,7 @@ export type OrganizationMember = Node & {
   organizationByOrganizationId?: Maybe<Organization>;
 };
 
-/**
- * A condition to be used against `OrganizationMember` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `OrganizationMember` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type OrganizationMemberCondition = {
   /** Checks for equality with the object’s `createdAt` field. */
   createdAt?: Maybe<Scalars['Datetime']>;
@@ -11863,10 +11410,7 @@ export type ProjectBroker = Node & {
   userBySignerId?: Maybe<User>;
 };
 
-/**
- * A condition to be used against `ProjectBroker` object types. All fields are
- * tested for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `ProjectBroker` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type ProjectBrokerCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -12520,10 +12064,7 @@ export type PurchaseCreditVintagesByTransactionPurchaseIdAndCreditVintageIdArgs 
     condition?: Maybe<CreditVintageCondition>;
   };
 
-/**
- * A condition to be used against `Purchase` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `Purchase` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type PurchaseCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -12788,10 +12329,7 @@ export enum PurchasesOrderBy {
 /** The root query type which gives access points into the data universe. */
 export type Query = Node & {
   __typename?: 'Query';
-  /**
-   * Exposes the root query type nested one level down. This is helpful for Relay 1
-   * which can only query top level fields if they are in a particular form.
-   */
+  /** Exposes the root query type nested one level down. This is helpful for Relay 1 which can only query top level fields if they are in a particular form. */
   query: Query;
   /** The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`. */
   nodeId: Scalars['ID'];
@@ -13491,10 +13029,7 @@ export type QueryWalletArgs = {
 
 /** All input for the `reallyCreateOrganizationIfNeeded` mutation. */
 export type ReallyCreateOrganizationIfNeededInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   legalName?: Maybe<Scalars['String']>;
   displayName?: Maybe<Scalars['String']>;
@@ -13509,10 +13044,7 @@ export type ReallyCreateOrganizationIfNeededInput = {
 /** The output of our `reallyCreateOrganizationIfNeeded` mutation. */
 export type ReallyCreateOrganizationIfNeededPayload = {
   __typename?: 'ReallyCreateOrganizationIfNeededPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   organization?: Maybe<Organization>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -13530,10 +13062,7 @@ export type ReallyCreateOrganizationIfNeededPayloadOrganizationEdgeArgs = {
 
 /** All input for the `reallyCreateOrganization` mutation. */
 export type ReallyCreateOrganizationInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   legalName?: Maybe<Scalars['String']>;
   displayName?: Maybe<Scalars['String']>;
@@ -13548,10 +13077,7 @@ export type ReallyCreateOrganizationInput = {
 /** The output of our `reallyCreateOrganization` mutation. */
 export type ReallyCreateOrganizationPayload = {
   __typename?: 'ReallyCreateOrganizationPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   organization?: Maybe<Organization>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -13569,10 +13095,7 @@ export type ReallyCreateOrganizationPayloadOrganizationEdgeArgs = {
 
 /** All input for the `reallyCreateUserIfNeeded` mutation. */
 export type ReallyCreateUserIfNeededInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   userEmail?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -13587,10 +13110,7 @@ export type ReallyCreateUserIfNeededInput = {
 /** The output of our `reallyCreateUserIfNeeded` mutation. */
 export type ReallyCreateUserIfNeededPayload = {
   __typename?: 'ReallyCreateUserIfNeededPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -13608,10 +13128,7 @@ export type ReallyCreateUserIfNeededPayloadUserEdgeArgs = {
 
 /** All input for the `reallyCreateUser` mutation. */
 export type ReallyCreateUserInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
@@ -13628,10 +13145,7 @@ export type ReallyCreateUserInput = {
 /** The output of our `reallyCreateUser` mutation. */
 export type ReallyCreateUserPayload = {
   __typename?: 'ReallyCreateUserPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -13649,10 +13163,7 @@ export type ReallyCreateUserPayloadUserEdgeArgs = {
 
 /** All input for the `retireCredits` mutation. */
 export type RetireCreditsInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   vintageId: Scalars['UUID'];
   buyerWalletId: Scalars['UUID'];
@@ -13664,10 +13175,7 @@ export type RetireCreditsInput = {
 /** The output of our `retireCredits` mutation. */
 export type RetireCreditsPayload = {
   __typename?: 'RetireCreditsPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   retirement?: Maybe<Retirement>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -13707,10 +13215,7 @@ export type Retirement = Node & {
   creditVintageByCreditVintageId?: Maybe<CreditVintage>;
 };
 
-/**
- * A condition to be used against `Retirement` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `Retirement` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type RetirementCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -13801,10 +13306,7 @@ export enum RetirementsOrderBy {
 
 /** All input for the `sendTransferCreditsConfirmation` mutation. */
 export type SendTransferCreditsConfirmationInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   units: Scalars['BigFloat'];
   creditPrice: Scalars['BigFloat'];
@@ -13820,10 +13322,7 @@ export type SendTransferCreditsConfirmationInput = {
 /** The output of our `sendTransferCreditsConfirmation` mutation. */
 export type SendTransferCreditsConfirmationPayload = {
   __typename?: 'SendTransferCreditsConfirmationPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
   query?: Maybe<Query>;
@@ -13839,10 +13338,7 @@ export type ShaclGraph = Node & {
   graph: Scalars['JSON'];
 };
 
-/**
- * A condition to be used against `ShaclGraph` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `ShaclGraph` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type ShaclGraphCondition = {
   /** Checks for equality with the object’s `uri` field. */
   uri?: Maybe<Scalars['String']>;
@@ -13934,10 +13430,7 @@ export type Transaction = Node & {
   purchaseByPurchaseId?: Maybe<Purchase>;
 };
 
-/**
- * A condition to be used against `Transaction` object types. All fields are tested
- * for equality and combined with a logical ‘and.’
- */
+/** A condition to be used against `Transaction` object types. All fields are tested for equality and combined with a logical ‘and.’ */
 export type TransactionCondition = {
   /** Checks for equality with the object’s `id` field. */
   id?: Maybe<Scalars['UUID']>;
@@ -14054,10 +13547,7 @@ export enum TransactionsOrderBy {
 
 /** All input for the `transferCredits` mutation. */
 export type TransferCreditsInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   vintageId: Scalars['UUID'];
   buyerWalletId: Scalars['UUID'];
@@ -14081,10 +13571,7 @@ export type TransferCreditsInput = {
 /** The output of our `transferCredits` mutation. */
 export type TransferCreditsPayload = {
   __typename?: 'TransferCreditsPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   json?: Maybe<Scalars['JSON']>;
   /** Our root query field type. Allows us to run any query from our mutation payload. */
@@ -14093,10 +13580,7 @@ export type TransferCreditsPayload = {
 
 /** All input for the `updateAccountBalanceByCreditVintageIdAndWalletId` mutation. */
 export type UpdateAccountBalanceByCreditVintageIdAndWalletIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `AccountBalance` being updated. */
   accountBalancePatch: AccountBalancePatch;
@@ -14106,10 +13590,7 @@ export type UpdateAccountBalanceByCreditVintageIdAndWalletIdInput = {
 
 /** All input for the `updateAccountBalanceById` mutation. */
 export type UpdateAccountBalanceByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `AccountBalance` being updated. */
   accountBalancePatch: AccountBalancePatch;
@@ -14118,10 +13599,7 @@ export type UpdateAccountBalanceByIdInput = {
 
 /** All input for the `updateAccountBalance` mutation. */
 export type UpdateAccountBalanceInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `AccountBalance` to be updated. */
   nodeId: Scalars['ID'];
@@ -14132,10 +13610,7 @@ export type UpdateAccountBalanceInput = {
 /** The output of our update `AccountBalance` mutation. */
 export type UpdateAccountBalancePayload = {
   __typename?: 'UpdateAccountBalancePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `AccountBalance` that was updated by this mutation. */
   accountBalance?: Maybe<AccountBalance>;
@@ -14156,10 +13631,7 @@ export type UpdateAccountBalancePayloadAccountBalanceEdgeArgs = {
 
 /** All input for the `updateAddressById` mutation. */
 export type UpdateAddressByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Address` being updated. */
   addressPatch: AddressPatch;
@@ -14168,10 +13640,7 @@ export type UpdateAddressByIdInput = {
 
 /** All input for the `updateAddress` mutation. */
 export type UpdateAddressInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Address` to be updated. */
   nodeId: Scalars['ID'];
@@ -14182,10 +13651,7 @@ export type UpdateAddressInput = {
 /** The output of our update `Address` mutation. */
 export type UpdateAddressPayload = {
   __typename?: 'UpdateAddressPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Address` that was updated by this mutation. */
   address?: Maybe<Address>;
@@ -14202,10 +13668,7 @@ export type UpdateAddressPayloadAddressEdgeArgs = {
 
 /** All input for the `updateAdminByAuth0Sub` mutation. */
 export type UpdateAdminByAuth0SubInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Admin` being updated. */
   adminPatch: AdminPatch;
@@ -14214,10 +13677,7 @@ export type UpdateAdminByAuth0SubInput = {
 
 /** All input for the `updateAdminById` mutation. */
 export type UpdateAdminByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Admin` being updated. */
   adminPatch: AdminPatch;
@@ -14226,10 +13686,7 @@ export type UpdateAdminByIdInput = {
 
 /** All input for the `updateAdmin` mutation. */
 export type UpdateAdminInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Admin` to be updated. */
   nodeId: Scalars['ID'];
@@ -14240,10 +13697,7 @@ export type UpdateAdminInput = {
 /** The output of our update `Admin` mutation. */
 export type UpdateAdminPayload = {
   __typename?: 'UpdateAdminPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Admin` that was updated by this mutation. */
   admin?: Maybe<Admin>;
@@ -14260,10 +13714,7 @@ export type UpdateAdminPayloadAdminEdgeArgs = {
 
 /** All input for the `updateCreditClassById` mutation. */
 export type UpdateCreditClassByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `CreditClass` being updated. */
   creditClassPatch: CreditClassPatch;
@@ -14272,10 +13723,7 @@ export type UpdateCreditClassByIdInput = {
 
 /** All input for the `updateCreditClass` mutation. */
 export type UpdateCreditClassInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `CreditClass` to be updated. */
   nodeId: Scalars['ID'];
@@ -14286,10 +13734,7 @@ export type UpdateCreditClassInput = {
 /** The output of our update `CreditClass` mutation. */
 export type UpdateCreditClassPayload = {
   __typename?: 'UpdateCreditClassPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditClass` that was updated by this mutation. */
   creditClass?: Maybe<CreditClass>;
@@ -14310,10 +13755,7 @@ export type UpdateCreditClassPayloadCreditClassEdgeArgs = {
 
 /** All input for the `updateCreditClassVersionByIdAndCreatedAt` mutation. */
 export type UpdateCreditClassVersionByIdAndCreatedAtInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `CreditClassVersion` being updated. */
   creditClassVersionPatch: CreditClassVersionPatch;
@@ -14323,10 +13765,7 @@ export type UpdateCreditClassVersionByIdAndCreatedAtInput = {
 
 /** All input for the `updateCreditClassVersion` mutation. */
 export type UpdateCreditClassVersionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `CreditClassVersion` to be updated. */
   nodeId: Scalars['ID'];
@@ -14337,10 +13776,7 @@ export type UpdateCreditClassVersionInput = {
 /** The output of our update `CreditClassVersion` mutation. */
 export type UpdateCreditClassVersionPayload = {
   __typename?: 'UpdateCreditClassVersionPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditClassVersion` that was updated by this mutation. */
   creditClassVersion?: Maybe<CreditClassVersion>;
@@ -14359,10 +13795,7 @@ export type UpdateCreditClassVersionPayloadCreditClassVersionEdgeArgs = {
 
 /** All input for the `updateCreditVintageByEventId` mutation. */
 export type UpdateCreditVintageByEventIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `CreditVintage` being updated. */
   creditVintagePatch: CreditVintagePatch;
@@ -14371,10 +13804,7 @@ export type UpdateCreditVintageByEventIdInput = {
 
 /** All input for the `updateCreditVintageById` mutation. */
 export type UpdateCreditVintageByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `CreditVintage` being updated. */
   creditVintagePatch: CreditVintagePatch;
@@ -14383,10 +13813,7 @@ export type UpdateCreditVintageByIdInput = {
 
 /** All input for the `updateCreditVintage` mutation. */
 export type UpdateCreditVintageInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `CreditVintage` to be updated. */
   nodeId: Scalars['ID'];
@@ -14397,10 +13824,7 @@ export type UpdateCreditVintageInput = {
 /** The output of our update `CreditVintage` mutation. */
 export type UpdateCreditVintagePayload = {
   __typename?: 'UpdateCreditVintagePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `CreditVintage` that was updated by this mutation. */
   creditVintage?: Maybe<CreditVintage>;
@@ -14433,10 +13857,7 @@ export type UpdateCreditVintagePayloadCreditVintageEdgeArgs = {
 
 /** All input for the `updateDocumentById` mutation. */
 export type UpdateDocumentByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Document` being updated. */
   documentPatch: DocumentPatch;
@@ -14445,10 +13866,7 @@ export type UpdateDocumentByIdInput = {
 
 /** All input for the `updateDocument` mutation. */
 export type UpdateDocumentInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Document` to be updated. */
   nodeId: Scalars['ID'];
@@ -14459,10 +13877,7 @@ export type UpdateDocumentInput = {
 /** The output of our update `Document` mutation. */
 export type UpdateDocumentPayload = {
   __typename?: 'UpdateDocumentPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Document` that was updated by this mutation. */
   document?: Maybe<Document>;
@@ -14483,10 +13898,7 @@ export type UpdateDocumentPayloadDocumentEdgeArgs = {
 
 /** All input for the `updateEventById` mutation. */
 export type UpdateEventByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Event` being updated. */
   eventPatch: EventPatch;
@@ -14495,10 +13907,7 @@ export type UpdateEventByIdInput = {
 
 /** All input for the `updateEvent` mutation. */
 export type UpdateEventInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Event` to be updated. */
   nodeId: Scalars['ID'];
@@ -14509,10 +13918,7 @@ export type UpdateEventInput = {
 /** The output of our update `Event` mutation. */
 export type UpdateEventPayload = {
   __typename?: 'UpdateEventPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Event` that was updated by this mutation. */
   event?: Maybe<Event>;
@@ -14531,10 +13937,7 @@ export type UpdateEventPayloadEventEdgeArgs = {
 
 /** All input for the `updateFlywaySchemaHistoryByInstalledRank` mutation. */
 export type UpdateFlywaySchemaHistoryByInstalledRankInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `FlywaySchemaHistory` being updated. */
   flywaySchemaHistoryPatch: FlywaySchemaHistoryPatch;
@@ -14543,10 +13946,7 @@ export type UpdateFlywaySchemaHistoryByInstalledRankInput = {
 
 /** All input for the `updateFlywaySchemaHistory` mutation. */
 export type UpdateFlywaySchemaHistoryInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `FlywaySchemaHistory` to be updated. */
   nodeId: Scalars['ID'];
@@ -14557,10 +13957,7 @@ export type UpdateFlywaySchemaHistoryInput = {
 /** The output of our update `FlywaySchemaHistory` mutation. */
 export type UpdateFlywaySchemaHistoryPayload = {
   __typename?: 'UpdateFlywaySchemaHistoryPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `FlywaySchemaHistory` that was updated by this mutation. */
   flywaySchemaHistory?: Maybe<FlywaySchemaHistory>;
@@ -14577,10 +13974,7 @@ export type UpdateFlywaySchemaHistoryPayloadFlywaySchemaHistoryEdgeArgs = {
 
 /** All input for the `updateMethodologyById` mutation. */
 export type UpdateMethodologyByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Methodology` being updated. */
   methodologyPatch: MethodologyPatch;
@@ -14589,10 +13983,7 @@ export type UpdateMethodologyByIdInput = {
 
 /** All input for the `updateMethodology` mutation. */
 export type UpdateMethodologyInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Methodology` to be updated. */
   nodeId: Scalars['ID'];
@@ -14603,10 +13994,7 @@ export type UpdateMethodologyInput = {
 /** The output of our update `Methodology` mutation. */
 export type UpdateMethodologyPayload = {
   __typename?: 'UpdateMethodologyPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Methodology` that was updated by this mutation. */
   methodology?: Maybe<Methodology>;
@@ -14625,10 +14013,7 @@ export type UpdateMethodologyPayloadMethodologyEdgeArgs = {
 
 /** All input for the `updateMethodologyVersionByIdAndCreatedAt` mutation. */
 export type UpdateMethodologyVersionByIdAndCreatedAtInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `MethodologyVersion` being updated. */
   methodologyVersionPatch: MethodologyVersionPatch;
@@ -14638,10 +14023,7 @@ export type UpdateMethodologyVersionByIdAndCreatedAtInput = {
 
 /** All input for the `updateMethodologyVersion` mutation. */
 export type UpdateMethodologyVersionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `MethodologyVersion` to be updated. */
   nodeId: Scalars['ID'];
@@ -14652,10 +14034,7 @@ export type UpdateMethodologyVersionInput = {
 /** The output of our update `MethodologyVersion` mutation. */
 export type UpdateMethodologyVersionPayload = {
   __typename?: 'UpdateMethodologyVersionPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `MethodologyVersion` that was updated by this mutation. */
   methodologyVersion?: Maybe<MethodologyVersion>;
@@ -14674,10 +14053,7 @@ export type UpdateMethodologyVersionPayloadMethodologyVersionEdgeArgs = {
 
 /** All input for the `updateMrvById` mutation. */
 export type UpdateMrvByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Mrv` being updated. */
   mrvPatch: MrvPatch;
@@ -14686,10 +14062,7 @@ export type UpdateMrvByIdInput = {
 
 /** All input for the `updateMrv` mutation. */
 export type UpdateMrvInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Mrv` to be updated. */
   nodeId: Scalars['ID'];
@@ -14700,10 +14073,7 @@ export type UpdateMrvInput = {
 /** The output of our update `Mrv` mutation. */
 export type UpdateMrvPayload = {
   __typename?: 'UpdateMrvPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Mrv` that was updated by this mutation. */
   mrv?: Maybe<Mrv>;
@@ -14722,10 +14092,7 @@ export type UpdateMrvPayloadMrvEdgeArgs = {
 
 /** All input for the `updateOrganizationById` mutation. */
 export type UpdateOrganizationByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Organization` being updated. */
   organizationPatch: OrganizationPatch;
@@ -14734,10 +14101,7 @@ export type UpdateOrganizationByIdInput = {
 
 /** All input for the `updateOrganizationByPartyIdAndType` mutation. */
 export type UpdateOrganizationByPartyIdAndTypeInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Organization` being updated. */
   organizationPatch: OrganizationPatch;
@@ -14747,10 +14111,7 @@ export type UpdateOrganizationByPartyIdAndTypeInput = {
 
 /** All input for the `updateOrganizationByPartyId` mutation. */
 export type UpdateOrganizationByPartyIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Organization` being updated. */
   organizationPatch: OrganizationPatch;
@@ -14759,10 +14120,7 @@ export type UpdateOrganizationByPartyIdInput = {
 
 /** All input for the `updateOrganization` mutation. */
 export type UpdateOrganizationInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Organization` to be updated. */
   nodeId: Scalars['ID'];
@@ -14772,10 +14130,7 @@ export type UpdateOrganizationInput = {
 
 /** All input for the `updateOrganizationMemberByMemberIdAndOrganizationId` mutation. */
 export type UpdateOrganizationMemberByMemberIdAndOrganizationIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `OrganizationMember` being updated. */
   organizationMemberPatch: OrganizationMemberPatch;
@@ -14785,10 +14140,7 @@ export type UpdateOrganizationMemberByMemberIdAndOrganizationIdInput = {
 
 /** All input for the `updateOrganizationMember` mutation. */
 export type UpdateOrganizationMemberInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `OrganizationMember` to be updated. */
   nodeId: Scalars['ID'];
@@ -14799,10 +14151,7 @@ export type UpdateOrganizationMemberInput = {
 /** The output of our update `OrganizationMember` mutation. */
 export type UpdateOrganizationMemberPayload = {
   __typename?: 'UpdateOrganizationMemberPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `OrganizationMember` that was updated by this mutation. */
   organizationMember?: Maybe<OrganizationMember>;
@@ -14824,10 +14173,7 @@ export type UpdateOrganizationMemberPayloadOrganizationMemberEdgeArgs = {
 /** The output of our update `Organization` mutation. */
 export type UpdateOrganizationPayload = {
   __typename?: 'UpdateOrganizationPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Organization` that was updated by this mutation. */
   organization?: Maybe<Organization>;
@@ -14846,10 +14192,7 @@ export type UpdateOrganizationPayloadOrganizationEdgeArgs = {
 
 /** All input for the `updatePartyById` mutation. */
 export type UpdatePartyByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Party` being updated. */
   partyPatch: PartyPatch;
@@ -14858,10 +14201,7 @@ export type UpdatePartyByIdInput = {
 
 /** All input for the `updateParty` mutation. */
 export type UpdatePartyInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Party` to be updated. */
   nodeId: Scalars['ID'];
@@ -14872,10 +14212,7 @@ export type UpdatePartyInput = {
 /** The output of our update `Party` mutation. */
 export type UpdatePartyPayload = {
   __typename?: 'UpdatePartyPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Party` that was updated by this mutation. */
   party?: Maybe<Party>;
@@ -14896,10 +14233,7 @@ export type UpdatePartyPayloadPartyEdgeArgs = {
 
 /** All input for the `updateProjectBrokerById` mutation. */
 export type UpdateProjectBrokerByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `ProjectBroker` being updated. */
   projectBrokerPatch: ProjectBrokerPatch;
@@ -14908,10 +14242,7 @@ export type UpdateProjectBrokerByIdInput = {
 
 /** All input for the `updateProjectBroker` mutation. */
 export type UpdateProjectBrokerInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `ProjectBroker` to be updated. */
   nodeId: Scalars['ID'];
@@ -14922,10 +14253,7 @@ export type UpdateProjectBrokerInput = {
 /** The output of our update `ProjectBroker` mutation. */
 export type UpdateProjectBrokerPayload = {
   __typename?: 'UpdateProjectBrokerPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `ProjectBroker` that was updated by this mutation. */
   projectBroker?: Maybe<ProjectBroker>;
@@ -14950,10 +14278,7 @@ export type UpdateProjectBrokerPayloadProjectBrokerEdgeArgs = {
 
 /** All input for the `updateProjectByHandle` mutation. */
 export type UpdateProjectByHandleInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Project` being updated. */
   projectPatch: ProjectPatch;
@@ -14962,10 +14287,7 @@ export type UpdateProjectByHandleInput = {
 
 /** All input for the `updateProjectById` mutation. */
 export type UpdateProjectByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Project` being updated. */
   projectPatch: ProjectPatch;
@@ -14974,10 +14296,7 @@ export type UpdateProjectByIdInput = {
 
 /** All input for the `updateProject` mutation. */
 export type UpdateProjectInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Project` to be updated. */
   nodeId: Scalars['ID'];
@@ -14988,10 +14307,7 @@ export type UpdateProjectInput = {
 /** The output of our update `Project` mutation. */
 export type UpdateProjectPayload = {
   __typename?: 'UpdateProjectPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Project` that was updated by this mutation. */
   project?: Maybe<Project>;
@@ -15028,10 +14344,7 @@ export type UpdateProjectPayloadProjectEdgeArgs = {
 
 /** All input for the `updatePurchaseById` mutation. */
 export type UpdatePurchaseByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Purchase` being updated. */
   purchasePatch: PurchasePatch;
@@ -15040,10 +14353,7 @@ export type UpdatePurchaseByIdInput = {
 
 /** All input for the `updatePurchase` mutation. */
 export type UpdatePurchaseInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Purchase` to be updated. */
   nodeId: Scalars['ID'];
@@ -15054,10 +14364,7 @@ export type UpdatePurchaseInput = {
 /** The output of our update `Purchase` mutation. */
 export type UpdatePurchasePayload = {
   __typename?: 'UpdatePurchasePayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Purchase` that was updated by this mutation. */
   purchase?: Maybe<Purchase>;
@@ -15084,10 +14391,7 @@ export type UpdatePurchasePayloadPurchaseEdgeArgs = {
 
 /** All input for the `updateRetirementById` mutation. */
 export type UpdateRetirementByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Retirement` being updated. */
   retirementPatch: RetirementPatch;
@@ -15096,10 +14400,7 @@ export type UpdateRetirementByIdInput = {
 
 /** All input for the `updateRetirement` mutation. */
 export type UpdateRetirementInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Retirement` to be updated. */
   nodeId: Scalars['ID'];
@@ -15110,10 +14411,7 @@ export type UpdateRetirementInput = {
 /** The output of our update `Retirement` mutation. */
 export type UpdateRetirementPayload = {
   __typename?: 'UpdateRetirementPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Retirement` that was updated by this mutation. */
   retirement?: Maybe<Retirement>;
@@ -15136,10 +14434,7 @@ export type UpdateRetirementPayloadRetirementEdgeArgs = {
 
 /** All input for the `updateShaclGraphByUri` mutation. */
 export type UpdateShaclGraphByUriInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `ShaclGraph` being updated. */
   shaclGraphPatch: ShaclGraphPatch;
@@ -15148,10 +14443,7 @@ export type UpdateShaclGraphByUriInput = {
 
 /** All input for the `updateShaclGraph` mutation. */
 export type UpdateShaclGraphInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `ShaclGraph` to be updated. */
   nodeId: Scalars['ID'];
@@ -15162,10 +14454,7 @@ export type UpdateShaclGraphInput = {
 /** The output of our update `ShaclGraph` mutation. */
 export type UpdateShaclGraphPayload = {
   __typename?: 'UpdateShaclGraphPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `ShaclGraph` that was updated by this mutation. */
   shaclGraph?: Maybe<ShaclGraph>;
@@ -15182,10 +14471,7 @@ export type UpdateShaclGraphPayloadShaclGraphEdgeArgs = {
 
 /** All input for the `updateTransactionById` mutation. */
 export type UpdateTransactionByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Transaction` being updated. */
   transactionPatch: TransactionPatch;
@@ -15194,10 +14480,7 @@ export type UpdateTransactionByIdInput = {
 
 /** All input for the `updateTransaction` mutation. */
 export type UpdateTransactionInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Transaction` to be updated. */
   nodeId: Scalars['ID'];
@@ -15208,10 +14491,7 @@ export type UpdateTransactionInput = {
 /** The output of our update `Transaction` mutation. */
 export type UpdateTransactionPayload = {
   __typename?: 'UpdateTransactionPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Transaction` that was updated by this mutation. */
   transaction?: Maybe<Transaction>;
@@ -15238,10 +14518,7 @@ export type UpdateTransactionPayloadTransactionEdgeArgs = {
 
 /** All input for the `updateUserByAuth0Sub` mutation. */
 export type UpdateUserByAuth0SubInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `User` being updated. */
   userPatch: UserPatch;
@@ -15250,10 +14527,7 @@ export type UpdateUserByAuth0SubInput = {
 
 /** All input for the `updateUserByEmail` mutation. */
 export type UpdateUserByEmailInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `User` being updated. */
   userPatch: UserPatch;
@@ -15262,10 +14536,7 @@ export type UpdateUserByEmailInput = {
 
 /** All input for the `updateUserById` mutation. */
 export type UpdateUserByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `User` being updated. */
   userPatch: UserPatch;
@@ -15274,10 +14545,7 @@ export type UpdateUserByIdInput = {
 
 /** All input for the `updateUserByPartyIdAndType` mutation. */
 export type UpdateUserByPartyIdAndTypeInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `User` being updated. */
   userPatch: UserPatch;
@@ -15287,10 +14555,7 @@ export type UpdateUserByPartyIdAndTypeInput = {
 
 /** All input for the `updateUserByPartyId` mutation. */
 export type UpdateUserByPartyIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `User` being updated. */
   userPatch: UserPatch;
@@ -15299,10 +14564,7 @@ export type UpdateUserByPartyIdInput = {
 
 /** All input for the `updateUser` mutation. */
 export type UpdateUserInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `User` to be updated. */
   nodeId: Scalars['ID'];
@@ -15313,10 +14575,7 @@ export type UpdateUserInput = {
 /** The output of our update `User` mutation. */
 export type UpdateUserPayload = {
   __typename?: 'UpdateUserPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `User` that was updated by this mutation. */
   user?: Maybe<User>;
@@ -15335,10 +14594,7 @@ export type UpdateUserPayloadUserEdgeArgs = {
 
 /** All input for the `updateWalletById` mutation. */
 export type UpdateWalletByIdInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** An object where the defined keys will be set on the `Wallet` being updated. */
   walletPatch: WalletPatch;
@@ -15347,10 +14603,7 @@ export type UpdateWalletByIdInput = {
 
 /** All input for the `updateWallet` mutation. */
 export type UpdateWalletInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The globally unique `ID` which will identify a single `Wallet` to be updated. */
   nodeId: Scalars['ID'];
@@ -15361,10 +14614,7 @@ export type UpdateWalletInput = {
 /** The output of our update `Wallet` mutation. */
 export type UpdateWalletPayload = {
   __typename?: 'UpdateWalletPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
+  /** The exact same `clientMutationId` that was provided in the mutation input, unchanged and unused. May be used by a client to track mutations. */
   clientMutationId?: Maybe<Scalars['String']>;
   /** The `Wallet` that was updated by this mutation. */
   wallet?: Maybe<Wallet>;
@@ -18058,60 +17308,46 @@ export type GetOrganizationProfileByEmailQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
-export type GetOrganizationProfileByEmailQuery = { __typename?: 'Query' } & {
-  userByEmail?: Maybe<
-    { __typename?: 'User' } & Pick<
-      User,
-      'id' | 'email' | 'phoneNumber' | 'partyId'
-    > & {
-        partyByPartyId?: Maybe<
-          { __typename?: 'Party' } & Pick<Party, 'id' | 'name'> & {
-              walletByWalletId?: Maybe<
-                { __typename?: 'Wallet' } & Pick<Wallet, 'addr'>
-              >;
-            }
-        >;
-        organizationMembersByMemberId: {
-          __typename?: 'OrganizationMembersConnection';
-        } & {
-          nodes: Array<
-            Maybe<
-              { __typename?: 'OrganizationMember' } & {
-                organizationByOrganizationId?: Maybe<
-                  { __typename?: 'Organization' } & Pick<
-                    Organization,
-                    'id' | 'legalName' | 'partyId'
-                  > & {
-                      partyByPartyId?: Maybe<
-                        { __typename?: 'Party' } & Pick<
-                          Party,
-                          'name' | 'image' | 'description'
-                        > & {
-                            addressByAddressId?: Maybe<
-                              { __typename?: 'Address' } & Pick<
-                                Address,
-                                'id' | 'feature'
-                              >
-                            >;
-                          }
-                      >;
-                    }
-                >;
-              }
-            >
-          >;
-        };
-      }
-  >;
-};
+export type GetOrganizationProfileByEmailQuery = (
+  { __typename?: 'Query' }
+  & { userByEmail?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'email' | 'phoneNumber' | 'partyId'>
+    & { partyByPartyId?: Maybe<(
+      { __typename?: 'Party' }
+      & Pick<Party, 'id' | 'name'>
+      & { walletByWalletId?: Maybe<(
+        { __typename?: 'Wallet' }
+        & Pick<Wallet, 'addr'>
+      )> }
+    )>, organizationMembersByMemberId: (
+      { __typename?: 'OrganizationMembersConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'OrganizationMember' }
+        & { organizationByOrganizationId?: Maybe<(
+          { __typename?: 'Organization' }
+          & Pick<Organization, 'id' | 'legalName' | 'partyId'>
+          & { partyByPartyId?: Maybe<(
+            { __typename?: 'Party' }
+            & Pick<Party, 'name' | 'image' | 'description'>
+            & { addressByAddressId?: Maybe<(
+              { __typename?: 'Address' }
+              & Pick<Address, 'id' | 'feature'>
+            )> }
+          )> }
+        )> }
+      )>> }
+    ) }
+  )> }
+);
 
-export type ProjectFragment = { __typename?: 'ProjectsConnection' } & {
-  nodes: Array<
-    Maybe<
-      { __typename?: 'Project' } & Pick<Project, 'creditClassId' | 'metadata'>
-    >
-  >;
-};
+export type ProjectFragment = (
+  { __typename?: 'ProjectsConnection' }
+  & { nodes: Array<Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'id' | 'creditClassId' | 'metadata'>
+  )>> }
+);
 
 export type GetUserProfileByEmailQueryVariables = Exact<{
   email: Scalars['String'];

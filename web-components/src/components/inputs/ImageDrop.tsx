@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
-import { IconButton, useMediaQuery } from '@mui/material';
+import { IconButton, IconButtonProps, useMediaQuery } from '@mui/material';
 import { FieldProps } from 'formik';
 import { Crop } from 'react-image-crop';
 import cx from 'clsx';
@@ -165,7 +165,9 @@ function ImageDrop({
     setCropModalOpen(false);
   };
 
-  const onCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
+  const onCropModalSubmit = async (
+    croppedImage: HTMLImageElement,
+  ): Promise<void> => {
     const result = await getImageSrc(croppedImage, onUpload, fileName);
 
     if (result) {
@@ -175,14 +177,14 @@ function ImageDrop({
     }
   };
 
-  const handleDelete = async (): Promise<void> => {
-    if (onDelete) {
-      await onDelete(fileName);
-    }
-    form.setFieldValue(field.name, undefined);
-    setInitialImage('');
-    setFileName('');
-  };
+  const handleDelete: IconButtonProps['onClick'] =
+    e =>
+    async (imageUrl: string): Promise<void> => {
+      form.setFieldValue(field.name, undefined);
+      if (onDelete) await onDelete(imageUrl);
+      setInitialImage('');
+      setFileName('');
+    };
 
   return (
     <>

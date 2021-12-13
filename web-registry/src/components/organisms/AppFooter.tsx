@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   Footer,
   FooterItemProps as FooterItem,
@@ -6,6 +7,9 @@ import {
 import { RegistryIconLink, Link } from '../atoms';
 
 const AppFooter: React.FC = () => {
+  const { pathname } = useLocation();
+  const isHidden = ['/project-pages'].some(route => pathname.startsWith(route));
+
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
       title: 'Regen Registry',
@@ -52,7 +56,7 @@ const AppFooter: React.FC = () => {
     },
   ];
 
-  return (
+  return isHidden ? null : (
     <Footer
       footerItems={footerItems}
       iconLink={RegistryIconLink}

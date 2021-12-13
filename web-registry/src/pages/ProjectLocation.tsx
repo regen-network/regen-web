@@ -6,6 +6,7 @@ import {
   ProjectLocationFormValues,
 } from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
+import { useProjectEditContext } from '../pages/ProjectEdit';
 import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
@@ -16,12 +17,14 @@ import {
 const ProjectLocation: React.FC = () => {
   const navigate = useNavigate();
   const { projectId } = useParams();
+  const { isEdit } = useProjectEditContext();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const [createAddress] = useCreateAddressMutation();
   const [updateAddress] = useUpdateAddressByIdMutation();
   const { data: projectData } = useProjectByIdQuery({
     variables: { id: projectId },
+    fetchPolicy: 'cache-and-network',
   });
 
   let initialFieldValues: any | undefined;
@@ -42,7 +45,7 @@ const ProjectLocation: React.FC = () => {
   async function submit(values: ProjectLocationFormValues): Promise<void> {
     try {
       await saveValues(values);
-      navigate(`/project-pages/${projectId}/roles`);
+      !isEdit && navigate(`/project-pages/${projectId}/roles`);
     } catch (e) {
       //   // TODO: Should we display the error banner here?
       //   // https://github.com/regen-network/regen-registry/issues/554
@@ -92,7 +95,14 @@ const ProjectLocation: React.FC = () => {
     });
   }
 
-  return (
+  return isEdit ? (
+    <ProjectLocationForm
+      submit={submit}
+      saveAndExit={saveAndExit}
+      mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
+      initialValues={initialFieldValues}
+    />
+  ) : (
     <OnboardingFormTemplate
       activeStep={0}
       title="Location"

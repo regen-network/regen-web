@@ -46,6 +46,7 @@ import {
   Story,
   UserProfile,
   VerifyEmail,
+  ProjectEdit,
 } from './pages';
 
 import './App.css';
@@ -138,6 +139,35 @@ const App: React.FC = (): JSX.Element => {
               path="entity-display"
               element={<ProtectedRoute component={EntityDisplay} />}
             />
+            <Route
+              path="edit"
+              element={<ProtectedRoute component={ProjectEdit} />}
+            >
+              <Route
+                path="basic-info"
+                element={<ProtectedRoute component={BasicInfo} />}
+              />
+              <Route
+                path="location"
+                element={<ProtectedRoute component={ProjectLocation} />}
+              />
+              <Route
+                path="story"
+                element={<ProtectedRoute component={Story} />}
+              />
+              <Route
+                path="media"
+                element={<ProtectedRoute component={Media} />}
+              />
+              <Route
+                path="roles"
+                element={<ProtectedRoute component={Roles} />}
+              />
+              <Route
+                path="entity-display"
+                element={<ProtectedRoute component={EntityDisplay} />}
+              />
+            </Route>
           </Route>
           <Route path="admin" element={<Admin />} />
           {isAdmin(user) && (

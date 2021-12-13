@@ -5,7 +5,6 @@ import { Formik, Form, Field, getIn } from 'formik';
 import { useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
 // import { VideoInput } from 'web-components/lib/components/inputs/VideoInput'; //TODO: make this component easier to use with share links from youtube, vimeo, etc
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
@@ -14,6 +13,8 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
+import { ProjectPageFooter } from '../molecules';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
@@ -126,6 +127,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const theme = useTheme();
   const apiUri = getApiUri();
   const { projectId } = useParams();
+  const { confirmSave, isEdit } = useProjectEditContext();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
   const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -182,11 +184,13 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
           }
           return errors;
         }}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting, setTouched }) => {
           setSubmitting(true);
           try {
             await submit(values);
             setSubmitting(false);
+            setTouched({}); // reset to untouched
+            if (isEdit && confirmSave) confirmSave();
           } catch (e) {
             setSubmitting(false);
           }
@@ -271,7 +275,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
                             fixedCrop={cropAspect}
-                            name="['http://regen.network/galleryTop']"
+                            name="['http://regen.network/galleryPhotos'].@list[1].@value" // top
                             buttonText="+ Add Photo"
                             apiServerUrl={apiUri}
                             projectId={projectId}
@@ -288,7 +292,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
                             fixedCrop={cropAspect}
-                            name="['http://regen.network/galleryBottom']"
+                            name="['http://regen.network/galleryPhotos'].@list[2].@value" // bottom
                             buttonText="+ Add Photo"
                             apiServerUrl={apiUri}
                             projectId={projectId}
@@ -355,15 +359,11 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   isDrop
                 />
               </OnBoardingCard>
-
-              <OnboardingFooter
+              <ProjectPageFooter
                 onSave={submitForm}
-                saveText={'Save and Next'}
-                onPrev={() => null} // TODO
-                onNext={() => null} // TODO
-                hideProgress={false} // TODO
-                saveDisabled={!isValid || isSubmitting}
-                percentComplete={0} // TODO
+                saveDisabled={
+                  !isValid || isSubmitting || !Object.keys(touched).length
+                }
               />
             </Form>
           );

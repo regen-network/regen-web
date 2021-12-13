@@ -2,21 +2,22 @@ import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
+import cx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 import Modal from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
+import { ProjectPageFooter } from '../molecules';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface StoryFormProps {
   submit: (values: StoryValues) => Promise<void>;
-  exampleProjectUrl: string;
   initialValues?: StoryValues;
 }
 
@@ -74,6 +75,7 @@ type exampleFieldName =
 const useStyles = makeStyles((theme: Theme) => ({
   storyCard: {
     paddingBottom: 0,
+    marginBottom: theme.spacing(5),
   },
   quoteTitle: {
     marginBottom: theme.spacing(5),
@@ -89,7 +91,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.typography.pxToRem(16),
   },
   field: {
-    marginBottom: theme.spacing(4),
+    marginBottom: theme.spacing(8),
+  },
+  paddingTop: {
+    paddingTop: theme.spacing(4),
   },
   error: {
     marginTop: 0,
@@ -177,12 +182,9 @@ const ModalContent: React.FC<{
   );
 };
 
-const StoryForm: React.FC<StoryFormProps> = ({
-  submit,
-  exampleProjectUrl,
-  initialValues,
-}) => {
+const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
+  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -195,7 +197,7 @@ const StoryForm: React.FC<StoryFormProps> = ({
     const content = (
       <ModalContent
         fieldName={fieldName}
-        exampleProjectUrl={exampleProjectUrl}
+        exampleProjectUrl={'/projects/wilmot'}
       />
     );
     setModalContent(content);
@@ -256,17 +258,19 @@ const StoryForm: React.FC<StoryFormProps> = ({
           }
           return errors;
         }}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting, setTouched }) => {
           setSubmitting(true);
           try {
             await submit(values);
             setSubmitting(false);
+            setTouched({}); // reset to untouched
+            if (isEdit && confirmSave) confirmSave();
           } catch (e) {
             setSubmitting(false);
           }
         }}
       >
-        {({ submitForm, submitCount, isValid, isSubmitting }) => {
+        {({ submitForm, submitCount, isValid, isSubmitting, touched }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
@@ -345,21 +349,18 @@ const StoryForm: React.FC<StoryFormProps> = ({
                   name="['http://regen.network/projectQuote'].['http://schema.org/name']"
                 />
                 <Field
-                  className={styles.field}
+                  className={cx(styles.field, styles.paddingTop)}
                   component={ControlledTextField}
                   label="Title of person quoted"
                   name="['http://regen.network/projectQuote'].['http://schema.org/jobTitle']"
                 />
               </OnBoardingCard>
 
-              <OnboardingFooter
+              <ProjectPageFooter
                 onSave={submitForm}
-                saveText={'Save and Next'}
-                onPrev={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
-                onNext={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
-                hideProgress={false} // TODO
-                saveDisabled={!isValid || isSubmitting}
-                percentComplete={0} // TODO
+                saveDisabled={
+                  !isValid || isSubmitting || !Object.keys(touched).length
+                }
               />
             </Form>
           );

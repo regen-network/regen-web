@@ -55,6 +55,7 @@ import SoilSampleIcon from 'web-components/lib/components/icons/SoilSampleIcon';
 import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
+import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
 
 export default {
   title: 'Icons',
@@ -180,3 +181,5 @@ export const trashIcon = (): JSX.Element => <TrashIcon />;
 export const walletIcon = (): JSX.Element => <WalletIcon />;
 
 export const regenTokenIcon = (): JSX.Element => <RegenTokenIcon />;
+
+export const saveIcon = (): JSX.Element => <SaveIcon />;

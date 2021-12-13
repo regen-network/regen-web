@@ -1,17 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import Description from 'web-components/lib/components/description';
 import {
   FormValues,
   isIndividual,
 } from 'web-components/lib/components/inputs/RoleField';
 import { OnboardingFormTemplate } from '../components/templates';
 import { RolesForm, RolesValues } from '../components/organisms';
+import { useProjectEditContext } from '../pages/ProjectEdit';
 import {
   useProjectByIdQuery,
   useGetOrganizationProfileByEmailQuery,
@@ -20,15 +17,6 @@ import {
   Maybe,
   ProjectPatch,
 } from '../generated/graphql';
-
-const exampleProjectUrl = '/projects/wilmot';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  description: {
-    fontSize: theme.typography.pxToRem(16),
-    padding: theme.spacing(2, 0, 1),
-  },
-}));
 
 function getPartyIds(
   party?: Maybe<{ __typename?: 'Party' } & PartyFieldsFragment>,
@@ -95,16 +83,16 @@ function stripIds(values: RolesValues): RolesValues {
 }
 
 const Roles: React.FC = () => {
-  const styles = useStyles();
-  const activeStep = 0;
   const navigate = useNavigate();
   const { projectId } = useParams();
+  const { isEdit } = useProjectEditContext();
   const { user } = useAuth0();
   const userEmail = user?.email;
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
+    fetchPolicy: 'cache-and-network',
   });
   const { data: userProfileData } = useGetOrganizationProfileByEmailQuery({
     skip: !userEmail,
@@ -136,10 +124,9 @@ const Roles: React.FC = () => {
     };
   }
 
-  const saveAndExit = (): Promise<void> => {
+  async function saveAndExit(): Promise<void> {
     // TODO: functionality
-    return Promise.resolve();
-  };
+  }
 
   async function submit(values: RolesValues): Promise<void> {
     let projectPatch: ProjectPatch = {};
@@ -186,7 +173,7 @@ const Roles: React.FC = () => {
           },
         },
       });
-      navigate(`/project-pages/${projectId}/entity-display`);
+      !isEdit && navigate(`/project-pages/${projectId}/entity-display`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -194,18 +181,18 @@ const Roles: React.FC = () => {
     }
   }
 
-  return (
+  return isEdit ? (
+    <RolesForm
+      submit={submit}
+      initialValues={initialFieldValues}
+      projectCreator={userProfileData}
+    />
+  ) : (
     <OnboardingFormTemplate
-      activeStep={activeStep}
+      activeStep={0}
       title="Roles"
       saveAndExit={saveAndExit}
     >
-      <Description className={styles.description}>
-        See an example{' '}
-        <Link to={exampleProjectUrl} target="_blank">
-          project page»
-        </Link>
-      </Description>
       <RolesForm
         submit={submit}
         initialValues={initialFieldValues}

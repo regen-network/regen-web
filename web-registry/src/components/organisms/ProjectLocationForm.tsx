@@ -3,12 +3,13 @@ import { Formik, Form, Field, FormikErrors } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
-import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import LocationField from 'web-components/lib/components/inputs/LocationField';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import { ProjectPageFooter } from '../molecules';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 export interface ProjectLocationFormValues {
   'http://schema.org/location': Partial<GeocodeFeature>;
@@ -20,6 +21,7 @@ const ProjectLocationForm: React.FC<{
   saveAndExit: (values: ProjectLocationFormValues) => Promise<void>;
   initialValues?: ProjectLocationFormValues;
 }> = ({ submit, initialValues, mapToken }) => {
+  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -29,8 +31,6 @@ const ProjectLocationForm: React.FC<{
   return (
     <Formik
       enableReinitialize
-      validateOnMount
-      validateOnBlur
       initialValues={{
         'http://schema.org/location':
           initialValues?.['http://schema.org/location'] || {},
@@ -41,7 +41,6 @@ const ProjectLocationForm: React.FC<{
         > = {};
         if (graphData?.shaclGraphByUri?.graph) {
           const projectPageData = { ...getProjectPageBaseData(), ...values };
-
           const report = await validate(
             graphData.shaclGraphByUri.graph,
             projectPageData,
@@ -55,17 +54,19 @@ const ProjectLocationForm: React.FC<{
         }
         return errors;
       }}
-      onSubmit={async (values, { setSubmitting }) => {
+      onSubmit={async (values, { setSubmitting, setTouched }) => {
         setSubmitting(true);
         try {
           await submit(values);
           setSubmitting(false);
+          setTouched({}); // reset to untouched
+          if (isEdit && confirmSave) confirmSave();
         } catch (e) {
           setSubmitting(false);
         }
       }}
     >
-      {({ submitForm, isValid, isSubmitting }) => {
+      {({ submitForm, isValid, isSubmitting, touched, dirty }) => {
         return (
           <Form>
             <OnBoardingCard>
@@ -78,14 +79,14 @@ const ProjectLocationForm: React.FC<{
                 token={mapToken}
               />
             </OnBoardingCard>
-            <OnboardingFooter
-              saveText={'Save and Next'}
+            <ProjectPageFooter
               onSave={submitForm}
-              onPrev={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
-              onNext={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
-              hideProgress={false} // TODO
-              saveDisabled={!isValid || isSubmitting}
-              percentComplete={0} // TODO
+              saveDisabled={
+                !isValid ||
+                isSubmitting ||
+                !dirty ||
+                !Object.keys(touched).length
+              }
             />
           </Form>
         );

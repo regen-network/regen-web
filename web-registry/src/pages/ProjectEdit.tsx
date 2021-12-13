@@ -8,18 +8,9 @@ import Title from 'web-components/lib/components/title';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import Banner from 'web-components/lib/components/banner';
 import { Label } from 'web-components/lib/components/label';
-import {
-  BasicInfo,
-  ProjectLocation,
-  Roles,
-  EntityDisplay,
-  Media,
-  Story,
-} from '../pages';
+
 import { Link } from '../components/atoms';
-import { ProtectedRoute } from '../components/atoms';
 import { toTitleCase } from '../lib/titleCase';
-import { EditProjectPageFooter } from '../components/molecules';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -207,46 +198,6 @@ function ProjectEdit(): JSX.Element {
               </div>
               {isMobile && !section && <Nav />}
               <Outlet />
-              {/* <Route
-                path="/project-pages/edit/:projectId"
-                render={({ match: { path } }) => (
-                  <>
-                    <ProtectedRoute
-                      path={path}
-                      exact
-                      component={() => (
-                        <Hidden smUp>
-                          <Nav />
-                        </Hidden>
-                      )}
-                    />
-                    <ProtectedRoute
-                      path={`${path}/basic-info`}
-                      component={() => <BasicInfo />}
-                    />
-                    <ProtectedRoute
-                      path={`${path}/location`}
-                      component={() => <ProjectLocation />}
-                    />
-                    <ProtectedRoute
-                      path={`${path}/story`}
-                      component={() => <Story />}
-                    />
-                    <ProtectedRoute
-                      path={`${path}/media`}
-                      component={() => <Media />}
-                    />
-                    <ProtectedRoute
-                      path={`${path}/roles`}
-                      component={() => <Roles />}
-                    />
-                    <ProtectedRoute
-                      path={`${path}/entity-display`}
-                      component={() => <EntityDisplay />}
-                    />
-                  </>
-                )}
-              /> */}
             </div>
           </div>
         </div>

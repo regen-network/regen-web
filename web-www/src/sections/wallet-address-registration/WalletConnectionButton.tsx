@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Alert, AlertTitle } from '@mui/lab';
+import { Alert, AlertTitle } from '@mui/material';
 
 interface WalletConnectionButtonProps {
   isKeplrDetected: boolean;

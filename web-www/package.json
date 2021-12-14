@@ -1,7 +1,6 @@
 {
   "name": "web-www",
   "version": "0.0.1",
-  "private": true,
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",

@@ -3,6 +3,7 @@ import { makeStyles, useTheme } from '@mui/styles';
 import { useMediaQuery } from '@mui/material';
 import { useNavigate, useParams, useLocation, Outlet } from 'react-router-dom';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Navigation from 'web-components/lib/components/faq/Navigation';
 import Title from 'web-components/lib/components/title';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
@@ -12,7 +13,7 @@ import { Label } from 'web-components/lib/components/label';
 import { Link } from '../components/atoms';
 import { toTitleCase } from '../lib/titleCase';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
@@ -122,7 +123,7 @@ const ProjectEditContext = createContext<ContextType>({
 
 function ProjectEdit(): JSX.Element {
   const styles = useStyles();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
   const { projectId } = useParams();
@@ -130,8 +131,7 @@ function ProjectEdit(): JSX.Element {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const lastPathItem = pathname.substring(pathname.lastIndexOf('/') + 1);
   const section = lastPathItem !== 'edit' ? lastPathItem : undefined;
-  console.log('section', section);
-  console.log('isMobile', isMobile);
+
   const navigateSection = (sectionName: string): void => {
     const hyphenated = sectionName.replace(' ', '-');
     navigate(`/project-pages/${projectId}/edit/${hyphenated}`);

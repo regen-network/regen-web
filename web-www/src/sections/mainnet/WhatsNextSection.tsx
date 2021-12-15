@@ -31,10 +31,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.spacing(5),
     margin: theme.spacing(5, 0),
   },
-  itemWrap: {
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent: 'center',
+  card: {
+    minHeight: '95%',
   },
 }));
 
@@ -87,14 +85,17 @@ const WhatsNextSection: React.FC = () => {
         </Typography>
         <Grid container direction="row" justify="center">
           {content?.infoItems?.map((item, i) => (
-            <GreenTopIconCard
-              key={i}
-              description={item?._rawDescription}
-              title={item?.title || ''}
-              linkUrl={item?.gitLink || ''}
-              linkText="View on Github"
-              imgSrc={item?.icon?.image?.asset?.url || ''}
-            />
+            <Grid item key={i}>
+              <GreenTopIconCard
+                key={i}
+                className={styles.card}
+                description={item?._rawDescription}
+                title={item?.title || ''}
+                linkUrl={item?.gitLink || ''}
+                linkText="View on Github"
+                imgSrc={item?.icon?.image?.asset?.url || ''}
+              />
+            </Grid>
           ))}
         </Grid>
       </Grid>

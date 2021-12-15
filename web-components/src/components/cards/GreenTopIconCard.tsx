@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.spacing(90),
   },
   main: {
-    height: '100%',
+    flex: 1,
     padding: theme.spacing(4, 4, 8),
   },
   title: {

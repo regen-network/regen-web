@@ -4,7 +4,6 @@ import { Formik, Form, Field, FormikErrors } from 'formik';
 import cx from 'clsx';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
 import { RoleField, FormValues } from 'web-components/lib/components/inputs/RoleField';
 import Title from 'web-components/lib/components/title';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
@@ -12,6 +11,7 @@ import { IndividualFormValues } from 'web-components/lib/components/modal/Indivi
 import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
 
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import { ProjectPageFooter } from '../molecules';
 import {
   useReallyCreateUserMutation,
   useReallyCreateOrganizationMutation,
@@ -22,6 +22,7 @@ import {
   useShaclGraphByUriQuery,
   GetOrganizationProfileByEmailQuery,
 } from '../../generated/graphql';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
@@ -102,6 +103,7 @@ function getEntity(query?: GetOrganizationProfileByEmailQuery): FormValues | nul
 const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCreator }) => {
   const [entities, setEntities] = useState<Array<FormValues>>([]);
   const styles = useStyles();
+  const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
       uri: 'http://regen.network/ProjectPageShape',
@@ -347,18 +349,20 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
               initialValues?.['http://regen.network/projectOriginator'],
           }
         }
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting, setTouched }) => {
           setSubmitting(true);
           try {
             await submit(values);
             setSubmitting(false);
+            setTouched({}); // reset to untouched
+            if (isEdit && confirmSave) confirmSave();
           } catch (e) {
             setSubmitting(false);
           }
         }}
         validate={validateProject}
       >
-        {({ submitForm, isValid, isSubmitting }) => {
+        {({ submitForm, isValid, isSubmitting, touched }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
@@ -418,15 +422,9 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
                   validateEntity={validateEntity}
                 />
               </OnBoardingCard>
-
-              <OnboardingFooter
+              <ProjectPageFooter
                 onSave={submitForm}
-                saveText={'Save and Next'}
-                onPrev={() => null} // TODO
-                onNext={() => null} // TODO
-                hideProgress={false} // TODO
-                saveDisabled={!isValid || isSubmitting}
-                percentComplete={0} // TODO
+                saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
               />
             </Form>
           );

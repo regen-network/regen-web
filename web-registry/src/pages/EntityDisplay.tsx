@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useHistory, useParams } from 'react-router-dom';
 
-import Description from 'web-components/lib/components/description';
+import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
 import { OnboardingFormTemplate } from '../components/templates';
 import {
   EntityDisplayForm,
@@ -16,9 +14,7 @@ import {
   useUpdateProjectByIdMutation,
   useUpdatePartyByIdMutation,
 } from '../generated/graphql';
-import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
-
-const exampleProjectUrl = '/projects/wilmot';
+import { useProjectEditContext } from '../pages/ProjectEdit';
 
 type roleIdField = 'developerId' | 'stewardId' | 'landOwnerId' | 'originatorId';
 const rolesMap: { [key in EntityFieldName]: roleIdField } = {
@@ -28,21 +24,13 @@ const rolesMap: { [key in EntityFieldName]: roleIdField } = {
   'http://regen.network/projectOriginator': 'originatorId',
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
-  description: {
-    fontSize: theme.typography.pxToRem(16),
-    padding: theme.spacing(2, 0, 1),
-  },
-}));
-
 function getInitialValues(value: any): any {
   return value?.['@type'] ? value : undefined;
 }
 
 const EntityDisplay: React.FC = () => {
-  const styles = useStyles();
-  const activeStep = 0;
   const { projectId } = useParams();
+  const { isEdit } = useProjectEditContext();
   const history = useHistory();
   const [initialValues, setInitialValues] = useState<EntityDisplayValues | undefined>();
 
@@ -70,10 +58,9 @@ const EntityDisplay: React.FC = () => {
     }
   }, [data]);
 
-  const saveAndExit = (): Promise<void> => {
+  async function saveAndExit(): Promise<void> {
     // TODO: functionality
-    return Promise.resolve();
-  };
+  }
 
   async function submit(values: EntityDisplayValues): Promise<void> {
     try {
@@ -112,21 +99,17 @@ const EntityDisplay: React.FC = () => {
           },
         },
       });
-      history.push(`/project-pages/${projectId}/story`);
+      !isEdit && history.push(`/project-pages/${projectId}/story`);
     } catch (e) {
       // TODO: display the error banner in case of server error
       // https://github.com/regen-network/regen-registry/issues/554
     }
   }
 
-  return (
-    <OnboardingFormTemplate activeStep={activeStep} title="Entity Display" saveAndExit={saveAndExit}>
-      <Description className={styles.description}>
-        See an example{' '}
-        <Link to={exampleProjectUrl} target="_blank">
-          project page»
-        </Link>
-      </Description>
+  return isEdit ? (
+    <EntityDisplayForm submit={submit} initialValues={initialValues} />
+  ) : (
+    <OnboardingFormTemplate activeStep={0} title="Entity Display" saveAndExit={saveAndExit}>
       <EntityDisplayForm submit={submit} initialValues={initialValues} />
     </OnboardingFormTemplate>
   );

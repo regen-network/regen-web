@@ -25,8 +25,9 @@ export async function uploadImage(
 
 export async function deleteImage(
   projectId: string,
-  fileName: string,
+  imageUrl: string,
   apiServerUrl: string | undefined,
 ): Promise<void> {
+  const fileName = imageUrl.split(`${projectId}/`)[1];
   return axios.delete(`${apiServerUrl}/files/${projectId}/${fileName}`);
 }

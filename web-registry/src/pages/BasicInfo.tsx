@@ -4,14 +4,17 @@ import { useHistory, useParams } from 'react-router-dom';
 import { BasicInfoForm, BasicInfoFormValues } from '../components/organisms';
 import { OnboardingFormTemplate } from '../components/templates';
 import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import { useProjectEditContext } from '../pages/ProjectEdit';
 
 const BasicInfo: React.FC = () => {
   const history = useHistory();
   const { projectId } = useParams<{ projectId: string }>();
-
   const [updateProject] = useUpdateProjectByIdMutation();
+  const { isEdit } = useProjectEditContext();
+
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
+    fetchPolicy: 'cache-and-network',
   });
 
   let initialFieldValues: BasicInfoFormValues | undefined;
@@ -40,7 +43,7 @@ const BasicInfo: React.FC = () => {
           },
         },
       });
-      history.push(`/project-pages/${projectId}/location`);
+      !isEdit && history.push(`/project-pages/${projectId}/location`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -48,7 +51,9 @@ const BasicInfo: React.FC = () => {
     }
   }
 
-  return (
+  return isEdit ? (
+    <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
+  ) : (
     <OnboardingFormTemplate activeStep={0} title="Basic Info" saveAndExit={saveAndExit}>
       <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
     </OnboardingFormTemplate>

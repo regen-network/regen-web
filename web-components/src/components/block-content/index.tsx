@@ -19,8 +19,9 @@ const CustomBlockContent: React.FC<{
   className?: string;
   content?: any;
   tooltipText?: string;
+  withPadding?: boolean;
   onClickModalLink?: (href: string) => any;
-}> = ({ onClickModalLink, content, tooltipText, className }) => {
+}> = ({ onClickModalLink, content, tooltipText, className, withPadding = false }) => {
   const styles = useStyles();
 
   const serializers = {
@@ -57,7 +58,7 @@ const CustomBlockContent: React.FC<{
 
   if (content) {
     return (
-      <div className={styles.root}>
+      <div className={withPadding ? '' : styles.root}>
         <BlockContent className={className} blocks={content} serializers={serializers} />
       </div>
     );

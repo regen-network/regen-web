@@ -62,7 +62,7 @@ const Staking = (): JSX.Element => {
       classes={{ root: clsx(styles.root, styles.center), title: styles.title }}
     >
       <Description className={clsx(styles.content, styles.center)}>
-        <BlockContent content={data?._rawBody} />
+        <BlockContent withPadding content={data?._rawBody} />
       </Description>
       <ContainedButton href={data?.button?.buttonLink?.buttonHref || ''}>
         {data?.button?.buttonText}

@@ -7,6 +7,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-layout',
+    // 'gatsby-plugin-top-layout',
     {
       resolve: `gatsby-plugin-netlify`,
       options: {
@@ -42,14 +43,7 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: `gatsby-plugin-material-ui`,
-      // options: {
-      //   stylesProvider: {
-      //     injectFirst: true,
-      //   },
-      // },
-    },
+    'gatsby-plugin-mui-jss',
     `gatsby-background-image`,
     `gatsby-plugin-react-helmet`,
     {

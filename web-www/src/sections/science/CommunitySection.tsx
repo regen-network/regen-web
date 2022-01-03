@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(23.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17),
     },
   },
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(38.5),
       paddingBottom: theme.spacing(9),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(18.5),
       paddingBottom: theme.spacing(7.5),
     },
@@ -51,14 +51,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '10px',
   },
   grid: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       '& > div:not(:first-child)': {
         paddingTop: theme.spacing(8.75),
       },
     },
   },
   caption: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
       paddingBottom: theme.spacing(5.5),
     },
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: theme.spacing(18.5),
       height: theme.spacing(18.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(13),
       height: theme.spacing(13),
       marginRight: theme.spacing(2.5),
@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
   },
   icons: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       justifyContent: 'center',
     },
   },
@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   connect: {
     alignItems: 'center',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       justifyContent: 'center',
     },
   },

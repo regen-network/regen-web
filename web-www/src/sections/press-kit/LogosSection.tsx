@@ -10,7 +10,7 @@ import RegenIcon from 'web-components/lib/components/icons/RegenIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(8),
     },
   },
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(34.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(20),
     },
   },
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(13.75),
       marginBottom: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(43.5),
       height: theme.spacing(19.4),
       marginTop: theme.spacing(12),

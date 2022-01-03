@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       paddingTop: theme.spacing(9),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingTop: theme.spacing(20.75),
     },
   },
@@ -26,16 +26,16 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: theme.spacing(83.75),
       position: 'absolute',
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: `${theme.spacing(6)} ${theme.spacing(5)}`,
     },
   },
   title: {
     lineHeight: '135%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(6),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingBottom: theme.spacing(3),
     },
     [theme.breakpoints.up('md')]: {
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'uppercase',
     letterSpacing: '1px',
     lineHeight: theme.spacing(3.75),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       lineHeight: theme.spacing(4.5),
     },
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     lineHeight: '140%',
     color: theme.palette.info.main,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5.25),
     },
   },
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       width: '60%',
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
     },
   },
@@ -93,13 +93,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       bottom: theme.spacing(57),
       left: '5%',
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       transform: 'rotate(116.57deg)',
       width: theme.spacing(65),
       top: theme.spacing(70),
       left: theme.spacing(-5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       top: theme.spacing(50),
       left: theme.spacing(-15),
     },
@@ -115,14 +115,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       top: theme.spacing(58),
       width: '25%',
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       zIndex: -1,
       transform: 'rotate(68.36deg)',
       right: '12%',
       width: theme.spacing(87.5),
       top: theme.spacing(-20),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(35),
       top: theme.spacing(-16),
     },
@@ -132,7 +132,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       left: '10%',
       bottom: 0,
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginRight: '20%',
       marginLeft: theme.spacing(5),
     },
@@ -145,7 +145,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('xl')]: {
       top: theme.spacing(60),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       position: 'relative',
       overflow: 'visible',
       marginLeft: '30%',
@@ -162,7 +162,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('xl')]: {
       marginTop: '-8%',
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingTop: theme.spacing(15),
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
@@ -198,7 +198,7 @@ const ClimateSection = (): JSX.Element => {
   `);
   const classes = useStyles();
   const theme = useTheme();
-  const downSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const downSm = useMediaQuery(theme.breakpoints.down('md'));
   const content = data.text.climateSection;
 
   return (

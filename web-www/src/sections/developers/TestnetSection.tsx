@@ -13,7 +13,7 @@ import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(20),
     },
     [theme.breakpoints.up('sm')]: {
@@ -26,14 +26,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.secondary.main,
     lineHeight: '140%',
     textAlign: 'center',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5),
     },
   },
   label: {
     fontFamily: theme.typography.overline.fontFamily,
     color: theme.palette.secondary.main,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
       paddingBottom: theme.spacing(1.5),
     },
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     lineHeight: '150%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(3.25),
     },
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(8.25),
       paddingBottom: theme.spacing(20),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(6),
     },
   },

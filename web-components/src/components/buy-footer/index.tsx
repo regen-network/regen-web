@@ -81,9 +81,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingRight: theme.spacing(5),
     },
-    // [theme.breakpoints.down('xs')]: {
-    //   fontSize: '1.125rem',
-    // },
   },
   buyText: {
     [theme.breakpoints.up('sm')]: {

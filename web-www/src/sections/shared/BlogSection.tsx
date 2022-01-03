@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   image: {
     width: '100%',
     backgroundSize: 'cover',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(50.75),
     },
     [theme.breakpoints.up('sm')]: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(19.75),
     },
     [theme.breakpoints.up('sm')]: {

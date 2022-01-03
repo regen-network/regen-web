@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         backgroundPosition: `center ${theme.spacing(22)} !important`,
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(37.5),
       '&::before': {
         backgroundPosition: `right ${theme.spacing(27.5)} !important`,
@@ -30,12 +30,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(13.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5.5),
     },
   },
   caption: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       paddingBottom: theme.spacing(0.5),
     },
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.secondary.main,
   },
   phaseTitle: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5.25),
       paddingBottom: theme.spacing(2),
     },

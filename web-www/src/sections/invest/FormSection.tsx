@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       background: 'transparent',
       height: theme.spacing(444.4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(475),
       marginLeft: '-1rem',
       width: 'calc(100% + 2rem)',

@@ -8,7 +8,7 @@ import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   section: props => ({
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: 'none',
       paddingRight: 'none',
     },
@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     width: 70,
     height: 70,
     marginRight: theme.spacing(4),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginRight: theme.spacing(2),
     },
   },

@@ -9,7 +9,7 @@ import ProjectCardsSlider from 'web-components/lib/components/sliders/ProjectCar
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(14),
     },
     [theme.breakpoints.up('sm')]: {

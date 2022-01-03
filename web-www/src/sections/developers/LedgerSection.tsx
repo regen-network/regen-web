@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.spacing(12),
       margin: `0 auto ${theme.spacing(10.5)}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '60%',
       margin: `0 auto ${theme.spacing(6.5)}`,
     },

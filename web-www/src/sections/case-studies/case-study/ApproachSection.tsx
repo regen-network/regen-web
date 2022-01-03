@@ -35,7 +35,7 @@ interface ApproachSectionProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(21.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(12),
     },
     [theme.breakpoints.up('sm')]: {
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   titleWithDescription: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(3),
     },
     [theme.breakpoints.up('sm')]: {
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'uppercase',
     letterSpacing: '1px',
     fontWeight: 800,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
       lineHeight: theme.spacing(5),
     },
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   cardDescription: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
     [theme.breakpoints.up('sm')]: {
@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   figureTitle: {
     lineHeight: '150%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       paddingTop: theme.spacing(3),
     },
@@ -108,7 +108,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textAlign: 'center',
     maxWidth: theme.spacing(186.5),
     margin: '0 auto',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
       paddingBottom: theme.spacing(11),
     },
@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   subHeader: {
     lineHeight: '140%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(7),
     },
     [theme.breakpoints.up('sm')]: {
@@ -133,7 +133,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '10px',
   },
   paragraph: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3.5),
     },
     [theme.breakpoints.up('sm')]: {

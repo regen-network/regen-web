@@ -12,12 +12,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(28.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(25),
     },
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       textAlign: 'left',
       fontSize: theme.spacing(8),
     },
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       textAlign: 'center',
       margin: '0 auto',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       textAlign: 'left',
       paddingBottom: theme.spacing(9.5),
       paddingTop: theme.spacing(5),

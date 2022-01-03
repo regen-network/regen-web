@@ -30,13 +30,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderTop: `1px solid ${theme.palette.grey[100]}`,
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(6),
     },
   },
   description: {
     lineHeight: '150%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   withMargin: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   imageTitle: {
     lineHeight: '150%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       paddingTop: theme.spacing(3),
     },

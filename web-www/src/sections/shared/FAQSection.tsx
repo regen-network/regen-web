@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(20),
       paddingTop: theme.spacing(52.5),
       paddingBottom: theme.spacing(52.5),
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     maxWidth: theme.spacing(172),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(8),
       paddingBottom: theme.spacing(7.5),
     },

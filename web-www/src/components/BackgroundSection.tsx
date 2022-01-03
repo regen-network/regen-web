@@ -32,7 +32,7 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
     overflow: 'hidden',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: props.topSection ? theme.spacing(70) : theme.spacing(17.75),
       paddingBottom: theme.spacing(13),
     },
@@ -54,7 +54,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         props.linearGradient ||
         'linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(194.2deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       background:
         props.linearGradientMobile ||
         props.linearGradient ||
@@ -68,11 +68,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         lineHeight: '130%',
       },
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(10),
       paddingRight: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(4),
       paddingRight: theme.spacing(4),
     },
@@ -104,11 +104,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingLeft: theme.spacing(37.5),
       paddingRight: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(10),
       paddingRight: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
     },
@@ -122,7 +122,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     position: 'relative',
   },
   subtitle: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3),
       fontSize: theme.spacing(4.5),
     },
@@ -134,7 +134,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: theme.palette.primary.main,
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: '130%',
     },
     [theme.breakpoints.up('sm')]: {

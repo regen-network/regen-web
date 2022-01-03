@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: '12vh',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: '15vh',
       height: '80vh',
     },
@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: '1.62rem',
         width: '650px',
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         width: '90%',
         fontSize: '1.125em',
       },
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     fontFamily: 'Muli',
     lineHeight: '130%',
     marginBottom: '12px',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       margin: '0 auto',
       marginTop: theme.spacing(13.5),
       marginBottom: theme.spacing(3),

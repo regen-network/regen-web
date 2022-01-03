@@ -11,7 +11,7 @@ interface Props {
 
 const useStyles = makeStyles<Theme, Props>((theme: Theme) => ({
   section: props => ({
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(42.75),
       paddingLeft: props.paddingLR || 'none',
       paddingRight: props.paddingLR || 'none',

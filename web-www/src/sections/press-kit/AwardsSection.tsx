@@ -10,19 +10,19 @@ import Title from 'web-components/lib/components/title';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(8),
     },
   },
   slider: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(7.5),
     },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(15),
     },
     '& .slick-slide': {
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         paddingRight: `${theme.spacing(4.125)} !important`,
       },
     },
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   itemTitle: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(4),
     },
     [theme.breakpoints.up('sm')]: {

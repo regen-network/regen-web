@@ -37,7 +37,7 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(21.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -49,7 +49,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     textTransform: 'uppercase',
     letterSpacing: '1px',
     fontWeight: 800,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       lineHeight: theme.spacing(3.75),
     },
@@ -59,14 +59,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   title: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingBottom: theme.spacing(8.75),
     },
   },
   cardDescription: {
     marginBottom: 0,
     paddingTop: theme.spacing(1.25),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       lineHeight: theme.spacing(3.75),
     },
@@ -84,7 +84,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   about: {
     lineHeight: '150%',
     fontWeight: 500,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -98,7 +98,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   image: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(17.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -108,7 +108,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   cardContainer: {
     borderRadius: '10px',
     border: `1px solid ${theme.palette.grey[100]}`,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(3.5)} ${theme.spacing(24.25)} ${theme.spacing(3.5)} ${theme.spacing(3.5)}`,
     },
     [theme.breakpoints.up('sm')]: {
@@ -127,7 +127,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   card: {
     position: 'relative',
     zIndex: 1,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       maxWidth: theme.spacing(54.75),
     },
     [theme.breakpoints.up('sm')]: {
@@ -135,8 +135,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   gridItem: {
-    [theme.breakpoints.down('md')]: {
-      padding: `0 ${theme.spacing(5)} !important`,
+    [theme.breakpoints.down('lg')]: {
+      paddingTop: `${theme.spacing(5)} !important`,
     },
   },
 }));

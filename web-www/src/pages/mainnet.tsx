@@ -9,8 +9,6 @@ import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import MediaSection from '../sections/mainnet/MediaSection';
 
-interface Props extends PageProps {}
-
 type QueryData = {
   background: {
     publicURL: string;
@@ -26,21 +24,22 @@ const Mainnet: React.FC<PageProps> = ({ location }) => {
   const {
     background,
     text: { livecastLink, launchDate, seoDescription },
-  } = useStaticQuery<QueryData>(graphql`{
-  background: file(relativePath: {eq: "mainnet-globe.png"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+  } = useStaticQuery<QueryData>(graphql`
+    {
+      background: file(relativePath: { eq: "mainnet-globe.png" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      text: mainnetYaml {
+        launchDate
+        seoDescription
+        livecastLink
       }
     }
-  }
-  text: mainnetYaml {
-    launchDate
-    seoDescription
-    livecastLink
-  }
-}
-`);
+  `);
 
   return (
     <>

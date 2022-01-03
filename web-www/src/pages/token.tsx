@@ -16,7 +16,7 @@ import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
   newsletterTitle: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },

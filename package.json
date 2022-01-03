@@ -10,9 +10,6 @@
     "type": "git",
     "url": "https://github.com/regen-network/regen-web"
   },
-  "dependencies": {
-    "serve": "^11.2.0"
-  },
   "workspaces": {
     "packages": [
       "web-registry",
@@ -45,11 +42,13 @@
     "@storybook/addon-viewport": "^6.3.12",
     "@storybook/addons": "^6.3.12",
     "@storybook/react": "^6.3.12",
-    "@types/jest": "24.0.25",
+    "@types/css-mediaquery": "^0.1.1",
+    "@types/jest": "27.0.3",
     "@types/node": "13.1.1",
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.2",
     "babel-loader": "8.1.0",
+    "css-mediaquery": "0.1.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^3.1.0",
@@ -64,7 +63,7 @@
     "babel-eslint": "^10.1.0",
     "**/@typescript-eslint/eslint-plugin": "^4.5.0",
     "**/@typescript-eslint/parser": "^4.5.0",
-    "webpack-dev-server": "3.11.1"
+    "webpack": "4.44.2"
   },
   "husky": {
     "hooks": {}

@@ -32,7 +32,7 @@ const useStyles = makeStyles<Theme>(theme => ({
       padding: theme.spacing(8),
       height: '100%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(8, 4),
     },
   },
@@ -44,7 +44,7 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
   title: {
     lineHeight: '34.8px',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(24),
     },
   },
@@ -52,7 +52,7 @@ const useStyles = makeStyles<Theme>(theme => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(22),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
     },
   },

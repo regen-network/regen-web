@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   notInterestedTitle: {
     lineHeight: '145%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(23),
     },
     [theme.breakpoints.up('sm')]: {
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(4.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
     [theme.breakpoints.up('sm')]: {
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     transform: 'translate(-50%, -50%)',
     top: '50%',
     left: '50%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '95%',
       height: theme.spacing(65),
       padding: `${theme.spacing(10.5)} ${theme.spacing(6.5)} ${theme.spacing(7.25)}`,

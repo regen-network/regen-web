@@ -52,8 +52,8 @@ const CreditClassCards: React.FC<Props> = ({
 }) => {
   const navigate = useNavigate();
   const styles = useStyles();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const theme = useTheme<Theme>();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Grid

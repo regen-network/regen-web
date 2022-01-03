@@ -9,7 +9,7 @@ import Section from 'web-components/lib/components/section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(8.25),
     },
     [theme.breakpoints.up('sm')]: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   section: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(27.5),
     },
     [theme.breakpoints.up('sm')]: {

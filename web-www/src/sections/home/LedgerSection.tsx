@@ -23,7 +23,7 @@ let useStyles = makeStyles((theme: Theme) => ({
     },
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(6),
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
@@ -46,7 +46,7 @@ let useStyles = makeStyles((theme: Theme) => ({
     },
   },
   button: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(12.5),
       fontSize: theme.spacing(4.5),
     },
@@ -57,7 +57,7 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     color: theme.palette.info.dark,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
       lineHeight: '150%',
       paddingTop: theme.spacing(3),

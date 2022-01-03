@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(23.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17),
     },
   },
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(9),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(7.5),
     },
   },
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(2.25),
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
   },
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '10px',
   },
   grid: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       '& > div:not(:first-child)': {
         paddingTop: theme.spacing(8.75),
       },

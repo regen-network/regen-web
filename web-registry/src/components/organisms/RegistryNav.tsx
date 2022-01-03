@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import Box from '@mui/material/Box';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Header, { HeaderColors } from 'web-components/lib/components/header';
 import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
 import { NavLink } from 'web-components/lib/components/header/NavLink';
@@ -23,7 +24,7 @@ const RegistryNav: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
   const { data: projectsData } = useMoreProjectsQuery();
 

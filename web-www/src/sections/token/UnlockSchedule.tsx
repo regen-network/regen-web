@@ -11,7 +11,7 @@ import { MarketingDescription as Description } from '../../components/Descriptio
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
     display: 'flex',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(12),
     },
   },
@@ -22,7 +22,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     textAlign: 'center',
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -36,7 +36,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     '&::-webkit-scrollbar': {
       display: 'none',
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       overflowX: 'scroll',
       overflowY: 'hidden',
     },

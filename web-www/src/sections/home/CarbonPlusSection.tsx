@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 800,
     letterSpacing: '1px',
     textTransform: 'uppercase',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     color: theme.palette.info.dark,
     lineHeight: '150%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
       paddingBottom: theme.spacing(4),
       paddingTop: theme.spacing(4),

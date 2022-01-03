@@ -14,12 +14,12 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     width: '80%',
     maxWidth: theme.spacing(236.5),
     marginBottom: theme.spacing(4),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '100%',
     },
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       lineHeight: '130%',
       paddingBottom: theme.spacing(6),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5),
       lineHeight: '160%',
       paddingBottom: theme.spacing(3.75),
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(14),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(16),
     },
   },

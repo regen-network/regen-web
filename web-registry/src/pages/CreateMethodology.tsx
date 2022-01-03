@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import CardMedia from '@mui/material/CardMedia';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { ButtonProps } from '@mui/material/Button';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
@@ -91,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const CreateMethodology: React.FC = () => {
   const styles = useStyles();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>();
 
@@ -186,7 +187,7 @@ const CreateMethodology: React.FC = () => {
         openModal={openModal}
       /> */}
       <FixedFooter justifyContent="flex-end">
-        <ContainedButton onClick={() => openModal(content?.footerLink)}>
+        <ContainedButton onClick={e => openModal(content?.footerLink)}>
           Submit a methodology
         </ContainedButton>
       </FixedFooter>

@@ -9,7 +9,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(8),
     },
   },

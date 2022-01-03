@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(21.5),
       paddingBottom: theme.spacing(23.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(3),
       paddingTop: theme.spacing(17),
       paddingBottom: theme.spacing(25),
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(15),
     maxWidth: theme.spacing(225),
     margin: '0 auto',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       fontSize: theme.spacing(4),
     },
     [theme.breakpoints.up('sm')]: {

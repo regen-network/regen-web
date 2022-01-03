@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 // TODO use Section component
 // import Section from '../section';
 import ContainedButton from '../buttons/ContainedButton';
+import { Theme } from '../../theme/muiTheme';
 
 interface CookiesBannerProps {
   privacyUrl: string;
@@ -151,7 +152,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function CookiesBanner({
   privacyUrl,
 }: CookiesBannerProps): JSX.Element | null {
-  const classes = useStyles({});
+  const classes = useStyles();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

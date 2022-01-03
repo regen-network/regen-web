@@ -17,7 +17,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
   },
@@ -31,7 +31,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
         objectPosition: '71% !important',
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       minWidth: '100%',
       maxHeight: theme.spacing(50),
       '& picture img': {
@@ -48,7 +48,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
         paddingBottom: theme.spacing(12),
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(10, 4.5),
     },
   },
@@ -56,10 +56,10 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     margin: theme.spacing(4, 0),
     color: theme.palette.info.main,
     fontWeight: 700,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       fontSize: theme.typography.pxToRem(18),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
   },
@@ -73,7 +73,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(22),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
   },

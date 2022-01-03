@@ -26,7 +26,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     width: '100%',
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -44,7 +44,7 @@ type QueryData = {
 const TokenEconomics = (): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const {
     text: {

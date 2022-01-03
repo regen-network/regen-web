@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(25),
     paddingBottom: theme.spacing(25),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(20),
       paddingBottom: theme.spacing(20),
     },
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       'line-height': '150%',
       'font-family': 'Lato',
       'font-size': '1.375rem',
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: '1rem',
       },
     },
@@ -81,20 +81,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.dark,
     'font-weight': 800,
     'font-size': '1.125rem',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '0.875rem',
     },
     'letter-spacing': '1px',
     'line-height': '23px',
   },
   gridItem: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       'flex-basis': 'auto',
       'margin-bottom': theme.spacing(8),
     },
   },
   button: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(3)} ${theme.spacing(7.5)}`,
       fontSize: theme.spacing(4.5),
     },
@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(3.5),
     'line-height': '140%',
     'margin-bottom': theme.spacing(2.4),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(3),
       marginBottom: theme.spacing(3),
       fontSize: theme.spacing(5.25),

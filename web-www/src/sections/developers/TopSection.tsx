@@ -9,7 +9,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(64),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(60),
     },
   },
@@ -17,7 +17,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     fontWeight: 'normal',
     fontFamily: theme.typography.overline.fontFamily,
     lineHeight: '160%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
     },
   },

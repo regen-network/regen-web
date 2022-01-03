@@ -9,12 +9,12 @@ import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSl
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(8),
     },
   },
   slider: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(7.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'flex',
       '& .slick-slide': {
         height: 'inherit',
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
           paddingRight: theme.spacing(4.125),
           '&:last-child': {
             paddingRight: 0,

@@ -34,14 +34,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       paddingLeft: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(10),
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(22.5),
       paddingBottom: theme.spacing(12.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: 0,
       paddingLeft: 0,
     },
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     lineHeight: '150%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -103,7 +103,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   item: {
     counterIncrement: 'challenge-counter',
     marginBottom: 0,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3),
     },
     [theme.breakpoints.up('sm')]: {
@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(5.5),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(4.5),
       },
     },

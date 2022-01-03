@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(42.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(7.5),
     },
   },
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(2.5),
       fontSize: theme.spacing(8),
     },
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       margin: '0 auto',
       fontSize: theme.spacing(5.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(7.5),
       fontSize: theme.spacing(4.5),
     },
@@ -87,13 +87,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },
   emailBody: {
     lineHeight: '200%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(5.75),
     },
   },
@@ -102,7 +102,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(13.75)} ${theme.spacing(7.5)} ${theme.spacing(12.75)}`,
       marginBottom: theme.spacing(25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(9.5)} ${theme.spacing(5)} ${theme.spacing(11.25)}`,
       marginBottom: theme.spacing(16.25),
     },
@@ -111,14 +111,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(10.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(8.25),
     },
     '& .MuiInputBase-root': {
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(4),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(3.5),
       },
     },
@@ -129,7 +129,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         height: theme.spacing(43.75),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         height: theme.spacing(25),
       },
     },
@@ -140,7 +140,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.spacing(15),
       width: theme.spacing(65.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(12.5),
       width: theme.spacing(38.75),
     },
@@ -166,7 +166,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(-8.5),
       fontSize: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(-7),
       fontSize: theme.spacing(4),
     },

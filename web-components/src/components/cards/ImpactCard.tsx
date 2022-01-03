@@ -102,11 +102,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       'linear-gradient(180deg, rgba(250, 250, 250, 0) 2.48%, #FAFAFA 64.06%)',
   }),
   monitoredIcon: {
-    // [theme.breakpoints.down('xs')]: {
-    //   flexGrow: 0,
-    //   maxWidth: '20%',
-    //   flexBasis: '20%',
-    // },
     paddingRight: theme.spacing(2),
   },
 }));

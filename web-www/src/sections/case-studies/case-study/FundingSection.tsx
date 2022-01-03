@@ -23,7 +23,7 @@ interface FundingSectionProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(6),
     },
     [theme.breakpoints.up('sm')]: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   image: {
     width: '100%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(10),
     },
   },

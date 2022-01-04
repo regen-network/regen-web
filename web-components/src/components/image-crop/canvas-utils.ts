@@ -52,22 +52,27 @@ export function canvasToBlob(
 ): Promise<HTMLImageElement> {
   return new Promise<HTMLImageElement>(resolve => {
     canvas.toBlob(file => {
-      const newImg = document.createElement('img');
-      const url = URL.createObjectURL(file);
+      if (file) {
+        const newImg = document.createElement('img');
+        const url = URL.createObjectURL(file);
+        newImg.onload = () => {
+          // no longer need to read the blob so it's revoked
+          URL.revokeObjectURL(url);
+        };
 
-      newImg.onload = () => {
-        // no longer need to read the blob so it's revoked
-        URL.revokeObjectURL(url);
-      };
+        newImg.src = url;
 
-      newImg.src = url;
-
-      resolve(newImg);
+        resolve(newImg);
+      }
     }, 'image/png');
   });
 }
 
-export function srcToFile(src: string, fileName: string, mimeType: string): Promise<File> {
+export function srcToFile(
+  src: string,
+  fileName: string,
+  mimeType: string,
+): Promise<File> {
   return fetch(src)
     .then(res => res.arrayBuffer())
     .then(buf => new File([buf], fileName, { type: mimeType }));

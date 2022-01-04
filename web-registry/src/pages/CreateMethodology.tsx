@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import CardMedia from '@mui/material/CardMedia';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { ButtonProps } from '@mui/material/Button';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';

@@ -213,7 +213,10 @@ const RoleField: React.FC<Props> = ({
             value={value}
             getOptionLabel={o => getLabel(o) || ''}
             isOptionEqualToValue={o => o.id === field.value}
-            renderOption={o => getLabel(o) || o}
+            renderOption={(props, option) => {
+              const label = getLabel(option);
+              return <li {...props}>{label || option}</li>;
+            }}
             onChange={(event, newValue, reason) => {
               if (reason === 'selectOption' && !newValue.inputValue) {
                 handleChange(newValue);

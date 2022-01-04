@@ -17,7 +17,7 @@ import { QuestionItem } from 'web-components/lib/components/faq/Question';
 const useStyles = makeStyles((theme: Theme) => ({
   content: {
     paddingTop: theme.spacing(12),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(7),
     },
   },

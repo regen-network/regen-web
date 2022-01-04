@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(12),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(10),
     },
   },
@@ -87,7 +87,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -96,7 +96,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.typography.pxToRem(290),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.typography.pxToRem(210),
     },
   },
@@ -105,7 +105,7 @@ const useStyles = makeStyles(theme => ({
       height: theme.typography.pxToRem(169),
       flex: 1,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.typography.pxToRem(139),
     },
   },

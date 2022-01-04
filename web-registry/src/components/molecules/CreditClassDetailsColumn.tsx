@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
       width: theme.spacing(91.75),
       padding: theme.spacing(12, 8),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
       padding: theme.spacing(12, 5.5),
     },
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
       width: theme.typography.pxToRem(76),
       height: theme.typography.pxToRem(76),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.typography.pxToRem(85),
       height: theme.typography.pxToRem(85),
     },
@@ -84,7 +84,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.typography.pxToRem(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.typography.pxToRem(13),
     },
   },

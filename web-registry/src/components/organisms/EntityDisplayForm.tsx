@@ -101,7 +101,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(18),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
   },
@@ -148,7 +148,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   modalText: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },
@@ -161,7 +161,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.info.main,
   },
   modalUserInfo: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(8),
       marginBottom: 0,
     },

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(21.5),
       paddingBottom: theme.spacing(22.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.5),
       paddingBottom: theme.spacing(17.5),
     },
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(3),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(2),
     },
   },
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       margin: theme.spacing(0, 1.875),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(0, 1.875),
       '&:first-child': {
         paddingLeft: theme.spacing(4),
@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(7),
       fontSize: theme.typography.pxToRem(16),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(4),
       fontSize: theme.typography.pxToRem(14),
     },
@@ -89,7 +89,7 @@ function LandManagementActions({
 }: LandManagementActionsProps): JSX.Element {
   const styles = useStyles({});
   const theme: Theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet: boolean = useMediaQuery(
     theme.breakpoints.between('xs', 'sm'),
   );

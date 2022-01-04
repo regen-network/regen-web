@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     '& > div': {
       padding: theme.spacing(3, 0),
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         padding: theme.spacing(2, 0),
       },
       '&:first-of-type': {
@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.info.dark,
     fontWeight: 700,
     fontSize: theme.typography.pxToRem(18),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
   },
@@ -49,14 +49,14 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.secondary.main,
     letterSpacing: '1px',
     fontSize: theme.typography.pxToRem(18),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(14),
     },
   },
   description: {
     fontSize: theme.typography.pxToRem(22),
     lineHeight: theme.typography.pxToRem(33),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       lineHeight: theme.typography.pxToRem(27),
     },

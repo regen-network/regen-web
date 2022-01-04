@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(30),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17),
     },
   },
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(22),
       lineHeight: theme.typography.pxToRem(35.2),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
       lineHeight: theme.typography.pxToRem(25),
     },

@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ProjectList: React.FC = () => {
   const classes = useStyles();
   // const theme = useTheme();
-  // const isMobile = useMediaQuery(theme.breakpoints.down('sm')); used for navigating to edit
+  // const isMobile = useMediaQuery(theme.breakpoints.down('md')); used for navigating to edit
   const navigate = useNavigate();
 
   // TODO Create provider to get directly user data if logged in

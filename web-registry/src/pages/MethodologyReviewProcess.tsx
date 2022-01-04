@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),
     paddingBottom: theme.spacing(20),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(12),
     },
   },

@@ -14,7 +14,7 @@ import { PracticesOutcomesSection as PracticesOutcomesSectionProps } from '../..
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(14),
     },
     [theme.breakpoints.up('sm')]: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   slider: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(12),
     },
     [theme.breakpoints.up('sm')]: {

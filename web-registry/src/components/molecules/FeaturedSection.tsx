@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     color: theme.palette.info.dark,
     lineHeight: '150%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
       paddingBottom: theme.spacing(4.5),
     },

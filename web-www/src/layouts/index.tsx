@@ -10,14 +10,7 @@ interface propTypes {
 }
 
 const ThemeWrap = ({ children, location }: propTypes): JSX.Element => {
-  return (
-    <>
-      <ThemeProvider injectFonts>
-        <CssBaseline />
-        <Layout location={location}>{children}</Layout>
-      </ThemeProvider>
-    </>
-  );
+  return <Layout location={location}>{children}</Layout>;
 };
 
 export default ThemeWrap;

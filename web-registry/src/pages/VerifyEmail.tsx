@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `0 ${theme.spacing(10)}`,
       fontSize: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(33)} ${theme.spacing(2.5)} 0`,
       fontSize: theme.spacing(4.5),
     },

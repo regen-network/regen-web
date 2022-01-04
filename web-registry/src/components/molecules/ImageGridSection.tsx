@@ -13,7 +13,7 @@ import { ImageGridSection as ImageGridSectionProps } from '../../generated/sanit
 const useStyles = makeStyles<Theme>(theme => ({
   card: {
     borderRadius: 0,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(70.75),
     },
     [theme.breakpoints.up('sm')]: {

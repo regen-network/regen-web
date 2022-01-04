@@ -9,14 +9,14 @@ import { Maybe, CardFieldsFragment } from '../../generated/sanity-graphql';
 const useStyles = makeStyles(theme => ({
   wrap: {
     justifyContent: 'center',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       justifyContent: 'flex-start',
       flexWrap: 'nowrap',
       overflow: 'scroll',
     },
   },
   item: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '95%',
     },
   },

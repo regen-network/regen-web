@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     marginBottom: theme.spacing(8.75),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(8),
     },
   },
@@ -39,7 +39,7 @@ const MoreProjectsSection = ({
 }: MoreProjectsProps): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Section

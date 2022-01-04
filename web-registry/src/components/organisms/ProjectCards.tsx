@@ -20,7 +20,7 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexWrap: 'nowrap',
       overflow: 'auto',
     },
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
   },
   item: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexGrow: 0,
       maxWidth: '100%',
       flexBasis: '100%',
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       margin: theme.spacing(0, 1.875),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(0, 1.875),
       '&:first-child': {
         paddingLeft: theme.spacing(4),
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ProjectCards: React.FC<Props> = props => {
   const styles = useStyles();
   const theme: Theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 

@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),
     paddingBottom: theme.spacing(20),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(12),
       '& h1': {
         lineHeight: '130%',
@@ -42,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: 0,
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },

@@ -10,10 +10,10 @@ const useStyles = makeStyles(theme => {
     icon: {
       height: 'auto',
       width: pxToRem(117),
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         width: pxToRem(70),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         width: pxToRem(62),
       },
     },

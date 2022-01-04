@@ -60,10 +60,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       padding: `${theme.spacing(15.5)} ${theme.spacing(37)}`,
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: `${theme.spacing(15.5)} ${theme.spacing(10)}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: 0,
     },
     [theme.breakpoints.up('xl')]: {
@@ -80,14 +80,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(35.875),
       paddingRight: theme.spacing(35.875),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(10),
       paddingRight: theme.spacing(10),
     },
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(17.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(13)} ${theme.spacing(3.75)} 0`,
     },
   },
@@ -99,11 +99,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.between('md', 'lg')]: {
       paddingRight: theme.spacing(33.375),
     },
-    // [theme.breakpoints.down('sm')]: {
+    // [theme.breakpoints.down('md')]: {
     [theme.breakpoints.between('sm', 'sm')]: {
       paddingRight: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(4),
       marginTop: theme.spacing(13),
     },
@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   projectActionsGrid: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(2),
     },
   },
@@ -127,7 +127,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         2.5,
       )}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(8),
     },
   },
@@ -135,7 +135,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.between('md', 'lg')]: {
       paddingRight: theme.spacing(30.375),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(5),
     },
     [theme.breakpoints.up('xl')]: {
@@ -143,21 +143,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   projectImpactGrid: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexWrap: 'nowrap',
       overflowX: 'auto',
     },
   },
   projectImpact: {
     display: 'flex',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flex: '0 0 auto',
       marginRight: theme.spacing(4),
       width: '80%',
     },
   },
   protectedSpecies: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(13),
     },
     [theme.breakpoints.up('sm')]: {
@@ -168,7 +168,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginBottom: theme.spacing(7),
         marginTop: theme.spacing(2.5),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         marginBottom: theme.spacing(3.25),
         marginTop: theme.spacing(8.5),
       },
@@ -180,7 +180,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(21.5),
       paddingBottom: theme.spacing(22.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17),
     },
   },
@@ -188,7 +188,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(12),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(10),
     },
   },
@@ -204,7 +204,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(3.75),
       marginBottom: theme.spacing(5),
     },

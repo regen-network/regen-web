@@ -7,7 +7,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-layout',
-    // 'gatsby-plugin-top-layout',
+    'gatsby-plugin-top-layout',
     {
       resolve: `gatsby-plugin-netlify`,
       options: {

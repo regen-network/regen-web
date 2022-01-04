@@ -35,12 +35,12 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: 'unset',
     },
   },
   card: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(3, 0),
     },
   },
@@ -53,7 +53,7 @@ const CreditClassCards: React.FC<Props> = ({
   const navigate = useNavigate();
   const styles = useStyles();
   const theme = useTheme<Theme>();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Grid

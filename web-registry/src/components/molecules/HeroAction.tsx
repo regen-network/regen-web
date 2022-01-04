@@ -54,7 +54,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
   title: {
     fontWeight: 900,
     lineHeight: theme.typography.pxToRem(53.2),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
       lineHeight: theme.typography.pxToRem(44.8),
     },
@@ -65,7 +65,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
       fontSize: theme.typography.pxToRem(21),
       padding: theme.spacing(2, 8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       padding: theme.spacing(2, 4),
       '&:nth-child(2)': {
@@ -83,7 +83,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
       fontSize: theme.typography.pxToRem(22),
       lineHeight: theme.typography.pxToRem(33),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       lineHeight: theme.typography.pxToRem(27),
     },

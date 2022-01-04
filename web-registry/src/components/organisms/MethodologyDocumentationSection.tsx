@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(0),
       paddingBottom: theme.spacing(30),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingTop: theme.spacing(0),
       paddingBottom: theme.spacing(20),
     },
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       maxWidth: theme.breakpoints.values.lg,
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column',
     },
   },
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(13.25),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginLeft: 0,
       marginBottom: theme.spacing(4),
     },

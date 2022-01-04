@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(30, 5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17.75),
     },
   },
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   header: {
     color: theme.palette.primary.main,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -52,13 +52,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(30),
       fontSize: theme.typography.pxToRem(18),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.75),
       flexDirection: 'column',
     },
   },
   iconLabel: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(17.75),
       '&:last-child': {
         marginBottom: 0,

@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         marginTop: theme.spacing(9),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         marginTop: theme.spacing(6.5),
       },
     },

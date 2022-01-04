@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),
     paddingBottom: theme.spacing(20),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(12),
       '& h1': {
         lineHeight: '130%',
@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
         textDecoration: 'underline',
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(20),
     },
   },
@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
     minHeight: 0,
   },
   bottomHeroDescription: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       '& p': {
         fontSize: theme.typography.pxToRem(20),
       },
@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(76),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(72),
       '&:first-child': {
         marginTop: theme.spacing(8),

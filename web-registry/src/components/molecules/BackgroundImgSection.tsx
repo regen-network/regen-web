@@ -27,7 +27,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
   section: {
     zIndex: 1,
     position: 'relative',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: 0,
     },
   },
@@ -37,7 +37,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     [theme.breakpoints.up('sm')]: {
       height: props.isBanner ? theme.spacing(125) : 'inherit',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: props.isBanner ? '74vh' : 'inherit',
     },
   }),

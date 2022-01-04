@@ -39,7 +39,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(5.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(8),
     },
   },
@@ -86,7 +86,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(18),
       paddingTop: theme.spacing(5.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
       paddingTop: theme.spacing(4),
     },

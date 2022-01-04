@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     whiteSpace: 'pre-wrap',
   },
   modalText: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },

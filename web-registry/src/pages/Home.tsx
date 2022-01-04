@@ -29,22 +29,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17.75),
     },
   },
   title: {
     marginBottom: theme.spacing(8.75),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(8),
     },
   },
   projectCards: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100vw',
       marginLeft: theme.spacing(-8), // MUI Grid spacing in our `section` component with padding prevents scrolling all the way over. This presents d
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginLeft: theme.spacing(-4),
     },
   },
@@ -74,7 +74,7 @@ const Home: React.FC = () => {
   const creditClassesContent = creditClassData?.allCreditClass;
   const { data: projectsData } = useMoreProjectsQuery();
 
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <>

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       justifyContent: 'space-evenly',
       padding: theme.spacing(8.75),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(6, 3.75),
     },
   },
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
     },
   },
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginRight: theme.spacing(2),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       position: 'absolute',
     },
   },
@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.between('xs', 'lg')]: {
       minWidth: theme.spacing(47.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
     },
   },
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& form > div': {
       marginTop: 0,
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: 'none',
     },
   },
@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.spacing(10),
       marginBottom: theme.spacing(9.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginBottom: theme.spacing(6),
     },
   },
@@ -128,7 +128,7 @@ function ProjectEdit(): JSX.Element {
   const [saved, setSaved] = useState(false);
   const { projectId } = useParams();
   const { pathname } = useLocation();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const lastPathItem = pathname.substring(pathname.lastIndexOf('/') + 1);
   const section = lastPathItem !== 'edit' ? lastPathItem : undefined;
 

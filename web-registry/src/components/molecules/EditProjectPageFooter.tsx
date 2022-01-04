@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.typography.pxToRem(60),
       width: theme.typography.pxToRem(181.11),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       height: theme.typography.pxToRem(50),
       width: theme.typography.pxToRem(131),
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   saveIcon: {
     marginRight: theme.spacing(1),
     height: theme.typography.pxToRem(15),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(0.25),
     },
   },

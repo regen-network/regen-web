@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
       paddingTop: theme.spacing(30),
       paddingBottom: theme.spacing(30),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(20),
       paddingBottom: theme.spacing(20),
     },
@@ -42,14 +42,14 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
       paddingBottom: theme.spacing(8),
     },
   },
   overview: {
     display: 'flex',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
   },
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       marginRight: theme.spacing(8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: `calc(100% + ${theme.spacing(8)})`,
       justifyContent: 'flex-start',
       flexWrap: 'nowrap',
@@ -69,10 +69,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
   cardItem: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '95%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       '&:first-child': {
         paddingLeft: theme.spacing(4),
       },
@@ -81,13 +81,13 @@ const useStyles = makeStyles(theme => ({
   overviewCard: {
     width: '100%',
     height: '100%',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       minWidth: theme.spacing(69.5),
       minHeight: theme.spacing(40.75),
     },
   },
   sdgsMobile: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(20, 0),
     },
   },
@@ -134,7 +134,7 @@ const CreditClassOverviewSection: React.FC<CreditClassOverviewSectionProps> = ({
 }) => {
   const styles = useStyles();
   const theme = useTheme();
-  const isMobile: boolean = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <>

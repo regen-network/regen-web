@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: theme.palette.grey[50],
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '100%',
       padding: theme.spacing(8, 5.5),
     },

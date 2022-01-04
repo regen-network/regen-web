@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(12),
     },
   },
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   outcomeSection: {
     paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(25),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(0),
       paddingBottom: theme.spacing(20),
     },
@@ -57,13 +57,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderTop: `1px solid ${theme.palette.grey[100]}`,
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
     paddingBottom: theme.spacing(22.25),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17.75),
     },
   },
   methodologyTitle: {
     marginBottom: theme.spacing(8.75),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(8),
       fontSize: theme.typography.pxToRem(32),
       lineHeight: theme.typography.pxToRem(41.6),
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'none',
     color: theme.palette.text.primary,
     fontWeight: 900,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },

@@ -25,12 +25,12 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: theme.spacing(20),
       height: theme.spacing(139),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(8, 4),
     },
   },
   cows: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(20),
     },
   },
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       lineHeight: theme.typography.pxToRem(44.8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: theme.typography.pxToRem(34.8),
     },
   },
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(44.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(57.5),
     },
   },
@@ -101,17 +101,17 @@ const useStyles = makeStyles(theme => ({
       alignItems: 'center',
       height: theme.typography.pxToRem(54),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
   verticalSpacing: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(6),
     },
   },
   hideIfMobile: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
   },

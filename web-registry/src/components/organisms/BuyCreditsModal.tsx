@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: theme.spacing(7.5),
       paddingRight: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(6),
       paddingLeft: 0,
       paddingRight: 0,
@@ -72,13 +72,13 @@ const useStyles = makeStyles(theme => ({
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.typography.pxToRem(18),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.typography.pxToRem(12),
       },
     },
   },
   creditTitle: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
   },
@@ -102,7 +102,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: theme.typography.pxToRem(16),
       marginBottom: theme.spacing(3),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: 0,
       fontSize: theme.typography.pxToRem(14),
     },
@@ -111,7 +111,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(12),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(10),
     },
   },
@@ -167,7 +167,7 @@ const useStyles = makeStyles(theme => ({
       lineHeight: '18px',
       fontSize: theme.typography.pxToRem(14),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: '15.06px',
       letterSpacing: '1px',
       fontSize: theme.typography.pxToRem(12),

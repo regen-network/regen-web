@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(12),
     },
   },
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(20),
     },
   },
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
   },
   sectionTitle: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
       lineHeight: theme.typography.pxToRem(41.6),
     },
@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
     textTransform: 'none',
     color: theme.palette.text.primary,
     fontWeight: 900,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: theme.typography.pxToRem(22),
       lineHeight: theme.typography.pxToRem(33),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       lineHeight: theme.typography.pxToRem(27),
     },
@@ -94,7 +94,7 @@ const CreateCreditClass: React.FC = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string | undefined>();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   const { data } = useAllCreateCreditClassPageQuery({ client });

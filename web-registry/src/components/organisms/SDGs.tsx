@@ -16,7 +16,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       height: theme.typography.pxToRem(200),
       marginRight: theme.spacing(8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.typography.pxToRem(100),
       marginRight: theme.spacing(4),
     },
@@ -27,7 +27,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     '&::-webkit-scrollbar': {
       display: 'none',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: `calc(100% + ${theme.spacing(8)})`,
       marginLeft: theme.spacing(-4),
       paddingLeft: theme.spacing(4),

@@ -82,12 +82,15 @@ const ReadMore: React.FC<ReadMoreProps> = ({
           {texts.truncated}
           {texts.rest && !expanded && <ReadButton />}
         </Description>
-        <Fade in={expanded} unmountOnExit>
-          <Description fontSize={fontSize}>
-            {!texts.rest.startsWith('\n') && '\n'}
-            {texts.rest}
-            {texts.rest && expanded && <ReadButton />}
-          </Description>
+        <Fade in={expanded} mountOnEnter unmountOnExit>
+          {/* https://mui.com/guides/migration-v4/#cannot-read-property-scrolltop-of-null */}
+          <div>
+            <Description fontSize={fontSize}>
+              {!texts.rest.startsWith('\n') && '\n'}
+              {texts.rest}
+              {texts.rest && expanded && <ReadButton />}
+            </Description>
+          </div>
         </Fade>
       </div>
     </div>

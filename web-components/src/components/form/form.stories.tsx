@@ -1,7 +1,6 @@
 import * as React from 'react';
 import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
 // import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import LoginForm from 'web-components/lib/components/form/LoginForm';
 
 export default {
@@ -16,12 +15,10 @@ const submit = async (): Promise<void> => {
 };
 
 export const userProfile = (): JSX.Element => (
-  <OnBoardingSection formContainer title="User Profile">
-    <UserProfileForm
-      submit={() => null}
-      initialValues={{ name: 'Name', roleTitle: 'Role title' }}
-    />
-  </OnBoardingSection>
+  <UserProfileForm
+    submit={() => null}
+    initialValues={{ name: 'Name', roleTitle: 'Role title' }}
+  />
 );
 
 // export const organizationProfile = (): JSX.Element => (

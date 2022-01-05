@@ -11,6 +11,8 @@ const imageSrc =
 const imageStorageBaseUrl = process.env.STORYBOOK_IMAGE_STORAGE_BASE_URL;
 const apiServerUrl = process.env.STORYBOOK_API_URI;
 
+// const label = 'Image Quality';
+const defaultValue = 100;
 // const options = {
 //   range: true,
 //   min: 1,

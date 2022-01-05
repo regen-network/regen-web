@@ -13,7 +13,7 @@ function OpenModal(): JSX.Element {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <Button onClick={() => setOpen(true)}>Open Modal</Button>
+      <Button variant="contained" onClick={() => setOpen(true)}>Open Modal</Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <p>I'm a Modal</p>
       </Modal>
@@ -25,7 +25,7 @@ function OpenLedgerModal(): JSX.Element {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <Button onClick={() => setOpen(true)}>Open Modal</Button>
+      <Button variant="contained" onClick={() => setOpen(true)}>Open Modal</Button>
       <IssuanceModal
         open={open}
         onClose={() => setOpen(false)}

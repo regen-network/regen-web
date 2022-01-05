@@ -225,7 +225,16 @@ const themeObject = {
   },
 };
 
-const regenTheme = createTheme(adaptV4Theme(themeObject));
+const regenTheme = {
+  ...createTheme(adaptV4Theme(themeObject)),
+  components: {
+    MuiLink: {
+      defaultProps: {
+        underline: 'none',
+      },
+    },
+  },
+};
 type Theme = typeof regenTheme;
 
 export { Theme }; // avoid having to do manual type definitions for added breakpoint values by importing here instead of MUI

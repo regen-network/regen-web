@@ -229,7 +229,7 @@ function ProjectTopLink({
   standard?: boolean;
 }): JSX.Element {
   const classes = useStyles();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
 
   return (
     <div className={classes.creditClassDetail}>

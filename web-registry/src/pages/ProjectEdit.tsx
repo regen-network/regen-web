@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   arrow: {
+    fontSize: theme.spacing(6),
     [theme.breakpoints.up('sm')]: {
       marginRight: theme.spacing(2),
     },

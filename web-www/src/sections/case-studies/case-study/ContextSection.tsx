@@ -86,7 +86,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   list: {
     listStyle: 'none',
     counterReset: 'challenge-counter',
-    // marginLeft: theme.spacing(6),
   },
   item: {
     counterIncrement: 'challenge-counter',

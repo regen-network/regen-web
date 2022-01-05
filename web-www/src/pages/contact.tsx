@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   emailBody: {
-    lineHeight: '200%',
+    lineHeight: '125%',
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(5.75),
     },

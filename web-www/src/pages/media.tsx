@@ -60,6 +60,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: theme.spacing(67.5),
     },
   },
+  form: {
+    paddingBottom: theme.spacing(6),
+  },
 }));
 
 type ItemMap = {
@@ -137,7 +140,7 @@ const MediaPage: React.FC<PageProps> = ({ location }) => {
               const currItems = values.category === 'all' ? items : grouped[values.category];
               return (
                 <>
-                  <Form>
+                  <Form className={styles.form}>
                     <Grid container wrap="nowrap" alignItems="center">
                       <span className={styles.show}>show me:</span>
                       <Field

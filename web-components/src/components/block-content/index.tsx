@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'clsx';
 import BlockContent from '@sanity/block-content-to-react';
 import { makeStyles } from '@material-ui/core';
 
@@ -19,9 +20,9 @@ const CustomBlockContent: React.FC<{
   className?: string;
   content?: any;
   tooltipText?: string;
-  withPadding?: boolean;
+  noYMargin?: boolean;
   onClickModalLink?: (href: string) => any;
-}> = ({ onClickModalLink, content, tooltipText, className, withPadding = false }) => {
+}> = ({ onClickModalLink, content, tooltipText, className, noYMargin = false }) => {
   const styles = useStyles();
 
   const serializers = {
@@ -58,7 +59,7 @@ const CustomBlockContent: React.FC<{
 
   if (content) {
     return (
-      <div className={withPadding ? '' : styles.root}>
+      <div className={cx(className, { [styles.root]: !!noYMargin })}>
         <BlockContent className={className} blocks={content} serializers={serializers} />
       </div>
     );

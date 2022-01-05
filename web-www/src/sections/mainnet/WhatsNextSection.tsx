@@ -1,9 +1,10 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Grid, makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 import BackgroundSection from '../../components/BackgroundSection';
-import { FluidObject } from 'gatsby-image';
 import GreenTopIconCard from 'web-components/src/components/cards/GreenTopIconCard';
 import { MainnetWhatsNextSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -83,21 +84,22 @@ const WhatsNextSection: React.FC = () => {
         <Typography className={styles.description}>
           <BlockContent content={content?._rawDescription} />
         </Typography>
-        <Grid container direction="row" justify="center">
-          {content?.infoItems?.map((item, i) => (
-            <Grid item key={i}>
-              <GreenTopIconCard
-                key={i}
-                className={styles.card}
-                description={item?._rawDescription}
-                title={item?.title || ''}
-                linkUrl={item?.gitLink || ''}
-                linkText="View on Github"
-                imgSrc={item?.icon?.image?.asset?.url || ''}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        <div>
+          <Grid container direction="row" justify="center">
+            {content?.infoItems?.map((item, i) => (
+              <Grid item key={i}>
+                <GreenTopIconCard
+                  className={styles.card}
+                  description={item?._rawDescription}
+                  title={item?.title || ''}
+                  linkUrl={item?.gitLink || ''}
+                  linkText="View on Github"
+                  imgSrc={item?.icon?.image?.asset?.url || ''}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
       </Grid>
     </BackgroundSection>
   );

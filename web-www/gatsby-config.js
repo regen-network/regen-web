@@ -11,6 +11,16 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-layout',
+    'gatsby-plugin-regen-theme',
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+          productionPrefix: 'rgn',
+        },
+      },
+    },
     {
       resolve: `gatsby-source-sanity`,
       options: {
@@ -62,14 +72,6 @@ module.exports = {
             url: `/registry/sitemap.xml`,
           },
         ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-material-ui`,
-      options: {
-        stylesProvider: {
-          injectFirst: true,
-        },
       },
     },
     `gatsby-background-image`,
@@ -130,7 +132,6 @@ module.exports = {
         path: `${__dirname}/content/`,
       },
     },
-    `gatsby-plugin-netlify-cms`,
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {

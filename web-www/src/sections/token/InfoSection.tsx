@@ -63,20 +63,21 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(16),
     },
   },
-  // body: {
-  //   color: theme.palette.info.dark,
-  //   '& a': {
-  //     color: theme.palette.secondary.main,
-  //     textDecoration: 'none',
-  //     cursor: 'pointer',
-  //   },
-  //   [theme.breakpoints.up('sm')]: {
-  //     fontSize: theme.typography.pxToRem(22),
-  //   },
-  //   [theme.breakpoints.down('xs')]: {
-  //     fontSize: theme.typography.pxToRem(16),
-  //   },
-  // },
+  body: {
+    color: theme.palette.info.dark,
+    fontSize: theme.typography.pxToRem(22),
+    '& a': {
+      color: theme.palette.secondary.main,
+      textDecoration: 'none',
+      cursor: 'pointer',
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(22),
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: theme.typography.pxToRem(16),
+    },
+  },
 }));
 
 const query = graphql`
@@ -99,11 +100,6 @@ const InfoSection = (): JSX.Element => {
   const { sanityTokenPage } = useStaticQuery<TokenInfoSectionQuery>(query);
   const data = sanityTokenPage?.infoSection;
 
-  // const scrollToSignup = (): void => {
-  //   const signup = document.getElementById('newsletter-signup');
-  //   signup?.scrollIntoView({ behavior: 'smooth' });
-  // };
-
   return (
     <Section>
       <Card className={styles.card}>
@@ -119,9 +115,6 @@ const InfoSection = (): JSX.Element => {
           <Description>
             <BlockContent className={styles.body} content={data?._rawBody} />
           </Description>
-          {/* <Description className={styles.body}>
-            <div onClick={() => scrollToSignup()}>{ReactHtmlParser(signupText)}</div>
-          </Description> */}
         </CardContent>
       </Card>
     </Section>

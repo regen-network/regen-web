@@ -102,8 +102,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.info.dark,
     fontSize: theme.spacing(5),
     lineHeight: '120%',
+    '& > ul': {
+      padding: theme.spacing(0, 4),
+    },
     '& > ul > li': {
-      marginLeft: theme.spacing(5),
+      margin: theme.spacing(2, 0),
       position: 'relative',
       display: 'list-item',
       listStyleType: 'disc',

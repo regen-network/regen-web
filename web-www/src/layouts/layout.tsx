@@ -12,13 +12,8 @@ import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
 import { MarketingNav } from '../components/MarketingNav';
 
-import './layout.css';
 interface Props {
   location: Location;
-}
-
-interface BoolProps {
-  [key: string]: boolean;
 }
 
 const Layout: React.FC<Props> = ({ children, location }) => {

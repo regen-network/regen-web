@@ -1,4 +1,5 @@
 import { ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
 import * as React from 'react';
 import theme from './muiTheme';
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
   readonly children: React.ReactNode;
 }
 
-const MedulasThemeProvider = ({ injectFonts = false, injectStyles, children }: Props): JSX.Element => {
+const RegenThemeProvider = ({ injectFonts = false, injectStyles, children }: Props): JSX.Element => {
   if (injectStyles) {
     injectStyles();
   }
@@ -16,7 +17,12 @@ const MedulasThemeProvider = ({ injectFonts = false, injectStyles, children }: P
     require('web-components/src/theme/fonts.css');
   }
 
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
+  );
 };
 
-export default MedulasThemeProvider;
+export default RegenThemeProvider;

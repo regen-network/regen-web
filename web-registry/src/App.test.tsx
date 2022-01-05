@@ -15,11 +15,6 @@ function createMatchMedia(width: unknown) {
     }),
     addListener: () => {},
     removeListener: () => {},
-    // media: '',
-    // onchange: () => {},
-    // addEventListener: () => {},
-    // removeEventListener: () => {},
-    // dispatchEvent: () => {},
   });
 }
 
@@ -33,9 +28,10 @@ jest.mock('@auth0/auth0-react');
 const mockedAuth0 = useAuth0 as jest.Mock;
 
 describe('App', () => {
-  // beforeAll(() => {
-  //   window.matchMedia = createMatchMedia(window.innerWidth);
-  // });
+  beforeAll(() => {
+    // @ts-ignore
+    window.matchMedia = createMatchMedia(window.innerWidth);
+  });
 
   describe('App - logged in', () => {
     beforeEach(() => {
@@ -61,23 +57,26 @@ describe('App', () => {
       ReactDOM.unmountComponentAtNode(div);
     });
   });
+
+  describe('App - not logged in', () => {
+    mockedAuth0.mockReturnValue({
+      isAuthenticated: false,
+      logout: jest.fn(),
+      loginWithRedirect: jest.fn(),
+    });
+
+    it('renders without crashing', () => {
+      const div = document.createElement('div');
+      ReactDOM.render(
+        <MockedProvider mocks={[]}>
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
+          ,
+        </MockedProvider>,
+        div,
+      );
+      ReactDOM.unmountComponentAtNode(div);
+    });
+  });
 });
-
-// describe('App - not logged in', () => {
-//   mockedAuth0.mockReturnValue({
-//     isAuthenticated: false,
-//     logout: jest.fn(),
-//     loginWithRedirect: jest.fn(),
-//   });
-
-//   it('renders without crashing', () => {
-//     const div = document.createElement('div');
-//     ReactDOM.render(
-//       <MockedProvider mocks={[]}>
-//         <App />
-//       </MockedProvider>,
-//       div,
-//     );
-//     ReactDOM.unmountComponentAtNode(div);
-//   });
-// });

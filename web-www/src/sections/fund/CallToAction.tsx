@@ -35,6 +35,9 @@ const useStyles = makeStyles<Theme>(theme => ({
       padding: theme.spacing(8, 4),
     },
   },
+  image: {
+    maxWidth: '100%',
+  },
   greenCircle: {
     backgroundColor: theme.palette.secondary.light,
     width: theme.spacing(28),
@@ -90,13 +93,14 @@ const CallToAction = (): JSX.Element => {
             <Grid key={cta?.header || ''} item sm={6}>
               <Card className={styles.card}>
                 <Avatar className={cx(styles.greenCircle, styles.verticalSpacing)}>
-                  <SanityImage {...(cta?.image as any)} alt="Icon" />
+                  <SanityImage className={styles.image} {...(cta?.image as any)} alt="Icon" />
                 </Avatar>
                 <Title className={cx(styles.title, styles.verticalSpacing)} variant="h4" align="center">
                   {cta?.header || ''}
                 </Title>
                 <Description className={styles.description} align="center">
                   <BlockContent
+                    noYMargin
                     content={cta?._rawDescription}
                     onClickModalLink={(href: string) => setModalIframeLink(href)}
                   />

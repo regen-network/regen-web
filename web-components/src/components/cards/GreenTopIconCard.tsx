@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     fontSize: theme.spacing(4),
-    margin: theme.spacing(4, 0),
     color: theme.palette.info.dark,
   },
   imgWrap: {

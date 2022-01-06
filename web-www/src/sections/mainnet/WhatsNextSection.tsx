@@ -82,7 +82,7 @@ const WhatsNextSection: React.FC = () => {
           {content?.title}
         </Typography>
         <Typography className={styles.description}>
-          <BlockContent content={content?._rawDescription} />
+          <BlockContent noYMargin content={content?._rawDescription} />
         </Typography>
         <div>
           <Grid container direction="row" justify="center">

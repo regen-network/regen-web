@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   image: {
     borderRadius: '10px',
+    maxWidth: '100%',
   },
 }));
 

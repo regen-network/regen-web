@@ -277,7 +277,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
             <Image
               className={cx(styles.projectThumbnail, styles.marginRight)}
               src={
-                project.image ||
+                // project.image ||
                 'https://regen-registry.s3.amazonaws.com/projects/wilmot/time-controlled-rotational-grazing.jpg'
               } // TODO: more generic fallback
               imageStorageBaseUrl={imageStorageBaseUrl}

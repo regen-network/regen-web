@@ -361,6 +361,12 @@ function ProjectDetails(): JSX.Element {
     skip: !impactIris,
   });
 
+  // TODO: DELETE. DO NOT MERGE.
+  project.creditPrice = {
+    unitPrice: 25,
+    currency: 'usd',
+  };
+
   return (
     <div className={styles.root}>
       <SEO

@@ -93,6 +93,7 @@ export default function FieldFormControl({
         optional={optional}
         description={description}
         disabled={disabled}
+        onExampleClick={() => console.log}
       />
       {children({ handleChange, handleBlur })}
 

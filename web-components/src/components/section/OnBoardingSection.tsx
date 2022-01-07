@@ -87,7 +87,7 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
   formContainer = false,
   linkText,
   onLinkClick,
-  exampleProjectUrl = '/projects/wilmot',
+  exampleProjectUrl,
   classes,
   ...p
 }) => {
@@ -113,12 +113,14 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
       }
     >
       <div className={cx(formContainer && styles.formWrap, !!classes && classes.formWrap)}>
-        <Description className={styles.description}>
-          See an example{' '}
-          <RouterLink to={exampleProjectUrl} target="_blank">
-            project page»
-          </RouterLink>
-        </Description>
+        {exampleProjectUrl && (
+          <Description className={styles.description}>
+            See an example{' '}
+            <RouterLink to={exampleProjectUrl} target="_blank">
+              project page»
+            </RouterLink>
+          </Description>
+        )}
         {p.children}
       </div>
     </Section>

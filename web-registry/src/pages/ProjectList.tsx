@@ -82,7 +82,6 @@ const ProjectList: React.FC = () => {
     const editUrl = `/project-pages/edit/${projectId}`;
     history.push(`${editUrl}/basic-info`);
   };
-  console.log(projects);
 
   return (
     <OnBoardingSection formContainer title={isFirstProject ? 'Create a Project' : 'Projects'}>
@@ -91,6 +90,7 @@ const ProjectList: React.FC = () => {
       )}
       <div className={classes.cards}>
         {/* TODO: Existing Projects. see regen-network/regen-registry#360 */}
+        {/* TODO: DELETE demo code below */}
         {projects?.map(p => (
           <div onClick={() => editProjectPage(p?.id)}>{p?.id}</div>
         ))}

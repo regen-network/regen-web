@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { OnboardingFormTemplate } from '../components/templates';
+import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
 import { MediaForm, MediaValues } from '../components/organisms';
 import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
 import { useProjectEditContext } from '../pages/ProjectEdit';
@@ -53,7 +53,9 @@ const Media: React.FC = () => {
   }
 
   return isEdit ? (
-    <MediaForm submit={submit} initialValues={initialFieldValues} />
+    <EditFormTemplate>
+      <MediaForm submit={submit} initialValues={initialFieldValues} />
+    </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Media" saveAndExit={saveAndExit}>
       <MediaForm submit={submit} initialValues={initialFieldValues} />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
-import { OnboardingFormTemplate } from '../components/templates';
+import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
 import {
   EntityDisplayForm,
   EntityDisplayValues,
@@ -107,7 +107,9 @@ const EntityDisplay: React.FC = () => {
   }
 
   return isEdit ? (
-    <EntityDisplayForm submit={submit} initialValues={initialValues} />
+    <EditFormTemplate>
+      <EntityDisplayForm submit={submit} initialValues={initialValues} />
+    </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Entity Display" saveAndExit={saveAndExit}>
       <EntityDisplayForm submit={submit} initialValues={initialValues} />

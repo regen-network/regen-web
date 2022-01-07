@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import { FormValues, isIndividual } from 'web-components/lib/components/inputs/RoleField';
-import { OnboardingFormTemplate } from '../components/templates';
+import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
 import { RolesForm, RolesValues } from '../components/organisms';
 import { useProjectEditContext } from '../pages/ProjectEdit';
 import {
@@ -161,7 +161,9 @@ const Roles: React.FC = () => {
   }
 
   return isEdit ? (
-    <RolesForm submit={submit} initialValues={initialFieldValues} projectCreator={userProfileData} />
+    <EditFormTemplate>
+      <RolesForm submit={submit} initialValues={initialFieldValues} projectCreator={userProfileData} />
+    </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Roles" saveAndExit={saveAndExit}>
       <RolesForm submit={submit} initialValues={initialFieldValues} projectCreator={userProfileData} />

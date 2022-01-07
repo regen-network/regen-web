@@ -78,10 +78,10 @@ const ProjectList: React.FC = () => {
   }
 
   // TODO: when existing project is clicked for editing, use this
-  const editProjectPage = (projectId: string): void => {
-    const editUrl = `/project-pages/edit/${projectId}`;
-    history.push(`${editUrl}/basic-info`);
-  };
+  // const editProjectPage = (projectId: string): void => {
+  //   const editUrl = `/project-pages/edit/${projectId}`;
+  //   history.push(isMobile ? editUrl : `${editUrl}/basic-info`);
+  // };
 
   return (
     <OnBoardingSection formContainer title={isFirstProject ? 'Create a Project' : 'Projects'}>
@@ -90,10 +90,6 @@ const ProjectList: React.FC = () => {
       )}
       <div className={classes.cards}>
         {/* TODO: Existing Projects. see regen-network/regen-registry#360 */}
-        {/* TODO: DELETE demo code below */}
-        {projects?.map(p => (
-          <div onClick={() => editProjectPage(p?.id)}>{p?.id}</div>
-        ))}
         <CreateProjectCard
           className={classes.createCard}
           onClick={submitCreateProject}

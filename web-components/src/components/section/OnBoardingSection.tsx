@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { Link } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -22,9 +22,8 @@ interface OnBoardingSectionProps {
   };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.grey[200],
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(12.5, 0, 30),
     },

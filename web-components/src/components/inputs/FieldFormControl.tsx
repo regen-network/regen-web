@@ -92,8 +92,8 @@ export default function FieldFormControl({
         labelSubText={labelSubText}
         optional={optional}
         description={description}
+        onExampleClick={onExampleClick}
         disabled={disabled}
-        onExampleClick={() => console.log}
       />
       {children({ handleChange, handleBlur })}
 

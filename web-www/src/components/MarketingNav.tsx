@@ -31,7 +31,6 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
     '/terms-service/': theme.palette.primary.light,
     '/team/': theme.palette.primary.light,
     '/developers/': theme.palette.primary.main,
-    '/invest/': theme.palette.primary.light,
     '/science/': theme.palette.primary.main,
     '/validators/': theme.palette.primary.main,
     '/community/': theme.palette.primary.main,
@@ -47,7 +46,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/partners/|/contact/|/validators/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/fund/|/case-studies/[a-z-]+//',
+    '//|/partners/|/contact/|/validators/|/resources/|/media/|/team/|/developers/|/science/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/fund/|/case-studies/[a-z-]+//',
   );
 
   const standardItems: HeaderDropdownItemProps[] = [

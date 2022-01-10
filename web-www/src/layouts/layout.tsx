@@ -108,10 +108,6 @@ const Layout: React.FC<Props> = ({ children, location }) => {
           title: 'Press Kit',
           href: '/press-kit/',
         },
-        {
-          title: 'Invest',
-          href: '/invest/',
-        },
       ],
     },
   ];

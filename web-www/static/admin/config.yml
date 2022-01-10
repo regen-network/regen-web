@@ -91,16 +91,6 @@ collections:
             fields:
               - {label: Header, name: header, widget: string}
               - {label: Body, name: body, widget: text}
-      - label: "Invest"
-        name: "invest"
-        file: "web-www/content/invest/index.yaml"
-        fields:
-          - label: "Top Section"
-            name: "topSection"
-            widget: "object"
-            fields:
-              - {label: Header, name: header, widget: string}
-              - {label: Body, name: body, widget: text}
       - label: "Developers"
         name: "developers"
         file: "web-www/content/developers/index.yaml"

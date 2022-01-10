@@ -1,8 +1,5 @@
 /registry/*  https://registry.regen.network/:splat 301!
 
-/investor.html  /invest/  200
-/us_investors  /invest/  200
-/nonus_investors  /invest/  200
 /rainforestfoundation.html  /case-studies/  200
 /faq.html  /faq/  200
 /farmers_signup.html  https://registry.regen.network/land-stewards  301!

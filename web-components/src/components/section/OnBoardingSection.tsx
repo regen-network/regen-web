@@ -18,23 +18,18 @@ interface OnBoardingSectionProps {
     root?: string;
     title?: string;
     titleWrap?: string;
-    formWrap?: string;
   };
 }
 
 const useStyles = makeStyles(theme => ({
   root: {
+    display: 'flex',
+    flex: 1,
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(12.5, 0, 30),
     },
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(8.75, 2.5, 20),
-    },
-  },
-  formWrap: {
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: theme.spacing(140),
-      margin: '0 auto',
     },
   },
   title: {
@@ -111,17 +106,15 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
         )
       }
     >
-      <div className={cx(formContainer && styles.formWrap, !!classes && classes.formWrap)}>
-        {exampleProjectUrl && (
-          <Description className={styles.description}>
-            See an example{' '}
-            <RouterLink to={exampleProjectUrl} target="_blank">
-              project page»
-            </RouterLink>
-          </Description>
-        )}
-        {p.children}
-      </div>
+      {exampleProjectUrl && (
+        <Description className={styles.description}>
+          See an example{' '}
+          <RouterLink to={exampleProjectUrl} target="_blank">
+            project page»
+          </RouterLink>
+        </Description>
+      )}
+      {p.children}
     </Section>
   );
 };

@@ -92,6 +92,7 @@ export default function FieldFormControl({
         labelSubText={labelSubText}
         optional={optional}
         description={description}
+        onExampleClick={onExampleClick}
         disabled={disabled}
       />
       {children({ handleChange, handleBlur })}

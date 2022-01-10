@@ -9,7 +9,7 @@
       "approvedMethodology": "Carbon<i>Plus</i> Grasslands Methodology",
       "methodologyUrl": "/methodologies/carbonplus-grasslands",
       "methodologyId": "carbonplus-grasslands",
-      "imgSrc": "credit-class-grasslands.png"
+      "imgSrc": "https://regen-registry.s3.amazonaws.com/credit_classes/credit-class-grasslands.png"
     }
   ],
   "methodologies": [

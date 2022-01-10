@@ -91,6 +91,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   eyeIcon: {
     height: theme.spacing(3.455),
     marginRight: theme.spacing(1.25),
+    marginBottom: theme.spacing(-0.5),
   },
   buttonWrapper: {
     [theme.breakpoints.down('sm')]: {
@@ -142,7 +143,7 @@ export default function ResourcesCard({
       <div className={classes.buttonWrapper}>
         <OutlinedButton target={target} href={link} className={classes.button}>
           <EyeIcon className={classes.eyeIcon} />
-          {buttonText}
+          <span>{buttonText}</span>
         </OutlinedButton>
       </div>
     </MediaCard>

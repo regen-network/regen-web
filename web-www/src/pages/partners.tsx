@@ -34,8 +34,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: theme.spacing(90.25),
     height: theme.spacing(62.5),
     textAlign: 'center',
-    paddingRight: theme.spacing(3.6),
-    paddingBottom: theme.spacing(5.25),
   },
   card: {
     '& img': {

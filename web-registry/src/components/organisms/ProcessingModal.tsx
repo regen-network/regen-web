@@ -8,6 +8,8 @@ import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import ShieldIcon from 'web-components/lib/components/icons/ShieldIcon';
 
+import Spinner from '../../assets/svgs/spinner.svg';
+
 interface Props extends RegenModalProps {
   txHash?: string;
 }
@@ -62,7 +64,7 @@ const ProcessingModal: React.FC<Props> = ({ open, onClose, txHash }) => {
     <Modal className={styles.root} open={open} onClose={onClose}>
       <img
         className={cx(styles.verticalSpacing, styles.spinner)}
-        src={require('../../assets/svgs/spinner.svg')}
+        src={Spinner}
         height={48}
         width={48}
         alt="processing"

@@ -10,7 +10,6 @@ import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { CreditClass } from '../../mocks';
-import { getImgSrc } from '../../lib/imgSrc';
 import {
   CreditClass as CreditClassContent,
   Maybe,
@@ -83,7 +82,7 @@ const CreditClassCards: React.FC<Props> = ({
                   content={creditClassContent?.shortDescriptionRaw}
                 />
               }
-              imgSrc={getImgSrc(c.imgSrc)}
+              imgSrc={c.imgSrc}
               onClick={() => {
                 const path =
                   creditClassContent?.path &&

@@ -13,6 +13,7 @@ import Title from 'web-components/lib/components/title';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 
 import sum from '../lib/sum';
+import CowIllustration from '../assets/cow-illustration.png';
 
 const PROJECT = gql`
   query ProjectByHandle($handle: String!) {
@@ -228,10 +229,7 @@ function PostPurchase(): JSX.Element {
     <>
       <Section classes={{ root: classes.section }}>
         <div className={classes.center}>
-          <img
-            src={require('../assets/cow-illustration.png')}
-            alt={require('../assets/cow-illustration.png')}
-          />
+          <img src={CowIllustration} alt={CowIllustration} />
           <Title className={classes.title} align="center" variant="h2">
             Thank you for your purchase!
           </Title>

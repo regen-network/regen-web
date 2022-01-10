@@ -11,6 +11,8 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 import { LineItem } from './LineItem';
 import { CreditClass } from '../../mocks/mocks';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
+import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
+import Sequestration from '../../assets/svgs/sequestration.svg';
 
 interface CreditClassDetailsColumnProps {
   creditClass: CreditClass;
@@ -109,7 +111,7 @@ function CreditClassDetailsColumn({
             <Avatar className={styles.iconContainer}>
               <img
                 className={styles.icon}
-                src={require(`../../assets/svgs/carbon-credit-fruit.svg`)}
+                src={CarbonCreditFruit}
                 alt="carbon credit"
               />
             </Avatar>
@@ -122,7 +124,7 @@ function CreditClassDetailsColumn({
             <Avatar className={styles.iconContainer}>
               <img
                 className={styles.icon}
-                src={require(`../../assets/svgs/sequestration.svg`)}
+                src={Sequestration}
                 alt="ton of carbon"
               />
             </Avatar>

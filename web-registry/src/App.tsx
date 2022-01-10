@@ -8,7 +8,7 @@ import { init as initGA } from './lib/ga';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 import { ScrollToTop, ProtectedRoute } from './components/atoms';
-import { RegistryNav } from './components/organisms';
+import { RegistryNav, AppFooter } from './components/organisms';
 
 import {
   // Additionality,
@@ -208,7 +208,9 @@ const App: React.FC = (): JSX.Element => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
-        <footer>{/* <AppFooter /> */}</footer>
+        <footer>
+          <AppFooter />
+        </footer>
       </div>
     </BrowserRouter>
   );

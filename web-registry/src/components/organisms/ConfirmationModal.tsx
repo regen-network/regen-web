@@ -8,6 +8,8 @@ import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import { Label } from 'web-components/lib/components/label';
+import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
+import CowIllustration from '../../assets/cow-illustration.png';
 
 interface Props extends RegenModalProps {
   data?: BroadcastTxResponse;
@@ -129,7 +131,7 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
     <Modal className={styles.root} open={open} onClose={onClose}>
       <img
         className={cx(styles.cows, styles.verticalSpacing)}
-        src={require('../../assets/cow-illustration.png')}
+        src={CowIllustration}
         alt="cows celebrating"
       />
       <Title
@@ -143,7 +145,7 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
         <Avatar className={styles.iconContainer}>
           <img
             className={styles.icon}
-            src={require(`../../assets/svgs/carbon-credit-fruit.svg`)}
+            src={CarbonCreditFruit}
             alt="eco-credit"
           />
         </Avatar>

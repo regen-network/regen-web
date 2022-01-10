@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
     },
-    [theme.breakpoints.between('md', 'xl')]: {
+    [theme.breakpoints.up('md')]: {
       maxWidth: theme.spacing(170),
     },
     [theme.breakpoints.up('xl')]: {

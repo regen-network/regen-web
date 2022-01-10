@@ -91,7 +91,7 @@ function LandManagementActions({
   const theme: Theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet: boolean = useMediaQuery(
-    theme.breakpoints.between('xs', 'sm'),
+    theme.breakpoints.between('xs', 'tablet'),
   );
   const slidesCount = isTablet ? 2 : 3;
 

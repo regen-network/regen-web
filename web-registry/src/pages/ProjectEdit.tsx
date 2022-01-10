@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       width: theme.spacing(74.25),
     },
-    [theme.breakpoints.between('xs', 'lg')]: {
+    [theme.breakpoints.between('xs', 'xl')]: {
       minWidth: theme.spacing(47.5),
     },
     [theme.breakpoints.down('md')]: {

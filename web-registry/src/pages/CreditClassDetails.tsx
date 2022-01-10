@@ -87,7 +87,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
   stepsSection: {
     background: 'transparent',
-    [theme.breakpoints.between('xs', 'md')]: {
+    [theme.breakpoints.between('xs', 'lg')]: {
       paddingLeft: theme.spacing(8),
       paddingRight: theme.spacing(8),
     },

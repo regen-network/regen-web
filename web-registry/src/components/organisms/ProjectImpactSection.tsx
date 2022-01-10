@@ -95,7 +95,7 @@ function ProjectImpactSection({
   const theme: Theme = useTheme();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet: boolean = useMediaQuery(
-    theme.breakpoints.between('xs', 'sm'),
+    theme.breakpoints.between('xs', 'tablet'),
   );
   const slidesCount: number = isTablet ? 2 : 3;
 

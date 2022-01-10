@@ -56,27 +56,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
   },
-  projectTopContent: {
-    [theme.breakpoints.up('md')]: {
-      padding: `${theme.spacing(15.5)} ${theme.spacing(37)}`,
-    },
-    [theme.breakpoints.down('md')]: {
-      padding: `${theme.spacing(15.5)} ${theme.spacing(10)}`,
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: 0,
-    },
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: theme.spacing(5),
-      paddingLeft: theme.spacing(5),
-    },
-  },
   projectDetails: {
     [theme.breakpoints.up('xl')]: {
       paddingRight: theme.spacing(5),
       paddingLeft: theme.spacing(5),
     },
-    [theme.breakpoints.between('md', 'lg')]: {
+    [theme.breakpoints.between('md', 'xl')]: {
       paddingLeft: theme.spacing(35.875),
       paddingRight: theme.spacing(35.875),
     },
@@ -89,89 +74,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(13)} ${theme.spacing(3.75)} 0`,
-    },
-  },
-  projectActions: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(27.5),
-      marginTop: theme.spacing(20),
-    },
-    [theme.breakpoints.between('md', 'lg')]: {
-      paddingRight: theme.spacing(33.375),
-    },
-    // [theme.breakpoints.down('md')]: {
-    [theme.breakpoints.between('sm', 'sm')]: {
-      paddingRight: theme.spacing(7.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(4),
-      marginTop: theme.spacing(13),
-    },
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: theme.spacing(2.5),
-    },
-  },
-  projectGrid: {
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(-2.5),
-    },
-  },
-  projectActionsGrid: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(2),
-    },
-  },
-  projectGridItem: {
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(3.5)} ${theme.spacing(2.5)} ${theme.spacing(
-        2.5,
-      )}`,
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(8),
-    },
-  },
-  projectImpactContainer: {
-    [theme.breakpoints.between('md', 'lg')]: {
-      paddingRight: theme.spacing(30.375),
-    },
-    [theme.breakpoints.down('md')]: {
-      paddingRight: theme.spacing(5),
-    },
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: 0,
-    },
-  },
-  projectImpactGrid: {
-    [theme.breakpoints.down('sm')]: {
-      flexWrap: 'nowrap',
-      overflowX: 'auto',
-    },
-  },
-  projectImpact: {
-    display: 'flex',
-    [theme.breakpoints.down('sm')]: {
-      flex: '0 0 auto',
-      marginRight: theme.spacing(4),
-      width: '80%',
-    },
-  },
-  protectedSpecies: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(13),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(5),
-    },
-    '& h4': {
-      [theme.breakpoints.up('sm')]: {
-        marginBottom: theme.spacing(7),
-        marginTop: theme.spacing(2.5),
-      },
-      [theme.breakpoints.down('sm')]: {
-        marginBottom: theme.spacing(3.25),
-        marginTop: theme.spacing(8.5),
-      },
     },
   },
   projectTimeline: {
@@ -190,37 +92,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(10),
-    },
-  },
-  map: {
-    maxHeight: '50rem',
-  },
-  projectActionsGroup: {
-    '&:first-child': {
-      marginTop: theme.spacing(6),
-    },
-  },
-  creditsGauge: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(3.75),
-      marginBottom: theme.spacing(5),
-    },
-  },
-  glanceCard: {
-    marginTop: theme.spacing(5),
-  },
-  projectMedia: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(16),
-      paddingRight: theme.spacing(7.5),
-    },
-  },
-  monitoredImpact: {
-    [theme.breakpoints.up('sm')]: {
-      paddingRight: theme.spacing(7.5),
     },
   },
 }));

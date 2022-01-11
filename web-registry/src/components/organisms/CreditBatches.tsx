@@ -43,7 +43,7 @@ const headCells: HeadCell[] = [
   { id: 'issuer', numeric: false, label: 'issuer' },
   { id: 'batch_denom', numeric: false, label: 'batch denom' },
   { id: 'class_id', numeric: false, label: 'credit class' },
-  { id: 'tradable_supply', numeric: true, label: 'total amount active', wrap: true },
+  { id: 'tradable_supply', numeric: true, label: 'total amount tradable', wrap: true },
   { id: 'retired_supply', numeric: true, label: 'total amount retired', wrap: true },
   { id: 'amount_cancelled', numeric: true, label: 'total amount cancelled', wrap: true },
   { id: 'start_date', numeric: true, label: 'start date' },

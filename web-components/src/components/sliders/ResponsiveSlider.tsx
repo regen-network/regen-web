@@ -38,7 +38,6 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
-    width: '100%',
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(11.75),
     },
@@ -203,7 +202,7 @@ export default function ResponsiveSlider({
   const nextDisabled = currSlide >= items.length - slides && !infinite;
 
   return (
-    <div className={cx(styles.root, className, classes && classes.root)}>
+    <div className={cx(styles.root, className || (classes && classes.root))}>
       <Grid container wrap="nowrap" alignItems="center" className={classes && classes.headerWrap}>
         {renderTitle ? (
           renderTitle()

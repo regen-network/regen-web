@@ -64,7 +64,7 @@ function SliderSection({ items, title, classes }: SliderSectionProps): JSX.Eleme
 
   return (
     <Section className={cx(styles.root, classes?.root)}>
-      <LazyLoad style={{ width: '100%' }} offset={300}>
+      <LazyLoad offset={300}>
         <ResponsiveSlider
           classes={{ root: styles.slider, headerWrap: styles.headerWrap }}
           arrows={showArrows}

@@ -48,7 +48,6 @@ const query = graphql`
 const TopSection = (): JSX.Element => {
   const styles = useStyles();
   const { background, sanityTokenPage } = useStaticQuery<TokenTopSectionQuery>(query);
-  console.log('sanityTokenPage :>> ', sanityTokenPage);
   const data = sanityTokenPage?.topSection;
 
   return (

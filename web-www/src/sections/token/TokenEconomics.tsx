@@ -28,6 +28,9 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(32),
     },
   },
+  center: {
+    margin: '0 auto',
+  },
 }));
 
 type QueryData = {

@@ -75,6 +75,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     maxWidth: theme.breakpoints.values.lg,
     margin: '0 auto',
     overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 }));
 
@@ -92,7 +95,7 @@ const Section = ({
 }: SectionProps): JSX.Element => {
   const styles = useStyles({ withSlider, titleLineHeight, titleAlign, titleColor, topRight: !!topRight });
   return (
-    <section className={clsx(styles.root, className || (classes && classes.root))}>
+    <section className={clsx(styles.root, className, classes && classes.root)}>
       <div className={clsx(styles.wrap, classes && classes.wrap)}>
         {title && (
           <div className={clsx(classes && classes.titleWrap, topRight && styles.spaceBetween)}>

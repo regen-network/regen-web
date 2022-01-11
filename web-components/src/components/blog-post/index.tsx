@@ -3,11 +3,11 @@ import { makeStyles, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Title from '../title';
 import OutlinedButton from '../buttons/OutlinedButton';
-import { BlockContent } from '../block-content';
+import { BlockContent, SanityBlockOr } from '../block-content';
 
 export interface BlogPostProps {
   header: string;
-  description: string | any[]; // optional array for sanity block content
+  description: SanityBlockOr<string>; // optional array for sanity block content
   img: JSX.Element;
   url: string;
 }

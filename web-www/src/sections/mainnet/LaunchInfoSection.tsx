@@ -110,7 +110,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       position: 'relative',
       display: 'list-item',
       listStyleType: 'disc',
-      listStylePositio: 'inside',
       '&::marker': {
         fontSize: theme.spacing(3),
       },

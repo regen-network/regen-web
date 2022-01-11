@@ -5,13 +5,13 @@ import ReactHtmlParser from 'react-html-parser';
 
 import Title from '../title';
 import Description from '../description';
-import { BlockContent } from '../block-content';
+import { BlockContent, SanityBlockOr } from '../block-content';
 
 interface HexaImage {
   name: string;
   imgSrc: string;
-  role: string | any[]; // optionally pass block content from sanity
-  description: string | any[];
+  role: SanityBlockOr<string>; // optionally pass block content from sanity
+  description: SanityBlockOr<string>;
 }
 
 interface HexaImagesProps {
@@ -202,7 +202,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function renderText(text: string | any[]) {
+// TODO type
+function renderText(text: SanityBlockOr<string>): any {
   if (typeof text === 'string') {
     return ReactHtmlParser(text);
   }

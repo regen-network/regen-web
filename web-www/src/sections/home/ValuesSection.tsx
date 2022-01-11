@@ -4,7 +4,6 @@ import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { makeStyles, Theme } from '@material-ui/core';
 import clsx from 'clsx';
-// import Img from 'gatsby-image';
 
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';

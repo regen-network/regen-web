@@ -5,11 +5,11 @@ import clsx from 'clsx';
 
 import Title from '../title';
 import Description from '../description';
-import { BlockContent } from '../block-content';
+import { BlockContent, SanityBlockOr } from '../block-content';
 
 interface TitleDescriptionProps {
   title: string;
-  description?: string | any[]; // accepts an HTML string or an array of sanity BlockContent
+  description?: SanityBlockOr<string>; // accepts an HTML string or an array of sanity BlockContent
   className?: string;
   children?: React.ReactNode;
 }

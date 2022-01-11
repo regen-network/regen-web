@@ -137,7 +137,7 @@ const MediaPage: React.FC<PageProps> = ({ location }) => {
             onSubmit={() => {}}
           >
             {({ values }) => {
-              const currItems = values.category === 'all' ? items : grouped[values.category];
+              const currentItems = values.category === 'all' ? items : grouped[values.category];
               return (
                 <>
                   <Form className={styles.form}>
@@ -152,11 +152,11 @@ const MediaPage: React.FC<PageProps> = ({ location }) => {
                     </Grid>
                   </Form>
                   <Grid container spacing={6}>
-                    {currItems.map((item, i) => (
+                    {currentItems.map((item, i) => (
                       <Grid item xs={12} sm={6} md={4} key={i}>
                         <ArticleCard
                           className={styles.card}
-                          type={item?.type}
+                          type={item?.type || 'article'}
                           play={item?.type === 'video'}
                           name={item?.title || ''}
                           author={item?.author || ''}

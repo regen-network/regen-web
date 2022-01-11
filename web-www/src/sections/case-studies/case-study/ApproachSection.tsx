@@ -9,11 +9,11 @@ import Title from 'web-components/lib/components/title';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import { SanityCaseStudyApproachSection } from '../../../generated/graphql';
-import { BlockContent } from 'web-components/src/components/block-content';
+import { BlockContent, SanityBlockOr } from 'web-components/src/components/block-content';
 
 interface Paragraph {
   title: string | Element;
-  content: string | any[];
+  content: SanityBlockOr<string>;
 }
 
 interface TitleWithParagraphsProps {

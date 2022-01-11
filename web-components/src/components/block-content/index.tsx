@@ -5,6 +5,9 @@ import { makeStyles } from '@material-ui/core';
 
 import { UnderlineTooltip } from '../tooltip/UnderlineTooltip';
 
+/** type alias for components which can optionally accept sanity block content */
+export type SanityBlockOr<T> = T | any[];
+
 const useStyles = makeStyles(() => ({
   root: {
     '& p:first-child': {

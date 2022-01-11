@@ -8,7 +8,7 @@ import Description from 'web-components/lib/components/description';
 import { SanityCaseStudyFigure, SanityCaseStudyFigureSection } from '../../../generated/graphql';
 
 interface StyleProps {
-  figures: SanityCaseStudyFigure[] | any[];
+  figures: SanityCaseStudyFigure[];
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({

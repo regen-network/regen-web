@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import Card from './Card';
 import OutlinedButton from '../buttons/OutlinedButton';
-import { BlockContent } from '../block-content';
+import { BlockContent, SanityBlockOr } from '../block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const GreenTopIconCard: React.FC<{
   className?: string;
   title: string;
-  description: string | any[];
+  description: SanityBlockOr<string>;
   linkUrl: string;
   linkText: string;
   imgSrc: string;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
@@ -17,12 +17,14 @@ import { useMoreProjectsQuery } from '../generated/graphql';
 import { useAllHomePageQuery, useAllCreditClassQuery } from '../generated/sanity-graphql';
 import { client } from '../sanity';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.primary.main,
+  },
   topSectionDescription: {
     maxWidth: theme.spacing(165),
   },
   section: {
-    backgroundColor: theme.palette.primary.main,
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22.25),
     },
@@ -74,7 +76,7 @@ const Home: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <>
+    <div className={styles.root}>
       <HeroTitle
         isBanner
         img={cowsImg}
@@ -120,7 +122,7 @@ const Home: React.FC = () => {
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
-    </>
+    </div>
   );
 };
 

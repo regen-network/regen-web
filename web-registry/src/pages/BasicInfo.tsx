@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { BasicInfoForm, BasicInfoFormValues } from '../components/organisms';
-import { OnboardingFormTemplate } from '../components/templates';
+import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
 import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
 import { useProjectEditContext } from '../pages/ProjectEdit';
 
@@ -52,7 +52,9 @@ const BasicInfo: React.FC = () => {
   }
 
   return isEdit ? (
-    <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
+    <EditFormTemplate>
+      <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
+    </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Basic Info" saveAndExit={saveAndExit}>
       <BasicInfoForm submit={submit} initialValues={initialFieldValues} />

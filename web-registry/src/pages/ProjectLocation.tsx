@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { ProjectLocationForm, ProjectLocationFormValues } from '../components/organisms';
-import { OnboardingFormTemplate } from '../components/templates';
+import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
 import { useProjectEditContext } from '../pages/ProjectEdit';
 import {
   useProjectByIdQuery,
@@ -92,12 +92,14 @@ const ProjectLocation: React.FC = () => {
   }
 
   return isEdit ? (
-    <ProjectLocationForm
-      submit={submit}
-      saveAndExit={saveAndExit}
-      mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
-      initialValues={initialFieldValues}
-    />
+    <EditFormTemplate>
+      <ProjectLocationForm
+        submit={submit}
+        saveAndExit={saveAndExit}
+        mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
+        initialValues={initialFieldValues}
+      />
+    </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Location" saveAndExit={saveAndExit}>
       <ProjectLocationForm

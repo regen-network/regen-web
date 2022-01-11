@@ -58,13 +58,13 @@ export default function ControlledTextField({
     <FieldFormControl
       label={label}
       description={description}
+      onExampleClick={onExampleClick}
       disabled={form.isSubmitting}
       optional={optional}
       className={className}
       field={field}
       form={form}
       meta={meta}
-      onExampleClick={onExampleClick}
     >
       {({ handleChange, handleBlur }) => (
         <>

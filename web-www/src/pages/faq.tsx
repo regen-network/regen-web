@@ -4,6 +4,7 @@ import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import Faq from '../components/Faq';
 import { FAQProps } from 'web-components/lib/components/faq';
 import { FaqPageQuery } from '../generated/graphql';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
 const query = graphql`
   query faqPage {
@@ -27,7 +28,7 @@ const FAQPage = (props: PageProps): JSX.Element => {
       questions: (category?.questions || []).map(question => {
         return {
           question: question?.question || '',
-          answer: question?._rawAnswer || '',
+          answer: <BlockContent content={question?._rawAnswer} />,
         };
       }),
     } as FAQProps['categories'][0];

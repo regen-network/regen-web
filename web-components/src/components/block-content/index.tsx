@@ -5,8 +5,8 @@ import { makeStyles } from '@material-ui/core';
 
 import { UnderlineTooltip } from '../tooltip/UnderlineTooltip';
 
-/** type alias for components which can optionally accept sanity block content */
-export type SanityBlockOr<T> = T | any[];
+export type SanityBlockContent = any[] | any; // copied from Sanity's types
+export type SanityBlockOr<T> = T | SanityBlockContent;
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
 
 const CustomBlockContent: React.FC<{
   className?: string;
-  content?: any;
+  content: SanityBlockContent;
   tooltipText?: string;
   noYMargin?: boolean;
   onClickModalLink?: (href: string) => any;
@@ -62,7 +62,7 @@ const CustomBlockContent: React.FC<{
 
   if (content) {
     return (
-      <div className={cx(className, { [styles.root]: !!noYMargin })}>
+      <div className={cx({ [styles.root]: !!noYMargin })}>
         <BlockContent className={className} blocks={content} serializers={serializers} />
       </div>
     );

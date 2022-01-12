@@ -89,7 +89,7 @@ function MethodologyTopSection({ methodology, nameRaw, descriptionRaw }: Props):
             <BlockContent content={nameRaw} />
           </Title>
           <Description className={styles.description}>
-            <BlockContent content={descriptionRaw} />
+            <BlockContent noYMargin content={descriptionRaw} />
           </Description>
         </div>
       </div>

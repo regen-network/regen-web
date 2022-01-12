@@ -10,7 +10,7 @@ import { IntercomProvider } from 'react-use-intercom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthApolloProvider } from './apollo';
 import { LedgerProvider } from './ledger';
-import { WalletProvider } from './wallet';
+import { WalletProvider } from './lib/wallet';
 // import history from './lib/history';
 
 const config = {

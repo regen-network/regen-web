@@ -5,8 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import Title from 'web-components/lib/components/title';
-import ResourceCardsSlider, { ResourceCardsProps } from 'web-components/lib/components/sliders/ResourceCards';
 import Table, { Document } from 'web-components/lib/components/table';
+import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
+import { DocumentationTable } from 'web-components/lib/components/table/DocumentationTable';
 import BackgroundSection from '../../components/BackgroundSection';
 import { ResourcesRegistrySectionQuery, SanityDoc, SanityResource } from '../../generated/graphql';
 import { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
@@ -122,7 +123,7 @@ const RegistrySection = (): JSX.Element => {
         {content?.documentTableTitle}
       </Typography>
       <Box className={styles.table}>
-        <Table canClickRow rows={sanityDocsToDocuments(content?.documents as SanityDoc[])} />
+        <DocumentationTable canClickRow rows={sanityDocsToDocuments(content?.documents as SanityDoc[])} />
       </Box>
     </BackgroundSection>
   );

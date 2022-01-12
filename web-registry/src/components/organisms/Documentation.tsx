@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-import Table, { Document } from 'web-components/lib/components/table';
+import { DocumentationTable, Document } from 'web-components/lib/components/table/DocumentationTable';
 import Section from 'web-components/lib/components/section';
 
 export interface DocumentationProps {
@@ -40,7 +40,7 @@ function Documentation({ txClient, onViewOnLedger, documents }: DocumentationPro
       titleVariant="h2"
       titleAlign="left"
     >
-      <Table
+      <DocumentationTable
         className={styles.tableBorder}
         txClient={txClient}
         onViewOnLedger={onViewOnLedger}

@@ -61,7 +61,7 @@ export const WalletProvider: React.FC = ({ children }) => {
     if (key && key.bech32Address) {
       const sender = {
         address: key.bech32Address,
-        shortAddress: `${key.bech32Address.substring(0, 10)}...`,
+        shortAddress: truncateWalletAddress(key.bech32Address),
       };
       setSender(sender);
     }
@@ -266,6 +266,10 @@ export const WalletProvider: React.FC = ({ children }) => {
       {children}
     </WalletContext.Provider>
   );
+};
+
+export const truncateWalletAddress = (walletAddress: string): string => {
+  return walletAddress ? `${walletAddress.substring(0, 10)}...` : '-';
 };
 
 export const useWallet = (): ContextType => React.useContext(WalletContext);

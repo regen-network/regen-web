@@ -3,6 +3,7 @@ export * from './AdminNav';
 export * from './AppFooter';
 export * from './BasicInfoForm';
 export * from './ConfirmationModal';
+export * from './CreditBatches';
 export * from './CreditClassCards';
 export * from './CreditClassConnectSection';
 export * from './CreditClassOverviewSection';

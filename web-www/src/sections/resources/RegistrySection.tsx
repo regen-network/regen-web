@@ -6,7 +6,7 @@ import Box from '@material-ui/core/Box';
 
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
-import Table from 'web-components/lib/components/table';
+import { DocumentationTable } from 'web-components/lib/components/table/DocumentationTable';
 import BackgroundSection from '../../components/BackgroundSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -107,7 +107,7 @@ const RegistrySection = (): JSX.Element => {
               {content.documentTableTitle}
             </Typography>
             <Box className={classes.table}>
-              <Table canClickRow rows={content.documents} />
+              <DocumentationTable canClickRow rows={content.documents} />
             </Box>
           </BackgroundSection>
         );

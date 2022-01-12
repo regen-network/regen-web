@@ -8,6 +8,8 @@ import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import ShieldIcon from 'web-components/lib/components/icons/ShieldIcon';
 
+import { getHashUrl } from '../../lib/block-explorer';
+
 interface Props extends RegenModalProps {
   txHash?: string;
 }
@@ -76,7 +78,7 @@ const ProcessingModal: React.FC<Props> = ({ open, onClose, txHash }) => {
       {txHash && (
         <OutlinedButton
           className={cx(styles.button, styles.verticalSpacing)}
-          href={`${process.env.REACT_APP_BLOCK_EXPLORER}/txs/${txHash}`}
+          href={getHashUrl(txHash)}
           target="_blank"
           startIcon={<ShieldIcon />}
         >

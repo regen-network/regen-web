@@ -5,7 +5,7 @@ import { StylesProvider } from '@material-ui/core/styles';
 const GatsbyPluginRegenThemeProvider = ({ children }) => {
   return (
     <ThemeProvider injectFonts>
-      <StylesProvider injectFirst>{children}</StylesProvider>
+      <StylesProvider>{children}</StylesProvider>
     </ThemeProvider>
   );
 };

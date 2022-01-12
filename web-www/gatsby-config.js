@@ -17,7 +17,6 @@ module.exports = {
       options: {
         stylesProvider: {
           injectFirst: true,
-          productionPrefix: 'rgn',
         },
       },
     },

@@ -25,7 +25,7 @@ module.exports = {
       resolve: `gatsby-source-sanity`,
       options: {
         projectId: process.env.GATSBY_SANITY_PROJECT_ID,
-        dataset: process.env.REACT_APP_SANITY_DATASET,
+        dataset: process.env.GATSBY_SANITY_DATASET,
         token: process.env.GATSBY_SANITY_TOKEN,
         graphqlTag: 'default',
         watchMode: true,
@@ -35,7 +35,7 @@ module.exports = {
       resolve: 'gatsby-plugin-sanity-image',
       options: {
         projectId: process.env.GATSBY_SANITY_PROJECT_ID,
-        dataset: process.env.REACT_APP_SANITY_DATASET,
+        dataset: process.env.GATSBY_SANITY_DATASET,
         watchMode: true,
       },
     },

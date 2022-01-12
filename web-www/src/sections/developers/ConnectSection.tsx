@@ -8,6 +8,7 @@ import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIco
 import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
 import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
+import { DevConnectSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -22,25 +23,24 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const DevelopersConnectSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "developers-connect-bg.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: developersYaml {
-        connectSection {
-          header
+const query = graphql`
+  query devConnectSection {
+    background: file(relativePath: { eq: "developers-connect-bg.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
-  const content = data.text.connectSection;
-  const classes = useStyles();
+    sanityDevelopersPage {
+      connectSectionHeader
+    }
+  }
+`;
+
+const DevelopersConnectSection: React.FC = () => {
+  const styles = useStyles();
+  const { background, sanityDevelopersPage: data } = useStaticQuery<DevConnectSectionQuery>(query);
   const theme = useTheme();
   const icons: IconLabelProps[] = [
     {
@@ -72,11 +72,11 @@ const DevelopersConnectSection = (): JSX.Element => {
   ];
   return (
     <ConnectSection
-      itemClassName={classes.item}
-      header={content.header}
-      background={data.background}
+      itemClassName={styles.item}
+      header={`${data?.connectSectionHeader}`}
+      background={background as any}
       icons={icons}
-      titleClassName={classes.title}
+      titleClassName={styles.title}
     />
   );
 };

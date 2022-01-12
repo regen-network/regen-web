@@ -1,35 +1,24 @@
 import React from 'react';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
 import Img, { FluidObject } from 'gatsby-image';
 
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
+import { SanityCaseStudyApproachSection } from '../../../generated/graphql';
+import { BlockContent, SanityBlockOr } from 'web-components/src/components/block-content';
 
 interface Paragraph {
   title: string | Element;
-  content: string;
+  content: SanityBlockOr<string>;
 }
 
 interface TitleWithParagraphsProps {
-  title: string;
+  title: string | JSX.Element;
   paragraphs: Paragraph[];
-}
-
-interface ApproachSectionProps {
-  description?: string;
-  details: string;
-  results: string;
-  next: string;
-  figureTitle: string;
-  figureImage: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -141,19 +130,24 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const TitleWithParagraphs = ({ title, paragraphs }: TitleWithParagraphsProps): JSX.Element => {
-  const classes = useStyles();
-
+export const TitleWithParagraphs: React.FC<TitleWithParagraphsProps> = ({ title, paragraphs }) => {
+  const styles = useStyles();
   return (
     <>
-      <Title className={classes.subHeader} variant="h3">
+      <Title className={styles.subHeader} variant="h3">
         {title}
       </Title>
       <div>
         {paragraphs.map((p: Paragraph, i: number) => (
-          <div key={i} className={i > 0 ? classes.paragraph : undefined}>
-            <div className={classes.cardTitle}>{p.title}</div>
-            <Description className={classes.cardDescription}>{ReactHtmlParser(p.content)}</Description>
+          <div key={i} className={i > 0 ? styles.paragraph : undefined}>
+            <div className={styles.cardTitle}>{p.title}</div>
+            <Description className={styles.cardDescription}>
+              {typeof p.content === 'string' ? (
+                ReactHtmlParser(p.content)
+              ) : (
+                <BlockContent content={p.content} />
+              )}
+            </Description>
           </div>
         ))}
       </div>
@@ -161,63 +155,59 @@ export const TitleWithParagraphs = ({ title, paragraphs }: TitleWithParagraphsPr
   );
 };
 
-const ApproachSection = ({
+const query = graphql`
+  query CaseStudyApproachSection {
+    sanityCaseStudiesPage {
+      approachSection {
+        header
+        subheader
+        details
+        results
+        next
+      }
+    }
+  }
+`;
+
+const ApproachSection: React.FC<SanityCaseStudyApproachSection> = ({
   description,
-  details,
-  results,
-  next,
-  figureTitle,
+  _rawDetails,
+  _rawResults,
+  _rawNext,
+  _rawFigureTitle,
   figureImage,
-}: ApproachSectionProps): JSX.Element => {
+}) => {
   const classes = useStyles();
+  const data = useStaticQuery(query);
+  const content = data?.sanityCaseStudiesPage?.approachSection;
   return (
-    <StaticQuery
-      query={graphql`
-        query {
-          text: caseStudiesYaml {
-            caseStudies {
-              approachSection {
-                header
-                subHeader
-                details
-                results
-                next
-              }
-            }
-          }
-        }
-      `}
-      render={data => {
-        const content = data.text.caseStudies.approachSection;
-        return (
-          <Section
-            classes={{
-              root: classes.root,
-              title: description ? classes.titleWithDescription : classes.title,
-            }}
-            title={content.header}
-          >
-            {description && <Description className={classes.description}>{description}</Description>}
-            <Grid container spacing={10}>
-              <Grid item xs={12} md={6}>
-                <Img className={classes.image} fluid={figureImage.childImageSharp.fluid} />
-                <Description className={classes.figureTitle}>{figureTitle}</Description>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TitleWithParagraphs
-                  title={content.subHeader}
-                  paragraphs={[
-                    { title: content.details, content: details },
-                    { title: content.results, content: results },
-                    { title: content.next, content: next },
-                  ]}
-                />
-              </Grid>
-            </Grid>
-          </Section>
-        );
+    <Section
+      classes={{
+        root: classes.root,
+        title: description ? classes.titleWithDescription : classes.title,
       }}
-    />
+      title={content.header}
+    >
+      {description && <Description className={classes.description}>{description}</Description>}
+      <Grid container spacing={10}>
+        <Grid item xs={12} md={6}>
+          <Img className={classes.image} fluid={figureImage?.image?.asset?.fluid as FluidObject} />
+          <Description className={classes.figureTitle}>
+            <BlockContent content={_rawFigureTitle} />
+          </Description>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <TitleWithParagraphs
+            title={content.subheader}
+            paragraphs={[
+              { title: content.details, content: _rawDetails || [] },
+              { title: content.results, content: _rawResults || [] },
+              { title: content.next, content: _rawNext || [] },
+            ]}
+          />
+        </Grid>
+      </Grid>
+    </Section>
   );
 };
 

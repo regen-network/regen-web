@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, Link, Grid, Avatar } from '@material-ui/core';
+import { makeStyles, Theme, Grid, Avatar } from '@material-ui/core';
 import { graphql, useStaticQuery } from 'gatsby';
-import Img from 'gatsby-image';
-import ReactHtmlParser from 'react-html-parser';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
@@ -10,6 +8,9 @@ import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import Section from 'web-components/src/components/section';
 import Modal from 'web-components/src/components/modal';
+import { FundCallToActionQuery } from '../../generated/graphql';
+import SanityImage from 'gatsby-plugin-sanity-image';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles<Theme>(theme => ({
   root: {
@@ -33,6 +34,9 @@ const useStyles = makeStyles<Theme>(theme => ({
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(8, 4),
     },
+  },
+  image: {
+    maxWidth: '100%',
   },
   greenCircle: {
     backgroundColor: theme.palette.secondary.light,
@@ -62,66 +66,44 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
 }));
 
-const CallToAction = (): JSX.Element => {
-  const styles = useStyles();
-
-  const data = useStaticQuery(graphql`
-    query {
-      text: fundYaml {
-        calltoActionSection {
-          callToActions {
-            image {
-              childImageSharp {
-                fixed(quality: 90, width: 159) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-            }
-            header
-            description
-            descriptionWithModalLink {
-              beginning
-              linkText
-              linkUrl
-              end
-            }
-          }
+const query = graphql`
+  query fundCallToAction {
+    sanityFundPage {
+      callsToAction {
+        image {
+          ...Image
         }
+        header
+        _rawDescription
       }
     }
-  `);
+  }
+`;
 
-  const content = data.text.calltoActionSection;
+const CallToAction = (): JSX.Element => {
+  const styles = useStyles();
   const [modalIframeLink, setModalIframeLink] = useState<string>('');
+  const { sanityFundPage: data } = useStaticQuery<FundCallToActionQuery>(query);
 
   return (
     <Section className={styles.root}>
       <Grid container spacing={5}>
-        {content.callToActions.map((cta: any) => {
+        {data?.callsToAction?.map(cta => {
           return (
-            <Grid key={cta.header} item sm={6}>
+            <Grid key={cta?.header || ''} item sm={6}>
               <Card className={styles.card}>
                 <Avatar className={cx(styles.greenCircle, styles.verticalSpacing)}>
-                  <Img fixed={cta.image.childImageSharp.fixed} />
+                  <SanityImage className={styles.image} {...(cta?.image as any)} alt="Icon" />
                 </Avatar>
                 <Title className={cx(styles.title, styles.verticalSpacing)} variant="h4" align="center">
-                  {cta.header}
+                  {cta?.header || ''}
                 </Title>
                 <Description className={styles.description} align="center">
-                  {cta.descriptionWithModalLink ? (
-                    <>
-                      {cta.descriptionWithModalLink.beginning}{' '}
-                      <Link
-                        className={styles.link}
-                        onClick={() => setModalIframeLink(cta.descriptionWithModalLink.linkUrl)}
-                      >
-                        {cta.descriptionWithModalLink.linkText}
-                      </Link>{' '}
-                      {cta.descriptionWithModalLink.end}
-                    </>
-                  ) : (
-                    ReactHtmlParser(cta.description)
-                  )}
+                  <BlockContent
+                    noYMargin
+                    content={cta?._rawDescription}
+                    onClickModalLink={(href: string) => setModalIframeLink(href)}
+                  />
                 </Description>
               </Card>
             </Grid>

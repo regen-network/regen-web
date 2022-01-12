@@ -4,6 +4,7 @@ import clsx from 'clsx';
 
 import Card from './Card';
 import OutlinedButton from '../buttons/OutlinedButton';
+import { BlockContent, SanityBlockOr } from '../block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.spacing(90),
   },
   main: {
-    height: '100%',
+    flex: 1,
     padding: theme.spacing(4, 4, 8),
   },
   title: {
@@ -25,7 +26,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     fontSize: theme.spacing(4),
-    margin: theme.spacing(4, 0),
     color: theme.palette.info.dark,
   },
   imgWrap: {
@@ -49,35 +49,44 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-type Props = {
+const GreenTopIconCard: React.FC<{
   className?: string;
   title: string;
-  description: string;
-  linkURL: string;
+  description: SanityBlockOr<string>;
+  linkUrl: string;
+  linkText: string;
   imgSrc: string;
-};
-
-const GreenTopIconCard: React.FC<Props> = props => {
+}> = props => {
   const classes = useStyles();
   return (
     <Card className={clsx(classes.root, props.className)}>
       <div className={classes.imgWrap}>
-        <img className={classes.img} src={props.imgSrc} alt={props.description} />
+        <img
+          className={classes.img}
+          src={props.imgSrc}
+          alt={typeof props.description === 'string' ? props.description : props.title}
+        />
       </div>
 
       <Grid container direction="column" className={classes.main}>
         <Typography variant="h1" className={classes.title}>
           {props.title}
         </Typography>
-        <Typography className={classes.description}>{props.description}</Typography>
+        <Typography className={classes.description}>
+          {typeof props.description === 'string' ? (
+            props.description
+          ) : (
+            <BlockContent content={props.description} />
+          )}
+        </Typography>
         <div className={classes.btnWrap}>
           <OutlinedButton
             className={classes.btn}
-            href={props.linkURL}
+            href={props.linkUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
-            View on Github
+            {props.linkText}
           </OutlinedButton>
         </div>
       </Grid>

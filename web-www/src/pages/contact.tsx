@@ -2,10 +2,10 @@ import React from 'react';
 import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import ReactHtmlParser from 'react-html-parser';
-import Img from 'gatsby-image';
-import clsx from 'clsx';
+import Img, { FluidObject } from 'gatsby-image';
+import cx from 'clsx';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 
@@ -23,7 +23,10 @@ import {
 import TextField from 'web-components/lib/components/inputs/TextField';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { BlockContent } from 'web-components/src/components/block-content';
 import Banner from 'web-components/lib/components/banner';
+
+import { ContactPageQuery } from '../generated/graphql';
 
 interface Values {
   name: string;
@@ -90,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   emailBody: {
-    lineHeight: '200%',
+    lineHeight: '125%',
     [theme.breakpoints.down('xs')]: {
       paddingBottom: theme.spacing(5.75),
     },
@@ -176,67 +179,58 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ContactPage = ({ location }: { location: Location }): JSX.Element => {
-  const classes = useStyles();
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
-
-  const data = useStaticQuery(graphql`
-    query {
-      text: contactYaml {
-        header
-        body
-        form {
-          messageForPartners
-          requestTypes {
-            label
-            value
-          }
+const query = graphql`
+  query contactPage {
+    sanityContactPage {
+      header
+      _rawBody
+      _rawMessageForPartners
+      formRequestTypes {
+        label
+        value
+      }
+      location {
+        title
+        _rawBody
+        image {
+          ...fluidCustomImageFields
         }
-        location {
-          header
-          body
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
-        email {
-          header
-          body
-        }
-        faq {
-          header
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
+      }
+      email {
+        title
+        _rawBody
+      }
+      faq {
+        title
+        image {
+          ...fluidCustomImageFields
         }
       }
     }
-  `);
-  const content = data.text;
+  }
+`;
+
+const ContactPage: React.FC<PageProps> = ({ location }) => {
+  const styles = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+
+  const { sanityContactPage: data } = useStaticQuery<ContactPageQuery>(query);
 
   return (
     <>
       <SEO title="Contact" location={location} />
-      <div className={classes.background}>
+      <div className={styles.background}>
         <Section
-          title={content.header}
+          title={data?.header || ''}
           titleVariant="h1"
-          classes={{ root: classes.section, title: classes.title }}
+          classes={{ root: styles.section, title: styles.title }}
         >
-          <Description align="center" className={classes.subtitle}>
-            {ReactHtmlParser(content.body)}
+          <Description align="center" className={styles.subtitle}>
+            <BlockContent content={data?._rawBody} />
           </Description>
-          <div className={classes.container}>
-            <Card elevation={1} className={classes.card}>
+          <div className={styles.container}>
+            <Card elevation={1} className={styles.card}>
               <Formik
                 initialValues={{
                   name: '',
@@ -289,18 +283,18 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
                       <Form translate="yes">
                         <div>
                           <Grid container>
-                            <Grid item xs={12} sm={6} className={classes.gridLeft}>
+                            <Grid item xs={12} sm={6} className={styles.gridLeft}>
                               <Field
-                                className={classes.textField}
+                                className={styles.textField}
                                 component={TextField}
                                 label="Your full name"
                                 name="name"
                               />
                             </Grid>
-                            <Grid item xs={12} sm={6} className={classes.gridRight}>
+                            <Grid item xs={12} sm={6} className={styles.gridRight}>
                               <Field
                                 component={TextField}
-                                className={classes.textField}
+                                className={styles.textField}
                                 type="email"
                                 label="Your email address"
                                 name="email"
@@ -308,46 +302,49 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
                             </Grid>
                           </Grid>
                           <Grid container>
-                            <Grid item xs={12} sm={6} className={classes.gridLeft}>
+                            <Grid item xs={12} sm={6} className={styles.gridLeft}>
                               <Field
                                 component={TextField}
-                                className={classes.textField}
+                                className={styles.textField}
                                 label="Your organization's name"
                                 name="orgName"
                                 optional
                               />
                             </Grid>
-                            <Grid item xs={12} sm={6} className={classes.gridRight}>
+                            <Grid item xs={12} sm={6} className={styles.gridRight}>
                               <Field
-                                options={[{ value: '', label: 'Select one' }, ...content.form.requestTypes]}
+                                options={[
+                                  { value: '', label: 'Select one' },
+                                  ...(data?.formRequestTypes as any),
+                                ]}
                                 component={SelectTextField}
                                 label="I am a:"
                                 name="requestType"
                                 className={
                                   values.requestType === ''
-                                    ? clsx(classes.defaultSelect, classes.textField)
-                                    : classes.textField
+                                    ? cx(styles.defaultSelect, styles.textField)
+                                    : styles.textField
                                 }
                               />
                             </Grid>
                           </Grid>
                         </div>
                         {values.requestType === 'partnerships@regen.network' && (
-                          <Description className={classes.messageForPartners}>
-                            {ReactHtmlParser(content.form.messageForPartners)}
+                          <Description className={styles.messageForPartners}>
+                            <BlockContent content={data?._rawMessageForPartners} />
                           </Description>
                         )}
                         <Field
                           component={TextField}
                           name="message"
-                          className={clsx(classes.textAreaField, classes.textField)}
+                          className={cx(styles.textAreaField, styles.textField)}
                           label="Message"
                           multiline
                           rows={matches ? 6 : 4}
                         />
                         <ContainedButton
                           disabled={(submitCount > 0 && !isValid) || isSubmitting}
-                          className={classes.button}
+                          className={styles.button}
                           onClick={submitForm}
                         >
                           send
@@ -362,23 +359,28 @@ const ContactPage = ({ location }: { location: Location }): JSX.Element => {
               </Formik>
             </Card>
             <Grid container>
-              <Grid item xs={12} sm={6} className={classes.contactInfo}>
-                <Title variant="h4">{content.location.header}</Title>
-                <Description className={classes.body}>{ReactHtmlParser(content.location.body)}</Description>
-                <Title className={classes.email} variant="h4">
-                  {content.email.header}
+              <Grid item xs={12} sm={6} className={styles.contactInfo}>
+                <Title variant="h4">{data?.location?.title}</Title>
+                <Description className={styles.body}>
+                  <BlockContent content={data?.location?._rawBody} />
+                </Description>
+                <Title className={styles.email} variant="h4">
+                  {data?.email?.title}
                 </Title>
-                <Description className={clsx(classes.emailBody, classes.body)}>
-                  {ReactHtmlParser(content.email.body)}
+                <Description className={cx(styles.emailBody, styles.body)}>
+                  <BlockContent content={data?.email?._rawBody} />
                 </Description>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Img fluid={content.location.image.childImageSharp.fluid} />
+                <Img fluid={data?.location?.image?.image?.asset?.fluid as FluidObject} />
               </Grid>
             </Grid>
           </div>
         </Section>
-        <FAQSection header={content.faq.header} imageData={content.faq.image.childImageSharp.fluid} />
+        <FAQSection
+          header={data?.faq?.title || ''}
+          imageData={data?.faq?.image?.image?.asset?.fluid as FluidObject}
+        />
       </div>
     </>
   );

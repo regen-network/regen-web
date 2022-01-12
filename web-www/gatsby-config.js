@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `Regen Network`,
@@ -7,6 +11,33 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-layout',
+    'gatsby-plugin-regen-theme',
+    {
+      resolve: `gatsby-plugin-material-ui`,
+      options: {
+        stylesProvider: {
+          injectFirst: true,
+        },
+      },
+    },
+    {
+      resolve: `gatsby-source-sanity`,
+      options: {
+        projectId: process.env.GATSBY_SANITY_PROJECT_ID,
+        dataset: process.env.GATSBY_SANITY_DATASET,
+        token: process.env.GATSBY_SANITY_TOKEN,
+        graphqlTag: 'default',
+        watchMode: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sanity-image',
+      options: {
+        projectId: process.env.GATSBY_SANITY_PROJECT_ID,
+        dataset: process.env.GATSBY_SANITY_DATASET,
+        watchMode: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-netlify`,
       options: {
@@ -40,14 +71,6 @@ module.exports = {
             url: `/registry/sitemap.xml`,
           },
         ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-material-ui`,
-      options: {
-        stylesProvider: {
-          injectFirst: true,
-        },
       },
     },
     `gatsby-background-image`,
@@ -108,7 +131,6 @@ module.exports = {
         path: `${__dirname}/content/`,
       },
     },
-    `gatsby-plugin-netlify-cms`,
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {

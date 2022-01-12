@@ -1,19 +1,11 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import SEO from '../components/seo';
 import TopSection from '../sections/wallet-address-registration/TopSection';
 import InstructionsSection from '../sections/wallet-address-registration/InstructionsSection';
 import FormSection from '../sections/wallet-address-registration/FormSection';
-interface LocationProps extends Location {
-  state?: {
-    submitted: boolean;
-  };
-}
-interface Props {
-  location: LocationProps;
-}
 
-const WalletAddressRegistrationPage = ({ location }: Props): JSX.Element => {
+const WalletAddressRegistrationPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`
     query {
       seoImage: file(relativePath: { eq: "wallet-address-registration.png" }) {

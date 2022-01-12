@@ -1,14 +1,11 @@
 import React from 'react';
+import { PageProps } from 'gatsby';
 
 import TopSection from '../sections/case-studies/TopSection';
 import ListSection from '../sections/case-studies/ListSection';
 import SEO from '../components/seo';
 
-interface props {
-  location: Location;
-}
-
-const CaseStudiesPage = ({ location }: props): JSX.Element => {
+const CaseStudiesPage: React.FC<PageProps> = ({ location }) => {
   return (
     <>
       <SEO

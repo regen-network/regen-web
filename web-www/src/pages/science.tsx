@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
 import TopSection from '../sections/science/TopSection';
 import TitleDescriptionSection from '../sections/science/TitleDescriptionSection';
@@ -10,11 +10,7 @@ import BlogSection from '../sections/shared/BlogSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import SEO from '../components/seo';
 
-interface props {
-  location: Location;
-}
-
-const SciencePage = ({ location }: props): JSX.Element => {
+const SciencePage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`
     query {
       seoImage: file(relativePath: { eq: "science.png" }) {

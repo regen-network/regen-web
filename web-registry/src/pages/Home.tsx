@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   projectCards: {
     [theme.breakpoints.down('sm')]: {
       width: '100vw',
-      marginLeft: theme.spacing(-8), // MUI Grid spacing in our `section` component with padding prevents scrolling all the way over. This presents d
+      marginLeft: theme.spacing(-8),
     },
     [theme.breakpoints.down('xs')]: {
       marginLeft: theme.spacing(-4),

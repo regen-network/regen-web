@@ -94,7 +94,18 @@ yarn build
 
 #### GraphQL Type generation
 
-To generate Type definitions from our GraphQL Schema, as well as custom react hooks, make sure the [graphQL server is running locally](https://github.com/regen-network/registry-server/blob/5adc07f89c0d4ee74d65779cfad591025c8bebc2/README.md#starting-a-development-server), `cd` into `/web-registry` and run:
+To generate Type definitions from our GraphQL Schema, as well as custom react hooks, make sure the [graphQL server is running locally](https://github.com/regen-network/registry-server/blob/5adc07f89c0d4ee74d65779cfad591025c8bebc2/README.md#starting-a-development-server), `cd` into the appropriate sub-folder and run (per repo):
+
+For `/web-registry` there are two commands for the separate sources:
+
+1. `yarn graphql:codegen` - for registry server graphql types
+2. `yarn graphql:codegen-sanity` - for sanity CMS graphql types
+
+`/web-www` only has one commmand
+
+1.  `yarn graphql:codegen`
+
+which generates types for both the Sanity items + any **_named_** GraphQL queries that live in the codebase (note - it does not generate types for unnamed queries)
 
 ```sh
 yarn graphql:codegen

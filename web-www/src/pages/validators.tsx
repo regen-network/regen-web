@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
 import TopSection from '../sections/validators/TopSection';
 import WhatSection from '../sections/validators/WhatSection';
@@ -8,11 +8,7 @@ import WhySection from '../sections/validators/WhySection';
 import ConnectSection from '../sections/validators/ConnectSection';
 import SEO from '../components/seo';
 
-interface props {
-  location: Location;
-}
-
-const ValidatorsPage = ({ location }: props): JSX.Element => {
+const ValidatorsPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`
     query {
       seoImage: file(relativePath: { eq: "validators-top-bg.png" }) {

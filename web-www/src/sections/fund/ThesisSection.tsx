@@ -3,35 +3,26 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import Section from 'web-components/src/components/section';
 import TitleDescription from 'web-components/src/components/title-description';
+import { FundThesisSectionQuery } from '../../generated/graphql';
 
-type QueryData = {
-  text: {
-    thesisSection: {
-      title: string;
-      body: string;
-    };
-  };
-};
-
-const ThesisSection = (): JSX.Element => {
-  const {
-    text: {
-      thesisSection: { title, body },
-    },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      text: fundYaml {
-        thesisSection {
-          title
-          body
-        }
+const query = graphql`
+  query fundThesisSection {
+    sanityFundPage {
+      thesisSection {
+        title
+        _rawBody
       }
     }
-  `);
+  }
+`;
+
+const ThesisSection = (): JSX.Element => {
+  const { sanityFundPage } = useStaticQuery<FundThesisSectionQuery>(query);
+  const data = sanityFundPage?.thesisSection;
 
   return (
     <Section>
-      <TitleDescription title={title} description={body} />
+      <TitleDescription title={data?.title || ''} description={data?._rawBody} />
     </Section>
   );
 };

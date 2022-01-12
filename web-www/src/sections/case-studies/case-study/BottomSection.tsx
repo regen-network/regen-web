@@ -6,24 +6,7 @@ import clsx from 'clsx';
 
 import BackgroundSection from '../../../components/BackgroundSection';
 import Title from 'web-components/lib/components/title';
-
-interface BottomSectionProps {
-  quote: string;
-  person: {
-    name: string;
-    image: {
-      childImageSharp: {
-        fluid: FluidObject;
-      };
-    };
-    role: string;
-  };
-  background: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
-}
+import { SanityCaseStudyBottomSection } from '../../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -123,28 +106,34 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BottomSection = ({ background, quote, person }: BottomSectionProps): JSX.Element => {
-  const classes = useStyles();
+const BottomSection: React.FC<SanityCaseStudyBottomSection> = ({
+  background,
+  quote,
+  personName,
+  personRole,
+  personImage,
+}) => {
+  const styles = useStyles();
 
   return (
     <BackgroundSection
       topSection={false}
       linearGradient="linear-gradient(209.5deg, rgba(250, 235, 209, 0.5) 12.63%, rgba(125, 201, 191, 0.5) 44.03%, rgba(81, 93, 137, 0.5) 75.43%)"
-      imageData={background.childImageSharp.fluid}
-      className={classes.root}
+      imageData={background?.image?.asset?.fluid}
+      className={styles.root}
     >
-      <Title variant="h3" className={classes.title}>
-        <span className={clsx(classes.firstQuote, classes.quotes)}>“</span>
-        <span className={classes.textQuote}>{quote}</span>
-        <span className={clsx(classes.secondQuote, classes.quotes)}>”</span>
+      <Title variant="h3" className={styles.title}>
+        <span className={clsx(styles.firstQuote, styles.quotes)}>“</span>
+        <span className={styles.textQuote}>{quote}</span>
+        <span className={clsx(styles.secondQuote, styles.quotes)}>”</span>
       </Title>
-      <Grid className={classes.person} container alignItems="center">
-        <Img className={classes.image} fluid={person.image.childImageSharp.fluid} />
-        <div className={classes.text}>
-          <Title variant="h5" className={classes.name}>
-            {person.name}
+      <Grid className={styles.person} container alignItems="center">
+        <Img className={styles.image} fluid={personImage?.image?.asset?.fluid as FluidObject} />
+        <div className={styles.text}>
+          <Title variant="h5" className={styles.name}>
+            {personName}
           </Title>
-          <div className={classes.role}>{person.role}</div>
+          <div className={styles.role}>{personRole}</div>
         </div>
       </Grid>
     </BackgroundSection>

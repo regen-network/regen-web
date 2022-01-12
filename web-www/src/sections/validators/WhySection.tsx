@@ -1,9 +1,10 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, Theme } from '@material-ui/core';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import TitleDescription from 'web-components/lib/components/title-description';
+import { ValidatorsWhySectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -13,42 +14,37 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const WhySection = (): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <StaticQuery
-      query={graphql`
-        query {
-          background: file(relativePath: { eq: "developers-topo-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: validatorsYaml {
-            whySection {
-              header
-              body
-            }
-          }
+const query = graphql`
+  query validatorsWhySection {
+    background: file(relativePath: { eq: "developers-topo-bg.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
-      `}
-      render={data => {
-        const content = data.content.whySection;
-        return (
-          <BackgroundSection
-            linearGradient="unset"
-            topSection={false}
-            imageData={data.background.childImageSharp.fluid}
-            className={classes.section}
-          >
-            <TitleDescription title={content.header} description={content.body} />
-          </BackgroundSection>
-        );
-      }}
-    />
+      }
+    }
+    sanityValidatorsPage {
+      whySection {
+        title
+        _rawBody
+      }
+    }
+  }
+`;
+
+const WhySection = (): JSX.Element => {
+  const styles = useStyles();
+  const { background, sanityValidatorsPage } = useStaticQuery<ValidatorsWhySectionQuery>(query);
+  const data = sanityValidatorsPage?.whySection;
+  return (
+    <BackgroundSection
+      linearGradient="unset"
+      topSection={false}
+      imageData={background?.childImageSharp?.fluid}
+      className={styles.section}
+    >
+      <TitleDescription title={data?.title || ''} description={data?._rawBody} />
+    </BackgroundSection>
   );
 };
 

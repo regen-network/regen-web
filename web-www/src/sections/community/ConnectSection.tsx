@@ -6,6 +6,7 @@ import ConnectSection, { IconLabelProps } from '../../components/ConnectSection'
 import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
+import { CommunityConnectSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -24,60 +25,61 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CommunityConnectSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "developers-connect-bg.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: communityYaml {
-        connectSection {
-          header
-          telegramSubLabel
-          telegramUrl
-          twitterSubLabel
-          twitterUrl
-          discordSubLabel
-          discordUrl
+const query = graphql`
+  query communityConnectSection {
+    background: file(relativePath: { eq: "developers-connect-bg.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
-  const content = data.text.connectSection;
+    sanityCommunityPage {
+      connectSection {
+        header
+        telegramSubLabel
+        telegramUrl
+        twitterSubLabel
+        twitterUrl
+        discordSubLabel
+        discordUrl
+      }
+    }
+  }
+`;
+const CommunityConnectSection: React.FC = () => {
+  const { background, sanityCommunityPage: data } = useStaticQuery<CommunityConnectSectionQuery>(query);
+  const content = data?.connectSection;
   const styles = useStyles();
   const theme = useTheme();
   const icons: IconLabelProps[] = [
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: content.telegramUrl,
+      href: content?.telegramUrl || '',
       label: 'Telegram',
-      subLabel: content.telegramSubLabel,
+      subLabel: content?.telegramSubLabel || '',
     },
 
     {
       icon: <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: content.twitterUrl,
+      href: content?.twitterUrl || '',
       label: 'Twitter',
-      subLabel: content.twitterSubLabel,
+      subLabel: content?.twitterSubLabel || '',
     },
 
     {
       icon: <DiscordIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
-      href: content.discordUrl,
+      href: content?.discordUrl || '',
       label: 'Discord',
-      subLabel: content.discordSubLabel,
+      subLabel: content?.discordSubLabel || '',
       small: true,
     },
   ];
   return (
     <ConnectSection
       itemClassName={styles.item}
-      header={content.header}
-      background={data.background}
+      header={content?.header || ''}
+      background={background as any}
       icons={icons}
       titleClassName={styles.title}
     />

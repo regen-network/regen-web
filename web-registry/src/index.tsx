@@ -2,11 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import { IntercomProvider } from 'react-use-intercom';
 
 import { Auth0Provider } from '@auth0/auth0-react';
@@ -48,8 +46,6 @@ ReactDOM.render(
           <WalletProvider>
             <LedgerProvider>
               <ThemeProvider injectFonts>
-                {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-                <CssBaseline />
                 <App />
               </ThemeProvider>
             </LedgerProvider>

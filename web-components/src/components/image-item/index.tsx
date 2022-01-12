@@ -19,8 +19,8 @@ export interface ImageItemProps {
     image?: string;
   };
   titleVariant?: Variant;
-  buttonText?: Variant;
-  buttonHref?: Variant;
+  buttonText?: string;
+  buttonHref?: string;
   buttonTarget?: string;
 }
 

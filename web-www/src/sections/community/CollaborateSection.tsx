@@ -7,6 +7,9 @@ import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
+import { CommunityCollaborateSectionQuery, CommunityConnectSectionQuery } from '../../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -41,36 +44,53 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CollaborateSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      text: communityYaml {
-        collaborateSection {
-          header
-          body
-          cards {
+const query = graphql`
+  query communityCollaborateSection {
+    sanityCommunityPage {
+      collaborateSection {
+        titleBody {
+          title
+          _rawBody
+        }
+        cards {
+          image {
             image {
-              extension
-              publicURL
+              asset {
+                url
+              }
             }
-            title
-            description
-            buttonText
-            link
           }
+          title
+          description
+          buttonText
+          buttonHref
         }
       }
     }
-  `);
-  const content = data.text.collaborateSection;
-  const classes = useStyles();
+  }
+`;
+
+const CollaborateSection = (): JSX.Element => {
+  const styles = useStyles();
+  const { sanityCommunityPage } = useStaticQuery<CommunityCollaborateSectionQuery>(query);
+  const data = sanityCommunityPage?.collaborateSection;
+  const resourceCards = data?.cards?.map(card => {
+    return {
+      description: card?.description,
+      image: { publicURL: card?.image?.image?.asset?.url },
+      link: card?.buttonHref,
+      title: card?.title,
+    } as ResourcesCardProps;
+  });
   return (
-    <Section className={classes.section}>
-      <Title className={classes.title} variant="h3" align="center">
-        {content.header}
+    <Section className={styles.section}>
+      <Title className={styles.title} variant="h3" align="center">
+        {data?.titleBody?.title}
       </Title>
-      <Description className={classes.body}>{ReactHtmlParser(content.body)}</Description>
-      <ResourceCardsSlider target="_self" items={content.cards} />
+      <Description className={styles.body}>
+        <BlockContent content={data?.titleBody?._rawBody} />
+      </Description>
+      <ResourceCardsSlider target="_self" items={resourceCards || []} />
     </Section>
   );
 };

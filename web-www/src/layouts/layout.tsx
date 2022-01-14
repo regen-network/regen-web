@@ -6,20 +6,22 @@
  */
 
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 
 import { MarketingNav } from '../components/MarketingNav';
 
-import './layout.css';
 interface Props {
   location: Location;
 }
 
-interface BoolProps {
-  [key: string]: boolean;
-}
+const useStyles = makeStyles(theme => ({
+  root: {
+    background: theme.palette.primary.main,
+  },
+}));
 
 const Layout: React.FC<Props> = ({ children, location }) => {
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
@@ -109,11 +111,12 @@ const Layout: React.FC<Props> = ({ children, location }) => {
       ],
     },
   ];
+  const styles = useStyles();
   return (
     <>
       <MarketingNav location={location} />
       <div>
-        <main>{children}</main>
+        <main className={styles.root}>{children}</main>
       </div>
       <CookiesFooter privacyUrl="/privacy-policy/" />
       <footer>

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import Table, { Data } from 'web-components/lib/components/table';
+import { DocumentationTable, DocumentRowData } from 'web-components/lib/components/table/DocumentationTable';
 
 export default {
   title: 'Components|Table',
-  component: Table,
+  component: DocumentationTable,
 };
 
-const data: Data[] = [
+const data: DocumentRowData[] = [
   {
     name: 'Monitoring',
     type: 'Monitoring',
@@ -27,4 +27,4 @@ const data: Data[] = [
   },
 ];
 
-export const mrvTable = (): JSX.Element => <Table rows={data} />;
+export const documentationTable = (): JSX.Element => <DocumentationTable rows={data} />;

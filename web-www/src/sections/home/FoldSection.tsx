@@ -6,9 +6,7 @@ import BackgroundImage from 'gatsby-background-image';
 import Typography from '@material-ui/core/Typography';
 import Title from 'web-components/lib/components/title';
 
-interface Props {
-  className?: string;
-}
+import { HomeFoldSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -87,40 +85,42 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const HomeFoldSection = ({ className }: Props): JSX.Element => {
-  const styles = useStyles({});
-  const data = useStaticQuery(graphql`
-    query {
-      desktop: file(relativePath: { eq: "image43.jpg" }) {
-        childImageSharp {
-          fluid(quality: 90, maxWidth: 1920) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: homeYaml {
-        foldSection {
-          tagline
-          description
+const query = graphql`
+  query homeFoldSection {
+    desktop: file(relativePath: { eq: "image43.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 1920) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
-  const imageData = data.desktop.childImageSharp.fluid;
-  const content = data.text.foldSection;
+    sanityHomePageWeb {
+      homeFoldSection {
+        title
+        body
+      }
+    }
+  }
+`;
+
+const HomeFoldSection: React.FC<{ className?: string }> = ({ className }) => {
+  const styles = useStyles();
+  const data = useStaticQuery<HomeFoldSectionQuery>(query);
+  const content = data.sanityHomePageWeb?.homeFoldSection;
+
   return (
     <BackgroundImage
       Tag="section"
       className={clsx(styles.root, className)}
-      fluid={imageData}
+      fluid={data?.desktop?.childImageSharp?.fluid as any}
       backgroundColor={`#040e18`}
     >
       <div className={styles.backgroundGradient}></div>
       <Title align="center" color="primary" variant="h1" className={styles.title}>
-        {content.tagline}
+        {content?.title}
       </Title>
       <div className={styles.tag}>
-        <Typography variant="body1">{content.description}</Typography>
+        <Typography variant="body1">{content?.body}</Typography>
       </div>
     </BackgroundImage>
   );

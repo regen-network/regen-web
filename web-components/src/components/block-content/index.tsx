@@ -1,8 +1,12 @@
 import React from 'react';
+import cx from 'clsx';
 import BlockContent from '@sanity/block-content-to-react';
 import { makeStyles } from '@material-ui/core';
 
 import { UnderlineTooltip } from '../tooltip/UnderlineTooltip';
+
+export type SanityBlockContent = any[] | any; // copied from Sanity's types
+export type SanityBlockOr<T> = T | SanityBlockContent;
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -15,14 +19,35 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CustomBlockContent: React.FC<{ content?: any; tooltipText?: string }> = ({ content, tooltipText }) => {
+const CustomBlockContent: React.FC<{
+  className?: string;
+  content: SanityBlockContent;
+  tooltipText?: string;
+  noYMargin?: boolean;
+  onClickModalLink?: (href: string) => any;
+}> = ({ onClickModalLink, content, tooltipText, className, noYMargin = false }) => {
   const styles = useStyles();
 
   const serializers = {
     marks: {
       link: (props: any) => {
         const { mark, children } = props;
-        const { blank, href } = mark;
+        const { blank, href, modal } = mark;
+        // the CMS has a field for opening links from portable text in a modal,
+        // but the behavior requires a callback to handle
+        if (modal && onClickModalLink) {
+          return (
+            <a
+              href="#"
+              onClick={e => {
+                e.preventDefault();
+                onClickModalLink(href);
+              }}
+            >
+              {children}
+            </a>
+          );
+        }
         return blank ? (
           <a href={href} target="_blank" rel="noreferrer noopener">
             {children}
@@ -37,8 +62,8 @@ const CustomBlockContent: React.FC<{ content?: any; tooltipText?: string }> = ({
 
   if (content) {
     return (
-      <div className={styles.root}>
-        <BlockContent blocks={content} serializers={serializers} />
+      <div className={cx({ [styles.root]: !!noYMargin })}>
+        <BlockContent className={className} blocks={content} serializers={serializers} />
       </div>
     );
   }

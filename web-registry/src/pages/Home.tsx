@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import { HeroTitle, HeroAction } from '../components/molecules';
-import { ProjectCards, CreditClassCards } from '../components/organisms';
+import { ProjectCards, CreditClassCards, CreditBatches } from '../components/organisms';
 import { creditClasses } from '../mocks';
 
 import cowsImg from '../assets/cows-by-barn.png';
@@ -17,7 +17,10 @@ import { useMoreProjectsQuery } from '../generated/graphql';
 import { useAllHomePageQuery, useAllCreditClassQuery } from '../generated/sanity-graphql';
 import { client } from '../sanity';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.primary.main,
+  },
   topSectionDescription: {
     maxWidth: theme.spacing(165),
   },
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   projectCards: {
     [theme.breakpoints.down('sm')]: {
       width: '100vw',
-      marginLeft: theme.spacing(-8), // MUI Grid spacing in our `section` component with padding prevents scrolling all the way over. This presents d
+      marginLeft: theme.spacing(-8),
     },
     [theme.breakpoints.down('xs')]: {
       marginLeft: theme.spacing(-4),
@@ -73,7 +76,7 @@ const Home: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <>
+    <div className={styles.root}>
       <HeroTitle
         isBanner
         img={cowsImg}
@@ -83,15 +86,14 @@ const Home: React.FC = () => {
       />
 
       {projectsData?.allProjects?.nodes && (
-        <CardMedia image={topographyImg}>
-          <Section title="Projects" classes={{ root: styles.section, title: styles.title }}>
-            <ProjectCards
-              projects={projectsData?.allProjects?.nodes}
-              classes={{ root: styles.projectCards }}
-            />
-          </Section>
-        </CardMedia>
+        <Section title="Projects" titleAlign="left" classes={{ root: styles.section, title: styles.title }}>
+          <ProjectCards projects={projectsData?.allProjects?.nodes} classes={{ root: styles.projectCards }} />
+        </Section>
       )}
+
+      <CardMedia image={topographyImg}>
+        <CreditBatches />
+      </CardMedia>
 
       <Section
         title="Credit Classes"
@@ -120,7 +122,7 @@ const Home: React.FC = () => {
       <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
-    </>
+    </div>
   );
 };
 

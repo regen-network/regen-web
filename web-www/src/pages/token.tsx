@@ -12,6 +12,8 @@ import ConnectSection from '../sections/token/ConnectSection';
 import MediaSection from '../sections/token/MediaSection';
 import TokenDetails from '../sections/token/TokenDetails';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
+import { TokenPageQuery } from '../generated/graphql';
+import { FluidObject } from 'gatsby-image';
 
 const useStyles = makeStyles((theme: Theme) => ({
   newsletterTitle: {
@@ -21,42 +23,45 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const TokenPage = ({ location }: PageProps): JSX.Element => {
-  const styles = useStyles();
-  const data = useStaticQuery(graphql`
-    query {
-      seoImage: file(relativePath: { eq: "token-aurora.png" }) {
-        publicURL
-      }
-      emailImage: file(relativePath: { eq: "deer-newsletter-bg.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      text: tokenYaml {
-        seo {
-          title
-          description
-        }
-        newsletterSection {
-          header
-          buttonText
-          inputText
+const query = graphql`
+  query tokenPage {
+    seoImage: file(relativePath: { eq: "token-aurora.png" }) {
+      publicURL
+    }
+    emailImage: file(relativePath: { eq: "deer-newsletter-bg.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid
         }
       }
     }
-  `);
-  const newsletterContent = data?.text?.newsletterSection;
+    sanityTokenPage {
+      topSection {
+        title
+        body
+      }
+      newsletterSection {
+        header
+        buttonText
+        inputText
+      }
+    }
+  }
+`;
+
+const TokenPage = ({ location }: PageProps): JSX.Element => {
+  const styles = useStyles();
+  const { emailImage, seoImage, sanityTokenPage } = useStaticQuery<TokenPageQuery>(query);
+  const data = sanityTokenPage?.topSection;
+  const newsletterContent = sanityTokenPage?.newsletterSection;
 
   return (
     <>
       <SEO
-        description={data?.text?.seo?.description}
-        title={data?.text?.seo?.title}
+        description={data?.body || ''}
+        title={data?.title || ''}
         location={location}
-        imageUrl={data?.seoImage?.publicURL}
+        imageUrl={seoImage?.publicURL || ''}
       />
       <TopSection />
       <TokenEconomics />
@@ -68,11 +73,11 @@ const TokenPage = ({ location }: PageProps): JSX.Element => {
       <MediaSection />
       <EmailSubmitSection
         classes={{ title: styles.newsletterTitle }}
-        image={data?.emailImage?.childImageSharp?.fluid}
+        image={emailImage?.childImageSharp?.fluid as FluidObject}
         altContent={{
-          header: newsletterContent?.header,
-          buttonText: newsletterContent?.buttonText,
-          inputText: newsletterContent?.inputText,
+          header: newsletterContent?.header || '',
+          buttonText: newsletterContent?.buttonText || '',
+          inputText: newsletterContent?.inputText || '',
         }}
       />
     </>

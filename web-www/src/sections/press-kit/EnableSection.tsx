@@ -1,12 +1,14 @@
 import React from 'react';
 import { makeStyles, Theme } from '@material-ui/core';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import Grid from '@material-ui/core/Grid';
-import Img from 'gatsby-image';
+import Img, { FluidObject } from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
+import { PresskitEnableSectionQuery } from '../../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -85,57 +87,48 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const EnableSection = (): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <StaticQuery
-      query={graphql`
-        query {
-          background: file(relativePath: { eq: "image-topo-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: pressKitYaml {
-            enableSection {
-              header
-              description
-              image {
-                childImageSharp {
-                  fluid(quality: 90) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
-                }
-              }
-            }
-          }
+const query = graphql`
+  query presskitEnableSection {
+    background: file(relativePath: { eq: "image-topo-bg.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
-      `}
-      render={data => {
-        const content = data.content.enableSection;
-        return (
-          <div className={classes.root}>
-            <Grid container alignItems="center">
-              <Grid xs={12} item className={classes.imageContainer}>
-                <Img className={classes.image} fluid={content.image.childImageSharp.fluid} />
-                <div className={classes.imageBackground}>
-                  <Img fluid={data.background.childImageSharp.fluid} />
-                </div>
-              </Grid>
-              <Grid xs={12} item className={classes.text}>
-                <Title variant="h2">{content.header}</Title>
-                <Description className={classes.description}>
-                  {ReactHtmlParser(content.description)}
-                </Description>
-              </Grid>
-            </Grid>
+      }
+    }
+    sanityPresskitPage {
+      enableSection {
+        title
+        _rawBody
+        image {
+          ...fluidCustomImageFields_withWebp
+        }
+      }
+    }
+  }
+`;
+
+const EnableSection = (): JSX.Element => {
+  const styles = useStyles();
+  const { background, sanityPresskitPage: data } = useStaticQuery<PresskitEnableSectionQuery>(query);
+  const content = data?.enableSection;
+  return (
+    <div className={styles.root}>
+      <Grid container alignItems="center">
+        <Grid xs={12} item className={styles.imageContainer}>
+          <Img className={styles.image} fluid={content?.image?.image?.asset?.fluid as FluidObject} />
+          <div className={styles.imageBackground}>
+            <Img fluid={background?.childImageSharp?.fluid as FluidObject} />
           </div>
-        );
-      }}
-    />
+        </Grid>
+        <Grid xs={12} item className={styles.text}>
+          <Title variant="h2">{content?.title}</Title>
+          <Description className={styles.description}>
+            <BlockContent content={content?._rawBody} />
+          </Description>
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 

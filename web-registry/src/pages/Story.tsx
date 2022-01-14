@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-import { OnboardingFormTemplate } from '../components/templates';
+import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
 import { StoryForm, StoryValues } from '../components/organisms';
 import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
 import { useProjectEditContext } from '../pages/ProjectEdit';
@@ -55,7 +55,9 @@ const Story: React.FC = () => {
   }
 
   return isEdit ? (
-    <StoryForm submit={submit} initialValues={initialFieldValues} />
+    <EditFormTemplate>
+      <StoryForm submit={submit} initialValues={initialFieldValues} />
+    </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate activeStep={0} title="Story" saveAndExit={saveAndExit}>
       <StoryForm submit={submit} initialValues={initialFieldValues} />

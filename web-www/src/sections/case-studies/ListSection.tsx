@@ -1,9 +1,10 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import Section from 'web-components/lib/components/section';
+import { CaseStudiesListSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -24,69 +25,62 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-// items {
-//   name
-//   description
-//   slug
-//   cardImage {
-//     publicURL
-//   }
-// }
-
-const ListSection = (): JSX.Element => {
-  const classes = useStyles();
-  return (
-    <StaticQuery
-      query={graphql`
-        query {
-          text: caseStudiesYaml {
-            caseStudies {
-              header
-              view
-            }
-          }
-          list: allCaseStudyItemsYaml {
-            nodes {
-              name
-              description
-              slug
-              cardImage {
-                publicURL
-              }
+const query = graphql`
+  query caseStudiesListSection {
+    sanityCaseStudiesPage {
+      listSection {
+        header
+        view
+      }
+      topSection {
+        title
+        body
+      }
+      caseStudies {
+        name
+        description
+        slug {
+          current
+        }
+        cardImage {
+          image {
+            asset {
+              url
             }
           }
         }
-      `}
-      render={data => {
-        const text = data.text.caseStudies;
-        const nodes = data.list.nodes;
-        return (
-          <Section
-            classes={{ root: classes.section, title: classes.title }}
-            title={text.header}
-            titleAlign="left"
-            titleVariant="h3"
-          >
-            <Grid container spacing={5}>
-              {nodes.map((item, i) => (
-                <Grid item xs={12} sm={6} md={4}>
-                  <ResourcesCard
-                    target="_self"
-                    title={item.name}
-                    description={item.description}
-                    image={item.cardImage}
-                    buttonText={text.view}
-                    link={`/case-studies/${item.slug}`}
-                    backgroundGradient={false}
-                    titleOverwrite={false}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Section>
-        );
-      }}
-    />
+      }
+    }
+  }
+`;
+
+const ListSection: React.FC = () => {
+  const styles = useStyles();
+  const { sanityCaseStudiesPage: data } = useStaticQuery<CaseStudiesListSectionQuery>(query);
+  return (
+    <Section
+      classes={{ root: styles.section, title: styles.title }}
+      title={data?.listSection?.header || ''}
+      titleAlign="left"
+      titleVariant="h3"
+    >
+      <Grid container spacing={5}>
+        {data?.caseStudies?.map((item, i) => (
+          <Grid item xs={12} sm={6} md={4}>
+            <ResourcesCard
+              target="_self"
+              title={item?.name || ''}
+              description={item?.description || ''}
+              image={{ publicURL: item?.cardImage?.image?.asset?.url || '' }}
+              buttonText={data?.listSection?.view || ''}
+              link={`/case-studies/${item?.slug?.current}`}
+              backgroundGradient={false}
+              titleOverwrite={false}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </Section>
   );
 };
 

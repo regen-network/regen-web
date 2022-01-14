@@ -1,7 +1,14 @@
-/**
- * Implement Gatsby's SSR (Server Side Rendering) APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/ssr-apis/
- */
+import React from 'react';
+import { IntercomProvider } from 'react-use-intercom';
+import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
-// You can delete this file if you're not using it
+const intercomAppId = process.env.GATSBY_INTERCOM_APP_ID || '';
+
+// // Wraps every page in a component
+export const wrapPageElement = ({ element }) => {
+  return (
+    <IntercomProvider appId={intercomAppId} autoBoot>
+      {element}
+    </IntercomProvider>
+  );
+};

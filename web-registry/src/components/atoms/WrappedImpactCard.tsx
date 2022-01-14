@@ -15,7 +15,7 @@ const WrappedImpactCard: React.FC<{
     <ImpactCard
       name={outcome?.title || ''}
       imgSrc={getSanityImgSrc(outcome?.image)}
-      description={<BlockContent content={outcome?.descriptionRaw} />}
+      description={<BlockContent noYMargin content={outcome?.descriptionRaw} />}
       largeFontSize
     />
   );

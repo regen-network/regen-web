@@ -7,6 +7,8 @@ import ReactHtmlParser from 'react-html-parser';
 import Section from 'web-components/src/components/section';
 import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
 import { MarketingDescription as Description } from '../../components/Description';
+import { TokenStakingQuery } from '../../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   content: {
@@ -32,41 +34,39 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
 }));
 
-type QueryData = {
-  text: {
-    staking: {
-      title: string;
-      body: string;
-      buttonText: string;
-      buttonUrl: string;
-    };
-  };
-};
-
-const Staking = (): JSX.Element => {
-  const styles = useStyles();
-
-  const {
-    text: {
-      staking: { title, body, buttonText, buttonUrl },
-    },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      text: tokenYaml {
-        staking {
-          title
-          body
+const query = graphql`
+  query tokenStaking {
+    sanityTokenPage {
+      stakingSection {
+        title
+        _rawBody
+        button {
           buttonText
-          buttonUrl
+          buttonLink {
+            buttonHref
+          }
         }
       }
     }
-  `);
+  }
+`;
+
+const Staking = (): JSX.Element => {
+  const styles = useStyles();
+  const { sanityTokenPage } = useStaticQuery<TokenStakingQuery>(query);
+  const data = sanityTokenPage?.stakingSection;
 
   return (
-    <Section title={title} classes={{ root: clsx(styles.root, styles.center), title: styles.title }}>
-      <Description className={clsx(styles.content, styles.center)}>{ReactHtmlParser(body)}</Description>
-      <ContainedButton href={buttonUrl}>{buttonText}</ContainedButton>
+    <Section
+      title={data?.title || ''}
+      classes={{ root: clsx(styles.root, styles.center), title: styles.title }}
+    >
+      <Description className={clsx(styles.content, styles.center)}>
+        <BlockContent content={data?._rawBody} />
+      </Description>
+      <ContainedButton href={data?.button?.buttonLink?.buttonHref || ''}>
+        {data?.button?.buttonText}
+      </ContainedButton>
     </Section>
   );
 };

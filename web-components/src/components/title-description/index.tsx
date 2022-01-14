@@ -5,10 +5,11 @@ import clsx from 'clsx';
 
 import Title from '../title';
 import Description from '../description';
+import { BlockContent, SanityBlockOr } from '../block-content';
 
 interface TitleDescriptionProps {
   title: string;
-  description: string;
+  description?: SanityBlockOr<string>; // accepts an HTML string or an array of sanity BlockContent
   className?: string;
   children?: React.ReactNode;
 }
@@ -47,7 +48,14 @@ export default function TitleDescription({
       <Title align="center" variant="h2">
         {title}
       </Title>
-      <Description className={classes.description}>{ReactHtmlParser(description)}</Description>
+      <Description className={classes.description}>
+        {/* gets passed a string for HTML, array of blocks for sanity */}
+        {typeof description === 'string' ? (
+          ReactHtmlParser(description)
+        ) : (
+          <BlockContent content={description} />
+        )}
+      </Description>
       {children && <div>{children}</div>}
     </div>
   );

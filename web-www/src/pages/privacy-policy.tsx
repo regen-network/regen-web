@@ -1,14 +1,10 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
 import SEO from '../components/seo';
 import MarkdownSection from '../components/MarkdownSection';
 
-interface Props {
-  location: Location;
-}
-
-const PrivacyPolicy = ({ location }: Props): JSX.Element => {
+const PrivacyPolicy: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`
     query {
       markdownRemark(fileAbsolutePath: { regex: "/^.*/privacy-policy.md$/" }) {
@@ -23,7 +19,7 @@ const PrivacyPolicy = ({ location }: Props): JSX.Element => {
         location={location}
         description="Regen Network aligns economics with ecology to drive regenerative land management."
       />
-      <MarkdownSection title="Privacy Policy" mdContent={data.markdownRemark.html} />
+      <MarkdownSection title="Privacy Policy" mdContent={data?.markdownRemark?.html || ''} />
     </>
   );
 };

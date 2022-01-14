@@ -1,5 +1,4 @@
 import React from 'react';
-import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 import Layout from './layout';
 
 interface propTypes {
@@ -10,9 +9,7 @@ interface propTypes {
 const ThemeWrap = ({ children, location }: propTypes): JSX.Element => {
   return (
     <>
-      <ThemeProvider injectFonts>
-        <Layout location={location}>{children}</Layout>
-      </ThemeProvider>
+      <Layout location={location}>{children}</Layout>
     </>
   );
 };

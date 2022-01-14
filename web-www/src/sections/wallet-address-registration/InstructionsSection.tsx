@@ -1,10 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { Theme, makeStyles } from '@material-ui/core';
-import ReactHtmlParser from 'react-html-parser';
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
+import { WalletAddrRegInstructionsSectionQuery } from '../../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -36,25 +37,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const InstructionsSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      text: walletAddressRegistrationYaml {
-        instructionsSection {
-          header
-          body
-        }
+const query = graphql`
+  query walletAddrRegInstructionsSection {
+    sanityWalletAddressRegistrationPage {
+      instructionSection {
+        title
+        _rawBody
       }
     }
-  `);
-  const content = data?.text?.instructionsSection;
-  const classes = useStyles();
+  }
+`;
+
+const InstructionsSection = (): JSX.Element => {
+  const { sanityWalletAddressRegistrationPage } = useStaticQuery<WalletAddrRegInstructionsSectionQuery>(
+    query,
+  );
+  const data = sanityWalletAddressRegistrationPage?.instructionSection;
+  const styles = useStyles();
   return (
-    <Section className={classes.section}>
-      <Title className={classes.title} variant="h3" align="center">
-        {content?.header}
+    <Section className={styles.section}>
+      <Title className={styles.title} variant="h3" align="center">
+        {data?.title}
       </Title>
-      <Description className={classes.body}>{ReactHtmlParser(content?.body)}</Description>
+      <Description className={styles.body}>{<BlockContent content={data?._rawBody} />}</Description>
     </Section>
   );
 };

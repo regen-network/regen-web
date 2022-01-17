@@ -25,28 +25,28 @@ const PressKitPage: React.FC<PageProps> = ({ location }) => {
         }
       }
     }
-  }
-}
-`);
-  return <>
-    <SEO
-      title="Press Kit"
-      location={location}
-      description="Regen Network aligns economics with ecology to drive regenerative land management."
-    />
-    <TopSection />
-    <TitleDescriptionSection />
-    <EnableSection />
-    <TimelineSection />
-    <TeamSection />
-    <BackgroundImage fluid={data.background.childImageSharp.fluid}>
-      <FeaturedSection />
-      <AwardsSection />
-      <LogosSection />
-    </BackgroundImage>
-    <ConnectSection />
-    <PhotosSection />
-  </>;
+  `);
+  return (
+    <>
+      <SEO
+        title="Press Kit"
+        location={location}
+        description="Regen Network aligns economics with ecology to drive regenerative land management."
+      />
+      <TopSection />
+      <TitleDescriptionSection />
+      <EnableSection />
+      <TimelineSection />
+      <TeamSection />
+      <BackgroundImage fluid={data.background.childImageSharp.fluid}>
+        <FeaturedSection />
+        <AwardsSection />
+        <LogosSection />
+      </BackgroundImage>
+      <ConnectSection />
+      <PhotosSection />
+    </>
+  );
 };
 
 export default PressKitPage;

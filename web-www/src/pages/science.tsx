@@ -24,9 +24,7 @@ const SciencePage: React.FC<PageProps> = ({ location }) => {
         }
       }
     }
-  }
-}
-`);
+  `);
   return (
     <>
       <SEO

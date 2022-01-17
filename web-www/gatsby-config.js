@@ -13,15 +13,8 @@ module.exports = {
     'gatsby-plugin-layout',
     // 'gatsby-plugin-top-layout',
     'gatsby-plugin-regen-theme',
+    // 'gatsby-plugin-material-ui',
     'gatsby-plugin-mui-jss',
-    // {
-    //   resolve: `gatsby-plugin-material-ui`,
-    //   options: {
-    //     stylesProvider: {
-    //       injectFirst: true,
-    //     },
-    //   },
-    // },
     {
       resolve: `gatsby-source-sanity`,
       options: {

@@ -139,7 +139,6 @@ export const query = graphql`
       }
     }
   }
-}
 `;
 
 export default CaseStudy;

@@ -27,7 +27,7 @@ import { setPageView } from '../../lib/ga';
 import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
 import { useLedger, ContextType } from '../../ledger';
-import { chainId, useWallet } from '../../wallet';
+import { chainId, useWallet } from '../../lib/wallet';
 import {
   Documentation,
   ProjectTopSection,

@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `Regen Network`,
@@ -7,7 +11,35 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-layout',
-    'gatsby-plugin-top-layout',
+    // 'gatsby-plugin-top-layout',
+    'gatsby-plugin-regen-theme',
+    'gatsby-plugin-mui-jss',
+    // {
+    //   resolve: `gatsby-plugin-material-ui`,
+    //   options: {
+    //     stylesProvider: {
+    //       injectFirst: true,
+    //     },
+    //   },
+    // },
+    {
+      resolve: `gatsby-source-sanity`,
+      options: {
+        projectId: process.env.GATSBY_SANITY_PROJECT_ID,
+        dataset: process.env.GATSBY_SANITY_DATASET,
+        token: process.env.GATSBY_SANITY_TOKEN,
+        graphqlTag: 'default',
+        watchMode: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-sanity-image',
+      options: {
+        projectId: process.env.GATSBY_SANITY_PROJECT_ID,
+        dataset: process.env.GATSBY_SANITY_DATASET,
+        watchMode: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-netlify`,
       options: {
@@ -34,16 +66,7 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-advanced-sitemap`,
-      options: {
-        additionalSitemaps: [
-          {
-            name: `registry`,
-            url: `/registry/sitemap.xml`,
-          },
-        ],
-      },
     },
-    'gatsby-plugin-mui-jss',
     `gatsby-background-image`,
     `gatsby-plugin-react-helmet`,
     {
@@ -93,16 +116,6 @@ module.exports = {
         icon: `static/media/regen-favicon.svg`, // This path is relative to the root of the site.
       },
     },
-    {
-      resolve: `gatsby-transformer-yaml-plus`,
-      options: {
-        enableRemark: true,
-        markdownPreface: 'md//',
-        name: `content`,
-        path: `${__dirname}/content/`,
-      },
-    },
-    `gatsby-plugin-netlify-cms`,
     {
       resolve: 'gatsby-plugin-react-svg',
       options: {

@@ -1,48 +1,46 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import BackgroundSection from '../../components/BackgroundSection';
+import { TeamTopSectionQuery } from '../../generated/graphql';
+
+const query = graphql`
+  query teamTopSection {
+    background: file(relativePath: { eq: "gulls.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    backgroundMobile: file(relativePath: { eq: "gulls.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    sanityTeamPage {
+      topSection {
+        title
+        body
+      }
+    }
+  }
+`;
 
 const TopSection = (): JSX.Element => {
   const gradient =
     'linear-gradient(209.83deg, rgba(250, 235, 209, 0.9) 11.05%, rgba(125, 201, 191, 0.9) 43.17%, rgba(81, 93, 137, 0.9) 75.29%)';
-
+  const { background, backgroundMobile, sanityTeamPage } = useStaticQuery<TeamTopSectionQuery>(query);
+  const data = sanityTeamPage?.topSection;
   return (
-    <StaticQuery
-      query={graphql`{
-  background: file(relativePath: {eq: "gulls.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  backgroundMobile: file(relativePath: {eq: "gulls.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  text: teamYaml {
-    topSection {
-      header
-      body
-    }
-  }
-}
-`}
-      render={data => {
-        return <>
-          <BackgroundSection
-            linearGradient={gradient}
-            header={data.text.topSection.header}
-            body={data.text.topSection.body}
-            imageData={data.background.childImageSharp.fluid}
-            imageDataMobile={data.backgroundMobile.childImageSharp.fluid}
-          />
-        </>;
-      }}
+    <BackgroundSection
+      linearGradient={gradient}
+      header={data?.title}
+      body={data?.body}
+      imageData={background?.childImageSharp?.fluid}
+      imageDataMobile={backgroundMobile?.childImageSharp?.fluid}
     />
   );
 };

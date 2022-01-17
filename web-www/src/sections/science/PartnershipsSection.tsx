@@ -1,14 +1,15 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Img from 'gatsby-image';
-import ReactHtmlParser from 'react-html-parser';
+import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import Section from 'web-components/lib/components/section';
+import { SciencePartnershipsSectionQuery } from '../../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -62,66 +63,55 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const PartnershipsSection = (): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <StaticQuery
-      query={graphql`
-        {
-          background: file(relativePath: { eq: "science-partnerships-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: scienceYaml {
-            partnershipsSection {
-              header
-              partners {
-                image {
-                  childImageSharp {
-                    fluid(quality: 90) {
-                      ...GatsbyImageSharpFluid_withWebp
-                    }
-                  }
-                }
-                description
-              }
-            }
-          }
+const query = graphql`
+  query sciencePartnershipsSection {
+    background: file(relativePath: { eq: "science-partnerships-bg.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
-      `}
-      render={data => {
-        const content = data.content.partnershipsSection;
-        return (
-          <div className={classes.root}>
-            <Section className={classes.section}>
-              <Title align="center" className={classes.title} variant="h1">
-                {content.header}
-              </Title>
-              <Grid container className={classes.grid}>
-                {content.partners.map((p, i) => (
-                  <Grid
-                    item
-                    key={i}
-                    xs={12}
-                    sm={6}
-                    className={i % 2 === 0 ? classes.itemLeft : classes.itemRight}
-                  >
-                    <Img fluid={p.image.childImageSharp.fluid} className={classes.image} />
-                    <Description className={classes.description}>
-                      {ReactHtmlParser(p.description)}
-                    </Description>
-                  </Grid>
-                ))}
-              </Grid>
-            </Section>
-          </div>
-        );
-      }}
-    />
+      }
+    }
+    sanitySciencePage {
+      partnershipSection {
+        header
+        partners {
+          image {
+            ...fluidCustomImageFields_withWebp
+          }
+          _rawBody
+        }
+      }
+    }
+  }
+`;
+
+const PartnershipsSection = (): JSX.Element => {
+  const styles = useStyles();
+  const data = useStaticQuery<SciencePartnershipsSectionQuery>(query);
+  const content = data.sanitySciencePage?.partnershipSection;
+  return (
+    <div className={styles.root}>
+      <Section className={styles.section}>
+        <Title align="center" className={styles.title} variant="h1">
+          {content?.header}
+        </Title>
+        <Grid container className={styles.grid}>
+          {content?.partners?.map((p, i) => (
+            <Grid item key={i} xs={12} sm={6} className={i % 2 === 0 ? styles.itemLeft : styles.itemRight}>
+              <Img
+                className={styles.image}
+                alt={p?.image?.imageAlt || ''}
+                fluid={p?.image?.image?.asset?.fluid as FluidObject}
+              />
+              <Description className={styles.description}>
+                <BlockContent content={p?._rawBody} />
+              </Description>
+            </Grid>
+          ))}
+        </Grid>
+      </Section>
+    </div>
   );
 };
 

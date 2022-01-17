@@ -6,6 +6,8 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import Section from 'web-components/lib/components/section';
+import { ResourcesLedgerSectionQuery, SanityResource } from '../../generated/graphql';
+import { sanityResourcesToCardProps } from '../../util/sanity-transforms';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -27,35 +29,49 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const LedgerSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      text: resourcesYaml {
-        ledgerSection {
-          header
-          cards {
-            image {
-              extension
-              publicURL
-            }
-            title
-            updated
-            description
+const query = graphql`
+  query resourcesLedgerSection {
+    sanityResourcesPage {
+      ledgerSection {
+        header
+        cards {
+          _rawTitle
+          _rawDescription
+          lastUpdated
+          button {
             buttonText
-            link
+            buttonLink {
+              buttonHref
+              buttonDoc {
+                href
+              }
+            }
+          }
+          image {
+            imageHref
+            image {
+              asset {
+                extension
+                url
+              }
+            }
           }
         }
       }
     }
-  `);
-  const content = data.text.ledgerSection;
-  const classes = useStyles();
+  }
+`;
+
+const LedgerSection = (): JSX.Element => {
+  const { sanityResourcesPage } = useStaticQuery<ResourcesLedgerSectionQuery>(query);
+  const content = sanityResourcesPage?.ledgerSection;
+  const styles = useStyles();
   return (
-    <Section className={classes.section}>
-      <Title className={classes.title} variant="h3" align="left">
-        {content.header}
+    <Section className={styles.section}>
+      <Title className={styles.title} variant="h3" align="left">
+        {content?.header}
       </Title>
-      <ResourceCardsSlider items={content.cards} />
+      <ResourceCardsSlider items={sanityResourcesToCardProps(content?.cards as SanityResource[])} />
     </Section>
   );
 };

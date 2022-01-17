@@ -8,6 +8,7 @@ import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIco
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
 import RegenLogoIcon from 'web-components/lib/components/icons/RegenLogoIcon';
 import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
+import { ValidatorsConnectSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   item: {
@@ -18,24 +19,23 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ValidatorsConnectSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    {
-      background: file(relativePath: { eq: "validators-connect-bg.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: validatorsYaml {
-        connectSection {
-          header
+const query = graphql`
+  query validatorsConnectSection {
+    background: file(relativePath: { eq: "validators-connect-bg.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
-  const content = data.text.connectSection;
+    sanityValidatorsPage {
+      connectSectionHeader
+    }
+  }
+`;
+
+const ValidatorsConnectSection = (): JSX.Element => {
+  const { background, sanityValidatorsPage: data } = useStaticQuery<ValidatorsConnectSectionQuery>(query);
   const classes = useStyles();
   const theme = useTheme();
   const icons: IconLabelProps[] = [
@@ -72,8 +72,8 @@ const ValidatorsConnectSection = (): JSX.Element => {
   return (
     <ConnectSection
       itemClassName={classes.item}
-      header={content.header}
-      background={data.background}
+      header={data?.connectSectionHeader || ''}
+      background={background as any} // TODO fix this type
       icons={icons}
     />
   );

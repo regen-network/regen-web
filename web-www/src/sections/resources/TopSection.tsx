@@ -2,6 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 
 import BackgroundSection from '../../components/BackgroundSection';
+import { ResourcesTopSectionQuery } from '../../generated/graphql';
 
 const TopSection = (): JSX.Element => {
   const gradient =
@@ -13,39 +14,44 @@ const TopSection = (): JSX.Element => {
    */
   return (
     <StaticQuery
-      query={graphql`{
-  background: file(relativePath: {eq: "resources-top-image.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  backgroundMobile: file(relativePath: {eq: "resources-top-image-mobile.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-    }
-  }
-  text: resourcesYaml {
-    topSection {
-      header
-      body
-    }
-  }
-}
-`}
-      render={data => {
-        return <>
-          <BackgroundSection
-            linearGradient={gradient}
-            header={data.text.topSection.header}
-            body={data.text.topSection.body}
-            imageData={data.background.childImageSharp.fluid}
-            imageDataMobile={data.backgroundMobile.childImageSharp.fluid}
-          />
-        </>;
+      query={graphql`
+        query resourcesTopSection {
+          background: file(relativePath: { eq: "resources-top-image.jpg" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          backgroundMobile: file(relativePath: { eq: "resources-top-image-mobile.jpg" }) {
+            childImageSharp {
+              fluid(quality: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          sanityResourcesPage {
+            topSection {
+              title
+              body
+            }
+          }
+        }
+      `}
+      render={(data: ResourcesTopSectionQuery) => {
+        const { background, backgroundMobile, sanityResourcesPage } = data;
+        const content = sanityResourcesPage?.topSection;
+        return (
+          <>
+            <BackgroundSection
+              linearGradient={gradient}
+              header={content?.title}
+              body={content?.body}
+              imageData={background?.childImageSharp?.fluid}
+              imageDataMobile={backgroundMobile?.childImageSharp?.fluid}
+            />
+          </>
+        );
       }}
     />
   );

@@ -1,14 +1,19 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
+import Table, { Document } from 'web-components/lib/components/table';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
-import Table from 'web-components/lib/components/table';
+import { DocumentationTable } from 'web-components/lib/components/table/DocumentationTable';
 import BackgroundSection from '../../components/BackgroundSection';
+import { ResourcesRegistrySectionQuery, SanityDoc, SanityResource } from '../../generated/graphql';
+import { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { sanityDocsToDocuments, sanityResourcesToCardProps } from '../../util/sanity-transforms';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -43,77 +48,85 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const RegistrySection = (): JSX.Element => {
-  const classes = useStyles();
-  return (
-    <StaticQuery
-      query={graphql`
-        {
-          background: file(relativePath: { eq: "image-grid-bg.png" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
+const query = graphql`
+  query resourcesRegistrySection {
+    background: file(relativePath: { eq: "image-grid-bg.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    sanityResourcesPage {
+      registrySection {
+        header
+        documentTableTitle
+        documents {
+          name
+          type
+          date
+          href
+        }
+        subsections {
+          title
+          cards {
+            image {
+              imageHref
+              image {
+                asset {
+                  extension
+                  url
+                }
               }
             }
-          }
-          text: resourcesYaml {
-            registrySection {
-              header
-              documentTableTitle
-              documents {
-                name
-                type
-                date
-                url
-              }
-              subsections {
-                title
-                cards {
-                  image {
-                    extension
-                    publicURL
-                  }
-                  title
-                  updated
-                  description
-                  buttonText
-                  link
+            _rawTitle
+            lastUpdated
+            _rawDescription
+            button {
+              buttonText
+              buttonLink {
+                buttonDoc {
+                  href
                 }
               }
             }
           }
         }
-      `}
-      render={data => {
-        const content = data.text.registrySection;
-        return (
-          <BackgroundSection
-            className={classes.section}
-            linearGradient="unset"
-            imageData={data.background.childImageSharp.fluid}
-            topSection={false}
-          >
-            <Title className={classes.title} variant="h3" align="left">
-              {content.header}
-            </Title>
-            {content?.subsections?.map((sub: any, i: number) => (
-              <React.Fragment key={i}>
-                <Typography variant="h1" className={classes.subtitle}>
-                  {sub.title}
-                </Typography>
-                <ResourceCardsSlider items={sub.cards} />
-              </React.Fragment>
-            ))}
-            <Typography variant="h1" className={classes.subtitle}>
-              {content.documentTableTitle}
-            </Typography>
-            <Box className={classes.table}>
-              <Table canClickRow rows={content.documents} />
-            </Box>
-          </BackgroundSection>
-        );
-      }}
-    />
+      }
+    }
+  }
+`;
+
+const RegistrySection = (): JSX.Element => {
+  const styles = useStyles();
+  const data = useStaticQuery<ResourcesRegistrySectionQuery>(query);
+  const content = data?.sanityResourcesPage?.registrySection;
+
+  return (
+    <BackgroundSection
+      className={styles.section}
+      linearGradient="unset"
+      imageData={data?.background?.childImageSharp?.fluid}
+      topSection={false}
+    >
+      <Title className={styles.title} variant="h3" align="left">
+        {content?.header}
+      </Title>
+      {content?.subsections?.map((sub, i) => (
+        <React.Fragment key={i}>
+          <Typography variant="h1" className={styles.subtitle}>
+            {sub?.title}
+          </Typography>
+          <ResourceCardsSlider items={sanityResourcesToCardProps(sub?.cards as SanityResource[])} />
+        </React.Fragment>
+      ))}
+      <Typography variant="h1" className={styles.subtitle}>
+        {content?.documentTableTitle}
+      </Typography>
+      <Box className={styles.table}>
+        <DocumentationTable canClickRow rows={sanityDocsToDocuments(content?.documents as SanityDoc[])} />
+      </Box>
+    </BackgroundSection>
   );
 };
 

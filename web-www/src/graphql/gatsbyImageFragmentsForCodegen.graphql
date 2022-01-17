@@ -1,0 +1,78 @@
+# TODO these aren't actually used by the codebase, but are needed for the
+# codegen to work around a bug with gatsby-source-sanity
+
+fragment GatsbyImageSharpFluid_withWebp on ImageSharpFluid {
+  base64
+  aspectRatio
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+  sizes
+}
+
+fragment GatsbyImageSharpFluid on ImageSharpFluid {
+  base64
+  aspectRatio
+  src
+  srcSet
+  sizes
+}
+
+fragment GatsbyImageSharpFixed on ImageSharpFixed {
+  base64
+  width
+  height
+  src
+  srcSet
+}
+
+fragment GatsbyImageSharpFixed_withWebp on ImageSharpFixed {
+  base64
+  width
+  height
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+}
+
+fragment GatsbySanityImageFluid_withWebp on SanityImageFluid {
+  base64
+  aspectRatio
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+  sizes
+}
+
+fragment GatsbySanityImageFluid on SanityImageFluid {
+  base64
+  aspectRatio
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+  sizes
+}
+
+fragment GatsbySanityImageFixed_withWebp on SanityImageFixed {
+  base64
+  width
+  height
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+}
+
+fragment GatsbySanityImageFixed on SanityImageFixed {
+  base64
+  width
+  height
+  src
+  srcSet
+  srcWebp
+  srcSetWebp
+}

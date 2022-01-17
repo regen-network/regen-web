@@ -1,12 +1,14 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
-import { Grid, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 import BackgroundSection from '../../components/BackgroundSection';
-import { FluidObject } from 'gatsby-image';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
+import { MainnetWhatsNextSectionQuery } from '../../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -31,92 +33,74 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.spacing(5),
     margin: theme.spacing(5, 0),
   },
-  itemWrap: {
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent: 'center',
+  card: {
+    minHeight: '95%',
   },
 }));
 
-type InfoItem = {
-  title: string;
-  description: string;
-  gitLink: string;
-  icon: {
-    publicURL: string;
-  };
-};
-
-type QueryData = {
-  background: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
-  text: {
-    whatsNextSection: {
-      title: string;
-      description: string;
-      infoItems: InfoItem[];
-    };
-  };
-};
-
-const WhatsNextSection: React.FC = () => {
-  const {
-    background: { childImageSharp },
-    text: {
-      whatsNextSection: { title, description, infoItems },
-    },
-  } = useStaticQuery<QueryData>(graphql`
-    {
-      background: file(relativePath: { eq: "mainnet-whats-next.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+const query = graphql`
+  query mainnetWhatsNextSection {
+    background: file(relativePath: { eq: "mainnet-whats-next.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
-      text: mainnetYaml {
-        whatsNextSection {
+    }
+    sanityMainnetPage {
+      whatsNextSection {
+        title
+        _rawDescription
+        infoItems {
           title
-          description
-          infoItems {
-            title
-            description
-            gitLink
-            icon {
-              extension
-              publicURL
+          _rawDescription
+          gitLink
+          icon {
+            image {
+              asset {
+                url
+              }
             }
           }
         }
       }
     }
-  `);
-  const classes = useStyles();
+  }
+`;
+
+const WhatsNextSection: React.FC = () => {
+  const styles = useStyles();
+  const { background, sanityMainnetPage } = useStaticQuery<MainnetWhatsNextSectionQuery>(query);
+  const content = sanityMainnetPage?.whatsNextSection;
   return (
     <BackgroundSection
-      className={classes.root}
+      className={styles.root}
       linearGradient="linear-gradient(209.5deg, rgba(250, 235, 209, 0.8) 12.63%, rgba(125, 201, 191, 0.8) 44.03%, rgba(81, 93, 137, 0.8) 75.43%);"
-      imageData={childImageSharp.fluid}
+      imageData={background?.childImageSharp?.fluid as any}
     >
       <Grid container direction="column" alignItems="center">
-        <Typography variant="h1" className={classes.title}>
-          {title}
+        <Typography variant="h1" className={styles.title}>
+          {content?.title}
         </Typography>
-        <Typography className={classes.description}>{description}</Typography>
-        <Grid container direction="row" justifyContent="center">
-          {infoItems.map(({ description, title, gitLink, icon }, i) => (
-            <GreenTopIconCard
-              key={i}
-              description={description}
-              title={title}
-              linkURL={gitLink}
-              imgSrc={icon.publicURL}
-            />
-          ))}
-        </Grid>
+        <Typography className={styles.description}>
+          <BlockContent noYMargin content={content?._rawDescription} />
+        </Typography>
+        <div>
+          <Grid container direction="row" justifyContent="center">
+            {content?.infoItems?.map((item, i) => (
+              <Grid item key={i}>
+                <GreenTopIconCard
+                  className={styles.card}
+                  description={item?._rawDescription}
+                  title={item?.title || ''}
+                  linkUrl={item?.gitLink || ''}
+                  linkText="View on Github"
+                  imgSrc={item?.icon?.image?.asset?.url || ''}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </div>
       </Grid>
     </BackgroundSection>
   );

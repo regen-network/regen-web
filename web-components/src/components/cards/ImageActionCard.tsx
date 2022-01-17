@@ -54,7 +54,7 @@ const ImageActionCard: React.FC<Props> = props => {
           <Typography gutterBottom className={styles.title} variant="h5">
             {parseText(props.title)}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" color="textSecondary" component="div">
             {parseText(props.description)}
           </Typography>
         </div>

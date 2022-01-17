@@ -2,8 +2,7 @@ import React from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { graphql, StaticQuery } from 'gatsby';
-import ReactHtmlParser from 'react-html-parser';
+import { graphql, useStaticQuery } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 
@@ -12,23 +11,8 @@ import MediaCard from 'web-components/lib/components/cards/MediaCard';
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
-
-interface AboutSectionProps {
-  about: string;
-  aboutImage: {
-    publicURL: string;
-  };
-  mapImage: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
-  practice: string;
-  biome: string;
-  region: string;
-  lineRotate?: string;
-  lineWidth?: string;
-}
+import { BlockContent } from 'web-components/src/components/block-content';
+import { CaseStudyAboutSectionQuery, SanityCaseStudyAboutSection } from '../../../generated/graphql';
 
 interface StyleProps {
   lineRotate?: string;
@@ -141,86 +125,81 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const AboutSection = ({
-  about,
+const query = graphql`
+  query CaseStudyAboutSection {
+    sanityCaseStudiesPage {
+      aboutSection {
+        header
+        practice
+        biome
+        region
+      }
+    }
+  }
+`;
+
+const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
+  _rawAbout,
   aboutImage,
   mapImage,
   practice,
   biome,
   region,
-  lineRotate,
   lineWidth,
-}: AboutSectionProps): JSX.Element => {
-  const classes = useStyles({ lineRotate, lineWidth });
+  lineRotate,
+}) => {
+  const styles = useStyles({ lineRotate: lineRotate || 'rotate(-25deg)', lineWidth: lineWidth || '53%' });
   const theme = useTheme();
+  const data = useStaticQuery<CaseStudyAboutSectionQuery>(query);
+  const content = data?.sanityCaseStudiesPage?.aboutSection;
+
   return (
-    <StaticQuery
-      query={graphql`
-        query {
-          text: caseStudiesYaml {
-            caseStudies {
-              aboutSection {
-                header
-                practice
-                biome
-                region
-              }
-            }
-          }
-        }
-      `}
-      render={data => {
-        const content = data.text.caseStudies.aboutSection;
-        return (
-          <Section className={classes.root}>
-            <Box display={{ xs: 'block', md: 'none' }}>
-              <Title align="center" variant="h2" className={classes.title}>
-                {content.header}
-              </Title>
-            </Box>
-            <Grid container spacing={10}>
-              <Grid item xs={12} md={6}>
-                <BackgroundImage className={classes.background} fluid={mapImage.childImageSharp.fluid}>
-                  <div className={classes.cardContainer}>
-                    <MediaCard
-                      borderColor={theme.palette.grey[100]}
-                      imageClassName={classes.image}
-                      className={classes.card}
-                      imgSrc={aboutImage.publicURL}
-                      backgroundGradient={false}
-                    >
-                      <div className={classes.cardContent}>
-                        <div className={classes.cardItem}>
-                          <div className={classes.cardTitle}>{content.practice}</div>
-                          <Description className={classes.cardDescription}>{practice}</Description>
-                        </div>
-                        <div className={classes.cardItem}>
-                          <div className={classes.cardTitle}>{content.biome}</div>
-                          <Description className={classes.cardDescription}>{biome}</Description>
-                        </div>
-                        <div className={classes.cardItem}>
-                          <div className={classes.cardTitle}>{content.region}</div>
-                          <Description className={classes.cardDescription}>{region}</Description>
-                        </div>
-                      </div>
-                    </MediaCard>
-                    <hr className={classes.line} />
+    <Section className={styles.root}>
+      <Box display={{ xs: 'block', md: 'none' }}>
+        <Title align="center" variant="h2" className={styles.title}>
+          {content?.header}
+        </Title>
+      </Box>
+      <Grid container spacing={10}>
+        <Grid item xs={12} md={6}>
+          <BackgroundImage className={styles.background} fluid={mapImage?.image?.asset?.fluid as FluidObject}>
+            <div className={styles.cardContainer}>
+              <MediaCard
+                borderColor={theme.palette.grey[100]}
+                imageClassName={styles.image}
+                className={styles.card}
+                imgSrc={aboutImage?.image?.asset?.url || ''}
+                backgroundGradient={false}
+              >
+                <div className={styles.cardContent}>
+                  <div className={styles.cardItem}>
+                    <div className={styles.cardTitle}>{content?.practice}</div>
+                    <Description className={styles.cardDescription}>{practice}</Description>
                   </div>
-                </BackgroundImage>
-              </Grid>
-              <Grid item xs={12} md={6} className={classes.gridItem}>
-                <Box display={{ xs: 'none', md: 'block' }}>
-                  <Title variant="h2" className={classes.title}>
-                    {content.header}
-                  </Title>
-                </Box>
-                <Description className={classes.about}>{ReactHtmlParser(about)}</Description>
-              </Grid>
-            </Grid>
-          </Section>
-        );
-      }}
-    />
+                  <div className={styles.cardItem}>
+                    <div className={styles.cardTitle}>{content?.biome}</div>
+                    <Description className={styles.cardDescription}>{biome}</Description>
+                  </div>
+                  <div className={styles.cardItem}>
+                    <div className={styles.cardTitle}>{content?.region}</div>
+                    <Description className={styles.cardDescription}>{region}</Description>
+                  </div>
+                </div>
+              </MediaCard>
+              <hr className={styles.line} />
+            </div>
+          </BackgroundImage>
+        </Grid>
+        <Grid item xs={12} md={6} className={styles.gridItem}>
+          <Box display={{ xs: 'none', md: 'block' }}>
+            <Title variant="h2" className={styles.title}>
+              {content?.header}
+            </Title>
+          </Box>
+          <Description className={styles.about}>{<BlockContent content={_rawAbout} />}</Description>
+        </Grid>
+      </Grid>
+    </Section>
   );
 };
 

@@ -1,12 +1,6 @@
 const React = require('react');
 const { IntercomProvider } = require('react-use-intercom');
 
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
-
 const intercomAppId = process.env.GATSBY_INTERCOM_APP_ID || '';
 
 exports.onClientEntry = () => {

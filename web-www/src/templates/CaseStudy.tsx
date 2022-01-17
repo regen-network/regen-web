@@ -10,163 +10,131 @@ import FigureSection from '../sections/case-studies/case-study/FigureSection';
 import FundingSection from '../sections/case-studies/case-study/FundingSection';
 import ConclusionSection from '../sections/case-studies/case-study/ConclusionSection';
 import BottomSection from '../sections/case-studies/case-study/BottomSection';
+import {
+  CaseStudyTemplateQuery,
+  SanityCaseStudyAboutSection,
+  SanityCaseStudyApproachSection,
+  SanityCaseStudyBottomSection,
+  SanityCaseStudyConclusionSection,
+  SanityCaseStudyContextSection,
+  SanityCaseStudyFigureSection,
+  SanityCaseStudyFundingSection,
+} from '../generated/graphql';
+import { FluidObject } from 'gatsby-image';
 
 interface Props extends PageProps {
-  data: {
-    allCaseStudyItemsYaml: {
-      nodes: any[];
-    };
-  };
+  data: CaseStudyTemplateQuery;
 }
 
-const CaseStudy = ({ data, location }: Props): JSX.Element => {
-  if (data.allCaseStudyItemsYaml.nodes.length !== 1) {
+const CaseStudy: React.FC<Props> = ({ data, location }) => {
+  if (!data?.sanityCaseStudyPage) {
     return <></>;
   }
-  const item = data.allCaseStudyItemsYaml.nodes[0];
+  const item = data.sanityCaseStudyPage;
   return (
     <>
       <SEO
-        title={item.name}
+        title={item?.name || ''}
         location={location}
-        description="Explore Regen Network case studies where technology, science and regenerative land use practices intersect."
+        description={
+          item?.description ||
+          'Explore Regen Network case studies where technology, science and regenerative land use practices intersect.'
+        }
       />
-      <TopSection background={item.background} name={item.name} />
-      <AboutSection {...item.aboutSection} />
-      <ContextSection {...item.contextSection} />
-      <ApproachSection {...item.approachSection} />
-      <FigureSection {...item.figureSection} />
-      <FundingSection {...item.fundingSection} />
-      <ConclusionSection {...item.conclusionSection} />
-      <BottomSection {...item.bottomSection} />
+      <TopSection background={item?.background?.image?.asset?.fluid as FluidObject} name={item?.name || ''} />
+      <AboutSection {...(item?.aboutSection as SanityCaseStudyAboutSection)} />
+      <ContextSection {...(item?.contextSection as SanityCaseStudyContextSection)} />
+      <ApproachSection {...(item?.approachSection as SanityCaseStudyApproachSection)} />
+      <FigureSection {...(item?.figureSection as SanityCaseStudyFigureSection)} />
+      <FundingSection {...(item?.fundingSection as SanityCaseStudyFundingSection)} />
+      <ConclusionSection {...(item?.conclusionSection as SanityCaseStudyConclusionSection)} />
+      <BottomSection {...(item?.bottomSection as SanityCaseStudyBottomSection)} />
     </>
   );
 };
 
-export const query = graphql`query ($slug: String!) {
-  allCaseStudyItemsYaml(filter: {slug: {eq: $slug}}) {
-    nodes {
-      id
+export const query = graphql`
+  query caseStudyTemplate($slug: String!) {
+    sanityCaseStudyPage(slug: { current: { eq: $slug } }) {
       name
-      slug
       description
       background {
-        childImageSharp {
-          fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-        }
+        ...fluidCustomImageFields_withWebp
       }
       aboutSection {
-        about
+        _rawAbout
         practice
         biome
         region
         lineRotate
         lineWidth
         aboutImage {
-          publicURL
+          image {
+            asset {
+              url
+            }
+          }
         }
         mapImage {
-          childImageSharp {
-            fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-          }
+          ...fluidCustomImageFields_withWebp
         }
       }
       contextSection {
-        description
+        _rawDescription
         image {
-          childImageSharp {
-            fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-          }
+          ...fluidCustomImageFields_withWebp
         }
-        challenges {
-          text
-        }
+        challenges
       }
       approachSection {
         description
-        details
-        results
-        next
-        figureTitle
+        _rawDetails
+        _rawResults
+        _rawNext
+        _rawFigureTitle
         figureImage {
-          childImageSharp {
-            fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-          }
+          ...fluidCustomImageFields_withWebp
         }
       }
       figureSection {
         title
         background {
-          childImageSharp {
-            fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-          }
+          ...fluidCustomImageFields_withWebp
         }
         figures {
           title
           spacing
           image {
-            childImageSharp {
-              fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-            }
+            ...fluidCustomImageFields_withWebp
           }
         }
       }
       fundingSection {
-        details
-        results
-        next
+        _rawDetails
+        _rawResults
+        _rawNext
         image {
-          childImageSharp {
-            fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-          }
+          ...fluidCustomImageFields_withWebp
         }
       }
       conclusionSection {
-        description
+        _rawDescription
         images {
           title
           image {
-            childImageSharp {
-              fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-            }
+            ...fluidCustomImageFields_withWebp
           }
         }
       }
       bottomSection {
         quote
-        background {
-          childImageSharp {
-            fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-          }
+        personName
+        personRole
+        personImage {
+          ...fluidCustomImageFields_withWebp
         }
-        person {
-          name
-          role
-          image {
-            childImageSharp {
-              fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
-      }
-            }
-          }
+        background {
+          ...fluidCustomImageFields_withWebp
         }
       }
     }

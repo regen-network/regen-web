@@ -4,7 +4,10 @@ import {
   StyledEngineProvider,
 } from '@mui/material/styles';
 import * as React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+
 import theme from './muiTheme';
+import 'web-components/src/theme/index.css';
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -32,7 +35,10 @@ const RegenThemeProvider = ({
 
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
     </StyledEngineProvider>
   );
 };

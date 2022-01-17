@@ -5,6 +5,7 @@ import { makeStyles } from '@mui/styles';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import TitleDescription from 'web-components/lib/components/title-description';
+import { FundFoldSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>(theme => ({
   spacing: {
@@ -14,35 +15,25 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
 }));
 
-type QueryData = {
-  text: {
-    foldSection: {
-      title: string;
-      body: string;
-    };
-  };
-};
+const query = graphql`
+  query fundFoldSection {
+    sanityFundPage {
+      foldSection {
+        title
+        _rawBody
+      }
+    }
+  }
+`;
 
 const FoldSection = (): JSX.Element => {
   const styles = useStyles();
-  const {
-    text: {
-      foldSection: { title, body },
-    },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      text: fundYaml {
-        foldSection {
-          title
-          body
-        }
-      }
-    }
-  `);
+  const { sanityFundPage } = useStaticQuery<FundFoldSectionQuery>(query);
+  const data = sanityFundPage?.foldSection;
 
   return (
     <Section>
-      <TitleDescription className={styles.spacing} title={title} description={body} />
+      <TitleDescription className={styles.spacing} title={data?.title || ''} description={data?._rawBody} />
     </Section>
   );
 };

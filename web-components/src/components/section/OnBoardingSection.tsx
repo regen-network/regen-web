@@ -1,8 +1,7 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import { Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-
 import cx from 'clsx';
 
 import Section from './index';
@@ -22,9 +21,8 @@ interface OnBoardingSectionProps {
   };
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.grey[200],
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(12.5, 0, 30),
     },
@@ -87,7 +85,7 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
   formContainer = false,
   linkText,
   onLinkClick,
-  exampleProjectUrl = '/projects/wilmot',
+  exampleProjectUrl,
   classes,
   ...p
 }) => {
@@ -118,12 +116,14 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
           !!classes && classes.formWrap,
         )}
       >
-        <Description className={styles.description}>
-          See an example{' '}
-          <RouterLink to={exampleProjectUrl} target="_blank">
-            project page»
-          </RouterLink>
-        </Description>
+        {exampleProjectUrl && (
+          <Description className={styles.description}>
+            See an example{' '}
+            <RouterLink to={exampleProjectUrl} target="_blank">
+              project page»
+            </RouterLink>
+          </Description>
+        )}
         {p.children}
       </div>
     </Section>

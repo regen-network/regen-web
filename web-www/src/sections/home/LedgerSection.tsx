@@ -2,12 +2,14 @@ import React from 'react';
 import BackgroundImage from 'gatsby-background-image';
 import { graphql, useStaticQuery } from 'gatsby';
 import Grid from '@mui/material/Grid';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { makeStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
+import Img from 'gatsby-image';
+
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
-import Img from 'gatsby-image';
+import { HomeLedgerSectionQuery } from '../../generated/graphql';
 
 let useStyles = makeStyles((theme: Theme) => ({
   grid: {
@@ -86,46 +88,46 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeLedger = () => {
-  const data = useStaticQuery(graphql`
-    {
-      bg: file(relativePath: { eq: "farm-background.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      ledger: file(relativePath: { eq: "ledger.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: homeYaml {
-        ledgerSection {
-          description
+const query = graphql`
+  query homeLedgerSection {
+    bg: file(relativePath: { eq: "farm-background.png" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 1920) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
-  const classes = useStyles();
-  const content = data.text.ledgerSection; // TODO add title content to yaml once structure for styling set
+    ledger: file(relativePath: { eq: "ledger.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    sanityHomePageWeb {
+      ledgerDescription
+    }
+  }
+`;
+
+const HomeLedger: React.FC = () => {
+  const styles = useStyles();
+  const data = useStaticQuery<HomeLedgerSectionQuery>(query);
+  const content = data.sanityHomePageWeb;
 
   return (
-    <BackgroundImage Tag="section" fluid={data.bg.childImageSharp.fluid}>
-      <Grid className={classes.grid} container alignItems="center" wrap="nowrap">
-        <Grid className={classes.imgContainer} item xs={12}>
-          <Img fluid={data.ledger.childImageSharp.fluid} className={classes.img} />
+    <BackgroundImage Tag="section" fluid={data.bg?.childImageSharp?.fluid as any}>
+      <Grid className={styles.grid} container alignItems="center" wrap="nowrap">
+        <Grid className={styles.imgContainer} item xs={12}>
+          <Img className={styles.img} fluid={data.ledger?.childImageSharp?.fluid as any} />
         </Grid>
-        <Grid item xs={12} className={classes.text}>
-          <Title align="left" variant="h1" className={classes.title}>
-            <span className={classes.green}>Regen Ledger</span> powers{' '}
-            <span className={classes.green}>Regen Registry</span>
+        <Grid item xs={12} className={styles.text}>
+          <Title align="left" variant="h1" className={styles.title}>
+            <span className={styles.green}>Regen Ledger</span> powers{' '}
+            <span className={styles.green}>Regen Registry</span>
           </Title>
-          <Typography className={classes.description}>{content.description}</Typography>
-          <ContainedButton href="/developers" className={classes.button}>
+          <Typography className={styles.description}>{content?.ledgerDescription}</Typography>
+          <ContainedButton href="/developers" className={styles.button}>
             Learn More
           </ContainedButton>
         </Grid>

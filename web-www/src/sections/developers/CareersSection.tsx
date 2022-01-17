@@ -1,13 +1,15 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
-import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import BackgroundSection from '../../components/BackgroundSection';
+import { BlockContent } from 'web-components/src/components/block-content';
+
+import { DevCareersSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -64,56 +66,56 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CareersSection = (): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <StaticQuery
-      query={graphql`
-        {
-          background: file(relativePath: { eq: "developers-careers-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: developersYaml {
-            careersSection {
-              header
-              body
-              caption
-              buttonLink
-              buttonText
-            }
-          }
+const query = graphql`
+  query devCareersSection {
+    background: file(relativePath: { eq: "developers-careers-bg.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
-      `}
-      render={data => {
-        const content = data.content.careersSection;
-        return (
-          <BackgroundSection
-            linearGradient="unset"
-            topSection={false}
-            className={classes.section}
-            imageData={data.background.childImageSharp.fluid}
-          >
-            <div className={classes.caption}>{content.caption}</div>
-            <Title align="center" className={classes.title} variant="h2">
-              {content.header}
-            </Title>
-            <Description align="center" className={classes.description}>
-              {ReactHtmlParser(content.body)}
-            </Description>
-            <div className={classes.buttonContainer}>
-              <OutlinedButton className={classes.button} target="_blank" href={content.buttonLink}>
-                {content.buttonText}
-              </OutlinedButton>
-            </div>
-          </BackgroundSection>
-        );
-      }}
-    />
+      }
+    }
+    sanityDevelopersPage {
+      careersSection {
+        caption
+        header
+        _rawBody
+        button {
+          ...buttonFields
+        }
+      }
+    }
+  }
+`;
+
+const CareersSection: React.FC = () => {
+  const styles = useStyles();
+  const { background, sanityDevelopersPage } = useStaticQuery<DevCareersSectionQuery>(query);
+  const data = sanityDevelopersPage?.careersSection;
+  return (
+    <BackgroundSection
+      linearGradient="unset"
+      topSection={false}
+      className={styles.section}
+      imageData={background?.childImageSharp?.fluid}
+    >
+      <div className={styles.caption}>{data?.caption}</div>
+      <Title align="center" className={styles.title} variant="h2">
+        {data?.header}
+      </Title>
+      <Description align="center" className={styles.description}>
+        <BlockContent content={data?._rawBody} />
+      </Description>
+      <div className={styles.buttonContainer}>
+        <OutlinedButton
+          className={styles.button}
+          target="_blank"
+          href={`${data?.button?.buttonLink?.buttonHref}`}
+        >
+          {data?.button?.buttonText}
+        </OutlinedButton>
+      </div>
+    </BackgroundSection>
   );
 };
 

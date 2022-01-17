@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, useTheme } from '@mui/styles';
 
-import ConnectSection, { IconLabelProps } from '../../components/ConnectSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
@@ -13,6 +12,8 @@ import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIco
 import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
+import { PresskitConnectSectionQuery } from '../../generated/graphql';
+import ConnectSection, { IconLabelProps } from '../../components/ConnectSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
   item: {
@@ -23,26 +24,25 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const PressKitConnectSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    {
-      background: file(relativePath: { eq: "press-kit-connect-bg.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: pressKitYaml {
-        connectSection {
-          header
+const query = graphql`
+  query presskitConnectSection {
+    background: file(relativePath: { eq: "press-kit-connect-bg.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
-  const content = data.text.connectSection;
+    sanityPresskitPage {
+      connectSectionHeader
+    }
+  }
+`;
+
+const PressKitConnectSection = (): JSX.Element => {
+  const { sanityPresskitPage: data, background } = useStaticQuery<PresskitConnectSectionQuery>(query);
   const theme = useTheme();
-  const classes = useStyles();
+  const styles = useStyles();
   const icons: IconLabelProps[] = [
     {
       icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
@@ -100,9 +100,9 @@ const PressKitConnectSection = (): JSX.Element => {
   ];
   return (
     <ConnectSection
-      itemClassName={classes.item}
-      header={content.header}
-      background={data.background}
+      itemClassName={styles.item}
+      header={data?.connectSectionHeader || ''}
+      background={background as any}
       icons={icons}
     />
   );

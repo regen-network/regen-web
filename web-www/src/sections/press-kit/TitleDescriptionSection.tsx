@@ -1,10 +1,11 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import TitleDescription from 'web-components/lib/components/title-description';
 import Section from 'web-components/lib/components/section';
+import { PresskitTitleDescriptionSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -17,30 +18,25 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const TitleDescriptionSection = (): JSX.Element => {
-  const classes = useStyles();
+const query = graphql`
+  query presskitTitleDescriptionSection {
+    sanityPresskitPage {
+      titleDescriptionSection {
+        title
+        _rawBody
+      }
+    }
+  }
+`;
 
+const TitleDescriptionSection = (): JSX.Element => {
+  const styles = useStyles();
+  const { sanityPresskitPage } = useStaticQuery<PresskitTitleDescriptionSectionQuery>(query);
+  const content = sanityPresskitPage?.titleDescriptionSection;
   return (
-    <StaticQuery
-      query={graphql`
-        query {
-          content: pressKitYaml {
-            titleDescriptionSection {
-              header
-              description
-            }
-          }
-        }
-      `}
-      render={data => {
-        const content = data.content.titleDescriptionSection;
-        return (
-          <Section className={classes.root}>
-            <TitleDescription title={content.header} description={content.description} />
-          </Section>
-        );
-      }}
-    />
+    <Section className={styles.root}>
+      <TitleDescription title={content?.title || ''} description={content?._rawBody} />
+    </Section>
   );
 };
 

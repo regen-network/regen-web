@@ -1,13 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
+import Img from 'gatsby-image';
+import { graphql, useStaticQuery } from 'gatsby';
+import SanityImage from 'gatsby-plugin-sanity-image';
+
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { useStaticQuery, graphql } from 'gatsby';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/lib/components/section';
-import Img from 'gatsby-image';
 import Tooltip from 'web-components/lib/components/tooltip';
+
+import { HomeMarketPlaceSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -122,64 +126,59 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const MarketplaceSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    {
-      text: homeYaml {
-        marketplaceSection {
-          header
-          tooltip
-          body {
-            green
-            middle
-            popover
-            end
-          }
-          callToActions {
-            image {
-              childImageSharp {
-                fixed(quality: 90, width: 159) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-            }
-            caption
-            header
-            description
-            linkText
-            linkUrl
-          }
+const query = graphql`
+  query homeMarketPlaceSection {
+    sanityHomePageWeb {
+      marketplaceSection {
+        header
+        tooltip
+        body {
+          green
+          middle
+          popover
+          end
+        }
+        callToActions {
+          ...callToActionFields
         }
       }
     }
-  `);
+  }
+`;
 
-  const content = data.text.marketplaceSection;
+const MarketplaceSection: React.FC = () => {
+  const styles = useStyles({});
+  const data = useStaticQuery<HomeMarketPlaceSectionQuery>(query);
+  const content = data.sanityHomePageWeb?.marketplaceSection;
 
-  const classes = useStyles({});
   return (
-    <Section className={classes.root}>
-      <div className={classes.inner}>
-        <div className={classes.smallTag}>{content.header}</div>
+    <Section className={styles.root}>
+      <div className={styles.inner}>
+        <div className={styles.smallTag}>{content?.header}</div>
         <Title variant="h2" align="center">
-          <span className={classes.green}>{content.body.green} </span>
-          {content.body.middle}{' '}
-          <Tooltip arrow placement="top" title={content.tooltip}>
-            <span className={classes.popover}>{content.body.popover}</span>
+          <span className={styles.green}>{content?.body?.green} </span>
+          {content?.body?.middle}{' '}
+          <Tooltip arrow placement="top" title={content?.tooltip || ''}>
+            <span className={styles.popover}>{content?.body?.popover}</span>
           </Tooltip>{' '}
-          {content.body.end}
+          {content?.body?.end}
         </Title>
         <Grid container spacing={3}>
-          {content.callToActions.map(cta => {
-            return (
-              <Grid key={cta.header} className={classes.gridItem} item xs>
-                <Img fixed={cta.image.childImageSharp.fixed} />
-                <div className={classes.smallTitle}>{cta.caption}</div>
-                <Title className={classes.h3} variant="h3" align="center">
+          {content?.callToActions?.map((cta, i) => {
+            return !cta ? null : (
+              <Grid key={cta.header || i} className={styles.gridItem} item xs>
+                <SanityImage
+                  {...(cta.image as any)}
+                  alt={cta.caption}
+                  width={159}
+                  style={{ width: '159px' }}
+                />
+                <div className={styles.smallTitle}>{cta.caption}</div>
+                <Title className={styles.h3} variant="h3" align="center">
                   {cta.header}
                 </Title>
                 <p>{cta.description}</p>
-                <ContainedButton href={cta.linkUrl} className={classes.button}>
+                <ContainedButton href={cta.linkUrl || ''} className={styles.button}>
                   {cta.linkText}
                 </ContainedButton>
               </Grid>

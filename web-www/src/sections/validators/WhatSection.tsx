@@ -1,10 +1,11 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import TitleDescription from 'web-components/lib/components/title-description';
+import { ValidatorsWhatSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -19,41 +20,37 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const query = graphql`
+  query validatorsWhatSection {
+    background: file(relativePath: { eq: "what-validators-bg.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    sanityValidatorsPage {
+      whatSection {
+        title
+        _rawBody
+      }
+    }
+  }
+`;
 const WhatSection = (): JSX.Element => {
-  const classes = useStyles();
+  const styles = useStyles();
+  const { background, sanityValidatorsPage } = useStaticQuery<ValidatorsWhatSectionQuery>(query);
+  const data = sanityValidatorsPage?.whatSection;
 
   return (
-    <StaticQuery
-      query={graphql`
-        {
-          background: file(relativePath: { eq: "what-validators-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          text: validatorsYaml {
-            whatSection {
-              header
-              body
-            }
-          }
-        }
-      `}
-      render={data => {
-        return (
-          <BackgroundSection
-            linearGradient="unset"
-            className={classes.section}
-            imageData={data.background.childImageSharp.fluid}
-            topSection={false}
-          >
-            <TitleDescription title={data.text.whatSection.header} description={data.text.whatSection.body} />
-          </BackgroundSection>
-        );
-      }}
-    />
+    <BackgroundSection
+      linearGradient="unset"
+      className={styles.section}
+      imageData={background?.childImageSharp?.fluid}
+      topSection={false}
+    >
+      <TitleDescription title={data?.title || ''} description={data?._rawBody} />
+    </BackgroundSection>
   );
 };
 

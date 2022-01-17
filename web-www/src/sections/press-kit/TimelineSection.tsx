@@ -1,11 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Timeline from 'web-components/lib/components/timeline';
 import Description from 'web-components/lib/components/description';
+import { PresskitTimelineSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -38,37 +39,37 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const query = graphql`
+  query presskitTimelineSection {
+    sanityPresskitPage {
+      timelineSection {
+        header
+        description
+        completedItemIndex
+        items {
+          date
+          summary
+          description
+        }
+      }
+    }
+  }
+`;
+
 const TimelineSection = (): JSX.Element => {
-  const classes = useStyles();
+  const styles = useStyles();
+  const { sanityPresskitPage: data } = useStaticQuery<PresskitTimelineSectionQuery>(query);
+  const content = data?.timelineSection;
 
   return (
-    <StaticQuery
-      query={graphql`
-        query {
-          content: pressKitYaml {
-            timelineSection {
-              header
-              description
-              completedItemIndex
-              items {
-                date
-                summary
-                description
-              }
-            }
-          }
-        }
-      `}
-      render={data => {
-        const content = data.content.timelineSection;
-        return (
-          <Section classes={{ root: classes.root, title: classes.title }} title={content.header}>
-            <Description className={classes.description}>{content.description}</Description>
-            <Timeline events={content.items} completedItemIndex={content.completedItemIndex} />
-          </Section>
-        );
-      }}
-    />
+    <Section classes={{ root: styles.root, title: styles.title }} title={content?.header || ''}>
+      <Description className={styles.description}>{content?.description}</Description>
+      <Timeline
+        onViewOnLedger={() => null}
+        events={content?.items as any[]}
+        completedItemIndex={content?.completedItemIndex || 0}
+      />
+    </Section>
   );
 };
 

@@ -1,11 +1,15 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
+import { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import TeamSection from 'web-components/lib/components/team-section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { TeamItemProps } from 'web-components/lib/components/team-item';
+
+import { PresskitTeamSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -15,55 +19,57 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const PressKitTeamSection = (): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <StaticQuery
-      query={graphql`
-        {
-          teamBackground: file(relativePath: { eq: "press-kit-team-bg.png" }) {
-            publicURL
-          }
-          background: file(relativePath: { eq: "waterfall-bg.png" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          text: pressKitYaml {
-            teamSection {
-              header
-              buttonText
-              members {
-                name
-                title
-                image {
-                  publicURL
-                }
-              }
+const query = graphql`
+  query presskitTeamSection {
+    teamBackground: file(relativePath: { eq: "press-kit-team-bg.png" }) {
+      publicURL
+    }
+    background: file(relativePath: { eq: "waterfall-bg.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    sanityPresskitPage {
+      teamSection {
+        header
+        buttonText
+        members {
+          name
+          title
+          image {
+            asset {
+              url
             }
           }
         }
-      `}
-      render={data => {
-        const content = data.text.teamSection;
-        return (
-          <BackgroundImage fluid={data.background.childImageSharp.fluid}>
-            <TeamSection
-              gridMd={3}
-              titleClassName={classes.title}
-              bgUrl={data.teamBackground.publicURL}
-              members={content.members.map(m => ({ imgUrl: m.image.publicURL, ...m }))}
-              title={content.header}
-            >
-              <ContainedButton href="/team">{content.buttonText}</ContainedButton>
-            </TeamSection>
-          </BackgroundImage>
-        );
-      }}
-    />
+      }
+    }
+  }
+`;
+const PressKitTeamSection = (): JSX.Element => {
+  const styles = useStyles();
+  const { background, teamBackground, sanityPresskitPage: data } = useStaticQuery<PresskitTeamSectionQuery>(
+    query,
+  );
+  const content = data?.teamSection;
+  const members = content?.members?.map(m => ({
+    ...m,
+    imgUrl: m?.image?.asset?.url,
+  })) as TeamItemProps[];
+  return (
+    <BackgroundImage fluid={background?.childImageSharp?.fluid as FluidObject}>
+      <TeamSection
+        gridMd={3}
+        titleClassName={styles.title}
+        bgUrl={teamBackground?.publicURL || ''}
+        members={members}
+        title={content?.header || ''}
+      >
+        <ContainedButton href="/team">{content?.buttonText}</ContainedButton>
+      </TeamSection>
+    </BackgroundImage>
   );
 };
 

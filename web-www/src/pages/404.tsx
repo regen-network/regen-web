@@ -1,14 +1,10 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import SEO from '../components/seo';
 import NotFound from 'web-components/lib/components/not-found';
 
-interface props {
-  location: Location;
-}
-
-const NotFoundPage = ({ location }: props): JSX.Element => {
+const NotFoundPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`
     {
       grazing: file(relativePath: { eq: "rotational-grazing.png" }) {

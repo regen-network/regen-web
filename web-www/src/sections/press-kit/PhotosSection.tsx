@@ -1,13 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
+import ProjectMedia, { Media } from 'web-components/lib/components/sliders/ProjectMedia';
+import { PresskitPhotosSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -36,43 +36,39 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const PhotosSection = (): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <StaticQuery
-      query={graphql`
-        query {
-          content: pressKitYaml {
-            photosSection {
-              header
-              photos {
-                image {
-                  publicURL
-                }
-              }
-            }
+const query = graphql`
+  query presskitPhotosSection {
+    sanityPresskitPage {
+      photosSection {
+        header
+        photos {
+          asset {
+            url
           }
         }
-      `}
-      render={data => {
-        const content = data.content.photosSection;
-        return (
-          <Section title={content.header} classes={{ root: classes.root, title: classes.title }}>
-            <div className={classes.slider}>
-              <ProjectMedia
-                xsBorderRadius
-                assets={content.photos.map(({ image }: { image: { publicURL: string } }) => ({
-                  src: image.publicURL,
-                  thumbnail: image.publicURL,
-                  type: 'image',
-                }))}
-              />
-            </div>
-          </Section>
-        );
-      }}
-    />
+      }
+    }
+  }
+`;
+
+const PhotosSection = (): JSX.Element => {
+  const styles = useStyles();
+  const { sanityPresskitPage } = useStaticQuery<PresskitPhotosSectionQuery>(query);
+  const data = sanityPresskitPage?.photosSection;
+  const assets = (data?.photos || []).map(photo => {
+    return {
+      src: photo?.asset?.url,
+      thumbnail: photo?.asset?.url,
+      type: 'image',
+    } as Media;
+  });
+
+  return (
+    <Section title={data?.header || ''} classes={{ root: styles.root, title: styles.title }}>
+      <div className={styles.slider}>
+        <ProjectMedia xsBorderRadius assets={assets} />
+      </div>
+    </Section>
   );
 };
 

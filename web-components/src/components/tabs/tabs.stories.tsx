@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Tabs, { RegenTab } from 'web-components/lib/components/tabs';
-import Table, { Data } from 'web-components/lib/components/table';
+import { DocumentationTable, DocumentRowData } from 'web-components/lib/components/table/DocumentationTable';
 
 import CreditDetails, {
   CreditInfoProps,
@@ -26,7 +26,7 @@ const details: CreditInfoProps = {
   ],
 };
 
-const data: Data[] = [
+const data: DocumentRowData[] = [
   {
     name: 'Monitoring',
     type: 'Monitoring',
@@ -60,7 +60,7 @@ const creditDetailsTab: RegenTab = {
 
 const documentationTab: RegenTab = {
   label: 'Documentation',
-  children: <Table rows={data} />,
+  children: <DocumentationTable rows={data} />,
 };
 
 const tabs: RegenTab[] = [creditDetailsTab, documentationTab];

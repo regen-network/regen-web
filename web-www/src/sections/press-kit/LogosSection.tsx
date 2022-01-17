@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
@@ -7,6 +7,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import RegenIcon from 'web-components/lib/components/icons/RegenIcon';
+import { PresskitLogosSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -38,34 +39,30 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const query = graphql`
+  query presskitLogosSection {
+    sanityPresskitPage {
+      logosSection {
+        header
+        buttonText
+        buttonLink
+      }
+    }
+  }
+`;
+
 const LogosSection = (): JSX.Element => {
-  const classes = useStyles();
+  const styles = useStyles();
+  const { sanityPresskitPage } = useStaticQuery<PresskitLogosSectionQuery>(query);
+  const data = sanityPresskitPage?.logosSection;
 
   return (
-    <StaticQuery
-      query={graphql`
-        query {
-          content: pressKitYaml {
-            logosSection {
-              header
-              buttonText
-              buttonLink
-            }
-          }
-        }
-      `}
-      render={data => {
-        const content = data.content.logosSection;
-        return (
-          <Section title={content.header} classes={{ root: classes.root, title: classes.title }}>
-            <Grid container alignItems="center" direction="column">
-              <RegenIcon className={classes.logo} />
-              <ContainedButton href={content.buttonLink}>{content.buttonText}</ContainedButton>
-            </Grid>
-          </Section>
-        );
-      }}
-    />
+    <Section title={data?.header || ''} classes={{ root: styles.root, title: styles.title }}>
+      <Grid container alignItems="center" direction="column">
+        <RegenIcon className={styles.logo} />
+        <ContainedButton href={data?.buttonLink || ''}>{data?.buttonText}</ContainedButton>
+      </Grid>
+    </Section>
   );
 };
 

@@ -3,17 +3,16 @@ import ReactDOM from 'react-dom';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 // import DateFnsUtils from '@date-io/date-fns';
-import './index.css';
+import { IntercomProvider } from 'react-use-intercom';
+import { Auth0Provider } from '@auth0/auth0-react';
+
+import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
-import CssBaseline from '@mui/material/CssBaseline';
-import { IntercomProvider } from 'react-use-intercom';
-
-import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthApolloProvider } from './apollo';
 import { LedgerProvider } from './ledger';
-import { WalletProvider } from './wallet';
+import { WalletProvider } from './lib/wallet';
 // import history from './lib/history';
 
 const config = {
@@ -51,8 +50,6 @@ ReactDOM.render(
           <WalletProvider>
             <LedgerProvider>
               <ThemeProvider injectFonts>
-                {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-                <CssBaseline />
                 <App />
               </ThemeProvider>
             </LedgerProvider>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -11,6 +11,7 @@ import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
+import { ValidatorsWhoSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -52,85 +53,87 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const WhoSection = (): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <StaticQuery
-      query={graphql`
-        {
-          background: file(relativePath: { eq: "who-validators-bg.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
+const query = graphql`
+  query validatorsWhoSection {
+    background: file(relativePath: { eq: "who-validators-bg.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    sanityValidatorsPage {
+      whoSection {
+        header
+        _rawBody
+        validators {
+          header
+          description
+          members {
+            link {
+              buttonHref
             }
-          }
-          text: validatorsYaml {
-            whoSection {
-              header
-              body
-              validators {
-                header
-                description
-                members {
-                  image {
-                    publicURL
-                    childImageSharp {
-                      fluid(quality: 90) {
-                        ...GatsbyImageSharpFluid_withWebp
-                      }
-                    }
-                  }
-                  link
+            image {
+              image {
+                asset {
+                  url
                 }
               }
             }
           }
         }
-      `}
-      render={data => {
-        const content = data.text.whoSection;
-        return (
-          <BackgroundSection
-            linearGradient="unset"
-            className={classes.section}
-            imageData={data.background.childImageSharp.fluid}
-            topSection={false}
-          >
-            <TitleDescription title={content.header} description={content.body} />
-            {content.validators.map((v, i: number) => {
-              const items: JSX.Element[] = v.members.map((m, j: number) => (
-                <GreenMediaCard className={classes.card} imageUrl={m.image.publicURL} link={m.link} />
-              ));
-              return (
-                <div key={i} className={classes.validators}>
-                  <Title align="center" variant="h3" className={classes.title}>
-                    {v.header}
-                  </Title>
-                  <Description align="center" className={classes.description}>
-                    {v.description}
-                  </Description>
+      }
+    }
+  }
+`;
 
-                  <Box display={{ xs: 'none', sm: 'block' }}>
-                    <Grid container justifyContent="center" spacing={7}>
-                      {items.map((item: JSX.Element, index: number) => (
-                        <Grid key={index} item xs={6} md={4}>
-                          {item}
-                        </Grid>
-                      ))}
-                    </Grid>
-                  </Box>
-                  <Box display={{ xs: 'block', sm: 'none' }}>
-                    <ResponsiveSlider itemWidth="90%" items={items} />
-                  </Box>
-                </div>
-              );
-            })}
-          </BackgroundSection>
+const WhoSection = (): JSX.Element => {
+  const styles = useStyles();
+  const { background, sanityValidatorsPage } = useStaticQuery<ValidatorsWhoSectionQuery>(query);
+  const data = sanityValidatorsPage?.whoSection;
+  return (
+    <BackgroundSection
+      linearGradient="unset"
+      className={styles.section}
+      imageData={background?.childImageSharp?.fluid}
+      topSection={false}
+    >
+      <TitleDescription title={data?.header || ''} description={data?._rawBody} />
+      {(data?.validators || []).map((v, i) => {
+        const items: JSX.Element[] = (v?.members || []).map((m, j) => (
+          <GreenMediaCard
+            key={j}
+            className={styles.card}
+            imageUrl={m?.image?.image?.asset?.url || ''}
+            link={m?.link?.buttonHref || ''}
+          />
+        ));
+
+        return (
+          <div key={i} className={styles.validators}>
+            <Title align="center" variant="h3" className={styles.title}>
+              {v?.header}
+            </Title>
+            <Description align="center" className={styles.description}>
+              {v?.description}
+            </Description>
+
+            <Box display={{ xs: 'none', sm: 'block' }}>
+              <Grid container justifyContent="center" spacing={7}>
+                {items.map((item: JSX.Element, index: number) => (
+                  <Grid key={index} item xs={6} md={4}>
+                    {item}
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+            <Box display={{ xs: 'block', sm: 'none' }}>
+              <ResponsiveSlider itemWidth="90%" items={items} />
+            </Box>
+          </div>
         );
-      }}
-    />
+      })}
+    </BackgroundSection>
   );
 };
 

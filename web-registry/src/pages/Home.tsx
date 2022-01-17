@@ -3,11 +3,14 @@ import { makeStyles, useTheme } from '@mui/styles';
 import CardMedia from '@mui/material/CardMedia';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import { HeroTitle, HeroAction } from '../components/molecules';
-import { ProjectCards, CreditClassCards } from '../components/organisms';
+import {
+  ProjectCards,
+  CreditClassCards,
+  CreditBatches,
+} from '../components/organisms';
 import { creditClasses } from '../mocks';
 
 import cowsImg from '../assets/cows-by-barn.png';
@@ -21,7 +24,10 @@ import {
 } from '../generated/sanity-graphql';
 import { client } from '../sanity';
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
+  root: {
+    backgroundColor: theme.palette.primary.main,
+  },
   topSectionDescription: {
     maxWidth: theme.spacing(165),
   },
@@ -42,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   projectCards: {
     [theme.breakpoints.down('md')]: {
       width: '100vw',
-      marginLeft: theme.spacing(-8), // MUI Grid spacing in our `section` component with padding prevents scrolling all the way over. This presents d
+      marginLeft: theme.spacing(-8),
     },
     [theme.breakpoints.down('sm')]: {
       marginLeft: theme.spacing(-4),
@@ -77,7 +83,7 @@ const Home: React.FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <>
+    <div className={styles.root}>
       <HeroTitle
         isBanner
         img={cowsImg}
@@ -87,18 +93,21 @@ const Home: React.FC = () => {
       />
 
       {projectsData?.allProjects?.nodes && (
-        <CardMedia image={topographyImg}>
-          <Section
-            title="Projects"
-            classes={{ root: styles.section, title: styles.title }}
-          >
-            <ProjectCards
-              projects={projectsData?.allProjects?.nodes}
-              classes={{ root: styles.projectCards }}
-            />
-          </Section>
-        </CardMedia>
+        <Section
+          title="Projects"
+          titleAlign="left"
+          classes={{ root: styles.section, title: styles.title }}
+        >
+          <ProjectCards
+            projects={projectsData?.allProjects?.nodes}
+            classes={{ root: styles.projectCards }}
+          />
+        </Section>
       )}
+
+      <CardMedia image={topographyImg}>
+        <CreditBatches />
+      </CardMedia>
 
       <Section
         title="Credit Classes"
@@ -134,7 +143,7 @@ const Home: React.FC = () => {
       >
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
-    </>
+    </div>
   );
 };
 

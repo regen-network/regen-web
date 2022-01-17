@@ -10,6 +10,7 @@ import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import WalletConnectionButton from './WalletConnectionButton';
 import { FontSizes } from 'web-components/lib/theme/sizing';
+import { WalletAddrRegFormSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -43,24 +44,25 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const query = graphql`
+  query walletAddrRegFormSection {
+    sanityWalletAddressRegistrationPage {
+      formSection {
+        airtableLink
+        recaptchaMessage
+      }
+    }
+  }
+`;
+
 const FormSection = (): JSX.Element => {
-  const classes = useStyles();
+  const styles = useStyles();
+  const { sanityWalletAddressRegistrationPage } = useStaticQuery<WalletAddrRegFormSectionQuery>(query);
+  const data = sanityWalletAddressRegistrationPage?.formSection;
   const [isRecaptchaVerified, setIsRecaptchaVerified] = useState<any>(undefined);
   const [isKeplrDetected, setIsKeplrDetected] = useState(false);
   const recaptchaSiteKey = process.env.GATSBY_RECAPTCHA_SITE_KEY;
   const fontSize: FontSizes = { xs: '1rem', sm: '1.375rem' };
-
-  const data = useStaticQuery(graphql`
-    query {
-      text: walletAddressRegistrationYaml {
-        form {
-          airtableLink
-          recaptchaMessage
-        }
-      }
-    }
-  `);
-  const content = data?.text?.form;
 
   useEffect(() => {
     setTimeout(checkForKeplr, 300);
@@ -90,19 +92,19 @@ const FormSection = (): JSX.Element => {
   };
 
   return (
-    <Section className={classes.section}>
+    <Section className={styles.section}>
       <div onMouseEnter={checkForKeplr}>
         <WalletConnectionButton isKeplrDetected={isKeplrDetected} />
         {recaptchaSiteKey && !isRecaptchaVerified && (
-          <div className={classes.recaptcha}>
+          <div className={styles.recaptcha}>
             <Description fontSize={fontSize}>
-              <p>{content.recaptchaMessage}</p>
+              <p>{data?.recaptchaMessage}</p>
             </Description>
             <ReCAPTCHA onChange={verifyRecaptchaResponse} sitekey={recaptchaSiteKey} />
           </div>
         )}
-        <Collapse in={isRecaptchaVerified} classes={{ wrapperInner: classes.flex }}>
-          <iframe className={classes.iframe} title="airtable-wallet-form" src={content?.airtableLink} />
+        <Collapse in={isRecaptchaVerified} classes={{ wrapperInner: styles.flex }}>
+          <iframe className={styles.iframe} title="airtable-wallet-form" src={data?.airtableLink || ''} />
         </Collapse>
       </div>
     </Section>

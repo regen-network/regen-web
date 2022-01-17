@@ -2,11 +2,12 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import { MarketingDescription as Description } from '../../components/Description';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { TokenEconomicsQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -31,36 +32,29 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
 }));
 
-type QueryData = {
-  text: {
-    tokenEconomics: {
-      title: string;
-      body: string;
-    };
-  };
-};
-
-const TokenEconomics = (): JSX.Element => {
-  const styles = useStyles();
-
-  const {
-    text: {
-      tokenEconomics: { title, body },
-    },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      text: tokenYaml {
-        tokenEconomics {
-          title
-          body
-        }
+const query = graphql`
+  query tokenEconomics {
+    sanityTokenPage {
+      tokenEconomics {
+        title
+        _rawBody
       }
     }
-  `);
+  }
+`;
+const TokenEconomics = (): JSX.Element => {
+  const styles = useStyles();
+  const { sanityTokenPage } = useStaticQuery<TokenEconomicsQuery>(query);
+  const data = sanityTokenPage?.tokenEconomics;
 
   return (
-    <Section title={title} classes={{ root: clsx(styles.root, styles.center), title: styles.title }}>
-      <Description className={clsx(styles.content, styles.center)}>{ReactHtmlParser(body)}</Description>
+    <Section
+      title={data?.title || ''}
+      classes={{ root: clsx(styles.root, styles.center), title: styles.title }}
+    >
+      <Description className={clsx(styles.content, styles.center)}>
+        <BlockContent content={data?._rawBody} />
+      </Description>
     </Section>
   );
 };

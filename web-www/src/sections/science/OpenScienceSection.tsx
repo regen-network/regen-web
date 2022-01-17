@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -8,6 +8,7 @@ import Description from 'web-components/lib/components/description';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import { getFontSize } from 'web-components/lib/theme/sizing';
 import BackgroundSection from '../../components/BackgroundSection';
+import { ScienceOpenScienceSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -66,67 +67,60 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const query = graphql`
+  query scienceOpenScienceSection {
+    background: file(relativePath: { eq: "open-science.jpg" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    sanitySciencePage {
+      openScienceSection {
+        headerStart
+        headerGreen
+        caption
+        phases {
+          title
+          body
+        }
+      }
+    }
+  }
+`;
+
 const OpenScienceSection = (): JSX.Element => {
-  const classes = useStyles();
+  const styles = useStyles();
+  const data = useStaticQuery<ScienceOpenScienceSectionQuery>(query);
+  const content = data.sanitySciencePage?.openScienceSection;
 
   return (
-    <StaticQuery
-      query={graphql`
-        {
-          background: file(relativePath: { eq: "open-science.jpg" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          content: scienceYaml {
-            openScienceSection {
-              header {
-                start
-                green
-              }
-              caption
-              phases {
-                title
-                description
-              }
-            }
-          }
-        }
-      `}
-      render={data => {
-        const content = data.content.openScienceSection;
-        return (
-          <BackgroundSection
-            withSlider
-            className={classes.root}
-            linearGradient="unset"
-            topSection={false}
-            imageData={data.background.childImageSharp.fluid}
-          >
-            <Title className={classes.caption} variant="h6">
-              {content.caption}
+    <BackgroundSection
+      className={styles.root}
+      linearGradient="unset"
+      topSection={false}
+      imageData={data.background?.childImageSharp?.fluid}
+    >
+      <Title className={styles.caption} variant="h6">
+        {content?.caption}
+      </Title>
+      <Title className={styles.title} variant="h1">
+        {content?.headerStart} <span className={styles.green}>{content?.headerGreen}</span>
+      </Title>
+      <ResponsiveSlider
+        infinite={false}
+        className={styles.slider}
+        items={content?.phases?.map((phase, index) => (
+          <div key={index}>
+            <Title variant="h3" className={styles.phaseTitle}>
+              {phase?.title}
             </Title>
-            <Title className={classes.title} variant="h1">
-              {content.header.start} <span className={classes.green}>{content.header.green}</span>
-            </Title>
-            <ResponsiveSlider
-              infinite={false}
-              className={classes.slider}
-              items={content.phases.map((phase, index) => (
-                <div>
-                  <Title variant="h3" className={classes.phaseTitle}>
-                    {phase.title}
-                  </Title>
-                  <Description fontSize={getFontSize('big')}>{phase.description}</Description>
-                </div>
-              ))}
-            />
-          </BackgroundSection>
-        );
-      }}
-    />
+            <Description fontSize={getFontSize('big')}>{phase?.body}</Description>
+          </div>
+        ))}
+      />
+    </BackgroundSection>
   );
 };
 

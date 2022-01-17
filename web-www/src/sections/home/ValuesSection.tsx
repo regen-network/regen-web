@@ -1,20 +1,17 @@
 import React from 'react';
+import SanityImage from 'gatsby-plugin-sanity-image';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
-import Img from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import Section from 'web-components/lib/components/section';
+import { HomeValuesSectionQuery } from '../../generated/graphql';
 
-interface Props {
-  className?: string;
-}
-
-let useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(14),
@@ -57,72 +54,58 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const HomeValues = ({ className }: Props) => {
-  const data = useStaticQuery(graphql`
-    query {
-      bg: file(relativePath: { eq: "topo-bg-top.png" }) {
-        childImageSharp {
-          fluid(quality: 90, maxWidth: 1920) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+const query = graphql`
+  query homeValuesSection {
+    bg: file(relativePath: { eq: "topo-bg-top.png" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 1920) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
-      ellipse: file(relativePath: { eq: "green-ellipse.png" }) {
-        childImageSharp {
-          fixed(quality: 90, width: 120) {
-            ...GatsbyImageSharpFixed_withWebp
-          }
-        }
-      }
-      text: homeYaml {
-        valuesSection {
-          header
-          imageItems {
-            image {
-              childImageSharp {
-                fixed(quality: 90, width: 120) {
-                  ...GatsbyImageSharpFixed_withWebp
-                }
-              }
-              extension
-              publicURL
-            }
-            header
-            description
+    }
+    sanityHomePageWeb {
+      valuesSection {
+        header
+        imageItems {
+          title
+          description
+          image {
+            ...Image
           }
         }
       }
     }
-  `);
-  const content = data.text.valuesSection;
-  const classes = useStyles();
+  }
+`;
 
-  const imageItems: ImageItemProps[] = content.imageItems.map(({ image, header: title, description }) => ({
-    img:
-      !image.childImageSharp && image.extension === 'svg' ? (
-        <img src={image.publicURL} alt={image.publicURL} />
-      ) : (
-        <Img fixed={image.childImageSharp.fixed} />
-      ),
-    title,
-    description,
-  }));
+const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
+  const styles = useStyles();
+  const { bg, sanityHomePageWeb } = useStaticQuery<HomeValuesSectionQuery>(query);
+  const content = sanityHomePageWeb?.valuesSection;
+
+  const imageItems: ImageItemProps[] = (content?.imageItems || []).map(item => {
+    return {
+      title: item?.title || '',
+      description: item?.description || '',
+      img: <SanityImage {...(item?.image as any)} alt={item?.title || ''} />,
+    };
+  }) as ImageItemProps[];
 
   return (
     <BackgroundImage
       Tag="section"
-      className={clsx(className, classes.section)}
-      fluid={data.bg.childImageSharp.fluid}
+      className={clsx(className, styles.section)}
+      fluid={bg?.childImageSharp?.fluid as any}
     >
       <Section
         withSlider
-        className={classes.root}
+        className={styles.root}
         titleVariant="h1"
         titleLineHeight="130%"
-        title={content.header}
+        title={content?.header || ''}
       >
-        <div className={classes.sliderContainer}>
-          <ImageItems imageClassName={classes.image} titleVariant="h3" items={imageItems} />
+        <div className={styles.sliderContainer}>
+          <ImageItems imageClassName={styles.image} titleVariant="h3" items={imageItems} />
         </div>
       </Section>
     </BackgroundImage>

@@ -2,6 +2,7 @@ import React from 'react';
 import { useTheme } from '@mui/styles';
 import Box from '@mui/material/Box';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Header, { HeaderColors } from 'web-components/lib/components/header';
 import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
 import { NavLink } from 'web-components/lib/components/header/NavLink';
@@ -23,7 +24,7 @@ interface BoolProps {
 }
 
 const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
     '/resources/': theme.palette.primary.main,
@@ -31,7 +32,6 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
     '/terms-service/': theme.palette.primary.light,
     '/team/': theme.palette.primary.light,
     '/developers/': theme.palette.primary.main,
-    '/invest/': theme.palette.primary.light,
     '/science/': theme.palette.primary.main,
     '/validators/': theme.palette.primary.main,
     '/community/': theme.palette.primary.main,
@@ -47,7 +47,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   // Links in rest of the site must use the trailing '/'
   // in order for these to work appropriately
   const headerNoBorderBottomPages: RegExp = new RegExp(
-    '//|/partners/|/contact/|/validators/|/resources/|/media/|/team/|/developers/|/science/|/invest/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/fund/|/case-studies/[a-z-]+//',
+    '//|/partners/|/contact/|/validators/|/resources/|/media/|/team/|/developers/|/science/|/case-studies/|/press-kit/|/community/|/wallet-address-registration/|/mainnet/|/token/|/fund/|/case-studies/[a-z-]+//',
   );
 
   const standardItems: HeaderDropdownItemProps[] = [

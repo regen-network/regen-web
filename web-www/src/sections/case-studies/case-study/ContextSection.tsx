@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import { graphql, StaticQuery } from 'gatsby';
-import ReactHtmlParser from 'react-html-parser';
+import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 import clsx from 'clsx';
@@ -10,18 +9,8 @@ import clsx from 'clsx';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
-
-interface ContextSectionProps {
-  description: string;
-  image: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
-  challenges: {
-    text: string;
-  }[];
-}
+import { BlockContent } from 'web-components/src/components/block-content';
+import { SanityCaseStudyContextSection } from '../../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -98,7 +87,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   list: {
     listStyle: 'none',
     counterReset: 'challenge-counter',
-    marginLeft: theme.spacing(6),
   },
   item: {
     counterIncrement: 'challenge-counter',
@@ -133,68 +121,63 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ContextSection = ({ description, image, challenges }: ContextSectionProps): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <StaticQuery
-      query={graphql`
-        {
-          bg: file(relativePath: { eq: "topo-bg-top.png" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          imageBg: file(relativePath: { eq: "image-bg.png" }) {
-            childImageSharp {
-              fluid(quality: 90) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-          text: caseStudiesYaml {
-            caseStudies {
-              contextSection {
-                header
-                challenges
-              }
-            }
-          }
+const query = graphql`
+  query CaseStudyContextSection {
+    bg: file(relativePath: { eq: "topo-bg-top.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
-      `}
-      render={data => {
-        const content = data.text.caseStudies.contextSection;
-        return (
-          <BackgroundImage fluid={data.bg.childImageSharp.fluid}>
-            <div className={classes.root}>
-              <Grid className={classes.grid} container wrap="nowrap">
-                <Grid item xs={12} className={classes.text}>
-                  <Title variant="h2" className={classes.title}>
-                    {content.header}
-                  </Title>
-                  <Description className={classes.description}>{ReactHtmlParser(description)}</Description>
-                  <Title variant="h2" className={classes.title}>
-                    {content.challenges}
-                  </Title>
-                  <ol className={classes.list}>
-                    {challenges.map(({ text }, i) => (
-                      <Description key={i} component="li" className={clsx(classes.description, classes.item)}>
-                        {text}
-                      </Description>
-                    ))}
-                  </ol>
-                </Grid>
-                <Grid item xs={12} className={classes.imageContainer}>
-                  <Img fluid={image.childImageSharp.fluid} className={classes.image} />
-                </Grid>
-              </Grid>
-            </div>
-          </BackgroundImage>
-        );
-      }}
-    />
+      }
+    }
+    imageBg: file(relativePath: { eq: "image-bg.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    sanityCaseStudiesPage {
+      contextSection {
+        header
+        challenges
+      }
+    }
+  }
+`;
+
+const ContextSection: React.FC<SanityCaseStudyContextSection> = ({ _rawDescription, image, challenges }) => {
+  const styles = useStyles();
+  const data = useStaticQuery(query);
+  const content = data?.sanityCaseStudiesPage?.contextSection;
+  return (
+    <BackgroundImage fluid={data.bg.childImageSharp.fluid}>
+      <div className={styles.root}>
+        <Grid className={styles.grid} container wrap="nowrap">
+          <Grid item xs={12} className={styles.text}>
+            <Title variant="h2" className={styles.title}>
+              {content?.header}
+            </Title>
+            <Description className={styles.description}>
+              {<BlockContent content={_rawDescription} />}
+            </Description>
+            <Title variant="h2" className={styles.title}>
+              {content.challenges}
+            </Title>
+            <ol className={styles.list}>
+              {challenges?.map((text, i) => (
+                <Description key={i} component="li" className={clsx(styles.description, styles.item)}>
+                  {text}
+                </Description>
+              ))}
+            </ol>
+          </Grid>
+          <Grid item xs={12} className={styles.imageContainer}>
+            <Img fluid={image?.image?.asset?.fluid as FluidObject} className={styles.image} />
+          </Grid>
+        </Grid>
+      </div>
+    </BackgroundImage>
   );
 };
 

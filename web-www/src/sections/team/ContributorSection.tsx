@@ -1,8 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
+
+import { TeamContributorSectionQuery } from '../../generated/graphql';
+import { TeamItemProps } from 'web-components/lib/components/team-item';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import TeamSection from 'web-components/lib/components/team-section';
-import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -12,41 +15,30 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ContributorSection = (): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      background: file(relativePath: { eq: "team-bg.png" }) {
-        publicURL
-      }
-      text: teamYaml {
-        contributorSection {
-          title
-          contributors {
-            name
-            title
-            description
-            image {
-              extension
-              publicURL
-            }
-            linkedUrl
-            twitterUrl
-            githubUrl
-          }
-        }
+const query = graphql`
+  query teamContributorSection {
+    background: file(relativePath: { eq: "team-bg.png" }) {
+      publicURL
+    }
+    sanityTeamPage {
+      contributorSection {
+        ...teamSectionFields
       }
     }
-  `);
-  const classes = useStyles();
-  const members = data.text.contributorSection.contributors;
-  const title = data.text.contributorSection.title;
+  }
+`;
+
+const ContributorSection = (): JSX.Element => {
+  const { background, sanityTeamPage } = useStaticQuery<TeamContributorSectionQuery>(query);
+  const data = sanityTeamPage?.contributorSection;
+  const styles = useStyles();
   return (
-    <div className={classes.root}>
+    <div className={styles.root}>
       <TeamSection
         alphabetized
-        bgUrl={data.background.publicURL}
-        members={members.map(m => ({ imgUrl: m.image.publicURL, ...m }))}
-        title={title}
+        bgUrl={background?.publicURL || ''}
+        members={(data?.members || []).map(m => ({ imgUrl: m?.image?.asset?.url, ...m } as TeamItemProps))}
+        title={data?.title || ''}
       />
     </div>
   );

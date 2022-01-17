@@ -6,10 +6,7 @@ import Description from '../description';
 import OutlinedButton from '../buttons/OutlinedButton';
 import PlayIcon from '../icons/PlayIcon';
 
-// TODO When migrating website content to Sanity,
-// remove buttonText props from ArticleCard and use
-// this function instead
-export function getBtnText(type?: string | null): string {
+function getBtnText(type?: string | null): string {
   switch (type) {
     case 'video':
       return 'watch video';
@@ -23,7 +20,7 @@ export function getBtnText(type?: string | null): string {
 }
 
 export interface ArticleCardProps {
-  buttonText?: string;
+  type: string;
   name: string;
   date: string;
   author: string;
@@ -84,16 +81,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export default function ArticleCard({
-  buttonText = 'read article',
   className,
   name,
   date,
   author,
   imgSrc,
   url,
+  type,
   play = false,
 }: ArticleCardProps): JSX.Element {
-  const classes = useStyles({});
+  const styles = useStyles({});
   return (
     <MediaCard
       className={className}
@@ -103,17 +100,17 @@ export default function ArticleCard({
       elevation={1}
     >
       {play && (
-        <div className={classes.play}>
-          <PlayIcon className={classes.icon} />
+        <div className={styles.play}>
+          <PlayIcon className={styles.icon} />
         </div>
       )}
-      <Description className={classes.description}>
-        <span className={classes.author}>{author}</span>
-        <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <Description className={styles.description}>
+        <span className={styles.author}>{author}</span>
+        <span className={styles.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         <span>{date}</span>
       </Description>
-      <OutlinedButton className={classes.button} href={url} target="_blank">
-        {buttonText}
+      <OutlinedButton className={styles.button} href={url} target="_blank">
+        {getBtnText(type)}
       </OutlinedButton>
     </MediaCard>
   );

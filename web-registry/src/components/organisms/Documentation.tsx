@@ -3,7 +3,10 @@ import { makeStyles } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Table, { Document } from 'web-components/lib/components/table';
+import {
+  DocumentationTable,
+  Document,
+} from 'web-components/lib/components/table/DocumentationTable';
 import Section from 'web-components/lib/components/section';
 
 export interface DocumentationProps {
@@ -45,7 +48,7 @@ function Documentation({
       titleVariant="h2"
       titleAlign="left"
     >
-      <Table
+      <DocumentationTable
         className={styles.tableBorder}
         txClient={txClient}
         onViewOnLedger={onViewOnLedger}

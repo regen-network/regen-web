@@ -1,7 +1,10 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { OnboardingFormTemplate } from '../components/templates';
+import {
+  OnboardingFormTemplate,
+  EditFormTemplate,
+} from '../components/templates';
 import { StoryForm, StoryValues } from '../components/organisms';
 import {
   useProjectByIdQuery,
@@ -62,7 +65,9 @@ const Story: React.FC = () => {
   }
 
   return isEdit ? (
-    <StoryForm submit={submit} initialValues={initialFieldValues} />
+    <EditFormTemplate>
+      <StoryForm submit={submit} initialValues={initialFieldValues} />
+    </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
       activeStep={0}

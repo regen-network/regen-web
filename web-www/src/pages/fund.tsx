@@ -6,29 +6,30 @@ import TopSection from '../sections/fund/TopSection';
 import FoldSection from '../sections/fund/FoldSection';
 import ThesisSection from '../sections/fund/ThesisSection';
 import CallToAction from '../sections/fund/CallToAction';
+import { FundPageQuery } from '../generated/graphql';
 
-const TokenPage = ({ location }: PageProps): JSX.Element => {
-  const data = useStaticQuery(graphql`
-    query {
-      seoImage: file(relativePath: { eq: "waterfall.png" }) {
-        publicURL
-      }
-      text: fundYaml {
-        seo {
-          title
-          description
-        }
-      }
+const query = graphql`
+  query fundPage {
+    seoImage: file(relativePath: { eq: "waterfall.png" }) {
+      publicURL
     }
-  `);
+    sanityFundPage {
+      seoTitle
+      seoDescription
+    }
+  }
+`;
+
+const FundPage: React.FC<PageProps> = ({ location }) => {
+  const { seoImage, sanityFundPage: data } = useStaticQuery<FundPageQuery>(query);
 
   return (
     <>
       <SEO
-        description={data?.text?.seo?.description}
-        title={data?.text?.seo?.title}
+        description={data?.seoDescription || ''}
+        title={data?.seoTitle || ''}
         location={location}
-        imageUrl={data?.seoImage?.publicURL}
+        imageUrl={seoImage?.publicURL || ''}
       />
       <TopSection />
       <FoldSection />
@@ -38,4 +39,4 @@ const TokenPage = ({ location }: PageProps): JSX.Element => {
   );
 };
 
-export default TokenPage;
+export default FundPage;

@@ -9,6 +9,9 @@ import Title from 'web-components/lib/components/title';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import DecentralizeIcon from 'web-components/lib/components/icons/DecentralizeIcon';
 import { MarketingDescription as Description } from '../../components/Description';
+import { TokenBlockExplorerSectionQuery } from '../../generated/graphql';
+import { FluidObject } from 'gatsby-image';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -69,39 +72,50 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BlockExplorerSection = (): JSX.Element => {
-  const styles = useStyles();
-  const data = useStaticQuery(graphql`
-    {
-      background: file(relativePath: { eq: "stones-bg.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: tokenYaml {
-        blockExplorerSection {
-          header
-          description
-          buttonText
-          buttonUrl
+const query = graphql`
+  query tokenBlockExplorerSection {
+    background: file(relativePath: { eq: "stones-bg.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
-  const content = data.text.blockExplorerSection;
-  const imageData = data.background.childImageSharp.fluid;
+    sanityTokenPage {
+      blockExplorerSection {
+        title
+        _rawBody
+        button {
+          buttonText
+          buttonLink {
+            buttonHref
+          }
+        }
+      }
+    }
+  }
+`;
+const BlockExplorerSection = (): JSX.Element => {
+  const styles = useStyles();
+  const { background, sanityTokenPage } = useStaticQuery<TokenBlockExplorerSectionQuery>(query);
+  const data = sanityTokenPage?.blockExplorerSection;
+  const imageData = background?.childImageSharp?.fluid;
 
   return (
-    <BackgroundImage Tag="div" fluid={imageData}>
+    <BackgroundImage Tag="div" fluid={imageData as FluidObject}>
       <Section classes={{ root: styles.root }}>
         <div className={styles.content}>
           <DecentralizeIcon />
-          <Title className={styles.title}>{content.header}</Title>
-          <Description className={styles.description}>{content.description}</Description>
-          <ContainedButton className={styles.button} href={content.buttonUrl} target="_blank">
-            {content.buttonText}
+          <Title className={styles.title}>{data?.title}</Title>
+          <Description className={styles.description}>
+            <BlockContent content={data?._rawBody} />
+          </Description>
+          <ContainedButton
+            className={styles.button}
+            href={data?.button?.buttonLink?.buttonHref || ''}
+            target="_blank"
+          >
+            {data?.button?.buttonText || ''}
           </ContainedButton>
         </div>
       </Section>

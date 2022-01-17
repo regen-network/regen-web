@@ -1,0 +1,16 @@
+overwrite: true
+schema: 'http://localhost:8000/___graphql'
+documents:
+  - cache/fragments/**/*.js
+  - node_modules/gatsby*/!(node_modules)/**/*.js
+  - node_modules/gatsby-*/**/*.js
+  - src/graphql/**/*.graphql
+  - src/**/*.{ts,tsx}
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+    config:
+      withHooks: true
+      avoidOptionals: true

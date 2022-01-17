@@ -1,11 +1,12 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
+import { PresskitFeaturedSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -38,47 +39,56 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FeaturedSection = (): JSX.Element => {
-  const classes = useStyles();
-
-  return (
-    <StaticQuery
-      query={graphql`
-        query {
-          content: pressKitYaml {
-            featuredSection {
-              header
-              articles {
-                header
-                author
-                date
-                image {
-                  publicURL
-                }
+const query = graphql`
+  query presskitFeaturedSection {
+    sanityPresskitPage {
+      featuredSection {
+        header
+        articles {
+          title
+          author
+          date
+          href
+          type
+          image {
+            image {
+              asset {
                 url
               }
             }
           }
         }
-      `}
-      render={data => {
-        const content = data.content.featuredSection;
-        const items: JSX.Element[] = content.articles.map(({ image, header, author, date, url }) => (
-          <ArticleCard name={header} imgSrc={image.publicURL} author={author} date={date} url={url} />
-        ));
-        return (
-          <Section withSlider title={content.header} classes={{ title: classes.title }}>
-            <ResponsiveSlider
-              infinite={false}
-              className={classes.slider}
-              itemWidth="90%"
-              slidesToShow={3}
-              items={items}
-            />
-          </Section>
-        );
-      }}
+      }
+    }
+  }
+`;
+
+const FeaturedSection = (): JSX.Element => {
+  const styles = useStyles();
+  const { sanityPresskitPage } = useStaticQuery<PresskitFeaturedSectionQuery>(query);
+  const data = sanityPresskitPage?.featuredSection;
+
+  const items: JSX.Element[] = (data?.articles || []).map(item => (
+    <ArticleCard
+      name={item?.title || ''}
+      type={item?.type || 'article'}
+      imgSrc={item?.image?.image?.asset?.url || ''}
+      author={item?.author || ''}
+      date={item?.date || ''}
+      url={item?.href || ''}
     />
+  ));
+
+  return (
+    <Section withSlider title={data?.header || ''} classes={{ title: styles.title }}>
+      <ResponsiveSlider
+        infinite={false}
+        className={styles.slider}
+        itemWidth="90%"
+        slidesToShow={3}
+        items={items}
+      />
+    </Section>
   );
 };
 

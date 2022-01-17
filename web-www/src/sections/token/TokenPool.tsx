@@ -7,6 +7,8 @@ import clsx from 'clsx';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import { MarketingDescription as Description } from '../../components/Description';
+import { TokenPoolQuery } from '../../generated/graphql';
+import SanityImage from 'gatsby-plugin-sanity-image';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -32,49 +34,42 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
 }));
 
-type QueryData = {
-  text: {
-    tokenPool: {
-      title: string;
-      subtitle: string;
-    };
-  };
-};
+const query = graphql`
+  query TokenPool {
+    sanityTokenPage {
+      poolSection {
+        title
+        subtitle
+        image {
+          ...Image
+        }
+        mobileImage {
+          ...Image
+        }
+      }
+    }
+  }
+`;
 
 const TokenEconomics = (): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const {
-    text: {
-      tokenPool: { title, subtitle },
-    },
-  } = useStaticQuery<QueryData>(graphql`
-    query {
-      text: tokenYaml {
-        tokenPool {
-          title
-          subtitle
-        }
-      }
-    }
-  `);
-  const imageTitle = 'Token Pool';
+  const { sanityTokenPage } = useStaticQuery<TokenPoolQuery>(query);
+  const data = sanityTokenPage?.poolSection;
 
   return isMobile ? (
     <div className={styles.root}>
-      <img
-        src="../media/token-pool-mobile.svg"
-        className={styles.image}
-        title={imageTitle}
-        alt={imageTitle}
-      />
+      <SanityImage className={styles.image} {...(data?.mobileImage as any)} />
     </div>
   ) : (
-    <Section title={title} classes={{ root: clsx(styles.root, styles.center), title: styles.title }}>
-      <Description className={clsx(styles.content, styles.center)}>{subtitle}</Description>
-      <img src="../media/token-pool.svg" className={styles.image} title={imageTitle} alt={imageTitle} />
+    <Section
+      title={data?.title || ''}
+      classes={{ root: clsx(styles.root, styles.center), title: styles.title }}
+    >
+      <Description className={clsx(styles.content, styles.center)}>{data?.subtitle}</Description>
+      <SanityImage className={styles.image} {...(data?.image as any)} />
     </Section>
   );
 };

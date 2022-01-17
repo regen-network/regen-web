@@ -3,10 +3,11 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Title from '../title';
 import OutlinedButton from '../buttons/OutlinedButton';
+import { BlockContent, SanityBlockOr } from '../block-content';
 
 export interface BlogPostProps {
   header: string;
-  description: string;
+  description: SanityBlockOr<string>; // optional array for sanity block content
   img: JSX.Element;
   url: string;
 }
@@ -55,12 +56,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function BlogPost({
+const BlogPost: React.FC<BlogPostProps> = ({
   header,
   description,
   img,
   url,
-}: BlogPostProps): JSX.Element {
+}) => {
   const classes = useStyles({});
   return (
     <div>
@@ -68,7 +69,13 @@ export default function BlogPost({
       <Title variant="h5" className={classes.header}>
         {header}
       </Title>
-      <Typography className={classes.description}>{description}</Typography>
+      <Typography className={classes.description} component="div">
+        {typeof description == 'string' ? (
+          description
+        ) : (
+          <BlockContent content={description} />
+        )}
+      </Typography>
       <OutlinedButton
         className={classes.button}
         href={url}
@@ -79,4 +86,6 @@ export default function BlogPost({
       </OutlinedButton>
     </div>
   );
-}
+};
+
+export default BlogPost;

@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { RegenApi } from '@regen-network/api';
 
 import getApiUri from './lib/apiUri';
+import { chainId } from './lib/wallet';
 
 export type ContextType = {
   loading: boolean;
   api: RegenApi | undefined;
   error: unknown;
 };
+
+// Simple proxy endpoint for REST requests. We check for chainId as an on/off switch.
+export const ledgerRestUri = chainId ? `${getApiUri()}/ledger-rest` : undefined;
 
 async function connect(): Promise<RegenApi | undefined> {
   // Create a new instance of the RegenApi class.

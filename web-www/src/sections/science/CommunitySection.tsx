@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
 import { makeStyles, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Img from 'gatsby-image';
+import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
@@ -11,6 +11,7 @@ import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIco
 import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
 import HexaImages from 'web-components/lib/components/hexa-images';
 import BackgroundSection from '../../components/BackgroundSection';
+import { ScienceCommunitySectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -124,7 +125,7 @@ const CommunitySection = (): JSX.Element => {
   return (
     <StaticQuery
       query={graphql`
-        {
+        query scienceCommunitySection {
           arrow: file(relativePath: { eq: "Arrow.png" }) {
             childImageSharp {
               fluid(quality: 90) {
@@ -139,37 +140,42 @@ const CommunitySection = (): JSX.Element => {
               }
             }
           }
-          content: scienceYaml {
+          sanitySciencePage {
             communitySection {
               caption
               header
               members {
                 name
-                role
                 image {
-                  publicURL
+                  imageHref
+                  image {
+                    asset {
+                      url
+                    }
+                  }
                 }
-                description
+                _rawRole
+                _rawDescription
               }
             }
           }
         }
       `}
-      render={data => {
-        const content = data.content.communitySection;
+      render={(data: ScienceCommunitySectionQuery) => {
+        const content = data.sanitySciencePage?.communitySection;
         return (
           <BackgroundSection
             className={classes.root}
             linearGradient="unset"
             topSection={false}
-            imageData={data.background.childImageSharp.fluid}
+            imageData={data.background?.childImageSharp?.fluid}
           >
             <Grid container alignItems="center">
               <Grid xs={12} sm={6} item container wrap="nowrap" className={classes.connect}>
                 <Title className={classes.caption} variant="h3">
-                  {content.caption}
+                  {content?.caption}
                 </Title>
-                <Img fluid={data.arrow.childImageSharp.fluid} className={classes.arrow} />
+                <Img className={classes.arrow} fluid={data.arrow?.childImageSharp?.fluid as FluidObject} />
               </Grid>
               <Grid xs={12} sm={6} item container justifyContent="flex-end" className={classes.icons}>
                 <a
@@ -211,15 +217,17 @@ const CommunitySection = (): JSX.Element => {
               </Grid>
             </Grid>
             <Title className={classes.title} variant="h1">
-              {content.header}
+              {content?.header}
             </Title>
             <HexaImages
-              items={content.members.map(({ name, description, role, image }, i) => ({
-                name,
-                description,
-                role,
-                imgSrc: image.publicURL,
-              }))}
+              items={(content?.members || []).map(m => {
+                return {
+                  name: m?.name,
+                  description: m?._rawDescription,
+                  role: m?._rawRole,
+                  imgSrc: m?.image?.image?.asset?.url,
+                } as any;
+              })}
             />
           </BackgroundSection>
         );

@@ -19,6 +19,7 @@ const OnboardingFormTemplate: React.FC<Props> = props => {
         linkText="Save & Exit"
         onLinkClick={props.saveAndExit}
         formContainer
+        exampleProjectUrl="/projects/wilmot"
       >
         <Box minHeight="50vh">{props.children}</Box>
       </OnBoardingSection>

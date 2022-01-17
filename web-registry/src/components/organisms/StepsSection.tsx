@@ -27,7 +27,6 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) => ({
   stepSection: {
     paddingTop: 0,
-    background: theme.palette.primary.main,
   },
   titleWrap: {
     display: 'flex',

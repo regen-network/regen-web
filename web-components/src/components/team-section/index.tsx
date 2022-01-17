@@ -93,7 +93,7 @@ const TeamSection = ({
                 description={m.description}
                 imgUrl={m.imgUrl}
                 bgUrl={bgUrl}
-                linkedUrl={m.linkedUrl}
+                linkedUrl={m.linkedinUrl}
                 twitterUrl={m.twitterUrl}
                 githubUrl={m.githubUrl}
               />

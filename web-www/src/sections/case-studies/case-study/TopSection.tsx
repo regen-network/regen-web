@@ -4,11 +4,7 @@ import { FluidObject } from 'gatsby-image';
 import BackgroundSection from '../../../components/BackgroundSection';
 
 interface TopSectionProps {
-  background: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
+  background: FluidObject;
   name: string;
 }
 
@@ -24,7 +20,7 @@ const TopSection = ({ background, name }: TopSectionProps): JSX.Element => {
       linearGradient={gradient}
       linearGradientMobile={gradientMobile}
       header={`Case Study: ${name}`}
-      imageData={background.childImageSharp.fluid}
+      imageData={background}
     />
   );
 };

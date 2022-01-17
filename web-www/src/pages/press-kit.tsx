@@ -1,5 +1,5 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
 import SEO from '../components/seo';
@@ -14,16 +14,15 @@ import LogosSection from '../sections/press-kit/LogosSection';
 import ConnectSection from '../sections/press-kit/ConnectSection';
 import PhotosSection from '../sections/press-kit/PhotosSection';
 
-interface props {
-  location: Location;
-}
-
-const PressKitPage = ({ location }: props): JSX.Element => {
-  const data = useStaticQuery(graphql`{
-  background: file(relativePath: {eq: "press-kit-topo-bg.jpg"}) {
-    childImageSharp {
-      fluid(quality: 90) {
-        ...GatsbyImageSharpFluid_withWebp
+const PressKitPage: React.FC<PageProps> = ({ location }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      background: file(relativePath: { eq: "press-kit-topo-bg.jpg" }) {
+        childImageSharp {
+          fluid(quality: 90) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
       }
     }
   }

@@ -5,6 +5,7 @@ import { makeStyles } from '@mui/styles';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import BackgroundSection from '../../components/BackgroundSection';
+import { TokenTopSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   section: props => ({
@@ -27,27 +28,28 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
 }));
 
-const TopSection = (): JSX.Element => {
-  const styles = useStyles();
-  const data = useStaticQuery(graphql`
-    {
-      background: file(relativePath: { eq: "token-aurora.png" }) {
-        childImageSharp {
-          fluid(quality: 90) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
-      text: tokenYaml {
-        topSection {
-          header
-          body
+const query = graphql`
+  query tokenTopSection {
+    background: file(relativePath: { eq: "token-aurora.png" }) {
+      childImageSharp {
+        fluid(quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-  `);
-  const content = data?.text?.topSection;
-  const imageData = data?.background?.childImageSharp?.fluid;
+    sanityTokenPage {
+      topSection {
+        title
+        body
+      }
+    }
+  }
+`;
+
+const TopSection = (): JSX.Element => {
+  const styles = useStyles();
+  const { background, sanityTokenPage } = useStaticQuery<TokenTopSectionQuery>(query);
+  const data = sanityTokenPage?.topSection;
 
   return (
     <BackgroundSection
@@ -62,12 +64,12 @@ const TopSection = (): JSX.Element => {
             title="Regen Token"
           />
           <Title color="primary" variant="h1">
-            {content.header}
+            {data?.title}
           </Title>
         </div>
       }
-      body={content?.body}
-      imageData={imageData}
+      body={data?.body}
+      imageData={background?.childImageSharp?.fluid}
     />
   );
 };

@@ -11,10 +11,22 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-layout',
-    // 'gatsby-plugin-top-layout',
     'gatsby-plugin-regen-theme',
-    // 'gatsby-plugin-material-ui',
+    'gatsby-plugin-material-ui',
+
     'gatsby-plugin-mui-jss',
+    // { NO
+    //   resolve: `gatsby-plugin-emotion`,
+    //   options: {
+    //     // Accepts the following options, all of which are defined by `@emotion/babel-plugin` plugin.
+    //     // The values for each key in this example are the defaults the plugin uses.
+    //     sourceMap: true,
+    //     autoLabel: 'dev-only',
+    //     labelFormat: `[local]`,
+    //     cssPropOptimization: true,
+    //   },
+    // },
+    // 'gatsby-plugin-mui-emotion',
     {
       resolve: `gatsby-source-sanity`,
       options: {

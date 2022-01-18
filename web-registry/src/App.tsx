@@ -11,7 +11,7 @@ import { ScrollToTop, ProtectedRoute } from './components/atoms';
 import { RegistryNav, AppFooter } from './components/organisms';
 
 import {
-  // Additionality,
+  Additionality,
   // Eligibility,
   // GettingStarted,
   Admin,
@@ -82,6 +82,7 @@ const App: React.FC = (): JSX.Element => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="verify-email" element={<VerifyEmail />} />
+          <Route path="add" element={<Additionality />} />
           <Route path="signup" element={<Signup />} />
           <Route path="certificate" element={<CertificatePage />} />
           <Route path="projects/wilmot/admin" element={<Seller />} />

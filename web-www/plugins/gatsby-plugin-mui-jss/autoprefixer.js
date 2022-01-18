@@ -1,15 +1,11 @@
-import postcss from 'postcss';
-import autoprefixer from 'autoprefixer';
+import postcss from "postcss";
+import autoprefixer from "autoprefixer";
 
-export default function (css, pathname) {
-  const prefixer = postcss([
-    autoprefixer({
-      overrideBrowserslist: [`>0.25%`, `not dead`],
-    }),
-  ]);
+export default function(css, pathname) {
+  const prefixer = postcss([autoprefixer]);
 
   try {
-    return prefixer.process(css, { from: null }).css;
+    return prefixer.process(css, { from: undefined }).css;
   } catch (error) {
     if (error.name === `CssSyntaxError`) {
       throw new Error(`Pathname: ${pathname} ${error.toString()}`);

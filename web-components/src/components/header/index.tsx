@@ -209,7 +209,7 @@ export default function Header({
             </MenuList>
           </Box>
 
-          <Box display={{ xs: 'block', md: 'none' }}>
+          <Box sx={{ display: { xs: 'block', md: 'none' } }}>
             <MobileMenu
               linkComponent={linkComponent}
               isRegistry={isRegistry}

@@ -15,7 +15,7 @@ export function sanityResourcesToCardProps(resources: SanityResource[]): Resourc
       description: <BlockContent content={card?._rawDescription} />,
       image: { publicURL: card?.image?.imageHref || card?.image?.image?.asset?.url },
       title: <BlockContent content={card?._rawTitle} />,
-      link: card?.button?.buttonLink?.buttonDoc?.href,
+      link: card?.button?.buttonLink?.buttonHref || card?.button?.buttonLink?.buttonDoc?.href,
       buttonText: card?.button?.buttonText,
       updated: card?.lastUpdated,
     } as ResourcesCardProps;

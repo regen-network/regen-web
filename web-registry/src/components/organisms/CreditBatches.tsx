@@ -40,13 +40,13 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
+  { id: 'start_date', numeric: true, label: 'date created' },
   { id: 'issuer', numeric: false, label: 'issuer' },
   { id: 'batch_denom', numeric: false, label: 'batch denom' },
   { id: 'class_id', numeric: false, label: 'credit class' },
-  { id: 'tradable_supply', numeric: true, label: 'total amount tradable', wrap: true },
+  { id: 'tradable_supply', numeric: true, label: 'total amount active', wrap: true },
   { id: 'retired_supply', numeric: true, label: 'total amount retired', wrap: true },
   { id: 'amount_cancelled', numeric: true, label: 'total amount cancelled', wrap: true },
-  { id: 'start_date', numeric: true, label: 'start date' },
   { id: 'end_date', numeric: true, label: 'end date' },
   { id: 'project_location', numeric: false, label: 'project location' },
 ];
@@ -133,12 +133,7 @@ const CreditBatches: React.FC = () => {
   };
 
   return ledgerRestUri && batches.length > 0 ? (
-    <Section
-      classes={{ root: styles.section, title: styles.title }}
-      title="Credit Batches"
-      titleVariant="h2"
-      titleAlign="left"
-    >
+    <Section classes={{ root: styles.section, title: styles.title }} title="Credit Batches" titleVariant="h2">
       <StyledTableContainer className={styles.tableBorder}>
         <Table aria-label="credit batch table" stickyHeader>
           <TableHead>
@@ -165,6 +160,10 @@ const CreditBatches: React.FC = () => {
               return (
                 <StyledTableRow className={styles.noWrap} tabIndex={-1} key={batch.batch_denom}>
                   <StyledTableCell>
+                    {moment(batch.start_date).fromNow()}
+                    {/* {moment(batch.start_date).format('LL')} */}
+                  </StyledTableCell>
+                  <StyledTableCell>
                     <a href={getAccountUrl(batch.issuer)} target="_blank" rel="noopener noreferrer">
                       {truncateWalletAddress(batch.issuer)}
                     </a>
@@ -174,7 +173,6 @@ const CreditBatches: React.FC = () => {
                   <StyledTableCell>{formatNumber(batch.tradable_supply)}</StyledTableCell>
                   <StyledTableCell>{formatNumber(batch.retired_supply)}</StyledTableCell>
                   <StyledTableCell>{formatNumber(batch.amount_cancelled)}</StyledTableCell>
-                  <StyledTableCell>{moment(batch.start_date).format('LL')}</StyledTableCell>
                   <StyledTableCell>{moment(batch.end_date).format('LL')}</StyledTableCell>
                   <StyledTableCell>{batch.project_location}</StyledTableCell>
                 </StyledTableRow>

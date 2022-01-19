@@ -10,14 +10,14 @@ import { ProjectCards, CreditClassCards, CreditBatches } from '../components/org
 import { creditClasses } from '../mocks';
 
 import cowsImg from '../assets/cows-by-barn.png';
-import topographyImg from '../assets/background.jpg';
+import topographyImg from '../assets/background-contour-1.jpg';
 import horsesImg from '../assets/horses-grazing.png';
 
 import { useMoreProjectsQuery } from '../generated/graphql';
 import { useAllHomePageQuery, useAllCreditClassQuery } from '../generated/sanity-graphql';
 import { client } from '../sanity';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
   },
@@ -86,7 +86,7 @@ const Home: React.FC = () => {
       />
 
       {projectsData?.allProjects?.nodes && (
-        <Section title="Projects" titleAlign="left" classes={{ root: styles.section, title: styles.title }}>
+        <Section title="Featured Projects" classes={{ root: styles.section, title: styles.title }}>
           <ProjectCards projects={projectsData?.allProjects?.nodes} classes={{ root: styles.projectCards }} />
         </Section>
       )}
@@ -95,11 +95,7 @@ const Home: React.FC = () => {
         <CreditBatches />
       </CardMedia>
 
-      <Section
-        title="Credit Classes"
-        titleAlign="left"
-        classes={{ root: styles.section, title: styles.title }}
-      >
+      <Section title="Credit Classes" classes={{ root: styles.section, title: styles.title }}>
         <CreditClassCards
           btnText="Learn More"
           justify={isMobile ? 'center' : 'flex-start'}

@@ -8,23 +8,14 @@ import DropdownIcon from '../icons/DropdownIcon';
 
 const StyledTableContainer = withStyles(theme => ({
   root: {
-    paddingBottom: theme.spacing(7),
-    borderRadius: 5,
     backgroundColor: theme.palette.primary.main,
-    [theme.breakpoints.up('sm')]: {
-      maxHeight: theme.spacing(119.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      maxHeight: theme.spacing(96.75),
-    },
   },
 }))(TableContainer);
 
 const StyledTableRow = withStyles(theme => ({
   root: {
     color: theme.palette.info.dark,
-    height: theme.spacing(20),
-    fontSize: theme.typography.pxToRem(16),
+    height: theme.spacing(25),
     '&:nth-child(odd)': {
       backgroundColor: theme.palette.grey[50],
     },
@@ -64,6 +55,7 @@ const StyledTableCell = withStyles(theme => ({
   body: {
     border: 'none',
     color: theme.palette.primary.light,
+    fontSize: theme.typography.pxToRem(16),
     [theme.breakpoints.up('sm')]: {
       lineHeight: theme.spacing(6),
     },

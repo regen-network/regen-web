@@ -13,7 +13,6 @@ import {
   StyledTableCell,
   StyledTableRow,
   StyledTableSortLabel,
-  // StyledTablePagination,
 } from 'web-components/lib/components/table';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
 import { getComparator, stableSort, Order } from 'web-components/lib/components/table/sort';
@@ -196,14 +195,6 @@ const CreditBatches: React.FC = () => {
           <TableFooter>
             <TableRow>
               <TablePagination {...paginationProps} />
-              {/* <StyledTablePagination
-                rowsPerPageOptions={[5, 10]}
-                count={batches.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-              /> */}
             </TableRow>
           </TableFooter>
         </Table>

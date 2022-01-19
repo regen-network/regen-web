@@ -5,7 +5,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableFooter from '@material-ui/core/TableFooter';
 import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
 import moment from 'moment';
 import cx from 'clsx';
 
@@ -14,7 +13,9 @@ import {
   StyledTableCell,
   StyledTableRow,
   StyledTableSortLabel,
+  // StyledTablePagination,
 } from 'web-components/lib/components/table';
+import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
 import { getComparator, stableSort, Order } from 'web-components/lib/components/table/sort';
 import Section from 'web-components/lib/components/section';
 import { truncateWalletAddress } from '../../lib/wallet';
@@ -90,8 +91,8 @@ const CreditBatches: React.FC = () => {
   const [batches, setBatches] = useState<any[]>([]);
   const [order, setOrder] = useState<Order>('desc');
   const [orderBy, setOrderBy] = useState<string>('start_date');
-  const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+
+  const { page, rowsPerPage, paginationProps, TablePagination } = useTablePagination(batches.length)
 
   useEffect(() => {
     if (ledgerRestUri) {
@@ -135,15 +136,6 @@ const CreditBatches: React.FC = () => {
   const formatNumber = (num: number | string): string => {
     if (typeof num === 'string') num = parseFloat(num);
     return num > 0 ? Math.floor(num).toLocaleString() : '-';
-  };
-
-  const handleChangePage = (event: unknown, newPage: number): void => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setRowsPerPage(parseInt(event.target.value as string, 10));
-    setPage(0);
   };
 
   return ledgerRestUri && batches.length > 0 ? (
@@ -200,22 +192,21 @@ const CreditBatches: React.FC = () => {
             </TableBody>
           </Table>
         </div>
-
         <Table>
           <TableFooter>
             <TableRow>
-              <TablePagination
+              <TablePagination {...paginationProps} />
+              {/* <StyledTablePagination
                 rowsPerPageOptions={[5, 10]}
                 count={batches.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
-              />
+              /> */}
             </TableRow>
           </TableFooter>
         </Table>
-
       </StyledTableContainer>
     </Section>
   ) : null;

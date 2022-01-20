@@ -94,29 +94,29 @@ const ProjectCards: React.FC<Props> = props => {
 
   return isMobile ? (
     <div className={styles.swipe}>
-      {props.projects.map((project, i) => (
-        <>
-          {project && (
+      {props.projects.map((project, i) => {
+        return (
+          project && (
             <Link className={styles.swipeItem} key={project.handle || i} href={`/projects/${project.handle}`}>
               <LinkedProject project={project} />
             </Link>
-          )}
-        </>
-      ))}
+          )
+        );
+      })}
     </div>
   ) : (
     <Grid container className={clsx(styles.root, props.classes && props.classes.root)} spacing={5}>
-      {props.projects.map((project, i) => (
-        <>
-          {project && (
+      {props.projects.map((project, i) => {
+        return (
+          project && (
             <Grid item sm={6} md={4} key={project.handle || i} className={styles.item}>
               <Link className={styles.projectCard} href={`/projects/${project.handle}`}>
                 <LinkedProject project={project} />
               </Link>
             </Grid>
-          )}
-        </>
-      ))}
+          )
+        );
+      })}
     </Grid>
   );
 };

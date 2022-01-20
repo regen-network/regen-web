@@ -6,13 +6,10 @@ import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
-import Table, { Document } from 'web-components/lib/components/table';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import { DocumentationTable } from 'web-components/lib/components/table/DocumentationTable';
 import BackgroundSection from '../../components/BackgroundSection';
 import { ResourcesRegistrySectionQuery, SanityDoc, SanityResource } from '../../generated/graphql';
-import { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
-import { BlockContent } from 'web-components/src/components/block-content';
 import { sanityDocsToDocuments, sanityResourcesToCardProps } from '../../util/sanity-transforms';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -85,6 +82,7 @@ const query = graphql`
             button {
               buttonText
               buttonLink {
+                buttonHref
                 buttonDoc {
                   href
                 }

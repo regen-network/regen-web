@@ -37,10 +37,25 @@ exports[`Storyshots Action Action 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -126,12 +141,10 @@ exports[`Storyshots Action Action 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -377,10 +390,25 @@ exports[`Storyshots Blog Post Blog Post 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -466,12 +494,10 @@ exports[`Storyshots Blog Post Blog Post 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -717,10 +743,25 @@ exports[`Storyshots Buttons Contained Button 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -806,12 +847,10 @@ exports[`Storyshots Buttons Contained Button 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -1057,10 +1096,25 @@ exports[`Storyshots Buttons Next Button 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -1146,12 +1200,10 @@ exports[`Storyshots Buttons Next Button 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -1397,10 +1449,25 @@ exports[`Storyshots Buttons Outlined Button 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -1486,12 +1553,10 @@ exports[`Storyshots Buttons Outlined Button 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -1737,10 +1802,25 @@ exports[`Storyshots Buttons Prev Button 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -1826,12 +1906,10 @@ exports[`Storyshots Buttons Prev Button 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -2077,10 +2155,25 @@ exports[`Storyshots Cards Create Project Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -2166,12 +2259,10 @@ exports[`Storyshots Cards Create Project Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -2417,10 +2508,25 @@ exports[`Storyshots Cards Create Project Card Add Another 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -2506,12 +2612,10 @@ exports[`Storyshots Cards Create Project Card Add Another 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -2757,10 +2861,25 @@ exports[`Storyshots Cards Glance Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -2846,12 +2965,10 @@ exports[`Storyshots Cards Glance Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -3097,10 +3214,25 @@ exports[`Storyshots Cards Green Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -3186,12 +3318,10 @@ exports[`Storyshots Cards Green Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -3437,10 +3567,25 @@ exports[`Storyshots Cards Green Top Icon Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -3526,12 +3671,10 @@ exports[`Storyshots Cards Green Top Icon Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -3777,10 +3920,25 @@ exports[`Storyshots Cards Image Action Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -3866,12 +4024,10 @@ exports[`Storyshots Cards Image Action Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -4117,10 +4273,25 @@ exports[`Storyshots Cards Impact Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -4206,12 +4377,10 @@ exports[`Storyshots Cards Impact Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -4457,10 +4626,25 @@ exports[`Storyshots Cards Map Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -4546,12 +4730,10 @@ exports[`Storyshots Cards Map Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -4797,10 +4979,25 @@ exports[`Storyshots Cards Monitored Impact Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -4886,12 +5083,10 @@ exports[`Storyshots Cards Monitored Impact Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -5137,10 +5332,25 @@ exports[`Storyshots Cards On Boarding Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -5226,12 +5436,10 @@ exports[`Storyshots Cards On Boarding Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -5477,10 +5685,25 @@ exports[`Storyshots Cards Overview Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -5566,12 +5789,10 @@ exports[`Storyshots Cards Overview Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -5817,10 +6038,25 @@ exports[`Storyshots Cards Overview Cards Group 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -5906,12 +6142,10 @@ exports[`Storyshots Cards Overview Cards Group 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -6157,10 +6391,25 @@ exports[`Storyshots Cards Project Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -6246,12 +6495,10 @@ exports[`Storyshots Cards Project Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -6497,10 +6744,25 @@ exports[`Storyshots Cards Project Top Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -6586,12 +6848,10 @@ exports[`Storyshots Cards Project Top Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -6837,10 +7097,25 @@ exports[`Storyshots Cards Purchased Credits Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -6926,12 +7201,10 @@ exports[`Storyshots Cards Purchased Credits Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -7177,10 +7450,25 @@ exports[`Storyshots Cards Step Card 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -7266,12 +7554,10 @@ exports[`Storyshots Cards Step Card 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -7517,10 +7803,25 @@ exports[`Storyshots Certificate Certificate 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -7606,12 +7907,10 @@ exports[`Storyshots Certificate Certificate 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -7857,10 +8156,25 @@ exports[`Storyshots Charts Bar Chart 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -7946,12 +8260,10 @@ exports[`Storyshots Charts Bar Chart 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -8197,10 +8509,25 @@ exports[`Storyshots Credits Credit Details 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -8286,12 +8613,10 @@ exports[`Storyshots Credits Credit Details 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -8537,10 +8862,25 @@ exports[`Storyshots Credits Credits Gauge 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -8626,12 +8966,10 @@ exports[`Storyshots Credits Credits Gauge 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -8877,10 +9215,25 @@ exports[`Storyshots Description Description 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -8966,12 +9319,10 @@ exports[`Storyshots Description Description 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -9217,10 +9568,25 @@ exports[`Storyshots Document Document 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -9306,12 +9672,10 @@ exports[`Storyshots Document Document 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -9557,10 +9921,25 @@ exports[`Storyshots FAQ Category 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -9646,12 +10025,10 @@ exports[`Storyshots FAQ Category 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -9897,10 +10274,25 @@ exports[`Storyshots FAQ Faq 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -9986,12 +10378,10 @@ exports[`Storyshots FAQ Faq 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -10237,10 +10627,25 @@ exports[`Storyshots FAQ Navigation 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -10326,12 +10731,10 @@ exports[`Storyshots FAQ Navigation 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -10577,10 +10980,25 @@ exports[`Storyshots FAQ Question 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -10666,12 +11084,10 @@ exports[`Storyshots FAQ Question 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -10917,10 +11333,25 @@ exports[`Storyshots Footers Fixed Footer 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -11006,12 +11437,10 @@ exports[`Storyshots Footers Fixed Footer 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -11257,10 +11686,25 @@ exports[`Storyshots Footers Onboarding Footer 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -11346,12 +11790,10 @@ exports[`Storyshots Footers Onboarding Footer 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -11597,10 +12039,25 @@ exports[`Storyshots Footers Switch Footer 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -11686,12 +12143,10 @@ exports[`Storyshots Footers Switch Footer 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -11937,10 +12392,25 @@ exports[`Storyshots Forms Login Form 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -12026,12 +12496,10 @@ exports[`Storyshots Forms Login Form 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -12277,10 +12745,25 @@ exports[`Storyshots Forms Sign Up Form 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -12366,12 +12849,10 @@ exports[`Storyshots Forms Sign Up Form 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -12617,10 +13098,25 @@ exports[`Storyshots Forms User Profile 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -12706,12 +13202,10 @@ exports[`Storyshots Forms User Profile 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -12957,10 +13451,25 @@ exports[`Storyshots Icons Accountability Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -13046,12 +13555,10 @@ exports[`Storyshots Icons Accountability Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -13297,10 +13804,25 @@ exports[`Storyshots Icons Arrow Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -13386,12 +13908,10 @@ exports[`Storyshots Icons Arrow Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -13637,10 +14157,25 @@ exports[`Storyshots Icons Available Credits Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -13726,12 +14261,10 @@ exports[`Storyshots Icons Available Credits Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -13977,10 +14510,25 @@ exports[`Storyshots Icons Avatar Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -14066,12 +14614,10 @@ exports[`Storyshots Icons Avatar Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -14317,10 +14863,25 @@ exports[`Storyshots Icons Block Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -14406,12 +14967,10 @@ exports[`Storyshots Icons Block Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -14657,10 +15216,25 @@ exports[`Storyshots Icons Breadcrumb Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -14746,12 +15320,10 @@ exports[`Storyshots Icons Breadcrumb Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -14997,10 +15569,25 @@ exports[`Storyshots Icons Check Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -15086,12 +15673,10 @@ exports[`Storyshots Icons Check Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -15337,10 +15922,25 @@ exports[`Storyshots Icons Checked Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -15426,12 +16026,10 @@ exports[`Storyshots Icons Checked Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -15677,10 +16275,25 @@ exports[`Storyshots Icons Close Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -15766,12 +16379,10 @@ exports[`Storyshots Icons Close Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -16017,10 +16628,25 @@ exports[`Storyshots Icons Co Benefits Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -16106,12 +16732,10 @@ exports[`Storyshots Icons Co Benefits Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -16357,10 +16981,25 @@ exports[`Storyshots Icons Counting Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -16446,12 +17085,10 @@ exports[`Storyshots Icons Counting Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -16697,10 +17334,25 @@ exports[`Storyshots Icons Credits Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -16786,12 +17438,10 @@ exports[`Storyshots Icons Credits Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -17037,10 +17687,25 @@ exports[`Storyshots Icons Current Credits Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -17126,12 +17791,10 @@ exports[`Storyshots Icons Current Credits Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -17377,10 +18040,25 @@ exports[`Storyshots Icons Discord Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -17466,12 +18144,10 @@ exports[`Storyshots Icons Discord Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -17717,10 +18393,25 @@ exports[`Storyshots Icons Document Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -17806,12 +18497,10 @@ exports[`Storyshots Icons Document Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -18057,10 +18746,25 @@ exports[`Storyshots Icons Dropdown Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -18146,12 +18850,10 @@ exports[`Storyshots Icons Dropdown Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -18397,10 +19099,25 @@ exports[`Storyshots Icons Email Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -18486,12 +19203,10 @@ exports[`Storyshots Icons Email Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -18737,10 +19452,25 @@ exports[`Storyshots Icons Eye Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -18826,12 +19556,10 @@ exports[`Storyshots Icons Eye Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -19077,10 +19805,25 @@ exports[`Storyshots Icons Facebook Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -19166,12 +19909,10 @@ exports[`Storyshots Icons Facebook Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -19417,10 +20158,25 @@ exports[`Storyshots Icons Farmer Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -19506,12 +20262,10 @@ exports[`Storyshots Icons Farmer Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -19757,10 +20511,25 @@ exports[`Storyshots Icons Github Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -19846,12 +20615,10 @@ exports[`Storyshots Icons Github Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -20097,10 +20864,25 @@ exports[`Storyshots Icons Info Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -20186,12 +20968,10 @@ exports[`Storyshots Icons Info Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -20437,10 +21217,25 @@ exports[`Storyshots Icons Info Icon Outlined 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -20526,12 +21321,10 @@ exports[`Storyshots Icons Info Icon Outlined 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -20777,10 +21570,25 @@ exports[`Storyshots Icons Instagram Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -20866,12 +21674,10 @@ exports[`Storyshots Icons Instagram Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -21117,10 +21923,25 @@ exports[`Storyshots Icons Interface Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -21206,12 +22027,10 @@ exports[`Storyshots Icons Interface Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -21457,10 +22276,25 @@ exports[`Storyshots Icons Link Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -21546,12 +22380,10 @@ exports[`Storyshots Icons Link Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -21797,10 +22629,25 @@ exports[`Storyshots Icons Linked In Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -21886,12 +22733,10 @@ exports[`Storyshots Icons Linked In Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -22137,10 +22982,25 @@ exports[`Storyshots Icons Medium Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -22226,12 +23086,10 @@ exports[`Storyshots Icons Medium Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -22477,10 +23335,25 @@ exports[`Storyshots Icons Minus Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -22566,12 +23439,10 @@ exports[`Storyshots Icons Minus Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -22817,10 +23688,25 @@ exports[`Storyshots Icons Organization Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -22906,12 +23792,10 @@ exports[`Storyshots Icons Organization Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -23157,10 +24041,25 @@ exports[`Storyshots Icons Phone Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -23246,12 +24145,10 @@ exports[`Storyshots Icons Phone Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -23497,10 +24394,25 @@ exports[`Storyshots Icons Pin Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -23586,12 +24498,10 @@ exports[`Storyshots Icons Pin Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -23837,10 +24747,25 @@ exports[`Storyshots Icons Play Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -23926,12 +24851,10 @@ exports[`Storyshots Icons Play Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -24177,10 +25100,25 @@ exports[`Storyshots Icons Plus Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -24266,12 +25204,10 @@ exports[`Storyshots Icons Plus Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -24517,10 +25453,25 @@ exports[`Storyshots Icons Pointer Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -24606,12 +25557,10 @@ exports[`Storyshots Icons Pointer Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -24857,10 +25806,25 @@ exports[`Storyshots Icons Print Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -24946,12 +25910,10 @@ exports[`Storyshots Icons Print Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -25197,10 +26159,25 @@ exports[`Storyshots Icons Regen Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -25286,12 +26263,10 @@ exports[`Storyshots Icons Regen Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -25537,10 +26512,25 @@ exports[`Storyshots Icons Regen Ledger Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -25626,12 +26616,10 @@ exports[`Storyshots Icons Regen Ledger Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -25877,10 +26865,25 @@ exports[`Storyshots Icons Regen Logo Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -25966,12 +26969,10 @@ exports[`Storyshots Icons Regen Logo Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -26217,10 +27218,25 @@ exports[`Storyshots Icons Regen Token Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -26306,12 +27322,10 @@ exports[`Storyshots Icons Regen Token Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -26557,10 +27571,25 @@ exports[`Storyshots Icons Registration Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -26646,12 +27675,10 @@ exports[`Storyshots Icons Registration Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -26897,10 +27924,25 @@ exports[`Storyshots Icons Review Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -26986,12 +28028,10 @@ exports[`Storyshots Icons Review Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -27237,10 +28277,25 @@ exports[`Storyshots Icons Satellite Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -27326,12 +28381,10 @@ exports[`Storyshots Icons Satellite Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -27577,10 +28630,25 @@ exports[`Storyshots Icons Save Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -27666,12 +28734,10 @@ exports[`Storyshots Icons Save Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -27917,10 +28983,25 @@ exports[`Storyshots Icons Shaded Credits Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -28006,12 +29087,10 @@ exports[`Storyshots Icons Shaded Credits Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -28257,10 +29336,25 @@ exports[`Storyshots Icons Shield Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -28346,12 +29440,10 @@ exports[`Storyshots Icons Shield Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -28597,10 +29689,25 @@ exports[`Storyshots Icons Soil Sample Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -28686,12 +29793,10 @@ exports[`Storyshots Icons Soil Sample Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -28937,10 +30042,25 @@ exports[`Storyshots Icons Telegram Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -29026,12 +30146,10 @@ exports[`Storyshots Icons Telegram Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -29277,10 +30395,25 @@ exports[`Storyshots Icons Total Credits Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -29366,12 +30499,10 @@ exports[`Storyshots Icons Total Credits Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -29617,10 +30748,25 @@ exports[`Storyshots Icons Trash Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -29706,12 +30852,10 @@ exports[`Storyshots Icons Trash Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -29957,10 +31101,25 @@ exports[`Storyshots Icons Trust Document Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -30046,12 +31205,10 @@ exports[`Storyshots Icons Trust Document Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -30297,10 +31454,25 @@ exports[`Storyshots Icons Trust Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -30386,12 +31558,10 @@ exports[`Storyshots Icons Trust Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -30637,10 +31807,25 @@ exports[`Storyshots Icons Twitter Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -30726,12 +31911,10 @@ exports[`Storyshots Icons Twitter Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -30977,10 +32160,25 @@ exports[`Storyshots Icons Verified Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -31066,12 +32264,10 @@ exports[`Storyshots Icons Verified Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -31317,10 +32513,25 @@ exports[`Storyshots Icons Wallet Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -31406,12 +32617,10 @@ exports[`Storyshots Icons Wallet Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -31657,10 +32866,25 @@ exports[`Storyshots Icons Whitepaper Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -31746,12 +32970,10 @@ exports[`Storyshots Icons Whitepaper Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -31997,10 +33219,25 @@ exports[`Storyshots Icons Youtube Icon 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -32086,12 +33323,10 @@ exports[`Storyshots Icons Youtube Icon 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -32337,10 +33572,25 @@ exports[`Storyshots Image Grid Image Grid 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -32426,12 +33676,10 @@ exports[`Storyshots Image Grid Image Grid 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -32677,10 +33925,25 @@ exports[`Storyshots Image Image Default Quality 100 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -32766,12 +34029,10 @@ exports[`Storyshots Image Image Default Quality 100 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -33017,10 +34278,25 @@ exports[`Storyshots Image Item Image Item 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -33106,12 +34382,10 @@ exports[`Storyshots Image Item Image Item 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -33357,10 +34631,25 @@ exports[`Storyshots Image Original Image 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -33446,12 +34735,10 @@ exports[`Storyshots Image Original Image 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -33697,10 +34984,25 @@ exports[`Storyshots Inputs Roles Input 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -33786,12 +35088,10 @@ exports[`Storyshots Inputs Roles Input 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -34037,10 +35337,25 @@ exports[`Storyshots Inputs Toggle 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -34126,12 +35441,10 @@ exports[`Storyshots Inputs Toggle 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -34377,10 +35690,25 @@ exports[`Storyshots Map Map 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -34466,12 +35794,10 @@ exports[`Storyshots Map Map 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -34717,10 +36043,25 @@ exports[`Storyshots Modal Crop Round Image Modal 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -34806,12 +36147,10 @@ exports[`Storyshots Modal Crop Round Image Modal 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -35057,10 +36396,25 @@ exports[`Storyshots Modal Crop Square Image Modal 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -35146,12 +36500,10 @@ exports[`Storyshots Modal Crop Square Image Modal 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -35397,10 +36749,25 @@ exports[`Storyshots Modal Ledger Modal 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -35486,12 +36853,10 @@ exports[`Storyshots Modal Ledger Modal 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -35737,10 +37102,25 @@ exports[`Storyshots Modal Modal 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -35826,12 +37206,10 @@ exports[`Storyshots Modal Modal 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -36077,10 +37455,25 @@ exports[`Storyshots Party Party Address 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -36166,12 +37559,10 @@ exports[`Storyshots Party Party Address 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -36417,10 +37808,25 @@ exports[`Storyshots Place Project Place Info 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -36506,12 +37912,10 @@ exports[`Storyshots Place Project Place Info 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -36757,10 +38161,25 @@ exports[`Storyshots ReadMore Read More 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -36846,12 +38265,10 @@ exports[`Storyshots ReadMore Read More 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -37097,10 +38514,25 @@ exports[`Storyshots Sliders Project Media 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -37186,12 +38618,10 @@ exports[`Storyshots Sliders Project Media 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -37437,10 +38867,25 @@ exports[`Storyshots Sliders Protected Species 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -37526,12 +38971,10 @@ exports[`Storyshots Sliders Protected Species 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -37777,10 +39220,25 @@ exports[`Storyshots Table Documentation Table 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -37866,12 +39324,10 @@ exports[`Storyshots Table Documentation Table 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -38117,10 +39573,25 @@ exports[`Storyshots Tabs Mrv Tabs 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -38206,12 +39677,10 @@ exports[`Storyshots Tabs Mrv Tabs 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -38457,10 +39926,25 @@ exports[`Storyshots Timeline New Timeline 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -38546,12 +40030,10 @@ exports[`Storyshots Timeline New Timeline 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -38797,10 +40279,25 @@ exports[`Storyshots Timeline Timeline 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -38886,12 +40383,10 @@ exports[`Storyshots Timeline Timeline 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -39137,10 +40632,25 @@ exports[`Storyshots Timeline Timeline Item 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -39226,12 +40736,10 @@ exports[`Storyshots Timeline Timeline Item 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -39477,10 +40985,25 @@ exports[`Storyshots Title Main Title 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -39566,12 +41089,10 @@ exports[`Storyshots Title Main Title 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -39817,10 +41338,25 @@ exports[`Storyshots Title Subtitle 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -39906,12 +41442,10 @@ exports[`Storyshots Title Subtitle 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -40157,10 +41691,25 @@ exports[`Storyshots TitleDescription Description 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -40246,12 +41795,10 @@ exports[`Storyshots TitleDescription Description 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -40497,10 +42044,25 @@ exports[`Storyshots Tooltip Info 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -40586,12 +42148,10 @@ exports[`Storyshots Tooltip Info 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -40837,10 +42397,25 @@ exports[`Storyshots Tooltip Main Title 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -40926,12 +42501,10 @@ exports[`Storyshots Tooltip Main Title 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -41177,10 +42750,25 @@ exports[`Storyshots User Big User Avatar 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -41266,12 +42854,10 @@ exports[`Storyshots User Big User Avatar 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -41517,10 +43103,25 @@ exports[`Storyshots User Column User Info 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -41606,12 +43207,10 @@ exports[`Storyshots User Column User Info 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -41857,10 +43456,25 @@ exports[`Storyshots User Fallback User Avatar 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -41946,12 +43560,10 @@ exports[`Storyshots User Fallback User Avatar 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -42197,10 +43809,25 @@ exports[`Storyshots User Medium User Avatar 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -42286,12 +43913,10 @@ exports[`Storyshots User Medium User Avatar 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -42537,10 +44162,25 @@ exports[`Storyshots User User Avatar With Link 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -42626,12 +44266,10 @@ exports[`Storyshots User User Avatar With Link 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -42877,10 +44515,25 @@ exports[`Storyshots User User Info 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -42966,12 +44619,10 @@ exports[`Storyshots User User Info 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",
@@ -43217,10 +44868,25 @@ exports[`Storyshots User With Title 1`] = `
               "underline": "none",
             },
           },
+          "MuiTypography": Object {
+            "defaultProps": Object {
+              "variantMapping": Object {
+                "body1": "p",
+                "body2": "p",
+                "h1": "h1",
+                "h2": "h2",
+                "h3": "h3",
+                "h4": "h4",
+                "h5": "h5",
+                "h6": "h6",
+                "subtitle1": "h2",
+                "subtitle2": "h2",
+              },
+            },
+          },
         },
         "direction": "ltr",
         "mixins": Object {
-          "gutters": [Function],
           "toolbar": Object {
             "@media (min-width:0px) and (orientation: landscape)": Object {
               "minHeight": 48,
@@ -43306,12 +44972,10 @@ exports[`Storyshots User With Title 1`] = `
           },
           "text": Object {
             "disabled": "rgba(0, 0, 0, 0.38)",
-            "hint": "rgba(0, 0, 0, 0.38)",
             "primary": "rgba(0, 0, 0, 0.87)",
             "secondary": "rgba(0, 0, 0, 0.6)",
           },
           "tonalOffset": 0.2,
-          "type": "light",
           "warning": Object {
             "contrastText": "#fff",
             "dark": "#e65100",

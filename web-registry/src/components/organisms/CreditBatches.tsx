@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableHead from '@material-ui/core/TableHead';
-import TableFooter from '@material-ui/core/TableFooter';
-import TableRow from '@material-ui/core/TableRow';
-import TablePagination from '@material-ui/core/TablePagination';
+import { Table, TableBody, TableHead, TableRow, TableFooter, TablePagination } from '@material-ui/core';
 import moment from 'moment';
 import cx from 'clsx';
 
@@ -157,23 +152,25 @@ const CreditBatches: React.FC = () => {
         <div style={{ width: '100%', overflow: 'auto' }}>
           <Table aria-label="credit batch table" stickyHeader>
             <TableHead>
-              {headCells.map(headCell => (
-                <StyledTableCell
-                  className={cx(headCell.wrap && styles.wrap)}
-                  key={headCell.id}
-                  align="left"
-                  padding="default"
-                  sortDirection={orderBy === headCell.id ? order : false}
-                >
-                  <StyledTableSortLabel
-                    active={orderBy === headCell.id}
-                    direction={orderBy === headCell.id ? order : 'asc'}
-                    onClick={createSortHandler(headCell.id)}
+              <TableRow>
+                {headCells.map(headCell => (
+                  <StyledTableCell
+                    className={cx(headCell.wrap && styles.wrap)}
+                    key={headCell.id}
+                    align="left"
+                    padding="default"
+                    sortDirection={orderBy === headCell.id ? order : false}
                   >
-                    {headCell.label}
-                  </StyledTableSortLabel>
-                </StyledTableCell>
-              ))}
+                    <StyledTableSortLabel
+                      active={orderBy === headCell.id}
+                      direction={orderBy === headCell.id ? order : 'asc'}
+                      onClick={createSortHandler(headCell.id)}
+                    >
+                      {headCell.label}
+                    </StyledTableSortLabel>
+                  </StyledTableCell>
+                ))}
+              </TableRow>
             </TableHead>
             <TableBody>
               {stableSort(batches, getComparator(order, orderBy))
@@ -200,7 +197,6 @@ const CreditBatches: React.FC = () => {
             </TableBody>
           </Table>
         </div>
-
         <Table>
           <TableFooter>
             <TableRow>
@@ -215,7 +211,6 @@ const CreditBatches: React.FC = () => {
             </TableRow>
           </TableFooter>
         </Table>
-
       </StyledTableContainer>
     </Section>
   ) : null;

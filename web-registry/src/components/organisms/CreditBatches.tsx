@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableHead';
 import moment from 'moment';
 import cx from 'clsx';
 
@@ -167,23 +168,25 @@ const CreditBatches: React.FC = () => {
       <StyledTableContainer className={styles.tableBorder}>
         <Table aria-label="credit batch table" stickyHeader>
           <TableHead>
-            {headCells.map(headCell => (
-              <StyledTableCell
-                className={cx(headCell.wrap && styles.wrap)}
-                key={headCell.id}
-                align="left"
-                padding="normal"
-                sortDirection={orderBy === headCell.id ? order : false}
-              >
-                <StyledTableSortLabel
-                  active={orderBy === headCell.id}
-                  direction={orderBy === headCell.id ? order : 'asc'}
-                  onClick={createSortHandler(headCell.id)}
+            <TableRow>
+              {headCells.map(headCell => (
+                <StyledTableCell
+                  className={cx(headCell.wrap && styles.wrap)}
+                  key={headCell.id}
+                  align="left"
+                  padding="normal"
+                  sortDirection={orderBy === headCell.id ? order : false}
                 >
-                  {headCell.label}
-                </StyledTableSortLabel>
-              </StyledTableCell>
-            ))}
+                  <StyledTableSortLabel
+                    active={orderBy === headCell.id}
+                    direction={orderBy === headCell.id ? order : 'asc'}
+                    onClick={createSortHandler(headCell.id)}
+                  >
+                    {headCell.label}
+                  </StyledTableSortLabel>
+                </StyledTableCell>
+              ))}
+            </TableRow>
           </TableHead>
           <TableBody>
             {stableSort(batches, getComparator(order, orderBy)).map(

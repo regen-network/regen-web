@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(4.75),
   },
   text: {
-    '& li.MuiListItem-button:hover': {
+    '& li.MuiMenuItem-root:hover': {
       backgroundColor: 'transparent',
     },
     '& li > a': {

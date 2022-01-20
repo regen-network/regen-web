@@ -27,6 +27,7 @@ interface StyleProps {
   linearGradient?: string;
   linearGradientMobile?: string;
   topSection?: boolean;
+  titleVariant?: Variant;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -133,14 +134,25 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     lineHeight: '160%',
     color: theme.palette.primary.main,
   },
-  title: {
+  title: props => ({
     [theme.breakpoints.down('sm')]: {
       lineHeight: '130%',
     },
     [theme.breakpoints.up('sm')]: {
       lineHeight: '140%',
     },
-  },
+    // BEGIN HACK setting jss styles (duplicated from emotion style)
+    // so it's initially rendered on gatsby build
+    // Remove once migrations from mui jss to emotion and to latest gatsby done
+    color: theme.palette.primary.main,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: props.titleVariant === 'h1' ? '3rem' : '2.375rem',
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: props.titleVariant === 'h1' ? '2rem' : '1.5rem',
+    },
+    // END HACK
+  }),
 }));
 
 const BackgroundSection = ({
@@ -156,7 +168,7 @@ const BackgroundSection = ({
   children,
   topSection = true,
 }: Props): JSX.Element => {
-  const classes = useStyles({ linearGradientMobile, linearGradient, topSection });
+  const classes = useStyles({ titleVariant, linearGradientMobile, linearGradient, topSection });
   let headerJSX: JSX.Element | null = null;
   let bodyJSX: JSX.Element | null = null;
   let textJSX: JSX.Element | null = null;

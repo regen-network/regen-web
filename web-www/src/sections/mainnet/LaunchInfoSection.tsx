@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Grid, createStyles, Typography, LinearProgress, Theme } from '@mui/material';
-import { withStyles, makeStyles } from '@mui/styles';
+import { Grid, Typography, LinearProgress, Theme } from '@mui/material';
+import { withStyles, createStyles, makeStyles } from '@mui/styles';
 import Img, { FluidObject } from 'gatsby-image';
 import SanityImage from 'gatsby-plugin-sanity-image';
 

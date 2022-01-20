@@ -21,9 +21,6 @@ const useStyles = makeStyles(theme => ({
     '& a:hover': {
       borderBottom: `2px solid ${theme.palette.secondary.main}`,
     },
-    '&:last-child': {
-      paddingTop: theme.spacing(1.25),
-    },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingRight: theme.spacing(1.25),
       paddingLeft: theme.spacing(1.25),

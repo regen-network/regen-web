@@ -66,8 +66,6 @@ export default function DatePickField({
     >
       {({ handleChange }) => (
         <DatePicker
-          // autoOk
-          // variant="inline"
           renderInput={params => <TextField {...params} />}
           openTo="year"
           disabled={form.isSubmitting}
@@ -76,7 +74,6 @@ export default function DatePickField({
           views={['year', 'month']}
           value={field.value}
           onChange={handleChange}
-          // error={false}
           InputProps={{ disableUnderline: true }}
         />
       )}

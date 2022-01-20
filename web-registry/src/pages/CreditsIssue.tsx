@@ -260,8 +260,6 @@ function CreditsIssue(): JSX.Element {
         <div className={classes.datePicker}>
           <InputLabel id="project-select-label">Start Date</InputLabel>
           <DatePicker
-            // autoOk
-            // variant="inline"
             renderInput={params => <TextField {...params} />}
             openTo="year"
             className={classes.input}
@@ -269,15 +267,12 @@ function CreditsIssue(): JSX.Element {
             views={['year', 'month']}
             value={startDate}
             onChange={date => setStartDate(date)}
-            // error={false}
             InputProps={{ disableUnderline: true }}
           />
         </div>
         <div className={classes.datePicker}>
           <InputLabel id="project-select-label">End Date</InputLabel>
           <DatePicker
-            // autoOk
-            // variant="inline"
             renderInput={params => <TextField {...params} />}
             openTo="year"
             className={classes.input}
@@ -285,7 +280,6 @@ function CreditsIssue(): JSX.Element {
             views={['year', 'month']}
             value={endDate}
             onChange={date => setEndDate(date)}
-            // error={false}
             InputProps={{ disableUnderline: true }}
           />
         </div>

@@ -47,7 +47,7 @@ function App(): JSX.Element {
     ({ email, password }: Values): Promise<void> => {
       return new Promise(async (resolve, reject) => {
         try {
-          const token = await executeRecaptcha('login_page');
+          const token = await executeRecaptcha?.('login_page');
           const apiUri: string =
             process.env.REACT_APP_API_URI || 'http://localhost:5000';
           const res = await axios({

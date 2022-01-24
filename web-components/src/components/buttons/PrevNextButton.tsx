@@ -4,7 +4,8 @@ import ArrowDownIcon from '../icons/ArrowDownIcon';
 
 interface PrevNextButtonProps {
   direction: 'next' | 'prev';
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  // onClick?: () => void;
   disabled?: boolean;
 }
 
@@ -35,7 +36,7 @@ export default function PrevNextButton({ direction, onClick, disabled }: PrevNex
   const theme = useTheme();
   const styles = useStyles({ disabled: !!disabled });
   return (
-    <div className={styles.root} onClick={disabled ? undefined : onClick}>
+    <div className={styles.root} onClick={disabled ? undefined : onClick} aria-label={direction}>
       <ArrowDownIcon
         direction={direction}
         color={disabled ? theme.palette.grey[400] : theme.palette.secondary.main}

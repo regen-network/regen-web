@@ -81,42 +81,53 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const ROWS_PER_PAGE_OPTIONS = [5, 10];
+
 const CreditBatches: React.FC = () => {
   const styles = useStyles();
   const [batches, setBatches] = useState<any[]>([]);
   const [order, setOrder] = useState<Order>('desc');
   const [orderBy, setOrderBy] = useState<string>('start_date');
 
-  const { page, rowsPerPage, paginationProps, TablePagination } = useTablePagination(batches.length);
+  const { TablePagination, setCountTotal, paginationParams, paginationProps } = useTablePagination(
+    ROWS_PER_PAGE_OPTIONS,
+  );
+
+  const fetchData = (paginationParams: URLSearchParams, setCountTotal: (count: number) => void): void => {
+    const addSupplyDataToBatch = (batches: BatchRowData[]): Promise<BatchRowData[]> => {
+      return Promise.all(
+        batches.map(batch => {
+          return getBatchSupply(batch.batch_denom)
+            .then(({ data }) => {
+              if (data) {
+                batch.tradable_supply = data.tradable_supply;
+                batch.retired_supply = data.retired_supply;
+              }
+              return batch;
+            })
+            .catch(err => {
+              return batch;
+            });
+        }),
+      );
+    };
+
+    getBatches(paginationParams).then(res => {
+      const creditBatches = res?.data?.batches;
+      addSupplyDataToBatch(creditBatches).then(sortableBatches => {
+        setBatches(sortableBatches);
+        const _countTotal = parseInt(res?.data?.pagination.total);
+        if (_countTotal) {
+          setCountTotal(_countTotal);
+        }
+      });
+    });
+  };
 
   useEffect(() => {
-    if (ledgerRestUri) {
-      const addSupplyDataToBatch = (batches: BatchRowData[]): Promise<BatchRowData[]> => {
-        return Promise.all(
-          batches.map(batch => {
-            return getBatchSupply(batch.batch_denom)
-              .then(({ data }) => {
-                if (data) {
-                  batch.tradable_supply = data.tradable_supply;
-                  batch.retired_supply = data.retired_supply;
-                }
-                return batch;
-              })
-              .catch(err => {
-                return batch;
-              });
-          }),
-        );
-      };
-
-      getBatches().then(res => {
-        const creditBatches = res?.data?.batches;
-        addSupplyDataToBatch(creditBatches).then(sortableBatches => {
-          setBatches(sortableBatches);
-        });
-      });
-    }
-  }, []);
+    if (!ledgerRestUri || !paginationParams) return;
+    fetchData(paginationParams, setCountTotal);
+  }, [paginationParams, setCountTotal]);
 
   const createSortHandler = (property: keyof BatchRowData) => (event: React.MouseEvent<unknown>) => {
     handleRequestSort(event, property);
@@ -165,27 +176,25 @@ const CreditBatches: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {stableSort(batches, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((batch: any) => {
-                  return (
-                    <StyledTableRow className={styles.noWrap} tabIndex={-1} key={batch.batch_denom}>
-                      <StyledTableCell>
-                        <a href={getAccountUrl(batch.issuer)} target="_blank" rel="noopener noreferrer">
-                          {truncateWalletAddress(batch.issuer)}
-                        </a>
-                      </StyledTableCell>
-                      <StyledTableCell>{batch.batch_denom}</StyledTableCell>
-                      <StyledTableCell>{batch.class_id}</StyledTableCell>
-                      <StyledTableCell>{formatNumber(batch.tradable_supply)}</StyledTableCell>
-                      <StyledTableCell>{formatNumber(batch.retired_supply)}</StyledTableCell>
-                      <StyledTableCell>{formatNumber(batch.amount_cancelled)}</StyledTableCell>
-                      <StyledTableCell>{moment(batch.start_date).format('LL')}</StyledTableCell>
-                      <StyledTableCell>{moment(batch.end_date).format('LL')}</StyledTableCell>
-                      <StyledTableCell>{batch.project_location}</StyledTableCell>
-                    </StyledTableRow>
-                  );
-                })}
+              {stableSort(batches, getComparator(order, orderBy)).map((batch: any) => {
+                return (
+                  <StyledTableRow className={styles.noWrap} tabIndex={-1} key={batch.batch_denom}>
+                    <StyledTableCell>
+                      <a href={getAccountUrl(batch.issuer)} target="_blank" rel="noopener noreferrer">
+                        {truncateWalletAddress(batch.issuer)}
+                      </a>
+                    </StyledTableCell>
+                    <StyledTableCell>{batch.batch_denom}</StyledTableCell>
+                    <StyledTableCell>{batch.class_id}</StyledTableCell>
+                    <StyledTableCell>{formatNumber(batch.tradable_supply)}</StyledTableCell>
+                    <StyledTableCell>{formatNumber(batch.retired_supply)}</StyledTableCell>
+                    <StyledTableCell>{formatNumber(batch.amount_cancelled)}</StyledTableCell>
+                    <StyledTableCell>{moment(batch.start_date).format('LL')}</StyledTableCell>
+                    <StyledTableCell>{moment(batch.end_date).format('LL')}</StyledTableCell>
+                    <StyledTableCell>{batch.project_location}</StyledTableCell>
+                  </StyledTableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </div>

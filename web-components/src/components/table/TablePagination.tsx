@@ -1,5 +1,4 @@
 import React from 'react';
-// import { withStyles } from '@material-ui/core/styles';
 import { TablePagination as MuiTablePagination } from '@material-ui/core';
 
 export interface TablePaginationProps {

@@ -1,26 +1,12 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import {
-  TableCell,
-  TableContainer,
-  TableRow,
-  TableSortLabel,
-  TableSortLabelProps,
-  TablePagination,
-} from '@material-ui/core';
+import { TableCell, TableContainer, TableRow, TableSortLabel, TableSortLabelProps } from '@material-ui/core';
 import DropdownIcon from '../icons/DropdownIcon';
 
 const StyledTableContainer = withStyles(theme => ({
   root: {
-    // paddingBottom: theme.spacing(7),
     backgroundColor: theme.palette.primary.main,
     overflow: 'hidden',
-    // [theme.breakpoints.up('sm')]: {
-    //   maxHeight: theme.spacing(119.5),
-    // },
-    // [theme.breakpoints.down('xs')]: {
-    //   maxHeight: theme.spacing(96.75),
-    // },
   },
 }))(TableContainer);
 

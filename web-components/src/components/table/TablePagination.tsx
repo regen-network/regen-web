@@ -14,51 +14,70 @@ const useStylesAction = makeStyles(theme => ({
   },
 }));
 
-function TablePaginationActions(props: any) {
+const TablePaginationActions = (props: any): any => {
   const classes = useStylesAction();
   const { count, page, rowsPerPage, onChangePage } = props;
 
-  const handleBackButtonClick = (event: any) => {
+  const handleBackButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     onChangePage(event, page - 1);
   };
 
-  const handleNextButtonClick = (event: any) => {
+  const handleNextButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     onChangePage(event, page + 1);
   };
 
   return (
     <Grid container justify="flex-end" className={classes.buttonsWrapper}>
-      <PrevNextButton direction="prev" onClick={handleBackButtonClick} disabled={page === 0} />
+      <PrevNextButton dark direction="prev" onClick={handleBackButtonClick} disabled={page === 0} />
       <PrevNextButton
+        dark
         direction="next"
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
       />
     </Grid>
   );
-}
+};
 
 const StyledTablePagination = withStyles(theme => ({
   root: {
     height: theme.spacing(29),
   },
   caption: {
-    color: theme.palette.grey[500],
-    textTransform: 'uppercase',
-    fontSize: '0.75rem',
-    fontWeight: 800,
+    fontSize: '1rem',
+    '&:first-of-type': {
+      fontFamily: 'Muli',
+      fontSize: '0.75rem',
+      fontWeight: 800,
+      letterSpacing: '1px',
+      textTransform: 'uppercase',
+      color: theme.palette.grey[500],
+    },
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
+  },
+  selectRoot: {
+    marginLeft: theme.spacing(4),
     [theme.breakpoints.down('xs')]: {
       display: 'none',
     },
   },
   select: {
+    fontSize: '1rem',
+    lineHeight: '1.5rem',
     border: `1px solid ${theme.palette.grey[100]}`,
-    [theme.breakpoints.down('xs')]: {
-      display: 'none',
-    },
-    '& .MuiSelect-icon .MuiSvgIcon-root': {
-      color: theme.palette.secondary.main,
-    },
+    borderRadius: '2px',
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+    paddingLeft: theme.spacing(3),
+    paddingRight: `${theme.spacing(12)} !important`,
+  },
+  selectIcon: {
+    color: theme.palette.secondary.main,
+    marginRight: theme.spacing(2),
+    fontSize: '1.75rem',
+    top: 'calc(50% - 16px)',
   },
 }))(MuiTablePagination);
 

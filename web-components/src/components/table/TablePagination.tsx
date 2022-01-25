@@ -52,9 +52,12 @@ const StyledTablePagination = withStyles(theme => ({
       letterSpacing: '1px',
       textTransform: 'uppercase',
       color: theme.palette.grey[500],
+      [theme.breakpoints.down('xs')]: {
+        display: 'none',
+      },
     },
     [theme.breakpoints.down('xs')]: {
-      display: 'none',
+      marginRight: theme.spacing(10),
     },
   },
   selectRoot: {

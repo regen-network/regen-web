@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Table, TableBody, TableHead, TableFooter, TableRow } from '@material-ui/core';
 import moment from 'moment';
 import cx from 'clsx';
@@ -79,16 +79,19 @@ const useStyles = makeStyles(theme => ({
   grey: {
     color: theme.palette.info.main,
   },
+  tableBody: props => ({
+    backgroundColor: theme.palette.primary.main,
+  }),
 }));
 
 const ROWS_PER_PAGE_OPTIONS = [5, 10];
 
 const CreditBatches: React.FC = () => {
   const styles = useStyles();
+  const theme = useTheme();
   const [batches, setBatches] = useState<any[]>([]);
   const [order, setOrder] = useState<Order>('desc');
   const [orderBy, setOrderBy] = useState<string>('start_date');
-
   const { TablePagination, setCountTotal, paginationParams, paginationProps } = useTablePagination(
     ROWS_PER_PAGE_OPTIONS,
   );
@@ -144,6 +147,10 @@ const CreditBatches: React.FC = () => {
     return num > 0 ? Math.floor(num).toLocaleString() : '-';
   };
 
+  const getPaddingBottom = (countTotal: number, rowsPerPage: number, countPage: number): number => {
+    return countTotal <= rowsPerPage ? 0 : rowsPerPage - countPage;
+  };
+
   return ledgerRestUri && batches.length > 0 ? (
     <Section
       classes={{ root: styles.section, title: styles.title }}
@@ -152,7 +159,15 @@ const CreditBatches: React.FC = () => {
       titleAlign="left"
     >
       <StyledTableContainer className={styles.tableBorder}>
-        <div style={{ width: '100%', overflow: 'auto' }}>
+        <div
+          style={{
+            width: '100%',
+            overflow: 'auto',
+            paddingBottom: `${theme.spacing(
+              getPaddingBottom(paginationProps.count, paginationProps.rowsPerPage, batches.length) * 20,
+            )}`,
+          }}
+        >
           <Table aria-label="credit batch table" stickyHeader>
             <TableHead>
               <TableRow>
@@ -175,7 +190,7 @@ const CreditBatches: React.FC = () => {
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className={styles.tableBody}>
               {stableSort(batches, getComparator(order, orderBy)).map((batch: any) => {
                 return (
                   <StyledTableRow className={styles.noWrap} tabIndex={-1} key={batch.batch_denom}>

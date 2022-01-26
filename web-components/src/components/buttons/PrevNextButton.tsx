@@ -33,30 +33,28 @@ const getBackgroundColor = (theme: Theme, disabled: boolean, dark: boolean): str
   }
 };
 
-const useStyles = makeStyles<Theme, { disabled: boolean; dark: boolean }>(theme => {
-  return {
-    root: props => ({
-      borderRadius: '50%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      border: `2px solid ${getBorderColor(theme, props.disabled, props.dark)}`,
-      backgroundColor: getBackgroundColor(theme, props.disabled, props.dark),
-      boxSizing: 'border-box',
-      boxShadow: 'none',
-      opacity: props.disabled ? 0.4 : 1,
-      cursor: props.disabled ? 'not-allowed' : 'pointer',
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(12.5),
-        height: theme.spacing(12.5),
-      },
-      [theme.breakpoints.down('xs')]: {
-        width: theme.spacing(10),
-        height: theme.spacing(10),
-      },
-    }),
-  };
-});
+const useStyles = makeStyles<Theme, { disabled: boolean; dark: boolean }>(theme => ({
+  root: props => ({
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: `2px solid ${getBorderColor(theme, props.disabled, props.dark)}`,
+    backgroundColor: getBackgroundColor(theme, props.disabled, props.dark),
+    boxSizing: 'border-box',
+    boxShadow: 'none',
+    opacity: props.disabled ? 0.4 : 1,
+    cursor: props.disabled ? 'not-allowed' : 'pointer',
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(12.5),
+      height: theme.spacing(12.5),
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: theme.spacing(10),
+      height: theme.spacing(10),
+    },
+  }),
+}));
 
 export default function PrevNextButton({
   direction,

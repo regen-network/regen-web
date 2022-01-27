@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
-import moment from 'moment';
 import cx from 'clsx';
 
 import {

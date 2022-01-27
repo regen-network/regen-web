@@ -11,7 +11,6 @@ import {
 import Section from 'web-components/lib/components/section';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import { getComparator, Order, stableSort } from 'web-components/lib/components/table/sort';
-import moment from 'moment';
 import { format } from 'date-fns';
 
 const useStyles = makeStyles(theme => ({

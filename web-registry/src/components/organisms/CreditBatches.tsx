@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import moment from 'moment';
 import cx from 'clsx';
 
 import {
@@ -174,8 +175,8 @@ const CreditBatches: React.FC = () => {
                   <StyledTableCell>{formatNumber(batch.tradable_supply)}</StyledTableCell>
                   <StyledTableCell>{formatNumber(batch.retired_supply)}</StyledTableCell>
                   <StyledTableCell>{formatNumber(batch.amount_cancelled)}</StyledTableCell>
-                  <StyledTableCell>{format(batch.start_date, 'LL')}</StyledTableCell>
-                  <StyledTableCell>{format(batch.end_date, 'LL')}</StyledTableCell>
+                  <StyledTableCell>{moment(batch.start_date).format('LL')}</StyledTableCell>
+                  <StyledTableCell>{moment(batch.end_date).format('LL')}</StyledTableCell>
                   <StyledTableCell>{batch.project_location}</StyledTableCell>
                 </StyledTableRow>
               );

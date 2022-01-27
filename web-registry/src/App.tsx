@@ -47,6 +47,7 @@ import {
   UserProfile,
   VerifyEmail,
   ProjectEdit,
+  Ecocredits,
 } from './pages';
 
 import './App.css';
@@ -125,6 +126,7 @@ const App: React.FC = (): JSX.Element => {
           />
           <ProtectedRoute path="/user-profile" component={UserProfile} />
           <ProtectedRoute path="/organization-profile" component={OrganizationProfile} />
+          <ProtectedRoute path="/dashboard/ecocredits" component={Ecocredits} />
           <Route
             path="/project-pages"
             render={({ match: { path } }) => (
@@ -157,6 +159,7 @@ const App: React.FC = (): JSX.Element => {
               </>
             )}
           />
+
           <Route
             path="/admin"
             render={({ match: { path } }) => (

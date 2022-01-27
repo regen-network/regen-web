@@ -16,6 +16,7 @@ import { truncateWalletAddress } from '../../lib/wallet';
 import { ledgerRestUri } from '../../ledger';
 import { getBatchSupply, getBatches } from '../../lib/ledger-rest';
 import { getAccountUrl } from '../../lib/block-explorer';
+import { format } from 'date-fns';
 
 interface BatchRowData {
   start_date: string | Date;
@@ -174,8 +175,8 @@ const CreditBatches: React.FC = () => {
                   <StyledTableCell>{formatNumber(batch.tradable_supply)}</StyledTableCell>
                   <StyledTableCell>{formatNumber(batch.retired_supply)}</StyledTableCell>
                   <StyledTableCell>{formatNumber(batch.amount_cancelled)}</StyledTableCell>
-                  <StyledTableCell>{moment(batch.start_date).format('LL')}</StyledTableCell>
-                  <StyledTableCell>{moment(batch.end_date).format('LL')}</StyledTableCell>
+                  <StyledTableCell>{format(batch.start_date, 'LL')}</StyledTableCell>
+                  <StyledTableCell>{format(batch.end_date, 'LL')}</StyledTableCell>
                   <StyledTableCell>{batch.project_location}</StyledTableCell>
                 </StyledTableRow>
               );

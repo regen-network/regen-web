@@ -56,6 +56,7 @@ import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
+import { HorizontalDotsIcon } from 'web-components/lib/components/icons/HorizontalDotsIcon';
 
 import { withKnobs, text } from '@storybook/addon-knobs';
 
@@ -69,114 +70,116 @@ export const arrowIcon = (): JSX.Element => (
   <ArrowDownIcon color={text('color', '#000')} direction={text('direction', 'down')} />
 );
 
+export const accountabilityIcon = (): JSX.Element => <AccountabilityIcon />;
+
 export const availableCreditsIcon = (): JSX.Element => <AvailableCreditsIcon />;
 
 export const avatarIcon = (): JSX.Element => <AvatarIcon />;
 
+export const blockIcon = (): JSX.Element => <BlockIcon color="black" />;
+
 export const breadcrumbIcon = (): JSX.Element => <BreadcrumbIcon direction={text('direction', 'down')} />;
-
-export const closeIcon = (): JSX.Element => <CloseIcon />;
-
-export const playIcon = (): JSX.Element => <PlayIcon />;
-
-export const eyeIcon = (): JSX.Element => <EyeIcon />;
-
-export const documentIcon = (): JSX.Element => <DocumentIcon />;
-
-export const creditsIcon = (): JSX.Element => <CreditsIcon color={text('color', '#000')} />;
-
-export const currentCreditsIcon = (): JSX.Element => <CurrentCreditsIcon color={text('color', '#4FB573')} />;
-
-export const organizationIcon = (): JSX.Element => <OrganizationIcon />;
-
-export const pinIcon = (): JSX.Element => <PinIcon fontSize={text('fontSize', 'small')} />;
-
-export const pointerIcon = (): JSX.Element => <PointerIcon />;
-
-export const regenIcon = (): JSX.Element => <RegenIcon />;
-
-export const emailIcon = (): JSX.Element => <EmailIcon />;
-
-export const phoneIcon = (): JSX.Element => <PhoneIcon />;
-
-export const regenLogoIcon = (): JSX.Element => <RegenLogoIcon />;
-
-export const totalCreditsIcon = (): JSX.Element => <TotalCreditsIcon />;
-
-export const verifiedIcon = (): JSX.Element => <VerifiedIcon color={text('color', '#000')} />;
-
-export const dropdownIcon = (): JSX.Element => <DropdownIcon />;
-
-export const checkIcon = (): JSX.Element => <CheckIcon />;
 
 export const checkedIcon = (): JSX.Element => <CheckedIcon />;
 
-export const facebookIcon = (): JSX.Element => <FacebookIcon />;
+export const checkIcon = (): JSX.Element => <CheckIcon />;
 
-export const instagramIcon = (): JSX.Element => <InstagramIcon />;
-
-export const linkedInIcon = (): JSX.Element => <LinkedInIcon />;
-
-export const mediumIcon = (): JSX.Element => <MediumIcon />;
-
-export const telegramIcon = (): JSX.Element => <TelegramIcon />;
-
-export const discordIcon = (): JSX.Element => <DiscordIcon />;
-
-export const twitterIcon = (): JSX.Element => <TwitterIcon />;
-
-export const youtubeIcon = (): JSX.Element => <YoutubeIcon />;
-
-export const githubIcon = (): JSX.Element => <GithubIcon />;
-
-export const whitepaperIcon = (): JSX.Element => <WhitepaperIcon color="black" />;
-
-export const blockIcon = (): JSX.Element => <BlockIcon color="black" />;
-
-export const linkIcon = (): JSX.Element => <LinkIcon color="black" />;
-
-export const printIcon = (): JSX.Element => <PrintIcon />;
-
-export const regenLedgerIcon = (): JSX.Element => <RegenLedgerIcon />;
-
-export const infoIcon = (): JSX.Element => <InfoIcon />;
-
-export const infoIconOutlined = (): JSX.Element => <InfoIconOutlined />;
-
-export const shieldIcon = (): JSX.Element => <ShieldIcon />;
-
-export const plusIcon = (): JSX.Element => <PlusIcon />;
-
-export const minusIcon = (): JSX.Element => <MinusIcon />;
-
-export const interfaceIcon = (): JSX.Element => <InterfaceIcon />;
-
-export const farmerIcon = (): JSX.Element => <FarmerIcon />;
-
-export const trustIcon = (): JSX.Element => <TrustIcon />;
-
-export const trustDocumentIcon = (): JSX.Element => <TrustDocumentIcon />;
-
-export const registrationIcon = (): JSX.Element => <RegistrationIcon />;
-
-export const shadedCreditsIcon = (): JSX.Element => <ShadedCreditsIcon />;
-
-export const accountabilityIcon = (): JSX.Element => <AccountabilityIcon />;
-
-export const reviewIcon = (): JSX.Element => <ReviewIcon />;
+export const closeIcon = (): JSX.Element => <CloseIcon />;
 
 export const coBenefitsIcon = (): JSX.Element => <CoBenefitsIcon />;
 
 export const countingIcon = (): JSX.Element => <CountingIcon />;
 
-export const satelliteIcon = (): JSX.Element => <SatelliteIcon />;
+export const creditsIcon = (): JSX.Element => <CreditsIcon color={text('color', '#000')} />;
 
-export const soilSampleIcon = (): JSX.Element => <SoilSampleIcon />;
+export const currentCreditsIcon = (): JSX.Element => <CurrentCreditsIcon color={text('color', '#4FB573')} />;
 
-export const trashIcon = (): JSX.Element => <TrashIcon />;
+export const discordIcon = (): JSX.Element => <DiscordIcon />;
 
-export const walletIcon = (): JSX.Element => <WalletIcon />;
+export const documentIcon = (): JSX.Element => <DocumentIcon />;
+
+export const dropdownIcon = (): JSX.Element => <DropdownIcon />;
+
+export const emailIcon = (): JSX.Element => <EmailIcon />;
+
+export const eyeIcon = (): JSX.Element => <EyeIcon />;
+
+export const facebookIcon = (): JSX.Element => <FacebookIcon />;
+
+export const farmerIcon = (): JSX.Element => <FarmerIcon />;
+
+export const githubIcon = (): JSX.Element => <GithubIcon />;
+
+export const horizontalDotsIcon = (): JSX.Element => <HorizontalDotsIcon />;
+
+export const infoIcon = (): JSX.Element => <InfoIcon />;
+
+export const infoIconOutlined = (): JSX.Element => <InfoIconOutlined />;
+
+export const instagramIcon = (): JSX.Element => <InstagramIcon />;
+
+export const interfaceIcon = (): JSX.Element => <InterfaceIcon />;
+
+export const linkedInIcon = (): JSX.Element => <LinkedInIcon />;
+
+export const linkIcon = (): JSX.Element => <LinkIcon color="black" />;
+
+export const mediumIcon = (): JSX.Element => <MediumIcon />;
+
+export const minusIcon = (): JSX.Element => <MinusIcon />;
+
+export const organizationIcon = (): JSX.Element => <OrganizationIcon />;
+
+export const phoneIcon = (): JSX.Element => <PhoneIcon />;
+
+export const pinIcon = (): JSX.Element => <PinIcon fontSize={text('fontSize', 'small')} />;
+
+export const playIcon = (): JSX.Element => <PlayIcon />;
+
+export const plusIcon = (): JSX.Element => <PlusIcon />;
+
+export const pointerIcon = (): JSX.Element => <PointerIcon />;
+
+export const printIcon = (): JSX.Element => <PrintIcon />;
+
+export const regenIcon = (): JSX.Element => <RegenIcon />;
+
+export const regenLedgerIcon = (): JSX.Element => <RegenLedgerIcon />;
+
+export const regenLogoIcon = (): JSX.Element => <RegenLogoIcon />;
 
 export const regenTokenIcon = (): JSX.Element => <RegenTokenIcon />;
 
+export const registrationIcon = (): JSX.Element => <RegistrationIcon />;
+
+export const reviewIcon = (): JSX.Element => <ReviewIcon />;
+
+export const satelliteIcon = (): JSX.Element => <SatelliteIcon />;
+
 export const saveIcon = (): JSX.Element => <SaveIcon />;
+
+export const shadedCreditsIcon = (): JSX.Element => <ShadedCreditsIcon />;
+
+export const shieldIcon = (): JSX.Element => <ShieldIcon />;
+
+export const soilSampleIcon = (): JSX.Element => <SoilSampleIcon />;
+
+export const telegramIcon = (): JSX.Element => <TelegramIcon />;
+
+export const totalCreditsIcon = (): JSX.Element => <TotalCreditsIcon />;
+
+export const trashIcon = (): JSX.Element => <TrashIcon />;
+
+export const trustDocumentIcon = (): JSX.Element => <TrustDocumentIcon />;
+
+export const trustIcon = (): JSX.Element => <TrustIcon />;
+
+export const twitterIcon = (): JSX.Element => <TwitterIcon />;
+
+export const verifiedIcon = (): JSX.Element => <VerifiedIcon color={text('color', '#000')} />;
+
+export const walletIcon = (): JSX.Element => <WalletIcon />;
+
+export const whitepaperIcon = (): JSX.Element => <WhitepaperIcon color="black" />;
+
+export const youtubeIcon = (): JSX.Element => <YoutubeIcon />;

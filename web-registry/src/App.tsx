@@ -48,6 +48,7 @@ import {
   VerifyEmail,
   ProjectEdit,
   Ecocredits,
+  Activity,
 } from './pages';
 
 import './App.css';
@@ -212,7 +213,8 @@ const App: React.FC = (): JSX.Element => {
             path="credit-classes/:creditClassId/*"
             element={<CreditClassDetails />}
           />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="stats/activity" element={<Activity />} />
+          <Route path="*" element={NotFoundPage} />
         </Routes>
         <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
         <footer>

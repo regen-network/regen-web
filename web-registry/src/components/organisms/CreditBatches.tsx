@@ -5,6 +5,7 @@ import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
+import TableSortLabel from '@mui/material/TableSortLabel';
 import dayjs from 'dayjs';
 import cx from 'clsx';
 
@@ -12,7 +13,7 @@ import {
   StyledTableContainer,
   StyledTableCell,
   StyledTableRow,
-  // StyledTableSortLabel,
+  formatNumber,
 } from 'web-components/lib/components/table';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
 import {
@@ -21,15 +22,13 @@ import {
   Order,
 } from 'web-components/lib/components/table/sort';
 import Section from 'web-components/lib/components/section';
-import { truncateWalletAddress } from '../../lib/wallet';
+import { truncate } from '../../lib/wallet';
 import { ledgerRestUri } from '../../ledger';
-import { getBatchSupply, getBatches } from '../../lib/ecocredit';
+import { getBatchesWithSupply, BatchData } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { BatchRowData } from '../../types/ledger';
-import { TableSortLabel } from '@mui/material';
 
 interface HeadCell {
-  id: keyof BatchRowData;
+  id: keyof BatchData;
   label: string;
   numeric: boolean;
   wrap?: boolean;
@@ -64,10 +63,10 @@ const headCells: HeadCell[] = [
 
 const useStyles = makeStyles(theme => ({
   section: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       paddingBottom: theme.spacing(22.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.5),
       paddingBottom: theme.spacing(17.5),
     },
@@ -96,14 +95,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ROWS_PER_PAGE_OPTIONS = [5, 10];
+const ROWS_PER_PAGE_OPTIONS = { options: [5, 10] };
 
 const CreditBatches: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
   const [batches, setBatches] = useState<any[]>([]);
-  const [order /* , setOrder */] = useState<Order>('desc');
-  const [orderBy /* , setOrderBy */] = useState<string>('start_date');
+  const [order, setOrder] = useState<Order>('desc');
+  const [orderBy, setOrderBy] = useState<string>('start_date');
   const { TablePagination, setCountTotal, paginationParams, paginationProps } =
     useTablePagination(ROWS_PER_PAGE_OPTIONS);
 
@@ -111,35 +110,12 @@ const CreditBatches: React.FC = () => {
     paginationParams: URLSearchParams,
     setCountTotal: (count: number) => void,
   ): void => {
-    const addSupplyDataToBatch = (
-      batches: BatchRowData[],
-    ): Promise<BatchRowData[]> => {
-      return Promise.all(
-        batches.map(batch => {
-          return getBatchSupply(batch.batch_denom)
-            .then(({ data }) => {
-              if (data) {
-                batch.tradable_supply = data.tradable_supply;
-                batch.retired_supply = data.retired_supply;
-              }
-              return batch;
-            })
-            .catch(err => {
-              return batch;
-            });
-        }),
-      );
-    };
-
-    getBatches(paginationParams).then(res => {
-      const creditBatches = res?.data?.batches;
-      addSupplyDataToBatch(creditBatches).then(sortableBatches => {
-        setBatches(sortableBatches);
-        const _countTotal = parseInt(res?.data?.pagination.total);
-        if (_countTotal) {
-          setCountTotal(_countTotal);
-        }
-      });
+    getBatchesWithSupply(paginationParams).then(sortableBatches => {
+      setBatches(sortableBatches.data);
+      if (sortableBatches?.pagination?.total) {
+        const _countTotal = parseInt(sortableBatches.pagination.total);
+        setCountTotal(_countTotal);
+      }
     });
   };
 
@@ -148,23 +124,18 @@ const CreditBatches: React.FC = () => {
     fetchData(paginationParams, setCountTotal);
   }, [paginationParams, setCountTotal]);
 
-  // const createSortHandler =
-  //   (property: keyof BatchRowData) => (event: React.MouseEvent<unknown>) => {
-  //     handleRequestSort(event, property);
-  //   };
+  const createSortHandler =
+    (property: keyof BatchData) => (event: React.MouseEvent<unknown>) => {
+      handleRequestSort(event, property);
+    };
 
-  // const handleRequestSort = (
-  //   event: React.MouseEvent<unknown>,
-  //   property: keyof BatchRowData,
-  // ): void => {
-  //   const isAsc = orderBy === property && order === 'asc';
-  //   setOrder(isAsc ? 'desc' : 'asc');
-  //   setOrderBy(property);
-  // };
-
-  const formatNumber = (num: number | string): string => {
-    if (typeof num === 'string') num = parseFloat(num);
-    return num > 0 ? Math.floor(num).toLocaleString() : '-';
+  const handleRequestSort = (
+    event: React.MouseEvent<unknown>,
+    property: keyof BatchData,
+  ): void => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
   };
 
   const getPaddingBottom = (
@@ -239,7 +210,7 @@ const CreditBatches: React.FC = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {truncateWalletAddress(batch.issuer)}
+                          {truncate(batch.issuer)}
                         </a>
                       </StyledTableCell>
                       <StyledTableCell>{batch.batch_denom}</StyledTableCell>

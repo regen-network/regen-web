@@ -42,15 +42,17 @@ const StyledTableCell = withStyles(theme => ({
     lineHeight: theme.spacing(4),
     verticalAlign: 'bottom',
     whiteSpace: 'nowrap',
-    '&:first-of-type': {
-      paddingLeft: theme.spacing(8.5),
-    },
     '& .MuiTableSortLabel-active': {
       color: theme.palette.info.main,
     },
     '& svg': {
       alignSelf: 'end',
       top: theme.spacing(-1),
+    },
+    [theme.breakpoints.up('sm')]: {
+      '&:first-of-type': {
+        paddingLeft: theme.spacing(8.5),
+      },
     },
   },
   body: {
@@ -71,8 +73,10 @@ const StyledTableCell = withStyles(theme => ({
         marginRight: theme.spacing(2),
       },
     },
-    '&:first-of-type': {
-      paddingLeft: theme.spacing(8.5),
+    [theme.breakpoints.up('sm')]: {
+      '&:first-of-type': {
+        paddingLeft: theme.spacing(8.5),
+      },
     },
   },
 }))(TableCell);
@@ -85,9 +89,15 @@ const StyledTableSortLabel: React.FC<TableSortLabelProps> = props => {
   );
 };
 
+const formatNumber = (num: number | string): string => {
+  if (typeof num === 'string') num = parseFloat(num);
+  return num > 0 ? Math.floor(num).toLocaleString() : '-';
+};
+
 export {
   StyledTableContainer,
   StyledTableRow,
   StyledTableCell,
   StyledTableSortLabel,
+  formatNumber,
 };

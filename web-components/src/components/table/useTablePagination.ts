@@ -8,21 +8,25 @@ import { TablePagination, TablePaginationProps } from './TablePagination';
  * but not always available (more indicated when the dataset changes a lot).
  *
  * This hook handles the state of the paging component.
- * The hook optionally receives a list of rows-per-page options as a parameter.
+ * The hook optionally receives a list of RowsPerPageOptions as a parameter.
  * Returns the pagination component as is, the properties that should be passed
  * to the pagination component where it is used, the pagination parameters that
  * correspond when the page is changed, and a setter method to set the total
  * data in the source.
  */
 export function useTablePagination(
-  rowsPerPageOptions: number[] = [5],
+  rowsPerPageOptions: RowsPerPageOptions = { options: [5] },
 ): UseTablePaginationResult {
   const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(rowsPerPageOptions[0]);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(
+    rowsPerPageOptions.default || 5,
+  );
   const [offset, setOffset] = useState<number>(0);
   const [countTotal, setCountTotal] = useState<number>(0);
-  const [paginationParams, setPaginationParams] =
-    useState<URLSearchParams | null>(null);
+  const [
+    paginationParams,
+    setPaginationParams,
+  ] = useState<URLSearchParams | null>(null);
 
   const prepareParams = (rowsPerPage: number, offset: number): void => {
     const params = new URLSearchParams();
@@ -53,8 +57,8 @@ export function useTablePagination(
     setPage(0);
   };
 
-  const paginationProps = {
-    rowsPerPageOptions,
+  let paginationProps = {
+    rowsPerPageOptions: rowsPerPageOptions.options,
     count: countTotal,
     rowsPerPage: rowsPerPage,
     page: page,
@@ -77,4 +81,9 @@ export interface UseTablePaginationResult {
   paginationProps: TablePaginationProps;
   /** The hook returns the UI Table Pagination component as a nicety so you don't have to mess with importing it */
   TablePagination?: any;
+}
+
+interface RowsPerPageOptions {
+  options: number[];
+  default?: number;
 }

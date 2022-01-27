@@ -58,7 +58,7 @@ const TopSection: React.FC = () => {
       }
       linearGradient="linear-gradient(220.67deg, rgba(250, 235, 209, 0.6) 21.4%, rgba(125, 201, 191, 0.6) 46.63%, rgba(81, 93, 137, 0.6) 71.86%), linear-gradient(180deg, rgba(0, 0, 0, 0.684) 0%, rgba(0, 0, 0, 0) 97.78%)"
       body={<span>{data?.body}</span>}
-      imageData={desktop?.childImageSharp?.fluid as any}
+      imageData={desktop?.childImageSharp?.fluid as FluidObject}
     />
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { Table, TableBody, TableHead, TableFooter, TableRow } from '@material-ui/core';
 import moment from 'moment';
 import cx from 'clsx';
 
@@ -10,6 +10,7 @@ import {
   StyledTableRow,
   StyledTableSortLabel,
 } from 'web-components/lib/components/table';
+import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
 import { getComparator, stableSort, Order } from 'web-components/lib/components/table/sort';
 import Section from 'web-components/lib/components/section';
 import { truncateWalletAddress } from '../../lib/wallet';
@@ -64,7 +65,7 @@ const useStyles = makeStyles(theme => ({
   },
   tableBorder: {
     border: `1px solid ${theme.palette.info.light}`,
-    borderRadius: 5,
+    borderRadius: 8,
   },
   wrap: {
     whiteSpace: 'normal',
@@ -78,42 +79,58 @@ const useStyles = makeStyles(theme => ({
   grey: {
     color: theme.palette.info.main,
   },
+  tableBody: {
+    backgroundColor: theme.palette.primary.main,
+  },
 }));
+
+const ROWS_PER_PAGE_OPTIONS = [5, 10];
 
 const CreditBatches: React.FC = () => {
   const styles = useStyles();
+  const theme = useTheme();
   const [batches, setBatches] = useState<any[]>([]);
   const [order, setOrder] = useState<Order>('desc');
   const [orderBy, setOrderBy] = useState<string>('start_date');
+  const { TablePagination, setCountTotal, paginationParams, paginationProps } = useTablePagination(
+    ROWS_PER_PAGE_OPTIONS,
+  );
+
+  const fetchData = (paginationParams: URLSearchParams, setCountTotal: (count: number) => void): void => {
+    const addSupplyDataToBatch = (batches: BatchRowData[]): Promise<BatchRowData[]> => {
+      return Promise.all(
+        batches.map(batch => {
+          return getBatchSupply(batch.batch_denom)
+            .then(({ data }) => {
+              if (data) {
+                batch.tradable_supply = data.tradable_supply;
+                batch.retired_supply = data.retired_supply;
+              }
+              return batch;
+            })
+            .catch(err => {
+              return batch;
+            });
+        }),
+      );
+    };
+
+    getBatches(paginationParams).then(res => {
+      const creditBatches = res?.data?.batches;
+      addSupplyDataToBatch(creditBatches).then(sortableBatches => {
+        setBatches(sortableBatches);
+        const _countTotal = parseInt(res?.data?.pagination.total);
+        if (_countTotal) {
+          setCountTotal(_countTotal);
+        }
+      });
+    });
+  };
 
   useEffect(() => {
-    if (ledgerRestUri) {
-      const addSupplyDataToBatch = (batches: BatchRowData[]): Promise<BatchRowData[]> => {
-        return Promise.all(
-          batches.map(batch => {
-            return getBatchSupply(batch.batch_denom)
-              .then(({ data }) => {
-                if (data) {
-                  batch.tradable_supply = data.tradable_supply;
-                  batch.retired_supply = data.retired_supply;
-                }
-                return batch;
-              })
-              .catch(err => {
-                return batch;
-              });
-          }),
-        );
-      };
-
-      getBatches().then(res => {
-        const creditBatches = res?.data?.batches;
-        addSupplyDataToBatch(creditBatches).then(sortableBatches => {
-          setBatches(sortableBatches);
-        });
-      });
-    }
-  }, []);
+    if (!ledgerRestUri || !paginationParams) return;
+    fetchData(paginationParams, setCountTotal);
+  }, [paginationParams, setCountTotal]);
 
   const createSortHandler = (property: keyof BatchRowData) => (event: React.MouseEvent<unknown>) => {
     handleRequestSort(event, property);
@@ -130,6 +147,10 @@ const CreditBatches: React.FC = () => {
     return num > 0 ? Math.floor(num).toLocaleString() : '-';
   };
 
+  const getPaddingBottom = (countTotal: number, rowsPerPage: number, countPage: number): number => {
+    return countTotal <= rowsPerPage ? 0 : rowsPerPage - countPage;
+  };
+
   return ledgerRestUri && batches.length > 0 ? (
     <Section
       classes={{ root: styles.section, title: styles.title }}
@@ -138,49 +159,66 @@ const CreditBatches: React.FC = () => {
       titleAlign="left"
     >
       <StyledTableContainer className={styles.tableBorder}>
-        <Table aria-label="credit batch table" stickyHeader>
-          <TableHead>
-            <TableRow>
-              {headCells.map(headCell => (
-                <StyledTableCell
-                  className={cx(headCell.wrap && styles.wrap)}
-                  key={headCell.id}
-                  align="left"
-                  padding="default"
-                  sortDirection={orderBy === headCell.id ? order : false}
-                >
-                  <StyledTableSortLabel
-                    active={orderBy === headCell.id}
-                    direction={orderBy === headCell.id ? order : 'asc'}
-                    onClick={createSortHandler(headCell.id)}
+        <div
+          style={{
+            width: '100%',
+            overflow: 'auto',
+            paddingBottom: `${theme.spacing(
+              getPaddingBottom(paginationProps.count, paginationProps.rowsPerPage, batches.length) * 20,
+            )}`,
+          }}
+        >
+          <Table aria-label="credit batch table" stickyHeader>
+            <TableHead>
+              <TableRow>
+                {headCells.map(headCell => (
+                  <StyledTableCell
+                    className={cx(headCell.wrap && styles.wrap)}
+                    key={headCell.id}
+                    align="left"
+                    padding="default"
+                    sortDirection={orderBy === headCell.id ? order : false}
                   >
-                    {headCell.label}
-                  </StyledTableSortLabel>
-                </StyledTableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {stableSort(batches, getComparator(order, orderBy)).map((batch: any) => {
-              return (
-                <StyledTableRow className={styles.noWrap} tabIndex={-1} key={batch.batch_denom}>
-                  <StyledTableCell>
-                    <a href={getAccountUrl(batch.issuer)} target="_blank" rel="noopener noreferrer">
-                      {truncateWalletAddress(batch.issuer)}
-                    </a>
+                    <StyledTableSortLabel
+                      active={orderBy === headCell.id}
+                      direction={orderBy === headCell.id ? order : 'asc'}
+                      onClick={createSortHandler(headCell.id)}
+                    >
+                      {headCell.label}
+                    </StyledTableSortLabel>
                   </StyledTableCell>
-                  <StyledTableCell>{batch.batch_denom}</StyledTableCell>
-                  <StyledTableCell>{batch.class_id}</StyledTableCell>
-                  <StyledTableCell>{formatNumber(batch.tradable_supply)}</StyledTableCell>
-                  <StyledTableCell>{formatNumber(batch.retired_supply)}</StyledTableCell>
-                  <StyledTableCell>{formatNumber(batch.amount_cancelled)}</StyledTableCell>
-                  <StyledTableCell>{moment(batch.start_date).format('LL')}</StyledTableCell>
-                  <StyledTableCell>{moment(batch.end_date).format('LL')}</StyledTableCell>
-                  <StyledTableCell>{batch.project_location}</StyledTableCell>
-                </StyledTableRow>
-              );
-            })}
-          </TableBody>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody className={styles.tableBody}>
+              {stableSort(batches, getComparator(order, orderBy)).map((batch: any) => {
+                return (
+                  <StyledTableRow className={styles.noWrap} tabIndex={-1} key={batch.batch_denom}>
+                    <StyledTableCell>
+                      <a href={getAccountUrl(batch.issuer)} target="_blank" rel="noopener noreferrer">
+                        {truncateWalletAddress(batch.issuer)}
+                      </a>
+                    </StyledTableCell>
+                    <StyledTableCell>{batch.batch_denom}</StyledTableCell>
+                    <StyledTableCell>{batch.class_id}</StyledTableCell>
+                    <StyledTableCell>{formatNumber(batch.tradable_supply)}</StyledTableCell>
+                    <StyledTableCell>{formatNumber(batch.retired_supply)}</StyledTableCell>
+                    <StyledTableCell>{formatNumber(batch.amount_cancelled)}</StyledTableCell>
+                    <StyledTableCell>{moment(batch.start_date).format('LL')}</StyledTableCell>
+                    <StyledTableCell>{moment(batch.end_date).format('LL')}</StyledTableCell>
+                    <StyledTableCell>{batch.project_location}</StyledTableCell>
+                  </StyledTableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </div>
+        <Table>
+          <TableFooter>
+            <TableRow>
+              <TablePagination {...paginationProps} />
+            </TableRow>
+          </TableFooter>
         </Table>
       </StyledTableContainer>
     </Section>

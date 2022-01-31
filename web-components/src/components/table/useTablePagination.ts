@@ -48,7 +48,7 @@ export function useTablePagination(rowsPerPageOptions: number[] = [5]): UseTable
     setPage(0);
   };
 
-  let paginationProps = {
+  const paginationProps = {
     rowsPerPageOptions,
     count: countTotal,
     rowsPerPage: rowsPerPage,

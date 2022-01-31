@@ -79,9 +79,9 @@ const useStyles = makeStyles(theme => ({
   grey: {
     color: theme.palette.info.main,
   },
-  tableBody: props => ({
+  tableBody: {
     backgroundColor: theme.palette.primary.main,
-  }),
+  },
 }));
 
 const ROWS_PER_PAGE_OPTIONS = [5, 10];

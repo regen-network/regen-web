@@ -109,6 +109,10 @@ const Layout: React.FC<Props> = ({ children, location }) => {
           title: 'Press Kit',
           href: '/press-kit/',
         },
+        {
+          title: 'Developer Docs',
+          href: 'https://docs.regen.network',
+        },
       ],
     },
   ];

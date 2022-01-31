@@ -162,7 +162,7 @@ const ConnectSection = ({
     >
       <Grid container spacing={4} justifyContent="space-between">
         {icons.map((item, i) => (
-          <Grid item xs={4} sm={3} className={itemClassName} key={i}>
+          <Grid item xs={4} sm={2} className={itemClassName} key={i}>
             <IconLabel
               href={item.href}
               icon={item.icon}

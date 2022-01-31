@@ -108,7 +108,7 @@ const BlockExplorerSection = (): JSX.Element => {
           <DecentralizeIcon />
           <Title className={styles.title}>{data?.title}</Title>
           <Description className={styles.description}>
-            <BlockContent content={data?._rawBody} />
+            <BlockContent noYMargin content={data?._rawBody} />
           </Description>
           <ContainedButton
             className={styles.button}

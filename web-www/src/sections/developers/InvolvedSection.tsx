@@ -8,6 +8,7 @@ import RegenLogoIcon from 'web-components/lib/components/icons/RegenLogoIcon';
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
 import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
+import DocumentIcon from 'web-components/lib/components/icons/DocumentIcon';
 import { DevInvolvedSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -64,6 +65,12 @@ const InvolvedSection = (): JSX.Element => {
       icon: <DiscordIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
       href: 'https://discord.gg/BDcBJu3',
       label: 'Chat with us on Discord',
+      small: true,
+    },
+    {
+      icon: <WhitepaperIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      href: 'https://docs.regen.network',
+      label: 'Developer Docs',
       small: true,
     },
   ];

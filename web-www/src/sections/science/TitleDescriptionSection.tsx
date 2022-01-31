@@ -47,7 +47,8 @@ const query = graphql`
 const TitleDescriptionSection = (): JSX.Element => {
   const theme = useTheme();
   const styles = useStyles();
-  const { sanitySciencePage } = useStaticQuery<ScienceTitleDescriptionSectionQuery>(query);
+  const { sanitySciencePage } =
+    useStaticQuery<ScienceTitleDescriptionSectionQuery>(query);
   const data = sanitySciencePage?.titleDescriptionSection;
 
   const outcomesElement: JSX.Element[] = (data?.outcomes || []).map(o => {
@@ -63,7 +64,10 @@ const TitleDescriptionSection = (): JSX.Element => {
 
   return (
     <Section>
-      <TitleDescription title={data?.title || ''} description={data?._rawDescription}></TitleDescription>
+      <TitleDescription
+        title={data?.title || ''}
+        description={data?._rawDescription}
+      ></TitleDescription>
       <ResponsiveSlider
         itemWidth="90%"
         padding={theme.spacing(2.5)}

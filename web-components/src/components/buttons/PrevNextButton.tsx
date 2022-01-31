@@ -19,6 +19,7 @@ const useStyles = makeStyles<Theme, { disabled: boolean }>(theme => ({
     boxSizing: 'border-box',
     boxShadow: 'none',
     opacity: props.disabled ? 0.4 : 1,
+    fontSize: theme.spacing(6),
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(12.5),
       height: theme.spacing(12.5),

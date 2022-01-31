@@ -7,12 +7,12 @@ import OutlinedButton from './OutlinedButton';
 import { HorizontalDotsIcon } from '../icons/HorizontalDotsIcon';
 
 const useStyles = makeStyles(theme => ({
+  menu: {
+    padding: theme.spacing(4, 8),
+  },
   menuLabel: {
-    color: theme.palette.secondary.main,
-    fontFamily: theme.typography.h1.fontFamily,
-    fontSize: theme.spacing(3),
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
+    fontSize: theme.typography.pxToRem(16),
+    textTransform: 'capitalize',
   },
 }));
 
@@ -54,7 +54,13 @@ const TableActionButtons: React.FC<{
         <OutlinedButton onClick={handleMobileMenuOpen} size="small" aria-controls="table-menu-buttons">
           <HorizontalDotsIcon />
         </OutlinedButton>
-        <Menu id="table-menu-buttons" anchorEl={anchorEl} open={!!anchorEl} onClose={handleMobileMenuClose}>
+        <Menu
+          id="table-menu-buttons"
+          className={styles.menu}
+          anchorEl={anchorEl}
+          open={!!anchorEl}
+          onClose={handleMobileMenuClose}
+        >
           {buttons.map(({ label, onClick }, i) => (
             <MenuItem
               key={i}

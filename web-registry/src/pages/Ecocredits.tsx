@@ -45,6 +45,22 @@ const useStyles = makeStyles(theme => ({
     bottom: 0,
     borderLeft: `1px solid ${theme.palette.info.light}`,
   },
+  batchDenomTitleCell: {
+    minWidth: theme.spacing(25),
+    [theme.breakpoints.up('md')]: {
+      minWidth: theme.spacing(40),
+    },
+    [theme.breakpoints.up('lg')]: {
+      minWidth: theme.spacing(50),
+    },
+  },
+  greenText: {
+    color: theme.palette.secondary.main,
+    fontWeight: 700,
+  },
+  greyText: {
+    color: theme.palette.info.main,
+  },
 }));
 
 type RowItem = {
@@ -110,7 +126,9 @@ export const Ecocredits: React.FC = () => {
             <Table aria-label="eco credits table" stickyHeader>
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>Batch Denom</StyledTableCell>
+                  <StyledTableCell>
+                    <div className={styles.batchDenomTitleCell}>Batch Denom</div>
+                  </StyledTableCell>
                   <StyledTableCell>Issuer</StyledTableCell>
                   <StyledTableCell>Credit Class</StyledTableCell>
                   <SortableCell field="amount_tradeable">Amount Tradeable</SortableCell>
@@ -130,12 +148,18 @@ export const Ecocredits: React.FC = () => {
                 {stableSort(rows, getComparator(order, orderBy)).map((row, i) => (
                   <StyledTableRow key={i}>
                     <StyledTableCell>{row.batch_denom}</StyledTableCell>
-                    <StyledTableCell>{row.issuer}</StyledTableCell>
+                    <StyledTableCell>
+                      <span className={styles.greenText}>{row.issuer}</span>
+                    </StyledTableCell>
                     <StyledTableCell>{row.class_id}</StyledTableCell>
                     <StyledTableCell>{formatNumber(row.amount_tradeable)}</StyledTableCell>
                     <StyledTableCell>{formatNumber(row.amount_retired)}</StyledTableCell>
-                    <StyledTableCell>{formatDate(row.start_date)}</StyledTableCell>
-                    <StyledTableCell>{formatDate(row.end_date)}</StyledTableCell>
+                    <StyledTableCell>
+                      <span className={styles.greyText}>{formatDate(row.start_date)}</span>
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <span className={styles.greyText}>{formatDate(row.end_date)}</span>
+                    </StyledTableCell>
                     <StyledTableCell>{row.project_location}</StyledTableCell>
                     <StyledTableCell className={styles.stickyCell}>
                       <div className={styles.borderLeft} />
@@ -167,7 +191,7 @@ export const Ecocredits: React.FC = () => {
   );
 };
 
-const formatDate = (date: Date): string => format(date, 'LL');
+const formatDate = (date: Date): string => format(date, 'LLLL dd, yyyy');
 const formatNumber = (num: number | string): string => {
   return +num > 0 ? Math.floor(+num).toLocaleString() : '-';
 };

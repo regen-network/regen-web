@@ -16,7 +16,6 @@ import { truncateWalletAddress } from '../../lib/wallet';
 import { ledgerRestUri } from '../../ledger';
 import { getBatchSupply, getBatches } from '../../lib/ledger-rest';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { format } from 'date-fns';
 
 interface BatchRowData {
   start_date: string | Date;

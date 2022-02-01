@@ -1,8 +1,13 @@
 import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableFooter from '@mui/material/TableFooter';
+import TableRow from '@mui/material/TableRow';
+
 import {
   DocumentationTable,
   DocumentRowData,
 } from 'web-components/lib/components/table/DocumentationTable';
+import { TablePagination } from 'web-components/lib/components/table/TablePagination';
 
 export default {
   title: 'Table',
@@ -32,4 +37,21 @@ const data: DocumentRowData[] = [
 
 export const documentationTable = (): JSX.Element => (
   <DocumentationTable rows={data} />
+);
+
+export const tablePagination = (): JSX.Element => (
+  <Table>
+    <TableFooter>
+      <TableRow>
+        <TablePagination
+          rowsPerPageOptions={[5, 10]}
+          count={6}
+          rowsPerPage={5}
+          page={0}
+          onChangePage={(e, newPage) => {}}
+          onChangeRowsPerPage={e => {}}
+        />
+      </TableRow>
+    </TableFooter>
+  </Table>
 );

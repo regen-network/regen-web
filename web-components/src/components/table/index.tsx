@@ -8,15 +8,8 @@ import DropdownIcon from '../icons/DropdownIcon';
 
 const StyledTableContainer = withStyles(theme => ({
   root: {
-    paddingBottom: theme.spacing(7),
-    borderRadius: 5,
     backgroundColor: theme.palette.primary.main,
-    [theme.breakpoints.up('sm')]: {
-      maxHeight: theme.spacing(119.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      maxHeight: theme.spacing(96.75),
-    },
+    overflow: 'hidden',
   },
 }))(TableContainer);
 

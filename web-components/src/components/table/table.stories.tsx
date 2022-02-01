@@ -48,8 +48,8 @@ export const tablePagination = (): JSX.Element => (
           count={6}
           rowsPerPage={5}
           page={0}
-          onChangePage={(e, newPage) => {}}
-          onChangeRowsPerPage={e => {}}
+          onPageChange={(e, newPage) => { }}
+          onChangeRowsPerPage={e => { }}
         />
       </TableRow>
     </TableFooter>

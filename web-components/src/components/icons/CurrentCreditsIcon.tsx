@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
 import cx from 'clsx';
 
 interface CurrentCreditsIconProps {

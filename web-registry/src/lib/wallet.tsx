@@ -1,5 +1,9 @@
 import React, { useState, createContext } from 'react';
-import { assertIsBroadcastTxSuccess, SigningStargateClient, BroadcastTxResponse } from '@cosmjs/stargate';
+import {
+  assertIsBroadcastTxSuccess,
+  SigningStargateClient,
+  BroadcastTxResponse,
+} from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 
@@ -47,7 +51,9 @@ const defaultClientOptions = {
 
 export const WalletProvider: React.FC = ({ children }) => {
   const [sender, setSender] = useState<Sender>(emptySender);
-  const [txResult, setTxResult] = useState<BroadcastTxResponse | undefined>(undefined);
+  const [txResult, setTxResult] = useState<BroadcastTxResponse | undefined>(
+    undefined,
+  );
 
   window.onload = async () => {
     if (!sender.address) {
@@ -176,7 +182,10 @@ export const WalletProvider: React.FC = ({ children }) => {
   /**
    * Sign a transaction for sending tokens to a reciptient
    */
-  const signSend = async (amount: number, recipient: string): Promise<Uint8Array> => {
+  const signSend = async (
+    amount: number,
+    recipient: string,
+  ): Promise<Uint8Array> => {
     amount *= 1000000;
     amount = Math.floor(amount);
 
@@ -232,7 +241,9 @@ export const WalletProvider: React.FC = ({ children }) => {
     if (chainId && chainRpc) {
       try {
         await window?.keplr?.enable(chainId);
-        const offlineSigner = !!window.getOfflineSignerAuto && (await window.getOfflineSignerAuto(chainId));
+        const offlineSigner =
+          !!window.getOfflineSignerAuto &&
+          (await window.getOfflineSignerAuto(chainId));
 
         if (offlineSigner) {
           if (!sender.address) {
@@ -261,7 +272,14 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   return (
     <WalletContext.Provider
-      value={{ wallet: sender, suggestChain, signSend, broadcast, txResult, setTxResult }}
+      value={{
+        wallet: sender,
+        suggestChain,
+        signSend,
+        broadcast,
+        txResult,
+        setTxResult,
+      }}
     >
       {children}
     </WalletContext.Provider>

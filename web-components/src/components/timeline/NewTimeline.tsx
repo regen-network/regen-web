@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-import Timeline from '@material-ui/lab/Timeline';
-import TimelineItem from '@material-ui/lab/TimelineItem';
-import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
-import TimelineConnector from '@material-ui/lab/TimelineConnector';
-import TimelineContent from '@material-ui/lab/TimelineContent';
-import TimelineDot from '@material-ui/lab/TimelineDot';
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
+import Timeline from '@mui/lab/Timeline';
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
+import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import clsx from 'clsx';
 
 import Title from '../title';
@@ -80,7 +80,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       marginLeft: props.even ? theme.spacing(3) : theme.spacing(-3),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(4),
       paddingBottom: theme.spacing(2),
       paddingRight: 0,
@@ -93,12 +93,20 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       [theme.breakpoints.up('md')]: {
         right: props.even ? 'auto' : theme.spacing(-2),
         left: props.even ? theme.spacing(-2) : 'auto',
-        borderRight: props.even ? 'none' : `1px solid ${theme.palette.info.light}`,
-        borderTop: props.even ? 'none' : `1px solid ${theme.palette.info.light}`,
-        borderLeft: props.even ? `1px solid ${theme.palette.info.light}` : 'none',
-        borderBottom: props.even ? `1px solid ${theme.palette.info.light}` : 'none',
+        borderRight: props.even
+          ? 'none'
+          : `1px solid ${theme.palette.info.light}`,
+        borderTop: props.even
+          ? 'none'
+          : `1px solid ${theme.palette.info.light}`,
+        borderLeft: props.even
+          ? `1px solid ${theme.palette.info.light}`
+          : 'none',
+        borderBottom: props.even
+          ? `1px solid ${theme.palette.info.light}`
+          : 'none',
       },
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         left: theme.spacing(-2),
         borderLeft: `1px solid ${theme.palette.info.light}`,
         borderBottom: `1px solid ${theme.palette.info.light}`,
@@ -158,7 +166,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(22.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(15),
     },
   },
@@ -166,7 +174,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: theme.palette.primary.light,
     lineHeight: '140%',
     paddingBottom: theme.spacing(4),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5.25),
       paddingBottom: theme.spacing(3),
     },
@@ -178,7 +186,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3),
       paddingRight: theme.spacing(5.75),
     },
@@ -218,7 +226,7 @@ export default function NewTimeline({ items }: Props): JSX.Element {
   return (
     <>
       <Box display={{ xs: 'none', md: 'block' }}>
-        <Timeline align="alternate" className={classes.timeline}>
+        <Timeline position="alternate" className={classes.timeline}>
           {items.map((item, index) => {
             const connectorClassName = [classes.connector];
             if (index === 0) {
@@ -237,7 +245,11 @@ export default function NewTimeline({ items }: Props): JSX.Element {
                   <TimelineConnector className={clsx(connectorClassName)} />
                 </TimelineSeparator>
                 <TimelineContent>
-                  <Content item={item} index={index} onTitleClick={setIframeSrc} />
+                  <Content
+                    item={item}
+                    index={index}
+                    onTitleClick={setIframeSrc}
+                  />
                 </TimelineContent>
               </TimelineItem>
             );
@@ -268,7 +280,11 @@ export default function NewTimeline({ items }: Props): JSX.Element {
           })}
         </Timeline>
       </Box>
-      <Modal open={!!iframeSrc} onClose={() => setIframeSrc('')} className={classes.modal}>
+      <Modal
+        open={!!iframeSrc}
+        onClose={() => setIframeSrc('')}
+        className={classes.modal}
+      >
         <iframe title="airtable-signup-form" src={iframeSrc} />
       </Modal>
     </>

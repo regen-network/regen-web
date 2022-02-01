@@ -3,7 +3,11 @@ export interface Texts {
   rest: string;
 }
 
-export function truncate(str: string, maxLength: number, restMinLength: number): Texts {
+export function truncate(
+  str: string,
+  maxLength: number,
+  restMinLength: number,
+): Texts {
   const regex = /[^\.!\?]+[\.!\?]+/g;
   const sentences: string[] | null = str.match(regex);
   if (
@@ -23,7 +27,11 @@ export function truncate(str: string, maxLength: number, restMinLength: number):
 
   if (sentences) {
     for (var i: number = 0; i < sentences.length; i++) {
-      if (restLength > restMinLength ? truncated.length < maxLength : truncated.length >= maxLength) {
+      if (
+        restLength > restMinLength
+          ? truncated.length < maxLength
+          : truncated.length >= maxLength
+      ) {
         truncated += sentences[i];
         restLength -= sentences[i].length;
       } else {

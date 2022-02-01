@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 type Props = {
@@ -26,7 +26,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 const StepCircleBadge: React.FC<Props> = ({ className, icon, isActive }) => {
   const classes = useStyles();
 
-  return <div className={clsx(className, classes.circle, isActive && classes.active)}>{icon}</div>;
+  return (
+    <div
+      className={clsx(className, classes.circle, isActive && classes.active)}
+    >
+      {icon}
+    </div>
+  );
 };
 
 export default StepCircleBadge;

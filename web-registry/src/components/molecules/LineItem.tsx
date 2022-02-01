@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 
 import { parseText } from 'web-components/lib/utils/textParser';
 import Description from 'web-components/lib/components/description';

@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, Radio as MuiRadio, RadioProps } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Radio as MuiRadio, RadioProps } from '@mui/material';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -7,7 +8,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '50%',
     width: 16,
     height: 16,
-    boxShadow: 'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
+    boxShadow:
+      'inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)',
     backgroundColor: theme.palette.primary.main,
     '$root.Mui-focusVisible &': {
       outline: `2px auto ${theme.palette.secondary.main}`,
@@ -43,7 +45,9 @@ const Radio: React.FC<RadioProps> = props => {
   return (
     <MuiRadio
       {...props}
-      checkedIcon={<span className={clsx(classes.radioBtn, classes.checkedRadioBtn)} />}
+      checkedIcon={
+        <span className={clsx(classes.radioBtn, classes.checkedRadioBtn)} />
+      }
       icon={<span className={classes.radioBtn} />}
     />
   );

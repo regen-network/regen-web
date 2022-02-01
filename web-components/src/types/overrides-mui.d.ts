@@ -1,9 +1,9 @@
-import { MuiPickersOverrides } from '@material-ui/pickers/typings/overrides';
+import { MuiPickersOverrides } from '@mui/lab/typings/overrides';
 
 type overridesNameToClassKey = {
   [P in keyof MuiPickersOverrides]: keyof MuiPickersOverrides[P];
 };
 
-declare module '@material-ui/core/styles/overrides' {
+declare module '@mui/material/styles/overrides' {
   export interface ComponentNameToClassKey extends overridesNameToClassKey {}
 }

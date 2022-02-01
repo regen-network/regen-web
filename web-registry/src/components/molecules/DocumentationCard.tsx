@@ -1,6 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ImageLeftCard } from 'web-components/lib/components/cards/ImageLeftCard';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';

@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Slider from 'react-slick';
 
 import BlogPost, { BlogPostProps } from '../blog-post';
@@ -11,7 +11,7 @@ export interface BlogPostsProps {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(7.75),
     },
     [theme.breakpoints.up('sm')]: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   slider: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '80%',
     },
     '& .slick-list': {
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .slick-track': {
       display: 'flex',
       '& .slick-slide': {
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
           paddingRight: theme.spacing(4.75),
           '&:last-child': {
             paddingRight: 0,
@@ -56,7 +56,7 @@ export default function BlogPosts({ posts }: BlogPostsProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const desktop = useMediaQuery(theme.breakpoints.up('md'));
-  const mobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const mobile = useMediaQuery(theme.breakpoints.down('sm'));
   const slides: number = desktop ? 3 : mobile ? 1 : 2;
 
   const settings = {

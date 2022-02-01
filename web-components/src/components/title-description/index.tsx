@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(10),
       fontSize: theme.spacing(5.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3.75),
       fontSize: theme.spacing(4),
     },

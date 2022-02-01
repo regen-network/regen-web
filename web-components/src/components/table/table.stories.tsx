@@ -1,10 +1,16 @@
 import * as React from 'react';
-import { DocumentationTable, DocumentRowData } from 'web-components/lib/components/table/DocumentationTable';
+import Table from '@mui/material/Table';
+import TableFooter from '@mui/material/TableFooter';
+import TableRow from '@mui/material/TableRow';
+
+import {
+  DocumentationTable,
+  DocumentRowData,
+} from 'web-components/lib/components/table/DocumentationTable';
 import { TablePagination } from 'web-components/lib/components/table/TablePagination';
-import { Table, TableFooter, TableRow } from '@material-ui/core';
 
 export default {
-  title: 'Components|Table',
+  title: 'Table',
   component: DocumentationTable,
 };
 
@@ -29,7 +35,9 @@ const data: DocumentRowData[] = [
   },
 ];
 
-export const documentationTable = (): JSX.Element => <DocumentationTable rows={data} />;
+export const documentationTable = (): JSX.Element => (
+  <DocumentationTable rows={data} />
+);
 
 export const tablePagination = (): JSX.Element => (
   <Table>

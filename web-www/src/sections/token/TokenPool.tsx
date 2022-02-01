@@ -1,9 +1,11 @@
 import React from 'react';
-import { Theme, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
+import { useMediaQuery, useTheme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 import clsx from 'clsx';
 
-import Section from 'web-components/src/components/section';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/lib/components/section';
 import { MarketingDescription as Description } from '../../components/Description';
 import { TokenPoolQuery } from '../../generated/graphql';
 import SanityImage from 'gatsby-plugin-sanity-image';
@@ -26,7 +28,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     width: '100%',
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -52,7 +54,7 @@ const query = graphql`
 const TokenEconomics = (): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { sanityTokenPage } = useStaticQuery<TokenPoolQuery>(query);
   const data = sanityTokenPage?.poolSection;

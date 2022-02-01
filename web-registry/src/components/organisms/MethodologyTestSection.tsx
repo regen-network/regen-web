@@ -1,6 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(30, 5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17.75),
     },
   },
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(22),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
     },
   },
@@ -51,7 +52,10 @@ function MethodologyTestSection({ title, descriptionRaw }: Props): JSX.Element {
   const styles = useStyles();
 
   return (
-    <BackgroundImgSection img={testMethodologyImg} classes={{ main: styles.main, section: styles.section }}>
+    <BackgroundImgSection
+      img={testMethodologyImg}
+      classes={{ main: styles.main, section: styles.section }}
+    >
       {title && (
         <Title className={styles.title} variant="h2" align="center">
           {title}

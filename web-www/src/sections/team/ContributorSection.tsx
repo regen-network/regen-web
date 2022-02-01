@@ -1,9 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import TeamSection from 'web-components/lib/components/team-section';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+
 import { TeamContributorSectionQuery } from '../../generated/graphql';
 import { TeamItemProps } from 'web-components/lib/components/team-item';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import TeamSection from 'web-components/lib/components/team-section';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

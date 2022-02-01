@@ -1,11 +1,9 @@
 import * as React from 'react';
 import ImageGrid from 'web-components/lib/components/image-grid';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 
 export default {
-  title: 'Components|Image Grid',
+  title: 'Image Grid',
   component: ImageGrid,
-  decorators: [withKnobs],
 };
 const titleText: string = 'Verified outcomes';
 const descriptionText: string =
@@ -13,9 +11,9 @@ const descriptionText: string =
 
 export const imageGrid = (): JSX.Element => (
   <ImageGrid
-    even={boolean('even', true)}
+    even={true}
     img={<img src="./andover.jpg" alt="andover" />}
-    title={text('title', titleText)}
-    description={text('description', descriptionText)}
+    title={titleText}
+    description={descriptionText}
   />
 );

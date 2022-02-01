@@ -1,10 +1,9 @@
-import React from 'react';
-import { IntercomProvider } from 'react-use-intercom';
-import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
+const React = require('react');
+const { IntercomProvider } = require('react-use-intercom');
 
 const intercomAppId = process.env.GATSBY_INTERCOM_APP_ID || '';
 
-export const onClientEntry = () => {
+exports.onClientEntry = () => {
   // IntersectionObserver polyfill for gatsby-background-image (Safari, IE)
   if (!(`IntersectionObserver` in window)) {
     import(`intersection-observer`);
@@ -12,8 +11,8 @@ export const onClientEntry = () => {
   }
 };
 
-// // Wraps every page in a component
-export const wrapPageElement = ({ element }) => {
+// Wraps every page in a component
+exports.wrapPageElement = ({ element }) => {
   return (
     <IntercomProvider appId={intercomAppId} autoBoot>
       {element}

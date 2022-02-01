@@ -6,7 +6,7 @@ import NotFound from 'web-components/lib/components/not-found';
 
 const NotFoundPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`
-    query {
+    {
       grazing: file(relativePath: { eq: "rotational-grazing.png" }) {
         childImageSharp {
           fluid(quality: 90) {

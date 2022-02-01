@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 import Card from './Card';
@@ -29,7 +29,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CreateProjectCard: React.FC<CreateProjectCardProps> = ({ className, onClick, isFirstProject }) => {
+const CreateProjectCard: React.FC<CreateProjectCardProps> = ({
+  className,
+  onClick,
+  isFirstProject,
+}) => {
   const classes = useStyles();
 
   return (

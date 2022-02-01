@@ -2,8 +2,9 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
-import { Theme, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import TokenPool from './TokenPool';
 
 type QueryData = {
@@ -26,10 +27,10 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 const TokenEconomics = (): JSX.Element => {
   const styles = useStyles();
   const data = useStaticQuery<QueryData>(graphql`
-    query {
+    {
       bg: file(relativePath: { eq: "topo-bg-portrait.jpg" }) {
         childImageSharp {
-          fluid(quality: 90, maxWidth: 1920) {
+          fluid(quality: 90) {
             ...GatsbyImageSharpFluid_withWebp
           }
         }

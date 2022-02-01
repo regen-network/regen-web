@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import PlayIcon from 'web-components/lib/components/icons/PlayIcon';
-import Modal from '@material-ui/core/Modal';
+import Modal from '@mui/material/Modal';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
       width: '112px',
       height: '112px',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '70px',
       height: '70px',
     },
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
       width: theme.spacing(13.8025),
       height: theme.spacing(13.8025),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       top: theme.spacing(4.8),
       left: theme.spacing(4.8),
       width: theme.spacing(8.6275),

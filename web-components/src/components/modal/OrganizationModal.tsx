@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 import cx from 'clsx';
@@ -21,7 +21,9 @@ interface OrganizationModalProps {
   organization?: OrganizationFormValues;
   onClose: () => void;
   onSubmit: (organization: OrganizationFormValues) => void;
-  validate: (values: OrganizationFormValues) => Promise<FormikErrors<OrganizationFormValues>>;
+  validate: (
+    values: OrganizationFormValues,
+  ) => Promise<FormikErrors<OrganizationFormValues>>;
   mapboxToken: string;
 }
 
@@ -56,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(7.5),
       paddingRight: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(8),
       paddingBottom: theme.spacing(6),
       paddingLeft: 0,
@@ -80,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(0, 10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(0, 2.5),
     },
   },
@@ -100,7 +102,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -117,7 +119,9 @@ function OrganizationModal({
   mapboxToken,
 }: OrganizationModalProps): JSX.Element {
   const styles = useStyles();
-  const [organizationEdit, setOrganizationEdit] = useState<OrganizationFormValues | undefined>(organization);
+  const [organizationEdit, setOrganizationEdit] = useState<
+    OrganizationFormValues | undefined
+  >(organization);
 
   useEffect(() => {
     setOrganizationEdit(organization);
@@ -127,7 +131,9 @@ function OrganizationModal({
     <Modal open={!!organizationEdit} onClose={onClose}>
       <div className={styles.root}>
         <Title variant="h4" align="center" className={styles.title}>
-          {`${organizationEdit && organizationEdit.id ? 'Edit' : 'Add'} Organization`}
+          {`${
+            organizationEdit && organizationEdit.id ? 'Edit' : 'Add'
+          } Organization`}
         </Title>
         <Formik
           enableReinitialize
@@ -136,7 +142,8 @@ function OrganizationModal({
             ...organizationEdit,
             '@type': 'http://regen.network/Organization',
             'http://regen.network/sharePermission':
-              organizationEdit && !!organizationEdit['http://regen.network/sharePermission'],
+              organizationEdit &&
+              !!organizationEdit['http://regen.network/sharePermission'],
           }}
           validate={validate}
           onSubmit={async (values, { setSubmitting }) => {
@@ -151,7 +158,7 @@ function OrganizationModal({
         >
           {({ values, submitForm, isValid, isSubmitting }) => {
             return (
-              <Form translate="yes">
+              <Form>
                 <OnBoardingCard className={styles.card}>
                   <Field
                     className={styles.field}
@@ -198,7 +205,8 @@ function OrganizationModal({
                     name="['http://regen.network/sharePermission']"
                     label={
                       <Description className={styles.checkboxLabel}>
-                        I have this organization’s permission to share their information with Regen Registry
+                        I have this organization’s permission to share their
+                        information with Regen Registry
                       </Description>
                     }
                   />

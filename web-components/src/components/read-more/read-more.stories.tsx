@@ -1,11 +1,9 @@
 import * as React from 'react';
 import ReadMore from 'web-components/lib/components/read-more';
-import { withKnobs, text, number } from '@storybook/addon-knobs';
 
 export default {
-  title: 'Components|ReadMore',
+  title: 'ReadMore',
   component: ReadMore,
-  decorators: [withKnobs],
 };
 
 const readMoreText: string =
@@ -28,7 +26,7 @@ const readMoreText: string =
   'non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
 export const readMore = (): JSX.Element => (
-  <ReadMore maxLength={number('maxLength', 700)} restMinLength={number('restMinLength', 300)}>
-    {text('Text', readMoreText)}
+  <ReadMore maxLength={700} restMinLength={300}>
+    {readMoreText}
   </ReadMore>
 );

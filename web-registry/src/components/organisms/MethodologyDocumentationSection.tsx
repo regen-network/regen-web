@@ -1,6 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
 import Section from 'web-components/lib/components/section';
 
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(0),
       paddingBottom: theme.spacing(30),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingTop: theme.spacing(0),
       paddingBottom: theme.spacing(20),
     },
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       maxWidth: theme.breakpoints.values.lg,
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column',
     },
   },
@@ -52,14 +53,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(13.25),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginLeft: 0,
       marginBottom: theme.spacing(4),
     },
   },
 }));
 
-function MethodologyDocumentationSection({ methodology, documentation, nameRaw }: Props): JSX.Element {
+function MethodologyDocumentationSection({
+  methodology,
+  documentation,
+  nameRaw,
+}: Props): JSX.Element {
   const styles = useStyles();
 
   return (
@@ -71,13 +76,17 @@ function MethodologyDocumentationSection({ methodology, documentation, nameRaw }
               mainTitle="Documentation"
               cardTitle={documentation.title || ''}
               imageSrc={getSanityImgSrc(documentation.image)}
-              imageAlt={documentation.image?.imageAlt || documentation.title || ''}
+              imageAlt={
+                documentation.image?.imageAlt || documentation.title || ''
+              }
               buttonText={documentation.button?.buttonText || 'view document'}
               buttonUrl={getBtnHref(documentation.button)}
               buttonIcon={<EyeIcon />}
               version={methodology.version}
               program={methodology.program}
-              buttonBlankTarget={documentation.button?.buttonBlankTarget ? true : false}
+              buttonBlankTarget={
+                documentation.button?.buttonBlankTarget ? true : false
+              }
             />
           )}
           <DocumentationCard

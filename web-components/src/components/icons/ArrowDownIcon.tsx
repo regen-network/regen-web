@@ -1,12 +1,12 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 interface ArrowDownIconProps {
   color: string;
   className?: string;
-  fontSize?: 'inherit' | 'default' | 'small' | 'large';
+  fontSize?: SvgIconProps['fontSize'];
   direction?: 'next' | 'prev' | 'down' | 'up';
 }
 
@@ -37,14 +37,20 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 export default function ArrowDownIcon({
   color,
   className,
-  fontSize = 'default',
+  fontSize = 'inherit',
   direction = 'down',
 }: ArrowDownIconProps): JSX.Element {
   const rotate: string = directionRotate[direction];
   const classes = useStyles({ rotate });
   return (
     <SvgIcon fontSize={fontSize} className={clsx(className, classes.icon)}>
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <g id="Icon / Arrow / Large">
           <path
             id="Union"

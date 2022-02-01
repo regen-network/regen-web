@@ -1,9 +1,12 @@
 import React from 'react';
-import { Theme, makeStyles, TypographyVariant } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { Variant } from '@mui/material/styles/createTypography';
+import { makeStyles } from '@mui/styles';
+
+import Grid from '@mui/material/Grid';
 import clsx from 'clsx';
 import { FluidObject } from 'gatsby-image';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from './BackgroundSection';
 
 interface StyleProps {
@@ -12,7 +15,7 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17.75),
     },
     [theme.breakpoints.up('sm')]: {
@@ -26,7 +29,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(18),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5),
       paddingBottom: theme.spacing(15.5),
     },
@@ -41,7 +44,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.spacing(6),
       paddingTop: theme.spacing(5.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
       paddingTop: theme.spacing(1.5),
     },
@@ -95,7 +98,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(18),
       paddingTop: theme.spacing(5.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(14),
       paddingTop: theme.spacing(1.5),
     },
@@ -115,7 +118,7 @@ interface ConnectSectionProps {
   icons: IconLabelProps[];
   itemClassName?: string;
   titleClassName?: string;
-  titleVariant?: TypographyVariant;
+  titleVariant?: Variant;
   className?: string;
   background: {
     childImageSharp: {
@@ -157,7 +160,7 @@ const ConnectSection = ({
       titleClassName={clsx(titleClassName, classes.title)}
       titleVariant={titleVariant}
     >
-      <Grid container spacing={4} justify="space-between">
+      <Grid container spacing={4} justifyContent="space-between">
         {icons.map((item, i) => (
           <Grid item xs={4} sm={2} className={itemClassName} key={i}>
             <IconLabel

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Popover, MenuList, Paper, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { Popover, MenuList, Paper } from '@mui/material';
 import DropdownIcon from '../icons/DropdownIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(4.75),
   },
   text: {
-    '& li.MuiListItem-button:hover': {
+    '& li.MuiMenuItem-root:hover': {
       backgroundColor: 'transparent',
     },
     '& li > a': {
@@ -49,7 +50,12 @@ interface Props {
  *
  * @param object contains text, color, children. Where text is the anchor text. Color is a string for link text color, and children are MenuItems typically with Links.
  */
-const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Element => {
+const MenuHover = ({
+  text,
+  textColor,
+  dropdownColor,
+  children,
+}: Props): JSX.Element => {
   const [openedPopover, setOpenedPopover] = useState(false);
   const popoverAnchor = useRef(null);
 
@@ -96,7 +102,9 @@ const MenuHover = ({ text, textColor, dropdownColor, children }: Props): JSX.Ele
         PaperProps={{ onMouseEnter: popoverEnter, onMouseLeave: popoverLeave }}
       >
         <Paper className={styles.paper} elevation={5}>
-          <MenuList classes={{ root: styles.text, padding: styles.noOutline }}>{children}</MenuList>
+          <MenuList classes={{ root: styles.text, padding: styles.noOutline }}>
+            {children}
+          </MenuList>
         </Paper>
       </Popover>
     </div>

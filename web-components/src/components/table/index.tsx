@@ -1,6 +1,9 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { TableCell, TableContainer, TableRow, TableSortLabel, TableSortLabelProps } from '@material-ui/core';
+import { withStyles } from '@mui/styles';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableRow from '@mui/material/TableRow';
+import { TableSortLabel, TableSortLabelProps } from '@mui/material';
 import DropdownIcon from '../icons/DropdownIcon';
 
 const StyledTableContainer = withStyles(theme => ({
@@ -82,4 +85,9 @@ const StyledTableSortLabel: React.FC<TableSortLabelProps> = props => {
   );
 };
 
-export { StyledTableContainer, StyledTableRow, StyledTableCell, StyledTableSortLabel };
+export {
+  StyledTableContainer,
+  StyledTableRow,
+  StyledTableCell,
+  StyledTableSortLabel,
+};

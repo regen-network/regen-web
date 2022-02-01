@@ -1,15 +1,19 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
-import { BottomBannerFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import {
+  BottomBannerFieldsFragment,
+  Maybe,
+} from '../../generated/sanity-graphql';
 import { onBtnClick } from '../../lib/button';
 import { BackgroundImgSection } from './BackgroundImgSection';
 
@@ -50,7 +54,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
   title: {
     fontWeight: 900,
     lineHeight: theme.typography.pxToRem(53.2),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
       lineHeight: theme.typography.pxToRem(44.8),
     },
@@ -61,7 +65,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
       fontSize: theme.typography.pxToRem(21),
       padding: theme.spacing(2, 8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       padding: theme.spacing(2, 4),
       '&:nth-child(2)': {
@@ -70,14 +74,16 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     },
   },
   description: props => ({
-    color: props.lightBg ? theme.palette.text.primary : theme.palette.primary.main,
+    color: props.lightBg
+      ? theme.palette.text.primary
+      : theme.palette.primary.main,
     marginTop: theme.spacing(4),
     textAlign: 'center',
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(22),
       lineHeight: theme.typography.pxToRem(33),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       lineHeight: theme.typography.pxToRem(27),
     },
@@ -105,7 +111,7 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
       }}
       isBanner={props.isBanner}
     >
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <div className={styles.content}>
           <Title
             align="center"
@@ -116,11 +122,13 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
             {props.bottomBanner?.title}
           </Title>
           {!!props.bottomBanner?.descriptionRaw && (
-            <Description className={cx(styles.description, classes?.description)}>
+            <Description
+              className={cx(styles.description, classes?.description)}
+            >
               <BlockContent content={props.bottomBanner.descriptionRaw} />
             </Description>
           )}
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Button
               onClick={() => onBtnClick(props.openModal, button)}
               className={cx(styles.btn, classes?.button)}

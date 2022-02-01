@@ -1,13 +1,18 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { WrappedStepCard } from '../atoms';
-import { StepCardFieldsFragment, Maybe, Scalars } from '../../generated/sanity-graphql';
+import {
+  StepCardFieldsFragment,
+  Maybe,
+  Scalars,
+} from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   description: {
@@ -16,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(22),
       lineHeight: theme.typography.pxToRem(33),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       lineHeight: theme.typography.pxToRem(27),
     },
@@ -28,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(4),
     },
   },
@@ -37,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(24),
       fontSize: theme.typography.pxToRem(32),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(16),
       fontSize: theme.typography.pxToRem(24),
     },
@@ -56,19 +61,33 @@ const StepCardsWithDescription: React.FC<{
   stepCards?: Maybe<Array<Maybe<StepCardFieldsFragment>>>;
   openModal: (link: string) => void;
   className?: string;
-}> = ({ stepCards, className, descriptionRaw, bottomDescription, openModal }) => {
+}> = ({
+  stepCards,
+  className,
+  descriptionRaw,
+  bottomDescription,
+  openModal,
+}) => {
   const styles = useStyles();
 
   return (
-    <Grid container justify="center" className={className}>
+    <Grid container justifyContent="center" className={className}>
       {descriptionRaw && (
         <Description className={cx(styles.description, styles.topDescription)}>
           <BlockContent content={descriptionRaw} />
         </Description>
       )}
-      <Grid container justify="center" className={styles.stepCardsContainer}>
+      <Grid
+        container
+        justifyContent="center"
+        className={styles.stepCardsContainer}
+      >
         {stepCards?.map((card, i) => (
-          <WrappedStepCard stepNumber={i} stepCard={card} openModal={openModal} />
+          <WrappedStepCard
+            stepNumber={i}
+            stepCard={card}
+            openModal={openModal}
+          />
         ))}
       </Grid>
       {!!bottomDescription && (
@@ -76,7 +95,9 @@ const StepCardsWithDescription: React.FC<{
           <Title align="center" className={styles.bottomTitle}>
             {bottomDescription.title}
           </Title>
-          <Description className={cx(styles.description, styles.bottomDescription)}>
+          <Description
+            className={cx(styles.description, styles.bottomDescription)}
+          >
             <BlockContent content={bottomDescription.body} />
           </Description>
         </>

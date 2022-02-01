@@ -1,14 +1,20 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { BasicInfoForm, BasicInfoFormValues } from '../components/organisms';
-import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
-import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import {
+  OnboardingFormTemplate,
+  EditFormTemplate,
+} from '../components/templates';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+} from '../generated/graphql';
 import { useProjectEditContext } from '../pages/ProjectEdit';
 
 const BasicInfo: React.FC = () => {
-  const history = useHistory();
-  const { projectId } = useParams<{ projectId: string }>();
+  const navigate = useNavigate();
+  const { projectId } = useParams();
   const [updateProject] = useUpdateProjectByIdMutation();
   const { isEdit } = useProjectEditContext();
 
@@ -43,10 +49,11 @@ const BasicInfo: React.FC = () => {
           },
         },
       });
-      !isEdit && history.push(`/project-pages/${projectId}/location`);
+      !isEdit && navigate(`/project-pages/${projectId}/location`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
+      // eslint-disable-next-line no-console
       console.log(e);
     }
   }
@@ -56,7 +63,11 @@ const BasicInfo: React.FC = () => {
       <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
     </EditFormTemplate>
   ) : (
-    <OnboardingFormTemplate activeStep={0} title="Basic Info" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={0}
+      title="Basic Info"
+      saveAndExit={saveAndExit}
+    >
       <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
     </OnboardingFormTemplate>
   );

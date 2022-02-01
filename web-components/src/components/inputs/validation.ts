@@ -5,7 +5,9 @@ export const invalidPassword: string =
 export const requirementAgreement: string = 'You must agree to continue';
 
 export function validateEmail(email: string): boolean {
-  return /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,10})$/i.test(email);
+  return /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,10})$/i.test(
+    email,
+  );
 }
 
 export function validatePassword(password: string): boolean {

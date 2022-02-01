@@ -1,9 +1,10 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { RadioGroup } from 'formik-material-ui';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { RadioGroup } from 'formik-mui';
+import { makeStyles } from '@mui/styles';
+import { Typography } from '@mui/material';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import DatePickField from 'web-components/lib/components/inputs/DatePickField';
@@ -14,8 +15,6 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 interface AdditionalityFormProps {
   submit: (values: AdditionalityValues) => Promise<void>;
 }
-
-type RegenerativePractice = { name: string; startDate: string };
 
 export interface AdditionalityValues {
   rotationalGrazing: string;
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         marginTop: theme.spacing(9),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         marginTop: theme.spacing(6.5),
       },
     },
@@ -105,7 +104,8 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
           <Form>
             <OnBoardingCard className={classes.card}>
               <ControlledFormLabel className={classes.sectionLabel}>
-                Which regenerative practices have you been applying and for how long?
+                Which regenerative practices have you been applying and for how
+                long?
               </ControlledFormLabel>
               <Field component={RadioGroup} name="includesGrasslands">
                 <Field
@@ -184,8 +184,8 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
 
             <OnBoardingCard className={classes.card}>
               <ControlledFormLabel>
-                Prior to adopting these regenerative practices (going back 5 years prior) how were you using
-                the land?
+                Prior to adopting these regenerative practices (going back 5
+                years prior) how were you using the land?
               </ControlledFormLabel>
               <Field component={RadioGroup} name="includesGrasslands">
                 <Field
@@ -216,12 +216,15 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
             </OnBoardingCard>
 
             <OnBoardingCard className={classes.card}>
-              <ControlledFormLabel>Prior environmental conditions</ControlledFormLabel>
+              <ControlledFormLabel>
+                Prior environmental conditions
+              </ControlledFormLabel>
               <Field
                 component={ControlledTextField}
                 description="Relevant environmental changes within the project area. These include changes in vegetation such as clearing or planting, hydrology, soil conditions, or other."
                 name="environmentalConditions"
                 rows={6}
+                minRows={6}
                 multiline
                 optional
               />

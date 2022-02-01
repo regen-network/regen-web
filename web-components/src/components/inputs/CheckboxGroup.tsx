@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
-import Checkbox from '@material-ui/core/Checkbox';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormLabel from '@mui/material/FormLabel';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import Checkbox from '@mui/material/Checkbox';
 import { FieldProps } from 'formik';
 
 import CheckedIcon from '../icons/CheckedIcon';
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(4.5),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(4),
       },
       '&.Mui-focused': {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
     '& .MuiFormControlLabel-label': {
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(3.5),
       },
     },
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(3.5),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(3),
       },
     },
@@ -61,7 +61,11 @@ interface CheckboxGroupProps extends FieldProps {
   }[];
 }
 
-export default function CheckboxGroup({ label, options, ...props }: CheckboxGroupProps): JSX.Element {
+export default function CheckboxGroup({
+  label,
+  options,
+  ...props
+}: CheckboxGroupProps): JSX.Element {
   const classes = useStyles();
   const {
     form: { setFieldValue, errors },
@@ -98,7 +102,9 @@ export default function CheckboxGroup({ label, options, ...props }: CheckboxGrou
           />
         ))}
       </FormGroup>
-      {errors && errors[name] && <span className="MuiFormHelperText-root Mui-error">{errors[name]}</span>}
+      {errors && errors[name] && (
+        <span className="MuiFormHelperText-root Mui-error">{errors[name]}</span>
+      )}
     </FormControl>
   );
 }

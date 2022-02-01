@@ -1,7 +1,10 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 
-import Timeline, { Item } from 'web-components/lib/components/timeline/NewTimeline';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Timeline, {
+  Item,
+} from 'web-components/lib/components/timeline/NewTimeline';
 import Section from 'web-components/lib/components/section';
 
 import {
@@ -19,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(20),
     },
   },
@@ -27,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(19.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(11.25),
     },
   },
@@ -49,13 +52,23 @@ const TimelineSection: React.FC<Props> = ({ content }) => {
       imgSrc: t?.image?.asset?.url || '',
       title: t?.title || '',
       url: t?.url || '',
-      tags: t?.tags?.map((tag: Maybe<Tag>) => ({ name: tag?.name || '', color: tag?.color || '' })) || [],
+      tags:
+        t?.tags?.map((tag: Maybe<Tag>) => ({
+          name: tag?.name || '',
+          color: tag?.color || '',
+        })) || [],
     })) || [];
 
   return (
     <div className={styles.root}>
-      <Section title={content.header || ''} classes={{ title: styles.title }} titleVariant="subtitle2">
-        <div className={styles.timeline}>{items.length > 0 && <Timeline items={items} />}</div>
+      <Section
+        title={content.header || ''}
+        classes={{ title: styles.title }}
+        titleVariant="subtitle2"
+      >
+        <div className={styles.timeline}>
+          {items.length > 0 && <Timeline items={items} />}
+        </div>
       </Section>
     </div>
   );

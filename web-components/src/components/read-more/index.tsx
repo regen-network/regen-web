@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-import Fade from '@material-ui/core/Fade';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import Fade from '@mui/material/Fade';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import Description from '../description';
@@ -34,13 +34,17 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(18),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(14),
     },
   },
 }));
 
-const ReadMore: React.FC<ReadMoreProps> = ({ maxLength = 700, restMinLength = 300, children }) => {
+const ReadMore: React.FC<ReadMoreProps> = ({
+  maxLength = 700,
+  restMinLength = 300,
+  children,
+}) => {
   const classes = useStyles({});
   const theme = useTheme();
 
@@ -55,12 +59,15 @@ const ReadMore: React.FC<ReadMoreProps> = ({ maxLength = 700, restMinLength = 30
   const ReadButton = (): JSX.Element => (
     <OutlinedButton
       onClick={handleChange}
-      classes={{ root: classes.button, label: classes.buttonLabel }}
+      classes={{ root: classes.button, outlined: classes.buttonLabel }}
       endIcon={
         expanded ? (
           <ArrowDownIcon direction="up" color={theme.palette.secondary.main} />
         ) : (
-          <ArrowDownIcon direction="down" color={theme.palette.secondary.main} />
+          <ArrowDownIcon
+            direction="down"
+            color={theme.palette.secondary.main}
+          />
         )
       }
     >
@@ -75,12 +82,15 @@ const ReadMore: React.FC<ReadMoreProps> = ({ maxLength = 700, restMinLength = 30
           {texts.truncated}
           {texts.rest && !expanded && <ReadButton />}
         </Description>
-        <Fade in={expanded} unmountOnExit>
-          <Description fontSize={fontSize}>
-            {!texts.rest.startsWith('\n') && '\n'}
-            {texts.rest}
-            {texts.rest && expanded && <ReadButton />}
-          </Description>
+        <Fade in={expanded} mountOnEnter unmountOnExit>
+          {/* https://mui.com/guides/migration-v4/#cannot-read-property-scrolltop-of-null */}
+          <div>
+            <Description fontSize={fontSize}>
+              {!texts.rest.startsWith('\n') && '\n'}
+              {texts.rest}
+              {texts.rest && expanded && <ReadButton />}
+            </Description>
+          </div>
         </Fade>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { IconButton, useMediaQuery } from '@material-ui/core';
+import { makeStyles, useTheme } from '@mui/styles';
+import { IconButton, IconButtonProps, useMediaQuery } from '@mui/material';
 import { FieldProps } from 'formik';
 import { Crop } from 'react-image-crop';
 import cx from 'clsx';
@@ -25,7 +25,7 @@ export interface ImageDropProps extends FieldProps {
   optional?: boolean;
   labelSubText?: string;
   buttonText?: string;
-  fixedCrop?: Crop;
+  fixedCrop: Partial<Crop>;
   hideDragText?: boolean;
   onDelete?: (fileName: string) => Promise<void>;
   onUpload?: (imageFile: File) => Promise<string>;
@@ -128,8 +128,15 @@ function ImageDrop({
     noKeyboard: true,
   });
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event && event.target && event.target.files && event.target.files.length > 0) {
+  const handleFileChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    if (
+      event &&
+      event.target &&
+      event.target.files &&
+      event.target.files.length > 0
+    ) {
       const file = event.target.files[0];
       setFileName(file.name);
       toBase64(file).then(base64String => {
@@ -158,7 +165,9 @@ function ImageDrop({
     setCropModalOpen(false);
   };
 
-  const onCropModalSubmit = async (croppedImage: HTMLImageElement): Promise<void> => {
+  const onCropModalSubmit = async (
+    croppedImage: HTMLImageElement,
+  ): Promise<void> => {
     const result = await getImageSrc(croppedImage, onUpload, fileName);
 
     if (result) {
@@ -168,12 +177,14 @@ function ImageDrop({
     }
   };
 
-  const handleDelete = async (imageUrl: string): Promise<void> => {
-    form.setFieldValue(field.name, undefined);
-    if (onDelete) await onDelete(imageUrl);
-    setInitialImage('');
-    setFileName('');
-  };
+  const handleDelete: IconButtonProps['onClick'] =
+    e =>
+    async (imageUrl: string): Promise<void> => {
+      form.setFieldValue(field.name, undefined);
+      if (onDelete) await onDelete(imageUrl);
+      setInitialImage('');
+      setFileName('');
+    };
 
   return (
     <>
@@ -188,11 +199,16 @@ function ImageDrop({
         {() =>
           field.value ? (
             <div className={cx(styles.preview, classes?.main)}>
-              <Image className={styles.previewImage} src={field.value} backgroundImage />
+              <Image
+                className={styles.previewImage}
+                src={field.value}
+                backgroundImage
+              />
               <IconButton
                 classes={{ root: styles.deleteButton }}
-                onClick={() => handleDelete(field.value)}
+                onClick={handleDelete}
                 aria-label="delete"
+                size="large"
               >
                 <TrashIcon color={theme.palette.error.light} />
               </IconButton>
@@ -226,7 +242,10 @@ function ImageDrop({
                   id={`btn-file-input-${field.name}`}
                 />
                 <label htmlFor={`btn-file-input-${field.name}`}>
-                  <OutlinedButton classes={{ root: cx(styles.button, classes?.button) }} isImageBtn>
+                  <OutlinedButton
+                    classes={{ root: cx(styles.button, classes?.button) }}
+                    isImageBtn
+                  >
                     {buttonText || '+ add'}
                   </OutlinedButton>
                 </label>

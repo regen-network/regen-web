@@ -1,9 +1,14 @@
 import React from 'react';
+import { StyledEngineProvider } from '@mui/material/styles';
+
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
-// import { StylesProvider } from '@material-ui/core/styles';
 
 const GatsbyPluginRegenThemeProvider = ({ children }) => {
-  return <ThemeProvider injectFonts>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider injectFonts>
+      <StyledEngineProvider injectFirst>{children}</StyledEngineProvider>
+    </ThemeProvider>
+  );
 };
 
 export default GatsbyPluginRegenThemeProvider;

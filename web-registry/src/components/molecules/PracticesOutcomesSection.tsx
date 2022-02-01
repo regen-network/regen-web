@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { makeStyles, useTheme } from '@mui/styles';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
@@ -13,7 +14,7 @@ import { PracticesOutcomesSection as PracticesOutcomesSectionProps } from '../..
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(14),
     },
     [theme.breakpoints.up('sm')]: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   slider: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(12),
     },
     [theme.breakpoints.up('sm')]: {
@@ -58,15 +59,22 @@ const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
 
   const practiceItems: ImageItemProps[] =
     practices?.map(i => ({
-      img: <img src={i?.icon?.asset?.url || ''} alt={`${i?.icon?.asset?.label}`} />,
+      img: (
+        <img src={i?.icon?.asset?.url || ''} alt={`${i?.icon?.asset?.label}`} />
+      ),
       title: i?.title || '',
       description: i?.descriptionRaw[0]?.children[0]?.text,
     })) || [];
 
-  const outcomeCards = outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />) || [];
+  const outcomeCards =
+    outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />) || [];
 
   return (
-    <Section withSlider classes={{ root: classes.root, title: classes.title }} title={title || ''}>
+    <Section
+      withSlider
+      classes={{ root: classes.root, title: classes.title }}
+      title={title || ''}
+    >
       <ImageItems
         className={classes.slider}
         title="Land Management Practices"

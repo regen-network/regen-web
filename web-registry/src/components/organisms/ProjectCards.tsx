@@ -1,10 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import { makeStyles, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
 import { MoreProjectFieldsFragment, Maybe } from '../../generated/graphql';
@@ -19,7 +20,7 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexWrap: 'nowrap',
       overflow: 'auto',
     },
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
   },
   item: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexGrow: 0,
       maxWidth: '100%',
       flexBasis: '100%',
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       margin: theme.spacing(0, 1.875),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(0, 1.875),
       '&:first-child': {
         paddingLeft: theme.spacing(4),
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ProjectCards: React.FC<Props> = props => {
   const styles = useStyles();
   const theme: Theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
@@ -72,20 +73,22 @@ const ProjectCards: React.FC<Props> = props => {
   }> = ({ project }) => (
     <ProjectCard
       name={project.metadata?.['http://schema.org/name']}
-      imgSrc={project.metadata?.['http://regen.network/previewPhoto']?.['@value']}
+      imgSrc={
+        project.metadata?.['http://regen.network/previewPhoto']?.['@value']
+      }
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
       place={project.metadata?.['http://schema.org/location']?.place_name}
       area={
-        project.metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#numericValue']?.[
-          '@value'
-        ]
+        project.metadata?.['http://regen.network/size']?.[
+          'http://qudt.org/1.1/schema/qudt#numericValue'
+        ]?.['@value']
       }
       areaUnit={
         qudtUnitMap[
-          project.metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#unit']?.[
-            '@value'
-          ] as qudtUnit
+          project.metadata?.['http://regen.network/size']?.[
+            'http://qudt.org/1.1/schema/qudt#unit'
+          ]?.['@value'] as qudtUnit
         ]
       }
       registry={project.partyByRegistryId}
@@ -97,7 +100,11 @@ const ProjectCards: React.FC<Props> = props => {
       {props.projects.map((project, i) => {
         return (
           project && (
-            <Link className={styles.swipeItem} key={project.handle || i} href={`/projects/${project.handle}`}>
+            <Link
+              className={styles.swipeItem}
+              key={project.handle || i}
+              href={`/projects/${project.handle}`}
+            >
               <LinkedProject project={project} />
             </Link>
           )
@@ -105,12 +112,25 @@ const ProjectCards: React.FC<Props> = props => {
       })}
     </div>
   ) : (
-    <Grid container className={clsx(styles.root, props.classes && props.classes.root)} spacing={5}>
+    <Grid
+      container
+      className={clsx(styles.root, props.classes && props.classes.root)}
+      spacing={5}
+    >
       {props.projects.map((project, i) => {
         return (
           project && (
-            <Grid item sm={6} md={4} key={project.handle || i} className={styles.item}>
-              <Link className={styles.projectCard} href={`/projects/${project.handle}`}>
+            <Grid
+              item
+              sm={6}
+              md={4}
+              key={project.handle || i}
+              className={styles.item}
+            >
+              <Link
+                className={styles.projectCard}
+                href={`/projects/${project.handle}`}
+              >
                 <LinkedProject project={project} />
               </Link>
             </Grid>

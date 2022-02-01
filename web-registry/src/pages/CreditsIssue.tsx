@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { useMutation } from '@apollo/client';
 import { gql } from '@apollo/client';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import { DatePicker } from '@material-ui/pickers';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { DatePicker } from '@mui/lab';
 import ReactHtmlParser from 'react-html-parser';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import { useAllProjectsQuery } from '../generated/graphql';
 
@@ -60,47 +61,72 @@ const useStyles = makeStyles((theme: Theme) => ({
 function CreditsIssue(): JSX.Element {
   const classes = useStyles();
 
-  const [issueCredits, { data, loading, error }] = useMutation(ISSUE_CREDITS, { errorPolicy: 'ignore' });
+  const [issueCredits, { data, loading, error }] = useMutation(ISSUE_CREDITS, {
+    errorPolicy: 'ignore',
+  });
 
-  const { data: projectsData, loading: projectsLoading, error: projectsError } = useAllProjectsQuery({
+  const {
+    data: projectsData,
+    loading: projectsLoading,
+    error: projectsError,
+  } = useAllProjectsQuery({
     errorPolicy: 'ignore',
   });
 
   const [projectId, setProjectId] = useState('');
   const [units, setUnits] = useState(10);
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [creditClassVersionId, setCreditClassVersionId] = useState<string | null>(null);
-  const [creditClassVersionCreatedAt, setCreditClassVersionCreatedAt] = useState<string | null>(null);
-  const [methodologyVersionId, setMethodologyVersionId] = useState<string | null>(null);
-  const [methodologyVersionCreatedAt, setMethodologyVersionCreatedAt] = useState<string | null>(null);
+  const [startDate, setStartDate] = useState<Date | undefined | null>(
+    undefined,
+  );
+  const [endDate, setEndDate] = useState<Date | undefined | null>(undefined);
+  const [creditClassVersionId, setCreditClassVersionId] = useState<
+    string | undefined
+  >(undefined);
+  const [creditClassVersionCreatedAt, setCreditClassVersionCreatedAt] =
+    useState<string | undefined>(undefined);
+  const [methodologyVersionId, setMethodologyVersionId] = useState<
+    string | undefined
+  >(undefined);
+  const [methodologyVersionCreatedAt, setMethodologyVersionCreatedAt] =
+    useState<string | undefined>(undefined);
   const [projectDeveloper, setProjectDeveloper] = useState(100);
   const [landSteward, setLandSteward] = useState(0);
   const [landOwner, setLandOwner] = useState(0);
 
-  const handleProjectChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    const projectId = event.target.value as string;
+  const handleProjectChange = (event: SelectChangeEvent<string>): void => {
+    const projectId = event.target.value;
     setProjectId(projectId);
-    const project = projectsData?.allProjects?.nodes?.find(node => node?.id === projectId);
+    const project = projectsData?.allProjects?.nodes?.find(
+      node => node?.id === projectId,
+    );
     setCreditClassVersionId(project?.creditClassByCreditClassId?.id);
-    setMethodologyVersionId(project?.creditClassByCreditClassId?.methodologyByMethodologyId?.id);
+    setMethodologyVersionId(
+      project?.creditClassByCreditClassId?.methodologyByMethodologyId?.id,
+    );
   };
 
-  const handleCreditClassVersionChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    setCreditClassVersionCreatedAt(event.target.value as string);
+  const handleCreditClassVersionChange = (
+    event: SelectChangeEvent<string>,
+  ): void => {
+    setCreditClassVersionCreatedAt(event.target.value);
   };
 
-  const handleMethodologyVersionChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
-    setMethodologyVersionCreatedAt(event.target.value as string);
+  const handleMethodologyVersionChange = (
+    event: SelectChangeEvent<string>,
+  ): void => {
+    setMethodologyVersionCreatedAt(event.target.value);
   };
 
   const creditClassVersionOptions = [];
   const methodologyVersionOptions = [];
   if (projectsData?.allProjects?.nodes && projectId) {
-    const project = projectsData.allProjects.nodes.find(node => node?.id === projectId);
+    const project = projectsData.allProjects.nodes.find(
+      node => node?.id === projectId,
+    );
     const node = project;
     if (node?.creditClassByCreditClassId) {
-      const creditClassVersions = node.creditClassByCreditClassId.creditClassVersionsById?.nodes;
+      const creditClassVersions =
+        node.creditClassByCreditClassId.creditClassVersionsById?.nodes;
       if (creditClassVersions) {
         for (let j = 0; j < creditClassVersions.length; j++) {
           const cVersion = creditClassVersions[j];
@@ -113,7 +139,8 @@ function CreditsIssue(): JSX.Element {
         }
       }
       const methodologyVersions =
-        node.creditClassByCreditClassId.methodologyByMethodologyId?.methodologyVersionsById?.nodes;
+        node.creditClassByCreditClassId.methodologyByMethodologyId
+          ?.methodologyVersionsById?.nodes;
       if (methodologyVersions) {
         for (let k = 0; k < methodologyVersions.length; k++) {
           const mVersion = methodologyVersions[k];
@@ -152,9 +179,12 @@ function CreditsIssue(): JSX.Element {
                   endDate,
                   initialDistribution: {
                     // '@type': 'http://regen.network/CreditVintage', TODO this is now set on the backend, but that's creating issues in credits transfer so leaving this for reference
-                    'http://regen.network/projectDeveloperDistribution': projectDeveloper / 100,
-                    'http://regen.network/landStewardDistribution': landSteward / 100,
-                    'http://regen.network/landOwnerDistribution': landOwner / 100,
+                    'http://regen.network/projectDeveloperDistribution':
+                      projectDeveloper / 100,
+                    'http://regen.network/landStewardDistribution':
+                      landSteward / 100,
+                    'http://regen.network/landOwnerDistribution':
+                      landOwner / 100,
                   },
                 },
               },
@@ -185,7 +215,9 @@ function CreditsIssue(): JSX.Element {
           </Select>
         </FormControl>
         <FormControl className={classes.formControl}>
-          <InputLabel id="credit-class-version-select-label">Credit Class Version</InputLabel>
+          <InputLabel id="credit-class-version-select-label">
+            Credit Class Version
+          </InputLabel>
           <Select
             labelId="credit-class-version-select-label"
             id="credit-class-version-select"
@@ -201,7 +233,9 @@ function CreditsIssue(): JSX.Element {
           </Select>
         </FormControl>
         <FormControl className={classes.formControl}>
-          <InputLabel id="methodology-version-select-label">Methodology Version</InputLabel>
+          <InputLabel id="methodology-version-select-label">
+            Methodology Version
+          </InputLabel>
           <Select
             labelId="methodology-version-select-label"
             id="methodology-version-select"
@@ -226,30 +260,26 @@ function CreditsIssue(): JSX.Element {
         <div className={classes.datePicker}>
           <InputLabel id="project-select-label">Start Date</InputLabel>
           <DatePicker
-            autoOk
-            variant="inline"
+            renderInput={params => <TextField {...params} />}
             openTo="year"
             className={classes.input}
-            placeholder="Click to choose a date"
+            toolbarPlaceholder="Click to choose a date"
             views={['year', 'month']}
             value={startDate}
             onChange={date => setStartDate(date)}
-            error={false}
             InputProps={{ disableUnderline: true }}
           />
         </div>
         <div className={classes.datePicker}>
           <InputLabel id="project-select-label">End Date</InputLabel>
           <DatePicker
-            autoOk
-            variant="inline"
+            renderInput={params => <TextField {...params} />}
             openTo="year"
             className={classes.input}
-            placeholder="Click to choose a date"
+            toolbarPlaceholder="Click to choose a date"
             views={['year', 'month']}
             value={endDate}
             onChange={date => setEndDate(date)}
-            error={false}
             InputProps={{ disableUnderline: true }}
           />
         </div>
@@ -304,7 +334,11 @@ function CreditsIssue(): JSX.Element {
               </TableHead>
               <TableBody>
                 {data.issueCredits.json.accountBalances.map(
-                  (row: { name: string; percentage: number; amount: number }) => (
+                  (row: {
+                    name: string;
+                    percentage: number;
+                    amount: number;
+                  }) => (
                     <TableRow key={row.name}>
                       <TableCell scope="row">
                         {row.name

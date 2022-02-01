@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Card from '@mui/material/Card';
 
 interface RegenCardProps {
   children?: any;
@@ -41,9 +41,19 @@ export default function RegenCard({
   borderRadius,
   className,
 }: RegenCardProps): JSX.Element {
-  const classes = useStyles({ width, height, borderColor, borderRadius, onClick });
+  const classes = useStyles({
+    width,
+    height,
+    borderColor,
+    borderRadius,
+    onClick,
+  });
   return (
-    <Card onClick={onClick} className={`${classes.root} ${className}`} elevation={elevation}>
+    <Card
+      onClick={onClick}
+      className={`${classes.root} ${className}`}
+      elevation={elevation}
+    >
       {children}
     </Card>
   );

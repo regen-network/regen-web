@@ -1,5 +1,5 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 import clsx from 'clsx';
 
 interface IconProps {
@@ -10,9 +10,26 @@ interface IconProps {
 export default function UserIcon({ color, className }: IconProps): JSX.Element {
   return (
     <SvgIcon viewBox="0 0 25 25" className={clsx(className)}>
-      <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12.5" cy="12.5" r="11.5" stroke={color || 'black'} strokeWidth="2" />
-        <circle cx="12.5001" cy="9.72223" r="4.59259" stroke={color || 'black'} />
+      <svg
+        width="25"
+        height="25"
+        viewBox="0 0 25 25"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle
+          cx="12.5"
+          cy="12.5"
+          r="11.5"
+          stroke={color || 'black'}
+          strokeWidth="2"
+        />
+        <circle
+          cx="12.5001"
+          cy="9.72223"
+          r="4.59259"
+          stroke={color || 'black'}
+        />
         <path
           fillRule="evenodd"
           clipRule="evenodd"

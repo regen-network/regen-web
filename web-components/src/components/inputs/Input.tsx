@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, Input as MuiInput, InputProps } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Input as MuiInput, InputProps } from '@mui/material';
 import cx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(16),
       lineHeight: theme.typography.pxToRem(24),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(2),
       fontSize: theme.typography.pxToRem(14),
       lineHeight: theme.typography.pxToRem(21),
@@ -31,7 +32,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 /** Custom styles on top of MUI's `Input` component */
 const Input: React.FC<InputProps> = ({ className, ...props }) => {
   const styles = useStyles();
-  return <MuiInput {...props} disableUnderline className={cx(styles.input, className)} />;
+  return (
+    <MuiInput
+      {...props}
+      disableUnderline
+      className={cx(styles.input, className)}
+    />
+  );
 };
 
 export default Input;

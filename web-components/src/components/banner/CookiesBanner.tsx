@@ -1,21 +1,23 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-import Backdrop from '@material-ui/core/Backdrop';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
+import Backdrop from '@mui/material/Backdrop';
 import Cookies from 'js-cookie';
 
 // TODO use Section component
 // import Section from '../section';
 import ContainedButton from '../buttons/ContainedButton';
+import { Theme } from '../../theme/muiTheme';
 
 interface CookiesBannerProps {
   privacyUrl: string;
 }
 
 const rejectCookieName: string = 'cookies-rejected';
-const cookieName: string = 'gatsby-plugin-google-analytics-gdpr_cookies-enabled';
+const cookieName: string =
+  'gatsby-plugin-google-analytics-gdpr_cookies-enabled';
 
 function getCookieValue(name: string): string | undefined {
   let cookieValue = Cookies.get(name);
@@ -54,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(19),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(5),
       paddingBottom: theme.spacing(5),
     },
@@ -70,11 +72,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(37.5),
       paddingLeft: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(10),
       paddingLeft: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(19),
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
@@ -102,7 +104,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -112,7 +114,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.spacing(8.75),
       minWidth: theme.spacing(33.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(8.75),
       minWidth: theme.spacing(22),
     },
@@ -124,7 +126,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(8.5),
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(2.5),
       fontSize: theme.spacing(3),
       textAlign: 'center',
@@ -138,7 +140,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
   },
@@ -147,14 +149,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function CookiesBanner({ privacyUrl }: CookiesBannerProps): JSX.Element | null {
-  const classes = useStyles({});
+export default function CookiesBanner({
+  privacyUrl,
+}: CookiesBannerProps): JSX.Element | null {
+  const classes = useStyles();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (
       getCookieValue(rejectCookieName) !== 'true' &&
-      (getCookieValue(cookieName) === undefined || getCookieValue(cookieName) === 'false')
+      (getCookieValue(cookieName) === undefined ||
+        getCookieValue(cookieName) === 'false')
     ) {
       setVisible(true);
     }
@@ -174,10 +179,16 @@ export default function CookiesBanner({ privacyUrl }: CookiesBannerProps): JSX.E
     return (
       <Backdrop className={classes.backdrop} open>
         <div className={classes.background}>
-          <Grid container wrap="nowrap" alignItems="center" justify="space-between" className={classes.root}>
+          <Grid
+            container
+            wrap="nowrap"
+            alignItems="center"
+            justifyContent="space-between"
+            className={classes.root}
+          >
             <Typography className={classes.text}>
-              We use cookies to provide you with a great user experience. By using this site, you accept our
-              use of{' '}
+              We use cookies to provide you with a great user experience. By
+              using this site, you accept our use of{' '}
               <Link className={classes.link} href={privacyUrl}>
                 cookies policy
               </Link>

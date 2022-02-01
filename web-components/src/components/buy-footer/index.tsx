@@ -1,9 +1,9 @@
 import React from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import ContainedButton from '../buttons/ContainedButton';
 
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(30),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(19),
     },
     boxShadow: theme.shadows[7],
@@ -36,11 +36,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(37.5),
       paddingLeft: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(10),
       paddingLeft: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(19),
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.125rem',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '0.75rem',
     },
   },
@@ -73,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.3125rem',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '1.125rem',
     },
   },
@@ -81,22 +81,23 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingRight: theme.spacing(5),
     },
-    // [theme.breakpoints.down('xs')]: {
-    //   fontSize: '1.125rem',
-    // },
   },
   buyText: {
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(1.5),
       lineHeight: theme.spacing(6),
     },
   },
 }));
 
-export default function BuyFooter({ creditPrice, href, onClick }: BuyFooterProps): JSX.Element {
+export default function BuyFooter({
+  creditPrice,
+  href,
+  onClick,
+}: BuyFooterProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -107,7 +108,7 @@ export default function BuyFooter({ creditPrice, href, onClick }: BuyFooterProps
         container
         wrap="nowrap"
         alignItems="center"
-        justify={matches ? 'flex-end' : 'space-between'}
+        justifyContent={matches ? 'flex-end' : 'space-between'}
         className={classes.root}
       >
         {creditPrice && (
@@ -119,7 +120,9 @@ export default function BuyFooter({ creditPrice, href, onClick }: BuyFooterProps
                   minimumFractionDigits: 2,
                 }).format(creditPrice.unitPrice)}
               </span>
-              <span className={classes.creditsText}>/credit {creditPrice.currency}</span>
+              <span className={classes.creditsText}>
+                /credit {creditPrice.currency}
+              </span>
             </Typography>
           </Grid>
         )}

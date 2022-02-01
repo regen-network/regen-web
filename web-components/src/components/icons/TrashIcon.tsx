@@ -1,9 +1,14 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 
 import withHoverColor, { Props } from './withHoverColor';
 
-function TrashIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX.Element {
+function TrashIcon({
+  className,
+  color,
+  onMouseEnter,
+  onMouseLeave,
+}: Props): JSX.Element {
   return (
     <SvgIcon
       className={className}
@@ -34,7 +39,14 @@ function TrashIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX
           strokeWidth="4"
           mask="url(#path-2-inside-2)"
         />
-        <rect x="5" y="10" width="1" height="10" rx="0.25" fill={color || 'black'} />
+        <rect
+          x="5"
+          y="10"
+          width="1"
+          height="10"
+          rx="0.25"
+          fill={color || 'black'}
+        />
         <rect
           x="17"
           y="3"
@@ -44,8 +56,22 @@ function TrashIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX
           transform="rotate(90 17 3)"
           fill={color || 'black'}
         />
-        <rect x="8" y="10" width="1" height="10" rx="0.25" fill={color || 'black'} />
-        <rect x="11" y="10" width="1" height="10" rx="0.25" fill={color || 'black'} />
+        <rect
+          x="8"
+          y="10"
+          width="1"
+          height="10"
+          rx="0.25"
+          fill={color || 'black'}
+        />
+        <rect
+          x="11"
+          y="10"
+          width="1"
+          height="10"
+          rx="0.25"
+          fill={color || 'black'}
+        />
       </svg>
     </SvgIcon>
   );

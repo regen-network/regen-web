@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import { FormControl, RadioGroup, FormControlLabel, Radio, Collapse, Zoom } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import {
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Collapse,
+  Zoom,
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
@@ -36,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(4)} ${theme.spacing(4)}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(2),
     },
   },
@@ -57,22 +65,25 @@ const useStyles = makeStyles((theme: Theme) => ({
 type AcctType = 'user' | 'organization';
 
 const OrganizationProfile: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { user } = useAuth0();
   const [acctType, setAcctType] = useState<AcctType>('user');
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<unknown>(null);
   const [isSubmitting, setSubmitting] = useState<boolean>(false);
-  const [initialFieldValues, setInitialFieldValues] = useState<OrgProfileFormValues | undefined>();
+  const [initialFieldValues, setInitialFieldValues] = useState<
+    OrgProfileFormValues | undefined
+  >();
   const userEmail = user?.email;
 
   const { data: orgProfile } = useGetOrganizationProfileByEmailQuery({
     skip: !userEmail,
     errorPolicy: 'ignore',
-    variables: { email: userEmail },
+    variables: { email: userEmail as string },
   });
   const userByEmail = orgProfile?.userByEmail;
   const userOrg =
-    orgProfile?.userByEmail?.organizationMembersByMemberId.nodes[0]?.organizationByOrganizationId;
+    orgProfile?.userByEmail?.organizationMembersByMemberId.nodes[0]
+      ?.organizationByOrganizationId;
 
   useEffect(() => {
     if (!userByEmail || !userOrg) return;
@@ -103,7 +114,10 @@ const OrganizationProfile: React.FC = () => {
   });
 
   function handleSkip(): void {
-    console.log('TODO: save that a user bypassed this step / is personal? Or just go to next'); // eslint-disable-line no-console
+    // eslint-disable-next-line no-console
+    console.log(
+      'TODO: save that a user bypassed this step / is personal? Or just go to next',
+    );
   }
 
   async function submitOrgProfile(values: OrgProfileFormValues): Promise<void> {
@@ -119,7 +133,8 @@ const OrganizationProfile: React.FC = () => {
               legalName: values.legalName,
               displayName: values.displayName,
               orgAddress: values.location,
-              walletAddr: userByEmail?.partyByPartyId?.walletByWalletId?.addr || '',
+              walletAddr:
+                userByEmail?.partyByPartyId?.walletByWalletId?.addr || '',
               image: values.logo,
               ownerId: orgProfile?.userByEmail?.id,
             },
@@ -178,7 +193,9 @@ const OrganizationProfile: React.FC = () => {
 
   return (
     <OnBoardingSection formContainer title="Organization Profile">
-      {!isSubmitting && error && <ErrorBanner text={error.toString()} />}
+      {!isSubmitting && error instanceof Object && (
+        <ErrorBanner text={error.toString()} />
+      )}
 
       <OnBoardingCard className={styles.topCard}>
         <FormControl component="fieldset" fullWidth>
@@ -211,7 +228,7 @@ const OrganizationProfile: React.FC = () => {
           submit={submitOrgProfile}
           mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
           skip={handleSkip}
-          goBack={() => history.push('/user-profile')}
+          goBack={() => navigate('/user-profile')}
         />
       </PopIn>
     </OnBoardingSection>
@@ -223,7 +240,7 @@ const PopIn: React.FC<{ isOpen: boolean }> = ({ children, isOpen }) => {
     <div style={{ display: 'flex' }}>
       <Zoom in={isOpen}>
         <div>
-          <Collapse in={isOpen} collapsedHeight={0}>
+          <Collapse in={isOpen} collapsedSize={0}>
             <div>{children}</div>
           </Collapse>
         </div>

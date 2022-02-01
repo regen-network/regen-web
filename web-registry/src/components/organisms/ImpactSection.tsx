@@ -4,7 +4,10 @@ import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpact
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
-import { EcologicalImpactRelation, Maybe } from '../../generated/sanity-graphql';
+import {
+  EcologicalImpactRelation,
+  Maybe,
+} from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';
 
 interface ProjectImpactProps {
@@ -15,7 +18,11 @@ interface ProjectImpactProps {
   };
 }
 
-function ImpactSection({ impacts, title, classes }: ProjectImpactProps): JSX.Element {
+function ImpactSection({
+  impacts,
+  title,
+  classes,
+}: ProjectImpactProps): JSX.Element {
   return (
     <SliderSection
       classes={classes}
@@ -25,7 +32,11 @@ function ImpactSection({ impacts, title, classes }: ProjectImpactProps): JSX.Ele
           <ProjectImpactCard
             key={index}
             name={impact?.ecologicalImpact?.name || ''}
-            description={<BlockContent content={impact?.ecologicalImpact?.descriptionRaw} />}
+            description={
+              <BlockContent
+                content={impact?.ecologicalImpact?.descriptionRaw}
+              />
+            }
             imgSrc={getSanityImgSrc(impact?.ecologicalImpact?.image)}
             monitored={impact?.primary ? true : false}
           />

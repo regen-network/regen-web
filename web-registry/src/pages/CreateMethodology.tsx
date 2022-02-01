@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import CardMedia from '@material-ui/core/CardMedia';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme } from '@mui/styles';
+import CardMedia from '@mui/material/CardMedia';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(12),
     },
   },
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   outcomeSection: {
     paddingTop: theme.spacing(10),
     paddingBottom: theme.spacing(25),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(0),
       paddingBottom: theme.spacing(20),
     },
@@ -55,13 +56,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderTop: `1px solid ${theme.palette.grey[100]}`,
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
     paddingBottom: theme.spacing(22.25),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17.75),
     },
   },
   methodologyTitle: {
     marginBottom: theme.spacing(8.75),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(8),
       fontSize: theme.typography.pxToRem(32),
       lineHeight: theme.typography.pxToRem(41.6),
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'none',
     color: theme.palette.text.primary,
     fontWeight: 900,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -90,7 +91,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const CreateMethodology: React.FC = () => {
   const styles = useStyles();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>();
 
@@ -105,7 +106,9 @@ const CreateMethodology: React.FC = () => {
     setOpen(true);
   };
 
-  const outcomeCards = content?.outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />);
+  const outcomeCards = content?.outcomes?.map(outcome => (
+    <WrappedImpactCard outcome={outcome} />
+  ));
 
   return (
     <div className={styles.root}>
@@ -149,11 +152,18 @@ const CreateMethodology: React.FC = () => {
           <ResponsiveSlider
             infinite={false}
             itemWidth="90%"
-            classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}
+            classes={{
+              title: styles.resourcesTitle,
+              root: styles.resourcesRoot,
+            }}
             padding={theme.spacing(2.5)}
             title="Resources"
             titleVariant="h2"
-            arrows={content?.resources ? content.resources.length > resourceCardsShown : false}
+            arrows={
+              content?.resources
+                ? content.resources.length > resourceCardsShown
+                : false
+            }
             slidesToShow={resourceCardsShown}
             items={content?.resources?.map(resource => (
               <WrappedResourcesCard resource={resource} />
@@ -175,10 +185,16 @@ const CreateMethodology: React.FC = () => {
         bottomBanner={content?.createCreditClassSection}
         openModal={openModal}
       /> */}
-      <FixedFooter justify="flex-end">
-        <ContainedButton onClick={() => openModal(content?.footerLink)}>Submit a methodology</ContainedButton>
+      <FixedFooter justifyContent="flex-end">
+        <ContainedButton onClick={e => openModal(content?.footerLink)}>
+          Submit a methodology
+        </ContainedButton>
       </FixedFooter>
-      <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        className={styles.modal}
+      >
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>

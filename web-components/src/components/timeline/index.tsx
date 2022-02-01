@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { useTheme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import LazyLoad from 'react-lazyload';
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(7.5),
     },
   },
@@ -62,13 +62,24 @@ export default function Timeline({
           // Use completedItemIndex if available to color past timeline items
           if (completedItemIndex || completedItemIndex === 0) {
             circleColor =
-              index <= completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main;
-            barColor = index < completedItemIndex ? theme.palette.secondary.main : theme.palette.info.main;
+              index <= completedItemIndex
+                ? theme.palette.secondary.main
+                : theme.palette.info.main;
+            barColor =
+              index < completedItemIndex
+                ? theme.palette.secondary.main
+                : theme.palette.info.main;
           } else {
             // else we should provide valid dates for events so we can compare them with present date
             const eventDate = new Date(event.date);
-            circleColor = eventDate <= new Date() ? theme.palette.secondary.main : theme.palette.info.main;
-            if (index + 1 < events.length && new Date() < new Date(events[index + 1].date)) {
+            circleColor =
+              eventDate <= new Date()
+                ? theme.palette.secondary.main
+                : theme.palette.info.main;
+            if (
+              index + 1 < events.length &&
+              new Date() < new Date(events[index + 1].date)
+            ) {
               barColor = theme.palette.info.main;
             } else {
               barColor = circleColor;

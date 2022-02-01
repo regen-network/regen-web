@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import RegenIcon from '../icons/RegenIcon';
 
 const useStyles = makeStyles<Theme, { isLoaded: boolean }>(theme => {
@@ -10,10 +10,10 @@ const useStyles = makeStyles<Theme, { isLoaded: boolean }>(theme => {
       display: props.isLoaded ? 'block' : 'inline-block',
       height: 'auto',
       width: pxToRem(186),
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         width: pxToRem(111),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         width: pxToRem(104),
       },
     }),
@@ -29,8 +29,14 @@ export const HeaderLogoLink: React.FC<{ color: string }> = ({ color }) => {
   // something more long-term. You can see the bug by visiting the /community
   // page in safari
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.location && window.location.href) setIsLoaded(!isLoaded);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    if (
+      typeof window !== 'undefined' &&
+      window.location &&
+      window.location.href
+    )
+      console.log("LOADED", isLoaded)
+      setIsLoaded(i => !i);
+  }, []);
 
   return (
     <a href="/">

@@ -1,12 +1,13 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import { useStaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
-import Section from 'web-components/src/components/section';
-import Title from 'web-components/src/components/title';
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
-import DecentralizeIcon from 'web-components/src/components/icons/DecentralizeIcon';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/lib/components/section';
+import Title from 'web-components/lib/components/title';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import DecentralizeIcon from 'web-components/lib/components/icons/DecentralizeIcon';
 import { MarketingDescription as Description } from '../../components/Description';
 import { TokenBlockExplorerSectionQuery } from '../../generated/graphql';
 import { FluidObject } from 'gatsby-image';
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(30, 0),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(22, 0),
     },
     '& a': {
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(38),
       padding: theme.spacing(9.5, 0),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
       padding: theme.spacing(7.5, 0),
     },
@@ -64,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(9.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5),
       padding: theme.spacing(0, 4, 7),
     },

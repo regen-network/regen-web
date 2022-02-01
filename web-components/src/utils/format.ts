@@ -3,12 +3,18 @@ export function getFormattedDate(
   options?: Intl.DateTimeFormatOptions | undefined,
 ): string {
   if (date) {
-    return new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', ...options }).format(new Date(date));
+    return new Intl.DateTimeFormat('en-US', {
+      timeZone: 'UTC',
+      ...options,
+    }).format(new Date(date));
   }
   return '';
 }
 
-export function getFormattedNumber(number: number, options?: Intl.NumberFormatOptions | undefined): string {
+export function getFormattedNumber(
+  number: number,
+  options?: Intl.NumberFormatOptions | undefined,
+): string {
   return new Intl.NumberFormat('en-US', options).format(number);
 }
 
@@ -28,5 +34,7 @@ export interface StandardInfo {
 }
 
 export function formatStandardInfo(info: StandardInfo): string {
-  return `${info.name}, ${info.documentId ? `${info.documentId}, ` : ''}${info.version}`;
+  return `${info.name}, ${info.documentId ? `${info.documentId}, ` : ''}${
+    info.version
+  }`;
 }

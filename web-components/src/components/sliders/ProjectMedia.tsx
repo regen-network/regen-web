@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useLayoutEffect } from 'react';
-import { makeStyles, Theme, useMediaQuery, useTheme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Grid from '@mui/material/Grid';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
 import { Image, OptimizeImageProps } from '../image';
@@ -28,11 +29,11 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(8.75),
     },
     '& .slick-slide img': {
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         height: props.mobileHeight ? props.mobileHeight : 'inherit',
         objectFit: props.mobileHeight ? 'cover' : 'inherit',
         objectPosition: '0% 0%',
@@ -62,7 +63,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
           },
         },
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         height: theme.spacing(6),
         '& ul': {
           margin: '8px 0 -6.5px',
@@ -109,7 +110,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       borderRadius: '5px',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       borderRadius: props.xsBorderRadius ? '5px' : 'none',
     },
   }),
@@ -161,7 +162,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       left: theme.typography.pxToRem(13),
       bottom: theme.typography.pxToRem(9),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(11),
       left: theme.typography.pxToRem(9),
       bottom: theme.typography.pxToRem(6),
@@ -238,7 +239,11 @@ export default function ProjectMedia({
             height={60}
             src={
               imageStorageBaseUrl && apiServerUrl
-                ? getOptimizedImageSrc(assets[i].thumbnail, imageStorageBaseUrl, apiServerUrl)
+                ? getOptimizedImageSrc(
+                    assets[i].thumbnail,
+                    imageStorageBaseUrl,
+                    apiServerUrl,
+                  )
                 : assets[i].thumbnail || ''
             }
             alt={assets[i].thumbnail}
@@ -267,7 +272,9 @@ export default function ProjectMedia({
               imageStorageBaseUrl={imageStorageBaseUrl}
               apiServerUrl={apiServerUrl}
             />
-            {imageCredits && <div className={classes.imageCredits}>{imageCredits}</div>}
+            {imageCredits && (
+              <div className={classes.imageCredits}>{imageCredits}</div>
+            )}
           </Grid>
           <Grid item className={classes.centreGrid}>
             <div className={classes.imageContainer}>
@@ -305,11 +312,16 @@ export default function ProjectMedia({
           className={classes.root}
           beforeChange={(oldIndex: number, newIndex: number) => {
             const indexDifference: number = Math.abs(oldIndex - newIndex);
-            const thumbnailsElement = thumbnailsWrapper && thumbnailsWrapper.current;
+            const thumbnailsElement =
+              thumbnailsWrapper && thumbnailsWrapper.current;
             if (thumbnailsElement) {
-              if (thumbnailsElement.scrollWidth > thumbnailsWrapperWidth && thumbnailsWrapperWidth > 0) {
+              if (
+                thumbnailsElement.scrollWidth > thumbnailsWrapperWidth &&
+                thumbnailsWrapperWidth > 0
+              ) {
                 const perIndexScroll =
-                  (thumbnailsElement.scrollWidth - thumbnailsWrapperWidth) / (assets.length - 1);
+                  (thumbnailsElement.scrollWidth - thumbnailsWrapperWidth) /
+                  (assets.length - 1);
                 const scroll = indexDifference * perIndexScroll;
                 if (scroll > 0) {
                   if (oldIndex < newIndex) {
@@ -340,12 +352,20 @@ export default function ProjectMedia({
 
               return (
                 <div key={index} className={classes.sliderImageContainer}>
-                  {image} {imageCredits && <div className={classes.imageCredits}>{imageCredits}</div>}
+                  {image}{' '}
+                  {imageCredits && (
+                    <div className={classes.imageCredits}>{imageCredits}</div>
+                  )}
                 </div>
               );
             } else if (item.type === 'video') {
               return (
-                <video key={index} className={classes.item} controls poster={item.preview}>
+                <video
+                  key={index}
+                  className={classes.item}
+                  controls
+                  poster={item.preview}
+                >
                   <source src={item.src} />
                 </video>
               );

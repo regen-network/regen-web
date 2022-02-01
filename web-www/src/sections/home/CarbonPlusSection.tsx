@@ -1,10 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 800,
     letterSpacing: '1px',
     textTransform: 'uppercase',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     color: theme.palette.info.dark,
     lineHeight: '150%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
       paddingBottom: theme.spacing(4),
       paddingTop: theme.spacing(4),

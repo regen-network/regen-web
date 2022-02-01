@@ -1,9 +1,15 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
+import {
+  OnboardingFormTemplate,
+  EditFormTemplate,
+} from '../components/templates';
 import { MediaForm, MediaValues } from '../components/organisms';
-import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+} from '../generated/graphql';
 import { useProjectEditContext } from '../pages/ProjectEdit';
 
 const Media: React.FC = () => {
@@ -20,10 +26,14 @@ const Media: React.FC = () => {
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
-      'http://regen.network/previewPhoto': metadata['http://regen.network/previewPhoto'],
-      'http://regen.network/galleryPhotos': metadata['http://regen.network/galleryPhotos'],
-      'http://regen.network/landStewardPhoto': metadata['http://regen.network/landStewardPhoto'],
-      'http://regen.network/videoURL': metadata['http://regen.network/videoURL'],
+      'http://regen.network/previewPhoto':
+        metadata['http://regen.network/previewPhoto'],
+      'http://regen.network/galleryPhotos':
+        metadata['http://regen.network/galleryPhotos'],
+      'http://regen.network/landStewardPhoto':
+        metadata['http://regen.network/landStewardPhoto'],
+      'http://regen.network/videoURL':
+        metadata['http://regen.network/videoURL'],
     };
   }
 
@@ -57,7 +67,11 @@ const Media: React.FC = () => {
       <MediaForm submit={submit} initialValues={initialFieldValues} />
     </EditFormTemplate>
   ) : (
-    <OnboardingFormTemplate activeStep={0} title="Media" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={0}
+      title="Media"
+      saveAndExit={saveAndExit}
+    >
       <MediaForm submit={submit} initialValues={initialFieldValues} />
     </OnboardingFormTemplate>
   );

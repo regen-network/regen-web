@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Modal from 'web-components/lib/components/modal';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
-import { Button, Card, Avatar, CardMedia } from '@material-ui/core';
+import { Button, Card, Avatar, CardMedia } from '@mui/material';
 
 export default {
-  title: 'Components|Modal',
+  title: 'Modal',
   component: Modal,
 };
 
@@ -13,7 +13,7 @@ function OpenModal(): JSX.Element {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <Button onClick={() => setOpen(true)}>Open Modal</Button>
+      <Button variant="contained" onClick={() => setOpen(true)}>Open Modal</Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <p>I'm a Modal</p>
       </Modal>
@@ -25,7 +25,7 @@ function OpenLedgerModal(): JSX.Element {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <Button onClick={() => setOpen(true)}>Open Modal</Button>
+      <Button variant="contained" onClick={() => setOpen(true)}>Open Modal</Button>
       <IssuanceModal
         open={open}
         onClose={() => setOpen(false)}
@@ -102,7 +102,12 @@ function OpenCropImageModal(props: CropStoryProps): JSX.Element {
 
   // On file select (from the pop up)
   const onFileChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    if (event && event.target && event.target.files && event.target.files.length) {
+    if (
+      event &&
+      event.target &&
+      event.target.files &&
+      event.target.files.length
+    ) {
       const file = event.target.files[0];
       toBase64(file).then(image => {
         if (typeof image === 'string') {
@@ -149,10 +154,18 @@ function OpenCropImageModal(props: CropStoryProps): JSX.Element {
       />
       <Card style={{ width: 200, height: 200, marginTop: 32 }}>
         {props.circularCrop ? (
-          <Avatar style={{ height: 'inherit', width: 'inherit' }} src={image} title="cropped image" />
+          <Avatar
+            style={{ height: 'inherit', width: 'inherit' }}
+            src={image}
+            title="cropped image"
+          />
         ) : (
           image && (
-            <CardMedia style={{ height: 'inherit', width: 'inherit' }} image={image} title="cropped image" />
+            <CardMedia
+              style={{ height: 'inherit', width: 'inherit' }}
+              image={image}
+              title="cropped image"
+            />
           )
         )}
       </Card>
@@ -163,4 +176,6 @@ function OpenCropImageModal(props: CropStoryProps): JSX.Element {
 export const modal = (): JSX.Element => <OpenModal />;
 export const ledgerModal = (): JSX.Element => <OpenLedgerModal />;
 export const cropSquareImageModal = (): JSX.Element => <OpenCropImageModal />;
-export const cropRoundImageModal = (): JSX.Element => <OpenCropImageModal circularCrop />;
+export const cropRoundImageModal = (): JSX.Element => (
+  <OpenCropImageModal circularCrop />
+);

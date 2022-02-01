@@ -1,8 +1,10 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import { CheckboxProps } from 'formik-material-ui';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import FormControlLabel, {
+  FormControlLabelProps,
+} from '@mui/material/FormControlLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+import { CheckboxProps } from 'formik-mui';
 import { getIn } from 'formik';
 
 import Checkbox from '../inputs/Checkbox';
@@ -10,7 +12,7 @@ import Checkbox from '../inputs/Checkbox';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     '& .MuiFormControlLabel-label': {
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(3.5),
       },
     },
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(3.5),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(3),
       },
       '&.Mui-error': {
@@ -35,10 +37,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface CheckboxLabelProps extends CheckboxProps {
-  label: React.ReactNode;
+  label: FormControlLabelProps['label'];
 }
 
-export default function CheckboxLabel({ label, ...props }: CheckboxLabelProps): JSX.Element {
+export default function CheckboxLabel({
+  label,
+  ...props
+}: CheckboxLabelProps): JSX.Element {
   const styles = useStyles();
   const {
     form: { errors, touched },
@@ -62,7 +67,9 @@ export default function CheckboxLabel({ label, ...props }: CheckboxLabelProps): 
         }
         label={label}
       />
-      {showError && <FormHelperText error={showError}>{fieldError}</FormHelperText>}
+      {showError && (
+        <FormHelperText error={showError}>{fieldError}</FormHelperText>
+      )}
     </div>
   );
 }

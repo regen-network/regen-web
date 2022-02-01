@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
-import CardContent from '@material-ui/core/CardContent';
-import Collapse from '@material-ui/core/Collapse';
+import Grid from '@mui/material/Grid';
+import CardContent from '@mui/material/CardContent';
+import Collapse from '@mui/material/Collapse';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
-import { RadioGroup } from 'formik-material-ui';
+import { RadioGroup } from 'formik-mui';
 import cx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
@@ -14,7 +14,9 @@ import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
-import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import SelectTextField, {
+  Option,
+} from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
@@ -47,7 +49,7 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: theme.spacing(7.5),
       paddingRight: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(6),
       paddingLeft: 0,
       paddingRight: 0,
@@ -70,13 +72,13 @@ const useStyles = makeStyles(theme => ({
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.typography.pxToRem(18),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.typography.pxToRem(12),
       },
     },
   },
   creditTitle: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
   },
@@ -100,7 +102,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: theme.typography.pxToRem(16),
       marginBottom: theme.spacing(3),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: 0,
       fontSize: theme.typography.pxToRem(14),
     },
@@ -109,7 +111,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(12),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(10),
     },
   },
@@ -165,7 +167,7 @@ const useStyles = makeStyles(theme => ({
       lineHeight: '18px',
       fontSize: theme.typography.pxToRem(14),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: '15.06px',
       letterSpacing: '1px',
       fontSize: theme.typography.pxToRem(12),
@@ -235,7 +237,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 
   const searchState = async (countryId: string): Promise<void> => {
     const resp = await axios({
-      url: 'https://geodata.solutions/api/api.php?type=getStates&countryId=' + countryId,
+      url:
+        'https://geodata.solutions/api/api.php?type=getStates&countryId=' +
+        countryId,
       method: 'POST',
     });
     const respOK = resp && resp.status === 200;
@@ -286,7 +290,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
             />
             <div className={styles.flexColumn}>
               <Title className={styles.creditTitle} variant="h5">
-                {project.creditDenom && ReactHtmlParser(project.creditDenom)} Credits
+                {project.creditDenom && ReactHtmlParser(project.creditDenom)}{' '}
+                Credits
               </Title>
               <Link to={`/projects/${project.id}`} target="_blank">
                 {project.name}
@@ -326,8 +331,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       Number of credits
                     </Title>
                     <Description className={styles.regenPerCredit}>
-                      {`5 REGEN each.  ${(project?.credits?.issued || 0) -
-                        (project?.credits?.purchased || 0)} credits available`}
+                      {`5 REGEN each.  ${
+                        (project?.credits?.issued || 0) -
+                        (project?.credits?.purchased || 0)
+                      } credits available`}
                     </Description>
                     <div className={styles.creditWidget}>
                       <div className={styles.marginRight}>
@@ -340,22 +347,33 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <Title className={styles.marginRight} variant="h6">
                         =
                       </Title>
-                      <div className={cx(styles.flexColumn, styles.marginRight)}>
+                      <div
+                        className={cx(styles.flexColumn, styles.marginRight)}
+                      >
                         <div className={styles.regenCount}>
                           <RegenTokenIcon className={styles.regenIcon} />
-                          <Title variant="h4" className={styles.regenCountNumber}>
+                          <Title
+                            variant="h4"
+                            className={styles.regenCountNumber}
+                          >
                             500
                           </Title>
                           <Label className={styles.regenLabel}>REGEN</Label>
                         </div>
-                        <div className={styles.currencyEquivalent}>($2345.00 USD)</div>
+                        <div className={styles.currencyEquivalent}>
+                          ($2345.00 USD)
+                        </div>
                       </div>
                     </div>
                   </div>
                   <Title className={styles.groupTitle} variant="h5">
                     Retirement of credits
                   </Title>
-                  <Field className={styles.field} component={RadioGroup} name="retirementAction">
+                  <Field
+                    className={styles.field}
+                    component={RadioGroup}
+                    name="retirementAction"
+                  >
                     <Field
                       className={styles.toggle}
                       component={Toggle}
@@ -402,11 +420,21 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       </Tooltip>
                     </div>
                     <Description className={styles.description}>
-                      Please enter a location for the retirement of these credits. This prevents double
-                      counting of credits in different locations. These credits will auto-retire.
+                      Please enter a location for the retirement of these
+                      credits. This prevents double counting of credits in
+                      different locations. These credits will auto-retire.
                     </Description>
-                    <Grid container alignItems="center" className={styles.stateCountryGrid}>
-                      <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+                    <Grid
+                      container
+                      alignItems="center"
+                      className={styles.stateCountryGrid}
+                    >
+                      <Grid
+                        item
+                        xs={12}
+                        sm={6}
+                        className={styles.stateCountryTextField}
+                      >
                         <Field
                           options={stateOptions}
                           component={SelectTextField}
@@ -415,7 +443,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           optional
                         />
                       </Grid>
-                      <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+                      <Grid
+                        item
+                        xs={12}
+                        sm={6}
+                        className={styles.stateCountryTextField}
+                      >
                         <Field
                           component={SelectTextField}
                           options={Object.keys(countries).map(key => ({

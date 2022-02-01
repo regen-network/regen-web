@@ -1,8 +1,9 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { BackgroundImgSection } from './BackgroundImgSection';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(30),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17),
     },
   },
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(22),
       lineHeight: theme.typography.pxToRem(35.2),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
       lineHeight: theme.typography.pxToRem(25),
     },
@@ -73,8 +74,14 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
         </Typography>
       )}
       {props.descriptionRaw && (
-        <Typography variant="h4" className={cx(styles.description, classes?.description)}>
-          <BlockContent content={props.descriptionRaw} tooltipText={props?.tooltipText || ''} />
+        <Typography
+          variant="h4"
+          className={cx(styles.description, classes?.description)}
+        >
+          <BlockContent
+            content={props.descriptionRaw}
+            tooltipText={props?.tooltipText || ''}
+          />
         </Typography>
       )}
     </BackgroundImgSection>

@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import SvgIcon from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 interface SpinIconProps {
   direction?: 'next' | 'prev' | 'down' | 'up';
@@ -32,7 +32,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function SpinIcon({ direction = 'up' }: SpinIconProps): JSX.Element {
+export default function SpinIcon({
+  direction = 'up',
+}: SpinIconProps): JSX.Element {
   const rotate: string = directionRotate[direction];
   const classes = useStyles({ rotate });
   return (

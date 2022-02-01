@@ -1,9 +1,10 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import Img, { FluidObject } from 'gatsby-image';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../../components/BackgroundSection';
 import Title from 'web-components/lib/components/title';
 import { SanityCaseStudyBottomSection } from '../../../generated/graphql';
@@ -11,7 +12,7 @@ import { SanityCaseStudyBottomSection } from '../../../generated/graphql';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     borderTop: `1px solid ${theme.palette.grey[100]}`,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(19.5),
       paddingBottom: theme.spacing(15),
     },
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     color: theme.palette.primary.main,
     position: 'relative',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5.5),
       lineHeight: '150%',
     },
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   image: {
     borderRadius: '50%',
     border: `1px solid ${theme.palette.info.dark}`,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(15.5),
       width: theme.spacing(15),
     },
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     lineHeight: 0,
     zIndex: 0,
     position: 'absolute',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(15),
     },
     [theme.breakpoints.up('sm')]: {
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 1,
   },
   firstQuote: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       top: theme.spacing(4),
       left: theme.spacing(-1.75),
     },
@@ -86,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.main,
     lineHeight: '150%',
     paddingTop: theme.spacing(2),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -94,7 +95,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   text: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(4),
     },
     [theme.breakpoints.up('sm')]: {

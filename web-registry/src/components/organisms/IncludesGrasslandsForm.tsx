@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { RadioGroup } from 'formik-material-ui';
+import { RadioGroup } from 'formik-mui';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
@@ -19,7 +19,9 @@ interface IncludesGrasslandsFormValues {
   includesGrasslands?: string; // Radio always produces a string. We convert back to a Boolean on submit
 }
 
-export const IncludesGrasslandsForm: React.FC<IncludesGrasslandsFormProps> = ({ submit }) => {
+export const IncludesGrasslandsForm: React.FC<IncludesGrasslandsFormProps> = ({
+  submit,
+}) => {
   return (
     <Formik
       initialValues={{
@@ -27,7 +29,9 @@ export const IncludesGrasslandsForm: React.FC<IncludesGrasslandsFormProps> = ({ 
       }}
       validate={(values: IncludesGrasslandsFormValues) => {
         const errors: Partial<IncludesGrasslandsFormValues> = {};
-        const errorFields: Array<keyof IncludesGrasslandsFormValues> = ['includesGrasslands'];
+        const errorFields: Array<keyof IncludesGrasslandsFormValues> = [
+          'includesGrasslands',
+        ];
         errorFields.forEach(value => {
           if (!values[value]) {
             errors[value] = requiredMessage;
@@ -36,7 +40,9 @@ export const IncludesGrasslandsForm: React.FC<IncludesGrasslandsFormProps> = ({ 
         return errors;
       }}
       onSubmit={async (values, { setSubmitting }) => {
-        const valuesCleaned = { includesGrasslands: values['includesGrasslands'] === 'true' };
+        const valuesCleaned = {
+          includesGrasslands: values['includesGrasslands'] === 'true',
+        };
         setSubmitting(true);
         try {
           await submit(valuesCleaned);
@@ -50,7 +56,9 @@ export const IncludesGrasslandsForm: React.FC<IncludesGrasslandsFormProps> = ({ 
         return (
           <Form>
             <OnBoardingCard>
-              <ControlledFormLabel>Does your project include grasslands?</ControlledFormLabel>
+              <ControlledFormLabel>
+                Does your project include grasslands?
+              </ControlledFormLabel>
               <Field component={RadioGroup} name="includesGrasslands">
                 <Field
                   component={Toggle}

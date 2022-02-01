@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { TextFieldProps } from 'formik-material-ui';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { TextFieldProps } from 'formik-mui';
+import Grid from '@mui/material/Grid';
 import TextField from './TextField';
 import SpinIcon from '../icons/SpinIcon';
 
@@ -59,7 +59,10 @@ export default function NumberTextField({
             item
             className={classes.arrow}
             onClick={(): void =>
-              setFieldValue(name, max ? Math.min(max, value + increment) : value + increment)
+              setFieldValue(
+                name,
+                max ? Math.min(max, value + increment) : value + increment,
+              )
             }
           >
             <SpinIcon />
@@ -68,7 +71,10 @@ export default function NumberTextField({
             item
             className={classes.arrow}
             onClick={(): void =>
-              setFieldValue(name, min ? Math.max(min, value - increment) : value - increment)
+              setFieldValue(
+                name,
+                min ? Math.max(min, value - increment) : value - increment,
+              )
             }
           >
             <SpinIcon direction="down" />

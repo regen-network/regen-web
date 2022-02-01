@@ -1,12 +1,13 @@
 import React, { ReactChild } from 'react';
-import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 import BackgroundImage from 'gatsby-background-image';
 import { Link } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Section from 'web-components/src/components/section';
+import Section from 'web-components/lib/components/section';
 
 interface FAQSectionProps {
   category?: string;
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(20),
       paddingTop: theme.spacing(52.5),
       paddingBottom: theme.spacing(52.5),
@@ -41,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   title: {
     maxWidth: theme.spacing(172),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(8),
       paddingBottom: theme.spacing(7.5),
     },

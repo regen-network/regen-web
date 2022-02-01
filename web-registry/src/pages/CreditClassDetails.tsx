@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { useParams, useHistory, useRouteMatch, Switch, Route } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+import { useParams, useNavigate, Routes, Route } from 'react-router-dom';
 import cx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import Modal from 'web-components/lib/components/modal';
@@ -44,12 +45,12 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(12),
     },
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -67,7 +68,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       paddingTop: theme.spacing(30),
       paddingBottom: theme.spacing(30),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(20),
       paddingBottom: theme.spacing(20),
     },
@@ -77,7 +78,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(22),
       maxWidth: theme.typography.pxToRem(752),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
     },
   },
@@ -86,11 +87,11 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
   stepsSection: {
     background: 'transparent',
-    [theme.breakpoints.between('xs', 'md')]: {
+    [theme.breakpoints.between('xs', 'lg')]: {
       paddingLeft: theme.spacing(8),
       paddingRight: theme.spacing(8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(4),
       paddingRight: theme.spacing(4),
     },
@@ -98,20 +99,18 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 }));
 
 function CreditClassDetails(): JSX.Element {
-  let { path } = useRouteMatch();
-
   return (
-    <Switch>
-      <Route exact path={path}>
-        <CreditClassDetail isLandSteward={true} />
-      </Route>
-      <Route path={`${path}/buyer`}>
-        <CreditClassDetail isLandSteward={false} />
-      </Route>
-      <Route path={`${path}/land-steward`}>
-        <CreditClassDetail isLandSteward={true} />
-      </Route>
-    </Switch>
+    <Routes>
+      <Route path="/*" element={<CreditClassDetail isLandSteward={true} />} />
+      <Route
+        path="buyer"
+        element={<CreditClassDetail isLandSteward={false} />}
+      />
+      <Route
+        path="land-steward"
+        element={<CreditClassDetail isLandSteward={true} />}
+      />
+    </Routes>
   );
 }
 
@@ -120,18 +119,24 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   const [isBuyerModalOpen, setBuyerModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const styles = useStyles();
-  const history = useHistory();
+  const navigate = useNavigate();
 
-  let { creditClassId } = useParams<{ creditClassId: string }>();
+  let { creditClassId } = useParams();
 
   const { data } = useAllCreditClassQuery({ client });
-  const content = data?.allCreditClass?.find(creditClass => creditClass.path === creditClassId);
-  const creditClass = mock?.creditClasses.find(creditClass => creditClass.id === creditClassId);
+  const content = data?.allCreditClass?.find(
+    creditClass => creditClass.path === creditClassId,
+  );
+  const creditClass = mock?.creditClasses.find(
+    creditClass => creditClass.id === creditClassId,
+  );
   const { data: projectsData } = useMoreProjectsQuery();
 
   const getFeaturedProjects = (): JSX.Element => {
     const featuredProjects = projectsData?.allProjects?.nodes?.filter(project =>
-      content?.landSteward?.featuredProjectIds?.some(projectId => projectId === project?.handle),
+      content?.landSteward?.featuredProjectIds?.some(
+        projectId => projectId === project?.handle,
+      ),
     );
 
     return featuredProjects && featuredProjects.length > 0 ? (
@@ -149,7 +154,8 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
 
   const getAllProjects = (): JSX.Element => {
     const projects = projectsData?.allProjects?.nodes?.filter(
-      project => project?.creditClassByCreditClassId?.uri === content?.iri?.current,
+      project =>
+        project?.creditClassByCreditClassId?.uri === content?.iri?.current,
     );
 
     return projects && projects.length > 0 ? (
@@ -178,7 +184,11 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   };
 
   const setContent = (): void => {
-    history.push(`/credit-classes/${creditClassId}/${isLandSteward ? 'buyer' : 'land-steward'}`);
+    navigate(
+      `/credit-classes/${creditClassId}/${
+        isLandSteward ? 'buyer' : 'land-steward'
+      }`,
+    );
   };
 
   if (creditClass) {
@@ -188,7 +198,9 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           isBanner
           img={hero}
           title={
-            isLandSteward ? content?.landSteward?.heroSection?.title : content?.buyer?.heroSection?.title
+            isLandSteward
+              ? content?.landSteward?.heroSection?.title
+              : content?.buyer?.heroSection?.title
           }
           descriptionRaw={
             isLandSteward
@@ -198,8 +210,14 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           classes={{ main: styles.heroMain }}
         />
         <Section
-          title={content?.nameRaw ? <BlockContent content={content?.nameRaw} /> : ''}
-          classes={{ root: styles.introSection, title: styles.title, titleWrap: styles.titleWrap }}
+          title={
+            content?.nameRaw ? <BlockContent content={content?.nameRaw} /> : ''
+          }
+          classes={{
+            root: styles.introSection,
+            title: styles.title,
+            titleWrap: styles.titleWrap,
+          }}
         >
           <Description className={styles.sectionDescription}>
             <BlockContent content={content?.descriptionRaw} />
@@ -207,7 +225,10 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         </Section>
         <div className="topo-background-alternate">
           {content?.ecologicalImpact && (
-            <ImpactSection title="Ecological Impact" impacts={content?.ecologicalImpact} />
+            <ImpactSection
+              title="Ecological Impact"
+              impacts={content?.ecologicalImpact}
+            />
           )}
           {!isLandSteward && (
             <CreditClassOverviewSection
@@ -235,7 +256,10 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         {!isLandSteward && getAllProjects()}
         {isLandSteward &&
           content?.landSteward?.steps?.map((stepSequence, index) => (
-            <div className={cx('topo-background-alternate', styles.flex)} key={index}>
+            <div
+              className={cx('topo-background-alternate', styles.flex)}
+              key={index}
+            >
               <StepsSection
                 className={styles.stepsSection}
                 title={stepSequence?.title}
@@ -248,12 +272,20 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         <div className="topo-background-alternate">
           <MediaSection
             header="Videos"
-            items={isLandSteward ? content?.landSteward?.videos : content?.buyer?.videos}
+            items={
+              isLandSteward
+                ? content?.landSteward?.videos
+                : content?.buyer?.videos
+            }
           />
         </div>
         <div className="topo-background-alternate">
           <ResourcesSection
-            resources={isLandSteward ? content?.landSteward?.resources : content?.buyer?.resources}
+            resources={
+              isLandSteward
+                ? content?.landSteward?.resources
+                : content?.buyer?.resources
+            }
           />
         </div>
         {/* {isLandSteward && <CreditClassConnectSection connectSection={content?.landSteward?.connectSection} />} TODO: hidden until resource is ready */}
@@ -270,7 +302,11 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           onCtaClick={onCtaClick}
           onToggleClick={setContent}
         />
-        <Modal open={!!modalIframeLink} onClose={() => setModalIframeLink('')} className={styles.modal}>
+        <Modal
+          open={!!modalIframeLink}
+          onClose={() => setModalIframeLink('')}
+          className={styles.modal}
+        >
           <iframe title="modal-iframe-link" src={modalIframeLink} />
         </Modal>
         <Modal open={isBuyerModalOpen} onClose={() => setBuyerModalOpen(false)}>

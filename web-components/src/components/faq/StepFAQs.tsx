@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, Collapse, useTheme } from '@material-ui/core';
-import { Button } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { Collapse } from '@mui/material';
+import { Button } from '@mui/material';
 import clsx from 'clsx';
 
 import MinusIcon from '../icons/MinusIcon';
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   answer: {
     paddingBottom: theme.spacing(4),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(4),
     },
   },
@@ -94,11 +95,20 @@ const StepFAQs: React.FC<StepFAQProps> = ({ questionItems, isActive }) => {
         <Title variant="h6" className={classes.title}>
           top faqs
         </Title>
-        <Button className={classes.addButton} onClick={() => setIsExpanded(!isExpanded)}>
+        <Button
+          className={classes.addButton}
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
           {isExpanded ? (
-            <MinusIcon className={classes.expandCollapse} color={theme.palette.secondary.main} />
+            <MinusIcon
+              className={classes.expandCollapse}
+              color={theme.palette.secondary.main}
+            />
           ) : (
-            <PlusIcon className={classes.expandCollapse} color={theme.palette.secondary.main} />
+            <PlusIcon
+              className={classes.expandCollapse}
+              color={theme.palette.secondary.main}
+            />
           )}
         </Button>
       </div>
@@ -109,7 +119,10 @@ const StepFAQs: React.FC<StepFAQProps> = ({ questionItems, isActive }) => {
             classNames={{
               root: classes.questionRoot,
               container: classes.questionContainer,
-              gradient: clsx(classes.gradient, !isActive && classes.inactiveGradient),
+              gradient: clsx(
+                classes.gradient,
+                !isActive && classes.inactiveGradient,
+              ),
               question: classes.questionTitle,
               answer: classes.answer,
               collapsed: classes.collapsedAnswer,

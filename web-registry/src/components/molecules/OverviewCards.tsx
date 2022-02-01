@@ -1,6 +1,6 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
 
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -9,14 +9,14 @@ import { Maybe, CardFieldsFragment } from '../../generated/sanity-graphql';
 const useStyles = makeStyles(theme => ({
   wrap: {
     justifyContent: 'center',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       justifyContent: 'flex-start',
       flexWrap: 'nowrap',
       overflow: 'scroll',
     },
   },
   item: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '95%',
     },
   },
@@ -37,9 +37,14 @@ const OverviewCards: React.FC<{
           <OverviewCard
             className={styles.overviewCard}
             icon={
-              card?.icon?.asset?.url ? <img src={card.icon.asset.url} alt={card?.title || ''} /> : undefined
+              card?.icon?.asset?.url ? (
+                <img src={card.icon.asset.url} alt={card?.title || ''} />
+              ) : undefined
             }
-            item={{ title: card?.title || '', description: <BlockContent content={card?.descriptionRaw} /> }}
+            item={{
+              title: card?.title || '',
+              description: <BlockContent content={card?.descriptionRaw} />,
+            }}
           />
         </Grid>
       ))}

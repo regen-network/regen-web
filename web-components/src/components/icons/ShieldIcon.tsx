@@ -1,11 +1,15 @@
 import React from 'react';
-import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 interface Props extends SvgIconProps {
   iconColor?: string;
 }
 
-export default function ShieldIcon({ iconColor = '#4FB573', className, onClick }: Props): JSX.Element {
+export default function ShieldIcon({
+  iconColor = '#4FB573',
+  className,
+  onClick,
+}: Props): JSX.Element {
   return (
     <SvgIcon viewBox="0 0 25 25" className={className} onClick={onClick}>
       <path

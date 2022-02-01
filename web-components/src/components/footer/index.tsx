@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Link from '@material-ui/core/Link';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Link from '@mui/material/Link';
 
 import Title from '../title';
 import Section from '../section';
@@ -36,7 +36,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: props.paddingBottom ? theme.spacing(30) : 0,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: props.paddingBottom ? theme.spacing(19) : 0,
     },
     '& a': {
@@ -57,7 +57,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       lineHeight: theme.spacing(6.5),
       marginBottom: theme.spacing(3.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: theme.spacing(4.5),
       fontSize: theme.spacing(3.5),
       marginBottom: theme.spacing(4.5),
@@ -71,7 +71,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.spacing(4.5),
       marginBottom: theme.spacing(1.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
       marginBottom: theme.spacing(1),
     },
@@ -99,7 +99,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginTop: theme.spacing(8.25),
       marginBottom: theme.spacing(8.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(9),
     },
@@ -124,7 +124,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(19.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(18.75),
     },
   },
@@ -135,7 +135,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   },
   footerItem: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(11.25),
     },
   },
@@ -143,7 +143,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
   const classes = useStyles({});
-
   return (
     <div className={classes.footerItem}>
       <Title className={classes.title} variant="h5">
@@ -152,7 +151,11 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
       <List className={classes.list}>
         {items.map((item, index) => (
           <ListItem className={classes.subTitle} key={index}>
-            <Link href={item.href} rel="noopener noreferrer" target={item.target}>
+            <Link
+              href={item.href}
+              rel="noopener noreferrer"
+              target={item.target}
+            >
               {item.title}
             </Link>
           </ListItem>
@@ -176,13 +179,22 @@ export default function Footer({
       <Section classes={{ root: classes.section }}>
         <Grid container>
           <Grid item xs={12} sm={3}>
-            <FooterItem title={footerItems[0].title} items={footerItems[0].items} />
+            <FooterItem
+              title={footerItems[0].title}
+              items={footerItems[0].items}
+            />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <FooterItem title={footerItems[1].title} items={footerItems[1].items} />
+            <FooterItem
+              title={footerItems[1].title}
+              items={footerItems[1].items}
+            />
           </Grid>
           <Grid item xs={12} sm={2}>
-            <FooterItem title={footerItems[2].title} items={footerItems[2].items} />
+            <FooterItem
+              title={footerItems[2].title}
+              items={footerItems[2].items}
+            />
           </Grid>
           <Grid item xs={12} sm={4} className={classes.footerItem}>
             <Title className={classes.title} variant="h5">
@@ -205,9 +217,14 @@ export default function Footer({
         </Grid>
         <SocialLinks className={classes.community} />
         <hr className={classes.separator} />
-        <Grid className={classes.bottomGrid} container justify="space-between">
+        <Grid
+          className={classes.bottomGrid}
+          container
+          justifyContent="space-between"
+        >
           <Grid item className={classes.bottom}>
-            <Link href={termsUrl}>Terms</Link> | <Link href={privacyUrl}>Privacy</Link>
+            <Link href={termsUrl}>Terms</Link> |{' '}
+            <Link href={privacyUrl}>Privacy</Link>
           </Grid>
           <Grid item className={classes.bottom}>
             © 2021 Regen Network Development, Inc

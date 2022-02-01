@@ -1,8 +1,12 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-import { DocumentationTable, Document } from 'web-components/lib/components/table/DocumentationTable';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import {
+  DocumentationTable,
+  Document,
+} from 'web-components/lib/components/table/DocumentationTable';
 import Section from 'web-components/lib/components/section';
 
 export interface DocumentationProps {
@@ -16,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.5),
       paddingBottom: theme.spacing(17.5),
     },
@@ -30,7 +34,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function Documentation({ txClient, onViewOnLedger, documents }: DocumentationProps): JSX.Element {
+function Documentation({
+  txClient,
+  onViewOnLedger,
+  documents,
+}: DocumentationProps): JSX.Element {
   const styles = useStyles();
 
   return (

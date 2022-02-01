@@ -1,21 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+// import DateFnsUtils from '@date-io/date-fns';
+import { IntercomProvider } from 'react-use-intercom';
+import { Auth0Provider } from '@auth0/auth0-react';
+
+import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
+
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
-import { IntercomProvider } from 'react-use-intercom';
-
-import { Auth0Provider } from '@auth0/auth0-react';
 import { AuthApolloProvider } from './apollo';
 import { LedgerProvider } from './ledger';
 import { WalletProvider } from './lib/wallet';
 // import history from './lib/history';
 
 const config = {
-  domain: process.env.REACT_APP_AUTH0_DOMAIN || 'regen-network-registry.auth0.com',
-  clientId: process.env.REACT_APP_AUTH0_CLIENT_ID || 'rEuc1WLPAQVXZ7gJrWg4AL9EhWMHmLu8',
+  domain:
+    process.env.REACT_APP_AUTH0_DOMAIN || 'regen-network-registry.auth0.com',
+  clientId:
+    process.env.REACT_APP_AUTH0_CLIENT_ID || 'rEuc1WLPAQVXZ7gJrWg4AL9EhWMHmLu8',
   returnTo: window.location.origin || 'http://localhost:3000/',
   audience: 'https://regen-registry-server.herokuapp.com/',
 };
@@ -42,7 +46,7 @@ ReactDOM.render(
   >
     <AuthApolloProvider>
       <IntercomProvider appId={intercomId} autoBoot>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
           <WalletProvider>
             <LedgerProvider>
               <ThemeProvider injectFonts>
@@ -50,7 +54,7 @@ ReactDOM.render(
               </ThemeProvider>
             </LedgerProvider>
           </WalletProvider>
-        </MuiPickersUtilsProvider>
+        </LocalizationProvider>
       </IntercomProvider>
     </AuthApolloProvider>
   </Auth0Provider>,

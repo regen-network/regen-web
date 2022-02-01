@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 interface PlayIconProps extends React.HTMLProps<HTMLDivElement> {
@@ -15,7 +15,11 @@ const useStyles = makeStyles<Theme, PlayIconProps>((theme: Theme) => ({
   }),
 }));
 
-export default function PlayIcon({ width, height, className }: PlayIconProps): JSX.Element {
+export default function PlayIcon({
+  width,
+  height,
+  className,
+}: PlayIconProps): JSX.Element {
   const classes = useStyles({ width, height });
 
   return (

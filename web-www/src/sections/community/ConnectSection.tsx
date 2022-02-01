@@ -1,7 +1,8 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ConnectSection, { IconLabelProps } from '../../components/ConnectSection';
 import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
@@ -13,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(38),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(24),
     },
   },

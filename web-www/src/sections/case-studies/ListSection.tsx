@@ -1,14 +1,16 @@
 import React from 'react';
-import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import Section from 'web-components/lib/components/section';
 import { CaseStudiesListSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(8.25),
     },
     [theme.breakpoints.up('sm')]: {
@@ -16,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   section: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(27.5),
     },
     [theme.breakpoints.up('sm')]: {

@@ -1,8 +1,14 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { ProjectLocationForm, ProjectLocationFormValues } from '../components/organisms';
-import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
+import {
+  ProjectLocationForm,
+  ProjectLocationFormValues,
+} from '../components/organisms';
+import {
+  OnboardingFormTemplate,
+  EditFormTemplate,
+} from '../components/templates';
 import { useProjectEditContext } from '../pages/ProjectEdit';
 import {
   useProjectByIdQuery,
@@ -12,8 +18,8 @@ import {
 } from '../generated/graphql';
 
 const ProjectLocation: React.FC = () => {
-  const history = useHistory();
-  const { projectId } = useParams<{ projectId: string }>();
+  const navigate = useNavigate();
+  const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
 
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -28,7 +34,8 @@ const ProjectLocation: React.FC = () => {
   if (projectData?.projectById?.metadata) {
     const metadata = projectData.projectById.metadata;
     initialFieldValues = {
-      'http://schema.org/location': metadata?.['http://schema.org/location'] || {},
+      'http://schema.org/location':
+        metadata?.['http://schema.org/location'] || {},
     };
   }
 
@@ -41,7 +48,7 @@ const ProjectLocation: React.FC = () => {
   async function submit(values: ProjectLocationFormValues): Promise<void> {
     try {
       await saveValues(values);
-      !isEdit && history.push(`/project-pages/${projectId}/roles`);
+      !isEdit && navigate(`/project-pages/${projectId}/roles`);
     } catch (e) {
       //   // TODO: Should we display the error banner here?
       //   // https://github.com/regen-network/regen-registry/issues/554
@@ -101,7 +108,11 @@ const ProjectLocation: React.FC = () => {
       />
     </EditFormTemplate>
   ) : (
-    <OnboardingFormTemplate activeStep={0} title="Location" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={0}
+      title="Location"
+      saveAndExit={saveAndExit}
+    >
       <ProjectLocationForm
         submit={submit}
         saveAndExit={saveAndExit}

@@ -1,12 +1,16 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Typography } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
-import { useCreateProjectMutation, useGetUserProfileByEmailQuery } from '../generated/graphql';
+import {
+  useCreateProjectMutation,
+  useGetUserProfileByEmailQuery,
+} from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   subtitle: {
@@ -35,8 +39,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 const ProjectList: React.FC = () => {
   const classes = useStyles();
   // const theme = useTheme();
-  // const isMobile = useMediaQuery(theme.breakpoints.down('sm')); used for navigating to edit
-  const history = useHistory();
+  // const isMobile = useMediaQuery(theme.breakpoints.down('md')); used for navigating to edit
+  const navigate = useNavigate();
 
   // TODO Create provider to get directly user data if logged in
   // https://github.com/regen-network/regen-registry/issues/555
@@ -45,7 +49,7 @@ const ProjectList: React.FC = () => {
   const { data } = useGetUserProfileByEmailQuery({
     skip: !userEmail,
     variables: {
-      email: userEmail,
+      email: userEmail as string,
     },
     fetchPolicy: 'cache-and-network',
   });
@@ -68,25 +72,31 @@ const ProjectList: React.FC = () => {
       });
       const projectId = res.data?.createProject?.project?.id;
       if (projectId) {
-        history.push(`/project-pages/${projectId}/choose-credit-class`);
+        navigate(`/project-pages/${projectId}/choose-credit-class`);
       }
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
+      // eslint-disable-next-line no-console
       console.log(e);
     }
   }
 
   // TODO: when existing project is clicked for editing, use this
   // const editProjectPage = (projectId: string): void => {
-  //   const editUrl = `/project-pages/edit/${projectId}`;
-  //   history.push(isMobile ? editUrl : `${editUrl}/basic-info`);
+  //   const editUrl = `/project-pages/${projectId}/edit/`;
+  //   navigate(isMobile ? editUrl : `${editUrl}/basic-info`);
   // };
 
   return (
-    <OnBoardingSection formContainer title={isFirstProject ? 'Create a Project' : 'Projects'}>
+    <OnBoardingSection
+      formContainer
+      title={isFirstProject ? 'Create a Project' : 'Projects'}
+    >
       {isFirstProject && (
-        <Typography className={classes.subtitle}>Get started with your first project.</Typography>
+        <Typography className={classes.subtitle}>
+          Get started with your first project.
+        </Typography>
       )}
       <div className={classes.cards}>
         {/* TODO: Existing Projects. see regen-network/regen-registry#360 */}

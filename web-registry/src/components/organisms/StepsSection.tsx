@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import Modal from 'web-components/lib/components/modal';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
-import { StepCardFieldsFragment, Maybe, Scalars } from '../../generated/sanity-graphql';
+import {
+  StepCardFieldsFragment,
+  Maybe,
+  Scalars,
+} from '../../generated/sanity-graphql';
 import { WrappedStepCard } from '../atoms';
 
 type Props = {
@@ -30,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(24, 0, 8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(15, 0, 7.5),
     },
   },
@@ -40,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(38),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -53,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(18),
       margin: theme.spacing(8, 0, 6),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(14),
       marginBottom: theme.spacing(4),
     },
@@ -63,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(18),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
   },
@@ -78,7 +83,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function StepsSection({ className, stepCards, title, preTitle, descriptionRaw }: Props): JSX.Element {
+function StepsSection({
+  className,
+  stepCards,
+  title,
+  preTitle,
+  descriptionRaw,
+}: Props): JSX.Element {
   const styles = useStyles();
   const [modalIframeLink, setModalIframeLink] = useState<string>('');
 
@@ -100,10 +111,19 @@ function StepsSection({ className, stepCards, title, preTitle, descriptionRaw }:
       </div>
       <div className={styles.steps}>
         {stepCards?.map((card, i) => (
-          <WrappedStepCard key={i} stepNumber={i} stepCard={card} openModal={setModalIframeLink} />
+          <WrappedStepCard
+            key={i}
+            stepNumber={i}
+            stepCard={card}
+            openModal={setModalIframeLink}
+          />
         ))}
       </div>
-      <Modal open={!!modalIframeLink} onClose={() => setModalIframeLink('')} className={styles.modal}>
+      <Modal
+        open={!!modalIframeLink}
+        onClose={() => setModalIframeLink('')}
+        className={styles.modal}
+      >
         <iframe title="modal-iframe-link" src={modalIframeLink} />
       </Modal>
     </OnBoardingSection>

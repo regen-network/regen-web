@@ -1,7 +1,8 @@
 import React from 'react';
-import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { makeStyles, useTheme } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import TitleDescription from 'web-components/lib/components/title-description';
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
@@ -46,7 +47,8 @@ const query = graphql`
 const TitleDescriptionSection = (): JSX.Element => {
   const theme = useTheme();
   const styles = useStyles();
-  const { sanitySciencePage } = useStaticQuery<ScienceTitleDescriptionSectionQuery>(query);
+  const { sanitySciencePage } =
+    useStaticQuery<ScienceTitleDescriptionSectionQuery>(query);
   const data = sanitySciencePage?.titleDescriptionSection;
 
   const outcomesElement: JSX.Element[] = (data?.outcomes || []).map(o => {
@@ -62,7 +64,10 @@ const TitleDescriptionSection = (): JSX.Element => {
 
   return (
     <Section>
-      <TitleDescription title={data?.title || ''} description={data?._rawDescription}></TitleDescription>
+      <TitleDescription
+        title={data?.title || ''}
+        description={data?._rawDescription}
+      ></TitleDescription>
       <ResponsiveSlider
         itemWidth="90%"
         padding={theme.spacing(2.5)}

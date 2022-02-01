@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
-import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
+import {
+  OnboardingFormTemplate,
+  EditFormTemplate,
+} from '../components/templates';
 import {
   EntityDisplayForm,
   EntityDisplayValues,
@@ -31,8 +34,10 @@ function getInitialValues(value: any): any {
 const EntityDisplay: React.FC = () => {
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
-  const history = useHistory();
-  const [initialValues, setInitialValues] = useState<EntityDisplayValues | undefined>();
+  const navigate = useNavigate();
+  const [initialValues, setInitialValues] = useState<
+    EntityDisplayValues | undefined
+  >();
 
   const [updateProject] = useUpdateProjectByIdMutation();
   const [updatePartyById] = useUpdatePartyByIdMutation();
@@ -46,8 +51,12 @@ const EntityDisplay: React.FC = () => {
       const metadata = data.projectById.metadata;
 
       setInitialValues({
-        'http://regen.network/landOwner': getInitialValues(metadata['http://regen.network/landOwner']),
-        'http://regen.network/landSteward': getInitialValues(metadata['http://regen.network/landSteward']),
+        'http://regen.network/landOwner': getInitialValues(
+          metadata['http://regen.network/landOwner'],
+        ),
+        'http://regen.network/landSteward': getInitialValues(
+          metadata['http://regen.network/landSteward'],
+        ),
         'http://regen.network/projectDeveloper': getInitialValues(
           metadata['http://regen.network/projectDeveloper'],
         ),
@@ -67,8 +76,11 @@ const EntityDisplay: React.FC = () => {
       // update project stakeholders' parties
       if (data?.projectById) {
         for (const role in values) {
-          const value: DisplayValues = values[role as EntityFieldName] as DisplayValues;
-          const roleIdFieldName: roleIdField = rolesMap[role as EntityFieldName];
+          const value: DisplayValues = values[
+            role as EntityFieldName
+          ] as DisplayValues;
+          const roleIdFieldName: roleIdField =
+            rolesMap[role as EntityFieldName];
           const roleId = data.projectById[roleIdFieldName];
           if (value?.['http://regen.network/showOnProjectPage'] && roleId) {
             await updatePartyById({
@@ -99,7 +111,7 @@ const EntityDisplay: React.FC = () => {
           },
         },
       });
-      !isEdit && history.push(`/project-pages/${projectId}/story`);
+      !isEdit && navigate(`/project-pages/${projectId}/story`);
     } catch (e) {
       // TODO: display the error banner in case of server error
       // https://github.com/regen-network/regen-registry/issues/554
@@ -111,7 +123,11 @@ const EntityDisplay: React.FC = () => {
       <EntityDisplayForm submit={submit} initialValues={initialValues} />
     </EditFormTemplate>
   ) : (
-    <OnboardingFormTemplate activeStep={0} title="Entity Display" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={0}
+      title="Entity Display"
+      saveAndExit={saveAndExit}
+    >
       <EntityDisplayForm submit={submit} initialValues={initialValues} />
     </OnboardingFormTemplate>
   );

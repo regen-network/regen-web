@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Timeline from 'web-components/lib/components/timeline';
 import Description from 'web-components/lib/components/description';
@@ -12,12 +13,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(28.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(25),
     },
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       textAlign: 'left',
       fontSize: theme.spacing(8),
     },
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       textAlign: 'center',
       margin: '0 auto',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       textAlign: 'left',
       paddingBottom: theme.spacing(9.5),
       paddingTop: theme.spacing(5),

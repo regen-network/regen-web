@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { StepIconProps } from '@material-ui/core/StepIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { StepIconProps } from '@mui/material/StepIcon';
 import clsx from 'clsx';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -18,7 +18,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
       width: theme.spacing(7.75),
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(5.25),
       width: theme.spacing(5.25),
       fontSize: theme.spacing(3),

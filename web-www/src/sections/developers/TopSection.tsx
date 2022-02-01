@@ -1,6 +1,8 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
+
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../components/BackgroundSection';
 import { DevelopersTopSectionQuery } from '../../generated/graphql';
 
@@ -9,7 +11,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(64),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(60),
     },
   },
@@ -17,7 +19,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     fontWeight: 'normal',
     fontFamily: theme.typography.overline.fontFamily,
     lineHeight: '160%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
     },
   },

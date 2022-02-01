@@ -1,14 +1,14 @@
 import React from 'react';
-import { withKnobs, text, boolean, object } from '@storybook/addon-knobs';
-import Question, { QuestionItem } from 'web-components/lib/components/faq/Question';
+import Question, {
+  QuestionItem,
+} from 'web-components/lib/components/faq/Question';
 import Category from 'web-components/lib/components/faq/Category';
 import Navigation from 'web-components/lib/components/faq/Navigation';
 import FAQ from 'web-components/lib/components/faq';
 
 export default {
-  title: 'Components|FAQ',
+  title: 'FAQ',
   component: Question,
-  decorators: [withKnobs],
 };
 
 const questions: QuestionItem[] = [
@@ -26,16 +26,16 @@ const questions: QuestionItem[] = [
 
 export const question = (): JSX.Element => (
   <Question
-    first={boolean('first', false)}
-    last={boolean('last', false)}
-    question={text('question', questions[0].question)}
-    answer={text('answer', questions[0].answer)}
+    first={false}
+    last={false}
+    question={questions[0].question}
+    answer={questions[0].answer}
     isShareable
   />
 );
 
 export const category = (): JSX.Element => (
-  <Category name={text('name', 'tech')} questions={object('questions', questions)} />
+  <Category name={'tech'} questions={questions} />
 );
 
 export const navigation = (): JSX.Element => (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import cx from 'clsx';
 
@@ -19,7 +19,9 @@ interface IndividualModalProps {
   individual?: IndividualFormValues;
   onClose: () => void;
   onSubmit: (individual: IndividualFormValues) => void;
-  validate: (values: IndividualFormValues) => Promise<FormikErrors<IndividualFormValues>>;
+  validate: (
+    values: IndividualFormValues,
+  ) => Promise<FormikErrors<IndividualFormValues>>;
 }
 
 export interface IndividualFormValues {
@@ -48,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(7.5),
       paddingRight: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(8),
       paddingBottom: theme.spacing(6),
       paddingLeft: 0,
@@ -65,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(0, 10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(0, 2.5),
     },
   },
@@ -92,7 +94,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -101,9 +103,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function IndividualModal({ individual, onClose, onSubmit, validate }: IndividualModalProps): JSX.Element {
+function IndividualModal({
+  individual,
+  onClose,
+  onSubmit,
+  validate,
+}: IndividualModalProps): JSX.Element {
   const styles = useStyles();
-  const [individualEdit, setIndividualEdit] = useState<IndividualFormValues | undefined>(undefined);
+  const [individualEdit, setIndividualEdit] = useState<
+    IndividualFormValues | undefined
+  >(undefined);
 
   useEffect(() => {
     setIndividualEdit(individual);
@@ -126,7 +135,8 @@ function IndividualModal({ individual, onClose, onSubmit, validate }: Individual
             ...individualEdit,
             '@type': 'http://regen.network/Individual',
             'http://regen.network/sharePermission':
-              individualEdit && !!individualEdit['http://regen.network/sharePermission'],
+              individualEdit &&
+              !!individualEdit['http://regen.network/sharePermission'],
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -141,7 +151,7 @@ function IndividualModal({ individual, onClose, onSubmit, validate }: Individual
         >
           {({ submitForm, isValid, isSubmitting }) => {
             return (
-              <Form translate="yes">
+              <Form>
                 <OnBoardingCard className={styles.card}>
                   <Field
                     className={styles.field}
@@ -169,7 +179,8 @@ function IndividualModal({ individual, onClose, onSubmit, validate }: Individual
                     name="['http://regen.network/sharePermission']"
                     label={
                       <Description className={styles.checkboxLabel}>
-                        I have this individual’s permission to share their information with Regen Registry
+                        I have this individual’s permission to share their
+                        information with Regen Registry
                       </Description>
                     }
                   />

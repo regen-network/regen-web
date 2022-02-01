@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, useTheme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
@@ -14,11 +14,11 @@ export interface ActionProps {
   className?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(74.5),
     },
   },
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(2.5),
       paddingBottom: theme.spacing(2.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
       paddingTop: theme.spacing(2.8),
       paddingBottom: theme.spacing(1.2),
@@ -71,13 +71,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Action({ name, description, imgSrc, className }: ActionProps): JSX.Element {
+export default function Action({
+  name,
+  description,
+  imgSrc,
+  className,
+}: ActionProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
 
   const [expanded, setExpanded] = useState(false);
   const texts: Texts = truncate(description, 310, 100);
-  const desc: string = expanded ? texts.truncated + ' ' + texts.rest : texts.truncated;
+  const desc: string = expanded
+    ? texts.truncated + ' ' + texts.rest
+    : texts.truncated;
 
   const handleChange = (): void => {
     setExpanded(prev => !prev);
@@ -93,9 +100,17 @@ export default function Action({ name, description, imgSrc, className }: ActionP
           <span className={classes.readMore} onClick={handleChange}>
             read {expanded ? 'less' : 'more'}
             {expanded ? (
-              <ArrowDownIcon className={classes.icon} direction="up" color={theme.palette.secondary.main} />
+              <ArrowDownIcon
+                className={classes.icon}
+                direction="up"
+                color={theme.palette.secondary.main}
+              />
             ) : (
-              <ArrowDownIcon className={classes.icon} direction="down" color={theme.palette.secondary.main} />
+              <ArrowDownIcon
+                className={classes.icon}
+                direction="down"
+                color={theme.palette.secondary.main}
+              />
             )}
           </span>
         )}

@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import { Avatar } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Avatar } from '@mui/material';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
@@ -11,6 +11,8 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 import { LineItem } from './LineItem';
 import { CreditClass } from '../../mocks/mocks';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
+import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
+import Sequestration from '../../assets/svgs/sequestration.svg';
 
 interface CreditClassDetailsColumnProps {
   creditClass: CreditClass;
@@ -31,7 +33,7 @@ const useStyles = makeStyles(theme => ({
       width: theme.spacing(91.75),
       padding: theme.spacing(12, 8),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
       padding: theme.spacing(12, 5.5),
     },
@@ -65,7 +67,7 @@ const useStyles = makeStyles(theme => ({
       width: theme.typography.pxToRem(76),
       height: theme.typography.pxToRem(76),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.typography.pxToRem(85),
       height: theme.typography.pxToRem(85),
     },
@@ -84,7 +86,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.typography.pxToRem(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.typography.pxToRem(13),
     },
   },
@@ -109,7 +111,7 @@ function CreditClassDetailsColumn({
             <Avatar className={styles.iconContainer}>
               <img
                 className={styles.icon}
-                src={require(`../../assets/svgs/carbon-credit-fruit.svg`)}
+                src={CarbonCreditFruit}
                 alt="carbon credit"
               />
             </Avatar>
@@ -122,7 +124,7 @@ function CreditClassDetailsColumn({
             <Avatar className={styles.iconContainer}>
               <img
                 className={styles.icon}
-                src={require(`../../assets/svgs/sequestration.svg`)}
+                src={Sequestration}
                 alt="ton of carbon"
               />
             </Avatar>
@@ -131,18 +133,38 @@ function CreditClassDetailsColumn({
             </Title>
           </div>
         </div>
-        {nameRaw && <LineItem label="credit name" data={<BlockContent content={nameRaw} />} />}
-        {creditClass.version && <LineItem label="version" data={creditClass.version} />}
-        {creditClass.creditDesigner && <LineItem label="credit designer" data={creditClass.creditDesigner} />}
-        {creditClass.ecoType && <LineItem label="ecotype" data={creditClass.ecoType} />}
+        {nameRaw && (
+          <LineItem
+            label="credit name"
+            data={<BlockContent content={nameRaw} />}
+          />
+        )}
+        {creditClass.version && (
+          <LineItem label="version" data={creditClass.version} />
+        )}
+        {creditClass.creditDesigner && (
+          <LineItem label="credit designer" data={creditClass.creditDesigner} />
+        )}
+        {creditClass.ecoType && (
+          <LineItem label="ecotype" data={creditClass.ecoType} />
+        )}
         {creditClass.ecoServiceType && (
-          <LineItem label="carbon removal or emission reduction" data={creditClass.ecoServiceType} />
+          <LineItem
+            label="carbon removal or emission reduction"
+            data={creditClass.ecoServiceType}
+          />
         )}
         {creditClass.approvedMethodology && (
-          <LineItem label="approved methodology" data={creditClass.approvedMethodology} />
+          <LineItem
+            label="approved methodology"
+            data={creditClass.approvedMethodology}
+          />
         )}
         {creditClass.methodologyUrl && (
-          <OutlinedButton classes={{ root: styles.button }} href={creditClass.methodologyUrl}>
+          <OutlinedButton
+            classes={{ root: styles.button }}
+            href={creditClass.methodologyUrl}
+          >
             view methodology»
           </OutlinedButton>
         )}

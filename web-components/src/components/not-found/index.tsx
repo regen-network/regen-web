@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 import ContainedButton from '../buttons/ContainedButton';
 import Title from '../title';
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: theme.spacing(132.75),
       margin: '0 auto',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(11),
       paddingLeft: theme.spacing(5),
       paddingRight: theme.spacing(5),
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         marginBottom: theme.spacing(6.25),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         marginBottom: theme.spacing(2),
       },
       margin: '0 auto',
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       lineHeight: theme.spacing(42.75),
       marginBottom: theme.spacing(8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(28),
       lineHeight: theme.spacing(30.75),
       marginBottom: theme.spacing(2),
@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'uppercase',
     height: theme.spacing(15),
     lineHeight: theme.spacing(5.75),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(3)} ${theme.spacing(7.5)}`,
       fontSize: theme.spacing(4.5),
       height: 'unset',
@@ -109,10 +109,16 @@ const NotFound = ({ img, home = '/' }: NotFoundProps): JSX.Element => {
           Oops! Page not found.
         </Title>
         <Typography align="center" className={classes.text}>
-          The page you are looking for might have been temporarily removed or had its name changed.
+          The page you are looking for might have been temporarily removed or
+          had its name changed.
         </Typography>
-        <ContainedButton style={{ whiteSpace: 'nowrap' }} href={home} className={classes.button}>
-          Visit Our Homepage <Box display={{ xs: 'none', sm: 'inline' }}>{'\u00A0'}Instead</Box>
+        <ContainedButton
+          style={{ whiteSpace: 'nowrap' }}
+          href={home}
+          className={classes.button}
+        >
+          Visit Our Homepage{' '}
+          <Box display={{ xs: 'none', sm: 'inline' }}>{'\u00A0'}Instead</Box>
         </ContainedButton>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 import cx from 'clsx';
 
 interface LabelProps {
@@ -19,7 +19,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 function Label({ children, className }: LabelProps): JSX.Element {
   const styles = useStyles();
 
-  return <Typography className={cx(styles.root, className)}>{children}</Typography>;
+  return (
+    <Typography className={cx(styles.root, className)}>{children}</Typography>
+  );
 }
 
 export { Label };

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import CardMedia from '@material-ui/core/CardMedia';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import CardMedia from '@mui/material/CardMedia';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(12),
     },
   },
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(20),
     },
   },
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
     borderBottom: `1px solid ${theme.palette.grey[100]}`,
   },
   sectionTitle: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
       lineHeight: theme.typography.pxToRem(41.6),
     },
@@ -66,7 +66,7 @@ const useStyles = makeStyles(theme => ({
     textTransform: 'none',
     color: theme.palette.text.primary,
     fontWeight: 900,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: theme.typography.pxToRem(22),
       lineHeight: theme.typography.pxToRem(33),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       lineHeight: theme.typography.pxToRem(27),
     },
@@ -94,7 +94,7 @@ const CreateCreditClass: React.FC = () => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string | undefined>();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   const { data } = useAllCreateCreditClassPageQuery({ client });
@@ -105,7 +105,9 @@ const CreateCreditClass: React.FC = () => {
     setOpen(true);
   };
 
-  const outcomeCards = content?.outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />);
+  const outcomeCards = content?.outcomes?.map(outcome => (
+    <WrappedImpactCard outcome={outcome} />
+  ));
 
   const SubtitleAndDescription: React.FC<{
     title: string;
@@ -114,7 +116,7 @@ const CreateCreditClass: React.FC = () => {
   }> = props => {
     const align = props.align || (isMobile ? 'left' : 'center');
     return (
-      <Grid container justify="center">
+      <Grid container justifyContent="center">
         <Box maxWidth={theme.typography.pxToRem(948)}>
           <Title align={align} variant="h3">
             {props.title}
@@ -152,7 +154,11 @@ const CreateCreditClass: React.FC = () => {
         classes={{ root: styles.padBottom, title: styles.sectionTitle }}
       >
         <Box display={['block', 'flex']} justifyContent="center">
-          <Box maxWidth={theme.typography.pxToRem(942)} mt={[6, 8.75]} mx={[-1, 'inherit']}>
+          <Box
+            maxWidth={theme.typography.pxToRem(942)}
+            mt={[6, 8.75]}
+            mx={[-1, 'inherit']}
+          >
             <StepCardsWithDescription
               openModal={openModal}
               stepCards={content?.stepCardSection?.stepCards}
@@ -174,7 +180,9 @@ const CreateCreditClass: React.FC = () => {
               descriptionRaw={content?.creditTypeSection?.descriptionTopRaw}
             />
             <OverviewWrap>
-              <OverviewCards cards={content?.creditTypeSection?.institutionalCards} />
+              <OverviewCards
+                cards={content?.creditTypeSection?.institutionalCards}
+              />
             </OverviewWrap>
           </Box>
           <Box mt={[15, 22]} pb={[4, 8]}>
@@ -183,7 +191,9 @@ const CreateCreditClass: React.FC = () => {
               descriptionRaw={content?.creditTypeSection?.descriptionBottomRaw}
             />
             <OverviewWrap>
-              <OverviewCards cards={content?.creditTypeSection?.flexCreditCards} />
+              <OverviewCards
+                cards={content?.creditTypeSection?.flexCreditCards}
+              />
             </OverviewWrap>
           </Box>
         </Section>
@@ -210,11 +220,18 @@ const CreateCreditClass: React.FC = () => {
           <ResponsiveSlider
             infinite={false}
             itemWidth="90%"
-            classes={{ title: styles.resourcesTitle, root: styles.resourcesRoot }}
+            classes={{
+              title: styles.resourcesTitle,
+              root: styles.resourcesRoot,
+            }}
             padding={theme.spacing(2.5)}
             title="Resources"
             titleVariant="h2"
-            arrows={content?.resources ? content.resources.length > resourceCardsShown : false}
+            arrows={
+              content?.resources
+                ? content.resources.length > resourceCardsShown
+                : false
+            }
             slidesToShow={resourceCardsShown}
             items={content?.resources?.map(resource => (
               <WrappedResourcesCard resource={resource} />
@@ -230,12 +247,16 @@ const CreateCreditClass: React.FC = () => {
         bottomBanner={content?.bottomBanner}
         openModal={openModal}
       />
-      <FixedFooter justify="flex-end">
+      <FixedFooter justifyContent="flex-end">
         <ContainedButton onClick={() => openModal(content?.footerLink)}>
           Submit a Credit Class
         </ContainedButton>
       </FixedFooter>
-      <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        className={styles.modal}
+      >
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>

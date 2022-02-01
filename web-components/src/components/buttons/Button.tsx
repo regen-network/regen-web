@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button as MuiButton } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Button as MuiButton } from '@mui/material';
 import cx from 'clsx';
 
 const useStyles = makeStyles(theme => ({

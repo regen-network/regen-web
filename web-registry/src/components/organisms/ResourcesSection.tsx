@@ -13,13 +13,21 @@ interface ProjectImpactProps {
   };
 }
 
-function ResourcesSection({ resources, title, classes }: ProjectImpactProps): JSX.Element {
+function ResourcesSection({
+  resources,
+  title,
+  classes,
+}: ProjectImpactProps): JSX.Element {
   return (
     <div>
       <SliderSection
         classes={classes}
         title={title || 'Resources'}
-        items={resources?.map(resource => <WrappedResourcesCard resource={resource} />) || []}
+        items={
+          resources?.map(resource => (
+            <WrappedResourcesCard resource={resource} />
+          )) || []
+        }
       />
     </div>
   );

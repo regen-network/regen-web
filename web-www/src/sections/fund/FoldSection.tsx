@@ -1,9 +1,10 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 
-import Section from 'web-components/src/components/section';
-import TitleDescription from 'web-components/src/components/title-description';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/lib/components/section';
+import TitleDescription from 'web-components/lib/components/title-description';
 import { FundFoldSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>(theme => ({

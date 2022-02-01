@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, useTheme } from '@material-ui/core';
+import { makeStyles, useTheme } from '@mui/styles';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
 
-import Section from 'web-components/src/components/section';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { MarketingDescription } from '../../components/Description';
 import { CommunityCollectiveSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -18,7 +19,7 @@ const useStyles = makeStyles<Theme>(theme => ({
     [theme.breakpoints.up('xs')]: {
       paddingBottom: theme.spacing(22.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17.75),
     },
   },
@@ -26,7 +27,7 @@ const useStyles = makeStyles<Theme>(theme => ({
     width: '80%',
     maxWidth: theme.spacing(236.5),
     marginBottom: theme.spacing(4),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '100%',
     },
   },

@@ -2,17 +2,18 @@ import React from 'react';
 import SanityImage from 'gatsby-plugin-sanity-image';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
-import Section from 'web-components/src/components/section';
+import Section from 'web-components/lib/components/section';
 import { HomeValuesSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(14),
     },
     [theme.breakpoints.up('sm')]: {
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(9),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(6.25),
     },
   },

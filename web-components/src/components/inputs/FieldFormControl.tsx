@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldProps, getIn } from 'formik';
-import { Theme, makeStyles, FormHelperText, FormControl } from '@material-ui/core';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { FormHelperText, FormControl } from '@mui/material';
 
 import FormLabel from './FormLabel';
 
@@ -39,7 +40,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   }),
@@ -47,7 +48,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(3),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(2),
     },
   },
@@ -83,7 +84,12 @@ export default function FieldFormControl({
   }
 
   const hasError = fieldTouched && errorMessage;
-  const styles = useStyles({ optional, disabled, description, error: hasError });
+  const styles = useStyles({
+    optional,
+    disabled,
+    description,
+    error: hasError,
+  });
   return (
     <FormControl className={className} fullWidth>
       <FormLabel
@@ -97,7 +103,9 @@ export default function FieldFormControl({
       />
       {children({ handleChange, handleBlur })}
 
-      {hasError && <FormHelperText className={styles.error}>{errorMessage}</FormHelperText>}
+      {hasError && (
+        <FormHelperText className={styles.error}>{errorMessage}</FormHelperText>
+      )}
     </FormControl>
   );
 }

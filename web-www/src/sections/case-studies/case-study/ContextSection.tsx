@@ -1,11 +1,12 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -22,14 +23,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       paddingLeft: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(10),
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(22.5),
       paddingBottom: theme.spacing(12.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: 0,
       paddingLeft: 0,
     },
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     lineHeight: '150%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
     },
-    [theme.breakpoints.between('md', 'xl')]: {
+    [theme.breakpoints.up('md')]: {
       maxWidth: theme.spacing(170),
     },
     [theme.breakpoints.up('xl')]: {
@@ -90,7 +91,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   item: {
     counterIncrement: 'challenge-counter',
     marginBottom: 0,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3),
     },
     [theme.breakpoints.up('sm')]: {
@@ -106,7 +107,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(5.5),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(4.5),
       },
     },

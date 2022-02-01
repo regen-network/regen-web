@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import MuiInputLabel, { InputLabelProps } from '@material-ui/core/InputLabel';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import MuiInputLabel, { InputLabelProps } from '@mui/material/InputLabel';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -10,7 +10,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },

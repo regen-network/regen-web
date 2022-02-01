@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Avatar } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Avatar } from '@mui/material';
 import { BroadcastTxResponse } from '@cosmjs/stargate';
 import cx from 'clsx';
 
@@ -8,6 +8,8 @@ import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import { Label } from 'web-components/lib/components/label';
+import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
+import CowIllustration from '../../assets/cow-illustration.png';
 
 interface Props extends RegenModalProps {
   data?: BroadcastTxResponse;
@@ -25,12 +27,12 @@ const useStyles = makeStyles(theme => ({
       paddingBottom: theme.spacing(20),
       height: theme.spacing(139),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(8, 4),
     },
   },
   cows: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(20),
     },
   },
@@ -38,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       lineHeight: theme.typography.pxToRem(44.8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: theme.typography.pxToRem(34.8),
     },
   },
@@ -50,7 +52,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(44.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(57.5),
     },
   },
@@ -101,17 +103,17 @@ const useStyles = makeStyles(theme => ({
       alignItems: 'center',
       height: theme.typography.pxToRem(54),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
   verticalSpacing: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(6),
     },
   },
   hideIfMobile: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -129,22 +131,29 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
     <Modal className={styles.root} open={open} onClose={onClose}>
       <img
         className={cx(styles.cows, styles.verticalSpacing)}
-        src={require('../../assets/cow-illustration.png')}
+        src={CowIllustration}
         alt="cows celebrating"
       />
-      <Title className={cx(styles.title, styles.verticalSpacing)} align="center" variant="h3">
+      <Title
+        className={cx(styles.title, styles.verticalSpacing)}
+        align="center"
+        variant="h3"
+      >
         Congrats! Your purchase was successful.
       </Title>
       <Card className={cx(styles.card, styles.verticalSpacing)}>
         <Avatar className={styles.iconContainer}>
           <img
             className={styles.icon}
-            src={require(`../../assets/svgs/carbon-credit-fruit.svg`)}
+            src={CarbonCreditFruit}
             alt="eco-credit"
           />
         </Avatar>
         <div className={styles.creditDetails}>
-          <Title className={(styles.creditCount, styles.hideIfDesktop)} variant="h3">
+          <Title
+            className={(styles.creditCount, styles.hideIfDesktop)}
+            variant="h3"
+          >
             500
           </Title>
           <Title variant="h6">Regen - Ecocredits</Title>
@@ -163,7 +172,11 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
             </a>
           </div>
         </div>
-        <Title className={cx(styles.creditCount, styles.hideIfMobile)} align="center" variant="h3">
+        <Title
+          className={cx(styles.creditCount, styles.hideIfMobile)}
+          align="center"
+          variant="h3"
+        >
           500
         </Title>
       </Card>

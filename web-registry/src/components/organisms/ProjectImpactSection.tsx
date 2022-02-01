@@ -1,11 +1,12 @@
 import React, { useCallback, useRef } from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import LazyLoad from 'react-lazyload';
 import Slider from 'react-slick';
 import cx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpactCard';
 import Section from 'web-components/lib/components/section';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(21.5),
       paddingBottom: theme.spacing(27.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.5),
     },
   },
@@ -62,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       margin: theme.spacing(0, 1.875),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(0, 1.875),
       '&:first-child': {
         paddingLeft: theme.spacing(4),
@@ -75,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   buttons: {
     paddingTop: theme.spacing(0.25),
     width: '50%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3.75),
       paddingBottom: theme.spacing(10),
     },
@@ -85,11 +86,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function ProjectImpactSection({ data, title, classes }: ProjectImpactProps): JSX.Element {
+function ProjectImpactSection({
+  data,
+  title,
+  classes,
+}: ProjectImpactProps): JSX.Element {
   const styles = useStyles();
   const theme: Theme = useTheme();
-  const isMobile: boolean = useMediaQuery(theme.breakpoints.down('xs'));
-  const isTablet: boolean = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet: boolean = useMediaQuery(
+    theme.breakpoints.between('xs', 'tablet'),
+  );
   const slidesCount: number = isTablet ? 2 : 3;
 
   const settings = {
@@ -120,14 +127,21 @@ function ProjectImpactSection({ data, title, classes }: ProjectImpactProps): JSX
     <>
       {impact && (
         <Section
-          classes={{ root: cx(styles.root, classes?.root), title: styles.title }}
+          classes={{
+            root: cx(styles.root, classes?.root),
+            title: styles.title,
+          }}
           title={title || 'Impact'}
           titleVariant="h2"
           titleAlign="left"
           topRight={
             <>
               {!isMobile && impact.length > slidesCount && (
-                <Grid container justify="flex-end" className={styles.buttons}>
+                <Grid
+                  container
+                  justifyContent="flex-end"
+                  className={styles.buttons}
+                >
                   <PrevNextButton direction="prev" onClick={slickPrev} />
                   <PrevNextButton direction="next" onClick={slickNext} />
                 </Grid>
@@ -138,30 +152,37 @@ function ProjectImpactSection({ data, title, classes }: ProjectImpactProps): JSX
           <LazyLoad offset={300}>
             {isMobile ? (
               <div className={styles.swipe}>
-                {impact.map(({ name, descriptionRaw, image }, index: number) => (
-                  <div className={styles.item} key={index}>
-                    <ProjectImpactCard
-                      name={name}
-                      description={<BlockContent content={descriptionRaw} />}
-                      imgSrc={getSanityImgSrc(image)}
-                      monitored={index === 0}
-                    />
-                  </div>
-                ))}
+                {impact.map(
+                  ({ name, descriptionRaw, image }, index: number) => (
+                    <div className={styles.item} key={index}>
+                      <ProjectImpactCard
+                        name={name}
+                        description={<BlockContent content={descriptionRaw} />}
+                        imgSrc={getSanityImgSrc(image)}
+                        monitored={index === 0}
+                      />
+                    </div>
+                  ),
+                )}
               </div>
             ) : (
               <Slider {...settings} ref={slider} className={styles.slider}>
-                {impact.map(({ name, descriptionRaw, image, standard }, index: number) => (
-                  <ProjectImpactCard
-                    key={index}
-                    className={styles.item}
-                    name={name}
-                    description={<BlockContent content={descriptionRaw} />}
-                    imgSrc={getSanityImgSrc(image)}
-                    standard={getSanityImgSrc(standard)}
-                    monitored={index === 0}
-                  />
-                ))}
+                {impact.map(
+                  (
+                    { name, descriptionRaw, image, standard },
+                    index: number,
+                  ) => (
+                    <ProjectImpactCard
+                      key={index}
+                      className={styles.item}
+                      name={name}
+                      description={<BlockContent content={descriptionRaw} />}
+                      imgSrc={getSanityImgSrc(image)}
+                      standard={getSanityImgSrc(standard)}
+                      monitored={index === 0}
+                    />
+                  ),
+                )}
               </Slider>
             )}
           </LazyLoad>

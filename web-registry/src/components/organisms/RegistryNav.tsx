@@ -1,9 +1,10 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
+import { useTheme } from '@mui/styles';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Header, { HeaderColors } from 'web-components/lib/components/header';
 import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
 import { NavLink } from 'web-components/lib/components/header/NavLink';
@@ -20,10 +21,10 @@ import { ReactComponent as LandStewardsIcon } from '../../assets/svgs/land-stewa
 import { useMoreProjectsQuery } from '../../generated/graphql';
 
 const RegistryNav: React.FC = () => {
-  const history = useHistory();
-  const { pathname } = history.location;
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
   const { data: projectsData } = useMoreProjectsQuery();
 
@@ -74,7 +75,11 @@ const RegistryNav: React.FC = () => {
 
   const programHowToItems: HeaderDropdownItemProps[] = [
     // { href: '/create-credit-class', title: 'Create a Credit Class', linkComponent: RegistryNavLink },
-    { href: '/create-methodology', title: 'Create a Methodology', linkComponent: RegistryNavLink },
+    {
+      href: '/create-methodology',
+      title: 'Create a Methodology',
+      linkComponent: RegistryNavLink,
+    },
     {
       href: '/methodology-review-process',
       title: 'Methodology Review Process',
@@ -86,14 +91,17 @@ const RegistryNav: React.FC = () => {
 
   /** for pages where we don't want to render full `name` */
   const titleAlias: { [title: string]: string } = {
-    'The Kasigau Corridor REDD Project - Phase II The Community Ranches': 'Kasigau Corridor',
+    'The Kasigau Corridor REDD Project - Phase II The Community Ranches':
+      'Kasigau Corridor',
   };
 
   const menuItems: HeaderMenuItem[] = [
     {
       title: 'Projects',
       dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
-        title: titleAlias[p?.metadata?.['http://schema.org/name']] || p?.metadata?.['http://schema.org/name'],
+        title:
+          titleAlias[p?.metadata?.['http://schema.org/name']] ||
+          p?.metadata?.['http://schema.org/name'],
         href: `/projects/${p?.handle}`,
         linkComponent: RegistryNavLink,
       })),
@@ -112,12 +120,22 @@ const RegistryNav: React.FC = () => {
     {
       title: 'Methodologies',
       dropdownItems: methodologyItems,
-      render: () => <HeaderDropdownColumn items={methodologyItems} linkComponent={RegistryNavLink} />,
+      render: () => (
+        <HeaderDropdownColumn
+          items={methodologyItems}
+          linkComponent={RegistryNavLink}
+        />
+      ),
     },
     {
       title: 'Stakeholders',
       dropdownItems: stakeholderItems,
-      render: () => <HeaderDropdownColumn items={stakeholderItems} linkComponent={RegistryNavLink} />,
+      render: () => (
+        <HeaderDropdownColumn
+          items={stakeholderItems}
+          linkComponent={RegistryNavLink}
+        />
+      ),
     },
     {
       title: 'Program',
@@ -132,7 +150,11 @@ const RegistryNav: React.FC = () => {
             />
           </Box>
           <Box display="flex" flexDirection="column">
-            <HeaderDropdownColumn title="How Tos" items={programHowToItems} linkComponent={RegistryNavLink} />
+            <HeaderDropdownColumn
+              title="How Tos"
+              items={programHowToItems}
+              linkComponent={RegistryNavLink}
+            />
           </Box>
         </Box>
       ),
@@ -167,9 +189,13 @@ const RegistryNav: React.FC = () => {
       isAuthenticated={isAuthenticated}
       onLogin={() => loginWithRedirect({ redirectUri: window.location.origin })}
       onLogout={() => logout({ returnTo: window.location.origin })}
-      onSignup={() => history.push('/signup')}
+      onSignup={() => navigate('/signup')}
       menuItems={menuItems}
-      color={headerColors[pathname] ? headerColors[pathname] : theme.palette.primary.light}
+      color={
+        headerColors[pathname]
+          ? headerColors[pathname]
+          : theme.palette.primary.light
+      }
       transparent={isTransparent}
       absolute={isTransparent}
       // borderBottom={!isTransparent}

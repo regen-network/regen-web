@@ -1,6 +1,6 @@
 import React from 'react';
-import { TablePagination as MuiTablePagination, Grid } from '@material-ui/core';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { TablePagination as MuiTablePagination, Grid } from '@mui/material';
+import { makeStyles, withStyles } from '@mui/styles';
 import PrevNextButton from '../buttons/PrevNextButton';
 
 const useStylesAction = makeStyles(theme => ({
@@ -18,17 +18,30 @@ const TablePaginationActions = (props: any): any => {
   const classes = useStylesAction();
   const { count, page, rowsPerPage, onChangePage } = props;
 
-  const handleBackButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
+  const handleBackButtonClick = (
+    event: React.MouseEvent<HTMLDivElement>,
+  ): void => {
     onChangePage(event, page - 1);
   };
 
-  const handleNextButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
+  const handleNextButtonClick = (
+    event: React.MouseEvent<HTMLDivElement>,
+  ): void => {
     onChangePage(event, page + 1);
   };
 
   return (
-    <Grid container justify="flex-end" className={classes.buttonsWrapper}>
-      <PrevNextButton dark direction="prev" onClick={handleBackButtonClick} disabled={page === 0} />
+    <Grid
+      container
+      justifyContent="flex-end"
+      className={classes.buttonsWrapper}
+    >
+      <PrevNextButton
+        dark
+        direction="prev"
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+      />
       <PrevNextButton
         dark
         direction="next"
@@ -100,8 +113,8 @@ export const TablePagination: React.FC<TablePaginationProps> = props => {
       count={props.count}
       rowsPerPage={props.rowsPerPage}
       page={props.page}
-      onChangePage={props.onChangePage}
-      onChangeRowsPerPage={props.onChangeRowsPerPage}
+      onPageChange={props.onChangePage}
+      onRowsPerPageChange={props.onChangeRowsPerPage}
       ActionsComponent={TablePaginationActions}
     />
   );

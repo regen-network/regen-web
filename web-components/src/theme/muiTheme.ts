@@ -1,8 +1,6 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
-import { MuiPickersOverrides } from '@material-ui/pickers/typings/overrides';
+import { createTheme } from '@mui/material/styles';
 
-declare module '@material-ui/core/styles/createBreakpoints' {
+declare module '@mui/material/styles' {
   interface BreakpointOverrides {
     xs: true;
     sm: true;
@@ -13,7 +11,7 @@ declare module '@material-ui/core/styles/createBreakpoints' {
   }
 }
 
-const defaultTheme = createMuiTheme({
+const defaultTheme = createTheme({
   breakpoints: {
     values: {
       xs: 0,
@@ -26,7 +24,7 @@ const defaultTheme = createMuiTheme({
   },
 });
 
-const theme = createMuiTheme({
+const regenTheme = createTheme({
   palette: {
     primary: {
       main: '#fff',
@@ -61,14 +59,14 @@ const theme = createMuiTheme({
     // contrastThreshold: 3,
     // tonalOffset: 0.2,
   },
-  spacing: factor => `${0.25 * factor}rem`,
+  spacing: (factor: number) => `${0.25 * factor}rem`,
   typography: {
     fontFamily: ['"Lato"', '-apple-system', 'sans-serif'].join(','),
     h1: {
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '3rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '2rem',
       },
       fontFamily: ['"Muli"', '-apple-system', 'sans-serif'].join(','),
@@ -77,7 +75,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2.375rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '1.5rem',
       },
     },
@@ -85,7 +83,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '1.5rem', // possible override: 1.3125rem
       },
     },
@@ -93,7 +91,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '1.5rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '1.3125rem', // possible override: 1.125rem
       },
     },
@@ -101,7 +99,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '1.3125rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '1.125rem',
       },
     },
@@ -112,7 +110,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2.375rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '2rem',
       },
     },
@@ -120,7 +118,7 @@ const theme = createMuiTheme({
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '1rem',
       },
-      [defaultTheme.breakpoints.down('xs')]: {
+      [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '0.875rem',
       },
     },
@@ -128,7 +126,9 @@ const theme = createMuiTheme({
       fontSize: '0.875rem',
     },
     overline: {
-      fontFamily: ['PT Mono', '"Lato"', '-apple-system', 'sans-serif'].join(','),
+      fontFamily: ['PT Mono', '"Lato"', '-apple-system', 'sans-serif'].join(
+        ',',
+      ),
     },
   },
   breakpoints: defaultTheme.breakpoints,
@@ -159,69 +159,31 @@ const theme = createMuiTheme({
     defaultTheme.shadows[23],
     defaultTheme.shadows[24],
   ],
-  props: {
+  components: {
     MuiTypography: {
-      variantMapping: {
-        h1: 'h1',
-        h2: 'h2',
-        h3: 'h3',
-        h4: 'h4',
-        h5: 'h5',
-        h6: 'h6',
-        subtitle1: 'h2',
-        subtitle2: 'h2',
-        body1: 'p',
-        body2: 'p',
+      defaultProps: {
+        variantMapping: {
+          h1: 'h1',
+          h2: 'h2',
+          h3: 'h3',
+          h4: 'h4',
+          h5: 'h5',
+          h6: 'h6',
+          subtitle1: 'h2',
+          subtitle2: 'h2',
+          body1: 'p',
+          body2: 'p',
+        },
+      },
+    },
+    MuiLink: {
+      defaultProps: {
+        underline: 'none',
       },
     },
   },
 });
 
-const muiPickersOverrides: MuiPickersOverrides = {
-  // see: https://github1s.com/mui-org/material-ui-pickers/blob/HEAD/lib/src/typings/overrides.ts
-  MuiPickersDatePickerRoot: {
-    toolbar: {
-      backgroundColor: theme.palette.secondary.main,
-      '& .MuiPickersToolbarText-toolbarTxt': {
-        color: theme.palette.secondary.contrastText,
-      },
-      '& .MuiPickersToolbarText-toolbarBtnSelected': {
-        color: theme.palette.primary.main,
-      },
-    },
-  },
-  MuiPickersToolbar: {
-    toolbar: {
-      backgroundColor: theme.palette.secondary.main,
-    },
-  },
-  MuiPickersYear: {
-    yearSelected: {
-      color: theme.palette.secondary.main,
-      fontSize: theme.spacing(7),
-    },
-  },
-  MuiPickersMonth: {
-    root: {
-      '&:focus': {
-        color: theme.palette.secondary.main,
-      },
-    },
-    monthSelected: {
-      color: theme.palette.secondary.main,
-      fontSize: theme.spacing(7),
-    },
-  },
-};
-
-const themeObject: ThemeOptions = {
-  ...theme,
-  overrides: {
-    ...muiPickersOverrides,
-  },
-};
-
-const regenTheme = createMuiTheme(themeObject);
 type Theme = typeof regenTheme;
 
 export { Theme }; // avoid having to do manual type definitions for added breakpoint values by importing here instead of MUI

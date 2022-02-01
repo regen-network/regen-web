@@ -1,7 +1,8 @@
 import React from 'react';
-import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
+import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
@@ -9,12 +10,12 @@ import { PresskitFeaturedSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(8),
     },
   },
   slider: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(7.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       display: 'flex',
       '& .slick-slide': {
         height: 'inherit',
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
           paddingRight: theme.spacing(4.125),
           '&:last-child': {
             paddingRight: 0,

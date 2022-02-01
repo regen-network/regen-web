@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 import Card from './Card';
 import Title from '../title';
 import StaticMap from '../map/StaticMap';
@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   title: {
     textTransform: 'uppercase',
     marginBottom: theme.spacing(2.75),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
   },
   container: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexWrap: 'wrap-reverse',
       padding: theme.spacing(6, 4.5),
     },
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
     '& li': {
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         top: theme.spacing(2),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         top: theme.spacing(1.25),
       },
     },
@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(8.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(4.5),
     },
   },
@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: '100%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(51),
     },
   },
@@ -115,7 +115,10 @@ export default function GlanceCard({
         <Grid xs={12} sm={5} item>
           <div className={classes.mapWrapper}>
             {geojson && isGISFile ? (
-              <StaticMap geojson={geojson} token={process.env.REACT_APP_MAPBOX_TOKEN} />
+              <StaticMap
+                geojson={geojson}
+                token={process.env.REACT_APP_MAPBOX_TOKEN}
+              />
             ) : (
               imgSrc && (
                 <Image

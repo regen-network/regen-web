@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Formik, Form, Field } from 'formik';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
 
 import Description from '../description';
 import TextField from '../inputs/TextField';
@@ -19,7 +19,13 @@ import {
   validateEmail,
   invalidEmailMessage,
 } from '../inputs/validation';
-import { errors, SignupCode, LoginCode, getErrorMessage } from './errors';
+import {
+  errors,
+  SignupCode,
+  LoginCode,
+  getErrorMessage,
+  isAuth0Error,
+} from './errors';
 
 interface LoginFormProps {
   signupFromLogin?: string; // link to loginFromSignup page
@@ -42,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(8.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(8.5),
     },
   },
@@ -51,7 +57,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
     '& a': {
@@ -62,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -75,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(3.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(1.25),
     },
   },
@@ -84,7 +90,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(8),
       marginRight: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(6.25),
       marginRight: theme.spacing(2.5),
     },
@@ -93,7 +99,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(7.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(4.75),
     },
   },
@@ -101,7 +107,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(11),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(6),
     },
   },
@@ -155,32 +161,52 @@ const LoginForm: React.FC<LoginFormProps> = ({
           await submit(values);
           setSubmitting(false);
         } catch (e) {
-          const code: LoginCode | SignupCode | undefined = e.code;
-          let errorMessage: string = code && code in errors ? errors[code] : e.toString();
-          if (e.description === 'Wrong email or password.') {
-            errorMessage = errors.invalid_user_password;
+          if (isAuth0Error(e)) {
+            const code = e.code as LoginCode | SignupCode | undefined;
+            let errorMessage: string =
+              code && code in errors ? errors[code] : e.toString();
+            if (e.description === 'Wrong email or password.') {
+              errorMessage = errors.invalid_user_password;
+            }
+            setStatus(errorMessage);
+          } else if (e instanceof Error) {
+            setStatus(getErrorMessage(e.message));
           }
-          errorMessage = getErrorMessage(e.message);
-          setStatus(errorMessage);
           setSubmitting(false);
         }
       }}
     >
-      {({ values, errors, submitForm, isSubmitting, isValid, submitCount, setFieldValue, status }) => {
+      {({
+        values,
+        errors,
+        submitForm,
+        isSubmitting,
+        isValid,
+        submitCount,
+        setFieldValue,
+        status,
+      }) => {
         return (
           <div>
             <Form>
               <OnBoardingCard>
                 {loginFromSignup ? (
                   <Description className={classes.description}>
-                    If you've already signed up, <Link onClick={loginFromSignup}>log in here</Link>.
+                    If you've already signed up,{' '}
+                    <Link onClick={loginFromSignup}>log in here</Link>.
                   </Description>
                 ) : (
                   <Description className={classes.description}>
-                    Don't have an account? <Link href={signupFromLogin}>Sign up</Link>.
+                    Don't have an account?{' '}
+                    <Link href={signupFromLogin}>Sign up</Link>.
                   </Description>
                 )}
-                <Field component={TextField} type="email" label="Email address" name="email" />
+                <Field
+                  component={TextField}
+                  type="email"
+                  label="Email address"
+                  name="email"
+                />
                 <Field
                   component={PasswordField}
                   className={classes.textField}
@@ -188,7 +214,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
                   loginFromSignup={loginFromSignup}
                 />
                 {!loginFromSignup && (
-                  <Description className={classes.forgotPassword}>Forgot password</Description>
+                  <Description className={classes.forgotPassword}>
+                    Forgot password
+                  </Description>
                 )}
               </OnBoardingCard>
               <div className={classes.checkboxes}>
@@ -200,7 +228,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
                       name="updates"
                       label={
                         <Description className={classes.checkboxLabel}>
-                          Please sign me up for the Regen news and updates (unsubscribe anytime)
+                          Please sign me up for the Regen news and updates
+                          (unsubscribe anytime)
                         </Description>
                       }
                     />
@@ -210,7 +239,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
                       name="privacy"
                       label={
                         <Description className={classes.checkboxLabel}>
-                          I agree to the Regen Network <Link href={privacyLink}>Privacy Policy</Link> and{' '}
+                          I agree to the Regen Network{' '}
+                          <Link href={privacyLink}>Privacy Policy</Link> and{' '}
                           <Link href={termsLink}>Terms of Service</Link>
                         </Description>
                       }
@@ -218,7 +248,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                   </>
                 )}
               </div>
-              <Grid container justify="flex-end">
+              <Grid container justifyContent="flex-end">
                 <ContainedButton
                   onClick={submitForm}
                   className={classes.button}
@@ -228,7 +258,9 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 </ContainedButton>
               </Grid>
             </Form>
-            {submitCount > 0 && !isSubmitting && status && <ErrorBanner text={status} />}
+            {submitCount > 0 && !isSubmitting && status && (
+              <ErrorBanner text={status} />
+            )}
           </div>
         );
       }}

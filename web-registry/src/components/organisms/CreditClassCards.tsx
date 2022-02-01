@@ -1,22 +1,31 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Grid from '@mui/material/Grid';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { CreditClass } from '../../mocks';
-import { getImgSrc } from '../../lib/imgSrc';
-import { CreditClass as CreditClassContent, Maybe } from '../../generated/sanity-graphql';
+import {
+  CreditClass as CreditClassContent,
+  Maybe,
+} from '../../generated/sanity-graphql';
 
 type Props = {
   btnText: string;
   creditClasses: CreditClass[];
   creditClassesContent?: Maybe<Array<CreditClassContent>>;
-  justify?: 'center' | 'space-around' | 'space-between' | 'space-evenly' | 'flex-end' | 'flex-start';
+  justifyContent?:
+    | 'center'
+    | 'space-around'
+    | 'space-between'
+    | 'space-evenly'
+    | 'flex-end'
+    | 'flex-start';
   classes?: {
     root?: string;
     card?: string;
@@ -25,32 +34,37 @@ type Props = {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: 'unset',
     },
   },
   card: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(3, 0),
     },
   },
 }));
 
-const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...props }) => {
-  const history = useHistory();
+const CreditClassCards: React.FC<Props> = ({
+  justifyContent = 'center',
+  ...props
+}) => {
+  const navigate = useNavigate();
   const styles = useStyles();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const theme = useTheme<Theme>();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <Grid
       container
-      justify={justify}
+      justifyContent={justifyContent}
       className={clsx(styles.root, props.classes && props.classes.root)}
       spacing={isMobile ? 0 : 5}
     >
       {props.creditClasses.map((c, i) => {
-        const creditClassContent = props.creditClassesContent?.find(creditClass => creditClass.path === c.id);
+        const creditClassContent = props.creditClassesContent?.find(
+          creditClass => creditClass.path === c.id,
+        );
         return (
           <Grid
             item
@@ -63,12 +77,18 @@ const CreditClassCards: React.FC<Props> = ({ justify = 'center', ...props }) => 
             <ImageActionCard
               key={i}
               btnText={props.btnText}
-              description={<BlockContent content={creditClassContent?.shortDescriptionRaw} />}
-              imgSrc={getImgSrc(c.imgSrc)}
+              description={
+                <BlockContent
+                  content={creditClassContent?.shortDescriptionRaw}
+                />
+              }
+              imgSrc={c.imgSrc}
               onClick={() => {
-                const path = creditClassContent?.path && `/credit-classes/${creditClassContent?.path}`;
+                const path =
+                  creditClassContent?.path &&
+                  `/credit-classes/${creditClassContent?.path}`;
                 if (path) {
-                  history.push(path);
+                  navigate(path);
                 }
               }}
               title={<BlockContent content={creditClassContent?.nameRaw} />}

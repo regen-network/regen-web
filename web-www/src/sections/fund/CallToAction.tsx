@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, Grid, Avatar } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Link, Grid, Avatar } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
 import cx from 'clsx';
+import SanityImage from 'gatsby-plugin-sanity-image';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
-import Section from 'web-components/src/components/section';
-import Modal from 'web-components/src/components/modal';
+import Section from 'web-components/lib/components/section';
+import Modal from 'web-components/lib/components/modal';
 import { FundCallToActionQuery } from '../../generated/graphql';
-import SanityImage from 'gatsby-plugin-sanity-image';
 import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles<Theme>(theme => ({
@@ -31,7 +33,7 @@ const useStyles = makeStyles<Theme>(theme => ({
       padding: theme.spacing(8),
       height: '100%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(8, 4),
     },
   },
@@ -46,7 +48,7 @@ const useStyles = makeStyles<Theme>(theme => ({
   },
   title: {
     lineHeight: '34.8px',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(24),
     },
   },
@@ -54,7 +56,7 @@ const useStyles = makeStyles<Theme>(theme => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(22),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
     },
   },

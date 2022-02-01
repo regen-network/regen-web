@@ -1,14 +1,15 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import { Formik, Form, Field } from 'formik';
 
-import SEO from '../components/seo';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import Section from 'web-components/lib/components/section';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import { MediaPageQuery, SanityMedia } from '../generated/graphql';
+import SEO from '../components/seo';
 
 const useStyles = makeStyles((theme: Theme) => ({
   background: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(42.25),
       paddingBottom: theme.spacing(40.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(22.5),
       paddingTop: theme.spacing(7.5),
     },
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(13.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(7.5),
       fontSize: theme.spacing(8),
     },
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingRight: theme.spacing(5.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: theme.spacing(3),
     },
   },

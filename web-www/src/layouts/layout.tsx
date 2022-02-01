@@ -6,10 +6,11 @@
  */
 
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
 import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { MarketingNav } from '../components/MarketingNav';
 
@@ -17,7 +18,7 @@ interface Props {
   location: Location;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     background: theme.palette.primary.main,
   },

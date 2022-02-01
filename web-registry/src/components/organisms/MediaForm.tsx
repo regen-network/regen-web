@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, useMediaQuery, useTheme, Grid, FormHelperText } from '@material-ui/core';
+import { makeStyles, useTheme } from '@mui/styles';
+import { useMediaQuery, Grid, FormHelperText } from '@mui/material';
 import { Formik, Form, Field, getIn } from 'formik';
 import { useParams } from 'react-router-dom';
 
@@ -60,7 +61,7 @@ function getURLListInitialValue(value?: urlList): urlList {
   );
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   storyCard: {
     paddingBottom: 0,
   },
@@ -72,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(12),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(10),
     },
   },
@@ -86,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -95,7 +96,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.typography.pxToRem(290),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.typography.pxToRem(210),
     },
   },
@@ -104,7 +105,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.typography.pxToRem(169),
       flex: 1,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.typography.pxToRem(139),
     },
   },
@@ -170,11 +171,14 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   errors[path] = { '@value': requiredMessage };
                 } else {
                   // for gallery photos, display general error message below "Gallery Photos" section
-                  errors['http://regen.network/galleryPhotos'] = 'You must add 4 photos';
+                  errors['http://regen.network/galleryPhotos'] =
+                    'You must add 4 photos';
                 }
               } else {
                 // or constraint not satisfied on regen:landStewardPhoto/regen:videoURL
-                errors['http://regen.network/landStewardPhoto'] = { '@value': requiredMessage };
+                errors['http://regen.network/landStewardPhoto'] = {
+                  '@value': requiredMessage,
+                };
               }
             }
           }
@@ -228,7 +232,12 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                       />
                     </Grid>
                     {isTabletOrLarger ? (
-                      <Grid item sm={3} className={styles.centerImages} direction="column">
+                      <Grid
+                        item
+                        sm={3}
+                        className={styles.centerImages}
+                        direction="column"
+                      >
                         <Grid item sm={12} className={styles.centerSmall}>
                           <Field
                             classes={{ button: styles.smallButton }}
@@ -256,7 +265,12 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                       </Grid>
                     ) : (
                       <>
-                        <Grid item xs={6} sm={12} className={styles.galleryImage}>
+                        <Grid
+                          item
+                          xs={6}
+                          sm={12}
+                          className={styles.galleryImage}
+                        >
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
@@ -268,7 +282,12 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             isDrop
                           />
                         </Grid>
-                        <Grid item xs={6} sm={12} className={styles.galleryImage}>
+                        <Grid
+                          item
+                          xs={6}
+                          sm={12}
+                          className={styles.galleryImage}
+                        >
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
@@ -297,10 +316,22 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     </Grid>
                   </Grid>
                   {errors?.['http://regen.network/galleryPhotos'] &&
-                    (getIn(touched, `['http://regen.network/galleryPhotos'].@list[0].@value`) ||
-                      getIn(touched, `['http://regen.network/galleryPhotos'].@list[1].@value`) ||
-                      getIn(touched, `['http://regen.network/galleryPhotos'].@list[2].@value`) ||
-                      getIn(touched, `['http://regen.network/galleryPhotos'].@list[3].@value`)) && (
+                    (getIn(
+                      touched,
+                      `['http://regen.network/galleryPhotos'].@list[0].@value`,
+                    ) ||
+                      getIn(
+                        touched,
+                        `['http://regen.network/galleryPhotos'].@list[1].@value`,
+                      ) ||
+                      getIn(
+                        touched,
+                        `['http://regen.network/galleryPhotos'].@list[2].@value`,
+                      ) ||
+                      getIn(
+                        touched,
+                        `['http://regen.network/galleryPhotos'].@list[3].@value`,
+                      )) && (
                       <FormHelperText className={styles.error}>
                         {errors?.['http://regen.network/galleryPhotos']}
                       </FormHelperText>
@@ -330,7 +361,9 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
-                saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
+                saveDisabled={
+                  !isValid || isSubmitting || !Object.keys(touched).length
+                }
               />
             </Form>
           );

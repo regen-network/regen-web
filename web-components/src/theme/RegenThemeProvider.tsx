@@ -1,8 +1,18 @@
-import { ThemeProvider } from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
+import {
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+} from '@mui/material/styles';
 import * as React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+
 import theme from './muiTheme';
 import 'web-components/src/theme/index.css';
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 interface Props {
   readonly injectFonts?: boolean;
@@ -10,7 +20,11 @@ interface Props {
   readonly children: React.ReactNode;
 }
 
-const RegenThemeProvider = ({ injectFonts = false, injectStyles, children }: Props): JSX.Element => {
+const RegenThemeProvider = ({
+  injectFonts = false,
+  injectStyles,
+  children,
+}: Props): JSX.Element => {
   if (injectStyles) {
     injectStyles();
   }
@@ -20,10 +34,12 @@ const RegenThemeProvider = ({ injectFonts = false, injectStyles, children }: Pro
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

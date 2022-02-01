@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Grid from '@mui/material/Grid';
 // import LandManagementActionsItem, { ItemProps } from './Item';
 import Slider from 'react-slick';
 import PrevNextButton from '../buttons/PrevNextButton';
@@ -19,12 +19,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   item: {
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(3.5)} ${theme.spacing(2.5)} ${theme.spacing(2.5)}`,
+      padding: `${theme.spacing(3.5)} ${theme.spacing(2.5)} ${theme.spacing(
+        2.5,
+      )}`,
     },
   },
   buttons: {
     paddingTop: theme.spacing(0.25),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3.75),
       paddingBottom: theme.spacing(10),
     },
@@ -34,7 +36,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function LandManagementActions({ actions }: LandManagementActionsProps): JSX.Element {
+export default function LandManagementActions({
+  actions,
+}: LandManagementActionsProps): JSX.Element {
   const classes = useStyles({});
   const theme: Theme = useTheme();
   const slides: number = useMediaQuery(theme.breakpoints.up('sm')) ? 3 : 1;
@@ -66,12 +70,16 @@ export default function LandManagementActions({ actions }: LandManagementActions
       <Slider {...settings} ref={slider} className={classes.root}>
         {actions.map((action, index) => (
           <div className={classes.item} key={index}>
-            <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
+            <Action
+              name={action.name}
+              description={action.description}
+              imgSrc={action.imgSrc}
+            />
           </div>
         ))}
       </Slider>
       {actions.length > slides && (
-        <Grid container justify="flex-end" className={classes.buttons}>
+        <Grid container justifyContent="flex-end" className={classes.buttons}>
           <PrevNextButton direction="prev" onClick={slickPrev} />
           <PrevNextButton direction="next" onClick={slickNext} />
         </Grid>

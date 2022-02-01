@@ -1,10 +1,11 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import Description from 'web-components/lib/components/description';
@@ -12,6 +13,7 @@ import Title from 'web-components/lib/components/title';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 
 import sum from '../lib/sum';
+import CowIllustration from '../assets/cow-illustration.png';
 
 const PROJECT = gql`
   query ProjectByHandle($handle: String!) {
@@ -66,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -76,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },
@@ -85,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(5.5),
       paddingBottom: theme.spacing(8.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
       paddingBottom: theme.spacing(6),
     },
@@ -98,7 +100,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(5),
       paddingBottom: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3.5),
       paddingBottom: theme.spacing(3.5),
     },
@@ -107,15 +109,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(7),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingTop: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(4),
     },
   },
   grid: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       flexDirection: 'column-reverse',
     },
   },
@@ -131,7 +133,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },
@@ -140,7 +142,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(11.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(7.5),
     },
   },
@@ -167,13 +169,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(2),
   },
   gridItem: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(2.5),
     },
   },
 }));
 
-function GridItem({ label, value }: { label: string; value: any }): JSX.Element {
+function GridItem({
+  label,
+  value,
+}: {
+  label: string;
+  value: any;
+}): JSX.Element {
   const classes = useStyles();
   return (
     <Grid container alignItems="center" className={classes.gridItem}>
@@ -189,8 +197,12 @@ function GridItem({ label, value }: { label: string; value: any }): JSX.Element 
 
 function PostPurchase(): JSX.Element {
   const classes = useStyles();
-  let { walletId, projectId, name } = useParams<{ walletId: string; projectId: string; name: string }>();
-  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  let { walletId, projectId, name } = useParams();
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  };
 
   const { data: projectData } = useQuery(PROJECT, {
     errorPolicy: 'ignore',
@@ -207,16 +219,17 @@ function PostPurchase(): JSX.Element {
   const units: number | undefined =
     walletData &&
     walletData.walletById &&
-    sum(walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes, 'units');
+    sum(
+      walletData.walletById.purchasesByBuyerWalletId.nodes[0]
+        .transactionsByPurchaseId.nodes,
+      'units',
+    );
 
   return (
     <>
       <Section classes={{ root: classes.section }}>
         <div className={classes.center}>
-          <img
-            src={require('../assets/cow-illustration.png')}
-            alt={require('../assets/cow-illustration.png')}
-          />
+          <img src={CowIllustration} alt={CowIllustration} />
           <Title className={classes.title} align="center" variant="h2">
             Thank you for your purchase!
           </Title>
@@ -226,53 +239,65 @@ function PostPurchase(): JSX.Element {
             </Description>
           )}
         </div>
-        {projectData && projectData.projectByHandle && walletData && walletData.walletById && (
-          <GreenCard className={classes.card}>
-            <Grid container className={classes.grid}>
-              <Grid item xs={12} md={6}>
-                <Title className={classes.cardTitle} variant="h3">
-                  Order summary
-                </Title>
-                <GridItem
-                  label="credit"
-                  value={ReactHtmlParser(
-                    projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0]
-                      .name,
+        {projectData &&
+          projectData.projectByHandle &&
+          walletData &&
+          walletData.walletById && (
+            <GreenCard className={classes.card}>
+              <Grid container className={classes.grid}>
+                <Grid item xs={12} md={6}>
+                  <Title className={classes.cardTitle} variant="h3">
+                    Order summary
+                  </Title>
+                  <GridItem
+                    label="credit"
+                    value={ReactHtmlParser(
+                      projectData.projectByHandle.creditClassByCreditClassId
+                        .creditClassVersionsById.nodes[0].name,
+                    )}
+                  />
+                  <GridItem
+                    label="project"
+                    value={<a href={url}>{projectData.projectByHandle.name}</a>}
+                  />
+                  <GridItem label="# of credits" value={units} />
+                  {units && (
+                    <GridItem
+                      label="total price"
+                      value={`$${new Intl.NumberFormat('en-US', {
+                        minimumFractionDigits: 2,
+                      }).format(
+                        walletData.walletById.purchasesByBuyerWalletId.nodes[0]
+                          .transactionsByPurchaseId.nodes[0].creditPrice *
+                          units,
+                      )} USD`}
+                    />
                   )}
-                />
-                <GridItem label="project" value={<a href={url}>{projectData.projectByHandle.name}</a>} />
-                <GridItem label="# of credits" value={units} />
-                <GridItem
-                  label="total price"
-                  value={`$${new Intl.NumberFormat('en-US', {
-                    minimumFractionDigits: 2,
-                  }).format(
-                    walletData.walletById.purchasesByBuyerWalletId.nodes[0].transactionsByPurchaseId.nodes[0]
-                      .creditPrice * units,
-                  )} USD`}
-                />
-                <GridItem
-                  label="date"
-                  value={new Date(
-                    walletData.walletById.purchasesByBuyerWalletId.nodes[0].createdAt,
-                  ).toLocaleDateString('en-US', options)}
-                />
-                <GridItem label="owner" value={name} />
-                <GridItem
-                  label="transaction id"
-                  value={walletData.walletById.purchasesByBuyerWalletId.nodes[0].id.slice(0, 8)}
-                />
+                  <GridItem
+                    label="date"
+                    value={new Date(
+                      walletData.walletById.purchasesByBuyerWalletId.nodes[0].createdAt,
+                    ).toLocaleDateString('en-US', options)}
+                  />
+                  <GridItem label="owner" value={name} />
+                  <GridItem
+                    label="transaction id"
+                    value={walletData.walletById.purchasesByBuyerWalletId.nodes[0].id.slice(
+                      0,
+                      8,
+                    )}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <img
+                    className={classes.image}
+                    alt={projectData.projectByHandle.image}
+                    src={projectData.projectByHandle.image}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12} md={6}>
-                <img
-                  className={classes.image}
-                  alt={projectData.projectByHandle.image}
-                  src={projectData.projectByHandle.image}
-                />
-              </Grid>
-            </Grid>
-          </GreenCard>
-        )}
+            </GreenCard>
+          )}
         {projectData && projectData.projectByHandle && (
           <div className={classes.share}>
             <Title variant="h4" align="center">
@@ -284,12 +309,12 @@ function PostPurchase(): JSX.Element {
             <ShareIcons
               url={url}
               telegramShare={
-                projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0]
-                  .metadata.telegramShare
+                projectData.projectByHandle.creditClassByCreditClassId
+                  .creditClassVersionsById.nodes[0].metadata.telegramShare
               }
               twitterShare={
-                projectData.projectByHandle.creditClassByCreditClassId.creditClassVersionsById.nodes[0]
-                  .metadata.twitterShare
+                projectData.projectByHandle.creditClassByCreditClassId
+                  .creditClassVersionsById.nodes[0].metadata.twitterShare
               }
             />
           </div>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import { makeStyles, useTheme } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import Section from 'web-components/src/components/section';
+import Section from 'web-components/lib/components/section';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import Title from 'web-components/lib/components/title';
 import { TokenMediaSectionQuery } from '../../generated/graphql';
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(14, 4, 20),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(14, 0, 20),
     },
   },
@@ -57,7 +58,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(38),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'space-between',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       justifyContent: 'center',
     },
   },

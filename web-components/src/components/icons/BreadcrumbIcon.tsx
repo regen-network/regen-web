@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, useTheme, Theme } from '@material-ui/core';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import clsx from 'clsx';
 
 import { directionRotate } from './ArrowDownIcon';
@@ -8,7 +8,7 @@ import { directionRotate } from './ArrowDownIcon';
 interface Props {
   className?: string;
   direction?: 'next' | 'prev' | 'down' | 'up';
-  onClick?: React.MouseEventHandler;
+  onClick?: SvgIconProps['onClick'];
   color?: string;
 }
 
@@ -34,7 +34,12 @@ export default function BreadcrumbIcon({
   color = color || theme.palette.secondary.main;
 
   return (
-    <SvgIcon fill="none" viewBox="0 0 33 20" className={clsx(className, classes.root)} onClick={onClick}>
+    <SvgIcon
+      fill="none"
+      viewBox="0 0 33 20"
+      className={clsx(className, classes.root)}
+      onClick={onClick}
+    >
       <rect
         width="4.27533"
         height="23.6375"

@@ -1,5 +1,5 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 
 interface IconProps {
   className?: string;
@@ -34,7 +34,10 @@ function RegenTokenIcon({ className }: IconProps): JSX.Element {
         d="M41.0875 23.1248L39.7579 23.2551L38.1937 28.2086L41.635 24.324L41.0875 23.1248Z"
         fill="white"
       />
-      <path d="M52.4544 24.1676V22.0558L50.3948 21.4041L40.7486 30.4506L52.4544 24.1676Z" fill="white" />
+      <path
+        d="M52.4544 24.1676V22.0558L50.3948 21.4041L40.7486 30.4506L52.4544 24.1676Z"
+        fill="white"
+      />
       <path
         d="M28.8864 29.5121L26.0186 25.2104L26.0708 25.3147L26.0186 25.2104L24.7151 25.419L24.5065 26.7226L28.8864 29.5121Z"
         fill="white"
@@ -51,7 +54,10 @@ function RegenTokenIcon({ className }: IconProps): JSX.Element {
         d="M21.7169 37.8026L21.3259 39.0279L22.3948 39.8101L26.9572 37.2551L21.7169 37.8026Z"
         fill="white"
       />
-      <path d="M23.229 41.4262L23.1769 42.7298L24.4283 43.173L28.0782 39.3406L23.229 41.4262Z" fill="white" />
+      <path
+        d="M23.229 41.4262L23.1769 42.7298L24.4283 43.173L28.0782 39.3406L23.229 41.4262Z"
+        fill="white"
+      />
       <path
         d="M29.7988 41.1135L25.9143 44.5288L26.2532 45.7802L27.5828 45.8323L29.7988 41.1135Z"
         fill="white"
@@ -60,7 +66,10 @@ function RegenTokenIcon({ className }: IconProps): JSX.Element {
         d="M34.4134 42.6255L33.3706 47.6832L34.4395 48.4393L35.5084 47.6571L34.4134 42.6255Z"
         fill="white"
       />
-      <path d="M52.4804 45.7019L40.7486 39.4709L50.4469 48.4654L52.4804 47.8136V45.7019Z" fill="white" />
+      <path
+        d="M52.4804 45.7019L40.7486 39.4709L50.4469 48.4654L52.4804 47.8136V45.7019Z"
+        fill="white"
+      />
       <path
         d="M39.5494 46.6665L36.9163 42.2605L37.5159 47.3182L38.7673 47.7093L39.5494 46.6665Z"
         fill="white"

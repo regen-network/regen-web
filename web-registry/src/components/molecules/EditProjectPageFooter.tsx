@@ -1,8 +1,8 @@
 import React from 'react';
-import { Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.typography.pxToRem(60),
       width: theme.typography.pxToRem(181.11),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(18),
       height: theme.typography.pxToRem(50),
       width: theme.typography.pxToRem(131),
@@ -37,20 +37,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   saveIcon: {
     marginRight: theme.spacing(1),
     height: theme.typography.pxToRem(15),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(0.25),
     },
   },
 }));
 
-const EditProjectPageFooter: React.FC<Props> = ({ saveText = 'Save', onSave, saveDisabled }) => {
+const EditProjectPageFooter: React.FC<Props> = ({
+  saveText = 'Save',
+  onSave,
+  saveDisabled,
+}) => {
   const styles = useStyles();
 
   return (
     <FixedFooter>
       <Grid container className={styles.root}>
         <Grid item>
-          <ContainedButton className={styles.btn} onClick={onSave} disabled={saveDisabled}>
+          <ContainedButton
+            className={styles.btn}
+            onClick={onSave}
+            disabled={saveDisabled}
+          >
             <SaveIcon className={styles.saveIcon} />
             {saveText}
           </ContainedButton>

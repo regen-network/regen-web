@@ -6,14 +6,23 @@ import { Crop } from 'react-image-crop';
 //  * @param {Crop} crop - crop Object
 //  * @param {String} fileName - Name of the returned file in Promise
  */
-export async function getCroppedImg(image: HTMLImageElement, crop: Crop): Promise<HTMLImageElement> {
+export async function getCroppedImg(
+  image: HTMLImageElement,
+  crop: Crop,
+): Promise<HTMLImageElement> {
   const canvas = document.createElement('canvas');
   const scaleX = image.naturalWidth / image.width;
   const scaleY = image.naturalHeight / image.height;
   const ctx = canvas.getContext('2d');
   const pixelRatio = window.devicePixelRatio;
 
-  if (crop && crop.width && crop.height && crop.x !== undefined && crop.y !== undefined) {
+  if (
+    crop &&
+    crop.width &&
+    crop.height &&
+    crop.x !== undefined &&
+    crop.y !== undefined
+  ) {
     canvas.width = crop.width * pixelRatio;
     canvas.height = crop.height * pixelRatio;
 
@@ -38,25 +47,32 @@ export async function getCroppedImg(image: HTMLImageElement, crop: Crop): Promis
   return canvasToBlob(canvas);
 }
 
-export function canvasToBlob(canvas: HTMLCanvasElement): Promise<HTMLImageElement> {
+export function canvasToBlob(
+  canvas: HTMLCanvasElement,
+): Promise<HTMLImageElement> {
   return new Promise<HTMLImageElement>(resolve => {
     canvas.toBlob(file => {
-      const newImg = document.createElement('img');
-      const url = URL.createObjectURL(file);
+      if (file) {
+        const newImg = document.createElement('img');
+        const url = URL.createObjectURL(file);
+        newImg.onload = () => {
+          // no longer need to read the blob so it's revoked
+          URL.revokeObjectURL(url);
+        };
 
-      newImg.onload = () => {
-        // no longer need to read the blob so it's revoked
-        URL.revokeObjectURL(url);
-      };
+        newImg.src = url;
 
-      newImg.src = url;
-
-      resolve(newImg);
+        resolve(newImg);
+      }
     }, 'image/png');
   });
 }
 
-export function srcToFile(src: string, fileName: string, mimeType: string): Promise<File> {
+export function srcToFile(
+  src: string,
+  fileName: string,
+  mimeType: string,
+): Promise<File> {
   return fetch(src)
     .then(res => res.arrayBuffer())
     .then(buf => new File([buf], fileName, { type: mimeType }));

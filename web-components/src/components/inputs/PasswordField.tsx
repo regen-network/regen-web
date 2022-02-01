@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useTheme, makeStyles, Theme } from '@material-ui/core/styles';
+import { useTheme, makeStyles, DefaultTheme as Theme } from '@mui/styles';
 // import zxcvbn, { ZXCVBNScore } from 'zxcvbn';
 // import { ZXCVBNResult } from 'zxcvbn';
-import IconButton from '@material-ui/core/IconButton';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import IconButton from '@mui/material/IconButton';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import EyeIcon from '../icons/EyeIcon';
 import TextField, { RegenTextFieldProps } from './TextField';
@@ -28,7 +28,10 @@ function getScoreLabel(score: number): string {
   return `Password strength: ${scores[score]}`;
 }
 
-export default function PasswordField({ signup = false, ...props }: PasswordFieldProps): JSX.Element {
+export default function PasswordField({
+  signup = false,
+  ...props
+}: PasswordFieldProps): JSX.Element {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
@@ -44,7 +47,9 @@ export default function PasswordField({ signup = false, ...props }: PasswordFiel
     field: { name, value },
   } = props;
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLElement>): void => {
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLElement>,
+  ): void => {
     event.preventDefault();
   };
 
@@ -68,8 +73,13 @@ export default function PasswordField({ signup = false, ...props }: PasswordFiel
           aria-label="toggle password visibility"
           onClick={() => setShowPassword(!showPassword)}
           onMouseDown={handleMouseDownPassword}
+          size="large"
         >
-          <EyeIcon className={classes.eyeIcon} color={theme.palette.secondary.dark} visible={showPassword} />
+          <EyeIcon
+            className={classes.eyeIcon}
+            color={theme.palette.secondary.dark}
+            visible={showPassword}
+          />
         </IconButton>
       }
       {...props}

@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
+import { makeStyles } from '@mui/styles';
+import Link from '@mui/material/Link';
 import axios from 'axios';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Description from 'web-components/lib/components/description';
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `0 ${theme.spacing(10)}`,
       fontSize: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(33)} ${theme.spacing(2.5)} 0`,
       fontSize: theme.spacing(4.5),
     },
@@ -62,7 +63,8 @@ function VerifyEmail(): JSX.Element {
     <OnBoardingSection formContainer title="Please confirm your email address">
       <OnBoardingCard>
         <Description className={classes.description}>
-          We've just sent a confirmation email to: <a href={`mailto:${email}`}>{email}</a>.
+          We've just sent a confirmation email to:{' '}
+          <a href={`mailto:${email}`}>{email}</a>.
         </Description>
         <br />
         <Description className={classes.description}>

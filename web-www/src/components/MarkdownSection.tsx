@@ -1,7 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { Variant } from '@mui/material/styles/createTypography';
+
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 
 interface SectionProps {
@@ -23,7 +25,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingLeft: theme.spacing(37.5),
       paddingRight: theme.spacing(38.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(2.8),
       paddingRight: theme.spacing(2.8),
     },
@@ -35,14 +37,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(21.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(9.5),
       paddingTop: theme.spacing(18.25),
     },
   }),
   text: {
     fontSize: theme.spacing(4.5),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       fontSize: theme.spacing(4),
     },
     lineHeight: '150%',
@@ -67,7 +69,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontFamily: theme.typography.h1.fontFamily,
       fontWeight: 900,
       lineHeight: '150%',
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(5.25),
         marginTop: theme.spacing(8),
         marginBottom: theme.spacing(4),
@@ -83,7 +85,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.spacing(4.5),
       textTransform: 'uppercase',
       letterSpacing: theme.spacing(0.2),
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(4),
         marginTop: theme.spacing(4),
         marginBottom: theme.spacing(4),

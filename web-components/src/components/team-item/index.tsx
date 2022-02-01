@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 
 import GithubIcon from '../icons/social/GithubIcon';
 import TwitterIcon from '../icons/social/TwitterIcon';

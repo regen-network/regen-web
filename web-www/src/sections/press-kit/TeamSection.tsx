@@ -2,8 +2,9 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
-import { Theme, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import TeamSection from 'web-components/lib/components/team-section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { TeamItemProps } from 'web-components/lib/components/team-item';
@@ -12,7 +13,7 @@ import { PresskitTeamSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(8),
     },
   },

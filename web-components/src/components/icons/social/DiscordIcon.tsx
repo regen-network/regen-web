@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 import withHoverColor, { Props } from '../withHoverColor';
@@ -12,7 +12,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function DiscordIcon({ className, color, onMouseEnter, onMouseLeave }: Props): JSX.Element {
+function DiscordIcon({
+  className,
+  color,
+  onMouseEnter,
+  onMouseLeave,
+}: Props): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -36,7 +41,12 @@ function DiscordIcon({ className, color, onMouseEnter, onMouseLeave }: Props): J
       </g>
       <defs>
         <clipPath id="clip0">
-          <rect width="60" height="69.6" fill={color} transform="translate(0.200195 0.399994)" />
+          <rect
+            width="60"
+            height="69.6"
+            fill={color}
+            transform="translate(0.200195 0.399994)"
+          />
         </clipPath>
       </defs>
     </SvgIcon>

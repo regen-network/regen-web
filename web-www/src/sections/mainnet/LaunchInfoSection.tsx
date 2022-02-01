@@ -1,21 +1,14 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import {
-  Grid,
-  createStyles,
-  withStyles,
-  makeStyles,
-  Theme,
-  Typography,
-  LinearProgress,
-} from '@material-ui/core';
+import { Grid, Typography, LinearProgress, Theme } from '@mui/material';
+import { withStyles, createStyles, makeStyles } from '@mui/styles';
 import Img, { FluidObject } from 'gatsby-image';
-import { getFormattedDate } from 'web-components/src/utils/format';
-
-import Section from 'web-components/src/components/section';
-import ContainedButton from 'web-components/src/components/buttons/ContainedButton';
-import { MainnetLaunchInfoSectionQuery, SanityMainnetActionItem } from '../../generated/graphql';
 import SanityImage from 'gatsby-plugin-sanity-image';
+
+import { getFormattedDate } from 'web-components/lib/utils/format';
+import Section from 'web-components/lib/components/section';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { MainnetLaunchInfoSectionQuery, SanityMainnetActionItem } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
 
 const StyledLinearProgress = withStyles((theme: Theme) =>
@@ -44,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(8),
     },
   },
@@ -56,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       minWidth: '40%',
       maxHeight: '100%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       minWidth: '100%',
       maxHeight: theme.spacing(50),
     },
@@ -70,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       flexFlow: 'row nowrap',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexFlow: 'row wrap',
     },
   },
@@ -78,7 +71,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(10, 4.5),
     },
   },
@@ -88,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(7),
     },
   },
@@ -166,7 +159,7 @@ const LaunchInfoSection: React.FC = () => {
       <Typography variant="h1" className={styles.title}>
         {data?.title}
       </Typography>
-      <Grid container justify="center" className={styles.actionItems}>
+      <Grid container justifyContent="center" className={styles.actionItems}>
         {data?.actionItems?.map((item, i) => (
           <ActionItem key={i} {...(item as SanityMainnetActionItem)} />
         ))}

@@ -1,9 +1,10 @@
 import React from 'react';
-import { makeStyles, TypographyVariant } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import { Variant } from '@mui/material/styles/createTypography';
+import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 
 import Title from 'web-components/lib/components/title';
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -11,7 +12,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 interface Props {
   className?: string;
   titleClassName?: string;
-  titleVariant?: TypographyVariant;
+  titleVariant?: Variant;
   body?: React.ReactNode;
   header?: React.ReactNode;
   linearGradient?: string;
@@ -26,12 +27,13 @@ interface StyleProps {
   linearGradient?: string;
   linearGradientMobile?: string;
   topSection?: boolean;
+  titleVariant?: Variant;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: props => ({
     overflow: 'hidden',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: props.topSection ? theme.spacing(70) : theme.spacing(17.75),
       paddingBottom: theme.spacing(13),
     },
@@ -53,7 +55,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         props.linearGradient ||
         'linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(194.2deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       background:
         props.linearGradientMobile ||
         props.linearGradient ||
@@ -67,11 +69,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         lineHeight: '130%',
       },
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(10),
       paddingRight: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(4),
       paddingRight: theme.spacing(4),
     },
@@ -103,11 +105,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingLeft: theme.spacing(37.5),
       paddingRight: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(10),
       paddingRight: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
     },
@@ -121,7 +123,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     position: 'relative',
   },
   subtitle: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3),
       fontSize: theme.spacing(4.5),
     },
@@ -132,14 +134,25 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     lineHeight: '160%',
     color: theme.palette.primary.main,
   },
-  title: {
-    [theme.breakpoints.down('xs')]: {
+  title: props => ({
+    [theme.breakpoints.down('sm')]: {
       lineHeight: '130%',
     },
     [theme.breakpoints.up('sm')]: {
       lineHeight: '140%',
     },
-  },
+    // BEGIN HACK setting jss styles (duplicated from emotion style)
+    // so it's initially rendered on gatsby build
+    // Remove once migrations from mui jss to emotion and to latest gatsby done
+    color: theme.palette.primary.main,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: props.titleVariant === 'h1' ? '3rem' : '2.375rem',
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: props.titleVariant === 'h1' ? '2rem' : '1.5rem',
+    },
+    // END HACK
+  }),
 }));
 
 const BackgroundSection = ({
@@ -155,7 +168,7 @@ const BackgroundSection = ({
   children,
   topSection = true,
 }: Props): JSX.Element => {
-  const classes = useStyles({ linearGradientMobile, linearGradient, topSection });
+  const classes = useStyles({ titleVariant, linearGradientMobile, linearGradient, topSection });
   let headerJSX: JSX.Element | null = null;
   let bodyJSX: JSX.Element | null = null;
   let textJSX: JSX.Element | null = null;

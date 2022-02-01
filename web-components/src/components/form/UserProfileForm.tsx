@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Formik, Form, Field } from 'formik';
 
 import OnBoardingCard from '../cards/OnBoardingCard';
@@ -30,13 +30,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.typography.pxToRem(40),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.typography.pxToRem(33),
     },
   },
 }));
 
-const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, initialValues }) => {
+const UserProfileForm: React.FC<UserProfileFormProps> = ({
+  submit,
+  initialValues,
+}) => {
   const classes = useStyles();
   return (
     <Formik
@@ -52,7 +55,10 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, initialValues
       }
       validate={(values: UserProfileValues) => {
         const errors: Partial<UserProfileValues> = {};
-        const errorFields: Array<keyof UserProfileValues> = ['name', 'roleTitle'];
+        const errorFields: Array<keyof UserProfileValues> = [
+          'name',
+          'roleTitle',
+        ];
         errorFields.forEach(value => {
           if (!values[value]) {
             errors[value] = requiredMessage;
@@ -110,6 +116,7 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({ submit, initialValues
                 label="Short personal description"
                 name="description"
                 rows={3}
+                minRows={3}
                 multiline
                 optional
               />

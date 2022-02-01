@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 import { directionRotate, StyleProps } from './ArrowDownIcon';
@@ -24,7 +24,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-export default function DropdownIcon({ color, direction = 'down', className, ...props }: Props): JSX.Element {
+export default function DropdownIcon({
+  color,
+  direction = 'down',
+  className,
+  ...props
+}: Props): JSX.Element {
   if (className?.includes('MuiTableSortLabel-iconDirectionAsc')) {
     direction = 'up';
   } else if (className?.includes('MuiTableSortLabel-iconDirectionDesc')) {
@@ -36,7 +41,13 @@ export default function DropdownIcon({ color, direction = 'down', className, ...
   const theme = useTheme();
 
   return (
-    <SvgIcon className={clsx(className, classes.icon)} width="11" height="8" viewBox="0 0 11 8" {...props}>
+    <SvgIcon
+      className={clsx(className, classes.icon)}
+      width="11"
+      height="8"
+      viewBox="0 0 11 8"
+      {...props}
+    >
       <path
         d="M5.69995 7.7336C5.59994 7.86684 5.40006 7.86684 5.30005 7.7336L0.171111 0.900071C0.0474202 0.735273 0.165005 0.5 0.371057 0.5L10.6289 0.500001C10.835 0.500001 10.9526 0.735274 10.8289 0.900072L5.69995 7.7336Z"
         fill={color || theme.palette.secondary.main}

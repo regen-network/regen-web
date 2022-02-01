@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import bbox from '@turf/bbox';
 // import { FeatureCollection } from 'geojson'; TODO
 // import { AllGeoJSON } from '@turf/helpers';
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import ReactMapGL, {
   Popup,
   Marker,
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(150),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(121),
     },
     '& .mapboxgl-marker svg': {
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         },
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       top: theme.spacing(5),
       right: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       top: theme.spacing(3.75),
       right: theme.spacing(3.75),
     },
@@ -132,13 +132,25 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
-  const filteredFeatures: any[] = geojson.features.filter(feature => !feature.properties.boundary);
+  const filteredFeatures: any[] = geojson.features.filter(
+    feature => !feature.properties.boundary,
+  );
 
-  const [viewPort, setViewPort] = useState<any>({ zoom: 11, latitude: 0.0, longitude: 0.0 });
-  const [boundary, setBoundary] = useState<any>({ zoom: 11, latitude: 0.0, longitude: 0.0 });
+  const [viewPort, setViewPort] = useState<any>({
+    zoom: 11,
+    latitude: 0.0,
+    longitude: 0.0,
+  });
+  const [boundary, setBoundary] = useState<any>({
+    zoom: 11,
+    latitude: 0.0,
+    longitude: 0.0,
+  });
   const [popupInfo, setPopupInfo] = useState<PopupInfo | null>(null);
   // const [shownLayer, setShownLayer] = useState<string | null>(
-  const [shownLayer] = useState<string | null>(filteredFeatures.length ? filteredFeatures[0].id : null);
+  const [shownLayer] = useState<string | null>(
+    filteredFeatures.length ? filteredFeatures[0].id : null,
+  );
 
   const interactiveLayerIds: string[] = geojson.features
     ? geojson.features
@@ -180,7 +192,10 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
 
   const onMarkerClick = (feature: any, index: string): void => {
     setPopupInfo({
-      lngLat: [feature.geometry.coordinates[0], feature.geometry.coordinates[1]],
+      lngLat: [
+        feature.geometry.coordinates[0],
+        feature.geometry.coordinates[1],
+      ],
       feature: { ...feature.properties, id: feature.id || index },
     });
   };
@@ -252,8 +267,11 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                           id={feature.id || index.toString()}
                           type="fill"
                           paint={{
-                            'fill-opacity': parseFloat(feature.properties['fill-opacity']) || 0,
-                            'fill-color': feature.properties['fill'] || '#000000',
+                            'fill-opacity':
+                              parseFloat(feature.properties['fill-opacity']) ||
+                              0,
+                            'fill-color':
+                              feature.properties['fill'] || '#000000',
                           }}
                         />
                         <Layer
@@ -281,18 +299,21 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
                         />
                       </Source>
                     )}
-                  {feature.geometry.type === 'Point' && (matches || (!matches && feature.id === shownLayer)) && (
-                    <Marker
-                      latitude={feature.geometry.coordinates[1]}
-                      longitude={feature.geometry.coordinates[0]}
-                    >
-                      <PinIcon
-                        fontSize="large"
-                        size={35}
-                        onClick={() => onMarkerClick(feature, index.toString())}
-                      />
-                    </Marker>
-                  )}
+                  {feature.geometry.type === 'Point' &&
+                    (matches || (!matches && feature.id === shownLayer)) && (
+                      <Marker
+                        latitude={feature.geometry.coordinates[1]}
+                        longitude={feature.geometry.coordinates[0]}
+                      >
+                        <PinIcon
+                          fontSize="large"
+                          size={35}
+                          onClick={() =>
+                            onMarkerClick(feature, index.toString())
+                          }
+                        />
+                      </Marker>
+                    )}
                 </div>
               );
             })}
@@ -304,7 +325,11 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
         <div className={classes.zoomButton}>
           <OutlinedButton
             onClick={() =>
-              setViewPort({ longitude: boundary.longitude, latitude: boundary.latitude, zoom: boundary.zoom })
+              setViewPort({
+                longitude: boundary.longitude,
+                latitude: boundary.latitude,
+                zoom: boundary.zoom,
+              })
             }
             startIcon={<ZoomIcon />}
           >

@@ -1,16 +1,19 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
+import { makeStyles } from '@mui/styles';
+import Link from '@mui/material/Link';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Description from 'web-components/lib/components/description';
 import Banner from 'web-components/lib/components/banner';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import UserProfileForm, { UserProfileValues } from 'web-components/lib/components/form/UserProfileForm';
+import UserProfileForm, {
+  UserProfileValues,
+} from 'web-components/lib/components/form/UserProfileForm';
 import getApiUri from '../lib/apiUri';
 import {
   useGetUserProfileByEmailQuery,
@@ -24,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(33, 0, 0),
       fontSize: theme.spacing(4.5),
     },
@@ -35,7 +38,7 @@ const messageExpired: string = 'Access expired.';
 
 function UserProfile(): JSX.Element {
   const { user } = useAuth0();
-  const history = useHistory();
+  const navigate = useNavigate();
   const userEmail = user?.email;
 
   // Get any URL parameters from auth0 after email verification
@@ -62,21 +65,24 @@ function UserProfile(): JSX.Element {
   const { data: userProfileData } = useGetUserProfileByEmailQuery({
     skip: !userEmail,
     variables: {
-      email: userEmail,
+      email: userEmail as string,
     },
   });
 
   const [updateUserByEmail] = useUpdateUserByEmailMutation();
   const [updatePartyById] = useUpdatePartyByIdMutation();
 
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<unknown>(null);
   const [status, setStatus] = useState<string | null>(null);
   const [isSubmitting, setSubmitting] = useState<boolean>(false);
-  const [initialFieldValues, setInitialFieldValues] = useState<UserProfileValues | undefined>();
+  const [initialFieldValues, setInitialFieldValues] = useState<
+    UserProfileValues | undefined
+  >();
 
   useEffect(() => {
     if (!userProfileData?.userByEmail) return;
-    const { roleTitle, phoneNumber, partyByPartyId } = userProfileData.userByEmail;
+    const { roleTitle, phoneNumber, partyByPartyId } =
+      userProfileData.userByEmail;
     setInitialFieldValues({
       name: partyByPartyId?.name || '',
       roleTitle: roleTitle || '',
@@ -109,7 +115,7 @@ function UserProfile(): JSX.Element {
       await updateUserByEmail({
         variables: {
           input: {
-            email: userEmail,
+            email: userEmail as string,
             userPatch: {
               phoneNumber: values.phone,
               roleTitle: values.roleTitle,
@@ -130,7 +136,7 @@ function UserProfile(): JSX.Element {
         },
       });
       search.set('message', 'User profile created!');
-      history.push('/organization-profile'); // TODO: programmatically handle routing?
+      navigate('/organization-profile'); // TODO: programmatically handle routing?
     } catch (e) {
       setError(e);
     } finally {
@@ -149,11 +155,18 @@ function UserProfile(): JSX.Element {
               <Link onClick={resendEmail}>Resend</Link> confirmation email.
             </Description>
           </OnBoardingCard>
-          {!isSubmitting && error && <ErrorBanner text={error.toString()} />}
+          {!isSubmitting && error instanceof Object && (
+            <ErrorBanner text={error.toString()} />
+          )}
           {!isSubmitting && status && <Banner text={status} />}
         </>
       )}
-      {showForm && <UserProfileForm submit={submitUserProfile} initialValues={initialFieldValues} />}
+      {showForm && (
+        <UserProfileForm
+          submit={submitUserProfile}
+          initialValues={initialFieldValues}
+        />
+      )}
     </OnBoardingSection>
   );
 }

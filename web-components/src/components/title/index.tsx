@@ -1,15 +1,22 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
+import { Variant } from '@mui/material/styles/createTypography';
 
 interface TitleProps {
   variant?: Variant;
   children?: any;
-  color?: 'inherit' | 'initial' | 'textPrimary' | 'primary' | 'secondary' | 'textSecondary' | 'error';
+  color?:
+    | 'inherit'
+    | 'initial'
+    | 'textPrimary'
+    | 'primary'
+    | 'secondary'
+    | 'textSecondary'
+    | 'error';
   className?: string;
-  onClick?: React.MouseEventHandler;
+  onClick?: () => void;
   align?: 'left' | 'right' | 'inherit' | 'center' | 'justify';
 }
 

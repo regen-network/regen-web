@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import { fieldToTextField, TextFieldProps } from 'formik-material-ui';
-import MuiTextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { fieldToTextField, TextFieldProps } from 'formik-mui';
+import MuiTextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 import clsx from 'clsx';
 
 interface TriggerTextFieldProps extends TextFieldProps {
@@ -34,19 +34,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(4.5),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(4),
       },
       '&.Mui-focused': {
         display: 'block',
       },
     },
-    '& .MuiInput-formControl': {
+    '& .MuiInputBase-formControl': {
       marginTop: props.label ? theme.spacing(4) : 0,
       [theme.breakpoints.up('sm')]: {
         marginBottom: props.errors ? theme.spacing(5.25) : 0,
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         marginBottom: props.errors ? theme.spacing(4.75) : 0,
       },
     },
@@ -61,7 +61,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         [theme.breakpoints.up('sm')]: {
           fontSize: theme.spacing(4),
         },
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
           fontSize: theme.spacing(3.5),
         },
       },
@@ -74,7 +74,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(3.5),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(3),
       },
       '&.MuiFormHelperText-filled': {
@@ -91,7 +91,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       [theme.breakpoints.up('sm')]: {
         right: theme.spacing(3.75),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         right: theme.spacing(3.25),
       },
       position: 'absolute',
@@ -107,7 +107,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         fontSize: theme.spacing(4.5),
         height: theme.spacing(15), // 11.25
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         paddingLeft: theme.spacing(3.25),
         paddingRight: theme.spacing(3.25),
         fontSize: theme.spacing(4),
@@ -132,7 +132,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   }),
 }));
 
-function TriggerTextField({ triggerOnChange, transformValue, ...props }: TriggerTextFieldProps): JSX.Element {
+function TriggerTextField({
+  triggerOnChange,
+  transformValue,
+  ...props
+}: TriggerTextFieldProps): JSX.Element {
   const {
     form: { setFieldValue },
     field: { name },
@@ -161,6 +165,7 @@ export default function RegenTextField({
   return (
     <TriggerTextField
       {...props}
+      variant="standard"
       transformValue={transformValue}
       triggerOnChange={triggerOnChange}
       className={clsx(classes.root, props.className)}
@@ -169,7 +174,9 @@ export default function RegenTextField({
         startAdornment: startAdornment ? (
           <InputAdornment position="start">{startAdornment}</InputAdornment>
         ) : null,
-        endAdornment: endAdornment ? <InputAdornment position="end">{endAdornment}</InputAdornment> : null,
+        endAdornment: endAdornment ? (
+          <InputAdornment position="end">{endAdornment}</InputAdornment>
+        ) : null,
       }}
       InputLabelProps={{ focused: false, required: false }}
       fullWidth

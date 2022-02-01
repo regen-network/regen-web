@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Grid from '@material-ui/core/Grid';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 import TwitterIcon from './social/TwitterIcon';
 import FacebookIcon from './social/FacebookIcon';
@@ -14,11 +14,11 @@ interface ShareIconsProps {
   url: string;
   twitterShare?: string;
   telegramShare?: string;
-  xsSize?: number;
+  xsSize?: string | number;
 }
 
 interface StyleProps {
-  xsSize?: number;
+  xsSize?: string | number;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -28,7 +28,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     display: 'block',
     width: theme.spacing(12.5),
     height: theme.spacing(12.5),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: props.xsSize || theme.spacing(12.5),
       height: props.xsSize || theme.spacing(12.5),
     },
@@ -49,7 +49,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'left',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       justifyContent: 'center',
     },
   },
@@ -75,7 +75,10 @@ export default function ShareIcons({
             target="_blank"
             className={classes.iconContainer}
           >
-            <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+            <TwitterIcon
+              color={theme.palette.primary.main}
+              hoverColor={theme.palette.secondary.main}
+            />
           </a>
         </Grid>
         <Grid item>
@@ -85,7 +88,10 @@ export default function ShareIcons({
             target="_blank"
             className={classes.iconContainer}
           >
-            <FacebookIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+            <FacebookIcon
+              color={theme.palette.primary.main}
+              hoverColor={theme.palette.secondary.main}
+            />
           </a>
         </Grid>
         <Grid item>
@@ -95,7 +101,10 @@ export default function ShareIcons({
             target="_blank"
             className={classes.iconContainer}
           >
-            <LinkedInIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+            <LinkedInIcon
+              color={theme.palette.primary.main}
+              hoverColor={theme.palette.secondary.main}
+            />
           </a>
         </Grid>
         <Grid item>
@@ -105,7 +114,10 @@ export default function ShareIcons({
             target="_blank"
             className={classes.iconContainer}
           >
-            <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />
+            <TelegramIcon
+              color={theme.palette.primary.main}
+              hoverColor={theme.palette.secondary.main}
+            />
           </a>
         </Grid>
         <Grid item>

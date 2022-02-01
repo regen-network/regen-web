@@ -1,7 +1,8 @@
 import React from 'react';
-import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
+import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import TitleDescription from 'web-components/lib/components/title-description';
 import Section from 'web-components/lib/components/section';
 import { PresskitTitleDescriptionSectionQuery } from '../../generated/graphql';
@@ -11,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(15),
     },
   },

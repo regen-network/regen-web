@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { useParams } from 'react-router-dom';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import {
   MethodologyTopSection,
   MethodologySteps,
@@ -28,9 +29,11 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 
 function MethodologyDetails(): JSX.Element {
   const styles = useStyles();
-  let { methodologyId } = useParams<{ methodologyId: string }>();
+  let { methodologyId } = useParams();
   const { data } = useAllMethodologyQuery({ client });
-  const content = data?.allMethodology?.find(methodology => methodology.path === methodologyId);
+  const content = data?.allMethodology?.find(
+    methodology => methodology.path === methodologyId,
+  );
   // TODO replace with methodology data from db
   const methodology = mock.methodologies.find(p => p.id === methodologyId);
 
@@ -49,7 +52,10 @@ function MethodologyDetails(): JSX.Element {
           documentation={content?.documentation}
         />
         <div className={styles.topoBackground}>
-          <ImpactSection title="Ecological Impact" impacts={content?.ecologicalImpact} />
+          <ImpactSection
+            title="Ecological Impact"
+            impacts={content?.ecologicalImpact}
+          />
         </div>
         <ResourcesSection resources={content?.resources} />
         <MethodologyTestSection

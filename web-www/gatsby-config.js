@@ -12,14 +12,9 @@ module.exports = {
   plugins: [
     'gatsby-plugin-layout',
     'gatsby-plugin-regen-theme',
-    {
-      resolve: `gatsby-plugin-material-ui`,
-      options: {
-        stylesProvider: {
-          injectFirst: true,
-        },
-      },
-    },
+    'gatsby-plugin-mui-jss',
+    // 'gatsby-plugin-material-ui',
+    'gatsby-plugin-mui-emotion',
     {
       resolve: `gatsby-source-sanity`,
       options: {
@@ -64,14 +59,6 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-advanced-sitemap`,
-      options: {
-        additionalSitemaps: [
-          {
-            name: `registry`,
-            url: `/registry/sitemap.xml`,
-          },
-        ],
-      },
     },
     `gatsby-background-image`,
     `gatsby-plugin-react-helmet`,
@@ -120,15 +107,6 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `static/media/regen-favicon.svg`, // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: `gatsby-transformer-yaml-plus`,
-      options: {
-        enableRemark: true,
-        markdownPreface: 'md//',
-        name: `content`,
-        path: `${__dirname}/content/`,
       },
     },
     {

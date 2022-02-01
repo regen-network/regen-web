@@ -1,8 +1,8 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 
 import Title from '../title';
 import InstagramIcon from '../icons/social/InstagramIcon';
@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
       lineHeight: theme.spacing(6.5),
       marginBottom: theme.spacing(3.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: theme.spacing(4.5),
       fontSize: theme.spacing(3.5),
       marginBottom: theme.spacing(4.5),
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'center',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginLeft: theme.spacing(-2),
       justifyContent: 'space-between',
     },
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: theme.spacing(2.5),
       marginRight: theme.spacing(2.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(7.75),
       height: theme.spacing(7.75),
     },
@@ -78,16 +78,32 @@ const SocialLinks: React.FC<Props> = ({ className }) => {
         join the community
       </Title>
       <Grid container wrap="nowrap" className={styles.social}>
-        <Link href="https://www.instagram.com/regennetwork/" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="https://www.instagram.com/regennetwork/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <InstagramIcon className={styles.icon} />
         </Link>
-        <Link href="http://t.me/regennetwork_public" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="http://t.me/regennetwork_public"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <TelegramIcon className={styles.icon} />
         </Link>
-        <Link href="https://facebook.com/weareregennetwork" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="https://facebook.com/weareregennetwork"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <FacebookIcon className={styles.icon} />
         </Link>
-        <Link href="http://twitter.com/regen_network" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="http://twitter.com/regen_network"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <TwitterIcon className={styles.icon} />
         </Link>
         <Link
@@ -97,7 +113,11 @@ const SocialLinks: React.FC<Props> = ({ className }) => {
         >
           <LinkedInIcon className={styles.icon} />
         </Link>
-        <Link href="https://medium.com/regen-network" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="https://medium.com/regen-network"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <MediumIcon className={styles.icon} />
         </Link>
         <Link
@@ -107,11 +127,21 @@ const SocialLinks: React.FC<Props> = ({ className }) => {
         >
           <YoutubeIcon className={cx(styles.smallIcon, styles.icon)} />
         </Link>
-        <Link href="https://github.com/regen-network/" rel="noopener noreferrer" target="_blank">
+        <Link
+          href="https://github.com/regen-network/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           <GithubIcon className={styles.icon} />
         </Link>
-        <Link href="https://discord.gg/regen-network" rel="noopener noreferrer" target="_blank">
-          <DiscordIcon className={cx(styles.smallIcon, styles.icon, styles.discord)} />
+        <Link
+          href="https://discord.gg/regen-network"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <DiscordIcon
+            className={cx(styles.smallIcon, styles.icon, styles.discord)}
+          />
         </Link>
       </Grid>
     </div>

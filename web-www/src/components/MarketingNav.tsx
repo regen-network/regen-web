@@ -1,7 +1,8 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import { useTheme } from '@mui/styles';
+import Box from '@mui/material/Box';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Header, { HeaderColors } from 'web-components/lib/components/header';
 import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
 import { NavLink } from 'web-components/lib/components/header/NavLink';
@@ -23,7 +24,7 @@ interface BoolProps {
 }
 
 const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
     '/resources/': theme.palette.primary.main,

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import Img, { FluidObject } from 'gatsby-image';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../../components/BackgroundSection';
 import Description from 'web-components/lib/components/description';
 import { SanityCaseStudyFigure, SanityCaseStudyFigureSection } from '../../../generated/graphql';
@@ -14,7 +15,7 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   figureTitle: {
     lineHeight: '150%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       paddingTop: theme.spacing(3),
     },

@@ -1,11 +1,12 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import ReactHtmlParser from 'react-html-parser';
-import Link from '@material-ui/core/Link';
+import Link from '@mui/material/Link';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
@@ -33,13 +34,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(16),
       paddingBottom: theme.spacing(27.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(6.5),
       paddingBottom: theme.spacing(20.5),
     },
   },
   tagline: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
     },
     lineHeight: '150%',
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(5.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },
@@ -61,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(5.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       paddingTop: theme.spacing(4),
     },
@@ -70,7 +71,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(6),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(5),
     },
   },
@@ -92,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(12.5),
       marginBottom: theme.spacing(12.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(8.5),
       marginBottom: theme.spacing(8.5),
     },
@@ -102,7 +103,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(109.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(55.25),
     },
   },
@@ -111,7 +112,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(14),
       paddingBottom: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(11.75),
       paddingBottom: theme.spacing(3.75),
     },
@@ -120,7 +121,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginLeft: theme.spacing(4),
     },
   },
@@ -129,7 +130,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     lineHeight: 0,
     zIndex: 0,
     position: 'absolute',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(9),
     },
     [theme.breakpoints.up('sm')]: {
@@ -142,7 +143,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   firstQuote: {
     top: theme.spacing(4),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       left: theme.spacing(-3.75),
     },
     [theme.breakpoints.up('sm')]: {
@@ -150,7 +151,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   secondQuote: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       bottom: theme.spacing(3.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -164,7 +165,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   leftGrid: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(6.25),
     },
   },
@@ -172,7 +173,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(1),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(0.25),
     },
   },
@@ -200,7 +201,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(14),
     },
   },
@@ -228,7 +229,7 @@ function ProjectTopLink({
   standard?: boolean;
 }): JSX.Element {
   const classes = useStyles();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
 
   return (
     <div className={classes.creditClassDetail}>
@@ -239,7 +240,12 @@ function ProjectTopLink({
         standard ? (
           <div className={cx(classes.creditClassName, classes.darkText)}>
             {ReactHtmlParser(name)}
-            <Link className={classes.arrowLink} href={url} rel="noopener noreferrer" target="_blank">
+            <Link
+              className={classes.arrowLink}
+              href={url}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <ArrowIcon
                 className={classes.arrowIcon}
                 direction="next"
@@ -259,13 +265,19 @@ function ProjectTopLink({
           </Link>
         )
       ) : (
-        <div className={cx(classes.creditClassName, classes.darkText)}>{ReactHtmlParser(name)}</div>
+        <div className={cx(classes.creditClassName, classes.darkText)}>
+          {ReactHtmlParser(name)}
+        </div>
       )}
     </div>
   );
 }
 
-function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.Element {
+function ProjectTopSection({
+  data,
+  geojson,
+  isGISFile,
+}: ProjectTopProps): JSX.Element {
   const classes = useStyles();
 
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
@@ -273,18 +285,24 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
 
   const metadata = data?.projectByHandle?.metadata;
   const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
-  const landStewardPhoto = metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
+  const landStewardPhoto =
+    metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
   const unit: qudtUnit =
-    metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#unit']?.['@value'];
+    metadata?.['http://regen.network/size']?.[
+      'http://qudt.org/1.1/schema/qudt#unit'
+    ]?.['@value'];
   const creditClass = data?.projectByHandle?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
-  const methodologyVersion = creditClass?.methodologyByMethodologyId?.methodologyVersionsById?.nodes?.[0];
+  const methodologyVersion =
+    creditClass?.methodologyByMethodologyId?.methodologyVersionsById
+      ?.nodes?.[0];
   const quote = metadata?.['http://regen.network/projectQuote'];
-  const additionalCertification = metadata?.['http://regen.network/additionalCertification'];
+  const additionalCertification =
+    metadata?.['http://regen.network/additionalCertification'];
   const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
-  const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.['@list']?.map(
-    (sdg: { '@id': string }) => sdg['@id'],
-  );
+  const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
+    '@list'
+  ]?.map((sdg: { '@id': string }) => sdg['@id']);
   const { data: sdgData } = useSdgByIriQuery({
     client,
     variables: {
@@ -307,9 +325,9 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
               iconClassName={classes.icon}
               place={metadata?.['http://schema.org/location']?.place_name}
               area={
-                metadata?.['http://regen.network/size']?.['http://qudt.org/1.1/schema/qudt#numericValue']?.[
-                  '@value'
-                ]
+                metadata?.['http://regen.network/size']?.[
+                  'http://qudt.org/1.1/schema/qudt#numericValue'
+                ]?.['@value']
               }
               areaUnit={qudtUnitMap[unit]}
             />
@@ -317,36 +335,46 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
               {creditClass && creditClassVersion && (
                 <>
                   {creditClass.standard &&
-                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                      'http://schema.org/name'
-                    ] &&
-                    creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                      'http://schema.org/url'
-                    ]?.['@value'] && (
+                    creditClassVersion?.metadata?.[
+                      'http://regen.network/standard'
+                    ]?.['http://schema.org/name'] &&
+                    creditClassVersion?.metadata?.[
+                      'http://regen.network/standard'
+                    ]?.['http://schema.org/url']?.['@value'] && (
                       <ProjectTopLink
                         label="standard"
                         name={
-                          creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                            'http://schema.org/name'
-                          ]
+                          creditClassVersion?.metadata?.[
+                            'http://regen.network/standard'
+                          ]?.['http://schema.org/name']
                         }
                         url={
-                          creditClassVersion?.metadata?.['http://regen.network/standard']?.[
-                            'http://schema.org/url'
-                          ]?.['@value']
+                          creditClassVersion?.metadata?.[
+                            'http://regen.network/standard'
+                          ]?.['http://schema.org/url']?.['@value']
                         }
                         standard={creditClass.standard}
                       />
                     )}
                   <ProjectTopLink
-                    label={`credit class${creditClass.standard ? ' (type)' : ''}`}
+                    label={`credit class${
+                      creditClass.standard ? ' (type)' : ''
+                    }`}
                     name={creditClassVersion.name}
-                    url={creditClassVersion.metadata?.['http://schema.org/url']?.['@value']}
+                    url={
+                      creditClassVersion.metadata?.['http://schema.org/url']?.[
+                        '@value'
+                      ]
+                    }
                     standard={creditClass.standard}
                   />
                   <ProjectTopLink
                     label="offset generation method"
-                    name={creditClassVersion.metadata?.['http://regen.network/offsetGenerationMethod']}
+                    name={
+                      creditClassVersion.metadata?.[
+                        'http://regen.network/offsetGenerationMethod'
+                      ]
+                    }
                   />
                 </>
               )}
@@ -354,14 +382,22 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
                 <ProjectTopLink
                   label="methodology"
                   name={methodologyVersion.name}
-                  url={methodologyVersion.metadata?.['http://schema.org/url']?.['@value']}
+                  url={
+                    methodologyVersion.metadata?.['http://schema.org/url']?.[
+                      '@value'
+                    ]
+                  }
                 />
               )}
               {creditClass && additionalCertification && (
                 <ProjectTopLink
                   label="additional certification"
                   name={additionalCertification?.['http://schema.org/name']}
-                  url={additionalCertification?.['http://schema.org/url']?.['@value']}
+                  url={
+                    additionalCertification?.['http://schema.org/url']?.[
+                      '@value'
+                    ]
+                  }
                   standard={creditClass.standard}
                 />
               )}
@@ -388,11 +424,15 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
           </Description>
           <LazyLoad offset={50}>
             {videoURL &&
-              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(videoURL) ||
-              /https:\/\/player.vimeo.com\/video\/[a-zA-Z0-9_.-]+/.test(videoURL) ? (
+              (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(
+                videoURL,
+              ) ||
+              /https:\/\/player.vimeo.com\/video\/[a-zA-Z0-9_.-]+/.test(
+                videoURL,
+              ) ? (
                 <iframe
                   className={cx(classes.iframe, classes.media)}
-                  title={metadata?.['http://schema.org/name']}
+                  title={metadata?.['http://schema.org/name'] || 'project'}
                   src={videoURL}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 ></iframe>
@@ -402,7 +442,11 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
                 </video>
               ))}
             {landStewardPhoto && (
-              <img className={classes.media} alt={landStewardPhoto} src={landStewardPhoto} />
+              <img
+                className={classes.media}
+                alt={landStewardPhoto}
+                src={landStewardPhoto}
+              />
             )}
           </LazyLoad>
           <Title variant="h4" className={classes.tagline}>
@@ -413,10 +457,19 @@ function ProjectTopSection({ data, geojson, isGISFile }: ProjectTopProps): JSX.E
           </ReadMore>
           {quote && (
             <div>
-              <Title variant="h4" className={cx(classes.quote, classes.tagline)}>
-                <span className={cx(classes.firstQuote, classes.quotes)}>“</span>
-                <span className={classes.textQuote}>{quote['http://regen.network/quote']}</span>
-                <span className={cx(classes.secondQuote, classes.quotes)}>”</span>
+              <Title
+                variant="h4"
+                className={cx(classes.quote, classes.tagline)}
+              >
+                <span className={cx(classes.firstQuote, classes.quotes)}>
+                  “
+                </span>
+                <span className={classes.textQuote}>
+                  {quote['http://regen.network/quote']}
+                </span>
+                <span className={cx(classes.secondQuote, classes.quotes)}>
+                  ”
+                </span>
               </Title>
               <Title variant="h6" className={classes.quotePersonName}>
                 {quote['http://schema.org/name']}

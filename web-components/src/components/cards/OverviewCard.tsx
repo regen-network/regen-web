@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core';
-import Box from '@material-ui/core/Box';
+import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
 
 import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
       marginRight: theme.spacing(5.375),
       marginBottom: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       minWidth: theme.spacing(69.5),
       minHeight: theme.spacing(40.75),
       padding: theme.spacing(4),
@@ -75,7 +75,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: theme.spacing(-2),
       marginRight: theme.spacing(-5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(-1.5),
       marginRight: theme.spacing(-2),
     },
@@ -114,14 +114,23 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function OverviewCard({ className, classes, icon, item }: OverviewCardProps): JSX.Element {
+function OverviewCard({
+  className,
+  classes,
+  icon,
+  item,
+}: OverviewCardProps): JSX.Element {
   const styles = useStyles();
 
   return (
     <Card className={clsx(className, styles.root, classes && classes.root)}>
       <div className={styles.top}>
         <div className={clsx(styles.cardTopThird)} />
-        {icon && <div className={clsx(styles.cardTopThird, styles.iconWrap)}>{icon}</div>}
+        {icon && (
+          <div className={clsx(styles.cardTopThird, styles.iconWrap)}>
+            {icon}
+          </div>
+        )}
         <div className={clsx(styles.cardTopThird, styles.cardTopRight)}>
           {item.tooltip && (
             <InfoTooltip title={item.tooltip || ''} arrow placement="top">

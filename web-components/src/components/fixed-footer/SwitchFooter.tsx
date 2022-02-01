@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
 import FixedFooter from './';
 import ContainedButton from '../buttons/ContainedButton';
@@ -28,7 +28,7 @@ const useStyles = makeStyles<Theme>(theme => ({
     [theme.breakpoints.up('sm')]: {
       alignItems: 'center',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       alignItems: 'flex-start',
       flexDirection: 'column',
     },
@@ -38,7 +38,7 @@ const useStyles = makeStyles<Theme>(theme => ({
       fontSize: theme.typography.pxToRem(16),
       marginRight: theme.spacing(2),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(12),
       marginBottom: theme.spacing(0.75),
     },
@@ -57,7 +57,7 @@ const useStyles = makeStyles<Theme>(theme => ({
       height: theme.spacing(12.5),
       fontSize: theme.typography.pxToRem(14),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(38),
       height: theme.spacing(8),
       fontSize: theme.typography.pxToRem(9),
@@ -77,7 +77,7 @@ const useStyles = makeStyles<Theme>(theme => ({
       borderRadius: theme.spacing(12.5),
       margin: theme.spacing(0, 0.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(7),
       padding: theme.spacing(0, 1.4),
       borderRadius: theme.spacing(12.5),
@@ -103,7 +103,7 @@ const useStyles = makeStyles<Theme>(theme => ({
       minWidth: theme.spacing(74.75),
       fontSize: theme.typography.pxToRem(21),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(2, 1),
       minWidth: theme.spacing(31),
       fontSize: theme.typography.pxToRem(12),
@@ -149,13 +149,19 @@ const SwitchFooter: React.FC<SwitchFooterProps> = ({
           {label && <span className={styles.label}>{label}</span>}
           <div className={styles.toggleContainer}>
             <div
-              className={clsx(styles.option, activeOption === leftOption ? styles.active : styles.inactive)}
+              className={clsx(
+                styles.option,
+                activeOption === leftOption ? styles.active : styles.inactive,
+              )}
               onClick={onToggleClick}
             >
               {leftOption}
             </div>
             <div
-              className={clsx(styles.option, activeOption === rightOption ? styles.active : styles.inactive)}
+              className={clsx(
+                styles.option,
+                activeOption === rightOption ? styles.active : styles.inactive,
+              )}
               onClick={onToggleClick}
             >
               {rightOption}

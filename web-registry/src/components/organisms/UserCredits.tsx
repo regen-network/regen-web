@@ -1,7 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
+
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
 import TotalCreditsIcon from 'web-components/lib/components/icons/TotalCreditsIcon';
@@ -13,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: `${theme.spacing(17.75)} 0 ${theme.spacing(28.25)}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: `${theme.spacing(10.75)} 0 ${theme.spacing(20.5)}`,
     },
     maxWidth: theme.breakpoints.values.lg,
@@ -24,11 +26,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(37.5),
       paddingLeft: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(10),
       paddingLeft: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
     },
@@ -48,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontFamily: theme.typography.h1.fontFamily,
     textAlign: 'right',
     letterSpacing: '1px',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '0.75rem',
       paddingTop: theme.spacing(7.5),
     },
@@ -62,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(10),
       paddingLeft: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(8.25),
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
@@ -83,7 +85,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(5),
       paddingLeft: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(8.25),
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
@@ -101,7 +103,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: `0 ${theme.spacing(2.5)}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(4.75),
     },
   },
@@ -133,11 +135,19 @@ function UserCredits({ credits }: PurchasedCreditsProps): JSX.Element {
   const classes = useStyles({});
   return (
     <div className={classes.root}>
-      <Grid container alignItems="flex-end" justify="space-between" className={classes.title}>
+      <Grid
+        container
+        alignItems="flex-end"
+        justifyContent="space-between"
+        className={classes.title}
+      >
         <Grid item sm={6} xs={12}>
           <Title variant="h3">
             Credits for{' '}
-            <Link to={`/projects/${credits.project.id}`} className={classes.projectName}>
+            <Link
+              to={`/projects/${credits.project.id}`}
+              className={classes.projectName}
+            >
               {credits.project.name}
             </Link>
           </Title>

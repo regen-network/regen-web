@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import FormLabel from '@mui/material/FormLabel';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
 
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Geocoder from 'web-components/lib/components/map/Geocoder';
 import { getErrorMessage } from 'web-components/lib/components/form/errors';
-import { useCreateUserOrganizationMutation, useReallyCreateUserMutation } from '../generated/graphql';
+import {
+  useCreateUserOrganizationMutation,
+  useReallyCreateUserMutation,
+} from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,12 +33,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) => void }> = ({
-  onCreate,
-}) => {
+const BuyerCreate: React.FC<{
+  onCreate?: (walletId: string, addressId: string) => void;
+}> = ({ onCreate }) => {
   const classes = useStyles();
 
-  const [createUser, { data: userData, error: userError }] = useReallyCreateUserMutation();
+  const [createUser, { data: userData, error: userError }] =
+    useReallyCreateUserMutation();
 
   const [
     createUserOrganization,
@@ -75,8 +79,11 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) =
                 },
               });
               const newAddressId =
-                result.data?.createUserOrganization?.organization?.partyByPartyId?.addressId;
-              const newWalletId = result.data?.createUserOrganization?.organization?.partyByPartyId?.walletId;
+                result.data?.createUserOrganization?.organization
+                  ?.partyByPartyId?.addressId;
+              const newWalletId =
+                result.data?.createUserOrganization?.organization
+                  ?.partyByPartyId?.walletId;
               setAddressId(newAddressId);
               setWalletId(newWalletId);
               if (onCreate) {
@@ -94,8 +101,10 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) =
                   },
                 },
               });
-              const newAddressId = result.data?.reallyCreateUser?.user?.partyByPartyId?.addressId;
-              const newWalletId = result.data?.reallyCreateUser?.user?.partyByPartyId?.walletId;
+              const newAddressId =
+                result.data?.reallyCreateUser?.user?.partyByPartyId?.addressId;
+              const newWalletId =
+                result.data?.reallyCreateUser?.user?.partyByPartyId?.walletId;
               setAddressId(newAddressId);
               setWalletId(newWalletId);
               if (onCreate) {
@@ -117,8 +126,16 @@ const BuyerCreate: React.FC<{ onCreate?: (walletId: string, addressId: string) =
             value={buyerType}
             onChange={({ target: { value } }) => setBuyerType(value)}
           >
-            <FormControlLabel value="organization" control={<Radio />} label="Organization" />
-            <FormControlLabel value="user" control={<Radio />} label="Individual person" />
+            <FormControlLabel
+              value="organization"
+              control={<Radio />}
+              label="Organization"
+            />
+            <FormControlLabel
+              value="user"
+              control={<Radio />}
+              label="Individual person"
+            />
           </RadioGroup>
         </FormControl>
         {buyerType === 'organization' ? (

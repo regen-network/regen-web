@@ -1,10 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
 import Img from 'gatsby-image';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import TitleDescription from 'web-components/lib/components/title-description';
 import { DevLedgerSectionQuery } from '../../generated/graphql';
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.spacing(12),
       margin: `0 auto ${theme.spacing(10.5)}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '60%',
       margin: `0 auto ${theme.spacing(6.5)}`,
     },

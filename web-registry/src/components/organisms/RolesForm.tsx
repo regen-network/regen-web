@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import cx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import { RoleField, FormValues } from 'web-components/lib/components/inputs/RoleField';
+import {
+  RoleField,
+  FormValues,
+} from 'web-components/lib/components/inputs/RoleField';
 import Title from 'web-components/lib/components/title';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
@@ -50,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(18),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
   },
@@ -58,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(12),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(10),
     },
   },
@@ -67,10 +71,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function getEntity(query?: GetOrganizationProfileByEmailQuery): FormValues | null {
+function getEntity(
+  query?: GetOrganizationProfileByEmailQuery,
+): FormValues | null {
   const user = query?.userByEmail;
   if (user) {
-    const org = user?.organizationMembersByMemberId?.nodes[0]?.organizationByOrganizationId;
+    const org =
+      user?.organizationMembersByMemberId?.nodes[0]
+        ?.organizationByOrganizationId;
     if (org) {
       return {
         '@type': 'http://regen.network/Organization',
@@ -81,7 +89,8 @@ function getEntity(query?: GetOrganizationProfileByEmailQuery): FormValues | nul
         'http://schema.org/email': user.email,
         'http://regen.network/responsiblePerson': user.partyByPartyId?.name,
         'http://regen.network/sharePermission': true,
-        'http://schema.org/location': org.partyByPartyId?.addressByAddressId?.feature,
+        'http://schema.org/location':
+          org.partyByPartyId?.addressByAddressId?.feature,
         projectCreator: true,
       };
     } else {
@@ -100,7 +109,11 @@ function getEntity(query?: GetOrganizationProfileByEmailQuery): FormValues | nul
   return null;
 }
 
-const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCreator }) => {
+const RolesForm: React.FC<RolesFormProps> = ({
+  submit,
+  initialValues,
+  projectCreator,
+}) => {
   const [entities, setEntities] = useState<Array<FormValues>>([]);
   const styles = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
@@ -109,6 +122,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
       uri: 'http://regen.network/ProjectPageShape',
     },
   });
+
   const [createUser] = useReallyCreateUserMutation();
   const [createOrganization] = useReallyCreateOrganizationMutation();
   const [updateUserById] = useUpdateUserByIdMutation();
@@ -126,7 +140,8 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
       }
       initEntities = values.filter(
         // Remove duplicates and empty values
-        (v, i, self) => self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
+        (v, i, self) =>
+          self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
       );
     } else if (creatorEntity) {
       initEntities = [creatorEntity];
@@ -164,7 +179,9 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
     });
   };
 
-  const validateEntity = async (e: FormValues): Promise<FormikErrors<FormValues>> => {
+  const validateEntity = async (
+    e: FormValues,
+  ): Promise<FormikErrors<FormValues>> => {
     const errors: FormikErrors<FormValues> = {};
     if (graphData?.shaclGraphByUri?.graph) {
       const report = await validate(
@@ -180,7 +197,9 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
     return errors;
   };
 
-  const validateProject = async (values: RolesValues): Promise<FormikErrors<RolesValues>> => {
+  const validateProject = async (
+    values: RolesValues,
+  ): Promise<FormikErrors<RolesValues>> => {
     const errors: FormikErrors<RolesValues> = {};
     if (graphData?.shaclGraphByUri?.graph) {
       const projectPageData = { ...getProjectPageBaseData(), ...values };
@@ -199,7 +218,9 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
     return errors;
   };
 
-  const saveIndividual = async (updatedEntity: IndividualFormValues): Promise<FormValues> => {
+  const saveIndividual = async (
+    updatedEntity: IndividualFormValues,
+  ): Promise<FormValues> => {
     if (!updatedEntity.id) {
       // Create
       try {
@@ -214,11 +235,13 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
         });
         if (userRes?.data?.reallyCreateUser?.user?.id) {
           updatedEntity.id = userRes?.data?.reallyCreateUser?.user?.id;
-          updatedEntity.partyId = userRes?.data?.reallyCreateUser?.user?.partyId;
+          updatedEntity.partyId =
+            userRes?.data?.reallyCreateUser?.user?.partyId;
         }
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
+        // eslint-disable-next-line no-console
         console.log(e);
       }
       const newEntities = [...entities, { ...updatedEntity }];
@@ -238,17 +261,22 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
+        // eslint-disable-next-line no-console
         console.log(e);
       }
       const updatedEntities = entities.map((existingEntity: FormValues) =>
-        existingEntity.id === updatedEntity.id ? { ...updatedEntity } : existingEntity,
+        existingEntity.id === updatedEntity.id
+          ? { ...updatedEntity }
+          : existingEntity,
       );
       setEntities(updatedEntities);
     }
     return Promise.resolve(updatedEntity);
   };
 
-  const saveOrganization = async (updatedEntity: OrganizationFormValues): Promise<FormValues> => {
+  const saveOrganization = async (
+    updatedEntity: OrganizationFormValues,
+  ): Promise<FormValues> => {
     if (!updatedEntity.id) {
       // Create
       try {
@@ -275,17 +303,21 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
             },
           });
           if (orgRes?.data?.reallyCreateOrganization?.organization?.id) {
-            updatedEntity.id = orgRes?.data?.reallyCreateOrganization?.organization?.id;
-            updatedEntity.partyId = orgRes?.data?.reallyCreateOrganization?.organization?.partyId;
+            updatedEntity.id =
+              orgRes?.data?.reallyCreateOrganization?.organization?.id;
+            updatedEntity.partyId =
+              orgRes?.data?.reallyCreateOrganization?.organization?.partyId;
             updatedEntity.addressId =
               orgRes?.data?.reallyCreateOrganization?.organization?.partyByPartyId?.addressId;
             updatedEntity.ownerId = ownerRes?.data?.reallyCreateUser?.user?.id;
-            updatedEntity.ownerPartyId = ownerRes?.data?.reallyCreateUser?.user?.partyId;
+            updatedEntity.ownerPartyId =
+              ownerRes?.data?.reallyCreateUser?.user?.partyId;
           }
         }
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
+        // eslint-disable-next-line no-console
         console.log(e);
       }
       const newEntities = [...entities, { ...updatedEntity }];
@@ -325,6 +357,7 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
+        // eslint-disable-next-line no-console
         console.log(e);
       }
       const updatedEntities = entities.map((existingEntity: FormValues) =>
@@ -342,9 +375,12 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
         validateOnMount
         initialValues={
           initialValues || {
-            'http://regen.network/landOwner': initialValues?.['http://regen.network/landOwner'],
-            'http://regen.network/landSteward': initialValues?.['http://regen.network/landSteward'],
-            'http://regen.network/projectDeveloper': initialValues?.['http://regen.network/projectDeveloper'],
+            'http://regen.network/landOwner':
+              initialValues?.['http://regen.network/landOwner'],
+            'http://regen.network/landSteward':
+              initialValues?.['http://regen.network/landSteward'],
+            'http://regen.network/projectDeveloper':
+              initialValues?.['http://regen.network/projectDeveloper'],
             'http://regen.network/projectOriginator':
               initialValues?.['http://regen.network/projectOriginator'],
           }
@@ -424,7 +460,9 @@ const RolesForm: React.FC<RolesFormProps> = ({ submit, initialValues, projectCre
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
-                saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
+                saveDisabled={
+                  !isValid || isSubmitting || !Object.keys(touched).length
+                }
               />
             </Form>
           );

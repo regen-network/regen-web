@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(12),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(3),
     },
   },
@@ -46,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginRight: theme.spacing(2.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '57%',
       marginRight: theme.spacing(1.25),
     },
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(2.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginLeft: theme.spacing(1.25),
       width: '43%',
     },
@@ -83,8 +84,11 @@ const BasicInfoForm: React.FC<{
       enableReinitialize
       validateOnMount
       initialValues={{
-        'http://schema.org/name': initialValues?.['http://schema.org/name'] || '',
-        'http://regen.network/size': initialValues?.['http://regen.network/size'] || {
+        'http://schema.org/name':
+          initialValues?.['http://schema.org/name'] || '',
+        'http://regen.network/size': initialValues?.[
+          'http://regen.network/size'
+        ] || {
           'http://qudt.org/1.1/schema/qudt#numericValue': {
             '@type': 'http://www.w3.org/2001/XMLSchema#double',
             '@value': undefined,
@@ -156,8 +160,14 @@ const BasicInfoForm: React.FC<{
                     component={SelectTextField}
                     name="['http://regen.network/size'].['http://qudt.org/1.1/schema/qudt#unit'].@value"
                     options={[
-                      { value: 'http://qudt.org/1.1/vocab/unit#HA', label: 'Hectares' },
-                      { value: 'http://qudt.org/1.1/vocab/unit#AC', label: 'Acres' },
+                      {
+                        value: 'http://qudt.org/1.1/vocab/unit#HA',
+                        label: 'Hectares',
+                      },
+                      {
+                        value: 'http://qudt.org/1.1/vocab/unit#AC',
+                        label: 'Acres',
+                      },
                     ]}
                   />
                 </div>
@@ -165,7 +175,9 @@ const BasicInfoForm: React.FC<{
             </OnBoardingCard>
             <ProjectPageFooter
               onSave={submitForm}
-              saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
+              saveDisabled={
+                !isValid || isSubmitting || !Object.keys(touched).length
+              }
             />
           </Form>
         );

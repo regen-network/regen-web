@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 interface DecentralizeIconProps {
   color?: string;
@@ -20,7 +20,10 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
   }),
 }));
 
-export default function DecentralizeIcon({ height, width }: DecentralizeIconProps): JSX.Element {
+export default function DecentralizeIcon({
+  height,
+  width,
+}: DecentralizeIconProps): JSX.Element {
   const classes = useStyles({ height, width });
 
   return (

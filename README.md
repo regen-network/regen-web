@@ -45,6 +45,7 @@ yarn build
 ## Environment variables
 
 Set variables in `.env` files in `web-registry/` and `web-storybook/` folders based on provided `.env.example` files.
+Set variables in `.env.development` and `.env.production` in `web-www/` based on `.env.development.example` and `.env.production.example` respectively.
 
 For `web-auth`, follow these [setup instructions](web-auth/README.md#setup).
 

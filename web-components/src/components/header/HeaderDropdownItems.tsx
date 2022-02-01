@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
 
 import Title from '../title';
 import { NavLinkProps } from './NavLink';
@@ -44,13 +44,20 @@ export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({
 }) => {
   const styles = useStyles();
   return (
-    <Box display="flex" flexWrap="nowrap" alignItems="center" className={styles.item}>
+    <Box
+      display="flex"
+      flexWrap="nowrap"
+      alignItems="center"
+      className={styles.item}
+    >
       {SVG && (
         <Box mr={3}>
           <SVG />
         </Box>
       )}
-      <LinkComponent href={props.href}>{ReactHtmlParser(props.title)}</LinkComponent>
+      <LinkComponent href={props.href}>
+        {ReactHtmlParser(props.title)}
+      </LinkComponent>
       {props.right && <Box ml={3}>{props.right()}</Box>}
     </Box>
   );
@@ -73,7 +80,11 @@ export const HeaderDropdownColumn: React.FC<{
         </Box>
       )}
       {props.items.map((link, i) => (
-        <HeaderDropdownItem key={i} {...link} linkComponent={props.linkComponent} />
+        <HeaderDropdownItem
+          key={i}
+          {...link}
+          linkComponent={props.linkComponent}
+        />
       ))}
     </Box>
   );

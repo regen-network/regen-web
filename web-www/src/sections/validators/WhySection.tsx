@@ -1,7 +1,8 @@
 import React from 'react';
+import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../components/BackgroundSection';
 import TitleDescription from 'web-components/lib/components/title-description';
 import { ValidatorsWhySectionQuery } from '../../generated/graphql';

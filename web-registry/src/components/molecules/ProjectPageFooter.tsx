@@ -10,11 +10,20 @@ interface Props {
   saveDisabled: boolean;
 }
 
-const ProjectPageFooter: React.FC<Props> = ({ saveText, saveDisabled, onSave, ...props }) => {
+const ProjectPageFooter: React.FC<Props> = ({
+  saveText,
+  saveDisabled,
+  onSave,
+  ...props
+}) => {
   const { isEdit } = useProjectEditContext();
 
   return isEdit ? (
-    <EditProjectPageFooter saveText={saveText || 'Save'} onSave={onSave} saveDisabled={saveDisabled} />
+    <EditProjectPageFooter
+      saveText={saveText || 'Save'}
+      onSave={onSave}
+      saveDisabled={saveDisabled}
+    />
   ) : (
     <OnboardingFooter
       saveText={saveText || 'Save and Next'}

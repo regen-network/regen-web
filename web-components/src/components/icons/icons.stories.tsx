@@ -58,16 +58,13 @@ import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIc
 import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
 import { HorizontalDotsIcon } from 'web-components/lib/components/icons/HorizontalDotsIcon';
 
-import { withKnobs, text } from '@storybook/addon-knobs';
-
 export default {
-  title: 'Components|Icons',
+  title: 'Icons',
   component: ArrowDownIcon,
-  decorators: [withKnobs],
 };
 
 export const arrowIcon = (): JSX.Element => (
-  <ArrowDownIcon color={text('color', '#000')} direction={text('direction', 'down')} />
+  <ArrowDownIcon color={'#000'} direction={'down'} />
 );
 
 export const accountabilityIcon = (): JSX.Element => <AccountabilityIcon />;
@@ -78,7 +75,9 @@ export const avatarIcon = (): JSX.Element => <AvatarIcon />;
 
 export const blockIcon = (): JSX.Element => <BlockIcon color="black" />;
 
-export const breadcrumbIcon = (): JSX.Element => <BreadcrumbIcon direction={text('direction', 'down')} />;
+export const breadcrumbIcon = (): JSX.Element => (
+  <BreadcrumbIcon direction={'down'} />
+);
 
 export const checkedIcon = (): JSX.Element => <CheckedIcon />;
 
@@ -90,9 +89,11 @@ export const coBenefitsIcon = (): JSX.Element => <CoBenefitsIcon />;
 
 export const countingIcon = (): JSX.Element => <CountingIcon />;
 
-export const creditsIcon = (): JSX.Element => <CreditsIcon color={text('color', '#000')} />;
+export const creditsIcon = (): JSX.Element => <CreditsIcon color={'#000'} />;
 
-export const currentCreditsIcon = (): JSX.Element => <CurrentCreditsIcon color={text('color', '#4FB573')} />;
+export const currentCreditsIcon = (): JSX.Element => (
+  <CurrentCreditsIcon color={'#4FB573'} />
+);
 
 export const discordIcon = (): JSX.Element => <DiscordIcon />;
 
@@ -132,7 +133,7 @@ export const organizationIcon = (): JSX.Element => <OrganizationIcon />;
 
 export const phoneIcon = (): JSX.Element => <PhoneIcon />;
 
-export const pinIcon = (): JSX.Element => <PinIcon fontSize={text('fontSize', 'small')} />;
+export const pinIcon = (): JSX.Element => <PinIcon fontSize={'small'} />;
 
 export const playIcon = (): JSX.Element => <PlayIcon />;
 
@@ -176,10 +177,12 @@ export const trustIcon = (): JSX.Element => <TrustIcon />;
 
 export const twitterIcon = (): JSX.Element => <TwitterIcon />;
 
-export const verifiedIcon = (): JSX.Element => <VerifiedIcon color={text('color', '#000')} />;
+export const verifiedIcon = (): JSX.Element => <VerifiedIcon color={'#000'} />;
 
 export const walletIcon = (): JSX.Element => <WalletIcon />;
 
-export const whitepaperIcon = (): JSX.Element => <WhitepaperIcon color="black" />;
+export const whitepaperIcon = (): JSX.Element => (
+  <WhitepaperIcon color="black" />
+);
 
 export const youtubeIcon = (): JSX.Element => <YoutubeIcon />;

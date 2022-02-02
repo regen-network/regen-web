@@ -1,9 +1,10 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/lib/components/section';
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     color: theme.palette.info.dark,
     lineHeight: '150%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
       paddingBottom: theme.spacing(4.5),
     },
@@ -78,9 +79,19 @@ interface Props {
 const FeaturedSection: React.FC<Props> = ({ content }) => {
   const styles = useStyles();
 
-  if (content?.header && content.titleRaw && content.descriptionRaw && content.button && content.image) {
+  if (
+    content?.header &&
+    content.titleRaw &&
+    content.descriptionRaw &&
+    content.button &&
+    content.image
+  ) {
     return (
-      <Section className={styles.root} title={content.header} titleVariant="subtitle2">
+      <Section
+        className={styles.root}
+        title={content.header}
+        titleVariant="subtitle2"
+      >
         <div className={styles.card}>
           <GreenCard>
             <Grid className={styles.grid} container wrap="nowrap">
@@ -99,7 +110,10 @@ const FeaturedSection: React.FC<Props> = ({ content }) => {
                 </ContainedButton>
               </Grid>
               <Grid item xs={12}>
-                <Image src={content.image?.image?.asset?.url || ''} alt={content.image?.imageAlt || ''} />
+                <Image
+                  src={content.image?.image?.asset?.url || ''}
+                  alt={content.image?.imageAlt || ''}
+                />
               </Grid>
             </Grid>
           </GreenCard>
@@ -107,6 +121,7 @@ const FeaturedSection: React.FC<Props> = ({ content }) => {
       </Section>
     );
   } else {
+    // eslint-disable-next-line no-console
     console.error('Missing some fields. Please check Sanity');
     return <></>;
   }

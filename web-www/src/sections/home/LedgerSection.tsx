@@ -1,12 +1,14 @@
 import React from 'react';
 import BackgroundImage from 'gatsby-background-image';
 import { graphql, useStaticQuery } from 'gatsby';
-import Grid from '@material-ui/core/Grid';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import Title from 'web-components/lib/components/title';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 import Img from 'gatsby-image';
+
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Title from 'web-components/lib/components/title';
 import { HomeLedgerSectionQuery } from '../../generated/graphql';
 
 let useStyles = makeStyles((theme: Theme) => ({
@@ -23,7 +25,7 @@ let useStyles = makeStyles((theme: Theme) => ({
     },
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(6),
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
@@ -46,7 +48,7 @@ let useStyles = makeStyles((theme: Theme) => ({
     },
   },
   button: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(12.5),
       fontSize: theme.spacing(4.5),
     },
@@ -57,7 +59,7 @@ let useStyles = makeStyles((theme: Theme) => ({
   },
   description: {
     color: theme.palette.info.dark,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
       lineHeight: '150%',
       paddingTop: theme.spacing(3),

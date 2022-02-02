@@ -1,11 +1,12 @@
 import React from 'react';
+import { makeStyles, useTheme } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import SanityImage from 'gatsby-plugin-sanity-image';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Card from 'web-components/lib/components/cards/Card';
 
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       paddingTop: theme.spacing(9),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingTop: theme.spacing(20.75),
     },
   },
@@ -27,16 +28,16 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: theme.spacing(83.75),
       position: 'absolute',
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: `${theme.spacing(6)} ${theme.spacing(5)}`,
     },
   },
   title: {
     lineHeight: '135%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(6),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingBottom: theme.spacing(3),
     },
     [theme.breakpoints.up('md')]: {
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textTransform: 'uppercase',
     letterSpacing: '1px',
     lineHeight: theme.spacing(3.75),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       lineHeight: theme.spacing(4.5),
     },
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     lineHeight: '140%',
     color: theme.palette.info.main,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5.25),
     },
   },
@@ -73,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       width: '60%',
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
     },
   },
@@ -94,13 +95,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       bottom: theme.spacing(57),
       left: '5%',
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       transform: 'rotate(116.57deg)',
       width: theme.spacing(65),
       top: theme.spacing(70),
       left: theme.spacing(-5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       top: theme.spacing(50),
       left: theme.spacing(-15),
     },
@@ -116,14 +117,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       top: theme.spacing(58),
       width: '25%',
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       zIndex: -1,
       transform: 'rotate(68.36deg)',
       right: '12%',
       width: theme.spacing(87.5),
       top: theme.spacing(-20),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(35),
       top: theme.spacing(-16),
     },
@@ -133,7 +134,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       left: '10%',
       bottom: 0,
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginRight: '20%',
       marginLeft: theme.spacing(5),
     },
@@ -146,7 +147,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('xl')]: {
       top: theme.spacing(60),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       position: 'relative',
       overflow: 'visible',
       marginLeft: '30%',
@@ -163,7 +164,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('xl')]: {
       marginTop: '-8%',
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingTop: theme.spacing(15),
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
@@ -196,7 +197,7 @@ const query = graphql`
 const ClimateSection: React.FC = (): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
-  const downSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const downMd = useMediaQuery(theme.breakpoints.down('md'));
   const data = useStaticQuery<HomeClimateSectionQuery>(query);
   const content = data.sanityHomePageWeb?.climateSection;
 
@@ -214,7 +215,7 @@ const ClimateSection: React.FC = (): JSX.Element => {
         <div className={styles.cardContent}>{content?.problem?.body}</div>
       </Card>
       <SanityImage {...(content?.image as any)} alt="Map" className={styles.image} />
-      {!downSm && <hr className={clsx(styles.line, styles.solutionLine)} />}
+      {!downMd && <hr className={clsx(styles.line, styles.solutionLine)} />}
       <Card
         className={clsx(styles.card, styles.solutionCard)}
         borderColor={theme.palette.grey['100']}
@@ -224,7 +225,7 @@ const ClimateSection: React.FC = (): JSX.Element => {
           {content?.solution?.title}
         </Title>
         <div className={styles.cardContent}>{content?.solution?.body}</div>
-        {downSm && <hr className={clsx(styles.line, styles.solutionLine)} />}
+        {downMd && <hr className={clsx(styles.line, styles.solutionLine)} />}
       </Card>
       <div className={styles.titleContainer}>
         <Title variant="h1" className={styles.title}>

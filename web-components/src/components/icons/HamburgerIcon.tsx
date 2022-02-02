@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 interface props extends SvgIconProps {
@@ -15,7 +15,12 @@ const useStyles = makeStyles<Theme, props>((theme: Theme) => ({
   }),
 }));
 
-export default function HamburgerIcon({ width, height, className, ...props }: props): JSX.Element {
+export default function HamburgerIcon({
+  width,
+  height,
+  className,
+  ...props
+}: props): JSX.Element {
   const classes = useStyles({ width, height });
 
   return (

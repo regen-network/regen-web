@@ -1,5 +1,5 @@
 import React from 'react';
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { Variant } from '@mui/material/styles/createTypography';
 
 import ImageItem, { ImageItemProps } from '../image-item';
 import ResponsiveSlider from './ResponsiveSlider';

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Table, TableBody, TableHead, TableRow } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
+import { Table, TableBody, TableHead, TableRow, Box } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import {
   StyledTableCell,
   StyledTableContainer,
@@ -10,7 +9,11 @@ import {
 } from 'web-components/lib/components/table';
 import Section from 'web-components/lib/components/section';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
-import { getComparator, Order, stableSort } from 'web-components/lib/components/table/sort';
+import {
+  getComparator,
+  Order,
+  stableSort,
+} from 'web-components/lib/components/table/sort';
 import { format } from 'date-fns';
 
 const useStyles = makeStyles(theme => ({
@@ -127,14 +130,24 @@ export const Ecocredits: React.FC = () => {
               <TableHead>
                 <TableRow>
                   <StyledTableCell>
-                    <div className={styles.batchDenomTitleCell}>Batch Denom</div>
+                    <div className={styles.batchDenomTitleCell}>
+                      Batch Denom
+                    </div>
                   </StyledTableCell>
                   <StyledTableCell>Issuer</StyledTableCell>
                   <StyledTableCell>Credit Class</StyledTableCell>
-                  <SortableCell field="amount_tradeable">Amount Tradeable</SortableCell>
-                  <SortableCell field="amount_retired">Amount Retired</SortableCell>
-                  <SortableCell field="batch_start_date">Batch Start Date</SortableCell>
-                  <SortableCell field="batch_end_date">Batch End Date</SortableCell>
+                  <SortableCell field="amount_tradeable">
+                    Amount Tradeable
+                  </SortableCell>
+                  <SortableCell field="amount_retired">
+                    Amount Retired
+                  </SortableCell>
+                  <SortableCell field="batch_start_date">
+                    Batch Start Date
+                  </SortableCell>
+                  <SortableCell field="batch_end_date">
+                    Batch End Date
+                  </SortableCell>
                   <StyledTableCell>Project Location</StyledTableCell>
                   <StyledTableCell className={styles.stickyHead}>
                     <Box>
@@ -145,43 +158,53 @@ export const Ecocredits: React.FC = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {stableSort(rows, getComparator(order, orderBy)).map((row, i) => (
-                  <StyledTableRow key={i}>
-                    <StyledTableCell>{row.batch_denom}</StyledTableCell>
-                    <StyledTableCell>
-                      <span className={styles.greenText}>{row.issuer}</span>
-                    </StyledTableCell>
-                    <StyledTableCell>{row.class_id}</StyledTableCell>
-                    <StyledTableCell>{formatNumber(row.amount_tradeable)}</StyledTableCell>
-                    <StyledTableCell>{formatNumber(row.amount_retired)}</StyledTableCell>
-                    <StyledTableCell>
-                      <span className={styles.greyText}>{formatDate(row.start_date)}</span>
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      <span className={styles.greyText}>{formatDate(row.end_date)}</span>
-                    </StyledTableCell>
-                    <StyledTableCell>{row.project_location}</StyledTableCell>
-                    <StyledTableCell className={styles.stickyCell}>
-                      <div className={styles.borderLeft} />
-                      <TableActionButtons
-                        buttons={[
-                          {
-                            label: 'sell',
-                            onClick: () => 'TODO sell credit',
-                          },
-                          {
-                            label: 'Transfer',
-                            onClick: () => 'TODO transfer credit',
-                          },
-                          {
-                            label: 'Retire',
-                            onClick: () => 'TODO retire credit',
-                          },
-                        ]}
-                      />
-                    </StyledTableCell>
-                  </StyledTableRow>
-                ))}
+                {stableSort(rows, getComparator(order, orderBy)).map(
+                  (row, i) => (
+                    <StyledTableRow key={i}>
+                      <StyledTableCell>{row.batch_denom}</StyledTableCell>
+                      <StyledTableCell>
+                        <span className={styles.greenText}>{row.issuer}</span>
+                      </StyledTableCell>
+                      <StyledTableCell>{row.class_id}</StyledTableCell>
+                      <StyledTableCell>
+                        {formatNumber(row.amount_tradeable)}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        {formatNumber(row.amount_retired)}
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <span className={styles.greyText}>
+                          {formatDate(row.start_date)}
+                        </span>
+                      </StyledTableCell>
+                      <StyledTableCell>
+                        <span className={styles.greyText}>
+                          {formatDate(row.end_date)}
+                        </span>
+                      </StyledTableCell>
+                      <StyledTableCell>{row.project_location}</StyledTableCell>
+                      <StyledTableCell className={styles.stickyCell}>
+                        <div className={styles.borderLeft} />
+                        <TableActionButtons
+                          buttons={[
+                            {
+                              label: 'sell',
+                              onClick: () => 'TODO sell credit',
+                            },
+                            {
+                              label: 'Transfer',
+                              onClick: () => 'TODO transfer credit',
+                            },
+                            {
+                              label: 'Retire',
+                              onClick: () => 'TODO retire credit',
+                            },
+                          ]}
+                        />
+                      </StyledTableCell>
+                    </StyledTableRow>
+                  ),
+                )}
               </TableBody>
             </Table>
           </StyledTableContainer>

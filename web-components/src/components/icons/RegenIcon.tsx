@@ -1,5 +1,5 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 
 interface Props {
   color?: string;
@@ -10,7 +10,13 @@ export default function RegenIcon({ color, className }: Props): JSX.Element {
   color = color ? color : '#000';
   return (
     <SvgIcon viewBox="0 0 186 84" className={className}>
-      <svg width="186" height="84" viewBox="0 0 186 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        width="186"
+        height="84"
+        viewBox="0 0 186 84"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <g clipPath="url(#clip0)">
           <path
             d="M39.8276 27.3231V27.3746L34.9844 1.80445L30.9656 0.515625L28.4409 3.91811L39.8276 27.3231Z"
@@ -24,7 +30,10 @@ export default function RegenIcon({ color, className }: Props): JSX.Element {
             d="M57.7577 18.4045L55.13 18.6623L52.0386 28.4573L58.8397 20.776L57.7577 18.4045Z"
             fill={color}
           />
-          <path d="M80.222 20.4666V16.2908L76.1516 15.002L57.0879 32.8908L80.222 20.4666Z" fill={color} />
+          <path
+            d="M80.222 20.4666V16.2908L76.1516 15.002L57.0879 32.8908L80.222 20.4666Z"
+            fill={color}
+          />
           <path
             d="M33.6447 31.0348L27.9771 22.5286L28.0802 22.7348L27.9771 22.5286L25.401 22.941L24.9888 25.5186L33.6447 31.0348Z"
             fill={color}
@@ -53,7 +62,10 @@ export default function RegenIcon({ color, className }: Props): JSX.Element {
             d="M44.5678 56.9658L42.5068 66.9671L44.6193 68.4621L46.7318 66.9155L44.5678 56.9658Z"
             fill={color}
           />
-          <path d="M80.2735 63.0491L57.0879 50.728L76.2546 68.5137L80.2735 67.2249V63.0491Z" fill={color} />
+          <path
+            d="M80.2735 63.0491L57.0879 50.728L76.2546 68.5137L80.2735 67.2249V63.0491Z"
+            fill={color}
+          />
           <path
             d="M54.7178 64.9566L49.5139 56.2441L50.699 66.2454L53.1721 67.0187L54.7178 64.9566Z"
             fill={color}
@@ -113,7 +125,12 @@ export default function RegenIcon({ color, className }: Props): JSX.Element {
         </g>
         <defs>
           <clipPath id="clip0">
-            <rect width="185.433" height="82.5876" fill={color} transform="translate(0.515137 0.515625)" />
+            <rect
+              width="185.433"
+              height="82.5876"
+              fill={color}
+              transform="translate(0.515137 0.515625)"
+            />
           </clipPath>
         </defs>
       </svg>

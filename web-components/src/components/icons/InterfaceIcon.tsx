@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 interface IconProps {
@@ -37,11 +37,35 @@ function InterfaceIcon({ className }: IconProps): JSX.Element {
         mask="url(#path-1-inside-1)"
       />
       <path d="M3 20L117 20" stroke="#4FB573" strokeWidth="2" />
-      <ellipse cx="10.7143" cy="11.7097" rx="2.71429" ry="2.70968" fill="#4FB573" />
-      <ellipse cx="18.8572" cy="11.7097" rx="2.71428" ry="2.70968" fill="#4FB573" />
+      <ellipse
+        cx="10.7143"
+        cy="11.7097"
+        rx="2.71429"
+        ry="2.70968"
+        fill="#4FB573"
+      />
+      <ellipse
+        cx="18.8572"
+        cy="11.7097"
+        rx="2.71428"
+        ry="2.70968"
+        fill="#4FB573"
+      />
       <ellipse cx="27" cy="11.7097" rx="2.71428" ry="2.70968" fill="#4FB573" />
-      <path d="M22 30H63" stroke="#FFC432" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M22 53H63" stroke="#FFC432" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M22 30H63"
+        stroke="#FFC432"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M22 53H63"
+        stroke="#FFC432"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
       <rect
         x="22"
         y="44"

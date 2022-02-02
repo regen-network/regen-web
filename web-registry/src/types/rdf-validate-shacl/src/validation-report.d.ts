@@ -1,4 +1,12 @@
-import { BlankNode, DataFactory, DatasetCore, DatasetCoreFactory, NamedNode, Quad, Term } from 'rdf-js';
+import {
+  BlankNode,
+  DataFactory,
+  DatasetCore,
+  DatasetCoreFactory,
+  NamedNode,
+  Quad,
+  Term,
+} from 'rdf-js';
 import { GraphPointer } from 'clownface';
 
 declare namespace ValidationReport {

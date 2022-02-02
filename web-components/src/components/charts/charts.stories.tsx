@@ -4,7 +4,7 @@ import moment from 'moment';
 import BarChart from './BarChart';
 
 export default {
-  title: 'Components|Charts',
+  title: 'Charts',
   component: BarChart,
 };
 
@@ -60,7 +60,9 @@ export const barChart = (): JSX.Element => {
         y="tokens"
         width={907}
         height={277}
-        labels={({ datum }) => (datum.date ? moment(datum.date).format('MMMM YYYY') : '')}
+        labels={({ datum }) =>
+          datum.date ? moment(datum.date).format('MMMM YYYY') : ''
+        }
         barWidth={17}
       />
     </div>

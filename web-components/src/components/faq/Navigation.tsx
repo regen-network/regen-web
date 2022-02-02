@@ -1,9 +1,14 @@
 import React from 'react';
-import { withStyles, makeStyles, Theme, useTheme } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Box from '@material-ui/core/Box';
+import {
+  withStyles,
+  makeStyles,
+  DefaultTheme as Theme,
+  useTheme,
+} from '@mui/styles';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import Box from '@mui/material/Box';
 import cx from 'clsx';
 
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
@@ -27,7 +32,7 @@ const StyledList = withStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       background: 'transparent',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       background: theme.palette.primary.main,
       borderRadius: '10px',
       boxShadow: theme.shadows[1],
@@ -36,7 +41,7 @@ const StyledList = withStyles(theme => ({
   },
 }))(List);
 
-const StyledListItem = withStyles(theme => ({
+const StyledListItemButton = withStyles(theme => ({
   root: {
     fontSize: theme.spacing(3.5),
     fontFamily: theme.typography.h1.fontFamily,
@@ -60,7 +65,7 @@ const StyledListItem = withStyles(theme => ({
         color: theme.palette.grey[500],
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: theme.spacing(17.5),
       paddingLeft: theme.spacing(7),
       paddingRight: theme.spacing(5),
@@ -69,7 +74,7 @@ const StyledListItem = withStyles(theme => ({
       },
     },
   },
-}))(ListItem);
+}))(ListItemButton);
 
 const useStyles = makeStyles((theme: Theme) => ({
   action: {
@@ -77,7 +82,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
   },
   icon: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(3.5),
       width: theme.spacing(5.75),
     },
@@ -103,10 +108,9 @@ const Navigation = ({
       {categories.map((name, i) => {
         const selected = !!category && category === name;
         return (
-          <StyledListItem
+          <StyledListItemButton
             key={i}
             className={classes?.listItem}
-            button
             selected={selected}
             onClick={() => {
               onClick(name);
@@ -116,18 +120,22 @@ const Navigation = ({
             <Box
               display={{
                 xs: 'block',
-                sm: showIcon || 'none',
+                sm: showIcon ? 'block' : 'none',
               }}
             >
               <ListItemSecondaryAction className={styles.action}>
                 <BreadcrumbIcon
                   className={styles.icon}
                   direction="next"
-                  color={selected ? theme.palette.info.main : theme.palette.secondary.main}
+                  color={
+                    selected
+                      ? theme.palette.info.main
+                      : theme.palette.secondary.main
+                  }
                 />
               </ListItemSecondaryAction>
             </Box>
-          </StyledListItem>
+          </StyledListItemButton>
         );
       })}
     </StyledList>

@@ -2,7 +2,7 @@ import React from 'react';
 import Certificate from 'web-components/lib/components/certificate';
 
 export default {
-  title: 'Components|Certificate',
+  title: 'Certificate',
   component: Certificate,
 };
 
@@ -14,12 +14,19 @@ export const certificate = (): JSX.Element => (
     equivalentTonsCO2={1000}
     buyerName="Marie Gauthier"
     date={'10-10-2020'}
-    issuer={{ companyName: 'Regen Network', personName: 'Christian Shearer', personRole: 'CEO' }}
-    issuee={{
-      companyName: 'John Doe Ltd',
-      personName: 'John Doe',
-      personRole: 'Director',
-    }}
-    verifier={{ companyName: 'RSM Australia Pty Ltd', personName: 'Tim Pittaway', personRole: 'Partner' }}
+    stakeholders={[
+      {
+        companyName: 'Regen Network',
+        personName: 'Christian Shearer',
+        personRole: 'CEO',
+        label: 'issuer',
+      },
+      {
+        companyName: 'John Doe Ltd',
+        personName: 'John Doe',
+        personRole: 'Director',
+        label: 'issuee',
+      },
+    ]}
   />
 );

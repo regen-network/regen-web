@@ -1,8 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Link } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-
 import cx from 'clsx';
 
 import Section from './index';
@@ -27,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(12.5, 0, 30),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(8.75, 2.5, 20),
     },
   },
@@ -41,7 +40,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       flex: 'unset',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       margin: 'inherit',
       flex: 1,
     },
@@ -51,7 +50,7 @@ const useStyles = makeStyles(theme => ({
       margin: '0 auto',
       maxWidth: theme.spacing(140),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       margin: 'inherit',
     },
   },
@@ -66,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
       marginLeft: theme.spacing(4),
     },
@@ -111,7 +110,12 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
         )
       }
     >
-      <div className={cx(formContainer && styles.formWrap, !!classes && classes.formWrap)}>
+      <div
+        className={cx(
+          formContainer && styles.formWrap,
+          !!classes && classes.formWrap,
+        )}
+      >
         {exampleProjectUrl && (
           <Description className={styles.description}>
             See an example{' '}

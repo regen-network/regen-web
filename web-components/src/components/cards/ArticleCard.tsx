@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import MediaCard from './MediaCard';
 import Description from '../description';
@@ -33,7 +33,7 @@ export interface ArticleCardProps {
 const useStyles = makeStyles((theme: Theme) => ({
   description: {
     flex: '1 0 auto',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       padding: `${theme.spacing(2.5)} ${theme.spacing(4)}`,
     },
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     marginBottom: theme.spacing(7.5),
     maxWidth: theme.spacing(50),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginRight: theme.spacing(4),
       marginLeft: theme.spacing(4),
     },
@@ -92,7 +92,13 @@ export default function ArticleCard({
 }: ArticleCardProps): JSX.Element {
   const styles = useStyles({});
   return (
-    <MediaCard className={className} name={name} imgSrc={imgSrc} backgroundGradient={false} elevation={1}>
+    <MediaCard
+      className={className}
+      name={name}
+      imgSrc={imgSrc}
+      backgroundGradient={false}
+      elevation={1}
+    >
       {play && (
         <div className={styles.play}>
           <PlayIcon className={styles.icon} />

@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableHead from '@material-ui/core/TableHead';
-// import TablePagination from '@material-ui/core/TablePagination';
+import { makeStyles } from '@mui/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableHead from '@mui/material/TableHead';
+// import TablePagination from '@mui/material/TablePagination';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-import { StyledTableContainer, StyledTableCell, StyledTableRow, StyledTableSortLabel } from '.';
+import {
+  StyledTableContainer,
+  StyledTableCell,
+  StyledTableRow,
+  StyledTableSortLabel,
+} from '.';
 
 import { getComparator, stableSort, Order } from './sort';
 import DocumentIcon from '../icons/DocumentIcon';
@@ -43,7 +48,7 @@ interface HeadCell {
   numeric: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   rowClickable: {
     cursor: 'pointer',
   },
@@ -83,7 +88,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface EnhancedTableProps {
   classes: ReturnType<typeof useStyles>;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof DocumentRowData) => void;
+  onRequestSort: (
+    event: React.MouseEvent<unknown>,
+    property: keyof DocumentRowData,
+  ) => void;
   order: Order;
   orderBy: string;
   hasViewOnLedgerColumn?: boolean;
@@ -91,9 +99,10 @@ interface EnhancedTableProps {
 
 function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
   const { order, orderBy, onRequestSort, hasViewOnLedgerColumn } = props;
-  const createSortHandler = (property: keyof DocumentRowData) => (event: React.MouseEvent<unknown>) => {
-    onRequestSort(event, property);
-  };
+  const createSortHandler =
+    (property: keyof DocumentRowData) => (event: React.MouseEvent<unknown>) => {
+      onRequestSort(event, property);
+    };
 
   let headCells: HeadCell[] = [
     { id: 'name', numeric: false, label: 'Name of document' },
@@ -112,7 +121,7 @@ function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
           <StyledTableCell
             key={headCell.id}
             align="left"
-            padding="default"
+            padding="normal"
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <StyledTableSortLabel
@@ -151,7 +160,10 @@ const DocumentationTable: React.FC<DocumentationTableProps> = ({
     }
   }
 
-  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof DocumentRowData): void => {
+  const handleRequestSort = (
+    event: React.MouseEvent<unknown>,
+    property: keyof DocumentRowData,
+  ): void => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -161,7 +173,11 @@ const DocumentationTable: React.FC<DocumentationTableProps> = ({
 
   let hasViewOnLedgerColumn: boolean = false;
   for (const r of rows) {
-    if (r.eventByEventId?.creditVintageByEventId?.txHash && txClient && onViewOnLedger) {
+    if (
+      r.eventByEventId?.creditVintageByEventId?.txHash &&
+      txClient &&
+      onViewOnLedger
+    ) {
       hasViewOnLedgerColumn = true;
     }
   }
@@ -182,7 +198,9 @@ const DocumentationTable: React.FC<DocumentationTableProps> = ({
             .map((row, index) => {
               const labelId = `enhanced-table-checkbox-${index}`;
               const hasViewOnLedger =
-                row.eventByEventId?.creditVintageByEventId?.txHash && txClient && onViewOnLedger;
+                row.eventByEventId?.creditVintageByEventId?.txHash &&
+                txClient &&
+                onViewOnLedger;
               return (
                 <StyledTableRow
                   tabIndex={-1}
@@ -190,21 +208,39 @@ const DocumentationTable: React.FC<DocumentationTableProps> = ({
                   className={clsx(canClickRow && styles.rowClickable)}
                   onClick={() => handleClickNavigate(row.url)}
                 >
-                  <StyledTableCell className={styles.nameCell} id={labelId} scope="row">
+                  <StyledTableCell
+                    className={styles.nameCell}
+                    id={labelId}
+                    scope="row"
+                  >
                     <div className={styles.name}>
-                      <DocumentIcon className={styles.icon} fileType={row?.name?.split('.')?.pop()} />{' '}
+                      <DocumentIcon
+                        className={styles.icon}
+                        fileType={row?.name?.split('.')?.pop()}
+                      />{' '}
                       {row.name}
                     </div>
                   </StyledTableCell>
                   <StyledTableCell align="left">{row.type}</StyledTableCell>
                   <StyledTableCell align="left">
-                    {typeof row.date === 'string' && getFormattedDate(row.date, options)}
+                    {typeof row.date === 'string' &&
+                      getFormattedDate(
+                        row.date,
+                        options as Intl.DateTimeFormatOptions,
+                      )}
                   </StyledTableCell>
                   {hasViewOnLedger && onViewOnLedger && (
-                    <StyledTableCell className={styles.documentCell} align="right">
+                    <StyledTableCell
+                      className={styles.documentCell}
+                      align="right"
+                    >
                       <ContainedButton
                         className={clsx(styles.button, styles.ledgerBtn)}
-                        onClick={() => onViewOnLedger(row.eventByEventId.creditVintageByEventId)}
+                        onClick={() =>
+                          onViewOnLedger(
+                            row.eventByEventId.creditVintageByEventId,
+                          )
+                        }
                         startIcon={<ShieldIcon />}
                       >
                         view on ledger
@@ -212,11 +248,20 @@ const DocumentationTable: React.FC<DocumentationTableProps> = ({
                     </StyledTableCell>
                   )}
                   {hasViewOnLedgerColumn && !hasViewOnLedger && (
-                    <StyledTableCell className={styles.documentCell} align="right"></StyledTableCell>
+                    <StyledTableCell
+                      className={styles.documentCell}
+                      align="right"
+                    ></StyledTableCell>
                   )}
-                  <StyledTableCell className={styles.documentCell} align="right">
+                  <StyledTableCell
+                    className={styles.documentCell}
+                    align="right"
+                  >
                     <a href={row.url} target="_blank" rel="noopener noreferrer">
-                      <OutlinedButton startIcon={<EyeIcon />} className={styles.button}>
+                      <OutlinedButton
+                        startIcon={<EyeIcon />}
+                        className={styles.button}
+                      >
                         view document
                       </OutlinedButton>
                     </a>

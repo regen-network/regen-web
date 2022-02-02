@@ -63,7 +63,8 @@ describe('validate', () => {
         ],
         'http://www.w3.org/ns/shacl#description': [
           {
-            '@value': 'This is the name of the farm, ranch, property, or conservation project.',
+            '@value':
+              'This is the name of the farm, ranch, property, or conservation project.',
           },
         ],
         'http://www.w3.org/ns/shacl#datatype': [
@@ -125,7 +126,10 @@ describe('validate', () => {
       },
       {
         '@id': 'http://regen.network/ProjectPlanShape',
-        '@type': ['http://www.w3.org/2000/01/rdf-schema#Class', 'http://www.w3.org/ns/shacl#NodeShape'],
+        '@type': [
+          'http://www.w3.org/2000/01/rdf-schema#Class',
+          'http://www.w3.org/ns/shacl#NodeShape',
+        ],
         'http://www.w3.org/ns/shacl#targetClass': [
           {
             '@id': 'http://regen.network/ProjectPlan',
@@ -180,7 +184,11 @@ describe('validate', () => {
     expect(report1.conforms).toEqual(false);
     expect(report1.results.length).toEqual(1);
 
-    const report2 = await validate(shapes, data, 'http://regen.network/ProjectPlanBasicInfoGroup');
+    const report2 = await validate(
+      shapes,
+      data,
+      'http://regen.network/ProjectPlanBasicInfoGroup',
+    );
     expect(report2.conforms).toEqual(true);
   });
 });

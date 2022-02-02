@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { useLocation } from 'react-router-dom';
 
 import SEO from 'web-components/lib/components/seo';
@@ -8,7 +8,12 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import Modal from 'web-components/lib/components/modal';
 
-import { HeroTitle, FeaturedSection, HeroAction, ImageGridSection } from '../components/molecules';
+import {
+  HeroTitle,
+  FeaturedSection,
+  HeroAction,
+  ImageGridSection,
+} from '../components/molecules';
 import { MoreProjectsSection } from '../components/organisms';
 import { client } from '../sanity';
 import { useAllBuyersPageQuery } from '../generated/sanity-graphql';
@@ -19,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),
     paddingBottom: theme.spacing(20),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(12),
       '& h1': {
         lineHeight: '130%',
@@ -37,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     paddingTop: 0,
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -91,10 +96,14 @@ const BuyersPage = (): JSX.Element => {
         img={buyersHero}
         linearGradient="linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(209.5deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)"
       />
-      {content?.imageGridSection && <ImageGridSection content={content?.imageGridSection} />}
+      {content?.imageGridSection && (
+        <ImageGridSection content={content?.imageGridSection} />
+      )}
       {/* <ApproachSection />
       <InvestingSection /> */}
-      {content?.featuredSection && <FeaturedSection content={content?.featuredSection} />}
+      {content?.featuredSection && (
+        <FeaturedSection content={content?.featuredSection} />
+      )}
       {projectsData?.allProjects?.nodes && (
         <div className="topo-background">
           <MoreProjectsSection
@@ -114,7 +123,7 @@ const BuyersPage = (): JSX.Element => {
         />
       )}
 
-      <FixedFooter justify="flex-end">
+      <FixedFooter justifyContent="flex-end">
         <>
           <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
             {content?.footerButtonText}

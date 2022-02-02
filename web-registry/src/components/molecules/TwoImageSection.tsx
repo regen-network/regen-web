@@ -1,9 +1,10 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+
 import Title from 'web-components/lib/components/title';
 import { Image } from 'web-components/lib/components/image';
-
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { DualImageSection } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     lineHeight: '130%',
     color: theme.palette.primary.main,
     textAlign: 'center',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(20),
     },
     [theme.breakpoints.up('sm')]: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   labelContainer: {
     textAlign: 'center',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(1.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   item: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       '&:first-child': {
         padding: `${theme.spacing(34.25)} 0`,
       },
@@ -52,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       lineHeight: theme.spacing(6.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
       lineHeight: theme.spacing(4.5),
     },
@@ -70,7 +71,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       top: theme.spacing(11),
       padding: theme.spacing(2),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       top: theme.spacing(5),
       padding: `${theme.spacing(3.5)} ${theme.spacing(3)}`,
       width: '95%',
@@ -105,7 +106,10 @@ const TwoImageSection: React.FC<Props> = ({ content }) => {
         </Title>
       </div>
       <Grid item xs={12} sm={6}>
-        <Image backgroundImage src={content?.left?.image?.image?.asset?.url || ''}>
+        <Image
+          backgroundImage
+          src={content?.left?.image?.image?.asset?.url || ''}
+        >
           <div className={classes.item}>
             <Title className={classes.amount}>{content?.left?.boldText}</Title>
             <div className={classes.labelContainer}>
@@ -115,7 +119,10 @@ const TwoImageSection: React.FC<Props> = ({ content }) => {
         </Image>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Image backgroundImage src={content?.right?.image?.image?.asset?.url || ''}>
+        <Image
+          backgroundImage
+          src={content?.right?.image?.image?.asset?.url || ''}
+        >
           <div className={classes.item}>
             <Title className={classes.amount}>{content?.right?.boldText}</Title>
             <div className={classes.labelContainer}>

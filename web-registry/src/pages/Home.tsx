@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import CardMedia from '@material-ui/core/CardMedia';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { makeStyles, useTheme } from '@mui/styles';
+import CardMedia from '@mui/material/CardMedia';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import { HeroTitle, HeroAction } from '../components/molecules';
-import { ProjectCards, CreditClassCards, CreditBatches } from '../components/organisms';
+import {
+  ProjectCards,
+  CreditClassCards,
+  CreditBatches,
+} from '../components/organisms';
 import { creditClasses } from '../mocks';
 
 import cowsImg from '../assets/cows-by-barn.png';
@@ -14,10 +18,13 @@ import topographyImg from '../assets/background.jpg';
 import horsesImg from '../assets/horses-grazing.png';
 
 import { useMoreProjectsQuery } from '../generated/graphql';
-import { useAllHomePageQuery, useAllCreditClassQuery } from '../generated/sanity-graphql';
+import {
+  useAllHomePageQuery,
+  useAllCreditClassQuery,
+} from '../generated/sanity-graphql';
 import { client } from '../sanity';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
   },
@@ -28,22 +35,22 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17.75),
     },
   },
   title: {
     marginBottom: theme.spacing(8.75),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(8),
     },
   },
   projectCards: {
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100vw',
       marginLeft: theme.spacing(-8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginLeft: theme.spacing(-4),
     },
   },
@@ -73,7 +80,7 @@ const Home: React.FC = () => {
   const creditClassesContent = creditClassData?.allCreditClass;
   const { data: projectsData } = useMoreProjectsQuery();
 
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <div className={styles.root}>
@@ -86,8 +93,15 @@ const Home: React.FC = () => {
       />
 
       {projectsData?.allProjects?.nodes && (
-        <Section title="Projects" titleAlign="left" classes={{ root: styles.section, title: styles.title }}>
-          <ProjectCards projects={projectsData?.allProjects?.nodes} classes={{ root: styles.projectCards }} />
+        <Section
+          title="Projects"
+          titleAlign="left"
+          classes={{ root: styles.section, title: styles.title }}
+        >
+          <ProjectCards
+            projects={projectsData?.allProjects?.nodes}
+            classes={{ root: styles.projectCards }}
+          />
         </Section>
       )}
 
@@ -102,7 +116,7 @@ const Home: React.FC = () => {
       >
         <CreditClassCards
           btnText="Learn More"
-          justify={isMobile ? 'center' : 'flex-start'}
+          justifyContent={isMobile ? 'center' : 'flex-start'}
           creditClasses={creditClasses} // mock/db data
           creditClassesContent={creditClassesContent} // CMS data
         />
@@ -110,7 +124,10 @@ const Home: React.FC = () => {
 
       <HeroAction
         isBanner
-        classes={{ main: styles.bottomSectionWidth, section: styles.bottomSection }}
+        classes={{
+          main: styles.bottomSectionWidth,
+          section: styles.bottomSection,
+        }}
         img={horsesImg}
         openModal={(href: string): void => {
           setModalLink(href);
@@ -119,7 +136,11 @@ const Home: React.FC = () => {
         bottomBanner={content?.bottomBanner}
       />
 
-      <Modal open={open} onClose={() => setOpen(false)} className={styles.modal}>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        className={styles.modal}
+      >
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>

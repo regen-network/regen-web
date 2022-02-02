@@ -1,7 +1,8 @@
 import React from 'react';
-import { CardMedia } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core';
+import { CardMedia } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ImageGrid from 'web-components/lib/components/image-grid';
 import Card from 'web-components/lib/components/cards/Card';
 import { Image } from 'web-components/lib/components/image';
@@ -12,7 +13,7 @@ import { ImageGridSection as ImageGridSectionProps } from '../../generated/sanit
 const useStyles = makeStyles<Theme>(theme => ({
   card: {
     borderRadius: 0,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: theme.spacing(70.75),
     },
     [theme.breakpoints.up('sm')]: {
@@ -45,7 +46,10 @@ const ImageGridSection: React.FC<Props> = ({ content }) => {
           <ImageGrid
             img={
               <Card className={styles.card}>
-                <CardMedia className={styles.cardMedia} image={item?.image?.image?.asset?.url || ''} />
+                <CardMedia
+                  className={styles.cardMedia}
+                  image={item?.image?.image?.asset?.url || ''}
+                />
               </Card>
             }
             title={item?.header || ''}

@@ -1,12 +1,15 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 
 interface Props {
   color?: string;
   className?: string;
 }
 
-export default function RegenLedgerIcon({ color, className }: Props): JSX.Element {
+export default function RegenLedgerIcon({
+  color,
+  className,
+}: Props): JSX.Element {
   return (
     <SvgIcon viewBox="0 0 136 61" className={className}>
       <g clipPath="url(#clip0)">
@@ -34,7 +37,10 @@ export default function RegenLedgerIcon({ color, className }: Props): JSX.Elemen
           d="M43.4785 30.2804L50.8813 31.8868H50.8888L52.0115 30.3448L50.8813 28.8103L43.4785 30.2804Z"
           fill="black"
         />
-        <path d="M20.9161 30.3105L1.82715 27.8894L0 30.3862L1.83468 32.8755L20.9161 30.3105Z" fill="black" />
+        <path
+          d="M20.9161 30.3105L1.82715 27.8894L0 30.3862L1.83468 32.8755L20.9161 30.3105Z"
+          fill="black"
+        />
         <path
           d="M13.8752 34.4593L13.2837 36.2704L14.8396 37.3843L21.4286 33.6902L13.8752 34.4593Z"
           fill="black"
@@ -83,7 +89,10 @@ export default function RegenLedgerIcon({ color, className }: Props): JSX.Elemen
           d="M128.353 22.6156L132.116 29.174H135.623V17.0498H132.836V23.1687L132.907 25.4458H132.888L131.969 23.6083L128.206 17.0498H124.698V29.174H127.49V23.0589L127.414 20.778H127.433L128.353 22.6156Z"
           fill="black"
         />
-        <path d="M76.8157 35.3647H75.6177V45.318H82.4855V44.1851H76.8157V35.3647Z" fill="black" />
+        <path
+          d="M76.8157 35.3647H75.6177V45.318H82.4855V44.1851H76.8157V35.3647Z"
+          fill="black"
+        />
         <path
           d="M86.3806 40.8396H90.8487V39.7067H86.3806V36.4976H92.1258V35.3647H85.1826V45.318H92.348V44.1851H86.3806V40.8396Z"
           fill="black"

@@ -1,10 +1,10 @@
 import React from 'react';
-import { graphql, StaticQuery, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
+import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import Img, { FluidObject } from 'gatsby-image';
-import ReactHtmlParser from 'react-html-parser';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import Section from 'web-components/lib/components/section';
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(23.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17),
     },
   },
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(9),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(7.5),
     },
   },
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(2.25),
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
   },
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '10px',
   },
   grid: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       '& > div:not(:first-child)': {
         paddingTop: theme.spacing(8.75),
       },

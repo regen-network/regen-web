@@ -1,11 +1,9 @@
 import * as React from 'react';
 import TitleDescription from 'web-components/lib/components/description';
-import { withKnobs, text } from '@storybook/addon-knobs';
 
 export default {
-  title: 'Components|TitleDescription',
+  title: 'TitleDescription',
   component: TitleDescription,
-  decorators: [withKnobs],
 };
 
 const titleText: string = 'Measuring Ecological Health';
@@ -14,7 +12,7 @@ const descriptionText: string =
 
 export const description = (): JSX.Element => (
   <TitleDescription
-    title={text('title', titleText)}
-    description={text('description', descriptionText)}
+    title={titleText}
+    description={descriptionText}
   ></TitleDescription>
 );

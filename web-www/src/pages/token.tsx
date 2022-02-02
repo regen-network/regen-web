@@ -1,7 +1,9 @@
 import React from 'react';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { FluidObject } from 'gatsby-image';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import SEO from '../components/seo';
 import TopSection from '../sections/token/TopSection';
 import TokenEconomics from '../sections/token/TokenEconomics';
@@ -13,11 +15,10 @@ import MediaSection from '../sections/token/MediaSection';
 import TokenDetails from '../sections/token/TokenDetails';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import { TokenPageQuery } from '../generated/graphql';
-import { FluidObject } from 'gatsby-image';
 
 const useStyles = makeStyles((theme: Theme) => ({
   newsletterTitle: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },

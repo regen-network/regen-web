@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Crop } from 'react-image-crop';
 
 import ImageCrop from '../image-crop';
@@ -12,7 +12,7 @@ export interface CropImageModalProps {
   onSubmit: (image: HTMLImageElement) => void;
   circularCrop?: boolean;
   initialImage: string;
-  fixedCrop?: Crop;
+  fixedCrop?: Partial<Crop>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       height: '70%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: 0,
     },
   },
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(7.5),
       paddingRight: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(8),
       paddingBottom: theme.spacing(6),
       paddingLeft: 0,
@@ -50,7 +50,7 @@ export default function CropImageModal({
   onSubmit,
   circularCrop,
   initialImage,
-  fixedCrop,
+  fixedCrop = {},
 }: CropImageModalProps): JSX.Element {
   const classes = useStyles();
 

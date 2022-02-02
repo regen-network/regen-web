@@ -1,16 +1,18 @@
 import React, { useState, useCallback, useRef } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
-import { makeStyles, Theme, Button } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Button } from '@mui/material';
 import ContainedButton from '../buttons/ContainedButton';
 import { getCroppedImg } from './canvas-utils';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 export interface ImageCropProps {
   image: string;
   circularCrop?: boolean;
   onCropSubmit: (blob: HTMLImageElement) => void;
   onCancel: () => void;
-  fixedCrop?: Crop;
+  fixedCrop: Partial<Crop>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -37,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   button: {
     marginLeft: theme.spacing(2),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginRight: theme.spacing(6),
     },
   },
@@ -59,8 +61,10 @@ export default function ImageCrop({
 }: ImageCropProps): JSX.Element {
   const classes = useStyles();
   const imgRef = useRef<any>(null);
-  const [crop, setCrop] = useState<Crop | undefined>(fixedCrop);
-  const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(undefined);
+  const [crop, setCrop] = useState<Partial<Crop>>(fixedCrop);
+  const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(
+    undefined,
+  );
   const mobileMatches = useMediaQuery('(max-width:834px)');
 
   const showCroppedImage = useCallback(async () => {
@@ -134,7 +138,11 @@ export default function ImageCrop({
         <Button onClick={onCancel} className={classes.cancelButton}>
           Cancel
         </Button>
-        <ContainedButton onClick={showCroppedImage} className={classes.button} disabled={!completedCrop}>
+        <ContainedButton
+          onClick={showCroppedImage}
+          className={classes.button}
+          disabled={!completedCrop}
+        >
           Apply
         </ContainedButton>
       </div>

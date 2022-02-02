@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -13,7 +13,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function IconIcon({ className }: { className?: string }): JSX.Element {
+export default function IconIcon({
+  className,
+}: {
+  className?: string;
+}): JSX.Element {
   const classes = useStyles();
   return <div className={clsx(className, classes.root)}>i</div>;
 }

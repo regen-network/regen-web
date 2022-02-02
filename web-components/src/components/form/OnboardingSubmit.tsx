@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/styles';
-import { Grid, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Grid } from '@mui/material';
 
 import ContainedButton from '../buttons/ContainedButton';
 
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(8),
       marginRight: theme.spacing(8.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(6.25),
       marginRight: theme.spacing(2.5),
     },
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
   },
@@ -48,7 +48,7 @@ export const OnboardingSubmit: React.FC<Props> = ({
 }) => {
   const classes = useStyles();
   return (
-    <Grid container justify={!!onCancel ? 'space-between' : 'flex-end'}>
+    <Grid container justifyContent={!!onCancel ? 'space-between' : 'flex-end'}>
       {!!onCancel && (
         <ContainedButton
           variant="text"
@@ -58,7 +58,11 @@ export const OnboardingSubmit: React.FC<Props> = ({
           {cancelText}
         </ContainedButton>
       )}
-      <ContainedButton onClick={onSubmit} className={classes.button} disabled={disabled}>
+      <ContainedButton
+        onClick={onSubmit}
+        className={classes.button}
+        disabled={disabled}
+      >
         {submitText}
       </ContainedButton>
     </Grid>

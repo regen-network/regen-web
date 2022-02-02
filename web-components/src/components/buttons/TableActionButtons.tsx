@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+// import { makeStyles } from '@mui/core/styles';
+// import Box from '@mui/core/Box';
+// import Menu from '@mui/core/Menu';
+// import MenuItem from '@mui';
 import OutlinedButton from './OutlinedButton';
 import { HorizontalDotsIcon } from '../icons/HorizontalDotsIcon';
+import { makeStyles } from '@mui/styles';
+import { Box, Menu, MenuItem } from '@mui/material';
 
 const useStyles = makeStyles(theme => ({
   menu: {
@@ -23,7 +25,9 @@ const TableActionButtons: React.FC<{
 }> = ({ buttons, breakOn = 'md' }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  function handleMobileMenuOpen({ currentTarget }: React.MouseEvent<HTMLButtonElement>): void {
+  function handleMobileMenuOpen({
+    currentTarget,
+  }: React.MouseEvent<HTMLButtonElement>): void {
     setAnchorEl(currentTarget);
   }
 
@@ -35,7 +39,13 @@ const TableActionButtons: React.FC<{
   return (
     <>
       {/* Desktop */}
-      <Box display={{ xs: 'none', [breakOn]: 'flex' }} flexWrap="nowrap" gridGap={8}>
+      <Box
+        display={{ xs: 'none', [breakOn]: 'flex' }}
+        sx={{
+          flexWrap: 'nowrap',
+          gap: 8,
+        }}
+      >
         {buttons.map(({ label, onClick }, i) => (
           <OutlinedButton
             key={'table-action-' + i}
@@ -51,7 +61,11 @@ const TableActionButtons: React.FC<{
       </Box>
       {/* Mobile */}
       <Box display={{ xs: 'flex', [breakOn]: 'none' }}>
-        <OutlinedButton onClick={handleMobileMenuOpen} size="small" aria-controls="table-menu-buttons">
+        <OutlinedButton
+          onClick={handleMobileMenuOpen}
+          size="small"
+          aria-controls="table-menu-buttons"
+        >
           <HorizontalDotsIcon />
         </OutlinedButton>
         <Menu

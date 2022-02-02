@@ -1,10 +1,14 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 
 import { WrappedStepCard } from '../atoms/WrappedStepCard';
-import { Maybe, BasicStepCardSectionFieldsFragment } from '../../generated/sanity-graphql';
+import {
+  Maybe,
+  BasicStepCardSectionFieldsFragment,
+} from '../../generated/sanity-graphql';
 
 type Props = {
   steps?: Maybe<BasicStepCardSectionFieldsFragment>;
@@ -18,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(17.75, 0, 10.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(15, 0, 7.5),
     },
   },
@@ -26,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(38),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -80,7 +84,12 @@ function MethodologySteps({ steps }: Props): JSX.Element {
     >
       <div className={styles.steps}>
         {steps?.stepCards?.map((s, i) => (
-          <WrappedStepCard key={i} stepNumber={i} stepCard={s} openModal={() => {}} />
+          <WrappedStepCard
+            key={i}
+            stepNumber={i}
+            stepCard={s}
+            openModal={() => {}}
+          />
         ))}
       </div>
     </OnBoardingSection>

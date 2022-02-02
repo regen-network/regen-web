@@ -1,8 +1,9 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
-import Description, { DescriptionProps } from 'web-components/src/components/description';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Description, { DescriptionProps } from 'web-components/lib/components/description';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(22),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
   },

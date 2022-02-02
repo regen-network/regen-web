@@ -1,13 +1,17 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 import clsx from 'clsx';
 
 import TextField from '../inputs/TextField';
 import ContainedButton from '../buttons/ContainedButton';
-import { requiredMessage, validateEmail, invalidEmailMessage } from '../inputs/validation';
+import {
+  requiredMessage,
+  validateEmail,
+  invalidEmailMessage,
+} from '../inputs/validation';
 
 interface NewsletterFormProps {
   submitLabel?: string;
@@ -16,8 +20,38 @@ interface NewsletterFormProps {
   textFieldClassName?: string;
   buttonClassName?: string;
   gridXs?: {
-    textField: boolean | 'auto' | 4 | 5 | 8 | 1 | 2 | 3 | 6 | 7 | 9 | 10 | 11 | 12 | undefined;
-    button: boolean | 'auto' | 4 | 5 | 8 | 1 | 2 | 3 | 6 | 7 | 9 | 10 | 11 | 12 | undefined;
+    textField:
+      | boolean
+      | 'auto'
+      | 4
+      | 5
+      | 8
+      | 1
+      | 2
+      | 3
+      | 6
+      | 7
+      | 9
+      | 10
+      | 11
+      | 12
+      | undefined;
+    button:
+      | boolean
+      | 'auto'
+      | 4
+      | 5
+      | 8
+      | 1
+      | 2
+      | 3
+      | 6
+      | 7
+      | 9
+      | 10
+      | 11
+      | 12
+      | undefined;
   };
 }
 
@@ -31,7 +65,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     margin: '0 auto',
   },
   textField: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: theme.spacing(1.75),
     },
     [theme.breakpoints.up('sm')]: {
@@ -39,7 +73,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '& .MuiInputBase-root': {
       lineHeight: '150%',
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         fontSize: theme.spacing(4),
         height: theme.spacing(15),
         padding: theme.spacing(5),
@@ -58,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     letterSpacing: '1px',
     width: '100%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
       lineHeight: theme.spacing(4.5),
       height: theme.spacing(15),
@@ -112,7 +146,15 @@ export default function NewsletterForm({
           });
       }}
     >
-      {({ values, errors, submitForm, isSubmitting, isValid, submitCount, status }) => {
+      {({
+        values,
+        errors,
+        submitForm,
+        isSubmitting,
+        isValid,
+        submitCount,
+        status,
+      }) => {
         if (status && status.success) {
           return (
             <div className={classes.success}>

@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
 import Title from 'web-components/lib/components/title';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { ConnectSection, Maybe } from '../../generated/sanity-graphql';
 import { BackgroundImgSection } from '../molecules/BackgroundImgSection';
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(30, 5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17.75),
     },
   },
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   header: {
     color: theme.palette.primary.main,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(32),
     },
   },
@@ -51,13 +52,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(30),
       fontSize: theme.typography.pxToRem(18),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.75),
       flexDirection: 'column',
     },
   },
   iconLabel: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(17.75),
       '&:last-child': {
         marginBottom: 0,
@@ -72,7 +73,11 @@ function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
   return (
     <BackgroundImgSection
       img={creditClassConnectImg}
-      classes={{ root: styles.connectRoot, main: styles.main, section: styles.section }}
+      classes={{
+        root: styles.connectRoot,
+        main: styles.main,
+        section: styles.section,
+      }}
     >
       <Title className={styles.header} variant="h2" align="center">
         {connectSection?.title || 'Connect and Learn'}
@@ -83,7 +88,12 @@ function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
             className={styles.iconLabel}
             key={link?.name || i}
             label={link?.name || ''}
-            icon={<img src={link?.icon?.asset?.url || ''} alt={link?.name || 'connect'} />}
+            icon={
+              <img
+                src={link?.icon?.asset?.url || ''}
+                alt={link?.name || 'connect'}
+              />
+            }
             descriptionRaw={link?.descriptionRaw}
             href={getLinkHref(link?.href)}
           />

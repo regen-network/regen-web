@@ -33,7 +33,7 @@ interface IssuanceModalProps extends RegenModalProps, IssuanceModalData {
   txHash?: string;
 }
 
-const options = {
+const options: Intl.DateTimeFormatOptions = {
   month: 'short',
   day: 'numeric',
   year: 'numeric',
@@ -68,7 +68,13 @@ export default function IssuanceModal({
     summary = [
       {
         label: 'issued by',
-        value: <PartyAddress name={issuer.name} address={issuer.address} onClick={() => setParty(issuer)} />,
+        value: (
+          <PartyAddress
+            name={issuer.name}
+            address={issuer.address}
+            onClick={() => setParty(issuer)}
+          />
+        ),
       },
     ];
   return (
@@ -106,16 +112,18 @@ export default function IssuanceModal({
         {
           label: 'buffer pool',
           value: bufferPool
-            ? `${getFormattedNumber(Math.floor(bufferPool))} ${pluralize(bufferPool, 'credit')}`
+            ? `${getFormattedNumber(Math.floor(bufferPool))} ${pluralize(
+                bufferPool,
+                'credit',
+              )}`
             : undefined,
         },
         {
           label: 'permanence reversal buffer',
           value: permanenceReversalBuffer
-            ? `${getFormattedNumber(Math.floor(permanenceReversalBuffer))} ${pluralize(
-                permanenceReversalBuffer,
-                'credit',
-              )}`
+            ? `${getFormattedNumber(
+                Math.floor(permanenceReversalBuffer),
+              )} ${pluralize(permanenceReversalBuffer, 'credit')}`
             : undefined,
         },
         {
@@ -124,7 +132,13 @@ export default function IssuanceModal({
         },
         {
           label: 'vintage id',
-          value: <Document name={vintageId.name} info={vintageId.info} link={vintageId.link} />,
+          value: (
+            <Document
+              name={vintageId.name}
+              info={vintageId.info}
+              link={vintageId.link}
+            />
+          ),
         },
         {
           label: 'vintage period',
@@ -135,7 +149,12 @@ export default function IssuanceModal({
           value: (
             <>
               {monitoringPeriods.map((p: DocumentInfo, index: number) => (
-                <Document key={index} name={p.name} info={p.info} link={p.link} />
+                <Document
+                  key={index}
+                  name={p.name}
+                  info={p.info}
+                  link={p.link}
+                />
               ))}
             </>
           ),

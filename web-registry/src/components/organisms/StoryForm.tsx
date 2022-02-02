@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
 import cx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import Description from 'web-components/lib/components/description';
@@ -113,7 +114,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     whiteSpace: 'pre-wrap',
   },
   modalText: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },
@@ -126,8 +127,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const examples: FieldNameExamples = {
   'http://regen.network/landStory': {
     type: 'Story of the Land',
-    text:
-      'Wilmot is an extraordinary property high in the New England Tablelands at Ebor, New South Wales, Australia. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.',
+    text: 'Wilmot is an extraordinary property high in the New England Tablelands at Ebor, New South Wales, Australia. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.',
   },
   'http://regen.network/landStewardStory': {
     type: 'Story of the Land Stewards',
@@ -142,23 +142,24 @@ const examples: FieldNameExamples = {
   },
   'http://regen.network/projectQuote': {
     type: 'Quote',
-    text:
-      'We feel privileged to have the opportunity to manage cattle in a truly holistic and regenerative way on such a remarkable property.',
+    text: 'We feel privileged to have the opportunity to manage cattle in a truly holistic and regenerative way on such a remarkable property.',
   },
 };
 
 const quoteError: string = 'You must fill in all the quote fields, or none';
 const errorMsgs: Errors = {
   'http://regen.network/landStory': 'Please fill in the story of the land',
-  'http://regen.network/landStewardStory': 'Please fill in the story of the land stewards',
-  'http://regen.network/landStewardStoryTitle': 'Please fill in a title for the land steward story',
+  'http://regen.network/landStewardStory':
+    'Please fill in the story of the land stewards',
+  'http://regen.network/landStewardStoryTitle':
+    'Please fill in a title for the land steward story',
   'http://regen.network/projectQuote': quoteError,
 };
 
-const ModalContent: React.FC<{ exampleProjectUrl: string; fieldName: exampleFieldName }> = ({
-  exampleProjectUrl,
-  fieldName,
-}) => {
+const ModalContent: React.FC<{
+  exampleProjectUrl: string;
+  fieldName: exampleFieldName;
+}> = ({ exampleProjectUrl, fieldName }) => {
   const styles = useStyles();
 
   return (
@@ -173,7 +174,9 @@ const ModalContent: React.FC<{ exampleProjectUrl: string; fieldName: exampleFiel
         </Link>
       </Description>
       <Card className={styles.modalCard}>
-        <Description className={styles.modalText}>{examples[fieldName].text}</Description>
+        <Description className={styles.modalText}>
+          {examples[fieldName].text}
+        </Description>
       </Card>
     </div>
   );
@@ -191,7 +194,12 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
   const [modalContent, setModalContent] = useState<JSX.Element | null>(null);
 
   const showExample = (fieldName: exampleFieldName): void => {
-    const content = <ModalContent fieldName={fieldName} exampleProjectUrl={'/projects/wilmot'} />;
+    const content = (
+      <ModalContent
+        fieldName={fieldName}
+        exampleProjectUrl={'/projects/wilmot'}
+      />
+    );
     setModalContent(content);
   };
 
@@ -206,11 +214,13 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
         validateOnMount
         initialValues={
           initialValues || {
-            'http://regen.network/landStory': initialValues?.['http://regen.network/landStory'] || '',
+            'http://regen.network/landStory':
+              initialValues?.['http://regen.network/landStory'] || '',
             'http://regen.network/landStewardStory':
               initialValues?.['http://regen.network/landStewardStory'] || '',
             'http://regen.network/landStewardStoryTitle':
-              initialValues?.['http://regen.network/landStewardStoryTitle'] || '',
+              initialValues?.['http://regen.network/landStewardStoryTitle'] ||
+              '',
             'http://regen.network/projectQuote':
               initialValues?.['http://regen.network/projectQuote'] || undefined,
           }
@@ -228,9 +238,18 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
               const path: keyof StoryValues = result.path.value;
               if (path === 'http://regen.network/projectQuote') {
                 errors['http://regen.network/projectQuote'] = {
-                  'http://regen.network/quote': getProjectQuoteError(values, 'http://regen.network/quote'),
-                  'http://schema.org/name': getProjectQuoteError(values, 'http://schema.org/name'),
-                  'http://schema.org/jobTitle': getProjectQuoteError(values, 'http://schema.org/jobTitle'),
+                  'http://regen.network/quote': getProjectQuoteError(
+                    values,
+                    'http://regen.network/quote',
+                  ),
+                  'http://schema.org/name': getProjectQuoteError(
+                    values,
+                    'http://schema.org/name',
+                  ),
+                  'http://schema.org/jobTitle': getProjectQuoteError(
+                    values,
+                    'http://schema.org/jobTitle',
+                  ),
                 };
               } else {
                 errors[path] = errorMsgs[path];
@@ -261,9 +280,12 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   component={ControlledTextField}
                   label="Story of the land"
                   description="Describe the story of this property."
-                  onExampleClick={() => showExample('http://regen.network/landStory')}
+                  onExampleClick={() =>
+                    showExample('http://regen.network/landStory')
+                  }
                   name="['http://regen.network/landStory']"
                   rows={5}
+                  minRows={5}
                   multiline
                 />
               </OnBoardingCard>
@@ -274,9 +296,12 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   component={ControlledTextField}
                   label="Story of the land stewards"
                   description="Tell the story of who are they, what do they do on the land, what is their background, why are they excited to do this work."
-                  onExampleClick={() => showExample('http://regen.network/landStewardStory')}
+                  onExampleClick={() =>
+                    showExample('http://regen.network/landStewardStory')
+                  }
                   name="['http://regen.network/landStewardStory']"
                   rows={16}
+                  minRows={16}
                   multiline
                 />
                 <Field
@@ -285,9 +310,12 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   component={ControlledTextField}
                   label="Land steward story title"
                   description="In one sentence, summarize the story above of the land stewards."
-                  onExampleClick={() => showExample('http://regen.network/landStewardStoryTitle')}
+                  onExampleClick={() =>
+                    showExample('http://regen.network/landStewardStoryTitle')
+                  }
                   name="['http://regen.network/landStewardStoryTitle']"
                   rows={2}
+                  minRows={2}
                   multiline
                 />
               </OnBoardingCard>
@@ -296,7 +324,9 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   <Title variant="body2" className={styles.title}>
                     QUOTE
                   </Title>
-                  <Description className={styles.description}>&nbsp;&nbsp;(optional)</Description>
+                  <Description className={styles.description}>
+                    &nbsp;&nbsp;(optional)
+                  </Description>
                 </div>
                 <Field
                   className={styles.field}
@@ -304,9 +334,12 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   component={ControlledTextField}
                   label="Quote from land steward or other important stakeholder"
                   description="Choose an inspiring quote that helps others understand why this project is important."
-                  onExampleClick={() => showExample('http://regen.network/projectQuote')}
+                  onExampleClick={() =>
+                    showExample('http://regen.network/projectQuote')
+                  }
                   name="['http://regen.network/projectQuote'].['http://regen.network/quote']"
                   rows={16}
+                  minRows={16}
                   multiline
                 />
                 <Field
@@ -325,7 +358,9 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
 
               <ProjectPageFooter
                 onSave={submitForm}
-                saveDisabled={!isValid || isSubmitting || !Object.keys(touched).length}
+                saveDisabled={
+                  !isValid || isSubmitting || !Object.keys(touched).length
+                }
               />
             </Form>
           );
@@ -338,7 +373,10 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
   );
 };
 
-function getProjectQuoteError(values: StoryValues, key: keyof Quote): string | undefined {
+function getProjectQuoteError(
+  values: StoryValues,
+  key: keyof Quote,
+): string | undefined {
   return values?.['http://regen.network/projectQuote']?.[key]
     ? undefined
     : errorMsgs['http://regen.network/projectQuote'];

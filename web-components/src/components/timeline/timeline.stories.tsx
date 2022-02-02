@@ -1,14 +1,14 @@
 import * as React from 'react';
 import TimelineItem from 'web-components/lib/components/timeline/TimelineItem';
 import Timeline, { Event } from 'web-components/lib/components/timeline';
-import NewTimeline, { Item } from 'web-components/lib/components/timeline/NewTimeline';
+import NewTimeline, {
+  Item,
+} from 'web-components/lib/components/timeline/NewTimeline';
 import theme from '../../theme/muiTheme';
-import { withKnobs, object, boolean, text, number } from '@storybook/addon-knobs';
 
 export default {
-  title: 'Components|Timeline',
+  title: 'Timeline',
   component: Timeline,
-  decorators: [withKnobs],
 };
 
 const events: Event[] = [
@@ -45,18 +45,18 @@ const events: Event[] = [
 ];
 
 export const timeline = (): JSX.Element => (
-  <Timeline events={object('Events', events)} completedItemIndex={number('completedItemIndex', 1)} />
+  <Timeline events={events} completedItemIndex={1} />
 );
 export const timelineItem = (): JSX.Element => (
   <TimelineItem
-    date={text('Date', events[0].date as string)}
-    summary={text('Summary', events[0].summary)}
+    date={events[0].date as string}
+    summary={events[0].summary}
     // modalData={{ creditClass: 1, numberOfCredits: 1 }}
-    description={text('Description', events[0].description)}
+    description={events[0].description}
     circleColor={theme.palette.secondary.main}
     barColor={theme.palette.secondary.main}
-    odd={boolean('Odd', false)}
-    last={boolean('Last element', false)}
+    odd={false}
+    last={false}
   />
 );
 

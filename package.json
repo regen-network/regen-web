@@ -10,16 +10,15 @@
     "type": "git",
     "url": "https://github.com/regen-network/regen-web"
   },
-  "dependencies": {
-    "serve": "^11.2.0"
+  "workspaces": {
+    "packages": [
+      "web-registry",
+      "web-components",
+      "web-storybook",
+      "web-www",
+      "web-auth"
+    ]
   },
-  "workspaces": [
-    "web-registry",
-    "web-components",
-    "web-storybook",
-    "web-www",
-    "web-auth"
-  ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "yarn build-components && lerna run --scope web-registry build --stream",
@@ -38,30 +37,36 @@
     "test-update-snapshot": "lerna run --scope web-registry test-update-snapshot --stream"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.2.8",
-    "@storybook/addon-knobs": "^5.2.8",
-    "@storybook/addon-links": "^5.2.8",
-    "@storybook/addon-viewport": "^5.2.8",
-    "@storybook/addons": "^5.2.8",
-    "@storybook/react": "^5.2.8",
-    "@types/jest": "24.0.25",
+    "@storybook/addon-actions": "^6.4.9",
+    "@storybook/addon-links": "^6.4.9",
+    "@storybook/addon-viewport": "^6.4.9",
+    "@storybook/react": "^6.4.9",
+    "@types/css-mediaquery": "^0.1.1",
+    "@types/jest": "27.0.3",
     "@types/node": "13.1.1",
-    "@types/react": "16.9.17",
-    "@types/react-dom": "16.9.4",
-    "babel-loader": "8.0.6",
-    "eslint-config-prettier": "^6.8.0",
-    "eslint-plugin-prettier": "^3.1.2",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
+    "babel-loader": "8.1.0",
+    "css-mediaquery": "0.1.2",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "husky": "^3.1.0",
-    "lerna": "^3.19.0",
-    "prettier": "1.19.1",
+    "lerna": "^4.0.0",
+    "prettier": "2.4.1",
     "shx": "^0.3.2",
-    "typescript": "^3.9.2"
+    "typescript": "^4.4.4"
   },
   "resolutions": {
-    "webpack": "4.41.2",
-    "babel-eslint": "10.0.3"
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "babel-eslint": "^10.1.0",
+    "**/@typescript-eslint/eslint-plugin": "^4.5.0",
+    "**/@typescript-eslint/parser": "^4.5.0",
+    "webpack": "4.44.2",
+    "react-error-overlay": "6.0.9"
   },
   "husky": {
     "hooks": {}
-  }
+  },
+  "version": "0.0.0"
 }

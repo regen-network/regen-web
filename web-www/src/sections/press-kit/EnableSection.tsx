@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import { graphql, useStaticQuery } from 'gatsby';
-import Grid from '@material-ui/core/Grid';
 import Img, { FluidObject } from 'gatsby-image';
-import ReactHtmlParser from 'react-html-parser';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
 import { PresskitEnableSectionQuery } from '../../generated/graphql';
@@ -20,14 +20,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       paddingRight: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       paddingRight: theme.spacing(10),
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: theme.spacing(22.5),
       paddingBottom: theme.spacing(12.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingRight: 0,
       paddingLeft: 0,
     },
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: theme.spacing(4),
       paddingLeft: theme.spacing(4),
     },
-    [theme.breakpoints.between('md', 'xl')]: {
+    [theme.breakpoints.up('md')]: {
       maxWidth: theme.spacing(170),
     },
     [theme.breakpoints.up('xl')]: {
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       bottom: theme.spacing(-6.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       bottom: theme.spacing(-3),
     },
   },

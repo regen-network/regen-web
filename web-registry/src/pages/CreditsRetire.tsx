@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import Box from '@material-ui/core/Box';
+import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Input from '@mui/material/Input';
+import Box from '@mui/material/Box';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import { pluralize } from 'web-components/lib/utils/pluralize';
 import {
@@ -36,8 +37,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-function getUnits(vintagesData: any, walletId: string, vintageId: string): number {
-  const vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
+function getUnits(
+  vintagesData: any,
+  walletId: string,
+  vintageId: string,
+): number {
+  const vintage = vintagesData.allCreditVintages.nodes.find(
+    (node: any) => node.id === vintageId,
+  );
   if (!vintage) {
     return 0;
   }
@@ -64,15 +71,27 @@ const CreditsRetire: React.FC<{
   const [retireCredits, { data, loading, error }] = useRetireCreditsMutation({
     errorPolicy: 'ignore',
   });
-  const { data: vintagesData, loading: vintagesLoading, error: vintagesError } = useAllCreditVintagesQuery({
+  const {
+    data: vintagesData,
+    loading: vintagesLoading,
+    error: vintagesError,
+  } = useAllCreditVintagesQuery({
     errorPolicy: 'ignore',
   });
 
-  const { data: partiesData, loading: partiesLoading, error: partiesError } = useAllPartiesQuery({
+  const {
+    data: partiesData,
+    loading: partiesLoading,
+    error: partiesError,
+  } = useAllPartiesQuery({
     errorPolicy: 'ignore',
   });
 
-  const dateFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'numeric', day: '2-digit' });
+  const dateFormat = new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: 'numeric',
+    day: '2-digit',
+  });
 
   const [vintageId, setVintageId] = useState(passedVintageId);
   const [buyerWalletId, setBuyerWalletId] = useState(passedBuyerWalletId);
@@ -90,11 +109,11 @@ const CreditsRetire: React.FC<{
     }
   }, [vintageId, buyerWalletId, vintagesData]);
 
-  const handleVintageChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+  const handleVintageChange = (event: SelectChangeEvent<string>): void => {
     if (showResult) {
       setShowResult(false);
     }
-    setVintageId(event.target.value as string);
+    setVintageId(event.target.value);
     if (vintagesData && vintagesData.allCreditVintages) {
       // TODO: the following shouldn't be type cast to `any` but changing throws an error
       // `creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt`
@@ -102,7 +121,9 @@ const CreditsRetire: React.FC<{
       const selectedVintage: any = vintagesData.allCreditVintages.nodes.find(
         vintage => vintage?.id === event.target.value,
       );
-      if (selectedVintage?.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt) {
+      if (
+        selectedVintage?.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt
+      ) {
         const selectedCredit =
           selectedVintage.creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt;
         setCreditName(selectedCredit.name);
@@ -110,12 +131,12 @@ const CreditsRetire: React.FC<{
     }
   };
 
-  const handleBuyerWalletChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
+  const handleBuyerWalletChange = (event: SelectChangeEvent<string>): void => {
     if (showResult) {
       setShowResult(false);
     }
-    setBuyerWalletId(event.target.value as string);
-    setUnits(getUnits(vintagesData, event.target.value as string, vintageId));
+    setBuyerWalletId(event.target.value);
+    setUnits(getUnits(vintagesData, event.target.value, vintageId));
     if (partiesData && partiesData.allParties) {
       const selectedParty = partiesData.allParties.nodes.find(
         (party: any) => party.walletId === event.target.value,
@@ -131,8 +152,16 @@ const CreditsRetire: React.FC<{
   if (partiesError) return <div>Error! ${partiesError.message}</div>;
 
   let vintage: any;
-  if (partiesData && partiesData.allParties && vintagesData && vintagesData.allCreditVintages && vintageId) {
-    vintage = vintagesData.allCreditVintages.nodes.find((node: any) => node.id === vintageId);
+  if (
+    partiesData &&
+    partiesData.allParties &&
+    vintagesData &&
+    vintagesData.allCreditVintages &&
+    vintageId
+  ) {
+    vintage = vintagesData.allCreditVintages.nodes.find(
+      (node: any) => node.id === vintageId,
+    );
   }
 
   return (
@@ -145,7 +174,9 @@ const CreditsRetire: React.FC<{
           if (!units) {
             return;
           }
-          const confirmAlert = window.confirm('Are you sure you want to retire credits?');
+          const confirmAlert = window.confirm(
+            'Are you sure you want to retire credits?',
+          );
           if (confirmAlert) {
             try {
               await retireCredits({
@@ -156,7 +187,10 @@ const CreditsRetire: React.FC<{
                     units,
                     addressId,
                     metadata: retireUrl
-                      ? { '@type': 'http://regen.network/Retirement', 'http://www.schema.org/url': retireUrl }
+                      ? {
+                          '@type': 'http://regen.network/Retirement',
+                          'http://www.schema.org/url': retireUrl,
+                        }
                       : null,
                   },
                 },
@@ -186,7 +220,12 @@ const CreditsRetire: React.FC<{
                 vintagesData.allCreditVintages &&
                 vintagesData.allCreditVintages.nodes.map((node: any) => (
                   <MenuItem key={node.id} value={node.id}>
-                    {node.projectByProjectId.metadata?.['http://schema.org/name']} - {dateFormat.format(new Date(node.createdAt))}
+                    {
+                      node.projectByProjectId.metadata?.[
+                        'http://schema.org/name'
+                      ]
+                    }{' '}
+                    - {dateFormat.format(new Date(node.createdAt))}
                   </MenuItem>
                 ))}
             </Select>
@@ -212,7 +251,8 @@ const CreditsRetire: React.FC<{
                       (vintage &&
                         vintage.projectByProjectId.developerId !== node.id &&
                         vintage.projectByProjectId.stewardId !== node.id &&
-                        vintage.projectByProjectId.landOwnerId !== node.id)) && (
+                        vintage.projectByProjectId.landOwnerId !==
+                          node.id)) && (
                       <MenuItem key={node.id} value={node.walletId}>
                         {node.name} ({node.type.toLowerCase()}){' '}
                       </MenuItem>
@@ -228,7 +268,12 @@ const CreditsRetire: React.FC<{
               id="retirement-link-input"
             />
           </FormControl>
-          <Button disabled={!units} className={styles.button} variant="contained" type="submit">
+          <Button
+            disabled={!units}
+            className={styles.button}
+            variant="contained"
+            type="submit"
+          >
             Retire
           </Button>
         </Box>

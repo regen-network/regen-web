@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { useTheme } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { useTheme } from '@mui/material';
 interface IconProps {
   className?: string;
 }

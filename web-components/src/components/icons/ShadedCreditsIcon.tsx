@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 interface IconProps {
@@ -26,7 +26,13 @@ function ShadedCreditsIcon({ className, isActive }: IconProps): JSX.Element {
       viewBox="0 0 90 97"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <svg width="90" height="97" viewBox="0 0 90 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        width="90"
+        height="97"
+        viewBox="0 0 90 97"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           d="M23.3064 11.6532L4.99414 16.6474V69.0871L10.8208 74.9137L22.474 76.5785L32.4625 74.9137V49.9425V32.4626L44.1158 27.4683L62.428 29.1331L66.5899 35.7921L68.2547 69.0871H77.4108L85.7345 63.2605L89.064 11.6532L84.0698 6.65895L69.087 2.49707L51.6072 9.15607V25.8036L39.1215 26.6359L39.9539 19.1446L23.3064 11.6532Z"
           fill="#EFEFEF"

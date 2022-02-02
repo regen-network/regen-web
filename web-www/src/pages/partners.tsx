@@ -1,10 +1,11 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import clsx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(42.25),
       paddingBottom: theme.spacing(40.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(22.5),
       paddingTop: theme.spacing(7.5),
     },
@@ -34,8 +35,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: theme.spacing(90.25),
     height: theme.spacing(62.5),
     textAlign: 'center',
-    paddingRight: theme.spacing(3.6),
-    paddingBottom: theme.spacing(5.25),
   },
   card: {
     '& img': {
@@ -68,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(3.25),
   },
   title: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(7.5),
     },
     [theme.breakpoints.up('sm')]: {
@@ -106,7 +105,7 @@ const PartnersPage: React.FC<PageProps> = ({ location }) => {
           <Title className={styles.title} align="center" variant="h1">
             {data?.header}
           </Title>
-          <Grid spacing={7} justify="center" direction="row" alignItems="center" container>
+          <Grid spacing={7} justifyContent="center" direction="row" alignItems="center" container>
             {data?.partners?.map((partner, i) => (
               <Grid className={styles.item} xs={12} sm={4} item key={i}>
                 <GreenMediaCard

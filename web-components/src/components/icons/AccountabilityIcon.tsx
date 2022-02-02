@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme } from '@material-ui/core';
+import SvgIcon from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 interface IconProps {
@@ -14,7 +14,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function AccountabilityIcon({ className, isActive }: IconProps): JSX.Element {
+export default function AccountabilityIcon({
+  className,
+  isActive,
+}: IconProps): JSX.Element {
   const classes = useStyles();
 
   return isActive ? (

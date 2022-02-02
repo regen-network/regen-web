@@ -1,11 +1,12 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, Theme } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 import BackgroundSection from '../../components/BackgroundSection';
-import GreenTopIconCard from 'web-components/src/components/cards/GreenTopIconCard';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
 import { MainnetWhatsNextSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
 
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(10),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(8),
     },
   },
@@ -85,7 +86,7 @@ const WhatsNextSection: React.FC = () => {
           <BlockContent noYMargin content={content?._rawDescription} />
         </Typography>
         <div>
-          <Grid container direction="row" justify="center">
+          <Grid container direction="row" justifyContent="center">
             {content?.infoItems?.map((item, i) => (
               <Grid item key={i}>
                 <GreenTopIconCard

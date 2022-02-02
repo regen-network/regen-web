@@ -29,9 +29,11 @@ function initializeGA(): void {
       storage: 'none', // disable cookies for google analytics
       clientId: clientFingerprint, // set custom client fingerprint
     };
-    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE = GA_MODE_RUNNING_COOKIES_DISABLED;
+    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE =
+      GA_MODE_RUNNING_COOKIES_DISABLED;
   } else {
-    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE = GA_MODE_RUNNING_COOKIES_ENABLED;
+    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE =
+      GA_MODE_RUNNING_COOKIES_ENABLED;
   }
 
   // var ractGaOptions = { gaOptions: gaOptions };
@@ -45,13 +47,23 @@ function initializeGA(): void {
 }
 
 function isCookiesEnabled(): boolean {
-  return Cookies.get(COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED) === 'true';
+  return (
+    Cookies.get(COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED) ===
+    'true'
+  );
 }
 
 export function init(): void {
   if (process.env.NODE_ENV === 'production') {
-    if (Cookies.get(COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED) === undefined) {
-      Cookies.set(COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED, 'false');
+    if (
+      Cookies.get(
+        COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED,
+      ) === undefined
+    ) {
+      Cookies.set(
+        COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED,
+        'false',
+      );
     }
 
     initializeGA();
@@ -60,7 +72,8 @@ export function init(): void {
 
 function isGARunningInCorrectMode(): boolean {
   const runningWithCookiesEnabled =
-    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE === GA_MODE_RUNNING_COOKIES_ENABLED;
+    window.GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_RUNNING_WITH_MODE ===
+    GA_MODE_RUNNING_COOKIES_ENABLED;
   return isCookiesEnabled() === runningWithCookiesEnabled;
 }
 

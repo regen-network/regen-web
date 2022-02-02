@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 
 interface CloseIconProps extends SvgIconProps {
   svgColor?: string;
@@ -13,7 +13,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function CloseIcon({ svgColor, ...props }: CloseIconProps): JSX.Element {
+export default function CloseIcon({
+  svgColor,
+  ...props
+}: CloseIconProps): JSX.Element {
   const classes = useStyles({});
   const theme = useTheme();
 

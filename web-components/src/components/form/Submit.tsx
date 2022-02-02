@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import ContainedButton from '../buttons/ContainedButton';
 
 interface SubmitProps {
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(3.5),
       paddingRight: theme.spacing(6),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
       paddingRight: theme.spacing(4.5),
     },
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(8),
       paddingRight: theme.spacing(8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       maxWidth: theme.spacing(53.25),
     },
   },
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -71,7 +71,13 @@ export default function Submit({
 }: SubmitProps): JSX.Element {
   const classes = useStyles();
   return (
-    <Grid className={className} container wrap="nowrap" alignItems="center" justify="flex-end">
+    <Grid
+      className={className}
+      container
+      wrap="nowrap"
+      alignItems="center"
+      justifyContent="flex-end"
+    >
       <Grid
         xs={5}
         item
@@ -84,7 +90,14 @@ export default function Submit({
       >
         cancel
       </Grid>
-      <Grid xs={7} item container direction="column" justify="flex-end" className={classes.submitButton}>
+      <Grid
+        xs={7}
+        item
+        container
+        direction="column"
+        justifyContent="flex-end"
+        className={classes.submitButton}
+      >
         <Grid item>
           <ContainedButton
             className={classes.button}

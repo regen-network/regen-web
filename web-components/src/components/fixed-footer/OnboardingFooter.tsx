@@ -1,9 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Theme } from '@material-ui/core';
-import { withStyles, createStyles, makeStyles, useTheme } from '@material-ui/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Grid from '@material-ui/core/Grid';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { withStyles, createStyles, makeStyles, useTheme } from '@mui/styles';
+import LinearProgress from '@mui/material/LinearProgress';
+import Grid from '@mui/material/Grid';
 
 import FixedFooter from './';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
@@ -20,7 +20,7 @@ const StyledLinearProgress = withStyles((theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         height: theme.spacing(1.75),
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         height: theme.spacing(1.5),
       },
       borderRadius: theme.spacing(0, 2, 2, 0),
@@ -29,7 +29,8 @@ const StyledLinearProgress = withStyles((theme: Theme) =>
       backgroundColor: theme.palette.info.light,
     },
     bar: {
-      background: 'linear-gradient(81.77deg, rgba(79, 181, 115, 0.7) 0%, rgba(35, 142, 73, 0.7) 73.42%);',
+      background:
+        'linear-gradient(81.77deg, rgba(79, 181, 115, 0.7) 0%, rgba(35, 142, 73, 0.7) 73.42%);',
     },
   }),
 )(LinearProgress);
@@ -56,7 +57,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'space-between',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       justifyContent: 'flex-end',
     },
   }),
@@ -65,7 +66,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'space-between',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       justifyContent: 'flex-end',
     },
   },
@@ -76,7 +77,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -85,7 +86,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', hideProgress = false, ...props }) => {
+const OnboardingFooter: React.FC<Props> = ({
+  saveText = 'Save & Next',
+  hideProgress = false,
+  ...props
+}) => {
   const classes = useStyles({ hideProgress });
   const theme: Theme = useTheme();
 
@@ -94,23 +99,43 @@ const OnboardingFooter: React.FC<Props> = ({ saveText = 'Save & Next', hideProgr
       <Grid container spacing={4} className={classes.root}>
         <Grid item className={classes.arrows}>
           {props.onPrev && (
-            <OutlinedButton className={clsx(classes.btn, classes.back)} onClick={props.onPrev}>
-              <ArrowDownIcon fontSize="small" direction="prev" color={theme.palette.secondary.main} />
+            <OutlinedButton
+              className={clsx(classes.btn, classes.back)}
+              onClick={props.onPrev}
+            >
+              <ArrowDownIcon
+                fontSize="small"
+                direction="prev"
+                color={theme.palette.secondary.main}
+              />
             </OutlinedButton>
           )}
           {props.onNext && (
             <OutlinedButton className={classes.btn} onClick={props.onNext}>
-              <ArrowDownIcon fontSize="small" direction="next" color={theme.palette.secondary.main} />
+              <ArrowDownIcon
+                fontSize="small"
+                direction="next"
+                color={theme.palette.secondary.main}
+              />
             </OutlinedButton>
           )}
         </Grid>
         <Grid item>
-          <ContainedButton className={classes.btn} onClick={props.onSave} disabled={props.saveDisabled}>
+          <ContainedButton
+            className={classes.btn}
+            onClick={props.onSave}
+            disabled={props.saveDisabled}
+          >
             {saveText}
           </ContainedButton>
         </Grid>
       </Grid>
-      {!hideProgress && <StyledLinearProgress variant="determinate" value={props.percentComplete} />}
+      {!hideProgress && (
+        <StyledLinearProgress
+          variant="determinate"
+          value={props.percentComplete}
+        />
+      )}
     </FixedFooter>
   );
 };

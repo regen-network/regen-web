@@ -1,20 +1,19 @@
 import React, { useState, createContext, useContext } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Hidden } from '@material-ui/core';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useHistory, useParams, Route } from 'react-router-dom';
+import { makeStyles, useTheme } from '@mui/styles';
+import { useMediaQuery } from '@mui/material';
+import { useNavigate, useParams, useLocation, Outlet } from 'react-router-dom';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Navigation from 'web-components/lib/components/faq/Navigation';
 import Title from 'web-components/lib/components/title';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import Banner from 'web-components/lib/components/banner';
 import { Label } from 'web-components/lib/components/label';
-import { BasicInfo, ProjectLocation, Roles, EntityDisplay, Media, Story } from '../pages';
+
 import { Link } from '../components/atoms';
-import { ProtectedRoute } from '../components/atoms';
 import { toTitleCase } from '../lib/titleCase';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
@@ -22,7 +21,7 @@ const useStyles = makeStyles(theme => ({
       justifyContent: 'space-evenly',
       padding: theme.spacing(8.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(6, 3.75),
     },
   },
@@ -37,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
     },
   },
@@ -50,10 +49,11 @@ const useStyles = makeStyles(theme => ({
     },
   },
   arrow: {
+    fontSize: theme.spacing(6),
     [theme.breakpoints.up('sm')]: {
       marginRight: theme.spacing(2),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('md')]: {
       position: 'absolute',
     },
   },
@@ -68,10 +68,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       width: theme.spacing(74.25),
     },
-    [theme.breakpoints.between('xs', 'md')]: {
+    [theme.breakpoints.between('xs', 'xl')]: {
       minWidth: theme.spacing(47.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('md')]: {
       width: '100%',
     },
   },
@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
     '& form > div': {
       marginTop: 0,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('md')]: {
       padding: 'none',
     },
   },
@@ -106,7 +106,7 @@ const useStyles = makeStyles(theme => ({
       height: theme.spacing(10),
       marginBottom: theme.spacing(9.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('md')]: {
       marginBottom: theme.spacing(6),
     },
   },
@@ -124,23 +124,33 @@ const ProjectEditContext = createContext<ContextType>({
 
 function ProjectEdit(): JSX.Element {
   const styles = useStyles();
-  const theme = useTheme();
-  const history = useHistory();
+  const theme = useTheme<Theme>();
+  const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
-  const { projectId, section } = useParams<{ projectId: string; section: string }>();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const { projectId } = useParams();
+  const { pathname } = useLocation();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const lastPathItem = pathname.substring(pathname.lastIndexOf('/') + 1);
+  const section = lastPathItem !== 'edit' ? lastPathItem : undefined;
 
-  const navigate = (sectionName: string): void => {
+  const navigateSection = (sectionName: string): void => {
     const hyphenated = sectionName.replace(' ', '-');
-    history.push(`/project-pages/edit/${projectId}/${hyphenated}`);
+    navigate(`/project-pages/${projectId}/edit/${hyphenated}`);
   };
-
   const Nav = (): JSX.Element => (
     <Navigation
       classes={{ root: styles.nav, listItem: styles.navItem }}
-      categories={['basic info', 'location', 'roles', 'entity display', 'media', 'story', 'settings']}
+      categories={[
+        'basic info',
+        'location',
+        'roles',
+        'entity display',
+        'media',
+        'story',
+        'settings',
+      ]}
       category={section?.replace('-', ' ')}
-      onClick={sectionName => navigate(sectionName)}
+      onClick={sectionName => navigateSection(sectionName)}
       showIcon
     />
   );
@@ -162,47 +172,33 @@ function ProjectEdit(): JSX.Element {
         <div className={styles.left}>
           <div className={styles.topAlign}>
             <Link
-              href={section && isMobile ? `/project-pages/edit/${projectId}` : '/project-pages'}
+              href={
+                section && isMobile
+                  ? `/project-pages/${projectId}/edit/`
+                  : '/project-pages'
+              }
               className={styles.back}
             >
-              <ArrowDownIcon className={styles.arrow} color={theme.palette.secondary.main} direction="prev" />
+              <ArrowDownIcon
+                className={styles.arrow}
+                color={theme.palette.secondary.main}
+                direction="prev"
+              />
               {!isMobile && <Label>back to projects</Label>}
             </Link>
           </div>
-          <Hidden xsDown>
-            <Nav />
-          </Hidden>
+          {!isMobile && <Nav />}
         </div>
         <div className={styles.right}>
           <div className={styles.sectionContainer}>
             <div className={styles.section}>
               <div className={styles.topAlign}>
                 <Title className={styles.title} variant="h3" align="center">
-                  {section && isMobile ? titleCase(section) : 'Edit Project Page'}
+                  {section ? titleCase(section) : 'Edit Project Page'}
                 </Title>
               </div>
-              <Route
-                path="/project-pages/edit/:projectId"
-                render={({ match: { path } }) => (
-                  <>
-                    <ProtectedRoute
-                      path={path}
-                      exact
-                      component={() => (
-                        <Hidden smUp>
-                          <Nav />
-                        </Hidden>
-                      )}
-                    />
-                    <ProtectedRoute path={`${path}/basic-info`} component={() => <BasicInfo />} />
-                    <ProtectedRoute path={`${path}/location`} component={() => <ProjectLocation />} />
-                    <ProtectedRoute path={`${path}/story`} component={() => <Story />} />
-                    <ProtectedRoute path={`${path}/media`} component={() => <Media />} />
-                    <ProtectedRoute path={`${path}/roles`} component={() => <Roles />} />
-                    <ProtectedRoute path={`${path}/entity-display`} component={() => <EntityDisplay />} />
-                  </>
-                )}
-              />
+              {isMobile && !section && <Nav />}
+              <Outlet />
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, useTheme } from '@material-ui/core';
-import { CardMedia } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { CardMedia } from '@mui/material';
 import cx from 'clsx';
 
 import Card from '../cards/Card';
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   btn: {
     margin: theme.spacing(3, 0, 5),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(14),
       padding: theme.spacing(2, 8),
     },
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     justifyContent: 'space-between',
     paddingTop: theme.spacing(12),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(4),
     },
   },
@@ -102,7 +102,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     padding: theme.spacing(3.5, 8, 6),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(3.5, 3.5, 4),
     },
   },
@@ -120,7 +120,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(3.5, 0),
     textAlign: 'center',
     lineHeight: '145%',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
     },
   },
@@ -131,7 +131,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     textAlign: 'center',
     color: theme.palette.info.dark,
     fontSize: theme.spacing(4.5),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
   },
@@ -140,7 +140,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(81),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(2),
       height: theme.spacing(55),
     },
@@ -176,7 +176,13 @@ function StepCard({
   const theme = useTheme();
   return (
     <div className={styles.root}>
-      <Card className={cx(className, styles.card, step.isActive && styles.activeCard)}>
+      <Card
+        className={cx(
+          className,
+          styles.card,
+          step.isActive && styles.activeCard,
+        )}
+      >
         {step.videoSrc && (
           <CardMedia
             className={styles.media}
@@ -208,25 +214,42 @@ function StepCard({
           )}
           <div className={cx(styles.cardTopThird, styles.cardTopRight)}>
             {step.tagName && (
-              <Tag className={styles.tag} name={step.tagName} color={theme.palette.secondary.main} />
+              <Tag
+                className={styles.tag}
+                name={step.tagName}
+                color={theme.palette.secondary.main}
+              />
             )}
           </div>
         </div>
         <div className={styles.cardBottom}>
-          <Title variant="h6" className={cx(styles.step, step.isActive && styles.activeColor)}>
+          <Title
+            variant="h6"
+            className={cx(styles.step, step.isActive && styles.activeColor)}
+          >
             step {step.stepNumber}
           </Title>
-          <Title variant="h4" className={cx(styles.stepTitle, step.isActive && styles.activeTitle)}>
+          <Title
+            variant="h4"
+            className={cx(
+              styles.stepTitle,
+              step.isActive && styles.activeTitle,
+            )}
+          >
             {step.title}
           </Title>
-          <Description className={styles.stepDescription}>{step.description}</Description>
+          <Description className={styles.stepDescription}>
+            {step.description}
+          </Description>
           {!!step.btnText && !!step.onBtnClick && (
             <ContainedButton onClick={step.onBtnClick} className={styles.btn}>
               {step.btnText}
             </ContainedButton>
           )}
         </div>
-        {step.faqs && step.faqs.length > 0 && <StepFAQs questionItems={step.faqs} isActive={step.isActive} />}
+        {step.faqs && step.faqs.length > 0 && (
+          <StepFAQs questionItems={step.faqs} isActive={step.isActive} />
+        )}
       </Card>
       <ArrowFilledIcon className="down-arrow" color={theme.palette.info.main} />
     </div>

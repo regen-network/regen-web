@@ -1,13 +1,19 @@
 import React from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
-import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
+import {
+  OnboardingFormTemplate,
+  EditFormTemplate,
+} from '../components/templates';
 import { StoryForm, StoryValues } from '../components/organisms';
-import { useProjectByIdQuery, useUpdateProjectByIdMutation } from '../generated/graphql';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+} from '../generated/graphql';
 import { useProjectEditContext } from '../pages/ProjectEdit';
 
 const Story: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
 
@@ -21,10 +27,14 @@ const Story: React.FC = () => {
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
-      'http://regen.network/landStory': metadata['http://regen.network/landStory'],
-      'http://regen.network/landStewardStory': metadata['http://regen.network/landStewardStory'],
-      'http://regen.network/landStewardStoryTitle': metadata['http://regen.network/landStewardStoryTitle'],
-      'http://regen.network/projectQuote': metadata['http://regen.network/projectQuote'],
+      'http://regen.network/landStory':
+        metadata['http://regen.network/landStory'],
+      'http://regen.network/landStewardStory':
+        metadata['http://regen.network/landStory'],
+      'http://regen.network/landStewardStoryTitle':
+        metadata['http://regen.network/landStewardStoryTitle'],
+      'http://regen.network/projectQuote':
+        metadata['http://regen.network/projectQuote'],
     };
   }
 
@@ -46,7 +56,7 @@ const Story: React.FC = () => {
           },
         },
       });
-      !isEdit && history.push(`/project-pages/${projectId}/media`);
+      !isEdit && navigate(`/project-pages/${projectId}/media`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -59,7 +69,11 @@ const Story: React.FC = () => {
       <StoryForm submit={submit} initialValues={initialFieldValues} />
     </EditFormTemplate>
   ) : (
-    <OnboardingFormTemplate activeStep={0} title="Story" saveAndExit={saveAndExit}>
+    <OnboardingFormTemplate
+      activeStep={0}
+      title="Story"
+      saveAndExit={saveAndExit}
+    >
       <StoryForm submit={submit} initialValues={initialFieldValues} />
     </OnboardingFormTemplate>
   );

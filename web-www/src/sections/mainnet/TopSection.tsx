@@ -1,9 +1,10 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { FluidObject } from 'gatsby-image';
-import { makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Typography } from '@mui/material';
 
-import Countdown from 'web-components/src/components/countdown';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Countdown from 'web-components/lib/components/countdown';
 import BackgroundSection from '../../components/BackgroundSection';
 import { MainnetTopSectionQuery } from '../../generated/graphql';
 

@@ -1,7 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-// import { useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
 
 import Card from './Card';
 // import VerifiedIcon from '../icons/VerifiedIcon';
@@ -31,7 +30,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       backgroundSize: props.monitored ? 'auto 70%' : '100% auto',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       backgroundSize: '100% auto',
     },
     height: '100%',
@@ -43,7 +42,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingBottom: props.monitored ? theme.spacing(12.5) : theme.spacing(6),
       paddingTop: props.monitored ? theme.spacing(63.75) : theme.spacing(45.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: props.monitored ? theme.spacing(5) : theme.spacing(3.75),
       paddingRight: props.monitored ? theme.spacing(5) : theme.spacing(3.75),
       paddingBottom: props.monitored ? theme.spacing(8) : theme.spacing(1.5),
@@ -55,17 +54,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: props.largeFontSize || props.monitored ? '1.5rem' : '1.125rem',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: props.largeFontSize || props.monitored ? '1.375rem' : '1rem',
     },
     fontWeight: 'bold',
   }),
   description: props => ({
     [theme.breakpoints.up('sm')]: {
-      fontSize: props.largeFontSize || props.monitored ? '1.125rem' : '0.875rem',
+      fontSize:
+        props.largeFontSize || props.monitored ? '1.125rem' : '0.875rem',
       paddingBottom: props.monitored ? theme.spacing(10) : theme.spacing(0),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: props.largeFontSize || props.monitored ? '1rem' : '0.875rem',
       paddingBottom: props.monitored ? theme.spacing(6.75) : theme.spacing(6),
     },
@@ -85,7 +85,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingLeft: '10%',
       paddingRight: '10%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '0.625rem',
       paddingLeft: theme.spacing(8),
       paddingRight: theme.spacing(8),
@@ -98,14 +98,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    background: 'linear-gradient(180deg, rgba(250, 250, 250, 0) 2.48%, #FAFAFA 64.06%)',
+    background:
+      'linear-gradient(180deg, rgba(250, 250, 250, 0) 2.48%, #FAFAFA 64.06%)',
   }),
   monitoredIcon: {
-    // [theme.breakpoints.down('xs')]: {
-    //   flexGrow: 0,
-    //   maxWidth: '20%',
-    //   flexBasis: '20%',
-    // },
     paddingRight: theme.spacing(2),
   },
 }));

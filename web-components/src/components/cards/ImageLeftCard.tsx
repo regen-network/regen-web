@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme, CardContent } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { CardContent } from '@mui/material';
 import ReactHtmlParser from 'react-html-parser';
 import cx from 'clsx';
 
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     borderRadius: 9,
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: 0,
       flexDirection: 'column',
     },
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   image: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '100%',
       height: theme.spacing(44),
       padding: 0,
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(4),
   },
   button: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: '100%',
     },
     [theme.breakpoints.up('sm')]: {

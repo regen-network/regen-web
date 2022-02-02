@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, Collapse } from '@material-ui/core';
+import { Collapse } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import WalletConnectionButton from './WalletConnectionButton';
@@ -19,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(10),
       paddingBottom: theme.spacing(23.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(3),
       paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(12),

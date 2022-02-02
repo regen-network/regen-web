@@ -1,10 +1,11 @@
 import React from 'react';
+import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 
 import BackgroundSection from '../../components/BackgroundSection';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import TitleDescription from 'web-components/lib/components/title-description';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(19.25),
       paddingBottom: theme.spacing(12.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.5),
       paddingBottom: theme.spacing(15),
     },
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(7.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5.25),
       paddingBottom: theme.spacing(3.25),
     },
@@ -42,7 +43,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(20),
       paddingTop: theme.spacing(5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(5),
       paddingTop: theme.spacing(15),
     },
@@ -118,7 +119,7 @@ const WhoSection = (): JSX.Element => {
             </Description>
 
             <Box display={{ xs: 'none', sm: 'block' }}>
-              <Grid container justify="center" spacing={7}>
+              <Grid container justifyContent="center" spacing={7}>
                 {items.map((item: JSX.Element, index: number) => (
                   <Grid key={index} item xs={6} md={4}>
                     {item}

@@ -1,10 +1,14 @@
 import React from 'react';
 import cx from 'clsx';
-import { makeStyles, MenuItem, useTheme } from '@material-ui/core';
+import { makeStyles, useTheme } from '@mui/styles';
+import { MenuItem } from '@mui/material';
 
 import MenuHover from '../menu-hover';
 import { NavLinkProps } from './NavLink';
-import { HeaderDropdownColumn, HeaderDropdownItemProps } from './HeaderDropdownItems';
+import {
+  HeaderDropdownColumn,
+  HeaderDropdownItemProps,
+} from './HeaderDropdownItems';
 
 const useStyles = makeStyles(theme => ({
   menuItem: {
@@ -16,9 +20,6 @@ const useStyles = makeStyles(theme => ({
     'background-color': 'inherit',
     '& a:hover': {
       borderBottom: `2px solid ${theme.palette.secondary.main}`,
-    },
-    '&:last-child': {
-      paddingTop: theme.spacing(1.25),
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingRight: theme.spacing(1.25),
@@ -63,7 +64,10 @@ const HeaderMenuHover: React.FC<{
       >
         {/* `render` overrides default dropdown */}
         {item.dropdownItems && !item.render && (
-          <HeaderDropdownColumn items={item.dropdownItems} linkComponent={LinkComponent} />
+          <HeaderDropdownColumn
+            items={item.dropdownItems}
+            linkComponent={LinkComponent}
+          />
         )}
         {item.render && item.render()}
       </MenuHover>
@@ -71,7 +75,12 @@ const HeaderMenuHover: React.FC<{
   };
 
   return (
-    <MenuItem className={cx(styles.menuItem, pathName === item.href && styles.currentMenuItem)}>
+    <MenuItem
+      className={cx(
+        styles.menuItem,
+        pathName === item.href && styles.currentMenuItem,
+      )}
+    >
       <Content />
     </MenuItem>
   );

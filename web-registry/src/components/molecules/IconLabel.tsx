@@ -1,8 +1,9 @@
 import React from 'react';
-import { Theme, makeStyles } from '@material-ui/core/styles';
-import { Avatar } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Avatar } from '@mui/material';
 import cx from 'clsx';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/lib/components/block-content';
@@ -38,7 +39,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(5.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(8),
     },
   },
@@ -85,7 +86,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(18),
       paddingTop: theme.spacing(5.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
       paddingTop: theme.spacing(4),
     },
@@ -103,7 +104,12 @@ const IconLabel = ({
   const styles = useStyles({ small });
   return (
     <div className={cx(styles.root, className)}>
-      <a href={href} rel="noopener noreferrer" target="_blank" className={styles.link}>
+      <a
+        href={href}
+        rel="noopener noreferrer"
+        target="_blank"
+        className={styles.link}
+      >
         <Avatar className={styles.iconContainer}>{icon}</Avatar>
       </a>
       <div className={styles.textContainer}>

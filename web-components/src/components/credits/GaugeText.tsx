@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import { Variant } from '@material-ui/core/styles/createTypography';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Typography from '@mui/material/Typography';
+import { Variant } from '@mui/material/styles/createTypography';
 
 interface GaugeTextProps {
   number: number;
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.5rem',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '1.125rem',
     },
   },
@@ -27,15 +27,22 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.125rem',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: '0.85rem',
     },
   },
 }));
 
-export default function GaugeText({ number, label, format, variant }: GaugeTextProps): JSX.Element {
+export default function GaugeText({
+  number,
+  label,
+  format,
+  variant,
+}: GaugeTextProps): JSX.Element {
   const classes = useStyles({});
-  const displayedNumber: string = format ? new Intl.NumberFormat('en-US').format(number) : number.toString();
+  const displayedNumber: string = format
+    ? new Intl.NumberFormat('en-US').format(number)
+    : number.toString();
   return (
     <Typography variant={variant || 'body1'}>
       <span className={classes.number}>{displayedNumber} </span>

@@ -7,7 +7,7 @@ import { chainId } from './lib/wallet';
 export type ContextType = {
   loading: boolean;
   api: RegenApi | undefined;
-  error: Error | undefined;
+  error: unknown;
 };
 
 // Simple proxy endpoint for REST requests. We check for chainId as an on/off switch.
@@ -30,12 +30,16 @@ async function connect(): Promise<RegenApi | undefined> {
   return api;
 }
 
-const LedgerContext = React.createContext<ContextType>({ loading: false, api: undefined, error: undefined });
+const LedgerContext = React.createContext<ContextType>({
+  loading: false,
+  api: undefined,
+  error: undefined,
+});
 
 export const LedgerProvider: React.FC = ({ children }) => {
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<Error | undefined>(undefined);
+  const [error, setError] = useState<unknown>(undefined);
 
   useEffect(() => {
     const getApi = async (): Promise<void> => {
@@ -53,7 +57,11 @@ export const LedgerProvider: React.FC = ({ children }) => {
     getApi();
   }, []);
 
-  return <LedgerContext.Provider value={{ error, loading, api }}>{children}</LedgerContext.Provider>;
+  return (
+    <LedgerContext.Provider value={{ error, loading, api }}>
+      {children}
+    </LedgerContext.Provider>
+  );
 };
 
 export const useLedger = (): ContextType => React.useContext(LedgerContext);

@@ -1,9 +1,10 @@
 import React from 'react';
-import { makeStyles, Theme, MenuList, useTheme, useMediaQuery } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { MenuList, useMediaQuery } from '@mui/material';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
 import cx from 'clsx';
-import Box from '@material-ui/core/Box';
+import Box from '@mui/material/Box';
 
 import MobileMenu from '../mobile-menu';
 import ContainedButton from '../buttons/ContainedButton';
@@ -23,6 +24,7 @@ export interface HeaderColors {
 interface StyleProps {
   color: string;
   borderBottom?: boolean;
+  fullWidth: boolean;
 }
 
 interface HeaderProps {
@@ -57,9 +59,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
     },
     borderBottom: props => ({
       [theme.breakpoints.up('sm')]: {
-        borderBottom: props.borderBottom ? `1px ${theme.palette.grey[100]} solid` : 'none',
+        borderBottom: props.borderBottom
+          ? `1px ${theme.palette.grey[100]} solid`
+          : 'none',
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         borderBottom: `1px ${theme.palette.grey[100]} solid`,
       },
     }),
@@ -72,7 +76,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
       alignItems: 'center',
       justifyContent: 'space-between',
       height: '110px',
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.up('md')]: {
+        paddingRight: theme.spacing(6),
+        paddingLeft: theme.spacing(6),
+      },
+      [theme.breakpoints.down('md')]: {
         padding: theme.spacing(2.5, 3.75),
         height: theme.spacing(15),
         color: theme.palette.primary.light,
@@ -96,7 +104,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
       [theme.breakpoints.up('sm')]: {
         display: 'flex',
       },
-      '& li.MuiListItem-button, li.MuiListItem-button > div': {
+      '& li.MuiMenuItem-root': {
+        // BEGIN HACK setting jss styles (duplicated from emotion style)
+        // so it's initially rendered on gatsby build
+        // Remove once migrations from mui jss to emotion and to latest gatsby done
+        listStyle: 'none',
+        // END HACK
+      },
+      '& li.MuiMenuItem-root, li.MuiMenuItem-root > div': {
         '& span:hover, svg:hover, path:hover': {
           borderBottom: 'none',
         },
@@ -116,7 +131,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
     signUpBtn: {
       padding: theme.spacing(2, 7),
       fontSize: pxToRem(12),
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('md')]: {
         padding: theme.spacing(2, 4),
         fontSize: pxToRem(9),
       },
@@ -128,6 +143,33 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
         backgroundColor: 'transparent',
       },
     }),
+    // BEGIN HACK setting jss styles (duplicated from mui components built-in emotion styles)
+    // so it's initially rendered on gatsby build
+    // Remove once migrations from mui jss to emotion and to latest gatsby done
+    desktop: {
+      [theme.breakpoints.down('md')]: {
+        display: 'none',
+      },
+      [theme.breakpoints.up('md')]: {
+        display: 'block',
+      },
+    },
+    mobile: {
+      [theme.breakpoints.down('md')]: {
+        display: 'block',
+      },
+      [theme.breakpoints.up('md')]: {
+        display: 'none',
+      },
+    },
+    container: {
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      [theme.breakpoints.up('xl')]: {
+        maxWidth: theme.breakpoints.values['xl'],
+      },
+    },
+    // END HACK
   };
 });
 
@@ -149,7 +191,7 @@ export default function Header({
   extras,
 }: HeaderProps): JSX.Element {
   const theme = useTheme();
-  const isTablet = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   const RegistryLoginBtns: React.FC = () => (
     <li>
@@ -162,7 +204,11 @@ export default function Header({
           <Button variant="text" className={styles.loginBtn} onClick={onLogin}>
             Login
           </Button>
-          <ContainedButton size="small" className={styles.signUpBtn} onClick={onSignup}>
+          <ContainedButton
+            size="small"
+            className={styles.signUpBtn}
+            onClick={onSignup}
+          >
             Sign Up
           </ContainedButton>
         </Box>
@@ -170,7 +216,7 @@ export default function Header({
     </li>
   );
 
-  const styles = useStyles({ color, borderBottom });
+  const styles = useStyles({ color, borderBottom, fullWidth });
   return (
     <div
       className={cx(
@@ -179,10 +225,16 @@ export default function Header({
         transparent ? styles.transparent : styles.background,
       )}
     >
-      <Container disableGutters maxWidth={fullWidth ? false : 'xl'}>
-        <Box className={styles.header} px={[4, 5, 6]}>
-          <HomeLink color={isTablet ? theme.palette.primary.contrastText : color} />
-          <Box display={{ xs: 'none', md: 'block' }}>
+      <Container
+        disableGutters
+        className={styles.container}
+        maxWidth={fullWidth ? false : 'xl'}
+      >
+        <Box className={styles.header}>
+          <HomeLink
+            color={isTablet ? theme.palette.primary.contrastText : color}
+          />
+          <Box className={styles.desktop} display={{ xs: 'none', md: 'block' }}>
             <MenuList className={styles.menuList}>
               {menuItems?.map((item, index) => {
                 return (
@@ -200,7 +252,7 @@ export default function Header({
             </MenuList>
           </Box>
 
-          <Box display={{ xs: 'block', md: 'none' }}>
+          <Box className={styles.mobile} display={{ xs: 'block', md: 'none' }}>
             <MobileMenu
               linkComponent={linkComponent}
               isRegistry={isRegistry}

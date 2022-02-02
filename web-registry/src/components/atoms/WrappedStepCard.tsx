@@ -16,10 +16,24 @@ const WrappedStepCard: React.FC<{
   if (!stepCard) {
     return null;
   }
-  const { icon, faqs, tagName, isActive, title, descriptionRaw, button, videoSrc, image } = stepCard;
+  const {
+    icon,
+    faqs,
+    tagName,
+    isActive,
+    title,
+    descriptionRaw,
+    button,
+    videoSrc,
+    image,
+  } = stepCard;
   return (
     <StepCard
-      icon={icon?.asset?.url ? <img src={icon.asset.url} alt={title || ''} /> : undefined}
+      icon={
+        icon?.asset?.url ? (
+          <img src={icon.asset.url} alt={title || ''} />
+        ) : undefined
+      }
       step={{
         tagName,
         title: title || '',

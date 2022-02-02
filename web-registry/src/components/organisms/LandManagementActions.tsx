@@ -1,13 +1,14 @@
 import React, { useRef, useCallback } from 'react';
-import { makeStyles, useTheme, Theme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Grid from '@mui/material/Grid';
 import Slider from 'react-slick';
 
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
 import Action, { ActionProps } from 'web-components/lib/components/action';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 export interface LandManagementActionsProps {
   actions: ActionProps[];
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(21.5),
       paddingBottom: theme.spacing(22.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.5),
       paddingBottom: theme.spacing(17.5),
     },
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(3),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(2),
     },
   },
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       margin: theme.spacing(0, 1.875),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(0, 1.875),
       '&:first-child': {
         paddingLeft: theme.spacing(4),
@@ -74,18 +75,24 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(7),
       fontSize: theme.typography.pxToRem(16),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(4),
       fontSize: theme.typography.pxToRem(14),
     },
   },
 }));
 
-function LandManagementActions({ actions, title, subtitle }: LandManagementActionsProps): JSX.Element {
+function LandManagementActions({
+  actions,
+  title,
+  subtitle,
+}: LandManagementActionsProps): JSX.Element {
   const styles = useStyles({});
   const theme: Theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const isTablet: boolean = useMediaQuery(theme.breakpoints.between('xs', 'sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet: boolean = useMediaQuery(
+    theme.breakpoints.between('xs', 'tablet'),
+  );
   const slidesCount = isTablet ? 2 : 3;
 
   const settings = {
@@ -119,7 +126,11 @@ function LandManagementActions({ actions, title, subtitle }: LandManagementActio
       topRight={
         <>
           {!isMobile && actions.length > slidesCount && (
-            <Grid container justify="flex-end" className={styles.buttons}>
+            <Grid
+              container
+              justifyContent="flex-end"
+              className={styles.buttons}
+            >
               <PrevNextButton direction="prev" onClick={slickPrev} />
               <PrevNextButton direction="next" onClick={slickNext} />
             </Grid>
@@ -132,7 +143,11 @@ function LandManagementActions({ actions, title, subtitle }: LandManagementActio
         <div className={styles.swipe}>
           {actions.map(action => (
             <div className={styles.item} key={action.name}>
-              <Action name={action.name} description={action.description} imgSrc={action.imgSrc} />
+              <Action
+                name={action.name}
+                description={action.description}
+                imgSrc={action.imgSrc}
+              />
             </div>
           ))}
         </div>

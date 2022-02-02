@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'clsx';
 import BlockContent from '@sanity/block-content-to-react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 
 import { UnderlineTooltip } from '../tooltip/UnderlineTooltip';
 
@@ -25,7 +25,13 @@ const CustomBlockContent: React.FC<{
   tooltipText?: string;
   noYMargin?: boolean;
   onClickModalLink?: (href: string) => any;
-}> = ({ onClickModalLink, content, tooltipText, className, noYMargin = false }) => {
+}> = ({
+  onClickModalLink,
+  content,
+  tooltipText,
+  className,
+  noYMargin = false,
+}) => {
   const styles = useStyles();
 
   const serializers = {
@@ -56,14 +62,20 @@ const CustomBlockContent: React.FC<{
           <a href={href}>{children}</a>
         );
       },
-      underline: (props: any) => <UnderlineTooltip {...props} title={tooltipText} />,
+      underline: (props: any) => (
+        <UnderlineTooltip {...props} title={tooltipText} />
+      ),
     },
   };
 
   if (content) {
     return (
       <div className={cx({ [styles.root]: !!noYMargin })}>
-        <BlockContent className={className} blocks={content} serializers={serializers} />
+        <BlockContent
+          className={className}
+          blocks={content}
+          serializers={serializers}
+        />
       </div>
     );
   }

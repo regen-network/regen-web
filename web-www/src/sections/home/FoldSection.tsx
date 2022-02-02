@@ -1,14 +1,15 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import Typography from '@material-ui/core/Typography';
-import Title from 'web-components/lib/components/title';
+import Typography from '@mui/material/Typography';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Title from 'web-components/lib/components/title';
 import { HomeFoldSectionQuery } from '../../generated/graphql';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     textShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
     textAlign: 'center',
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: '12vh',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: '15vh',
       height: '80vh',
     },
@@ -38,7 +39,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: '1.62rem',
         width: '650px',
       },
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         width: '90%',
         fontSize: '1.125em',
       },
@@ -56,21 +57,18 @@ const useStyles = makeStyles(theme => ({
     left: '54%',
     transform: 'translate(-50%, -50%)',
   },
-  '& h1.MuiTypography-h1': {
-    color: theme.palette.primary.main,
-  },
   title: {
     fontFamily: 'Muli',
     lineHeight: '130%',
-    marginBottom: '12px',
-    [theme.breakpoints.down('xs')]: {
-      margin: '0 auto',
-      marginTop: theme.spacing(13.5),
-      marginBottom: theme.spacing(3),
-      width: '80%',
+    marginBottom: `${theme.spacing(3)} !important`,
+    [theme.breakpoints.down('sm')]: {
+      margin: '0 auto !important',
+      marginTop: `${theme.spacing(13.5)} !important`,
+      marginBottom: `${theme.spacing(3)} !important`,
+      width: '80% !important',
     },
     [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(21.5),
+      marginTop: `${theme.spacing(21.5)} !important`,
     },
   },
   backgroundGradient: {

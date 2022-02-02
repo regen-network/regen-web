@@ -1,12 +1,11 @@
 import React from 'react';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import { useTheme } from '@material-ui/core';
+import { SvgIcon } from '@mui/material';
+import { useTheme } from '@mui/styles';
 
-export const HorizontalDotsIcon: React.FC<{ color?: string; className?: string }> = ({
-  className,
-  color,
-  ...props
-}) => {
+export const HorizontalDotsIcon: React.FC<{
+  color?: string;
+  className?: string;
+}> = ({ className, color, ...props }) => {
   const theme = useTheme();
   color = color || theme.palette.secondary.main;
 
@@ -19,7 +18,12 @@ export const HorizontalDotsIcon: React.FC<{ color?: string; className?: string }
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <svg fill="none" stroke={color} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        fill="none"
+        stroke={color}
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"

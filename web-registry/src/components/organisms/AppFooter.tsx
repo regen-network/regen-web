@@ -1,11 +1,13 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { Footer, FooterItemProps as FooterItem } from 'web-components/lib/components/footer/footer-new';
+import { useLocation } from 'react-router-dom';
+import {
+  Footer,
+  FooterItemProps as FooterItem,
+} from 'web-components/lib/components/footer/footer-new';
 import { RegistryIconLink, Link } from '../atoms';
 
 const AppFooter: React.FC = () => {
-  const history = useHistory();
-  const { pathname } = history.location;
+  const { pathname } = useLocation();
   const isHidden = ['/project-pages'].some(route => pathname.startsWith(route));
 
   const footerItems: [FooterItem, FooterItem, FooterItem] = [

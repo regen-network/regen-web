@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import GreenCard from './GreenCard';
 import clsx from 'clsx';
 
@@ -30,7 +30,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function GreenMediaCard({ className, imageUrl, link }: GreenMediaCardProps): JSX.Element {
+export default function GreenMediaCard({
+  className,
+  imageUrl,
+  link,
+}: GreenMediaCardProps): JSX.Element {
   const classes = useStyles();
 
   return (

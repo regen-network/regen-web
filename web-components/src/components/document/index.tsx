@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 export interface DocumentInfo {
   name: string;
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
   },
@@ -31,12 +31,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function Document({ name, info, link }: DocumentInfo): JSX.Element {
+export default function Document({
+  name,
+  info,
+  link,
+}: DocumentInfo): JSX.Element {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <span>{name} </span>
-      <a className={classes.link} href={link} target="_blank" rel="noopener noreferrer">
+      <a
+        className={classes.link}
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         View {info} »
       </a>
     </div>

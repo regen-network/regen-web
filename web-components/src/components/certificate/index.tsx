@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
@@ -40,7 +40,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(8),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(3),
     },
   },
@@ -48,10 +48,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
     border: `1px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(9.25)} ${theme.spacing(18.75)} ${theme.spacing(12.5)}`,
+      padding: `${theme.spacing(9.25)} ${theme.spacing(18.75)} ${theme.spacing(
+        12.5,
+      )}`,
     },
-    [theme.breakpoints.down('xs')]: {
-      padding: `${theme.spacing(3.25)} ${theme.spacing(2.75)} ${theme.spacing(7.25)}`,
+    [theme.breakpoints.down('sm')]: {
+      padding: `${theme.spacing(3.25)} ${theme.spacing(2.75)} ${theme.spacing(
+        7.25,
+      )}`,
     },
   },
   bannerSide: {
@@ -62,7 +66,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       height: theme.spacing(21.75),
       bottom: theme.spacing(-5.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(6),
       height: theme.spacing(8),
       bottom: theme.spacing(-2.12),
@@ -73,10 +77,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     height: 0,
     borderStyle: 'solid',
     [theme.breakpoints.up('sm')]: {
-      borderWidth: `${theme.spacing(10.875)} 0 ${theme.spacing(10.875)} ${theme.spacing(5)}`,
+      borderWidth: `${theme.spacing(10.875)} 0 ${theme.spacing(
+        10.875,
+      )} ${theme.spacing(5)}`,
     },
-    [theme.breakpoints.down('xs')]: {
-      borderWidth: `${theme.spacing(4)} 0 ${theme.spacing(4)} ${theme.spacing(1.85)}`,
+    [theme.breakpoints.down('sm')]: {
+      borderWidth: `${theme.spacing(4)} 0 ${theme.spacing(4)} ${theme.spacing(
+        1.85,
+      )}`,
     },
     borderColor: `transparent transparent transparent ${theme.palette.primary.main}`,
   },
@@ -90,7 +98,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       borderWidth: `0 ${theme.spacing(5.5)} ${theme.spacing(5.5)} 0`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       borderWidth: `0 ${theme.spacing(2)} ${theme.spacing(2)} 0`,
     },
     borderColor: `transparent ${theme.palette.secondary.contrastText} transparent transparent`,
@@ -108,7 +116,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginLeft: theme.spacing(9.5),
       marginRight: theme.spacing(9.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       // width: theme.spacing(59.5),
       padding: `${theme.spacing(1.75)} ${theme.spacing(3.5)}`,
       fontSize: theme.spacing(3.25),
@@ -127,7 +135,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginTop: theme.spacing(31),
       marginBottom: theme.spacing(2.5 + 5.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       maxWidth: theme.spacing(67),
       marginTop: theme.spacing(11.5),
       marginBottom: theme.spacing(1 + 2.12),
@@ -139,7 +147,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(43.75),
       height: theme.spacing(18.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       width: theme.spacing(15.5),
       height: theme.spacing(7),
     },
@@ -153,7 +161,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingBottom: theme.spacing(25),
       lineHeight: '180%',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       maxWidth: theme.spacing(54.75),
       fontSize: theme.spacing(2.9),
       paddingBottom: theme.spacing(6),
@@ -168,7 +176,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       lineHeight: '150%',
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: '140%',
       fontSize: theme.spacing(1.75),
     },
@@ -181,7 +189,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingTop: theme.spacing(3.75),
       paddingBottom: theme.spacing(1.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: '140%',
       fontSize: theme.spacing(1.5),
       paddingTop: theme.spacing(1),
@@ -194,7 +202,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       lineHeight: '150%',
       fontSize: theme.spacing(3),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       lineHeight: '140%',
       fontSize: theme.spacing(1.5),
     },
@@ -204,7 +212,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginRight: theme.spacing(9.75),
       border: `1px solid ${theme.palette.info.main}`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginRight: theme.spacing(3.5),
       border: `0.5px solid ${theme.palette.info.main}`,
     },
@@ -212,9 +220,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 const formater = new Intl.NumberFormat('en-US');
-const options = { year: 'numeric', month: 'long', day: 'numeric' };
+const options: Intl.DateTimeFormatOptions = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
 
-function Stakeholder({ info, total }: { info: StakeholderInfo; total: number }): JSX.Element {
+function Stakeholder({
+  info,
+  total,
+}: {
+  info: StakeholderInfo;
+  total: number;
+}): JSX.Element {
   const classes = useStyles({});
 
   return (
@@ -267,10 +285,15 @@ export default function Certificate({
           Credits:{' '}
           <b>
             {formater.format(creditsUnits)}{' '}
-            {ReactHtmlParser(creditUnitName ? pluralize(creditsUnits, creditUnitName) : creditName)}
+            {ReactHtmlParser(
+              creditUnitName
+                ? pluralize(creditsUnits, creditUnitName)
+                : creditName,
+            )}
           </b>
           <br />
-          Equivalent to: <b>{formater.format(equivalentTonsCO2)} tons of CO2e</b>
+          Equivalent to:{' '}
+          <b>{formater.format(equivalentTonsCO2)} tons of CO2e</b>
           <br />
           Project: <b>{projectName}</b>
           <br />

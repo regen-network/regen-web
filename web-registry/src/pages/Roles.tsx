@@ -1,9 +1,15 @@
 import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-import { FormValues, isIndividual } from 'web-components/lib/components/inputs/RoleField';
-import { OnboardingFormTemplate, EditFormTemplate } from '../components/templates';
+import {
+  FormValues,
+  isIndividual,
+} from 'web-components/lib/components/inputs/RoleField';
+import {
+  OnboardingFormTemplate,
+  EditFormTemplate,
+} from '../components/templates';
 import { RolesForm, RolesValues } from '../components/organisms';
 import { useProjectEditContext } from '../pages/ProjectEdit';
 import {
@@ -26,7 +32,8 @@ function getPartyIds(
       return { id: party.userByPartyId.id, ...p };
     }
     if (party.type === 'ORGANIZATION' && party.organizationByPartyId) {
-      const members = party.organizationByPartyId.organizationMembersByOrganizationId?.nodes;
+      const members =
+        party.organizationByPartyId.organizationMembersByOrganizationId?.nodes;
       return {
         id: party.organizationByPartyId.id,
         addressId: party.addressByAddressId?.id,
@@ -44,7 +51,12 @@ function stripPartyIds(values: FormValues | undefined): FormValues | undefined {
   if (values?.id && values?.partyId) {
     delete values.id;
     delete values.partyId;
-    if (!isIndividual(values) && values?.addressId && values?.ownerId && values?.ownerPartyId) {
+    if (
+      !isIndividual(values) &&
+      values?.addressId &&
+      values?.ownerId &&
+      values?.ownerPartyId
+    ) {
       delete values.addressId;
       delete values.ownerId;
       delete values.ownerPartyId;
@@ -56,9 +68,15 @@ function stripPartyIds(values: FormValues | undefined): FormValues | undefined {
 function stripIds(values: RolesValues): RolesValues {
   if (values) {
     return {
-      'http://regen.network/landOwner': stripPartyIds(values['http://regen.network/landOwner']),
-      'http://regen.network/landSteward': stripPartyIds(values['http://regen.network/landSteward']),
-      'http://regen.network/projectDeveloper': stripPartyIds(values['http://regen.network/projectDeveloper']),
+      'http://regen.network/landOwner': stripPartyIds(
+        values['http://regen.network/landOwner'],
+      ),
+      'http://regen.network/landSteward': stripPartyIds(
+        values['http://regen.network/landSteward'],
+      ),
+      'http://regen.network/projectDeveloper': stripPartyIds(
+        values['http://regen.network/projectDeveloper'],
+      ),
       'http://regen.network/projectOriginator': stripPartyIds(
         values['http://regen.network/projectOriginator'],
       ),
@@ -68,7 +86,7 @@ function stripIds(values: RolesValues): RolesValues {
 }
 
 const Roles: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
   const { user } = useAuth0();
@@ -82,7 +100,7 @@ const Roles: React.FC = () => {
   const { data: userProfileData } = useGetOrganizationProfileByEmailQuery({
     skip: !userEmail,
     variables: {
-      email: userEmail,
+      email: userEmail as string,
     },
   });
 
@@ -117,10 +135,16 @@ const Roles: React.FC = () => {
     let projectPatch: ProjectPatch = {};
 
     if (values['http://regen.network/landOwner']?.partyId) {
-      projectPatch = { landOwnerId: values['http://regen.network/landOwner']?.partyId, ...projectPatch };
+      projectPatch = {
+        landOwnerId: values['http://regen.network/landOwner']?.partyId,
+        ...projectPatch,
+      };
     }
     if (values['http://regen.network/landSteward']?.partyId) {
-      projectPatch = { stewardId: values['http://regen.network/landSteward']?.partyId, ...projectPatch };
+      projectPatch = {
+        stewardId: values['http://regen.network/landSteward']?.partyId,
+        ...projectPatch,
+      };
     }
     if (values['http://regen.network/projectDeveloper']?.partyId) {
       projectPatch = {
@@ -152,7 +176,7 @@ const Roles: React.FC = () => {
           },
         },
       });
-      !isEdit && history.push(`/project-pages/${projectId}/entity-display`);
+      !isEdit && navigate(`/project-pages/${projectId}/entity-display`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -162,11 +186,23 @@ const Roles: React.FC = () => {
 
   return isEdit ? (
     <EditFormTemplate>
-      <RolesForm submit={submit} initialValues={initialFieldValues} projectCreator={userProfileData} />
+      <RolesForm
+        submit={submit}
+        initialValues={initialFieldValues}
+        projectCreator={userProfileData}
+      />
     </EditFormTemplate>
   ) : (
-    <OnboardingFormTemplate activeStep={0} title="Roles" saveAndExit={saveAndExit}>
-      <RolesForm submit={submit} initialValues={initialFieldValues} projectCreator={userProfileData} />
+    <OnboardingFormTemplate
+      activeStep={0}
+      title="Roles"
+      saveAndExit={saveAndExit}
+    >
+      <RolesForm
+        submit={submit}
+        initialValues={initialFieldValues}
+        projectCreator={userProfileData}
+      />
     </OnboardingFormTemplate>
   );
 };

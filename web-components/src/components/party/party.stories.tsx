@@ -1,12 +1,10 @@
 import * as React from 'react';
 
 import PartyAddress from 'web-components/lib/components/party/PartyAddress';
-import { withKnobs } from '@storybook/addon-knobs';
 
 export default {
-  title: 'Components|Party',
+  title: 'Party',
   component: PartyAddress,
-  decorators: [withKnobs],
 };
 
 export const partyAddress = (): JSX.Element => (

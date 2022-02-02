@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "declaration": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "noEmitOnError": true,
     "outDir": "lib",
     "paths": {

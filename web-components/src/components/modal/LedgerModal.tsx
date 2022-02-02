@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, Theme, withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { makeStyles, DefaultTheme as Theme, withStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
-import { ServiceClientImpl, GetTxResponse } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import {
+  ServiceClientImpl,
+  GetTxResponse,
+} from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
 import Modal, { RegenModalProps } from './index';
 import RegenLedgerIcon from '../icons/RegenLedgerIcon';
@@ -63,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(3.5),
       lineHeight: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(2.75),
       lineHeight: theme.spacing(3.5),
     },
@@ -72,7 +75,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(6.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(4.5),
     },
   },
@@ -80,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(6.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(5),
     },
   },
@@ -89,7 +92,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(3),
       lineHeight: theme.spacing(3.75),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(2.5),
       lineHeight: theme.spacing(3.25),
     },
@@ -99,7 +102,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(6),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(3),
     },
   },
@@ -108,7 +111,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(3.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -137,7 +140,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'absolute',
     top: theme.spacing(4),
     width: '100%',
-    background: 'linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FAFAFA 100%)',
+    background:
+      'linear-gradient(180deg, rgba(250, 250, 250, 0) 0%, #FAFAFA 100%)',
     height: theme.spacing(15.15),
   },
   ledgerIconContainer: {
@@ -145,7 +149,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(9.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(6.25),
     },
   },
@@ -153,7 +157,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(9.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(7.5),
     },
   },
@@ -170,7 +174,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(-1.5),
       paddingLeft: theme.spacing(7.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(-1),
       paddingLeft: theme.spacing(3.75),
     },
@@ -196,7 +200,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3.5),
     },
   },
@@ -204,7 +208,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(3),
     },
   },
@@ -213,7 +217,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(1.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(1),
     },
   },
@@ -222,7 +226,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(12.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(7.5),
       fontSize: theme.spacing(3.5),
     },
@@ -237,7 +241,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(2),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(1.25),
       paddingBottom: theme.spacing(1.25),
     },
@@ -262,10 +266,18 @@ function SummaryItem({ item }: { item: Item }): JSX.Element {
     <>
       {item.value ? (
         <Grid container className={classes.summaryItem}>
-          <Grid className={clsx(classes.label, classes.summaryLabel)} xs={4} item>
+          <Grid
+            className={clsx(classes.label, classes.summaryLabel)}
+            xs={4}
+            item
+          >
             {item.label}
           </Grid>
-          <Grid xs={8} className={clsx(classes.value, classes.summaryValue)} item>
+          <Grid
+            xs={8}
+            className={clsx(classes.value, classes.summaryValue)}
+            item
+          >
             {parseText(item.value)}
           </Grid>
         </Grid>
@@ -316,15 +328,28 @@ export default function LedgerModal({
             Entity Information
           </Title>
           <SummaryItem item={{ label: 'organization', value: party.name }} />
-          <SummaryItem item={{ label: 'individual', value: party.individual }} />
+          <SummaryItem
+            item={{ label: 'individual', value: party.individual }}
+          />
           <SummaryItem item={{ label: 'role', value: party.role }} />
-          <SummaryItem item={{ label: 'account address', value: party.address }} />
+          <SummaryItem
+            item={{ label: 'account address', value: party.address }}
+          />
           <SummaryItem item={{ label: 'location', value: party.location }} />
-          {party.description && <SummaryItem item={{ label: 'description', value: party.description }} />}
+          {party.description && (
+            <SummaryItem
+              item={{ label: 'description', value: party.description }}
+            />
+          )}
         </>
       ) : (
         <>
-          <Grid container alignItems="center" justify="center" className={classes.title}>
+          <Grid
+            container
+            alignItems="center"
+            justifyContent="center"
+            className={classes.title}
+          >
             <Title variant="h5">Summary</Title>
             <CustomTooltip
               arrow
@@ -346,7 +371,9 @@ export default function LedgerModal({
             <>
               <Grid container wrap="nowrap" className={classes.blockchainTitle}>
                 <Grid item container alignItems="center">
-                  <div className={clsx(classes.label, classes.blockchain)}>blockchain data (devnet)</div>
+                  <div className={clsx(classes.label, classes.blockchain)}>
+                    blockchain data (devnet)
+                  </div>
                   <CustomTooltip
                     arrow
                     placement="top"
@@ -368,74 +395,137 @@ export default function LedgerModal({
                 </Grid>
               </Grid>
               <div
-                className={open ? classes.blockchainData : clsx(classes.blockchainData, classes.collapsed)}
+                className={
+                  open
+                    ? classes.blockchainData
+                    : clsx(classes.blockchainData, classes.collapsed)
+                }
               >
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={4}
+                    item
+                  >
                     hash
                   </Grid>
-                  <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
+                  <Grid
+                    xs={8}
+                    item
+                    className={clsx(classes.value, classes.blockchainValue)}
+                  >
                     {txRes.txResponse.txhash}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={4}
+                    item
+                  >
                     height
                   </Grid>
-                  <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
+                  <Grid
+                    xs={8}
+                    item
+                    className={clsx(classes.value, classes.blockchainValue)}
+                  >
                     {numberFormat.format(txRes.txResponse.height.low)}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={4}
+                    item
+                  >
                     status
                   </Grid>
-                  <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
-                    {txRes.txResponse.code === 0 && <span className={classes.success}>success</span>}
+                  <Grid
+                    xs={8}
+                    item
+                    className={clsx(classes.value, classes.blockchainValue)}
+                  >
+                    {txRes.txResponse.code === 0 && (
+                      <span className={classes.success}>success</span>
+                    )}
                   </Grid>
                 </Grid>
                 {txRes.txResponse.timestamp && (
                   <Grid container className={classes.blockchainItem}>
-                    <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                    <Grid
+                      className={clsx(classes.label, classes.blockchainLabel)}
+                      xs={4}
+                      item
+                    >
                       timestamp
                     </Grid>
-                    <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
+                    <Grid
+                      xs={8}
+                      item
+                      className={clsx(classes.value, classes.blockchainValue)}
+                    >
                       {txRes.txResponse.timestamp}
                     </Grid>
                   </Grid>
                 )}
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={4}
+                    item
+                  >
                     memo
                   </Grid>
-                  <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
+                  <Grid
+                    xs={8}
+                    item
+                    className={clsx(classes.value, classes.blockchainValue)}
+                  >
                     {(txRes.tx.body && txRes.tx.body.memo) || '-'}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={4}
+                    item
+                  >
                     transaction fee
                   </Grid>
-                  <Grid xs={8} item className={clsx(classes.value, classes.blockchainValue)}>
+                  <Grid
+                    xs={8}
+                    item
+                    className={clsx(classes.value, classes.blockchainValue)}
+                  >
                     {txRes.tx.authInfo &&
                     txRes.tx.authInfo.fee &&
                     txRes.tx.authInfo.fee.amount &&
                     txRes.tx.authInfo.fee.amount.length
-                      ? `${numberFormat.format(parseFloat(txRes.tx.authInfo.fee.amount[0].amount))} ${
-                          txRes.tx.authInfo.fee.amount[0].denom
-                        }`
+                      ? `${numberFormat.format(
+                          parseFloat(txRes.tx.authInfo.fee.amount[0].amount),
+                        )} ${txRes.tx.authInfo.fee.amount[0].denom}`
                       : '0'}
                   </Grid>
                 </Grid>
                 <Grid container className={classes.blockchainItem}>
-                  <Grid className={clsx(classes.label, classes.blockchainLabel)} xs={12} sm={4} item>
+                  <Grid
+                    className={clsx(classes.label, classes.blockchainLabel)}
+                    xs={12}
+                    sm={4}
+                    item
+                  >
                     transaction data
                   </Grid>
                   <Grid
                     xs={12}
                     sm={8}
                     item
-                    className={clsx(classes.logs, classes.value, classes.blockchainValue)}
+                    className={clsx(
+                      classes.logs,
+                      classes.value,
+                      classes.blockchainValue,
+                    )}
                   >
                     {ReactHtmlParser(
                       JSON.stringify(txRes.txResponse.logs, null, 2)
@@ -447,7 +537,11 @@ export default function LedgerModal({
                 {open ? null : <div className={classes.gradient} />}
               </div>
               {link && (
-                <ContainedButton href={link} target="_blank" className={classes.button}>
+                <ContainedButton
+                  href={link}
+                  target="_blank"
+                  className={classes.button}
+                >
                   review on regen ledger
                 </ContainedButton>
               )}

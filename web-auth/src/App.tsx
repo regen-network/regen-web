@@ -1,11 +1,14 @@
 import React, { useCallback } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { WebAuth } from 'auth0-js';
 import axios from 'axios';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import LoginForm, { Values } from 'web-components/lib/components/form/LoginForm';
+import LoginForm, {
+  Values,
+} from 'web-components/lib/components/form/LoginForm';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 const searchParams = new URLSearchParams(window.location.search);
 const state = searchParams.get('state') || undefined;
@@ -44,8 +47,9 @@ function App(): JSX.Element {
     ({ email, password }: Values): Promise<void> => {
       return new Promise(async (resolve, reject) => {
         try {
-          const token = await executeRecaptcha('login_page');
-          const apiUri: string = process.env.REACT_APP_API_URI || 'http://localhost:5000';
+          const token = await executeRecaptcha?.('login_page');
+          const apiUri: string =
+            process.env.REACT_APP_API_URI || 'http://localhost:5000';
           const res = await axios({
             method: 'POST',
             url: `${apiUri}/recaptcha/v3/verify`,
@@ -65,7 +69,7 @@ function App(): JSX.Element {
                 responseMode,
                 state,
               },
-              function(err) {
+              function (err) {
                 if (err) {
                   reject(err);
                 } else {
@@ -93,7 +97,10 @@ function App(): JSX.Element {
       />
       <OnBoardingSection formContainer title="Log in">
         <LoginForm
-          signupFromLogin={process.env.REACT_APP_SIGNUP_LINK || 'https://www.regen.network/registry/signup'}
+          signupFromLogin={
+            process.env.REACT_APP_SIGNUP_LINK ||
+            'https://www.regen.network/registry/signup'
+          }
           submit={submit}
         />
       </OnBoardingSection>

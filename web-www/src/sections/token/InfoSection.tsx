@@ -1,13 +1,14 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles, CardContent, Typography } from '@material-ui/core';
+import { CardContent, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import Img, { FluidObject } from 'gatsby-image';
-import ReactHtmlParser from 'react-html-parser';
 
-import Section from 'web-components/src/components/section';
-import Title from 'web-components/src/components/title';
-import Card from 'web-components/src/components/cards/Card';
-import Description from 'web-components/src/components/description';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/lib/components/section';
+import Title from 'web-components/lib/components/title';
+import Card from 'web-components/lib/components/cards/Card';
+import Description from 'web-components/lib/components/description';
 import { TokenInfoSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
 
@@ -17,7 +18,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
     },
   },
@@ -31,7 +32,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
         objectPosition: '71% !important',
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       minWidth: '100%',
       maxHeight: theme.spacing(50),
       '& picture img': {
@@ -48,7 +49,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
         paddingBottom: theme.spacing(12),
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(10, 4.5),
     },
   },
@@ -56,10 +57,10 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     margin: theme.spacing(4, 0),
     color: theme.palette.info.main,
     fontWeight: 700,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       fontSize: theme.typography.pxToRem(18),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
   },
@@ -74,7 +75,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(22),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       fontSize: theme.typography.pxToRem(16),
     },
   },

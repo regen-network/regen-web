@@ -1,8 +1,9 @@
 import React from 'react';
+import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core/';
 
 import BackgroundSection from '../../components/BackgroundSection';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import TitleDescription from 'web-components/lib/components/title-description';
 import { ValidatorsWhatSectionQuery } from '../../generated/graphql';
 
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(25),
       paddingBottom: theme.spacing(37.5),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.75),
       paddingBottom: theme.spacing(15.25),
     },

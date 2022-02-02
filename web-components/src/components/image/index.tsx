@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
@@ -82,7 +82,11 @@ const Image: React.FC<ImageProps> = ({
   useEffect(() => {
     if (width > 0 && !serverFailed) {
       if (imageStorageBaseUrl && apiServerUrl) {
-        const serverUrl = getOptimizedImageSrc(src, imageStorageBaseUrl, apiServerUrl);
+        const serverUrl = getOptimizedImageSrc(
+          src,
+          imageStorageBaseUrl,
+          apiServerUrl,
+        );
         // Create an empty query string
         let queryParams = '';
 
@@ -91,7 +95,9 @@ const Image: React.FC<ImageProps> = ({
 
         // Loop through option object and build queryString
         Object.keys(options).map((option, i) => {
-          return (queryParams += `${i < 1 ? '?' : '&'}${option}=${options[option]}`);
+          return (queryParams += `${i < 1 ? '?' : '&'}${option}=${
+            options[option]
+          }`);
         });
         setOptimizedSrc(`${serverUrl}${queryParams}`);
       } else {
@@ -100,7 +106,15 @@ const Image: React.FC<ImageProps> = ({
     } else {
       setOptimizedSrc(src);
     }
-  }, [imgRef, serverFailed, src, imageStorageBaseUrl, options, width, apiServerUrl]);
+  }, [
+    imgRef,
+    serverFailed,
+    src,
+    imageStorageBaseUrl,
+    options,
+    width,
+    apiServerUrl,
+  ]);
 
   const handleError = (): void => {
     setServerFailed(true);
@@ -109,27 +123,29 @@ const Image: React.FC<ImageProps> = ({
 
   return (
     <figure ref={imgRef} className={clsx(className, classes.figure)}>
-      {// If the container width has been set, display the image else null
-      width > 0 && optimizedSrc && readyToLoad ? (
-        backgroundImage ? (
-          <div
-            className={clsx(className, classes.background)}
-            style={{ backgroundImage: `url(${optimizedSrc}), url(${src})` }}
-          >
-            {children}
-          </div>
-        ) : (
-          <img
-            {...rest}
-            className={className}
-            src={optimizedSrc}
-            alt={alt}
-            onError={handleError}
-            width={width}
-            height={height}
-          />
-        )
-      ) : null}
+      {
+        // If the container width has been set, display the image else null
+        width > 0 && optimizedSrc && readyToLoad ? (
+          backgroundImage ? (
+            <div
+              className={clsx(className, classes.background)}
+              style={{ backgroundImage: `url(${optimizedSrc}), url(${src})` }}
+            >
+              {children}
+            </div>
+          ) : (
+            <img
+              {...rest}
+              className={className}
+              src={optimizedSrc}
+              alt={alt}
+              onError={handleError}
+              width={width}
+              height={height}
+            />
+          )
+        ) : null
+      }
     </figure>
   );
 };

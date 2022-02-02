@@ -45,7 +45,7 @@ const Mainnet: React.FC<PageProps> = ({ location }) => {
       <WhatsNextSection />
       <MediaSection />
       {new Date() < new Date(launchDate) && data?.livecastLink && (
-        <FixedFooter justify="flex-end">
+        <FixedFooter justifyContent="flex-end">
           <ContainedButton href={data?.livecastLink} target="_blank" rel="noopener noreferrer">
             Register for Mainnet Livecast
           </ContainedButton>

@@ -1,13 +1,14 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Theme, makeStyles } from '@material-ui/core/';
+import { makeStyles } from '@mui/styles';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../components/BackgroundSection';
 import { WalletAddrRegTopSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   section: props => ({
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(20),
       paddingLeft: 'none',
       paddingRight: 'none',

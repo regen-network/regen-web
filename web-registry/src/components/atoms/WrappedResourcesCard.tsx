@@ -18,7 +18,9 @@ const WrappedResourcesCard: React.FC<{
     <ResourcesCard
       image={{ publicURL: getSanityImgSrc(resource?.image) }}
       title={<BlockContent content={resource?.titleRaw} />}
-      description={<BlockContent noYMargin content={resource?.descriptionRaw} />}
+      description={
+        <BlockContent noYMargin content={resource?.descriptionRaw} />
+      }
       updated={getFormattedDate(resource?.lastUpdated || resource?._updatedAt)}
       buttonText={resource?.button?.buttonText}
       target={resource?.button?.buttonBlankTarget ? '_blank' : '_self'}

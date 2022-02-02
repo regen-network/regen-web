@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   batchDenomTitleCell: {
     minWidth: theme.spacing(25),
     [theme.breakpoints.up('md')]: {
-      minWidth: theme.spacing(40),
+      minWidth: theme.spacing(45),
     },
     [theme.breakpoints.up('lg')]: {
       minWidth: theme.spacing(50),

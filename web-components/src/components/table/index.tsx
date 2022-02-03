@@ -9,7 +9,7 @@ import DropdownIcon from '../icons/DropdownIcon';
 const StyledTableContainer = withStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
-    overflow: 'hidden',
+    overflowY: 'hidden',
   },
 }))(TableContainer);
 

@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-// import { makeStyles } from '@mui/core/styles';
-// import Box from '@mui/core/Box';
-// import Menu from '@mui/core/Menu';
-// import MenuItem from '@mui';
 import OutlinedButton from './OutlinedButton';
 import { HorizontalDotsIcon } from '../icons/HorizontalDotsIcon';
 import { makeStyles } from '@mui/styles';
@@ -36,58 +32,68 @@ const TableActionButtons: React.FC<{
   }
 
   const styles = useStyles();
-  return (
+  const Desktop: React.FC = () => (
     <>
-      {/* Desktop */}
-      <Box
-        display={{ xs: 'none', [breakOn]: 'flex' }}
-        sx={{
-          flexWrap: 'nowrap',
-          gap: 8,
-        }}
+      {buttons.map(({ label, onClick }, i) => (
+        <OutlinedButton
+          key={'table-action-' + i}
+          size="small"
+          onClick={() => {
+            handleMobileMenuClose();
+            onClick();
+          }}
+        >
+          {label}
+        </OutlinedButton>
+      ))}
+    </>
+  );
+
+  const Mobile: React.FC = () => (
+    <>
+      <OutlinedButton
+        onClick={handleMobileMenuOpen}
+        size="small"
+        aria-controls="table-menu-buttons"
+      >
+        <HorizontalDotsIcon />
+      </OutlinedButton>
+      <Menu
+        id="table-menu-buttons"
+        className={styles.menu}
+        anchorEl={anchorEl}
+        open={!!anchorEl}
+        onClose={handleMobileMenuClose}
       >
         {buttons.map(({ label, onClick }, i) => (
-          <OutlinedButton
-            key={'table-action-' + i}
-            size="small"
+          <MenuItem
+            key={i}
+            className={styles.menuLabel}
             onClick={() => {
               handleMobileMenuClose();
               onClick();
             }}
           >
             {label}
-          </OutlinedButton>
+          </MenuItem>
         ))}
+      </Menu>
+    </>
+  );
+
+  return (
+    <>
+      <Box
+        display={{ xs: 'none', [breakOn]: 'flex' }}
+        sx={{
+          flexWrap: 'nowrap',
+          gap: 2,
+        }}
+      >
+        <Desktop />
       </Box>
-      {/* Mobile */}
       <Box display={{ xs: 'flex', [breakOn]: 'none' }}>
-        <OutlinedButton
-          onClick={handleMobileMenuOpen}
-          size="small"
-          aria-controls="table-menu-buttons"
-        >
-          <HorizontalDotsIcon />
-        </OutlinedButton>
-        <Menu
-          id="table-menu-buttons"
-          className={styles.menu}
-          anchorEl={anchorEl}
-          open={!!anchorEl}
-          onClose={handleMobileMenuClose}
-        >
-          {buttons.map(({ label, onClick }, i) => (
-            <MenuItem
-              key={i}
-              className={styles.menuLabel}
-              onClick={() => {
-                handleMobileMenuClose();
-                onClick();
-              }}
-            >
-              {label}
-            </MenuItem>
-          ))}
-        </Menu>
+        <Mobile />
       </Box>
     </>
   );

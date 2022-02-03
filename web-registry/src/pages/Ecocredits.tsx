@@ -17,29 +17,6 @@ import {
 import { format } from 'date-fns';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    background: theme.palette.primary.main,
-  },
-  tableWrap: {
-    border: `1px solid ${theme.palette.info.light}`,
-    borderRadius: '8px',
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(12),
-    overflow: 'hidden',
-  },
-  stickyHead: {
-    // TODO once we upgrade MUI there is a built in solution:
-    // https://mui.com/components/data-grid/columns/#column-pinning
-    textAlign: 'left',
-    background: theme.palette.primary.main,
-    position: 'sticky',
-    right: 0,
-  },
-  stickyCell: {
-    background: 'inherit',
-    position: 'sticky',
-    right: 0,
-  },
   borderLeft: {
     // absolutely position border to get around MUI style quirks
     position: 'absolute',
@@ -56,10 +33,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('lg')]: {
       minWidth: theme.spacing(50),
     },
-  },
-  greenText: {
-    color: theme.palette.secondary.main,
-    fontWeight: 700,
   },
   greyText: {
     color: theme.palette.info.main,
@@ -106,7 +79,7 @@ export const Ecocredits: React.FC = () => {
     setOrderBy(sortBy);
   };
 
-  const SortableCell: React.FC<{ field: string }> = ({ field, children }) => {
+  const SortableHead: React.FC<{ field: string }> = ({ field, children }) => {
     const isCurrentSort = orderBy === field;
     return (
       <StyledTableCell sortDirection={isCurrentSort ? order : false}>
@@ -122,11 +95,20 @@ export const Ecocredits: React.FC = () => {
   };
 
   return (
-    <div className={styles.root}>
+    <Box sx={{ backgroundColor: 'grey.50' }}>
       <Section title="My Ecocredits" titleVariant="h3" titleAlign="left">
-        <div className={styles.tableWrap}>
-          <StyledTableContainer>
-            <Table aria-label="eco credits table" stickyHeader>
+        <Box
+          sx={{
+            border: 1,
+            borderColor: 'info.light',
+            borderRadius: '8px',
+            marginTop: 8,
+            marginBottom: 12,
+            overflow: 'hidden',
+          }}
+        >
+          <StyledTableContainer sx={{ overflow: 'auto' }}>
+            <Table aria-label="eco credits table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>
@@ -136,20 +118,27 @@ export const Ecocredits: React.FC = () => {
                   </StyledTableCell>
                   <StyledTableCell>Issuer</StyledTableCell>
                   <StyledTableCell>Credit Class</StyledTableCell>
-                  <SortableCell field="amount_tradeable">
+                  <SortableHead field="amount_tradeable">
                     Amount Tradeable
-                  </SortableCell>
-                  <SortableCell field="amount_retired">
+                  </SortableHead>
+                  <SortableHead field="amount_retired">
                     Amount Retired
-                  </SortableCell>
-                  <SortableCell field="batch_start_date">
+                  </SortableHead>
+                  <SortableHead field="batch_start_date">
                     Batch Start Date
-                  </SortableCell>
-                  <SortableCell field="batch_end_date">
+                  </SortableHead>
+                  <SortableHead field="batch_end_date">
                     Batch End Date
-                  </SortableCell>
+                  </SortableHead>
                   <StyledTableCell>Project Location</StyledTableCell>
-                  <StyledTableCell className={styles.stickyHead}>
+                  <StyledTableCell
+                    sx={{
+                      textAlign: 'left',
+                      background: 'primary.main',
+                      position: 'sticky',
+                      right: 0,
+                    }}
+                  >
                     <Box>
                       <div className={styles.borderLeft} />
                       Actions
@@ -163,7 +152,15 @@ export const Ecocredits: React.FC = () => {
                     <StyledTableRow key={i}>
                       <StyledTableCell>{row.batch_denom}</StyledTableCell>
                       <StyledTableCell>
-                        <span className={styles.greenText}>{row.issuer}</span>
+                        <Box
+                          display="inline"
+                          sx={{
+                            color: 'secondary.main',
+                            fontWeight: 700,
+                          }}
+                        >
+                          {row.issuer}
+                        </Box>
                       </StyledTableCell>
                       <StyledTableCell>{row.class_id}</StyledTableCell>
                       <StyledTableCell>
@@ -183,7 +180,13 @@ export const Ecocredits: React.FC = () => {
                         </span>
                       </StyledTableCell>
                       <StyledTableCell>{row.project_location}</StyledTableCell>
-                      <StyledTableCell className={styles.stickyCell}>
+                      <StyledTableCell
+                        sx={{
+                          background: 'inherit',
+                          position: 'sticky',
+                          right: 0,
+                        }}
+                      >
                         <div className={styles.borderLeft} />
                         <TableActionButtons
                           buttons={[
@@ -208,9 +211,9 @@ export const Ecocredits: React.FC = () => {
               </TableBody>
             </Table>
           </StyledTableContainer>
-        </div>
+        </Box>
       </Section>
-    </div>
+    </Box>
   );
 };
 

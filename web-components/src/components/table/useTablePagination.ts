@@ -14,12 +14,15 @@ import { TablePagination, TablePaginationProps } from './TablePagination';
  * correspond when the page is changed, and a setter method to set the total
  * data in the source.
  */
-export function useTablePagination(rowsPerPageOptions: number[] = [5]): UseTablePaginationResult {
+export function useTablePagination(
+  rowsPerPageOptions: number[] = [5],
+): UseTablePaginationResult {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(rowsPerPageOptions[0]);
   const [offset, setOffset] = useState<number>(0);
   const [countTotal, setCountTotal] = useState<number>(0);
-  const [paginationParams, setPaginationParams] = useState<URLSearchParams | null>(null);
+  const [paginationParams, setPaginationParams] =
+    useState<URLSearchParams | null>(null);
 
   const prepareParams = (rowsPerPage: number, offset: number): void => {
     const params = new URLSearchParams();
@@ -42,7 +45,9 @@ export function useTablePagination(rowsPerPageOptions: number[] = [5]): UseTable
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
     setRowsPerPage(parseInt(event.target.value as string, 10));
     setOffset(0);
     setPage(0);
@@ -53,7 +58,7 @@ export function useTablePagination(rowsPerPageOptions: number[] = [5]): UseTable
     count: countTotal,
     rowsPerPage: rowsPerPage,
     page: page,
-    onChangePage: handleChangePage,
+    onPageChange: handleChangePage,
     onChangeRowsPerPage: handleChangeRowsPerPage,
   };
 

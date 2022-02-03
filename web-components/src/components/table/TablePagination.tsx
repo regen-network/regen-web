@@ -16,18 +16,18 @@ const useStylesAction = makeStyles(theme => ({
 
 const TablePaginationActions = (props: any): any => {
   const classes = useStylesAction();
-  const { count, page, rowsPerPage, onChangePage } = props;
+  const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleBackButtonClick = (
     event: React.MouseEvent<HTMLDivElement>,
   ): void => {
-    onChangePage(event, page - 1);
+    onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
     event: React.MouseEvent<HTMLDivElement>,
   ): void => {
-    onChangePage(event, page + 1);
+    onPageChange(event, page + 1);
   };
 
   return (
@@ -102,7 +102,7 @@ export interface TablePaginationProps {
   count: number;
   rowsPerPage: number;
   page: number;
-  onChangePage: (event: unknown, newPage: number) => void;
+  onPageChange: (event: unknown, newPage: number) => void;
   onChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -113,7 +113,7 @@ export const TablePagination: React.FC<TablePaginationProps> = props => {
       count={props.count}
       rowsPerPage={props.rowsPerPage}
       page={props.page}
-      onPageChange={props.onChangePage}
+      onPageChange={props.onPageChange}
       onRowsPerPageChange={props.onChangeRowsPerPage}
       ActionsComponent={TablePaginationActions}
     />

@@ -14,7 +14,7 @@ import {
 import { creditClasses } from '../mocks';
 
 import cowsImg from '../assets/cows-by-barn.png';
-import topographyImg from '../assets/background.jpg';
+import topographyImg from '../assets/background-contour-1.jpg';
 import horsesImg from '../assets/horses-grazing.png';
 
 import { useMoreProjectsQuery } from '../generated/graphql';
@@ -94,8 +94,8 @@ const Home: React.FC = () => {
 
       {projectsData?.allProjects?.nodes && (
         <Section
-          title="Projects"
-          titleAlign="left"
+          title="Featured Projects"
+          titleAlign="center"
           classes={{ root: styles.section, title: styles.title }}
         >
           <ProjectCards
@@ -111,7 +111,6 @@ const Home: React.FC = () => {
 
       <Section
         title="Credit Classes"
-        titleAlign="left"
         classes={{ root: styles.section, title: styles.title }}
       >
         <CreditClassCards

@@ -1,4 +1,5 @@
 export const requiredMessage: string = 'This field is required';
+export const invalidAmount: string = 'Please enter a valid amount';
 export const invalidEmailMessage: string = 'Please enter a valid email address';
 export const invalidPassword: string =
   'Your password must contain at least 1 letter, 1 number, 1 special character (!@#$%^&*) and at least 8 characters';

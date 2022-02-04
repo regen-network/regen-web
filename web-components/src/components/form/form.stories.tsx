@@ -2,6 +2,9 @@ import * as React from 'react';
 import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
 // import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
 import LoginForm from 'web-components/lib/components/form/LoginForm';
+import { CreditTransferForm } from 'web-components/lib/components/form/CreditTransferForm';
+import { CreditRetireForm } from 'web-components/lib/components/form/CreditRetireForm';
+import { CreditTransferModal } from 'web-components/lib/components/form/CreditTransferModal';
 
 export default {
   title: 'Forms',
@@ -49,4 +52,16 @@ export const loginForm = (): JSX.Element => (
     signupFromLogin="/"
     privacyLink="https://www.regen.network/privacy-policy/"
   />
+);
+
+export const creditTransferForm = (): JSX.Element => (
+  <CreditTransferForm sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} /> // test account
+);
+
+export const creditTransferModal = (): JSX.Element => (
+  <CreditTransferModal open={true} onClose={() => { }} />
+);
+
+export const creditRetireForm = (): JSX.Element => (
+  <CreditRetireForm sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} /> // test account
 );

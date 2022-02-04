@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'web-components/lib/components/modal';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Button, Card, Avatar, CardMedia } from '@mui/material';
 
 export default {
@@ -13,7 +14,9 @@ function OpenModal(): JSX.Element {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <Button variant="contained" onClick={() => setOpen(true)}>Open Modal</Button>
+      <Button variant="contained" onClick={() => setOpen(true)}>
+        Open Modal
+      </Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <p>I'm a Modal</p>
       </Modal>
@@ -173,9 +176,14 @@ function OpenCropImageModal(props: CropStoryProps): JSX.Element {
   );
 }
 
+function OpenProcessingModal(): JSX.Element {
+  return <ProcessingModal open={true} onClose={() => {}} />;
+}
+
 export const modal = (): JSX.Element => <OpenModal />;
 export const ledgerModal = (): JSX.Element => <OpenLedgerModal />;
 export const cropSquareImageModal = (): JSX.Element => <OpenCropImageModal />;
 export const cropRoundImageModal = (): JSX.Element => (
   <OpenCropImageModal circularCrop />
 );
+export const processingModal = (): JSX.Element => <OpenProcessingModal />;

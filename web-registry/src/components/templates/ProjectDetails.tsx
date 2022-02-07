@@ -134,12 +134,13 @@ function ProjectDetails(): JSX.Element {
 
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
+  console.log('location', location);
   useEffect(() => {
     setPageView(location);
   }, [location]);
 
   const styles = useStyles();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
 
   const otherProjects = projectsData?.allProjects?.nodes?.filter(
     p => p?.handle !== projectId,
@@ -223,6 +224,10 @@ function ProjectDetails(): JSX.Element {
     getVisiblePartyName(metadata?.['http://regen.network/landOwner']) ||
     getVisiblePartyName(metadata?.['http://regen.network/projectOriginator']);
   const projectAddress = metadata?.['http://schema.org/location']?.place_name;
+  const galleryPhotos =
+    metadata?.['http://regen.network/galleryPhotos']?.['@list'];
+  const noGallery = !galleryPhotos || galleryPhotos?.length === 0;
+  const simplifiedGallery = galleryPhotos?.length === 1; // || has main photo
   const siteMetadata = {
     title: `Regen Network Registry`,
     description:
@@ -230,7 +235,7 @@ function ProjectDetails(): JSX.Element {
         ? `Learn about ${creditClassName} credits sourced from ${partyName} in ${projectAddress}.`
         : '',
     author: `Regen Network`,
-    siteUrl: `${window.location.origin}/registry`,
+    siteUrl: `${window.location.origin}/`,
   };
 
   const coBenefitsIris =
@@ -258,21 +263,21 @@ function ProjectDetails(): JSX.Element {
         imageUrl={metadata?.['http://schema.org/image']?.['@value']}
       />
 
-      <ProjectMedia
-        assets={
-          metadata?.['http://regen.network/galleryPhotos']?.['@list']?.map(
-            (photo: { '@value': string }) => ({
+      {galleryPhotos?.length === 4 && (
+        <ProjectMedia
+          assets={
+            galleryPhotos?.map((photo: { '@value': string }) => ({
               src: photo['@value'],
               type: 'image',
-            }),
-          ) || []
-        }
-        gridView
-        mobileHeight={theme.spacing(78.75)}
-        imageStorageBaseUrl={imageStorageBaseUrl}
-        apiServerUrl={apiServerUrl}
-        imageCredits={metadata?.['http://schema.org/creditText']}
-      />
+            })) || []
+          }
+          gridView
+          mobileHeight={theme.spacing(78.75)}
+          imageStorageBaseUrl={imageStorageBaseUrl}
+          apiServerUrl={apiServerUrl}
+          imageCredits={metadata?.['http://schema.org/creditText']}
+        />
+      )}
       <ProjectTopSection data={data} geojson={geojson} isGISFile={isGISFile} />
       <div className="topo-background-alternate">
         <ProjectImpactSection data={impactData} />

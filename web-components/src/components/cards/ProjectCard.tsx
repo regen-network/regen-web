@@ -38,20 +38,12 @@ export interface ProjectCardProps {
   registry?: User | null;
   tag?: string;
   onClick?: () => void;
-  displayCity?: boolean;
-  displayRegion?: boolean;
-  displayCountry?: boolean;
   comingSoon?: boolean;
   purchaseInfo?: PurchaseInfo;
   href?: string;
   target?: string;
   imageStorageBaseUrl?: string;
   apiServerUrl?: string;
-}
-
-interface AreaUnits {
-  hectares: string;
-  acres: string;
 }
 
 function getAbbreviation(unit: string): string {
@@ -213,9 +205,6 @@ export default function ProjectCard({
   registry,
   onClick,
   tag,
-  displayCity = true,
-  displayRegion = true,
-  displayCountry = true,
   comingSoon = false,
   purchaseInfo,
   href,
@@ -258,9 +247,6 @@ export default function ProjectCard({
           smFontSize="0.8125rem"
           fontSize="0.75rem"
           color={theme.palette.primary.light}
-          displayCity={displayCity}
-          displayRegion={displayRegion}
-          displayCountry={displayCountry}
         />
       </div>
       {comingSoon && (

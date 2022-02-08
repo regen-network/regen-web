@@ -12,7 +12,9 @@ import IssuanceModal, {
 } from 'web-components/lib/components/modal/IssuanceModal';
 import Title from 'web-components/lib/components/title';
 import Timeline from 'web-components/lib/components/timeline';
-import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
+import ProjectMedia, {
+  Asset,
+} from 'web-components/lib/components/sliders/ProjectMedia';
 import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import Modal from 'web-components/lib/components/modal';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
@@ -21,6 +23,7 @@ import SEO from 'web-components/lib/components/seo';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
+import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 
 import { setPageView } from '../../lib/ga';
@@ -134,7 +137,7 @@ function ProjectDetails(): JSX.Element {
 
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
-  console.log('location', location);
+
   useEffect(() => {
     setPageView(location);
   }, [location]);
@@ -224,10 +227,31 @@ function ProjectDetails(): JSX.Element {
     getVisiblePartyName(metadata?.['http://regen.network/landOwner']) ||
     getVisiblePartyName(metadata?.['http://regen.network/projectOriginator']);
   const projectAddress = metadata?.['http://schema.org/location']?.place_name;
+
   const galleryPhotos =
     metadata?.['http://regen.network/galleryPhotos']?.['@list'];
   const noGallery = !galleryPhotos || galleryPhotos?.length === 0;
-  const simplifiedGallery = galleryPhotos?.length === 1; // || has main photo
+  const previewPhoto =
+    metadata?.['http://regen.network/previewPhoto']?.['@value'];
+  const noGalleryAssets: Asset[] = [];
+  if (previewPhoto) {
+    noGalleryAssets.push({ src: previewPhoto, type: 'image' });
+  }
+  if (geojson) {
+    noGalleryAssets.push(
+      <StaticMap
+        geojson={geojson}
+        mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+      />,
+    );
+  }
+  const assets = noGallery
+    ? noGalleryAssets
+    : galleryPhotos.map((photo: { '@value': string }) => ({
+        src: photo['@value'],
+        type: 'image',
+      }));
+
   const siteMetadata = {
     title: `Regen Network Registry`,
     description:
@@ -235,7 +259,7 @@ function ProjectDetails(): JSX.Element {
         ? `Learn about ${creditClassName} credits sourced from ${partyName} in ${projectAddress}.`
         : '',
     author: `Regen Network`,
-    siteUrl: `${window.location.origin}/`,
+    siteUrl: `${window.location.origin}`,
   };
 
   const coBenefitsIris =
@@ -263,14 +287,9 @@ function ProjectDetails(): JSX.Element {
         imageUrl={metadata?.['http://schema.org/image']?.['@value']}
       />
 
-      {galleryPhotos?.length === 4 && (
+      {assets.length && (
         <ProjectMedia
-          assets={
-            galleryPhotos?.map((photo: { '@value': string }) => ({
-              src: photo['@value'],
-              type: 'image',
-            })) || []
-          }
+          assets={assets}
           gridView
           mobileHeight={theme.spacing(78.75)}
           imageStorageBaseUrl={imageStorageBaseUrl}

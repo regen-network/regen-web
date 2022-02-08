@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback, useLayoutEffect } from 'react';
 import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
 import { Image, OptimizeImageProps } from '../image';
@@ -177,6 +178,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     position: 'relative',
   },
   elementContainer: {
+    position: 'relative',
     [theme.breakpoints.up('sm')]: {
       height: theme.spacing(100),
     },
@@ -320,7 +322,12 @@ export default function ProjectMedia({
             </Grid>
           )}
           {(assets.length === 1 || assets.length === 2) && (
-            <Grid container spacing={5} columns={15} className={classes.grid}>
+            <Grid
+              container
+              columnSpacing={5}
+              columns={15}
+              className={classes.grid}
+            >
               {assets.map((a, i) => (
                 <Grid
                   xs={assets.length === 1 ? 15 : i === 0 ? 8 : 7}
@@ -328,6 +335,11 @@ export default function ProjectMedia({
                   className={classes.elementContainer}
                 >
                   <ProjectAsset asset={a} />
+                  {i === 0 && isMedia(a) && imageCredits && (
+                    <Box className={classes.imageCredits} sx={{ pl: 5 }}>
+                      {imageCredits}
+                    </Box>
+                  )}
                 </Grid>
               ))}
             </Grid>

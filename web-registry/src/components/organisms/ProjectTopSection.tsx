@@ -1,12 +1,14 @@
 import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import { makeStyles, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import ReactHtmlParser from 'react-html-parser';
+// import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
+// import { getFontSize } from 'web-components/lib/theme/sizing';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
@@ -205,9 +207,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(14),
     },
   },
-  creditClassLink: {
-    fontWeight: 700,
-  },
   arrowIcon: {
     height: theme.spacing(3.5),
   },
@@ -221,12 +220,12 @@ function ProjectTopLink({
   label,
   name,
   url,
-  standard = false,
+  onChainId,
 }: {
   label: string;
-  name: string;
+  name?: string;
   url?: string;
-  standard?: boolean;
+  onChainId?: string;
 }): JSX.Element {
   const classes = useStyles();
   const theme = useTheme<Theme>();
@@ -236,39 +235,28 @@ function ProjectTopLink({
       <Title className={classes.creditClass} variant="h5">
         {label}:
       </Title>
-      {url ? (
-        standard ? (
-          <div className={cx(classes.creditClassName, classes.darkText)}>
-            {ReactHtmlParser(name)}
-            <Link
-              className={classes.arrowLink}
-              href={url}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <ArrowIcon
-                className={classes.arrowIcon}
-                direction="next"
-                color={theme.palette.secondary.main}
-              />
-            </Link>
-          </div>
+      <div className={cx(classes.creditClassName, classes.darkText)}>
+        {name && ReactHtmlParser(name)}
+        {onChainId && name ? (
+          <span> ({onChainId})</span>
         ) : (
+          <span>{onChainId}</span>
+        )}
+        {url && (
           <Link
-            className={cx(classes.creditClassName, classes.creditClassLink)}
+            className={classes.arrowLink}
             href={url}
             rel="noopener noreferrer"
             target="_blank"
-            color="secondary"
           >
-            {ReactHtmlParser(name)}
+            <ArrowIcon
+              className={classes.arrowIcon}
+              direction="next"
+              color={theme.palette.secondary.main}
+            />
           </Link>
-        )
-      ) : (
-        <div className={cx(classes.creditClassName, classes.darkText)}>
-          {ReactHtmlParser(name)}
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
@@ -287,7 +275,7 @@ function ProjectTopSection({
   const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
   const landStewardPhoto =
     metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
-  const unit: qudtUnit =
+  const unit: qudtUnit | undefined =
     metadata?.['http://regen.network/size']?.[
       'http://qudt.org/1.1/schema/qudt#unit'
     ]?.['@value'];
@@ -300,6 +288,11 @@ function ProjectTopSection({
   const additionalCertification =
     metadata?.['http://regen.network/additionalCertification'];
   const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
+  const landStory = metadata?.['http://regen.network/landStory'];
+  const landStewardStoryTitle =
+    metadata?.['http://regen.network/landStewardStoryTitle'];
+  const landStewardStory = metadata?.['http://regen.network/landStewardStory'];
+
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'
   ]?.map((sdg: { '@id': string }) => sdg['@id']);
@@ -319,17 +312,19 @@ function ProjectTopSection({
     <Section classes={{ root: classes.section }}>
       <Grid container>
         <Grid item xs={12} md={8} className={classes.rightGrid}>
+          {/* TODO Show on-chain project id if no off-chain name */}
           <Title variant="h1">{metadata?.['http://schema.org/name']}</Title>
           <div className={classes.projectPlace}>
             <ProjectPlaceInfo
               iconClassName={classes.icon}
+              // TODO Format and show on-chain project location if no off-chain location
               place={metadata?.['http://schema.org/location']?.place_name}
               area={
                 metadata?.['http://regen.network/size']?.[
                   'http://qudt.org/1.1/schema/qudt#numericValue'
                 ]?.['@value']
               }
-              areaUnit={qudtUnitMap[unit]}
+              areaUnit={unit && qudtUnitMap[unit]}
             />
             <div className={classes.creditClassInfo}>
               {creditClass && creditClassVersion && (
@@ -353,7 +348,11 @@ function ProjectTopSection({
                             'http://regen.network/standard'
                           ]?.['http://schema.org/url']?.['@value']
                         }
-                        standard={creditClass.standard}
+                        onChainId={
+                          creditClassVersion?.metadata?.[
+                            'http://regen.network/standard'
+                          ]?.['http://regen.network/onChainId']
+                        }
                       />
                     )}
                   <ProjectTopLink
@@ -366,7 +365,11 @@ function ProjectTopSection({
                         '@value'
                       ]
                     }
-                    standard={creditClass.standard}
+                    onChainId={
+                      creditClassVersion?.metadata?.[
+                        'http://regen.network/onChainId'
+                      ]
+                    }
                   />
                   <ProjectTopLink
                     label="offset generation method"
@@ -398,7 +401,6 @@ function ProjectTopSection({
                       '@value'
                     ]
                   }
-                  standard={creditClass.standard}
                 />
               )}
             </div>
@@ -412,16 +414,21 @@ function ProjectTopSection({
                   apiServerUrl={apiServerUrl}
                   geojson={geojson}
                   isGISFile={isGISFile}
+                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 />
               </div>
             </LazyLoad>
           )}
-          <Title className={classes.story} variant="h2">
-            Story
-          </Title>
-          <Description className={classes.description}>
-            {ReactHtmlParser(metadata?.['http://regen.network/landStory'])}
-          </Description>
+          {landStewardStoryTitle && (
+            <Title className={classes.story} variant="h2">
+              Story
+            </Title>
+          )}
+          {landStory && (
+            <Description className={classes.description}>
+              {landStory}
+            </Description>
+          )}
           <LazyLoad offset={50}>
             {videoURL &&
               (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(
@@ -449,12 +456,16 @@ function ProjectTopSection({
               />
             )}
           </LazyLoad>
-          <Title variant="h4" className={classes.tagline}>
-            {metadata?.['http://regen.network/landStewardStoryTitle']}
-          </Title>
-          <ReadMore maxLength={450} restMinLength={300}>
-            {metadata?.['http://regen.network/landStewardStory'] || ''}
-          </ReadMore>
+          {landStewardStoryTitle && (
+            <Title variant="h4" className={classes.tagline}>
+              {landStewardStoryTitle}
+            </Title>
+          )}
+          {landStewardStory && (
+            <ReadMore maxLength={450} restMinLength={300}>
+              {landStewardStory}
+            </ReadMore>
+          )}
           {quote && (
             <div>
               <Title
@@ -479,6 +490,26 @@ function ProjectTopSection({
               </Description>
             </div>
           )}
+          {/* TODO uncomment code below and  display on-chain project.metadata */}
+          {/* <>
+            <Box
+              sx={theme => ({
+                fontSize: { xs: theme.spacing(3), sm: theme.spacing(3.5) },
+                color: theme.palette.primary.contrastText,
+                fontWeight: 800,
+                fontFamily: 'Muli',
+                letterSpacing: '1px',
+                textTransform: 'uppercase',
+                pt: { xs: 6.25, sm: 11.75 },
+                pb: { xs: 2.75, sm: 5.5 },
+              })}
+            >
+              additional metadata
+            </Box>
+            <Description fontSize={getFontSize('metadata')}>
+              lorem ipsum
+            </Description>
+          </> */}
         </Grid>
         <Grid item xs={12} md={4} className={classes.leftGrid}>
           <ProjectTopCard
@@ -497,6 +528,8 @@ function ProjectTopSection({
               metadata,
               data?.projectByHandle?.partyByLandOwnerId,
             )}
+            // TODO issuer or broker
+            // if no off-chain data, use on-chain project.issuer
             broker={getParty(data?.projectByHandle?.partyByBrokerId)}
             reseller={getParty(data?.projectByHandle?.partyByResellerId)}
             sdgs={sdgs}

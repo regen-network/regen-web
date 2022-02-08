@@ -108,7 +108,6 @@ function ProjectImpactSection({
   };
 
   const impact = data?.allEcologicalImpact;
-
   let slider: any = useRef(null);
 
   const slickPrev = useCallback(() => {
@@ -125,7 +124,7 @@ function ProjectImpactSection({
 
   return (
     <>
-      {impact && (
+      {impact && impact.length > 0 && (
         <Section
           classes={{
             root: cx(styles.root, classes?.root),

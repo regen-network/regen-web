@@ -10,6 +10,7 @@ import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
 import { MoreProjectFieldsFragment, Maybe } from '../../generated/graphql';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
+import DefaultProject from '../../assets/default-project.jpg';
 
 type Props = {
   projects: Array<Maybe<MoreProjectFieldsFragment | undefined>>;
@@ -74,7 +75,8 @@ const ProjectCards: React.FC<Props> = props => {
     <ProjectCard
       name={project.metadata?.['http://schema.org/name']}
       imgSrc={
-        project.metadata?.['http://regen.network/previewPhoto']?.['@value']
+        project.metadata?.['http://regen.network/previewPhoto']?.['@value'] ||
+        DefaultProject
       }
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}

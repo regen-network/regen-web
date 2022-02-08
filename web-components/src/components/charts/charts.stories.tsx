@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import moment from 'moment';
+import { format } from 'date-fns';
 import BarChart from './BarChart';
 
 export default {
@@ -61,7 +61,7 @@ export const barChart = (): JSX.Element => {
         width={907}
         height={277}
         labels={({ datum }) =>
-          datum.date ? moment(datum.date).format('MMMM YYYY') : ''
+          datum.date ? format(new Date(datum.date), 'MMMM YYYY') : ''
         }
         barWidth={17}
       />

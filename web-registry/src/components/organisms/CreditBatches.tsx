@@ -5,7 +5,7 @@ import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
-import moment from 'moment';
+import { format } from 'date-fns';
 import cx from 'clsx';
 
 import {
@@ -25,19 +25,20 @@ import { truncateWalletAddress } from '../../lib/wallet';
 import { ledgerRestUri } from '../../ledger';
 import { getBatchSupply, getBatches } from '../../lib/ledger-rest';
 import { getAccountUrl } from '../../lib/block-explorer';
+import { BatchRowData } from '../../types/ledger';
 
-interface BatchRowData {
-  start_date: string | Date;
-  end_date: string | Date;
-  issuer: string;
-  batch_denom: string;
-  class_id: string;
-  total_amount: number;
-  tradable_supply?: number;
-  retired_supply?: number;
-  amount_cancelled: number;
-  project_location: string;
-}
+// interface BatchRowData {
+//   start_date: string | Date;
+//   end_date: string | Date;
+//   issuer: string;
+//   batch_denom: string;
+//   class_id: string;
+//   total_amount: number;
+//   tradable_supply?: number;
+//   retired_supply?: number;
+//   amount_cancelled: number;
+//   project_location: string;
+// }
 
 interface HeadCell {
   id: keyof BatchRowData;
@@ -259,10 +260,10 @@ const CreditBatches: React.FC = () => {
                         {formatNumber(batch.amount_cancelled)}
                       </StyledTableCell>
                       <StyledTableCell>
-                        {moment(batch.start_date).format('LL')}
+                        {formatDate(batch.start_date)}
                       </StyledTableCell>
                       <StyledTableCell>
-                        {moment(batch.end_date).format('LL')}
+                        {formatDate(batch.end_date)}
                       </StyledTableCell>
                       <StyledTableCell>
                         {batch.project_location}
@@ -285,5 +286,8 @@ const CreditBatches: React.FC = () => {
     </Section>
   ) : null;
 };
+
+const formatDate = (date: Date): string =>
+  format(new Date(date), 'LLLL dd, yyyy');
 
 export { CreditBatches };

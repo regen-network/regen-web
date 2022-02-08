@@ -1,20 +1,10 @@
 import React, { useState } from 'react';
+import { Box, Menu, MenuItem } from '@mui/material';
 import OutlinedButton from './OutlinedButton';
 import { HorizontalDotsIcon } from '../icons/HorizontalDotsIcon';
-import { makeStyles } from '@mui/styles';
-import { Box, Menu, MenuItem } from '@mui/material';
 
-const useStyles = makeStyles(theme => ({
-  menu: {
-    padding: theme.spacing(4, 8),
-  },
-  menuLabel: {
-    fontSize: theme.typography.pxToRem(16),
-    textTransform: 'capitalize',
-  },
-}));
-
-/** Displays a row of buttons on `md` and up, and a dropdown icon those buttons on mobile */
+/** Displays a row of buttons on a set breakpoint (defaults to `md`) and up, and
+ * a dropdown icon those buttons on mobile */
 const TableActionButtons: React.FC<{
   buttons: { label: string; onClick: () => void }[];
   breakOn?: 'sm' | 'md';
@@ -31,56 +21,6 @@ const TableActionButtons: React.FC<{
     setAnchorEl(null);
   }
 
-  const styles = useStyles();
-  const Desktop: React.FC = () => (
-    <>
-      {buttons.map(({ label, onClick }, i) => (
-        <OutlinedButton
-          key={'table-action-' + i}
-          size="small"
-          onClick={() => {
-            handleMobileMenuClose();
-            onClick();
-          }}
-        >
-          {label}
-        </OutlinedButton>
-      ))}
-    </>
-  );
-
-  const Mobile: React.FC = () => (
-    <>
-      <OutlinedButton
-        onClick={handleMobileMenuOpen}
-        size="small"
-        aria-controls="table-menu-buttons"
-      >
-        <HorizontalDotsIcon />
-      </OutlinedButton>
-      <Menu
-        id="table-menu-buttons"
-        className={styles.menu}
-        anchorEl={anchorEl}
-        open={!!anchorEl}
-        onClose={handleMobileMenuClose}
-      >
-        {buttons.map(({ label, onClick }, i) => (
-          <MenuItem
-            key={i}
-            className={styles.menuLabel}
-            onClick={() => {
-              handleMobileMenuClose();
-              onClick();
-            }}
-          >
-            {label}
-          </MenuItem>
-        ))}
-      </Menu>
-    </>
-  );
-
   return (
     <>
       <Box
@@ -90,10 +30,48 @@ const TableActionButtons: React.FC<{
           gap: 2,
         }}
       >
-        <Desktop />
+        {/* Desktop */}
+        {buttons.map(({ label, onClick }, i) => (
+          <OutlinedButton
+            key={'table-action-' + i}
+            size="small"
+            onClick={() => {
+              handleMobileMenuClose();
+              onClick();
+            }}
+          >
+            {label}
+          </OutlinedButton>
+        ))}
       </Box>
       <Box display={{ xs: 'flex', [breakOn]: 'none' }}>
-        <Mobile />
+        {/* Mobile */}
+        <OutlinedButton
+          onClick={handleMobileMenuOpen}
+          size="small"
+          aria-controls="table-menu-buttons"
+        >
+          <HorizontalDotsIcon />
+        </OutlinedButton>
+        <Menu
+          id="table-menu-buttons"
+          anchorEl={anchorEl}
+          open={!!anchorEl}
+          onClose={handleMobileMenuClose}
+        >
+          {buttons.map(({ label, onClick }, i) => (
+            <MenuItem
+              key={i}
+              sx={{ px: 4, fontSize: 16, textTransform: 'capitalize' }}
+              onClick={() => {
+                handleMobileMenuClose();
+                onClick();
+              }}
+            >
+              {label}
+            </MenuItem>
+          ))}
+        </Menu>
       </Box>
     </>
   );

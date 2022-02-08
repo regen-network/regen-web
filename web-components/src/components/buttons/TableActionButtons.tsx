@@ -23,6 +23,7 @@ const TableActionButtons: React.FC<{
 
   return (
     <>
+      {/* Desktop */}
       <Box
         display={{ xs: 'none', [breakOn]: 'flex' }}
         sx={{
@@ -30,7 +31,6 @@ const TableActionButtons: React.FC<{
           gap: 2,
         }}
       >
-        {/* Desktop */}
         {buttons.map(({ label, onClick }, i) => (
           <OutlinedButton
             key={'table-action-' + i}
@@ -44,8 +44,8 @@ const TableActionButtons: React.FC<{
           </OutlinedButton>
         ))}
       </Box>
+      {/* Mobile */}
       <Box display={{ xs: 'flex', [breakOn]: 'none' }}>
-        {/* Mobile */}
         <OutlinedButton
           onClick={handleMobileMenuOpen}
           size="small"

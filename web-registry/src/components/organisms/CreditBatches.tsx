@@ -27,19 +27,6 @@ import { getBatchSupply, getBatches } from '../../lib/ledger-rest';
 import { getAccountUrl } from '../../lib/block-explorer';
 import { BatchRowData } from '../../types/ledger';
 
-// interface BatchRowData {
-//   start_date: string | Date;
-//   end_date: string | Date;
-//   issuer: string;
-//   batch_denom: string;
-//   class_id: string;
-//   total_amount: number;
-//   tradable_supply?: number;
-//   retired_supply?: number;
-//   amount_cancelled: number;
-//   project_location: string;
-// }
-
 interface HeadCell {
   id: keyof BatchRowData;
   label: string;

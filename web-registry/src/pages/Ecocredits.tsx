@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { format } from 'date-fns';
+import dayjs from 'dayjs';
 import {
   Table,
   TableBody,
@@ -242,7 +242,7 @@ export const Ecocredits: React.FC = () => {
 };
 
 const formatDate = (date: string | number | Date): string =>
-  format(new Date(date), 'LLLL dd, yyyy');
+  dayjs(date).format('MMMM D, YYYY');
 
 const formatNumber = (num: string | number | Date): string => {
   return +num > 0 ? Math.floor(+num).toLocaleString() : '-';

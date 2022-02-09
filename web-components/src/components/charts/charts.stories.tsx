@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-import { format } from 'date-fns';
+import dayjs from 'dayjs';
 import BarChart from './BarChart';
 
 export default {
@@ -61,7 +60,7 @@ export const barChart = (): JSX.Element => {
         width={907}
         height={277}
         labels={({ datum }) =>
-          datum.date ? format(new Date(datum.date), 'MMMM YYYY') : ''
+          datum.date ? dayjs(datum.date).format('MMMM YYYY') : ''
         }
         barWidth={17}
       />

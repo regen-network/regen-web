@@ -5,7 +5,7 @@ import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
-import { format } from 'date-fns';
+import dayjs from 'dayjs';
 import cx from 'clsx';
 
 import {
@@ -281,7 +281,6 @@ const CreditBatches: React.FC = () => {
   ) : null;
 };
 
-const formatDate = (date: Date): string =>
-  format(new Date(date), 'LLLL dd, yyyy');
+const formatDate = (date: Date): string => dayjs(date).format('MMMM D, YYYY');
 
 export { CreditBatches };

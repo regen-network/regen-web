@@ -26,6 +26,7 @@ import { ledgerRestUri } from '../../ledger';
 import { getBatchSupply, getBatches } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
 import { BatchRowData } from '../../types/ledger';
+import { TableSortLabel } from '@mui/material';
 
 interface HeadCell {
   id: keyof BatchRowData;
@@ -203,15 +204,22 @@ const CreditBatches: React.FC = () => {
                     key={headCell.id}
                     align="left"
                     padding="normal"
-                    sortDirection={orderBy === headCell.id ? order : false}
+                    // TODO implement sorting. See:
+                    // https://app.zenhub.com/workspaces/regen-registry-5f8998bec8958d000f4609e2/issues/regen-network/regen-registry/811
+                    // sortDirection={orderBy === headCell.id ? order : false}
                   >
-                    <StyledTableSortLabel
+                    {/* <StyledTableSortLabel
                       active={orderBy === headCell.id}
                       direction={orderBy === headCell.id ? order : 'asc'}
                       onClick={createSortHandler(headCell.id)}
+                    > */}
+                    <TableSortLabel
+                      sx={{ cursor: 'default', ':hover': { color: 'inherit' } }}
+                      IconComponent={() => null}
                     >
                       {headCell.label}
-                    </StyledTableSortLabel>
+                    </TableSortLabel>
+                    {/* </StyledTableSortLabel> */}
                   </StyledTableCell>
                 ))}
               </TableRow>

@@ -13,15 +13,15 @@ import {
   StyledTableCell,
   StyledTableContainer,
   StyledTableRow,
-  StyledTableSortLabel,
+  // StyledTableSortLabel,
 } from 'web-components/lib/components/table';
 import Section from 'web-components/lib/components/section';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
-import {
-  getComparator,
-  Order,
-  stableSort,
-} from 'web-components/lib/components/table/sort';
+// import {
+//   getComparator,
+//   Order,
+//   stableSort,
+// } from 'web-components/lib/components/table/sort';
 import { getAccountEcocreditsForBatch, getBatches } from '../lib/ecocredit';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
 import { ledgerRestUri } from '../ledger';
@@ -52,8 +52,8 @@ export const Ecocredits: React.FC = () => {
   // const wallet = walletContext.wallet?.address;
   // TODO hard coded for now - the following should work for a user's data
   const wallet = 'regen1m5fecarvw0ltx2yvvru0kl4un03d3uca2kxggj';
-  const [order, setOrder] = useState<Order>('desc');
-  const [orderBy, setOrderBy] = useState<keyof TableCredits>('start_date');
+  // const [order, setOrder] = useState<Order>('desc');
+  // const [orderBy, setOrderBy] = useState<keyof TableCredits>('start_date');
   const [credits, setCredits] = useState<TableCredits[]>([]);
   const { TablePagination, setCountTotal, paginationParams, paginationProps } =
     useTablePagination(ROWS_PER_PAGE_OPTIONS);
@@ -83,26 +83,30 @@ export const Ecocredits: React.FC = () => {
     fetchData(paginationParams, setCountTotal);
   }, [paginationParams, setCountTotal]);
 
-  const handleSort = (sortBy: keyof TableCredits): void => {
-    const isAsc = orderBy === sortBy && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(sortBy);
-  };
+  // const handleSort = (sortBy: keyof TableCredits): void => {
+  //   const isAsc = orderBy === sortBy && order === 'asc';
+  //   setOrder(isAsc ? 'desc' : 'asc');
+  //   setOrderBy(sortBy);
+  // };
 
-  const SortableHead: React.FC<{ field: string }> = ({ field, children }) => {
-    const isCurrentSort = orderBy === field;
-    return (
-      <StyledTableCell sortDirection={isCurrentSort ? order : false}>
-        <StyledTableSortLabel
-          active={isCurrentSort}
-          direction={isCurrentSort ? order : 'asc'}
-          onClick={() => handleSort(field as keyof TableCredits)}
-        >
-          {children}
-        </StyledTableSortLabel>
-      </StyledTableCell>
-    );
-  };
+  // TODO this will pass the correct fields and can replace <StyledTableCell>
+  // header components, however only works on elements within the current
+  // pagination page. See:
+  // https://app.zenhub.com/workspaces/regen-registry-5f8998bec8958d000f4609e2/issues/regen-network/regen-registry/811
+  // const SortableHead: React.FC<{ field: string }> = ({ field, children }) => {
+  //   const isCurrentSort = orderBy === field;
+  //   return (
+  //     <StyledTableCell sortDirection={isCurrentSort ? order : false}>
+  //       <StyledTableSortLabel
+  //         active={isCurrentSort}
+  //         direction={isCurrentSort ? order : 'asc'}
+  //         onClick={() => handleSort(field as keyof TableCredits)}
+  //       >
+  //         {children}
+  //       </StyledTableSortLabel>
+  //     </StyledTableCell>
+  //   );
+  // };
 
   const styles = useStyles();
   return (
@@ -123,7 +127,7 @@ export const Ecocredits: React.FC = () => {
               <Table aria-label="eco credits table">
                 <TableHead>
                   <TableRow>
-                    <SortableHead field="batch_denom">
+                    <StyledTableCell>
                       <Box
                         sx={{
                           minWidth: {
@@ -135,27 +139,14 @@ export const Ecocredits: React.FC = () => {
                       >
                         Batch Denom
                       </Box>
-                    </SortableHead>
-                    <SortableHead field="issuer">Issuer</SortableHead>
-                    <SortableHead field="class_id">Credit Class</SortableHead>
-                    <SortableHead field="amount_tradable">
-                      Amount Tradable
-                    </SortableHead>
-                    <SortableHead field="amount_retired">
-                      Amount Retired
-                    </SortableHead>
-                    {/* TODO Date not sorting correctly */}
-                    {/* <SortableHead field="batch_start_date">
-                      Batch Start Date
-                    </SortableHead>
-                    <SortableHead field="batch_end_date">
-                      Batch End Date
-                    </SortableHead> */}
+                    </StyledTableCell>
+                    <StyledTableCell>Issuer</StyledTableCell>
+                    <StyledTableCell>Credit Class</StyledTableCell>
+                    <StyledTableCell>Amount Tradable</StyledTableCell>
+                    <StyledTableCell>Amount Retired</StyledTableCell>
                     <StyledTableCell>Batch Start Date</StyledTableCell>
                     <StyledTableCell>Batch End Date</StyledTableCell>
-                    <SortableHead field="project_location">
-                      Project Location
-                    </SortableHead>
+                    <StyledTableCell>Project Location</StyledTableCell>
                     <StyledTableCell
                       sx={{
                         textAlign: 'left',
@@ -172,10 +163,11 @@ export const Ecocredits: React.FC = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {stableSort(
+                  {/* {stableSort(
                     credits as any, // TODO type coercion shouldn't be necessary here
                     getComparator(order, orderBy),
-                  ).map((row, i) => (
+                  ).map((row, i) => ( */}
+                  {credits.map((row, i) => (
                     <StyledTableRow key={i}>
                       <StyledTableCell>{row.batch_denom}</StyledTableCell>
                       <StyledTableCell>

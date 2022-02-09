@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-// import DateFnsUtils from '@date-io/date-fns';
 import { IntercomProvider } from 'react-use-intercom';
 import { Auth0Provider } from '@auth0/auth0-react';
 

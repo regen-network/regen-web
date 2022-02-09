@@ -22,12 +22,12 @@ import {
   Order,
   stableSort,
 } from 'web-components/lib/components/table/sort';
-import { getAccontEcocreditsForBatch, getBatches } from '../lib/ledger-rest';
+import { getAccountEcocreditsForBatch, getBatches } from '../lib/ecocredit';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
 import { ledgerRestUri } from '../ledger';
 import { truncateWalletAddress } from '../lib/wallet';
-import { BatchRowData, EcocreditAccountBalance } from '../types/ledger';
 import { getAccountUrl } from '../lib/block-explorer';
+import type { BatchRowData, EcocreditAccountBalance } from '../types/ledger';
 
 const useStyles = makeStyles(theme => ({
   borderLeft: {
@@ -70,7 +70,7 @@ export const Ecocredits: React.FC = () => {
       batches.map(async batch => {
         const {
           data: { retired_amount, tradable_amount },
-        } = await getAccontEcocreditsForBatch(batch.batch_denom, wallet);
+        } = await getAccountEcocreditsForBatch(batch.batch_denom, wallet);
         return { ...batch, tradable_amount, retired_amount };
       }),
     );

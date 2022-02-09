@@ -23,7 +23,7 @@ import {
 import Section from 'web-components/lib/components/section';
 import { truncateWalletAddress } from '../../lib/wallet';
 import { ledgerRestUri } from '../../ledger';
-import { getBatchSupply, getBatches } from '../../lib/ledger-rest';
+import { getBatchSupply, getBatches } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
 import { BatchRowData } from '../../types/ledger';
 

@@ -25,7 +25,7 @@ export const getBatchSupply = (batchDenom: string): Promise<AxiosResponse> => {
   );
 };
 
-export const getAccontEcocreditsForBatch = (
+export const getAccountEcocreditsForBatch = (
   batchDenom: string,
   account: string,
 ): Promise<AxiosResponse<EcocreditAccountBalance>> => {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { Statistic } from '../molecules';
 import { getBatchesWithSupply } from '../../lib/ecocredit';
@@ -12,7 +13,7 @@ interface CreditTotalData {
   created: number;
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(3, 0, 9),

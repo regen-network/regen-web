@@ -5,9 +5,11 @@ import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { Dictionary } from 'lodash';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import {
   StyledTableContainer,
   StyledTableCell,
@@ -52,7 +54,9 @@ const headCells: HeadCell[] = [
   { id: 'txUrl', numeric: false, label: '' },
 ];
 
-const useStyles = makeStyles(theme => ({
+dayjs.extend(relativeTime);
+
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     border: `1px solid ${theme.palette.info.light}`,
     borderRadius: '8px',
@@ -91,7 +95,7 @@ const READABLE_NAMES: Dictionary<string> = {
 
 const CreditActivityTable: React.FC = () => {
   const styles = useStyles();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const [txs, setTxs] = useState<TxRowData[]>([]);
   const [order, setOrder] = useState<Order>('desc');
   const [orderBy, setOrderBy] = useState<string>('date');
@@ -203,7 +207,7 @@ const CreditActivityTable: React.FC = () => {
                       key={tx.txhash}
                     >
                       <StyledTableCell className={styles.grey}>
-                        {moment(tx.date).fromNow()}
+                        {dayjs(tx.date).fromNow()}
                       </StyledTableCell>
                       <StyledTableCell>
                         <a

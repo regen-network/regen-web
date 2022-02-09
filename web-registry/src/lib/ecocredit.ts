@@ -56,7 +56,6 @@ export const getTxs = async (
         .get(`${ledgerRestUri}/cosmos/tx/v1beta1/txs`, {
           params: {
             events: [msgType],
-            // 'pagination.limit': 10,
           },
           paramsSerializer: params => {
             return qs.stringify(params);
@@ -88,18 +87,17 @@ export const addSupplyDataToBatch = (
   batches: BatchRowData[],
 ): Promise<BatchRowData[]> => {
   return Promise.all(
-    batches.map(batch => {
-      return getBatchSupply(batch.batch_denom)
-        .then(({ data }) => {
-          if (data) {
-            batch.tradable_supply = data.tradable_supply;
-            batch.retired_supply = data.retired_supply;
-          }
-          return batch;
-        })
-        .catch(err => {
-          return batch;
-        });
+    batches.map(async batch => {
+      try {
+        const { data } = await getBatchSupply(batch.batch_denom);
+        if (data) {
+          batch.tradable_supply = data.tradable_supply;
+          batch.retired_supply = data.retired_supply;
+        }
+        return batch;
+      } catch (err) {
+        return batch;
+      }
     }),
   );
 };

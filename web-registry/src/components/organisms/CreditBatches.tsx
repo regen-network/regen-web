@@ -191,7 +191,6 @@ const CreditBatches: React.FC = () => {
       classes={{ root: styles.section, title: styles.title }}
       title="Credit Batches"
       titleVariant="h2"
-      titleAlign="left"
     >
       <StyledTableContainer className={styles.tableBorder}>
         <div
@@ -203,7 +202,7 @@ const CreditBatches: React.FC = () => {
                 paginationProps.count,
                 paginationProps.rowsPerPage,
                 batches.length,
-              ) * 20,
+              ) * 25,
             )}`,
           }}
         >

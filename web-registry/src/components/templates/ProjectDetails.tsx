@@ -287,7 +287,7 @@ function ProjectDetails(): JSX.Element {
         imageUrl={metadata?.['http://schema.org/image']?.['@value']}
       />
 
-      {assets.length && (
+      {assets.length > 0 && (
         <ProjectMedia
           assets={assets}
           gridView

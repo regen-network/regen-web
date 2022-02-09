@@ -51,9 +51,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(5.5),
+      paddingTop: theme.spacing(7.5),
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
+      paddingTop: theme.spacing(3.75),
     },
   },
   quotePersonName: {
@@ -112,11 +114,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   story: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(14),
-      paddingBottom: theme.spacing(7.5),
     },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(11.75),
-      paddingBottom: theme.spacing(3.75),
     },
   },
   quote: {

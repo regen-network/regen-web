@@ -5,27 +5,14 @@ import cx from 'clsx';
 import Description from '../description';
 import Title from '../title';
 import Modal, { RegenModalProps } from '../modal';
-import OutlinedButton from '../buttons/OutlinedButton';
-import ShieldIcon from '../icons/ShieldIcon';
 import CircularProgress from '@mui/material/CircularProgress';
-
-// import Spinner from '../../theme/assets/svgs/spinner.svg';
-// import { getHashUrl } from '../../lib/block-explorer';
-
-// const Spinner = require('../../theme/assets/svgs/spinner.svg') as string;
-
-interface Props extends RegenModalProps {
-  txHash?: string;
-}
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    [theme.breakpoints.up('md')]: {
-      height: 'auto',
-    },
+    height: 'auto',
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(4),
     },
@@ -60,6 +47,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.pxToRem(18),
   },
 }));
+
+interface Props extends RegenModalProps {
+  txHash?: string;
+}
 
 const ProcessingModal: React.FC<Props> = ({ open, onClose, txHash }) => {
   const styles = useStyles();

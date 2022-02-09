@@ -1,10 +1,62 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { requiredMessage, invalidAmount } from '../inputs/validation';
-import AmountField from '../inputs/AmountField';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
+import { Theme } from '../../theme/muiTheme';
+import TextField from '../inputs/TextField';
+import LabelWithHelperText from '../inputs/LabelWithHelperText';
 import LocationCountryField from '../inputs/LocationCountryField';
 import LocationStateCountryField from '../inputs/LocationStateCountryField';
 import ControlledTextField from '../inputs/ControlledTextField';
+import Title from '../title';
+import Description from '../description';
+import {
+  requiredMessage,
+  invalidAmount,
+  insufficientCredits,
+} from '../inputs/validation';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  groupTitle: {
+    marginTop: theme.spacing(10.75),
+    marginBottom: theme.spacing(2),
+  },
+  description: {
+    '& a': {
+      cursor: 'pointer',
+    },
+    [theme.breakpoints.up('sm')]: {
+      fontSize: theme.typography.pxToRem(16),
+      marginBottom: theme.spacing(3),
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: 0,
+      fontSize: theme.typography.pxToRem(14),
+    },
+  },
+  textField: {
+    marginTop: theme.spacing(10.75),
+  },
+  stateCountryGrid: {
+    [theme.breakpoints.up('sm')]: {
+      flexWrap: 'nowrap',
+    },
+  },
+  stateCountryTextField: {
+    marginTop: theme.spacing(6),
+    [theme.breakpoints.up('sm')]: {
+      '&:first-of-type': {
+        marginRight: theme.spacing(2.375),
+      },
+      '&:last-of-type': {
+        marginLeft: theme.spacing(2.375),
+      },
+    },
+  },
+  postalCodeField: {
+    marginTop: theme.spacing(6),
+  },
+}));
 
 // TODO: sender and recipient types,
 // with specific restrictions => valid Regen/Cosmos address
@@ -13,14 +65,19 @@ import ControlledTextField from '../inputs/ControlledTextField';
 
 interface FormProps {
   sender: string;
+  available: {
+    amount: number;
+    type: string;
+  };
+  onClose: () => void;
 }
 
 interface FormValues {
   // sender: string;
-  amount: number | undefined;
+  amount: number;
   country: string;
-  stateCountry?: string | undefined;
-  postalCode?: string | undefined;
+  stateCountry?: string;
+  postalCode?: string;
 }
 
 interface FormErrors {
@@ -31,16 +88,23 @@ interface FormErrors {
   postalCode?: string;
 }
 
-const CreditRetireForm: React.FC<FormProps> = ({ sender }) => {
+const CreditRetireForm: React.FC<FormProps> = ({
+  sender,
+  available,
+  onClose,
+}) => {
+  const styles = useStyles();
+
   const initialValues = {
     // sender,
-    amount: undefined,
+    amount: 0,
     country: 'US',
-    stateCountry: undefined,
+    stateCountry: '',
   };
 
   const validateHandler = (values: FormValues): FormErrors => {
     const errors: FormErrors = {};
+
     // if (!values.sender) {
     //   errors.sender = requiredMessage;
     // }
@@ -49,28 +113,27 @@ const CreditRetireForm: React.FC<FormProps> = ({ sender }) => {
       errors.country = requiredMessage;
     }
 
-    // amount validation... order matters.
-    // something weird with "===" strict comparision
-    // TODO only positive number
-    if (values.amount == 0) {
-      errors.amount = invalidAmount;
-    }
     if (!values.amount) {
       errors.amount = requiredMessage;
+    } else if (Math.sign(values.amount) !== 1) {
+      errors.amount = invalidAmount;
+    } else if (values.amount > available.amount) {
+      errors.amount = insufficientCredits;
     }
+
     return errors;
   };
 
   const submitHandler = async (values: any): Promise<any> => {
-    console.log('*** Submit', values);
+    console.log('*** submitHandler', values);
   };
 
   const countryHandler = (countryCode: string): any => {
-    console.log('*** country change', countryCode);
+    console.log('*** countryHandler', countryCode);
   };
 
   const stateCountryHandler = (stateCountry: string): any => {
-    console.log('*** State / region country change', stateCountry);
+    console.log('*** stateCountryHandler', stateCountry);
   };
 
   return (
@@ -97,18 +160,45 @@ const CreditRetireForm: React.FC<FormProps> = ({ sender }) => {
             label="Sender"
             name="sender"
           /> */}
-          <AmountField
-            label={'Amount to retire'}
-            available={{ amount: 1000, type: 'C01-20190101-20201010-02' }}
-          />
-          <LocationCountryField triggerOnChange={countryHandler} />
-          <LocationStateCountryField
-            country={values.country}
-            triggerOnChange={stateCountryHandler}
-          />
 
           <Field
-            // className={cx(styles.field, styles.postalCodeField)}
+            name="amount"
+            type="number"
+            component={TextField}
+            className={styles.textField}
+            label={
+              <LabelWithHelperText
+                label={'Amount to retire'}
+                available={available}
+              />
+            }
+          />
+
+          <Title className={styles.groupTitle} variant="h5">
+            Location of retirement
+          </Title>
+          <Description className={styles.description}>
+            Please enter a location for the retirement of these credits. This
+            prevents double counting of credits in different locations.
+          </Description>
+          <Grid
+            container
+            alignItems="center"
+            className={styles.stateCountryGrid}
+          >
+            <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+              <LocationStateCountryField
+                country={values.country}
+                triggerOnChange={stateCountryHandler}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+              <LocationCountryField triggerOnChange={countryHandler} />
+            </Grid>
+          </Grid>
+
+          <Field
+            className={styles.postalCodeField}
             component={ControlledTextField}
             label="Postal Code"
             name="postalCode"

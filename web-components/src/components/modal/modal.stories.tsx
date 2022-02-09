@@ -4,6 +4,7 @@ import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Button, Card, Avatar, CardMedia } from '@mui/material';
+import { CreditTransferModal } from 'web-components/lib/components/modal/CreditTransferModal';
 
 export default {
   title: 'Modal',
@@ -177,7 +178,7 @@ function OpenCropImageModal(props: CropStoryProps): JSX.Element {
 }
 
 function OpenProcessingModal(): JSX.Element {
-  return <ProcessingModal open={true} onClose={() => {}} />;
+  return <ProcessingModal open={true} onClose={() => { }} />;
 }
 
 export const modal = (): JSX.Element => <OpenModal />;
@@ -187,3 +188,7 @@ export const cropRoundImageModal = (): JSX.Element => (
   <OpenCropImageModal circularCrop />
 );
 export const processingModal = (): JSX.Element => <OpenProcessingModal />;
+
+export const creditTransferModal = (): JSX.Element => (
+  <CreditTransferModal open={true} onClose={() => null} />
+);

@@ -4,7 +4,6 @@ import UserProfileForm from 'web-components/lib/components/form/UserProfileForm'
 import LoginForm from 'web-components/lib/components/form/LoginForm';
 import { CreditTransferForm } from 'web-components/lib/components/form/CreditTransferForm';
 import { CreditRetireForm } from 'web-components/lib/components/form/CreditRetireForm';
-import { CreditTransferModal } from 'web-components/lib/components/form/CreditTransferModal';
 
 export default {
   title: 'Forms',
@@ -55,13 +54,17 @@ export const loginForm = (): JSX.Element => (
 );
 
 export const creditTransferForm = (): JSX.Element => (
-  <CreditTransferForm sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} /> // test account
-);
-
-export const creditTransferModal = (): JSX.Element => (
-  <CreditTransferModal open={true} onClose={() => { }} />
+  <CreditTransferForm
+    sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
+    available={{ amount: 1000, type: 'C01-20190101-20201010-02' }}
+    onClose={() => null}
+  />
 );
 
 export const creditRetireForm = (): JSX.Element => (
-  <CreditRetireForm sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} /> // test account
+  <CreditRetireForm
+    sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
+    available={{ amount: 1000, type: 'C01-20190101-20201010-02' }}
+    onClose={() => null}
+  />
 );

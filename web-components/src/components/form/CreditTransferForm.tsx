@@ -1,10 +1,33 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import Grid from '@mui/material/Grid';
-import ContainedButton from '../buttons/ContainedButton';
+import { makeStyles } from '@mui/styles';
+import { Theme } from '../../theme/muiTheme';
+import Submit from './Submit';
 import TextField from '../inputs/TextField';
-import AmountField from '../inputs/AmountField';
-import { requiredMessage, invalidAmount } from '../inputs/validation';
+import LabelWithHelperText from '../inputs/LabelWithHelperText';
+import {
+  requiredMessage,
+  invalidAmount,
+  insufficientCredits,
+} from '../inputs/validation';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  senderField: {
+    '& label': {
+      color: `${theme.palette.primary.contrastText} !important`,
+    },
+    '& .MuiInputBase-formControl': {
+      backgroundColor: theme.palette.info.light,
+    },
+  },
+  textField: {
+    marginTop: theme.spacing(10.75),
+  },
+  submit: {
+    marginTop: theme.spacing(12.5),
+    marginBottom: theme.spacing(12.5),
+  },
+}));
 
 // TODO: sender and recipient types,
 // with specific restrictions => valid Regen/Cosmos address
@@ -13,13 +36,18 @@ import { requiredMessage, invalidAmount } from '../inputs/validation';
 
 interface FormProps {
   sender: string;
+  available: {
+    amount: number;
+    type: string;
+  };
+  onClose: () => void;
   children?: JSX.Element;
 }
 
 interface FormValues {
   sender: string;
   recipient: string;
-  amount: number | undefined;
+  amount: number;
 }
 
 interface FormErrors {
@@ -28,35 +56,44 @@ interface FormErrors {
   amount?: string;
 }
 
-const CreditTransferForm: React.FC<FormProps> = ({ sender, children }) => {
+const CreditTransferForm: React.FC<FormProps> = ({
+  sender,
+  available,
+  onClose,
+  children,
+}) => {
+  const styles = useStyles();
+
   const initialValues = {
     sender,
     recipient: '',
-    amount: undefined,
+    amount: 0,
   };
 
   const validateHandler = (values: FormValues): FormErrors => {
     const errors: FormErrors = {};
+
     if (!values.sender) {
       errors.sender = requiredMessage;
     }
+
     if (!values.recipient) {
       errors.recipient = requiredMessage;
     }
-    // amount validation... order matters.
-    // something weird with "===" strict comparision
-    // TODO only positive number
-    if (values.amount == 0) {
-      errors.amount = invalidAmount;
-    }
+
     if (!values.amount) {
       errors.amount = requiredMessage;
+    } else if (Math.sign(values.amount) !== 1) {
+      errors.amount = invalidAmount;
+    } else if (values.amount > available.amount) {
+      errors.amount = insufficientCredits;
     }
+
     return errors;
   };
 
-  const submitHandler = async (values: any): Promise<any> => {
-    console.log('*** Submit', values);
+  const submitHandler = async (values: FormValues): Promise<any> => {
+    console.log('*** submitHandler', values);
   };
 
   return (
@@ -73,36 +110,47 @@ const CreditTransferForm: React.FC<FormProps> = ({ sender, children }) => {
         isValid,
         submitCount,
         // setFieldValue,
-        // status,
+        status,
       }) => (
         <Form>
           <Field
-            disabled
-            component={TextField}
+            name="sender"
             type="text"
             label="Sender"
-            name="sender"
+            component={TextField}
+            className={styles.senderField}
+            disabled
           />
           <Field
-            component={TextField}
+            name="recipient"
             type="text"
             label="Recipient"
-            name="recipient"
+            component={TextField}
+            className={styles.textField}
           />
-          <AmountField
-            label={'Amount to send'}
-            available={{ amount: 1000, type: 'C01-20190101-20201010-02' }}
+          <Field
+            name="amount"
+            type="number"
+            component={TextField}
+            className={styles.textField}
+            label={
+              <LabelWithHelperText
+                label={'Amount to send'}
+                available={available}
+              />
+            }
           />
           {children}
-          <Grid container justifyContent="flex-end">
-            <ContainedButton
-              onClick={submitForm}
-              // className={classes.button}
-              disabled={(submitCount > 0 && !isValid) || isSubmitting}
-            >
-              {'Transfer'}
-            </ContainedButton>
-          </Grid>
+          <Submit
+            className={styles.submit}
+            isSubmitting={isSubmitting}
+            onClose={onClose}
+            status={status}
+            isValid={isValid}
+            submitCount={submitCount}
+            submitForm={submitForm}
+            label={'Transfer'}
+          />
         </Form>
       )}
     </Formik>

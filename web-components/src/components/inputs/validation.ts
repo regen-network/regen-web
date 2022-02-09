@@ -1,9 +1,10 @@
 export const requiredMessage: string = 'This field is required';
-export const invalidAmount: string = 'Please enter a valid amount';
 export const invalidEmailMessage: string = 'Please enter a valid email address';
 export const invalidPassword: string =
   'Your password must contain at least 1 letter, 1 number, 1 special character (!@#$%^&*) and at least 8 characters';
 export const requirementAgreement: string = 'You must agree to continue';
+export const invalidAmount: string = 'Please enter a valid amount';
+export const insufficientCredits: string = "You don't have enough credits";
 
 export function validateEmail(email: string): boolean {
   return /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,10})$/i.test(

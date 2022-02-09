@@ -298,9 +298,12 @@ function ProjectDetails(): JSX.Element {
         />
       )}
       <ProjectTopSection data={data} geojson={geojson} isGISFile={isGISFile} />
-      <div className="topo-background-alternate">
-        <ProjectImpactSection data={impactData} />
-      </div>
+      {impactData?.allEcologicalImpact &&
+        impactData?.allEcologicalImpact.length > 0 && (
+          <div className="topo-background-alternate">
+            <ProjectImpactSection impact={impactData?.allEcologicalImpact} />
+          </div>
+        )}
 
       {data?.projectByHandle?.documentsByProjectId?.nodes &&
         data.projectByHandle.documentsByProjectId.nodes.length > 0 && (

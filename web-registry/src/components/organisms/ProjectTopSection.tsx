@@ -197,6 +197,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   darkText: {
     color: theme.palette.info.dark,
+  },
+  link: {
     position: 'relative',
   },
   creditClassName: {
@@ -209,10 +211,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   arrowIcon: {
     height: theme.spacing(3.5),
-  },
-  arrowLink: {
     position: 'absolute',
-    top: theme.spacing(0.5),
+    top: theme.spacing(0.85),
   },
 }));
 
@@ -230,31 +230,38 @@ function ProjectTopLink({
   const classes = useStyles();
   const theme = useTheme<Theme>();
 
+  const text = (
+    <span className={classes.darkText}>
+      {name && ReactHtmlParser(name)}
+      {onChainId && name ? (
+        <span> ({onChainId})</span>
+      ) : (
+        <span>{onChainId}</span>
+      )}
+    </span>
+  );
   return (
     <div className={classes.creditClassDetail}>
       <Title className={classes.creditClass} variant="h5">
         {label}:
       </Title>
-      <div className={cx(classes.creditClassName, classes.darkText)}>
-        {name && ReactHtmlParser(name)}
-        {onChainId && name ? (
-          <span> ({onChainId})</span>
-        ) : (
-          <span>{onChainId}</span>
-        )}
-        {url && (
+      <div className={classes.creditClassName}>
+        {url ? (
           <Link
-            className={classes.arrowLink}
+            className={classes.link}
             href={url}
             rel="noopener noreferrer"
             target="_blank"
           >
+            {text}
             <ArrowIcon
               className={classes.arrowIcon}
               direction="next"
               color={theme.palette.secondary.main}
             />
           </Link>
+        ) : (
+          <>{text}</>
         )}
       </div>
     </div>

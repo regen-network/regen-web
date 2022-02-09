@@ -490,7 +490,7 @@ function ProjectTopSection({
               </Description>
             </div>
           )}
-          {/* TODO uncomment code below and  display on-chain project.metadata */}
+          {/* TODO uncomment code below and display on-chain project.metadata */}
           {/* <>
             <Box
               sx={theme => ({
@@ -528,9 +528,10 @@ function ProjectTopSection({
               metadata,
               data?.projectByHandle?.partyByLandOwnerId,
             )}
-            // TODO issuer or broker
-            // if no off-chain data, use on-chain project.issuer
-            broker={getParty(data?.projectByHandle?.partyByBrokerId)}
+            // TODO update graphql schema and change to use partyByIssuerId once registry-server PR merged
+            issuer={getParty(data?.projectByHandle?.partyByBrokerId)}
+            // TODO if no off-chain data, use on-chain project.issuer
+            // issuer={getParty(data?.projectByHandle?.partyByIssuerId)}
             reseller={getParty(data?.projectByHandle?.partyByResellerId)}
             sdgs={sdgs}
           />

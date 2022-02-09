@@ -307,9 +307,7 @@ function ProjectDetails(): JSX.Element {
 
       {data?.projectByHandle?.documentsByProjectId?.nodes &&
         data.projectByHandle.documentsByProjectId.nodes.length > 0 && (
-          <div
-            className={clsx('topo-background-alternate', styles.projectContent)}
-          >
+          <div className="topo-background-alternate">
             <Documentation
               txClient={txClient}
               onViewOnLedger={viewOnLedger}

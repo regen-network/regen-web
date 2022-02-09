@@ -12,7 +12,7 @@ import {
   StyledTableContainer,
   StyledTableCell,
   StyledTableRow,
-  StyledTableSortLabel,
+  // StyledTableSortLabel,
 } from 'web-components/lib/components/table';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
 import {
@@ -102,8 +102,8 @@ const CreditBatches: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
   const [batches, setBatches] = useState<any[]>([]);
-  const [order, setOrder] = useState<Order>('desc');
-  const [orderBy, setOrderBy] = useState<string>('start_date');
+  const [order /* , setOrder */] = useState<Order>('desc');
+  const [orderBy /* , setOrderBy */] = useState<string>('start_date');
   const { TablePagination, setCountTotal, paginationParams, paginationProps } =
     useTablePagination(ROWS_PER_PAGE_OPTIONS);
 
@@ -148,19 +148,19 @@ const CreditBatches: React.FC = () => {
     fetchData(paginationParams, setCountTotal);
   }, [paginationParams, setCountTotal]);
 
-  const createSortHandler =
-    (property: keyof BatchRowData) => (event: React.MouseEvent<unknown>) => {
-      handleRequestSort(event, property);
-    };
+  // const createSortHandler =
+  //   (property: keyof BatchRowData) => (event: React.MouseEvent<unknown>) => {
+  //     handleRequestSort(event, property);
+  //   };
 
-  const handleRequestSort = (
-    event: React.MouseEvent<unknown>,
-    property: keyof BatchRowData,
-  ): void => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
+  // const handleRequestSort = (
+  //   event: React.MouseEvent<unknown>,
+  //   property: keyof BatchRowData,
+  // ): void => {
+  //   const isAsc = orderBy === property && order === 'asc';
+  //   setOrder(isAsc ? 'desc' : 'asc');
+  //   setOrderBy(property);
+  // };
 
   const formatNumber = (num: number | string): string => {
     if (typeof num === 'string') num = parseFloat(num);

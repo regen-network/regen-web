@@ -3,7 +3,8 @@ import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
 import { Statistic } from '../molecules';
-import { getBatchesWithSupply, BatchData } from '../../lib/ecocredit';
+import { getBatchesWithSupply } from '../../lib/ecocredit';
+import { BatchRowData } from '../../types/ledger';
 
 interface CreditTotalData {
   tradeable: number;
@@ -44,7 +45,7 @@ const CreditTotals: React.FC = () => {
   };
 
   const sumBatchTotals = useCallback(
-    (batches: BatchData[]): CreditTotalData => {
+    (batches: BatchRowData[]): CreditTotalData => {
       let tradeable = 0;
       let retired = 0;
       let created = 0;
@@ -67,7 +68,7 @@ const CreditTotals: React.FC = () => {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       const res = await getBatchesWithSupply();
-      const data: BatchData[] = res?.data;
+      const data: BatchRowData[] = res?.data;
 
       if (data) {
         const creditTotals = sumBatchTotals(data);

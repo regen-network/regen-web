@@ -25,7 +25,7 @@ import { TableActionButtons } from 'web-components/lib/components/buttons/TableA
 import { getAccountEcocreditsForBatch, getBatches } from '../lib/ecocredit';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
 import { ledgerRestUri } from '../ledger';
-import { truncateWalletAddress } from '../lib/wallet';
+import { truncate } from '../lib/wallet';
 import { getAccountUrl } from '../lib/block-explorer';
 import type { BatchRowData, EcocreditAccountBalance } from '../types/ledger';
 
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ROWS_PER_PAGE_OPTIONS = [5, 10];
+const ROWS_PER_PAGE_OPTIONS = { options: [5, 10], default: 5 };
 
 interface TableCredits extends BatchRowData, EcocreditAccountBalance {}
 
@@ -176,7 +176,7 @@ export const Ecocredits: React.FC = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {truncateWalletAddress(row.issuer as string)}
+                          {truncate(row.issuer as string)}
                         </a>
                       </StyledTableCell>
                       <StyledTableCell>{row.class_id}</StyledTableCell>

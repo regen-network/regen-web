@@ -16,19 +16,20 @@ import {
   formatNumber,
 } from 'web-components/lib/components/table';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
-import {
-  getComparator,
-  stableSort,
-  Order,
-} from 'web-components/lib/components/table/sort';
+// import {
+//   getComparator,
+//   stableSort,
+//   Order,
+// } from 'web-components/lib/components/table/sort';
 import Section from 'web-components/lib/components/section';
 import { truncate } from '../../lib/wallet';
+import { BatchRowData } from '../../types/ledger';
 import { ledgerRestUri } from '../../ledger';
-import { getBatchesWithSupply, BatchData } from '../../lib/ecocredit';
+import { getBatchesWithSupply } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
 
 interface HeadCell {
-  id: keyof BatchData;
+  id: keyof BatchRowData;
   label: string;
   numeric: boolean;
   wrap?: boolean;
@@ -101,8 +102,8 @@ const CreditBatches: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
   const [batches, setBatches] = useState<any[]>([]);
-  const [order, setOrder] = useState<Order>('desc');
-  const [orderBy, setOrderBy] = useState<string>('start_date');
+  // const [order, setOrder] = useState<Order>('desc');
+  // const [orderBy, setOrderBy] = useState<string>('start_date');
   const { TablePagination, setCountTotal, paginationParams, paginationProps } =
     useTablePagination(ROWS_PER_PAGE_OPTIONS);
 
@@ -124,19 +125,19 @@ const CreditBatches: React.FC = () => {
     fetchData(paginationParams, setCountTotal);
   }, [paginationParams, setCountTotal]);
 
-  const createSortHandler =
-    (property: keyof BatchData) => (event: React.MouseEvent<unknown>) => {
-      handleRequestSort(event, property);
-    };
+  // const createSortHandler =
+  //   (property: keyof BatchRowData) => (event: React.MouseEvent<unknown>) => {
+  //     handleRequestSort(event, property);
+  //   };
 
-  const handleRequestSort = (
-    event: React.MouseEvent<unknown>,
-    property: keyof BatchData,
-  ): void => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
+  // const handleRequestSort = (
+  //   event: React.MouseEvent<unknown>,
+  //   property: keyof BatchRowData,
+  // ): void => {
+  //   const isAsc = orderBy === property && order === 'asc';
+  //   setOrder(isAsc ? 'desc' : 'asc');
+  //   setOrderBy(property);
+  // };
 
   const getPaddingBottom = (
     countTotal: number,
@@ -196,47 +197,44 @@ const CreditBatches: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {stableSort(batches, getComparator(order, orderBy)).map(
-                (batch: any) => {
-                  return (
-                    <StyledTableRow
-                      className={styles.noWrap}
-                      tabIndex={-1}
-                      key={batch.batch_denom}
-                    >
-                      <StyledTableCell>
-                        <a
-                          href={getAccountUrl(batch.issuer)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {truncate(batch.issuer)}
-                        </a>
-                      </StyledTableCell>
-                      <StyledTableCell>{batch.batch_denom}</StyledTableCell>
-                      <StyledTableCell>{batch.class_id}</StyledTableCell>
-                      <StyledTableCell>
-                        {formatNumber(batch.tradable_supply)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {formatNumber(batch.retired_supply)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {formatNumber(batch.amount_cancelled)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {formatDate(batch.start_date)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {formatDate(batch.end_date)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {batch.project_location}
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  );
-                },
-              )}
+              {/* {stableSort(batches, getComparator(order, orderBy)).map( */}
+              {batches.map((batch: BatchRowData) => {
+                return (
+                  <StyledTableRow
+                    className={styles.noWrap}
+                    tabIndex={-1}
+                    key={batch.batch_denom}
+                  >
+                    <StyledTableCell>
+                      <a
+                        href={getAccountUrl(batch.issuer)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {truncate(batch.issuer)}
+                      </a>
+                    </StyledTableCell>
+                    <StyledTableCell>{batch.batch_denom}</StyledTableCell>
+                    <StyledTableCell>{batch.class_id}</StyledTableCell>
+                    <StyledTableCell>
+                      {formatNumber(batch.tradable_supply)}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {formatNumber(batch.retired_supply)}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {formatNumber(batch.amount_cancelled)}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {formatDate(batch.start_date as Date)}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {formatDate(batch.end_date as Date)}
+                    </StyledTableCell>
+                    <StyledTableCell>{batch.project_location}</StyledTableCell>
+                  </StyledTableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </div>

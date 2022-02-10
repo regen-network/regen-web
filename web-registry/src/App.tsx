@@ -214,7 +214,7 @@ const App: React.FC = (): JSX.Element => {
             element={<CreditClassDetails />}
           />
           <Route path="stats/activity" element={<Activity />} />
-          <Route path="*" element={NotFoundPage} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
         <footer>

@@ -29,7 +29,9 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import { truncate } from '../../lib/wallet';
 import { ledgerRestUri } from '../../ledger';
 import { getHashUrl } from '../../lib/block-explorer';
-import { getTxs } from '../../lib/ecocredit';
+import { getEcocreditTxs } from '../../lib/ecocredit';
+
+dayjs.extend(relativeTime);
 
 interface TxRowData {
   date: string | Date;
@@ -53,8 +55,6 @@ const headCells: HeadCell[] = [
   { id: 'height', numeric: true, label: 'block height' },
   { id: 'txUrl', numeric: false, label: '' },
 ];
-
-dayjs.extend(relativeTime);
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -111,7 +111,7 @@ const CreditActivityTable: React.FC = () => {
 
   const fetchData = useCallback(
     async (setCountTotal: (count: number) => void): Promise<void> => {
-      const tx_responses = await getTxs();
+      const tx_responses = await getEcocreditTxs();
 
       const txRows: TxRowData[] = tx_responses.map((tx_response: any) => {
         return {

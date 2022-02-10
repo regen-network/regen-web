@@ -23,10 +23,8 @@ export function useTablePagination(
   );
   const [offset, setOffset] = useState<number>(0);
   const [countTotal, setCountTotal] = useState<number>(0);
-  const [
-    paginationParams,
-    setPaginationParams,
-  ] = useState<URLSearchParams | null>(null);
+  const [paginationParams, setPaginationParams] =
+    useState<URLSearchParams | null>(null);
 
   const prepareParams = (rowsPerPage: number, offset: number): void => {
     const params = new URLSearchParams();
@@ -57,7 +55,7 @@ export function useTablePagination(
     setPage(0);
   };
 
-  let paginationProps = {
+  const paginationProps = {
     rowsPerPageOptions: rowsPerPageOptions.options,
     count: countTotal,
     rowsPerPage: rowsPerPage,

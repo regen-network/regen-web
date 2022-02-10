@@ -1,5 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
+import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import qs from 'querystring';
+
 import { ledgerRestUri } from '../ledger';
 import {
   BatchDataResponse,
@@ -44,26 +46,27 @@ export const getAccountEcocreditsForBatch = (
   );
 };
 
-export const getTxs = async (
-  paginationParams?: URLSearchParams,
-): Promise<any[]> => {
-  let allTxs: any[] = [];
+export const getTxsByEvent = (msgType: string): Promise<AxiosResponse> => {
+  return axios.get(`${ledgerRestUri}/cosmos/tx/v1beta1/txs`, {
+    params: {
+      events: [msgType],
+    },
+    paramsSerializer: params => {
+      return qs.stringify(params);
+    },
+  });
+};
 
-  // TODO: until ledger API supports "message.module='ecocredit'", we must send separate requests for each message action type:
+export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
+  let allTxs: TxResponse[] = [];
+
+  // TODO: until ledger API supports "message.module='ecocredit'",
+  // we must send separate requests for each message action type:
   return Promise.all(
     Object.values(ECOCREDIT_MESSAGE_TYPES).map(async msgType => {
-      return axios
-        .get(`${ledgerRestUri}/cosmos/tx/v1beta1/txs`, {
-          params: {
-            events: [msgType],
-          },
-          paramsSerializer: params => {
-            return qs.stringify(params);
-          },
-        })
-        .then(({ data }) => {
-          allTxs = [...allTxs, ...data.tx_responses];
-        });
+      return getTxsByEvent(msgType).then(({ data }) => {
+        allTxs = [...allTxs, ...data.tx_responses];
+      });
     }),
   ).then(() => {
     return allTxs;

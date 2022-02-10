@@ -2,6 +2,7 @@ import * as React from 'react';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export default {
@@ -23,4 +24,17 @@ export const nextButton = (): JSX.Element => (
 
 export const prevButton = (): JSX.Element => (
   <PrevNextButton direction="prev" />
+);
+
+export const tableActionButtons = (): JSX.Element => (
+  <>
+    <h3>(Adjust size to see responsive styles)</h3>
+    <TableActionButtons
+      buttons={[
+        { label: 'one', onClick: () => alert('clicked one') },
+        { label: 'two', onClick: () => alert('clicked two') },
+        { label: 'three', onClick: () => alert('clicked three') },
+      ]}
+    />
+  </>
 );

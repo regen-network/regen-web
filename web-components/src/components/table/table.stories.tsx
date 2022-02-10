@@ -20,18 +20,21 @@ const data: DocumentRowData[] = [
     type: 'Monitoring',
     date: '2020-03-15T00:00:00.000Z',
     url: 'test',
+    ledger: 'test',
   },
   {
     name: 'Issuance Documents',
     type: 'Issuance',
     date: '2020-03-15T00:00:00.000Z',
     url: 'test',
+    ledger: 'test',
   },
   {
     name: 'Project Review',
     type: 'Project Review',
     date: '2020-03-15T00:00:00.000Z',
     url: 'test',
+    ledger: 'test',
   },
 ];
 
@@ -48,8 +51,8 @@ export const tablePagination = (): JSX.Element => (
           count={6}
           rowsPerPage={5}
           page={0}
-          onPageChange={(e, newPage) => { }}
-          onChangeRowsPerPage={e => { }}
+          onPageChange={(e, newPage) => {}}
+          onChangeRowsPerPage={e => {}}
         />
       </TableRow>
     </TableFooter>

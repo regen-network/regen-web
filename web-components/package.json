@@ -19,7 +19,6 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@date-io/date-fns": "1.x",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mapbox/mapbox-sdk": "^0.10.0",
@@ -39,7 +38,6 @@
     "@types/react-map-gl": "^5.2.0",
     "@types/react-slick": "^0.23.4",
     "@types/zxcvbn": "^4.4.0",
-    "date-fns": "^2.21.3",
     "formik": "2.2.9",
     "formik-mui": "^4.0.0-alpha.3",
     "js-cookie": "^2.2.1",

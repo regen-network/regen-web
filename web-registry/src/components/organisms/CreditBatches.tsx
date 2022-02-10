@@ -22,6 +22,7 @@ import { useTablePagination } from 'web-components/lib/components/table/useTable
 //   Order,
 // } from 'web-components/lib/components/table/sort';
 import Section from 'web-components/lib/components/section';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from '../../lib/wallet';
 import { BatchRowData } from '../../types/ledger';
 import { ledgerRestUri } from '../../ledger';
@@ -62,7 +63,7 @@ const headCells: HeadCell[] = [
   { id: 'project_location', numeric: false, label: 'project location' },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('md')]: {
       paddingBottom: theme.spacing(22.25),

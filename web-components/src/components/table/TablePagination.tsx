@@ -1,9 +1,14 @@
 import React from 'react';
-import { TablePagination as MuiTablePagination, Grid } from '@mui/material';
+import {
+  TablePagination as MuiTablePagination,
+  Grid,
+  SelectProps,
+} from '@mui/material';
 import { makeStyles, withStyles } from '@mui/styles';
+import { Theme } from '../../theme/muiTheme';
 import PrevNextButton from '../buttons/PrevNextButton';
 
-const useStylesAction = makeStyles(theme => ({
+const useStylesAction = makeStyles((theme: Theme) => ({
   buttonsWrapper: {
     display: 'flex',
     marginLeft: theme.spacing(5),
@@ -52,11 +57,11 @@ const TablePaginationActions = (props: any): any => {
   );
 };
 
-const StyledTablePagination = withStyles(theme => ({
+const StyledTablePagination = withStyles((theme: Theme) => ({
   root: {
     height: theme.spacing(29),
   },
-  caption: {
+  selectLabel: {
     fontSize: '1rem',
     '&:first-of-type': {
       fontFamily: 'Muli',
@@ -65,18 +70,12 @@ const StyledTablePagination = withStyles(theme => ({
       letterSpacing: '1px',
       textTransform: 'uppercase',
       color: theme.palette.grey[500],
-      [theme.breakpoints.down('xs')]: {
+      [theme.breakpoints.down('sm')]: {
         display: 'none',
       },
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       marginRight: theme.spacing(10),
-    },
-  },
-  selectRoot: {
-    marginLeft: theme.spacing(4),
-    [theme.breakpoints.down('xs')]: {
-      display: 'none',
     },
   },
   select: {
@@ -88,12 +87,19 @@ const StyledTablePagination = withStyles(theme => ({
     paddingBottom: theme.spacing(4),
     paddingLeft: theme.spacing(3),
     paddingRight: `${theme.spacing(12)} !important`,
+    marginLeft: theme.spacing(4),
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
   selectIcon: {
     color: theme.palette.secondary.main,
     marginRight: theme.spacing(2),
     fontSize: '1.75rem',
     top: 'calc(50% - 16px)',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
 }))(MuiTablePagination);
 
@@ -104,6 +110,8 @@ export interface TablePaginationProps {
   page: number;
   onPageChange: (event: unknown, newPage: number) => void;
   onChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  labelRowsPerPage?: string;
+  SelectProps?: SelectProps;
 }
 
 export const TablePagination: React.FC<TablePaginationProps> = props => {

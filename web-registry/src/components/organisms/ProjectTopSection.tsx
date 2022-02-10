@@ -220,12 +220,12 @@ function ProjectTopLink({
   label,
   name,
   url,
-  onChainId,
+  creditClassId,
 }: {
   label: string;
   name?: string;
   url?: string;
-  onChainId?: string;
+  creditClassId?: string; // on-chain credit class id (e.g. "C01")
 }): JSX.Element {
   const classes = useStyles();
   const theme = useTheme<Theme>();
@@ -233,10 +233,10 @@ function ProjectTopLink({
   const text = (
     <span className={classes.darkText}>
       {name && ReactHtmlParser(name)}
-      {onChainId && name ? (
-        <span> ({onChainId})</span>
+      {creditClassId && name ? (
+        <span> ({creditClassId})</span>
       ) : (
-        <span>{onChainId}</span>
+        <span>{creditClassId}</span>
       )}
     </span>
   );
@@ -355,10 +355,10 @@ function ProjectTopSection({
                             'http://regen.network/standard'
                           ]?.['http://schema.org/url']?.['@value']
                         }
-                        onChainId={
+                        creditClassId={
                           creditClassVersion?.metadata?.[
                             'http://regen.network/standard'
-                          ]?.['http://regen.network/onChainId']
+                          ]?.['http://regen.network/creditClassId']
                         }
                       />
                     )}
@@ -372,9 +372,9 @@ function ProjectTopSection({
                         '@value'
                       ]
                     }
-                    onChainId={
+                    creditClassId={
                       creditClassVersion?.metadata?.[
-                        'http://regen.network/onChainId'
+                        'http://regen.network/creditClassId'
                       ]
                     }
                   />

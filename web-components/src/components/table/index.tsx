@@ -38,7 +38,7 @@ const StyledTableCell = withStyles(theme => ({
     fontSize: theme.typography.pxToRem(11),
     color: theme.palette.info.main,
     background: theme.palette.primary.main,
-    borderBottom: `1px solid ${theme.palette.grey[100]}`,
+    borderBottom: `1px solid ${theme.palette.info.light}`,
     lineHeight: theme.spacing(4),
     verticalAlign: 'bottom',
     whiteSpace: 'nowrap',

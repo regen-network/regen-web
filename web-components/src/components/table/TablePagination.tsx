@@ -60,6 +60,8 @@ const TablePaginationActions = (props: any): any => {
 const StyledTablePagination = withStyles((theme: Theme) => ({
   root: {
     height: theme.spacing(29),
+    borderTop: `1px solid ${theme.palette.info.light}`,
+    borderBottom: 'none',
   },
   selectLabel: {
     fontSize: '1rem',

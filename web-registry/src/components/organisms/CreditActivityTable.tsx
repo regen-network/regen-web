@@ -149,7 +149,7 @@ const CreditActivityTable: React.FC = () => {
         border: theme => `1px solid ${theme.palette.info.light}`,
         borderRadius: '8px',
         overflow: 'auto',
-        mb: { sm: 18.5, md: 30 },
+        mb: { xs: 18.5, sm: 30 },
       }}
     >
       <Box

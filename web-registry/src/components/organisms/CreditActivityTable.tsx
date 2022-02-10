@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
+import Box from '@mui/material/Box';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { Dictionary } from 'lodash';
@@ -57,26 +58,6 @@ const headCells: HeadCell[] = [
 ];
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    border: `1px solid ${theme.palette.info.light}`,
-    borderRadius: '8px',
-    overflow: 'auto',
-    [theme.breakpoints.up('md')]: {
-      marginBottom: theme.spacing(30),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(18.5),
-    },
-  },
-  noWrap: {
-    whiteSpace: 'nowrap',
-  },
-  grey: {
-    color: theme.palette.info.main,
-  },
-  tableBody: {
-    backgroundColor: theme.palette.primary.main,
-  },
   label: {
     color: theme.palette.info.dark,
     fontSize: theme.typography.pxToRem(12),
@@ -95,7 +76,6 @@ const READABLE_NAMES: Dictionary<string> = {
 
 const CreditActivityTable: React.FC = () => {
   const styles = useStyles();
-  const theme = useTheme<Theme>();
   const [txs, setTxs] = useState<TxRowData[]>([]);
   const [order, setOrder] = useState<Order>('desc');
   const [orderBy, setOrderBy] = useState<string>('date');
@@ -164,14 +144,22 @@ const CreditActivityTable: React.FC = () => {
   }, [fetchData, getReadableMessages, setCountTotal]);
 
   return (
-    <StyledTableContainer className={styles.root}>
-      <div
-        style={{
+    <StyledTableContainer
+      sx={{
+        border: theme => `1px solid ${theme.palette.info.light}`,
+        borderRadius: '8px',
+        overflow: 'auto',
+        mb: { sm: 18.5, md: 30 },
+      }}
+    >
+      <Box
+        sx={{
           width: '100%',
           overflow: 'auto',
-          paddingBottom: `${theme.spacing(
-            getPaddingBottom(count, rowsPerPage, txs.length) * 20,
-          )}`,
+          pb: theme =>
+            `${theme.spacing(
+              getPaddingBottom(count, rowsPerPage, txs.length) * 20,
+            )}`,
         }}
       >
         <Table aria-label="credit activity table" stickyHeader>
@@ -195,18 +183,18 @@ const CreditActivityTable: React.FC = () => {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody className={styles.tableBody}>
+          <TableBody sx={{ bgcolor: 'primary.main' }}>
             {ledgerRestUri && txs.length > 0 ? (
               stableSort(txs as any, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((tx: any) => {
                   return (
                     <StyledTableRow
-                      className={styles.noWrap}
+                      sx={{ whiteSpace: 'nowrap' }}
                       tabIndex={-1}
                       key={tx.txhash}
                     >
-                      <StyledTableCell className={styles.grey}>
+                      <StyledTableCell sx={{ color: 'info.main' }}>
                         {dayjs(tx.date).fromNow()}
                       </StyledTableCell>
                       <StyledTableCell>
@@ -234,14 +222,17 @@ const CreditActivityTable: React.FC = () => {
                 })
             ) : (
               <StyledTableRow
-                style={{ width: '100%', backgroundColor: 'transparent' }}
+                sx={{
+                  width: '100%',
+                  bgcolor: 'transparent',
+                }}
               >
                 <StyledTableCell>Loading...</StyledTableCell>
               </StyledTableRow>
             )}
           </TableBody>
         </Table>
-      </div>
+      </Box>
       <Table>
         <TableFooter>
           <TableRow>

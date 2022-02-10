@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import { Dictionary } from 'lodash';
+import Box from '@mui/material/Box';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { Label } from 'web-components/lib/components/label';
 import Title from 'web-components/lib/components/title';
 import { formatNumber } from 'web-components/lib/components/table';
@@ -13,36 +15,17 @@ interface StatisticProps {
   arrow?: 'upRight' | 'downLeft';
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    marginTop: theme.spacing(2),
-  },
+const useStyles = makeStyles((theme: Theme) => ({
   label: {
     fontSize: theme.typography.pxToRem(14),
     color: theme.palette.info.main,
     whiteSpace: 'nowrap',
   },
-  data: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingTop: theme.spacing(2),
-  },
-  circle: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: theme.typography.pxToRem(30),
-    height: theme.typography.pxToRem(30),
-    background: theme.palette.info.light,
-    borderRadius: '50%',
-    marginRight: theme.spacing(2),
-    fontSize: theme.typography.pxToRem(24),
-  },
 }));
 
 const Statistic: React.FC<StatisticProps> = ({ label, count, arrow }) => {
   const styles = useStyles();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
 
   const getColor = (arrowDirection: string): string => {
     const colors: Dictionary<string> = {
@@ -53,21 +36,33 @@ const Statistic: React.FC<StatisticProps> = ({ label, count, arrow }) => {
   };
 
   return (
-    <div className={styles.root}>
+    <Box sx={{ mt: 2 }}>
       <Label className={styles.label}>{label}</Label>
-      <div className={styles.data}>
+      <Box sx={{ display: 'flex', alignItems: 'center', pt: 2 }}>
         {arrow && (
-          <div className={styles.circle}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 30,
+              height: 30,
+              bgcolor: 'info.light',
+              borderRadius: '50%',
+              mr: 2,
+              fontSize: 24,
+            }}
+          >
             <ArrowDownIcon
               fontSize="inherit"
               color={getColor(arrow)}
               direction={arrow}
             />
-          </div>
+          </Box>
         )}
         <Title variant="h3">{formatNumber(count)}</Title>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

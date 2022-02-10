@@ -3,6 +3,7 @@ import cx from 'clsx';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import { Variant } from '@mui/material/styles/createTypography';
+import { SxProps } from '@mui/material';
 
 interface TitleProps {
   variant?: Variant;
@@ -16,6 +17,7 @@ interface TitleProps {
     | 'textSecondary'
     | 'error';
   className?: string;
+  sx?: SxProps<Theme>;
   onClick?: () => void;
   align?: 'left' | 'right' | 'inherit' | 'center' | 'justify';
 }
@@ -34,11 +36,13 @@ export default function Title({
   className,
   align,
   onClick,
+  sx,
 }: TitleProps): JSX.Element {
   const styles = useStyles({});
   return (
     <Typography
       className={cx(styles.root, className)}
+      sx={sx}
       color={color || 'textPrimary'}
       align={align || 'left'}
       variant={variant}

@@ -85,9 +85,20 @@ const StyledTableSortLabel: React.FC<TableSortLabelProps> = props => {
   );
 };
 
+/** Our table rows have a fixed height - this is used to calculate padding bottom
+ * for container div on a paginated table so the last page maintains height */
+const getTablePaginationPadding = (
+  countTotal: number,
+  rowsPerPage: number,
+  countPage: number,
+): number => {
+  return countTotal <= rowsPerPage ? 0 : rowsPerPage - countPage;
+};
+
 export {
   StyledTableContainer,
   StyledTableRow,
   StyledTableCell,
   StyledTableSortLabel,
+  getTablePaginationPadding,
 };

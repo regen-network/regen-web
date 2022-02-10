@@ -28,12 +28,14 @@ import {
   CreditsRetire,
   CreditsTransfer,
   EntityDisplay,
+  EcocreditsForAccount,
   Home,
   // Home,
   LandStewards,
   Media,
   MethodologyDetails,
   MethodologyReviewProcess,
+  MyEcocredits,
   NotFoundPage,
   OrganizationProfile,
   PostPurchase,
@@ -47,7 +49,6 @@ import {
   UserProfile,
   VerifyEmail,
   ProjectEdit,
-  Ecocredits,
 } from './pages';
 
 import './App.css';
@@ -101,8 +102,12 @@ const App: React.FC = (): JSX.Element => {
             element={<PostPurchase />}
           />
           <Route
-            path="/dashboard/ecocredits"
-            element={<ProtectedRoute component={Ecocredits} />}
+            path="ecocredits/dashboard"
+            element={<ProtectedRoute component={MyEcocredits} />}
+          />
+          <Route
+            path="ecocredits/:accountId"
+            element={<ProtectedRoute component={EcocreditsForAccount} />}
           />
           <Route
             path="user-profile"

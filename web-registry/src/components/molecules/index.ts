@@ -1,4 +1,5 @@
 export * from './BackgroundImgSection';
+export * from './EcocreditsSection';
 export * from './ReviewProcessInfo';
 export * from './PlanStepper';
 export * from './OverviewCards';

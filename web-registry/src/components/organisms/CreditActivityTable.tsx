@@ -10,7 +10,6 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { Dictionary } from 'lodash';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import {
   StyledTableContainer,
   StyledTableCell,
@@ -26,6 +25,7 @@ import {
 } from 'web-components/lib/components/table/sort';
 import { Label } from 'web-components/lib/components/label';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { truncate } from '../../lib/wallet';
 import { ledgerRestUri } from '../../ledger';

@@ -16,7 +16,7 @@ interface CreditTotalData {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(3, 0, 9),
+      padding: theme.spacing(7, 0, 11),
     },
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(5, 0, 11),

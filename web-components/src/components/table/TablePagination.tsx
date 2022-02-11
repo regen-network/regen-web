@@ -112,8 +112,6 @@ export interface TablePaginationProps {
   page: number;
   onPageChange: (event: unknown, newPage: number) => void;
   onChangeRowsPerPage: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  labelRowsPerPage?: string;
-  SelectProps?: SelectProps;
 }
 
 export const TablePagination: React.FC<TablePaginationProps> = props => {

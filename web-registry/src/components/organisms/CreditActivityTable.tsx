@@ -83,6 +83,11 @@ const CreditActivityTable: React.FC = () => {
     useTablePagination(ROWS_PER_PAGE_OPTIONS);
   const { count, page, rowsPerPage } = paginationProps;
 
+  const handleClickNavigate = (txhash: string): void => {
+    const url = getHashUrl(txhash);
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   const getReadableMessages = useCallback((txResponse: any): string[] => {
     return txResponse?.tx?.body?.messages?.map((message: any) => {
       return getReadableName(message['@type']);
@@ -190,9 +195,10 @@ const CreditActivityTable: React.FC = () => {
                 .map((tx: any) => {
                   return (
                     <StyledTableRow
-                      sx={{ whiteSpace: 'nowrap' }}
+                      sx={{ whiteSpace: 'nowrap', cursor: 'pointer' }}
                       tabIndex={-1}
                       key={tx.txhash}
+                      onClick={() => handleClickNavigate(tx.txhash)}
                     >
                       <StyledTableCell sx={{ color: 'info.main' }}>
                         {dayjs(tx.date).fromNow()}

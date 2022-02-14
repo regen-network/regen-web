@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ROWS_PER_PAGE_OPTIONS = { options: [5, 10, 20, 50], default: 10 };
 
+// TODO: pull message type names directly from regen-js.
 const READABLE_NAMES: Dictionary<string> = {
   '/regen.ecocredit.v1alpha1.MsgSend': 'send',
   '/regen.ecocredit.v1alpha1.MsgRetire': 'retire',

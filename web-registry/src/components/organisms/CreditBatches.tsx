@@ -5,14 +5,14 @@ import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import cx from 'clsx';
 
 import {
   StyledTableContainer,
   StyledTableCell,
   StyledTableRow,
-  StyledTableSortLabel,
+  // StyledTableSortLabel,
 } from 'web-components/lib/components/table';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
 import {
@@ -23,21 +23,10 @@ import {
 import Section from 'web-components/lib/components/section';
 import { truncateWalletAddress } from '../../lib/wallet';
 import { ledgerRestUri } from '../../ledger';
-import { getBatchSupply, getBatches } from '../../lib/ledger-rest';
+import { getBatchSupply, getBatches } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
-
-interface BatchRowData {
-  start_date: string | Date;
-  end_date: string | Date;
-  issuer: string;
-  batch_denom: string;
-  class_id: string;
-  total_amount: number;
-  tradable_supply?: number;
-  retired_supply?: number;
-  amount_cancelled: number;
-  project_location: string;
-}
+import { BatchRowData } from '../../types/ledger';
+import { TableSortLabel } from '@mui/material';
 
 interface HeadCell {
   id: keyof BatchRowData;
@@ -113,8 +102,8 @@ const CreditBatches: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
   const [batches, setBatches] = useState<any[]>([]);
-  const [order, setOrder] = useState<Order>('desc');
-  const [orderBy, setOrderBy] = useState<string>('start_date');
+  const [order /* , setOrder */] = useState<Order>('desc');
+  const [orderBy /* , setOrderBy */] = useState<string>('start_date');
   const { TablePagination, setCountTotal, paginationParams, paginationProps } =
     useTablePagination(ROWS_PER_PAGE_OPTIONS);
 
@@ -159,19 +148,19 @@ const CreditBatches: React.FC = () => {
     fetchData(paginationParams, setCountTotal);
   }, [paginationParams, setCountTotal]);
 
-  const createSortHandler =
-    (property: keyof BatchRowData) => (event: React.MouseEvent<unknown>) => {
-      handleRequestSort(event, property);
-    };
+  // const createSortHandler =
+  //   (property: keyof BatchRowData) => (event: React.MouseEvent<unknown>) => {
+  //     handleRequestSort(event, property);
+  //   };
 
-  const handleRequestSort = (
-    event: React.MouseEvent<unknown>,
-    property: keyof BatchRowData,
-  ): void => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
+  // const handleRequestSort = (
+  //   event: React.MouseEvent<unknown>,
+  //   property: keyof BatchRowData,
+  // ): void => {
+  //   const isAsc = orderBy === property && order === 'asc';
+  //   setOrder(isAsc ? 'desc' : 'asc');
+  //   setOrderBy(property);
+  // };
 
   const formatNumber = (num: number | string): string => {
     if (typeof num === 'string') num = parseFloat(num);
@@ -215,15 +204,22 @@ const CreditBatches: React.FC = () => {
                     key={headCell.id}
                     align="left"
                     padding="normal"
-                    sortDirection={orderBy === headCell.id ? order : false}
+                    // TODO implement sorting. See:
+                    // https://app.zenhub.com/workspaces/regen-registry-5f8998bec8958d000f4609e2/issues/regen-network/regen-registry/811
+                    // sortDirection={orderBy === headCell.id ? order : false}
                   >
-                    <StyledTableSortLabel
+                    {/* <StyledTableSortLabel
                       active={orderBy === headCell.id}
                       direction={orderBy === headCell.id ? order : 'asc'}
                       onClick={createSortHandler(headCell.id)}
+                    > */}
+                    <TableSortLabel
+                      sx={{ cursor: 'default', ':hover': { color: 'inherit' } }}
+                      IconComponent={() => null}
                     >
                       {headCell.label}
-                    </StyledTableSortLabel>
+                    </TableSortLabel>
+                    {/* </StyledTableSortLabel> */}
                   </StyledTableCell>
                 ))}
               </TableRow>
@@ -258,10 +254,10 @@ const CreditBatches: React.FC = () => {
                         {formatNumber(batch.amount_cancelled)}
                       </StyledTableCell>
                       <StyledTableCell>
-                        {moment(batch.start_date).format('LL')}
+                        {formatDate(batch.start_date)}
                       </StyledTableCell>
                       <StyledTableCell>
-                        {moment(batch.end_date).format('LL')}
+                        {formatDate(batch.end_date)}
                       </StyledTableCell>
                       <StyledTableCell>
                         {batch.project_location}
@@ -284,5 +280,7 @@ const CreditBatches: React.FC = () => {
     </Section>
   ) : null;
 };
+
+const formatDate = (date: Date): string => dayjs(date).format('MMMM D, YYYY');
 
 export { CreditBatches };

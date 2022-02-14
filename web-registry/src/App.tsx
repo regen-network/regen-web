@@ -47,6 +47,7 @@ import {
   UserProfile,
   VerifyEmail,
   ProjectEdit,
+  Ecocredits,
 } from './pages';
 
 import './App.css';
@@ -100,6 +101,10 @@ const App: React.FC = (): JSX.Element => {
             element={<PostPurchase />}
           />
           <Route
+            path="/dashboard/ecocredits"
+            element={<ProtectedRoute component={Ecocredits} />}
+          />
+          <Route
             path="user-profile"
             element={<ProtectedRoute component={UserProfile} />}
           />
@@ -107,6 +112,7 @@ const App: React.FC = (): JSX.Element => {
             path="organization-profile"
             element={<ProtectedRoute component={OrganizationProfile} />}
           />
+
           <Route
             path="project-pages"
             element={<ProtectedRoute component={ProjectList} />}

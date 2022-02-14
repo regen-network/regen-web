@@ -56,15 +56,17 @@ export const loginForm = (): JSX.Element => (
 export const creditTransferForm = (): JSX.Element => (
   <CreditTransferForm
     sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
-    available={{ amount: 1000, type: 'C01-20190101-20201010-02' }}
+    tradableAmount={1000}
+    batchDenom={'C01-20190101-20201010-02'}
     onClose={() => null}
   />
 );
 
 export const creditRetireForm = (): JSX.Element => (
   <CreditRetireForm
-    sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
-    available={{ amount: 1000, type: 'C01-20190101-20201010-02' }}
+    holder={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
+    tradableAmount={1000}
+    batchDenom={'C01-20190101-20201010-02'}
     onClose={() => null}
   />
 );

@@ -4,17 +4,34 @@ import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
-import LabelWithHelperText from '../inputs/LabelWithHelperText';
+import AmountLabel from '../inputs/AmountLabel';
 import LocationCountryField from '../inputs/LocationCountryField';
 import LocationStateCountryField from '../inputs/LocationStateCountryField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import Title from '../title';
 import Description from '../description';
+import Submit from './Submit';
 import {
   requiredMessage,
   invalidAmount,
   insufficientCredits,
 } from '../inputs/validation';
+
+/**
+ * Retire retires a specified number of credits in the holder's account.
+ * https://docs.regen.network/modules/ecocredit/03_messages.html#msgretire
+ *
+ * Validation:
+ *    holder: must ba a valid address, and their signature must be present in the transaction
+ *    credits: must not be empty
+ *    batch_denom: must be a valid batch denomination
+ *    amount: must be positive
+ *    location: must be a valid location
+ *
+ * Also:
+ * https://docs.regen.network/modules/ecocredit/protobuf.html#msgretire
+ * https://docs.regen.network/modules/ecocredit/protobuf.html#msgretire-retirecredits
+ */
 
 const useStyles = makeStyles((theme: Theme) => ({
   groupTitle: {
@@ -56,24 +73,33 @@ const useStyles = makeStyles((theme: Theme) => ({
   postalCodeField: {
     marginTop: theme.spacing(6),
   },
+  submit: {
+    marginTop: theme.spacing(12.5),
+    marginBottom: theme.spacing(12.5),
+  },
 }));
 
-// TODO: sender and recipient types,
-// with specific restrictions => valid Regen/Cosmos address
-// type regenAddress | CosmosAddress = string;
-// "regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4"
+// Output (submit)
+interface RetireCredits {
+  batchDenom: string;
+  amount: string;
+}
 
+interface MsgRetire {
+  holder: string;
+  credits: RetireCredits;
+  location: string;
+}
+
+// Input (args)
 interface FormProps {
-  sender: string;
-  available: {
-    amount: number;
-    type: string;
-  };
+  holder: string;
+  batchDenom: string;
+  tradableAmount: number;
   onClose: () => void;
 }
 
 interface FormValues {
-  // sender: string;
   amount: number;
   country: string;
   stateCountry?: string;
@@ -81,7 +107,6 @@ interface FormValues {
 }
 
 interface FormErrors {
-  // sender?: string;
   amount?: string;
   country?: string;
   stateCountry?: string;
@@ -89,14 +114,14 @@ interface FormErrors {
 }
 
 const CreditRetireForm: React.FC<FormProps> = ({
-  sender,
-  available,
+  holder,
+  batchDenom,
+  tradableAmount,
   onClose,
 }) => {
   const styles = useStyles();
 
   const initialValues = {
-    // sender,
     amount: 0,
     country: 'US',
     stateCountry: '',
@@ -104,10 +129,6 @@ const CreditRetireForm: React.FC<FormProps> = ({
 
   const validateHandler = (values: FormValues): FormErrors => {
     const errors: FormErrors = {};
-
-    // if (!values.sender) {
-    //   errors.sender = requiredMessage;
-    // }
 
     if (!values.country) {
       errors.country = requiredMessage;
@@ -117,15 +138,19 @@ const CreditRetireForm: React.FC<FormProps> = ({
       errors.amount = requiredMessage;
     } else if (Math.sign(values.amount) !== 1) {
       errors.amount = invalidAmount;
-    } else if (values.amount > available.amount) {
+    } else if (values.amount > tradableAmount) {
       errors.amount = insufficientCredits;
     }
 
     return errors;
   };
 
-  const submitHandler = async (values: any): Promise<any> => {
+  const submitHandler = async (values: FormValues): Promise<any> => {
     console.log('*** submitHandler', values);
+    // TODO
+    // add holder,
+    // amount to string,
+    // location codification (country + state)
   };
 
   const countryHandler = (countryCode: string): any => {
@@ -142,38 +167,21 @@ const CreditRetireForm: React.FC<FormProps> = ({
       validate={validateHandler}
       onSubmit={submitHandler}
     >
-      {({
-        values,
-        // errors,
-        // submitForm,
-        // isSubmitting,
-        // isValid,
-        // submitCount,
-        // setFieldValue,
-        // status,
-      }) => (
+      {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
-          {/* <Field
-            disabled
-            component={TextField}
-            type="text"
-            label="Sender"
-            name="sender"
-          /> */}
-
           <Field
             name="amount"
             type="number"
             component={TextField}
             className={styles.textField}
             label={
-              <LabelWithHelperText
+              <AmountLabel
                 label={'Amount to retire'}
-                available={available}
+                tradableAmount={tradableAmount}
+                batchDenom={batchDenom}
               />
             }
           />
-
           <Title className={styles.groupTitle} variant="h5">
             Location of retirement
           </Title>
@@ -196,13 +204,22 @@ const CreditRetireForm: React.FC<FormProps> = ({
               <LocationCountryField triggerOnChange={countryHandler} />
             </Grid>
           </Grid>
-
           <Field
             className={styles.postalCodeField}
             component={ControlledTextField}
             label="Postal Code"
             name="postalCode"
             optional
+          />
+          <Submit
+            className={styles.submit}
+            isSubmitting={isSubmitting}
+            onClose={onClose}
+            status={status}
+            isValid={isValid}
+            submitCount={submitCount}
+            submitForm={submitForm}
+            label={'Retire'}
           />
         </Form>
       )}

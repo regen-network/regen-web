@@ -11,46 +11,42 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '14px',
     color: theme.palette.info.dark,
   },
-  availableAmount: {
+  tradableAmount: {
     fontFamily: 'Muli',
     fontSize: '12px',
     color: theme.palette.info.dark,
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
   },
-  availableType: {
+  batchDenom: {
     fontFamily: 'Muli',
     fontSize: '12px',
     color: theme.palette.info.dark,
   },
 }));
 
-interface AvailableProp {
-  amount: number;
-  type: string;
+interface AmountLabelProps {
+  label?: string;
+  tradableAmount: number;
+  batchDenom: string;
 }
 
-interface LabelWithHelperTextProp {
-  label: string;
-  available: AvailableProp;
-}
-
-const LabelWithHelperText: React.FC<LabelWithHelperTextProp> = ({
-  label,
-  available,
+const AmountLabel: React.FC<AmountLabelProps> = ({
+  label = 'Amount',
+  tradableAmount,
+  batchDenom,
 }) => {
   const classes = useStyles();
-
   return (
     <Grid container justifyContent="space-between">
       <span>{label}</span>
       <span>
         <span className={classes.availableLabel}>Available:</span>{' '}
-        <span className={classes.availableAmount}>{available.amount}</span>
-        <span className={classes.availableType}>{available.type}</span>
+        <span className={classes.tradableAmount}>{tradableAmount}</span>
+        <span className={classes.batchDenom}>{batchDenom}</span>
       </span>
     </Grid>
   );
 };
 
-export default LabelWithHelperText;
+export default AmountLabel;

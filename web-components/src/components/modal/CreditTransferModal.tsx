@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@mui/styles';
-import MuiCheckbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Modal, { RegenModalProps } from '../modal';
 import Title from '../title';
 import { CreditTransferForm } from '../form/CreditTransferForm';
-import { CreditRetireForm } from '../form/CreditRetireForm';
 
 const useStyles = makeStyles(theme => ({
   mainTitle: {
@@ -30,9 +27,6 @@ const useStyles = makeStyles(theme => ({
 const CreditTransferModal: React.FC<RegenModalProps> = ({ open, onClose }) => {
   const styles = useStyles();
   const sender = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4';
-  const [showRetire, setShowRetire] = useState<boolean>(false);
-
-  const retireHandler = (): void => setShowRetire(prev => !prev);
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -41,27 +35,10 @@ const CreditTransferModal: React.FC<RegenModalProps> = ({ open, onClose }) => {
       </Title>
       <CreditTransferForm
         sender={sender}
-        available={{ amount: 1000, type: 'C01-20190101-20201010-02' }}
+        tradableAmount={1000}
+        batchDenom={'C01-20190101-20201010-02'}
         onClose={() => null}
-      >
-        <FormControlLabel
-          className={styles.retireCheckbox}
-          control={
-            <MuiCheckbox checked={showRetire} onChange={retireHandler} />
-          }
-          label={'Retire credits upon transfer'}
-        />
-      </CreditTransferForm>
-
-      {showRetire && (
-        <div className={styles.retireWrapper}>
-          <CreditRetireForm
-            sender={sender}
-            available={{ amount: 1000, type: 'C01-20190101-20201010-02' }}
-            onClose={() => null}
-          />
-        </div>
-      )}
+      />
     </Modal>
   );
 };

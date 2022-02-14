@@ -224,7 +224,7 @@ function ProjectTopLink({
 }: {
   label: string;
   name?: string;
-  url?: string;
+  url?: string | null;
   creditClassId?: string; // on-chain credit class id (e.g. "C01")
 }): JSX.Element {
   const classes = useStyles();
@@ -278,7 +278,9 @@ function ProjectTopSection({
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
-  const metadata = data?.projectByHandle?.metadata;
+  const project = data?.projectByHandle;
+  const metadata = project?.metadata;
+  const registry = project?.partyByRegistryId;
   const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
   const landStewardPhoto =
     metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
@@ -408,6 +410,13 @@ function ProjectTopSection({
                       '@value'
                     ]
                   }
+                />
+              )}
+              {registry && (
+                <ProjectTopLink
+                  label="registry"
+                  name={registry.name}
+                  url={registry.organizationByPartyId?.website}
                 />
               )}
             </div>

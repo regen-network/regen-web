@@ -71,12 +71,6 @@
     ]
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "1.21.4",
-    "@graphql-codegen/introspection": "1.18.2",
-    "@graphql-codegen/typescript": "1.22.0",
-    "@graphql-codegen/typescript-graphql-files-modules": "1.18.1",
-    "@graphql-codegen/typescript-operations": "^1.18.0",
-    "@graphql-codegen/typescript-react-apollo": "2.2.4",
     "@keplr-wallet/types": "^0.9.0",
     "@storybook/addon-storyshots": "^6.3.12",
     "@types/enzyme": "^3.10.8",

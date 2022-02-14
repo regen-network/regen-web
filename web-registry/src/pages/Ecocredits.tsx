@@ -15,21 +15,23 @@ import {
   StyledTableRow,
   // StyledTableSortLabel,
 } from 'web-components/lib/components/table';
-import Section from 'web-components/lib/components/section';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 // import {
 //   getComparator,
 //   Order,
 //   stableSort,
 // } from 'web-components/lib/components/table/sort';
-import { getAccountEcocreditsForBatch, getBatches } from '../lib/ecocredit';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import { getAccountEcocreditsForBatch, getBatches } from '../lib/ecocredit';
 import { ledgerRestUri } from '../ledger';
-import { truncateWalletAddress } from '../lib/wallet';
+import { truncate } from '../lib/wallet';
 import { getAccountUrl } from '../lib/block-explorer';
 import type { BatchRowData, EcocreditAccountBalance } from '../types/ledger';
+import { EcocreditsSection } from '../components/molecules';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   borderLeft: {
     // absolutely position border to get around MUI style quirks
     position: 'absolute',
@@ -43,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ROWS_PER_PAGE_OPTIONS = [5, 10];
+const ROWS_PER_PAGE_OPTIONS = { options: [5, 10], default: 5 };
 
 interface TableCredits extends BatchRowData, EcocreditAccountBalance {}
 
@@ -110,134 +112,132 @@ export const Ecocredits: React.FC = () => {
 
   const styles = useStyles();
   return (
-    <Box sx={{ backgroundColor: 'grey.50' }}>
-      <Section title="My Ecocredits" titleVariant="h3" titleAlign="left">
-        <Box
-          sx={{
-            border: 1,
-            borderColor: 'info.light',
-            borderRadius: '8px',
-            marginTop: 8,
-            marginBottom: 12,
-            overflow: 'hidden',
-          }}
-        >
-          <StyledTableContainer sx={{ overflow: 'auto' }}>
-            <Box sx={{ overflow: 'auto' }}>
-              <Table aria-label="eco credits table">
-                <TableHead>
-                  <TableRow>
+    <EcocreditsSection title="My Ecocredits">
+      <Box
+        sx={{
+          border: 1,
+          borderColor: 'info.light',
+          borderRadius: '8px',
+          marginTop: 8,
+          marginBottom: 12,
+          overflow: 'hidden',
+        }}
+      >
+        <StyledTableContainer sx={{ overflow: 'auto' }}>
+          <Box sx={{ overflow: 'auto' }}>
+            <Table aria-label="eco credits table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>
+                    <Box
+                      sx={{
+                        minWidth: {
+                          xs: 'auto',
+                          sm: '11rem',
+                          lg: '13rem',
+                        },
+                      }}
+                    >
+                      Batch Denom
+                    </Box>
+                  </StyledTableCell>
+                  <StyledTableCell>Issuer</StyledTableCell>
+                  <StyledTableCell>Credit Class</StyledTableCell>
+                  <StyledTableCell>Amount Tradable</StyledTableCell>
+                  <StyledTableCell>Amount Retired</StyledTableCell>
+                  <StyledTableCell>Batch Start Date</StyledTableCell>
+                  <StyledTableCell>Batch End Date</StyledTableCell>
+                  <StyledTableCell>Project Location</StyledTableCell>
+                  <StyledTableCell
+                    sx={{
+                      textAlign: 'left',
+                      background: 'primary.main',
+                      position: 'sticky',
+                      right: 0,
+                    }}
+                  >
+                    <Box>
+                      <div className={styles.borderLeft} />
+                      Actions
+                    </Box>
+                  </StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {/* {stableSort(
+                    credits as any, // TODO type coercion shouldn't be necessary here
+                    getComparator(order, orderBy),
+                  ).map((row, i) => ( */}
+                {credits.map((row, i) => (
+                  <StyledTableRow key={i}>
+                    <StyledTableCell>{row.batch_denom}</StyledTableCell>
                     <StyledTableCell>
-                      <Box
-                        sx={{
-                          minWidth: {
-                            xs: 'auto',
-                            sm: '11rem',
-                            lg: '13rem',
-                          },
-                        }}
+                      <a
+                        href={getAccountUrl(row.issuer as string)}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        Batch Denom
-                      </Box>
+                        {truncate(row.issuer as string)}
+                      </a>
                     </StyledTableCell>
-                    <StyledTableCell>Issuer</StyledTableCell>
-                    <StyledTableCell>Credit Class</StyledTableCell>
-                    <StyledTableCell>Amount Tradable</StyledTableCell>
-                    <StyledTableCell>Amount Retired</StyledTableCell>
-                    <StyledTableCell>Batch Start Date</StyledTableCell>
-                    <StyledTableCell>Batch End Date</StyledTableCell>
-                    <StyledTableCell>Project Location</StyledTableCell>
+                    <StyledTableCell>{row.class_id}</StyledTableCell>
+                    <StyledTableCell>
+                      {formatNumber(row.tradable_amount)}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {formatNumber(row.retired_amount)}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <span className={styles.greyText}>
+                        {formatDate(row.start_date)}
+                      </span>
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      <span className={styles.greyText}>
+                        {formatDate(row.end_date)}
+                      </span>
+                    </StyledTableCell>
+                    <StyledTableCell>{row.project_location}</StyledTableCell>
                     <StyledTableCell
                       sx={{
-                        textAlign: 'left',
-                        background: 'primary.main',
+                        background: 'inherit',
                         position: 'sticky',
                         right: 0,
                       }}
                     >
-                      <Box>
-                        <div className={styles.borderLeft} />
-                        Actions
-                      </Box>
+                      <div className={styles.borderLeft} />
+                      <TableActionButtons
+                        buttons={[
+                          {
+                            label: 'sell',
+                            onClick: () => 'TODO sell credit',
+                          },
+                          {
+                            label: 'Transfer',
+                            onClick: () => 'TODO transfer credit',
+                          },
+                          {
+                            label: 'Retire',
+                            onClick: () => 'TODO retire credit',
+                          },
+                        ]}
+                      />
                     </StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {/* {stableSort(
-                    credits as any, // TODO type coercion shouldn't be necessary here
-                    getComparator(order, orderBy),
-                  ).map((row, i) => ( */}
-                  {credits.map((row, i) => (
-                    <StyledTableRow key={i}>
-                      <StyledTableCell>{row.batch_denom}</StyledTableCell>
-                      <StyledTableCell>
-                        <a
-                          href={getAccountUrl(row.issuer as string)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {truncateWalletAddress(row.issuer as string)}
-                        </a>
-                      </StyledTableCell>
-                      <StyledTableCell>{row.class_id}</StyledTableCell>
-                      <StyledTableCell>
-                        {formatNumber(row.tradable_amount)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {formatNumber(row.retired_amount)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <span className={styles.greyText}>
-                          {formatDate(row.start_date)}
-                        </span>
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        <span className={styles.greyText}>
-                          {formatDate(row.end_date)}
-                        </span>
-                      </StyledTableCell>
-                      <StyledTableCell>{row.project_location}</StyledTableCell>
-                      <StyledTableCell
-                        sx={{
-                          background: 'inherit',
-                          position: 'sticky',
-                          right: 0,
-                        }}
-                      >
-                        <div className={styles.borderLeft} />
-                        <TableActionButtons
-                          buttons={[
-                            {
-                              label: 'sell',
-                              onClick: () => 'TODO sell credit',
-                            },
-                            {
-                              label: 'Transfer',
-                              onClick: () => 'TODO transfer credit',
-                            },
-                            {
-                              label: 'Retire',
-                              onClick: () => 'TODO retire credit',
-                            },
-                          ]}
-                        />
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-            <Table>
-              <TableFooter sx={{ position: 'sticky', left: 0 }}>
-                <TableRow>
-                  <TablePagination {...paginationProps} />
-                </TableRow>
-              </TableFooter>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
             </Table>
-          </StyledTableContainer>
-        </Box>
-      </Section>
-    </Box>
+          </Box>
+          <Table>
+            <TableFooter sx={{ position: 'sticky', left: 0 }}>
+              <TableRow>
+                <TablePagination {...paginationProps} />
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </StyledTableContainer>
+      </Box>
+    </EcocreditsSection>
   );
 };
 

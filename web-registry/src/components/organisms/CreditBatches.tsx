@@ -32,6 +32,11 @@ import { getBatchesWithSupply } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
 import { formatDate } from 'web-components/lib/utils/format';
 
+interface CreditBatchProps {
+  creditClassId?: string;
+  titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
+}
+
 interface HeadCell {
   id: keyof BatchInfoWithSupply;
   label: string;
@@ -102,31 +107,42 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ROWS_PER_PAGE_OPTIONS = { options: [5, 10] };
 
-const CreditBatches: React.FC = () => {
+const CreditBatches: React.FC<CreditBatchProps> = ({
+  creditClassId,
+  titleAlign = 'center',
+}) => {
   const styles = useStyles();
   const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
   // const [order, setOrder] = useState<Order>('desc');
   // const [orderBy, setOrderBy] = useState<string>('start_date');
   const { TablePagination, setCountTotal, paginationParams, paginationProps } =
     useTablePagination(ROWS_PER_PAGE_OPTIONS);
-
-  const fetchData = (
-    paginationParams: URLSearchParams,
-    setCountTotal: (count: number) => void,
-  ): void => {
-    getBatchesWithSupply(paginationParams).then(sortableBatches => {
-      setBatches(sortableBatches.data);
-      if (sortableBatches?.pagination?.total) {
-        const _countTotal = parseInt(sortableBatches.pagination.total);
-        setCountTotal(_countTotal);
-      }
-    });
-  };
+  let columnsToShow = [...headCells];
 
   useEffect(() => {
+    const fetchData = (
+      params: URLSearchParams,
+      setCountTotal: (count: number) => void,
+    ): void => {
+      if (creditClassId) {
+        params.set('class_id', creditClassId);
+      }
+
+      getBatchesWithSupply(params)
+        .then(sortableBatches => {
+          setBatches(sortableBatches.data);
+          if (sortableBatches?.pagination?.total) {
+            const _countTotal = parseInt(sortableBatches.pagination.total);
+            setCountTotal(_countTotal);
+          }
+        })
+        // eslint-disable-next-line
+        .catch(console.error);
+    };
+
     if (!ledgerRestUri || !paginationParams) return;
     fetchData(paginationParams, setCountTotal);
-  }, [paginationParams, setCountTotal]);
+  }, [paginationParams, setCountTotal, creditClassId]);
 
   // const createSortHandler =
   //   (property: keyof BatchRowData) => (event: React.MouseEvent<unknown>) => {
@@ -142,11 +158,17 @@ const CreditBatches: React.FC = () => {
   //   setOrderBy(property);
   // };
 
+  // We hide the classId column if it creditClassId provided (redundant)
+  if (creditClassId) {
+    columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'class_id');
+  }
+
   return ledgerRestUri && batches.length > 0 ? (
     <Section
       classes={{ root: styles.section, title: styles.title }}
       title="Credit Batches"
       titleVariant="h2"
+      titleAlign={titleAlign}
     >
       <StyledTableContainer className={styles.tableBorder}>
         <Box
@@ -164,7 +186,7 @@ const CreditBatches: React.FC = () => {
           <Table aria-label="credit batch table" stickyHeader>
             <TableHead>
               <TableRow>
-                {headCells.map(headCell => (
+                {columnsToShow.map(headCell => (
                   <StyledTableCell
                     className={cx(headCell.wrap && styles.wrap)}
                     key={headCell.id}
@@ -209,7 +231,9 @@ const CreditBatches: React.FC = () => {
                       </a>
                     </StyledTableCell>
                     <StyledTableCell>{batch.batch_denom}</StyledTableCell>
-                    <StyledTableCell>{batch.class_id}</StyledTableCell>
+                    {!creditClassId && (
+                      <StyledTableCell>{batch.class_id}</StyledTableCell>
+                    )}
                     <StyledTableCell>
                       {formatNumber(batch.tradable_supply)}
                     </StyledTableCell>

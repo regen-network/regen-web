@@ -12,6 +12,7 @@ import type {
   QueryBalanceResponse,
   BatchInfoWithBalance,
   QueryBatchesResponse,
+  QueryClassInfoResponse,
 } from '../types/ledger/ecocredit';
 import type { PageResponse } from '../types/ledger/base';
 
@@ -210,4 +211,17 @@ export const getTxsByEvent = (msgType: string): Promise<AxiosResponse> => {
       return qs.stringify(params);
     },
   });
+};
+
+export const getClassInfo = async (
+  class_id: string,
+): Promise<QueryClassInfoResponse> => {
+  try {
+    const { data } = await axios.get(
+      `${ledgerRestUri}/regen/ecocredit/v1alpha1/classes/${class_id}`,
+    );
+    return data;
+  } catch (err) {
+    throw new Error(`Error fetching class info: ${err}`);
+  }
 };

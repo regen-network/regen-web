@@ -7,7 +7,7 @@ interface ArrowDownIconProps {
   color: string;
   className?: string;
   fontSize?: SvgIconProps['fontSize'];
-  direction?: 'next' | 'prev' | 'down' | 'up';
+  direction?: 'next' | 'prev' | 'down' | 'up' | 'downLeft' | 'upRight';
 }
 
 export interface StyleProps {
@@ -19,6 +19,8 @@ interface DirectionRotate {
   down: string;
   prev: string;
   next: string;
+  downLeft: string;
+  upRight: string;
 }
 
 export const directionRotate: DirectionRotate = {
@@ -26,6 +28,8 @@ export const directionRotate: DirectionRotate = {
   down: '0deg',
   prev: '90deg',
   next: '-90deg',
+  downLeft: '45deg',
+  upRight: '225deg',
 };
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({

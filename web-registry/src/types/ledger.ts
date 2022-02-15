@@ -11,6 +11,11 @@ export interface BatchRowData {
   project_location: string;
 }
 
+export interface BatchDataResponse {
+  data: BatchRowData[];
+  pagination?: BatchPagination;
+}
+
 export interface BatchPagination {
   next_key: string;
   total: string;

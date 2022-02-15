@@ -1,4 +1,5 @@
 export * from './BackgroundImgSection';
+export * from './EcocreditsSection';
 export * from './ReviewProcessInfo';
 export * from './PlanStepper';
 export * from './OverviewCards';
@@ -12,3 +13,4 @@ export * from './FeaturedSection';
 export * from './ImageGridSection';
 export * from './EditProjectPageFooter';
 export * from './ProjectPageFooter';
+export * from './Statistic';

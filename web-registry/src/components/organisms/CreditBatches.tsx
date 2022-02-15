@@ -5,6 +5,7 @@ import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
+import TableSortLabel from '@mui/material/TableSortLabel';
 import dayjs from 'dayjs';
 import cx from 'clsx';
 
@@ -12,21 +13,21 @@ import {
   StyledTableContainer,
   StyledTableCell,
   StyledTableRow,
-  // StyledTableSortLabel,
+  formatNumber,
 } from 'web-components/lib/components/table';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
-import {
-  getComparator,
-  stableSort,
-  Order,
-} from 'web-components/lib/components/table/sort';
+// import {
+//   getComparator,
+//   stableSort,
+//   Order,
+// } from 'web-components/lib/components/table/sort';
 import Section from 'web-components/lib/components/section';
-import { truncateWalletAddress } from '../../lib/wallet';
-import { ledgerRestUri } from '../../ledger';
-import { getBatchSupply, getBatches } from '../../lib/ecocredit';
-import { getAccountUrl } from '../../lib/block-explorer';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import { truncate } from '../../lib/wallet';
 import { BatchRowData } from '../../types/ledger';
-import { TableSortLabel } from '@mui/material';
+import { ledgerRestUri } from '../../ledger';
+import { getBatchesWithSupply } from '../../lib/ecocredit';
+import { getAccountUrl } from '../../lib/block-explorer';
 
 interface HeadCell {
   id: keyof BatchRowData;
@@ -62,12 +63,12 @@ const headCells: HeadCell[] = [
   { id: 'project_location', numeric: false, label: 'project location' },
 ];
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   section: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       paddingBottom: theme.spacing(22.25),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.5),
       paddingBottom: theme.spacing(17.5),
     },
@@ -96,14 +97,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ROWS_PER_PAGE_OPTIONS = [5, 10];
+const ROWS_PER_PAGE_OPTIONS = { options: [5, 10] };
 
 const CreditBatches: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
   const [batches, setBatches] = useState<any[]>([]);
-  const [order /* , setOrder */] = useState<Order>('desc');
-  const [orderBy /* , setOrderBy */] = useState<string>('start_date');
+  // const [order, setOrder] = useState<Order>('desc');
+  // const [orderBy, setOrderBy] = useState<string>('start_date');
   const { TablePagination, setCountTotal, paginationParams, paginationProps } =
     useTablePagination(ROWS_PER_PAGE_OPTIONS);
 
@@ -111,35 +112,12 @@ const CreditBatches: React.FC = () => {
     paginationParams: URLSearchParams,
     setCountTotal: (count: number) => void,
   ): void => {
-    const addSupplyDataToBatch = (
-      batches: BatchRowData[],
-    ): Promise<BatchRowData[]> => {
-      return Promise.all(
-        batches.map(batch => {
-          return getBatchSupply(batch.batch_denom)
-            .then(({ data }) => {
-              if (data) {
-                batch.tradable_supply = data.tradable_supply;
-                batch.retired_supply = data.retired_supply;
-              }
-              return batch;
-            })
-            .catch(err => {
-              return batch;
-            });
-        }),
-      );
-    };
-
-    getBatches(paginationParams).then(res => {
-      const creditBatches = res?.data?.batches;
-      addSupplyDataToBatch(creditBatches).then(sortableBatches => {
-        setBatches(sortableBatches);
-        const _countTotal = parseInt(res?.data?.pagination.total);
-        if (_countTotal) {
-          setCountTotal(_countTotal);
-        }
-      });
+    getBatchesWithSupply(paginationParams).then(sortableBatches => {
+      setBatches(sortableBatches.data);
+      if (sortableBatches?.pagination?.total) {
+        const _countTotal = parseInt(sortableBatches.pagination.total);
+        setCountTotal(_countTotal);
+      }
     });
   };
 
@@ -161,11 +139,6 @@ const CreditBatches: React.FC = () => {
   //   setOrder(isAsc ? 'desc' : 'asc');
   //   setOrderBy(property);
   // };
-
-  const formatNumber = (num: number | string): string => {
-    if (typeof num === 'string') num = parseFloat(num);
-    return num > 0 ? Math.floor(num).toLocaleString() : '-';
-  };
 
   const getPaddingBottom = (
     countTotal: number,
@@ -225,47 +198,44 @@ const CreditBatches: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody className={styles.tableBody}>
-              {stableSort(batches, getComparator(order, orderBy)).map(
-                (batch: any) => {
-                  return (
-                    <StyledTableRow
-                      className={styles.noWrap}
-                      tabIndex={-1}
-                      key={batch.batch_denom}
-                    >
-                      <StyledTableCell>
-                        <a
-                          href={getAccountUrl(batch.issuer)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {truncateWalletAddress(batch.issuer)}
-                        </a>
-                      </StyledTableCell>
-                      <StyledTableCell>{batch.batch_denom}</StyledTableCell>
-                      <StyledTableCell>{batch.class_id}</StyledTableCell>
-                      <StyledTableCell>
-                        {formatNumber(batch.tradable_supply)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {formatNumber(batch.retired_supply)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {formatNumber(batch.amount_cancelled)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {formatDate(batch.start_date)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {formatDate(batch.end_date)}
-                      </StyledTableCell>
-                      <StyledTableCell>
-                        {batch.project_location}
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  );
-                },
-              )}
+              {/* {stableSort(batches, getComparator(order, orderBy)).map( */}
+              {batches.map((batch: BatchRowData) => {
+                return (
+                  <StyledTableRow
+                    className={styles.noWrap}
+                    tabIndex={-1}
+                    key={batch.batch_denom}
+                  >
+                    <StyledTableCell>
+                      <a
+                        href={getAccountUrl(batch.issuer)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {truncate(batch.issuer)}
+                      </a>
+                    </StyledTableCell>
+                    <StyledTableCell>{batch.batch_denom}</StyledTableCell>
+                    <StyledTableCell>{batch.class_id}</StyledTableCell>
+                    <StyledTableCell>
+                      {formatNumber(batch.tradable_supply)}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {formatNumber(batch.retired_supply)}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {formatNumber(batch.amount_cancelled)}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {formatDate(batch.start_date as Date)}
+                    </StyledTableCell>
+                    <StyledTableCell>
+                      {formatDate(batch.end_date as Date)}
+                    </StyledTableCell>
+                    <StyledTableCell>{batch.project_location}</StyledTableCell>
+                  </StyledTableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </div>

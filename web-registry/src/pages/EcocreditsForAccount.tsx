@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
@@ -10,6 +10,10 @@ import { EcocreditsTable } from '../components/organisms';
 
 import type { TableCredits } from '../components/organisms';
 import Title from 'web-components/lib/components/title';
+import { truncate } from '../lib/wallet';
+import { getAccountUrl } from '../lib/block-explorer';
+import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import { useTheme } from '@mui/styles';
 
 export const EcocreditsForAccount: React.FC = () => {
   const { accountId } = useParams<{ accountId: string }>();
@@ -34,12 +38,38 @@ export const EcocreditsForAccount: React.FC = () => {
     fetchData();
   }, [accountId]);
 
+  const theme = useTheme();
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
-      <Section title="Ecocredits for" titleVariant="h3" titleAlign="left">
-        <Title sx={{ fontSize: 16, color: 'info.main' }}>
-          Account: {accountId}
-        </Title>
+      <Section title="Ecocredits" titleVariant="h3" titleAlign="left">
+        <Box sx={{ mt: 4 }}>
+          <Typography
+            sx={{
+              fontSize: 14,
+              display: 'inline',
+              color: 'black',
+              fontFamily: 'Muli',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+            }}
+          >
+            Account:
+          </Typography>
+          <Typography sx={{ ml: 2, display: 'inline', fontSize: 18 }}>
+            {truncate(accountId || '')}
+          </Typography>
+          <a
+            href={getAccountUrl(accountId || '')}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <ArrowDownIcon
+              direction="next"
+              sx={{ fontSize: 18, ml: 2 }}
+              color={theme.palette.secondary.main}
+            />
+          </a>
+        </Box>
         <Box
           sx={{
             border: 1,

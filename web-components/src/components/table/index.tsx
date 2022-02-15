@@ -38,19 +38,21 @@ const StyledTableCell = withStyles(theme => ({
     fontSize: theme.typography.pxToRem(11),
     color: theme.palette.info.main,
     background: theme.palette.primary.main,
-    borderBottom: `1px solid ${theme.palette.grey[100]}`,
+    borderBottom: `1px solid ${theme.palette.info.light}`,
     lineHeight: theme.spacing(4),
     verticalAlign: 'bottom',
     whiteSpace: 'nowrap',
-    '&:first-of-type': {
-      paddingLeft: theme.spacing(8.5),
-    },
     '& .MuiTableSortLabel-active': {
       color: theme.palette.info.main,
     },
     '& svg': {
       alignSelf: 'end',
       top: theme.spacing(-1),
+    },
+    [theme.breakpoints.up('sm')]: {
+      '&:first-of-type': {
+        paddingLeft: theme.spacing(8.5),
+      },
     },
   },
   body: {
@@ -71,8 +73,10 @@ const StyledTableCell = withStyles(theme => ({
         marginRight: theme.spacing(2),
       },
     },
-    '&:first-of-type': {
-      paddingLeft: theme.spacing(8.5),
+    [theme.breakpoints.up('sm')]: {
+      '&:first-of-type': {
+        paddingLeft: theme.spacing(8.5),
+      },
     },
   },
 }))(TableCell);
@@ -95,10 +99,17 @@ const getTablePaginationPadding = (
   return countTotal <= rowsPerPage ? 0 : rowsPerPage - countPage;
 };
 
+const formatNumber = (num: number | string | undefined): string => {
+  if (!num) return '-';
+  if (typeof num === 'string') num = parseFloat(num);
+  return num > 0 ? Math.floor(num).toLocaleString() : '-';
+};
+
 export {
   StyledTableContainer,
   StyledTableRow,
   StyledTableCell,
   StyledTableSortLabel,
   getTablePaginationPadding,
+  formatNumber,
 };

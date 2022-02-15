@@ -1,3 +1,4 @@
+export * from './Activity';
 export * from './Additionality';
 export * from './Admin';
 export * from './BasicInfo';

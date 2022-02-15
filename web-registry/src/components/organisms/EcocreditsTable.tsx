@@ -21,7 +21,7 @@ import {
 //   Order,
 //   stableSort,
 // } from 'web-components/lib/components/table/sort';
-import { truncateWalletAddress } from '../../lib/wallet';
+import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
 import type { BatchRowData, EcocreditAccountBalance } from '../../types/ledger';
 import { TablePagination } from 'web-components/lib/components/table/TablePagination';
@@ -149,7 +149,7 @@ export const EcocreditsTable: React.FC<{
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {truncateWalletAddress(row.issuer as string)}
+                    {truncate(row.issuer as string)}
                   </a>
                 </StyledTableCell>
                 <StyledTableCell>{row.class_id}</StyledTableCell>

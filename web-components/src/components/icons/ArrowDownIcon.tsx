@@ -2,12 +2,14 @@ import React from 'react';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
+import { SxProps } from '@mui/material';
 
 interface ArrowDownIconProps {
   color: string;
   className?: string;
   fontSize?: SvgIconProps['fontSize'];
-  direction?: 'next' | 'prev' | 'down' | 'up';
+  direction?: 'next' | 'prev' | 'down' | 'up' | 'downLeft' | 'upRight';
+  sx?: SxProps<Theme>;
 }
 
 export interface StyleProps {
@@ -19,6 +21,8 @@ interface DirectionRotate {
   down: string;
   prev: string;
   next: string;
+  downLeft: string;
+  upRight: string;
 }
 
 export const directionRotate: DirectionRotate = {
@@ -26,6 +30,8 @@ export const directionRotate: DirectionRotate = {
   down: '0deg',
   prev: '90deg',
   next: '-90deg',
+  downLeft: '45deg',
+  upRight: '225deg',
 };
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -39,11 +45,16 @@ export default function ArrowDownIcon({
   className,
   fontSize = 'inherit',
   direction = 'down',
+  sx,
 }: ArrowDownIconProps): JSX.Element {
   const rotate: string = directionRotate[direction];
   const classes = useStyles({ rotate });
   return (
-    <SvgIcon fontSize={fontSize} className={clsx(className, classes.icon)}>
+    <SvgIcon
+      fontSize={fontSize}
+      className={clsx(className, classes.icon)}
+      sx={sx}
+    >
       <svg
         width="24"
         height="24"

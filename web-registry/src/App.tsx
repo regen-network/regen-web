@@ -49,6 +49,7 @@ import {
   UserProfile,
   VerifyEmail,
   ProjectEdit,
+  Activity,
 } from './pages';
 
 import './App.css';
@@ -217,6 +218,7 @@ const App: React.FC = (): JSX.Element => {
             path="credit-classes/:creditClassId/*"
             element={<CreditClassDetails />}
           />
+          <Route path="stats/activity" element={<Activity />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />

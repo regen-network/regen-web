@@ -288,7 +288,7 @@ function ProjectTopSection({
     metadata?.['http://regen.network/size']?.[
       'http://qudt.org/1.1/schema/qudt#unit'
     ]?.['@value'];
-  const creditClass = data?.projectByHandle?.creditClassByCreditClassId;
+  const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
   const methodologyVersion =
     creditClass?.methodologyByMethodologyId?.methodologyVersionsById
@@ -338,36 +338,8 @@ function ProjectTopSection({
             <div className={classes.creditClassInfo}>
               {creditClass && creditClassVersion && (
                 <>
-                  {creditClass.standard &&
-                    creditClassVersion?.metadata?.[
-                      'http://regen.network/standard'
-                    ]?.['http://schema.org/name'] &&
-                    creditClassVersion?.metadata?.[
-                      'http://regen.network/standard'
-                    ]?.['http://schema.org/url']?.['@value'] && (
-                      <ProjectTopLink
-                        label="standard"
-                        name={
-                          creditClassVersion?.metadata?.[
-                            'http://regen.network/standard'
-                          ]?.['http://schema.org/name']
-                        }
-                        url={
-                          creditClassVersion?.metadata?.[
-                            'http://regen.network/standard'
-                          ]?.['http://schema.org/url']?.['@value']
-                        }
-                        creditClassId={
-                          creditClassVersion?.metadata?.[
-                            'http://regen.network/standard'
-                          ]?.['http://regen.network/creditClassId']
-                        }
-                      />
-                    )}
                   <ProjectTopLink
-                    label={`credit class${
-                      creditClass.standard ? ' (type)' : ''
-                    }`}
+                    label="credit class"
                     name={creditClassVersion.name}
                     url={
                       creditClassVersion.metadata?.['http://schema.org/url']?.[
@@ -380,6 +352,23 @@ function ProjectTopSection({
                       ]
                     }
                   />
+                  {metadata?.['http://regen.network/projectActivity']?.[
+                    'http://schema.org/name'
+                  ] && (
+                    <ProjectTopLink
+                      label="project type"
+                      name={
+                        metadata?.['http://regen.network/projectActivity']?.[
+                          'http://schema.org/name'
+                        ]
+                      }
+                      url={
+                        metadata?.['http://regen.network/projectActivity']?.[
+                          'http://schema.org/url'
+                        ]?.['@value']
+                      }
+                    />
+                  )}
                   <ProjectTopLink
                     label="offset generation method"
                     name={
@@ -532,23 +521,21 @@ function ProjectTopSection({
             projectDeveloper={getDisplayParty(
               'http://regen.network/projectDeveloper',
               metadata,
-              data?.projectByHandle?.partyByDeveloperId,
+              project?.partyByDeveloperId,
             )}
             landSteward={getDisplayParty(
               'http://regen.network/landSteward',
               metadata,
-              data?.projectByHandle?.partyByStewardId,
+              project?.partyByStewardId,
             )}
             landOwner={getDisplayParty(
               'http://regen.network/landOwner',
               metadata,
-              data?.projectByHandle?.partyByLandOwnerId,
+              project?.partyByLandOwnerId,
             )}
-            // TODO update graphql schema and change to use partyByIssuerId once registry-server PR merged
-            issuer={getParty(data?.projectByHandle?.partyByBrokerId)}
             // TODO if no off-chain data, use on-chain project.issuer
-            // issuer={getParty(data?.projectByHandle?.partyByIssuerId)}
-            reseller={getParty(data?.projectByHandle?.partyByResellerId)}
+            issuer={getParty(project?.partyByIssuerId)}
+            reseller={getParty(project?.partyByResellerId)}
             sdgs={sdgs}
           />
         </Grid>

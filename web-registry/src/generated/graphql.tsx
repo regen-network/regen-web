@@ -163,7 +163,7 @@ export type Address = Node & {
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectAddressIdAndOriginatorId: AddressPartiesByProjectAddressIdAndOriginatorIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectAddressIdAndBrokerId: AddressPartiesByProjectAddressIdAndBrokerIdManyToManyConnection;
+  partiesByProjectAddressIdAndIssuerId: AddressPartiesByProjectAddressIdAndIssuerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectAddressIdAndResellerId: AddressPartiesByProjectAddressIdAndResellerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Wallet`. */
@@ -313,7 +313,7 @@ export type AddressPartiesByProjectAddressIdAndOriginatorIdArgs = {
 };
 
 
-export type AddressPartiesByProjectAddressIdAndBrokerIdArgs = {
+export type AddressPartiesByProjectAddressIdAndIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -529,42 +529,6 @@ export type AddressInput = {
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
-export type AddressPartiesByProjectAddressIdAndBrokerIdManyToManyConnection = {
-  __typename?: 'AddressPartiesByProjectAddressIdAndBrokerIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<AddressPartiesByProjectAddressIdAndBrokerIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type AddressPartiesByProjectAddressIdAndBrokerIdManyToManyEdge = {
-  __typename?: 'AddressPartiesByProjectAddressIdAndBrokerIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByBrokerId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type AddressPartiesByProjectAddressIdAndBrokerIdManyToManyEdgeProjectsByBrokerIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
 export type AddressPartiesByProjectAddressIdAndDeveloperIdManyToManyConnection = {
   __typename?: 'AddressPartiesByProjectAddressIdAndDeveloperIdManyToManyConnection';
   /** A list of `Party` objects. */
@@ -591,6 +555,42 @@ export type AddressPartiesByProjectAddressIdAndDeveloperIdManyToManyEdge = {
 
 /** A `Party` edge in the connection, with data from `Project`. */
 export type AddressPartiesByProjectAddressIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type AddressPartiesByProjectAddressIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'AddressPartiesByProjectAddressIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<AddressPartiesByProjectAddressIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type AddressPartiesByProjectAddressIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'AddressPartiesByProjectAddressIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByIssuerId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type AddressPartiesByProjectAddressIdAndIssuerIdManyToManyEdgeProjectsByIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -1764,7 +1764,7 @@ export type CreateProjectPayload = {
   /** Reads a single `Party` that is related to this `Project`. */
   partyByOriginatorId?: Maybe<Party>;
   /** Reads a single `Party` that is related to this `Project`. */
-  partyByBrokerId?: Maybe<Party>;
+  partyByIssuerId?: Maybe<Party>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByResellerId?: Maybe<Party>;
   /** An edge for our `Project`. May be used by Relay 1. */
@@ -2130,7 +2130,7 @@ export type CreditClass = Node & {
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectCreditClassIdAndOriginatorId: CreditClassPartiesByProjectCreditClassIdAndOriginatorIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectCreditClassIdAndBrokerId: CreditClassPartiesByProjectCreditClassIdAndBrokerIdManyToManyConnection;
+  partiesByProjectCreditClassIdAndIssuerId: CreditClassPartiesByProjectCreditClassIdAndIssuerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectCreditClassIdAndResellerId: CreditClassPartiesByProjectCreditClassIdAndResellerIdManyToManyConnection;
 };
@@ -2312,7 +2312,7 @@ export type CreditClassPartiesByProjectCreditClassIdAndOriginatorIdArgs = {
 };
 
 
-export type CreditClassPartiesByProjectCreditClassIdAndBrokerIdArgs = {
+export type CreditClassPartiesByProjectCreditClassIdAndIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -2508,42 +2508,6 @@ export type CreditClassPartiesByCreditVintageCreditClassIdAndIssuerIdManyToManyE
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
-export type CreditClassPartiesByProjectCreditClassIdAndBrokerIdManyToManyConnection = {
-  __typename?: 'CreditClassPartiesByProjectCreditClassIdAndBrokerIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<CreditClassPartiesByProjectCreditClassIdAndBrokerIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type CreditClassPartiesByProjectCreditClassIdAndBrokerIdManyToManyEdge = {
-  __typename?: 'CreditClassPartiesByProjectCreditClassIdAndBrokerIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByBrokerId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type CreditClassPartiesByProjectCreditClassIdAndBrokerIdManyToManyEdgeProjectsByBrokerIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
 export type CreditClassPartiesByProjectCreditClassIdAndDeveloperIdManyToManyConnection = {
   __typename?: 'CreditClassPartiesByProjectCreditClassIdAndDeveloperIdManyToManyConnection';
   /** A list of `Party` objects. */
@@ -2570,6 +2534,42 @@ export type CreditClassPartiesByProjectCreditClassIdAndDeveloperIdManyToManyEdge
 
 /** A `Party` edge in the connection, with data from `Project`. */
 export type CreditClassPartiesByProjectCreditClassIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type CreditClassPartiesByProjectCreditClassIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'CreditClassPartiesByProjectCreditClassIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<CreditClassPartiesByProjectCreditClassIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type CreditClassPartiesByProjectCreditClassIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'CreditClassPartiesByProjectCreditClassIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByIssuerId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type CreditClassPartiesByProjectCreditClassIdAndIssuerIdManyToManyEdgeProjectsByIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -4787,7 +4787,7 @@ export type DeleteProjectPayload = {
   /** Reads a single `Party` that is related to this `Project`. */
   partyByOriginatorId?: Maybe<Party>;
   /** Reads a single `Party` that is related to this `Project`. */
-  partyByBrokerId?: Maybe<Party>;
+  partyByIssuerId?: Maybe<Party>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByResellerId?: Maybe<Party>;
   /** An edge for our `Project`. May be used by Relay 1. */
@@ -7592,7 +7592,7 @@ export type Party = Node & {
   /** Reads and enables pagination through a set of `Project`. */
   projectsByOriginatorId: ProjectsConnection;
   /** Reads and enables pagination through a set of `Project`. */
-  projectsByBrokerId: ProjectsConnection;
+  projectsByIssuerId: ProjectsConnection;
   /** Reads and enables pagination through a set of `Project`. */
   projectsByResellerId: ProjectsConnection;
   /** Reads and enables pagination through a set of `Transaction`. */
@@ -7628,7 +7628,7 @@ export type Party = Node & {
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectDeveloperIdAndOriginatorId: PartyPartiesByProjectDeveloperIdAndOriginatorIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectDeveloperIdAndBrokerId: PartyPartiesByProjectDeveloperIdAndBrokerIdManyToManyConnection;
+  partiesByProjectDeveloperIdAndIssuerId: PartyPartiesByProjectDeveloperIdAndIssuerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectDeveloperIdAndResellerId: PartyPartiesByProjectDeveloperIdAndResellerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
@@ -7646,7 +7646,7 @@ export type Party = Node & {
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectStewardIdAndOriginatorId: PartyPartiesByProjectStewardIdAndOriginatorIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectStewardIdAndBrokerId: PartyPartiesByProjectStewardIdAndBrokerIdManyToManyConnection;
+  partiesByProjectStewardIdAndIssuerId: PartyPartiesByProjectStewardIdAndIssuerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectStewardIdAndResellerId: PartyPartiesByProjectStewardIdAndResellerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
@@ -7664,7 +7664,7 @@ export type Party = Node & {
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectLandOwnerIdAndOriginatorId: PartyPartiesByProjectLandOwnerIdAndOriginatorIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectLandOwnerIdAndBrokerId: PartyPartiesByProjectLandOwnerIdAndBrokerIdManyToManyConnection;
+  partiesByProjectLandOwnerIdAndIssuerId: PartyPartiesByProjectLandOwnerIdAndIssuerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectLandOwnerIdAndResellerId: PartyPartiesByProjectLandOwnerIdAndResellerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
@@ -7682,7 +7682,7 @@ export type Party = Node & {
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectRegistryIdAndOriginatorId: PartyPartiesByProjectRegistryIdAndOriginatorIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectRegistryIdAndBrokerId: PartyPartiesByProjectRegistryIdAndBrokerIdManyToManyConnection;
+  partiesByProjectRegistryIdAndIssuerId: PartyPartiesByProjectRegistryIdAndIssuerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectRegistryIdAndResellerId: PartyPartiesByProjectRegistryIdAndResellerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
@@ -7700,27 +7700,27 @@ export type Party = Node & {
   /** Reads and enables pagination through a set of `User`. */
   usersByProjectOriginatorIdAndCreatorId: PartyUsersByProjectOriginatorIdAndCreatorIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectOriginatorIdAndBrokerId: PartyPartiesByProjectOriginatorIdAndBrokerIdManyToManyConnection;
+  partiesByProjectOriginatorIdAndIssuerId: PartyPartiesByProjectOriginatorIdAndIssuerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectOriginatorIdAndResellerId: PartyPartiesByProjectOriginatorIdAndResellerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectBrokerIdAndDeveloperId: PartyPartiesByProjectBrokerIdAndDeveloperIdManyToManyConnection;
+  partiesByProjectIssuerIdAndDeveloperId: PartyPartiesByProjectIssuerIdAndDeveloperIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectBrokerIdAndStewardId: PartyPartiesByProjectBrokerIdAndStewardIdManyToManyConnection;
+  partiesByProjectIssuerIdAndStewardId: PartyPartiesByProjectIssuerIdAndStewardIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectBrokerIdAndLandOwnerId: PartyPartiesByProjectBrokerIdAndLandOwnerIdManyToManyConnection;
+  partiesByProjectIssuerIdAndLandOwnerId: PartyPartiesByProjectIssuerIdAndLandOwnerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
-  creditClassesByProjectBrokerIdAndCreditClassId: PartyCreditClassesByProjectBrokerIdAndCreditClassIdManyToManyConnection;
+  creditClassesByProjectIssuerIdAndCreditClassId: PartyCreditClassesByProjectIssuerIdAndCreditClassIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectBrokerIdAndRegistryId: PartyPartiesByProjectBrokerIdAndRegistryIdManyToManyConnection;
+  partiesByProjectIssuerIdAndRegistryId: PartyPartiesByProjectIssuerIdAndRegistryIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Address`. */
-  addressesByProjectBrokerIdAndAddressId: PartyAddressesByProjectBrokerIdAndAddressIdManyToManyConnection;
+  addressesByProjectIssuerIdAndAddressId: PartyAddressesByProjectIssuerIdAndAddressIdManyToManyConnection;
   /** Reads and enables pagination through a set of `User`. */
-  usersByProjectBrokerIdAndCreatorId: PartyUsersByProjectBrokerIdAndCreatorIdManyToManyConnection;
+  usersByProjectIssuerIdAndCreatorId: PartyUsersByProjectIssuerIdAndCreatorIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectBrokerIdAndOriginatorId: PartyPartiesByProjectBrokerIdAndOriginatorIdManyToManyConnection;
+  partiesByProjectIssuerIdAndOriginatorId: PartyPartiesByProjectIssuerIdAndOriginatorIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectBrokerIdAndResellerId: PartyPartiesByProjectBrokerIdAndResellerIdManyToManyConnection;
+  partiesByProjectIssuerIdAndResellerId: PartyPartiesByProjectIssuerIdAndResellerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectResellerIdAndDeveloperId: PartyPartiesByProjectResellerIdAndDeveloperIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
@@ -7738,7 +7738,7 @@ export type Party = Node & {
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectResellerIdAndOriginatorId: PartyPartiesByProjectResellerIdAndOriginatorIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectResellerIdAndBrokerId: PartyPartiesByProjectResellerIdAndBrokerIdManyToManyConnection;
+  partiesByProjectResellerIdAndIssuerId: PartyPartiesByProjectResellerIdAndIssuerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Wallet`. */
   walletsByTransactionBrokerIdAndFromWalletId: PartyWalletsByTransactionBrokerIdAndFromWalletIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Wallet`. */
@@ -7880,7 +7880,7 @@ export type PartyProjectsByOriginatorIdArgs = {
 };
 
 
-export type PartyProjectsByBrokerIdArgs = {
+export type PartyProjectsByIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8078,7 +8078,7 @@ export type PartyPartiesByProjectDeveloperIdAndOriginatorIdArgs = {
 };
 
 
-export type PartyPartiesByProjectDeveloperIdAndBrokerIdArgs = {
+export type PartyPartiesByProjectDeveloperIdAndIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8177,7 +8177,7 @@ export type PartyPartiesByProjectStewardIdAndOriginatorIdArgs = {
 };
 
 
-export type PartyPartiesByProjectStewardIdAndBrokerIdArgs = {
+export type PartyPartiesByProjectStewardIdAndIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8276,7 +8276,7 @@ export type PartyPartiesByProjectLandOwnerIdAndOriginatorIdArgs = {
 };
 
 
-export type PartyPartiesByProjectLandOwnerIdAndBrokerIdArgs = {
+export type PartyPartiesByProjectLandOwnerIdAndIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8375,7 +8375,7 @@ export type PartyPartiesByProjectRegistryIdAndOriginatorIdArgs = {
 };
 
 
-export type PartyPartiesByProjectRegistryIdAndBrokerIdArgs = {
+export type PartyPartiesByProjectRegistryIdAndIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8474,7 +8474,7 @@ export type PartyUsersByProjectOriginatorIdAndCreatorIdArgs = {
 };
 
 
-export type PartyPartiesByProjectOriginatorIdAndBrokerIdArgs = {
+export type PartyPartiesByProjectOriginatorIdAndIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8496,7 +8496,7 @@ export type PartyPartiesByProjectOriginatorIdAndResellerIdArgs = {
 };
 
 
-export type PartyPartiesByProjectBrokerIdAndDeveloperIdArgs = {
+export type PartyPartiesByProjectIssuerIdAndDeveloperIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8507,7 +8507,7 @@ export type PartyPartiesByProjectBrokerIdAndDeveloperIdArgs = {
 };
 
 
-export type PartyPartiesByProjectBrokerIdAndStewardIdArgs = {
+export type PartyPartiesByProjectIssuerIdAndStewardIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8518,7 +8518,7 @@ export type PartyPartiesByProjectBrokerIdAndStewardIdArgs = {
 };
 
 
-export type PartyPartiesByProjectBrokerIdAndLandOwnerIdArgs = {
+export type PartyPartiesByProjectIssuerIdAndLandOwnerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8529,7 +8529,7 @@ export type PartyPartiesByProjectBrokerIdAndLandOwnerIdArgs = {
 };
 
 
-export type PartyCreditClassesByProjectBrokerIdAndCreditClassIdArgs = {
+export type PartyCreditClassesByProjectIssuerIdAndCreditClassIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8540,7 +8540,7 @@ export type PartyCreditClassesByProjectBrokerIdAndCreditClassIdArgs = {
 };
 
 
-export type PartyPartiesByProjectBrokerIdAndRegistryIdArgs = {
+export type PartyPartiesByProjectIssuerIdAndRegistryIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8551,7 +8551,7 @@ export type PartyPartiesByProjectBrokerIdAndRegistryIdArgs = {
 };
 
 
-export type PartyAddressesByProjectBrokerIdAndAddressIdArgs = {
+export type PartyAddressesByProjectIssuerIdAndAddressIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8562,7 +8562,7 @@ export type PartyAddressesByProjectBrokerIdAndAddressIdArgs = {
 };
 
 
-export type PartyUsersByProjectBrokerIdAndCreatorIdArgs = {
+export type PartyUsersByProjectIssuerIdAndCreatorIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8573,7 +8573,7 @@ export type PartyUsersByProjectBrokerIdAndCreatorIdArgs = {
 };
 
 
-export type PartyPartiesByProjectBrokerIdAndOriginatorIdArgs = {
+export type PartyPartiesByProjectIssuerIdAndOriginatorIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8584,7 +8584,7 @@ export type PartyPartiesByProjectBrokerIdAndOriginatorIdArgs = {
 };
 
 
-export type PartyPartiesByProjectBrokerIdAndResellerIdArgs = {
+export type PartyPartiesByProjectIssuerIdAndResellerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8683,7 +8683,7 @@ export type PartyPartiesByProjectResellerIdAndOriginatorIdArgs = {
 };
 
 
-export type PartyPartiesByProjectResellerIdAndBrokerIdArgs = {
+export type PartyPartiesByProjectResellerIdAndIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -8848,42 +8848,6 @@ export type PartyUsersByProjectBrokerAuthorizedByPartyIdAndSignerIdArgs = {
 };
 
 /** A connection to a list of `Address` values, with data from `Project`. */
-export type PartyAddressesByProjectBrokerIdAndAddressIdManyToManyConnection = {
-  __typename?: 'PartyAddressesByProjectBrokerIdAndAddressIdManyToManyConnection';
-  /** A list of `Address` objects. */
-  nodes: Array<Maybe<Address>>;
-  /** A list of edges which contains the `Address`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyAddressesByProjectBrokerIdAndAddressIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Address` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Address` edge in the connection, with data from `Project`. */
-export type PartyAddressesByProjectBrokerIdAndAddressIdManyToManyEdge = {
-  __typename?: 'PartyAddressesByProjectBrokerIdAndAddressIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Address` at the end of the edge. */
-  node?: Maybe<Address>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByAddressId: ProjectsConnection;
-};
-
-
-/** A `Address` edge in the connection, with data from `Project`. */
-export type PartyAddressesByProjectBrokerIdAndAddressIdManyToManyEdgeProjectsByAddressIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Address` values, with data from `Project`. */
 export type PartyAddressesByProjectDeveloperIdAndAddressIdManyToManyConnection = {
   __typename?: 'PartyAddressesByProjectDeveloperIdAndAddressIdManyToManyConnection';
   /** A list of `Address` objects. */
@@ -8910,6 +8874,42 @@ export type PartyAddressesByProjectDeveloperIdAndAddressIdManyToManyEdge = {
 
 /** A `Address` edge in the connection, with data from `Project`. */
 export type PartyAddressesByProjectDeveloperIdAndAddressIdManyToManyEdgeProjectsByAddressIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Address` values, with data from `Project`. */
+export type PartyAddressesByProjectIssuerIdAndAddressIdManyToManyConnection = {
+  __typename?: 'PartyAddressesByProjectIssuerIdAndAddressIdManyToManyConnection';
+  /** A list of `Address` objects. */
+  nodes: Array<Maybe<Address>>;
+  /** A list of edges which contains the `Address`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyAddressesByProjectIssuerIdAndAddressIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Address` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Address` edge in the connection, with data from `Project`. */
+export type PartyAddressesByProjectIssuerIdAndAddressIdManyToManyEdge = {
+  __typename?: 'PartyAddressesByProjectIssuerIdAndAddressIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Address` at the end of the edge. */
+  node?: Maybe<Address>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByAddressId: ProjectsConnection;
+};
+
+
+/** A `Address` edge in the connection, with data from `Project`. */
+export type PartyAddressesByProjectIssuerIdAndAddressIdManyToManyEdgeProjectsByAddressIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -9196,42 +9196,6 @@ export type PartyCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyE
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
-export type PartyCreditClassesByProjectBrokerIdAndCreditClassIdManyToManyConnection = {
-  __typename?: 'PartyCreditClassesByProjectBrokerIdAndCreditClassIdManyToManyConnection';
-  /** A list of `CreditClass` objects. */
-  nodes: Array<Maybe<CreditClass>>;
-  /** A list of edges which contains the `CreditClass`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyCreditClassesByProjectBrokerIdAndCreditClassIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `CreditClass` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `CreditClass` edge in the connection, with data from `Project`. */
-export type PartyCreditClassesByProjectBrokerIdAndCreditClassIdManyToManyEdge = {
-  __typename?: 'PartyCreditClassesByProjectBrokerIdAndCreditClassIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `CreditClass` at the end of the edge. */
-  node?: Maybe<CreditClass>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByCreditClassId: ProjectsConnection;
-};
-
-
-/** A `CreditClass` edge in the connection, with data from `Project`. */
-export type PartyCreditClassesByProjectBrokerIdAndCreditClassIdManyToManyEdgeProjectsByCreditClassIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `CreditClass` values, with data from `Project`. */
 export type PartyCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyConnection = {
   __typename?: 'PartyCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyConnection';
   /** A list of `CreditClass` objects. */
@@ -9258,6 +9222,42 @@ export type PartyCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyEdge
 
 /** A `CreditClass` edge in the connection, with data from `Project`. */
 export type PartyCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyEdgeProjectsByCreditClassIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `CreditClass` values, with data from `Project`. */
+export type PartyCreditClassesByProjectIssuerIdAndCreditClassIdManyToManyConnection = {
+  __typename?: 'PartyCreditClassesByProjectIssuerIdAndCreditClassIdManyToManyConnection';
+  /** A list of `CreditClass` objects. */
+  nodes: Array<Maybe<CreditClass>>;
+  /** A list of edges which contains the `CreditClass`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyCreditClassesByProjectIssuerIdAndCreditClassIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `CreditClass` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `CreditClass` edge in the connection, with data from `Project`. */
+export type PartyCreditClassesByProjectIssuerIdAndCreditClassIdManyToManyEdge = {
+  __typename?: 'PartyCreditClassesByProjectIssuerIdAndCreditClassIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `CreditClass` at the end of the edge. */
+  node?: Maybe<CreditClass>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByCreditClassId: ProjectsConnection;
+};
+
+
+/** A `CreditClass` edge in the connection, with data from `Project`. */
+export type PartyCreditClassesByProjectIssuerIdAndCreditClassIdManyToManyEdgeProjectsByCreditClassIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -9642,12 +9642,12 @@ export type PartyPartiesByProjectBrokerBrokerIdAndAuthorizedByPartyIdManyToManyE
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndDeveloperIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndDeveloperIdManyToManyConnection';
+export type PartyPartiesByProjectDeveloperIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectDeveloperIdAndIssuerIdManyToManyConnection';
   /** A list of `Party` objects. */
   nodes: Array<Maybe<Party>>;
   /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectBrokerIdAndDeveloperIdManyToManyEdge>;
+  edges: Array<PartyPartiesByProjectDeveloperIdAndIssuerIdManyToManyEdge>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The count of *all* `Party` you could get from the connection. */
@@ -9655,235 +9655,19 @@ export type PartyPartiesByProjectBrokerIdAndDeveloperIdManyToManyConnection = {
 };
 
 /** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndDeveloperIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndDeveloperIdManyToManyEdge';
+export type PartyPartiesByProjectDeveloperIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectDeveloperIdAndIssuerIdManyToManyEdge';
   /** A cursor for use in pagination. */
   cursor?: Maybe<Scalars['Cursor']>;
   /** The `Party` at the end of the edge. */
   node?: Maybe<Party>;
   /** Reads and enables pagination through a set of `Project`. */
-  projectsByDeveloperId: ProjectsConnection;
+  projectsByIssuerId: ProjectsConnection;
 };
 
 
 /** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndLandOwnerIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndLandOwnerIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectBrokerIdAndLandOwnerIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndLandOwnerIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndLandOwnerIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByLandOwnerId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndLandOwnerIdManyToManyEdgeProjectsByLandOwnerIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndOriginatorIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndOriginatorIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectBrokerIdAndOriginatorIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndOriginatorIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndOriginatorIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByOriginatorId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndOriginatorIdManyToManyEdgeProjectsByOriginatorIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndRegistryIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndRegistryIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectBrokerIdAndRegistryIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndRegistryIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndRegistryIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByRegistryId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndRegistryIdManyToManyEdgeProjectsByRegistryIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndResellerIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndResellerIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectBrokerIdAndResellerIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndResellerIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndResellerIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByResellerId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndResellerIdManyToManyEdgeProjectsByResellerIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndStewardIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndStewardIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectBrokerIdAndStewardIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndStewardIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectBrokerIdAndStewardIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByStewardId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectBrokerIdAndStewardIdManyToManyEdgeProjectsByStewardIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectDeveloperIdAndBrokerIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectDeveloperIdAndBrokerIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectDeveloperIdAndBrokerIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectDeveloperIdAndBrokerIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectDeveloperIdAndBrokerIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByBrokerId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectDeveloperIdAndBrokerIdManyToManyEdgeProjectsByBrokerIdArgs = {
+export type PartyPartiesByProjectDeveloperIdAndIssuerIdManyToManyEdgeProjectsByIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -10074,12 +9858,12 @@ export type PartyPartiesByProjectDeveloperIdAndStewardIdManyToManyEdgeProjectsBy
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectLandOwnerIdAndBrokerIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectLandOwnerIdAndBrokerIdManyToManyConnection';
+export type PartyPartiesByProjectIssuerIdAndDeveloperIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndDeveloperIdManyToManyConnection';
   /** A list of `Party` objects. */
   nodes: Array<Maybe<Party>>;
   /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectLandOwnerIdAndBrokerIdManyToManyEdge>;
+  edges: Array<PartyPartiesByProjectIssuerIdAndDeveloperIdManyToManyEdge>;
   /** Information to aid in pagination. */
   pageInfo: PageInfo;
   /** The count of *all* `Party` you could get from the connection. */
@@ -10087,19 +9871,199 @@ export type PartyPartiesByProjectLandOwnerIdAndBrokerIdManyToManyConnection = {
 };
 
 /** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectLandOwnerIdAndBrokerIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectLandOwnerIdAndBrokerIdManyToManyEdge';
+export type PartyPartiesByProjectIssuerIdAndDeveloperIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndDeveloperIdManyToManyEdge';
   /** A cursor for use in pagination. */
   cursor?: Maybe<Scalars['Cursor']>;
   /** The `Party` at the end of the edge. */
   node?: Maybe<Party>;
   /** Reads and enables pagination through a set of `Project`. */
-  projectsByBrokerId: ProjectsConnection;
+  projectsByDeveloperId: ProjectsConnection;
 };
 
 
 /** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectLandOwnerIdAndBrokerIdManyToManyEdgeProjectsByBrokerIdArgs = {
+export type PartyPartiesByProjectIssuerIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndLandOwnerIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndLandOwnerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectIssuerIdAndLandOwnerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndLandOwnerIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndLandOwnerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByLandOwnerId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndLandOwnerIdManyToManyEdgeProjectsByLandOwnerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndOriginatorIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndOriginatorIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectIssuerIdAndOriginatorIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndOriginatorIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndOriginatorIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByOriginatorId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndOriginatorIdManyToManyEdgeProjectsByOriginatorIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndRegistryIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndRegistryIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectIssuerIdAndRegistryIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndRegistryIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndRegistryIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByRegistryId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndRegistryIdManyToManyEdgeProjectsByRegistryIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndResellerIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndResellerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectIssuerIdAndResellerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndResellerIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndResellerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByResellerId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndResellerIdManyToManyEdgeProjectsByResellerIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndStewardIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndStewardIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectIssuerIdAndStewardIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndStewardIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectIssuerIdAndStewardIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByStewardId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectIssuerIdAndStewardIdManyToManyEdgeProjectsByStewardIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -10136,6 +10100,42 @@ export type PartyPartiesByProjectLandOwnerIdAndDeveloperIdManyToManyEdge = {
 
 /** A `Party` edge in the connection, with data from `Project`. */
 export type PartyPartiesByProjectLandOwnerIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectLandOwnerIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectLandOwnerIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectLandOwnerIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectLandOwnerIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectLandOwnerIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByIssuerId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectLandOwnerIdAndIssuerIdManyToManyEdgeProjectsByIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -10290,42 +10290,6 @@ export type PartyPartiesByProjectLandOwnerIdAndStewardIdManyToManyEdgeProjectsBy
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectOriginatorIdAndBrokerIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectOriginatorIdAndBrokerIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectOriginatorIdAndBrokerIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectOriginatorIdAndBrokerIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectOriginatorIdAndBrokerIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByBrokerId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectOriginatorIdAndBrokerIdManyToManyEdgeProjectsByBrokerIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
 export type PartyPartiesByProjectOriginatorIdAndDeveloperIdManyToManyConnection = {
   __typename?: 'PartyPartiesByProjectOriginatorIdAndDeveloperIdManyToManyConnection';
   /** A list of `Party` objects. */
@@ -10352,6 +10316,42 @@ export type PartyPartiesByProjectOriginatorIdAndDeveloperIdManyToManyEdge = {
 
 /** A `Party` edge in the connection, with data from `Project`. */
 export type PartyPartiesByProjectOriginatorIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectOriginatorIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectOriginatorIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectOriginatorIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectOriginatorIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectOriginatorIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByIssuerId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectOriginatorIdAndIssuerIdManyToManyEdgeProjectsByIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -10506,42 +10506,6 @@ export type PartyPartiesByProjectOriginatorIdAndStewardIdManyToManyEdgeProjectsB
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectRegistryIdAndBrokerIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectRegistryIdAndBrokerIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectRegistryIdAndBrokerIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectRegistryIdAndBrokerIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectRegistryIdAndBrokerIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByBrokerId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectRegistryIdAndBrokerIdManyToManyEdgeProjectsByBrokerIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
 export type PartyPartiesByProjectRegistryIdAndDeveloperIdManyToManyConnection = {
   __typename?: 'PartyPartiesByProjectRegistryIdAndDeveloperIdManyToManyConnection';
   /** A list of `Party` objects. */
@@ -10568,6 +10532,42 @@ export type PartyPartiesByProjectRegistryIdAndDeveloperIdManyToManyEdge = {
 
 /** A `Party` edge in the connection, with data from `Project`. */
 export type PartyPartiesByProjectRegistryIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectRegistryIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectRegistryIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectRegistryIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectRegistryIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectRegistryIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByIssuerId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectRegistryIdAndIssuerIdManyToManyEdgeProjectsByIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -10722,42 +10722,6 @@ export type PartyPartiesByProjectRegistryIdAndStewardIdManyToManyEdgeProjectsByS
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectResellerIdAndBrokerIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectResellerIdAndBrokerIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectResellerIdAndBrokerIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectResellerIdAndBrokerIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectResellerIdAndBrokerIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByBrokerId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectResellerIdAndBrokerIdManyToManyEdgeProjectsByBrokerIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
 export type PartyPartiesByProjectResellerIdAndDeveloperIdManyToManyConnection = {
   __typename?: 'PartyPartiesByProjectResellerIdAndDeveloperIdManyToManyConnection';
   /** A list of `Party` objects. */
@@ -10784,6 +10748,42 @@ export type PartyPartiesByProjectResellerIdAndDeveloperIdManyToManyEdge = {
 
 /** A `Party` edge in the connection, with data from `Project`. */
 export type PartyPartiesByProjectResellerIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectResellerIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectResellerIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectResellerIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectResellerIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectResellerIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByIssuerId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectResellerIdAndIssuerIdManyToManyEdgeProjectsByIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -10938,42 +10938,6 @@ export type PartyPartiesByProjectResellerIdAndStewardIdManyToManyEdgeProjectsByS
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
-export type PartyPartiesByProjectStewardIdAndBrokerIdManyToManyConnection = {
-  __typename?: 'PartyPartiesByProjectStewardIdAndBrokerIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyPartiesByProjectStewardIdAndBrokerIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectStewardIdAndBrokerIdManyToManyEdge = {
-  __typename?: 'PartyPartiesByProjectStewardIdAndBrokerIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByBrokerId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type PartyPartiesByProjectStewardIdAndBrokerIdManyToManyEdgeProjectsByBrokerIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
 export type PartyPartiesByProjectStewardIdAndDeveloperIdManyToManyConnection = {
   __typename?: 'PartyPartiesByProjectStewardIdAndDeveloperIdManyToManyConnection';
   /** A list of `Party` objects. */
@@ -11000,6 +10964,42 @@ export type PartyPartiesByProjectStewardIdAndDeveloperIdManyToManyEdge = {
 
 /** A `Party` edge in the connection, with data from `Project`. */
 export type PartyPartiesByProjectStewardIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type PartyPartiesByProjectStewardIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'PartyPartiesByProjectStewardIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyPartiesByProjectStewardIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectStewardIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'PartyPartiesByProjectStewardIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByIssuerId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type PartyPartiesByProjectStewardIdAndIssuerIdManyToManyEdgeProjectsByIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -11389,42 +11389,6 @@ export type PartyUsersByProjectBrokerBrokerIdAndSignerIdManyToManyEdgeProjectBro
 };
 
 /** A connection to a list of `User` values, with data from `Project`. */
-export type PartyUsersByProjectBrokerIdAndCreatorIdManyToManyConnection = {
-  __typename?: 'PartyUsersByProjectBrokerIdAndCreatorIdManyToManyConnection';
-  /** A list of `User` objects. */
-  nodes: Array<Maybe<User>>;
-  /** A list of edges which contains the `User`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<PartyUsersByProjectBrokerIdAndCreatorIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `User` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `User` edge in the connection, with data from `Project`. */
-export type PartyUsersByProjectBrokerIdAndCreatorIdManyToManyEdge = {
-  __typename?: 'PartyUsersByProjectBrokerIdAndCreatorIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `User` at the end of the edge. */
-  node?: Maybe<User>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByCreatorId: ProjectsConnection;
-};
-
-
-/** A `User` edge in the connection, with data from `Project`. */
-export type PartyUsersByProjectBrokerIdAndCreatorIdManyToManyEdgeProjectsByCreatorIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `User` values, with data from `Project`. */
 export type PartyUsersByProjectDeveloperIdAndCreatorIdManyToManyConnection = {
   __typename?: 'PartyUsersByProjectDeveloperIdAndCreatorIdManyToManyConnection';
   /** A list of `User` objects. */
@@ -11451,6 +11415,42 @@ export type PartyUsersByProjectDeveloperIdAndCreatorIdManyToManyEdge = {
 
 /** A `User` edge in the connection, with data from `Project`. */
 export type PartyUsersByProjectDeveloperIdAndCreatorIdManyToManyEdgeProjectsByCreatorIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `User` values, with data from `Project`. */
+export type PartyUsersByProjectIssuerIdAndCreatorIdManyToManyConnection = {
+  __typename?: 'PartyUsersByProjectIssuerIdAndCreatorIdManyToManyConnection';
+  /** A list of `User` objects. */
+  nodes: Array<Maybe<User>>;
+  /** A list of edges which contains the `User`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<PartyUsersByProjectIssuerIdAndCreatorIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `User` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `User` edge in the connection, with data from `Project`. */
+export type PartyUsersByProjectIssuerIdAndCreatorIdManyToManyEdge = {
+  __typename?: 'PartyUsersByProjectIssuerIdAndCreatorIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `User` at the end of the edge. */
+  node?: Maybe<User>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByCreatorId: ProjectsConnection;
+};
+
+
+/** A `User` edge in the connection, with data from `Project`. */
+export type PartyUsersByProjectIssuerIdAndCreatorIdManyToManyEdgeProjectsByCreatorIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -11881,7 +11881,7 @@ export type Project = Node & {
   type?: Maybe<Scalars['String']>;
   creatorId?: Maybe<Scalars['UUID']>;
   originatorId?: Maybe<Scalars['UUID']>;
-  brokerId?: Maybe<Scalars['UUID']>;
+  issuerId?: Maybe<Scalars['UUID']>;
   resellerId?: Maybe<Scalars['UUID']>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByDeveloperId?: Maybe<Party>;
@@ -11900,7 +11900,7 @@ export type Project = Node & {
   /** Reads a single `Party` that is related to this `Project`. */
   partyByOriginatorId?: Maybe<Party>;
   /** Reads a single `Party` that is related to this `Project`. */
-  partyByBrokerId?: Maybe<Party>;
+  partyByIssuerId?: Maybe<Party>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByResellerId?: Maybe<Party>;
   /** Reads and enables pagination through a set of `CreditVintage`. */
@@ -12223,8 +12223,8 @@ export type ProjectCondition = {
   creatorId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `originatorId` field. */
   originatorId?: Maybe<Scalars['UUID']>;
-  /** Checks for equality with the object’s `brokerId` field. */
-  brokerId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `issuerId` field. */
+  issuerId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `resellerId` field. */
   resellerId?: Maybe<Scalars['UUID']>;
 };
@@ -12324,7 +12324,7 @@ export type ProjectInput = {
   type?: Maybe<Scalars['String']>;
   creatorId?: Maybe<Scalars['UUID']>;
   originatorId?: Maybe<Scalars['UUID']>;
-  brokerId?: Maybe<Scalars['UUID']>;
+  issuerId?: Maybe<Scalars['UUID']>;
   resellerId?: Maybe<Scalars['UUID']>;
 };
 
@@ -12459,7 +12459,7 @@ export type ProjectPatch = {
   type?: Maybe<Scalars['String']>;
   creatorId?: Maybe<Scalars['UUID']>;
   originatorId?: Maybe<Scalars['UUID']>;
-  brokerId?: Maybe<Scalars['UUID']>;
+  issuerId?: Maybe<Scalars['UUID']>;
   resellerId?: Maybe<Scalars['UUID']>;
 };
 
@@ -12644,8 +12644,8 @@ export enum ProjectsOrderBy {
   CreatorIdDesc = 'CREATOR_ID_DESC',
   OriginatorIdAsc = 'ORIGINATOR_ID_ASC',
   OriginatorIdDesc = 'ORIGINATOR_ID_DESC',
-  BrokerIdAsc = 'BROKER_ID_ASC',
-  BrokerIdDesc = 'BROKER_ID_DESC',
+  IssuerIdAsc = 'ISSUER_ID_ASC',
+  IssuerIdDesc = 'ISSUER_ID_DESC',
   ResellerIdAsc = 'RESELLER_ID_ASC',
   ResellerIdDesc = 'RESELLER_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
@@ -15338,7 +15338,7 @@ export type UpdateProjectPayload = {
   /** Reads a single `Party` that is related to this `Project`. */
   partyByOriginatorId?: Maybe<Party>;
   /** Reads a single `Party` that is related to this `Project`. */
-  partyByBrokerId?: Maybe<Party>;
+  partyByIssuerId?: Maybe<Party>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByResellerId?: Maybe<Party>;
   /** An edge for our `Project`. May be used by Relay 1. */
@@ -15753,7 +15753,7 @@ export type User = Node & {
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectCreatorIdAndOriginatorId: UserPartiesByProjectCreatorIdAndOriginatorIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
-  partiesByProjectCreatorIdAndBrokerId: UserPartiesByProjectCreatorIdAndBrokerIdManyToManyConnection;
+  partiesByProjectCreatorIdAndIssuerId: UserPartiesByProjectCreatorIdAndIssuerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectCreatorIdAndResellerId: UserPartiesByProjectCreatorIdAndResellerIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Wallet`. */
@@ -15905,7 +15905,7 @@ export type UserPartiesByProjectCreatorIdAndOriginatorIdArgs = {
 };
 
 
-export type UserPartiesByProjectCreatorIdAndBrokerIdArgs = {
+export type UserPartiesByProjectCreatorIdAndIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -16290,42 +16290,6 @@ export type UserPartiesByProjectBrokerSignerIdAndBrokerIdManyToManyEdgeProjectBr
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
-export type UserPartiesByProjectCreatorIdAndBrokerIdManyToManyConnection = {
-  __typename?: 'UserPartiesByProjectCreatorIdAndBrokerIdManyToManyConnection';
-  /** A list of `Party` objects. */
-  nodes: Array<Maybe<Party>>;
-  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
-  edges: Array<UserPartiesByProjectCreatorIdAndBrokerIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Party` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type UserPartiesByProjectCreatorIdAndBrokerIdManyToManyEdge = {
-  __typename?: 'UserPartiesByProjectCreatorIdAndBrokerIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Party` at the end of the edge. */
-  node?: Maybe<Party>;
-  /** Reads and enables pagination through a set of `Project`. */
-  projectsByBrokerId: ProjectsConnection;
-};
-
-
-/** A `Party` edge in the connection, with data from `Project`. */
-export type UserPartiesByProjectCreatorIdAndBrokerIdManyToManyEdgeProjectsByBrokerIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<ProjectsOrderBy>>;
-  condition?: Maybe<ProjectCondition>;
-};
-
-/** A connection to a list of `Party` values, with data from `Project`. */
 export type UserPartiesByProjectCreatorIdAndDeveloperIdManyToManyConnection = {
   __typename?: 'UserPartiesByProjectCreatorIdAndDeveloperIdManyToManyConnection';
   /** A list of `Party` objects. */
@@ -16352,6 +16316,42 @@ export type UserPartiesByProjectCreatorIdAndDeveloperIdManyToManyEdge = {
 
 /** A `Party` edge in the connection, with data from `Project`. */
 export type UserPartiesByProjectCreatorIdAndDeveloperIdManyToManyEdgeProjectsByDeveloperIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<ProjectsOrderBy>>;
+  condition?: Maybe<ProjectCondition>;
+};
+
+/** A connection to a list of `Party` values, with data from `Project`. */
+export type UserPartiesByProjectCreatorIdAndIssuerIdManyToManyConnection = {
+  __typename?: 'UserPartiesByProjectCreatorIdAndIssuerIdManyToManyConnection';
+  /** A list of `Party` objects. */
+  nodes: Array<Maybe<Party>>;
+  /** A list of edges which contains the `Party`, info from the `Project`, and the cursor to aid in pagination. */
+  edges: Array<UserPartiesByProjectCreatorIdAndIssuerIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Party` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type UserPartiesByProjectCreatorIdAndIssuerIdManyToManyEdge = {
+  __typename?: 'UserPartiesByProjectCreatorIdAndIssuerIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Party` at the end of the edge. */
+  node?: Maybe<Party>;
+  /** Reads and enables pagination through a set of `Project`. */
+  projectsByIssuerId: ProjectsConnection;
+};
+
+
+/** A `Party` edge in the connection, with data from `Project`. */
+export type UserPartiesByProjectCreatorIdAndIssuerIdManyToManyEdgeProjectsByIssuerIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
@@ -18570,7 +18570,7 @@ export type ProjectByHandleQuery = (
     )>, partyByLandOwnerId?: Maybe<(
       { __typename?: 'Party' }
       & PartyFieldsFragment
-    )>, partyByBrokerId?: Maybe<(
+    )>, partyByIssuerId?: Maybe<(
       { __typename?: 'Party' }
       & PartyFieldsFragment
     )>, partyByResellerId?: Maybe<(
@@ -19845,7 +19845,7 @@ export const ProjectByHandleDocument = gql`
     partyByLandOwnerId {
       ...partyFields
     }
-    partyByBrokerId {
+    partyByIssuerId {
       ...partyFields
     }
     partyByResellerId {

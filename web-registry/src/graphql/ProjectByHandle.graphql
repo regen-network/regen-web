@@ -110,7 +110,7 @@ query ProjectByHandle($handle: String!) {
     partyByLandOwnerId {
       ...partyFields
     }
-    partyByBrokerId {
+    partyByIssuerId {
       ...partyFields
     }
     partyByResellerId {

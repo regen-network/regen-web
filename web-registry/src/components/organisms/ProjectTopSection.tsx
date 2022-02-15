@@ -356,7 +356,7 @@ function ProjectTopSection({
                     'http://schema.org/name'
                   ] && (
                     <ProjectTopLink
-                      label="project type"
+                      label="project activity"
                       name={
                         metadata?.['http://regen.network/projectActivity']?.[
                           'http://schema.org/name'

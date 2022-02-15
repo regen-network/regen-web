@@ -9,7 +9,6 @@ import { ledgerRestUri } from '../ledger';
 import { EcocreditsTable } from '../components/organisms';
 
 import type { TableCredits } from '../components/organisms';
-import Title from 'web-components/lib/components/title';
 import { truncate } from '../lib/wallet';
 import { getAccountUrl } from '../lib/block-explorer';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';

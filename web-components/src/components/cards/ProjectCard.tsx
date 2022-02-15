@@ -25,7 +25,6 @@ interface PurchaseInfo {
   vintagePeriod: string;
   creditClass: CreditClassInfo;
   methodology: Info;
-  standard: Info;
   projectType: string;
 }
 
@@ -290,25 +289,13 @@ export default function ProjectCard({
               />
               <PurchaseDetails
                 url={purchaseInfo.creditClass.url}
-                title={`credit class${
-                  purchaseInfo.creditClass.standard ? ' (type)' : ''
-                }`}
-                info={
-                  purchaseInfo.creditClass.standard &&
-                  purchaseInfo.creditClass.name
-                    ? purchaseInfo.creditClass.name
-                    : formatStandardInfo(purchaseInfo.creditClass)
-                }
+                title="credit class"
+                info={formatStandardInfo(purchaseInfo.creditClass)}
               />
               <PurchaseDetails
                 url={purchaseInfo.methodology.url}
                 title="methodology"
                 info={formatStandardInfo(purchaseInfo.methodology)}
-              />
-              <PurchaseDetails
-                url={purchaseInfo.standard.url}
-                title="standard"
-                info={formatStandardInfo(purchaseInfo.standard)}
               />
               {purchaseInfo.projectType && (
                 <PurchaseDetails

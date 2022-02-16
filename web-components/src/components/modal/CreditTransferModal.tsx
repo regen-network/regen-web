@@ -35,7 +35,7 @@ const CreditTransferModal: React.FC<RegenModalProps> = ({ open, onClose }) => {
       </Title>
       <CreditTransferForm
         sender={sender}
-        tradableAmount={1000}
+        availableTradableAmount={1000}
         batchDenom={'C01-20190101-20201010-02'}
         onClose={() => null}
       />

@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '14px',
     color: theme.palette.info.dark,
   },
-  tradableAmount: {
+  availableAmount: {
     fontFamily: 'Muli',
     fontSize: '12px',
     color: theme.palette.info.dark,
@@ -27,13 +27,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface AmountLabelProps {
   label?: string;
-  tradableAmount: number;
+  availableAmount: number;
   batchDenom: string;
 }
 
 const AmountLabel: React.FC<AmountLabelProps> = ({
   label = 'Amount',
-  tradableAmount,
+  availableAmount,
   batchDenom,
 }) => {
   const classes = useStyles();
@@ -42,7 +42,7 @@ const AmountLabel: React.FC<AmountLabelProps> = ({
       <span>{label}</span>
       <span>
         <span className={classes.availableLabel}>Available:</span>{' '}
-        <span className={classes.tradableAmount}>{tradableAmount}</span>
+        <span className={classes.availableAmount}>{availableAmount}</span>
         <span className={classes.batchDenom}>{batchDenom}</span>
       </span>
     </Grid>

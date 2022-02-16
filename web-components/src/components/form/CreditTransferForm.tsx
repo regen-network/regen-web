@@ -2,18 +2,17 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '../../theme/muiTheme';
-import Grid from '@mui/material/Grid';
 
-import Submit from './Submit';
 import TextField from '../inputs/TextField';
 import AmountLabel from '../inputs/AmountLabel';
 import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
-import LocationCountryField from '../inputs/LocationCountryField';
-import LocationStateCountryField from '../inputs/LocationStateCountryField';
-import ControlledTextField from '../inputs/ControlledTextField';
-import Title from '../title';
-
+import {
+  CreditRetireFields,
+  RetireFormValues,
+  validateCreditRetire,
+} from './CreditRetireForm';
+import Submit from './Submit';
 import {
   requiredMessage,
   invalidAmount,
@@ -96,31 +95,40 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+// Output (submit)
+interface SendCredits {
+  batchDenom: string;
+  tradableAmount: string;
+  retiredAmount?: string;
+  retirementLocation?: string;
+}
+
+interface MsgSend {
+  sender: string;
+  recipient: string;
+  credits: SendCredits;
+}
+
+// Input (args)
 interface FormProps {
   sender: string;
   batchDenom: string;
-  tradableAmount: number;
+  availableTradableAmount: number;
   onClose: () => void;
 }
 
-interface FormValues {
+interface FormValues extends RetireFormValues {
   sender: string;
   recipient: string;
-  amount: number;
-  // retire
-  retire?: boolean;
-  amountRetire?: number;
-  country: string;
-  stateCountry?: string;
-  postalCode?: string;
+  tradableAmount: number;
+  withRetire?: boolean;
 }
 
 interface FormErrors {
   sender?: string;
   recipient?: string;
-  amount?: string;
-  // retire
-  amountRetire?: string;
+  tradableAmount?: string;
+  retiredAmount?: string;
   country?: string;
   stateCountry?: string;
   postalCode?: string;
@@ -129,7 +137,7 @@ interface FormErrors {
 const CreditTransferForm: React.FC<FormProps> = ({
   sender,
   batchDenom,
-  tradableAmount,
+  availableTradableAmount,
   onClose,
 }) => {
   const styles = useStyles();
@@ -137,15 +145,15 @@ const CreditTransferForm: React.FC<FormProps> = ({
   const initialValues = {
     sender,
     recipient: '',
-    amount: 0,
-    // retire
-    amountRetire: 0,
+    tradableAmount: 0,
+    withRetire: false,
+    retiredAmount: 0,
     country: 'US',
     stateCountry: '',
   };
 
   const validateHandler = (values: FormValues): FormErrors => {
-    const errors: FormErrors = {};
+    let errors: FormErrors = {};
 
     if (!values.sender) {
       errors.sender = requiredMessage;
@@ -155,43 +163,34 @@ const CreditTransferForm: React.FC<FormProps> = ({
       errors.recipient = requiredMessage;
     }
 
-    if (!values.amount) {
-      errors.amount = requiredMessage;
-    } else if (Math.sign(values.amount) !== 1) {
-      errors.amount = invalidAmount;
-    } else if (values.amount > tradableAmount) {
-      errors.amount = insufficientCredits;
+    if (!values.tradableAmount) {
+      errors.tradableAmount = requiredMessage;
+    } else if (Math.sign(values.tradableAmount) !== 1) {
+      errors.tradableAmount = invalidAmount;
+    } else if (values.tradableAmount > availableTradableAmount) {
+      errors.tradableAmount = insufficientCredits;
     }
 
-    if (values.retire) {
-      // retire form validation
-      if (!values.country) {
-        errors.country = requiredMessage;
-      }
+    // Retire form validation (optional subform)
+    if (values.withRetire) {
+      errors = validateCreditRetire(availableTradableAmount, values, errors);
 
-      if (!values.amountRetire) {
-        errors.amountRetire = requiredMessage;
-      } else if (Math.sign(values.amountRetire) !== 1) {
-        errors.amountRetire = invalidAmount;
-      } else if (values.amountRetire > tradableAmount) {
-        errors.amountRetire = insufficientCredits;
+      // combo validation: send + retire
+      if (
+        Number(values.tradableAmount) + Number(values.retiredAmount) >
+        availableTradableAmount
+      ) {
+        errors.tradableAmount = insufficientCredits;
+        errors.retiredAmount = insufficientCredits;
       }
     }
 
     return errors;
   };
 
-  const submitHandler = async (values: FormValues): Promise<any> => {
+  const submitHandler = async (values: FormValues): Promise<MsgSend | void> => {
+    // TODO holder, amount string, check withRetire
     console.log('*** submitHandler', values);
-    // TODO holder, amount string
-  };
-
-  const countryHandler = (countryCode: string): any => {
-    console.log('*** countryHandler', countryCode);
-  };
-
-  const stateCountryHandler = (stateCountry: string): any => {
-    console.log('*** stateCountryHandler', stateCountry);
   };
 
   return (
@@ -218,14 +217,14 @@ const CreditTransferForm: React.FC<FormProps> = ({
             className={styles.textField}
           />
           <Field
-            name="amount"
+            name="tradableAmount"
             type="number"
             component={TextField}
             className={styles.textField}
             label={
               <AmountLabel
-                label={'Amount to retire'}
-                tradableAmount={tradableAmount}
+                label={'Amount to transfer'}
+                availableAmount={availableTradableAmount}
                 batchDenom={batchDenom}
               />
             }
@@ -234,66 +233,17 @@ const CreditTransferForm: React.FC<FormProps> = ({
           <Field
             component={CheckboxLabel}
             type="checkbox"
-            name="retire"
+            name="withRetire"
             className={styles.checkboxLabel}
             label={<Description>Retire credits upon transfer</Description>}
           />
 
-          {values.retire && (
-            <>
-              <Field
-                name="amountRetire"
-                type="number"
-                component={TextField}
-                className={styles.textField}
-                label={
-                  <AmountLabel
-                    label={'Amount to retire'}
-                    tradableAmount={tradableAmount}
-                    batchDenom={batchDenom}
-                  />
-                }
-              />
-              <Title className={styles.groupTitle} variant="h5">
-                Location of retirement
-              </Title>
-              <Description className={styles.description}>
-                Please enter a location for the retirement of these credits.
-                This prevents double counting of credits in different locations.
-              </Description>
-              <Grid
-                container
-                alignItems="center"
-                className={styles.stateCountryGrid}
-              >
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  className={styles.stateCountryTextField}
-                >
-                  <LocationStateCountryField
-                    country={values.country}
-                    triggerOnChange={stateCountryHandler}
-                  />
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  className={styles.stateCountryTextField}
-                >
-                  <LocationCountryField triggerOnChange={countryHandler} />
-                </Grid>
-              </Grid>
-              <Field
-                className={styles.postalCodeField}
-                component={ControlledTextField}
-                label="Postal Code"
-                name="postalCode"
-                optional
-              />
-            </>
+          {values.withRetire && (
+            <CreditRetireFields
+              country={values.country}
+              availableTradableAmount={availableTradableAmount}
+              batchDenom={batchDenom}
+            />
           )}
 
           <Submit

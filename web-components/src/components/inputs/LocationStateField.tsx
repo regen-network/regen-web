@@ -8,7 +8,7 @@ interface FieldProps {
   triggerOnChange: (stateCountry: string) => void;
 }
 
-const LocationStateCountryField: React.FC<FieldProps> = ({
+const LocationStateField: React.FC<FieldProps> = ({
   country,
   triggerOnChange,
 }) => {
@@ -34,7 +34,6 @@ const LocationStateCountryField: React.FC<FieldProps> = ({
   };
 
   useEffect(() => {
-    console.log('*** new search', country);
     searchState(country);
   }, [country]);
 
@@ -50,4 +49,4 @@ const LocationStateCountryField: React.FC<FieldProps> = ({
   );
 };
 
-export default LocationStateCountryField;
+export default LocationStateField;

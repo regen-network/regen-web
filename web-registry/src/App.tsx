@@ -102,13 +102,10 @@ const App: React.FC = (): JSX.Element => {
             path="post-purchase/:projectId/:walletId/:name"
             element={<PostPurchase />}
           />
+          <Route path="ecocredits/dashboard" element={<MyEcocredits />} />
           <Route
-            path="ecocredits/dashboard"
-            element={<ProtectedRoute component={MyEcocredits} />}
-          />
-          <Route
-            path="ecocredits/:accountId"
-            element={<ProtectedRoute component={EcocreditsForAccount} />}
+            path="ecocredits/accounts/:accountAddress"
+            element={<EcocreditsForAccount />}
           />
           <Route
             path="user-profile"

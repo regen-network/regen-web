@@ -44,7 +44,7 @@ export interface TableCredits extends BatchRowData, EcocreditAccountBalance {}
 
 export const EcocreditsTable: React.FC<{
   credits: TableCredits[];
-  renderActionButtons: (row: TableCredits) => React.ReactElement;
+  renderActionButtons?: (row: TableCredits) => React.ReactElement;
 }> = ({ credits, renderActionButtons }) => {
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);
@@ -120,19 +120,21 @@ export const EcocreditsTable: React.FC<{
               <StyledTableCell>Batch Start Date</StyledTableCell>
               <StyledTableCell>Batch End Date</StyledTableCell>
               <StyledTableCell>Project Location</StyledTableCell>
-              <StyledTableCell
-                sx={{
-                  textAlign: 'left',
-                  background: 'primary.main',
-                  position: 'sticky',
-                  right: 0,
-                }}
-              >
-                <Box>
-                  <div className={styles.borderLeft} />
-                  Actions
-                </Box>
-              </StyledTableCell>
+              {!!renderActionButtons && (
+                <StyledTableCell
+                  sx={{
+                    textAlign: 'left',
+                    background: 'primary.main',
+                    position: 'sticky',
+                    right: 0,
+                  }}
+                >
+                  <Box>
+                    <div className={styles.borderLeft} />
+                    Actions
+                  </Box>
+                </StyledTableCell>
+              )}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -170,16 +172,18 @@ export const EcocreditsTable: React.FC<{
                   </span>
                 </StyledTableCell>
                 <StyledTableCell>{row.project_location}</StyledTableCell>
-                <StyledTableCell
-                  sx={{
-                    background: 'inherit',
-                    position: 'sticky',
-                    right: 0,
-                  }}
-                >
-                  <div className={styles.borderLeft} />
-                  {renderActionButtons(row)}
-                </StyledTableCell>
+                {!!renderActionButtons && (
+                  <StyledTableCell
+                    sx={{
+                      background: 'inherit',
+                      position: 'sticky',
+                      right: 0,
+                    }}
+                  >
+                    <div className={styles.borderLeft} />
+                    {renderActionButtons(row)}
+                  </StyledTableCell>
+                )}
               </StyledTableRow>
             ))}
           </TableBody>

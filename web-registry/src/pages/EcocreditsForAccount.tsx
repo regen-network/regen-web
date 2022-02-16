@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography } from '@mui/material';
+import { useTheme } from '@mui/styles';
 
 import Section from 'web-components/lib/components/section';
-import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
+import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { getAccountEcocreditsForBatch, getBatches } from '../lib/ecocredit';
 import { ledgerRestUri } from '../ledger';
+import { truncate } from '../lib/wallet';
+import { getAccountUrl } from '../lib/block-explorer';
 import { EcocreditsTable } from '../components/organisms';
 
 import type { TableCredits } from '../components/organisms';
-import { truncate } from '../lib/wallet';
-import { getAccountUrl } from '../lib/block-explorer';
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
-import { useTheme } from '@mui/styles';
 
 export const EcocreditsForAccount: React.FC = () => {
-  const { accountId } = useParams<{ accountId: string }>();
+  const { accountAddress } = useParams<{ accountAddress: string }>();
   const [credits, setCredits] = useState<TableCredits[]>([]);
 
   useEffect(() => {
-    if (!ledgerRestUri || !accountId) return;
+    if (!ledgerRestUri || !accountAddress) return;
     const fetchData = async (): Promise<void> => {
       const {
         data: { batches },
@@ -28,14 +27,17 @@ export const EcocreditsForAccount: React.FC = () => {
         batches.map(async batch => {
           const {
             data: { retired_amount, tradable_amount },
-          } = await getAccountEcocreditsForBatch(batch.batch_denom, accountId);
+          } = await getAccountEcocreditsForBatch(
+            batch.batch_denom,
+            accountAddress,
+          );
           return { ...batch, tradable_amount, retired_amount };
         }),
       );
       setCredits(credits);
     };
     fetchData();
-  }, [accountId]);
+  }, [accountAddress]);
 
   const theme = useTheme();
   return (
@@ -66,19 +68,19 @@ export const EcocreditsForAccount: React.FC = () => {
             }}
           >
             <a
-              href={getAccountUrl(accountId || '')}
+              href={getAccountUrl(accountAddress || '')}
               target="_blank"
               rel="noopener noreferrer"
             >
-              {truncate(accountId || '')}
+              {truncate(accountAddress || '')}
+              <ArrowDownIcon
+                direction="next"
+                fontSize="medium"
+                sx={{ ml: 2 }}
+                color={theme.palette.secondary.main}
+              />
             </a>
           </Typography>
-          <ArrowDownIcon
-            direction="next"
-            fontSize="medium"
-            sx={{ ml: 2 }}
-            color={theme.palette.secondary.main}
-          />
         </Box>
         <Box
           sx={{
@@ -90,27 +92,7 @@ export const EcocreditsForAccount: React.FC = () => {
             overflow: 'hidden',
           }}
         >
-          <EcocreditsTable
-            credits={credits}
-            renderActionButtons={row => (
-              <TableActionButtons
-                buttons={[
-                  {
-                    label: 'sell',
-                    onClick: () => `TODO sell credit for ${row}`,
-                  },
-                  {
-                    label: 'Transfer',
-                    onClick: () => 'TODO transfer credit',
-                  },
-                  {
-                    label: 'Retire',
-                    onClick: () => 'TODO retire credit',
-                  },
-                ]}
-              />
-            )}
-          />
+          <EcocreditsTable credits={credits} />
         </Box>
       </Section>
     </Box>

@@ -54,20 +54,31 @@ export const EcocreditsForAccount: React.FC = () => {
           >
             Account:
           </Typography>
-          <Typography sx={{ ml: 2, display: 'inline', fontSize: 18 }}>
-            {truncate(accountId || '')}
-          </Typography>
-          <a
-            href={getAccountUrl(accountId || '')}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Typography
+            sx={{
+              ml: 2,
+              display: 'inline',
+              '& a': {
+                fontSize: 18,
+                color: 'black',
+                textDecoration: 'none',
+              },
+            }}
           >
-            <ArrowDownIcon
-              direction="next"
-              sx={{ fontSize: 18, ml: 2 }}
-              color={theme.palette.secondary.main}
-            />
-          </a>
+            <a
+              href={getAccountUrl(accountId || '')}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {truncate(accountId || '')}
+            </a>
+          </Typography>
+          <ArrowDownIcon
+            direction="next"
+            fontSize="medium"
+            sx={{ ml: 2 }}
+            color={theme.palette.secondary.main}
+          />
         </Box>
         <Box
           sx={{

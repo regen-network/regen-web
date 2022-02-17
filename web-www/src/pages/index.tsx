@@ -43,9 +43,13 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
 
   return (
     <>
-      <SEO location={location} title="Regen Network" imageUrl={`${data?.seoImage?.publicURL}`} />
+      <SEO
+        location={location}
+        title="Regen Network"
+        imageUrl={`${data?.seoImage?.publicURL}`}
+      />
       <HomeFoldSection />
-      <MarketplaceSection />
+      <HomeValuesSection />
       <EmailSubmitSection />
       <Box display={{ xs: 'block', sm: 'none' }}>
         <BackgroundImage
@@ -71,7 +75,7 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
         </BackgroundImage>
       </Box>
       <HomeLedger />
-      <HomeValuesSection />
+      <MarketplaceSection />
       <BlogSection />
     </>
   );

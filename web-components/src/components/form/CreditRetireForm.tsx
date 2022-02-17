@@ -57,6 +57,14 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(2.25),
     },
   },
+  noteTextField: {
+    '& .MuiInputBase-formControl': {
+      marginTop: theme.spacing(2.25),
+    },
+    '& label': {
+      whiteSpace: 'unset',
+    },
+  },
   stateCountryGrid: {
     [theme.breakpoints.up('sm')]: {
       flexWrap: 'nowrap',
@@ -154,14 +162,14 @@ export const CreditRetireFields = ({
       />
       {/* TODO memoNote review */}
       <Title className={styles.groupTitle} variant="h5">
-        Memo
+        Transaction note
       </Title>
       <Field
         name="memoNote"
         type="text"
-        label="Add retirement transaction details"
+        label="Add retirement transaction details (stored in the transaction memo)"
         component={TextField}
-        className={styles.textField}
+        className={styles.noteTextField}
         optional
       />
       <Title className={styles.groupTitle} variant="h5">
@@ -226,8 +234,6 @@ const CreditRetireForm: React.FC<FormProps> = ({
   availableTradableAmount,
   onClose,
 }) => {
-  const styles = useStyles();
-
   const validateHandler = (values: FormValues): FormErrors => {
     let errors: FormErrors = {};
     errors = validateCreditRetire(availableTradableAmount, values, errors);

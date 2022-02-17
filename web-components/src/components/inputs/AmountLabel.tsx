@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   availableLabel: {
     fontSize: '14px',
+    fontWeight: 'normal',
     color: theme.palette.info.dark,
   },
   availableAmount: {

@@ -9,8 +9,10 @@ import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
   CreditRetireFields,
-  RetireFormValues,
+  FormValues as RetireFormValues,
+  FormErrors as RetireFormErrors,
   validateCreditRetire,
+  initialValues as initialValuesRetire,
 } from './CreditRetireForm';
 import Submit from './Submit';
 import {
@@ -46,10 +48,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '& .MuiInputBase-formControl': {
       backgroundColor: theme.palette.info.light,
+      marginTop: theme.spacing(2.25),
     },
   },
   textField: {
     marginTop: theme.spacing(10.75),
+    '& .MuiInputBase-formControl': {
+      marginTop: theme.spacing(2.25),
+    },
   },
   description: {
     marginBottom: theme.spacing(5),
@@ -64,11 +70,21 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   checkboxLabel: {
-    paddingTop: theme.spacing(10.75),
+    marginTop: theme.spacing(10.75),
+    marginBottom: theme.spacing(10.75),
+    alignItems: 'initial',
+    '& .MuiCheckbox-root': {
+      alignSelf: 'end',
+    },
+  },
+  checkboxDescription: {
+    color: theme.palette.primary.contrastText,
+    fontSize: theme.spacing(4.5),
+    fontWeight: 'bold',
+    marginLeft: theme.spacing(1),
   },
   submit: {
     marginTop: theme.spacing(12.5),
-    marginBottom: theme.spacing(12.5),
   },
   groupTitle: {
     marginTop: theme.spacing(10.75),
@@ -91,7 +107,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   postalCodeField: {
-    marginTop: theme.spacing(6),
+    marginTop: theme.spacing(8),
   },
 }));
 
@@ -124,14 +140,10 @@ interface FormValues extends RetireFormValues {
   withRetire?: boolean;
 }
 
-interface FormErrors {
+interface FormErrors extends RetireFormErrors {
   sender?: string;
   recipient?: string;
   tradableAmount?: string;
-  retiredAmount?: string;
-  country?: string;
-  stateCountry?: string;
-  postalCode?: string;
 }
 
 const CreditTransferForm: React.FC<FormProps> = ({
@@ -147,9 +159,7 @@ const CreditTransferForm: React.FC<FormProps> = ({
     recipient: '',
     tradableAmount: 0,
     withRetire: false,
-    retiredAmount: 0,
-    country: 'US',
-    stateCountry: '',
+    ...initialValuesRetire,
   };
 
   const validateHandler = (values: FormValues): FormErrors => {
@@ -223,7 +233,7 @@ const CreditTransferForm: React.FC<FormProps> = ({
             className={styles.textField}
             label={
               <AmountLabel
-                label={'Amount to transfer'}
+                label={'Amount to send'}
                 availableAmount={availableTradableAmount}
                 batchDenom={batchDenom}
               />
@@ -235,7 +245,11 @@ const CreditTransferForm: React.FC<FormProps> = ({
             type="checkbox"
             name="withRetire"
             className={styles.checkboxLabel}
-            label={<Description>Retire credits upon transfer</Description>}
+            label={
+              <Description className={styles.checkboxDescription}>
+                Retire credits upon transfer
+              </Description>
+            }
           />
 
           {values.withRetire && (

@@ -79,7 +79,7 @@ export default function Submit({
       justifyContent="flex-end"
     >
       <Grid
-        xs={5}
+        xs={6}
         item
         className={classes.cancel}
         onClick={() => {
@@ -91,7 +91,7 @@ export default function Submit({
         cancel
       </Grid>
       <Grid
-        xs={7}
+        xs={6}
         item
         container
         direction="column"

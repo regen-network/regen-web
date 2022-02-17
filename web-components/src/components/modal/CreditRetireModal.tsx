@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import Modal, { RegenModalProps } from '../modal';
+import Modal, { RegenModalProps } from '.';
 import Title from '../title';
-import { CreditTransferForm } from '../form/CreditTransferForm';
+import { CreditRetireForm } from '../form/CreditRetireForm';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -30,18 +30,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreditTransferModal: React.FC<RegenModalProps> = ({ open, onClose }) => {
+const CreditRetireModal: React.FC<RegenModalProps> = ({ open, onClose }) => {
   const styles = useStyles();
-  // TODO Harcoded sender
-  const sender = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4';
+  // TODO Harcoded holder
+  const holder = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4';
 
   return (
     <Modal className={styles.modal} open={open} onClose={onClose}>
       <Title variant="h3" align="center" className={styles.mainTitle}>
-        Transfer
+        Retire
       </Title>
-      <CreditTransferForm
-        sender={sender}
+      <CreditRetireForm
+        holder={holder}
         availableTradableAmount={1000}
         batchDenom={'C01-20190101-20201010-02'}
         onClose={() => null}
@@ -50,4 +50,4 @@ const CreditTransferModal: React.FC<RegenModalProps> = ({ open, onClose }) => {
   );
 };
 
-export { CreditTransferModal };
+export { CreditRetireModal };

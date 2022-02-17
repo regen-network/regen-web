@@ -5,6 +5,7 @@ import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Button, Card, Avatar, CardMedia } from '@mui/material';
 import { CreditTransferModal } from 'web-components/lib/components/modal/CreditTransferModal';
+import { CreditRetireModal } from 'web-components/lib/components/modal/CreditRetireModal';
 
 export default {
   title: 'Modal',
@@ -191,4 +192,8 @@ export const processingModal = (): JSX.Element => <OpenProcessingModal />;
 
 export const creditTransferModal = (): JSX.Element => (
   <CreditTransferModal open={true} onClose={() => null} />
+);
+
+export const creditRetireModal = (): JSX.Element => (
+  <CreditRetireModal open={true} onClose={() => null} />
 );

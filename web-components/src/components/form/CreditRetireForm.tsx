@@ -36,8 +36,8 @@ import {
 
 const useStyles = makeStyles((theme: Theme) => ({
   groupTitle: {
-    marginTop: theme.spacing(10.75),
-    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(15.5),
+    marginBottom: theme.spacing(3),
   },
   description: {
     '& a': {
@@ -53,7 +53,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   textField: {
-    marginTop: theme.spacing(10.75),
+    '& .MuiInputBase-formControl': {
+      marginTop: theme.spacing(2.25),
+    },
   },
   stateCountryGrid: {
     [theme.breakpoints.up('sm')]: {
@@ -61,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   stateCountryTextField: {
-    marginTop: theme.spacing(6),
+    marginTop: theme.spacing(4),
     [theme.breakpoints.up('sm')]: {
       '&:first-of-type': {
         marginRight: theme.spacing(2.375),
@@ -72,11 +74,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   postalCodeField: {
-    marginTop: theme.spacing(6),
+    marginTop: theme.spacing(8),
   },
   submit: {
     marginTop: theme.spacing(12.5),
-    marginBottom: theme.spacing(12.5),
   },
 }));
 
@@ -90,6 +91,7 @@ interface MsgRetire {
   holder: string;
   credits: RetireCredits;
   location: string;
+  // TODO memoNote ?
 }
 
 // Input (args)
@@ -100,15 +102,17 @@ interface FormProps {
   onClose: () => void;
 }
 
-export interface RetireFormValues {
+export interface FormValues {
   retiredAmount: number;
+  memoNote: string;
   country: string;
   stateCountry?: string;
   postalCode?: string;
 }
 
-interface FormErrors {
+export interface FormErrors {
   retiredAmount?: string;
+  memoNote?: string;
   country?: string;
   stateCountry?: string;
   postalCode?: string;
@@ -150,6 +154,18 @@ export const CreditRetireFields = ({
           />
         }
       />
+      {/* TODO memoNote review */}
+      <Title className={styles.groupTitle} variant="h5">
+        Memo
+      </Title>
+      <Field
+        name="memoNote"
+        type="text"
+        label="Add retirement transaction details"
+        component={TextField}
+        className={styles.textField}
+        optional
+      />
       <Title className={styles.groupTitle} variant="h5">
         Location of retirement
       </Title>
@@ -181,7 +197,7 @@ export const CreditRetireFields = ({
 
 export const validateCreditRetire = (
   availableTradableAmount: number,
-  values: RetireFormValues,
+  values: FormValues,
   errors: FormErrors,
 ): FormErrors => {
   if (!values.country) {
@@ -199,6 +215,13 @@ export const validateCreditRetire = (
   return errors;
 };
 
+export const initialValues = {
+  retiredAmount: 0,
+  memoNote: '',
+  country: 'US',
+  stateCountry: '',
+};
+
 const CreditRetireForm: React.FC<FormProps> = ({
   holder,
   batchDenom,
@@ -207,20 +230,14 @@ const CreditRetireForm: React.FC<FormProps> = ({
 }) => {
   const styles = useStyles();
 
-  const initialValues = {
-    retiredAmount: 0,
-    country: 'US',
-    stateCountry: '',
-  };
-
-  const validateHandler = (values: RetireFormValues): FormErrors => {
+  const validateHandler = (values: FormValues): FormErrors => {
     let errors: FormErrors = {};
     errors = validateCreditRetire(availableTradableAmount, values, errors);
     return errors;
   };
 
   const submitHandler = async (
-    values: RetireFormValues,
+    values: FormValues,
   ): Promise<MsgRetire | void> => {
     // TODO
     // add holder,

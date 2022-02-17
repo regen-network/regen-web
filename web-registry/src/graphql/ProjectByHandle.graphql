@@ -78,6 +78,12 @@ query ProjectByHandle($handle: String!) {
       }
     }
     metadata
+    partyByRegistryId {
+      name
+      organizationByPartyId {
+        website
+      }
+    }
     creditClassByCreditClassId {
       standard
       creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
@@ -104,7 +110,7 @@ query ProjectByHandle($handle: String!) {
     partyByLandOwnerId {
       ...partyFields
     }
-    partyByBrokerId {
+    partyByIssuerId {
       ...partyFields
     }
     partyByResellerId {

@@ -27,7 +27,7 @@ interface GeoJson {
 
 interface MapProps {
   geojson: GeoJson;
-  token: string | undefined;
+  mapboxToken: string | undefined;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -127,7 +127,7 @@ interface PopupInfo {
   feature: any;
 }
 
-export default function Map({ geojson, token }: MapProps): JSX.Element {
+export default function Map({ geojson, mapboxToken }: MapProps): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
@@ -244,7 +244,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
           height="100%"
           mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
           onViewportChange={(v: any) => setViewPort(v)}
-          mapboxApiAccessToken={token}
+          mapboxApiAccessToken={mapboxToken}
           onClick={onMapClick}
           // interactiveLayerIds={interactiveLayerIds} unused for now
           attributionControl={false}

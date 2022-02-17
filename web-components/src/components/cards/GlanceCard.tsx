@@ -13,6 +13,7 @@ interface GlanceCardProps extends OptimizeImageProps {
   imgSrc?: string;
   geojson?: any;
   isGISFile?: Boolean;
+  mapboxToken?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -106,6 +107,7 @@ export default function GlanceCard({
   apiServerUrl,
   geojson,
   isGISFile,
+  mapboxToken,
 }: GlanceCardProps): JSX.Element {
   const classes = useStyles({});
 
@@ -115,10 +117,7 @@ export default function GlanceCard({
         <Grid xs={12} sm={5} item>
           <div className={classes.mapWrapper}>
             {geojson && isGISFile ? (
-              <StaticMap
-                geojson={geojson}
-                token={process.env.REACT_APP_MAPBOX_TOKEN}
-              />
+              <StaticMap geojson={geojson} mapboxToken={mapboxToken} />
             ) : (
               imgSrc && (
                 <Image

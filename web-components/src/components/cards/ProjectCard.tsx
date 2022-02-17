@@ -25,7 +25,6 @@ interface PurchaseInfo {
   vintagePeriod: string;
   creditClass: CreditClassInfo;
   methodology: Info;
-  standard: Info;
   projectType: string;
 }
 
@@ -38,20 +37,12 @@ export interface ProjectCardProps {
   registry?: User | null;
   tag?: string;
   onClick?: () => void;
-  displayCity?: boolean;
-  displayRegion?: boolean;
-  displayCountry?: boolean;
   comingSoon?: boolean;
   purchaseInfo?: PurchaseInfo;
   href?: string;
   target?: string;
   imageStorageBaseUrl?: string;
   apiServerUrl?: string;
-}
-
-interface AreaUnits {
-  hectares: string;
-  acres: string;
 }
 
 function getAbbreviation(unit: string): string {
@@ -213,9 +204,6 @@ export default function ProjectCard({
   registry,
   onClick,
   tag,
-  displayCity = true,
-  displayRegion = true,
-  displayCountry = true,
   comingSoon = false,
   purchaseInfo,
   href,
@@ -258,9 +246,6 @@ export default function ProjectCard({
           smFontSize="0.8125rem"
           fontSize="0.75rem"
           color={theme.palette.primary.light}
-          displayCity={displayCity}
-          displayRegion={displayRegion}
-          displayCountry={displayCountry}
         />
       </div>
       {comingSoon && (
@@ -304,25 +289,13 @@ export default function ProjectCard({
               />
               <PurchaseDetails
                 url={purchaseInfo.creditClass.url}
-                title={`credit class${
-                  purchaseInfo.creditClass.standard ? ' (type)' : ''
-                }`}
-                info={
-                  purchaseInfo.creditClass.standard &&
-                  purchaseInfo.creditClass.name
-                    ? purchaseInfo.creditClass.name
-                    : formatStandardInfo(purchaseInfo.creditClass)
-                }
+                title="credit class"
+                info={formatStandardInfo(purchaseInfo.creditClass)}
               />
               <PurchaseDetails
                 url={purchaseInfo.methodology.url}
                 title="methodology"
                 info={formatStandardInfo(purchaseInfo.methodology)}
-              />
-              <PurchaseDetails
-                url={purchaseInfo.standard.url}
-                title="standard"
-                info={formatStandardInfo(purchaseInfo.standard)}
               />
               {purchaseInfo.projectType && (
                 <PurchaseDetails

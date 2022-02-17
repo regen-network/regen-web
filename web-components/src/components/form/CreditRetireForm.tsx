@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
@@ -19,6 +19,10 @@ import {
 } from '../inputs/validation';
 
 /**
+ * This form is closely related to the form for send/transfer ecocredits (<CreditTransferForm />).
+ * In this retire form, some of its components and interfaces are exported in order to be reused in the
+ * send/transfer form, since it optionally includes the retirement of ecocredits.
+ *
  * Retire retires a specified number of credits in the holder's account.
  * https://docs.regen.network/modules/ecocredit/03_messages.html#msgretire
  *
@@ -97,7 +101,7 @@ interface MsgRetire {
   holder: string;
   credits: RetireCredits;
   location: string;
-  // TODO memoNote ?
+  // TODO note (aka. memoNote)
 }
 
 // Input (args)
@@ -110,16 +114,8 @@ interface FormProps {
 
 export interface FormValues {
   retiredAmount: number;
-  memoNote: string;
+  note: string;
   country: string;
-  stateCountry?: string;
-  postalCode?: string;
-}
-
-export interface FormErrors {
-  retiredAmount?: string;
-  memoNote?: string;
-  country?: string;
   stateCountry?: string;
   postalCode?: string;
 }
@@ -160,14 +156,13 @@ export const CreditRetireFields = ({
           />
         }
       />
-      {/* TODO memoNote review */}
       <Title className={styles.groupTitle} variant="h5">
         Transaction note
       </Title>
       <Field
-        name="memoNote"
+        name="note"
         type="text"
-        label="Add retirement transaction details (stored in the transaction memo)"
+        label="Add retirement transaction details (stored in the transaction note)"
         component={TextField}
         className={styles.noteTextField}
         optional
@@ -204,8 +199,8 @@ export const CreditRetireFields = ({
 export const validateCreditRetire = (
   availableTradableAmount: number,
   values: FormValues,
-  errors: FormErrors,
-): FormErrors => {
+  errors: FormikErrors<FormValues>,
+): FormikErrors<FormValues> => {
   if (!values.country) {
     errors.country = requiredMessage;
   }
@@ -223,7 +218,7 @@ export const validateCreditRetire = (
 
 export const initialValues = {
   retiredAmount: 0,
-  memoNote: '',
+  note: '',
   country: 'US',
   stateCountry: '',
 };
@@ -234,8 +229,8 @@ const CreditRetireForm: React.FC<FormProps> = ({
   availableTradableAmount,
   onClose,
 }) => {
-  const validateHandler = (values: FormValues): FormErrors => {
-    let errors: FormErrors = {};
+  const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
+    let errors: FormikErrors<FormValues> = {};
     errors = validateCreditRetire(availableTradableAmount, values, errors);
     return errors;
   };

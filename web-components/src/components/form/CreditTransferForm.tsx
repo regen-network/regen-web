@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { Theme } from '../../theme/muiTheme';
 
@@ -10,7 +10,6 @@ import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
   CreditRetireFields,
   FormValues as RetireFormValues,
-  FormErrors as RetireFormErrors,
   validateCreditRetire,
   initialValues as initialValuesRetire,
 } from './CreditRetireForm';
@@ -138,12 +137,6 @@ interface FormValues extends RetireFormValues {
   withRetire?: boolean;
 }
 
-interface FormErrors extends RetireFormErrors {
-  sender?: string;
-  recipient?: string;
-  tradableAmount?: string;
-}
-
 const CreditTransferForm: React.FC<FormProps> = ({
   sender,
   batchDenom,
@@ -160,8 +153,8 @@ const CreditTransferForm: React.FC<FormProps> = ({
     ...initialValuesRetire,
   };
 
-  const validateHandler = (values: FormValues): FormErrors => {
-    let errors: FormErrors = {};
+  const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
+    let errors: FormikErrors<FormValues> = {};
 
     if (!values.sender) {
       errors.sender = requiredMessage;

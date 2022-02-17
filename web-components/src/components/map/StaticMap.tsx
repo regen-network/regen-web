@@ -7,10 +7,10 @@ import PinIcon from '../icons/PinIcon';
 
 interface MapProps {
   geojson: FeatureCollection;
-  token?: string;
+  mapboxToken?: string;
 }
 
-export default function Map({ geojson, token }: MapProps): JSX.Element {
+export default function Map({ geojson, mapboxToken }: MapProps): JSX.Element {
   const [viewPort, setViewPort] = useState({
     zoom: 11,
     latitude: 0.0,
@@ -49,7 +49,7 @@ export default function Map({ geojson, token }: MapProps): JSX.Element {
       {...viewPort}
       width="100%"
       height="100%"
-      mapboxApiAccessToken={token}
+      mapboxApiAccessToken={mapboxToken}
       mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
       onLoad={onLoad}
       attributionControl={false}

@@ -5,7 +5,9 @@ import ProtectedSpecies, {
 } from 'web-components/lib/components/sliders/ProtectedSpecies';
 import ProjectMedia, {
   Media,
+  Asset,
 } from 'web-components/lib/components/sliders/ProjectMedia';
+import StaticMap from 'web-components/lib/components/map/StaticMap';
 
 import Grid from '@mui/material/Grid';
 
@@ -44,7 +46,7 @@ export const protectedSpecies = (): JSX.Element => (
   </Grid>
 );
 
-const assets: Media[] = [
+const mediaAssets: Media[] = [
   {
     src: './andover.jpg',
     thumbnail: './andover.jpg',
@@ -60,7 +62,50 @@ const assets: Media[] = [
 
 export const projectMedia = (): JSX.Element => (
   <div style={{ width: 600, height: 400 }}>
-    <ProjectMedia assets={assets} />
+    <ProjectMedia assets={mediaAssets} />
+  </div>
+);
+
+const assets: Asset[] = [
+  {
+    src: './andover.jpg',
+    thumbnail: './andover.jpg',
+    type: 'image',
+  },
+  <StaticMap
+    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    geojson={{
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          id: 'polygon1',
+          properties: {
+            stroke: '#FFC432',
+            fill: '#ffe7ad',
+          },
+          geometry: {
+            type: 'Polygon',
+            coordinates: [
+              [
+                [4.716849625110626, 45.75426138098967],
+                [4.7168174386024475, 45.753932000072346],
+                [4.717772305011749, 45.75354834371205],
+                [4.718327522277832, 45.75420149369476],
+                [4.717434346675873, 45.754545844762895],
+                [4.716849625110626, 45.75426138098967],
+              ],
+            ],
+          },
+        },
+      ],
+    }}
+  />,
+];
+
+export const projectMediaWithMap = (): JSX.Element => (
+  <div style={{ width: '100%' }}>
+    <ProjectMedia gridView assets={assets} />
   </div>
 );
 

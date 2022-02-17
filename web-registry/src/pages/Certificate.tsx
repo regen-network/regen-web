@@ -361,23 +361,6 @@ function CertificatePage(): JSX.Element {
                     'http://schema.org/url'
                   ]?.['@value'],
                 },
-                standard: {
-                  documentId:
-                    creditClassVersion?.metadata?.[
-                      'http://regen.network/standard'
-                    ]?.['http://regen.network/documentId'],
-                  name:
-                    creditClassVersion?.metadata?.[
-                      'http://regen.network/standard'
-                    ]?.['http://schema.org/name'] || '',
-                  version:
-                    creditClassVersion?.metadata?.[
-                      'http://regen.network/standard'
-                    ]?.['http://schema.org/version'] || '',
-                  url: creditClassVersion?.metadata?.[
-                    'http://regen.network/standard'
-                  ]?.['http://schema.org/url']?.['@value'],
-                },
                 projectType: project.type || '',
               }}
             />,

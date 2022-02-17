@@ -51,6 +51,9 @@ export function getFontSize(size?: string): FontSizes {
     case 'project':
       fontSize = { xs: '0.875rem', sm: '0.875rem' };
       break;
+    case 'metadata':
+      fontSize = { xs: '0.875rem', sm: '1.125rem' };
+      break;
     default:
       fontSize = { xs: '0.875rem', sm: '1rem' };
       break;

@@ -83,9 +83,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 'bold',
     marginLeft: theme.spacing(1),
   },
-  submit: {
-    marginTop: theme.spacing(12.5),
-  },
   groupTitle: {
     marginTop: theme.spacing(10.75),
     marginBottom: theme.spacing(2),
@@ -108,6 +105,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   postalCodeField: {
     marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(12.5),
   },
 }));
 
@@ -261,7 +259,6 @@ const CreditTransferForm: React.FC<FormProps> = ({
           )}
 
           <Submit
-            className={styles.submit}
             isSubmitting={isSubmitting}
             onClose={onClose}
             status={status}

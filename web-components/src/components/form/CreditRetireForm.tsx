@@ -75,9 +75,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   postalCodeField: {
     marginTop: theme.spacing(8),
-  },
-  submit: {
-    marginTop: theme.spacing(12.5),
+    marginBottom: theme.spacing(12.5),
   },
 }));
 
@@ -260,7 +258,6 @@ const CreditRetireForm: React.FC<FormProps> = ({
             batchDenom={batchDenom}
           />
           <Submit
-            className={styles.submit}
             isSubmitting={isSubmitting}
             onClose={onClose}
             status={status}

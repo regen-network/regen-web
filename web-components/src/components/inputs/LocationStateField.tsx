@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Field } from 'formik';
+import { makeStyles } from '@mui/styles';
+import { Theme } from '../../theme/muiTheme';
+
 import SelectTextField, { Option } from './SelectTextField';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  textField: {
+    '& .MuiInputBase-formControl': {
+      marginTop: theme.spacing(2.25),
+    },
+  },
+}));
 
 interface FieldProps {
   country: string;
@@ -12,6 +23,8 @@ const LocationStateField: React.FC<FieldProps> = ({
   country,
   triggerOnChange,
 }) => {
+  const styles = useStyles();
+
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
 
   const searchState = async (countryId: string): Promise<void> => {
@@ -41,6 +54,7 @@ const LocationStateField: React.FC<FieldProps> = ({
     <Field
       options={stateOptions}
       component={SelectTextField}
+      className={styles.textField}
       triggerOnChange={triggerOnChange}
       label="State / Region"
       name="stateProvince"

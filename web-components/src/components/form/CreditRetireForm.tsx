@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
-import AmountLabel from '../inputs/AmountLabel';
+import AmountField from '../inputs/AmountField';
 import LocationCountryField from '../inputs/LocationCountryField';
 import LocationStateField from '../inputs/LocationStateField';
 import ControlledTextField from '../inputs/ControlledTextField';
@@ -40,8 +40,11 @@ import {
 
 const useStyles = makeStyles((theme: Theme) => ({
   groupTitle: {
-    marginTop: theme.spacing(15.5),
+    marginTop: theme.spacing(10.75),
     marginBottom: theme.spacing(3),
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(15.5),
+    },
   },
   description: {
     '& a': {
@@ -143,18 +146,12 @@ export const CreditRetireFields = ({
 
   return (
     <>
-      <Field
-        name="retiredAmount"
-        type="number"
-        component={TextField}
+      <AmountField
+        name={'retiredAmount'}
+        label={'Amount to retire'}
+        availableAmount={availableTradableAmount}
+        batchDenom={batchDenom}
         className={styles.textField}
-        label={
-          <AmountLabel
-            label={'Amount to retire'}
-            availableAmount={availableTradableAmount}
-            batchDenom={batchDenom}
-          />
-        }
       />
       <Title className={styles.groupTitle} variant="h5">
         Transaction note

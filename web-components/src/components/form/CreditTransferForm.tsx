@@ -1,10 +1,10 @@
 import React from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
-import { Theme } from '../../theme/muiTheme';
 
+import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
-import AmountLabel from '../inputs/AmountLabel';
+import AmountField from '../inputs/AmountField';
 import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
@@ -217,18 +217,12 @@ const CreditTransferForm: React.FC<FormProps> = ({
             component={TextField}
             className={styles.textField}
           />
-          <Field
-            name="tradableAmount"
-            type="number"
-            component={TextField}
+          <AmountField
+            name={'tradableAmount'}
+            label={'Amount to send'}
+            availableAmount={availableTradableAmount}
+            batchDenom={batchDenom}
             className={styles.textField}
-            label={
-              <AmountLabel
-                label={'Amount to send'}
-                availableAmount={availableTradableAmount}
-                batchDenom={batchDenom}
-              />
-            }
           />
 
           <Field

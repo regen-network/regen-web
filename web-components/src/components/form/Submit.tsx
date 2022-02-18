@@ -42,9 +42,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(8),
       paddingRight: theme.spacing(8),
     },
-    [theme.breakpoints.down('sm')]: {
-      maxWidth: theme.spacing(53.25),
-    },
   },
   error: {
     color: theme.palette.error.main,
@@ -79,7 +76,8 @@ export default function Submit({
       justifyContent="flex-end"
     >
       <Grid
-        xs={6}
+        xs={3}
+        sm={6}
         item
         className={classes.cancel}
         onClick={() => {
@@ -91,7 +89,8 @@ export default function Submit({
         cancel
       </Grid>
       <Grid
-        xs={6}
+        xs={9}
+        sm={6}
         item
         container
         direction="column"

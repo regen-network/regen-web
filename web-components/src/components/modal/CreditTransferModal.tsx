@@ -6,20 +6,17 @@ import { CreditTransferForm } from '../form/CreditTransferForm';
 
 const useStyles = makeStyles(theme => ({
   modal: {
-    padding: `${theme.spacing(10.75)} ${theme.spacing(7.5)} ${theme.spacing(
-      12.5,
-    )}`,
-    maxWidth: theme.spacing(140),
+    [theme.breakpoints.up('sm')]: {
+      padding: `${theme.spacing(10.75)} ${theme.spacing(7.5)} ${theme.spacing(
+        12.5,
+      )}`,
+      maxWidth: theme.spacing(140),
+    },
   },
   mainTitle: {
-    paddingTop: 0,
+    paddingBottom: theme.spacing(6),
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(12.5),
-    },
-    [theme.breakpoints.down('xs')]: {
-      paddingBottom: theme.spacing(6),
-      paddingLeft: 0,
-      paddingRight: 0,
     },
   },
   retireCheckbox: {

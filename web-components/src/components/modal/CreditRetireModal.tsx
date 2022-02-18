@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   mainTitle: {
-    paddingBottom: theme.spacing(6),
+    paddingBottom: theme.spacing(7.5),
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(12.5),
     },

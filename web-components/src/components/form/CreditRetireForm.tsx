@@ -42,20 +42,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   groupTitle: {
     marginTop: theme.spacing(10.75),
     marginBottom: theme.spacing(3),
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(15.5),
-    },
   },
   description: {
+    marginBottom: 0,
     '& a': {
       cursor: 'pointer',
     },
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(16),
-      marginBottom: theme.spacing(3),
     },
     [theme.breakpoints.down('sm')]: {
-      marginBottom: 0,
       fontSize: theme.typography.pxToRem(14),
     },
   },
@@ -78,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   stateCountryTextField: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(8),
     [theme.breakpoints.up('sm')]: {
       '&:first-of-type': {
         marginRight: theme.spacing(2.375),

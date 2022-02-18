@@ -1,12 +1,14 @@
 import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import { makeStyles, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import ReactHtmlParser from 'react-html-parser';
+// import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
+// import { getFontSize } from 'web-components/lib/theme/sizing';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
@@ -49,9 +51,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(5.5),
+      paddingTop: theme.spacing(7.5),
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
+      paddingTop: theme.spacing(3.75),
     },
   },
   quotePersonName: {
@@ -110,11 +114,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   story: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(14),
-      paddingBottom: theme.spacing(7.5),
     },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(11.75),
-      paddingBottom: theme.spacing(3.75),
     },
   },
   quote: {
@@ -195,6 +197,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   darkText: {
     color: theme.palette.info.dark,
+  },
+  link: {
     position: 'relative',
   },
   creditClassName: {
@@ -205,15 +209,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(14),
     },
   },
-  creditClassLink: {
-    fontWeight: 700,
-  },
   arrowIcon: {
     height: theme.spacing(3.5),
-  },
-  arrowLink: {
     position: 'absolute',
-    top: theme.spacing(0.5),
+    top: theme.spacing(0.85),
   },
 }));
 
@@ -221,54 +220,50 @@ function ProjectTopLink({
   label,
   name,
   url,
-  standard = false,
+  creditClassId,
 }: {
   label: string;
-  name: string;
-  url?: string;
-  standard?: boolean;
+  name?: string;
+  url?: string | null;
+  creditClassId?: string; // on-chain credit class id (e.g. "C01")
 }): JSX.Element {
   const classes = useStyles();
   const theme = useTheme<Theme>();
 
+  const text = (
+    <span className={classes.darkText}>
+      {name && ReactHtmlParser(name)}
+      {creditClassId && name ? (
+        <span> ({creditClassId})</span>
+      ) : (
+        <span>{creditClassId}</span>
+      )}
+    </span>
+  );
   return (
     <div className={classes.creditClassDetail}>
       <Title className={classes.creditClass} variant="h5">
         {label}:
       </Title>
-      {url ? (
-        standard ? (
-          <div className={cx(classes.creditClassName, classes.darkText)}>
-            {ReactHtmlParser(name)}
-            <Link
-              className={classes.arrowLink}
-              href={url}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <ArrowIcon
-                className={classes.arrowIcon}
-                direction="next"
-                color={theme.palette.secondary.main}
-              />
-            </Link>
-          </div>
-        ) : (
+      <div className={classes.creditClassName}>
+        {url ? (
           <Link
-            className={cx(classes.creditClassName, classes.creditClassLink)}
+            className={classes.link}
             href={url}
             rel="noopener noreferrer"
             target="_blank"
-            color="secondary"
           >
-            {ReactHtmlParser(name)}
+            {text}
+            <ArrowIcon
+              className={classes.arrowIcon}
+              direction="next"
+              color={theme.palette.secondary.main}
+            />
           </Link>
-        )
-      ) : (
-        <div className={cx(classes.creditClassName, classes.darkText)}>
-          {ReactHtmlParser(name)}
-        </div>
-      )}
+        ) : (
+          <>{text}</>
+        )}
+      </div>
     </div>
   );
 }
@@ -283,15 +278,17 @@ function ProjectTopSection({
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
-  const metadata = data?.projectByHandle?.metadata;
+  const project = data?.projectByHandle;
+  const metadata = project?.metadata;
+  const registry = project?.partyByRegistryId;
   const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
   const landStewardPhoto =
     metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
-  const unit: qudtUnit =
+  const unit: qudtUnit | undefined =
     metadata?.['http://regen.network/size']?.[
       'http://qudt.org/1.1/schema/qudt#unit'
     ]?.['@value'];
-  const creditClass = data?.projectByHandle?.creditClassByCreditClassId;
+  const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
   const methodologyVersion =
     creditClass?.methodologyByMethodologyId?.methodologyVersionsById
@@ -300,6 +297,11 @@ function ProjectTopSection({
   const additionalCertification =
     metadata?.['http://regen.network/additionalCertification'];
   const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
+  const landStory = metadata?.['http://regen.network/landStory'];
+  const landStewardStoryTitle =
+    metadata?.['http://regen.network/landStewardStoryTitle'];
+  const landStewardStory = metadata?.['http://regen.network/landStewardStory'];
+
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'
   ]?.map((sdg: { '@id': string }) => sdg['@id']);
@@ -319,55 +321,54 @@ function ProjectTopSection({
     <Section classes={{ root: classes.section }}>
       <Grid container>
         <Grid item xs={12} md={8} className={classes.rightGrid}>
+          {/* TODO Show on-chain project id if no off-chain name */}
           <Title variant="h1">{metadata?.['http://schema.org/name']}</Title>
           <div className={classes.projectPlace}>
             <ProjectPlaceInfo
               iconClassName={classes.icon}
+              // TODO Format and show on-chain project location if no off-chain location
               place={metadata?.['http://schema.org/location']?.place_name}
               area={
                 metadata?.['http://regen.network/size']?.[
                   'http://qudt.org/1.1/schema/qudt#numericValue'
                 ]?.['@value']
               }
-              areaUnit={qudtUnitMap[unit]}
+              areaUnit={unit && qudtUnitMap[unit]}
             />
             <div className={classes.creditClassInfo}>
               {creditClass && creditClassVersion && (
                 <>
-                  {creditClass.standard &&
-                    creditClassVersion?.metadata?.[
-                      'http://regen.network/standard'
-                    ]?.['http://schema.org/name'] &&
-                    creditClassVersion?.metadata?.[
-                      'http://regen.network/standard'
-                    ]?.['http://schema.org/url']?.['@value'] && (
-                      <ProjectTopLink
-                        label="standard"
-                        name={
-                          creditClassVersion?.metadata?.[
-                            'http://regen.network/standard'
-                          ]?.['http://schema.org/name']
-                        }
-                        url={
-                          creditClassVersion?.metadata?.[
-                            'http://regen.network/standard'
-                          ]?.['http://schema.org/url']?.['@value']
-                        }
-                        standard={creditClass.standard}
-                      />
-                    )}
                   <ProjectTopLink
-                    label={`credit class${
-                      creditClass.standard ? ' (type)' : ''
-                    }`}
+                    label="credit class"
                     name={creditClassVersion.name}
                     url={
                       creditClassVersion.metadata?.['http://schema.org/url']?.[
                         '@value'
                       ]
                     }
-                    standard={creditClass.standard}
+                    creditClassId={
+                      creditClassVersion?.metadata?.[
+                        'http://regen.network/creditClassId'
+                      ]
+                    }
                   />
+                  {metadata?.['http://regen.network/projectActivity']?.[
+                    'http://schema.org/name'
+                  ] && (
+                    <ProjectTopLink
+                      label="project activity"
+                      name={
+                        metadata?.['http://regen.network/projectActivity']?.[
+                          'http://schema.org/name'
+                        ]
+                      }
+                      url={
+                        metadata?.['http://regen.network/projectActivity']?.[
+                          'http://schema.org/url'
+                        ]?.['@value']
+                      }
+                    />
+                  )}
                   <ProjectTopLink
                     label="offset generation method"
                     name={
@@ -398,7 +399,13 @@ function ProjectTopSection({
                       '@value'
                     ]
                   }
-                  standard={creditClass.standard}
+                />
+              )}
+              {registry && (
+                <ProjectTopLink
+                  label="registry"
+                  name={registry.name}
+                  url={registry.organizationByPartyId?.website}
                 />
               )}
             </div>
@@ -412,16 +419,21 @@ function ProjectTopSection({
                   apiServerUrl={apiServerUrl}
                   geojson={geojson}
                   isGISFile={isGISFile}
+                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 />
               </div>
             </LazyLoad>
           )}
-          <Title className={classes.story} variant="h2">
-            Story
-          </Title>
-          <Description className={classes.description}>
-            {ReactHtmlParser(metadata?.['http://regen.network/landStory'])}
-          </Description>
+          {landStewardStoryTitle && (
+            <Title className={classes.story} variant="h2">
+              Story
+            </Title>
+          )}
+          {landStory && (
+            <Description className={classes.description}>
+              {landStory}
+            </Description>
+          )}
           <LazyLoad offset={50}>
             {videoURL &&
               (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(
@@ -449,12 +461,16 @@ function ProjectTopSection({
               />
             )}
           </LazyLoad>
-          <Title variant="h4" className={classes.tagline}>
-            {metadata?.['http://regen.network/landStewardStoryTitle']}
-          </Title>
-          <ReadMore maxLength={450} restMinLength={300}>
-            {metadata?.['http://regen.network/landStewardStory'] || ''}
-          </ReadMore>
+          {landStewardStoryTitle && (
+            <Title variant="h4" className={classes.tagline}>
+              {landStewardStoryTitle}
+            </Title>
+          )}
+          {landStewardStory && (
+            <ReadMore maxLength={450} restMinLength={300}>
+              {landStewardStory}
+            </ReadMore>
+          )}
           {quote && (
             <div>
               <Title
@@ -479,26 +495,47 @@ function ProjectTopSection({
               </Description>
             </div>
           )}
+          {/* TODO uncomment code below and display on-chain project.metadata */}
+          {/* <>
+            <Box
+              sx={theme => ({
+                fontSize: { xs: theme.spacing(3), sm: theme.spacing(3.5) },
+                color: theme.palette.primary.contrastText,
+                fontWeight: 800,
+                fontFamily: 'Muli',
+                letterSpacing: '1px',
+                textTransform: 'uppercase',
+                pt: { xs: 6.25, sm: 11.75 },
+                pb: { xs: 2.75, sm: 5.5 },
+              })}
+            >
+              additional metadata
+            </Box>
+            <Description fontSize={getFontSize('metadata')}>
+              lorem ipsum
+            </Description>
+          </> */}
         </Grid>
         <Grid item xs={12} md={4} className={classes.leftGrid}>
           <ProjectTopCard
             projectDeveloper={getDisplayParty(
               'http://regen.network/projectDeveloper',
               metadata,
-              data?.projectByHandle?.partyByDeveloperId,
+              project?.partyByDeveloperId,
             )}
             landSteward={getDisplayParty(
               'http://regen.network/landSteward',
               metadata,
-              data?.projectByHandle?.partyByStewardId,
+              project?.partyByStewardId,
             )}
             landOwner={getDisplayParty(
               'http://regen.network/landOwner',
               metadata,
-              data?.projectByHandle?.partyByLandOwnerId,
+              project?.partyByLandOwnerId,
             )}
-            broker={getParty(data?.projectByHandle?.partyByBrokerId)}
-            reseller={getParty(data?.projectByHandle?.partyByResellerId)}
+            // TODO if no off-chain data, use on-chain project.issuer
+            issuer={getParty(project?.partyByIssuerId)}
+            reseller={getParty(project?.partyByResellerId)}
             sdgs={sdgs}
           />
         </Grid>

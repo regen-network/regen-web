@@ -107,13 +107,13 @@ const geojson = {
 };
 
 export const map = (): JSX.Element => (
-  <Map geojson={geojson} token={process.env.STORYBOOK_MAPBOX_TOKEN} />
+  <Map geojson={geojson} mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN} />
 );
 
 // export const geocoder = (): JSX.Element => {
 //   return (
 //     <Geocoder
-//       token={process.env.STORYBOOK_MAPBOX_TOKEN || ''}
+//       mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN || ''}
 //       fullWidth
 //       setFeature={() => {}}
 //       label="Address"

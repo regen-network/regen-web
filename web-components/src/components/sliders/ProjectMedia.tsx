@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback, useLayoutEffect } from 'react';
 import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
 import { Image, OptimizeImageProps } from '../image';
@@ -14,9 +15,10 @@ export interface Media {
   preview?: string;
 }
 
+export type Asset = Media | React.ReactNode;
 interface ProjectMediaProps extends OptimizeImageProps {
   gridView?: boolean;
-  assets: Media[];
+  assets: Asset[];
   imageCredits?: string;
   xsBorderRadius?: boolean;
   mobileHeight?: string | number;
@@ -25,6 +27,10 @@ interface ProjectMediaProps extends OptimizeImageProps {
 interface StyleProps {
   xsBorderRadius: boolean;
   mobileHeight?: string | number;
+}
+
+function isMedia(a: Asset): a is Media {
+  return (a as Media).src !== undefined;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
@@ -171,6 +177,22 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   sliderImageContainer: {
     position: 'relative',
   },
+  elementContainer: {
+    position: 'relative',
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(100),
+    },
+    [theme.breakpoints.down('sm')]: {
+      height: theme.spacing(56),
+    },
+  },
+  element: {
+    [theme.breakpoints.up('sm')]: {
+      borderRadius: '5px',
+      overflow: 'hidden',
+      height: '100%',
+    },
+  },
 }));
 
 function getThumbnailStyle(thumbsTranslate: number): object {
@@ -232,23 +254,24 @@ export default function ProjectMedia({
       </div>
     ),
     customPaging: (i: number) => {
+      const mediaAsset = isMedia(assets[i]) ? (assets[i] as Media) : undefined;
       return matches ? (
         <div className={classes.thumbnail}>
           <img
             width={60}
             height={60}
             src={
-              imageStorageBaseUrl && apiServerUrl
+              mediaAsset
                 ? getOptimizedImageSrc(
-                    assets[i].thumbnail,
+                    mediaAsset.thumbnail,
                     imageStorageBaseUrl,
                     apiServerUrl,
                   )
-                : assets[i].thumbnail || ''
+                : ''
             }
-            alt={assets[i].thumbnail}
+            alt={mediaAsset?.thumbnail}
           />
-          {assets[i].type === 'video' && (
+          {mediaAsset?.type === 'video' && (
             <div className={classes.play}>
               <PlayIcon width="10.85px" height="10.85px" />
             </div>
@@ -260,52 +283,68 @@ export default function ProjectMedia({
     },
   };
 
+  const ProjectAsset: React.FC<{ asset: Asset }> = ({ asset }) =>
+    isMedia(asset) ? (
+      <Image
+        className={classes.image}
+        src={asset.src}
+        alt={asset.src}
+        imageStorageBaseUrl={imageStorageBaseUrl}
+        apiServerUrl={apiServerUrl}
+      />
+    ) : (
+      <div className={classes.element}>{asset}</div>
+    );
+
   return (
     <div>
-      {matches && gridView && assets.length >= 4 ? (
-        <Grid container className={classes.grid}>
-          <Grid item className={classes.sideGrid}>
-            <Image
-              className={classes.image}
-              src={assets[0].src}
-              alt={assets[0].src}
-              imageStorageBaseUrl={imageStorageBaseUrl}
-              apiServerUrl={apiServerUrl}
-            />
-            {imageCredits && (
-              <div className={classes.imageCredits}>{imageCredits}</div>
-            )}
-          </Grid>
-          <Grid item className={classes.centreGrid}>
-            <div className={classes.imageContainer}>
-              <Image
-                className={classes.image}
-                src={assets[1].src}
-                alt={assets[1].src}
-                imageStorageBaseUrl={imageStorageBaseUrl}
-                apiServerUrl={apiServerUrl}
-              />
-            </div>
-            <div className={classes.imageContainer}>
-              <Image
-                className={classes.image}
-                src={assets[2].src}
-                alt={assets[2].src}
-                imageStorageBaseUrl={imageStorageBaseUrl}
-                apiServerUrl={apiServerUrl}
-              />
-            </div>
-          </Grid>
-          <Grid item className={classes.sideGrid}>
-            <Image
-              className={classes.image}
-              src={assets[3].src}
-              alt={assets[3].src}
-              imageStorageBaseUrl={imageStorageBaseUrl}
-              apiServerUrl={apiServerUrl}
-            />
-          </Grid>
-        </Grid>
+      {matches && gridView ? (
+        <>
+          {assets.length >= 4 && (
+            <Grid container className={classes.grid}>
+              <Grid item className={classes.sideGrid}>
+                <ProjectAsset asset={assets[0]} />
+                {imageCredits && (
+                  <div className={classes.imageCredits}>{imageCredits}</div>
+                )}
+              </Grid>
+              <Grid item className={classes.centreGrid}>
+                <div className={classes.imageContainer}>
+                  <ProjectAsset asset={assets[1]} />
+                </div>
+                <div className={classes.imageContainer}>
+                  <ProjectAsset asset={assets[2]} />
+                </div>
+              </Grid>
+              <Grid item className={classes.sideGrid}>
+                <ProjectAsset asset={assets[3]} />
+              </Grid>
+            </Grid>
+          )}
+          {(assets.length === 1 || assets.length === 2) && (
+            <Grid
+              container
+              columnSpacing={5}
+              columns={15}
+              className={classes.grid}
+            >
+              {assets.map((a, i) => (
+                <Grid
+                  xs={assets.length === 1 ? 15 : i === 0 ? 8 : 7}
+                  item
+                  className={classes.elementContainer}
+                >
+                  <ProjectAsset asset={a} />
+                  {i === 0 && isMedia(a) && imageCredits && (
+                    <Box className={classes.imageCredits} sx={{ pl: 5 }}>
+                      {imageCredits}
+                    </Box>
+                  )}
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </>
       ) : (
         <Slider
           {...settings}
@@ -335,42 +374,50 @@ export default function ProjectMedia({
           }}
         >
           {assets.map((item, index) => {
-            if (item.type === 'image') {
-              const image =
-                imageStorageBaseUrl && apiServerUrl ? (
-                  <Image
-                    src={item.src}
-                    className={classes.item}
-                    alt={item.src}
-                    delay={index > 0 ? 1000 : 0}
-                    imageStorageBaseUrl={imageStorageBaseUrl}
-                    apiServerUrl={apiServerUrl}
-                  />
-                ) : (
-                  <img src={item.src} className={classes.item} alt={item.src} />
-                );
+            if (isMedia(item)) {
+              if (item.type === 'image') {
+                const image =
+                  imageStorageBaseUrl && apiServerUrl ? (
+                    <Image
+                      src={item.src}
+                      className={classes.item}
+                      alt={item.src}
+                      delay={index > 0 ? 1000 : 0}
+                      imageStorageBaseUrl={imageStorageBaseUrl}
+                      apiServerUrl={apiServerUrl}
+                    />
+                  ) : (
+                    <img
+                      src={item.src}
+                      className={classes.item}
+                      alt={item.src}
+                    />
+                  );
 
-              return (
-                <div key={index} className={classes.sliderImageContainer}>
-                  {image}{' '}
-                  {imageCredits && (
-                    <div className={classes.imageCredits}>{imageCredits}</div>
-                  )}
-                </div>
-              );
-            } else if (item.type === 'video') {
-              return (
-                <video
-                  key={index}
-                  className={classes.item}
-                  controls
-                  poster={item.preview}
-                >
-                  <source src={item.src} />
-                </video>
-              );
+                return (
+                  <div key={index} className={classes.sliderImageContainer}>
+                    {image}{' '}
+                    {imageCredits && (
+                      <div className={classes.imageCredits}>{imageCredits}</div>
+                    )}
+                  </div>
+                );
+              } else if (item.type === 'video') {
+                return (
+                  <video
+                    key={index}
+                    className={classes.item}
+                    controls
+                    poster={item.preview}
+                  >
+                    <source src={item.src} />
+                  </video>
+                );
+              } else {
+                return null;
+              }
             } else {
-              return null;
+              return <div className={classes.elementContainer}>{item}</div>;
             }
           })}
         </Slider>

@@ -82,30 +82,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 'bold',
     marginLeft: theme.spacing(1),
   },
-  groupTitle: {
-    marginTop: theme.spacing(10.75),
-    marginBottom: theme.spacing(2),
-  },
-  stateCountryGrid: {
-    [theme.breakpoints.up('sm')]: {
-      flexWrap: 'nowrap',
-    },
-  },
-  stateCountryTextField: {
-    marginTop: theme.spacing(6),
-    [theme.breakpoints.up('sm')]: {
-      '&:first-of-type': {
-        marginRight: theme.spacing(2.375),
-      },
-      '&:last-of-type': {
-        marginLeft: theme.spacing(2.375),
-      },
-    },
-  },
-  postalCodeField: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(12.5),
-  },
 }));
 
 // Output (submit)

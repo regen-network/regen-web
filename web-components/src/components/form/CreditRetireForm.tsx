@@ -115,7 +115,7 @@ export interface FormValues {
   retiredAmount: number;
   note: string;
   country: string;
-  stateCountry?: string;
+  stateProvince?: string;
   postalCode?: string;
 }
 
@@ -131,14 +131,6 @@ export const CreditRetireFields = ({
   availableTradableAmount,
 }: CreditRetireFieldsProps): JSX.Element => {
   const styles = useStyles();
-
-  const countryHandler = (countryCode: string): any => {
-    console.log('*** countryHandler', countryCode);
-  };
-
-  const stateCountryHandler = (stateCountry: string): any => {
-    console.log('*** stateCountryHandler', stateCountry);
-  };
 
   return (
     <>
@@ -167,15 +159,12 @@ export const CreditRetireFields = ({
         Please enter a location for the retirement of these credits. This
         prevents double counting of credits in different locations.
       </Description>
-      <Grid container alignItems="center" className={styles.stateCountryGrid}>
+      <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationStateField
-            country={country}
-            triggerOnChange={stateCountryHandler}
-          />
+          <LocationStateField country={country} />
         </Grid>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationCountryField triggerOnChange={countryHandler} />
+          <LocationCountryField />
         </Grid>
       </Grid>
       <Field
@@ -212,8 +201,8 @@ export const validateCreditRetire = (
 export const initialValues = {
   retiredAmount: 0,
   note: '',
-  country: 'US',
-  stateCountry: '',
+  country: '',
+  stateProvince: '',
 };
 
 const CreditRetireForm: React.FC<FormProps> = ({

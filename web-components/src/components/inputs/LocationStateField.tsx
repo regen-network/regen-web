@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface FieldProps {
   country: string;
-  triggerOnChange: (stateCountry: string) => void;
+  name?: string;
 }
 
 const LocationStateField: React.FC<FieldProps> = ({
   country,
-  triggerOnChange,
+  name = 'stateProvince',
 }) => {
   const styles = useStyles();
 
@@ -47,17 +47,17 @@ const LocationStateField: React.FC<FieldProps> = ({
   };
 
   useEffect(() => {
+    if (country === '') return;
     searchState(country);
   }, [country]);
 
   return (
     <Field
+      name={name}
+      label="State / Region"
       options={stateOptions}
       component={SelectTextField}
       className={styles.textField}
-      triggerOnChange={triggerOnChange}
-      label="State / Region"
-      name="stateProvince"
       optional
     />
   );

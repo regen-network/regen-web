@@ -21,7 +21,7 @@ interface ProjectTopCardProps {
   projectDeveloper?: User;
   landSteward?: User;
   landOwner?: User;
-  broker?: User;
+  issuer?: User;
   reseller?: User;
   sdgs?: SDG[];
 }
@@ -106,7 +106,7 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
-  broker: {
+  issuer: {
     '& img': {
       width: '70%',
       height: '70%',
@@ -119,7 +119,7 @@ export default function ProjectTopCard({
   projectDeveloper,
   landSteward,
   landOwner,
-  broker,
+  issuer,
   reseller,
   sdgs,
 }: ProjectTopCardProps): JSX.Element {
@@ -178,13 +178,13 @@ export default function ProjectTopCard({
           <UserInfoWithTitle size="xl" user={landOwner} title="land owner" />
         </div>
       )}
-      {broker && (
-        <div className={styles.broker}>
-          <UserInfoWithTitle size="xl" user={broker} title="broker" />
+      {issuer && (
+        <div className={styles.issuer}>
+          <UserInfoWithTitle size="xl" user={issuer} title="issuer" />
         </div>
       )}
       {reseller && (
-        <div className={styles.broker}>
+        <div className={styles.issuer}>
           <UserInfoWithTitle size="xl" user={reseller} title="reseller" />
         </div>
       )}

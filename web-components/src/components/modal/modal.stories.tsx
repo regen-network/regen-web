@@ -30,7 +30,9 @@ function OpenLedgerModal(): JSX.Element {
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <Button variant="contained" onClick={() => setOpen(true)}>Open Modal</Button>
+      <Button variant="contained" onClick={() => setOpen(true)}>
+        Open Modal
+      </Button>
       <IssuanceModal
         open={open}
         onClose={() => setOpen(false)}
@@ -179,7 +181,7 @@ function OpenCropImageModal(props: CropStoryProps): JSX.Element {
 }
 
 function OpenProcessingModal(): JSX.Element {
-  return <ProcessingModal open={true} onClose={() => { }} />;
+  return <ProcessingModal open={true} onClose={() => {}} />;
 }
 
 export const modal = (): JSX.Element => <OpenModal />;
@@ -191,9 +193,19 @@ export const cropRoundImageModal = (): JSX.Element => (
 export const processingModal = (): JSX.Element => <OpenProcessingModal />;
 
 export const creditTransferModal = (): JSX.Element => (
-  <CreditTransferModal open={true} onClose={() => null} />
+  <CreditTransferModal
+    sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'}
+    batchDenom={'C01-20190101-20201010-02'}
+    open={true}
+    onClose={() => null}
+  />
 );
 
 export const creditRetireModal = (): JSX.Element => (
-  <CreditRetireModal open={true} onClose={() => null} />
+  <CreditRetireModal
+    holder={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'}
+    batchDenom={'C01-20190101-20201010-02'}
+    open={true}
+    onClose={() => null}
+  />
 );

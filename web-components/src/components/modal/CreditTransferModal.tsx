@@ -27,10 +27,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreditTransferModal: React.FC<RegenModalProps> = ({ open, onClose }) => {
+interface CreditTransferModalProps extends RegenModalProps {
+  sender: string;
+  batchDenom: string;
+}
+
+const CreditTransferModal: React.FC<CreditTransferModalProps> = ({
+  sender,
+  batchDenom,
+  open,
+  onClose,
+}) => {
   const styles = useStyles();
-  // TODO Harcoded sender
-  const sender = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4';
 
   return (
     <Modal className={styles.modal} open={open} onClose={onClose}>
@@ -40,7 +48,7 @@ const CreditTransferModal: React.FC<RegenModalProps> = ({ open, onClose }) => {
       <CreditTransferForm
         sender={sender}
         availableTradableAmount={1000}
-        batchDenom={'C01-20190101-20201010-02'}
+        batchDenom={batchDenom}
         onClose={() => null}
       />
     </Modal>

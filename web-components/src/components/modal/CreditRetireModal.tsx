@@ -27,10 +27,18 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreditRetireModal: React.FC<RegenModalProps> = ({ open, onClose }) => {
+interface CreditRetireModalProps extends RegenModalProps {
+  holder: string;
+  batchDenom: string;
+}
+
+const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
+  holder,
+  batchDenom,
+  open,
+  onClose,
+}) => {
   const styles = useStyles();
-  // TODO Harcoded holder
-  const holder = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4';
 
   return (
     <Modal className={styles.modal} open={open} onClose={onClose}>
@@ -40,7 +48,7 @@ const CreditRetireModal: React.FC<RegenModalProps> = ({ open, onClose }) => {
       <CreditRetireForm
         holder={holder}
         availableTradableAmount={1000}
-        batchDenom={'C01-20190101-20201010-02'}
+        batchDenom={batchDenom}
         onClose={() => null}
       />
     </Modal>

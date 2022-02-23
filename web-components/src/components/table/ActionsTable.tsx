@@ -82,90 +82,101 @@ export const ActionsTable: React.FC<{
 
   const styles = useStyles();
   return (
-    <StyledTableContainer>
-      <Box
-        sx={{
-          width: '100%',
-          overflow: 'auto',
-          paddingBottom:
-            getTablePaginationPadding(
-              rows.length,
-              rowsPerPage,
-              displayRows.length,
-            ) * 25,
-        }}
-      >
-        <Table aria-label={tableLabel}>
-          <TableHead>
-            <TableRow>
-              {headerRows.map((headerRow, i) => (
-                <StyledTableCell key={i}>{headerRow}</StyledTableCell>
-              ))}
-              {!!renderActionButtons && (
-                <StyledTableCell
-                  sx={{
-                    textAlign: 'left',
-                    background: 'primary.main',
-                    position: 'sticky',
-                    right: 0,
-                  }}
-                >
-                  <Box>
-                    <div className={styles.borderLeft} />
-                    Actions
-                  </Box>
-                </StyledTableCell>
-              )}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {/* {stableSort(
-                credits as any, // TODO type coercion shouldn't be necessary here
-                getComparator(order, orderBy),
-              ).map((row, i) => ( */}
-            {displayRows.map((row, i) => (
-              <StyledTableRow key={i}>
-                {row.map((elem, j) => (
-                  <StyledTableCell key={j}>{elem}</StyledTableCell>
+    <Box
+      sx={{
+        border: 1,
+        borderColor: 'info.light',
+        borderRadius: '8px',
+        marginTop: 8,
+        marginBottom: 12,
+        overflow: 'hidden',
+      }}
+    >
+      <StyledTableContainer>
+        <Box
+          sx={{
+            width: '100%',
+            overflow: 'auto',
+            paddingBottom:
+              getTablePaginationPadding(
+                rows.length,
+                rowsPerPage,
+                displayRows.length,
+              ) * 25,
+          }}
+        >
+          <Table aria-label={tableLabel}>
+            <TableHead>
+              <TableRow>
+                {headerRows.map((headerRow, i) => (
+                  <StyledTableCell key={i}>{headerRow}</StyledTableCell>
                 ))}
                 {!!renderActionButtons && (
                   <StyledTableCell
                     sx={{
-                      background: 'inherit',
+                      textAlign: 'left',
+                      background: 'primary.main',
                       position: 'sticky',
                       right: 0,
                     }}
                   >
-                    <div className={styles.borderLeft} />
-                    {renderActionButtons(i)}
+                    <Box>
+                      <div className={styles.borderLeft} />
+                      Actions
+                    </Box>
                   </StyledTableCell>
                 )}
-              </StyledTableRow>
-            ))}
-          </TableBody>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {/* {stableSort(
+                credits as any, // TODO type coercion shouldn't be necessary here
+                getComparator(order, orderBy),
+              ).map((row, i) => ( */}
+              {displayRows.map((row, i) => (
+                <StyledTableRow key={i}>
+                  {row.map((elem, j) => (
+                    <StyledTableCell key={j}>{elem}</StyledTableCell>
+                  ))}
+                  {!!renderActionButtons && (
+                    <StyledTableCell
+                      sx={{
+                        background: 'inherit',
+                        position: 'sticky',
+                        right: 0,
+                      }}
+                    >
+                      <div className={styles.borderLeft} />
+                      {renderActionButtons(i)}
+                    </StyledTableCell>
+                  )}
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Box>
+        <Table>
+          <TableFooter sx={{ position: 'sticky', left: 0 }}>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10]}
+                rowsPerPage={rowsPerPage}
+                onChangeRowsPerPage={e => {
+                  setRowsPerPage(parseInt(e.target.value, 10));
+                  setOffset(0);
+                }}
+                count={rows.length}
+                page={page}
+                onPageChange={(_, newPage) => {
+                  setPage(newPage);
+                  setOffset(newPage * rowsPerPage);
+                }}
+              />
+            </TableRow>
+          </TableFooter>
         </Table>
-      </Box>
-      <Table>
-        <TableFooter sx={{ position: 'sticky', left: 0 }}>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10]}
-              rowsPerPage={rowsPerPage}
-              onChangeRowsPerPage={e => {
-                setRowsPerPage(parseInt(e.target.value, 10));
-                setOffset(0);
-              }}
-              count={rows.length}
-              page={page}
-              onPageChange={(_, newPage) => {
-                setPage(newPage);
-                setOffset(newPage * rowsPerPage);
-              }}
-            />
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </StyledTableContainer>
+      </StyledTableContainer>
+    </Box>
   );
 };
 

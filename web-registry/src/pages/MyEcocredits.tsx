@@ -38,39 +38,28 @@ export const MyEcocredits: React.FC = () => {
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
-      <Section title="My Ecocredits" titleVariant="h3" titleAlign="left">
-        <Box
-          sx={{
-            border: 1,
-            borderColor: 'info.light',
-            borderRadius: '8px',
-            marginTop: 8,
-            marginBottom: 12,
-            overflow: 'hidden',
-          }}
-        >
-          <EcocreditsTable
-            credits={credits}
-            renderActionButtons={i => (
-              <TableActionButtons
-                buttons={[
-                  {
-                    label: 'sell',
-                    onClick: () => `TODO sell credit ${i}`,
-                  },
-                  {
-                    label: 'Transfer',
-                    onClick: () => `TODO transfer credit ${i}`,
-                  },
-                  {
-                    label: 'Retire',
-                    onClick: () => `TODO retire credit ${i}`,
-                  },
-                ]}
-              />
-            )}
-          />
-        </Box>
+      <Section title="Portfolio" titleVariant="h3" titleAlign="left">
+        <EcocreditsTable
+          credits={credits}
+          renderActionButtons={i => (
+            <TableActionButtons
+              buttons={[
+                {
+                  label: 'sell',
+                  onClick: () => `TODO sell credit ${i}`,
+                },
+                {
+                  label: 'Transfer',
+                  onClick: () => `TODO transfer credit ${i}`,
+                },
+                {
+                  label: 'Retire',
+                  onClick: () => `TODO retire credit ${i}`,
+                },
+              ]}
+            />
+          )}
+        />
       </Section>
     </Box>
   );

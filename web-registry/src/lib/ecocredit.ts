@@ -3,12 +3,12 @@ import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1
 import qs from 'querystring';
 
 import { ledgerRestUri } from '../ledger';
-import {
+import type {
   BatchDataResponse,
-  BatchPagination,
   BatchRowData,
-  EcocreditAccountBalance,
-} from '../types/ledger';
+  QueryBalanceResponse,
+} from '../types/ledger/ecocredit';
+import type { PageResponse } from '../types/ledger/base';
 
 const ECOCREDIT_MESSAGE_TYPES = {
   SEND: "message.action='/regen.ecocredit.v1alpha1.MsgSend'",
@@ -22,7 +22,7 @@ export const getBatches = async (
   params?: URLSearchParams,
 ): Promise<
   AxiosResponse<{
-    pagination: BatchPagination;
+    pagination: PageResponse;
     batches: BatchRowData[];
   }>
 > => {
@@ -40,7 +40,7 @@ export const getBatchSupply = (batchDenom: string): Promise<AxiosResponse> => {
 export const getAccountEcocreditsForBatch = (
   batchDenom: string,
   account: string,
-): Promise<AxiosResponse<EcocreditAccountBalance>> => {
+): Promise<AxiosResponse<QueryBalanceResponse>> => {
   return axios.get(
     `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/balance/${account}`,
   );

@@ -51,20 +51,20 @@ export const MyEcocredits: React.FC = () => {
         >
           <EcocreditsTable
             credits={credits}
-            renderActionButtons={row => (
+            renderActionButtons={i => (
               <TableActionButtons
                 buttons={[
                   {
                     label: 'sell',
-                    onClick: () => `TODO sell credit for ${row}`,
+                    onClick: () => `TODO sell credit ${i}`,
                   },
                   {
                     label: 'Transfer',
-                    onClick: () => 'TODO transfer credit',
+                    onClick: () => `TODO transfer credit ${i}`,
                   },
                   {
                     label: 'Retire',
-                    onClick: () => 'TODO retire credit',
+                    onClick: () => `TODO retire credit ${i}`,
                   },
                 ]}
               />

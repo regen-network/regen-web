@@ -113,7 +113,7 @@ interface FormValues extends RetireFormValues {
   withRetire?: boolean;
 }
 
-const CreditTransferForm: React.FC<FormProps> = ({
+const CreditSendForm: React.FC<FormProps> = ({
   sender,
   batchDenom,
   availableTradableAmount,
@@ -228,7 +228,7 @@ const CreditTransferForm: React.FC<FormProps> = ({
             isValid={isValid}
             submitCount={submitCount}
             submitForm={submitForm}
-            label={'Transfer'}
+            label={'Send'}
           />
         </Form>
       )}
@@ -236,4 +236,4 @@ const CreditTransferForm: React.FC<FormProps> = ({
   );
 };
 
-export { CreditTransferForm };
+export { CreditSendForm };

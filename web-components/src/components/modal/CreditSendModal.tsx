@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Modal, { RegenModalProps } from '../modal';
 import Title from '../title';
-import { CreditTransferForm } from '../form/CreditTransferForm';
+import { CreditSendForm } from '../form/CreditSendForm';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -27,12 +27,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-interface CreditTransferModalProps extends RegenModalProps {
+interface CreditSendModalProps extends RegenModalProps {
   sender: string;
   batchDenom: string;
 }
 
-const CreditTransferModal: React.FC<CreditTransferModalProps> = ({
+const CreditSendModal: React.FC<CreditSendModalProps> = ({
   sender,
   batchDenom,
   open,
@@ -43,9 +43,9 @@ const CreditTransferModal: React.FC<CreditTransferModalProps> = ({
   return (
     <Modal className={styles.modal} open={open} onClose={onClose}>
       <Title variant="h3" align="center" className={styles.mainTitle}>
-        Transfer
+        Send
       </Title>
-      <CreditTransferForm
+      <CreditSendForm
         sender={sender}
         availableTradableAmount={1000}
         batchDenom={batchDenom}
@@ -55,4 +55,4 @@ const CreditTransferModal: React.FC<CreditTransferModalProps> = ({
   );
 };
 
-export { CreditTransferModal };
+export { CreditSendModal };

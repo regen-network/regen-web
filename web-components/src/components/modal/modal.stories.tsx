@@ -4,7 +4,7 @@ import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Button, Card, Avatar, CardMedia } from '@mui/material';
-import { CreditTransferModal } from 'web-components/lib/components/modal/CreditTransferModal';
+import { CreditSendModal } from 'web-components/lib/components/modal/CreditSendModal';
 import { CreditRetireModal } from 'web-components/lib/components/modal/CreditRetireModal';
 
 export default {
@@ -192,8 +192,8 @@ export const cropRoundImageModal = (): JSX.Element => (
 );
 export const processingModal = (): JSX.Element => <OpenProcessingModal />;
 
-export const creditTransferModal = (): JSX.Element => (
-  <CreditTransferModal
+export const creditSendModal = (): JSX.Element => (
+  <CreditSendModal
     sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'}
     batchDenom={'C01-20190101-20201010-02'}
     open={true}

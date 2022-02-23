@@ -2,7 +2,7 @@ import * as React from 'react';
 import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
 // import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
 import LoginForm from 'web-components/lib/components/form/LoginForm';
-import { CreditTransferForm } from 'web-components/lib/components/form/CreditTransferForm';
+import { CreditSendForm } from 'web-components/lib/components/form/CreditSendForm';
 import { CreditRetireForm } from 'web-components/lib/components/form/CreditRetireForm';
 
 export default {
@@ -53,8 +53,8 @@ export const loginForm = (): JSX.Element => (
   />
 );
 
-export const creditTransferForm = (): JSX.Element => (
-  <CreditTransferForm
+export const creditSendForm = (): JSX.Element => (
+  <CreditSendForm
     sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
     availableTradableAmount={1000}
     batchDenom={'C01-20190101-20201010-02'}

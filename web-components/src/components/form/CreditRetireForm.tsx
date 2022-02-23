@@ -19,7 +19,7 @@ import {
 } from '../inputs/validation';
 
 /**
- * This form is closely related to the form for send/transfer ecocredits (<CreditTransferForm />).
+ * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).
  * In this retire form, some of its components and interfaces are exported in order to be reused in the
  * send/transfer form, since it optionally includes the retirement of ecocredits.
  *

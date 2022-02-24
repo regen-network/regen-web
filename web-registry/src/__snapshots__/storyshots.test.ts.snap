@@ -13061,7 +13061,7 @@ exports[`Storyshots Forms Credit Retire Form 1`] = `
 </StyledEngineProvider>
 `;
 
-exports[`Storyshots Forms Credit Transfer Form 1`] = `
+exports[`Storyshots Forms Credit Send Form 1`] = `
 <StyledEngineProvider
   injectFirst={true}
 >
@@ -37771,7 +37771,7 @@ exports[`Storyshots Modal Credit Retire Modal 1`] = `
 </StyledEngineProvider>
 `;
 
-exports[`Storyshots Modal Credit Transfer Modal 1`] = `
+exports[`Storyshots Modal Credit Send Modal 1`] = `
 <StyledEngineProvider
   injectFirst={true}
 >

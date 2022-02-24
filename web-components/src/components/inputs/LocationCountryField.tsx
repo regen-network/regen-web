@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Field } from 'formik';
-import { makeStyles } from '@mui/styles';
-import { Theme } from '../../theme/muiTheme';
 
 import SelectTextField, { Option } from './SelectTextField';
 import { countries } from './countries';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  textField: {
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
-    },
-  },
-}));
+interface FieldProps {
+  className?: string;
+}
 
-const LocationCountryField: React.FC = () => {
-  const styles = useStyles();
+const LocationCountryField: React.FC<FieldProps> = ({ className }) => {
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
@@ -32,7 +25,7 @@ const LocationCountryField: React.FC = () => {
       name="country"
       label="Country"
       component={SelectTextField}
-      className={styles.textField}
+      className={className}
       options={options}
     />
   );

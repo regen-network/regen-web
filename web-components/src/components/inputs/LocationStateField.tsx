@@ -1,30 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Field } from 'formik';
-import { makeStyles } from '@mui/styles';
-import { Theme } from '../../theme/muiTheme';
 
 import SelectTextField, { Option } from './SelectTextField';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  textField: {
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
-    },
-  },
-}));
 
 interface FieldProps {
   country: string;
   name?: string;
+  className?: string;
 }
 
 const LocationStateField: React.FC<FieldProps> = ({
   country,
   name = 'stateProvince',
+  className,
 }) => {
-  const styles = useStyles();
-
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
 
   const searchState = async (countryId: string): Promise<void> => {
@@ -57,7 +47,7 @@ const LocationStateField: React.FC<FieldProps> = ({
       label="State / Region"
       options={stateOptions}
       component={SelectTextField}
-      className={styles.textField}
+      className={className}
       optional
     />
   );

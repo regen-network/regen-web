@@ -161,10 +161,10 @@ export const CreditRetireFields = ({
       </Description>
       <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationStateField country={country} />
+          <LocationStateField country={country} className={styles.textField} />
         </Grid>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationCountryField />
+          <LocationCountryField className={styles.textField} />
         </Grid>
       </Grid>
       <Field

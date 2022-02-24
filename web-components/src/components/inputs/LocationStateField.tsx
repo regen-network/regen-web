@@ -8,12 +8,14 @@ interface FieldProps {
   country: string;
   name?: string;
   className?: string;
+  optional?: boolean;
 }
 
 const LocationStateField: React.FC<FieldProps> = ({
   country,
   name = 'stateProvince',
   className,
+  optional = false,
 }) => {
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
 
@@ -48,7 +50,7 @@ const LocationStateField: React.FC<FieldProps> = ({
       options={stateOptions}
       component={SelectTextField}
       className={className}
-      optional
+      optional={optional}
     />
   );
 };

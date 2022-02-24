@@ -26,8 +26,7 @@ import {
   invalidEmailMessage,
 } from 'web-components/lib/components/inputs/validation';
 import Submit from 'web-components/lib/components/form/Submit';
-
-import { countries } from '../../lib/countries';
+import { countries } from 'web-components/lib/utils/countries';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 

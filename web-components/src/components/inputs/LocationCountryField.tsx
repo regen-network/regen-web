@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Field } from 'formik';
 
 import SelectTextField, { Option } from './SelectTextField';
-import { countries } from './countries';
+import { countries } from '../../utils/countries';
 
 interface FieldProps {
   className?: string;

@@ -26,8 +26,8 @@ import { Label } from 'web-components/lib/components/label';
 import { Image } from 'web-components/lib/components/image';
 import Submit from 'web-components/lib/components/form/Submit';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
+import { countries } from 'web-components/lib/utils/countries';
 
-import { countries } from '../../lib/countries';
 import { useWallet } from '../../lib/wallet';
 
 const useStyles = makeStyles(theme => ({

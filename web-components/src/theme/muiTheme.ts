@@ -106,12 +106,20 @@ const regenTheme = createTheme({
     h6: {
       fontSize: '1.125rem',
     },
-    subtitle2: {
+    subtitle1: {
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2.375rem',
       },
       [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '2rem',
+      },
+    },
+    subtitle2: {
+      [defaultTheme.breakpoints.up('sm')]: {
+        fontSize: '1.125rem',
+      },
+      [defaultTheme.breakpoints.down('sm')]: {
+        fontSize: '0.875rem',
       },
     },
     body1: {

@@ -90,7 +90,7 @@ const FeaturedSection: React.FC<Props> = ({ content }) => {
       <Section
         className={styles.root}
         title={content.header}
-        titleVariant="subtitle2"
+        titleVariant="subtitle1"
       >
         <div className={styles.card}>
           <GreenCard>

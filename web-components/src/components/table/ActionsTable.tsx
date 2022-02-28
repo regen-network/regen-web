@@ -116,6 +116,7 @@ export const ActionsTable: React.FC<{
                       background: 'primary.main',
                       position: 'sticky',
                       right: 0,
+                      width: { sm: 29 },
                     }}
                   >
                     <Box>
@@ -142,6 +143,7 @@ export const ActionsTable: React.FC<{
                         background: 'inherit',
                         position: 'sticky',
                         right: 0,
+                        width: { sm: 29 },
                       }}
                     >
                       <div className={styles.borderLeft} />

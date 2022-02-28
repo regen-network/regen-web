@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 import ActionsTable, {
   renderActionButtonsFunc,
@@ -8,13 +7,10 @@ import ActionsTable, {
 import type { TableBaskets } from '../../types/ledger/ecocredit';
 import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
 
-const useStyles = makeStyles(theme => ({}));
-
 export const BasketsTable: React.FC<{
   baskets: TableBaskets[];
   renderActionButtons?: renderActionButtonsFunc;
 }> = ({ baskets, renderActionButtons }) => {
-  const styles = useStyles();
   return (
     <ActionsTable
       tableLabel="ecocredits table"

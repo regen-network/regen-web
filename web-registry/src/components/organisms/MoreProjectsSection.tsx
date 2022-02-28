@@ -38,7 +38,7 @@ const MoreProjectsSection = ({
   title,
 }: MoreProjectsProps): JSX.Element => {
   const styles = useStyles();
-  const theme = useTheme();
+  const theme = useTheme<Theme>();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
@@ -13,6 +14,8 @@ import {
   StyledTableContainer,
   StyledTableCell,
   StyledTableRow,
+  getTablePaginationPadding,
+  // StyledTableSortLabel,
   formatNumber,
 } from 'web-components/lib/components/table';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
@@ -101,7 +104,6 @@ const ROWS_PER_PAGE_OPTIONS = { options: [5, 10] };
 
 const CreditBatches: React.FC = () => {
   const styles = useStyles();
-  const theme = useTheme();
   const [batches, setBatches] = useState<any[]>([]);
   // const [order, setOrder] = useState<Order>('desc');
   // const [orderBy, setOrderBy] = useState<string>('start_date');
@@ -140,14 +142,6 @@ const CreditBatches: React.FC = () => {
   //   setOrderBy(property);
   // };
 
-  const getPaddingBottom = (
-    countTotal: number,
-    rowsPerPage: number,
-    countPage: number,
-  ): number => {
-    return countTotal <= rowsPerPage ? 0 : rowsPerPage - countPage;
-  };
-
   return ledgerRestUri && batches.length > 0 ? (
     <Section
       classes={{ root: styles.section, title: styles.title }}
@@ -155,17 +149,16 @@ const CreditBatches: React.FC = () => {
       titleVariant="h2"
     >
       <StyledTableContainer className={styles.tableBorder}>
-        <div
-          style={{
+        <Box
+          sx={{
             width: '100%',
             overflow: 'auto',
-            paddingBottom: `${theme.spacing(
-              getPaddingBottom(
+            paddingBottom:
+              getTablePaginationPadding(
                 paginationProps.count,
                 paginationProps.rowsPerPage,
                 batches.length,
               ) * 25,
-            )}`,
           }}
         >
           <Table aria-label="credit batch table" stickyHeader>
@@ -238,7 +231,7 @@ const CreditBatches: React.FC = () => {
               })}
             </TableBody>
           </Table>
-        </div>
+        </Box>
         <Table>
           <TableFooter>
             <TableRow>

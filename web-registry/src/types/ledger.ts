@@ -1,3 +1,4 @@
+// Response structure based on https://buf.build/regen/regen-ledger
 export interface BatchRowData {
   start_date: string | Date;
   end_date: string | Date;
@@ -25,3 +26,7 @@ export interface EcocreditAccountBalance {
   tradable_amount: string;
   retired_amount: string;
 }
+
+export interface EcocreditTableData
+  extends BatchRowData,
+    EcocreditAccountBalance {}

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import React from 'react';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useMutation } from '@apollo/client';
 import { Formik, Form, Field } from 'formik';
-import useMediaQuery from '@mui/material/useMediaQuery';
+// import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
@@ -16,9 +16,6 @@ import Description from 'web-components/lib/components/description';
 import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import SelectTextField, {
-  Option,
-} from 'web-components/lib/components/inputs/SelectTextField';
 import { CreditPrice } from 'web-components/lib/components/buy-footer';
 import {
   requiredMessage,
@@ -26,6 +23,9 @@ import {
   invalidEmailMessage,
 } from 'web-components/lib/components/inputs/validation';
 import Submit from 'web-components/lib/components/form/Submit';
+import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
+import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
+// TODO: refactor countries dependency
 import { countries } from 'web-components/lib/utils/countries';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
@@ -97,6 +97,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       flexWrap: 'nowrap',
     },
   },
+  locationTextField: {
+    '& .MuiInputBase-formControl': {
+      marginTop: theme.spacing(2.25),
+    },
+  },
   stateCountryTextField: {
     marginTop: theme.spacing(6),
     [theme.breakpoints.up('sm')]: {
@@ -157,12 +162,10 @@ function CreditsPurchaseForm({
   stripePrice,
   onClose,
 }: CreditsPurchaseFormProps): JSX.Element {
+  // const theme = useTheme();
   const classes = useStyles();
-  const initialCountry = 'US';
   const { projectId } = useParams();
-  const [stateOptions, setStateOptions] = useState<Option[]>([]);
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  // const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   const [createUser] = useMutation(CREATE_USER, {
     errorPolicy: 'ignore',
@@ -174,31 +177,6 @@ function CreditsPurchaseForm({
 
   const [createAddress] = useMutation(CREATE_ADDRESS, {
     errorPolicy: 'ignore',
-  });
-
-  const searchState = async (countryId: string): Promise<void> => {
-    const resp = await axios({
-      url:
-        'https://geodata.solutions/api/api.php?type=getStates&countryId=' +
-        countryId,
-      method: 'POST',
-    });
-    const respOK = resp && resp.status === 200;
-    if (respOK) {
-      const data = await resp.data;
-      const options = Object.keys(data.result).map(key => ({
-        value: data.result[key],
-        label: data.result[key],
-      }));
-      options.unshift({ value: '', label: 'Please choose a state' });
-      setStateOptions(options);
-    }
-  };
-
-  useEffect(() => {
-    if (stateOptions.length === 0) {
-      searchState(initialCountry);
-    }
   });
 
   return (
@@ -216,7 +194,7 @@ function CreditsPurchaseForm({
           email: '',
           city: '',
           state: '',
-          country: initialCountry,
+          country: '',
         }}
         validate={(values: Values) => {
           const errors: Partial<Values> = {};
@@ -263,6 +241,8 @@ function CreditsPurchaseForm({
             let result;
 
             // Create address
+            // TODO: country arg value should be enough..
+            // country valueObject instead of just a key as string
             const feature = {
               place_type: ['place'],
               text: city,
@@ -357,7 +337,6 @@ function CreditsPurchaseForm({
       >
         {({
           values,
-          errors,
           submitForm,
           isSubmitting,
           isValid,
@@ -460,23 +439,17 @@ function CreditsPurchaseForm({
                   label="City"
                   name="city"
                 />
-                <Grid
-                  container
-                  alignItems="center"
-                  className={classes.stateCountryGrid}
-                >
+                <Grid container className={classes.stateCountryGrid}>
                   <Grid
                     item
                     xs={12}
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <Field
-                      options={stateOptions}
-                      component={SelectTextField}
-                      label="State / Province / Region"
+                    <LocationStateField
                       name="state"
-                      errors={matches}
+                      country={values.country}
+                      className={classes.locationTextField}
                     />
                   </Grid>
                   <Grid
@@ -485,16 +458,8 @@ function CreditsPurchaseForm({
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <Field
-                      component={SelectTextField}
-                      options={Object.keys(countries).map(key => ({
-                        value: key,
-                        label: countries[key],
-                      }))}
-                      name="country"
-                      label="Country"
-                      triggerOnChange={searchState}
-                      errors={matches}
+                    <LocationCountryField
+                      className={classes.locationTextField}
                     />
                   </Grid>
                 </Grid>

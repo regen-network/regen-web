@@ -39,7 +39,11 @@ const LocationStateField: React.FC<FieldProps> = ({
   };
 
   useEffect(() => {
-    if (country === '') return;
+    if (country === '') {
+      // reset options when country no longer has a selected element
+      setStateOptions([]);
+      return;
+    }
     searchState(country);
   }, [country]);
 

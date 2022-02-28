@@ -25,3 +25,7 @@ export interface EcocreditAccountBalance {
   tradable_amount: string;
   retired_amount: string;
 }
+
+export interface EcocreditTableData
+  extends BatchRowData,
+    EcocreditAccountBalance {}

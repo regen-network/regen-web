@@ -16,6 +16,7 @@ import {
   getTablePaginationPadding,
   // StyledTableSortLabel,
 } from 'web-components/lib/components/table';
+import { TablePagination } from 'web-components/lib/components/table/TablePagination';
 // import {
 //   getComparator,
 //   Order,
@@ -23,8 +24,11 @@ import {
 // } from 'web-components/lib/components/table/sort';
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
-import type { BatchRowData, EcocreditAccountBalance } from '../../types/ledger';
-import { TablePagination } from 'web-components/lib/components/table/TablePagination';
+
+import { ReactComponent as CloudData } from '../../assets/svgs/cloud-data.svg';
+
+import type { EcocreditTableData } from '../../types/ledger';
+import Title from 'web-components/lib/components/title';
 
 const useStyles = makeStyles(theme => ({
   borderLeft: {
@@ -40,24 +44,23 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export interface TableCredits extends BatchRowData, EcocreditAccountBalance {}
-
 export const EcocreditsTable: React.FC<{
-  credits: TableCredits[];
-  renderActionButtons?: (row: TableCredits) => React.ReactElement;
+  credits: EcocreditTableData[];
+  renderActionButtons?: (row: EcocreditTableData) => React.ReactElement;
 }> = ({ credits, renderActionButtons }) => {
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [displayCredits, setDisplayCredits] = useState<TableCredits[]>(credits);
+  const [displayCredits, setDisplayCredits] =
+    useState<EcocreditTableData[]>(credits);
   // const [order, setOrder] = useState<Order>('desc');
-  // const [orderBy, setOrderBy] = useState<keyof TableCredits>('start_date');
+  // const [orderBy, setOrderBy] = useState<keyof EcocreditTableData>('start_date');
 
   useEffect(() => {
     setDisplayCredits(credits.slice(offset, offset + rowsPerPage));
   }, [offset, rowsPerPage, credits]);
 
-  // const handleSort = (sortBy: keyof TableCredits): void => {
+  // const handleSort = (sortBy: keyof EcocreditTableData): void => {
   //   const isAsc = orderBy === sortBy && order === 'asc';
   //   setOrder(isAsc ? 'desc' : 'asc');
   //   setOrderBy(sortBy);
@@ -74,7 +77,7 @@ export const EcocreditsTable: React.FC<{
   //       <StyledTableSortLabel
   //         active={isCurrentSort}
   //         direction={isCurrentSort ? order : 'asc'}
-  //         onClick={() => handleSort(field as keyof TableCredits)}
+  //         onClick={() => handleSort(field as keyof EcocreditTableData)}
   //       >
   //         {children}
   //       </StyledTableSortLabel>
@@ -83,6 +86,10 @@ export const EcocreditsTable: React.FC<{
   // };
 
   const styles = useStyles();
+  if (!displayCredits?.length) {
+    return <NoEcoCredits />;
+  }
+
   return (
     <StyledTableContainer>
       <Box
@@ -209,6 +216,27 @@ export const EcocreditsTable: React.FC<{
           </TableRow>
         </TableFooter>
       </Table>
+    </StyledTableContainer>
+  );
+};
+
+const NoEcoCredits: React.FC = () => {
+  return (
+    <StyledTableContainer>
+      <Box
+        sx={{
+          minHeight: 230,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <CloudData />
+        <Title variant="h4" sx={{ mt: 5 }}>
+          No ecocredits to display
+        </Title>
+      </Box>
     </StyledTableContainer>
   );
 };

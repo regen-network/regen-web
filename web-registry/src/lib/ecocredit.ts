@@ -8,6 +8,7 @@ import {
   BatchPagination,
   BatchRowData,
   EcocreditAccountBalance,
+  EcocreditTableData,
 } from '../types/ledger';
 
 const ECOCREDIT_MESSAGE_TYPES = {
@@ -37,13 +38,29 @@ export const getBatchSupply = (batchDenom: string): Promise<AxiosResponse> => {
   );
 };
 
-export const getAccountEcocreditsForBatch = (
-  batchDenom: string,
+export const getEcocreditsForAccount = async (
   account: string,
-): Promise<AxiosResponse<EcocreditAccountBalance>> => {
-  return axios.get(
-    `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/balance/${account}`,
+): Promise<EcocreditTableData[]> => {
+  const {
+    data: { batches },
+  } = await getBatches();
+  const credits = await Promise.all(
+    batches.map(async batch => {
+      const {
+        data: { retired_amount, tradable_amount },
+      } = await getAccountEcocreditsForBatch(batch.batch_denom, account);
+      return {
+        ...batch,
+        tradable_amount,
+        retired_amount,
+      };
+    }),
   );
+  // filter out batches that don't have any credits
+  const filteredCredits = credits.filter(
+    c => +c.tradable_amount > 0 || +c.retired_amount > 0,
+  );
+  return filteredCredits;
 };
 
 export const getTxsByEvent = (msgType: string): Promise<AxiosResponse> => {
@@ -102,5 +119,14 @@ export const addSupplyDataToBatch = (
         return batch;
       }
     }),
+  );
+};
+
+const getAccountEcocreditsForBatch = (
+  batchDenom: string,
+  account: string,
+): Promise<AxiosResponse<EcocreditAccountBalance>> => {
+  return axios.get(
+    `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/balance/${account}`,
   );
 };

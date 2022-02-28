@@ -5,35 +5,22 @@ import { useTheme } from '@mui/styles';
 
 import Section from 'web-components/lib/components/section';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
-import { getAccountEcocreditsForBatch, getBatches } from '../lib/ecocredit';
+import { getEcocreditsForAccount } from '../lib/ecocredit';
 import { ledgerRestUri } from '../ledger';
 import { truncate } from '../lib/wallet';
 import { getAccountUrl } from '../lib/block-explorer';
 import { EcocreditsTable } from '../components/organisms';
 
-import type { TableCredits } from '../components/organisms';
+import type { EcocreditTableData } from '../types/ledger';
 
-export const EcocreditsForAccount: React.FC = () => {
+export const EcocreditsByAccount: React.FC = () => {
   const { accountAddress } = useParams<{ accountAddress: string }>();
-  const [credits, setCredits] = useState<TableCredits[]>([]);
+  const [credits, setCredits] = useState<EcocreditTableData[]>([]);
 
   useEffect(() => {
     if (!ledgerRestUri || !accountAddress) return;
     const fetchData = async (): Promise<void> => {
-      const {
-        data: { batches },
-      } = await getBatches();
-      const credits = await Promise.all(
-        batches.map(async batch => {
-          const {
-            data: { retired_amount, tradable_amount },
-          } = await getAccountEcocreditsForBatch(
-            batch.batch_denom,
-            accountAddress,
-          );
-          return { ...batch, tradable_amount, retired_amount };
-        }),
-      );
+      const credits = await getEcocreditsForAccount(accountAddress);
       setCredits(credits);
     };
     fetchData();

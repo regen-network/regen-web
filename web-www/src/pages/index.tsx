@@ -14,6 +14,7 @@ import CarbonPlusSection from '../sections/home/CarbonPlusSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import BlogSection from '../sections/shared/BlogSection';
 import { HomePageWebQuery } from '../generated/graphql';
+import { BannerTextSection } from '../sections/home/BannerTextSection';
 
 const query = graphql`
   query homePageWeb {
@@ -50,7 +51,8 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
       />
       <HomeFoldSection />
       <HomeValuesSection />
-      <EmailSubmitSection />
+      {/* <EmailSubmitSection /> */}
+      <BannerTextSection />
       <Box display={{ xs: 'block', sm: 'none' }}>
         <BackgroundImage
           Tag="div"

@@ -2,13 +2,12 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import clsx from 'clsx';
+import { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import NewsletterForm from 'web-components/lib/components/form/NewsletterForm';
 import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/src/components/block-content';
-import { EmailSubmitSectionQuery } from '../../generated/graphql';
+import { BannerTextSectionQuery } from '../../generated/graphql';
 
 interface Props {
   image?: object;
@@ -28,19 +27,37 @@ interface Content {
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    zIndex: 1,
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(50)} ${theme.spacing(46.25)}`,
+      padding: theme.spacing(50, 46.25),
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      padding: `${theme.spacing(50)} ${theme.spacing(30)}`,
+      padding: theme.spacing(50, 30),
     },
     [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(21.25)} ${theme.spacing(4)}`,
+      padding: theme.spacing(21.25, 4),
     },
   },
   title: {
     color: theme.palette.primary.main,
     textAlign: 'center',
+  },
+  gradient: {
+    height: '100%',
+    zIndex: -1,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      background:
+        'linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(194.2deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)',
+    },
+    [theme.breakpoints.down('sm')]: {
+      background:
+        'linear-gradient(180deg, rgba(255, 249, 238, 0.74) 0%, rgba(255, 249, 238, 0) 27.6%), linear-gradient(194.2deg, #FAEBD1 12.63%, #7DC9BF 44.03%, #515D89 75.43%)',
+    },
+    opacity: 0.8,
   },
   description: {
     color: theme.palette.primary.main,
@@ -61,57 +78,41 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const query = graphql`
-  query emailSubmitSection {
-    sanitySharedSections {
-      newsletter {
+  query bannerTextSection {
+    sanityHomePageWeb {
+      bannerTextSection {
         title
         _rawBody
-      }
-    }
-    desktop: file(relativePath: { eq: "regen-handshake.png" }) {
-      childImageSharp {
-        fluid(quality: 90, maxWidth: 1920) {
-          ...GatsbyImageSharpFluid_withWebp
+        image {
+          ...fluidCustomImageFields
         }
       }
     }
   }
 `;
 
-const EmailSubmitSection: React.FC<Props> = ({
-  image,
-  altContent,
-  classes,
-}) => {
+const BannerTextSection: React.FC<Props> = () => {
   const styles = useStyles();
-  const data = useStaticQuery<EmailSubmitSectionQuery>(query);
-  const content = data.sanitySharedSections?.newsletter;
-  const imageData = image || data.desktop?.childImageSharp?.fluid;
+  const { sanityHomePageWeb } = useStaticQuery<BannerTextSectionQuery>(query);
+  const data = sanityHomePageWeb?.bannerTextSection;
+  // const imageData = image || data.desktop?.childImageSharp?.fluid;
   return (
     <BackgroundImage
       Tag="section"
-      fluid={imageData as any}
+      fluid={data?.image?.image?.asset?.fluid as FluidObject}
       backgroundColor={`#040e18`}
     >
-      <div className={clsx(styles.root, classes?.root)} id="newsletter-signup">
-        <Title className={clsx(styles.title, classes?.title)} variant="h2">
-          {altContent?.header || content?.title}
+      <div className={styles.gradient} />
+      <div className={styles.root} id="newsletter-signup">
+        <Title className={styles.title} variant="h2">
+          {data?.title}
         </Title>
-        <Title variant="h6" className={styles.description}>
-          {altContent?.description ? (
-            altContent.description
-          ) : (
-            <BlockContent content={content?._rawBody} />
-          )}
+        <Title variant="h4">
+          <BlockContent content={data?._rawBody} />
         </Title>
-        <NewsletterForm
-          apiUri={process.env.GATSBY_API_URI}
-          submitLabel={altContent?.buttonText}
-          inputPlaceholder={altContent?.inputText}
-        />
       </div>
     </BackgroundImage>
   );
 };
 
-export default EmailSubmitSection;
+export { BannerTextSection };

@@ -23,12 +23,13 @@ export const MyEcocredits: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles();
   const walletContext = useWallet();
-  const accountAddress = walletContext.wallet?.address;
+  let accountAddress = walletContext.wallet?.address;
+  // TODO Remove before merging, only for testing purposes
+  accountAddress = 'regen1m5fecarvw0ltx2yvvru0kl4un03d3uca2kxggj';
 
   return (
     <PortfolioTemplate
-      // TODO Remove before merging, only for testing purposes
-      accountAddress={'regen1m5fecarvw0ltx2yvvru0kl4un03d3uca2kxggj'}
+      accountAddress={accountAddress}
       renderCreditActionButtons={i => (
         <TableActionButtons
           buttons={[

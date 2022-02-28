@@ -12,6 +12,7 @@ export * from './CreditClassOverviewSection';
 export * from './CreditsPurchaseForm';
 export * from './CreditTotals';
 export * from './Documentation';
+export * from './EcocreditsTable';
 export * from './EntityDisplayForm';
 export * from './ImpactSection';
 export * from './IncludesGrasslandsForm';

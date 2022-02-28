@@ -5,6 +5,8 @@ import {
   ActionsTable,
   renderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
+
+import { NoEcocredits } from '../molecules';
 import type { TableBaskets } from '../../types/ledger/ecocredit';
 import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
 
@@ -12,9 +14,12 @@ export const BasketsTable: React.FC<{
   baskets: TableBaskets[];
   renderActionButtons?: renderActionButtonsFunc;
 }> = ({ baskets, renderActionButtons }) => {
+  if (!baskets?.length) {
+    return <NoEcocredits title="No basket tokens to display" />;
+  }
   return (
     <ActionsTable
-      tableLabel="ecocredits table"
+      tableLabel="baskets table"
       renderActionButtons={renderActionButtons}
       headerRows={[
         <Box

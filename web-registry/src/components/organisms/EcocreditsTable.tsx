@@ -7,13 +7,11 @@ import {
   ActionsTable,
   renderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
-import { StyledTableContainer } from 'web-components/lib/components/table';
-import Title from 'web-components/lib/components/title';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { ReactComponent as CloudData } from '../../assets/svgs/cloud-data.svg';
+import { NoEcocredits } from '../molecules';
 import type { TableCredits } from '../../types/ledger/ecocredit';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -28,7 +26,7 @@ export const EcocreditsTable: React.FC<{
 }> = ({ credits, renderActionButtons }) => {
   const styles = useStyles();
   if (!credits?.length) {
-    return <NoEcoCredits />;
+    return <NoEcocredits title="No ecocredits to display" />;
   }
 
   return (
@@ -74,27 +72,6 @@ export const EcocreditsTable: React.FC<{
         ];
       })}
     />
-  );
-};
-
-const NoEcoCredits: React.FC = () => {
-  return (
-    <StyledTableContainer>
-      <Box
-        sx={{
-          minHeight: 230,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <CloudData />
-        <Title variant="h4" sx={{ mt: 5 }}>
-          No ecocredits to display
-        </Title>
-      </Box>
-    </StyledTableContainer>
   );
 };
 

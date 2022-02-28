@@ -14,3 +14,4 @@ export * from './ImageGridSection';
 export * from './EditProjectPageFooter';
 export * from './ProjectPageFooter';
 export * from './Statistic';
+export * from './NoEcocredits';

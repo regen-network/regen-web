@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       margin: `${theme.spacing(11.25)} auto 0`,
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       margin: `${theme.spacing(7)} auto 0`,
     },
   },

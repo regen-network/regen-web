@@ -1,19 +1,17 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import type { QueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 import ActionsTable, {
   renderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
-import type { Basket } from '../../types/ledger/ecocredit';
+import type { TableBaskets } from '../../types/ledger/ecocredit';
+import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
 
 const useStyles = makeStyles(theme => ({}));
 
-export interface TableBasket extends Basket, QueryBalanceResponse {}
-
 export const BasketsTable: React.FC<{
-  baskets: TableBasket[];
+  baskets: TableBaskets[];
   renderActionButtons?: renderActionButtonsFunc;
 }> = ({ baskets, renderActionButtons }) => {
   const styles = useStyles();
@@ -36,7 +34,25 @@ export const BasketsTable: React.FC<{
         'Balance',
       ]}
       rows={baskets.map((row, i) => {
-        return [<>{row.name}</>, row.balance?.amount];
+        return [
+          <Grid container wrap="nowrap">
+            <Grid item>
+              <BasketIcon />
+            </Grid>
+            <Grid item sx={{ ml: 3.5, fontWeight: 700 }} alignSelf="center">
+              <Box sx={{ fontSize: theme => theme.spacing(4.5) }}>
+                {row.name}
+              </Box>
+              <Box sx={{ color: 'info.main' }}>
+                {row.display_denom.toLocaleString()}
+              </Box>
+            </Grid>
+          </Grid>,
+          row.balance?.amount
+            ? parseInt(row.balance?.amount) /
+              Math.pow(10, parseInt(row.exponent))
+            : 0,
+        ];
       })}
     />
   );

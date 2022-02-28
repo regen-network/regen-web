@@ -13,7 +13,7 @@ export * from './CreditClassDetails';
 export * from './CreditsIssue';
 export * from './CreditsRetire';
 export * from './CreditsTransfer';
-export * from './EcocreditsForAccount';
+export * from './EcocreditsByAccount';
 export * from './Eligibility';
 export * from './EntityDisplay';
 export * from './GettingStarted';

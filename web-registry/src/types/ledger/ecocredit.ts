@@ -1,5 +1,7 @@
 import type { PageResponse } from './base';
+import type { QueryBalanceResponse as BankQueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
+// Response structure based on https://buf.build/regen/regen-ledger
 export interface BatchRowData {
   start_date: string | Date;
   end_date: string | Date;
@@ -16,6 +18,12 @@ export interface BatchRowData {
 export interface BatchDataResponse {
   data: BatchRowData[];
   pagination?: PageResponse;
+}
+
+export interface TableCredits extends BatchRowData, QueryBalanceResponse {}
+
+export interface TableBaskets extends Basket, BankQueryBalanceResponse {
+  display_denom: string;
 }
 
 // The following interfaces should be removed once we migrate

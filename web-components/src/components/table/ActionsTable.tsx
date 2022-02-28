@@ -87,8 +87,6 @@ export const ActionsTable: React.FC<{
         border: 1,
         borderColor: 'info.light',
         borderRadius: '8px',
-        marginTop: 8,
-        marginBottom: 12,
         overflow: 'hidden',
       }}
     >

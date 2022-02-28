@@ -6,26 +6,30 @@ import { makeStyles } from '@mui/styles';
 import ActionsTable, {
   renderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
+import { StyledTableContainer } from 'web-components/lib/components/table';
+import Title from 'web-components/lib/components/title';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
-import type {
-  BatchRowData,
-  QueryBalanceResponse,
-} from '../../types/ledger/ecocredit';
+import { ReactComponent as CloudData } from '../../assets/svgs/cloud-data.svg';
+import type { TableCredits } from '../../types/ledger/ecocredit';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme: Theme) => ({
   greyText: {
     color: theme.palette.info.main,
   },
 }));
-
-export interface TableCredits extends BatchRowData, QueryBalanceResponse {}
 
 export const EcocreditsTable: React.FC<{
   credits: TableCredits[];
   renderActionButtons?: renderActionButtonsFunc;
 }> = ({ credits, renderActionButtons }) => {
   const styles = useStyles();
+  if (!credits?.length) {
+    return <NoEcoCredits />;
+  }
+
   return (
     <ActionsTable
       tableLabel="ecocredits table"
@@ -69,6 +73,27 @@ export const EcocreditsTable: React.FC<{
         ];
       })}
     />
+  );
+};
+
+const NoEcoCredits: React.FC = () => {
+  return (
+    <StyledTableContainer>
+      <Box
+        sx={{
+          minHeight: 230,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <CloudData />
+        <Title variant="h4" sx={{ mt: 5 }}>
+          No ecocredits to display
+        </Title>
+      </Box>
+    </StyledTableContainer>
   );
 };
 

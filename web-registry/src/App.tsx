@@ -28,7 +28,7 @@ import {
   CreditsRetire,
   CreditsTransfer,
   EntityDisplay,
-  EcocreditsForAccount,
+  EcocreditsByAccount,
   Home,
   // Home,
   LandStewards,
@@ -105,7 +105,7 @@ const App: React.FC = (): JSX.Element => {
           <Route path="ecocredits/dashboard" element={<MyEcocredits />} />
           <Route
             path="ecocredits/accounts/:accountAddress"
-            element={<EcocreditsForAccount />}
+            element={<EcocreditsByAccount />}
           />
           <Route
             path="user-profile"

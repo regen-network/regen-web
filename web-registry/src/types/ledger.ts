@@ -1,3 +1,4 @@
+// Response structure based on https://buf.build/regen/regen-ledger
 export interface BatchRowData {
   start_date: string | Date;
   end_date: string | Date;

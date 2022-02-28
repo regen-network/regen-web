@@ -3,7 +3,8 @@ import dayjs from 'dayjs';
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import ActionsTable, {
+import {
+  ActionsTable,
   renderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 import { StyledTableContainer } from 'web-components/lib/components/table';

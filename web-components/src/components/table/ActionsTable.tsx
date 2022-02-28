@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
 
 export type renderActionButtonsFunc = (i: number) => React.ReactElement;
 
-export const ActionsTable: React.FC<{
+const ActionsTable: React.FC<{
   tableLabel: string;
   headerRows: React.ReactNode[];
   rows: React.ReactNode[][];
@@ -180,4 +180,4 @@ export const ActionsTable: React.FC<{
   );
 };
 
-export default ActionsTable;
+export { ActionsTable };

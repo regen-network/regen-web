@@ -1,7 +1,8 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
 
-import ActionsTable, {
+import {
+  ActionsTable,
   renderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 import type { TableBaskets } from '../../types/ledger/ecocredit';

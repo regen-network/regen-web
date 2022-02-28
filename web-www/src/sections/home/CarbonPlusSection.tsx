@@ -123,8 +123,12 @@ const CarbonplusSection: React.FC = (): JSX.Element => {
       <Grid className={styles.grid} container wrap="nowrap">
         <Grid item xs={12} className={styles.text}>
           <Title variant="h6" className={styles.smallHeader}>
-            <span className={styles.featured}>{content?.smallHeaderFeatured} </span>
-            <span className={styles.creditName}>{ReactHtmlParser(content?.smallHeaderCreditName || '')}</span>
+            <span className={styles.featured}>
+              {content?.smallHeaderFeatured}{' '}
+            </span>
+            <span className={styles.creditName}>
+              {ReactHtmlParser(content?.smallHeaderCreditName || '')}
+            </span>
           </Title>
           <Title className={styles.header} variant="h3">
             {ReactHtmlParser(content?.header || '')}
@@ -132,12 +136,18 @@ const CarbonplusSection: React.FC = (): JSX.Element => {
           <Description className={styles.description}>
             {ReactHtmlParser(content?.description || '')}
           </Description>
-          <ContainedButton className={styles.button} href={content?.linkUrl || ''}>
+          <ContainedButton
+            className={styles.button}
+            href={content?.linkUrl || ''}
+          >
             {content?.linkText}
           </ContainedButton>
         </Grid>
         <Grid className={styles.imageContainer} item xs={12}>
-          <Img className={styles.image} fluid={data?.cow?.childImageSharp?.fluid as any} />
+          <Img
+            className={styles.image}
+            fluid={data?.cow?.childImageSharp?.fluid as any}
+          />
         </Grid>
       </Grid>
     </div>

@@ -11,7 +11,6 @@ import HomeLedger from '../sections/home/LedgerSection';
 import HomeValuesSection from '../sections/home/ValuesSection';
 import ClimateSection from '../sections/home/ClimateSection';
 import CarbonPlusSection from '../sections/home/CarbonPlusSection';
-import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import BlogSection from '../sections/shared/BlogSection';
 import { HomePageWebQuery } from '../generated/graphql';
 import { BannerTextSection } from '../sections/home/BannerTextSection';
@@ -51,7 +50,6 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
       />
       <HomeFoldSection />
       <HomeValuesSection />
-      {/* <EmailSubmitSection /> */}
       <BannerTextSection />
       <Box display={{ xs: 'block', sm: 'none' }}>
         <BackgroundImage

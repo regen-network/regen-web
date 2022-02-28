@@ -1,20 +1,22 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Img from 'gatsby-image';
 import { graphql, useStaticQuery } from 'gatsby';
 import SanityImage from 'gatsby-plugin-sanity-image';
+import BackgroundImage from 'gatsby-background-image';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
 import Section from 'web-components/lib/components/section';
 import Tooltip from 'web-components/lib/components/tooltip';
 
-import { HomeMarketPlaceSectionQuery } from '../../generated/graphql';
+import type { HomeMarketPlaceSectionQuery } from '../../generated/graphql';
+import type { FluidObject } from 'gatsby-image';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
+    zIndex: 1,
     paddingTop: theme.spacing(25),
     paddingBottom: theme.spacing(25),
     [theme.breakpoints.down('sm')]: {
@@ -23,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     height: 'min-content',
     color: theme.palette.primary.contrastText,
-    'background-color': theme.palette.primary.main,
     'font-family': theme.typography.h1.fontFamily,
     'text-align': 'center',
     '& h2': {
@@ -128,6 +129,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const query = graphql`
   query homeMarketPlaceSection {
+    bg: file(relativePath: { eq: "topo-bg-top.png" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 1920) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
     sanityHomePageWeb {
       marketplaceSection {
         header
@@ -148,45 +156,54 @@ const query = graphql`
 
 const MarketplaceSection: React.FC = () => {
   const styles = useStyles({});
-  const data = useStaticQuery<HomeMarketPlaceSectionQuery>(query);
-  const content = data.sanityHomePageWeb?.marketplaceSection;
+  const { sanityHomePageWeb, bg } =
+    useStaticQuery<HomeMarketPlaceSectionQuery>(query);
+  const data = sanityHomePageWeb?.marketplaceSection;
 
   return (
-    <Section className={styles.root}>
-      <div className={styles.inner}>
-        <div className={styles.smallTag}>{content?.header}</div>
-        <Title variant="h2" align="center">
-          <span className={styles.green}>{content?.body?.green} </span>
-          {content?.body?.middle}{' '}
-          <Tooltip arrow placement="top" title={content?.tooltip || ''}>
-            <span className={styles.popover}>{content?.body?.popover}</span>
-          </Tooltip>{' '}
-          {content?.body?.end}
-        </Title>
-        <Grid container spacing={3}>
-          {content?.callToActions?.map((cta, i) => {
-            return !cta ? null : (
-              <Grid key={cta.header || i} className={styles.gridItem} item xs>
-                <SanityImage
-                  {...(cta.image as any)}
-                  alt={cta.caption}
-                  width={159}
-                  style={{ width: '159px' }}
-                />
-                <div className={styles.smallTitle}>{cta.caption}</div>
-                <Title className={styles.h3} variant="h3" align="center">
-                  {cta.header}
-                </Title>
-                <p>{cta.description}</p>
-                <ContainedButton href={cta.linkUrl || ''} className={styles.button}>
-                  {cta.linkText}
-                </ContainedButton>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </div>
-    </Section>
+    <BackgroundImage
+      fluid={bg?.childImageSharp?.fluid as FluidObject}
+      style={{ zIndex: 2 }}
+    >
+      <Section className={styles.root}>
+        <div className={styles.inner}>
+          <div className={styles.smallTag}>{data?.header}</div>
+          <Title variant="h2" align="center">
+            <span className={styles.green}>{data?.body?.green} </span>
+            {data?.body?.middle}{' '}
+            <Tooltip arrow placement="top" title={data?.tooltip || ''}>
+              <span className={styles.popover}>{data?.body?.popover}</span>
+            </Tooltip>{' '}
+            {data?.body?.end}
+          </Title>
+          <Grid container spacing={3}>
+            {data?.callToActions?.map((cta, i) => {
+              return !cta ? null : (
+                <Grid key={cta.header || i} className={styles.gridItem} item xs>
+                  <SanityImage
+                    {...(cta.image as any)}
+                    alt={cta.caption}
+                    width={159}
+                    style={{ width: '159px' }}
+                  />
+                  <div className={styles.smallTitle}>{cta.caption}</div>
+                  <Title className={styles.h3} variant="h3" align="center">
+                    {cta.header}
+                  </Title>
+                  <p>{cta.description}</p>
+                  <ContainedButton
+                    href={cta.linkUrl || ''}
+                    className={styles.button}
+                  >
+                    {cta.linkText}
+                  </ContainedButton>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </div>
+      </Section>
+    </BackgroundImage>
   );
 };
 

@@ -24177,7 +24177,16 @@ export type HomeMarketPlaceSectionQueryVariables = Exact<{ [key: string]: never;
 
 export type HomeMarketPlaceSectionQuery = (
   { __typename?: 'Query' }
-  & { sanityHomePageWeb: Maybe<(
+  & { bg: Maybe<(
+    { __typename?: 'File' }
+    & { childImageSharp: Maybe<(
+      { __typename?: 'ImageSharp' }
+      & { fluid: Maybe<(
+        { __typename?: 'ImageSharpFluid' }
+        & GatsbyImageSharpFluid_WithWebpFragment
+      )> }
+    )> }
+  )>, sanityHomePageWeb: Maybe<(
     { __typename?: 'SanityHomePageWeb' }
     & { marketplaceSection: Maybe<(
       { __typename?: 'SanityMarketplaceSection' }
@@ -24198,16 +24207,7 @@ export type HomeValuesSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type HomeValuesSectionQuery = (
   { __typename?: 'Query' }
-  & { bg: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityHomePageWeb: Maybe<(
+  & { sanityHomePageWeb: Maybe<(
     { __typename?: 'SanityHomePageWeb' }
     & { valuesSection: Maybe<(
       { __typename?: 'SanityHomeValuesSection' }

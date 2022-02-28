@@ -23,9 +23,7 @@ export const MyEcocredits: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles();
   const walletContext = useWallet();
-  let accountAddress = walletContext.wallet?.address;
-  // TODO Remove before merging, only for testing purposes
-  accountAddress = 'regen1m5fecarvw0ltx2yvvru0kl4un03d3uca2kxggj';
+  const accountAddress = walletContext.wallet?.address;
 
   return (
     <PortfolioTemplate

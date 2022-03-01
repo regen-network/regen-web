@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   greyText: {
     color: theme.palette.info.main,
   },
+  amount: {
+    whiteSpace: 'normal',
+    wordWrap: 'break-word',
+  },
 }));
 
 export const EcocreditsTable: React.FC<{
@@ -47,8 +51,8 @@ export const EcocreditsTable: React.FC<{
         </Box>,
         'Issuer',
         'Credit Class',
-        'Amount Tradable',
-        'Amount Retired',
+        <Box className={styles.amount}>Amount Tradable</Box>,
+        <Box className={styles.amount}>Amount Retired</Box>,
         'Batch Start Date',
         'Batch End Date',
         'Project Location',

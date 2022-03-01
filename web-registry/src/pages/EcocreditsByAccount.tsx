@@ -1,22 +1,19 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography } from '@mui/material';
-import { useTheme } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 
 import { PortfolioTemplate } from '../components/templates';
 import { truncate } from '../lib/wallet';
 import { getAccountUrl } from '../lib/block-explorer';
 
 export const EcocreditsByAccount: React.FC = () => {
-  const theme = useTheme<Theme>();
   const { accountAddress } = useParams<{ accountAddress: string }>();
 
   return (
     <PortfolioTemplate accountAddress={accountAddress}>
-      <Box sx={{ mt: 4 }}>
+      <Box sx={{ mt: { xs: 1.25, sm: 3 } }}>
         <Typography
           sx={{
             fontSize: 14,
@@ -46,12 +43,7 @@ export const EcocreditsByAccount: React.FC = () => {
             rel="noopener noreferrer"
           >
             {truncate(accountAddress || '')}
-            <ArrowDownIcon
-              direction="next"
-              fontSize="medium"
-              sx={{ ml: 2 }}
-              color={theme.palette.secondary.main}
-            />
+            <SmallArrowIcon sx={{ ml: 1, mb: 0.5, height: 9, width: 13 }} />
           </a>
         </Typography>
       </Box>

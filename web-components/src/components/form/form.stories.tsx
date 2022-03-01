@@ -2,6 +2,8 @@ import * as React from 'react';
 import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
 // import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
 import LoginForm from 'web-components/lib/components/form/LoginForm';
+import { CreditSendForm } from 'web-components/lib/components/form/CreditSendForm';
+import { CreditRetireForm } from 'web-components/lib/components/form/CreditRetireForm';
 
 export default {
   title: 'Forms',
@@ -48,5 +50,23 @@ export const loginForm = (): JSX.Element => (
     termsLink="https://www.regen.network/terms-service/"
     signupFromLogin="/"
     privacyLink="https://www.regen.network/privacy-policy/"
+  />
+);
+
+export const creditSendForm = (): JSX.Element => (
+  <CreditSendForm
+    sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
+    availableTradableAmount={1000}
+    batchDenom={'C01-20190101-20201010-02'}
+    onClose={() => null}
+  />
+);
+
+export const creditRetireForm = (): JSX.Element => (
+  <CreditRetireForm
+    holder={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
+    availableTradableAmount={1000}
+    batchDenom={'C01-20190101-20201010-02'}
+    onClose={() => null}
   />
 );

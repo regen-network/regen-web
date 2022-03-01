@@ -121,11 +121,6 @@ const useStyles = makeStyles(theme => ({
       flexWrap: 'nowrap',
     },
   },
-  textField: {
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
-    },
-  },
   stateCountryTextField: {
     marginTop: theme.spacing(6),
     [theme.breakpoints.up('sm')]: {
@@ -406,11 +401,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         sm={6}
                         className={styles.stateCountryTextField}
                       >
-                        <LocationStateField
-                          country={values.country}
-                          className={styles.textField}
-                          optional
-                        />
+                        <LocationStateField country={values.country} optional />
                       </Grid>
                       <Grid
                         item
@@ -418,7 +409,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         sm={6}
                         className={styles.stateCountryTextField}
                       >
-                        <LocationCountryField className={styles.textField} />
+                        <LocationCountryField />
                       </Grid>
                     </Grid>
                     <Field

@@ -8,7 +8,6 @@ import { useParams } from 'react-router-dom';
 import { loader } from 'graphql.macro';
 import { useMutation } from '@apollo/client';
 import { Formik, Form, Field } from 'formik';
-// import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Title from 'web-components/lib/components/title';
@@ -97,11 +96,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       flexWrap: 'nowrap',
     },
   },
-  locationTextField: {
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
-    },
-  },
   stateCountryTextField: {
     marginTop: theme.spacing(6),
     [theme.breakpoints.up('sm')]: {
@@ -162,10 +156,8 @@ function CreditsPurchaseForm({
   stripePrice,
   onClose,
 }: CreditsPurchaseFormProps): JSX.Element {
-  // const theme = useTheme();
   const classes = useStyles();
   const { projectId } = useParams();
-  // const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   const [createUser] = useMutation(CREATE_USER, {
     errorPolicy: 'ignore',
@@ -241,8 +233,9 @@ function CreditsPurchaseForm({
             let result;
 
             // Create address
-            // TODO: country arg value should be enough..
-            // country valueObject instead of just a key as string
+            // TODO: in LocationCountryField component, the field value could
+            // be set as an object with both the country name and the country
+            // code so we don't need to import `countries` here
             const feature = {
               place_type: ['place'],
               text: city,
@@ -446,11 +439,7 @@ function CreditsPurchaseForm({
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <LocationStateField
-                      name="state"
-                      country={values.country}
-                      className={classes.locationTextField}
-                    />
+                    <LocationStateField name="state" country={values.country} />
                   </Grid>
                   <Grid
                     item
@@ -458,9 +447,7 @@ function CreditsPurchaseForm({
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <LocationCountryField
-                      className={classes.locationTextField}
-                    />
+                    <LocationCountryField />
                   </Grid>
                 </Grid>
 

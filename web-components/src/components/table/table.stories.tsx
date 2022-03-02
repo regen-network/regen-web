@@ -8,6 +8,8 @@ import {
   DocumentRowData,
 } from 'web-components/lib/components/table/DocumentationTable';
 import { TablePagination } from 'web-components/lib/components/table/TablePagination';
+import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
+import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 
 export default {
   title: 'Table',
@@ -57,4 +59,25 @@ export const tablePagination = (): JSX.Element => (
       </TableRow>
     </TableFooter>
   </Table>
+);
+
+export const actionsTable = (): JSX.Element => (
+  <ActionsTable
+    tableLabel="actions table"
+    renderActionButtons={i => (
+      <TableActionButtons
+        buttons={[
+          {
+            label: `Do something with row ${i + 1}`,
+            onClick: () => alert(`Action clicked for row ${i + 1}`),
+          },
+        ]}
+      />
+    )}
+    headerRows={['Column 1', 'Column 2', 'Column 3']}
+    rows={[
+      ['Row 11', 'Row 12', 'Row 13'],
+      ['Row 21', 'Row 22', 'Row 23'],
+    ]}
+  />
 );

@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { Box, Menu, MenuItem } from '@mui/material';
+import { Box, Menu, MenuItem, Grid } from '@mui/material';
 import OutlinedButton from './OutlinedButton';
 import { HorizontalDotsIcon } from '../icons/HorizontalDotsIcon';
 
-/** Displays a row of buttons on a set breakpoint (defaults to `md`) and up, and
- * a dropdown icon those buttons on mobile */
+/** Displays a dropdown icon with action buttons */
 const TableActionButtons: React.FC<{
-  buttons: { label: string; onClick: () => void }[];
-  breakOn?: 'sm' | 'md';
-}> = ({ buttons, breakOn = 'md' }) => {
+  buttons: { label: string; onClick: () => void; icon?: JSX.Element }[];
+}> = ({ buttons }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   function handleMobileMenuOpen({
@@ -22,58 +20,40 @@ const TableActionButtons: React.FC<{
   }
 
   return (
-    <>
-      {/* Desktop */}
-      <Box
-        display={{ xs: 'none', [breakOn]: 'flex' }}
-        sx={{
-          flexWrap: 'nowrap',
-          gap: 2,
-        }}
+    <Box>
+      <OutlinedButton
+        onClick={handleMobileMenuOpen}
+        size="small"
+        aria-controls="table-menu-buttons"
       >
-        {buttons.map(({ label, onClick }, i) => (
-          <OutlinedButton
-            key={'table-action-' + i}
-            size="small"
+        <HorizontalDotsIcon />
+      </OutlinedButton>
+      <Menu
+        id="table-menu-buttons"
+        anchorEl={anchorEl}
+        open={!!anchorEl}
+        onClose={handleMobileMenuClose}
+      >
+        {buttons.map(({ label, onClick, icon }, i) => (
+          <MenuItem
+            key={i}
+            sx={{
+              px: 4,
+              pb: 3,
+              fontSize: 16,
+              lineHeight: theme => theme.spacing(3),
+            }}
             onClick={() => {
               handleMobileMenuClose();
               onClick();
             }}
           >
+            {icon && <Box sx={{ display: 'inline', pr: 4 }}>{icon}</Box>}{' '}
             {label}
-          </OutlinedButton>
+          </MenuItem>
         ))}
-      </Box>
-      {/* Mobile */}
-      <Box display={{ xs: 'flex', [breakOn]: 'none' }}>
-        <OutlinedButton
-          onClick={handleMobileMenuOpen}
-          size="small"
-          aria-controls="table-menu-buttons"
-        >
-          <HorizontalDotsIcon />
-        </OutlinedButton>
-        <Menu
-          id="table-menu-buttons"
-          anchorEl={anchorEl}
-          open={!!anchorEl}
-          onClose={handleMobileMenuClose}
-        >
-          {buttons.map(({ label, onClick }, i) => (
-            <MenuItem
-              key={i}
-              sx={{ px: 4, fontSize: 16, textTransform: 'capitalize' }}
-              onClick={() => {
-                handleMobileMenuClose();
-                onClick();
-              }}
-            >
-              {label}
-            </MenuItem>
-          ))}
-        </Menu>
-      </Box>
-    </>
+      </Menu>
+    </Box>
   );
 };
 

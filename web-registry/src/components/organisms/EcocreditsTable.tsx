@@ -1,243 +1,81 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
-import {
-  Table,
-  TableBody,
-  TableHead,
-  TableRow,
-  Box,
-  TableFooter,
-} from '@mui/material';
+import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+
 import {
-  StyledTableCell,
-  StyledTableContainer,
-  StyledTableRow,
-  getTablePaginationPadding,
-  // StyledTableSortLabel,
-} from 'web-components/lib/components/table';
-import { TablePagination } from 'web-components/lib/components/table/TablePagination';
-// import {
-//   getComparator,
-//   Order,
-//   stableSort,
-// } from 'web-components/lib/components/table/sort';
+  ActionsTable,
+  renderActionButtonsFunc,
+} from 'web-components/lib/components/table/ActionsTable';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
+import { NoEcocredits } from '../molecules';
+import type { TableCredits } from '../../types/ledger/ecocredit';
 
-import { ReactComponent as CloudData } from '../../assets/svgs/cloud-data.svg';
-
-import type { EcocreditTableData } from '../../types/ledger';
-import Title from 'web-components/lib/components/title';
-
-const useStyles = makeStyles(theme => ({
-  borderLeft: {
-    // absolutely position border to get around MUI style quirks
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    borderLeft: `1px solid ${theme.palette.info.light}`,
-  },
+const useStyles = makeStyles((theme: Theme) => ({
   greyText: {
     color: theme.palette.info.main,
+  },
+  amount: {
+    whiteSpace: 'normal',
+    wordWrap: 'break-word',
   },
 }));
 
 export const EcocreditsTable: React.FC<{
-  credits: EcocreditTableData[];
-  renderActionButtons?: (row: EcocreditTableData) => React.ReactElement;
+  credits: TableCredits[];
+  renderActionButtons?: renderActionButtonsFunc;
 }> = ({ credits, renderActionButtons }) => {
-  const [page, setPage] = useState(0);
-  const [offset, setOffset] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [displayCredits, setDisplayCredits] =
-    useState<EcocreditTableData[]>(credits);
-  // const [order, setOrder] = useState<Order>('desc');
-  // const [orderBy, setOrderBy] = useState<keyof EcocreditTableData>('start_date');
-
-  useEffect(() => {
-    setDisplayCredits(credits.slice(offset, offset + rowsPerPage));
-  }, [offset, rowsPerPage, credits]);
-
-  // const handleSort = (sortBy: keyof EcocreditTableData): void => {
-  //   const isAsc = orderBy === sortBy && order === 'asc';
-  //   setOrder(isAsc ? 'desc' : 'asc');
-  //   setOrderBy(sortBy);
-  // };
-
-  // TODO this will pass the correct fields and can replace <StyledTableCell>
-  // header components, however only works on elements within the current
-  // pagination page. See:
-  // https://app.zenhub.com/workspaces/regen-registry-5f8998bec8958d000f4609e2/issues/regen-network/regen-registry/811
-  // const SortableHead: React.FC<{ field: string }> = ({ field, children }) => {
-  //   const isCurrentSort = orderBy === field;
-  //   return (
-  //     <StyledTableCell sortDirection={isCurrentSort ? order : false}>
-  //       <StyledTableSortLabel
-  //         active={isCurrentSort}
-  //         direction={isCurrentSort ? order : 'asc'}
-  //         onClick={() => handleSort(field as keyof EcocreditTableData)}
-  //       >
-  //         {children}
-  //       </StyledTableSortLabel>
-  //     </StyledTableCell>
-  //   );
-  // };
-
   const styles = useStyles();
-  if (!displayCredits?.length) {
-    return <NoEcoCredits />;
+  if (!credits?.length) {
+    return <NoEcocredits title="No ecocredits to display" />;
   }
 
   return (
-    <StyledTableContainer>
-      <Box
-        sx={{
-          width: '100%',
-          overflow: 'auto',
-          paddingBottom:
-            getTablePaginationPadding(
-              credits.length,
-              rowsPerPage,
-              displayCredits.length,
-            ) * 25,
-        }}
-      >
-        <Table aria-label="eco credits table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>
-                <Box
-                  sx={{
-                    minWidth: {
-                      xs: 'auto',
-                      sm: '11rem',
-                      lg: '13rem',
-                    },
-                  }}
-                >
-                  Batch Denom
-                </Box>
-              </StyledTableCell>
-              <StyledTableCell>Issuer</StyledTableCell>
-              <StyledTableCell>Credit Class</StyledTableCell>
-              <StyledTableCell>Amount Tradable</StyledTableCell>
-              <StyledTableCell>Amount Retired</StyledTableCell>
-              <StyledTableCell>Batch Start Date</StyledTableCell>
-              <StyledTableCell>Batch End Date</StyledTableCell>
-              <StyledTableCell>Project Location</StyledTableCell>
-              {!!renderActionButtons && (
-                <StyledTableCell
-                  sx={{
-                    textAlign: 'left',
-                    background: 'primary.main',
-                    position: 'sticky',
-                    right: 0,
-                  }}
-                >
-                  <Box>
-                    <div className={styles.borderLeft} />
-                    Actions
-                  </Box>
-                </StyledTableCell>
-              )}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {/* {stableSort(
-                    credits as any, // TODO type coercion shouldn't be necessary here
-                    getComparator(order, orderBy),
-                  ).map((row, i) => ( */}
-            {displayCredits.map((row, i) => (
-              <StyledTableRow key={i}>
-                <StyledTableCell>{row.batch_denom}</StyledTableCell>
-                <StyledTableCell>
-                  <a
-                    href={getAccountUrl(row.issuer as string)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {truncate(row.issuer as string)}
-                  </a>
-                </StyledTableCell>
-                <StyledTableCell>{row.class_id}</StyledTableCell>
-                <StyledTableCell>
-                  {formatNumber(row.tradable_amount)}
-                </StyledTableCell>
-                <StyledTableCell>
-                  {formatNumber(row.retired_amount)}
-                </StyledTableCell>
-                <StyledTableCell>
-                  <span className={styles.greyText}>
-                    {formatDate(row.start_date)}
-                  </span>
-                </StyledTableCell>
-                <StyledTableCell>
-                  <span className={styles.greyText}>
-                    {formatDate(row.end_date)}
-                  </span>
-                </StyledTableCell>
-                <StyledTableCell>{row.project_location}</StyledTableCell>
-                {!!renderActionButtons && (
-                  <StyledTableCell
-                    sx={{
-                      background: 'inherit',
-                      position: 'sticky',
-                      right: 0,
-                    }}
-                  >
-                    <div className={styles.borderLeft} />
-                    {renderActionButtons(row)}
-                  </StyledTableCell>
-                )}
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Box>
-      <Table>
-        <TableFooter sx={{ position: 'sticky', left: 0 }}>
-          <TableRow>
-            <TablePagination
-              rowsPerPageOptions={[5, 10]}
-              rowsPerPage={rowsPerPage}
-              onChangeRowsPerPage={e => {
-                setRowsPerPage(parseInt(e.target.value, 10));
-                setOffset(0);
-              }}
-              count={credits.length}
-              page={page}
-              onPageChange={(_, newPage) => {
-                setPage(newPage);
-                setOffset(newPage * rowsPerPage);
-              }}
-            />
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </StyledTableContainer>
-  );
-};
-
-const NoEcoCredits: React.FC = () => {
-  return (
-    <StyledTableContainer>
-      <Box
-        sx={{
-          minHeight: 230,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <CloudData />
-        <Title variant="h4" sx={{ mt: 5 }}>
-          No ecocredits to display
-        </Title>
-      </Box>
-    </StyledTableContainer>
+    <ActionsTable
+      tableLabel="ecocredits table"
+      renderActionButtons={renderActionButtons}
+      headerRows={[
+        <Box
+          sx={{
+            minWidth: {
+              xs: 'auto',
+              sm: '11rem',
+              lg: '13rem',
+            },
+          }}
+        >
+          Batch Denom
+        </Box>,
+        'Issuer',
+        'Credit Class',
+        <Box className={styles.amount}>Amount Tradable</Box>,
+        <Box className={styles.amount}>Amount Retired</Box>,
+        'Batch Start Date',
+        'Batch End Date',
+        'Project Location',
+      ]}
+      rows={credits.map((row, i) => {
+        return [
+          row.batch_denom,
+          <a
+            href={getAccountUrl(row.issuer as string)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {truncate(row.issuer as string)}
+          </a>,
+          row.class_id,
+          formatNumber(row.tradable_amount),
+          formatNumber(row.retired_amount),
+          <span className={styles.greyText}>{formatDate(row.start_date)}</span>,
+          <span className={styles.greyText}>{formatDate(row.end_date)}</span>,
+          row.project_location,
+        ];
+      })}
+    />
   );
 };
 

@@ -2,6 +2,7 @@ export * from './AdditionalityForm';
 export * from './AdminNav';
 export * from './AppFooter';
 export * from './BasicInfoForm';
+export * from './BasketsTable';
 export * from './BuyCreditsModal';
 export * from './ConfirmationModal';
 export * from './CreditActivityTable';

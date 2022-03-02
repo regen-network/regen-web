@@ -5,7 +5,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { Statistic } from '../molecules';
 import { getBatchesWithSupply } from '../../lib/ecocredit';
-import { BatchRowData } from '../../types/ledger';
+import type { BatchRowData } from '../../types/ledger/ecocredit';
 
 interface CreditTotalData {
   tradeable: number;

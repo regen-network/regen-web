@@ -27,7 +27,7 @@ import { useTablePagination } from 'web-components/lib/components/table/useTable
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from '../../lib/wallet';
-import { BatchRowData } from '../../types/ledger';
+import type { BatchRowData } from '../../types/ledger/ecocredit';
 import { ledgerRestUri } from '../../ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';

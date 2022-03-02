@@ -11,9 +11,9 @@ import HomeLedger from '../sections/home/LedgerSection';
 import HomeValuesSection from '../sections/home/ValuesSection';
 import ClimateSection from '../sections/home/ClimateSection';
 import CarbonPlusSection from '../sections/home/CarbonPlusSection';
-import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
 import BlogSection from '../sections/shared/BlogSection';
 import { HomePageWebQuery } from '../generated/graphql';
+import { BannerTextSection } from '../sections/home/BannerTextSection';
 
 const query = graphql`
   query homePageWeb {
@@ -43,10 +43,14 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
 
   return (
     <>
-      <SEO location={location} title="Regen Network" imageUrl={`${data?.seoImage?.publicURL}`} />
+      <SEO
+        location={location}
+        title="Regen Network"
+        imageUrl={`${data?.seoImage?.publicURL}`}
+      />
       <HomeFoldSection />
-      <MarketplaceSection />
-      <EmailSubmitSection />
+      <HomeValuesSection />
+      <BannerTextSection />
       <Box display={{ xs: 'block', sm: 'none' }}>
         <BackgroundImage
           Tag="div"
@@ -71,7 +75,7 @@ const IndexPage: React.FC<PageProps> = ({ location }) => {
         </BackgroundImage>
       </Box>
       <HomeLedger />
-      <HomeValuesSection />
+      <MarketplaceSection />
       <BlogSection />
     </>
   );

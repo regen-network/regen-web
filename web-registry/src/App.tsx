@@ -16,6 +16,7 @@ import {
   // GettingStarted,
   Admin,
   BasicInfo,
+  BasketDetails,
   BuyerCreate,
   BuyersPage,
   CertificatePage,
@@ -107,6 +108,7 @@ const App: React.FC = (): JSX.Element => {
             path="ecocredits/accounts/:accountAddress"
             element={<EcocreditsByAccount />}
           />
+          <Route path="baskets/:basketDenom" element={<BasketDetails />} />
           <Route
             path="user-profile"
             element={<ProtectedRoute component={UserProfile} />}

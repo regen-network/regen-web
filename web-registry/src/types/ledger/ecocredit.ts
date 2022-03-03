@@ -50,3 +50,7 @@ export interface QueryBasketsResponse {
   baskets: Basket[];
   pagination?: PageResponse;
 }
+
+export interface QueryBasketsRequest {
+  basket_denom: string;
+}

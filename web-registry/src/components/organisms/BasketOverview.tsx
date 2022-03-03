@@ -43,7 +43,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'relative',
     width: '100%',
     [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(76.4),
+      height: theme.spacing(57.5),
+      overflowY: 'clip',
     },
   },
   image: {
@@ -51,13 +52,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.spacing(103),
     margin: 'auto',
     [theme.breakpoints.down('sm')]: {
-      height: '100%',
+      height: theme.spacing(76.4),
       minWidth: theme.spacing(103),
       overflow: 'hidden',
       position: 'absolute',
-      top: '50%',
+      top: '60%',
       left: '50%',
-      transform: 'translate(-50%, -50%)',
+      transform: 'translate(-50%, -60%)',
     },
   },
   textContainer: {

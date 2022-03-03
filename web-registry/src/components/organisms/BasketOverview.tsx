@@ -13,7 +13,7 @@ import { parseText } from 'web-components/lib/utils/textParser';
 
 import { OptimizedImage } from '../atoms/OptimizedImage';
 import topoImg from '../../assets/background-contour-2.svg';
-import forestImg from '../../assets/forest.png';
+import forestImg from '../../assets/forest-token.png';
 import { ledgerRestUri } from '../../ledger';
 import type { Basket } from '../../types/ledger/ecocredit';
 
@@ -50,15 +50,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   image: {
     width: '100%',
     maxWidth: theme.spacing(103),
-    // margin: 'auto',
     [theme.breakpoints.down('sm')]: {
       height: theme.spacing(76.4),
       minWidth: theme.spacing(103),
       overflow: 'hidden',
       position: 'absolute',
-      top: '60%',
+      top: '50%',
       left: '50%',
-      transform: 'translate(-50%, -60%)',
+      transform: 'translate(-50%, -50%)',
     },
   },
   textContainer: {

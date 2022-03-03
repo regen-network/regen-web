@@ -214,7 +214,11 @@ const ClimateSection: React.FC = (): JSX.Element => {
         </Title>
         <div className={styles.cardContent}>{content?.problem?.body}</div>
       </Card>
-      <SanityImage {...(content?.image as any)} alt="Map" className={styles.image} />
+      <SanityImage
+        {...(content?.image as any)}
+        alt="Map"
+        className={styles.image}
+      />
       {!downMd && <hr className={clsx(styles.line, styles.solutionLine)} />}
       <Card
         className={clsx(styles.card, styles.solutionCard)}

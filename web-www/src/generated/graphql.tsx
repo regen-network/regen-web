@@ -25,6 +25,19 @@ export type Scalars = {
 
 
 
+export type AvifOptions = {
+  quality: Maybe<Scalars['Int']>;
+  lossless: Maybe<Scalars['Boolean']>;
+  speed: Maybe<Scalars['Int']>;
+};
+
+export type BlurredOptions = {
+  /** Width of the generated low-res preview. Default is 20px */
+  width: Maybe<Scalars['Int']>;
+  /** Force the output format for the low-res preview. Default is to use the same format as the input. You should rarely need to change this */
+  toFormat: Maybe<ImageFormat>;
+};
+
 export type BooleanQueryOperatorInput = {
   eq: Maybe<Scalars['Boolean']>;
   ne: Maybe<Scalars['Boolean']>;
@@ -394,12 +407,18 @@ export type File = Node & {
   blocks: Maybe<Scalars['Int']>;
   /** Copy file to static directory and return public url to it */
   publicURL: Maybe<Scalars['String']>;
+  /** Returns all children nodes filtered by type MarkdownRemark */
+  childrenMarkdownRemark: Maybe<Array<Maybe<MarkdownRemark>>>;
+  /** Returns the first child node of type MarkdownRemark or null if there are no children of given type on this node */
+  childMarkdownRemark: Maybe<MarkdownRemark>;
+  /** Returns all children nodes filtered by type ImageSharp */
+  childrenImageSharp: Maybe<Array<Maybe<ImageSharp>>>;
+  /** Returns the first child node of type ImageSharp or null if there are no children of given type on this node */
   childImageSharp: Maybe<ImageSharp>;
   id: Scalars['ID'];
   parent: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
-  childMarkdownRemark: Maybe<MarkdownRemark>;
 };
 
 
@@ -522,6 +541,208 @@ export enum FileFieldsEnum {
   Blksize = 'blksize',
   Blocks = 'blocks',
   PublicUrl = 'publicURL',
+  ChildrenMarkdownRemark = 'childrenMarkdownRemark',
+  ChildrenMarkdownRemarkId = 'childrenMarkdownRemark___id',
+  ChildrenMarkdownRemarkFrontmatterTitle = 'childrenMarkdownRemark___frontmatter___title',
+  ChildrenMarkdownRemarkExcerpt = 'childrenMarkdownRemark___excerpt',
+  ChildrenMarkdownRemarkRawMarkdownBody = 'childrenMarkdownRemark___rawMarkdownBody',
+  ChildrenMarkdownRemarkFileAbsolutePath = 'childrenMarkdownRemark___fileAbsolutePath',
+  ChildrenMarkdownRemarkHtml = 'childrenMarkdownRemark___html',
+  ChildrenMarkdownRemarkHtmlAst = 'childrenMarkdownRemark___htmlAst',
+  ChildrenMarkdownRemarkExcerptAst = 'childrenMarkdownRemark___excerptAst',
+  ChildrenMarkdownRemarkHeadings = 'childrenMarkdownRemark___headings',
+  ChildrenMarkdownRemarkHeadingsId = 'childrenMarkdownRemark___headings___id',
+  ChildrenMarkdownRemarkHeadingsValue = 'childrenMarkdownRemark___headings___value',
+  ChildrenMarkdownRemarkHeadingsDepth = 'childrenMarkdownRemark___headings___depth',
+  ChildrenMarkdownRemarkTimeToRead = 'childrenMarkdownRemark___timeToRead',
+  ChildrenMarkdownRemarkTableOfContents = 'childrenMarkdownRemark___tableOfContents',
+  ChildrenMarkdownRemarkWordCountParagraphs = 'childrenMarkdownRemark___wordCount___paragraphs',
+  ChildrenMarkdownRemarkWordCountSentences = 'childrenMarkdownRemark___wordCount___sentences',
+  ChildrenMarkdownRemarkWordCountWords = 'childrenMarkdownRemark___wordCount___words',
+  ChildrenMarkdownRemarkParentId = 'childrenMarkdownRemark___parent___id',
+  ChildrenMarkdownRemarkParentParentId = 'childrenMarkdownRemark___parent___parent___id',
+  ChildrenMarkdownRemarkParentParentChildren = 'childrenMarkdownRemark___parent___parent___children',
+  ChildrenMarkdownRemarkParentChildren = 'childrenMarkdownRemark___parent___children',
+  ChildrenMarkdownRemarkParentChildrenId = 'childrenMarkdownRemark___parent___children___id',
+  ChildrenMarkdownRemarkParentChildrenChildren = 'childrenMarkdownRemark___parent___children___children',
+  ChildrenMarkdownRemarkParentInternalContent = 'childrenMarkdownRemark___parent___internal___content',
+  ChildrenMarkdownRemarkParentInternalContentDigest = 'childrenMarkdownRemark___parent___internal___contentDigest',
+  ChildrenMarkdownRemarkParentInternalDescription = 'childrenMarkdownRemark___parent___internal___description',
+  ChildrenMarkdownRemarkParentInternalFieldOwners = 'childrenMarkdownRemark___parent___internal___fieldOwners',
+  ChildrenMarkdownRemarkParentInternalIgnoreType = 'childrenMarkdownRemark___parent___internal___ignoreType',
+  ChildrenMarkdownRemarkParentInternalMediaType = 'childrenMarkdownRemark___parent___internal___mediaType',
+  ChildrenMarkdownRemarkParentInternalOwner = 'childrenMarkdownRemark___parent___internal___owner',
+  ChildrenMarkdownRemarkParentInternalType = 'childrenMarkdownRemark___parent___internal___type',
+  ChildrenMarkdownRemarkChildren = 'childrenMarkdownRemark___children',
+  ChildrenMarkdownRemarkChildrenId = 'childrenMarkdownRemark___children___id',
+  ChildrenMarkdownRemarkChildrenParentId = 'childrenMarkdownRemark___children___parent___id',
+  ChildrenMarkdownRemarkChildrenParentChildren = 'childrenMarkdownRemark___children___parent___children',
+  ChildrenMarkdownRemarkChildrenChildren = 'childrenMarkdownRemark___children___children',
+  ChildrenMarkdownRemarkChildrenChildrenId = 'childrenMarkdownRemark___children___children___id',
+  ChildrenMarkdownRemarkChildrenChildrenChildren = 'childrenMarkdownRemark___children___children___children',
+  ChildrenMarkdownRemarkChildrenInternalContent = 'childrenMarkdownRemark___children___internal___content',
+  ChildrenMarkdownRemarkChildrenInternalContentDigest = 'childrenMarkdownRemark___children___internal___contentDigest',
+  ChildrenMarkdownRemarkChildrenInternalDescription = 'childrenMarkdownRemark___children___internal___description',
+  ChildrenMarkdownRemarkChildrenInternalFieldOwners = 'childrenMarkdownRemark___children___internal___fieldOwners',
+  ChildrenMarkdownRemarkChildrenInternalIgnoreType = 'childrenMarkdownRemark___children___internal___ignoreType',
+  ChildrenMarkdownRemarkChildrenInternalMediaType = 'childrenMarkdownRemark___children___internal___mediaType',
+  ChildrenMarkdownRemarkChildrenInternalOwner = 'childrenMarkdownRemark___children___internal___owner',
+  ChildrenMarkdownRemarkChildrenInternalType = 'childrenMarkdownRemark___children___internal___type',
+  ChildrenMarkdownRemarkInternalContent = 'childrenMarkdownRemark___internal___content',
+  ChildrenMarkdownRemarkInternalContentDigest = 'childrenMarkdownRemark___internal___contentDigest',
+  ChildrenMarkdownRemarkInternalDescription = 'childrenMarkdownRemark___internal___description',
+  ChildrenMarkdownRemarkInternalFieldOwners = 'childrenMarkdownRemark___internal___fieldOwners',
+  ChildrenMarkdownRemarkInternalIgnoreType = 'childrenMarkdownRemark___internal___ignoreType',
+  ChildrenMarkdownRemarkInternalMediaType = 'childrenMarkdownRemark___internal___mediaType',
+  ChildrenMarkdownRemarkInternalOwner = 'childrenMarkdownRemark___internal___owner',
+  ChildrenMarkdownRemarkInternalType = 'childrenMarkdownRemark___internal___type',
+  ChildMarkdownRemarkId = 'childMarkdownRemark___id',
+  ChildMarkdownRemarkFrontmatterTitle = 'childMarkdownRemark___frontmatter___title',
+  ChildMarkdownRemarkExcerpt = 'childMarkdownRemark___excerpt',
+  ChildMarkdownRemarkRawMarkdownBody = 'childMarkdownRemark___rawMarkdownBody',
+  ChildMarkdownRemarkFileAbsolutePath = 'childMarkdownRemark___fileAbsolutePath',
+  ChildMarkdownRemarkHtml = 'childMarkdownRemark___html',
+  ChildMarkdownRemarkHtmlAst = 'childMarkdownRemark___htmlAst',
+  ChildMarkdownRemarkExcerptAst = 'childMarkdownRemark___excerptAst',
+  ChildMarkdownRemarkHeadings = 'childMarkdownRemark___headings',
+  ChildMarkdownRemarkHeadingsId = 'childMarkdownRemark___headings___id',
+  ChildMarkdownRemarkHeadingsValue = 'childMarkdownRemark___headings___value',
+  ChildMarkdownRemarkHeadingsDepth = 'childMarkdownRemark___headings___depth',
+  ChildMarkdownRemarkTimeToRead = 'childMarkdownRemark___timeToRead',
+  ChildMarkdownRemarkTableOfContents = 'childMarkdownRemark___tableOfContents',
+  ChildMarkdownRemarkWordCountParagraphs = 'childMarkdownRemark___wordCount___paragraphs',
+  ChildMarkdownRemarkWordCountSentences = 'childMarkdownRemark___wordCount___sentences',
+  ChildMarkdownRemarkWordCountWords = 'childMarkdownRemark___wordCount___words',
+  ChildMarkdownRemarkParentId = 'childMarkdownRemark___parent___id',
+  ChildMarkdownRemarkParentParentId = 'childMarkdownRemark___parent___parent___id',
+  ChildMarkdownRemarkParentParentChildren = 'childMarkdownRemark___parent___parent___children',
+  ChildMarkdownRemarkParentChildren = 'childMarkdownRemark___parent___children',
+  ChildMarkdownRemarkParentChildrenId = 'childMarkdownRemark___parent___children___id',
+  ChildMarkdownRemarkParentChildrenChildren = 'childMarkdownRemark___parent___children___children',
+  ChildMarkdownRemarkParentInternalContent = 'childMarkdownRemark___parent___internal___content',
+  ChildMarkdownRemarkParentInternalContentDigest = 'childMarkdownRemark___parent___internal___contentDigest',
+  ChildMarkdownRemarkParentInternalDescription = 'childMarkdownRemark___parent___internal___description',
+  ChildMarkdownRemarkParentInternalFieldOwners = 'childMarkdownRemark___parent___internal___fieldOwners',
+  ChildMarkdownRemarkParentInternalIgnoreType = 'childMarkdownRemark___parent___internal___ignoreType',
+  ChildMarkdownRemarkParentInternalMediaType = 'childMarkdownRemark___parent___internal___mediaType',
+  ChildMarkdownRemarkParentInternalOwner = 'childMarkdownRemark___parent___internal___owner',
+  ChildMarkdownRemarkParentInternalType = 'childMarkdownRemark___parent___internal___type',
+  ChildMarkdownRemarkChildren = 'childMarkdownRemark___children',
+  ChildMarkdownRemarkChildrenId = 'childMarkdownRemark___children___id',
+  ChildMarkdownRemarkChildrenParentId = 'childMarkdownRemark___children___parent___id',
+  ChildMarkdownRemarkChildrenParentChildren = 'childMarkdownRemark___children___parent___children',
+  ChildMarkdownRemarkChildrenChildren = 'childMarkdownRemark___children___children',
+  ChildMarkdownRemarkChildrenChildrenId = 'childMarkdownRemark___children___children___id',
+  ChildMarkdownRemarkChildrenChildrenChildren = 'childMarkdownRemark___children___children___children',
+  ChildMarkdownRemarkChildrenInternalContent = 'childMarkdownRemark___children___internal___content',
+  ChildMarkdownRemarkChildrenInternalContentDigest = 'childMarkdownRemark___children___internal___contentDigest',
+  ChildMarkdownRemarkChildrenInternalDescription = 'childMarkdownRemark___children___internal___description',
+  ChildMarkdownRemarkChildrenInternalFieldOwners = 'childMarkdownRemark___children___internal___fieldOwners',
+  ChildMarkdownRemarkChildrenInternalIgnoreType = 'childMarkdownRemark___children___internal___ignoreType',
+  ChildMarkdownRemarkChildrenInternalMediaType = 'childMarkdownRemark___children___internal___mediaType',
+  ChildMarkdownRemarkChildrenInternalOwner = 'childMarkdownRemark___children___internal___owner',
+  ChildMarkdownRemarkChildrenInternalType = 'childMarkdownRemark___children___internal___type',
+  ChildMarkdownRemarkInternalContent = 'childMarkdownRemark___internal___content',
+  ChildMarkdownRemarkInternalContentDigest = 'childMarkdownRemark___internal___contentDigest',
+  ChildMarkdownRemarkInternalDescription = 'childMarkdownRemark___internal___description',
+  ChildMarkdownRemarkInternalFieldOwners = 'childMarkdownRemark___internal___fieldOwners',
+  ChildMarkdownRemarkInternalIgnoreType = 'childMarkdownRemark___internal___ignoreType',
+  ChildMarkdownRemarkInternalMediaType = 'childMarkdownRemark___internal___mediaType',
+  ChildMarkdownRemarkInternalOwner = 'childMarkdownRemark___internal___owner',
+  ChildMarkdownRemarkInternalType = 'childMarkdownRemark___internal___type',
+  ChildrenImageSharp = 'childrenImageSharp',
+  ChildrenImageSharpFixedBase64 = 'childrenImageSharp___fixed___base64',
+  ChildrenImageSharpFixedTracedSvg = 'childrenImageSharp___fixed___tracedSVG',
+  ChildrenImageSharpFixedAspectRatio = 'childrenImageSharp___fixed___aspectRatio',
+  ChildrenImageSharpFixedWidth = 'childrenImageSharp___fixed___width',
+  ChildrenImageSharpFixedHeight = 'childrenImageSharp___fixed___height',
+  ChildrenImageSharpFixedSrc = 'childrenImageSharp___fixed___src',
+  ChildrenImageSharpFixedSrcSet = 'childrenImageSharp___fixed___srcSet',
+  ChildrenImageSharpFixedSrcWebp = 'childrenImageSharp___fixed___srcWebp',
+  ChildrenImageSharpFixedSrcSetWebp = 'childrenImageSharp___fixed___srcSetWebp',
+  ChildrenImageSharpFixedOriginalName = 'childrenImageSharp___fixed___originalName',
+  ChildrenImageSharpResolutionsBase64 = 'childrenImageSharp___resolutions___base64',
+  ChildrenImageSharpResolutionsTracedSvg = 'childrenImageSharp___resolutions___tracedSVG',
+  ChildrenImageSharpResolutionsAspectRatio = 'childrenImageSharp___resolutions___aspectRatio',
+  ChildrenImageSharpResolutionsWidth = 'childrenImageSharp___resolutions___width',
+  ChildrenImageSharpResolutionsHeight = 'childrenImageSharp___resolutions___height',
+  ChildrenImageSharpResolutionsSrc = 'childrenImageSharp___resolutions___src',
+  ChildrenImageSharpResolutionsSrcSet = 'childrenImageSharp___resolutions___srcSet',
+  ChildrenImageSharpResolutionsSrcWebp = 'childrenImageSharp___resolutions___srcWebp',
+  ChildrenImageSharpResolutionsSrcSetWebp = 'childrenImageSharp___resolutions___srcSetWebp',
+  ChildrenImageSharpResolutionsOriginalName = 'childrenImageSharp___resolutions___originalName',
+  ChildrenImageSharpFluidBase64 = 'childrenImageSharp___fluid___base64',
+  ChildrenImageSharpFluidTracedSvg = 'childrenImageSharp___fluid___tracedSVG',
+  ChildrenImageSharpFluidAspectRatio = 'childrenImageSharp___fluid___aspectRatio',
+  ChildrenImageSharpFluidSrc = 'childrenImageSharp___fluid___src',
+  ChildrenImageSharpFluidSrcSet = 'childrenImageSharp___fluid___srcSet',
+  ChildrenImageSharpFluidSrcWebp = 'childrenImageSharp___fluid___srcWebp',
+  ChildrenImageSharpFluidSrcSetWebp = 'childrenImageSharp___fluid___srcSetWebp',
+  ChildrenImageSharpFluidSizes = 'childrenImageSharp___fluid___sizes',
+  ChildrenImageSharpFluidOriginalImg = 'childrenImageSharp___fluid___originalImg',
+  ChildrenImageSharpFluidOriginalName = 'childrenImageSharp___fluid___originalName',
+  ChildrenImageSharpFluidPresentationWidth = 'childrenImageSharp___fluid___presentationWidth',
+  ChildrenImageSharpFluidPresentationHeight = 'childrenImageSharp___fluid___presentationHeight',
+  ChildrenImageSharpSizesBase64 = 'childrenImageSharp___sizes___base64',
+  ChildrenImageSharpSizesTracedSvg = 'childrenImageSharp___sizes___tracedSVG',
+  ChildrenImageSharpSizesAspectRatio = 'childrenImageSharp___sizes___aspectRatio',
+  ChildrenImageSharpSizesSrc = 'childrenImageSharp___sizes___src',
+  ChildrenImageSharpSizesSrcSet = 'childrenImageSharp___sizes___srcSet',
+  ChildrenImageSharpSizesSrcWebp = 'childrenImageSharp___sizes___srcWebp',
+  ChildrenImageSharpSizesSrcSetWebp = 'childrenImageSharp___sizes___srcSetWebp',
+  ChildrenImageSharpSizesSizes = 'childrenImageSharp___sizes___sizes',
+  ChildrenImageSharpSizesOriginalImg = 'childrenImageSharp___sizes___originalImg',
+  ChildrenImageSharpSizesOriginalName = 'childrenImageSharp___sizes___originalName',
+  ChildrenImageSharpSizesPresentationWidth = 'childrenImageSharp___sizes___presentationWidth',
+  ChildrenImageSharpSizesPresentationHeight = 'childrenImageSharp___sizes___presentationHeight',
+  ChildrenImageSharpGatsbyImageData = 'childrenImageSharp___gatsbyImageData',
+  ChildrenImageSharpOriginalWidth = 'childrenImageSharp___original___width',
+  ChildrenImageSharpOriginalHeight = 'childrenImageSharp___original___height',
+  ChildrenImageSharpOriginalSrc = 'childrenImageSharp___original___src',
+  ChildrenImageSharpResizeSrc = 'childrenImageSharp___resize___src',
+  ChildrenImageSharpResizeTracedSvg = 'childrenImageSharp___resize___tracedSVG',
+  ChildrenImageSharpResizeWidth = 'childrenImageSharp___resize___width',
+  ChildrenImageSharpResizeHeight = 'childrenImageSharp___resize___height',
+  ChildrenImageSharpResizeAspectRatio = 'childrenImageSharp___resize___aspectRatio',
+  ChildrenImageSharpResizeOriginalName = 'childrenImageSharp___resize___originalName',
+  ChildrenImageSharpId = 'childrenImageSharp___id',
+  ChildrenImageSharpParentId = 'childrenImageSharp___parent___id',
+  ChildrenImageSharpParentParentId = 'childrenImageSharp___parent___parent___id',
+  ChildrenImageSharpParentParentChildren = 'childrenImageSharp___parent___parent___children',
+  ChildrenImageSharpParentChildren = 'childrenImageSharp___parent___children',
+  ChildrenImageSharpParentChildrenId = 'childrenImageSharp___parent___children___id',
+  ChildrenImageSharpParentChildrenChildren = 'childrenImageSharp___parent___children___children',
+  ChildrenImageSharpParentInternalContent = 'childrenImageSharp___parent___internal___content',
+  ChildrenImageSharpParentInternalContentDigest = 'childrenImageSharp___parent___internal___contentDigest',
+  ChildrenImageSharpParentInternalDescription = 'childrenImageSharp___parent___internal___description',
+  ChildrenImageSharpParentInternalFieldOwners = 'childrenImageSharp___parent___internal___fieldOwners',
+  ChildrenImageSharpParentInternalIgnoreType = 'childrenImageSharp___parent___internal___ignoreType',
+  ChildrenImageSharpParentInternalMediaType = 'childrenImageSharp___parent___internal___mediaType',
+  ChildrenImageSharpParentInternalOwner = 'childrenImageSharp___parent___internal___owner',
+  ChildrenImageSharpParentInternalType = 'childrenImageSharp___parent___internal___type',
+  ChildrenImageSharpChildren = 'childrenImageSharp___children',
+  ChildrenImageSharpChildrenId = 'childrenImageSharp___children___id',
+  ChildrenImageSharpChildrenParentId = 'childrenImageSharp___children___parent___id',
+  ChildrenImageSharpChildrenParentChildren = 'childrenImageSharp___children___parent___children',
+  ChildrenImageSharpChildrenChildren = 'childrenImageSharp___children___children',
+  ChildrenImageSharpChildrenChildrenId = 'childrenImageSharp___children___children___id',
+  ChildrenImageSharpChildrenChildrenChildren = 'childrenImageSharp___children___children___children',
+  ChildrenImageSharpChildrenInternalContent = 'childrenImageSharp___children___internal___content',
+  ChildrenImageSharpChildrenInternalContentDigest = 'childrenImageSharp___children___internal___contentDigest',
+  ChildrenImageSharpChildrenInternalDescription = 'childrenImageSharp___children___internal___description',
+  ChildrenImageSharpChildrenInternalFieldOwners = 'childrenImageSharp___children___internal___fieldOwners',
+  ChildrenImageSharpChildrenInternalIgnoreType = 'childrenImageSharp___children___internal___ignoreType',
+  ChildrenImageSharpChildrenInternalMediaType = 'childrenImageSharp___children___internal___mediaType',
+  ChildrenImageSharpChildrenInternalOwner = 'childrenImageSharp___children___internal___owner',
+  ChildrenImageSharpChildrenInternalType = 'childrenImageSharp___children___internal___type',
+  ChildrenImageSharpInternalContent = 'childrenImageSharp___internal___content',
+  ChildrenImageSharpInternalContentDigest = 'childrenImageSharp___internal___contentDigest',
+  ChildrenImageSharpInternalDescription = 'childrenImageSharp___internal___description',
+  ChildrenImageSharpInternalFieldOwners = 'childrenImageSharp___internal___fieldOwners',
+  ChildrenImageSharpInternalIgnoreType = 'childrenImageSharp___internal___ignoreType',
+  ChildrenImageSharpInternalMediaType = 'childrenImageSharp___internal___mediaType',
+  ChildrenImageSharpInternalOwner = 'childrenImageSharp___internal___owner',
+  ChildrenImageSharpInternalType = 'childrenImageSharp___internal___type',
   ChildImageSharpFixedBase64 = 'childImageSharp___fixed___base64',
   ChildImageSharpFixedTracedSvg = 'childImageSharp___fixed___tracedSVG',
   ChildImageSharpFixedAspectRatio = 'childImageSharp___fixed___aspectRatio',
@@ -566,6 +787,7 @@ export enum FileFieldsEnum {
   ChildImageSharpSizesOriginalName = 'childImageSharp___sizes___originalName',
   ChildImageSharpSizesPresentationWidth = 'childImageSharp___sizes___presentationWidth',
   ChildImageSharpSizesPresentationHeight = 'childImageSharp___sizes___presentationHeight',
+  ChildImageSharpGatsbyImageData = 'childImageSharp___gatsbyImageData',
   ChildImageSharpOriginalWidth = 'childImageSharp___original___width',
   ChildImageSharpOriginalHeight = 'childImageSharp___original___height',
   ChildImageSharpOriginalSrc = 'childImageSharp___original___src',
@@ -698,61 +920,7 @@ export enum FileFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  ChildMarkdownRemarkId = 'childMarkdownRemark___id',
-  ChildMarkdownRemarkFrontmatterTitle = 'childMarkdownRemark___frontmatter___title',
-  ChildMarkdownRemarkExcerpt = 'childMarkdownRemark___excerpt',
-  ChildMarkdownRemarkRawMarkdownBody = 'childMarkdownRemark___rawMarkdownBody',
-  ChildMarkdownRemarkFileAbsolutePath = 'childMarkdownRemark___fileAbsolutePath',
-  ChildMarkdownRemarkHtml = 'childMarkdownRemark___html',
-  ChildMarkdownRemarkHtmlAst = 'childMarkdownRemark___htmlAst',
-  ChildMarkdownRemarkExcerptAst = 'childMarkdownRemark___excerptAst',
-  ChildMarkdownRemarkHeadings = 'childMarkdownRemark___headings',
-  ChildMarkdownRemarkHeadingsId = 'childMarkdownRemark___headings___id',
-  ChildMarkdownRemarkHeadingsValue = 'childMarkdownRemark___headings___value',
-  ChildMarkdownRemarkHeadingsDepth = 'childMarkdownRemark___headings___depth',
-  ChildMarkdownRemarkTimeToRead = 'childMarkdownRemark___timeToRead',
-  ChildMarkdownRemarkTableOfContents = 'childMarkdownRemark___tableOfContents',
-  ChildMarkdownRemarkWordCountParagraphs = 'childMarkdownRemark___wordCount___paragraphs',
-  ChildMarkdownRemarkWordCountSentences = 'childMarkdownRemark___wordCount___sentences',
-  ChildMarkdownRemarkWordCountWords = 'childMarkdownRemark___wordCount___words',
-  ChildMarkdownRemarkParentId = 'childMarkdownRemark___parent___id',
-  ChildMarkdownRemarkParentParentId = 'childMarkdownRemark___parent___parent___id',
-  ChildMarkdownRemarkParentParentChildren = 'childMarkdownRemark___parent___parent___children',
-  ChildMarkdownRemarkParentChildren = 'childMarkdownRemark___parent___children',
-  ChildMarkdownRemarkParentChildrenId = 'childMarkdownRemark___parent___children___id',
-  ChildMarkdownRemarkParentChildrenChildren = 'childMarkdownRemark___parent___children___children',
-  ChildMarkdownRemarkParentInternalContent = 'childMarkdownRemark___parent___internal___content',
-  ChildMarkdownRemarkParentInternalContentDigest = 'childMarkdownRemark___parent___internal___contentDigest',
-  ChildMarkdownRemarkParentInternalDescription = 'childMarkdownRemark___parent___internal___description',
-  ChildMarkdownRemarkParentInternalFieldOwners = 'childMarkdownRemark___parent___internal___fieldOwners',
-  ChildMarkdownRemarkParentInternalIgnoreType = 'childMarkdownRemark___parent___internal___ignoreType',
-  ChildMarkdownRemarkParentInternalMediaType = 'childMarkdownRemark___parent___internal___mediaType',
-  ChildMarkdownRemarkParentInternalOwner = 'childMarkdownRemark___parent___internal___owner',
-  ChildMarkdownRemarkParentInternalType = 'childMarkdownRemark___parent___internal___type',
-  ChildMarkdownRemarkChildren = 'childMarkdownRemark___children',
-  ChildMarkdownRemarkChildrenId = 'childMarkdownRemark___children___id',
-  ChildMarkdownRemarkChildrenParentId = 'childMarkdownRemark___children___parent___id',
-  ChildMarkdownRemarkChildrenParentChildren = 'childMarkdownRemark___children___parent___children',
-  ChildMarkdownRemarkChildrenChildren = 'childMarkdownRemark___children___children',
-  ChildMarkdownRemarkChildrenChildrenId = 'childMarkdownRemark___children___children___id',
-  ChildMarkdownRemarkChildrenChildrenChildren = 'childMarkdownRemark___children___children___children',
-  ChildMarkdownRemarkChildrenInternalContent = 'childMarkdownRemark___children___internal___content',
-  ChildMarkdownRemarkChildrenInternalContentDigest = 'childMarkdownRemark___children___internal___contentDigest',
-  ChildMarkdownRemarkChildrenInternalDescription = 'childMarkdownRemark___children___internal___description',
-  ChildMarkdownRemarkChildrenInternalFieldOwners = 'childMarkdownRemark___children___internal___fieldOwners',
-  ChildMarkdownRemarkChildrenInternalIgnoreType = 'childMarkdownRemark___children___internal___ignoreType',
-  ChildMarkdownRemarkChildrenInternalMediaType = 'childMarkdownRemark___children___internal___mediaType',
-  ChildMarkdownRemarkChildrenInternalOwner = 'childMarkdownRemark___children___internal___owner',
-  ChildMarkdownRemarkChildrenInternalType = 'childMarkdownRemark___children___internal___type',
-  ChildMarkdownRemarkInternalContent = 'childMarkdownRemark___internal___content',
-  ChildMarkdownRemarkInternalContentDigest = 'childMarkdownRemark___internal___contentDigest',
-  ChildMarkdownRemarkInternalDescription = 'childMarkdownRemark___internal___description',
-  ChildMarkdownRemarkInternalFieldOwners = 'childMarkdownRemark___internal___fieldOwners',
-  ChildMarkdownRemarkInternalIgnoreType = 'childMarkdownRemark___internal___ignoreType',
-  ChildMarkdownRemarkInternalMediaType = 'childMarkdownRemark___internal___mediaType',
-  ChildMarkdownRemarkInternalOwner = 'childMarkdownRemark___internal___owner',
-  ChildMarkdownRemarkInternalType = 'childMarkdownRemark___internal___type'
+  InternalType = 'internal___type'
 }
 
 export type FileFilterInput = {
@@ -790,12 +958,14 @@ export type FileFilterInput = {
   blksize: Maybe<IntQueryOperatorInput>;
   blocks: Maybe<IntQueryOperatorInput>;
   publicURL: Maybe<StringQueryOperatorInput>;
+  childrenMarkdownRemark: Maybe<MarkdownRemarkFilterListInput>;
+  childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
+  childrenImageSharp: Maybe<ImageSharpFilterListInput>;
   childImageSharp: Maybe<ImageSharpFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
 };
 
 export type FileGroupConnection = {
@@ -848,9 +1018,24 @@ export enum ImageFit {
 
 export enum ImageFormat {
   NoChange = 'NO_CHANGE',
+  Auto = 'AUTO',
   Jpg = 'JPG',
   Png = 'PNG',
-  Webp = 'WEBP'
+  Webp = 'WEBP',
+  Avif = 'AVIF'
+}
+
+export enum ImageLayout {
+  Fixed = 'FIXED',
+  FullWidth = 'FULL_WIDTH',
+  Constrained = 'CONSTRAINED'
+}
+
+export enum ImagePlaceholder {
+  DominantColor = 'DOMINANT_COLOR',
+  TracedSvg = 'TRACED_SVG',
+  Blurred = 'BLURRED',
+  None = 'NONE'
 }
 
 export type ImageSharp = Node & {
@@ -861,6 +1046,7 @@ export type ImageSharp = Node & {
   fluid: Maybe<ImageSharpFluid>;
   /** @deprecated Sizes was deprecated in Gatsby v2. It's been renamed to "fluid" https://example.com/write-docs-and-fix-this-example-link */
   sizes: Maybe<ImageSharpSizes>;
+  gatsbyImageData: Scalars['JSON'];
   original: Maybe<ImageSharpOriginal>;
   resize: Maybe<ImageSharpResize>;
   id: Scalars['ID'];
@@ -966,6 +1152,28 @@ export type ImageSharpSizesArgs = {
 };
 
 
+export type ImageSharpGatsbyImageDataArgs = {
+  layout?: Maybe<ImageLayout>;
+  width: Maybe<Scalars['Int']>;
+  height: Maybe<Scalars['Int']>;
+  aspectRatio: Maybe<Scalars['Float']>;
+  placeholder: Maybe<ImagePlaceholder>;
+  blurredOptions: Maybe<BlurredOptions>;
+  tracedSVGOptions: Maybe<Potrace>;
+  formats: Maybe<Array<Maybe<ImageFormat>>>;
+  outputPixelDensities: Maybe<Array<Maybe<Scalars['Float']>>>;
+  breakpoints: Maybe<Array<Maybe<Scalars['Int']>>>;
+  sizes: Maybe<Scalars['String']>;
+  quality: Maybe<Scalars['Int']>;
+  jpgOptions: Maybe<JpgOptions>;
+  pngOptions: Maybe<PngOptions>;
+  webpOptions: Maybe<WebPOptions>;
+  avifOptions: Maybe<AvifOptions>;
+  transformOptions: Maybe<TransformOptions>;
+  backgroundColor: Maybe<Scalars['String']>;
+};
+
+
 export type ImageSharpResizeArgs = {
   width: Maybe<Scalars['Int']>;
   height: Maybe<Scalars['Int']>;
@@ -1062,6 +1270,7 @@ export enum ImageSharpFieldsEnum {
   SizesOriginalName = 'sizes___originalName',
   SizesPresentationWidth = 'sizes___presentationWidth',
   SizesPresentationHeight = 'sizes___presentationHeight',
+  GatsbyImageData = 'gatsbyImageData',
   OriginalWidth = 'original___width',
   OriginalHeight = 'original___height',
   OriginalSrc = 'original___src',
@@ -1164,12 +1373,17 @@ export type ImageSharpFilterInput = {
   resolutions: Maybe<ImageSharpResolutionsFilterInput>;
   fluid: Maybe<ImageSharpFluidFilterInput>;
   sizes: Maybe<ImageSharpSizesFilterInput>;
+  gatsbyImageData: Maybe<JsonQueryOperatorInput>;
   original: Maybe<ImageSharpOriginalFilterInput>;
   resize: Maybe<ImageSharpResizeFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
+};
+
+export type ImageSharpFilterListInput = {
+  elemMatch: Maybe<ImageSharpFilterInput>;
 };
 
 export type ImageSharpFixed = {
@@ -1211,8 +1425,8 @@ export type ImageSharpFluid = {
   sizes: Scalars['String'];
   originalImg: Maybe<Scalars['String']>;
   originalName: Maybe<Scalars['String']>;
-  presentationWidth: Maybe<Scalars['Int']>;
-  presentationHeight: Maybe<Scalars['Int']>;
+  presentationWidth: Scalars['Int'];
+  presentationHeight: Scalars['Int'];
 };
 
 export type ImageSharpFluidFilterInput = {
@@ -1311,8 +1525,8 @@ export type ImageSharpSizes = {
   sizes: Scalars['String'];
   originalImg: Maybe<Scalars['String']>;
   originalName: Maybe<Scalars['String']>;
-  presentationWidth: Maybe<Scalars['Int']>;
-  presentationHeight: Maybe<Scalars['Int']>;
+  presentationWidth: Scalars['Int'];
+  presentationHeight: Scalars['Int'];
 };
 
 export type ImageSharpSizesFilterInput = {
@@ -1367,6 +1581,11 @@ export type InternalFilterInput = {
   mediaType: Maybe<StringQueryOperatorInput>;
   owner: Maybe<StringQueryOperatorInput>;
   type: Maybe<StringQueryOperatorInput>;
+};
+
+export type JpgOptions = {
+  quality: Maybe<Scalars['Int']>;
+  progressive: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1608,6 +1827,10 @@ export type MarkdownRemarkFilterInput = {
   internal: Maybe<InternalFilterInput>;
 };
 
+export type MarkdownRemarkFilterListInput = {
+  elemMatch: Maybe<MarkdownRemarkFilterInput>;
+};
+
 export type MarkdownRemarkFrontmatter = {
   __typename?: 'MarkdownRemarkFrontmatter';
   title: Maybe<Scalars['String']>;
@@ -1664,6 +1887,11 @@ export type NodeFilterListInput = {
   elemMatch: Maybe<NodeFilterInput>;
 };
 
+export type PngOptions = {
+  quality: Maybe<Scalars['Int']>;
+  compressionSpeed: Maybe<Scalars['Int']>;
+};
+
 export type PageInfo = {
   __typename?: 'PageInfo';
   currentPage: Scalars['Int'];
@@ -1672,6 +1900,7 @@ export type PageInfo = {
   itemCount: Scalars['Int'];
   pageCount: Scalars['Int'];
   perPage: Maybe<Scalars['Int']>;
+  totalCount: Scalars['Int'];
 };
 
 export type Potrace = {
@@ -1701,10 +1930,10 @@ export type Query = {
   allFile: FileConnection;
   directory: Maybe<Directory>;
   allDirectory: DirectoryConnection;
-  sitePage: Maybe<SitePage>;
-  allSitePage: SitePageConnection;
   site: Maybe<Site>;
   allSite: SiteConnection;
+  sitePage: Maybe<SitePage>;
+  allSitePage: SitePageConnection;
   sanityBuyersPage: Maybe<SanityBuyersPage>;
   allSanityBuyersPage: SanityBuyersPageConnection;
   sanityCaseStudiesPage: Maybe<SanityCaseStudiesPage>;
@@ -1831,12 +2060,14 @@ export type QueryFileArgs = {
   blksize: Maybe<IntQueryOperatorInput>;
   blocks: Maybe<IntQueryOperatorInput>;
   publicURL: Maybe<StringQueryOperatorInput>;
+  childrenMarkdownRemark: Maybe<MarkdownRemarkFilterListInput>;
+  childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
+  childrenImageSharp: Maybe<ImageSharpFilterListInput>;
   childImageSharp: Maybe<ImageSharpFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
 };
 
 
@@ -1897,6 +2128,28 @@ export type QueryAllDirectoryArgs = {
 };
 
 
+export type QuerySiteArgs = {
+  buildTime: Maybe<DateQueryOperatorInput>;
+  siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
+  port: Maybe<IntQueryOperatorInput>;
+  host: Maybe<StringQueryOperatorInput>;
+  polyfill: Maybe<BooleanQueryOperatorInput>;
+  pathPrefix: Maybe<StringQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSiteArgs = {
+  filter: Maybe<SiteFilterInput>;
+  sort: Maybe<SiteSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
 export type QuerySitePageArgs = {
   path: Maybe<StringQueryOperatorInput>;
   component: Maybe<StringQueryOperatorInput>;
@@ -1918,28 +2171,6 @@ export type QuerySitePageArgs = {
 export type QueryAllSitePageArgs = {
   filter: Maybe<SitePageFilterInput>;
   sort: Maybe<SitePageSortInput>;
-  skip: Maybe<Scalars['Int']>;
-  limit: Maybe<Scalars['Int']>;
-};
-
-
-export type QuerySiteArgs = {
-  buildTime: Maybe<DateQueryOperatorInput>;
-  siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
-  port: Maybe<IntQueryOperatorInput>;
-  host: Maybe<StringQueryOperatorInput>;
-  polyfill: Maybe<BooleanQueryOperatorInput>;
-  pathPrefix: Maybe<StringQueryOperatorInput>;
-  id: Maybe<StringQueryOperatorInput>;
-  parent: Maybe<NodeFilterInput>;
-  children: Maybe<NodeFilterListInput>;
-  internal: Maybe<InternalFilterInput>;
-};
-
-
-export type QueryAllSiteArgs = {
-  filter: Maybe<SiteFilterInput>;
-  sort: Maybe<SiteSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -2510,12 +2741,14 @@ export type QuerySanityHomePageWebArgs = {
   _key: Maybe<StringQueryOperatorInput>;
   homeFoldSection: Maybe<SanityHomeFoldSectionFilterInput>;
   marketplaceSection: Maybe<SanityMarketplaceSectionFilterInput>;
+  bannerTextSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
   climateSection: Maybe<SanityClimateSectionFilterInput>;
   carbonPlusSection: Maybe<SanityCarbonPlusSectionFilterInput>;
   ledgerDescription: Maybe<StringQueryOperatorInput>;
   valuesSection: Maybe<SanityHomeValuesSectionFilterInput>;
   _rawHomeFoldSection: Maybe<JsonQueryOperatorInput>;
   _rawMarketplaceSection: Maybe<JsonQueryOperatorInput>;
+  _rawBannerTextSection: Maybe<JsonQueryOperatorInput>;
   _rawClimateSection: Maybe<JsonQueryOperatorInput>;
   _rawCarbonPlusSection: Maybe<JsonQueryOperatorInput>;
   _rawValuesSection: Maybe<JsonQueryOperatorInput>;
@@ -2970,6 +3203,7 @@ export type QuerySanityImageAssetArgs = {
   mimeType: Maybe<StringQueryOperatorInput>;
   size: Maybe<FloatQueryOperatorInput>;
   assetId: Maybe<StringQueryOperatorInput>;
+  uploadId: Maybe<StringQueryOperatorInput>;
   path: Maybe<StringQueryOperatorInput>;
   url: Maybe<StringQueryOperatorInput>;
   metadata: Maybe<SanityImageMetadataFilterInput>;
@@ -2982,7 +3216,6 @@ export type QuerySanityImageAssetArgs = {
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  childImageSharp: Maybe<ImageSharpFilterInput>;
 };
 
 
@@ -3265,6 +3498,7 @@ export type QueryImageSharpArgs = {
   resolutions: Maybe<ImageSharpResolutionsFilterInput>;
   fluid: Maybe<ImageSharpFluidFilterInput>;
   sizes: Maybe<ImageSharpSizesFilterInput>;
+  gatsbyImageData: Maybe<JsonQueryOperatorInput>;
   original: Maybe<ImageSharpOriginalFilterInput>;
   resize: Maybe<ImageSharpResizeFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
@@ -3925,6 +4159,7 @@ export enum SanityBuyersPageFieldsEnum {
   MetadataOpenGraphImageAssetMimeType = 'metadata___openGraphImage___asset___mimeType',
   MetadataOpenGraphImageAssetSize = 'metadata___openGraphImage___asset___size',
   MetadataOpenGraphImageAssetAssetId = 'metadata___openGraphImage___asset___assetId',
+  MetadataOpenGraphImageAssetUploadId = 'metadata___openGraphImage___asset___uploadId',
   MetadataOpenGraphImageAssetPath = 'metadata___openGraphImage___asset___path',
   MetadataOpenGraphImageAssetUrl = 'metadata___openGraphImage___asset___url',
   MetadataOpenGraphImageAssetRawMetadata = 'metadata___openGraphImage___asset____rawMetadata',
@@ -5289,6 +5524,7 @@ export enum SanityCaseStudyPageFieldsEnum {
   CardImageImageAssetMimeType = 'cardImage___image___asset___mimeType',
   CardImageImageAssetSize = 'cardImage___image___asset___size',
   CardImageImageAssetAssetId = 'cardImage___image___asset___assetId',
+  CardImageImageAssetUploadId = 'cardImage___image___asset___uploadId',
   CardImageImageAssetPath = 'cardImage___image___asset___path',
   CardImageImageAssetUrl = 'cardImage___image___asset___url',
   CardImageImageAssetRawMetadata = 'cardImage___image___asset____rawMetadata',
@@ -5333,6 +5569,7 @@ export enum SanityCaseStudyPageFieldsEnum {
   BackgroundImageAssetMimeType = 'background___image___asset___mimeType',
   BackgroundImageAssetSize = 'background___image___asset___size',
   BackgroundImageAssetAssetId = 'background___image___asset___assetId',
+  BackgroundImageAssetUploadId = 'background___image___asset___uploadId',
   BackgroundImageAssetPath = 'background___image___asset___path',
   BackgroundImageAssetUrl = 'background___image___asset___url',
   BackgroundImageAssetRawMetadata = 'background___image___asset____rawMetadata',
@@ -7143,6 +7380,7 @@ export enum SanityCreateCreditClassPageFieldsEnum {
   MetadataOpenGraphImageAssetMimeType = 'metadata___openGraphImage___asset___mimeType',
   MetadataOpenGraphImageAssetSize = 'metadata___openGraphImage___asset___size',
   MetadataOpenGraphImageAssetAssetId = 'metadata___openGraphImage___asset___assetId',
+  MetadataOpenGraphImageAssetUploadId = 'metadata___openGraphImage___asset___uploadId',
   MetadataOpenGraphImageAssetPath = 'metadata___openGraphImage___asset___path',
   MetadataOpenGraphImageAssetUrl = 'metadata___openGraphImage___asset___url',
   MetadataOpenGraphImageAssetRawMetadata = 'metadata___openGraphImage___asset____rawMetadata',
@@ -7803,6 +8041,7 @@ export enum SanityCreateMethodologyPageFieldsEnum {
   MetadataOpenGraphImageAssetMimeType = 'metadata___openGraphImage___asset___mimeType',
   MetadataOpenGraphImageAssetSize = 'metadata___openGraphImage___asset___size',
   MetadataOpenGraphImageAssetAssetId = 'metadata___openGraphImage___asset___assetId',
+  MetadataOpenGraphImageAssetUploadId = 'metadata___openGraphImage___asset___uploadId',
   MetadataOpenGraphImageAssetPath = 'metadata___openGraphImage___asset___path',
   MetadataOpenGraphImageAssetUrl = 'metadata___openGraphImage___asset___url',
   MetadataOpenGraphImageAssetRawMetadata = 'metadata___openGraphImage___asset____rawMetadata',
@@ -8201,6 +8440,7 @@ export enum SanityCreditClassFieldsEnum {
   OverviewCardsIconAssetMimeType = 'overviewCards___icon___asset___mimeType',
   OverviewCardsIconAssetSize = 'overviewCards___icon___asset___size',
   OverviewCardsIconAssetAssetId = 'overviewCards___icon___asset___assetId',
+  OverviewCardsIconAssetUploadId = 'overviewCards___icon___asset___uploadId',
   OverviewCardsIconAssetPath = 'overviewCards___icon___asset___path',
   OverviewCardsIconAssetUrl = 'overviewCards___icon___asset___url',
   OverviewCardsIconAssetRawMetadata = 'overviewCards___icon___asset____rawMetadata',
@@ -9124,6 +9364,7 @@ export enum SanityDevelopersPageFieldsEnum {
   LedgerSectionCosmosImageAssetMimeType = 'ledgerSection___cosmosImage___asset___mimeType',
   LedgerSectionCosmosImageAssetSize = 'ledgerSection___cosmosImage___asset___size',
   LedgerSectionCosmosImageAssetAssetId = 'ledgerSection___cosmosImage___asset___assetId',
+  LedgerSectionCosmosImageAssetUploadId = 'ledgerSection___cosmosImage___asset___uploadId',
   LedgerSectionCosmosImageAssetPath = 'ledgerSection___cosmosImage___asset___path',
   LedgerSectionCosmosImageAssetUrl = 'ledgerSection___cosmosImage___asset___url',
   LedgerSectionCosmosImageAssetRawMetadata = 'ledgerSection___cosmosImage___asset____rawMetadata',
@@ -9179,6 +9420,7 @@ export enum SanityDevelopersPageFieldsEnum {
   OpenAgSectionImageAssetMimeType = 'openAgSection___image___asset___mimeType',
   OpenAgSectionImageAssetSize = 'openAgSection___image___asset___size',
   OpenAgSectionImageAssetAssetId = 'openAgSection___image___asset___assetId',
+  OpenAgSectionImageAssetUploadId = 'openAgSection___image___asset___uploadId',
   OpenAgSectionImageAssetPath = 'openAgSection___image___asset___path',
   OpenAgSectionImageAssetUrl = 'openAgSection___image___asset___url',
   OpenAgSectionImageAssetRawMetadata = 'openAgSection___image___asset____rawMetadata',
@@ -9772,6 +10014,7 @@ export enum SanityEcologicalImpactFieldsEnum {
   ImageImageAssetMimeType = 'image___image___asset___mimeType',
   ImageImageAssetSize = 'image___image___asset___size',
   ImageImageAssetAssetId = 'image___image___asset___assetId',
+  ImageImageAssetUploadId = 'image___image___asset___uploadId',
   ImageImageAssetPath = 'image___image___asset___path',
   ImageImageAssetUrl = 'image___image___asset___url',
   ImageImageAssetRawMetadata = 'image___image___asset____rawMetadata',
@@ -9816,6 +10059,7 @@ export enum SanityEcologicalImpactFieldsEnum {
   StandardImageAssetMimeType = 'standard___image___asset___mimeType',
   StandardImageAssetSize = 'standard___image___asset___size',
   StandardImageAssetAssetId = 'standard___image___asset___assetId',
+  StandardImageAssetUploadId = 'standard___image___asset___uploadId',
   StandardImageAssetPath = 'standard___image___asset___path',
   StandardImageAssetUrl = 'standard___image___asset___url',
   StandardImageAssetRawMetadata = 'standard___image___asset____rawMetadata',
@@ -10108,6 +10352,7 @@ export enum SanityEcologicalOutcomeFieldsEnum {
   ImageImageAssetMimeType = 'image___image___asset___mimeType',
   ImageImageAssetSize = 'image___image___asset___size',
   ImageImageAssetAssetId = 'image___image___asset___assetId',
+  ImageImageAssetUploadId = 'image___image___asset___uploadId',
   ImageImageAssetPath = 'image___image___asset___path',
   ImageImageAssetUrl = 'image___image___asset___url',
   ImageImageAssetRawMetadata = 'image___image___asset____rawMetadata',
@@ -10871,6 +11116,7 @@ export enum SanityFeaturedSectionFieldsEnum {
   ImageImageAssetMimeType = 'image___image___asset___mimeType',
   ImageImageAssetSize = 'image___image___asset___size',
   ImageImageAssetAssetId = 'image___image___asset___assetId',
+  ImageImageAssetUploadId = 'image___image___asset___uploadId',
   ImageImageAssetPath = 'image___image___asset___path',
   ImageImageAssetUrl = 'image___image___asset___url',
   ImageImageAssetRawMetadata = 'image___image___asset____rawMetadata',
@@ -11527,6 +11773,7 @@ export enum SanityFundPageFieldsEnum {
   CallsToActionImageAssetMimeType = 'callsToAction___image___asset___mimeType',
   CallsToActionImageAssetSize = 'callsToAction___image___asset___size',
   CallsToActionImageAssetAssetId = 'callsToAction___image___asset___assetId',
+  CallsToActionImageAssetUploadId = 'callsToAction___image___asset___uploadId',
   CallsToActionImageAssetPath = 'callsToAction___image___asset___path',
   CallsToActionImageAssetUrl = 'callsToAction___image___asset___url',
   CallsToActionImageAssetRawMetadata = 'callsToAction___image___asset____rawMetadata',
@@ -12024,12 +12271,14 @@ export type SanityHomePageWeb = SanityDocument & Node & {
   _key: Maybe<Scalars['String']>;
   homeFoldSection: Maybe<SanityHomeFoldSection>;
   marketplaceSection: Maybe<SanityMarketplaceSection>;
+  bannerTextSection: Maybe<SanityTitleImageCustomBody>;
   climateSection: Maybe<SanityClimateSection>;
   carbonPlusSection: Maybe<SanityCarbonPlusSection>;
   ledgerDescription: Maybe<Scalars['String']>;
   valuesSection: Maybe<SanityHomeValuesSection>;
   _rawHomeFoldSection: Maybe<Scalars['JSON']>;
   _rawMarketplaceSection: Maybe<Scalars['JSON']>;
+  _rawBannerTextSection: Maybe<Scalars['JSON']>;
   _rawClimateSection: Maybe<Scalars['JSON']>;
   _rawCarbonPlusSection: Maybe<Scalars['JSON']>;
   _rawValuesSection: Maybe<Scalars['JSON']>;
@@ -12062,6 +12311,11 @@ export type SanityHomePageWeb_RawHomeFoldSectionArgs = {
 
 
 export type SanityHomePageWeb_RawMarketplaceSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityHomePageWeb_RawBannerTextSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
@@ -12146,6 +12400,32 @@ export enum SanityHomePageWebFieldsEnum {
   MarketplaceSectionCallToActionsRawImage = 'marketplaceSection___callToActions____rawImage',
   MarketplaceSectionRawBody = 'marketplaceSection____rawBody',
   MarketplaceSectionRawCallToActions = 'marketplaceSection____rawCallToActions',
+  BannerTextSectionKey = 'bannerTextSection____key',
+  BannerTextSectionType = 'bannerTextSection____type',
+  BannerTextSectionTitle = 'bannerTextSection___title',
+  BannerTextSectionImageKey = 'bannerTextSection___image____key',
+  BannerTextSectionImageType = 'bannerTextSection___image____type',
+  BannerTextSectionImageImageHref = 'bannerTextSection___image___imageHref',
+  BannerTextSectionImageImageKey = 'bannerTextSection___image___image____key',
+  BannerTextSectionImageImageType = 'bannerTextSection___image___image____type',
+  BannerTextSectionImageImageRawAsset = 'bannerTextSection___image___image____rawAsset',
+  BannerTextSectionImageImageRawHotspot = 'bannerTextSection___image___image____rawHotspot',
+  BannerTextSectionImageImageRawCrop = 'bannerTextSection___image___image____rawCrop',
+  BannerTextSectionImageImageAlt = 'bannerTextSection___image___imageAlt',
+  BannerTextSectionImageRawImage = 'bannerTextSection___image____rawImage',
+  BannerTextSectionBody = 'bannerTextSection___body',
+  BannerTextSectionBodyKey = 'bannerTextSection___body____key',
+  BannerTextSectionBodyType = 'bannerTextSection___body____type',
+  BannerTextSectionBodyChildren = 'bannerTextSection___body___children',
+  BannerTextSectionBodyChildrenKey = 'bannerTextSection___body___children____key',
+  BannerTextSectionBodyChildrenType = 'bannerTextSection___body___children____type',
+  BannerTextSectionBodyChildrenMarks = 'bannerTextSection___body___children___marks',
+  BannerTextSectionBodyChildrenText = 'bannerTextSection___body___children___text',
+  BannerTextSectionBodyStyle = 'bannerTextSection___body___style',
+  BannerTextSectionBodyList = 'bannerTextSection___body___list',
+  BannerTextSectionBodyRawChildren = 'bannerTextSection___body____rawChildren',
+  BannerTextSectionRawImage = 'bannerTextSection____rawImage',
+  BannerTextSectionRawBody = 'bannerTextSection____rawBody',
   ClimateSectionKey = 'climateSection____key',
   ClimateSectionType = 'climateSection____type',
   ClimateSectionHeader = 'climateSection___header',
@@ -12168,6 +12448,7 @@ export enum SanityHomePageWebFieldsEnum {
   ClimateSectionImageAssetMimeType = 'climateSection___image___asset___mimeType',
   ClimateSectionImageAssetSize = 'climateSection___image___asset___size',
   ClimateSectionImageAssetAssetId = 'climateSection___image___asset___assetId',
+  ClimateSectionImageAssetUploadId = 'climateSection___image___asset___uploadId',
   ClimateSectionImageAssetPath = 'climateSection___image___asset___path',
   ClimateSectionImageAssetUrl = 'climateSection___image___asset___url',
   ClimateSectionImageAssetRawMetadata = 'climateSection___image___asset____rawMetadata',
@@ -12226,6 +12507,7 @@ export enum SanityHomePageWebFieldsEnum {
   ValuesSectionRawImageItems = 'valuesSection____rawImageItems',
   RawHomeFoldSection = '_rawHomeFoldSection',
   RawMarketplaceSection = '_rawMarketplaceSection',
+  RawBannerTextSection = '_rawBannerTextSection',
   RawClimateSection = '_rawClimateSection',
   RawCarbonPlusSection = '_rawCarbonPlusSection',
   RawValuesSection = '_rawValuesSection',
@@ -12326,12 +12608,14 @@ export type SanityHomePageWebFilterInput = {
   _key: Maybe<StringQueryOperatorInput>;
   homeFoldSection: Maybe<SanityHomeFoldSectionFilterInput>;
   marketplaceSection: Maybe<SanityMarketplaceSectionFilterInput>;
+  bannerTextSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
   climateSection: Maybe<SanityClimateSectionFilterInput>;
   carbonPlusSection: Maybe<SanityCarbonPlusSectionFilterInput>;
   ledgerDescription: Maybe<StringQueryOperatorInput>;
   valuesSection: Maybe<SanityHomeValuesSectionFilterInput>;
   _rawHomeFoldSection: Maybe<JsonQueryOperatorInput>;
   _rawMarketplaceSection: Maybe<JsonQueryOperatorInput>;
+  _rawBannerTextSection: Maybe<JsonQueryOperatorInput>;
   _rawClimateSection: Maybe<JsonQueryOperatorInput>;
   _rawCarbonPlusSection: Maybe<JsonQueryOperatorInput>;
   _rawValuesSection: Maybe<JsonQueryOperatorInput>;
@@ -12423,6 +12707,7 @@ export type SanityImageAsset = SanityDocument & Node & {
   mimeType: Maybe<Scalars['String']>;
   size: Maybe<Scalars['Float']>;
   assetId: Maybe<Scalars['String']>;
+  uploadId: Maybe<Scalars['String']>;
   path: Maybe<Scalars['String']>;
   url: Maybe<Scalars['String']>;
   metadata: Maybe<SanityImageMetadata>;
@@ -12435,7 +12720,6 @@ export type SanityImageAsset = SanityDocument & Node & {
   parent: Maybe<Node>;
   children: Array<Node>;
   internal: Internal;
-  childImageSharp: Maybe<ImageSharp>;
 };
 
 
@@ -12525,6 +12809,7 @@ export enum SanityImageAssetFieldsEnum {
   MimeType = 'mimeType',
   Size = 'size',
   AssetId = 'assetId',
+  UploadId = 'uploadId',
   Path = 'path',
   Url = 'url',
   MetadataKey = 'metadata____key',
@@ -12591,6 +12876,7 @@ export enum SanityImageAssetFieldsEnum {
   MetadataPaletteRawLightMuted = 'metadata___palette____rawLightMuted',
   MetadataPaletteRawMuted = 'metadata___palette____rawMuted',
   MetadataLqip = 'metadata___lqip',
+  MetadataBlurHash = 'metadata___blurHash',
   MetadataHasAlpha = 'metadata___hasAlpha',
   MetadataIsOpaque = 'metadata___isOpaque',
   MetadataRawLocation = 'metadata____rawLocation',
@@ -12702,98 +12988,7 @@ export enum SanityImageAssetFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type',
-  ChildImageSharpFixedBase64 = 'childImageSharp___fixed___base64',
-  ChildImageSharpFixedTracedSvg = 'childImageSharp___fixed___tracedSVG',
-  ChildImageSharpFixedAspectRatio = 'childImageSharp___fixed___aspectRatio',
-  ChildImageSharpFixedWidth = 'childImageSharp___fixed___width',
-  ChildImageSharpFixedHeight = 'childImageSharp___fixed___height',
-  ChildImageSharpFixedSrc = 'childImageSharp___fixed___src',
-  ChildImageSharpFixedSrcSet = 'childImageSharp___fixed___srcSet',
-  ChildImageSharpFixedSrcWebp = 'childImageSharp___fixed___srcWebp',
-  ChildImageSharpFixedSrcSetWebp = 'childImageSharp___fixed___srcSetWebp',
-  ChildImageSharpFixedOriginalName = 'childImageSharp___fixed___originalName',
-  ChildImageSharpResolutionsBase64 = 'childImageSharp___resolutions___base64',
-  ChildImageSharpResolutionsTracedSvg = 'childImageSharp___resolutions___tracedSVG',
-  ChildImageSharpResolutionsAspectRatio = 'childImageSharp___resolutions___aspectRatio',
-  ChildImageSharpResolutionsWidth = 'childImageSharp___resolutions___width',
-  ChildImageSharpResolutionsHeight = 'childImageSharp___resolutions___height',
-  ChildImageSharpResolutionsSrc = 'childImageSharp___resolutions___src',
-  ChildImageSharpResolutionsSrcSet = 'childImageSharp___resolutions___srcSet',
-  ChildImageSharpResolutionsSrcWebp = 'childImageSharp___resolutions___srcWebp',
-  ChildImageSharpResolutionsSrcSetWebp = 'childImageSharp___resolutions___srcSetWebp',
-  ChildImageSharpResolutionsOriginalName = 'childImageSharp___resolutions___originalName',
-  ChildImageSharpFluidBase64 = 'childImageSharp___fluid___base64',
-  ChildImageSharpFluidTracedSvg = 'childImageSharp___fluid___tracedSVG',
-  ChildImageSharpFluidAspectRatio = 'childImageSharp___fluid___aspectRatio',
-  ChildImageSharpFluidSrc = 'childImageSharp___fluid___src',
-  ChildImageSharpFluidSrcSet = 'childImageSharp___fluid___srcSet',
-  ChildImageSharpFluidSrcWebp = 'childImageSharp___fluid___srcWebp',
-  ChildImageSharpFluidSrcSetWebp = 'childImageSharp___fluid___srcSetWebp',
-  ChildImageSharpFluidSizes = 'childImageSharp___fluid___sizes',
-  ChildImageSharpFluidOriginalImg = 'childImageSharp___fluid___originalImg',
-  ChildImageSharpFluidOriginalName = 'childImageSharp___fluid___originalName',
-  ChildImageSharpFluidPresentationWidth = 'childImageSharp___fluid___presentationWidth',
-  ChildImageSharpFluidPresentationHeight = 'childImageSharp___fluid___presentationHeight',
-  ChildImageSharpSizesBase64 = 'childImageSharp___sizes___base64',
-  ChildImageSharpSizesTracedSvg = 'childImageSharp___sizes___tracedSVG',
-  ChildImageSharpSizesAspectRatio = 'childImageSharp___sizes___aspectRatio',
-  ChildImageSharpSizesSrc = 'childImageSharp___sizes___src',
-  ChildImageSharpSizesSrcSet = 'childImageSharp___sizes___srcSet',
-  ChildImageSharpSizesSrcWebp = 'childImageSharp___sizes___srcWebp',
-  ChildImageSharpSizesSrcSetWebp = 'childImageSharp___sizes___srcSetWebp',
-  ChildImageSharpSizesSizes = 'childImageSharp___sizes___sizes',
-  ChildImageSharpSizesOriginalImg = 'childImageSharp___sizes___originalImg',
-  ChildImageSharpSizesOriginalName = 'childImageSharp___sizes___originalName',
-  ChildImageSharpSizesPresentationWidth = 'childImageSharp___sizes___presentationWidth',
-  ChildImageSharpSizesPresentationHeight = 'childImageSharp___sizes___presentationHeight',
-  ChildImageSharpOriginalWidth = 'childImageSharp___original___width',
-  ChildImageSharpOriginalHeight = 'childImageSharp___original___height',
-  ChildImageSharpOriginalSrc = 'childImageSharp___original___src',
-  ChildImageSharpResizeSrc = 'childImageSharp___resize___src',
-  ChildImageSharpResizeTracedSvg = 'childImageSharp___resize___tracedSVG',
-  ChildImageSharpResizeWidth = 'childImageSharp___resize___width',
-  ChildImageSharpResizeHeight = 'childImageSharp___resize___height',
-  ChildImageSharpResizeAspectRatio = 'childImageSharp___resize___aspectRatio',
-  ChildImageSharpResizeOriginalName = 'childImageSharp___resize___originalName',
-  ChildImageSharpId = 'childImageSharp___id',
-  ChildImageSharpParentId = 'childImageSharp___parent___id',
-  ChildImageSharpParentParentId = 'childImageSharp___parent___parent___id',
-  ChildImageSharpParentParentChildren = 'childImageSharp___parent___parent___children',
-  ChildImageSharpParentChildren = 'childImageSharp___parent___children',
-  ChildImageSharpParentChildrenId = 'childImageSharp___parent___children___id',
-  ChildImageSharpParentChildrenChildren = 'childImageSharp___parent___children___children',
-  ChildImageSharpParentInternalContent = 'childImageSharp___parent___internal___content',
-  ChildImageSharpParentInternalContentDigest = 'childImageSharp___parent___internal___contentDigest',
-  ChildImageSharpParentInternalDescription = 'childImageSharp___parent___internal___description',
-  ChildImageSharpParentInternalFieldOwners = 'childImageSharp___parent___internal___fieldOwners',
-  ChildImageSharpParentInternalIgnoreType = 'childImageSharp___parent___internal___ignoreType',
-  ChildImageSharpParentInternalMediaType = 'childImageSharp___parent___internal___mediaType',
-  ChildImageSharpParentInternalOwner = 'childImageSharp___parent___internal___owner',
-  ChildImageSharpParentInternalType = 'childImageSharp___parent___internal___type',
-  ChildImageSharpChildren = 'childImageSharp___children',
-  ChildImageSharpChildrenId = 'childImageSharp___children___id',
-  ChildImageSharpChildrenParentId = 'childImageSharp___children___parent___id',
-  ChildImageSharpChildrenParentChildren = 'childImageSharp___children___parent___children',
-  ChildImageSharpChildrenChildren = 'childImageSharp___children___children',
-  ChildImageSharpChildrenChildrenId = 'childImageSharp___children___children___id',
-  ChildImageSharpChildrenChildrenChildren = 'childImageSharp___children___children___children',
-  ChildImageSharpChildrenInternalContent = 'childImageSharp___children___internal___content',
-  ChildImageSharpChildrenInternalContentDigest = 'childImageSharp___children___internal___contentDigest',
-  ChildImageSharpChildrenInternalDescription = 'childImageSharp___children___internal___description',
-  ChildImageSharpChildrenInternalFieldOwners = 'childImageSharp___children___internal___fieldOwners',
-  ChildImageSharpChildrenInternalIgnoreType = 'childImageSharp___children___internal___ignoreType',
-  ChildImageSharpChildrenInternalMediaType = 'childImageSharp___children___internal___mediaType',
-  ChildImageSharpChildrenInternalOwner = 'childImageSharp___children___internal___owner',
-  ChildImageSharpChildrenInternalType = 'childImageSharp___children___internal___type',
-  ChildImageSharpInternalContent = 'childImageSharp___internal___content',
-  ChildImageSharpInternalContentDigest = 'childImageSharp___internal___contentDigest',
-  ChildImageSharpInternalDescription = 'childImageSharp___internal___description',
-  ChildImageSharpInternalFieldOwners = 'childImageSharp___internal___fieldOwners',
-  ChildImageSharpInternalIgnoreType = 'childImageSharp___internal___ignoreType',
-  ChildImageSharpInternalMediaType = 'childImageSharp___internal___mediaType',
-  ChildImageSharpInternalOwner = 'childImageSharp___internal___owner',
-  ChildImageSharpInternalType = 'childImageSharp___internal___type'
+  InternalType = 'internal___type'
 }
 
 export type SanityImageAssetFilterInput = {
@@ -12813,6 +13008,7 @@ export type SanityImageAssetFilterInput = {
   mimeType: Maybe<StringQueryOperatorInput>;
   size: Maybe<FloatQueryOperatorInput>;
   assetId: Maybe<StringQueryOperatorInput>;
+  uploadId: Maybe<StringQueryOperatorInput>;
   path: Maybe<StringQueryOperatorInput>;
   url: Maybe<StringQueryOperatorInput>;
   metadata: Maybe<SanityImageMetadataFilterInput>;
@@ -12825,7 +13021,6 @@ export type SanityImageAssetFilterInput = {
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
   internal: Maybe<InternalFilterInput>;
-  childImageSharp: Maybe<ImageSharpFilterInput>;
 };
 
 export type SanityImageAssetGroupConnection = {
@@ -13103,6 +13298,7 @@ export enum SanityImageGridItemFieldsEnum {
   ImageImageAssetMimeType = 'image___image___asset___mimeType',
   ImageImageAssetSize = 'image___image___asset___size',
   ImageImageAssetAssetId = 'image___image___asset___assetId',
+  ImageImageAssetUploadId = 'image___image___asset___uploadId',
   ImageImageAssetPath = 'image___image___asset___path',
   ImageImageAssetUrl = 'image___image___asset___url',
   ImageImageAssetRawMetadata = 'image___image___asset____rawMetadata',
@@ -13375,6 +13571,7 @@ export type SanityImageMetadata = {
   dimensions: Maybe<SanityImageDimensions>;
   palette: Maybe<SanityImagePalette>;
   lqip: Maybe<Scalars['String']>;
+  blurHash: Maybe<Scalars['String']>;
   hasAlpha: Maybe<Scalars['Boolean']>;
   isOpaque: Maybe<Scalars['Boolean']>;
   _rawLocation: Maybe<Scalars['JSON']>;
@@ -13404,6 +13601,7 @@ export type SanityImageMetadataFilterInput = {
   dimensions: Maybe<SanityImageDimensionsFilterInput>;
   palette: Maybe<SanityImagePaletteFilterInput>;
   lqip: Maybe<StringQueryOperatorInput>;
+  blurHash: Maybe<StringQueryOperatorInput>;
   hasAlpha: Maybe<BooleanQueryOperatorInput>;
   isOpaque: Maybe<BooleanQueryOperatorInput>;
   _rawLocation: Maybe<JsonQueryOperatorInput>;
@@ -13630,11 +13828,13 @@ export enum SanityLandManagementPracticeFieldsEnum {
   IconAssetMimeType = 'icon___asset___mimeType',
   IconAssetSize = 'icon___asset___size',
   IconAssetAssetId = 'icon___asset___assetId',
+  IconAssetUploadId = 'icon___asset___uploadId',
   IconAssetPath = 'icon___asset___path',
   IconAssetUrl = 'icon___asset___url',
   IconAssetMetadataKey = 'icon___asset___metadata____key',
   IconAssetMetadataType = 'icon___asset___metadata____type',
   IconAssetMetadataLqip = 'icon___asset___metadata___lqip',
+  IconAssetMetadataBlurHash = 'icon___asset___metadata___blurHash',
   IconAssetMetadataHasAlpha = 'icon___asset___metadata___hasAlpha',
   IconAssetMetadataIsOpaque = 'icon___asset___metadata___isOpaque',
   IconAssetMetadataRawLocation = 'icon___asset___metadata____rawLocation',
@@ -13675,8 +13875,6 @@ export enum SanityLandManagementPracticeFieldsEnum {
   IconAssetInternalMediaType = 'icon___asset___internal___mediaType',
   IconAssetInternalOwner = 'icon___asset___internal___owner',
   IconAssetInternalType = 'icon___asset___internal___type',
-  IconAssetChildImageSharpId = 'icon___asset___childImageSharp___id',
-  IconAssetChildImageSharpChildren = 'icon___asset___childImageSharp___children',
   IconHotspotKey = 'icon___hotspot____key',
   IconHotspotType = 'icon___hotspot____type',
   IconHotspotX = 'icon___hotspot___x',
@@ -14386,6 +14584,7 @@ export enum SanityLandStewardsPageFieldsEnum {
   MetadataOpenGraphImageAssetMimeType = 'metadata___openGraphImage___asset___mimeType',
   MetadataOpenGraphImageAssetSize = 'metadata___openGraphImage___asset___size',
   MetadataOpenGraphImageAssetAssetId = 'metadata___openGraphImage___asset___assetId',
+  MetadataOpenGraphImageAssetUploadId = 'metadata___openGraphImage___asset___uploadId',
   MetadataOpenGraphImageAssetPath = 'metadata___openGraphImage___asset___path',
   MetadataOpenGraphImageAssetUrl = 'metadata___openGraphImage___asset___url',
   MetadataOpenGraphImageAssetRawMetadata = 'metadata___openGraphImage___asset____rawMetadata',
@@ -15238,6 +15437,7 @@ export enum SanityMediaFieldsEnum {
   ImageImageAssetMimeType = 'image___image___asset___mimeType',
   ImageImageAssetSize = 'image___image___asset___size',
   ImageImageAssetAssetId = 'image___image___asset___assetId',
+  ImageImageAssetUploadId = 'image___image___asset___uploadId',
   ImageImageAssetPath = 'image___image___asset___path',
   ImageImageAssetUrl = 'image___image___asset___url',
   ImageImageAssetRawMetadata = 'image___image___asset____rawMetadata',
@@ -16181,6 +16381,7 @@ export enum SanityMethodologyReviewProcessPageFieldsEnum {
   MetadataOpenGraphImageAssetMimeType = 'metadata___openGraphImage___asset___mimeType',
   MetadataOpenGraphImageAssetSize = 'metadata___openGraphImage___asset___size',
   MetadataOpenGraphImageAssetAssetId = 'metadata___openGraphImage___asset___assetId',
+  MetadataOpenGraphImageAssetUploadId = 'metadata___openGraphImage___asset___uploadId',
   MetadataOpenGraphImageAssetPath = 'metadata___openGraphImage___asset___path',
   MetadataOpenGraphImageAssetUrl = 'metadata___openGraphImage___asset___url',
   MetadataOpenGraphImageAssetRawMetadata = 'metadata___openGraphImage___asset____rawMetadata',
@@ -16507,6 +16708,7 @@ export enum SanityPartnersPageFieldsEnum {
   PartnersImageAssetMimeType = 'partners___image___asset___mimeType',
   PartnersImageAssetSize = 'partners___image___asset___size',
   PartnersImageAssetAssetId = 'partners___image___asset___assetId',
+  PartnersImageAssetUploadId = 'partners___image___asset___uploadId',
   PartnersImageAssetPath = 'partners___image___asset___path',
   PartnersImageAssetUrl = 'partners___image___asset___url',
   PartnersImageAssetRawMetadata = 'partners___image___asset____rawMetadata',
@@ -17063,6 +17265,7 @@ export enum SanityPresskitPageFieldsEnum {
   PhotosSectionPhotosAssetMimeType = 'photosSection___photos___asset___mimeType',
   PhotosSectionPhotosAssetSize = 'photosSection___photos___asset___size',
   PhotosSectionPhotosAssetAssetId = 'photosSection___photos___asset___assetId',
+  PhotosSectionPhotosAssetUploadId = 'photosSection___photos___asset___uploadId',
   PhotosSectionPhotosAssetPath = 'photosSection___photos___asset___path',
   PhotosSectionPhotosAssetUrl = 'photosSection___photos___asset___url',
   PhotosSectionPhotosAssetRawMetadata = 'photosSection___photos___asset____rawMetadata',
@@ -17422,11 +17625,13 @@ export enum SanityRegenTeamMemberFieldsEnum {
   ImageAssetMimeType = 'image___asset___mimeType',
   ImageAssetSize = 'image___asset___size',
   ImageAssetAssetId = 'image___asset___assetId',
+  ImageAssetUploadId = 'image___asset___uploadId',
   ImageAssetPath = 'image___asset___path',
   ImageAssetUrl = 'image___asset___url',
   ImageAssetMetadataKey = 'image___asset___metadata____key',
   ImageAssetMetadataType = 'image___asset___metadata____type',
   ImageAssetMetadataLqip = 'image___asset___metadata___lqip',
+  ImageAssetMetadataBlurHash = 'image___asset___metadata___blurHash',
   ImageAssetMetadataHasAlpha = 'image___asset___metadata___hasAlpha',
   ImageAssetMetadataIsOpaque = 'image___asset___metadata___isOpaque',
   ImageAssetMetadataRawLocation = 'image___asset___metadata____rawLocation',
@@ -17467,8 +17672,6 @@ export enum SanityRegenTeamMemberFieldsEnum {
   ImageAssetInternalMediaType = 'image___asset___internal___mediaType',
   ImageAssetInternalOwner = 'image___asset___internal___owner',
   ImageAssetInternalType = 'image___asset___internal___type',
-  ImageAssetChildImageSharpId = 'image___asset___childImageSharp___id',
-  ImageAssetChildImageSharpChildren = 'image___asset___childImageSharp___children',
   ImageHotspotKey = 'image___hotspot____key',
   ImageHotspotType = 'image___hotspot____type',
   ImageHotspotX = 'image___hotspot___x',
@@ -17764,6 +17967,7 @@ export enum SanityResourceFieldsEnum {
   ImageImageAssetMimeType = 'image___image___asset___mimeType',
   ImageImageAssetSize = 'image___image___asset___size',
   ImageImageAssetAssetId = 'image___image___asset___assetId',
+  ImageImageAssetUploadId = 'image___image___asset___uploadId',
   ImageImageAssetPath = 'image___image___asset___path',
   ImageImageAssetUrl = 'image___image___asset___url',
   ImageImageAssetRawMetadata = 'image___image___asset____rawMetadata',
@@ -19053,6 +19257,7 @@ export enum SanitySdgFieldsEnum {
   ImageImageAssetMimeType = 'image___image___asset___mimeType',
   ImageImageAssetSize = 'image___image___asset___size',
   ImageImageAssetAssetId = 'image___image___asset___assetId',
+  ImageImageAssetUploadId = 'image___image___asset___uploadId',
   ImageImageAssetPath = 'image___image___asset___path',
   ImageImageAssetUrl = 'image___image___asset___url',
   ImageImageAssetRawMetadata = 'image___image___asset____rawMetadata',
@@ -20593,6 +20798,7 @@ export enum SanityTokenPageFieldsEnum {
   PoolSectionImageAssetMimeType = 'poolSection___image___asset___mimeType',
   PoolSectionImageAssetSize = 'poolSection___image___asset___size',
   PoolSectionImageAssetAssetId = 'poolSection___image___asset___assetId',
+  PoolSectionImageAssetUploadId = 'poolSection___image___asset___uploadId',
   PoolSectionImageAssetPath = 'poolSection___image___asset___path',
   PoolSectionImageAssetUrl = 'poolSection___image___asset___url',
   PoolSectionImageAssetRawMetadata = 'poolSection___image___asset____rawMetadata',
@@ -20632,6 +20838,7 @@ export enum SanityTokenPageFieldsEnum {
   PoolSectionMobileImageAssetMimeType = 'poolSection___mobileImage___asset___mimeType',
   PoolSectionMobileImageAssetSize = 'poolSection___mobileImage___asset___size',
   PoolSectionMobileImageAssetAssetId = 'poolSection___mobileImage___asset___assetId',
+  PoolSectionMobileImageAssetUploadId = 'poolSection___mobileImage___asset___uploadId',
   PoolSectionMobileImageAssetPath = 'poolSection___mobileImage___asset___path',
   PoolSectionMobileImageAssetUrl = 'poolSection___mobileImage___asset___url',
   PoolSectionMobileImageAssetRawMetadata = 'poolSection___mobileImage___asset____rawMetadata',
@@ -22172,9 +22379,9 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsPluginsId = 'pluginCreator___pluginOptions___plugins___id',
   PluginCreatorPluginOptionsPluginsName = 'pluginCreator___pluginOptions___plugins___name',
   PluginCreatorPluginOptionsPluginsVersion = 'pluginCreator___pluginOptions___plugins___version',
+  PluginCreatorPluginOptionsPluginsNodeApIs = 'pluginCreator___pluginOptions___plugins___nodeAPIs',
   PluginCreatorPluginOptionsPluginsBrowserApIs = 'pluginCreator___pluginOptions___plugins___browserAPIs',
   PluginCreatorPluginOptionsPluginsPluginFilepath = 'pluginCreator___pluginOptions___plugins___pluginFilepath',
-  PluginCreatorPluginOptionsStylesProviderInjectFirst = 'pluginCreator___pluginOptions___stylesProvider___injectFirst',
   PluginCreatorPluginOptionsProjectId = 'pluginCreator___pluginOptions___projectId',
   PluginCreatorPluginOptionsDataset = 'pluginCreator___pluginOptions___dataset',
   PluginCreatorPluginOptionsToken = 'pluginCreator___pluginOptions___token',
@@ -22186,9 +22393,6 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsAnonymizeIp = 'pluginCreator___pluginOptions___anonymizeIP',
   PluginCreatorPluginOptionsAutoStartWithCookiesEnabled = 'pluginCreator___pluginOptions___autoStartWithCookiesEnabled',
   PluginCreatorPluginOptionsReactGaOptionsDebug = 'pluginCreator___pluginOptions___reactGaOptions___debug',
-  PluginCreatorPluginOptionsAdditionalSitemaps = 'pluginCreator___pluginOptions___additionalSitemaps',
-  PluginCreatorPluginOptionsAdditionalSitemapsName = 'pluginCreator___pluginOptions___additionalSitemaps___name',
-  PluginCreatorPluginOptionsAdditionalSitemapsUrl = 'pluginCreator___pluginOptions___additionalSitemaps___url',
   PluginCreatorPluginOptionsName = 'pluginCreator___pluginOptions___name',
   PluginCreatorPluginOptionsPath = 'pluginCreator___pluginOptions___path',
   PluginCreatorPluginOptionsCommonmark = 'pluginCreator___pluginOptions___commonmark',
@@ -22196,14 +22400,36 @@ export enum SitePageFieldsEnum {
   PluginCreatorPluginOptionsPedantic = 'pluginCreator___pluginOptions___pedantic',
   PluginCreatorPluginOptionsGfm = 'pluginCreator___pluginOptions___gfm',
   PluginCreatorPluginOptionsMaxWidth = 'pluginCreator___pluginOptions___maxWidth',
+  PluginCreatorPluginOptionsLinkImagesToOriginal = 'pluginCreator___pluginOptions___linkImagesToOriginal',
+  PluginCreatorPluginOptionsShowCaptions = 'pluginCreator___pluginOptions___showCaptions',
+  PluginCreatorPluginOptionsMarkdownCaptions = 'pluginCreator___pluginOptions___markdownCaptions',
+  PluginCreatorPluginOptionsSizeByPixelDensity = 'pluginCreator___pluginOptions___sizeByPixelDensity',
+  PluginCreatorPluginOptionsBackgroundColor = 'pluginCreator___pluginOptions___backgroundColor',
+  PluginCreatorPluginOptionsQuality = 'pluginCreator___pluginOptions___quality',
+  PluginCreatorPluginOptionsWithWebp = 'pluginCreator___pluginOptions___withWebp',
+  PluginCreatorPluginOptionsTracedSvg = 'pluginCreator___pluginOptions___tracedSVG',
+  PluginCreatorPluginOptionsLoading = 'pluginCreator___pluginOptions___loading',
+  PluginCreatorPluginOptionsDisableBgImageOnAlpha = 'pluginCreator___pluginOptions___disableBgImageOnAlpha',
+  PluginCreatorPluginOptionsDisableBgImage = 'pluginCreator___pluginOptions___disableBgImage',
+  PluginCreatorPluginOptionsBase64Width = 'pluginCreator___pluginOptions___base64Width',
+  PluginCreatorPluginOptionsStripMetadata = 'pluginCreator___pluginOptions___stripMetadata',
+  PluginCreatorPluginOptionsDefaultQuality = 'pluginCreator___pluginOptions___defaultQuality',
+  PluginCreatorPluginOptionsFailOnError = 'pluginCreator___pluginOptions___failOnError',
+  PluginCreatorPluginOptionsIsTsx = 'pluginCreator___pluginOptions___isTSX',
+  PluginCreatorPluginOptionsJsxPragma = 'pluginCreator___pluginOptions___jsxPragma',
+  PluginCreatorPluginOptionsAllExtensions = 'pluginCreator___pluginOptions___allExtensions',
   PluginCreatorPluginOptionsShortName = 'pluginCreator___pluginOptions___short_name',
   PluginCreatorPluginOptionsStartUrl = 'pluginCreator___pluginOptions___start_url',
   PluginCreatorPluginOptionsBackgroundColor = 'pluginCreator___pluginOptions___background_color',
   PluginCreatorPluginOptionsThemeColor = 'pluginCreator___pluginOptions___theme_color',
   PluginCreatorPluginOptionsDisplay = 'pluginCreator___pluginOptions___display',
   PluginCreatorPluginOptionsIcon = 'pluginCreator___pluginOptions___icon',
-  PluginCreatorPluginOptionsEnableRemark = 'pluginCreator___pluginOptions___enableRemark',
-  PluginCreatorPluginOptionsMarkdownPreface = 'pluginCreator___pluginOptions___markdownPreface',
+  PluginCreatorPluginOptionsLegacy = 'pluginCreator___pluginOptions___legacy',
+  PluginCreatorPluginOptionsThemeColorInHead = 'pluginCreator___pluginOptions___theme_color_in_head',
+  PluginCreatorPluginOptionsCacheBustingMode = 'pluginCreator___pluginOptions___cache_busting_mode',
+  PluginCreatorPluginOptionsCrossOrigin = 'pluginCreator___pluginOptions___crossOrigin',
+  PluginCreatorPluginOptionsIncludeFavicon = 'pluginCreator___pluginOptions___include_favicon',
+  PluginCreatorPluginOptionsCacheDigest = 'pluginCreator___pluginOptions___cacheDigest',
   PluginCreatorPluginOptionsPathCheck = 'pluginCreator___pluginOptions___pathCheck',
   PluginCreatorNodeApIs = 'pluginCreator___nodeAPIs',
   PluginCreatorBrowserApIs = 'pluginCreator___browserAPIs',
@@ -22403,9 +22629,20 @@ export enum SitePluginFieldsEnum {
   PluginOptionsPluginsName = 'pluginOptions___plugins___name',
   PluginOptionsPluginsVersion = 'pluginOptions___plugins___version',
   PluginOptionsPluginsPluginOptionsMaxWidth = 'pluginOptions___plugins___pluginOptions___maxWidth',
+  PluginOptionsPluginsPluginOptionsLinkImagesToOriginal = 'pluginOptions___plugins___pluginOptions___linkImagesToOriginal',
+  PluginOptionsPluginsPluginOptionsShowCaptions = 'pluginOptions___plugins___pluginOptions___showCaptions',
+  PluginOptionsPluginsPluginOptionsMarkdownCaptions = 'pluginOptions___plugins___pluginOptions___markdownCaptions',
+  PluginOptionsPluginsPluginOptionsSizeByPixelDensity = 'pluginOptions___plugins___pluginOptions___sizeByPixelDensity',
+  PluginOptionsPluginsPluginOptionsBackgroundColor = 'pluginOptions___plugins___pluginOptions___backgroundColor',
+  PluginOptionsPluginsPluginOptionsQuality = 'pluginOptions___plugins___pluginOptions___quality',
+  PluginOptionsPluginsPluginOptionsWithWebp = 'pluginOptions___plugins___pluginOptions___withWebp',
+  PluginOptionsPluginsPluginOptionsTracedSvg = 'pluginOptions___plugins___pluginOptions___tracedSVG',
+  PluginOptionsPluginsPluginOptionsLoading = 'pluginOptions___plugins___pluginOptions___loading',
+  PluginOptionsPluginsPluginOptionsDisableBgImageOnAlpha = 'pluginOptions___plugins___pluginOptions___disableBgImageOnAlpha',
+  PluginOptionsPluginsPluginOptionsDisableBgImage = 'pluginOptions___plugins___pluginOptions___disableBgImage',
+  PluginOptionsPluginsNodeApIs = 'pluginOptions___plugins___nodeAPIs',
   PluginOptionsPluginsBrowserApIs = 'pluginOptions___plugins___browserAPIs',
   PluginOptionsPluginsPluginFilepath = 'pluginOptions___plugins___pluginFilepath',
-  PluginOptionsStylesProviderInjectFirst = 'pluginOptions___stylesProvider___injectFirst',
   PluginOptionsProjectId = 'pluginOptions___projectId',
   PluginOptionsDataset = 'pluginOptions___dataset',
   PluginOptionsToken = 'pluginOptions___token',
@@ -22418,9 +22655,6 @@ export enum SitePluginFieldsEnum {
   PluginOptionsAutoStartWithCookiesEnabled = 'pluginOptions___autoStartWithCookiesEnabled',
   PluginOptionsReactGaOptionsDebug = 'pluginOptions___reactGaOptions___debug',
   PluginOptionsReactGaOptionsGaOptionsSampleRate = 'pluginOptions___reactGaOptions___gaOptions___sampleRate',
-  PluginOptionsAdditionalSitemaps = 'pluginOptions___additionalSitemaps',
-  PluginOptionsAdditionalSitemapsName = 'pluginOptions___additionalSitemaps___name',
-  PluginOptionsAdditionalSitemapsUrl = 'pluginOptions___additionalSitemaps___url',
   PluginOptionsName = 'pluginOptions___name',
   PluginOptionsPath = 'pluginOptions___path',
   PluginOptionsCommonmark = 'pluginOptions___commonmark',
@@ -22428,14 +22662,36 @@ export enum SitePluginFieldsEnum {
   PluginOptionsPedantic = 'pluginOptions___pedantic',
   PluginOptionsGfm = 'pluginOptions___gfm',
   PluginOptionsMaxWidth = 'pluginOptions___maxWidth',
+  PluginOptionsLinkImagesToOriginal = 'pluginOptions___linkImagesToOriginal',
+  PluginOptionsShowCaptions = 'pluginOptions___showCaptions',
+  PluginOptionsMarkdownCaptions = 'pluginOptions___markdownCaptions',
+  PluginOptionsSizeByPixelDensity = 'pluginOptions___sizeByPixelDensity',
+  PluginOptionsBackgroundColor = 'pluginOptions___backgroundColor',
+  PluginOptionsQuality = 'pluginOptions___quality',
+  PluginOptionsWithWebp = 'pluginOptions___withWebp',
+  PluginOptionsTracedSvg = 'pluginOptions___tracedSVG',
+  PluginOptionsLoading = 'pluginOptions___loading',
+  PluginOptionsDisableBgImageOnAlpha = 'pluginOptions___disableBgImageOnAlpha',
+  PluginOptionsDisableBgImage = 'pluginOptions___disableBgImage',
+  PluginOptionsBase64Width = 'pluginOptions___base64Width',
+  PluginOptionsStripMetadata = 'pluginOptions___stripMetadata',
+  PluginOptionsDefaultQuality = 'pluginOptions___defaultQuality',
+  PluginOptionsFailOnError = 'pluginOptions___failOnError',
+  PluginOptionsIsTsx = 'pluginOptions___isTSX',
+  PluginOptionsJsxPragma = 'pluginOptions___jsxPragma',
+  PluginOptionsAllExtensions = 'pluginOptions___allExtensions',
   PluginOptionsShortName = 'pluginOptions___short_name',
   PluginOptionsStartUrl = 'pluginOptions___start_url',
   PluginOptionsBackgroundColor = 'pluginOptions___background_color',
   PluginOptionsThemeColor = 'pluginOptions___theme_color',
   PluginOptionsDisplay = 'pluginOptions___display',
   PluginOptionsIcon = 'pluginOptions___icon',
-  PluginOptionsEnableRemark = 'pluginOptions___enableRemark',
-  PluginOptionsMarkdownPreface = 'pluginOptions___markdownPreface',
+  PluginOptionsLegacy = 'pluginOptions___legacy',
+  PluginOptionsThemeColorInHead = 'pluginOptions___theme_color_in_head',
+  PluginOptionsCacheBustingMode = 'pluginOptions___cache_busting_mode',
+  PluginOptionsCrossOrigin = 'pluginOptions___crossOrigin',
+  PluginOptionsIncludeFavicon = 'pluginOptions___include_favicon',
+  PluginOptionsCacheDigest = 'pluginOptions___cacheDigest',
   PluginOptionsPathCheck = 'pluginOptions___pathCheck',
   NodeApIs = 'nodeAPIs',
   BrowserApIs = 'browserAPIs',
@@ -22560,7 +22816,6 @@ export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
 export type SitePluginPluginOptions = {
   __typename?: 'SitePluginPluginOptions';
   plugins: Maybe<Array<Maybe<SitePluginPluginOptionsPlugins>>>;
-  stylesProvider: Maybe<SitePluginPluginOptionsStylesProvider>;
   projectId: Maybe<Scalars['String']>;
   dataset: Maybe<Scalars['String']>;
   token: Maybe<Scalars['String']>;
@@ -22572,7 +22827,6 @@ export type SitePluginPluginOptions = {
   anonymizeIP: Maybe<Scalars['Boolean']>;
   autoStartWithCookiesEnabled: Maybe<Scalars['Boolean']>;
   reactGaOptions: Maybe<SitePluginPluginOptionsReactGaOptions>;
-  additionalSitemaps: Maybe<Array<Maybe<SitePluginPluginOptionsAdditionalSitemaps>>>;
   name: Maybe<Scalars['String']>;
   path: Maybe<Scalars['String']>;
   commonmark: Maybe<Scalars['Boolean']>;
@@ -22580,35 +22834,41 @@ export type SitePluginPluginOptions = {
   pedantic: Maybe<Scalars['Boolean']>;
   gfm: Maybe<Scalars['Boolean']>;
   maxWidth: Maybe<Scalars['Int']>;
+  linkImagesToOriginal: Maybe<Scalars['Boolean']>;
+  showCaptions: Maybe<Scalars['Boolean']>;
+  markdownCaptions: Maybe<Scalars['Boolean']>;
+  sizeByPixelDensity: Maybe<Scalars['Boolean']>;
+  backgroundColor: Maybe<Scalars['String']>;
+  quality: Maybe<Scalars['Int']>;
+  withWebp: Maybe<Scalars['Boolean']>;
+  tracedSVG: Maybe<Scalars['Boolean']>;
+  loading: Maybe<Scalars['String']>;
+  disableBgImageOnAlpha: Maybe<Scalars['Boolean']>;
+  disableBgImage: Maybe<Scalars['Boolean']>;
+  base64Width: Maybe<Scalars['Int']>;
+  stripMetadata: Maybe<Scalars['Boolean']>;
+  defaultQuality: Maybe<Scalars['Int']>;
+  failOnError: Maybe<Scalars['Boolean']>;
+  isTSX: Maybe<Scalars['Boolean']>;
+  jsxPragma: Maybe<Scalars['String']>;
+  allExtensions: Maybe<Scalars['Boolean']>;
   short_name: Maybe<Scalars['String']>;
   start_url: Maybe<Scalars['String']>;
   background_color: Maybe<Scalars['String']>;
   theme_color: Maybe<Scalars['String']>;
   display: Maybe<Scalars['String']>;
   icon: Maybe<Scalars['String']>;
-  enableRemark: Maybe<Scalars['Boolean']>;
-  markdownPreface: Maybe<Scalars['String']>;
+  legacy: Maybe<Scalars['Boolean']>;
+  theme_color_in_head: Maybe<Scalars['Boolean']>;
+  cache_busting_mode: Maybe<Scalars['String']>;
+  crossOrigin: Maybe<Scalars['String']>;
+  include_favicon: Maybe<Scalars['Boolean']>;
+  cacheDigest: Maybe<Scalars['String']>;
   pathCheck: Maybe<Scalars['Boolean']>;
-};
-
-export type SitePluginPluginOptionsAdditionalSitemaps = {
-  __typename?: 'SitePluginPluginOptionsAdditionalSitemaps';
-  name: Maybe<Scalars['String']>;
-  url: Maybe<Scalars['String']>;
-};
-
-export type SitePluginPluginOptionsAdditionalSitemapsFilterInput = {
-  name: Maybe<StringQueryOperatorInput>;
-  url: Maybe<StringQueryOperatorInput>;
-};
-
-export type SitePluginPluginOptionsAdditionalSitemapsFilterListInput = {
-  elemMatch: Maybe<SitePluginPluginOptionsAdditionalSitemapsFilterInput>;
 };
 
 export type SitePluginPluginOptionsFilterInput = {
   plugins: Maybe<SitePluginPluginOptionsPluginsFilterListInput>;
-  stylesProvider: Maybe<SitePluginPluginOptionsStylesProviderFilterInput>;
   projectId: Maybe<StringQueryOperatorInput>;
   dataset: Maybe<StringQueryOperatorInput>;
   token: Maybe<StringQueryOperatorInput>;
@@ -22620,7 +22880,6 @@ export type SitePluginPluginOptionsFilterInput = {
   anonymizeIP: Maybe<BooleanQueryOperatorInput>;
   autoStartWithCookiesEnabled: Maybe<BooleanQueryOperatorInput>;
   reactGaOptions: Maybe<SitePluginPluginOptionsReactGaOptionsFilterInput>;
-  additionalSitemaps: Maybe<SitePluginPluginOptionsAdditionalSitemapsFilterListInput>;
   name: Maybe<StringQueryOperatorInput>;
   path: Maybe<StringQueryOperatorInput>;
   commonmark: Maybe<BooleanQueryOperatorInput>;
@@ -22628,14 +22887,36 @@ export type SitePluginPluginOptionsFilterInput = {
   pedantic: Maybe<BooleanQueryOperatorInput>;
   gfm: Maybe<BooleanQueryOperatorInput>;
   maxWidth: Maybe<IntQueryOperatorInput>;
+  linkImagesToOriginal: Maybe<BooleanQueryOperatorInput>;
+  showCaptions: Maybe<BooleanQueryOperatorInput>;
+  markdownCaptions: Maybe<BooleanQueryOperatorInput>;
+  sizeByPixelDensity: Maybe<BooleanQueryOperatorInput>;
+  backgroundColor: Maybe<StringQueryOperatorInput>;
+  quality: Maybe<IntQueryOperatorInput>;
+  withWebp: Maybe<BooleanQueryOperatorInput>;
+  tracedSVG: Maybe<BooleanQueryOperatorInput>;
+  loading: Maybe<StringQueryOperatorInput>;
+  disableBgImageOnAlpha: Maybe<BooleanQueryOperatorInput>;
+  disableBgImage: Maybe<BooleanQueryOperatorInput>;
+  base64Width: Maybe<IntQueryOperatorInput>;
+  stripMetadata: Maybe<BooleanQueryOperatorInput>;
+  defaultQuality: Maybe<IntQueryOperatorInput>;
+  failOnError: Maybe<BooleanQueryOperatorInput>;
+  isTSX: Maybe<BooleanQueryOperatorInput>;
+  jsxPragma: Maybe<StringQueryOperatorInput>;
+  allExtensions: Maybe<BooleanQueryOperatorInput>;
   short_name: Maybe<StringQueryOperatorInput>;
   start_url: Maybe<StringQueryOperatorInput>;
   background_color: Maybe<StringQueryOperatorInput>;
   theme_color: Maybe<StringQueryOperatorInput>;
   display: Maybe<StringQueryOperatorInput>;
   icon: Maybe<StringQueryOperatorInput>;
-  enableRemark: Maybe<BooleanQueryOperatorInput>;
-  markdownPreface: Maybe<StringQueryOperatorInput>;
+  legacy: Maybe<BooleanQueryOperatorInput>;
+  theme_color_in_head: Maybe<BooleanQueryOperatorInput>;
+  cache_busting_mode: Maybe<StringQueryOperatorInput>;
+  crossOrigin: Maybe<StringQueryOperatorInput>;
+  include_favicon: Maybe<BooleanQueryOperatorInput>;
+  cacheDigest: Maybe<StringQueryOperatorInput>;
   pathCheck: Maybe<BooleanQueryOperatorInput>;
 };
 
@@ -22655,6 +22936,7 @@ export type SitePluginPluginOptionsPlugins = {
   name: Maybe<Scalars['String']>;
   version: Maybe<Scalars['String']>;
   pluginOptions: Maybe<SitePluginPluginOptionsPluginsPluginOptions>;
+  nodeAPIs: Maybe<Array<Maybe<Scalars['String']>>>;
   browserAPIs: Maybe<Array<Maybe<Scalars['String']>>>;
   pluginFilepath: Maybe<Scalars['String']>;
 };
@@ -22665,6 +22947,7 @@ export type SitePluginPluginOptionsPluginsFilterInput = {
   name: Maybe<StringQueryOperatorInput>;
   version: Maybe<StringQueryOperatorInput>;
   pluginOptions: Maybe<SitePluginPluginOptionsPluginsPluginOptionsFilterInput>;
+  nodeAPIs: Maybe<StringQueryOperatorInput>;
   browserAPIs: Maybe<StringQueryOperatorInput>;
   pluginFilepath: Maybe<StringQueryOperatorInput>;
 };
@@ -22676,10 +22959,32 @@ export type SitePluginPluginOptionsPluginsFilterListInput = {
 export type SitePluginPluginOptionsPluginsPluginOptions = {
   __typename?: 'SitePluginPluginOptionsPluginsPluginOptions';
   maxWidth: Maybe<Scalars['Int']>;
+  linkImagesToOriginal: Maybe<Scalars['Boolean']>;
+  showCaptions: Maybe<Scalars['Boolean']>;
+  markdownCaptions: Maybe<Scalars['Boolean']>;
+  sizeByPixelDensity: Maybe<Scalars['Boolean']>;
+  backgroundColor: Maybe<Scalars['String']>;
+  quality: Maybe<Scalars['Int']>;
+  withWebp: Maybe<Scalars['Boolean']>;
+  tracedSVG: Maybe<Scalars['Boolean']>;
+  loading: Maybe<Scalars['String']>;
+  disableBgImageOnAlpha: Maybe<Scalars['Boolean']>;
+  disableBgImage: Maybe<Scalars['Boolean']>;
 };
 
 export type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
   maxWidth: Maybe<IntQueryOperatorInput>;
+  linkImagesToOriginal: Maybe<BooleanQueryOperatorInput>;
+  showCaptions: Maybe<BooleanQueryOperatorInput>;
+  markdownCaptions: Maybe<BooleanQueryOperatorInput>;
+  sizeByPixelDensity: Maybe<BooleanQueryOperatorInput>;
+  backgroundColor: Maybe<StringQueryOperatorInput>;
+  quality: Maybe<IntQueryOperatorInput>;
+  withWebp: Maybe<BooleanQueryOperatorInput>;
+  tracedSVG: Maybe<BooleanQueryOperatorInput>;
+  loading: Maybe<StringQueryOperatorInput>;
+  disableBgImageOnAlpha: Maybe<BooleanQueryOperatorInput>;
+  disableBgImage: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SitePluginPluginOptionsReactGaOptions = {
@@ -22700,15 +23005,6 @@ export type SitePluginPluginOptionsReactGaOptionsGaOptions = {
 
 export type SitePluginPluginOptionsReactGaOptionsGaOptionsFilterInput = {
   sampleRate: Maybe<IntQueryOperatorInput>;
-};
-
-export type SitePluginPluginOptionsStylesProvider = {
-  __typename?: 'SitePluginPluginOptionsStylesProvider';
-  injectFirst: Maybe<Scalars['Boolean']>;
-};
-
-export type SitePluginPluginOptionsStylesProviderFilterInput = {
-  injectFirst: Maybe<BooleanQueryOperatorInput>;
 };
 
 export type SitePluginSortInput = {
@@ -22750,27 +23046,23 @@ export type StringQueryOperatorInput = {
   glob: Maybe<Scalars['String']>;
 };
 
+export type TransformOptions = {
+  grayscale: Maybe<Scalars['Boolean']>;
+  duotone: Maybe<DuotoneGradient>;
+  rotate: Maybe<Scalars['Int']>;
+  trim: Maybe<Scalars['Float']>;
+  cropFocus: Maybe<ImageCropFocus>;
+  fit: Maybe<ImageFit>;
+};
+
+export type WebPOptions = {
+  quality: Maybe<Scalars['Int']>;
+};
+
 export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type Unnamed_1_Query = (
-  { __typename?: 'Query' }
-  & { placeholderImage: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluidFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_2_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -22943,10 +23235,10 @@ export type TeamSectionFieldsFragment = (
   )>>> }
 );
 
-export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_3_Query = (
+export type Unnamed_2_Query = (
   { __typename?: 'Query' }
   & { grazing: Maybe<(
     { __typename?: 'File' }
@@ -22960,10 +23252,10 @@ export type Unnamed_3_Query = (
   )> }
 );
 
-export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_4_Query = (
+export type Unnamed_3_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -23003,10 +23295,10 @@ export type ContactPageQuery = (
   )> }
 );
 
-export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_5_Query = (
+export type Unnamed_4_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -23141,10 +23433,10 @@ export type PartnersPageQuery = (
   )> }
 );
 
-export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_6_Query = (
+export type Unnamed_5_Query = (
   { __typename?: 'Query' }
   & { background: Maybe<(
     { __typename?: 'File' }
@@ -23158,10 +23450,10 @@ export type Unnamed_6_Query = (
   )> }
 );
 
-export type Unnamed_7_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_7_Query = (
+export type Unnamed_6_Query = (
   { __typename?: 'Query' }
   & { markdownRemark: Maybe<(
     { __typename?: 'MarkdownRemark' }
@@ -23169,10 +23461,10 @@ export type Unnamed_7_Query = (
   )> }
 );
 
-export type Unnamed_8_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_7_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_8_Query = (
+export type Unnamed_7_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -23180,10 +23472,10 @@ export type Unnamed_8_Query = (
   )> }
 );
 
-export type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_8_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_9_Query = (
+export type Unnamed_8_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -23200,10 +23492,10 @@ export type Unnamed_9_Query = (
   )> }
 );
 
-export type Unnamed_10_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_10_Query = (
+export type Unnamed_9_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -23211,10 +23503,10 @@ export type Unnamed_10_Query = (
   )> }
 );
 
-export type Unnamed_11_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_10_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_11_Query = (
+export type Unnamed_10_Query = (
   { __typename?: 'Query' }
   & { markdownRemark: Maybe<(
     { __typename?: 'MarkdownRemark' }
@@ -23251,10 +23543,10 @@ export type TokenPageQuery = (
   )> }
 );
 
-export type Unnamed_12_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_11_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_12_Query = (
+export type Unnamed_11_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -23262,10 +23554,10 @@ export type Unnamed_12_Query = (
   )> }
 );
 
-export type Unnamed_13_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_12_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_13_Query = (
+export type Unnamed_12_Query = (
   { __typename?: 'Query' }
   & { seoImage: Maybe<(
     { __typename?: 'File' }
@@ -23763,6 +24055,24 @@ export type FundTopSectionQuery = (
   )> }
 );
 
+export type BannerTextSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BannerTextSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityHomePageWeb: Maybe<(
+    { __typename?: 'SanityHomePageWeb' }
+    & { bannerTextSection: Maybe<(
+      { __typename?: 'SanityTitleImageCustomBody' }
+      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
+      & { image: Maybe<(
+        { __typename?: 'SanityCustomImage' }
+        & FluidCustomImageFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
 export type HomeCarbonplusSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -23867,7 +24177,16 @@ export type HomeMarketPlaceSectionQueryVariables = Exact<{ [key: string]: never;
 
 export type HomeMarketPlaceSectionQuery = (
   { __typename?: 'Query' }
-  & { sanityHomePageWeb: Maybe<(
+  & { bg: Maybe<(
+    { __typename?: 'File' }
+    & { childImageSharp: Maybe<(
+      { __typename?: 'ImageSharp' }
+      & { fluid: Maybe<(
+        { __typename?: 'ImageSharpFluid' }
+        & GatsbyImageSharpFluid_WithWebpFragment
+      )> }
+    )> }
+  )>, sanityHomePageWeb: Maybe<(
     { __typename?: 'SanityHomePageWeb' }
     & { marketplaceSection: Maybe<(
       { __typename?: 'SanityMarketplaceSection' }
@@ -23888,16 +24207,7 @@ export type HomeValuesSectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type HomeValuesSectionQuery = (
   { __typename?: 'Query' }
-  & { bg: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityHomePageWeb: Maybe<(
+  & { sanityHomePageWeb: Maybe<(
     { __typename?: 'SanityHomePageWeb' }
     & { valuesSection: Maybe<(
       { __typename?: 'SanityHomeValuesSection' }
@@ -24790,10 +25100,10 @@ export type TokenStakingQuery = (
   )> }
 );
 
-export type Unnamed_14_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_13_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_14_Query = (
+export type Unnamed_13_Query = (
   { __typename?: 'Query' }
   & { bg: Maybe<(
     { __typename?: 'File' }
@@ -25151,10 +25461,10 @@ export type CaseStudyTemplateQuery = (
   )> }
 );
 
-export type Unnamed_15_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_14_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_15_Query = (
+export type Unnamed_14_Query = (
   { __typename?: 'Query' }
   & { sanityFaqPage: Maybe<(
     { __typename?: 'SanityFaqPage' }

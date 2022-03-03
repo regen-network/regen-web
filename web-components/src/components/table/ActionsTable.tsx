@@ -155,26 +155,28 @@ const ActionsTable: React.FC<{
             </TableBody>
           </Table>
         </Box>
-        <Table>
-          <TableFooter sx={{ position: 'sticky', left: 0 }}>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[5, 10]}
-                rowsPerPage={rowsPerPage}
-                onChangeRowsPerPage={e => {
-                  setRowsPerPage(parseInt(e.target.value, 10));
-                  setOffset(0);
-                }}
-                count={rows.length}
-                page={page}
-                onPageChange={(_, newPage) => {
-                  setPage(newPage);
-                  setOffset(newPage * rowsPerPage);
-                }}
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
+        {rows.length > 5 && (
+          <Table>
+            <TableFooter sx={{ position: 'sticky', left: 0 }}>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10]}
+                  rowsPerPage={rowsPerPage}
+                  onChangeRowsPerPage={e => {
+                    setRowsPerPage(parseInt(e.target.value, 10));
+                    setOffset(0);
+                  }}
+                  count={rows.length}
+                  page={page}
+                  onPageChange={(_, newPage) => {
+                    setPage(newPage);
+                    setOffset(newPage * rowsPerPage);
+                  }}
+                />
+              </TableRow>
+            </TableFooter>
+          </Table>
+        )}
       </StyledTableContainer>
     </Box>
   );

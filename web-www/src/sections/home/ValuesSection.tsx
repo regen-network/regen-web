@@ -1,9 +1,7 @@
 import React from 'react';
 import SanityImage from 'gatsby-plugin-sanity-image';
 import { graphql, useStaticQuery } from 'gatsby';
-import BackgroundImage from 'gatsby-background-image';
 import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
@@ -19,24 +17,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(25),
     },
-  },
-  section: {
-    '& .MuiGrid-item': {
-      'max-width': theme.spacing(70),
-    },
-    ' & p': {
-      'font-family': 'Lato',
-      'font-size': theme.typography.body2.fontSize,
-      'line-height': '150%',
-      color: theme.palette.primary.contrastText,
-    },
-    ' & h4': {
-      'margin-bottom': theme.spacing(5),
-    },
-    'text-align': 'center',
-    height: 'min-content',
-    'padding-bottom': theme.spacing(15),
-    'padding-top': theme.spacing(15),
   },
   sliderContainer: {
     [theme.breakpoints.up('sm')]: {
@@ -56,13 +36,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const query = graphql`
   query homeValuesSection {
-    bg: file(relativePath: { eq: "topo-bg-top.png" }) {
-      childImageSharp {
-        fluid(quality: 90, maxWidth: 1920) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
-      }
-    }
     sanityHomePageWeb {
       valuesSection {
         header
@@ -80,7 +53,7 @@ const query = graphql`
 
 const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
   const styles = useStyles();
-  const { bg, sanityHomePageWeb } = useStaticQuery<HomeValuesSectionQuery>(query);
+  const { sanityHomePageWeb } = useStaticQuery<HomeValuesSectionQuery>(query);
   const content = sanityHomePageWeb?.valuesSection;
 
   const imageItems: ImageItemProps[] = (content?.imageItems || []).map(item => {
@@ -92,23 +65,21 @@ const HomeValues: React.FC<{ className?: string }> = ({ className }) => {
   }) as ImageItemProps[];
 
   return (
-    <BackgroundImage
-      Tag="section"
-      className={clsx(className, styles.section)}
-      fluid={bg?.childImageSharp?.fluid as any}
+    <Section
+      withSlider
+      className={styles.root}
+      titleVariant="h1"
+      titleLineHeight="130%"
+      title={content?.header || ''}
     >
-      <Section
-        withSlider
-        className={styles.root}
-        titleVariant="h1"
-        titleLineHeight="130%"
-        title={content?.header || ''}
-      >
-        <div className={styles.sliderContainer}>
-          <ImageItems imageClassName={styles.image} titleVariant="h3" items={imageItems} />
-        </div>
-      </Section>
-    </BackgroundImage>
+      <div className={styles.sliderContainer}>
+        <ImageItems
+          imageClassName={styles.image}
+          titleVariant="h3"
+          items={imageItems}
+        />
+      </div>
+    </Section>
   );
 };
 

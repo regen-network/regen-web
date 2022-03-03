@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
-import axios from 'axios';
 import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-mui';
 import cx from 'clsx';
@@ -14,9 +13,6 @@ import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
 import Title from 'web-components/lib/components/title';
 import Description from 'web-components/lib/components/description';
-import SelectTextField, {
-  Option,
-} from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
@@ -26,8 +22,9 @@ import { Label } from 'web-components/lib/components/label';
 import { Image } from 'web-components/lib/components/image';
 import Submit from 'web-components/lib/components/form/Submit';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
+import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
+import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
 
-import { countries } from '../../lib/countries';
 import { useWallet } from '../../lib/wallet';
 
 const useStyles = makeStyles(theme => ({
@@ -232,33 +229,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 }) => {
   const styles = useStyles();
   const walletContext = useWallet();
-  const [stateOptions, setStateOptions] = useState<Option[]>([]);
-  const initialCountry = 'US';
-
-  const searchState = async (countryId: string): Promise<void> => {
-    const resp = await axios({
-      url:
-        'https://geodata.solutions/api/api.php?type=getStates&countryId=' +
-        countryId,
-      method: 'POST',
-    });
-    const respOK = resp && resp.status === 200;
-    if (respOK) {
-      const data = await resp.data;
-      const options = Object.keys(data.result).map(key => ({
-        value: data.result[key],
-        label: data.result[key],
-      }));
-      options.unshift({ value: '', label: 'Please choose a state' });
-      setStateOptions(options);
-    }
-  };
-
-  useEffect(() => {
-    if (stateOptions.length === 0) {
-      searchState(initialCountry);
-    }
-  });
 
   const submit = async (values: BuyCreditsValues): Promise<void> => {
     const recipient = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'; // test account
@@ -307,7 +277,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
               creditCount: 0,
               retirementBeneficiary: '',
               stateProvince: '',
-              country: initialCountry,
+              country: '',
               postalCode: '',
               retirementAction: 'autoretire',
             }
@@ -322,7 +292,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
             }
           }}
         >
-          {({ submitForm, isValid, isSubmitting, submitCount, values }) => {
+          {({ values, submitForm, isValid, isSubmitting, submitCount }) => {
             return (
               <div className={styles.formWrapper}>
                 <Form translate="yes">
@@ -424,24 +394,14 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       credits. This prevents double counting of credits in
                       different locations. These credits will auto-retire.
                     </Description>
-                    <Grid
-                      container
-                      alignItems="center"
-                      className={styles.stateCountryGrid}
-                    >
+                    <Grid container className={styles.stateCountryGrid}>
                       <Grid
                         item
                         xs={12}
                         sm={6}
                         className={styles.stateCountryTextField}
                       >
-                        <Field
-                          options={stateOptions}
-                          component={SelectTextField}
-                          label="State / Region"
-                          name="stateProvince"
-                          optional
-                        />
+                        <LocationStateField country={values.country} optional />
                       </Grid>
                       <Grid
                         item
@@ -449,16 +409,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         sm={6}
                         className={styles.stateCountryTextField}
                       >
-                        <Field
-                          component={SelectTextField}
-                          options={Object.keys(countries).map(key => ({
-                            value: key,
-                            label: countries[key],
-                          }))}
-                          name="country"
-                          label="Country"
-                          triggerOnChange={searchState}
-                        />
+                        <LocationCountryField />
                       </Grid>
                     </Grid>
                     <Field

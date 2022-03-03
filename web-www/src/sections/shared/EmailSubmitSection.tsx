@@ -5,8 +5,8 @@ import BackgroundImage from 'gatsby-background-image';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
 import NewsletterForm from 'web-components/lib/components/form/NewsletterForm';
+import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { EmailSubmitSectionQuery } from '../../generated/graphql';
 
@@ -78,19 +78,31 @@ const query = graphql`
   }
 `;
 
-const EmailSubmitSection: React.FC<Props> = ({ image, altContent, classes }) => {
+const EmailSubmitSection: React.FC<Props> = ({
+  image,
+  altContent,
+  classes,
+}) => {
   const styles = useStyles();
   const data = useStaticQuery<EmailSubmitSectionQuery>(query);
   const content = data.sanitySharedSections?.newsletter;
   const imageData = image || data.desktop?.childImageSharp?.fluid;
   return (
-    <BackgroundImage Tag="section" fluid={imageData as any} backgroundColor={`#040e18`}>
+    <BackgroundImage
+      Tag="section"
+      fluid={imageData as any}
+      backgroundColor={`#040e18`}
+    >
       <div className={clsx(styles.root, classes?.root)} id="newsletter-signup">
         <Title className={clsx(styles.title, classes?.title)} variant="h2">
           {altContent?.header || content?.title}
         </Title>
         <Title variant="h6" className={styles.description}>
-          {altContent?.description ? altContent.description : <BlockContent content={content?._rawBody} />}
+          {altContent?.description ? (
+            altContent.description
+          ) : (
+            <BlockContent content={content?._rawBody} />
+          )}
         </Title>
         <NewsletterForm
           apiUri={process.env.GATSBY_API_URI}

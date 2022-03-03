@@ -4,11 +4,19 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import clsx from 'clsx';
 import { SxProps } from '@mui/material';
 
+export type Direction =
+  | 'next'
+  | 'prev'
+  | 'down'
+  | 'up'
+  | 'downLeft'
+  | 'upRight';
+
 interface ArrowDownIconProps {
   color: string;
   className?: string;
   fontSize?: SvgIconProps['fontSize'];
-  direction?: 'next' | 'prev' | 'down' | 'up' | 'downLeft' | 'upRight';
+  direction?: Direction;
   sx?: SxProps<Theme>;
 }
 
@@ -16,7 +24,7 @@ export interface StyleProps {
   rotate: string;
 }
 
-interface DirectionRotate {
+export interface DirectionRotate {
   up: string;
   down: string;
   prev: string;

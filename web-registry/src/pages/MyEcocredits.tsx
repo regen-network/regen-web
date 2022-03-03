@@ -9,8 +9,8 @@ import { PortfolioTemplate } from '../components/templates';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-basket.svg';
-import { ReactComponent as WithdrawIBC } from '../assets/svgs/withdraw-ibc.svg';
-import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
+// import { ReactComponent as WithdrawIBC } from '../assets/svgs/withdraw-ibc.svg';
+// import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
 
 const useStyles = makeStyles((theme: Theme) => ({
   arrow: {
@@ -28,7 +28,7 @@ export const MyEcocredits: React.FC = () => {
   return (
     <PortfolioTemplate
       accountAddress={accountAddress}
-      renderCreditActionButtons={i => (
+      renderCreditActionButtons={(i: number) => (
         <TableActionButtons
           buttons={[
             // Disabling for now until the marketplace is
@@ -68,7 +68,7 @@ export const MyEcocredits: React.FC = () => {
           ]}
         />
       )}
-      renderBasketActionButtons={i => (
+      renderBasketActionButtons={(i: number) => (
         <TableActionButtons
           buttons={[
             {
@@ -76,16 +76,18 @@ export const MyEcocredits: React.FC = () => {
               label: 'Take from basket',
               onClick: () => `TODO take from basket ${i}`,
             },
-            {
-              icon: <WithdrawIBC />,
-              label: 'Withdraw (IBC)',
-              onClick: () => `TODO withdraw ${i}`,
-            },
-            {
-              icon: <DepositIBC />,
-              label: 'Deposit (IBC)',
-              onClick: () => `TODO deposit ${i}`,
-            },
+            // This will be handled from osmosis
+            // so hiding these for now
+            // {
+            //   icon: <WithdrawIBC />,
+            //   label: 'Withdraw (IBC)',
+            //   onClick: () => `TODO withdraw ${i}`,
+            // },
+            // {
+            //   icon: <DepositIBC />,
+            //   label: 'Deposit (IBC)',
+            //   onClick: () => `TODO deposit ${i}`,
+            // },
           ]}
         />
       )}

@@ -51,6 +51,7 @@ import InfoIconOutlined from 'web-components/lib/components/icons/InfoIconOutlin
 import CoBenefitsIcon from 'web-components/lib/components/icons/CoBenefitsIcon';
 import CountingIcon from 'web-components/lib/components/icons/CountingIcon';
 import SatelliteIcon from 'web-components/lib/components/icons/SatelliteIcon';
+import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import SoilSampleIcon from 'web-components/lib/components/icons/SoilSampleIcon';
 import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
@@ -162,6 +163,8 @@ export const saveIcon = (): JSX.Element => <SaveIcon />;
 export const shadedCreditsIcon = (): JSX.Element => <ShadedCreditsIcon />;
 
 export const shieldIcon = (): JSX.Element => <ShieldIcon />;
+
+export const smallArrowIcon = (): JSX.Element => <SmallArrowIcon />;
 
 export const soilSampleIcon = (): JSX.Element => <SoilSampleIcon />;
 

@@ -75,7 +75,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
 
   return (
     <Box sx={{ backgroundColor: 'grey.50', pb: { xs: 21.25, sm: 28.28 } }}>
-      <Section title="Portfolio" titleVariant="h3" titleAlign="left">
+      <Section title="Portfolio" titleVariant="h2" titleAlign="left">
         {children}
         <Box sx={{ pt: { xs: 9.25, sm: 8.5 } }}>
           <Title className={styles.subtitle} variant="subtitle2">

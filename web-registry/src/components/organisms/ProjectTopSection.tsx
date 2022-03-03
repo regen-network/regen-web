@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 // import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -15,7 +15,7 @@ import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceIn
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
-import ArrowIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import ReadMore from 'web-components/lib/components/read-more';
 import { ProjectByHandleQuery } from '../../generated/graphql';
 import { useSdgByIriQuery } from '../../generated/sanity-graphql';
@@ -228,7 +228,6 @@ function ProjectTopLink({
   creditClassId?: string; // on-chain credit class id (e.g. "C01")
 }): JSX.Element {
   const classes = useStyles();
-  const theme = useTheme<Theme>();
 
   const text = (
     <span className={classes.darkText}>
@@ -254,11 +253,7 @@ function ProjectTopLink({
             target="_blank"
           >
             {text}
-            <ArrowIcon
-              className={classes.arrowIcon}
-              direction="next"
-              color={theme.palette.secondary.main}
-            />
+            <SmallArrowIcon sx={{ ml: 1, mb: 0.5, height: 9, width: 13 }} />
           </Link>
         ) : (
           <>{text}</>

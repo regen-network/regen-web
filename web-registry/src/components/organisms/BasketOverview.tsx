@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { Grid, Box, Link } from '@mui/material';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Description from 'web-components/lib/components/description';
+import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { Label } from 'web-components/lib/components/label';
 import { parseText } from 'web-components/lib/utils/textParser';
 
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   image: {
     width: '100%',
     maxWidth: theme.spacing(103),
-    margin: 'auto',
+    // margin: 'auto',
     [theme.breakpoints.down('sm')]: {
       height: theme.spacing(76.4),
       minWidth: theme.spacing(103),
@@ -65,8 +65,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(0, 0, 2, 15),
+    [theme.breakpoints.down('lg')]: {
+      paddingLeft: theme.spacing(8),
     },
     [theme.breakpoints.down('sm')]: {
       width: '100%',
@@ -132,11 +132,13 @@ const basketSummary = [
     id: 'curator',
     displayName: 'curator',
     value: 'Regen Network Development, Inc',
+    link: 'https://www.regen.network/',
   },
   {
     id: 'allowedCreditClasses',
     displayName: 'allowed credit classes',
     value: 'VCU (CO2)',
+    link: 'https://www.regen.network/',
   },
   {
     id: 'minStartDate',
@@ -198,7 +200,11 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({ basketDenom }) => {
               >
                 {basketSummary.map(item => (
                   <Grid item key={item.id} xs={12} sm={6}>
-                    <Item label={item.displayName} data={item.value} />
+                    <Item
+                      label={item.displayName}
+                      data={item.value}
+                      link={item.link}
+                    />
                   </Grid>
                 ))}
               </Grid>
@@ -230,21 +236,42 @@ const useStylesItem = makeStyles(theme => ({
   data: {
     fontSize: theme.typography.pxToRem(16),
     fontWeight: 400,
+    '& a': {
+      color: theme.palette.text.secondary,
+      fontSize: theme.typography.pxToRem(16),
+      fontWeight: 400,
+    },
+  },
+  arrowIcon: {
+    marginLeft: theme.spacing(1),
+    marginBottom: theme.spacing(0.3),
+    height: 9,
+    width: 13,
   },
 }));
 
 interface ItemProps {
   label: string;
   data: string | JSX.Element;
+  link?: string;
 }
 
-const Item = ({ label, data }: ItemProps): JSX.Element => {
+const Item = ({ label, data, link }: ItemProps): JSX.Element => {
   const styles = useStylesItem();
 
   return (
     <div className={styles.gridItem}>
       <Label className={styles.label}>{label}</Label>
-      <Description className={styles.data}>{parseText(data)}</Description>
+      <Description className={styles.data}>
+        {link ? (
+          <Link href={link} target="_blank" rel="noreferrer">
+            {parseText(data)}
+            <SmallArrowIcon className={styles.arrowIcon} />
+          </Link>
+        ) : (
+          parseText(data)
+        )}
+      </Description>
     </div>
   );
 };

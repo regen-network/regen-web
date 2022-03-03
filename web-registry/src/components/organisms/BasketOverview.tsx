@@ -39,13 +39,25 @@ const useStyles = makeStyles((theme: Theme) => ({
       flexDirection: 'column',
     },
   },
+  imageContainer: {
+    position: 'relative',
+    width: '100%',
+    [theme.breakpoints.down('sm')]: {
+      height: theme.spacing(76.4),
+    },
+  },
   image: {
     width: '100%',
     maxWidth: theme.spacing(103),
     margin: 'auto',
     [theme.breakpoints.down('sm')]: {
+      height: '100%',
       minWidth: theme.spacing(103),
       overflow: 'hidden',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
     },
   },
   textContainer: {
@@ -160,7 +172,7 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({ basketDenom }) => {
     <Box className={styles.top}>
       <Section className={styles.content}>
         <Grid container>
-          <Grid item xs={12} sm={5}>
+          <Grid item xs={12} sm={5} className={styles.imageContainer}>
             <OptimizedImage
               className={styles.image}
               src={forestImg}

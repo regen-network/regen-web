@@ -11,8 +11,12 @@ import type { TableCredits } from '../../types/ledger/ecocredit';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    marginTop: theme.spacing(2.5),
-    marginBottom: theme.spacing(35),
+    width: '100%',
+    padding: theme.spacing(15, 5, 20),
+    [theme.breakpoints.up('sm')]: {
+      padding: theme.spacing(30, 5),
+      maxWidth: theme.breakpoints.values.lg,
+    },
   },
   title: {
     marginBottom: theme.spacing(8),

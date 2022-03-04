@@ -100,11 +100,8 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface BasketOverviewProps {
-  basketDenom: string;
-}
-
 // TODO: Mocked function: Basket Query (ledger api)
+// TODO: fetch Basket description
 async function getBasket(basketDenom: string): Promise<Basket> {
   return Promise.resolve({
     id: '1',
@@ -146,16 +143,18 @@ const basketSummary = [
   },
 ];
 
-// TODO: Hardcoded description
-const BASKET_DESCRIPTION =
+// TODO: Basket description (see comment in Figma)
+// https://www.figma.com/file/x5vjWsddiUBzP2N13AFOPw?node-id=32:10028#155844414
+const basketDescription =
   'The Regen Nature Carbon Ton groups together carbon sequestration ecocredits into one tradeable asset. Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+interface BasketOverviewProps {
+  basketDenom: string;
+}
 
 const BasketOverview: React.FC<BasketOverviewProps> = ({ basketDenom }) => {
   const styles = useStyles();
   const [basket, setBasket] = useState<Basket>();
-  // TODO: Basket description (see comment in Figma)
-  // https://www.figma.com/file/x5vjWsddiUBzP2N13AFOPw?node-id=32:10028#155844414
-  const [basketDescription, setBasketDescription] = useState<string>('');
 
   useEffect(() => {
     if (!basketDenom || !ledgerRestUri) return;
@@ -163,8 +162,6 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({ basketDenom }) => {
     const fetchData = async (): Promise<void> => {
       const _basket = await getBasket(basketDenom);
       setBasket(_basket);
-      // TODO: fetch Basket description
-      setBasketDescription(BASKET_DESCRIPTION);
     };
 
     fetchData();
@@ -189,6 +186,7 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({ basketDenom }) => {
               {basket?.basket_denom}
             </Description>
             <Description className={styles.basketDescription}>
+              {/* TODO: Hardcoded description */}
               {basketDescription}
             </Description>
             <OnBoardingCard className={styles.card}>

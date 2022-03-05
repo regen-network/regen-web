@@ -31,7 +31,12 @@ const BorderLeft = styled('div')(({ theme }) => ({
   borderLeft: `1px solid ${theme.palette.info.light}`,
 }));
 
-/** `i` represents the index of the  */
+/** `i` represents the index of the current row in the data set - ie it can be
+ * used in the parent component to access that row's data. ex.
+ * ```ts
+ * const selectedRow = data[i];
+ * ```
+ *  */
 export type RenderActionButtonsFunc = (i: number) => React.ReactElement;
 
 const ActionsTable: React.FC<{

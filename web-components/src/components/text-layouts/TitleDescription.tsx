@@ -29,11 +29,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const TitleDescription: React.FC<{
+export function TitleDescription({
+  title,
+  description,
+  className,
+  children,
+}: {
   title: string;
   description?: SanityBlockOr<string>; // accepts an HTML string or an array of sanity BlockContent
   className?: string;
-}> = ({ title, description, className, children }) => {
+  children?: React.ReactNode;
+}): JSX.Element {
   const classes = useStyles();
   return (
     <div className={clsx(className, classes.root)}>
@@ -51,4 +57,4 @@ export const TitleDescription: React.FC<{
       {children && <div>{children}</div>}
     </div>
   );
-};
+}

@@ -50,6 +50,11 @@ import {
 } from '../../generated/graphql';
 import { useEcologicalImpactByIriQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
+import { getBatchesWithSupplyForDenoms } from '../../lib/ecocredit';
+import {
+  BatchRowData,
+  BatchTotalsForProject,
+} from '../../types/ledger/ecocredit';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -121,6 +126,8 @@ function ProjectDetails(): JSX.Element {
   const walletContext = useWallet();
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [batchData, setBatchData] = useState<BatchRowData[]>([]);
+  const [totals, setTotals] = useState<BatchTotalsForProject>();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
@@ -128,11 +135,36 @@ function ProjectDetails(): JSX.Element {
     txClient = new ServiceClientImpl(api.connection.queryConnection);
   }
 
+  // fetch project
   const { data } = useProjectByHandleQuery({
     skip: !projectId,
     variables: { handle: projectId as string },
   });
   const metadata = data?.projectByHandle?.metadata;
+
+  const vintageBatchDenoms: string[] = (
+    data?.projectByHandle?.creditVintagesByProjectId?.nodes || []
+  )
+    .map(v => v?.batchDenom || '')
+    .filter(Boolean);
+
+  useEffect(() => {
+    if (vintageBatchDenoms?.length > 0) {
+      const fetch = async (): Promise<void> => {
+        try {
+          const { batches, totals } = await getBatchesWithSupplyForDenoms(
+            vintageBatchDenoms,
+          );
+          setBatchData(batches);
+          setTotals(totals);
+        } catch (err) {
+          console.error(err); // eslint-disable-line no-console
+        }
+      };
+      fetch();
+    }
+  }, [vintageBatchDenoms.length]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const { data: projectsData } = useMoreProjectsQuery();
 
   const [submitted, setSubmitted] = useState(false);
@@ -141,9 +173,6 @@ function ProjectDetails(): JSX.Element {
   useEffect(() => {
     setPageView(location);
   }, [location]);
-
-  const styles = useStyles();
-  const theme = useTheme<Theme>();
 
   const otherProjects = projectsData?.allProjects?.nodes?.filter(
     p => p?.handle !== projectId,
@@ -278,6 +307,8 @@ function ProjectDetails(): JSX.Element {
     skip: !impactIris,
   });
 
+  const styles = useStyles();
+  const theme = useTheme<Theme>();
   return (
     <div className={styles.root}>
       <SEO
@@ -297,7 +328,16 @@ function ProjectDetails(): JSX.Element {
           imageCredits={metadata?.['http://schema.org/creditText']}
         />
       )}
-      <ProjectTopSection data={data} geojson={geojson} isGISFile={isGISFile} />
+      <ProjectTopSection
+        data={data}
+        batchData={{
+          batches: batchData,
+          totals: totals,
+        }}
+        geojson={geojson}
+        isGISFile={isGISFile}
+      />
+
       {impactData?.allEcologicalImpact &&
         impactData?.allEcologicalImpact.length > 0 && (
           <div className="topo-background-alternate">

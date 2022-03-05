@@ -4,8 +4,12 @@ import qs from 'querystring';
 
 import { ledgerRestUri } from '../ledger';
 import type {
+  BatchData,
   BatchDataResponse,
+  BatchByDenomResponse,
   BatchRowData,
+  BatchSupplyResponse,
+  BatchTotalsForProject,
   QueryBalanceResponse,
   TableCredits,
 } from '../types/ledger/ecocredit';
@@ -21,46 +25,119 @@ const ECOCREDIT_MESSAGE_TYPES = {
 
 export const getBatches = async (
   params?: URLSearchParams,
-): Promise<
-  AxiosResponse<{
-    pagination: PageResponse;
-    batches: BatchRowData[];
-  }>
-> => {
-  return axios.get(`${ledgerRestUri}/regen/ecocredit/v1alpha1/batches`, {
-    params,
-  });
+): Promise<{
+  pagination: PageResponse;
+  batches: BatchData[];
+}> => {
+  try {
+    const { data } = await axios.get(
+      `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches`,
+      {
+        params,
+      },
+    );
+    return data;
+  } catch (err) {
+    throw new Error(`Error fetching batches: ${err}`);
+  }
 };
 
-export const getBatchSupply = (batchDenom: string): Promise<AxiosResponse> => {
-  return axios.get(
-    `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/supply`,
-  );
+export const getBatchByDenom = async (
+  denom: string,
+): Promise<BatchByDenomResponse> => {
+  try {
+    const { data } = await axios.get(
+      `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${denom}`,
+    );
+    return data;
+  } catch (err) {
+    throw new Error(`Error fetching batch by denom: ${denom}, err: ${err}`);
+  }
+};
+
+export const getBatchSupply = async (
+  batchDenom: string,
+): Promise<BatchSupplyResponse> => {
+  try {
+    const { data } = await axios.get(
+      `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/supply`,
+    );
+    return data;
+  } catch (err) {
+    throw new Error(`Error fetching batch supply: ${err}`);
+  }
+};
+
+export const getBatchWithSupplyForDenom = async (
+  denom: string,
+): Promise<BatchRowData> => {
+  try {
+    const { info } = await getBatchByDenom(denom);
+    const supply = await getBatchSupply(denom);
+    return { ...info, ...supply };
+  } catch (err) {
+    throw new Error(
+      `Could not get batches with supply for denom ${denom}, ${err}`,
+    );
+  }
+};
+
+export const getBatchesWithSupplyForDenoms = async (
+  denoms: string[],
+): Promise<{
+  batches: BatchRowData[];
+  totals: BatchTotalsForProject;
+}> => {
+  try {
+    const batches = await Promise.all(
+      denoms.map(denom => getBatchWithSupplyForDenom(denom)),
+    );
+    const totals = batches.reduce(
+      (acc, batch) => {
+        acc.amount_cancelled += Number(batch?.amount_cancelled ?? 0);
+        acc.retired_supply += Number(batch?.retired_supply ?? 0);
+        acc.tradable_supply += Number(batch?.tradable_supply ?? 0);
+        return acc;
+      },
+      {
+        amount_cancelled: 0,
+        retired_supply: 0,
+        tradable_supply: 0,
+      },
+    );
+    return { batches, totals };
+  } catch (err) {
+    throw new Error(
+      `Could not get batches with supply for denoms ${denoms}, ${err}`,
+    );
+  }
 };
 
 export const getEcocreditsForAccount = async (
   account: string,
 ): Promise<TableCredits[]> => {
-  const {
-    data: { batches },
-  } = await getBatches();
-  const credits = await Promise.all(
-    batches.map(async batch => {
-      const {
-        data: { retired_amount, tradable_amount },
-      } = await getAccountEcocreditsForBatch(batch.batch_denom, account);
-      return {
-        ...batch,
-        tradable_amount,
-        retired_amount,
-      };
-    }),
-  );
-  // filter out batches that don't have any credits
-  const filteredCredits = credits.filter(
-    c => +c.tradable_amount > 0 || +c.retired_amount > 0,
-  );
-  return filteredCredits;
+  try {
+    const { batches } = await getBatches();
+    const credits = await Promise.all(
+      batches.map(async batch => {
+        const credits = await getAccountEcocreditsForBatch(
+          batch.batch_denom,
+          account,
+        );
+        return {
+          ...batch,
+          ...credits,
+        };
+      }),
+    );
+    // filter out batches that don't have any credits
+    const filteredCredits = credits.filter(
+      c => Number(c.tradable_amount) > 0 || Number(c.retired_amount) > 0,
+    );
+    return filteredCredits;
+  } catch (err) {
+    throw new Error(`Could not get ecocredits for account ${account}, ${err}`);
+  }
 };
 
 export const getTxsByEvent = (msgType: string): Promise<AxiosResponse> => {
@@ -93,40 +170,43 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
 export const getBatchesWithSupply = async (
   params?: URLSearchParams,
 ): Promise<BatchDataResponse> => {
-  return getBatches(params).then(async res => {
-    const creditBatches = res?.data?.batches;
-    const batchesWithSupply = await addSupplyDataToBatch(creditBatches);
+  return getBatches(params).then(async ({ batches, pagination }) => {
+    // const creditBatches = data?.batches;
+    const batchesWithSupply = await addSupplyDataToBatch(batches);
     return {
       data: batchesWithSupply,
-      pagination: res?.data?.pagination,
+      pagination: pagination,
     };
   });
 };
 
 export const addSupplyDataToBatch = (
-  batches: BatchRowData[],
+  batches: BatchData[],
 ): Promise<BatchRowData[]> => {
-  return Promise.all(
-    batches.map(async batch => {
-      try {
-        const { data } = await getBatchSupply(batch.batch_denom);
-        if (data) {
-          batch.tradable_supply = data.tradable_supply;
-          batch.retired_supply = data.retired_supply;
-        }
-        return batch;
-      } catch (err) {
-        return batch;
-      }
-    }),
-  );
+  try {
+    return Promise.all(
+      batches.map(async batch => {
+        const data = await getBatchSupply(batch.batch_denom);
+        return { ...batch, ...data };
+      }),
+    );
+  } catch (err) {
+    throw new Error('Could not add supply to batches batches');
+  }
 };
 
-const getAccountEcocreditsForBatch = (
+const getAccountEcocreditsForBatch = async (
   batchDenom: string,
   account: string,
-): Promise<AxiosResponse<QueryBalanceResponse>> => {
-  return axios.get(
-    `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/balance/${account}`,
-  );
+): Promise<QueryBalanceResponse> => {
+  try {
+    const { data } = await axios.get<QueryBalanceResponse>(
+      `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/balance/${account}`,
+    );
+    return data;
+  } catch (err) {
+    throw new Error(
+      `Error fetching account ecocredits for batch ${batchDenom}`,
+    );
+  }
 };

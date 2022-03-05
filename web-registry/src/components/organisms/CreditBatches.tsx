@@ -104,7 +104,7 @@ const ROWS_PER_PAGE_OPTIONS = { options: [5, 10] };
 
 const CreditBatches: React.FC = () => {
   const styles = useStyles();
-  const [batches, setBatches] = useState<any[]>([]);
+  const [batches, setBatches] = useState<BatchRowData[]>([]);
   // const [order, setOrder] = useState<Order>('desc');
   // const [orderBy, setOrderBy] = useState<string>('start_date');
   const { TablePagination, setCountTotal, paginationParams, paginationProps } =
@@ -220,10 +220,10 @@ const CreditBatches: React.FC = () => {
                       {formatNumber(batch.amount_cancelled)}
                     </StyledTableCell>
                     <StyledTableCell>
-                      {formatDate(batch.start_date as Date)}
+                      {formatDate(batch.start_date)}
                     </StyledTableCell>
                     <StyledTableCell>
-                      {formatDate(batch.end_date as Date)}
+                      {formatDate(batch.end_date)}
                     </StyledTableCell>
                     <StyledTableCell>{batch.project_location}</StyledTableCell>
                   </StyledTableRow>
@@ -244,6 +244,7 @@ const CreditBatches: React.FC = () => {
   ) : null;
 };
 
-const formatDate = (date: Date): string => dayjs(date).format('MMMM D, YYYY');
+const formatDate = (date: string | Date): string =>
+  dayjs(date).format('MMMM D, YYYY');
 
 export { CreditBatches };

@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import TitleDescription from 'web-components/lib/components/title-description';
+import { TitleDescription } from 'web-components/lib/components/text-layouts';
 import Section from 'web-components/lib/components/section';
 import { DevApproachSectionQuery } from '../../generated/graphql';
 
@@ -48,13 +48,17 @@ const query = graphql`
 
 const ApproachSection: React.FC = () => {
   const styles = useStyles();
-  const { sanityDevelopersPage } = useStaticQuery<DevApproachSectionQuery>(query);
+  const { sanityDevelopersPage } =
+    useStaticQuery<DevApproachSectionQuery>(query);
   const data = sanityDevelopersPage?.approachSection;
 
   return (
     <Section className={styles.section}>
       <div className={styles.caption}>{data?.caption}</div>
-      <TitleDescription title={`${data?.header}`} description={data?._rawBody} />
+      <TitleDescription
+        title={`${data?.header}`}
+        description={data?._rawBody}
+      />
     </Section>
   );
 };

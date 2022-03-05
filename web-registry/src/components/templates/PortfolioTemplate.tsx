@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
-import { renderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
+import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { getEcocreditsForAccount } from '../../lib/ecocredit';
@@ -14,8 +14,8 @@ import type { TableCredits, TableBaskets } from '../../types/ledger/ecocredit';
 
 interface PortfolioTemplateProps {
   accountAddress?: string;
-  renderCreditActionButtons?: renderActionButtonsFunc;
-  renderBasketActionButtons?: renderActionButtonsFunc;
+  renderCreditActionButtons?: RenderActionButtonsFunc;
+  renderBasketActionButtons?: RenderActionButtonsFunc;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -46,8 +46,12 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   useEffect(() => {
     if (!ledgerRestUri || !accountAddress) return;
     const fetchData = async (): Promise<void> => {
-      const credits = await getEcocreditsForAccount(accountAddress);
-      setCredits(credits);
+      try {
+        const credits = await getEcocreditsForAccount(accountAddress);
+        if (credits) setCredits(credits);
+      } catch (err) {
+        console.error(err); // eslint-disable-line no-console
+      }
     };
     fetchData();
 

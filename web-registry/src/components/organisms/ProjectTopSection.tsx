@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-// import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+import { Box, Grid, Link } from '@mui/material';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
@@ -17,18 +15,18 @@ import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import ReadMore from 'web-components/lib/components/read-more';
+import { LabeledNumber } from 'web-components/lib/components/text-layouts';
 import { ProjectByHandleQuery } from '../../generated/graphql';
 import { useSdgByIriQuery } from '../../generated/sanity-graphql';
 import { getParty, getDisplayParty } from '../../lib/transform';
 import { getSanityImgSrc } from '../../lib/imgSrc';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { client } from '../../sanity';
-
-interface ProjectTopProps {
-  data?: ProjectByHandleQuery;
-  geojson?: any;
-  isGISFile?: boolean;
-}
+import {
+  BatchRowData,
+  BatchTotalsForProject,
+} from '../../types/ledger/ecocredit';
+import { ProjectCreditBatchesTable } from '.';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -267,7 +265,16 @@ function ProjectTopSection({
   data,
   geojson,
   isGISFile,
-}: ProjectTopProps): JSX.Element {
+  batchData,
+}: {
+  data?: ProjectByHandleQuery;
+  geojson?: any;
+  isGISFile?: boolean;
+  batchData?: {
+    batches?: BatchRowData[];
+    totals?: BatchTotalsForProject;
+  };
+}): JSX.Element {
   const classes = useStyles();
 
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
@@ -490,6 +497,30 @@ function ProjectTopSection({
               </Description>
             </div>
           )}
+          {batchData?.totals && (
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 2,
+                justifyContent: 'space-between',
+                mt: { xs: 10, sm: 12, md: 16 },
+                mb: { xs: 10, sm: 12, md: 0 },
+              }}
+            >
+              <LabeledNumber
+                label="Credits Available"
+                number={batchData.totals.tradable_supply}
+              />
+              <LabeledNumber
+                label="Credits Retired"
+                number={batchData.totals.retired_supply}
+              />
+              <LabeledNumber
+                label="Credits Cancelled"
+                number={batchData.totals.amount_cancelled}
+              />
+            </Box>
+          )}
           {/* TODO uncomment code below and display on-chain project.metadata */}
           {/* <>
             <Box
@@ -535,6 +566,14 @@ function ProjectTopSection({
           />
         </Grid>
       </Grid>
+      {batchData?.batches && (
+        <Box sx={{ mt: { xs: 10, sm: 12, md: 20 } }}>
+          <Title variant="h3" sx={{ pb: 8 }}>
+            Credit Batches
+          </Title>
+          <ProjectCreditBatchesTable batches={batchData.batches} />
+        </Box>
+      )}
     </Section>
   );
 }

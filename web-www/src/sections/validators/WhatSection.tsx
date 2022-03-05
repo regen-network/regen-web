@@ -4,7 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import TitleDescription from 'web-components/lib/components/title-description';
+import { TitleDescription } from 'web-components/lib/components/text-layouts';
 import { ValidatorsWhatSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -39,7 +39,8 @@ const query = graphql`
 `;
 const WhatSection = (): JSX.Element => {
   const styles = useStyles();
-  const { background, sanityValidatorsPage } = useStaticQuery<ValidatorsWhatSectionQuery>(query);
+  const { background, sanityValidatorsPage } =
+    useStaticQuery<ValidatorsWhatSectionQuery>(query);
   const data = sanityValidatorsPage?.whatSection;
 
   return (
@@ -49,7 +50,10 @@ const WhatSection = (): JSX.Element => {
       imageData={background?.childImageSharp?.fluid}
       topSection={false}
     >
-      <TitleDescription title={data?.title || ''} description={data?._rawBody} />
+      <TitleDescription
+        title={data?.title || ''}
+        description={data?._rawBody}
+      />
     </BackgroundSection>
   );
 };

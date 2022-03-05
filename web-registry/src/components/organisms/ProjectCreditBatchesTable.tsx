@@ -10,7 +10,7 @@ import {
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
 import { NoCredits } from '../molecules';
-import type { TableCredits } from '../../types/ledger/ecocredit';
+import type { BatchRowData } from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -21,12 +21,12 @@ const Amount = styled('div')({
   wordWrap: 'break-word',
 });
 
-export const EcocreditsTable: React.FC<{
-  credits: TableCredits[];
+export const ProjectCreditBatchesTable: React.FC<{
+  batches: BatchRowData[];
   renderActionButtons?: RenderActionButtonsFunc;
-}> = ({ credits, renderActionButtons }) => {
-  if (!credits?.length) {
-    return <NoCredits title="No ecocredits to display" />;
+}> = ({ batches, renderActionButtons }) => {
+  if (!batches?.length) {
+    return <NoCredits title="No batches to display" />;
   }
 
   return (
@@ -49,11 +49,12 @@ export const EcocreditsTable: React.FC<{
         'Credit Class',
         <Amount>Amount Tradable</Amount>,
         <Amount>Amount Retired</Amount>,
+        <Amount>Amount Cancelled</Amount>,
         'Batch Start Date',
         'Batch End Date',
         'Project Location',
       ]}
-      rows={credits.map((row, i) => {
+      rows={batches.map((row, i) => {
         return [
           row.batch_denom,
           <a
@@ -61,11 +62,12 @@ export const EcocreditsTable: React.FC<{
             target="_blank"
             rel="noopener noreferrer"
           >
-            {truncate(row.issuer as string)}
+            {truncate(row.issuer)}
           </a>,
           row.class_id,
-          formatNumber(row.tradable_amount),
-          formatNumber(row.retired_amount),
+          formatNumber(row.tradable_supply),
+          formatNumber(row.retired_supply),
+          formatNumber(row.amount_cancelled),
           <GreyText>{formatDate(row.start_date)}</GreyText>,
           <GreyText>{formatDate(row.end_date)}</GreyText>,
           row.project_location,

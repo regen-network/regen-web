@@ -6,7 +6,7 @@ import Title from 'web-components/lib/components/title';
 
 import { ReactComponent as CloudData } from '../../assets/svgs/cloud-data.svg';
 
-const NoEcocredits: React.FC<{ title: string }> = ({ title }) => {
+const NoCredits: React.FC<{ title: string }> = ({ title }) => {
   return (
     <StyledTableContainer>
       <Box
@@ -27,4 +27,4 @@ const NoEcocredits: React.FC<{ title: string }> = ({ title }) => {
   );
 };
 
-export { NoEcocredits };
+export { NoCredits };

@@ -566,7 +566,7 @@ function ProjectTopSection({
           />
         </Grid>
       </Grid>
-      {batchData?.batches && (
+      {batchData?.batches && batchData.batches.length > 0 && (
         <Box sx={{ mt: { xs: 10, sm: 12, md: 20 } }}>
           <Title variant="h3" sx={{ pb: 8 }}>
             Credit Batches

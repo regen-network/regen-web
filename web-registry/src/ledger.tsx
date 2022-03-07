@@ -11,7 +11,10 @@ export type ContextType = {
 };
 
 // Simple proxy endpoint for REST requests. We check for chainId as an on/off switch.
-export const ledgerRestUri = chainId ? `${getApiUri()}/ledger-rest` : undefined;
+// export const ledgerRestUri = chainId ? `${getApiUri()}/ledger-rest` : undefined;
+export const ledgerRestUri = chainId
+  ? `http://redwood.regen.network:1317/`
+  : undefined;
 
 async function connect(): Promise<RegenApi | undefined> {
   // Create a new instance of the RegenApi class.
@@ -24,7 +27,8 @@ async function connect(): Promise<RegenApi | undefined> {
     connection: {
       // Here, we are using the Tendermint RPC client connection.
       type: 'tendermint',
-      url: `${getApiUri()}/ledger`,
+      // url: `${getApiUri()}/ledger`,
+      url: `http://redwood.regen.network:26657/`,
     },
   });
   return api;

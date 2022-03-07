@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RegenApi } from '@regen-network/api';
 
-import getApiUri from './lib/apiUri';
+// import getApiUri from './lib/apiUri';
 import { chainId } from './lib/wallet';
 
 export type ContextType = {

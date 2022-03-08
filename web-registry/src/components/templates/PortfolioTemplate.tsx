@@ -10,7 +10,10 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { getEcocreditsForAccount } from '../../lib/ecocredit';
 import { ledgerRestUri } from '../../ledger';
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
-import type { TableCredits, TableBaskets } from '../../types/ledger/ecocredit';
+import type {
+  BatchInfoWithBalance,
+  TableBaskets,
+} from '../../types/ledger/ecocredit';
 
 interface PortfolioTemplateProps {
   accountAddress?: string;
@@ -40,7 +43,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   children,
 }) => {
   const styles = useStyles();
-  const [credits, setCredits] = useState<TableCredits[]>([]);
+  const [credits, setCredits] = useState<BatchInfoWithBalance[]>([]);
   const [baskets, setBaskets] = useState<TableBaskets[]>([]);
 
   useEffect(() => {

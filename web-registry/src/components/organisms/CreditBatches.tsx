@@ -7,7 +7,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableFooter from '@mui/material/TableFooter';
 import TableSortLabel from '@mui/material/TableSortLabel';
-import dayjs from 'dayjs';
 import cx from 'clsx';
 
 import {
@@ -27,13 +26,14 @@ import { useTablePagination } from 'web-components/lib/components/table/useTable
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from '../../lib/wallet';
-import type { BatchRowData } from '../../types/ledger/ecocredit';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRestUri } from '../../ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
+import { formatDate } from 'web-components/lib/utils/format';
 
 interface HeadCell {
-  id: keyof BatchRowData;
+  id: keyof BatchInfoWithSupply;
   label: string;
   numeric: boolean;
   wrap?: boolean;
@@ -104,7 +104,7 @@ const ROWS_PER_PAGE_OPTIONS = { options: [5, 10] };
 
 const CreditBatches: React.FC = () => {
   const styles = useStyles();
-  const [batches, setBatches] = useState<BatchRowData[]>([]);
+  const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
   // const [order, setOrder] = useState<Order>('desc');
   // const [orderBy, setOrderBy] = useState<string>('start_date');
   const { TablePagination, setCountTotal, paginationParams, paginationProps } =
@@ -192,7 +192,7 @@ const CreditBatches: React.FC = () => {
             </TableHead>
             <TableBody className={styles.tableBody}>
               {/* {stableSort(batches, getComparator(order, orderBy)).map( */}
-              {batches.map((batch: BatchRowData) => {
+              {batches.map((batch: BatchInfoWithSupply) => {
                 return (
                   <StyledTableRow
                     className={styles.noWrap}
@@ -243,8 +243,5 @@ const CreditBatches: React.FC = () => {
     </Section>
   ) : null;
 };
-
-const formatDate = (date: string | Date): string =>
-  dayjs(date).format('MMMM D, YYYY');
 
 export { CreditBatches };

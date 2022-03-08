@@ -52,7 +52,7 @@ import { useEcologicalImpactByIriQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 import { getBatchesWithSupplyForDenoms } from '../../lib/ecocredit';
 import {
-  BatchRowData,
+  BatchInfoWithSupply,
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
 
@@ -126,8 +126,8 @@ function ProjectDetails(): JSX.Element {
   const walletContext = useWallet();
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [batchData, setBatchData] = useState<BatchRowData[]>([]);
-  const [totals, setTotals] = useState<BatchTotalsForProject>();
+  const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
+  const [batchTotals, setBatchTotals] = useState<BatchTotalsForProject>();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
@@ -156,7 +156,7 @@ function ProjectDetails(): JSX.Element {
             vintageBatchDenoms,
           );
           setBatchData(batches);
-          setTotals(totals);
+          setBatchTotals(totals);
         } catch (err) {
           console.error(err); // eslint-disable-line no-console
         }
@@ -332,7 +332,7 @@ function ProjectDetails(): JSX.Element {
         data={data}
         batchData={{
           batches: batchData,
-          totals: totals,
+          totals: batchTotals,
         }}
         geojson={geojson}
         isGISFile={isGISFile}

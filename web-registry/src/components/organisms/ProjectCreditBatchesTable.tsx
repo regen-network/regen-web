@@ -1,16 +1,17 @@
 import React from 'react';
-import dayjs from 'dayjs';
 import { Box, styled } from '@mui/material';
 
 import {
   ActionsTable,
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
+import { formatNumber } from 'web-components/lib/components/table';
+import { formatDate } from 'web-components/lib/utils/format';
 
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
 import { NoCredits } from '../molecules';
-import type { BatchRowData } from '../../types/ledger/ecocredit';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -22,7 +23,7 @@ const Amount = styled('div')({
 });
 
 export const ProjectCreditBatchesTable: React.FC<{
-  batches: BatchRowData[];
+  batches: BatchInfoWithSupply[];
   renderActionButtons?: RenderActionButtonsFunc;
 }> = ({ batches, renderActionButtons }) => {
   if (!batches?.length) {
@@ -75,11 +76,4 @@ export const ProjectCreditBatchesTable: React.FC<{
       })}
     />
   );
-};
-
-const formatDate = (date: string | number | Date): string =>
-  dayjs(date).format('MMMM D, YYYY');
-
-const formatNumber = (num: string | number | Date): string => {
-  return +num > 0 ? Math.floor(+num).toLocaleString() : '-';
 };

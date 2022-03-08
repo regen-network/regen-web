@@ -4,14 +4,14 @@ import qs from 'querystring';
 
 import { ledgerRestUri } from '../ledger';
 import type {
-  BatchData,
-  BatchDataResponse,
-  BatchByDenomResponse,
-  BatchRowData,
-  BatchSupplyResponse,
+  BatchInfo,
+  QueryBatchInfoResponse,
+  BatchInfoWithSupply,
+  QuerySupplyResponse,
   BatchTotalsForProject,
   QueryBalanceResponse,
-  TableCredits,
+  BatchInfoWithBalance,
+  QueryBatchesResponse,
 } from '../types/ledger/ecocredit';
 import type { PageResponse } from '../types/ledger/base';
 
@@ -23,69 +23,13 @@ const ECOCREDIT_MESSAGE_TYPES = {
   RETIRE: "message.action='/regen.ecocredit.v1alpha1.MsgRetire'",
 };
 
-export const getBatches = async (
-  params?: URLSearchParams,
-): Promise<{
-  pagination: PageResponse;
-  batches: BatchData[];
-}> => {
-  try {
-    const { data } = await axios.get(
-      `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches`,
-      {
-        params,
-      },
-    );
-    return data;
-  } catch (err) {
-    throw new Error(`Error fetching batches: ${err}`);
-  }
-};
-
-export const getBatchByDenom = async (
-  denom: string,
-): Promise<BatchByDenomResponse> => {
-  try {
-    const { data } = await axios.get(
-      `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${denom}`,
-    );
-    return data;
-  } catch (err) {
-    throw new Error(`Error fetching batch by denom: ${denom}, err: ${err}`);
-  }
-};
-
-export const getBatchSupply = async (
-  batchDenom: string,
-): Promise<BatchSupplyResponse> => {
-  try {
-    const { data } = await axios.get(
-      `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/supply`,
-    );
-    return data;
-  } catch (err) {
-    throw new Error(`Error fetching batch supply: ${err}`);
-  }
-};
-
-export const getBatchWithSupplyForDenom = async (
-  denom: string,
-): Promise<BatchRowData> => {
-  try {
-    const { info } = await getBatchByDenom(denom);
-    const supply = await getBatchSupply(denom);
-    return { ...info, ...supply };
-  } catch (err) {
-    throw new Error(
-      `Could not get batches with supply for denom ${denom}, ${err}`,
-    );
-  }
-};
+// helpers for combining ledger queries (currently rest, regen-js in future)
+// into UI data structures
 
 export const getBatchesWithSupplyForDenoms = async (
   denoms: string[],
 ): Promise<{
-  batches: BatchRowData[];
+  batches: BatchInfoWithSupply[];
   totals: BatchTotalsForProject;
 }> => {
   try {
@@ -115,15 +59,12 @@ export const getBatchesWithSupplyForDenoms = async (
 
 export const getEcocreditsForAccount = async (
   account: string,
-): Promise<TableCredits[]> => {
+): Promise<BatchInfoWithBalance[]> => {
   try {
-    const { batches } = await getBatches();
+    const { batches } = await queryEcoBatches();
     const credits = await Promise.all(
       batches.map(async batch => {
-        const credits = await getAccountEcocreditsForBatch(
-          batch.batch_denom,
-          account,
-        );
+        const credits = await queryEcoBalance(batch.batch_denom, account);
         return {
           ...batch,
           ...credits,
@@ -138,17 +79,6 @@ export const getEcocreditsForAccount = async (
   } catch (err) {
     throw new Error(`Could not get ecocredits for account ${account}, ${err}`);
   }
-};
-
-export const getTxsByEvent = (msgType: string): Promise<AxiosResponse> => {
-  return axios.get(`${ledgerRestUri}/cosmos/tx/v1beta1/txs`, {
-    params: {
-      events: [msgType],
-    },
-    paramsSerializer: params => {
-      return qs.stringify(params);
-    },
-  });
 };
 
 export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
@@ -169,9 +99,11 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
 
 export const getBatchesWithSupply = async (
   params?: URLSearchParams,
-): Promise<BatchDataResponse> => {
-  return getBatches(params).then(async ({ batches, pagination }) => {
-    // const creditBatches = data?.batches;
+): Promise<{
+  data: BatchInfoWithSupply[];
+  pagination?: PageResponse;
+}> => {
+  return queryEcoBatches(params).then(async ({ batches, pagination }) => {
     const batchesWithSupply = await addSupplyDataToBatch(batches);
     return {
       data: batchesWithSupply,
@@ -181,21 +113,79 @@ export const getBatchesWithSupply = async (
 };
 
 export const addSupplyDataToBatch = (
-  batches: BatchData[],
-): Promise<BatchRowData[]> => {
+  batches: BatchInfo[],
+): Promise<BatchInfoWithSupply[]> => {
   try {
     return Promise.all(
       batches.map(async batch => {
-        const data = await getBatchSupply(batch.batch_denom);
+        const data = await queryEcoBatchSupply(batch.batch_denom);
         return { ...batch, ...data };
       }),
     );
   } catch (err) {
-    throw new Error('Could not add supply to batches batches');
+    throw new Error(`Could not add supply to batches batches: ${err}`);
   }
 };
 
-const getAccountEcocreditsForBatch = async (
+export const getBatchWithSupplyForDenom = async (
+  denom: string,
+): Promise<BatchInfoWithSupply> => {
+  try {
+    const { info } = await queryEcoBatchInfo(denom);
+    const supply = await queryEcoBatchSupply(denom);
+    return { ...info, ...supply };
+  } catch (err) {
+    throw new Error(
+      `Could not get batches with supply for denom ${denom}, ${err}`,
+    );
+  }
+};
+
+// Regen REST endpoints - will be replaced with regen-js
+
+export const queryEcoBatches = async (
+  params?: URLSearchParams,
+): Promise<QueryBatchesResponse> => {
+  try {
+    const { data } = await axios.get(
+      `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches`,
+      {
+        params,
+      },
+    );
+    return data;
+  } catch (err) {
+    throw new Error(`Error fetching batches: ${err}`);
+  }
+};
+
+export const queryEcoBatchInfo = async (
+  denom: string,
+): Promise<QueryBatchInfoResponse> => {
+  try {
+    const { data } = await axios.get(
+      `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${denom}`,
+    );
+    return data;
+  } catch (err) {
+    throw new Error(`Error fetching batch by denom: ${denom}, err: ${err}`);
+  }
+};
+
+export const queryEcoBatchSupply = async (
+  batchDenom: string,
+): Promise<QuerySupplyResponse> => {
+  try {
+    const { data } = await axios.get(
+      `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/supply`,
+    );
+    return data;
+  } catch (err) {
+    throw new Error(`Error fetching batch supply: ${err}`);
+  }
+};
+
+const queryEcoBalance = async (
   batchDenom: string,
   account: string,
 ): Promise<QueryBalanceResponse> => {
@@ -206,7 +196,18 @@ const getAccountEcocreditsForBatch = async (
     return data;
   } catch (err) {
     throw new Error(
-      `Error fetching account ecocredits for batch ${batchDenom}`,
+      `Error fetching account ecocredits for batch ${batchDenom}, account ${account}, err: ${err}`,
     );
   }
+};
+
+export const getTxsByEvent = (msgType: string): Promise<AxiosResponse> => {
+  return axios.get(`${ledgerRestUri}/cosmos/tx/v1beta1/txs`, {
+    params: {
+      events: [msgType],
+    },
+    paramsSerializer: params => {
+      return qs.stringify(params);
+    },
+  });
 };

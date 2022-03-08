@@ -1,8 +1,31 @@
 import type { PageResponse } from './base';
 import type { QueryBalanceResponse as BankQueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
+/** Map keys from another type to values of number type */
+type MapToNumber<T> = { [K in keyof T]: number };
+
 // Response structure based on https://buf.build/regen/regen-ledger
-export interface BatchData {
+
+/** combines the ledger `BatchInfo` with ledger `QuerySupplyResponse` */
+export interface BatchInfoWithSupply extends BatchInfo, QuerySupplyResponse {}
+
+/** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
+export interface BatchInfoWithBalance extends BatchInfo, QueryBalanceResponse {}
+
+export interface TableBaskets extends Basket, BankQueryBalanceResponse {
+  display_denom: string;
+}
+
+/** `QueryBatchSupplyResponse` + `amount_cancelled` to display summed totals on project page */
+export interface BatchTotalsForProject
+  extends MapToNumber<QuerySupplyResponse> {
+  amount_cancelled: number;
+}
+
+// The following interfaces should be removed once we migrate
+// the current queries to use regen-js instead of REST
+
+export interface BatchInfo {
   start_date: string | Date;
   end_date: string | Date;
   issuer: string;
@@ -13,39 +36,23 @@ export interface BatchData {
   project_location: string;
 }
 
-export interface BatchRowData extends BatchData, BatchSupplyResponse {}
-
-export interface TableCredits extends BatchData, QueryBalanceResponse {}
-
-export interface TableBaskets extends Basket, BankQueryBalanceResponse {
-  display_denom: string;
+export interface QueryBatchesResponse {
+  batches: BatchInfo[];
+  pagination: PageResponse;
 }
 
-// The following interfaces should be removed once we migrate
-// the current queries to use regen-js instead of REST
-
-export interface BatchTotalsForProject {
-  amount_cancelled: number;
-  tradable_supply: number;
-  retired_supply: number;
+export interface QueryBatchInfoResponse {
+  info: BatchInfo;
 }
 
-export interface BatchSupplyResponse {
-  tradable_supply: number;
-  retired_supply: number;
+export interface QuerySupplyResponse {
+  tradable_supply: string;
+  retired_supply: string;
 }
 
-export interface BatchDataResponse {
-  data: BatchRowData[];
-  pagination?: PageResponse;
-}
 export interface QueryBalanceResponse {
   tradable_amount: string;
   retired_amount: string;
-}
-
-export interface BatchByDenomResponse {
-  info: BatchData;
 }
 
 export interface Basket {

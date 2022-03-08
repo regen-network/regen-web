@@ -81,8 +81,6 @@ const ActionsTable: React.FC<{
   //   );
   // };
 
-  console.log('rows :>> ', rows);
-
   return (
     <Box
       sx={{

@@ -141,7 +141,7 @@ export const getBatchWithSupplyForDenom = async (
   }
 };
 
-// Regen REST endpoints - will be replaced with regen-js
+// the following consume Regen REST endpoints - will be replaced with regen-js
 
 export const queryEcoBatches = async (
   params?: URLSearchParams,

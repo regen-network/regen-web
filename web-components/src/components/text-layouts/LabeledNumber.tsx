@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import Title from '../title';
 
+/** Grey label over a rounded, formatted number */
 export const LabeledNumber: React.FC<{
   label: string;
   number: number | string;
@@ -27,7 +28,7 @@ export const LabeledNumber: React.FC<{
         {props.label}
       </Typography>
       <Title variant="h3" sx={{ pt: 1 }}>
-        {Number(props.number).toLocaleString()}
+        {Math.round(Number(props.number)).toLocaleString()}
       </Title>
     </Box>
   );

@@ -7,7 +7,7 @@ import SanityImage from 'gatsby-plugin-sanity-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import TitleDescription from 'web-components/lib/components/title-description';
+import { TitleDescription } from 'web-components/lib/components/text-layouts';
 import { DevLedgerSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)',
+    background:
+      'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)',
   },
   titleDesc: {
     zIndex: 1,
@@ -64,7 +65,8 @@ const query = graphql`
 `;
 
 const LedgerSection = (): JSX.Element => {
-  const { background, sanityDevelopersPage } = useStaticQuery<DevLedgerSectionQuery>(query);
+  const { background, sanityDevelopersPage } =
+    useStaticQuery<DevLedgerSectionQuery>(query);
   const data = sanityDevelopersPage?.ledgerSection;
   const backgroundImg = background?.childImageSharp?.fluid;
   const styles = useStyles();
@@ -73,7 +75,11 @@ const LedgerSection = (): JSX.Element => {
       <Section>
         <Box display="flex" justifyContent="center">
           {data?.cosmosImage && (
-            <SanityImage className={styles.cosmosImg} alt="cosmos image" {...(data.cosmosImage as any)} />
+            <SanityImage
+              className={styles.cosmosImg}
+              alt="cosmos image"
+              {...(data.cosmosImage as any)}
+            />
           )}
         </Box>
         <TitleDescription
@@ -83,7 +89,11 @@ const LedgerSection = (): JSX.Element => {
         />
       </Section>
       <div className={styles.bgGradient}>
-        <Img className={styles.img} alt="background" fluid={backgroundImg as any} />
+        <Img
+          className={styles.img}
+          alt="background"
+          fluid={backgroundImg as any}
+        />
       </div>
     </div>
   );

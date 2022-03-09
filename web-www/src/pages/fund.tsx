@@ -21,7 +21,8 @@ const query = graphql`
 `;
 
 const FundPage: React.FC<PageProps> = ({ location }) => {
-  const { seoImage, sanityFundPage: data } = useStaticQuery<FundPageQuery>(query);
+  const { seoImage, sanityFundPage: data } =
+    useStaticQuery<FundPageQuery>(query);
 
   return (
     <>

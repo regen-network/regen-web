@@ -6,8 +6,8 @@ import {
   TableRow,
   Box,
   TableFooter,
+  styled,
 } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import {
   StyledTableCell,
   StyledTableContainer,
@@ -22,27 +22,28 @@ import {
 // } from 'web-components/lib/components/table/sort';
 import { TablePagination } from './TablePagination';
 
-const useStyles = makeStyles(theme => ({
-  borderLeft: {
-    // absolutely position border to get around MUI style quirks
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    borderLeft: `1px solid ${theme.palette.info.light}`,
-  },
-  greyText: {
-    color: theme.palette.info.main,
-  },
+const BorderLeft = styled('div')(({ theme }) => ({
+  // absolutely position border to get around MUI style quirks
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  bottom: 0,
+  borderLeft: `1px solid ${theme.palette.info.light}`,
 }));
 
-export type renderActionButtonsFunc = (i: number) => React.ReactElement;
+/** `i` represents the index of the current row in the data set - ie it can be
+ * used in the parent component to access that row's data. ex.
+ * ```ts
+ * const selectedRow = data[i];
+ * ```
+ *  */
+export type RenderActionButtonsFunc = (i: number) => React.ReactNode;
 
 const ActionsTable: React.FC<{
   tableLabel: string;
   headerRows: React.ReactNode[];
   rows: React.ReactNode[][];
-  renderActionButtons?: renderActionButtonsFunc;
+  renderActionButtons?: RenderActionButtonsFunc;
 }> = ({ tableLabel, headerRows, rows, renderActionButtons }) => {
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);
@@ -80,7 +81,6 @@ const ActionsTable: React.FC<{
   //   );
   // };
 
-  const styles = useStyles();
   return (
     <Box
       sx={{
@@ -120,7 +120,7 @@ const ActionsTable: React.FC<{
                     }}
                   >
                     <Box>
-                      <div className={styles.borderLeft} />
+                      <BorderLeft />
                       Actions
                     </Box>
                   </StyledTableCell>
@@ -146,7 +146,7 @@ const ActionsTable: React.FC<{
                         width: { sm: 29 },
                       }}
                     >
-                      <div className={styles.borderLeft} />
+                      <BorderLeft />
                       {renderActionButtons(i)}
                     </StyledTableCell>
                   )}

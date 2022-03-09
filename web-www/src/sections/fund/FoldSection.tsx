@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import TitleDescription from 'web-components/lib/components/title-description';
+import { TitleDescription } from 'web-components/lib/components/text-layouts';
 import { FundFoldSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>(theme => ({
@@ -33,7 +33,11 @@ const FoldSection = (): JSX.Element => {
 
   return (
     <Section>
-      <TitleDescription className={styles.spacing} title={data?.title || ''} description={data?._rawBody} />
+      <TitleDescription
+        className={styles.spacing}
+        title={data?.title || ''}
+        description={data?._rawBody}
+      />
     </Section>
   );
 };

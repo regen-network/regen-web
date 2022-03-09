@@ -6,7 +6,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import TitleDescription from 'web-components/lib/components/title-description';
+import { TitleDescription } from 'web-components/lib/components/text-layouts';
 import Description from 'web-components/lib/components/description';
 import Title from 'web-components/lib/components/title';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
@@ -89,7 +89,8 @@ const query = graphql`
 
 const WhoSection = (): JSX.Element => {
   const styles = useStyles();
-  const { background, sanityValidatorsPage } = useStaticQuery<ValidatorsWhoSectionQuery>(query);
+  const { background, sanityValidatorsPage } =
+    useStaticQuery<ValidatorsWhoSectionQuery>(query);
   const data = sanityValidatorsPage?.whoSection;
   return (
     <BackgroundSection
@@ -98,7 +99,10 @@ const WhoSection = (): JSX.Element => {
       imageData={background?.childImageSharp?.fluid}
       topSection={false}
     >
-      <TitleDescription title={data?.header || ''} description={data?._rawBody} />
+      <TitleDescription
+        title={data?.header || ''}
+        description={data?._rawBody}
+      />
       {(data?.validators || []).map((v, i) => {
         const items: JSX.Element[] = (v?.members || []).map((m, j) => (
           <GreenMediaCard

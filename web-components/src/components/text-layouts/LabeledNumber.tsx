@@ -1,6 +1,8 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+
 import Title from '../title';
+import { Label } from '../label';
 
 /** Grey label over a rounded, formatted number */
 export function LabeledNumber({
@@ -19,23 +21,15 @@ export function LabeledNumber({
         justifyContent: 'space-between',
       }}
     >
-      <Typography
-        variant="overline"
+      <Label
         sx={{
-          fontSize: {
-            xs: 12,
-            sm: 14,
-          },
-          fontFamily: 'muli',
-          fontWeight: 800,
           color: 'info.main',
-          textTransform: 'uppercase',
+          fontSize: { xs: 12, md: 14 },
           lineHeight: '17.57px',
-          letterSpacing: 1,
         }}
       >
         {label}
-      </Typography>
+      </Label>
       <Title variant="h3" sx={{ pt: 1 }}>
         {Math.round(Number(number)).toLocaleString()}
       </Title>

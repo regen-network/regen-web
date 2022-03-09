@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Grid, Box, Link } from '@mui/material';
 
@@ -14,8 +14,6 @@ import { parseText } from 'web-components/lib/utils/textParser';
 import { OptimizedImage } from '../atoms/OptimizedImage';
 import topoImg from '../../assets/background-contour-2.svg';
 import forestImg from '../../assets/forest-token.png';
-import { ledgerRestUri } from '../../ledger';
-import type { Basket } from '../../types/ledger/ecocredit';
 
 const useStyles = makeStyles((theme: Theme) => ({
   top: {
@@ -100,72 +98,28 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-// TODO: Mocked function: Basket Query (ledger api)
-// TODO: fetch Basket description
-async function getBasket(basketDenom: string): Promise<Basket> {
-  return Promise.resolve({
-    id: '1',
-    basket_denom: 'eco.uC.rNCT',
-    display_denom: 'eco.C.rNCT',
-    name: 'rNCT',
-    disable_auto_retire: false,
-    credit_type_abbrev: 'C',
-    date_criteria: {
-      start_date_window: '1000',
-    },
-    exponent: '6',
-    balance: {
-      denom: 'eco.uC.rNCT',
-      amount: '10000000',
-    },
-  });
-}
-
-// TODO: Hardcoded basket values
-const basketSummary = [
-  { id: 'balance.amount', displayName: 'total amount', value: '14,000' },
-  {
-    id: 'curator',
-    displayName: 'curator',
-    value: 'Regen Network Development, Inc',
-    link: 'https://www.regen.network/',
-  },
-  {
-    id: 'allowedCreditClasses',
-    displayName: 'allowed credit classes',
-    value: 'VCU (CO2)',
-    link: 'https://www.regen.network/',
-  },
-  {
-    id: 'minStartDate',
-    displayName: 'min start date',
-    value: '10-year rolling acceptance window',
-  },
-];
-
-// TODO: Basket description (see comment in Figma)
-// https://www.figma.com/file/x5vjWsddiUBzP2N13AFOPw?node-id=32:10028#155844414
-const basketDescription =
-  'The Regen Nature Carbon Ton groups together carbon sequestration ecocredits into one tradeable asset. Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
-
-interface BasketOverviewProps {
+export interface BasketOverviewProps {
+  name: string;
   basketDenom: string;
+  description: string;
+  totalAmount: number;
+  curator: string;
+  allowedCreditClasses: string[];
+  minStartDate?: string;
+  startDateWindow?: string;
 }
 
-const BasketOverview: React.FC<BasketOverviewProps> = ({ basketDenom }) => {
+const BasketOverview: React.FC<BasketOverviewProps> = ({
+  name,
+  basketDenom,
+  description,
+  totalAmount,
+  curator,
+  allowedCreditClasses,
+  minStartDate,
+  startDateWindow,
+}) => {
   const styles = useStyles();
-  const [basket, setBasket] = useState<Basket>();
-
-  useEffect(() => {
-    if (!basketDenom || !ledgerRestUri) return;
-
-    const fetchData = async (): Promise<void> => {
-      const _basket = await getBasket(basketDenom);
-      setBasket(_basket);
-    };
-
-    fetchData();
-  }, [basketDenom]);
 
   return (
     <Box className={styles.top}>
@@ -175,19 +129,18 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({ basketDenom }) => {
             <OptimizedImage
               className={styles.image}
               src={forestImg}
-              alt={basket?.name}
+              alt={name}
             />
           </Grid>
           <Grid item xs={12} sm={7} className={styles.textContainer}>
             <Title variant="h1" className={styles.title}>
-              {basket?.name}
+              {name}
             </Title>
             <Description className={styles.basketDenom}>
-              {basket?.basket_denom}
+              {basketDenom}
             </Description>
             <Description className={styles.basketDescription}>
-              {/* TODO: Hardcoded description */}
-              {basketDescription}
+              {description}
             </Description>
             <OnBoardingCard className={styles.card}>
               <Grid
@@ -195,15 +148,35 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({ basketDenom }) => {
                 rowSpacing={1}
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
               >
-                {basketSummary.map(item => (
-                  <Grid item key={item.id} xs={12} sm={6}>
-                    <Item
-                      label={item.displayName}
-                      data={item.value}
-                      link={item.link}
-                    />
+                <Grid item xs={12} sm={6}>
+                  <Item label="totalAmount" data={totalAmount.toString()} />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Item
+                    label="curator"
+                    data={curator}
+                    // TODO: harcoded url for curator
+                    link={'https://www.regen.network/'}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Item
+                    label="allowed credit classes"
+                    data={allowedCreditClasses}
+                    // TODO: harcoded url for credit class
+                    link={'https://www.regen.network/'}
+                  />
+                </Grid>
+                {minStartDate && (
+                  <Grid item xs={12} sm={6}>
+                    <Item label="min start date" data={minStartDate} />
                   </Grid>
-                ))}
+                )}
+                {startDateWindow && (
+                  <Grid item xs={12} sm={6}>
+                    <Item label="start date window" data={startDateWindow} />
+                  </Grid>
+                )}
               </Grid>
             </OnBoardingCard>
           </Grid>
@@ -249,7 +222,7 @@ const useStylesItem = makeStyles(theme => ({
 
 interface ItemProps {
   label: string;
-  data: string | JSX.Element;
+  data: string | string[];
   link?: string;
 }
 
@@ -259,16 +232,31 @@ const Item = ({ label, data, link }: ItemProps): JSX.Element => {
   return (
     <div className={styles.gridItem}>
       <Label className={styles.label}>{label}</Label>
-      <Description className={styles.data}>
-        {link ? (
-          <Link href={link} target="_blank" rel="noreferrer">
-            {parseText(data)}
-            <SmallArrowIcon className={styles.arrowIcon} />
-          </Link>
-        ) : (
-          parseText(data)
-        )}
-      </Description>
+      {Array.isArray(data) ? (
+        data.map(item => (
+          <Description key={`basket-${item}`} className={styles.data}>
+            {link ? (
+              <Link href={link} target="_blank" rel="noreferrer">
+                {parseText(item)}
+                <SmallArrowIcon className={styles.arrowIcon} />
+              </Link>
+            ) : (
+              parseText(item)
+            )}
+          </Description>
+        ))
+      ) : (
+        <Description className={styles.data}>
+          {link ? (
+            <Link href={link} target="_blank" rel="noreferrer">
+              {parseText(data)}
+              <SmallArrowIcon className={styles.arrowIcon} />
+            </Link>
+          ) : (
+            parseText(data)
+          )}
+        </Description>
+      )}
     </div>
   );
 };

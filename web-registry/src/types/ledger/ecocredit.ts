@@ -51,6 +51,69 @@ export interface QueryBasketsResponse {
   pagination?: PageResponse;
 }
 
-export interface QueryBasketsRequest {
-  basket_denom: string;
+export interface IBasket {
+  id: string;
+  basketDenom: string;
+  name: string;
+  disableAutoRetire: boolean;
+  creditTypeAbbrev: string;
+  dateCriteria: {
+    minStartDate?: string;
+    startDateWindow?: string;
+  };
+  exponent: string;
+}
+
+export interface QueryBasketRequest {
+  basketDenom: string;
+}
+
+export interface QueryBasketResponse {
+  basket?: IBasket;
+  classes: string[];
+}
+
+export interface QueryBasketBalancesRequest {
+  basketDenom: string;
+  // pagination?: PageRequest; // DISABLED
+}
+
+export interface QueryBasketBalancesResponse {
+  balances: BasketBalance[];
+  // pagination?: PageResponse; // DISABLED
+}
+
+// BasketBalance stores the amount of credits from a batch in a basket
+export interface BasketBalance {
+  basketId: string | Long;
+  batchDenom: string;
+  balance: string;
+  batchStartDate?: string | Date;
+}
+
+/**
+ * Ecocredits
+ */
+
+/** BatchInfo represents the high-level on-chain information for a credit batch. */
+export interface BatchInfo {
+  classId: string;
+  batchDenom: string;
+  issuer: string;
+  totalAmount: string;
+  metadata: string | Uint8Array;
+  amountCancelled: string;
+  startDate?: string | Date;
+  endDate?: string | Date;
+  projectLocation: string;
+}
+
+/** QueryBatchInfoRequest is the Query/BatchInfo request type. */
+export interface QueryBatchInfoRequest {
+  batchDenom: string;
+}
+
+/** QueryBatchInfoResponse is the Query/BatchInfo response type. */
+export interface QueryBatchInfoResponse {
+  info: BatchInfo;
 }

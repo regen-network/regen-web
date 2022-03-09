@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-
-import { ledgerRestUri } from '../../ledger';
-import { getEcocreditsForAccount } from '../../lib/ecocredit';
-import { EcocreditsTable } from '../../components/organisms';
-import type { TableCredits } from '../../types/ledger/ecocredit';
+import BasketEcocreditsTable from './BasketEcocreditsTable';
+import { BatchInfo } from '../../types/ledger/ecocredit';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -24,26 +21,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface BasketEcocreditsProps {
-  basketDenom: string;
+  batches: BatchInfo[];
 }
 
-const BasketEcocredits: React.FC<BasketEcocreditsProps> = ({ basketDenom }) => {
+// This component will manage other components organized in tabs
+const BasketEcocredits: React.FC<BasketEcocreditsProps> = ({ batches }) => {
   const styles = useStyles();
-  const [credits, setCredits] = useState<TableCredits[]>([]);
-
-  useEffect(() => {
-    if (!basketDenom || !ledgerRestUri) return;
-
-    const fetchData = async (): Promise<void> => {
-      // TODO: mocked fetch to get a list of credit batches
-      const ADDRESS = 'regen1m5fecarvw0ltx2yvvru0kl4un03d3uca2kxggj';
-      const _credits = await getEcocreditsForAccount(ADDRESS);
-      // const _credits = await getEcocreditsForBasket(basketDenom);
-      setCredits(_credits);
-    };
-
-    fetchData();
-  }, [basketDenom]);
 
   return (
     <Section
@@ -52,7 +35,7 @@ const BasketEcocredits: React.FC<BasketEcocreditsProps> = ({ basketDenom }) => {
       titleAlign="left"
       classes={styles}
     >
-      <EcocreditsTable credits={credits} />
+      <BasketEcocreditsTable batches={batches} />
     </Section>
   );
 };

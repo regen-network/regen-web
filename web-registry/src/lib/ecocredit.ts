@@ -3,13 +3,16 @@ import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1
 import qs from 'querystring';
 
 import { ledgerRestUri } from '../ledger';
+import type { PageResponse } from '../types/ledger/base';
 import type {
   BatchDataResponse,
   BatchRowData,
   QueryBalanceResponse,
+  QueryBasketBalancesResponse,
+  QueryBasketResponse,
+  QueryBatchInfoResponse,
   TableCredits,
 } from '../types/ledger/ecocredit';
-import type { PageResponse } from '../types/ledger/base';
 
 const ECOCREDIT_MESSAGE_TYPES = {
   SEND: "message.action='/regen.ecocredit.v1alpha1.MsgSend'",
@@ -130,3 +133,64 @@ const getAccountEcocreditsForBatch = (
     `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/balance/${account}`,
   );
 };
+
+export async function getBasket(
+  basketDenom: string,
+): Promise<QueryBasketResponse> {
+  return Promise.resolve({
+    basket: {
+      id: 'basket-1',
+      basketDenom: 'eco.uC.rNCT',
+      name: 'rNCT',
+      disableAutoRetire: false,
+      creditTypeAbbrev: 'C',
+      dateCriteria: {
+        startDateWindow: '1000',
+      },
+      exponent: '6',
+    },
+    classes: ['C01', 'C02'],
+  });
+}
+
+export async function getBasketBalances(
+  basketDenom: string,
+): Promise<QueryBasketBalancesResponse> {
+  return Promise.resolve({
+    balances: [
+      {
+        basketId: 'basket-1',
+        batchDenom: 'C01-20170101-20191231-001',
+        balance: '17000',
+      },
+      {
+        basketId: 'basket-1',
+        batchDenom: 'C01-20170101-20191231-002',
+        balance: '23000',
+      },
+      {
+        basketId: 'basket-1',
+        batchDenom: 'C01-20170101-20201231-003',
+        balance: '30000',
+      },
+    ],
+  });
+}
+
+export async function getBatchInfo(
+  batchDenom: string,
+): Promise<QueryBatchInfoResponse> {
+  return Promise.resolve({
+    info: {
+      classId: 'C01',
+      batchDenom: 'C01-20170101-20191231-001',
+      issuer: 'regen1qdqafsy2jfuyq7rxzkdwyytmrxlfn8csq0uetx',
+      totalAmount: '13000.00',
+      metadata: 'MA==',
+      amountCancelled: '38243.00',
+      startDate: '2017-01-01T00:00:00Z',
+      endDate: '2019-12-31T00:00:00Z',
+      projectLocation: 'AU-NSW 2453',
+    },
+  });
+}

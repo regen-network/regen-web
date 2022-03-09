@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import BasketEcocreditsTable from './BasketEcocreditsTable';
-import { BatchInfo } from '../../types/ledger/ecocredit';
+import { IBatchInfo } from '../../types/ledger/ecocredit';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 interface BasketEcocreditsProps {
-  batches: BatchInfo[];
+  batches: IBatchInfo[];
 }
 
 // This component will manage other components organized in tabs

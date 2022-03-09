@@ -5,7 +5,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { Statistic } from '../molecules';
 import { getBatchesWithSupply } from '../../lib/ecocredit';
-import type { BatchRowData } from '../../types/ledger/ecocredit';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
 interface CreditTotalData {
   tradeable: number;
@@ -46,7 +46,7 @@ const CreditTotals: React.FC = () => {
   };
 
   const sumBatchTotals = useCallback(
-    (batches: BatchRowData[]): CreditTotalData => {
+    (batches: BatchInfoWithSupply[]): CreditTotalData => {
       let tradeable = 0;
       let retired = 0;
       let created = 0;
@@ -69,7 +69,7 @@ const CreditTotals: React.FC = () => {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       const res = await getBatchesWithSupply();
-      const data: BatchRowData[] = res?.data;
+      const data: BatchInfoWithSupply[] = res?.data;
 
       if (data) {
         const creditTotals = sumBatchTotals(data);

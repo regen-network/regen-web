@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export function getFormattedDate(
   date?: string | Date | null,
   options?: Intl.DateTimeFormatOptions | undefined,
@@ -37,4 +39,13 @@ export function formatStandardInfo(info: StandardInfo): string {
   return `${info.name}, ${info.documentId ? `${info.documentId}, ` : ''}${
     info.version
   }`;
+}
+
+/** wrapper for dayjs format function with default format `MMMM D, YYYY` (ex
+ * "December 31, 2016") */
+export function formatDate(
+  date: dayjs.ConfigType,
+  format: string = 'MMMM D, YYYY',
+): string {
+  return dayjs(date).format(format);
 }

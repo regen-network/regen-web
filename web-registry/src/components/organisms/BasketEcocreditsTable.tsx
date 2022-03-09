@@ -5,14 +5,14 @@ import { makeStyles } from '@mui/styles';
 
 import {
   ActionsTable,
-  renderActionButtonsFunc,
+  RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { NoEcocredits } from '../molecules';
-import type { BatchInfo } from '../../types/ledger/ecocredit';
+import { NoCredits } from '../molecules';
+import type { IBatchInfo } from '../../types/ledger/ecocredit';
 
 const formatDate = (date: string | Date | undefined): string =>
   dayjs(date).format('MMMM D, YYYY');
@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface BasketEcocreditsTableProps {
-  batches: BatchInfo[];
-  renderActionButtons?: renderActionButtonsFunc;
+  batches: IBatchInfo[];
+  renderActionButtons?: RenderActionButtonsFunc;
 }
 
 const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
@@ -42,7 +42,7 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
 }) => {
   const styles = useStyles();
   if (!batches?.length) {
-    return <NoEcocredits title="No credits batches to display" />;
+    return <NoCredits title="No credit batches to display" />;
   }
 
   return (

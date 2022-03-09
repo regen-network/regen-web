@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import cx from 'clsx';
 import Fade from '@mui/material/Fade';
 
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -59,7 +60,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   const ReadButton = (): JSX.Element => (
     <OutlinedButton
       onClick={handleChange}
-      classes={{ root: classes.button, outlined: classes.buttonLabel }}
+      classes={{ root: cx(classes.button, classes.buttonLabel) }}
       endIcon={
         expanded ? (
           <ArrowDownIcon direction="up" color={theme.palette.secondary.main} />

@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-// import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+import { Box, Grid, Link, styled } from '@mui/material';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
@@ -23,12 +21,12 @@ import { getParty, getDisplayParty } from '../../lib/transform';
 import { getSanityImgSrc } from '../../lib/imgSrc';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { client } from '../../sanity';
-
-interface ProjectTopProps {
-  data?: ProjectByHandleQuery;
-  geojson?: any;
-  isGISFile?: boolean;
-}
+import {
+  BatchInfoWithSupply,
+  BatchTotalsForProject,
+} from '../../types/ledger/ecocredit';
+import { ProjectCreditBatchesTable } from '.';
+import { ProjectBatchTotals } from '../molecules';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -79,17 +77,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(3),
     },
   },
-  projectPlace: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(6),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(5),
-    },
-  },
-  glanceCard: {
-    paddingTop: theme.spacing(6),
-  },
   media: {
     width: '100%',
     borderRadius: '5px',
@@ -111,22 +98,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       height: theme.spacing(55.25),
     },
   },
-  story: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(14),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(11.75),
-    },
-  },
-  quote: {
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: theme.spacing(4),
-    },
-  },
   quotes: {
     color: theme.palette.secondary.main,
     lineHeight: 0,
@@ -139,38 +110,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(12),
     },
   },
-  textQuote: {
-    position: 'relative',
-    zIndex: 1,
-  },
-  firstQuote: {
-    top: theme.spacing(4),
-    [theme.breakpoints.down('sm')]: {
-      left: theme.spacing(-3.75),
-    },
-    [theme.breakpoints.up('sm')]: {
-      left: theme.spacing(-4.5),
-    },
-  },
-  secondQuote: {
-    [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(3.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      bottom: theme.spacing(4),
-    },
-    marginLeft: theme.spacing(-2.5),
-  },
-  rightGrid: {
-    [theme.breakpoints.up('sm')]: {
-      paddingRight: theme.spacing(19),
-    },
-  },
-  leftGrid: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(6.25),
-    },
-  },
   icon: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(1),
@@ -178,11 +117,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(0.25),
     },
-  },
-  creditClassInfo: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginTop: theme.spacing(2.5),
   },
   creditClassDetail: {
     display: 'flex',
@@ -209,10 +143,18 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(14),
     },
   },
-  arrowIcon: {
-    height: theme.spacing(3.5),
-    position: 'absolute',
-    top: theme.spacing(0.85),
+}));
+
+const QuoteMark = styled('span')(({ theme }) => ({
+  color: theme.palette.secondary.main,
+  lineHeight: 0,
+  zIndex: 0,
+  position: 'absolute',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: theme.spacing(9),
+  },
+  [theme.breakpoints.up('sm')]: {
+    fontSize: theme.spacing(12),
   },
 }));
 
@@ -227,10 +169,10 @@ function ProjectTopLink({
   url?: string | null;
   creditClassId?: string; // on-chain credit class id (e.g. "C01")
 }): JSX.Element {
-  const classes = useStyles();
+  const styles = useStyles();
 
   const text = (
-    <span className={classes.darkText}>
+    <span className={styles.darkText}>
       {name && ReactHtmlParser(name)}
       {creditClassId && name ? (
         <span> ({creditClassId})</span>
@@ -240,14 +182,14 @@ function ProjectTopLink({
     </span>
   );
   return (
-    <div className={classes.creditClassDetail}>
-      <Title className={classes.creditClass} variant="h5">
+    <div className={styles.creditClassDetail}>
+      <Title className={styles.creditClass} variant="h5">
         {label}:
       </Title>
-      <div className={classes.creditClassName}>
+      <div className={styles.creditClassName}>
         {url ? (
           <Link
-            className={classes.link}
+            className={styles.link}
             href={url}
             rel="noopener noreferrer"
             target="_blank"
@@ -267,8 +209,17 @@ function ProjectTopSection({
   data,
   geojson,
   isGISFile,
-}: ProjectTopProps): JSX.Element {
-  const classes = useStyles();
+  batchData,
+}: {
+  data?: ProjectByHandleQuery;
+  geojson?: any;
+  isGISFile?: boolean;
+  batchData?: {
+    batches?: BatchInfoWithSupply[];
+    totals?: BatchTotalsForProject;
+  };
+}): JSX.Element {
+  const styles = useStyles();
 
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
@@ -313,14 +264,14 @@ function ProjectTopSection({
   }));
 
   return (
-    <Section classes={{ root: classes.section }}>
+    <Section classes={{ root: styles.section }}>
       <Grid container>
-        <Grid item xs={12} md={8} className={classes.rightGrid}>
+        <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
           {/* TODO Show on-chain project id if no off-chain name */}
           <Title variant="h1">{metadata?.['http://schema.org/name']}</Title>
-          <div className={classes.projectPlace}>
+          <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo
-              iconClassName={classes.icon}
+              iconClassName={styles.icon}
               // TODO Format and show on-chain project location if no off-chain location
               place={metadata?.['http://schema.org/location']?.place_name}
               area={
@@ -330,7 +281,7 @@ function ProjectTopSection({
               }
               areaUnit={unit && qudtUnitMap[unit]}
             />
-            <div className={classes.creditClassInfo}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2.5 }}>
               {creditClass && creditClassVersion && (
                 <>
                   <ProjectTopLink
@@ -403,11 +354,11 @@ function ProjectTopSection({
                   url={registry.organizationByPartyId?.website}
                 />
               )}
-            </div>
-          </div>
+            </Box>
+          </Box>
           {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
-              <div className={classes.glanceCard}>
+              <Box sx={{ pt: 6 }}>
                 <GlanceCard
                   text={glanceText}
                   imageStorageBaseUrl={imageStorageBaseUrl}
@@ -416,16 +367,16 @@ function ProjectTopSection({
                   isGISFile={isGISFile}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                 />
-              </div>
+              </Box>
             </LazyLoad>
           )}
           {landStewardStoryTitle && (
-            <Title className={classes.story} variant="h2">
+            <Title sx={{ pt: { xs: 11.75, sm: 14 } }} variant="h2">
               Story
             </Title>
           )}
           {landStory && (
-            <Description className={classes.description}>
+            <Description className={styles.description}>
               {landStory}
             </Description>
           )}
@@ -438,26 +389,26 @@ function ProjectTopSection({
                 videoURL,
               ) ? (
                 <iframe
-                  className={cx(classes.iframe, classes.media)}
+                  className={cx(styles.iframe, styles.media)}
                   title={metadata?.['http://schema.org/name'] || 'project'}
                   src={videoURL}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 ></iframe>
               ) : (
-                <video className={classes.media} controls>
+                <video className={styles.media} controls>
                   <source src={videoURL} />
                 </video>
               ))}
             {landStewardPhoto && (
               <img
-                className={classes.media}
+                className={styles.media}
                 alt={landStewardPhoto}
                 src={landStewardPhoto}
               />
             )}
           </LazyLoad>
           {landStewardStoryTitle && (
-            <Title variant="h4" className={classes.tagline}>
+            <Title variant="h4" className={styles.tagline}>
               {landStewardStoryTitle}
             </Title>
           )}
@@ -470,25 +421,35 @@ function ProjectTopSection({
             <div>
               <Title
                 variant="h4"
-                className={cx(classes.quote, classes.tagline)}
+                sx={{ ml: { xs: 4, sm: 4.5 } }}
+                className={styles.tagline}
               >
-                <span className={cx(classes.firstQuote, classes.quotes)}>
+                <QuoteMark sx={{ top: 16, left: { xs: -15, sm: -18 } }}>
                   “
-                </span>
-                <span className={classes.textQuote}>
+                </QuoteMark>
+                <Box component="span" sx={{ position: 'relative', zIndex: 1 }}>
                   {quote['http://regen.network/quote']}
-                </span>
-                <span className={cx(classes.secondQuote, classes.quotes)}>
+                </Box>
+                <QuoteMark sx={{ ml: -2.5, bottom: { xs: 14, sm: 16 } }}>
                   ”
-                </span>
+                </QuoteMark>
               </Title>
-              <Title variant="h6" className={classes.quotePersonName}>
+              <Title variant="h6" className={styles.quotePersonName}>
                 {quote['http://schema.org/name']}
               </Title>
-              <Description className={classes.quotePersonRole}>
+              <Description className={styles.quotePersonRole}>
                 {quote['http://schema.org/jobTitle']}
               </Description>
             </div>
+          )}
+          {batchData?.totals && (
+            <ProjectBatchTotals
+              totals={batchData.totals}
+              sx={{
+                mt: { xs: 10, sm: 12, md: 16 },
+                mb: { xs: 10, sm: 12, md: 0 },
+              }}
+            />
           )}
           {/* TODO uncomment code below and display on-chain project.metadata */}
           {/* <>
@@ -511,7 +472,7 @@ function ProjectTopSection({
             </Description>
           </> */}
         </Grid>
-        <Grid item xs={12} md={4} className={classes.leftGrid}>
+        <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
             projectDeveloper={getDisplayParty(
               'http://regen.network/projectDeveloper',
@@ -535,6 +496,15 @@ function ProjectTopSection({
           />
         </Grid>
       </Grid>
+      {batchData?.batches && batchData.batches.length > 0 && (
+        // spacing here based on paddding-top for `<Section />` component
+        <Box sx={{ mt: { xs: 17.75, sm: 22.25 } }}>
+          <Title variant="h3" sx={{ pb: 8 }}>
+            Credit Batches
+          </Title>
+          <ProjectCreditBatchesTable batches={batchData.batches} />
+        </Box>
+      )}
     </Section>
   );
 }

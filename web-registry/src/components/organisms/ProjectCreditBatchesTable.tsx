@@ -11,7 +11,7 @@ import { formatDate } from 'web-components/lib/utils/format';
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
 import { NoCredits } from '../molecules';
-import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -22,12 +22,12 @@ const Amount = styled('div')({
   wordWrap: 'break-word',
 });
 
-export const EcocreditsTable: React.FC<{
-  credits: BatchInfoWithBalance[];
+export const ProjectCreditBatchesTable: React.FC<{
+  batches: BatchInfoWithSupply[];
   renderActionButtons?: RenderActionButtonsFunc;
-}> = ({ credits, renderActionButtons }) => {
-  if (!credits?.length) {
-    return <NoCredits title="No ecocredits to display" />;
+}> = ({ batches, renderActionButtons }) => {
+  if (!batches?.length) {
+    return <NoCredits title="No batches to display" />;
   }
 
   return (
@@ -35,38 +35,40 @@ export const EcocreditsTable: React.FC<{
       tableLabel="ecocredits table"
       renderActionButtons={renderActionButtons}
       headerRows={[
-        <Box
-          sx={{
-            minWidth: {
-              xs: 'auto',
-              sm: '11rem',
-              lg: '13rem',
-            },
-          }}
-        >
+        <Box sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}>
           Batch Denom
         </Box>,
         'Issuer',
-        'Credit Class',
         <Amount>Amount Tradable</Amount>,
         <Amount>Amount Retired</Amount>,
+        <Amount>Amount Cancelled</Amount>,
         'Batch Start Date',
         'Batch End Date',
         'Project Location',
       ]}
-      rows={credits.map((row, i) => {
+      rows={batches.map((row, i) => {
         return [
-          row.batch_denom,
+          <Box
+            component="span"
+            sx={{
+              whiteSpace: {
+                xs: 'wrap-word',
+                md: 'nowrap',
+              },
+            }}
+          >
+            {row.batch_denom}
+          </Box>,
           <a
             href={getAccountUrl(row.issuer as string)}
             target="_blank"
             rel="noopener noreferrer"
           >
-            {truncate(row.issuer as string)}
+            {truncate(row.issuer)}
           </a>,
-          row.class_id,
-          formatNumber(row.tradable_amount),
-          formatNumber(row.retired_amount),
+          formatNumber(row.tradable_supply),
+          formatNumber(row.retired_supply),
+          formatNumber(row.amount_cancelled),
           <GreyText>{formatDate(row.start_date)}</GreyText>,
           <GreyText>{formatDate(row.end_date)}</GreyText>,
           row.project_location,

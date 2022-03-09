@@ -11,7 +11,14 @@ export function LabeledNumber({
   number: number | string;
 }): JSX.Element {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        justifyContent: 'space-between',
+      }}
+    >
       <Typography
         variant="overline"
         sx={{

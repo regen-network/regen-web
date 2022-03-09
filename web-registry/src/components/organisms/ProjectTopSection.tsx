@@ -15,7 +15,6 @@ import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import ReadMore from 'web-components/lib/components/read-more';
-import { LabeledNumber } from 'web-components/lib/components/text-layouts';
 import { ProjectByHandleQuery } from '../../generated/graphql';
 import { useSdgByIriQuery } from '../../generated/sanity-graphql';
 import { getParty, getDisplayParty } from '../../lib/transform';
@@ -27,6 +26,7 @@ import {
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
 import { ProjectCreditBatchesTable } from '.';
+import { ProjectBatchTotals } from '../molecules';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -443,28 +443,13 @@ function ProjectTopSection({
             </div>
           )}
           {batchData?.totals && (
-            <Box
+            <ProjectBatchTotals
+              totals={batchData.totals}
               sx={{
-                display: 'flex',
-                gap: 2,
-                justifyContent: 'space-between',
                 mt: { xs: 10, sm: 12, md: 16 },
                 mb: { xs: 10, sm: 12, md: 0 },
               }}
-            >
-              <LabeledNumber
-                label="Credits Tradable"
-                number={batchData.totals.tradable_supply}
-              />
-              <LabeledNumber
-                label="Credits Retired"
-                number={batchData.totals.retired_supply}
-              />
-              <LabeledNumber
-                label="Credits Cancelled"
-                number={batchData.totals.amount_cancelled}
-              />
-            </Box>
+            />
           )}
           {/* TODO uncomment code below and display on-chain project.metadata */}
           {/* <>
@@ -512,7 +497,8 @@ function ProjectTopSection({
         </Grid>
       </Grid>
       {batchData?.batches && batchData.batches.length > 0 && (
-        <Box sx={{ mt: { xs: 10, sm: 12, md: 20 } }}>
+        // spacing here based on paddding-top for `<Section />` component
+        <Box sx={{ mt: { xs: 17.75, sm: 22.25 } }}>
           <Title variant="h3" sx={{ pb: 8 }}>
             Credit Batches
           </Title>

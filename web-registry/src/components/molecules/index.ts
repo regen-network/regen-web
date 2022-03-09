@@ -13,5 +13,6 @@ export * from './FeaturedSection';
 export * from './ImageGridSection';
 export * from './EditProjectPageFooter';
 export * from './ProjectPageFooter';
+export * from './ProjectBatchTotals';
 export * from './Statistic';
 export * from './NoCredits';

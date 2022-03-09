@@ -37,7 +37,7 @@ const BorderLeft = styled('div')(({ theme }) => ({
  * const selectedRow = data[i];
  * ```
  *  */
-export type RenderActionButtonsFunc = (i: number) => React.ReactElement;
+export type RenderActionButtonsFunc = (i: number) => React.ReactNode;
 
 const ActionsTable: React.FC<{
   tableLabel: string;

@@ -48,5 +48,38 @@ export interface Basket {
 
 export interface QueryBasketsResponse {
   baskets: Basket[];
-  pagination?: PageResponse;
+  pagination: PageResponse;
+}
+
+export interface ClassInfo {
+  /**
+   *  class_id is the unique ID of credit class.
+   */
+  class_id: string;
+  /**
+   *  admin is the designer of the credit class. In Hambach, this is identified as "designer".
+   */
+  admin?: string;
+  designer?: string;
+  /**
+   *  issuers are the approved issuers of the credit class.
+   */
+  issuers: string[];
+  /**
+   *  metadata is a hashed IRI that can be used to fetch JSON-LD from the metadata-graph DB table
+   */
+  metadata: Uint8Array;
+  credit_type: CreditType;
+}
+
+interface CreditType {
+  abbreviation: string;
+  name: string;
+  precision: number;
+  unit: string;
+}
+
+export interface QueryClassesResponse {
+  classes: ClassInfo[];
+  pagination: PageResponse;
 }

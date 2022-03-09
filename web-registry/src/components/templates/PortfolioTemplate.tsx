@@ -8,7 +8,7 @@ import { renderActionButtonsFunc } from 'web-components/lib/components/table/Act
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { getEcocreditsForAccount } from '../../lib/ecocredit';
-import { ledgerRestUri } from '../../ledger';
+import { ledgerRESTUri } from '../../lib/ledger';
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
 import type { TableCredits, TableBaskets } from '../../types/ledger/ecocredit';
 
@@ -44,7 +44,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   const [baskets, setBaskets] = useState<TableBaskets[]>([]);
 
   useEffect(() => {
-    if (!ledgerRestUri || !accountAddress) return;
+    if (!ledgerRESTUri || !accountAddress) return;
     const fetchData = async (): Promise<void> => {
       const credits = await getEcocreditsForAccount(accountAddress);
       setCredits(credits);

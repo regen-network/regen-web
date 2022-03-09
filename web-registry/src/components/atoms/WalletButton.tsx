@@ -4,7 +4,8 @@ import { IconButton } from '@mui/material';
 import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
-import { useWallet, chainId } from '../../lib/wallet';
+import { useWallet } from '../../lib/wallet';
+import { chainId } from '../../lib/ledger';
 
 const useStyles = makeStyles(theme => ({
   root: {

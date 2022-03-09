@@ -2,12 +2,13 @@ import axios, { AxiosResponse } from 'axios';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import qs from 'querystring';
 
-import { ledgerRestUri } from '../ledger';
+import { expLedger, ledgerRESTUri } from '../lib/ledger';
 import type {
   BatchDataResponse,
   BatchRowData,
   QueryBalanceResponse,
   TableCredits,
+  QueryClassesResponse,
 } from '../types/ledger/ecocredit';
 import type { PageResponse } from '../types/ledger/base';
 
@@ -19,31 +20,67 @@ const ECOCREDIT_MESSAGE_TYPES = {
   RETIRE: "message.action='/regen.ecocredit.v1alpha1.MsgRetire'",
 };
 
-export const getBatches = async (
+export const getClasses = async (
   params?: URLSearchParams,
-): Promise<
-  AxiosResponse<{
-    pagination: PageResponse;
-    batches: BatchRowData[];
-  }>
-> => {
-  return axios.get(`${ledgerRestUri}/regen/ecocredit/v1alpha1/batches`, {
+): Promise<AxiosResponse<QueryClassesResponse>> => {
+  return axios.get(`${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes`, {
     params,
   });
 };
 
+export const getBatches = async (
+  params?: URLSearchParams,
+): Promise<{
+  pagination?: PageResponse;
+  batches: BatchRowData[];
+}> => {
+  // Currently, the experimental testnet Hambach is running an old version of regen-ledger (v2.0.0-beta1)
+  // which provides a different API than latest v3.0 for querying credit batches.
+  if (expLedger) {
+    const { data } = await axios.get(
+      `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches`,
+      {
+        params,
+      },
+    );
+    return data;
+  } else {
+    // With 3.0 regen-ledger version, we first have to query all classes and then batches per class.
+    // The url pagination params are just ignored here since they can't really be used.
+    // Indeed we cannot know in advance how many credit classes should be queried initially
+    // to get the desired number of credit batches.
+    // We're still return some custom built pagination response so that the TablePagination
+    // still displays correct total values of credit batches.
+    const {
+      data: { classes },
+    } = await getClasses();
+    const arr: BatchRowData[] = await Promise.all(
+      classes.map(async c => {
+        const { data } = await axios.get(
+          `${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes/${c.class_id}/batches`,
+        );
+        return data.batches;
+      }),
+    );
+
+    const batches = arr.flat();
+    return {
+      batches,
+      pagination: { total: batches.length.toString(), next_key: null },
+    };
+  }
+};
+
 export const getBatchSupply = (batchDenom: string): Promise<AxiosResponse> => {
   return axios.get(
-    `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/supply`,
+    `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/supply`,
   );
 };
 
 export const getEcocreditsForAccount = async (
   account: string,
 ): Promise<TableCredits[]> => {
-  const {
-    data: { batches },
-  } = await getBatches();
+  const { batches } = await getBatches();
   const credits = await Promise.all(
     batches.map(async batch => {
       const {
@@ -64,7 +101,7 @@ export const getEcocreditsForAccount = async (
 };
 
 export const getTxsByEvent = (msgType: string): Promise<AxiosResponse> => {
-  return axios.get(`${ledgerRestUri}/cosmos/tx/v1beta1/txs`, {
+  return axios.get(`${ledgerRESTUri}/cosmos/tx/v1beta1/txs`, {
     params: {
       events: [msgType],
     },
@@ -94,11 +131,11 @@ export const getBatchesWithSupply = async (
   params?: URLSearchParams,
 ): Promise<BatchDataResponse> => {
   return getBatches(params).then(async res => {
-    const creditBatches = res?.data?.batches;
+    const creditBatches = res?.batches;
     const batchesWithSupply = await addSupplyDataToBatch(creditBatches);
     return {
       data: batchesWithSupply,
-      pagination: res?.data?.pagination,
+      pagination: res?.pagination,
     };
   });
 };
@@ -127,6 +164,6 @@ const getAccountEcocreditsForBatch = (
   account: string,
 ): Promise<AxiosResponse<QueryBalanceResponse>> => {
   return axios.get(
-    `${ledgerRestUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/balance/${account}`,
+    `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/balance/${account}`,
   );
 };

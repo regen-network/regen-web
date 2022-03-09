@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { RegenApi } from '@regen-network/api';
 
-import getApiUri from './lib/apiUri';
-import { chainId } from './lib/wallet';
+import { ledgerRPCUri } from './lib/ledger';
 
 export type ContextType = {
   loading: boolean;
   api: RegenApi | undefined;
   error: unknown;
 };
-
-// Simple proxy endpoint for REST requests. We check for chainId as an on/off switch.
-export const ledgerRestUri = chainId ? `${getApiUri()}/ledger-rest` : undefined;
 
 async function connect(): Promise<RegenApi | undefined> {
   // Create a new instance of the RegenApi class.
@@ -24,7 +20,7 @@ async function connect(): Promise<RegenApi | undefined> {
     connection: {
       // Here, we are using the Tendermint RPC client connection.
       type: 'tendermint',
-      url: `${getApiUri()}/ledger`,
+      url: ledgerRPCUri,
     },
   });
   return api;

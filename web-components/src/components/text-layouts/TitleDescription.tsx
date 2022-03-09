@@ -7,13 +7,6 @@ import Title from '../title';
 import Description from '../description';
 import { BlockContent, SanityBlockOr } from '../block-content';
 
-interface TitleDescriptionProps {
-  title: string;
-  description?: SanityBlockOr<string>; // accepts an HTML string or an array of sanity BlockContent
-  className?: string;
-  children?: React.ReactNode;
-}
-
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'relative',
@@ -36,12 +29,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function TitleDescription({
+export function TitleDescription({
   title,
   description,
   className,
   children,
-}: TitleDescriptionProps): JSX.Element {
+}: {
+  title: string;
+  description?: SanityBlockOr<string>; // accepts an HTML string or an array of sanity BlockContent
+  className?: string;
+  children?: React.ReactNode;
+}): JSX.Element {
   const classes = useStyles();
   return (
     <div className={clsx(className, classes.root)}>

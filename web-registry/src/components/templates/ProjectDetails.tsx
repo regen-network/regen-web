@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useTheme } from '@mui/styles';
+import { Box } from '@mui/material';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation, useParams } from 'react-router-dom';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { getFormattedDate } from 'web-components/lib/utils/format';
 import IssuanceModal, {
   IssuanceModalData,
 } from 'web-components/lib/components/modal/IssuanceModal';
-import Title from 'web-components/lib/components/title';
 import Timeline from 'web-components/lib/components/timeline';
 import ProjectMedia, {
   Asset,
@@ -51,54 +50,12 @@ import {
 } from '../../generated/graphql';
 import { useEcologicalImpactByIriQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  projectContent: {
-    maxWidth: theme.breakpoints.values.lg,
-    margin: '0 auto',
-  },
-  projectDetails: {
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: theme.spacing(5),
-      paddingLeft: theme.spacing(5),
-    },
-    [theme.breakpoints.between('md', 'xl')]: {
-      paddingLeft: theme.spacing(35.875),
-      paddingRight: theme.spacing(35.875),
-    },
-    [theme.breakpoints.down('md')]: {
-      paddingLeft: theme.spacing(10),
-      paddingRight: theme.spacing(10),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(17.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(13)} ${theme.spacing(3.75)} 0`,
-    },
-  },
-  projectTimeline: {
-    backgroundColor: theme.palette.primary.main,
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(21.5),
-      paddingBottom: theme.spacing(22.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(17),
-    },
-  },
-  timelineTitle: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(12),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(10),
-    },
-  },
-}));
+import { getBatchesWithSupplyForDenoms } from '../../lib/ecocredit';
+import {
+  BatchInfoWithSupply,
+  BatchTotalsForProject,
+} from '../../types/ledger/ecocredit';
+import Section from 'web-components/lib/components/section';
 
 interface Project {
   creditPrice?: CreditPrice;
@@ -122,6 +79,8 @@ function ProjectDetails(): JSX.Element {
   const walletContext = useWallet();
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
+  const [batchTotals, setBatchTotals] = useState<BatchTotalsForProject>();
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
@@ -129,11 +88,36 @@ function ProjectDetails(): JSX.Element {
     txClient = new ServiceClientImpl(api.connection.queryConnection);
   }
 
+  // fetch project
   const { data } = useProjectByHandleQuery({
     skip: !projectId,
     variables: { handle: projectId as string },
   });
   const metadata = data?.projectByHandle?.metadata;
+
+  const vintageBatchDenoms: string[] = (
+    data?.projectByHandle?.creditVintagesByProjectId?.nodes || []
+  )
+    .map(v => v?.batchDenom || '')
+    .filter(Boolean);
+
+  useEffect(() => {
+    if (vintageBatchDenoms?.length > 0) {
+      const fetch = async (): Promise<void> => {
+        try {
+          const { batches, totals } = await getBatchesWithSupplyForDenoms(
+            vintageBatchDenoms,
+          );
+          setBatchData(batches);
+          setBatchTotals(totals);
+        } catch (err) {
+          console.error(err); // eslint-disable-line no-console
+        }
+      };
+      fetch();
+    }
+  }, [vintageBatchDenoms.length]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const { data: projectsData } = useMoreProjectsQuery();
 
   const [submitted, setSubmitted] = useState(false);
@@ -142,9 +126,6 @@ function ProjectDetails(): JSX.Element {
   useEffect(() => {
     setPageView(location);
   }, [location]);
-
-  const styles = useStyles();
-  const theme = useTheme<Theme>();
 
   const otherProjects = projectsData?.allProjects?.nodes?.filter(
     p => p?.handle !== projectId,
@@ -279,8 +260,9 @@ function ProjectDetails(): JSX.Element {
     skip: !impactIris,
   });
 
+  const theme = useTheme<Theme>();
   return (
-    <div className={styles.root}>
+    <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
         location={location}
         siteMetadata={siteMetadata}
@@ -298,7 +280,16 @@ function ProjectDetails(): JSX.Element {
           imageCredits={metadata?.['http://schema.org/creditText']}
         />
       )}
-      <ProjectTopSection data={data} geojson={geojson} isGISFile={isGISFile} />
+      <ProjectTopSection
+        data={data}
+        batchData={{
+          batches: batchData,
+          totals: batchTotals,
+        }}
+        geojson={geojson}
+        isGISFile={isGISFile}
+      />
+
       {impactData?.allEcologicalImpact &&
         impactData?.allEcologicalImpact.length > 0 && (
           <div className="topo-background-alternate">
@@ -344,34 +335,31 @@ function ProjectDetails(): JSX.Element {
 
       {data?.projectByHandle?.eventsByProjectId?.nodes &&
         data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
-          <div
-            className={clsx(
-              'topo-background-alternate',
-              styles.projectDetails,
-              styles.projectTimeline,
-              styles.projectContent,
-            )}
+          <Box
+            className="topo-background-alternate"
+            sx={{ pb: { xs: 17, sm: 22.25 } }}
           >
-            <Title className={styles.timelineTitle} variant="h2">
-              Timeline
-            </Title>
-            <Timeline
-              txClient={txClient}
-              onViewOnLedger={viewOnLedger}
-              events={data.projectByHandle.eventsByProjectId.nodes.map(
-                node => ({
-                  date: getFormattedDate(node?.date, {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  }),
-                  summary: node?.summary || '',
-                  description: node?.description || '',
-                  creditVintage: node?.creditVintageByEventId,
-                }),
-              )}
-            />
-          </div>
+            <Section titleVariant="h2" title="Timeline" titleAlign="left">
+              <Box sx={{ mt: { xs: 10, sm: 12 } }}>
+                <Timeline
+                  txClient={txClient}
+                  onViewOnLedger={viewOnLedger}
+                  events={data.projectByHandle.eventsByProjectId.nodes.map(
+                    node => ({
+                      date: getFormattedDate(node?.date, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      }),
+                      summary: node?.summary || '',
+                      description: node?.description || '',
+                      creditVintage: node?.creditVintageByEventId,
+                    }),
+                  )}
+                />
+              </Box>
+            </Section>
+          </Box>
         )}
 
       {otherProjects && otherProjects.length > 0 && (
@@ -467,7 +455,7 @@ function ProjectDetails(): JSX.Element {
         </>
       )}
       {submitted && <Banner text="Thanks for submitting your information!" />}
-    </div>
+    </Box>
   );
 }
 

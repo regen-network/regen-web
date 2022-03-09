@@ -44,6 +44,7 @@ fragment creditVintageFields on CreditVintage {
   units
   certificateLink
   txHash
+  batchDenom
   creditClassVersionByCreditClassVersionIdAndCreditClassVersionCreatedAt {
     name
     version
@@ -115,6 +116,11 @@ query ProjectByHandle($handle: String!) {
     }
     partyByResellerId {
       ...partyFields
+    }
+    creditVintagesByProjectId {
+      nodes {
+        batchDenom
+      }
     }
     documentsByProjectId {
       nodes {

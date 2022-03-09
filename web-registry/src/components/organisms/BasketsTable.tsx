@@ -3,19 +3,19 @@ import { Box, Grid } from '@mui/material';
 
 import {
   ActionsTable,
-  renderActionButtonsFunc,
+  RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 
-import { NoEcocredits } from '../molecules';
+import { NoCredits } from '../molecules';
 import type { TableBaskets } from '../../types/ledger/ecocredit';
 import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
 
 export const BasketsTable: React.FC<{
   baskets: TableBaskets[];
-  renderActionButtons?: renderActionButtonsFunc;
+  renderActionButtons?: RenderActionButtonsFunc;
 }> = ({ baskets, renderActionButtons }) => {
   if (!baskets?.length) {
-    return <NoEcocredits title="No basket tokens to display" />;
+    return <NoCredits title="No basket tokens to display" />;
   }
   return (
     <ActionsTable

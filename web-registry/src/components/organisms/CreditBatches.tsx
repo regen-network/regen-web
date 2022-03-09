@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
-import dayjs from 'dayjs';
 import cx from 'clsx';
 
 import { formatNumber } from 'web-components/lib/components/table';
@@ -10,13 +9,14 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 
 import { truncate } from '../../lib/wallet';
-import type { BatchRowData } from '../../types/ledger/ecocredit';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
+import { formatDate } from 'web-components/lib/utils/format';
 
 interface HeadCell {
-  id: keyof BatchRowData;
+  id: keyof BatchInfoWithSupply;
   label: string;
   numeric: boolean;
   wrap?: boolean;
@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const CreditBatches: React.FC = () => {
   const styles = useStyles();
-  const [batches, setBatches] = useState<any[]>([]);
+  const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
 
   const fetchData = (): void => {
     getBatchesWithSupply().then(sortableBatches => {
@@ -136,7 +136,5 @@ const CreditBatches: React.FC = () => {
     </Section>
   ) : null;
 };
-
-const formatDate = (date: Date): string => dayjs(date).format('MMMM D, YYYY');
 
 export { CreditBatches };

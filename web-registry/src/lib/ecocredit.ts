@@ -45,12 +45,10 @@ export const getBatches = async (
     );
     return data;
   } else {
-    // With 3.0 regen-ledger version, we first have to query all classes and then batches per class.
+    // With regen-ledger v3.0, we first have to query all classes and then batches per class.
     // The url pagination params are just ignored here since they can't really be used.
     // Indeed we cannot know in advance how many credit classes should be queried initially
     // to get the desired number of credit batches.
-    // We're still return some custom built pagination response so that the TablePagination
-    // still displays correct total values of credit batches.
     const {
       data: { classes },
     } = await getClasses();
@@ -66,7 +64,6 @@ export const getBatches = async (
     const batches = arr.flat();
     return {
       batches,
-      pagination: { total: batches.length.toString(), next_key: null },
     };
   }
 };

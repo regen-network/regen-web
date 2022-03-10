@@ -13,6 +13,11 @@ interface ReadMoreProps {
   children: string;
   maxLength?: number;
   restMinLength?: number;
+  classes?: {
+    root?: string;
+    textContainer?: string;
+    description?: string;
+  };
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -45,8 +50,9 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   maxLength = 700,
   restMinLength = 300,
   children,
+  classes,
 }) => {
-  const classes = useStyles({});
+  const styles = useStyles({});
   const theme = useTheme();
 
   const [expanded, setExpanded] = useState(false);
@@ -60,7 +66,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   const ReadButton = (): JSX.Element => (
     <OutlinedButton
       onClick={handleChange}
-      classes={{ root: cx(classes.button, classes.buttonLabel) }}
+      classes={{ root: cx(styles.button, styles.buttonLabel) }}
       endIcon={
         expanded ? (
           <ArrowDownIcon direction="up" color={theme.palette.secondary.main} />
@@ -77,16 +83,16 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   );
 
   return (
-    <div className={classes.root}>
-      <div className={classes.textContainer}>
-        <Description fontSize={fontSize}>
+    <div className={cx(styles.root, classes?.root)}>
+      <div className={cx(styles.textContainer, classes?.textContainer)}>
+        <Description className={classes?.description} fontSize={fontSize}>
           {texts.truncated}
           {texts.rest && !expanded && <ReadButton />}
         </Description>
         <Fade in={expanded} mountOnEnter unmountOnExit>
           {/* https://mui.com/guides/migration-v4/#cannot-read-property-scrolltop-of-null */}
           <div>
-            <Description fontSize={fontSize}>
+            <Description className={classes?.description} fontSize={fontSize}>
               {!texts.rest.startsWith('\n') && '\n'}
               {texts.rest}
               {texts.rest && expanded && <ReadButton />}

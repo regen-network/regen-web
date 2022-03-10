@@ -1,10 +1,10 @@
 export const explorer = process.env.REACT_APP_BLOCK_EXPLORER;
 
 const isMintscan = explorer?.includes('mintscan');
-
 const isAneka = explorer?.includes('aneka');
 
-export const getAccountUrl = (address: string): string => {
+export const getAccountUrl = (address: string | undefined): string => {
+  if (!address) return '';
   if (isAneka) {
     return `${explorer}/accounts/${address}`;
   } else if (isMintscan) {
@@ -13,7 +13,8 @@ export const getAccountUrl = (address: string): string => {
   return '';
 };
 
-export const getHashUrl = (txHash: string): string => {
+export const getHashUrl = (txHash: string | undefined): string => {
+  if (!txHash) return '';
   if (isAneka) {
     return `${explorer}/txs/${txHash}`;
   } else if (isMintscan) {

@@ -68,12 +68,17 @@ const CreditTotals: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
-      const res = await getBatchesWithSupply();
-      const data: BatchInfoWithSupply[] = res?.data;
+      try {
+        const res = await getBatchesWithSupply();
+        const data: BatchInfoWithSupply[] = res?.data;
 
-      if (data) {
-        const creditTotals = sumBatchTotals(data);
-        setTotals(creditTotals);
+        if (data) {
+          const creditTotals = sumBatchTotals(data);
+          setTotals(creditTotals);
+        }
+      } catch (err) {
+        // eslint-disable-next-line
+        console.error(err);
       }
     };
 

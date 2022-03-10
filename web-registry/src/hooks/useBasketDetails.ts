@@ -69,7 +69,6 @@ const useBasketDetails = (
         });
       } catch (error) {
         // TODO Manage error
-        console.error(error);
       }
     }
 

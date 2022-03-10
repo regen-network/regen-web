@@ -42,14 +42,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       )}`,
     },
     maxWidth: theme.spacing(150),
-    height: '-webkit-fill-available',
     [theme.breakpoints.up('md')]: {
       width: '50%',
-      maxHeight: '90%',
+      height: '90%',
     },
     [theme.breakpoints.between('sm', 'md')]: {
       width: '70%',
-      maxHeight: '90%',
+      height: '90%',
     },
     [theme.breakpoints.down('sm')]: {
       left: '0px',

@@ -45,9 +45,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   label: {
     fontSize: theme.typography.pxToRem(12),
     color: theme.palette.primary.contrastText,
-    letterSpacing: '1px',
-    lineHeight: '15px',
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(3),
   },
   box: {
     display: 'flex',
@@ -201,12 +199,12 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               mr: { xs: 0, md: 12 },
             }}
           >
-            <Box className={styles.marginBottom}>
+            <Box sx={{ mb: 6 }}>
               <Label
                 sx={{
                   fontSize: { xs: 12, sm: 14 },
                   color: 'info.dark',
-                  mb: 2,
+                  mb: 4,
                 }}
               >
                 credit class
@@ -247,7 +245,10 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                         >
                           {metadata?.['regen:sourceRegistry']?.['schema:name']}
                         </Description>
-                        <SmallArrowIcon className={styles.arrow} />
+                        <SmallArrowIcon
+                          sx={{ mt: '-2px' }}
+                          className={styles.arrow}
+                        />
                       </Box>
                     </Link>
                   }

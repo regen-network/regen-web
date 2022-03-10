@@ -1,35 +1,19 @@
 import React from 'react';
-import dayjs from 'dayjs';
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 import {
   ActionsTable,
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
+import { GreyText } from '../atoms/GreyText';
+import { BreakText } from '../atoms/BreakText';
 import { NoCredits } from '../molecules';
 import type { IBatchInfo } from '../../types/ledger/ecocredit';
-
-const formatDate = (date: string | Date | undefined): string =>
-  dayjs(date).format('MMMM D, YYYY');
-
-const formatNumber = (num: string): string => {
-  return parseFloat(num) > 0 ? Math.floor(+num).toLocaleString() : '-';
-};
-
-const useStyles = makeStyles((theme: Theme) => ({
-  greyText: {
-    color: theme.palette.info.main,
-  },
-  break: {
-    whiteSpace: 'normal',
-    wordWrap: 'break-word',
-  },
-}));
+import { formatNumber } from 'web-components/lib/components/table';
+import { formatDate } from 'web-components/lib/utils/format';
 
 export interface BasketEcocreditsTableProps {
   batches: IBatchInfo[];
@@ -40,7 +24,6 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
   batches,
   renderActionButtons,
 }) => {
-  const styles = useStyles();
   if (!batches?.length) {
     return <NoCredits title="No credit batches to display" />;
   }
@@ -64,9 +47,9 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
         </Box>,
         'Issuer',
         'Amount',
-        <Box className={styles.break}>Credit Class</Box>,
-        <Box className={styles.break}>Batch Start Date</Box>,
-        <Box className={styles.break}>Batch End Date</Box>,
+        <BreakText>Credit Class</BreakText>,
+        <BreakText>Batch Start Date</BreakText>,
+        <BreakText>Batch End Date</BreakText>,
         'Project Location',
       ]}
       rows={batches.map((item, i) => {
@@ -81,8 +64,8 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
           </a>,
           formatNumber(item.totalAmount),
           item.classId,
-          <span className={styles.greyText}>{formatDate(item.startDate)}</span>,
-          <span className={styles.greyText}>{formatDate(item.endDate)}</span>,
+          <GreyText>{formatDate(item.startDate)}</GreyText>,
+          <GreyText>{formatDate(item.endDate)}</GreyText>,
           item.projectLocation,
         ];
       })}

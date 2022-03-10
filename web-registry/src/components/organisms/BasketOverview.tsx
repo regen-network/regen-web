@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Grid, Box, Link } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
@@ -10,21 +11,14 @@ import Description from 'web-components/lib/components/description';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { Label } from 'web-components/lib/components/label';
 import { parseText } from 'web-components/lib/utils/textParser';
+import { formatNumber } from 'web-components/lib/components/table';
+import { formatDate } from 'web-components/lib/utils/format';
 
 import { OptimizedImage } from '../atoms/OptimizedImage';
 import topoImg from '../../assets/background-contour-2.svg';
 import forestImg from '../../assets/forest-token.png';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  top: {
-    display: 'flex',
-    justifyContent: 'center',
-    borderBottom: `1px solid ${theme.palette.grey[100]}`,
-    backgroundColor: theme.palette.grey[50],
-    backgroundImage: `url(${topoImg})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  },
   content: {
     display: 'flex',
     width: '100%',
@@ -122,7 +116,17 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({
   const styles = useStyles();
 
   return (
-    <Box className={styles.top}>
+    <Box
+      sx={theme => ({
+        display: 'flex',
+        justifyContent: 'center',
+        borderBottom: `1px solid ${theme.palette.grey[100]}`,
+        backgroundColor: theme.palette.grey[50],
+        backgroundImage: `url(${topoImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      })}
+    >
       <Section className={styles.content}>
         <Grid container>
           <Grid item xs={12} sm={5} className={styles.imageContainer}>
@@ -149,7 +153,7 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
               >
                 <Grid item xs={12} sm={6}>
-                  <Item label="totalAmount" data={totalAmount.toString()} />
+                  <Item label="total amount" data={formatNumber(totalAmount)} />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <Item
@@ -163,18 +167,24 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({
                   <Item
                     label="allowed credit classes"
                     data={allowedCreditClasses}
-                    // TODO: harcoded url for credit class
-                    link={'https://www.regen.network/'}
+                    // TODO: url for credit class
+                    link={'/credit-classes/'}
                   />
                 </Grid>
                 {minStartDate && (
                   <Grid item xs={12} sm={6}>
-                    <Item label="min start date" data={minStartDate} />
+                    <Item
+                      label="min start date"
+                      data={formatDate(minStartDate)}
+                    />
                   </Grid>
                 )}
                 {startDateWindow && (
                   <Grid item xs={12} sm={6}>
-                    <Item label="start date window" data={startDateWindow} />
+                    <Item
+                      label="start date window"
+                      data={formatDate(startDateWindow)}
+                    />
                   </Grid>
                 )}
               </Grid>
@@ -189,13 +199,10 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({
 export { BasketOverview };
 
 /**
- * Basket summary item (subcomponent)
+ * Basket summary item
  */
 
 const useStylesItem = makeStyles(theme => ({
-  gridItem: {
-    marginTop: theme.spacing(4),
-  },
   label: {
     fontSize: theme.typography.pxToRem(12),
     color: theme.palette.primary.contrastText,
@@ -230,13 +237,13 @@ const Item = ({ label, data, link }: ItemProps): JSX.Element => {
   const styles = useStylesItem();
 
   return (
-    <div className={styles.gridItem}>
+    <Box sx={{ mt: 4 }}>
       <Label className={styles.label}>{label}</Label>
       {Array.isArray(data) ? (
         data.map(item => (
           <Description key={`basket-${item}`} className={styles.data}>
             {link ? (
-              <Link href={link} target="_blank" rel="noreferrer">
+              <Link href={link + item} target="_blank" rel="noreferrer">
                 {parseText(item)}
                 <SmallArrowIcon className={styles.arrowIcon} />
               </Link>
@@ -257,6 +264,6 @@ const Item = ({ label, data, link }: ItemProps): JSX.Element => {
           )}
         </Description>
       )}
-    </div>
+    </Box>
   );
 };

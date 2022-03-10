@@ -226,7 +226,7 @@ export async function getBasket(
       disableAutoRetire: false,
       creditTypeAbbrev: 'C',
       dateCriteria: {
-        startDateWindow: '1000',
+        minStartDate: '2022-06-01T00:00:00Z',
       },
       exponent: '6',
     },

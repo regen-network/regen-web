@@ -91,9 +91,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     '&:last-child': {
       marginBottom: 0,
     },
-    '&:nth-child(5)': {
-      marginBottom: 0,
-    },
   },
   arrow: {
     fontSize: theme.typography.pxToRem(16),

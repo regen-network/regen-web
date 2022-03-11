@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  TablePagination as MuiTablePagination,
-  Grid,
-  SelectProps,
-} from '@mui/material';
+import { TablePagination as MuiTablePagination, Grid } from '@mui/material';
 import { makeStyles, withStyles } from '@mui/styles';
 import { Theme } from '../../theme/muiTheme';
 import PrevNextButton from '../buttons/PrevNextButton';
@@ -11,7 +7,6 @@ import PrevNextButton from '../buttons/PrevNextButton';
 const useStylesAction = makeStyles((theme: Theme) => ({
   buttonsWrapper: {
     display: 'flex',
-    marginLeft: theme.spacing(5),
     marginRight: theme.spacing(7.5),
     width: '100%',
     maxWidth: theme.spacing(27.5),
@@ -22,6 +17,7 @@ const useStylesAction = makeStyles((theme: Theme) => ({
 const TablePaginationActions = (props: any): any => {
   const classes = useStylesAction();
   const { count, page, rowsPerPage, onPageChange } = props;
+  const pageTotal = Math.ceil(count / rowsPerPage);
 
   const handleBackButtonClick = (
     event: React.MouseEvent<HTMLDivElement>,
@@ -35,6 +31,7 @@ const TablePaginationActions = (props: any): any => {
     onPageChange(event, page + 1);
   };
 
+  if (pageTotal === 1) return null; // no need for pagination if only one page
   return (
     <Grid
       container
@@ -51,7 +48,7 @@ const TablePaginationActions = (props: any): any => {
         dark
         direction="next"
         onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        disabled={page >= pageTotal - 1}
       />
     </Grid>
   );
@@ -102,6 +99,9 @@ const StyledTablePagination = withStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
+  },
+  displayedRows: {
+    marginRight: theme.spacing(7.5),
   },
 }))(MuiTablePagination);
 

@@ -44,7 +44,6 @@ export const ProjectCreditBatchesTable: React.FC<{
         <Amount>Amount Cancelled</Amount>,
         'Batch Start Date',
         'Batch End Date',
-        'Project Location',
       ]}
       rows={batches.map((row, i) => {
         return [
@@ -71,7 +70,6 @@ export const ProjectCreditBatchesTable: React.FC<{
           formatNumber(row.amount_cancelled),
           <GreyText>{formatDate(row.start_date)}</GreyText>,
           <GreyText>{formatDate(row.end_date)}</GreyText>,
-          row.project_location,
         ];
       })}
     />

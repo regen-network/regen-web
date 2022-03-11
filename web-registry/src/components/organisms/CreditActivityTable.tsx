@@ -97,22 +97,27 @@ const CreditActivityTable: React.FC = () => {
 
   const fetchData = useCallback(
     async (setCountTotal: (count: number) => void): Promise<void> => {
-      const tx_responses = await getEcocreditTxs();
+      try {
+        const tx_responses = await getEcocreditTxs();
 
-      const txRows: TxRowData[] = tx_responses.map((tx_response: any) => {
-        return {
-          date: tx_response.timestamp,
-          txhash: tx_response.txhash,
-          messages: getReadableMessages(tx_response).join(', '),
-          height: parseFloat(tx_response.height),
-          txUrl: getHashUrl(tx_response.txhash),
-        } as TxRowData;
-      });
+        const txRows: TxRowData[] = tx_responses.map((tx_response: any) => {
+          return {
+            date: tx_response.timestamp,
+            txhash: tx_response.txhash,
+            messages: getReadableMessages(tx_response).join(', '),
+            height: parseFloat(tx_response.height),
+            txUrl: getHashUrl(tx_response.txhash),
+          } as TxRowData;
+        });
 
-      setTxs(txRows);
-      const countTotal = tx_responses.length;
-      if (countTotal) {
-        setCountTotal(countTotal);
+        setTxs(txRows);
+        const countTotal = tx_responses.length;
+        if (countTotal) {
+          setCountTotal(countTotal);
+        }
+      } catch (err) {
+        // eslint-disable-next-line
+        console.error(err);
       }
     },
     [getReadableMessages],

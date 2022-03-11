@@ -72,3 +72,54 @@ export interface QueryBasketsResponse {
   baskets: Basket[];
   pagination?: PageResponse;
 }
+
+export interface ClassInfo {
+  /**
+   *  class_id is the unique ID of credit class.
+   */
+  class_id: string;
+  /**
+   *  admin is the designer of the credit class. In Hambach, this is identified as "designer"
+   */
+  admin?: string;
+  designer?: string;
+  /**
+   *  issuers are the approved issuers of the credit class.
+   */
+  issuers: string[];
+  /**
+   *  metadata is a hashed IRI that can be used to fetch JSON-LD from the metadata-graph DB table
+   */
+  metadata: Uint8Array;
+  credit_type: CreditType;
+}
+
+export interface QueryClassInfoResponse {
+  info?: ClassInfo;
+}
+
+interface CreditType {
+  abbreviation: string;
+  name: string;
+  precision: number;
+  unit: string;
+}
+
+// TODO: pull these types from credit-class shacl schema
+export interface ApprovedMethodologyList {
+  '@type': 'schema:BreadcrumbList';
+  'schema:itemListElement': ApprovedMethodology[];
+  'schema:url': {
+    '@type': string;
+    '@value': string;
+  };
+}
+
+interface ApprovedMethodology {
+  '@type': 'regen:Methodology';
+  'schema:name': string;
+  'schema:url': {
+    '@type': string;
+    '@value': string;
+  };
+}

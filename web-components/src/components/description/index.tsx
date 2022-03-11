@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Typography, { TypographyProps } from '@mui/material/Typography';
+import { SxProps } from '@mui/system';
 import { getFontSize, FontSizes } from '../../theme/sizing';
 import clsx from 'clsx';
 
@@ -9,6 +10,7 @@ export interface DescriptionProps {
   fontSize?: FontSizes;
   className?: string;
   align?: TypographyProps['align'];
+  sx?: SxProps<Theme>;
 }
 
 interface StyleProps {
@@ -41,12 +43,14 @@ export default function Description({
   children,
   fontSize = getFontSize('medium'),
   className,
+  sx,
   ...props
 }: DescriptionProps): JSX.Element {
   const classes = useStyles({ fontSize });
   return (
     <Typography
       {...props}
+      sx={sx}
       component="div"
       className={clsx(classes.root, className)}
     >

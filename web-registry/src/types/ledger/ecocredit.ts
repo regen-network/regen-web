@@ -1,4 +1,4 @@
-import type { PageResponse } from './base';
+import type { PageResponse, PageRequest } from './base';
 import type { QueryBalanceResponse as BankQueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 /** Map keys from another type to values of number type */
@@ -26,23 +26,27 @@ export interface BatchTotalsForProject
 // the current queries to use regen-js instead of REST
 
 export interface BatchInfo {
-  start_date: string | Date;
-  end_date: string | Date;
-  issuer: string;
-  batch_denom: string;
   class_id: string;
+  batch_denom: string;
+  issuer: string;
   total_amount: number;
   amount_cancelled: number;
+  start_date: string | Date;
+  end_date: string | Date;
   project_location: string;
+}
+
+export interface QueryBatchInfoRequest {
+  batchDenom: string;
+}
+
+export interface QueryBatchInfoResponse {
+  info: BatchInfo;
 }
 
 export interface QueryBatchesResponse {
   batches: BatchInfo[];
   pagination: PageResponse;
-}
-
-export interface QueryBatchInfoResponse {
-  info: BatchInfo;
 }
 
 export interface QuerySupplyResponse {
@@ -97,47 +101,19 @@ export interface QueryBasketResponse {
 
 export interface QueryBasketBalancesRequest {
   basketDenom: string;
-  // pagination?: PageRequest; // DISABLED
+  pagination?: PageRequest;
 }
 
 export interface QueryBasketBalancesResponse {
   balances: BasketBalance[];
-  // pagination?: PageResponse; // DISABLED
+  pagination?: PageResponse;
 }
 
-// BasketBalance stores the amount of credits from a batch in a basket
 export interface BasketBalance {
   basketId: string | Long;
   batchDenom: string;
   balance: string;
   batchStartDate?: string | Date;
-}
-
-/**
- * Ecocredits
- */
-
-/** BatchInfo represents the high-level on-chain information for a credit batch. */
-export interface IBatchInfo {
-  classId: string;
-  batchDenom: string;
-  issuer: string;
-  totalAmount: string;
-  metadata: string | Uint8Array;
-  amountCancelled: string;
-  startDate?: string | Date;
-  endDate?: string | Date;
-  projectLocation: string;
-}
-
-/** QueryBatchInfoRequest is the Query/BatchInfo request type. */
-export interface QueryBatchInfoRequest {
-  batchDenom: string;
-}
-
-/** QueryBatchInfoResponse is the Query/BatchInfo response type. */
-export interface IQueryBatchInfoResponse {
-  info: IBatchInfo;
 }
 
 export interface ClassInfo {

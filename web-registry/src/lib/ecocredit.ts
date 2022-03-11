@@ -13,7 +13,6 @@ import type {
   QueryBalanceResponse,
   QueryBasketBalancesResponse,
   QueryBasketResponse,
-  IQueryBatchInfoResponse,
   BatchInfoWithBalance,
   QueryBatchesResponse,
   QueryClassInfoResponse,
@@ -261,18 +260,17 @@ export async function getBasketBalances(
 
 export async function getBatchInfo(
   batchDenom: string,
-): Promise<IQueryBatchInfoResponse> {
+): Promise<QueryBatchInfoResponse> {
   return Promise.resolve({
     info: {
-      classId: 'C01',
-      batchDenom: 'C01-20170101-20191231-001',
+      class_id: 'C01',
+      batch_denom: 'C01-20170101-20191231-001',
       issuer: 'regen1qdqafsy2jfuyq7rxzkdwyytmrxlfn8csq0uetx',
-      totalAmount: '13000.00',
-      metadata: 'MA==',
-      amountCancelled: '38243.00',
-      startDate: '2017-01-01T00:00:00Z',
-      endDate: '2019-12-31T00:00:00Z',
-      projectLocation: 'AU-NSW 2453',
+      total_amount: 13000.0,
+      amount_cancelled: 38243.0,
+      start_date: '2017-01-01T00:00:00Z',
+      end_date: '2019-12-31T00:00:00Z',
+      project_location: 'AU-NSW 2453',
     },
   });
 }

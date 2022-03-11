@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { getBasket, getBasketBalances, getBatchInfo } from '../lib/ecocredit';
-import { IBasket, BasketBalance, IBatchInfo } from '../types/ledger/ecocredit';
+import { IBasket, BasketBalance, BatchInfo } from '../types/ledger/ecocredit';
 import { BasketOverviewProps } from '../components/organisms';
 
 interface BasketExtended {
@@ -15,12 +15,12 @@ interface BasketDetailsAll {
   basket: IBasket | undefined;
   basketExtended: BasketExtended;
   basketBalances: BasketBalance[];
-  batchesInfo: IBatchInfo[];
+  batchesInfo: BatchInfo[];
 }
 
 type BasketDetailsData = {
   dataOverview: BasketOverviewProps | null;
-  dataBasketBatches: IBatchInfo[] | undefined;
+  dataBasketBatches: BatchInfo[] | undefined;
 };
 
 const useBasketDetails = (
@@ -48,7 +48,7 @@ const useBasketDetails = (
         // TODO: Basket Curator
         const curator = 'Regen Network Development, Inc';
         const balances = await getBasketBalances(basketDenom);
-        const batches: IBatchInfo[] = [];
+        const batches: BatchInfo[] = [];
         balances.balances.map(async batchBalance => {
           getBatchInfo(batchBalance.batchDenom).then(batchInfo => {
             batches.push(batchInfo.info);
@@ -95,7 +95,7 @@ const useBasketDetails = (
 
       if (data?.batchesInfo?.length > 0) {
         _dataOverview.totalAmount = data.batchesInfo.reduce(
-          (acc: number, obj: IBatchInfo) => acc + Number(obj.totalAmount),
+          (acc: number, obj: BatchInfo) => acc + Number(obj.total_amount),
           0,
         );
       }

@@ -10,7 +10,7 @@ import {
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
 import { NoCredits } from '../molecules';
-import type { IBatchInfo } from '../../types/ledger/ecocredit';
+import type { BatchInfo } from '../../types/ledger/ecocredit';
 import { formatNumber } from 'web-components/lib/components/table';
 import { formatDate } from 'web-components/lib/utils/format';
 
@@ -24,7 +24,7 @@ const BreakText = styled('div')({
 });
 
 export interface BasketEcocreditsTableProps {
-  batches: IBatchInfo[];
+  batches: BatchInfo[];
   renderActionButtons?: RenderActionButtonsFunc;
 }
 
@@ -63,7 +63,7 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
               },
             }}
           >
-            {item.batchDenom}
+            {item.batch_denom}
           </Box>,
           <a
             href={getAccountUrl(item.issuer as string)}
@@ -72,11 +72,11 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
           >
             {truncate(item.issuer as string)}
           </a>,
-          formatNumber(item.totalAmount),
-          item.classId,
-          <GreyText>{formatDate(item.startDate)}</GreyText>,
-          <GreyText>{formatDate(item.endDate)}</GreyText>,
-          item.projectLocation,
+          formatNumber(item.total_amount),
+          item.class_id,
+          <GreyText>{formatDate(item.start_date)}</GreyText>,
+          <GreyText>{formatDate(item.end_date)}</GreyText>,
+          item.project_location,
         ];
       })}
     />

@@ -1,18 +1,19 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { Grid, Box, Link } from '@mui/material';
+import { styled } from '@mui/system';
+import { Grid, Box } from '@mui/material';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Description from 'web-components/lib/components/description';
-import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { Label } from 'web-components/lib/components/label';
 import { parseText } from 'web-components/lib/utils/textParser';
 import { formatNumber } from 'web-components/lib/components/table';
 import { formatDate } from 'web-components/lib/utils/format';
 
+import { LinkWithArrow } from '../atoms/LinkWithArrow';
 import { OptimizedImage } from '../atoms/OptimizedImage';
 import topoImg from '../../assets/background-contour-2.svg';
 import forestImg from '../../assets/forest-token.png';
@@ -30,14 +31,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       flexDirection: 'column',
     },
   },
-  imageContainer: {
-    position: 'relative',
-    width: '100%',
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(57.5),
-      overflowY: 'clip',
-    },
-  },
   image: {
     width: '100%',
     maxWidth: theme.spacing(103),
@@ -49,21 +42,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
-    },
-  },
-  textContainer: {
-    display: 'flex',
-    flex: 1,
-    flexDirection: 'column',
-    [theme.breakpoints.down('lg')]: {
-      paddingLeft: theme.spacing(8),
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: '100%',
-      padding: theme.spacing(8, 0),
-      '&:last-child': {
-        paddingBottom: theme.spacing(15),
-      },
     },
   },
   title: {
@@ -91,6 +69,41 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const SectionContainer = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'center',
+  borderBottom: `1px solid ${theme.palette.grey[100]}`,
+  backgroundColor: theme.palette.grey[50],
+  backgroundImage: `url(${topoImg})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+}));
+
+const ImageContainer = styled(Grid)(({ theme }) => ({
+  position: 'relative',
+  width: '100%',
+  [theme.breakpoints.down('sm')]: {
+    height: theme.spacing(57.5),
+    overflowY: 'clip',
+  },
+}));
+
+const TextContainer = styled(Grid)(({ theme }) => ({
+  display: 'flex',
+  flex: 1,
+  flexDirection: 'column',
+  [theme.breakpoints.down('lg')]: {
+    paddingLeft: theme.spacing(8),
+  },
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+    padding: theme.spacing(8, 0),
+    '&:last-child': {
+      paddingBottom: theme.spacing(15),
+    },
+  },
+}));
+
 export interface BasketOverviewProps {
   name: string;
   basketDenom: string;
@@ -102,7 +115,7 @@ export interface BasketOverviewProps {
   startDateWindow?: string;
 }
 
-const BasketOverview: React.FC<BasketOverviewProps> = ({
+export const BasketOverview: React.FC<BasketOverviewProps> = ({
   name,
   basketDenom,
   description,
@@ -115,27 +128,17 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({
   const styles = useStyles();
 
   return (
-    <Box
-      sx={theme => ({
-        display: 'flex',
-        justifyContent: 'center',
-        borderBottom: `1px solid ${theme.palette.grey[100]}`,
-        backgroundColor: theme.palette.grey[50],
-        backgroundImage: `url(${topoImg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      })}
-    >
+    <SectionContainer>
       <Section className={styles.content}>
         <Grid container>
-          <Grid item xs={12} sm={5} className={styles.imageContainer}>
+          <ImageContainer item xs={12} sm={5}>
             <OptimizedImage
               className={styles.image}
               src={forestImg}
               alt={name}
             />
-          </Grid>
-          <Grid item xs={12} sm={7} className={styles.textContainer}>
+          </ImageContainer>
+          <TextContainer item xs={12} sm={7}>
             <Title variant="h1" className={styles.title}>
               {name}
             </Title>
@@ -188,17 +191,15 @@ const BasketOverview: React.FC<BasketOverviewProps> = ({
                 )}
               </Grid>
             </OnBoardingCard>
-          </Grid>
+          </TextContainer>
         </Grid>
       </Section>
-    </Box>
+    </SectionContainer>
   );
 };
 
-export { BasketOverview };
-
 /**
- * Basket summary item
+ * Basket summary item (subcomponent)
  */
 
 const useStylesItem = makeStyles(theme => ({
@@ -218,12 +219,6 @@ const useStylesItem = makeStyles(theme => ({
       fontWeight: 400,
     },
   },
-  arrowIcon: {
-    marginLeft: theme.spacing(1),
-    marginBottom: theme.spacing(0.3),
-    height: 9,
-    width: 13,
-  },
 }));
 
 interface ItemProps {
@@ -234,35 +229,20 @@ interface ItemProps {
 
 const Item = ({ label, data, link }: ItemProps): JSX.Element => {
   const styles = useStylesItem();
+  const itemData = Array.isArray(data) ? data : [data];
 
   return (
     <Box sx={{ mt: 4 }}>
       <Label className={styles.label}>{label}</Label>
-      {Array.isArray(data) ? (
-        data.map(item => (
-          <Description key={`basket-${item}`} className={styles.data}>
-            {link ? (
-              <Link href={link + item} target="_blank" rel="noreferrer">
-                {parseText(item)}
-                <SmallArrowIcon className={styles.arrowIcon} />
-              </Link>
-            ) : (
-              parseText(item)
-            )}
-          </Description>
-        ))
-      ) : (
-        <Description className={styles.data}>
+      {itemData.map((item, i) => (
+        <Description key={`basket-${item}`} className={styles.data}>
           {link ? (
-            <Link href={link} target="_blank" rel="noreferrer">
-              {parseText(data)}
-              <SmallArrowIcon className={styles.arrowIcon} />
-            </Link>
+            <LinkWithArrow link={link + item} label={item} />
           ) : (
-            parseText(data)
+            parseText(item)
           )}
         </Description>
-      )}
+      ))}
     </Box>
   );
 };

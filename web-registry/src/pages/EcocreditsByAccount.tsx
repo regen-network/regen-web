@@ -2,9 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography } from '@mui/material';
 
-import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-
 import { PortfolioTemplate } from '../components/templates';
+import { LinkWithArrow } from '../components/atoms';
 import { truncate } from '../lib/wallet';
 import { getAccountUrl } from '../lib/block-explorer';
 
@@ -37,14 +36,10 @@ export const EcocreditsByAccount: React.FC = () => {
             },
           }}
         >
-          <a
-            href={getAccountUrl(accountAddress || '')}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {truncate(accountAddress || '')}
-            <SmallArrowIcon sx={{ ml: 1, mb: 0.5, height: 9, width: 13 }} />
-          </a>
+          <LinkWithArrow
+            link={getAccountUrl(accountAddress || '')}
+            label={truncate(accountAddress || '')}
+          />
         </Typography>
       </Box>
     </PortfolioTemplate>

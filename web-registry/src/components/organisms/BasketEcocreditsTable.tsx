@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
+import { styled } from '@mui/material';
 
 import {
   ActionsTable,
@@ -8,12 +9,19 @@ import {
 
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { GreyText } from '../atoms/GreyText';
-import { BreakText } from '../atoms/BreakText';
 import { NoCredits } from '../molecules';
 import type { IBatchInfo } from '../../types/ledger/ecocredit';
 import { formatNumber } from 'web-components/lib/components/table';
 import { formatDate } from 'web-components/lib/utils/format';
+
+const GreyText = styled('span')(({ theme }) => ({
+  color: theme.palette.info.main,
+}));
+
+const BreakText = styled('div')({
+  whiteSpace: 'normal',
+  wordWrap: 'break-word',
+});
 
 export interface BasketEcocreditsTableProps {
   batches: IBatchInfo[];
@@ -34,15 +42,7 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
       renderActionButtons={renderActionButtons}
       headerRows={[
         // TODO: Project
-        <Box
-          sx={{
-            minWidth: {
-              xs: 'auto',
-              sm: '11rem',
-              lg: '13rem',
-            },
-          }}
-        >
+        <Box sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}>
           Batch Denom
         </Box>,
         'Issuer',
@@ -54,7 +54,17 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
       ]}
       rows={batches.map((item, i) => {
         return [
-          item.batchDenom,
+          <Box
+            component="span"
+            sx={{
+              whiteSpace: {
+                xs: 'wrap-word',
+                md: 'nowrap',
+              },
+            }}
+          >
+            {item.batchDenom}
+          </Box>,
           <a
             href={getAccountUrl(item.issuer as string)}
             target="_blank"

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
+import { styled } from '@mui/material';
 
 import {
   ActionsTable,
@@ -10,10 +11,17 @@ import { formatDate } from 'web-components/lib/utils/format';
 
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { GreyText } from '../atoms/GreyText';
-import { BreakText } from '../atoms/BreakText';
 import { NoCredits } from '../molecules';
 import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
+
+const GreyText = styled('span')(({ theme }) => ({
+  color: theme.palette.info.main,
+}));
+
+const BreakText = styled('div')({
+  whiteSpace: 'normal',
+  wordWrap: 'break-word',
+});
 
 export const EcocreditsTable: React.FC<{
   credits: BatchInfoWithBalance[];

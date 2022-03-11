@@ -9,7 +9,6 @@ interface BasketExtended {
   description: string;
   curator: string;
   totalAmount: number;
-  // displayDenom ?
 }
 
 interface BasketDetailsAll {
@@ -39,7 +38,7 @@ const useBasketDetails = (
     async function fetchData(basketDenom: string): Promise<void> {
       try {
         const basket = await getBasket(basketDenom);
-        // // TODO: Display basket denom
+        // TODO: Display basket denom
         // const displayDenom = 'eco.C.rNCT';
         // TODO: Basket description (see comment in Figma)
         // https://www.figma.com/file/x5vjWsddiUBzP2N13AFOPw?node-id=32:10028#155844414

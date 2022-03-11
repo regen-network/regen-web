@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { getBasket, getBasketBalances, getBatchInfo } from '../lib/ecocredit';
-import { IBasket, BasketBalance, BatchInfo } from '../types/ledger/ecocredit';
+import { Basket, BasketBalance, BatchInfo } from '../types/ledger/ecocredit';
 import { BasketOverviewProps } from '../components/organisms';
 
 interface BasketExtended {
@@ -12,7 +12,7 @@ interface BasketExtended {
 }
 
 interface BasketDetailsAll {
-  basket: IBasket | undefined;
+  basket: Basket | undefined;
   basketExtended: BasketExtended;
   basketBalances: BasketBalance[];
   batchesInfo: BatchInfo[];
@@ -68,6 +68,7 @@ const useBasketDetails = (
         });
       } catch (error) {
         // TODO Manage error
+        console.error(error); // eslint-disable-line no-console
       }
     }
 

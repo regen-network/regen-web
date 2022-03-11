@@ -13,7 +13,7 @@ export interface BatchInfoWithSupply extends BatchInfo, QuerySupplyResponse {}
 export interface BatchInfoWithBalance extends BatchInfo, QueryBalanceResponse {}
 
 export interface TableBaskets extends Basket, BankQueryBalanceResponse {
-  display_denom: string;
+  displayDenom: string;
 }
 
 /** `QueryBatchSupplyResponse` + `amount_cancelled` to display summed totals on project page */
@@ -59,25 +59,10 @@ export interface QueryBalanceResponse {
   retired_amount: string;
 }
 
+// regen-js based interfaces (camelCase props)
+// remove after api/queries upgrade
+
 export interface Basket {
-  id: string;
-  basket_denom: string;
-  name: string;
-  disable_auto_retire: boolean;
-  credit_type_abbrev: string;
-  date_criteria: {
-    min_start_date?: string;
-    start_date_window?: string;
-  };
-  exponent: string;
-}
-
-export interface QueryBasketsResponse {
-  baskets: Basket[];
-  pagination?: PageResponse;
-}
-
-export interface IBasket {
   id: string;
   basketDenom: string;
   name: string;
@@ -95,8 +80,20 @@ export interface QueryBasketRequest {
 }
 
 export interface QueryBasketResponse {
-  basket?: IBasket;
+  basket?: Basket;
   classes: string[];
+}
+
+export interface QueryBasketsResponse {
+  baskets: Basket[];
+  pagination?: PageResponse;
+}
+
+export interface BasketBalance {
+  basketId: string | Long;
+  batchDenom: string;
+  balance: string;
+  batchStartDate?: string | Date;
 }
 
 export interface QueryBasketBalancesRequest {
@@ -109,12 +106,7 @@ export interface QueryBasketBalancesResponse {
   pagination?: PageResponse;
 }
 
-export interface BasketBalance {
-  basketId: string | Long;
-  batchDenom: string;
-  balance: string;
-  batchStartDate?: string | Date;
-}
+// REST based interfaces (snake_case props)
 
 export interface ClassInfo {
   /**

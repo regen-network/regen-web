@@ -63,13 +63,13 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
     setBaskets([
       {
         id: '1',
-        basket_denom: 'eco.uC.rNCT',
-        display_denom: 'eco.C.rNCT',
+        basketDenom: 'eco.uC.rNCT',
+        displayDenom: 'eco.C.rNCT',
         name: 'rNCT',
-        disable_auto_retire: false,
-        credit_type_abbrev: 'C',
-        date_criteria: {
-          start_date_window: '1000',
+        disableAutoRetire: false,
+        creditTypeAbbrev: 'C',
+        dateCriteria: {
+          startDateWindow: '1000',
         },
         exponent: '6',
         balance: {

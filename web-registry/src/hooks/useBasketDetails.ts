@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 
 import { getBasket, getBasketBalances, getBatchInfo } from '../lib/ecocredit';
-import { Basket, BasketBalance, BatchInfo } from '../types/ledger/ecocredit';
+import {
+  Basket,
+  BasketBalance,
+  BatchInfoWithProject,
+} from '../types/ledger/ecocredit';
 import { BasketOverviewProps } from '../components/organisms';
 
 interface BasketExtended {
@@ -15,12 +19,12 @@ interface BasketDetailsAll {
   basket: Basket | undefined;
   basketExtended: BasketExtended;
   basketBalances: BasketBalance[];
-  batchesInfo: BatchInfo[];
+  batchesInfo: BatchInfoWithProject[];
 }
 
 type BasketDetailsData = {
   dataOverview: BasketOverviewProps | null;
-  dataBasketBatches: BatchInfo[] | undefined;
+  dataBasketBatches: BatchInfoWithProject[] | undefined;
 };
 
 const useBasketDetails = (
@@ -48,10 +52,17 @@ const useBasketDetails = (
         // TODO: Basket Curator
         const curator = 'Regen Network Development, Inc';
         const balances = await getBasketBalances(basketDenom);
-        const batches: BatchInfo[] = [];
+        const batches: BatchInfoWithProject[] = [];
         balances.balances.map(async batchBalance => {
           getBatchInfo(batchBalance.batchDenom).then(batchInfo => {
-            batches.push(batchInfo.info);
+            // TODO: fetch the project name / display name, corresponding to the batch
+            const projectName = 'cavan-station';
+            const projectDisplayName = 'Cavan Station';
+            batches.push({
+              project_name: projectName,
+              project_display: projectDisplayName,
+              ...batchInfo.info,
+            });
           });
         });
 
@@ -96,7 +107,8 @@ const useBasketDetails = (
 
       if (data?.batchesInfo?.length > 0) {
         _dataOverview.totalAmount = data.batchesInfo.reduce(
-          (acc: number, obj: BatchInfo) => acc + Number(obj.total_amount),
+          (acc: number, obj: BatchInfoWithProject) =>
+            acc + Number(obj.total_amount),
           0,
         );
       }

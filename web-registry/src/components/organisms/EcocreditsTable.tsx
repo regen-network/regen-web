@@ -9,9 +9,10 @@ import {
 import { formatNumber } from 'web-components/lib/components/table';
 import { formatDate } from 'web-components/lib/utils/format';
 
+import { Link } from '../atoms';
+import { NoCredits } from '../molecules';
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { NoCredits } from '../molecules';
 import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
@@ -58,13 +59,9 @@ export const EcocreditsTable: React.FC<{
       rows={credits.map((row, i) => {
         return [
           row.batch_denom,
-          <a
-            href={getAccountUrl(row.issuer as string)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Link href={getAccountUrl(row.issuer as string)} target="_blank">
             {truncate(row.issuer as string)}
-          </a>,
+          </Link>,
           row.class_id,
           formatNumber(row.tradable_amount),
           formatNumber(row.retired_amount),

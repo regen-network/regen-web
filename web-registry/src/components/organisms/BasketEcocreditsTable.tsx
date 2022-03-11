@@ -6,13 +6,14 @@ import {
   ActionsTable,
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
-
-import { truncate } from '../../lib/wallet';
-import { getAccountUrl } from '../../lib/block-explorer';
-import { NoCredits } from '../molecules';
-import type { BatchInfo } from '../../types/ledger/ecocredit';
 import { formatNumber } from 'web-components/lib/components/table';
 import { formatDate } from 'web-components/lib/utils/format';
+
+import { Link } from '../atoms';
+import { NoCredits } from '../molecules';
+import { truncate } from '../../lib/wallet';
+import { getAccountUrl } from '../../lib/block-explorer';
+import type { BatchInfoWithProject } from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -24,7 +25,7 @@ const BreakText = styled('div')({
 });
 
 export interface BasketEcocreditsTableProps {
-  batches: BatchInfo[];
+  batches: BatchInfoWithProject[];
   renderActionButtons?: RenderActionButtonsFunc;
 }
 
@@ -41,7 +42,7 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
       tableLabel="basket ecocredits table"
       renderActionButtons={renderActionButtons}
       headerRows={[
-        // TODO: Project
+        <Box sx={{ minWidth: '8rem' }}>Project</Box>,
         <Box sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}>
           Batch Denom
         </Box>,
@@ -54,6 +55,9 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
       ]}
       rows={batches.map((item, i) => {
         return [
+          <Link href={`/projects/${item.project_name}`} target="_blank">
+            {item.project_display}
+          </Link>,
           <Box
             component="span"
             sx={{
@@ -65,13 +69,9 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
           >
             {item.batch_denom}
           </Box>,
-          <a
-            href={getAccountUrl(item.issuer as string)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Link href={getAccountUrl(item.issuer as string)} target="_blank">
             {truncate(item.issuer as string)}
-          </a>,
+          </Link>,
           formatNumber(item.total_amount),
           item.class_id,
           <GreyText>{formatDate(item.start_date)}</GreyText>,

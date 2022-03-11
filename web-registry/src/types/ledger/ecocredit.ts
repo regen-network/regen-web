@@ -12,6 +12,12 @@ export interface BatchInfoWithSupply extends BatchInfo, QuerySupplyResponse {}
 /** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
 export interface BatchInfoWithBalance extends BatchInfo, QueryBalanceResponse {}
 
+/** combines the ledger `BatchInfo` with the corresponding project name */
+export interface BatchInfoWithProject extends BatchInfo {
+  project_name: string;
+  project_display: string;
+}
+
 export interface TableBaskets extends Basket, BankQueryBalanceResponse {
   displayDenom: string;
 }

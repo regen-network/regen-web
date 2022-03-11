@@ -2,6 +2,7 @@ export * from './Activity';
 export * from './Additionality';
 export * from './Admin';
 export * from './BasicInfo';
+export * from './BatchDetails';
 export * from './BuyerCreate';
 export * from './BuyerCreditsTransfer';
 export * from './Buyers';

@@ -1,6 +1,7 @@
 import React from 'react';
-import { withStyles, DefaultTheme as Theme } from '@mui/styles';
+import { DefaultTheme as Theme } from '@mui/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
+import { styled } from '@mui/material';
 
 interface OutlinedButtonProps extends ButtonProps {
   target?: string;
@@ -15,33 +16,31 @@ const SpanButton: React.FC = props => (
   <Button variant="contained" component="span" {...props} />
 );
 
-const styleCallback = (theme: Theme): any => ({
-  root: {
-    border: `2px solid ${theme.palette.secondary.light}`,
-    borderRadius: '2px',
-    color: theme.palette.secondary.main,
-    fontFamily: theme.typography.h1.fontFamily,
-    fontWeight: 800,
-    letterSpacing: '1px',
-    padding: theme.spacing(2, 4),
-    backgroundColor: theme.palette.primary.main,
+const styledCallback = ({ theme }: { theme: Theme }): any => ({
+  border: `2px solid ${theme.palette.secondary.light}`,
+  borderRadius: '2px',
+  color: theme.palette.secondary.main,
+  fontFamily: theme.typography.h1.fontFamily,
+  fontWeight: 800,
+  letterSpacing: '1px',
+  padding: theme.spacing(2, 4),
+  backgroundColor: theme.palette.primary.main,
+  boxShadow: 'none',
+  textAlign: 'center',
+  '&:hover': {
+    backgroundColor: theme.palette.secondary.light,
     boxShadow: 'none',
-    textAlign: 'center',
-    '&:hover': {
-      backgroundColor: theme.palette.secondary.light,
-      boxShadow: 'none',
-    },
   },
 });
 
-const CustomButton = withStyles(styleCallback)(Button);
-const CustomLabel = withStyles(styleCallback)(SpanButton);
+const StyledButton = styled(Button)(styledCallback);
+const StyledLabel = styled(SpanButton)(styledCallback);
 
 export default function OutlinedButton({
   isImageBtn,
   ...props
 }: OutlinedButtonProps): JSX.Element {
-  const Component = isImageBtn ? CustomLabel : CustomButton;
+  const Component = isImageBtn ? StyledLabel : StyledButton;
   return (
     <Component color="secondary" {...props}>
       {props.children}

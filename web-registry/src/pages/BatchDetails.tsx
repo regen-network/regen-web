@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
+import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 
 import { getBatchWithSupplyForDenom } from '../lib/ecocredit';
 import {
@@ -15,10 +16,8 @@ import {
 import { useBatchDetailsQuery } from '../generated/graphql';
 
 import type { BatchInfoWithSupply } from '../types/ledger/ecocredit';
+import { Link } from '../components/atoms';
 
-// this is similar to `formatDate` in web-components, but different format.
-// Could pass the format to that function, but it would be more code overall
-// compared to just using dayjs
 const batchDate = (date: string | Date): string =>
   dayjs(date).format('MMM D, YYYY');
 
@@ -30,7 +29,11 @@ const GridItem: React.FC = ({ children }) => (
 
 const BatchDetail: React.FC<{ label: string }> = ({ label, children }) => (
   <LabeledDetail label={label}>
-    <Typography sx={{ fontSize: { xs: 16, sm: 18 } }}>{children}</Typography>
+    <Typography
+      sx={{ display: 'flex', alignItems: 'center', fontSize: [16, 18] }}
+    >
+      {children}
+    </Typography>
   </LabeledDetail>
 );
 
@@ -56,12 +59,21 @@ const BatchInfo: React.FC<{ batch: BatchInfoWithSupply; project: string }> = ({
     <GridItem>
       <BatchDetail label="Project">
         <Box component="span" sx={{ textTransform: 'capitalize' }}>
-          {project}
+          <Link sx={{ color: 'unset' }} href={`/projects/${project}`}>
+            {project} <SmallArrowIcon sx={{ ml: 2 }} />
+          </Link>
         </Box>
       </BatchDetail>
     </GridItem>
     <GridItem>
-      <BatchDetail label="Credit Class">{batch.class_id}</BatchDetail>
+      <BatchDetail label="Credit Class">
+        <Link
+          sx={{ color: 'unset' }}
+          href={`/credit-classes/${batch.class_id}`}
+        >
+          {batch.class_id} <SmallArrowIcon sx={{ ml: 2 }} />
+        </Link>
+      </BatchDetail>
     </GridItem>
     <GridItem>
       <BatchDetail label="Batch start and end date">
@@ -102,24 +114,29 @@ const BatchTotals: React.FC<{ batch: BatchInfoWithSupply }> = ({ batch }) => (
   </>
 );
 
-const BatchMetadata: React.FC<{ data: any }> = () => (
-  <Box
-    sx={{
-      py: 7,
-      px: 5,
-      backgroundColor: 'primary.main',
-      border: 1,
-      borderColor: 'info.light',
-    }}
-  >
-    <Title variant="h5">Metadata</Title>
-    <Box sx={{ mt: 4, display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <MetaDetail label="vcs retirement serial number">TODO</MetaDetail>
-      <MetaDetail label="batch monitoring report">TODO</MetaDetail>
-      <MetaDetail label="Batch verification report">TODO</MetaDetail>
+const BatchMetadata: React.FC<{ data: any }> = ({ data }) => {
+  const regenField = (key: string): string => `http://regen.network/${key}`;
+  return (
+    <Box
+      sx={{
+        py: 7,
+        px: 5,
+        backgroundColor: 'primary.main',
+        border: 1,
+        borderColor: 'info.light',
+      }}
+    >
+      <Title variant="h5">Metadata</Title>
+      <Box sx={{ mt: 4, display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <MetaDetail label="vcs retirement serial number">
+          {data[regenField('serialNumber')]}
+        </MetaDetail>
+        <MetaDetail label="batch monitoring report">TODO</MetaDetail>
+        <MetaDetail label="Batch verification report">TODO</MetaDetail>
+      </Box>
     </Box>
-  </Box>
-);
+  );
+};
 
 export const BatchDetails: React.FC = () => {
   const { batchDenom } = useParams();
@@ -128,10 +145,12 @@ export const BatchDetails: React.FC = () => {
   useEffect(() => {
     const fetch = async (): Promise<void> => {
       if (batchDenom) {
-        const batch = await getBatchWithSupplyForDenom(batchDenom).catch(
-          console.error, // eslint-disable-line
-        );
-        if (batch) setBatch(batch);
+        try {
+          const batch = await getBatchWithSupplyForDenom(batchDenom);
+          setBatch(batch);
+        } catch (err) {
+          console.error(err); // eslint-disable-line no-console
+        }
       }
     };
     fetch();
@@ -141,9 +160,9 @@ export const BatchDetails: React.FC = () => {
     skip: !batchDenom,
     variables: { batchDenom: batchDenom as string },
   });
-  const project = offchainData?.creditVintageByBatchDenom?.projectByProjectId;
-  const projectHandle = project?.handle || '';
-  const metadata = project?.metadata || {};
+  const vintage = offchainData?.creditVintageByBatchDenom;
+  const projectHandle = vintage?.projectByProjectId?.handle || '';
+  const metadata = vintage?.metadata || {};
 
   if (!batch) return null;
 
@@ -165,7 +184,7 @@ export const BatchDetails: React.FC = () => {
             view in portfolio
           </OutlinedButton>
         </Box>
-        <Box sx={{ display: 'flex', flexWrap: { xs: 'wrap', sm: 'nowrap' } }}>
+        <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'] }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <Box sx={{ py: 10, borderBottom: 1, borderColor: 'grey.100' }}>
               <BatchInfo batch={batch} project={projectHandle} />
@@ -178,7 +197,7 @@ export const BatchDetails: React.FC = () => {
             sx={{
               my: [0, 10],
               ml: [0, 10],
-              width: ['100%', '370px'],
+              minWidth: ['100%', '33%', '370px'],
             }}
           >
             <BatchMetadata data={metadata} />

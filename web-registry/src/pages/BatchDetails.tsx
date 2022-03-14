@@ -43,6 +43,12 @@ const MetaDetail: React.FC<{ label: string }> = ({ label, children }) => (
   </LabeledDetail>
 );
 
+const ArrowLink: React.FC<{ href: string }> = ({ href, children }) => (
+  <Link sx={{ color: 'primary.contrastText' }} href={href}>
+    {children} <SmallArrowIcon sx={{ ml: 2 }} />
+  </Link>
+);
+
 const BatchInfo: React.FC<{ batch: BatchInfoWithSupply; project: string }> = ({
   batch,
   project,
@@ -59,23 +65,15 @@ const BatchInfo: React.FC<{ batch: BatchInfoWithSupply; project: string }> = ({
     <GridItem>
       <BatchDetail label="Project">
         <Box component="span" sx={{ textTransform: 'capitalize' }}>
-          <Link
-            sx={{ color: 'primary.contrastText' }}
-            href={`/projects/${project}`}
-          >
-            {project} <SmallArrowIcon sx={{ ml: 2 }} />
-          </Link>
+          <ArrowLink href={`/projects/${project}`}>{project}</ArrowLink>
         </Box>
       </BatchDetail>
     </GridItem>
     <GridItem>
       <BatchDetail label="Credit Class">
-        <Link
-          sx={{ color: 'primary.contrastText' }}
-          href={`/credit-classes/${batch.class_id}`}
-        >
-          {batch.class_id} <SmallArrowIcon sx={{ ml: 2 }} />
-        </Link>
+        <ArrowLink href={`/credit-classes/${batch.class_id}`}>
+          {batch.class_id}
+        </ArrowLink>
       </BatchDetail>
     </GridItem>
     <GridItem>
@@ -168,6 +166,7 @@ export const BatchDetails: React.FC = () => {
   const metadata = vintage?.metadata || {};
 
   if (!batch) return null;
+  // TODO should there be a not found component?
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>

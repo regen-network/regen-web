@@ -1,5 +1,4 @@
 import type { PageResponse } from './base';
-// import type { QueryBalanceResponse as BankQueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 /** Map keys from another type to values of number type */
 type MapToNumber<T> = { [K in keyof T]: number };

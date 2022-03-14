@@ -126,27 +126,29 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             {headCell.label}
           </Box>
         ))}
-        rows={batches.map(batch => [
-          <a
-            href={getAccountUrl(batch.issuer)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {truncate(batch.issuer)}
-          </a>,
-          <Box className={styles.noWrap}>{batch.batch_denom}</Box>,
-          !creditClassId && batch.class_id,
-          formatNumber(batch.tradable_supply),
-          formatNumber(batch.retired_supply),
-          formatNumber(batch.amount_cancelled),
-          <Box className={styles.noWrap}>
-            {formatDate(batch.start_date as Date)}
-          </Box>,
-          <Box className={styles.noWrap}>
-            {formatDate(batch.end_date as Date)}
-          </Box>,
-          <Box className={styles.noWrap}>{batch.project_location}</Box>,
-        ])}
+        rows={batches.map(batch =>
+          [
+            <a
+              href={getAccountUrl(batch.issuer)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {truncate(batch.issuer)}
+            </a>,
+            <Box className={styles.noWrap}>{batch.batch_denom}</Box>,
+            batch.class_id,
+            formatNumber(batch.tradable_supply),
+            formatNumber(batch.retired_supply),
+            formatNumber(batch.amount_cancelled),
+            <Box className={styles.noWrap}>
+              {formatDate(batch.start_date as Date)}
+            </Box>,
+            <Box className={styles.noWrap}>
+              {formatDate(batch.end_date as Date)}
+            </Box>,
+            <Box className={styles.noWrap}>{batch.project_location}</Box>,
+          ].filter(item => !(creditClassId && item === batch.class_id)),
+        )}
       />
     </Section>
   ) : null;

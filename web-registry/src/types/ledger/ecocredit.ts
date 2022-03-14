@@ -4,8 +4,6 @@ import type { QueryBalanceResponse as BankQueryBalanceResponse } from '@regen-ne
 /** Map keys from another type to values of number type */
 type MapToNumber<T> = { [K in keyof T]: number };
 
-// Response structure based on https://buf.build/regen/regen-ledger
-
 /** combines the ledger `BatchInfo` with ledger `QuerySupplyResponse` */
 export interface BatchInfoWithSupply extends BatchInfo, QuerySupplyResponse {}
 
@@ -94,6 +92,10 @@ export interface ClassInfo {
   credit_type: CreditType;
 }
 
+export interface QueryClassInfoResponse {
+  info?: ClassInfo;
+}
+
 interface CreditType {
   abbreviation: string;
   name: string;
@@ -104,4 +106,23 @@ interface CreditType {
 export interface QueryClassesResponse {
   classes: ClassInfo[];
   pagination?: PageResponse;
+}
+
+// TODO: pull these types from credit-class shacl schema
+export interface ApprovedMethodologyList {
+  '@type': 'schema:BreadcrumbList';
+  'schema:itemListElement': ApprovedMethodology[];
+  'schema:url': {
+    '@type': string;
+    '@value': string;
+  };
+}
+
+interface ApprovedMethodology {
+  '@type': 'regen:Methodology';
+  'schema:name': string;
+  'schema:url': {
+    '@type': string;
+    '@value': string;
+  };
 }

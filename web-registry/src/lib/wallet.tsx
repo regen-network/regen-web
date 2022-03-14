@@ -285,10 +285,13 @@ export const WalletProvider: React.FC = ({ children }) => {
   );
 };
 
-export const truncate = (walletAddress: string): string => {
-  return walletAddress
-    ? `${walletAddress.substring(0, 14)}...`.toLowerCase()
-    : '-';
+export const truncate = (walletAddress: string | undefined): string => {
+  if (!walletAddress) return '-';
+  const stringLength = walletAddress.length;
+  return `${walletAddress.substring(0, 8)}...${walletAddress.substring(
+    stringLength - 6,
+    stringLength,
+  )}`.toLowerCase();
 };
 
 export const useWallet = (): ContextType => React.useContext(WalletContext);

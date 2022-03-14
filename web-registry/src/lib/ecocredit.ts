@@ -13,6 +13,7 @@ import type {
   QueryClassesResponse,
   BatchInfoWithBalance,
   QueryBatchesResponse,
+  QueryClassInfoResponse,
 } from '../types/ledger/ecocredit';
 import type { PageResponse } from '../types/ledger/base';
 
@@ -99,18 +100,21 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
 };
 
 export const getBatchesWithSupply = async (
+  creditClassId?: string,
   params?: URLSearchParams,
 ): Promise<{
   data: BatchInfoWithSupply[];
   pagination?: PageResponse;
 }> => {
-  return queryEcoBatches(params).then(async ({ batches, pagination }) => {
-    const batchesWithSupply = await addSupplyDataToBatch(batches);
-    return {
-      data: batchesWithSupply,
-      pagination: pagination,
-    };
-  });
+  return queryEcoBatches(creditClassId, params).then(
+    async ({ batches, pagination }) => {
+      const batchesWithSupply = await addSupplyDataToBatch(batches);
+      return {
+        data: batchesWithSupply,
+        pagination: pagination,
+      };
+    },
+  );
 };
 
 export const addSupplyDataToBatch = (
@@ -153,12 +157,19 @@ export const queryEcoClasses = async (
 };
 
 export const queryEcoBatches = async (
+  creditClassId?: string,
   params?: URLSearchParams,
 ): Promise<QueryBatchesResponse> => {
   try {
     // Currently, the experimental testnet Hambach is running an old version of regen-ledger (v2.0.0-beta1)
     // which provides a different API than latest v3.0 for querying credit batches.
     if (expLedger) {
+      if (creditClassId) {
+        if (!params) {
+          params = new URLSearchParams();
+        }
+        params.set('class_id', creditClassId);
+      }
       const { data } = await axios.get(
         `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches`,
         {
@@ -171,19 +182,28 @@ export const queryEcoBatches = async (
       // The url pagination params are just ignored here since they can't really be used.
       // Indeed we cannot know in advance how many credit classes should be queried initially
       // to get the desired number of credit batches.
-      const {
-        data: { classes },
-      } = await queryEcoClasses();
-      const arr: BatchInfo[] = await Promise.all(
-        classes.map(async c => {
-          const { data } = await axios.get(
-            `${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes/${c.class_id}/batches`,
-          );
-          return data.batches;
-        }),
-      );
+      let batches: BatchInfo[] = [];
+      if (!creditClassId) {
+        const {
+          data: { classes },
+        } = await queryEcoClasses();
+        const arr: BatchInfo[] = await Promise.all(
+          classes.map(async c => {
+            const { data } = await axios.get(
+              `${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes/${c.class_id}/batches`,
+            );
+            return data.batches;
+          }),
+        );
 
-      const batches = arr.flat();
+        batches = arr.flat();
+      } else {
+        const { data } = await axios.get(
+          `${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes/${creditClassId}/batches`,
+        );
+        batches = data.batches;
+      }
+
       return {
         batches,
       };
@@ -244,4 +264,17 @@ export const getTxsByEvent = (msgType: string): Promise<AxiosResponse> => {
       return qs.stringify(params);
     },
   });
+};
+
+export const queryEcoClassInfo = async (
+  class_id: string,
+): Promise<QueryClassInfoResponse> => {
+  try {
+    const { data } = await axios.get(
+      `${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes/${class_id}`,
+    );
+    return data;
+  } catch (err) {
+    throw new Error(`Error fetching class info: ${err}`);
+  }
 };

@@ -7,13 +7,18 @@ import { formatNumber } from 'web-components/lib/components/table';
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
+import { formatDate } from 'web-components/lib/utils/format';
 
 import { truncate } from '../../lib/wallet';
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { formatDate } from 'web-components/lib/utils/format';
+
+interface CreditBatchProps {
+  creditClassId?: string;
+  titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
+}
 
 interface HeadCell {
   id: keyof BatchInfoWithSupply;
@@ -83,12 +88,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const CreditBatches: React.FC = () => {
+const CreditBatches: React.FC<CreditBatchProps> = ({
+  creditClassId,
+  titleAlign = 'center',
+}) => {
   const styles = useStyles();
   const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
+  let columnsToShow = [...headCells];
 
   const fetchData = (): void => {
-    getBatchesWithSupply().then(sortableBatches => {
+    getBatchesWithSupply(creditClassId).then(sortableBatches => {
       setBatches(sortableBatches.data);
     });
   };
@@ -98,15 +107,21 @@ const CreditBatches: React.FC = () => {
     fetchData();
   });
 
+  // We hide the classId column if it creditClassId provided (redundant)
+  if (creditClassId) {
+    columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'class_id');
+  }
+
   return ledgerRESTUri && batches.length > 0 ? (
     <Section
       classes={{ root: styles.section, title: styles.title }}
       title="Credit Batches"
       titleVariant="h2"
+      titleAlign={titleAlign}
     >
       <ActionsTable
         tableLabel="credit batch table"
-        headerRows={headCells.map(headCell => (
+        headerRows={columnsToShow.map(headCell => (
           <Box className={cx(headCell.wrap && styles.wrap)} key={headCell.id}>
             {headCell.label}
           </Box>
@@ -120,7 +135,7 @@ const CreditBatches: React.FC = () => {
             {truncate(batch.issuer)}
           </a>,
           <Box className={styles.noWrap}>{batch.batch_denom}</Box>,
-          batch.class_id,
+          !creditClassId && batch.class_id,
           formatNumber(batch.tradable_supply),
           formatNumber(batch.retired_supply),
           formatNumber(batch.amount_cancelled),

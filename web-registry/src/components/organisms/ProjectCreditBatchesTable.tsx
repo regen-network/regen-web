@@ -35,29 +35,29 @@ export const ProjectCreditBatchesTable: React.FC<{
       tableLabel="ecocredits table"
       renderActionButtons={renderActionButtons}
       headerRows={[
-        <Box
-          sx={{
-            minWidth: {
-              xs: 'auto',
-              sm: '11rem',
-              lg: '13rem',
-            },
-          }}
-        >
+        <Box sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}>
           Batch Denom
         </Box>,
         'Issuer',
-        'Credit Class',
         <Amount>Amount Tradable</Amount>,
         <Amount>Amount Retired</Amount>,
         <Amount>Amount Cancelled</Amount>,
         'Batch Start Date',
         'Batch End Date',
-        'Project Location',
       ]}
       rows={batches.map((row, i) => {
         return [
-          row.batch_denom,
+          <Box
+            component="span"
+            sx={{
+              whiteSpace: {
+                xs: 'wrap-word',
+                md: 'nowrap',
+              },
+            }}
+          >
+            {row.batch_denom}
+          </Box>,
           <a
             href={getAccountUrl(row.issuer as string)}
             target="_blank"
@@ -65,13 +65,11 @@ export const ProjectCreditBatchesTable: React.FC<{
           >
             {truncate(row.issuer)}
           </a>,
-          row.class_id,
           formatNumber(row.tradable_supply),
           formatNumber(row.retired_supply),
           formatNumber(row.amount_cancelled),
           <GreyText>{formatDate(row.start_date)}</GreyText>,
           <GreyText>{formatDate(row.end_date)}</GreyText>,
-          row.project_location,
         ];
       })}
     />

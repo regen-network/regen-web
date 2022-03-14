@@ -96,16 +96,16 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
   let columnsToShow = [...headCells];
 
-  const fetchData = (): void => {
-    getBatchesWithSupply(creditClassId).then(sortableBatches => {
-      setBatches(sortableBatches.data);
-    });
-  };
-
   useEffect(() => {
+    const fetchData = (): void => {
+      getBatchesWithSupply(creditClassId).then(sortableBatches => {
+        setBatches(sortableBatches.data);
+      });
+    };
+
     if (!ledgerRESTUri) return;
     fetchData();
-  });
+  }, [creditClassId]);
 
   // We hide the classId column if it creditClassId provided (redundant)
   if (creditClassId) {

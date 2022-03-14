@@ -1958,6 +1958,7 @@ export type CreditClass = Node & {
   methodologyId: Scalars['UUID'];
   uri: Scalars['String'];
   standard: Scalars['Boolean'];
+  onChainId?: Maybe<Scalars['String']>;
   /** Reads a single `Party` that is related to this `CreditClass`. */
   partyByDesignerId?: Maybe<Party>;
   /** Reads a single `Methodology` that is related to this `CreditClass`. */
@@ -2250,6 +2251,8 @@ export type CreditClassCondition = {
   uri?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `standard` field. */
   standard?: Maybe<Scalars['Boolean']>;
+  /** Checks for equality with the object’s `onChainId` field. */
+  onChainId?: Maybe<Scalars['String']>;
 };
 
 /** An input for mutations affecting `CreditClass` */
@@ -2261,6 +2264,7 @@ export type CreditClassInput = {
   methodologyId: Scalars['UUID'];
   uri?: Maybe<Scalars['String']>;
   standard?: Maybe<Scalars['Boolean']>;
+  onChainId?: Maybe<Scalars['String']>;
 };
 
 export type CreditClassIssuer = {
@@ -2627,6 +2631,7 @@ export type CreditClassPatch = {
   methodologyId?: Maybe<Scalars['UUID']>;
   uri?: Maybe<Scalars['String']>;
   standard?: Maybe<Scalars['Boolean']>;
+  onChainId?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Project` values, with data from `CreditVintage`. */
@@ -2980,6 +2985,8 @@ export enum CreditClassesOrderBy {
   UriDesc = 'URI_DESC',
   StandardAsc = 'STANDARD_ASC',
   StandardDesc = 'STANDARD_DESC',
+  OnChainIdAsc = 'ON_CHAIN_ID_ASC',
+  OnChainIdDesc = 'ON_CHAIN_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -3900,6 +3907,13 @@ export type DeleteCreditClassByIdInput = {
   /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
   clientMutationId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
+};
+
+/** All input for the `deleteCreditClassByOnChainId` mutation. */
+export type DeleteCreditClassByOnChainIdInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  onChainId: Scalars['String'];
 };
 
 /** All input for the `deleteCreditClass` mutation. */
@@ -5820,6 +5834,8 @@ export type Mutation = {
   updateCreditClass?: Maybe<UpdateCreditClassPayload>;
   /** Updates a single `CreditClass` using a unique key and a patch. */
   updateCreditClassById?: Maybe<UpdateCreditClassPayload>;
+  /** Updates a single `CreditClass` using a unique key and a patch. */
+  updateCreditClassByOnChainId?: Maybe<UpdateCreditClassPayload>;
   /** Updates a single `CreditClassVersion` using its globally unique id and a patch. */
   updateCreditClassVersion?: Maybe<UpdateCreditClassVersionPayload>;
   /** Updates a single `CreditClassVersion` using a unique key and a patch. */
@@ -5938,6 +5954,8 @@ export type Mutation = {
   deleteCreditClass?: Maybe<DeleteCreditClassPayload>;
   /** Deletes a single `CreditClass` using a unique key. */
   deleteCreditClassById?: Maybe<DeleteCreditClassPayload>;
+  /** Deletes a single `CreditClass` using a unique key. */
+  deleteCreditClassByOnChainId?: Maybe<DeleteCreditClassPayload>;
   /** Deletes a single `CreditClassVersion` using its globally unique id. */
   deleteCreditClassVersion?: Maybe<DeleteCreditClassVersionPayload>;
   /** Deletes a single `CreditClassVersion` using a unique key. */
@@ -6259,6 +6277,12 @@ export type MutationUpdateCreditClassArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateCreditClassByIdArgs = {
   input: UpdateCreditClassByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateCreditClassByOnChainIdArgs = {
+  input: UpdateCreditClassByOnChainIdInput;
 };
 
 
@@ -6613,6 +6637,12 @@ export type MutationDeleteCreditClassArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteCreditClassByIdArgs = {
   input: DeleteCreditClassByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteCreditClassByOnChainIdArgs = {
+  input: DeleteCreditClassByOnChainIdInput;
 };
 
 
@@ -12817,6 +12847,7 @@ export type Query = Node & {
   adminById?: Maybe<Admin>;
   adminByAuth0Sub?: Maybe<Admin>;
   creditClassById?: Maybe<CreditClass>;
+  creditClassByOnChainId?: Maybe<CreditClass>;
   creditClassVersionByIdAndCreatedAt?: Maybe<CreditClassVersion>;
   creditVintageById?: Maybe<CreditVintage>;
   creditVintageByEventId?: Maybe<CreditVintage>;
@@ -13240,6 +13271,12 @@ export type QueryAdminByAuth0SubArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryCreditClassByIdArgs = {
   id: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryCreditClassByOnChainIdArgs = {
+  onChainId: Scalars['String'];
 };
 
 
@@ -14274,6 +14311,15 @@ export type UpdateCreditClassByIdInput = {
   /** An object where the defined keys will be set on the `CreditClass` being updated. */
   creditClassPatch: CreditClassPatch;
   id: Scalars['UUID'];
+};
+
+/** All input for the `updateCreditClassByOnChainId` mutation. */
+export type UpdateCreditClassByOnChainIdInput = {
+  /** An arbitrary string value with no semantic meaning. Will be included in the payload verbatim. May be used to track mutations by the client. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `CreditClass` being updated. */
+  creditClassPatch: CreditClassPatch;
+  onChainId: Scalars['String'];
 };
 
 /** All input for the `updateCreditClass` mutation. */
@@ -17859,6 +17905,29 @@ export type CreateUserOrganizationIfNeededMutation = (
   )> }
 );
 
+export type CreditClassByOnChainIdQueryVariables = Exact<{
+  onChainId: Scalars['String'];
+}>;
+
+
+export type CreditClassByOnChainIdQuery = (
+  { __typename?: 'Query' }
+  & { creditClassByOnChainId?: Maybe<(
+    { __typename?: 'CreditClass' }
+    & Pick<CreditClass, 'id' | 'standard' | 'uri'>
+    & { projectsByCreditClassId: (
+      { __typename?: 'ProjectsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'Project' }
+        & MoreProjectFieldsFragment
+      )>> }
+    ), partyByDesignerId?: Maybe<(
+      { __typename?: 'Party' }
+      & Pick<Party, 'name'>
+    )> }
+  )> }
+);
+
 export type IssueCreditsMutationVariables = Exact<{
   input: IssueCreditsInput;
 }>;
@@ -19091,6 +19160,51 @@ export function useCreateUserOrganizationIfNeededMutation(baseOptions?: Apollo.M
 export type CreateUserOrganizationIfNeededMutationHookResult = ReturnType<typeof useCreateUserOrganizationIfNeededMutation>;
 export type CreateUserOrganizationIfNeededMutationResult = Apollo.MutationResult<CreateUserOrganizationIfNeededMutation>;
 export type CreateUserOrganizationIfNeededMutationOptions = Apollo.BaseMutationOptions<CreateUserOrganizationIfNeededMutation, CreateUserOrganizationIfNeededMutationVariables>;
+export const CreditClassByOnChainIdDocument = gql`
+    query CreditClassByOnChainId($onChainId: String!) {
+  creditClassByOnChainId(onChainId: $onChainId) {
+    id
+    standard
+    uri
+    projectsByCreditClassId {
+      nodes {
+        ...moreProjectFields
+      }
+    }
+    partyByDesignerId {
+      name
+    }
+  }
+}
+    ${MoreProjectFieldsFragmentDoc}`;
+
+/**
+ * __useCreditClassByOnChainIdQuery__
+ *
+ * To run a query within a React component, call `useCreditClassByOnChainIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCreditClassByOnChainIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCreditClassByOnChainIdQuery({
+ *   variables: {
+ *      onChainId: // value for 'onChainId'
+ *   },
+ * });
+ */
+export function useCreditClassByOnChainIdQuery(baseOptions: Apollo.QueryHookOptions<CreditClassByOnChainIdQuery, CreditClassByOnChainIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CreditClassByOnChainIdQuery, CreditClassByOnChainIdQueryVariables>(CreditClassByOnChainIdDocument, options);
+      }
+export function useCreditClassByOnChainIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CreditClassByOnChainIdQuery, CreditClassByOnChainIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CreditClassByOnChainIdQuery, CreditClassByOnChainIdQueryVariables>(CreditClassByOnChainIdDocument, options);
+        }
+export type CreditClassByOnChainIdQueryHookResult = ReturnType<typeof useCreditClassByOnChainIdQuery>;
+export type CreditClassByOnChainIdLazyQueryHookResult = ReturnType<typeof useCreditClassByOnChainIdLazyQuery>;
+export type CreditClassByOnChainIdQueryResult = Apollo.QueryResult<CreditClassByOnChainIdQuery, CreditClassByOnChainIdQueryVariables>;
 export const IssueCreditsDocument = gql`
     mutation IssueCredits($input: IssueCreditsInput!) {
   issueCredits(input: $input) {

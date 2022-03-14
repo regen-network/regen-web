@@ -14,9 +14,9 @@ import {
   LabeledNumber,
 } from 'web-components/lib/components/text-layouts';
 import { useBatchDetailsQuery } from '../generated/graphql';
+import { Link } from '../components/atoms';
 
 import type { BatchInfoWithSupply } from '../types/ledger/ecocredit';
-import { Link } from '../components/atoms';
 
 const batchDate = (date: string | Date): string =>
   dayjs(date).format('MMM D, YYYY');
@@ -59,7 +59,10 @@ const BatchInfo: React.FC<{ batch: BatchInfoWithSupply; project: string }> = ({
     <GridItem>
       <BatchDetail label="Project">
         <Box component="span" sx={{ textTransform: 'capitalize' }}>
-          <Link sx={{ color: 'unset' }} href={`/projects/${project}`}>
+          <Link
+            sx={{ color: 'primary.contrastText' }}
+            href={`/projects/${project}`}
+          >
             {project} <SmallArrowIcon sx={{ ml: 2 }} />
           </Link>
         </Box>
@@ -68,7 +71,7 @@ const BatchInfo: React.FC<{ batch: BatchInfoWithSupply; project: string }> = ({
     <GridItem>
       <BatchDetail label="Credit Class">
         <Link
-          sx={{ color: 'unset' }}
+          sx={{ color: 'primary.contrastText' }}
           href={`/credit-classes/${batch.class_id}`}
         >
           {batch.class_id} <SmallArrowIcon sx={{ ml: 2 }} />

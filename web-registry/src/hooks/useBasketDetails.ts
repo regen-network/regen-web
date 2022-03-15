@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 
-import { getBasket, getBasketBalances, getBatchInfo } from '../lib/ecocredit';
+import {
+  getBasket,
+  getBasketBalances,
+  getBasketBalancesWithBatchInfo,
+} from '../lib/ecocredit';
 import {
   Basket,
   BasketBalance,
@@ -58,19 +62,7 @@ const useBasketDetails = (
         // TODO: Basket Curator
         const curator = 'Regen Network Development, Inc';
         const balances = await getBasketBalances(basketDenom);
-        const batches: BatchInfoWithProject[] = [];
-        balances.balances.map(async batchBalance => {
-          getBatchInfo(batchBalance.batchDenom).then(batchInfo => {
-            // TODO: fetch the project name / display name, corresponding to the batch
-            const projectName = 'cavan-station';
-            const projectDisplayName = 'Cavan Station';
-            batches.push({
-              project_name: projectName,
-              project_display: projectDisplayName,
-              ...batchInfo.info,
-            });
-          });
-        });
+        const batches = await getBasketBalancesWithBatchInfo(balances.balances);
 
         setData({
           basket: basket.basket,

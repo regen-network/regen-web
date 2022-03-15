@@ -9,12 +9,11 @@ export function LabeledNumber({
   label,
   number,
   sx,
-  styles,
 }: {
   label: string;
   number: number | string;
-  sx?: SxProps<Theme>;
-  styles?: {
+  sx?: {
+    root?: SxProps<Theme>;
     label?: SxProps<Theme>;
     number?: SxProps<Theme>;
   };
@@ -23,15 +22,15 @@ export function LabeledNumber({
     <LabeledDetail
       label={label}
       sx={{
-        height: '100%',
-        justifyContent: 'space-between',
-        ...sx,
-      }}
-      styles={{
-        label: styles?.label,
+        root: {
+          height: '100%',
+          justifyContent: 'space-between',
+          ...sx?.root,
+        },
+        label: sx?.label,
       }}
     >
-      <Title variant="h3" sx={styles?.number}>
+      <Title variant="h3" sx={sx?.number}>
         {Math.round(Number(number)).toLocaleString()}
       </Title>
     </LabeledDetail>

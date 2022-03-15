@@ -19,13 +19,13 @@ const Label = styled(UnstyledLabel)(({ theme }) => ({
 /** Grey label over child elements */
 export const LabeledDetail: React.FC<{
   label: string;
-  sx?: SxProps<Theme>;
-  styles?: {
+  sx?: {
+    root?: SxProps<Theme>;
     label?: SxProps<Theme>;
   };
-}> = ({ label, children, sx, styles }) => (
-  <Root sx={sx}>
-    <Label sx={styles?.label}>{label}</Label>
+}> = ({ label, children, sx }) => (
+  <Root sx={sx?.root}>
+    <Label sx={sx?.label}>{label}</Label>
     <div>{children}</div>
   </Root>
 );

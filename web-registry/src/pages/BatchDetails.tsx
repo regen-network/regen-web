@@ -40,7 +40,7 @@ const BatchDetail: React.FC<{ label: string }> = ({ label, children }) => (
 );
 
 const MetaDetail: React.FC<{ label: string }> = ({ label, children }) => (
-  <LabeledDetail label={label} styles={{ label: { fontSize: { xs: 12 } } }}>
+  <LabeledDetail label={label} sx={{ label: { fontSize: { xs: 12 } } }}>
     <Typography sx={{ fontSize: 16 }}>{children}</Typography>
   </LabeledDetail>
 );

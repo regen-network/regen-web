@@ -110,10 +110,7 @@ const App: React.FC = (): JSX.Element => {
             element={<EcocreditsByAccount />}
           />
           <Route path="baskets/:basketDenom" element={<BasketDetails />} />
-          <Route
-            path="ecocredits/batch-details/:batchDenom"
-            element={<BatchDetails />}
-          />
+          <Route path="credit-batches/:batchDenom" element={<BatchDetails />} />
           <Route
             path="user-profile"
             element={<ProtectedRoute component={UserProfile} />}

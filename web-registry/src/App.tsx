@@ -17,6 +17,7 @@ import {
   Admin,
   BasicInfo,
   BatchDetails,
+  BasketDetails,
   BuyerCreate,
   BuyersPage,
   CertificatePage,
@@ -108,6 +109,7 @@ const App: React.FC = (): JSX.Element => {
             path="ecocredits/accounts/:accountAddress"
             element={<EcocreditsByAccount />}
           />
+          <Route path="baskets/:basketDenom" element={<BasketDetails />} />
           <Route
             path="ecocredits/batch-details/:batchDenom"
             element={<BatchDetails />}

@@ -60,7 +60,7 @@ const useBasketDetails = (
         const description =
           'The Regen Nature Carbon Ton groups together carbon sequestration ecocredits into one tradeable asset. Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
         // TODO: Basket Curator
-        const curator = 'Regen Network Development, Inc';
+        const curator = 'regen1qdqafsy2jfuyq7rxzkdwyytmrxlfn8csq0uetx';
         const balances = await getBasketBalances(basketDenom);
         const batches = await getBasketBalancesWithBatchInfo(balances.balances);
 

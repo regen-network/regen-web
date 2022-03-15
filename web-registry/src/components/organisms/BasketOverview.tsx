@@ -12,6 +12,8 @@ import { Label } from 'web-components/lib/components/label';
 import { parseText } from 'web-components/lib/utils/textParser';
 import { formatNumber } from 'web-components/lib/components/table';
 import { formatDate } from 'web-components/lib/utils/format';
+import { getAccountUrl } from '../../lib/block-explorer';
+import { truncate } from '../../lib/wallet';
 
 import { LinkWithArrow } from '../atoms/LinkWithArrow';
 import { OptimizedImage } from '../atoms/OptimizedImage';
@@ -162,9 +164,8 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                 <Item label="total amount" data={formatNumber(totalAmount)} />
                 <Item
                   label="curator"
-                  data={curator}
-                  // TODO: harcoded url for curator
-                  link={'https://www.regen.network/'}
+                  data={truncate(curator)}
+                  link={getAccountUrl(curator as string)}
                 />
                 <ItemWithLinkList
                   label="allowed credit classes"

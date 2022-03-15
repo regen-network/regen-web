@@ -16,6 +16,8 @@ import type {
   BatchInfoWithBalance,
   QueryBatchesResponse,
   QueryClassInfoResponse,
+  BasketBalance,
+  BatchInfoWithProject,
 } from '../types/ledger/ecocredit';
 
 const ECOCREDIT_MESSAGE_TYPES = {
@@ -28,6 +30,27 @@ const ECOCREDIT_MESSAGE_TYPES = {
 
 // helpers for combining ledger queries (currently rest, regen-js in future)
 // into UI data structures
+
+export const getBasketBalancesWithBatchInfo = async (
+  balances: BasketBalance[],
+): Promise<BatchInfoWithProject[]> => {
+  try {
+    const batches = await Promise.all(
+      balances.map(batchBalance => queryEcoBatchInfo(batchBalance.batchDenom)),
+    );
+    // TODO: fetch the project name / display name, corresponding to the batch
+    const projectName = 'cavan-station';
+    const projectDisplayName = 'Cavan Station';
+    const batchesWithProject = batches.map(batch => ({
+      project_name: projectName,
+      project_display: projectDisplayName,
+      ...batch.info,
+    }));
+    return batchesWithProject;
+  } catch (err) {
+    throw new Error(`Could not get basket balances with batch info ${err}`);
+  }
+};
 
 export const getBatchesWithSupplyForDenoms = async (
   denoms: string[],
@@ -241,37 +264,20 @@ export async function getBasketBalances(
     balances: [
       {
         basketId: 'basket-1',
-        batchDenom: 'C01-20170101-20191231-001',
+        batchDenom: 'C01-20180101-20200101-001',
         balance: '17000',
       },
       {
         basketId: 'basket-1',
-        batchDenom: 'C01-20170101-20191231-002',
+        batchDenom: 'C01-20190101-20210101-002',
         balance: '23000',
       },
       {
         basketId: 'basket-1',
-        batchDenom: 'C01-20170101-20201231-003',
+        batchDenom: 'C01-20210909-20220101-003',
         balance: '30000',
       },
     ],
-  });
-}
-
-export async function getBatchInfo(
-  batchDenom: string,
-): Promise<QueryBatchInfoResponse> {
-  return Promise.resolve({
-    info: {
-      class_id: 'C01',
-      batch_denom: 'C01-20170101-20191231-001',
-      issuer: 'regen1qdqafsy2jfuyq7rxzkdwyytmrxlfn8csq0uetx',
-      total_amount: 13000.0,
-      amount_cancelled: 38243.0,
-      start_date: '2017-01-01T00:00:00Z',
-      end_date: '2019-12-31T00:00:00Z',
-      project_location: 'AU-NSW 2453',
-    },
   });
 }
 

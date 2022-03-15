@@ -17842,7 +17842,6 @@ export type BatchDetailsQuery = (
   { __typename?: 'Query' }
   & { creditVintageByBatchDenom?: Maybe<(
     { __typename?: 'CreditVintage' }
-    & Pick<CreditVintage, 'metadata'>
     & { projectByProjectId?: Maybe<(
       { __typename?: 'Project' }
       & Pick<Project, 'handle'>
@@ -19032,7 +19031,6 @@ export type AllProjectsQueryResult = Apollo.QueryResult<AllProjectsQuery, AllPro
 export const BatchDetailsDocument = gql`
     query batchDetails($batchDenom: String!) {
   creditVintageByBatchDenom(batchDenom: $batchDenom) {
-    metadata
     projectByProjectId {
       handle
     }

@@ -104,20 +104,25 @@ const TextContainer = styled(Grid)(({ theme }) => ({
   },
 }));
 
+export interface CreditClass {
+  id: string;
+  name: string;
+}
+
 export interface BasketOverviewProps {
   name: string;
-  basketDenom: string;
+  displayDenom: string;
   description: string;
   totalAmount: number;
   curator: string;
-  allowedCreditClasses: string[];
+  allowedCreditClasses: CreditClass[];
   minStartDate?: string;
   startDateWindow?: string;
 }
 
 export const BasketOverview: React.FC<BasketOverviewProps> = ({
   name,
-  basketDenom,
+  displayDenom,
   description,
   totalAmount,
   curator,
@@ -143,7 +148,7 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
               {name}
             </Title>
             <Description className={styles.basketDenom}>
-              {basketDenom}
+              {displayDenom}
             </Description>
             <Description className={styles.basketDescription}>
               {description}
@@ -154,40 +159,29 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                 rowSpacing={1}
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
               >
-                <Grid item xs={12} sm={6}>
-                  <Item label="total amount" data={formatNumber(totalAmount)} />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Item
-                    label="curator"
-                    data={curator}
-                    // TODO: harcoded url for curator
-                    link={'https://www.regen.network/'}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Item
-                    label="allowed credit classes"
-                    data={allowedCreditClasses}
-                    // TODO: url for credit class
-                    link={'/credit-classes/'}
-                  />
-                </Grid>
+                <Item label="total amount" data={formatNumber(totalAmount)} />
+                <Item
+                  label="curator"
+                  data={curator}
+                  // TODO: harcoded url for curator
+                  link={'https://www.regen.network/'}
+                />
+                <ItemWithLinkList
+                  label="allowed credit classes"
+                  data={allowedCreditClasses}
+                  link={'/credit-classes/'}
+                />
                 {minStartDate && (
-                  <Grid item xs={12} sm={6}>
-                    <Item
-                      label="min start date"
-                      data={formatDate(minStartDate)}
-                    />
-                  </Grid>
+                  <Item
+                    label="min start date"
+                    data={formatDate(minStartDate)}
+                  />
                 )}
                 {startDateWindow && (
-                  <Grid item xs={12} sm={6}>
-                    <Item
-                      label="start date window"
-                      data={formatDate(startDateWindow)}
-                    />
-                  </Grid>
+                  <Item
+                    label="start date window"
+                    data={formatDate(startDateWindow)}
+                  />
                 )}
               </Grid>
             </OnBoardingCard>
@@ -199,7 +193,7 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
 };
 
 /**
- * Basket summary item (subcomponent)
+ * Basket summary item (subcomponents)
  */
 
 const useStylesItem = makeStyles(theme => ({
@@ -223,26 +217,60 @@ const useStylesItem = makeStyles(theme => ({
 
 interface ItemProps {
   label: string;
-  data: string | string[];
+  data: string;
   link?: string;
 }
 
 const Item = ({ label, data, link }: ItemProps): JSX.Element => {
   const styles = useStylesItem();
-  const itemData = Array.isArray(data) ? data : [data];
 
   return (
-    <Box sx={{ mt: 4 }}>
-      <Label className={styles.label}>{label}</Label>
-      {itemData.map((item, i) => (
-        <Description key={`basket-${item}`} className={styles.data}>
-          {link ? (
-            <LinkWithArrow link={link + item} label={item} />
-          ) : (
-            parseText(item)
-          )}
+    <GridItem label={label}>
+      <Description className={styles.data}>
+        {link ? <LinkWithArrow link={link} label={data} /> : parseText(data)}
+      </Description>
+    </GridItem>
+  );
+};
+
+interface ItemWithListProps {
+  label: string;
+  data: CreditClass[];
+  link: string;
+}
+
+const ItemWithLinkList = ({
+  label,
+  data,
+  link,
+}: ItemWithListProps): JSX.Element => {
+  const styles = useStylesItem();
+
+  return (
+    <GridItem label={label}>
+      {data.map(item => (
+        <Description key={`basket-${item.id}`} className={styles.data}>
+          <LinkWithArrow link={link + item.id} label={item.name} />
         </Description>
       ))}
-    </Box>
+    </GridItem>
+  );
+};
+
+interface GridItemProps {
+  label: string;
+  children: React.ReactNode;
+}
+
+const GridItem = ({ label, children }: GridItemProps): JSX.Element => {
+  const styles = useStylesItem();
+
+  return (
+    <Grid item xs={12} sm={6}>
+      <Box sx={{ mt: 4 }}>
+        <Label className={styles.label}>{label}</Label>
+        {children}
+      </Box>
+    </Grid>
   );
 };

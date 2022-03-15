@@ -6,10 +6,11 @@ import {
   BasketBalance,
   BatchInfoWithProject,
 } from '../types/ledger/ecocredit';
-import { BasketOverviewProps } from '../components/organisms';
+import { BasketOverviewProps, CreditClass } from '../components/organisms';
 
 interface BasketExtended {
-  classes: string[];
+  classes: CreditClass[];
+  displayDenom: string;
   description: string;
   curator: string;
   totalAmount: number;
@@ -42,8 +43,13 @@ const useBasketDetails = (
     async function fetchData(basketDenom: string): Promise<void> {
       try {
         const basket = await getBasket(basketDenom);
+        // TODO: Hardcoded. Fetch basket classes display names
+        const basketClasses = basket.classes.map(classId => ({
+          id: classId,
+          name: `Verified Carbon Standard (${classId})`,
+        }));
         // TODO: Display basket denom
-        // const displayDenom = 'eco.C.rNCT';
+        const displayDenom = 'eco.C.rNCT';
         // TODO: Basket description (see comment in Figma)
         // https://www.figma.com/file/x5vjWsddiUBzP2N13AFOPw?node-id=32:10028#155844414
         // const description = getBasketDescription(basketDenom);
@@ -69,7 +75,8 @@ const useBasketDetails = (
         setData({
           basket: basket.basket,
           basketExtended: {
-            classes: basket.classes,
+            classes: basketClasses,
+            displayDenom,
             description,
             curator,
             totalAmount: 0,
@@ -88,10 +95,12 @@ const useBasketDetails = (
 
   // Prepare data for BasketOverview
   useEffect(() => {
-    if (data?.basket) {
+    if (data?.basket && data?.basketExtended && data?.batchesInfo) {
+      console.log('>>> _dataOverview', data); // eslint-disable-line no-console
+
       const _dataOverview: BasketOverviewProps = {
         name: data.basket.name,
-        basketDenom: data.basket.basketDenom,
+        displayDenom: data.basketExtended.displayDenom,
         description: data.basketExtended.description,
         totalAmount: data.basketExtended.totalAmount,
         curator: data.basketExtended.curator,

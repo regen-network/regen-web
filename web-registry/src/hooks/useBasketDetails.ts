@@ -96,8 +96,6 @@ const useBasketDetails = (
   // Prepare data for BasketOverview
   useEffect(() => {
     if (data?.basket && data?.basketExtended && data?.batchesInfo) {
-      console.log('>>> _dataOverview', data); // eslint-disable-line no-console
-
       const _dataOverview: BasketOverviewProps = {
         name: data.basket.name,
         displayDenom: data.basketExtended.displayDenom,

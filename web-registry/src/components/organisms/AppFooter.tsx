@@ -20,6 +20,10 @@ const AppFooter: React.FC = () => {
           title: 'rNCT',
           href: '/baskets/eco.uC.rNCT',
         },
+        {
+          title: 'Projects',
+          href: '/#projects',
+        },
         // TODO: Hide before merging
         // Add it back once there starts to be some activity on mainnet
         {

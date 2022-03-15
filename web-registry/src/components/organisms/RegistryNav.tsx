@@ -16,8 +16,6 @@ import {
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
 
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
-import { ReactComponent as BuyersIcon } from '../../assets/svgs/buyers.svg';
-import { ReactComponent as LandStewardsIcon } from '../../assets/svgs/land-stewards.svg';
 import { useMoreProjectsQuery } from '../../generated/graphql';
 
 const RegistryNav: React.FC = () => {
@@ -30,50 +28,29 @@ const RegistryNav: React.FC = () => {
 
   //  each custom dropdown still needs to be passed `dropdownItems` to render
   //  correctly on mobile, so I declare here to avoid duplicate code
-  const creditClassItems: HeaderDropdownItemProps[] = [
+
+  const carbonPlusItems: HeaderDropdownItemProps[] = [
     {
       linkComponent: RegistryNavLink,
-      title: 'Carbon<i>Plus</i> Grasslands',
+      title: 'Carbon<i>Plus</i> Grasslands credit class',
       href: '/credit-classes/carbonplus-grasslands',
       svg: Cow /* , right: () => <PeerReviewed /> */,
     },
-  ];
-
-  const methodologyItems: HeaderDropdownItemProps[] = [
     {
       linkComponent: RegistryNavLink,
-      title: 'Carbon<i>Plus</i> Grasslands',
+      title: 'Carbon<i>Plus</i> Grasslands methodology',
       href: '/methodologies/carbonplus-grasslands',
       svg: Cow,
       /* right: () => <PeerReviewed />, */
     },
   ];
 
-  const stakeholderItems: HeaderDropdownItemProps[] = [
-    {
-      linkComponent: RegistryNavLink,
-      title: 'Buyers',
-      href: '/buyers',
-      svg: BuyersIcon,
-    },
-    {
-      linkComponent: RegistryNavLink,
-      title: 'Land Stewards',
-      href: '/land-stewards',
-      svg: LandStewardsIcon,
-    },
-  ];
-
-  const programStandardItems: HeaderDropdownItemProps[] = [
+  const programHowToItems: HeaderDropdownItemProps[] = [
     {
       linkComponent: NavLink,
       href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
       title: 'Program Guide',
     },
-    // { href: '/process', title: 'Process' },
-  ];
-
-  const programHowToItems: HeaderDropdownItemProps[] = [
     // { href: '/create-credit-class', title: 'Create a Credit Class', linkComponent: RegistryNavLink },
     {
       href: '/create-methodology',
@@ -83,6 +60,11 @@ const RegistryNav: React.FC = () => {
     {
       href: '/methodology-review-process',
       title: 'Methodology Review Process',
+      linkComponent: RegistryNavLink,
+    },
+    {
+      href: 'https://library.regen.network/',
+      title: 'Regen Registry Library',
       linkComponent: RegistryNavLink,
     },
     // { href: '/become-a-monitor', title: 'Become a Monitor' },
@@ -96,6 +78,12 @@ const RegistryNav: React.FC = () => {
   };
 
   const menuItems: HeaderMenuItem[] = [
+    // TODO: Hide before merging
+    // Add it back once the rNCT basket is created on mainnet
+    {
+      title: 'rNCT',
+      href: '/baskets/eco.uC.rNCT',
+    },
     {
       title: 'Projects',
       dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
@@ -106,46 +94,21 @@ const RegistryNav: React.FC = () => {
         linkComponent: RegistryNavLink,
       })),
     },
+    // TODO: Hide before merging
+    // Add it back once there starts to be some activity on mainnet
     {
-      title: 'Credit Classes',
-      dropdownItems: creditClassItems,
-      render: () => (
-        <HeaderDropdownColumn
-          // title="Carbon<i>Plus</i> Credits"
-          items={creditClassItems}
-          linkComponent={RegistryNavLink}
-        />
-      ),
-    },
-    {
-      title: 'Methodologies',
-      dropdownItems: methodologyItems,
-      render: () => (
-        <HeaderDropdownColumn
-          items={methodologyItems}
-          linkComponent={RegistryNavLink}
-        />
-      ),
-    },
-    {
-      title: 'Stakeholders',
-      dropdownItems: stakeholderItems,
-      render: () => (
-        <HeaderDropdownColumn
-          items={stakeholderItems}
-          linkComponent={RegistryNavLink}
-        />
-      ),
+      title: 'Activity',
+      href: '/stats/activity',
     },
     {
       title: 'Program',
-      dropdownItems: [...programStandardItems, ...programHowToItems],
+      dropdownItems: [...carbonPlusItems, ...programHowToItems],
       render: () => (
         <Box display="flex" justifyContent="space-between">
           <Box pr={20}>
             <HeaderDropdownColumn
-              title="Standard"
-              items={programStandardItems}
+              title="CarbonPlus"
+              items={carbonPlusItems}
               linkComponent={RegistryNavLink}
             />
           </Box>

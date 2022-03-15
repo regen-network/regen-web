@@ -79,7 +79,8 @@ const MenuHover = ({
         onMouseEnter={popoverEnter}
         onMouseLeave={popoverLeave}
       >
-        {text} <DropdownIcon color={dropdownColor} />
+        {text}
+        <DropdownIcon color={dropdownColor} />
       </span>
       <Popover
         // disableScrollLock

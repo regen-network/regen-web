@@ -9,6 +9,7 @@ import Title from 'web-components/lib/components/title';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 
 import { getBatchWithSupplyForDenom } from '../lib/ecocredit';
+import { getMetadata } from '../lib/metadata-graph';
 import {
   LabeledDetail,
   LabeledNumber,
@@ -17,6 +18,7 @@ import { useBatchDetailsQuery } from '../generated/graphql';
 import { Link } from '../components/atoms';
 
 import type { BatchInfoWithSupply } from '../types/ledger/ecocredit';
+import type { BatchMetadataLD } from '../generated/json-ld';
 
 const batchDate = (date: string | Date): string =>
   dayjs(date).format('MMM D, YYYY');
@@ -115,8 +117,9 @@ const BatchTotals: React.FC<{ batch: BatchInfoWithSupply }> = ({ batch }) => (
   </>
 );
 
-const BatchMetadata: React.FC<{ data: any }> = ({ data }) => {
-  const regenField = (key: string): string => `http://regen.network/${key}`;
+const BatchMetadata: React.FC<{ data?: BatchMetadataLD }> = ({ data }) => {
+  const monitoringReport = data?.['regen:batchMonitoringReport'];
+  const verificationReport = data?.['regen:batchVerificationReport'];
   return (
     <Box
       sx={{
@@ -130,10 +133,26 @@ const BatchMetadata: React.FC<{ data: any }> = ({ data }) => {
       <Title variant="h5">Metadata</Title>
       <Box sx={{ mt: 4, display: 'flex', flexDirection: 'column', gap: 8 }}>
         <MetaDetail label="vcs retirement serial number">
-          {data[regenField('serialNumber')]}
+          {data?.['regen:vcsRetirementSerialNumber'] || '-'}
         </MetaDetail>
-        <MetaDetail label="batch monitoring report">TODO</MetaDetail>
-        <MetaDetail label="Batch verification report">TODO</MetaDetail>
+        <MetaDetail label="batch monitoring report">
+          {!!monitoringReport ? (
+            <Link href={monitoringReport?.['schema:url']?.['@value']}>
+              {monitoringReport?.['schema:name']}
+            </Link>
+          ) : (
+            '-'
+          )}
+        </MetaDetail>
+        <MetaDetail label="Batch verification report">
+          {!!verificationReport ? (
+            <Link href={verificationReport?.['schema:url']?.['@value']}>
+              {verificationReport?.['schema:name']}
+            </Link>
+          ) : (
+            '-'
+          )}
+        </MetaDetail>
       </Box>
     </Box>
   );
@@ -142,6 +161,7 @@ const BatchMetadata: React.FC<{ data: any }> = ({ data }) => {
 export const BatchDetails: React.FC = () => {
   const { batchDenom } = useParams();
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
+  const [metadata, setMetadata] = useState<BatchMetadataLD>();
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {
@@ -149,6 +169,10 @@ export const BatchDetails: React.FC = () => {
         try {
           const batch = await getBatchWithSupplyForDenom(batchDenom);
           setBatch(batch);
+          if (batch.metadata) {
+            const { data: metadata } = await getMetadata(batch.metadata);
+            setMetadata(metadata);
+          }
         } catch (err) {
           console.error(err); // eslint-disable-line no-console
         }
@@ -161,12 +185,11 @@ export const BatchDetails: React.FC = () => {
     skip: !batchDenom,
     variables: { batchDenom: batchDenom as string },
   });
-  const vintage = offchainData?.creditVintageByBatchDenom;
-  const projectHandle = vintage?.projectByProjectId?.handle || '';
-  const metadata = vintage?.metadata || {};
+  const projectHandle =
+    offchainData?.creditVintageByBatchDenom?.projectByProjectId?.handle || '';
 
   if (!batch) return null;
-  // TODO should there be a not found component?
+  // TODO should there be a not found component or redirect?
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>

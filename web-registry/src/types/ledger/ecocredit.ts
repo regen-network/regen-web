@@ -31,6 +31,7 @@ export interface BatchInfo {
   issuer: string;
   batch_denom: string;
   class_id: string;
+  metadata: Uint8Array;
   total_amount: number;
   amount_cancelled: number;
   project_location: string;

@@ -8,16 +8,17 @@ import {
 import { formatNumber } from 'web-components/lib/components/table';
 import { formatDate } from 'web-components/lib/utils/format';
 
+import { Link } from '../atoms';
+import { NoCredits } from '../molecules';
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { NoCredits } from '../molecules';
 import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
 }));
 
-const Amount = styled('div')({
+const BreakText = styled('div')({
   whiteSpace: 'normal',
   wordWrap: 'break-word',
 });
@@ -48,8 +49,8 @@ export const EcocreditsTable: React.FC<{
         </Box>,
         'Issuer',
         'Credit Class',
-        <Amount>Amount Tradable</Amount>,
-        <Amount>Amount Retired</Amount>,
+        <BreakText>Amount Tradable</BreakText>,
+        <BreakText>Amount Retired</BreakText>,
         'Batch Start Date',
         'Batch End Date',
         'Project Location',
@@ -57,13 +58,9 @@ export const EcocreditsTable: React.FC<{
       rows={credits.map((row, i) => {
         return [
           row.batch_denom,
-          <a
-            href={getAccountUrl(row.issuer as string)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Link href={getAccountUrl(row.issuer as string)} target="_blank">
             {truncate(row.issuer as string)}
-          </a>,
+          </Link>,
           row.class_id,
           formatNumber(row.tradable_amount),
           formatNumber(row.retired_amount),

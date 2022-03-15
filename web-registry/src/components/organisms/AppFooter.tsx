@@ -12,15 +12,19 @@ const AppFooter: React.FC = () => {
 
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
-      title: 'Regen Registry',
+      title: 'Registry App',
       items: [
+        // TODO: Hide before merging
+        // Add it back once the rNCT basket is created on mainnet
         {
-          title: 'Carbon<i>Plus</i> Grasslands Credit Class',
-          href: '/credit-classes/carbonplus-grasslands',
+          title: 'rNCT',
+          href: '/baskets/eco.uC.rNCT',
         },
+        // TODO: Hide before merging
+        // Add it back once there starts to be some activity on mainnet
         {
-          title: 'Carbon<i>Plus</i> Grasslands Methodology',
-          href: '/methodologies/carbonplus-grasslands',
+          title: 'Activity',
+          href: '/stats/activity',
         },
       ],
     },
@@ -29,11 +33,11 @@ const AppFooter: React.FC = () => {
       items: [
         {
           title: 'Buyers',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/buyers/`,
+          href: `/buyers`,
         },
         {
           title: 'Land Stewards',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
+          href: `/land-stewards`,
         },
       ],
     },
@@ -51,6 +55,10 @@ const AppFooter: React.FC = () => {
         {
           title: 'Methodology Review Process',
           href: '/methodology-review-process',
+        },
+        {
+          title: 'Regen Registry Library',
+          href: 'https://library.regen.network/',
         },
       ],
     },

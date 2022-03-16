@@ -28,7 +28,7 @@ import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFoote
 import { setPageView } from '../../lib/ga';
 import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
-import { useLedger, ContextType } from '../../ledger';
+import { useLedger } from '../../ledger';
 import { chainId } from '../../lib/ledger';
 import { useWallet } from '../../lib/wallet';
 import {
@@ -73,7 +73,7 @@ function getVisiblePartyName(party?: DisplayValues): string | undefined {
 }
 
 function ProjectDetails(): JSX.Element {
-  const { api }: ContextType = useLedger();
+  const { api } = useLedger({ forceExp: true });
   const { projectId } = useParams();
 
   const walletContext = useWallet();

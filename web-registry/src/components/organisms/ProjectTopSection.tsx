@@ -25,7 +25,7 @@ import {
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
 import { ProjectCreditBatchesTable } from '.';
-import { ProjectBatchTotals } from '../molecules';
+import { LineItemLabelAbove, ProjectBatchTotals } from '../molecules';
 import { LinkWithArrow } from '../atoms';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -378,7 +378,10 @@ function ProjectTopSection({
               <Title sx={{ mt: 6 }} variant="h5">
                 Additional Metadata
               </Title>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}></Box>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}>
+                <LineItemLabelAbove label="xyz" data={'abc'} />
+                {/* <LinkWithArrow /> */}
+              </Box>
             </>
           )}
           <LazyLoad offset={50}>

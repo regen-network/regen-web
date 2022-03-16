@@ -10,7 +10,7 @@ import ReadMore from 'web-components/lib/components/read-more';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 
 import { Link } from '../components/atoms';
-import { EcocreditsSection } from '../components/molecules';
+import { EcocreditsSection, LineItemLabelAbove } from '../components/molecules';
 import { CreditBatches, MoreProjectsSection } from '../components/organisms';
 import { toTitleCase } from '../lib/titleCase';
 import { getAccountUrl } from '../lib/block-explorer';
@@ -131,7 +131,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
 
     if (!count || count < 1) return null;
     return (
-      <LineItem
+      <LineItemLabelAbove
         label="approved methodologies"
         data={
           <Box>
@@ -154,27 +154,6 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
           </Box>
         }
       />
-    );
-  };
-
-  interface LineItemProps {
-    label: string;
-    data: string | JSX.Element;
-  }
-
-  const LineItem: React.FC<LineItemProps> = ({ label, data }) => {
-    if (!data) return null;
-    return (
-      <Box
-        sx={{
-          width: { xs: '100%', sm: '50%' },
-          pr: 4,
-        }}
-        className={styles.marginBottom}
-      >
-        <Label className={styles.label}>{label}</Label>
-        <Description className={styles.description}>{data}</Description>
-      </Box>
     );
   };
 
@@ -223,12 +202,12 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               </ReadMore>
             )}
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-              <LineItem
+              <LineItemLabelAbove
                 label="credit type"
                 data={toTitleCase(ledgerClass.credit_type.name)}
               />
               {metadata?.['regen:sourceRegistry']?.['schema:name'] && (
-                <LineItem
+                <LineItemLabelAbove
                   label="registry"
                   data={
                     <Link
@@ -257,7 +236,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               <ApprovedMethodologies
                 methodologyList={metadata?.['regen:approvedMethodologies']}
               />
-              <LineItem
+              <LineItemLabelAbove
                 label="offset generation method"
                 data={metadata?.['regen:offsetGenerationMethod']?.[
                   'schema:itemListElement'
@@ -267,11 +246,11 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                   </Description>
                 ))}
               />
-              <LineItem
+              <LineItemLabelAbove
                 label="verification method"
                 data={toTitleCase(metadata?.['regen:verificationMethod'])}
               />
-              <LineItem
+              <LineItemLabelAbove
                 label="sectoral scope"
                 data={metadata?.['regen:sectoralScope']?.[
                   'schema:itemListElement'

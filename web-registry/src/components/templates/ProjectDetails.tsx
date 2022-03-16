@@ -85,7 +85,7 @@ function ProjectDetails(): JSX.Element {
   const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
   if (api) {
-    txClient = new ServiceClientImpl(api.connection.queryConnection);
+    txClient = new ServiceClientImpl(api.queryClient);
   }
 
   // fetch project

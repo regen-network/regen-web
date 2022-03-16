@@ -1,4 +1,5 @@
 export * from './Link';
+export * from './LinkWithArrow';
 export * from './OptimizedImage';
 export * from './OptimizedImage';
 export * from './PeerReviewed';

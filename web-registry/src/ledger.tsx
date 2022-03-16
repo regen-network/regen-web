@@ -15,7 +15,7 @@ export const ledgerRestUri = chainId ? `${getApiUri()}/ledger-rest` : undefined;
 
 async function connect(): Promise<RegenApi | undefined> {
   // Create a new instance of the RegenApi class.
-  const api = RegenApi.connect({
+  const api = await RegenApi.connect({
     // RegenApi only supports using the Tendermint RPC to interact with a node for now.
     // But it may support other client connections in the future:
     // - via gRPC

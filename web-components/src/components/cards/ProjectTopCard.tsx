@@ -19,6 +19,7 @@ interface ProjectTopCardProps {
     userInfo?: string;
   };
   projectDeveloper?: User;
+  projectProponent?: User;
   landSteward?: User;
   landOwner?: User;
   issuer?: User;
@@ -117,6 +118,7 @@ const useStyles = makeStyles(theme => ({
 export default function ProjectTopCard({
   classes,
   projectDeveloper,
+  projectProponent,
   landSteward,
   landOwner,
   issuer,
@@ -159,6 +161,15 @@ export default function ProjectTopCard({
             size="xl"
             user={projectDeveloper}
             title="project developer"
+          />
+        </div>
+      )}
+      {projectProponent && (
+        <div className={cx(styles.userInfo, classes && classes.userInfo)}>
+          <UserInfoWithTitle
+            size="xl"
+            user={projectProponent}
+            title="project proponent"
           />
         </div>
       )}

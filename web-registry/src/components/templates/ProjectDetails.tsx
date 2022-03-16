@@ -260,6 +260,8 @@ function ProjectDetails(): JSX.Element {
   });
 
   const theme = useTheme<Theme>();
+
+  console.log('metadata', metadata);
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO

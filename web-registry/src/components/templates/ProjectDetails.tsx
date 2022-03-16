@@ -24,6 +24,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
+import Title from 'web-components/lib/components/title';
 
 import { setPageView } from '../../lib/ga';
 import getApiUri from '../../lib/apiUri';
@@ -290,7 +291,6 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
       />
-
       {impactData?.allEcologicalImpact &&
         impactData?.allEcologicalImpact.length > 0 && (
           <div className="topo-background-alternate">

@@ -348,6 +348,7 @@ function ProjectTopSection({
               )}
             </Box>
           </Box>
+
           {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
               <Box sx={{ pt: 6 }}>
@@ -371,6 +372,14 @@ function ProjectTopSection({
             <Description className={styles.description}>
               {landStory}
             </Description>
+          )}
+          {metadata?.['regen:vcsProjectId']?.['@value'] && (
+            <>
+              <Title sx={{ mt: 6 }} variant="h5">
+                Additional Metadata
+              </Title>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}></Box>
+            </>
           )}
           <LazyLoad offset={50}>
             {videoURL &&

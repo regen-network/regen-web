@@ -16,15 +16,16 @@ export const ledgerRestUri = chainId ? `${getApiUri()}/ledger-rest` : undefined;
 async function connect(): Promise<RegenApi | undefined> {
   // Create a new instance of the RegenApi class.
   const api = await RegenApi.connect({
-    // RegenApi supports multiple client connections to interact with a node:
-    // - via the Tendermint RPC
+    // RegenApi only supports using the Tendermint RPC to interact with a node for now.
+    // But it may support other client connections in the future:
     // - via gRPC
     // - via gRPC-web
     // - via REST and gRPC-gateway
     connection: {
-      // Here, we are using the Tendermint RPC client connection.
       type: 'tendermint',
-      url: `${getApiUri()}/ledger`,
+      endpoint: `${getApiUri()}/ledger`,
+      // TODO: DISABLED SIGNER
+      // signer, // OfflineSigner from @cosmjs/proto-signing
     },
   });
   return api;

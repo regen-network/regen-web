@@ -88,9 +88,12 @@ const ProjectCards: React.FC<Props> = props => {
       }
       areaUnit={
         qudtUnitMap[
-          project.metadata?.['http://regen.network/size']?.[
+          (project.metadata?.['http://regen.network/size']?.[
             'http://qudt.org/1.1/schema/qudt#unit'
-          ]?.['@value'] as qudtUnit
+          ]?.['@value'] as qudtUnit) ||
+            (project.metadata?.['regen:projectSize']?.['qudt:unit']?.[
+              '@value'
+            ] as qudtUnit)
         ]
       }
       registry={project.partyByRegistryId}

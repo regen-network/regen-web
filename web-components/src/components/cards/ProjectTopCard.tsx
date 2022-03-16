@@ -19,7 +19,7 @@ interface ProjectTopCardProps {
     userInfo?: string;
   };
   projectDeveloper?: User;
-  projectProponent?: User;
+  projectProponent?: any;
   landSteward?: User;
   landOwner?: User;
   issuer?: User;
@@ -168,7 +168,10 @@ export default function ProjectTopCard({
         <div className={cx(styles.userInfo, classes && classes.userInfo)}>
           <UserInfoWithTitle
             size="xl"
-            user={projectProponent}
+            user={{
+              name: projectProponent?.['schema:name'],
+              type: 'organization',
+            }}
             title="project proponent"
           />
         </div>

@@ -10,6 +10,7 @@ interface PlaceInfoProps {
   color?: string;
   className?: string;
   iconClassName?: string;
+  showIcon?: boolean;
 }
 
 interface StyleProps {
@@ -40,13 +41,16 @@ export default function PlaceInfo({
   color,
   smFontSize,
   iconClassName,
+  showIcon,
 }: PlaceInfoProps): JSX.Element {
   const classes = useStyles({ smFontSize, fontSize, color });
   return (
     <div className={classes.root}>
-      <span className={iconClassName}>
-        <PinIcon />
-      </span>
+      {showIcon && (
+        <span className={iconClassName}>
+          <PinIcon />
+        </span>
+      )}
       <Typography className={classes.content}>{children}</Typography>
     </div>
   );

@@ -222,10 +222,15 @@ function ProjectTopSection({
   const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
   const landStewardPhoto =
     metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
+  const area =
+    metadata?.['http://regen.network/size']?.[
+      'http://qudt.org/1.1/schema/qudt#numericValue'
+    ]?.['@value'] ||
+    metadata?.['regen:projectSize']?.['qudt:numericValue']?.['@value'];
   const unit: qudtUnit | undefined =
     metadata?.['http://regen.network/size']?.[
       'http://qudt.org/1.1/schema/qudt#unit'
-    ]?.['@value'];
+    ]?.['@value'] || metadata?.['regen:projectSize']?.['qudt:unit']?.['@value'];
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
   const methodologyVersion =
@@ -254,7 +259,6 @@ function ProjectTopSection({
     title: s.title || '',
     imageUrl: getSanityImgSrc(s.image),
   }));
-
   return (
     <Section classes={{ root: styles.section }}>
       <Grid container>
@@ -266,11 +270,7 @@ function ProjectTopSection({
               iconClassName={styles.icon}
               // TODO Format and show on-chain project location if no off-chain location
               place={metadata?.['http://schema.org/location']?.place_name}
-              area={
-                metadata?.['http://regen.network/size']?.[
-                  'http://qudt.org/1.1/schema/qudt#numericValue'
-                ]?.['@value']
-              }
+              area={area}
               areaUnit={unit && qudtUnitMap[unit]}
             />
             <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2.5 }}>
@@ -484,7 +484,7 @@ function ProjectTopSection({
             // TODO if no off-chain data, use on-chain project.issuer
             issuer={getParty(project?.partyByIssuerId)}
             reseller={getParty(project?.partyByResellerId)}
-            projectProponent={getParty(project?.partyByDeveloperId)}
+            projectProponent={metadata?.['regen:projectProponent']}
             sdgs={sdgs}
           />
         </Grid>

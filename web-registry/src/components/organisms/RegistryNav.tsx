@@ -48,7 +48,7 @@ const RegistryNav: React.FC = () => {
   const programHowToItems: HeaderDropdownItemProps[] = [
     {
       linkComponent: NavLink,
-      href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
+      href: 'https://library.regen.network/v/regen-registry-program-guide/',
       title: 'Program Guide',
     },
     // { href: '/create-credit-class', title: 'Create a Credit Class', linkComponent: RegistryNavLink },

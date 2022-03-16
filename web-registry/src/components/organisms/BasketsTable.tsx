@@ -46,7 +46,7 @@ export const BasketsTable: React.FC<{
                 {row.name}
               </Box>
               <Box sx={{ color: 'info.main' }}>
-                {row.display_denom.toLocaleString()}
+                {row.displayDenom.toLocaleString()}
               </Box>
             </Grid>
           </Grid>,

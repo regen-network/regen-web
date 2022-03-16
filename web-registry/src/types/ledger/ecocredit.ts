@@ -1,4 +1,4 @@
-import type { PageResponse } from './base';
+import type { PageResponse, PageRequest } from './base';
 
 /** Map keys from another type to values of number type */
 type MapToNumber<T> = { [K in keyof T]: number };
@@ -20,8 +20,14 @@ interface BankQueryBalanceResponse {
   balance?: Coin;
 }
 
+/** combines the ledger `BatchInfo` with the corresponding project name */
+export interface BatchInfoWithProject extends BatchInfo {
+  project_name: string;
+  project_display: string;
+}
+
 export interface TableBaskets extends Basket, BankQueryBalanceResponse {
-  display_denom: string;
+  displayDenom: string;
 }
 
 /** `QueryBatchSupplyResponse` + `amount_cancelled` to display summed totals on project page */
@@ -34,23 +40,27 @@ export interface BatchTotalsForProject
 // the current queries to use regen-js instead of REST
 
 export interface BatchInfo {
-  start_date: string | Date;
-  end_date: string | Date;
-  issuer: string;
-  batch_denom: string;
   class_id: string;
+  batch_denom: string;
+  issuer: string;
   total_amount: number;
   amount_cancelled: number;
+  start_date: string | Date;
+  end_date: string | Date;
   project_location: string;
+}
+
+export interface QueryBatchInfoRequest {
+  batchDenom: string;
+}
+
+export interface QueryBatchInfoResponse {
+  info: BatchInfo;
 }
 
 export interface QueryBatchesResponse {
   batches: BatchInfo[];
   pagination: PageResponse;
-}
-
-export interface QueryBatchInfoResponse {
-  info: BatchInfo;
 }
 
 export interface QuerySupplyResponse {
@@ -63,23 +73,54 @@ export interface QueryBalanceResponse {
   retired_amount: string;
 }
 
+// regen-js based interfaces (camelCase props)
+// remove after api/queries upgrade
+
 export interface Basket {
   id: string;
-  basket_denom: string;
+  basketDenom: string;
   name: string;
-  disable_auto_retire: boolean;
-  credit_type_abbrev: string;
-  date_criteria: {
-    min_start_date?: string;
-    start_date_window?: string;
+  disableAutoRetire: boolean;
+  creditTypeAbbrev: string;
+  dateCriteria: {
+    minStartDate?: string;
+    startDateWindow?: string;
   };
   exponent: string;
+}
+
+export interface QueryBasketRequest {
+  basketDenom: string;
+}
+
+export interface QueryBasketResponse {
+  basket?: Basket;
+  classes: string[];
 }
 
 export interface QueryBasketsResponse {
   baskets: Basket[];
   pagination?: PageResponse;
 }
+
+export interface BasketBalance {
+  basketId: string | Long;
+  batchDenom: string;
+  balance: string;
+  batchStartDate?: string | Date;
+}
+
+export interface QueryBasketBalancesRequest {
+  basketDenom: string;
+  pagination?: PageRequest;
+}
+
+export interface QueryBasketBalancesResponse {
+  balances: BasketBalance[];
+  pagination?: PageResponse;
+}
+
+// REST based interfaces (snake_case props)
 
 export interface ClassInfo {
   /**

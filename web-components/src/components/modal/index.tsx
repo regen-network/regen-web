@@ -44,13 +44,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.spacing(150),
     [theme.breakpoints.up('md')]: {
       width: '50%',
-      height: 'auto',
-      maxHeight: '90%',
+      height: '90%',
     },
     [theme.breakpoints.between('sm', 'md')]: {
       width: '70%',
-      height: 'auto',
-      maxHeight: '90%',
+      height: '90%',
     },
     [theme.breakpoints.down('sm')]: {
       left: '0px',

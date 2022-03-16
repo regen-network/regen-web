@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@mui/styles';
-import { Box, Grid, Link, styled } from '@mui/material';
+import { Box, Grid, styled } from '@mui/material';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
@@ -13,7 +13,6 @@ import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceIn
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
-import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import ReadMore from 'web-components/lib/components/read-more';
 import { ProjectByHandleQuery } from '../../generated/graphql';
 import { useSdgByIriQuery } from '../../generated/sanity-graphql';
@@ -27,6 +26,7 @@ import {
 } from '../../types/ledger/ecocredit';
 import { ProjectCreditBatchesTable } from '.';
 import { ProjectBatchTotals } from '../molecules';
+import { LinkWithArrow } from '../atoms';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -188,15 +188,7 @@ function ProjectTopLink({
       </Title>
       <div className={styles.creditClassName}>
         {url ? (
-          <Link
-            className={styles.link}
-            href={url}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            {text}
-            <SmallArrowIcon sx={{ ml: 1, mb: 0.5, height: 9, width: 13 }} />
-          </Link>
+          <LinkWithArrow link={url} label={text} className={styles.link} />
         ) : (
           <>{text}</>
         )}

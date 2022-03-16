@@ -11,15 +11,6 @@ export interface BatchInfoWithSupply extends BatchInfo, QuerySupplyResponse {}
 /** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
 export interface BatchInfoWithBalance extends BatchInfo, QueryBalanceResponse {}
 
-interface Coin {
-  denom: string;
-  amount: string;
-}
-
-interface BankQueryBalanceResponse {
-  balance?: Coin;
-}
-
 /** combines the ledger `BatchInfo` with the corresponding project name */
 export interface BatchInfoWithProject extends BatchInfo {
   project_name: string;
@@ -38,6 +29,15 @@ export interface BatchTotalsForProject
 
 // The following interfaces should be removed once we migrate
 // the current queries to use regen-js instead of REST
+
+interface Coin {
+  denom: string;
+  amount: string;
+}
+
+interface BankQueryBalanceResponse {
+  balance?: Coin;
+}
 
 export interface BatchInfo {
   class_id: string;

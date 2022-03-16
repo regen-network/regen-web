@@ -28,7 +28,13 @@ export const LinkWithArrow = ({
   const styles = useStylesLink();
 
   return (
-    <Link href={link} className={className} target="_blank" rel="noreferrer">
+    <Link
+      href={link}
+      className={className}
+      sx={{ color: 'info.dark' }}
+      target="_blank"
+      rel="noreferrer"
+    >
       {parseText(label)}
       <SmallArrowIcon className={styles.arrowIcon} />
     </Link>

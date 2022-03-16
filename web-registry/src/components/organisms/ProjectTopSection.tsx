@@ -378,7 +378,7 @@ function ProjectTopSection({
               <Title sx={{ mt: 6 }} variant="h5">
                 Additional Metadata
               </Title>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 4 }}>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 6 }}>
                 <LineItemLabelAbove label="xyz" data={'abc'} />
                 {/* <LinkWithArrow /> */}
               </Box>

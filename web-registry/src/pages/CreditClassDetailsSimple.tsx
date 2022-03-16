@@ -143,7 +143,11 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
             </Description>
             {count > 1 && (
               <Link
-                sx={{ display: 'flex', alignItems: 'center' }}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  color: 'secondary.main',
+                }}
                 href={methodologyList?.['schema:url']?.['@value']}
                 target="_blank"
               >
@@ -204,7 +208,11 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
               <LineItemLabelAbove
                 label="credit type"
-                data={toTitleCase(ledgerClass.credit_type.name)}
+                data={
+                  <Description sx={{ mr: 1 }} className={styles.description}>
+                    {toTitleCase(ledgerClass.credit_type.name)}
+                  </Description>
+                }
               />
               {metadata?.['regen:sourceRegistry']?.['schema:name'] && (
                 <LineItemLabelAbove
@@ -248,7 +256,11 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               />
               <LineItemLabelAbove
                 label="verification method"
-                data={toTitleCase(metadata?.['regen:verificationMethod'])}
+                data={
+                  <Description sx={{ mr: 1 }} className={styles.description}>
+                    {toTitleCase(metadata?.['regen:verificationMethod'])}
+                  </Description>
+                }
               />
               <LineItemLabelAbove
                 label="sectoral scope"

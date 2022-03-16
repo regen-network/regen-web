@@ -24,14 +24,20 @@ export const LineItemLabelAbove: React.FC<LineItemProps> = ({
     >
       <Label
         sx={{
-          fontSize: 12,
+          fontSize: { sm: '12px' },
           color: 'primary.contrastText',
           marginBottom: 3,
         }}
       >
         {label}
       </Label>
-      <Description sx={{ fontSize: { xs: 18, sm: 22 } }}>{data}</Description>
+      {typeof data === 'string' ? (
+        <Description sx={{ fontSize: { xs: '18px', sm: '22px' } }}>
+          {data}
+        </Description>
+      ) : (
+        <>{data}</>
+      )}
     </Box>
   );
 };

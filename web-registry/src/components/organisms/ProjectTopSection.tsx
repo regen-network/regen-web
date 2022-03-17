@@ -14,6 +14,8 @@ import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ReadMore from 'web-components/lib/components/read-more';
+import { formatDate } from 'web-components/lib/utils/format';
+
 import { ProjectByHandleQuery } from '../../generated/graphql';
 import { useSdgByIriQuery } from '../../generated/sanity-graphql';
 import { getParty, getDisplayParty } from '../../lib/transform';
@@ -379,7 +381,39 @@ function ProjectTopSection({
                 Additional Metadata
               </Title>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 6 }}>
-                <LineItemLabelAbove label="xyz" data={'abc'} />
+                <LineItemLabelAbove
+                  label="offset generation method"
+                  data={metadata?.['regen:offsetGenerationMethod']}
+                />
+                <LineItemLabelAbove
+                  label="project activity"
+                  data={metadata?.['regen:projectActivity']}
+                />
+                <LineItemLabelAbove
+                  label="vcs project id"
+                  data={metadata?.['regen:vcsProjectId']?.['@value']}
+                />
+                <LineItemLabelAbove
+                  label="vcs project type"
+                  data={metadata?.['regen:vcsProjectType']}
+                />
+                <LineItemLabelAbove
+                  label="project start date"
+                  data={
+                    metadata?.['regen:projectStartDate']?.['@value'] &&
+                    formatDate(metadata?.['regen:projectStartDate']?.['@value'])
+                  }
+                />
+                <LineItemLabelAbove
+                  label="project end date"
+                  data={
+                    metadata?.['regen:projectEndDate']?.['@value'] &&
+                    formatDate(metadata?.['regen:projectEndDate']?.['@value'])
+                  }
+                />
+                {metadata?.['regen:projectStartDate']?.['@value'] &&
+                  formatDate(metadata?.['regen:projectEndDate']?.['@value'])}
+
                 {/* <LinkWithArrow /> */}
               </Box>
             </>

@@ -411,8 +411,6 @@ function ProjectTopSection({
                     formatDate(metadata?.['regen:projectEndDate']?.['@value'])
                   }
                 />
-                {metadata?.['regen:projectStartDate']?.['@value'] &&
-                  formatDate(metadata?.['regen:projectEndDate']?.['@value'])}
 
                 {/* <LinkWithArrow /> */}
               </Box>

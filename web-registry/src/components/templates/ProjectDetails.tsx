@@ -264,7 +264,6 @@ function ProjectDetails(): JSX.Element {
   const theme = useTheme<Theme>();
 
   console.log('metadata', metadata);
-  console.log('geojson', geojson);
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO

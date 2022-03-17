@@ -1,8 +1,10 @@
 import React from 'react';
 import { withStyles, DefaultTheme as Theme } from '@mui/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
+import { SxProps } from '@mui/material';
 
 interface OutlinedButtonProps extends ButtonProps {
+  sx?: SxProps<Theme>;
   target?: string;
   rel?: string;
   isImageBtn?: boolean;

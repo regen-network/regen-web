@@ -1,3 +1,4 @@
+export * from './AdditionalMetadata';
 export * from './BackgroundImgSection';
 export * from './EcocreditsSection';
 export * from './ReviewProcessInfo';

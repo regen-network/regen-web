@@ -9,6 +9,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 // import { getFontSize } from 'web-components/lib/theme/sizing';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
+import { Label } from 'web-components/lib/components/label';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
@@ -27,7 +28,11 @@ import {
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
 import { ProjectCreditBatchesTable } from '.';
-import { LineItemLabelAbove, ProjectBatchTotals } from '../molecules';
+import {
+  LineItemLabelAbove,
+  ProjectBatchTotals,
+  AdditionalMetadata,
+} from '../molecules';
 import { LinkWithArrow } from '../atoms';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -125,12 +130,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'baseline',
     paddingTop: theme.spacing(1.75),
   },
-  creditClass: {
-    textTransform: 'uppercase',
-    marginRight: theme.spacing(2),
-    fontSize: theme.typography.pxToRem(12),
-    fontWeight: 800,
-  },
   darkText: {
     color: theme.palette.info.dark,
   },
@@ -185,9 +184,7 @@ function ProjectTopLink({
   );
   return (
     <div className={styles.creditClassDetail}>
-      <Title className={styles.creditClass} variant="h5">
-        {label}:
-      </Title>
+      <Label sx={{ fontSize: { xs: '12px' }, mr: 2 }}>{label + ':'}</Label>
       <div className={styles.creditClassName}>
         {url ? (
           <LinkWithArrow link={url} label={text} className={styles.link} />
@@ -265,8 +262,10 @@ function ProjectTopSection({
     <Section classes={{ root: styles.section }}>
       <Grid container>
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
-          {/* TODO Show on-chain project id if no off-chain name */}
-          <Title variant="h1">{metadata?.['http://schema.org/name']}</Title>
+          <Title variant="h1">
+            {metadata?.['http://schema.org/name'] ||
+              metadata?.['regen:vcsProjectId']?.['@value']}
+          </Title>
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo
               iconClassName={styles.icon}
@@ -309,14 +308,6 @@ function ProjectTopSection({
                       }
                     />
                   )}
-                  <ProjectTopLink
-                    label="offset generation method"
-                    name={
-                      creditClassVersion.metadata?.[
-                        'http://regen.network/offsetGenerationMethod'
-                      ]
-                    }
-                  />
                 </>
               )}
               {methodologyVersion && (
@@ -325,17 +316,6 @@ function ProjectTopSection({
                   name={methodologyVersion.name}
                   url={
                     methodologyVersion.metadata?.['http://schema.org/url']?.[
-                      '@value'
-                    ]
-                  }
-                />
-              )}
-              {creditClass && additionalCertification && (
-                <ProjectTopLink
-                  label="additional certification"
-                  name={additionalCertification?.['http://schema.org/name']}
-                  url={
-                    additionalCertification?.['http://schema.org/url']?.[
                       '@value'
                     ]
                   }
@@ -375,47 +355,12 @@ function ProjectTopSection({
               {landStory}
             </Description>
           )}
-          {metadata?.['regen:vcsProjectId']?.['@value'] && (
-            <>
-              <Title sx={{ mt: 6 }} variant="h5">
-                Additional Metadata
-              </Title>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', mt: 6 }}>
-                <LineItemLabelAbove
-                  label="offset generation method"
-                  data={metadata?.['regen:offsetGenerationMethod']}
-                />
-                <LineItemLabelAbove
-                  label="project activity"
-                  data={metadata?.['regen:projectActivity']}
-                />
-                <LineItemLabelAbove
-                  label="vcs project id"
-                  data={metadata?.['regen:vcsProjectId']?.['@value']}
-                />
-                <LineItemLabelAbove
-                  label="vcs project type"
-                  data={metadata?.['regen:vcsProjectType']}
-                />
-                <LineItemLabelAbove
-                  label="project start date"
-                  data={
-                    metadata?.['regen:projectStartDate']?.['@value'] &&
-                    formatDate(metadata?.['regen:projectStartDate']?.['@value'])
-                  }
-                />
-                <LineItemLabelAbove
-                  label="project end date"
-                  data={
-                    metadata?.['regen:projectEndDate']?.['@value'] &&
-                    formatDate(metadata?.['regen:projectEndDate']?.['@value'])
-                  }
-                />
-
-                {/* <LinkWithArrow /> */}
-              </Box>
-            </>
-          )}
+          <AdditionalMetadata
+            metadata={metadata}
+            creditClass={creditClass}
+            creditClassVersion={creditClassVersion}
+            additionalCertification={additionalCertification}
+          />
           <LazyLoad offset={50}>
             {videoURL &&
               (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(

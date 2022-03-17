@@ -19,12 +19,12 @@ export const LineItemLabelAbove: React.FC<LineItemProps> = ({
       sx={{
         width: { xs: '100%', sm: '50%' },
         pr: 4,
-        mb: { xs: 8.75, sm: 12 },
+        mb: { xs: 8, sm: 8 },
       }}
     >
       <Label
         sx={{
-          fontSize: { sm: '12px' },
+          fontSize: { xs: '12px' },
           color: 'primary.contrastText',
           marginBottom: 3,
         }}

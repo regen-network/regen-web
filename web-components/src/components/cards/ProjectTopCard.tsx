@@ -19,7 +19,7 @@ interface ProjectTopCardProps {
     userInfo?: string;
   };
   projectDeveloper?: User;
-  projectProponent?: any;
+  projectDeveloperMeta?: any;
   landSteward?: User;
   landOwner?: User;
   issuer?: User;
@@ -118,7 +118,7 @@ const useStyles = makeStyles(theme => ({
 export default function ProjectTopCard({
   classes,
   projectDeveloper,
-  projectProponent,
+  projectDeveloperMeta,
   landSteward,
   landOwner,
   issuer,
@@ -155,27 +155,22 @@ export default function ProjectTopCard({
           </Grid>
         </div>
       )}
-      {projectDeveloper && (
+      {(projectDeveloper || projectDeveloperMeta) && (
         <div className={cx(styles.userInfo, classes && classes.userInfo)}>
           <UserInfoWithTitle
             size="xl"
-            user={projectDeveloper}
+            user={
+              projectDeveloper || {
+                name: projectDeveloperMeta?.['schema:name'],
+                description: projectDeveloperMeta?.['schema:description'],
+                type: 'organization',
+              }
+            }
             title="project developer"
           />
         </div>
       )}
-      {projectProponent && (
-        <div className={cx(styles.userInfo, classes && classes.userInfo)}>
-          <UserInfoWithTitle
-            size="xl"
-            user={{
-              name: projectProponent?.['schema:name'],
-              type: 'organization',
-            }}
-            title="project proponent"
-          />
-        </div>
-      )}
+
       {landSteward && (
         <div className={cx(styles.userInfo, classes && classes.userInfo)}>
           {/* <hr className={styles.separator} /> */}

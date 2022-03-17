@@ -448,7 +448,7 @@ function ProjectTopSection({
             // TODO if no off-chain data, use on-chain project.issuer
             issuer={getParty(project?.partyByIssuerId)}
             reseller={getParty(project?.partyByResellerId)}
-            projectProponent={metadata?.['regen:projectProponent']}
+            projectDeveloperMeta={metadata?.['regen:projectDeveloper']}
             sdgs={sdgs}
           />
         </Grid>

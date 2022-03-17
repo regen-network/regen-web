@@ -80,6 +80,7 @@ function ProjectDetails(): JSX.Element {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
   const [batchTotals, setBatchTotals] = useState<BatchTotalsForProject>();
+  const [geojson, setGeojson] = useState<any | null>(null);
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
@@ -124,13 +125,12 @@ function ProjectDetails(): JSX.Element {
 
   useEffect(() => {
     setPageView(location);
+    setGeojson(null);
   }, [location]);
 
   const otherProjects = projectsData?.allProjects?.nodes?.filter(
     p => p?.handle !== projectId,
   );
-
-  const [geojson, setGeojson] = useState<any | null>(null);
 
   // Convert kml to geojson
   const mapFile: string =
@@ -138,20 +138,22 @@ function ProjectDetails(): JSX.Element {
   const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
   const isKMLFile: boolean = /\.kml$/i.test(mapFile);
 
-  if (!geojson && isGISFile) {
-    fetch(mapFile)
-      .then(r => r.text())
-      .then(text => {
-        let geojson;
-        if (isKMLFile) {
-          const dom = new DOMParser().parseFromString(text, 'text/xml');
-          geojson = togeojson.kml(dom);
-        } else {
-          geojson = JSON.parse(text);
-        }
-        setGeojson(geojson);
-      });
-  }
+  useEffect(() => {
+    if (!geojson && isGISFile) {
+      fetch(mapFile)
+        .then(r => r.text())
+        .then(text => {
+          let geojson;
+          if (isKMLFile) {
+            const dom = new DOMParser().parseFromString(text, 'text/xml');
+            geojson = togeojson.kml(dom);
+          } else {
+            geojson = JSON.parse(text);
+          }
+          setGeojson(geojson);
+        });
+    }
+  }, [geojson, isGISFile, isKMLFile, mapFile]);
 
   // Modal
   const [open, setOpen] = useState(false);
@@ -262,6 +264,7 @@ function ProjectDetails(): JSX.Element {
   const theme = useTheme<Theme>();
 
   console.log('metadata', metadata);
+  console.log('geojson', geojson);
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO

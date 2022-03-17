@@ -42,11 +42,11 @@ export default function ProjectPlaceInfo({
       showIcon={!!place}
     >
       {place}
+      {place && (
+        <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      )}
       {displayedArea && areaUnit && (
         <span>
-          {place && (
-            <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-          )}
           {displayedArea} {areaUnit}
         </span>
       )}

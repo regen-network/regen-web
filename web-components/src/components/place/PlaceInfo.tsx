@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
+import cx from 'clsx';
+
 import PinIcon from '../icons/PinIcon';
 
 interface PlaceInfoProps {
@@ -30,9 +32,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: props.fontSize || theme.spacing(3.5),
     },
-    marginLeft: theme.spacing(1.6),
     color: props.color || theme.palette.primary.contrastText,
   }),
+  icon: {
+    marginRight: theme.spacing(1.6),
+  },
 }));
 
 export default function PlaceInfo({
@@ -43,15 +47,15 @@ export default function PlaceInfo({
   iconClassName,
   showIcon,
 }: PlaceInfoProps): JSX.Element {
-  const classes = useStyles({ smFontSize, fontSize, color });
+  const styles = useStyles({ smFontSize, fontSize, color });
   return (
-    <div className={classes.root}>
+    <div className={styles.root}>
       {showIcon && (
-        <span className={iconClassName}>
+        <span className={cx(styles.icon, iconClassName)}>
           <PinIcon />
         </span>
       )}
-      <Typography className={classes.content}>{children}</Typography>
+      <Typography className={styles.content}>{children}</Typography>
     </div>
   );
 }

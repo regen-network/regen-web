@@ -7,7 +7,7 @@ import { useCreditClassByOnChainIdQuery } from '../generated/graphql';
 import { client } from '../sanity';
 import { CreditClassDetailsWithContent } from './CreditClassDetailsWithContent';
 import { CreditClassDetailsSimple } from './CreditClassDetailsSimple';
-import { getClassInfo } from '../lib/ecocredit';
+import { queryEcoClassInfo } from '../lib/ecocredit';
 import { getMetadata } from '../lib/metadata-graph';
 import { ClassInfo } from '../types/ledger/ecocredit';
 
@@ -49,7 +49,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
 
   useEffect(() => {
     if (creditClassId) {
-      getClassInfo(creditClassId)
+      queryEcoClassInfo(creditClassId)
         .then(res => {
           const classInfo = res?.info;
           if (classInfo) {

@@ -10,6 +10,6 @@ export interface PageRequest {
 }
 
 export interface PageResponse {
-  next_key: string;
+  next_key: string | null;
   total: string;
 }

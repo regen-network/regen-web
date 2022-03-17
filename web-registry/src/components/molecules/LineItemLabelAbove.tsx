@@ -6,7 +6,7 @@ import { Label } from 'web-components/lib/components/label';
 
 interface LineItemProps {
   label: string;
-  data: string | JSX.Element;
+  data: string | JSX.Element | number;
 }
 
 export const LineItemLabelAbove: React.FC<LineItemProps> = ({

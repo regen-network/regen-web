@@ -15,7 +15,6 @@ import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ReadMore from 'web-components/lib/components/read-more';
-import { formatDate } from 'web-components/lib/utils/format';
 
 import { ProjectByHandleQuery } from '../../generated/graphql';
 import { useSdgByIriQuery } from '../../generated/sanity-graphql';
@@ -28,11 +27,7 @@ import {
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
 import { ProjectCreditBatchesTable } from '.';
-import {
-  LineItemLabelAbove,
-  ProjectBatchTotals,
-  AdditionalMetadata,
-} from '../molecules';
+import { ProjectBatchTotals, AdditionalMetadata } from '../molecules';
 import { LinkWithArrow } from '../atoms';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -432,26 +427,6 @@ function ProjectTopSection({
               }}
             />
           )}
-          {/* TODO uncomment code below and display on-chain project.metadata */}
-          {/* <>
-            <Box
-              sx={theme => ({
-                fontSize: { xs: theme.spacing(3), sm: theme.spacing(3.5) },
-                color: theme.palette.primary.contrastText,
-                fontWeight: 800,
-                fontFamily: 'Muli',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                pt: { xs: 6.25, sm: 11.75 },
-                pb: { xs: 2.75, sm: 5.5 },
-              })}
-            >
-              additional metadata
-            </Box>
-            <Description fontSize={getFontSize('metadata')}>
-              lorem ipsum
-            </Description>
-          </> */}
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard

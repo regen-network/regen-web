@@ -8,9 +8,10 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { LinkWithArrow } from '../atoms';
 import { LineItemLabelAbove } from '../molecules';
+import { VcsProjectMetadata } from '../../types/project/project';
 
 export interface MetadataProps {
-  metadata: any;
+  metadata: VcsProjectMetadata;
   creditClass: any;
   creditClassVersion: any;
   additionalCertification: any;

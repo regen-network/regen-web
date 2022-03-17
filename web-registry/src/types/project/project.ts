@@ -1,10 +1,3 @@
-// export interface EntityDisplayValues {
-//   'http://regen.network/landOwner'?: DisplayValues;
-//   'http://regen.network/landSteward'?: DisplayValues;
-//   'http://regen.network/projectDeveloper'?: DisplayValues;
-//   'http://regen.network/projectOriginator'?: DisplayValues;
-// }
-
 export type VcsProjectMetadata = {
   '@context': {
     schema: 'http://schema.org/';
@@ -22,9 +15,10 @@ export type VcsProjectMetadata = {
     '@type': 'schema:URL';
     '@value': string;
   };
-  'regen:projectProponent': {
+  'regen:projectDeveloper': {
     '@type': 'regen:Organization';
     'schema:name': string;
+    'schema:description': string;
   };
   'regen:vcsProjectType': string;
   'regen:projectActivity': string;

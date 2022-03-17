@@ -74,8 +74,8 @@ function getVisiblePartyName(party?: DisplayValues): string | undefined {
 function ProjectDetails(): JSX.Element {
   const { api }: ContextType = useLedger();
   const { projectId } = useParams();
-
   const walletContext = useWallet();
+  const theme = useTheme<Theme>();
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
@@ -261,9 +261,6 @@ function ProjectDetails(): JSX.Element {
     skip: !impactIris,
   });
 
-  const theme = useTheme<Theme>();
-
-  console.log('metadata', metadata);
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO

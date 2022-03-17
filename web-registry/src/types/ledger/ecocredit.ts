@@ -3,8 +3,6 @@ import type { PageResponse, PageRequest } from './base';
 /** Map keys from another type to values of number type */
 type MapToNumber<T> = { [K in keyof T]: number };
 
-// Response structure based on https://buf.build/regen/regen-ledger
-
 /** combines the ledger `BatchInfo` with ledger `QuerySupplyResponse` */
 export interface BatchInfoWithSupply extends BatchInfo, QuerySupplyResponse {}
 
@@ -51,17 +49,17 @@ export interface BatchInfo {
   project_location: string;
 }
 
+export interface QueryBatchesResponse {
+  batches: BatchInfo[];
+  pagination?: PageResponse;
+}
+
 export interface QueryBatchInfoRequest {
   batchDenom: string;
 }
 
 export interface QueryBatchInfoResponse {
   info: BatchInfo;
-}
-
-export interface QueryBatchesResponse {
-  batches: BatchInfo[];
-  pagination: PageResponse;
 }
 
 export interface QuerySupplyResponse {
@@ -129,7 +127,7 @@ export interface ClassInfo {
    */
   class_id: string;
   /**
-   *  admin is the designer of the credit class. In Hambach, this is identified as "designer"
+   *  admin is the designer of the credit class. In Hambach, this is identified as "designer".
    */
   admin?: string;
   designer?: string;
@@ -153,6 +151,11 @@ interface CreditType {
   name: string;
   precision: number;
   unit: string;
+}
+
+export interface QueryClassesResponse {
+  classes: ClassInfo[];
+  pagination?: PageResponse;
 }
 
 // TODO: pull these types from credit-class shacl schema

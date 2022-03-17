@@ -1,36 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import TableFooter from '@mui/material/TableFooter';
-import TableSortLabel from '@mui/material/TableSortLabel';
 import cx from 'clsx';
 
-import {
-  StyledTableContainer,
-  StyledTableCell,
-  StyledTableRow,
-  getTablePaginationPadding,
-  // StyledTableSortLabel,
-  formatNumber,
-} from 'web-components/lib/components/table';
-import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
-// import {
-//   getComparator,
-//   stableSort,
-//   Order,
-// } from 'web-components/lib/components/table/sort';
+import { formatNumber } from 'web-components/lib/components/table';
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
+import { formatDate } from 'web-components/lib/utils/format';
+
 import { truncate } from '../../lib/wallet';
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
-import { ledgerRestUri } from '../../ledger';
+import { ledgerRESTUri } from '../../lib/ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { formatDate } from 'web-components/lib/utils/format';
 
 interface CreditBatchProps {
   creditClassId?: string;
@@ -105,165 +88,68 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ROWS_PER_PAGE_OPTIONS = { options: [5, 10] };
-
 const CreditBatches: React.FC<CreditBatchProps> = ({
   creditClassId,
   titleAlign = 'center',
 }) => {
   const styles = useStyles();
   const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
-  // const [order, setOrder] = useState<Order>('desc');
-  // const [orderBy, setOrderBy] = useState<string>('start_date');
-  const { TablePagination, setCountTotal, paginationParams, paginationProps } =
-    useTablePagination(ROWS_PER_PAGE_OPTIONS);
   let columnsToShow = [...headCells];
 
   useEffect(() => {
-    const fetchData = (
-      params: URLSearchParams,
-      setCountTotal: (count: number) => void,
-    ): void => {
-      if (creditClassId) {
-        params.set('class_id', creditClassId);
-      }
-
-      getBatchesWithSupply(params)
-        .then(sortableBatches => {
-          setBatches(sortableBatches.data);
-          if (sortableBatches?.pagination?.total) {
-            const _countTotal = parseInt(sortableBatches.pagination.total);
-            setCountTotal(_countTotal);
-          }
-        })
-        // eslint-disable-next-line
-        .catch(console.error);
+    const fetchData = (): void => {
+      getBatchesWithSupply(creditClassId).then(sortableBatches => {
+        setBatches(sortableBatches.data);
+      });
     };
 
-    if (!ledgerRestUri || !paginationParams) return;
-    fetchData(paginationParams, setCountTotal);
-  }, [paginationParams, setCountTotal, creditClassId]);
-
-  // const createSortHandler =
-  //   (property: keyof BatchRowData) => (event: React.MouseEvent<unknown>) => {
-  //     handleRequestSort(event, property);
-  //   };
-
-  // const handleRequestSort = (
-  //   event: React.MouseEvent<unknown>,
-  //   property: keyof BatchRowData,
-  // ): void => {
-  //   const isAsc = orderBy === property && order === 'asc';
-  //   setOrder(isAsc ? 'desc' : 'asc');
-  //   setOrderBy(property);
-  // };
+    if (!ledgerRESTUri) return;
+    fetchData();
+  }, [creditClassId]);
 
   // We hide the classId column if it creditClassId provided (redundant)
   if (creditClassId) {
     columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'class_id');
   }
 
-  return ledgerRestUri && batches.length > 0 ? (
+  return ledgerRESTUri && batches.length > 0 ? (
     <Section
       classes={{ root: styles.section, title: styles.title }}
       title="Credit Batches"
       titleVariant="h2"
       titleAlign={titleAlign}
     >
-      <StyledTableContainer className={styles.tableBorder}>
-        <Box
-          sx={{
-            width: '100%',
-            overflow: 'auto',
-            paddingBottom:
-              getTablePaginationPadding(
-                paginationProps.count,
-                paginationProps.rowsPerPage,
-                batches.length,
-              ) * 25,
-          }}
-        >
-          <Table aria-label="credit batch table" stickyHeader>
-            <TableHead>
-              <TableRow>
-                {columnsToShow.map(headCell => (
-                  <StyledTableCell
-                    className={cx(headCell.wrap && styles.wrap)}
-                    key={headCell.id}
-                    align="left"
-                    padding="normal"
-                    // TODO implement sorting. See:
-                    // https://app.zenhub.com/workspaces/regen-registry-5f8998bec8958d000f4609e2/issues/regen-network/regen-registry/811
-                    // sortDirection={orderBy === headCell.id ? order : false}
-                  >
-                    {/* <StyledTableSortLabel
-                      active={orderBy === headCell.id}
-                      direction={orderBy === headCell.id ? order : 'asc'}
-                      onClick={createSortHandler(headCell.id)}
-                    > */}
-                    <TableSortLabel
-                      sx={{ cursor: 'default', ':hover': { color: 'inherit' } }}
-                      IconComponent={() => null}
-                    >
-                      {headCell.label}
-                    </TableSortLabel>
-                    {/* </StyledTableSortLabel> */}
-                  </StyledTableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody className={styles.tableBody}>
-              {/* {stableSort(batches, getComparator(order, orderBy)).map( */}
-              {batches.map((batch: BatchInfoWithSupply) => {
-                return (
-                  <StyledTableRow
-                    className={styles.noWrap}
-                    tabIndex={-1}
-                    key={batch.batch_denom}
-                  >
-                    <StyledTableCell>
-                      <a
-                        href={getAccountUrl(batch.issuer)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {truncate(batch.issuer)}
-                      </a>
-                    </StyledTableCell>
-                    <StyledTableCell>{batch.batch_denom}</StyledTableCell>
-                    {!creditClassId && (
-                      <StyledTableCell>{batch.class_id}</StyledTableCell>
-                    )}
-                    <StyledTableCell>
-                      {formatNumber(batch.tradable_supply)}
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      {formatNumber(batch.retired_supply)}
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      {formatNumber(batch.amount_cancelled)}
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      {formatDate(batch.start_date)}
-                    </StyledTableCell>
-                    <StyledTableCell>
-                      {formatDate(batch.end_date)}
-                    </StyledTableCell>
-                    <StyledTableCell>{batch.project_location}</StyledTableCell>
-                  </StyledTableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Box>
-        <Table>
-          <TableFooter>
-            <TableRow>
-              <TablePagination {...paginationProps} />
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </StyledTableContainer>
+      <ActionsTable
+        tableLabel="credit batch table"
+        headerRows={columnsToShow.map(headCell => (
+          <Box className={cx(headCell.wrap && styles.wrap)} key={headCell.id}>
+            {headCell.label}
+          </Box>
+        ))}
+        rows={batches.map(batch =>
+          [
+            <a
+              href={getAccountUrl(batch.issuer)}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {truncate(batch.issuer)}
+            </a>,
+            <Box className={styles.noWrap}>{batch.batch_denom}</Box>,
+            batch.class_id,
+            formatNumber(batch.tradable_supply),
+            formatNumber(batch.retired_supply),
+            formatNumber(batch.amount_cancelled),
+            <Box className={styles.noWrap}>
+              {formatDate(batch.start_date as Date)}
+            </Box>,
+            <Box className={styles.noWrap}>
+              {formatDate(batch.end_date as Date)}
+            </Box>,
+            <Box className={styles.noWrap}>{batch.project_location}</Box>,
+          ].filter(item => !(creditClassId && item === batch.class_id)),
+        )}
+      />
     </Section>
   ) : null;
 };

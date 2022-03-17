@@ -28,7 +28,7 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { truncate } from '../../lib/wallet';
-import { ledgerRestUri } from '../../ledger';
+import { ledgerRESTUri } from '../../lib/ledger';
 import { getHashUrl } from '../../lib/block-explorer';
 import { getEcocreditTxs } from '../../lib/ecocredit';
 
@@ -150,7 +150,7 @@ const CreditActivityTable: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!ledgerRestUri) return;
+    if (!ledgerRESTUri) return;
     fetchData(setCountTotal);
   }, [fetchData, getReadableMessages, setCountTotal]);
 
@@ -195,7 +195,7 @@ const CreditActivityTable: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody sx={{ bgcolor: 'primary.main' }}>
-            {ledgerRestUri && txs.length > 0 ? (
+            {ledgerRESTUri && txs.length > 0 ? (
               stableSort(txs as any, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((tx: any) => {

@@ -89,6 +89,7 @@ export const OverviewSection = (): JSX.Element => {
             />
           </Box>
           <ContainedButton
+            size="large"
             href={data?.button?.buttonLink?.buttonHref || ''}
             sx={{ alignSelf: 'start', mt: [5, 7, 5] }}
           >

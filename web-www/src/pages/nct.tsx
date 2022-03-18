@@ -2,7 +2,7 @@ import React from 'react';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
 import SEO from '../components/seo';
-import { TopSection } from '../sections/nct';
+import { TopSection, OverviewSection } from '../sections/nct';
 
 import type { NctPageQuery } from '../generated/graphql';
 
@@ -34,6 +34,7 @@ const NctPage: React.FC<PageProps> = ({ location }) => {
         imageUrl={data?.image?.asset?.url || ''}
       />
       <TopSection />
+      <OverviewSection />
     </>
   );
 };

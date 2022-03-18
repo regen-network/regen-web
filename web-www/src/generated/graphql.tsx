@@ -3003,8 +3003,10 @@ export type QuerySanityNctPageArgs = {
   _key: Maybe<StringQueryOperatorInput>;
   seo: Maybe<SanitySeoFilterInput>;
   topSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  overviewSection: Maybe<SanityNctOverviewSectionFilterInput>;
   _rawSeo: Maybe<JsonQueryOperatorInput>;
   _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawOverviewSection: Maybe<JsonQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -13756,6 +13758,34 @@ export type SanityImageWithTitleFilterListInput = {
   elemMatch: Maybe<SanityImageWithTitleFilterInput>;
 };
 
+export type SanityLabeledTextLinkable = {
+  __typename?: 'SanityLabeledTextLinkable';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  label: Maybe<Scalars['String']>;
+  text: Maybe<Scalars['String']>;
+  link: Maybe<SanityLink>;
+  _rawLink: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityLabeledTextLinkable_RawLinkArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityLabeledTextLinkableFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  label: Maybe<StringQueryOperatorInput>;
+  text: Maybe<StringQueryOperatorInput>;
+  link: Maybe<SanityLinkFilterInput>;
+  _rawLink: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityLabeledTextLinkableFilterListInput = {
+  elemMatch: Maybe<SanityLabeledTextLinkableFilterInput>;
+};
+
 export type SanityLandManagementPractice = SanityDocument & Node & {
   __typename?: 'SanityLandManagementPractice';
   _id: Maybe<Scalars['String']>;
@@ -16583,6 +16613,64 @@ export type SanityNameTitleImage_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
+export type SanityNctOverviewSection = {
+  __typename?: 'SanityNctOverviewSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  background: Maybe<SanityImage>;
+  titleIcon: Maybe<SanityImage>;
+  button: Maybe<SanityButton>;
+  items: Maybe<Array<Maybe<SanityLabeledTextLinkable>>>;
+  body: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawBackground: Maybe<Scalars['JSON']>;
+  _rawTitleIcon: Maybe<Scalars['JSON']>;
+  _rawButton: Maybe<Scalars['JSON']>;
+  _rawBody: Maybe<Scalars['JSON']>;
+  _rawItems: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityNctOverviewSection_RawBackgroundArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctOverviewSection_RawTitleIconArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctOverviewSection_RawButtonArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctOverviewSection_RawBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctOverviewSection_RawItemsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityNctOverviewSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  background: Maybe<SanityImageFilterInput>;
+  titleIcon: Maybe<SanityImageFilterInput>;
+  button: Maybe<SanityButtonFilterInput>;
+  items: Maybe<SanityLabeledTextLinkableFilterListInput>;
+  body: Maybe<SanityBlockFilterListInput>;
+  _rawBackground: Maybe<JsonQueryOperatorInput>;
+  _rawTitleIcon: Maybe<JsonQueryOperatorInput>;
+  _rawButton: Maybe<JsonQueryOperatorInput>;
+  _rawBody: Maybe<JsonQueryOperatorInput>;
+  _rawItems: Maybe<JsonQueryOperatorInput>;
+};
+
 export type SanityNctPage = SanityDocument & Node & {
   __typename?: 'SanityNctPage';
   _id: Maybe<Scalars['String']>;
@@ -16593,8 +16681,10 @@ export type SanityNctPage = SanityDocument & Node & {
   _key: Maybe<Scalars['String']>;
   seo: Maybe<SanitySeo>;
   topSection: Maybe<SanityTitleImageCustomBody>;
+  overviewSection: Maybe<SanityNctOverviewSection>;
   _rawSeo: Maybe<Scalars['JSON']>;
   _rawTopSection: Maybe<Scalars['JSON']>;
+  _rawOverviewSection: Maybe<Scalars['JSON']>;
   id: Scalars['ID'];
   parent: Maybe<Node>;
   children: Array<Node>;
@@ -16624,6 +16714,11 @@ export type SanityNctPage_RawSeoArgs = {
 
 
 export type SanityNctPage_RawTopSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawOverviewSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
@@ -16734,8 +16829,128 @@ export enum SanityNctPageFieldsEnum {
   TopSectionBodyRawChildren = 'topSection___body____rawChildren',
   TopSectionRawImage = 'topSection____rawImage',
   TopSectionRawBody = 'topSection____rawBody',
+  OverviewSectionKey = 'overviewSection____key',
+  OverviewSectionType = 'overviewSection____type',
+  OverviewSectionTitle = 'overviewSection___title',
+  OverviewSectionBackgroundKey = 'overviewSection___background____key',
+  OverviewSectionBackgroundType = 'overviewSection___background____type',
+  OverviewSectionBackgroundAssetId = 'overviewSection___background___asset____id',
+  OverviewSectionBackgroundAssetType = 'overviewSection___background___asset____type',
+  OverviewSectionBackgroundAssetCreatedAt = 'overviewSection___background___asset____createdAt',
+  OverviewSectionBackgroundAssetUpdatedAt = 'overviewSection___background___asset____updatedAt',
+  OverviewSectionBackgroundAssetRev = 'overviewSection___background___asset____rev',
+  OverviewSectionBackgroundAssetKey = 'overviewSection___background___asset____key',
+  OverviewSectionBackgroundAssetOriginalFilename = 'overviewSection___background___asset___originalFilename',
+  OverviewSectionBackgroundAssetLabel = 'overviewSection___background___asset___label',
+  OverviewSectionBackgroundAssetTitle = 'overviewSection___background___asset___title',
+  OverviewSectionBackgroundAssetDescription = 'overviewSection___background___asset___description',
+  OverviewSectionBackgroundAssetAltText = 'overviewSection___background___asset___altText',
+  OverviewSectionBackgroundAssetSha1hash = 'overviewSection___background___asset___sha1hash',
+  OverviewSectionBackgroundAssetExtension = 'overviewSection___background___asset___extension',
+  OverviewSectionBackgroundAssetMimeType = 'overviewSection___background___asset___mimeType',
+  OverviewSectionBackgroundAssetSize = 'overviewSection___background___asset___size',
+  OverviewSectionBackgroundAssetAssetId = 'overviewSection___background___asset___assetId',
+  OverviewSectionBackgroundAssetUploadId = 'overviewSection___background___asset___uploadId',
+  OverviewSectionBackgroundAssetPath = 'overviewSection___background___asset___path',
+  OverviewSectionBackgroundAssetUrl = 'overviewSection___background___asset___url',
+  OverviewSectionBackgroundAssetRawMetadata = 'overviewSection___background___asset____rawMetadata',
+  OverviewSectionBackgroundAssetRawSource = 'overviewSection___background___asset____rawSource',
+  OverviewSectionBackgroundAssetId = 'overviewSection___background___asset___id',
+  OverviewSectionBackgroundAssetChildren = 'overviewSection___background___asset___children',
+  OverviewSectionBackgroundHotspotKey = 'overviewSection___background___hotspot____key',
+  OverviewSectionBackgroundHotspotType = 'overviewSection___background___hotspot____type',
+  OverviewSectionBackgroundHotspotX = 'overviewSection___background___hotspot___x',
+  OverviewSectionBackgroundHotspotY = 'overviewSection___background___hotspot___y',
+  OverviewSectionBackgroundHotspotHeight = 'overviewSection___background___hotspot___height',
+  OverviewSectionBackgroundHotspotWidth = 'overviewSection___background___hotspot___width',
+  OverviewSectionBackgroundCropKey = 'overviewSection___background___crop____key',
+  OverviewSectionBackgroundCropType = 'overviewSection___background___crop____type',
+  OverviewSectionBackgroundCropTop = 'overviewSection___background___crop___top',
+  OverviewSectionBackgroundCropBottom = 'overviewSection___background___crop___bottom',
+  OverviewSectionBackgroundCropLeft = 'overviewSection___background___crop___left',
+  OverviewSectionBackgroundCropRight = 'overviewSection___background___crop___right',
+  OverviewSectionBackgroundRawAsset = 'overviewSection___background____rawAsset',
+  OverviewSectionBackgroundRawHotspot = 'overviewSection___background____rawHotspot',
+  OverviewSectionBackgroundRawCrop = 'overviewSection___background____rawCrop',
+  OverviewSectionTitleIconKey = 'overviewSection___titleIcon____key',
+  OverviewSectionTitleIconType = 'overviewSection___titleIcon____type',
+  OverviewSectionTitleIconAssetId = 'overviewSection___titleIcon___asset____id',
+  OverviewSectionTitleIconAssetType = 'overviewSection___titleIcon___asset____type',
+  OverviewSectionTitleIconAssetCreatedAt = 'overviewSection___titleIcon___asset____createdAt',
+  OverviewSectionTitleIconAssetUpdatedAt = 'overviewSection___titleIcon___asset____updatedAt',
+  OverviewSectionTitleIconAssetRev = 'overviewSection___titleIcon___asset____rev',
+  OverviewSectionTitleIconAssetKey = 'overviewSection___titleIcon___asset____key',
+  OverviewSectionTitleIconAssetOriginalFilename = 'overviewSection___titleIcon___asset___originalFilename',
+  OverviewSectionTitleIconAssetLabel = 'overviewSection___titleIcon___asset___label',
+  OverviewSectionTitleIconAssetTitle = 'overviewSection___titleIcon___asset___title',
+  OverviewSectionTitleIconAssetDescription = 'overviewSection___titleIcon___asset___description',
+  OverviewSectionTitleIconAssetAltText = 'overviewSection___titleIcon___asset___altText',
+  OverviewSectionTitleIconAssetSha1hash = 'overviewSection___titleIcon___asset___sha1hash',
+  OverviewSectionTitleIconAssetExtension = 'overviewSection___titleIcon___asset___extension',
+  OverviewSectionTitleIconAssetMimeType = 'overviewSection___titleIcon___asset___mimeType',
+  OverviewSectionTitleIconAssetSize = 'overviewSection___titleIcon___asset___size',
+  OverviewSectionTitleIconAssetAssetId = 'overviewSection___titleIcon___asset___assetId',
+  OverviewSectionTitleIconAssetUploadId = 'overviewSection___titleIcon___asset___uploadId',
+  OverviewSectionTitleIconAssetPath = 'overviewSection___titleIcon___asset___path',
+  OverviewSectionTitleIconAssetUrl = 'overviewSection___titleIcon___asset___url',
+  OverviewSectionTitleIconAssetRawMetadata = 'overviewSection___titleIcon___asset____rawMetadata',
+  OverviewSectionTitleIconAssetRawSource = 'overviewSection___titleIcon___asset____rawSource',
+  OverviewSectionTitleIconAssetId = 'overviewSection___titleIcon___asset___id',
+  OverviewSectionTitleIconAssetChildren = 'overviewSection___titleIcon___asset___children',
+  OverviewSectionTitleIconHotspotKey = 'overviewSection___titleIcon___hotspot____key',
+  OverviewSectionTitleIconHotspotType = 'overviewSection___titleIcon___hotspot____type',
+  OverviewSectionTitleIconHotspotX = 'overviewSection___titleIcon___hotspot___x',
+  OverviewSectionTitleIconHotspotY = 'overviewSection___titleIcon___hotspot___y',
+  OverviewSectionTitleIconHotspotHeight = 'overviewSection___titleIcon___hotspot___height',
+  OverviewSectionTitleIconHotspotWidth = 'overviewSection___titleIcon___hotspot___width',
+  OverviewSectionTitleIconCropKey = 'overviewSection___titleIcon___crop____key',
+  OverviewSectionTitleIconCropType = 'overviewSection___titleIcon___crop____type',
+  OverviewSectionTitleIconCropTop = 'overviewSection___titleIcon___crop___top',
+  OverviewSectionTitleIconCropBottom = 'overviewSection___titleIcon___crop___bottom',
+  OverviewSectionTitleIconCropLeft = 'overviewSection___titleIcon___crop___left',
+  OverviewSectionTitleIconCropRight = 'overviewSection___titleIcon___crop___right',
+  OverviewSectionTitleIconRawAsset = 'overviewSection___titleIcon____rawAsset',
+  OverviewSectionTitleIconRawHotspot = 'overviewSection___titleIcon____rawHotspot',
+  OverviewSectionTitleIconRawCrop = 'overviewSection___titleIcon____rawCrop',
+  OverviewSectionButtonKey = 'overviewSection___button____key',
+  OverviewSectionButtonType = 'overviewSection___button____type',
+  OverviewSectionButtonButtonText = 'overviewSection___button___buttonText',
+  OverviewSectionButtonButtonLinkKey = 'overviewSection___button___buttonLink____key',
+  OverviewSectionButtonButtonLinkType = 'overviewSection___button___buttonLink____type',
+  OverviewSectionButtonButtonLinkButtonHref = 'overviewSection___button___buttonLink___buttonHref',
+  OverviewSectionButtonButtonLinkRawButtonDoc = 'overviewSection___button___buttonLink____rawButtonDoc',
+  OverviewSectionButtonButtonModal = 'overviewSection___button___buttonModal',
+  OverviewSectionButtonButtonBlankTarget = 'overviewSection___button___buttonBlankTarget',
+  OverviewSectionButtonRawButtonLink = 'overviewSection___button____rawButtonLink',
+  OverviewSectionItems = 'overviewSection___items',
+  OverviewSectionItemsKey = 'overviewSection___items____key',
+  OverviewSectionItemsType = 'overviewSection___items____type',
+  OverviewSectionItemsLabel = 'overviewSection___items___label',
+  OverviewSectionItemsText = 'overviewSection___items___text',
+  OverviewSectionItemsLinkKey = 'overviewSection___items___link____key',
+  OverviewSectionItemsLinkType = 'overviewSection___items___link____type',
+  OverviewSectionItemsLinkButtonHref = 'overviewSection___items___link___buttonHref',
+  OverviewSectionItemsLinkRawButtonDoc = 'overviewSection___items___link____rawButtonDoc',
+  OverviewSectionItemsRawLink = 'overviewSection___items____rawLink',
+  OverviewSectionBody = 'overviewSection___body',
+  OverviewSectionBodyKey = 'overviewSection___body____key',
+  OverviewSectionBodyType = 'overviewSection___body____type',
+  OverviewSectionBodyChildren = 'overviewSection___body___children',
+  OverviewSectionBodyChildrenKey = 'overviewSection___body___children____key',
+  OverviewSectionBodyChildrenType = 'overviewSection___body___children____type',
+  OverviewSectionBodyChildrenMarks = 'overviewSection___body___children___marks',
+  OverviewSectionBodyChildrenText = 'overviewSection___body___children___text',
+  OverviewSectionBodyStyle = 'overviewSection___body___style',
+  OverviewSectionBodyList = 'overviewSection___body___list',
+  OverviewSectionBodyRawChildren = 'overviewSection___body____rawChildren',
+  OverviewSectionRawBackground = 'overviewSection____rawBackground',
+  OverviewSectionRawTitleIcon = 'overviewSection____rawTitleIcon',
+  OverviewSectionRawButton = 'overviewSection____rawButton',
+  OverviewSectionRawBody = 'overviewSection____rawBody',
+  OverviewSectionRawItems = 'overviewSection____rawItems',
   RawSeo = '_rawSeo',
   RawTopSection = '_rawTopSection',
+  RawOverviewSection = '_rawOverviewSection',
   Id = 'id',
   ParentId = 'parent___id',
   ParentParentId = 'parent___parent___id',
@@ -16833,8 +17048,10 @@ export type SanityNctPageFilterInput = {
   _key: Maybe<StringQueryOperatorInput>;
   seo: Maybe<SanitySeoFilterInput>;
   topSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  overviewSection: Maybe<SanityNctOverviewSectionFilterInput>;
   _rawSeo: Maybe<JsonQueryOperatorInput>;
   _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawOverviewSection: Maybe<JsonQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -24679,6 +24896,37 @@ export type MainnetWhatsNextSectionQuery = (
               & Pick<SanityImageAsset, 'url'>
             )> }
           )> }
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
+export type NctOverviewSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctOverviewSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { overviewSection: Maybe<(
+      { __typename?: 'SanityNctOverviewSection' }
+      & Pick<SanityNctOverviewSection, 'title' | '_rawBody'>
+      & { background: Maybe<(
+        { __typename?: 'SanityImage' }
+        & FluidSanityImageFieldsFragment
+      )>, titleIcon: Maybe<(
+        { __typename?: 'SanityImage' }
+        & ImageWithPreviewFragment
+      )>, button: Maybe<(
+        { __typename?: 'SanityButton' }
+        & ButtonFieldsFragment
+      )>, items: Maybe<Array<Maybe<(
+        { __typename?: 'SanityLabeledTextLinkable' }
+        & Pick<SanityLabeledTextLinkable, 'label' | 'text'>
+        & { link: Maybe<(
+          { __typename?: 'SanityLink' }
+          & LinkFieldsFragment
         )> }
       )>>> }
     )> }

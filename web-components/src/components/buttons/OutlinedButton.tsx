@@ -17,19 +17,13 @@ const SpanButton: React.FC = props => (
 
 const styleCallback = (theme: Theme): any => ({
   root: {
-    border: `2px solid ${theme.palette.secondary.light}`,
-    borderRadius: '2px',
     color: theme.palette.secondary.main,
-    fontFamily: theme.typography.h1.fontFamily,
-    fontWeight: 800,
-    letterSpacing: '1px',
-    padding: theme.spacing(2, 4),
+    borderColor: theme.palette.secondary.contrastText,
     backgroundColor: theme.palette.primary.main,
-    boxShadow: 'none',
-    textAlign: 'center',
+    fontFamily: theme.typography.h1.fontFamily,
     '&:hover': {
       backgroundColor: theme.palette.secondary.light,
-      boxShadow: 'none',
+      borderColor: theme.palette.secondary.light,
     },
   },
 });

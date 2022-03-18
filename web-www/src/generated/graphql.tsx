@@ -3002,11 +3002,14 @@ export type QuerySanityNctPageArgs = {
   _rev: Maybe<StringQueryOperatorInput>;
   _key: Maybe<StringQueryOperatorInput>;
   seo: Maybe<SanitySeoFilterInput>;
+  launchDate: Maybe<DateQueryOperatorInput>;
   topSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
   overviewSection: Maybe<SanityNctOverviewSectionFilterInput>;
+  tokenSection: Maybe<SanityNctTokenSectionFilterInput>;
   _rawSeo: Maybe<JsonQueryOperatorInput>;
   _rawTopSection: Maybe<JsonQueryOperatorInput>;
   _rawOverviewSection: Maybe<JsonQueryOperatorInput>;
+  _rawTokenSection: Maybe<JsonQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -16680,11 +16683,14 @@ export type SanityNctPage = SanityDocument & Node & {
   _rev: Maybe<Scalars['String']>;
   _key: Maybe<Scalars['String']>;
   seo: Maybe<SanitySeo>;
+  launchDate: Maybe<Scalars['Date']>;
   topSection: Maybe<SanityTitleImageCustomBody>;
   overviewSection: Maybe<SanityNctOverviewSection>;
+  tokenSection: Maybe<SanityNctTokenSection>;
   _rawSeo: Maybe<Scalars['JSON']>;
   _rawTopSection: Maybe<Scalars['JSON']>;
   _rawOverviewSection: Maybe<Scalars['JSON']>;
+  _rawTokenSection: Maybe<Scalars['JSON']>;
   id: Scalars['ID'];
   parent: Maybe<Node>;
   children: Array<Node>;
@@ -16708,6 +16714,14 @@ export type SanityNctPage_UpdatedAtArgs = {
 };
 
 
+export type SanityNctPageLaunchDateArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
 export type SanityNctPage_RawSeoArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -16719,6 +16733,11 @@ export type SanityNctPage_RawTopSectionArgs = {
 
 
 export type SanityNctPage_RawOverviewSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawTokenSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
@@ -16803,6 +16822,7 @@ export enum SanityNctPageFieldsEnum {
   SeoImageRawHotspot = 'seo___image____rawHotspot',
   SeoImageRawCrop = 'seo___image____rawCrop',
   SeoRawImage = 'seo____rawImage',
+  LaunchDate = 'launchDate',
   TopSectionKey = 'topSection____key',
   TopSectionType = 'topSection____type',
   TopSectionTitle = 'topSection___title',
@@ -16948,9 +16968,95 @@ export enum SanityNctPageFieldsEnum {
   OverviewSectionRawButton = 'overviewSection____rawButton',
   OverviewSectionRawBody = 'overviewSection____rawBody',
   OverviewSectionRawItems = 'overviewSection____rawItems',
+  TokenSectionKey = 'tokenSection____key',
+  TokenSectionType = 'tokenSection____type',
+  TokenSectionCardImageKey = 'tokenSection___cardImage____key',
+  TokenSectionCardImageType = 'tokenSection___cardImage____type',
+  TokenSectionCardImageImageHref = 'tokenSection___cardImage___imageHref',
+  TokenSectionCardImageImageKey = 'tokenSection___cardImage___image____key',
+  TokenSectionCardImageImageType = 'tokenSection___cardImage___image____type',
+  TokenSectionCardImageImageRawAsset = 'tokenSection___cardImage___image____rawAsset',
+  TokenSectionCardImageImageRawHotspot = 'tokenSection___cardImage___image____rawHotspot',
+  TokenSectionCardImageImageRawCrop = 'tokenSection___cardImage___image____rawCrop',
+  TokenSectionCardImageImageAlt = 'tokenSection___cardImage___imageAlt',
+  TokenSectionCardImageRawImage = 'tokenSection___cardImage____rawImage',
+  TokenSectionCardTitle = 'tokenSection___cardTitle',
+  TokenSectionCardSubtitle = 'tokenSection___cardSubtitle',
+  TokenSectionCardButtonKey = 'tokenSection___cardButton____key',
+  TokenSectionCardButtonType = 'tokenSection___cardButton____type',
+  TokenSectionCardButtonButtonText = 'tokenSection___cardButton___buttonText',
+  TokenSectionCardButtonButtonLinkKey = 'tokenSection___cardButton___buttonLink____key',
+  TokenSectionCardButtonButtonLinkType = 'tokenSection___cardButton___buttonLink____type',
+  TokenSectionCardButtonButtonLinkButtonHref = 'tokenSection___cardButton___buttonLink___buttonHref',
+  TokenSectionCardButtonButtonLinkRawButtonDoc = 'tokenSection___cardButton___buttonLink____rawButtonDoc',
+  TokenSectionCardButtonButtonModal = 'tokenSection___cardButton___buttonModal',
+  TokenSectionCardButtonButtonBlankTarget = 'tokenSection___cardButton___buttonBlankTarget',
+  TokenSectionCardButtonRawButtonLink = 'tokenSection___cardButton____rawButtonLink',
+  TokenSectionDetailImageKey = 'tokenSection___detailImage____key',
+  TokenSectionDetailImageType = 'tokenSection___detailImage____type',
+  TokenSectionDetailImageImageHref = 'tokenSection___detailImage___imageHref',
+  TokenSectionDetailImageImageKey = 'tokenSection___detailImage___image____key',
+  TokenSectionDetailImageImageType = 'tokenSection___detailImage___image____type',
+  TokenSectionDetailImageImageRawAsset = 'tokenSection___detailImage___image____rawAsset',
+  TokenSectionDetailImageImageRawHotspot = 'tokenSection___detailImage___image____rawHotspot',
+  TokenSectionDetailImageImageRawCrop = 'tokenSection___detailImage___image____rawCrop',
+  TokenSectionDetailImageImageAlt = 'tokenSection___detailImage___imageAlt',
+  TokenSectionDetailImageRawImage = 'tokenSection___detailImage____rawImage',
+  TokenSectionDetailTitle = 'tokenSection___detailTitle',
+  TokenSectionDetailSubtitle = 'tokenSection___detailSubtitle',
+  TokenSectionDetailButton1Key = 'tokenSection___detailButton1____key',
+  TokenSectionDetailButton1Type = 'tokenSection___detailButton1____type',
+  TokenSectionDetailButton1ButtonText = 'tokenSection___detailButton1___buttonText',
+  TokenSectionDetailButton1ButtonLinkKey = 'tokenSection___detailButton1___buttonLink____key',
+  TokenSectionDetailButton1ButtonLinkType = 'tokenSection___detailButton1___buttonLink____type',
+  TokenSectionDetailButton1ButtonLinkButtonHref = 'tokenSection___detailButton1___buttonLink___buttonHref',
+  TokenSectionDetailButton1ButtonLinkRawButtonDoc = 'tokenSection___detailButton1___buttonLink____rawButtonDoc',
+  TokenSectionDetailButton1ButtonModal = 'tokenSection___detailButton1___buttonModal',
+  TokenSectionDetailButton1ButtonBlankTarget = 'tokenSection___detailButton1___buttonBlankTarget',
+  TokenSectionDetailButton1RawButtonLink = 'tokenSection___detailButton1____rawButtonLink',
+  TokenSectionDetailButton2Key = 'tokenSection___detailButton2____key',
+  TokenSectionDetailButton2Type = 'tokenSection___detailButton2____type',
+  TokenSectionDetailButton2ButtonText = 'tokenSection___detailButton2___buttonText',
+  TokenSectionDetailButton2ButtonLinkKey = 'tokenSection___detailButton2___buttonLink____key',
+  TokenSectionDetailButton2ButtonLinkType = 'tokenSection___detailButton2___buttonLink____type',
+  TokenSectionDetailButton2ButtonLinkButtonHref = 'tokenSection___detailButton2___buttonLink___buttonHref',
+  TokenSectionDetailButton2ButtonLinkRawButtonDoc = 'tokenSection___detailButton2___buttonLink____rawButtonDoc',
+  TokenSectionDetailButton2ButtonModal = 'tokenSection___detailButton2___buttonModal',
+  TokenSectionDetailButton2ButtonBlankTarget = 'tokenSection___detailButton2___buttonBlankTarget',
+  TokenSectionDetailButton2RawButtonLink = 'tokenSection___detailButton2____rawButtonLink',
+  TokenSectionCardBody = 'tokenSection___cardBody',
+  TokenSectionCardBodyKey = 'tokenSection___cardBody____key',
+  TokenSectionCardBodyType = 'tokenSection___cardBody____type',
+  TokenSectionCardBodyChildren = 'tokenSection___cardBody___children',
+  TokenSectionCardBodyChildrenKey = 'tokenSection___cardBody___children____key',
+  TokenSectionCardBodyChildrenType = 'tokenSection___cardBody___children____type',
+  TokenSectionCardBodyChildrenMarks = 'tokenSection___cardBody___children___marks',
+  TokenSectionCardBodyChildrenText = 'tokenSection___cardBody___children___text',
+  TokenSectionCardBodyStyle = 'tokenSection___cardBody___style',
+  TokenSectionCardBodyList = 'tokenSection___cardBody___list',
+  TokenSectionCardBodyRawChildren = 'tokenSection___cardBody____rawChildren',
+  TokenSectionDetailBody = 'tokenSection___detailBody',
+  TokenSectionDetailBodyKey = 'tokenSection___detailBody____key',
+  TokenSectionDetailBodyType = 'tokenSection___detailBody____type',
+  TokenSectionDetailBodyChildren = 'tokenSection___detailBody___children',
+  TokenSectionDetailBodyChildrenKey = 'tokenSection___detailBody___children____key',
+  TokenSectionDetailBodyChildrenType = 'tokenSection___detailBody___children____type',
+  TokenSectionDetailBodyChildrenMarks = 'tokenSection___detailBody___children___marks',
+  TokenSectionDetailBodyChildrenText = 'tokenSection___detailBody___children___text',
+  TokenSectionDetailBodyStyle = 'tokenSection___detailBody___style',
+  TokenSectionDetailBodyList = 'tokenSection___detailBody___list',
+  TokenSectionDetailBodyRawChildren = 'tokenSection___detailBody____rawChildren',
+  TokenSectionRawCardImage = 'tokenSection____rawCardImage',
+  TokenSectionRawCardBody = 'tokenSection____rawCardBody',
+  TokenSectionRawCardButton = 'tokenSection____rawCardButton',
+  TokenSectionRawDetailImage = 'tokenSection____rawDetailImage',
+  TokenSectionRawDetailBody = 'tokenSection____rawDetailBody',
+  TokenSectionRawDetailButton1 = 'tokenSection____rawDetailButton1',
+  TokenSectionRawDetailButton2 = 'tokenSection____rawDetailButton2',
   RawSeo = '_rawSeo',
   RawTopSection = '_rawTopSection',
   RawOverviewSection = '_rawOverviewSection',
+  RawTokenSection = '_rawTokenSection',
   Id = 'id',
   ParentId = 'parent___id',
   ParentParentId = 'parent___parent___id',
@@ -17047,11 +17153,14 @@ export type SanityNctPageFilterInput = {
   _rev: Maybe<StringQueryOperatorInput>;
   _key: Maybe<StringQueryOperatorInput>;
   seo: Maybe<SanitySeoFilterInput>;
+  launchDate: Maybe<DateQueryOperatorInput>;
   topSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
   overviewSection: Maybe<SanityNctOverviewSectionFilterInput>;
+  tokenSection: Maybe<SanityNctTokenSectionFilterInput>;
   _rawSeo: Maybe<JsonQueryOperatorInput>;
   _rawTopSection: Maybe<JsonQueryOperatorInput>;
   _rawOverviewSection: Maybe<JsonQueryOperatorInput>;
+  _rawTokenSection: Maybe<JsonQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -17071,6 +17180,88 @@ export type SanityNctPageGroupConnection = {
 export type SanityNctPageSortInput = {
   fields: Maybe<Array<Maybe<SanityNctPageFieldsEnum>>>;
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type SanityNctTokenSection = {
+  __typename?: 'SanityNctTokenSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  cardImage: Maybe<SanityCustomImage>;
+  cardTitle: Maybe<Scalars['String']>;
+  cardSubtitle: Maybe<Scalars['String']>;
+  cardButton: Maybe<SanityButton>;
+  detailImage: Maybe<SanityCustomImage>;
+  detailTitle: Maybe<Scalars['String']>;
+  detailSubtitle: Maybe<Scalars['String']>;
+  detailButton1: Maybe<SanityButton>;
+  detailButton2: Maybe<SanityButton>;
+  cardBody: Maybe<Array<Maybe<SanityBlock>>>;
+  detailBody: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawCardImage: Maybe<Scalars['JSON']>;
+  _rawCardBody: Maybe<Scalars['JSON']>;
+  _rawCardButton: Maybe<Scalars['JSON']>;
+  _rawDetailImage: Maybe<Scalars['JSON']>;
+  _rawDetailBody: Maybe<Scalars['JSON']>;
+  _rawDetailButton1: Maybe<Scalars['JSON']>;
+  _rawDetailButton2: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityNctTokenSection_RawCardImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawCardBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawCardButtonArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawDetailImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawDetailBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawDetailButton1Args = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawDetailButton2Args = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityNctTokenSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  cardImage: Maybe<SanityCustomImageFilterInput>;
+  cardTitle: Maybe<StringQueryOperatorInput>;
+  cardSubtitle: Maybe<StringQueryOperatorInput>;
+  cardButton: Maybe<SanityButtonFilterInput>;
+  detailImage: Maybe<SanityCustomImageFilterInput>;
+  detailTitle: Maybe<StringQueryOperatorInput>;
+  detailSubtitle: Maybe<StringQueryOperatorInput>;
+  detailButton1: Maybe<SanityButtonFilterInput>;
+  detailButton2: Maybe<SanityButtonFilterInput>;
+  cardBody: Maybe<SanityBlockFilterListInput>;
+  detailBody: Maybe<SanityBlockFilterListInput>;
+  _rawCardImage: Maybe<JsonQueryOperatorInput>;
+  _rawCardBody: Maybe<JsonQueryOperatorInput>;
+  _rawCardButton: Maybe<JsonQueryOperatorInput>;
+  _rawDetailImage: Maybe<JsonQueryOperatorInput>;
+  _rawDetailBody: Maybe<JsonQueryOperatorInput>;
+  _rawDetailButton1: Maybe<JsonQueryOperatorInput>;
+  _rawDetailButton2: Maybe<JsonQueryOperatorInput>;
 };
 
 export type SanityPageMetadata = {
@@ -24929,6 +25120,37 @@ export type NctOverviewSectionQuery = (
           & LinkFieldsFragment
         )> }
       )>>> }
+    )> }
+  )> }
+);
+
+export type NctTokenSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctTokenSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & Pick<SanityNctPage, 'launchDate'>
+    & { tokenSection: Maybe<(
+      { __typename?: 'SanityNctTokenSection' }
+      & Pick<SanityNctTokenSection, 'cardTitle' | 'cardSubtitle' | '_rawCardBody' | 'detailTitle' | 'detailSubtitle' | '_rawDetailBody'>
+      & { cardImage: Maybe<(
+        { __typename?: 'SanityCustomImage' }
+        & CustomImageFieldsFragment
+      )>, cardButton: Maybe<(
+        { __typename?: 'SanityButton' }
+        & ButtonFieldsFragment
+      )>, detailImage: Maybe<(
+        { __typename?: 'SanityCustomImage' }
+        & CustomImageFieldsFragment
+      )>, detailButton1: Maybe<(
+        { __typename?: 'SanityButton' }
+        & ButtonFieldsFragment
+      )>, detailButton2: Maybe<(
+        { __typename?: 'SanityButton' }
+        & ButtonFieldsFragment
+      )> }
     )> }
   )> }
 );

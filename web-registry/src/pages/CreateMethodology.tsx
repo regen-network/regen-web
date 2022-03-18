@@ -186,7 +186,10 @@ const CreateMethodology: React.FC = () => {
         openModal={openModal}
       /> */}
       <FixedFooter justifyContent="flex-end">
-        <ContainedButton onClick={e => openModal(content?.footerLink)}>
+        <ContainedButton
+          size="large"
+          onClick={e => openModal(content?.footerLink)}
+        >
           Submit a methodology
         </ContainedButton>
       </FixedFooter>

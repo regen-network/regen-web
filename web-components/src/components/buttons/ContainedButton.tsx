@@ -7,21 +7,13 @@ interface ContainedButtonProps extends ButtonProps {
   rel?: string;
 }
 
-const StyledButton = styled(Button)(({ theme }) => ({
-  borderRadius: '2px',
-  fontFamily: theme.typography.h1.fontFamily,
-  fontWeight: 800,
+const StyledButton = styled(Button)<ButtonProps>(({ theme }) => ({
+  borderColor: theme.palette.secondary.main,
   color: theme.palette.primary.main,
-  letterSpacing: '1px',
-  boxShadow: 'none',
   whiteSpace: 'nowrap',
-  [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(3, 6),
-    fontSize: '1.125rem',
-  },
-  [theme.breakpoints.up('sm')]: {
-    padding: theme.spacing(3, 12.5),
-    fontSize: '1.3125rem',
+  fontFamily: theme.typography.h1.fontFamily,
+  '&:hover': {
+    borderColor: theme.palette.secondary.dark,
   },
 }));
 

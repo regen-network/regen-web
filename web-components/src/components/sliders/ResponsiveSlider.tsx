@@ -81,7 +81,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       '& .slick-slide': {
         display: 'flex',
         '& > div': {
-          width: '100%',
+          width: '97%',
         },
       },
     },

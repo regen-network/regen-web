@@ -87,7 +87,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
         background: theme.palette.primary.main,
       },
       '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
-        fontSize: theme.spacing(3.25),
+        fontSize: theme.typography.pxToRem(14),
+        lineHeight: theme.typography.pxToRem(17.57),
         letterSpacing: '1px',
       },
       '& ul > li > a, & ul > li > div > span': {
@@ -247,7 +248,6 @@ export default function Header({
                   />
                 );
               })}
-              {/* {isRegistry && <RegistryLoginBtns />} */}
               {isRegistry && extras}
             </MenuList>
           </Box>

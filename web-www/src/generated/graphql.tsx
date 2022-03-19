@@ -3006,10 +3006,18 @@ export type QuerySanityNctPageArgs = {
   topSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
   overviewSection: Maybe<SanityNctOverviewSectionFilterInput>;
   tokenSection: Maybe<SanityNctTokenSectionFilterInput>;
+  banner: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  marketplaceSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  ledgerSection: Maybe<SanityNctLedgerSectionFilterInput>;
+  mediaItems: Maybe<SanityMediaFilterListInput>;
   _rawSeo: Maybe<JsonQueryOperatorInput>;
   _rawTopSection: Maybe<JsonQueryOperatorInput>;
   _rawOverviewSection: Maybe<JsonQueryOperatorInput>;
   _rawTokenSection: Maybe<JsonQueryOperatorInput>;
+  _rawBanner: Maybe<JsonQueryOperatorInput>;
+  _rawMarketplaceSection: Maybe<JsonQueryOperatorInput>;
+  _rawLedgerSection: Maybe<JsonQueryOperatorInput>;
+  _rawMediaItems: Maybe<JsonQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -16616,6 +16624,48 @@ export type SanityNameTitleImage_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
+export type SanityNctLedgerSection = {
+  __typename?: 'SanityNctLedgerSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  icon: Maybe<SanityImage>;
+  title: Maybe<Scalars['String']>;
+  subtitle: Maybe<Scalars['String']>;
+  button: Maybe<SanityButton>;
+  body: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawIcon: Maybe<Scalars['JSON']>;
+  _rawBody: Maybe<Scalars['JSON']>;
+  _rawButton: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityNctLedgerSection_RawIconArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctLedgerSection_RawBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctLedgerSection_RawButtonArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityNctLedgerSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  icon: Maybe<SanityImageFilterInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  subtitle: Maybe<StringQueryOperatorInput>;
+  button: Maybe<SanityButtonFilterInput>;
+  body: Maybe<SanityBlockFilterListInput>;
+  _rawIcon: Maybe<JsonQueryOperatorInput>;
+  _rawBody: Maybe<JsonQueryOperatorInput>;
+  _rawButton: Maybe<JsonQueryOperatorInput>;
+};
+
 export type SanityNctOverviewSection = {
   __typename?: 'SanityNctOverviewSection';
   _key: Maybe<Scalars['String']>;
@@ -16687,10 +16737,18 @@ export type SanityNctPage = SanityDocument & Node & {
   topSection: Maybe<SanityTitleImageCustomBody>;
   overviewSection: Maybe<SanityNctOverviewSection>;
   tokenSection: Maybe<SanityNctTokenSection>;
+  banner: Maybe<SanityTitleImageCustomBody>;
+  marketplaceSection: Maybe<SanityTitleImageCustomBody>;
+  ledgerSection: Maybe<SanityNctLedgerSection>;
+  mediaItems: Maybe<Array<Maybe<SanityMedia>>>;
   _rawSeo: Maybe<Scalars['JSON']>;
   _rawTopSection: Maybe<Scalars['JSON']>;
   _rawOverviewSection: Maybe<Scalars['JSON']>;
   _rawTokenSection: Maybe<Scalars['JSON']>;
+  _rawBanner: Maybe<Scalars['JSON']>;
+  _rawMarketplaceSection: Maybe<Scalars['JSON']>;
+  _rawLedgerSection: Maybe<Scalars['JSON']>;
+  _rawMediaItems: Maybe<Scalars['JSON']>;
   id: Scalars['ID'];
   parent: Maybe<Node>;
   children: Array<Node>;
@@ -16738,6 +16796,26 @@ export type SanityNctPage_RawOverviewSectionArgs = {
 
 
 export type SanityNctPage_RawTokenSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawBannerArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawMarketplaceSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawLedgerSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawMediaItemsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
@@ -17053,10 +17131,195 @@ export enum SanityNctPageFieldsEnum {
   TokenSectionRawDetailBody = 'tokenSection____rawDetailBody',
   TokenSectionRawDetailButton1 = 'tokenSection____rawDetailButton1',
   TokenSectionRawDetailButton2 = 'tokenSection____rawDetailButton2',
+  BannerKey = 'banner____key',
+  BannerType = 'banner____type',
+  BannerTitle = 'banner___title',
+  BannerImageKey = 'banner___image____key',
+  BannerImageType = 'banner___image____type',
+  BannerImageImageHref = 'banner___image___imageHref',
+  BannerImageImageKey = 'banner___image___image____key',
+  BannerImageImageType = 'banner___image___image____type',
+  BannerImageImageRawAsset = 'banner___image___image____rawAsset',
+  BannerImageImageRawHotspot = 'banner___image___image____rawHotspot',
+  BannerImageImageRawCrop = 'banner___image___image____rawCrop',
+  BannerImageImageAlt = 'banner___image___imageAlt',
+  BannerImageRawImage = 'banner___image____rawImage',
+  BannerBody = 'banner___body',
+  BannerBodyKey = 'banner___body____key',
+  BannerBodyType = 'banner___body____type',
+  BannerBodyChildren = 'banner___body___children',
+  BannerBodyChildrenKey = 'banner___body___children____key',
+  BannerBodyChildrenType = 'banner___body___children____type',
+  BannerBodyChildrenMarks = 'banner___body___children___marks',
+  BannerBodyChildrenText = 'banner___body___children___text',
+  BannerBodyStyle = 'banner___body___style',
+  BannerBodyList = 'banner___body___list',
+  BannerBodyRawChildren = 'banner___body____rawChildren',
+  BannerRawImage = 'banner____rawImage',
+  BannerRawBody = 'banner____rawBody',
+  MarketplaceSectionKey = 'marketplaceSection____key',
+  MarketplaceSectionType = 'marketplaceSection____type',
+  MarketplaceSectionTitle = 'marketplaceSection___title',
+  MarketplaceSectionImageKey = 'marketplaceSection___image____key',
+  MarketplaceSectionImageType = 'marketplaceSection___image____type',
+  MarketplaceSectionImageImageHref = 'marketplaceSection___image___imageHref',
+  MarketplaceSectionImageImageKey = 'marketplaceSection___image___image____key',
+  MarketplaceSectionImageImageType = 'marketplaceSection___image___image____type',
+  MarketplaceSectionImageImageRawAsset = 'marketplaceSection___image___image____rawAsset',
+  MarketplaceSectionImageImageRawHotspot = 'marketplaceSection___image___image____rawHotspot',
+  MarketplaceSectionImageImageRawCrop = 'marketplaceSection___image___image____rawCrop',
+  MarketplaceSectionImageImageAlt = 'marketplaceSection___image___imageAlt',
+  MarketplaceSectionImageRawImage = 'marketplaceSection___image____rawImage',
+  MarketplaceSectionBody = 'marketplaceSection___body',
+  MarketplaceSectionBodyKey = 'marketplaceSection___body____key',
+  MarketplaceSectionBodyType = 'marketplaceSection___body____type',
+  MarketplaceSectionBodyChildren = 'marketplaceSection___body___children',
+  MarketplaceSectionBodyChildrenKey = 'marketplaceSection___body___children____key',
+  MarketplaceSectionBodyChildrenType = 'marketplaceSection___body___children____type',
+  MarketplaceSectionBodyChildrenMarks = 'marketplaceSection___body___children___marks',
+  MarketplaceSectionBodyChildrenText = 'marketplaceSection___body___children___text',
+  MarketplaceSectionBodyStyle = 'marketplaceSection___body___style',
+  MarketplaceSectionBodyList = 'marketplaceSection___body___list',
+  MarketplaceSectionBodyRawChildren = 'marketplaceSection___body____rawChildren',
+  MarketplaceSectionRawImage = 'marketplaceSection____rawImage',
+  MarketplaceSectionRawBody = 'marketplaceSection____rawBody',
+  LedgerSectionKey = 'ledgerSection____key',
+  LedgerSectionType = 'ledgerSection____type',
+  LedgerSectionIconKey = 'ledgerSection___icon____key',
+  LedgerSectionIconType = 'ledgerSection___icon____type',
+  LedgerSectionIconAssetId = 'ledgerSection___icon___asset____id',
+  LedgerSectionIconAssetType = 'ledgerSection___icon___asset____type',
+  LedgerSectionIconAssetCreatedAt = 'ledgerSection___icon___asset____createdAt',
+  LedgerSectionIconAssetUpdatedAt = 'ledgerSection___icon___asset____updatedAt',
+  LedgerSectionIconAssetRev = 'ledgerSection___icon___asset____rev',
+  LedgerSectionIconAssetKey = 'ledgerSection___icon___asset____key',
+  LedgerSectionIconAssetOriginalFilename = 'ledgerSection___icon___asset___originalFilename',
+  LedgerSectionIconAssetLabel = 'ledgerSection___icon___asset___label',
+  LedgerSectionIconAssetTitle = 'ledgerSection___icon___asset___title',
+  LedgerSectionIconAssetDescription = 'ledgerSection___icon___asset___description',
+  LedgerSectionIconAssetAltText = 'ledgerSection___icon___asset___altText',
+  LedgerSectionIconAssetSha1hash = 'ledgerSection___icon___asset___sha1hash',
+  LedgerSectionIconAssetExtension = 'ledgerSection___icon___asset___extension',
+  LedgerSectionIconAssetMimeType = 'ledgerSection___icon___asset___mimeType',
+  LedgerSectionIconAssetSize = 'ledgerSection___icon___asset___size',
+  LedgerSectionIconAssetAssetId = 'ledgerSection___icon___asset___assetId',
+  LedgerSectionIconAssetUploadId = 'ledgerSection___icon___asset___uploadId',
+  LedgerSectionIconAssetPath = 'ledgerSection___icon___asset___path',
+  LedgerSectionIconAssetUrl = 'ledgerSection___icon___asset___url',
+  LedgerSectionIconAssetRawMetadata = 'ledgerSection___icon___asset____rawMetadata',
+  LedgerSectionIconAssetRawSource = 'ledgerSection___icon___asset____rawSource',
+  LedgerSectionIconAssetId = 'ledgerSection___icon___asset___id',
+  LedgerSectionIconAssetChildren = 'ledgerSection___icon___asset___children',
+  LedgerSectionIconHotspotKey = 'ledgerSection___icon___hotspot____key',
+  LedgerSectionIconHotspotType = 'ledgerSection___icon___hotspot____type',
+  LedgerSectionIconHotspotX = 'ledgerSection___icon___hotspot___x',
+  LedgerSectionIconHotspotY = 'ledgerSection___icon___hotspot___y',
+  LedgerSectionIconHotspotHeight = 'ledgerSection___icon___hotspot___height',
+  LedgerSectionIconHotspotWidth = 'ledgerSection___icon___hotspot___width',
+  LedgerSectionIconCropKey = 'ledgerSection___icon___crop____key',
+  LedgerSectionIconCropType = 'ledgerSection___icon___crop____type',
+  LedgerSectionIconCropTop = 'ledgerSection___icon___crop___top',
+  LedgerSectionIconCropBottom = 'ledgerSection___icon___crop___bottom',
+  LedgerSectionIconCropLeft = 'ledgerSection___icon___crop___left',
+  LedgerSectionIconCropRight = 'ledgerSection___icon___crop___right',
+  LedgerSectionIconRawAsset = 'ledgerSection___icon____rawAsset',
+  LedgerSectionIconRawHotspot = 'ledgerSection___icon____rawHotspot',
+  LedgerSectionIconRawCrop = 'ledgerSection___icon____rawCrop',
+  LedgerSectionTitle = 'ledgerSection___title',
+  LedgerSectionSubtitle = 'ledgerSection___subtitle',
+  LedgerSectionButtonKey = 'ledgerSection___button____key',
+  LedgerSectionButtonType = 'ledgerSection___button____type',
+  LedgerSectionButtonButtonText = 'ledgerSection___button___buttonText',
+  LedgerSectionButtonButtonLinkKey = 'ledgerSection___button___buttonLink____key',
+  LedgerSectionButtonButtonLinkType = 'ledgerSection___button___buttonLink____type',
+  LedgerSectionButtonButtonLinkButtonHref = 'ledgerSection___button___buttonLink___buttonHref',
+  LedgerSectionButtonButtonLinkRawButtonDoc = 'ledgerSection___button___buttonLink____rawButtonDoc',
+  LedgerSectionButtonButtonModal = 'ledgerSection___button___buttonModal',
+  LedgerSectionButtonButtonBlankTarget = 'ledgerSection___button___buttonBlankTarget',
+  LedgerSectionButtonRawButtonLink = 'ledgerSection___button____rawButtonLink',
+  LedgerSectionBody = 'ledgerSection___body',
+  LedgerSectionBodyKey = 'ledgerSection___body____key',
+  LedgerSectionBodyType = 'ledgerSection___body____type',
+  LedgerSectionBodyChildren = 'ledgerSection___body___children',
+  LedgerSectionBodyChildrenKey = 'ledgerSection___body___children____key',
+  LedgerSectionBodyChildrenType = 'ledgerSection___body___children____type',
+  LedgerSectionBodyChildrenMarks = 'ledgerSection___body___children___marks',
+  LedgerSectionBodyChildrenText = 'ledgerSection___body___children___text',
+  LedgerSectionBodyStyle = 'ledgerSection___body___style',
+  LedgerSectionBodyList = 'ledgerSection___body___list',
+  LedgerSectionBodyRawChildren = 'ledgerSection___body____rawChildren',
+  LedgerSectionRawIcon = 'ledgerSection____rawIcon',
+  LedgerSectionRawBody = 'ledgerSection____rawBody',
+  LedgerSectionRawButton = 'ledgerSection____rawButton',
+  MediaItems = 'mediaItems',
+  MediaItemsId = 'mediaItems____id',
+  MediaItemsType = 'mediaItems____type',
+  MediaItemsCreatedAt = 'mediaItems____createdAt',
+  MediaItemsUpdatedAt = 'mediaItems____updatedAt',
+  MediaItemsRev = 'mediaItems____rev',
+  MediaItemsKey = 'mediaItems____key',
+  MediaItemsTitle = 'mediaItems___title',
+  MediaItemsAuthor = 'mediaItems___author',
+  MediaItemsDate = 'mediaItems___date',
+  MediaItemsImageKey = 'mediaItems___image____key',
+  MediaItemsImageType = 'mediaItems___image____type',
+  MediaItemsImageImageHref = 'mediaItems___image___imageHref',
+  MediaItemsImageImageKey = 'mediaItems___image___image____key',
+  MediaItemsImageImageType = 'mediaItems___image___image____type',
+  MediaItemsImageImageRawAsset = 'mediaItems___image___image____rawAsset',
+  MediaItemsImageImageRawHotspot = 'mediaItems___image___image____rawHotspot',
+  MediaItemsImageImageRawCrop = 'mediaItems___image___image____rawCrop',
+  MediaItemsImageImageAlt = 'mediaItems___image___imageAlt',
+  MediaItemsImageRawImage = 'mediaItems___image____rawImage',
+  MediaItemsHref = 'mediaItems___href',
+  MediaItemsType = 'mediaItems___type',
+  MediaItemsRawImage = 'mediaItems____rawImage',
+  MediaItemsId = 'mediaItems___id',
+  MediaItemsParentId = 'mediaItems___parent___id',
+  MediaItemsParentParentId = 'mediaItems___parent___parent___id',
+  MediaItemsParentParentChildren = 'mediaItems___parent___parent___children',
+  MediaItemsParentChildren = 'mediaItems___parent___children',
+  MediaItemsParentChildrenId = 'mediaItems___parent___children___id',
+  MediaItemsParentChildrenChildren = 'mediaItems___parent___children___children',
+  MediaItemsParentInternalContent = 'mediaItems___parent___internal___content',
+  MediaItemsParentInternalContentDigest = 'mediaItems___parent___internal___contentDigest',
+  MediaItemsParentInternalDescription = 'mediaItems___parent___internal___description',
+  MediaItemsParentInternalFieldOwners = 'mediaItems___parent___internal___fieldOwners',
+  MediaItemsParentInternalIgnoreType = 'mediaItems___parent___internal___ignoreType',
+  MediaItemsParentInternalMediaType = 'mediaItems___parent___internal___mediaType',
+  MediaItemsParentInternalOwner = 'mediaItems___parent___internal___owner',
+  MediaItemsParentInternalType = 'mediaItems___parent___internal___type',
+  MediaItemsChildren = 'mediaItems___children',
+  MediaItemsChildrenId = 'mediaItems___children___id',
+  MediaItemsChildrenParentId = 'mediaItems___children___parent___id',
+  MediaItemsChildrenParentChildren = 'mediaItems___children___parent___children',
+  MediaItemsChildrenChildren = 'mediaItems___children___children',
+  MediaItemsChildrenChildrenId = 'mediaItems___children___children___id',
+  MediaItemsChildrenChildrenChildren = 'mediaItems___children___children___children',
+  MediaItemsChildrenInternalContent = 'mediaItems___children___internal___content',
+  MediaItemsChildrenInternalContentDigest = 'mediaItems___children___internal___contentDigest',
+  MediaItemsChildrenInternalDescription = 'mediaItems___children___internal___description',
+  MediaItemsChildrenInternalFieldOwners = 'mediaItems___children___internal___fieldOwners',
+  MediaItemsChildrenInternalIgnoreType = 'mediaItems___children___internal___ignoreType',
+  MediaItemsChildrenInternalMediaType = 'mediaItems___children___internal___mediaType',
+  MediaItemsChildrenInternalOwner = 'mediaItems___children___internal___owner',
+  MediaItemsChildrenInternalType = 'mediaItems___children___internal___type',
+  MediaItemsInternalContent = 'mediaItems___internal___content',
+  MediaItemsInternalContentDigest = 'mediaItems___internal___contentDigest',
+  MediaItemsInternalDescription = 'mediaItems___internal___description',
+  MediaItemsInternalFieldOwners = 'mediaItems___internal___fieldOwners',
+  MediaItemsInternalIgnoreType = 'mediaItems___internal___ignoreType',
+  MediaItemsInternalMediaType = 'mediaItems___internal___mediaType',
+  MediaItemsInternalOwner = 'mediaItems___internal___owner',
+  MediaItemsInternalType = 'mediaItems___internal___type',
   RawSeo = '_rawSeo',
   RawTopSection = '_rawTopSection',
   RawOverviewSection = '_rawOverviewSection',
   RawTokenSection = '_rawTokenSection',
+  RawBanner = '_rawBanner',
+  RawMarketplaceSection = '_rawMarketplaceSection',
+  RawLedgerSection = '_rawLedgerSection',
+  RawMediaItems = '_rawMediaItems',
   Id = 'id',
   ParentId = 'parent___id',
   ParentParentId = 'parent___parent___id',
@@ -17157,10 +17420,18 @@ export type SanityNctPageFilterInput = {
   topSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
   overviewSection: Maybe<SanityNctOverviewSectionFilterInput>;
   tokenSection: Maybe<SanityNctTokenSectionFilterInput>;
+  banner: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  marketplaceSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  ledgerSection: Maybe<SanityNctLedgerSectionFilterInput>;
+  mediaItems: Maybe<SanityMediaFilterListInput>;
   _rawSeo: Maybe<JsonQueryOperatorInput>;
   _rawTopSection: Maybe<JsonQueryOperatorInput>;
   _rawOverviewSection: Maybe<JsonQueryOperatorInput>;
   _rawTokenSection: Maybe<JsonQueryOperatorInput>;
+  _rawBanner: Maybe<JsonQueryOperatorInput>;
+  _rawMarketplaceSection: Maybe<JsonQueryOperatorInput>;
+  _rawLedgerSection: Maybe<JsonQueryOperatorInput>;
+  _rawMediaItems: Maybe<JsonQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -23832,6 +24103,10 @@ export type CustomImageFieldsFragment = (
   & Pick<SanityCustomImage, 'imageAlt' | 'imageHref'>
   & { image: Maybe<(
     { __typename?: 'SanityImage' }
+    & { asset: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
     & ImageWithPreviewFragment
   )> }
 );
@@ -23922,6 +24197,15 @@ export type LinkFieldsFragment = (
   & { buttonDoc: Maybe<(
     { __typename?: 'SanityDoc' }
     & Pick<SanityDoc, 'href'>
+  )> }
+);
+
+export type MediaFieldsFragment = (
+  { __typename?: 'SanityMedia' }
+  & Pick<SanityMedia, 'title' | 'author' | 'date' | 'href' | 'type'>
+  & { image: Maybe<(
+    { __typename?: 'SanityCustomImage' }
+    & CustomImageFieldsFragment
   )> }
 );
 
@@ -25017,17 +25301,7 @@ export type MainnetMediaSectionQuery = (
     { __typename?: 'SanityMainnetPage' }
     & { mediaItems: Maybe<Array<Maybe<(
       { __typename?: 'SanityMedia' }
-      & Pick<SanityMedia, 'title' | 'author' | 'date' | 'href' | 'type'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & { image: Maybe<(
-          { __typename?: 'SanityImage' }
-          & { asset: Maybe<(
-            { __typename?: 'SanityImageAsset' }
-            & Pick<SanityImageAsset, 'url'>
-          )> }
-        )> }
-      )> }
+      & MediaFieldsFragment
     )>>> }
   )> }
 );
@@ -25090,6 +25364,86 @@ export type MainnetWhatsNextSectionQuery = (
         )> }
       )>>> }
     )> }
+  )> }
+);
+
+export type NctBannerSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctBannerSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { banner: Maybe<(
+      { __typename?: 'SanityTitleImageCustomBody' }
+      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
+      & { image: Maybe<(
+        { __typename?: 'SanityCustomImage' }
+        & FluidCustomImageFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
+export type NctLedgerSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctLedgerSectionQuery = (
+  { __typename?: 'Query' }
+  & { bg: Maybe<(
+    { __typename?: 'File' }
+    & { childImageSharp: Maybe<(
+      { __typename?: 'ImageSharp' }
+      & { fluid: Maybe<(
+        { __typename?: 'ImageSharpFluid' }
+        & GatsbyImageSharpFluid_WithWebpFragment
+      )> }
+    )> }
+  )>, sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { ledgerSection: Maybe<(
+      { __typename?: 'SanityNctLedgerSection' }
+      & Pick<SanityNctLedgerSection, 'title' | 'subtitle' | '_rawBody'>
+      & { icon: Maybe<(
+        { __typename?: 'SanityImage' }
+        & ImageWithPreviewFragment
+      )>, button: Maybe<(
+        { __typename?: 'SanityButton' }
+        & ButtonFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
+export type NctMarketplaceSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctMarketplaceSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { marketplaceSection: Maybe<(
+      { __typename?: 'SanityTitleImageCustomBody' }
+      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
+      & { image: Maybe<(
+        { __typename?: 'SanityCustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
+export type NctMediaSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctMediaSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { mediaItems: Maybe<Array<Maybe<(
+      { __typename?: 'SanityMedia' }
+      & MediaFieldsFragment
+    )>>> }
   )> }
 );
 
@@ -25897,17 +26251,7 @@ export type TokenMediaSectionQuery = (
     { __typename?: 'SanityTokenPage' }
     & { mediaCards: Maybe<Array<Maybe<(
       { __typename?: 'SanityMedia' }
-      & Pick<SanityMedia, 'title' | 'author' | 'date' | 'href' | 'type'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & { image: Maybe<(
-          { __typename?: 'SanityImage' }
-          & { asset: Maybe<(
-            { __typename?: 'SanityImageAsset' }
-            & Pick<SanityImageAsset, 'url'>
-          )> }
-        )> }
-      )> }
+      & MediaFieldsFragment
     )>>> }
   )> }
 );

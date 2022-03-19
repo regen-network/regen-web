@@ -127,6 +127,10 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
 
   const menuItems: HeaderMenuItem[] = [
     {
+      title: 'NCT',
+      href: '/nct/',
+    },
+    {
       title: 'Program',
       dropdownItems: mobileProgramItems,
       render: () => (

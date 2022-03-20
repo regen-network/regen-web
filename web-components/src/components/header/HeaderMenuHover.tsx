@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'clsx';
 import { makeStyles, useTheme } from '@mui/styles';
-import { MenuItem } from '@mui/material';
+import { Box, MenuItem, styled } from '@mui/material';
 
 import MenuHover from '../menu-hover';
 import { NavLinkProps } from './NavLink';
@@ -9,6 +9,7 @@ import {
   HeaderDropdownColumn,
   HeaderDropdownItemProps,
 } from './HeaderDropdownItems';
+import { Label } from '../label';
 
 const useStyles = makeStyles(theme => ({
   menuItem: {
@@ -33,10 +34,25 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const NewIcon = styled('div')(({ theme }) => ({
+  position: 'absolute',
+  top: '-7px',
+  right: '-28px',
+  backgroundColor: '#3D7ACF', // not in theme
+  height: '10px',
+  width: '30px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '1px',
+  borderRadius: '3px',
+}));
+
 export interface HeaderMenuItem {
   title: string;
   href?: string;
   render?: () => JSX.Element;
+  isNew?: boolean;
   dropdownItems?: HeaderDropdownItemProps[];
 }
 
@@ -44,19 +60,33 @@ const HeaderMenuHover: React.FC<{
   item: HeaderMenuItem;
   pathName: string;
   color: string;
+  isNew?: boolean;
   linkComponent: React.FC<NavLinkProps>;
-}> = ({ item, pathName, color, linkComponent: LinkComponent }) => {
+}> = ({ item, linkComponent: LinkComponent, ...props }) => {
   const theme = useTheme();
   const styles = useStyles();
 
   const Content: React.FC = () => {
     if (item.href && !item.dropdownItems && !item.render) {
-      return <LinkComponent href={item.href}>{item.title}</LinkComponent>;
+      return (
+        <LinkComponent href={item.href}>
+          <Box component="span" sx={{ position: 'relative' }}>
+            {item.title}
+            {props.isNew && (
+              <NewIcon>
+                <Label sx={{ fontSize: { xs: 8 }, color: 'primary.main' }}>
+                  NEW
+                </Label>
+              </NewIcon>
+            )}
+          </Box>
+        </LinkComponent>
+      );
     }
     return (
       <MenuHover
         dropdownColor={
-          color === theme.palette.primary.light
+          props.color === theme.palette.primary.light
             ? theme.palette.secondary.main
             : theme.palette.secondary.contrastText
         }
@@ -78,7 +108,7 @@ const HeaderMenuHover: React.FC<{
     <MenuItem
       className={cx(
         styles.menuItem,
-        pathName === item.href && styles.currentMenuItem,
+        props.pathName === item.href && styles.currentMenuItem,
       )}
     >
       <Content />

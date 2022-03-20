@@ -242,6 +242,7 @@ export default function Header({
                 return (
                   <HeaderMenuHover
                     key={index}
+                    isNew={item.isNew}
                     linkComponent={linkComponent}
                     item={item}
                     color={color}

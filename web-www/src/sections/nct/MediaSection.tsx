@@ -1,13 +1,13 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
 
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import { sanityMediaToArticleCardProps } from '../../util/sanity-transforms';
 
 import type { NctMediaSectionQuery } from '../../generated/graphql';
-import { makeStyles } from '@mui/styles';
-import { Theme } from '@mui/material';
+import type { Theme } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {
@@ -30,11 +30,9 @@ export const MediaSection = (): JSX.Element => {
   const styles = useStyles();
   const { sanityNctPage } = useStaticQuery<NctMediaSectionQuery>(query);
   const data = sanityNctPage?.mediaItems;
-  const articleProps = sanityMediaToArticleCardProps(data);
-  const articleCards = articleProps.map(props => (
+  const articleCards = sanityMediaToArticleCardProps(data).map(props => (
     <ArticleCard className={styles.card} {...props} />
   ));
-  return <SliderSection title="Media" items={articleCards} />;
 
-  // return <SanityMediaSection items={data.mediaItems} />;
+  return <SliderSection title="Media" items={articleCards} />;
 };

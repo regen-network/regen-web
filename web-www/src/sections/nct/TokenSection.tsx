@@ -12,9 +12,10 @@ import Section from 'web-components/lib/components/section';
 import { formatDate } from 'web-components/lib/utils/format';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { Label } from 'web-components/lib/components/label';
+import Countdown from 'web-components/lib/components/countdown';
 
 import type { NctTokenSectionQuery } from '../../generated/graphql';
-import { Label } from 'web-components/lib/components/label';
 
 const query = graphql`
   query nctTokenSection {
@@ -109,7 +110,19 @@ export const TokenSection = (): JSX.Element => {
           px: [4, 12],
         }}
       >
-        <Title variant="h3">{data?.cardTitle}</Title>
+        <Title variant="h3">
+          {data?.cardTitle}{' '}
+          <Box
+            component="span"
+            sx={{
+              px: 2,
+              backgroundColor: 'info.light',
+              borderRadius: '5px',
+            }}
+          >
+            <Countdown date={launchDate} />
+          </Box>
+        </Title>
         <Typography
           sx={{ fontSize: [16, 18], fontWeight: 700, color: 'info.main' }}
         >
@@ -149,7 +162,7 @@ export const TokenSection = (): JSX.Element => {
       >
         <Title variant="h2">{data?.detailTitle}</Title>
         <Label sx={{ fontSize: { xs: 14, sm: 18 }, color: 'info.main' }}>
-          {data?.detailSubtitle}
+          {data?.detailSubtitle} {formatDate(launchDate)}
         </Label>
         <BodyContent content={data?._rawDetailBody} />
         <Box sx={{ display: 'flex', gap: 3, mt: [4, 8] }}>

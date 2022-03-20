@@ -129,6 +129,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
     {
       title: 'NCT',
       href: '/nct/',
+      isNew: true,
     },
     {
       title: 'Program',

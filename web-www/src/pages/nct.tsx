@@ -12,11 +12,7 @@ import {
   TopSection,
 } from '../sections/nct';
 
-import type { Maybe, NctPageQuery, SanityMedia } from '../generated/graphql';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import Section from 'web-components/lib/components/section';
-import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import { sanityMediaToArticleCardProps } from '../util/sanity-transforms';
+import type { NctPageQuery } from '../generated/graphql';
 
 const query = graphql`
   query nctPage {

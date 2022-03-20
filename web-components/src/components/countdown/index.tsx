@@ -1,11 +1,7 @@
 import React from 'react';
 import ReactCountdown from 'react-countdown';
 
-type Props = {
-  date: string;
-};
-
-const Countdown: React.FC<Props> = props => {
+const Countdown: React.FC<{ date: string }> = props => {
   const padN = (n: number): string => (n < 10 ? `0${n}` : n.toString());
   return (
     <ReactCountdown

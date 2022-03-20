@@ -1,13 +1,14 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import SanityImage from 'gatsby-plugin-sanity-image';
+import { Box } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
 
-import type { NctMarketplaceSectionQuery } from '../../generated/graphql';
-import { Box } from '@mui/material';
 import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/src/components/block-content';
+
+import type { NctMarketplaceSectionQuery } from '../../generated/graphql';
 
 const query = graphql`
   query nctMarketplaceSection {

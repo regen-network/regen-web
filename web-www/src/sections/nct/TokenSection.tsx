@@ -14,6 +14,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
 import type { NctTokenSectionQuery } from '../../generated/graphql';
+import { Label } from 'web-components/lib/components/label';
 
 const query = graphql`
   query nctTokenSection {
@@ -147,16 +148,9 @@ export const TokenSection = (): JSX.Element => {
         }}
       >
         <Title variant="h2">{data?.detailTitle}</Title>
-        <Title
-          sx={{
-            fontSize: { xs: 14, sm: 18 },
-            color: 'info.main',
-            fontWeight: 800,
-            textTransform: 'uppercase',
-          }}
-        >
+        <Label sx={{ fontSize: { xs: 14, sm: 18 }, color: 'info.main' }}>
           {data?.detailSubtitle}
-        </Title>
+        </Label>
         <BodyContent content={data?._rawDetailBody} />
         <Box sx={{ display: 'flex', gap: 3, mt: [4, 8] }}>
           <OutlinedButton

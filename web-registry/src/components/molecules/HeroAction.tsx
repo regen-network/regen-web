@@ -61,13 +61,7 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
   },
   btn: {
     margin: theme.spacing(10, 4, 0),
-    [theme.breakpoints.up('sm')]: {
-      // fontSize: theme.typography.pxToRem(21),
-      // padding: theme.spacing(2, 8),
-    },
     [theme.breakpoints.down('sm')]: {
-      // fontSize: theme.typography.pxToRem(18),
-      // padding: theme.spacing(2, 4),
       '&:nth-child(2)': {
         marginTop: theme.spacing(6),
       },

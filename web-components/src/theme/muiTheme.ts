@@ -175,6 +175,7 @@ const regenTheme = createTheme({
           textAlign: 'center',
           boxShadow: 'none',
           fontWeight: 800,
+          fontFamily: '"Muli"',
           borderRadius: '2px',
           border: '2px solid',
           whiteSpace: 'nowrap',

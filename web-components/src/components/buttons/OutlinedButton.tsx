@@ -20,7 +20,6 @@ const styleCallback = (theme: Theme): any => ({
     color: theme.palette.secondary.main,
     borderColor: theme.palette.secondary.contrastText,
     backgroundColor: theme.palette.primary.main,
-    fontFamily: theme.typography.h1.fontFamily,
     '&:hover': {
       backgroundColor: theme.palette.secondary.light,
       borderColor: theme.palette.secondary.light,

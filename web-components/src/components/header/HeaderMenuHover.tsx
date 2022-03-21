@@ -69,7 +69,7 @@ const HeaderMenuHover: React.FC<{
   const Content: React.FC = () => {
     if (item.href && !item.dropdownItems && !item.render) {
       return (
-        <LinkComponent href={item.href}>
+        <LinkComponent href={item.href} pathname={props.pathName}>
           <Box component="span" sx={{ position: 'relative' }}>
             {item.title}
             {props.isNew && (
@@ -95,6 +95,7 @@ const HeaderMenuHover: React.FC<{
         {/* `render` overrides default dropdown */}
         {item.dropdownItems && !item.render && (
           <HeaderDropdownColumn
+            pathname={props.pathName}
             items={item.dropdownItems}
             linkComponent={LinkComponent}
           />

@@ -32,6 +32,7 @@ const RegistryNav: React.FC = () => {
   //  correctly on mobile, so I declare here to avoid duplicate code
   const creditClassItems: HeaderDropdownItemProps[] = [
     {
+      pathname,
       linkComponent: RegistryNavLink,
       title: 'Carbon<i>Plus</i> Grasslands',
       href: '/credit-classes/carbonplus-grasslands',
@@ -41,6 +42,7 @@ const RegistryNav: React.FC = () => {
 
   const methodologyItems: HeaderDropdownItemProps[] = [
     {
+      pathname,
       linkComponent: RegistryNavLink,
       title: 'Carbon<i>Plus</i> Grasslands',
       href: '/methodologies/carbonplus-grasslands',
@@ -51,12 +53,14 @@ const RegistryNav: React.FC = () => {
 
   const stakeholderItems: HeaderDropdownItemProps[] = [
     {
+      pathname,
       linkComponent: RegistryNavLink,
       title: 'Buyers',
       href: '/buyers',
       svg: BuyersIcon,
     },
     {
+      pathname,
       linkComponent: RegistryNavLink,
       title: 'Land Stewards',
       href: '/land-stewards',
@@ -66,6 +70,7 @@ const RegistryNav: React.FC = () => {
 
   const programStandardItems: HeaderDropdownItemProps[] = [
     {
+      pathname,
       linkComponent: NavLink,
       href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
       title: 'Program Guide',
@@ -76,11 +81,13 @@ const RegistryNav: React.FC = () => {
   const programHowToItems: HeaderDropdownItemProps[] = [
     // { href: '/create-credit-class', title: 'Create a Credit Class', linkComponent: RegistryNavLink },
     {
+      pathname,
       href: '/create-methodology',
       title: 'Create a Methodology',
       linkComponent: RegistryNavLink,
     },
     {
+      pathname,
       href: '/methodology-review-process',
       title: 'Methodology Review Process',
       linkComponent: RegistryNavLink,
@@ -99,6 +106,7 @@ const RegistryNav: React.FC = () => {
     {
       title: 'Projects',
       dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
+        pathname,
         title:
           titleAlias[p?.metadata?.['http://schema.org/name']] ||
           p?.metadata?.['http://schema.org/name'],
@@ -112,6 +120,7 @@ const RegistryNav: React.FC = () => {
       render: () => (
         <HeaderDropdownColumn
           // title="Carbon<i>Plus</i> Credits"
+          pathname={pathname}
           items={creditClassItems}
           linkComponent={RegistryNavLink}
         />
@@ -122,6 +131,7 @@ const RegistryNav: React.FC = () => {
       dropdownItems: methodologyItems,
       render: () => (
         <HeaderDropdownColumn
+          pathname={pathname}
           items={methodologyItems}
           linkComponent={RegistryNavLink}
         />
@@ -132,6 +142,7 @@ const RegistryNav: React.FC = () => {
       dropdownItems: stakeholderItems,
       render: () => (
         <HeaderDropdownColumn
+          pathname={pathname}
           items={stakeholderItems}
           linkComponent={RegistryNavLink}
         />
@@ -144,6 +155,7 @@ const RegistryNav: React.FC = () => {
         <Box display="flex" justifyContent="space-between">
           <Box pr={20}>
             <HeaderDropdownColumn
+              pathname={pathname}
               title="Standard"
               items={programStandardItems}
               linkComponent={RegistryNavLink}
@@ -151,6 +163,7 @@ const RegistryNav: React.FC = () => {
           </Box>
           <Box display="flex" flexDirection="column">
             <HeaderDropdownColumn
+              pathname={pathname}
               title="How Tos"
               items={programHowToItems}
               linkComponent={RegistryNavLink}

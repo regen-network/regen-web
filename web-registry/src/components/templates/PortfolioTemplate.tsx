@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
@@ -7,11 +7,9 @@ import Title from 'web-components/lib/components/title';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { ledgerRESTUri } from '../../lib/ledger';
 import useBasketTokens from '../../hooks/useBasketTokens';
-import { getEcocreditsForAccount } from '../../lib/ecocredit';
+import useEcocredits from '../../hooks/useEcocredits';
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
-import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 
 interface PortfolioTemplateProps {
   accountAddress?: string;
@@ -41,21 +39,8 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   children,
 }) => {
   const styles = useStyles();
-  const [credits, setCredits] = useState<BatchInfoWithBalance[]>([]);
   const baskets = useBasketTokens(accountAddress);
-
-  useEffect(() => {
-    if (!ledgerRESTUri || !accountAddress) return;
-    const fetchData = async (): Promise<void> => {
-      try {
-        const credits = await getEcocreditsForAccount(accountAddress);
-        if (credits) setCredits(credits);
-      } catch (err) {
-        console.error(err); // eslint-disable-line no-console
-      }
-    };
-    fetchData();
-  }, [accountAddress]);
+  const credits = useEcocredits(accountAddress);
 
   return (
     <Box sx={{ backgroundColor: 'grey.50', pb: { xs: 21.25, sm: 28.28 } }}>

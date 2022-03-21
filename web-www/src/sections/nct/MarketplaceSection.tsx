@@ -29,18 +29,25 @@ export const MarketplaceSection = (): JSX.Element => {
   const data = sanityNctPage?.marketplaceSection;
 
   return (
-    <Section sx={{ py: [20, 30] }}>
+    <Section
+      sx={{
+        py: [20, 30],
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
       <SanityImage
         {...(data?.image?.image as any)}
         alt={data?.image?.imageAlt || ''}
         width={691}
         style={{
-          maxWidth: '100%',
-          maxHeight: '100%',
+          maxWidth: '691px',
+          maxHeight: '892px',
           objectFit: 'cover',
         }}
       />
-      <Box sx={{ maxWidth: 700, m: '0 auto' }}>
+      <Box sx={{ maxWidth: 700 }}>
         <Title variant="h2" sx={{ textAlign: 'center', my: [4, 8] }}>
           {data?.title}
         </Title>

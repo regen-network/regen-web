@@ -5,6 +5,7 @@ import {
   ActionsTable,
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
+import { formatNumber } from 'web-components/lib/utils/format';
 
 import { BasketTokens } from '../../hooks/useBasketTokens';
 import { NoCredits } from '../molecules';
@@ -51,8 +52,10 @@ export const BasketsTable: React.FC<{
             </Grid>
           </Grid>,
           row.balance?.balance?.amount
-            ? parseInt(row.balance?.balance?.amount) /
-              Math.pow(10, row.basket.exponent)
+            ? formatNumber(
+                parseInt(row.balance?.balance?.amount) /
+                  Math.pow(10, row.basket.exponent),
+              )
             : 0,
         ];
       })}

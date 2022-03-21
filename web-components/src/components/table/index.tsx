@@ -99,17 +99,10 @@ const getTablePaginationPadding = (
   return countTotal <= rowsPerPage ? 0 : rowsPerPage - countPage;
 };
 
-const formatNumber = (num: number | string | undefined): string => {
-  if (!num) return '-';
-  if (typeof num === 'string') num = parseFloat(num);
-  return num > 0 ? Math.floor(num).toLocaleString() : '-';
-};
-
 export {
   StyledTableContainer,
   StyledTableRow,
   StyledTableCell,
   StyledTableSortLabel,
   getTablePaginationPadding,
-  formatNumber,
 };

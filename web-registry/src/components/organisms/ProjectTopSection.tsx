@@ -234,7 +234,9 @@ function ProjectTopSection({
   const additionalCertification =
     metadata?.['http://regen.network/additionalCertification'];
   const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
-  const landStory = metadata?.['http://regen.network/landStory'];
+  const landStory =
+    metadata?.['http://regen.network/landStory'] ||
+    metadata?.['regen:landStory'];
   const landStewardStoryTitle =
     metadata?.['http://regen.network/landStewardStoryTitle'];
   const landStewardStory = metadata?.['http://regen.network/landStewardStory'];

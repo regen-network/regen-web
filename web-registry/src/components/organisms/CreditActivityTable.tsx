@@ -15,7 +15,6 @@ import {
   StyledTableCell,
   StyledTableRow,
   StyledTableSortLabel,
-  formatNumber,
 } from 'web-components/lib/components/table';
 import { useTablePagination } from 'web-components/lib/components/table/useTablePagination';
 import {
@@ -26,6 +25,7 @@ import {
 import { Label } from 'web-components/lib/components/label';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { formatNumber } from 'web-components/lib/utils/format';
 
 import { truncate } from '../../lib/wallet';
 import { ledgerRESTUri } from '../../lib/ledger';

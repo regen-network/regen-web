@@ -258,14 +258,16 @@ function ProjectTopSection({
       <Grid container>
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
           <Title variant="h1">
-            {metadata?.['http://schema.org/name'] ||
-              metadata?.['regen:vcsProjectId']?.['@value']}
+            {metadata?.['http://schema.org/name'] || metadata?.['schema:name']}
           </Title>
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo
               iconClassName={styles.icon}
               // TODO Format and show on-chain project location if no off-chain location
-              place={metadata?.['http://schema.org/location']?.place_name}
+              place={
+                metadata?.['http://schema.org/location']?.place_name ||
+                metadata?.['schema:location']?.place_name
+              }
               area={area}
               areaUnit={unit && qudtUnitMap[unit]}
             />
@@ -430,11 +432,18 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
-            projectDeveloper={getDisplayParty(
-              'http://regen.network/projectDeveloper',
-              metadata,
-              project?.partyByDeveloperId,
-            )}
+            projectDeveloper={
+              getDisplayParty(
+                'http://regen.network/projectDeveloper',
+                metadata,
+                project?.partyByDeveloperId,
+              ) ||
+              getDisplayParty(
+                'regen:projectDeveloper',
+                metadata,
+                project?.partyByDeveloperId,
+              )
+            }
             landSteward={getDisplayParty(
               'http://regen.network/landSteward',
               metadata,
@@ -448,7 +457,6 @@ function ProjectTopSection({
             // TODO if no off-chain data, use on-chain project.issuer
             issuer={getParty(project?.partyByIssuerId)}
             reseller={getParty(project?.partyByResellerId)}
-            projectDeveloperMeta={metadata?.['regen:projectDeveloper']}
             sdgs={sdgs}
           />
         </Grid>

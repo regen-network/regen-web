@@ -25,6 +25,7 @@ const rolesMap: { [key in EntityFieldName]: roleIdField } = {
   'http://regen.network/landSteward': 'stewardId',
   'http://regen.network/landOwner': 'landOwnerId',
   'http://regen.network/projectOriginator': 'originatorId',
+  'regen:projectDeveloper': 'developerId',
 };
 
 function getInitialValues(value: any): any {

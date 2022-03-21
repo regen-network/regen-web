@@ -74,8 +74,8 @@ function getVisiblePartyName(party?: DisplayValues): string | undefined {
 function ProjectDetails(): JSX.Element {
   const { api }: ContextType = useLedger();
   const { projectId } = useParams();
-  const walletContext = useWallet();
   const theme = useTheme<Theme>();
+  const walletContext = useWallet();
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
@@ -125,7 +125,7 @@ function ProjectDetails(): JSX.Element {
 
   useEffect(() => {
     setPageView(location);
-    setGeojson(null);
+    setGeojson(null); // reset when location changes
   }, [location]);
 
   const otherProjects = projectsData?.allProjects?.nodes?.filter(
@@ -134,7 +134,8 @@ function ProjectDetails(): JSX.Element {
 
   // Convert kml to geojson
   const mapFile: string =
-    metadata?.['http://regen.network/boundaries']?.['@value'];
+    metadata?.['http://regen.network/boundaries']?.['@value'] ||
+    metadata?.['schema:boundaries']?.['@value'];
   const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
   const isKMLFile: boolean = /\.kml$/i.test(mapFile);
 
@@ -209,7 +210,9 @@ function ProjectDetails(): JSX.Element {
     getVisiblePartyName(metadata?.['http://regen.network/projectDeveloper']) ||
     getVisiblePartyName(metadata?.['http://regen.network/landOwner']) ||
     getVisiblePartyName(metadata?.['http://regen.network/projectOriginator']);
-  const projectAddress = metadata?.['http://schema.org/location']?.place_name;
+  const projectAddress =
+    metadata?.['http://schema.org/location']?.place_name ||
+    metadata?.['schema:location']?.place_name;
 
   const galleryPhotos =
     metadata?.['http://regen.network/galleryPhotos']?.['@list'];

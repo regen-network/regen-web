@@ -19,7 +19,6 @@ interface ProjectTopCardProps {
     userInfo?: string;
   };
   projectDeveloper?: User;
-  projectDeveloperMeta?: any;
   landSteward?: User;
   landOwner?: User;
   issuer?: User;
@@ -118,7 +117,6 @@ const useStyles = makeStyles(theme => ({
 export default function ProjectTopCard({
   classes,
   projectDeveloper,
-  projectDeveloperMeta,
   landSteward,
   landOwner,
   issuer,
@@ -155,17 +153,11 @@ export default function ProjectTopCard({
           </Grid>
         </div>
       )}
-      {(projectDeveloper || projectDeveloperMeta) && (
+      {projectDeveloper && (
         <div className={cx(styles.userInfo, classes && classes.userInfo)}>
           <UserInfoWithTitle
             size="xl"
-            user={
-              projectDeveloper || {
-                name: projectDeveloperMeta?.['schema:name'],
-                description: projectDeveloperMeta?.['schema:description'],
-                type: 'organization',
-              }
-            }
+            user={projectDeveloper}
             title="project developer"
           />
         </div>

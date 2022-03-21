@@ -46,6 +46,7 @@ export interface EntityDisplayValues {
   'http://regen.network/landSteward'?: DisplayValues;
   'http://regen.network/projectDeveloper'?: DisplayValues;
   'http://regen.network/projectOriginator'?: DisplayValues;
+  'regen:projectDeveloper'?: DisplayValues;
 }
 
 export type EntityFieldName = keyof EntityDisplayValues;
@@ -55,12 +56,14 @@ interface OrganizationDisplayShape {
   'http://schema.org/name'?: string;
   'http://schema.org/logo'?: urlType;
   'http://schema.org/description'?: string;
+  'regen:showOnProjectPage'?: boolean;
 }
 
 interface IndividualDisplayShape {
   'http://regen.network/showOnProjectPage': boolean;
   'http://schema.org/image'?: urlType;
   'http://schema.org/description'?: string;
+  'regen:showOnProjectPage'?: boolean;
 }
 
 interface FormletProps {
@@ -176,6 +179,7 @@ function getEntityTypeString(shaclRole: EntityFieldName): string {
     'http://regen.network/landOwner': '(land owner)',
     'http://regen.network/landSteward': '(land steward)',
     'http://regen.network/projectDeveloper': '(project developer)',
+    'regen:projectDeveloper': '(project developer)',
     'http://regen.network/projectOriginator': '(project originator)',
     default: '',
   };

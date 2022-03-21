@@ -37,7 +37,6 @@ export const NavLink: React.FC<NavLinkProps> = ({
   pathname,
   overrideClassname,
 }) => {
-  // const pathname = window && window.location && window.location.pathname;
   const styles = useNavLinkStyles({ isActive: pathname === href });
 
   return (

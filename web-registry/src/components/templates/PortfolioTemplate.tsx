@@ -7,13 +7,11 @@ import Title from 'web-components/lib/components/title';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { getEcocreditsForAccount } from '../../lib/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
+import useBasketTokens from '../../hooks/useBasketTokens';
+import { getEcocreditsForAccount } from '../../lib/ecocredit';
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
-import type {
-  BatchInfoWithBalance,
-  TableBaskets,
-} from '../../types/ledger/ecocredit';
+import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 
 interface PortfolioTemplateProps {
   accountAddress?: string;
@@ -44,7 +42,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
 }) => {
   const styles = useStyles();
   const [credits, setCredits] = useState<BatchInfoWithBalance[]>([]);
-  const [baskets, setBaskets] = useState<TableBaskets[]>([]);
+  const baskets = useBasketTokens(accountAddress);
 
   useEffect(() => {
     if (!ledgerRESTUri || !accountAddress) return;
@@ -57,27 +55,6 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
       }
     };
     fetchData();
-
-    // Hardcoded basket data for testing purposes
-    // TODO fetch from ledger instead
-    setBaskets([
-      {
-        id: '1',
-        basketDenom: 'eco.uC.rNCT',
-        displayDenom: 'eco.C.rNCT',
-        name: 'rNCT',
-        disableAutoRetire: false,
-        creditTypeAbbrev: 'C',
-        dateCriteria: {
-          startDateWindow: '1000',
-        },
-        exponent: '6',
-        balance: {
-          denom: 'eco.uC.rNCT',
-          amount: '10000000',
-        },
-      },
-    ]);
   }, [accountAddress]);
 
   return (

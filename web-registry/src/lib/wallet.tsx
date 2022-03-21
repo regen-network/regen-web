@@ -6,6 +6,7 @@ import {
 } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
+import { ledgerRPCUri, ledgerRESTUri, chainId } from './ledger';
 
 interface ChainKey {
   name: string;
@@ -39,10 +40,8 @@ const WalletContext = createContext<ContextType>({
   setTxResult: (txResult: BroadcastTxResponse | undefined) => {},
 });
 
-export const chainId = process.env.REACT_APP_LEDGER_CHAIN_ID;
 const chainName = process.env.REACT_APP_LEDGER_CHAIN_NAME;
-const chainRpc = `${process.env.REACT_APP_API_URI}/ledger`;
-const chainRestEndpoint = process.env.REACT_APP_LEDGER_REST_ENDPOINT;
+
 const emptySender = { address: '', shortAddress: '' };
 const defaultClientOptions = {
   broadcastPollIntervalMs: 1000,
@@ -84,7 +83,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   };
 
   const suggestChain = async (): Promise<void> => {
-    if (window.keplr && chainId && chainName && chainRpc && chainRestEndpoint) {
+    if (window.keplr && chainId && chainName && ledgerRPCUri && ledgerRESTUri) {
       return window.keplr
         .experimentalSuggestChain({
           // Chain-id of the Regen chain.
@@ -92,9 +91,9 @@ export const WalletProvider: React.FC = ({ children }) => {
           // The name of the chain to be displayed to the user.
           chainName,
           // RPC endpoint of the chain.
-          rpc: chainRpc,
+          rpc: ledgerRPCUri,
           // REST endpoint of the chain.
-          rest: chainRestEndpoint,
+          rest: ledgerRESTUri,
           // Staking coin information
           stakeCurrency: {
             // Coin denomination to be displayed to the user.
@@ -238,7 +237,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   };
 
   const getClient = async (): Promise<SigningStargateClient> => {
-    if (chainId && chainRpc) {
+    if (chainId && ledgerRPCUri) {
       try {
         await window?.keplr?.enable(chainId);
         const offlineSigner =
@@ -255,7 +254,7 @@ export const WalletProvider: React.FC = ({ children }) => {
           }
 
           const client = await SigningStargateClient.connectWithSigner(
-            chainRpc,
+            ledgerRPCUri,
             offlineSigner,
             defaultClientOptions,
           );

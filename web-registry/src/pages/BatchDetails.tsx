@@ -73,7 +73,7 @@ export const BatchDetails: React.FC = () => {
           <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <BatchInfoGrid
               batch={batch}
-              project={projectHandle}
+              projectHandle={projectHandle}
               sx={{ py: 10, borderBottom: 1, borderColor: 'grey.100' }}
             />
             <Title variant="h5" sx={{ mt: 10, mb: 8 }}>

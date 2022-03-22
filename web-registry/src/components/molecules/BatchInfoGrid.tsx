@@ -10,9 +10,9 @@ import { Link } from '../atoms';
 
 export const BatchInfoGrid: React.FC<{
   batch: BatchInfoWithSupply;
-  project: string;
+  projectHandle: string;
   sx?: SxProps<Theme>;
-}> = ({ batch, project, sx }) => (
+}> = ({ batch, projectHandle: project, sx }) => (
   <Grid
     container
     rowGap={6}

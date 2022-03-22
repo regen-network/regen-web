@@ -6,31 +6,32 @@ export type VcsProjectMetadata = {
     unit: 'http://qudt.org/2.1/vocab/unit';
     xsd: 'http://www.w3.org/2001/XMLSchema#';
   };
-  '@type': 'regen:Project';
-  'regen:vcsProjectId': {
+  '@type': 'http://regen.network/Project';
+  'http://regen.network/vcsProjectId': {
     '@type': 'xsd:unsignedInt';
     '@value': number;
   };
-  'regen:vcsProjectPage': {
+  'http://regen.network/vcsProjectPage': {
     '@type': 'schema:URL';
     '@value': string;
   };
-  'regen:projectDeveloper': {
-    '@type': 'regen:Organization';
+  'http://regen.network/projectDeveloper': {
+    '@type': 'http://regen.network/Organization';
     'schema:name': string;
     'schema:description': string;
   };
-  'regen:vcsProjectType': string;
-  'regen:projectActivity': string;
-  'regen:offsetGenerationMethod': string;
-  'regen:vcsMethodology': {
+  'http://regen.network/vcsProjectType': string;
+  'http://regen.network/projectActivity': string;
+  'http://regen.network/landStory': string;
+  'http://regen.network/offsetGenerationMethod': string;
+  'http://regen.network/vcsMethodology': {
     'schema:name': string;
     'schema:url': {
       '@type': 'schema:URL';
       '@value': string;
     };
   };
-  'regen:projectSize': {
+  'http://regen.network/projectSize': {
     'qudt:unit': {
       '@type': 'qudt:Unit';
       '@value': 'unit:HA';
@@ -40,12 +41,12 @@ export type VcsProjectMetadata = {
       '@value': number;
     };
   };
-  'regen:projectStartDate': {
+  'http://regen.network/projectStartDate': {
     '@type': 'xsd:date';
     '@value': Date;
   };
-  'regen:projectEndDate': {
+  'http://regen.network/projectEndDate': {
     '@type': 'xsd:date';
     '@value': Date;
   };
-}
+};

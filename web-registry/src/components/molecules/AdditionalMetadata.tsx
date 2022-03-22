@@ -41,7 +41,7 @@ const AdditionalMetadata: React.FC<MetadataProps> = ({
           <LineItemLabelAbove
             label="offset generation method"
             data={
-              metadata?.['regen:offsetGenerationMethod'] ||
+              metadata?.['http://regen.network/offsetGenerationMethod'] ||
               (!!creditClass &&
                 creditClassVersion?.metadata?.[
                   'http://regen.network/offsetGenerationMethod'
@@ -50,28 +50,32 @@ const AdditionalMetadata: React.FC<MetadataProps> = ({
           />
           <LineItemLabelAbove
             label="project activity"
-            data={metadata?.['regen:projectActivity']}
+            data={metadata?.['http://regen.network/projectActivity']}
           />
           <LineItemLabelAbove
             label="vcs project id"
-            data={metadata?.['regen:vcsProjectId']?.['@value']}
+            data={metadata?.['http://regen.network/vcsProjectId']?.['@value']}
           />
           <LineItemLabelAbove
             label="vcs project type"
-            data={metadata?.['regen:vcsProjectType']}
+            data={metadata?.['http://regen.network/vcsProjectType']}
           />
           <LineItemLabelAbove
             label="project start date"
             data={
-              metadata?.['regen:projectStartDate']?.['@value'] &&
-              formatDate(metadata?.['regen:projectStartDate']?.['@value'])
+              metadata?.['http://regen.network/projectStartDate']?.['@value'] &&
+              formatDate(
+                metadata?.['http://regen.network/projectStartDate']?.['@value'],
+              )
             }
           />
           <LineItemLabelAbove
             label="project end date"
             data={
-              metadata?.['regen:projectEndDate']?.['@value'] &&
-              formatDate(metadata?.['regen:projectEndDate']?.['@value'])
+              metadata?.['http://regen.network/projectEndDate']?.['@value'] &&
+              formatDate(
+                metadata?.['http://regen.network/projectEndDate']?.['@value'],
+              )
             }
           />
           {creditClass && additionalCertification && (

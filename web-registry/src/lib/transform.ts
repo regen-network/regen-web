@@ -187,8 +187,7 @@ export function getDisplayParty(
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
   const showOnProjectPage =
-    metadata?.[role]?.['http://regen.network/showOnProjectPage'] ||
-    metadata?.[role]?.['regen:showOnProjectPage'];
+    metadata?.[role]?.['http://regen.network/showOnProjectPage'];
   if (showOnProjectPage) {
     return getParty(party);
   }

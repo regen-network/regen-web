@@ -219,12 +219,11 @@ function ProjectTopSection({
   const area =
     metadata?.['http://regen.network/size']?.[
       'http://qudt.org/1.1/schema/qudt#numericValue'
-    ]?.['@value'] ||
-    metadata?.['regen:projectSize']?.['qudt:numericValue']?.['@value'];
+    ]?.['@value'];
   const unit: qudtUnit | undefined =
     metadata?.['http://regen.network/size']?.[
       'http://qudt.org/1.1/schema/qudt#unit'
-    ]?.['@value'] || metadata?.['regen:projectSize']?.['qudt:unit']?.['@value'];
+    ]?.['@value'];
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
   const methodologyVersion =
@@ -234,9 +233,7 @@ function ProjectTopSection({
   const additionalCertification =
     metadata?.['http://regen.network/additionalCertification'];
   const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
-  const landStory =
-    metadata?.['http://regen.network/landStory'] ||
-    metadata?.['regen:landStory'];
+  const landStory = metadata?.['http://regen.network/landStory'];
   const landStewardStoryTitle =
     metadata?.['http://regen.network/landStewardStoryTitle'];
   const landStewardStory = metadata?.['http://regen.network/landStewardStory'];
@@ -434,18 +431,11 @@ function ProjectTopSection({
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
-            projectDeveloper={
-              getDisplayParty(
-                'http://regen.network/projectDeveloper',
-                metadata,
-                project?.partyByDeveloperId,
-              ) ||
-              getDisplayParty(
-                'regen:projectDeveloper',
-                metadata,
-                project?.partyByDeveloperId,
-              )
-            }
+            projectDeveloper={getDisplayParty(
+              'http://regen.network/projectDeveloper',
+              metadata,
+              project?.partyByDeveloperId,
+            )}
             landSteward={getDisplayParty(
               'http://regen.network/landSteward',
               metadata,

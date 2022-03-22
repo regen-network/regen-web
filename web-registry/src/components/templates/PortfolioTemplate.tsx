@@ -7,7 +7,6 @@ import Title from 'web-components/lib/components/title';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { useBasketTokens, useEcocredits } from '../../hooks';
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
 
 interface PortfolioTemplateProps {
@@ -38,8 +37,6 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   children,
 }) => {
   const styles = useStyles();
-  const baskets = useBasketTokens(accountAddress);
-  const credits = useEcocredits(accountAddress);
 
   return (
     <Box sx={{ backgroundColor: 'grey.50', pb: { xs: 21.25, sm: 28.28 } }}>
@@ -50,7 +47,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             basket tokens
           </Title>
           <BasketsTable
-            baskets={baskets}
+            address={accountAddress}
             renderActionButtons={renderBasketActionButtons}
           />
         </Box>
@@ -59,7 +56,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             ecocredits
           </Title>
           <EcocreditsTable
-            credits={credits}
+            address={accountAddress}
             renderActionButtons={renderCreditActionButtons}
           />
         </Box>

@@ -10,8 +10,8 @@ import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { Link } from '../atoms';
 import { NoCredits } from '../molecules';
 import { truncate } from '../../lib/wallet';
+import { useEcocredits } from '../../hooks';
 import { getAccountUrl } from '../../lib/block-explorer';
-import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -22,10 +22,17 @@ const BreakText = styled('div')({
   wordWrap: 'break-word',
 });
 
-export const EcocreditsTable: React.FC<{
-  credits: BatchInfoWithBalance[];
+type EcocreditsTableProps = {
+  address?: string;
   renderActionButtons?: RenderActionButtonsFunc;
-}> = ({ credits, renderActionButtons }) => {
+};
+
+export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
+  address,
+  renderActionButtons,
+}) => {
+  const credits = useEcocredits(address);
+
   if (!credits?.length) {
     return <NoCredits title="No ecocredits to display" />;
   }

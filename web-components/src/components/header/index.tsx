@@ -89,6 +89,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
       '& ul > li > a, & ul > li > div > span': {
         color: props.color,
         textDecoration: 'none',
+        paddingTop: theme.spacing(0.25),
         '&:link, &:visited, &:hover, &:active': {
           textDecoration: 'none',
         },

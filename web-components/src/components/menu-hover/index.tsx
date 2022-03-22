@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { Popover, MenuList, Paper } from '@mui/material';
 import DropdownIcon from '../icons/DropdownIcon';
+import { ClassNames } from '@emotion/react';
 
 const useStyles = makeStyles((theme: Theme) => ({
   popover: {
@@ -39,9 +40,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-interface Props {
+export interface MenuTitle {
+  title?: string;
+  renderTitle?: () => JSX.Element;
+}
+
+interface Props extends MenuTitle {
+  classes?: {
+    title?: string;
+  };
   children: React.ReactNode;
-  text: string;
   textColor?: string;
   dropdownColor?: string;
 }
@@ -51,7 +59,9 @@ interface Props {
  * @param object contains text, color, children. Where text is the anchor text. Color is a string for link text color, and children are MenuItems typically with Links.
  */
 const MenuHover = ({
-  text,
+  title,
+  renderTitle,
+  classes,
   textColor,
   dropdownColor,
   children,
@@ -79,8 +89,13 @@ const MenuHover = ({
         onMouseEnter={popoverEnter}
         onMouseLeave={popoverLeave}
       >
-        {text}
-        <DropdownIcon color={dropdownColor} />
+        {title && (
+          <span className={classes?.title}>
+            {title}
+            <DropdownIcon color={dropdownColor} />
+          </span>
+        )}
+        {renderTitle && renderTitle()}
       </span>
       <Popover
         // disableScrollLock

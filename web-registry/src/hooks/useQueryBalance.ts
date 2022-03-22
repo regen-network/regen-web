@@ -7,12 +7,16 @@ import {
 
 import { useLedger } from '../ledger';
 
-type FetchBalance = {
-  address: string | undefined;
-  denom: string | undefined;
+type Balance = {
+  address?: string;
+  denom?: string;
 };
 
-export default function useQueryBalance(): Function {
+type FetchBalance = (
+  args: Balance,
+) => Promise<QueryBalanceResponse | undefined>;
+
+export default function useQueryBalance(): FetchBalance {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl | undefined>();
 
@@ -24,10 +28,7 @@ export default function useQueryBalance(): Function {
   }, [api?.queryClient]);
 
   const fetchBalance = useCallback(
-    async ({
-      address,
-      denom,
-    }: FetchBalance): Promise<QueryBalanceResponse | undefined> => {
+    async ({ address, denom }) => {
       if (!queryClient) return;
 
       try {

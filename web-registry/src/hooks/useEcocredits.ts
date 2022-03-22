@@ -5,7 +5,7 @@ import { getEcocreditsForAccount } from '../lib/ecocredit';
 import type { BatchInfoWithBalance } from '../types/ledger/ecocredit';
 
 export default function useEcocredits(
-  address: string | undefined,
+  address?: string,
 ): BatchInfoWithBalance[] {
   const [credits, setCredits] = useState<BatchInfoWithBalance[]>([]);
 

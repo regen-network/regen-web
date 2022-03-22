@@ -6,7 +6,7 @@ import { formatDate } from 'web-components/lib/utils/format';
 
 import { LinkWithArrow } from '../atoms';
 import { LineItemLabelAbove } from '.';
-import { VcsProjectMetadataLD } from '../../types/project/project';
+import { VcsProjectMetadataLD } from '../../types/project/vcs-project';
 
 export interface MetadataProps {
   metadata?: VcsProjectMetadataLD;

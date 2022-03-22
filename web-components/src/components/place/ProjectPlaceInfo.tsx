@@ -42,7 +42,7 @@ export default function ProjectPlaceInfo({
       showIcon={!!place}
     >
       {place}
-      {place && (
+      {place && displayedArea && areaUnit && (
         <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
       )}
       {displayedArea && areaUnit && (

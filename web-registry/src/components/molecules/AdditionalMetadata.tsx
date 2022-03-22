@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import { Box, Collapse } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { Box, Collapse, useTheme } from '@mui/material';
 import Title from 'web-components/lib/components/title';
 import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
 import { formatDate } from 'web-components/lib/utils/format';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { LinkWithArrow } from '../atoms';
 import { LineItemLabelAbove } from '../molecules';
-import { VcsProjectMetadata } from '../../types/project/project';
+import { VcsProjectMetadataLD } from '../../types/project/project';
 
 export interface MetadataProps {
-  metadata: VcsProjectMetadata;
-  creditClass: any;
-  creditClassVersion: any;
-  additionalCertification: any;
+  metadata?: VcsProjectMetadataLD;
+  creditClass?: any;
+  creditClassVersion?: any;
+  additionalCertification?: any;
 }
 
 const AdditionalMetadata: React.FC<MetadataProps> = ({
@@ -23,9 +21,8 @@ const AdditionalMetadata: React.FC<MetadataProps> = ({
   creditClassVersion,
   additionalCertification,
 }) => {
-  const theme = useTheme<Theme>();
+  const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
-
   if (!metadata) return null;
   return (
     <Box sx={{ pt: 8 }}>
@@ -48,10 +45,27 @@ const AdditionalMetadata: React.FC<MetadataProps> = ({
                 ])
             }
           />
-          <LineItemLabelAbove
-            label="project activity"
-            data={metadata?.['http://regen.network/projectActivity']}
-          />
+          {metadata?.['http://regen.network/projectActivity']?.[
+            'http://schema.org/name'
+          ] && (
+            <LineItemLabelAbove
+              label="project activity"
+              data={
+                <LinkWithArrow
+                  link={
+                    metadata?.['http://regen.network/projectActivity']?.[
+                      'http://schema.org/url'
+                    ]?.['@value']
+                  }
+                  label={
+                    metadata?.['http://regen.network/projectActivity']?.[
+                      'http://schema.org/name'
+                    ]
+                  }
+                />
+              }
+            />
+          )}
           <LineItemLabelAbove
             label="vcs project id"
             data={metadata?.['http://regen.network/vcsProjectId']?.['@value']}
@@ -63,7 +77,9 @@ const AdditionalMetadata: React.FC<MetadataProps> = ({
           <LineItemLabelAbove
             label="project start date"
             data={
-              metadata?.['http://regen.network/projectStartDate']?.['@value'] &&
+              !!metadata?.['http://regen.network/projectStartDate']?.[
+                '@value'
+              ] &&
               formatDate(
                 metadata?.['http://regen.network/projectStartDate']?.['@value'],
               )
@@ -72,7 +88,7 @@ const AdditionalMetadata: React.FC<MetadataProps> = ({
           <LineItemLabelAbove
             label="project end date"
             data={
-              metadata?.['http://regen.network/projectEndDate']?.['@value'] &&
+              !!metadata?.['http://regen.network/projectEndDate']?.['@value'] &&
               formatDate(
                 metadata?.['http://regen.network/projectEndDate']?.['@value'],
               )

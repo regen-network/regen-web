@@ -1,4 +1,7 @@
-export type VcsProjectMetadata = {
+// TODO: Use [json-to-ts](https://marketplace.visualstudio.com/items?itemName=MariusAlchimavicius.json-to-ts) to generate type from
+// https://github.com/regen-network/regen-registry-standards/blob/a2d81baebe7756226a58b126378d1890ad4cadcc/jsonld/projects/C01-verified-carbon-standard-project.json
+
+export interface VcsProjectMetadataLD {
   '@context': {
     schema: 'http://schema.org/';
     regen: 'http://regen.network/';
@@ -21,7 +24,13 @@ export type VcsProjectMetadata = {
     'schema:description': string;
   };
   'http://regen.network/vcsProjectType': string;
-  'http://regen.network/projectActivity': string;
+  'http://regen.network/projectActivity': {
+    'http://schema.org/name': string;
+    'http://schema.org/url': {
+      '@type': 'schema:URL';
+      '@value': string;
+    };
+  };
   'http://regen.network/landStory': string;
   'http://regen.network/offsetGenerationMethod': string;
   'http://regen.network/vcsMethodology': {
@@ -31,13 +40,15 @@ export type VcsProjectMetadata = {
       '@value': string;
     };
   };
-  'http://regen.network/projectSize': {
-    'qudt:unit': {
-      '@type': 'qudt:Unit';
-      '@value': 'unit:HA';
+  'http://regen.network/size': {
+    'http://qudt.org/1.1/schema/qudt#unit': {
+      '@type': 'http://qudt.org/schema/qudt/Unit';
+      '@value':
+        | 'http://qudt.org/1.1/vocab/unit#HA'
+        | 'http://qudt.org/1.1/vocab/unit#AC';
     };
-    'qudt:numericValue': {
-      '@type': 'xsd:double';
+    'http://qudt.org/1.1/schema/qudt#numericValue': {
+      '@type': 'http://www.w3.org/2001/XMLSchema#double';
       '@value': number;
     };
   };
@@ -49,4 +60,4 @@ export type VcsProjectMetadata = {
     '@type': 'xsd:date';
     '@value': Date;
   };
-};
+}

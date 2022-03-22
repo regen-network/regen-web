@@ -25,14 +25,10 @@ const ExpandButton: React.FC<Props> = ({ onClick, expanded, text, sx }) => {
         border: 'none !important',
       }}
       endIcon={
-        expanded ? (
-          <ArrowDownIcon direction="up" color={theme.palette.secondary.main} />
-        ) : (
-          <ArrowDownIcon
-            direction="down"
-            color={theme.palette.secondary.main}
-          />
-        )
+        <ArrowDownIcon
+          direction={expanded ? 'up' : 'down'}
+          color={theme.palette.secondary.main}
+        />
       }
     >
       <Label sx={{ fontSize: { xs: '14px', sm: '18px' } }}>

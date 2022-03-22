@@ -135,8 +135,7 @@ function ProjectDetails(): JSX.Element {
 
   // Convert kml to geojson
   const mapFile: string =
-    metadata?.['http://regen.network/boundaries']?.['@value'] ||
-    metadata?.['schema:boundaries']?.['@value'];
+    metadata?.['http://regen.network/boundaries']?.['@value'];
   const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
   const isKMLFile: boolean = /\.kml$/i.test(mapFile);
 
@@ -211,10 +210,7 @@ function ProjectDetails(): JSX.Element {
     getVisiblePartyName(metadata?.['http://regen.network/projectDeveloper']) ||
     getVisiblePartyName(metadata?.['http://regen.network/landOwner']) ||
     getVisiblePartyName(metadata?.['http://regen.network/projectOriginator']);
-  const projectAddress =
-    metadata?.['http://schema.org/location']?.place_name ||
-    metadata?.['schema:location']?.place_name;
-
+  const projectAddress = metadata?.['http://schema.org/location']?.place_name;
   const galleryPhotos =
     metadata?.['http://regen.network/galleryPhotos']?.['@list'];
   const noGallery = !galleryPhotos || galleryPhotos?.length === 0;

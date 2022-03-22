@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Header, { HeaderColors } from 'web-components/lib/components/header';
@@ -16,13 +18,20 @@ import {
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
 
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
+import { ReactComponent as Credits } from '../../assets/svgs/credits.svg';
+import DefaultAvatar from '../../assets/avatar.png';
 import { useMoreProjectsQuery } from '../../generated/graphql';
+import { useWallet } from '../../lib/wallet';
+import { chainId } from '../../lib/ledger';
 
 const RegistryNav: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { wallet, loaded } = useWallet();
   const theme = useTheme<Theme>();
+  const desktop = useMediaQuery(theme.breakpoints.up('sm'));
+
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
   const { data: projectsData } = useMoreProjectsQuery();
 
@@ -103,7 +112,7 @@ const RegistryNav: React.FC = () => {
     {
       title: 'Program',
       dropdownItems: [...carbonPlusItems, ...programHowToItems],
-      render: () => (
+      renderDropdownItems: () => (
         <Box display="flex" justifyContent="space-between">
           <Box pr={20}>
             <HeaderDropdownColumn
@@ -123,6 +132,34 @@ const RegistryNav: React.FC = () => {
       ),
     },
   ];
+
+  if (chainId && loaded && wallet?.shortAddress && desktop) {
+    menuItems.push({
+      renderTitle: () => (
+        <Box display="flex" alignItems="center" sx={{ fontSize: 14 }}>
+          <Avatar
+            sx={{
+              height: 24,
+              width: 24,
+              mr: 2.75,
+              border: theme => `1px solid ${theme.palette.grey[100]}`,
+            }}
+            alt="default avatar"
+            src={DefaultAvatar}
+          />
+          {wallet.shortAddress}
+        </Box>
+      ),
+      dropdownItems: [
+        {
+          linkComponent: RegistryNavLink,
+          title: 'My Portfolio',
+          href: '/ecocredits/dashboard',
+          svg: Credits,
+        },
+      ],
+    });
+  }
 
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,

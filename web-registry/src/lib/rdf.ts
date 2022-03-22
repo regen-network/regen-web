@@ -58,8 +58,12 @@ export function getProjectPageBaseData(): any {
 
 export type qudtUnit =
   | 'http://qudt.org/1.1/vocab/unit#HA'
-  | 'http://qudt.org/1.1/vocab/unit#AC';
+  | 'http://qudt.org/1.1/vocab/unit#AC'
+  | 'unit:HA'
+  | 'unit:AC';
 export const qudtUnitMap = {
   'http://qudt.org/1.1/vocab/unit#HA': 'hectares',
   'http://qudt.org/1.1/vocab/unit#AC': 'acres',
+  'unit:HA': 'hectares',
+  'unit:AC': 'acres',
 };

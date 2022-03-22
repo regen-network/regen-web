@@ -15,28 +15,28 @@ export interface VcsProjectMetadataLD {
     '@value': number;
   };
   'http://regen.network/vcsProjectPage': {
-    '@type': 'schema:URL';
+    '@type': 'http://schema.org/URL';
     '@value': string;
   };
   'http://regen.network/projectDeveloper': {
     '@type': 'http://regen.network/Organization';
-    'schema:name': string;
-    'schema:description': string;
+    'http://schema.org/name': string;
+    'http://schema.org/description': string;
   };
   'http://regen.network/vcsProjectType': string;
   'http://regen.network/projectActivity': {
     'http://schema.org/name': string;
     'http://schema.org/url': {
-      '@type': 'schema:URL';
+      '@type': 'http://schema.org/URL';
       '@value': string;
     };
   };
   'http://regen.network/landStory': string;
   'http://regen.network/offsetGenerationMethod': string;
   'http://regen.network/vcsMethodology': {
-    'schema:name': string;
-    'schema:url': {
-      '@type': 'schema:URL';
+    'http://schema.org/name': string;
+    'http://schema.org/url': {
+      '@type': 'http://schema.org/URL';
       '@value': string;
     };
   };

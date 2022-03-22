@@ -27,7 +27,7 @@ import {
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
 import { ProjectCreditBatchesTable } from '.';
-import { ProjectBatchTotals, AdditionalMetadata } from '../molecules';
+import { ProjectBatchTotals, AdditionalProjectMetadata } from '../molecules';
 import { LinkWithArrow } from '../atoms';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -219,11 +219,15 @@ function ProjectTopSection({
   const area =
     metadata?.['http://regen.network/size']?.[
       'http://qudt.org/1.1/schema/qudt#numericValue'
-    ]?.['@value'];
+    ]?.['@value'] ||
+    metadata?.['http://regen.network/projectSize']?.['qudt:numericValue']?.[
+      '@value'
+    ];
   const unit: qudtUnit | undefined =
     metadata?.['http://regen.network/size']?.[
       'http://qudt.org/1.1/schema/qudt#unit'
-    ]?.['@value'];
+    ]?.['@value'] ||
+    metadata?.['http://regen.network/projectSize']?.['qudt:unit']?.['@value'];
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
   const methodologyVersion =
@@ -252,21 +256,17 @@ function ProjectTopSection({
     title: s.title || '',
     imageUrl: getSanityImgSrc(s.image),
   }));
+  console.log(unit, area);
   return (
     <Section classes={{ root: styles.section }}>
       <Grid container>
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
-          <Title variant="h1">
-            {metadata?.['http://schema.org/name'] || metadata?.['schema:name']}
-          </Title>
+          <Title variant="h1">{metadata?.['http://schema.org/name']}</Title>
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo
               iconClassName={styles.icon}
               // TODO Format and show on-chain project location if no off-chain location
-              place={
-                metadata?.['http://schema.org/location']?.place_name ||
-                metadata?.['schema:location']?.place_name
-              }
+              place={metadata?.['http://schema.org/location']?.place_name}
               area={area}
               areaUnit={unit && qudtUnitMap[unit]}
             />
@@ -351,7 +351,7 @@ function ProjectTopSection({
               {landStory}
             </Description>
           )}
-          <AdditionalMetadata
+          <AdditionalProjectMetadata
             metadata={metadata}
             creditClass={creditClass}
             creditClassVersion={creditClassVersion}

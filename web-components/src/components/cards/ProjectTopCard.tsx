@@ -162,7 +162,6 @@ export default function ProjectTopCard({
           />
         </div>
       )}
-
       {landSteward && (
         <div className={cx(styles.userInfo, classes && classes.userInfo)}>
           {/* <hr className={styles.separator} /> */}

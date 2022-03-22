@@ -5,7 +5,7 @@ import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton
 import { formatDate } from 'web-components/lib/utils/format';
 
 import { LinkWithArrow } from '../atoms';
-import { LineItemLabelAbove } from '../molecules';
+import { LineItemLabelAbove } from '.';
 import { VcsProjectMetadataLD } from '../../types/project/project';
 
 export interface MetadataProps {
@@ -15,7 +15,7 @@ export interface MetadataProps {
   additionalCertification?: any;
 }
 
-const AdditionalMetadata: React.FC<MetadataProps> = ({
+const AdditionalProjectMetadata: React.FC<MetadataProps> = ({
   metadata,
   creditClass,
   creditClassVersion,
@@ -123,4 +123,4 @@ const AdditionalMetadata: React.FC<MetadataProps> = ({
   );
 };
 
-export { AdditionalMetadata };
+export { AdditionalProjectMetadata };

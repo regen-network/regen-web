@@ -98,20 +98,13 @@ const RegistryNav: React.FC = () => {
   const menuItems: HeaderMenuItem[] = [
     {
       title: 'Projects',
-      dropdownItems: projectsData?.allProjects?.nodes
-        ?.filter(n => {
-          // hide VCS projects for now
-          return !n?.metadata?.['regen:vcsProjectPage'];
-        })
-        .map(p => {
-          return {
-            title:
-              titleAlias[p?.metadata?.['http://schema.org/name']] ||
-              p?.metadata?.['http://schema.org/name'],
-            href: `/projects/${p?.handle}`,
-            linkComponent: RegistryNavLink,
-          };
-        }),
+      dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
+        title:
+          titleAlias[p?.metadata?.['http://schema.org/name']] ||
+          p?.metadata?.['http://schema.org/name'],
+        href: `/projects/${p?.handle}`,
+        linkComponent: RegistryNavLink,
+      })),
     },
     {
       title: 'Credit Classes',

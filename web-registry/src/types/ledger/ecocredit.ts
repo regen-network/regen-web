@@ -1,10 +1,7 @@
-import type { PageResponse } from './base';
-import type { QueryBalanceResponse as BankQueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import type { PageResponse, PageRequest } from './base';
 
 /** Map keys from another type to values of number type */
 type MapToNumber<T> = { [K in keyof T]: number };
-
-// Response structure based on https://buf.build/regen/regen-ledger
 
 /** combines the ledger `BatchInfo` with ledger `QuerySupplyResponse` */
 export interface BatchInfoWithSupply extends BatchInfo, QuerySupplyResponse {}
@@ -12,8 +9,14 @@ export interface BatchInfoWithSupply extends BatchInfo, QuerySupplyResponse {}
 /** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
 export interface BatchInfoWithBalance extends BatchInfo, QueryBalanceResponse {}
 
+/** combines the ledger `BatchInfo` with the corresponding project name */
+export interface BatchInfoWithProject extends BatchInfo {
+  project_name: string;
+  project_display: string;
+}
+
 export interface TableBaskets extends Basket, BankQueryBalanceResponse {
-  display_denom: string;
+  displayDenom: string;
 }
 
 /** `QueryBatchSupplyResponse` + `amount_cancelled` to display summed totals on project page */
@@ -25,20 +28,33 @@ export interface BatchTotalsForProject
 // The following interfaces should be removed once we migrate
 // the current queries to use regen-js instead of REST
 
+interface Coin {
+  denom: string;
+  amount: string;
+}
+
+interface BankQueryBalanceResponse {
+  balance?: Coin;
+}
+
 export interface BatchInfo {
-  start_date: string | Date;
-  end_date: string | Date;
-  issuer: string;
-  batch_denom: string;
   class_id: string;
+  batch_denom: string;
+  issuer: string;
   total_amount: number;
   amount_cancelled: number;
+  start_date: string | Date;
+  end_date: string | Date;
   project_location: string;
 }
 
 export interface QueryBatchesResponse {
   batches: BatchInfo[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+
+export interface QueryBatchInfoRequest {
+  batchDenom: string;
 }
 
 export interface QueryBatchInfoResponse {
@@ -55,17 +71,29 @@ export interface QueryBalanceResponse {
   retired_amount: string;
 }
 
+// regen-js based interfaces (camelCase props)
+// remove after api/queries upgrade
+
 export interface Basket {
   id: string;
-  basket_denom: string;
+  basketDenom: string;
   name: string;
-  disable_auto_retire: boolean;
-  credit_type_abbrev: string;
-  date_criteria: {
-    min_start_date?: string;
-    start_date_window?: string;
+  disableAutoRetire: boolean;
+  creditTypeAbbrev: string;
+  dateCriteria: {
+    minStartDate?: string;
+    startDateWindow?: string;
   };
   exponent: string;
+}
+
+export interface QueryBasketRequest {
+  basketDenom: string;
+}
+
+export interface QueryBasketResponse {
+  basket?: Basket;
+  classes: string[];
 }
 
 export interface QueryBasketsResponse {
@@ -73,13 +101,32 @@ export interface QueryBasketsResponse {
   pagination?: PageResponse;
 }
 
+export interface BasketBalance {
+  basketId: string | Long;
+  batchDenom: string;
+  balance: string;
+  batchStartDate?: string | Date;
+}
+
+export interface QueryBasketBalancesRequest {
+  basketDenom: string;
+  pagination?: PageRequest;
+}
+
+export interface QueryBasketBalancesResponse {
+  balances: BasketBalance[];
+  pagination?: PageResponse;
+}
+
+// REST based interfaces (snake_case props)
+
 export interface ClassInfo {
   /**
    *  class_id is the unique ID of credit class.
    */
   class_id: string;
   /**
-   *  admin is the designer of the credit class. In Hambach, this is identified as "designer"
+   *  admin is the designer of the credit class. In Hambach, this is identified as "designer".
    */
   admin?: string;
   designer?: string;
@@ -103,6 +150,11 @@ interface CreditType {
   name: string;
   precision: number;
   unit: string;
+}
+
+export interface QueryClassesResponse {
+  classes: ClassInfo[];
+  pagination?: PageResponse;
 }
 
 // TODO: pull these types from credit-class shacl schema

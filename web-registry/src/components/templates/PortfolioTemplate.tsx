@@ -7,8 +7,7 @@ import Title from 'web-components/lib/components/title';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import useBasketTokens from '../../hooks/useBasketTokens';
-import useEcocredits from '../../hooks/useEcocredits';
+import { useBasketTokens, useEcocredits } from '../../hooks';
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
 
 interface PortfolioTemplateProps {

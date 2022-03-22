@@ -9,13 +9,11 @@ import useQueryBalance from './useQueryBalance';
 
 export interface BasketTokens {
   basket: Basket;
-  balance?: QueryBalanceResponse | undefined;
+  balance?: QueryBalanceResponse;
   displayDenom: string;
 }
 
-export default function useBasketTokens(
-  address: string | undefined,
-): BasketTokens[] {
+export default function useBasketTokens(address?: string): BasketTokens[] {
   const baskets = useQueryBaskets();
   const fetchBalance = useQueryBalance();
   const [basketTokens, setBasketTokens] = useState<BasketTokens[]>([]);

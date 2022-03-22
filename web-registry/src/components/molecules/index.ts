@@ -1,3 +1,6 @@
+export * from './BatchInfoGrid';
+export * from './BatchMetadata';
+export * from './BatchTotalsGrid';
 export * from './BackgroundImgSection';
 export * from './EcocreditsSection';
 export * from './EditProjectPageFooter';

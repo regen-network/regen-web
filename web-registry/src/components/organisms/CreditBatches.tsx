@@ -98,9 +98,11 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
 
   useEffect(() => {
     const fetchData = (): void => {
-      getBatchesWithSupply(creditClassId).then(sortableBatches => {
-        setBatches(sortableBatches.data);
-      });
+      getBatchesWithSupply(creditClassId)
+        .then(sortableBatches => {
+          setBatches(sortableBatches.data);
+        })
+        .catch(console.error); // eslint-disable-line no-console
     };
 
     if (!ledgerRESTUri) return;

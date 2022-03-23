@@ -164,8 +164,10 @@ function ProjectTopLink({
   name?: string;
   url?: string | null;
   creditClassId?: string; // on-chain credit class id (e.g. "C01")
-}): JSX.Element {
+}): JSX.Element | null {
   const styles = useStyles();
+
+  if (!label || !name) return null;
 
   const text = (
     <span className={styles.darkText}>

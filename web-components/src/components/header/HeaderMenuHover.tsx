@@ -18,8 +18,11 @@ const useStyles = makeStyles(theme => ({
     paddingRight: theme.spacing(7.375),
     paddingLeft: theme.spacing(7.375),
     'background-color': 'inherit',
-    '& a:hover': {
-      borderBottom: `2px solid ${theme.palette.secondary.main}`,
+    '& > a': {
+      borderBottom: '2px solid transparent',
+      '&:hover': {
+        borderBottom: `2px solid ${theme.palette.secondary.main}`,
+      },
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingRight: theme.spacing(1.25),

@@ -122,7 +122,7 @@ const RegistryNav: React.FC = () => {
 
   if (chainId) {
     menuItems.unshift({
-      title: 'rNCT',
+      title: 'NCT',
       href: '/baskets/eco.uC.rNCT',
     });
     menuItems.splice(2, 0, {

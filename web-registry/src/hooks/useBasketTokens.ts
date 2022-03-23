@@ -42,7 +42,7 @@ export default function useBasketTokens(address?: string): BasketTokens[] {
     }
 
     fetchData(baskets);
-  }, [address, baskets, fetchBalance]);
+  }, [address, baskets, fetchBalance, fetchDenomMetadata]);
 
   return basketTokens;
 }

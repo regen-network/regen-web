@@ -5,6 +5,7 @@ import {
   FooterItemProps as FooterItem,
 } from 'web-components/lib/components/footer/footer-new';
 import { RegistryIconLink, Link } from '../atoms';
+import { chainId } from '../../lib/ledger';
 
 const AppFooter: React.FC = () => {
   const { pathname } = useLocation();
@@ -14,21 +15,9 @@ const AppFooter: React.FC = () => {
     {
       title: 'Registry App',
       items: [
-        // TODO: Hide before merging
-        // Add it back once the rNCT basket is created on mainnet
-        {
-          title: 'rNCT',
-          href: '/baskets/eco.uC.rNCT',
-        },
         {
           title: 'Projects',
           href: '/#projects',
-        },
-        // TODO: Hide before merging
-        // Add it back once there starts to be some activity on mainnet
-        {
-          title: 'Activity',
-          href: '/stats/activity',
         },
       ],
     },
@@ -67,6 +56,17 @@ const AppFooter: React.FC = () => {
       ],
     },
   ];
+
+  if (chainId) {
+    footerItems[0].items.unshift({
+      title: 'rNCT',
+      href: '/baskets/eco.uC.rNCT',
+    });
+    footerItems[0].items.push({
+      title: 'Activity',
+      href: '/stats/activity',
+    });
+  }
 
   return isHidden ? null : (
     <Footer

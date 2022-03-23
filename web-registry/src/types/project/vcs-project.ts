@@ -48,7 +48,7 @@ export interface VcsProjectMetadataLD {
       '@value': string;
     };
   };
-  'regen:projectSize': {
+  'http://regen.network/projectSize': {
     'qudt:unit': {
       '@type': 'qudt:Unit';
       '@value': string;

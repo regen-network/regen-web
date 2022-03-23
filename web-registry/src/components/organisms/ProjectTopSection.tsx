@@ -234,13 +234,13 @@ function ProjectTopSection({
     creditClass?.methodologyByMethodologyId?.methodologyVersionsById
       ?.nodes?.[0];
   const quote = metadata?.['http://regen.network/projectQuote'];
-  const additionalCertification =
-    metadata?.['http://regen.network/additionalCertification'];
   const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
   const landStory = metadata?.['http://regen.network/landStory'];
   const landStewardStoryTitle =
     metadata?.['http://regen.network/landStewardStoryTitle'];
   const landStewardStory = metadata?.['http://regen.network/landStewardStory'];
+  const isVcsProject =
+    !!metadata?.['http://regen.network/vcsProjectId']?.['@value'];
 
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'
@@ -256,7 +256,6 @@ function ProjectTopSection({
     title: s.title || '',
     imageUrl: getSanityImgSrc(s.image),
   }));
-  console.log(unit, area);
   return (
     <Section classes={{ root: styles.section }}>
       <Grid container>
@@ -287,24 +286,17 @@ function ProjectTopSection({
                       ]
                     }
                   />
-                  {metadata?.['http://regen.network/projectActivity']?.[
-                    'http://schema.org/name'
-                  ] && (
-                    <ProjectTopLink
-                      label="project activity"
-                      name={
-                        metadata?.['http://regen.network/projectActivity']?.[
-                          'http://schema.org/name'
-                        ]
-                      }
-                      url={
-                        metadata?.['http://regen.network/projectActivity']?.[
-                          'http://schema.org/url'
-                        ]?.['@value']
-                      }
-                    />
-                  )}
                 </>
+              )}
+              {!isVcsProject && (
+                <ProjectTopLink
+                  label="offset generation method"
+                  name={
+                    creditClassVersion?.metadata?.[
+                      'http://regen.network/offsetGenerationMethod'
+                    ]
+                  }
+                />
               )}
               {methodologyVersion && (
                 <ProjectTopLink
@@ -351,12 +343,7 @@ function ProjectTopSection({
               {landStory}
             </Description>
           )}
-          <AdditionalProjectMetadata
-            metadata={metadata}
-            creditClass={creditClass}
-            creditClassVersion={creditClassVersion}
-            additionalCertification={additionalCertification}
-          />
+          {isVcsProject && <AdditionalProjectMetadata metadata={metadata} />}
           <LazyLoad offset={50}>
             {videoURL &&
               (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(

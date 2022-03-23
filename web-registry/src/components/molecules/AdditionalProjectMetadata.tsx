@@ -10,20 +10,24 @@ import { VcsProjectMetadataLD } from '../../types/project/vcs-project';
 
 export interface MetadataProps {
   metadata?: VcsProjectMetadataLD;
-  creditClass?: any;
-  creditClassVersion?: any;
-  additionalCertification?: any;
 }
 
-const AdditionalProjectMetadata: React.FC<MetadataProps> = ({
-  metadata,
-  creditClass,
-  creditClassVersion,
-  additionalCertification,
-}) => {
+const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
-  if (!metadata) return null;
+  if (
+    !metadata ||
+    !metadata?.['http://regen.network/vcsProjectId']?.['@value']
+  ) {
+    return null;
+  }
+
+  const additionalCertification =
+    metadata?.['http://regen.network/additionalCertification'];
+  const startDate =
+    metadata?.['http://regen.network/projectStartDate']?.['@value'];
+  const endDate = metadata?.['http://regen.network/projectEndDate']?.['@value'];
+
   return (
     <Box sx={{ pt: 8 }}>
       <Title variant="h5">Additional Metadata</Title>
@@ -37,13 +41,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({
         >
           <LineItemLabelAbove
             label="offset generation method"
-            data={
-              metadata?.['http://regen.network/offsetGenerationMethod'] ||
-              (!!creditClass &&
-                creditClassVersion?.metadata?.[
-                  'http://regen.network/offsetGenerationMethod'
-                ])
-            }
+            data={metadata?.['http://regen.network/offsetGenerationMethod']}
           />
           {metadata?.['http://regen.network/projectActivity']?.[
             'http://schema.org/name'
@@ -76,30 +74,22 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({
           />
           <LineItemLabelAbove
             label="project start date"
-            data={
-              !!metadata?.['http://regen.network/projectStartDate']?.[
-                '@value'
-              ] &&
-              formatDate(
-                metadata?.['http://regen.network/projectStartDate']?.['@value'],
-              )
-            }
+            data={!!startDate && formatDate(startDate)}
           />
           <LineItemLabelAbove
             label="project end date"
-            data={
-              !!metadata?.['http://regen.network/projectEndDate']?.['@value'] &&
-              formatDate(
-                metadata?.['http://regen.network/projectEndDate']?.['@value'],
-              )
-            }
+            data={!!endDate && formatDate(endDate)}
           />
-          {creditClass && additionalCertification && (
+          {additionalCertification && (
             <LineItemLabelAbove
               label="additional certification"
               data={
                 <LinkWithArrow
-                  link={additionalCertification?.['http://schema.org/url']}
+                  link={
+                    additionalCertification?.['http://schema.org/url']?.[
+                      '@value'
+                    ]
+                  }
                   label={additionalCertification?.['http://schema.org/name']}
                 />
               }

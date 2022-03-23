@@ -38,7 +38,10 @@ export default function useBasketTokens(address?: string): BasketTokens[] {
         })),
       );
 
-      setBasketTokens(_basketTokens);
+      const withPositiveBalance = (basket: BasketTokens): boolean =>
+        basket.balance?.balance?.amount !== '0';
+
+      setBasketTokens(_basketTokens.filter(withPositiveBalance));
     }
 
     fetchData(baskets);

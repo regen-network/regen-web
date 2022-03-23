@@ -49,11 +49,11 @@ export interface VcsProjectMetadataLD {
     };
   };
   'http://regen.network/projectSize': {
-    'qudt:unit': {
+    'http://qudt.org/schema/qudt/#unit': {
       '@type': 'qudt:Unit';
       '@value': string;
     };
-    'qudt:numericValue': {
+    'http://qudt.org/schema/qudt/numericValue': {
       '@type': 'xsd:double';
       '@value': number;
     };

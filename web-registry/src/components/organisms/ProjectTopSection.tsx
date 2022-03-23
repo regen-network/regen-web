@@ -220,14 +220,16 @@ function ProjectTopSection({
     metadata?.['http://regen.network/size']?.[
       'http://qudt.org/1.1/schema/qudt#numericValue'
     ]?.['@value'] ||
-    metadata?.['http://regen.network/projectSize']?.['qudt:numericValue']?.[
-      '@value'
-    ];
+    metadata?.['http://regen.network/projectSize']?.[
+      'http://qudt.org/schema/qudt/numericValue'
+    ]?.['@value'];
   const unit: qudtUnit | undefined =
     metadata?.['http://regen.network/size']?.[
       'http://qudt.org/1.1/schema/qudt#unit'
     ]?.['@value'] ||
-    metadata?.['http://regen.network/projectSize']?.['qudt:unit']?.['@value'];
+    metadata?.['http://regen.network/projectSize']?.[
+      'http://qudt.org/schema/qudt/#unit'
+    ]?.['@value'];
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
   const methodologyVersion =

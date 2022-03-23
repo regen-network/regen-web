@@ -264,6 +264,7 @@ function ProjectTopSection({
     <Section classes={{ root: styles.section }}>
       <Grid container>
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
+          {/* TODO Show on-chain project id if no off-chain name */}
           <Title variant="h1">{metadata?.['http://schema.org/name']}</Title>
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo
@@ -280,9 +281,11 @@ function ProjectTopSection({
                     label="credit class"
                     name={creditClassVersion.name}
                     url={
-                      creditClassVersion.metadata?.['http://schema.org/url']?.[
-                        '@value'
-                      ]
+                      isVcsProject
+                        ? `/credit-classes/${creditClass?.onChainId}`
+                        : creditClassVersion.metadata?.[
+                            'http://schema.org/url'
+                          ]?.['@value']
                     }
                     creditClassId={
                       creditClassVersion?.metadata?.[

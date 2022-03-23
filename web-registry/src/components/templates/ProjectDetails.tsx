@@ -138,6 +138,7 @@ function ProjectDetails(): JSX.Element {
     metadata?.['http://regen.network/boundaries']?.['@value'];
   const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
   const isKMLFile: boolean = /\.kml$/i.test(mapFile);
+  const metadataLocation = metadata?.['http://schema.org/location'];
 
   useEffect(() => {
     if (!geojson && isGISFile) {
@@ -153,8 +154,10 @@ function ProjectDetails(): JSX.Element {
           }
           setGeojson(geojson);
         });
+    } else if (metadataLocation) {
+      setGeojson(metadataLocation);
     }
-  }, [geojson, isGISFile, isKMLFile, mapFile]);
+  }, [geojson, isGISFile, isKMLFile, mapFile, metadataLocation]);
 
   // Modal
   const [open, setOpen] = useState(false);
@@ -210,7 +213,7 @@ function ProjectDetails(): JSX.Element {
     getVisiblePartyName(metadata?.['http://regen.network/projectDeveloper']) ||
     getVisiblePartyName(metadata?.['http://regen.network/landOwner']) ||
     getVisiblePartyName(metadata?.['http://regen.network/projectOriginator']);
-  const projectAddress = metadata?.['http://schema.org/location']?.place_name;
+  const projectAddress = metadataLocation?.place_name;
   const galleryPhotos =
     metadata?.['http://regen.network/galleryPhotos']?.['@list'];
   const noGallery = !galleryPhotos || galleryPhotos?.length === 0;

@@ -2,13 +2,6 @@
 // https://github.com/regen-network/regen-registry-standards/blob/a2d81baebe7756226a58b126378d1890ad4cadcc/jsonld/projects/C01-verified-carbon-standard-project.json
 
 export interface VcsProjectMetadataLD {
-  '@context': {
-    schema: 'http://schema.org/';
-    regen: 'http://regen.network/';
-    qudt: 'http://qudt.org/schema/qudt';
-    unit: 'http://qudt.org/2.1/vocab/unit';
-    xsd: 'http://www.w3.org/2001/XMLSchema#';
-  };
   '@type': 'http://regen.network/Project';
   'http://regen.network/vcsProjectId': {
     '@type': 'xsd:unsignedInt';
@@ -50,20 +43,20 @@ export interface VcsProjectMetadataLD {
   };
   'http://regen.network/projectSize': {
     'http://qudt.org/schema/qudt/#unit': {
-      '@type': 'qudt:Unit';
+      '@type': 'http://qudt.org/schema/qudt/Unit';
       '@value': string;
     };
     'http://qudt.org/schema/qudt/numericValue': {
-      '@type': 'xsd:double';
+      '@type': 'http://www.w3.org/2001/XMLSchema#double';
       '@value': number;
     };
   };
   'http://regen.network/projectStartDate': {
-    '@type': 'xsd:date';
+    '@type': 'http://www.w3.org/2001/XMLSchema#date';
     '@value': Date;
   };
   'http://regen.network/projectEndDate': {
-    '@type': 'xsd:date';
+    '@type': 'http://www.w3.org/2001/XMLSchema#date';
     '@value': Date;
   };
 }

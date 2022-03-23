@@ -59,7 +59,7 @@ export const BasketsTable: React.FC<BasketTableProps> = ({
                 {row.basket.name}
               </Box>
               <Box sx={{ color: 'info.main' }}>
-                {row.displayDenom.toLocaleString()}
+                {row.metadata?.metadata?.display.toLocaleString()}
               </Box>
             </Grid>
           </Grid>,

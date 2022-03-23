@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     border: `1px solid ${theme.palette.grey[400]}`,
     padding: theme.spacing(5, 9),
   },
+  icon: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 export interface MenuTitle {
@@ -92,7 +95,7 @@ const MenuHover = ({
         {title && (
           <span className={classes?.title}>
             {title}
-            <DropdownIcon color={dropdownColor} />
+            <DropdownIcon className={styles.icon} color={dropdownColor} />
           </span>
         )}
         {renderTitle && renderTitle()}

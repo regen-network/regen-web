@@ -2,20 +2,25 @@ import { useState, useEffect } from 'react';
 
 import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
 import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { QueryBalanceResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import {
+  QueryBalanceResponse,
+  QueryDenomMetadataResponse,
+} from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 import useQueryBaskets from './useQueryBaskets';
 import useQueryBalance from './useQueryBalance';
+import useQueryDenomMetadata from './useQueryDenomMetadata';
 
 export interface BasketTokens {
   basket: Basket;
   balance?: QueryBalanceResponse;
-  displayDenom: string;
+  metadata?: QueryDenomMetadataResponse;
 }
 
 export default function useBasketTokens(address?: string): BasketTokens[] {
   const baskets = useQueryBaskets();
   const fetchBalance = useQueryBalance();
+  const fetchDenomMetadata = useQueryDenomMetadata();
   const [basketTokens, setBasketTokens] = useState<BasketTokens[]>([]);
 
   useEffect(() => {
@@ -29,8 +34,7 @@ export default function useBasketTokens(address?: string): BasketTokens[] {
             address,
             denom: basket.basketDenom,
           }),
-          // TODO: fetch display denom for basket
-          displayDenom: basket.basketDenom,
+          metadata: await fetchDenomMetadata(basket.basketDenom),
         })),
       );
 

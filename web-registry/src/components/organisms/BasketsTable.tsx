@@ -42,7 +42,7 @@ export const BasketsTable: React.FC<BasketTableProps> = ({
         >
           Asset
         </Box>,
-        'Balance',
+        'Amount available',
       ]}
       rows={baskets.map((row, i) => {
         return [
@@ -50,7 +50,11 @@ export const BasketsTable: React.FC<BasketTableProps> = ({
             <Grid item>
               <BasketIcon />
             </Grid>
-            <Grid item sx={{ ml: 3.5, fontWeight: 700 }} alignSelf="center">
+            <Grid
+              item
+              sx={{ ml: 3.5, pb: 2, fontWeight: 700 }}
+              alignSelf="center"
+            >
               <Box sx={{ fontSize: theme => theme.spacing(4.5) }}>
                 {row.basket.name}
               </Box>

@@ -36,7 +36,7 @@ export const LinkWithArrow = ({
       rel="noreferrer"
     >
       {parseText(label)}
-      <SmallArrowIcon className={styles.arrowIcon} />
+      {link && <SmallArrowIcon className={styles.arrowIcon} />}
     </Link>
   );
 };

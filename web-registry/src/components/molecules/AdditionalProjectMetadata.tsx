@@ -15,10 +15,9 @@ export interface MetadataProps {
 const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
-  if (
-    !metadata ||
-    !metadata?.['http://regen.network/vcsProjectId']?.['@value']
-  ) {
+  const projectId = metadata?.['http://regen.network/vcsProjectId']?.['@value'];
+
+  if (!metadata || !projectId) {
     return null;
   }
 
@@ -64,10 +63,21 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
               }
             />
           )}
-          <LineItemLabelAbove
-            label="vcs project id"
-            data={metadata?.['http://regen.network/vcsProjectId']?.['@value']}
-          />
+          {projectId && (
+            <LineItemLabelAbove
+              label="vcs project id"
+              data={
+                <LinkWithArrow
+                  label={projectId.toString()}
+                  link={
+                    metadata?.['http://regen.network/vcsProjectPage']?.[
+                      '@value'
+                    ]
+                  }
+                />
+              }
+            />
+          )}
           <LineItemLabelAbove
             label="vcs project type"
             data={metadata?.['http://regen.network/vcsProjectType']}

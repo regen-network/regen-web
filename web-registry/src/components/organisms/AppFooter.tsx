@@ -60,7 +60,7 @@ const AppFooter: React.FC = () => {
   if (chainId) {
     footerItems[0].items.unshift({
       title: 'NCT',
-      href: '/baskets/eco.uC.rNCT',
+      href: '/baskets/eco.uC.NCT',
     });
     footerItems[0].items.push({
       title: 'Activity',

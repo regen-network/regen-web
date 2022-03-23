@@ -16,7 +16,6 @@ import {
 } from 'web-components/lib/components/header/HeaderDropdownItems';
 
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
-
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 import { ReactComponent as Credits } from '../../assets/svgs/credits.svg';
 import DefaultAvatar from '../../assets/avatar.png';
@@ -87,12 +86,6 @@ const RegistryNav: React.FC = () => {
   };
 
   const menuItems: HeaderMenuItem[] = [
-    // TODO: Hide before merging
-    // Add it back once the rNCT basket is created on mainnet
-    {
-      title: 'rNCT',
-      href: '/baskets/eco.uC.rNCT',
-    },
     {
       title: 'Projects',
       dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
@@ -102,12 +95,6 @@ const RegistryNav: React.FC = () => {
         href: `/projects/${p?.handle}`,
         linkComponent: RegistryNavLink,
       })),
-    },
-    // TODO: Hide before merging
-    // Add it back once there starts to be some activity on mainnet
-    {
-      title: 'Activity',
-      href: '/stats/activity',
     },
     {
       title: 'Program',
@@ -133,32 +120,43 @@ const RegistryNav: React.FC = () => {
     },
   ];
 
-  if (chainId && loaded && wallet?.shortAddress && desktop) {
-    menuItems.push({
-      renderTitle: () => (
-        <Box display="flex" alignItems="center" sx={{ fontSize: 14 }}>
-          <Avatar
-            sx={{
-              height: 24,
-              width: 24,
-              mr: 2.75,
-              border: theme => `1px solid ${theme.palette.grey[100]}`,
-            }}
-            alt="default avatar"
-            src={DefaultAvatar}
-          />
-          {wallet.shortAddress}
-        </Box>
-      ),
-      dropdownItems: [
-        {
-          linkComponent: RegistryNavLink,
-          title: 'My Portfolio',
-          href: '/ecocredits/dashboard',
-          svg: Credits,
-        },
-      ],
+  if (chainId) {
+    menuItems.unshift({
+      title: 'rNCT',
+      href: '/baskets/eco.uC.rNCT',
     });
+    menuItems.splice(2, 0, {
+      title: 'Activity',
+      href: '/stats/activity',
+    });
+
+    if (loaded && wallet?.shortAddress && desktop) {
+      menuItems.push({
+        renderTitle: () => (
+          <Box display="flex" alignItems="center" sx={{ fontSize: 14 }}>
+            <Avatar
+              sx={{
+                height: 24,
+                width: 24,
+                mr: 2.75,
+                border: theme => `1px solid ${theme.palette.grey[100]}`,
+              }}
+              alt="default avatar"
+              src={DefaultAvatar}
+            />
+            {wallet.shortAddress}
+          </Box>
+        ),
+        dropdownItems: [
+          {
+            linkComponent: RegistryNavLink,
+            title: 'My Portfolio',
+            href: '/ecocredits/dashboard',
+            svg: Credits,
+          },
+        ],
+      });
+    }
   }
 
   const headerColors: HeaderColors = {

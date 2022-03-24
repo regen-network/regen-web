@@ -12,7 +12,6 @@ import {
   EntityDisplayValues,
   EntityFieldName,
 } from '../components/organisms/EntityDisplayForm';
-import { VcsProjectMetadataLD } from '../types/project/vcs-project';
 
 // buildIssuanceModalData builds some IssuanceModalData to provide
 // to a Timeline Event based on some optional credit vintage data.
@@ -149,7 +148,6 @@ export function buildIssuanceModalData(
 
 export function getParty(
   party?: Maybe<PartyFieldsFragment>,
-  metadata?: VcsProjectMetadataLD,
 ): Party | undefined {
   if (!party) {
     return undefined;
@@ -193,7 +191,7 @@ const getPartyFromMetadata = (
   return {
     name: metadataRole?.['http://schema.org/name'] || '',
     description: metadataRole?.['http://schema.org/description'] || '',
-    type: 'ORGANIZATION',
+    type: 'ORGANIZATION', // to provide default image
     individual: '',
     role: '',
     address: '',

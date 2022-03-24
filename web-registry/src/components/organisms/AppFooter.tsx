@@ -5,6 +5,7 @@ import {
   FooterItemProps as FooterItem,
 } from 'web-components/lib/components/footer/footer-new';
 import { RegistryIconLink, Link } from '../atoms';
+import { chainId } from '../../lib/ledger';
 
 const AppFooter: React.FC = () => {
   const { pathname } = useLocation();
@@ -12,15 +13,11 @@ const AppFooter: React.FC = () => {
 
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
-      title: 'Regen Registry',
+      title: 'Registry App',
       items: [
         {
-          title: 'Carbon<i>Plus</i> Grasslands Credit Class',
-          href: '/credit-classes/carbonplus-grasslands',
-        },
-        {
-          title: 'Carbon<i>Plus</i> Grasslands Methodology',
-          href: '/methodologies/carbonplus-grasslands',
+          title: 'Projects',
+          href: '/#projects',
         },
       ],
     },
@@ -29,11 +26,11 @@ const AppFooter: React.FC = () => {
       items: [
         {
           title: 'Buyers',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/buyers/`,
+          href: `/buyers`,
         },
         {
           title: 'Land Stewards',
-          href: `${process.env.REACT_APP_WEBSITE_URL}/land-stewards/`,
+          href: `/land-stewards`,
         },
       ],
     },
@@ -42,7 +39,7 @@ const AppFooter: React.FC = () => {
       items: [
         {
           title: 'Program Guide',
-          href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
+          href: 'https://library.regen.network/v/regen-registry-program-guide/',
         },
         {
           title: 'Create a Methodology',
@@ -52,9 +49,24 @@ const AppFooter: React.FC = () => {
           title: 'Methodology Review Process',
           href: '/methodology-review-process',
         },
+        {
+          title: 'Regen Registry Library',
+          href: 'https://library.regen.network/',
+        },
       ],
     },
   ];
+
+  if (chainId) {
+    footerItems[0].items.unshift({
+      title: 'NCT',
+      href: '/baskets/eco.uC.NCT',
+    });
+    footerItems[0].items.push({
+      title: 'Activity',
+      href: '/stats/activity',
+    });
+  }
 
   return isHidden ? null : (
     <Footer

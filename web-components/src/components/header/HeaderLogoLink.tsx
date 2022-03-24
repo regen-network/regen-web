@@ -34,7 +34,6 @@ export const HeaderLogoLink: React.FC<{ color: string }> = ({ color }) => {
       window.location &&
       window.location.href
     )
-      console.log("LOADED", isLoaded)
       setIsLoaded(i => !i);
   }, []);
 

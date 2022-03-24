@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import CardMedia from '@mui/material/CardMedia';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -82,6 +82,16 @@ const Home: React.FC = () => {
 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+  useEffect(() => {
+    const anchor = window.location.hash.slice(1);
+    if (anchor) {
+      const anchorEl = document.getElementById(anchor);
+      if (anchorEl) {
+        anchorEl.scrollIntoView();
+      }
+    }
+  }, []);
+
   return (
     <div className={styles.root}>
       <HeroTitle
@@ -93,16 +103,18 @@ const Home: React.FC = () => {
       />
 
       {projectsData?.allProjects?.nodes && (
-        <Section
-          title="Featured Projects"
-          titleAlign="center"
-          classes={{ root: styles.section, title: styles.title }}
-        >
-          <ProjectCards
-            projects={projectsData?.allProjects?.nodes}
-            classes={{ root: styles.projectCards }}
-          />
-        </Section>
+        <div id="projects">
+          <Section
+            title="Featured Projects"
+            titleAlign="center"
+            classes={{ root: styles.section, title: styles.title }}
+          >
+            <ProjectCards
+              projects={projectsData?.allProjects?.nodes}
+              classes={{ root: styles.projectCards }}
+            />
+          </Section>
+        </div>
       )}
 
       <CardMedia image={topographyImg}>

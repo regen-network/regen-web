@@ -12,6 +12,7 @@ import {
   EntityDisplayValues,
   EntityFieldName,
 } from '../components/organisms/EntityDisplayForm';
+import { VcsProjectMetadataLD } from '../types/project/vcs-project';
 
 // buildIssuanceModalData builds some IssuanceModalData to provide
 // to a Timeline Event based on some optional credit vintage data.
@@ -148,6 +149,7 @@ export function buildIssuanceModalData(
 
 export function getParty(
   party?: Maybe<PartyFieldsFragment>,
+  metadata?: VcsProjectMetadataLD,
 ): Party | undefined {
   if (!party) {
     return undefined;
@@ -181,6 +183,23 @@ export function getParty(
   };
 }
 
+const getPartyFromMetadata = (
+  metadata: EntityDisplayValues,
+  role: EntityFieldName,
+): Party | undefined => {
+  const metadataRole = metadata[role];
+  if (!metadataRole) return undefined;
+
+  return {
+    name: metadataRole?.['http://schema.org/name'] || '',
+    description: metadataRole?.['http://schema.org/description'] || '',
+    type: 'ORGANIZATION',
+    individual: '',
+    role: '',
+    address: '',
+  };
+};
+
 export function getDisplayParty(
   role: EntityFieldName,
   metadata?: EntityDisplayValues,
@@ -189,7 +208,9 @@ export function getDisplayParty(
   const showOnProjectPage =
     metadata?.[role]?.['http://regen.network/showOnProjectPage'];
   if (showOnProjectPage) {
-    return getParty(party);
+    const dbParty = getParty(party);
+    if (dbParty) return dbParty;
+    return getPartyFromMetadata(metadata, role);
   }
   return undefined;
 }

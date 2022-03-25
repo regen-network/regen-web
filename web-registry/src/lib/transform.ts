@@ -191,7 +191,9 @@ const getPartyFromMetadata = (
   return {
     name: metadataRole?.['http://schema.org/name'] || '',
     description: metadataRole?.['http://schema.org/description'] || '',
-    type: metadataRole?.['@type'] || 'ORGANIZATION', // to provide default image
+    type: metadataRole?.['@type'].includes('http://regen.network/Organization')
+      ? 'ORGANIZATION' // to provide default image
+      : '',
     individual: '',
     role: '',
     address: '',

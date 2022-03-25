@@ -1,15 +1,19 @@
 import React from 'react';
 import Box from '@mui/material/Box';
+import { SxProps } from '@mui/system';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import Description from 'web-components/lib/components/description';
 import { Label } from 'web-components/lib/components/label';
 
-interface LineItemProps {
+export interface LineItemLabelAboveProps {
+  sx?: SxProps<Theme>;
   label: string;
   data: string | JSX.Element | number;
 }
 
-export const LineItemLabelAbove: React.FC<LineItemProps> = ({
+const LineItemLabelAbove: React.FC<LineItemLabelAboveProps> = ({
+  sx,
   label,
   data,
 }) => {
@@ -20,6 +24,7 @@ export const LineItemLabelAbove: React.FC<LineItemProps> = ({
         width: { xs: '100%', sm: '50%' },
         pr: 4,
         mb: { xs: 8, sm: 8 },
+        ...sx,
       }}
     >
       <Label
@@ -41,3 +46,5 @@ export const LineItemLabelAbove: React.FC<LineItemProps> = ({
     </Box>
   );
 };
+
+export { LineItemLabelAbove };

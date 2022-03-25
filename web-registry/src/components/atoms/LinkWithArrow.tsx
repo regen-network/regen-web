@@ -3,9 +3,9 @@ import { makeStyles } from '@mui/styles';
 import { Link } from '@mui/material';
 import { SxProps } from '@mui/system';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { parseText } from 'web-components/lib/utils/textParser';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 const useStylesLink = makeStyles(theme => ({
   arrowIcon: {
@@ -24,20 +24,20 @@ interface LinkProps {
   target?: '_blank' | '_self';
 }
 
-export const LinkWithArrow = ({
+const LinkWithArrow: React.FC<LinkProps> = ({
   sx,
   link,
   label,
   className,
   target = '_blank',
-}: LinkProps): JSX.Element => {
+}) => {
   const styles = useStylesLink();
 
   return (
     <Link
       href={link}
       className={className}
-      sx={{ ...sx, color: 'info.dark' }}
+      sx={{ color: 'info.dark', ...sx }}
       target={target}
       rel="noreferrer"
     >
@@ -46,3 +46,5 @@ export const LinkWithArrow = ({
     </Link>
   );
 };
+
+export { LinkWithArrow };

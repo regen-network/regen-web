@@ -5,7 +5,7 @@ import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton
 import { formatDate } from 'web-components/lib/utils/format';
 
 import { LinkWithArrow } from '../atoms';
-import { LineItemLabelAbove } from '.';
+import { LineItemLabelAbove, LineItemLabelAboveProps } from '../molecules';
 import { VcsProjectMetadataLD } from '../../types/project/vcs-project';
 
 export interface MetadataProps {
@@ -27,6 +27,10 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
     metadata?.['http://regen.network/projectStartDate']?.['@value'];
   const endDate = metadata?.['http://regen.network/projectEndDate']?.['@value'];
 
+  const LineItem = (props: LineItemLabelAboveProps): JSX.Element => (
+    <LineItemLabelAbove sx={{ mb: { xs: 6, sm: 8 } }} {...props} />
+  );
+
   return (
     <Box sx={{ pt: 8 }}>
       <Title variant="h5">Additional Metadata</Title>
@@ -38,14 +42,14 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
             pt: 8,
           }}
         >
-          <LineItemLabelAbove
+          <LineItem
             label="offset generation method"
             data={metadata?.['http://regen.network/offsetGenerationMethod']}
           />
           {metadata?.['http://regen.network/projectActivity']?.[
             'http://schema.org/name'
           ] && (
-            <LineItemLabelAbove
+            <LineItem
               label="project activity"
               data={
                 <LinkWithArrow
@@ -64,7 +68,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
             />
           )}
           {projectId && (
-            <LineItemLabelAbove
+            <LineItem
               label="vcs project id"
               data={
                 <LinkWithArrow
@@ -78,20 +82,20 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
               }
             />
           )}
-          <LineItemLabelAbove
+          <LineItem
             label="vcs project type"
             data={metadata?.['http://regen.network/vcsProjectType']}
           />
-          <LineItemLabelAbove
+          <LineItem
             label="project start date"
             data={!!startDate && formatDate(startDate)}
           />
-          <LineItemLabelAbove
+          <LineItem
             label="project end date"
             data={!!endDate && formatDate(endDate)}
           />
           {additionalCertification && (
-            <LineItemLabelAbove
+            <LineItem
               label="additional certification"
               data={
                 <LinkWithArrow

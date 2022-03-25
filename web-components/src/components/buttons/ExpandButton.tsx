@@ -21,8 +21,8 @@ const ExpandButton: React.FC<Props> = ({ onClick, expanded, text, sx }) => {
     <OutlinedButton
       onClick={onClick}
       sx={{
-        ...sx,
         border: 'none !important',
+        ...sx,
       }}
       endIcon={
         <ArrowDownIcon

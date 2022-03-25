@@ -170,7 +170,7 @@ function ProjectTopSection({
       'http://qudt.org/1.1/schema/qudt#unit'
     ]?.['@value'] ||
     metadata?.['http://regen.network/projectSize']?.[
-      'http://qudt.org/schema/qudt/#unit'
+      'http://qudt.org/schema/qudt/unit'
     ]?.['@value'];
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];

@@ -191,7 +191,7 @@ const getPartyFromMetadata = (
   return {
     name: metadataRole?.['http://schema.org/name'] || '',
     description: metadataRole?.['http://schema.org/description'] || '',
-    type: 'ORGANIZATION', // to provide default image
+    type: metadataRole?.['@type'] || 'ORGANIZATION', // to provide default image
     individual: '',
     role: '',
     address: '',
@@ -208,6 +208,7 @@ export function getDisplayParty(
   if (showOnProjectPage) {
     const dbParty = getParty(party);
     if (dbParty) return dbParty;
+    // If no party info available for this role, check the metadata
     return getPartyFromMetadata(metadata, role);
   }
   return undefined;

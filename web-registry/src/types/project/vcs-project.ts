@@ -12,9 +12,10 @@ export interface VcsProjectMetadataLD {
     '@value': string;
   };
   'http://regen.network/projectDeveloper': {
-    '@type': 'http://regen.network/Organization';
+    '@type': 'http://regen.network/OrganizationDisplay';
     'http://schema.org/name': string;
     'http://schema.org/description': string;
+    'http://regen.network/showOnProjectPage': boolean;
   };
   'http://regen.network/vcsProjectType': string;
   'http://regen.network/projectActivity': {
@@ -35,14 +36,13 @@ export interface VcsProjectMetadataLD {
   };
   'http://regen.network/additionalCertification': {
     'http://schema.org/name': string;
-    'http://schema.org/version': string;
     'http://schema.org/url': {
       '@type': 'http://schema.org/URL';
       '@value': string;
     };
   };
   'http://regen.network/projectSize': {
-    'http://qudt.org/schema/qudt/#unit': {
+    'http://qudt.org/schema/qudt/unit': {
       '@type': 'http://qudt.org/schema/qudt/Unit';
       '@value': string;
     };

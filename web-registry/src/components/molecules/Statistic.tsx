@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { Label } from 'web-components/lib/components/label';
 import Title from 'web-components/lib/components/title';
-import { formatNumber } from 'web-components/lib/components/table';
+import { formatNumber } from 'web-components/lib/utils/format';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 
 interface StatisticProps {

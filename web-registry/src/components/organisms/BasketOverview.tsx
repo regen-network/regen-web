@@ -10,8 +10,7 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Description from 'web-components/lib/components/description';
 import { Label } from 'web-components/lib/components/label';
 import { parseText } from 'web-components/lib/utils/textParser';
-import { formatNumber } from 'web-components/lib/components/table';
-import { formatDate } from 'web-components/lib/utils/format';
+import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { getAccountUrl } from '../../lib/block-explorer';
 import { truncate } from '../../lib/wallet';
 

@@ -49,3 +49,9 @@ export function formatDate(
 ): string {
   return dayjs(date).format(format);
 }
+
+export function formatNumber(num: number | string | undefined): string {
+  if (!num) return '-';
+  if (typeof num === 'string') num = parseFloat(num);
+  return num > 0 ? Math.floor(num).toLocaleString() : '-';
+}

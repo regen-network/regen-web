@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import useBasketDetails from '../hooks/useBasketDetails';
+import { useBasketDetails } from '../hooks';
 import { BasketOverview, BasketEcocredits } from '../components/organisms';
 
 const BasketDetails: React.FC = () => {

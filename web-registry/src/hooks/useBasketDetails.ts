@@ -1,121 +1,92 @@
 import { useState, useEffect } from 'react';
 
 import {
-  getBasket,
-  getBasketBalances,
-  getBasketBalancesWithBatchInfo,
-} from '../lib/ecocredit';
+  QueryBasketBalancesResponse,
+  QueryBasketResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import {
-  Basket,
-  BasketBalance,
-  BatchInfoWithProject,
-} from '../types/ledger/ecocredit';
-import { BasketOverviewProps, CreditClass } from '../components/organisms';
+  QueryBatchInfoResponse,
+  QueryClassInfoResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
-interface BasketExtended {
-  classes: CreditClass[];
-  displayDenom: string;
-  description: string;
-  curator: string;
-  totalAmount: number;
-}
+import useQueryBasket from './useQueryBasket';
+import useQueryBatchInfo from './useQueryBatchInfo';
+import useQueryDenomMetadata from './useQueryDenomMetadata';
+import useQueryBasketBalances from './useQueryBasketBalances';
+import useQueryClassInfo from './useQueryClassInfo';
 
-interface BasketDetailsAll {
-  basket: Basket | undefined;
-  basketExtended: BasketExtended;
-  basketBalances: BasketBalance[];
-  batchesInfo: BatchInfoWithProject[];
-}
-
-type BasketDetailsData = {
-  dataOverview: BasketOverviewProps | null;
-  dataBasketBatches: BatchInfoWithProject[] | undefined;
+type BasketDetails = {
+  basket?: QueryBasketResponse;
+  balances?: QueryBasketBalancesResponse[];
+  metadata?: QueryDenomMetadataResponse;
+  classes?: Array<QueryClassInfoResponse | undefined>;
+  batches?: Array<QueryBatchInfoResponse | undefined>;
 };
 
-const useBasketDetails = (
-  basketDenom: string | undefined,
-): BasketDetailsData => {
-  const [data, setData] = useState<BasketDetailsAll | null>(null);
-  const [dataOverview, setDataOverview] = useState<BasketOverviewProps | null>(
-    null,
-  );
+const useBasketDetails = (basketDenom?: string): BasketDetails | undefined => {
+  const basket = useQueryBasket(basketDenom);
+  const basketBalances = useQueryBasketBalances(basketDenom);
+  const fetchClassInfo = useQueryClassInfo();
+  const fetchDenomMetadata = useQueryDenomMetadata();
+  const fetchBatchInfo = useQueryBatchInfo();
 
-  // fetch all the data
+  const [data, setData] = useState<BasketDetails | undefined>();
+
+  // Store hooked basket DTO
   useEffect(() => {
-    if (basketDenom === undefined) return;
+    if (!basket) return;
+    setData(prev => ({ ...prev, basket }));
+  }, [basket]);
 
+  // Store hooked basket balances DTOs
+  useEffect(() => {
+    if (!basketBalances) return;
+    setData(prev => ({ ...prev, basketBalances }));
+  }, [basketBalances]);
+
+  // Fetch and store allowed credit classes DTOs
+  useEffect(() => {
+    if (!basket) return;
+    async function fetchData(basketClasses: string[]): Promise<void> {
+      const classes = await Promise.all(
+        basketClasses.map(async classId => await fetchClassInfo(classId)),
+      );
+      setData(prev => ({ ...prev, classes }));
+    }
+    fetchData(basket.classes);
+  }, [basket, fetchClassInfo]);
+
+  // Fetch and store basket metadata DTO
+  useEffect(() => {
+    if (!basketDenom) return;
     async function fetchData(basketDenom: string): Promise<void> {
-      try {
-        const basket = await getBasket(basketDenom);
-        // TODO: Hardcoded. Fetch basket classes display names
-        const basketClasses = basket.classes.map(classId => ({
-          id: classId,
-          name: `Verified Carbon Standard (${classId})`,
-        }));
-        // TODO: Display basket denom
-        const displayDenom = 'eco.C.rNCT';
-        // TODO: Basket description (see comment in Figma)
-        // https://www.figma.com/file/x5vjWsddiUBzP2N13AFOPw?node-id=32:10028#155844414
-        // const description = getBasketDescription(basketDenom);
-        const description =
-          'The Regen Nature Carbon Ton groups together carbon sequestration ecocredits into one tradeable asset. Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
-        // TODO: Basket Curator
-        const curator = 'regen1qdqafsy2jfuyq7rxzkdwyytmrxlfn8csq0uetx';
-        const balances = await getBasketBalances(basketDenom);
-        const batches = await getBasketBalancesWithBatchInfo(balances.balances);
-
-        setData({
-          basket: basket.basket,
-          basketExtended: {
-            classes: basketClasses,
-            displayDenom,
-            description,
-            curator,
-            totalAmount: 0,
-          },
-          basketBalances: balances.balances,
-          batchesInfo: batches,
-        });
-      } catch (error) {
-        // TODO Manage error
-        console.error(error); // eslint-disable-line no-console
-      }
+      const metadata = await fetchDenomMetadata(basketDenom);
+      setData(prev => ({ ...prev, metadata }));
     }
-
     fetchData(basketDenom);
-  }, [basketDenom]);
+  }, [basketDenom, fetchDenomMetadata]);
 
-  // Prepare data for BasketOverview
+  // Fetch and store corresponding batches info DTOs
   useEffect(() => {
-    if (data?.basket && data?.basketExtended && data?.batchesInfo) {
-      const _dataOverview: BasketOverviewProps = {
-        name: data.basket.name,
-        displayDenom: data.basketExtended.displayDenom,
-        description: data.basketExtended.description,
-        totalAmount: data.basketExtended.totalAmount,
-        curator: data.basketExtended.curator,
-        allowedCreditClasses: data.basketExtended.classes,
-      };
-      if (data?.basket?.dateCriteria?.minStartDate) {
-        _dataOverview.minStartDate = data.basket.dateCriteria.minStartDate;
-      }
-      if (data?.basket?.dateCriteria?.startDateWindow) {
-        _dataOverview.startDateWindow =
-          data?.basket?.dateCriteria.startDateWindow;
-      }
-
-      if (data?.batchesInfo?.length > 0) {
-        _dataOverview.totalAmount = data.batchesInfo.reduce(
-          (acc: number, obj: BatchInfoWithProject) =>
-            acc + Number(obj.total_amount),
-          0,
-        );
-      }
-      setDataOverview(_dataOverview);
+    if (!basketBalances) return;
+    async function fetchData(
+      basketBalances: QueryBasketBalancesResponse,
+    ): Promise<void> {
+      const batches = await Promise.all(
+        basketBalances.balances.map(
+          async batch => await fetchBatchInfo(batch.batchDenom),
+        ),
+      );
+      setData(prev => ({ ...prev, batches }));
     }
-  }, [data]);
+    fetchData(basketBalances);
+  }, [basketBalances, fetchBatchInfo]);
 
-  return { dataOverview, dataBasketBatches: data?.batchesInfo };
+  // eslint-disable-next-line no-console
+  console.log('*** data', data);
+
+  return data;
 };
 
 export default useBasketDetails;

@@ -11,11 +11,11 @@ import useQueryBaskets from './useQueryBaskets';
 import useQueryBalance from './useQueryBalance';
 import useQueryDenomMetadata from './useQueryDenomMetadata';
 
-export interface BasketTokens {
+type BasketTokens = {
   basket: Basket;
   balance?: QueryBalanceResponse;
   metadata?: QueryDenomMetadataResponse;
-}
+};
 
 export default function useBasketTokens(address?: string): BasketTokens[] {
   const baskets = useQueryBaskets();
@@ -26,7 +26,10 @@ export default function useBasketTokens(address?: string): BasketTokens[] {
   useEffect(() => {
     if (!address || !baskets) return;
 
-    async function fetchData(baskets: QueryBasketsResponse): Promise<void> {
+    async function fetchData(
+      address: string,
+      baskets: QueryBasketsResponse,
+    ): Promise<void> {
       const _basketTokens = await Promise.all(
         baskets.baskets.map(async basket => ({
           basket,
@@ -44,7 +47,7 @@ export default function useBasketTokens(address?: string): BasketTokens[] {
       setBasketTokens(_basketTokens.filter(withPositiveBalance));
     }
 
-    fetchData(baskets);
+    fetchData(address, baskets);
   }, [address, baskets, fetchBalance, fetchDenomMetadata]);
 
   return basketTokens;

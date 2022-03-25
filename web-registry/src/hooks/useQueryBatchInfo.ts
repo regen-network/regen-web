@@ -1,22 +1,21 @@
 import { useState, useEffect, useCallback } from 'react';
 
 import {
-  QueryBalanceResponse,
+  QueryBatchInfoResponse,
   QueryClientImpl,
-} from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 
 import { useLedger } from '../ledger';
 
-type Balance = {
-  address: string;
-  denom: string;
-};
+// type Batch = {
+//   batchDenom: string;
+// };
 
-type FetchBalance = (
-  args: Balance,
-) => Promise<QueryBalanceResponse | undefined>;
+type FetchBatchInfo = (
+  batchDenom: string,
+) => Promise<QueryBatchInfoResponse | undefined>;
 
-export default function useQueryBalance(): FetchBalance {
+export default function useQueryBatchInfo(): FetchBatchInfo {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl | undefined>();
 
@@ -27,13 +26,13 @@ export default function useQueryBalance(): FetchBalance {
     setQueryClient(_queryClient);
   }, [api?.queryClient]);
 
-  const fetchBalance = useCallback(
-    async ({ address, denom }) => {
+  const fetchBatchInfo = useCallback(
+    async batchDenom => {
       if (!queryClient) return;
 
       try {
-        const balance = await queryClient.Balance({ address, denom });
-        return balance;
+        const batchInfo = await queryClient.BatchInfo({ batchDenom });
+        return batchInfo;
       } catch (err) {
         console.error(err); // eslint-disable-line no-console
       }
@@ -43,5 +42,5 @@ export default function useQueryBalance(): FetchBalance {
     [queryClient],
   );
 
-  return fetchBalance;
+  return fetchBatchInfo;
 }

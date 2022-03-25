@@ -106,11 +106,11 @@ const TextContainer = styled(Grid)(({ theme }) => ({
 }));
 
 export interface CreditClass {
-  id: string;
-  name: string;
+  id: string | '-';
+  name: string | '-';
 }
 
-export interface BasketOverviewProps {
+export type BasketOverviewProps = {
   name: string;
   displayDenom: string;
   description: string;
@@ -118,8 +118,9 @@ export interface BasketOverviewProps {
   curator: string;
   allowedCreditClasses: CreditClass[];
   minStartDate?: string;
-  startDateWindow?: string;
-}
+  startDateWindow?: Long;
+  // startDateWindow?: string;
+};
 
 export const BasketOverview: React.FC<BasketOverviewProps> = ({
   name,
@@ -180,7 +181,8 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                 {startDateWindow && (
                   <Item
                     label="start date window"
-                    data={formatDate(startDateWindow)}
+                    data={startDateWindow.toString()}
+                    // data={formatDate(startDateWindow)}
                   />
                 )}
               </Grid>

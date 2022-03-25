@@ -18,12 +18,14 @@ interface LinkProps {
   link: string;
   label: string | JSX.Element;
   className?: string;
+  target?: '_blank' | '_self';
 }
 
 export const LinkWithArrow = ({
   link,
   label,
   className,
+  target = '_blank',
 }: LinkProps): JSX.Element => {
   const styles = useStylesLink();
 
@@ -32,7 +34,7 @@ export const LinkWithArrow = ({
       href={link}
       className={className}
       sx={{ color: 'info.dark' }}
-      target="_blank"
+      target={target}
       rel="noreferrer"
     >
       {parseText(label)}

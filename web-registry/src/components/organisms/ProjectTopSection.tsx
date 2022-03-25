@@ -159,11 +159,13 @@ function ProjectTopLink({
   name,
   url,
   creditClassId,
+  target,
 }: {
   label: string;
   name?: string;
   url?: string | null;
   creditClassId?: string; // on-chain credit class id (e.g. "C01")
+  target?: '_blank' | '_self';
 }): JSX.Element | null {
   const styles = useStyles();
 
@@ -184,7 +186,12 @@ function ProjectTopLink({
       <Label sx={{ fontSize: { xs: '12px' }, mr: 2 }}>{label + ':'}</Label>
       <div className={styles.creditClassName}>
         {url ? (
-          <LinkWithArrow link={url} label={text} className={styles.link} />
+          <LinkWithArrow
+            link={url}
+            label={text}
+            className={styles.link}
+            target={target}
+          />
         ) : (
           <>{text}</>
         )}
@@ -292,6 +299,7 @@ function ProjectTopSection({
                         'http://regen.network/creditClassId'
                       ]
                     }
+                    target="_self"
                   />
                 </>
               )}

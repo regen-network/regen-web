@@ -1,9 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Link } from '@mui/material';
+import { SxProps } from '@mui/system';
 
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { parseText } from 'web-components/lib/utils/textParser';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 const useStylesLink = makeStyles(theme => ({
   arrowIcon: {
@@ -15,6 +17,7 @@ const useStylesLink = makeStyles(theme => ({
 }));
 
 interface LinkProps {
+  sx?: SxProps<Theme>;
   link: string;
   label: string | JSX.Element;
   className?: string;
@@ -22,6 +25,7 @@ interface LinkProps {
 }
 
 export const LinkWithArrow = ({
+  sx,
   link,
   label,
   className,
@@ -33,7 +37,7 @@ export const LinkWithArrow = ({
     <Link
       href={link}
       className={className}
-      sx={{ color: 'info.dark' }}
+      sx={{ ...sx, color: 'info.dark' }}
       target={target}
       rel="noreferrer"
     >

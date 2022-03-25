@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@mui/styles';
 import { Box, Grid, styled } from '@mui/material';
 import cx from 'clsx';
@@ -9,7 +8,6 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 // import { getFontSize } from 'web-components/lib/theme/sizing';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
-import { Label } from 'web-components/lib/components/label';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
@@ -28,7 +26,7 @@ import {
 } from '../../types/ledger/ecocredit';
 import { ProjectCreditBatchesTable } from '.';
 import { ProjectBatchTotals, AdditionalProjectMetadata } from '../molecules';
-import { LinkWithArrow } from '../atoms';
+import { ProjectTopLink } from '../atoms';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -120,25 +118,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(0.25),
     },
   },
-  creditClassDetail: {
-    display: 'flex',
-    alignItems: 'baseline',
-    paddingTop: theme.spacing(1.75),
-  },
-  darkText: {
-    color: theme.palette.info.dark,
-  },
-  link: {
-    position: 'relative',
-  },
-  creditClassName: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(14),
-    },
-  },
 }));
 
 const QuoteMark = styled('span')(({ theme }) => ({
@@ -153,52 +132,6 @@ const QuoteMark = styled('span')(({ theme }) => ({
     fontSize: theme.spacing(12),
   },
 }));
-
-function ProjectTopLink({
-  label,
-  name,
-  url,
-  creditClassId,
-  target,
-}: {
-  label: string;
-  name?: string;
-  url?: string | null;
-  creditClassId?: string; // on-chain credit class id (e.g. "C01")
-  target?: '_blank' | '_self';
-}): JSX.Element | null {
-  const styles = useStyles();
-
-  if (!label || !name) return null;
-
-  const text = (
-    <span className={styles.darkText}>
-      {name && ReactHtmlParser(name)}
-      {creditClassId && name ? (
-        <span> ({creditClassId})</span>
-      ) : (
-        <span>{creditClassId}</span>
-      )}
-    </span>
-  );
-  return (
-    <div className={styles.creditClassDetail}>
-      <Label sx={{ fontSize: { xs: '12px' }, mr: 2 }}>{label + ':'}</Label>
-      <div className={styles.creditClassName}>
-        {url ? (
-          <LinkWithArrow
-            link={url}
-            label={text}
-            className={styles.link}
-            target={target}
-          />
-        ) : (
-          <>{text}</>
-        )}
-      </div>
-    </div>
-  );
-}
 
 function ProjectTopSection({
   data,

@@ -64,6 +64,6 @@ export type qudtUnit =
 export const qudtUnitMap = {
   'http://qudt.org/1.1/vocab/unit#HA': 'hectares',
   'http://qudt.org/1.1/vocab/unit#AC': 'acres',
-  'unit:HA': 'hectares',
-  'unit:AC': 'acres',
+  'http://qudt.org/vocab/unit/HA': 'hectares',
+  'http://qudt.org/vocab/unit/AC': 'acres',
 };

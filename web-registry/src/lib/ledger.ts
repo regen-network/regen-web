@@ -8,8 +8,8 @@ export const expLedger = process.env.REACT_APP_EXP_LEDGER;
 const expUriBase = 'exp-';
 const uriBase = `${getApiUri()}/${expLedger ? expUriBase : ''}`;
 
-// Simple proxy endpoint for REST requests. We check for chainId as an on/off switch.
-export const ledgerRESTUri = chainId ? `${uriBase}ledger-rest` : undefined;
+// Simple proxy endpoint for REST requests.
+export const ledgerRESTUri = `${uriBase}ledger-rest`;
 
 export const ledgerRPCUri = `${uriBase}ledger`;
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@mui/styles';
 import { Box, Grid, styled } from '@mui/material';
 import cx from 'clsx';
@@ -14,6 +13,7 @@ import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ReadMore from 'web-components/lib/components/read-more';
+
 import { ProjectByHandleQuery } from '../../generated/graphql';
 import { useSdgByIriQuery } from '../../generated/sanity-graphql';
 import { getParty, getDisplayParty } from '../../lib/transform';
@@ -25,8 +25,8 @@ import {
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
 import { ProjectCreditBatchesTable } from '.';
-import { ProjectBatchTotals } from '../molecules';
-import { LinkWithArrow } from '../atoms';
+import { ProjectBatchTotals, AdditionalProjectMetadata } from '../molecules';
+import { ProjectTopLink } from '../atoms';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -118,31 +118,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(0.25),
     },
   },
-  creditClassDetail: {
-    display: 'flex',
-    alignItems: 'baseline',
-    paddingTop: theme.spacing(1.75),
-  },
-  creditClass: {
-    textTransform: 'uppercase',
-    marginRight: theme.spacing(2),
-    fontSize: theme.typography.pxToRem(12),
-    fontWeight: 800,
-  },
-  darkText: {
-    color: theme.palette.info.dark,
-  },
-  link: {
-    position: 'relative',
-  },
-  creditClassName: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(14),
-    },
-  },
 }));
 
 const QuoteMark = styled('span')(({ theme }) => ({
@@ -157,45 +132,6 @@ const QuoteMark = styled('span')(({ theme }) => ({
     fontSize: theme.spacing(12),
   },
 }));
-
-function ProjectTopLink({
-  label,
-  name,
-  url,
-  creditClassId,
-}: {
-  label: string;
-  name?: string;
-  url?: string | null;
-  creditClassId?: string; // on-chain credit class id (e.g. "C01")
-}): JSX.Element {
-  const styles = useStyles();
-
-  const text = (
-    <span className={styles.darkText}>
-      {name && ReactHtmlParser(name)}
-      {creditClassId && name ? (
-        <span> ({creditClassId})</span>
-      ) : (
-        <span>{creditClassId}</span>
-      )}
-    </span>
-  );
-  return (
-    <div className={styles.creditClassDetail}>
-      <Title className={styles.creditClass} variant="h5">
-        {label}:
-      </Title>
-      <div className={styles.creditClassName}>
-        {url ? (
-          <LinkWithArrow link={url} label={text} className={styles.link} />
-        ) : (
-          <>{text}</>
-        )}
-      </div>
-    </div>
-  );
-}
 
 function ProjectTopSection({
   data,
@@ -222,9 +158,19 @@ function ProjectTopSection({
   const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
   const landStewardPhoto =
     metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
+  const area =
+    metadata?.['http://regen.network/size']?.[
+      'http://qudt.org/1.1/schema/qudt#numericValue'
+    ]?.['@value'] ||
+    metadata?.['http://regen.network/projectSize']?.[
+      'http://qudt.org/schema/qudt/numericValue'
+    ]?.['@value'];
   const unit: qudtUnit | undefined =
     metadata?.['http://regen.network/size']?.[
       'http://qudt.org/1.1/schema/qudt#unit'
+    ]?.['@value'] ||
+    metadata?.['http://regen.network/projectSize']?.[
+      'http://qudt.org/schema/qudt/unit'
     ]?.['@value'];
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
@@ -232,13 +178,13 @@ function ProjectTopSection({
     creditClass?.methodologyByMethodologyId?.methodologyVersionsById
       ?.nodes?.[0];
   const quote = metadata?.['http://regen.network/projectQuote'];
-  const additionalCertification =
-    metadata?.['http://regen.network/additionalCertification'];
   const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
   const landStory = metadata?.['http://regen.network/landStory'];
   const landStewardStoryTitle =
     metadata?.['http://regen.network/landStewardStoryTitle'];
   const landStewardStory = metadata?.['http://regen.network/landStewardStory'];
+  const isVcsProject =
+    !!metadata?.['http://regen.network/vcsProjectId']?.['@value'];
 
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'
@@ -254,7 +200,6 @@ function ProjectTopSection({
     title: s.title || '',
     imageUrl: getSanityImgSrc(s.image),
   }));
-
   return (
     <Section classes={{ root: styles.section }}>
       <Grid container>
@@ -266,11 +211,7 @@ function ProjectTopSection({
               iconClassName={styles.icon}
               // TODO Format and show on-chain project location if no off-chain location
               place={metadata?.['http://schema.org/location']?.place_name}
-              area={
-                metadata?.['http://regen.network/size']?.[
-                  'http://qudt.org/1.1/schema/qudt#numericValue'
-                ]?.['@value']
-              }
+              area={area}
               areaUnit={unit && qudtUnitMap[unit]}
             />
             <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2.5 }}>
@@ -280,42 +221,30 @@ function ProjectTopSection({
                     label="credit class"
                     name={creditClassVersion.name}
                     url={
-                      creditClassVersion.metadata?.['http://schema.org/url']?.[
-                        '@value'
-                      ]
+                      isVcsProject
+                        ? `/credit-classes/${creditClass?.onChainId}`
+                        : creditClassVersion.metadata?.[
+                            'http://schema.org/url'
+                          ]?.['@value']
                     }
                     creditClassId={
                       creditClassVersion?.metadata?.[
                         'http://regen.network/creditClassId'
                       ]
                     }
-                  />
-                  {metadata?.['http://regen.network/projectActivity']?.[
-                    'http://schema.org/name'
-                  ] && (
-                    <ProjectTopLink
-                      label="project activity"
-                      name={
-                        metadata?.['http://regen.network/projectActivity']?.[
-                          'http://schema.org/name'
-                        ]
-                      }
-                      url={
-                        metadata?.['http://regen.network/projectActivity']?.[
-                          'http://schema.org/url'
-                        ]?.['@value']
-                      }
-                    />
-                  )}
-                  <ProjectTopLink
-                    label="offset generation method"
-                    name={
-                      creditClassVersion.metadata?.[
-                        'http://regen.network/offsetGenerationMethod'
-                      ]
-                    }
+                    target="_self"
                   />
                 </>
+              )}
+              {!isVcsProject && (
+                <ProjectTopLink
+                  label="offset generation method"
+                  name={
+                    creditClassVersion?.metadata?.[
+                      'http://regen.network/offsetGenerationMethod'
+                    ]
+                  }
+                />
               )}
               {methodologyVersion && (
                 <ProjectTopLink
@@ -323,17 +252,6 @@ function ProjectTopSection({
                   name={methodologyVersion.name}
                   url={
                     methodologyVersion.metadata?.['http://schema.org/url']?.[
-                      '@value'
-                    ]
-                  }
-                />
-              )}
-              {creditClass && additionalCertification && (
-                <ProjectTopLink
-                  label="additional certification"
-                  name={additionalCertification?.['http://schema.org/name']}
-                  url={
-                    additionalCertification?.['http://schema.org/url']?.[
                       '@value'
                     ]
                   }
@@ -348,6 +266,7 @@ function ProjectTopSection({
               )}
             </Box>
           </Box>
+
           {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
               <Box sx={{ pt: 6 }}>
@@ -372,6 +291,7 @@ function ProjectTopSection({
               {landStory}
             </Description>
           )}
+          {isVcsProject && <AdditionalProjectMetadata metadata={metadata} />}
           <LazyLoad offset={50}>
             {videoURL &&
               (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(
@@ -443,26 +363,6 @@ function ProjectTopSection({
               }}
             />
           )}
-          {/* TODO uncomment code below and display on-chain project.metadata */}
-          {/* <>
-            <Box
-              sx={theme => ({
-                fontSize: { xs: theme.spacing(3), sm: theme.spacing(3.5) },
-                color: theme.palette.primary.contrastText,
-                fontWeight: 800,
-                fontFamily: 'Muli',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                pt: { xs: 6.25, sm: 11.75 },
-                pb: { xs: 2.75, sm: 5.5 },
-              })}
-            >
-              additional metadata
-            </Box>
-            <Description fontSize={getFontSize('metadata')}>
-              lorem ipsum
-            </Description>
-          </> */}
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard

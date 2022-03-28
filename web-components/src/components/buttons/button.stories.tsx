@@ -3,6 +3,7 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
+import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 export default {
@@ -36,5 +37,12 @@ export const tableActionButtons = (): JSX.Element => (
         { label: 'three', onClick: () => alert('clicked three') },
       ]}
     />
+  </>
+);
+
+export const expandButton = (): JSX.Element => (
+  <>
+    <ExpandButton onClick={() => {}} expanded={false} />
+    <ExpandButton onClick={() => {}} expanded={true} />
   </>
 );

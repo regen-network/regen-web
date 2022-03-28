@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import cx from 'clsx';
 import Fade from '@mui/material/Fade';
 
-import OutlinedButton from '../buttons/OutlinedButton';
+import { ExpandButton } from '../buttons/ExpandButton';
 import Description from '../description';
-import ArrowDownIcon from '../icons/ArrowDownIcon';
 import { truncate, Texts } from './truncate';
 import { FontSizes } from '../../theme/sizing';
 
@@ -53,41 +52,22 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   classes,
 }) => {
   const styles = useStyles({});
-  const theme = useTheme();
-
   const [expanded, setExpanded] = useState(false);
   const fontSize: FontSizes = { xs: '1rem', sm: '1.375rem' };
   const texts: Texts = truncate(children, maxLength, restMinLength);
-
-  const handleChange = (): void => {
-    setExpanded(prev => !prev);
-  };
-
-  const ReadButton = (): JSX.Element => (
-    <OutlinedButton
-      onClick={handleChange}
-      classes={{ root: cx(styles.button, styles.buttonLabel) }}
-      endIcon={
-        expanded ? (
-          <ArrowDownIcon direction="up" color={theme.palette.secondary.main} />
-        ) : (
-          <ArrowDownIcon
-            direction="down"
-            color={theme.palette.secondary.main}
-          />
-        )
-      }
-    >
-      read {expanded ? 'less' : 'more'}
-    </OutlinedButton>
-  );
 
   return (
     <div className={cx(styles.root, classes?.root)}>
       <div className={cx(styles.textContainer, classes?.textContainer)}>
         <Description className={classes?.description} fontSize={fontSize}>
           {texts.truncated}
-          {texts.rest && !expanded && <ReadButton />}
+          {texts.rest && !expanded && (
+            <ExpandButton
+              sx={{ ml: 4 }}
+              onClick={() => setExpanded(!expanded)}
+              expanded={expanded}
+            />
+          )}
         </Description>
         <Fade in={expanded} mountOnEnter unmountOnExit>
           {/* https://mui.com/guides/migration-v4/#cannot-read-property-scrolltop-of-null */}
@@ -95,7 +75,13 @@ const ReadMore: React.FC<ReadMoreProps> = ({
             <Description className={classes?.description} fontSize={fontSize}>
               {!texts.rest.startsWith('\n') && '\n'}
               {texts.rest}
-              {texts.rest && expanded && <ReadButton />}
+              {texts.rest && expanded && (
+                <ExpandButton
+                  sx={{ ml: 4 }}
+                  onClick={() => setExpanded(!expanded)}
+                  expanded={expanded}
+                />
+              )}
             </Description>
           </div>
         </Fade>

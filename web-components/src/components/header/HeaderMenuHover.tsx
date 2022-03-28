@@ -3,7 +3,7 @@ import cx from 'clsx';
 import { makeStyles, useTheme } from '@mui/styles';
 import { MenuItem } from '@mui/material';
 
-import MenuHover from '../menu-hover';
+import MenuHover, { MenuTitle } from '../menu-hover';
 import { NavLinkProps } from './NavLink';
 import {
   HeaderDropdownColumn,
@@ -18,8 +18,11 @@ const useStyles = makeStyles(theme => ({
     paddingRight: theme.spacing(7.375),
     paddingLeft: theme.spacing(7.375),
     'background-color': 'inherit',
-    '& a:hover': {
-      borderBottom: `2px solid ${theme.palette.secondary.main}`,
+    '& > a': {
+      borderBottom: '2px solid transparent',
+      '&:hover': {
+        borderBottom: `2px solid ${theme.palette.secondary.main}`,
+      },
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingRight: theme.spacing(1.25),
@@ -31,12 +34,17 @@ const useStyles = makeStyles(theme => ({
       borderBottom: `2px solid ${theme.palette.secondary.main}`,
     },
   },
+  title: {
+    fontSize: theme.spacing(3.25),
+    letterSpacing: '1px',
+    fontFamily: 'Muli',
+    textTransform: 'uppercase',
+  },
 }));
 
-export interface HeaderMenuItem {
-  title: string;
+export interface HeaderMenuItem extends MenuTitle {
   href?: string;
-  render?: () => JSX.Element;
+  renderDropdownItems?: () => JSX.Element;
   dropdownItems?: HeaderDropdownItemProps[];
 }
 
@@ -50,8 +58,12 @@ const HeaderMenuHover: React.FC<{
   const styles = useStyles();
 
   const Content: React.FC = () => {
-    if (item.href && !item.dropdownItems && !item.render) {
-      return <LinkComponent href={item.href}>{item.title}</LinkComponent>;
+    if (item.href && !item.dropdownItems && !item.renderDropdownItems) {
+      return (
+        <LinkComponent overrideClassname={styles.title} href={item.href}>
+          {item.title}
+        </LinkComponent>
+      );
     }
     return (
       <MenuHover
@@ -60,16 +72,18 @@ const HeaderMenuHover: React.FC<{
             ? theme.palette.secondary.main
             : theme.palette.secondary.contrastText
         }
-        text={item.title}
+        title={item.title}
+        renderTitle={item.renderTitle}
+        classes={{ title: styles.title }}
       >
         {/* `render` overrides default dropdown */}
-        {item.dropdownItems && !item.render && (
+        {item.dropdownItems && !item.renderDropdownItems && (
           <HeaderDropdownColumn
             items={item.dropdownItems}
             linkComponent={LinkComponent}
           />
         )}
-        {item.render && item.render()}
+        {item.renderDropdownItems && item.renderDropdownItems()}
       </MenuHover>
     );
   };

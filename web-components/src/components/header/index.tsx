@@ -86,15 +86,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
         color: theme.palette.primary.light,
         background: theme.palette.primary.main,
       },
-      '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
-        fontSize: theme.spacing(3.25),
-        letterSpacing: '1px',
-      },
       '& ul > li > a, & ul > li > div > span': {
         color: props.color,
         textDecoration: 'none',
-        fontFamily: 'Muli',
-        textTransform: 'uppercase',
+        paddingTop: theme.spacing(0.25),
         '&:link, &:visited, &:hover, &:active': {
           textDecoration: 'none',
         },

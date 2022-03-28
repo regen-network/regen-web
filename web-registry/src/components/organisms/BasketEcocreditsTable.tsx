@@ -6,8 +6,7 @@ import {
   ActionsTable,
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
-import { formatNumber } from 'web-components/lib/components/table';
-import { formatDate } from 'web-components/lib/utils/format';
+import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
 import { Link } from '../atoms';
 import { NoCredits } from '../molecules';

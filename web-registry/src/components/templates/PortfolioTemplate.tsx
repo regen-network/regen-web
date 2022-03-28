@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
@@ -7,13 +7,7 @@ import Title from 'web-components/lib/components/title';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { getEcocreditsForAccount } from '../../lib/ecocredit';
-import { ledgerRESTUri } from '../../lib/ledger';
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
-import type {
-  BatchInfoWithBalance,
-  TableBaskets,
-} from '../../types/ledger/ecocredit';
 
 interface PortfolioTemplateProps {
   accountAddress?: string;
@@ -43,42 +37,6 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   children,
 }) => {
   const styles = useStyles();
-  const [credits, setCredits] = useState<BatchInfoWithBalance[]>([]);
-  const [baskets, setBaskets] = useState<TableBaskets[]>([]);
-
-  useEffect(() => {
-    if (!ledgerRESTUri || !accountAddress) return;
-    const fetchData = async (): Promise<void> => {
-      try {
-        const credits = await getEcocreditsForAccount(accountAddress);
-        if (credits) setCredits(credits);
-      } catch (err) {
-        console.error(err); // eslint-disable-line no-console
-      }
-    };
-    fetchData();
-
-    // Hardcoded basket data for testing purposes
-    // TODO fetch from ledger instead
-    setBaskets([
-      {
-        id: '1',
-        basketDenom: 'eco.uC.rNCT',
-        displayDenom: 'eco.C.rNCT',
-        name: 'rNCT',
-        disableAutoRetire: false,
-        creditTypeAbbrev: 'C',
-        dateCriteria: {
-          startDateWindow: '1000',
-        },
-        exponent: '6',
-        balance: {
-          denom: 'eco.uC.rNCT',
-          amount: '10000000',
-        },
-      },
-    ]);
-  }, [accountAddress]);
 
   return (
     <Box sx={{ backgroundColor: 'grey.50', pb: { xs: 21.25, sm: 28.28 } }}>
@@ -89,7 +47,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             basket tokens
           </Title>
           <BasketsTable
-            baskets={baskets}
+            address={accountAddress}
             renderActionButtons={renderBasketActionButtons}
           />
         </Box>
@@ -98,7 +56,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             ecocredits
           </Title>
           <EcocreditsTable
-            credits={credits}
+            address={accountAddress}
             renderActionButtons={renderCreditActionButtons}
           />
         </Box>

@@ -10,55 +10,25 @@ import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  senderField: {
-    '& label': {
-      color: `${theme.palette.primary.contrastText} !important`,
-    },
-    '& .MuiInputBase-formControl': {
-      backgroundColor: theme.palette.info.light,
-      marginTop: theme.spacing(2.25),
-    },
-  },
   textField: {
-    marginTop: theme.spacing(10.75),
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
-    },
-  },
-  description: {
-    marginBottom: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
+      marginTop: theme.spacing(10.75),
     },
     [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
+      marginTop: theme.spacing(8.25),
     },
-    '& a': {
-      cursor: 'pointer',
-    },
-  },
-  checkboxLabel: {
-    marginTop: theme.spacing(10.75),
-    marginBottom: theme.spacing(10.75),
-    alignItems: 'initial',
-    '& .MuiCheckbox-root': {
-      alignSelf: 'end',
-    },
-  },
-  checkboxDescription: {
-    color: theme.palette.primary.contrastText,
-    fontSize: theme.spacing(4.5),
-    fontWeight: 'bold',
-    marginLeft: theme.spacing(1),
   },
 }));
 
-interface FormProps {
+export interface BasketPutProps {
   basketOptions: Option[];
   batchDenom: string;
   availableTradableAmount: number;
-  onClose: () => void;
   onSubmit: () => void;
+}
+
+interface FormProps extends BasketPutProps {
+  onClose: () => void;
 }
 
 interface FormValues {

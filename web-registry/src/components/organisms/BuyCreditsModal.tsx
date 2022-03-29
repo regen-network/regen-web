@@ -52,9 +52,6 @@ const useStyles = makeStyles(theme => ({
       paddingRight: 0,
     },
   },
-  formWrapper: {
-    paddingBottom: theme.spacing(12),
-  },
   thumbnailCard: {
     display: 'flex',
     alignItems: 'center',
@@ -294,7 +291,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
         >
           {({ values, submitForm, isValid, isSubmitting, submitCount }) => {
             return (
-              <div className={styles.formWrapper}>
+              <div>
                 <Form translate="yes">
                   <div className={styles.field}>
                     <Title className={styles.groupTitle} variant="h5">

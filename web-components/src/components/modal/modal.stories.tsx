@@ -6,6 +6,7 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { Button, Card, Avatar, CardMedia } from '@mui/material';
 import { CreditSendModal } from 'web-components/lib/components/modal/CreditSendModal';
 import { CreditRetireModal } from 'web-components/lib/components/modal/CreditRetireModal';
+import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
 
 export default {
   title: 'Modal',
@@ -207,5 +208,16 @@ export const creditRetireModal = (): JSX.Element => (
     batchDenom={'C01-20190101-20201010-02'}
     open={true}
     onClose={() => null}
+  />
+);
+
+export const basketPutModal = (): JSX.Element => (
+  <BasketPutModal
+    basketOptions={[{ label: 'NCT', value: 'eco.uC.NCT' }]}
+    availableTradableAmount={1000}
+    batchDenom={'C01-20190101-20201010-02'}
+    open={true}
+    onClose={() => null}
+    onSubmit={() => alert('submit')}
   />
 );

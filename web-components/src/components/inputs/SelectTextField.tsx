@@ -1,21 +1,24 @@
 import React from 'react';
+import { TextFieldProps } from 'formik-mui';
 
 import DropdownIcon from '../icons/DropdownIcon';
 import TextField from './TextField';
-// import { StandardTextFieldProps as TextFieldProps } from '@mui/material/TextField';
-import { TextFieldProps } from 'formik-mui';
+import { DefaultStyleProps } from './FieldFormControl';
 
 export interface Option {
   value: string;
   label: string;
 }
 
-export interface SelectTextFieldProps extends TextFieldProps {
+export interface SelectTextFieldProps
+  extends TextFieldProps,
+    DefaultStyleProps {
   options?: Option[];
 }
 
 export default function SelectTextField({
   options,
+  defaultStyle = true,
   ...props
 }: SelectTextFieldProps): JSX.Element {
   return (
@@ -26,6 +29,7 @@ export default function SelectTextField({
         native: true,
         IconComponent: DropdownIcon,
       }}
+      defaultStyle={defaultStyle}
     >
       {options &&
         options.map(option => (

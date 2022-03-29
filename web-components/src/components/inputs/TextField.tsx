@@ -14,6 +14,7 @@ export interface RegenTextFieldProps extends TriggerTextFieldProps {
   children?: any;
   errors?: boolean;
   optional?: boolean;
+  defaultStyle?: boolean;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
 }
@@ -42,7 +43,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
     '& .MuiInputBase-formControl': {
-      marginTop: props.label ? theme.spacing(4) : 0,
+      marginTop: props.label ? theme.spacing(2.25) : 0,
       [theme.breakpoints.up('sm')]: {
         marginBottom: props.errors ? theme.spacing(5.25) : 0,
       },
@@ -130,6 +131,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
   }),
+  default: {
+    '&:first-of-type': {
+      marginTop: 0,
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.typography.pxToRem(40),
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.typography.pxToRem(33),
+    },
+  },
 }));
 
 function TriggerTextField({
@@ -156,19 +168,25 @@ export default function RegenTextField({
   triggerOnChange,
   errors = false,
   optional = false,
+  defaultStyle = true,
   children,
   startAdornment,
   endAdornment,
   ...props
 }: RegenTextFieldProps): JSX.Element {
   const classes = useStyles({ ...props, optional, errors });
+  const baseRootClasses = [classes.root, props.className];
+  const rootClasses = defaultStyle
+    ? [classes.default, ...baseRootClasses]
+    : baseRootClasses;
+
   return (
     <TriggerTextField
       {...props}
       variant="standard"
       transformValue={transformValue}
       triggerOnChange={triggerOnChange}
-      className={clsx(classes.root, props.className)}
+      className={clsx(rootClasses)}
       InputProps={{
         disableUnderline: true,
         startAdornment: startAdornment ? (

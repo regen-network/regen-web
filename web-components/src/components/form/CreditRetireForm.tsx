@@ -51,15 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(14),
     },
   },
-  textField: {
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
-    },
-  },
   noteTextField: {
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
-    },
     '& label': {
       whiteSpace: 'unset',
     },
@@ -79,10 +71,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginLeft: theme.spacing(2.375),
       },
     },
-  },
-  postalCodeField: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(12.5),
   },
 }));
 
@@ -135,7 +123,6 @@ export const CreditRetireFields = ({
         label={'Amount to retire'}
         availableAmount={availableTradableAmount}
         batchDenom={batchDenom}
-        className={styles.textField}
       />
       <Title className={styles.groupTitle} variant="h5">
         Transaction note
@@ -147,6 +134,7 @@ export const CreditRetireFields = ({
         component={TextField}
         className={styles.noteTextField}
         optional
+        defaultStyle={false}
       />
       <Title className={styles.groupTitle} variant="h5">
         Location of retirement
@@ -157,18 +145,13 @@ export const CreditRetireFields = ({
       </Description>
       <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationStateField
-            country={country}
-            className={styles.textField}
-            optional
-          />
+          <LocationStateField country={country} optional />
         </Grid>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationCountryField className={styles.textField} />
+          <LocationCountryField />
         </Grid>
       </Grid>
       <Field
-        className={styles.postalCodeField}
         component={ControlledTextField}
         label="Postal Code"
         name="postalCode"

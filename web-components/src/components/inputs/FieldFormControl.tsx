@@ -2,6 +2,7 @@ import React from 'react';
 import { FieldProps, getIn } from 'formik';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import { FormHelperText, FormControl } from '@mui/material';
+import cx from 'clsx';
 
 import FormLabel from './FormLabel';
 
@@ -10,7 +11,11 @@ interface RenderProps {
   handleBlur: (value: any) => void;
 }
 
-interface Props extends FieldProps {
+export interface DefaultStyleProps {
+  defaultStyle?: boolean;
+}
+
+interface Props extends FieldProps, DefaultStyleProps {
   children: (childProps: RenderProps) => React.ReactNode;
   className?: string;
   description?: string;
@@ -52,6 +57,17 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginBottom: theme.spacing(2),
     },
   },
+  default: {
+    '&:first-of-type': {
+      marginTop: 0,
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.typography.pxToRem(40),
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.typography.pxToRem(33),
+    },
+  },
 }));
 
 /**
@@ -67,6 +83,7 @@ export default function FieldFormControl({
   optional,
   labelSubText,
   onExampleClick,
+  defaultStyle = true,
   ...fieldProps
 }: Props): JSX.Element {
   const { form, field } = fieldProps;
@@ -90,8 +107,10 @@ export default function FieldFormControl({
     description,
     error: hasError,
   });
+  const rootClasses = defaultStyle ? [styles.default, className] : className;
+
   return (
-    <FormControl className={className} fullWidth>
+    <FormControl className={cx(rootClasses)} fullWidth>
       <FormLabel
         className={styles.label}
         label={label}

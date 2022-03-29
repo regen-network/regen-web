@@ -12,11 +12,7 @@ import ControlledTextField from '../inputs/ControlledTextField';
 import Title from '../title';
 import Description from '../description';
 import Submit from './Submit';
-import {
-  requiredMessage,
-  invalidAmount,
-  insufficientCredits,
-} from '../inputs/validation';
+import { requiredMessage, validateAmount } from '../inputs/validation';
 
 /**
  * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).
@@ -191,13 +187,10 @@ export const validateCreditRetire = (
     errors.country = requiredMessage;
   }
 
-  if (!values.retiredAmount) {
-    errors.retiredAmount = requiredMessage;
-  } else if (Math.sign(values.retiredAmount) !== 1) {
-    errors.retiredAmount = invalidAmount;
-  } else if (values.retiredAmount > availableTradableAmount) {
-    errors.retiredAmount = insufficientCredits;
-  }
+  errors.retiredAmount = validateAmount(
+    availableTradableAmount,
+    values.retiredAmount,
+  );
 
   return errors;
 };

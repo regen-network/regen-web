@@ -16,8 +16,8 @@ import {
 import Submit from './Submit';
 import {
   requiredMessage,
-  invalidAmount,
   insufficientCredits,
+  validateAmount,
 } from '../inputs/validation';
 
 /**
@@ -140,13 +140,10 @@ const CreditSendForm: React.FC<FormProps> = ({
       errors.recipient = requiredMessage;
     }
 
-    if (!values.tradableAmount) {
-      errors.tradableAmount = requiredMessage;
-    } else if (Math.sign(values.tradableAmount) !== 1) {
-      errors.tradableAmount = invalidAmount;
-    } else if (values.tradableAmount > availableTradableAmount) {
-      errors.tradableAmount = insufficientCredits;
-    }
+    errors.tradableAmount = validateAmount(
+      availableTradableAmount,
+      values.tradableAmount,
+    );
 
     // Retire form validation (optional subform)
     if (values.withRetire) {

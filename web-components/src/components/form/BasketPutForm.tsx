@@ -1,39 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from '../../theme/muiTheme';
-import TextField from '../inputs/TextField';
 import AmountField from '../inputs/AmountField';
-import Description from '../description';
-import CheckboxLabel from '../inputs/CheckboxLabel';
+import SelectTextField, { Option } from '../inputs/SelectTextField';
 
 import Submit from './Submit';
-import {
-  requiredMessage,
-  invalidAmount,
-  insufficientCredits,
-} from '../inputs/validation';
-
-/**
- * Send sends tradable credits from one account to another account.
- * Sent credits can either be tradable or retired on receipt.
- * https://docs.regen.network/modules/ecocredit/03_messages.html#msgsend
- *
- * Validation:
- *    sender: must ba a valid address, and their signature must be present in the transaction
- *    recipient: must ba a valid address
- *    credits: must not be empty
- *    batch_denom: must be a valid batch denomination
- *    tradable_amount: must not be negative
- *    retired_amount: must not be negative
- *  if retired_amount is positive:
- *    retirement_location: must be a valid location
- *
- * Also:
- * https://docs.regen.network/modules/ecocredit/protobuf.html#msgsend
- * https://docs.regen.network/modules/ecocredit/protobuf.html#msgsend-sendcredits
- */
+import { requiredMessage, validateAmount } from '../inputs/validation';
 
 const useStyles = makeStyles((theme: Theme) => ({
   senderField: {
@@ -79,142 +53,71 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-// Output (submit)
-interface SendCredits {
-  batchDenom: string;
-  tradableAmount: string;
-  retiredAmount?: string;
-  retirementLocation?: string;
-}
-
-interface MsgSend {
-  sender: string;
-  recipient: string;
-  credits: SendCredits;
-}
-
-// Input (args)
 interface FormProps {
-  sender: string;
+  basketOptions: Option[];
   batchDenom: string;
   availableTradableAmount: number;
   onClose: () => void;
+  onSubmit: () => void;
 }
 
-interface FormValues extends RetireFormValues {
-  sender: string;
-  recipient: string;
-  tradableAmount: number;
-  withRetire?: boolean;
+interface FormValues {
+  basketDenom?: string;
+  amount?: number;
 }
 
-const CreditSendForm: React.FC<FormProps> = ({
-  sender,
+const BasketPutForm: React.FC<FormProps> = ({
   batchDenom,
+  basketOptions,
   availableTradableAmount,
   onClose,
+  onSubmit,
 }) => {
   const styles = useStyles();
+  const [options, setOptions] = useState<Option[]>([]);
 
   const initialValues = {
-    sender,
-    recipient: '',
-    tradableAmount: 0,
-    withRetire: false,
-    ...initialValuesRetire,
+    basketDenom: undefined,
+    amount: undefined,
   };
+
+  useEffect(() => {
+    basketOptions.unshift({ value: '', label: 'choose basket' });
+    setOptions(basketOptions);
+  }, [basketOptions]);
 
   const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
     let errors: FormikErrors<FormValues> = {};
 
-    if (!values.sender) {
-      errors.sender = requiredMessage;
+    if (!values.basketDenom) {
+      errors.basketDenom = requiredMessage;
     }
-
-    if (!values.recipient) {
-      errors.recipient = requiredMessage;
-    }
-
-    if (!values.tradableAmount) {
-      errors.tradableAmount = requiredMessage;
-    } else if (Math.sign(values.tradableAmount) !== 1) {
-      errors.tradableAmount = invalidAmount;
-    } else if (values.tradableAmount > availableTradableAmount) {
-      errors.tradableAmount = insufficientCredits;
-    }
-
-    // Retire form validation (optional subform)
-    if (values.withRetire) {
-      errors = validateCreditRetire(availableTradableAmount, values, errors);
-
-      // combo validation: send + retire
-      if (
-        Number(values.tradableAmount) + Number(values.retiredAmount) >
-        availableTradableAmount
-      ) {
-        errors.tradableAmount = insufficientCredits;
-        errors.retiredAmount = insufficientCredits;
-      }
-    }
+    errors.amount = validateAmount(availableTradableAmount, values.amount);
 
     return errors;
-  };
-
-  const submitHandler = async (values: FormValues): Promise<MsgSend | void> => {
-    // TODO holder, amount string, check withRetire
-    console.log('*** submitHandler', values);
   };
 
   return (
     <Formik
       initialValues={initialValues}
       validate={validateHandler}
-      onSubmit={submitHandler}
+      onSubmit={onSubmit}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
           <Field
-            name="sender"
-            type="text"
-            label="Sender"
-            component={TextField}
-            className={styles.senderField}
-            disabled
-          />
-          <Field
-            name="recipient"
-            type="text"
-            label="Recipient"
-            component={TextField}
-            className={styles.textField}
+            name="basketDenom"
+            label="Choose basket"
+            component={SelectTextField}
+            options={options}
           />
           <AmountField
-            name={'tradableAmount'}
-            label={'Amount to send'}
+            name="amount"
+            label="Amount"
             availableAmount={availableTradableAmount}
             batchDenom={batchDenom}
             className={styles.textField}
           />
-
-          <Field
-            component={CheckboxLabel}
-            type="checkbox"
-            name="withRetire"
-            className={styles.checkboxLabel}
-            label={
-              <Description className={styles.checkboxDescription}>
-                Retire credits upon transfer
-              </Description>
-            }
-          />
-
-          {values.withRetire && (
-            <CreditRetireFields
-              country={values.country}
-              availableTradableAmount={availableTradableAmount}
-              batchDenom={batchDenom}
-            />
-          )}
 
           <Submit
             isSubmitting={isSubmitting}
@@ -223,7 +126,7 @@ const CreditSendForm: React.FC<FormProps> = ({
             isValid={isValid}
             submitCount={submitCount}
             submitForm={submitForm}
-            label={'Send'}
+            label="Put in basket"
           />
         </Form>
       )}
@@ -231,4 +134,4 @@ const CreditSendForm: React.FC<FormProps> = ({
   );
 };
 
-export { CreditSendForm };
+export { BasketPutForm };

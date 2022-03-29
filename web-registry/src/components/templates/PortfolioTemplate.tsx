@@ -11,6 +11,8 @@ import Title from 'web-components/lib/components/title';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
+import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
+import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
@@ -18,6 +20,7 @@ import { useEcocredits } from '../../hooks';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
+import { Label } from 'web-components/lib/components/label';
 // import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
 
@@ -59,6 +62,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   const [creditBaskets, setCreditBaskets] = useState<
     (QueryBasketResponse | undefined)[][]
   >([]);
+  const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
 
   useEffect(() => {
     // Get available baskets to put credits into
@@ -90,7 +94,9 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
                         {
                           icon: <TakeFromBasket />,
                           label: 'Take from basket',
-                          onClick: () => `TODO take from basket ${i}`,
+                          // eslint-disable-next-line no-console
+                          onClick: () =>
+                            console.log(`TODO take from basket ${i}`),
                         },
                         // This will be handled from osmosis
                         // so hiding these for now
@@ -126,7 +132,8 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
                       // {
                       //   icon: <Sell />,
                       //   label: 'Sell',
-                      //   onClick: () => `TODO sell credit ${i}`,
+                      //   // eslint-disable-next-line no-console
+                      //   onClick: () => console.log(`TODO sell credit ${i}`),
                       // },
                       {
                         icon: (
@@ -137,7 +144,8 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
                           />
                         ),
                         label: 'Send',
-                        onClick: () => `TODO send credit ${i}`,
+                        // eslint-disable-next-line no-console
+                        onClick: () => console.log(`TODO send credit ${i}`),
                       },
                       {
                         icon: (
@@ -148,7 +156,8 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
                           />
                         ),
                         label: 'Retire',
-                        onClick: () => `TODO retire credit ${i}`,
+                        // eslint-disable-next-line no-console
+                        onClick: () => console.log(`TODO retire credit ${i}`),
                       },
                     ];
 
@@ -159,7 +168,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
                         // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
                         icon: <PutInBasket />,
                         label: 'Put in basket',
-                        onClick: () => `TODO put in basket${i}`,
+                        onClick: () => setBasketPutOpen(i),
                       });
                     }
                     return <TableActionButtons buttons={buttons} />;
@@ -168,6 +177,25 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             }
           />
         </Box>
+        {basketPutOpen > -1 && (
+          <BasketPutModal
+            basketOptions={
+              creditBaskets[basketPutOpen]
+                .map(b => ({
+                  label: b?.basket?.name,
+                  value: b?.basket?.basketDenom,
+                }))
+                .filter(v => v.label && v.value) as Option[]
+            }
+            availableTradableAmount={Number(
+              credits[basketPutOpen].tradable_amount,
+            )}
+            batchDenom={credits[basketPutOpen].batch_denom}
+            open={basketPutOpen > -1}
+            onClose={() => setBasketPutOpen(-1)}
+            onSubmit={() => alert('submit')}
+          />
+        )}
       </Section>
     </Box>
   );
@@ -180,9 +208,9 @@ export interface WithBasketsProps {
 export function withBaskets<P>(
   WrappedComponent: React.ComponentType<P & WithBasketsProps>,
 ): React.FC<P & WithBasketsProps> {
-  const ComponentWithExtraInfo: React.FC<P> = (props: P) => {
+  const ComponentWithBaskets: React.FC<P> = (props: P) => {
     const baskets = useQueryBaskets();
     return <WrappedComponent {...props} baskets={baskets} />;
   };
-  return ComponentWithExtraInfo;
+  return ComponentWithBaskets;
 }

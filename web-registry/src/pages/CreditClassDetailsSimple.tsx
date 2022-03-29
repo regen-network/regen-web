@@ -220,8 +220,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                   data={
                     <Link
                       href={
-                        metadata?.['regen:sourceRegistry']?.['schema:url']
-                          ?.value
+                        metadata?.['regen:sourceRegistry']?.['schema:url']?.[
+                          '@value'
+                        ]
                       }
                       target="_blank"
                     >

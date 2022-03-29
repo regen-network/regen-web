@@ -11,6 +11,8 @@ import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg'
 import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-basket.svg';
 // import { ReactComponent as WithdrawIBC } from '../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
+import { useBasketTokens } from '../hooks';
+import useTakeBasketTokens from '../hooks/useTakeBasketTokens';
 
 const useStyles = makeStyles((theme: Theme) => ({
   arrow: {
@@ -23,7 +25,16 @@ export const MyEcocredits: React.FC = () => {
   const theme = useTheme();
   const styles = useStyles();
   const walletContext = useWallet();
+  const { signTake } = useTakeBasketTokens();
   const accountAddress = walletContext.wallet?.address;
+  const baskets = useBasketTokens(accountAddress);
+
+  const takeFromBasket = (rowIndex: number): void => {
+    if (!accountAddress) return;
+    const selectedRow = baskets[rowIndex];
+    console.log(selectedRow, 'accountAddress ', accountAddress);
+    signTake(accountAddress, selectedRow.basket.basketDenom, 11);
+  };
 
   return (
     <PortfolioTemplate
@@ -74,7 +85,7 @@ export const MyEcocredits: React.FC = () => {
             {
               icon: <TakeFromBasket />,
               label: 'Take from basket',
-              onClick: () => `TODO take from basket ${i}`,
+              onClick: () => takeFromBasket(i),
             },
             // This will be handled from osmosis
             // so hiding these for now

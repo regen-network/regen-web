@@ -6,6 +6,8 @@ import {
 } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
+import { OfflineSigner } from '@cosmjs/proto-signing';
+
 import { ledgerRPCUri, ledgerRESTUri, chainId } from './ledger';
 
 interface ChainKey {
@@ -18,6 +20,7 @@ interface ChainKey {
 }
 
 interface Sender {
+  offlineSigner?: OfflineSigner;
   address: string;
   shortAddress: string;
 }
@@ -81,9 +84,10 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   const getWallet = async (): Promise<void> => {
     const key = await checkForWallet();
-
-    if (key && key.bech32Address) {
+    const offlineSigner = await getOfflineSigner();
+    if (key && key.bech32Address && offlineSigner) {
       const sender = {
+        offlineSigner,
         address: key.bech32Address,
         shortAddress: truncate(key.bech32Address),
       };
@@ -200,6 +204,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   /**
    * Sign a transaction for sending tokens to a reciptient
    */
+  // TODO Remove, we don't need this anymore, we should use @regen-network/api instead
   const signSend = async (
     amount: number,
     recipient: string,
@@ -246,6 +251,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   /**
    * Broadcast a signed transaction and wait for transaction hash
    */
+  // TODO Remove, we don't need this anymore, we should use @regen-network/api instead
   const broadcast = async (signedTxBytes: Uint8Array): Promise<string> => {
     const client = await getClient();
     const result = await client.broadcastTx(signedTxBytes);
@@ -255,6 +261,23 @@ export const WalletProvider: React.FC = ({ children }) => {
     return result.transactionHash;
   };
 
+  const getOfflineSigner = async (): Promise<OfflineSigner | undefined> => {
+    if (chainId && window?.keplr) {
+      try {
+        await window.keplr.enable(chainId);
+        const offlineSigner = window.getOfflineSignerAuto
+          ? await window.getOfflineSignerAuto(chainId)
+          : undefined;
+        return offlineSigner;
+      } catch (err) {
+        alert(`Wallet error: ${err}`);
+        return Promise.reject();
+      }
+    }
+    return Promise.reject('No chain id provided');
+  };
+
+  // TODO Remove, we don't need this anymore, we should use @regen-network/api instead
   const getClient = async (): Promise<SigningStargateClient> => {
     if (chainId && ledgerRPCUri) {
       try {

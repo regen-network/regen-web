@@ -17,10 +17,10 @@ import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
 import { useEcocredits } from '../../hooks';
+import { useLedger } from '../../ledger';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
-import { Label } from 'web-components/lib/components/label';
 // import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
 
@@ -58,6 +58,9 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
 }) => {
   const styles = useStyles();
   const theme = useTheme();
+  const { api } = useLedger();
+  console.log(api?.msgClient);
+
   const credits = useEcocredits(accountAddress);
   const [creditBaskets, setCreditBaskets] = useState<
     (QueryBasketResponse | undefined)[][]

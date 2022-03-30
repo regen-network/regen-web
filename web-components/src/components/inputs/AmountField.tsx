@@ -12,9 +12,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(2),
     },
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
-    },
   },
   mainLabel: {
     marginRight: theme.spacing(8),

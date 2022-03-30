@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
+import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import {
   ActionsTable,
@@ -13,16 +14,18 @@ import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
 
 type BasketTableProps = {
   address?: string;
+  baskets?: QueryBasketsResponse;
   renderActionButtons?: RenderActionButtonsFunc;
 };
 
 export const BasketsTable: React.FC<BasketTableProps> = ({
   address,
+  baskets,
   renderActionButtons,
 }) => {
-  const baskets = useBasketTokens(address);
+  const basketTokens = useBasketTokens(address, baskets);
 
-  if (!baskets?.length) {
+  if (!basketTokens?.length) {
     return <NoCredits title="No basket tokens to display" />;
   }
 
@@ -44,7 +47,7 @@ export const BasketsTable: React.FC<BasketTableProps> = ({
         </Box>,
         'Amount available',
       ]}
-      rows={baskets.map((row, i) => {
+      rows={basketTokens.map((row, i) => {
         return [
           <Grid container wrap="nowrap">
             <Grid item>

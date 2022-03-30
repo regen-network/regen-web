@@ -1,19 +1,16 @@
 import { useState, useEffect, useCallback } from 'react';
 
 import {
+  DeepPartial,
+  QueryBalanceRequest,
   QueryBalanceResponse,
   QueryClientImpl,
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 import { useLedger } from '../ledger';
 
-type Balance = {
-  address?: string;
-  denom?: string;
-};
-
 type FetchBalance = (
-  args: Balance,
+  request: DeepPartial<QueryBalanceRequest>,
 ) => Promise<QueryBalanceResponse | undefined>;
 
 export default function useQueryBalance(): FetchBalance {

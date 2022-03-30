@@ -24,3 +24,17 @@ export function validatePassword(password: string): boolean {
 
   return hasUpperCase && hasLowerCase && hasNumber && hasSpecialCharacter;
 }
+
+export function validateAmount(
+  availableTradableAmount: number,
+  amount?: number,
+): string | undefined {
+  if (!amount) {
+    return requiredMessage;
+  } else if (Math.sign(amount) !== 1) {
+    return invalidAmount;
+  } else if (amount > availableTradableAmount) {
+    return insufficientCredits;
+  }
+  return;
+}

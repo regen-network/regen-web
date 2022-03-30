@@ -227,6 +227,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
                 minRows={6}
                 multiline
                 optional
+                defaultStyle={false}
               />
             </OnBoardingCard>
           </Form>

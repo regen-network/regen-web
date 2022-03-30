@@ -2,16 +2,22 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography } from '@mui/material';
 
-import { PortfolioTemplate } from '../components/templates';
+import {
+  PortfolioTemplate,
+  WithBasketsProps,
+  withBaskets,
+} from '../components/templates';
 import { LinkWithArrow } from '../components/atoms';
 import { truncate } from '../lib/wallet';
 import { getAccountUrl } from '../lib/block-explorer';
 
-export const EcocreditsByAccount: React.FC = () => {
+const WrappedEcocreditsByAccount: React.FC<WithBasketsProps> = ({
+  baskets,
+}) => {
   const { accountAddress } = useParams<{ accountAddress: string }>();
 
   return (
-    <PortfolioTemplate accountAddress={accountAddress}>
+    <PortfolioTemplate accountAddress={accountAddress} baskets={baskets}>
       <Box sx={{ mt: { xs: 1.25, sm: 3 } }}>
         <Typography
           sx={{
@@ -45,3 +51,5 @@ export const EcocreditsByAccount: React.FC = () => {
     </PortfolioTemplate>
   );
 };
+
+export const EcocreditsByAccount = withBaskets(WrappedEcocreditsByAccount);

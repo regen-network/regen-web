@@ -63,7 +63,6 @@ export function sanityMediaToArticleCardProps(
   media?: Maybe<Array<Maybe<MediaFieldsFragment>>>,
 ): ArticleCardProps[] {
   return (media || []).map(item => {
-    console.log('item :>> ', item);
     return {
       author: item?.author || '',
       date: formatDate(item?.date) || '',

@@ -1,24 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
-import { makeStyles } from '@mui/styles';
 
-import { Theme } from '../../theme/muiTheme';
 import AmountField from '../inputs/AmountField';
 import SelectTextField, { Option } from '../inputs/SelectTextField';
 
 import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  textField: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(10.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(8.25),
-    },
-  },
-}));
 
 export interface BasketPutProps {
   basketOptions: Option[];
@@ -43,7 +30,6 @@ const BasketPutForm: React.FC<FormProps> = ({
   onClose,
   onSubmit,
 }) => {
-  const styles = useStyles();
   const [options, setOptions] = useState<Option[]>([]);
 
   const initialValues = {
@@ -86,7 +72,6 @@ const BasketPutForm: React.FC<FormProps> = ({
             label="Amount"
             availableAmount={availableTradableAmount}
             batchDenom={batchDenom}
-            className={styles.textField}
           />
 
           <Submit

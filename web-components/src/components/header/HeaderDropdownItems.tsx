@@ -33,7 +33,6 @@ export type HeaderDropdownItemProps = {
   title: string;
   href: string;
   linkComponent: React.FC<NavLinkProps>;
-  pathname: string;
   svg?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   right?: () => JSX.Element;
 };
@@ -56,7 +55,7 @@ export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({
           <SVG />
         </Box>
       )}
-      <LinkComponent href={props.href} pathname={props.pathname}>
+      <LinkComponent href={props.href}>
         {ReactHtmlParser(props.title)}
       </LinkComponent>
       {props.right && <Box ml={3}>{props.right()}</Box>}
@@ -68,7 +67,6 @@ export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({
 export const HeaderDropdownColumn: React.FC<{
   items: HeaderDropdownItemProps[];
   linkComponent: React.FC<NavLinkProps>;
-  pathname: string;
   title?: string;
 }> = props => {
   const styles = useStyles();
@@ -86,7 +84,6 @@ export const HeaderDropdownColumn: React.FC<{
           key={i}
           {...link}
           linkComponent={props.linkComponent}
-          pathname={props.pathname}
         />
       ))}
     </Box>

@@ -86,16 +86,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
         color: theme.palette.primary.light,
         background: theme.palette.primary.main,
       },
-      '& .MuiMenuItem-root > a, .MuiMenuItem-root > div > span': {
-        fontSize: theme.typography.pxToRem(14),
-        lineHeight: theme.typography.pxToRem(17.57),
-        letterSpacing: '1px',
-      },
       '& ul > li > a, & ul > li > div > span': {
         color: props.color,
         textDecoration: 'none',
-        fontFamily: 'Muli',
-        textTransform: 'uppercase',
+        paddingTop: theme.spacing(0.25),
         '&:link, &:visited, &:hover, &:active': {
           textDecoration: 'none',
         },
@@ -242,7 +236,6 @@ export default function Header({
                 return (
                   <HeaderMenuHover
                     key={index}
-                    isNew={item.isNew}
                     linkComponent={linkComponent}
                     item={item}
                     color={color}

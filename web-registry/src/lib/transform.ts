@@ -181,6 +181,25 @@ export function getParty(
   };
 }
 
+const getPartyFromMetadata = (
+  metadata: EntityDisplayValues,
+  role: EntityFieldName,
+): Party | undefined => {
+  const metadataRole = metadata[role];
+  if (!metadataRole) return undefined;
+
+  return {
+    name: metadataRole?.['http://schema.org/name'] || '',
+    description: metadataRole?.['http://schema.org/description'] || '',
+    type: metadataRole?.['@type'].includes('http://regen.network/Organization') // covers Organization or OrganizationDisplay
+      ? 'ORGANIZATION' // to provide default image
+      : '',
+    individual: '',
+    role: '',
+    address: '',
+  };
+};
+
 export function getDisplayParty(
   role: EntityFieldName,
   metadata?: EntityDisplayValues,
@@ -189,7 +208,10 @@ export function getDisplayParty(
   const showOnProjectPage =
     metadata?.[role]?.['http://regen.network/showOnProjectPage'];
   if (showOnProjectPage) {
-    return getParty(party);
+    const dbParty = getParty(party);
+    if (dbParty) return dbParty;
+    // If no party info available for this role, check the metadata
+    return getPartyFromMetadata(metadata, role);
   }
   return undefined;
 }

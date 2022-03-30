@@ -75,12 +75,13 @@ function getVisiblePartyName(party?: DisplayValues): string | undefined {
 function ProjectDetails(): JSX.Element {
   const { api } = useLedger({ forceExp: true });
   const { projectId } = useParams();
-
+  const theme = useTheme<Theme>();
   const walletContext = useWallet();
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
   const [batchTotals, setBatchTotals] = useState<BatchTotalsForProject>();
+  const [geojson, setGeojson] = useState<any | null>(null);
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
   let txClient: ServiceClientImpl | undefined;
@@ -125,34 +126,38 @@ function ProjectDetails(): JSX.Element {
 
   useEffect(() => {
     setPageView(location);
+    setGeojson(null); // reset when location changes
   }, [location]);
 
   const otherProjects = projectsData?.allProjects?.nodes?.filter(
     p => p?.handle !== projectId,
   );
 
-  const [geojson, setGeojson] = useState<any | null>(null);
-
   // Convert kml to geojson
   const mapFile: string =
     metadata?.['http://regen.network/boundaries']?.['@value'];
   const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
   const isKMLFile: boolean = /\.kml$/i.test(mapFile);
+  const metadataLocation = metadata?.['http://schema.org/location'];
 
-  if (!geojson && isGISFile) {
-    fetch(mapFile)
-      .then(r => r.text())
-      .then(text => {
-        let geojson;
-        if (isKMLFile) {
-          const dom = new DOMParser().parseFromString(text, 'text/xml');
-          geojson = togeojson.kml(dom);
-        } else {
-          geojson = JSON.parse(text);
-        }
-        setGeojson(geojson);
-      });
-  }
+  useEffect(() => {
+    if (!geojson && isGISFile) {
+      fetch(mapFile)
+        .then(r => r.text())
+        .then(text => {
+          let geojson;
+          if (isKMLFile) {
+            const dom = new DOMParser().parseFromString(text, 'text/xml');
+            geojson = togeojson.kml(dom);
+          } else {
+            geojson = JSON.parse(text);
+          }
+          setGeojson(geojson);
+        });
+    } else if (metadataLocation) {
+      setGeojson(metadataLocation);
+    }
+  }, [geojson, isGISFile, isKMLFile, mapFile, metadataLocation]);
 
   // Modal
   const [open, setOpen] = useState(false);
@@ -208,8 +213,7 @@ function ProjectDetails(): JSX.Element {
     getVisiblePartyName(metadata?.['http://regen.network/projectDeveloper']) ||
     getVisiblePartyName(metadata?.['http://regen.network/landOwner']) ||
     getVisiblePartyName(metadata?.['http://regen.network/projectOriginator']);
-  const projectAddress = metadata?.['http://schema.org/location']?.place_name;
-
+  const projectAddress = metadataLocation?.place_name;
   const galleryPhotos =
     metadata?.['http://regen.network/galleryPhotos']?.['@list'];
   const noGallery = !galleryPhotos || galleryPhotos?.length === 0;
@@ -260,7 +264,6 @@ function ProjectDetails(): JSX.Element {
     skip: !impactIris,
   });
 
-  const theme = useTheme<Theme>();
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
@@ -289,7 +292,6 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
       />
-
       {impactData?.allEcologicalImpact &&
         impactData?.allEcologicalImpact.length > 0 && (
           <div className="topo-background-alternate">

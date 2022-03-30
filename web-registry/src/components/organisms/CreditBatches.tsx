@@ -3,11 +3,10 @@ import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 import cx from 'clsx';
 
-import { formatNumber } from 'web-components/lib/components/table';
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
-import { formatDate } from 'web-components/lib/utils/format';
+import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
 import { truncate } from '../../lib/wallet';
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';

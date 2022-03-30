@@ -1,15 +1,14 @@
 import React from 'react';
 import cx from 'clsx';
 import { makeStyles, useTheme } from '@mui/styles';
-import { Box, MenuItem, styled } from '@mui/material';
+import { MenuItem } from '@mui/material';
 
-import MenuHover from '../menu-hover';
+import MenuHover, { MenuTitle } from '../menu-hover';
 import { NavLinkProps } from './NavLink';
 import {
   HeaderDropdownColumn,
   HeaderDropdownItemProps,
 } from './HeaderDropdownItems';
-import { Label } from '../label';
 
 const useStyles = makeStyles(theme => ({
   menuItem: {
@@ -19,8 +18,11 @@ const useStyles = makeStyles(theme => ({
     paddingRight: theme.spacing(7.375),
     paddingLeft: theme.spacing(7.375),
     'background-color': 'inherit',
-    '& a:hover': {
-      borderBottom: `2px solid ${theme.palette.secondary.main}`,
+    '& > a': {
+      borderBottom: '2px solid transparent',
+      '&:hover': {
+        borderBottom: `2px solid ${theme.palette.secondary.main}`,
+      },
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingRight: theme.spacing(1.25),
@@ -32,27 +34,32 @@ const useStyles = makeStyles(theme => ({
       borderBottom: `2px solid ${theme.palette.secondary.main}`,
     },
   },
+  title: {
+    fontSize: theme.spacing(3.25),
+    letterSpacing: '1px',
+    fontFamily: 'Muli',
+    textTransform: 'uppercase',
+  },
 }));
 
-const NewIcon = styled('div')(({ theme }) => ({
-  position: 'absolute',
-  top: '-7px',
-  right: '-28px',
-  backgroundColor: '#3D7ACF', // not in theme
-  height: '10px',
-  width: '30px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: '1px',
-  borderRadius: '3px',
-}));
+// TODO I made this for the NCT page, but there were conflicts with master. Leaving to use for #856
+// const NewIcon = styled('div')(({ theme }) => ({
+//   position: 'absolute',
+//   top: '-7px',
+//   right: '-28px',
+//   backgroundColor: '#3D7ACF', // not in theme
+//   height: '10px',
+//   width: '30px',
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'center',
+//   padding: '1px',
+//   borderRadius: '3px',
+// }));
 
-export interface HeaderMenuItem {
-  title: string;
+export interface HeaderMenuItem extends MenuTitle {
   href?: string;
-  render?: () => JSX.Element;
-  isNew?: boolean;
+  renderDropdownItems?: () => JSX.Element;
   dropdownItems?: HeaderDropdownItemProps[];
 }
 
@@ -60,47 +67,38 @@ const HeaderMenuHover: React.FC<{
   item: HeaderMenuItem;
   pathName: string;
   color: string;
-  isNew?: boolean;
   linkComponent: React.FC<NavLinkProps>;
-}> = ({ item, linkComponent: LinkComponent, ...props }) => {
+}> = ({ item, pathName, color, linkComponent: LinkComponent }) => {
   const theme = useTheme();
   const styles = useStyles();
 
   const Content: React.FC = () => {
-    if (item.href && !item.dropdownItems && !item.render) {
+    if (item.href && !item.dropdownItems && !item.renderDropdownItems) {
       return (
-        <LinkComponent href={item.href} pathname={props.pathName}>
-          <Box component="span" sx={{ position: 'relative' }}>
-            {item.title}
-            {props.isNew && (
-              <NewIcon>
-                <Label sx={{ fontSize: { xs: 8 }, color: 'primary.main' }}>
-                  NEW
-                </Label>
-              </NewIcon>
-            )}
-          </Box>
+        <LinkComponent overrideClassname={styles.title} href={item.href}>
+          {item.title}
         </LinkComponent>
       );
     }
     return (
       <MenuHover
         dropdownColor={
-          props.color === theme.palette.primary.light
+          color === theme.palette.primary.light
             ? theme.palette.secondary.main
             : theme.palette.secondary.contrastText
         }
-        text={item.title}
+        title={item.title}
+        renderTitle={item.renderTitle}
+        classes={{ title: styles.title }}
       >
         {/* `render` overrides default dropdown */}
-        {item.dropdownItems && !item.render && (
+        {item.dropdownItems && !item.renderDropdownItems && (
           <HeaderDropdownColumn
-            pathname={props.pathName}
             items={item.dropdownItems}
             linkComponent={LinkComponent}
           />
         )}
-        {item.render && item.render()}
+        {item.renderDropdownItems && item.renderDropdownItems()}
       </MenuHover>
     );
   };
@@ -109,7 +107,7 @@ const HeaderMenuHover: React.FC<{
     <MenuItem
       className={cx(
         styles.menuItem,
-        props.pathName === item.href && styles.currentMenuItem,
+        pathName === item.href && styles.currentMenuItem,
       )}
     >
       <Content />

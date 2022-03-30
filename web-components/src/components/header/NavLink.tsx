@@ -26,7 +26,6 @@ export const useNavLinkStyles = makeStyles<Theme, { isActive: boolean }>(
 
 export type NavLinkProps = {
   href: string;
-  pathname: string;
   /** replaces default styles with passed styles */
   overrideClassname?: string;
 };
@@ -34,9 +33,9 @@ export type NavLinkProps = {
 export const NavLink: React.FC<NavLinkProps> = ({
   children,
   href,
-  pathname,
   overrideClassname,
 }) => {
+  const pathname = window && window.location && window.location.pathname;
   const styles = useNavLinkStyles({ isActive: pathname === href });
 
   return (

@@ -54,7 +54,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
   const standardItems: HeaderDropdownItemProps[] = [
     {
       title: 'Program Guide',
-      href: 'https://regen-registry.s3.amazonaws.com/Regen+Registry+Program+Guide.pdf',
+      href: 'https://library.regen.network/v/regen-registry-program-guide/',
       linkComponent: NavLink,
     },
   ];

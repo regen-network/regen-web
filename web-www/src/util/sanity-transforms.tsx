@@ -4,7 +4,6 @@ import {
   Maybe,
   MediaFieldsFragment,
   SanityDoc,
-  SanityMedia,
   SanityResource,
 } from '../generated/graphql';
 

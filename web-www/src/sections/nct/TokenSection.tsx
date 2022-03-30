@@ -140,6 +140,7 @@ export const TokenSection = (): JSX.Element => {
             ...btnPad,
           }}
           href={data?.cardButton?.buttonLink?.buttonHref || ''}
+          target={data?.cardButton?.buttonBlankTarget ? '_blank' : '_self'}
         >
           {data?.cardButton?.buttonText}
         </ContainedButton>
@@ -172,12 +173,14 @@ export const TokenSection = (): JSX.Element => {
           <OutlinedButton
             sx={btnPad}
             href={data?.detailButton1?.buttonLink?.buttonHref || ''}
+            target={data?.detailButton1?.buttonBlankTarget ? '_blank' : '_self'}
           >
             {data?.detailButton1?.buttonText}
           </OutlinedButton>
           <ContainedButton
             sx={btnPad}
             href={data?.detailButton2?.buttonLink?.buttonHref || ''}
+            target={data?.detailButton2?.buttonBlankTarget ? '_blank' : '_self'}
           >
             {data?.detailButton2?.buttonText}
           </ContainedButton>

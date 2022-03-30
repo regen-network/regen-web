@@ -83,6 +83,7 @@ export const LedgerSection = (): JSX.Element => {
             <OutlinedButton
               sx={{ px: [8, 12], mt: [4, 8] }}
               href={data?.button?.buttonLink?.buttonHref || ''}
+              target={data?.button?.buttonBlankTarget ? '_blank' : '_self'}
             >
               {data?.button?.buttonText}
             </OutlinedButton>

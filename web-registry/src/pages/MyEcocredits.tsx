@@ -7,7 +7,7 @@ import { TableActionButtons } from 'web-components/lib/components/buttons/TableA
 import {
   TakeFromBasketModal,
   TakeModalProps,
-} from 'web-components/lib/components/modal/TakeFromBasketModal';
+} from '../components/molecules/TakeFromBasketModal';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { useWallet } from '../lib/wallet';
 import { PortfolioTemplate } from '../components/templates';

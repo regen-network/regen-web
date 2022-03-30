@@ -83,13 +83,14 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   const openModal = (rowIndex: number): void => {
     if (!accountAddress) return;
     console.log('basketsWithClasses', basketsWithClasses);
-    const selectedRow = basketsWithClasses?.[rowIndex];
+    // const selectedRow = basketsWithClasses?.[rowIndex];
+    const selectedRow = baskets?.baskets?.[rowIndex];
     console.log('selectedRow', selectedRow, 'accountAddress ', accountAddress);
     const basket = {
-      basketDenom: selectedRow?.basket?.basketDenom,
+      basketDenom: selectedRow?.basketDenom,
       // availableTradableAmount:
-      //   parseInt(selectedRow?.balance?.balance?.amount || '0') /
-      //   Math.pow(10, selectedRow.basket.exponent),
+      //   parseInt(selectedRow?.balance?.amount || '0') /
+      //   Math.pow(10, selectedRow?.exponent),
     };
     setSelectedBasket(basket);
   };
@@ -214,13 +215,15 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             onSubmit={() => alert('submit')}
           />
         )}
-        <TakeFromBasketModal
-          open={!!selectedBasket}
-          holder={accountAddress || ''}
-          batchDenom={selectedBasket?.basketDenom}
-          availableTradableAmount={selectedBasket?.availableTradableAmount}
-          onClose={() => setSelectedBasket(null)}
-        />
+        {baskets && (
+          <TakeFromBasketModal
+            open={!!selectedBasket}
+            holder={accountAddress || ''}
+            basketDenom={selectedBasket?.basketDenom}
+            baskets={baskets}
+            onClose={() => setSelectedBasket(null)}
+          />
+        )}
       </Section>
     </Box>
   );

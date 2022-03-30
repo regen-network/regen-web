@@ -111,7 +111,7 @@ interface FormProps {
   onClose: () => void;
 }
 
-export interface FormValues {
+export interface RetireFormValues {
   retiredAmount: number;
   note: string;
   country: string;
@@ -125,22 +125,17 @@ interface CreditRetireFieldsProps {
   availableTradableAmount: number;
 }
 
-export const CreditRetireFields = ({
+interface BottomCreditRetireFieldsProps {
+  country: string;
+}
+
+export const BottomCreditRetireFields = ({
   country,
-  batchDenom,
-  availableTradableAmount,
-}: CreditRetireFieldsProps): JSX.Element => {
+}: BottomCreditRetireFieldsProps): JSX.Element => {
   const styles = useStyles();
 
   return (
     <>
-      <AmountField
-        name={'retiredAmount'}
-        label={'Amount to retire'}
-        availableAmount={availableTradableAmount}
-        batchDenom={batchDenom}
-        className={styles.textField}
-      />
       <Title className={styles.groupTitle} variant="h5">
         Transaction note
       </Title>
@@ -182,11 +177,31 @@ export const CreditRetireFields = ({
   );
 };
 
+export const CreditRetireFields = ({
+  country,
+  batchDenom,
+  availableTradableAmount,
+}: CreditRetireFieldsProps): JSX.Element => {
+  const styles = useStyles();
+  return (
+    <>
+      <AmountField
+        name="retiredAmount"
+        label="Amount to retire"
+        availableAmount={availableTradableAmount}
+        batchDenom={batchDenom}
+        className={styles.textField}
+      />
+      <BottomCreditRetireFields country={country} />
+    </>
+  );
+};
+
 export const validateCreditRetire = (
   availableTradableAmount: number,
-  values: FormValues,
-  errors: FormikErrors<FormValues>,
-): FormikErrors<FormValues> => {
+  values: RetireFormValues,
+  errors: FormikErrors<RetireFormValues>,
+): FormikErrors<RetireFormValues> => {
   if (!values.country) {
     errors.country = requiredMessage;
   }
@@ -215,14 +230,14 @@ const CreditRetireForm: React.FC<FormProps> = ({
   availableTradableAmount,
   onClose,
 }) => {
-  const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
-    let errors: FormikErrors<FormValues> = {};
+  const validateHandler = (values: RetireFormValues): FormikErrors<RetireFormValues> => {
+    let errors: FormikErrors<RetireFormValues> = {};
     errors = validateCreditRetire(availableTradableAmount, values, errors);
     return errors;
   };
 
   const submitHandler = async (
-    values: FormValues,
+    values: RetireFormValues,
   ): Promise<MsgRetire | void> => {
     // TODO
     // add holder,

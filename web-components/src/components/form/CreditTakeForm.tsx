@@ -1,14 +1,15 @@
 import React from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
+import { Collapse } from '@mui/material';
 
 import { Theme } from '../../theme/muiTheme';
 import AmountField from '../inputs/AmountField';
 import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
-  CreditRetireFields,
-  FormValues as RetireFormValues,
+  BottomCreditRetireFields,
+  RetireFormValues,
   validateCreditRetire,
 } from './CreditRetireForm';
 import Submit from './Submit';
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
-    marginBottom: theme.spacing(10.75),
+    // marginBottom: theme.spacing(10.75),
     alignItems: 'initial',
     '& .MuiCheckbox-root': {
       alignSelf: 'end',
@@ -86,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface SendCredits {
   batchDenom: string;
   tradableAmount: string;
-  retiredAmount?: string;
+  takeAmount?: string;
   retirementLocation?: string;
 }
 
@@ -105,6 +106,7 @@ interface FormProps {
 }
 
 interface FormValues extends RetireFormValues {
+  takeAmount: number;
   holder: string;
   recipient: string;
   tradableAmount: number;
@@ -125,6 +127,7 @@ const CreditTakeForm: React.FC<FormProps> = ({
     tradableAmount: 0,
     withRetire: false,
 
+    takeAmount: 0,
     retiredAmount: 0,
     note: '',
     country: '',
@@ -160,10 +163,10 @@ const CreditTakeForm: React.FC<FormProps> = ({
         availableTradableAmount
       ) {
         errors.tradableAmount = insufficientCredits;
-        errors.retiredAmount = insufficientCredits;
+        errors.takeAmount = insufficientCredits;
       }
     }
-
+    console.log('errors ', erros);
     return errors;
   };
 
@@ -180,35 +183,31 @@ const CreditTakeForm: React.FC<FormProps> = ({
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
-          {values.withRetire ? (
-            <CreditRetireFields
-              country={values.country}
-              availableTradableAmount={availableTradableAmount}
+          <>
+            <AmountField
+              name="takeAmount"
+              label="Amount"
+              availableAmount={availableTradableAmount}
               batchDenom={batchDenom}
+              className={styles.textField}
             />
-          ) : (
-            <>
-              <AmountField
-                name="retiredAmount"
-                label="Amount to retire"
-                availableAmount={availableTradableAmount}
-                batchDenom={batchDenom}
-                className={styles.textField}
-              />
-              <Field
-                component={CheckboxLabel}
-                type="checkbox"
-                name="withRetire"
-                className={styles.checkboxLabel}
-                label={
-                  <Description className={styles.checkboxDescription}>
-                    Retire credits upon transfer
-                  </Description>
-                }
-              />
-            </>
-          )}
-
+            <Field
+              component={CheckboxLabel}
+              type="checkbox"
+              name="withRetire"
+              className={styles.checkboxLabel}
+              label={
+                <Description className={styles.checkboxDescription}>
+                  Retire credits upon transfer
+                </Description>
+              }
+            />
+            {/* <Collapse in={values.withRetire} collapsedSize={0}> */}
+            {values.withRetire && (
+              <BottomCreditRetireFields country={values.country} />
+            )}
+            {/* </Collapse> */}
+          </>
           <Submit
             isSubmitting={isSubmitting}
             onClose={onClose}

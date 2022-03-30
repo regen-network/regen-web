@@ -75,7 +75,11 @@ const HeaderMenuHover: React.FC<{
   const Content: React.FC = () => {
     if (item.href && !item.dropdownItems && !item.renderDropdownItems) {
       return (
-        <LinkComponent overrideClassname={styles.title} href={item.href}>
+        <LinkComponent
+          overrideClassname={styles.title}
+          pathname={pathName}
+          href={item.href}
+        >
           {item.title}
         </LinkComponent>
       );

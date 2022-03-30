@@ -24,6 +24,8 @@ const defaultTheme = createTheme({
   },
 });
 
+const headerFontFamily = ['"Muli"', '-apple-system', 'sans-serif'].join(',');
+
 const regenTheme = createTheme({
   palette: {
     primary: {
@@ -69,7 +71,7 @@ const regenTheme = createTheme({
       [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '2rem',
       },
-      fontFamily: ['"Muli"', '-apple-system', 'sans-serif'].join(','),
+      fontFamily: headerFontFamily,
     },
     h2: {
       [defaultTheme.breakpoints.up('sm')]: {
@@ -175,7 +177,7 @@ const regenTheme = createTheme({
           textAlign: 'center',
           boxShadow: 'none',
           fontWeight: 800,
-          fontFamily: '"Muli"',
+          fontFamily: headerFontFamily,
           borderRadius: '2px',
           border: '2px solid',
           whiteSpace: 'nowrap',

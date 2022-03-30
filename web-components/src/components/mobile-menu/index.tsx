@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 type Props = {
   menuItems?: HeaderMenuItem[];
   isRegistry?: boolean;
-  pathName?: string;
+  pathName: string;
   isAuthenticated?: boolean;
   linkComponent: React.FC<NavLinkProps>;
   onSignup?: () => void;
@@ -191,7 +191,11 @@ const MobileMenu: React.FC<Props> = ({
                                 <SVG height={29} width={29} />
                               </Box>
                             )}
-                            <Link href={dropdownItem.href} overrideClassname="">
+                            <Link
+                              href={dropdownItem.href}
+                              overrideClassname=""
+                              pathname={pathName}
+                            >
                               {ReactHtmlParser(dropdownItem.title)}
                             </Link>
                           </MenuItem>
@@ -200,7 +204,11 @@ const MobileMenu: React.FC<Props> = ({
                     </MenuList>
                   </div>
                 ) : (
-                  <Link overrideClassname="" href={item.href || ''}>
+                  <Link
+                    overrideClassname=""
+                    pathname={pathName}
+                    href={item.href || ''}
+                  >
                     {item.title}
                   </Link>
                 )}

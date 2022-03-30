@@ -162,7 +162,7 @@ export const CreditRetireFields = ({
   batchDenom,
   availableTradableAmount,
 }: CreditRetireFieldsProps): JSX.Element => {
-  const styles = useStyles();
+  // const styles = useStyles();
   return (
     <>
       <AmountField
@@ -170,7 +170,7 @@ export const CreditRetireFields = ({
         label="Amount to retire"
         availableAmount={availableTradableAmount}
         batchDenom={batchDenom}
-        className={styles.textField}
+        // className={styles.textField}
       />
       <BottomCreditRetireFields country={country} />
     </>

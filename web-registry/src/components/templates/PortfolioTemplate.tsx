@@ -15,6 +15,7 @@ import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutMod
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
+import { TakeFromBasketModal } from '../../components/molecules';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
 import { useEcocredits } from '../../hooks';
 import { useLedger } from '../../ledger';
@@ -59,13 +60,14 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   const styles = useStyles();
   const theme = useTheme();
   const { api } = useLedger();
-  console.log(api?.msgClient);
+  // console.log(api?.msgClient);
 
   const credits = useEcocredits(accountAddress);
   const [creditBaskets, setCreditBaskets] = useState<
     (QueryBasketResponse | undefined)[][]
   >([]);
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
+  const [selectedBasket, setSelectedBasket] = useState<any>(null);
 
   useEffect(() => {
     // Get available baskets to put credits into
@@ -77,6 +79,20 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
       );
     }
   }, [own, credits, basketsWithClasses]);
+
+  const openModal = (rowIndex: number): void => {
+    if (!accountAddress) return;
+    console.log('basketsWithClasses', basketsWithClasses);
+    const selectedRow = basketsWithClasses?.[rowIndex];
+    console.log('selectedRow', selectedRow, 'accountAddress ', accountAddress);
+    const basket = {
+      basketDenom: selectedRow?.basket?.basketDenom,
+      // availableTradableAmount:
+      //   parseInt(selectedRow?.balance?.balance?.amount || '0') /
+      //   Math.pow(10, selectedRow.basket.exponent),
+    };
+    setSelectedBasket(basket);
+  };
 
   return (
     <Box sx={{ backgroundColor: 'grey.50', pb: { xs: 21.25, sm: 28.28 } }}>
@@ -98,8 +114,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
                           icon: <TakeFromBasket />,
                           label: 'Take from basket',
                           // eslint-disable-next-line no-console
-                          onClick: () =>
-                            console.log(`TODO take from basket ${i}`),
+                          onClick: () => openModal(i),
                         },
                         // This will be handled from osmosis
                         // so hiding these for now
@@ -199,6 +214,13 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             onSubmit={() => alert('submit')}
           />
         )}
+        <TakeFromBasketModal
+          open={!!selectedBasket}
+          holder={accountAddress || ''}
+          batchDenom={selectedBasket?.basketDenom}
+          availableTradableAmount={selectedBasket?.availableTradableAmount}
+          onClose={() => setSelectedBasket(null)}
+        />
       </Section>
     </Box>
   );

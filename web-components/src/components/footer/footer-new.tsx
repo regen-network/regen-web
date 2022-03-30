@@ -14,9 +14,18 @@ import { HeaderLogoLink } from '../header/HeaderLogoLink';
 
 import { SocialLinks } from './SocialLinks';
 
+export interface LinkItem {
+  href: string;
+  target?: '_blank' | '_self';
+}
+
+interface FooterItem extends LinkItem {
+  title: string;
+}
+
 export interface FooterItemProps {
   title: string;
-  items: { title: string; href: string; target?: string }[];
+  items: FooterItem[];
   linkComponent?: React.FC<{ href: string }>;
 }
 

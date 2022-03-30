@@ -1,12 +1,13 @@
 import React from 'react';
-import { DefaultTheme as Theme } from '@mui/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
-import { styled } from '@mui/material';
+import { styled, SxProps } from '@mui/material';
+import { Theme } from '~/theme/muiTheme';
 
 interface OutlinedButtonProps extends ButtonProps {
   target?: string;
   rel?: string;
   isImageBtn?: boolean;
+  sx?: SxProps<Theme>;
 }
 
 // MUI won't allow passing `component="span"` when extending `ButtonProps`,

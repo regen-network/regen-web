@@ -29,6 +29,7 @@ declare global {
 
 type ContextType = {
   wallet?: Sender;
+  loaded: boolean;
   suggestChain?: () => Promise<void>;
   signSend?: (amount: number, recipient: string) => Promise<Uint8Array>;
   broadcast?: (txBytes: Uint8Array) => Promise<string>;
@@ -37,6 +38,7 @@ type ContextType = {
 };
 
 const WalletContext = createContext<ContextType>({
+  loaded: false,
   setTxResult: (txResult: BroadcastTxResponse | undefined) => {},
 });
 
@@ -50,13 +52,30 @@ const defaultClientOptions = {
 
 export const WalletProvider: React.FC = ({ children }) => {
   const [sender, setSender] = useState<Sender>(emptySender);
+  // Because initiating the wallet is asyncronous, when users enter the app, the wallet is seen as not loaded.
+  // This is being used so that we display the "connect wallet" or the connected wallet address
+  // only once we know what's the actual wallet connection status.
+  const [loaded, setLoaded] = useState<boolean>(false);
   const [txResult, setTxResult] = useState<BroadcastTxResponse | undefined>(
     undefined,
   );
 
   window.onload = async () => {
     if (!sender.address) {
-      await getWallet();
+      try {
+        // This should be updated to use the AccountStore from '@keplr-wallet/stores'
+        // so that the user can connect his/her wallet on demand,
+        // and not automatically on load if he/she hasn't connected yet.
+        await getWallet();
+      } catch (e) {
+        // For now, this error will only happen if we're trying to connect to a testnet
+        // which hasn't been added yet through experimentalSuggestChain.
+        // In this case, the user will see the "connect wallet" button and should click on it.
+        // eslint-disable-next-line
+        console.log(e);
+      } finally {
+        setLoaded(true);
+      }
     }
   };
 
@@ -273,6 +292,7 @@ export const WalletProvider: React.FC = ({ children }) => {
     <WalletContext.Provider
       value={{
         wallet: sender,
+        loaded,
         suggestChain,
         signSend,
         broadcast,

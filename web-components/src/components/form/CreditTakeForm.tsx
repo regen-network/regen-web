@@ -166,7 +166,7 @@ const CreditTakeForm: React.FC<FormProps> = ({
         errors.takeAmount = insufficientCredits;
       }
     }
-    console.log('errors ', erros);
+    console.log('errors ', errors);
     return errors;
   };
 

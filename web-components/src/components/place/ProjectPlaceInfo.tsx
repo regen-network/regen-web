@@ -39,11 +39,14 @@ export default function ProjectPlaceInfo({
       smFontSize={smFontSize}
       color={color}
       iconClassName={iconClassName}
+      showIcon={!!place}
     >
       {place}
+      {place && displayedArea && areaUnit && (
+        <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      )}
       {displayedArea && areaUnit && (
         <span>
-          <span className={classes.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
           {displayedArea} {areaUnit}
         </span>
       )}

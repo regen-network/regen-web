@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ElementType } from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { SxProps } from '@mui/system';
 import Typography from '@mui/material/Typography';
@@ -8,6 +8,7 @@ interface LabelProps {
   children: string;
   className?: string;
   sx?: SxProps<Theme>;
+  component?: ElementType<any>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -18,11 +19,20 @@ const useStyles = makeStyles((theme: Theme) => ({
     letterSpacing: '1px',
   },
 }));
-function Label({ children, className, sx }: LabelProps): JSX.Element {
+function Label({
+  children,
+  className,
+  sx,
+  component = 'div',
+}: LabelProps): JSX.Element {
   const styles = useStyles();
 
   return (
-    <Typography sx={sx} className={cx(styles.root, className)}>
+    <Typography
+      sx={sx}
+      className={cx(styles.root, className)}
+      component={component}
+    >
       {children}
     </Typography>
   );

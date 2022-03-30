@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   popoverContent: {
     pointerEvents: 'auto',
-    marginTop: theme.spacing(4.75),
+    marginTop: theme.spacing(4),
   },
   text: {
     '& li.MuiMenuItem-root:hover': {

@@ -1250,6 +1250,53 @@ exports[`Storyshots Buttons Expand Button 1`] = `
           },
         },
         "components": Object {
+          "MuiButton": Object {
+            "styleOverrides": Object {
+              "root": Object {
+                "&:hover": Object {
+                  "boxShadow": "none",
+                },
+                "border": "2px solid",
+                "borderRadius": "2px",
+                "boxShadow": "none",
+                "fontFamily": "\\"Muli\\"",
+                "fontWeight": 800,
+                "letterSpacing": "1px",
+                "textAlign": "center",
+                "whiteSpace": "nowrap",
+              },
+              "sizeLarge": Object {
+                "@media (min-width:600px)": Object {
+                  "fontSize": "1.313rem",
+                  "lineHeight": "26.36px",
+                  "padding": "14.8px 48px",
+                },
+                "fontSize": "1.125rem",
+                "lineHeight": "22.49px",
+                "padding": "12px 24px",
+              },
+              "sizeMedium": Object {
+                "@media (min-width:600px)": Object {
+                  "fontSize": "1.125rem",
+                  "lineHeight": "22.49px",
+                  "padding": "12px 24px",
+                },
+                "fontSize": "0.875rem",
+                "lineHeight": "17.47px",
+                "padding": "10px 20px",
+              },
+              "sizeSmall": Object {
+                "@media (min-width:600px)": Object {
+                  "fontSize": "0.875rem",
+                  "lineHeight": "17.47px",
+                  "padding": "9px 18px",
+                },
+                "fontSize": "0.75rem",
+                "lineHeight": "13.81px",
+                "padding": "8px 16px",
+              },
+            },
+          },
           "MuiLink": Object {
             "defaultProps": Object {
               "underline": "none",

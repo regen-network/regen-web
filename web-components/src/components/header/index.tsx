@@ -108,9 +108,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
       },
       '& li.MuiMenuItem-root, li.MuiMenuItem-root > div': {
         display: 'flex',
-        '& span:hover, svg:hover, path:hover': {
-          borderBottom: 'none',
-        },
+        alignSelf: 'baseline',
         'background-color': 'inherit',
         'text-decoration': 'none',
       },

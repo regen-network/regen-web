@@ -112,8 +112,9 @@ export const TokenSection = (): JSX.Element => {
       >
         {/* TODO remove manual line height. See: https://github.com/regen-network/regen-registry/issues/866 */}
         <Title variant="h3" sx={{ lineHeight: { xs: '34.8px', sm: '44.8px' } }}>
-          {data?.cardTitle}{' '}
-          <Box
+          {data?.cardTitle}
+          {/* TODO uncomment if we want to display countdown */}
+          {/* <Box
             component="span"
             sx={{
               px: 2,
@@ -122,12 +123,13 @@ export const TokenSection = (): JSX.Element => {
             }}
           >
             <Countdown date={launchDate} />
-          </Box>
+          </Box> */}
         </Title>
         <Typography
           sx={{ fontSize: [16, 18], fontWeight: 700, color: 'info.main' }}
         >
-          {data?.cardSubtitle} {formatDate(launchDate)}
+          {/* TODO uncomment if we want to formatted date based on CMS launch date */}
+          {data?.cardSubtitle} {/* {formatDate(launchDate)} */}
         </Typography>
         <BodyContent content={data?._rawCardBody} />
         <ContainedButton
@@ -163,7 +165,7 @@ export const TokenSection = (): JSX.Element => {
       >
         <Title variant="h2">{data?.detailTitle}</Title>
         <Label sx={{ fontSize: { xs: 14, sm: 18 }, color: 'info.main' }}>
-          {data?.detailSubtitle} {formatDate(launchDate)}
+          {data?.detailSubtitle} {/* {formatDate(launchDate)} */}
         </Label>
         <BodyContent content={data?._rawDetailBody} />
         <Box sx={{ display: 'flex', gap: 3, mt: [4, 8] }}>

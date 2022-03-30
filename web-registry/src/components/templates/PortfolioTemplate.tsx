@@ -67,7 +67,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
     (QueryBasketResponse | undefined)[][]
   >([]);
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
-  const [selectedBasket, setSelectedBasket] = useState<any>(null);
+  const [selectedBasketDenom, setSelectedBasketDenom] = useState('');
 
   useEffect(() => {
     // Get available baskets to put credits into
@@ -82,17 +82,10 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
 
   const openModal = (rowIndex: number): void => {
     if (!accountAddress) return;
-    console.log('basketsWithClasses', basketsWithClasses);
-    // const selectedRow = basketsWithClasses?.[rowIndex];
-    const selectedRow = baskets?.baskets?.[rowIndex];
-    console.log('selectedRow', selectedRow, 'accountAddress ', accountAddress);
-    const basket = {
-      basketDenom: selectedRow?.basketDenom,
-      // availableTradableAmount:
-      //   parseInt(selectedRow?.balance?.amount || '0') /
-      //   Math.pow(10, selectedRow?.exponent),
-    };
-    setSelectedBasket(basket);
+    const selectedBasket = basketsWithClasses?.[rowIndex]?.basket;
+    if (selectedBasket?.basketDenom) {
+      setSelectedBasketDenom(selectedBasket.basketDenom);
+    }
   };
 
   return (
@@ -215,13 +208,13 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             onSubmit={() => alert('submit')}
           />
         )}
-        {baskets && (
+        {baskets && !!accountAddress && (
           <TakeFromBasketModal
-            open={!!selectedBasket}
-            holder={accountAddress || ''}
-            basketDenom={selectedBasket?.basketDenom}
+            open={!!selectedBasketDenom}
+            holder={accountAddress}
+            basketDenom={selectedBasketDenom}
             baskets={baskets}
-            onClose={() => setSelectedBasket(null)}
+            onClose={() => setSelectedBasketDenom('')}
           />
         )}
       </Section>

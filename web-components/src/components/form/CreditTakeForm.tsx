@@ -99,7 +99,7 @@ interface MsgSend {
 
 // Input (args)
 interface FormProps {
-  holder: string;
+  accountAddress: string;
   batchDenom: string;
   availableTradableAmount: number;
   onClose: () => void;
@@ -114,7 +114,7 @@ interface FormValues extends RetireFormValues {
 }
 
 const CreditTakeForm: React.FC<FormProps> = ({
-  holder,
+  accountAddress,
   batchDenom,
   availableTradableAmount,
   onClose,
@@ -122,8 +122,8 @@ const CreditTakeForm: React.FC<FormProps> = ({
   const styles = useStyles();
 
   const initialValues = {
-    holder,
-    recipient: '',
+    holder: accountAddress,
+    recipient: accountAddress,
     tradableAmount: 0,
     withRetire: false,
 

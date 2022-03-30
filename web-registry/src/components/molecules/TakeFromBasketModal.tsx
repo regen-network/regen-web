@@ -35,24 +35,23 @@ const useStyles = makeStyles(theme => ({
 
 export interface TakeModalProps extends RegenModalProps {
   baskets: QueryBasketsResponse;
-  holder: string;
+  accountAddress: string;
   basketDenom: string;
 }
 
 const TakeFromBasketModal: React.FC<TakeModalProps> = ({
   baskets,
-  holder,
+  accountAddress,
   basketDenom,
   open,
   onClose,
 }) => {
   const styles = useStyles();
-  const basketTokens = useBasketTokens(holder, baskets);
+  const basketTokens = useBasketTokens(accountAddress, baskets);
   const basket = basketTokens.find(bt => bt.basket.basketDenom === basketDenom);
 
-  if (!holder || !basket) return null; //TODO
+  if (!accountAddress || !basket) return null; //TODO
 
-  console.log('basketTokens', basketTokens);
   console.log('basket', basket);
 
   const balance =
@@ -65,7 +64,7 @@ const TakeFromBasketModal: React.FC<TakeModalProps> = ({
         Take from Basket
       </Title>
       <CreditTakeForm
-        holder={holder}
+        accountAddress={accountAddress}
         availableTradableAmount={balance}
         batchDenom={basketDenom}
         onClose={onClose}

@@ -211,7 +211,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
         {baskets && !!accountAddress && (
           <TakeFromBasketModal
             open={!!selectedBasketDenom}
-            holder={accountAddress}
+            accountAddress={accountAddress}
             basketDenom={selectedBasketDenom}
             baskets={baskets}
             onClose={() => setSelectedBasketDenom('')}

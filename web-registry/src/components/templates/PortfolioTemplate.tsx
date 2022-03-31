@@ -13,6 +13,7 @@ import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import { CreditTakeFormValues } from 'web-components/lib/components/form/CreditTakeForm';
 
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
 import { TakeFromBasketModal } from '../../components/molecules';
@@ -86,6 +87,10 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
     if (selectedBasket?.basketDenom) {
       setSelectedBasketDenom(selectedBasket.basketDenom);
     }
+  };
+
+  const handleTakeCredits = (values: CreditTakeFormValues): void => {
+    console.log('CreditTakeFormValues ', values);
   };
 
   return (
@@ -215,6 +220,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             basketDenom={selectedBasketDenom}
             baskets={baskets}
             onClose={() => setSelectedBasketDenom('')}
+            onSubmit={handleTakeCredits}
           />
         )}
       </Section>

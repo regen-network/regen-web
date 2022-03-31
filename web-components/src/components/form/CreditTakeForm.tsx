@@ -97,15 +97,7 @@ interface MsgSend {
   credits: SendCredits;
 }
 
-// Input (args)
-interface FormProps {
-  accountAddress: string;
-  batchDenom: string;
-  availableTradableAmount: number;
-  onClose: () => void;
-}
-
-interface FormValues extends RetireFormValues {
+interface CreditTakeFormValues extends RetireFormValues {
   takeAmount: number;
   holder: string;
   recipient: string;
@@ -113,11 +105,21 @@ interface FormValues extends RetireFormValues {
   withRetire?: boolean;
 }
 
+// Input (args)
+interface FormProps {
+  accountAddress: string;
+  batchDenom: string;
+  availableTradableAmount: number;
+  onClose: () => void;
+  onSubmit: (values: CreditTakeFormValues) => void;
+}
+
 const CreditTakeForm: React.FC<FormProps> = ({
   accountAddress,
   batchDenom,
   availableTradableAmount,
   onClose,
+  onSubmit,
 }) => {
   const styles = useStyles();
 
@@ -134,8 +136,10 @@ const CreditTakeForm: React.FC<FormProps> = ({
     stateProvince: '',
   };
 
-  const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
-    let errors: FormikErrors<FormValues> = {};
+  const validateHandler = (
+    values: CreditTakeFormValues,
+  ): FormikErrors<CreditTakeFormValues> => {
+    let errors: FormikErrors<CreditTakeFormValues> = {};
 
     if (!values.holder) {
       errors.holder = requiredMessage;
@@ -170,9 +174,12 @@ const CreditTakeForm: React.FC<FormProps> = ({
     return errors;
   };
 
-  const submitHandler = async (values: FormValues): Promise<MsgSend | void> => {
+  const submitHandler = async (
+    values: CreditTakeFormValues,
+  ): Promise<MsgSend | void> => {
     // TODO holder, amount string, check withRetire
     console.log('*** submitHandler', values);
+    onSubmit(values);
   };
 
   return (
@@ -223,4 +230,4 @@ const CreditTakeForm: React.FC<FormProps> = ({
   );
 };
 
-export { CreditTakeForm };
+export { CreditTakeForm, CreditTakeFormValues };

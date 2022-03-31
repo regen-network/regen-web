@@ -4,7 +4,7 @@ import { RegenModalProps } from 'web-components/lib/components/modal';
 import { FormModalTemplate } from 'web-components/lib/components/modal/FormModalTemplate';
 import {
   CreditTakeForm,
-  CreditTakeFormValues,
+  MsgTake,
 } from 'web-components/lib/components/form/CreditTakeForm';
 import useBasketTokens from '../../hooks/useBasketTokens';
 
@@ -14,7 +14,7 @@ export interface TakeModalProps extends RegenModalProps {
   basketDenom: string;
   open: boolean;
   onClose: () => void;
-  onSubmit: (values: CreditTakeFormValues) => void;
+  onSubmit: (values: MsgTake) => void;
 }
 
 const TakeFromBasketModal: React.FC<TakeModalProps> = ({
@@ -30,8 +30,6 @@ const TakeFromBasketModal: React.FC<TakeModalProps> = ({
 
   if (!accountAddress || !basket) return null; //TODO
 
-  console.log('basket', basket);
-
   const balance =
     parseInt(basket?.balance?.balance?.amount || '0') /
     Math.pow(10, basket?.basket?.exponent);
@@ -41,7 +39,7 @@ const TakeFromBasketModal: React.FC<TakeModalProps> = ({
       <CreditTakeForm
         accountAddress={accountAddress}
         availableTradableAmount={balance}
-        batchDenom={basketDenom}
+        basketDenom={basketDenom}
         onClose={onClose}
         onSubmit={onSubmit}
       />

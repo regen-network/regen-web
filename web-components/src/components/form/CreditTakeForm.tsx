@@ -7,11 +7,7 @@ import { Theme } from '../../theme/muiTheme';
 import AmountField from '../inputs/AmountField';
 import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
-import {
-  BottomCreditRetireFields,
-  RetireFormValues,
-  validateCreditRetire,
-} from './CreditRetireForm';
+import { BottomCreditRetireFields } from './CreditRetireForm';
 import Submit from './Submit';
 import {
   requiredMessage,
@@ -84,39 +80,34 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 // Output (submit)
-interface SendCredits {
-  batchDenom: string;
-  tradableAmount: string;
-  takeAmount?: string;
+export interface MsgTake {
+  owner: string;
+  basketDenom: string;
+  amount: number;
+  retireOnTake: boolean;
   retirementLocation?: string;
 }
 
-interface MsgSend {
-  sender: string;
-  recipient: string;
-  credits: SendCredits;
-}
-
-interface CreditTakeFormValues extends RetireFormValues {
-  takeAmount: number;
-  holder: string;
-  recipient: string;
-  tradableAmount: number;
-  withRetire?: boolean;
+interface CreditTakeFormValues {
+  amount: number;
+  retireOnTake?: boolean;
+  note?: string;
+  country: string;
+  stateProvince: string;
 }
 
 // Input (args)
 interface FormProps {
   accountAddress: string;
-  batchDenom: string;
+  basketDenom: string;
   availableTradableAmount: number;
   onClose: () => void;
-  onSubmit: (values: CreditTakeFormValues) => void;
+  onSubmit: (values: MsgTake) => void;
 }
 
 const CreditTakeForm: React.FC<FormProps> = ({
   accountAddress,
-  batchDenom,
+  basketDenom,
   availableTradableAmount,
   onClose,
   onSubmit,
@@ -124,13 +115,9 @@ const CreditTakeForm: React.FC<FormProps> = ({
   const styles = useStyles();
 
   const initialValues = {
-    holder: accountAddress,
-    recipient: accountAddress,
-    tradableAmount: 0,
-    withRetire: false,
+    amount: 0,
+    retireOnTake: false,
 
-    takeAmount: 0,
-    retiredAmount: 0,
     note: '',
     country: '',
     stateProvince: '',
@@ -141,45 +128,43 @@ const CreditTakeForm: React.FC<FormProps> = ({
   ): FormikErrors<CreditTakeFormValues> => {
     let errors: FormikErrors<CreditTakeFormValues> = {};
 
-    if (!values.holder) {
-      errors.holder = requiredMessage;
-    }
-
-    if (!values.recipient) {
-      errors.recipient = requiredMessage;
-    }
-
-    if (!values.tradableAmount) {
-      errors.tradableAmount = requiredMessage;
-    } else if (Math.sign(values.tradableAmount) !== 1) {
-      errors.tradableAmount = invalidAmount;
-    } else if (values.tradableAmount > availableTradableAmount) {
-      errors.tradableAmount = insufficientCredits;
+    if (!values.amount) {
+      errors.amount = requiredMessage;
+    } else if (Math.sign(values.amount) !== 1) {
+      errors.amount = invalidAmount;
+    } else if (values.amount > availableTradableAmount) {
+      errors.amount = insufficientCredits;
     }
 
     // Retire form validation (optional subform)
-    if (values.withRetire) {
-      errors = validateCreditRetire(availableTradableAmount, values, errors);
+    if (values.retireOnTake) {
+      // errors = validateCreditRetire(availableTradableAmount, values, errors); TODO
 
       // combo validation: send + retire
       if (
-        Number(values.tradableAmount) + Number(values.retiredAmount) >
+        Number(values.amount) + Number(values.amount) >
         availableTradableAmount
       ) {
-        errors.tradableAmount = insufficientCredits;
-        errors.takeAmount = insufficientCredits;
+        errors.amount = insufficientCredits;
       }
     }
     console.log('errors ', errors);
     return errors;
   };
 
-  const submitHandler = async (
-    values: CreditTakeFormValues,
-  ): Promise<MsgSend | void> => {
-    // TODO holder, amount string, check withRetire
-    console.log('*** submitHandler', values);
-    onSubmit(values);
+  const submitHandler = async (values: CreditTakeFormValues): Promise<void> => {
+    // console.log('*** submitHandler', values);
+    // const retirementLocation = getLocationString(); todo
+
+    const msgTake: MsgTake = {
+      owner: accountAddress,
+      basketDenom,
+      amount: values.amount,
+      retireOnTake: !!values.retireOnTake,
+      retirementLocation: 'todo',
+    };
+
+    await onSubmit(msgTake);
   };
 
   return (
@@ -192,16 +177,16 @@ const CreditTakeForm: React.FC<FormProps> = ({
         <Form>
           <>
             <AmountField
-              name="takeAmount"
+              name="amount"
               label="Amount"
               availableAmount={availableTradableAmount}
-              batchDenom={batchDenom}
+              batchDenom={basketDenom}
               className={styles.textField}
             />
             <Field
               component={CheckboxLabel}
               type="checkbox"
-              name="withRetire"
+              name="retireOnTake"
               className={styles.checkboxLabel}
               label={
                 <Description className={styles.checkboxDescription}>
@@ -209,8 +194,8 @@ const CreditTakeForm: React.FC<FormProps> = ({
                 </Description>
               }
             />
-            {/* <Collapse in={values.withRetire} collapsedSize={0}> */}
-            {values.withRetire && (
+            {/* <Collapse in={values.retireOnTake} collapsedSize={0}> */}
+            {values.retireOnTake && (
               <BottomCreditRetireFields country={values.country} />
             )}
             {/* </Collapse> */}
@@ -230,4 +215,4 @@ const CreditTakeForm: React.FC<FormProps> = ({
   );
 };
 
-export { CreditTakeForm, CreditTakeFormValues };
+export { CreditTakeForm };

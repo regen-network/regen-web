@@ -13,18 +13,19 @@ import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-import { CreditTakeFormValues } from 'web-components/lib/components/form/CreditTakeForm';
+import { MsgTake } from 'web-components/lib/components/form/CreditTakeForm';
 
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
 import { TakeFromBasketModal } from '../../components/molecules';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
-import { useEcocredits } from '../../hooks';
+import { useEcocredits, useTakeBasketTokens } from '../../hooks';
 import { useLedger } from '../../ledger';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
 // import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
+import { useWallet } from '../../lib/wallet';
 
 interface PortfolioTemplateProps extends WithBasketsProps {
   accountAddress?: string;
@@ -61,7 +62,8 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   const styles = useStyles();
   const theme = useTheme();
   const { api } = useLedger();
-  // console.log(api?.msgClient);
+  const { signTake } = useTakeBasketTokens();
+  const walletContext = useWallet();
 
   const credits = useEcocredits(accountAddress);
   const [creditBaskets, setCreditBaskets] = useState<
@@ -89,8 +91,22 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
     }
   };
 
-  const handleTakeCredits = (values: CreditTakeFormValues): void => {
-    console.log('CreditTakeFormValues ', values);
+  const handleTakeCredits = async (values: MsgTake): Promise<void> => {
+    const msgClient = api?.msgClient;
+    if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
+
+    console.log('MsgTake ', values);
+    const signedMsg = await signTake(
+      accountAddress,
+      values.basketDenom,
+      values.amount,
+      values.retirementLocation,
+      values.retireOnTake,
+    );
+    // onTxQueued(txBytes);
+    console.log('signedMsg ', signedMsg);
+
+    await msgClient.broadcast(signedMsg);
   };
 
   return (
@@ -213,7 +229,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             onSubmit={() => alert('submit')}
           />
         )}
-        {baskets && !!accountAddress && (
+        {baskets && !!selectedBasketDenom && !!accountAddress && (
           <TakeFromBasketModal
             open={!!selectedBasketDenom}
             accountAddress={accountAddress}

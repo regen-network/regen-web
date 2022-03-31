@@ -36,7 +36,6 @@ export default function useTakeBasketTokens(): TakeBasketsAPI {
     retirementLocation?: string,
     retireOnTake?: boolean,
   ): Promise<Uint8Array> => {
-    console.log('api?', api);
     if (!api?.msgClient) return Promise.reject();
     const msg: MsgTake = {
       $type: 'regen.ecocredit.basket.v1.MsgTake',
@@ -60,13 +59,17 @@ export default function useTakeBasketTokens(): TakeBasketsAPI {
     };
 
     const fee: StdFee = {
-      amount: [{ amount: '0', denom: 'uregen' }],
-      gas: '0',
+      amount: [{ amount: '10000', denom: 'uregen' }],
+      gas: '10000',
     };
 
     const memo = '';
 
-    return api.msgClient.sign(address, msg, fee, memo);
+    return api.msgClient
+      .sign(address, [msg], fee, memo)
+      .catch(err => Promise.reject(err));
+
+    // return walletContext.sign(address, [msg], fee, memo);
   };
 
   return { signTake };

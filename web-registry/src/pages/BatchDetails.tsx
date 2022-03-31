@@ -30,7 +30,7 @@ export const BatchDetails: React.FC = () => {
           const batch = await getBatchWithSupplyForDenom(batchDenom);
           setBatch(batch);
           if (batch.metadata) {
-            const { data: metadata } = await getMetadata(batch.metadata);
+            const { metadata } = await getMetadata(batch.metadata);
             setMetadata(metadata);
           }
         } catch (err) {

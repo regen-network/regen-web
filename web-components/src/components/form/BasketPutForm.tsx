@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import { Formik, Form, Field, FormikErrors, FormikHelpers } from 'formik';
 
 import AmountField from '../inputs/AmountField';
 import SelectTextField, { Option } from '../inputs/SelectTextField';
@@ -13,10 +13,7 @@ export interface BasketPutProps {
   availableTradableAmount: number;
   onSubmit: (
     values: FormValues,
-    // formikHelpers: FormikHelpers<{
-    //   basketDenom: undefined;
-    //   amount: undefined;
-    // }>,
+    // formikHelpers: FormikHelpers<FormValues>,
   ) => Promise<void>;
 }
 

@@ -6,20 +6,20 @@ import { Sender } from '../lib/wallet';
 
 type MsgClientType = {
   sign: (msgs: any, fee?: StdFee, memo?: string) => Promise<void>;
-  broadcast: () => Promise<void>;
+  setDeliverTxResponse: (txResult: DeliverTxResponse | undefined) => void;
   deliverTxResponse?: DeliverTxResponse;
   error?: unknown;
   wallet?: Sender;
 };
 
-export default function useMsgClient(): MsgClientType {
+export default function useMsgClient(
+  handleTxQueued: () => void,
+): MsgClientType {
   const { api, wallet } = useLedger();
   const [error, setError] = useState<unknown | undefined>();
-  const [txBytes, setTxBytes] = useState<Uint8Array | undefined>();
   const [deliverTxResponse, setDeliverTxResponse] = useState<
     DeliverTxResponse | undefined
   >();
-  console.log('txBytes', txBytes);
 
   const sign = useCallback(
     async (msgs: any, fee?: StdFee, memo?: string) => {
@@ -35,13 +35,17 @@ export default function useMsgClient(): MsgClientType {
         gas: '200000',
       };
       try {
-        const _txBytes = await api.msgClient.sign(
+        const txBytes = await api.msgClient.sign(
           wallet.address,
           msgs,
           fee || defaultFee,
           memo || '',
         );
-        setTxBytes(_txBytes);
+        if (txBytes) {
+          handleTxQueued();
+          const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
+          setDeliverTxResponse(_deliverTxResponse);
+        }
       } catch (err) {
         console.error(err); // eslint-disable-line no-console
         setError(err);
@@ -49,15 +53,14 @@ export default function useMsgClient(): MsgClientType {
 
       return;
     },
-    [api?.msgClient, wallet?.address],
+    [api?.msgClient, wallet?.address, handleTxQueued],
   );
 
-  const broadcast = useCallback(async () => {
-    if (!api?.msgClient || !txBytes) return;
-
-    const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
-    setDeliverTxResponse(_deliverTxResponse);
-  }, [api?.msgClient, txBytes]);
-
-  return { sign, broadcast, deliverTxResponse, error, wallet };
+  return {
+    sign,
+    setDeliverTxResponse,
+    deliverTxResponse,
+    error,
+    wallet,
+  };
 }

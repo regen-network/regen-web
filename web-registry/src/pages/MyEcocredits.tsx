@@ -17,6 +17,7 @@ import {
   WithBasketsProps,
   withBaskets,
 } from '../components/templates';
+import { ProcessingModal, ConfirmationModal } from '../components/organisms';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-basket.svg';
@@ -33,7 +34,19 @@ const useStyles = makeStyles((theme: Theme) => ({
 const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const styles = useStyles();
   const theme = useTheme();
-  const { sign, broadcast, wallet, deliverTxResponse } = useMsgClient();
+
+  const handleTxQueued = (): void => {
+    setIsProcessingModalOpen(true);
+  };
+
+  const handleConfirmationModalClose = (): void => {
+    setIsProcessingModalOpen(false);
+    setIsConfirmationModalOpen(false);
+    setDeliverTxResponse(undefined);
+  };
+
+  const { sign, setDeliverTxResponse, wallet, deliverTxResponse } =
+    useMsgClient(handleTxQueued);
   const accountAddress = wallet?.address;
   const credits = useEcocredits(accountAddress);
   const basketsWithClasses = useBasketsWithClasses(baskets);
@@ -42,6 +55,8 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     (QueryBasketResponse | undefined)[][]
   >([]);
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
+  const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
   useEffect(() => {
     // Get available baskets to put credits into
@@ -160,10 +175,22 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
                 },
               ],
             });
-            sign([msg]);
+            await sign([msg]);
+            setBasketPutOpen(-1);
           }}
         />
       )}
+      <ProcessingModal
+        open={!deliverTxResponse && isProcessingModalOpen}
+        txHash={deliverTxResponse?.transactionHash}
+        onClose={() => setIsProcessingModalOpen(false)}
+      />
+      {/* TODO Implement new confirmation modal */}
+      <ConfirmationModal
+        open={!!isConfirmationModalOpen || !!deliverTxResponse}
+        onClose={handleConfirmationModalClose}
+        data={deliverTxResponse}
+      />
     </>
   );
 };

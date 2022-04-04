@@ -43,6 +43,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     setIsProcessingModalOpen(false);
     setIsConfirmationModalOpen(false);
     setDeliverTxResponse(undefined);
+    // TODO refetch basket/ecocredits data so it show latest values
   };
 
   const { sign, setDeliverTxResponse, wallet, deliverTxResponse } =

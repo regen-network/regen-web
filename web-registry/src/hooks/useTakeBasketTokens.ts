@@ -38,7 +38,6 @@ export default function useTakeBasketTokens(): TakeBasketsAPI {
   ): Promise<Uint8Array> => {
     if (!api?.msgClient) return Promise.reject();
     const msg = MsgTake.fromPartial({
-      $type: 'regen.ecocredit.basket.v1.MsgTake',
       /** owner is the owner of the basket tokens. */
       owner: address,
       /** basket_denom is the basket bank denom to take credits from. */
@@ -65,9 +64,7 @@ export default function useTakeBasketTokens(): TakeBasketsAPI {
 
     const memo = '';
 
-    return api.msgClient
-      .sign(address, [msg], fee, memo)
-      .catch(err => Promise.reject(err));
+    return api.msgClient.sign(address, [msg], fee, memo);
   };
 
   return { signTake };

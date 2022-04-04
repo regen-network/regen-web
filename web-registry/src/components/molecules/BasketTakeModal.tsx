@@ -3,9 +3,9 @@ import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/eco
 import { RegenModalProps } from 'web-components/lib/components/modal';
 import { FormModalTemplate } from 'web-components/lib/components/modal/FormModalTemplate';
 import {
-  CreditTakeForm,
+  BasketTakeForm,
   MsgTake,
-} from 'web-components/lib/components/form/CreditTakeForm';
+} from 'web-components/lib/components/form/BasketTakeForm';
 import useBasketTokens from '../../hooks/useBasketTokens';
 
 export interface TakeModalProps extends RegenModalProps {
@@ -17,7 +17,7 @@ export interface TakeModalProps extends RegenModalProps {
   onSubmit: (values: MsgTake) => void;
 }
 
-const TakeFromBasketModal: React.FC<TakeModalProps> = ({
+const BasketTakeModal: React.FC<TakeModalProps> = ({
   baskets,
   accountAddress,
   basketDenom,
@@ -36,7 +36,7 @@ const TakeFromBasketModal: React.FC<TakeModalProps> = ({
 
   return (
     <FormModalTemplate title="Take from basket" open={open} onClose={onClose}>
-      <CreditTakeForm
+      <BasketTakeForm
         accountAddress={accountAddress}
         availableTradableAmount={balance}
         basketDenom={basketDenom}
@@ -47,4 +47,4 @@ const TakeFromBasketModal: React.FC<TakeModalProps> = ({
   );
 };
 
-export { TakeFromBasketModal };
+export { BasketTakeModal };

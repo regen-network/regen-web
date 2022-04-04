@@ -17,6 +17,6 @@ export * from './ProjectPageFooter';
 export * from './ProjectBatchTotals';
 export * from './ReviewProcessInfo';
 export * from './Statistic';
-export * from './TakeFromBasketModal';
+export * from './BasketTakeModal';
 export * from './TimelineSection';
 export * from './TwoImageSection';

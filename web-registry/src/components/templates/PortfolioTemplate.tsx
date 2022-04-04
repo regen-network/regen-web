@@ -16,7 +16,7 @@ import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { MsgTake } from 'web-components/lib/components/form/CreditTakeForm';
 
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
-import { TakeFromBasketModal } from '../../components/molecules';
+import { BasketTakeModal } from '../../components/molecules';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
 import { useEcocredits, useTakeBasketTokens } from '../../hooks';
 import { useLedger } from '../../ledger';
@@ -234,7 +234,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
           />
         )}
         {baskets && !!selectedBasketDenom && !!accountAddress && (
-          <TakeFromBasketModal
+          <BasketTakeModal
             open={!!selectedBasketDenom}
             accountAddress={accountAddress}
             basketDenom={selectedBasketDenom}

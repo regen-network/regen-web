@@ -16,23 +16,18 @@ import {
 } from '../inputs/validation';
 
 /**
- * Send sends tradable credits from one account to another account.
- * Sent credits can either be tradable or retired on receipt.
- * https://docs.regen.network/modules/ecocredit/03_messages.html#msgsend
+ * Take - takes credits from a basket starting from the oldest credits first.
+ * https://docs.regen.network/commands/regen_tx_ecocredit_take-from-basket.html
  *
  * Validation:
  *    holder: must ba a valid address, and their signature must be present in the transaction
- *    recipient: must ba a valid address
- *    credits: must not be empty
- *    batch_denom: must be a valid batch denomination
- *    tradable_amount: must not be negative
- *    retired_amount: must not be negative
- *  if retired_amount is positive:
+ *    amount: must not be empty
+ *    basket_denom: must be a valid batch denomination
+ *  if retire_on_take is true:
  *    retirement_location: must be a valid location
  *
  * Also:
- * https://docs.regen.network/modules/ecocredit/protobuf.html#msgsend
- * https://docs.regen.network/modules/ecocredit/protobuf.html#msgsend-sendcredits
+ * https://buf.build/regen/regen-ledger/docs/main:regen.ecocredit.basket.v1#regen.ecocredit.basket.v1.EventTake
  */
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -105,14 +100,14 @@ interface FormProps {
   onSubmit: (values: MsgTake) => void;
 }
 
-const CreditTakeForm: React.FC<FormProps> = ({
+const BasketTakeForm: React.FC<FormProps> = ({
   accountAddress,
   basketDenom,
   availableTradableAmount,
   onClose,
   onSubmit,
 }) => {
-  const styles = useStyles();
+  // const styles = useStyles();
 
   const initialValues = {
     amount: 0,
@@ -161,6 +156,7 @@ const CreditTakeForm: React.FC<FormProps> = ({
       basketDenom,
       // amount: values.amount,
       amount: values.amount * 1000000,
+      // Math.pow(10, basket?.basket?.exponent);
       retireOnTake: !!values.retireOnTake,
       retirementLocation: 'US', //todo
     };
@@ -182,15 +178,17 @@ const CreditTakeForm: React.FC<FormProps> = ({
               label="Amount"
               availableAmount={availableTradableAmount}
               batchDenom={basketDenom}
-              className={styles.textField}
+              // className={styles.textField}
             />
             <Field
               component={CheckboxLabel}
               type="checkbox"
               name="retireOnTake"
-              className={styles.checkboxLabel}
+              // className={styles.checkboxLabel}
               label={
-                <Description className={styles.checkboxDescription}>
+                <Description
+                // className={styles.checkboxDescription}
+                >
                   Retire credits upon transfer
                 </Description>
               }
@@ -216,4 +214,4 @@ const CreditTakeForm: React.FC<FormProps> = ({
   );
 };
 
-export { CreditTakeForm };
+export { BasketTakeForm };

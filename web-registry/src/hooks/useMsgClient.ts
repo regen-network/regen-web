@@ -5,7 +5,7 @@ import { useLedger } from '../ledger';
 import { Sender } from '../lib/wallet';
 
 type MsgClientType = {
-  sign: (msgs: any, fee?: StdFee, memo?: string) => Promise<void>;
+  signAndBroadcast: (msgs: any, fee?: StdFee, memo?: string) => Promise<void>;
   setDeliverTxResponse: (txResult: DeliverTxResponse | undefined) => void;
   deliverTxResponse?: DeliverTxResponse;
   error?: unknown;
@@ -22,7 +22,7 @@ export default function useMsgClient(
     DeliverTxResponse | undefined
   >();
 
-  const sign = useCallback(
+  const signAndBroadcast = useCallback(
     async (msgs: any, fee?: StdFee, memo?: string) => {
       if (!api?.msgClient || !wallet?.address) return;
 
@@ -59,7 +59,7 @@ export default function useMsgClient(
   );
 
   return {
-    sign,
+    signAndBroadcast,
     setDeliverTxResponse,
     deliverTxResponse,
     error,

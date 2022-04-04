@@ -51,8 +51,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     width: theme.spacing(38),
     height: theme.spacing(10),
-    paddingRight: theme.spacing(0),
-    paddingLeft: theme.spacing(0),
   },
 }));
 
@@ -77,6 +75,7 @@ const BlogPost: React.FC<BlogPostProps> = ({
         )}
       </Typography>
       <OutlinedButton
+        size="small"
         className={classes.button}
         href={url}
         target="_blank"

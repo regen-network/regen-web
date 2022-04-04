@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, useTheme } from '@mui/styles';
-import { Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { Typography, useTheme } from '@mui/material';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
@@ -51,18 +51,7 @@ const query = graphql`
   query mainnetMediaSection {
     sanityMainnetPage {
       mediaItems {
-        title
-        author
-        date
-        href
-        type
-        image {
-          image {
-            asset {
-              url
-            }
-          }
-        }
+        ...mediaFields
       }
     }
   }

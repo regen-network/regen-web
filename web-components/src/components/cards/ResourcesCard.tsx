@@ -141,7 +141,12 @@ export default function ResourcesCard({
         )}
       </div>
       <div className={classes.buttonWrapper}>
-        <OutlinedButton target={target} href={link} className={classes.button}>
+        <OutlinedButton
+          size="small"
+          target={target}
+          href={link}
+          className={classes.button}
+        >
           <EyeIcon className={classes.eyeIcon} />
           <span>{buttonText}</span>
         </OutlinedButton>

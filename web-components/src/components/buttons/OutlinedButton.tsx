@@ -17,20 +17,15 @@ const SpanButton: React.FC = props => (
   <Button variant="contained" component="span" {...props} />
 );
 
-const styledCallback = ({ theme }: { theme: Theme }): any => ({
-  border: `2px solid ${theme.palette.secondary.light}`,
-  borderRadius: '2px',
-  color: theme.palette.secondary.main,
-  fontFamily: theme.typography.h1.fontFamily,
-  fontWeight: 800,
-  letterSpacing: '1px',
-  padding: theme.spacing(2, 4),
-  backgroundColor: theme.palette.primary.main,
-  boxShadow: 'none',
-  textAlign: 'center',
-  '&:hover': {
-    backgroundColor: theme.palette.secondary.light,
-    boxShadow: 'none',
+const styledCallback = (theme: Theme): any => ({
+  root: {
+    color: theme.palette.secondary.main,
+    borderColor: theme.palette.secondary.contrastText,
+    backgroundColor: theme.palette.primary.main,
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.light,
+      borderColor: theme.palette.secondary.light,
+    },
   },
 });
 

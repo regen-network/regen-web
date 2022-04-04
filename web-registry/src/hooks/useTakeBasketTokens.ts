@@ -37,7 +37,7 @@ export default function useTakeBasketTokens(): TakeBasketsAPI {
     retireOnTake?: boolean,
   ): Promise<Uint8Array> => {
     if (!api?.msgClient) return Promise.reject();
-    const msg: MsgTake = {
+    const msg = MsgTake.fromPartial({
       $type: 'regen.ecocredit.basket.v1.MsgTake',
       /** owner is the owner of the basket tokens. */
       owner: address,
@@ -56,11 +56,11 @@ export default function useTakeBasketTokens(): TakeBasketsAPI {
        * retired or tradable credits.
        */
       retireOnTake: retireOnTake || false,
-    };
+    });
 
     const fee: StdFee = {
       amount: [{ amount: '10000', denom: 'uregen' }],
-      gas: '10000',
+      gas: '100000',
     };
 
     const memo = '';
@@ -68,8 +68,6 @@ export default function useTakeBasketTokens(): TakeBasketsAPI {
     return api.msgClient
       .sign(address, [msg], fee, memo)
       .catch(err => Promise.reject(err));
-
-    // return walletContext.sign(address, [msg], fee, memo);
   };
 
   return { signTake };

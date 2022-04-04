@@ -3,11 +3,10 @@ import {
   assertIsBroadcastTxSuccess,
   SigningStargateClient,
   BroadcastTxResponse,
-  StdFee,
 } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
-import { OfflineSigner, EncodeObject } from '@cosmjs/proto-signing';
+import { OfflineSigner } from '@cosmjs/proto-signing';
 
 import { ledgerRPCUri, ledgerRESTUri, chainId } from './ledger';
 
@@ -35,12 +34,7 @@ type ContextType = {
   wallet?: Sender;
   loaded: boolean;
   suggestChain?: () => Promise<void>;
-  sign?: (
-    signerAddress: string,
-    msgs: any,
-    fee: StdFee,
-    memo: string,
-  ) => Promise<Uint8Array>;
+  signSend?: (amount: number, recipient: string) => Promise<Uint8Array>;
   broadcast?: (txBytes: Uint8Array) => Promise<string>;
   txResult?: BroadcastTxResponse;
   setTxResult: (txResult: BroadcastTxResponse | undefined) => void;
@@ -208,31 +202,49 @@ export const WalletProvider: React.FC = ({ children }) => {
   };
 
   /**
-   * Sign a transaction
+   * Sign a transaction for sending tokens to a reciptient
    */
   // TODO Remove, we don't need this anymore, we should use @regen-network/api instead
-  const sign = async (
-    signerAddress: string,
-    msgs: any,
-    fee: StdFee,
-    memo: string,
+  const signSend = async (
+    amount: number,
+    recipient: string,
   ): Promise<Uint8Array> => {
-    const msgsAny: any[] = []; //todo
-    for (const msg of msgs) {
-      msgsAny.push({
-        typeUrl: `/${msg.$type}`,
-        value: (({ $type, ...rest }) => rest)(msg),
-      });
-    }
-    try {
-      console.log('msgsAny', msgsAny);
-      const client = await getClient();
-      const txRaw = await client.sign(signerAddress, msgsAny, fee, memo);
-      const txBytes = TxRaw.encode(txRaw).finish();
+    amount *= 1000000;
+    amount = Math.floor(amount);
 
+    const client = await getClient();
+    const fee = {
+      amount: [
+        {
+          denom: 'uregen',
+          amount: '100', //TODO: what should fee and gas be?
+        },
+      ],
+      gas: '200000',
+    };
+
+    const msgSend = {
+      fromAddress: sender.address,
+      toAddress: recipient,
+      amount: [
+        {
+          denom: 'uregen',
+          amount: amount.toString(),
+        },
+      ],
+    };
+    const msgAny = {
+      typeUrl: '/cosmos.bank.v1beta1.MsgSend',
+      value: msgSend,
+    };
+
+    try {
+      const txRaw = await client.sign(sender.address, [msgAny], fee, '');
+      const txBytes = TxRaw.encode(txRaw).finish();
       return txBytes;
     } catch (err) {
-      return Promise.reject(err);
+      alert(`Client sign error: ${err}`);
+      return Promise.reject();
     }
   };
 
@@ -305,7 +317,7 @@ export const WalletProvider: React.FC = ({ children }) => {
         wallet: sender,
         loaded,
         suggestChain,
-        sign,
+        signSend,
         broadcast,
         txResult,
         setTxResult,

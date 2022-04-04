@@ -159,9 +159,10 @@ const CreditTakeForm: React.FC<FormProps> = ({
     const msgTake: MsgTake = {
       owner: accountAddress,
       basketDenom,
-      amount: values.amount,
+      // amount: values.amount,
+      amount: values.amount * 1000000,
       retireOnTake: !!values.retireOnTake,
-      retirementLocation: 'todo',
+      retirementLocation: 'US', //todo
     };
 
     await onSubmit(msgTake);

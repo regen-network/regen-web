@@ -96,7 +96,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
     if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
 
     console.log('MsgTake ', values);
-    const signedMsg = await signTake(
+    const txBytes = await signTake(
       accountAddress,
       values.basketDenom,
       values.amount,
@@ -104,9 +104,13 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
       values.retireOnTake,
     );
     // onTxQueued(txBytes);
-    console.log('signedMsg ', signedMsg);
+    console.log('txBytes ', txBytes);
 
-    await msgClient.broadcast(signedMsg);
+    if (txBytes) {
+      const hash = await msgClient.broadcast(txBytes);
+      // eslint-disable-next-line
+      console.log('hash', hash);
+    }
   };
 
   return (

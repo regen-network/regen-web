@@ -39,12 +39,14 @@ const RegistryNav: React.FC = () => {
 
   const carbonPlusItems: HeaderDropdownItemProps[] = [
     {
+      pathname,
       linkComponent: RegistryNavLink,
       title: 'Carbon<i>Plus</i> Grasslands credit class',
       href: '/credit-classes/carbonplus-grasslands',
       svg: Cow /* , right: () => <PeerReviewed /> */,
     },
     {
+      pathname,
       linkComponent: RegistryNavLink,
       title: 'Carbon<i>Plus</i> Grasslands methodology',
       href: '/methodologies/carbonplus-grasslands',
@@ -55,22 +57,26 @@ const RegistryNav: React.FC = () => {
 
   const programHowToItems: HeaderDropdownItemProps[] = [
     {
+      pathname,
       linkComponent: NavLink,
       href: 'https://library.regen.network/v/regen-registry-program-guide/',
       title: 'Program Guide',
     },
     // { href: '/create-credit-class', title: 'Create a Credit Class', linkComponent: RegistryNavLink },
     {
+      pathname,
       href: '/create-methodology',
       title: 'Create a Methodology',
       linkComponent: RegistryNavLink,
     },
     {
+      pathname,
       href: '/methodology-review-process',
       title: 'Methodology Review Process',
       linkComponent: RegistryNavLink,
     },
     {
+      pathname,
       href: 'https://library.regen.network/',
       title: 'Regen Registry Library',
       linkComponent: RegistryNavLink,
@@ -89,6 +95,7 @@ const RegistryNav: React.FC = () => {
     {
       title: 'Projects',
       dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
+        pathname,
         title:
           titleAlias[p?.metadata?.['http://schema.org/name']] ||
           p?.metadata?.['http://schema.org/name'],
@@ -149,6 +156,7 @@ const RegistryNav: React.FC = () => {
         ),
         dropdownItems: [
           {
+            pathname,
             linkComponent: RegistryNavLink,
             title: 'My Portfolio',
             href: '/ecocredits/dashboard',

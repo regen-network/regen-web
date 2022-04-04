@@ -3,7 +3,6 @@ import { makeStyles } from '@mui/styles';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { Popover, MenuList, Paper } from '@mui/material';
 import DropdownIcon from '../icons/DropdownIcon';
-import { ClassNames } from '@emotion/react';
 
 const useStyles = makeStyles((theme: Theme) => ({
   popover: {
@@ -11,7 +10,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   popoverContent: {
     pointerEvents: 'auto',
-    marginTop: theme.spacing(4.75),
+    marginTop: theme.spacing(4),
   },
   text: {
     '& li.MuiMenuItem-root:hover': {

@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   button: {
-    textAlign: 'center',
     width: theme.spacing(90),
   },
   title: {
@@ -97,7 +96,8 @@ const query = graphql`
 `;
 const BlockExplorerSection = (): JSX.Element => {
   const styles = useStyles();
-  const { background, sanityTokenPage } = useStaticQuery<TokenBlockExplorerSectionQuery>(query);
+  const { background, sanityTokenPage } =
+    useStaticQuery<TokenBlockExplorerSectionQuery>(query);
   const data = sanityTokenPage?.blockExplorerSection;
   const imageData = background?.childImageSharp?.fluid;
 
@@ -111,6 +111,7 @@ const BlockExplorerSection = (): JSX.Element => {
             <BlockContent noYMargin content={data?._rawBody} />
           </Description>
           <ContainedButton
+            size="large"
             className={styles.button}
             href={data?.button?.buttonLink?.buttonHref || ''}
             target="_blank"

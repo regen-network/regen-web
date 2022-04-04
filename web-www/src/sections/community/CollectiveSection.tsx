@@ -91,19 +91,25 @@ const CollectiveSection = (): JSX.Element => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
-  const { bg, sanityCommunityPage } = useStaticQuery<CommunityCollectiveSectionQuery>(query);
+  const { bg, sanityCommunityPage } =
+    useStaticQuery<CommunityCollectiveSectionQuery>(query);
   const data = sanityCommunityPage?.collectiveSection;
 
   return (
     <BackgroundImage fluid={bg?.childImageSharp?.fluid as FluidObject}>
       <Section
         title={data?.title || ''}
-        classes={{ root: clsx(styles.section, styles.center), title: styles.title }}
+        classes={{
+          root: clsx(styles.section, styles.center),
+          title: styles.title,
+        }}
       >
         <MarketingDescription className={clsx(styles.content, styles.center)}>
           <BlockContent content={data?._rawBody} />
         </MarketingDescription>
-        <ContainedButton onClick={() => setOpen(true)}>{data?.buttonText}</ContainedButton>
+        <ContainedButton size="large" onClick={() => setOpen(true)}>
+          {data?.buttonText}
+        </ContainedButton>
       </Section>
       <Modal
         open={open}
@@ -111,7 +117,10 @@ const CollectiveSection = (): JSX.Element => {
         className={styles.modal}
         closeIconColor={theme.palette.info.light}
       >
-        <iframe title="collective-signup-form" src={data?.signupFormUrl || ''} />
+        <iframe
+          title="collective-signup-form"
+          src={data?.signupFormUrl || ''}
+        />
       </Modal>
     </BackgroundImage>
   );

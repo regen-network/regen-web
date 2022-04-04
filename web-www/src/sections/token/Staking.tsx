@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
@@ -65,7 +64,10 @@ const Staking = (): JSX.Element => {
       <Description className={clsx(styles.content, styles.center)}>
         <BlockContent content={data?._rawBody} />
       </Description>
-      <ContainedButton href={data?.button?.buttonLink?.buttonHref || ''}>
+      <ContainedButton
+        size="large"
+        href={data?.button?.buttonLink?.buttonHref || ''}
+      >
         {data?.button?.buttonText}
       </ContainedButton>
     </Section>

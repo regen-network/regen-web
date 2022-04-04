@@ -40,12 +40,12 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   };
 
   const handleConfirmationModalClose = (): void => {
-    setIsProcessingModalOpen(false);
     setIsConfirmationModalOpen(false);
     setDeliverTxResponse(undefined);
   };
 
   const handleTxDelivered = (): void => {
+    setIsProcessingModalOpen(false);
     // TODO refetch basket/ecocredits data so it show latest values
   };
 

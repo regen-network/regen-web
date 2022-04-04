@@ -5,16 +5,19 @@ import MuiTextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import clsx from 'clsx';
 
+import { DefaultStyleProps } from './FieldFormControl';
+
 interface TriggerTextFieldProps extends TextFieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
   transformValue?: (v: any) => any;
 }
 
-export interface RegenTextFieldProps extends TriggerTextFieldProps {
+export interface RegenTextFieldProps
+  extends TriggerTextFieldProps,
+    DefaultStyleProps {
   children?: any;
   errors?: boolean;
   optional?: boolean;
-  defaultStyle?: boolean;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
 }
@@ -131,10 +134,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
   }),
-  default: {
+  firstOfType: {
     '&:first-of-type': {
       marginTop: 0,
     },
+  },
+  default: {
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.typography.pxToRem(40),
     },
@@ -169,16 +174,20 @@ export default function RegenTextField({
   errors = false,
   optional = false,
   defaultStyle = true,
+  forceDefaultStyle = false,
   children,
   startAdornment,
   endAdornment,
   ...props
 }: RegenTextFieldProps): JSX.Element {
-  const classes = useStyles({ ...props, optional, errors });
-  const baseRootClasses = [classes.root, props.className];
+  const styles = useStyles({ ...props, optional, errors });
+  const baseClasses = [styles.root, props.className];
+  const defaultClasses = [styles.default, ...baseClasses];
   const rootClasses = defaultStyle
-    ? [classes.default, ...baseRootClasses]
-    : baseRootClasses;
+    ? forceDefaultStyle
+      ? defaultClasses
+      : [...defaultClasses, styles.firstOfType]
+    : baseClasses;
 
   return (
     <TriggerTextField

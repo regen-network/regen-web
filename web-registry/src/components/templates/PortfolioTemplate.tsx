@@ -1,19 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
-import { makeStyles, useTheme } from '@mui/styles';
-import {
-  QueryBasketsResponse,
-  QueryBasketResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import { makeStyles } from '@mui/styles';
+import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
+import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
-import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
-import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
-import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-import { MsgTake } from 'web-components/lib/components/form/CreditTakeForm';
 
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
 import { BasketTakeModal } from '../../components/molecules';
@@ -26,11 +19,13 @@ import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-ba
 // import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
 import { useWallet } from '../../lib/wallet';
+import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 
 interface PortfolioTemplateProps extends WithBasketsProps {
   accountAddress?: string;
-  basketsWithClasses?: (QueryBasketResponse | undefined)[];
-  own?: boolean;
+  credits?: BatchInfoWithBalance[];
+  renderCreditActionButtons?: RenderActionButtonsFunc;
+  renderBasketActionButtons?: RenderActionButtonsFunc;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -46,72 +41,47 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(4.25),
     },
   },
-  arrow: {
-    width: theme.spacing(6),
-    height: theme.spacing(6),
-  },
 }));
 
 export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   accountAddress,
+  credits,
   baskets,
-  basketsWithClasses,
-  own,
   children,
+  renderCreditActionButtons,
+  renderBasketActionButtons,
 }) => {
   const styles = useStyles();
-  const theme = useTheme();
-  const { api } = useLedger();
-  const { signTake } = useTakeBasketTokens();
-  const walletContext = useWallet();
 
-  const credits = useEcocredits(accountAddress);
-  const [creditBaskets, setCreditBaskets] = useState<
-    (QueryBasketResponse | undefined)[][]
-  >([]);
-  const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
-  const [selectedBasketDenom, setSelectedBasketDenom] = useState('');
+  // const openModal = (rowIndex: number): void => {
+  //   if (!accountAddress) return;
+  //   const selectedBasket = basketsWithClasses?.[rowIndex]?.basket;
+  //   if (selectedBasket?.basketDenom) {
+  //     setSelectedBasketDenom(selectedBasket.basketDenom);
+  //   }
+  // };
 
-  useEffect(() => {
-    // Get available baskets to put credits into
-    if (own && basketsWithClasses && basketsWithClasses.length > 0) {
-      setCreditBaskets(
-        credits.map(c =>
-          basketsWithClasses.filter(b => b?.classes.includes(c.class_id)),
-        ),
-      );
-    }
-  }, [own, credits, basketsWithClasses]);
+  // const handleTakeCredits = async (values: MsgTake): Promise<void> => {
+  //   const msgClient = api?.msgClient;
+  //   if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
 
-  const openModal = (rowIndex: number): void => {
-    if (!accountAddress) return;
-    const selectedBasket = basketsWithClasses?.[rowIndex]?.basket;
-    if (selectedBasket?.basketDenom) {
-      setSelectedBasketDenom(selectedBasket.basketDenom);
-    }
-  };
+  //   console.log('MsgTake ', values);
+  //   const txBytes = await signTake(
+  //     accountAddress,
+  //     values.basketDenom,
+  //     values.amount,
+  //     values.retirementLocation,
+  //     values.retireOnTake,
+  //   );
+  //   // onTxQueued(txBytes);
+  //   console.log('txBytes ', txBytes);
 
-  const handleTakeCredits = async (values: MsgTake): Promise<void> => {
-    const msgClient = api?.msgClient;
-    if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
-
-    console.log('MsgTake ', values);
-    const txBytes = await signTake(
-      accountAddress,
-      values.basketDenom,
-      values.amount,
-      values.retirementLocation,
-      values.retireOnTake,
-    );
-    // onTxQueued(txBytes);
-    console.log('txBytes ', txBytes);
-
-    if (txBytes) {
-      const hash = await msgClient.broadcast(txBytes);
-      // eslint-disable-next-line
-      console.log('hash', hash);
-    }
-  };
+  //   if (txBytes) {
+  //     const hash = await msgClient.broadcast(txBytes);
+  //     // eslint-disable-next-line
+  //     console.log('hash', hash);
+  //   }
+  // };
 
   return (
     <Box sx={{ backgroundColor: 'grey.50', pb: { xs: 21.25, sm: 28.28 } }}>
@@ -124,34 +94,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
           <BasketsTable
             address={accountAddress}
             baskets={baskets}
-            renderActionButtons={
-              own
-                ? (i: number) => (
-                    <TableActionButtons
-                      buttons={[
-                        {
-                          icon: <TakeFromBasket />,
-                          label: 'Take from basket',
-                          // eslint-disable-next-line no-console
-                          onClick: () => openModal(i),
-                        },
-                        // This will be handled from osmosis
-                        // so hiding these for now
-                        // {
-                        //   icon: <WithdrawIBC />,
-                        //   label: 'Withdraw (IBC)',
-                        //   onClick: () => `TODO withdraw ${i}`,
-                        // },
-                        // {
-                        //   icon: <DepositIBC />,
-                        //   label: 'Deposit (IBC)',
-                        //   onClick: () => `TODO deposit ${i}`,
-                        // },
-                      ]}
-                    />
-                  )
-                : undefined
-            }
+            renderActionButtons={renderBasketActionButtons}
           />
         </Box>
         <Box sx={{ pt: 12.75 }}>
@@ -160,80 +103,10 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
           </Title>
           <EcocreditsTable
             credits={credits}
-            renderActionButtons={
-              own
-                ? (i: number) => {
-                    const buttons = [
-                      // Disabling for now until the marketplace is
-                      // released on regen-ledger
-                      // {
-                      //   icon: <Sell />,
-                      //   label: 'Sell',
-                      //   // eslint-disable-next-line no-console
-                      //   onClick: () => console.log(`TODO sell credit ${i}`),
-                      // },
-                      {
-                        icon: (
-                          <ArrowDownIcon
-                            className={styles.arrow}
-                            color={theme.palette.secondary.main}
-                            direction="next"
-                          />
-                        ),
-                        label: 'Send',
-                        // eslint-disable-next-line no-console
-                        onClick: () => console.log(`TODO send credit ${i}`),
-                      },
-                      {
-                        icon: (
-                          <ArrowDownIcon
-                            className={styles.arrow}
-                            color={theme.palette.secondary.main}
-                            direction="down"
-                          />
-                        ),
-                        label: 'Retire',
-                        // eslint-disable-next-line no-console
-                        onClick: () => console.log(`TODO retire credit ${i}`),
-                      },
-                    ];
-
-                    // Only add ability to put credits into basket
-                    // if there's at least one basket that accepts those credits
-                    if (creditBaskets[i] && creditBaskets[i].length > 0) {
-                      buttons.splice(1, 0, {
-                        // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
-                        icon: <PutInBasket />,
-                        label: 'Put in basket',
-                        onClick: () => setBasketPutOpen(i),
-                      });
-                    }
-                    return <TableActionButtons buttons={buttons} />;
-                  }
-                : undefined
-            }
+            renderActionButtons={renderCreditActionButtons}
           />
         </Box>
-        {basketPutOpen > -1 && (
-          <BasketPutModal
-            basketOptions={
-              creditBaskets[basketPutOpen]
-                .map(b => ({
-                  label: b?.basket?.name,
-                  value: b?.basket?.basketDenom,
-                }))
-                .filter(v => v.label && v.value) as Option[]
-            }
-            availableTradableAmount={Number(
-              credits[basketPutOpen].tradable_amount,
-            )}
-            batchDenom={credits[basketPutOpen].batch_denom}
-            open={basketPutOpen > -1}
-            onClose={() => setBasketPutOpen(-1)}
-            onSubmit={() => alert('submit')}
-          />
-        )}
-        {baskets && !!selectedBasketDenom && !!accountAddress && (
+        {/* {baskets && !!selectedBasketDenom && !!accountAddress && (
           <BasketTakeModal
             open={!!selectedBasketDenom}
             accountAddress={accountAddress}
@@ -242,7 +115,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             onClose={() => setSelectedBasketDenom('')}
             onSubmit={handleTakeCredits}
           />
-        )}
+        )} */}
       </Section>
     </Box>
   );

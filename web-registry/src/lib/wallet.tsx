@@ -1,9 +1,5 @@
 import React, { useState, createContext } from 'react';
-import {
-  assertIsBroadcastTxSuccess,
-  SigningStargateClient,
-  BroadcastTxResponse,
-} from '@cosmjs/stargate';
+import { SigningStargateClient, DeliverTxResponse } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { OfflineSigner } from '@cosmjs/proto-signing';
@@ -19,7 +15,7 @@ interface ChainKey {
   isNanoLedger: boolean;
 }
 
-interface Sender {
+export interface Sender {
   offlineSigner?: OfflineSigner;
   address: string;
   shortAddress: string;
@@ -36,13 +32,13 @@ type ContextType = {
   suggestChain?: () => Promise<void>;
   signSend?: (amount: number, recipient: string) => Promise<Uint8Array>;
   broadcast?: (txBytes: Uint8Array) => Promise<string>;
-  txResult?: BroadcastTxResponse;
-  setTxResult: (txResult: BroadcastTxResponse | undefined) => void;
+  txResult?: DeliverTxResponse;
+  setTxResult: (txResult: DeliverTxResponse | undefined) => void;
 };
 
 const WalletContext = createContext<ContextType>({
   loaded: false,
-  setTxResult: (txResult: BroadcastTxResponse | undefined) => {},
+  setTxResult: (txResult: DeliverTxResponse | undefined) => {},
 });
 
 const chainName = process.env.REACT_APP_LEDGER_CHAIN_NAME;
@@ -59,7 +55,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   // This is being used so that we display the "connect wallet" or the connected wallet address
   // only once we know what's the actual wallet connection status.
   const [loaded, setLoaded] = useState<boolean>(false);
-  const [txResult, setTxResult] = useState<BroadcastTxResponse | undefined>(
+  const [txResult, setTxResult] = useState<DeliverTxResponse | undefined>(
     undefined,
   );
 
@@ -255,7 +251,6 @@ export const WalletProvider: React.FC = ({ children }) => {
   const broadcast = async (signedTxBytes: Uint8Array): Promise<string> => {
     const client = await getClient();
     const result = await client.broadcastTx(signedTxBytes);
-    assertIsBroadcastTxSuccess(result);
     setTxResult(result);
 
     return result.transactionHash;

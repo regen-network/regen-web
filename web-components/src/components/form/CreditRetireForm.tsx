@@ -185,11 +185,11 @@ export const validateCreditRetire = (
   if (!values.country) {
     errors.country = requiredMessage;
   }
-
-  errors.retiredAmount = validateAmount(
+  const errAmount = validateAmount(
     availableTradableAmount,
     values.retiredAmount,
   );
+  if (errAmount) errors.retiredAmount = errAmount;
 
   return errors;
 };

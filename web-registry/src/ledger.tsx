@@ -3,12 +3,13 @@ import { RegenApi } from '@regen-network/api';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 
 import { ledgerRPCUri, ledgerExpRPCUri, expLedger } from './lib/ledger';
-import { useWallet } from './lib/wallet';
+import { useWallet, Sender } from './lib/wallet';
 
 interface ContextValue {
   loading: boolean;
   api: RegenApi | undefined;
   error: unknown;
+  wallet?: Sender;
 }
 
 interface ConnectParams {
@@ -71,7 +72,7 @@ export const LedgerProvider: React.FC = ({ children }) => {
   }, [setApi, setLoading, setError, wallet?.offlineSigner]);
 
   return (
-    <LedgerContext.Provider value={{ error, loading, api }}>
+    <LedgerContext.Provider value={{ error, loading, api, wallet }}>
       {children}
     </LedgerContext.Provider>
   );
@@ -113,5 +114,6 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
     api: forceExp ? expApi : context.api,
     loading: forceExp ? expLoading : context.loading,
     error: forceExp ? expError : context.error,
+    wallet,
   };
 };

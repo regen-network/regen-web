@@ -3,7 +3,6 @@ import { makeStyles, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
-import ReactHtmlParser from 'react-html-parser';
 import Img, { FluidObject } from 'gatsby-image';
 import cx from 'clsx';
 import { Formik, Form, Field } from 'formik';
@@ -334,6 +333,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                                 label="Your organization's name"
                                 name="orgName"
                                 optional
+                                forceDefaultStyle
                               />
                             </Grid>
                             <Grid
@@ -355,6 +355,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                                     ? cx(styles.defaultSelect, styles.textField)
                                     : styles.textField
                                 }
+                                forceDefaultStyle
                               />
                             </Grid>
                           </Grid>
@@ -377,6 +378,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                           minRows={matches ? 6 : 4}
                         />
                         <ContainedButton
+                          sx={{ mt: 12.5 }}
                           disabled={
                             (submitCount > 0 && !isValid) || isSubmitting
                           }

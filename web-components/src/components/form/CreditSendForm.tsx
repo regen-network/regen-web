@@ -141,10 +141,11 @@ const CreditSendForm: React.FC<FormProps> = ({
       errors.recipient = requiredMessage;
     }
 
-    errors.tradableAmount = validateAmount(
+    const errAmount = validateAmount(
       availableTradableAmount,
       values.tradableAmount,
     );
+    if (errAmount) errors.tradableAmount = errAmount;
 
     // Retire form validation (optional subform)
     if (values.withRetire) {

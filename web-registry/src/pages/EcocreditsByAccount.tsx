@@ -10,14 +10,20 @@ import {
 import { LinkWithArrow } from '../components/atoms';
 import { truncate } from '../lib/wallet';
 import { getAccountUrl } from '../lib/block-explorer';
+import { useEcocredits } from '../hooks';
 
 const WrappedEcocreditsByAccount: React.FC<WithBasketsProps> = ({
   baskets,
 }) => {
   const { accountAddress } = useParams<{ accountAddress: string }>();
+  const credits = useEcocredits(accountAddress);
 
   return (
-    <PortfolioTemplate accountAddress={accountAddress} baskets={baskets}>
+    <PortfolioTemplate
+      credits={credits}
+      accountAddress={accountAddress}
+      baskets={baskets}
+    >
       <Box sx={{ mt: { xs: 1.25, sm: 3 } }}>
         <Typography
           sx={{

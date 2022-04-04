@@ -11,14 +11,20 @@ export interface BasketPutProps {
   basketOptions: Option[];
   batchDenom: string;
   availableTradableAmount: number;
-  onSubmit: () => void;
+  onSubmit: (
+    values: FormValues,
+    // formikHelpers: FormikHelpers<{
+    //   basketDenom: undefined;
+    //   amount: undefined;
+    // }>,
+  ) => Promise<void>;
 }
 
 interface FormProps extends BasketPutProps {
   onClose: () => void;
 }
 
-interface FormValues {
+export interface FormValues {
   basketDenom?: string;
   amount?: number;
 }
@@ -48,7 +54,8 @@ const BasketPutForm: React.FC<FormProps> = ({
     if (!values.basketDenom) {
       errors.basketDenom = requiredMessage;
     }
-    errors.amount = validateAmount(availableTradableAmount, values.amount);
+    const errAmount = validateAmount(availableTradableAmount, values.amount);
+    if (errAmount) errors.amount = errAmount;
 
     return errors;
   };

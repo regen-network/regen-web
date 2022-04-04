@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => {
 export type HeaderDropdownItemProps = {
   title: string;
   href: string;
+  pathname: string;
   linkComponent: React.FC<NavLinkProps>;
   svg?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   right?: () => JSX.Element;
@@ -55,7 +56,7 @@ export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({
           <SVG />
         </Box>
       )}
-      <LinkComponent href={props.href}>
+      <LinkComponent pathname={props.pathname} href={props.href}>
         {ReactHtmlParser(props.title)}
       </LinkComponent>
       {props.right && <Box ml={3}>{props.right()}</Box>}

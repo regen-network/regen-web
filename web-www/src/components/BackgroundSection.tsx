@@ -1,13 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import { Variant } from '@mui/material/styles/createTypography';
-import Typography from '@mui/material/Typography';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
+import { useMediaQuery, useTheme, Typography } from '@mui/material';
 
 import Title from 'web-components/lib/components/title';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import type { Theme } from 'web-components/lib/theme/muiTheme';
+import type { Variant } from '@mui/material/styles/createTypography';
 
 interface Props {
   className?: string;
@@ -168,14 +168,23 @@ const BackgroundSection = ({
   children,
   topSection = true,
 }: Props): JSX.Element => {
-  const classes = useStyles({ titleVariant, linearGradientMobile, linearGradient, topSection });
+  const classes = useStyles({
+    titleVariant,
+    linearGradientMobile,
+    linearGradient,
+    topSection,
+  });
   let headerJSX: JSX.Element | null = null;
   let bodyJSX: JSX.Element | null = null;
   let textJSX: JSX.Element | null = null;
   // Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
   if (header) {
     headerJSX = (
-      <Title color="primary" variant={titleVariant} className={clsx(titleClassName, classes.title)}>
+      <Title
+        color="primary"
+        variant={titleVariant}
+        className={clsx(titleClassName, classes.title)}
+      >
         {header}
       </Title>
     );
@@ -196,33 +205,22 @@ const BackgroundSection = ({
     );
   }
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
-    <>
-      <Box display={{ xs: 'block', sm: 'none' }}>
-        <BackgroundImage
-          Tag="section"
-          className={clsx(className, classes.root)}
-          fluid={imageDataMobile ? imageDataMobile : imageData}
-          backgroundColor="transparent"
-        >
-          {linearGradient !== 'unset' && <div className={classes.backgroundGradient} />}
-          {textJSX}
-          <div className={classes.children}>{children}</div>
-        </BackgroundImage>
-      </Box>
-      <Box display={{ xs: 'none', sm: 'block' }}>
-        <BackgroundImage
-          Tag="section"
-          className={clsx(className, classes.root)}
-          fluid={imageData}
-          backgroundColor="transparent"
-        >
-          {linearGradient !== 'unset' && <div className={classes.backgroundGradient} />}
-          {textJSX}
-          <div className={classes.children}>{children}</div>
-        </BackgroundImage>
-      </Box>
-    </>
+    <BackgroundImage
+      Tag="section"
+      className={clsx(className, classes.root)}
+      fluid={imageDataMobile && isMobile ? imageDataMobile : imageData}
+      backgroundColor="transparent"
+    >
+      {linearGradient !== 'unset' && (
+        <div className={classes.backgroundGradient} />
+      )}
+      {textJSX}
+      <div className={classes.children}>{children}</div>
+    </BackgroundImage>
   );
 };
 

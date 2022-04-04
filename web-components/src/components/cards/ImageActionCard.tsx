@@ -59,7 +59,11 @@ const ImageActionCard: React.FC<Props> = props => {
           </Typography>
         </div>
 
-        <OutlinedButton className={styles.btn} onClick={props.onClick}>
+        <OutlinedButton
+          size="small"
+          className={styles.btn}
+          onClick={props.onClick}
+        >
           {props.btnText}
         </OutlinedButton>
       </CardContent>

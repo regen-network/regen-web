@@ -18,7 +18,6 @@ export interface SelectTextFieldProps
 
 export default function SelectTextField({
   options,
-  defaultStyle = true,
   ...props
 }: SelectTextFieldProps): JSX.Element {
   return (
@@ -29,7 +28,6 @@ export default function SelectTextField({
         native: true,
         IconComponent: DropdownIcon,
       }}
-      defaultStyle={defaultStyle}
     >
       {options &&
         options.map(option => (

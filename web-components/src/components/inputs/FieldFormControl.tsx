@@ -13,6 +13,10 @@ interface RenderProps {
 
 export interface DefaultStyleProps {
   defaultStyle?: boolean;
+  // forceDefaultStyle applies default style even if first-of-type,
+  // this may be useful when the element is the only child of some wrapper element
+  // e.g. in Grid's item
+  forceDefaultStyle?: boolean;
 }
 
 interface Props extends FieldProps, DefaultStyleProps {
@@ -57,10 +61,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginBottom: theme.spacing(2),
     },
   },
-  default: {
+  firstOfType: {
     '&:first-of-type': {
       marginTop: 0,
     },
+  },
+  default: {
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.typography.pxToRem(40),
     },
@@ -84,6 +90,7 @@ export default function FieldFormControl({
   labelSubText,
   onExampleClick,
   defaultStyle = true,
+  forceDefaultStyle = false,
   ...fieldProps
 }: Props): JSX.Element {
   const { form, field } = fieldProps;
@@ -107,7 +114,12 @@ export default function FieldFormControl({
     description,
     error: hasError,
   });
-  const rootClasses = defaultStyle ? [styles.default, className] : className;
+  const defaultClasses = [styles.default, className];
+  const rootClasses = defaultStyle
+    ? forceDefaultStyle
+      ? defaultClasses
+      : [...defaultClasses, styles.firstOfType]
+    : className;
 
   return (
     <FormControl className={cx(rootClasses)} fullWidth>

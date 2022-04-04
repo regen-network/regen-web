@@ -1984,6 +1984,8 @@ export type Query = {
   allSanityMethodology: SanityMethodologyConnection;
   sanityMethodologyReviewProcessPage: Maybe<SanityMethodologyReviewProcessPage>;
   allSanityMethodologyReviewProcessPage: SanityMethodologyReviewProcessPageConnection;
+  sanityNctPage: Maybe<SanityNctPage>;
+  allSanityNctPage: SanityNctPageConnection;
   sanityPartnersPage: Maybe<SanityPartnersPage>;
   allSanityPartnersPage: SanityPartnersPageConnection;
   sanityPresskitPage: Maybe<SanityPresskitPage>;
@@ -2987,6 +2989,45 @@ export type QuerySanityMethodologyReviewProcessPageArgs = {
 export type QueryAllSanityMethodologyReviewProcessPageArgs = {
   filter: Maybe<SanityMethodologyReviewProcessPageFilterInput>;
   sort: Maybe<SanityMethodologyReviewProcessPageSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
+
+export type QuerySanityNctPageArgs = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  seo: Maybe<SanitySeoFilterInput>;
+  launchDate: Maybe<DateQueryOperatorInput>;
+  topSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  overviewSection: Maybe<SanityNctOverviewSectionFilterInput>;
+  tokenSection: Maybe<SanityNctTokenSectionFilterInput>;
+  banner: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  marketplaceSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  ledgerSection: Maybe<SanityNctLedgerSectionFilterInput>;
+  mediaItems: Maybe<SanityMediaFilterListInput>;
+  _rawSeo: Maybe<JsonQueryOperatorInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawOverviewSection: Maybe<JsonQueryOperatorInput>;
+  _rawTokenSection: Maybe<JsonQueryOperatorInput>;
+  _rawBanner: Maybe<JsonQueryOperatorInput>;
+  _rawMarketplaceSection: Maybe<JsonQueryOperatorInput>;
+  _rawLedgerSection: Maybe<JsonQueryOperatorInput>;
+  _rawMediaItems: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+
+export type QueryAllSanityNctPageArgs = {
+  filter: Maybe<SanityNctPageFilterInput>;
+  sort: Maybe<SanityNctPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -13728,6 +13769,34 @@ export type SanityImageWithTitleFilterListInput = {
   elemMatch: Maybe<SanityImageWithTitleFilterInput>;
 };
 
+export type SanityLabeledTextLinkable = {
+  __typename?: 'SanityLabeledTextLinkable';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  label: Maybe<Scalars['String']>;
+  text: Maybe<Scalars['String']>;
+  link: Maybe<SanityLink>;
+  _rawLink: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityLabeledTextLinkable_RawLinkArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityLabeledTextLinkableFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  label: Maybe<StringQueryOperatorInput>;
+  text: Maybe<StringQueryOperatorInput>;
+  link: Maybe<SanityLinkFilterInput>;
+  _rawLink: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityLabeledTextLinkableFilterListInput = {
+  elemMatch: Maybe<SanityLabeledTextLinkableFilterInput>;
+};
+
 export type SanityLandManagementPractice = SanityDocument & Node & {
   __typename?: 'SanityLandManagementPractice';
   _id: Maybe<Scalars['String']>;
@@ -16553,6 +16622,917 @@ export type SanityNameTitleImage = {
 
 export type SanityNameTitleImage_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityNctLedgerSection = {
+  __typename?: 'SanityNctLedgerSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  icon: Maybe<SanityImage>;
+  title: Maybe<Scalars['String']>;
+  subtitle: Maybe<Scalars['String']>;
+  button: Maybe<SanityButton>;
+  body: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawIcon: Maybe<Scalars['JSON']>;
+  _rawBody: Maybe<Scalars['JSON']>;
+  _rawButton: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityNctLedgerSection_RawIconArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctLedgerSection_RawBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctLedgerSection_RawButtonArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityNctLedgerSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  icon: Maybe<SanityImageFilterInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  subtitle: Maybe<StringQueryOperatorInput>;
+  button: Maybe<SanityButtonFilterInput>;
+  body: Maybe<SanityBlockFilterListInput>;
+  _rawIcon: Maybe<JsonQueryOperatorInput>;
+  _rawBody: Maybe<JsonQueryOperatorInput>;
+  _rawButton: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityNctOverviewSection = {
+  __typename?: 'SanityNctOverviewSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  background: Maybe<SanityImage>;
+  titleIcon: Maybe<SanityImage>;
+  button: Maybe<SanityButton>;
+  items: Maybe<Array<Maybe<SanityLabeledTextLinkable>>>;
+  body: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawBackground: Maybe<Scalars['JSON']>;
+  _rawTitleIcon: Maybe<Scalars['JSON']>;
+  _rawButton: Maybe<Scalars['JSON']>;
+  _rawBody: Maybe<Scalars['JSON']>;
+  _rawItems: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityNctOverviewSection_RawBackgroundArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctOverviewSection_RawTitleIconArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctOverviewSection_RawButtonArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctOverviewSection_RawBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctOverviewSection_RawItemsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityNctOverviewSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  background: Maybe<SanityImageFilterInput>;
+  titleIcon: Maybe<SanityImageFilterInput>;
+  button: Maybe<SanityButtonFilterInput>;
+  items: Maybe<SanityLabeledTextLinkableFilterListInput>;
+  body: Maybe<SanityBlockFilterListInput>;
+  _rawBackground: Maybe<JsonQueryOperatorInput>;
+  _rawTitleIcon: Maybe<JsonQueryOperatorInput>;
+  _rawButton: Maybe<JsonQueryOperatorInput>;
+  _rawBody: Maybe<JsonQueryOperatorInput>;
+  _rawItems: Maybe<JsonQueryOperatorInput>;
+};
+
+export type SanityNctPage = SanityDocument & Node & {
+  __typename?: 'SanityNctPage';
+  _id: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  _createdAt: Maybe<Scalars['Date']>;
+  _updatedAt: Maybe<Scalars['Date']>;
+  _rev: Maybe<Scalars['String']>;
+  _key: Maybe<Scalars['String']>;
+  seo: Maybe<SanitySeo>;
+  launchDate: Maybe<Scalars['Date']>;
+  topSection: Maybe<SanityTitleImageCustomBody>;
+  overviewSection: Maybe<SanityNctOverviewSection>;
+  tokenSection: Maybe<SanityNctTokenSection>;
+  banner: Maybe<SanityTitleImageCustomBody>;
+  marketplaceSection: Maybe<SanityTitleImageCustomBody>;
+  ledgerSection: Maybe<SanityNctLedgerSection>;
+  mediaItems: Maybe<Array<Maybe<SanityMedia>>>;
+  _rawSeo: Maybe<Scalars['JSON']>;
+  _rawTopSection: Maybe<Scalars['JSON']>;
+  _rawOverviewSection: Maybe<Scalars['JSON']>;
+  _rawTokenSection: Maybe<Scalars['JSON']>;
+  _rawBanner: Maybe<Scalars['JSON']>;
+  _rawMarketplaceSection: Maybe<Scalars['JSON']>;
+  _rawLedgerSection: Maybe<Scalars['JSON']>;
+  _rawMediaItems: Maybe<Scalars['JSON']>;
+  id: Scalars['ID'];
+  parent: Maybe<Node>;
+  children: Array<Node>;
+  internal: Internal;
+};
+
+
+export type SanityNctPage_CreatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityNctPage_UpdatedAtArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityNctPageLaunchDateArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+export type SanityNctPage_RawSeoArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawTopSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawOverviewSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawTokenSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawBannerArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawMarketplaceSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawLedgerSectionArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctPage_RawMediaItemsArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityNctPageConnection = {
+  __typename?: 'SanityNctPageConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityNctPageEdge>;
+  nodes: Array<SanityNctPage>;
+  pageInfo: PageInfo;
+  distinct: Array<Scalars['String']>;
+  group: Array<SanityNctPageGroupConnection>;
+};
+
+
+export type SanityNctPageConnectionDistinctArgs = {
+  field: SanityNctPageFieldsEnum;
+};
+
+
+export type SanityNctPageConnectionGroupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: SanityNctPageFieldsEnum;
+};
+
+export type SanityNctPageEdge = {
+  __typename?: 'SanityNctPageEdge';
+  next: Maybe<SanityNctPage>;
+  node: SanityNctPage;
+  previous: Maybe<SanityNctPage>;
+};
+
+export enum SanityNctPageFieldsEnum {
+  Id = '_id',
+  Type = '_type',
+  CreatedAt = '_createdAt',
+  UpdatedAt = '_updatedAt',
+  Rev = '_rev',
+  Key = '_key',
+  SeoKey = 'seo____key',
+  SeoType = 'seo____type',
+  SeoTitle = 'seo___title',
+  SeoDescription = 'seo___description',
+  SeoImageKey = 'seo___image____key',
+  SeoImageType = 'seo___image____type',
+  SeoImageAssetId = 'seo___image___asset____id',
+  SeoImageAssetType = 'seo___image___asset____type',
+  SeoImageAssetCreatedAt = 'seo___image___asset____createdAt',
+  SeoImageAssetUpdatedAt = 'seo___image___asset____updatedAt',
+  SeoImageAssetRev = 'seo___image___asset____rev',
+  SeoImageAssetKey = 'seo___image___asset____key',
+  SeoImageAssetOriginalFilename = 'seo___image___asset___originalFilename',
+  SeoImageAssetLabel = 'seo___image___asset___label',
+  SeoImageAssetTitle = 'seo___image___asset___title',
+  SeoImageAssetDescription = 'seo___image___asset___description',
+  SeoImageAssetAltText = 'seo___image___asset___altText',
+  SeoImageAssetSha1hash = 'seo___image___asset___sha1hash',
+  SeoImageAssetExtension = 'seo___image___asset___extension',
+  SeoImageAssetMimeType = 'seo___image___asset___mimeType',
+  SeoImageAssetSize = 'seo___image___asset___size',
+  SeoImageAssetAssetId = 'seo___image___asset___assetId',
+  SeoImageAssetUploadId = 'seo___image___asset___uploadId',
+  SeoImageAssetPath = 'seo___image___asset___path',
+  SeoImageAssetUrl = 'seo___image___asset___url',
+  SeoImageAssetRawMetadata = 'seo___image___asset____rawMetadata',
+  SeoImageAssetRawSource = 'seo___image___asset____rawSource',
+  SeoImageAssetId = 'seo___image___asset___id',
+  SeoImageAssetChildren = 'seo___image___asset___children',
+  SeoImageHotspotKey = 'seo___image___hotspot____key',
+  SeoImageHotspotType = 'seo___image___hotspot____type',
+  SeoImageHotspotX = 'seo___image___hotspot___x',
+  SeoImageHotspotY = 'seo___image___hotspot___y',
+  SeoImageHotspotHeight = 'seo___image___hotspot___height',
+  SeoImageHotspotWidth = 'seo___image___hotspot___width',
+  SeoImageCropKey = 'seo___image___crop____key',
+  SeoImageCropType = 'seo___image___crop____type',
+  SeoImageCropTop = 'seo___image___crop___top',
+  SeoImageCropBottom = 'seo___image___crop___bottom',
+  SeoImageCropLeft = 'seo___image___crop___left',
+  SeoImageCropRight = 'seo___image___crop___right',
+  SeoImageRawAsset = 'seo___image____rawAsset',
+  SeoImageRawHotspot = 'seo___image____rawHotspot',
+  SeoImageRawCrop = 'seo___image____rawCrop',
+  SeoRawImage = 'seo____rawImage',
+  LaunchDate = 'launchDate',
+  TopSectionKey = 'topSection____key',
+  TopSectionType = 'topSection____type',
+  TopSectionTitle = 'topSection___title',
+  TopSectionImageKey = 'topSection___image____key',
+  TopSectionImageType = 'topSection___image____type',
+  TopSectionImageImageHref = 'topSection___image___imageHref',
+  TopSectionImageImageKey = 'topSection___image___image____key',
+  TopSectionImageImageType = 'topSection___image___image____type',
+  TopSectionImageImageRawAsset = 'topSection___image___image____rawAsset',
+  TopSectionImageImageRawHotspot = 'topSection___image___image____rawHotspot',
+  TopSectionImageImageRawCrop = 'topSection___image___image____rawCrop',
+  TopSectionImageImageAlt = 'topSection___image___imageAlt',
+  TopSectionImageRawImage = 'topSection___image____rawImage',
+  TopSectionBody = 'topSection___body',
+  TopSectionBodyKey = 'topSection___body____key',
+  TopSectionBodyType = 'topSection___body____type',
+  TopSectionBodyChildren = 'topSection___body___children',
+  TopSectionBodyChildrenKey = 'topSection___body___children____key',
+  TopSectionBodyChildrenType = 'topSection___body___children____type',
+  TopSectionBodyChildrenMarks = 'topSection___body___children___marks',
+  TopSectionBodyChildrenText = 'topSection___body___children___text',
+  TopSectionBodyStyle = 'topSection___body___style',
+  TopSectionBodyList = 'topSection___body___list',
+  TopSectionBodyRawChildren = 'topSection___body____rawChildren',
+  TopSectionRawImage = 'topSection____rawImage',
+  TopSectionRawBody = 'topSection____rawBody',
+  OverviewSectionKey = 'overviewSection____key',
+  OverviewSectionType = 'overviewSection____type',
+  OverviewSectionTitle = 'overviewSection___title',
+  OverviewSectionBackgroundKey = 'overviewSection___background____key',
+  OverviewSectionBackgroundType = 'overviewSection___background____type',
+  OverviewSectionBackgroundAssetId = 'overviewSection___background___asset____id',
+  OverviewSectionBackgroundAssetType = 'overviewSection___background___asset____type',
+  OverviewSectionBackgroundAssetCreatedAt = 'overviewSection___background___asset____createdAt',
+  OverviewSectionBackgroundAssetUpdatedAt = 'overviewSection___background___asset____updatedAt',
+  OverviewSectionBackgroundAssetRev = 'overviewSection___background___asset____rev',
+  OverviewSectionBackgroundAssetKey = 'overviewSection___background___asset____key',
+  OverviewSectionBackgroundAssetOriginalFilename = 'overviewSection___background___asset___originalFilename',
+  OverviewSectionBackgroundAssetLabel = 'overviewSection___background___asset___label',
+  OverviewSectionBackgroundAssetTitle = 'overviewSection___background___asset___title',
+  OverviewSectionBackgroundAssetDescription = 'overviewSection___background___asset___description',
+  OverviewSectionBackgroundAssetAltText = 'overviewSection___background___asset___altText',
+  OverviewSectionBackgroundAssetSha1hash = 'overviewSection___background___asset___sha1hash',
+  OverviewSectionBackgroundAssetExtension = 'overviewSection___background___asset___extension',
+  OverviewSectionBackgroundAssetMimeType = 'overviewSection___background___asset___mimeType',
+  OverviewSectionBackgroundAssetSize = 'overviewSection___background___asset___size',
+  OverviewSectionBackgroundAssetAssetId = 'overviewSection___background___asset___assetId',
+  OverviewSectionBackgroundAssetUploadId = 'overviewSection___background___asset___uploadId',
+  OverviewSectionBackgroundAssetPath = 'overviewSection___background___asset___path',
+  OverviewSectionBackgroundAssetUrl = 'overviewSection___background___asset___url',
+  OverviewSectionBackgroundAssetRawMetadata = 'overviewSection___background___asset____rawMetadata',
+  OverviewSectionBackgroundAssetRawSource = 'overviewSection___background___asset____rawSource',
+  OverviewSectionBackgroundAssetId = 'overviewSection___background___asset___id',
+  OverviewSectionBackgroundAssetChildren = 'overviewSection___background___asset___children',
+  OverviewSectionBackgroundHotspotKey = 'overviewSection___background___hotspot____key',
+  OverviewSectionBackgroundHotspotType = 'overviewSection___background___hotspot____type',
+  OverviewSectionBackgroundHotspotX = 'overviewSection___background___hotspot___x',
+  OverviewSectionBackgroundHotspotY = 'overviewSection___background___hotspot___y',
+  OverviewSectionBackgroundHotspotHeight = 'overviewSection___background___hotspot___height',
+  OverviewSectionBackgroundHotspotWidth = 'overviewSection___background___hotspot___width',
+  OverviewSectionBackgroundCropKey = 'overviewSection___background___crop____key',
+  OverviewSectionBackgroundCropType = 'overviewSection___background___crop____type',
+  OverviewSectionBackgroundCropTop = 'overviewSection___background___crop___top',
+  OverviewSectionBackgroundCropBottom = 'overviewSection___background___crop___bottom',
+  OverviewSectionBackgroundCropLeft = 'overviewSection___background___crop___left',
+  OverviewSectionBackgroundCropRight = 'overviewSection___background___crop___right',
+  OverviewSectionBackgroundRawAsset = 'overviewSection___background____rawAsset',
+  OverviewSectionBackgroundRawHotspot = 'overviewSection___background____rawHotspot',
+  OverviewSectionBackgroundRawCrop = 'overviewSection___background____rawCrop',
+  OverviewSectionTitleIconKey = 'overviewSection___titleIcon____key',
+  OverviewSectionTitleIconType = 'overviewSection___titleIcon____type',
+  OverviewSectionTitleIconAssetId = 'overviewSection___titleIcon___asset____id',
+  OverviewSectionTitleIconAssetType = 'overviewSection___titleIcon___asset____type',
+  OverviewSectionTitleIconAssetCreatedAt = 'overviewSection___titleIcon___asset____createdAt',
+  OverviewSectionTitleIconAssetUpdatedAt = 'overviewSection___titleIcon___asset____updatedAt',
+  OverviewSectionTitleIconAssetRev = 'overviewSection___titleIcon___asset____rev',
+  OverviewSectionTitleIconAssetKey = 'overviewSection___titleIcon___asset____key',
+  OverviewSectionTitleIconAssetOriginalFilename = 'overviewSection___titleIcon___asset___originalFilename',
+  OverviewSectionTitleIconAssetLabel = 'overviewSection___titleIcon___asset___label',
+  OverviewSectionTitleIconAssetTitle = 'overviewSection___titleIcon___asset___title',
+  OverviewSectionTitleIconAssetDescription = 'overviewSection___titleIcon___asset___description',
+  OverviewSectionTitleIconAssetAltText = 'overviewSection___titleIcon___asset___altText',
+  OverviewSectionTitleIconAssetSha1hash = 'overviewSection___titleIcon___asset___sha1hash',
+  OverviewSectionTitleIconAssetExtension = 'overviewSection___titleIcon___asset___extension',
+  OverviewSectionTitleIconAssetMimeType = 'overviewSection___titleIcon___asset___mimeType',
+  OverviewSectionTitleIconAssetSize = 'overviewSection___titleIcon___asset___size',
+  OverviewSectionTitleIconAssetAssetId = 'overviewSection___titleIcon___asset___assetId',
+  OverviewSectionTitleIconAssetUploadId = 'overviewSection___titleIcon___asset___uploadId',
+  OverviewSectionTitleIconAssetPath = 'overviewSection___titleIcon___asset___path',
+  OverviewSectionTitleIconAssetUrl = 'overviewSection___titleIcon___asset___url',
+  OverviewSectionTitleIconAssetRawMetadata = 'overviewSection___titleIcon___asset____rawMetadata',
+  OverviewSectionTitleIconAssetRawSource = 'overviewSection___titleIcon___asset____rawSource',
+  OverviewSectionTitleIconAssetId = 'overviewSection___titleIcon___asset___id',
+  OverviewSectionTitleIconAssetChildren = 'overviewSection___titleIcon___asset___children',
+  OverviewSectionTitleIconHotspotKey = 'overviewSection___titleIcon___hotspot____key',
+  OverviewSectionTitleIconHotspotType = 'overviewSection___titleIcon___hotspot____type',
+  OverviewSectionTitleIconHotspotX = 'overviewSection___titleIcon___hotspot___x',
+  OverviewSectionTitleIconHotspotY = 'overviewSection___titleIcon___hotspot___y',
+  OverviewSectionTitleIconHotspotHeight = 'overviewSection___titleIcon___hotspot___height',
+  OverviewSectionTitleIconHotspotWidth = 'overviewSection___titleIcon___hotspot___width',
+  OverviewSectionTitleIconCropKey = 'overviewSection___titleIcon___crop____key',
+  OverviewSectionTitleIconCropType = 'overviewSection___titleIcon___crop____type',
+  OverviewSectionTitleIconCropTop = 'overviewSection___titleIcon___crop___top',
+  OverviewSectionTitleIconCropBottom = 'overviewSection___titleIcon___crop___bottom',
+  OverviewSectionTitleIconCropLeft = 'overviewSection___titleIcon___crop___left',
+  OverviewSectionTitleIconCropRight = 'overviewSection___titleIcon___crop___right',
+  OverviewSectionTitleIconRawAsset = 'overviewSection___titleIcon____rawAsset',
+  OverviewSectionTitleIconRawHotspot = 'overviewSection___titleIcon____rawHotspot',
+  OverviewSectionTitleIconRawCrop = 'overviewSection___titleIcon____rawCrop',
+  OverviewSectionButtonKey = 'overviewSection___button____key',
+  OverviewSectionButtonType = 'overviewSection___button____type',
+  OverviewSectionButtonButtonText = 'overviewSection___button___buttonText',
+  OverviewSectionButtonButtonLinkKey = 'overviewSection___button___buttonLink____key',
+  OverviewSectionButtonButtonLinkType = 'overviewSection___button___buttonLink____type',
+  OverviewSectionButtonButtonLinkButtonHref = 'overviewSection___button___buttonLink___buttonHref',
+  OverviewSectionButtonButtonLinkRawButtonDoc = 'overviewSection___button___buttonLink____rawButtonDoc',
+  OverviewSectionButtonButtonModal = 'overviewSection___button___buttonModal',
+  OverviewSectionButtonButtonBlankTarget = 'overviewSection___button___buttonBlankTarget',
+  OverviewSectionButtonRawButtonLink = 'overviewSection___button____rawButtonLink',
+  OverviewSectionItems = 'overviewSection___items',
+  OverviewSectionItemsKey = 'overviewSection___items____key',
+  OverviewSectionItemsType = 'overviewSection___items____type',
+  OverviewSectionItemsLabel = 'overviewSection___items___label',
+  OverviewSectionItemsText = 'overviewSection___items___text',
+  OverviewSectionItemsLinkKey = 'overviewSection___items___link____key',
+  OverviewSectionItemsLinkType = 'overviewSection___items___link____type',
+  OverviewSectionItemsLinkButtonHref = 'overviewSection___items___link___buttonHref',
+  OverviewSectionItemsLinkRawButtonDoc = 'overviewSection___items___link____rawButtonDoc',
+  OverviewSectionItemsRawLink = 'overviewSection___items____rawLink',
+  OverviewSectionBody = 'overviewSection___body',
+  OverviewSectionBodyKey = 'overviewSection___body____key',
+  OverviewSectionBodyType = 'overviewSection___body____type',
+  OverviewSectionBodyChildren = 'overviewSection___body___children',
+  OverviewSectionBodyChildrenKey = 'overviewSection___body___children____key',
+  OverviewSectionBodyChildrenType = 'overviewSection___body___children____type',
+  OverviewSectionBodyChildrenMarks = 'overviewSection___body___children___marks',
+  OverviewSectionBodyChildrenText = 'overviewSection___body___children___text',
+  OverviewSectionBodyStyle = 'overviewSection___body___style',
+  OverviewSectionBodyList = 'overviewSection___body___list',
+  OverviewSectionBodyRawChildren = 'overviewSection___body____rawChildren',
+  OverviewSectionRawBackground = 'overviewSection____rawBackground',
+  OverviewSectionRawTitleIcon = 'overviewSection____rawTitleIcon',
+  OverviewSectionRawButton = 'overviewSection____rawButton',
+  OverviewSectionRawBody = 'overviewSection____rawBody',
+  OverviewSectionRawItems = 'overviewSection____rawItems',
+  TokenSectionKey = 'tokenSection____key',
+  TokenSectionType = 'tokenSection____type',
+  TokenSectionCardImageKey = 'tokenSection___cardImage____key',
+  TokenSectionCardImageType = 'tokenSection___cardImage____type',
+  TokenSectionCardImageImageHref = 'tokenSection___cardImage___imageHref',
+  TokenSectionCardImageImageKey = 'tokenSection___cardImage___image____key',
+  TokenSectionCardImageImageType = 'tokenSection___cardImage___image____type',
+  TokenSectionCardImageImageRawAsset = 'tokenSection___cardImage___image____rawAsset',
+  TokenSectionCardImageImageRawHotspot = 'tokenSection___cardImage___image____rawHotspot',
+  TokenSectionCardImageImageRawCrop = 'tokenSection___cardImage___image____rawCrop',
+  TokenSectionCardImageImageAlt = 'tokenSection___cardImage___imageAlt',
+  TokenSectionCardImageRawImage = 'tokenSection___cardImage____rawImage',
+  TokenSectionCardTitle = 'tokenSection___cardTitle',
+  TokenSectionCardSubtitle = 'tokenSection___cardSubtitle',
+  TokenSectionCardButtonKey = 'tokenSection___cardButton____key',
+  TokenSectionCardButtonType = 'tokenSection___cardButton____type',
+  TokenSectionCardButtonButtonText = 'tokenSection___cardButton___buttonText',
+  TokenSectionCardButtonButtonLinkKey = 'tokenSection___cardButton___buttonLink____key',
+  TokenSectionCardButtonButtonLinkType = 'tokenSection___cardButton___buttonLink____type',
+  TokenSectionCardButtonButtonLinkButtonHref = 'tokenSection___cardButton___buttonLink___buttonHref',
+  TokenSectionCardButtonButtonLinkRawButtonDoc = 'tokenSection___cardButton___buttonLink____rawButtonDoc',
+  TokenSectionCardButtonButtonModal = 'tokenSection___cardButton___buttonModal',
+  TokenSectionCardButtonButtonBlankTarget = 'tokenSection___cardButton___buttonBlankTarget',
+  TokenSectionCardButtonRawButtonLink = 'tokenSection___cardButton____rawButtonLink',
+  TokenSectionDetailImageKey = 'tokenSection___detailImage____key',
+  TokenSectionDetailImageType = 'tokenSection___detailImage____type',
+  TokenSectionDetailImageImageHref = 'tokenSection___detailImage___imageHref',
+  TokenSectionDetailImageImageKey = 'tokenSection___detailImage___image____key',
+  TokenSectionDetailImageImageType = 'tokenSection___detailImage___image____type',
+  TokenSectionDetailImageImageRawAsset = 'tokenSection___detailImage___image____rawAsset',
+  TokenSectionDetailImageImageRawHotspot = 'tokenSection___detailImage___image____rawHotspot',
+  TokenSectionDetailImageImageRawCrop = 'tokenSection___detailImage___image____rawCrop',
+  TokenSectionDetailImageImageAlt = 'tokenSection___detailImage___imageAlt',
+  TokenSectionDetailImageRawImage = 'tokenSection___detailImage____rawImage',
+  TokenSectionDetailTitle = 'tokenSection___detailTitle',
+  TokenSectionDetailSubtitle = 'tokenSection___detailSubtitle',
+  TokenSectionDetailButton1Key = 'tokenSection___detailButton1____key',
+  TokenSectionDetailButton1Type = 'tokenSection___detailButton1____type',
+  TokenSectionDetailButton1ButtonText = 'tokenSection___detailButton1___buttonText',
+  TokenSectionDetailButton1ButtonLinkKey = 'tokenSection___detailButton1___buttonLink____key',
+  TokenSectionDetailButton1ButtonLinkType = 'tokenSection___detailButton1___buttonLink____type',
+  TokenSectionDetailButton1ButtonLinkButtonHref = 'tokenSection___detailButton1___buttonLink___buttonHref',
+  TokenSectionDetailButton1ButtonLinkRawButtonDoc = 'tokenSection___detailButton1___buttonLink____rawButtonDoc',
+  TokenSectionDetailButton1ButtonModal = 'tokenSection___detailButton1___buttonModal',
+  TokenSectionDetailButton1ButtonBlankTarget = 'tokenSection___detailButton1___buttonBlankTarget',
+  TokenSectionDetailButton1RawButtonLink = 'tokenSection___detailButton1____rawButtonLink',
+  TokenSectionDetailButton2Key = 'tokenSection___detailButton2____key',
+  TokenSectionDetailButton2Type = 'tokenSection___detailButton2____type',
+  TokenSectionDetailButton2ButtonText = 'tokenSection___detailButton2___buttonText',
+  TokenSectionDetailButton2ButtonLinkKey = 'tokenSection___detailButton2___buttonLink____key',
+  TokenSectionDetailButton2ButtonLinkType = 'tokenSection___detailButton2___buttonLink____type',
+  TokenSectionDetailButton2ButtonLinkButtonHref = 'tokenSection___detailButton2___buttonLink___buttonHref',
+  TokenSectionDetailButton2ButtonLinkRawButtonDoc = 'tokenSection___detailButton2___buttonLink____rawButtonDoc',
+  TokenSectionDetailButton2ButtonModal = 'tokenSection___detailButton2___buttonModal',
+  TokenSectionDetailButton2ButtonBlankTarget = 'tokenSection___detailButton2___buttonBlankTarget',
+  TokenSectionDetailButton2RawButtonLink = 'tokenSection___detailButton2____rawButtonLink',
+  TokenSectionCardBody = 'tokenSection___cardBody',
+  TokenSectionCardBodyKey = 'tokenSection___cardBody____key',
+  TokenSectionCardBodyType = 'tokenSection___cardBody____type',
+  TokenSectionCardBodyChildren = 'tokenSection___cardBody___children',
+  TokenSectionCardBodyChildrenKey = 'tokenSection___cardBody___children____key',
+  TokenSectionCardBodyChildrenType = 'tokenSection___cardBody___children____type',
+  TokenSectionCardBodyChildrenMarks = 'tokenSection___cardBody___children___marks',
+  TokenSectionCardBodyChildrenText = 'tokenSection___cardBody___children___text',
+  TokenSectionCardBodyStyle = 'tokenSection___cardBody___style',
+  TokenSectionCardBodyList = 'tokenSection___cardBody___list',
+  TokenSectionCardBodyRawChildren = 'tokenSection___cardBody____rawChildren',
+  TokenSectionDetailBody = 'tokenSection___detailBody',
+  TokenSectionDetailBodyKey = 'tokenSection___detailBody____key',
+  TokenSectionDetailBodyType = 'tokenSection___detailBody____type',
+  TokenSectionDetailBodyChildren = 'tokenSection___detailBody___children',
+  TokenSectionDetailBodyChildrenKey = 'tokenSection___detailBody___children____key',
+  TokenSectionDetailBodyChildrenType = 'tokenSection___detailBody___children____type',
+  TokenSectionDetailBodyChildrenMarks = 'tokenSection___detailBody___children___marks',
+  TokenSectionDetailBodyChildrenText = 'tokenSection___detailBody___children___text',
+  TokenSectionDetailBodyStyle = 'tokenSection___detailBody___style',
+  TokenSectionDetailBodyList = 'tokenSection___detailBody___list',
+  TokenSectionDetailBodyRawChildren = 'tokenSection___detailBody____rawChildren',
+  TokenSectionRawCardImage = 'tokenSection____rawCardImage',
+  TokenSectionRawCardBody = 'tokenSection____rawCardBody',
+  TokenSectionRawCardButton = 'tokenSection____rawCardButton',
+  TokenSectionRawDetailImage = 'tokenSection____rawDetailImage',
+  TokenSectionRawDetailBody = 'tokenSection____rawDetailBody',
+  TokenSectionRawDetailButton1 = 'tokenSection____rawDetailButton1',
+  TokenSectionRawDetailButton2 = 'tokenSection____rawDetailButton2',
+  BannerKey = 'banner____key',
+  BannerType = 'banner____type',
+  BannerTitle = 'banner___title',
+  BannerImageKey = 'banner___image____key',
+  BannerImageType = 'banner___image____type',
+  BannerImageImageHref = 'banner___image___imageHref',
+  BannerImageImageKey = 'banner___image___image____key',
+  BannerImageImageType = 'banner___image___image____type',
+  BannerImageImageRawAsset = 'banner___image___image____rawAsset',
+  BannerImageImageRawHotspot = 'banner___image___image____rawHotspot',
+  BannerImageImageRawCrop = 'banner___image___image____rawCrop',
+  BannerImageImageAlt = 'banner___image___imageAlt',
+  BannerImageRawImage = 'banner___image____rawImage',
+  BannerBody = 'banner___body',
+  BannerBodyKey = 'banner___body____key',
+  BannerBodyType = 'banner___body____type',
+  BannerBodyChildren = 'banner___body___children',
+  BannerBodyChildrenKey = 'banner___body___children____key',
+  BannerBodyChildrenType = 'banner___body___children____type',
+  BannerBodyChildrenMarks = 'banner___body___children___marks',
+  BannerBodyChildrenText = 'banner___body___children___text',
+  BannerBodyStyle = 'banner___body___style',
+  BannerBodyList = 'banner___body___list',
+  BannerBodyRawChildren = 'banner___body____rawChildren',
+  BannerRawImage = 'banner____rawImage',
+  BannerRawBody = 'banner____rawBody',
+  MarketplaceSectionKey = 'marketplaceSection____key',
+  MarketplaceSectionType = 'marketplaceSection____type',
+  MarketplaceSectionTitle = 'marketplaceSection___title',
+  MarketplaceSectionImageKey = 'marketplaceSection___image____key',
+  MarketplaceSectionImageType = 'marketplaceSection___image____type',
+  MarketplaceSectionImageImageHref = 'marketplaceSection___image___imageHref',
+  MarketplaceSectionImageImageKey = 'marketplaceSection___image___image____key',
+  MarketplaceSectionImageImageType = 'marketplaceSection___image___image____type',
+  MarketplaceSectionImageImageRawAsset = 'marketplaceSection___image___image____rawAsset',
+  MarketplaceSectionImageImageRawHotspot = 'marketplaceSection___image___image____rawHotspot',
+  MarketplaceSectionImageImageRawCrop = 'marketplaceSection___image___image____rawCrop',
+  MarketplaceSectionImageImageAlt = 'marketplaceSection___image___imageAlt',
+  MarketplaceSectionImageRawImage = 'marketplaceSection___image____rawImage',
+  MarketplaceSectionBody = 'marketplaceSection___body',
+  MarketplaceSectionBodyKey = 'marketplaceSection___body____key',
+  MarketplaceSectionBodyType = 'marketplaceSection___body____type',
+  MarketplaceSectionBodyChildren = 'marketplaceSection___body___children',
+  MarketplaceSectionBodyChildrenKey = 'marketplaceSection___body___children____key',
+  MarketplaceSectionBodyChildrenType = 'marketplaceSection___body___children____type',
+  MarketplaceSectionBodyChildrenMarks = 'marketplaceSection___body___children___marks',
+  MarketplaceSectionBodyChildrenText = 'marketplaceSection___body___children___text',
+  MarketplaceSectionBodyStyle = 'marketplaceSection___body___style',
+  MarketplaceSectionBodyList = 'marketplaceSection___body___list',
+  MarketplaceSectionBodyRawChildren = 'marketplaceSection___body____rawChildren',
+  MarketplaceSectionRawImage = 'marketplaceSection____rawImage',
+  MarketplaceSectionRawBody = 'marketplaceSection____rawBody',
+  LedgerSectionKey = 'ledgerSection____key',
+  LedgerSectionType = 'ledgerSection____type',
+  LedgerSectionIconKey = 'ledgerSection___icon____key',
+  LedgerSectionIconType = 'ledgerSection___icon____type',
+  LedgerSectionIconAssetId = 'ledgerSection___icon___asset____id',
+  LedgerSectionIconAssetType = 'ledgerSection___icon___asset____type',
+  LedgerSectionIconAssetCreatedAt = 'ledgerSection___icon___asset____createdAt',
+  LedgerSectionIconAssetUpdatedAt = 'ledgerSection___icon___asset____updatedAt',
+  LedgerSectionIconAssetRev = 'ledgerSection___icon___asset____rev',
+  LedgerSectionIconAssetKey = 'ledgerSection___icon___asset____key',
+  LedgerSectionIconAssetOriginalFilename = 'ledgerSection___icon___asset___originalFilename',
+  LedgerSectionIconAssetLabel = 'ledgerSection___icon___asset___label',
+  LedgerSectionIconAssetTitle = 'ledgerSection___icon___asset___title',
+  LedgerSectionIconAssetDescription = 'ledgerSection___icon___asset___description',
+  LedgerSectionIconAssetAltText = 'ledgerSection___icon___asset___altText',
+  LedgerSectionIconAssetSha1hash = 'ledgerSection___icon___asset___sha1hash',
+  LedgerSectionIconAssetExtension = 'ledgerSection___icon___asset___extension',
+  LedgerSectionIconAssetMimeType = 'ledgerSection___icon___asset___mimeType',
+  LedgerSectionIconAssetSize = 'ledgerSection___icon___asset___size',
+  LedgerSectionIconAssetAssetId = 'ledgerSection___icon___asset___assetId',
+  LedgerSectionIconAssetUploadId = 'ledgerSection___icon___asset___uploadId',
+  LedgerSectionIconAssetPath = 'ledgerSection___icon___asset___path',
+  LedgerSectionIconAssetUrl = 'ledgerSection___icon___asset___url',
+  LedgerSectionIconAssetRawMetadata = 'ledgerSection___icon___asset____rawMetadata',
+  LedgerSectionIconAssetRawSource = 'ledgerSection___icon___asset____rawSource',
+  LedgerSectionIconAssetId = 'ledgerSection___icon___asset___id',
+  LedgerSectionIconAssetChildren = 'ledgerSection___icon___asset___children',
+  LedgerSectionIconHotspotKey = 'ledgerSection___icon___hotspot____key',
+  LedgerSectionIconHotspotType = 'ledgerSection___icon___hotspot____type',
+  LedgerSectionIconHotspotX = 'ledgerSection___icon___hotspot___x',
+  LedgerSectionIconHotspotY = 'ledgerSection___icon___hotspot___y',
+  LedgerSectionIconHotspotHeight = 'ledgerSection___icon___hotspot___height',
+  LedgerSectionIconHotspotWidth = 'ledgerSection___icon___hotspot___width',
+  LedgerSectionIconCropKey = 'ledgerSection___icon___crop____key',
+  LedgerSectionIconCropType = 'ledgerSection___icon___crop____type',
+  LedgerSectionIconCropTop = 'ledgerSection___icon___crop___top',
+  LedgerSectionIconCropBottom = 'ledgerSection___icon___crop___bottom',
+  LedgerSectionIconCropLeft = 'ledgerSection___icon___crop___left',
+  LedgerSectionIconCropRight = 'ledgerSection___icon___crop___right',
+  LedgerSectionIconRawAsset = 'ledgerSection___icon____rawAsset',
+  LedgerSectionIconRawHotspot = 'ledgerSection___icon____rawHotspot',
+  LedgerSectionIconRawCrop = 'ledgerSection___icon____rawCrop',
+  LedgerSectionTitle = 'ledgerSection___title',
+  LedgerSectionSubtitle = 'ledgerSection___subtitle',
+  LedgerSectionButtonKey = 'ledgerSection___button____key',
+  LedgerSectionButtonType = 'ledgerSection___button____type',
+  LedgerSectionButtonButtonText = 'ledgerSection___button___buttonText',
+  LedgerSectionButtonButtonLinkKey = 'ledgerSection___button___buttonLink____key',
+  LedgerSectionButtonButtonLinkType = 'ledgerSection___button___buttonLink____type',
+  LedgerSectionButtonButtonLinkButtonHref = 'ledgerSection___button___buttonLink___buttonHref',
+  LedgerSectionButtonButtonLinkRawButtonDoc = 'ledgerSection___button___buttonLink____rawButtonDoc',
+  LedgerSectionButtonButtonModal = 'ledgerSection___button___buttonModal',
+  LedgerSectionButtonButtonBlankTarget = 'ledgerSection___button___buttonBlankTarget',
+  LedgerSectionButtonRawButtonLink = 'ledgerSection___button____rawButtonLink',
+  LedgerSectionBody = 'ledgerSection___body',
+  LedgerSectionBodyKey = 'ledgerSection___body____key',
+  LedgerSectionBodyType = 'ledgerSection___body____type',
+  LedgerSectionBodyChildren = 'ledgerSection___body___children',
+  LedgerSectionBodyChildrenKey = 'ledgerSection___body___children____key',
+  LedgerSectionBodyChildrenType = 'ledgerSection___body___children____type',
+  LedgerSectionBodyChildrenMarks = 'ledgerSection___body___children___marks',
+  LedgerSectionBodyChildrenText = 'ledgerSection___body___children___text',
+  LedgerSectionBodyStyle = 'ledgerSection___body___style',
+  LedgerSectionBodyList = 'ledgerSection___body___list',
+  LedgerSectionBodyRawChildren = 'ledgerSection___body____rawChildren',
+  LedgerSectionRawIcon = 'ledgerSection____rawIcon',
+  LedgerSectionRawBody = 'ledgerSection____rawBody',
+  LedgerSectionRawButton = 'ledgerSection____rawButton',
+  MediaItems = 'mediaItems',
+  MediaItemsId = 'mediaItems____id',
+  MediaItemsType = 'mediaItems____type',
+  MediaItemsCreatedAt = 'mediaItems____createdAt',
+  MediaItemsUpdatedAt = 'mediaItems____updatedAt',
+  MediaItemsRev = 'mediaItems____rev',
+  MediaItemsKey = 'mediaItems____key',
+  MediaItemsTitle = 'mediaItems___title',
+  MediaItemsAuthor = 'mediaItems___author',
+  MediaItemsDate = 'mediaItems___date',
+  MediaItemsImageKey = 'mediaItems___image____key',
+  MediaItemsImageType = 'mediaItems___image____type',
+  MediaItemsImageImageHref = 'mediaItems___image___imageHref',
+  MediaItemsImageImageKey = 'mediaItems___image___image____key',
+  MediaItemsImageImageType = 'mediaItems___image___image____type',
+  MediaItemsImageImageRawAsset = 'mediaItems___image___image____rawAsset',
+  MediaItemsImageImageRawHotspot = 'mediaItems___image___image____rawHotspot',
+  MediaItemsImageImageRawCrop = 'mediaItems___image___image____rawCrop',
+  MediaItemsImageImageAlt = 'mediaItems___image___imageAlt',
+  MediaItemsImageRawImage = 'mediaItems___image____rawImage',
+  MediaItemsHref = 'mediaItems___href',
+  MediaItemsType = 'mediaItems___type',
+  MediaItemsRawImage = 'mediaItems____rawImage',
+  MediaItemsId = 'mediaItems___id',
+  MediaItemsParentId = 'mediaItems___parent___id',
+  MediaItemsParentParentId = 'mediaItems___parent___parent___id',
+  MediaItemsParentParentChildren = 'mediaItems___parent___parent___children',
+  MediaItemsParentChildren = 'mediaItems___parent___children',
+  MediaItemsParentChildrenId = 'mediaItems___parent___children___id',
+  MediaItemsParentChildrenChildren = 'mediaItems___parent___children___children',
+  MediaItemsParentInternalContent = 'mediaItems___parent___internal___content',
+  MediaItemsParentInternalContentDigest = 'mediaItems___parent___internal___contentDigest',
+  MediaItemsParentInternalDescription = 'mediaItems___parent___internal___description',
+  MediaItemsParentInternalFieldOwners = 'mediaItems___parent___internal___fieldOwners',
+  MediaItemsParentInternalIgnoreType = 'mediaItems___parent___internal___ignoreType',
+  MediaItemsParentInternalMediaType = 'mediaItems___parent___internal___mediaType',
+  MediaItemsParentInternalOwner = 'mediaItems___parent___internal___owner',
+  MediaItemsParentInternalType = 'mediaItems___parent___internal___type',
+  MediaItemsChildren = 'mediaItems___children',
+  MediaItemsChildrenId = 'mediaItems___children___id',
+  MediaItemsChildrenParentId = 'mediaItems___children___parent___id',
+  MediaItemsChildrenParentChildren = 'mediaItems___children___parent___children',
+  MediaItemsChildrenChildren = 'mediaItems___children___children',
+  MediaItemsChildrenChildrenId = 'mediaItems___children___children___id',
+  MediaItemsChildrenChildrenChildren = 'mediaItems___children___children___children',
+  MediaItemsChildrenInternalContent = 'mediaItems___children___internal___content',
+  MediaItemsChildrenInternalContentDigest = 'mediaItems___children___internal___contentDigest',
+  MediaItemsChildrenInternalDescription = 'mediaItems___children___internal___description',
+  MediaItemsChildrenInternalFieldOwners = 'mediaItems___children___internal___fieldOwners',
+  MediaItemsChildrenInternalIgnoreType = 'mediaItems___children___internal___ignoreType',
+  MediaItemsChildrenInternalMediaType = 'mediaItems___children___internal___mediaType',
+  MediaItemsChildrenInternalOwner = 'mediaItems___children___internal___owner',
+  MediaItemsChildrenInternalType = 'mediaItems___children___internal___type',
+  MediaItemsInternalContent = 'mediaItems___internal___content',
+  MediaItemsInternalContentDigest = 'mediaItems___internal___contentDigest',
+  MediaItemsInternalDescription = 'mediaItems___internal___description',
+  MediaItemsInternalFieldOwners = 'mediaItems___internal___fieldOwners',
+  MediaItemsInternalIgnoreType = 'mediaItems___internal___ignoreType',
+  MediaItemsInternalMediaType = 'mediaItems___internal___mediaType',
+  MediaItemsInternalOwner = 'mediaItems___internal___owner',
+  MediaItemsInternalType = 'mediaItems___internal___type',
+  RawSeo = '_rawSeo',
+  RawTopSection = '_rawTopSection',
+  RawOverviewSection = '_rawOverviewSection',
+  RawTokenSection = '_rawTokenSection',
+  RawBanner = '_rawBanner',
+  RawMarketplaceSection = '_rawMarketplaceSection',
+  RawLedgerSection = '_rawLedgerSection',
+  RawMediaItems = '_rawMediaItems',
+  Id = 'id',
+  ParentId = 'parent___id',
+  ParentParentId = 'parent___parent___id',
+  ParentParentParentId = 'parent___parent___parent___id',
+  ParentParentParentChildren = 'parent___parent___parent___children',
+  ParentParentChildren = 'parent___parent___children',
+  ParentParentChildrenId = 'parent___parent___children___id',
+  ParentParentChildrenChildren = 'parent___parent___children___children',
+  ParentParentInternalContent = 'parent___parent___internal___content',
+  ParentParentInternalContentDigest = 'parent___parent___internal___contentDigest',
+  ParentParentInternalDescription = 'parent___parent___internal___description',
+  ParentParentInternalFieldOwners = 'parent___parent___internal___fieldOwners',
+  ParentParentInternalIgnoreType = 'parent___parent___internal___ignoreType',
+  ParentParentInternalMediaType = 'parent___parent___internal___mediaType',
+  ParentParentInternalOwner = 'parent___parent___internal___owner',
+  ParentParentInternalType = 'parent___parent___internal___type',
+  ParentChildren = 'parent___children',
+  ParentChildrenId = 'parent___children___id',
+  ParentChildrenParentId = 'parent___children___parent___id',
+  ParentChildrenParentChildren = 'parent___children___parent___children',
+  ParentChildrenChildren = 'parent___children___children',
+  ParentChildrenChildrenId = 'parent___children___children___id',
+  ParentChildrenChildrenChildren = 'parent___children___children___children',
+  ParentChildrenInternalContent = 'parent___children___internal___content',
+  ParentChildrenInternalContentDigest = 'parent___children___internal___contentDigest',
+  ParentChildrenInternalDescription = 'parent___children___internal___description',
+  ParentChildrenInternalFieldOwners = 'parent___children___internal___fieldOwners',
+  ParentChildrenInternalIgnoreType = 'parent___children___internal___ignoreType',
+  ParentChildrenInternalMediaType = 'parent___children___internal___mediaType',
+  ParentChildrenInternalOwner = 'parent___children___internal___owner',
+  ParentChildrenInternalType = 'parent___children___internal___type',
+  ParentInternalContent = 'parent___internal___content',
+  ParentInternalContentDigest = 'parent___internal___contentDigest',
+  ParentInternalDescription = 'parent___internal___description',
+  ParentInternalFieldOwners = 'parent___internal___fieldOwners',
+  ParentInternalIgnoreType = 'parent___internal___ignoreType',
+  ParentInternalMediaType = 'parent___internal___mediaType',
+  ParentInternalOwner = 'parent___internal___owner',
+  ParentInternalType = 'parent___internal___type',
+  Children = 'children',
+  ChildrenId = 'children___id',
+  ChildrenParentId = 'children___parent___id',
+  ChildrenParentParentId = 'children___parent___parent___id',
+  ChildrenParentParentChildren = 'children___parent___parent___children',
+  ChildrenParentChildren = 'children___parent___children',
+  ChildrenParentChildrenId = 'children___parent___children___id',
+  ChildrenParentChildrenChildren = 'children___parent___children___children',
+  ChildrenParentInternalContent = 'children___parent___internal___content',
+  ChildrenParentInternalContentDigest = 'children___parent___internal___contentDigest',
+  ChildrenParentInternalDescription = 'children___parent___internal___description',
+  ChildrenParentInternalFieldOwners = 'children___parent___internal___fieldOwners',
+  ChildrenParentInternalIgnoreType = 'children___parent___internal___ignoreType',
+  ChildrenParentInternalMediaType = 'children___parent___internal___mediaType',
+  ChildrenParentInternalOwner = 'children___parent___internal___owner',
+  ChildrenParentInternalType = 'children___parent___internal___type',
+  ChildrenChildren = 'children___children',
+  ChildrenChildrenId = 'children___children___id',
+  ChildrenChildrenParentId = 'children___children___parent___id',
+  ChildrenChildrenParentChildren = 'children___children___parent___children',
+  ChildrenChildrenChildren = 'children___children___children',
+  ChildrenChildrenChildrenId = 'children___children___children___id',
+  ChildrenChildrenChildrenChildren = 'children___children___children___children',
+  ChildrenChildrenInternalContent = 'children___children___internal___content',
+  ChildrenChildrenInternalContentDigest = 'children___children___internal___contentDigest',
+  ChildrenChildrenInternalDescription = 'children___children___internal___description',
+  ChildrenChildrenInternalFieldOwners = 'children___children___internal___fieldOwners',
+  ChildrenChildrenInternalIgnoreType = 'children___children___internal___ignoreType',
+  ChildrenChildrenInternalMediaType = 'children___children___internal___mediaType',
+  ChildrenChildrenInternalOwner = 'children___children___internal___owner',
+  ChildrenChildrenInternalType = 'children___children___internal___type',
+  ChildrenInternalContent = 'children___internal___content',
+  ChildrenInternalContentDigest = 'children___internal___contentDigest',
+  ChildrenInternalDescription = 'children___internal___description',
+  ChildrenInternalFieldOwners = 'children___internal___fieldOwners',
+  ChildrenInternalIgnoreType = 'children___internal___ignoreType',
+  ChildrenInternalMediaType = 'children___internal___mediaType',
+  ChildrenInternalOwner = 'children___internal___owner',
+  ChildrenInternalType = 'children___internal___type',
+  InternalContent = 'internal___content',
+  InternalContentDigest = 'internal___contentDigest',
+  InternalDescription = 'internal___description',
+  InternalFieldOwners = 'internal___fieldOwners',
+  InternalIgnoreType = 'internal___ignoreType',
+  InternalMediaType = 'internal___mediaType',
+  InternalOwner = 'internal___owner',
+  InternalType = 'internal___type'
+}
+
+export type SanityNctPageFilterInput = {
+  _id: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  _createdAt: Maybe<DateQueryOperatorInput>;
+  _updatedAt: Maybe<DateQueryOperatorInput>;
+  _rev: Maybe<StringQueryOperatorInput>;
+  _key: Maybe<StringQueryOperatorInput>;
+  seo: Maybe<SanitySeoFilterInput>;
+  launchDate: Maybe<DateQueryOperatorInput>;
+  topSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  overviewSection: Maybe<SanityNctOverviewSectionFilterInput>;
+  tokenSection: Maybe<SanityNctTokenSectionFilterInput>;
+  banner: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  marketplaceSection: Maybe<SanityTitleImageCustomBodyFilterInput>;
+  ledgerSection: Maybe<SanityNctLedgerSectionFilterInput>;
+  mediaItems: Maybe<SanityMediaFilterListInput>;
+  _rawSeo: Maybe<JsonQueryOperatorInput>;
+  _rawTopSection: Maybe<JsonQueryOperatorInput>;
+  _rawOverviewSection: Maybe<JsonQueryOperatorInput>;
+  _rawTokenSection: Maybe<JsonQueryOperatorInput>;
+  _rawBanner: Maybe<JsonQueryOperatorInput>;
+  _rawMarketplaceSection: Maybe<JsonQueryOperatorInput>;
+  _rawLedgerSection: Maybe<JsonQueryOperatorInput>;
+  _rawMediaItems: Maybe<JsonQueryOperatorInput>;
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+};
+
+export type SanityNctPageGroupConnection = {
+  __typename?: 'SanityNctPageGroupConnection';
+  totalCount: Scalars['Int'];
+  edges: Array<SanityNctPageEdge>;
+  nodes: Array<SanityNctPage>;
+  pageInfo: PageInfo;
+  field: Scalars['String'];
+  fieldValue: Maybe<Scalars['String']>;
+};
+
+export type SanityNctPageSortInput = {
+  fields: Maybe<Array<Maybe<SanityNctPageFieldsEnum>>>;
+  order: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type SanityNctTokenSection = {
+  __typename?: 'SanityNctTokenSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  cardImage: Maybe<SanityCustomImage>;
+  cardTitle: Maybe<Scalars['String']>;
+  cardSubtitle: Maybe<Scalars['String']>;
+  cardButton: Maybe<SanityButton>;
+  detailImage: Maybe<SanityCustomImage>;
+  detailTitle: Maybe<Scalars['String']>;
+  detailSubtitle: Maybe<Scalars['String']>;
+  detailButton1: Maybe<SanityButton>;
+  detailButton2: Maybe<SanityButton>;
+  cardBody: Maybe<Array<Maybe<SanityBlock>>>;
+  detailBody: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawCardImage: Maybe<Scalars['JSON']>;
+  _rawCardBody: Maybe<Scalars['JSON']>;
+  _rawCardButton: Maybe<Scalars['JSON']>;
+  _rawDetailImage: Maybe<Scalars['JSON']>;
+  _rawDetailBody: Maybe<Scalars['JSON']>;
+  _rawDetailButton1: Maybe<Scalars['JSON']>;
+  _rawDetailButton2: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityNctTokenSection_RawCardImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawCardBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawCardButtonArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawDetailImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawDetailBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawDetailButton1Args = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityNctTokenSection_RawDetailButton2Args = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityNctTokenSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  cardImage: Maybe<SanityCustomImageFilterInput>;
+  cardTitle: Maybe<StringQueryOperatorInput>;
+  cardSubtitle: Maybe<StringQueryOperatorInput>;
+  cardButton: Maybe<SanityButtonFilterInput>;
+  detailImage: Maybe<SanityCustomImageFilterInput>;
+  detailTitle: Maybe<StringQueryOperatorInput>;
+  detailSubtitle: Maybe<StringQueryOperatorInput>;
+  detailButton1: Maybe<SanityButtonFilterInput>;
+  detailButton2: Maybe<SanityButtonFilterInput>;
+  cardBody: Maybe<SanityBlockFilterListInput>;
+  detailBody: Maybe<SanityBlockFilterListInput>;
+  _rawCardImage: Maybe<JsonQueryOperatorInput>;
+  _rawCardBody: Maybe<JsonQueryOperatorInput>;
+  _rawCardButton: Maybe<JsonQueryOperatorInput>;
+  _rawDetailImage: Maybe<JsonQueryOperatorInput>;
+  _rawDetailBody: Maybe<JsonQueryOperatorInput>;
+  _rawDetailButton1: Maybe<JsonQueryOperatorInput>;
+  _rawDetailButton2: Maybe<JsonQueryOperatorInput>;
 };
 
 export type SanityPageMetadata = {
@@ -19406,6 +20386,30 @@ export type SanitySdgGroupConnection = {
 export type SanitySdgSortInput = {
   fields: Maybe<Array<Maybe<SanitySdgFieldsEnum>>>;
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type SanitySeo = {
+  __typename?: 'SanitySeo';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  description: Maybe<Scalars['String']>;
+  image: Maybe<SanityImage>;
+  _rawImage: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanitySeo_RawImageArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanitySeoFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  image: Maybe<SanityImageFilterInput>;
+  _rawImage: Maybe<JsonQueryOperatorInput>;
 };
 
 export type SanitySharedSections = SanityDocument & Node & {
@@ -23099,6 +24103,10 @@ export type CustomImageFieldsFragment = (
   & Pick<SanityCustomImage, 'imageAlt' | 'imageHref'>
   & { image: Maybe<(
     { __typename?: 'SanityImage' }
+    & { asset: Maybe<(
+      { __typename?: 'SanityImageAsset' }
+      & Pick<SanityImageAsset, 'url'>
+    )> }
     & ImageWithPreviewFragment
   )> }
 );
@@ -23189,6 +24197,15 @@ export type LinkFieldsFragment = (
   & { buttonDoc: Maybe<(
     { __typename?: 'SanityDoc' }
     & Pick<SanityDoc, 'href'>
+  )> }
+);
+
+export type MediaFieldsFragment = (
+  { __typename?: 'SanityMedia' }
+  & Pick<SanityMedia, 'title' | 'author' | 'date' | 'href' | 'type'>
+  & { image: Maybe<(
+    { __typename?: 'SanityCustomImage' }
+    & CustomImageFieldsFragment
   )> }
 );
 
@@ -23409,6 +24426,27 @@ export type MediaPageQuery = (
       )> }
     )> }
   ) }
+);
+
+export type NctPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctPageQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { seo: Maybe<(
+      { __typename?: 'SanitySeo' }
+      & Pick<SanitySeo, 'title' | 'description'>
+      & { image: Maybe<(
+        { __typename?: 'SanityImage' }
+        & { asset: Maybe<(
+          { __typename?: 'SanityImageAsset' }
+          & Pick<SanityImageAsset, 'url'>
+        )> }
+      )> }
+    )> }
+  )> }
 );
 
 export type PartnersPageQueryVariables = Exact<{ [key: string]: never; }>;
@@ -24263,17 +25301,7 @@ export type MainnetMediaSectionQuery = (
     { __typename?: 'SanityMainnetPage' }
     & { mediaItems: Maybe<Array<Maybe<(
       { __typename?: 'SanityMedia' }
-      & Pick<SanityMedia, 'title' | 'author' | 'date' | 'href' | 'type'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & { image: Maybe<(
-          { __typename?: 'SanityImage' }
-          & { asset: Maybe<(
-            { __typename?: 'SanityImageAsset' }
-            & Pick<SanityImageAsset, 'url'>
-          )> }
-        )> }
-      )> }
+      & MediaFieldsFragment
     )>>> }
   )> }
 );
@@ -24335,6 +25363,166 @@ export type MainnetWhatsNextSectionQuery = (
           )> }
         )> }
       )>>> }
+    )> }
+  )> }
+);
+
+export type NctBannerSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctBannerSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { banner: Maybe<(
+      { __typename?: 'SanityTitleImageCustomBody' }
+      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
+      & { image: Maybe<(
+        { __typename?: 'SanityCustomImage' }
+        & FluidCustomImageFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
+export type NctLedgerSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctLedgerSectionQuery = (
+  { __typename?: 'Query' }
+  & { bg: Maybe<(
+    { __typename?: 'File' }
+    & { childImageSharp: Maybe<(
+      { __typename?: 'ImageSharp' }
+      & { fluid: Maybe<(
+        { __typename?: 'ImageSharpFluid' }
+        & GatsbyImageSharpFluid_WithWebpFragment
+      )> }
+    )> }
+  )>, sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { ledgerSection: Maybe<(
+      { __typename?: 'SanityNctLedgerSection' }
+      & Pick<SanityNctLedgerSection, 'title' | 'subtitle' | '_rawBody'>
+      & { icon: Maybe<(
+        { __typename?: 'SanityImage' }
+        & ImageWithPreviewFragment
+      )>, button: Maybe<(
+        { __typename?: 'SanityButton' }
+        & ButtonFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
+export type NctMarketplaceSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctMarketplaceSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { marketplaceSection: Maybe<(
+      { __typename?: 'SanityTitleImageCustomBody' }
+      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
+      & { image: Maybe<(
+        { __typename?: 'SanityCustomImage' }
+        & CustomImageFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
+export type NctMediaSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctMediaSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { mediaItems: Maybe<Array<Maybe<(
+      { __typename?: 'SanityMedia' }
+      & MediaFieldsFragment
+    )>>> }
+  )> }
+);
+
+export type NctOverviewSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctOverviewSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { overviewSection: Maybe<(
+      { __typename?: 'SanityNctOverviewSection' }
+      & Pick<SanityNctOverviewSection, 'title' | '_rawBody'>
+      & { background: Maybe<(
+        { __typename?: 'SanityImage' }
+        & FluidSanityImageFieldsFragment
+      )>, titleIcon: Maybe<(
+        { __typename?: 'SanityImage' }
+        & ImageWithPreviewFragment
+      )>, button: Maybe<(
+        { __typename?: 'SanityButton' }
+        & ButtonFieldsFragment
+      )>, items: Maybe<Array<Maybe<(
+        { __typename?: 'SanityLabeledTextLinkable' }
+        & Pick<SanityLabeledTextLinkable, 'label' | 'text'>
+        & { link: Maybe<(
+          { __typename?: 'SanityLink' }
+          & LinkFieldsFragment
+        )> }
+      )>>> }
+    )> }
+  )> }
+);
+
+export type NctTokenSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctTokenSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & Pick<SanityNctPage, 'launchDate'>
+    & { tokenSection: Maybe<(
+      { __typename?: 'SanityNctTokenSection' }
+      & Pick<SanityNctTokenSection, 'cardTitle' | 'cardSubtitle' | '_rawCardBody' | 'detailTitle' | 'detailSubtitle' | '_rawDetailBody'>
+      & { cardImage: Maybe<(
+        { __typename?: 'SanityCustomImage' }
+        & CustomImageFieldsFragment
+      )>, cardButton: Maybe<(
+        { __typename?: 'SanityButton' }
+        & ButtonFieldsFragment
+      )>, detailImage: Maybe<(
+        { __typename?: 'SanityCustomImage' }
+        & CustomImageFieldsFragment
+      )>, detailButton1: Maybe<(
+        { __typename?: 'SanityButton' }
+        & ButtonFieldsFragment
+      )>, detailButton2: Maybe<(
+        { __typename?: 'SanityButton' }
+        & ButtonFieldsFragment
+      )> }
+    )> }
+  )> }
+);
+
+export type NctTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type NctTopSectionQuery = (
+  { __typename?: 'Query' }
+  & { sanityNctPage: Maybe<(
+    { __typename?: 'SanityNctPage' }
+    & { topSection: Maybe<(
+      { __typename?: 'SanityTitleImageCustomBody' }
+      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
+      & { image: Maybe<(
+        { __typename?: 'SanityCustomImage' }
+        & FluidCustomImageFields_WithWebpFragment
+      )> }
     )> }
   )> }
 );
@@ -25063,17 +26251,7 @@ export type TokenMediaSectionQuery = (
     { __typename?: 'SanityTokenPage' }
     & { mediaCards: Maybe<Array<Maybe<(
       { __typename?: 'SanityMedia' }
-      & Pick<SanityMedia, 'title' | 'author' | 'date' | 'href' | 'type'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & { image: Maybe<(
-          { __typename?: 'SanityImage' }
-          & { asset: Maybe<(
-            { __typename?: 'SanityImageAsset' }
-            & Pick<SanityImageAsset, 'url'>
-          )> }
-        )> }
-      )> }
+      & MediaFieldsFragment
     )>>> }
   )> }
 );

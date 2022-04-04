@@ -58,6 +58,7 @@ import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
 import { HorizontalDotsIcon } from 'web-components/lib/components/icons/HorizontalDotsIcon';
+import { Loading } from 'web-components/lib/components/loading';
 
 export default {
   title: 'Icons',
@@ -125,6 +126,9 @@ export const interfaceIcon = (): JSX.Element => <InterfaceIcon />;
 export const linkedInIcon = (): JSX.Element => <LinkedInIcon />;
 
 export const linkIcon = (): JSX.Element => <LinkIcon color="black" />;
+
+/** this isn't really an icon, but it makes sense here I think in storybook */
+export const loadingIcon = (): JSX.Element => <Loading />;
 
 export const mediumIcon = (): JSX.Element => <MediumIcon />;
 

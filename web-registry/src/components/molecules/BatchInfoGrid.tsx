@@ -4,9 +4,8 @@ import dayjs from 'dayjs';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
-import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { LabeledDetail } from 'web-components/lib/components/text-layouts';
-import { Link } from '../atoms';
+import { LinkWithArrow } from '../atoms';
 
 export const BatchInfoGrid: React.FC<{
   batch: BatchInfoWithSupply;
@@ -25,15 +24,16 @@ export const BatchInfoGrid: React.FC<{
     <GridItem>
       <BatchDetail label="Project">
         <Box component="span" sx={{ textTransform: 'capitalize' }}>
-          <ArrowLink href={`/projects/${project}`}>{project}</ArrowLink>
+          <LinkWithArrow label={project} href={`/projects/${project}`} />
         </Box>
       </BatchDetail>
     </GridItem>
     <GridItem>
       <BatchDetail label="Credit Class">
-        <ArrowLink href={`/credit-classes/${batch.class_id}`}>
-          {batch.class_id}
-        </ArrowLink>
+        <LinkWithArrow
+          href={`/credit-classes/${batch.class_id}`}
+          label={batch.class_id}
+        />
       </BatchDetail>
     </GridItem>
     <GridItem>
@@ -46,12 +46,6 @@ export const BatchInfoGrid: React.FC<{
 
 const batchDate = (date: string | Date): string =>
   dayjs(date).format('MMM D, YYYY');
-
-const ArrowLink: React.FC<{ href: string }> = ({ href, children }) => (
-  <Link sx={{ color: 'primary.contrastText' }} href={href}>
-    {children} <SmallArrowIcon sx={{ ml: 2 }} />
-  </Link>
-);
 
 const GridItem: React.FC = ({ children }) => (
   <Grid item xs={12} sm={5}>

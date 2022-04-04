@@ -1,7 +1,7 @@
 import React from 'react';
+import { withStyles, DefaultTheme as Theme } from '@mui/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
-import { styled, SxProps } from '@mui/material';
-import { Theme } from '~/theme/muiTheme';
+import { SxProps } from '@mui/system';
 
 interface OutlinedButtonProps extends ButtonProps {
   target?: string;
@@ -17,7 +17,7 @@ const SpanButton: React.FC = props => (
   <Button variant="contained" component="span" {...props} />
 );
 
-const styledCallback = (theme: Theme): any => ({
+const styleCallback = (theme: Theme): any => ({
   root: {
     color: theme.palette.secondary.main,
     borderColor: theme.palette.secondary.contrastText,
@@ -29,14 +29,14 @@ const styledCallback = (theme: Theme): any => ({
   },
 });
 
-const StyledButton = styled(Button)(styledCallback);
-const StyledLabel = styled(SpanButton)(styledCallback);
+const CustomButton = withStyles(styleCallback)(Button);
+const CustomLabel = withStyles(styleCallback)(SpanButton);
 
 export default function OutlinedButton({
   isImageBtn,
   ...props
 }: OutlinedButtonProps): JSX.Element {
-  const Component = isImageBtn ? StyledLabel : StyledButton;
+  const Component = isImageBtn ? CustomLabel : CustomButton;
   return (
     <Component color="secondary" {...props}>
       {props.children}

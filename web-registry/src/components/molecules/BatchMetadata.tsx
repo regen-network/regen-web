@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, SxProps, Theme, Typography } from '@mui/material';
 
 import { LabeledDetail } from 'web-components/lib/components/text-layouts';
-import { Link } from '../atoms';
+import { LinkWithArrow } from '../atoms';
 
 import type { BatchMetadataLD } from '../../generated/json-ld';
 
@@ -18,25 +18,27 @@ export const BatchMetadata: React.FC<{
         {data?.['regen:vcsRetirementSerialNumber'] || '-'}
       </MetaDetail>
       <MetaDetail label="batch monitoring report">
-        {!!monitoringReport ? (
-          <Link href={monitoringReport?.['schema:url']?.['@value']}>
-            {monitoringReport?.['schema:name']}
-          </Link>
-        ) : (
-          '-'
-        )}
+        <LinkOrDash
+          href={monitoringReport?.['schema:url']?.['@value']}
+          label={monitoringReport?.['schema:name']}
+        />
       </MetaDetail>
       <MetaDetail label="Batch verification report">
-        {!!verificationReport ? (
-          <Link href={verificationReport?.['schema:url']?.['@value']}>
-            {verificationReport?.['schema:name']}
-          </Link>
-        ) : (
-          '-'
-        )}
+        <LinkOrDash
+          href={verificationReport?.['schema:url']?.['@value']}
+          label={verificationReport?.['schema:name']}
+        />
       </MetaDetail>
     </Box>
   );
+};
+
+const LinkOrDash: React.FC<{ href?: string; label?: string }> = ({
+  href,
+  label,
+}) => {
+  if (!href) return <>-</>;
+  return <LinkWithArrow href={href} label={label || ''} />;
 };
 
 const MetaDetail: React.FC<{ label: string }> = ({ label, children }) => (

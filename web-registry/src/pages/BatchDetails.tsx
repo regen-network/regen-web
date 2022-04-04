@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
+import { Loading } from 'web-components/lib/components/loading';
 
 import { getBatchWithSupplyForDenom } from '../lib/ecocredit';
 import { getMetadata } from '../lib/metadata-graph';
@@ -17,16 +18,26 @@ import {
   BatchMetadata,
   BatchTotalsGrid,
 } from '../components/molecules';
+import { NotFoundPage } from './NotFound';
+import { useWallet } from '../lib/wallet';
+import { useEcocredits } from '../hooks';
 
 export const BatchDetails: React.FC = () => {
   const { batchDenom } = useParams();
+  const [loading, setLoading] = useState(true);
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
   const [metadata, setMetadata] = useState<BatchMetadataLD>();
+  const navigate = useNavigate();
+  const walletContext = useWallet();
+  const accountAddress = walletContext.wallet?.address;
+  const userEcocredits = useEcocredits(accountAddress);
+  const isUserBatch = userEcocredits.some(c => c.batch_denom === batchDenom);
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {
       if (batchDenom) {
         try {
+          setLoading(true);
           const batch = await getBatchWithSupplyForDenom(batchDenom);
           setBatch(batch);
           if (batch.metadata) {
@@ -35,6 +46,8 @@ export const BatchDetails: React.FC = () => {
           }
         } catch (err) {
           console.error(err); // eslint-disable-line no-console
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -48,8 +61,9 @@ export const BatchDetails: React.FC = () => {
   const projectHandle =
     offchainData?.creditVintageByBatchDenom?.projectByProjectId?.handle || '';
 
-  if (!batch) return null;
-  // TODO should there be a not found component or redirect?
+  // TODO placeholder until we have a more descriptive not found graphic
+  if (loading) return <Loading />;
+  if (!batch) return <NotFoundPage />;
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
@@ -65,9 +79,15 @@ export const BatchDetails: React.FC = () => {
           }}
         >
           <Title variant="h2">Credit Batch Details</Title>
-          <OutlinedButton sx={{ maxWidth: 'max-content', px: 7 }} size="small">
-            view in portfolio
-          </OutlinedButton>
+          {isUserBatch && (
+            <OutlinedButton
+              sx={{ maxWidth: 'max-content', px: 7 }}
+              size="small"
+              onClick={() => navigate('/ecocredits/dashboard')}
+            >
+              view in portfolio
+            </OutlinedButton>
+          )}
         </Box>
         <Box sx={{ display: 'flex', flexWrap: ['wrap', 'nowrap'] }}>
           <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>

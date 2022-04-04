@@ -14,6 +14,7 @@ type MsgClientType = {
 
 export default function useMsgClient(
   handleTxQueued: () => void,
+  handleTxDelivered: () => void,
 ): MsgClientType {
   const { api, wallet } = useLedger();
   const [error, setError] = useState<unknown | undefined>();
@@ -45,6 +46,7 @@ export default function useMsgClient(
           handleTxQueued();
           const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
           setDeliverTxResponse(_deliverTxResponse);
+          handleTxDelivered();
         }
       } catch (err) {
         console.error(err); // eslint-disable-line no-console
@@ -53,7 +55,7 @@ export default function useMsgClient(
 
       return;
     },
-    [api?.msgClient, wallet?.address, handleTxQueued],
+    [api?.msgClient, wallet?.address, handleTxQueued, handleTxDelivered],
   );
 
   return {

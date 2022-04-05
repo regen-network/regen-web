@@ -119,7 +119,7 @@ const AmountTextField: React.FC<AmountTextFieldProps> = ({
           alignItems="center"
           sx={theme => ({
             fontFamily: theme.typography.h1.fontFamily,
-            color: theme.palette.info.main,
+            color: theme.palette.info.dark,
             textTransform: 'uppercase',
             fontWeight: 800,
             letterSpacing: '1px',

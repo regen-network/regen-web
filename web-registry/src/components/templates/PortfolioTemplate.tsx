@@ -9,16 +9,7 @@ import { RenderActionButtonsFunc } from 'web-components/lib/components/table/Act
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
-import { BasketTakeModal } from '../../components/molecules';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
-import { useEcocredits, useTakeBasketTokens } from '../../hooks';
-import { useLedger } from '../../ledger';
-// import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
-import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
-import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
-// import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
-// import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
-import { useWallet } from '../../lib/wallet';
 import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 
 interface PortfolioTemplateProps extends WithBasketsProps {
@@ -53,36 +44,6 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
 }) => {
   const styles = useStyles();
 
-  // const openModal = (rowIndex: number): void => {
-  //   if (!accountAddress) return;
-  //   const selectedBasket = basketsWithClasses?.[rowIndex]?.basket;
-  //   if (selectedBasket?.basketDenom) {
-  //     setSelectedBasketDenom(selectedBasket.basketDenom);
-  //   }
-  // };
-
-  // const handleTakeCredits = async (values: MsgTake): Promise<void> => {
-  //   const msgClient = api?.msgClient;
-  //   if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
-
-  //   console.log('MsgTake ', values);
-  //   const txBytes = await signTake(
-  //     accountAddress,
-  //     values.basketDenom,
-  //     values.amount,
-  //     values.retirementLocation,
-  //     values.retireOnTake,
-  //   );
-  //   // onTxQueued(txBytes);
-  //   console.log('txBytes ', txBytes);
-
-  //   if (txBytes) {
-  //     const hash = await msgClient.broadcast(txBytes);
-  //     // eslint-disable-next-line
-  //     console.log('hash', hash);
-  //   }
-  // };
-
   return (
     <Box sx={{ backgroundColor: 'grey.50', pb: { xs: 21.25, sm: 28.28 } }}>
       <Section title="Portfolio" titleVariant="h2" titleAlign="left">
@@ -106,16 +67,6 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             renderActionButtons={renderCreditActionButtons}
           />
         </Box>
-        {/* {baskets && !!selectedBasketDenom && !!accountAddress && (
-          <BasketTakeModal
-            open={!!selectedBasketDenom}
-            accountAddress={accountAddress}
-            basketDenom={selectedBasketDenom}
-            baskets={baskets}
-            onClose={() => setSelectedBasketDenom('')}
-            onSubmit={handleTakeCredits}
-          />
-        )} */}
       </Section>
     </Box>
   );

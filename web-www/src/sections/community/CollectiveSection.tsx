@@ -44,10 +44,6 @@ const useStyles = makeStyles<Theme>(theme => ({
       textAlign: 'center',
     },
   },
-  modal: {
-    padding: 0,
-    overflow: 'hidden',
-  },
 }));
 
 type QueryData = {
@@ -91,27 +87,36 @@ const CollectiveSection = (): JSX.Element => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
-  const { bg, sanityCommunityPage } = useStaticQuery<CommunityCollectiveSectionQuery>(query);
+  const { bg, sanityCommunityPage } =
+    useStaticQuery<CommunityCollectiveSectionQuery>(query);
   const data = sanityCommunityPage?.collectiveSection;
 
   return (
     <BackgroundImage fluid={bg?.childImageSharp?.fluid as FluidObject}>
       <Section
         title={data?.title || ''}
-        classes={{ root: clsx(styles.section, styles.center), title: styles.title }}
+        classes={{
+          root: clsx(styles.section, styles.center),
+          title: styles.title,
+        }}
       >
         <MarketingDescription className={clsx(styles.content, styles.center)}>
           <BlockContent content={data?._rawBody} />
         </MarketingDescription>
-        <ContainedButton onClick={() => setOpen(true)}>{data?.buttonText}</ContainedButton>
+        <ContainedButton onClick={() => setOpen(true)}>
+          {data?.buttonText}
+        </ContainedButton>
       </Section>
       <Modal
         open={open}
         onClose={() => setOpen(false)}
-        className={styles.modal}
         closeIconColor={theme.palette.info.light}
+        isIFrame
       >
-        <iframe title="collective-signup-form" src={data?.signupFormUrl || ''} />
+        <iframe
+          title="collective-signup-form"
+          src={data?.signupFormUrl || ''}
+        />
       </Modal>
     </BackgroundImage>
   );

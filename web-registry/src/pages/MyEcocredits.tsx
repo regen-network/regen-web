@@ -9,8 +9,13 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
 import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
-import { useEcocredits, useBasketsWithClasses } from '../hooks';
+import {
+  useEcocredits,
+  useBasketsWithClasses,
+  useTakeBasketTokens,
+} from '../hooks';
 import useMsgClient from '../hooks/useMsgClient';
 import {
   PortfolioTemplate,
@@ -18,11 +23,13 @@ import {
   withBaskets,
 } from '../components/templates';
 import { ProcessingModal, ConfirmationModal } from '../components/organisms';
+import { BasketTakeModal } from '../components/molecules';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-basket.svg';
 // import { ReactComponent as WithdrawIBC } from '../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
+import { useLedger } from '../ledger';
 
 const useStyles = makeStyles((theme: Theme) => ({
   arrow: {
@@ -54,6 +61,8 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const accountAddress = wallet?.address;
   const credits = useEcocredits(accountAddress);
   const basketsWithClasses = useBasketsWithClasses(baskets);
+  const { signTake } = useTakeBasketTokens();
+  const { api } = useLedger();
 
   const [creditBaskets, setCreditBaskets] = useState<
     (QueryBasketResponse | undefined)[][]
@@ -61,6 +70,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [selectedBasketDenom, setSelectedBasketDenom] = useState('');
 
   useEffect(() => {
     // Get available baskets to put credits into
@@ -72,6 +82,40 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       );
     }
   }, [credits, basketsWithClasses]);
+
+  const openTakeModal = (rowIndex: number): void => {
+    if (!accountAddress) return;
+    const selectedBasket = basketsWithClasses?.[rowIndex]?.basket;
+    if (selectedBasket?.basketDenom) {
+      setSelectedBasketDenom(selectedBasket.basketDenom);
+    }
+  };
+
+  const handleTakeCredits = async (values: any): Promise<void> => {
+    const msgClient = api?.msgClient;
+    if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
+
+    console.log('MsgTake ', values);
+    // const txBytes = await signTake(
+    //   accountAddress,
+    //   values.basketDenom,
+    //   values.amount,
+    //   values.retirementLocation,
+    //   values.retireOnTake,
+    // );
+    // onTxQueued(txBytes);
+    // console.log('txBytes ', txBytes);
+
+    const msg = MsgTake.fromPartial({
+      owner: accountAddress,
+      basketDenom: values.basketDenom,
+      amount: values?.amount?.toString(),
+      retirementLocation: values.retirementLocation || '',
+      retireOnTake: values.retireOnTake || false,
+    });
+
+    await signAndBroadcast([msg]);
+  };
 
   return (
     <>
@@ -134,7 +178,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
                 icon: <TakeFromBasket />,
                 label: 'Take from basket',
                 // eslint-disable-next-line no-console
-                onClick: () => console.log(`TODO take from basket ${i}`),
+                onClick: () => openTakeModal(i),
               },
               // This will be handled from osmosis
               // so hiding these for now
@@ -182,6 +226,16 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
             await signAndBroadcast([msg]);
             setBasketPutOpen(-1);
           }}
+        />
+      )}
+      {baskets && !!selectedBasketDenom && !!accountAddress && (
+        <BasketTakeModal
+          open={!!selectedBasketDenom}
+          accountAddress={accountAddress}
+          basketDenom={selectedBasketDenom}
+          baskets={baskets}
+          onClose={() => setSelectedBasketDenom('')}
+          onSubmit={handleTakeCredits}
         />
       )}
       <ProcessingModal

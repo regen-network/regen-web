@@ -73,10 +73,6 @@ const useStyles = makeStyles(theme => ({
   resourcesRoot: {
     paddingTop: 0,
   },
-  modal: {
-    padding: 0,
-    overflow: 'hidden',
-  },
   description: {
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(22),
@@ -252,11 +248,7 @@ const CreateCreditClass: React.FC = () => {
           Submit a Credit Class
         </ContainedButton>
       </FixedFooter>
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        className={styles.modal}
-      >
+      <Modal open={open} onClose={() => setOpen(false)} isIFrame>
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>

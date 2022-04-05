@@ -10,6 +10,7 @@ export interface RegenModalProps {
   onClose: () => void;
   className?: string;
   closeIconColor?: string;
+  isIFrame?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -44,11 +45,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     maxWidth: theme.spacing(150),
     [theme.breakpoints.up('md')]: {
       width: '50%',
-      height: '90%',
+      maxHeight: '90%',
     },
     [theme.breakpoints.between('sm', 'md')]: {
       width: '70%',
-      height: '90%',
+      maxHeight: '90%',
     },
     [theme.breakpoints.down('sm')]: {
       left: '0px',
@@ -78,6 +79,16 @@ const useStyles = makeStyles((theme: Theme) => ({
     cursor: 'pointer',
     fontWeight: 'bold',
   },
+  iframe: {
+    padding: '0',
+    overflow: 'hidden',
+    [theme.breakpoints.up('md')]: {
+      height: '90%',
+    },
+    [theme.breakpoints.between('sm', 'md')]: {
+      height: '90%',
+    },
+  },
 }));
 
 const RegenModal: React.FC<RegenModalProps> = ({
@@ -86,14 +97,17 @@ const RegenModal: React.FC<RegenModalProps> = ({
   children,
   className,
   closeIconColor,
+  isIFrame,
 }) => {
-  const classes = useStyles({});
+  const styles = useStyles();
   return (
     <Modal open={open} onClose={onClose}>
       <RemoveScroll>
-        <div className={clsx(classes.content, className)}>
+        <div
+          className={clsx(styles.content, isIFrame && styles.iframe, className)}
+        >
           {children}
-          <div className={classes.closeIcon} onClick={onClose}>
+          <div className={styles.closeIcon} onClick={onClose}>
             <CloseIcon svgColor={closeIconColor} />
           </div>
         </div>

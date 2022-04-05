@@ -107,7 +107,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
   onClose,
   onSubmit,
 }) => {
-  // const styles = useStyles();
+  const styles = useStyles();
 
   const initialValues = {
     amount: 0,
@@ -184,11 +184,9 @@ const BasketTakeForm: React.FC<FormProps> = ({
               component={CheckboxLabel}
               type="checkbox"
               name="retireOnTake"
-              // className={styles.checkboxLabel}
+              className={styles.checkboxLabel}
               label={
-                <Description
-                // className={styles.checkboxDescription}
-                >
+                <Description className={styles.checkboxDescription}>
                   Retire credits upon transfer
                 </Description>
               }

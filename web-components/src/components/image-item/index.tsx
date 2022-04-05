@@ -88,6 +88,7 @@ export default function ImageItem({
       )}
       {buttonText && buttonHref && (
         <ContainedButton
+          size="large"
           className={styles.button}
           href={buttonHref}
           target={buttonTarget}

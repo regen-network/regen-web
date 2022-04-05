@@ -63,8 +63,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontSize: getFontSize('medium').xs,
     },
     color: theme.palette.info.dark,
+    paddingTop: theme.spacing(2.8),
   },
-  place: props => ({
+  place: {
     color: theme.palette.info.dark,
     [theme.breakpoints.up('sm')]: {
       fontSize: getFontSize('small').sm,
@@ -72,9 +73,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: getFontSize('small').xs,
     },
-    paddingBottom: theme.spacing(2.8),
     paddingTop: theme.spacing(1.6),
-  }),
+  },
 }));
 
 export default function UserInfo({
@@ -84,8 +84,8 @@ export default function UserInfo({
   border = true,
   icon,
 }: UserInfoProps): JSX.Element {
-  const classes = useStyles({ description: user.description, direction, size });
-  const name = <Typography className={classes.name}>{user.name}</Typography>;
+  const styles = useStyles({ description: user.description, direction, size });
+  const name = <Typography className={styles.name}>{user.name}</Typography>;
 
   return (
     <Grid container direction={direction} wrap="nowrap">
@@ -105,10 +105,10 @@ export default function UserInfo({
           }
         />
       </Grid>
-      <Grid item className={classes.text}>
+      <Grid item className={styles.text}>
         {user.link ? (
           <a
-            className={classes.link}
+            className={styles.link}
             href={user.link}
             target="_blank"
             rel="noopener noreferrer"
@@ -119,10 +119,10 @@ export default function UserInfo({
           name
         )}
         {user.location && (
-          <Typography className={classes.place}>{user.location}</Typography>
+          <Typography className={styles.place}>{user.location}</Typography>
         )}
         {user.description && (
-          <Typography className={classes.description}>
+          <Typography className={styles.description}>
             {user.description}
           </Typography>
         )}

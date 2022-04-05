@@ -1,3 +1,4 @@
+export * from './AdditionalProjectMetadata';
 export * from './BackgroundImgSection';
 export * from './EcocreditsSection';
 export * from './ReviewProcessInfo';
@@ -6,6 +7,8 @@ export * from './OverviewCards';
 export * from './HeroTitle';
 export * from './HeroAction';
 export * from './ImageItemsSection';
+export * from './LineItem';
+export * from './LineItemLabelAbove';
 export * from './TwoImageSection';
 export * from './PracticesOutcomesSection';
 export * from './TimelineSection';

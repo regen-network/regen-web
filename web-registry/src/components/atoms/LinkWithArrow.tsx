@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Link } from '@mui/material';
+import { SxProps } from '@mui/system';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { parseText } from 'web-components/lib/utils/textParser';
 
@@ -15,22 +17,34 @@ const useStylesLink = makeStyles(theme => ({
 }));
 
 interface LinkProps {
+  sx?: SxProps<Theme>;
   link: string;
   label: string | JSX.Element;
   className?: string;
+  target?: '_blank' | '_self';
 }
 
-export const LinkWithArrow = ({
+const LinkWithArrow: React.FC<LinkProps> = ({
+  sx,
   link,
   label,
   className,
-}: LinkProps): JSX.Element => {
+  target = '_blank',
+}) => {
   const styles = useStylesLink();
 
   return (
-    <Link href={link} className={className} target="_blank" rel="noreferrer">
+    <Link
+      href={link}
+      className={className}
+      sx={{ color: 'info.dark', ...sx }}
+      target={target}
+      rel="noreferrer"
+    >
       {parseText(label)}
-      <SmallArrowIcon className={styles.arrowIcon} />
+      {link && <SmallArrowIcon className={styles.arrowIcon} />}
     </Link>
   );
 };
+
+export { LinkWithArrow };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'formik';
 import { makeStyles } from '@mui/styles';
-import { Grid, Box } from '@mui/material';
+import { Grid } from '@mui/material';
 import clsx from 'clsx';
 
 import { Theme } from '../../theme/muiTheme';
@@ -10,7 +10,7 @@ import TextField, { RegenTextFieldProps } from '../inputs/TextField';
 const useStyles = makeStyles((theme: Theme) => ({
   textField: {
     '& .MuiInputBase-root': {
-      paddingRight: 0,
+      paddingRight: '0 !important',
     },
     [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(2),

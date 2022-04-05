@@ -15,7 +15,11 @@ import {
 import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
-import { useEcocredits, useBasketsWithClasses } from '../hooks';
+import {
+  useEcocredits,
+  useBasketsWithClasses,
+  useBasketTokens,
+} from '../hooks';
 import useMsgClient from '../hooks/useMsgClient';
 import {
   PortfolioTemplate,
@@ -53,14 +57,20 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
 
   const handleTxDelivered = (): void => {
     setIsProcessingModalOpen(false);
-    // TODO refetch basket/ecocredits data so it shows latest values
+    // Refetch basket/ecocredits data so it shows latest values
+    fetchBasketTokens();
+    fetchCredits();
   };
 
   // TODO handle error when signing and broadcasting tx
   const { signAndBroadcast, setDeliverTxResponse, wallet, deliverTxResponse } =
     useMsgClient(handleTxQueued, handleTxDelivered);
   const accountAddress = wallet?.address;
-  const credits = useEcocredits(accountAddress);
+  const { credits, fetchCredits } = useEcocredits(accountAddress);
+  const { basketTokens, fetchBasketTokens } = useBasketTokens(
+    accountAddress,
+    baskets,
+  );
   const basketsWithClasses = useBasketsWithClasses(baskets);
 
   const [creditBaskets, setCreditBaskets] = useState<
@@ -88,8 +98,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     <>
       <PortfolioTemplate
         credits={credits}
-        baskets={baskets}
-        accountAddress={accountAddress}
+        basketTokens={basketTokens}
         renderCreditActionButtons={(i: number) => {
           const buttons = [
             // Disabling for now until the marketplace is

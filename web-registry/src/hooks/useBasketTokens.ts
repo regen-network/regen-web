@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
 import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
@@ -19,34 +19,39 @@ export interface BasketTokens {
 export default function useBasketTokens(
   address?: string,
   baskets?: QueryBasketsResponse,
-): BasketTokens[] {
+): {
+  basketTokens: BasketTokens[];
+  fetchBasketTokens: () => Promise<void>;
+} {
   const fetchBalance = useQueryBalance();
   const fetchDenomMetadata = useQueryDenomMetadata();
   const [basketTokens, setBasketTokens] = useState<BasketTokens[]>([]);
 
+  const fetchBasketTokens = useCallback(async (): Promise<void> => {
+    if (!baskets) return;
+
+    const _basketTokens = await Promise.all(
+      baskets.baskets.map(async basket => ({
+        basket,
+        balance: await fetchBalance({
+          address,
+          denom: basket.basketDenom,
+        }),
+        metadata: await fetchDenomMetadata(basket.basketDenom),
+      })),
+    );
+
+    const withPositiveBalance = (basket: BasketTokens): boolean =>
+      basket.balance?.balance?.amount !== '0';
+
+    setBasketTokens(_basketTokens.filter(withPositiveBalance));
+  }, [baskets, address, fetchBalance, fetchDenomMetadata]);
+
   useEffect(() => {
     if (!address || !baskets) return;
 
-    async function fetchData(baskets: QueryBasketsResponse): Promise<void> {
-      const _basketTokens = await Promise.all(
-        baskets.baskets.map(async basket => ({
-          basket,
-          balance: await fetchBalance({
-            address,
-            denom: basket.basketDenom,
-          }),
-          metadata: await fetchDenomMetadata(basket.basketDenom),
-        })),
-      );
+    fetchBasketTokens();
+  }, [fetchBasketTokens, baskets, address]);
 
-      const withPositiveBalance = (basket: BasketTokens): boolean =>
-        basket.balance?.balance?.amount !== '0';
-
-      setBasketTokens(_basketTokens.filter(withPositiveBalance));
-    }
-
-    fetchData(baskets);
-  }, [address, baskets, fetchBalance, fetchDenomMetadata]);
-
-  return basketTokens;
+  return { basketTokens, fetchBasketTokens };
 }

@@ -13,6 +13,7 @@ import {
   Item,
 } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
+import { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
@@ -49,8 +50,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const styles = useStyles();
   const theme = useTheme();
 
-  const handleTxQueued = (txBytes: Uint8Array): void => {
-    console.log('handleTxQueued', txBytes);
+  const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
   };
 
@@ -110,30 +110,40 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     }
   };
 
-  const handleTakeCredits = async (values: any): Promise<void> => {
+  const handleTakeCredits = async (values: MsgTakeValues): Promise<void> => {
     const msgClient = api?.msgClient;
     if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
 
     console.log('MsgTake ', values);
-    // const txBytes = await signTake(
-    //   accountAddress,
-    //   values.basketDenom,
-    //   values.amount,
-    //   values.retirementLocation,
-    //   values.retireOnTake,
-    // );
-    // onTxQueued(txBytes);
-    // console.log('txBytes ', txBytes);
+    const amount = values?.amount;
+    const basket = baskets?.baskets.find(
+      b => b.basketDenom === values.basketDenom,
+    );
 
     const msg = MsgTake.fromPartial({
       owner: accountAddress,
       basketDenom: values.basketDenom,
-      amount: values?.amount?.toString(),
+      amount,
       retirementLocation: values.retirementLocation || '',
       retireOnTake: values.retireOnTake || false,
     });
 
-    await signAndBroadcast([msg]);
+    await signAndBroadcast([msg], undefined, values?.retirementNote);
+
+    if (basket && amount) {
+      setCardItems([
+        {
+          label: 'basket',
+          value: { name: basket.name },
+        },
+        {
+          label: 'amount',
+          value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
+        },
+      ]);
+      setIsTxSuccessfulModalTitle('Take from basket');
+      setSelectedBasketDenom(''); // close Take modal
+    }
   };
 
   return (
@@ -195,7 +205,6 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
               {
                 icon: <TakeFromBasket />,
                 label: 'Take from basket',
-                // eslint-disable-next-line no-console
                 onClick: () => openTakeModal(i),
               },
               // This will be handled from osmosis

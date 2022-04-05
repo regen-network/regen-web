@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { Collapse } from '@mui/material';
+import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
 
 import { Theme } from '../../theme/muiTheme';
 import AmountField from '../inputs/AmountField';
@@ -75,12 +76,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 // Output (submit)
-export interface MsgTake {
+export interface MsgTakeValues {
   owner: string;
   basketDenom: string;
-  amount: number;
+  amount: string;
   retireOnTake: boolean;
   retirementLocation?: string;
+  retirementNote?: string;
 }
 
 interface CreditTakeFormValues {
@@ -94,15 +96,15 @@ interface CreditTakeFormValues {
 // Input (args)
 interface FormProps {
   accountAddress: string;
-  basketDenom: string;
+  basket: Basket;
   availableTradableAmount: number;
   onClose: () => void;
-  onSubmit: (values: MsgTake) => void;
+  onSubmit: (values: MsgTakeValues) => void;
 }
 
 const BasketTakeForm: React.FC<FormProps> = ({
   accountAddress,
-  basketDenom,
+  basket,
   availableTradableAmount,
   onClose,
   onSubmit,
@@ -112,7 +114,6 @@ const BasketTakeForm: React.FC<FormProps> = ({
   const initialValues = {
     amount: 0,
     retireOnTake: false,
-
     note: '',
     country: '',
     stateProvince: '',
@@ -151,14 +152,13 @@ const BasketTakeForm: React.FC<FormProps> = ({
     // console.log('*** submitHandler', values);
     // const retirementLocation = getLocationString(); todo
 
-    const msgTake: MsgTake = {
+    const msgTake: MsgTakeValues = {
       owner: accountAddress,
-      basketDenom,
-      // amount: values.amount,
-      amount: values.amount * 1000000,
-      // Math.pow(10, basket?.basket?.exponent);
+      basketDenom: basket.basketDenom,
+      amount: (values.amount * Math.pow(10, basket.exponent)).toString(),
       retireOnTake: !!values.retireOnTake,
       retirementLocation: 'US', //todo
+      retirementNote: values?.note,
     };
 
     await onSubmit(msgTake);
@@ -177,8 +177,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
               name="amount"
               label="Amount"
               availableAmount={availableTradableAmount}
-              batchDenom={basketDenom}
-              // className={styles.textField}
+              batchDenom={basket.basketDenom}
             />
             <Field
               component={CheckboxLabel}

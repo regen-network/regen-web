@@ -65,44 +65,34 @@ const regenTheme = createTheme({
   typography: {
     fontFamily: ['"Lato"', '-apple-system', 'sans-serif'].join(','),
     h1: {
+      fontSize: '2rem',
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '3rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '2rem',
       },
       fontFamily: headerFontFamily,
     },
     h2: {
+      fontSize: '1.5rem',
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2.375rem',
       },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '1.5rem',
-      },
     },
     h3: {
+      fontSize: '1.5rem', // possible override: 1.3125rem
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2rem',
       },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '1.5rem', // possible override: 1.3125rem
-      },
     },
     h4: {
+      fontSize: '1.3125rem', // possible override: 1.125rem
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '1.5rem',
       },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '1.3125rem', // possible override: 1.125rem
-      },
     },
     h5: {
+      fontSize: '1.125rem',
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '1.3125rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '1.125rem',
       },
     },
     h6: {

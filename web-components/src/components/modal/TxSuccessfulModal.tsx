@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-interface Item {
+export interface Item {
   label: string;
   value: {
     name: string | number;

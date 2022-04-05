@@ -4,6 +4,8 @@ import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 
+import { truncate } from 'web-components/lib/utils/truncate';
+
 import { ledgerRPCUri, ledgerRESTUri, chainId } from './ledger';
 
 interface ChainKey {

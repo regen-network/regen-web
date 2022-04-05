@@ -24,7 +24,7 @@ import { useEcocredits } from '../hooks';
 
 export const BatchDetails: React.FC = () => {
   const { batchDenom } = useParams();
-  const [loading, setLoading] = useState(true);
+  const [ledgerLoading, setLedgerLoading] = useState(false);
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
   const [metadata, setMetadata] = useState<BatchMetadataLD>();
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ export const BatchDetails: React.FC = () => {
     const fetch = async (): Promise<void> => {
       if (batchDenom) {
         try {
-          setLoading(true);
+          setLedgerLoading(true);
           const batch = await getBatchWithSupplyForDenom(batchDenom);
           setBatch(batch);
           if (batch.metadata) {
@@ -47,23 +47,29 @@ export const BatchDetails: React.FC = () => {
         } catch (err) {
           console.error(err); // eslint-disable-line no-console
         } finally {
-          setLoading(false);
+          setLedgerLoading(false);
         }
       }
     };
     fetch();
   }, [batchDenom]);
 
-  const { data: offchainData } = useBatchDetailsQuery({
+  const {
+    data: offchainData,
+    loading: dbLoading,
+    error,
+  } = useBatchDetailsQuery({
     skip: !batchDenom,
     variables: { batchDenom: batchDenom as string },
   });
+
   const projectHandle =
     offchainData?.creditVintageByBatchDenom?.projectByProjectId?.handle || '';
 
+  if (ledgerLoading || dbLoading) return <Loading />;
+
   // TODO placeholder until we have a more descriptive not found graphic
-  if (loading) return <Loading />;
-  if (!batch) return <NotFoundPage />;
+  if (!batch || error) return <NotFoundPage />;
 
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>

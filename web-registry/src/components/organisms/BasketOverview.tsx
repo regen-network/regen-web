@@ -106,8 +106,8 @@ const TextContainer = styled(Grid)(({ theme }) => ({
 }));
 
 export interface CreditClass {
-  id: string | '-';
-  name: string | '-';
+  id: string;
+  name: string;
 }
 
 export type BasketOverviewProps = {
@@ -118,7 +118,7 @@ export type BasketOverviewProps = {
   curator: string;
   allowedCreditClasses: CreditClass[];
   minStartDate?: string;
-  startDateWindow?: Long;
+  // startDateWindow?: Long;
   // startDateWindow?: string;
 };
 
@@ -130,7 +130,7 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
   curator,
   allowedCreditClasses,
   minStartDate,
-  startDateWindow,
+  // startDateWindow,
 }) => {
   const styles = useStyles();
 
@@ -178,13 +178,13 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                     data={formatDate(minStartDate)}
                   />
                 )}
-                {startDateWindow && (
+                {/* {startDateWindow && (
                   <Item
                     label="start date window"
                     data={startDateWindow.toString()}
                     // data={formatDate(startDateWindow)}
                   />
-                )}
+                )} */}
               </Grid>
             </OnBoardingCard>
           </TextContainer>

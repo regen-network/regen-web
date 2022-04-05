@@ -2,6 +2,12 @@ import axios, { AxiosResponse } from 'axios';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import qs from 'querystring';
 
+import {
+  QueryClientImpl as BankQueryClient,
+  QueryDenomMetadataResponse,
+  QueryBalanceResponse,
+} from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+
 import { expLedger, ledgerRESTUri } from '../lib/ledger';
 import type { PageResponse } from '../types/ledger/base';
 import type {
@@ -10,7 +16,7 @@ import type {
   BatchInfoWithSupply,
   QuerySupplyResponse,
   BatchTotalsForProject,
-  QueryBalanceResponse,
+  QueryBalanceResponse as QueryBalanceResponseV0,
   QueryClassesResponse,
   QueryBasketBalancesResponse,
   QueryBasketResponse,
@@ -267,9 +273,9 @@ export const queryEcoBatchSupply = async (
 const queryEcoBalance = async (
   batchDenom: string,
   account: string,
-): Promise<QueryBalanceResponse> => {
+): Promise<QueryBalanceResponseV0> => {
   try {
-    const { data } = await axios.get<QueryBalanceResponse>(
+    const { data } = await axios.get<QueryBalanceResponseV0>(
       `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/balance/${account}`,
     );
     return data;
@@ -345,4 +351,50 @@ export const queryEcoClassInfo = async (
   } catch (err) {
     throw new Error(`Error fetching class info: ${err}`);
   }
+};
+
+/**
+ * NEW ledger queries using RegenAPI
+ */
+
+export type FetchDenomMetadataProps = {
+  client: BankQueryClient;
+  denom: string;
+};
+
+export const fetchDenomMetadata = async ({
+  client,
+  denom,
+}: FetchDenomMetadataProps): Promise<
+  QueryDenomMetadataResponse | undefined
+> => {
+  try {
+    const metadata = await client.DenomMetadata({ denom });
+    return metadata;
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+  return;
+};
+
+export type FetchBalanceByAddressAndDenomProps = {
+  client: BankQueryClient;
+  address: string;
+  denom: string;
+};
+
+export const fetchBalanceByAddressAndDenom = async ({
+  client,
+  address,
+  denom,
+}: FetchBalanceByAddressAndDenomProps): Promise<
+  QueryBalanceResponse | undefined
+> => {
+  try {
+    const balance = await client.Balance({ address, denom });
+    return balance;
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+  }
+  return;
 };

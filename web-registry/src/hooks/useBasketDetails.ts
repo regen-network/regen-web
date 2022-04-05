@@ -1,92 +1,84 @@
 import { useState, useEffect } from 'react';
 
-import {
-  QueryBasketBalancesResponse,
-  QueryBasketResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import {
-  QueryBatchInfoResponse,
-  QueryClassInfoResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
-import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryBatchInfoResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/types';
 
 import useQueryBasket from './useQueryBasket';
-import useQueryBatchInfo from './useQueryBatchInfo';
-import useQueryDenomMetadata from './useQueryDenomMetadata';
 import useQueryBasketBalances from './useQueryBasketBalances';
-import useQueryClassInfo from './useQueryClassInfo';
+import useQueryDenomMetadata from './useQueryDenomMetadata';
+import useQueryListClassInfo from './useQueryListClassInfo';
+import useQueryListBatchInfo from './useQueryListBatchInfo';
+import { BasketEcocredit } from '../types/ledger';
+import { BasketOverviewProps } from '../components/organisms';
 
 type BasketDetails = {
-  basket?: QueryBasketResponse;
-  balances?: QueryBasketBalancesResponse[];
-  metadata?: QueryDenomMetadataResponse;
-  classes?: Array<QueryClassInfoResponse | undefined>;
-  batches?: Array<QueryBatchInfoResponse | undefined>;
+  overview: BasketOverviewProps;
+  ecocreditBatches: BasketEcocredit[];
 };
 
-const useBasketDetails = (basketDenom?: string): BasketDetails | undefined => {
+const useBasketDetails = (basketDenom?: string): BasketDetails => {
   const basket = useQueryBasket(basketDenom);
   const basketBalances = useQueryBasketBalances(basketDenom);
-  const fetchClassInfo = useQueryClassInfo();
-  const fetchDenomMetadata = useQueryDenomMetadata();
-  const fetchBatchInfo = useQueryBatchInfo();
+  const basketMetadata = useQueryDenomMetadata(basketDenom);
 
-  const [data, setData] = useState<BasketDetails | undefined>();
+  const basketClasses = useQueryListClassInfo(basket?.classes);
 
-  // Store hooked basket DTO
+  const [batches, setBatches] = useState<string[]>();
+  const basketBatches = useQueryListBatchInfo(batches);
+
+  // local state for all raw data queries
+  // custom ecocredit batches data for <BasketEcocreditsTable />
+  const [ecocreditBatches, setEcocreditBatches] = useState<BasketEcocredit[]>();
+
+  // Batches string list query param for `useQueryListBatchInfo(batches)`
   useEffect(() => {
-    if (!basket) return;
-    setData(prev => ({ ...prev, basket }));
-  }, [basket]);
+    if (!basketBalances?.balances) return;
+    setBatches(basketBalances.balances.map(balance => balance.batchDenom));
+  }, [basketBalances?.balances]);
 
-  // Store hooked basket balances DTOs
+  // TODO: extend batches with projectName and projectDisplay
+  // required in <BasketEcocreditsTable />
   useEffect(() => {
-    if (!basketBalances) return;
-    setData(prev => ({ ...prev, basketBalances }));
-  }, [basketBalances]);
+    if (!basketBatches) return;
 
-  // Fetch and store allowed credit classes DTOs
-  useEffect(() => {
-    if (!basket) return;
-    async function fetchData(basketClasses: string[]): Promise<void> {
-      const classes = await Promise.all(
-        basketClasses.map(async classId => await fetchClassInfo(classId)),
-      );
-      setData(prev => ({ ...prev, classes }));
-    }
-    fetchData(basket.classes);
-  }, [basket, fetchClassInfo]);
-
-  // Fetch and store basket metadata DTO
-  useEffect(() => {
-    if (!basketDenom) return;
-    async function fetchData(basketDenom: string): Promise<void> {
-      const metadata = await fetchDenomMetadata(basketDenom);
-      setData(prev => ({ ...prev, metadata }));
-    }
-    fetchData(basketDenom);
-  }, [basketDenom, fetchDenomMetadata]);
-
-  // Fetch and store corresponding batches info DTOs
-  useEffect(() => {
-    if (!basketBalances) return;
     async function fetchData(
-      basketBalances: QueryBasketBalancesResponse,
+      batchesInfo: QueryBatchInfoResponse[],
     ): Promise<void> {
-      const batches = await Promise.all(
-        basketBalances.balances.map(
-          async batch => await fetchBatchInfo(batch.batchDenom),
-        ),
-      );
-      setData(prev => ({ ...prev, batches }));
+      const batches = batchesInfo.map(batch => ({
+        batchInfo: batch.info as BatchInfo,
+        // TODO
+        projectName: '---',
+        projectDisplay: '---',
+      }));
+      setEcocreditBatches(batches);
     }
-    fetchData(basketBalances);
-  }, [basketBalances, fetchBatchInfo]);
 
-  // eslint-disable-next-line no-console
-  console.log('*** data', data);
+    fetchData(basketBatches);
+  }, [basketBatches]);
 
-  return data;
+  const totalAmount = basketBalances?.balances.reduce(
+    (acc, obj) => acc + parseFloat(obj.balance),
+    0,
+  );
+
+  const allowedCreditClasses = basketClasses?.map(basketClass => ({
+    id: basketClass.info?.classId || '-',
+    name: basketClass?.info?.classId || '-',
+  }));
+
+  return {
+    overview: {
+      name: basket?.basket?.name || '-',
+      displayDenom: basketMetadata?.metadata?.display || '-',
+      description: basketMetadata?.metadata?.description || '-',
+      totalAmount: totalAmount || 0,
+      curator: 'TODO' || '-',
+      allowedCreditClasses: allowedCreditClasses || [{ id: '-', name: '-' }],
+      minStartDate: '-',
+      // startDateWindow: '-',
+    },
+    ecocreditBatches: ecocreditBatches || [],
+  };
 };
 
 export default useBasketDetails;

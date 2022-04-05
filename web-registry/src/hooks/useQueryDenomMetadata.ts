@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   QueryDenomMetadataResponse,
@@ -7,36 +7,28 @@ import {
 
 import { useLedger } from '../ledger';
 
-type FetchDenomMetadata = (
-  denom: string,
-) => Promise<QueryDenomMetadataResponse | undefined>;
-
-export default function useQueryDenomMetadata(): FetchDenomMetadata {
+export default function useQueryDenomMetadata(
+  denom?: string,
+): QueryDenomMetadataResponse | undefined {
   const { api } = useLedger();
-  const [queryClient, setQueryClient] = useState<QueryClientImpl | undefined>();
+  const [queryClient, setQueryClient] = useState<QueryClientImpl>();
+  const [data, setData] = useState<QueryDenomMetadataResponse>();
 
   useEffect(() => {
     if (!api?.queryClient) return;
-
     const _queryClient: QueryClientImpl = new QueryClientImpl(api.queryClient);
     setQueryClient(_queryClient);
   }, [api?.queryClient]);
 
-  const fetchDenomMetadata = useCallback(
-    async denom => {
-      if (!queryClient) return;
+  useEffect(() => {
+    if (!queryClient || !denom) return;
 
-      try {
-        const metadata = await queryClient.DenomMetadata({ denom });
-        return metadata;
-      } catch (err) {
-        console.error(err); // eslint-disable-line no-console
-      }
+    queryClient
+      .DenomMetadata({ denom })
+      .then(setData)
+      /* eslint-disable */
+      .catch(console.error);
+  }, [queryClient, denom]);
 
-      return;
-    },
-    [queryClient],
-  );
-
-  return fetchDenomMetadata;
+  return data;
 }

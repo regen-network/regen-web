@@ -11,7 +11,7 @@ export default function useQueryBasket(
   basketDenom?: string,
 ): QueryBasketResponse | undefined {
   const { api } = useLedger();
-  const [basket, setBasket] = useState<QueryBasketResponse | undefined>();
+  const [basket, setBasket] = useState<QueryBasketResponse>();
 
   useEffect(() => {
     if (!api?.queryClient || !basketDenom) return;

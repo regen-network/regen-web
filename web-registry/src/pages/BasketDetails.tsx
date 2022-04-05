@@ -2,10 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useBasketDetails } from '../hooks';
-import {
-  BasketOverview,
-  // BasketEcocredits
-} from '../components/organisms';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { BasketOverview, BasketEcocredits } from '../components/organisms';
 
 const BasketDetails: React.FC = () => {
   const { basketDenom } = useParams<{ basketDenom: string }>();
@@ -14,28 +12,21 @@ const BasketDetails: React.FC = () => {
   return (
     <>
       <BasketOverview
-        name={data?.basket?.basket?.name || '-'}
-        displayDenom={data?.metadata?.metadata?.display || '-'}
-        description={data?.metadata?.metadata?.description || '-'}
+        name={data.overview.name}
+        displayDenom={data.overview.displayDenom}
+        description={data.overview.description}
+        totalAmount={data.overview.totalAmount}
         // TODO
-        totalAmount={666}
-        // TODO
-        curator={'TODO'}
-        allowedCreditClasses={
-          data?.classes
-            ? data.classes.map(basketClass => ({
-                id: basketClass?.info?.classId || '-',
-                name: basketClass?.info?.classId || '-',
-              }))
-            : [{ id: '-', name: '-' }]
-        }
+        curator={data.overview.curator}
+        allowedCreditClasses={data.overview.allowedCreditClasses}
         // TODO: DISABLED
         // minStartDate={data?.basket?.basket?.dateCriteria?.minStartDate}
         // startDateWindow={
         //   data?.basket?.basket?.dateCriteria?.startDateWindow?.seconds
         // }
       />
-      {/* <BasketEcocredits /> */}
+
+      <BasketEcocredits batches={data.ecocreditBatches} />
     </>
   );
 };

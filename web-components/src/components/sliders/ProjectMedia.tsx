@@ -333,6 +333,7 @@ export default function ProjectMedia({
                   xs={assets.length === 1 ? 15 : i === 0 ? 8 : 7}
                   item
                   className={classes.elementContainer}
+                  key={i}
                 >
                   <ProjectAsset asset={a} />
                   {i === 0 && isMedia(a) && imageCredits && (
@@ -417,7 +418,11 @@ export default function ProjectMedia({
                 return null;
               }
             } else {
-              return <div className={classes.elementContainer}>{item}</div>;
+              return (
+                <div key={index} className={classes.elementContainer}>
+                  {item}
+                </div>
+              );
             }
           })}
         </Slider>

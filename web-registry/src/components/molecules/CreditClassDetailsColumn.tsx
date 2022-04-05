@@ -162,6 +162,7 @@ function CreditClassDetailsColumn({
         )}
         {creditClass.methodologyUrl && (
           <OutlinedButton
+            size="small"
             classes={{ root: styles.button }}
             href={creditClass.methodologyUrl}
           >

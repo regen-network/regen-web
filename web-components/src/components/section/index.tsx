@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Box, styled, SxProps } from '@mui/material';
 import clsx from 'clsx';
 import { Variant } from '@mui/material/styles/createTypography';
 
@@ -14,6 +15,7 @@ export interface SectionProps {
     title?: string;
     titleWrap?: string;
   };
+  sx?: SxProps<Theme>;
   title?: string | JSX.Element;
   titleVariant?: Variant;
   withSlider?: boolean;
@@ -31,32 +33,36 @@ interface StyleProps {
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
+const Root = styled(Box, {
+  name: 'RegenSection',
+  shouldForwardProp: prop => prop !== 'sx' && prop !== 'withSlider',
+})<{ withSlider: boolean }>(({ theme, withSlider }) => ({
+  maxWidth: theme.breakpoints.values.lg,
+  margin: '0 auto',
+  overflow: 'hidden',
+  [theme.breakpoints.up('sm')]: {
+    paddingTop: theme.spacing(22.25),
+  },
+  [theme.breakpoints.up('md')]: {
+    paddingRight: theme.spacing(37.5),
+    paddingLeft: theme.spacing(37.5),
+  },
+  [theme.breakpoints.down('md')]: {
+    paddingRight: theme.spacing(10),
+    paddingLeft: theme.spacing(10),
+  },
+  [theme.breakpoints.down('sm')]: {
+    paddingRight: withSlider ? 0 : theme.spacing(4),
+    paddingLeft: theme.spacing(4),
+    paddingTop: theme.spacing(17.75),
+  },
+  [theme.breakpoints.up('xl')]: {
+    paddingRight: theme.spacing(5),
+    paddingLeft: theme.spacing(5),
+  },
+}));
+
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: props => ({
-    maxWidth: theme.breakpoints.values.lg,
-    margin: '0 auto',
-    overflow: 'hidden',
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(22.25),
-    },
-    [theme.breakpoints.up('md')]: {
-      paddingRight: theme.spacing(37.5),
-      paddingLeft: theme.spacing(37.5),
-    },
-    [theme.breakpoints.down('md')]: {
-      paddingRight: theme.spacing(10),
-      paddingLeft: theme.spacing(10),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingRight: props.withSlider ? 0 : theme.spacing(4),
-      paddingLeft: theme.spacing(4),
-      paddingTop: theme.spacing(17.75),
-    },
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: theme.spacing(5),
-      paddingLeft: theme.spacing(5),
-    },
-  }),
   title: props => ({
     color: props.titleColor || 'inherit',
     lineHeight: props.titleLineHeight || '140%',
@@ -79,6 +85,7 @@ const Section = ({
   children,
   classes,
   className,
+  sx,
   titleLineHeight,
   titleColor,
   titleVariant = 'h2',
@@ -95,8 +102,11 @@ const Section = ({
     topRight: !!topRight,
   });
   return (
-    <section
-      className={clsx(styles.root, className || (classes && classes.root))}
+    <Root
+      sx={sx}
+      component="section"
+      withSlider={withSlider}
+      className={className || (classes && classes.root)}
     >
       {title && (
         <div
@@ -116,7 +126,7 @@ const Section = ({
         </div>
       )}
       {children}
-    </section>
+    </Root>
   );
 };
 

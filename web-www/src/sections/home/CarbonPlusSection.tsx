@@ -137,6 +137,7 @@ const CarbonplusSection: React.FC = (): JSX.Element => {
             {ReactHtmlParser(content?.description || '')}
           </Description>
           <ContainedButton
+            size="large"
             className={styles.button}
             href={content?.linkUrl || ''}
           >

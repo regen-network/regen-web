@@ -2,13 +2,14 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography } from '@mui/material';
 
+import { truncate } from 'web-components/lib/utils/truncate';
+
 import {
   PortfolioTemplate,
   WithBasketsProps,
   withBaskets,
 } from '../components/templates';
 import { LinkWithArrow } from '../components/atoms';
-import { truncate } from '../lib/wallet';
 import { getAccountUrl } from '../lib/block-explorer';
 import { useEcocredits } from '../hooks';
 

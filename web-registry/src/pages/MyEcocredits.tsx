@@ -49,7 +49,8 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const styles = useStyles();
   const theme = useTheme();
 
-  const handleTxQueued = (): void => {
+  const handleTxQueued = (txBytes: Uint8Array): void => {
+    console.log('handleTxQueued', txBytes);
     setIsProcessingModalOpen(true);
   };
 

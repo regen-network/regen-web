@@ -13,7 +13,7 @@ type MsgClientType = {
 };
 
 export default function useMsgClient(
-  handleTxQueued: () => void,
+  handleTxQueued: (txBytes: Uint8Array) => void,
   handleTxDelivered: () => void,
 ): MsgClientType {
   const { api, wallet } = useLedger();
@@ -43,7 +43,8 @@ export default function useMsgClient(
           memo || '',
         );
         if (txBytes) {
-          handleTxQueued();
+          console.log('txBytes queued', txBytes);
+          handleTxQueued(txBytes);
           const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
           setDeliverTxResponse(_deliverTxResponse);
           handleTxDelivered();

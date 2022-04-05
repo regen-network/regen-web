@@ -154,6 +154,8 @@ const LandStewards = (): JSX.Element => {
 
       <FixedFooter justifyContent="flex-end">
         <ContainedButton
+          size="large"
+          sx={{ px: { md: 12 } }}
           onClick={() =>
             openModal(content?.footerButton?.buttonLink?.buttonHref)
           }

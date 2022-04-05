@@ -2,28 +2,26 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography } from '@mui/material';
 
+import { truncate } from 'web-components/lib/utils/truncate';
+
 import {
   PortfolioTemplate,
   WithBasketsProps,
   withBaskets,
 } from '../components/templates';
 import { LinkWithArrow } from '../components/atoms';
-import { truncate } from '../lib/wallet';
 import { getAccountUrl } from '../lib/block-explorer';
-import { useEcocredits } from '../hooks';
+import { useEcocredits, useBasketTokens } from '../hooks';
 
 const WrappedEcocreditsByAccount: React.FC<WithBasketsProps> = ({
   baskets,
 }) => {
   const { accountAddress } = useParams<{ accountAddress: string }>();
-  const credits = useEcocredits(accountAddress);
+  const { credits } = useEcocredits(accountAddress);
+  const { basketTokens } = useBasketTokens(accountAddress, baskets);
 
   return (
-    <PortfolioTemplate
-      credits={credits}
-      accountAddress={accountAddress}
-      baskets={baskets}
-    >
+    <PortfolioTemplate credits={credits} basketTokens={basketTokens}>
       <Box sx={{ mt: { xs: 1.25, sm: 3 } }}>
         <Typography
           sx={{

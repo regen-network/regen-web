@@ -47,16 +47,6 @@ let useStyles = makeStyles((theme: Theme) => ({
       width: '100%',
     },
   },
-  button: {
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(12.5),
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(15),
-      fontSize: theme.spacing(5.25),
-    },
-  },
   description: {
     color: theme.palette.info.dark,
     [theme.breakpoints.down('sm')]: {
@@ -116,18 +106,26 @@ const HomeLedger: React.FC = () => {
   const content = data.sanityHomePageWeb;
 
   return (
-    <BackgroundImage Tag="section" fluid={data.bg?.childImageSharp?.fluid as any}>
+    <BackgroundImage
+      Tag="section"
+      fluid={data.bg?.childImageSharp?.fluid as any}
+    >
       <Grid className={styles.grid} container alignItems="center" wrap="nowrap">
         <Grid className={styles.imgContainer} item xs={12}>
-          <Img className={styles.img} fluid={data.ledger?.childImageSharp?.fluid as any} />
+          <Img
+            className={styles.img}
+            fluid={data.ledger?.childImageSharp?.fluid as any}
+          />
         </Grid>
         <Grid item xs={12} className={styles.text}>
           <Title align="left" variant="h1" className={styles.title}>
             <span className={styles.green}>Regen Ledger</span> powers{' '}
             <span className={styles.green}>Regen Registry</span>
           </Title>
-          <Typography className={styles.description}>{content?.ledgerDescription}</Typography>
-          <ContainedButton href="/developers" className={styles.button}>
+          <Typography className={styles.description}>
+            {content?.ledgerDescription}
+          </Typography>
+          <ContainedButton size="large" href="/developers">
             Learn More
           </ContainedButton>
         </Grid>

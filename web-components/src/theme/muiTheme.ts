@@ -24,6 +24,8 @@ const defaultTheme = createTheme({
   },
 });
 
+const headerFontFamily = ['"Muli"', '-apple-system', 'sans-serif'].join(',');
+
 const regenTheme = createTheme({
   palette: {
     primary: {
@@ -69,7 +71,7 @@ const regenTheme = createTheme({
       [defaultTheme.breakpoints.down('sm')]: {
         fontSize: '2rem',
       },
-      fontFamily: ['"Muli"', '-apple-system', 'sans-serif'].join(','),
+      fontFamily: headerFontFamily,
     },
     h2: {
       [defaultTheme.breakpoints.up('sm')]: {
@@ -168,6 +170,53 @@ const regenTheme = createTheme({
     defaultTheme.shadows[24],
   ],
   components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          letterSpacing: '1px',
+          textAlign: 'center',
+          boxShadow: 'none',
+          fontWeight: 800,
+          fontFamily: headerFontFamily,
+          borderRadius: '2px',
+          border: '2px solid',
+          whiteSpace: 'nowrap',
+          '&:hover': {
+            boxShadow: 'none',
+          },
+        },
+        sizeSmall: {
+          padding: defaultTheme.spacing(1, 2),
+          fontSize: '0.75rem',
+          lineHeight: '13.81px',
+          [defaultTheme.breakpoints.up('sm')]: {
+            padding: defaultTheme.spacing(1.125, 2.25),
+            fontSize: '0.875rem',
+            lineHeight: '17.47px',
+          },
+        },
+        sizeMedium: {
+          padding: defaultTheme.spacing(1.25, 2.5),
+          fontSize: '0.875rem',
+          lineHeight: '17.47px',
+          [defaultTheme.breakpoints.up('sm')]: {
+            padding: defaultTheme.spacing(1.5, 3),
+            fontSize: '1.125rem',
+            lineHeight: '22.49px',
+          },
+        },
+        sizeLarge: {
+          padding: defaultTheme.spacing(1.5, 3),
+          fontSize: '1.125rem',
+          lineHeight: '22.49px',
+          [defaultTheme.breakpoints.up('sm')]: {
+            padding: defaultTheme.spacing(1.85, 6),
+            fontSize: '1.313rem',
+            lineHeight: '26.36px',
+          },
+        },
+      },
+    },
     MuiTypography: {
       defaultProps: {
         variantMapping: {

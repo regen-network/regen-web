@@ -103,7 +103,7 @@ const CollectiveSection = (): JSX.Element => {
         <MarketingDescription className={clsx(styles.content, styles.center)}>
           <BlockContent content={data?._rawBody} />
         </MarketingDescription>
-        <ContainedButton onClick={() => setOpen(true)}>
+        <ContainedButton size="large" onClick={() => setOpen(true)}>
           {data?.buttonText}
         </ContainedButton>
       </Section>

@@ -101,6 +101,7 @@ function ImageLeftCard({
         </Title>
         {children && <div className={styles.line}>{children}</div>}
         <OutlinedButton
+          size="small"
           className={styles.button}
           startIcon={buttonIcon}
           href={buttonUrl}

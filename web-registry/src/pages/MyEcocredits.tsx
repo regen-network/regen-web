@@ -5,8 +5,13 @@ import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecoc
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
+import {
+  TxSuccessfulModal,
+  Item,
+} from 'web-components/lib/components/modal/TxSuccessfulModal';
 import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
@@ -15,6 +20,7 @@ import {
   useEcocredits,
   useBasketsWithClasses,
   useTakeBasketTokens,
+  useBasketTokens,
 } from '../hooks';
 import useMsgClient from '../hooks/useMsgClient';
 import {
@@ -22,14 +28,15 @@ import {
   WithBasketsProps,
   withBaskets,
 } from '../components/templates';
-import { ProcessingModal, ConfirmationModal } from '../components/organisms';
 import { BasketTakeModal } from '../components/molecules';
+import { Link } from '../components/atoms';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-basket.svg';
 // import { ReactComponent as WithdrawIBC } from '../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
 import { useLedger } from '../ledger';
+import { getHashUrl } from '../lib/block-explorer';
 
 const useStyles = makeStyles((theme: Theme) => ({
   arrow: {
@@ -46,20 +53,28 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     setIsProcessingModalOpen(true);
   };
 
-  const handleConfirmationModalClose = (): void => {
-    setIsConfirmationModalOpen(false);
+  const handleTxSuccessfulModalClose = (): void => {
+    setCardItems(undefined);
+    setIsTxSuccessfulModalTitle(undefined);
     setDeliverTxResponse(undefined);
   };
 
   const handleTxDelivered = (): void => {
     setIsProcessingModalOpen(false);
-    // TODO refetch basket/ecocredits data so it shows latest values
+    // Refetch basket/ecocredits data so it shows latest values
+    fetchBasketTokens();
+    fetchCredits();
   };
 
+  // TODO handle error when signing and broadcasting tx
   const { signAndBroadcast, setDeliverTxResponse, wallet, deliverTxResponse } =
     useMsgClient(handleTxQueued, handleTxDelivered);
   const accountAddress = wallet?.address;
-  const credits = useEcocredits(accountAddress);
+  const { credits, fetchCredits } = useEcocredits(accountAddress);
+  const { basketTokens, fetchBasketTokens } = useBasketTokens(
+    accountAddress,
+    baskets,
+  );
   const basketsWithClasses = useBasketsWithClasses(baskets);
   const { signTake } = useTakeBasketTokens();
   const { api } = useLedger();
@@ -69,8 +84,11 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   >([]);
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [selectedBasketDenom, setSelectedBasketDenom] = useState('');
+  const [isTxSuccessfulModalTitle, setIsTxSuccessfulModalTitle] = useState<
+    string | undefined
+  >(undefined);
+  const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
 
   useEffect(() => {
     // Get available baskets to put credits into
@@ -121,8 +139,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     <>
       <PortfolioTemplate
         credits={credits}
-        baskets={baskets}
-        accountAddress={accountAddress}
+        basketTokens={basketTokens}
         renderCreditActionButtons={(i: number) => {
           const buttons = [
             // Disabling for now until the marketplace is
@@ -213,18 +230,35 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           open={basketPutOpen > -1}
           onClose={() => setBasketPutOpen(-1)}
           onSubmit={async (values: BasketPutFormValues) => {
+            setBasketPutOpen(-1);
+            const amount = values.amount?.toString();
             const msg = MsgPut.fromPartial({
               basketDenom: values.basketDenom,
               owner: wallet?.address,
               credits: [
                 {
                   batchDenom: credits[basketPutOpen].batch_denom,
-                  amount: values.amount?.toString(),
+                  amount: amount,
                 },
               ],
             });
             await signAndBroadcast([msg]);
-            setBasketPutOpen(-1);
+            const basket = baskets?.baskets.find(
+              b => b.basketDenom === values.basketDenom,
+            );
+            if (basket && amount) {
+              setCardItems([
+                {
+                  label: 'basket',
+                  value: { name: basket.name },
+                },
+                {
+                  label: 'amount',
+                  value: { name: amount },
+                },
+              ]);
+              setIsTxSuccessfulModalTitle('Put in basket');
+            }
           }}
         />
       )}
@@ -240,15 +274,22 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       )}
       <ProcessingModal
         open={!deliverTxResponse && isProcessingModalOpen}
-        txHash={deliverTxResponse?.transactionHash}
         onClose={() => setIsProcessingModalOpen(false)}
       />
-      {/* TODO Implement new confirmation modal */}
-      <ConfirmationModal
-        open={!!isConfirmationModalOpen || !!deliverTxResponse}
-        onClose={handleConfirmationModalClose}
-        data={deliverTxResponse}
-      />
+      {deliverTxResponse?.transactionHash &&
+        cardItems &&
+        isTxSuccessfulModalTitle && (
+          <TxSuccessfulModal
+            open={!!isTxSuccessfulModalTitle || !!deliverTxResponse}
+            onClose={handleTxSuccessfulModalClose}
+            txHash={deliverTxResponse?.transactionHash}
+            txHashUrl={getHashUrl(deliverTxResponse?.transactionHash)}
+            cardTitle={isTxSuccessfulModalTitle}
+            cardItems={cardItems}
+            linkComponent={Link}
+            onViewPortfolio={handleTxSuccessfulModalClose}
+          />
+        )}
     </>
   );
 };

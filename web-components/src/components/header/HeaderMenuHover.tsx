@@ -42,6 +42,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+// TODO I made this for the NCT page, but there were conflicts with master. Leaving to use for #856
+// const NewIcon = styled('div')(({ theme }) => ({
+//   position: 'absolute',
+//   top: '-7px',
+//   right: '-28px',
+//   backgroundColor: '#3D7ACF', // not in theme
+//   height: '10px',
+//   width: '30px',
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'center',
+//   padding: '1px',
+//   borderRadius: '3px',
+// }));
+
 export interface HeaderMenuItem extends MenuTitle {
   href?: string;
   renderDropdownItems?: () => JSX.Element;
@@ -60,7 +75,11 @@ const HeaderMenuHover: React.FC<{
   const Content: React.FC = () => {
     if (item.href && !item.dropdownItems && !item.renderDropdownItems) {
       return (
-        <LinkComponent overrideClassname={styles.title} href={item.href}>
+        <LinkComponent
+          overrideClassname={styles.title}
+          pathname={pathName}
+          href={item.href}
+        >
           {item.title}
         </LinkComponent>
       );

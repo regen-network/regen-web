@@ -7,8 +7,8 @@ import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
+import { truncate } from 'web-components/lib/utils/truncate';
 
-import { truncate } from '../../lib/wallet';
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit';
@@ -97,9 +97,11 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
 
   useEffect(() => {
     const fetchData = (): void => {
-      getBatchesWithSupply(creditClassId).then(sortableBatches => {
-        setBatches(sortableBatches.data);
-      });
+      getBatchesWithSupply(creditClassId)
+        .then(sortableBatches => {
+          setBatches(sortableBatches.data);
+        })
+        .catch(console.error); // eslint-disable-line no-console
     };
 
     if (!ledgerRESTUri) return;

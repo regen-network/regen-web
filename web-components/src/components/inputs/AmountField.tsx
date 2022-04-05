@@ -5,10 +5,13 @@ import { Grid } from '@mui/material';
 import clsx from 'clsx';
 
 import { Theme } from '../../theme/muiTheme';
-import TextField from '../inputs/TextField';
+import TextField, { RegenTextFieldProps } from '../inputs/TextField';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textField: {
+    '& .MuiInputBase-root': {
+      paddingRight: '0 !important',
+    },
     [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(2),
     },
@@ -95,6 +98,49 @@ const AmountLabel: React.FC<AmountLabelProps> = ({
   );
 };
 
+interface AmountTextFieldProps extends RegenTextFieldProps {
+  availableAmount: number;
+}
+
+const AmountTextField: React.FC<AmountTextFieldProps> = ({
+  availableAmount,
+  ...props
+}: AmountTextFieldProps) => {
+  const {
+    form: { setFieldValue },
+    field: { name },
+  } = props;
+  return (
+    <TextField
+      {...props}
+      endAdornment={
+        <Grid
+          container
+          alignItems="center"
+          sx={theme => ({
+            fontFamily: theme.typography.h1.fontFamily,
+            color: theme.palette.info.dark,
+            textTransform: 'uppercase',
+            fontWeight: 800,
+            letterSpacing: '1px',
+            backgroundColor: theme.palette.grey[100],
+            fontSize: theme.spacing(3),
+            cursor: 'pointer',
+            px: 5,
+            height: {
+              xs: theme.spacing(12.5),
+              sm: theme.spacing(15),
+            },
+          })}
+          onClick={() => setFieldValue(name, availableAmount)}
+        >
+          max
+        </Grid>
+      }
+    />
+  );
+};
+
 const AmountField: React.FC<AmountFieldProps> = ({
   name,
   label = 'Amount',
@@ -108,7 +154,8 @@ const AmountField: React.FC<AmountFieldProps> = ({
       <Field
         name={name}
         type="number"
-        component={TextField}
+        component={AmountTextField}
+        availableAmount={availableAmount}
         className={clsx(styles.textField, className)}
         label={
           <AmountLabel
@@ -117,11 +164,6 @@ const AmountField: React.FC<AmountFieldProps> = ({
             batchDenom={batchDenom}
           />
         }
-      />
-      <AuxiliarLabel
-        availableAmount={availableAmount}
-        batchDenom={batchDenom}
-        className={styles.auxiliarLabelMobile}
       />
     </>
   );

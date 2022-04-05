@@ -5,6 +5,9 @@ export const customImage = graphql`
     imageAlt
     imageHref
     image {
+      asset {
+        url
+      }
       ...ImageWithPreview
     }
   }

@@ -4,6 +4,8 @@ import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 
+import { truncate } from 'web-components/lib/utils/truncate';
+
 import { ledgerRPCUri, ledgerRESTUri, chainId } from './ledger';
 
 interface ChainKey {
@@ -321,15 +323,6 @@ export const WalletProvider: React.FC = ({ children }) => {
       {children}
     </WalletContext.Provider>
   );
-};
-
-export const truncate = (walletAddress: string | undefined): string => {
-  if (!walletAddress) return '-';
-  const stringLength = walletAddress.length;
-  return `${walletAddress.substring(0, 8)}...${walletAddress.substring(
-    stringLength - 6,
-    stringLength,
-  )}`.toLowerCase();
 };
 
 export const useWallet = (): ContextType => React.useContext(WalletContext);

@@ -11,10 +11,11 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
 import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
+import { BasketTokens } from '../../hooks/useBasketTokens';
 
-interface PortfolioTemplateProps extends WithBasketsProps {
-  accountAddress?: string;
+interface PortfolioTemplateProps {
   credits?: BatchInfoWithBalance[];
+  basketTokens: BasketTokens[];
   renderCreditActionButtons?: RenderActionButtonsFunc;
   renderBasketActionButtons?: RenderActionButtonsFunc;
 }
@@ -35,9 +36,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
-  accountAddress,
   credits,
-  baskets,
+  basketTokens,
   children,
   renderCreditActionButtons,
   renderBasketActionButtons,
@@ -53,8 +53,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             basket tokens
           </Title>
           <BasketsTable
-            address={accountAddress}
-            baskets={baskets}
+            basketTokens={basketTokens}
             renderActionButtons={renderBasketActionButtons}
           />
         </Box>

@@ -5,6 +5,7 @@ import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecoc
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
 import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
@@ -17,7 +18,7 @@ import {
   WithBasketsProps,
   withBaskets,
 } from '../components/templates';
-import { ProcessingModal, ConfirmationModal } from '../components/organisms';
+import { ConfirmationModal } from '../components/organisms';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-basket.svg';
@@ -186,7 +187,6 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       )}
       <ProcessingModal
         open={!deliverTxResponse && isProcessingModalOpen}
-        txHash={deliverTxResponse?.transactionHash}
         onClose={() => setIsProcessingModalOpen(false)}
       />
       {/* TODO Implement new confirmation modal */}

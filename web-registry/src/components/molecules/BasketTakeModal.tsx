@@ -28,7 +28,7 @@ const BasketTakeModal: React.FC<TakeModalProps> = ({
   const { basketTokens } = useBasketTokens(accountAddress, baskets);
   const basket = basketTokens.find(bt => bt.basket.basketDenom === basketDenom);
 
-  if (!accountAddress || !basket) return null; //TODO
+  if (!accountAddress || !basket) return null;
 
   const balance =
     parseInt(basket?.balance?.balance?.amount || '0') /

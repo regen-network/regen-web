@@ -20,7 +20,6 @@ import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket
 import {
   useEcocredits,
   useBasketsWithClasses,
-  useTakeBasketTokens,
   useBasketTokens,
 } from '../hooks';
 import useMsgClient from '../hooks/useMsgClient';
@@ -68,13 +67,8 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   };
 
   // TODO handle error when signing and broadcasting tx
-  const {
-    signAndBroadcast,
-    setDeliverTxResponse,
-    wallet,
-    deliverTxResponse,
-    error,
-  } = useMsgClient(handleTxQueued, handleTxDelivered);
+  const { signAndBroadcast, setDeliverTxResponse, wallet, deliverTxResponse } =
+    useMsgClient(handleTxQueued, handleTxDelivered);
   const accountAddress = wallet?.address;
   const { credits, fetchCredits } = useEcocredits(accountAddress);
   const { basketTokens, fetchBasketTokens } = useBasketTokens(
@@ -82,7 +76,6 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     baskets,
   );
   const basketsWithClasses = useBasketsWithClasses(baskets);
-  const { signTake } = useTakeBasketTokens();
   const { api } = useLedger();
 
   const [creditBaskets, setCreditBaskets] = useState<
@@ -131,7 +124,6 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       retirementLocation: values.retirementLocation || '',
       retireOnTake: values.retireOnTake || false,
     });
-    console.log('MsgTake', msg);
     await signAndBroadcast([msg], undefined, values?.retirementNote);
 
     if (basket && amount) {

@@ -230,11 +230,11 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   const submit = async (values: BuyCreditsValues): Promise<void> => {
     const recipient = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'; // test account
     const amount = values.creditCount;
-    // if (walletContext.signSend && walletContext.broadcast) {
-    //   const txBytes = await walletContext.signSend(amount, recipient);
-    //   onTxQueued(txBytes);
-    //   onClose();
-    // }
+    if (walletContext.signSend && walletContext.broadcast) {
+      const txBytes = await walletContext.signSend(amount, recipient);
+      onTxQueued(txBytes);
+      onClose();
+    }
   };
 
   return (

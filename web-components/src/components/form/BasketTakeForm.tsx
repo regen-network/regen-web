@@ -104,6 +104,9 @@ const BasketTakeForm: React.FC<FormProps> = ({
   ): FormikErrors<CreditTakeFormValues> => {
     let errors: FormikErrors<CreditTakeFormValues> = {};
 
+    console.log('values validation', values);
+    console.log('availableTradableAmount', availableTradableAmount);
+
     if (!values.amount) {
       errors.amount = requiredMessage;
     } else if (Math.sign(values.amount) !== 1) {
@@ -121,7 +124,6 @@ const BasketTakeForm: React.FC<FormProps> = ({
         stateProvince: values.stateProvince,
         postalCode: values.postalCode,
       };
-      //TODO: is this using correct amount value?
       errors = validateCreditRetire(
         availableTradableAmount,
         retirementValues,

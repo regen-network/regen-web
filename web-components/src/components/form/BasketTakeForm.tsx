@@ -1,5 +1,5 @@
-import React from 'react';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import React, { useEffect } from 'react';
+import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { Collapse } from '@mui/material';
 import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
@@ -73,6 +73,7 @@ interface CreditTakeFormValues {
   country: string;
   stateProvince: string;
   postalCode?: string;
+  retirementLocation?: string;
 }
 
 // Input (args)
@@ -102,6 +103,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
     note: '',
     country: '',
     stateProvince: '',
+    retirementLocation: undefined,
   };
 
   const validateHandler = (
@@ -146,7 +148,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
   };
 
   // fetches from mapbox to compose a proper ISO 3166-2 standard location string
-  const getISOstring = async (
+  const getISOString = async (
     country?: string,
     stateProvice?: string,
     postalCode?: string,
@@ -171,30 +173,45 @@ const BasketTakeForm: React.FC<FormProps> = ({
         console.log('placecode', placeCode);
       });
 
-    // If country-only, mapbox returns lowercase ("us"), so need toUppercase here for ledger
+    // If country-only, mapbox returns lowercase ('us'), so need toUppercase here for ledger
     return Promise.resolve(placeCode?.toUpperCase());
   };
 
   const submitHandler = async (values: CreditTakeFormValues): Promise<void> => {
-    let retirementLocation;
-    if (values.retireOnTake) {
-      retirementLocation = await getISOstring(
-        values.country,
-        values.stateProvince,
-        values.postalCode,
-      );
-    }
-
     const msgTake: MsgTakeValues = {
       owner: accountAddress,
       basketDenom: basket.basketDenom,
       amount: (values.amount * Math.pow(10, basket.exponent)).toString(),
       retireOnTake: !!values.retireOnTake,
-      retirementLocation,
+      retirementLocation: values.retirementLocation,
       retirementNote: values?.note,
     };
 
     onSubmit(msgTake);
+  };
+
+  const AutoSetRetirementLocation = (): JSX.Element => {
+    const {
+      values: { country, stateProvince, postalCode },
+      setFieldValue,
+    } = useFormikContext<CreditTakeFormValues>();
+
+    useEffect(() => {
+      const setRetirementLocation = async (): Promise<void> => {
+        const isoString = await getISOString(
+          country,
+          stateProvince,
+          postalCode,
+        );
+        setFieldValue('retirementLocation', isoString);
+      };
+
+      if (stateProvince || country || postalCode) {
+        setRetirementLocation();
+      }
+    }, [country, stateProvince, postalCode, setFieldValue]);
+
+    return <></>;
   };
 
   return (
@@ -225,7 +242,10 @@ const BasketTakeForm: React.FC<FormProps> = ({
             />
             {/* <Collapse in={values.retireOnTake} collapsedSize={0}> */}
             {values.retireOnTake && (
-              <BottomCreditRetireFields country={values.country} />
+              <>
+                <BottomCreditRetireFields country={values.country} />
+                <AutoSetRetirementLocation />
+              </>
             )}
             {/* </Collapse> */}
           </>

@@ -131,7 +131,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       retirementLocation: values.retirementLocation || '',
       retireOnTake: values.retireOnTake || false,
     });
-
+    console.log('MsgTake', msg);
     await signAndBroadcast([msg], undefined, values?.retirementNote);
 
     if (basket && amount) {

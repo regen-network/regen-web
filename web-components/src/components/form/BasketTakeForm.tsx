@@ -134,15 +134,13 @@ const BasketTakeForm: React.FC<FormProps> = ({
     country?: string,
     stateProvice?: string,
     postalCode?: string,
-  ): Promise<string> => {
-    let placeCode = '';
-    // let placeCode = postalCode || '';
-
+  ): Promise<string | undefined> => {
+    let placeCode: string | undefined;
     // fetches from mapbox to compose a proper ISO 3166-2 standard location string
-    geocoderService
+    await geocoderService
       .forwardGeocode({
         mode: 'mapbox.places',
-        query: `${country}+${stateProvice}+${postalCode}`,
+        query: `${country}+${stateProvice}`,
         types: ['country', 'region'],
       })
       .send()
@@ -153,7 +151,8 @@ const BasketTakeForm: React.FC<FormProps> = ({
         console.log('placeCodes', placeCodes);
 
         const result = placeCodes?.[0]?.properties?.short_code || '';
-        if (!!result) placeCode = `${result} ${placeCode}`;
+        if (!!result) placeCode = result;
+        if (!!postalCode) placeCode += ` ${postalCode}`;
         console.log('placeCode', placeCode);
       });
 
@@ -167,6 +166,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
       values.stateProvince,
       values.postalCode,
     );
+    console.log('*** retirementLocation', retirementLocation);
 
     const msgTake: MsgTakeValues = {
       owner: accountAddress,
@@ -177,7 +177,6 @@ const BasketTakeForm: React.FC<FormProps> = ({
       retirementNote: values?.note,
     };
 
-    // await getISOstring(values.country, values.stateProvince, values.postalCode);
     await onSubmit(msgTake);
   };
 

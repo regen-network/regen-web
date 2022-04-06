@@ -68,8 +68,13 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   };
 
   // TODO handle error when signing and broadcasting tx
-  const { signAndBroadcast, setDeliverTxResponse, wallet, deliverTxResponse } =
-    useMsgClient(handleTxQueued, handleTxDelivered);
+  const {
+    signAndBroadcast,
+    setDeliverTxResponse,
+    wallet,
+    deliverTxResponse,
+    error,
+  } = useMsgClient(handleTxQueued, handleTxDelivered);
   const accountAddress = wallet?.address;
   const { credits, fetchCredits } = useEcocredits(accountAddress);
   const { basketTokens, fetchBasketTokens } = useBasketTokens(
@@ -79,6 +84,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const basketsWithClasses = useBasketsWithClasses(baskets);
   const { signTake } = useTakeBasketTokens();
   const { api } = useLedger();
+  console.log('err', error);
 
   const [creditBaskets, setCreditBaskets] = useState<
     (QueryBasketResponse | undefined)[][]
@@ -114,7 +120,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     const msgClient = api?.msgClient;
     if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
 
-    console.log('MsgTake ', values);
+    console.log('MsgTakeValues ', values);
     const amount = values?.amount;
     const basket = baskets?.baskets.find(
       b => b.basketDenom === values.basketDenom,
@@ -128,25 +134,21 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       retireOnTake: values.retireOnTake || false,
     });
 
-    try {
-      await signAndBroadcast([msg], undefined, values?.retirementNote);
+    await signAndBroadcast([msg], undefined, values?.retirementNote);
 
-      if (basket && amount) {
-        setCardItems([
-          {
-            label: 'basket',
-            value: { name: basket.name },
-          },
-          {
-            label: 'amount',
-            value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
-          },
-        ]);
-        setIsTxSuccessfulModalTitle('Take from basket');
-        setSelectedBasketDenom(''); // close Take modal
-      }
-    } catch (err) {
-      alert('something went wrong. check values and try again');
+    if (basket && amount) {
+      setCardItems([
+        {
+          label: 'basket',
+          value: { name: basket.name },
+        },
+        {
+          label: 'amount',
+          value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
+        },
+      ]);
+      setIsTxSuccessfulModalTitle('Take from basket');
+      setSelectedBasketDenom(''); // close Take modal
     }
   };
 

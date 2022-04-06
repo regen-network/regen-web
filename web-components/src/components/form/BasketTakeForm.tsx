@@ -43,7 +43,6 @@ import {
 const useStyles = makeStyles((theme: Theme) => ({
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
-    // marginBottom: theme.spacing(10.75),
     alignItems: 'initial',
     '& .MuiCheckbox-root': {
       alignSelf: 'end',

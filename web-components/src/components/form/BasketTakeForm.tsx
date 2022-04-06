@@ -126,6 +126,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
         stateProvince: values.stateProvince,
         postalCode: values.postalCode,
       };
+      //TODO: is this using correct amount value?
       errors = validateCreditRetire(
         availableTradableAmount,
         retirementValues,
@@ -175,18 +176,21 @@ const BasketTakeForm: React.FC<FormProps> = ({
   };
 
   const submitHandler = async (values: CreditTakeFormValues): Promise<void> => {
+    let retirementLocation;
+    if (values.retireOnTake) {
+      retirementLocation = await getISOstring(
+        values.country,
+        values.stateProvince,
+        values.postalCode,
+      );
+    }
+
     const msgTake: MsgTakeValues = {
       owner: accountAddress,
       basketDenom: basket.basketDenom,
       amount: (values.amount * Math.pow(10, basket.exponent)).toString(),
       retireOnTake: !!values.retireOnTake,
-      retirementLocation: values.retireOnTake
-        ? await getISOstring(
-            values.country,
-            values.stateProvince,
-            values.postalCode,
-          )
-        : undefined,
+      retirementLocation,
       retirementNote: values?.note,
     };
 

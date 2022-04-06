@@ -43,7 +43,6 @@ export default function useMsgClient(
           memo || '',
         );
         if (txBytes) {
-          console.log('txBytes queued', txBytes);
           handleTxQueued(txBytes);
           const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
           setDeliverTxResponse(_deliverTxResponse);

@@ -13,7 +13,11 @@ import { Theme } from '../../theme/muiTheme';
 import AmountField from '../inputs/AmountField';
 import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
-import { BottomCreditRetireFields } from './CreditRetireForm';
+import {
+  BottomCreditRetireFields,
+  RetireFormValues,
+  validateCreditRetire,
+} from './CreditRetireForm';
 import Submit from './Submit';
 import {
   requiredMessage,
@@ -97,7 +101,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
     amount: 0,
     retireOnTake: false,
     note: '',
-    country: 'US', // TODO: good default?
+    country: '',
     stateProvince: '',
   };
 
@@ -116,7 +120,18 @@ const BasketTakeForm: React.FC<FormProps> = ({
 
     // Retire form validation (optional subform)
     if (values.retireOnTake) {
-      // errors = validateCreditRetire(availableTradableAmount, values, errors); TODO
+      const retirementValues: RetireFormValues = {
+        retiredAmount: values.amount,
+        note: values.note || '',
+        country: values.country,
+        stateProvince: values.stateProvince,
+        postalCode: values.postalCode,
+      };
+      errors = validateCreditRetire(
+        availableTradableAmount,
+        retirementValues,
+        errors,
+      );
 
       // combo validation: send + retire
       if (
@@ -130,13 +145,14 @@ const BasketTakeForm: React.FC<FormProps> = ({
     return errors;
   };
 
+  // fetches from mapbox to compose a proper ISO 3166-2 standard location string
   const getISOstring = async (
     country?: string,
     stateProvice?: string,
     postalCode?: string,
   ): Promise<string | undefined> => {
     let placeCode: string | undefined;
-    // fetches from mapbox to compose a proper ISO 3166-2 standard location string
+    if (!country) return Promise.reject();
     await geocoderService
       .forwardGeocode({
         mode: 'mapbox.places',
@@ -148,36 +164,34 @@ const BasketTakeForm: React.FC<FormProps> = ({
         const placeCodes = res?.body?.features
           ?.filter((f: any) => !!f?.properties?.short_code)
           .sort((p: any) => p.relevance); // TODO: set minimum relevance threshold?
-        console.log('placeCodes', placeCodes);
 
         const result = placeCodes?.[0]?.properties?.short_code || '';
         if (!!result) placeCode = result;
         if (!!postalCode) placeCode += ` ${postalCode}`;
-        console.log('placeCode', placeCode);
+        console.log('placecode', placeCode);
       });
 
-    return Promise.resolve(placeCode);
+    // If country-only, mapbox returns lowercase ("us"), so need toUppercase here for ledger
+    return Promise.resolve(placeCode?.toUpperCase());
   };
 
   const submitHandler = async (values: CreditTakeFormValues): Promise<void> => {
-    console.log('*** submitHandler', values);
-    const retirementLocation = await getISOstring(
-      values.country,
-      values.stateProvince,
-      values.postalCode,
-    );
-    console.log('*** retirementLocation', retirementLocation);
-
     const msgTake: MsgTakeValues = {
       owner: accountAddress,
       basketDenom: basket.basketDenom,
       amount: (values.amount * Math.pow(10, basket.exponent)).toString(),
       retireOnTake: !!values.retireOnTake,
-      retirementLocation,
+      retirementLocation: values.retireOnTake
+        ? await getISOstring(
+            values.country,
+            values.stateProvince,
+            values.postalCode,
+          )
+        : undefined,
       retirementNote: values?.note,
     };
 
-    await onSubmit(msgTake);
+    onSubmit(msgTake);
   };
 
   return (

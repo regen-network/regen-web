@@ -84,7 +84,6 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const basketsWithClasses = useBasketsWithClasses(baskets);
   const { signTake } = useTakeBasketTokens();
   const { api } = useLedger();
-  console.log('err', error);
 
   const [creditBaskets, setCreditBaskets] = useState<
     (QueryBasketResponse | undefined)[][]
@@ -120,7 +119,6 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     const msgClient = api?.msgClient;
     if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
 
-    console.log('MsgTakeValues ', values);
     const amount = values?.amount;
     const basket = baskets?.baskets.find(
       b => b.basketDenom === values.basketDenom,

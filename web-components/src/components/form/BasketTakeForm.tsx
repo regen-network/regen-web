@@ -3,11 +3,6 @@ import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { Collapse } from '@mui/material';
 import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
-import mbxGeocoder, {
-  GeocodeQueryType,
-  GeocodeRequest,
-} from '@mapbox/mapbox-sdk/services/geocoding';
-import MapboxClient from '@mapbox/mapbox-sdk';
 
 import { Theme } from '../../theme/muiTheme';
 import AmountField from '../inputs/AmountField';
@@ -24,7 +19,7 @@ import {
   invalidAmount,
   insufficientCredits,
 } from '../inputs/validation';
-import { countries } from '../../utils/countries';
+import { getISOString } from '../../utils/locationStandard';
 
 /**
  * Take - takes credits from a basket starting from the oldest credits first.
@@ -94,9 +89,6 @@ const BasketTakeForm: React.FC<FormProps> = ({
   onSubmit,
 }) => {
   const styles = useStyles();
-  const accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
-  const baseClient = MapboxClient({ accessToken });
-  const geocoderService = mbxGeocoder(baseClient);
 
   const initialValues = {
     amount: 0,
@@ -146,36 +138,6 @@ const BasketTakeForm: React.FC<FormProps> = ({
     }
     console.log('errors ', errors);
     return errors;
-  };
-
-  // fetches from mapbox to compose a proper ISO 3166-2 standard location string
-  const getISOString = async (
-    countryKey?: string,
-    stateProvice?: string,
-    postalCode?: string,
-  ): Promise<string | undefined> => {
-    let placeCode: string | undefined;
-    if (!countryKey) return Promise.reject();
-    await geocoderService
-      .forwardGeocode({
-        mode: 'mapbox.places',
-        query: `${countries[countryKey]}+${stateProvice}`,
-        types: ['country', 'region'],
-      })
-      .send()
-      .then(res => {
-        const placeCodes = res?.body?.features
-          ?.filter((f: any) => !!f?.properties?.short_code)
-          .sort((p: any) => p.relevance); // TODO: set minimum relevance threshold?
-
-        const result = placeCodes?.[0]?.properties?.short_code || '';
-        if (!!result) placeCode = result;
-        if (!!postalCode) placeCode += ` ${postalCode}`;
-        console.log('placecode', placeCode);
-      });
-
-    // If country-only, mapbox returns lowercase ('us'), so need toUppercase here for ledger
-    return Promise.resolve(placeCode?.toUpperCase());
   };
 
   const submitHandler = async (values: CreditTakeFormValues): Promise<void> => {
@@ -241,14 +203,14 @@ const BasketTakeForm: React.FC<FormProps> = ({
                 </Description>
               }
             />
-            {/* <Collapse in={values.retireOnTake} collapsedSize={0}> */}
-            {values.retireOnTake && (
-              <>
-                <BottomCreditRetireFields country={values.country} />
-                <AutoSetRetirementLocation />
-              </>
-            )}
-            {/* </Collapse> */}
+            <Collapse in={values.retireOnTake} collapsedSize={0}>
+              {values.retireOnTake && (
+                <>
+                  <BottomCreditRetireFields country={values.country} />
+                  <AutoSetRetirementLocation />
+                </>
+              )}
+            </Collapse>
           </>
           <Submit
             isSubmitting={isSubmitting}

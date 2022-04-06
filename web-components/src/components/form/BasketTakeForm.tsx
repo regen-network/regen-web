@@ -24,6 +24,7 @@ import {
   invalidAmount,
   insufficientCredits,
 } from '../inputs/validation';
+import { countries } from '../../utils/countries';
 
 /**
  * Take - takes credits from a basket starting from the oldest credits first.
@@ -149,16 +150,16 @@ const BasketTakeForm: React.FC<FormProps> = ({
 
   // fetches from mapbox to compose a proper ISO 3166-2 standard location string
   const getISOString = async (
-    country?: string,
+    countryKey?: string,
     stateProvice?: string,
     postalCode?: string,
   ): Promise<string | undefined> => {
     let placeCode: string | undefined;
-    if (!country) return Promise.reject();
+    if (!countryKey) return Promise.reject();
     await geocoderService
       .forwardGeocode({
         mode: 'mapbox.places',
-        query: `${country}+${stateProvice}`,
+        query: `${countries[countryKey]}+${stateProvice}`,
         types: ['country', 'region'],
       })
       .send()

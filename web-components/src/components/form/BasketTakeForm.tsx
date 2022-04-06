@@ -3,6 +3,11 @@ import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { Collapse } from '@mui/material';
 import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
+import mbxGeocoder, {
+  GeocodeQueryType,
+  GeocodeRequest,
+} from '@mapbox/mapbox-sdk/services/geocoding';
+import MapboxClient from '@mapbox/mapbox-sdk';
 
 import { Theme } from '../../theme/muiTheme';
 import AmountField from '../inputs/AmountField';
@@ -32,33 +37,6 @@ import {
  */
 
 const useStyles = makeStyles((theme: Theme) => ({
-  holderField: {
-    '& label': {
-      color: `${theme.palette.primary.contrastText} !important`,
-    },
-    '& .MuiInputBase-formControl': {
-      backgroundColor: theme.palette.info.light,
-      marginTop: theme.spacing(2.25),
-    },
-  },
-  textField: {
-    marginTop: theme.spacing(10.75),
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
-    },
-  },
-  description: {
-    marginBottom: theme.spacing(5),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    '& a': {
-      cursor: 'pointer',
-    },
-  },
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
     // marginBottom: theme.spacing(10.75),
@@ -91,6 +69,7 @@ interface CreditTakeFormValues {
   note?: string;
   country: string;
   stateProvince: string;
+  postalCode?: string;
 }
 
 // Input (args)
@@ -110,12 +89,15 @@ const BasketTakeForm: React.FC<FormProps> = ({
   onSubmit,
 }) => {
   const styles = useStyles();
+  const accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
+  const baseClient = MapboxClient({ accessToken });
+  const geocoderService = mbxGeocoder(baseClient);
 
   const initialValues = {
     amount: 0,
     retireOnTake: false,
     note: '',
-    country: '',
+    country: 'US', // TODO: good default?
     stateProvince: '',
   };
 
@@ -148,19 +130,54 @@ const BasketTakeForm: React.FC<FormProps> = ({
     return errors;
   };
 
+  const getISOstring = async (
+    country?: string,
+    stateProvice?: string,
+    postalCode?: string,
+  ): Promise<string> => {
+    let placeCode = '';
+    // let placeCode = postalCode || '';
+
+    // fetches from mapbox to compose a proper ISO 3166-2 standard location string
+    geocoderService
+      .forwardGeocode({
+        mode: 'mapbox.places',
+        query: `${country}+${stateProvice}+${postalCode}`,
+        types: ['country', 'region'],
+      })
+      .send()
+      .then(res => {
+        const placeCodes = res?.body?.features
+          ?.filter((f: any) => !!f?.properties?.short_code)
+          .sort((p: any) => p.relevance); // TODO: set minimum relevance threshold?
+        console.log('placeCodes', placeCodes);
+
+        const result = placeCodes?.[0]?.properties?.short_code || '';
+        if (!!result) placeCode = `${result} ${placeCode}`;
+        console.log('placeCode', placeCode);
+      });
+
+    return Promise.resolve(placeCode);
+  };
+
   const submitHandler = async (values: CreditTakeFormValues): Promise<void> => {
-    // console.log('*** submitHandler', values);
-    // const retirementLocation = getLocationString(); todo
+    console.log('*** submitHandler', values);
+    const retirementLocation = await getISOstring(
+      values.country,
+      values.stateProvince,
+      values.postalCode,
+    );
 
     const msgTake: MsgTakeValues = {
       owner: accountAddress,
       basketDenom: basket.basketDenom,
       amount: (values.amount * Math.pow(10, basket.exponent)).toString(),
       retireOnTake: !!values.retireOnTake,
-      retirementLocation: 'US', //todo
+      retirementLocation,
       retirementNote: values?.note,
     };
 
+    // await getISOstring(values.country, values.stateProvince, values.postalCode);
     await onSubmit(msgTake);
   };
 

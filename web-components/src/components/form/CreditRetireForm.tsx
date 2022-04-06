@@ -162,7 +162,6 @@ export const CreditRetireFields = ({
   batchDenom,
   availableTradableAmount,
 }: CreditRetireFieldsProps): JSX.Element => {
-  // const styles = useStyles();
   return (
     <>
       <AmountField
@@ -170,7 +169,6 @@ export const CreditRetireFields = ({
         label="Amount to retire"
         availableAmount={availableTradableAmount}
         batchDenom={batchDenom}
-        // className={styles.textField}
       />
       <BottomCreditRetireFields country={country} />
     </>
@@ -207,7 +205,9 @@ const CreditRetireForm: React.FC<FormProps> = ({
   availableTradableAmount,
   onClose,
 }) => {
-  const validateHandler = (values: RetireFormValues): FormikErrors<RetireFormValues> => {
+  const validateHandler = (
+    values: RetireFormValues,
+  ): FormikErrors<RetireFormValues> => {
     let errors: FormikErrors<RetireFormValues> = {};
     errors = validateCreditRetire(availableTradableAmount, values, errors);
     return errors;

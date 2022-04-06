@@ -128,21 +128,25 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       retireOnTake: values.retireOnTake || false,
     });
 
-    await signAndBroadcast([msg], undefined, values?.retirementNote);
+    try {
+      await signAndBroadcast([msg], undefined, values?.retirementNote);
 
-    if (basket && amount) {
-      setCardItems([
-        {
-          label: 'basket',
-          value: { name: basket.name },
-        },
-        {
-          label: 'amount',
-          value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
-        },
-      ]);
-      setIsTxSuccessfulModalTitle('Take from basket');
-      setSelectedBasketDenom(''); // close Take modal
+      if (basket && amount) {
+        setCardItems([
+          {
+            label: 'basket',
+            value: { name: basket.name },
+          },
+          {
+            label: 'amount',
+            value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
+          },
+        ]);
+        setIsTxSuccessfulModalTitle('Take from basket');
+        setSelectedBasketDenom(''); // close Take modal
+      }
+    } catch (err) {
+      alert('something went wrong. check values and try again');
     }
   };
 

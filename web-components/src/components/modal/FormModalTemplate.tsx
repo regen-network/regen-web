@@ -5,8 +5,8 @@ import Title from '../title';
 
 const useStyles = makeStyles(theme => ({
   modal: {
-    height: 'inherit',
     [theme.breakpoints.up('sm')]: {
+      height: 'inherit',
       padding: `${theme.spacing(10.75)} ${theme.spacing(7.5)} ${theme.spacing(
         12.5,
       )}`,

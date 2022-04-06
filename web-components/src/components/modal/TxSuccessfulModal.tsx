@@ -16,8 +16,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: 'auto',
     [theme.breakpoints.up('sm')]: {
+      height: 'auto',
       paddingLeft: theme.spacing(7.5),
       paddingRight: theme.spacing(7.5),
     },

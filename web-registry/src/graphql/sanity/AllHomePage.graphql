@@ -1,7 +1,17 @@
 query allHomePage {
   allHomePage {
     heroSection {
-      ...heroSectionFields
+      title
+      bodyRaw
+      button {
+        ...buttonFields
+      }
+      background {
+        ...customImageFields
+      }
+      icon {
+        ...customImageFields
+      }
     }
     bottomBanner {
       ...bottomBannerFields

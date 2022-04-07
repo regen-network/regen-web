@@ -7,7 +7,9 @@ const accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 const baseClient = MapboxClient({ accessToken });
 const geocoderService = mbxGeocoder(baseClient);
 
-// fetches from mapbox to compose a proper ISO 3166-2 standard location string
+/**
+ * Fetches from mapbox to compose a proper ISO 3166-2 standard location string
+ */
 export const getISOString = async (
   countryKey?: string,
   stateProvice?: string,
@@ -15,6 +17,10 @@ export const getISOString = async (
 ): Promise<string | undefined> => {
   let placeCode: string | undefined;
   if (!countryKey) return Promise.reject();
+  if (countryKey && !stateProvice && !postalCode) {
+    return Promise.resolve(countryKey); // no need to search
+  }
+
   await geocoderService
     .forwardGeocode({
       mode: 'mapbox.places',
@@ -25,7 +31,7 @@ export const getISOString = async (
     .then(res => {
       const placeCodes = res?.body?.features
         ?.filter((f: any) => !!f?.properties?.short_code)
-        .sort((p: any) => p.relevance); // TODO: set minimum relevance threshold?
+        .sort((p: any) => p.relevance);
 
       const result = placeCodes?.[0]?.properties?.short_code || '';
       if (!!result) placeCode = result;

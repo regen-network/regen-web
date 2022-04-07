@@ -28,7 +28,7 @@ import {
   WithBasketsProps,
   withBaskets,
 } from '../components/templates';
-import { BasketTakeModal } from '../components/molecules';
+import { BasketTakeModal } from '../components/organisms';
 import { Link } from '../components/atoms';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg';

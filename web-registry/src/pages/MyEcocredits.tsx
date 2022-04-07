@@ -170,7 +170,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
         },
         {
           label: 'amount',
-          value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
+          value: { name: amount },
         },
       ]);
       setIsTxSuccessfulModalTitle('Put in basket');

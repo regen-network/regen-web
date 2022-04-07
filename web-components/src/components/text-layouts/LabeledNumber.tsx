@@ -1,44 +1,38 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
+import { SxProps, Theme } from '@mui/material';
+
 import Title from '../title';
+import { LabeledDetail } from './LabeledDetail';
 
 /** Grey label over a rounded, formatted number */
 export function LabeledNumber({
   label,
   number,
+  sx,
 }: {
   label: string;
   number: number | string;
+  sx?: {
+    root?: SxProps<Theme>;
+    label?: SxProps<Theme>;
+    number?: SxProps<Theme>;
+  };
 }): JSX.Element {
   return (
-    <Box
+    <LabeledDetail
+      label={label}
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        justifyContent: 'space-between',
+        root: {
+          height: '100%',
+          justifyContent: 'space-between',
+          ...sx?.root,
+        },
+        label: sx?.label,
       }}
     >
-      <Typography
-        variant="overline"
-        sx={{
-          fontSize: {
-            xs: 12,
-            sm: 14,
-          },
-          fontFamily: 'muli',
-          fontWeight: 800,
-          color: 'info.main',
-          textTransform: 'uppercase',
-          lineHeight: '17.57px',
-          letterSpacing: 1,
-        }}
-      >
-        {label}
-      </Typography>
-      <Title variant="h3" sx={{ pt: 1 }}>
+      <Title variant="h3" sx={sx?.number}>
         {Math.round(Number(number)).toLocaleString()}
       </Title>
-    </Box>
+    </LabeledDetail>
   );
 }

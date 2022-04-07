@@ -39,6 +39,7 @@ interface BankQueryBalanceResponse {
 
 export interface BatchInfo {
   class_id: string;
+  metadata: Uint8Array;
   batch_denom: string;
   issuer: string;
   total_amount: number;

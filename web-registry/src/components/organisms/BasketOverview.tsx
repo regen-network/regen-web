@@ -227,7 +227,7 @@ const Item = ({ label, data, link }: ItemProps): JSX.Element => {
   return (
     <GridItem label={label}>
       <Description className={styles.data}>
-        {link ? <LinkWithArrow link={link} label={data} /> : parseText(data)}
+        {link ? <LinkWithArrow href={link} label={data} /> : parseText(data)}
       </Description>
     </GridItem>
   );
@@ -250,7 +250,7 @@ const ItemWithLinkList = ({
     <GridItem label={label}>
       {data.map(item => (
         <Description key={`basket-${item.id}`} className={styles.data}>
-          <LinkWithArrow link={link + item.id} label={item.name} />
+          <LinkWithArrow href={link + item.id} label={item.name} />
         </Description>
       ))}
     </GridItem>

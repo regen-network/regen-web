@@ -37,7 +37,7 @@ export const EcocreditsByAccount: React.FC = () => {
           }}
         >
           <LinkWithArrow
-            link={getAccountUrl(accountAddress || '')}
+            href={getAccountUrl(accountAddress || '')}
             label={truncate(accountAddress || '')}
           />
         </Typography>

@@ -125,7 +125,11 @@ const BuyersPage = (): JSX.Element => {
 
       <FixedFooter justifyContent="flex-end">
         <>
-          <ContainedButton onClick={handleOpen} startIcon={<EmailIcon />}>
+          <ContainedButton
+            size="large"
+            onClick={handleOpen}
+            startIcon={<EmailIcon />}
+          >
             {content?.footerButtonText}
           </ContainedButton>
         </>

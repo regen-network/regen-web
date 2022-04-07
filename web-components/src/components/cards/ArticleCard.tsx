@@ -109,7 +109,12 @@ export default function ArticleCard({
         <span className={styles.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
         <span>{date}</span>
       </Description>
-      <OutlinedButton className={styles.button} href={url} target="_blank">
+      <OutlinedButton
+        size="small"
+        className={styles.button}
+        href={url}
+        target="_blank"
+      >
         {getBtnText(type)}
       </OutlinedButton>
     </MediaCard>

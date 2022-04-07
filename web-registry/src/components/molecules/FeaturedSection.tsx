@@ -103,6 +103,7 @@ const FeaturedSection: React.FC<Props> = ({ content }) => {
                   <BlockContent content={content.descriptionRaw} />
                 </Typography>
                 <ContainedButton
+                  size="large"
                   href={content?.button?.buttonLink?.buttonHref || ''}
                   className={styles.button}
                 >

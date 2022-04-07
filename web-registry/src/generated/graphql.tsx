@@ -18855,6 +18855,22 @@ export type MoreProjectsQuery = (
   )> }
 );
 
+export type ProjectByBatchDenomQueryVariables = Exact<{
+  batchDenom: Scalars['String'];
+}>;
+
+
+export type ProjectByBatchDenomQuery = (
+  { __typename?: 'Query' }
+  & { creditVintageByBatchDenom?: Maybe<(
+    { __typename?: 'CreditVintage' }
+    & { projectByProjectId?: Maybe<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'metadata' | 'handle'>
+    )> }
+  )> }
+);
+
 export type PartyFieldsFragment = (
   { __typename?: 'Party' }
   & Pick<Party, 'id' | 'type' | 'name' | 'description' | 'image'>
@@ -20250,6 +20266,44 @@ export function useMoreProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type MoreProjectsQueryHookResult = ReturnType<typeof useMoreProjectsQuery>;
 export type MoreProjectsLazyQueryHookResult = ReturnType<typeof useMoreProjectsLazyQuery>;
 export type MoreProjectsQueryResult = Apollo.QueryResult<MoreProjectsQuery, MoreProjectsQueryVariables>;
+export const ProjectByBatchDenomDocument = gql`
+    query ProjectByBatchDenom($batchDenom: String!) {
+  creditVintageByBatchDenom(batchDenom: $batchDenom) {
+    projectByProjectId {
+      metadata
+      handle
+    }
+  }
+}
+    `;
+
+/**
+ * __useProjectByBatchDenomQuery__
+ *
+ * To run a query within a React component, call `useProjectByBatchDenomQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectByBatchDenomQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectByBatchDenomQuery({
+ *   variables: {
+ *      batchDenom: // value for 'batchDenom'
+ *   },
+ * });
+ */
+export function useProjectByBatchDenomQuery(baseOptions: Apollo.QueryHookOptions<ProjectByBatchDenomQuery, ProjectByBatchDenomQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProjectByBatchDenomQuery, ProjectByBatchDenomQueryVariables>(ProjectByBatchDenomDocument, options);
+      }
+export function useProjectByBatchDenomLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectByBatchDenomQuery, ProjectByBatchDenomQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProjectByBatchDenomQuery, ProjectByBatchDenomQueryVariables>(ProjectByBatchDenomDocument, options);
+        }
+export type ProjectByBatchDenomQueryHookResult = ReturnType<typeof useProjectByBatchDenomQuery>;
+export type ProjectByBatchDenomLazyQueryHookResult = ReturnType<typeof useProjectByBatchDenomLazyQuery>;
+export type ProjectByBatchDenomQueryResult = Apollo.QueryResult<ProjectByBatchDenomQuery, ProjectByBatchDenomQueryVariables>;
 export const ProjectByHandleDocument = gql`
     query ProjectByHandle($handle: String!) {
   projectByHandle(handle: $handle) {

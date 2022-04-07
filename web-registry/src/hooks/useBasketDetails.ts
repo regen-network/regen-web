@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react';
 
-import { QueryBatchInfoResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
-import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/types';
-
+// hooks
 import useQueryBasket from './useQueryBasket';
 import useQueryBasketBalances from './useQueryBasketBalances';
 import useQueryDenomMetadata from './useQueryDenomMetadata';
 import useQueryListClassInfo from './useQueryListClassInfo';
 import useQueryListBatchInfo from './useQueryListBatchInfo';
-import { BasketEcocredit } from '../types/ledger';
-import { BasketOverviewProps } from '../components/organisms';
+import { useProjectByBatchDenomLazyQuery } from '../generated/graphql';
+// ui types
+import { BasketOverviewProps, CreditBatch } from '../components/organisms';
 
 type BasketDetails = {
   overview: BasketOverviewProps;
-  ecocreditBatches: BasketEcocredit[];
+  creditBatches: CreditBatch[];
+};
+
+type BatchWithProject = {
+  batchDenom: string;
+  projectName: string;
+  projectDisplay: string;
 };
 
 const useBasketDetails = (basketDenom?: string): BasketDetails => {
@@ -26,9 +31,23 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
   const [batches, setBatches] = useState<string[]>();
   const basketBatches = useQueryListBatchInfo(batches);
 
-  // local state for all raw data queries
+  const [fetchProjectByBatchDenom] = useProjectByBatchDenomLazyQuery();
+  const [batchesProjects, setBatchesProjects] = useState<BatchWithProject[]>();
+
+  // custom basket overview data for <BasketOverview />
+  const [overview, setOverview] = useState<BasketOverviewProps>({
+    name: '-',
+    displayDenom: '-',
+    description: '-',
+    totalAmount: 0,
+    curator: '-',
+    allowedCreditClasses: [{ id: '-', name: '-' }],
+    minStartDate: '-',
+    // startDateWindow?: Long;
+    // startDateWindow?: string;
+  });
   // custom ecocredit batches data for <BasketEcocreditsTable />
-  const [ecocreditBatches, setEcocreditBatches] = useState<BasketEcocredit[]>();
+  const [creditBatches, setCreditBatches] = useState<CreditBatch[]>([]);
 
   // Batches string list query param for `useQueryListBatchInfo(batches)`
   useEffect(() => {
@@ -36,49 +55,93 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
     setBatches(basketBalances.balances.map(balance => balance.batchDenom));
   }, [basketBalances?.balances]);
 
-  // TODO: extend batches with projectName and projectDisplay
-  // required in <BasketEcocreditsTable />
+  // fetch project data related to credit batch using graphql lazy hook
   useEffect(() => {
-    if (!basketBatches) return;
+    if (!batches) return;
 
-    async function fetchData(
-      batchesInfo: QueryBatchInfoResponse[],
-    ): Promise<void> {
-      const batches = batchesInfo.map(batch => ({
-        batchInfo: batch.info as BatchInfo,
+    async function fetchData(batches: string[]): Promise<void> {
+      try {
+        const _batchesProjects = await Promise.all(
+          batches.map(async batchDenom => {
+            const batchProject = await fetchProjectByBatchDenom({
+              variables: { batchDenom },
+            });
+            return {
+              batchDenom,
+              projectName:
+                batchProject.data!.creditVintageByBatchDenom!
+                  .projectByProjectId!.handle || '-', // TODO
+              projectDisplay:
+                batchProject.data!.creditVintageByBatchDenom!
+                  .projectByProjectId!.metadata['http://schema.org/name'],
+            };
+          }),
+        );
+
+        setBatchesProjects(_batchesProjects);
+      } catch (error) {
         // TODO
-        projectName: '---',
-        projectDisplay: '---',
-      }));
-      setEcocreditBatches(batches);
+        // eslint-disable-next-line no-console
+        console.error(error);
+      }
     }
 
-    fetchData(basketBatches);
-  }, [basketBatches]);
+    fetchData(batches);
+  }, [batches, fetchProjectByBatchDenom]);
 
-  const totalAmount = basketBalances?.balances.reduce(
-    (acc, obj) => acc + parseFloat(obj.balance),
-    0,
-  );
+  // finally, data preparation for <BasketEcocreditsTable />
+  useEffect(() => {
+    if (!batches || !basketBatches || !batchesProjects) return;
 
-  const allowedCreditClasses = basketClasses?.map(basketClass => ({
-    id: basketClass.info?.classId || '-',
-    name: basketClass?.info?.classId || '-',
-  }));
+    const _creditBatches = batches.map(batch => {
+      const _basketBatch = basketBatches.find(
+        basketBatch => basketBatch.info!.batchDenom === batch,
+      );
+      const _projectBatch = batchesProjects.find(
+        projectBatch => projectBatch.batchDenom === batch,
+      );
+      return {
+        classId: _basketBatch!.info!.classId,
+        batchDenom: _basketBatch!.info!.batchDenom,
+        issuer: _basketBatch!.info!.issuer,
+        totalAmount: _basketBatch!.info!.totalAmount,
+        startDate: _basketBatch!.info!.startDate || '-', // TODO
+        endDate: _basketBatch!.info!.endDate || '-', // TODO
+        projectLocation: _basketBatch!.info!.projectLocation,
+        projectName: _projectBatch!.projectName,
+        projectDisplay: _projectBatch!.projectDisplay,
+      };
+    });
 
-  return {
-    overview: {
+    setCreditBatches(_creditBatches);
+  }, [batches, basketBatches, batchesProjects]);
+
+  // finally, data preparation for <BasketOverview />
+  useEffect(() => {
+    if (!basket || !basketMetadata || !basketBalances || !basketClasses) return;
+
+    const totalAmount = basketBalances?.balances.reduce(
+      (acc, obj) => acc + parseFloat(obj.balance),
+      0,
+    );
+    const allowedCreditClasses = basketClasses?.map(basketClass => ({
+      id: basketClass.info?.classId || '-',
+      name: basketClass?.info?.classId || '-',
+    }));
+
+    setOverview({
       name: basket?.basket?.name || '-',
       displayDenom: basketMetadata?.metadata?.display || '-',
       description: basketMetadata?.metadata?.description || '-',
       totalAmount: totalAmount || 0,
-      curator: 'TODO' || '-',
+      curator: 'Regen Network Development, Inc.' || '-', // TODO
       allowedCreditClasses: allowedCreditClasses || [{ id: '-', name: '-' }],
       minStartDate: '-',
       // startDateWindow: '-',
-    },
-    ecocreditBatches: ecocreditBatches || [],
-  };
+    });
+  }, [basket, basketMetadata, basketBalances, basketClasses]);
+
+  return { overview, creditBatches };
 };
 
 export default useBasketDetails;

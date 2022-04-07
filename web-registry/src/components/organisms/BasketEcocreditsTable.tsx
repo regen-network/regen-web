@@ -2,8 +2,6 @@ import React from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material';
 
-// import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/types';
-
 import {
   ActionsTable,
   RenderActionButtonsFunc,
@@ -14,7 +12,6 @@ import { Link } from '../atoms';
 import { NoCredits } from '../molecules';
 import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { BasketEcocredit } from '../../types/ledger';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -25,8 +22,22 @@ const BreakText = styled('div')({
   wordWrap: 'break-word',
 });
 
+export type CreditBatch = {
+  //  BatchInfo
+  classId: string;
+  batchDenom: string;
+  issuer: string;
+  totalAmount: string;
+  startDate: Date | string;
+  endDate: Date | string;
+  projectLocation: string;
+  // Project info
+  projectName: string;
+  projectDisplay: string;
+};
+
 type BasketEcocreditsTableProps = {
-  batches: BasketEcocredit[];
+  batches: CreditBatch[];
   renderActionButtons?: RenderActionButtonsFunc;
 };
 
@@ -68,19 +79,16 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
               },
             }}
           >
-            {item.batchInfo.batchDenom}
+            {item.batchDenom}
           </Box>,
-          <Link
-            href={getAccountUrl(item.batchInfo.issuer as string)}
-            target="_blank"
-          >
-            {truncate(item.batchInfo.issuer as string)}
+          <Link href={getAccountUrl(item.issuer as string)} target="_blank">
+            {truncate(item.issuer as string)}
           </Link>,
-          formatNumber(item.batchInfo.totalAmount),
-          item.batchInfo.classId,
-          <GreyText>{formatDate(item.batchInfo.startDate)}</GreyText>,
-          <GreyText>{formatDate(item.batchInfo.endDate)}</GreyText>,
-          item.batchInfo.projectLocation,
+          formatNumber(item.totalAmount),
+          item.classId,
+          <GreyText>{formatDate(item.startDate)}</GreyText>,
+          <GreyText>{formatDate(item.endDate)}</GreyText>,
+          item.projectLocation,
         ];
       })}
     />

@@ -3,8 +3,7 @@ import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import BasketEcocreditsTable from './BasketEcocreditsTable';
-import { BasketEcocredit } from '../../types/ledger';
+import BasketEcocreditsTable, { CreditBatch } from './BasketEcocreditsTable';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 type BasketEcocreditsProps = {
-  batches: BasketEcocredit[];
+  batches: CreditBatch[];
 };
 
 // This component will manage other components organized in tabs

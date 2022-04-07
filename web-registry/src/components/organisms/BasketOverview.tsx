@@ -19,6 +19,99 @@ import { OptimizedImage } from '../atoms/OptimizedImage';
 import topoImg from '../../assets/background-contour-2.svg';
 import forestImg from '../../assets/forest-token.png';
 
+type CreditClass = {
+  id: string;
+  name: string;
+};
+
+export type BasketOverviewProps = {
+  name: string;
+  displayDenom: string;
+  description: string;
+  totalAmount: number;
+  curator: string;
+  allowedCreditClasses: CreditClass[];
+  minStartDate?: string;
+  // startDateWindow?: Long;
+  // startDateWindow?: string;
+};
+
+export const BasketOverview: React.FC<BasketOverviewProps> = ({
+  name,
+  displayDenom,
+  description,
+  totalAmount,
+  curator,
+  allowedCreditClasses,
+  minStartDate,
+  // startDateWindow,
+}) => {
+  const styles = useStyles();
+
+  return (
+    <SectionContainer>
+      <Section className={styles.content}>
+        <Grid container>
+          <ImageContainer item xs={12} sm={5}>
+            <OptimizedImage
+              className={styles.image}
+              src={forestImg}
+              alt={name}
+            />
+          </ImageContainer>
+          <TextContainer item xs={12} sm={7}>
+            <Title variant="h1" className={styles.title}>
+              {name}
+            </Title>
+            <Description className={styles.basketDenom}>
+              {displayDenom}
+            </Description>
+            <Description className={styles.basketDescription}>
+              {description}
+            </Description>
+            <OnBoardingCard className={styles.card}>
+              <Grid
+                container
+                rowSpacing={1}
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              >
+                <Item label="total amount" data={formatNumber(totalAmount)} />
+                <Item
+                  label="curator"
+                  data={truncate(curator)}
+                  link={getAccountUrl(curator as string)}
+                />
+                <ItemWithLinkList
+                  label="allowed credit classes"
+                  data={allowedCreditClasses}
+                  link={'/credit-classes/'}
+                />
+                {minStartDate && (
+                  <Item
+                    label="min start date"
+                    data={formatDate(minStartDate)}
+                  />
+                )}
+                {/* {startDateWindow && (
+                  <Item
+                    label="start date window"
+                    data={startDateWindow.toString()}
+                    // data={formatDate(startDateWindow)}
+                  />
+                )} */}
+              </Grid>
+            </OnBoardingCard>
+          </TextContainer>
+        </Grid>
+      </Section>
+    </SectionContainer>
+  );
+};
+
+/**
+ * Styles and styled components
+ */
+
 const useStyles = makeStyles((theme: Theme) => ({
   content: {
     display: 'flex',
@@ -104,95 +197,6 @@ const TextContainer = styled(Grid)(({ theme }) => ({
     },
   },
 }));
-
-export interface CreditClass {
-  id: string;
-  name: string;
-}
-
-export type BasketOverviewProps = {
-  name: string;
-  displayDenom: string;
-  description: string;
-  totalAmount: number;
-  curator: string;
-  allowedCreditClasses: CreditClass[];
-  minStartDate?: string;
-  // startDateWindow?: Long;
-  // startDateWindow?: string;
-};
-
-export const BasketOverview: React.FC<BasketOverviewProps> = ({
-  name,
-  displayDenom,
-  description,
-  totalAmount,
-  curator,
-  allowedCreditClasses,
-  minStartDate,
-  // startDateWindow,
-}) => {
-  const styles = useStyles();
-
-  return (
-    <SectionContainer>
-      <Section className={styles.content}>
-        <Grid container>
-          <ImageContainer item xs={12} sm={5}>
-            <OptimizedImage
-              className={styles.image}
-              src={forestImg}
-              alt={name}
-            />
-          </ImageContainer>
-          <TextContainer item xs={12} sm={7}>
-            <Title variant="h1" className={styles.title}>
-              {name}
-            </Title>
-            <Description className={styles.basketDenom}>
-              {displayDenom}
-            </Description>
-            <Description className={styles.basketDescription}>
-              {description}
-            </Description>
-            <OnBoardingCard className={styles.card}>
-              <Grid
-                container
-                rowSpacing={1}
-                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-              >
-                <Item label="total amount" data={formatNumber(totalAmount)} />
-                <Item
-                  label="curator"
-                  data={truncate(curator)}
-                  link={getAccountUrl(curator as string)}
-                />
-                <ItemWithLinkList
-                  label="allowed credit classes"
-                  data={allowedCreditClasses}
-                  link={'/credit-classes/'}
-                />
-                {minStartDate && (
-                  <Item
-                    label="min start date"
-                    data={formatDate(minStartDate)}
-                  />
-                )}
-                {/* {startDateWindow && (
-                  <Item
-                    label="start date window"
-                    data={startDateWindow.toString()}
-                    // data={formatDate(startDateWindow)}
-                  />
-                )} */}
-              </Grid>
-            </OnBoardingCard>
-          </TextContainer>
-        </Grid>
-      </Section>
-    </SectionContainer>
-  );
-};
 
 /**
  * Basket summary item (subcomponents)

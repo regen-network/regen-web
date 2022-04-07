@@ -5,12 +5,16 @@ import MuiTextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import clsx from 'clsx';
 
+import { DefaultStyleProps } from './FieldFormControl';
+
 interface TriggerTextFieldProps extends TextFieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
   transformValue?: (v: any) => any;
 }
 
-export interface RegenTextFieldProps extends TriggerTextFieldProps {
+export interface RegenTextFieldProps
+  extends TriggerTextFieldProps,
+    DefaultStyleProps {
   children?: any;
   errors?: boolean;
   optional?: boolean;
@@ -42,7 +46,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
     '& .MuiInputBase-formControl': {
-      marginTop: props.label ? theme.spacing(4) : 0,
+      marginTop: props.label ? theme.spacing(2.25) : 0,
       [theme.breakpoints.up('sm')]: {
         marginBottom: props.errors ? theme.spacing(5.25) : 0,
       },
@@ -130,6 +134,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
     },
   }),
+  firstOfType: {
+    '&:first-of-type': {
+      marginTop: 0,
+    },
+  },
+  default: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.typography.pxToRem(40),
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.typography.pxToRem(33),
+    },
+  },
 }));
 
 function TriggerTextField({
@@ -156,19 +173,29 @@ export default function RegenTextField({
   triggerOnChange,
   errors = false,
   optional = false,
+  defaultStyle = true,
+  forceDefaultStyle = false,
   children,
   startAdornment,
   endAdornment,
   ...props
 }: RegenTextFieldProps): JSX.Element {
-  const classes = useStyles({ ...props, optional, errors });
+  const styles = useStyles({ ...props, optional, errors });
+  const baseClasses = [styles.root, props.className];
+  const defaultClasses = [styles.default, ...baseClasses];
+  const rootClasses = defaultStyle
+    ? forceDefaultStyle
+      ? defaultClasses
+      : [...defaultClasses, styles.firstOfType]
+    : baseClasses;
+
   return (
     <TriggerTextField
       {...props}
       variant="standard"
       transformValue={transformValue}
       triggerOnChange={triggerOnChange}
-      className={clsx(classes.root, props.className)}
+      className={clsx(rootClasses)}
       InputProps={{
         disableUnderline: true,
         startAdornment: startAdornment ? (

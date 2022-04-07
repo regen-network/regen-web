@@ -24,6 +24,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 
 import { setPageView } from '../../lib/ga';
 import getApiUri from '../../lib/apiUri';
@@ -39,7 +40,6 @@ import {
   CreditsPurchaseForm,
   LandManagementActions,
   BuyCreditsModal,
-  ProcessingModal,
   ConfirmationModal,
 } from '../organisms';
 import { Credits } from '../organisms/BuyCreditsModal';
@@ -447,7 +447,6 @@ function ProjectDetails(): JSX.Element {
             open={
               !walletContext?.txResult?.transactionHash && isProcessingModalOpen
             }
-            txHash={walletContext?.txResult?.transactionHash}
             onClose={handleProcessingModalClose}
           />
           <ConfirmationModal

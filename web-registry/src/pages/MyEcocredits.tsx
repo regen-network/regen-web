@@ -1,16 +1,38 @@
-import React from 'react';
-import { useTheme, makeStyles } from '@mui/styles';
+import React, { useState, useEffect } from 'react';
+import { makeStyles, useTheme } from '@mui/styles';
+import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
+import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
+import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { useWallet } from '../lib/wallet';
-import { PortfolioTemplate } from '../components/templates';
+import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
+import {
+  TxSuccessfulModal,
+  Item,
+} from 'web-components/lib/components/modal/TxSuccessfulModal';
+import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
+import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+
+import {
+  useEcocredits,
+  useBasketsWithClasses,
+  useBasketTokens,
+} from '../hooks';
+import useMsgClient from '../hooks/useMsgClient';
+import {
+  PortfolioTemplate,
+  WithBasketsProps,
+  withBaskets,
+} from '../components/templates';
+import { Link } from '../components/atoms';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-basket.svg';
 // import { ReactComponent as WithdrawIBC } from '../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
+import { getHashUrl } from '../lib/block-explorer';
 
 const useStyles = makeStyles((theme: Theme) => ({
   arrow: {
@@ -19,24 +41,107 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const MyEcocredits: React.FC = () => {
-  const theme = useTheme();
+const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const styles = useStyles();
-  const walletContext = useWallet();
-  const accountAddress = walletContext.wallet?.address;
+  const theme = useTheme();
+
+  const handleTxQueued = (): void => {
+    setIsProcessingModalOpen(true);
+  };
+
+  const handleTxSuccessfulModalClose = (): void => {
+    setCardItems(undefined);
+    setIsTxSuccessfulModalTitle(undefined);
+    setDeliverTxResponse(undefined);
+  };
+
+  const handleTxDelivered = (): void => {
+    setIsProcessingModalOpen(false);
+    // Refetch basket/ecocredits data so it shows latest values
+    fetchBasketTokens();
+    fetchCredits();
+  };
+
+  // TODO handle error when signing and broadcasting tx
+  const { signAndBroadcast, setDeliverTxResponse, wallet, deliverTxResponse } =
+    useMsgClient(handleTxQueued, handleTxDelivered);
+  const accountAddress = wallet?.address;
+  const { credits, fetchCredits } = useEcocredits(accountAddress);
+  const { basketTokens, fetchBasketTokens } = useBasketTokens(
+    accountAddress,
+    baskets,
+  );
+  const basketsWithClasses = useBasketsWithClasses(baskets);
+
+  const [creditBaskets, setCreditBaskets] = useState<
+    (QueryBasketResponse | undefined)[][]
+  >([]);
+  const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
+  const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
+  const [isTxSuccessfulModalTitle, setIsTxSuccessfulModalTitle] = useState<
+    string | undefined
+  >(undefined);
+  const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+
+  useEffect(() => {
+    // Get available baskets to put credits into
+    if (basketsWithClasses && basketsWithClasses.length > 0) {
+      setCreditBaskets(
+        credits.map(c =>
+          basketsWithClasses.filter(b => b?.classes.includes(c.class_id)),
+        ),
+      );
+    }
+  }, [credits, basketsWithClasses]);
+
+  const basketPutSubmit = async (
+    values: BasketPutFormValues,
+  ): Promise<void> => {
+    setBasketPutOpen(-1);
+    const amount = values.amount?.toString();
+    const msg = MsgPut.fromPartial({
+      basketDenom: values.basketDenom,
+      owner: wallet?.address,
+      credits: [
+        {
+          batchDenom: credits[basketPutOpen].batch_denom,
+          amount: amount,
+        },
+      ],
+    });
+    await signAndBroadcast([msg]);
+    const basket = baskets?.baskets.find(
+      b => b.basketDenom === values.basketDenom,
+    );
+    if (basket && amount) {
+      setCardItems([
+        {
+          label: 'basket',
+          value: { name: basket.name },
+        },
+        {
+          label: 'amount',
+          value: { name: amount },
+        },
+      ]);
+      setIsTxSuccessfulModalTitle('Put in basket');
+    }
+  };
 
   return (
-    <PortfolioTemplate
-      accountAddress={accountAddress}
-      renderCreditActionButtons={(i: number) => (
-        <TableActionButtons
-          buttons={[
+    <>
+      <PortfolioTemplate
+        credits={credits}
+        basketTokens={basketTokens}
+        renderCreditActionButtons={(i: number) => {
+          const buttons = [
             // Disabling for now until the marketplace is
             // released on regen-ledger
             // {
             //   icon: <Sell />,
             //   label: 'Sell',
-            //   onClick: () => `TODO sell credit ${i}`,
+            //   // eslint-disable-next-line no-console
+            //   onClick: () => console.log(`TODO sell credit ${i}`),
             // },
             {
               icon: (
@@ -47,12 +152,8 @@ export const MyEcocredits: React.FC = () => {
                 />
               ),
               label: 'Send',
-              onClick: () => `TODO send credit ${i}`,
-            },
-            {
-              icon: <PutInBasket />,
-              label: 'Put in basket',
-              onClick: () => `TODO put in basket${i}`,
+              // eslint-disable-next-line no-console
+              onClick: () => console.log(`TODO send credit ${i}`),
             },
             {
               icon: (
@@ -63,34 +164,87 @@ export const MyEcocredits: React.FC = () => {
                 />
               ),
               label: 'Retire',
-              onClick: () => `TODO retire credit ${i}`,
+              // eslint-disable-next-line no-console
+              onClick: () => console.log(`TODO retire credit ${i}`),
             },
-          ]}
+          ];
+
+          // Only add ability to put credits into basket
+          // if there's at least one basket that accepts those credits
+          if (creditBaskets[i] && creditBaskets[i].length > 0) {
+            buttons.splice(1, 0, {
+              // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
+              icon: <PutInBasket />,
+              label: 'Put in basket',
+              onClick: () => setBasketPutOpen(i),
+            });
+          }
+          return <TableActionButtons buttons={buttons} />;
+        }}
+        renderBasketActionButtons={(i: number) => (
+          <TableActionButtons
+            buttons={[
+              {
+                icon: <TakeFromBasket />,
+                label: 'Take from basket',
+                // eslint-disable-next-line no-console
+                onClick: () => console.log(`TODO take from basket ${i}`),
+              },
+              // This will be handled from osmosis
+              // so hiding these for now
+              // {
+              //   icon: <WithdrawIBC />,
+              //   label: 'Withdraw (IBC)',
+              //   onClick: () => `TODO withdraw ${i}`,
+              // },
+              // {
+              //   icon: <DepositIBC />,
+              //   label: 'Deposit (IBC)',
+              //   onClick: () => `TODO deposit ${i}`,
+              // },
+            ]}
+          />
+        )}
+      />
+      {basketPutOpen > -1 && (
+        <BasketPutModal
+          basketOptions={
+            creditBaskets[basketPutOpen]
+              .map(b => ({
+                label: b?.basket?.name,
+                value: b?.basket?.basketDenom,
+              }))
+              .filter(v => v.label && v.value) as Option[]
+          }
+          availableTradableAmount={Number(
+            credits[basketPutOpen].tradable_amount,
+          )}
+          batchDenom={credits[basketPutOpen].batch_denom}
+          open={basketPutOpen > -1}
+          onClose={() => setBasketPutOpen(-1)}
+          onSubmit={basketPutSubmit}
         />
       )}
-      renderBasketActionButtons={(i: number) => (
-        <TableActionButtons
-          buttons={[
-            {
-              icon: <TakeFromBasket />,
-              label: 'Take from basket',
-              onClick: () => `TODO take from basket ${i}`,
-            },
-            // This will be handled from osmosis
-            // so hiding these for now
-            // {
-            //   icon: <WithdrawIBC />,
-            //   label: 'Withdraw (IBC)',
-            //   onClick: () => `TODO withdraw ${i}`,
-            // },
-            // {
-            //   icon: <DepositIBC />,
-            //   label: 'Deposit (IBC)',
-            //   onClick: () => `TODO deposit ${i}`,
-            // },
-          ]}
-        />
-      )}
-    />
+      <ProcessingModal
+        open={!deliverTxResponse && isProcessingModalOpen}
+        onClose={() => setIsProcessingModalOpen(false)}
+      />
+      {deliverTxResponse?.transactionHash &&
+        cardItems &&
+        isTxSuccessfulModalTitle && (
+          <TxSuccessfulModal
+            open={!!isTxSuccessfulModalTitle || !!deliverTxResponse}
+            onClose={handleTxSuccessfulModalClose}
+            txHash={deliverTxResponse?.transactionHash}
+            txHashUrl={getHashUrl(deliverTxResponse?.transactionHash)}
+            cardTitle={isTxSuccessfulModalTitle}
+            cardItems={cardItems}
+            linkComponent={Link}
+            onViewPortfolio={handleTxSuccessfulModalClose}
+          />
+        )}
+    </>
   );
 };
+
+export const MyEcocredits = withBaskets(WrappedMyEcocredits);

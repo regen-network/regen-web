@@ -30,7 +30,7 @@ export const BatchDetails: React.FC = () => {
   const navigate = useNavigate();
   const walletContext = useWallet();
   const accountAddress = walletContext.wallet?.address;
-  const userEcocredits = useEcocredits(accountAddress);
+  const { credits: userEcocredits } = useEcocredits(accountAddress);
   const isUserBatch = userEcocredits.some(c => c.batch_denom === batchDenom);
 
   useEffect(() => {

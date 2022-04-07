@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Avatar } from '@mui/material';
-import { BroadcastTxResponse } from '@cosmjs/stargate';
+import { DeliverTxResponse } from '@cosmjs/stargate';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
@@ -12,7 +12,7 @@ import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
 import CowIllustration from '../../assets/cow-illustration.png';
 
 interface Props extends RegenModalProps {
-  data?: BroadcastTxResponse;
+  data?: DeliverTxResponse;
 }
 
 const useStyles = makeStyles(theme => ({

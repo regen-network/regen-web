@@ -235,7 +235,6 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
       activeContent={
         <div className={styles.activeContent}>
           <Field
-            className={styles.field}
             component={ControlledTextField}
             name={`['${role}'].['http://schema.org/name']`}
             label="Organization display name"
@@ -243,7 +242,6 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
             placeholder="i.e. Cherrybrook Farms"
           />
           <Field
-            className={styles.field}
             component={ImageUpload}
             projectId={projectId}
             apiServerUrl={apiUri}

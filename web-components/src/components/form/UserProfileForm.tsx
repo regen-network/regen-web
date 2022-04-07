@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Formik, Form, Field } from 'formik';
 
 import OnBoardingCard from '../cards/OnBoardingCard';
@@ -22,25 +21,10 @@ export interface UserProfileValues {
   description?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  textField: {
-    '&:first-of-type': {
-      marginTop: 0,
-    },
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.typography.pxToRem(40),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.typography.pxToRem(33),
-    },
-  },
-}));
-
 const UserProfileForm: React.FC<UserProfileFormProps> = ({
   submit,
   initialValues,
 }) => {
-  const classes = useStyles();
   return (
     <Formik
       enableReinitialize
@@ -81,27 +65,23 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({
           <Form>
             <OnBoardingCard>
               <Field
-                className={classes.textField}
                 component={ControlledTextField}
                 label="Full name"
                 name="name"
               />
               <Field
-                className={classes.textField}
                 component={ControlledTextField}
                 name="roleTitle"
                 label="Role"
                 placeholder="i.e. Farmer, Conservationist, Manager, etc."
               />
               <Field
-                className={classes.textField}
                 component={ImageField}
                 label="Bio photo"
                 name="photo"
                 optional
               />
               <Field
-                className={classes.textField}
                 component={PhoneField}
                 placeholder="+1 719 200 3488"
                 label="Phone number"
@@ -109,7 +89,6 @@ const UserProfileForm: React.FC<UserProfileFormProps> = ({
                 optional
               />
               <Field
-                className={classes.textField}
                 charLimit={160}
                 component={ControlledTextField}
                 description="Describe any relevant background and experience. This info may be shown on the project page."

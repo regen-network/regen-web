@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Card from '@mui/material/Card';
+import { SxProps } from '@mui/material';
 
 interface RegenCardProps {
   children?: any;
@@ -11,6 +12,7 @@ interface RegenCardProps {
   borderColor?: string;
   borderRadius?: string;
   className?: string;
+  sx?: SxProps<Theme>;
 }
 
 interface StyleProps {
@@ -40,6 +42,7 @@ export default function RegenCard({
   borderColor,
   borderRadius,
   className,
+  sx,
 }: RegenCardProps): JSX.Element {
   const classes = useStyles({
     width,
@@ -53,6 +56,7 @@ export default function RegenCard({
       onClick={onClick}
       className={`${classes.root} ${className}`}
       elevation={elevation}
+      sx={sx}
     >
       {children}
     </Card>

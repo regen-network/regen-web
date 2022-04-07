@@ -126,7 +126,7 @@ export const BottomCreditRetireFields = ({
       <Field
         name="note"
         type="text"
-        label="Add retirement transaction details (stored in the transaction note)"
+        label="Add retirement transaction details (stored in the tx memo)"
         component={TextField}
         className={styles.noteTextField}
         optional

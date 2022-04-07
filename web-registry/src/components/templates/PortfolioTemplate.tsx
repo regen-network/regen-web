@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import Section from 'web-components/lib/components/section';
 import Title from 'web-components/lib/components/title';
@@ -8,9 +9,13 @@ import { RenderActionButtonsFunc } from 'web-components/lib/components/table/Act
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
+import useQueryBaskets from '../../hooks/useQueryBaskets';
+import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
+import { BasketTokens } from '../../hooks/useBasketTokens';
 
 interface PortfolioTemplateProps {
-  accountAddress?: string;
+  credits?: BatchInfoWithBalance[];
+  basketTokens: BasketTokens[];
   renderCreditActionButtons?: RenderActionButtonsFunc;
   renderBasketActionButtons?: RenderActionButtonsFunc;
 }
@@ -28,13 +33,18 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(4.25),
     },
   },
+  arrow: {
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+  },
 }));
 
 export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
-  accountAddress,
+  credits,
+  basketTokens,
+  children,
   renderCreditActionButtons,
   renderBasketActionButtons,
-  children,
 }) => {
   const styles = useStyles();
 
@@ -47,7 +57,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             basket tokens
           </Title>
           <BasketsTable
-            address={accountAddress}
+            basketTokens={basketTokens}
             renderActionButtons={renderBasketActionButtons}
           />
         </Box>
@@ -56,7 +66,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
             ecocredits
           </Title>
           <EcocreditsTable
-            address={accountAddress}
+            credits={credits}
             renderActionButtons={renderCreditActionButtons}
           />
         </Box>
@@ -64,3 +74,17 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
     </Box>
   );
 };
+
+export interface WithBasketsProps {
+  baskets?: QueryBasketsResponse;
+}
+
+export function withBaskets<P>(
+  WrappedComponent: React.ComponentType<P & WithBasketsProps>,
+): React.FC<P & WithBasketsProps> {
+  const ComponentWithBaskets: React.FC<P> = (props: P) => {
+    const baskets = useQueryBaskets();
+    return <WrappedComponent {...props} baskets={baskets} />;
+  };
+  return ComponentWithBaskets;
+}

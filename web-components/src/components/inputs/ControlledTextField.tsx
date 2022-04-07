@@ -2,10 +2,14 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Typography, InputProps, InputAdornment } from '@mui/material';
 import { FieldProps } from 'formik';
-import FieldFormControl from './FieldFormControl';
+
+import FieldFormControl, { DefaultStyleProps } from './FieldFormControl';
 import Input from './Input';
 
-interface ControlledTextFieldProps extends FieldProps, InputProps {
+interface ControlledTextFieldProps
+  extends FieldProps,
+    InputProps,
+    DefaultStyleProps {
   charLimit?: number;
   description?: string;
   label?: string;
@@ -41,6 +45,7 @@ export default function ControlledTextField({
   optional,
   startAdornment,
   onExampleClick,
+  defaultStyle = true,
   ...inputProps
 }: ControlledTextFieldProps): JSX.Element {
   const charsLeft =
@@ -71,6 +76,7 @@ export default function ControlledTextField({
       field={field}
       form={form}
       meta={meta}
+      defaultStyle={defaultStyle}
     >
       {({ handleChange, handleBlur }) => (
         <>

@@ -18,6 +18,9 @@ interface Props extends ButtonProps {
   sx?: SxProps<Theme>;
 }
 
+/** a wrapper for Sanity buttons to be used in the Registry app. Handles internal
+ * links through `react-router` and forwards button props to a `Contained` or
+ * `Outlined` button */
 function SanityButton({
   btn,
   openModal,

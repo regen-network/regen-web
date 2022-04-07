@@ -1,5 +1,4 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import { Form, Formik, Field } from 'formik';
 
 import ControlledTextField from '../inputs/ControlledTextField';
@@ -26,23 +25,7 @@ export interface OrgProfileFormValues {
   logo: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  textField: {
-    '&:first-of-type': {
-      marginTop: 0,
-    },
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.typography.pxToRem(40),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.typography.pxToRem(33),
-    },
-  },
-}));
-
 const OrganizationProfileForm: React.FC<FormProps> = props => {
-  const styles = useStyles();
-
   return (
     <Formik
       enableReinitialize
@@ -87,7 +70,6 @@ const OrganizationProfileForm: React.FC<FormProps> = props => {
           <Form>
             <OnBoardingCard>
               <Field
-                className={styles.textField}
                 component={ControlledTextField}
                 description="This is the name of your farm, ranch, cooperative, non-profit, or other organization."
                 label="Organization legal name"
@@ -95,7 +77,6 @@ const OrganizationProfileForm: React.FC<FormProps> = props => {
                 placeholder="i.e. Cherrybrook Farms LLC"
               />
               <Field
-                className={styles.textField}
                 component={ControlledTextField}
                 description="This is the display name on your project page, if you choose to make this entity publically viewable."
                 label="Display name for organization"
@@ -103,7 +84,6 @@ const OrganizationProfileForm: React.FC<FormProps> = props => {
                 placeholder="i.e. Cherrybrook Farms"
               />
               <Field
-                className={styles.textField}
                 component={LocationField}
                 description="This address is used for issuing credits.  If you choose to show this entity on the project page, only city, state/province, and country will be displayed. "
                 label="Organization location"
@@ -112,13 +92,11 @@ const OrganizationProfileForm: React.FC<FormProps> = props => {
                 token={props.mapToken}
               />
               <Field
-                className={styles.textField}
                 component={ImageField}
                 label="Organization logo"
                 name="logo"
               />
               <Field
-                className={styles.textField}
                 charLimit={160}
                 component={ControlledTextField}
                 label="Short organization description"

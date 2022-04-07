@@ -111,6 +111,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const handleTakeCredits = async (values: MsgTakeValues): Promise<void> => {
     const msgClient = api?.msgClient;
     if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
+    setSelectedBasketDenom(''); // close Take modal
 
     const amount = values?.amount;
     const basket = baskets?.baskets.find(
@@ -140,7 +141,6 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       ]);
     }
     setIsTxSuccessfulModalTitle('Take from basket');
-    setSelectedBasketDenom(''); // close Take modal
   };
 
   const basketPutSubmit = async (

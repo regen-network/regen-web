@@ -92,7 +92,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
 
   const initialValues = {
     amount: 0,
-    retireOnTake: false,
+    retireOnTake: !basket.disableAutoRetire,
     note: '',
     country: 'US',
     stateProvince: '',
@@ -186,6 +186,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
               component={CheckboxLabel}
               type="checkbox"
               name="retireOnTake"
+              disabled={!basket.disableAutoRetire}
               className={styles.checkboxLabel}
               label={
                 <Description className={styles.checkboxDescription}>

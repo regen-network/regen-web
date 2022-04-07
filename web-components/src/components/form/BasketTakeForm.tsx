@@ -94,7 +94,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
     amount: 0,
     retireOnTake: false,
     note: '',
-    country: '',
+    country: 'US',
     stateProvince: '',
     retirementLocation: undefined,
   };
@@ -126,14 +126,6 @@ const BasketTakeForm: React.FC<FormProps> = ({
         retirementValues,
         errors,
       );
-
-      // combo validation: send + retire
-      if (
-        Number(values.amount) + Number(values.amount) >
-        availableTradableAmount
-      ) {
-        errors.amount = insufficientCredits;
-      }
     }
     return errors;
   };

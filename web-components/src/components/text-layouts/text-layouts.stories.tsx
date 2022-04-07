@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   TitleDescription,
   LabeledNumber,
+  LabeledDetail,
 } from 'web-components/lib/components/text-layouts';
 
 export default {
@@ -19,4 +20,12 @@ export const titleDescription = (): JSX.Element => (
 
 export const labeledNumber = (): JSX.Element => (
   <LabeledNumber label={'Label'} number={1234} />
+);
+
+export const labeledDetail = (): JSX.Element => (
+  <LabeledDetail label={'Label'}>
+    <div style={{ fontSize: 16, fontWeight: 'bold' }}>
+      anything rendered as a child shows underneath
+    </div>
+  </LabeledDetail>
 );

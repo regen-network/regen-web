@@ -18,7 +18,7 @@ const useStylesLink = makeStyles(theme => ({
 
 interface LinkProps {
   sx?: SxProps<Theme>;
-  link: string;
+  href: string;
   label: string | JSX.Element;
   className?: string;
   target?: '_blank' | '_self';
@@ -26,7 +26,7 @@ interface LinkProps {
 
 const LinkWithArrow: React.FC<LinkProps> = ({
   sx,
-  link,
+  href,
   label,
   className,
   target = '_blank',
@@ -35,14 +35,14 @@ const LinkWithArrow: React.FC<LinkProps> = ({
 
   return (
     <Link
-      href={link}
+      href={href}
       className={className}
       sx={{ color: 'info.dark', ...sx }}
       target={target}
       rel="noreferrer"
     >
       {parseText(label)}
-      {link && <SmallArrowIcon className={styles.arrowIcon} />}
+      {href && <SmallArrowIcon className={styles.arrowIcon} />}
     </Link>
   );
 };

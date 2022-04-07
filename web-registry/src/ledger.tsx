@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { RegenApi } from '@regen-network/api';
+import { OfflineSigner } from '@cosmjs/proto-signing';
 
 import { ledgerRPCUri, ledgerExpRPCUri, expLedger } from './lib/ledger';
+import { useWallet, Sender } from './lib/wallet';
 
 interface ContextValue {
   loading: boolean;
   api: RegenApi | undefined;
   error: unknown;
+  wallet?: Sender;
 }
 
 interface ConnectParams {
   forceExp?: boolean;
+  signer?: OfflineSigner;
 }
 
 async function connect(options?: ConnectParams): Promise<RegenApi | undefined> {
@@ -26,6 +30,7 @@ async function connect(options?: ConnectParams): Promise<RegenApi | undefined> {
       // If forceExp = true, then use experimental testnet RPC
       endpoint: options?.forceExp ? ledgerExpRPCUri : ledgerRPCUri,
       // TODO: DISABLED SIGNER
+      signer: options?.signer,
       // signer, // OfflineSigner from @cosmjs/proto-signing
     },
   });
@@ -42,11 +47,12 @@ const getApi = async (
   setApi: React.Dispatch<React.SetStateAction<RegenApi | undefined>>,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>,
   setError: React.Dispatch<unknown>,
+  signer?: OfflineSigner,
   forceExp?: boolean,
 ): Promise<void> => {
   setLoading(true);
   try {
-    const regenApi = await connect({ forceExp });
+    const regenApi = await connect({ forceExp, signer });
     setApi(regenApi);
     setLoading(false);
   } catch (e) {
@@ -59,13 +65,14 @@ export const LedgerProvider: React.FC = ({ children }) => {
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<unknown>(undefined);
+  const { wallet } = useWallet();
 
   useEffect(() => {
-    getApi(setApi, setLoading, setError);
-  }, [setApi, setLoading, setError]);
+    getApi(setApi, setLoading, setError, wallet?.offlineSigner);
+  }, [setApi, setLoading, setError, wallet?.offlineSigner]);
 
   return (
-    <LedgerContext.Provider value={{ error, loading, api }}>
+    <LedgerContext.Provider value={{ error, loading, api, wallet }}>
       {children}
     </LedgerContext.Provider>
   );
@@ -76,6 +83,7 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
   const [expLoading, setExpLoading] = useState<boolean>(false);
   const [expError, setExpError] = useState<unknown>(undefined);
   const context = React.useContext(LedgerContext);
+  const { wallet } = useWallet();
 
   const forceExp =
     !expLedger && // No need to get exp ledger api if it's already used as the primary one
@@ -83,7 +91,13 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
 
   useEffect(() => {
     if (forceExp && !expApi && !expLoading && !expError) {
-      getApi(setExpApi, setExpLoading, setExpError, forceExp);
+      getApi(
+        setExpApi,
+        setExpLoading,
+        setExpError,
+        wallet?.offlineSigner,
+        forceExp,
+      );
     }
   }, [
     expApi,
@@ -92,6 +106,7 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
     setExpApi,
     setExpLoading,
     setExpError,
+    wallet?.offlineSigner,
     forceExp,
   ]);
 
@@ -99,5 +114,6 @@ export const useLedger = (options?: ConnectParams): ContextValue => {
     api: forceExp ? expApi : context.api,
     loading: forceExp ? expLoading : context.loading,
     error: forceExp ? expError : context.error,
+    wallet,
   };
 };

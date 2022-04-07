@@ -2,6 +2,7 @@ import React from 'react';
 import { FieldProps, getIn } from 'formik';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import { FormHelperText, FormControl } from '@mui/material';
+import cx from 'clsx';
 
 import FormLabel from './FormLabel';
 
@@ -10,7 +11,15 @@ interface RenderProps {
   handleBlur: (value: any) => void;
 }
 
-interface Props extends FieldProps {
+export interface DefaultStyleProps {
+  defaultStyle?: boolean;
+  // forceDefaultStyle applies default style even if first-of-type,
+  // this may be useful when the element is the only child of some wrapper element
+  // e.g. in Grid's item
+  forceDefaultStyle?: boolean;
+}
+
+interface Props extends FieldProps, DefaultStyleProps {
   children: (childProps: RenderProps) => React.ReactNode;
   className?: string;
   description?: string;
@@ -52,6 +61,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginBottom: theme.spacing(2),
     },
   },
+  firstOfType: {
+    '&:first-of-type': {
+      marginTop: 0,
+    },
+  },
+  default: {
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.typography.pxToRem(40),
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.typography.pxToRem(33),
+    },
+  },
 }));
 
 /**
@@ -67,6 +89,8 @@ export default function FieldFormControl({
   optional,
   labelSubText,
   onExampleClick,
+  defaultStyle = true,
+  forceDefaultStyle = false,
   ...fieldProps
 }: Props): JSX.Element {
   const { form, field } = fieldProps;
@@ -90,8 +114,15 @@ export default function FieldFormControl({
     description,
     error: hasError,
   });
+  const defaultClasses = [styles.default, className];
+  const rootClasses = defaultStyle
+    ? forceDefaultStyle
+      ? defaultClasses
+      : [...defaultClasses, styles.firstOfType]
+    : className;
+
   return (
-    <FormControl className={className} fullWidth>
+    <FormControl className={cx(rootClasses)} fullWidth>
       <FormLabel
         className={styles.label}
         label={label}

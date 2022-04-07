@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
+import cx from 'clsx';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
@@ -16,8 +17,8 @@ import {
 import Submit from './Submit';
 import {
   requiredMessage,
-  invalidAmount,
   insufficientCredits,
+  validateAmount,
 } from '../inputs/validation';
 
 /**
@@ -47,13 +48,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '& .MuiInputBase-formControl': {
       backgroundColor: theme.palette.info.light,
-      marginTop: theme.spacing(2.25),
-    },
-  },
-  textField: {
-    marginTop: theme.spacing(10.75),
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
     },
   },
   description: {
@@ -70,10 +64,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
-    marginBottom: theme.spacing(10.75),
     alignItems: 'initial',
     '& .MuiCheckbox-root': {
       alignSelf: 'end',
+    },
+  },
+  checked: {
+    [theme.breakpoints.up('sm')]: {
+      marginBottom: theme.spacing(10),
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: theme.spacing(9),
     },
   },
   checkboxDescription: {
@@ -140,13 +141,11 @@ const CreditSendForm: React.FC<FormProps> = ({
       errors.recipient = requiredMessage;
     }
 
-    if (!values.tradableAmount) {
-      errors.tradableAmount = requiredMessage;
-    } else if (Math.sign(values.tradableAmount) !== 1) {
-      errors.tradableAmount = invalidAmount;
-    } else if (values.tradableAmount > availableTradableAmount) {
-      errors.tradableAmount = insufficientCredits;
-    }
+    const errAmount = validateAmount(
+      availableTradableAmount,
+      values.tradableAmount,
+    );
+    if (errAmount) errors.tradableAmount = errAmount;
 
     // Retire form validation (optional subform)
     if (values.withRetire) {
@@ -191,21 +190,23 @@ const CreditSendForm: React.FC<FormProps> = ({
             type="text"
             label="Recipient"
             component={TextField}
-            className={styles.textField}
           />
           <AmountField
             name={'tradableAmount'}
             label={'Amount to send'}
             availableAmount={availableTradableAmount}
             batchDenom={batchDenom}
-            className={styles.textField}
           />
 
           <Field
             component={CheckboxLabel}
             type="checkbox"
             name="withRetire"
-            className={styles.checkboxLabel}
+            className={
+              values.withRetire
+                ? cx(styles.checkboxLabel, styles.checked)
+                : styles.checkboxLabel
+            }
             label={
               <Description className={styles.checkboxDescription}>
                 Retire credits upon transfer

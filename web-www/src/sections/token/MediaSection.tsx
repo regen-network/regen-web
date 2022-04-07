@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
+import { useTheme } from '@mui/material';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
@@ -86,25 +87,15 @@ const query = graphql`
   query tokenMediaSection {
     sanityTokenPage {
       mediaCards {
-        title
-        author
-        date
-        href
-        type
-        image {
-          image {
-            asset {
-              url
-            }
-          }
-        }
+        ...mediaFields
       }
     }
   }
 `;
 
 const MediaSection: React.FC = () => {
-  const { sanityTokenPage: data } = useStaticQuery<TokenMediaSectionQuery>(query);
+  const { sanityTokenPage: data } =
+    useStaticQuery<TokenMediaSectionQuery>(query);
   const styles = useStyles();
   const theme = useTheme();
 

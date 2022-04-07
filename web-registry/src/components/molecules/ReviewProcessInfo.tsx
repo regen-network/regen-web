@@ -108,6 +108,7 @@ const ReviewProcessInfo: React.FC<{
       {props.reviewSection?.button?.buttonText && (
         <div>
           <ContainedButton
+            size="large"
             onClick={() =>
               onBtnClick(props.openModal, props.reviewSection?.button)
             }

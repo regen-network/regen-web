@@ -56,14 +56,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     textAlign: 'center',
     marginTop: theme.spacing(7.5),
   },
-  button: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-  },
 }));
 
 const query = graphql`
@@ -90,7 +82,8 @@ const query = graphql`
 
 const CareersSection: React.FC = () => {
   const styles = useStyles();
-  const { background, sanityDevelopersPage } = useStaticQuery<DevCareersSectionQuery>(query);
+  const { background, sanityDevelopersPage } =
+    useStaticQuery<DevCareersSectionQuery>(query);
   const data = sanityDevelopersPage?.careersSection;
   return (
     <BackgroundSection
@@ -108,7 +101,6 @@ const CareersSection: React.FC = () => {
       </Description>
       <div className={styles.buttonContainer}>
         <OutlinedButton
-          className={styles.button}
           target="_blank"
           href={`${data?.button?.buttonLink?.buttonHref}`}
         >

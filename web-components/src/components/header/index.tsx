@@ -107,9 +107,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => {
         // END HACK
       },
       '& li.MuiMenuItem-root, li.MuiMenuItem-root > div': {
-        '& span:hover, svg:hover, path:hover': {
-          borderBottom: 'none',
-        },
+        display: 'flex',
+        alignSelf: 'baseline',
         'background-color': 'inherit',
         'text-decoration': 'none',
       },
@@ -242,7 +241,6 @@ export default function Header({
                   />
                 );
               })}
-              {/* {isRegistry && <RegistryLoginBtns />} */}
               {isRegistry && extras}
             </MenuList>
           </Box>

@@ -25,6 +25,7 @@ const BasketTakeModal: React.FC<TakeModalProps> = ({
   onClose,
   onSubmit,
 }) => {
+  const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   const { basketTokens } = useBasketTokens(accountAddress, baskets);
   const basket = basketTokens.find(bt => bt.basket.basketDenom === basketDenom);
 
@@ -37,6 +38,7 @@ const BasketTakeModal: React.FC<TakeModalProps> = ({
   return (
     <FormModalTemplate title="Take from basket" open={open} onClose={onClose}>
       <BasketTakeForm
+        mapboxToken={mapboxToken}
         accountAddress={accountAddress}
         availableTradableAmount={balance}
         basket={basket?.basket}

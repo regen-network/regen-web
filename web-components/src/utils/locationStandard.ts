@@ -3,23 +3,22 @@ import mbxGeocoder from '@mapbox/mapbox-sdk/services/geocoding';
 
 import { countries } from './countries';
 
-const accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
-const baseClient = MapboxClient({ accessToken });
-const geocoderService = mbxGeocoder(baseClient);
-
 /**
  * Fetches from mapbox to compose a proper ISO 3166-2 standard location string
  */
 export const getISOString = async (
+  accessToken: string,
   countryKey?: string,
   stateProvince?: string,
   postalCode?: string,
 ): Promise<string | undefined> => {
-  let placeCode: string | undefined;
-  if (!countryKey) return Promise.reject();
+  if (!countryKey || !accessToken) return Promise.reject();
   if (!stateProvince) {
     return Promise.resolve(countryKey); // no need to search
   }
+  const baseClient = MapboxClient({ accessToken });
+  const geocoderService = mbxGeocoder(baseClient);
+  let placeCode: string | undefined;
 
   await geocoderService
     .forwardGeocode({

@@ -74,6 +74,7 @@ interface CreditTakeFormValues {
 
 // Input (args)
 interface FormProps {
+  mapboxToken: string;
   accountAddress: string;
   basket: Basket;
   availableTradableAmount: number;
@@ -82,6 +83,7 @@ interface FormProps {
 }
 
 const BasketTakeForm: React.FC<FormProps> = ({
+  mapboxToken,
   accountAddress,
   basket,
   availableTradableAmount,
@@ -152,6 +154,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
     useEffect(() => {
       const setRetirementLocation = async (): Promise<void> => {
         const isoString = await getISOString(
+          mapboxToken,
           country,
           stateProvince,
           postalCode,

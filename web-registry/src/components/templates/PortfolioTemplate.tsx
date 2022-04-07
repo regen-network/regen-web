@@ -33,6 +33,10 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(4.25),
     },
   },
+  arrow: {
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+  },
 }));
 
 export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({

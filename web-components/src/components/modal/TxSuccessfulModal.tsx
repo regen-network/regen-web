@@ -16,8 +16,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: 'auto',
     [theme.breakpoints.up('sm')]: {
+      height: 'auto',
       paddingLeft: theme.spacing(7.5),
       paddingRight: theme.spacing(7.5),
     },
@@ -130,7 +130,7 @@ const TxSuccessfulModal: React.FC<Props> = ({
       >
         <Title variant="h5">{cardTitle}</Title>
         {cardItems.map((item, i) => (
-          <CardItem {...item} linkComponent={linkComponent} />
+          <CardItem {...item} linkComponent={linkComponent} key={i} />
         ))}
         <CardItem
           label="hash"

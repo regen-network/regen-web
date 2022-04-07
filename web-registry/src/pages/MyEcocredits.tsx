@@ -124,6 +124,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       retirementLocation: values.retirementLocation || '',
       retireOnTake: values.retireOnTake || false,
     });
+
     await signAndBroadcast([msg], undefined, values?.retirementNote);
 
     if (basket && amount) {
@@ -137,8 +138,42 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
         },
       ]);
-      setIsTxSuccessfulModalTitle('Take from basket');
-      setSelectedBasketDenom(''); // close Take modal
+    }
+    setIsTxSuccessfulModalTitle('Take from basket');
+    setSelectedBasketDenom(''); // close Take modal
+  };
+
+  const basketPutSubmit = async (
+    values: BasketPutFormValues,
+  ): Promise<void> => {
+    setBasketPutOpen(-1);
+    const amount = values.amount?.toString();
+    const msg = MsgPut.fromPartial({
+      basketDenom: values.basketDenom,
+      owner: wallet?.address,
+      credits: [
+        {
+          batchDenom: credits[basketPutOpen].batch_denom,
+          amount: amount,
+        },
+      ],
+    });
+    await signAndBroadcast([msg]);
+    const basket = baskets?.baskets.find(
+      b => b.basketDenom === values.basketDenom,
+    );
+    if (basket && amount) {
+      setCardItems([
+        {
+          label: 'basket',
+          value: { name: basket.name },
+        },
+        {
+          label: 'amount',
+          value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
+        },
+      ]);
+      setIsTxSuccessfulModalTitle('Put in basket');
     }
   };
 
@@ -235,37 +270,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           batchDenom={credits[basketPutOpen].batch_denom}
           open={basketPutOpen > -1}
           onClose={() => setBasketPutOpen(-1)}
-          onSubmit={async (values: BasketPutFormValues) => {
-            setBasketPutOpen(-1);
-            const amount = values.amount?.toString();
-            const msg = MsgPut.fromPartial({
-              basketDenom: values.basketDenom,
-              owner: wallet?.address,
-              credits: [
-                {
-                  batchDenom: credits[basketPutOpen].batch_denom,
-                  amount: amount,
-                },
-              ],
-            });
-            await signAndBroadcast([msg]);
-            const basket = baskets?.baskets.find(
-              b => b.basketDenom === values.basketDenom,
-            );
-            if (basket && amount) {
-              setCardItems([
-                {
-                  label: 'basket',
-                  value: { name: basket.name },
-                },
-                {
-                  label: 'amount',
-                  value: { name: amount },
-                },
-              ]);
-              setIsTxSuccessfulModalTitle('Put in basket');
-            }
-          }}
+          onSubmit={basketPutSubmit}
         />
       )}
       {baskets && !!selectedBasketDenom && !!accountAddress && (

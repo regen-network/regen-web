@@ -12,11 +12,7 @@ import ControlledTextField from '../inputs/ControlledTextField';
 import Title from '../title';
 import Description from '../description';
 import Submit from './Submit';
-import {
-  requiredMessage,
-  invalidAmount,
-  insufficientCredits,
-} from '../inputs/validation';
+import { requiredMessage, validateAmount } from '../inputs/validation';
 
 /**
  * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).
@@ -55,15 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.typography.pxToRem(14),
     },
   },
-  textField: {
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
-    },
-  },
   noteTextField: {
-    '& .MuiInputBase-formControl': {
-      marginTop: theme.spacing(2.25),
-    },
     '& label': {
       whiteSpace: 'unset',
     },
@@ -83,10 +71,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         marginLeft: theme.spacing(2.375),
       },
     },
-  },
-  postalCodeField: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(12.5),
   },
 }));
 
@@ -139,7 +123,6 @@ export const CreditRetireFields = ({
         label={'Amount to retire'}
         availableAmount={availableTradableAmount}
         batchDenom={batchDenom}
-        className={styles.textField}
       />
       <Title className={styles.groupTitle} variant="h5">
         Transaction note
@@ -151,6 +134,7 @@ export const CreditRetireFields = ({
         component={TextField}
         className={styles.noteTextField}
         optional
+        defaultStyle={false}
       />
       <Title className={styles.groupTitle} variant="h5">
         Location of retirement
@@ -161,18 +145,13 @@ export const CreditRetireFields = ({
       </Description>
       <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationStateField
-            country={country}
-            className={styles.textField}
-            optional
-          />
+          <LocationStateField country={country} optional />
         </Grid>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationCountryField className={styles.textField} />
+          <LocationCountryField />
         </Grid>
       </Grid>
       <Field
-        className={styles.postalCodeField}
         component={ControlledTextField}
         label="Postal Code"
         name="postalCode"
@@ -190,14 +169,11 @@ export const validateCreditRetire = (
   if (!values.country) {
     errors.country = requiredMessage;
   }
-
-  if (!values.retiredAmount) {
-    errors.retiredAmount = requiredMessage;
-  } else if (Math.sign(values.retiredAmount) !== 1) {
-    errors.retiredAmount = invalidAmount;
-  } else if (values.retiredAmount > availableTradableAmount) {
-    errors.retiredAmount = insufficientCredits;
-  }
+  const errAmount = validateAmount(
+    availableTradableAmount,
+    values.retiredAmount,
+  );
+  if (errAmount) errors.retiredAmount = errAmount;
 
   return errors;
 };

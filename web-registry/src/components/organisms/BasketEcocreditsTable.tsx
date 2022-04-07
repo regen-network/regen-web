@@ -7,10 +7,10 @@ import {
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
+import { truncate } from 'web-components/lib/utils/truncate';
 
 import { Link } from '../atoms';
 import { NoCredits } from '../molecules';
-import { truncate } from '../../lib/wallet';
 import { getAccountUrl } from '../../lib/block-explorer';
 import type { BatchInfoWithProject } from '../../types/ledger/ecocredit';
 

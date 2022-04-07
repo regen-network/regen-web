@@ -12,19 +12,19 @@ const geocoderService = mbxGeocoder(baseClient);
  */
 export const getISOString = async (
   countryKey?: string,
-  stateProvice?: string,
+  stateProvince?: string,
   postalCode?: string,
 ): Promise<string | undefined> => {
   let placeCode: string | undefined;
   if (!countryKey) return Promise.reject();
-  if (countryKey && !stateProvice && !postalCode) {
+  if (!stateProvince) {
     return Promise.resolve(countryKey); // no need to search
   }
 
   await geocoderService
     .forwardGeocode({
       mode: 'mapbox.places',
-      query: `${countries[countryKey]}+${stateProvice}`,
+      query: `${countries[countryKey]}+${stateProvince}`,
       types: ['country', 'region'],
     })
     .send()
@@ -35,7 +35,7 @@ export const getISOString = async (
 
       const result = placeCodes?.[0]?.properties?.short_code || '';
       if (!!result) placeCode = result;
-      if (!!postalCode) placeCode += ` ${postalCode}`;
+      if (postalCode) placeCode += ` ${postalCode}`;
     });
 
   // If country-only, mapbox returns lowercase ('us'), so need toUppercase here for ledger

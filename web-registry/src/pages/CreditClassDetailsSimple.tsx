@@ -8,13 +8,13 @@ import Title from 'web-components/lib/components/title';
 import { Label } from 'web-components/lib/components/label';
 import ReadMore from 'web-components/lib/components/read-more';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
+import { truncate } from 'web-components/lib/utils/truncate';
 
 import { Link } from '../components/atoms';
 import { EcocreditsSection, LineItemLabelAbove } from '../components/molecules';
 import { CreditBatches, MoreProjectsSection } from '../components/organisms';
 import { toTitleCase } from '../lib/titleCase';
 import { getAccountUrl } from '../lib/block-explorer';
-import { truncate } from '../lib/wallet';
 import { ClassInfo, ApprovedMethodologyList } from '../types/ledger/ecocredit';
 
 interface CreditDetailsProps {

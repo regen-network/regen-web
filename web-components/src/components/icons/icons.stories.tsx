@@ -58,6 +58,7 @@ import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
 import { HorizontalDotsIcon } from 'web-components/lib/components/icons/HorizontalDotsIcon';
+import { Spinner } from 'web-components/lib/components/icons/Spinner';
 
 export default {
   title: 'Icons',
@@ -167,6 +168,8 @@ export const shieldIcon = (): JSX.Element => <ShieldIcon />;
 export const smallArrowIcon = (): JSX.Element => <SmallArrowIcon />;
 
 export const soilSampleIcon = (): JSX.Element => <SoilSampleIcon />;
+
+export const spinner = (): JSX.Element => <Spinner />;
 
 export const telegramIcon = (): JSX.Element => <TelegramIcon />;
 

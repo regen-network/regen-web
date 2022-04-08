@@ -7,22 +7,20 @@ import {
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatNumber } from 'web-components/lib/utils/format';
 
-import { useBasketTokens } from '../../hooks';
+import { BasketTokens } from '../../hooks/useBasketTokens';
 import { NoCredits } from '../molecules';
 import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
 
 type BasketTableProps = {
-  address?: string;
+  basketTokens: BasketTokens[];
   renderActionButtons?: RenderActionButtonsFunc;
 };
 
 export const BasketsTable: React.FC<BasketTableProps> = ({
-  address,
+  basketTokens,
   renderActionButtons,
 }) => {
-  const baskets = useBasketTokens(address);
-
-  if (!baskets?.length) {
+  if (!basketTokens?.length) {
     return <NoCredits title="No basket tokens to display" />;
   }
 
@@ -44,7 +42,7 @@ export const BasketsTable: React.FC<BasketTableProps> = ({
         </Box>,
         'Amount available',
       ]}
-      rows={baskets.map((row, i) => {
+      rows={basketTokens.map((row, i) => {
         return [
           <Grid container wrap="nowrap">
             <Grid item>

@@ -57,12 +57,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: 0,
     },
   },
-  field: {
-    marginBottom: theme.spacing(8),
-    '&:last-child': {
-      marginBottom: 0,
-    },
-  },
   matchFormPadding: {
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing(0, 10),
@@ -154,19 +148,16 @@ function IndividualModal({
               <Form>
                 <OnBoardingCard className={styles.card}>
                   <Field
-                    className={styles.field}
                     component={ControlledTextField}
                     label="Full name"
                     name="['http://schema.org/name']"
                   />
                   <Field
-                    className={styles.field}
                     component={ControlledTextField}
                     label="Email address"
                     name="['http://schema.org/email']"
                   />
                   <Field
-                    className={styles.field}
                     component={PhoneField}
                     label="Phone number"
                     name="['http://schema.org/telephone']"

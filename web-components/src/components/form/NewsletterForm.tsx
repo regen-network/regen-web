@@ -173,6 +173,7 @@ export default function NewsletterForm({
                   className={clsx(textFieldClassName, classes.textField)}
                   type="email"
                   name="email"
+                  defaultStyle={false}
                 />
               </Grid>
               <Grid item xs={gridXs.button}>

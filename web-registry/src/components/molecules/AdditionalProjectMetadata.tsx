@@ -53,7 +53,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
               label="project activity"
               data={
                 <LinkWithArrow
-                  link={
+                  href={
                     metadata?.['http://regen.network/projectActivity']?.[
                       'http://schema.org/url'
                     ]?.['@value']
@@ -73,7 +73,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
               data={
                 <LinkWithArrow
                   label={projectId.toString()}
-                  link={
+                  href={
                     metadata?.['http://regen.network/vcsProjectPage']?.[
                       '@value'
                     ]
@@ -99,7 +99,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
               label="additional certification"
               data={
                 <LinkWithArrow
-                  link={
+                  href={
                     additionalCertification?.['http://schema.org/url']?.[
                       '@value'
                     ]

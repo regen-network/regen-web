@@ -16,7 +16,7 @@ const useStylesLink = makeStyles(theme => ({
   },
 }));
 
-interface LinkProps {
+export interface LinkWithArrowProps {
   sx?: SxProps<Theme>;
   link: string;
   label: string | JSX.Element;
@@ -24,7 +24,7 @@ interface LinkProps {
   target?: '_blank' | '_self';
 }
 
-const LinkWithArrow: React.FC<LinkProps> = ({
+const LinkWithArrow: React.FC<LinkWithArrowProps> = ({
   sx,
   link,
   label,

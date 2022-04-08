@@ -2,8 +2,9 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Modal from '@mui/material/Modal';
 import clsx from 'clsx';
-import CloseIcon from '../icons/CloseIcon';
 import { RemoveScroll } from 'react-remove-scroll';
+
+import CloseIcon from '../icons/CloseIcon';
 
 export interface RegenModalProps {
   open: boolean;

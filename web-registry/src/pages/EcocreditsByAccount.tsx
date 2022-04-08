@@ -2,16 +2,26 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography } from '@mui/material';
 
-import { PortfolioTemplate } from '../components/templates';
-import { LinkWithArrow } from '../components/atoms';
-import { truncate } from '../lib/wallet';
-import { getAccountUrl } from '../lib/block-explorer';
+import { truncate } from 'web-components/lib/utils/truncate';
 
-export const EcocreditsByAccount: React.FC = () => {
+import {
+  PortfolioTemplate,
+  WithBasketsProps,
+  withBaskets,
+} from '../components/templates';
+import { LinkWithArrow } from '../components/atoms';
+import { getAccountUrl } from '../lib/block-explorer';
+import { useEcocredits, useBasketTokens } from '../hooks';
+
+const WrappedEcocreditsByAccount: React.FC<WithBasketsProps> = ({
+  baskets,
+}) => {
   const { accountAddress } = useParams<{ accountAddress: string }>();
+  const { credits } = useEcocredits(accountAddress);
+  const { basketTokens } = useBasketTokens(accountAddress, baskets);
 
   return (
-    <PortfolioTemplate accountAddress={accountAddress}>
+    <PortfolioTemplate credits={credits} basketTokens={basketTokens}>
       <Box sx={{ mt: { xs: 1.25, sm: 3 } }}>
         <Typography
           sx={{
@@ -37,7 +47,7 @@ export const EcocreditsByAccount: React.FC = () => {
           }}
         >
           <LinkWithArrow
-            link={getAccountUrl(accountAddress || '')}
+            href={getAccountUrl(accountAddress || '')}
             label={truncate(accountAddress || '')}
           />
         </Typography>
@@ -45,3 +55,5 @@ export const EcocreditsByAccount: React.FC = () => {
     </PortfolioTemplate>
   );
 };
+
+export const EcocreditsByAccount = withBaskets(WrappedEcocreditsByAccount);

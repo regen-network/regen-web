@@ -11,9 +11,9 @@ import Description from 'web-components/lib/components/description';
 import { Label } from 'web-components/lib/components/label';
 import { parseText } from 'web-components/lib/utils/textParser';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-import { getAccountUrl } from '../../lib/block-explorer';
-import { truncate } from '../../lib/wallet';
+import { truncate } from 'web-components/lib/utils/truncate';
 
+import { getAccountUrl } from '../../lib/block-explorer';
 import { LinkWithArrow } from '../atoms/LinkWithArrow';
 import { OptimizedImage } from '../atoms/OptimizedImage';
 import topoImg from '../../assets/background-contour-2.svg';
@@ -227,7 +227,7 @@ const Item = ({ label, data, link }: ItemProps): JSX.Element => {
   return (
     <GridItem label={label}>
       <Description className={styles.data}>
-        {link ? <LinkWithArrow link={link} label={data} /> : parseText(data)}
+        {link ? <LinkWithArrow href={link} label={data} /> : parseText(data)}
       </Description>
     </GridItem>
   );
@@ -250,7 +250,7 @@ const ItemWithLinkList = ({
     <GridItem label={label}>
       {data.map(item => (
         <Description key={`basket-${item.id}`} className={styles.data}>
-          <LinkWithArrow link={link + item.id} label={item.name} />
+          <LinkWithArrow href={link + item.id} label={item.name} />
         </Description>
       ))}
     </GridItem>

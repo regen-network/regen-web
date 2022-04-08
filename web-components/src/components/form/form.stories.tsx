@@ -4,6 +4,7 @@ import UserProfileForm from 'web-components/lib/components/form/UserProfileForm'
 import LoginForm from 'web-components/lib/components/form/LoginForm';
 import { CreditSendForm } from 'web-components/lib/components/form/CreditSendForm';
 import { CreditRetireForm } from 'web-components/lib/components/form/CreditRetireForm';
+import { BasketPutForm } from 'web-components/lib/components/form/BasketPutForm';
 
 export default {
   title: 'Forms',
@@ -68,5 +69,15 @@ export const creditRetireForm = (): JSX.Element => (
     availableTradableAmount={1000}
     batchDenom={'C01-20190101-20201010-02'}
     onClose={() => null}
+  />
+);
+
+export const basketPutForm = (): JSX.Element => (
+  <BasketPutForm
+    basketOptions={[{ label: 'NCT', value: 'eco.uC.NCT' }]}
+    availableTradableAmount={1000}
+    batchDenom={'C01-20190101-20201010-02'}
+    onClose={() => null}
+    onSubmit={() => alert('submit')}
   />
 );

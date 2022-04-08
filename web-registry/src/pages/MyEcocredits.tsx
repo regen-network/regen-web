@@ -83,7 +83,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   >([]);
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
-  const [selectedBasketDenom, setSelectedBasketDenom] = useState('');
+  const [basketTakeDenom, setBasketTakeDenom] = useState('');
   const [isTxSuccessfulModalTitle, setIsTxSuccessfulModalTitle] = useState<
     string | undefined
   >(undefined);
@@ -101,17 +101,16 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   }, [credits, basketsWithClasses]);
 
   const openTakeModal = (rowIndex: number): void => {
-    if (!accountAddress) return;
     const selectedBasket = basketsWithClasses?.[rowIndex]?.basket;
     if (selectedBasket?.basketDenom) {
-      setSelectedBasketDenom(selectedBasket.basketDenom);
+      setBasketTakeDenom(selectedBasket.basketDenom);
     }
   };
 
-  const handleTakeCredits = async (values: MsgTakeValues): Promise<void> => {
+  const basketTakeSubmit = async (values: MsgTakeValues): Promise<void> => {
     const msgClient = api?.msgClient;
     if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
-    setSelectedBasketDenom(''); // close Take modal
+    setBasketTakeDenom(''); // close Take modal
 
     const amount = values?.amount;
     const basket = baskets?.baskets.find(
@@ -273,14 +272,14 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           onSubmit={basketPutSubmit}
         />
       )}
-      {baskets && !!selectedBasketDenom && !!accountAddress && (
+      {baskets && !!basketTakeDenom && !!accountAddress && (
         <BasketTakeModal
-          open={!!selectedBasketDenom}
+          open={!!basketTakeDenom}
           accountAddress={accountAddress}
-          basketDenom={selectedBasketDenom}
+          basketDenom={basketTakeDenom}
           baskets={baskets}
-          onClose={() => setSelectedBasketDenom('')}
-          onSubmit={handleTakeCredits}
+          onClose={() => setBasketTakeDenom('')}
+          onSubmit={basketTakeSubmit}
         />
       )}
       <ProcessingModal

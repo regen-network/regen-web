@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
 
 // hooks
 import useQueryBasket from './useQueryBasket';
@@ -11,6 +13,13 @@ import { useProjectByBatchDenomLazyQuery } from '../generated/graphql';
 import { BasketOverviewProps, CreditBatch } from '../components/organisms';
 // import { getMetadata } from '../lib/metadata-graph';
 import { QueryClassInfoResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+
+dayjs.extend(duration);
+
+function formatDuration(seconds: number): string {
+  const _duration = dayjs.duration(seconds, 'seconds');
+  return _duration.humanize();
+}
 
 type BasketDetails = {
   overview: BasketOverviewProps;
@@ -35,9 +44,6 @@ const overviewInitial = {
   totalAmount: 0,
   curator: '-',
   allowedCreditClasses: [{ id: '-', name: '-' }],
-  minStartDate: '-',
-  // startDateWindow?: Long;
-  // startDateWindow?: string;
 };
 
 const useBasketDetails = (basketDenom?: string): BasketDetails => {
@@ -79,8 +85,6 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
         const _basketClasses = await Promise.all(
           basketClassesInfo.map(async basketClass => {
             // const metadata = await getMetadata(basketClass.info!.metadata);
-            // eslint-disable-next-line no-console
-            // console.log('***** metadata', metadata);
             return {
               id: basketClass.info!.classId,
               name: basketClass.info!.classId,
@@ -170,16 +174,28 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
       0,
     );
 
-    setOverview({
+    const _overview: BasketOverviewProps = {
       name: basket?.basket?.name || '-',
       displayDenom: basketMetadata?.metadata?.display || '-',
       description: basketMetadata?.metadata?.description || '-',
       totalAmount: totalAmount || 0,
-      curator: 'Regen Network Development, Inc.' || '-', // TODO
-      allowedCreditClasses: basketClasses, // || [{ id: '-', name: '-' }],
-      minStartDate: '-',
-      // startDateWindow: '-',
-    });
+      curator: basketMetadata ? 'Regen Network Development, Inc.' : '-', // TODO: hardcoded curator
+      allowedCreditClasses: basketClasses,
+    };
+
+    const minStartDate = basket.basket?.dateCriteria?.minStartDate;
+    if (minStartDate) {
+      _overview.minStartDate = minStartDate.toISOString();
+    }
+
+    const startDateWindow = basket.basket?.dateCriteria?.startDateWindow;
+    if (startDateWindow) {
+      _overview.startDateWindow = formatDuration(
+        startDateWindow.seconds.toNumber(),
+      );
+    }
+
+    setOverview(_overview);
   }, [basket, basketMetadata, basketBalances, basketClasses]);
 
   return { overview, creditBatches };

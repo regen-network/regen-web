@@ -11,9 +11,8 @@ import Description from 'web-components/lib/components/description';
 import { Label } from 'web-components/lib/components/label';
 import { parseText } from 'web-components/lib/utils/textParser';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-import { getAccountUrl } from '../../lib/block-explorer';
-import { truncate } from '../../lib/wallet';
 
+import { getAccountUrl } from '../../lib/block-explorer';
 import { LinkWithArrow } from '../atoms/LinkWithArrow';
 import { OptimizedImage } from '../atoms/OptimizedImage';
 import topoImg from '../../assets/background-contour-2.svg';
@@ -32,8 +31,7 @@ export type BasketOverviewProps = {
   curator: string;
   allowedCreditClasses: CreditClass[];
   minStartDate?: string;
-  // startDateWindow?: Long;
-  // startDateWindow?: string;
+  startDateWindow?: string;
 };
 
 export const BasketOverview: React.FC<BasketOverviewProps> = ({
@@ -44,9 +42,18 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
   curator,
   allowedCreditClasses,
   minStartDate,
-  // startDateWindow,
+  startDateWindow,
 }) => {
   const styles = useStyles();
+
+  const getDateCriteria = (
+    minStartDate?: string,
+    startDateWindow?: string,
+  ): string => {
+    if (minStartDate) return formatDate(minStartDate);
+    if (startDateWindow) return `${startDateWindow} rolling acceptance window`;
+    return '-';
+  };
 
   return (
     <SectionContainer>
@@ -78,7 +85,7 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                 <Item label="total amount" data={formatNumber(totalAmount)} />
                 <Item
                   label="curator"
-                  data={truncate(curator)}
+                  data={curator}
                   link={getAccountUrl(curator as string)}
                 />
                 <ItemWithLinkList
@@ -86,19 +93,10 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                   data={allowedCreditClasses}
                   link={'/credit-classes/'}
                 />
-                {minStartDate && (
-                  <Item
-                    label="min start date"
-                    data={formatDate(minStartDate)}
-                  />
-                )}
-                {/* {startDateWindow && (
-                  <Item
-                    label="start date window"
-                    data={startDateWindow.toString()}
-                    // data={formatDate(startDateWindow)}
-                  />
-                )} */}
+                <Item
+                  label="min start date"
+                  data={getDateCriteria(minStartDate, startDateWindow)}
+                />
               </Grid>
             </OnBoardingCard>
           </TextContainer>

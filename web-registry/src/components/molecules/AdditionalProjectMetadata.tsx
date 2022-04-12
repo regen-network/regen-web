@@ -77,7 +77,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
               data={
                 <ArrowLink
                   label={projectId.toString()}
-                  link={
+                  href={
                     metadata?.['http://regen.network/vcsProjectPage']?.[
                       '@value'
                     ]

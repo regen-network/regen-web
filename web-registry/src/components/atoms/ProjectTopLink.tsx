@@ -46,7 +46,7 @@ const ProjectTopLink: React.FC<Props> = ({
         {url ? (
           <LinkWithArrow
             sx={{ position: 'relative' }}
-            link={url}
+            href={url}
             label={text}
             target={target}
           />

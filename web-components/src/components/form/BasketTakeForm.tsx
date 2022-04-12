@@ -14,12 +14,7 @@ import {
   validateCreditRetire,
 } from './CreditRetireForm';
 import Submit from './Submit';
-import {
-  requiredMessage,
-  invalidAmount,
-  insufficientCredits,
-  validateAmount,
-} from '../inputs/validation';
+import { validateAmount } from '../inputs/validation';
 import { getISOString } from '../../utils/locationStandard';
 
 /**
@@ -78,6 +73,7 @@ interface FormProps {
   mapboxToken: string;
   accountAddress: string;
   basket: Basket;
+  basketDenom: string;
   availableTradableAmount: number;
   onClose: () => void;
   onSubmit: (values: MsgTakeValues) => void;
@@ -87,6 +83,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
   mapboxToken,
   accountAddress,
   basket,
+  basketDenom,
   availableTradableAmount,
   onClose,
   onSubmit,
@@ -107,7 +104,11 @@ const BasketTakeForm: React.FC<FormProps> = ({
   ): FormikErrors<CreditTakeFormValues> => {
     let errors: FormikErrors<CreditTakeFormValues> = {};
 
-    const errAmount = validateAmount(availableTradableAmount, values.amount);
+    const errAmount = validateAmount(
+      availableTradableAmount,
+      values.amount,
+      `You don't have enough basket tokens`,
+    );
     if (errAmount) errors.amount = errAmount;
 
     // Retire form validation (optional subform)
@@ -178,7 +179,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
               name="amount"
               label="Amount"
               availableAmount={availableTradableAmount}
-              batchDenom={basket.basketDenom}
+              batchDenom={basketDenom}
             />
             <Field
               component={CheckboxLabel}

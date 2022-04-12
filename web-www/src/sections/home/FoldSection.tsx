@@ -57,20 +57,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     left: '54%',
     transform: 'translate(-50%, -50%)',
   },
-  title: {
-    fontFamily: 'Muli',
-    lineHeight: '130%',
-    marginBottom: `${theme.spacing(3)} !important`,
-    [theme.breakpoints.down('sm')]: {
-      margin: '0 auto !important',
-      marginTop: `${theme.spacing(13.5)} !important`,
-      marginBottom: `${theme.spacing(3)} !important`,
-      width: '80% !important',
-    },
-    [theme.breakpoints.up('sm')]: {
-      marginTop: `${theme.spacing(21.5)} !important`,
-    },
-  },
   backgroundGradient: {
     height: '100%',
     zIndex: -1,
@@ -114,7 +100,12 @@ const HomeFoldSection: React.FC<{ className?: string }> = ({ className }) => {
       backgroundColor={`#040e18`}
     >
       <div className={styles.backgroundGradient}></div>
-      <Title align="center" color="primary" variant="h1" className={styles.title}>
+      <Title
+        align="center"
+        color="primary"
+        variant="h1"
+        sx={{ mx: 'auto', maxWidth: '80%', mt: { xs: 13.5, sm: 21.5 }, mb: 3 }}
+      >
         {content?.title}
       </Title>
       <div className={styles.tag}>

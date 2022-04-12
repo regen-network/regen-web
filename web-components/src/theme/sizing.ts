@@ -8,6 +8,8 @@ export interface FontSizes {
   sm: string;
 }
 
+export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
 export function getSize(size?: string): Sizes {
   let spacing: Sizes;
   switch (size) {

@@ -24,7 +24,14 @@ const defaultTheme = createTheme({
   },
 });
 
+const { pxToRem } = defaultTheme.typography;
+
 const headerFontFamily = ['"Muli"', '-apple-system', 'sans-serif'].join(',');
+
+const headerDefaults = {
+  fontWeight: 900,
+  fontFamily: headerFontFamily,
+};
 
 const regenTheme = createTheme({
   palette: {
@@ -65,61 +72,92 @@ const regenTheme = createTheme({
   typography: {
     fontFamily: ['"Lato"', '-apple-system', 'sans-serif'].join(','),
     h1: {
-      fontSize: '2rem',
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '3rem',
-      },
-      fontFamily: headerFontFamily,
+      // fontSize: '2rem',
+      // [defaultTheme.breakpoints.up('sm')]: {
+      // fontSize: '3rem',
+      // },
+      ...headerDefaults,
+      fontSize: pxToRem(48),
+      lineHeight: '130%',
     },
     h2: {
-      fontSize: '1.5rem',
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '2.375rem',
-      },
+      // fontSize: '1.5rem',
+      // [defaultTheme.breakpoints.up('sm')]: {
+      // fontSize: '2.375rem',
+      // },
+      ...headerDefaults,
+      fontSize: pxToRem(38),
+      lineHeight: '130%',
+      // fontFamily: headerFontFamily,
     },
     h3: {
-      fontSize: '1.5rem', // possible override: 1.3125rem
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '2rem',
-      },
+      ...headerDefaults,
+      fontSize: pxToRem(32),
+      lineHeight: '140%',
+      // fontFamily: headerFontFamily,
+      // fontSize: '1.5rem', // possible override: 1.3125rem
+      // [defaultTheme.breakpoints.up('sm')]: {
+      //   fontSize: '2rem',
+      // },
     },
     h4: {
-      fontSize: '1.3125rem', // possible override: 1.125rem
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '1.5rem',
-      },
+      ...headerDefaults,
+      fontSize: pxToRem(24),
+      lineHeight: '145%',
+      // fontFamily: headerFontFamily,
+      // fontSize: '1.3125rem', // possible override: 1.125rem
+      // [defaultTheme.breakpoints.up('sm')]: {
+      //   fontSize: '1.5rem',
+      // },
     },
     h5: {
-      fontSize: '1.125rem',
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '1.3125rem',
-      },
+      ...headerDefaults,
+      fontSize: pxToRem(21),
+      lineHeight: '150%',
+      // fontFamily: headerFontFamily,
+      // fontSize: '1.125rem',
+      // [defaultTheme.breakpoints.up('sm')]: {
+      //   fontSize: '1.3125rem',
+      // },
     },
     h6: {
-      fontSize: '1.125rem',
+      ...headerDefaults,
+      fontSize: pxToRem(18),
+      lineHeight: '150%',
+      // fontFamily: headerFontFamily,
+      // fontSize: '1.125rem',
+    },
+    textXLarge: {
+      fontSize: pxToRem(22),
+    },
+    textLarge: {
+      fontSize: pxToRem(18),
+    },
+    textMedium: {
+      fontSize: pxToRem(16),
+    },
+    textSmall: {
+      fontSize: pxToRem(14),
+    },
+    textXSmall: {
+      fontSize: pxToRem(12),
     },
     subtitle1: {
+      fontSize: '2rem',
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '2.375rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '2rem',
       },
     },
     subtitle2: {
+      fontSize: '0.875rem',
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '1.125rem',
       },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '0.875rem',
-      },
     },
     body1: {
+      fontSize: '0.875rem',
       [defaultTheme.breakpoints.up('sm')]: {
         fontSize: '1rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '0.875rem',
       },
     },
     body2: {
@@ -230,6 +268,36 @@ const regenTheme = createTheme({
     },
   },
 });
+
+declare module '@mui/material/styles' {
+  interface TypographyVariants {
+    textXLarge: React.CSSProperties;
+    textLarge: React.CSSProperties;
+    textMedium: React.CSSProperties;
+    textSmall: React.CSSProperties;
+    textXSmall: React.CSSProperties;
+  }
+
+  // allow configuration using `createTheme`
+  interface TypographyVariantsOptions {
+    textXLarge?: React.CSSProperties;
+    textLarge?: React.CSSProperties;
+    textMedium?: React.CSSProperties;
+    textSmall?: React.CSSProperties;
+    textXSmall?: React.CSSProperties;
+  }
+}
+
+// Update the Typography's variant prop options
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    textXLarge: true;
+    textLarge: true;
+    textMedium: true;
+    textSmall: true;
+    textXSmall: true;
+  }
+}
 
 type Theme = typeof regenTheme;
 

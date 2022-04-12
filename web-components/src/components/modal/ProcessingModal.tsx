@@ -4,22 +4,25 @@ import cx from 'clsx';
 
 import Description from '../description';
 import Title from '../title';
+import { Spinner } from '../icons/Spinner';
 import Modal, { RegenModalProps } from '../modal';
-import CircularProgress from '@mui/material/CircularProgress';
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    height: 'auto',
+    [theme.breakpoints.up('sm')]: {
+      height: 'auto',
+    },
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(4),
     },
   },
   spinner: {
     marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
+    height: '48px',
+    width: '48px',
   },
   title: {
     [theme.breakpoints.up('sm')]: {
@@ -48,26 +51,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-interface Props extends RegenModalProps {
-  txHash?: string;
-}
+interface Props extends RegenModalProps {}
 
-const ProcessingModal: React.FC<Props> = ({ open, onClose, txHash }) => {
+const ProcessingModal: React.FC<Props> = ({ open, onClose }) => {
   const styles = useStyles();
 
   return (
     <Modal className={styles.root} open={open} onClose={onClose}>
-      {/* <img
-        className={cx(styles.verticalSpacing, styles.spinner)}
-        src={Spinner}
-        height={48}
-        width={48}
-        alt="processing"
-      /> */}
-      <CircularProgress
-        className={cx(styles.verticalSpacing, styles.spinner)}
-        sx={{ color: 'black' }}
-      />
+      <Spinner className={cx(styles.verticalSpacing, styles.spinner)} />
       <Title
         className={cx(styles.title, styles.verticalSpacing)}
         align="center"

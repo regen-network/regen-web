@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   form: {
     paddingTop: theme.spacing(7.5),
-    paddingBottom: theme.spacing(10),
   },
   usd: {
     fontSize: theme.spacing(4),
@@ -55,7 +54,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   textField: {
-    marginTop: theme.spacing(8.25),
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.typography.pxToRem(40),
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.typography.pxToRem(33),
+    },
   },
 }));
 
@@ -148,29 +152,23 @@ export default function MoreInfoForm({
           return (
             <div>
               <Form className={classes.form} translate="yes">
-                <div>
-                  <Field
-                    component={TextField}
-                    label="Your full name"
-                    name="name"
-                  />
-                  <Field
-                    component={TextField}
-                    className={classes.textField}
-                    type="email"
-                    label="Your email address"
-                    name="email"
-                  />
-                </div>
-                <div>
-                  <Field
-                    component={TextField}
-                    name="orgName"
-                    className={classes.textField}
-                    label="Organization name"
-                    optional
-                  />
-                </div>
+                <Field
+                  component={TextField}
+                  label="Your full name"
+                  name="name"
+                />
+                <Field
+                  component={TextField}
+                  type="email"
+                  label="Your email address"
+                  name="email"
+                />
+                <Field
+                  component={TextField}
+                  name="orgName"
+                  label="Organization name"
+                  optional
+                />
                 <Grid
                   container
                   alignItems="center"
@@ -210,66 +208,61 @@ export default function MoreInfoForm({
                     <Typography className={classes.usd}>USD</Typography>
                   </Grid>
                 </Grid>
-                <div>
-                  <Field
-                    component={CheckboxGroup}
-                    name="projectTypes"
-                    className={classes.textField}
-                    label="Which types of carbon credits projects are you interested in?"
-                    options={[
-                      {
-                        label: 'All nature based carbon credits',
-                        value: 'All nature based carbon credits',
-                      },
-                      {
-                        label: 'Forestry-based credits',
-                        value: 'Forestry-based credits',
-                      },
-                      {
-                        label: 'Grasslands-based credits',
-                        value: 'Grasslands-based credits',
-                      },
-                      {
-                        label: 'Cropland-based credits',
-                        value: 'Cropland-based credits',
-                      },
-                    ]}
-                  />
-                </div>
-                <div>
-                  <Field
-                    className={classes.textField}
-                    options={[
-                      {
-                        label: '',
-                        value: '',
-                      },
-                      {
-                        label: 'Consumer/Individual/myself',
-                        value: 'Consumer/Individual/myself',
-                      },
-                      {
-                        label: 'Small or Medium Sized Business',
-                        value: 'Small or Medium Sized Business',
-                      },
-                      {
-                        label: 'Nonprofit',
-                        value: 'Nonprofit',
-                      },
-                      {
-                        label: 'Large Corporation',
-                        value: 'Large Corporation',
-                      },
-                      {
-                        label: 'Crypto Organization',
-                        value: 'Crypto Organization',
-                      },
-                    ]}
-                    component={SelectTextField}
-                    label="I am interested in buying carbon credits on behalf of:"
-                    name="onBehalfOf"
-                  />
-                </div>
+                <Field
+                  component={CheckboxGroup}
+                  name="projectTypes"
+                  className={classes.textField}
+                  label="Which types of carbon credits projects are you interested in?"
+                  options={[
+                    {
+                      label: 'All nature based carbon credits',
+                      value: 'All nature based carbon credits',
+                    },
+                    {
+                      label: 'Forestry-based credits',
+                      value: 'Forestry-based credits',
+                    },
+                    {
+                      label: 'Grasslands-based credits',
+                      value: 'Grasslands-based credits',
+                    },
+                    {
+                      label: 'Cropland-based credits',
+                      value: 'Cropland-based credits',
+                    },
+                  ]}
+                />
+                <Field
+                  options={[
+                    {
+                      label: '',
+                      value: '',
+                    },
+                    {
+                      label: 'Consumer/Individual/myself',
+                      value: 'Consumer/Individual/myself',
+                    },
+                    {
+                      label: 'Small or Medium Sized Business',
+                      value: 'Small or Medium Sized Business',
+                    },
+                    {
+                      label: 'Nonprofit',
+                      value: 'Nonprofit',
+                    },
+                    {
+                      label: 'Large Corporation',
+                      value: 'Large Corporation',
+                    },
+                    {
+                      label: 'Crypto Organization',
+                      value: 'Crypto Organization',
+                    },
+                  ]}
+                  component={SelectTextField}
+                  label="I am interested in buying carbon credits on behalf of:"
+                  name="onBehalfOf"
+                />
               </Form>
               <Submit
                 isSubmitting={isSubmitting}

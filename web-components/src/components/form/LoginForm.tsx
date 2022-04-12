@@ -44,14 +44,6 @@ export interface Values {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  textField: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(8.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(8.5),
-    },
-  },
   description: {
     marginBottom: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
@@ -206,10 +198,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
                   type="email"
                   label="Email address"
                   name="email"
+                  defaultStyle={false}
                 />
                 <Field
                   component={PasswordField}
-                  className={classes.textField}
                   name="password"
                   loginFromSignup={loginFromSignup}
                 />

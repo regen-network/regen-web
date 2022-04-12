@@ -147,7 +147,7 @@ const ActionsTable: React.FC<{
                       }}
                     >
                       <BorderLeft />
-                      {renderActionButtons(i)}
+                      {renderActionButtons(offset + i)}
                     </StyledTableCell>
                   )}
                 </StyledTableRow>

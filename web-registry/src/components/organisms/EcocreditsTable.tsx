@@ -6,12 +6,12 @@ import {
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
+import { truncate } from 'web-components/lib/utils/truncate';
 
 import { Link } from '../atoms';
 import { NoCredits } from '../molecules';
-import { truncate } from '../../lib/wallet';
-import { useEcocredits } from '../../hooks';
 import { getAccountUrl } from '../../lib/block-explorer';
+import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -23,16 +23,14 @@ const BreakText = styled('div')({
 });
 
 type EcocreditsTableProps = {
-  address?: string;
+  credits?: BatchInfoWithBalance[];
   renderActionButtons?: RenderActionButtonsFunc;
 };
 
 export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
-  address,
+  credits,
   renderActionButtons,
 }) => {
-  const credits = useEcocredits(address);
-
   if (!credits?.length) {
     return <NoCredits title="No ecocredits to display" />;
   }

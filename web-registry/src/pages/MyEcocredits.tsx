@@ -22,6 +22,7 @@ import {
   useBasketsWithClasses,
   useBasketTokens,
 } from '../hooks';
+import { BasketTokens } from '../hooks/useBasketTokens';
 import useMsgClient from '../hooks/useMsgClient';
 import {
   PortfolioTemplate,
@@ -66,6 +67,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     fetchCredits();
   };
 
+  const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   // TODO handle error when signing and broadcasting tx
   const { signAndBroadcast, setDeliverTxResponse, wallet, deliverTxResponse } =
     useMsgClient(handleTxQueued, handleTxDelivered);
@@ -83,7 +85,9 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   >([]);
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
-  const [basketTakeDenom, setBasketTakeDenom] = useState('');
+  const [basketTakeTokens, setBasketTakeTokens] = useState<
+    BasketTokens | undefined
+  >(undefined);
   const [isTxSuccessfulModalTitle, setIsTxSuccessfulModalTitle] = useState<
     string | undefined
   >(undefined);
@@ -101,16 +105,20 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   }, [credits, basketsWithClasses]);
 
   const openTakeModal = (rowIndex: number): void => {
-    const selectedBasket = basketsWithClasses?.[rowIndex]?.basket;
-    if (selectedBasket?.basketDenom) {
-      setBasketTakeDenom(selectedBasket.basketDenom);
+    const selectedBasketDenom =
+      basketsWithClasses?.[rowIndex]?.basket?.basketDenom;
+    if (selectedBasketDenom) {
+      const selectedBasketTokens = basketTokens.find(
+        bt => bt.basket.basketDenom === selectedBasketDenom,
+      );
+      setBasketTakeTokens(selectedBasketTokens);
     }
   };
 
   const basketTakeSubmit = async (values: MsgTakeValues): Promise<void> => {
     const msgClient = api?.msgClient;
     if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
-    setBasketTakeDenom(''); // close Take modal
+    setBasketTakeTokens(undefined); // close Take modal
 
     const amount = values?.amount;
     const basket = baskets?.baskets.find(
@@ -272,13 +280,17 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           onSubmit={basketPutSubmit}
         />
       )}
-      {baskets && !!basketTakeDenom && !!accountAddress && (
+      {!!basketTakeTokens?.basket && !!accountAddress && (
         <BasketTakeModal
-          open={!!basketTakeDenom}
+          open={true}
           accountAddress={accountAddress}
-          basketDenom={basketTakeDenom}
-          baskets={baskets}
-          onClose={() => setBasketTakeDenom('')}
+          basket={basketTakeTokens?.basket}
+          balance={
+            parseInt(basketTakeTokens?.balance?.balance?.amount || '0') /
+            Math.pow(10, basketTakeTokens?.basket?.exponent)
+          }
+          mapboxToken={mapboxToken}
+          onClose={() => setBasketTakeTokens(undefined)}
           onSubmit={basketTakeSubmit}
         />
       )}

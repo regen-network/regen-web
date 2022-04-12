@@ -1280,8 +1280,9 @@ export type CreditClass = Document & {
   _key?: Maybe<Scalars['String']>;
   nameRaw?: Maybe<Scalars['JSON']>;
   iri?: Maybe<Slug>;
-  /** This will be used in the credit class page url: "/credit-classes/{path}" */
+  /** This will be used in the credit class page url: "/credit-classes/{path}", it can be a generic handle or an on chain credit class id */
   path?: Maybe<Scalars['String']>;
+  image?: Maybe<CustomImage>;
   descriptionRaw?: Maybe<Scalars['JSON']>;
   shortDescriptionRaw?: Maybe<Scalars['JSON']>;
   ecologicalImpact?: Maybe<Array<Maybe<EcologicalImpactRelation>>>;
@@ -1302,6 +1303,7 @@ export type CreditClassFilter = {
   _key?: Maybe<StringFilter>;
   iri?: Maybe<SlugFilter>;
   path?: Maybe<StringFilter>;
+  image?: Maybe<CustomImageFilter>;
   buyer?: Maybe<BuyerFilter>;
   landSteward?: Maybe<LandStewardFilter>;
 };
@@ -1315,6 +1317,7 @@ export type CreditClassSorting = {
   _key?: Maybe<SortOrder>;
   iri?: Maybe<SlugSorting>;
   path?: Maybe<SortOrder>;
+  image?: Maybe<CustomImageSorting>;
   buyer?: Maybe<BuyerSorting>;
   landSteward?: Maybe<LandStewardSorting>;
 };
@@ -2219,6 +2222,7 @@ export type HomePageSorting = {
   bottomBanner?: Maybe<BottomBannerSorting>;
 };
 
+<<<<<<< HEAD
 export type HomePageTopSection = {
   __typename?: 'HomePageTopSection';
   _key?: Maybe<Scalars['String']>;
@@ -2248,6 +2252,8 @@ export type HomePageTopSectionSorting = {
   icon?: Maybe<CustomImageSorting>;
 };
 
+=======
+>>>>>>> 74c5553d (Update CreditClassDetails fetching)
 export type HomePageWeb = Document & {
   __typename?: 'HomePageWeb';
   /** Document ID */
@@ -6096,6 +6102,9 @@ export type AllCreditClassQuery = (
     & { iri?: Maybe<(
       { __typename?: 'Slug' }
       & Pick<Slug, 'current'>
+    )>, image?: Maybe<(
+      { __typename?: 'CustomImage' }
+      & CustomImageFieldsFragment
     )>, ecologicalImpact?: Maybe<Array<Maybe<(
       { __typename?: 'EcologicalImpactRelation' }
       & EcologicalImpactRelationFieldsFragment
@@ -7038,6 +7047,9 @@ export const AllCreditClassDocument = gql`
     nameRaw
     descriptionRaw
     shortDescriptionRaw
+    image {
+      ...customImageFields
+    }
     ecologicalImpact {
       ...ecologicalImpactRelationFields
     }
@@ -7106,9 +7118,9 @@ export const AllCreditClassDocument = gql`
     }
   }
 }
-    ${EcologicalImpactRelationFieldsFragmentDoc}
+    ${CustomImageFieldsFragmentDoc}
+${EcologicalImpactRelationFieldsFragmentDoc}
 ${CardFieldsFragmentDoc}
-${CustomImageFieldsFragmentDoc}
 ${HeroSectionFieldsFragmentDoc}
 ${ResourceFieldsFragmentDoc}
 ${MediaFieldsFragmentDoc}

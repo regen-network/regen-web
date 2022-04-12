@@ -1,11 +1,8 @@
 import React from 'react';
 import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
-import { RegenModalProps } from 'web-components/lib/components/modal';
-import { FormModalTemplate } from 'web-components/lib/components/modal/FormModalTemplate';
-import {
-  BasketTakeForm,
-  MsgTakeValues,
-} from 'web-components/lib/components/form/BasketTakeForm';
+import { RegenModalProps } from './index';
+import { FormModalTemplate } from './FormModalTemplate';
+import { BasketTakeForm, MsgTakeValues } from '../form/BasketTakeForm';
 
 export interface TakeModalProps extends RegenModalProps {
   basket: Basket;
@@ -26,6 +23,7 @@ const BasketTakeModal: React.FC<TakeModalProps> = ({
   onClose,
   onSubmit,
 }) => {
+  console.log(basket);
   return (
     <FormModalTemplate title="Take from basket" open={open} onClose={onClose}>
       <BasketTakeForm

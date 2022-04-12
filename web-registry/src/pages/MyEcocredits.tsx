@@ -8,6 +8,7 @@ import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
+import { BasketTakeModal } from 'web-components/lib/components/modal/BasketTakeModal';
 import {
   TxSuccessfulModal,
   Item,
@@ -29,7 +30,6 @@ import {
   WithBasketsProps,
   withBaskets,
 } from '../components/templates';
-import { BasketTakeModal } from '../components/organisms';
 import { Link } from '../components/atoms';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
 import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg';

@@ -57,7 +57,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
               label="project activity"
               data={
                 <ArrowLink
-                  link={
+                  href={
                     metadata?.['http://regen.network/projectActivity']?.[
                       'http://schema.org/url'
                     ]?.['@value']
@@ -103,7 +103,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
               label="additional certification"
               data={
                 <ArrowLink
-                  link={
+                  href={
                     additionalCertification?.['http://schema.org/url']?.[
                       '@value'
                     ]

@@ -161,6 +161,9 @@ const BasketTakeForm: React.FC<FormProps> = ({
       if (stateProvince || country || postalCode) {
         setRetirementLocation();
       }
+      if (!country) {
+        setFieldValue('retirementLocation', null)
+      }
     }, [country, stateProvince, postalCode, setFieldValue]);
 
     return <></>;
@@ -196,7 +199,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
             <Collapse in={values.retireOnTake} collapsedSize={0}>
               {values.retireOnTake && (
                 <>
-                  <BottomCreditRetireFields country={values.country} />
+                  <BottomCreditRetireFields />
                   <AutoSetRetirementLocation />
                 </>
               )}

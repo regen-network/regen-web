@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
@@ -104,19 +104,15 @@ export interface RetireFormValues {
 }
 
 interface CreditRetireFieldsProps {
-  country: string;
   batchDenom: string;
   availableTradableAmount: number;
 }
 
-interface BottomCreditRetireFieldsProps {
-  country: string;
-}
-
-export const BottomCreditRetireFields = ({
-  country,
-}: BottomCreditRetireFieldsProps): JSX.Element => {
+export const BottomCreditRetireFields: React.FC = () => {
   const styles = useStyles();
+  const {
+    values: { country, postalCode },
+  } = useFormikContext<RetireFormValues>();
 
   return (
     <>
@@ -141,7 +137,7 @@ export const BottomCreditRetireFields = ({
       </Description>
       <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationStateField country={country} optional />
+          <LocationStateField country={country} optional={!postalCode} />
         </Grid>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
           <LocationCountryField />
@@ -158,7 +154,6 @@ export const BottomCreditRetireFields = ({
 };
 
 export const CreditRetireFields = ({
-  country,
   batchDenom,
   availableTradableAmount,
 }: CreditRetireFieldsProps): JSX.Element => {
@@ -170,7 +165,7 @@ export const CreditRetireFields = ({
         availableAmount={availableTradableAmount}
         batchDenom={batchDenom}
       />
-      <BottomCreditRetireFields country={country} />
+      <BottomCreditRetireFields />
     </>
   );
 };
@@ -182,6 +177,9 @@ export const validateCreditRetire = (
 ): FormikErrors<RetireFormValues> => {
   if (!values.country) {
     errors.country = requiredMessage;
+  }
+  if (values.postalCode && !values.stateProvince) {
+    errors.stateProvince = 'Required with postal code';
   }
   const errAmount = validateAmount(
     availableTradableAmount,
@@ -232,7 +230,6 @@ const CreditRetireForm: React.FC<FormProps> = ({
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
           <CreditRetireFields
-            country={values.country}
             availableTradableAmount={availableTradableAmount}
             batchDenom={batchDenom}
           />

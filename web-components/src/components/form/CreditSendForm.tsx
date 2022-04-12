@@ -216,7 +216,6 @@ const CreditSendForm: React.FC<FormProps> = ({
 
           {values.withRetire && (
             <CreditRetireFields
-              country={values.country}
               availableTradableAmount={availableTradableAmount}
               batchDenom={batchDenom}
             />

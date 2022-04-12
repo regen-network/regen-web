@@ -16,6 +16,7 @@ import {
   // GettingStarted,
   Admin,
   BasicInfo,
+  BatchDetails,
   BasketDetails,
   BuyerCreate,
   BuyersPage,
@@ -108,6 +109,7 @@ const App: React.FC = (): JSX.Element => {
             element={<EcocreditsByAccount />}
           />
           <Route path="baskets/:basketDenom" element={<BasketDetails />} />
+          <Route path="credit-batches/:batchDenom" element={<BatchDetails />} />
           <Route
             path="user-profile"
             element={<ProtectedRoute component={UserProfile} />}

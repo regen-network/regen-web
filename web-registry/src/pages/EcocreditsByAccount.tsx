@@ -47,7 +47,7 @@ const WrappedEcocreditsByAccount: React.FC<WithBasketsProps> = ({
           }}
         >
           <LinkWithArrow
-            link={getAccountUrl(accountAddress || '')}
+            href={getAccountUrl(accountAddress || '')}
             label={truncate(accountAddress || '')}
           />
         </Typography>

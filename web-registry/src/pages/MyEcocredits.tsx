@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
-import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
+import {
+  MsgPut,
+  MsgTake,
+} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
@@ -16,7 +19,6 @@ import {
 import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
 import { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
 import {
   useEcocredits,

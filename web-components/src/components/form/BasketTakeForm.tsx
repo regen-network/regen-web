@@ -138,7 +138,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
       retirementNote: values?.note,
     };
 
-    onSubmit(msgTake);
+    return onSubmit(msgTake);
   };
 
   const AutoSetRetirementLocation = (): JSX.Element => {

@@ -38,7 +38,6 @@ import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-baske
 // import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
 import { useLedger } from '../ledger';
 import { getHashUrl } from '../lib/block-explorer';
-import { sign } from 'crypto';
 
 const useStyles = makeStyles((theme: Theme) => ({
   arrow: {

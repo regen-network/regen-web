@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Box, Grid, styled } from '@mui/material';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
+import jsonld from 'jsonld';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 // import { getFontSize } from 'web-components/lib/theme/sizing';
@@ -148,12 +149,28 @@ function ProjectTopSection({
   };
 }): JSX.Element {
   const styles = useStyles();
+  const [metadata, setMetadata] = useState<any>(null);
 
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
   const project = data?.projectByHandle;
-  const metadata = project?.metadata;
+
+  useEffect(() => {
+    const expand = async (): Promise<void> => {
+      const result = await jsonld.expand(
+        project?.metadata,
+        // project?.metadata?.['@context'],
+      );
+
+      setMetadata(result);
+    };
+
+    expand();
+  }, [project]);
+
+  console.log(metadata);
+
   const registry = project?.partyByRegistryId;
   const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
   const landStewardPhoto =

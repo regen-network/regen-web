@@ -11,7 +11,6 @@ import {
   CreditClassCards,
   CreditBatches,
 } from '../components/organisms';
-import { creditClasses } from '../mocks';
 
 import cowsImg from '../assets/cows-by-barn.png';
 import topographyImg from '../assets/background-contour-1.jpg';
@@ -121,17 +120,18 @@ const Home: React.FC = () => {
         <CreditBatches />
       </CardMedia>
 
-      <Section
-        title="Credit Classes"
-        classes={{ root: styles.section, title: styles.title }}
-      >
-        <CreditClassCards
-          btnText="Learn More"
-          justifyContent={isMobile ? 'center' : 'flex-start'}
-          creditClasses={creditClasses} // mock/db data
-          creditClassesContent={creditClassesContent} // CMS data
-        />
-      </Section>
+      {creditClassesContent && (
+        <Section
+          title="Credit Classes"
+          classes={{ root: styles.section, title: styles.title }}
+        >
+          <CreditClassCards
+            btnText="Learn More"
+            justifyContent={isMobile ? 'center' : 'flex-start'}
+            creditClassesContent={creditClassesContent} // CMS data
+          />
+        </Section>
+      )}
 
       <HeroAction
         isBanner

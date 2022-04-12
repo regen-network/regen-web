@@ -217,9 +217,7 @@ function ProjectTopSection({
                           ]?.['@value']
                     }
                     creditClassId={
-                      creditClassVersion?.metadata?.[
-                        'http://regen.network/creditClassId'
-                      ]
+                      creditClassVersion?.metadata?.['regen:creditClassId']
                     }
                     target="_self"
                   />
@@ -230,7 +228,7 @@ function ProjectTopSection({
                   label="offset generation method"
                   name={
                     creditClassVersion?.metadata?.[
-                      'http://regen.network/offsetGenerationMethod'
+                      'regen:offsetGenerationMethod'
                     ]
                   }
                 />
@@ -239,11 +237,7 @@ function ProjectTopSection({
                 <ProjectTopLink
                   label="methodology"
                   name={methodologyVersion.name}
-                  url={
-                    methodologyVersion.metadata?.['http://schema.org/url']?.[
-                      '@value'
-                    ]
-                  }
+                  url={methodologyVersion.metadata?.['schema:url']?.['@value']}
                 />
               )}
               {registry && (

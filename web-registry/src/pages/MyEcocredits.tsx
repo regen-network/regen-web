@@ -38,6 +38,7 @@ import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-baske
 // import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
 import { useLedger } from '../ledger';
 import { getHashUrl } from '../lib/block-explorer';
+import { sign } from 'crypto';
 
 const useStyles = makeStyles((theme: Theme) => ({
   arrow: {
@@ -118,7 +119,6 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const basketTakeSubmit = async (values: MsgTakeValues): Promise<void> => {
     const msgClient = api?.msgClient;
     if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
-    setBasketTakeTokens(undefined); // close Take modal
 
     const amount = values?.amount;
     const basket = baskets?.baskets.find(
@@ -133,7 +133,13 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       retireOnTake: values.retireOnTake || false,
     });
 
-    await signAndBroadcast([msg], undefined, values?.retirementNote);
+    const message = {
+      msgs: [msg],
+      fee: undefined,
+      memo: values?.retirementNote,
+    };
+
+    await signAndBroadcast(message, () => setBasketTakeTokens(undefined));
 
     if (basket && amount) {
       setCardItems([
@@ -153,7 +159,6 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const basketPutSubmit = async (
     values: BasketPutFormValues,
   ): Promise<void> => {
-    setBasketPutOpen(-1);
     const amount = values.amount?.toString();
     const msg = MsgPut.fromPartial({
       basketDenom: values.basketDenom,
@@ -165,7 +170,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
         },
       ],
     });
-    await signAndBroadcast([msg]);
+    await signAndBroadcast({ msgs: [msg] }, () => setBasketPutOpen(-1));
     const basket = baskets?.baskets.find(
       b => b.basketDenom === values.basketDenom,
     );

@@ -1,17 +1,6 @@
 import mock from './mock.json';
 
-export interface CreditClass {
-  id: string;
-  version: string;
-  creditDesigner: string;
-  ecoType: string;
-  ecoServiceType: string;
-  approvedMethodology: string;
-  methodologyUrl: string;
-  methodologyId: string;
-  imgSrc: string;
-}
-
+// TODO Remove as part of https://github.com/regen-network/regen-registry/issues/726
 export interface Methodology {
   id: string;
   imageSrc: string;
@@ -26,5 +15,4 @@ export interface Methodology {
   creditClassUrl: string;
 }
 
-export const creditClasses = mock.creditClasses;
 export const methodologies = mock.methodologies;

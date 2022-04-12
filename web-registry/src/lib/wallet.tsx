@@ -1,11 +1,11 @@
 import React, { useState, createContext } from 'react';
-import {
-  assertIsBroadcastTxSuccess,
-  SigningStargateClient,
-  BroadcastTxResponse,
-} from '@cosmjs/stargate';
+import { SigningStargateClient, DeliverTxResponse } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
+import { OfflineSigner } from '@cosmjs/proto-signing';
+
+import { truncate } from 'web-components/lib/utils/truncate';
+
 import { ledgerRPCUri, ledgerRESTUri, chainId } from './ledger';
 
 interface ChainKey {
@@ -17,7 +17,8 @@ interface ChainKey {
   isNanoLedger: boolean;
 }
 
-interface Sender {
+export interface Sender {
+  offlineSigner?: OfflineSigner;
   address: string;
   shortAddress: string;
 }
@@ -33,13 +34,13 @@ type ContextType = {
   suggestChain?: () => Promise<void>;
   signSend?: (amount: number, recipient: string) => Promise<Uint8Array>;
   broadcast?: (txBytes: Uint8Array) => Promise<string>;
-  txResult?: BroadcastTxResponse;
-  setTxResult: (txResult: BroadcastTxResponse | undefined) => void;
+  txResult?: DeliverTxResponse;
+  setTxResult: (txResult: DeliverTxResponse | undefined) => void;
 };
 
 const WalletContext = createContext<ContextType>({
   loaded: false,
-  setTxResult: (txResult: BroadcastTxResponse | undefined) => {},
+  setTxResult: (txResult: DeliverTxResponse | undefined) => {},
 });
 
 const chainName = process.env.REACT_APP_LEDGER_CHAIN_NAME;
@@ -56,7 +57,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   // This is being used so that we display the "connect wallet" or the connected wallet address
   // only once we know what's the actual wallet connection status.
   const [loaded, setLoaded] = useState<boolean>(false);
-  const [txResult, setTxResult] = useState<BroadcastTxResponse | undefined>(
+  const [txResult, setTxResult] = useState<DeliverTxResponse | undefined>(
     undefined,
   );
 
@@ -81,9 +82,10 @@ export const WalletProvider: React.FC = ({ children }) => {
 
   const getWallet = async (): Promise<void> => {
     const key = await checkForWallet();
-
-    if (key && key.bech32Address) {
+    const offlineSigner = await getOfflineSigner();
+    if (key && key.bech32Address && offlineSigner) {
       const sender = {
+        offlineSigner,
         address: key.bech32Address,
         shortAddress: truncate(key.bech32Address),
       };
@@ -200,6 +202,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   /**
    * Sign a transaction for sending tokens to a reciptient
    */
+  // TODO Remove, we don't need this anymore, we should use @regen-network/api instead
   const signSend = async (
     amount: number,
     recipient: string,
@@ -246,15 +249,32 @@ export const WalletProvider: React.FC = ({ children }) => {
   /**
    * Broadcast a signed transaction and wait for transaction hash
    */
+  // TODO Remove, we don't need this anymore, we should use @regen-network/api instead
   const broadcast = async (signedTxBytes: Uint8Array): Promise<string> => {
     const client = await getClient();
     const result = await client.broadcastTx(signedTxBytes);
-    assertIsBroadcastTxSuccess(result);
     setTxResult(result);
 
     return result.transactionHash;
   };
 
+  const getOfflineSigner = async (): Promise<OfflineSigner | undefined> => {
+    if (chainId && window?.keplr) {
+      try {
+        await window.keplr.enable(chainId);
+        const offlineSigner = window.getOfflineSignerAuto
+          ? await window.getOfflineSignerAuto(chainId)
+          : undefined;
+        return offlineSigner;
+      } catch (err) {
+        alert(`Wallet error: ${err}`);
+        return Promise.reject();
+      }
+    }
+    return Promise.reject('No chain id provided');
+  };
+
+  // TODO Remove, we don't need this anymore, we should use @regen-network/api instead
   const getClient = async (): Promise<SigningStargateClient> => {
     if (chainId && ledgerRPCUri) {
       try {
@@ -303,15 +323,6 @@ export const WalletProvider: React.FC = ({ children }) => {
       {children}
     </WalletContext.Provider>
   );
-};
-
-export const truncate = (walletAddress: string | undefined): string => {
-  if (!walletAddress) return '-';
-  const stringLength = walletAddress.length;
-  return `${walletAddress.substring(0, 8)}...${walletAddress.substring(
-    stringLength - 6,
-    stringLength,
-  )}`.toLowerCase();
 };
 
 export const useWallet = (): ContextType => React.useContext(WalletContext);

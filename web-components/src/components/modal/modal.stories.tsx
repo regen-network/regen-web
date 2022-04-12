@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { Button, Card, Avatar, CardMedia, Link } from '@mui/material';
+
 import Modal from 'web-components/lib/components/modal';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
-import { Button, Card, Avatar, CardMedia } from '@mui/material';
+import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import { CreditSendModal } from 'web-components/lib/components/modal/CreditSendModal';
 import { CreditRetireModal } from 'web-components/lib/components/modal/CreditRetireModal';
+import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
 
 export default {
   title: 'Modal',
@@ -180,17 +183,30 @@ function OpenCropImageModal(props: CropStoryProps): JSX.Element {
   );
 }
 
-function OpenProcessingModal(): JSX.Element {
-  return <ProcessingModal open={true} onClose={() => {}} />;
-}
-
 export const modal = (): JSX.Element => <OpenModal />;
 export const ledgerModal = (): JSX.Element => <OpenLedgerModal />;
 export const cropSquareImageModal = (): JSX.Element => <OpenCropImageModal />;
 export const cropRoundImageModal = (): JSX.Element => (
   <OpenCropImageModal circularCrop />
 );
-export const processingModal = (): JSX.Element => <OpenProcessingModal />;
+export const processingModal = (): JSX.Element => (
+  <ProcessingModal open={true} onClose={() => {}} />
+);
+export const txSuccessfulModal = (): JSX.Element => (
+  <TxSuccessfulModal
+    open={true}
+    onClose={() => {}}
+    linkComponent={Link}
+    onViewPortfolio={() => alert('view on portofolio')}
+    cardTitle="Put in basket"
+    txHash="3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
+    txHashUrl="https://redwood.regen.aneka.io/txs/3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
+    cardItems={[
+      { label: 'basket', value: { name: 'NCT' } },
+      { label: 'amount', value: { name: 100 } },
+    ]}
+  />
+);
 
 export const creditSendModal = (): JSX.Element => (
   <CreditSendModal
@@ -207,5 +223,16 @@ export const creditRetireModal = (): JSX.Element => (
     batchDenom={'C01-20190101-20201010-02'}
     open={true}
     onClose={() => null}
+  />
+);
+
+export const basketPutModal = (): JSX.Element => (
+  <BasketPutModal
+    basketOptions={[{ label: 'NCT', value: 'eco.uC.NCT' }]}
+    availableTradableAmount={1000}
+    batchDenom={'C01-20190101-20201010-02'}
+    open={true}
+    onClose={() => null}
+    onSubmit={() => alert('submit')}
   />
 );

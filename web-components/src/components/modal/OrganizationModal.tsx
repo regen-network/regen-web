@@ -65,12 +65,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingRight: 0,
     },
   },
-  field: {
-    marginBottom: theme.spacing(8),
-    '&:last-child': {
-      marginBottom: 0,
-    },
-  },
   controls: {
     display: 'flex',
     alignItems: 'center',
@@ -161,7 +155,6 @@ function OrganizationModal({
               <Form>
                 <OnBoardingCard className={styles.card}>
                   <Field
-                    className={styles.field}
                     component={ControlledTextField}
                     label="Organization legal name"
                     description="This is the name of the farm, ranch, cooperative, non-profit, or other organization."
@@ -169,7 +162,6 @@ function OrganizationModal({
                     placeholder="i.e. Cherrybrook Farms LLC"
                   />
                   <Field
-                    className={styles.field}
                     component={LocationField}
                     label="Organization location"
                     description="This address is used for issuing credits.  If you choose to 
@@ -179,20 +171,17 @@ function OrganizationModal({
                     token={mapboxToken}
                   />
                   <Field
-                    className={styles.field}
                     component={ControlledTextField}
                     label="Organization representative"
                     description="This is the person who will be signing the project plan (if applicable), and whose name will appear on credit issuance certificates if credits are issued to this organization."
                     name="['http://regen.network/responsiblePerson']"
                   />
                   <Field
-                    className={styles.field}
                     component={ControlledTextField}
                     label="Email address"
                     name="['http://schema.org/email']"
                   />
                   <Field
-                    className={styles.field}
                     component={PhoneField}
                     label="Phone number"
                     name="['http://schema.org/telephone']"

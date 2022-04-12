@@ -154,6 +154,7 @@ const BasicInfoForm: React.FC<{
                     component={TextField}
                     type="number"
                     name="['http://regen.network/size'].['http://qudt.org/1.1/schema/qudt#numericValue'].@value"
+                    defaultStyle={false}
                   />
                   <Field
                     className={clsx(classes.parcelField, classes.parcelUnit)}
@@ -169,6 +170,7 @@ const BasicInfoForm: React.FC<{
                         label: 'Acres',
                       },
                     ]}
+                    defaultStyle={false}
                   />
                 </div>
               </div>

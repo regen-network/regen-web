@@ -26,8 +26,8 @@ import { Label } from 'web-components/lib/components/label';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatNumber } from 'web-components/lib/utils/format';
+import { truncate } from 'web-components/lib/utils/truncate';
 
-import { truncate } from '../../lib/wallet';
 import { ledgerRESTUri } from '../../lib/ledger';
 import { getHashUrl } from '../../lib/block-explorer';
 import { getEcocreditTxs } from '../../lib/ecocredit';

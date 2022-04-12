@@ -8,10 +8,13 @@ import { countries } from './countries';
  */
 export const getISOString = async (
   accessToken: string,
-  countryKey?: string,
-  stateProvince?: string,
-  postalCode?: string,
+  location: {
+    countryKey?: string;
+    stateProvince?: string;
+    postalCode?: string;
+  },
 ): Promise<string | undefined> => {
+  const { countryKey, stateProvince, postalCode } = location;
   if (!countryKey || !accessToken) return Promise.reject();
   if (!stateProvince) {
     return Promise.resolve(countryKey); // no need to search

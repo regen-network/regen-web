@@ -18,6 +18,7 @@ import {
   requiredMessage,
   invalidAmount,
   insufficientCredits,
+  validateAmount,
 } from '../inputs/validation';
 import { getISOString } from '../../utils/locationStandard';
 
@@ -106,13 +107,8 @@ const BasketTakeForm: React.FC<FormProps> = ({
   ): FormikErrors<CreditTakeFormValues> => {
     let errors: FormikErrors<CreditTakeFormValues> = {};
 
-    if (!values.amount) {
-      errors.amount = requiredMessage;
-    } else if (Math.sign(values.amount) !== 1) {
-      errors.amount = invalidAmount;
-    } else if (values.amount > availableTradableAmount) {
-      errors.amount = insufficientCredits;
-    }
+    const errAmount = validateAmount(availableTradableAmount, values.amount);
+    if (errAmount) errors.amount = errAmount;
 
     // Retire form validation (optional subform)
     if (values.retireOnTake) {
@@ -153,12 +149,11 @@ const BasketTakeForm: React.FC<FormProps> = ({
 
     useEffect(() => {
       const setRetirementLocation = async (): Promise<void> => {
-        const isoString = await getISOString(
-          mapboxToken,
-          country,
+        const isoString = await getISOString(mapboxToken, {
+          countryKey: country,
           stateProvince,
           postalCode,
-        );
+        });
         setFieldValue('retirementLocation', isoString);
       };
 

@@ -23,7 +23,6 @@ const BasketTakeModal: React.FC<TakeModalProps> = ({
   onClose,
   onSubmit,
 }) => {
-  console.log(basket);
   return (
     <FormModalTemplate title="Take from basket" open={open} onClose={onClose}>
       <BasketTakeForm

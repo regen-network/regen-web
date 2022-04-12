@@ -99,6 +99,8 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
       />
     );
   } else {
+    // TODO Display not found or error status
+    // based on https://github.com/regen-network/regen-registry/issues/886
     return <></>;
   }
 }

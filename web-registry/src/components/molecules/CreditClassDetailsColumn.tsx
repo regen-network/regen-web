@@ -151,7 +151,7 @@ function CreditClassDetailsColumn({
             data={dbClass?.partyByDesignerId?.name}
           />
         )}
-        {/* TODO {dbClass.ecoType && (
+        {/* TODO keep or not? pending Sam/Erika feedback {dbClass.ecoType && (
           <LineItem label="ecotype" data={dbClass.ecoType} />
         )} */}
         {creditClassVersion?.metadata?.[
@@ -172,15 +172,21 @@ function CreditClassDetailsColumn({
             data={methodologyVersion?.name}
           />
         )}
-        {/* {dbClass.methodologyUrl && (
+        {methodologyVersion?.metadata?.['http://schema.org/url']?.[
+          '@value'
+        ] && (
           <OutlinedButton
             size="small"
             classes={{ root: styles.button }}
-            href={dbClass.methodologyUrl}
+            href={
+              methodologyVersion?.metadata?.['http://schema.org/url']?.[
+                '@value'
+              ]
+            }
           >
             view methodology»
           </OutlinedButton>
-        )} */}
+        )}
       </Card>
     </div>
   );

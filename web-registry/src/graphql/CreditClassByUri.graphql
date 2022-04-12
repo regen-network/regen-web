@@ -11,6 +11,7 @@ query CreditClassByUri($uri: String!) {
       methodologyVersionsById(last: 1) {
         nodes {
           name
+          metadata
         }
       }
     }

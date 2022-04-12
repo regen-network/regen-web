@@ -18799,7 +18799,7 @@ export type CreditClassByUriQuery = (
         { __typename?: 'MethodologyVersionsConnection' }
         & { nodes: Array<Maybe<(
           { __typename?: 'MethodologyVersion' }
-          & Pick<MethodologyVersion, 'name'>
+          & Pick<MethodologyVersion, 'name' | 'metadata'>
         )>> }
       ) }
     )>, partyByDesignerId?: Maybe<(
@@ -20137,6 +20137,7 @@ export const CreditClassByUriDocument = gql`
       methodologyVersionsById(last: 1) {
         nodes {
           name
+          metadata
         }
       }
     }

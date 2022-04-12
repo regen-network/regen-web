@@ -108,9 +108,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   metadata,
 }) => {
   const styles = useStyles();
-  console.log(dbClass);
-  console.log('onChainClass', onChainClass);
-  console.log('metadata', metadata);
+
   const Projects: React.FC = () => {
     const projects = dbClass?.projectsByCreditClassId?.nodes;
     if (!projects || projects.length < 1) return null;

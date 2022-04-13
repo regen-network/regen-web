@@ -165,6 +165,11 @@ const AmountField: React.FC<AmountFieldProps> = ({
           />
         }
       />
+      <AuxiliarLabel
+        availableAmount={availableAmount}
+        batchDenom={batchDenom}
+        className={styles.auxiliarLabelMobile}
+      />
     </>
   );
 };

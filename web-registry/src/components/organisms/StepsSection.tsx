@@ -77,10 +77,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       maxWidth: theme.spacing(199.75),
     },
   },
-  modal: {
-    padding: 0,
-    overflow: 'hidden',
-  },
 }));
 
 function StepsSection({
@@ -122,7 +118,7 @@ function StepsSection({
       <Modal
         open={!!modalIframeLink}
         onClose={() => setModalIframeLink('')}
-        className={styles.modal}
+        isIFrame
       >
         <iframe title="modal-iframe-link" src={modalIframeLink} />
       </Modal>

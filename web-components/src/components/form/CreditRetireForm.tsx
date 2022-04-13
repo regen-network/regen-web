@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
@@ -95,7 +95,7 @@ interface FormProps {
   onClose: () => void;
 }
 
-export interface FormValues {
+export interface RetireFormValues {
   retiredAmount: number;
   note: string;
   country: string;
@@ -104,33 +104,25 @@ export interface FormValues {
 }
 
 interface CreditRetireFieldsProps {
-  country: string;
   batchDenom: string;
   availableTradableAmount: number;
 }
 
-export const CreditRetireFields = ({
-  country,
-  batchDenom,
-  availableTradableAmount,
-}: CreditRetireFieldsProps): JSX.Element => {
+export const BottomCreditRetireFields: React.FC = () => {
   const styles = useStyles();
+  const {
+    values: { country, postalCode },
+  } = useFormikContext<RetireFormValues>();
 
   return (
     <>
-      <AmountField
-        name={'retiredAmount'}
-        label={'Amount to retire'}
-        availableAmount={availableTradableAmount}
-        batchDenom={batchDenom}
-      />
       <Title className={styles.groupTitle} variant="h5">
         Transaction note
       </Title>
       <Field
         name="note"
         type="text"
-        label="Add retirement transaction details (stored in the transaction note)"
+        label="Add retirement transaction details (stored in the tx memo)"
         component={TextField}
         className={styles.noteTextField}
         optional
@@ -145,7 +137,7 @@ export const CreditRetireFields = ({
       </Description>
       <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationStateField country={country} optional />
+          <LocationStateField country={country} optional={!postalCode} />
         </Grid>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
           <LocationCountryField />
@@ -161,13 +153,33 @@ export const CreditRetireFields = ({
   );
 };
 
+export const CreditRetireFields = ({
+  batchDenom,
+  availableTradableAmount,
+}: CreditRetireFieldsProps): JSX.Element => {
+  return (
+    <>
+      <AmountField
+        name="retiredAmount"
+        label="Amount to retire"
+        availableAmount={availableTradableAmount}
+        batchDenom={batchDenom}
+      />
+      <BottomCreditRetireFields />
+    </>
+  );
+};
+
 export const validateCreditRetire = (
   availableTradableAmount: number,
-  values: FormValues,
-  errors: FormikErrors<FormValues>,
-): FormikErrors<FormValues> => {
+  values: RetireFormValues,
+  errors: FormikErrors<RetireFormValues>,
+): FormikErrors<RetireFormValues> => {
   if (!values.country) {
     errors.country = requiredMessage;
+  }
+  if (values.postalCode && !values.stateProvince) {
+    errors.stateProvince = 'Required with postal code';
   }
   const errAmount = validateAmount(
     availableTradableAmount,
@@ -191,14 +203,16 @@ const CreditRetireForm: React.FC<FormProps> = ({
   availableTradableAmount,
   onClose,
 }) => {
-  const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
-    let errors: FormikErrors<FormValues> = {};
+  const validateHandler = (
+    values: RetireFormValues,
+  ): FormikErrors<RetireFormValues> => {
+    let errors: FormikErrors<RetireFormValues> = {};
     errors = validateCreditRetire(availableTradableAmount, values, errors);
     return errors;
   };
 
   const submitHandler = async (
-    values: FormValues,
+    values: RetireFormValues,
   ): Promise<MsgRetire | void> => {
     // TODO
     // add holder,
@@ -216,7 +230,6 @@ const CreditRetireForm: React.FC<FormProps> = ({
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
           <CreditRetireFields
-            country={values.country}
             availableTradableAmount={availableTradableAmount}
             batchDenom={batchDenom}
           />

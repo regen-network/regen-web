@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, Avatar, CardMedia, Link } from '@mui/material';
+import Long from 'long';
 
 import Modal from 'web-components/lib/components/modal';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
@@ -9,6 +10,7 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 import { CreditSendModal } from 'web-components/lib/components/modal/CreditSendModal';
 import { CreditRetireModal } from 'web-components/lib/components/modal/CreditRetireModal';
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
+import { BasketTakeModal } from 'web-components/lib/components/modal/BasketTakeModal';
 
 export default {
   title: 'Modal',
@@ -232,6 +234,26 @@ export const basketPutModal = (): JSX.Element => (
     availableTradableAmount={1000}
     batchDenom={'C01-20190101-20201010-02'}
     open={true}
+    onClose={() => null}
+    onSubmit={() => alert('submit')}
+  />
+);
+
+export const basketTakeModal = (): JSX.Element => (
+  <BasketTakeModal
+    open={true}
+    accountAddress={'123xyz'}
+    basket={{
+      id: new Long(1),
+      $type: 'regen.ecocredit.basket.v1.Basket',
+      name: 'rNCT',
+      basketDenom: 'eco.uC.rNCT',
+      creditTypeAbbrev: 'C',
+      disableAutoRetire: false,
+      exponent: 6,
+    }}
+    balance={9999}
+    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={() => alert('submit')}
   />

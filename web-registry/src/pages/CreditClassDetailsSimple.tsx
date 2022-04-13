@@ -193,7 +193,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               >
                 credit class
               </Label>
-              <Title variant="h1">{onChainClass.class_id}</Title>
+              <Title variant="h1">
+                {metadata?.['schema:name']} ({onChainClass.class_id})
+              </Title>
             </Box>
             {metadata?.['schema:description'] && (
               <ReadMore

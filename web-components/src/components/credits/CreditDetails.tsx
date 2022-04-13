@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 import Typography from '@mui/material/Typography';
 
-import Title from '../title';
+import { Title } from '../typography';
 import CreditsIcon from '../icons/CreditsIcon';
 
 interface CreditInfoProps {

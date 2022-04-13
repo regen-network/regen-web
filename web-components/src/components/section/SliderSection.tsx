@@ -5,7 +5,7 @@ import LazyLoad from 'react-lazyload';
 import cx from 'clsx';
 
 import ResponsiveSlider from '../sliders/ResponsiveSlider';
-import Title from '../title';
+import { Title } from '../typography';
 import Section from './';
 
 interface SliderSectionProps {

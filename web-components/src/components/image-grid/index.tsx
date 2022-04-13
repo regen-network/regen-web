@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
-import Title from '../title';
+import { Title } from '../typography';
 import Description from '../description';
 import { getFontSize } from '../../theme/sizing';
 

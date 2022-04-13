@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Description from 'web-components/lib/components/description';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';

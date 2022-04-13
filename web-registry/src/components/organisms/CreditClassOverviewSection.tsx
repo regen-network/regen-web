@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import cx from 'clsx';
 
 import Section from 'web-components/lib/components/section';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import { BlockContent } from 'web-components/lib/components/block-content';
 

@@ -8,11 +8,14 @@ import BackgroundImage from 'gatsby-background-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import MediaCard from 'web-components/lib/components/cards/MediaCard';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import { BlockContent } from 'web-components/src/components/block-content';
-import { CaseStudyAboutSectionQuery, SanityCaseStudyAboutSection } from '../../../generated/graphql';
+import {
+  CaseStudyAboutSectionQuery,
+  SanityCaseStudyAboutSection,
+} from '../../../generated/graphql';
 
 interface StyleProps {
   lineRotate?: string;
@@ -93,10 +96,14 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     borderRadius: '10px',
     border: `1px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(3.5)} ${theme.spacing(24.25)} ${theme.spacing(3.5)} ${theme.spacing(3.5)}`,
+      padding: `${theme.spacing(3.5)} ${theme.spacing(24.25)} ${theme.spacing(
+        3.5,
+      )} ${theme.spacing(3.5)}`,
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(5)} ${theme.spacing(36)} ${theme.spacing(5)} ${theme.spacing(5)}`,
+      padding: `${theme.spacing(5)} ${theme.spacing(36)} ${theme.spacing(
+        5,
+      )} ${theme.spacing(5)}`,
     },
   },
   line: props => ({
@@ -148,7 +155,10 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
   lineWidth,
   lineRotate,
 }) => {
-  const styles = useStyles({ lineRotate: lineRotate || 'rotate(-25deg)', lineWidth: lineWidth || '53%' });
+  const styles = useStyles({
+    lineRotate: lineRotate || 'rotate(-25deg)',
+    lineWidth: lineWidth || '53%',
+  });
   const theme = useTheme();
   const data = useStaticQuery<CaseStudyAboutSectionQuery>(query);
   const content = data?.sanityCaseStudiesPage?.aboutSection;
@@ -162,7 +172,10 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
       </Box>
       <Grid container spacing={10}>
         <Grid item xs={12} md={6}>
-          <BackgroundImage className={styles.background} fluid={mapImage?.image?.asset?.fluid as FluidObject}>
+          <BackgroundImage
+            className={styles.background}
+            fluid={mapImage?.image?.asset?.fluid as FluidObject}
+          >
             <div className={styles.cardContainer}>
               <MediaCard
                 borderColor={theme.palette.grey[100]}
@@ -174,15 +187,21 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
                 <div className={styles.cardContent}>
                   <div className={styles.cardItem}>
                     <div className={styles.cardTitle}>{content?.practice}</div>
-                    <Description className={styles.cardDescription}>{practice}</Description>
+                    <Description className={styles.cardDescription}>
+                      {practice}
+                    </Description>
                   </div>
                   <div className={styles.cardItem}>
                     <div className={styles.cardTitle}>{content?.biome}</div>
-                    <Description className={styles.cardDescription}>{biome}</Description>
+                    <Description className={styles.cardDescription}>
+                      {biome}
+                    </Description>
                   </div>
                   <div className={styles.cardItem}>
                     <div className={styles.cardTitle}>{content?.region}</div>
-                    <Description className={styles.cardDescription}>{region}</Description>
+                    <Description className={styles.cardDescription}>
+                      {region}
+                    </Description>
                   </div>
                 </div>
               </MediaCard>
@@ -196,7 +215,9 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
               {content?.header}
             </Title>
           </Box>
-          <Description className={styles.about}>{<BlockContent content={_rawAbout} />}</Description>
+          <Description className={styles.about}>
+            {<BlockContent content={_rawAbout} />}
+          </Description>
         </Grid>
       </Grid>
     </Section>

@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
-import Title from '../title';
+import { Title } from '../typography';
 import Description from '../description';
 import { BlockContent, SanityBlockOr } from '../block-content';
 

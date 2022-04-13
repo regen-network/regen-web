@@ -6,7 +6,7 @@ import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import Section from 'web-components/lib/components/section';
@@ -105,7 +105,13 @@ const PartnersPage: React.FC<PageProps> = ({ location }) => {
           <Title className={styles.title} align="center" variant="h1">
             {data?.header}
           </Title>
-          <Grid spacing={7} justifyContent="center" direction="row" alignItems="center" container>
+          <Grid
+            spacing={7}
+            justifyContent="center"
+            direction="row"
+            alignItems="center"
+            container
+          >
             {data?.partners?.map((partner, i) => (
               <Grid className={styles.item} xs={12} sm={4} item key={i}>
                 <GreenMediaCard
@@ -115,7 +121,14 @@ const PartnersPage: React.FC<PageProps> = ({ location }) => {
                 />
               </Grid>
             ))}
-            <Grid className={styles.item} xs={12} sm={6} md={4} item key="contact">
+            <Grid
+              className={styles.item}
+              xs={12}
+              sm={6}
+              md={4}
+              item
+              key="contact"
+            >
               <GreenCard className={clsx(styles.card, styles.contactCard)}>
                 <Title align="center" variant="h4">
                   {data?.contactHeader}

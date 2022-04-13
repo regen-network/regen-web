@@ -7,7 +7,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import Certificate, {
   StakeholderInfo,
 } from 'web-components/lib/components/certificate';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 import PrintIcon from 'web-components/lib/components/icons/PrintIcon';

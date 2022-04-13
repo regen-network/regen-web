@@ -5,7 +5,7 @@ import { Box, CardMedia, useMediaQuery } from '@mui/material';
 import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import { Loading } from 'web-components/lib/components/loading';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { SanityButton } from '../components/atoms';

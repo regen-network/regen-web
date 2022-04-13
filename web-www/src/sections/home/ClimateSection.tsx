@@ -7,7 +7,7 @@ import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Card from 'web-components/lib/components/cards/Card';
 
 import { HomeClimateSectionQuery } from '../../generated/graphql';

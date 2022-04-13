@@ -8,7 +8,7 @@ import ListItem from '@mui/material/ListItem';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 
-import Title from '../title';
+import { Title } from '../typography';
 import Section from '../section';
 import { HeaderLogoLink } from '../header/HeaderLogoLink';
 

@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Description from 'web-components/lib/components/description';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { Label } from 'web-components/lib/components/label';
 import ReadMore from 'web-components/lib/components/read-more';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';

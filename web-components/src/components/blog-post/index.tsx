@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
-import Title from '../title';
+import { Title } from '../typography';
 import OutlinedButton from '../buttons/OutlinedButton';
 import { BlockContent, SanityBlockOr } from '../block-content';
 

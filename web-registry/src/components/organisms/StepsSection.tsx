@@ -6,7 +6,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import Modal from 'web-components/lib/components/modal';
 import Description from 'web-components/lib/components/description';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import {

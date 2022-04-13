@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import cx from 'clsx';
 
 import Card from './Card';
-import Title from '../title';
+import { Title } from '../typography';
 import Description from '../description';
 import { Image } from '../image';
 

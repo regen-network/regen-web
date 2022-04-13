@@ -9,7 +9,7 @@ import OnBoardingCard from '../cards/OnBoardingCard';
 import PhoneField from '../inputs/PhoneField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
-import Title from '../title';
+import { Title } from '../typography';
 import Description from '../description';
 import Tooltip from '../tooltip/InfoTooltip';
 import Modal from '.';

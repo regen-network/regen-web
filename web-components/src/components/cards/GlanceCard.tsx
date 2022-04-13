@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Card from './Card';
-import Title from '../title';
+import { Title } from '../typography';
 import StaticMap from '../map/StaticMap';
 import { Image, OptimizeImageProps } from '../image';
 

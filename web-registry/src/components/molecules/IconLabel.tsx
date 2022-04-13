@@ -5,7 +5,7 @@ import cx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Description from 'web-components/lib/components/description';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
 

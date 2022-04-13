@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import GithubIcon from '../icons/social/GithubIcon';
 import TwitterIcon from '../icons/social/TwitterIcon';
 import LinkedInIcon from '../icons/social/LinkedInIcon';
-import Title from '../title';
+import { Title } from '../typography';
 
 export interface TeamItemProps {
   name: string;

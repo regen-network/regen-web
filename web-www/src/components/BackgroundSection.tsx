@@ -4,7 +4,7 @@ import BackgroundImage from 'gatsby-background-image';
 import { makeStyles } from '@mui/styles';
 import { useMediaQuery, useTheme, Typography } from '@mui/material';
 
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 import type { Variant } from '@mui/material/styles/createTypography';

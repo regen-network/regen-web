@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../../components/BackgroundSection';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { SanityCaseStudyBottomSection } from '../../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -129,7 +129,10 @@ const BottomSection: React.FC<SanityCaseStudyBottomSection> = ({
         <span className={clsx(styles.secondQuote, styles.quotes)}>”</span>
       </Title>
       <Grid className={styles.person} container alignItems="center">
-        <Img className={styles.image} fluid={personImage?.image?.asset?.fluid as FluidObject} />
+        <Img
+          className={styles.image}
+          fluid={personImage?.image?.asset?.fluid as FluidObject}
+        />
         <div className={styles.text}>
           <Title variant="h5" className={styles.name}>
             {personName}

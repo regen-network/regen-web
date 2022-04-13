@@ -5,7 +5,7 @@ import { useNavigate, useParams, useLocation, Outlet } from 'react-router-dom';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Navigation from 'web-components/lib/components/faq/Navigation';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import Banner from 'web-components/lib/components/banner';
 import { Label } from 'web-components/lib/components/label';

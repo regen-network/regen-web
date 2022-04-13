@@ -3,10 +3,13 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import Section from 'web-components/lib/components/section';
-import { ResourcesLedgerSectionQuery, SanityResource } from '../../generated/graphql';
+import {
+  ResourcesLedgerSectionQuery,
+  SanityResource,
+} from '../../generated/graphql';
 import { sanityResourcesToCardProps } from '../../util/sanity-transforms';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -63,7 +66,8 @@ const query = graphql`
 `;
 
 const LedgerSection = (): JSX.Element => {
-  const { sanityResourcesPage } = useStaticQuery<ResourcesLedgerSectionQuery>(query);
+  const { sanityResourcesPage } =
+    useStaticQuery<ResourcesLedgerSectionQuery>(query);
   const content = sanityResourcesPage?.ledgerSection;
   const styles = useStyles();
   return (
@@ -71,7 +75,9 @@ const LedgerSection = (): JSX.Element => {
       <Title className={styles.title} variant="h3" align="left">
         {content?.header}
       </Title>
-      <ResourceCardsSlider items={sanityResourcesToCardProps(content?.cards as SanityResource[])} />
+      <ResourceCardsSlider
+        items={sanityResourcesToCardProps(content?.cards as SanityResource[])}
+      />
     </Section>
   );
 };

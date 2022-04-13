@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Description from 'web-components/lib/components/description';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import { getFontSize } from 'web-components/lib/theme/sizing';
@@ -106,7 +106,8 @@ const OpenScienceSection = (): JSX.Element => {
         {content?.caption}
       </Title>
       <Title className={styles.title} variant="h1">
-        {content?.headerStart} <span className={styles.green}>{content?.headerGreen}</span>
+        {content?.headerStart}{' '}
+        <span className={styles.green}>{content?.headerGreen}</span>
       </Title>
       <ResponsiveSlider
         infinite={false}
@@ -116,7 +117,9 @@ const OpenScienceSection = (): JSX.Element => {
             <Title variant="h3" className={styles.phaseTitle}>
               {phase?.title}
             </Title>
-            <Description fontSize={getFontSize('big')}>{phase?.body}</Description>
+            <Description fontSize={getFontSize('big')}>
+              {phase?.body}
+            </Description>
           </div>
         ))}
       />

@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import clsx from 'clsx';
 
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
-import Title from '../title';
+import { Title } from '../typography';
 import LinkIcon from '../icons/LinkIcon';
 import Banner from '../banner';
 import copyTextToClipboard from '../../utils/copy';

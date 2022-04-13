@@ -6,7 +6,7 @@ import cx from 'clsx';
 import Card from '../cards/Card';
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
 import StepCircleBadge from '../icons/StepCircleBadge';
-import Title from '../title';
+import { Title } from '../typography';
 import Description from '../description';
 import Tag from '../tag';
 import StepFAQs from '../faq/StepFAQs';

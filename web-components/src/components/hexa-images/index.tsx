@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import ReactHtmlParser from 'react-html-parser';
 
-import Title from '../title';
+import { Title } from '../typography';
 import Description from '../description';
 import { BlockContent, SanityBlockOr } from '../block-content';
 
@@ -223,7 +223,9 @@ export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
         <Title variant="h6" className={classes.role}>
           {renderText(items[selected].role)}
         </Title>
-        <Description className={classes.description}>{renderText(items[selected].description)}</Description>
+        <Description className={classes.description}>
+          {renderText(items[selected].description)}
+        </Description>
       </Grid>
       <Grid container className={classes.images}>
         {items.map((item, i) => (

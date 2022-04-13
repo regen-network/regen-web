@@ -5,12 +5,19 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import { DocumentationTable } from 'web-components/lib/components/table/DocumentationTable';
 import BackgroundSection from '../../components/BackgroundSection';
-import { ResourcesRegistrySectionQuery, SanityDoc, SanityResource } from '../../generated/graphql';
-import { sanityDocsToDocuments, sanityResourcesToCardProps } from '../../util/sanity-transforms';
+import {
+  ResourcesRegistrySectionQuery,
+  SanityDoc,
+  SanityResource,
+} from '../../generated/graphql';
+import {
+  sanityDocsToDocuments,
+  sanityResourcesToCardProps,
+} from '../../util/sanity-transforms';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -115,14 +122,19 @@ const RegistrySection = (): JSX.Element => {
           <Typography variant="h1" className={styles.subtitle}>
             {sub?.title}
           </Typography>
-          <ResourceCardsSlider items={sanityResourcesToCardProps(sub?.cards as SanityResource[])} />
+          <ResourceCardsSlider
+            items={sanityResourcesToCardProps(sub?.cards as SanityResource[])}
+          />
         </React.Fragment>
       ))}
       <Typography variant="h1" className={styles.subtitle}>
         {content?.documentTableTitle}
       </Typography>
       <Box className={styles.table}>
-        <DocumentationTable canClickRow rows={sanityDocsToDocuments(content?.documents as SanityDoc[])} />
+        <DocumentationTable
+          canClickRow
+          rows={sanityDocsToDocuments(content?.documents as SanityDoc[])}
+        />
       </Box>
     </BackgroundSection>
   );

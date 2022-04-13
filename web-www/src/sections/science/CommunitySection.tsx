@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
 import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
 import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
@@ -171,13 +171,30 @@ const CommunitySection = (): JSX.Element => {
             imageData={data.background?.childImageSharp?.fluid}
           >
             <Grid container alignItems="center">
-              <Grid xs={12} sm={6} item container wrap="nowrap" className={classes.connect}>
+              <Grid
+                xs={12}
+                sm={6}
+                item
+                container
+                wrap="nowrap"
+                className={classes.connect}
+              >
                 <Title className={classes.caption} variant="h3">
                   {content?.caption}
                 </Title>
-                <Img className={classes.arrow} fluid={data.arrow?.childImageSharp?.fluid as FluidObject} />
+                <Img
+                  className={classes.arrow}
+                  fluid={data.arrow?.childImageSharp?.fluid as FluidObject}
+                />
               </Grid>
-              <Grid xs={12} sm={6} item container justifyContent="flex-end" className={classes.icons}>
+              <Grid
+                xs={12}
+                sm={6}
+                item
+                container
+                justifyContent="flex-end"
+                className={classes.icons}
+              >
                 <a
                   href="https://t.me/regennetwork_science"
                   rel="noopener noreferrer"

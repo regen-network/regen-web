@@ -5,7 +5,7 @@ import { DeliverTxResponse } from '@cosmjs/stargate';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import { Label } from 'web-components/lib/components/label';
 import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';

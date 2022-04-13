@@ -8,7 +8,7 @@ import BackgroundSection from '../../components/BackgroundSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { TitleDescription } from 'web-components/lib/components/text-layouts';
 import Description from 'web-components/lib/components/description';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
 import { ValidatorsWhoSectionQuery } from '../../generated/graphql';

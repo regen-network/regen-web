@@ -8,7 +8,7 @@ import Img from 'gatsby-image';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { HomeLedgerSectionQuery } from '../../generated/graphql';
 
 let useStyles = makeStyles((theme: Theme) => ({

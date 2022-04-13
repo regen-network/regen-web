@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 
-import Title from '../title';
+import { Title } from '../typography';
 import InstagramIcon from '../icons/social/InstagramIcon';
 import TelegramIcon from '../icons/social/TelegramIcon';
 import FacebookIcon from '../icons/social/FacebookIcon';

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Image } from 'web-components/lib/components/image';

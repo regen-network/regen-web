@@ -6,7 +6,7 @@ import { FluidObject } from 'gatsby-image';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Description from 'web-components/lib/components/description';
 import { BlockContent } from 'web-components/src/components/block-content';
 import BackgroundSection from '../../components/BackgroundSection';
@@ -64,7 +64,8 @@ const query = graphql`
 
 const OpenAgSection: React.FC = () => {
   const styles = useStyles();
-  const { background, sanityDevelopersPage } = useStaticQuery<DevOpenAgSectionQuery>(query);
+  const { background, sanityDevelopersPage } =
+    useStaticQuery<DevOpenAgSectionQuery>(query);
   const data = sanityDevelopersPage?.openAgSection;
 
   return (
@@ -77,7 +78,11 @@ const OpenAgSection: React.FC = () => {
       <Grid container alignItems="center" spacing={8}>
         <Grid item xs={12} sm={6}>
           {data?.image && (
-            <SanityImage alt={`${data?.header}`} className={styles.image} {...(data.image as any)} />
+            <SanityImage
+              alt={`${data?.header}`}
+              className={styles.image}
+              {...(data.image as any)}
+            />
           )}
         </Grid>
         <Grid item xs={12} sm={6}>

@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Description from 'web-components/lib/components/description';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import BackgroundSection from '../../components/BackgroundSection';

@@ -4,7 +4,7 @@ import BackgroundImage from 'gatsby-background-image';
 import { Box, Link, Typography } from '@mui/material';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import Section from 'web-components/lib/components/section';

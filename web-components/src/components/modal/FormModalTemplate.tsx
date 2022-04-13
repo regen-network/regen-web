@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Modal, { RegenModalProps } from '../modal';
-import Title from '../title';
+import { Title } from '../typography';
 import Description from '../description';
 
 const useStyles = makeStyles(theme => ({

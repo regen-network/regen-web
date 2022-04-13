@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import BackgroundSection from '../../components/BackgroundSection';
 import { BlockContent } from 'web-components/src/components/block-content';
 

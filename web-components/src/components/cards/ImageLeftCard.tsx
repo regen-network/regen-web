@@ -5,7 +5,7 @@ import ReactHtmlParser from 'react-html-parser';
 import cx from 'clsx';
 
 import Card from './Card';
-import Title from '../title';
+import { Title } from '../typography';
 import { Image } from '../image';
 import OutlinedButton from '../buttons/OutlinedButton';
 

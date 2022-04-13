@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Collapse, useTheme } from '@mui/material';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
 import { formatDate } from 'web-components/lib/utils/format';
 

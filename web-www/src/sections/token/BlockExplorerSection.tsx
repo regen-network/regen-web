@@ -5,7 +5,7 @@ import BackgroundImage from 'gatsby-background-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import DecentralizeIcon from 'web-components/lib/components/icons/DecentralizeIcon';
 import { MarketingDescription as Description } from '../../components/Description';

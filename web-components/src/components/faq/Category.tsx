@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import GreenCard from '../cards/GreenCard';
-import Title from '../title';
+import { Title } from '../typography';
 import Question, { QuestionItem } from './Question';
 
 interface CategoryProps {

@@ -4,7 +4,7 @@ import { SxProps } from '@mui/system';
 import { makeStyles } from '@mui/styles';
 
 import Description from '../description';
-import Title from '../title';
+import { Title } from '../typography';
 import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
 import Modal, { RegenModalProps } from '../modal';

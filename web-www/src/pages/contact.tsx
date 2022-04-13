@@ -14,7 +14,7 @@ import FAQSection from '../sections/shared/FAQSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Card from 'web-components/lib/components/cards/Card';
 import {
   requiredMessage,

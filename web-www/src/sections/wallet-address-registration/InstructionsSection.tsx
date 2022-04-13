@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import { WalletAddrRegInstructionsSectionQuery } from '../../generated/graphql';
@@ -50,9 +50,8 @@ const query = graphql`
 `;
 
 const InstructionsSection = (): JSX.Element => {
-  const { sanityWalletAddressRegistrationPage } = useStaticQuery<WalletAddrRegInstructionsSectionQuery>(
-    query,
-  );
+  const { sanityWalletAddressRegistrationPage } =
+    useStaticQuery<WalletAddrRegInstructionsSectionQuery>(query);
   const data = sanityWalletAddressRegistrationPage?.instructionSection;
   const styles = useStyles();
   return (
@@ -60,7 +59,9 @@ const InstructionsSection = (): JSX.Element => {
       <Title className={styles.title} variant="h3" align="center">
         {data?.title}
       </Title>
-      <Description className={styles.body}>{<BlockContent content={data?._rawBody} />}</Description>
+      <Description className={styles.body}>
+        {<BlockContent content={data?._rawBody} />}
+      </Description>
     </Section>
   );
 };

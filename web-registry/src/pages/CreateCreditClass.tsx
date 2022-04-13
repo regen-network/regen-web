@@ -10,7 +10,7 @@ import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSl
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Modal from 'web-components/lib/components/modal';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Description from 'web-components/lib/components/description';
 import { BlockContent } from 'web-components/lib/components/block-content';
 

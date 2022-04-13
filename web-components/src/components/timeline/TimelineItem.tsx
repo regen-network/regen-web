@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-import Title from '../title';
+import { Title } from '../typography';
 import ContainedButton from '../buttons/ContainedButton';
 import ShieldIcon from '../icons/ShieldIcon';
 import { Event } from './';

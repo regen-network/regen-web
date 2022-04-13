@@ -6,7 +6,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Link from '@mui/material/Link';
 
-import Title from '../title';
+import { Title } from '../typography';
 import Section from '../section';
 import NewsletterForm from '../form/NewsletterForm';
 import { SocialLinks } from './SocialLinks';

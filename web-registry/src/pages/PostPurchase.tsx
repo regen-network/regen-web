@@ -9,7 +9,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import Description from 'web-components/lib/components/description';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 
 import sum from '../lib/sum';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { SxProps, Theme } from '@mui/material';
 
-import Title from '../title';
+import { Title } from '../typography';
 import { LabeledDetail } from './LabeledDetail';
 
 /** Grey label over a rounded, formatted number */

@@ -6,11 +6,14 @@ import ReactHtmlParser from 'react-html-parser';
 import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import { SanityCaseStudyApproachSection } from '../../../generated/graphql';
-import { BlockContent, SanityBlockOr } from 'web-components/src/components/block-content';
+import {
+  BlockContent,
+  SanityBlockOr,
+} from 'web-components/src/components/block-content';
 
 interface Paragraph {
   title: string | Element;
@@ -131,7 +134,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const TitleWithParagraphs: React.FC<TitleWithParagraphsProps> = ({ title, paragraphs }) => {
+export const TitleWithParagraphs: React.FC<TitleWithParagraphsProps> = ({
+  title,
+  paragraphs,
+}) => {
   const styles = useStyles();
   return (
     <>
@@ -189,10 +195,15 @@ const ApproachSection: React.FC<SanityCaseStudyApproachSection> = ({
       }}
       title={content.header}
     >
-      {description && <Description className={classes.description}>{description}</Description>}
+      {description && (
+        <Description className={classes.description}>{description}</Description>
+      )}
       <Grid container spacing={10}>
         <Grid item xs={12} md={6}>
-          <Img className={classes.image} fluid={figureImage?.image?.asset?.fluid as FluidObject} />
+          <Img
+            className={classes.image}
+            fluid={figureImage?.image?.asset?.fluid as FluidObject}
+          />
           <Description className={classes.figureTitle}>
             <BlockContent content={_rawFigureTitle} />
           </Description>

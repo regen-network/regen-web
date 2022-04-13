@@ -4,7 +4,7 @@ import { Box, styled, SxProps } from '@mui/material';
 import clsx from 'clsx';
 import { Variant } from '@mui/material/styles/createTypography';
 
-import Title from '../title';
+import { Title } from '../typography';
 import { parseText } from '../../utils/textParser';
 
 export interface SectionProps {

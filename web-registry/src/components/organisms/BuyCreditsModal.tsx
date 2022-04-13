@@ -11,7 +11,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Description from 'web-components/lib/components/description';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';

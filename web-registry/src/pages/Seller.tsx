@@ -8,7 +8,7 @@ import getApiUri from '../lib/apiUri';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 
 const GET_USER = gql`
   query UserByEmail($email: String!) {

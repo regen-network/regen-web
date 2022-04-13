@@ -9,7 +9,7 @@ import AmountField from '../inputs/AmountField';
 import LocationCountryField from '../inputs/LocationCountryField';
 import LocationStateField from '../inputs/LocationStateField';
 import ControlledTextField from '../inputs/ControlledTextField';
-import Title from '../title';
+import { Title } from '../typography';
 import Description from '../description';
 import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';

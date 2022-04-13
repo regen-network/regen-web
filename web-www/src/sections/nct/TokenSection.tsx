@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { Box, Typography } from '@mui/material';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import {
   BlockContent,
   SanityBlockContent,

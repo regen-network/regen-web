@@ -7,7 +7,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import Description from 'web-components/lib/components/description';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Modal from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
 import { ProjectPageFooter } from '../molecules';

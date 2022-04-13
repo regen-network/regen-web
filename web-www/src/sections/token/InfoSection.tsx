@@ -6,7 +6,7 @@ import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Card from 'web-components/lib/components/cards/Card';
 import Description from 'web-components/lib/components/description';
 import { TokenInfoSectionQuery } from '../../generated/graphql';

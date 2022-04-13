@@ -6,7 +6,7 @@ import cx from 'clsx';
 
 import Card from './Card';
 import { Image, OptimizeImageProps } from '../image';
-import Title from '../title';
+import { Title } from '../typography';
 import { parseText } from '../../utils/textParser';
 
 export interface MediaCardProps extends OptimizeImageProps {

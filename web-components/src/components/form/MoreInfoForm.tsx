@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 
-import Title from '../title';
+import { Title } from '../typography';
 import TextField from '../inputs/TextField';
 import {
   requiredMessage,

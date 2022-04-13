@@ -6,7 +6,7 @@ import Img, { FluidObject } from 'gatsby-image';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { PresskitAwardsSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -66,11 +66,15 @@ const query = graphql`
 
 const AwardsSection = (): JSX.Element => {
   const styles = useStyles();
-  const { sanityPresskitPage } = useStaticQuery<PresskitAwardsSectionQuery>(query);
+  const { sanityPresskitPage } =
+    useStaticQuery<PresskitAwardsSectionQuery>(query);
   const data = sanityPresskitPage?.awardsSection;
   const items: JSX.Element[] = (data?.items || []).map(item => (
     <a href={item?.link || ''} target="_blank" rel="noopener noreferrer">
-      <Img className={styles.image} fluid={item?.image?.asset?.fluid as FluidObject}></Img>
+      <Img
+        className={styles.image}
+        fluid={item?.image?.asset?.fluid as FluidObject}
+      ></Img>
       <Title className={styles.itemTitle} variant="h5">
         {item?.title}
       </Title>
@@ -78,7 +82,11 @@ const AwardsSection = (): JSX.Element => {
   ));
 
   return (
-    <Section withSlider title={data?.header || ''} classes={{ title: styles.title }}>
+    <Section
+      withSlider
+      title={data?.header || ''}
+      classes={{ title: styles.title }}
+    >
       <ResponsiveSlider
         infinite={false}
         className={styles.slider}

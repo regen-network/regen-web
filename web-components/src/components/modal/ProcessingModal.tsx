@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
 import Description from '../description';
-import Title from '../title';
+import { Title } from '../typography';
 import { Spinner } from '../icons/Spinner';
 import Modal, { RegenModalProps } from '../modal';
 

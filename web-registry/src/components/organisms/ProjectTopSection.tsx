@@ -7,7 +7,7 @@ import LazyLoad from 'react-lazyload';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 // import { getFontSize } from 'web-components/lib/theme/sizing';
 import Section from 'web-components/lib/components/section';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import Description from 'web-components/lib/components/description';

@@ -4,7 +4,7 @@ import { Avatar } from '@mui/material';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { BlockContent } from 'web-components/lib/components/block-content';
 

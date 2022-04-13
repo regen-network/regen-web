@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import ContainedButton from '../buttons/ContainedButton';
-import Title from '../title';
+import { Title } from '../typography';
 
 interface NotFoundProps {
   img: JSX.Element;

@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import cx from 'clsx';
 
 import Card from './Card';
-import Title from '../title';
+import { Title } from '../typography';
 import UserInfoWithTitle from '../user/UserInfoWithTitle';
 import { User } from '../user/UserInfo';
 

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { Variant } from '@mui/material/styles/createTypography';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 
 interface SectionProps {
   children?: any;
@@ -105,7 +105,10 @@ const MarkdownSection = ({
   const classes = useStyles({ titleLineHeight });
   return (
     <>
-      <Title className={clsx(classes.title, classes.sectionPadding)} variant="h1">
+      <Title
+        className={clsx(classes.title, classes.sectionPadding)}
+        variant="h1"
+      >
         {title}
       </Title>
       <div

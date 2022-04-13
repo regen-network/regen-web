@@ -7,7 +7,7 @@ import { Link as RouterLink, useParams } from 'react-router-dom';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import Modal from 'web-components/lib/components/modal';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Card from 'web-components/lib/components/cards/Card';
 import Description from 'web-components/lib/components/description';
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';

@@ -6,7 +6,7 @@ import BackgroundImage from 'gatsby-background-image';
 import Typography from '@mui/material/Typography';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { HomeFoldSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({

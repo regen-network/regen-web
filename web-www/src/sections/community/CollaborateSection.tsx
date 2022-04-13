@@ -4,11 +4,14 @@ import { makeStyles } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
-import { CommunityCollaborateSectionQuery, CommunityConnectSectionQuery } from '../../generated/graphql';
+import {
+  CommunityCollaborateSectionQuery,
+  CommunityConnectSectionQuery,
+} from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
 
@@ -73,7 +76,8 @@ const query = graphql`
 
 const CollaborateSection = (): JSX.Element => {
   const styles = useStyles();
-  const { sanityCommunityPage } = useStaticQuery<CommunityCollaborateSectionQuery>(query);
+  const { sanityCommunityPage } =
+    useStaticQuery<CommunityCollaborateSectionQuery>(query);
   const data = sanityCommunityPage?.collaborateSection;
   const resourceCards = data?.cards?.map(card => {
     return {

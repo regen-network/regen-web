@@ -9,7 +9,7 @@ import {
   RoleField,
   FormValues,
 } from 'web-components/lib/components/inputs/RoleField';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';

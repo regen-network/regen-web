@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
 
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 
 import type { NctBannerSectionQuery } from '../../generated/graphql';

@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Description from 'web-components/lib/components/description';
 import Section from 'web-components/lib/components/section';
 import { SciencePartnershipsSectionQuery } from '../../generated/graphql';
@@ -98,7 +98,13 @@ const PartnershipsSection = (): JSX.Element => {
         </Title>
         <Grid container className={styles.grid}>
           {content?.partners?.map((p, i) => (
-            <Grid item key={i} xs={12} sm={6} className={i % 2 === 0 ? styles.itemLeft : styles.itemRight}>
+            <Grid
+              item
+              key={i}
+              xs={12}
+              sm={6}
+              className={i % 2 === 0 ? styles.itemLeft : styles.itemRight}
+            >
               <Img
                 className={styles.image}
                 alt={p?.image?.imageAlt || ''}

@@ -4,7 +4,7 @@ import { Variant } from '@mui/material/styles/createTypography';
 import clsx from 'clsx';
 import Grid from '@mui/material/Grid';
 
-import Title from '../title';
+import { Title } from '../typography';
 import Description from '../description';
 import ContainedButton from '../buttons/ContainedButton';
 import { getFontSize } from '../../theme/sizing';

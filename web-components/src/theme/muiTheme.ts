@@ -27,6 +27,7 @@ const defaultTheme = createTheme({
 const { pxToRem } = defaultTheme.typography;
 
 const headerFontFamily = ['"Muli"', '-apple-system', 'sans-serif'].join(',');
+const defaultFontFamily = ['"Lato"', '-apple-system', 'sans-serif'].join(',');
 
 const headerDefaults = {
   fontWeight: 900,
@@ -70,7 +71,7 @@ const regenTheme = createTheme({
   },
   spacing: (factor: number) => `${0.25 * factor}rem`,
   typography: {
-    fontFamily: ['"Lato"', '-apple-system', 'sans-serif'].join(','),
+    fontFamily: defaultFontFamily,
     h1: {
       // fontSize: '2rem',
       // [defaultTheme.breakpoints.up('sm')]: {
@@ -142,6 +143,7 @@ const regenTheme = createTheme({
     textXSmall: {
       fontSize: pxToRem(12),
     },
+    // TODO disable these after moving to custom comopnents
     subtitle1: {
       fontSize: '2rem',
       [defaultTheme.breakpoints.up('sm')]: {
@@ -154,19 +156,17 @@ const regenTheme = createTheme({
         fontSize: '1.125rem',
       },
     },
-    body1: {
-      fontSize: '0.875rem',
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '1rem',
-      },
-    },
-    body2: {
-      fontSize: '0.875rem',
-    },
+    // body1: {
+    //   fontSize: '0.875rem',
+    //   [defaultTheme.breakpoints.up('sm')]: {
+    //     fontSize: '1rem',
+    //   },
+    // },
+    // body2: {
+    //   fontSize: '0.875rem',
+    // },
     overline: {
-      fontFamily: ['PT Mono', '"Lato"', '-apple-system', 'sans-serif'].join(
-        ',',
-      ),
+      fontFamily: defaultFontFamily,
     },
   },
   breakpoints: defaultTheme.breakpoints,
@@ -246,6 +246,38 @@ const regenTheme = createTheme({
       },
     },
     MuiTypography: {
+      // styleOverrides: {
+      //   h1: {
+      //     ...headerDefaults,
+      //     fontSize: pxToRem(48),
+      //     lineHeight: '130%',
+      //   },
+      //   h2: {
+      //     ...headerDefaults,
+      //     fontSize: pxToRem(38),
+      //     lineHeight: '130%',
+      //   },
+      //   h3: {
+      //     ...headerDefaults,
+      //     fontSize: pxToRem(32),
+      //     lineHeight: '140%',
+      //   },
+      //   h4: {
+      //     ...headerDefaults,
+      //     fontSize: pxToRem(24),
+      //     lineHeight: '145%',
+      //   },
+      //   h5: {
+      //     ...headerDefaults,
+      //     fontSize: pxToRem(21),
+      //     lineHeight: '150%',
+      //   },
+      //   h6: {
+      //     ...headerDefaults,
+      //     fontSize: pxToRem(18),
+      //     lineHeight: '150%',
+      //   },
+      // },
       defaultProps: {
         variantMapping: {
           h1: 'h1',

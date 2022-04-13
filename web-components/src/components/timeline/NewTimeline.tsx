@@ -12,7 +12,7 @@ import TimelineDot from '@mui/lab/TimelineDot';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import clsx from 'clsx';
 
-import Title from '../title';
+import { Title } from '../typography';
 import Modal from '../modal';
 import Tag from '../tag';
 

@@ -7,7 +7,7 @@ import BackgroundImage from 'gatsby-background-image';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Description from 'web-components/lib/components/description';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { SanityCaseStudyContextSection } from '../../../generated/graphql';
@@ -146,7 +146,11 @@ const query = graphql`
   }
 `;
 
-const ContextSection: React.FC<SanityCaseStudyContextSection> = ({ _rawDescription, image, challenges }) => {
+const ContextSection: React.FC<SanityCaseStudyContextSection> = ({
+  _rawDescription,
+  image,
+  challenges,
+}) => {
   const styles = useStyles();
   const data = useStaticQuery(query);
   const content = data?.sanityCaseStudiesPage?.contextSection;
@@ -166,14 +170,21 @@ const ContextSection: React.FC<SanityCaseStudyContextSection> = ({ _rawDescripti
             </Title>
             <ol className={styles.list}>
               {challenges?.map((text, i) => (
-                <Description key={i} component="li" className={clsx(styles.description, styles.item)}>
+                <Description
+                  key={i}
+                  component="li"
+                  className={clsx(styles.description, styles.item)}
+                >
                   {text}
                 </Description>
               ))}
             </ol>
           </Grid>
           <Grid item xs={12} className={styles.imageContainer}>
-            <Img fluid={image?.image?.asset?.fluid as FluidObject} className={styles.image} />
+            <Img
+              fluid={image?.image?.asset?.fluid as FluidObject}
+              className={styles.image}
+            />
           </Grid>
         </Grid>
       </div>

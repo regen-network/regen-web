@@ -38,10 +38,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface CheckboxLabelProps extends CheckboxProps {
   label: FormControlLabelProps['label'];
+  disabled?: boolean;
 }
 
 export default function CheckboxLabel({
   label,
+  disabled,
   ...props
 }: CheckboxLabelProps): JSX.Element {
   const styles = useStyles();
@@ -63,6 +65,7 @@ export default function CheckboxLabel({
             form={props.form}
             meta={props.meta}
             type="checkbox"
+            disabled={disabled}
           />
         }
         label={label}

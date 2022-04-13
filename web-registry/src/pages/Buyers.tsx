@@ -46,10 +46,6 @@ const useStyles = makeStyles(theme => ({
       fontSize: theme.typography.pxToRem(32),
     },
   },
-  modal: {
-    padding: 0,
-    overflow: 'hidden',
-  },
 }));
 
 const BuyersPage = (): JSX.Element => {
@@ -134,7 +130,7 @@ const BuyersPage = (): JSX.Element => {
           </ContainedButton>
         </>
       </FixedFooter>
-      <Modal className={styles.modal} open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleClose} isIFrame>
         <iframe
           title="airtable-buyer-intake"
           src="https://airtable.com/embed/shrijZlxJdSmj7H8J?backgroundColor=green"

@@ -28,13 +28,14 @@ export function validatePassword(password: string): boolean {
 export function validateAmount(
   availableTradableAmount: number,
   amount?: number,
+  customInsufficientCredits?: string,
 ): string | undefined {
   if (!amount) {
     return requiredMessage;
   } else if (Math.sign(amount) !== 1) {
     return invalidAmount;
   } else if (amount > availableTradableAmount) {
-    return insufficientCredits;
+    return customInsufficientCredits || insufficientCredits;
   }
   return;
 }

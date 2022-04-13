@@ -61,10 +61,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginLeft: theme.spacing(4),
     },
   },
-  modal: {
-    padding: 0,
-    overflow: 'hidden',
-  },
   content: props => ({
     backgroundColor: theme.palette.primary.main,
     position: 'relative',
@@ -280,11 +276,7 @@ export default function NewTimeline({ items }: Props): JSX.Element {
           })}
         </Timeline>
       </Box>
-      <Modal
-        open={!!iframeSrc}
-        onClose={() => setIframeSrc('')}
-        className={classes.modal}
-      >
+      <Modal open={!!iframeSrc} onClose={() => setIframeSrc('')} isIFrame>
         <iframe title="airtable-signup-form" src={iframeSrc} />
       </Modal>
     </>

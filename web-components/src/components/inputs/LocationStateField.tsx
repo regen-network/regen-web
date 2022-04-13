@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Field } from 'formik';
+import { Field, useFormikContext } from 'formik';
 
 import SelectTextField, { Option } from './SelectTextField';
 
@@ -18,6 +18,7 @@ const LocationStateField: React.FC<FieldProps> = ({
   optional = false,
 }) => {
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
+  const { setFieldValue } = useFormikContext();
 
   const searchState = async (countryId: string): Promise<void> => {
     const resp = await axios({
@@ -44,8 +45,10 @@ const LocationStateField: React.FC<FieldProps> = ({
       setStateOptions([]);
       return;
     }
+    // reset state/province if country changes
+    setFieldValue(name, '');
     searchState(country);
-  }, [country]);
+  }, [country, setFieldValue, name]);
 
   return (
     <Field
@@ -55,6 +58,7 @@ const LocationStateField: React.FC<FieldProps> = ({
       component={SelectTextField}
       className={className}
       optional={optional}
+      required={!optional}
     />
   );
 };

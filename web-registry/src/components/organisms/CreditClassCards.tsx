@@ -7,10 +7,14 @@ import Grid from '@mui/material/Grid';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
-import { BlockContent } from 'web-components/lib/components/block-content';
+import {
+  BlockContent,
+  blocksToText,
+} from 'web-components/lib/components/block-content';
 
 import { AllCreditClassQuery } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';
+import { onChainClassRegExp } from '../../lib/ledger';
 
 type Props = {
   btnText: string;
@@ -58,6 +62,12 @@ const CreditClassCards: React.FC<Props> = ({
       spacing={isMobile ? 0 : 5}
     >
       {props.creditClassesContent?.map((c, i) => {
+        const isOnChainClass = c.path && onChainClassRegExp.test(c.path);
+        const title = isOnChainClass ? (
+          `${blocksToText(c?.nameRaw)} (${c.path})`
+        ) : (
+          <BlockContent noYMargin content={c?.nameRaw} />
+        );
         return (
           <Grid
             item
@@ -78,7 +88,7 @@ const CreditClassCards: React.FC<Props> = ({
                   navigate(path);
                 }
               }}
-              title={<BlockContent content={c?.nameRaw} />}
+              title={title}
             />
           </Grid>
         );

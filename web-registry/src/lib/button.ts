@@ -17,6 +17,7 @@ export function getLinkHref(link?: Maybe<LinkFieldsFragment>): string {
   return link?.buttonHref || link?.buttonDoc?.href || '';
 }
 
+/** click handler for sanity buttons which can render in a modal */
 export function onBtnClick(
   openModal: (href: string) => void,
   button?: Maybe<ButtonFieldsFragment>,

@@ -17,7 +17,7 @@ import {
 } from '../lib/ecocredit';
 
 // hooks
-import useQueryLedger from './useQueryLedger';
+import useQueryClient from './useQueryClient';
 import useQueryListClassInfo from './useQueryListClassInfo';
 import useQueryListBatchInfo from './useQueryListBatchInfo';
 import { useProjectByBatchDenomLazyQuery } from '../generated/graphql';
@@ -35,7 +35,7 @@ function formatDuration(seconds: number): string {
 }
 
 type BasketDetails = {
-  overview: BasketOverviewProps;
+  overview?: BasketOverviewProps;
   creditBatches: CreditBatch[];
 };
 
@@ -50,40 +50,40 @@ type BatchWithProject = {
   projectDisplay: string;
 };
 
-const overviewInitial = {
-  name: '-',
-  displayDenom: '-',
-  description: '-',
-  totalAmount: 0,
-  curator: '-',
-  allowedCreditClasses: [{ id: '-', name: '-' }],
-};
+// DISABLED - Initial values for overview
+// const overviewInitial = {
+//   name: '',
+//   displayDenom: '',
+//   description: '',
+//   totalAmount: 0,
+//   curator: '',
+//   allowedCreditClasses: [{ id: '', name: '' }],
+// };
 
 const useBasketDetails = (basketDenom?: string): BasketDetails => {
   // local state (overview and credit batchs)
   // custom basket overview data for <BasketOverview />
-  const [overview, setOverview] =
-    useState<BasketOverviewProps>(overviewInitial);
+  const [overview, setOverview] = useState<BasketOverviewProps>();
   // custom ecocredit batches data for <BasketEcocreditsTable />
   const [creditBatches, setCreditBatches] = useState<CreditBatch[]>([]);
 
   // fetching necessary data
-  const { data: basket } = useQueryLedger<QueryBasketResponse>({
-    queryType: 'basket',
-    queryCallback: queryBasket,
-    queryParams: { basketDenom },
+  const { data: basket } = useQueryClient<QueryBasketResponse>({
+    type: 'basket',
+    callback: queryBasket,
+    params: { basketDenom },
   });
 
-  const { data: basketBalances } = useQueryLedger<QueryBasketBalancesResponse>({
-    queryType: 'basket',
-    queryCallback: queryBasketBalances,
-    queryParams: { basketDenom },
+  const { data: basketBalances } = useQueryClient<QueryBasketBalancesResponse>({
+    type: 'basket',
+    callback: queryBasketBalances,
+    params: { basketDenom },
   });
 
-  const { data: basketMetadata } = useQueryLedger<QueryDenomMetadataResponse>({
-    queryType: 'bank',
-    queryCallback: queryDenomMetadata,
-    queryParams: { denom: basketDenom },
+  const { data: basketMetadata } = useQueryClient<QueryDenomMetadataResponse>({
+    type: 'bank',
+    callback: queryDenomMetadata,
+    params: { denom: basketDenom },
   });
 
   const basketClassesInfo = useQueryListClassInfo(basket?.classes);

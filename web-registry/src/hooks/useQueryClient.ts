@@ -10,22 +10,22 @@ import { useLedger } from '../ledger';
 // TODO: Map the clients and queries here, so that the implementation details
 // of the queries are transparent to business hooks. Instead, the hook would be called
 // like this:
-// ie. useQueryLedger('basket', { basketDenom })
-// ie. useQueryLedger('denomMetadata', { denom: basketDenom })
+// ie. useQueryClient('basket', { basketDenom })
+// ie. useQueryClient('denomMetadata', { denom: basketDenom })
 
 type QueryClient = BankQueryClient | EcocreditQueryClient | BasketQueryClient;
 
 type LedgerModules = 'bank' | 'ecocredit' | 'basket';
 
 // TODO: generic type
-type LedgerQueryParams = any;
+type Ledgerparams = any;
 
 // type LedgerQuery<P> = ({
 //   client,
 //   params,
 // }: {
 //   client: QueryClient;
-//   params: LedgerQueryParams<P>;
+//   params: Ledgerparams<P>;
 // }) => Promise<any>;
 
 // type LedgerQuery = ({
@@ -33,16 +33,16 @@ type LedgerQueryParams = any;
 //   params,
 // }: {
 //   client: QueryClient;
-//   params: LedgerQueryParams;
+//   params: Ledgerparams;
 // }) => Promise<any>;
 
 // TODO: generic types
 type LedgerQuery = ({ client, params }: any) => Promise<any>;
 
 type InputQueryLedger = {
-  queryType: LedgerModules;
-  queryCallback: LedgerQuery;
-  queryParams?: LedgerQueryParams;
+  type: LedgerModules;
+  callback: LedgerQuery;
+  params?: Ledgerparams;
 };
 
 type OutputQueryLedger<T> = {
@@ -51,10 +51,10 @@ type OutputQueryLedger<T> = {
   error: Error | undefined;
 };
 
-export default function useQueryLedger<T>({
-  queryType,
-  queryCallback,
-  queryParams,
+export default function useQueryClient<T>({
+  type,
+  callback,
+  params,
 }: InputQueryLedger): OutputQueryLedger<T> {
   const { api } = useLedger();
   const [client, setClient] = useState<QueryClient>();
@@ -63,11 +63,13 @@ export default function useQueryLedger<T>({
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>();
 
+  // TODO: move query clients creation / management (singletons)
+  // to `LedgerProvider` accessible through the `useLedger` hook
   useEffect(() => {
     if (!api?.queryClient) return;
     if (client) return;
 
-    switch (queryType) {
+    switch (type) {
       case 'bank':
         setClient(new BankQueryClient(api.queryClient));
         break;
@@ -81,26 +83,22 @@ export default function useQueryLedger<T>({
         break;
 
       default:
-        break;
+        throw new Error('The specified query client does not exist');
     }
-  }, [api?.queryClient, client, queryType]);
+  }, [api?.queryClient, client, type]);
 
   useEffect(() => {
     if (!client) return;
-    if (!queryType || !queryCallback || !queryParams) return;
+    if (!type || !callback || !params) return;
     if (loading || data) return;
 
     setLoading(true);
 
-    queryCallback({
-      client,
-      ...queryParams,
-      // params: queryParams,
-    })
+    callback({ client, ...params })
       .then(setData)
       .catch(setError)
       .finally(() => setLoading(false));
-  }, [client, queryType, queryCallback, queryParams, loading, data]);
+  }, [client, type, callback, params, loading, data]);
 
   return { data, loading, error };
 }

@@ -94,7 +94,9 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                   link={'/credit-classes/'}
                 />
                 <Item
-                  label="min start date"
+                  label={
+                    startDateWindow ? 'start date window' : 'min start date'
+                  }
                   data={getDateCriteria(minStartDate, startDateWindow)}
                 />
               </Grid>

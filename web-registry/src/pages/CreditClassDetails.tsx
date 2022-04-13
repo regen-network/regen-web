@@ -11,6 +11,7 @@ import { CreditClassDetailsWithContent } from './CreditClassDetailsWithContent';
 import { CreditClassDetailsSimple } from './CreditClassDetailsSimple';
 import { queryEcoClassInfo } from '../lib/ecocredit';
 import { getMetadata } from '../lib/metadata-graph';
+import { onChainClassRegExp } from '../lib/ledger';
 import { ClassInfo } from '../types/ledger/ecocredit';
 
 interface CreditDetailsProps {
@@ -49,7 +50,6 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
     creditClass => creditClass.path === creditClassId,
   );
 
-  const onChainClassRegExp = /[A-Z]{1,3}[0-9]{2,}/;
   const isOnChainClassId =
     creditClassId && onChainClassRegExp.test(creditClassId);
   const iri = content?.iri?.current;

@@ -151,9 +151,18 @@ function CreditClassDetailsColumn({
             data={dbClass?.partyByDesignerId?.name}
           />
         )}
-        {/* TODO keep or not? pending Sam/Erika feedback {dbClass.ecoType && (
-          <LineItem label="ecotype" data={dbClass.ecoType} />
-        )} */}
+        {creditClassVersion?.metadata?.[
+          'http://regen.network/ecosystemType'
+        ] && (
+          <LineItem
+            label="ecotype"
+            data={
+              creditClassVersion?.metadata?.[
+                'http://regen.network/ecosystemType'
+              ]
+            }
+          />
+        )}
         {creditClassVersion?.metadata?.[
           'http://regen.network/offsetGenerationMethod'
         ] && (

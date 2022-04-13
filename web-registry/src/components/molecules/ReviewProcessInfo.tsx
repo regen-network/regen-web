@@ -8,14 +8,13 @@ import Typography from '@mui/material/Typography';
 import Title from 'web-components/lib/components/title';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Description from 'web-components/lib/components/description';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { Label } from 'web-components/lib/components/label';
 
 import {
   ReviewSectionFieldsFragment,
   Maybe,
 } from '../../generated/sanity-graphql';
-import { onBtnClick } from '../../lib/button';
+import { SanityButton } from '../atoms';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -107,14 +106,11 @@ const ReviewProcessInfo: React.FC<{
       </div>
       {props.reviewSection?.button?.buttonText && (
         <div>
-          <ContainedButton
+          <SanityButton
             size="large"
-            onClick={() =>
-              onBtnClick(props.openModal, props.reviewSection?.button)
-            }
-          >
-            {props.reviewSection.button.buttonText}
-          </ContainedButton>
+            btn={props.reviewSection.button}
+            openModal={props.openModal}
+          />
         </div>
       )}
       {props.reviewSection?.disclaimerBottom && (

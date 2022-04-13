@@ -12,6 +12,7 @@ export * from './RegistryNavLink';
 export * from './RegistryIconLink';
 export * from './ScrollToTop';
 export * from './ScrollToTop';
+export * from './SanityButton';
 export * from './WalletButton';
 export * from './WrappedImpactCard';
 export * from './WrappedResourcesCard';

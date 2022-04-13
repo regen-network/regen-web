@@ -7,6 +7,12 @@ import {
   QueryDenomMetadataResponse,
   QueryBalanceResponse,
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import {
+  QueryClientImpl as BasketQueryClient,
+  QueryBasketResponse,
+  QueryBasketsResponse,
+  QueryBasketBalancesResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import { expLedger, ledgerRESTUri } from '../lib/ledger';
 import type { PageResponse } from '../types/ledger/base';
@@ -18,8 +24,8 @@ import type {
   BatchTotalsForProject,
   QueryBalanceResponse as QueryBalanceResponseV0,
   QueryClassesResponse,
-  QueryBasketBalancesResponse,
-  QueryBasketResponse,
+  QueryBasketBalancesResponse as QueryBasketBalancesResponseV0,
+  QueryBasketResponse as QueryBasketResponseV0,
   BatchInfoWithBalance,
   QueryBatchesResponse,
   QueryClassInfoResponse,
@@ -299,7 +305,7 @@ export const getTxsByEvent = (msgType: string): Promise<AxiosResponse> => {
 
 export async function getBasket(
   basketDenom: string,
-): Promise<QueryBasketResponse> {
+): Promise<QueryBasketResponseV0> {
   return Promise.resolve({
     basket: {
       id: 'basket-1',
@@ -318,7 +324,7 @@ export async function getBasket(
 
 export async function getBasketBalances(
   basketDenom: string,
-): Promise<QueryBasketBalancesResponse> {
+): Promise<QueryBasketBalancesResponseV0> {
   return Promise.resolve({
     balances: [
       {
@@ -354,47 +360,131 @@ export const queryEcoClassInfo = async (
 };
 
 /**
- * NEW ledger queries using RegenAPI
+ *
+ * REGEN LEDGER API QUERIES
+ *
  */
 
-export type FetchDenomMetadataProps = {
+/**
+ *
+ * BANK MODULE QUERIES
+ * -------------------
+ *  - AllBalances (TODO)
+ *  - Balance
+ *  - DenomMetadata
+ *  - DenomsMetadata (TODO)
+ *
+ */
+
+// Denom Metadata
+
+export type QueryDenomMetadataProps = {
   client: BankQueryClient;
   denom: string;
 };
 
-export const fetchDenomMetadata = async ({
+export const queryDenomMetadata = async ({
   client,
   denom,
-}: FetchDenomMetadataProps): Promise<
+}: QueryDenomMetadataProps): Promise<
   QueryDenomMetadataResponse | undefined
 > => {
   try {
     const metadata = await client.DenomMetadata({ denom });
     return metadata;
   } catch (err) {
-    console.error(err); // eslint-disable-line no-console
+    // return err as Error;
+    // throw new Error('queryDenomMetadata');
+    return;
   }
-  return;
 };
 
-export type FetchBalanceByAddressAndDenomProps = {
+// Balance
+
+export type QueryBalanceProps = {
   client: BankQueryClient;
   address: string;
   denom: string;
 };
 
-export const fetchBalanceByAddressAndDenom = async ({
+export const queryBalance = async ({
   client,
   address,
   denom,
-}: FetchBalanceByAddressAndDenomProps): Promise<
-  QueryBalanceResponse | undefined
-> => {
+}: QueryBalanceProps): Promise<QueryBalanceResponse | undefined> => {
   try {
     const balance = await client.Balance({ address, denom });
     return balance;
   } catch (err) {
-    console.error(err); // eslint-disable-line no-console
+    // return err as Error;
+    // throw new Error('queryBalance');
+    return;
   }
-  return;
+};
+
+/**
+ *
+ * BASKET MODULE QUERIES
+ * ---------------------
+ *  - Basket
+ *  - Baskets
+ *  - BasketBalances
+ *  - BasketBalance (TODO)
+ *
+ */
+
+// Basket
+
+export type QueryBasketProps = {
+  client: BasketQueryClient;
+  basketDenom: string;
+  // params: {
+  //   basketDenom: string;
+  // };
+};
+
+export const queryBasket = async ({
+  client,
+  basketDenom,
+}: // params: { basketDenom },
+QueryBasketProps): Promise<QueryBasketResponse | Error> => {
+  try {
+    return await client.Basket({ basketDenom });
+  } catch (err) {
+    return err as Error;
+  }
+};
+
+// Baskets
+
+export type QueryBasketsProps = {
+  client: BasketQueryClient;
+};
+
+export const queryBaskets = async ({
+  client,
+}: QueryBasketsProps): Promise<QueryBasketsResponse | Error> => {
+  try {
+    return await client.Baskets({});
+  } catch (err) {
+    return err as Error;
+  }
+};
+
+// Basket Balances
+
+export type QueryBasketBalancesProps = {
+  client: BasketQueryClient;
+  basketDenom: string;
+};
+
+export const queryBasketBalances = async ({
+  client,
+  basketDenom,
+}: QueryBasketBalancesProps): Promise<QueryBasketBalancesResponse | Error> => {
+  try {
+    return await client.BasketBalances({ basketDenom });
+  } catch (err) {
+    return err as Error;
+  }
 };

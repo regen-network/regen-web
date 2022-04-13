@@ -9,10 +9,7 @@ import {
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 import useQueryBaskets from './useQueryBaskets';
-import {
-  fetchBalanceByAddressAndDenom,
-  fetchDenomMetadata,
-} from '../lib/ecocredit';
+import { queryBalance, queryDenomMetadata } from '../lib/ecocredit';
 import { useLedger } from '../ledger';
 
 type BasketTokens = {
@@ -42,25 +39,30 @@ export default function useBasketTokens(address?: string): BasketTokens[] {
       address: string,
       baskets: QueryBasketsResponse,
     ): Promise<void> {
-      const _basketTokens = await Promise.all(
-        baskets.baskets.map(async basket => ({
-          basket,
-          balance: await fetchBalanceByAddressAndDenom({
-            client: banckQueryClient,
-            address,
-            denom: basket.basketDenom,
-          }),
-          metadata: await fetchDenomMetadata({
-            client: banckQueryClient,
-            denom: basket.basketDenom,
-          }),
-        })),
-      );
+      try {
+        const _basketTokens = await Promise.all(
+          baskets.baskets.map(async basket => ({
+            basket,
+            balance: await queryBalance({
+              client: banckQueryClient,
+              address,
+              denom: basket.basketDenom,
+            }),
+            metadata: await queryDenomMetadata({
+              client: banckQueryClient,
+              denom: basket.basketDenom,
+            }),
+          })),
+        );
 
-      const withPositiveBalance = (basket: BasketTokens): boolean =>
-        basket.balance?.balance?.amount !== '0';
+        const withPositiveBalance = (basket: BasketTokens): boolean =>
+          basket.balance?.balance?.amount !== '0';
 
-      setBasketTokens(_basketTokens.filter(withPositiveBalance));
+        setBasketTokens(_basketTokens.filter(withPositiveBalance));
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error(err);
+      }
     }
 
     fetchData(banckQueryClient, address, baskets);

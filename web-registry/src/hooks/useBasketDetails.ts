@@ -2,17 +2,30 @@ import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 
+import {
+  QueryBasketResponse,
+  QueryBasketBalancesResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import { QueryClassInfoResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+
+import {
+  queryBasket,
+  queryBasketBalances,
+  queryDenomMetadata,
+  // QueryBasketProps,
+} from '../lib/ecocredit';
+
 // hooks
-import useQueryBasket from './useQueryBasket';
-import useQueryBasketBalances from './useQueryBasketBalances';
-import useQueryDenomMetadata from './useQueryDenomMetadata';
+import useQueryLedger from './useQueryLedger';
 import useQueryListClassInfo from './useQueryListClassInfo';
 import useQueryListBatchInfo from './useQueryListBatchInfo';
 import { useProjectByBatchDenomLazyQuery } from '../generated/graphql';
+
 // ui types
 import { BasketOverviewProps, CreditBatch } from '../components/organisms';
+
 // import { getMetadata } from '../lib/metadata-graph';
-import { QueryClassInfoResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 
 dayjs.extend(duration);
 
@@ -47,6 +60,7 @@ const overviewInitial = {
 };
 
 const useBasketDetails = (basketDenom?: string): BasketDetails => {
+  // local state (overview and credit batchs)
   // custom basket overview data for <BasketOverview />
   const [overview, setOverview] =
     useState<BasketOverviewProps>(overviewInitial);
@@ -54,9 +68,23 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
   const [creditBatches, setCreditBatches] = useState<CreditBatch[]>([]);
 
   // fetching necessary data
-  const basket = useQueryBasket(basketDenom);
-  const basketBalances = useQueryBasketBalances(basketDenom);
-  const basketMetadata = useQueryDenomMetadata(basketDenom);
+  const { data: basket } = useQueryLedger<QueryBasketResponse>({
+    queryType: 'basket',
+    queryCallback: queryBasket,
+    queryParams: { basketDenom },
+  });
+
+  const { data: basketBalances } = useQueryLedger<QueryBasketBalancesResponse>({
+    queryType: 'basket',
+    queryCallback: queryBasketBalances,
+    queryParams: { basketDenom },
+  });
+
+  const { data: basketMetadata } = useQueryLedger<QueryDenomMetadataResponse>({
+    queryType: 'bank',
+    queryCallback: queryDenomMetadata,
+    queryParams: { denom: basketDenom },
+  });
 
   const basketClassesInfo = useQueryListClassInfo(basket?.classes);
   const [basketClasses, setBasketClasses] = useState<ClassInfo[]>();
@@ -93,9 +121,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
         );
         setBasketClasses(_basketClasses);
       } catch (error) {
-        // TODO
-        // eslint-disable-next-line no-console
-        console.error(error);
+        console.error(error); // eslint-disable-line no-console
       }
     }
 
@@ -128,9 +154,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
 
         setBatchesProjects(_batchesProjects);
       } catch (error) {
-        // TODO
-        // eslint-disable-next-line no-console
-        console.error(error);
+        console.error(error); // eslint-disable-line no-console
       }
     }
 

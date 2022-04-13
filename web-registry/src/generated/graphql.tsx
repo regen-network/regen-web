@@ -18622,6 +18622,22 @@ export type AllProjectsQuery = (
   )> }
 );
 
+export type BatchDetailsQueryVariables = Exact<{
+  batchDenom: Scalars['String'];
+}>;
+
+
+export type BatchDetailsQuery = (
+  { __typename?: 'Query' }
+  & { creditVintageByBatchDenom?: Maybe<(
+    { __typename?: 'CreditVintage' }
+    & { projectByProjectId?: Maybe<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'handle'>
+    )> }
+  )> }
+);
+
 export type CreateAddressMutationVariables = Exact<{
   input: CreateAddressInput;
 }>;
@@ -19817,6 +19833,43 @@ export function useAllProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type AllProjectsQueryHookResult = ReturnType<typeof useAllProjectsQuery>;
 export type AllProjectsLazyQueryHookResult = ReturnType<typeof useAllProjectsLazyQuery>;
 export type AllProjectsQueryResult = Apollo.QueryResult<AllProjectsQuery, AllProjectsQueryVariables>;
+export const BatchDetailsDocument = gql`
+    query batchDetails($batchDenom: String!) {
+  creditVintageByBatchDenom(batchDenom: $batchDenom) {
+    projectByProjectId {
+      handle
+    }
+  }
+}
+    `;
+
+/**
+ * __useBatchDetailsQuery__
+ *
+ * To run a query within a React component, call `useBatchDetailsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBatchDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBatchDetailsQuery({
+ *   variables: {
+ *      batchDenom: // value for 'batchDenom'
+ *   },
+ * });
+ */
+export function useBatchDetailsQuery(baseOptions: Apollo.QueryHookOptions<BatchDetailsQuery, BatchDetailsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BatchDetailsQuery, BatchDetailsQueryVariables>(BatchDetailsDocument, options);
+      }
+export function useBatchDetailsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BatchDetailsQuery, BatchDetailsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BatchDetailsQuery, BatchDetailsQueryVariables>(BatchDetailsDocument, options);
+        }
+export type BatchDetailsQueryHookResult = ReturnType<typeof useBatchDetailsQuery>;
+export type BatchDetailsLazyQueryHookResult = ReturnType<typeof useBatchDetailsLazyQuery>;
+export type BatchDetailsQueryResult = Apollo.QueryResult<BatchDetailsQuery, BatchDetailsQueryVariables>;
 export const CreateAddressDocument = gql`
     mutation CreateAddress($input: CreateAddressInput!) {
   createAddress(input: $input) {

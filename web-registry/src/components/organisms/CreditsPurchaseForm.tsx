@@ -80,14 +80,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginTop: theme.spacing(3),
     },
   },
-  textField: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(10.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(8.5),
-    },
-  },
   cityTextField: {
     marginTop: theme.spacing(4),
   },
@@ -113,11 +105,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   updatesCheckbox: {
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(7.25),
-      marginBottom: theme.spacing(12.5),
     },
     [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(5.25),
-      marginBottom: theme.spacing(8.75),
     },
   },
   green: {
@@ -390,7 +380,6 @@ function CreditsPurchaseForm({
                   />
                   <Field
                     component={TextField}
-                    className={classes.textField}
                     type="email"
                     label="Your email address"
                     name="email"
@@ -409,7 +398,6 @@ function CreditsPurchaseForm({
                     <Field
                       component={TextField}
                       name="orgName"
-                      className={classes.textField}
                       label="Organization name"
                     />
                   </div>

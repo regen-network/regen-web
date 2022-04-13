@@ -3,7 +3,6 @@ import { makeStyles, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
-import ReactHtmlParser from 'react-html-parser';
 import Img, { FluidObject } from 'gatsby-image';
 import cx from 'clsx';
 import { Formik, Form, Field } from 'formik';
@@ -102,21 +101,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   card: {
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(13.75)} ${theme.spacing(7.5)} ${theme.spacing(12.75)}`,
+      padding: `${theme.spacing(13.75)} ${theme.spacing(7.5)} ${theme.spacing(
+        12.75,
+      )}`,
       marginBottom: theme.spacing(25),
     },
     [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(9.5)} ${theme.spacing(5)} ${theme.spacing(11.25)}`,
+      padding: `${theme.spacing(9.5)} ${theme.spacing(5)} ${theme.spacing(
+        11.25,
+      )}`,
       marginBottom: theme.spacing(16.25),
     },
   },
   textField: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(10.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(8.25),
-    },
     '& .MuiInputBase-root': {
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(4),
@@ -259,9 +256,13 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                   }
                   return errors;
                 }}
-                onSubmit={({ requestType, email, name, orgName, message }, { setSubmitting, resetForm }) => {
+                onSubmit={(
+                  { requestType, email, name, orgName, message },
+                  { setSubmitting, resetForm },
+                ) => {
                   setSubmitting(true);
-                  const apiUri: string = process.env.GATSBY_API_URI || 'http://localhost:5000';
+                  const apiUri: string =
+                    process.env.GATSBY_API_URI || 'http://localhost:5000';
                   axios
                     .post(`${apiUri}/contact`, {
                       email,
@@ -279,13 +280,24 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                     });
                 }}
               >
-                {({ values, isValid, submitForm, isSubmitting, submitCount }) => {
+                {({
+                  values,
+                  isValid,
+                  submitForm,
+                  isSubmitting,
+                  submitCount,
+                }) => {
                   return (
                     <div>
                       <Form translate="yes">
                         <div>
                           <Grid container>
-                            <Grid item xs={12} sm={6} className={styles.gridLeft}>
+                            <Grid
+                              item
+                              xs={12}
+                              sm={6}
+                              className={styles.gridLeft}
+                            >
                               <Field
                                 className={styles.textField}
                                 component={TextField}
@@ -293,7 +305,12 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                                 name="name"
                               />
                             </Grid>
-                            <Grid item xs={12} sm={6} className={styles.gridRight}>
+                            <Grid
+                              item
+                              xs={12}
+                              sm={6}
+                              className={styles.gridRight}
+                            >
                               <Field
                                 component={TextField}
                                 className={styles.textField}
@@ -304,16 +321,27 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                             </Grid>
                           </Grid>
                           <Grid container>
-                            <Grid item xs={12} sm={6} className={styles.gridLeft}>
+                            <Grid
+                              item
+                              xs={12}
+                              sm={6}
+                              className={styles.gridLeft}
+                            >
                               <Field
                                 component={TextField}
                                 className={styles.textField}
                                 label="Your organization's name"
                                 name="orgName"
                                 optional
+                                forceDefaultStyle
                               />
                             </Grid>
-                            <Grid item xs={12} sm={6} className={styles.gridRight}>
+                            <Grid
+                              item
+                              xs={12}
+                              sm={6}
+                              className={styles.gridRight}
+                            >
                               <Field
                                 options={[
                                   { value: '', label: 'Select one' },
@@ -327,13 +355,17 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                                     ? cx(styles.defaultSelect, styles.textField)
                                     : styles.textField
                                 }
+                                forceDefaultStyle
                               />
                             </Grid>
                           </Grid>
                         </div>
-                        {values.requestType === 'partnerships@regen.network' && (
+                        {values.requestType ===
+                          'partnerships@regen.network' && (
                           <Description className={styles.messageForPartners}>
-                            <BlockContent content={data?._rawMessageForPartners} />
+                            <BlockContent
+                              content={data?._rawMessageForPartners}
+                            />
                           </Description>
                         )}
                         <Field
@@ -346,7 +378,10 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                           minRows={matches ? 6 : 4}
                         />
                         <ContainedButton
-                          disabled={(submitCount > 0 && !isValid) || isSubmitting}
+                          sx={{ mt: 12.5 }}
+                          disabled={
+                            (submitCount > 0 && !isValid) || isSubmitting
+                          }
                           className={styles.button}
                           onClick={submitForm}
                         >
@@ -354,7 +389,10 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                         </ContainedButton>
                       </Form>
                       {submitCount > 0 && !isSubmitting && (
-                        <Banner duration={bannerDuration} text="Your message was sent to the Regen team!" />
+                        <Banner
+                          duration={bannerDuration}
+                          text="Your message was sent to the Regen team!"
+                        />
                       )}
                     </div>
                   );
@@ -375,7 +413,11 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                 </Description>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Img fluid={data?.location?.image?.image?.asset?.fluid as FluidObject} />
+                <Img
+                  fluid={
+                    data?.location?.image?.image?.asset?.fluid as FluidObject
+                  }
+                />
               </Grid>
             </Grid>
           </div>

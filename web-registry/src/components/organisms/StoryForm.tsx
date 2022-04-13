@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
-import cx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -75,7 +74,7 @@ type exampleFieldName =
 const useStyles = makeStyles((theme: Theme) => ({
   storyCard: {
     paddingBottom: 0,
-    marginBottom: theme.spacing(5),
+    marginBottom: theme.spacing(13),
   },
   quoteTitle: {
     marginBottom: theme.spacing(5),
@@ -89,9 +88,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   description: {
     marginBottom: 0,
     fontSize: theme.typography.pxToRem(16),
-  },
-  field: {
-    marginBottom: theme.spacing(8),
   },
   paddingTop: {
     paddingTop: theme.spacing(4),
@@ -275,7 +271,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
                 <Field
-                  className={styles.field}
                   charLimit={500}
                   component={ControlledTextField}
                   label="Story of the land"
@@ -291,7 +286,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
               </OnBoardingCard>
               <OnBoardingCard className={styles.storyCard}>
                 <Field
-                  className={styles.field}
                   charLimit={1500}
                   component={ControlledTextField}
                   label="Story of the land stewards"
@@ -305,7 +299,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   multiline
                 />
                 <Field
-                  className={styles.field}
                   charLimit={80}
                   component={ControlledTextField}
                   label="Land steward story title"
@@ -329,7 +322,6 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   </Description>
                 </div>
                 <Field
-                  className={styles.field}
                   charLimit={160}
                   component={ControlledTextField}
                   label="Quote from land steward or other important stakeholder"
@@ -341,15 +333,15 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   rows={16}
                   minRows={16}
                   multiline
+                  defaultStyle={false}
                 />
                 <Field
-                  className={styles.field}
                   component={ControlledTextField}
                   label="Name of person quoted"
                   name="['http://regen.network/projectQuote'].['http://schema.org/name']"
                 />
                 <Field
-                  className={cx(styles.field, styles.paddingTop)}
+                  className={styles.paddingTop}
                   component={ControlledTextField}
                   label="Title of person quoted"
                   name="['http://regen.network/projectQuote'].['http://schema.org/jobTitle']"

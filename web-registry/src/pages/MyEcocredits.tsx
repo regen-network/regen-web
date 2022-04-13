@@ -291,9 +291,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           open={true}
           accountAddress={accountAddress}
           basket={basketTakeTokens?.basket}
-          basketDenom={
-            basketTakeTokens?.metadata?.metadata?.display.toUpperCase() || ''
-          }
+          basketDenom={basketTakeTokens?.metadata?.metadata?.display || ''}
           balance={
             parseInt(basketTakeTokens?.balance?.balance?.amount || '0') /
             Math.pow(10, basketTakeTokens?.basket?.exponent)

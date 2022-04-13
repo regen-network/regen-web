@@ -4,7 +4,7 @@ import { StdFee, DeliverTxResponse } from '@cosmjs/stargate';
 import { useLedger } from '../ledger';
 import { Sender } from '../lib/wallet';
 
-interface MessageData {
+interface TxData {
   msgs: any[];
   fee?: StdFee;
   memo?: string;
@@ -12,7 +12,7 @@ interface MessageData {
 
 type MsgClientType = {
   signAndBroadcast: (
-    message: MessageData,
+    message: TxData,
     onBroadcast?: () => void, // an optional callback that gets called between sign and broadcast
   ) => Promise<void>;
   setDeliverTxResponse: (txResult: DeliverTxResponse | undefined) => void;
@@ -32,7 +32,7 @@ export default function useMsgClient(
   >();
 
   const sign = useCallback(
-    async (message: MessageData): Promise<Uint8Array | undefined> => {
+    async (message: TxData): Promise<Uint8Array | undefined> => {
       if (!api?.msgClient || !wallet?.address) return;
       const { msgs, fee, memo } = message;
 
@@ -79,7 +79,7 @@ export default function useMsgClient(
   );
 
   const signAndBroadcast = useCallback(
-    async (message: MessageData, onBroadcast?: () => void) => {
+    async (message: TxData, onBroadcast?: () => void) => {
       try {
         const txBytes = await sign(message);
         if (txBytes) {

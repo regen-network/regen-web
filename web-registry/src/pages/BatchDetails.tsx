@@ -41,8 +41,8 @@ export const BatchDetails: React.FC = () => {
           const batch = await getBatchWithSupplyForDenom(batchDenom);
           setBatch(batch);
           if (batch.metadata) {
-            const metadata = await getMetadata(batch.metadata);
-            setMetadata(metadata);
+            const data = await getMetadata(batch.metadata);
+            setMetadata(data);
           }
         } catch (err) {
           console.error(err); // eslint-disable-line no-console

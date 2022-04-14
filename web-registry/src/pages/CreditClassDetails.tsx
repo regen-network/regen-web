@@ -55,8 +55,8 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
           const classInfo = res?.info;
           if (classInfo) {
             setLedgerClass(classInfo);
-            const metadata = await getMetadata(classInfo.metadata);
-            setMetadata(metadata);
+            const data = await getMetadata(classInfo.metadata);
+            setMetadata(data);
           }
         } catch (err) {
           // eslint-disable-next-line

@@ -58,10 +58,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
   },
-  modal: {
-    padding: 0,
-    overflow: 'hidden',
-  },
 }));
 
 const Home: React.FC = () => {
@@ -194,11 +190,7 @@ const Home: React.FC = () => {
         bottomBanner={content?.bottomBanner}
       />
 
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        className={styles.modal}
-      >
+      <Modal open={open} onClose={() => setOpen(false)} isIFrame>
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </Box>

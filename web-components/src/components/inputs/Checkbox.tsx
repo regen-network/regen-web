@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 /** Custom styles on top of MUI's `Checkbox` component */
 const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
   const classes = useStyles();
-  const { form, field, triggerOnChange } = props;
+  const { form, field, triggerOnChange, disabled } = props;
 
   const onChange = (e: React.ChangeEvent<any>): void => {
     const value = e.target.checked;
@@ -36,7 +36,9 @@ const Checkbox: React.FC<CheckboxProps> = (props: CheckboxProps) => {
       onChange={onChange}
       color="secondary"
       icon={<UncheckedIcon className={classes.check} />}
-      checkedIcon={<CheckedIcon className={classes.check} />}
+      checkedIcon={
+        <CheckedIcon className={classes.check} disabled={disabled} />
+      }
     />
   );
 };

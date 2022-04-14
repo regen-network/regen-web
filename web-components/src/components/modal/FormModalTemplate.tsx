@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Modal, { RegenModalProps } from '../modal';
 import Title from '../title';
+import Description from '../description';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -23,10 +24,12 @@ const useStyles = makeStyles(theme => ({
 
 interface FormModalTemplateProps extends RegenModalProps {
   title: string;
+  subtitle?: string;
 }
 
 const FormModalTemplate: React.FC<FormModalTemplateProps> = ({
   title,
+  subtitle,
   open,
   onClose,
   children,
@@ -35,9 +38,14 @@ const FormModalTemplate: React.FC<FormModalTemplateProps> = ({
 
   return (
     <Modal className={styles.modal} open={open} onClose={onClose}>
-      <Title variant="h3" align="center" className={styles.mainTitle}>
+      <Title sx={{ pb: [7.5, 10] }} variant="h3" align="center">
         {title}
       </Title>
+      {subtitle && (
+        <Description sx={{ pb: [7.5, 10] }} align="center" variant="subtitle2">
+          {subtitle}
+        </Description>
+      )}
       {children}
     </Modal>
   );

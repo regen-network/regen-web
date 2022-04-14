@@ -4,7 +4,7 @@ import Title from 'web-components/lib/components/title';
 import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
 import { formatDate } from 'web-components/lib/utils/format';
 
-import { LinkWithArrow } from '../atoms';
+import { LinkWithArrow, LinkWithArrowProps } from '../atoms';
 import { LineItemLabelAbove, LineItemLabelAboveProps } from '../molecules';
 import { VcsProjectMetadataLD } from '../../types/project/vcs-project';
 
@@ -31,6 +31,10 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
     <LineItemLabelAbove sx={{ mb: { xs: 6, sm: 8 } }} {...props} />
   );
 
+  const ArrowLink = (props: LinkWithArrowProps): JSX.Element => (
+    <LinkWithArrow sx={{ fontSize: { xs: '18px', sm: '22px' } }} {...props} />
+  );
+
   return (
     <Box sx={{ pt: 8 }}>
       <Title variant="h5">Additional Metadata</Title>
@@ -52,7 +56,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
             <LineItem
               label="project activity"
               data={
-                <LinkWithArrow
+                <ArrowLink
                   href={
                     metadata?.['http://regen.network/projectActivity']?.[
                       'http://schema.org/url'
@@ -71,7 +75,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
             <LineItem
               label="vcs project id"
               data={
-                <LinkWithArrow
+                <ArrowLink
                   label={projectId.toString()}
                   href={
                     metadata?.['http://regen.network/vcsProjectPage']?.[
@@ -98,7 +102,7 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
             <LineItem
               label="additional certification"
               data={
-                <LinkWithArrow
+                <ArrowLink
                   href={
                     additionalCertification?.['http://schema.org/url']?.[
                       '@value'

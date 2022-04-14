@@ -94,17 +94,29 @@ const CallToAction = (): JSX.Element => {
           return (
             <Grid key={cta?.header || ''} item sm={6}>
               <Card className={styles.card}>
-                <Avatar className={cx(styles.greenCircle, styles.verticalSpacing)}>
-                  <SanityImage className={styles.image} {...(cta?.image as any)} alt="Icon" />
+                <Avatar
+                  className={cx(styles.greenCircle, styles.verticalSpacing)}
+                >
+                  <SanityImage
+                    className={styles.image}
+                    {...(cta?.image as any)}
+                    alt="Icon"
+                  />
                 </Avatar>
-                <Title className={cx(styles.title, styles.verticalSpacing)} variant="h4" align="center">
+                <Title
+                  className={cx(styles.title, styles.verticalSpacing)}
+                  variant="h4"
+                  align="center"
+                >
                   {cta?.header || ''}
                 </Title>
                 <Description className={styles.description} align="center">
                   <BlockContent
                     noYMargin
                     content={cta?._rawDescription}
-                    onClickModalLink={(href: string) => setModalIframeLink(href)}
+                    onClickModalLink={(href: string) =>
+                      setModalIframeLink(href)
+                    }
                   />
                 </Description>
               </Card>
@@ -112,7 +124,11 @@ const CallToAction = (): JSX.Element => {
           );
         })}
       </Grid>
-      <Modal open={!!modalIframeLink} onClose={() => setModalIframeLink('')} className={styles.modal}>
+      <Modal
+        open={!!modalIframeLink}
+        onClose={() => setModalIframeLink('')}
+        isIFrame
+      >
         <iframe title="cta-modal-iframe-link" src={modalIframeLink} />
       </Modal>
     </Section>

@@ -39,10 +39,6 @@ const useStyles = makeStyles(theme => ({
     background: theme.palette.grey[50],
     borderTop: `1px solid ${theme.palette.grey[100]}`,
   },
-  modal: {
-    padding: 0,
-    overflow: 'hidden',
-  },
 }));
 
 const MethodologyReviewProcess: React.FC = () => {
@@ -130,11 +126,7 @@ const MethodologyReviewProcess: React.FC = () => {
         }}
       />
 
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        className={styles.modal}
-      >
+      <Modal open={open} onClose={() => setOpen(false)} isIFrame>
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>

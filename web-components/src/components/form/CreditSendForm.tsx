@@ -10,7 +10,7 @@ import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
   CreditRetireFields,
-  FormValues as RetireFormValues,
+  RetireFormValues,
   validateCreditRetire,
   initialValues as initialValuesRetire,
 } from './CreditRetireForm';
@@ -216,7 +216,6 @@ const CreditSendForm: React.FC<FormProps> = ({
 
           {values.withRetire && (
             <CreditRetireFields
-              country={values.country}
               availableTradableAmount={availableTradableAmount}
               batchDenom={batchDenom}
             />

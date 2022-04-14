@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
-import CardMedia from '@mui/material/CardMedia';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { Box, CardMedia, useMediaQuery } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
-import { HeroTitle, HeroAction } from '../components/molecules';
+import { Loading } from 'web-components/lib/components/loading';
+import Title from 'web-components/lib/components/title';
+import { BlockContent } from 'web-components/lib/components/block-content';
+
+import { SanityButton } from '../components/atoms';
+import { BackgroundImgSection, HeroAction } from '../components/molecules';
 import {
   ProjectCards,
   CreditClassCards,
@@ -13,24 +17,17 @@ import {
 } from '../components/organisms';
 import { creditClasses } from '../mocks';
 
-import cowsImg from '../assets/cows-by-barn.png';
 import topographyImg from '../assets/background-contour-1.jpg';
 import horsesImg from '../assets/horses-grazing.png';
 
-import { useMoreProjectsQuery } from '../generated/graphql';
+import { client } from '../sanity';
 import {
   useAllHomePageQuery,
   useAllCreditClassQuery,
 } from '../generated/sanity-graphql';
-import { client } from '../sanity';
+import { useMoreProjectsQuery } from '../generated/graphql';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.primary.main,
-  },
-  topSectionDescription: {
-    maxWidth: theme.spacing(165),
-  },
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(22.25),
@@ -61,10 +58,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
   },
-  modal: {
-    padding: 0,
-    overflow: 'hidden',
-  },
 }));
 
 const Home: React.FC = () => {
@@ -74,9 +67,11 @@ const Home: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
 
-  const { data } = useAllHomePageQuery({ client });
+  const { data, loading: loadingSanity } = useAllHomePageQuery({ client });
   const { data: creditClassData } = useAllCreditClassQuery({ client });
   const content = data?.allHomePage?.[0];
+  const heroSection = content?.heroSection;
+
   const creditClassesContent = creditClassData?.allCreditClass;
   const { data: projectsData } = useMoreProjectsQuery();
 
@@ -92,15 +87,63 @@ const Home: React.FC = () => {
     }
   }, []);
 
+  if (loadingSanity) return <Loading sx={{ minHeight: '100vh' }} />;
+
   return (
-    <div className={styles.root}>
-      <HeroTitle
-        isBanner
-        img={cowsImg}
-        title={content?.heroSection?.title}
-        descriptionRaw={content?.heroSection?.descriptionRaw}
-        classes={{ description: styles.topSectionDescription }}
-      />
+    <Box sx={{ backgroundColor: 'primary.main' }}>
+      <BackgroundImgSection
+        img={heroSection?.background?.image?.asset?.url || ''}
+        linearGradient="linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);"
+        classes={{ section: styles.section }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column-reverse', sm: 'row' },
+            alignItems: 'flex-end',
+            justifyContent: 'space-between',
+            pt: { xs: 8, sm: 15 },
+          }}
+        >
+          <Box sx={{ pr: 4, maxWidth: '585px' }}>
+            <Title
+              variant="h1"
+              sx={{
+                color: 'primary.main',
+                lineHeight: { xs: '140%', sm: '130%' },
+              }}
+            >
+              {heroSection?.title}
+            </Title>
+            <BlockContent
+              content={heroSection?.bodyRaw}
+              sxWrap={{
+                color: 'primary.main',
+                fontSize: { xs: 16, sm: 22 },
+                lineHeight: '150%',
+              }}
+            />
+            <SanityButton
+              size="large"
+              btn={heroSection?.button}
+              sx={{ mt: { xs: 4, sm: 4 } }}
+            />
+          </Box>
+          <Box
+            sx={{
+              alignSelf: 'center',
+              maxWidth: { xs: '187px', sm: '100%' },
+            }}
+          >
+            <img
+              loading="lazy"
+              style={{ width: '100%' }}
+              src={heroSection?.icon?.image?.asset?.url || ''}
+              alt={heroSection?.icon?.imageAlt || 'icon'}
+            />
+          </Box>
+        </Box>
+      </BackgroundImgSection>
 
       {projectsData?.allProjects?.nodes && (
         <div id="projects">
@@ -147,14 +190,10 @@ const Home: React.FC = () => {
         bottomBanner={content?.bottomBanner}
       />
 
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        className={styles.modal}
-      >
+      <Modal open={open} onClose={() => setOpen(false)} isIFrame>
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
-    </div>
+    </Box>
   );
 };
 

@@ -83,10 +83,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   resourcesRoot: {
     paddingTop: 0,
   },
-  modal: {
-    padding: 0,
-    overflow: 'hidden',
-  },
 }));
 
 const CreateMethodology: React.FC = () => {
@@ -193,11 +189,7 @@ const CreateMethodology: React.FC = () => {
           Submit a methodology
         </ContainedButton>
       </FixedFooter>
-      <Modal
-        open={open}
-        onClose={() => setOpen(false)}
-        className={styles.modal}
-      >
+      <Modal open={open} onClose={() => setOpen(false)} isIFrame>
         <iframe title="airtable-signup-form" src={modalLink} />
       </Modal>
     </div>

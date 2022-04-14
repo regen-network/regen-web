@@ -5,7 +5,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ImageLeftCard } from 'web-components/lib/components/cards/ImageLeftCard';
 import Description from 'web-components/lib/components/description';
 import { Title } from 'web-components/lib/components/typography';
-import { Label } from 'web-components/lib/components/label';
+import { Label } from 'web-components/lib/components/typography';
 
 const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
 const apiServerUrl = process.env.REACT_APP_API_URI;

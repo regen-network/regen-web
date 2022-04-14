@@ -1,19 +1,11 @@
 import React from 'react';
 import { Box, styled, SxProps, Theme } from '@mui/material';
-import { Label as UnstyledLabel } from '../label';
+import { Label } from '../typography';
 
 const Root = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: theme.spacing(2),
-}));
-
-const Label = styled(UnstyledLabel)(({ theme }) => ({
-  color: theme.palette.info.main,
-  fontSize: 12,
-  [theme.breakpoints.up('sm')]: {
-    fontSize: 14,
-  },
 }));
 
 /** Grey label over child elements */
@@ -25,7 +17,11 @@ export const LabeledDetail: React.FC<{
   };
 }> = ({ label, children, sx }) => (
   <Root sx={sx?.root}>
-    <Label sx={sx?.label}>{label}</Label>
+    <Label
+      sx={{ color: 'info.main', fontSize: { xs: 12, sm: 14 }, ...sx?.label }}
+    >
+      {label}
+    </Label>
     <div>{children}</div>
   </Root>
 );

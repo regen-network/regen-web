@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 
 import { parseText } from 'web-components/lib/utils/textParser';
 import Description from 'web-components/lib/components/description';
-import { Label } from 'web-components/lib/components/label';
+import { Label } from 'web-components/lib/components/typography';
 
 interface LineItemProps {
   label: string;

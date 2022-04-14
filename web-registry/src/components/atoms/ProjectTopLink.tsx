@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Box } from '@mui/material';
-import { Label } from 'web-components/lib/components/label';
+import { Label } from 'web-components/lib/components/typography';
 
 import { LinkWithArrow } from '../atoms';
 

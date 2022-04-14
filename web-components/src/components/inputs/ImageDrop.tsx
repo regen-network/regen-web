@@ -11,7 +11,7 @@ import FieldFormControl from './FieldFormControl';
 import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
-import { Label } from '../label';
+import { Label } from '../typography';
 import { getImageSrc } from '../image-crop/canvas-utils';
 
 export interface ImageDropProps extends FieldProps {

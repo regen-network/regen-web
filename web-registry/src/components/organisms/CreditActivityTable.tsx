@@ -22,7 +22,7 @@ import {
   stableSort,
   Order,
 } from 'web-components/lib/components/table/sort';
-import { Label } from 'web-components/lib/components/label';
+import { Label } from 'web-components/lib/components/typography';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatNumber } from 'web-components/lib/utils/format';

@@ -7,6 +7,7 @@ import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';
 import InfoIconOutlined from '../icons/InfoIconOutlined';
 import InfoTooltip from '../tooltip/InfoTooltip';
+import { Body, Label, Subtitle, Title } from '../typography';
 
 interface OverviewCardProps {
   className?: string;
@@ -86,26 +87,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     width: '100%',
   },
-  title: {
-    fontWeight: 800,
-    fontSize: theme.typography.pxToRem(14),
-    fontFamily: theme.typography.h1.fontFamily,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-    inlineSize: 'max-content',
-    position: 'relative',
-    display: 'inline-block',
-  },
-  description: {
-    display: 'flex',
-    justifyContent: 'center',
-    textAlign: 'center',
-    flexWrap: 'wrap',
-    color: theme.palette.info.dark,
-    fontSize: theme.typography.pxToRem(14),
-    paddingTop: theme.spacing(3),
-  },
   check: {
     height: theme.spacing(4.25),
     width: theme.spacing(4.25),
@@ -143,12 +124,21 @@ function OverviewCard({
       </div>
       <div className={styles.bottom}>
         <Box display="flex" justifyContent="center" pt={2}>
-          <div className={styles.title}>
+          <Label sx={{ fontSize: 14 }}>
             <CheckIcon className={styles.check} />
             {item.title}
-          </div>
+          </Label>
         </Box>
-        <div className={styles.description}>{item.description}</div>
+        <Body
+          size="sm"
+          sx={{
+            textAlign: 'center',
+            color: 'info.dark',
+            pt: 3,
+          }}
+        >
+          {item.description}
+        </Body>
       </div>
     </Card>
   );

@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import Description from 'web-components/lib/components/description';
-import { Label } from 'web-components/lib/components/label';
+import { Label } from 'web-components/lib/components/typography';
 
 import {
   ReviewSectionFieldsFragment,

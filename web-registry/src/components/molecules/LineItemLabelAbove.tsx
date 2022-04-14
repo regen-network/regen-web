@@ -4,7 +4,7 @@ import { SxProps } from '@mui/system';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Description from 'web-components/lib/components/description';
-import { Label } from 'web-components/lib/components/label';
+import { Label } from 'web-components/lib/components/typography';
 
 export interface LineItemLabelAboveProps {
   sx?: SxProps<Theme>;

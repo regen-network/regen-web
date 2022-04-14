@@ -73,60 +73,34 @@ const regenTheme = createTheme({
   typography: {
     fontFamily: defaultFontFamily,
     h1: {
-      // fontSize: '2rem',
-      // [defaultTheme.breakpoints.up('sm')]: {
-      // fontSize: '3rem',
-      // },
       ...headerDefaults,
       fontSize: pxToRem(48),
       lineHeight: '130%',
     },
     h2: {
-      // fontSize: '1.5rem',
-      // [defaultTheme.breakpoints.up('sm')]: {
-      // fontSize: '2.375rem',
-      // },
       ...headerDefaults,
       fontSize: pxToRem(38),
       lineHeight: '130%',
-      // fontFamily: headerFontFamily,
     },
     h3: {
       ...headerDefaults,
       fontSize: pxToRem(32),
       lineHeight: '140%',
-      // fontFamily: headerFontFamily,
-      // fontSize: '1.5rem', // possible override: 1.3125rem
-      // [defaultTheme.breakpoints.up('sm')]: {
-      //   fontSize: '2rem',
-      // },
     },
     h4: {
       ...headerDefaults,
       fontSize: pxToRem(24),
       lineHeight: '145%',
-      // fontFamily: headerFontFamily,
-      // fontSize: '1.3125rem', // possible override: 1.125rem
-      // [defaultTheme.breakpoints.up('sm')]: {
-      //   fontSize: '1.5rem',
-      // },
     },
     h5: {
       ...headerDefaults,
       fontSize: pxToRem(21),
       lineHeight: '150%',
-      // fontFamily: headerFontFamily,
-      // fontSize: '1.125rem',
-      // [defaultTheme.breakpoints.up('sm')]: {
-      //   fontSize: '1.3125rem',
-      // },
     },
     h6: {
       ...headerDefaults,
       fontSize: pxToRem(18),
       lineHeight: '150%',
-      // fontFamily: headerFontFamily,
-      // fontSize: '1.125rem',
     },
     textXLarge: {
       fontSize: pxToRem(22),
@@ -216,11 +190,11 @@ const regenTheme = createTheme({
         sizeSmall: {
           padding: defaultTheme.spacing(1, 2),
           fontSize: '0.75rem',
-          lineHeight: '13.81px',
+          lineHeight: pxToRem(13.81),
           [defaultTheme.breakpoints.up('sm')]: {
             padding: defaultTheme.spacing(1.125, 2.25),
             fontSize: '0.875rem',
-            lineHeight: '17.47px',
+            lineHeight: pxToRem(17.47),
           },
         },
         sizeMedium: {
@@ -230,7 +204,7 @@ const regenTheme = createTheme({
           [defaultTheme.breakpoints.up('sm')]: {
             padding: defaultTheme.spacing(1.5, 3),
             fontSize: '1.125rem',
-            lineHeight: '22.49px',
+            lineHeight: pxToRem(22.49),
           },
         },
         sizeLarge: {
@@ -240,44 +214,12 @@ const regenTheme = createTheme({
           [defaultTheme.breakpoints.up('sm')]: {
             padding: defaultTheme.spacing(1.85, 6),
             fontSize: '1.313rem',
-            lineHeight: '26.36px',
+            lineHeight: pxToRem(26.36),
           },
         },
       },
     },
     MuiTypography: {
-      // styleOverrides: {
-      //   h1: {
-      //     ...headerDefaults,
-      //     fontSize: pxToRem(48),
-      //     lineHeight: '130%',
-      //   },
-      //   h2: {
-      //     ...headerDefaults,
-      //     fontSize: pxToRem(38),
-      //     lineHeight: '130%',
-      //   },
-      //   h3: {
-      //     ...headerDefaults,
-      //     fontSize: pxToRem(32),
-      //     lineHeight: '140%',
-      //   },
-      //   h4: {
-      //     ...headerDefaults,
-      //     fontSize: pxToRem(24),
-      //     lineHeight: '145%',
-      //   },
-      //   h5: {
-      //     ...headerDefaults,
-      //     fontSize: pxToRem(21),
-      //     lineHeight: '150%',
-      //   },
-      //   h6: {
-      //     ...headerDefaults,
-      //     fontSize: pxToRem(18),
-      //     lineHeight: '150%',
-      //   },
-      // },
       defaultProps: {
         variantMapping: {
           h1: 'h1',

@@ -10,7 +10,7 @@ import { BlockContent } from 'web-components/src/components/block-content';
 import Section from 'web-components/lib/components/section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import { Label } from 'web-components/lib/components/label';
+import { Label } from 'web-components/lib/components/typography';
 
 import type { NctOverviewSectionQuery } from '../../generated/graphql';
 import type { FluidObject } from 'gatsby-image';

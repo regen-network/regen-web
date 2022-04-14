@@ -18,7 +18,7 @@ import ControlledTextField from 'web-components/lib/components/inputs/Controlled
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
-import { Label } from 'web-components/lib/components/label';
+import { Label } from 'web-components/lib/components/typography';
 import { Image } from 'web-components/lib/components/image';
 import Submit from 'web-components/lib/components/form/Submit';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';

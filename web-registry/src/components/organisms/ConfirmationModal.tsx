@@ -7,7 +7,7 @@ import cx from 'clsx';
 import Card from 'web-components/lib/components/cards/Card';
 import { Title } from 'web-components/lib/components/typography';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import { Label } from 'web-components/lib/components/label';
+import { Label } from 'web-components/lib/components/typography';
 import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
 import CowIllustration from '../../assets/cow-illustration.png';
 

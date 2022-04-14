@@ -3,6 +3,7 @@ import {
   Title,
   Subtitle,
   Body,
+  Label,
 } from 'web-components/lib/components/typography';
 
 export default {
@@ -44,5 +45,12 @@ export const body = (): JSX.Element => (
     <Body size="xs" mobileSize="xl">
       Body size xs (XL on mobile)
     </Body>
+  </>
+);
+
+export const label = (): JSX.Element => (
+  <>
+    <Label>Label</Label>
+    <Label sx={{ color: 'secondary.main', fontSize: 24 }}>styled Label</Label>
   </>
 );

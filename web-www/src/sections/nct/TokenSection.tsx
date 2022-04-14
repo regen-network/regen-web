@@ -12,7 +12,7 @@ import Section from 'web-components/lib/components/section';
 import { formatDate } from 'web-components/lib/utils/format';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import { Label } from 'web-components/lib/components/label';
+import { Label } from 'web-components/lib/components/typography';
 import Countdown from 'web-components/lib/components/countdown';
 
 import type { NctTokenSectionQuery } from '../../generated/graphql';

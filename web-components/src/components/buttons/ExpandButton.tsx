@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from '@mui/styles';
 import { SxProps } from '@mui/material';
 
-import { Label } from '../label';
+import { Label } from '../typography';
 import OutlinedButton from '../buttons/OutlinedButton';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import { Theme } from '../../theme/muiTheme';

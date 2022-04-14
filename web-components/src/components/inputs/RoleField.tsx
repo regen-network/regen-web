@@ -6,7 +6,7 @@ import { FieldProps, FormikErrors } from 'formik';
 import cx from 'clsx';
 
 import FieldFormControl from './FieldFormControl';
-import { Label } from '../label';
+import { Label } from '../typography';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import OutlinedButton from '../buttons/OutlinedButton';

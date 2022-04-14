@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'https://jm12rn9t.api.sanity.io/v1/graphql/staging/slugs'
+schema: 'https://jm12rn9t.api.sanity.io/v1/graphql/staging/default'
 documents:
   - 'src/graphql/sanity/*.graphql'
 generates:

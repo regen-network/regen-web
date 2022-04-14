@@ -34,11 +34,9 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
   main: props => ({
     display: 'flex',
     flexFlow: 'column nowrap',
+    minHeight: props.isBanner ? '74vh' : 'inherit',
     [theme.breakpoints.up('sm')]: {
-      height: props.isBanner ? theme.spacing(125) : 'inherit',
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: props.isBanner ? '74vh' : 'inherit',
+      minHeight: props.isBanner ? theme.spacing(125) : 'inherit',
     },
   }),
   backgroundGradient: props => ({

@@ -158,54 +158,337 @@ function ProjectTopSection({
 
   useEffect(() => {
     const expand = async (): Promise<void> => {
+      if (!project?.metadata) return;
+      console.log('project?.metadata', project?.metadata);
+
       const result = await jsonld.expand(
         project?.metadata,
         // project?.metadata?.['@context'],
       );
+      // const result = await jsonld.frame(
+      //   project?.metadata,
+      //   project?.metadata?.['@context'],
+      // );
 
-      setMetadata(result);
+      //TODO: JUST use compacted style!!!
+
+      const fixed = result[0];
+      console.log('result', fixed);
+
+      setMetadata(fixed);
     };
 
     expand();
   }, [project]);
 
-  console.log(metadata);
+  // [
+  //   {
+  //     '@type': ['http://regen.network/Project'],
+  //     'http://regen.network/additionalCertification': [
+  //       {
+  //         'http://schema.org/name': [
+  //           {
+  //             '@value': 'CCB',
+  //           },
+  //         ],
+  //         'http://schema.org/url': [
+  //           {
+  //             '@type': 'http://schema.org/URL',
+  //             '@value': 'https://verra.org/project/ccb-program/',
+  //           },
+  //         ],
+  //         'http://schema.org/version': [
+  //           {
+  //             '@value': 'Second Edition',
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //     'http://regen.network/boundaries': [
+  //       {
+  //         '@type': 'http://schema.org/URL',
+  //         '@value':
+  //           'https://regen-registry.s3.amazonaws.com/projects/wilmot/Wilmot_boundary.kml',
+  //       },
+  //     ],
+  //     'http://regen.network/landStory': [
+  //       {
+  //         '@value':
+  //           'For years, the land between Tsavo East and Tsavo West National parks in Kenya served both as home to a slowly failing cattle ranch and as the main migration corridor for local wildlife moving between the two National Parks. When we first encountered Rukinga, the community and the wildlife were at odds. Rukinga was a bruised, balding land, barren of wildlife. Cattle had grazed the fields into dust, poachers slipped on and off the ranch with ease, and trees were being clear cut along the area’s critical rainwater basin.',
+  //       },
+  //     ],
+  //     'http://regen.network/offsetGenerationMethod': [
+  //       {
+  //         '@value': 'offsetGenerationMethod',
+  //       },
+  //     ],
+  //     'http://regen.network/projectActivity': [
+  //       {
+  //         'http://schema.org/name': [
+  //           {
+  //             '@value': 'REDD+',
+  //           },
+  //         ],
+  //         'http://schema.org/url': [
+  //           {
+  //             '@type': 'http://schema.org/URL',
+  //             '@value': 'https://redd.unfccc.int/',
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //     'http://regen.network/projectDeveloper': [
+  //       {
+  //         '@type': ['http://regen.network/OrganizationDisplay'],
+  //         'http://regen.network/showOnProjectPage': [
+  //           {
+  //             '@value': true,
+  //           },
+  //         ],
+  //         'http://schema.org/description': [
+  //           {
+  //             '@value':
+  //               "Wildlife Works is the world's leading REDD+ program development and management company.",
+  //           },
+  //         ],
+  //         'http://schema.org/name': [
+  //           {
+  //             '@value': 'Wildlife Works Carbon LLC',
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //     'http://regen.network/projectEndDate': [
+  //       {
+  //         '@type': 'http://www.w3.org/2001/XMLSchema#date',
+  //         '@value': '2022-03-17',
+  //       },
+  //     ],
+  //     'http://regen.network/projectSize': [
+  //       {
+  //         'http://qudt.org/schema/qudt/numericValue': [
+  //           {
+  //             '@type': 'http://www.w3.org/2001/XMLSchema#double',
+  //             '@value': 123456,
+  //           },
+  //         ],
+  //         'http://qudt.org/schema/qudt/unit': [
+  //           {
+  //             '@type': 'qudt:Unit',
+  //             '@value': 'http://qudt.org/vocab/unit/HA',
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //     'http://regen.network/projectStartDate': [
+  //       {
+  //         '@type': 'http://www.w3.org/2001/XMLSchema#date',
+  //         '@value': '2020-01-31',
+  //       },
+  //     ],
+  //     'http://regen.network/vcsMethodology': [
+  //       {
+  //         'http://schema.org/name': [
+  //           {
+  //             '@value': 'vcsMethodology',
+  //           },
+  //         ],
+  //         'http://schema.org/url': [
+  //           {
+  //             '@type': 'http://schema.org/URL',
+  //             '@value': 'https://verra.org/project/ccb-program/',
+  //           },
+  //         ],
+  //       },
+  //     ],
+  //     'http://regen.network/vcsProjectId': [
+  //       {
+  //         '@type': 'http://www.w3.org/2001/XMLSchema#unsignedInt',
+  //         '@value': 123,
+  //       },
+  //     ],
+  //     'http://regen.network/vcsProjectPage': [
+  //       {
+  //         '@type': 'http://schema.org/URL',
+  //         '@value': 'https://registry.verra.org/app/projectDetail/VCS/todo',
+  //       },
+  //     ],
+  //     'http://regen.network/vcsProjectType': [
+  //       {
+  //         '@value': 'vcsProjectType',
+  //       },
+  //     ],
+  //     'http://schema.org/location': [
+  //       {
+  //         'https://purl.org/geojson/vocab#bbox': [
+  //           {
+  //             '@value': 152.281925823569,
+  //           },
+  //           {
+  //             '@value': -30.4188967883064,
+  //           },
+  //           {
+  //             '@value': 152.53051845185,
+  //           },
+  //           {
+  //             '@value': -30.1967091580822,
+  //           },
+  //         ],
+  //         'https://purl.org/geojson/vocab#center': [
+  //           {
+  //             '@value': 152.4184,
+  //           },
+  //           {
+  //             '@value': -30.2986,
+  //           },
+  //         ],
+  //         'https://purl.org/geojson/vocab#context': [
+  //           {
+  //             'https://purl.org/geojson/vocab#id': [
+  //               {
+  //                 '@value': 'postcode.8076814917761920',
+  //               },
+  //             ],
+  //             'https://purl.org/geojson/vocab#text': [
+  //               {
+  //                 '@value': '2453',
+  //               },
+  //             ],
+  //           },
+  //           {
+  //             'https://purl.org/geojson/vocab#id': [
+  //               {
+  //                 '@value': 'region.19582497656831280',
+  //               },
+  //             ],
+  //             'https://purl.org/geojson/vocab#short_code': [
+  //               {
+  //                 '@value': 'AU-NSW',
+  //               },
+  //             ],
+  //             'https://purl.org/geojson/vocab#text': [
+  //               {
+  //                 '@value': 'New South Wales',
+  //               },
+  //             ],
+  //             'https://purl.org/geojson/vocab#wikidata': [
+  //               {
+  //                 '@value': 'Q3224',
+  //               },
+  //             ],
+  //           },
+  //           {
+  //             'https://purl.org/geojson/vocab#id': [
+  //               {
+  //                 '@value': 'country.9665923154346070',
+  //               },
+  //             ],
+  //             'https://purl.org/geojson/vocab#short_code': [
+  //               {
+  //                 '@value': 'au',
+  //               },
+  //             ],
+  //             'https://purl.org/geojson/vocab#text': [
+  //               {
+  //                 '@value': 'Australia',
+  //               },
+  //             ],
+  //             'https://purl.org/geojson/vocab#wikidata': [
+  //               {
+  //                 '@value': 'Q408',
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //         'https://purl.org/geojson/vocab#geometry': [
+  //           {
+  //             'https://purl.org/geojson/vocab#coordinates': [
+  //               {
+  //                 '@list': [
+  //                   {
+  //                     '@value': 152.4184,
+  //                   },
+  //                   {
+  //                     '@value': -30.2986,
+  //                   },
+  //                 ],
+  //               },
+  //             ],
+  //             '@type': ['https://purl.org/geojson/vocab#Point'],
+  //           },
+  //         ],
+  //         'https://purl.org/geojson/vocab#id': [
+  //           {
+  //             '@value': 'locality.6875563885184200',
+  //           },
+  //         ],
+  //         'https://purl.org/geojson/vocab#place_name': [
+  //           {
+  //             '@value': 'Hernani, New South Wales, Australia',
+  //           },
+  //         ],
+  //         'https://purl.org/geojson/vocab#place_type': [
+  //           {
+  //             '@value': 'locality',
+  //           },
+  //         ],
+  //         'https://purl.org/geojson/vocab#properties': [{}],
+  //         'https://purl.org/geojson/vocab#relevance': [
+  //           {
+  //             '@value': 1,
+  //           },
+  //         ],
+  //         'https://purl.org/geojson/vocab#text': [
+  //           {
+  //             '@value': 'Hernani',
+  //           },
+  //         ],
+  //         '@type': ['https://purl.org/geojson/vocab#Feature'],
+  //       },
+  //     ],
+  //     'http://schema.org/name': [
+  //       {
+  //         '@value': 'VCS Sample Project',
+  //       },
+  //     ],
+  //   },
+  // ];
 
   const registry = project?.partyByRegistryId;
-  const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
+  const videoURL = metadata?.['http://regen.network/videoURL']?.[0]?.['@value'];
   const landStewardPhoto =
-    metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
+    metadata?.['http://regen.network/landStewardPhoto']?.[0]?.['@value'];
   const area =
-    metadata?.['http://regen.network/size']?.[
+    metadata?.['http://regen.network/size']?.[0]?.[
       'http://qudt.org/1.1/schema/qudt#numericValue'
-    ]?.['@value'] ||
-    metadata?.['http://regen.network/projectSize']?.[
+    ]?.[0]?.['@value'] ||
+    metadata?.['http://regen.network/projectSize']?.[0]?.[
       'http://qudt.org/schema/qudt/numericValue'
-    ]?.['@value'];
+    ]?.[0]?.['@value'];
   const unit: qudtUnit | undefined =
-    metadata?.['http://regen.network/size']?.[
+    metadata?.['http://regen.network/projectSize']?.[0]?.[
       'http://qudt.org/1.1/schema/qudt#unit'
-    ]?.['@value'] ||
-    metadata?.['http://regen.network/projectSize']?.[
-      'http://qudt.org/schema/qudt/unit'
-    ]?.['@value'];
+    ]?.[0]?.['@value'] ||
+    metadata?.['http://regen.network/projectSize']?.[0]?.['@value'];
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
   const methodologyVersion =
     creditClass?.methodologyByMethodologyId?.methodologyVersionsById
       ?.nodes?.[0];
   const quote = metadata?.['http://regen.network/projectQuote'];
-  const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
+  const glanceText =
+    metadata?.['http://regen.network/glanceText']?.[0]?.['@list'];
   const landStory = metadata?.['http://regen.network/landStory'];
   const landStewardStoryTitle =
     metadata?.['http://regen.network/landStewardStoryTitle'];
-  const landStewardStory = metadata?.['http://regen.network/landStewardStory'];
+  const landStewardStory =
+    metadata?.['http://regen.network/landStewardStory']?.[0]?.['@value'];
   const isVcsProject =
-    !!metadata?.['http://regen.network/vcsProjectId']?.['@value'];
+    !!metadata?.['http://regen.network/vcsProjectId']?.[0]?.['@value'];
 
-  const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
-    '@list'
-  ]?.map((sdg: { '@id': string }) => sdg['@id']);
+  const sdgIris = creditClassVersion?.metadata?.[
+    'http://regen.network/SDGs'
+  ]?.[0]?.['@list']?.map((sdg: { '@id': string }) => sdg['@id']);
   const { data: sdgData } = useSdgByIriQuery({
     client,
     variables: {
@@ -222,12 +505,14 @@ function ProjectTopSection({
       <Grid container>
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
           {/* TODO Show on-chain project id if no off-chain name */}
-          <Title variant="h1">{metadata?.['http://schema.org/name']}</Title>
+          <Title variant="h1">
+            {metadata?.['http://schema.org/name']?.[0]?.['@value']}
+          </Title>
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo
               iconClassName={styles.icon}
               // TODO Format and show on-chain project location if no off-chain location
-              place={metadata?.['http://schema.org/location']?.place_name}
+              place={metadata?.['http://schema.org/location']?.[0]?.place_name}
               area={area}
               areaUnit={unit && qudtUnitMap[unit]}
             />
@@ -308,7 +593,7 @@ function ProjectTopSection({
               {landStory}
             </Description>
           )}
-          {isVcsProject && <AdditionalProjectMetadata metadata={metadata} />}
+          <AdditionalProjectMetadata metadata={metadata} />
           <LazyLoad offset={50}>
             {videoURL &&
               (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(
@@ -319,7 +604,10 @@ function ProjectTopSection({
               ) ? (
                 <iframe
                   className={cx(styles.iframe, styles.media)}
-                  title={metadata?.['http://schema.org/name'] || 'project'}
+                  title={
+                    metadata?.['http://schema.org/name']?.[0]?.['@value'] ||
+                    'project'
+                  }
                   src={videoURL}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 ></iframe>
@@ -382,7 +670,7 @@ function ProjectTopSection({
           )}
         </Grid>
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
-          <ProjectTopCard
+          {/* <ProjectTopCard
             projectDeveloper={getDisplayParty(
               'http://regen.network/projectDeveloper',
               metadata,
@@ -402,7 +690,7 @@ function ProjectTopSection({
             issuer={getParty(project?.partyByIssuerId)}
             reseller={getParty(project?.partyByResellerId)}
             sdgs={sdgs}
-          />
+          /> */}
         </Grid>
       </Grid>
       {batchData?.batches && batchData.batches.length > 0 && (

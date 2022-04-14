@@ -9,23 +9,26 @@ import { LineItemLabelAbove, LineItemLabelAboveProps } from '../molecules';
 import { VcsProjectMetadataLD } from '../../types/project/vcs-project';
 
 export interface MetadataProps {
-  metadata?: VcsProjectMetadataLD;
+  // metadata?: VcsProjectMetadataLD;
+  metadata?: any;
 }
 
 const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
-  const projectId = metadata?.['http://regen.network/vcsProjectId']?.['@value'];
 
-  if (!metadata || !projectId) {
-    return null;
-  }
+  if (!metadata) return null;
+  const projectId =
+    metadata?.['http://regen.network/vcsProjectId']?.[0]?.['@value'];
 
-  const additionalCertification =
-    metadata?.['http://regen.network/additionalCertification'];
+  console.log('metadata ', metadata);
+  console.log('projectId ', projectId);
+  if (!projectId) return null;
+
   const startDate =
-    metadata?.['http://regen.network/projectStartDate']?.['@value'];
-  const endDate = metadata?.['http://regen.network/projectEndDate']?.['@value'];
+    metadata?.['http://regen.network/projectStartDate']?.[0]?.['@value'];
+  const endDate =
+    metadata?.['http://regen.network/projectEndDate']?.[0]?.['@value'];
 
   const LineItem = (props: LineItemLabelAboveProps): JSX.Element => (
     <LineItemLabelAbove sx={{ mb: { xs: 6, sm: 8 } }} {...props} />
@@ -48,9 +51,13 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
         >
           <LineItem
             label="offset generation method"
-            data={metadata?.['http://regen.network/offsetGenerationMethod']}
+            data={
+              metadata?.['http://regen.network/offsetGenerationMethod']?.[0]?.[
+                '@value'
+              ]
+            }
           />
-          {metadata?.['http://regen.network/projectActivity']?.[
+          {!!metadata?.['http://regen.network/projectActivity']?.[0]?.[
             'http://schema.org/name'
           ] && (
             <LineItem
@@ -58,27 +65,27 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
               data={
                 <ArrowLink
                   href={
-                    metadata?.['http://regen.network/projectActivity']?.[
+                    metadata?.['http://regen.network/projectActivity']?.[0]?.[
                       'http://schema.org/url'
-                    ]?.['@value']
+                    ]?.[0]?.['@value']
                   }
                   label={
-                    metadata?.['http://regen.network/projectActivity']?.[
+                    metadata?.['http://regen.network/projectActivity']?.[0]?.[
                       'http://schema.org/name'
-                    ]
+                    ]?.[0]?.['@value']
                   }
                 />
               }
             />
           )}
-          {projectId && (
+          {!!projectId && (
             <LineItem
               label="vcs project id"
               data={
                 <ArrowLink
                   label={projectId.toString()}
                   href={
-                    metadata?.['http://regen.network/vcsProjectPage']?.[
+                    metadata?.['http://regen.network/vcsProjectPage']?.[0]?.[
                       '@value'
                     ]
                   }
@@ -88,30 +95,15 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
           )}
           <LineItem
             label="vcs project type"
-            data={metadata?.['http://regen.network/vcsProjectType']}
+            data={
+              metadata?.['http://regen.network/vcsProjectType']?.[0]?.['value']
+            }
           />
-          <LineItem
-            label="project start date"
-            data={!!startDate && formatDate(startDate)}
-          />
-          <LineItem
-            label="project end date"
-            data={!!endDate && formatDate(endDate)}
-          />
-          {additionalCertification && (
-            <LineItem
-              label="additional certification"
-              data={
-                <ArrowLink
-                  href={
-                    additionalCertification?.['http://schema.org/url']?.[
-                      '@value'
-                    ]
-                  }
-                  label={additionalCertification?.['http://schema.org/name']}
-                />
-              }
-            />
+          {!!startDate && (
+            <LineItem label="project start date" data={formatDate(startDate)} />
+          )}
+          {!!startDate && (
+            <LineItem label="project end date" data={formatDate(endDate)} />
           )}
         </Box>
       </Collapse>

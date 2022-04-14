@@ -44,10 +44,6 @@ const useStyles = makeStyles<Theme>(theme => ({
       textAlign: 'center',
     },
   },
-  modal: {
-    padding: 0,
-    overflow: 'hidden',
-  },
 }));
 
 type QueryData = {
@@ -114,8 +110,8 @@ const CollectiveSection = (): JSX.Element => {
       <Modal
         open={open}
         onClose={() => setOpen(false)}
-        className={styles.modal}
         closeIconColor={theme.palette.info.light}
+        isIFrame
       >
         <iframe
           title="collective-signup-form"

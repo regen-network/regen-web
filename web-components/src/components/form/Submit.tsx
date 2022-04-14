@@ -19,6 +19,7 @@ interface SubmitProps {
 const useStyles = makeStyles((theme: Theme) => ({
   submitButton: {
     textAlign: 'right',
+    maxWidth: 'max-content',
   },
   cancel: {
     fontFamily: theme.typography.h1.fontFamily,

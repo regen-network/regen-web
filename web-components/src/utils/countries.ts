@@ -1,4 +1,5 @@
 export const countries: { [key: string]: string } = {
+  US: 'United States',
   AD: 'Andorra',
   AE: 'United Arab Emirates',
   AF: 'Afghanistan',
@@ -204,7 +205,6 @@ export const countries: { [key: string]: string } = {
   UA: 'Ukraine',
   UG: 'Uganda',
   UM: 'United States minor outlying islands',
-  US: 'United States',
   UY: 'Uruguay',
   UZ: 'Uzbekistan',
   VC: 'Saint Vincent and the Grenadines',

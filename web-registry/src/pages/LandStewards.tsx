@@ -20,10 +20,6 @@ import {
 import landStewardsHero from '../assets/land-stewards-top.jpg';
 
 const useStyles = makeStyles(theme => ({
-  modal: {
-    padding: 0,
-    overflow: 'hidden',
-  },
   heroMain: {
     maxWidth: theme.typography.pxToRem(775),
     paddingBottom: theme.spacing(20),
@@ -167,7 +163,7 @@ const LandStewards = (): JSX.Element => {
           {content?.footerButton?.buttonText}
         </ContainedButton>
       </FixedFooter>
-      <Modal open={open} onClose={closeModal} className={styles.modal}>
+      <Modal open={open} onClose={closeModal} isIFrame>
         <iframe title="airtable-signup-land-steward" src={modalLink} />
       </Modal>
     </>

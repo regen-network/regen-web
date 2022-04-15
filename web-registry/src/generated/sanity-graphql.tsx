@@ -2194,7 +2194,7 @@ export type HomePage = Document & {
   /** Current document revision */
   _rev?: Maybe<Scalars['String']>;
   _key?: Maybe<Scalars['String']>;
-  heroSection?: Maybe<HeroSection>;
+  heroSection?: Maybe<HomePageTopSection>;
   bottomBanner?: Maybe<BottomBanner>;
 };
 
@@ -2207,7 +2207,7 @@ export type HomePageFilter = {
   _updatedAt?: Maybe<DatetimeFilter>;
   _rev?: Maybe<StringFilter>;
   _key?: Maybe<StringFilter>;
-  heroSection?: Maybe<HeroSectionFilter>;
+  heroSection?: Maybe<HomePageTopSectionFilter>;
   bottomBanner?: Maybe<BottomBannerFilter>;
 };
 
@@ -2218,8 +2218,37 @@ export type HomePageSorting = {
   _updatedAt?: Maybe<SortOrder>;
   _rev?: Maybe<SortOrder>;
   _key?: Maybe<SortOrder>;
-  heroSection?: Maybe<HeroSectionSorting>;
+  heroSection?: Maybe<HomePageTopSectionSorting>;
   bottomBanner?: Maybe<BottomBannerSorting>;
+};
+
+export type HomePageTopSection = {
+  __typename?: 'HomePageTopSection';
+  _key?: Maybe<Scalars['String']>;
+  _type?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  bodyRaw?: Maybe<Scalars['JSON']>;
+  button?: Maybe<Button>;
+  background?: Maybe<CustomImage>;
+  icon?: Maybe<CustomImage>;
+};
+
+export type HomePageTopSectionFilter = {
+  _key?: Maybe<StringFilter>;
+  _type?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  button?: Maybe<ButtonFilter>;
+  background?: Maybe<CustomImageFilter>;
+  icon?: Maybe<CustomImageFilter>;
+};
+
+export type HomePageTopSectionSorting = {
+  _key?: Maybe<SortOrder>;
+  _type?: Maybe<SortOrder>;
+  title?: Maybe<SortOrder>;
+  button?: Maybe<ButtonSorting>;
+  background?: Maybe<CustomImageSorting>;
+  icon?: Maybe<CustomImageSorting>;
 };
 
 export type HomePageWeb = Document & {
@@ -6154,8 +6183,18 @@ export type AllHomePageQuery = (
   & { allHomePage: Array<(
     { __typename?: 'HomePage' }
     & { heroSection?: Maybe<(
-      { __typename?: 'HeroSection' }
-      & HeroSectionFieldsFragment
+      { __typename?: 'HomePageTopSection' }
+      & Pick<HomePageTopSection, 'title' | 'bodyRaw'>
+      & { button?: Maybe<(
+        { __typename?: 'Button' }
+        & ButtonFieldsFragment
+      )>, background?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )>, icon?: Maybe<(
+        { __typename?: 'CustomImage' }
+        & CustomImageFieldsFragment
+      )> }
     )>, bottomBanner?: Maybe<(
       { __typename?: 'BottomBanner' }
       & BottomBannerFieldsFragment
@@ -7116,14 +7155,25 @@ export const AllHomePageDocument = gql`
     query allHomePage {
   allHomePage {
     heroSection {
-      ...heroSectionFields
+      title
+      bodyRaw
+      button {
+        ...buttonFields
+      }
+      background {
+        ...customImageFields
+      }
+      icon {
+        ...customImageFields
+      }
     }
     bottomBanner {
       ...bottomBannerFields
     }
   }
 }
-    ${HeroSectionFieldsFragmentDoc}
+    ${ButtonFieldsFragmentDoc}
+${CustomImageFieldsFragmentDoc}
 ${BottomBannerFieldsFragmentDoc}`;
 
 /**

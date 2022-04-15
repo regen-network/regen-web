@@ -287,7 +287,7 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
       <Modal
         open={!!modalIframeLink}
         onClose={() => setModalIframeLink('')}
-        className={styles.modal}
+        isIFrame
       >
         <iframe title="modal-iframe-link" src={modalIframeLink} />
       </Modal>

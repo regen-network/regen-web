@@ -140,6 +140,10 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
             const batchProject = await fetchProjectByBatchDenom({
               variables: { batchDenom },
             });
+
+            // eslint-disable-next-line no-console
+            console.log('** batchProject', batchProject);
+
             return {
               batchDenom,
               projectName:
@@ -151,6 +155,9 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
             };
           }),
         );
+
+        // eslint-disable-next-line no-console
+        console.log('** _batchesProjects', _batchesProjects);
 
         setBatchesProjects(_batchesProjects);
       } catch (error) {

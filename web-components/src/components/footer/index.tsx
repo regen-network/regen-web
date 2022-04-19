@@ -64,15 +64,17 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
       <List sx={{ p: 0 }}>
         {items.map((item, index) => (
           <ListItem sx={{ py: 0.75, px: 0 }} key={index}>
-            <BodyText size="lg">
-              <Link
-                href={item.href}
-                rel="noopener noreferrer"
-                target={item.target}
-              >
-                {item.title}
-              </Link>
-            </BodyText>
+            <Link
+              href={item.href}
+              rel="noopener noreferrer"
+              target={item.target}
+              sx={{
+                fontSize: [16, 18],
+                lineHeight: '150%',
+              }}
+            >
+              {item.title}
+            </Link>
           </ListItem>
         ))}
       </List>
@@ -90,20 +92,7 @@ export default function Footer({
 
   return (
     <Box sx={{ backgroundColor: 'info.dark', color: 'primary.main' }}>
-      <Section
-        sx={{
-          root: {
-            '& a': {
-              '&:link, &:visited, &:hover, &:active': {
-                textDecoration: 'none',
-              },
-              '&:hover': {
-                color: 'info.contrastText',
-              },
-            },
-          },
-        }}
-      >
+      <Section>
         <Grid container>
           <Grid item xs={12} sm={3}>
             <FooterItem

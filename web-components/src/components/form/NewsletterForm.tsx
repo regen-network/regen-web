@@ -71,19 +71,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingRight: theme.spacing(3.25),
     },
-    '& .MuiInputBase-root': {
-      lineHeight: '150%',
-      [theme.breakpoints.down('sm')]: {
-        fontSize: theme.spacing(4),
-        height: theme.spacing(15),
-        padding: theme.spacing(5),
-      },
-      [theme.breakpoints.up('sm')]: {
-        height: theme.spacing(17.75),
-        fontSize: theme.spacing(4.5),
-        padding: theme.spacing(5),
-      },
-    },
+    // '& .MuiInputBase-root': {
+    //   lineHeight: '150%',
+    //   [theme.breakpoints.down('sm')]: {
+    //     fontSize: theme.spacing(4),
+    //     height: theme.spacing(15),
+    //     padding: theme.spacing(5),
+    //   },
+    //   [theme.breakpoints.up('sm')]: {
+    //     height: theme.spacing(17.75),
+    //     fontSize: theme.spacing(4.5),
+    //     padding: theme.spacing(5),
+    //   },
+    // },
   },
   success: {
     color: theme.palette.primary.main,
@@ -178,7 +178,8 @@ export default function NewsletterForm({
               </Grid>
               <Grid item xs={gridXs.button}>
                 <ContainedButton
-                  className={clsx(buttonClassName, classes.button)}
+                  size="large"
+                  className={buttonClassName}
                   disabled={(submitCount > 0 && !isValid) || isSubmitting}
                   onClick={submitForm}
                 >

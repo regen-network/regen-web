@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useTheme } from '@mui/styles';
 import { Grid, List, ListItem, Link, Box } from '@mui/material';
 
 import { BodyText, ButtonText } from '../typography';
@@ -37,22 +37,25 @@ const FooterItem: React.FC<FooterItemProps> = ({
       <List sx={{ p: 0 }}>
         {items.map((item, index) => (
           <ListItem sx={{ py: 0.75, px: 0 }} key={index}>
-            <BodyText
-              size="lg"
+            <Box
+              component={'span'}
               sx={{
+                fontSize: [16, 18],
+                lineHeight: '150%',
                 '& a:hover': {
                   color: 'info.contrastText',
                 },
               }}
             >
               <LinkComponent
+                style={{ fontWeight: 'normal' }}
                 href={item.href}
                 rel="noopener noreferrer"
                 target={item.target}
               >
                 {ReactHtmlParser(item.title)}
               </LinkComponent>
-            </BodyText>
+            </Box>
           </ListItem>
         ))}
       </List>

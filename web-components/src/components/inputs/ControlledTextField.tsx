@@ -5,6 +5,7 @@ import { FieldProps } from 'formik';
 
 import FieldFormControl, { DefaultStyleProps } from './FieldFormControl';
 import Input from './Input';
+import { BodyText } from '../typography';
 
 interface ControlledTextFieldProps
   extends FieldProps,
@@ -16,22 +17,6 @@ interface ControlledTextFieldProps
   optional?: boolean;
   onExampleClick?: () => void;
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  charCount: {
-    color: theme.palette.info.main,
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(4),
-      fontSize: theme.spacing(3.3),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(1),
-      marginBottom: theme.spacing(3),
-      fontSize: theme.spacing(3),
-    },
-  },
-}));
 
 export default function ControlledTextField({
   charLimit,
@@ -62,8 +47,6 @@ export default function ControlledTextField({
       charLimit && charsLeft <= charLimit ? value.slice(0, charLimit) : value;
     handleFn(text);
   }
-
-  const classes = useStyles();
 
   return (
     <FieldFormControl
@@ -100,12 +83,12 @@ export default function ControlledTextField({
             }
           />
           {charLimit && (
-            <Typography
-              variant="body1"
-              className={classes.charCount}
-            >{`${charsLeft} character${
-              charsLeft === 1 ? '' : 's'
-            } remaining`}</Typography>
+            <BodyText
+              size="sm"
+              sx={{ color: 'info.main', mt: 1, mb: { xs: 3, sm: 4 } }}
+            >
+              {`${charsLeft} character${charsLeft === 1 ? '' : 's'} remaining`}
+            </BodyText>
           )}
         </>
       )}

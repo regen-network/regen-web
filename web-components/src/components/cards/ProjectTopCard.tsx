@@ -45,16 +45,7 @@ const useStyles = makeStyles(theme => ({
   },
   image: {
     borderRadius: '2px',
-    // boxShadow: `3px 3px ${theme.palette.grey[100]}`,
     width: '100%',
-  },
-  sdg: {
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(3),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(4),
-    },
   },
   sdgs: {
     [theme.breakpoints.down('sm')]: {
@@ -128,7 +119,7 @@ export default function ProjectTopCard({
     <Card className={cx(styles.root, classes && classes.root)}>
       {sdgs && (
         <div className={styles.sdgs}>
-          <Title className={styles.sdg} variant="h3">
+          <Title variant="h3" sx={{ pb: { xs: 3, sm: 4 } }}>
             SDGs
           </Title>
           <Grid container>

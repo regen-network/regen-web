@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, StaticQuery } from 'gatsby';
-import { makeStyles, useTheme } from '@mui/styles';
-import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+import { useTheme, Grid } from '@mui/material';
 import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -20,17 +20,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17),
-    },
-  },
-  title: {
-    lineHeight: '140%',
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(38.5),
-      paddingBottom: theme.spacing(9),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(18.5),
-      paddingBottom: theme.spacing(7.5),
     },
   },
   itemLeft: {
@@ -179,7 +168,10 @@ const CommunitySection = (): JSX.Element => {
                 wrap="nowrap"
                 className={classes.connect}
               >
-                <Title className={classes.caption} variant="h3">
+                <Title
+                  variant="h3"
+                  sx={{ textAlign: 'center', pb: [5.5, 'initial'] }}
+                >
                   {content?.caption}
                 </Title>
                 <Img
@@ -233,7 +225,7 @@ const CommunitySection = (): JSX.Element => {
                 </a>
               </Grid>
             </Grid>
-            <Title className={classes.title} variant="h1">
+            <Title variant="h1" sx={{ pt: [18.5, 38.5], pb: [7.5, 9] }}>
               {content?.header}
             </Title>
             <HexaImages

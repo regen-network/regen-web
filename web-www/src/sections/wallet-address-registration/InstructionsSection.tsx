@@ -2,9 +2,8 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
+import { BodyText, Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
-import Description from 'web-components/lib/components/description';
 import { WalletAddrRegInstructionsSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
 
@@ -56,12 +55,21 @@ const InstructionsSection = (): JSX.Element => {
   const styles = useStyles();
   return (
     <Section className={styles.section}>
-      <Title className={styles.title} variant="h3" align="center">
+      <Title variant="h3" align="center" sx={{ mb: [8.5, 6.75] }}>
         {data?.title}
       </Title>
-      <Description className={styles.body}>
-        {<BlockContent content={data?._rawBody} />}
-      </Description>
+      <BodyText
+        size="xl"
+        mobileSize="md"
+        sx={{
+          m: '0 auto',
+          maxWidth: theme => theme.spacing(225),
+          mb: 15,
+          textAlign: 'center',
+        }}
+      >
+        <BlockContent content={data?._rawBody} />
+      </BodyText>
     </Section>
   );
 };

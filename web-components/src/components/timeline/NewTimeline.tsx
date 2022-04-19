@@ -152,52 +152,33 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     paddingLeft: theme.spacing(2.375),
     paddingRight: theme.spacing(2.375),
   },
-  number: {
-    display: 'flex',
-    alignItems: 'center',
-    color: theme.palette.grey[100],
-    fontWeight: 900,
-    fontFamily: theme.typography.h1.fontFamily,
-    paddingRight: theme.spacing(5),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(22.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(15),
-    },
-  },
-  title: {
-    color: theme.palette.primary.light,
-    lineHeight: '140%',
-    paddingBottom: theme.spacing(4),
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(5.25),
-      paddingBottom: theme.spacing(3),
-    },
-    '& a': {
-      cursor: 'pointer',
-    },
-  },
-  text: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(3),
-      paddingRight: theme.spacing(5.75),
-    },
-  },
 }));
 
 function Content({ item, index, onTitleClick }: ContentProps): JSX.Element {
   const classes = useStyles({ even: index % 2 === 0 });
   return (
     <Grid container wrap="nowrap" className={classes.content}>
-      <Grid className={classes.number} item>
-        {index + 1}
+      <Grid item sx={{ display: 'flex', alignItems: 'center' }}>
+        <Title
+          variant="h1"
+          sx={{
+            color: 'grey.100',
+            pr: 5,
+            fontSize: theme => ({
+              xs: theme.spacing(15),
+              sm: theme.spacing(22.5),
+            }),
+          }}
+        >
+          {index + 1}
+        </Title>
       </Grid>
-      <Grid item className={classes.text}>
-        <Title className={classes.title} variant="h3">
+      <Grid item sx={{ pr: { xs: 5.75, sm: 0 }, pt: { xs: 3, sm: 5 } }}>
+        <Title
+          variant="h3"
+          mobileVariant="h5"
+          sx={{ color: 'primary.light', pb: { xs: 3, sm: 3.5 } }}
+        >
           {item.url && onTitleClick ? (
             <Link color="inherit" onClick={() => onTitleClick(item.url || '')}>
               {item.title}

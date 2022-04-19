@@ -151,7 +151,12 @@ const CreditClassOverviewSection: React.FC<CreditClassOverviewSectionProps> = ({
           <OverviewCards cards={overviewCards} />
           {isMobile && sdgs && (
             <div className={styles.sdgsMobile}>
-              <Title className={styles.title} variant="h2" align="left">
+              <Title
+                variant="h2"
+                mobileVariant="h3"
+                align="left"
+                sx={{ pb: 8 }}
+              >
                 SDGs
               </Title>
               <SDGs sdgs={sdgs} />

@@ -74,7 +74,7 @@ export const BatchDetails: React.FC = () => {
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
       {/* default `Section` padding is higher on mobile - 22.25 is default above small */}
-      <Section sx={{ pt: [12, 22.25], pb: 22.25 }}>
+      <Section sx={{ root: { pt: [12, 22.25], pb: 22.25 } }}>
         <Box
           sx={{
             display: 'flex',

@@ -66,14 +66,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.spacing(4.5),
     paddingTop: theme.spacing(3.25),
   },
-  title: {
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(7.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(21.75),
-    },
-  },
 }));
 
 const query = graphql`
@@ -102,7 +94,11 @@ const PartnersPage: React.FC<PageProps> = ({ location }) => {
       <SEO title="Partners" location={location} />
       <div className={styles.sectionWrapper}>
         <Section className={styles.section}>
-          <Title className={styles.title} align="center" variant="h1">
+          <Title
+            align="center"
+            variant="h1"
+            sx={{ pb: { xs: 7.5, sm: 21.75 } }}
+          >
             {data?.header}
           </Title>
           <Grid

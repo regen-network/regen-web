@@ -95,27 +95,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   center: {
     textAlign: 'center',
   },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(5),
-      paddingBottom: theme.spacing(5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(3.5),
-      paddingBottom: theme.spacing(3.5),
-    },
-  },
-  cardTitle: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(7),
-    },
-    [theme.breakpoints.down('md')]: {
-      paddingTop: theme.spacing(5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(4),
-    },
-  },
   grid: {
     [theme.breakpoints.down('md')]: {
       flexDirection: 'column-reverse',
@@ -230,7 +209,7 @@ function PostPurchase(): JSX.Element {
       <Section classes={{ root: classes.section }}>
         <div className={classes.center}>
           <img src={CowIllustration} alt={CowIllustration} />
-          <Title className={classes.title} align="center" variant="h2">
+          <Title align="center" variant="h2" sx={{ py: { xs: 3.5, sm: 5 } }}>
             Thank you for your purchase!
           </Title>
           {projectData && projectData.projectByHandle && (
@@ -246,7 +225,10 @@ function PostPurchase(): JSX.Element {
             <GreenCard className={classes.card}>
               <Grid container className={classes.grid}>
                 <Grid item xs={12} md={6}>
-                  <Title className={classes.cardTitle} variant="h3">
+                  <Title
+                    variant="h3"
+                    sx={{ pb: { xs: 4, sm: 7 }, pt: { xs: 5, md: 0 } }}
+                  >
                     Order summary
                   </Title>
                   <GridItem

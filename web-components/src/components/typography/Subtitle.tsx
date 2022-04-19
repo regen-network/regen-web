@@ -7,6 +7,7 @@ interface Props extends TypographyProps {
 }
 
 export const Subtitle = styled(Typography, {
+  name: 'RegenSubtitle',
   shouldForwardProp: prop => prop !== 'size' && prop !== 'mobileSize',
 })<Props>(({ theme, mobileSize, size = 'md' }) => {
   const { breakpoints, typography } = theme;
@@ -20,3 +21,7 @@ export const Subtitle = styled(Typography, {
     },
   };
 });
+
+Subtitle.defaultProps = {
+  size: 'md',
+};

@@ -105,7 +105,10 @@ const NotFound = ({ img, home = '/' }: NotFoundProps): JSX.Element => {
       <div className={classes.container}>
         <div className={classes.image}>{img}</div>
         <div className={classes.fourOFour}>404</div>
-        <Title className={classes.h1} align="center" variant="h1">
+        <Title
+          variant="h1"
+          sx={{ textAlign: 'center', color: 'primary.contrastText', mb: 4.25 }}
+        >
           Oops! Page not found.
         </Title>
         <Typography align="center" className={classes.text}>

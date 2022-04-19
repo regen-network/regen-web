@@ -57,9 +57,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       position: 'absolute',
     },
   },
-  title: {
-    flex: 1,
-  },
   nav: {
     border: `1px solid ${theme.palette.grey[100]}`,
     borderRadius: '10px',
@@ -193,7 +190,7 @@ function ProjectEdit(): JSX.Element {
           <div className={styles.sectionContainer}>
             <div className={styles.section}>
               <div className={styles.topAlign}>
-                <Title className={styles.title} variant="h3" align="center">
+                <Title variant="h3" align="center" sx={{ flex: 1 }}>
                   {section ? titleCase(section) : 'Edit Project Page'}
                 </Title>
               </div>

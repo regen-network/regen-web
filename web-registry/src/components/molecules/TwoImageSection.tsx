@@ -2,10 +2,12 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
-import { Title } from 'web-components/lib/components/typography';
+import { Label } from 'web-components/lib/components/typography';
 import { Image } from 'web-components/lib/components/image';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { DualImageSection } from '../../generated/sanity-graphql';
+import { Typography } from '@mui/material';
+import { styled } from '@mui/system';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -43,21 +45,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(60.5)} 0`,
     },
   },
-  title: {
-    fontWeight: 800,
-    fontFamily: theme.typography.h1.fontFamily,
-    letterSpacing: '1px',
-    color: theme.palette.info.dark,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: theme.spacing(6.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-      lineHeight: theme.spacing(4.5),
-    },
-  },
   titleContainer: {
     position: 'absolute',
     background: theme.palette.primary.main,
@@ -77,20 +64,16 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '95%',
     },
   },
-  label: {
-    fontSize: theme.spacing(4.5),
-    color: theme.palette.primary.main,
-    lineHeight: theme.spacing(5.75),
-    fontWeight: 800,
-    fontFamily: theme.typography.h1.fontFamily,
-    letterSpacing: '1px',
-    textTransform: 'uppercase',
-    backgroundColor: theme.palette.secondary.main,
-    borderRadius: '2px',
-    padding: `${theme.spacing(1)} ${theme.spacing(2.5)}`,
-  },
 }));
 
+const GreenLabel = styled(Label)(({ theme }) => ({
+  fontSize: theme.spacing(4.5),
+  backgroundColor: theme.palette.secondary.main,
+  borderRadius: '2px',
+  color: theme.palette.primary.main,
+  padding: theme.spacing(1, 2.5),
+  display: 'inline-block',
+}));
 interface Props {
   content: DualImageSection;
 }
@@ -101,9 +84,9 @@ const TwoImageSection: React.FC<Props> = ({ content }) => {
   return (
     <Grid container className={classes.root}>
       <div className={classes.titleContainer}>
-        <Title variant="h5" className={classes.title}>
+        <Label sx={{ color: 'info.dark', fontSize: { xs: 14, sm: 21 } }}>
           {content?.title}
-        </Title>
+        </Label>
       </div>
       <Grid item xs={12} sm={6}>
         <Image
@@ -111,9 +94,11 @@ const TwoImageSection: React.FC<Props> = ({ content }) => {
           src={content?.left?.image?.image?.asset?.url || ''}
         >
           <div className={classes.item}>
-            <Title className={classes.amount}>{content?.left?.boldText}</Title>
+            <Typography className={classes.amount}>
+              {content?.left?.boldText}
+            </Typography>
             <div className={classes.labelContainer}>
-              <span className={classes.label}>{content?.left?.label}</span>
+              <GreenLabel>{content?.left?.label}</GreenLabel>
             </div>
           </div>
         </Image>
@@ -124,9 +109,11 @@ const TwoImageSection: React.FC<Props> = ({ content }) => {
           src={content?.right?.image?.image?.asset?.url || ''}
         >
           <div className={classes.item}>
-            <Title className={classes.amount}>{content?.right?.boldText}</Title>
+            <Typography className={classes.amount}>
+              {content?.right?.boldText}
+            </Typography>
             <div className={classes.labelContainer}>
-              <span className={classes.label}>{content?.right?.label}</span>
+              <GreenLabel>{content?.right?.label}</GreenLabel>
             </div>
           </div>
         </Image>

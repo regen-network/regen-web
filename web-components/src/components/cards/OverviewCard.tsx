@@ -7,7 +7,7 @@ import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';
 import InfoIconOutlined from '../icons/InfoIconOutlined';
 import InfoTooltip from '../tooltip/InfoTooltip';
-import { Body, Label, Subtitle, Title } from '../typography';
+import { BodyText, Label } from '../typography';
 
 interface OverviewCardProps {
   className?: string;
@@ -129,7 +129,7 @@ function OverviewCard({
             {item.title}
           </Label>
         </Box>
-        <Body
+        <BodyText
           size="sm"
           sx={{
             textAlign: 'center',
@@ -138,7 +138,7 @@ function OverviewCard({
           }}
         >
           {item.description}
-        </Body>
+        </BodyText>
       </div>
     </Card>
   );

@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
+import { ButtonText, Title } from 'web-components/lib/components/typography';
 import Description from 'web-components/lib/components/description';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import { getFontSize } from 'web-components/lib/theme/sizing';
@@ -25,28 +25,6 @@ const useStyles = makeStyles((theme: Theme) => ({
         backgroundPosition: `right ${theme.spacing(27.5)} !important`,
       },
     },
-  },
-  title: {
-    lineHeight: '145%',
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(13.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(5.5),
-    },
-  },
-  caption: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      paddingBottom: theme.spacing(0.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(1),
-    },
-    fontWeight: 800,
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    color: theme.palette.info.main,
   },
   slider: {
     [theme.breakpoints.up('sm')]: {
@@ -102,10 +80,10 @@ const OpenScienceSection = (): JSX.Element => {
       topSection={false}
       imageData={data.background?.childImageSharp?.fluid}
     >
-      <Title className={styles.caption} variant="h6">
+      <ButtonText mobileSize="xs" sx={{ color: 'info.main' }}>
         {content?.caption}
-      </Title>
-      <Title className={styles.title} variant="h1">
+      </ButtonText>
+      <Title variant="h1" mobileVariant="h5" sx={{ pb: [0, 13.5] }}>
         {content?.headerStart}{' '}
         <span className={styles.green}>{content?.headerGreen}</span>
       </Title>

@@ -1,16 +1,5 @@
 import { createTheme } from '@mui/material/styles';
 
-declare module '@mui/material/styles' {
-  interface BreakpointOverrides {
-    xs: true;
-    sm: true;
-    tablet: true; // adds the `tablet` breakpoint
-    md: true;
-    lg: true;
-    xl: true;
-  }
-}
-
 const defaultTheme = createTheme({
   breakpoints: {
     values: {
@@ -108,7 +97,9 @@ const regenTheme = createTheme({
     textLarge: {
       fontSize: pxToRem(18),
     },
-    textMedium: {
+    // MUI defaults to 'body1' for Typography text and I can't figure out how to
+    // override - this represents the equivalent of `textMedium`
+    body1: {
       fontSize: pxToRem(16),
     },
     textSmall: {
@@ -118,18 +109,18 @@ const regenTheme = createTheme({
       fontSize: pxToRem(12),
     },
     // TODO disable these after moving to custom comopnents
-    subtitle1: {
-      fontSize: '2rem',
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '2.375rem',
-      },
-    },
-    subtitle2: {
-      fontSize: '0.875rem',
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '1.125rem',
-      },
-    },
+    // subtitle1: {
+    //   fontSize: '2rem',
+    //   [defaultTheme.breakpoints.up('sm')]: {
+    //     fontSize: '2.375rem',
+    //   },
+    // },
+    // subtitle2: {
+    //   fontSize: '0.875rem',
+    //   [defaultTheme.breakpoints.up('sm')]: {
+    //     fontSize: '1.125rem',
+    //   },
+    // },
     // body1: {
     //   fontSize: '0.875rem',
     //   [defaultTheme.breakpoints.up('sm')]: {
@@ -139,9 +130,10 @@ const regenTheme = createTheme({
     // body2: {
     //   fontSize: '0.875rem',
     // },
-    overline: {
-      fontFamily: defaultFontFamily,
-    },
+    // not really used
+    // overline: {
+    //   fontFamily: defaultFontFamily,
+    // },
   },
   breakpoints: defaultTheme.breakpoints,
   shadows: [
@@ -228,10 +220,11 @@ const regenTheme = createTheme({
           h4: 'h4',
           h5: 'h5',
           h6: 'h6',
-          subtitle1: 'h2',
-          subtitle2: 'h2',
+          textXLarge: 'p',
+          textLarge: 'p',
           body1: 'p',
-          body2: 'p',
+          textSmall: 'p',
+          textXSmall: 'p',
         },
       },
     },
@@ -247,7 +240,6 @@ declare module '@mui/material/styles' {
   interface TypographyVariants {
     textXLarge: React.CSSProperties;
     textLarge: React.CSSProperties;
-    textMedium: React.CSSProperties;
     textSmall: React.CSSProperties;
     textXSmall: React.CSSProperties;
   }
@@ -256,7 +248,6 @@ declare module '@mui/material/styles' {
   interface TypographyVariantsOptions {
     textXLarge?: React.CSSProperties;
     textLarge?: React.CSSProperties;
-    textMedium?: React.CSSProperties;
     textSmall?: React.CSSProperties;
     textXSmall?: React.CSSProperties;
   }
@@ -267,9 +258,19 @@ declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
     textXLarge: true;
     textLarge: true;
-    textMedium: true;
     textSmall: true;
     textXSmall: true;
+  }
+}
+
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xs: true;
+    sm: true;
+    tablet: true; // adds the `tablet` breakpoint
+    md: true;
+    lg: true;
+    xl: true;
   }
 }
 

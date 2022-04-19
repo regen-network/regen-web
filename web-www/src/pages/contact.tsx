@@ -82,9 +82,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       margin: '0 auto',
     },
   },
-  email: {
-    paddingTop: theme.spacing(8.5),
-  },
   body: {
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.spacing(4.5),
@@ -405,7 +402,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                 <Description className={styles.body}>
                   <BlockContent content={data?.location?._rawBody} />
                 </Description>
-                <Title className={styles.email} variant="h4">
+                <Title variant="h4" sx={{ pt: 8.5 }}>
                   {data?.email?.title}
                 </Title>
                 <Description className={cx(styles.emailBody, styles.body)}>

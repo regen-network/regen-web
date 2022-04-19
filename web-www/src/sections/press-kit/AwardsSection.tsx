@@ -34,14 +34,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
-  itemTitle: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(4),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(4.5),
-    },
-  },
   image: {
     borderRadius: '5px',
   },
@@ -75,7 +67,7 @@ const AwardsSection = (): JSX.Element => {
         className={styles.image}
         fluid={item?.image?.asset?.fluid as FluidObject}
       ></Img>
-      <Title className={styles.itemTitle} variant="h5">
+      <Title variant="h5" sx={{ pt: [4, 4.5] }}>
         {item?.title}
       </Title>
     </a>

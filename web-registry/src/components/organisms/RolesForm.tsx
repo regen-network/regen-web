@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field, FormikErrors } from 'formik';
-import cx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -9,7 +8,7 @@ import {
   RoleField,
   FormValues,
 } from 'web-components/lib/components/inputs/RoleField';
-import { Title } from 'web-components/lib/components/typography';
+import { Subtitle } from 'web-components/lib/components/typography';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
@@ -46,17 +45,6 @@ const rolesErrorMessage = 'You must add one of the following roles.';
 const useStyles = makeStyles((theme: Theme) => ({
   storyCard: {
     paddingBottom: 0,
-  },
-  title: {
-    fontWeight: 700,
-    color: theme.palette.primary.contrastText,
-    fontFamily: theme.typography.fontFamily,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-    },
   },
   field: {
     [theme.breakpoints.up('sm')]: {
@@ -402,9 +390,12 @@ const RolesForm: React.FC<RolesFormProps> = ({
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>
-                <Title className={cx(styles.title, styles.field)}>
+                <Subtitle
+                  size="lg"
+                  sx={{ color: 'primary.contrastText', mb: { xs: 10, sm: 12 } }}
+                >
                   You must add one of the following roles.
-                </Title>
+                </Subtitle>
                 <Field
                   classes={{ root: styles.field }}
                   component={RoleField}

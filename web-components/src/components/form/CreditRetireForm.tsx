@@ -108,6 +108,8 @@ interface CreditRetireFieldsProps {
   availableTradableAmount: number;
 }
 
+const titleMargins = { mt: 10.75, mb: 3 } as const;
+
 export const BottomCreditRetireFields: React.FC = () => {
   const styles = useStyles();
   const {
@@ -116,7 +118,7 @@ export const BottomCreditRetireFields: React.FC = () => {
 
   return (
     <>
-      <Title className={styles.groupTitle} variant="h5">
+      <Title variant="h5" sx={titleMargins}>
         Transaction note
       </Title>
       <Field
@@ -128,7 +130,7 @@ export const BottomCreditRetireFields: React.FC = () => {
         optional
         defaultStyle={false}
       />
-      <Title className={styles.groupTitle} variant="h5">
+      <Title variant="h5" sx={titleMargins}>
         Location of retirement
       </Title>
       <Description className={styles.description}>

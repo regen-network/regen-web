@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
+import { ButtonText, Title } from 'web-components/lib/components/typography';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import { DocumentationTable } from 'web-components/lib/components/table/DocumentationTable';
 import BackgroundSection from '../../components/BackgroundSection';
@@ -20,30 +20,8 @@ import {
 } from '../../util/sanity-transforms';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    marginBottom: theme.spacing(8.5),
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(6.75),
-    },
-  },
   section: {
     borderBottom: `1px solid ${theme.palette.grey[300]}`,
-  },
-  subtitle: {
-    color: theme.palette.info.dark,
-    textTransform: 'uppercase',
-    fontWeight: 800,
-    letterSpacing: '1px',
-    margin: theme.spacing(8, 0),
-    '&:last-of-type': {
-      margin: theme.spacing(10, 0, 8),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
   },
   table: {
     border: `2px solid ${theme.palette.secondary.contrastText}`,
@@ -114,22 +92,32 @@ const RegistrySection = (): JSX.Element => {
       imageData={data?.background?.childImageSharp?.fluid}
       topSection={false}
     >
-      <Title className={styles.title} variant="h3" align="left">
+      <Title variant="h3" align="left" sx={{ mb: [6.75, 8.5] }}>
         {content?.header}
       </Title>
       {content?.subsections?.map((sub, i) => (
         <React.Fragment key={i}>
-          <Typography variant="h1" className={styles.subtitle}>
+          <ButtonText
+            sx={{
+              color: 'info.dark',
+              my: 8,
+            }}
+          >
             {sub?.title}
-          </Typography>
+          </ButtonText>
           <ResourceCardsSlider
             items={sanityResourcesToCardProps(sub?.cards as SanityResource[])}
           />
         </React.Fragment>
       ))}
-      <Typography variant="h1" className={styles.subtitle}>
+      <ButtonText
+        sx={{
+          color: 'info.dark',
+          my: 8,
+        }}
+      >
         {content?.documentTableTitle}
-      </Typography>
+      </ButtonText>
       <Box className={styles.table}>
         <DocumentationTable
           canClickRow

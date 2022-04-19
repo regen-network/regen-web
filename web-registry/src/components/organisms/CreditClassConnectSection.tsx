@@ -79,7 +79,11 @@ function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
         section: styles.section,
       }}
     >
-      <Title className={styles.header} variant="h2" align="center">
+      <Title
+        variant="h2"
+        mobileVariant="h3"
+        sx={{ color: 'primary.main', textAlign: 'center' }}
+      >
         {connectSection?.title || 'Connect and Learn'}
       </Title>
       <div className={styles.links}>

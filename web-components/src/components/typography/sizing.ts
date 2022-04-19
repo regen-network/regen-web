@@ -1,6 +1,16 @@
 import { Variant } from '@mui/material/styles/createTypography';
 
-export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type TextSize =
+  /** 12px */
+  | 'xs'
+  /** 14px */
+  | 'sm'
+  /** 16px */
+  | 'md'
+  /** 18px */
+  | 'lg'
+  /** 22px */
+  | 'xl';
 
 export function getSizeVariants(
   size: TextSize,
@@ -12,8 +22,24 @@ export function getSizeVariants(
     mobileVariant: getSizeVariant(_mobileSize),
   };
 }
+export function getMobileSize(size: TextSize): TextSize {
+  switch (size) {
+    case 'xs':
+      return 'xs';
+    case 'sm':
+      return 'xs';
+    case 'lg':
+      return 'md';
+    case 'xl':
+      return 'lg';
+    case 'md':
+    default:
+      return 'sm';
+  }
+}
 
 /** takes a `TextSize` and returns a custom MUI theme `variant` */
+// Possible TODO: should this also accept pixel (or REM) values?
 function getSizeVariant(size: TextSize): Variant {
   let variant;
   switch (size) {
@@ -31,24 +57,8 @@ function getSizeVariant(size: TextSize): Variant {
       break;
     case 'md':
     default:
-      variant = 'textMedium';
+      variant = 'body1';
       break;
   }
   return variant as Variant;
-}
-
-function getMobileSize(size: TextSize): TextSize {
-  switch (size) {
-    case 'xs':
-      return 'xs';
-    case 'sm':
-      return 'xs';
-    case 'lg':
-      return 'md';
-    case 'xl':
-      return 'lg';
-    case 'md':
-    default:
-      return 'sm';
-  }
 }

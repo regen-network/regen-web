@@ -38,9 +38,6 @@ const useStyles = makeStyles(theme => ({
       padding: theme.spacing(12, 5.5),
     },
   },
-  title: {
-    marginBottom: theme.spacing(4),
-  },
   button: {
     marginTop: theme.spacing(1),
     width: theme.typography.pxToRem(232),
@@ -103,7 +100,7 @@ function CreditClassDetailsColumn({
   return (
     <div className={cx(classes?.root, className)}>
       <Card className={styles.card}>
-        <Title className={styles.title} variant="h4">
+        <Title variant="h4" sx={{ mb: 4 }}>
           Credit Details
         </Title>
         <div className={cx(styles.lineItem, styles.images)}>

@@ -1,15 +1,15 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Link from '@mui/material/Link';
 
-import { Title } from '../typography';
+import { BodyText, ButtonText } from '../typography';
 import Section from '../section';
 import NewsletterForm from '../form/NewsletterForm';
 import { SocialLinks } from './SocialLinks';
+import { Box } from '@mui/material';
 
 export interface FooterItemProps {
   title: string;
@@ -20,68 +20,10 @@ interface FooterProps {
   footerItems: [FooterItemProps, FooterItemProps, FooterItemProps];
   termsUrl: string;
   privacyUrl: string;
-  paddingBottom?: boolean;
   apiUri?: string;
 }
 
-interface StyleProps {
-  paddingBottom?: boolean;
-}
-
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.info.dark,
-  },
-  section: props => ({
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: props.paddingBottom ? theme.spacing(30) : 0,
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: props.paddingBottom ? theme.spacing(19) : 0,
-    },
-    '& a': {
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-      '&:hover': {
-        color: theme.palette.info.contrastText,
-      },
-    },
-  }),
-  title: {
-    textTransform: 'uppercase',
-    color: theme.palette.primary.main,
-    fontWeight: 800,
-    letterSpacing: '1px',
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: theme.spacing(6.5),
-      marginBottom: theme.spacing(3.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      lineHeight: theme.spacing(4.5),
-      fontSize: theme.spacing(3.5),
-      marginBottom: theme.spacing(4.5),
-    },
-  },
-  subTitle: {
-    lineHeight: '150%',
-    color: theme.palette.primary.main,
-    padding: 0,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-      marginBottom: theme.spacing(1.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-      marginBottom: theme.spacing(1),
-    },
-  },
-  list: {
-    padding: 0,
-  },
-  mail: {
-    paddingTop: theme.spacing(4),
-  },
+const useStyles = makeStyles<Theme>((theme: Theme) => ({
   textField: {
     paddingRight: theme.spacing(2.5),
     '& .MuiInputBase-root': {
@@ -93,40 +35,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     fontSize: theme.spacing(3.5),
     height: theme.spacing(12.5),
     padding: theme.spacing(2.5),
-  },
-  bottomGrid: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(8.25),
-      marginBottom: theme.spacing(8.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(9),
-    },
-  },
-  bottom: {
-    color: theme.palette.primary.main,
-    lineHeight: '150%',
-    fontSize: theme.spacing(3.5),
-  },
-  newsletter: {
-    fontWeight: 'bold',
-    color: theme.palette.secondary.main,
-    lineHeight: '145%',
-    fontSize: theme.spacing(3),
-    paddingBottom: theme.spacing(5),
-    paddingTop: theme.spacing(2.5),
-    display: 'block',
-  },
-  separator: {
-    borderTop: 0,
-    borderColor: theme.palette.grey[50],
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(19.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(18.75),
-    },
   },
   community: {
     [theme.breakpoints.up('sm')]: {
@@ -141,23 +49,30 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
+const btnTextMB = {
+  xs: 4.5,
+  sm: 3.75,
+} as const;
+
 const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
   const classes = useStyles({});
   return (
     <div className={classes.footerItem}>
-      <Title className={classes.title} variant="h5">
+      <ButtonText size="lg" sx={{ mb: btnTextMB }}>
         {title}
-      </Title>
-      <List className={classes.list}>
+      </ButtonText>
+      <List sx={{ p: 0 }}>
         {items.map((item, index) => (
-          <ListItem className={classes.subTitle} key={index}>
-            <Link
-              href={item.href}
-              rel="noopener noreferrer"
-              target={item.target}
-            >
-              {item.title}
-            </Link>
+          <ListItem sx={{ py: 0.75, px: 0 }} key={index}>
+            <BodyText size="lg">
+              <Link
+                href={item.href}
+                rel="noopener noreferrer"
+                target={item.target}
+              >
+                {item.title}
+              </Link>
+            </BodyText>
           </ListItem>
         ))}
       </List>
@@ -169,14 +84,26 @@ export default function Footer({
   footerItems,
   termsUrl,
   privacyUrl,
-  paddingBottom,
   apiUri = 'http://localhost:5000',
 }: FooterProps): JSX.Element {
-  const classes = useStyles({ paddingBottom });
+  const classes = useStyles({ paddingBottom: false });
 
   return (
-    <div className={classes.root}>
-      <Section classes={{ root: classes.section }}>
+    <Box sx={{ backgroundColor: 'info.dark', color: 'primary.main' }}>
+      <Section
+        sx={{
+          root: {
+            '& a': {
+              '&:link, &:visited, &:hover, &:active': {
+                textDecoration: 'none',
+              },
+              '&:hover': {
+                color: 'info.contrastText',
+              },
+            },
+          },
+        }}
+      >
         <Grid container>
           <Grid item xs={12} sm={3}>
             <FooterItem
@@ -197,13 +124,13 @@ export default function Footer({
             />
           </Grid>
           <Grid item xs={12} sm={4} className={classes.footerItem}>
-            <Title className={classes.title} variant="h5">
+            <ButtonText size="lg" sx={{ mb: btnTextMB }}>
               subscribe
-            </Title>
-            <Typography className={classes.subTitle}>
+            </ButtonText>
+            <BodyText size="lg">
               Stay up to date! Sign up for our monthly newsletter.
-            </Typography>
-            <div className={classes.mail}>
+            </BodyText>
+            <Box sx={{ pt: 4 }}>
               <NewsletterForm
                 submitLabel="subscribe"
                 buttonClassName={classes.button}
@@ -211,26 +138,40 @@ export default function Footer({
                 apiUri={apiUri}
                 gridXs={{ textField: 7, button: 5 }}
               />
-            </div>
-            {/* <Link className={classes.newsletter}>See archive of past newsletters»</Link> */}
+            </Box>
           </Grid>
         </Grid>
         <SocialLinks className={classes.community} />
-        <hr className={classes.separator} />
+        <Box
+          component="hr"
+          sx={{
+            borderTop: 1,
+            borderColor: 'grey.50',
+            mt: { xs: 10, sm: 19.75 },
+          }}
+        />
         <Grid
-          className={classes.bottomGrid}
           container
+          sx={{
+            mt: { xs: 6, sm: 8.25 },
+            mb: { xs: 9, sm: 8.25 },
+          }}
           justifyContent="space-between"
         >
-          <Grid item className={classes.bottom}>
-            <Link href={termsUrl}>Terms</Link> |{' '}
-            <Link href={privacyUrl}>Privacy</Link>
+          <Grid item>
+            <Link variant="textSmall" href={termsUrl}>
+              Terms
+            </Link>{' '}
+            |{' '}
+            <Link variant="textSmall" href={privacyUrl}>
+              Privacy
+            </Link>
           </Grid>
-          <Grid item className={classes.bottom}>
-            © 2021 Regen Network Development, Inc
+          <Grid item>
+            <BodyText size="sm">© 2021 Regen Network Development, Inc</BodyText>
           </Grid>
         </Grid>
       </Section>
-    </div>
+    </Box>
   );
 }

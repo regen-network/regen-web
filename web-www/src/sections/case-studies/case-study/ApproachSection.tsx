@@ -6,7 +6,11 @@ import ReactHtmlParser from 'react-html-parser';
 import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
+import {
+  BodyText,
+  ButtonText,
+  Title,
+} from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import Description from 'web-components/lib/components/description';
 import { SanityCaseStudyApproachSection } from '../../../generated/graphql';
@@ -50,40 +54,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(4.5),
     },
   },
-  cardTitle: {
-    fontFamily: theme.typography.h1.fontFamily,
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    fontWeight: 800,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-      lineHeight: theme.spacing(5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-      lineHeight: theme.spacing(5.75),
-    },
-  },
-  cardDescription: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    '& ul, ol': {
-      listStyle: 'none',
-      marginLeft: theme.spacing(3),
-    },
-    '& li::before': {
-      content: "'\\2022'",
-      color: theme.palette.secondary.main,
-      display: 'inline-block',
-      width: '1em',
-      marginLeft: '-1em',
-      fontSize: theme.spacing(3),
-    },
-  },
   figureTitle: {
     lineHeight: '150%',
     [theme.breakpoints.down('sm')]: {
@@ -109,18 +79,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(13.5),
     },
   },
-  subHeader: {
-    lineHeight: '140%',
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(7),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(8),
-    },
-    '& p': {
-      margin: 0,
-    },
-  },
   image: {
     borderRadius: '10px',
   },
@@ -141,20 +99,40 @@ export const TitleWithParagraphs: React.FC<TitleWithParagraphsProps> = ({
   const styles = useStyles();
   return (
     <>
-      <Title className={styles.subHeader} variant="h3">
+      <Title variant="h3" sx={{ pb: { xs: 7, sm: 8 } }}>
         {title}
       </Title>
       <div>
         {paragraphs.map((p: Paragraph, i: number) => (
           <div key={i} className={i > 0 ? styles.paragraph : undefined}>
-            <div className={styles.cardTitle}>{p.title}</div>
-            <Description className={styles.cardDescription}>
+            <ButtonText sx={{ fontSize: { xs: 16, sm: 18 }, pb: 3.5 }}>
+              {p.title}
+            </ButtonText>
+            <BodyText
+              size="lg"
+              sx={{
+                pt: 1.25,
+                mb: 0,
+                '& ul, ol': {
+                  listStyle: 'none',
+                  marginLeft: 3,
+                },
+                '& li::before': {
+                  content: "'\\2022'",
+                  color: 'secondary.main',
+                  display: 'inline-block',
+                  width: '1em',
+                  marginLeft: '-1em',
+                  fontSize: 12,
+                },
+              }}
+            >
               {typeof p.content === 'string' ? (
                 ReactHtmlParser(p.content)
               ) : (
                 <BlockContent content={p.content} />
               )}
-            </Description>
+            </BodyText>
           </div>
         ))}
       </div>
@@ -204,9 +182,9 @@ const ApproachSection: React.FC<SanityCaseStudyApproachSection> = ({
             className={classes.image}
             fluid={figureImage?.image?.asset?.fluid as FluidObject}
           />
-          <Description className={classes.figureTitle}>
+          <BodyText size="sm" sx={{ pt: [3, 4], color: 'info.dark' }}>
             <BlockContent content={_rawFigureTitle} />
-          </Description>
+          </BodyText>
         </Grid>
         <Grid item xs={12} md={6}>
           <TitleWithParagraphs

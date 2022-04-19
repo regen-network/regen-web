@@ -21,7 +21,7 @@ const CustomBlockContent: React.FC<{
   tooltipText,
   className,
   sxWrap = [],
-  noYMargin = false,
+  noYMargin = true, // TODO this used to be false, I switched to true to show style issues and correct with the plan of removing this prop after - we shouldn't have to manually manage this
 }) => {
   const serializers = {
     marks: {
@@ -60,6 +60,7 @@ const CustomBlockContent: React.FC<{
   if (content) {
     return (
       <Box
+        component="span"
         sx={[
           !!noYMargin && {
             '& p:first-child': {

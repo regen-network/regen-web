@@ -5,8 +5,11 @@ import cx from 'clsx';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import Modal from 'web-components/lib/components/modal';
-import Description from 'web-components/lib/components/description';
-import { Title } from 'web-components/lib/components/typography';
+import {
+  BodyText,
+  ButtonText,
+  Title,
+} from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import {
@@ -39,39 +42,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: theme.spacing(15, 0, 7.5),
     },
   },
-  sectionTitle: {
-    marginBottom: theme.spacing(2),
-    textAlign: 'center',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(38),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
-    },
-  },
-  preTitle: {
-    color: theme.palette.secondary.main,
-    fontWeight: 800,
-    textTransform: 'uppercase',
-    fontFamily: theme.typography.h1.fontFamily,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-      margin: theme.spacing(8, 0, 6),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(14),
-      marginBottom: theme.spacing(4),
-    },
-  },
-  description: {
-    marginBottom: 0,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-    },
-  },
   steps: {
     [theme.breakpoints.up('sm')]: {
       maxWidth: theme.spacing(199.75),
@@ -97,12 +67,28 @@ function StepsSection({
       }}
     >
       <div className={styles.titleWrap}>
-        {preTitle && <div className={styles.preTitle}>{preTitle}</div>}
-        {title && <Title className={styles.sectionTitle}>{title}</Title>}
+        <ButtonText
+          size="sm"
+          sx={theme => ({
+            color: 'secondary.main',
+            m: { xs: theme.spacing(0, 0, 4), sm: theme.spacing(8, 0, 6) },
+          })}
+        >
+          {preTitle}
+        </ButtonText>
+        {title && (
+          <Title
+            variant="h2"
+            mobileVariant="h3"
+            sx={{ mb: 2, textAlign: 'center' }}
+          >
+            {title}
+          </Title>
+        )}
         {descriptionRaw && (
-          <Description className={styles.description}>
+          <BodyText size="lg" sx={{ mb: 0 }}>
             <BlockContent content={descriptionRaw} />
-          </Description>
+          </BodyText>
         )}
       </div>
       <div className={styles.steps}>

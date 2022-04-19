@@ -36,20 +36,6 @@ const CREATE_USER_ORGANIZATION = loader(
 const CREATE_ADDRESS = loader('../../graphql/CreateAddress.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    textAlign: 'center',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: '2rem',
-    },
-  },
-  subtitle: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(3.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(4),
-    },
-  },
   form: {
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(5.75),
@@ -113,9 +99,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   green: {
     color: theme.palette.secondary.main,
   },
-  otherTitle: {
-    marginTop: theme.spacing(13),
-  },
   textFields: {
     [theme.breakpoints.up('sm')]: {
       width: '70%',
@@ -163,9 +146,7 @@ function CreditsPurchaseForm({
 
   return (
     <div>
-      <Title variant="h3" className={classes.title}>
-        Buy Credits
-      </Title>
+      <Title variant="h3">Buy Credits</Title>
       <Formik
         initialValues={{
           units: 1,
@@ -336,7 +317,7 @@ function CreditsPurchaseForm({
           return (
             <div>
               <Form className={classes.form} translate="yes">
-                <Title className={classes.subtitle} variant="h5">
+                <Title variant="h5" sx={{ mb: { xs: 4, sm: 3.75 } }}>
                   Number of credits
                 </Title>
                 <Description>
@@ -366,10 +347,7 @@ function CreditsPurchaseForm({
                   </Grid>
                 </Grid>
 
-                <Title
-                  className={`${classes.subtitle} ${classes.otherTitle}`}
-                  variant="h5"
-                >
+                <Title variant="h5" sx={{ mb: { xs: 4, sm: 3.75 }, mt: 13 }}>
                   Credit ownership
                 </Title>
                 <div className={classes.textFields}>
@@ -403,10 +381,7 @@ function CreditsPurchaseForm({
                   </div>
                 )}
 
-                <Title
-                  className={`${classes.subtitle} ${classes.otherTitle}`}
-                  variant="h5"
-                >
+                <Title variant="h5" sx={{ mb: { xs: 4, sm: 3.75 }, mt: 13 }}>
                   Location of purchase
                 </Title>
                 <Description>

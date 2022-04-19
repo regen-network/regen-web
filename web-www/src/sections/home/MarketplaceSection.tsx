@@ -6,13 +6,18 @@ import SanityImage from 'gatsby-plugin-sanity-image';
 import BackgroundImage from 'gatsby-background-image';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Title } from 'web-components/lib/components/typography';
+import {
+  BodyText,
+  ButtonText,
+  Title,
+} from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import Tooltip from 'web-components/lib/components/tooltip';
 
 import type { HomeMarketPlaceSectionQuery } from '../../generated/graphql';
 import type { FluidObject } from 'gatsby-image';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
+import { Box } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -36,22 +41,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       'margin-bottom': theme.spacing(2),
       'font-weight': 900,
     },
-    '& p': {
-      'margin-bottom': '0px',
-      'line-height': '150%',
-      'font-family': 'Lato',
-      'font-size': '1.375rem',
-      [theme.breakpoints.down('sm')]: {
-        fontSize: '1rem',
-      },
-    },
     '& .MuiGrid-item.MuiGrid-root': {
       padding: theme.spacing(1),
       'padding-left': theme.spacing(3),
       'padding-right': theme.spacing(3),
       '& p': {
         color: theme.palette.info.dark,
-        'margin-bottom': theme.spacing(6.75),
       },
     },
   },
@@ -61,36 +56,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   bgdiv: {
     'margin-bottom': theme.spacing(4),
   },
-  buttonpad: {
-    padding: '0px',
-  },
   inner: {
     [theme.breakpoints.up('sm')]: {
       'max-width': '85%',
     },
     margin: '0 auto',
-  },
-  smallTag: {
-    'text-transform': 'uppercase',
-    'font-family': 'Muli',
-    color: theme.palette.info.main,
-    'margin-bottom': theme.spacing(5),
-    'font-weight': 800,
-    'font-size': '1.3125rem',
-    'letter-spacing': '1px',
-    'line-height': '27px',
-  },
-  smallTitle: {
-    marginTop: theme.spacing(6.5),
-    'text-transform': 'uppercase',
-    color: theme.palette.info.dark,
-    'font-weight': 800,
-    'font-size': '1.125rem',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: '0.875rem',
-    },
-    'letter-spacing': '1px',
-    'line-height': '23px',
   },
   gridItem: {
     [theme.breakpoints.down('md')]: {
@@ -98,32 +68,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       'margin-bottom': theme.spacing(8),
     },
   },
-  button: {
-    [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(3)} ${theme.spacing(7.5)}`,
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(4.5)} ${theme.spacing(12.5)}`,
-      fontSize: theme.spacing(4.5),
-    },
-  },
-  green: {
-    color: theme.palette.secondary.main,
-  },
   popover: {
     cursor: 'pointer',
     borderBottom: `3px dashed ${theme.palette.secondary.main}`,
-  },
-  h3: {
-    marginTop: theme.spacing(3.5),
-    'line-height': '140%',
-    'margin-bottom': theme.spacing(2.4),
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(3),
-      marginBottom: theme.spacing(3),
-      fontSize: theme.spacing(5.25),
-    },
   },
 }));
 
@@ -167,9 +114,13 @@ const MarketplaceSection: React.FC = () => {
     >
       <Section className={styles.root}>
         <div className={styles.inner}>
-          <div className={styles.smallTag}>{data?.header}</div>
+          <ButtonText size="lg" sx={{ color: 'info.main', mb: 5 }}>
+            {data?.header}
+          </ButtonText>
           <Title variant="h2" align="center">
-            <span className={styles.green}>{data?.body?.green} </span>
+            <Box component="span" sx={{ color: 'secondary.main' }}>
+              {data?.body?.green}{' '}
+            </Box>
             {data?.body?.middle}{' '}
             <Tooltip arrow placement="top" title={data?.tooltip || ''}>
               <span className={styles.popover}>{data?.body?.popover}</span>
@@ -186,14 +137,23 @@ const MarketplaceSection: React.FC = () => {
                     width={159}
                     style={{ width: '159px' }}
                   />
-                  <div className={styles.smallTitle}>{cta.caption}</div>
-                  <Title className={styles.h3} variant="h3" align="center">
+                  <ButtonText size="md" sx={{ pt: 4 }}>
+                    {cta.caption}
+                  </ButtonText>
+                  <Title
+                    variant="h3"
+                    mobileVariant="h5"
+                    sx={{ textAlign: 'center', my: 3 }}
+                  >
                     {cta.header}
                   </Title>
-                  <p>{cta.description}</p>
+                  <BodyText size="xl" mobileSize="md">
+                    {cta.description}
+                  </BodyText>
                   <ContainedButton
+                    size="large"
                     href={cta.linkUrl || ''}
-                    className={styles.button}
+                    sx={{ mt: [4, 7] }}
                   >
                     {cta.linkText}
                   </ContainedButton>

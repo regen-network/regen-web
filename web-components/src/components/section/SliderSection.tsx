@@ -43,14 +43,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       justifyContent: 'space-between',
     },
   },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(38),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
-    },
-  },
 }));
 
 function SliderSection({
@@ -80,7 +72,7 @@ function SliderSection({
           itemWidth="100%"
           items={items}
           renderTitle={() => (
-            <Title className={styles.title} variant="h2" align="left">
+            <Title variant="h2" mobileVariant="h3" align="left">
               {title}
             </Title>
           )}

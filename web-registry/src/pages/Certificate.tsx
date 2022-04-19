@@ -159,9 +159,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(4.25),
     paddingTop: theme.spacing(4),
   },
-  issuerName: {
-    paddingLeft: theme.spacing(3),
-  },
   issuanceButton: {
     marginRight: theme.spacing(1.25),
   },
@@ -413,7 +410,7 @@ function CertificatePage(): JSX.Element {
             {issuer.image && (
               <UserAvatar src={issuer.image} alt={issuer.image} />
             )}
-            <Title className={classes.issuerName} variant="h4">
+            <Title variant="h4" sx={{ pl: 3 }}>
               View on {issuer.name}
             </Title>
           </Grid>
@@ -442,7 +439,10 @@ function CertificatePage(): JSX.Element {
       )}
       <Grid container className={classes.share} alignItems="flex-end">
         <Grid item xs={12} sm={6}>
-          <Title className={classes.shareTitle} variant="h4">
+          <Title
+            variant="h4"
+            sx={{ pb: 3.75, textAlign: { xs: 'center', sm: 'inherit' } }}
+          >
             Share
           </Title>
           <ShareIcons

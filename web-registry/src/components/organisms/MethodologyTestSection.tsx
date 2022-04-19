@@ -35,9 +35,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       maxWidth: theme.spacing(236.5),
     },
   },
-  title: {
-    marginBottom: theme.spacing(8),
-  },
   description: {
     [theme.breakpoints.up('sm')]: {
       fontSize: theme.typography.pxToRem(22),
@@ -57,7 +54,7 @@ function MethodologyTestSection({ title, descriptionRaw }: Props): JSX.Element {
       classes={{ main: styles.main, section: styles.section }}
     >
       {title && (
-        <Title className={styles.title} variant="h2" align="center">
+        <Title variant="h2" sx={{ mb: 8, textAlign: 'center' }}>
           {title}
         </Title>
       )}

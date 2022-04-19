@@ -1,12 +1,10 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import Section from 'web-components/lib/components/section';
-import { Title } from 'web-components/lib/components/typography';
+import { ButtonText } from 'web-components/lib/components/typography';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { EcocreditsTable, BasketsTable } from '../../components/organisms';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
@@ -20,24 +18,10 @@ interface PortfolioTemplateProps {
   renderBasketActionButtons?: RenderActionButtonsFunc;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  subtitle: {
-    color: theme.palette.info.dark,
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    fontWeight: 800,
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(8.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(4.25),
-    },
-  },
-  arrow: {
-    width: theme.spacing(6),
-    height: theme.spacing(6),
-  },
-}));
+const titleSx = {
+  color: 'info.dark',
+  mb: { xs: 4.25, sm: 8.5 },
+} as const;
 
 export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   credits,
@@ -46,25 +30,19 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   renderCreditActionButtons,
   renderBasketActionButtons,
 }) => {
-  const styles = useStyles();
-
   return (
     <Box sx={{ backgroundColor: 'grey.50', pb: { xs: 21.25, sm: 28.28 } }}>
       <Section title="Portfolio" titleVariant="h2" titleAlign="left">
         {children}
         <Box sx={{ pt: { xs: 9.25, sm: 8.5 } }}>
-          <Title className={styles.subtitle} variant="subtitle2">
-            basket tokens
-          </Title>
+          <ButtonText sx={titleSx}>basket tokens</ButtonText>
           <BasketsTable
             basketTokens={basketTokens}
             renderActionButtons={renderBasketActionButtons}
           />
         </Box>
         <Box sx={{ pt: 12.75 }}>
-          <Title className={styles.subtitle} variant="subtitle2">
-            ecocredits
-          </Title>
+          <ButtonText sx={titleSx}>ecocredits</ButtonText>
           <EcocreditsTable
             credits={credits}
             renderActionButtons={renderCreditActionButtons}

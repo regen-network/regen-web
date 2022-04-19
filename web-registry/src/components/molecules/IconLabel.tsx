@@ -4,8 +4,7 @@ import { Avatar } from '@mui/material';
 import cx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Description from 'web-components/lib/components/description';
-import { Title } from 'web-components/lib/components/typography';
+import { BodyText, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
@@ -28,19 +27,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       padding: theme.spacing(0, 4),
       fontSize: theme.typography.pxToRem(18),
       width: theme.typography.pxToRem(374),
-    },
-  },
-  label: {
-    fontFamily: theme.typography.h1.fontFamily,
-    color: theme.palette.primary.main,
-    fontWeight: 900,
-    textAlign: 'center',
-    lineHeight: '145%',
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(5.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(8),
     },
   },
   iconContainer: props => ({
@@ -80,17 +66,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
   },
-  linkDescription: {
-    color: theme.palette.primary.main,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-      paddingTop: theme.spacing(5.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-      paddingTop: theme.spacing(4),
-    },
-  },
 }));
 
 const IconLabel = ({
@@ -113,13 +88,20 @@ const IconLabel = ({
         <Avatar className={styles.iconContainer}>{icon}</Avatar>
       </a>
       <div className={styles.textContainer}>
-        <Title className={styles.label} variant="h4">
+        <Title variant="h4" sx={{ pt: { xs: 8, sm: 5.25 } }}>
           {label}
         </Title>
         {descriptionRaw && (
-          <Description className={styles.linkDescription} align="center">
+          <BodyText
+            size="lg"
+            sx={{
+              color: 'primary.main',
+              textAlign: 'center',
+              pt: { xs: 4, sm: 5.25 },
+            }}
+          >
             {BlockContent(descriptionRaw)}
-          </Description>
+          </BodyText>
         )}
       </div>
     </div>

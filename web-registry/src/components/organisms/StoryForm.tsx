@@ -7,7 +7,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import Description from 'web-components/lib/components/description';
-import { Title } from 'web-components/lib/components/typography';
+import { BodyText, Title } from 'web-components/lib/components/typography';
 import Modal from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
 import { ProjectPageFooter } from '../molecules';
@@ -100,19 +100,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  modalTitle: {
-    maxWidth: '70%',
-    textAlign: 'center',
-    paddingBottom: theme.spacing(4),
-  },
   modalCard: {
     padding: theme.spacing(6, 4),
     whiteSpace: 'pre-wrap',
-  },
-  modalText: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
   },
   examplePageText: {
     fontSize: theme.typography.pxToRem(16),
@@ -160,7 +150,7 @@ const ModalContent: React.FC<{
 
   return (
     <div className={styles.modalContent}>
-      <Title className={styles.modalTitle} variant="h5">
+      <Title variant="h5" sx={{ maxWidth: '70%', textAlign: 'center', pb: 4 }}>
         Example of {examples[fieldName].type}
       </Title>
       <Description className={styles.examplePageText}>
@@ -170,9 +160,7 @@ const ModalContent: React.FC<{
         </Link>
       </Description>
       <Card className={styles.modalCard}>
-        <Description className={styles.modalText}>
-          {examples[fieldName].text}
-        </Description>
+        <BodyText size="lg">{examples[fieldName].text}</BodyText>
       </Card>
     </div>
   );

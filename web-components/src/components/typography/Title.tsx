@@ -6,11 +6,13 @@ interface Props extends TypographyProps {
 }
 
 export const Title = styled(Typography, {
+  name: 'RegenTitle',
   shouldForwardProp: prop => prop !== 'mobileVariant',
-})<Props>(({ theme, mobileVariant, variant = 'h1' }) => {
+})<Props>(({ theme, mobileVariant, variant }) => {
   const { breakpoints, typography } = theme;
   const { up } = breakpoints;
   return {
+    // fontFamily: theme.typography.h1.fontFamily,
     ...(variant === 'h1' && {
       fontSize: typography[mobileVariant || 'h3'].fontSize,
       lineHeight: typography[mobileVariant || 'h3'].lineHeight,
@@ -61,3 +63,7 @@ export const Title = styled(Typography, {
     }),
   };
 });
+
+Title.defaultProps = {
+  variant: 'h1',
+};

@@ -15,7 +15,10 @@ export interface SectionProps {
     title?: string;
     titleWrap?: string;
   };
-  sx?: SxProps<Theme>;
+  sx?: {
+    root?: SxProps<Theme>;
+    title?: SxProps<Theme>;
+  };
   title?: string | JSX.Element;
   titleVariant?: Variant;
   withSlider?: boolean;
@@ -103,7 +106,7 @@ const Section = ({
   });
   return (
     <Root
-      sx={sx}
+      sx={sx?.root}
       component="section"
       withSlider={withSlider}
       className={className || (classes && classes.root)}
@@ -116,6 +119,7 @@ const Section = ({
           )}
         >
           <Title
+            sx={sx?.title}
             className={clsx(styles.title, classes && classes.title)}
             variant={titleVariant}
             align={titleAlign}

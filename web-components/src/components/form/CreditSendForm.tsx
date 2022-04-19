@@ -13,6 +13,7 @@ import {
   RetireFormValues,
   validateCreditRetire,
   initialValues as initialValuesRetire,
+  BottomCreditRetireFieldsProps,
 } from './CreditRetireForm';
 import Submit from './Submit';
 import {
@@ -86,7 +87,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export interface CreditSendProps {
+export interface CreditSendProps extends BottomCreditRetireFieldsProps {
   sender: string;
   batchDenom: string;
   availableTradableAmount: number;
@@ -97,7 +98,7 @@ interface FormProps extends CreditSendProps {
   onClose: RegenModalProps['onClose'];
 }
 
-interface FormValues extends RetireFormValues {
+export interface FormValues extends RetireFormValues {
   sender: string;
   recipient: string;
   tradableAmount: number;
@@ -108,6 +109,7 @@ const CreditSendForm: React.FC<FormProps> = ({
   sender,
   batchDenom,
   availableTradableAmount,
+  mapboxToken,
   onClose,
   onSubmit,
 }) => {
@@ -204,6 +206,7 @@ const CreditSendForm: React.FC<FormProps> = ({
             <CreditRetireFields
               availableTradableAmount={availableTradableAmount}
               batchDenom={batchDenom}
+              mapboxToken={mapboxToken}
             />
           )}
 

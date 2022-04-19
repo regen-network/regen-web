@@ -50,16 +50,6 @@ type BatchWithProject = {
   projectDisplay: string;
 };
 
-// DISABLED - Initial values for overview
-// const overviewInitial = {
-//   name: '',
-//   displayDenom: '',
-//   description: '',
-//   totalAmount: 0,
-//   curator: '',
-//   allowedCreditClasses: [{ id: '', name: '' }],
-// };
-
 const useBasketDetails = (basketDenom?: string): BasketDetails => {
   // local state (overview and credit batchs)
   // custom basket overview data for <BasketOverview />
@@ -112,10 +102,11 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
       try {
         const _basketClasses = await Promise.all(
           basketClassesInfo.map(async basketClass => {
+            // TODO: use metadata
             // const metadata = await getMetadata(basketClass.info!.metadata);
             return {
-              id: basketClass.info!.classId,
-              name: basketClass.info!.classId,
+              id: basketClass.info?.classId || '-',
+              name: basketClass.info?.classId || '-',
             };
           }),
         );
@@ -141,23 +132,17 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
               variables: { batchDenom },
             });
 
-            // eslint-disable-next-line no-console
-            console.log('** batchProject', batchProject);
-
             return {
               batchDenom,
               projectName:
-                batchProject.data!.creditVintageByBatchDenom!
-                  .projectByProjectId!.handle || '-', // TODO
+                batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
+                  ?.handle || '-',
               projectDisplay:
-                batchProject.data!.creditVintageByBatchDenom!
-                  .projectByProjectId!.metadata['http://schema.org/name'],
+                batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
+                  ?.metadata['http://schema.org/name'] || '-',
             };
           }),
         );
-
-        // eslint-disable-next-line no-console
-        console.log('** _batchesProjects', _batchesProjects);
 
         setBatchesProjects(_batchesProjects);
       } catch (error) {
@@ -174,21 +159,21 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
 
     const _creditBatches = batches.map(batch => {
       const _basketBatch = basketBatches.find(
-        basketBatch => basketBatch.info!.batchDenom === batch,
+        basketBatch => basketBatch.info?.batchDenom === batch,
       );
       const _projectBatch = batchesProjects.find(
         projectBatch => projectBatch.batchDenom === batch,
       );
       return {
-        classId: _basketBatch!.info!.classId,
-        batchDenom: _basketBatch!.info!.batchDenom,
-        issuer: _basketBatch!.info!.issuer,
-        totalAmount: _basketBatch!.info!.totalAmount,
-        startDate: _basketBatch!.info!.startDate || '-', // TODO
-        endDate: _basketBatch!.info!.endDate || '-', // TODO
-        projectLocation: _basketBatch!.info!.projectLocation,
-        projectName: _projectBatch!.projectName,
-        projectDisplay: _projectBatch!.projectDisplay,
+        classId: _basketBatch?.info?.classId || '-',
+        batchDenom: _basketBatch?.info?.batchDenom || '-',
+        issuer: _basketBatch?.info?.issuer || '-',
+        totalAmount: _basketBatch?.info?.totalAmount || '-',
+        startDate: _basketBatch?.info?.startDate || '-',
+        endDate: _basketBatch?.info?.endDate || '-',
+        projectLocation: _basketBatch?.info?.projectLocation || '-',
+        projectName: _projectBatch?.projectName || '-',
+        projectDisplay: _projectBatch?.projectDisplay || '-',
       };
     });
 

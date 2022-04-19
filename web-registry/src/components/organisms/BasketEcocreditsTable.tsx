@@ -66,10 +66,17 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
         'Project Location',
       ]}
       rows={batches.map(item => {
+        const projectCell =
+          item.projectName === '-' ? (
+            item.projectDisplay
+          ) : (
+            <Link href={`/projects/${item.projectName}`} target="_blank">
+              {item.projectDisplay}
+            </Link>
+          );
+
         return [
-          <Link href={`/projects/${item.projectName}`} target="_blank">
-            {item.projectDisplay}
-          </Link>,
+          projectCell,
           <Box
             component="span"
             sx={{

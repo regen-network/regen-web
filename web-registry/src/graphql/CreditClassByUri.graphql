@@ -1,0 +1,22 @@
+query CreditClassByUri($uri: String!) {
+  creditClassByUri(uri: $uri) {
+    creditClassVersionsById(last: 1) {
+      nodes {
+        version
+        name
+        metadata
+      }
+    }
+    methodologyByMethodologyId {
+      methodologyVersionsById(last: 1) {
+        nodes {
+          name
+          metadata
+        }
+      }
+    }
+    partyByDesignerId {
+      name
+    }
+  }
+}

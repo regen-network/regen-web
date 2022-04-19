@@ -7,6 +7,9 @@ query allCreditClass {
     nameRaw
     descriptionRaw
     shortDescriptionRaw
+    image {
+      ...customImageFields
+    }
     ecologicalImpact {
       ...ecologicalImpactRelationFields
     }

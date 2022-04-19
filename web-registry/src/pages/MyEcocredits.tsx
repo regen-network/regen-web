@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
+import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
 import {
   MsgPut,
   MsgTake,
@@ -10,12 +11,27 @@ import { TableActionButtons } from 'web-components/lib/components/buttons/TableA
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
-import { BasketTakeModal } from 'web-components/lib/components/modal/BasketTakeModal';
+import {
+  BasketPutModal,
+  title as basketPutTitle,
+} from 'web-components/lib/components/modal/BasketPutModal';
+import {
+  BasketTakeModal,
+  title as basketTakeTitle,
+} from 'web-components/lib/components/modal/BasketTakeModal';
+import {
+  CreditSendModal,
+  title as creditSendTitle,
+} from 'web-components/lib/components/modal/CreditSendModal';
+import {
+  // CreditRetireModal,
+  title as creditRetireTitle,
+} from 'web-components/lib/components/modal/CreditRetireModal';
 import {
   TxSuccessfulModal,
   Item,
 } from 'web-components/lib/components/modal/TxSuccessfulModal';
+import { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
 import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
 import { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
@@ -120,8 +136,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   };
 
   const basketTakeSubmit = async (values: MsgTakeValues): Promise<void> => {
-    const msgClient = api?.msgClient;
-    if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
+    if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
 
     const amount = values?.amount;
     const basket = baskets?.baskets.find(
@@ -156,7 +171,23 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
         },
       ]);
     }
-    setIsTxSuccessfulModalTitle('Take from basket');
+    setIsTxSuccessfulModalTitle(basketTakeTitle);
+  };
+
+  const creditSendSubmit = async (
+    values: CreditSendFormValues,
+  ): Promise<void> => {
+    if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
+    const msg = MsgSend.fromPartial({
+      sender: accountAddress,
+      credits: [
+        {
+          batchDenom: credits[creditSendOpen].batch_denom,
+          tradableAmount: values.tradableAmount.toString(),
+          retiredAmount: values.retiredAmount.toString(),
+        },
+      ],
+    });
   };
 
   const basketPutSubmit = async (
@@ -165,7 +196,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     const amount = values.amount?.toString();
     const msg = MsgPut.fromPartial({
       basketDenom: values.basketDenom,
-      owner: wallet?.address,
+      owner: accountAddress,
       credits: [
         {
           batchDenom: credits[basketPutOpen].batch_denom,
@@ -188,7 +219,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           value: { name: amount },
         },
       ]);
-      setIsTxSuccessfulModalTitle('Put in basket');
+      setIsTxSuccessfulModalTitle(basketPutTitle);
     }
   };
 
@@ -198,6 +229,9 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
         credits={credits}
         basketTokens={basketTokens}
         renderCreditActionButtons={(i: number) => {
+          if (Number(credits[i].tradable_amount) <= 0) {
+            return undefined;
+          }
           const buttons = [
             // Disabling for now until the marketplace is
             // released on regen-ledger
@@ -215,9 +249,8 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
                   direction="next"
                 />
               ),
-              label: 'Send',
-              // eslint-disable-next-line no-console
-              onClick: () => console.log(`TODO send credit ${i}`),
+              label: creditSendTitle,
+              onClick: () => setCreditSendOpen(i),
             },
             {
               icon: (
@@ -227,7 +260,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
                   direction="down"
                 />
               ),
-              label: 'Retire',
+              label: creditRetireTitle,
               // eslint-disable-next-line no-console
               onClick: () => console.log(`TODO retire credit ${i}`),
             },
@@ -239,7 +272,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
             buttons.splice(1, 0, {
               // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
               icon: <PutInBasket />,
-              label: 'Put in basket',
+              label: basketPutTitle,
               onClick: () => setBasketPutOpen(i),
             });
           }
@@ -250,7 +283,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
             buttons={[
               {
                 icon: <TakeFromBasket />,
-                label: 'Take from basket',
+                label: basketTakeTitle,
                 onClick: () => openTakeModal(i),
               },
               // This will be handled from osmosis
@@ -269,6 +302,19 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           />
         )}
       />
+      {creditSendOpen > -1 && !!accountAddress && (
+        <CreditSendModal
+          sender={accountAddress}
+          batchDenom={credits[creditSendOpen].batch_denom}
+          availableTradableAmount={Number(
+            credits[creditSendOpen].tradable_amount,
+          )}
+          mapboxToken={mapboxToken}
+          open={creditSendOpen > -1}
+          onClose={() => setCreditSendOpen(-1)}
+          onSubmit={creditSendSubmit}
+        />
+      )}
       {basketPutOpen > -1 && (
         <BasketPutModal
           basketOptions={

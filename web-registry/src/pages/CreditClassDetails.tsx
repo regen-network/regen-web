@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Routes, Route } from 'react-router-dom';
 
-import mock from '../mocks/mock.json';
 import { useAllCreditClassQuery } from '../generated/sanity-graphql';
-import { useCreditClassByOnChainIdQuery } from '../generated/graphql';
+import {
+  useCreditClassByOnChainIdQuery,
+  useCreditClassByUriQuery,
+} from '../generated/graphql';
 import { client } from '../sanity';
 import { CreditClassDetailsWithContent } from './CreditClassDetailsWithContent';
 import { CreditClassDetailsSimple } from './CreditClassDetailsSimple';
 import { queryEcoClassInfo } from '../lib/ecocredit';
 import { getMetadata } from '../lib/metadata-graph';
+import { onChainClassRegExp } from '../lib/ledger';
 import { ClassInfo } from '../types/ledger/ecocredit';
 
 interface CreditDetailsProps {
@@ -37,59 +40,69 @@ function CreditClassDetails(): JSX.Element {
 
 function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   let { creditClassId } = useParams();
-  const [ledgerClass, setLedgerClass] = useState<ClassInfo | undefined>(
+  const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
     undefined,
   );
   const [metadata, setMetadata] = useState<any>(undefined);
 
   const { data: contentData } = useAllCreditClassQuery({ client });
-  const { data: dbData } = useCreditClassByOnChainIdQuery({
-    variables: { onChainId: creditClassId || '' },
-  });
-
-  useEffect(() => {
-    if (creditClassId) {
-      queryEcoClassInfo(creditClassId)
-        .then(res => {
-          const classInfo = res?.info;
-          if (classInfo) {
-            setLedgerClass(classInfo);
-            getMetadata(classInfo.metadata).then(res => {
-              if (res?.data?.metadata) {
-                setMetadata(res.data.metadata);
-              }
-            });
-          }
-          // eslint-disable-next-line
-        }).catch(console.error);;
-    }
-  }, [creditClassId]);
-
-  const dbCreditClass = dbData?.creditClassByOnChainId;
   const content = contentData?.allCreditClass?.find(
     creditClass => creditClass.path === creditClassId,
   );
-  const creditClassMock = mock?.creditClasses.find(
-    creditClass => creditClass.id === creditClassId,
-  );
 
-  if (creditClassMock && content) {
+  const isOnChainClassId =
+    creditClassId && onChainClassRegExp.test(creditClassId);
+  const iri = content?.iri?.current;
+  const { data: dbDataByOnChainId } = useCreditClassByOnChainIdQuery({
+    variables: { onChainId: creditClassId as string },
+    skip: !isOnChainClassId,
+  });
+  const { data: dbDataByUri } = useCreditClassByUriQuery({
+    variables: { uri: iri as string },
+    skip: !iri || !!isOnChainClassId,
+  });
+  const dbCreditClassByOnChainId = dbDataByOnChainId?.creditClassByOnChainId;
+  const dbCreditClassByUri = dbDataByUri?.creditClassByUri;
+
+  useEffect(() => {
+    const fetch = async (): Promise<void> => {
+      if (creditClassId && isOnChainClassId) {
+        try {
+          const res = await queryEcoClassInfo(creditClassId);
+          const classInfo = res?.info;
+          if (classInfo) {
+            setOnChainClass(classInfo);
+            const data = await getMetadata(classInfo.metadata);
+            setMetadata(data);
+          }
+        } catch (err) {
+          // eslint-disable-next-line
+          console.error(err);
+        }
+      }
+    };
+    fetch();
+  }, [creditClassId, isOnChainClassId]);
+
+  if (content && dbCreditClassByUri) {
     return (
       <CreditClassDetailsWithContent
-        creditClass={creditClassMock}
+        dbClass={dbCreditClassByUri}
         content={content}
         isLandSteward={isLandSteward}
       />
     );
-  } else if (ledgerClass && dbCreditClass) {
+  } else if (onChainClass && dbCreditClassByOnChainId) {
     return (
       <CreditClassDetailsSimple
-        dbClass={dbCreditClass}
-        ledgerClass={ledgerClass}
+        dbClass={dbCreditClassByOnChainId}
+        onChainClass={onChainClass}
         metadata={metadata}
       />
     );
   } else {
+    // TODO Display not found or error status
+    // based on https://github.com/regen-network/regen-registry/issues/886
     return <></>;
   }
 }

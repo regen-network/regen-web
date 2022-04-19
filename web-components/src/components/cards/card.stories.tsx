@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { makeStyles } from '@mui/styles';
+import { Theme } from '@mui/material';
 
 import Card from 'web-components/lib/components/cards/Card';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
@@ -31,12 +32,8 @@ export default {
 const projectDeveloper: User = {
   name: 'Odonata',
   type: 'user',
-  place: {
-    city: 'South Melbourne',
-    state: 'Victoria',
-    country: 'Australia',
-  },
-  imgSrc:
+  location: 'South Melbourne',
+  image:
     'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
   description:
     'Odonata is a not-for-profit entity supporting biodiversity impact solutions.',
@@ -45,11 +42,8 @@ const projectDeveloper: User = {
 const landSteward: User = {
   name: 'Ngarrindjeri Tribe',
   type: 'user',
-  place: {
-    state: 'Southern Australia',
-    country: 'Australia',
-  },
-  imgSrc: '/tribe.png',
+  location: 'Southern Australia',
+  image: '/tribe.png',
   description:
     'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
 };
@@ -106,12 +100,6 @@ export const projectCard = (): JSX.Element => (
     comingSoon={false}
     areaUnit="hectares"
     imgSrc="/coorong.png"
-    developer={{
-      name: 'Odonata',
-      type: 'user',
-      imgSrc:
-        'http://www.odonata.org.au/wp-content/uploads/2018/01/odinata-logo-only.png',
-    }}
     tag="biodiversity"
     onClick={onClick}
   />
@@ -157,7 +145,8 @@ export const greenTopIconCard = (): JSX.Element => (
     <GreenTopIconCard
       title="Green card 1"
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      linkURL="https://github.com/regen-network"
+      linkText="Link text"
+      linkUrl="https://github.com/regen-network"
       imgSrc="./mainnet-validators.svg"
     />
   </>

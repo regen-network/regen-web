@@ -4135,6 +4135,16 @@ export type DeleteCreditClassByOnChainIdInput = {
   onChainId: Scalars['String'];
 };
 
+/** All input for the `deleteCreditClassByUri` mutation. */
+export type DeleteCreditClassByUriInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  uri: Scalars['String'];
+};
+
 /** All input for the `deleteCreditClass` mutation. */
 export type DeleteCreditClassInput = {
   /**
@@ -6306,6 +6316,8 @@ export type Mutation = {
   /** Updates a single `CreditClass` using a unique key and a patch. */
   updateCreditClassById?: Maybe<UpdateCreditClassPayload>;
   /** Updates a single `CreditClass` using a unique key and a patch. */
+  updateCreditClassByUri?: Maybe<UpdateCreditClassPayload>;
+  /** Updates a single `CreditClass` using a unique key and a patch. */
   updateCreditClassByOnChainId?: Maybe<UpdateCreditClassPayload>;
   /** Updates a single `CreditClassVersion` using its globally unique id and a patch. */
   updateCreditClassVersion?: Maybe<UpdateCreditClassVersionPayload>;
@@ -6425,6 +6437,8 @@ export type Mutation = {
   deleteCreditClass?: Maybe<DeleteCreditClassPayload>;
   /** Deletes a single `CreditClass` using a unique key. */
   deleteCreditClassById?: Maybe<DeleteCreditClassPayload>;
+  /** Deletes a single `CreditClass` using a unique key. */
+  deleteCreditClassByUri?: Maybe<DeleteCreditClassPayload>;
   /** Deletes a single `CreditClass` using a unique key. */
   deleteCreditClassByOnChainId?: Maybe<DeleteCreditClassPayload>;
   /** Deletes a single `CreditClassVersion` using its globally unique id. */
@@ -6748,6 +6762,12 @@ export type MutationUpdateCreditClassArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateCreditClassByIdArgs = {
   input: UpdateCreditClassByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateCreditClassByUriArgs = {
+  input: UpdateCreditClassByUriInput;
 };
 
 
@@ -7108,6 +7128,12 @@ export type MutationDeleteCreditClassArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteCreditClassByIdArgs = {
   input: DeleteCreditClassByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteCreditClassByUriArgs = {
+  input: DeleteCreditClassByUriInput;
 };
 
 
@@ -13333,6 +13359,7 @@ export type Query = Node & {
   adminById?: Maybe<Admin>;
   adminByAuth0Sub?: Maybe<Admin>;
   creditClassById?: Maybe<CreditClass>;
+  creditClassByUri?: Maybe<CreditClass>;
   creditClassByOnChainId?: Maybe<CreditClass>;
   creditClassVersionByIdAndCreatedAt?: Maybe<CreditClassVersion>;
   creditVintageById?: Maybe<CreditVintage>;
@@ -13757,6 +13784,12 @@ export type QueryAdminByAuth0SubArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryCreditClassByIdArgs = {
   id: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryCreditClassByUriArgs = {
+  uri: Scalars['String'];
 };
 
 
@@ -14896,6 +14929,18 @@ export type UpdateCreditClassByOnChainIdInput = {
   /** An object where the defined keys will be set on the `CreditClass` being updated. */
   creditClassPatch: CreditClassPatch;
   onChainId: Scalars['String'];
+};
+
+/** All input for the `updateCreditClassByUri` mutation. */
+export type UpdateCreditClassByUriInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `CreditClass` being updated. */
+  creditClassPatch: CreditClassPatch;
+  uri: Scalars['String'];
 };
 
 /** All input for the `updateCreditClass` mutation. */
@@ -18733,6 +18778,37 @@ export type CreditClassByOnChainIdQuery = (
   )> }
 );
 
+export type CreditClassByUriQueryVariables = Exact<{
+  uri: Scalars['String'];
+}>;
+
+
+export type CreditClassByUriQuery = (
+  { __typename?: 'Query' }
+  & { creditClassByUri?: Maybe<(
+    { __typename?: 'CreditClass' }
+    & { creditClassVersionsById: (
+      { __typename?: 'CreditClassVersionsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'CreditClassVersion' }
+        & Pick<CreditClassVersion, 'version' | 'name' | 'metadata'>
+      )>> }
+    ), methodologyByMethodologyId?: Maybe<(
+      { __typename?: 'Methodology' }
+      & { methodologyVersionsById: (
+        { __typename?: 'MethodologyVersionsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'MethodologyVersion' }
+          & Pick<MethodologyVersion, 'name' | 'metadata'>
+        )>> }
+      ) }
+    )>, partyByDesignerId?: Maybe<(
+      { __typename?: 'Party' }
+      & Pick<Party, 'name'>
+    )> }
+  )> }
+);
+
 export type IssueCreditsMutationVariables = Exact<{
   input: IssueCreditsInput;
 }>;
@@ -20063,6 +20139,58 @@ export function useCreditClassByOnChainIdLazyQuery(baseOptions?: Apollo.LazyQuer
 export type CreditClassByOnChainIdQueryHookResult = ReturnType<typeof useCreditClassByOnChainIdQuery>;
 export type CreditClassByOnChainIdLazyQueryHookResult = ReturnType<typeof useCreditClassByOnChainIdLazyQuery>;
 export type CreditClassByOnChainIdQueryResult = Apollo.QueryResult<CreditClassByOnChainIdQuery, CreditClassByOnChainIdQueryVariables>;
+export const CreditClassByUriDocument = gql`
+    query CreditClassByUri($uri: String!) {
+  creditClassByUri(uri: $uri) {
+    creditClassVersionsById(last: 1) {
+      nodes {
+        version
+        name
+        metadata
+      }
+    }
+    methodologyByMethodologyId {
+      methodologyVersionsById(last: 1) {
+        nodes {
+          name
+          metadata
+        }
+      }
+    }
+    partyByDesignerId {
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useCreditClassByUriQuery__
+ *
+ * To run a query within a React component, call `useCreditClassByUriQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCreditClassByUriQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCreditClassByUriQuery({
+ *   variables: {
+ *      uri: // value for 'uri'
+ *   },
+ * });
+ */
+export function useCreditClassByUriQuery(baseOptions: Apollo.QueryHookOptions<CreditClassByUriQuery, CreditClassByUriQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CreditClassByUriQuery, CreditClassByUriQueryVariables>(CreditClassByUriDocument, options);
+      }
+export function useCreditClassByUriLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CreditClassByUriQuery, CreditClassByUriQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CreditClassByUriQuery, CreditClassByUriQueryVariables>(CreditClassByUriDocument, options);
+        }
+export type CreditClassByUriQueryHookResult = ReturnType<typeof useCreditClassByUriQuery>;
+export type CreditClassByUriLazyQueryHookResult = ReturnType<typeof useCreditClassByUriLazyQuery>;
+export type CreditClassByUriQueryResult = Apollo.QueryResult<CreditClassByUriQuery, CreditClassByUriQueryVariables>;
 export const IssueCreditsDocument = gql`
     mutation IssueCredits($input: IssueCreditsInput!) {
   issueCredits(input: $input) {

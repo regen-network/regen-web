@@ -1,24 +1,13 @@
 import React from 'react';
-import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
 import { RegenModalProps } from './index';
 import { FormModalTemplate } from './FormModalTemplate';
-import { BasketTakeForm, MsgTakeValues } from '../form/BasketTakeForm';
-import Description from '../description';
+import { BasketTakeForm, BasketTakeProps } from '../form/BasketTakeForm';
 
-export interface TakeModalProps extends RegenModalProps {
-  basket: Basket;
-  basketDenom: string;
-  accountAddress: string;
-  balance: number;
-  open: boolean;
-  mapboxToken: string;
-  onClose: () => void;
-  onSubmit: (values: MsgTakeValues) => void;
-}
+export interface TakeModalProps extends RegenModalProps, BasketTakeProps {}
 
 const BasketTakeModal: React.FC<TakeModalProps> = ({
   basket,
-  basketDenom,
+  basketDisplayDenom,
   balance,
   accountAddress,
   open,
@@ -36,9 +25,9 @@ const BasketTakeModal: React.FC<TakeModalProps> = ({
       <BasketTakeForm
         mapboxToken={mapboxToken}
         accountAddress={accountAddress}
-        availableTradableAmount={balance}
+        balance={balance}
         basket={basket}
-        basketDenom={basketDenom}
+        basketDisplayDenom={basketDisplayDenom}
         onClose={onClose}
         onSubmit={onSubmit}
       />

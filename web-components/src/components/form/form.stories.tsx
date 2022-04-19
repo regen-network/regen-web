@@ -1,10 +1,13 @@
 import * as React from 'react';
+import Long from 'long';
+
 import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
 // import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
 import LoginForm from 'web-components/lib/components/form/LoginForm';
 import { CreditSendForm } from 'web-components/lib/components/form/CreditSendForm';
 import { CreditRetireForm } from 'web-components/lib/components/form/CreditRetireForm';
 import { BasketPutForm } from 'web-components/lib/components/form/BasketPutForm';
+import { BasketTakeForm } from 'web-components/lib/components/form/BasketTakeForm';
 
 export default {
   title: 'Forms',
@@ -60,6 +63,7 @@ export const creditSendForm = (): JSX.Element => (
     availableTradableAmount={1000}
     batchDenom={'C01-20190101-20201010-02'}
     onClose={() => null}
+    onSubmit={async () => alert('submit')}
   />
 );
 
@@ -69,6 +73,7 @@ export const creditRetireForm = (): JSX.Element => (
     availableTradableAmount={1000}
     batchDenom={'C01-20190101-20201010-02'}
     onClose={() => null}
+    onSubmit={async () => alert('submit')}
   />
 );
 
@@ -78,6 +83,26 @@ export const basketPutForm = (): JSX.Element => (
     availableTradableAmount={1000}
     batchDenom={'C01-20190101-20201010-02'}
     onClose={() => null}
-    onSubmit={() => alert('submit')}
+    onSubmit={async () => alert('submit')}
+  />
+);
+
+export const basketTakeForm = (): JSX.Element => (
+  <BasketTakeForm
+    accountAddress="123xyz"
+    basketDisplayDenom="eco.C.rNCT"
+    basket={{
+      id: new Long(1),
+      $type: 'regen.ecocredit.basket.v1.Basket',
+      name: 'rNCT',
+      basketDenom: 'eco.uC.rNCT',
+      creditTypeAbbrev: 'C',
+      disableAutoRetire: false,
+      exponent: 6,
+    }}
+    balance={9999}
+    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    onClose={() => null}
+    onSubmit={async () => alert('submit')}
   />
 );

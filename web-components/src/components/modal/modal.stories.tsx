@@ -45,6 +45,7 @@ function OpenLedgerModal(): JSX.Element {
         issuer={{
           name: 'Regen Network Development, Inc.',
           role: 'CTO',
+          type: 'ORGANIZATION',
           individual: 'Christian Shearer',
           address: 'regen:1p6syuqk3e5a8hwp8e20jyjwr8p7nj270x4spqm',
           location: 'Great Barrington, Massachussetts, United States',
@@ -55,6 +56,7 @@ function OpenLedgerModal(): JSX.Element {
           {
             name: 'Wyelba Pty Ltd',
             role: 'Director',
+            type: 'ORGANIZATION',
             individual: 'Eric Lawrence',
             address: 'regen:1wuufq6vkl4qmmgzs06mtgatklpxr5zr4qqnk4k',
             location: 'New South Wales, Australia',
@@ -216,6 +218,7 @@ export const creditSendModal = (): JSX.Element => (
     batchDenom={'C01-20190101-20201010-02'}
     open={true}
     onClose={() => null}
+    onSubmit={async () => alert('submit')}
   />
 );
 
@@ -225,6 +228,7 @@ export const creditRetireModal = (): JSX.Element => (
     batchDenom={'C01-20190101-20201010-02'}
     open={true}
     onClose={() => null}
+    onSubmit={async () => alert('submit')}
   />
 );
 
@@ -235,14 +239,15 @@ export const basketPutModal = (): JSX.Element => (
     batchDenom={'C01-20190101-20201010-02'}
     open={true}
     onClose={() => null}
-    onSubmit={() => alert('submit')}
+    onSubmit={async () => alert('submit')}
   />
 );
 
 export const basketTakeModal = (): JSX.Element => (
   <BasketTakeModal
     open={true}
-    accountAddress={'123xyz'}
+    accountAddress="123xyz"
+    basketDisplayDenom="eco.C.rNCT"
     basket={{
       id: new Long(1),
       $type: 'regen.ecocredit.basket.v1.Basket',

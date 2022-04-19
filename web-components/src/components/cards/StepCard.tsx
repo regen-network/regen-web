@@ -94,7 +94,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 0,
     borderRadius: 0,
     fontSize: theme.spacing(3),
-    maxWidth: theme.spacing(22),
   },
   cardBottom: {
     display: 'flex',

@@ -51,11 +51,7 @@ const query = graphql`
 const BodyContent: React.FC<{ content: SanityBlockContent }> = ({
   content,
 }) => (
-  <BlockContent
-    noYMargin
-    content={content}
-    sxWrap={{ '& p': { fontSize: [18, 22] } }}
-  />
+  <BlockContent content={content} sxWrap={{ '& p': { fontSize: [18, 22] } }} />
 );
 
 export const TokenSection = (): JSX.Element => {

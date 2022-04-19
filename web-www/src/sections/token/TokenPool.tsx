@@ -6,9 +6,9 @@ import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import { MarketingDescription as Description } from '../../components/Description';
 import { TokenPoolQuery } from '../../generated/graphql';
 import SanityImage from 'gatsby-plugin-sanity-image';
+import { BodyText, Title } from 'web-components/lib/components/typography';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -65,10 +65,24 @@ const TokenEconomics = (): JSX.Element => {
     </div>
   ) : (
     <Section
-      title={data?.title || ''}
+      title={
+        <Title variant="h2" mobileVariant="h3">
+          {data?.title}
+        </Title>
+      }
       classes={{ root: clsx(styles.root, styles.center), title: styles.title }}
     >
-      <Description className={clsx(styles.content, styles.center)}>{data?.subtitle}</Description>
+      <BodyText
+        sx={{
+          width: ['100%', '80%'],
+          maxWidth: 946,
+          mt: 4,
+          mb: 8,
+          textAlign: 'center',
+        }}
+      >
+        {data?.subtitle}
+      </BodyText>
       <SanityImage className={styles.image} {...(data?.image as any)} />
     </Section>
   );

@@ -11,7 +11,8 @@ const CustomBlockContent: React.FC<{
   className?: string;
   content: SanityBlockContent;
   tooltipText?: string;
-  noYMargin?: boolean;
+  /** by default, padding is added to the paragraph elements. We remove, but this allows them to be added back */
+  padYMargin?: boolean;
   /** we can't pass `sx` directly, so use wrapper to target elements */
   sxWrap?: SxProps<Theme>;
   onClickModalLink?: (href: string) => any;
@@ -21,7 +22,7 @@ const CustomBlockContent: React.FC<{
   tooltipText,
   className,
   sxWrap = [],
-  noYMargin = true, // TODO this used to be false, I switched to true to show style issues and correct with the plan of removing this prop after - we shouldn't have to manually manage this
+  padYMargin = false,
 }) => {
   const serializers = {
     marks: {
@@ -62,7 +63,7 @@ const CustomBlockContent: React.FC<{
       <Box
         component="span"
         sx={[
-          !!noYMargin && {
+          !padYMargin && {
             '& p:first-child': {
               marginTop: 0,
             },

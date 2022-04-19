@@ -76,7 +76,6 @@ export const LedgerSection = (): JSX.Element => {
               {data?.subtitle}
             </Label>
             <BlockContent
-              noYMargin
               content={data?._rawBody}
               sxWrap={{ '& p': { fontSize: [18, 22], textAlign: 'center' } }}
             />

@@ -83,7 +83,6 @@ export const OverviewSection = (): JSX.Element => {
               <SanityImage {...(data?.titleIcon as any)} alt="NCT icon" />
             </Box>
             <BlockContent
-              noYMargin
               content={data?._rawBody}
               sxWrap={{ '& p': { fontSize: [18, 22] } }}
             />

@@ -98,7 +98,7 @@ function MethodologyTopSection({
             <BlockContent content={nameRaw} />
           </Title>
           <Description className={styles.description}>
-            <BlockContent noYMargin content={descriptionRaw} />
+            <BlockContent content={descriptionRaw} />
           </Description>
         </div>
       </div>

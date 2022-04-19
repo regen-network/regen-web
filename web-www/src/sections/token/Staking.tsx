@@ -1,14 +1,13 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { MarketingDescription as Description } from '../../components/Description';
 import { TokenStakingQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
+import { BodyText, Title } from 'web-components/lib/components/typography';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   content: {
@@ -58,12 +57,25 @@ const Staking = (): JSX.Element => {
 
   return (
     <Section
-      title={data?.title || ''}
-      classes={{ root: clsx(styles.root, styles.center), title: styles.title }}
+      title={
+        <Title variant="h2" mobileVariant="h3">
+          {data?.title}
+        </Title>
+      }
+      classes={{ root: styles.center }}
     >
-      <Description className={clsx(styles.content, styles.center)}>
+      <BodyText
+        size="xl"
+        sx={{
+          py: 4,
+          mb: 4,
+          textAlign: 'center',
+          width: ['100%', '80%'],
+          maxWidth: theme => theme.spacing(236.5),
+        }}
+      >
         <BlockContent content={data?._rawBody} />
-      </Description>
+      </BodyText>
       <ContainedButton
         size="large"
         href={data?.button?.buttonLink?.buttonHref || ''}

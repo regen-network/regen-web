@@ -5,9 +5,9 @@ import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import { MarketingDescription as Description } from '../../components/Description';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TokenEconomicsQuery } from '../../generated/graphql';
+import { BodyText, Title } from 'web-components/lib/components/typography';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -16,18 +16,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     alignItems: 'center',
     '& p': {
       textAlign: 'center',
-    },
-  },
-  content: {
-    width: '80%',
-    maxWidth: theme.spacing(236.5),
-    [theme.breakpoints.down('sm')]: {
-      width: '100%',
-    },
-  },
-  title: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
     },
   },
 }));
@@ -49,12 +37,23 @@ const TokenEconomics = (): JSX.Element => {
 
   return (
     <Section
-      title={data?.title || ''}
+      title={
+        <Title variant="h2" mobileVariant="h3">
+          {data?.title}
+        </Title>
+      }
       classes={{ root: clsx(styles.root, styles.center), title: styles.title }}
     >
-      <Description className={clsx(styles.content, styles.center)}>
+      <BodyText
+        size="xl"
+        mobileSize="md"
+        sx={{
+          width: ['100%', '80%'],
+          maxWidth: 946,
+        }}
+      >
         <BlockContent content={data?._rawBody} />
-      </Description>
+      </BodyText>
     </Section>
   );
 };

@@ -35,7 +35,6 @@ export const TopSection = (): JSX.Element => {
       }
       body={
         <BlockContent
-          noYMargin
           content={data?._rawBody}
           sxWrap={{ '& p > a': { color: 'primary.main' } }}
         />

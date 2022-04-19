@@ -112,7 +112,6 @@ const CallToAction = (): JSX.Element => {
                 </Title>
                 <Description className={styles.description} align="center">
                   <BlockContent
-                    noYMargin
                     content={cta?._rawDescription}
                     onClickModalLink={(href: string) =>
                       setModalIframeLink(href)

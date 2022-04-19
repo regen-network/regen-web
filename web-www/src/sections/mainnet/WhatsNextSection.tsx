@@ -70,7 +70,8 @@ const query = graphql`
 
 const WhatsNextSection: React.FC = () => {
   const styles = useStyles();
-  const { background, sanityMainnetPage } = useStaticQuery<MainnetWhatsNextSectionQuery>(query);
+  const { background, sanityMainnetPage } =
+    useStaticQuery<MainnetWhatsNextSectionQuery>(query);
   const content = sanityMainnetPage?.whatsNextSection;
   return (
     <BackgroundSection
@@ -83,7 +84,7 @@ const WhatsNextSection: React.FC = () => {
           {content?.title}
         </Typography>
         <Typography className={styles.description}>
-          <BlockContent noYMargin content={content?._rawDescription} />
+          <BlockContent content={content?._rawDescription} />
         </Typography>
         <div>
           <Grid container direction="row" justifyContent="center">

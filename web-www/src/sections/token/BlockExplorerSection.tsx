@@ -8,7 +8,6 @@ import Section from 'web-components/lib/components/section';
 import { BodyText, Title } from 'web-components/lib/components/typography';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import DecentralizeIcon from 'web-components/lib/components/icons/DecentralizeIcon';
-import { MarketingDescription as Description } from '../../components/Description';
 import { TokenBlockExplorerSectionQuery } from '../../generated/graphql';
 import { FluidObject } from 'gatsby-image';
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -92,7 +91,7 @@ const BlockExplorerSection = (): JSX.Element => {
             align="center"
             sx={{ color: 'primary.main', px: [5, 0], pb: [7, 9.5] }}
           >
-            <BlockContent noYMargin content={data?._rawBody} />
+            <BlockContent content={data?._rawBody} />
           </BodyText>
           <ContainedButton
             size="large"

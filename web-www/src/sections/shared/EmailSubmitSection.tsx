@@ -86,7 +86,11 @@ const EmailSubmitSection: React.FC<Props> = ({ image, altContent }) => {
       backgroundColor={`#040e18`}
     >
       <div className={clsx(styles.root)} id="newsletter-signup">
-        <Title variant="h2" sx={{ color: 'primary.main', textAlign: 'center' }}>
+        <Title
+          variant="h2"
+          mobileVariant="h3"
+          sx={{ color: 'primary.main', textAlign: 'center' }}
+        >
           {altContent?.header || content?.title}
         </Title>
         <ButtonText

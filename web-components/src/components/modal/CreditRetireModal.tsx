@@ -5,19 +5,23 @@ import { CreditRetireForm, CreditRetireProps } from '../form/CreditRetireForm';
 
 interface CreditRetireModalProps extends RegenModalProps, CreditRetireProps {}
 
+export const title = 'Retire Credits';
+
 const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
   holder,
   batchDenom,
   availableTradableAmount,
+  mapboxToken,
   open,
   onClose,
   onSubmit,
 }) => (
-  <FormModalTemplate title="Retire Credits" open={open} onClose={onClose}>
+  <FormModalTemplate title={title} open={open} onClose={onClose}>
     <CreditRetireForm
       holder={holder}
       availableTradableAmount={availableTradableAmount}
       batchDenom={batchDenom}
+      mapboxToken={mapboxToken}
       onClose={onClose}
       onSubmit={onSubmit}
     />

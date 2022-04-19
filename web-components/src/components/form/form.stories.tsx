@@ -62,6 +62,7 @@ export const creditSendForm = (): JSX.Element => (
     sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
     availableTradableAmount={1000}
     batchDenom={'C01-20190101-20201010-02'}
+    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
   />
@@ -72,6 +73,7 @@ export const creditRetireForm = (): JSX.Element => (
     holder={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
     availableTradableAmount={1000}
     batchDenom={'C01-20190101-20201010-02'}
+    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
   />

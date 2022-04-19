@@ -5,6 +5,8 @@ import { BasketTakeForm, BasketTakeProps } from '../form/BasketTakeForm';
 
 export interface TakeModalProps extends RegenModalProps, BasketTakeProps {}
 
+export const title = 'Take from basket';
+
 const BasketTakeModal: React.FC<TakeModalProps> = ({
   basket,
   basketDisplayDenom,
@@ -17,7 +19,7 @@ const BasketTakeModal: React.FC<TakeModalProps> = ({
 }) => {
   return (
     <FormModalTemplate
-      title="Take from basket"
+      title={title}
       subtitle="You will receive one ecocredit for every basket token you redeem. Oldest batches will be pulled first."
       open={open}
       onClose={onClose}

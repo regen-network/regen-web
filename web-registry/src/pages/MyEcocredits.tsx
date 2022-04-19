@@ -71,6 +71,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
 
   const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   // TODO handle error when signing and broadcasting tx
+  // https://github.com/regen-network/regen-registry/issues/884
   const { signAndBroadcast, setDeliverTxResponse, wallet, deliverTxResponse } =
     useMsgClient(handleTxQueued, handleTxDelivered);
   const accountAddress = wallet?.address;
@@ -86,6 +87,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     (QueryBasketResponse | undefined)[][]
   >([]);
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
+  const [creditSendOpen, setCreditSendOpen] = useState<number>(-1);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [basketTakeTokens, setBasketTakeTokens] = useState<
     BasketTokens | undefined
@@ -291,7 +293,9 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           open={true}
           accountAddress={accountAddress}
           basket={basketTakeTokens?.basket}
-          basketDenom={basketTakeTokens?.metadata?.metadata?.display || ''}
+          basketDisplayDenom={
+            basketTakeTokens?.metadata?.metadata?.display || ''
+          }
           balance={
             parseInt(basketTakeTokens?.balance?.balance?.amount || '0') /
             Math.pow(10, basketTakeTokens?.basket?.exponent)

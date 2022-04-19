@@ -13,7 +13,7 @@ import Title from '../title';
 import Description from '../description';
 import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
-
+import { RegenModalProps } from '../modal';
 /**
  * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).
  * In this retire form, some of its components and interfaces are exported in order to be reused in the
@@ -74,25 +74,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-// Output (submit)
-interface RetireCredits {
-  batchDenom: string;
-  amount: string; // aka. retiredAmount
-}
-
-interface MsgRetire {
-  holder: string;
-  credits: RetireCredits;
-  location: string;
-  // TODO note (aka. memoNote)
-}
-
-// Input (args)
-interface FormProps {
+export interface CreditRetireProps {
   holder: string;
   batchDenom: string;
   availableTradableAmount: number;
-  onClose: () => void;
+  onSubmit: (values: RetireFormValues) => void;
+}
+
+// Input (args)
+interface FormProps extends CreditRetireProps {
+  onClose: RegenModalProps['onClose'];
 }
 
 export interface RetireFormValues {
@@ -163,7 +154,7 @@ export const CreditRetireFields = ({
         name="retiredAmount"
         label="Amount to retire"
         availableAmount={availableTradableAmount}
-        batchDenom={batchDenom}
+        denom={batchDenom}
       />
       <BottomCreditRetireFields />
     </>
@@ -202,6 +193,7 @@ const CreditRetireForm: React.FC<FormProps> = ({
   batchDenom,
   availableTradableAmount,
   onClose,
+  onSubmit,
 }) => {
   const validateHandler = (
     values: RetireFormValues,
@@ -211,21 +203,11 @@ const CreditRetireForm: React.FC<FormProps> = ({
     return errors;
   };
 
-  const submitHandler = async (
-    values: RetireFormValues,
-  ): Promise<MsgRetire | void> => {
-    // TODO
-    // add holder,
-    // retiredAmount to string,
-    // location codification (country + state)
-    console.log('*** submitHandler', values);
-  };
-
   return (
     <Formik
       initialValues={initialValues}
       validate={validateHandler}
-      onSubmit={submitHandler}
+      onSubmit={onSubmit}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>

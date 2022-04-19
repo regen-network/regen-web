@@ -5,7 +5,7 @@ import { CreditRetireForm, CreditRetireProps } from '../form/CreditRetireForm';
 
 interface CreditRetireModalProps extends RegenModalProps, CreditRetireProps {}
 
-export const title = 'Retire Credits';
+export const title = 'Retire';
 
 const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
   holder,

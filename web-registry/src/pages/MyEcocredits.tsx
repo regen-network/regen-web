@@ -151,13 +151,13 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       retireOnTake: values.retireOnTake || false,
     });
 
-    const message = {
+    const tx = {
       msgs: [msg],
       fee: undefined,
       memo: values?.retirementNote,
     };
 
-    await signAndBroadcast(message, () => setBasketTakeTokens(undefined));
+    await signAndBroadcast(tx, () => setBasketTakeTokens(undefined));
 
     if (basket && amount) {
       setCardItems([
@@ -170,24 +170,49 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
         },
       ]);
+      setIsTxSuccessfulModalTitle(basketTakeTitle);
     }
-    setIsTxSuccessfulModalTitle(basketTakeTitle);
   };
 
   const creditSendSubmit = async (
     values: CreditSendFormValues,
   ): Promise<void> => {
     if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
+    const batchDenom = credits[creditSendOpen].batch_denom;
+    const recipient = values.recipient;
     const msg = MsgSend.fromPartial({
       sender: accountAddress,
+      recipient,
       credits: [
         {
-          batchDenom: credits[creditSendOpen].batch_denom,
+          batchDenom,
           tradableAmount: values.tradableAmount.toString(),
           retiredAmount: values.retiredAmount.toString(),
+          retirementLocation: values.retirementLocation,
         },
       ],
     });
+
+    const tx = {
+      msgs: [msg],
+      fee: undefined,
+      memo: values?.note,
+    };
+
+    await signAndBroadcast(tx, () => setCreditSendOpen(-1));
+    if (batchDenom && recipient) {
+      setCardItems([
+        {
+          label: 'batch denom',
+          value: { name: batchDenom },
+        },
+        {
+          label: 'recipient',
+          value: { name: recipient },
+        },
+      ]);
+      setIsTxSuccessfulModalTitle(creditSendTitle);
+    }
   };
 
   const basketPutSubmit = async (

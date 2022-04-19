@@ -12,12 +12,12 @@ import {
   Title,
 } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
-import Description from 'web-components/lib/components/description';
 import { SanityCaseStudyApproachSection } from '../../../generated/graphql';
 import {
   BlockContent,
   SanityBlockOr,
 } from 'web-components/src/components/block-content';
+import { Box } from '@mui/material';
 
 interface Paragraph {
   title: string | Element;
@@ -96,23 +96,21 @@ export const TitleWithParagraphs: React.FC<TitleWithParagraphsProps> = ({
   title,
   paragraphs,
 }) => {
-  const styles = useStyles();
   return (
     <>
-      <Title variant="h3" sx={{ pb: { xs: 7, sm: 8 } }}>
+      <Title variant="h3" sx={{ mb: [6, 7] }}>
         {title}
       </Title>
       <div>
         {paragraphs.map((p: Paragraph, i: number) => (
-          <div key={i} className={i > 0 ? styles.paragraph : undefined}>
-            <ButtonText sx={{ fontSize: { xs: 16, sm: 18 }, pb: 3.5 }}>
+          <Box key={i} sx={{ mb: [7, 10] }}>
+            <ButtonText sx={{ fontSize: [16, 18], mb: [2, 4] }}>
               {p.title}
             </ButtonText>
             <BodyText
               size="lg"
               sx={{
-                pt: 1.25,
-                mb: 0,
+                mt: [4, 4],
                 '& ul, ol': {
                   listStyle: 'none',
                   marginLeft: 3,
@@ -133,7 +131,7 @@ export const TitleWithParagraphs: React.FC<TitleWithParagraphsProps> = ({
                 <BlockContent content={p.content} />
               )}
             </BodyText>
-          </div>
+          </Box>
         ))}
       </div>
     </>
@@ -174,7 +172,21 @@ const ApproachSection: React.FC<SanityCaseStudyApproachSection> = ({
       title={content.header}
     >
       {description && (
-        <Description className={classes.description}>{description}</Description>
+        <>
+          <BodyText
+            size="xl"
+            mobileSize="md"
+            sx={{
+              m: '0 auto',
+              maxWidth: theme => theme.spacing(186.5),
+              textAlign: 'center',
+              color: 'info.dark',
+              pb: [11, 13.5],
+            }}
+          >
+            {description}
+          </BodyText>
+        </>
       )}
       <Grid container spacing={10}>
         <Grid item xs={12} md={6}>

@@ -36,7 +36,7 @@ export const TopSection = (): JSX.Element => {
       body={
         <BlockContent
           content={data?._rawBody}
-          sxWrap={{ '& p > a': { color: 'primary.main' } }}
+          sx={{ '& p > a': { color: 'primary.main' } }}
         />
       }
       imageData={data?.image?.image?.asset?.fluid}

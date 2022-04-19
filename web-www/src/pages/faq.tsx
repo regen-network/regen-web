@@ -28,7 +28,7 @@ const FAQPage = (props: PageProps): JSX.Element => {
       questions: (category?.questions || []).map(question => {
         return {
           question: question?.question || '',
-          answer: <BlockContent content={question?._rawAnswer} />,
+          answer: <BlockContent padYMargin content={question?._rawAnswer} />,
         };
       }),
     } as FAQProps['categories'][0];

@@ -92,7 +92,7 @@ const CollectiveSection = (): JSX.Element => {
             maxWidth: 946,
           }}
         >
-          <BlockContent content={data?._rawBody} />
+          <BlockContent content={data?._rawBody} sx={{ color: 'info.dark' }} />
         </BodyText>
         <ContainedButton size="large" onClick={() => setOpen(true)}>
           {data?.buttonText}

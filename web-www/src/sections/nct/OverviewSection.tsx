@@ -84,7 +84,7 @@ export const OverviewSection = (): JSX.Element => {
             </Box>
             <BlockContent
               content={data?._rawBody}
-              sxWrap={{ '& p': { fontSize: [18, 22] } }}
+              sx={{ '& p': { fontSize: [18, 22] } }}
             />
           </Box>
           {/* TODO: this conditional check is temporary until the basket pages are live */}

@@ -76,9 +76,7 @@ const CollaborateSection = (): JSX.Element => {
           color: 'info.dark',
           textAlign: 'center',
           m: '0 auto',
-          pl: { xs: 3, sm: 'initial' },
-          pt: { xs: 17, sm: 21.5 },
-          pb: { xs: 25, sm: 23.25 },
+          pb: { xs: 20, sm: 23.25 },
         })}
       >
         <BlockContent content={data?.titleBody?._rawBody} />

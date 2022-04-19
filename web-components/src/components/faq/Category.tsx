@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import GreenCard from '../cards/GreenCard';
-import { Title } from '../typography';
+import { ButtonText } from '../typography';
 import Question, { QuestionItem } from './Question';
 
 interface CategoryProps {
@@ -21,19 +21,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: `${theme.spacing(10)} 0 ${theme.spacing(8.27)}`,
     },
   },
-  title: {
-    letterSpacing: '1px',
-    fontWeight: 800,
-    color: theme.palette.secondary.dark,
-    textTransform: 'uppercase',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-      padding: `0 ${theme.spacing(5.25)}`,
-    },
-    [theme.breakpoints.up('sm')]: {
-      padding: `0 ${theme.spacing(7.75)}`,
-    },
-  },
 }));
 
 const Category = ({
@@ -45,9 +32,9 @@ const Category = ({
 
   return (
     <GreenCard className={classes.root}>
-      <Title variant="h6" className={classes.title}>
+      <ButtonText sx={{ color: 'secondary.dark', px: [5.25, 7.75] }}>
         {name}
-      </Title>
+      </ButtonText>
       {questions.map((q, i) => (
         <div key={i}>
           <Question

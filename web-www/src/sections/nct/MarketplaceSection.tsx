@@ -55,7 +55,7 @@ export const MarketplaceSection = (): JSX.Element => {
         </Title>
         <BlockContent
           content={data?._rawBody}
-          sxWrap={{ '& p': { fontSize: [18, 22], textAlign: 'center' } }}
+          sx={{ '& p': { fontSize: [18, 22], textAlign: 'center' } }}
         />
       </Box>
     </Section>

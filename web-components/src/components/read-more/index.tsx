@@ -7,6 +7,7 @@ import { ExpandButton } from '../buttons/ExpandButton';
 import Description from '../description';
 import { truncate, Texts } from './truncate';
 import { FontSizes } from '../../theme/sizing';
+import { BodyText } from '../typography';
 
 interface ReadMoreProps {
   children: string;
@@ -53,13 +54,12 @@ const ReadMore: React.FC<ReadMoreProps> = ({
 }) => {
   const styles = useStyles({});
   const [expanded, setExpanded] = useState(false);
-  const fontSize: FontSizes = { xs: '1rem', sm: '1.375rem' };
   const texts: Texts = truncate(children, maxLength, restMinLength);
 
   return (
     <div className={cx(styles.root, classes?.root)}>
       <div className={cx(styles.textContainer, classes?.textContainer)}>
-        <Description className={classes?.description} fontSize={fontSize}>
+        <BodyText size="xl" mobileSize="md">
           {texts.truncated}
           {texts.rest && !expanded && (
             <ExpandButton
@@ -68,11 +68,11 @@ const ReadMore: React.FC<ReadMoreProps> = ({
               expanded={expanded}
             />
           )}
-        </Description>
+        </BodyText>
         <Fade in={expanded} mountOnEnter unmountOnExit>
           {/* https://mui.com/guides/migration-v4/#cannot-read-property-scrolltop-of-null */}
           <div>
-            <Description className={classes?.description} fontSize={fontSize}>
+            <BodyText size="xl" mobileSize="md">
               {!texts.rest.startsWith('\n') && '\n'}
               {texts.rest}
               {texts.rest && expanded && (
@@ -82,7 +82,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
                   expanded={expanded}
                 />
               )}
-            </Description>
+            </BodyText>
           </div>
         </Fade>
       </div>

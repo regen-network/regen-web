@@ -77,7 +77,7 @@ export const LedgerSection = (): JSX.Element => {
             </Label>
             <BlockContent
               content={data?._rawBody}
-              sxWrap={{ '& p': { fontSize: [18, 22], textAlign: 'center' } }}
+              sx={{ '& p': { fontSize: [18, 22], textAlign: 'center' } }}
             />
             <OutlinedButton
               sx={{ px: [8, 12], mt: [4, 8] }}

@@ -18,7 +18,8 @@ export const BodyText = styled(Typography, {
     fontWeight: 400,
     marginBottom: theme.spacing(1.5),
     whiteSpace: 'pre-wrap',
-    color: 'info.dark',
+    // TODO - ideally this would work, but gets overriden by global styles
+    // color: 'info.dark',
     fontSize: typography[mobileVariant].fontSize,
     [breakpoints.up('sm')]: {
       fontSize: typography[variant].fontSize,

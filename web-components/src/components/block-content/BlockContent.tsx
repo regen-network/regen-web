@@ -13,15 +13,15 @@ const CustomBlockContent: React.FC<{
   tooltipText?: string;
   /** by default, padding is added to the paragraph elements. We remove, but this allows them to be added back */
   padYMargin?: boolean;
-  /** we can't pass `sx` directly, so use wrapper to target elements */
-  sxWrap?: SxProps<Theme>;
+  /** note: this is passed to the wrapper element */
+  sx?: SxProps<Theme>;
   onClickModalLink?: (href: string) => any;
 }> = ({
   onClickModalLink,
   content,
   tooltipText,
   className,
-  sxWrap = [],
+  sx = [],
   padYMargin = false,
 }) => {
   const serializers = {
@@ -64,14 +64,14 @@ const CustomBlockContent: React.FC<{
         component="span"
         sx={[
           !padYMargin && {
-            '& p:first-child': {
+            '& p:first-of-type': {
               marginTop: 0,
             },
-            '& p:last-child': {
+            '& p:last-of-type': {
               marginBottom: 0,
             },
           },
-          ...(Array.isArray(sxWrap) ? sxWrap : [sxWrap]),
+          ...(Array.isArray(sx) ? sx : [sx]),
         ]}
       >
         <BlockContent

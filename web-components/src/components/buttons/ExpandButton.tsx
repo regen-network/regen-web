@@ -20,6 +20,7 @@ const ExpandButton: React.FC<Props> = ({ onClick, expanded, text, sx }) => {
   return (
     <OutlinedButton
       onClick={onClick}
+      size="small"
       sx={{
         border: 'none !important',
         ...sx,

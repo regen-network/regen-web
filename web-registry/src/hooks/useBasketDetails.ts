@@ -9,12 +9,8 @@ import {
 import { QueryClassInfoResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
-import {
-  queryBasket,
-  queryBasketBalances,
-  queryDenomMetadata,
-  // QueryBasketProps,
-} from '../lib/ecocredit';
+import { queryDenomMetadata } from '../lib/bank';
+import { queryBasket, queryBasketBalances } from '../lib/basket';
 
 // hooks
 import useQueryClient from './useQueryClient';

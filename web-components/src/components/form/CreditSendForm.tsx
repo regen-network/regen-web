@@ -71,14 +71,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       alignSelf: 'end',
     },
   },
-  checked: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(10),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(9),
-    },
-  },
   checkboxDescription: {
     color: theme.palette.primary.contrastText,
     fontSize: theme.spacing(4.5),
@@ -190,11 +182,7 @@ const CreditSendForm: React.FC<FormProps> = ({
             component={CheckboxLabel}
             type="checkbox"
             name="withRetire"
-            className={
-              values.withRetire
-                ? cx(styles.checkboxLabel, styles.checked)
-                : styles.checkboxLabel
-            }
+            className={styles.checkboxLabel}
             label={
               <Description className={styles.checkboxDescription}>
                 Retire credits upon transfer

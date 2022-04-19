@@ -69,7 +69,7 @@ export const OverviewSection = (): JSX.Element => {
       Tag="section"
       fluid={data?.background?.asset?.fluid as FluidObject}
     >
-      <Section sx={{ pb: [22.25, 40] }}>
+      <Section sx={{ root: { pb: [22.25, 40] } }}>
         <Box
           sx={{
             display: 'flex',

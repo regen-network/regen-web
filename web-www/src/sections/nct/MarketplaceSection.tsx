@@ -31,10 +31,12 @@ export const MarketplaceSection = (): JSX.Element => {
   return (
     <Section
       sx={{
-        py: [20, 30],
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        root: {
+          py: [20, 30],
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        },
       }}
     >
       <SanityImage

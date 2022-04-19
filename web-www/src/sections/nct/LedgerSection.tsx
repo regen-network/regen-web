@@ -51,7 +51,7 @@ export const LedgerSection = (): JSX.Element => {
       }}
     >
       <BackgroundImage fluid={bg?.childImageSharp?.fluid as FluidObject}>
-        <Section sx={{ py: [20, 30] }}>
+        <Section sx={{ root: { py: [20, 30] } }}>
           <Box
             sx={{
               display: 'flex',

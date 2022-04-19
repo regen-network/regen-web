@@ -20,7 +20,7 @@ interface OverviewCardProps {
 
 interface OverviewItem {
   title: string;
-  description: JSX.Element;
+  description: JSX.Element | string;
   tooltip?: string;
 }
 

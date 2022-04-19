@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
   },
-  batchDenom: {
+  denom: {
     fontFamily: 'Muli',
     fontSize: '12px',
     color: theme.palette.info.dark,
@@ -50,14 +50,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface AuxiliarLabelProps {
   availableAmount: number;
-  batchDenom: string;
+  denom: string;
   className?: string;
 }
 
 interface AmountLabelProps {
   label?: string;
   availableAmount: number;
-  batchDenom: string;
+  denom: string;
 }
 
 interface AmountFieldProps extends AmountLabelProps {
@@ -67,7 +67,7 @@ interface AmountFieldProps extends AmountLabelProps {
 
 const AuxiliarLabel: React.FC<AuxiliarLabelProps> = ({
   availableAmount,
-  batchDenom,
+  denom,
   className,
 }) => {
   const styles = useStyles();
@@ -75,7 +75,7 @@ const AuxiliarLabel: React.FC<AuxiliarLabelProps> = ({
     <span className={className}>
       <span className={styles.availableLabel}>Available:</span>{' '}
       <span className={styles.availableAmount}>{availableAmount}</span>
-      <span className={styles.batchDenom}>{batchDenom}</span>
+      <span className={styles.denom}>{denom}</span>
     </span>
   );
 };
@@ -83,7 +83,7 @@ const AuxiliarLabel: React.FC<AuxiliarLabelProps> = ({
 const AmountLabel: React.FC<AmountLabelProps> = ({
   label,
   availableAmount,
-  batchDenom,
+  denom,
 }) => {
   const styles = useStyles();
   return (
@@ -91,7 +91,7 @@ const AmountLabel: React.FC<AmountLabelProps> = ({
       <span className={styles.mainLabel}>{label}</span>
       <AuxiliarLabel
         availableAmount={availableAmount}
-        batchDenom={batchDenom}
+        denom={denom}
         className={styles.auxiliarLabelDesktop}
       />
     </Grid>
@@ -145,7 +145,7 @@ const AmountField: React.FC<AmountFieldProps> = ({
   name,
   label = 'Amount',
   availableAmount,
-  batchDenom,
+  denom,
   className,
 }) => {
   const styles = useStyles();
@@ -161,13 +161,13 @@ const AmountField: React.FC<AmountFieldProps> = ({
           <AmountLabel
             label={label}
             availableAmount={availableAmount}
-            batchDenom={batchDenom}
+            denom={denom}
           />
         }
       />
       <AuxiliarLabel
         availableAmount={availableAmount}
-        batchDenom={batchDenom}
+        denom={denom}
         className={styles.auxiliarLabelMobile}
       />
     </>

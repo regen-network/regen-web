@@ -1,25 +1,25 @@
 import React from 'react';
 import { RegenModalProps } from '../modal';
 import { FormModalTemplate } from './FormModalTemplate';
-import { CreditSendForm } from '../form/CreditSendForm';
+import { CreditSendForm, CreditSendProps } from '../form/CreditSendForm';
 
-interface CreditSendModalProps extends RegenModalProps {
-  sender: string;
-  batchDenom: string;
-}
+interface CreditSendModalProps extends RegenModalProps, CreditSendProps {}
 
 const CreditSendModal: React.FC<CreditSendModalProps> = ({
   sender,
   batchDenom,
+  availableTradableAmount,
   open,
+  onSubmit,
   onClose,
 }) => (
   <FormModalTemplate title="Send" open={open} onClose={onClose}>
     <CreditSendForm
       sender={sender}
-      availableTradableAmount={1000}
       batchDenom={batchDenom}
-      onClose={() => null}
+      availableTradableAmount={availableTradableAmount}
+      onSubmit={onSubmit}
+      onClose={onClose}
     />
   </FormModalTemplate>
 );

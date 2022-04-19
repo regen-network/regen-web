@@ -16,6 +16,7 @@ import {
 import Submit from './Submit';
 import { validateAmount } from '../inputs/validation';
 import { getISOString } from '../../utils/locationStandard';
+import { RegenModalProps } from '../modal';
 
 /**
  * Take - takes credits from a basket starting from the oldest credits first.
@@ -68,23 +69,26 @@ interface CreditTakeFormValues {
   retirementLocation?: string;
 }
 
-// Input (args)
-interface FormProps {
-  mapboxToken: string;
-  accountAddress: string;
+export interface BasketTakeProps {
   basket: Basket;
-  basketDenom: string;
-  availableTradableAmount: number;
-  onClose: () => void;
+  basketDisplayDenom: string;
+  accountAddress: string;
+  balance: number;
+  mapboxToken: string;
   onSubmit: (values: MsgTakeValues) => void;
+}
+
+// Input (args)
+interface FormProps extends BasketTakeProps {
+  onClose: RegenModalProps['onClose'];
 }
 
 const BasketTakeForm: React.FC<FormProps> = ({
   mapboxToken,
   accountAddress,
   basket,
-  basketDenom,
-  availableTradableAmount,
+  basketDisplayDenom,
+  balance,
   onClose,
   onSubmit,
 }) => {
@@ -105,7 +109,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
     let errors: FormikErrors<CreditTakeFormValues> = {};
 
     const errAmount = validateAmount(
-      availableTradableAmount,
+      balance,
       values.amount,
       `You don't have enough basket tokens`,
     );
@@ -120,11 +124,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
         stateProvince: values.stateProvince,
         postalCode: values.postalCode,
       };
-      errors = validateCreditRetire(
-        availableTradableAmount,
-        retirementValues,
-        errors,
-      );
+      errors = validateCreditRetire(balance, retirementValues, errors);
     }
     return errors;
   };
@@ -162,7 +162,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
         setRetirementLocation();
       }
       if (!country) {
-        setFieldValue('retirementLocation', null)
+        setFieldValue('retirementLocation', null);
       }
     }, [country, stateProvince, postalCode, setFieldValue]);
 
@@ -181,8 +181,8 @@ const BasketTakeForm: React.FC<FormProps> = ({
             <AmountField
               name="amount"
               label="Amount"
-              availableAmount={availableTradableAmount}
-              batchDenom={basketDenom}
+              availableAmount={balance}
+              denom={basketDisplayDenom}
             />
             <Field
               component={CheckboxLabel}

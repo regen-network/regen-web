@@ -55,20 +55,20 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
 
   // fetching necessary data
   const { data: basket } = useQueryClient<QueryBasketResponse>({
-    type: 'basket',
-    callback: queryBasket,
+    module: 'basket',
+    query: queryBasket,
     params: { basketDenom },
   });
 
   const { data: basketBalances } = useQueryClient<QueryBasketBalancesResponse>({
-    type: 'basket',
-    callback: queryBasketBalances,
+    module: 'basket',
+    query: queryBasketBalances,
     params: { basketDenom },
   });
 
   const { data: basketMetadata } = useQueryClient<QueryDenomMetadataResponse>({
-    type: 'bank',
-    callback: queryDenomMetadata,
+    module: 'bank',
+    query: queryDenomMetadata,
     params: { denom: basketDenom },
   });
 

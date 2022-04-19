@@ -15,17 +15,17 @@ import { useLedger } from '../ledger';
 
 type QueryClient = BankQueryClient | EcocreditQueryClient | BasketQueryClient;
 
-type LedgerModules = 'bank' | 'ecocredit' | 'basket';
+type LedgerModule = 'bank' | 'ecocredit' | 'basket';
 
 // TODO: generic type
-type Ledgerparams = any;
+type QueryParams = any;
 
 // type LedgerQuery<P> = ({
 //   client,
 //   params,
 // }: {
 //   client: QueryClient;
-//   params: Ledgerparams<P>;
+//   params: QueryParams<P>;
 // }) => Promise<any>;
 
 // type LedgerQuery = ({
@@ -33,16 +33,16 @@ type Ledgerparams = any;
 //   params,
 // }: {
 //   client: QueryClient;
-//   params: Ledgerparams;
+//   params: QueryParams;
 // }) => Promise<any>;
 
 // TODO: generic types
 type LedgerQuery = ({ client, params }: any) => Promise<any>;
 
 type InputQueryLedger = {
-  type: LedgerModules;
-  callback: LedgerQuery;
-  params?: Ledgerparams;
+  module: LedgerModule;
+  query: LedgerQuery;
+  params?: QueryParams;
 };
 
 type OutputQueryLedger<T> = {
@@ -52,8 +52,8 @@ type OutputQueryLedger<T> = {
 };
 
 export default function useQueryClient<T>({
-  type,
-  callback,
+  module,
+  query,
   params,
 }: InputQueryLedger): OutputQueryLedger<T> {
   const { api } = useLedger();
@@ -69,7 +69,7 @@ export default function useQueryClient<T>({
     if (!api?.queryClient) return;
     if (client) return;
 
-    switch (type) {
+    switch (module) {
       case 'bank':
         setClient(new BankQueryClient(api.queryClient));
         break;
@@ -85,20 +85,20 @@ export default function useQueryClient<T>({
       default:
         throw new Error('The specified query client does not exist');
     }
-  }, [api?.queryClient, client, type]);
+  }, [api?.queryClient, client, module]);
 
   useEffect(() => {
     if (!client) return;
-    if (!type || !callback || !params) return;
+    if (!module || !query || !params) return;
     if (loading || data) return;
 
     setLoading(true);
 
-    callback({ client, ...params })
+    query({ client, ...params })
       .then(setData)
       .catch(setError)
       .finally(() => setLoading(false));
-  }, [client, type, callback, params, loading, data]);
+  }, [client, module, query, params, loading, data]);
 
   return { data, loading, error };
 }

@@ -2222,7 +2222,6 @@ export type HomePageSorting = {
   bottomBanner?: Maybe<BottomBannerSorting>;
 };
 
-<<<<<<< HEAD
 export type HomePageTopSection = {
   __typename?: 'HomePageTopSection';
   _key?: Maybe<Scalars['String']>;
@@ -2252,8 +2251,6 @@ export type HomePageTopSectionSorting = {
   icon?: Maybe<CustomImageSorting>;
 };
 
-=======
->>>>>>> 74c5553d (Update CreditClassDetails fetching)
 export type HomePageWeb = Document & {
   __typename?: 'HomePageWeb';
   /** Document ID */

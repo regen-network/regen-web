@@ -19381,7 +19381,6 @@
       },
       {
         "kind": "OBJECT",
-<<<<<<< HEAD
         "name": "HomePageTopSection",
         "description": null,
         "fields": [
@@ -19643,8 +19642,6 @@
       },
       {
         "kind": "OBJECT",
-=======
->>>>>>> 74c5553d (Update CreditClassDetails fetching)
         "name": "HomePageWeb",
         "description": null,
         "fields": [

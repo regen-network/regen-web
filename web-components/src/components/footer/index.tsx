@@ -9,7 +9,7 @@ import { BodyText, ButtonText } from '../typography';
 import Section from '../section';
 import NewsletterForm from '../form/NewsletterForm';
 import { SocialLinks } from './SocialLinks';
-import { Box } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 
 export interface FooterItemProps {
   title: string;
@@ -49,16 +49,20 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
   },
 }));
 
-const btnTextMB = {
-  xs: 4.5,
-  sm: 3.75,
-} as const;
+const sxs = {
+  btn: {
+    mb: {
+      xs: 4.5,
+      sm: 3.75,
+    },
+  } as SxProps,
+};
 
 const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
   const classes = useStyles({});
   return (
     <div className={classes.footerItem}>
-      <ButtonText size="lg" sx={{ mb: btnTextMB }}>
+      <ButtonText size="lg" sx={sxs.btn}>
         {title}
       </ButtonText>
       <List sx={{ p: 0 }}>
@@ -113,7 +117,7 @@ export default function Footer({
             />
           </Grid>
           <Grid item xs={12} sm={4} className={classes.footerItem}>
-            <ButtonText size="lg" sx={{ mb: btnTextMB }}>
+            <ButtonText size="lg" sx={sxs.btn}>
               subscribe
             </ButtonText>
             <BodyText size="lg">

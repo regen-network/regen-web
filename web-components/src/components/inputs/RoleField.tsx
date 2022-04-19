@@ -6,7 +6,7 @@ import { FieldProps, FormikErrors } from 'formik';
 import cx from 'clsx';
 
 import FieldFormControl from './FieldFormControl';
-import { Label } from '../typography';
+import { ButtonText } from '../typography';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -30,11 +30,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-  },
-  label: {
-    fontSize: theme.typography.pxToRem(12),
-    color: theme.palette.secondary.main,
-    marginLeft: theme.spacing(2),
   },
   input: {
     borderRadius: 2,
@@ -256,9 +251,12 @@ const RoleField: React.FC<Props> = ({
                     }}
                   >
                     <OrganizationIcon />
-                    <Label className={styles.label}>
+                    <ButtonText
+                      size="xs"
+                      sx={{ color: 'secondary.main', ml: 2 }}
+                    >
                       + Add New Organization
-                    </Label>
+                    </ButtonText>
                   </div>
                 ) as unknown as RoleOptionType,
               );
@@ -274,7 +272,12 @@ const RoleField: React.FC<Props> = ({
                     }}
                   >
                     <UserIcon />
-                    <Label className={styles.label}>+ Add New Individual</Label>
+                    <ButtonText
+                      size="xs"
+                      sx={{ color: 'secondary.main', ml: 2 }}
+                    >
+                      + Add New Individual
+                    </ButtonText>
                   </div>
                 ) as unknown as RoleOptionType,
               );

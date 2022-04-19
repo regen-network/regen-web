@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from '@mui/styles';
 import { SxProps } from '@mui/material';
 
-import { Label } from '../typography';
+import { ButtonText } from '../typography';
 import OutlinedButton from '../buttons/OutlinedButton';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import { Theme } from '../../theme/muiTheme';
@@ -32,9 +32,9 @@ const ExpandButton: React.FC<Props> = ({ onClick, expanded, text, sx }) => {
         />
       }
     >
-      <Label sx={{ fontSize: { xs: '14px', sm: '18px' } }}>
+      <ButtonText>
         {`${text || 'read'} ${expanded ? 'less' : 'more'}`}
-      </Label>
+      </ButtonText>
     </OutlinedButton>
   );
 };

@@ -199,10 +199,10 @@ const ClimateSection: React.FC = (): JSX.Element => {
         borderColor={theme.palette.grey['100']}
         borderRadius="10px"
       >
-        <ButtonText size="sm" sx={{ color: 'info.dark' }}>
+        <ButtonText size="sm" color="info.dark">
           {content?.solution?.title}
         </ButtonText>
-        <BodyText size="lg" sx={{ pt: 2 }}>
+        <BodyText size="lg" pt={2}>
           {content?.solution?.body}
         </BodyText>
         {downMd && <hr className={clsx(styles.line, styles.solutionLine)} />}

@@ -13,6 +13,7 @@ import { Title } from '../typography';
 import Description from '../description';
 import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
+import { SxProps } from '@mui/material';
 
 /**
  * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).
@@ -108,7 +109,12 @@ interface CreditRetireFieldsProps {
   availableTradableAmount: number;
 }
 
-const titleMargins = { mt: 10.75, mb: 3 } as const;
+const sxs = {
+  title: {
+    mt: 10.75,
+    mb: 3,
+  } as SxProps,
+};
 
 export const BottomCreditRetireFields: React.FC = () => {
   const styles = useStyles();
@@ -118,7 +124,7 @@ export const BottomCreditRetireFields: React.FC = () => {
 
   return (
     <>
-      <Title variant="h5" sx={titleMargins}>
+      <Title variant="h5" sx={sxs.title}>
         Transaction note
       </Title>
       <Field
@@ -130,7 +136,7 @@ export const BottomCreditRetireFields: React.FC = () => {
         optional
         defaultStyle={false}
       />
-      <Title variant="h5" sx={titleMargins}>
+      <Title variant="h5" sx={sxs.title}>
         Location of retirement
       </Title>
       <Description className={styles.description}>

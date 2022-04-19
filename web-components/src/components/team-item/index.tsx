@@ -1,11 +1,10 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
-import Typography from '@mui/material/Typography';
 
 import GithubIcon from '../icons/social/GithubIcon';
 import TwitterIcon from '../icons/social/TwitterIcon';
 import LinkedInIcon from '../icons/social/LinkedInIcon';
-import { BodyText, Label, Title } from '../typography';
+import { BodyText, ButtonText, Title } from '../typography';
 
 export interface TeamItemProps {
   name: string;
@@ -81,8 +80,10 @@ export default function TeamItem({
       <Title variant="h4" align="center" sx={{ mb: 2 }}>
         {name}
       </Title>
-      <Label sx={{ fontSize: 12, color: 'info.main', mb: 2.5 }}>{title}</Label>
-      <BodyText size="sm" sx={{ mb: 4.5, color: 'info.dark' }}>
+      <ButtonText size="xs" sx={{ color: 'info.main', mb: 2.5 }}>
+        {title}
+      </ButtonText>
+      <BodyText size="sm" mb={4.5}>
         {description}
       </BodyText>
       {githubUrl && (

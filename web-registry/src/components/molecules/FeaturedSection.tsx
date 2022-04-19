@@ -76,11 +76,7 @@ const FeaturedSection: React.FC<Props> = ({ content }) => {
                 >
                   <BlockContent content={content.titleRaw} />
                 </Title>
-                <BodyText
-                  size="lg"
-                  mobileSize="sm"
-                  sx={{ color: 'info.dark', pb: { xs: 4.5, sm: 7 } }}
-                >
+                <BodyText size="lg" mobileSize="sm" sx={{ pb: [4.5, 7] }}>
                   <BlockContent content={content.descriptionRaw} />
                 </BodyText>
                 <ContainedButton

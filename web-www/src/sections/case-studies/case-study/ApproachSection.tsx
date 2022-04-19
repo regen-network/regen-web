@@ -180,7 +180,6 @@ const ApproachSection: React.FC<SanityCaseStudyApproachSection> = ({
               m: '0 auto',
               maxWidth: theme => theme.spacing(186.5),
               textAlign: 'center',
-              color: 'info.dark',
               pb: [11, 13.5],
             }}
           >

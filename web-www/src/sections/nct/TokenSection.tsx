@@ -1,6 +1,6 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Box, Typography } from '@mui/material';
+import { Box, SxProps, Typography } from '@mui/material';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
 import { Title } from 'web-components/lib/components/typography';
@@ -48,6 +48,10 @@ const query = graphql`
   }
 `;
 
+const sxs = {
+  btnPad: { px: { xs: 8, sm: 12 } } as SxProps,
+};
+
 const BodyContent: React.FC<{ content: SanityBlockContent }> = ({
   content,
 }) => <BlockContent content={content} sx={{ '& p': { fontSize: [18, 22] } }} />;
@@ -55,9 +59,6 @@ const BodyContent: React.FC<{ content: SanityBlockContent }> = ({
 export const TokenSection = (): JSX.Element => {
   const { sanityNctPage } = useStaticQuery<NctTokenSectionQuery>(query);
   const data = sanityNctPage?.tokenSection;
-  const launchDate = sanityNctPage?.launchDate;
-
-  const btnPad = { px: { xs: 8, sm: 12 } } as const;
 
   const Card = (): JSX.Element => (
     <Box
@@ -131,7 +132,7 @@ export const TokenSection = (): JSX.Element => {
             alignSelf: 'start',
             mb: [8, 'inherit'],
             mt: [4, 8],
-            ...btnPad,
+            ...sxs.btnPad,
           }}
           href={data?.cardButton?.buttonLink?.buttonHref || ''}
           target={data?.cardButton?.buttonBlankTarget ? '_blank' : '_self'}
@@ -165,14 +166,14 @@ export const TokenSection = (): JSX.Element => {
         <BodyContent content={data?._rawDetailBody} />
         <Box sx={{ display: 'flex', gap: 3, mt: [4, 8] }}>
           <OutlinedButton
-            sx={btnPad}
+            sx={sxs.btnPad}
             href={data?.detailButton1?.buttonLink?.buttonHref || ''}
             target={data?.detailButton1?.buttonBlankTarget ? '_blank' : '_self'}
           >
             {data?.detailButton1?.buttonText}
           </OutlinedButton>
           <ContainedButton
-            sx={btnPad}
+            sx={sxs.btnPad}
             href={data?.detailButton2?.buttonLink?.buttonHref || ''}
             target={data?.detailButton2?.buttonBlankTarget ? '_blank' : '_self'}
           >

@@ -133,7 +133,6 @@ const ContextSection: React.FC<SanityCaseStudyContextSection> = ({
                   as="li"
                   sx={{
                     py: 1.25,
-                    color: 'info.dark',
                     counterIncrement: `challenge-counter`,
                     '&::before': {
                       content: 'counter(challenge-counter)',

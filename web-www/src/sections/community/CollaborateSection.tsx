@@ -73,7 +73,6 @@ const CollaborateSection = (): JSX.Element => {
         mobileSize="md"
         sx={theme => ({
           maxWidth: theme.spacing(225),
-          color: 'info.dark',
           textAlign: 'center',
           m: '0 auto',
           pb: { xs: 20, sm: 23.25 },

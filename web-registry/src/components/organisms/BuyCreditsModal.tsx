@@ -277,11 +277,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                             REGEN
                           </Label>
                         </Box>
-                        <BodyText
-                          size="md"
-                          mobileSize="md"
-                          sx={{ color: 'info.dark' }}
-                        >
+                        <BodyText size="md" mobileSize="md">
                           ($2345.00 USD)
                         </BodyText>
                       </div>

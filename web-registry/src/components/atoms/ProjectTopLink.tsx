@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Box } from '@mui/material';
-import { Label } from 'web-components/lib/components/typography';
+import { ButtonText } from 'web-components/lib/components/typography';
 
 import { LinkWithArrow } from '../atoms';
 
@@ -39,9 +39,9 @@ const ProjectTopLink: React.FC<Props> = ({
         pt: 1.75,
       }}
     >
-      <Label component="span" sx={{ fontSize: { xs: '12px' }, mr: 2 }}>
+      <ButtonText as="span" size="xs" sx={{ mr: 2 }}>
         {label + ':'}
-      </Label>
+      </ButtonText>
       <Box component="span" sx={{ fontSize: { xs: '14px', sm: '16px' } }}>
         {url ? (
           <LinkWithArrow

@@ -71,7 +71,7 @@ const OpenAgSection: React.FC = () => {
           <Title variant="h3" sx={{ pb: [4, 6] }}>
             {data?.header}
           </Title>
-          <BodyText size="lg" sx={{ color: 'info.dark' }}>
+          <BodyText size="lg">
             <BlockContent content={data?._rawBody} />
           </BodyText>
         </Grid>

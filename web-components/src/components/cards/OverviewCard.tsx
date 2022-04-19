@@ -7,7 +7,7 @@ import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';
 import InfoIconOutlined from '../icons/InfoIconOutlined';
 import InfoTooltip from '../tooltip/InfoTooltip';
-import { BodyText, Label } from '../typography';
+import { BodyText, ButtonText } from '../typography';
 
 interface OverviewCardProps {
   className?: string;
@@ -124,19 +124,12 @@ function OverviewCard({
       </div>
       <div className={styles.bottom}>
         <Box display="flex" justifyContent="center" pt={2}>
-          <Label sx={{ fontSize: 14 }}>
+          <ButtonText size="sm" mobileSize="sm">
             <CheckIcon className={styles.check} />
             {item.title}
-          </Label>
+          </ButtonText>
         </Box>
-        <BodyText
-          size="sm"
-          sx={{
-            textAlign: 'center',
-            color: 'info.dark',
-            pt: 3,
-          }}
-        >
+        <BodyText size="sm" sx={{ textAlign: 'center', pt: 3 }}>
           {item.description}
         </BodyText>
       </div>

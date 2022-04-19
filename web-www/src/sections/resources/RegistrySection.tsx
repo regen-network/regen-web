@@ -18,6 +18,7 @@ import {
   sanityDocsToDocuments,
   sanityResourcesToCardProps,
 } from '../../util/sanity-transforms';
+import { SxProps } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
@@ -85,6 +86,13 @@ const RegistrySection = (): JSX.Element => {
   const data = useStaticQuery<ResourcesRegistrySectionQuery>(query);
   const content = data?.sanityResourcesPage?.registrySection;
 
+  const sxs = {
+    btn: {
+      color: 'info.dark',
+      my: 8,
+    } as SxProps,
+  };
+
   return (
     <BackgroundSection
       className={styles.section}
@@ -97,27 +105,13 @@ const RegistrySection = (): JSX.Element => {
       </Title>
       {content?.subsections?.map((sub, i) => (
         <React.Fragment key={i}>
-          <ButtonText
-            sx={{
-              color: 'info.dark',
-              my: 8,
-            }}
-          >
-            {sub?.title}
-          </ButtonText>
+          <ButtonText sx={sxs.btn}>{sub?.title}</ButtonText>
           <ResourceCardsSlider
             items={sanityResourcesToCardProps(sub?.cards as SanityResource[])}
           />
         </React.Fragment>
       ))}
-      <ButtonText
-        sx={{
-          color: 'info.dark',
-          my: 8,
-        }}
-      >
-        {content?.documentTableTitle}
-      </ButtonText>
+      <ButtonText sx={sxs.btn}>{content?.documentTableTitle}</ButtonText>
       <Box className={styles.table}>
         <DocumentationTable
           canClickRow

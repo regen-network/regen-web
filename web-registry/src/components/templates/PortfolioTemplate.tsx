@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import Section from 'web-components/lib/components/section';
@@ -18,10 +18,12 @@ interface PortfolioTemplateProps {
   renderBasketActionButtons?: RenderActionButtonsFunc;
 }
 
-const titleSx = {
-  color: 'info.dark',
-  mb: { xs: 4.25, sm: 8.5 },
-} as const;
+const sxs = {
+  title: {
+    color: 'info.dark',
+    mb: { xs: 4.25, sm: 8.5 },
+  } as SxProps,
+};
 
 export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   credits,
@@ -35,14 +37,14 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
       <Section title="Portfolio" titleVariant="h2" titleAlign="left">
         {children}
         <Box sx={{ pt: { xs: 9.25, sm: 8.5 } }}>
-          <ButtonText sx={titleSx}>basket tokens</ButtonText>
+          <ButtonText sx={sxs.title}>basket tokens</ButtonText>
           <BasketsTable
             basketTokens={basketTokens}
             renderActionButtons={renderBasketActionButtons}
           />
         </Box>
         <Box sx={{ pt: 12.75 }}>
-          <ButtonText sx={titleSx}>ecocredits</ButtonText>
+          <ButtonText sx={sxs.title}>ecocredits</ButtonText>
           <EcocreditsTable
             credits={credits}
             renderActionButtons={renderCreditActionButtons}

@@ -2,8 +2,8 @@ import * as React from 'react';
 import {
   Title,
   Subtitle,
-  Body,
-  Label,
+  BodyText,
+  ButtonText,
 } from 'web-components/lib/components/typography';
 
 export default {
@@ -38,19 +38,24 @@ export const subtitle = (): JSX.Element => (
 
 export const body = (): JSX.Element => (
   <>
-    <Body size="xl">Body size xl</Body>
-    <Body size="lg">Body size lg</Body>
-    <Body size="md">Body size md</Body>
-    <Body size="sm">Body size sm</Body>
-    <Body size="xs" mobileSize="xl">
-      Body size xs (XL on mobile)
-    </Body>
+    <BodyText size="xl">BodyText size xl</BodyText>
+    <BodyText size="lg">BodyText size lg</BodyText>
+    <BodyText size="md">BodyText size md</BodyText>
+    <BodyText size="sm">BodyText size sm</BodyText>
+    <BodyText size="xs" mobileSize="xl">
+      BodyText size xs (XL on mobile)
+    </BodyText>
   </>
 );
 
-export const label = (): JSX.Element => (
+export const buttonText = (): JSX.Element => (
   <>
-    <Label>Label</Label>
-    <Label sx={{ color: 'secondary.main', fontSize: 24 }}>styled Label</Label>
+    <ButtonText size="lg">ButtonText size LG</ButtonText>
+    <ButtonText>ButtonText size md (default)</ButtonText>
+    <ButtonText size="sm">ButtonText size sm </ButtonText>
+    <ButtonText size="xs">ButtonText size xs </ButtonText>
+    <ButtonText sx={{ color: 'secondary.main', fontWeight: 400 }}>
+      ButtonText with custom styles
+    </ButtonText>
   </>
 );

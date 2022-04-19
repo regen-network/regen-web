@@ -12,6 +12,7 @@ export interface LineItemLabelAboveProps {
   data: string | JSX.Element | number;
 }
 
+// TODO should this be consolidated with the LineItem component?
 const LineItemLabelAbove: React.FC<LineItemLabelAboveProps> = ({
   sx,
   label,

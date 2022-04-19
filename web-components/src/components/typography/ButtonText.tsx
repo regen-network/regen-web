@@ -8,7 +8,7 @@ interface Props extends TypographyProps {
   mobileSize?: BtnTextSize;
 }
 
-// correspond to pixel sizes in the theme for button text, which differ from other sizing
+// correspond to pixel sizes in the theme for button text, which differ from other sizing in values + no `xl`
 // see: https://www.figma.com/file/MuSpCtCdU2ns4cFAsPfvsx/Text-Styles-%26-Components-(current)?node-id=0%3A1
 const SIZES = {
   lg: 21,

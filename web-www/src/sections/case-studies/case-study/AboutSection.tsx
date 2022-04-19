@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { useTheme, Grid, Box } from '@mui/material';
+import { useTheme, Grid, Box, SxProps } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
@@ -123,12 +123,15 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
   const theme = useTheme();
   const data = useStaticQuery<CaseStudyAboutSectionQuery>(query);
   const content = data?.sanityCaseStudiesPage?.aboutSection;
-  const pbTitle = { pb: { xs: 8.75, md: 6 } } as const;
+
+  const sxs = {
+    title: { pb: { xs: 8.75, md: 6 } } as SxProps,
+  };
 
   return (
     <Section className={styles.root}>
       <Box display={{ xs: 'block', md: 'none' }}>
-        <Title variant="h2" align="center" sx={pbTitle}>
+        <Title variant="h2" align="center" sx={sxs.title}>
           {content?.header}
         </Title>
       </Box>
@@ -158,7 +161,7 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
         </Grid>
         <Grid item xs={12} md={6} className={styles.gridItem}>
           <Box display={{ xs: 'none', md: 'block' }}>
-            <Title variant="h2" sx={pbTitle}>
+            <Title variant="h2" sx={sxs.title}>
               {content?.header}
             </Title>
           </Box>
@@ -173,10 +176,10 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
 
 const CardItem: React.FC<{ label?: string | null }> = ({ label, children }) => (
   <Box pt={2.5}>
-    <ButtonText size="sm" sx={{ pt: 1.25 }}>
+    <ButtonText size="sm" pt={1.25}>
       {label}
     </ButtonText>
-    <BodyText size="sm" sx={{ pt: 1.25, color: 'info.dark' }}>
+    <BodyText size="sm" pt={1.25}>
       {children}
     </BodyText>
   </Box>

@@ -18,10 +18,11 @@ import { CreditBatches, MoreProjectsSection } from '../components/organisms';
 import { toTitleCase } from '../lib/titleCase';
 import { getAccountUrl } from '../lib/block-explorer';
 import { ClassInfo, ApprovedMethodologyList } from '../types/ledger/ecocredit';
+import { CreditClassByOnChainIdQuery } from '../generated/graphql';
 
 interface CreditDetailsProps {
-  dbClass: any;
-  ledgerClass: ClassInfo;
+  dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
+  onChainClass: ClassInfo;
   metadata?: any;
 }
 
@@ -105,7 +106,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 
 const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   dbClass,
-  ledgerClass,
+  onChainClass,
   metadata,
 }) => {
   const styles = useStyles();
@@ -187,7 +188,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               <ButtonText size="sm" color="info.dark" mb={4}>
                 credit class
               </ButtonText>
-              <Title variant="h1">{ledgerClass.class_id}</Title>
+              <Title variant="h1">
+                {metadata?.['schema:name']} ({onChainClass.class_id})
+              </Title>
             </Box>
             {metadata?.['schema:description'] && (
               <ReadMore
@@ -205,7 +208,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 label="credit type"
                 data={
                   <BodyText size="xl" sx={{ mr: 1 }}>
-                    {toTitleCase(ledgerClass.credit_type.name)}
+                    {toTitleCase(onChainClass.credit_type.name)}
                   </BodyText>
                 }
               />
@@ -281,14 +284,14 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 <Link
                   className={styles.link}
                   href={
-                    ledgerClass.admin
-                      ? getAccountUrl(ledgerClass.admin)
-                      : getAccountUrl(ledgerClass?.designer)
+                    onChainClass.admin
+                      ? getAccountUrl(onChainClass.admin)
+                      : getAccountUrl(onChainClass?.designer)
                   }
                 >
-                  {ledgerClass.admin
-                    ? truncate(ledgerClass.admin)
-                    : truncate(ledgerClass?.designer)}
+                  {onChainClass.admin
+                    ? truncate(onChainClass.admin)
+                    : truncate(onChainClass?.designer)}
                 </Link>
               </div>
               <div className={styles.sidebarItemMargin}>
@@ -296,7 +299,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                   issuers
                 </ButtonText>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  {ledgerClass?.issuers?.map((issuer: string) => (
+                  {onChainClass?.issuers?.map((issuer: string) => (
                     <Link
                       className={styles.link}
                       href={getAccountUrl(issuer)}
@@ -314,7 +317,10 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
       </EcocreditsSection>
       <Projects />
       <div className="topo-background-alternate">
-        <CreditBatches creditClassId={ledgerClass.class_id} titleAlign="left" />
+        <CreditBatches
+          creditClassId={onChainClass.class_id}
+          titleAlign="left"
+        />
       </div>
     </Box>
   );

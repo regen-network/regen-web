@@ -15,12 +15,12 @@ import {
   Maybe,
   Scalars,
 } from '../../generated/sanity-graphql';
+import { CreditClassByUriQuery } from '../../generated/graphql';
 import { SDGs } from './SDGs';
 import { CreditClassDetailsColumn } from '../molecules/CreditClassDetailsColumn';
-import { CreditClass } from '../../mocks/mocks';
 
 interface CreditClassOverviewSectionProps {
-  creditClass: CreditClass;
+  dbClass: CreditClassByUriQuery['creditClassByUri'];
   className?: string;
   nameRaw?: Maybe<Scalars['JSON']>;
   overviewCards?: Maybe<Array<Maybe<CardFieldsFragment>>>;
@@ -126,7 +126,7 @@ const OverviewCards: React.FC<{
 };
 
 const CreditClassOverviewSection: React.FC<CreditClassOverviewSectionProps> = ({
-  creditClass,
+  dbClass,
   className,
   nameRaw,
   overviewCards,
@@ -162,10 +162,7 @@ const CreditClassOverviewSection: React.FC<CreditClassOverviewSectionProps> = ({
               <SDGs sdgs={sdgs} />
             </div>
           )}
-          <CreditClassDetailsColumn
-            nameRaw={nameRaw}
-            creditClass={creditClass}
-          />
+          <CreditClassDetailsColumn nameRaw={nameRaw} dbClass={dbClass} />
         </div>
       </Section>
       {!isMobile && sdgs && (

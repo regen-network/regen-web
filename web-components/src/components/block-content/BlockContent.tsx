@@ -85,4 +85,10 @@ const CustomBlockContent: React.FC<{
   return <></>;
 };
 
+export function blocksToText(blocks: SanityBlockContent): string {
+  return blocks.map((block: { children: { text: string }[] }) =>
+    block.children.map(child => child.text).join(''),
+  );
+}
+
 export { CustomBlockContent as BlockContent };

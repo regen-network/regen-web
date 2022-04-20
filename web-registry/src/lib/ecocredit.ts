@@ -10,15 +10,11 @@ import type {
   BatchInfoWithSupply,
   QuerySupplyResponse,
   BatchTotalsForProject,
-  QueryBalanceResponse as QueryBalanceResponseV0,
+  QueryBalanceResponse,
   QueryClassesResponse,
-  QueryBasketBalancesResponse as QueryBasketBalancesResponseV0,
-  QueryBasketResponse as QueryBasketResponseV0,
   BatchInfoWithBalance,
   QueryBatchesResponse,
   QueryClassInfoResponse,
-  BasketBalance,
-  BatchInfoWithProject,
 } from '../types/ledger/ecocredit';
 
 const ECOCREDIT_MESSAGE_TYPES = {
@@ -31,27 +27,6 @@ const ECOCREDIT_MESSAGE_TYPES = {
 
 // helpers for combining ledger queries (currently rest, regen-js in future)
 // into UI data structures
-
-export const getBasketBalancesWithBatchInfo = async (
-  balances: BasketBalance[],
-): Promise<BatchInfoWithProject[]> => {
-  try {
-    const batches = await Promise.all(
-      balances.map(batchBalance => queryEcoBatchInfo(batchBalance.batchDenom)),
-    );
-    // TODO: fetch the project name / display name, corresponding to the batch
-    const projectName = 'cavan-station';
-    const projectDisplayName = 'Cavan Station';
-    const batchesWithProject = batches.map(batch => ({
-      project_name: projectName,
-      project_display: projectDisplayName,
-      ...batch.info,
-    }));
-    return batchesWithProject;
-  } catch (err) {
-    throw new Error(`Could not get basket balances with batch info ${err}`);
-  }
-};
 
 export const getBatchesWithSupplyForDenoms = async (
   denoms: string[],
@@ -267,9 +242,9 @@ export const queryEcoBatchSupply = async (
 const queryEcoBalance = async (
   batchDenom: string,
   account: string,
-): Promise<QueryBalanceResponseV0> => {
+): Promise<QueryBalanceResponse> => {
   try {
-    const { data } = await axios.get<QueryBalanceResponseV0>(
+    const { data } = await axios.get<QueryBalanceResponse>(
       `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/balance/${account}`,
     );
     return data;
@@ -290,49 +265,6 @@ export const getTxsByEvent = (msgType: string): Promise<AxiosResponse> => {
     },
   });
 };
-
-export async function getBasket(
-  basketDenom: string,
-): Promise<QueryBasketResponseV0> {
-  return Promise.resolve({
-    basket: {
-      id: 'basket-1',
-      basketDenom: 'eco.uC.rNCT',
-      name: 'rNCT',
-      disableAutoRetire: false,
-      creditTypeAbbrev: 'C',
-      dateCriteria: {
-        minStartDate: '2022-06-01T00:00:00Z',
-      },
-      exponent: '6',
-    },
-    classes: ['C01', 'C02'],
-  });
-}
-
-export async function getBasketBalances(
-  basketDenom: string,
-): Promise<QueryBasketBalancesResponseV0> {
-  return Promise.resolve({
-    balances: [
-      {
-        basketId: 'basket-1',
-        batchDenom: 'C01-20180101-20200101-001',
-        balance: '17000',
-      },
-      {
-        basketId: 'basket-1',
-        batchDenom: 'C01-20190101-20210101-002',
-        balance: '23000',
-      },
-      {
-        basketId: 'basket-1',
-        batchDenom: 'C01-20210909-20220101-003',
-        balance: '30000',
-      },
-    ],
-  });
-}
 
 export const queryEcoClassInfo = async (
   class_id: string,

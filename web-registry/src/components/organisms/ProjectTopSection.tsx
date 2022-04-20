@@ -175,9 +175,9 @@ function ProjectTopSection({
   const landStewardStory = metadata?.['regen:landStewardStory'];
   const isVCSProject = !!metadata?.['regen:vcsProjectId']?.['@value'];
 
-  const sdgIris = creditClassVersion?.metadata?.['regen:SDGs']?.['@list']?.map(
-    (sdg: { '@id': string }) => sdg['@id'],
-  );
+  const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
+    '@list'
+  ]?.map((sdg: { '@id': string }) => sdg['@id']);
   const { data: sdgData } = useSdgByIriQuery({
     client,
     variables: {

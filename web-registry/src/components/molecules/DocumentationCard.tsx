@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ImageLeftCard } from 'web-components/lib/components/cards/ImageLeftCard';
 import {
-  BodyText,
+  Body,
   ButtonText,
   Title,
 } from 'web-components/lib/components/typography';
@@ -29,7 +29,7 @@ const Detail: React.FC<{ label: string }> = ({ children, label }) => (
     <ButtonText size="xs" mr={1}>
       {label}
     </ButtonText>
-    <BodyText size="sm">{children}</BodyText>
+    <Body size="sm">{children}</Body>
   </Box>
 );
 

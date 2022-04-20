@@ -8,7 +8,7 @@ import BackgroundImage from 'gatsby-background-image';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import MediaCard from 'web-components/lib/components/cards/MediaCard';
 import {
-  BodyText,
+  Body,
   ButtonText,
   Title,
 } from 'web-components/lib/components/typography';
@@ -165,9 +165,9 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
               {content?.header}
             </Title>
           </Box>
-          <BodyText size="xl" sx={{ color: 'info.dark' }}>
+          <Body size="xl" sx={{ color: 'info.dark' }}>
             <BlockContent content={_rawAbout} />
-          </BodyText>
+          </Body>
         </Grid>
       </Grid>
     </Section>
@@ -179,9 +179,9 @@ const CardItem: React.FC<{ label?: string | null }> = ({ label, children }) => (
     <ButtonText size="sm" pt={1.25}>
       {label}
     </ButtonText>
-    <BodyText size="sm" pt={1.25}>
+    <Body size="sm" pt={1.25}>
       {children}
-    </BodyText>
+    </Body>
   </Box>
 );
 

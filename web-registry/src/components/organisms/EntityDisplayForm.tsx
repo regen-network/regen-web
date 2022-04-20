@@ -8,7 +8,7 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import Modal from 'web-components/lib/components/modal';
 import {
-  BodyText,
+  Body,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
@@ -462,7 +462,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
                 <Subtitle size="lg" sx={{ color: 'primary.contrastText' }}>
                   Choose the entities to show on the project page:
                 </Subtitle>
-                <BodyText sx={{ mb: 4 }}>
+                <Body sx={{ mb: 4 }}>
                   Showing more entities increases the salability of the project.
                   You must show at least one entity on the project page. These
                   entities can only be edited in the previous step.&nbsp;
@@ -472,7 +472,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
                   >
                     See an example»
                   </Link>
-                </BodyText>
+                </Body>
 
                 {values['http://regen.network/landOwner'] &&
                   getToggle(
@@ -521,12 +521,12 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
           >
             Example of Entity Display
           </Title>
-          <BodyText size="md" mobileSize="md" sx={{ pb: 5 }}>
+          <Body size="md" mobileSize="md" sx={{ pb: 5 }}>
             See full{' '}
             <RouterLink to="/projects/wilmot" target="_blank">
               project page»
             </RouterLink>
-          </BodyText>
+          </Body>
           <Card className={styles.modalCard}>
             <ProjectTopCard
               classes={{

@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import {
-  BodyText,
+  Body,
   ButtonText,
   Title,
 } from 'web-components/lib/components/typography';
@@ -138,9 +138,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
         label="approved methodologies"
         data={
           <Box>
-            <BodyText size="xl" key={firstMethodology?.['schema:name']}>
+            <Body size="xl" key={firstMethodology?.['schema:name']}>
               {firstMethodology?.['schema:name']}
-            </BodyText>
+            </Body>
             {count > 1 && (
               <Link
                 sx={{
@@ -207,9 +207,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               <LineItemLabelAbove
                 label="credit type"
                 data={
-                  <BodyText size="xl" sx={{ mr: 1 }}>
+                  <Body size="xl" sx={{ mr: 1 }}>
                     {toTitleCase(onChainClass.credit_type.name)}
-                  </BodyText>
+                  </Body>
                 }
               />
               {metadata?.['regen:sourceRegistry']?.['schema:name'] && (
@@ -225,9 +225,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                       target="_blank"
                     >
                       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <BodyText size="xl" sx={{ mr: 1 }}>
+                        <Body size="xl" sx={{ mr: 1 }}>
                           {metadata?.['regen:sourceRegistry']?.['schema:name']}
-                        </BodyText>
+                        </Body>
                         <SmallArrowIcon
                           sx={{ mt: '-2px' }}
                           className={styles.arrow}
@@ -245,17 +245,17 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 data={metadata?.['regen:offsetGenerationMethod']?.[
                   'schema:itemListElement'
                 ]?.map((method: string) => (
-                  <BodyText size="xl" key={method}>
+                  <Body size="xl" key={method}>
                     {toTitleCase(method)}
-                  </BodyText>
+                  </Body>
                 ))}
               />
               <LineItemLabelAbove
                 label="verification method"
                 data={
-                  <BodyText size="xl" sx={{ mr: 1 }}>
+                  <Body size="xl" sx={{ mr: 1 }}>
                     {toTitleCase(metadata?.['regen:verificationMethod'])}
-                  </BodyText>
+                  </Body>
                 }
               />
               <LineItemLabelAbove
@@ -263,9 +263,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 data={metadata?.['regen:sectoralScope']?.[
                   'schema:itemListElement'
                 ]?.map((sector: string) => (
-                  <BodyText size="xl" key={sector}>
+                  <Body size="xl" key={sector}>
                     {sector}
-                  </BodyText>
+                  </Body>
                 ))}
               />
             </Box>

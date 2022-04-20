@@ -7,7 +7,7 @@ import Section from 'web-components/lib/components/section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { TokenStakingQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   content: {
@@ -64,7 +64,7 @@ const Staking = (): JSX.Element => {
       }
       classes={{ root: styles.center }}
     >
-      <BodyText
+      <Body
         size="xl"
         sx={{
           py: 4,
@@ -75,7 +75,7 @@ const Staking = (): JSX.Element => {
         }}
       >
         <BlockContent content={data?._rawBody} />
-      </BodyText>
+      </Body>
       <ContainedButton
         size="large"
         href={data?.button?.buttonLink?.buttonHref || ''}

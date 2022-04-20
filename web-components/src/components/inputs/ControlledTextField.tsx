@@ -5,7 +5,7 @@ import { FieldProps } from 'formik';
 
 import FieldFormControl, { DefaultStyleProps } from './FieldFormControl';
 import Input from './Input';
-import { BodyText } from '../typography';
+import { Body } from '../typography';
 
 interface ControlledTextFieldProps
   extends FieldProps,
@@ -83,12 +83,12 @@ export default function ControlledTextField({
             }
           />
           {charLimit && (
-            <BodyText
+            <Body
               size="sm"
               sx={{ color: 'info.main', mt: 1, mb: { xs: 3, sm: 4 } }}
             >
               {`${charsLeft} character${charsLeft === 1 ? '' : 's'} remaining`}
-            </BodyText>
+            </Body>
           )}
         </>
       )}

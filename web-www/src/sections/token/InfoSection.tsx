@@ -6,7 +6,7 @@ import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import Card from 'web-components/lib/components/cards/Card';
 import Description from 'web-components/lib/components/description';
 import { TokenInfoSectionQuery } from '../../generated/graphql';
@@ -113,9 +113,9 @@ const InfoSection = (): JSX.Element => {
         <CardContent className={styles.cardContent}>
           <Title variant="h3">{data?.title}</Title>
           <Typography className={styles.subtitle}>{data?.subtitle}</Typography>
-          <BodyText size="xl">
+          <Body size="xl">
             <BlockContent className={styles.body} content={data?._rawBody} />
-          </BodyText>
+          </Body>
         </CardContent>
       </Card>
     </Section>

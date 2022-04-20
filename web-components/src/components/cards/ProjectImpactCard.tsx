@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import cx from 'clsx';
 
 import Card from './Card';
-import { BodyText, ButtonText, Title } from '../typography';
+import { Body, ButtonText, Title } from '../typography';
 import { Image } from '../image';
 
 export interface ProjectImpactCardProps {
@@ -95,9 +95,9 @@ export default function ProjectImpactCard({
         </Title>
       </div>
       <div className={classes.text}>
-        <BodyText size="sm" mobileSize="sm" sx={{ flex: '1 0 auto' }}>
+        <Body size="sm" mobileSize="sm" sx={{ flex: '1 0 auto' }}>
           {description}
-        </BodyText>
+        </Body>
         {standard && (
           <Image
             src={standard}

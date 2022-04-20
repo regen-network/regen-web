@@ -3,12 +3,13 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 
 import UserInfo, { User } from '../user/UserInfo';
+import type { TextSize } from '../typography/sizing';
 
 interface UserInfoWithTitleProps {
   user: User;
   title: string;
   border?: boolean;
-  size?: string;
+  size?: TextSize;
   icon?: any;
 }
 
@@ -33,7 +34,7 @@ export default function UserInfoWithTitle({
   user,
   title,
   border = true,
-  size = 'big',
+  size = 'lg',
   icon,
 }: UserInfoWithTitleProps): JSX.Element {
   const classes = useStyles({});

@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
 
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 
 import type { NctBannerSectionQuery } from '../../generated/graphql';
@@ -39,12 +39,12 @@ export const BannerSection = (): JSX.Element => {
           >
             {data?.title}
           </Title>
-          <BodyText
+          <Body
             size="xl"
             sx={{ color: 'primary.main', textAlign: 'center', pt: 4 }}
           >
             <BlockContent content={data?._rawBody} />
-          </BodyText>
+          </Body>
         </Box>
       </Section>
     </BackgroundImage>

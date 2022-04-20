@@ -6,7 +6,7 @@ import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
 import {
-  BodyText,
+  Body,
   ButtonText,
   Title,
 } from 'web-components/lib/components/typography';
@@ -111,9 +111,9 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
           <ButtonText size="xs" color="info.main">
             C01-20190101-20201010-02
           </ButtonText>
-          <BodyText size="sm" mobileSize="sm">
+          <Body size="sm" mobileSize="sm">
             Wilmot, Carbon<i>Plus</i> Grasslands Credits
-          </BodyText>
+          </Body>
           <Box
             sx={{
               display: 'flex',

@@ -6,7 +6,7 @@ import { Grid, Box } from '@mui/material';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import {
-  BodyText,
+  Body,
   ButtonText,
   Subtitle,
   Title,
@@ -89,7 +89,7 @@ const TextContainer = styled(Grid)(({ theme }) => ({
   },
 }));
 
-const DataText = styled(BodyText)(({ theme }) => ({
+const DataText = styled(Body)(({ theme }) => ({
   '& a': {
     color: theme.palette.text.secondary,
   },
@@ -144,9 +144,9 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
             <Subtitle mt={2} color="info.main">
               {displayDenom}
             </Subtitle>
-            <BodyText size="xl" mt={2}>
+            <Body size="xl" mt={2}>
               {description}
-            </BodyText>
+            </Body>
             <OnBoardingCard className={styles.card}>
               <Grid
                 container
@@ -164,7 +164,7 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                   data={allowedCreditClasses}
                   link={'/credit-classes/'}
                 />
-                <BodyText>text</BodyText>
+                <Body>text</Body>
                 {minStartDate && (
                   <Item
                     label="min start date"

@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import { truncate, Texts } from '../read-more/truncate';
-import { BodyText, ButtonText, Subtitle } from '../typography';
+import { Body, ButtonText, Subtitle } from '../typography';
 
 export interface ActionProps {
   name: string;
@@ -60,7 +60,7 @@ export default function Action({
       <Subtitle size="lg" sx={{ pt: [2.8, 2.5], pb: [1.2, 2.25] }}>
         {name}
       </Subtitle>
-      <BodyText size="sm" mobileSize="sm">
+      <Body size="sm" mobileSize="sm">
         {ReactHtmlParser(desc)}
         {texts.rest.length !== 0 && (
           <ButtonText
@@ -85,7 +85,7 @@ export default function Action({
             )}
           </ButtonText>
         )}
-      </BodyText>
+      </Body>
     </div>
   );
 }

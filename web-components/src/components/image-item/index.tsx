@@ -4,7 +4,7 @@ import { Variant } from '@mui/material/styles/createTypography';
 import clsx from 'clsx';
 import Grid from '@mui/material/Grid';
 
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 import ContainedButton from '../buttons/ContainedButton';
 
 export interface ImageItemProps {
@@ -81,7 +81,7 @@ export default function ImageItem({
       >
         {title}
       </Title>
-      {description && <BodyText size="lg">{description}</BodyText>}
+      {description && <Body size="lg">{description}</Body>}
       {buttonText && buttonHref && (
         <ContainedButton
           size="large"

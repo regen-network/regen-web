@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
 
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 
 import type { NctMarketplaceSectionQuery } from '../../generated/graphql';
@@ -53,9 +53,9 @@ export const MarketplaceSection = (): JSX.Element => {
         <Title variant="h2" sx={{ textAlign: 'center', my: [4, 8] }}>
           {data?.title}
         </Title>
-        <BodyText size="xl" align="center">
+        <Body size="xl" align="center">
           <BlockContent content={data?._rawBody} />
-        </BodyText>
+        </Body>
       </Box>
     </Section>
   );

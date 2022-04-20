@@ -23,7 +23,7 @@ import {
   getErrorMessage,
   isAuth0Error,
 } from './errors';
-import { BodyText, Subtitle } from '../typography';
+import { Body, Subtitle } from '../typography';
 
 interface LoginFormProps {
   signupFromLogin?: string; // link to loginFromSignup page
@@ -117,7 +117,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           <div>
             <Form>
               <OnBoardingCard>
-                <BodyText size="lg" mb={5}>
+                <Body size="lg" mb={5}>
                   {loginFromSignup ? (
                     <>
                       If you've already signed up,{' '}
@@ -129,7 +129,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                       <Link href={signupFromLogin}>Sign up</Link>.
                     </>
                   )}
-                </BodyText>
+                </Body>
                 <Field
                   component={TextField}
                   type="email"
@@ -164,10 +164,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
                       type="checkbox"
                       name="updates"
                       label={
-                        <BodyText size="sm">
+                        <Body size="sm">
                           Please sign me up for the Regen news and updates
                           (unsubscribe anytime)
-                        </BodyText>
+                        </Body>
                       }
                     />
                     <Field
@@ -175,11 +175,11 @@ const LoginForm: React.FC<LoginFormProps> = ({
                       type="checkbox"
                       name="privacy"
                       label={
-                        <BodyText size="sm">
+                        <Body size="sm">
                           I agree to the Regen Network{' '}
                           <Link href={privacyLink}>Privacy Policy</Link> and{' '}
                           <Link href={termsLink}>Terms of Service</Link>
-                        </BodyText>
+                        </Body>
                       }
                     />
                   </>

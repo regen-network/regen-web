@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 import Description from '../description';
 import { getFontSize } from '../../theme/sizing';
 
@@ -108,7 +108,7 @@ export default function ImageGrid({
         <Title variant="h2" className={classes.title}>
           {title}
         </Title>
-        <BodyText
+        <Body
           size="xl"
           sx={theme => ({
             ml: even ? 'auto' : 0,
@@ -122,7 +122,7 @@ export default function ImageGrid({
           })}
         >
           {description}
-        </BodyText>
+        </Body>
       </Grid>
     </Grid>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import { WalletAddrRegInstructionsSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -58,7 +58,7 @@ const InstructionsSection = (): JSX.Element => {
       <Title variant="h3" align="center" sx={{ mb: [8.5, 6.75] }}>
         {data?.title}
       </Title>
-      <BodyText
+      <Body
         size="xl"
         mobileSize="md"
         sx={{
@@ -69,7 +69,7 @@ const InstructionsSection = (): JSX.Element => {
         }}
       >
         <BlockContent content={data?._rawBody} />
-      </BodyText>
+      </Body>
     </Section>
   );
 };

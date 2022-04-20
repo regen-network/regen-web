@@ -6,7 +6,7 @@ interface Props extends TypographyProps {
   mobileSize?: TextSize;
 }
 
-export const BodyText = styled(Typography, {
+export const Body = styled(Typography, {
   name: 'RegenBodyText',
   shouldForwardProp: prop =>
     prop !== 'size' && prop !== 'mobileSize' && prop !== 'sx',
@@ -27,7 +27,7 @@ export const BodyText = styled(Typography, {
   };
 });
 
-BodyText.defaultProps = {
+Body.defaultProps = {
   size: 'md',
   color: 'info.dark',
 };

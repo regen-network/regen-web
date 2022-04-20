@@ -6,7 +6,7 @@ import { CardContent, useTheme } from '@mui/material';
 import OutlinedButton from '../buttons/OutlinedButton';
 import MediaCard from '../cards/MediaCard';
 import { parseText } from '../../utils/textParser';
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 import { Theme } from '~/theme/muiTheme';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -46,7 +46,7 @@ const ImageActionCard: React.FC<Props> = props => {
       >
         <div>
           <Title variant="h5">{parseText(props.title)}</Title>
-          <BodyText>{parseText(props.description)}</BodyText>
+          <Body>{parseText(props.description)}</Body>
         </div>
 
         <OutlinedButton

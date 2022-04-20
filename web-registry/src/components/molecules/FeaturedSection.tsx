@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Image } from 'web-components/lib/components/image';
@@ -76,9 +76,9 @@ const FeaturedSection: React.FC<Props> = ({ content }) => {
                 >
                   <BlockContent content={content.titleRaw} />
                 </Title>
-                <BodyText size="lg" mobileSize="sm" sx={{ pb: [4.5, 7] }}>
+                <Body size="lg" mobileSize="sm" sx={{ pb: [4.5, 7] }}>
                   <BlockContent content={content.descriptionRaw} />
-                </BodyText>
+                </Body>
                 <ContainedButton
                   size="large"
                   href={content?.button?.buttonLink?.buttonHref || ''}

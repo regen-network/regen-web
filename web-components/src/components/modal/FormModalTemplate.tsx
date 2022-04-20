@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Modal, { RegenModalProps } from '../modal';
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -41,14 +41,9 @@ const FormModalTemplate: React.FC<FormModalTemplateProps> = ({
         {title}
       </Title>
       {subtitle && (
-        <BodyText
-          size="lg"
-          mobileSize="sm"
-          align="center"
-          sx={{ pb: [7.5, 10] }}
-        >
+        <Body size="lg" mobileSize="sm" align="center" sx={{ pb: [7.5, 10] }}>
           {subtitle}
-        </BodyText>
+        </Body>
       )}
       {children}
     </Modal>

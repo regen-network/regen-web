@@ -6,7 +6,7 @@ import { FluidObject } from 'gatsby-image';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 import BackgroundSection from '../../components/BackgroundSection';
 import { DevOpenAgSectionQuery } from '../../generated/graphql';
@@ -71,9 +71,9 @@ const OpenAgSection: React.FC = () => {
           <Title variant="h3" sx={{ pb: [4, 6] }}>
             {data?.header}
           </Title>
-          <BodyText size="lg">
+          <Body size="lg">
             <BlockContent content={data?._rawBody} />
-          </BodyText>
+          </Body>
         </Grid>
       </Grid>
     </BackgroundSection>

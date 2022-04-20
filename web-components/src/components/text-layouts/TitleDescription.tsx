@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 import { BlockContent, SanityBlockOr } from '../block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -34,13 +34,13 @@ export function TitleDescription({
       <Title align="center" variant="h2">
         {title}
       </Title>
-      <BodyText size="xl">
+      <Body size="xl">
         {typeof description === 'string' ? (
           ReactHtmlParser(description)
         ) : (
           <BlockContent content={description} />
         )}
-      </BodyText>
+      </Body>
       {children && <div>{children}</div>}
     </div>
   );

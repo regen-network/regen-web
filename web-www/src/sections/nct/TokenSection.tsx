@@ -4,7 +4,7 @@ import { Box, SxProps, Typography } from '@mui/material';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
 import {
-  BodyText,
+  Body,
   ButtonText,
   Title,
 } from 'web-components/lib/components/typography';
@@ -122,9 +122,9 @@ export const TokenSection = (): JSX.Element => {
           {/* TODO uncomment if we want to formatted date based on CMS launch date */}
           {data?.cardSubtitle} {/* {formatDate(launchDate)} */}
         </Typography>
-        <BodyText size="xl">
+        <Body size="xl">
           <BlockContent content={data?._rawCardBody} />
-        </BodyText>
+        </Body>
         <ContainedButton
           sx={{
             alignSelf: 'start',
@@ -161,9 +161,9 @@ export const TokenSection = (): JSX.Element => {
         <ButtonText color="info.main">
           {data?.detailSubtitle} {/* {formatDate(launchDate)} */}
         </ButtonText>
-        <BodyText size="xl">
+        <Body size="xl">
           <BlockContent content={data?._rawDetailBody} />
-        </BodyText>
+        </Body>
         <Box sx={{ display: 'flex', gap: 3, mt: [4, 8] }}>
           <OutlinedButton
             sx={sxs.btnPad}

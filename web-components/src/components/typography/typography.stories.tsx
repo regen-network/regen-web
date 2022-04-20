@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   Title,
   Subtitle,
-  BodyText,
+  Body,
   ButtonText,
 } from 'web-components/lib/components/typography';
 
@@ -38,13 +38,13 @@ export const subtitle = (): JSX.Element => (
 
 export const body = (): JSX.Element => (
   <>
-    <BodyText size="xl">BodyText size xl</BodyText>
-    <BodyText size="lg">BodyText size lg</BodyText>
-    <BodyText size="md">BodyText size md</BodyText>
-    <BodyText size="sm">BodyText size sm</BodyText>
-    <BodyText size="xs" mobileSize="xl">
-      BodyText size xs (XL on mobile)
-    </BodyText>
+    <Body size="xl">Body size xl</Body>
+    <Body size="lg">Body size lg</Body>
+    <Body size="md">Body size md</Body>
+    <Body size="sm">Body size sm</Body>
+    <Body size="xs" mobileSize="xl">
+      Body size xs (XL on mobile)
+    </Body>
   </>
 );
 

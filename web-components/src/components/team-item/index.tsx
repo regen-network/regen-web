@@ -4,7 +4,7 @@ import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import GithubIcon from '../icons/social/GithubIcon';
 import TwitterIcon from '../icons/social/TwitterIcon';
 import LinkedInIcon from '../icons/social/LinkedInIcon';
-import { BodyText, ButtonText, Title } from '../typography';
+import { Body, ButtonText, Title } from '../typography';
 
 export interface TeamItemProps {
   name: string;
@@ -83,9 +83,9 @@ export default function TeamItem({
       <ButtonText size="xs" sx={{ color: 'info.main', mb: 2.5 }}>
         {title}
       </ButtonText>
-      <BodyText size="sm" mb={4.5}>
+      <Body size="sm" mb={4.5}>
         {description}
-      </BodyText>
+      </Body>
       {githubUrl && (
         <a href={githubUrl} target="_blank" rel="noopener noreferrer">
           <GithubIcon color={theme.palette.secondary.main} />

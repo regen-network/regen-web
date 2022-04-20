@@ -1,11 +1,10 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 
-import { Title } from '../typography';
+import { Body, Title } from '../typography';
 import TextField from '../inputs/TextField';
 import {
   requiredMessage,
@@ -34,16 +33,6 @@ interface Values {
 const useStyles = makeStyles((theme: Theme) => ({
   form: {
     paddingTop: theme.spacing(7.5),
-  },
-  usd: {
-    fontSize: theme.spacing(4),
-    marginTop: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(4.875),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: theme.spacing(2.75),
-    },
   },
   textField: {
     [theme.breakpoints.up('sm')]: {
@@ -194,7 +183,7 @@ export default function MoreInfoForm({
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography className={classes.usd}>USD</Typography>
+                    <Body sx={{ mt: 7, ml: [2.75, 4.875] }}>USD</Body>
                   </Grid>
                 </Grid>
                 <Field

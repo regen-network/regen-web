@@ -10,7 +10,7 @@ import Cookies from 'js-cookie';
 // import Section from '../section';
 import ContainedButton from '../buttons/ContainedButton';
 import { Theme } from '../../theme/muiTheme';
-import { BodyText } from '../typography';
+import { Body } from '../typography';
 import { Box } from '@mui/material';
 
 interface CookiesBannerProps {
@@ -115,14 +115,14 @@ export default function CookiesBanner({
               height: [theme.spacing(19), '100%'],
             })}
           >
-            <BodyText mobileSize="xs">
+            <Body mobileSize="xs">
               We use cookies to provide you with a great user experience. By
               using this site, you accept our use of{' '}
               <Link className={classes.link} href={privacyUrl}>
                 cookies policy
               </Link>
               .
-            </BodyText>
+            </Body>
             <Box
               sx={{
                 display: 'flex',
@@ -140,7 +140,7 @@ export default function CookiesBanner({
               >
                 accept
               </ContainedButton>
-              <BodyText
+              <Body
                 size="sm"
                 sx={{
                   color: 'info.main',
@@ -151,7 +151,7 @@ export default function CookiesBanner({
                 }}
               >
                 Reject
-              </BodyText>
+              </Body>
             </Box>
           </Grid>
         </Box>

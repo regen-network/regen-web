@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import Card from './Card';
 import OutlinedButton from '../buttons/OutlinedButton';
 import { BlockContent, SanityBlockOr } from '../block-content';
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -49,13 +49,13 @@ const GreenTopIconCard: React.FC<{
 
       <Grid container direction="column" sx={{ flex: 1, p: 4, gap: 4 }}>
         <Title variant="h3">{props.title}</Title>
-        <BodyText>
+        <Body>
           {typeof props.description === 'string' ? (
             props.description
           ) : (
             <BlockContent content={props.description} />
           )}
-        </BodyText>
+        </Body>
         <Box
           sx={{
             display: 'flex',

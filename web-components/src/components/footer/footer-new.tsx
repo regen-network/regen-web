@@ -3,7 +3,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { useTheme } from '@mui/styles';
 import { Grid, List, ListItem, Link, Box } from '@mui/material';
 
-import { BodyText, ButtonText } from '../typography';
+import { Body, ButtonText } from '../typography';
 import Section from '../section';
 import { HeaderLogoLink } from '../header/HeaderLogoLink';
 
@@ -97,7 +97,7 @@ const Footer: React.FC<{
             >
               <IconLink color={theme.palette.primary.main} />
               <Box mt={4}>
-                <BodyText size="lg" color="primary.main">
+                <Body size="lg" color="primary.main">
                   A project of{' '}
                   <Link
                     href="https://www.regen.network"
@@ -106,7 +106,7 @@ const Footer: React.FC<{
                     Regen Network
                     <br /> Development, Inc.
                   </Link>
-                </BodyText>
+                </Body>
               </Box>
             </Box>
           </Grid>
@@ -153,13 +153,13 @@ const Footer: React.FC<{
           justifyContent="space-between"
         >
           <Grid item>
-            <BodyText size="sm">
+            <Body size="sm">
               <Link href={termsUrl}>Terms</Link> |{' '}
               <Link href={privacyUrl}>Privacy</Link>
-            </BodyText>
+            </Body>
           </Grid>
           <Grid item>
-            <BodyText size="sm">© 2021 Regen Network Development, Inc</BodyText>
+            <Body size="sm">© 2021 Regen Network Development, Inc</Body>
           </Grid>
         </Grid>
       </Section>

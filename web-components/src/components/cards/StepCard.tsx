@@ -1,12 +1,12 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
-import { CardMedia } from '@mui/material';
+import { Box, CardMedia } from '@mui/material';
 import cx from 'clsx';
 
 import Card from '../cards/Card';
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
 import StepCircleBadge from '../icons/StepCircleBadge';
-import { BodyText, ButtonText, Title } from '../typography';
+import { Body, ButtonText, Title } from '../typography';
 import Tag from '../tag';
 import StepFAQs from '../faq/StepFAQs';
 import { Image } from '../image';
@@ -86,16 +86,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 0,
     borderRadius: 0,
     fontSize: theme.spacing(3),
-  },
-  cardBottom: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    padding: theme.spacing(3.5, 8, 6),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(3.5, 3.5, 4),
-    },
   },
   media: {
     width: '100%',
@@ -184,7 +174,18 @@ function StepCard({
             )}
           </div>
         </div>
-        <div className={styles.cardBottom}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-evenly',
+            pt: 3.5,
+            pb: [3.5, 8],
+            px: [4, 6],
+            gap: [2, 3],
+          }}
+        >
           <ButtonText
             size="sm"
             mobileSize="sm"
@@ -199,9 +200,9 @@ function StepCard({
           >
             {step.title}
           </Title>
-          <BodyText size="lg" align="center" color="info.dark">
+          <Body size="lg" align="center" color="info.dark">
             {step.description}
-          </BodyText>
+          </Body>
           {!!step.btnText && !!step.onBtnClick && (
             <ContainedButton
               size="large"
@@ -211,7 +212,7 @@ function StepCard({
               {step.btnText}
             </ContainedButton>
           )}
-        </div>
+        </Box>
         {step.faqs && step.faqs.length > 0 && (
           <StepFAQs questionItems={step.faqs} isActive={step.isActive} />
         )}

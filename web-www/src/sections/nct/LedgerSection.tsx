@@ -6,7 +6,7 @@ import { FluidObject } from 'gatsby-image';
 import { Box } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { Label } from 'web-components/lib/components/typography';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -75,9 +75,9 @@ export const LedgerSection = (): JSX.Element => {
             >
               {data?.subtitle}
             </Label>
-            <BodyText size="xl" align="center">
+            <Body size="xl" align="center">
               <BlockContent content={data?._rawBody} />
-            </BodyText>
+            </Body>
             <OutlinedButton
               sx={{ px: [8, 12], mt: [4, 8] }}
               href={data?.button?.buttonLink?.buttonHref || ''}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 import OutlinedButton from '../buttons/OutlinedButton';
 import { BlockContent, SanityBlockOr } from '../block-content';
 
@@ -35,13 +35,13 @@ const BlogPost: React.FC<BlogPostProps> = ({
       <Title variant="h5" sx={{ pt: [3.25, 5], pb: [2, 3] }}>
         {header}
       </Title>
-      <BodyText pb={5.75}>
+      <Body pb={5.75}>
         {typeof description == 'string' ? (
           description
         ) : (
           <BlockContent content={description} />
         )}
-      </BodyText>
+      </Body>
       <OutlinedButton
         size="small"
         href={url}

@@ -7,7 +7,7 @@ import BackgroundImage from 'gatsby-background-image';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import {
-  BodyText,
+  Body,
   ButtonText,
   Title,
 } from 'web-components/lib/components/typography';
@@ -147,9 +147,9 @@ const MarketplaceSection: React.FC = () => {
                   >
                     {cta.header}
                   </Title>
-                  <BodyText size="xl" mobileSize="md">
+                  <Body size="xl" mobileSize="md">
                     {cta.description}
-                  </BodyText>
+                  </Body>
                   <ContainedButton
                     size="large"
                     href={cta.linkUrl || ''}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { parseText } from 'web-components/lib/utils/textParser';
-import { BodyText, ButtonText } from 'web-components/lib/components/typography';
+import { Body, ButtonText } from 'web-components/lib/components/typography';
 import { Box } from '@mui/material';
 
 interface LineItemProps {
@@ -15,7 +15,7 @@ const LineItem = ({ label, data }: LineItemProps): JSX.Element => {
       <ButtonText size="xs" sx={{ color: 'primary.contrastText', mb: 2 }}>
         {label}
       </ButtonText>
-      <BodyText mobileSize="md">{parseText(data)}</BodyText>
+      <Body mobileSize="md">{parseText(data)}</Body>
     </Box>
   );
 };

@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import Section from 'web-components/lib/components/section';
 import { CommunityCollaborateSectionQuery } from '../../generated/graphql';
@@ -68,7 +68,7 @@ const CollaborateSection = (): JSX.Element => {
       <Title variant="h2" align="center" sx={{ mb: [8.5, 6.75] }}>
         {data?.titleBody?.title}
       </Title>
-      <BodyText
+      <Body
         size="xl"
         mobileSize="md"
         sx={theme => ({
@@ -79,7 +79,7 @@ const CollaborateSection = (): JSX.Element => {
         })}
       >
         <BlockContent content={data?.titleBody?._rawBody} />
-      </BodyText>
+      </Body>
       <ResourceCardsSlider target="_self" items={resourceCards || []} />
     </Section>
   );

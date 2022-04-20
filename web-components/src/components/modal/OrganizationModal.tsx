@@ -12,7 +12,7 @@ import ControlledTextField from '../inputs/ControlledTextField';
 import LocationField from '../inputs/LocationField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import Tooltip from '../tooltip/InfoTooltip';
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 import Description from '../description';
 import Modal from '.';
 import QuestionIcon from '../icons/QuestionIcon';
@@ -171,10 +171,10 @@ function OrganizationModal({
                     component={CheckboxLabel}
                     name="['http://regen.network/sharePermission']"
                     label={
-                      <BodyText size="sm">
+                      <Body size="sm">
                         I have this organization’s permission to share their
                         information with Regen Registry
-                      </BodyText>
+                      </Body>
                     }
                   />
                   <Tooltip

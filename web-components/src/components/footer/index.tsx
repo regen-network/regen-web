@@ -5,7 +5,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Link from '@mui/material/Link';
 
-import { BodyText, ButtonText } from '../typography';
+import { Body, ButtonText } from '../typography';
 import Section from '../section';
 import NewsletterForm from '../form/NewsletterForm';
 import { SocialLinks } from './SocialLinks';
@@ -121,9 +121,9 @@ export default function Footer({
             <ButtonText size="lg" sx={sxs.text}>
               subscribe
             </ButtonText>
-            <BodyText size="lg">
+            <Body size="lg">
               Stay up to date! Sign up for our monthly newsletter.
-            </BodyText>
+            </Body>
             <Box sx={{ pt: 4 }}>
               <NewsletterForm
                 submitLabel="subscribe"
@@ -162,7 +162,7 @@ export default function Footer({
             </Link>
           </Grid>
           <Grid item>
-            <BodyText size="sm">© 2021 Regen Network Development, Inc</BodyText>
+            <Body size="sm">© 2021 Regen Network Development, Inc</Body>
           </Grid>
         </Grid>
       </Section>

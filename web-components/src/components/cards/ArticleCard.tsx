@@ -5,7 +5,7 @@ import MediaCard from './MediaCard';
 import Description from '../description';
 import OutlinedButton from '../buttons/OutlinedButton';
 import PlayIcon from '../icons/PlayIcon';
-import { BodyText } from '../typography';
+import { Body } from '../typography';
 import { Box } from '@mui/material';
 
 function getBtnText(type?: string | null): string {
@@ -88,7 +88,7 @@ export default function ArticleCard({
           <PlayIcon className={styles.icon} />
         </div>
       )}
-      <BodyText size="sm" sx={{ flex: '1 0 auto', py: [2.5, 2], px: [4, 5] }}>
+      <Body size="sm" sx={{ flex: '1 0 auto', py: [2.5, 2], px: [4, 5] }}>
         <Box component="span" sx={{ fontWeight: 'bold' }}>
           {author}
         </Box>
@@ -96,7 +96,7 @@ export default function ArticleCard({
           &nbsp;&nbsp;|&nbsp;&nbsp;
         </Box>
         <span>{date}</span>
-      </BodyText>
+      </Body>
       <OutlinedButton
         size="small"
         href={url}

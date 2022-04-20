@@ -9,7 +9,7 @@ import OnBoardingCard from '../cards/OnBoardingCard';
 import PhoneField from '../inputs/PhoneField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 import Tooltip from '../tooltip/InfoTooltip';
 import Modal from '.';
 import QuestionIcon from '../icons/QuestionIcon';
@@ -150,10 +150,10 @@ function IndividualModal({
                     component={CheckboxLabel}
                     name="['http://regen.network/sharePermission']"
                     label={
-                      <BodyText size="sm">
+                      <Body size="sm">
                         I have this individual’s permission to share their
                         information with Regen Registry
-                      </BodyText>
+                      </Body>
                     }
                   />
                   <Tooltip

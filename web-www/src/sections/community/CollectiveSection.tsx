@@ -12,7 +12,7 @@ import Modal from 'web-components/lib/components/modal';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { CommunityCollectiveSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 
 const useStyles = makeStyles<Theme>(theme => ({
   section: {
@@ -84,7 +84,7 @@ const CollectiveSection = (): JSX.Element => {
           title: styles.title,
         }}
       >
-        <BodyText
+        <Body
           size="xl"
           mobileSize="md"
           sx={{
@@ -93,7 +93,7 @@ const CollectiveSection = (): JSX.Element => {
           }}
         >
           <BlockContent content={data?._rawBody} sx={{ color: 'info.dark' }} />
-        </BodyText>
+        </Body>
         <ContainedButton size="large" onClick={() => setOpen(true)}>
           {data?.buttonText}
         </ContainedButton>

@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 import Typography from '@mui/material/Typography';
 
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 import CreditsIcon from '../icons/CreditsIcon';
 import { Box } from '@mui/material';
 
@@ -120,12 +120,12 @@ export default function CreditInfo({
         </div>
         {creditClass.description && (
           <div className={classes.descriptionItem}>
-            <BodyText
+            <Body
               size="xl"
               sx={{ mt: 3.75, mr: { sm: background ? 11.75 : 0 } }}
             >
               {ReactHtmlParser(creditClass.description)}
-            </BodyText>
+            </Body>
           </div>
         )}
         <div className={classes.activitiesTitleContainer}>
@@ -139,7 +139,7 @@ export default function CreditInfo({
             sx={{ m: 0, mt: 4.5, paddingInlineStart: 2, listStyle: 'none' }}
           >
             {creditClass.keyOutcomesActivitiesDesc && (
-              <BodyText
+              <Body
                 size="xl"
                 sx={theme => ({
                   ml: theme.spacing(-2.5),
@@ -147,10 +147,10 @@ export default function CreditInfo({
                 })}
               >
                 {creditClass.keyOutcomesActivitiesDesc}
-              </BodyText>
+              </Body>
             )}
             {activities.map((activity, index) => (
-              <BodyText
+              <Body
                 key={index}
                 size="lg"
                 mobileSize="sm"
@@ -173,7 +173,7 @@ export default function CreditInfo({
                 }}
               >
                 <li>{activity}</li>
-              </BodyText>
+              </Body>
             ))}
           </Box>
         </div>

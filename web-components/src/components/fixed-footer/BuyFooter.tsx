@@ -6,7 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import ContainedButton from '../buttons/ContainedButton';
 import FixedFooter from './';
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 
 export interface CreditPrice {
   unitPrice: number;
@@ -31,15 +31,15 @@ export default function BuyFooter({
     <FixedFooter>
       {creditPrice && (
         <Grid item sx={{ pr: { sm: 5 } }}>
-          <BodyText>
+          <Body>
             <Title as="span" variant="h5">
               ${creditPrice.unitPrice}
             </Title>
-            <BodyText as="span" size="lg" mobileSize="xs" color="info.dark">
+            <Body as="span" size="lg" mobileSize="xs" color="info.dark">
               {' '}
               / credit {creditPrice.currency}
-            </BodyText>
-          </BodyText>
+            </Body>
+          </Body>
         </Grid>
       )}
       <Grid item>

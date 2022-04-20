@@ -7,7 +7,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { TokenEconomicsQuery } from '../../generated/graphql';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -44,7 +44,7 @@ const TokenEconomics = (): JSX.Element => {
       }
       classes={{ root: clsx(styles.root, styles.center), title: styles.title }}
     >
-      <BodyText
+      <Body
         size="xl"
         mobileSize="md"
         sx={{
@@ -53,7 +53,7 @@ const TokenEconomics = (): JSX.Element => {
         }}
       >
         <BlockContent content={data?._rawBody} />
-      </BodyText>
+      </Body>
     </Section>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { BodyText, Subtitle } from '../typography';
+import { Body, Subtitle } from '../typography';
 
 interface Props {
   children: React.ReactNode;
@@ -38,9 +38,9 @@ export default function ControlledFormLabel({
         {children}
       </Subtitle>
       {labelSubText && (
-        <BodyText ml={1} color="info.main">
+        <Body ml={1} color="info.main">
           &nbsp;{labelSubText}
-        </BodyText>
+        </Body>
       )}
     </Box>
   );

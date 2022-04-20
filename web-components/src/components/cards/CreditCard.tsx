@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import MediaCard from './MediaCard';
 import CreditPlaceInfo from '../place/CreditPlaceInfo';
 import Credits from '../credits';
-import { BodyText } from '../typography';
+import { Body } from '../typography';
 
 export interface CreditInfo {
   name: string;
@@ -38,7 +38,7 @@ export default function CreditCard({
       name={credit.name}
       width={width}
     >
-      <BodyText size="sm">{credit.description}</BodyText>
+      <Body size="sm">{credit.description}</Body>
       <CreditPlaceInfo
         place={credit.place}
         outcome={credit.outcome}

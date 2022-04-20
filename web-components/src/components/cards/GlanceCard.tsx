@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Box, Grid } from '@mui/material';
 
 import Card from './Card';
-import { BodyText, ButtonText } from '../typography';
+import { Body, ButtonText } from '../typography';
 import StaticMap from '../map/StaticMap';
 import { Image, OptimizeImageProps } from '../image';
 
@@ -84,7 +84,7 @@ export default function GlanceCard({
             sx={{ m: 0, listStyle: 'none', paddingInlineStart: 2 }}
           >
             {text.map((p, i) => (
-              <BodyText
+              <Body
                 key={i}
                 size="lg"
                 mobileSize="sm"
@@ -107,7 +107,7 @@ export default function GlanceCard({
                 }}
               >
                 <li>{p}</li>
-              </BodyText>
+              </Body>
             ))}
           </Box>
         </Grid>

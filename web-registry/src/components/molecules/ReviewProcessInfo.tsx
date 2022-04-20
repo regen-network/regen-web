@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 
 import {
-  BodyText,
+  Body,
   ButtonText,
   Subtitle,
   Title,
@@ -44,9 +44,9 @@ const ReviewProcessInfo: React.FC<{
           {props.reviewSection?.timespan}
         </ButtonText>
       )}
-      <BodyText size="xl" align="center">
+      <Body size="xl" align="center">
         <BlockContent content={props.reviewSection?.descriptionRaw} />
-      </BodyText>
+      </Body>
       {props.reviewSection?.button?.buttonText && (
         <SanityButton
           size="large"
@@ -55,7 +55,7 @@ const ReviewProcessInfo: React.FC<{
         />
       )}
       {props.reviewSection?.disclaimerBottom && (
-        <BodyText size="xs">{props.reviewSection?.disclaimerBottom}</BodyText>
+        <Body size="xs">{props.reviewSection?.disclaimerBottom}</Body>
       )}
     </Box>
   );

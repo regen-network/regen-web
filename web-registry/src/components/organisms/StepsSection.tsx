@@ -6,7 +6,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import Modal from 'web-components/lib/components/modal';
 import {
-  BodyText,
+  Body,
   ButtonText,
   Title,
 } from 'web-components/lib/components/typography';
@@ -86,9 +86,9 @@ function StepsSection({
           </Title>
         )}
         {descriptionRaw && (
-          <BodyText size="lg" sx={{ mb: 0 }}>
+          <Body size="lg" sx={{ mb: 0 }}>
             <BlockContent content={descriptionRaw} />
-          </BodyText>
+          </Body>
         )}
       </div>
       <div className={styles.steps}>

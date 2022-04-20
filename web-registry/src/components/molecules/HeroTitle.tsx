@@ -6,7 +6,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { BackgroundImgSection } from './BackgroundImgSection';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 
 type Props = {
   img: string;
@@ -51,12 +51,12 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
         </Title>
       )}
       {props.descriptionRaw && (
-        <BodyText size="xl" sx={{ color: 'primary.main', mt: 4.5 }}>
+        <Body size="xl" sx={{ color: 'primary.main', mt: 4.5 }}>
           <BlockContent
             content={props.descriptionRaw}
             tooltipText={props?.tooltipText || ''}
           />
-        </BodyText>
+        </Body>
       )}
     </BackgroundImgSection>
   );

@@ -12,7 +12,7 @@ import ReactHtmlParser from 'react-html-parser';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
 import {
-  BodyText,
+  Body,
   ButtonText,
   Subtitle,
   Title,
@@ -244,7 +244,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                       Number of credits
                     </Title>
-                    <BodyText
+                    <Body
                       size="md"
                       mobileSize="md"
                       sx={{ color: 'info.main', mb: 3 }}
@@ -253,7 +253,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         (project?.credits?.issued || 0) -
                         (project?.credits?.purchased || 0)
                       } credits available`}
-                    </BodyText>
+                    </Body>
                     <div className={styles.creditWidget}>
                       <div className={styles.marginRight}>
                         <Field
@@ -275,9 +275,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           </Title>
                           <ButtonText size="sm">REGEN</ButtonText>
                         </Box>
-                        <BodyText size="md" mobileSize="md">
+                        <Body size="md" mobileSize="md">
                           ($2345.00 USD)
-                        </BodyText>
+                        </Body>
                       </div>
                     </div>
                   </div>
@@ -334,11 +334,11 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         </div>
                       </Tooltip>
                     </div>
-                    <BodyText sx={{ color: 'info.dark', mb: { xs: 0, sm: 3 } }}>
+                    <Body sx={{ color: 'info.dark', mb: { xs: 0, sm: 3 } }}>
                       Please enter a location for the retirement of these
                       credits. This prevents double counting of credits in
                       different locations. These credits will auto-retire.
-                    </BodyText>
+                    </Body>
                     <Grid container className={styles.stateCountryGrid}>
                       <Grid
                         item

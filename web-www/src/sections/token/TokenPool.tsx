@@ -8,7 +8,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import { TokenPoolQuery } from '../../generated/graphql';
 import SanityImage from 'gatsby-plugin-sanity-image';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {
@@ -72,7 +72,7 @@ const TokenEconomics = (): JSX.Element => {
       }
       classes={{ root: clsx(styles.root, styles.center), title: styles.title }}
     >
-      <BodyText
+      <Body
         sx={{
           width: ['100%', '80%'],
           maxWidth: 946,
@@ -82,7 +82,7 @@ const TokenEconomics = (): JSX.Element => {
         }}
       >
         {data?.subtitle}
-      </BodyText>
+      </Body>
       <SanityImage className={styles.image} {...(data?.image as any)} />
     </Section>
   );

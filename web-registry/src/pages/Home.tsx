@@ -5,7 +5,7 @@ import { Box, CardMedia, useMediaQuery } from '@mui/material';
 import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import { Loading } from 'web-components/lib/components/loading';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { SanityButton } from '../components/atoms';
@@ -114,13 +114,13 @@ const Home: React.FC = () => {
             >
               {heroSection?.title}
             </Title>
-            <BodyText
+            <Body
               size="xl"
               mobileSize="md"
               sx={{ color: 'primary.main', my: 4 }}
             >
               <BlockContent content={heroSection?.bodyRaw} />
-            </BodyText>
+            </Body>
             <SanityButton
               size="large"
               btn={heroSection?.button}

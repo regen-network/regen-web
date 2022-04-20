@@ -4,7 +4,7 @@ import { Avatar } from '@mui/material';
 import cx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
@@ -92,7 +92,7 @@ const IconLabel = ({
           {label}
         </Title>
         {descriptionRaw && (
-          <BodyText
+          <Body
             size="lg"
             sx={{
               color: 'primary.main',
@@ -101,7 +101,7 @@ const IconLabel = ({
             }}
           >
             {BlockContent(descriptionRaw)}
-          </BodyText>
+          </Body>
         )}
       </div>
     </div>

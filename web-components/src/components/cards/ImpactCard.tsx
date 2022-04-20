@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 
 import Card from './Card';
-import { BodyText, Subtitle, Title } from '../typography';
+import { Body, Subtitle, Title } from '../typography';
 // import VerifiedIcon from '../icons/VerifiedIcon';
 
 export interface ImpactCardProps {
@@ -110,7 +110,7 @@ export default function ImpactCard({
           >
             {name}
           </Subtitle>
-          <BodyText
+          <Body
             size={largeFont ? 'lg' : 'sm'}
             mobileSize={largeFont ? 'md' : 'sm'}
             sx={{
@@ -122,7 +122,7 @@ export default function ImpactCard({
             }}
           >
             {description}
-          </BodyText>
+          </Body>
           {/*monitored && (
               <span className={classes.monitored}>
                 <span className={classes.monitoredIcon}>

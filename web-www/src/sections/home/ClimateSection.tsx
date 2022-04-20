@@ -9,7 +9,7 @@ import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import {
-  BodyText,
+  Body,
   ButtonText,
   Title,
 } from 'web-components/lib/components/typography';
@@ -184,9 +184,9 @@ const ClimateSection: React.FC = (): JSX.Element => {
         borderRadius="10px"
       >
         <ButtonText size="sm">{content?.problem?.title}</ButtonText>
-        <BodyText size="lg" sx={{ pt: 2 }}>
+        <Body size="lg" sx={{ pt: 2 }}>
           {content?.problem?.body}
-        </BodyText>
+        </Body>
       </Card>
       <SanityImage
         {...(content?.image as any)}
@@ -202,9 +202,9 @@ const ClimateSection: React.FC = (): JSX.Element => {
         <ButtonText size="sm" color="info.dark">
           {content?.solution?.title}
         </ButtonText>
-        <BodyText size="lg" pt={2}>
+        <Body size="lg" pt={2}>
           {content?.solution?.body}
-        </BodyText>
+        </Body>
         {downMd && <hr className={clsx(styles.line, styles.solutionLine)} />}
       </Card>
       <div className={styles.titleContainer}>

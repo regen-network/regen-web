@@ -5,7 +5,7 @@ import { Box, Link } from '@mui/material';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
 import {
-  BodyText,
+  Body,
   ButtonText,
   Title,
 } from 'web-components/lib/components/typography';
@@ -85,9 +85,9 @@ export const OverviewSection = (): JSX.Element => {
               <Title variant="h1">{data?.title}</Title>
               <SanityImage {...(data?.titleIcon as any)} alt="NCT icon" />
             </Box>
-            <BodyText size="xl">
+            <Body size="xl">
               <BlockContent content={data?._rawBody} />
-            </BodyText>
+            </Body>
           </Box>
           {/* TODO: this conditional check is temporary until the basket pages are live */}
           {data?.button?.buttonLink?.buttonHref && (
@@ -112,9 +112,9 @@ export const OverviewSection = (): JSX.Element => {
             <div key={i}>
               <ButtonText>{item?.label || ''}</ButtonText>
               <OptionalLink link={item?.link?.buttonHref}>
-                <BodyText size="lg" pt={2}>
+                <Body size="lg" pt={2}>
                   {item?.text}
-                </BodyText>
+                </Body>
               </OptionalLink>
             </div>
           ))}

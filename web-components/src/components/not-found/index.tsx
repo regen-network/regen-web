@@ -1,10 +1,9 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import ContainedButton from '../buttons/ContainedButton';
-import { Title } from '../typography';
+import { Body, ButtonText, Title } from '../typography';
 
 interface NotFoundProps {
   img: JSX.Element;
@@ -12,9 +11,6 @@ interface NotFoundProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    backgroundColor: theme.palette.primary.main,
-  },
   container: {
     textAlign: 'center',
     height: '100%',
@@ -50,81 +46,47 @@ const useStyles = makeStyles((theme: Theme) => ({
       left: `-${theme.spacing(1.5)}`,
     },
   },
-  fourOFour: {
-    fontFamily: theme.typography.h1.fontFamily,
-    fontStyle: 'normal',
-    fontWeight: 900,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(48),
-      lineHeight: theme.spacing(42.75),
-      marginBottom: theme.spacing(8),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(28),
-      lineHeight: theme.spacing(30.75),
-      marginBottom: theme.spacing(2),
-    },
-
-    textAlign: 'center',
-    letterSpacing: theme.spacing(1),
-    textTransform: 'uppercase',
-    color: theme.palette.secondary.dark,
-  },
-  h1: {
-    fontWeight: 900,
-    lineHeight: '130%',
-    color: theme.palette.primary.contrastText,
-    marginBottom: theme.spacing(4.25),
-  },
-  text: {
-    lineHeight: '150%',
-    fontSize: theme.spacing(4.5),
-    marginBottom: theme.spacing(6.5),
-  },
-  button: {
-    textTransform: 'uppercase',
-    height: theme.spacing(15),
-    lineHeight: theme.spacing(5.75),
-    [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(3)} ${theme.spacing(7.5)}`,
-      fontSize: theme.spacing(4.5),
-      height: 'unset',
-    },
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(4.5)} ${theme.spacing(12.5)}`,
-      fontSize: theme.spacing(4.5),
-    },
-  },
 }));
 
 const NotFound = ({ img, home = '/' }: NotFoundProps): JSX.Element => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ backgroundColor: 'primary.main' }}>
       <div className={classes.container}>
         <div className={classes.image}>{img}</div>
-        <div className={classes.fourOFour}>404</div>
+        <ButtonText
+          color="secondary.dark"
+          sx={{
+            mb: [2, 8],
+            textAlign: 'center',
+            fontSize: [123, 192],
+            lineHeight: ['100%'],
+          }}
+        >
+          404
+        </ButtonText>
         <Title
           variant="h1"
           sx={{ textAlign: 'center', color: 'primary.contrastText', mb: 4.25 }}
         >
           Oops! Page not found.
         </Title>
-        <Typography align="center" className={classes.text}>
+        <Body size="lg">
           The page you are looking for might have been temporarily removed or
           had its name changed.
-        </Typography>
+        </Body>
         <ContainedButton
+          size="large"
           style={{ whiteSpace: 'nowrap' }}
           href={home}
-          className={classes.button}
+          sx={{ whiteSpace: 'nowrap', mt: 8 }}
         >
           Visit Our Homepage{' '}
           <Box display={{ xs: 'none', sm: 'inline' }}>{'\u00A0'}Instead</Box>
         </ContainedButton>
       </div>
-    </div>
+    </Box>
   );
 };
 

@@ -6,7 +6,7 @@ import Img, { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BodyText, Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { SanityCaseStudyContextSection } from '../../../generated/graphql';
 
@@ -119,15 +119,15 @@ const ContextSection: React.FC<SanityCaseStudyContextSection> = ({
             <Title variant="h2" sx={{ pt: { tablet: 6 }, pb: 4 }}>
               {content?.header}
             </Title>
-            <BodyText size="xl" color="info.dark" sx={{ mb: 4 }}>
+            <Body size="xl" color="info.dark" sx={{ mb: 4 }}>
               <BlockContent content={_rawDescription} />
-            </BodyText>
+            </Body>
             <Title variant="h2" sx={{ mt: [4, 7], mb: [2, 3] }}>
               {content.challenges}
             </Title>
             <ol className={styles.list}>
               {challenges?.map((text, i) => (
-                <BodyText
+                <Body
                   key={i}
                   size="xl"
                   as="li"
@@ -146,7 +146,7 @@ const ContextSection: React.FC<SanityCaseStudyContextSection> = ({
                   }}
                 >
                   {text}
-                </BodyText>
+                </Body>
               ))}
             </ol>
           </Grid>

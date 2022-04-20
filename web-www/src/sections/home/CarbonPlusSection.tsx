@@ -7,7 +7,7 @@ import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import {
-  BodyText,
+  Body,
   ButtonText,
   Title,
 } from 'web-components/lib/components/typography';
@@ -102,9 +102,9 @@ const CarbonplusSection: React.FC = (): JSX.Element => {
             </Box>
           </ButtonText>
           <Title variant="h3">{ReactHtmlParser(content?.header || '')}</Title>
-          <BodyText size="lg" sx={{ color: 'info.dark', py: [4, 6] }}>
+          <Body size="lg" sx={{ color: 'info.dark', py: [4, 6] }}>
             {ReactHtmlParser(content?.description || '')}
-          </BodyText>
+          </Body>
           <ContainedButton
             size="large"
             className={styles.button}

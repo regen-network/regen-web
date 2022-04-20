@@ -5,7 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import cx from 'clsx';
 
 import Section from './index';
-import { BodyText } from '../typography';
+import { Body } from '../typography';
 
 interface OnBoardingSectionProps {
   title: string;
@@ -108,12 +108,12 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
         )}
       >
         {exampleProjectUrl && (
-          <BodyText sx={{ pt: 2, pb: 1 }}>
+          <Body sx={{ pt: 2, pb: 1 }}>
             See an example{' '}
             <RouterLink to={exampleProjectUrl} target="_blank">
               project page»
             </RouterLink>
-          </BodyText>
+          </Body>
         )}
         {p.children}
       </div>

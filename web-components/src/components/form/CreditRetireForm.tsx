@@ -9,7 +9,7 @@ import AmountField from '../inputs/AmountField';
 import LocationCountryField from '../inputs/LocationCountryField';
 import LocationStateField from '../inputs/LocationStateField';
 import ControlledTextField from '../inputs/ControlledTextField';
-import { BodyText, Title } from '../typography';
+import { Body, Title } from '../typography';
 import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { SxProps } from '@mui/material';
@@ -122,10 +122,10 @@ export const BottomCreditRetireFields: React.FC = () => {
       <Title variant="h5" sx={sxs.title}>
         Location of retirement
       </Title>
-      <BodyText>
+      <Body>
         Please enter a location for the retirement of these credits. This
         prevents double counting of credits in different locations.
-      </BodyText>
+      </Body>
       <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
           <LocationStateField country={country} optional={!postalCode} />

@@ -7,7 +7,7 @@ import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import {
-  BodyText,
+  Body,
   ButtonText,
   Title,
 } from 'web-components/lib/components/typography';
@@ -107,7 +107,7 @@ export const TitleWithParagraphs: React.FC<TitleWithParagraphsProps> = ({
             <ButtonText sx={{ fontSize: [16, 18], mb: [2, 4] }}>
               {p.title}
             </ButtonText>
-            <BodyText
+            <Body
               size="lg"
               sx={{
                 mt: [4, 4],
@@ -130,7 +130,7 @@ export const TitleWithParagraphs: React.FC<TitleWithParagraphsProps> = ({
               ) : (
                 <BlockContent content={p.content} />
               )}
-            </BodyText>
+            </Body>
           </Box>
         ))}
       </div>
@@ -173,7 +173,7 @@ const ApproachSection: React.FC<SanityCaseStudyApproachSection> = ({
     >
       {description && (
         <>
-          <BodyText
+          <Body
             size="xl"
             mobileSize="md"
             sx={{
@@ -184,7 +184,7 @@ const ApproachSection: React.FC<SanityCaseStudyApproachSection> = ({
             }}
           >
             {description}
-          </BodyText>
+          </Body>
         </>
       )}
       <Grid container spacing={10}>
@@ -193,9 +193,9 @@ const ApproachSection: React.FC<SanityCaseStudyApproachSection> = ({
             className={classes.image}
             fluid={figureImage?.image?.asset?.fluid as FluidObject}
           />
-          <BodyText size="sm" sx={{ pt: [3, 4], color: 'info.dark' }}>
+          <Body size="sm" sx={{ pt: [3, 4], color: 'info.dark' }}>
             <BlockContent content={_rawFigureTitle} />
-          </BodyText>
+          </Body>
         </Grid>
         <Grid item xs={12} md={6}>
           <TitleWithParagraphs

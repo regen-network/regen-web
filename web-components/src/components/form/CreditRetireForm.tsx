@@ -213,7 +213,7 @@ export const validateCreditRetire = (
 export const initialValues = {
   retiredAmount: 0,
   note: '',
-  country: '',
+  country: 'US',
   stateProvince: '',
 };
 

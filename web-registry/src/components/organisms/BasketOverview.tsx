@@ -164,6 +164,7 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                   data={allowedCreditClasses}
                   link={'/credit-classes/'}
                 />
+                <BodyText>text</BodyText>
                 {minStartDate && (
                   <Item
                     label="min start date"

@@ -7,7 +7,6 @@ import Card from '../cards/Card';
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
 import StepCircleBadge from '../icons/StepCircleBadge';
 import { BodyText, ButtonText, Title } from '../typography';
-import Description from '../description';
 import Tag from '../tag';
 import StepFAQs from '../faq/StepFAQs';
 import { Image } from '../image';
@@ -205,9 +204,9 @@ function StepCard({
           </BodyText>
           {!!step.btnText && !!step.onBtnClick && (
             <ContainedButton
-              size="small"
+              size="large"
               onClick={step.onBtnClick}
-              sx={{ mt: 3, mb: 5, py: [2, 0], px: [8, 0] }}
+              sx={{ mt: 3, mb: 5 }}
             >
               {step.btnText}
             </ContainedButton>

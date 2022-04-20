@@ -1,12 +1,11 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Typography from '@mui/material/Typography';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import EyeIcon from '../icons/EyeIcon';
 import MediaCard from './MediaCard';
 import { parseText } from '../../utils/textParser';
-import { BodyText, ButtonText, Subtitle } from '../typography';
+import { BodyText, ButtonText } from '../typography';
 import { Box } from '@mui/material';
 
 export interface ResourcesCardProps {

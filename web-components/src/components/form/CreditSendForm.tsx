@@ -20,6 +20,7 @@ import {
   insufficientCredits,
   validateAmount,
 } from '../inputs/validation';
+import { Subtitle } from '../typography';
 
 /**
  * Send sends tradable credits from one account to another account.
@@ -50,18 +51,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: theme.palette.info.light,
     },
   },
-  description: {
-    marginBottom: theme.spacing(5),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    '& a': {
-      cursor: 'pointer',
-    },
-  },
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
     alignItems: 'initial',
@@ -76,12 +65,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(9),
     },
-  },
-  checkboxDescription: {
-    color: theme.palette.primary.contrastText,
-    fontSize: theme.spacing(4.5),
-    fontWeight: 'bold',
-    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -208,9 +191,9 @@ const CreditSendForm: React.FC<FormProps> = ({
                 : styles.checkboxLabel
             }
             label={
-              <Description className={styles.checkboxDescription}>
+              <Subtitle size="lg" color="primary.contrastText" ml={1}>
                 Retire credits upon transfer
-              </Description>
+              </Subtitle>
             }
           />
 

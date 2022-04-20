@@ -10,6 +10,8 @@ import Cookies from 'js-cookie';
 // import Section from '../section';
 import ContainedButton from '../buttons/ContainedButton';
 import { Theme } from '../../theme/muiTheme';
+import { BodyText } from '../typography';
+import { Box } from '@mui/material';
 
 interface CookiesBannerProps {
   privacyUrl: string;
@@ -46,103 +48,8 @@ function setCookie(name: string, cookieValue: string): void {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  background: {
-    position: 'fixed',
-    top: '0px',
-    left: '0px',
-    zIndex: 1000,
-    backgroundColor: theme.palette.info.light,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(19),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(5),
-      paddingBottom: theme.spacing(5),
-    },
-    boxShadow: theme.shadows[7],
-  },
-  // section: {
-  //   paddingTop: 0,
-  //   height: '100%',
-  // },
-  root: {
-    height: '100%',
-    [theme.breakpoints.up('md')]: {
-      paddingRight: theme.spacing(37.5),
-      paddingLeft: theme.spacing(37.5),
-    },
-    [theme.breakpoints.down('md')]: {
-      paddingRight: theme.spacing(10),
-      paddingLeft: theme.spacing(10),
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(19),
-      paddingRight: theme.spacing(4),
-      paddingLeft: theme.spacing(4),
-    },
-    [theme.breakpoints.up('xl')]: {
-      paddingRight: theme.spacing(5),
-      paddingLeft: theme.spacing(5),
-    },
-    maxWidth: theme.breakpoints.values.lg,
-    margin: '0 auto',
-    '& a': {
-      textDecoration: 'none',
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-    },
-  },
   link: {
     color: theme.palette.secondary.main,
-  },
-  text: {
-    color: theme.palette.info.dark,
-    lineHeight: '150%',
-    paddingRight: theme.spacing(5),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-    },
-  },
-  button: {
-    fontSize: theme.spacing(3.5),
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(8.75),
-      minWidth: theme.spacing(33.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(8.75),
-      minWidth: theme.spacing(22),
-    },
-  },
-  reject: {
-    cursor: 'pointer',
-    color: theme.palette.info.main,
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(8.5),
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(2.5),
-      fontSize: theme.spacing(3),
-      textAlign: 'center',
-    },
-  },
-  grid: {
-    display: 'flex',
-    wrap: 'nowrap',
-    justifyContent: 'center',
-    alignItems: 'center',
-    [theme.breakpoints.up('sm')]: {
-      flexDirection: 'row',
-    },
-    [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column',
-    },
   },
   backdrop: {
     zIndex: 100,
@@ -178,32 +85,76 @@ export default function CookiesBanner({
   if (visible) {
     return (
       <Backdrop className={classes.backdrop} open>
-        <div className={classes.background}>
+        <Box
+          sx={theme => ({
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            zIndex: 1000,
+            backgroundColor: 'info.light',
+            width: '100%',
+            height: { sm: theme.spacing(19) },
+            py: [5, 0],
+            boxShadow: theme.shadows[7],
+          })}
+        >
           <Grid
             container
-            wrap="nowrap"
-            alignItems="center"
-            justifyContent="space-between"
-            className={classes.root}
+            sx={theme => ({
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              m: '0 auto',
+              maxWidth: theme.breakpoints.values.lg,
+              px: {
+                xs: 4,
+                sm: 10,
+                md: 37.5,
+                xl: 5,
+              },
+              height: [theme.spacing(19), '100%'],
+            })}
           >
-            <Typography className={classes.text}>
+            <BodyText mobileSize="xs">
               We use cookies to provide you with a great user experience. By
               using this site, you accept our use of{' '}
               <Link className={classes.link} href={privacyUrl}>
                 cookies policy
               </Link>
               .
-            </Typography>
-            <div className={classes.grid}>
-              <ContainedButton className={classes.button} onClick={accept}>
+            </BodyText>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: ['column', 'row'],
+              }}
+            >
+              <ContainedButton
+                size="small"
+                onClick={accept}
+                sx={theme => ({
+                  minWidth: [theme.spacing(22), theme.spacing(33.25)],
+                })}
+              >
                 accept
               </ContainedButton>
-              <div className={classes.reject} onClick={reject}>
+              <BodyText
+                size="sm"
+                sx={{
+                  color: 'info.main',
+                  cursor: 'pointer',
+                  textAlign: ['center', 'initial'],
+                  pt: [2.5, 0],
+                  pl: [null, 8.5],
+                }}
+              >
                 Reject
-              </div>
-            </div>
+              </BodyText>
+            </Box>
           </Grid>
-        </div>
+        </Box>
       </Backdrop>
     );
   }

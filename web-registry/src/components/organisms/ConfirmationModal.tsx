@@ -1,13 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { Avatar } from '@mui/material';
+import { Avatar, Box, Link } from '@mui/material';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
-import { Title } from 'web-components/lib/components/typography';
+import {
+  BodyText,
+  ButtonText,
+  Title,
+} from 'web-components/lib/components/typography';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import { Label } from 'web-components/lib/components/typography';
 import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
 import CowIllustration from '../../assets/cow-illustration.png';
 
@@ -34,14 +37,6 @@ const useStyles = makeStyles(theme => ({
   cows: {
     [theme.breakpoints.down('sm')]: {
       height: theme.spacing(20),
-    },
-  },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: theme.typography.pxToRem(44.8),
-    },
-    [theme.breakpoints.down('sm')]: {
-      lineHeight: theme.typography.pxToRem(34.8),
     },
   },
   card: {
@@ -72,54 +67,9 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between',
     padding: theme.spacing(0, 4),
   },
-  classId: {
-    color: theme.palette.info.main,
-    fontSize: theme.typography.pxToRem(12),
-  },
-  creditDescription: {
-    fontSize: theme.typography.pxToRem(14),
-  },
-  hash: {
-    display: 'flex',
-    alignItems: 'baseline',
-    marginTop: theme.spacing(2),
-    '& a': {
-      fontSize: theme.typography.pxToRem(14),
-      color: theme.palette.secondary.main,
-      textDecoration: 'none',
-      fontWeight: 700,
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-    },
-  },
-  hashLabel: {
-    fontSize: theme.typography.pxToRem(12),
-    marginRight: theme.spacing(4),
-  },
-  creditCount: {
-    display: 'flex',
-    [theme.breakpoints.up('sm')]: {
-      alignItems: 'center',
-      height: theme.typography.pxToRem(54),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
-    },
-  },
   verticalSpacing: {
     [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(6),
-    },
-  },
-  hideIfMobile: {
-    [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
-  },
-  hideIfDesktop: {
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
     },
   },
 }));
@@ -134,11 +84,7 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
         src={CowIllustration}
         alt="cows celebrating"
       />
-      <Title
-        className={cx(styles.title, styles.verticalSpacing)}
-        align="center"
-        variant="h3"
-      >
+      <Title align="center" variant="h3" sx={{ pb: [6, 0] }}>
         Congrats! Your purchase was successful.
       </Title>
       <Card className={cx(styles.card, styles.verticalSpacing)}>
@@ -151,31 +97,47 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
         </Avatar>
         <div className={styles.creditDetails}>
           <Title
-            className={(styles.creditCount, styles.hideIfDesktop)}
             variant="h3"
+            mobileVariant="h3"
+            sx={{
+              display: ['flex', 'none'],
+              alignItems: 'center',
+              height: 54,
+            }}
           >
             500
           </Title>
           <Title variant="h6">Regen - Ecocredits</Title>
-          <Label className={styles.classId}>C01-20190101-20201010-02</Label>
-          <span className={styles.creditDescription}>
+          <ButtonText size="xs" color="info.main">
+            C01-20190101-20201010-02
+          </ButtonText>
+          <BodyText size="sm" mobileSize="sm">
             Wilmot, Carbon<i>Plus</i> Grasslands Credits
-          </span>
-          <div className={styles.hash}>
-            <Label className={styles.hashLabel}>hash: </Label>
-            <a
+          </BodyText>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'baseline',
+              mt: 2,
+            }}
+          >
+            <ButtonText size="xs" mr={4}>
+              hash:{' '}
+            </ButtonText>
+            <Link
+              color="secondary.main"
+              fontWeight={700}
               href={`${process.env.REACT_APP_BLOCK_EXPLORER}/txs/${data?.transactionHash}`}
               target="_blank"
               rel="noopener noreferrer"
             >
               {data?.transactionHash?.substring(0, 13).toLowerCase()}...
-            </a>
-          </div>
+            </Link>
+          </Box>
         </div>
         <Title
-          className={cx(styles.creditCount, styles.hideIfMobile)}
-          align="center"
           variant="h3"
+          sx={{ textAlign: 'center', display: ['none', 'flex'] }}
         >
           500
         </Title>

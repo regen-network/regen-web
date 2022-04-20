@@ -6,7 +6,7 @@ import cx from 'clsx';
 import Card from '../cards/Card';
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
 import StepCircleBadge from '../icons/StepCircleBadge';
-import { Title } from '../typography';
+import { BodyText, ButtonText, Title } from '../typography';
 import Description from '../description';
 import Tag from '../tag';
 import StepFAQs from '../faq/StepFAQs';
@@ -61,13 +61,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   activeCard: {
     backgroundColor: theme.palette.primary.main,
   },
-  btn: {
-    margin: theme.spacing(3, 0, 5),
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(14),
-      padding: theme.spacing(2, 8),
-    },
-  },
   cardTop: {
     display: 'flex',
     flex: 1,
@@ -103,35 +96,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(3.5, 8, 6),
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(3.5, 3.5, 4),
-    },
-  },
-  step: {
-    color: theme.palette.info.main,
-    fontWeight: 800,
-    textTransform: 'uppercase',
-    fontSize: theme.spacing(3.5),
-  },
-  activeColor: {
-    color: theme.palette.secondary.main,
-  },
-  stepTitle: {
-    color: theme.palette.info.dark,
-    padding: theme.spacing(3.5, 0),
-    textAlign: 'center',
-    lineHeight: '145%',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-  },
-  activeTitle: {
-    color: theme.palette.primary.contrastText,
-  },
-  stepDescription: {
-    textAlign: 'center',
-    color: theme.palette.info.dark,
-    fontSize: theme.spacing(4.5),
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
     },
   },
   media: {
@@ -222,26 +186,29 @@ function StepCard({
           </div>
         </div>
         <div className={styles.cardBottom}>
-          <Title
-            variant="h6"
-            className={cx(styles.step, step.isActive && styles.activeColor)}
+          <ButtonText
+            size="sm"
+            mobileSize="sm"
+            color={step.isActive ? 'secondary.main' : 'info.dark'}
           >
             step {step.stepNumber}
-          </Title>
+          </ButtonText>
           <Title
             variant="h4"
-            className={cx(
-              styles.stepTitle,
-              step.isActive && styles.activeTitle,
-            )}
+            mobileVariant="h6"
+            color={step.isActive ? 'primary.contrastText' : 'info.dark'}
           >
             {step.title}
           </Title>
-          <Description className={styles.stepDescription}>
+          <BodyText size="lg" align="center" color="info.dark">
             {step.description}
-          </Description>
+          </BodyText>
           {!!step.btnText && !!step.onBtnClick && (
-            <ContainedButton onClick={step.onBtnClick} className={styles.btn}>
+            <ContainedButton
+              size="small"
+              onClick={step.onBtnClick}
+              sx={{ mt: 3, mb: 5, py: [2, 0], px: [8, 0] }}
+            >
               {step.btnText}
             </ContainedButton>
           )}

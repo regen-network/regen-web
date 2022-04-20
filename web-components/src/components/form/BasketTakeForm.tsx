@@ -6,7 +6,6 @@ import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/
 
 import { Theme } from '../../theme/muiTheme';
 import AmountField from '../inputs/AmountField';
-import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
   BottomCreditRetireFields,
@@ -16,6 +15,7 @@ import {
 import Submit from './Submit';
 import { validateAmount } from '../inputs/validation';
 import { getISOString } from '../../utils/locationStandard';
+import { Subtitle } from '../typography';
 
 /**
  * Take - takes credits from a basket starting from the oldest credits first.
@@ -39,12 +39,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiCheckbox-root': {
       alignSelf: 'end',
     },
-  },
-  checkboxDescription: {
-    color: theme.palette.primary.contrastText,
-    fontSize: theme.spacing(4.5),
-    fontWeight: 'bold',
-    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -162,7 +156,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
         setRetirementLocation();
       }
       if (!country) {
-        setFieldValue('retirementLocation', null)
+        setFieldValue('retirementLocation', null);
       }
     }, [country, stateProvince, postalCode, setFieldValue]);
 
@@ -191,9 +185,9 @@ const BasketTakeForm: React.FC<FormProps> = ({
               disabled={!basket.disableAutoRetire}
               className={styles.checkboxLabel}
               label={
-                <Description className={styles.checkboxDescription}>
+                <Subtitle color="primary.contrastText" ml={1}>
                   Retire credits upon transfer
-                </Description>
+                </Subtitle>
               }
             />
             <Collapse in={values.retireOnTake} collapsedSize={0}>

@@ -9,8 +9,7 @@ import AmountField from '../inputs/AmountField';
 import LocationCountryField from '../inputs/LocationCountryField';
 import LocationStateField from '../inputs/LocationStateField';
 import ControlledTextField from '../inputs/ControlledTextField';
-import { Title } from '../typography';
-import Description from '../description';
+import { BodyText, Title } from '../typography';
 import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { SxProps } from '@mui/material';
@@ -36,22 +35,6 @@ import { SxProps } from '@mui/material';
  */
 
 const useStyles = makeStyles((theme: Theme) => ({
-  groupTitle: {
-    marginTop: theme.spacing(10.75),
-    marginBottom: theme.spacing(3),
-  },
-  description: {
-    marginBottom: 0,
-    '& a': {
-      cursor: 'pointer',
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(14),
-    },
-  },
   noteTextField: {
     '& label': {
       whiteSpace: 'unset',
@@ -139,10 +122,10 @@ export const BottomCreditRetireFields: React.FC = () => {
       <Title variant="h5" sx={sxs.title}>
         Location of retirement
       </Title>
-      <Description className={styles.description}>
+      <BodyText>
         Please enter a location for the retirement of these credits. This
         prevents double counting of credits in different locations.
-      </Description>
+      </BodyText>
       <Grid container className={styles.stateCountryGrid}>
         <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
           <LocationStateField country={country} optional={!postalCode} />

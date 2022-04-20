@@ -12,7 +12,7 @@ import ControlledTextField from '../inputs/ControlledTextField';
 import LocationField from '../inputs/LocationField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import Tooltip from '../tooltip/InfoTooltip';
-import { Title } from '../typography';
+import { BodyText, Title } from '../typography';
 import Description from '../description';
 import Modal from '.';
 import QuestionIcon from '../icons/QuestionIcon';
@@ -51,20 +51,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   card: {
     marginTop: 0,
   },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: 0,
-      paddingBottom: theme.spacing(7.5),
-      paddingLeft: theme.spacing(7.5),
-      paddingRight: theme.spacing(7.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(6),
-      paddingLeft: 0,
-      paddingRight: 0,
-    },
-  },
   controls: {
     display: 'flex',
     alignItems: 'center',
@@ -80,10 +66,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: theme.spacing(0, 2.5),
     },
   },
-  button: {
-    paddingLeft: theme.spacing(17),
-    paddingRight: theme.spacing(17),
-  },
   cancelButton: {
     color: theme.palette.info.main,
     fontSize: theme.typography.pxToRem(12),
@@ -91,14 +73,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   permission: {
     display: 'flex',
-  },
-  checkboxLabel: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-    },
   },
   iconWrapper: {
     cursor: 'pointer',
@@ -124,7 +98,11 @@ function OrganizationModal({
   return (
     <Modal open={!!organizationEdit} onClose={onClose}>
       <div className={styles.root}>
-        <Title variant="h4" align="center" className={styles.title}>
+        <Title
+          variant="h4"
+          align="center"
+          sx={{ px: [0, 7.5], pt: [8, 0], pb: [6, 7.5] }}
+        >
           {`${
             organizationEdit && organizationEdit.id ? 'Edit' : 'Add'
           } Organization`}
@@ -193,10 +171,10 @@ function OrganizationModal({
                     component={CheckboxLabel}
                     name="['http://regen.network/sharePermission']"
                     label={
-                      <Description className={styles.checkboxLabel}>
+                      <BodyText size="sm">
                         I have this organization’s permission to share their
                         information with Regen Registry
-                      </Description>
+                      </BodyText>
                     }
                   />
                   <Tooltip
@@ -215,8 +193,8 @@ function OrganizationModal({
                   </Button>
                   <ContainedButton
                     onClick={submitForm}
-                    className={styles.button}
                     disabled={!isValid || isSubmitting}
+                    sx={{ px: 17 }}
                   >
                     save
                   </ContainedButton>

@@ -3,6 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 
 import Card from './Card';
+import { BodyText, Subtitle, Title } from '../typography';
 // import VerifiedIcon from '../icons/VerifiedIcon';
 
 export interface ImpactCardProps {
@@ -50,28 +51,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     position: 'relative',
   }),
-  name: props => ({
-    [theme.breakpoints.up('sm')]: {
-      fontSize: props.largeFontSize || props.monitored ? '1.5rem' : '1.125rem',
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: props.largeFontSize || props.monitored ? '1.375rem' : '1rem',
-    },
-    fontWeight: 'bold',
-  }),
-  description: props => ({
-    [theme.breakpoints.up('sm')]: {
-      fontSize:
-        props.largeFontSize || props.monitored ? '1.125rem' : '0.875rem',
-      paddingBottom: props.monitored ? theme.spacing(10) : theme.spacing(0),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: props.largeFontSize || props.monitored ? '1rem' : '0.875rem',
-      paddingBottom: props.monitored ? theme.spacing(6.75) : theme.spacing(6),
-    },
-    paddingTop: props.monitored ? theme.spacing(3) : theme.spacing(2.25),
-    color: theme.palette.info.dark,
-  }),
   monitored: {
     display: 'flex',
     alignItems: 'center',
@@ -115,13 +94,35 @@ export default function ImpactCard({
 }: ImpactCardProps): JSX.Element {
   const classes = useStyles({ imgSrc, monitored, largeFontSize });
   // const theme = useTheme();
+  const largeFont = largeFontSize || monitored;
   return (
     <Card>
       <div className={classes.background}>
         <div className={classes.backgroundGradient} />
         <div className={classes.text}>
-          <Typography className={classes.name}>{name}</Typography>
-          <Typography className={classes.description}>{description}</Typography>
+          <Subtitle
+            sx={{
+              fontSize: {
+                xs: largeFont ? '1.375rem' : '1rem',
+                sm: largeFont ? '1.5rem' : '1.125rem',
+              },
+            }}
+          >
+            {name}
+          </Subtitle>
+          <BodyText
+            size={largeFont ? 'lg' : 'sm'}
+            mobileSize={largeFont ? 'md' : 'sm'}
+            sx={{
+              pb: {
+                xs: monitored ? 6.75 : 6,
+                sm: monitored ? 10 : 0,
+              },
+              pt: monitored ? 3 : 2.25,
+            }}
+          >
+            {description}
+          </BodyText>
           {/*monitored && (
               <span className={classes.monitored}>
                 <span className={classes.monitoredIcon}>

@@ -3,9 +3,11 @@ import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Description from 'web-components/lib/components/description';
-import { Title } from 'web-components/lib/components/typography';
-import { Label } from 'web-components/lib/components/typography';
+import {
+  BodyText,
+  ButtonText,
+  Title,
+} from 'web-components/lib/components/typography';
 import ReadMore from 'web-components/lib/components/read-more';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { truncate } from 'web-components/lib/utils/truncate';
@@ -135,12 +137,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
         label="approved methodologies"
         data={
           <Box>
-            <Description
-              className={styles.description}
-              key={firstMethodology?.['schema:name']}
-            >
+            <BodyText size="xl" key={firstMethodology?.['schema:name']}>
               {firstMethodology?.['schema:name']}
-            </Description>
+            </BodyText>
             {count > 1 && (
               <Link
                 sx={{
@@ -151,7 +150,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 href={methodologyList?.['schema:url']?.['@value']}
                 target="_blank"
               >
-                <Label sx={{ mr: 2 }}>{`+ ${count - 1} more`}</Label>{' '}
+                <ButtonText sx={{ fontSize: [16], mr: 2 }}>{`+ ${
+                  count - 1
+                } more`}</ButtonText>{' '}
                 <SmallArrowIcon className={styles.arrow} />
               </Link>
             )}
@@ -183,15 +184,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
             }}
           >
             <Box sx={{ mb: 6 }}>
-              <Label
-                sx={{
-                  fontSize: { xs: 12, sm: 14 },
-                  color: 'info.dark',
-                  mb: 4,
-                }}
-              >
+              <ButtonText size="sm" color="info.dark" mb={4}>
                 credit class
-              </Label>
+              </ButtonText>
               <Title variant="h1">{ledgerClass.class_id}</Title>
             </Box>
             {metadata?.['schema:description'] && (
@@ -209,9 +204,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               <LineItemLabelAbove
                 label="credit type"
                 data={
-                  <Description sx={{ mr: 1 }} className={styles.description}>
+                  <BodyText size="xl" sx={{ mr: 1 }}>
                     {toTitleCase(ledgerClass.credit_type.name)}
-                  </Description>
+                  </BodyText>
                 }
               />
               {metadata?.['regen:sourceRegistry']?.['schema:name'] && (
@@ -227,12 +222,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                       target="_blank"
                     >
                       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Description
-                          sx={{ mr: 1 }}
-                          className={styles.description}
-                        >
+                        <BodyText size="xl" sx={{ mr: 1 }}>
                           {metadata?.['regen:sourceRegistry']?.['schema:name']}
-                        </Description>
+                        </BodyText>
                         <SmallArrowIcon
                           sx={{ mt: '-2px' }}
                           className={styles.arrow}
@@ -250,17 +242,17 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 data={metadata?.['regen:offsetGenerationMethod']?.[
                   'schema:itemListElement'
                 ]?.map((method: string) => (
-                  <Description className={styles.description} key={method}>
+                  <BodyText size="xl" key={method}>
                     {toTitleCase(method)}
-                  </Description>
+                  </BodyText>
                 ))}
               />
               <LineItemLabelAbove
                 label="verification method"
                 data={
-                  <Description sx={{ mr: 1 }} className={styles.description}>
+                  <BodyText size="xl" sx={{ mr: 1 }}>
                     {toTitleCase(metadata?.['regen:verificationMethod'])}
-                  </Description>
+                  </BodyText>
                 }
               />
               <LineItemLabelAbove
@@ -268,9 +260,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 data={metadata?.['regen:sectoralScope']?.[
                   'schema:itemListElement'
                 ]?.map((sector: string) => (
-                  <Description className={styles.description} key={sector}>
+                  <BodyText size="xl" key={sector}>
                     {sector}
-                  </Description>
+                  </BodyText>
                 ))}
               />
             </Box>
@@ -283,7 +275,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
           >
             <Box className={styles.box}>
               <div className={styles.sidebarItemMargin}>
-                <Label className={styles.label}>admin</Label>
+                <ButtonText size="xs" color="primary.contrastText" mb={3}>
+                  admin
+                </ButtonText>
                 <Link
                   className={styles.link}
                   href={
@@ -298,7 +292,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 </Link>
               </div>
               <div className={styles.sidebarItemMargin}>
-                <Label className={styles.label}>issuers</Label>
+                <ButtonText size="xs" color="primary.contrastText" mb={3}>
+                  issuers
+                </ButtonText>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   {ledgerClass?.issuers?.map((issuer: string) => (
                     <Link

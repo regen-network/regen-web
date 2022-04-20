@@ -4,7 +4,7 @@ import { SxProps } from '@mui/system';
 import { makeStyles } from '@mui/styles';
 
 import Description from '../description';
-import { Title } from '../typography';
+import { ButtonText, Subtitle, Title } from '../typography';
 import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
 import Modal, { RegenModalProps } from '../modal';
@@ -59,25 +59,11 @@ const CardItem: React.FC<CardItemProps> = ({
 }) => {
   return (
     <Box sx={{ pt: 5 }}>
-      <Title
-        sx={{
-          textTransform: 'uppercase',
-          fontWeight: 800,
-          letterSpacing: '1px',
-          pb: {
-            xs: 3,
-            sm: 2.25,
-          },
-          fontSize: {
-            sm: 14,
-            xs: 12,
-          },
-        }}
-      >
+      <ButtonText size="sm" sx={{ pb: [3, 2.25] }}>
         {label}
-      </Title>
+      </ButtonText>
 
-      <Description sx={{ fontWeight: 700 }} variant="subtitle2">
+      <Subtitle size="lg" mobileSize="sm">
         {value.url ? (
           <LinkComponent
             sx={{ color: theme => theme.palette.secondary.main }}
@@ -89,7 +75,7 @@ const CardItem: React.FC<CardItemProps> = ({
         ) : (
           <>{value.name}</>
         )}
-      </Description>
+      </Subtitle>
     </Box>
   );
 };

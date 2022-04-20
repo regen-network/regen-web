@@ -3,8 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import cx from 'clsx';
 
 import Card from './Card';
-import { Title } from '../typography';
-import Description from '../description';
+import { BodyText, ButtonText, Title } from '../typography';
 import { Image } from '../image';
 
 export interface ProjectImpactCardProps {
@@ -41,18 +40,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       height: theme.spacing(50),
     },
   }),
-  title: {
-    color: theme.palette.primary.main,
-    position: 'absolute',
-    [theme.breakpoints.up('sm')]: {
-      left: theme.spacing(5),
-      bottom: theme.spacing(6),
-    },
-    [theme.breakpoints.down('sm')]: {
-      left: theme.spacing(4),
-      bottom: theme.spacing(5),
-    },
-  },
   text: {
     display: 'flex',
     flexDirection: 'column',
@@ -63,29 +50,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       padding: theme.spacing(4),
     },
-  },
-  tag: {
-    position: 'absolute',
-    top: theme.spacing(7.5),
-    left: 0,
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.primary.main,
-    textTransform: 'uppercase',
-    fontWeight: 800,
-    letterSpacing: '1px',
-    fontFamily: theme.typography.h1.fontFamily,
-    padding: theme.spacing(3),
-    borderRadius: '0px 2px 2px 0px',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-    },
-  },
-  description: {
-    fontSize: theme.typography.pxToRem(14),
-    flex: '1 0 auto',
   },
 }));
 
@@ -104,15 +68,36 @@ export default function ProjectImpactCard({
   return (
     <Card className={cx(classes.root, className)}>
       <div className={classes.background}>
-        <div className={classes.tag}>
+        <ButtonText
+          size="sm"
+          sx={theme => ({
+            position: 'absolute',
+            top: theme.spacing(7.5),
+            left: 0,
+            backgroundColor: 'secondary.main',
+            color: 'primary.main',
+            borderRadius: '0px 2px 2px 0px',
+            p: 3,
+          })}
+        >
           {monitored ? 'primary impact' : 'co-benefit'}
-        </div>
-        <Title variant="h4" className={classes.title}>
+        </ButtonText>
+        <Title
+          variant="h4"
+          sx={{
+            color: 'primary.main',
+            position: 'absolute',
+            left: [4, 5],
+            bottom: [5, 6],
+          }}
+        >
           {name}
         </Title>
       </div>
       <div className={classes.text}>
-        <Description className={classes.description}>{description}</Description>
+        <BodyText size="sm" mobileSize="sm" sx={{ flex: '1 0 auto' }}>
+          {description}
+        </BodyText>
         {standard && (
           <Image
             src={standard}

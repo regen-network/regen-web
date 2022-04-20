@@ -3,8 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
-import { Title } from '../typography';
-import Description from '../description';
+import { BodyText, Title } from '../typography';
 import { BlockContent, SanityBlockOr } from '../block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -14,17 +13,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('md')]: {
       marginLeft: theme.spacing(28),
       marginRight: theme.spacing(28),
-    },
-  },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(5),
-      paddingBottom: theme.spacing(10),
-      fontSize: theme.spacing(5.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(3.75),
-      fontSize: theme.spacing(4),
     },
   },
 }));
@@ -46,14 +34,13 @@ export function TitleDescription({
       <Title align="center" variant="h2">
         {title}
       </Title>
-      <Description className={classes.description}>
-        {/* gets passed a string for HTML, array of blocks for sanity */}
+      <BodyText size="xl">
         {typeof description === 'string' ? (
           ReactHtmlParser(description)
         ) : (
           <BlockContent content={description} />
         )}
-      </Description>
+      </BodyText>
       {children && <div>{children}</div>}
     </div>
   );

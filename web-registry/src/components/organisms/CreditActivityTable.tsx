@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { makeStyles } from '@mui/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
@@ -22,9 +21,8 @@ import {
   stableSort,
   Order,
 } from 'web-components/lib/components/table/sort';
-import { Label } from 'web-components/lib/components/typography';
+import { ButtonText } from 'web-components/lib/components/typography';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
@@ -57,13 +55,6 @@ const headCells: HeadCell[] = [
   { id: 'txUrl', numeric: false, label: '' },
 ];
 
-const useStyles = makeStyles((theme: Theme) => ({
-  label: {
-    color: theme.palette.info.dark,
-    fontSize: theme.typography.pxToRem(12),
-  },
-}));
-
 const ROWS_PER_PAGE_OPTIONS = { options: [5, 10, 20, 50], default: 10 };
 
 // TODO: pull message type names directly from regen-js.
@@ -76,7 +67,6 @@ const READABLE_NAMES: Dictionary<string> = {
 };
 
 const CreditActivityTable: React.FC = () => {
-  const styles = useStyles();
   const [txs, setTxs] = useState<TxRowData[]>([]);
   const [order, setOrder] = useState<Order>('desc');
   const [orderBy, setOrderBy] = useState<string>('date');
@@ -219,7 +209,9 @@ const CreditActivityTable: React.FC = () => {
                         </a>
                       </StyledTableCell>
                       <StyledTableCell>
-                        <Label className={styles.label}>{tx.messages}</Label>
+                        <ButtonText size="xs" color="info.dark">
+                          {tx.messages}
+                        </ButtonText>
                       </StyledTableCell>
                       <StyledTableCell>
                         {formatNumber(tx.height)}

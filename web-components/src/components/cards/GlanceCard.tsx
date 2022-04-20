@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
+import { Box, Grid } from '@mui/material';
+
 import Card from './Card';
-import { Title } from '../typography';
+import { BodyText, ButtonText } from '../typography';
 import StaticMap from '../map/StaticMap';
 import { Image, OptimizeImageProps } from '../image';
 
@@ -17,62 +17,10 @@ interface GlanceCardProps extends OptimizeImageProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    textTransform: 'uppercase',
-    marginBottom: theme.spacing(2.75),
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-  },
-  container: {
-    [theme.breakpoints.down('sm')]: {
-      flexWrap: 'wrap-reverse',
-      padding: theme.spacing(6, 4.5),
-    },
+  root: {
+    backgroundColor: theme.palette.primary.main,
     [theme.breakpoints.up('sm')]: {
-      flexWrap: 'nowrap',
-      padding: 0,
-    },
-  },
-  texts: {
-    color: theme.palette.info.dark,
-    margin: 0,
-    paddingInlineStart: theme.spacing(2),
-    listStyle: 'none',
-  },
-  text: {
-    paddingBottom: theme.spacing(1.5),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    '& li': {
-      position: 'relative',
-    },
-    '& li::before': {
-      content: "'\\2022'",
-      fontSize: '0.5rem',
-      color: theme.palette.secondary.main,
-      display: 'inline-block',
-      width: '1em',
-      marginLeft: '-1em',
-      position: 'absolute',
-      [theme.breakpoints.up('sm')]: {
-        top: theme.spacing(2),
-      },
-      [theme.breakpoints.down('sm')]: {
-        top: theme.spacing(1.25),
-      },
-    },
-  },
-  textContainer: {
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(8.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(4.5),
+      border: 'none',
     },
   },
   image: {
@@ -84,18 +32,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       height: theme.spacing(51),
     },
-  },
-  root: {
-    backgroundColor: theme.palette.primary.main,
-    [theme.breakpoints.up('sm')]: {
-      border: 'none',
-    },
-  },
-  mapWrapper: {
-    height: theme.spacing(49.25),
-    border: `1px solid ${theme.palette.grey[100]}`,
-    borderRadius: '5px',
-    overflow: 'hidden',
   },
 }));
 
@@ -113,9 +49,19 @@ export default function GlanceCard({
 
   return (
     <Card className={classes.root}>
-      <Grid className={classes.container} container>
+      <Grid
+        container
+        sx={{ flexWrap: ['wrap-reverse', 'nowrap'], py: [6, 0], px: [4.5, 0] }}
+      >
         <Grid xs={12} sm={5} item>
-          <div className={classes.mapWrapper}>
+          <Box
+            sx={theme => ({
+              height: theme.spacing(49.25),
+              border: `1px solid ${theme.palette.grey[100]}`,
+              borderRadius: '5px',
+              overflow: 'hidden',
+            })}
+          >
             {geojson && isGISFile ? (
               <StaticMap geojson={geojson} mapboxToken={mapboxToken} />
             ) : (
@@ -129,19 +75,41 @@ export default function GlanceCard({
                 />
               )
             )}
-          </div>
+          </Box>
         </Grid>
-        <Grid xs={12} sm={7} item className={classes.textContainer}>
-          <Title variant="h6" className={classes.title}>
-            {title}
-          </Title>
-          <ul className={classes.texts}>
+        <Grid xs={12} sm={7} item sx={{ pb: [4.5, 0], pl: [0, 8.25] }}>
+          <ButtonText mb={2.75}>{title}</ButtonText>
+          <Box
+            component="ul"
+            sx={{ m: 0, listStyle: 'none', paddingInlineStart: 2 }}
+          >
             {text.map((p, i) => (
-              <Typography key={i} className={classes.text}>
+              <BodyText
+                key={i}
+                size="lg"
+                mobileSize="sm"
+                sx={{
+                  pb: 1.5,
+                  '& li': {
+                    position: 'relative',
+                    paddingInlineStart: 2,
+                  },
+                  '& li::before': {
+                    position: 'absolute',
+                    content: "'\\2022'",
+                    fontSize: '0.75rem',
+                    color: 'secondary.main',
+                    display: 'inline-block',
+                    width: '1rem',
+                    ml: '-1rem',
+                    top: 0,
+                  },
+                }}
+              >
                 <li>{p}</li>
-              </Typography>
+              </BodyText>
             ))}
-          </ul>
+          </Box>
         </Grid>
       </Grid>
     </Card>

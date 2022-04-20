@@ -3,16 +3,16 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { Box, SxProps, Typography } from '@mui/material';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
-import { Title } from 'web-components/lib/components/typography';
 import {
-  BlockContent,
-  SanityBlockContent,
-} from 'web-components/src/components/block-content';
+  BodyText,
+  ButtonText,
+  Title,
+} from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/src/components/block-content';
 import Section from 'web-components/lib/components/section';
 // import { formatDate } from 'web-components/lib/utils/format';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import { Label } from 'web-components/lib/components/typography';
 // import Countdown from 'web-components/lib/components/countdown';
 
 import type { NctTokenSectionQuery } from '../../generated/graphql';
@@ -51,10 +51,6 @@ const query = graphql`
 const sxs = {
   btnPad: { px: { xs: 8, sm: 12 } } as SxProps,
 };
-
-const BodyContent: React.FC<{ content: SanityBlockContent }> = ({
-  content,
-}) => <BlockContent content={content} sx={{ '& p': { fontSize: [18, 22] } }} />;
 
 export const TokenSection = (): JSX.Element => {
   const { sanityNctPage } = useStaticQuery<NctTokenSectionQuery>(query);
@@ -126,7 +122,9 @@ export const TokenSection = (): JSX.Element => {
           {/* TODO uncomment if we want to formatted date based on CMS launch date */}
           {data?.cardSubtitle} {/* {formatDate(launchDate)} */}
         </Typography>
-        <BodyContent content={data?._rawCardBody} />
+        <BodyText size="xl">
+          <BlockContent content={data?._rawCardBody} />
+        </BodyText>
         <ContainedButton
           sx={{
             alignSelf: 'start',
@@ -160,10 +158,12 @@ export const TokenSection = (): JSX.Element => {
         }}
       >
         <Title variant="h2">{data?.detailTitle}</Title>
-        <Label sx={{ fontSize: { xs: 14, sm: 18 }, color: 'info.main' }}>
+        <ButtonText color="info.main">
           {data?.detailSubtitle} {/* {formatDate(launchDate)} */}
-        </Label>
-        <BodyContent content={data?._rawDetailBody} />
+        </ButtonText>
+        <BodyText size="xl">
+          <BlockContent content={data?._rawDetailBody} />
+        </BodyText>
         <Box sx={{ display: 'flex', gap: 3, mt: [4, 8] }}>
           <OutlinedButton
             sx={sxs.btnPad}

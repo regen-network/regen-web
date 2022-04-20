@@ -15,7 +15,6 @@ import Description from 'web-components/lib/components/description';
 import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import { CreditPrice } from 'web-components/lib/components/buy-footer';
 import {
   requiredMessage,
   validateEmail,
@@ -26,6 +25,7 @@ import LocationCountryField from 'web-components/lib/components/inputs/LocationC
 import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
 // TODO: refactor countries dependency
 import { countries } from 'web-components/lib/utils/countries';
+import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 

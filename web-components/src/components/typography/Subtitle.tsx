@@ -24,4 +24,5 @@ export const Subtitle = styled(Typography, {
 
 Subtitle.defaultProps = {
   size: 'md',
+  color: 'primary.light',
 };

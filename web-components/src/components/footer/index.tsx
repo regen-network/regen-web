@@ -50,7 +50,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 }));
 
 const sxs = {
-  btn: {
+  text: {
+    color: 'primary.main',
     mb: {
       xs: 4.5,
       sm: 3.75,
@@ -62,7 +63,7 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
   const classes = useStyles({});
   return (
     <div className={classes.footerItem}>
-      <ButtonText size="lg" sx={sxs.btn}>
+      <ButtonText size="lg" sx={sxs.text}>
         {title}
       </ButtonText>
       <List sx={{ p: 0 }}>
@@ -117,7 +118,7 @@ export default function Footer({
             />
           </Grid>
           <Grid item xs={12} sm={4} className={classes.footerItem}>
-            <ButtonText size="lg" sx={sxs.btn}>
+            <ButtonText size="lg" sx={sxs.text}>
               subscribe
             </ButtonText>
             <BodyText size="lg">

@@ -5,7 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import cx from 'clsx';
 
 import Section from './index';
-import Description from '../description';
+import { BodyText } from '../typography';
 
 interface OnBoardingSectionProps {
   title: string;
@@ -70,15 +70,6 @@ const useStyles = makeStyles(theme => ({
       marginLeft: theme.spacing(4),
     },
   },
-  description: {
-    fontSize: theme.typography.pxToRem(16),
-    padding: theme.spacing(2, 0, 1),
-  },
-  topRight: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-  },
 }));
 
 const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
@@ -117,12 +108,12 @@ const OnBoardingSection: React.FC<OnBoardingSectionProps> = ({
         )}
       >
         {exampleProjectUrl && (
-          <Description className={styles.description}>
+          <BodyText sx={{ pt: 2, pb: 1 }}>
             See an example{' '}
             <RouterLink to={exampleProjectUrl} target="_blank">
               project page»
             </RouterLink>
-          </Description>
+          </BodyText>
         )}
         {p.children}
       </div>

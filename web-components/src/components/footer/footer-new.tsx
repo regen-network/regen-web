@@ -85,22 +85,7 @@ const Footer: React.FC<{
         color: 'primary.main',
       }}
     >
-      <Section
-        sx={
-          {
-            // root: {
-            //   '& a': {
-            //     '&:link, &:visited, &:hover, &:active': {
-            //       textDecoration: 'none',
-            //     },
-            //     '&:hover': {
-            //       color: 'info.contrastText',
-            //     },
-            //   },
-            // },
-          }
-        }
-      >
+      <Section>
         <Grid container spacing={10}>
           <Grid item xs={12} lg={3}>
             <Box
@@ -112,7 +97,7 @@ const Footer: React.FC<{
             >
               <IconLink color={theme.palette.primary.main} />
               <Box mt={4}>
-                <BodyText size="lg">
+                <BodyText size="lg" color="primary.main">
                   A project of{' '}
                   <Link
                     href="https://www.regen.network"

@@ -13,6 +13,7 @@ import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
 import {
   BodyText,
+  ButtonText,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
@@ -21,7 +22,6 @@ import ControlledTextField from 'web-components/lib/components/inputs/Controlled
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
-import { Label } from 'web-components/lib/components/typography';
 import { Image } from 'web-components/lib/components/image';
 import Submit from 'web-components/lib/components/form/Submit';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
@@ -273,9 +273,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           <Title variant="h4" sx={{ mr: 1.5 }}>
                             500
                           </Title>
-                          <Label sx={{ fontSize: { xs: 12, sm: 14 } }}>
-                            REGEN
-                          </Label>
+                          <ButtonText size="sm">REGEN</ButtonText>
                         </Box>
                         <BodyText size="md" mobileSize="md">
                           ($2345.00 USD)

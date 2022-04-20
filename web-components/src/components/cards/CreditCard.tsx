@@ -1,9 +1,9 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
 import MediaCard from './MediaCard';
 import CreditPlaceInfo from '../place/CreditPlaceInfo';
 import Credits from '../credits';
+import { BodyText } from '../typography';
 
 export interface CreditInfo {
   name: string;
@@ -25,24 +25,11 @@ interface CreditCardProps {
   width?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  description: {
-    fontSize: '0.875rem',
-    lineHeight: '150%',
-    marginBottom: theme.spacing(3),
-    color: theme.palette.info.dark,
-  },
-  creditsContainer: {
-    marginTop: theme.spacing(3.75),
-  },
-}));
-
 export default function CreditCard({
   credit,
   onClick,
   width,
 }: CreditCardProps): JSX.Element {
-  const classes = useStyles({});
   return (
     <MediaCard
       titleVariant="h5"
@@ -51,22 +38,20 @@ export default function CreditCard({
       name={credit.name}
       width={width}
     >
-      <Typography className={classes.description}>
-        {credit.description}
-      </Typography>
+      <BodyText size="sm">{credit.description}</BodyText>
       <CreditPlaceInfo
         place={credit.place}
         outcome={credit.outcome}
         fontSize="0.8125rem"
       />
-      <div className={classes.creditsContainer}>
+      <Box mt={2}>
         <Credits
           numberOfHolders={credit.numberOfHolders}
           numberOfProjects={credit.numberOfProjects}
           amount={credit.amount}
           totalAmount={credit.totalAmount}
         />
-      </div>
+      </Box>
     </MediaCard>
   );
 }

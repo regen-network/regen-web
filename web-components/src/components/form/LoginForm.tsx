@@ -1,10 +1,7 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Formik, Form, Field } from 'formik';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
+import { Box, Link, Grid } from '@mui/material';
 
-import Description from '../description';
 import TextField from '../inputs/TextField';
 import PasswordField from '../inputs/PasswordField';
 import ErrorBanner from '../banner/ErrorBanner';
@@ -26,6 +23,7 @@ import {
   getErrorMessage,
   isAuth0Error,
 } from './errors';
+import { BodyText, Subtitle } from '../typography';
 
 interface LoginFormProps {
   signupFromLogin?: string; // link to loginFromSignup page
@@ -43,68 +41,6 @@ export interface Values {
   privacy?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  description: {
-    marginBottom: theme.spacing(5),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    '& a': {
-      cursor: 'pointer',
-    },
-  },
-  checkboxLabel: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-    },
-  },
-  forgotPassword: {
-    fontSize: theme.spacing(3.5),
-    fontWeight: 700,
-    cursor: 'pointer',
-    color: theme.palette.secondary.main,
-    float: 'right',
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(3.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(1.25),
-    },
-  },
-  button: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(8),
-      marginRight: theme.spacing(10),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(6.25),
-      marginRight: theme.spacing(2.5),
-    },
-  },
-  recaptcha: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(7.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(4.75),
-    },
-  },
-  checkboxes: {
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(11),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: theme.spacing(6),
-    },
-  },
-}));
-
 const LoginForm: React.FC<LoginFormProps> = ({
   signupFromLogin,
   loginFromSignup,
@@ -112,7 +48,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
   termsLink,
   submit,
 }) => {
-  const classes = useStyles();
   const label: string = loginFromSignup ? 'Sign up' : 'Log in';
 
   return (
@@ -182,17 +117,19 @@ const LoginForm: React.FC<LoginFormProps> = ({
           <div>
             <Form>
               <OnBoardingCard>
-                {loginFromSignup ? (
-                  <Description className={classes.description}>
-                    If you've already signed up,{' '}
-                    <Link onClick={loginFromSignup}>log in here</Link>.
-                  </Description>
-                ) : (
-                  <Description className={classes.description}>
-                    Don't have an account?{' '}
-                    <Link href={signupFromLogin}>Sign up</Link>.
-                  </Description>
-                )}
+                <BodyText size="lg" mb={5}>
+                  {loginFromSignup ? (
+                    <>
+                      If you've already signed up,{' '}
+                      <Link onClick={loginFromSignup}>log in here</Link>.
+                    </>
+                  ) : (
+                    <>
+                      Don't have an account?{' '}
+                      <Link href={signupFromLogin}>Sign up</Link>.
+                    </>
+                  )}
+                </BodyText>
                 <Field
                   component={TextField}
                   type="email"
@@ -206,12 +143,20 @@ const LoginForm: React.FC<LoginFormProps> = ({
                   loginFromSignup={loginFromSignup}
                 />
                 {!loginFromSignup && (
-                  <Description className={classes.forgotPassword}>
+                  <Subtitle
+                    size="sm"
+                    sx={{
+                      color: 'secondary.main',
+                      cursor: 'pointer',
+                      float: 'right',
+                      pt: [1.25, 3.75],
+                    }}
+                  >
                     Forgot password
-                  </Description>
+                  </Subtitle>
                 )}
               </OnBoardingCard>
-              <div className={classes.checkboxes}>
+              <Box sx={{ pl: [6, 11] }}>
                 {loginFromSignup && (
                   <>
                     <Field
@@ -219,10 +164,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
                       type="checkbox"
                       name="updates"
                       label={
-                        <Description className={classes.checkboxLabel}>
+                        <BodyText size="sm">
                           Please sign me up for the Regen news and updates
                           (unsubscribe anytime)
-                        </Description>
+                        </BodyText>
                       }
                     />
                     <Field
@@ -230,21 +175,21 @@ const LoginForm: React.FC<LoginFormProps> = ({
                       type="checkbox"
                       name="privacy"
                       label={
-                        <Description className={classes.checkboxLabel}>
+                        <BodyText size="sm">
                           I agree to the Regen Network{' '}
                           <Link href={privacyLink}>Privacy Policy</Link> and{' '}
                           <Link href={termsLink}>Terms of Service</Link>
-                        </Description>
+                        </BodyText>
                       }
                     />
                   </>
                 )}
-              </div>
+              </Box>
               <Grid container justifyContent="flex-end">
                 <ContainedButton
                   onClick={submitForm}
-                  className={classes.button}
                   disabled={(submitCount > 0 && !isValid) || isSubmitting}
+                  sx={{ mt: [6.25, 8], mr: [2.5, 10] }}
                 >
                   {label}
                 </ContainedButton>

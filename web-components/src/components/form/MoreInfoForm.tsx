@@ -32,14 +32,6 @@ interface Values {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(4.75),
-    },
-  },
   form: {
     paddingTop: theme.spacing(7.5),
   },
@@ -71,12 +63,9 @@ export default function MoreInfoForm({
   const classes = useStyles();
   return (
     <div>
-      <Title align="center" variant="h4" className={classes.title}>
+      <Title align="center" variant="h4" sx={{ mb: [4.75, 5] }}>
         Yes, I’m interested in buying credits for myself or my organization!
       </Title>
-      {/* <Description align="center">
-        Fill out the form below, and someone from our team will get back to you soon.
-      </Description> */}
       <Formik
         initialValues={{
           budget: '',

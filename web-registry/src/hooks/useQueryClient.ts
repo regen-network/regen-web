@@ -5,57 +5,117 @@ import { QueryClientImpl as EcocreditQueryClient } from '@regen-network/api/lib/
 import { QueryClientImpl as BasketQueryClient } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import { useLedger } from '../ledger';
+import { queryDenomMetadata, queryBalance } from '../lib/bank';
+import { queryBasket, queryBasketBalances, queryBaskets } from '../lib/basket';
 
-// TODO: map clients and ledger queries here, hidding this details from business hooks
-// TODO: Map the clients and queries here, so that the implementation details
-// of the queries are transparent to business hooks. Instead, the hook would be called
-// like this:
-// ie. useQueryClient('basket', { basketDenom })
-// ie. useQueryClient('denomMetadata', { denom: basketDenom })
+//
 
 type QueryClient = BankQueryClient | EcocreditQueryClient | BasketQueryClient;
 
-type LedgerModule = 'bank' | 'ecocredit' | 'basket';
+/**
+ * Bank query hook
+ *
+ * ie. useQueryClient<···>('denomMetadata', { denom: basketDenom })
+ */
+
+type BankQuery = 'allBalances' | 'balance' | 'denomMetadata' | 'denomsMetadata';
+
+export function useBankQuery<T>(
+  queryName: BankQuery,
+  params?: Params,
+): QueryOutput<T> {
+  const { data, loading, error } = useQueryClient<T>({
+    module: 'bank',
+    query: getQuery(queryName),
+    params,
+  });
+
+  function getQuery(queryName: BankQuery): Query {
+    switch (queryName) {
+      case 'balance':
+        return queryBalance;
+
+      case 'denomMetadata':
+        return queryDenomMetadata;
+
+      default:
+        throw new Error('The specified bank query does not exist');
+    }
+  }
+
+  return { data, loading, error };
+}
+
+/**
+ * Basket query hook
+ *
+ * ie. useQueryClient('', { denom: basketDenom })
+ */
+
+type BasketQuery = 'basket' | 'baskets' | 'basketBalances' | 'basketBalance';
+
+export function useBasketQuery<T>(
+  queryName: BasketQuery,
+  params: Params,
+): QueryOutput<T> {
+  const { data, loading, error } = useQueryClient<T>({
+    module: 'basket',
+    query: getQuery(queryName),
+    params,
+  });
+
+  function getQuery(queryName: BasketQuery): Query {
+    switch (queryName) {
+      case 'basket':
+        return queryBasket;
+
+      case 'baskets':
+        return queryBaskets;
+
+      case 'basketBalances':
+        return queryBasketBalances;
+
+      default:
+        throw new Error('The specified basket query does not exist');
+    }
+  }
+
+  return { data, loading, error };
+}
+
+/**
+ *
+ * Base ledger query client hook.
+ *
+ * @param InputQueryClient
+ * @returns OutputQueryClient
+ */
+
+type Module = 'bank' | 'ecocredit' | 'basket';
 
 // TODO: generic type
-type QueryParams = any;
-
-// type LedgerQuery<P> = ({
-//   client,
-//   params,
-// }: {
-//   client: QueryClient;
-//   params: QueryParams<P>;
-// }) => Promise<any>;
-
-// type LedgerQuery = ({
-//   client,
-//   params,
-// }: {
-//   client: QueryClient;
-//   params: QueryParams;
-// }) => Promise<any>;
+type Params = any;
 
 // TODO: generic types
-type LedgerQuery = ({ client, params }: any) => Promise<any>;
+type Query = ({ client, params }: any) => Promise<any>;
 
-type InputQueryLedger = {
-  module: LedgerModule;
-  query: LedgerQuery;
-  params?: QueryParams;
+type QueryInput = {
+  module: Module;
+  query: Query;
+  params?: Params;
 };
 
-type OutputQueryLedger<T> = {
+type QueryOutput<T> = {
   data: T | undefined;
   loading: boolean;
   error: Error | undefined;
 };
 
-export default function useQueryClient<T>({
+function useQueryClient<T>({
   module,
   query,
   params,
-}: InputQueryLedger): OutputQueryLedger<T> {
+}: QueryInput): QueryOutput<T> {
   const { api } = useLedger();
   const [client, setClient] = useState<QueryClient>();
 

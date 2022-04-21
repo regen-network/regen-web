@@ -9,16 +9,11 @@ import {
 import { QueryClassInfoResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
-import { queryDenomMetadata } from '../lib/bank';
-import { queryBasket, queryBasketBalances } from '../lib/basket';
-
-// hooks
-import useQueryClient from './useQueryClient';
+import { useBankQuery, useBasketQuery } from './useQueryClient';
 import useQueryListClassInfo from './useQueryListClassInfo';
 import useQueryListBatchInfo from './useQueryListBatchInfo';
 import { useProjectByBatchDenomLazyQuery } from '../generated/graphql';
 
-// ui types
 import { BasketOverviewProps, CreditBatch } from '../components/organisms';
 
 // import { getMetadata } from '../lib/metadata-graph';
@@ -47,30 +42,25 @@ type BatchWithProject = {
 };
 
 const useBasketDetails = (basketDenom?: string): BasketDetails => {
-  // local state (overview and credit batchs)
-  // custom basket overview data for <BasketOverview />
+  // Data to prepare for the UI
   const [overview, setOverview] = useState<BasketOverviewProps>();
-  // custom ecocredit batches data for <BasketEcocreditsTable />
   const [creditBatches, setCreditBatches] = useState<CreditBatch[]>([]);
 
-  // fetching necessary data
-  const { data: basket } = useQueryClient<QueryBasketResponse>({
-    module: 'basket',
-    query: queryBasket,
-    params: { basketDenom },
+  // Data to fetch and process
+
+  const { data: basket } = useBasketQuery<QueryBasketResponse>('basket', {
+    basketDenom,
   });
 
-  const { data: basketBalances } = useQueryClient<QueryBasketBalancesResponse>({
-    module: 'basket',
-    query: queryBasketBalances,
-    params: { basketDenom },
-  });
+  const { data: basketBalances } = useBasketQuery<QueryBasketBalancesResponse>(
+    'basketBalances',
+    { basketDenom },
+  );
 
-  const { data: basketMetadata } = useQueryClient<QueryDenomMetadataResponse>({
-    module: 'bank',
-    query: queryDenomMetadata,
-    params: { denom: basketDenom },
-  });
+  const { data: basketMetadata } = useBankQuery<QueryDenomMetadataResponse>(
+    'denomMetadata',
+    { denom: basketDenom },
+  );
 
   const basketClassesInfo = useQueryListClassInfo(basket?.classes);
   const [basketClasses, setBasketClasses] = useState<ClassInfo[]>();

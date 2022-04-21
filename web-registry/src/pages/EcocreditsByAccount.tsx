@@ -1,8 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { truncate } from 'web-components/lib/utils/truncate';
+import { Body, ButtonText } from 'web-components/lib/components/typography';
 
 import {
   PortfolioTemplate,
@@ -23,24 +24,16 @@ const WrappedEcocreditsByAccount: React.FC<WithBasketsProps> = ({
   return (
     <PortfolioTemplate credits={credits} basketTokens={basketTokens}>
       <Box sx={{ mt: { xs: 1.25, sm: 3 } }}>
-        <Typography
-          sx={{
-            fontSize: 14,
-            display: 'inline',
-            color: 'black',
-            fontFamily: 'Muli',
-            fontWeight: 700,
-            textTransform: 'uppercase',
-          }}
-        >
+        <ButtonText size="sm" mobileSize="sm" sx={{ display: 'inline' }}>
           Account:
-        </Typography>
-        <Typography
+        </ButtonText>
+        <Body
+          size="lg"
           sx={{
-            ml: 2,
             display: 'inline',
+            mx: 2,
             '& a': {
-              fontSize: 18,
+              fontWeight: 'normal',
               color: 'black',
               textDecoration: 'none',
             },
@@ -50,7 +43,7 @@ const WrappedEcocreditsByAccount: React.FC<WithBasketsProps> = ({
             href={getAccountUrl(accountAddress || '')}
             label={truncate(accountAddress || '')}
           />
-        </Typography>
+        </Body>
       </Box>
     </PortfolioTemplate>
   );

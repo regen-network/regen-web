@@ -370,11 +370,10 @@ function ProjectDetails(): JSX.Element {
         </div>
       )}
 
-      {/* {chainId && project.creditPrice ? ( */}
-      {true ? (
+      {chainId && project.creditPrice ? (
         <BuyFooter
           onClick={() => setIsBuyCreditsModalOpen(true)}
-          creditPrice={{ currency: 'USD', unitPrice: 1234 }}
+          creditPrice={project.creditPrice}
         />
       ) : (
         <FixedFooter justifyContent="flex-end">

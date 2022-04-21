@@ -2,36 +2,18 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 
 import BackgroundSection from '../../components/BackgroundSection';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
-import { MainnetWhatsNextSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
+import { Body, Title } from 'web-components/lib/components/typography';
+
+import type { Theme } from 'web-components/lib/theme/muiTheme';
+import type { MainnetWhatsNextSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(10),
-  },
-  title: {
-    color: 'white',
-    textAlign: 'center',
-    fontWeight: 900,
-    margin: theme.spacing(7, 0, 4),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(10),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(8),
-    },
-  },
-  description: {
-    color: 'white',
-    textAlign: 'center',
-    maxWidth: theme.spacing(150),
-    fontSize: theme.spacing(5),
-    margin: theme.spacing(5, 0),
   },
   card: {
     minHeight: '95%',
@@ -80,12 +62,18 @@ const WhatsNextSection: React.FC = () => {
       imageData={background?.childImageSharp?.fluid as any}
     >
       <Grid container direction="column" alignItems="center">
-        <Typography variant="h1" className={styles.title}>
+        <Title
+          variant="h2"
+          mobileVariant="h3"
+          color="primary"
+          align="center"
+          sx={{ mt: 7, mb: 4 }}
+        >
           {content?.title}
-        </Typography>
-        <Typography className={styles.description}>
+        </Title>
+        <Body size="xl" color="primary" align="center">
           <BlockContent content={content?._rawDescription} />
-        </Typography>
+        </Body>
         <div>
           <Grid container direction="row" justifyContent="center">
             {content?.infoItems?.map((item, i) => (

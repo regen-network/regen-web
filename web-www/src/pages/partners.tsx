@@ -1,12 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import Section from 'web-components/lib/components/section';
@@ -129,9 +128,9 @@ const PartnersPage: React.FC<PageProps> = ({ location }) => {
                 <Title align="center" variant="h4">
                   {data?.contactHeader}
                 </Title>
-                <Typography className={styles.contactText}>
+                <Body size="lg" pt={3.25}>
                   <BlockContent content={data?._rawContactBody} />
-                </Typography>
+                </Body>
               </GreenCard>
             </Grid>
           </Grid>

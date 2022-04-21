@@ -97,7 +97,7 @@ const Footer: React.FC<{
             >
               <IconLink color={theme.palette.primary.main} />
               <Box mt={4}>
-                <Body size="lg" color="primary.main">
+                <Body size="lg" color="primary">
                   A project of{' '}
                   <Link
                     href="https://www.regen.network"

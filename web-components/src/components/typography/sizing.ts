@@ -1,17 +1,15 @@
 import { Variant } from '@mui/material/styles/createTypography';
 
 export type TextSize =
-  /** 12px */
-  | 'xs'
-  /** 14px */
-  | 'sm'
-  /** 16px */
-  | 'md'
-  /** 18px */
-  | 'lg'
-  /** 22px */
-  | 'xl';
+  | 'xs' // 12px
+  | 'sm' // 14px
+  | 'md' // 16px
+  | 'lg' // 18px
+  | 'xl'; // 22px
 
+export type LabelSize = Exclude<TextSize, 'xl'>;
+
+// Maps `TextSize` to the MUI custom `text` variant with those values
 export function getSizeVariants(
   size: TextSize,
   mobileSize?: TextSize,

@@ -1,12 +1,12 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import Typography from '@mui/material/Typography';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { HomeFoldSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -30,32 +30,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: '15vh',
       height: '80vh',
     },
-  },
-  tag: {
-    '& p': {
-      lineHeight: '160%',
-      fontFamily: 'Lato',
-      [theme.breakpoints.up('sm')]: {
-        fontSize: '1.62rem',
-        width: '650px',
-      },
-      [theme.breakpoints.down('sm')]: {
-        width: '90%',
-        fontSize: '1.125em',
-      },
-      margin: '0 auto',
-    },
-    textShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
-    textAlign: 'center',
-    margin: '0 auto',
-  },
-  icon: {
-    position: 'absolute',
-    width: '80%',
-    height: '80%',
-    top: '50%',
-    left: '54%',
-    transform: 'translate(-50%, -50%)',
   },
   backgroundGradient: {
     height: '100%',
@@ -108,9 +82,20 @@ const HomeFoldSection: React.FC<{ className?: string }> = ({ className }) => {
       >
         {content?.title}
       </Title>
-      <div className={styles.tag}>
-        <Typography variant="body1">{content?.body}</Typography>
-      </div>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Body
+          color="primary"
+          size="xl"
+          sx={{
+            textAlign: 'center',
+            fontSize: ['1.125rem', '1.62rem'],
+            maxWidth: ['90%', 650],
+            textShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
+          }}
+        >
+          {content?.body}
+        </Body>
+      </Box>
     </BackgroundImage>
   );
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { useParams } from 'react-router-dom';
@@ -10,7 +9,7 @@ import { useMutation } from '@apollo/client';
 import { Formik, Form, Field } from 'formik';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 import Description from 'web-components/lib/components/description';
 import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
@@ -26,6 +25,7 @@ import LocationStateField from 'web-components/lib/components/inputs/LocationSta
 // TODO: refactor countries dependency
 import { countries } from 'web-components/lib/utils/countries';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
+import { SxProps } from '@mui/material';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 
@@ -43,20 +43,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(8.5),
     },
-  },
-  units: {
-    fontFamily: theme.typography.h1.fontFamily,
-    fontWeight: 800,
-    marginLeft: theme.spacing(4),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: '1.3125rem',
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: '1.125rem',
-    },
-  },
-  currency: {
-    marginLeft: theme.spacing(2),
   },
   unitsGrid: {
     [theme.breakpoints.up('sm')]: {
@@ -105,6 +91,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
   },
 }));
+
+const sxs = {
+  title: { mt: 13, mb: { xs: 4, sm: 3.75 } } as SxProps,
+};
 
 interface CreditsPurchaseFormProps {
   creditPrice: CreditPrice;
@@ -338,16 +328,16 @@ function CreditsPurchaseForm({
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography>
-                      <span className={classes.units}>= ${formattedTotal}</span>
-                      <span className={classes.currency}>
+                    <Title variant="h5" ml={4} fontWeight={800}>
+                      = ${formattedTotal}
+                      <Body as="span" ml={2}>
                         {creditPrice.currency}
-                      </span>
-                    </Typography>
+                      </Body>
+                    </Title>
                   </Grid>
                 </Grid>
 
-                <Title variant="h5" sx={{ mb: { xs: 4, sm: 3.75 }, mt: 13 }}>
+                <Title variant="h5" sx={sxs.title}>
                   Credit ownership
                 </Title>
                 <div className={classes.textFields}>
@@ -381,7 +371,7 @@ function CreditsPurchaseForm({
                   </div>
                 )}
 
-                <Title variant="h5" sx={{ mb: { xs: 4, sm: 3.75 }, mt: 13 }}>
+                <Title variant="h5" sx={sxs.title}>
                   Location of purchase
                 </Title>
                 <Description>

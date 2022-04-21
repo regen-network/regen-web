@@ -17,7 +17,7 @@ export const Title = styled(Typography, {
       fontSize: typography[mobileVariant || 'h3'].fontSize,
       lineHeight: typography[mobileVariant || 'h3'].lineHeight,
       [up('sm')]: {
-        fontSize: typography.h1.fontSize,
+        fontSize: typography.h1.fontSize, // 48px | 3rem
         lineHeight: typography.h1.lineHeight,
       },
     }),
@@ -25,7 +25,7 @@ export const Title = styled(Typography, {
       fontSize: typography[mobileVariant || 'h4'].fontSize,
       lineHeight: typography[mobileVariant || 'h4'].lineHeight,
       [up('sm')]: {
-        fontSize: typography.h2.fontSize,
+        fontSize: typography.h2.fontSize, // 38px | 2.375rem
         lineHeight: typography.h2.lineHeight,
       },
     }),
@@ -33,7 +33,7 @@ export const Title = styled(Typography, {
       fontSize: typography[mobileVariant || 'h4'].fontSize,
       lineHeight: typography[mobileVariant || 'h4'].lineHeight,
       [up('sm')]: {
-        fontSize: typography.h3.fontSize,
+        fontSize: typography.h3.fontSize, // 32px | 2rem
         lineHeight: typography.h3.lineHeight,
       },
     }),
@@ -41,7 +41,7 @@ export const Title = styled(Typography, {
       fontSize: typography[mobileVariant || 'h5'].fontSize,
       lineHeight: typography[mobileVariant || 'h5'].lineHeight,
       [up('sm')]: {
-        fontSize: typography.h4.fontSize,
+        fontSize: typography.h4.fontSize, // 24px | 1.5rem
         lineHeight: typography.h4.lineHeight,
       },
     }),
@@ -49,7 +49,7 @@ export const Title = styled(Typography, {
       fontSize: typography[mobileVariant || 'h6'].fontSize,
       lineHeight: typography[mobileVariant || 'h6'].lineHeight,
       [up('sm')]: {
-        fontSize: typography.h5.fontSize,
+        fontSize: typography.h5.fontSize, // 21px | 1.313rem
         lineHeight: typography.h5.lineHeight,
       },
     }),
@@ -57,7 +57,7 @@ export const Title = styled(Typography, {
       fontSize: typography[mobileVariant || 'h6'].fontSize,
       lineHeight: typography[mobileVariant || 'h6'].lineHeight,
       [up('sm')]: {
-        fontSize: typography.h6.fontSize,
+        fontSize: typography.h6.fontSize, // 18px | 1.125rem
         lineHeight: typography.h6.lineHeight,
       },
     }),

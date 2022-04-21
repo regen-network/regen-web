@@ -1,11 +1,12 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Box, SxProps, Typography } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
 import {
   Body,
   ButtonText,
+  Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -116,12 +117,10 @@ export const TokenSection = (): JSX.Element => {
             <Countdown date={launchDate} />
           </Box> */}
         </Title>
-        <Typography
-          sx={{ fontSize: [16, 18], fontWeight: 700, color: 'info.main' }}
-        >
+        <Subtitle size="lg" color="info.main">
           {/* TODO uncomment if we want to formatted date based on CMS launch date */}
           {data?.cardSubtitle} {/* {formatDate(launchDate)} */}
-        </Typography>
+        </Subtitle>
         <Body size="xl">
           <BlockContent content={data?._rawCardBody} />
         </Body>

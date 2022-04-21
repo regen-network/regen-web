@@ -4,7 +4,7 @@ import BackgroundImage from 'gatsby-background-image';
 import { makeStyles } from '@mui/styles';
 import { useMediaQuery, useTheme, Typography } from '@mui/material';
 
-import { Title } from 'web-components/lib/components/typography';
+import { Body, Title } from 'web-components/lib/components/typography';
 
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 import type { Variant } from '@mui/material/styles/createTypography';
@@ -64,11 +64,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     opacity: 0.8,
   }),
   text: {
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      '& h1': {
-        lineHeight: '130%',
-      },
-    },
     [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(10),
       paddingRight: theme.spacing(10),
@@ -79,7 +74,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
       '& h1': {
-        lineHeight: '140%',
         maxWidth: theme.spacing(220),
       },
       '& div': {
@@ -122,37 +116,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     zIndex: 1,
     position: 'relative',
   },
-  subtitle: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(3),
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(3.75),
-      fontSize: theme.spacing(5.5),
-    },
-    lineHeight: '160%',
-    color: theme.palette.primary.main,
-  },
-  title: props => ({
-    [theme.breakpoints.down('sm')]: {
-      lineHeight: '130%',
-    },
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: '140%',
-    },
-    // BEGIN HACK setting jss styles (duplicated from emotion style)
-    // so it's initially rendered on gatsby build
-    // Remove once migrations from mui jss to emotion and to latest gatsby done
-    color: theme.palette.primary.main,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: props.titleVariant === 'h1' ? '3rem' : '2.375rem',
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: props.titleVariant === 'h1' ? '2rem' : '1.5rem',
-    },
-    // END HACK
-  }),
 }));
 
 const BackgroundSection = ({
@@ -180,20 +143,16 @@ const BackgroundSection = ({
   // Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
   if (header) {
     headerJSX = (
-      <Title
-        color="primary"
-        variant={titleVariant}
-        className={clsx(titleClassName, classes.title)}
-      >
+      <Title color="primary" variant={titleVariant} className={titleClassName}>
         {header}
       </Title>
     );
   }
   if (body) {
     bodyJSX = (
-      <Typography component="div" className={classes.subtitle}>
+      <Body as="div" size="xl" sx={{ color: 'primary.main', pt: [3, 3.75] }}>
         {body}
-      </Typography>
+      </Body>
     );
   }
   if (body || header) {

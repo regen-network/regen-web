@@ -1,7 +1,10 @@
 import {
-  QueryClientImpl as BankQueryClient,
+  QueryClientImpl,
+  DeepPartial,
+  QueryDenomMetadataRequest,
   QueryDenomMetadataResponse,
   QueryBalanceResponse,
+  QueryBalanceRequest,
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 /**
@@ -15,42 +18,46 @@ import {
  *
  */
 
+export type BankQueryClient = QueryClientImpl;
+
+export type BankQueryParams = any; // TODO: generic type
+
+export type BankQueryDTO = QueryDenomMetadataResponse | QueryBalanceResponse;
+
+export type BankQueryName =
+  | 'allBalances'
+  | 'balance'
+  | 'denomMetadata'
+  | 'denomsMetadata';
+
+//
+
+interface BankQueryClientProps {
+  client: BankQueryClient;
+}
+
 // Balance
 
-export type QueryBalanceProps = {
-  client: BankQueryClient;
-  address: string;
-  denom: string;
-};
+interface QueryBalanceProps extends BankQueryClientProps {
+  request: DeepPartial<QueryBalanceRequest>;
+}
 
-export const queryBalance = async ({
+export const queryBalance = ({
   client,
-  address,
-  denom,
-}: QueryBalanceProps): Promise<QueryBalanceResponse | Error> => {
-  try {
-    const balance = await client.Balance({ address, denom });
-    return balance;
-  } catch (err) {
-    return err as Error;
-  }
+  request,
+}: QueryBalanceProps): Promise<QueryBalanceResponse> => {
+  return client.Balance({ address: request.address, denom: request.denom });
 };
 
 // Denom Metadata
 
-export type QueryDenomMetadataProps = {
-  client: BankQueryClient;
-  denom: string;
-};
+interface QueryDenomMetadataProps extends BankQueryClientProps {
+  request: DeepPartial<QueryDenomMetadataRequest>;
+}
 
-export const queryDenomMetadata = async ({
+export const queryDenomMetadata = ({
   client,
-  denom,
-}: QueryDenomMetadataProps): Promise<QueryDenomMetadataResponse | Error> => {
-  try {
-    const metadata = await client.DenomMetadata({ denom });
-    return metadata;
-  } catch (err) {
-    return err as Error;
-  }
+  request,
+}: QueryDenomMetadataProps): Promise<QueryDenomMetadataResponse> => {
+  return client.DenomMetadata({ denom: request.denom });
 };

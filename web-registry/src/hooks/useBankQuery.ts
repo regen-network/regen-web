@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 
+// TODO: move query client creation to the ledger context ?
 import { QueryClientImpl } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 import { useLedger } from '../ledger';
 import {
   // types
   BankQueryClient,
-  BankQueryParams,
+  BankQueryProps,
   BankQueryDTO,
-  BankQueryName,
   // functions
   queryBalance,
   queryDenomMetadata,
@@ -22,10 +22,10 @@ type QueryOutput = {
   error: Error | undefined;
 };
 
-export default function useBankQuery(
-  queryName: BankQueryName,
-  params: BankQueryParams,
-): QueryOutput {
+export default function useBankQuery({
+  queryName,
+  params,
+}: BankQueryProps): QueryOutput {
   const { api } = useLedger();
   const [client, setClient] = useState<BankQueryClient>();
 
@@ -72,7 +72,7 @@ export default function useBankQuery(
         .catch(setError)
         .finally(() => setLoading(false));
     }
-  }, [client, params, loading, data, error, queryName, balance, denomMetadata]);
+  }, [client, queryName, params, data, loading, error, balance, denomMetadata]);
 
   return { data, loading, error };
 }

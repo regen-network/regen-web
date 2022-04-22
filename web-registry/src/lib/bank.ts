@@ -1,10 +1,10 @@
 import {
   QueryClientImpl,
   DeepPartial,
+  QueryBalanceRequest,
+  QueryBalanceResponse,
   QueryDenomMetadataRequest,
   QueryDenomMetadataResponse,
-  QueryBalanceResponse,
-  QueryBalanceRequest,
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 /**
@@ -18,23 +18,43 @@ import {
  *
  */
 
+/**
+ *
+ * QUERY TYPES
+ *
+ */
+
+// typing the query client
+
 export type BankQueryClient = QueryClientImpl;
-
-export type BankQueryParams = any; // TODO: generic type
-
-export type BankQueryDTO = QueryDenomMetadataResponse | QueryBalanceResponse;
-
-export type BankQueryName =
-  | 'allBalances'
-  | 'balance'
-  | 'denomMetadata'
-  | 'denomsMetadata';
-
-//
 
 interface BankQueryClientProps {
   client: BankQueryClient;
 }
+
+// typing and linking query names and corresponding input params
+
+type BalanceParams = {
+  queryName: 'balance';
+  params: DeepPartial<QueryBalanceRequest>;
+};
+
+type DenomMetadataParams = {
+  queryName: 'denomMetadata';
+  params: DeepPartial<QueryDenomMetadataRequest>;
+};
+
+export type BankQueryProps = BalanceParams | DenomMetadataParams;
+
+// typing the data received (Data Transfer Object), the output of the query
+
+export type BankQueryDTO = QueryDenomMetadataResponse | QueryBalanceResponse;
+
+/**
+ *
+ * QUERY FUNCTIONS
+ *
+ */
 
 // Balance
 

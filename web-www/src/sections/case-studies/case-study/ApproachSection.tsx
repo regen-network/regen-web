@@ -6,11 +6,7 @@ import ReactHtmlParser from 'react-html-parser';
 import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import {
-  Body,
-  ButtonText,
-  Title,
-} from 'web-components/lib/components/typography';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import { SanityCaseStudyApproachSection } from '../../../generated/graphql';
 import {
@@ -104,9 +100,7 @@ export const TitleWithParagraphs: React.FC<TitleWithParagraphsProps> = ({
       <div>
         {paragraphs.map((p: Paragraph, i: number) => (
           <Box key={i} sx={{ mb: [7, 10] }}>
-            <ButtonText sx={{ fontSize: [16, 18], mb: [2, 4] }}>
-              {p.title}
-            </ButtonText>
+            <Label sx={{ fontSize: [16, 18], mb: [2, 4] }}>{p.title}</Label>
             <Body
               size="lg"
               sx={{

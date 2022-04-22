@@ -3,8 +3,7 @@ import { Theme, Box } from '@mui/material';
 import { SxProps } from '@mui/system';
 import { makeStyles } from '@mui/styles';
 
-import Description from '../description';
-import { ButtonText, Subtitle, Title } from '../typography';
+import { Label, Subtitle, Title } from '../typography';
 import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
 import Modal, { RegenModalProps } from '../modal';
@@ -59,9 +58,9 @@ const CardItem: React.FC<CardItemProps> = ({
 }) => {
   return (
     <Box sx={{ pt: 5 }}>
-      <ButtonText size="sm" sx={{ pb: [3, 2.25] }}>
+      <Label size="sm" sx={{ pb: [3, 2.25] }}>
         {label}
-      </ButtonText>
+      </Label>
 
       <Subtitle size="lg" mobileSize="sm">
         {value.url ? (

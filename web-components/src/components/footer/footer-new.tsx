@@ -3,7 +3,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { useTheme } from '@mui/styles';
 import { Grid, List, ListItem, Link, Box } from '@mui/material';
 
-import { Body, ButtonText } from '../typography';
+import { Body, Label } from '../typography';
 import Section from '../section';
 import { HeaderLogoLink } from '../header/HeaderLogoLink';
 
@@ -31,9 +31,9 @@ const FooterItem: React.FC<FooterItemProps> = ({
 }) => {
   return (
     <>
-      <ButtonText size="lg" sx={{ mb: { xs: 4.5, sm: 3.75 } }}>
+      <Label size="lg" sx={{ mb: { xs: 4.5, sm: 3.75 } }}>
         {ReactHtmlParser(title)}
-      </ButtonText>
+      </Label>
       <List sx={{ p: 0 }}>
         {items.map((item, index) => (
           <ListItem sx={{ py: 0.75, px: 0 }} key={index}>

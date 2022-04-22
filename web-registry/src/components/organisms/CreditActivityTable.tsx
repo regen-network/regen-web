@@ -21,7 +21,7 @@ import {
   stableSort,
   Order,
 } from 'web-components/lib/components/table/sort';
-import { ButtonText } from 'web-components/lib/components/typography';
+import { Label } from 'web-components/lib/components/typography';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
@@ -209,9 +209,9 @@ const CreditActivityTable: React.FC = () => {
                         </a>
                       </StyledTableCell>
                       <StyledTableCell>
-                        <ButtonText size="xs" color="info.dark">
+                        <Label size="xs" color="info.dark">
                           {tx.messages}
-                        </ButtonText>
+                        </Label>
                       </StyledTableCell>
                       <StyledTableCell>
                         {formatNumber(tx.height)}

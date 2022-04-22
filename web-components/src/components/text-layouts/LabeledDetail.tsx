@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, SxProps } from '@mui/material';
-import { ButtonText } from '../typography';
+import { Label } from '../typography';
 
 import type { LabelSize } from '../typography/sizing';
 import type { Theme } from '~/theme/muiTheme';
@@ -12,9 +12,9 @@ export const LabeledDetail: React.FC<{
   labelSize?: LabelSize;
 }> = ({ label, children, labelSize, sx }) => (
   <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, ...sx }}>
-    <ButtonText size={labelSize || 'md'} color="info.main">
+    <Label size={labelSize || 'md'} color="info.main">
       {label}
-    </ButtonText>
+    </Label>
     <div>{children}</div>
   </Box>
 );

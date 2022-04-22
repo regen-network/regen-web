@@ -8,11 +8,7 @@ import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import {
-  Body,
-  ButtonText,
-  Title,
-} from 'web-components/lib/components/typography';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import Card from 'web-components/lib/components/cards/Card';
 
 import { HomeClimateSectionQuery } from '../../generated/graphql';
@@ -183,7 +179,7 @@ const ClimateSection: React.FC = (): JSX.Element => {
         borderColor={theme.palette.grey['100']}
         borderRadius="10px"
       >
-        <ButtonText size="sm">{content?.problem?.title}</ButtonText>
+        <Label size="sm">{content?.problem?.title}</Label>
         <Body size="lg" sx={{ pt: 2 }}>
           {content?.problem?.body}
         </Body>
@@ -199,9 +195,9 @@ const ClimateSection: React.FC = (): JSX.Element => {
         borderColor={theme.palette.grey['100']}
         borderRadius="10px"
       >
-        <ButtonText size="sm" color="info.dark">
+        <Label size="sm" color="info.dark">
           {content?.solution?.title}
-        </ButtonText>
+        </Label>
         <Body size="lg" pt={2}>
           {content?.solution?.body}
         </Body>

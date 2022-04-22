@@ -6,7 +6,7 @@ import cx from 'clsx';
 import Card from '../cards/Card';
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
 import StepCircleBadge from '../icons/StepCircleBadge';
-import { Body, ButtonText, Title } from '../typography';
+import { Body, Label, Title } from '../typography';
 import Tag from '../tag';
 import StepFAQs from '../faq/StepFAQs';
 import { Image } from '../image';
@@ -186,13 +186,13 @@ function StepCard({
             gap: [2, 3],
           }}
         >
-          <ButtonText
+          <Label
             size="sm"
             mobileSize="sm"
             color={step.isActive ? 'secondary.main' : 'info.dark'}
           >
             step {step.stepNumber}
-          </ButtonText>
+          </Label>
           <Title
             variant="h4"
             mobileVariant="h6"

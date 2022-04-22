@@ -5,7 +5,6 @@ import cx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import Description from 'web-components/lib/components/description';
 import Modal from 'web-components/lib/components/modal';
 import Banner from 'web-components/lib/components/banner';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
@@ -30,6 +29,7 @@ import {
   CreditClassByUriQuery,
 } from '../generated/graphql';
 import { CreditClass } from '../generated/sanity-graphql';
+import { Body } from 'web-components/lib/components/typography';
 
 interface CreditDetailsProps {
   dbClass: CreditClassByUriQuery['creditClassByUri'];
@@ -74,15 +74,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(20),
       paddingBottom: theme.spacing(20),
-    },
-  },
-  sectionDescription: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(22),
-      maxWidth: theme.typography.pxToRem(752),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
     },
   },
   flex: {
@@ -201,9 +192,9 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
           titleWrap: styles.titleWrap,
         }}
       >
-        <Description className={styles.sectionDescription}>
+        <Body size="xl" sx={{ maxWidth: { sm: 752 } }}>
           <BlockContent content={content.descriptionRaw} />
-        </Description>
+        </Body>
       </Section>
       <div className="topo-background-alternate">
         {content.ecologicalImpact && (

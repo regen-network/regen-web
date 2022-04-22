@@ -5,7 +5,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Link from '@mui/material/Link';
 
-import { Body, ButtonText } from '../typography';
+import { Body, Label } from '../typography';
 import Section from '../section';
 import NewsletterForm from '../form/NewsletterForm';
 import { SocialLinks } from './SocialLinks';
@@ -63,9 +63,9 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
   const classes = useStyles({});
   return (
     <div className={classes.footerItem}>
-      <ButtonText size="lg" sx={sxs.text}>
+      <Label size="lg" sx={sxs.text}>
         {title}
-      </ButtonText>
+      </Label>
       <List sx={{ p: 0 }}>
         {items.map((item, index) => (
           <ListItem sx={{ py: 0.75, px: 0 }} key={index}>
@@ -118,9 +118,9 @@ export default function Footer({
             />
           </Grid>
           <Grid item xs={12} sm={4} className={classes.footerItem}>
-            <ButtonText size="lg" sx={sxs.text}>
+            <Label size="lg" sx={sxs.text}>
               subscribe
-            </ButtonText>
+            </Label>
             <Body size="lg">
               Stay up to date! Sign up for our monthly newsletter.
             </Body>

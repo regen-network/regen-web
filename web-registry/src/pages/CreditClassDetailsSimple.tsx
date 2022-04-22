@@ -3,11 +3,7 @@ import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import {
-  Body,
-  ButtonText,
-  Title,
-} from 'web-components/lib/components/typography';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import ReadMore from 'web-components/lib/components/read-more';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { truncate } from 'web-components/lib/utils/truncate';
@@ -151,9 +147,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 href={methodologyList?.['schema:url']?.['@value']}
                 target="_blank"
               >
-                <ButtonText sx={{ fontSize: [16], mr: 2 }}>{`+ ${
+                <Label sx={{ fontSize: [16], mr: 2 }}>{`+ ${
                   count - 1
-                } more`}</ButtonText>{' '}
+                } more`}</Label>{' '}
                 <SmallArrowIcon className={styles.arrow} />
               </Link>
             )}
@@ -185,9 +181,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
             }}
           >
             <Box sx={{ mb: 6 }}>
-              <ButtonText size="sm" color="info.dark" mb={4}>
+              <Label size="sm" color="info.dark" mb={4}>
                 credit class
-              </ButtonText>
+              </Label>
               <Title variant="h1">
                 {metadata?.['schema:name']} ({onChainClass.class_id})
               </Title>
@@ -278,9 +274,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
           >
             <Box className={styles.box}>
               <div className={styles.sidebarItemMargin}>
-                <ButtonText size="xs" color="primary.contrastText" mb={3}>
+                <Label size="xs" color="primary.contrastText" mb={3}>
                   admin
-                </ButtonText>
+                </Label>
                 <Link
                   className={styles.link}
                   href={
@@ -295,9 +291,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 </Link>
               </div>
               <div className={styles.sidebarItemMargin}>
-                <ButtonText size="xs" color="primary.contrastText" mb={3}>
+                <Label size="xs" color="primary.contrastText" mb={3}>
                   issuers
-                </ButtonText>
+                </Label>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   {onChainClass?.issuers?.map((issuer: string) => (
                     <Link

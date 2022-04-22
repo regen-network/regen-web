@@ -5,7 +5,7 @@ import SanityImage from 'gatsby-plugin-sanity-image';
 
 import {
   Body,
-  ButtonText,
+  Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
@@ -157,9 +157,9 @@ export const TokenSection = (): JSX.Element => {
         }}
       >
         <Title variant="h2">{data?.detailTitle}</Title>
-        <ButtonText color="info.main">
+        <Label color="info.main">
           {data?.detailSubtitle} {/* {formatDate(launchDate)} */}
-        </ButtonText>
+        </Label>
         <Body size="xl">
           <BlockContent content={data?._rawDetailBody} />
         </Body>

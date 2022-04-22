@@ -5,11 +5,7 @@ import cx from 'clsx';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import Modal from 'web-components/lib/components/modal';
-import {
-  Body,
-  ButtonText,
-  Title,
-} from 'web-components/lib/components/typography';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import {
@@ -67,7 +63,7 @@ function StepsSection({
       }}
     >
       <div className={styles.titleWrap}>
-        <ButtonText
+        <Label
           size="sm"
           sx={theme => ({
             color: 'secondary.main',
@@ -75,7 +71,7 @@ function StepsSection({
           })}
         >
           {preTitle}
-        </ButtonText>
+        </Label>
         {title && (
           <Title
             variant="h2"

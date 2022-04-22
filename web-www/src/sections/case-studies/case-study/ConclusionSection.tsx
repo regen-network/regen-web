@@ -7,8 +7,7 @@ import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../../components/BackgroundSection';
-import { Title } from 'web-components/lib/components/typography';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 import {
   CaseStudyConclusionSectionQuery,
@@ -18,20 +17,6 @@ import {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     borderTop: `1px solid ${theme.palette.grey[100]}`,
-  },
-  title: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(6),
-    },
-  },
-  description: {
-    lineHeight: '150%',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
-    },
   },
   withMargin: {
     [theme.breakpoints.down('sm')]: {
@@ -44,17 +29,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   image: {
     borderRadius: '10px',
     width: '100%',
-  },
-  imageTitle: {
-    lineHeight: '150%',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      paddingTop: theme.spacing(3),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-      paddingTop: theme.spacing(4),
-    },
   },
 }));
 
@@ -100,20 +74,20 @@ const ConclusionSection: React.FC<SanityCaseStudyConclusionSection> = ({
                 }
               />
               {img?.title && (
-                <Description className={styles.imageTitle}>
+                <Body size="sm" pt={[3, 4]}>
                   {img.title}
-                </Description>
+                </Body>
               )}
             </div>
           ))}
         </Grid>
         <Grid item xs={12} sm={7}>
-          <Title variant="h2" className={styles.title}>
+          <Title variant="h2" pt={[6, 0]}>
             {content?.conclusionSectionHeader}
           </Title>
-          <Description className={styles.description}>
+          <Body size="xl">
             <BlockContent content={_rawDescription} />
-          </Description>
+          </Body>
         </Grid>
       </Grid>
     </BackgroundSection>

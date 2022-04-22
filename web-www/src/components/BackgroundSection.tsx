@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import { makeStyles } from '@mui/styles';
-import { useMediaQuery, useTheme, Typography } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 
 import { Body, Title } from 'web-components/lib/components/typography';
 

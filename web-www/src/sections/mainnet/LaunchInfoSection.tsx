@@ -15,7 +15,7 @@ import {
 import { BlockContent } from 'web-components/src/components/block-content';
 import {
   Body,
-  ButtonText,
+  Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
@@ -148,9 +148,9 @@ const LaunchInfoSection: React.FC = () => {
               flexGrow: 1,
             }}
           >
-            <ButtonText size="xs" sx={{ mt: 11, mb: 4 }}>
+            <Label size="xs" sx={{ mt: 11, mb: 4 }}>
               100% complete
-            </ButtonText>
+            </Label>
             <StyledLinearProgress variant="determinate" value={100} />
           </Box>
         </Grid>

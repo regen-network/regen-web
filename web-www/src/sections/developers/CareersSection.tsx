@@ -2,28 +2,18 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import BackgroundSection from '../../components/BackgroundSection';
 import { BlockContent } from 'web-components/src/components/block-content';
 
-import { DevCareersSectionQuery } from '../../generated/graphql';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
+import type { DevCareersSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(17.75),
-    },
-  },
-  title: {
-    lineHeight: '145%',
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(9),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(6),
     },
   },
   caption: {
@@ -40,16 +30,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(5),
       lineHeight: '160%',
       paddingBottom: theme.spacing(3.75),
-    },
-  },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-      maxWidth: theme.spacing(188.5),
-      margin: '0 auto',
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
     },
   },
   buttonContainer: {
@@ -93,12 +73,16 @@ const CareersSection: React.FC = () => {
       imageData={background?.childImageSharp?.fluid}
     >
       <div className={styles.caption}>{data?.caption}</div>
-      <Title align="center" className={styles.title} variant="h2">
+      <Title align="center" variant="h2" sx={{ pb: [6, 9] }}>
         {data?.header}
       </Title>
-      <Description align="center" className={styles.description}>
+      <Body
+        size="lg"
+        align="center"
+        sx={{ m: { sm: '0 auto' }, maxWidth: { sm: 754 } }}
+      >
         <BlockContent content={data?._rawBody} />
-      </Description>
+      </Body>
       <div className={styles.buttonContainer}>
         <OutlinedButton
           target="_blank"

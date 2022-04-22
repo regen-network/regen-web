@@ -11,7 +11,7 @@ import FieldFormControl from './FieldFormControl';
 import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
-import { ButtonText } from '../typography';
+import { Label } from '../typography';
 import { getImageSrc } from '../image-crop/canvas-utils';
 
 export interface ImageDropProps extends FieldProps {
@@ -218,9 +218,9 @@ function ImageDrop({
               >
                 {isDesktop && !hideDragText && (
                   <>
-                    <ButtonText size="xs" mb={2}>
+                    <Label size="xs" mb={2}>
                       drag and drop
-                    </ButtonText>
+                    </Label>
                     <span className={styles.or}>or</span>
                   </>
                 )}

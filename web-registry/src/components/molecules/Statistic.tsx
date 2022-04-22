@@ -3,7 +3,7 @@ import { useTheme, Box } from '@mui/material';
 import { Dictionary } from 'lodash';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { ButtonText } from 'web-components/lib/components/typography';
+import { Label } from 'web-components/lib/components/typography';
 import { Title } from 'web-components/lib/components/typography';
 import { formatNumber } from 'web-components/lib/utils/format';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
@@ -27,13 +27,13 @@ const Statistic: React.FC<StatisticProps> = ({ label, count, arrow }) => {
 
   return (
     <Box sx={{ mt: 2 }}>
-      <ButtonText
+      <Label
         size="sm"
         mobileSize="sm"
         sx={{ color: 'info.main', whiteSpace: 'nowrap' }}
       >
         {label}
-      </ButtonText>
+      </Label>
       <Box sx={{ display: 'flex', alignItems: 'center', pt: 2 }}>
         {arrow && (
           <Box

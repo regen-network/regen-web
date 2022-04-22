@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import MediaCard from './MediaCard';
-import Description from '../description';
 import OutlinedButton from '../buttons/OutlinedButton';
 import PlayIcon from '../icons/PlayIcon';
 import { Body } from '../typography';
@@ -33,17 +32,6 @@ export interface ArticleCardProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  description: {
-    flex: '1 0 auto',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      padding: `${theme.spacing(2.5)} ${theme.spacing(4)}`,
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-      padding: `${theme.spacing(2)} ${theme.spacing(5)}`,
-    },
-  },
   play: {
     background: theme.palette.primary.main,
     borderRadius: '50%',

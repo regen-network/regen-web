@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
 
-import { ButtonText, Title } from 'web-components/lib/components/typography';
+import { Label, Title } from 'web-components/lib/components/typography';
 import { Image } from 'web-components/lib/components/image';
 import { DualImageSection } from '../../generated/sanity-graphql';
 
@@ -38,7 +38,7 @@ const LabeledImage = (props: {
           pt: [1.5, 2.5],
         }}
       >
-        <ButtonText
+        <Label
           sx={{
             color: 'primary.main',
             backgroundColor: 'secondary.main',
@@ -49,7 +49,7 @@ const LabeledImage = (props: {
           }}
         >
           {props.label}
-        </ButtonText>
+        </Label>
       </Box>
     </Box>
   </Image>
@@ -74,9 +74,9 @@ export const TwoImageSection: React.FC<{ content: DualImageSection }> = ({
           top: [theme.spacing(5), theme.spacing(11)],
         })}
       >
-        <ButtonText size="lg" mobileSize="sm" align="center" color="info.dark">
+        <Label size="lg" mobileSize="sm" align="center" color="info.dark">
           {content?.title}
-        </ButtonText>
+        </Label>
       </Box>
       <Grid item xs={12} sm={6}>
         <LabeledImage

@@ -5,8 +5,7 @@ import Grid from '@mui/material/Grid';
 import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import { SciencePartnershipsSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -23,15 +22,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(17),
     },
   },
-  title: {
-    lineHeight: '140%',
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(9),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(7.5),
-    },
-  },
   itemLeft: {
     [theme.breakpoints.up('sm')]: {
       paddingRight: theme.spacing(2.5),
@@ -40,15 +30,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   itemRight: {
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(2.5),
-    },
-  },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(2.25),
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
     },
   },
   image: {
@@ -93,7 +74,7 @@ const PartnershipsSection = (): JSX.Element => {
   return (
     <div className={styles.root}>
       <Section className={styles.section}>
-        <Title align="center" className={styles.title} variant="h1">
+        <Title align="center" variant="h1" sx={{ pb: [7.5, 9] }}>
           {content?.header}
         </Title>
         <Grid container className={styles.grid}>
@@ -110,9 +91,9 @@ const PartnershipsSection = (): JSX.Element => {
                 alt={p?.image?.imageAlt || ''}
                 fluid={p?.image?.image?.asset?.fluid as FluidObject}
               />
-              <Description className={styles.description}>
+              <Body size="lg" mobileSize="sm" pt={[0, 3.5]}>
                 <BlockContent content={p?._rawBody} />
-              </Description>
+              </Body>
             </Grid>
           ))}
         </Grid>

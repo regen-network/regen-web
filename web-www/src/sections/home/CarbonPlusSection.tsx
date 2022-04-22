@@ -6,12 +6,7 @@ import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import {
-  Body,
-  ButtonText,
-  Title,
-} from 'web-components/lib/components/typography';
-import Description from 'web-components/lib/components/description';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { HomeCarbonplusSectionQuery } from '../../generated/graphql';
 import { Box } from '@mui/material';
@@ -93,14 +88,14 @@ const CarbonplusSection: React.FC = (): JSX.Element => {
     <div className={styles.root}>
       <Grid className={styles.grid} container wrap="nowrap">
         <Grid item xs={12} className={styles.text}>
-          <ButtonText sx={{ pb: [5, 7] }}>
+          <Label sx={{ pb: [5, 7] }}>
             <Box component="span" sx={{ color: 'info.main' }}>
               {content?.smallHeaderFeatured}{' '}
             </Box>
             <Box component="span" sx={{ color: 'secondary.main' }}>
               {ReactHtmlParser(content?.smallHeaderCreditName || '')}
             </Box>
-          </ButtonText>
+          </Label>
           <Title variant="h3">{ReactHtmlParser(content?.header || '')}</Title>
           <Body size="lg" sx={{ color: 'info.dark', py: [4, 6] }}>
             {ReactHtmlParser(content?.description || '')}

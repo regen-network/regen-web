@@ -31,7 +31,7 @@ export function TitleDescription({
   const classes = useStyles();
   return (
     <div className={clsx(className, classes.root)}>
-      <Title align="center" variant="h2">
+      <Title align="center" variant="h2" pb={[3.25, 7.75]}>
         {title}
       </Title>
       <Body size="xl">

@@ -5,11 +5,7 @@ import { DeliverTxResponse } from '@cosmjs/stargate';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
-import {
-  Body,
-  ButtonText,
-  Title,
-} from 'web-components/lib/components/typography';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
 import CowIllustration from '../../assets/cow-illustration.png';
@@ -108,9 +104,9 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
             500
           </Title>
           <Title variant="h6">Regen - Ecocredits</Title>
-          <ButtonText size="xs" color="info.main">
+          <Label size="xs" color="info.main">
             C01-20190101-20201010-02
-          </ButtonText>
+          </Label>
           <Body size="sm" mobileSize="sm">
             Wilmot, Carbon<i>Plus</i> Grasslands Credits
           </Body>
@@ -121,9 +117,9 @@ const ConfirmationModal: React.FC<Props> = ({ open, onClose, data }) => {
               mt: 2,
             }}
           >
-            <ButtonText size="xs" mr={4}>
+            <Label size="xs" mr={4}>
               hash:{' '}
-            </ButtonText>
+            </Label>
             <Link
               color="secondary.main"
               fontWeight={700}

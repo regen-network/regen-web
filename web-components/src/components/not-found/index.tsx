@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Box from '@mui/material/Box';
 
 import ContainedButton from '../buttons/ContainedButton';
-import { Body, ButtonText, Title } from '../typography';
+import { Body, Label, Title } from '../typography';
 
 interface NotFoundProps {
   img: JSX.Element;
@@ -55,7 +55,7 @@ const NotFound = ({ img, home = '/' }: NotFoundProps): JSX.Element => {
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <div className={classes.container}>
         <div className={classes.image}>{img}</div>
-        <ButtonText
+        <Label
           color="secondary.dark"
           sx={{
             mb: [2, 8],
@@ -65,7 +65,7 @@ const NotFound = ({ img, home = '/' }: NotFoundProps): JSX.Element => {
           }}
         >
           404
-        </ButtonText>
+        </Label>
         <Title
           variant="h1"
           sx={{ textAlign: 'center', color: 'primary.contrastText', mb: 4.25 }}

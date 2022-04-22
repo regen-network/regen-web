@@ -6,7 +6,6 @@ import cx from 'clsx';
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
 import AmountField from '../inputs/AmountField';
-import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
   CreditRetireFields,

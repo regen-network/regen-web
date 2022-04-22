@@ -7,7 +7,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import {
   Body,
-  ButtonText,
+  Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
@@ -237,9 +237,9 @@ const GridItem = ({ label, children }: GridItemProps): JSX.Element => {
   return (
     <Grid item xs={12} sm={6}>
       <Box sx={{ mt: 4 }}>
-        <ButtonText size="xs" sx={{ color: 'primary.contrastText', mb: 2 }}>
+        <Label size="xs" sx={{ color: 'primary.contrastText', mb: 2 }}>
           {label}
-        </ButtonText>
+        </Label>
         {children}
       </Box>
     </Grid>

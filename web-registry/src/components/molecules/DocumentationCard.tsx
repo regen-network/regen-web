@@ -1,11 +1,7 @@
 import React from 'react';
 
 import { ImageLeftCard } from 'web-components/lib/components/cards/ImageLeftCard';
-import {
-  Body,
-  ButtonText,
-  Title,
-} from 'web-components/lib/components/typography';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { Box } from '@mui/material';
 
 const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
@@ -26,9 +22,9 @@ interface DocumentationCardProps {
 
 const Detail: React.FC<{ label: string }> = ({ children, label }) => (
   <Box sx={{ display: 'flex', alignItems: 'baseline', mr: 4 }}>
-    <ButtonText size="xs" mr={1}>
+    <Label size="xs" mr={1}>
       {label}
-    </ButtonText>
+    </Label>
     <Body size="sm">{children}</Body>
   </Box>
 );

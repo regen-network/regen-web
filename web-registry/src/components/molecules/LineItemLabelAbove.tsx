@@ -3,8 +3,7 @@ import Box from '@mui/material/Box';
 import { SxProps } from '@mui/system';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Description from 'web-components/lib/components/description';
-import { Label } from 'web-components/lib/components/typography';
+import { Body, Label } from 'web-components/lib/components/typography';
 
 export interface LineItemLabelAboveProps {
   sx?: SxProps<Theme>;
@@ -29,21 +28,16 @@ const LineItemLabelAbove: React.FC<LineItemLabelAboveProps> = ({
       }}
     >
       <Label
+        size="xs"
         sx={{
           fontSize: { xs: '12px' },
           color: 'primary.contrastText',
-          marginBottom: 3,
+          mb: 3,
         }}
       >
         {label}
       </Label>
-      {typeof data === 'string' ? (
-        <Description sx={{ fontSize: { xs: '18px', sm: '22px' } }}>
-          {data}
-        </Description>
-      ) : (
-        <>{data}</>
-      )}
+      {typeof data === 'string' ? <Body size="xl">{data}</Body> : <>{data}</>}
     </Box>
   );
 };

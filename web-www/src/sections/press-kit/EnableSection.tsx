@@ -5,8 +5,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { PresskitEnableSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
 
@@ -33,14 +32,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.up('xl')]: {
       paddingRight: theme.spacing(5),
-    },
-  },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
     },
   },
   text: {
@@ -127,9 +118,9 @@ const EnableSection = (): JSX.Element => {
         </Grid>
         <Grid xs={12} item className={styles.text}>
           <Title variant="h2">{content?.title}</Title>
-          <Description className={styles.description}>
+          <Body size="lg">
             <BlockContent content={content?._rawBody} />
-          </Description>
+          </Body>
         </Grid>
       </Grid>
     </div>

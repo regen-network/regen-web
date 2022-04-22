@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import GreenCard from '../cards/GreenCard';
-import { ButtonText } from '../typography';
+import { Label } from '../typography';
 import Question, { QuestionItem } from './Question';
 
 interface CategoryProps {
@@ -32,9 +32,7 @@ const Category = ({
 
   return (
     <GreenCard className={classes.root}>
-      <ButtonText sx={{ color: 'secondary.dark', px: [5.25, 7.75] }}>
-        {name}
-      </ButtonText>
+      <Label sx={{ color: 'secondary.dark', px: [5.25, 7.75] }}>{name}</Label>
       {questions.map((q, i) => (
         <div key={i}>
           <Question

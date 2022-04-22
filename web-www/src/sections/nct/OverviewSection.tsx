@@ -4,11 +4,7 @@ import BackgroundImage from 'gatsby-background-image';
 import { Box, Link } from '@mui/material';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
-import {
-  Body,
-  ButtonText,
-  Title,
-} from 'web-components/lib/components/typography';
+import { Body, Title, Label } from 'web-components/lib/components/typography';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import Section from 'web-components/lib/components/section';
@@ -110,7 +106,7 @@ export const OverviewSection = (): JSX.Element => {
         >
           {data?.items?.map((item, i) => (
             <div key={i}>
-              <ButtonText>{item?.label || ''}</ButtonText>
+              <Label>{item?.label || ''}</Label>
               <OptionalLink link={item?.link?.buttonHref}>
                 <Body size="lg" pt={2}>
                   {item?.text}

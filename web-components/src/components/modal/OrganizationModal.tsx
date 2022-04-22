@@ -13,7 +13,6 @@ import LocationField from '../inputs/LocationField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import Tooltip from '../tooltip/InfoTooltip';
 import { Body, Title } from '../typography';
-import Description from '../description';
 import Modal from '.';
 import QuestionIcon from '../icons/QuestionIcon';
 

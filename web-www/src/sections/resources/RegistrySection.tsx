@@ -1,11 +1,10 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { ButtonText, Title } from 'web-components/lib/components/typography';
+import { Label, Title } from 'web-components/lib/components/typography';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import { DocumentationTable } from 'web-components/lib/components/table/DocumentationTable';
 import BackgroundSection from '../../components/BackgroundSection';
@@ -105,13 +104,13 @@ const RegistrySection = (): JSX.Element => {
       </Title>
       {content?.subsections?.map((sub, i) => (
         <React.Fragment key={i}>
-          <ButtonText sx={sxs.btn}>{sub?.title}</ButtonText>
+          <Label sx={sxs.btn}>{sub?.title}</Label>
           <ResourceCardsSlider
             items={sanityResourcesToCardProps(sub?.cards as SanityResource[])}
           />
         </React.Fragment>
       ))}
-      <ButtonText sx={sxs.btn}>{content?.documentTableTitle}</ButtonText>
+      <Label sx={sxs.btn}>{content?.documentTableTitle}</Label>
       <Box className={styles.table}>
         <DocumentationTable
           canClickRow

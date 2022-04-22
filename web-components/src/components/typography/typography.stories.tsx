@@ -3,7 +3,7 @@ import {
   Title,
   Subtitle,
   Body,
-  ButtonText,
+  Label,
 } from 'web-components/lib/components/typography';
 
 export default {
@@ -50,12 +50,12 @@ export const body = (): JSX.Element => (
 
 export const buttonText = (): JSX.Element => (
   <>
-    <ButtonText size="lg">ButtonText size LG</ButtonText>
-    <ButtonText>ButtonText size md (default)</ButtonText>
-    <ButtonText size="sm">ButtonText size sm </ButtonText>
-    <ButtonText size="xs">ButtonText size xs </ButtonText>
-    <ButtonText sx={{ color: 'secondary.main', fontWeight: 400 }}>
-      ButtonText with custom styles
-    </ButtonText>
+    <Label size="lg">Label size LG</Label>
+    <Label>Label size md (default)</Label>
+    <Label size="sm">Label size sm </Label>
+    <Label size="xs">Label size xs </Label>
+    <Label sx={{ color: 'secondary.main', fontWeight: 400 }}>
+      Label with custom styles
+    </Label>
   </>
 );

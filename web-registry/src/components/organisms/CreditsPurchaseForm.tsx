@@ -10,7 +10,6 @@ import { Formik, Form, Field } from 'formik';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { Body, Title } from 'web-components/lib/components/typography';
-import Description from 'web-components/lib/components/description';
 import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
@@ -310,10 +309,10 @@ function CreditsPurchaseForm({
                 <Title variant="h5" sx={{ mb: { xs: 4, sm: 3.75 } }}>
                   Number of credits
                 </Title>
-                <Description>
+                <Body>
                   (${formattedUnitPrice} {creditPrice.currency}/each), includes
                   10% service fee
-                </Description>
+                </Body>
                 <Grid
                   container
                   alignItems="center"
@@ -374,11 +373,11 @@ function CreditsPurchaseForm({
                 <Title variant="h5" sx={sxs.title}>
                   Location of purchase
                 </Title>
-                <Description>
+                <Body>
                   Please enter a location for the retirement of these credits.
                   This prevents double counting of credits in different
                   locations. Note, these credits will be retired upon purchase.
-                </Description>
+                </Body>
                 <Field
                   component={TextField}
                   className={classes.cityTextField}

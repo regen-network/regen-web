@@ -3,7 +3,6 @@ import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/
 import { RegenModalProps } from './index';
 import { FormModalTemplate } from './FormModalTemplate';
 import { BasketTakeForm, MsgTakeValues } from '../form/BasketTakeForm';
-import Description from '../description';
 
 export interface TakeModalProps extends RegenModalProps {
   basket: Basket;

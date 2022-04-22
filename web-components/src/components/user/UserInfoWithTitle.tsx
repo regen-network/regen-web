@@ -2,7 +2,7 @@ import React from 'react';
 
 import UserInfo, { User } from '../user/UserInfo';
 import type { TextSize } from '../typography/sizing';
-import { ButtonText } from '../typography';
+import { Label } from '../typography';
 
 interface Props {
   user: User;
@@ -21,9 +21,9 @@ export default function UserInfoWithTitle({
 }: Props): JSX.Element {
   return (
     <div>
-      <ButtonText size="xs" color="info.main" sx={{ mb: [4, 5.2] }}>
+      <Label size="xs" color="info.main" sx={{ mb: [4, 5.2] }}>
         {title}
-      </ButtonText>
+      </Label>
       <UserInfo user={user} size={size} border={border} icon={icon} />
     </div>
   );

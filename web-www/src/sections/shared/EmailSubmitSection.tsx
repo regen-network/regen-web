@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import NewsletterForm from 'web-components/lib/components/form/NewsletterForm';
-import { ButtonText, Title } from 'web-components/lib/components/typography';
+import { Label, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { EmailSubmitSectionQuery } from '../../generated/graphql';
 
@@ -93,7 +93,7 @@ const EmailSubmitSection: React.FC<Props> = ({ image, altContent }) => {
         >
           {altContent?.header || content?.title}
         </Title>
-        <ButtonText
+        <Label
           sx={{
             color: 'primary.main',
             textAlign: 'center',
@@ -106,7 +106,7 @@ const EmailSubmitSection: React.FC<Props> = ({ image, altContent }) => {
           ) : (
             <BlockContent content={content?._rawBody} />
           )}
-        </ButtonText>
+        </Label>
         <NewsletterForm
           apiUri={process.env.GATSBY_API_URI}
           submitLabel={altContent?.buttonText}

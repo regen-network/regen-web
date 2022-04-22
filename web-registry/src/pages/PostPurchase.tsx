@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
+import { Box, Grid } from '@mui/material';
 import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
@@ -8,8 +8,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
-import Description from 'web-components/lib/components/description';
-import { Title } from 'web-components/lib/components/typography';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 
 import sum from '../lib/sum';
@@ -59,98 +58,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     borderRadius: '10px',
   },
-  label: {
-    fontFamily: theme.typography.h1.fontFamily,
-    color: theme.palette.info.main,
-    fontWeight: 800,
-    letterSpacing: '1px',
-    textTransform: 'uppercase',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-    },
-  },
-  value: {
-    color: theme.palette.primary.contrastText,
-    lineHeight: '260%',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-  },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
-      paddingBottom: theme.spacing(8.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-      paddingBottom: theme.spacing(6),
-    },
-  },
-  center: {
-    textAlign: 'center',
-  },
-  grid: {
-    [theme.breakpoints.down('md')]: {
-      flexDirection: 'column-reverse',
-    },
-  },
-  share: {
-    textAlign: 'center',
-    paddingTop: theme.spacing(17.75),
-    paddingBottom: theme.spacing(20),
-  },
-  shareDescription: {
-    lineHeight: '150%',
-    paddingTop: theme.spacing(3),
-    paddingBottom: theme.spacing(5),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-  },
-  section: {
-    paddingBottom: theme.spacing(5),
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(11.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(7.5),
-    },
-  },
   card: {
     backgroundColor: theme.palette.primary.main,
-  },
-  iconContainer: {
-    backgroundColor: theme.palette.secondary.dark,
-    borderRadius: '50%',
-    display: 'block',
-    width: theme.spacing(12.5),
-    height: theme.spacing(12.5),
-    cursor: 'pointer',
-    '&:hover': {
-      backgroundColor: theme.palette.secondary.light,
-    },
-    '& svg': {
-      color: 'transparent',
-      width: '100%',
-      height: '100%',
-    },
-  },
-  small: {
-    padding: theme.spacing(2),
-  },
-  gridItem: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(2.5),
-    },
   },
 }));
 
@@ -161,14 +70,21 @@ function GridItem({
   label: string;
   value: any;
 }): JSX.Element {
-  const classes = useStyles();
   return (
-    <Grid container alignItems="center" className={classes.gridItem}>
-      <Grid className={classes.label} item xs={12} md={6}>
-        {label}
+    <Grid container alignItems="center" sx={{ pt: [2.5, 0] }}>
+      <Grid item xs={12} md={6}>
+        <Label size="sm" color="info.main">
+          {label}
+        </Label>
       </Grid>
       <Grid item xs={12} md={6}>
-        <Description className={classes.value}>{value}</Description>
+        <Body
+          size="lg"
+          color="primary.contrastText"
+          sx={{ lineHeight: '260%' }}
+        >
+          {value}
+        </Body>
       </Grid>
     </Grid>
   );
@@ -206,24 +122,27 @@ function PostPurchase(): JSX.Element {
 
   return (
     <>
-      <Section classes={{ root: classes.section }}>
-        <div className={classes.center}>
+      <Section sx={{ root: { pt: [7.5, 11.25], pb: 5 } }}>
+        <Box sx={{ textAlign: 'center' }}>
           <img src={CowIllustration} alt={CowIllustration} />
           <Title align="center" variant="h2" sx={{ py: { xs: 3.5, sm: 5 } }}>
             Thank you for your purchase!
           </Title>
           {projectData && projectData.projectByHandle && (
-            <Description className={classes.description}>
+            <Body size="xl" mobileSize="md" pb={[6, 8.75]}>
               {projectData.projectByHandle.metadata.thanksTagline}
-            </Description>
+            </Body>
           )}
-        </div>
+        </Box>
         {projectData &&
           projectData.projectByHandle &&
           walletData &&
           walletData.walletById && (
             <GreenCard className={classes.card}>
-              <Grid container className={classes.grid}>
+              <Grid
+                container
+                sx={{ flexDirection: { xs: 'column-reverse', md: 'row' } }}
+              >
                 <Grid item xs={12} md={6}>
                   <Title
                     variant="h3"
@@ -281,13 +200,13 @@ function PostPurchase(): JSX.Element {
             </GreenCard>
           )}
         {projectData && projectData.projectByHandle && (
-          <div className={classes.share}>
+          <Box sx={{ textAlign: 'center', pt: 17.75, pb: 20 }}>
             <Title variant="h4" align="center">
               Share this project
             </Title>
-            <Description className={classes.shareDescription}>
+            <Body size="lg" align="center" sx={{ pb: 5, pt: 3 }}>
               {projectData.projectByHandle.metadata.shareTagline}
-            </Description>
+            </Body>
             <ShareIcons
               url={url}
               telegramShare={
@@ -299,7 +218,7 @@ function PostPurchase(): JSX.Element {
                   .creditClassVersionsById.nodes[0].metadata.twitterShare
               }
             />
-          </div>
+          </Box>
         )}
       </Section>
     </>

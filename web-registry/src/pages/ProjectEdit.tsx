@@ -3,15 +3,15 @@ import { makeStyles, useTheme } from '@mui/styles';
 import { useMediaQuery } from '@mui/material';
 import { useNavigate, useParams, useLocation, Outlet } from 'react-router-dom';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Navigation from 'web-components/lib/components/faq/Navigation';
-import { Title } from 'web-components/lib/components/typography';
+import { Label, Title } from 'web-components/lib/components/typography';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import Banner from 'web-components/lib/components/banner';
-import { Label } from 'web-components/lib/components/typography';
 
 import { Link } from '../components/atoms';
 import { toTitleCase } from '../lib/titleCase';
+
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

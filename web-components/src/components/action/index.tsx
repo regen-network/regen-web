@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
-import Typography from '@mui/material/Typography';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import { truncate, Texts } from '../read-more/truncate';
-import { Body, ButtonText, Subtitle } from '../typography';
+import { Body, Label, Subtitle } from '../typography';
 
 export interface ActionProps {
   name: string;
@@ -63,7 +62,7 @@ export default function Action({
       <Body size="sm" mobileSize="sm">
         {ReactHtmlParser(desc)}
         {texts.rest.length !== 0 && (
-          <ButtonText
+          <Label
             size="xs"
             role="button"
             onClick={handleChange}
@@ -83,7 +82,7 @@ export default function Action({
                 color={theme.palette.secondary.main}
               />
             )}
-          </ButtonText>
+          </Label>
         )}
       </Body>
     </div>

@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import cx from 'clsx';
 
 import Card from './Card';
-import { Body, ButtonText, Title } from '../typography';
+import { Body, Label, Title } from '../typography';
 import { Image } from '../image';
 
 export interface ProjectImpactCardProps {
@@ -68,7 +68,7 @@ export default function ProjectImpactCard({
   return (
     <Card className={cx(classes.root, className)}>
       <div className={classes.background}>
-        <ButtonText
+        <Label
           size="sm"
           sx={theme => ({
             position: 'absolute',
@@ -81,7 +81,7 @@ export default function ProjectImpactCard({
           })}
         >
           {monitored ? 'primary impact' : 'co-benefit'}
-        </ButtonText>
+        </Label>
         <Title
           variant="h4"
           sx={{

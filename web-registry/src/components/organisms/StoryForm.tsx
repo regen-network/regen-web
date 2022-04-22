@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import Description from 'web-components/lib/components/description';
 import { Body, Title } from 'web-components/lib/components/typography';
 import Modal from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
@@ -81,19 +80,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'baseline',
   },
-  title: {
-    fontWeight: 800,
-    color: theme.palette.info.dark,
-  },
-  description: {
-    marginBottom: 0,
-    fontSize: theme.typography.pxToRem(16),
-  },
   paddingTop: {
     paddingTop: theme.spacing(4),
-  },
-  error: {
-    marginTop: 0,
   },
   modalContent: {
     display: 'flex',
@@ -103,10 +91,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   modalCard: {
     padding: theme.spacing(6, 4),
     whiteSpace: 'pre-wrap',
-  },
-  examplePageText: {
-    fontSize: theme.typography.pxToRem(16),
-    paddingBottom: theme.spacing(5),
   },
 }));
 
@@ -153,12 +137,12 @@ const ModalContent: React.FC<{
       <Title variant="h5" sx={{ maxWidth: '70%', textAlign: 'center', pb: 4 }}>
         Example of {examples[fieldName].type}
       </Title>
-      <Description className={styles.examplePageText}>
+      <Body pb={5}>
         See full example{' '}
         <Link to={exampleProjectUrl} target="_blank">
           project page»
         </Link>
-      </Description>
+      </Body>
       <Card className={styles.modalCard}>
         <Body size="lg">{examples[fieldName].text}</Body>
       </Card>
@@ -302,12 +286,8 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
               </OnBoardingCard>
               <OnBoardingCard>
                 <div className={styles.quoteTitle}>
-                  <Title variant="body2" className={styles.title}>
-                    QUOTE
-                  </Title>
-                  <Description className={styles.description}>
-                    &nbsp;&nbsp;(optional)
-                  </Description>
+                  <Title variant="h5">QUOTE</Title>
+                  <Body>&nbsp;&nbsp;(optional)</Body>
                 </div>
                 <Field
                   charLimit={160}

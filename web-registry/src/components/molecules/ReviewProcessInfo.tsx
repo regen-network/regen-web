@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 import {
   Body,
-  ButtonText,
+  Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
@@ -40,9 +40,7 @@ const ReviewProcessInfo: React.FC<{
         {props.reviewSection?.title}
       </Title>
       {props.reviewSection?.timespan && (
-        <ButtonText color="secondary.main">
-          {props.reviewSection?.timespan}
-        </ButtonText>
+        <Label color="secondary.main">{props.reviewSection?.timespan}</Label>
       )}
       <Body size="xl" align="center">
         <BlockContent content={props.reviewSection?.descriptionRaw} />

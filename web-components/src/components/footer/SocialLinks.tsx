@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 
-import { ButtonText, Title } from '../typography';
+import { Label, Title } from '../typography';
 import InstagramIcon from '../icons/social/InstagramIcon';
 import TelegramIcon from '../icons/social/TelegramIcon';
 import FacebookIcon from '../icons/social/FacebookIcon';
@@ -54,12 +54,12 @@ const SocialLinks: React.FC<Props> = ({ className }) => {
 
   return (
     <div className={className}>
-      <ButtonText
+      <Label
         size="lg"
         sx={{ textAlign: { sm: 'center' }, mb: { xs: 4.5, sm: 3.75 } }}
       >
         join the community
-      </ButtonText>
+      </Label>
       <Grid container wrap="nowrap" className={styles.social}>
         <Link
           href="https://www.instagram.com/regennetwork/"

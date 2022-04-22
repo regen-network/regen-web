@@ -2,7 +2,6 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
 import Backdrop from '@mui/material/Backdrop';
 import Cookies from 'js-cookie';
 

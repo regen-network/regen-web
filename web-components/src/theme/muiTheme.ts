@@ -131,9 +131,11 @@ const regenTheme = createTheme({
     //   fontSize: '0.875rem',
     // },
     // not really used
-    // overline: {
-    //   fontFamily: defaultFontFamily,
-    // },
+    overline: {
+      fontFamily: ['PT Mono', '"Lato"', '-apple-system', 'sans-serif'].join(
+        ',',
+      ),
+    },
   },
   breakpoints: defaultTheme.breakpoints,
   shadows: [

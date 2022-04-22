@@ -13,7 +13,7 @@ import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
 import {
   Body,
-  ButtonText,
+  Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
@@ -273,7 +273,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           <Title variant="h4" sx={{ mr: 1.5 }}>
                             500
                           </Title>
-                          <ButtonText size="sm">REGEN</ButtonText>
+                          <Label size="sm">REGEN</Label>
                         </Box>
                         <Body size="md" mobileSize="md">
                           ($2345.00 USD)

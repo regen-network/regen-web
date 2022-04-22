@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import { truncate } from 'web-components/lib/utils/truncate';
-import { Body, ButtonText } from 'web-components/lib/components/typography';
+import { Body, Label } from 'web-components/lib/components/typography';
 
 import {
   PortfolioTemplate,
@@ -24,9 +24,9 @@ const WrappedEcocreditsByAccount: React.FC<WithBasketsProps> = ({
   return (
     <PortfolioTemplate credits={credits} basketTokens={basketTokens}>
       <Box sx={{ mt: { xs: 1.25, sm: 3 } }}>
-        <ButtonText size="sm" mobileSize="sm" sx={{ display: 'inline' }}>
+        <Label size="sm" mobileSize="sm" sx={{ display: 'inline' }}>
           Account:
-        </ButtonText>
+        </Label>
         <Body
           size="lg"
           sx={{

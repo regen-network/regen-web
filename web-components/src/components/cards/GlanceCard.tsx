@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Box, Grid } from '@mui/material';
 
 import Card from './Card';
-import { Body, ButtonText } from '../typography';
+import { Body, Label } from '../typography';
 import StaticMap from '../map/StaticMap';
 import { Image, OptimizeImageProps } from '../image';
 
@@ -78,7 +78,7 @@ export default function GlanceCard({
           </Box>
         </Grid>
         <Grid xs={12} sm={7} item sx={{ pb: [4.5, 0], pl: [0, 8.25] }}>
-          <ButtonText mb={2.75}>{title}</ButtonText>
+          <Label mb={2.75}>{title}</Label>
           <Box
             component="ul"
             sx={{ m: 0, listStyle: 'none', paddingInlineStart: 2 }}

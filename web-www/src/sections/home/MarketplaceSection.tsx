@@ -6,11 +6,7 @@ import SanityImage from 'gatsby-plugin-sanity-image';
 import BackgroundImage from 'gatsby-background-image';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import {
-  Body,
-  ButtonText,
-  Title,
-} from 'web-components/lib/components/typography';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import Tooltip from 'web-components/lib/components/tooltip';
 
@@ -114,9 +110,9 @@ const MarketplaceSection: React.FC = () => {
     >
       <Section className={styles.root}>
         <div className={styles.inner}>
-          <ButtonText size="lg" sx={{ color: 'info.main', mb: 5 }}>
+          <Label size="lg" sx={{ color: 'info.main', mb: 5 }}>
             {data?.header}
-          </ButtonText>
+          </Label>
           <Title variant="h2" align="center">
             <Box component="span" sx={{ color: 'secondary.main' }}>
               {data?.body?.green}{' '}
@@ -137,9 +133,9 @@ const MarketplaceSection: React.FC = () => {
                     width={159}
                     style={{ width: '159px' }}
                   />
-                  <ButtonText size="md" sx={{ pt: 4 }}>
+                  <Label size="md" sx={{ pt: 4 }}>
                     {cta.caption}
-                  </ButtonText>
+                  </Label>
                   <Title
                     variant="h3"
                     mobileVariant="h5"

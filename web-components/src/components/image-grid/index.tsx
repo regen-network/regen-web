@@ -3,8 +3,6 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
 import { Body, Title } from '../typography';
-import Description from '../description';
-import { getFontSize } from '../../theme/sizing';
 
 export interface ImageGridProps {
   img: JSX.Element; // using pure img tag or gatsby-image

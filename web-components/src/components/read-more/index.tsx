@@ -4,9 +4,7 @@ import cx from 'clsx';
 import Fade from '@mui/material/Fade';
 
 import { ExpandButton } from '../buttons/ExpandButton';
-import Description from '../description';
 import { truncate, Texts } from './truncate';
-import { FontSizes } from '../../theme/sizing';
 import { Body } from '../typography';
 
 interface ReadMoreProps {

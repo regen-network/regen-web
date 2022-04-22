@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import ReactHtmlParser from 'react-html-parser';
 
-import { Body, ButtonText, Title } from '../typography';
+import { Body, Label, Title } from '../typography';
 import { BlockContent, SanityBlockOr } from '../block-content';
 
 interface HexaImage {
@@ -180,9 +180,9 @@ export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
         >
           {items[selected].name}
         </Title>
-        <ButtonText sx={{ color: 'info.main', pb: [3.5, 4.5] }}>
+        <Label sx={{ color: 'info.main', pb: [3.5, 4.5] }}>
           {renderText(items[selected].role)}
-        </ButtonText>
+        </Label>
         <Body size="lg">{renderText(items[selected].description)}</Body>
       </Grid>
       <Grid container className={classes.images}>

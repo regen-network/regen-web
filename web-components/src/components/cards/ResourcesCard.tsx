@@ -5,7 +5,7 @@ import OutlinedButton from '../buttons/OutlinedButton';
 import EyeIcon from '../icons/EyeIcon';
 import MediaCard from './MediaCard';
 import { parseText } from '../../utils/textParser';
-import { Body, ButtonText } from '../typography';
+import { Body, Label } from '../typography';
 import { Box } from '@mui/material';
 
 export interface ResourcesCardProps {
@@ -65,9 +65,9 @@ export default function ResourcesCard({
       >
         {updated && (
           <Body size="xs" color="info.main">
-            <ButtonText as="span" size="xs">
+            <Label as="span" size="xs">
               Last Updated:{' '}
-            </ButtonText>
+            </Label>
             {updated}
           </Body>
         )}

@@ -3,10 +3,8 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { ButtonText, Title } from 'web-components/lib/components/typography';
-import Description from 'web-components/lib/components/description';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import { getFontSize } from 'web-components/lib/theme/sizing';
 import BackgroundSection from '../../components/BackgroundSection';
 import { ScienceOpenScienceSectionQuery } from '../../generated/graphql';
 
@@ -33,15 +31,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   green: {
     color: theme.palette.secondary.main,
-  },
-  phaseTitle: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(5.25),
-      paddingBottom: theme.spacing(2),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(3),
-    },
   },
 }));
 
@@ -80,9 +69,9 @@ const OpenScienceSection = (): JSX.Element => {
       topSection={false}
       imageData={data.background?.childImageSharp?.fluid}
     >
-      <ButtonText mobileSize="xs" sx={{ color: 'info.main' }}>
+      <Label mobileSize="xs" sx={{ color: 'info.main' }}>
         {content?.caption}
-      </ButtonText>
+      </Label>
       <Title variant="h1" mobileVariant="h5" sx={{ pb: [0, 13.5] }}>
         {content?.headerStart}{' '}
         <span className={styles.green}>{content?.headerGreen}</span>
@@ -92,12 +81,10 @@ const OpenScienceSection = (): JSX.Element => {
         className={styles.slider}
         items={content?.phases?.map((phase, index) => (
           <div key={index}>
-            <Title variant="h3" className={styles.phaseTitle}>
+            <Title variant="h3" mobileVariant="h5" pb={[2, 3]}>
               {phase?.title}
             </Title>
-            <Description fontSize={getFontSize('big')}>
-              {phase?.body}
-            </Description>
+            <Body size="lg">{phase?.body}</Body>
           </div>
         ))}
       />

@@ -8,7 +8,7 @@ import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import ProjectPlaceInfo from '../place/ProjectPlaceInfo';
 import UserInfo, { User } from '../user/UserInfo';
 import { StandardInfo, formatStandardInfo } from '../../utils/format';
-import { Body, ButtonText } from '../typography';
+import { Body, Label } from '../typography';
 
 interface Info extends StandardInfo {
   url?: string | null;
@@ -177,9 +177,9 @@ function PurchaseDetails({
   const parsedInfo = ReactHtmlParser(info);
   return (
     <div>
-      <ButtonText color="info.dark" size="sm" mobileSize="sm">
+      <Label color="info.dark" size="sm" mobileSize="sm">
         {title}:{' '}
-      </ButtonText>
+      </Label>
       <Body size="sm" mobileSize="sm" display="inline">
         {url ? (
           <a href={url} target="_blank" rel="noopener noreferrer">

@@ -6,7 +6,7 @@ import { FieldProps, FormikErrors } from 'formik';
 import cx from 'clsx';
 
 import FieldFormControl from './FieldFormControl';
-import { ButtonText } from '../typography';
+import { Label } from '../typography';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -251,12 +251,9 @@ const RoleField: React.FC<Props> = ({
                     }}
                   >
                     <OrganizationIcon />
-                    <ButtonText
-                      size="xs"
-                      sx={{ color: 'secondary.main', ml: 2 }}
-                    >
+                    <Label size="xs" sx={{ color: 'secondary.main', ml: 2 }}>
                       + Add New Organization
-                    </ButtonText>
+                    </Label>
                   </div>
                 ) as unknown as RoleOptionType,
               );
@@ -272,12 +269,9 @@ const RoleField: React.FC<Props> = ({
                     }}
                   >
                     <UserIcon />
-                    <ButtonText
-                      size="xs"
-                      sx={{ color: 'secondary.main', ml: 2 }}
-                    >
+                    <Label size="xs" sx={{ color: 'secondary.main', ml: 2 }}>
                       + Add New Individual
-                    </ButtonText>
+                    </Label>
                   </div>
                 ) as unknown as RoleOptionType,
               );

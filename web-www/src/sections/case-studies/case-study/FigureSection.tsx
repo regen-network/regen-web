@@ -17,17 +17,6 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  figureTitle: {
-    lineHeight: '150%',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      paddingTop: theme.spacing(3),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-      paddingTop: theme.spacing(4),
-    },
-  },
   image: {
     borderRadius: '10px',
   },

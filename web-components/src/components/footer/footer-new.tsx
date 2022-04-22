@@ -37,16 +37,7 @@ const FooterItem: React.FC<FooterItemProps> = ({
       <List sx={{ p: 0 }}>
         {items.map((item, index) => (
           <ListItem sx={{ py: 0.75, px: 0 }} key={index}>
-            <Box
-              component={'span'}
-              sx={{
-                fontSize: [16, 18],
-                lineHeight: '150%',
-                '& a:hover': {
-                  color: 'info.contrastText',
-                },
-              }}
-            >
+            <Box component={'span'} sx={{ typography: ['body1', 'textLarge'] }}>
               <LinkComponent
                 style={{ fontWeight: 'normal' }}
                 href={item.href}
@@ -83,6 +74,13 @@ const Footer: React.FC<{
       sx={{
         backgroundColor: 'info.dark',
         color: 'primary.main',
+        '& a': {
+          fontWeight: 'normal',
+          transition: 'color 200ms ease-in-out',
+          ':hover': {
+            color: 'info.contrastText',
+          },
+        },
       }}
     >
       <Section>

@@ -102,8 +102,7 @@ export const TokenSection = (): JSX.Element => {
           px: [4, 12],
         }}
       >
-        {/* TODO remove manual line height. See: https://github.com/regen-network/regen-registry/issues/866 */}
-        <Title variant="h3" sx={{ lineHeight: { xs: '34.8px', sm: '44.8px' } }}>
+        <Title variant="h3">
           {data?.cardTitle}
           {/* TODO uncomment if we want to display countdown */}
           {/* <Box

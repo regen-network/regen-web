@@ -64,27 +64,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     background:
       'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
   },
-  title: {
-    lineHeight: '150%',
-    borderTop: `1px solid ${theme.palette.grey[100]}`,
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(4.5)} ${theme.spacing(5.25)} ${theme.spacing(
-        0.8,
-      )}`,
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(4)} ${theme.spacing(4.5)} ${theme.spacing(
-        0.8,
-      )}`,
-    },
-    overflow: 'hidden',
-    display: '-webkit-box',
-    '-webkit-line-clamp': 3,
-    '-webkit-box-orient': 'vertical',
-    '& p': {
-      margin: 0,
-    },
-  },
   h4title: {
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4.5),
@@ -152,12 +131,15 @@ export default function MediaCard({
       )}
       {name && (
         <Title
-          className={
-            titleVariant === 'h4' && titleOverwrite
-              ? cx(classes.h4title, classes.title)
-              : classes.title
-          }
           variant={titleVariant}
+          mobileVariant={titleOverwrite ? 'h6' : undefined}
+          sx={theme => ({
+            p: {
+              xs: theme.spacing(4, 4.5, 0.8),
+              sm: theme.spacing(4.5, 5.25, 0.8),
+            },
+            borderTop: `1px solid ${theme.palette.grey[100]}`,
+          })}
         >
           {parseText(name)}
         </Title>

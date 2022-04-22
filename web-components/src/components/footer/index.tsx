@@ -73,10 +73,7 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
               href={item.href}
               rel="noopener noreferrer"
               target={item.target}
-              sx={{
-                fontSize: [16, 18],
-                lineHeight: '150%',
-              }}
+              sx={{ typography: ['body1', 'textLarge'] }}
             >
               {item.title}
             </Link>
@@ -96,7 +93,19 @@ export default function Footer({
   const classes = useStyles({ paddingBottom: false });
 
   return (
-    <Box sx={{ backgroundColor: 'info.dark', color: 'primary.main' }}>
+    <Box
+      sx={{
+        backgroundColor: 'info.dark',
+        color: 'primary.main',
+        '& a': {
+          fontWeight: 'normal',
+          transition: 'color 200ms ease-in-out',
+          ':hover': {
+            color: 'info.contrastText',
+          },
+        },
+      }}
+    >
       <Section>
         <Grid container>
           <Grid item xs={12} sm={3}>

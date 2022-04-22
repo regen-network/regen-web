@@ -29,16 +29,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingBottom: theme.spacing(25),
     },
   },
-  about: {
-    lineHeight: '150%',
-    fontWeight: 500,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
-    },
-  },
   background: {
     '&::before': {
       borderRadius: '10px',

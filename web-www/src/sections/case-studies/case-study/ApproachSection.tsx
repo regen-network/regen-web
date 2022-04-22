@@ -61,20 +61,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingTop: theme.spacing(4),
     },
   },
-  description: {
-    lineHeight: '150%',
-    textAlign: 'center',
-    maxWidth: theme.spacing(186.5),
-    margin: '0 auto',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4.5),
-      paddingBottom: theme.spacing(11),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
-      paddingBottom: theme.spacing(13.5),
-    },
-  },
   image: {
     borderRadius: '10px',
   },

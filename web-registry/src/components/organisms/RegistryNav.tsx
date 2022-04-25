@@ -89,6 +89,7 @@ const RegistryNav: React.FC = () => {
   const titleAlias: { [title: string]: string } = {
     'The Kasigau Corridor REDD Project - Phase II The Community Ranches':
       'Kasigau Corridor',
+    'The Mai Ndombe REDD+ Project': 'Mai Ndombe',
   };
 
   const menuItems: HeaderMenuItem[] = [
@@ -97,8 +98,8 @@ const RegistryNav: React.FC = () => {
       dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
         pathname,
         title:
-          titleAlias[p?.metadata?.['http://schema.org/name']] ||
-          p?.metadata?.['http://schema.org/name'],
+          titleAlias[p?.metadata?.['schema:name']] ||
+          p?.metadata?.['schema:name'],
         href: `/projects/${p?.handle}`,
         linkComponent: RegistryNavLink,
       })),

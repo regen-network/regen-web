@@ -55,19 +55,20 @@ const ReadMore: React.FC<ReadMoreProps> = ({
   const [expanded, setExpanded] = useState(false);
   const fontSize: FontSizes = { xs: '1rem', sm: '1.375rem' };
   const texts: Texts = truncate(children, maxLength, restMinLength);
+  const Button: React.FC = () => (
+    <ExpandButton
+      sx={{ ml: 4, pt: [0, 0], pb: [0, 0] }}
+      onClick={() => setExpanded(!expanded)}
+      expanded={expanded}
+    />
+  );
 
   return (
     <div className={cx(styles.root, classes?.root)}>
       <div className={cx(styles.textContainer, classes?.textContainer)}>
         <Description className={classes?.description} fontSize={fontSize}>
           {texts.truncated}
-          {texts.rest && !expanded && (
-            <ExpandButton
-              sx={{ ml: 4 }}
-              onClick={() => setExpanded(!expanded)}
-              expanded={expanded}
-            />
-          )}
+          {texts.rest && !expanded && <Button />}
         </Description>
         <Fade in={expanded} mountOnEnter unmountOnExit>
           {/* https://mui.com/guides/migration-v4/#cannot-read-property-scrolltop-of-null */}
@@ -75,13 +76,7 @@ const ReadMore: React.FC<ReadMoreProps> = ({
             <Description className={classes?.description} fontSize={fontSize}>
               {!texts.rest.startsWith('\n') && '\n'}
               {texts.rest}
-              {texts.rest && expanded && (
-                <ExpandButton
-                  sx={{ ml: 4 }}
-                  onClick={() => setExpanded(!expanded)}
-                  expanded={expanded}
-                />
-              )}
+              {texts.rest && expanded && <Button />}
             </Description>
           </div>
         </Fade>

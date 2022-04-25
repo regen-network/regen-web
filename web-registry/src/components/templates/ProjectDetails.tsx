@@ -43,18 +43,24 @@ import {
   ConfirmationModal,
 } from '../organisms';
 import { Credits } from '../organisms/BuyCreditsModal';
-import { DisplayValues } from '../organisms/EntityDisplayForm';
 import {
   useMoreProjectsQuery,
   useProjectByHandleQuery,
 } from '../../generated/graphql';
-import { useEcologicalImpactByIriQuery } from '../../generated/sanity-graphql';
+import {
+  useEcologicalImpactByIriQuery,
+  EcologicalImpact,
+} from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 import { getBatchesWithSupplyForDenoms } from '../../lib/ecocredit';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
+import {
+  ProjectMetadataLD,
+  ProjectStakeholder,
+} from '../../generated/json-ld/index';
 import Section from 'web-components/lib/components/section';
 
 interface Project {
@@ -66,9 +72,9 @@ interface Project {
 // Update for testing purchase credits modal
 const project: Project = {};
 
-function getVisiblePartyName(party?: DisplayValues): string | undefined {
-  return party?.['http://regen.network/showOnProjectPage']
-    ? party?.['http://schema.org/name']
+function getVisiblePartyName(party?: ProjectStakeholder): string | undefined {
+  return party?.['regen:showOnProjectPage']
+    ? party?.['schema:name']
     : undefined;
 }
 
@@ -94,7 +100,7 @@ function ProjectDetails(): JSX.Element {
     skip: !projectId,
     variables: { handle: projectId as string },
   });
-  const metadata = data?.projectByHandle?.metadata;
+  const metadata: ProjectMetadataLD = data?.projectByHandle?.metadata;
 
   const vintageBatchDenoms: string[] = (
     data?.projectByHandle?.creditVintagesByProjectId?.nodes || []
@@ -134,11 +140,10 @@ function ProjectDetails(): JSX.Element {
   );
 
   // Convert kml to geojson
-  const mapFile: string =
-    metadata?.['http://regen.network/boundaries']?.['@value'];
+  const mapFile: string = metadata?.['regen:boundaries']?.['@value'];
   const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
   const isKMLFile: boolean = /\.kml$/i.test(mapFile);
-  const metadataLocation = metadata?.['http://schema.org/location'];
+  const metadataLocation = metadata?.['schema:location'];
 
   useEffect(() => {
     if (!geojson && isGISFile) {
@@ -209,16 +214,14 @@ function ProjectDetails(): JSX.Element {
       ?.nodes?.[0];
   const creditClassName = creditClassVersion?.name;
   const partyName =
-    getVisiblePartyName(metadata?.['http://regen.network/landSteward']) ||
-    getVisiblePartyName(metadata?.['http://regen.network/projectDeveloper']) ||
-    getVisiblePartyName(metadata?.['http://regen.network/landOwner']) ||
-    getVisiblePartyName(metadata?.['http://regen.network/projectOriginator']);
-  const projectAddress = metadataLocation?.place_name;
-  const galleryPhotos =
-    metadata?.['http://regen.network/galleryPhotos']?.['@list'];
+    getVisiblePartyName(metadata?.['regen:landSteward']) ||
+    getVisiblePartyName(metadata?.['regen:projectDeveloper']) ||
+    getVisiblePartyName(metadata?.['regen:landOwner']) ||
+    getVisiblePartyName(metadata?.['regen:projectOriginator']);
+  const projectAddress = metadataLocation?.['place_name'];
+  const galleryPhotos = metadata?.['regen:galleryPhotos']?.['@list'];
   const noGallery = !galleryPhotos || galleryPhotos?.length === 0;
-  const previewPhoto =
-    metadata?.['http://regen.network/previewPhoto']?.['@value'];
+  const previewPhoto = metadata?.['regen:previewPhoto']?.['@value'];
   const noGalleryAssets: Asset[] = [];
   if (previewPhoto) {
     noGalleryAssets.push({ src: previewPhoto, type: 'image' });
@@ -252,25 +255,40 @@ function ProjectDetails(): JSX.Element {
     creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.[
       '@list'
     ]?.map((impact: { '@id': string }) => impact['@id']) || [];
-  const impactIris = [
+  const primaryImpactIRI = [
     creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
-    ...coBenefitsIris,
   ];
-  const { data: impactData } = useEcologicalImpactByIriQuery({
+  const { data: primaryImpactData } = useEcologicalImpactByIriQuery({
     client,
     variables: {
-      iris: impactIris,
+      iris: primaryImpactIRI,
     },
-    skip: !impactIris,
+    skip: !primaryImpactIRI,
   });
+  const { data: coBenefitData } = useEcologicalImpactByIriQuery({
+    client,
+    variables: {
+      iris: coBenefitsIris,
+    },
+    skip: !coBenefitsIris,
+  });
+
+  let impactData: EcologicalImpact[] = [];
+  if (primaryImpactData && primaryImpactData.allEcologicalImpact?.length) {
+    impactData = [...primaryImpactData?.allEcologicalImpact];
+  }
+
+  if (coBenefitData && coBenefitData.allEcologicalImpact?.length) {
+    impactData = [...impactData, ...coBenefitData?.allEcologicalImpact];
+  }
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
         location={location}
         siteMetadata={siteMetadata}
-        title={metadata?.['http://schema.org/name']}
-        imageUrl={metadata?.['http://schema.org/image']?.['@value']}
+        title={metadata?.['schema:name']}
+        imageUrl={metadata?.['schema:image']?.['@value']}
       />
 
       {assets.length > 0 && (
@@ -280,7 +298,7 @@ function ProjectDetails(): JSX.Element {
           mobileHeight={theme.spacing(78.75)}
           imageStorageBaseUrl={imageStorageBaseUrl}
           apiServerUrl={apiServerUrl}
-          imageCredits={metadata?.['http://schema.org/creditText']}
+          imageCredits={metadata?.['schema:creditText']}
         />
       )}
       <ProjectTopSection
@@ -292,12 +310,11 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
       />
-      {impactData?.allEcologicalImpact &&
-        impactData?.allEcologicalImpact.length > 0 && (
-          <div className="topo-background-alternate">
-            <ProjectImpactSection impact={impactData?.allEcologicalImpact} />
-          </div>
-        )}
+      {impactData.length > 0 && (
+        <div className="topo-background-alternate">
+          <ProjectImpactSection impact={impactData} />
+        </div>
+      )}
 
       {data?.projectByHandle?.documentsByProjectId?.nodes &&
         data.projectByHandle.documentsByProjectId.nodes.length > 0 && (
@@ -319,16 +336,16 @@ function ProjectDetails(): JSX.Element {
           </div>
         )}
 
-      {metadata?.['http://regen.network/landManagementActions']?.['@list'] && (
+      {metadata?.['regen:landManagementActions']?.['@list'] && (
         <div className="topo-background-alternate">
           <LandManagementActions
-            actions={metadata?.['http://regen.network/landManagementActions']?.[
-              '@list'
-            ]?.map((action: any) => ({
-              name: action['http://schema.org/name'],
-              description: action['http://schema.org/description'],
-              imgSrc: action['http://schema.org/image']?.['@value'],
-            }))}
+            actions={metadata?.['regen:landManagementActions']?.['@list']?.map(
+              (action: any) => ({
+                name: action['schema:name'],
+                description: action['schema:description'],
+                imgSrc: action['schema:image']?.['@value'],
+              }),
+            )}
             title="Land Management Actions"
             subtitle="This is how the project developers are planning to achieve the primary impact."
           />
@@ -429,11 +446,8 @@ function ProjectDetails(): JSX.Element {
             onTxQueued={txRaw => handleTxQueued(txRaw)}
             project={{
               id: projectId as string,
-              name: data.projectByHandle?.metadata?.['http://schema.org/name'],
-              image:
-                data.projectByHandle?.metadata?.[
-                  'http://regen.network/previewPhoto'
-                ],
+              name: data.projectByHandle?.metadata?.['schema:name'],
+              image: data.projectByHandle?.metadata?.['regen:previewPhoto'],
               creditDenom:
                 creditClassVersion.metadata?.[
                   'http://regen.network/creditDenom'

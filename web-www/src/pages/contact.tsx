@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import cx from 'clsx';
@@ -25,7 +25,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import { BlockContent } from 'web-components/src/components/block-content';
 import Banner from 'web-components/lib/components/banner';
 
-import { ContactPageQuery } from '../generated/graphql';
+import type { ContactPageQuery } from '../generated/graphql';
 
 interface Values {
   name: string;
@@ -161,7 +161,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
           >
             <BlockContent content={data?._rawBody} />
           </Body>
-          <div className={styles.container}>
+          <Box sx={{ maxWidth: 700, m: '0 auto', pb: 32 }}>
             <Card elevation={1} className={styles.card}>
               <Formik
                 initialValues={{
@@ -342,7 +342,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                 />
               </Grid>
             </Grid>
-          </div>
+          </Box>
         </Section>
         <FAQSection
           header={data?.faq?.title || ''}

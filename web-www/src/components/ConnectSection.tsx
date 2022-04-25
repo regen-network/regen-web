@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Title } from 'web-components/lib/components/typography';
 import BackgroundSection from './BackgroundSection';
 
 interface StyleProps {
@@ -32,21 +33,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5),
       paddingBottom: theme.spacing(15.5),
-    },
-  },
-  label: {
-    fontFamily: theme.typography.h1.fontFamily,
-    color: theme.palette.primary.main,
-    fontWeight: 900,
-    textAlign: 'center',
-    lineHeight: '145%',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(6),
-      paddingTop: theme.spacing(5.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-      paddingTop: theme.spacing(1.5),
     },
   },
   iconContainer: props => ({
@@ -127,14 +113,34 @@ interface ConnectSectionProps {
   };
 }
 
-const IconLabel = ({ icon, label, subLabel, href, small = false }: IconLabelProps): JSX.Element => {
+const IconLabel = ({
+  icon,
+  label,
+  subLabel,
+  href,
+  small = false,
+}: IconLabelProps): JSX.Element => {
   const classes = useStyles({ small });
   return (
     <div>
-      <a href={href} rel="noopener noreferrer" target="_blank" className={classes.link}>
+      <a
+        href={href}
+        rel="noopener noreferrer"
+        target="_blank"
+        className={classes.link}
+      >
         <div className={classes.iconContainer}>{icon}</div>
       </a>
-      <div className={classes.label}>{label}</div>
+      <Title
+        color="primary"
+        align="center"
+        sx={{
+          fontSize: theme => [14, theme.typography.h4.fontSize],
+          pt: [1.5, 5.25],
+        }}
+      >
+        {label}
+      </Title>
       {subLabel && <div className={classes.followerCount}>{subLabel}</div>}
     </div>
   );
@@ -160,7 +166,7 @@ const ConnectSection = ({
       titleClassName={clsx(titleClassName, classes.title)}
       titleVariant={titleVariant}
     >
-      <Grid container spacing={4} justifyContent="space-between">
+      <Grid container spacing={4} justifyContent="center">
         {icons.map((item, i) => (
           <Grid item xs={4} sm={2} className={itemClassName} key={i}>
             <IconLabel

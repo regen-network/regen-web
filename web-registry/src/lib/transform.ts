@@ -9,9 +9,9 @@ import {
   Maybe,
 } from '../generated/graphql';
 import {
-  EntityDisplayValues,
-  EntityFieldName,
-} from '../components/organisms/EntityDisplayForm';
+  ProjectMetadataLD,
+  ProjectStakeholder,
+} from '../generated/json-ld/index';
 
 // buildIssuanceModalData builds some IssuanceModalData to provide
 // to a Timeline Event based on some optional credit vintage data.
@@ -181,17 +181,23 @@ export function getParty(
   };
 }
 
+type StakeholderType =
+  | 'regen:projectDeveloper'
+  | 'regen:landSteward'
+  | 'regen:landOwner'
+  | 'regen:projectOriginator';
+
 const getPartyFromMetadata = (
-  metadata: EntityDisplayValues,
-  role: EntityFieldName,
+  metadata: ProjectMetadataLD,
+  role: StakeholderType,
 ): Party | undefined => {
-  const metadataRole = metadata[role];
+  const metadataRole: ProjectStakeholder = metadata[role];
   if (!metadataRole) return undefined;
 
   return {
-    name: metadataRole?.['http://schema.org/name'] || '',
-    description: metadataRole?.['http://schema.org/description'] || '',
-    type: metadataRole?.['@type'].includes('http://regen.network/Organization') // covers Organization or OrganizationDisplay
+    name: metadataRole?.['schema:name'] || '',
+    description: metadataRole?.['schema:description'] || '',
+    type: metadataRole?.['@type'].includes('regen:Organization') // covers Organization or OrganizationDisplay
       ? 'ORGANIZATION' // to provide default image
       : '',
     individual: '',
@@ -201,12 +207,11 @@ const getPartyFromMetadata = (
 };
 
 export function getDisplayParty(
-  role: EntityFieldName,
-  metadata?: EntityDisplayValues,
+  role: StakeholderType,
+  metadata?: ProjectMetadataLD,
   party?: Maybe<PartyFieldsFragment>,
 ): Party | undefined {
-  const showOnProjectPage =
-    metadata?.[role]?.['http://regen.network/showOnProjectPage'];
+  const showOnProjectPage = metadata?.[role]?.['regen:showOnProjectPage'];
   if (showOnProjectPage) {
     const dbParty = getParty(party);
     if (dbParty) return dbParty;

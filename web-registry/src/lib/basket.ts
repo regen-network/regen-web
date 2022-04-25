@@ -7,6 +7,8 @@ import {
   QueryBasketsResponse,
   QueryBasketBalancesRequest,
   QueryBasketBalancesResponse,
+  QueryBasketBalanceResponse,
+  QueryBasketBalanceRequest,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 // TODO: pagination not implemented yet
@@ -53,10 +55,16 @@ type BasketBalancesParams = {
   params: DeepPartial<QueryBasketBalancesRequest>;
 };
 
+type BasketBalanceParams = {
+  query: 'basketBalance';
+  params: DeepPartial<QueryBasketBalanceRequest>;
+};
+
 export type BasketQueryProps =
   | BasketParams
   | BasketsParams
-  | BasketBalancesParams;
+  | BasketBalancesParams
+  | BasketBalanceParams;
 
 // TODO ?
 // typing the response
@@ -80,7 +88,7 @@ interface QueryBasketProps extends BasketQueryClientProps {
 export const queryBasket = async ({
   client,
   request,
-}: QueryBasketProps): Promise<DeepPartial<QueryBasketResponse> | Error> => {
+}: QueryBasketProps): Promise<DeepPartial<QueryBasketResponse>> => {
   try {
     return await client.Basket({ basketDenom: request.basketDenom });
   } catch (err) {
@@ -97,7 +105,7 @@ interface QueryBasketsProps extends BasketQueryClientProps {
 export const queryBaskets = async ({
   client,
   request,
-}: QueryBasketsProps): Promise<DeepPartial<QueryBasketsResponse> | Error> => {
+}: QueryBasketsProps): Promise<DeepPartial<QueryBasketsResponse>> => {
   try {
     return await client.Baskets({});
   } catch (err) {
@@ -115,13 +123,37 @@ export const queryBasketBalances = async ({
   client,
   request,
 }: QueryBasketBalancesProps): Promise<
-  DeepPartial<QueryBasketBalancesResponse> | Error
+  DeepPartial<QueryBasketBalancesResponse>
 > => {
   try {
     return await client.BasketBalances({ basketDenom: request.basketDenom });
   } catch (err) {
     throw new Error(
       'Error in the BasketBalances query of the ledger basket module.',
+    );
+  }
+};
+
+// Basket Balance
+
+interface QueryBasketBalanceProps extends BasketQueryClientProps {
+  request: DeepPartial<QueryBasketBalanceRequest>;
+}
+
+export const queryBasketBalance = async ({
+  client,
+  request,
+}: QueryBasketBalanceProps): Promise<
+  DeepPartial<QueryBasketBalanceResponse>
+> => {
+  try {
+    return await client.BasketBalance({
+      basketDenom: request.basketDenom,
+      batchDenom: request.batchDenom,
+    });
+  } catch (err) {
+    throw new Error(
+      'Error in the BasketBalance query of the ledger basket module.',
     );
   }
 };

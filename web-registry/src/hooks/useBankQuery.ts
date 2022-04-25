@@ -31,7 +31,7 @@ export default function useBankQuery<T>({
   const { api } = useLedger();
   const [client, setClient] = useState<BankQueryClient>();
 
-  const [data, setData] = useState<T | undefined>();
+  const [data, setData] = useState<T>();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>();
 

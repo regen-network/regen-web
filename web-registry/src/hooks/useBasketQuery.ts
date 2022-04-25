@@ -12,6 +12,7 @@ import {
   queryBasket,
   queryBasketBalances,
   queryBaskets,
+  queryBasketBalance,
 } from '../lib/basket';
 
 // TODO - hook is still missing batch query functionality
@@ -30,7 +31,7 @@ export default function useBasketQuery<T>({
   const { api } = useLedger();
   const [client, setClient] = useState<BasketQueryClient>();
 
-  const [data, setData] = useState<T | undefined>();
+  const [data, setData] = useState<T>();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error>();
 
@@ -56,6 +57,11 @@ export default function useBasketQuery<T>({
     [],
   );
 
+  const basketBalance = useCallback(
+    (client, params) => queryBasketBalance({ client, request: params }),
+    [],
+  );
+
   useEffect(() => {
     if (!client) return;
     if (!params) return;
@@ -77,6 +83,10 @@ export default function useBasketQuery<T>({
       response = basketBalances(client, params);
     }
 
+    if (query === 'basketBalance') {
+      response = basketBalance(client, params);
+    }
+
     if (response) {
       response
         .then(response => setData(response as T))
@@ -93,6 +103,7 @@ export default function useBasketQuery<T>({
     basket,
     baskets,
     basketBalances,
+    basketBalance,
   ]);
 
   return { data, loading, error };

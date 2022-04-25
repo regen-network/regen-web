@@ -6,14 +6,15 @@ export interface BatchMetadataLD {
   '@context'?: Context;
   '@type': string;
   'regen:vcsRetirementSerialNumber': string;
-  'regen:additionalCertifications': AdditionalCertificationsList;
+  'regen:additionalCertifications': NameUrl[];
 }
 
-interface AdditionalCertificationsList {
-  '@list': NameUrl[];
+interface AdditionalCertifications {
+  '@container': '@list';
 }
 
 interface Context {
   schema: string;
   regen: string;
+  'regen:additionalCertifications': AdditionalCertifications;
 }

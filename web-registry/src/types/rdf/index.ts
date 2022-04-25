@@ -1,5 +1,5 @@
 export interface URL {
-  '@type': string;
+  '@type': 'http://schema.org/URL' | 'schema:URL';
   '@value': string;
 }
 

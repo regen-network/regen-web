@@ -10,8 +10,7 @@ export const BatchMetadata: React.FC<{
   data?: BatchMetadataLD;
   sx?: SxProps<Theme>;
 }> = ({ sx, data }) => {
-  const additionalCertifications =
-    data?.['regen:additionalCertifications']?.['@list'];
+  const additionalCertifications = data?.['regen:additionalCertifications'];
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 8, ...sx }}>
       <MetaDetail label="vcs retirement serial number">

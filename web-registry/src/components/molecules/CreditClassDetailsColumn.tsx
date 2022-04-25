@@ -9,13 +9,13 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { LineItem } from './LineItem';
-import { CreditClass } from '../../mocks/mocks';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
 import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
 import Sequestration from '../../assets/svgs/sequestration.svg';
+import { CreditClassByUriQuery } from '../../generated/graphql';
 
 interface CreditClassDetailsColumnProps {
-  creditClass: CreditClass;
+  dbClass: CreditClassByUriQuery['creditClassByUri'];
   nameRaw?: Maybe<Scalars['JSON']>;
   classes?: {
     root?: string;
@@ -93,12 +93,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function CreditClassDetailsColumn({
-  creditClass,
+  dbClass,
   nameRaw,
   classes,
   className,
 }: CreditClassDetailsColumnProps): JSX.Element {
   const styles = useStyles();
+  const creditClassVersion = dbClass?.creditClassVersionsById?.nodes[0];
+  const methodologyVersion =
+    dbClass?.methodologyByMethodologyId?.methodologyVersionsById?.nodes[0];
 
   return (
     <div className={cx(classes?.root, className)}>
@@ -139,32 +142,56 @@ function CreditClassDetailsColumn({
             data={<BlockContent content={nameRaw} />}
           />
         )}
-        {creditClass.version && (
-          <LineItem label="version" data={creditClass.version} />
+        {creditClassVersion?.version && (
+          <LineItem label="version" data={creditClassVersion?.version} />
         )}
-        {creditClass.creditDesigner && (
-          <LineItem label="credit designer" data={creditClass.creditDesigner} />
-        )}
-        {creditClass.ecoType && (
-          <LineItem label="ecotype" data={creditClass.ecoType} />
-        )}
-        {creditClass.ecoServiceType && (
+        {dbClass?.partyByDesignerId?.name && (
           <LineItem
-            label="carbon removal or emission reduction"
-            data={creditClass.ecoServiceType}
+            label="credit designer"
+            data={dbClass?.partyByDesignerId?.name}
           />
         )}
-        {creditClass.approvedMethodology && (
+        {creditClassVersion?.metadata?.[
+          'http://regen.network/ecosystemType'
+        ] && (
+          <LineItem
+            label="ecotype"
+            data={
+              creditClassVersion?.metadata?.[
+                'http://regen.network/ecosystemType'
+              ]
+            }
+          />
+        )}
+        {creditClassVersion?.metadata?.[
+          'http://regen.network/offsetGenerationMethod'
+        ] && (
+          <LineItem
+            label="offset generation method"
+            data={
+              creditClassVersion?.metadata?.[
+                'http://regen.network/offsetGenerationMethod'
+              ]
+            }
+          />
+        )}
+        {methodologyVersion?.name && (
           <LineItem
             label="approved methodology"
-            data={creditClass.approvedMethodology}
+            data={methodologyVersion?.name}
           />
         )}
-        {creditClass.methodologyUrl && (
+        {methodologyVersion?.metadata?.['http://schema.org/url']?.[
+          '@value'
+        ] && (
           <OutlinedButton
             size="small"
             classes={{ root: styles.button }}
-            href={creditClass.methodologyUrl}
+            href={
+              methodologyVersion?.metadata?.['http://schema.org/url']?.[
+                '@value'
+              ]
+            }
           >
             view methodology»
           </OutlinedButton>

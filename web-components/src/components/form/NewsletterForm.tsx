@@ -12,6 +12,7 @@ import {
   validateEmail,
   invalidEmailMessage,
 } from '../inputs/validation';
+import { Body } from '../typography';
 
 interface NewsletterFormProps {
   submitLabel?: string;
@@ -71,19 +72,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingRight: theme.spacing(3.25),
     },
-    // '& .MuiInputBase-root': {
-    //   lineHeight: '150%',
-    //   [theme.breakpoints.down('sm')]: {
-    //     fontSize: theme.spacing(4),
-    //     height: theme.spacing(15),
-    //     padding: theme.spacing(5),
-    //   },
-    //   [theme.breakpoints.up('sm')]: {
-    //     height: theme.spacing(17.75),
-    //     fontSize: theme.spacing(4.5),
-    //     padding: theme.spacing(5),
-    //   },
-    // },
   },
   success: {
     color: theme.palette.primary.main,
@@ -93,8 +81,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     letterSpacing: '1px',
     width: '100%',
     [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-      lineHeight: theme.spacing(4.5),
       height: theme.spacing(15),
     },
     [theme.breakpoints.up('sm')]: {
@@ -157,10 +143,14 @@ export default function NewsletterForm({
       }) => {
         if (status && status.success) {
           return (
-            <div className={classes.success}>
-              Thank you!
-              <p>You have successfully joined our subscriber list.</p>
-            </div>
+            <>
+              <Body color="primary.main" align="center">
+                Thank you!
+              </Body>
+              <Body color="primary.main" align="center">
+                You have successfully joined our subscriber list.
+              </Body>
+            </>
           );
         }
         return (

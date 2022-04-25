@@ -75,6 +75,7 @@ const CollaborateSection = (): JSX.Element => {
           maxWidth: theme.spacing(225),
           textAlign: 'center',
           m: '0 auto',
+          pt: { sm: 4 },
           pb: { xs: 20, sm: 23.25 },
         })}
       >

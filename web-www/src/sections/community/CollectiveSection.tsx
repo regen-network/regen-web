@@ -74,11 +74,7 @@ const CollectiveSection = (): JSX.Element => {
   return (
     <BackgroundImage fluid={bg?.childImageSharp?.fluid as FluidObject}>
       <Section
-        title={
-          <Title variant="h2" mobileVariant="h3">
-            {data?.title}
-          </Title>
-        }
+        title={<Title variant="h2">{data?.title}</Title>}
         classes={{
           root: clsx(styles.section, styles.center),
           title: styles.title,
@@ -89,6 +85,8 @@ const CollectiveSection = (): JSX.Element => {
           mobileSize="md"
           sx={{
             width: ['100%', '80%'],
+            pb: 7,
+            pt: 4,
             maxWidth: 946,
           }}
         >

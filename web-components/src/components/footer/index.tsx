@@ -130,7 +130,7 @@ export default function Footer({
             <Label size="lg" sx={sxs.text}>
               subscribe
             </Label>
-            <Body size="lg">
+            <Body size="lg" color="primary.main">
               Stay up to date! Sign up for our monthly newsletter.
             </Body>
             <Box sx={{ pt: 4 }}>

@@ -47,6 +47,7 @@ export async function validate(
   return report;
 }
 
+// TODO: change to compact format, regen:
 export function getProjectPageBaseData(): any {
   return {
     '@type': [
@@ -56,14 +57,9 @@ export function getProjectPageBaseData(): any {
   };
 }
 
-export type qudtUnit =
-  | 'http://qudt.org/1.1/vocab/unit#HA'
-  | 'http://qudt.org/1.1/vocab/unit#AC'
-  | 'http://qudt.org/vocab/unit/HA'
-  | 'http://qudt.org/vocab/unit/AC';
+export type qudtUnit = 'unit:HA' | 'unit:AC';
+
 export const qudtUnitMap = {
-  'http://qudt.org/1.1/vocab/unit#HA': 'hectares',
-  'http://qudt.org/1.1/vocab/unit#AC': 'acres',
-  'http://qudt.org/vocab/unit/HA': 'hectares',
-  'http://qudt.org/vocab/unit/AC': 'acres',
+  'unit:HA': 'hectares',
+  'unit:AC': 'acres',
 };

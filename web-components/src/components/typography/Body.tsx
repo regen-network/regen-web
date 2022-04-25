@@ -24,6 +24,25 @@ export const Body = styled(Typography, {
     '& a': {
       fontWeight: 'bold',
     },
+    '& ul, ol': {
+      listStyle: 'none',
+      margin: theme.spacing(2, 0),
+      padding: 0,
+      listStylePosition: 'inside',
+    },
+    '& li': {
+      listStyle: 'none',
+      marginLeft: '1.5rem',
+      '::before': {
+        content: "'\\2022'",
+        color: theme.palette.secondary.main,
+        display: 'inline-flex',
+        alignContent: 'flex-start',
+        width: '1.25rem',
+        marginLeft: '-1.25rem',
+        fontSize: '75%',
+      },
+    },
   };
 });
 

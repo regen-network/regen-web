@@ -50,27 +50,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(4.5),
     },
   },
-  figureTitle: {
-    lineHeight: '150%',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      paddingTop: theme.spacing(3),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-      paddingTop: theme.spacing(4),
-    },
-  },
   image: {
     borderRadius: '10px',
-  },
-  paragraph: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(3.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(4.5),
-    },
   },
 }));
 
@@ -87,24 +68,7 @@ export const TitleWithParagraphs: React.FC<TitleWithParagraphsProps> = ({
         {paragraphs.map((p: Paragraph, i: number) => (
           <Box key={i} sx={{ mb: [7, 10] }}>
             <Label sx={{ fontSize: [16, 18], mb: [2, 4] }}>{p.title}</Label>
-            <Body
-              size="lg"
-              sx={{
-                mt: [4, 4],
-                '& ul, ol': {
-                  listStyle: 'none',
-                  marginLeft: 3,
-                },
-                '& li::before': {
-                  content: "'\\2022'",
-                  color: 'secondary.main',
-                  display: 'inline-block',
-                  width: '1em',
-                  marginLeft: '-1em',
-                  fontSize: 12,
-                },
-              }}
-            >
+            <Body size="lg" sx={{ mt: [4] }}>
               {typeof p.content === 'string' ? (
                 ReactHtmlParser(p.content)
               ) : (
@@ -173,7 +137,7 @@ const ApproachSection: React.FC<SanityCaseStudyApproachSection> = ({
             className={classes.image}
             fluid={figureImage?.image?.asset?.fluid as FluidObject}
           />
-          <Body size="sm" sx={{ pt: [3, 4], color: 'info.dark' }}>
+          <Body size="sm" as="div" sx={{ pt: [3, 4], color: 'info.dark' }}>
             <BlockContent content={_rawFigureTitle} />
           </Body>
         </Grid>

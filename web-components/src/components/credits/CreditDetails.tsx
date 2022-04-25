@@ -133,10 +133,7 @@ export default function CreditInfo({
           </Title>
         </div>
         <div className={classes.activitiesItem}>
-          <Box
-            component="ul"
-            sx={{ m: 0, mt: 4.5, paddingInlineStart: 2, listStyle: 'none' }}
-          >
+          <Box component="ul" sx={{ m: 0, mt: 4.5, paddingInlineStart: 0 }}>
             {creditClass.keyOutcomesActivitiesDesc && (
               <Body
                 size="xl"
@@ -149,28 +146,7 @@ export default function CreditInfo({
               </Body>
             )}
             {activities.map((activity, index) => (
-              <Body
-                key={index}
-                size="lg"
-                mobileSize="sm"
-                sx={{
-                  pb: 1.5,
-                  '& li': {
-                    position: 'relative',
-                    paddingInlineStart: 2,
-                  },
-                  '& li::before': {
-                    position: 'absolute',
-                    content: "'\\2022'",
-                    fontSize: '0.75rem',
-                    color: 'secondary.main',
-                    display: 'inline-block',
-                    width: '1rem',
-                    ml: '-1rem',
-                    top: 0,
-                  },
-                }}
-              >
+              <Body key={index} size="lg" mobileSize="sm">
                 <li>{activity}</li>
               </Body>
             ))}

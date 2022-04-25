@@ -79,33 +79,9 @@ export default function GlanceCard({
         </Grid>
         <Grid xs={12} sm={7} item sx={{ pb: [4.5, 0], pl: [0, 8.25] }}>
           <Label mb={2.75}>{title}</Label>
-          <Box
-            component="ul"
-            sx={{ m: 0, listStyle: 'none', paddingInlineStart: 2 }}
-          >
+          <Box component="ul" sx={{ m: 0, paddingInlineStart: 2 }}>
             {text.map((p, i) => (
-              <Body
-                key={i}
-                size="lg"
-                mobileSize="sm"
-                sx={{
-                  pb: 1.5,
-                  '& li': {
-                    position: 'relative',
-                    paddingInlineStart: 2,
-                  },
-                  '& li::before': {
-                    position: 'absolute',
-                    content: "'\\2022'",
-                    fontSize: '0.75rem',
-                    color: 'secondary.main',
-                    display: 'inline-block',
-                    width: '1rem',
-                    ml: '-1rem',
-                    top: 0,
-                  },
-                }}
-              >
+              <Body key={i} size="lg" mobileSize="sm" sx={{ pb: 1.5 }}>
                 <li>{p}</li>
               </Body>
             ))}

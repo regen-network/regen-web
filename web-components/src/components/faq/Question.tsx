@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
+import { Box, Link, useTheme } from '@mui/material';
 import clsx from 'clsx';
 
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
-import { Title } from '../typography';
+import { Body, Label, Title } from '../typography';
 import LinkIcon from '../icons/LinkIcon';
 import Banner from '../banner';
 import copyTextToClipboard from '../../utils/copy';
 import { parseText } from '../../utils/textParser';
-// import { BlockContent } from '../block-content';
+
+import type { Theme } from '~/theme/muiTheme';
 
 export interface QuestionItem {
   classNames?: ClassNames;
@@ -50,24 +52,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingBottom: theme.spacing(10.75),
     },
   }),
-  container: {
-    [theme.breakpoints.down('sm')]: {
-      padding: `0 ${theme.spacing(5.25)}`,
-    },
-    [theme.breakpoints.up('sm')]: {
-      padding: `0 ${theme.spacing(7.75)}`,
-    },
-  },
-  question: {
-    cursor: 'pointer',
-    lineHeight: '150%',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(2.5),
-    },
-  },
   icon: {
     cursor: 'pointer',
     [theme.breakpoints.up('sm')]: {
@@ -94,65 +78,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       height: theme.spacing(18),
     },
   },
-  collapsed: {
-    overflow: 'hidden',
-    [theme.breakpoints.up('sm')]: {
-      maxHeight: theme.spacing(21.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      maxHeight: theme.spacing(18),
-    },
-  },
-  answer: {
-    lineHeight: '150%',
-    position: 'relative',
-    '& ul, ol': {
-      listStyle: 'none',
-      marginLeft: theme.spacing(3),
-    },
-    '& li p:first-child': {
-      display: 'inline',
-    },
-    '& li::before': {
-      content: "'\\2022'",
-      color: theme.palette.secondary.main,
-      display: 'inline-block',
-      width: '1em',
-      marginLeft: '-1em',
-      fontSize: theme.spacing(3),
-    },
-    '& a': {
-      color: theme.palette.secondary.main,
-      fontWeight: 'bold',
-      textDecoration: 'none',
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-      marginRight: theme.spacing(14.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-      marginRight: theme.spacing(5.75),
-    },
-    '& span.gatsby-resp-image-background-image': {
-      position: 'absolute !important',
-    },
-    '& img.gatsby-resp-image-image': {
-      position: 'relative !important',
-    },
-  },
-  anchorLink: {
-    color: 'transparent !important',
-    textDecoration: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    '&:link, &:visited, &:hover, &:active': {
-      textDecoration: 'none',
-    },
-  },
   linkIcon: {
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(7.5),
@@ -162,15 +87,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       width: theme.spacing(5.5),
       height: theme.spacing(5.5),
     },
-  },
-  copyText: {
-    color: theme.palette.secondary.main,
-    fontSize: theme.spacing(3),
-    paddingLeft: theme.spacing(2.5),
-    letterSpacing: '1px',
-    textTransform: 'uppercase',
-    fontFamily: theme.typography.h1.fontFamily,
-    fontWeight: 800,
   },
 }));
 
@@ -203,17 +119,18 @@ const Question = ({
     setOpen(prevOpen => !prevOpen);
   };
 
-  const answerClassName = [classes.answer];
-  if (!open) {
-    answerClassName.push(classes.collapsed);
-  }
-
   return (
     <div className={clsx(classes.root, classNames?.root)} id={id}>
-      <div className={clsx(classes.container, classNames?.container)}>
+      <Box className={classNames?.container} sx={{ px: [5.25, 7.75] }}>
         <Title
           variant="h5"
-          className={clsx(classes.question, classNames?.question)}
+          sx={{
+            pb: { sm: 2.5 },
+            cursor: 'pointer',
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+          className={classNames?.question}
           onClick={handleClick}
         >
           {question}
@@ -226,20 +143,30 @@ const Question = ({
             <BreadcrumbIcon className={clsx(classes.icon, classNames?.icon)} />
           )}
         </Title>
-        <div
-          className={clsx(
-            classes.answer,
-            classNames?.answer,
-            !open && classes.collapsed,
-            !open && classNames?.collapsed,
-          )}
+        <Body
+          size="lg"
+          sx={[
+            {
+              mr: [5.75, 14.25],
+              position: 'relative',
+              '& span.gatsby-resp-image-background-image': {
+                position: 'absolute !important',
+              },
+              '& img.gatsby-resp-image-image': {
+                position: 'relative !important',
+              },
+            },
+            !open && {
+              overflow: 'hidden',
+              maxHeight: theme => [theme.spacing(18), theme.spacing(21.75)],
+            },
+          ]}
+          className={clsx(!open && classNames?.collapsed)}
         >
           {parseText(answer)}
-          {/* TODO this component should always accept Sanity block content */}
-          {/* <BlockContent content={answer} /> */}
           {open ? (
             isShareable && (
-              <a
+              <Link
                 href={`#${id}`}
                 onClick={() => {
                   if (window && window.location) {
@@ -248,20 +175,26 @@ const Question = ({
                     ).then(() => setCopied(true));
                   }
                 }}
-                className={classes.anchorLink}
+                sx={{
+                  color: 'transparent !important',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
               >
                 <LinkIcon
                   className={classes.linkIcon}
                   color={theme.palette.secondary.dark}
                 />
-                <span className={classes.copyText}>copy question link</span>
-              </a>
+                <Label size="xs" color="secondary.main" ml={2.5}>
+                  copy question link
+                </Label>
+              </Link>
             )
           ) : (
             <div className={clsx(classes.gradient, classNames?.gradient)} />
           )}
-        </div>
-      </div>
+        </Body>
+      </Box>
       {copied && <Banner text="Link copied to your clipboard" />}
     </div>
   );

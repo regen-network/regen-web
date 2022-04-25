@@ -121,23 +121,7 @@ const LaunchInfoSection: React.FC = () => {
               year: 'numeric',
             })}
           </Subtitle>
-          <Body
-            size="xl"
-            sx={{
-              '& > ul': {
-                px: 4,
-              },
-              '& > ul > li': {
-                my: 2,
-                position: 'relative',
-                display: 'list-item',
-                listStyleType: 'disc',
-                '&::marker': {
-                  fontSize: 12,
-                },
-              },
-            }}
-          >
+          <Body size="xl">
             <BlockContent content={data?._rawCardBody} />
           </Body>
           <Box

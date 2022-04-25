@@ -22,7 +22,7 @@ const BlogPost: React.FC<BlogPostProps> = ({
     <div>
       <Box
         sx={theme => ({
-          '& :first-child': {
+          '& img': {
             width: '100%',
             borderRadius: '10px',
             border: `1px solid ${theme.palette.info.light}`,
@@ -35,7 +35,7 @@ const BlogPost: React.FC<BlogPostProps> = ({
       <Title variant="h5" sx={{ pt: [3.25, 5], pb: [2, 3] }}>
         {header}
       </Title>
-      <Body pb={5.75}>
+      <Body pb={5.75} as="div">
         {typeof description == 'string' ? (
           description
         ) : (

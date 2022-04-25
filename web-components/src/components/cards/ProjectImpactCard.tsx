@@ -5,6 +5,7 @@ import cx from 'clsx';
 import Card from './Card';
 import { Body, Label, Title } from '../typography';
 import { Image } from '../image';
+import { Box } from '@mui/material';
 
 export interface ProjectImpactCardProps {
   className?: string;
@@ -40,17 +41,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       height: theme.spacing(50),
     },
   }),
-  text: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(4),
-    },
-  },
 }));
 
 export default function ProjectImpactCard({
@@ -94,8 +84,15 @@ export default function ProjectImpactCard({
           {name}
         </Title>
       </div>
-      <div className={classes.text}>
-        <Body size="sm" mobileSize="sm" sx={{ flex: '1 0 auto' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          flexGrow: 1,
+          p: [4, 5],
+        }}
+      >
+        <Body as="div" size="sm" mobileSize="sm" sx={{ flex: '1 0 auto' }}>
           {description}
         </Body>
         {standard && (
@@ -107,7 +104,7 @@ export default function ProjectImpactCard({
             width={140}
           />
         )}
-      </div>
+      </Box>
     </Card>
   );
 }

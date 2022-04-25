@@ -64,7 +64,7 @@ const InstructionsSection = (): JSX.Element => {
         sx={{
           m: '0 auto',
           maxWidth: theme => theme.spacing(225),
-          mb: 15,
+          mb: [10, 12],
           textAlign: 'center',
         }}
       >

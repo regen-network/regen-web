@@ -53,10 +53,13 @@ const query = graphql`
   }
 `;
 
-const WalletConnectionButton: React.FC<{ isKeplrDetected: boolean }> = ({ isKeplrDetected }) => {
+const WalletConnectionButton: React.FC<{ isKeplrDetected: boolean }> = ({
+  isKeplrDetected,
+}) => {
   const styles = useStyles();
   const [isChainDetected, setIsChainDetected] = useState(false);
-  const { sanityWalletAddressRegistrationPage } = useStaticQuery<WalletConnectButtonQuery>(query);
+  const { sanityWalletAddressRegistrationPage } =
+    useStaticQuery<WalletConnectButtonQuery>(query);
   const data = sanityWalletAddressRegistrationPage?.walletSection;
   const chainId = 'regen-devnet-5';
 
@@ -168,7 +171,11 @@ const WalletConnectionButton: React.FC<{ isKeplrDetected: boolean }> = ({ isKepl
   return (
     <div className={styles.walletButton}>
       {isKeplrDetected ? (
-        <ContainedButton onClick={connectToKeplr} disabled={isChainDetected}>
+        <ContainedButton
+          size="large"
+          onClick={connectToKeplr}
+          disabled={isChainDetected}
+        >
           {isChainDetected ? data?.walletFoundButtonText : data?.buttonText}
         </ContainedButton>
       ) : (

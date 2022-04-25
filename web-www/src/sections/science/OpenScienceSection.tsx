@@ -65,7 +65,7 @@ const OpenScienceSection = (): JSX.Element => {
   return (
     <BackgroundSection
       className={styles.root}
-      linearGradient="unset"
+      linearGradient="linear-gradient(180deg, #FFFFFF 50.1%, rgba(255, 255, 255, 0) 92.28%)"
       topSection={false}
       imageData={data.background?.childImageSharp?.fluid}
     >

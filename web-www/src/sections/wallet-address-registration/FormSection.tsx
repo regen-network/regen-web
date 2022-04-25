@@ -17,13 +17,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    paddingTop: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(10),
       paddingBottom: theme.spacing(23.25),
     },
     [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(3),
-      paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(12),
     },
   },

@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -12,6 +13,10 @@ import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outcomes: {
+    marginTop: theme.spacing(8),
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.spacing(4),
+    },
     '& .slick-slide': {
       '& div:first-child': {
         height: '100%',
@@ -67,7 +72,7 @@ const TitleDescriptionSection = (): JSX.Element => {
       <TitleDescription
         title={data?.title || ''}
         description={data?._rawDescription}
-      ></TitleDescription>
+      />
       <ResponsiveSlider
         itemWidth="90%"
         padding={theme.spacing(2.5)}

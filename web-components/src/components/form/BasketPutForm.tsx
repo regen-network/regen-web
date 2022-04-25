@@ -6,6 +6,7 @@ import SelectTextField, { Option } from '../inputs/SelectTextField';
 
 import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
+import { RegenModalProps } from '../modal';
 
 export interface BasketPutProps {
   basketOptions: Option[];
@@ -15,7 +16,7 @@ export interface BasketPutProps {
 }
 
 interface FormProps extends BasketPutProps {
-  onClose: () => void;
+  onClose: RegenModalProps['onClose'];
 }
 
 export interface FormValues {
@@ -72,7 +73,7 @@ const BasketPutForm: React.FC<FormProps> = ({
             name="amount"
             label="Amount"
             availableAmount={availableTradableAmount}
-            batchDenom={batchDenom}
+            denom={batchDenom}
           />
 
           <Submit

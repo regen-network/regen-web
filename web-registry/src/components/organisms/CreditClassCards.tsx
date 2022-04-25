@@ -7,18 +7,18 @@ import Grid from '@mui/material/Grid';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
-import { BlockContent } from 'web-components/lib/components/block-content';
-
-import { CreditClass } from '../../mocks';
 import {
-  CreditClass as CreditClassContent,
-  Maybe,
-} from '../../generated/sanity-graphql';
+  BlockContent,
+  blocksToText,
+} from 'web-components/lib/components/block-content';
+
+import { AllCreditClassQuery } from '../../generated/sanity-graphql';
+import { getSanityImgSrc } from '../../lib/imgSrc';
+import { onChainClassRegExp } from '../../lib/ledger';
 
 type Props = {
   btnText: string;
-  creditClasses: CreditClass[];
-  creditClassesContent?: Maybe<Array<CreditClassContent>>;
+  creditClassesContent?: AllCreditClassQuery['allCreditClass'];
   justifyContent?:
     | 'center'
     | 'space-around'
@@ -61,9 +61,12 @@ const CreditClassCards: React.FC<Props> = ({
       className={clsx(styles.root, props.classes && props.classes.root)}
       spacing={isMobile ? 0 : 5}
     >
-      {props.creditClasses.map((c, i) => {
-        const creditClassContent = props.creditClassesContent?.find(
-          creditClass => creditClass.path === c.id,
+      {props.creditClassesContent?.map((c, i) => {
+        const isOnChainClass = c.path && onChainClassRegExp.test(c.path);
+        const title = isOnChainClass ? (
+          `${blocksToText(c?.nameRaw)} (${c.path})`
+        ) : (
+          <BlockContent noYMargin content={c?.nameRaw} />
         );
         return (
           <Grid
@@ -77,21 +80,15 @@ const CreditClassCards: React.FC<Props> = ({
             <ImageActionCard
               key={i}
               btnText={props.btnText}
-              description={
-                <BlockContent
-                  content={creditClassContent?.shortDescriptionRaw}
-                />
-              }
-              imgSrc={c.imgSrc}
+              description={<BlockContent content={c?.shortDescriptionRaw} />}
+              imgSrc={getSanityImgSrc(c?.image)}
               onClick={() => {
-                const path =
-                  creditClassContent?.path &&
-                  `/credit-classes/${creditClassContent?.path}`;
+                const path = c?.path && `/credit-classes/${c?.path}`;
                 if (path) {
                   navigate(path);
                 }
               }}
-              title={<BlockContent content={creditClassContent?.nameRaw} />}
+              title={title}
             />
           </Grid>
         );

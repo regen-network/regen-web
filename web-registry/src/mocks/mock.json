@@ -1,17 +1,4 @@
 {
-  "creditClasses": [
-    {
-      "id": "carbonplus-grasslands",
-      "version": "Version 0.9 (beta)",
-      "creditDesigner": "Regen Network Development, Inc",
-      "ecoType": "Grasslands",
-      "ecoServiceType": "Carbon Removal",
-      "approvedMethodology": "Carbon<i>Plus</i> Grasslands Methodology",
-      "methodologyUrl": "/methodologies/carbonplus-grasslands",
-      "methodologyId": "carbonplus-grasslands",
-      "imgSrc": "https://regen-registry.s3.amazonaws.com/credit_classes/credit-class-grasslands.png"
-    }
-  ],
   "methodologies": [
     {
       "id": "carbonplus-grasslands",

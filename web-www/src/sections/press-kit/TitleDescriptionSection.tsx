@@ -10,7 +10,7 @@ import { PresskitTitleDescriptionSectionQuery } from '../../generated/graphql';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(8),
+      paddingBottom: theme.spacing(22.25),
     },
     [theme.breakpoints.down('sm')]: {
       paddingBottom: theme.spacing(15),

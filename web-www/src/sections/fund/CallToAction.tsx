@@ -17,7 +17,7 @@ import type { FundCallToActionQuery } from '../../generated/graphql';
 const useStyles = makeStyles<Theme>(theme => ({
   root: {
     display: 'flex',
-    paddingTop: theme.spacing(10),
+    paddingTop: theme.spacing(22.25),
     paddingBottom: theme.spacing(22.25),
   },
   card: {

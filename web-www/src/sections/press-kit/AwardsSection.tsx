@@ -66,8 +66,8 @@ const AwardsSection = (): JSX.Element => {
       <Img
         className={styles.image}
         fluid={item?.image?.asset?.fluid as FluidObject}
-      ></Img>
-      <Title variant="h5" sx={{ pt: [4, 4.5] }}>
+      />
+      <Title variant="h5" sx={{ pt: [4, 4.5] }} color="black">
         {item?.title}
       </Title>
     </a>

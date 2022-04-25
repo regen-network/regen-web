@@ -54,7 +54,7 @@ const TimelineSection = (): JSX.Element => {
       title={content?.header || ''}
     >
       <Body
-        mobileSize="md"
+        size="lg"
         sx={{
           textAlign: ['left', 'center'],
           pb: [9.5, 13.25],

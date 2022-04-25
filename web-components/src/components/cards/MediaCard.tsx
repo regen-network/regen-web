@@ -6,7 +6,7 @@ import cx from 'clsx';
 
 import Card from './Card';
 import { Image, OptimizeImageProps } from '../image';
-import { Title } from '../typography';
+import { Label, Title } from '../typography';
 import { parseText } from '../../utils/textParser';
 
 export interface MediaCardProps extends OptimizeImageProps {
@@ -40,20 +40,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(48.75),
     position: 'relative',
   },
-  tag: {
-    position: 'absolute',
-    bottom: theme.spacing(5),
-    left: theme.spacing(5),
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.primary.main,
-    boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)',
-    borderRadius: '50px',
-    textShadow: '0px 0px 2px rgba(0, 0, 0, 0.3)',
-    textTransform: 'uppercase',
-    fontWeight: 900,
-    fontFamily: theme.typography.fontFamily,
-    padding: `${theme.spacing(1.75)} ${theme.spacing(3.75)}`,
-  },
   backgroundGradient: {
     height: '100%',
     zIndex: 0,
@@ -63,11 +49,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '9px 9px 0px 0px',
     background:
       'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
-  },
-  h4title: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
   },
 }));
 
@@ -102,7 +83,24 @@ export default function MediaCard({
       apiServerUrl={apiServerUrl}
     >
       {backgroundGradient && <div className={classes.backgroundGradient} />}
-      {tag && <div className={classes.tag}>{tag}</div>}
+      {tag && (
+        <Label
+          sx={theme => ({
+            position: 'absolute',
+            bottom: theme.spacing(5),
+            left: theme.spacing(5),
+            py: 1.75,
+            px: 3.75,
+            color: 'primary.main',
+            backgroundColor: 'secondary.main',
+            boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.1)',
+            borderRadius: '50px',
+            textShadow: '0px 0px 2px rgba(0, 0, 0, 0.3)',
+          })}
+        >
+          {tag}
+        </Label>
+      )}
     </Image>
   );
 

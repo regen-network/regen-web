@@ -67,14 +67,14 @@ interface QueryBalanceProps extends BankQueryClientProps {
 export const queryBalance = async ({
   client,
   request,
-}: QueryBalanceProps): Promise<DeepPartial<QueryBalanceResponse> | Error> => {
+}: QueryBalanceProps): Promise<DeepPartial<QueryBalanceResponse>> => {
   try {
     return await client.Balance({
       address: request.address,
       denom: request.denom,
     });
   } catch (err) {
-    return err as Error;
+    throw new Error('Error in the Balance query of the ledger bank module.');
   }
 };
 
@@ -88,11 +88,13 @@ export const queryDenomMetadata = async ({
   client,
   request,
 }: QueryDenomMetadataProps): Promise<
-  DeepPartial<QueryDenomMetadataResponse> | Error
+  DeepPartial<QueryDenomMetadataResponse>
 > => {
   try {
     return await client.DenomMetadata({ denom: request.denom });
   } catch (err) {
-    return err as Error;
+    throw new Error(
+      'Error in the DenomMetadata query of the ledger bank module.',
+    );
   }
 };

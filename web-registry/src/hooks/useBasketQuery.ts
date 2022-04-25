@@ -14,7 +14,8 @@ import {
   queryBaskets,
 } from '../lib/basket';
 
-//
+// TODO - hook is still missing batch query functionality
+// TODO - the hook is still missing lazy query functionality
 
 type QueryOutput<T> = {
   data: T | undefined;

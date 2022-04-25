@@ -64,10 +64,12 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
     params: { denom: basketDenom },
   });
 
+  // TODO: useEcocreditQuery + batch queries
   const basketClassesInfo = useQueryListClassInfo(basket?.classes);
   const [basketClasses, setBasketClasses] = useState<ClassInfo[]>();
 
   const [batches, setBatches] = useState<string[]>();
+  // TODO: useEcocreditQuery + batch queries
   const basketBatches = useQueryListBatchInfo(batches);
 
   const [fetchProjectByBatchDenom] = useProjectByBatchDenomLazyQuery();

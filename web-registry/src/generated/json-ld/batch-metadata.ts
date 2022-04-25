@@ -9,12 +9,8 @@ export interface BatchMetadataLD {
   'regen:additionalCertifications': NameUrl[];
 }
 
-interface AdditionalCertifications {
-  '@container': '@list';
-}
-
 interface Context {
   schema: string;
   regen: string;
-  'regen:additionalCertifications': AdditionalCertifications;
+  'regen:additionalCertifications': { '@container': '@list' };
 }

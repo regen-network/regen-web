@@ -1,9 +1,15 @@
 import {
-  QueryClientImpl as BasketQueryClient,
+  QueryClientImpl,
+  DeepPartial,
+  QueryBasketRequest,
   QueryBasketResponse,
+  QueryBasketsRequest,
   QueryBasketsResponse,
+  QueryBasketBalancesRequest,
   QueryBasketBalancesResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+
+// TODO: pagination not implemented yet
 
 /**
  *
@@ -16,19 +22,67 @@ import {
  *
  */
 
+/**
+ *
+ * QUERY TYPES
+ *
+ */
+
+// typing the query client
+
+export type BasketQueryClient = QueryClientImpl;
+
+interface BasketQueryClientProps {
+  client: BasketQueryClient;
+}
+
+// typing and linking query names and corresponding input params
+
+type BasketParams = {
+  queryName: 'basket';
+  params: DeepPartial<QueryBasketRequest>;
+};
+
+type BasketsParams = {
+  queryName: 'baskets';
+  params: DeepPartial<QueryBasketsRequest>;
+};
+
+type BasketBalancesParams = {
+  queryName: 'basketBalances';
+  params: DeepPartial<QueryBasketBalancesRequest>;
+};
+
+export type BasketQueryProps =
+  | BasketParams
+  | BasketsParams
+  | BasketBalancesParams;
+
+// TODO ?
+// typing the response
+// export type BasketQueryResponse =
+//   | QueryBasketResponse
+//   | QueryBasketsResponse
+//   | QueryBasketBalancesResponse;
+
+/**
+ *
+ * QUERY FUNCTIONS
+ *
+ */
+
 // Basket
 
-export type QueryBasketProps = {
-  client: BasketQueryClient;
-  basketDenom: string;
-};
+interface QueryBasketProps extends BasketQueryClientProps {
+  request: DeepPartial<QueryBasketRequest>;
+}
 
 export const queryBasket = async ({
   client,
-  basketDenom,
-}: QueryBasketProps): Promise<QueryBasketResponse | Error> => {
+  request,
+}: QueryBasketProps): Promise<DeepPartial<QueryBasketResponse> | Error> => {
   try {
-    return await client.Basket({ basketDenom });
+    return await client.Basket({ basketDenom: request.basketDenom });
   } catch (err) {
     return err as Error;
   }
@@ -36,13 +90,14 @@ export const queryBasket = async ({
 
 // Baskets
 
-export type QueryBasketsProps = {
-  client: BasketQueryClient;
-};
+interface QueryBasketsProps extends BasketQueryClientProps {
+  request: DeepPartial<QueryBasketsRequest>;
+}
 
 export const queryBaskets = async ({
   client,
-}: QueryBasketsProps): Promise<QueryBasketsResponse | Error> => {
+  request,
+}: QueryBasketsProps): Promise<DeepPartial<QueryBasketsResponse> | Error> => {
   try {
     return await client.Baskets({});
   } catch (err) {
@@ -52,17 +107,18 @@ export const queryBaskets = async ({
 
 // Basket Balances
 
-export type QueryBasketBalancesProps = {
-  client: BasketQueryClient;
-  basketDenom: string;
-};
+interface QueryBasketBalancesProps extends BasketQueryClientProps {
+  request: DeepPartial<QueryBasketBalancesRequest>;
+}
 
 export const queryBasketBalances = async ({
   client,
-  basketDenom,
-}: QueryBasketBalancesProps): Promise<QueryBasketBalancesResponse | Error> => {
+  request,
+}: QueryBasketBalancesProps): Promise<
+  DeepPartial<QueryBasketBalancesResponse> | Error
+> => {
   try {
-    return await client.BasketBalances({ basketDenom });
+    return await client.BasketBalances({ basketDenom: request.basketDenom });
   } catch (err) {
     return err as Error;
   }

@@ -1,17 +1,18 @@
 import { useState, useEffect, useCallback } from 'react';
 
 // TODO: move query client creation to the ledger context ?
-import { QueryClientImpl } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import { useLedger } from '../ledger';
 import {
   // types
-  BankQueryClient,
-  BankQueryProps,
+  BasketQueryClient,
+  BasketQueryProps,
   // queries
-  queryBalance,
-  queryDenomMetadata,
-} from '../lib/bank';
+  queryBasket,
+  queryBasketBalances,
+  queryBaskets,
+} from '../lib/basket';
 
 //
 
@@ -21,12 +22,12 @@ type QueryOutput<T> = {
   error: Error | undefined;
 };
 
-export default function useBankQuery<T>({
+export default function useBasketQuery<T>({
   queryName,
   params,
-}: BankQueryProps): QueryOutput<T> {
+}: BasketQueryProps): QueryOutput<T> {
   const { api } = useLedger();
-  const [client, setClient] = useState<BankQueryClient>();
+  const [client, setClient] = useState<BasketQueryClient>();
 
   const [data, setData] = useState<T | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -39,13 +40,18 @@ export default function useBankQuery<T>({
     setClient(new QueryClientImpl(api.queryClient));
   }, [api?.queryClient, client]);
 
-  const balance = useCallback(
-    (client, params) => queryBalance({ client, request: params }),
+  const basket = useCallback(
+    (client, params) => queryBasket({ client, request: params }),
     [],
   );
 
-  const denomMetadata = useCallback(
-    (client, params) => queryDenomMetadata({ client, request: params }),
+  const baskets = useCallback(
+    (client, params) => queryBaskets({ client, request: params }),
+    [],
+  );
+
+  const basketBalances = useCallback(
+    (client, params) => queryBasketBalances({ client, request: params }),
     [],
   );
 
@@ -58,12 +64,16 @@ export default function useBankQuery<T>({
 
     setLoading(true);
 
-    if (queryName === 'balance') {
-      response = balance(client, params);
+    if (queryName === 'basket') {
+      response = basket(client, params);
     }
 
-    if (queryName === 'denomMetadata') {
-      response = denomMetadata(client, params);
+    if (queryName === 'baskets') {
+      response = baskets(client, params);
+    }
+
+    if (queryName === 'basketBalances') {
+      response = basketBalances(client, params);
     }
 
     if (response) {
@@ -72,7 +82,17 @@ export default function useBankQuery<T>({
         .catch(setError)
         .finally(() => setLoading(false));
     }
-  }, [client, queryName, params, data, loading, error, balance, denomMetadata]);
+  }, [
+    client,
+    queryName,
+    params,
+    data,
+    loading,
+    error,
+    basket,
+    baskets,
+    basketBalances,
+  ]);
 
   return { data, loading, error };
 }

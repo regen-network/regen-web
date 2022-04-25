@@ -7,6 +7,8 @@ import {
   QueryDenomMetadataResponse,
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
+// TODO: pagination not implemented yet
+
 /**
  *
  * BANK MODULE QUERIES
@@ -46,9 +48,9 @@ type DenomMetadataParams = {
 
 export type BankQueryProps = BalanceParams | DenomMetadataParams;
 
-// typing the data received (Data Transfer Object), the output of the query
-
-export type BankQueryDTO = QueryDenomMetadataResponse | QueryBalanceResponse;
+// TODO ?
+// typing the response
+// export type BankQueryResponse = QueryDenomMetadataResponse | QueryBalanceResponse;
 
 /**
  *
@@ -62,11 +64,18 @@ interface QueryBalanceProps extends BankQueryClientProps {
   request: DeepPartial<QueryBalanceRequest>;
 }
 
-export const queryBalance = ({
+export const queryBalance = async ({
   client,
   request,
-}: QueryBalanceProps): Promise<QueryBalanceResponse> => {
-  return client.Balance({ address: request.address, denom: request.denom });
+}: QueryBalanceProps): Promise<DeepPartial<QueryBalanceResponse> | Error> => {
+  try {
+    return await client.Balance({
+      address: request.address,
+      denom: request.denom,
+    });
+  } catch (err) {
+    return err as Error;
+  }
 };
 
 // Denom Metadata
@@ -75,9 +84,15 @@ interface QueryDenomMetadataProps extends BankQueryClientProps {
   request: DeepPartial<QueryDenomMetadataRequest>;
 }
 
-export const queryDenomMetadata = ({
+export const queryDenomMetadata = async ({
   client,
   request,
-}: QueryDenomMetadataProps): Promise<QueryDenomMetadataResponse> => {
-  return client.DenomMetadata({ denom: request.denom });
+}: QueryDenomMetadataProps): Promise<
+  DeepPartial<QueryDenomMetadataResponse> | Error
+> => {
+  try {
+    return await client.DenomMetadata({ denom: request.denom });
+  } catch (err) {
+    return err as Error;
+  }
 };

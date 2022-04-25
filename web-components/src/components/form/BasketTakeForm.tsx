@@ -11,18 +11,21 @@ import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
   BottomCreditRetireFields,
   RetireFormValues,
+  MetaRetireFormValues,
   validateCreditRetire,
+  BottomCreditRetireFieldsProps,
 } from './CreditRetireForm';
 import Submit from './Submit';
 import { validateAmount } from '../inputs/validation';
 import { getISOString } from '../../utils/locationStandard';
+import { RegenModalProps } from '../modal';
 
 /**
  * Take - takes credits from a basket starting from the oldest credits first.
  * https://docs.regen.network/commands/regen_tx_ecocredit_take-from-basket.html
  *
  * Validation:
- *    holder: must ba a valid address, and their signature must be present in the transaction
+ *    holder: must be a valid address, and their signature must be present in the transaction
  *    amount: must not be empty
  *    basket_denom: must be a valid batch denomination
  *  if retire_on_take is true:
@@ -58,33 +61,30 @@ export interface MsgTakeValues {
   retirementNote?: string;
 }
 
-interface CreditTakeFormValues {
+interface CreditTakeFormValues extends MetaRetireFormValues {
   amount: number;
   retireOnTake?: boolean;
-  note?: string;
-  country: string;
-  stateProvince: string;
-  postalCode?: string;
-  retirementLocation?: string;
+}
+
+export interface BasketTakeProps extends BottomCreditRetireFieldsProps {
+  basket: Basket;
+  basketDisplayDenom: string;
+  accountAddress: string;
+  balance: number;
+  onSubmit: (values: MsgTakeValues) => void;
 }
 
 // Input (args)
-interface FormProps {
-  mapboxToken: string;
-  accountAddress: string;
-  basket: Basket;
-  basketDenom: string;
-  availableTradableAmount: number;
-  onClose: () => void;
-  onSubmit: (values: MsgTakeValues) => void;
+interface FormProps extends BasketTakeProps {
+  onClose: RegenModalProps['onClose'];
 }
 
 const BasketTakeForm: React.FC<FormProps> = ({
   mapboxToken,
   accountAddress,
   basket,
-  basketDenom,
-  availableTradableAmount,
+  basketDisplayDenom,
+  balance,
   onClose,
   onSubmit,
 }) => {
@@ -105,7 +105,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
     let errors: FormikErrors<CreditTakeFormValues> = {};
 
     const errAmount = validateAmount(
-      availableTradableAmount,
+      balance,
       values.amount,
       `You don't have enough basket tokens`,
     );
@@ -120,11 +120,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
         stateProvince: values.stateProvince,
         postalCode: values.postalCode,
       };
-      errors = validateCreditRetire(
-        availableTradableAmount,
-        retirementValues,
-        errors,
-      );
+      errors = validateCreditRetire(balance, retirementValues, errors);
     }
     return errors;
   };
@@ -142,33 +138,6 @@ const BasketTakeForm: React.FC<FormProps> = ({
     return onSubmit(msgTake);
   };
 
-  const AutoSetRetirementLocation = (): JSX.Element => {
-    const {
-      values: { country, stateProvince, postalCode },
-      setFieldValue,
-    } = useFormikContext<CreditTakeFormValues>();
-
-    useEffect(() => {
-      const setRetirementLocation = async (): Promise<void> => {
-        const isoString = await getISOString(mapboxToken, {
-          countryKey: country,
-          stateProvince,
-          postalCode,
-        });
-        setFieldValue('retirementLocation', isoString);
-      };
-
-      if (stateProvince || country || postalCode) {
-        setRetirementLocation();
-      }
-      if (!country) {
-        setFieldValue('retirementLocation', null)
-      }
-    }, [country, stateProvince, postalCode, setFieldValue]);
-
-    return <></>;
-  };
-
   return (
     <Formik
       initialValues={initialValues}
@@ -181,8 +150,8 @@ const BasketTakeForm: React.FC<FormProps> = ({
             <AmountField
               name="amount"
               label="Amount"
-              availableAmount={availableTradableAmount}
-              batchDenom={basketDenom}
+              availableAmount={balance}
+              denom={basketDisplayDenom}
             />
             <Field
               component={CheckboxLabel}
@@ -198,10 +167,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
             />
             <Collapse in={values.retireOnTake} collapsedSize={0}>
               {values.retireOnTake && (
-                <>
-                  <BottomCreditRetireFields />
-                  <AutoSetRetirementLocation />
-                </>
+                <BottomCreditRetireFields mapboxToken={mapboxToken} />
               )}
             </Collapse>
           </>

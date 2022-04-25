@@ -5,6 +5,10 @@ import {
   QueryBalanceResponse,
   QueryDenomMetadataRequest,
   QueryDenomMetadataResponse,
+  QueryAllBalancesRequest,
+  QueryAllBalancesResponse,
+  QueryDenomsMetadataRequest,
+  QueryDenomsMetadataResponse,
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 // TODO: pagination not implemented yet
@@ -13,10 +17,10 @@ import {
  *
  * BANK MODULE QUERIES
  * -------------------
- *  - AllBalances (TODO)
+ *  - AllBalances
  *  - Balance
  *  - DenomMetadata
- *  - DenomsMetadata (TODO)
+ *  - DenomsMetadata
  *
  */
 
@@ -36,17 +40,31 @@ interface BankQueryClientProps {
 
 // typing and linking query names and corresponding input params
 
+type AllBalancesParams = {
+  query: 'allBalances';
+  params: DeepPartial<QueryAllBalancesRequest>;
+};
+
 type BalanceParams = {
-  queryName: 'balance';
+  query: 'balance';
   params: DeepPartial<QueryBalanceRequest>;
 };
 
 type DenomMetadataParams = {
-  queryName: 'denomMetadata';
+  query: 'denomMetadata';
   params: DeepPartial<QueryDenomMetadataRequest>;
 };
 
-export type BankQueryProps = BalanceParams | DenomMetadataParams;
+type DenomsMetadataParams = {
+  query: 'denomsMetadata';
+  params: DeepPartial<QueryDenomsMetadataRequest>;
+};
+
+export type BankQueryProps =
+  | AllBalancesParams
+  | BalanceParams
+  | DenomMetadataParams
+  | DenomsMetadataParams;
 
 // TODO ?
 // typing the response
@@ -57,6 +75,27 @@ export type BankQueryProps = BalanceParams | DenomMetadataParams;
  * QUERY FUNCTIONS
  *
  */
+
+// All Balances
+
+interface QueryAllBalancesProps extends BankQueryClientProps {
+  request: DeepPartial<QueryAllBalancesRequest>;
+}
+
+export const queryAllBalances = async ({
+  client,
+  request,
+}: QueryAllBalancesProps): Promise<DeepPartial<QueryAllBalancesResponse>> => {
+  try {
+    return await client.AllBalances({
+      address: request.address,
+    });
+  } catch (err) {
+    throw new Error(
+      'Error in the AllBalances query of the ledger bank module.',
+    );
+  }
+};
 
 // Balance
 
@@ -95,6 +134,27 @@ export const queryDenomMetadata = async ({
   } catch (err) {
     throw new Error(
       'Error in the DenomMetadata query of the ledger bank module.',
+    );
+  }
+};
+
+// Denoms Metadata
+
+interface QueryDenomsMetadataProps extends BankQueryClientProps {
+  request: DeepPartial<QueryDenomsMetadataRequest>;
+}
+
+export const queryDenomsMetadata = async ({
+  client,
+  request,
+}: QueryDenomsMetadataProps): Promise<
+  DeepPartial<QueryDenomsMetadataResponse>
+> => {
+  try {
+    return await client.DenomsMetadata({});
+  } catch (err) {
+    throw new Error(
+      'Error in the DenomsMetadata query of the ledger bank module.',
     );
   }
 };

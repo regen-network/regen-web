@@ -39,17 +39,17 @@ interface BasketQueryClientProps {
 // typing and linking query names and corresponding input params
 
 type BasketParams = {
-  queryName: 'basket';
+  query: 'basket';
   params: DeepPartial<QueryBasketRequest>;
 };
 
 type BasketsParams = {
-  queryName: 'baskets';
+  query: 'baskets';
   params: DeepPartial<QueryBasketsRequest>;
 };
 
 type BasketBalancesParams = {
-  queryName: 'basketBalances';
+  query: 'basketBalances';
   params: DeepPartial<QueryBasketBalancesRequest>;
 };
 

@@ -9,8 +9,10 @@ import {
   BankQueryClient,
   BankQueryProps,
   // queries
+  queryAllBalances,
   queryBalance,
   queryDenomMetadata,
+  queryDenomsMetadata,
 } from '../lib/bank';
 
 // TODO - hook is still missing batch query functionality
@@ -23,7 +25,7 @@ type QueryOutput<T> = {
 };
 
 export default function useBankQuery<T>({
-  queryName,
+  query,
   params,
 }: BankQueryProps): QueryOutput<T> {
   const { api } = useLedger();
@@ -40,6 +42,11 @@ export default function useBankQuery<T>({
     setClient(new QueryClientImpl(api.queryClient));
   }, [api?.queryClient, client]);
 
+  const allBalances = useCallback(
+    (client, params) => queryAllBalances({ client, request: params }),
+    [],
+  );
+
   const balance = useCallback(
     (client, params) => queryBalance({ client, request: params }),
     [],
@@ -47,6 +54,11 @@ export default function useBankQuery<T>({
 
   const denomMetadata = useCallback(
     (client, params) => queryDenomMetadata({ client, request: params }),
+    [],
+  );
+
+  const denomsMetadata = useCallback(
+    (client, params) => queryDenomsMetadata({ client, request: params }),
     [],
   );
 
@@ -59,12 +71,20 @@ export default function useBankQuery<T>({
 
     setLoading(true);
 
-    if (queryName === 'balance') {
+    if (query === 'allBalances') {
+      response = allBalances(client, params);
+    }
+
+    if (query === 'balance') {
       response = balance(client, params);
     }
 
-    if (queryName === 'denomMetadata') {
+    if (query === 'denomMetadata') {
       response = denomMetadata(client, params);
+    }
+
+    if (query === 'denomsMetadata') {
+      response = denomsMetadata(client, params);
     }
 
     if (response) {
@@ -73,7 +93,18 @@ export default function useBankQuery<T>({
         .catch(setError)
         .finally(() => setLoading(false));
     }
-  }, [client, queryName, params, data, loading, error, balance, denomMetadata]);
+  }, [
+    client,
+    query,
+    params,
+    data,
+    loading,
+    error,
+    allBalances,
+    balance,
+    denomMetadata,
+    denomsMetadata,
+  ]);
 
   return { data, loading, error };
 }

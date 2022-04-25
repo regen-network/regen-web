@@ -50,17 +50,17 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
   // Data to fetch and process
 
   const { data: basket } = useBasketQuery<QueryBasketResponse>({
-    queryName: 'basket',
+    query: 'basket',
     params: { basketDenom },
   });
 
   const { data: basketBalances } = useBasketQuery<QueryBasketBalancesResponse>({
-    queryName: 'basketBalances',
+    query: 'basketBalances',
     params: { basketDenom },
   });
 
   const { data: basketMetadata } = useBankQuery<QueryDenomMetadataResponse>({
-    queryName: 'denomMetadata',
+    query: 'denomMetadata',
     params: { denom: basketDenom },
   });
 

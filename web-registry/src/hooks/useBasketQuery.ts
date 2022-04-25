@@ -24,7 +24,7 @@ type QueryOutput<T> = {
 };
 
 export default function useBasketQuery<T>({
-  queryName,
+  query,
   params,
 }: BasketQueryProps): QueryOutput<T> {
   const { api } = useLedger();
@@ -65,15 +65,15 @@ export default function useBasketQuery<T>({
 
     setLoading(true);
 
-    if (queryName === 'basket') {
+    if (query === 'basket') {
       response = basket(client, params);
     }
 
-    if (queryName === 'baskets') {
+    if (query === 'baskets') {
       response = baskets(client, params);
     }
 
-    if (queryName === 'basketBalances') {
+    if (query === 'basketBalances') {
       response = basketBalances(client, params);
     }
 
@@ -85,7 +85,7 @@ export default function useBasketQuery<T>({
     }
   }, [
     client,
-    queryName,
+    query,
     params,
     data,
     loading,

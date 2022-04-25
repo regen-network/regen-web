@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import {
+  MsgSend,
+  MsgRetire,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
+import {
   MsgPut,
   MsgTake,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
@@ -10,12 +14,28 @@ import { TableActionButtons } from 'web-components/lib/components/buttons/TableA
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
-import { BasketTakeModal } from 'web-components/lib/components/modal/BasketTakeModal';
+import {
+  BasketPutModal,
+  title as basketPutTitle,
+} from 'web-components/lib/components/modal/BasketPutModal';
+import {
+  BasketTakeModal,
+  title as basketTakeTitle,
+} from 'web-components/lib/components/modal/BasketTakeModal';
+import {
+  CreditSendModal,
+  title as creditSendTitle,
+} from 'web-components/lib/components/modal/CreditSendModal';
+import {
+  CreditRetireModal,
+  title as creditRetireTitle,
+} from 'web-components/lib/components/modal/CreditRetireModal';
 import {
   TxSuccessfulModal,
   Item,
 } from 'web-components/lib/components/modal/TxSuccessfulModal';
+import { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
+import { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
 import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
 import { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
@@ -71,6 +91,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
 
   const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   // TODO handle error when signing and broadcasting tx
+  // https://github.com/regen-network/regen-registry/issues/884
   const { signAndBroadcast, setDeliverTxResponse, wallet, deliverTxResponse } =
     useMsgClient(handleTxQueued, handleTxDelivered);
   const accountAddress = wallet?.address;
@@ -86,6 +107,8 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     (QueryBasketResponse | undefined)[][]
   >([]);
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
+  const [creditSendOpen, setCreditSendOpen] = useState<number>(-1);
+  const [creditRetireOpen, setCreditRetireOpen] = useState<number>(-1);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [basketTakeTokens, setBasketTakeTokens] = useState<
     BasketTokens | undefined
@@ -118,8 +141,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   };
 
   const basketTakeSubmit = async (values: MsgTakeValues): Promise<void> => {
-    const msgClient = api?.msgClient;
-    if (!msgClient?.broadcast || !accountAddress) return Promise.reject();
+    if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
 
     const amount = values?.amount;
     const basket = baskets?.baskets.find(
@@ -134,13 +156,13 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       retireOnTake: values.retireOnTake || false,
     });
 
-    const message = {
+    const tx = {
       msgs: [msg],
       fee: undefined,
       memo: values?.retirementNote,
     };
 
-    await signAndBroadcast(message, () => setBasketTakeTokens(undefined));
+    await signAndBroadcast(tx, () => setBasketTakeTokens(undefined));
 
     if (basket && amount) {
       setCardItems([
@@ -153,8 +175,49 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
         },
       ]);
+      setIsTxSuccessfulModalTitle(basketTakeTitle);
     }
-    setIsTxSuccessfulModalTitle('Take from basket');
+  };
+
+  const creditSendSubmit = async (
+    values: CreditSendFormValues,
+  ): Promise<void> => {
+    if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
+    const batchDenom = credits[creditSendOpen].batch_denom;
+    const recipient = values.recipient;
+    const msg = MsgSend.fromPartial({
+      sender: accountAddress,
+      recipient,
+      credits: [
+        {
+          batchDenom,
+          tradableAmount: values.tradableAmount.toString(),
+          retiredAmount: values.retiredAmount.toString(),
+          retirementLocation: values.retirementLocation,
+        },
+      ],
+    });
+
+    const tx = {
+      msgs: [msg],
+      fee: undefined,
+      memo: values?.note,
+    };
+
+    await signAndBroadcast(tx, () => setCreditSendOpen(-1));
+    if (batchDenom && recipient) {
+      setCardItems([
+        {
+          label: 'batch denom',
+          value: { name: batchDenom },
+        },
+        {
+          label: 'recipient',
+          value: { name: recipient },
+        },
+      ]);
+      setIsTxSuccessfulModalTitle(creditSendTitle);
+    }
   };
 
   const basketPutSubmit = async (
@@ -163,7 +226,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     const amount = values.amount?.toString();
     const msg = MsgPut.fromPartial({
       basketDenom: values.basketDenom,
-      owner: wallet?.address,
+      owner: accountAddress,
       credits: [
         {
           batchDenom: credits[basketPutOpen].batch_denom,
@@ -186,7 +249,46 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           value: { name: amount },
         },
       ]);
-      setIsTxSuccessfulModalTitle('Put in basket');
+      setIsTxSuccessfulModalTitle(basketPutTitle);
+    }
+  };
+
+  const creditRetireSubmit = async (
+    values: CreditRetireFormValues,
+  ): Promise<void> => {
+    if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
+    const batchDenom = credits[creditRetireOpen].batch_denom;
+    const amount = values.retiredAmount.toString();
+    const msg = MsgRetire.fromPartial({
+      holder: accountAddress,
+      location: values.retirementLocation,
+      credits: [
+        {
+          batchDenom,
+          amount,
+        },
+      ],
+    });
+
+    const tx = {
+      msgs: [msg],
+      fee: undefined,
+      memo: values?.note,
+    };
+
+    await signAndBroadcast(tx, () => setCreditRetireOpen(-1));
+    if (batchDenom && amount) {
+      setCardItems([
+        {
+          label: 'batch denom',
+          value: { name: batchDenom },
+        },
+        {
+          label: 'number of credits',
+          value: { name: amount },
+        },
+      ]);
+      setIsTxSuccessfulModalTitle(creditRetireTitle);
     }
   };
 
@@ -195,60 +297,67 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       <PortfolioTemplate
         credits={credits}
         basketTokens={basketTokens}
-        renderCreditActionButtons={(i: number) => {
-          const buttons = [
-            // Disabling for now until the marketplace is
-            // released on regen-ledger
-            // {
-            //   icon: <Sell />,
-            //   label: 'Sell',
-            //   // eslint-disable-next-line no-console
-            //   onClick: () => console.log(`TODO sell credit ${i}`),
-            // },
-            {
-              icon: (
-                <ArrowDownIcon
-                  className={styles.arrow}
-                  color={theme.palette.secondary.main}
-                  direction="next"
-                />
-              ),
-              label: 'Send',
-              // eslint-disable-next-line no-console
-              onClick: () => console.log(`TODO send credit ${i}`),
-            },
-            {
-              icon: (
-                <ArrowDownIcon
-                  className={styles.arrow}
-                  color={theme.palette.secondary.main}
-                  direction="down"
-                />
-              ),
-              label: 'Retire',
-              // eslint-disable-next-line no-console
-              onClick: () => console.log(`TODO retire credit ${i}`),
-            },
-          ];
+        renderCreditActionButtons={
+          credits.findIndex(c => Number(c.tradable_amount) > 0) > -1
+            ? (i: number) => {
+                // No CTA available without tradable credit for given credit batch
+                if (Number(credits[i].tradable_amount) <= 0) {
+                  return undefined;
+                }
+                const buttons = [
+                  // Disabling for now until the marketplace is
+                  // released on regen-ledger
+                  // {
+                  //   icon: <Sell />,
+                  //   label: 'Sell',
+                  //   // eslint-disable-next-line no-console
+                  //   onClick: () => console.log(`TODO sell credit ${i}`),
+                  // },
+                  {
+                    icon: (
+                      <ArrowDownIcon
+                        className={styles.arrow}
+                        color={theme.palette.secondary.main}
+                        direction="next"
+                      />
+                    ),
+                    label: creditSendTitle,
+                    onClick: () => setCreditSendOpen(i),
+                  },
+                  {
+                    icon: (
+                      <ArrowDownIcon
+                        className={styles.arrow}
+                        color={theme.palette.secondary.main}
+                        direction="down"
+                      />
+                    ),
+                    label: creditRetireTitle,
+                    onClick: () => setCreditRetireOpen(i),
+                  },
+                ];
 
-          // Only add ability to put credits into basket
-          // if there's at least one basket that accepts those credits
-          if (creditBaskets[i] && creditBaskets[i].length > 0) {
-            buttons.splice(1, 0, {
-              // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
-              icon: <PutInBasket />,
-              label: 'Put in basket',
-              onClick: () => setBasketPutOpen(i),
-            });
-          }
-          return <TableActionButtons buttons={buttons} />;
-        }}
+                // Only add ability to put credits into basket
+                // if there's at least one basket that accepts those credits
+                if (creditBaskets[i] && creditBaskets[i].length > 0) {
+                  buttons.splice(1, 0, {
+                    // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
+                    icon: <PutInBasket />,
+                    label: basketPutTitle,
+                    onClick: () => setBasketPutOpen(i),
+                  });
+                }
+                return <TableActionButtons buttons={buttons} />;
+              }
+            : // Hide full CTA column if no credits tradable for all credit batches
+              undefined
+        }
         renderBasketActionButtons={(i: number) => (
           <TableActionButtons
             buttons={[
               {
                 icon: <TakeFromBasket />,
-                label: 'Take from basket',
+                label: basketTakeTitle,
                 onClick: () => openTakeModal(i),
               },
               // This will be handled from osmosis
@@ -267,6 +376,19 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           />
         )}
       />
+      {creditSendOpen > -1 && !!accountAddress && (
+        <CreditSendModal
+          sender={accountAddress}
+          batchDenom={credits[creditSendOpen].batch_denom}
+          availableTradableAmount={Number(
+            credits[creditSendOpen].tradable_amount,
+          )}
+          mapboxToken={mapboxToken}
+          open={creditSendOpen > -1}
+          onClose={() => setCreditSendOpen(-1)}
+          onSubmit={creditSendSubmit}
+        />
+      )}
       {basketPutOpen > -1 && (
         <BasketPutModal
           basketOptions={
@@ -286,12 +408,27 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           onSubmit={basketPutSubmit}
         />
       )}
+      {creditRetireOpen > -1 && !!accountAddress && (
+        <CreditRetireModal
+          holder={accountAddress}
+          batchDenom={credits[creditRetireOpen].batch_denom}
+          availableTradableAmount={Number(
+            credits[creditRetireOpen].tradable_amount,
+          )}
+          mapboxToken={mapboxToken}
+          open={creditRetireOpen > -1}
+          onClose={() => setCreditRetireOpen(-1)}
+          onSubmit={creditRetireSubmit}
+        />
+      )}
       {!!basketTakeTokens?.basket && !!accountAddress && (
         <BasketTakeModal
           open={true}
           accountAddress={accountAddress}
           basket={basketTakeTokens?.basket}
-          basketDenom={basketTakeTokens?.metadata?.metadata?.display || ''}
+          basketDisplayDenom={
+            basketTakeTokens?.metadata?.metadata?.display || ''
+          }
           balance={
             parseInt(basketTakeTokens?.balance?.balance?.amount || '0') /
             Math.pow(10, basketTakeTokens?.basket?.exponent)

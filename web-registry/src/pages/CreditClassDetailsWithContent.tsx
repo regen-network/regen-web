@@ -12,7 +12,6 @@ import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchFooter';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
-import { CreditClass } from '../mocks/mocks';
 import { HeroTitle } from '../components/molecules';
 import {
   ImpactSection,
@@ -26,17 +25,15 @@ import {
 import hero from '../assets/credit-class-grasslands-hero.png';
 import getApiUri from '../lib/apiUri';
 import { onBtnClick } from '../lib/button';
-import { useMoreProjectsQuery } from '../generated/graphql';
 import {
-  Maybe,
-  StepCardFieldsFragment,
-  // CreditClass as CreditClassContent, TODO
-} from '../generated/sanity-graphql';
+  useMoreProjectsQuery,
+  CreditClassByUriQuery,
+} from '../generated/graphql';
+import { CreditClass } from '../generated/sanity-graphql';
 
 interface CreditDetailsProps {
-  creditClass: CreditClass; // TODO
-  content: any;
-  // content: CreditClassContent; //TODO
+  dbClass: CreditClassByUriQuery['creditClassByUri'];
+  content: CreditClass;
   isLandSteward?: boolean;
 }
 
@@ -105,7 +102,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 }));
 
 const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
-  creditClass,
+  dbClass,
   content,
   isLandSteward,
 }) => {
@@ -120,8 +117,8 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
 
   const getFeaturedProjects = (): JSX.Element => {
     const featuredProjects = projectsData?.allProjects?.nodes?.filter(project =>
-      content?.landSteward?.featuredProjectIds?.some(
-        (projectId: string) => projectId === project?.handle,
+      content.landSteward?.featuredProjectIds?.some(
+        projectId => projectId === project?.handle,
       ),
     );
 
@@ -129,7 +126,7 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
       <div className="topo-background-alternate">
         <MoreProjectsSection
           classes={{ root: styles.sectionPadding, title: styles.title }}
-          title={content?.landSteward?.projectsTitle || 'Featured Projects'}
+          title={content.landSteward?.projectsTitle || 'Featured Projects'}
           projects={featuredProjects}
         />
       </div>
@@ -141,14 +138,14 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
   const getAllProjects = (): JSX.Element => {
     const projects = projectsData?.allProjects?.nodes?.filter(
       project =>
-        project?.creditClassByCreditClassId?.uri === content?.iri?.current,
+        project?.creditClassByCreditClassId?.uri === content.iri?.current,
     );
 
     return projects && projects.length > 0 ? (
       <div className="topo-background-alternate">
         <MoreProjectsSection
           classes={{ root: styles.sectionPadding, title: styles.title }}
-          title={content?.buyer?.projectsTitle || 'More Projects'}
+          title={content.buyer?.projectsTitle || 'More Projects'}
           projects={projects}
         />
       </div>
@@ -159,7 +156,7 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
 
   const onCtaClick = (): void => {
     if (isLandSteward && content) {
-      return onBtnClick(openModalLink, content?.landSteward?.ctaButton);
+      return onBtnClick(openModalLink, content.landSteward?.ctaButton);
     } else {
       return setBuyerModalOpen(true);
     }
@@ -184,19 +181,19 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
         img={hero}
         title={
           isLandSteward
-            ? content?.landSteward?.heroSection?.title
-            : content?.buyer?.heroSection?.title
+            ? content.landSteward?.heroSection?.title
+            : content.buyer?.heroSection?.title
         }
         descriptionRaw={
           isLandSteward
-            ? content?.landSteward?.heroSection?.descriptionRaw
-            : content?.buyer?.heroSection?.descriptionRaw
+            ? content.landSteward?.heroSection?.descriptionRaw
+            : content.buyer?.heroSection?.descriptionRaw
         }
         classes={{ main: styles.heroMain }}
       />
       <Section
         title={
-          content?.nameRaw ? <BlockContent content={content?.nameRaw} /> : ''
+          content.nameRaw ? <BlockContent content={content.nameRaw} /> : ''
         }
         classes={{
           root: styles.introSection,
@@ -205,23 +202,23 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
         }}
       >
         <Description className={styles.sectionDescription}>
-          <BlockContent content={content?.descriptionRaw} />
+          <BlockContent content={content.descriptionRaw} />
         </Description>
       </Section>
       <div className="topo-background-alternate">
-        {content?.ecologicalImpact && (
+        {content.ecologicalImpact && (
           <ImpactSection
             title="Ecological Impact"
-            impacts={content?.ecologicalImpact}
+            impacts={content.ecologicalImpact}
           />
         )}
         {!isLandSteward && (
           <CreditClassOverviewSection
             className={styles.overviewSection}
-            creditClass={creditClass}
-            nameRaw={content?.nameRaw}
-            overviewCards={content?.overviewCards}
-            sdgs={content?.sdgs}
+            dbClass={dbClass}
+            nameRaw={content.nameRaw}
+            overviewCards={content.overviewCards}
+            sdgs={content.sdgs}
           />
         )}
       </div>
@@ -230,26 +227,18 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
           {getFeaturedProjects()}
           <div className="topo-background-alternate">
             <CreditClassOverviewSection
-              creditClass={creditClass}
-              nameRaw={content?.nameRaw}
-              overviewCards={content?.overviewCards}
-              sdgs={content?.sdgs}
+              dbClass={dbClass}
+              nameRaw={content.nameRaw}
+              overviewCards={content.overviewCards}
+              sdgs={content.sdgs}
             />
           </div>
         </>
       )}
       {!isLandSteward && getAllProjects()}
       {isLandSteward &&
-        content?.landSteward?.steps?.map(
-          (
-            stepSequence: {
-              title: Maybe<string> | undefined;
-              preTitle: Maybe<string> | undefined;
-              descriptionRaw: any;
-              stepCards: Maybe<Maybe<StepCardFieldsFragment>[]> | undefined;
-            },
-            index: React.Key | null | undefined,
-          ) => (
+        content.landSteward?.steps?.map(
+          (stepSequence, index: React.Key | null | undefined) => (
             <div
               className={cx('topo-background-alternate', styles.flex)}
               key={index}
@@ -268,9 +257,7 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
         <MediaSection
           header="Videos"
           items={
-            isLandSteward
-              ? content?.landSteward?.videos
-              : content?.buyer?.videos
+            isLandSteward ? content.landSteward?.videos : content.buyer?.videos
           }
         />
       </div>
@@ -278,18 +265,18 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
         <ResourcesSection
           resources={
             isLandSteward
-              ? content?.landSteward?.resources
-              : content?.buyer?.resources
+              ? content.landSteward?.resources
+              : content.buyer?.resources
           }
         />
       </div>
-      {/* {isLandSteward && <CreditClassConnectSection connectSection={content?.landSteward?.connectSection} />} TODO: hidden until resource is ready */}
+      {/* {isLandSteward && <CreditClassConnectSection connectSection={content.landSteward?.connectSection} />} TODO: hidden until resource is ready */}
       <SwitchFooter
         activeOption={isLandSteward ? 'Land Steward' : 'Buyer'}
         buttonText={
           isLandSteward
-            ? content?.landSteward?.ctaButton?.buttonText || 'get started'
-            : content?.buyer?.ctaButton?.buttonText || 'buy credits'
+            ? content.landSteward?.ctaButton?.buttonText || 'get started'
+            : content.buyer?.ctaButton?.buttonText || 'buy credits'
         }
         label="I am a:"
         leftOption="Land Steward"

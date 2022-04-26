@@ -17,8 +17,8 @@ import {
   queryCreditTypes,
 } from '../lib/ecocredit';
 
-// TODO - hook is still missing batch query functionality
-// TODO - the hook is still missing lazy query functionality
+// TODO - this hook is still missing batch query functionality
+// TODO - this hook is still missing lazy query functionality
 
 type QueryOutput<T> = {
   data: T | undefined;

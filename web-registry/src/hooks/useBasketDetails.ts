@@ -17,7 +17,7 @@ import { useProjectByBatchDenomLazyQuery } from '../generated/graphql';
 
 import { BasketOverviewProps, CreditBatch } from '../components/organisms';
 
-// import { getMetadata } from '../lib/metadata-graph';
+import { getMetadataFromUint8Array } from '../lib/metadata-graph';
 
 dayjs.extend(duration);
 
@@ -93,7 +93,10 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
         const _basketClasses = await Promise.all(
           basketClassesInfo.map(async basketClass => {
             // TODO: use metadata
-            // const metadata = await getMetadata(basketClass.info!.metadata);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const metadata = await getMetadataFromUint8Array(
+              basketClass.info!.metadata,
+            );
             return {
               id: basketClass.info?.classId || '-',
               name: basketClass.info?.classId || '-',

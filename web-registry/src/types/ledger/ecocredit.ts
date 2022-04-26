@@ -20,7 +20,7 @@ export interface BatchTotalsForProject
 
 export interface BatchInfo {
   class_id: string;
-  metadata: Uint8Array;
+  metadata: string;
   batch_denom: string;
   issuer: string;
   total_amount: number;
@@ -73,7 +73,7 @@ export interface ClassInfo {
   /**
    *  metadata is a hashed IRI that can be used to fetch JSON-LD from the metadata-graph DB table
    */
-  metadata: Uint8Array;
+  metadata: string;
   credit_type: CreditType;
 }
 

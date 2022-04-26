@@ -90,6 +90,7 @@ const TextContainer = styled(Grid)(({ theme }) => ({
 }));
 
 const DataText = styled(Body)(({ theme }) => ({
+  color: theme.palette.info.dark,
   '& a': {
     color: theme.palette.text.secondary,
   },
@@ -164,7 +165,6 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                   data={allowedCreditClasses}
                   link={'/credit-classes/'}
                 />
-                <Body>text</Body>
                 {minStartDate && (
                   <Item
                     label="min start date"
@@ -221,7 +221,11 @@ const ItemWithLinkList = ({
     <GridItem label={label}>
       {data.map(item => (
         <DataText key={`basket-${item.id}`}>
-          <LinkWithArrow href={link + item.id} label={item.name} />
+          <LinkWithArrow
+            href={link + item.id}
+            label={item.name}
+            sx={{ fontWeight: 'normal' }}
+          />
         </DataText>
       ))}
     </GridItem>

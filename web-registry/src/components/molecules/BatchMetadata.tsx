@@ -17,16 +17,18 @@ export const BatchMetadata: React.FC<{
         {data?.['regen:vcsRetirementSerialNumber'] || '-'}
       </MetaDetail>
       <MetaDetail label="additional certifications">
-        {additionalCertifications && additionalCertifications?.length > 0 ? (
-          additionalCertifications?.map(cert => (
-            <LinkOrDash
-              href={cert?.['schema:url']?.['@value']}
-              label={cert?.['schema:name']}
-            />
-          ))
-        ) : (
-          <Dash />
-        )}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          {additionalCertifications && additionalCertifications?.length > 0 ? (
+            additionalCertifications?.map(cert => (
+              <LinkOrDash
+                href={cert?.['schema:url']?.['@value']}
+                label={cert?.['schema:name']}
+              />
+            ))
+          ) : (
+            <Dash />
+          )}
+        </Box>
       </MetaDetail>
     </Box>
   );

@@ -12,7 +12,6 @@ export const Title = styled(Typography, {
   const { breakpoints, typography } = theme;
   const { up } = breakpoints;
   return {
-    // fontFamily: theme.typography.h1.fontFamily,
     ...(variant === 'h1' && {
       fontSize: typography[mobileVariant || 'h3'].fontSize,
       lineHeight: typography[mobileVariant || 'h3'].lineHeight,

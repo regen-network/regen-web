@@ -55,8 +55,6 @@ const regenTheme = createTheme({
       main: '#DE4526',
       light: '#E6735C',
     },
-    // contrastThreshold: 3,
-    // tonalOffset: 0.2,
   },
   spacing: (factor: number) => `${0.25 * factor}rem`,
   typography: {
@@ -108,29 +106,7 @@ const regenTheme = createTheme({
     textXSmall: {
       fontSize: pxToRem(12),
     },
-    // TODO disable these after moving to custom comopnents
-    // subtitle1: {
-    //   fontSize: '2rem',
-    //   [defaultTheme.breakpoints.up('sm')]: {
-    //     fontSize: '2.375rem',
-    //   },
-    // },
-    // subtitle2: {
-    //   fontSize: '0.875rem',
-    //   [defaultTheme.breakpoints.up('sm')]: {
-    //     fontSize: '1.125rem',
-    //   },
-    // },
-    // body1: {
-    //   fontSize: '0.875rem',
-    //   [defaultTheme.breakpoints.up('sm')]: {
-    //     fontSize: '1rem',
-    //   },
-    // },
-    // body2: {
-    //   fontSize: '0.875rem',
-    // },
-    // not really used
+    // not the same as overline in Figma mockups (which isn't really used) - using for code font instead
     overline: {
       fontFamily: ['PT Mono', '"Lato"', '-apple-system', 'sans-serif'].join(
         ',',

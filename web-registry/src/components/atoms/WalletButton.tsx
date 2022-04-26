@@ -39,12 +39,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const WalletButton: React.FC = () => {
   const styles = useStyles();
-  const { wallet, suggestChain, loaded } = useWallet();
+  const { wallet, connect, connectionType, loaded } = useWallet();
   const [showAlert, setShowAlert] = useState(false);
 
   const connectToKeplr = async (): Promise<void> => {
-    if (chainId && suggestChain) {
-      await suggestChain();
+    if (connect) {
+      await connect();
     } else {
       setShowAlert(true);
       setTimeout(() => setShowAlert(false), 5000);
@@ -52,7 +52,7 @@ const WalletButton: React.FC = () => {
   };
   return chainId ? (
     <div className={styles.root}>
-      {!wallet?.shortAddress && loaded && (
+      {!wallet?.shortAddress && loaded && !connectionType && (
         <OutlinedButton onClick={connectToKeplr} sx={{ height: 40 }}>
           <img className={styles.icon} src={Keplr} alt="keplr" />
           connect wallet

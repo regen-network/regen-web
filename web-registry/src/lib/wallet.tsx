@@ -32,7 +32,7 @@ type ContextType = {
   wallet?: Wallet;
   loaded: boolean;
   connect?: () => Promise<void>;
-  signOut?: () => void;
+  disconnect?: () => void;
   connectionType?: string;
 
   // TODO: remove
@@ -60,7 +60,7 @@ export const WalletProvider: React.FC = ({ children }) => {
     undefined,
   );
 
-  const signOut = (): void => {
+  const disconnect = (): void => {
     setWallet(emptySender);
     setConnectionType(undefined);
     localStorage.removeItem(AUTO_CONNECT_WALLET_KEY);
@@ -304,7 +304,7 @@ export const WalletProvider: React.FC = ({ children }) => {
         wallet,
         loaded,
         connect,
-        signOut,
+        disconnect,
         connectionType,
 
         // TODO Remove

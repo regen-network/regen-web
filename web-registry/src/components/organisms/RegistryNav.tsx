@@ -2,7 +2,6 @@ import React from 'react';
 import { useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -18,7 +17,6 @@ import { UserMenuItem } from 'web-components/lib/components/header/UserMenuItem'
 
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
-import { ReactComponent as Credits } from '../../assets/svgs/credits.svg';
 import DefaultAvatar from '../../assets/avatar.png';
 import { useMoreProjectsQuery } from '../../generated/graphql';
 import { useWallet } from '../../lib/wallet';
@@ -27,7 +25,7 @@ import { chainId } from '../../lib/ledger';
 const RegistryNav: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { wallet, loaded } = useWallet();
+  const { wallet, loaded, disconnect } = useWallet();
   const theme = useTheme<Theme>();
   const desktop = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -181,15 +179,20 @@ const RegistryNav: React.FC = () => {
       pathname={pathname}
       extras={
         <Box display="flex" justifyContent="center" alignItems="center">
-          {chainId && loaded && wallet?.shortAddress && desktop && (
-            <UserMenuItem
-              address={wallet?.shortAddress}
-              avatar={DefaultAvatar}
-              pathname={pathname}
-              color={color}
-              linkComponent={RegistryNavLink}
-            />
-          )}
+          {chainId &&
+            loaded &&
+            wallet?.shortAddress &&
+            disconnect &&
+            desktop && (
+              <UserMenuItem
+                address={wallet?.shortAddress}
+                avatar={DefaultAvatar}
+                disconnect={disconnect}
+                pathname={pathname}
+                color={color}
+                linkComponent={RegistryNavLink}
+              />
+            )}
           <WalletButton />
         </Box>
       }

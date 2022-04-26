@@ -61,6 +61,7 @@ export interface HeaderMenuItem extends MenuTitle {
   href?: string;
   renderDropdownItems?: () => JSX.Element;
   dropdownItems?: HeaderDropdownItemProps[];
+  extras?: JSX.Element;
 }
 
 export interface HeaderMenuHoverBase {
@@ -113,6 +114,7 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
           />
         )}
         {item.renderDropdownItems && item.renderDropdownItems()}
+        {item.extras}
       </MenuHover>
     );
   };

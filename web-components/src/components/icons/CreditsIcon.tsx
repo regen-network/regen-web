@@ -1,17 +1,20 @@
 import React from 'react';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import { SxProps, Theme } from '@mui/material';
 
 interface CreditsIconProps {
   color: string;
   fontSize?: SvgIconProps['fontSize'];
+  sx?: SxProps<Theme>;
 }
 
 export default function CreditsIcon({
   color,
   fontSize = 'inherit',
+  sx,
 }: CreditsIconProps): JSX.Element {
   return (
-    <SvgIcon fontSize={fontSize} viewBox="0 0 25 23">
+    <SvgIcon fontSize={fontSize} viewBox="0 0 25 23" sx={sx}>
       <svg
         width="25"
         height="23"

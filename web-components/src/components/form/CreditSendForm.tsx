@@ -12,6 +12,7 @@ import {
   RetireFormValues,
   validateCreditRetire,
   initialValues as initialValuesRetire,
+  BottomCreditRetireFieldsProps,
 } from './CreditRetireForm';
 import Submit from './Submit';
 import {
@@ -20,6 +21,7 @@ import {
   validateAmount,
 } from '../inputs/validation';
 import { Subtitle } from '../typography';
+import { RegenModalProps } from '../modal';
 
 /**
  * Send sends tradable credits from one account to another account.
@@ -27,8 +29,8 @@ import { Subtitle } from '../typography';
  * https://docs.regen.network/modules/ecocredit/03_messages.html#msgsend
  *
  * Validation:
- *    sender: must ba a valid address, and their signature must be present in the transaction
- *    recipient: must ba a valid address
+ *    sender: must be a valid address, and their signature must be present in the transaction
+ *    recipient: must be a valid address
  *    credits: must not be empty
  *    batch_denom: must be a valid batch denomination
  *    tradable_amount: must not be negative
@@ -57,39 +59,20 @@ const useStyles = makeStyles((theme: Theme) => ({
       alignSelf: 'end',
     },
   },
-  checked: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(10),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(9),
-    },
-  },
 }));
 
-// Output (submit)
-interface SendCredits {
-  batchDenom: string;
-  tradableAmount: string;
-  retiredAmount?: string;
-  retirementLocation?: string;
-}
-
-interface MsgSend {
-  sender: string;
-  recipient: string;
-  credits: SendCredits;
-}
-
-// Input (args)
-interface FormProps {
+export interface CreditSendProps extends BottomCreditRetireFieldsProps {
   sender: string;
   batchDenom: string;
   availableTradableAmount: number;
-  onClose: () => void;
+  onSubmit: (values: FormValues) => Promise<void>;
 }
 
-interface FormValues extends RetireFormValues {
+interface FormProps extends CreditSendProps {
+  onClose: RegenModalProps['onClose'];
+}
+
+export interface FormValues extends RetireFormValues {
   sender: string;
   recipient: string;
   tradableAmount: number;
@@ -100,7 +83,9 @@ const CreditSendForm: React.FC<FormProps> = ({
   sender,
   batchDenom,
   availableTradableAmount,
+  mapboxToken,
   onClose,
+  onSubmit,
 }) => {
   const styles = useStyles();
 
@@ -146,16 +131,11 @@ const CreditSendForm: React.FC<FormProps> = ({
     return errors;
   };
 
-  const submitHandler = async (values: FormValues): Promise<MsgSend | void> => {
-    // TODO holder, amount string, check withRetire
-    console.log('*** submitHandler', values);
-  };
-
   return (
     <Formik
       initialValues={initialValues}
       validate={validateHandler}
-      onSubmit={submitHandler}
+      onSubmit={onSubmit}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
@@ -177,18 +157,14 @@ const CreditSendForm: React.FC<FormProps> = ({
             name={'tradableAmount'}
             label={'Amount to send'}
             availableAmount={availableTradableAmount}
-            batchDenom={batchDenom}
+            denom={batchDenom}
           />
 
           <Field
             component={CheckboxLabel}
             type="checkbox"
             name="withRetire"
-            className={
-              values.withRetire
-                ? cx(styles.checkboxLabel, styles.checked)
-                : styles.checkboxLabel
-            }
+            className={styles.checkboxLabel}
             label={
               <Subtitle size="lg" color="primary.contrastText" ml={1}>
                 Retire credits upon transfer
@@ -200,6 +176,7 @@ const CreditSendForm: React.FC<FormProps> = ({
             <CreditRetireFields
               availableTradableAmount={availableTradableAmount}
               batchDenom={batchDenom}
+              mapboxToken={mapboxToken}
             />
           )}
 

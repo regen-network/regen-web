@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
+import { SxProps, Grid } from '@mui/material';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
@@ -12,7 +12,8 @@ import ControlledTextField from '../inputs/ControlledTextField';
 import { Body, Title } from '../typography';
 import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
-import { SxProps } from '@mui/material';
+import { RegenModalProps } from '../modal';
+import { getISOString } from '../../utils/locationStandard';
 
 /**
  * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).
@@ -23,7 +24,7 @@ import { SxProps } from '@mui/material';
  * https://docs.regen.network/modules/ecocredit/03_messages.html#msgretire
  *
  * Validation:
- *    holder: must ba a valid address, and their signature must be present in the transaction
+ *    holder: must be a valid address, and their signature must be present in the transaction
  *    credits: must not be empty (MsgRetire.RetireCredits)
  *      - batch_denom: must be a valid batch denomination
  *      - amount: must be positive (aka retiredAmount)
@@ -58,36 +59,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-// Output (submit)
-interface RetireCredits {
-  batchDenom: string;
-  amount: string; // aka. retiredAmount
-}
-
-interface MsgRetire {
+export interface CreditRetireProps extends CreditRetireFieldsProps {
   holder: string;
-  credits: RetireCredits;
-  location: string;
-  // TODO note (aka. memoNote)
+  onSubmit: (values: RetireFormValues) => void;
 }
 
 // Input (args)
-interface FormProps {
-  holder: string;
-  batchDenom: string;
-  availableTradableAmount: number;
-  onClose: () => void;
+interface FormProps extends CreditRetireProps {
+  onClose: RegenModalProps['onClose'];
 }
 
-export interface RetireFormValues {
-  retiredAmount: number;
-  note: string;
+export interface MetaRetireFormValues {
+  note?: string;
   country: string;
   stateProvince?: string;
   postalCode?: string;
+  retirementLocation?: string;
 }
 
-interface CreditRetireFieldsProps {
+export interface RetireFormValues extends MetaRetireFormValues {
+  retiredAmount: number;
+}
+
+interface CreditRetireFieldsProps extends BottomCreditRetireFieldsProps {
   batchDenom: string;
   availableTradableAmount: number;
 }
@@ -99,54 +93,80 @@ const sxs = {
   } as SxProps,
 };
 
-export const BottomCreditRetireFields: React.FC = () => {
-  const styles = useStyles();
-  const {
-    values: { country, postalCode },
-  } = useFormikContext<RetireFormValues>();
+export interface BottomCreditRetireFieldsProps {
+  mapboxToken: string;
+}
 
-  return (
-    <>
-      <Title variant="h5" sx={sxs.title}>
-        Transaction note
-      </Title>
-      <Field
-        name="note"
-        type="text"
-        label="Add retirement transaction details (stored in the tx memo)"
-        component={TextField}
-        className={styles.noteTextField}
-        optional
-        defaultStyle={false}
-      />
-      <Title variant="h5" sx={sxs.title}>
-        Location of retirement
-      </Title>
-      <Body>
-        Please enter a location for the retirement of these credits. This
-        prevents double counting of credits in different locations.
-      </Body>
-      <Grid container className={styles.stateCountryGrid}>
-        <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationStateField country={country} optional={!postalCode} />
+export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
+  ({ mapboxToken }) => {
+    const styles = useStyles();
+    const {
+      values: { country, stateProvince, postalCode },
+      setFieldValue,
+    } = useFormikContext<RetireFormValues>();
+
+    useEffect(() => {
+      const setRetirementLocation = async (): Promise<void> => {
+        const isoString = await getISOString(mapboxToken, {
+          countryKey: country,
+          stateProvince,
+          postalCode,
+        });
+        setFieldValue('retirementLocation', isoString);
+      };
+
+      if (stateProvince || country || postalCode) {
+        setRetirementLocation();
+      }
+      if (!country) {
+        setFieldValue('retirementLocation', null);
+      }
+    }, [country, stateProvince, postalCode, setFieldValue, mapboxToken]);
+
+    return (
+      <>
+        <Title variant="h5" sx={sxs.title}>
+          Transaction note
+        </Title>
+        <Field
+          name="note"
+          type="text"
+          label="Add retirement transaction details (stored in the tx memo)"
+          component={TextField}
+          className={styles.noteTextField}
+          optional
+          defaultStyle={false}
+        />
+        <Title variant="h5" sx={sxs.title}>
+          Location of retirement
+        </Title>
+
+        <Body>
+          Please enter a location for the retirement of these credits. This
+          prevents double counting of credits in different locations.
+        </Body>
+        <Grid container className={styles.stateCountryGrid}>
+          <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+            <LocationStateField country={country} optional={!postalCode} />
+          </Grid>
+          <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+            <LocationCountryField />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-          <LocationCountryField />
-        </Grid>
-      </Grid>
-      <Field
-        component={ControlledTextField}
-        label="Postal Code"
-        name="postalCode"
-        optional
-      />
-    </>
-  );
-};
+        <Field
+          component={ControlledTextField}
+          label="Postal Code"
+          name="postalCode"
+          optional
+        />
+      </>
+    );
+  };
 
 export const CreditRetireFields = ({
   batchDenom,
   availableTradableAmount,
+  mapboxToken,
 }: CreditRetireFieldsProps): JSX.Element => {
   return (
     <>
@@ -154,9 +174,9 @@ export const CreditRetireFields = ({
         name="retiredAmount"
         label="Amount to retire"
         availableAmount={availableTradableAmount}
-        batchDenom={batchDenom}
+        denom={batchDenom}
       />
-      <BottomCreditRetireFields />
+      <BottomCreditRetireFields mapboxToken={mapboxToken} />
     </>
   );
 };
@@ -184,15 +204,17 @@ export const validateCreditRetire = (
 export const initialValues = {
   retiredAmount: 0,
   note: '',
-  country: '',
+  country: 'US',
   stateProvince: '',
 };
 
 const CreditRetireForm: React.FC<FormProps> = ({
-  holder,
+  // holder,
   batchDenom,
   availableTradableAmount,
+  mapboxToken,
   onClose,
+  onSubmit,
 }) => {
   const validateHandler = (
     values: RetireFormValues,
@@ -202,27 +224,18 @@ const CreditRetireForm: React.FC<FormProps> = ({
     return errors;
   };
 
-  const submitHandler = async (
-    values: RetireFormValues,
-  ): Promise<MsgRetire | void> => {
-    // TODO
-    // add holder,
-    // retiredAmount to string,
-    // location codification (country + state)
-    console.log('*** submitHandler', values);
-  };
-
   return (
     <Formik
       initialValues={initialValues}
       validate={validateHandler}
-      onSubmit={submitHandler}
+      onSubmit={onSubmit}
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
           <CreditRetireFields
             availableTradableAmount={availableTradableAmount}
             batchDenom={batchDenom}
+            mapboxToken={mapboxToken}
           />
           <Submit
             isSubmitting={isSubmitting}

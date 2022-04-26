@@ -73,24 +73,23 @@ const ProjectCards: React.FC<Props> = props => {
     project: MoreProjectFieldsFragment;
   }> = ({ project }) => (
     <ProjectCard
-      name={project.metadata?.['http://schema.org/name']}
+      name={project.metadata?.['schema:name']}
       imgSrc={
-        project.metadata?.['http://regen.network/previewPhoto']?.['@value'] ||
-        DefaultProject
+        project.metadata?.['regen:previewPhoto']?.['@value'] || DefaultProject
       }
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
-      place={project.metadata?.['http://schema.org/location']?.place_name}
+      place={project.metadata?.['schema:location']?.place_name}
       area={
-        project.metadata?.['http://regen.network/size']?.[
-          'http://qudt.org/1.1/schema/qudt#numericValue'
-        ]?.['@value']
+        project.metadata?.['regen:projectSize']?.['qudt:numericValue']?.[
+          '@value'
+        ]
       }
       areaUnit={
         qudtUnitMap[
-          project.metadata?.['http://regen.network/size']?.[
-            'http://qudt.org/1.1/schema/qudt#unit'
-          ]?.['@value'] as qudtUnit
+          project.metadata?.['regen:projectSize']?.['qudt:unit']?.[
+            '@value'
+          ] as qudtUnit
         ]
       }
       registry={project.partyByRegistryId}

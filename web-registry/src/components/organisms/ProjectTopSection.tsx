@@ -129,37 +129,26 @@ function ProjectTopSection({
 
   const project = data?.projectByHandle;
   const metadata = project?.metadata;
+
   const registry = project?.partyByRegistryId;
-  const videoURL = metadata?.['http://regen.network/videoURL']?.['@value'];
-  const landStewardPhoto =
-    metadata?.['http://regen.network/landStewardPhoto']?.['@value'];
+  const videoURL = metadata?.['regen:videoURL']?.['@value'];
+  const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
   const area =
-    metadata?.['http://regen.network/size']?.[
-      'http://qudt.org/1.1/schema/qudt#numericValue'
-    ]?.['@value'] ||
-    metadata?.['http://regen.network/projectSize']?.[
-      'http://qudt.org/schema/qudt/numericValue'
-    ]?.['@value'];
+    metadata?.['regen:projectSize']?.['qudt:numericValue']?.['@value'];
   const unit: qudtUnit | undefined =
-    metadata?.['http://regen.network/size']?.[
-      'http://qudt.org/1.1/schema/qudt#unit'
-    ]?.['@value'] ||
-    metadata?.['http://regen.network/projectSize']?.[
-      'http://qudt.org/schema/qudt/unit'
-    ]?.['@value'];
+    metadata?.['regen:projectSize']?.['qudt:unit']?.['@value'];
   const creditClass = project?.creditClassByCreditClassId;
   const creditClassVersion = creditClass?.creditClassVersionsById?.nodes?.[0];
   const methodologyVersion =
     creditClass?.methodologyByMethodologyId?.methodologyVersionsById
       ?.nodes?.[0];
-  const quote = metadata?.['http://regen.network/projectQuote'];
-  const glanceText = metadata?.['http://regen.network/glanceText']?.['@list'];
-  const landStory = metadata?.['http://regen.network/landStory'];
-  const landStewardStoryTitle =
-    metadata?.['http://regen.network/landStewardStoryTitle'];
-  const landStewardStory = metadata?.['http://regen.network/landStewardStory'];
-  const isVcsProject =
-    !!metadata?.['http://regen.network/vcsProjectId']?.['@value'];
+  const quote = metadata?.['regen:projectQuote'];
+  const glanceText = metadata?.['regen:glanceText']?.['@list'];
+  const primaryDescription =
+    metadata?.['regen:landStory'] || metadata?.['schema:description'];
+  const landStewardStoryTitle = metadata?.['regen:landStewardStoryTitle'];
+  const landStewardStory = metadata?.['regen:landStewardStory'];
+  const isVCSProject = !!metadata?.['regen:vcsProjectId']?.['@value'];
 
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'
@@ -180,12 +169,12 @@ function ProjectTopSection({
       <Grid container>
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
           {/* TODO Show on-chain project id if no off-chain name */}
-          <Title variant="h1">{metadata?.['http://schema.org/name']}</Title>
+          <Title variant="h1">{metadata?.['schema:name']}</Title>
           <Box sx={{ pt: { xs: 5, sm: 6 } }}>
             <ProjectPlaceInfo
               iconClassName={styles.icon}
               // TODO Format and show on-chain project location if no off-chain location
-              place={metadata?.['http://schema.org/location']?.place_name}
+              place={metadata?.['schema:location']?.['place_name']}
               area={area}
               areaUnit={unit && qudtUnitMap[unit]}
             />
@@ -196,9 +185,9 @@ function ProjectTopSection({
                     label="credit class"
                     name={creditClassVersion.name}
                     url={
-                      isVcsProject
+                      isVCSProject
                         ? `/credit-classes/${creditClass?.onChainId}`
-                        : creditClassVersion.metadata?.[
+                        : creditClassVersion?.metadata?.[
                             'http://schema.org/url'
                           ]?.['@value']
                     }
@@ -211,7 +200,7 @@ function ProjectTopSection({
                   />
                 </>
               )}
-              {!isVcsProject && (
+              {!isVCSProject && (
                 <ProjectTopLink
                   label="offset generation method"
                   name={
@@ -261,12 +250,12 @@ function ProjectTopSection({
               Story
             </Title>
           )}
-          {landStory && (
+          {primaryDescription && (
             <Body size="xl" mobileSize="md" pt={[3.75, 7.5]}>
-              {landStory}
+              {primaryDescription}
             </Body>
           )}
-          {isVcsProject && <AdditionalProjectMetadata metadata={metadata} />}
+          {isVCSProject && <AdditionalProjectMetadata metadata={metadata} />}
           <LazyLoad offset={50}>
             {videoURL &&
               (/https:\/\/www.youtube.com\/embed\/[a-zA-Z0-9_.-]+/.test(
@@ -277,7 +266,7 @@ function ProjectTopSection({
               ) ? (
                 <iframe
                   className={cx(styles.iframe, styles.media)}
-                  title={metadata?.['http://schema.org/name'] || 'project'}
+                  title={metadata?.['schema:name'] || 'project'}
                   src={videoURL}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 ></iframe>
@@ -315,16 +304,16 @@ function ProjectTopSection({
                   “
                 </QuoteMark>
                 <Box component="span" sx={{ position: 'relative', zIndex: 1 }}>
-                  {quote['http://regen.network/quote']}
+                  {quote['regen:quote']}
                 </Box>
                 <QuoteMark sx={{ ml: -2.5, bottom: { xs: 14, sm: 16 } }}>
                   ”
                 </QuoteMark>
               </Title>
               <Label mobileSize="xs" color="secondary.main" pt={[4, 5.5]}>
-                {quote['http://schema.org/name']}
+                {quote['schema:name']}
               </Label>
-              <Body mobileSize="xs">{quote['http://schema.org/jobTitle']}</Body>
+              <Body mobileSize="xs">{quote['schema:jobTitle']}</Body>
             </div>
           )}
           {batchData?.totals && (
@@ -340,17 +329,17 @@ function ProjectTopSection({
         <Grid item xs={12} md={4} sx={{ pt: { xs: 10, sm: 'inherit' } }}>
           <ProjectTopCard
             projectDeveloper={getDisplayParty(
-              'http://regen.network/projectDeveloper',
+              'regen:projectDeveloper',
               metadata,
               project?.partyByDeveloperId,
             )}
             landSteward={getDisplayParty(
-              'http://regen.network/landSteward',
+              'regen:landSteward',
               metadata,
               project?.partyByStewardId,
             )}
             landOwner={getDisplayParty(
-              'http://regen.network/landOwner',
+              'regen:landOwner',
               metadata,
               project?.partyByLandOwnerId,
             )}

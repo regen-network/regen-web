@@ -155,7 +155,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     height: '100%',
     objectFit: 'cover',
     borderRadius: '5px',
-    objectPosition: '0% 0%',
+    objectPosition: '50% 50%',
   },
   grid: {
     padding: theme.spacing(2.5),

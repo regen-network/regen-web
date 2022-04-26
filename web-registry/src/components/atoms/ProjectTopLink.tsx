@@ -23,7 +23,7 @@ const ProjectTopLink: React.FC<Props> = ({
   if (!label || !name) return null;
 
   const text = (
-    <Box component="span" sx={{ fontColor: 'info.dark' }}>
+    <Box component="span" sx={{ color: 'info.dark' }}>
       {name && ReactHtmlParser(name)}
       {creditClassId && name ? (
         <span> ({creditClassId})</span>

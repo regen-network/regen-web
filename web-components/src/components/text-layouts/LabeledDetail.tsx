@@ -12,7 +12,7 @@ export const LabeledDetail: React.FC<{
   labelSize?: LabelSize;
 }> = ({ label, children, labelSize, sx }) => (
   <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, ...sx }}>
-    <Label size={labelSize || 'md'} color="info.main">
+    <Label size={labelSize || 'sm'} color="info.main">
       {label}
     </Label>
     <div>{children}</div>

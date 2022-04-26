@@ -93,6 +93,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
         const _basketClasses = await Promise.all(
           basketClassesInfo.map(async basketClass => {
             // TODO: use metadata
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const metadata = await getMetadataFromUint8Array(
               basketClass.info!.metadata,
             );

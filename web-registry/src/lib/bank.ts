@@ -92,7 +92,7 @@ export const queryAllBalances = async ({
     });
   } catch (err) {
     throw new Error(
-      'Error in the AllBalances query of the ledger bank module.',
+      `Error in the AllBalances query of the ledger bank module: ${err}`,
     );
   }
 };
@@ -113,7 +113,9 @@ export const queryBalance = async ({
       denom: request.denom,
     });
   } catch (err) {
-    throw new Error('Error in the Balance query of the ledger bank module.');
+    throw new Error(
+      `Error in the Balance query of the ledger bank module: ${err}`,
+    );
   }
 };
 
@@ -133,7 +135,7 @@ export const queryDenomMetadata = async ({
     return await client.DenomMetadata({ denom: request.denom });
   } catch (err) {
     throw new Error(
-      'Error in the DenomMetadata query of the ledger bank module.',
+      `Error in the DenomMetadata query of the ledger bank module: ${err}`,
     );
   }
 };
@@ -154,7 +156,7 @@ export const queryDenomsMetadata = async ({
     return await client.DenomsMetadata({});
   } catch (err) {
     throw new Error(
-      'Error in the DenomsMetadata query of the ledger bank module.',
+      `Error in the DenomsMetadata query of the ledger bank module: ${err}`,
     );
   }
 };

@@ -92,7 +92,9 @@ export const queryBasket = async ({
   try {
     return await client.Basket({ basketDenom: request.basketDenom });
   } catch (err) {
-    throw new Error('Error in the Basket query of the ledger basket module.');
+    throw new Error(
+      `Error in the Basket query of the ledger basket module: ${err}`,
+    );
   }
 };
 
@@ -109,7 +111,9 @@ export const queryBaskets = async ({
   try {
     return await client.Baskets({});
   } catch (err) {
-    throw new Error('Error in the Baskets query of the ledger basket module.');
+    throw new Error(
+      `Error in the Baskets query of the ledger basket module: ${err}`,
+    );
   }
 };
 
@@ -129,7 +133,7 @@ export const queryBasketBalances = async ({
     return await client.BasketBalances({ basketDenom: request.basketDenom });
   } catch (err) {
     throw new Error(
-      'Error in the BasketBalances query of the ledger basket module.',
+      `Error in the BasketBalances query of the ledger basket module: ${err}`,
     );
   }
 };
@@ -153,7 +157,7 @@ export const queryBasketBalance = async ({
     });
   } catch (err) {
     throw new Error(
-      'Error in the BasketBalance query of the ledger basket module.',
+      `Error in the BasketBalance query of the ledger basket module: ${err}`,
     );
   }
 };

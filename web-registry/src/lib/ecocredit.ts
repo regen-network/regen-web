@@ -388,7 +388,7 @@ export const queryBalance = async ({
     });
   } catch (err) {
     throw new Error(
-      'Error in the Balance query of the ledger ecocredit module.',
+      `Error in the Balance query of the ledger ecocredit module: ${err}`,
     );
   }
 };
@@ -409,7 +409,7 @@ export const queryBatchInfo = async ({
     });
   } catch (err) {
     throw new Error(
-      'Error in the BatchInfo query of the ledger ecocredit module.',
+      `Error in the BatchInfo query of the ledger ecocredit module: ${err}`,
     );
   }
 };
@@ -430,7 +430,7 @@ export const queryBatches = async ({
     });
   } catch (err) {
     throw new Error(
-      'Error in the Batches query of the ledger ecocredit module.',
+      `Error in the Batches query of the ledger ecocredit module: ${err}`,
     );
   }
 };
@@ -451,7 +451,7 @@ export const queryClassInfo = async ({
     });
   } catch (err) {
     throw new Error(
-      'Error in the ClassInfo query of the ledger ecocredit module.',
+      `Error in the ClassInfo query of the ledger ecocredit module: ${err}`,
     );
   }
 };
@@ -470,7 +470,7 @@ export const queryClasses = async ({
     return await client.Classes({});
   } catch (err) {
     throw new Error(
-      'Error in the Classes query of the ledger ecocredit module.',
+      `Error in the Classes query of the ledger ecocredit module: ${err}`,
     );
   }
 };
@@ -489,7 +489,7 @@ export const queryCreditTypes = async ({
     return await client.CreditTypes({});
   } catch (err) {
     throw new Error(
-      'Error in the CreditTypes query of the ledger ecocredit module.',
+      `Error in the CreditTypes query of the ledger ecocredit module: ${err}`,
     );
   }
 };

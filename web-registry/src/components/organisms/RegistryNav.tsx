@@ -96,8 +96,8 @@ const RegistryNav: React.FC = () => {
       dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
         pathname,
         title:
-          titleAlias[p?.metadata?.['http://schema.org/name']] ||
-          p?.metadata?.['http://schema.org/name'],
+          titleAlias[p?.metadata?.['schema:name']] ||
+          p?.metadata?.['schema:name'],
         href: `/projects/${p?.handle}`,
         linkComponent: RegistryNavLink,
       })),

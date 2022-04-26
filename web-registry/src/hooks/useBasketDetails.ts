@@ -157,20 +157,23 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
 
   // finally, data preparation for <BasketEcocreditsTable />
   useEffect(() => {
-    if (!batches || !basketBatches || !batchesProjects) return;
+    if (!basketBalances?.balances || !basketBatches || !batchesProjects) return;
 
-    const _creditBatches = batches.map(batch => {
+    const _creditBatches = basketBalances.balances.map(basketBalance => {
       const _basketBatch = basketBatches.find(
-        basketBatch => basketBatch.info?.batchDenom === batch,
+        basketBatch =>
+          basketBatch.info?.batchDenom === basketBalance.batchDenom,
       );
       const _projectBatch = batchesProjects.find(
-        projectBatch => projectBatch.batchDenom === batch,
+        projectBatch => projectBatch.batchDenom === basketBalance.batchDenom,
       );
+      const totalAmount = basketBalance.balance;
+
       return {
         classId: _basketBatch?.info?.classId || '-',
         batchDenom: _basketBatch?.info?.batchDenom || '-',
         issuer: _basketBatch?.info?.issuer || '-',
-        totalAmount: _basketBatch?.info?.totalAmount || '-',
+        totalAmount: totalAmount || '-',
         startDate: _basketBatch?.info?.startDate || '-',
         endDate: _basketBatch?.info?.endDate || '-',
         projectLocation: _basketBatch?.info?.projectLocation || '-',
@@ -180,7 +183,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
     });
 
     setCreditBatches(_creditBatches);
-  }, [batches, basketBatches, batchesProjects]);
+  }, [basketBalances, basketBatches, batchesProjects]);
 
   // finally, data preparation for <BasketOverview />
   // TODO ? split state update into different useEffect based on data source ?

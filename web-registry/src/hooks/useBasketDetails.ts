@@ -23,7 +23,10 @@ dayjs.extend(duration);
 
 function formatDuration(seconds: number): string {
   const _duration = dayjs.duration(seconds, 'seconds');
-  return _duration.humanize();
+  const durationArr = _duration.humanize().split(' ');
+  const condition = durationArr[1].charAt(durationArr[1].length - 1) === 's';
+  const textPart = condition ? durationArr[1].slice(0, -1) : durationArr[1];
+  return `${durationArr[0]}-${textPart}`;
 }
 
 type BasketDetails = {

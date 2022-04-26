@@ -32,8 +32,8 @@ export type CreditBatch = {
   endDate: Date | string;
   projectLocation: string;
   // Project info
+  projectHandle: string;
   projectName: string;
-  projectDisplay: string;
 };
 
 type BasketEcocreditsTableProps = {
@@ -67,11 +67,11 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
       ]}
       rows={batches.map(item => {
         const projectCell =
-          item.projectName === '-' ? (
-            item.projectDisplay
+          item.projectHandle === '-' ? (
+            item.projectName
           ) : (
-            <Link href={`/projects/${item.projectName}`} target="_blank">
-              {item.projectDisplay}
+            <Link href={`/projects/${item.projectHandle}`} target="_blank">
+              {item.projectName}
             </Link>
           );
 

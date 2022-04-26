@@ -38,8 +38,8 @@ type ClassInfo = {
 
 type BatchWithProject = {
   batchDenom: string;
+  projectHandle: string;
   projectName: string;
-  projectDisplay: string;
 };
 
 const useBasketDetails = (basketDenom?: string): BasketDetails => {
@@ -94,6 +94,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
           basketClassesInfo.map(async basketClass => {
             // TODO: use metadata
             // const metadata = await getMetadata(basketClass.info!.metadata);
+
             return {
               id: basketClass.info?.classId || '-',
               name: basketClass.info?.classId || '-',
@@ -124,10 +125,10 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
 
             return {
               batchDenom,
-              projectName:
+              projectHandle:
                 batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
                   ?.handle || '-',
-              projectDisplay:
+              projectName:
                 batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
                   ?.metadata['schema:name'] || '-',
             };
@@ -162,8 +163,8 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
         startDate: _basketBatch?.info?.startDate || '-',
         endDate: _basketBatch?.info?.endDate || '-',
         projectLocation: _basketBatch?.info?.projectLocation || '-',
+        projectHandle: _projectBatch?.projectHandle || '-',
         projectName: _projectBatch?.projectName || '-',
-        projectDisplay: _projectBatch?.projectDisplay || '-',
       };
     });
 

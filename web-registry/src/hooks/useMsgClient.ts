@@ -32,9 +32,9 @@ export default function useMsgClient(
   >();
 
   const sign = useCallback(
-    async (message: TxData): Promise<Uint8Array | undefined> => {
+    async (tx: TxData): Promise<Uint8Array | undefined> => {
       if (!api?.msgClient || !wallet?.address) return;
-      const { msgs, fee, memo } = message;
+      const { msgs, fee, memo } = tx;
 
       const defaultFee = {
         amount: [
@@ -79,9 +79,9 @@ export default function useMsgClient(
   );
 
   const signAndBroadcast = useCallback(
-    async (message: TxData, onBroadcast?: () => void) => {
+    async (tx: TxData, onBroadcast?: () => void) => {
       try {
-        const txBytes = await sign(message);
+        const txBytes = await sign(tx);
         if (txBytes) {
           if (onBroadcast) onBroadcast();
           await broadcast(txBytes);

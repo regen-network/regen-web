@@ -63,12 +63,22 @@ export interface HeaderMenuItem extends MenuTitle {
   dropdownItems?: HeaderDropdownItemProps[];
 }
 
-const HeaderMenuHover: React.FC<{
-  item: HeaderMenuItem;
-  pathName: string;
+export interface HeaderMenuHoverBase {
+  pathname: string;
   color: string;
   linkComponent: React.FC<NavLinkProps>;
-}> = ({ item, pathName, color, linkComponent: LinkComponent }) => {
+}
+
+interface HeaderMenuHoverProps extends HeaderMenuHoverBase {
+  item: HeaderMenuItem;
+}
+
+const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
+  item,
+  pathname,
+  color,
+  linkComponent: LinkComponent,
+}) => {
   const theme = useTheme();
   const styles = useStyles();
 
@@ -77,7 +87,7 @@ const HeaderMenuHover: React.FC<{
       return (
         <LinkComponent
           overrideClassname={styles.title}
-          pathname={pathName}
+          pathname={pathname}
           href={item.href}
         >
           {item.title}
@@ -111,7 +121,7 @@ const HeaderMenuHover: React.FC<{
     <MenuItem
       className={cx(
         styles.menuItem,
-        pathName === item.href && styles.currentMenuItem,
+        pathname === item.href && styles.currentMenuItem,
       )}
     >
       <Content />

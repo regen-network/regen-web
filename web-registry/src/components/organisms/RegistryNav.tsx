@@ -14,6 +14,7 @@ import {
   HeaderDropdownColumn,
   HeaderDropdownItemProps,
 } from 'web-components/lib/components/header/HeaderDropdownItems';
+import { UserMenuItem } from 'web-components/lib/components/header/UserMenuItem';
 
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
@@ -89,7 +90,6 @@ const RegistryNav: React.FC = () => {
   const titleAlias: { [title: string]: string } = {
     'The Kasigau Corridor REDD Project - Phase II The Community Ranches':
       'Kasigau Corridor',
-    'The Mai Ndombe REDD+ Project': 'Mai Ndombe',
   };
 
   const menuItems: HeaderMenuItem[] = [
@@ -98,8 +98,8 @@ const RegistryNav: React.FC = () => {
       dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
         pathname,
         title:
-          titleAlias[p?.metadata?.['schema:name']] ||
-          p?.metadata?.['schema:name'],
+          titleAlias[p?.metadata?.['http://schema.org/name']] ||
+          p?.metadata?.['http://schema.org/name'],
         href: `/projects/${p?.handle}`,
         linkComponent: RegistryNavLink,
       })),
@@ -137,35 +137,6 @@ const RegistryNav: React.FC = () => {
       title: 'Activity',
       href: '/stats/activity',
     });
-
-    if (loaded && wallet?.shortAddress && desktop) {
-      menuItems.push({
-        renderTitle: () => (
-          <Box display="flex" alignItems="center" sx={{ fontSize: 14 }}>
-            <Avatar
-              sx={{
-                height: 24,
-                width: 24,
-                mr: 2.75,
-                border: theme => `1px solid ${theme.palette.grey[100]}`,
-              }}
-              alt="default avatar"
-              src={DefaultAvatar}
-            />
-            {wallet.shortAddress}
-          </Box>
-        ),
-        dropdownItems: [
-          {
-            pathname,
-            linkComponent: RegistryNavLink,
-            title: 'My Portfolio',
-            href: '/ecocredits/dashboard',
-            svg: Credits,
-          },
-        ],
-      });
-    }
   }
 
   const headerColors: HeaderColors = {
@@ -188,6 +159,10 @@ const RegistryNav: React.FC = () => {
       '/land-stewards',
     ].some(route => pathname.startsWith(route));
 
+  const color = headerColors[pathname]
+    ? headerColors[pathname]
+    : theme.palette.primary.light;
+
   return (
     <Header
       isRegistry
@@ -198,18 +173,23 @@ const RegistryNav: React.FC = () => {
       onLogout={() => logout({ returnTo: window.location.origin })}
       onSignup={() => navigate('/signup')}
       menuItems={menuItems}
-      color={
-        headerColors[pathname]
-          ? headerColors[pathname]
-          : theme.palette.primary.light
-      }
+      color={color}
       transparent={isTransparent}
       absolute={isTransparent}
       borderBottom={!isTransparent}
       fullWidth={fullWidthRegExp.test(pathname)}
-      pathName={pathname}
+      pathname={pathname}
       extras={
         <Box display="flex" justifyContent="center" alignItems="center">
+          {chainId && loaded && wallet?.shortAddress && desktop && (
+            <UserMenuItem
+              address={wallet?.shortAddress}
+              avatar={DefaultAvatar}
+              pathname={pathname}
+              color={color}
+              linkComponent={RegistryNavLink}
+            />
+          )}
           <WalletButton />
         </Box>
       }

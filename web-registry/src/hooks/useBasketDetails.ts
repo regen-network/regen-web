@@ -197,7 +197,16 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
       displayDenom: basketMetadata?.metadata?.display || '-',
       description: basketMetadata?.metadata?.description || '-',
       totalAmount: totalAmount || 0,
-      curator: basketMetadata ? 'Regen Network Development, Inc.' : '-', // TODO: hardcoded curator
+      // TODO: hardcoded curator
+      curator: basketMetadata
+        ? {
+            name: 'Regen Network Development, Inc.',
+            address: 'regen1sv6a7ry6nrls84z0w5lauae4mgmw3kh2mg97ht',
+          }
+        : {
+            name: '-',
+            address: '-',
+          },
       allowedCreditClasses: basketClasses,
     };
 

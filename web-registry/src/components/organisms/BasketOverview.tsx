@@ -23,12 +23,17 @@ type CreditClass = {
   name: string;
 };
 
+type Curator = {
+  name: string;
+  address: string;
+};
+
 export type BasketOverviewProps = {
   name: string;
   displayDenom: string;
   description: string;
   totalAmount: number;
-  curator: string;
+  curator: Curator;
   allowedCreditClasses: CreditClass[];
   minStartDate?: string;
   startDateWindow?: string;
@@ -85,8 +90,8 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                 <Item label="total amount" data={formatNumber(totalAmount)} />
                 <Item
                   label="curator"
-                  data={curator}
-                  link={getAccountUrl(curator as string)}
+                  data={curator.name}
+                  link={getAccountUrl(curator.address as string)}
                 />
                 <ItemWithLinkList
                   label={

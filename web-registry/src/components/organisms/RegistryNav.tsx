@@ -99,7 +99,8 @@ const RegistryNav: React.FC = () => {
         pathname,
         title:
           titleAlias[p?.metadata?.['schema:name']] ||
-          p?.metadata?.['schema:name'],
+          p?.metadata?.['schema:name'] ||
+          p?.handle,
         href: `/projects/${p?.handle}`,
         linkComponent: RegistryNavLink,
       })),

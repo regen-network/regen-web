@@ -148,6 +148,7 @@ const Question = ({
           sx={[
             {
               mr: [5.75, 14.25],
+              py: [2.5, 3.75],
               position: 'relative',
               '& span.gatsby-resp-image-background-image': {
                 position: 'absolute !important',
@@ -176,6 +177,7 @@ const Question = ({
                   }
                 }}
                 sx={{
+                  mt: 3.75,
                   color: 'transparent !important',
                   display: 'flex',
                   alignItems: 'center',

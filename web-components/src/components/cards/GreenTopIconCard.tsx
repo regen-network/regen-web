@@ -49,7 +49,7 @@ const GreenTopIconCard: React.FC<{
 
       <Grid container direction="column" sx={{ flex: 1, p: 4, gap: 4 }}>
         <Title variant="h3">{props.title}</Title>
-        <Body>
+        <Body as="div">
           {typeof props.description === 'string' ? (
             props.description
           ) : (

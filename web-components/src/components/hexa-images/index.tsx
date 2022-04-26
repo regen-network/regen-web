@@ -180,7 +180,7 @@ export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
         >
           {items[selected].name}
         </Title>
-        <Label sx={{ color: 'info.main', pb: [3.5, 4.5] }}>
+        <Label as="div" sx={{ color: 'info.main', pb: [3.5, 4.5] }}>
           {renderText(items[selected].role)}
         </Label>
         <Body size="lg">{renderText(items[selected].description)}</Body>

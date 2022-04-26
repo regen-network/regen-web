@@ -92,15 +92,23 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
       try {
         const _basketClasses = await Promise.all(
           basketClassesInfo.map(async basketClass => {
-            // TODO: use metadata
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            const metadata = await getMetadataFromUint8Array(
-              basketClass.info!.metadata,
-            );
+            let metadata;
+            if (basketClass.info?.metadata) {
+              metadata = await getMetadataFromUint8Array(
+                basketClass.info?.metadata,
+              );
+            }
+
+            let basketClassName;
+            if (basketClass.info?.classId) {
+              basketClassName = metadata
+                ? `${metadata['schema:name']} (${basketClass.info?.classId})`
+                : basketClass.info?.classId;
+            }
 
             return {
               id: basketClass.info?.classId || '-',
-              name: basketClass.info?.classId || '-',
+              name: basketClassName || '-',
             };
           }),
         );

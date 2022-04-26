@@ -88,6 +88,7 @@ const RegistryNav: React.FC = () => {
   const titleAlias: { [title: string]: string } = {
     'The Kasigau Corridor REDD Project - Phase II The Community Ranches':
       'Kasigau Corridor',
+    'The Mai Ndombe REDD+ Project': 'Mai Ndombe',
   };
 
   const menuItems: HeaderMenuItem[] = [

@@ -129,7 +129,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
                   ?.handle || '-',
               projectDisplay:
                 batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
-                  ?.metadata['http://schema.org/name'] || '-',
+                  ?.metadata['schema:name'] || '-',
             };
           }),
         );

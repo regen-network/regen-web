@@ -79,32 +79,34 @@ export default function useEcocreditQuery<T>({
     if (!params) return;
     if (loading || data || error) return;
 
-    let response;
-
     setLoading(true);
 
-    if (query === 'balance') {
-      response = balance(client, params);
-    }
-
-    if (query === 'batchInfo') {
-      response = batchInfo(client, params);
-    }
-
-    if (query === 'batches') {
-      response = batches(client, params);
-    }
-
-    if (query === 'classInfo') {
-      response = classInfo(client, params);
-    }
-
-    if (query === 'classes') {
-      response = classes(client, params);
-    }
-
-    if (query === 'creditTypes') {
-      response = creditTypes(client, params);
+    let response;
+    switch (query) {
+      case 'balance':
+        response = balance(client, params);
+        break;
+      case 'batchInfo':
+        response = batchInfo(client, params);
+        break;
+      case 'batches':
+        response = batches(client, params);
+        break;
+      case 'classInfo':
+        response = classInfo(client, params);
+        break;
+      case 'classes':
+        response = classes(client, params);
+        break;
+      case 'creditTypes':
+        response = creditTypes(client, params);
+        break;
+      default:
+        setError(
+          new Error(
+            'You need to provide a valid ecocredit query name (ie. batchInfo)',
+          ),
+        );
     }
 
     if (response) {

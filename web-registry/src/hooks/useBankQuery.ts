@@ -67,24 +67,28 @@ export default function useBankQuery<T>({
     if (!params) return;
     if (loading || data || error) return;
 
-    let response;
-
     setLoading(true);
 
-    if (query === 'allBalances') {
-      response = allBalances(client, params);
-    }
-
-    if (query === 'balance') {
-      response = balance(client, params);
-    }
-
-    if (query === 'denomMetadata') {
-      response = denomMetadata(client, params);
-    }
-
-    if (query === 'denomsMetadata') {
-      response = denomsMetadata(client, params);
+    let response;
+    switch (query) {
+      case 'allBalances':
+        response = allBalances(client, params);
+        break;
+      case 'balance':
+        response = balance(client, params);
+        break;
+      case 'denomMetadata':
+        response = denomMetadata(client, params);
+        break;
+      case 'denomsMetadata':
+        response = denomsMetadata(client, params);
+        break;
+      default:
+        setError(
+          new Error(
+            'You need to provide a valid bank query name (ie. allBalances)',
+          ),
+        );
     }
 
     if (response) {

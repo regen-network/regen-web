@@ -67,24 +67,28 @@ export default function useBasketQuery<T>({
     if (!params) return;
     if (loading || data || error) return;
 
-    let response;
-
     setLoading(true);
 
-    if (query === 'basket') {
-      response = basket(client, params);
-    }
-
-    if (query === 'baskets') {
-      response = baskets(client, params);
-    }
-
-    if (query === 'basketBalances') {
-      response = basketBalances(client, params);
-    }
-
-    if (query === 'basketBalance') {
-      response = basketBalance(client, params);
+    let response;
+    switch (query) {
+      case 'basket':
+        response = basket(client, params);
+        break;
+      case 'baskets':
+        response = baskets(client, params);
+        break;
+      case 'basketBalances':
+        response = basketBalances(client, params);
+        break;
+      case 'basketBalance':
+        response = basketBalance(client, params);
+        break;
+      default:
+        setError(
+          new Error(
+            'You need to provide a valid basket query name (ie. basketBalances)',
+          ),
+        );
     }
 
     if (response) {

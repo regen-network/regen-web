@@ -30,20 +30,19 @@ export default function UserInfo({
   border = true,
   icon,
 }: UserInfoProps): JSX.Element {
-  const mobileSize = getMobileSize(size);
   const sizeVariant = getSizeVariant(size);
-  const mobileVariant = getSizeVariant(mobileSize);
+  const mobileVariant = getSizeVariant(getMobileSize(size));
   // title doesn't accept size as a prop, so manually setting it here
   const name = (
-    <Typography
+    <Title
       sx={theme => ({
-        typography: { xs: sizeVariant, sm: mobileVariant },
+        typography: [mobileVariant, sizeVariant],
         fontFamily: theme.typography.h1.fontFamily,
-        fontWeight: 900,
+        fontWeight: theme.typography.h1.fontWeight,
       })}
     >
       {user.name}
-    </Typography>
+    </Title>
   );
 
   return (

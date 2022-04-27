@@ -11,6 +11,7 @@ export * from './Certificate';
 export * from './ChooseCreditClass';
 export * from './CreateCreditClass';
 export * from './CreateMethodology';
+export * from './CreditBatchBasics';
 export * from './CreditClassDetails';
 export * from './CreditsIssue';
 export * from './CreditsRetire';

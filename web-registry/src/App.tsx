@@ -51,6 +51,7 @@ import {
   VerifyEmail,
   ProjectEdit,
   Activity,
+  CreditBatchBasics,
 } from './pages';
 
 import './App.css';
@@ -182,6 +183,13 @@ const App: React.FC = (): JSX.Element => {
               />
             </Route>
           </Route>
+          <Route path="credit-batch">
+            <Route
+              path="basics"
+              element={<ProtectedRoute component={CreditBatchBasics} />}
+            />
+          </Route>
+
           <Route path="admin" element={<Admin />} />
           {isAdmin(user) && (
             <>

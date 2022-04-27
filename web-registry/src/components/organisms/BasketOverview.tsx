@@ -93,6 +93,7 @@ const DataText = styled(Body)(({ theme }) => ({
   color: theme.palette.info.dark,
   '& a': {
     color: theme.palette.text.secondary,
+    fontWeight: 'normal',
   },
 }));
 DataText.defaultProps = {

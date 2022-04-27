@@ -38,7 +38,7 @@ export function getMobileSize(size: TextSize): TextSize {
 
 /** takes a `TextSize` and returns a custom MUI theme `variant` */
 // Possible TODO: should this also accept pixel (or REM) values?
-function getSizeVariant(size: TextSize): Variant {
+export function getSizeVariant(size: TextSize): Variant {
   let variant;
   switch (size) {
     case 'xs':

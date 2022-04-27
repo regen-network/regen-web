@@ -3,8 +3,9 @@ import Grid, { GridDirection } from '@mui/material/Grid';
 
 import UserAvatar from './UserAvatar';
 import OrganizationIcon from '../icons/OrganizationIcon';
-import { Body } from '../typography';
-import type { TextSize } from '../typography/sizing';
+import { Body, Title } from '../typography';
+import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
+import { Typography } from '@mui/material';
 
 export interface User {
   name: string;
@@ -29,10 +30,20 @@ export default function UserInfo({
   border = true,
   icon,
 }: UserInfoProps): JSX.Element {
+  const mobileSize = getMobileSize(size);
+  const sizeVariant = getSizeVariant(size);
+  const mobileVariant = getSizeVariant(mobileSize);
+  // title doesn't accept size as a prop, so manually setting it here
   const name = (
-    <Body size={size} color="black">
+    <Typography
+      sx={theme => ({
+        typography: { xs: sizeVariant, sm: mobileVariant },
+        fontFamily: theme.typography.h1.fontFamily,
+        fontWeight: 900,
+      })}
+    >
       {user.name}
-    </Body>
+    </Typography>
   );
 
   return (

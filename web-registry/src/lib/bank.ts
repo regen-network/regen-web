@@ -85,7 +85,7 @@ interface QueryAllBalancesProps extends BankQueryClientProps {
 export const queryAllBalances = async ({
   client,
   request,
-}: QueryAllBalancesProps): Promise<DeepPartial<QueryAllBalancesResponse>> => {
+}: QueryAllBalancesProps): Promise<QueryAllBalancesResponse> => {
   try {
     return await client.AllBalances({
       address: request.address,
@@ -106,7 +106,7 @@ interface QueryBalanceProps extends BankQueryClientProps {
 export const queryBalance = async ({
   client,
   request,
-}: QueryBalanceProps): Promise<DeepPartial<QueryBalanceResponse>> => {
+}: QueryBalanceProps): Promise<QueryBalanceResponse> => {
   try {
     return await client.Balance({
       address: request.address,
@@ -128,9 +128,7 @@ interface QueryDenomMetadataProps extends BankQueryClientProps {
 export const queryDenomMetadata = async ({
   client,
   request,
-}: QueryDenomMetadataProps): Promise<
-  DeepPartial<QueryDenomMetadataResponse>
-> => {
+}: QueryDenomMetadataProps): Promise<QueryDenomMetadataResponse> => {
   try {
     return await client.DenomMetadata({ denom: request.denom });
   } catch (err) {
@@ -149,9 +147,7 @@ interface QueryDenomsMetadataProps extends BankQueryClientProps {
 export const queryDenomsMetadata = async ({
   client,
   request,
-}: QueryDenomsMetadataProps): Promise<
-  DeepPartial<QueryDenomsMetadataResponse>
-> => {
+}: QueryDenomsMetadataProps): Promise<QueryDenomsMetadataResponse> => {
   try {
     return await client.DenomsMetadata({});
   } catch (err) {

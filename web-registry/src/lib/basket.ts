@@ -88,7 +88,7 @@ interface QueryBasketProps extends BasketQueryClientProps {
 export const queryBasket = async ({
   client,
   request,
-}: QueryBasketProps): Promise<DeepPartial<QueryBasketResponse>> => {
+}: QueryBasketProps): Promise<QueryBasketResponse> => {
   try {
     return await client.Basket({ basketDenom: request.basketDenom });
   } catch (err) {
@@ -107,7 +107,7 @@ interface QueryBasketsProps extends BasketQueryClientProps {
 export const queryBaskets = async ({
   client,
   request,
-}: QueryBasketsProps): Promise<DeepPartial<QueryBasketsResponse>> => {
+}: QueryBasketsProps): Promise<QueryBasketsResponse> => {
   try {
     return await client.Baskets({});
   } catch (err) {
@@ -126,9 +126,7 @@ interface QueryBasketBalancesProps extends BasketQueryClientProps {
 export const queryBasketBalances = async ({
   client,
   request,
-}: QueryBasketBalancesProps): Promise<
-  DeepPartial<QueryBasketBalancesResponse>
-> => {
+}: QueryBasketBalancesProps): Promise<QueryBasketBalancesResponse> => {
   try {
     return await client.BasketBalances({ basketDenom: request.basketDenom });
   } catch (err) {
@@ -147,9 +145,7 @@ interface QueryBasketBalanceProps extends BasketQueryClientProps {
 export const queryBasketBalance = async ({
   client,
   request,
-}: QueryBasketBalanceProps): Promise<
-  DeepPartial<QueryBasketBalanceResponse>
-> => {
+}: QueryBasketBalanceProps): Promise<QueryBasketBalanceResponse> => {
   try {
     return await client.BasketBalance({
       basketDenom: request.basketDenom,

@@ -380,7 +380,7 @@ interface QueryBalanceProps extends EcocreditQueryClientProps {
 export const queryBalance = async ({
   client,
   request,
-}: QueryBalanceProps): Promise<DeepPartial<QueryBalanceResponse>> => {
+}: QueryBalanceProps): Promise<QueryBalanceResponse> => {
   try {
     return await client.Balance({
       account: request.account,
@@ -402,7 +402,7 @@ interface QueryBatchInfoProps extends EcocreditQueryClientProps {
 export const queryBatchInfo = async ({
   client,
   request,
-}: QueryBatchInfoProps): Promise<DeepPartial<QueryBatchInfoResponse>> => {
+}: QueryBatchInfoProps): Promise<QueryBatchInfoResponse> => {
   try {
     return await client.BatchInfo({
       batchDenom: request.batchDenom,
@@ -423,7 +423,7 @@ interface QueryBatchesProps extends EcocreditQueryClientProps {
 export const queryBatches = async ({
   client,
   request,
-}: QueryBatchesProps): Promise<DeepPartial<QueryBatchesResponse>> => {
+}: QueryBatchesProps): Promise<QueryBatchesResponse> => {
   try {
     return await client.Batches({
       classId: request.classId,
@@ -444,7 +444,7 @@ interface QueryClassInfoProps extends EcocreditQueryClientProps {
 export const queryClassInfo = async ({
   client,
   request,
-}: QueryClassInfoProps): Promise<DeepPartial<QueryClassInfoResponse>> => {
+}: QueryClassInfoProps): Promise<QueryClassInfoResponse> => {
   try {
     return await client.ClassInfo({
       classId: request.classId,
@@ -465,7 +465,7 @@ interface QueryClassesProps extends EcocreditQueryClientProps {
 export const queryClasses = async ({
   client,
   request,
-}: QueryClassesProps): Promise<DeepPartial<QueryClassesResponse>> => {
+}: QueryClassesProps): Promise<QueryClassesResponse> => {
   try {
     return await client.Classes({});
   } catch (err) {
@@ -484,7 +484,7 @@ interface QueryCreditTypesProps extends EcocreditQueryClientProps {
 export const queryCreditTypes = async ({
   client,
   request,
-}: QueryCreditTypesProps): Promise<DeepPartial<QueryCreditTypesResponse>> => {
+}: QueryCreditTypesProps): Promise<QueryCreditTypesResponse> => {
   try {
     return await client.CreditTypes({});
   } catch (err) {

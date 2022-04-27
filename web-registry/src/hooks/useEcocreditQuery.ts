@@ -111,7 +111,7 @@ export default function useEcocreditQuery<T>({
 
     if (response) {
       response
-        .then(response => setData(response as T))
+        .then(response => setData(response as unknown as T))
         .catch(setError)
         .finally(() => setLoading(false));
     }

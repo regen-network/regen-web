@@ -97,9 +97,11 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
           basketClassesInfo.map(async basketClass => {
             let metadata;
             if (basketClass.info?.metadata) {
-              metadata = await getMetadataFromUint8Array(
-                basketClass.info?.metadata,
-              );
+              try {
+                metadata = await getMetadataFromUint8Array(
+                  basketClass.info?.metadata,
+                );
+              } catch (err) {}
             }
 
             let basketClassName;

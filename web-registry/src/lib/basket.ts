@@ -15,12 +15,12 @@ import {
 
 /**
  *
- * BASKET MODULE QUERIES
+ * BASKET SUBMODULE QUERIES
  * ---------------------
  *  - Basket
  *  - Baskets
  *  - BasketBalances
- *  - BasketBalance (TODO)
+ *  - BasketBalance
  *
  */
 

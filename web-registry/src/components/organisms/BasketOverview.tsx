@@ -94,11 +94,9 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                   link={getAccountUrl(curator.address as string)}
                 />
                 <ItemWithLinkList
-                  label={
-                    allowedCreditClasses.length > 1
-                      ? 'allowed credit classes'
-                      : 'allowed credit class'
-                  }
+                  label={`allowed credit class${
+                    allowedCreditClasses.length > 1 ? 'es' : ''
+                  }`}
                   data={allowedCreditClasses}
                   link={'/credit-classes/'}
                 />

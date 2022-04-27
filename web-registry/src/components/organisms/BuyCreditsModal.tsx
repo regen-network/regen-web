@@ -348,7 +348,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       value="autoretire"
                       checked={values['retirementAction'] === 'autoretire'}
                       label="Auto-retire credits"
-                      description="These credits will be retired upon purchase and will not be tradeable."
+                      description="These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
                     />
                     <Field
                       className={styles.toggle}

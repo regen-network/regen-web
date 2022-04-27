@@ -36,7 +36,11 @@ const UserMenuItem: React.FC<UserMenuItemProps> = ({
       linkComponent={linkComponent}
       item={{
         renderTitle: () => (
-          <Box display="flex" alignItems="center" sx={{ fontSize: 14 }}>
+          <Box
+            display="flex"
+            alignItems="center"
+            sx={{ fontSize: 14, mt: { md: 0.5 } }}
+          >
             <Avatar
               sx={{
                 height: 24,

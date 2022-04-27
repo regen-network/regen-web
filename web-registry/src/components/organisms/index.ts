@@ -5,6 +5,7 @@ export * from './BasicInfoForm';
 export * from './BasketEcocredits';
 export * from './BasketEcocreditsTable';
 export * from './BasketsTable';
+export * from './BatchBasicsForm';
 export * from './BasketOverview';
 export * from './BuyCreditsModal';
 export * from './ConfirmationModal';

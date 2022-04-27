@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { CreditBatchFormTemplate } from '../components/templates';
+import { BatchBasicsForm } from '../components/organisms';
 
 const CreditBatchBasics: React.FC = () => {
   return (
-    <CreditBatchFormTemplate title="test" activeStep={0}>
-      hw
+    <CreditBatchFormTemplate title="Create Credit Batch" activeStep={0}>
+      <BatchBasicsForm submit={() => Promise.resolve()} />
     </CreditBatchFormTemplate>
   );
 };

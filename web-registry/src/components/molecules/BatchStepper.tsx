@@ -3,13 +3,13 @@ import React from 'react';
 import background from '../../assets/topography-pattern-full-1.png';
 import Stepper from 'web-components/lib/components/stepper';
 
-interface PlanStepperProps {
+interface BatchStepperProps {
   activeStep: number;
 }
 
-const steps = ['Project Page', 'Finished'];
+const steps = ['Credit Basics', 'Recipient(s)', 'Review', 'Finished'];
 
-const PlanStepper: React.FC<PlanStepperProps> = ({ activeStep }) => {
+const BatchStepper: React.FC<BatchStepperProps> = ({ activeStep }) => {
   return (
     <Stepper
       sx={{ mw: 240 }}
@@ -20,4 +20,4 @@ const PlanStepper: React.FC<PlanStepperProps> = ({ activeStep }) => {
   );
 };
 
-export { PlanStepper };
+export { BatchStepper };

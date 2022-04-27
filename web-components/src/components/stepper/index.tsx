@@ -1,6 +1,12 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme, withStyles } from '@mui/styles';
-import { Stepper, Step, StepLabel, StepConnector } from '@mui/material';
+import {
+  Stepper,
+  Step,
+  StepLabel,
+  StepConnector,
+  SxProps,
+} from '@mui/material';
 import clsx from 'clsx';
 
 import RegenStepIcon from './StepIcon';
@@ -10,6 +16,7 @@ interface StepperProps {
   activeStep: number;
   background?: string;
   steps: string[];
+  sx?: SxProps<Theme>;
 }
 
 interface StyleProps {
@@ -82,12 +89,14 @@ const RegenStepper = ({
   activeStep,
   steps,
   background,
+  sx,
 }: StepperProps): JSX.Element => {
   const classes = useStyles({ background });
 
   return (
     <div className={classes.root}>
       <Stepper
+        sx={sx}
         className={clsx(className, classes.stepper)}
         activeStep={activeStep}
         alternativeLabel

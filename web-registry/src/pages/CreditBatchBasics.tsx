@@ -1,5 +1,13 @@
 import React from 'react';
 
-const CreditBatchBasics: React.FC = () => <>hw</>;
+import { CreditBatchFormTemplate } from '../components/templates';
+
+const CreditBatchBasics: React.FC = () => {
+  return (
+    <CreditBatchFormTemplate title="test" activeStep={0}>
+      hw
+    </CreditBatchFormTemplate>
+  );
+};
 
 export { CreditBatchBasics };

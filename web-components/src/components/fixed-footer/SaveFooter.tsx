@@ -5,7 +5,7 @@ import { withStyles, createStyles, makeStyles, useTheme } from '@mui/styles';
 import LinearProgress from '@mui/material/LinearProgress';
 import Grid from '@mui/material/Grid';
 
-import FixedFooter from './';
+import FixedFooter from '.';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
 import ContainedButton from '../buttons/ContainedButton';
@@ -86,7 +86,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const OnboardingFooter: React.FC<Props> = ({
+const SaveFooter: React.FC<Props> = ({
   saveText = 'Save & Next',
   hideProgress = false,
   ...props
@@ -140,4 +140,4 @@ const OnboardingFooter: React.FC<Props> = ({
   );
 };
 
-export default OnboardingFooter;
+export default SaveFooter;

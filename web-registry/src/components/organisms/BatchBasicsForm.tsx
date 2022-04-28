@@ -1,15 +1,19 @@
 import React from 'react';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import {
+  Formik,
+  Form,
+  Field,
+  // FormikErrors
+} from 'formik';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+// import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
+// import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
-import { validate } from '../../lib/rdf';
-import { ProjectPageFooter } from '../molecules';
+import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
+// import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+// import { validate } from '../../lib/rdf';
 
 export interface BatchBasicsFormValues {
   creditClass?: string;
@@ -68,7 +72,7 @@ const BatchBasicsForm: React.FC<{
                 />
               )}
             </OnBoardingCard>
-            <ProjectPageFooter
+            <SaveFooter
               onSave={submitForm}
               saveDisabled={
                 !isValid || isSubmitting || !Object.keys(touched).length

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import FixedFooter from 'web-components/lib/components/fixed-footer';
-import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
+import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchFooter';
 
 export default {
@@ -21,8 +21,8 @@ export const fixedFooter = (): JSX.Element => (
   </FixedFooter>
 );
 
-export const onboardingFooter = (): JSX.Element => (
-  <OnboardingFooter
+export const SaveFooter = (): JSX.Element => (
+  <SaveFooter
     onSave={submit}
     saveText={'Save and Next'}
     onPrev={() => null}

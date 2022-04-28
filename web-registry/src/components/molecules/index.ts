@@ -1,6 +1,5 @@
 export * from './AdditionalProjectMetadata';
 export * from './BackgroundImgSection';
-export * from './BatchStepper';
 export * from './BatchInfoGrid';
 export * from './BatchMetadata';
 export * from './BatchTotalsGrid';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import OnboardingFooter from 'web-components/lib/components/fixed-footer/OnboardingFooter';
+import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import { EditProjectPageFooter } from './EditProjectPageFooter';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 
@@ -25,7 +25,7 @@ const ProjectPageFooter: React.FC<Props> = ({
       saveDisabled={saveDisabled}
     />
   ) : (
-    <OnboardingFooter
+    <SaveFooter
       saveText={saveText || 'Save and Next'}
       onSave={onSave}
       onPrev={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561

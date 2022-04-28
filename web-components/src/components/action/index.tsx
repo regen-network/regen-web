@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
-import ArrowDownIcon from '../icons/ArrowDownIcon';
 import { truncate, Texts } from '../read-more/truncate';
-import { Body, Label, Subtitle } from '../typography';
+import { Body, Subtitle } from '../typography';
+import { ExpandButton } from '../buttons/ExpandButton';
 
 export interface ActionProps {
   name: string;
@@ -40,8 +40,7 @@ export default function Action({
   imgSrc,
   className,
 }: ActionProps): JSX.Element {
-  const classes = useStyles({});
-  const theme = useTheme();
+  const classes = useStyles();
 
   const [expanded, setExpanded] = useState(false);
   const texts: Texts = truncate(description, 310, 100);
@@ -62,27 +61,16 @@ export default function Action({
       <Body size="sm" mobileSize="sm">
         {ReactHtmlParser(desc)}
         {texts.rest.length !== 0 && (
-          <Label
-            size="xs"
-            role="button"
+          <ExpandButton
+            size="small"
             onClick={handleChange}
-            sx={{ ml: 3, width: theme => theme.spacing(24), cursor: 'pointer' }}
-          >
-            read {expanded ? 'less' : 'more'}
-            {expanded ? (
-              <ArrowDownIcon
-                className={classes.icon}
-                direction="up"
-                color={theme.palette.secondary.main}
-              />
-            ) : (
-              <ArrowDownIcon
-                className={classes.icon}
-                direction="down"
-                color={theme.palette.secondary.main}
-              />
-            )}
-          </Label>
+            expanded={expanded}
+            sx={{
+              p: [0],
+              ml: 2,
+              ':hover': { bgcolor: 'transparent !important' },
+            }}
+          />
         )}
       </Body>
     </div>

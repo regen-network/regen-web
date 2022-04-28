@@ -88,13 +88,12 @@ const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
       <ExpandButton
         sx={{
           mt: 2,
-          pl: '0px !important',
-          pr: '0px !important',
-          '& p, svg': { fontSize: { xs: '12px' } },
-          '&:hover': { bgcolor: 'transparent !important' },
+          px: [0],
+          ':hover': { bgcolor: 'transparent !important' },
         }}
         onClick={() => setExpanded(!expanded)}
         text="see"
+        size="small"
         expanded={expanded}
       />
     </Box>

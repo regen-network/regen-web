@@ -5,7 +5,6 @@ import UserAvatar from './UserAvatar';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import { Body, Title } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
-import { Typography } from '@mui/material';
 
 export interface User {
   name: string;

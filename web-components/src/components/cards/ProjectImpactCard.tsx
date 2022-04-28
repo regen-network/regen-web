@@ -1,11 +1,9 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import cx from 'clsx';
+import { Box } from '@mui/material';
 
 import Card from './Card';
 import { Body, Label, Title } from '../typography';
 import { Image } from '../image';
-import { Box } from '@mui/material';
 
 export interface ProjectImpactCardProps {
   className?: string;
@@ -18,31 +16,6 @@ export interface ProjectImpactCardProps {
   imageStorageBaseUrl?: string;
 }
 
-interface StyleProps {
-  imgSrc: string;
-}
-
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  background: props => ({
-    backgroundImage: `url(${props.imgSrc})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    textAlign: 'center',
-    position: 'relative',
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(59),
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(50),
-    },
-  }),
-}));
-
 export default function ProjectImpactCard({
   name,
   description,
@@ -53,11 +26,28 @@ export default function ProjectImpactCard({
   imageStorageBaseUrl,
   apiServerUrl,
 }: ProjectImpactCardProps): JSX.Element {
-  const classes = useStyles({ imgSrc });
-
   return (
-    <Card className={cx(classes.root, className)}>
-      <div className={classes.background}>
+    <Card
+      className={className}
+      sx={{ display: 'flex', flexDirection: 'column' }}
+    >
+      <Box
+        sx={theme => ({
+          display: 'flex',
+          backgroundImage: `url(${imgSrc})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          textAlign: 'center',
+          position: 'relative',
+          [theme.breakpoints.up('sm')]: {
+            height: theme.spacing(59),
+          },
+          [theme.breakpoints.down('sm')]: {
+            height: theme.spacing(50),
+          },
+        })}
+      >
         <Label
           size="sm"
           sx={theme => ({
@@ -76,14 +66,13 @@ export default function ProjectImpactCard({
           variant="h4"
           sx={{
             color: 'primary.main',
-            position: 'absolute',
-            left: [4, 5],
-            bottom: [5, 6],
+            alignSelf: 'flex-end',
+            p: [4, 5],
           }}
         >
           {name}
         </Title>
-      </div>
+      </Box>
       <Box
         sx={{
           display: 'flex',
@@ -92,17 +81,24 @@ export default function ProjectImpactCard({
           p: [4, 5],
         }}
       >
-        <Body as="div" size="sm" mobileSize="sm" sx={{ flex: '1 0 auto' }}>
+        <Body
+          as="div"
+          size="sm"
+          mobileSize="sm"
+          sx={{ flex: '1 0 auto', pb: 4 }}
+        >
           {description}
         </Body>
         {standard && (
-          <Image
-            src={standard}
-            alt={standard}
-            imageStorageBaseUrl={imageStorageBaseUrl}
-            apiServerUrl={apiServerUrl}
-            width={140}
-          />
+          <Box sx={{ py: [2] }}>
+            <Image
+              src={standard}
+              alt={standard}
+              imageStorageBaseUrl={imageStorageBaseUrl}
+              apiServerUrl={apiServerUrl}
+              width={140}
+            />
+          </Box>
         )}
       </Box>
     </Card>

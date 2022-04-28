@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Title from '../title';
 import CreditsIcon from '../icons/CreditsIcon';
 
-interface CreditInfoProps {
+export interface CreditInfoProps {
   creditClass: CreditClass;
   activities: string[];
   background?: string;

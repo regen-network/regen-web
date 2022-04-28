@@ -7,6 +7,8 @@ import {
 
 import { useLedger } from '../ledger';
 
+// TODO: Use useBankQuery instead.
+
 type FetchDenomMetadata = (
   denom: string,
 ) => Promise<QueryDenomMetadataResponse | undefined>;

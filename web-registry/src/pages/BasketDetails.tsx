@@ -6,12 +6,12 @@ import { BasketOverview, BasketEcocredits } from '../components/organisms';
 
 const BasketDetails: React.FC = () => {
   const { basketDenom } = useParams<{ basketDenom: string }>();
-  const { dataOverview, dataBasketBatches } = useBasketDetails(basketDenom);
+  const data = useBasketDetails(basketDenom);
 
   return (
     <>
-      {dataOverview && <BasketOverview {...dataOverview} />}
-      {dataBasketBatches && <BasketEcocredits batches={dataBasketBatches} />}
+      {data.overview && <BasketOverview {...data.overview} />}
+      {data.creditBatches && <BasketEcocredits batches={data.creditBatches} />}
     </>
   );
 };

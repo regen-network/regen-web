@@ -12,7 +12,6 @@ import { truncate } from 'web-components/lib/utils/truncate';
 import { Link } from '../atoms';
 import { NoCredits } from '../molecules';
 import { getAccountUrl } from '../../lib/block-explorer';
-import type { BatchInfoWithProject } from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -23,10 +22,24 @@ const BreakText = styled('div')({
   wordWrap: 'break-word',
 });
 
-export interface BasketEcocreditsTableProps {
-  batches: BatchInfoWithProject[];
+export type CreditBatch = {
+  //  BatchInfo
+  classId: string;
+  batchDenom: string;
+  issuer: string;
+  totalAmount: string;
+  startDate: Date | string;
+  endDate: Date | string;
+  projectLocation: string;
+  // Project info
+  projectHandle: string;
+  projectName: string;
+};
+
+type BasketEcocreditsTableProps = {
+  batches: CreditBatch[];
   renderActionButtons?: RenderActionButtonsFunc;
-}
+};
 
 const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
   batches,
@@ -52,11 +65,18 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
         <BreakText>Batch End Date</BreakText>,
         'Project Location',
       ]}
-      rows={batches.map((item, i) => {
+      rows={batches.map(item => {
+        const projectCell =
+          item.projectHandle === '-' ? (
+            item.projectName
+          ) : (
+            <Link href={`/projects/${item.projectHandle}`} target="_blank">
+              {item.projectName}
+            </Link>
+          );
+
         return [
-          <Link href={`/projects/${item.project_name}`} target="_blank">
-            {item.project_display}
-          </Link>,
+          projectCell,
           <Box
             component="span"
             sx={{
@@ -66,16 +86,16 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
               },
             }}
           >
-            {item.batch_denom}
+            {item.batchDenom}
           </Box>,
           <Link href={getAccountUrl(item.issuer as string)} target="_blank">
             {truncate(item.issuer as string)}
           </Link>,
-          formatNumber(item.total_amount),
-          item.class_id,
-          <GreyText>{formatDate(item.start_date)}</GreyText>,
-          <GreyText>{formatDate(item.end_date)}</GreyText>,
-          item.project_location,
+          formatNumber(item.totalAmount),
+          item.classId,
+          <GreyText>{formatDate(item.startDate)}</GreyText>,
+          <GreyText>{formatDate(item.endDate)}</GreyText>,
+          item.projectLocation,
         ];
       })}
     />

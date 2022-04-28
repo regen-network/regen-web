@@ -9,6 +9,8 @@ import {
 
 import { useLedger } from '../ledger';
 
+// TODO: Use useBankQuery instead.
+
 type FetchBalance = (
   request: DeepPartial<QueryBalanceRequest>,
 ) => Promise<QueryBalanceResponse | undefined>;

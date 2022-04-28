@@ -223,7 +223,9 @@ export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
         <Title variant="h6" className={classes.role}>
           {renderText(items[selected].role)}
         </Title>
-        <Description className={classes.description}>{renderText(items[selected].description)}</Description>
+        <Description className={classes.description}>
+          {renderText(items[selected].description)}
+        </Description>
       </Grid>
       <Grid container className={classes.images}>
         {items.map((item, i) => (

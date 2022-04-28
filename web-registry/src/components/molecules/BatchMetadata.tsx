@@ -10,34 +10,37 @@ export const BatchMetadata: React.FC<{
   data?: BatchMetadataLD;
   sx?: SxProps<Theme>;
 }> = ({ sx, data }) => {
-  const monitoringReport = data?.['regen:batchMonitoringReport'];
-  const verificationReport = data?.['regen:batchVerificationReport'];
+  const additionalCertifications = data?.['regen:additionalCertifications'];
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 8, ...sx }}>
       <MetaDetail label="vcs retirement serial number">
         {data?.['regen:vcsRetirementSerialNumber'] || '-'}
       </MetaDetail>
-      <MetaDetail label="batch monitoring report">
-        <LinkOrDash
-          href={monitoringReport?.['schema:url']?.['@value']}
-          label={monitoringReport?.['schema:name']}
-        />
-      </MetaDetail>
-      <MetaDetail label="Batch verification report">
-        <LinkOrDash
-          href={verificationReport?.['schema:url']?.['@value']}
-          label={verificationReport?.['schema:name']}
-        />
+      <MetaDetail label="additional certifications">
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          {additionalCertifications && additionalCertifications?.length > 0 ? (
+            additionalCertifications?.map(cert => (
+              <LinkOrDash
+                href={cert?.['schema:url']?.['@value']}
+                label={cert?.['schema:name']}
+              />
+            ))
+          ) : (
+            <Dash />
+          )}
+        </Box>
       </MetaDetail>
     </Box>
   );
 };
 
+const Dash: React.FC = () => <>-</>;
+
 const LinkOrDash: React.FC<{ href?: string; label?: string }> = ({
   href,
   label,
 }) => {
-  if (!href) return <>-</>;
+  if (!href) return <Dash />;
   return <LinkWithArrow href={href} label={label || ''} />;
 };
 

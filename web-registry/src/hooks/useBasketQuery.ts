@@ -13,6 +13,7 @@ import {
   queryBasketBalances,
   queryBaskets,
   queryBasketBalance,
+  BasketQueryResponse,
 } from '../lib/basket';
 
 // TODO - this hook is still missing batch query functionality
@@ -24,7 +25,7 @@ type QueryOutput<T> = {
   error: Error | undefined;
 };
 
-export default function useBasketQuery<T>({
+export default function useBasketQuery<T extends BasketQueryResponse>({
   query,
   params,
 }: BasketQueryProps): QueryOutput<T> {
@@ -95,7 +96,7 @@ export default function useBasketQuery<T>({
 
     if (response) {
       response
-        .then(response => setData(response as unknown as T))
+        .then(response => setData(response as T))
         .catch(setError)
         .finally(() => setLoading(false));
     }

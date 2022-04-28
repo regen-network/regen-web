@@ -365,6 +365,16 @@ export type EcocreditQueryProps =
   | ClassesParams
   | CreditTypesParams;
 
+// typing the response
+
+export type EcocreditQueryResponse =
+  | QueryBalanceResponse
+  | QueryBatchInfoResponse
+  | QueryBatchesResponse
+  | QueryClassInfoResponse
+  | QueryClassesResponse
+  | QueryCreditTypesResponse;
+
 /**
  *
  * QUERY FUNCTIONS

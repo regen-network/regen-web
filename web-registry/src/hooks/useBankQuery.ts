@@ -8,6 +8,7 @@ import {
   // types
   BankQueryClient,
   BankQueryProps,
+  BankQueryResponse,
   // queries
   queryAllBalances,
   queryBalance,
@@ -24,7 +25,7 @@ type QueryOutput<T> = {
   error: Error | undefined;
 };
 
-export default function useBankQuery<T>({
+export default function useBankQuery<T extends BankQueryResponse>({
   query,
   params,
 }: BankQueryProps): QueryOutput<T> {
@@ -95,7 +96,7 @@ export default function useBankQuery<T>({
 
     if (response) {
       response
-        .then(response => setData(response as unknown as T))
+        .then(response => setData(response as T))
         .catch(setError)
         .finally(() => setLoading(false));
     }

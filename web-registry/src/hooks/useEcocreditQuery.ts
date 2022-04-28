@@ -15,6 +15,7 @@ import {
   queryClassInfo,
   queryClasses,
   queryCreditTypes,
+  EcocreditQueryResponse,
 } from '../lib/ecocredit';
 
 // TODO - this hook is still missing batch query functionality
@@ -26,7 +27,7 @@ type QueryOutput<T> = {
   error: Error | undefined;
 };
 
-export default function useEcocreditQuery<T>({
+export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
   query,
   params,
 }: EcocreditQueryProps): QueryOutput<T> {
@@ -113,7 +114,7 @@ export default function useEcocreditQuery<T>({
 
     if (response) {
       response
-        .then(response => setData(response as unknown as T))
+        .then(response => setData(response as T))
         .catch(setError)
         .finally(() => setLoading(false));
     }

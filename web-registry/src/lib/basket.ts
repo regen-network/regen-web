@@ -66,12 +66,13 @@ export type BasketQueryProps =
   | BasketBalancesParams
   | BasketBalanceParams;
 
-// TODO ?
 // typing the response
-// export type BasketQueryResponse =
-//   | QueryBasketResponse
-//   | QueryBasketsResponse
-//   | QueryBasketBalancesResponse;
+
+export type BasketQueryResponse =
+  | QueryBasketResponse
+  | QueryBasketsResponse
+  | QueryBasketBalanceResponse
+  | QueryBasketBalancesResponse;
 
 /**
  *

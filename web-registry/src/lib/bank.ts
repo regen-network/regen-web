@@ -66,9 +66,13 @@ export type BankQueryProps =
   | DenomMetadataParams
   | DenomsMetadataParams;
 
-// TODO ?
 // typing the response
-// export type BankQueryResponse = QueryDenomMetadataResponse | QueryBalanceResponse;
+
+export type BankQueryResponse =
+  | QueryAllBalancesResponse
+  | QueryBalanceResponse
+  | QueryDenomMetadataResponse
+  | QueryDenomsMetadataResponse;
 
 /**
  *

@@ -89,6 +89,8 @@ export default function useBankQuery<T>({
             'You need to provide a valid bank query name (ie. allBalances)',
           ),
         );
+        setLoading(false);
+        break;
     }
 
     if (response) {

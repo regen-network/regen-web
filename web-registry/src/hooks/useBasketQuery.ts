@@ -89,6 +89,8 @@ export default function useBasketQuery<T>({
             'You need to provide a valid basket query name (ie. basketBalances)',
           ),
         );
+        setLoading(false);
+        break;
     }
 
     if (response) {

@@ -107,6 +107,8 @@ export default function useEcocreditQuery<T>({
             'You need to provide a valid ecocredit query name (ie. batchInfo)',
           ),
         );
+        setLoading(false);
+        break;
     }
 
     if (response) {

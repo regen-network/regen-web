@@ -96,8 +96,8 @@ const MethodologyReviewProcess: React.FC = () => {
           mt={[2, 5]}
           mx={[-1, 'inherit']}
         >
-          {content?.externalReviewSection?.stepCardsSubsections?.map(s => (
-            <Box mt={[12, 15]}>
+          {content?.externalReviewSection?.stepCardsSubsections?.map((s, i) => (
+            <Box mt={[12, 15]} key={'subsection' + i}>
               <Title variant="h3" align="center">
                 {s?.title}
               </Title>

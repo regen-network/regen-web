@@ -7,6 +7,7 @@ import { BlockContent } from 'web-components/lib/components/block-content';
 import { BackgroundImgSection } from './BackgroundImgSection';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
 import { Body, Title } from 'web-components/lib/components/typography';
+import { SxProps } from '@mui/material';
 
 type Props = {
   img: string;
@@ -19,6 +20,11 @@ type Props = {
     title?: string;
     main?: string;
     section?: string;
+  };
+  sxs?: {
+    title?: SxProps<Theme>;
+    main?: SxProps<Theme>;
+    section?: SxProps<Theme>;
   };
 };
 
@@ -51,7 +57,17 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
         </Title>
       )}
       {props.descriptionRaw && (
-        <Body size="xl" sx={{ color: 'primary.main', mt: 4.5 }}>
+        <Body
+          as="div"
+          size="xl"
+          sx={{
+            color: 'primary.main',
+            mt: 4.5,
+            '& a': {
+              color: 'info.contrastText',
+            },
+          }}
+        >
           <BlockContent
             content={props.descriptionRaw}
             tooltipText={props?.tooltipText || ''}

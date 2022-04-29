@@ -183,7 +183,7 @@ function CreditClassDetailsColumn({
         ] && (
           <OutlinedButton
             size="small"
-            classes={{ root: styles.button }}
+            sx={{ mt: 4, w: 232 }}
             href={
               methodologyVersion?.metadata?.['http://schema.org/url']?.[
                 '@value'

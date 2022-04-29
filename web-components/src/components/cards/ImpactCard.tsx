@@ -110,6 +110,7 @@ export default function ImpactCard({
             {name}
           </Subtitle>
           <Body
+            as="div"
             size={largeFont ? 'lg' : 'sm'}
             mobileSize={largeFont ? 'md' : 'sm'}
             sx={{

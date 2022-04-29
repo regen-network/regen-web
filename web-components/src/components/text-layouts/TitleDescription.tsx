@@ -34,7 +34,7 @@ export function TitleDescription({
       <Title align="center" variant="h2" pb={[3.25, 7.75]}>
         {title}
       </Title>
-      <Body size="xl">
+      <Body size="xl" as="div">
         {typeof description === 'string' ? (
           ReactHtmlParser(description)
         ) : (

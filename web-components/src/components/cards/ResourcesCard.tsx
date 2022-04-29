@@ -27,11 +27,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.contrastText,
     border: `1px solid ${theme.palette.grey[100]}`,
   },
-  eyeIcon: {
-    height: theme.spacing(3.455),
-    marginRight: theme.spacing(1.25),
-    marginBottom: theme.spacing(-0.5),
-  },
 }));
 
 export default function ResourcesCard({
@@ -56,15 +51,9 @@ export default function ResourcesCard({
       backgroundGradient={backgroundGradient}
       titleOverwrite={titleOverwrite}
     >
-      <Box
-        sx={{
-          flex: '1 0 auto',
-          px: [5, 5.25],
-          py: 0,
-        }}
-      >
+      <Box px={[5, 5.25]} pb={[4, 7]}>
         {updated && (
-          <Body size="xs" color="info.main">
+          <Body size="xs" color="info.main" mt={2}>
             <Label as="span" size="xs">
               Last Updated:{' '}
             </Label>
@@ -72,16 +61,14 @@ export default function ResourcesCard({
           </Body>
         )}
         {description && <Body mt={2}>{parseText(description)}</Body>}
-      </Box>
-      <Box sx={{ p: [4, 5] }}>
         <OutlinedButton
           size="small"
           target={target}
           href={link}
-          sx={{ px: [null, 8] }}
+          sx={{ px: [null, 8], mt: [6, 8] }}
+          startIcon={<EyeIcon />}
         >
-          <EyeIcon className={classes.eyeIcon} />
-          <span>{buttonText}</span>
+          {buttonText}
         </OutlinedButton>
       </Box>
     </MediaCard>

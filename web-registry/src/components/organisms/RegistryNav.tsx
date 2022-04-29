@@ -206,7 +206,7 @@ const RegistryNav: React.FC = () => {
       }
       transparent={isTransparent}
       absolute={isTransparent}
-      borderBottom={!isTransparent}
+      borderBottom={false}
       fullWidth={fullWidthRegExp.test(pathname)}
       pathName={pathname}
       extras={

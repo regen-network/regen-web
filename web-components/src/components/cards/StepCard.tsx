@@ -196,6 +196,7 @@ function StepCard({
           <Title
             variant="h4"
             mobileVariant="h6"
+            align="center"
             color={step.isActive ? 'primary.contrastText' : 'info.dark'}
           >
             {step.title}

@@ -206,7 +206,7 @@ const RegistryNav: React.FC = () => {
       }
       transparent={isTransparent}
       absolute={isTransparent}
-      borderBottom={false}
+      borderBottom={false} // TODO: there's some bug where this won't change on routes - hardcoded for now
       fullWidth={fullWidthRegExp.test(pathname)}
       pathName={pathname}
       extras={

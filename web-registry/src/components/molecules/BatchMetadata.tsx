@@ -7,27 +7,28 @@ import { LinkWithArrow } from '../atoms';
 
 import type { BatchMetadataLD } from '../../generated/json-ld';
 
-export const BatchMetadata: React.FC<{ data?: BatchMetadataLD }> = ({
+export const BatchMetadata = ({
   data,
-}) => {
-  const monitoringReport = data?.['regen:batchMonitoringReport'];
-  const verificationReport = data?.['regen:batchVerificationReport'];
+}: {
+  data?: BatchMetadataLD;
+}): JSX.Element => {
+  const additionalCertifications = data?.['regen:additionalCertifications'];
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
       <MetaDetail label="vcs retirement serial number">
         {data?.['regen:vcsRetirementSerialNumber'] || '-'}
       </MetaDetail>
-      <MetaDetail label="batch monitoring report">
-        <LinkOrDash
-          href={monitoringReport?.['schema:url']?.['@value']}
-          label={monitoringReport?.['schema:name']}
-        />
-      </MetaDetail>
-      <MetaDetail label="Batch verification report">
-        <LinkOrDash
-          href={verificationReport?.['schema:url']?.['@value']}
-          label={verificationReport?.['schema:name']}
-        />
+      <MetaDetail label="additional certifications">
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          {additionalCertifications && additionalCertifications?.length > 0
+            ? additionalCertifications?.map(cert => (
+                <LinkOrDash
+                  href={cert?.['schema:url']?.['@value']}
+                  label={cert?.['schema:name']}
+                />
+              ))
+            : '-'}
+        </Box>
       </MetaDetail>
     </Box>
   );

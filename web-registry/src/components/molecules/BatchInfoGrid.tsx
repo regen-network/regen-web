@@ -25,7 +25,10 @@ export const BatchInfoGrid: React.FC<{
     <GridItem>
       <BatchDetail label="Project">
         <Box component="span" sx={{ textTransform: 'capitalize' }}>
-          <LinkWithArrow label={project} href={`/projects/${project}`} />
+          <LinkWithArrow
+            label={project || '-'}
+            href={project ? `/projects/${project}` : ''}
+          />
         </Box>
       </BatchDetail>
     </GridItem>

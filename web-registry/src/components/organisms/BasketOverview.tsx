@@ -14,13 +14,113 @@ import {
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { parseText } from 'web-components/lib/utils/textParser';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from '../../lib/block-explorer';
 import { LinkWithArrow } from '../atoms/LinkWithArrow';
 import { OptimizedImage } from '../atoms/OptimizedImage';
 import topoImg from '../../assets/background-contour-2.svg';
 import forestImg from '../../assets/forest-token.png';
+
+type CreditClass = {
+  id: string;
+  name: string;
+};
+
+type Curator = {
+  name: string;
+  address: string;
+};
+
+export type BasketOverviewProps = {
+  name: string;
+  displayDenom: string;
+  description: string;
+  totalAmount: number;
+  curator: Curator;
+  allowedCreditClasses: CreditClass[];
+  minStartDate?: string;
+  startDateWindow?: string;
+};
+
+export const BasketOverview: React.FC<BasketOverviewProps> = ({
+  name,
+  displayDenom,
+  description,
+  totalAmount,
+  curator,
+  allowedCreditClasses,
+  minStartDate,
+  startDateWindow,
+}) => {
+  const styles = useStyles();
+
+  const getDateCriteria = (
+    minStartDate?: string,
+    startDateWindow?: string,
+  ): string => {
+    if (minStartDate) return formatDate(minStartDate);
+    if (startDateWindow) return `${startDateWindow} rolling acceptance window`;
+    return '-';
+  };
+
+  return (
+    <SectionContainer>
+      <Section className={styles.content}>
+        <Grid container>
+          <ImageContainer item xs={12} sm={5}>
+            <OptimizedImage
+              className={styles.image}
+              src={forestImg}
+              alt={name}
+            />
+          </ImageContainer>
+          <TextContainer item xs={12} sm={7}>
+            <Title variant="h1" sx={{ mb: [0, 2] }}>
+              {name}
+            </Title>
+            <Subtitle mt={2} color="info.main">
+              {displayDenom}
+            </Subtitle>
+            <Body size="xl" mt={2}>
+              {description}
+            </Body>
+            <OnBoardingCard className={styles.card}>
+              <Grid
+                container
+                rowSpacing={1}
+                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              >
+                <Item label="total amount" data={formatNumber(totalAmount)} />
+                <Item
+                  label="curator"
+                  data={curator.name}
+                  link={getAccountUrl(curator.address as string)}
+                />
+                <ItemWithLinkList
+                  label={`allowed credit class${
+                    allowedCreditClasses.length > 1 ? 'es' : ''
+                  }`}
+                  data={allowedCreditClasses}
+                  link={'/credit-classes/'}
+                />
+                <Item
+                  label={
+                    startDateWindow ? 'start date window' : 'min start date'
+                  }
+                  data={getDateCriteria(minStartDate, startDateWindow)}
+                />
+              </Grid>
+            </OnBoardingCard>
+          </TextContainer>
+        </Grid>
+      </Section>
+    </SectionContainer>
+  );
+};
+
+/**
+ * Styles and styled components
+ */
 
 const useStyles = makeStyles((theme: Theme) => ({
   content: {
@@ -98,93 +198,6 @@ const DataText = styled(Body)(({ theme }) => ({
 }));
 DataText.defaultProps = {
   mobileSize: 'md',
-};
-
-export interface CreditClass {
-  id: string;
-  name: string;
-}
-
-export interface BasketOverviewProps {
-  name: string;
-  displayDenom: string;
-  description: string;
-  totalAmount: number;
-  curator: string;
-  allowedCreditClasses: CreditClass[];
-  minStartDate?: string;
-  startDateWindow?: string;
-}
-
-export const BasketOverview: React.FC<BasketOverviewProps> = ({
-  name,
-  displayDenom,
-  description,
-  totalAmount,
-  curator,
-  allowedCreditClasses,
-  minStartDate,
-  startDateWindow,
-}) => {
-  const styles = useStyles();
-
-  return (
-    <SectionContainer>
-      <Section className={styles.content}>
-        <Grid container>
-          <ImageContainer item xs={12} sm={5}>
-            <OptimizedImage
-              className={styles.image}
-              src={forestImg}
-              alt={name}
-            />
-          </ImageContainer>
-          <TextContainer item xs={12} sm={7}>
-            <Title variant="h1" sx={{ mb: [0, 2] }}>
-              {name}
-            </Title>
-            <Subtitle mt={2} color="info.main">
-              {displayDenom}
-            </Subtitle>
-            <Body size="xl" mt={2}>
-              {description}
-            </Body>
-            <OnBoardingCard className={styles.card}>
-              <Grid
-                container
-                rowSpacing={1}
-                columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-              >
-                <Item label="total amount" data={formatNumber(totalAmount)} />
-                <Item
-                  label="curator"
-                  data={truncate(curator)}
-                  link={getAccountUrl(curator as string)}
-                />
-                <ItemWithLinkList
-                  label="allowed credit classes"
-                  data={allowedCreditClasses}
-                  link={'/credit-classes/'}
-                />
-                {minStartDate && (
-                  <Item
-                    label="min start date"
-                    data={formatDate(minStartDate)}
-                  />
-                )}
-                {startDateWindow && (
-                  <Item
-                    label="start date window"
-                    data={formatDate(startDateWindow)}
-                  />
-                )}
-              </Grid>
-            </OnBoardingCard>
-          </TextContainer>
-        </Grid>
-      </Section>
-    </SectionContainer>
-  );
 };
 
 /**

@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
-import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
+import React from 'react';
+import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { Collapse } from '@mui/material';
 import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
 
-import { Theme } from '../../theme/muiTheme';
 import AmountField from '../inputs/AmountField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
@@ -16,9 +15,9 @@ import {
 } from './CreditRetireForm';
 import Submit from './Submit';
 import { validateAmount } from '../inputs/validation';
-import { getISOString } from '../../utils/locationStandard';
 import { Subtitle } from '../typography';
 import type { RegenModalProps } from '../modal';
+import type { Theme } from '../../theme/muiTheme';
 
 /**
  * Take - takes credits from a basket starting from the oldest credits first.

@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import CardMedia from '@mui/material/CardMedia';
+import { makeStyles } from '@mui/styles';
+import { styled, CardMedia } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import cx from 'clsx';
 
@@ -8,6 +8,8 @@ import Card from './Card';
 import { Image, OptimizeImageProps } from '../image';
 import { Label, Title } from '../typography';
 import { parseText } from '../../utils/textParser';
+
+import type { Theme } from '~/theme/muiTheme';
 
 export interface MediaCardProps extends OptimizeImageProps {
   children?: any;
@@ -40,17 +42,18 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: theme.spacing(48.75),
     position: 'relative',
   },
-  backgroundGradient: {
-    height: '100%',
-    zIndex: 0,
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    borderRadius: '9px 9px 0px 0px',
-    background:
-      'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
-  },
 }));
+
+const BackgroundGradient = styled('div')({
+  height: '100%',
+  zIndex: 0,
+  position: 'absolute',
+  bottom: 0,
+  width: '100%',
+  borderRadius: '9px 9px 0px 0px',
+  background:
+    'linear-gradient(180.28deg, rgba(0, 0, 0, 0) 65.91%, rgba(0, 0, 0, 0.6) 99.59%)',
+});
 
 export default function MediaCard({
   children,
@@ -82,7 +85,7 @@ export default function MediaCard({
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
     >
-      {backgroundGradient && <div className={classes.backgroundGradient} />}
+      {backgroundGradient && <BackgroundGradient />}
       {tag && (
         <Label
           sx={theme => ({
@@ -113,12 +116,19 @@ export default function MediaCard({
 
   return (
     <Card
-      className={cx(classes.root, className)}
+      className={className}
       onClick={onClick}
       width={width}
       elevation={elevation}
       borderColor={borderColor}
       borderRadius={borderRadius}
+      sx={{
+        height: '100%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'relative',
+      }}
     >
       {href ? (
         <a href={href} target={target}>
@@ -131,6 +141,7 @@ export default function MediaCard({
         <Title
           variant={titleVariant}
           mobileVariant={titleOverwrite ? 'h6' : undefined}
+          as="div"
           sx={theme => ({
             p: {
               xs: theme.spacing(4, 4.5, 0.8),

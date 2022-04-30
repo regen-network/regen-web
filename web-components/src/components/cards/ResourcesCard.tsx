@@ -51,7 +51,15 @@ export default function ResourcesCard({
       backgroundGradient={backgroundGradient}
       titleOverwrite={titleOverwrite}
     >
-      <Box px={[5, 5.25]} pb={[4, 7]}>
+      <Box
+        sx={{
+          px: [5, 5.25],
+          pb: [4, 7],
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         {updated && (
           <Body size="xs" color="info.main" mt={2}>
             <Label as="span" size="xs">
@@ -61,15 +69,26 @@ export default function ResourcesCard({
           </Body>
         )}
         {description && <Body mt={2}>{parseText(description)}</Body>}
-        <OutlinedButton
-          size="small"
-          target={target}
-          href={link}
-          sx={{ px: [null, 8], mt: [6, 8] }}
-          startIcon={<EyeIcon />}
+        <Box
+          sx={{
+            mt: [6, 8],
+            display: 'flex',
+            flexGrow: 1,
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            justifyContent: 'flex-end',
+          }}
         >
-          {buttonText}
-        </OutlinedButton>
+          <OutlinedButton
+            size="small"
+            target={target}
+            href={link}
+            startIcon={<EyeIcon />}
+            sx={{ px: [null, 8] }}
+          >
+            {buttonText}
+          </OutlinedButton>
+        </Box>
       </Box>
     </MediaCard>
   );

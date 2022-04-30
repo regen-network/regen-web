@@ -231,6 +231,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                                 component={TextField}
                                 label="Your full name"
                                 name="name"
+                                forceDefaultStyle
                               />
                             </Grid>
                             <Grid item xs={12} sm={6} sx={{ pl: [0, 3.75] }}>
@@ -240,6 +241,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                                 type="email"
                                 label="Your email address"
                                 name="email"
+                                forceDefaultStyle
                               />
                             </Grid>
                           </Grid>

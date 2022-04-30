@@ -85,7 +85,7 @@ const ConclusionSection: React.FC<SanityCaseStudyConclusionSection> = ({
           <Title variant="h2" pt={[6, 0]}>
             {content?.conclusionSectionHeader}
           </Title>
-          <Body size="xl">
+          <Body as="div" size="xl" mt={[4, 7]}>
             <BlockContent content={_rawDescription} />
           </Body>
         </Grid>

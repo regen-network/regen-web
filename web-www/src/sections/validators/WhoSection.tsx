@@ -41,6 +41,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   card: {
     height: theme.spacing(62.5),
   },
+  slider: {
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing(4),
+    },
+  },
 }));
 
 const query = graphql`
@@ -92,6 +97,7 @@ const WhoSection = (): JSX.Element => {
       <TitleBody
         title={data?.header || ''}
         body={data?._rawBody}
+        bodySize={['md', 'xl']}
         sx={{ body: { maxWidth: 946 } }}
       />
       {(data?.validators || []).map((v, i) => {
@@ -105,7 +111,10 @@ const WhoSection = (): JSX.Element => {
         ));
 
         return (
-          <Box key={i} sx={{ pb: [5, 7], pt: [15, 20] }}>
+          <Box
+            key={i}
+            sx={{ pb: [0, 7], pt: [15, 20], ':last-of-type': { pb: [4, 10] } }}
+          >
             <Title
               align="center"
               variant="h3"
@@ -114,7 +123,7 @@ const WhoSection = (): JSX.Element => {
             >
               {v?.header}
             </Title>
-            <Body align="center" pb={[null, 10]}>
+            <Body align="center" pb={[0, 10]}>
               {v?.description}
             </Body>
 
@@ -128,7 +137,11 @@ const WhoSection = (): JSX.Element => {
               </Grid>
             </Box>
             <Box display={{ xs: 'block', sm: 'none' }}>
-              <ResponsiveSlider itemWidth="90%" items={items} />
+              <ResponsiveSlider
+                itemWidth="90%"
+                items={items}
+                className={styles.slider}
+              />
             </Box>
           </Box>
         );

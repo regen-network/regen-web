@@ -54,6 +54,7 @@ const WhatSection = (): JSX.Element => {
         title={data?.title || ''}
         body={data?._rawBody}
         sx={{ body: { maxWidth: 946 } }}
+        bodySize={['md', 'xl']}
       />
     </BackgroundSection>
   );

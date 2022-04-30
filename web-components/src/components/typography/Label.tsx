@@ -35,11 +35,13 @@ export const Label = styled(Typography, {
     fontFamily: typography.h1.fontFamily,
     textTransform: 'uppercase',
     letterSpacing: '1px',
-    fontSize: typography.pxToRem(SIZES[_mobileSize]),
-    lineHeight: typography.pxToRem(LINE_HEIGHTS[_mobileSize]),
     [breakpoints.up('sm')]: {
       fontSize: typography.pxToRem(SIZES[size]),
       lineHeight: typography.pxToRem(LINE_HEIGHTS[size]),
+    },
+    [breakpoints.down('sm')]: {
+      fontSize: typography.pxToRem(SIZES[_mobileSize]),
+      lineHeight: typography.pxToRem(LINE_HEIGHTS[_mobileSize]),
     },
   };
 });

@@ -158,33 +158,39 @@ const regenTheme = createTheme({
           },
         },
         sizeSmall: {
-          padding: defaultTheme.spacing(1, 2),
-          fontSize: '0.75rem',
-          lineHeight: pxToRem(13.81),
           [defaultTheme.breakpoints.up('sm')]: {
             padding: defaultTheme.spacing(1.125, 2.25),
             fontSize: '0.875rem',
             lineHeight: pxToRem(17.47),
           },
+          [defaultTheme.breakpoints.down('sm')]: {
+            padding: defaultTheme.spacing(1, 2),
+            fontSize: '0.75rem',
+            lineHeight: pxToRem(13.81),
+          },
         },
         sizeMedium: {
-          padding: defaultTheme.spacing(1.25, 2.5),
-          fontSize: '0.875rem',
-          lineHeight: '17.47px',
           [defaultTheme.breakpoints.up('sm')]: {
             padding: defaultTheme.spacing(1.5, 3),
             fontSize: '1.125rem',
             lineHeight: pxToRem(22.49),
           },
+          [defaultTheme.breakpoints.down('sm')]: {
+            padding: defaultTheme.spacing(1.25, 2.5),
+            fontSize: '0.875rem',
+            lineHeight: '17.47px',
+          },
         },
         sizeLarge: {
-          padding: defaultTheme.spacing(1.5, 3),
-          fontSize: '1.125rem',
-          lineHeight: '22.49px',
           [defaultTheme.breakpoints.up('sm')]: {
             padding: defaultTheme.spacing(1.85, 6),
             fontSize: '1.313rem',
             lineHeight: pxToRem(26.36),
+          },
+          [defaultTheme.breakpoints.down('sm')]: {
+            padding: defaultTheme.spacing(1.5, 3),
+            fontSize: '1.125rem',
+            lineHeight: '22.49px',
           },
         },
       },

@@ -17,9 +17,11 @@ export const Body = styled(Typography, {
     lineHeight: '150%',
     fontWeight: 400,
     whiteSpace: 'pre-wrap',
-    fontSize: typography[mobileVariant].fontSize,
     [breakpoints.up('sm')]: {
       fontSize: typography[variant].fontSize,
+    },
+    [breakpoints.down('sm')]: {
+      fontSize: typography[mobileVariant].fontSize,
     },
     '& a': {
       fontWeight: 'bold',

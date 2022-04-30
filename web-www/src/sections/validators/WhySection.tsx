@@ -10,7 +10,7 @@ import { ValidatorsWhySectionQuery } from '../../generated/graphql';
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(20),
+      paddingBottom: theme.spacing(22),
     },
   },
 }));
@@ -49,6 +49,7 @@ const WhySection = (): JSX.Element => {
         title={data?.title || ''}
         body={data?._rawBody}
         sx={{ body: { maxWidth: 946 } }}
+        bodySize={['md', 'xl']}
       />
     </BackgroundSection>
   );

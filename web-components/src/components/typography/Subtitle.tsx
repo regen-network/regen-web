@@ -15,9 +15,11 @@ export const Subtitle = styled(Typography, {
   return {
     lineHeight: '145%',
     fontWeight: 700,
-    fontSize: typography[mobileVariant].fontSize,
     [breakpoints.up('sm')]: {
       fontSize: typography[variant].fontSize,
+    },
+    [breakpoints.down('sm')]: {
+      fontSize: typography[mobileVariant].fontSize,
     },
   };
 });

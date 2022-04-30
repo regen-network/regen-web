@@ -31,7 +31,7 @@ const FooterItem: React.FC<FooterItemProps> = ({
 }) => {
   return (
     <>
-      <Label size="lg" sx={{ mb: { xs: 4.5, sm: 3.75 } }}>
+      <Label size="lg" mobileSize="sm" sx={{ mb: { xs: 3.5, sm: 3.75 } }}>
         {ReactHtmlParser(title)}
       </Label>
       <List sx={{ p: 0 }}>

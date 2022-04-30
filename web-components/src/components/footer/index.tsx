@@ -63,12 +63,15 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
   const classes = useStyles({});
   return (
     <div className={classes.footerItem}>
-      <Label size="lg" sx={sxs.text}>
+      <Label size="lg" mobileSize="sm" sx={sxs.text}>
         {title}
       </Label>
       <List sx={{ p: 0 }}>
         {items.map((item, index) => (
-          <ListItem sx={{ py: 0.75, px: 0 }} key={index}>
+          <ListItem
+            sx={{ py: 0.75, px: 0, ':first-of-type': { p: 0 } }}
+            key={index}
+          >
             <Link
               href={item.href}
               rel="noopener noreferrer"

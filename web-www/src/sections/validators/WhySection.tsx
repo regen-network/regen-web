@@ -4,13 +4,13 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../components/BackgroundSection';
-import { TitleDescription } from 'web-components/lib/components/text-layouts';
+import { TitleBody } from 'web-components/lib/components/text-layouts';
 import { ValidatorsWhySectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(13),
+      paddingBottom: theme.spacing(20),
     },
   },
 }));
@@ -45,9 +45,10 @@ const WhySection = (): JSX.Element => {
       imageData={background?.childImageSharp?.fluid}
       className={styles.section}
     >
-      <TitleDescription
+      <TitleBody
         title={data?.title || ''}
-        description={data?._rawBody}
+        body={data?._rawBody}
+        sx={{ body: { maxWidth: 946 } }}
       />
     </BackgroundSection>
   );

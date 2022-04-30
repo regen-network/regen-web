@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { TitleDescription } from 'web-components/lib/components/text-layouts';
+import { TitleBody } from 'web-components/lib/components/text-layouts';
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
@@ -69,10 +69,7 @@ const TitleDescriptionSection = (): JSX.Element => {
 
   return (
     <Section>
-      <TitleDescription
-        title={data?.title || ''}
-        description={data?._rawDescription}
-      />
+      <TitleBody title={data?.title || ''} body={data?._rawDescription} />
       <ResponsiveSlider
         itemWidth="90%"
         padding={theme.spacing(2.5)}

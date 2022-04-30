@@ -4,7 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { TitleDescription } from 'web-components/lib/components/text-layouts';
+import { TitleBody } from 'web-components/lib/components/text-layouts';
 import { ValidatorsWhatSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -50,9 +50,10 @@ const WhatSection = (): JSX.Element => {
       imageData={background?.childImageSharp?.fluid}
       topSection={false}
     >
-      <TitleDescription
+      <TitleBody
         title={data?.title || ''}
-        description={data?._rawBody}
+        body={data?._rawBody}
+        sx={{ body: { maxWidth: 946 } }}
       />
     </BackgroundSection>
   );

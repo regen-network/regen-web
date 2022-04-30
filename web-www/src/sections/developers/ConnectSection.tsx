@@ -19,12 +19,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontWeight: 'normal',
     fontFamily: theme.typography.overline.fontFamily,
   },
-  item: {
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: '20%',
-      flexBasis: '20%',
-    },
-  },
 }));
 
 const query = graphql`
@@ -102,7 +96,6 @@ const DevelopersConnectSection: React.FC = () => {
   ];
   return (
     <ConnectSection
-      itemClassName={styles.item}
       header={`${data?.connectSectionHeader}`}
       background={background as any}
       icons={icons}

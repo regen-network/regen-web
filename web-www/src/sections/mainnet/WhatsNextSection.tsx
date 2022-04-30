@@ -14,9 +14,8 @@ import type { MainnetWhatsNextSectionQuery } from '../../generated/graphql';
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(10),
-  },
-  card: {
-    minHeight: '95%',
+    display: 'flex',
+    flexDirection: 'column',
   },
 }));
 
@@ -71,25 +70,27 @@ const WhatsNextSection: React.FC = () => {
         >
           {content?.title}
         </Title>
-        <Body size="xl" color="primary" align="center">
+        <Body
+          size="xl"
+          color="primary"
+          align="center"
+          sx={{ maxWidth: 658, pt: 4, mb: [14, 20] }}
+        >
           <BlockContent content={content?._rawDescription} />
         </Body>
-        <div>
-          <Grid container direction="row" justifyContent="center">
-            {content?.infoItems?.map((item, i) => (
-              <Grid item key={i}>
-                <GreenTopIconCard
-                  className={styles.card}
-                  description={item?._rawDescription}
-                  title={item?.title || ''}
-                  linkUrl={item?.gitLink || ''}
-                  linkText="View on Github"
-                  imgSrc={item?.icon?.image?.asset?.url || ''}
-                />
-              </Grid>
-            ))}
-          </Grid>
-        </div>
+        <Grid container direction="row" justifyContent="center" gap={7}>
+          {content?.infoItems?.map((item, i) => (
+            <Grid item key={i}>
+              <GreenTopIconCard
+                description={item?._rawDescription}
+                title={item?.title || ''}
+                linkUrl={item?.gitLink || ''}
+                linkText="View on Github"
+                imgSrc={item?.icon?.image?.asset?.url || ''}
+              />
+            </Grid>
+          ))}
+        </Grid>
       </Grid>
     </BackgroundSection>
   );

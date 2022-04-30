@@ -73,28 +73,42 @@ const HomeFoldSection: React.FC<{ className?: string }> = ({ className }) => {
       fluid={data?.desktop?.childImageSharp?.fluid as any}
       backgroundColor={`#040e18`}
     >
-      <div className={styles.backgroundGradient}></div>
-      <Title
-        align="center"
-        color="primary"
-        variant="h1"
-        sx={{ mx: 'auto', maxWidth: '80%', mt: { xs: 13.5, sm: 21.5 }, mb: 3 }}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
+        }}
       >
-        {content?.title}
-      </Title>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Body
+        <div className={styles.backgroundGradient}></div>
+        <Title
+          align="center"
           color="primary"
-          size="xl"
+          variant="h1"
           sx={{
-            textAlign: 'center',
-            fontSize: ['1.125rem', '1.62rem'],
-            maxWidth: ['90%', 650],
-            textShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
+            mx: 'auto',
+            maxWidth: '80%',
+            mt: { xs: 13.5, sm: 21.5 },
+            mb: 3,
           }}
         >
-          {content?.body}
-        </Body>
+          {content?.title}
+        </Title>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Body
+            color="primary"
+            size="xl"
+            sx={{
+              textAlign: 'center',
+              fontSize: ['1.125rem', '1.62rem'],
+              maxWidth: ['90%', 650],
+              textShadow: '0px 4px 10px rgba(0, 0, 0, 0.3)',
+            }}
+          >
+            {content?.body}
+          </Body>
+        </Box>
       </Box>
     </BackgroundImage>
   );

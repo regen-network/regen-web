@@ -68,10 +68,10 @@ const BannerTextSection: React.FC = () => {
           },
         })}
       >
-        <Title sx={{ color: 'primary.main' }} variant="h2">
+        <Title variant="h2" color="primary" align="center">
           {data?.title}
         </Title>
-        <Title variant="h4" sx={{ color: 'primary.main' }}>
+        <Title variant="h4" color="primary" align="center">
           <BlockContent content={data?._rawBody} />
         </Title>
       </Box>

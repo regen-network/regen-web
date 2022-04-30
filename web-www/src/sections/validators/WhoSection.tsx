@@ -6,7 +6,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { TitleDescription } from 'web-components/lib/components/text-layouts';
+import { TitleBody } from 'web-components/lib/components/text-layouts';
 import { Body, Title } from 'web-components/lib/components/typography';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(19.25),
-      paddingBottom: theme.spacing(12.5),
+      paddingBottom: theme.spacing(37.5),
     },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.5),
-      paddingBottom: theme.spacing(15),
+      paddingBottom: theme.spacing(15.25),
     },
   },
   description: {
@@ -89,9 +89,10 @@ const WhoSection = (): JSX.Element => {
       imageData={background?.childImageSharp?.fluid}
       topSection={false}
     >
-      <TitleDescription
+      <TitleBody
         title={data?.header || ''}
-        description={data?._rawBody}
+        body={data?._rawBody}
+        sx={{ body: { maxWidth: 946 } }}
       />
       {(data?.validators || []).map((v, i) => {
         const items: JSX.Element[] = (v?.members || []).map((m, j) => (

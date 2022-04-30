@@ -1,54 +1,55 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { Grid, Box } from '@mui/material';
-import clsx from 'clsx';
+import { Grid, Box, SxProps } from '@mui/material';
 
 import Card from './Card';
 import OutlinedButton from '../buttons/OutlinedButton';
 import { BlockContent, SanityBlockOr } from '../block-content';
 import { Body, Title } from '../typography';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    border: 'none',
-    borderRadius: '9px',
-    flexDirection: 'column',
-    margin: theme.spacing(4),
-    maxWidth: theme.spacing(90),
-  },
-  img: {
-    width: '100%',
-    height: theme.spacing(20),
-    margin: '0 auto',
-  },
-}));
+import type { Theme } from '~/theme/muiTheme';
 
 const GreenTopIconCard: React.FC<{
-  className?: string;
   title: string;
   description: SanityBlockOr<string>;
   linkUrl: string;
   linkText: string;
   imgSrc: string;
+  sx?: SxProps<Theme>;
 }> = props => {
-  const classes = useStyles();
   return (
-    <Card className={clsx(classes.root, props.className)}>
+    <Card
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        border: 'none',
+        borderRadius: '9px',
+        maxWidth: 370,
+        height: '100%',
+        ...props.sx,
+      }}
+    >
       <Box sx={{ backgroundColor: 'secondary.contrastText', py: 5 }}>
-        <img
-          className={classes.img}
+        <Box
+          component="img"
           src={props.imgSrc}
           alt={
             typeof props.description === 'string'
               ? props.description
               : props.title
           }
+          sx={{
+            width: '100%',
+            height: theme => theme.spacing(20),
+            m: '0 auto',
+          }}
         />
       </Box>
 
-      <Grid container direction="column" sx={{ flex: 1, p: 4, gap: 4 }}>
-        <Title variant="h3">{props.title}</Title>
+      <Box
+        sx={{ display: 'flex', flexDirection: 'column', flex: 1, px: 5, py: 7 }}
+      >
+        <Title variant="h3" sx={{ mb: 4 }}>
+          {props.title}
+        </Title>
         <Body as="div">
           {typeof props.description === 'string' ? (
             props.description
@@ -63,6 +64,7 @@ const GreenTopIconCard: React.FC<{
             flexDirection: 'column',
             alignItems: 'flex-start',
             justifyContent: 'flex-end',
+            mt: 4,
           }}
         >
           <OutlinedButton
@@ -74,7 +76,7 @@ const GreenTopIconCard: React.FC<{
             {props.linkText}
           </OutlinedButton>
         </Box>
-      </Grid>
+      </Box>
     </Card>
   );
 };

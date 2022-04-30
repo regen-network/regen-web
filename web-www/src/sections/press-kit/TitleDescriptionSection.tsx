@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { TitleDescription } from 'web-components/lib/components/text-layouts';
+import { TitleBody } from 'web-components/lib/components/text-layouts';
 import Section from 'web-components/lib/components/section';
 import { PresskitTitleDescriptionSectionQuery } from '../../generated/graphql';
 
@@ -36,10 +36,7 @@ const TitleDescriptionSection = (): JSX.Element => {
   const content = sanityPresskitPage?.titleDescriptionSection;
   return (
     <Section className={styles.root}>
-      <TitleDescription
-        title={content?.title || ''}
-        description={content?._rawBody}
-      />
+      <TitleBody title={content?.title || ''} body={content?._rawBody} />
     </Section>
   );
 };

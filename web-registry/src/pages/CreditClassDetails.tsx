@@ -65,21 +65,23 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   const dbCreditClassByUri = dbDataByUri?.creditClassByUri;
 
   useEffect(() => {
-    if (creditClassId && isOnChainClassId) {
-      queryEcoClassInfo(creditClassId)
-        .then(res => {
+    const fetch = async (): Promise<void> => {
+      if (creditClassId && isOnChainClassId) {
+        try {
+          const res = await queryEcoClassInfo(creditClassId);
           const classInfo = res?.info;
           if (classInfo) {
             setOnChainClass(classInfo);
-            getMetadata(classInfo.metadata).then(res => {
-              if (res?.data?.metadata) {
-                setMetadata(res.data.metadata);
-              }
-            });
+            const data = await getMetadata(classInfo.metadata);
+            setMetadata(data);
           }
+        } catch (err) {
           // eslint-disable-next-line
-        }).catch(console.error);;
-    }
+          console.error(err);
+        }
+      }
+    };
+    fetch();
   }, [creditClassId, isOnChainClassId]);
 
   if (content && dbCreditClassByUri) {

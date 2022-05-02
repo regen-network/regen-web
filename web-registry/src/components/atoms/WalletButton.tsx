@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@mui/styles';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -39,17 +39,14 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const WalletButton: React.FC = () => {
   const styles = useStyles();
-  const { wallet, connect, connectionType, loaded } = useWallet();
-  const [showAlert, setShowAlert] = useState(false);
+  const { wallet, connect, connectionType, loaded, error } = useWallet();
 
   const connectToKeplr = async (): Promise<void> => {
     if (connect) {
       await connect();
-    } else {
-      setShowAlert(true);
-      setTimeout(() => setShowAlert(false), 5000);
     }
   };
+
   return chainId ? (
     <div className={styles.root}>
       {!wallet?.shortAddress && loaded && !connectionType && (
@@ -58,7 +55,7 @@ const WalletButton: React.FC = () => {
           connect wallet
         </OutlinedButton>
       )}
-      {showAlert && (
+      {error && (
         <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />
       )}
     </div>

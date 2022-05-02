@@ -30,10 +30,9 @@ import {
   CreditRetireModal,
   title as creditRetireTitle,
 } from 'web-components/lib/components/modal/CreditRetireModal';
-import {
-  TxSuccessfulModal,
-  Item,
-} from 'web-components/lib/components/modal/TxSuccessfulModal';
+
+import { Item } from 'web-components/lib/components/modal/TxModal';
+import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
 import { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
 import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';

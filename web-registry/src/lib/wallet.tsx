@@ -34,7 +34,7 @@ type ContextType = {
   connect?: () => Promise<void>;
   disconnect?: () => void;
   connectionType?: string;
-  error?: Error;
+  error?: unknown;
 
   // TODO: remove
   signSend?: (amount: number, recipient: string) => Promise<Uint8Array>;
@@ -57,7 +57,7 @@ export const WalletProvider: React.FC = ({ children }) => {
   // This is being used so that we display the "connect wallet" or the connected wallet address
   // only once we know what's the actual wallet connection status.
   const [loaded, setLoaded] = useState<boolean>(false);
-  const [error, setError] = useState<Error | undefined>(undefined);
+  const [error, setError] = useState<unknown>(undefined);
   const [txResult, setTxResult] = useState<DeliverTxResponse | undefined>(
     undefined,
   );
@@ -74,7 +74,7 @@ export const WalletProvider: React.FC = ({ children }) => {
       setConnectionType(KEPLR_WALLET_EXTENSION);
       localStorage.setItem(AUTO_CONNECT_WALLET_KEY, KEPLR_WALLET_EXTENSION);
     } catch (e) {
-      setError(e as Error);
+      setError(e);
     }
   };
 
@@ -195,8 +195,7 @@ export const WalletProvider: React.FC = ({ children }) => {
       try {
         await connectWallet();
       } catch (e) {
-        // eslint-disable-next-line
-        console.log(e);
+        setError(e);
       } finally {
         setLoaded(true);
       }

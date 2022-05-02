@@ -1,9 +1,8 @@
 import React from 'react';
-import { Theme, Box } from '@mui/material';
+import { Theme, Box, Typography } from '@mui/material';
 import { SxProps } from '@mui/system';
 import { makeStyles } from '@mui/styles';
 
-import Description from '../description';
 import Title from '../title';
 import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
@@ -41,7 +40,7 @@ interface LinkProps extends LinkItem {
 type LinkComponentProp = React.FC<LinkProps>;
 
 interface Props extends TxModalProps {
-  svg?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  icon?: JSX.Element;
   title: string;
 }
 
@@ -84,10 +83,13 @@ const CardItem: React.FC<CardItemProps> = ({
         {label}
       </Title>
 
-      <Description sx={{ fontWeight: 700, ...sx }} variant="subtitle2">
+      <Typography
+        sx={{ fontWeight: 700, color: 'info.dark', ...sx }}
+        variant="subtitle2"
+      >
         {value.url ? (
           <LinkComponent
-            sx={{ color: theme => theme.palette.secondary.main }}
+            sx={{ color: 'secondary.main' }}
             href={value.url}
             target="_blank"
           >
@@ -96,13 +98,13 @@ const CardItem: React.FC<CardItemProps> = ({
         ) : (
           <>{value.name}</>
         )}
-      </Description>
+      </Typography>
     </Box>
   );
 };
 
 const TxModal: React.FC<Props> = ({
-  svg: SVG,
+  icon,
   title,
   open,
   onClose,
@@ -116,14 +118,16 @@ const TxModal: React.FC<Props> = ({
   const styles = useStyles();
   return (
     <Modal open={open} onClose={onClose} className={styles.root}>
-      {SVG && <SVG />}
+      {icon}
       <Title
         sx={{
           lineHeight: {
             xs: '150%',
             sm: '140%',
           },
-          px: 6.5,
+          px: {
+            sm: 6.5,
+          },
         }}
         align="center"
         variant="h3"

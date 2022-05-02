@@ -21,7 +21,7 @@ import { RegenModalProps } from '../modal';
 
 /**
  * Take - takes credits from a basket starting from the oldest credits first.
- * https://docs.regen.network/commands/regen_tx_ecocredit_take-from-basket.html
+ * https://buf.build/regen/regen-ledger/docs/main:regen.ecocredit.basket.v1#regen.ecocredit.basket.v1.EventTake
  *
  * Validation:
  *    holder: must be a valid address, and their signature must be present in the transaction
@@ -29,9 +29,6 @@ import { RegenModalProps } from '../modal';
  *    basket_denom: must be a valid batch denomination
  *  if retire_on_take is true:
  *    retirement_location: must be a valid location
- *
- * Also:
- * https://buf.build/regen/regen-ledger/docs/main:regen.ecocredit.basket.v1#regen.ecocredit.basket.v1.EventTake
  */
 
 const useStyles = makeStyles((theme: Theme) => ({

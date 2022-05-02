@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useTheme, Theme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import {
   MsgSend,
   MsgRetire,
@@ -13,7 +14,6 @@ import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecoc
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import {
   BasketPutModal,
   title as basketPutTitle,
@@ -409,7 +409,6 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       )}
       {creditRetireOpen > -1 && !!accountAddress && (
         <CreditRetireModal
-          holder={accountAddress}
           batchDenom={credits[creditRetireOpen].batch_denom}
           availableTradableAmount={Number(
             credits[creditRetireOpen].tradable_amount,

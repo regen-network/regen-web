@@ -33,6 +33,7 @@ import {
 
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
+import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
 import { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
 import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
@@ -75,10 +76,11 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     setIsProcessingModalOpen(true);
   };
 
-  const handleTxSuccessfulModalClose = (): void => {
+  const handleTxModalClose = (): void => {
     setCardItems(undefined);
-    setIsTxSuccessfulModalTitle(undefined);
+    setTxModalTitle(undefined);
     setDeliverTxResponse(undefined);
+    setError(undefined);
   };
 
   const handleTxDelivered = (): void => {
@@ -89,10 +91,14 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   };
 
   const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
-  // TODO handle error when signing and broadcasting tx
-  // https://github.com/regen-network/regen-registry/issues/884
-  const { signAndBroadcast, setDeliverTxResponse, wallet, deliverTxResponse } =
-    useMsgClient(handleTxQueued, handleTxDelivered);
+  const {
+    signAndBroadcast,
+    setDeliverTxResponse,
+    wallet,
+    deliverTxResponse,
+    error,
+    setError,
+  } = useMsgClient(handleTxQueued, handleTxDelivered);
   const accountAddress = wallet?.address;
   const { credits, fetchCredits } = useEcocredits(accountAddress);
   const { basketTokens, fetchBasketTokens } = useBasketTokens(
@@ -112,10 +118,13 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
   const [basketTakeTokens, setBasketTakeTokens] = useState<
     BasketTokens | undefined
   >(undefined);
-  const [isTxSuccessfulModalTitle, setIsTxSuccessfulModalTitle] = useState<
-    string | undefined
-  >(undefined);
+  const [txModalTitle, setTxModalTitle] = useState<string | undefined>(
+    undefined,
+  );
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+
+  const txHash = deliverTxResponse?.transactionHash;
+  const txHashUrl = getHashUrl(txHash);
 
   useEffect(() => {
     // Get available baskets to put credits into
@@ -174,7 +183,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
         },
       ]);
-      setIsTxSuccessfulModalTitle(basketTakeTitle);
+      setTxModalTitle(basketTakeTitle);
     }
   };
 
@@ -215,7 +224,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           value: { name: recipient },
         },
       ]);
-      setIsTxSuccessfulModalTitle(creditSendTitle);
+      setTxModalTitle(creditSendTitle);
     }
   };
 
@@ -229,7 +238,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       credits: [
         {
           batchDenom: credits[basketPutOpen].batch_denom,
-          amount: amount,
+          amount,
         },
       ],
     });
@@ -248,7 +257,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           value: { name: amount },
         },
       ]);
-      setIsTxSuccessfulModalTitle(basketPutTitle);
+      setTxModalTitle(basketPutTitle);
     }
   };
 
@@ -264,7 +273,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       credits: [
         {
           batchDenom,
-          amount: '1000',
+          amount,
         },
       ],
     });
@@ -287,7 +296,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
           value: { name: amount },
         },
       ]);
-      setIsTxSuccessfulModalTitle(creditRetireTitle);
+      setTxModalTitle(creditRetireTitle);
     }
   };
 
@@ -440,20 +449,30 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
         open={!deliverTxResponse && isProcessingModalOpen}
         onClose={() => setIsProcessingModalOpen(false)}
       />
-      {deliverTxResponse?.transactionHash &&
-        cardItems &&
-        isTxSuccessfulModalTitle && (
-          <TxSuccessfulModal
-            open={!!isTxSuccessfulModalTitle || !!deliverTxResponse}
-            onClose={handleTxSuccessfulModalClose}
-            txHash={deliverTxResponse?.transactionHash}
-            txHashUrl={getHashUrl(deliverTxResponse?.transactionHash)}
-            cardTitle={isTxSuccessfulModalTitle}
-            cardItems={cardItems}
-            linkComponent={Link}
-            onViewPortfolio={handleTxSuccessfulModalClose}
-          />
-        )}
+      {!error && txHash && cardItems && txModalTitle && (
+        <TxSuccessfulModal
+          open={!error && (!!txModalTitle || !!deliverTxResponse)}
+          onClose={handleTxModalClose}
+          txHash={txHash}
+          txHashUrl={txHashUrl}
+          cardTitle={txModalTitle}
+          cardItems={cardItems}
+          linkComponent={Link}
+          onViewPortfolio={handleTxModalClose}
+        />
+      )}
+      {error && txModalTitle && (
+        <TxErrorModal
+          error={error as string}
+          open={!!error && (!!txModalTitle || !!deliverTxResponse)}
+          onClose={handleTxModalClose}
+          txHash={txHash || ''}
+          txHashUrl={txHashUrl}
+          cardTitle={txModalTitle}
+          linkComponent={Link}
+          onViewPortfolio={handleTxModalClose}
+        />
+      )}
     </>
   );
 };

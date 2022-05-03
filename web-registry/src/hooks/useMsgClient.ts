@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { StdFee, DeliverTxResponse } from '@cosmjs/stargate';
 
 import { useLedger } from '../ledger';
-import { Sender } from '../lib/wallet';
+import { Wallet } from '../lib/wallet';
 
 interface TxData {
   msgs: any[];
@@ -18,7 +18,7 @@ type MsgClientType = {
   setDeliverTxResponse: (txResult: DeliverTxResponse | undefined) => void;
   deliverTxResponse?: DeliverTxResponse;
   error?: unknown;
-  wallet?: Sender;
+  wallet?: Wallet;
 };
 
 export default function useMsgClient(

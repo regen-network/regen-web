@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
@@ -190,6 +191,34 @@ export const CreditRetireFields = ({
   );
 };
 
+const Label = styled('div')(({ theme }) => ({
+  color: theme.palette.primary.contrastText,
+  fontSize: theme.typography.pxToRem(16),
+  marginTop: theme.spacing(8),
+  [theme.breakpoints.up('sm')]: {
+    fontSize: theme.typography.pxToRem(18),
+  },
+}));
+
+const LabelCenter = styled('div')(({ theme }) => ({
+  color: theme.palette.primary.contrastText,
+  fontSize: theme.typography.pxToRem(16),
+  textAlign: 'center',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: theme.typography.pxToRem(18),
+  },
+}));
+
+export const RetirementReminder = ({
+  centered,
+}: {
+  centered?: boolean;
+}): JSX.Element => {
+  const msg = 'Retirement is permanent and non-reversible.';
+  if (centered) return <LabelCenter>{msg}</LabelCenter>;
+  return <Label>{msg}</Label>;
+};
+
 export const validateCreditRetire = (
   availableTradableAmount: number,
   values: RetireFormValues,
@@ -241,6 +270,7 @@ const CreditRetireForm: React.FC<FormProps> = ({
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
+          <RetirementReminder centered />
           <CreditRetireFields
             availableTradableAmount={availableTradableAmount}
             batchDenom={batchDenom}

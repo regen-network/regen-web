@@ -264,7 +264,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       credits: [
         {
           batchDenom,
-          amount,
+          amount: '1000',
         },
       ],
     });

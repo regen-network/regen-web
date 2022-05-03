@@ -17,9 +17,16 @@ type MsgClientType = {
   ) => Promise<void>;
   setDeliverTxResponse: (txResult: DeliverTxResponse | undefined) => void;
   deliverTxResponse?: DeliverTxResponse;
+  setError: (error: unknown) => void;
   error?: unknown;
   wallet?: Wallet;
 };
+
+export function assertIsError(error: unknown): asserts error is Error {
+  if (!(error instanceof Error)) {
+    throw error;
+  }
+}
 
 export default function useMsgClient(
   handleTxQueued: () => void,
@@ -46,19 +53,14 @@ export default function useMsgClient(
         gas: '200000',
       };
 
-      try {
-        const txBytes = await api.msgClient.sign(
-          wallet.address,
-          msgs,
-          fee || defaultFee,
-          memo || '',
-        );
+      const txBytes = await api.msgClient.sign(
+        wallet.address,
+        msgs,
+        fee || defaultFee,
+        memo || '',
+      );
 
-        return txBytes;
-      } catch (err) {
-        setError(err);
-        return;
-      }
+      return txBytes;
     },
     [api?.msgClient, wallet?.address],
   );
@@ -66,13 +68,14 @@ export default function useMsgClient(
   const broadcast = useCallback(
     async (txBytes: Uint8Array) => {
       if (!api?.msgClient || !txBytes) return;
-      try {
-        handleTxQueued();
-        const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
-        setDeliverTxResponse(_deliverTxResponse);
-        handleTxDelivered();
-      } catch (err) {
-        setError(err);
+      handleTxQueued();
+      const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
+      setDeliverTxResponse(_deliverTxResponse);
+      handleTxDelivered();
+      // The transaction suceeded iff code is 0.
+      if (_deliverTxResponse.code !== 0) {
+        console.log('not 0');
+        setError(_deliverTxResponse.rawLog);
       }
     },
     [api?.msgClient, handleTxQueued, handleTxDelivered],
@@ -87,7 +90,10 @@ export default function useMsgClient(
           await broadcast(txBytes);
         }
       } catch (err) {
-        setError(err);
+        console.log('err', err);
+        if (onBroadcast) onBroadcast();
+        assertIsError(err);
+        setError(err.message);
       }
 
       return;
@@ -99,6 +105,7 @@ export default function useMsgClient(
     signAndBroadcast,
     setDeliverTxResponse,
     deliverTxResponse,
+    setError,
     error,
     wallet,
   };

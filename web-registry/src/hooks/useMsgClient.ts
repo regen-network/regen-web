@@ -17,8 +17,8 @@ type MsgClientType = {
   ) => Promise<void>;
   setDeliverTxResponse: (txResult: DeliverTxResponse | undefined) => void;
   deliverTxResponse?: DeliverTxResponse;
-  setError: (error: unknown) => void;
-  error?: unknown;
+  setError: (error: string | undefined) => void;
+  error?: string;
   wallet?: Wallet;
 };
 
@@ -33,7 +33,7 @@ export default function useMsgClient(
   handleTxDelivered: () => void,
 ): MsgClientType {
   const { api, wallet } = useLedger();
-  const [error, setError] = useState<unknown | undefined>();
+  const [error, setError] = useState<string | undefined>();
   const [deliverTxResponse, setDeliverTxResponse] = useState<
     DeliverTxResponse | undefined
   >();
@@ -74,7 +74,6 @@ export default function useMsgClient(
       handleTxDelivered();
       // The transaction suceeded iff code is 0.
       if (_deliverTxResponse.code !== 0) {
-        console.log('not 0');
         setError(_deliverTxResponse.rawLog);
       }
     },
@@ -82,16 +81,15 @@ export default function useMsgClient(
   );
 
   const signAndBroadcast = useCallback(
-    async (tx: TxData, onBroadcast?: () => void) => {
+    async (tx: TxData, closeForm?: () => void) => {
       try {
         const txBytes = await sign(tx);
         if (txBytes) {
-          if (onBroadcast) onBroadcast();
+          if (closeForm) closeForm();
           await broadcast(txBytes);
         }
       } catch (err) {
-        console.log('err', err);
-        if (onBroadcast) onBroadcast();
+        if (closeForm) closeForm();
         assertIsError(err);
         setError(err.message);
       }

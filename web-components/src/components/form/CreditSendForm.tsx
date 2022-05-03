@@ -103,7 +103,6 @@ const CreditSendForm: React.FC<FormProps> = ({
   onSubmit,
 }) => {
   const styles = useStyles();
-
   const initialValues = {
     sender,
     recipient: '',

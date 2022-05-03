@@ -162,7 +162,6 @@ export const WalletProvider: React.FC = ({ children }) => {
           average: 0.025,
           high: 0.04,
         },
-        features: ['stargate'],
       });
 
       // Enabling before using the Keplr is recommended.

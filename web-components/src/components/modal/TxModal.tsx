@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     [theme.breakpoints.up('sm')]: {
       height: 'auto',
+      maxHeight: '100%',
       paddingLeft: theme.spacing(7.5),
       paddingRight: theme.spacing(7.5),
     },

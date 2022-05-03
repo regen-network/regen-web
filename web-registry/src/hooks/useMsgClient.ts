@@ -31,6 +31,7 @@ function assertIsError(error: unknown): asserts error is Error {
 export default function useMsgClient(
   handleTxQueued: () => void,
   handleTxDelivered: () => void,
+  handleError: () => void,
 ): MsgClientType {
   const { api, wallet } = useLedger();
   const [error, setError] = useState<string | undefined>();
@@ -90,13 +91,14 @@ export default function useMsgClient(
         }
       } catch (err) {
         if (closeForm) closeForm();
+        handleError();
         assertIsError(err);
         setError(err.message);
       }
 
       return;
     },
-    [sign, broadcast],
+    [sign, broadcast, handleError],
   );
 
   return {

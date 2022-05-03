@@ -3,8 +3,7 @@ import { RegenModalProps } from '../modal';
 import { FormModalTemplate } from './FormModalTemplate';
 import { CreditSendForm, CreditSendProps } from '../form/CreditSendForm';
 
-interface CreditSendModalProps extends RegenModalProps, CreditSendProps {
-}
+interface CreditSendModalProps extends RegenModalProps, CreditSendProps {}
 
 export const title = 'Send';
 

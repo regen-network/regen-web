@@ -1,4 +1,4 @@
-import type { PageResponse, PageRequest } from './base';
+import type { PageResponse } from './base';
 
 /** Map keys from another type to values of number type */
 type MapToNumber<T> = { [K in keyof T]: number };
@@ -9,16 +9,6 @@ export interface BatchInfoWithSupply extends BatchInfo, QuerySupplyResponse {}
 /** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
 export interface BatchInfoWithBalance extends BatchInfo, QueryBalanceResponse {}
 
-/** combines the ledger `BatchInfo` with the corresponding project name */
-export interface BatchInfoWithProject extends BatchInfo {
-  project_name: string;
-  project_display: string;
-}
-
-export interface TableBaskets extends Basket, BankQueryBalanceResponse {
-  displayDenom: string;
-}
-
 /** `QueryBatchSupplyResponse` + `amount_cancelled` to display summed totals on project page */
 export interface BatchTotalsForProject
   extends MapToNumber<QuerySupplyResponse> {
@@ -28,18 +18,9 @@ export interface BatchTotalsForProject
 // The following interfaces should be removed once we migrate
 // the current queries to use regen-js instead of REST
 
-interface Coin {
-  denom: string;
-  amount: string;
-}
-
-interface BankQueryBalanceResponse {
-  balance?: Coin;
-}
-
 export interface BatchInfo {
   class_id: string;
-  metadata: Uint8Array;
+  metadata: string;
   batch_denom: string;
   issuer: string;
   total_amount: number;
@@ -72,54 +53,8 @@ export interface QueryBalanceResponse {
   retired_amount: string;
 }
 
-// regen-js based interfaces (camelCase props)
-// remove after api/queries upgrade
-
-export interface Basket {
-  id: string;
-  basketDenom: string;
-  name: string;
-  disableAutoRetire: boolean;
-  creditTypeAbbrev: string;
-  dateCriteria: {
-    minStartDate?: string;
-    startDateWindow?: string;
-  };
-  exponent: string;
-}
-
-export interface QueryBasketRequest {
-  basketDenom: string;
-}
-
-export interface QueryBasketResponse {
-  basket?: Basket;
-  classes: string[];
-}
-
-export interface QueryBasketsResponse {
-  baskets: Basket[];
-  pagination?: PageResponse;
-}
-
-export interface BasketBalance {
-  basketId: string | Long;
-  batchDenom: string;
-  balance: string;
-  batchStartDate?: string | Date;
-}
-
-export interface QueryBasketBalancesRequest {
-  basketDenom: string;
-  pagination?: PageRequest;
-}
-
-export interface QueryBasketBalancesResponse {
-  balances: BasketBalance[];
-  pagination?: PageResponse;
-}
-
 // REST based interfaces (snake_case props)
+// remove after api/queries upgrade
 
 export interface ClassInfo {
   /**
@@ -138,7 +73,7 @@ export interface ClassInfo {
   /**
    *  metadata is a hashed IRI that can be used to fetch JSON-LD from the metadata-graph DB table
    */
-  metadata: Uint8Array;
+  metadata: string;
   credit_type: CreditType;
 }
 

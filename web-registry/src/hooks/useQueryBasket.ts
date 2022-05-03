@@ -9,6 +9,8 @@ import {
 
 import { useLedger } from '../ledger';
 
+// TODO: Use useBasketQuery instead.
+
 type FetchBasket = (
   request: DeepPartial<QueryBasketRequest>,
 ) => Promise<QueryBasketResponse | undefined>;

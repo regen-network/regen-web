@@ -1,0 +1,8 @@
+query ProjectByBatchDenom($batchDenom: String!) {
+  creditVintageByBatchDenom(batchDenom: $batchDenom) {
+    projectByProjectId {
+      metadata
+      handle
+    }
+  }
+}

@@ -22,7 +22,7 @@ type MsgClientType = {
   wallet?: Wallet;
 };
 
-export function assertIsError(error: unknown): asserts error is Error {
+function assertIsError(error: unknown): asserts error is Error {
   if (!(error instanceof Error)) {
     throw error;
   }

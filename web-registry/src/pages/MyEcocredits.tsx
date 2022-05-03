@@ -463,7 +463,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       )}
       {error && txModalTitle && (
         <TxErrorModal
-          error={error as string}
+          error={error}
           open={!!error && (!!txModalTitle || !!deliverTxResponse)}
           onClose={handleTxModalClose}
           txHash={txHash || ''}

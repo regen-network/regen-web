@@ -1,121 +1,239 @@
 import { useState, useEffect } from 'react';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
 
 import {
-  getBasket,
-  getBasketBalances,
-  getBasketBalancesWithBatchInfo,
-} from '../lib/ecocredit';
-import {
-  Basket,
-  BasketBalance,
-  BatchInfoWithProject,
-} from '../types/ledger/ecocredit';
-import { BasketOverviewProps, CreditClass } from '../components/organisms';
+  QueryBasketBalancesResponse,
+  QueryBasketResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryClassInfoResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 
-interface BasketExtended {
-  classes: CreditClass[];
-  displayDenom: string;
-  description: string;
-  curator: string;
-  totalAmount: number;
+import useBankQuery from './useBankQuery';
+import useBasketQuery from './useBasketQuery';
+import useQueryListClassInfo from './useQueryListClassInfo';
+import useQueryListBatchInfo from './useQueryListBatchInfo';
+import { useProjectByBatchDenomLazyQuery } from '../generated/graphql';
+
+import { BasketOverviewProps, CreditBatch } from '../components/organisms';
+
+import { getMetadataFromUint8Array } from '../lib/metadata-graph';
+
+dayjs.extend(duration);
+
+function formatDuration(seconds: number): string {
+  const _duration = dayjs.duration(seconds, 'seconds');
+  const durationArr = _duration.humanize().split(' ');
+  const condition = durationArr[1].charAt(durationArr[1].length - 1) === 's';
+  const textPart = condition ? durationArr[1].slice(0, -1) : durationArr[1];
+  return `${durationArr[0]}-${textPart}`;
 }
 
-interface BasketDetailsAll {
-  basket: Basket | undefined;
-  basketExtended: BasketExtended;
-  basketBalances: BasketBalance[];
-  batchesInfo: BatchInfoWithProject[];
-}
-
-type BasketDetailsData = {
-  dataOverview: BasketOverviewProps | null;
-  dataBasketBatches: BatchInfoWithProject[] | undefined;
+type BasketDetails = {
+  overview?: BasketOverviewProps;
+  creditBatches: CreditBatch[];
 };
 
-const useBasketDetails = (
-  basketDenom: string | undefined,
-): BasketDetailsData => {
-  const [data, setData] = useState<BasketDetailsAll | null>(null);
-  const [dataOverview, setDataOverview] = useState<BasketOverviewProps | null>(
-    null,
-  );
+type ClassInfo = {
+  id: string;
+  name: string;
+};
 
-  // fetch all the data
+type BatchWithProject = {
+  batchDenom: string;
+  projectHandle: string;
+  projectName: string;
+};
+
+const useBasketDetails = (basketDenom?: string): BasketDetails => {
+  // Data to prepare for the UI
+  const [overview, setOverview] = useState<BasketOverviewProps>();
+  const [creditBatches, setCreditBatches] = useState<CreditBatch[]>([]);
+
+  // Data to fetch and process
+
+  const { data: basket } = useBasketQuery<QueryBasketResponse>({
+    query: 'basket',
+    params: { basketDenom },
+  });
+
+  const { data: basketBalances } = useBasketQuery<QueryBasketBalancesResponse>({
+    query: 'basketBalances',
+    params: { basketDenom },
+  });
+
+  const { data: basketMetadata } = useBankQuery<QueryDenomMetadataResponse>({
+    query: 'denomMetadata',
+    params: { denom: basketDenom },
+  });
+
+  // TODO: useEcocreditQuery + batch queries
+  const basketClassesInfo = useQueryListClassInfo(basket?.classes);
+  const [basketClasses, setBasketClasses] = useState<ClassInfo[]>();
+
+  const [batches, setBatches] = useState<string[]>();
+  // TODO: useEcocreditQuery + batch queries
+  const basketBatches = useQueryListBatchInfo(batches);
+
+  const [fetchProjectByBatchDenom] = useProjectByBatchDenomLazyQuery();
+  const [batchesProjects, setBatchesProjects] = useState<BatchWithProject[]>();
+
+  // Batches string list query param for `useQueryListBatchInfo(batches)`
   useEffect(() => {
-    if (basketDenom === undefined) return;
+    if (!basketBalances?.balances) return;
+    setBatches(basketBalances.balances.map(balance => balance.batchDenom));
+  }, [basketBalances?.balances]);
 
-    async function fetchData(basketDenom: string): Promise<void> {
+  // TODO ? overview data: extract into its own hook / function ?
+  // fetch credit classes metadata
+  useEffect(() => {
+    if (!basketClassesInfo || basketClassesInfo.length === 0) return;
+
+    async function fetchData(
+      basketClassesInfo: QueryClassInfoResponse[],
+    ): Promise<void> {
       try {
-        const basket = await getBasket(basketDenom);
-        // TODO: Hardcoded. Fetch basket classes display names
-        const basketClasses = basket.classes.map(classId => ({
-          id: classId,
-          name: `Verified Carbon Standard (${classId})`,
-        }));
-        // TODO: Display basket denom
-        const displayDenom = 'eco.C.rNCT';
-        // TODO: Basket description (see comment in Figma)
-        // https://www.figma.com/file/x5vjWsddiUBzP2N13AFOPw?node-id=32:10028#155844414
-        // const description = getBasketDescription(basketDenom);
-        const description =
-          'The Regen Nature Carbon Ton groups together carbon sequestration ecocredits into one tradeable asset. Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
-        // TODO: Basket Curator
-        const curator = 'regen1qdqafsy2jfuyq7rxzkdwyytmrxlfn8csq0uetx';
-        const balances = await getBasketBalances(basketDenom);
-        const batches = await getBasketBalancesWithBatchInfo(balances.balances);
+        const _basketClasses = await Promise.all(
+          basketClassesInfo.map(async basketClass => {
+            let metadata;
+            if (basketClass.info?.metadata) {
+              try {
+                metadata = await getMetadataFromUint8Array(
+                  basketClass.info?.metadata,
+                );
+              } catch (err) {}
+            }
 
-        setData({
-          basket: basket.basket,
-          basketExtended: {
-            classes: basketClasses,
-            displayDenom,
-            description,
-            curator,
-            totalAmount: 0,
-          },
-          basketBalances: balances.balances,
-          batchesInfo: batches,
-        });
+            let basketClassName;
+            if (basketClass.info?.classId) {
+              basketClassName = metadata
+                ? `${metadata['schema:name']} (${basketClass.info?.classId})`
+                : basketClass.info?.classId;
+            }
+
+            return {
+              id: basketClass.info?.classId || '-',
+              name: basketClassName || '-',
+            };
+          }),
+        );
+        setBasketClasses(_basketClasses);
       } catch (error) {
-        // TODO Manage error
         console.error(error); // eslint-disable-line no-console
       }
     }
 
-    fetchData(basketDenom);
-  }, [basketDenom]);
+    fetchData(basketClassesInfo);
+  }, [basketClassesInfo]);
 
-  // Prepare data for BasketOverview
+  // TODO ? creditaBatches data >> extract into its own hook / function ?
+  // fetch project data related to credit batch using graphql lazy hook
   useEffect(() => {
-    if (data?.basket && data?.basketExtended && data?.batchesInfo) {
-      const _dataOverview: BasketOverviewProps = {
-        name: data.basket.name,
-        displayDenom: data.basketExtended.displayDenom,
-        description: data.basketExtended.description,
-        totalAmount: data.basketExtended.totalAmount,
-        curator: data.basketExtended.curator,
-        allowedCreditClasses: data.basketExtended.classes,
-      };
-      if (data?.basket?.dateCriteria?.minStartDate) {
-        _dataOverview.minStartDate = data.basket.dateCriteria.minStartDate;
-      }
-      if (data?.basket?.dateCriteria?.startDateWindow) {
-        _dataOverview.startDateWindow =
-          data?.basket?.dateCriteria.startDateWindow;
-      }
+    if (!batches) return;
 
-      if (data?.batchesInfo?.length > 0) {
-        _dataOverview.totalAmount = data.batchesInfo.reduce(
-          (acc: number, obj: BatchInfoWithProject) =>
-            acc + Number(obj.total_amount),
-          0,
+    async function fetchData(batches: string[]): Promise<void> {
+      try {
+        const _batchesProjects = await Promise.all(
+          batches.map(async batchDenom => {
+            const batchProject = await fetchProjectByBatchDenom({
+              variables: { batchDenom },
+            });
+
+            return {
+              batchDenom,
+              projectHandle:
+                batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
+                  ?.handle || '-',
+              projectName:
+                batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
+                  ?.metadata['schema:name'] || '-',
+            };
+          }),
         );
-      }
-      setDataOverview(_dataOverview);
-    }
-  }, [data]);
 
-  return { dataOverview, dataBasketBatches: data?.batchesInfo };
+        setBatchesProjects(_batchesProjects);
+      } catch (error) {
+        console.error(error); // eslint-disable-line no-console
+      }
+    }
+
+    fetchData(batches);
+  }, [batches, fetchProjectByBatchDenom]);
+
+  // finally, data preparation for <BasketEcocreditsTable />
+  useEffect(() => {
+    if (!basketBalances?.balances || !basketBatches || !batchesProjects) return;
+
+    const _creditBatches = basketBalances.balances.map(basketBalance => {
+      const _basketBatch = basketBatches.find(
+        basketBatch =>
+          basketBatch.info?.batchDenom === basketBalance.batchDenom,
+      );
+      const _projectBatch = batchesProjects.find(
+        projectBatch => projectBatch.batchDenom === basketBalance.batchDenom,
+      );
+      const totalAmount = basketBalance.balance;
+
+      return {
+        classId: _basketBatch?.info?.classId || '-',
+        batchDenom: _basketBatch?.info?.batchDenom || '-',
+        issuer: _basketBatch?.info?.issuer || '-',
+        totalAmount: totalAmount || '-',
+        startDate: _basketBatch?.info?.startDate || '-',
+        endDate: _basketBatch?.info?.endDate || '-',
+        projectLocation: _basketBatch?.info?.projectLocation || '-',
+        projectHandle: _projectBatch?.projectHandle || '-',
+        projectName: _projectBatch?.projectName || '-',
+      };
+    });
+
+    setCreditBatches(_creditBatches);
+  }, [basketBalances, basketBatches, batchesProjects]);
+
+  // finally, data preparation for <BasketOverview />
+  // TODO ? split state update into different useEffect based on data source ?
+  useEffect(() => {
+    if (!basket || !basketMetadata || !basketBalances || !basketClasses) return;
+
+    const totalAmount = basketBalances?.balances.reduce(
+      (acc, obj) => acc + parseFloat(obj.balance),
+      0,
+    );
+
+    const _overview: BasketOverviewProps = {
+      name: basket?.basket?.name || '-',
+      displayDenom: basketMetadata?.metadata?.display || '-',
+      description: basketMetadata?.metadata?.description || '-',
+      totalAmount: totalAmount || 0,
+      // TODO: hardcoded curator
+      curator: basketMetadata
+        ? {
+            name: 'Regen Network Development, Inc.',
+            address: 'regen1sv6a7ry6nrls84z0w5lauae4mgmw3kh2mg97ht',
+          }
+        : {
+            name: '-',
+            address: '-',
+          },
+      allowedCreditClasses: basketClasses,
+    };
+
+    const minStartDate = basket.basket?.dateCriteria?.minStartDate;
+    if (minStartDate) {
+      _overview.minStartDate = minStartDate.toISOString();
+    }
+
+    const startDateWindow = basket.basket?.dateCriteria?.startDateWindow;
+    if (startDateWindow) {
+      _overview.startDateWindow = formatDuration(
+        startDateWindow.seconds.toNumber(),
+      );
+    }
+
+    setOverview(_overview);
+  }, [basket, basketMetadata, basketBalances, basketClasses]);
+
+  return { overview, creditBatches };
 };
 
 export default useBasketDetails;

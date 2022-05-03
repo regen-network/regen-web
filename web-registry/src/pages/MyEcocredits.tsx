@@ -90,6 +90,10 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     fetchCredits();
   };
 
+  const handleError = (): void => {
+    setIsProcessingModalOpen(false);
+  };
+
   const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   const {
     signAndBroadcast,
@@ -98,7 +102,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     deliverTxResponse,
     error,
     setError,
-  } = useMsgClient(handleTxQueued, handleTxDelivered);
+  } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const accountAddress = wallet?.address;
   const { credits, fetchCredits } = useEcocredits(accountAddress);
   const { basketTokens, fetchBasketTokens } = useBasketTokens(

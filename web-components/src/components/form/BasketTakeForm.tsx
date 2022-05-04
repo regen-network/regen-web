@@ -59,7 +59,6 @@ export interface BasketTakeProps extends BottomCreditRetireFieldsProps {
   basket: Basket;
   basketDisplayDenom: string;
   accountAddress: string;
-  mapboxToken: string;
   balance: number;
   onSubmit: (values: MsgTakeValues) => void;
 }

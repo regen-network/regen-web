@@ -62,7 +62,7 @@ const CardItem: React.FC<CardItemProps> = ({
         {label}
       </Label>
 
-      <Subtitle size="lg" mobileSize="sm">
+      <Subtitle size="lg" mobileSize="sm" color="info.dark">
         {value.url ? (
           <LinkComponent
             sx={{ color: theme => theme.palette.secondary.main }}

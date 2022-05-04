@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
-import { TextField } from '@mui/material';
+import { SxProps, TextField } from '@mui/material';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { FieldProps, FormikErrors } from 'formik';
 import cx from 'clsx';
@@ -116,6 +116,10 @@ function getLabel(o: any): string | undefined {
       : o['http://schema.org/legalName']
     : undefined;
 }
+
+const sxs = {
+  formLabel: sxs.formLabel as SxProps,
+};
 
 const RoleField: React.FC<Props> = ({
   className,
@@ -251,7 +255,7 @@ const RoleField: React.FC<Props> = ({
                     }}
                   >
                     <OrganizationIcon />
-                    <Label size="xs" sx={{ color: 'secondary.main', ml: 2 }}>
+                    <Label size="xs" sx={sxs.formLabel}>
                       + Add New Organization
                     </Label>
                   </div>
@@ -269,7 +273,7 @@ const RoleField: React.FC<Props> = ({
                     }}
                   >
                     <UserIcon />
-                    <Label size="xs" sx={{ color: 'secondary.main', ml: 2 }}>
+                    <Label size="xs" sx={sxs.formLabel}>
                       + Add New Individual
                     </Label>
                   </div>

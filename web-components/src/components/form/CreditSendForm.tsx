@@ -1,7 +1,6 @@
 import React from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
@@ -54,10 +53,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
-    alignItems: 'initial',
-    '& .MuiCheckbox-root': {
-      alignSelf: 'end',
-    },
   },
 }));
 
@@ -166,7 +161,7 @@ const CreditSendForm: React.FC<FormProps> = ({
             name="withRetire"
             className={styles.checkboxLabel}
             label={
-              <Subtitle size="lg" color="primary.contrastText" ml={1}>
+              <Subtitle size="lg" color="primary.contrastText">
                 Retire credits upon transfer
               </Subtitle>
             }

@@ -8,8 +8,7 @@ interface Props extends TypographyProps {
 
 export const Body = styled(Typography, {
   name: 'RegenBodyText',
-  shouldForwardProp: prop =>
-    prop !== 'size' && prop !== 'mobileSize' && prop !== 'sx',
+  shouldForwardProp: prop => prop !== 'size' && prop !== 'mobileSize',
 })<Props>(({ theme, mobileSize, size = 'md' }) => {
   const { breakpoints, typography } = theme;
   const { variant, mobileVariant } = getSizeVariants(size, mobileSize);
@@ -23,8 +22,10 @@ export const Body = styled(Typography, {
     [breakpoints.down('sm')]: {
       fontSize: typography[mobileVariant].fontSize,
     },
-    '& a': {
+    '& a, .MuiLink-root': {
       fontWeight: 'bold',
+      color: theme.palette.secondary.main,
+      cursor: 'pointer',
     },
     '& ul, ol': {
       listStyle: 'none',

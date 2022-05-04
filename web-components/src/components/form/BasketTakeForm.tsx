@@ -37,10 +37,6 @@ import type { Theme } from '../../theme/muiTheme';
 const useStyles = makeStyles((theme: Theme) => ({
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
-    alignItems: 'initial',
-    '& .MuiCheckbox-root': {
-      alignSelf: 'end',
-    },
   },
 }));
 
@@ -154,7 +150,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
               disabled={!basket.disableAutoRetire}
               className={styles.checkboxLabel}
               label={
-                <Subtitle color="primary.contrastText" ml={1}>
+                <Subtitle size="lg" color="primary.contrastText">
                   Retire credits upon transfer
                 </Subtitle>
               }

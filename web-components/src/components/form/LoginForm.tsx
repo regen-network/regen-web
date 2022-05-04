@@ -170,6 +170,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                         </Body>
                       }
                     />
+                    <Box py={1} />
                     <Field
                       component={CheckboxLabel}
                       type="checkbox"

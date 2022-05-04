@@ -1,8 +1,8 @@
 import React from 'react';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
-import { SxProps } from '@mui/material';
+import { SxProps, Theme } from '@mui/material';
 
 export type Direction =
   | 'next'

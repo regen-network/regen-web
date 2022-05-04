@@ -111,7 +111,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 type Props = {
   menuItems?: HeaderMenuItem[];
   isRegistry?: boolean;
-  pathName: string;
+  pathname: string;
   isAuthenticated?: boolean;
   linkComponent: React.FC<NavLinkProps>;
   onSignup?: () => void;
@@ -121,7 +121,7 @@ type Props = {
 
 const MobileMenu: React.FC<Props> = ({
   menuItems,
-  pathName,
+  pathname,
   linkComponent: Link,
   ...props
 }) => {
@@ -135,7 +135,7 @@ const MobileMenu: React.FC<Props> = ({
   // close drawer if route changes
   useEffect(() => {
     handleClose();
-  }, [pathName]);
+  }, [pathname]);
 
   return (
     <div className={styles.root}>
@@ -163,7 +163,7 @@ const MobileMenu: React.FC<Props> = ({
               <MenuItem
                 key={i}
                 className={
-                  pathName === item.href
+                  pathname === item.href
                     ? clsx(styles.menuItem, styles.currentMenuItem)
                     : styles.menuItem
                 }
@@ -173,11 +173,11 @@ const MobileMenu: React.FC<Props> = ({
                     <span className={styles.subMenuTitle}>{item.title}</span>
                     <MenuList>
                       {item.dropdownItems.map((dropdownItem, j) => {
-                        const { svg: SVG } = dropdownItem;
+                        const { svg: SVG, icon } = dropdownItem;
                         return (
                           <MenuItem
                             className={
-                              pathName === dropdownItem.href
+                              pathname === dropdownItem.href
                                 ? clsx(
                                     styles.subMenuItem,
                                     styles.currentMenuItem,
@@ -191,10 +191,11 @@ const MobileMenu: React.FC<Props> = ({
                                 <SVG height={29} width={29} />
                               </Box>
                             )}
+                            {icon && <Box mr={2}>{icon}</Box>}
                             <Link
                               href={dropdownItem.href}
                               overrideClassname=""
-                              pathname={pathName}
+                              pathname={pathname}
                             >
                               {ReactHtmlParser(dropdownItem.title)}
                             </Link>
@@ -206,7 +207,7 @@ const MobileMenu: React.FC<Props> = ({
                 ) : (
                   <Link
                     overrideClassname=""
-                    pathname={pathName}
+                    pathname={pathname}
                     href={item.href || ''}
                   >
                     {item.title}

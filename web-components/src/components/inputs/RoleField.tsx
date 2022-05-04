@@ -118,7 +118,7 @@ function getLabel(o: any): string | undefined {
 }
 
 const sxs = {
-  formLabel: sxs.formLabel as SxProps,
+  formLabel: { color: 'primary.contrastText', ml: 1 } as SxProps,
 };
 
 const RoleField: React.FC<Props> = ({

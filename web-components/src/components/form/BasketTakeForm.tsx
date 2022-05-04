@@ -12,6 +12,7 @@ import {
   MetaRetireFormValues,
   validateCreditRetire,
   BottomCreditRetireFieldsProps,
+  RetirementReminder,
 } from './CreditRetireForm';
 import Submit from './Submit';
 import { validateAmount } from '../inputs/validation';
@@ -156,7 +157,10 @@ const BasketTakeForm: React.FC<FormProps> = ({
             />
             <Collapse in={values.retireOnTake} collapsedSize={0}>
               {values.retireOnTake && (
-                <BottomCreditRetireFields mapboxToken={mapboxToken} />
+                <>
+                  <RetirementReminder sx={{ mt: 8 }} />
+                  <BottomCreditRetireFields mapboxToken={mapboxToken} />
+                </>
               )}
             </Collapse>
           </>

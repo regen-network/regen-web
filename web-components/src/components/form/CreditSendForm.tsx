@@ -12,6 +12,7 @@ import {
   validateCreditRetire,
   initialValues as initialValuesRetire,
   BottomCreditRetireFieldsProps,
+  RetirementReminder,
 } from './CreditRetireForm';
 import Submit from './Submit';
 import {
@@ -168,11 +169,14 @@ const CreditSendForm: React.FC<FormProps> = ({
           />
 
           {values.withRetire && (
-            <CreditRetireFields
-              availableTradableAmount={availableTradableAmount}
-              batchDenom={batchDenom}
-              mapboxToken={mapboxToken}
-            />
+            <>
+              <RetirementReminder sx={{ mt: 8 }} />
+              <CreditRetireFields
+                availableTradableAmount={availableTradableAmount}
+                batchDenom={batchDenom}
+                mapboxToken={mapboxToken}
+              />
+            </>
           )}
 
           <Submit

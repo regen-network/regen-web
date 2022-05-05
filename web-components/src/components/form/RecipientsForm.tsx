@@ -1,4 +1,5 @@
 import React from 'react';
+import { makeStyles, styled } from '@mui/styles';
 import {
   Formik,
   Form,
@@ -6,7 +7,7 @@ import {
   // FormikErrors,
   FieldArray,
 } from 'formik';
-import { makeStyles, styled } from '@mui/styles';
+import * as Yup from 'yup';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
@@ -74,12 +75,50 @@ export interface Recipient extends RetireFormValues {
   sender: string;
   recipient: string;
   tradableAmount: number;
-  withRetire?: boolean;
+  withRetire: boolean;
 }
 
 export interface FormValues {
   recipients: Recipient[];
 }
+
+const validationSchema = Yup.object().shape({
+  recipients: Yup.array()
+    .of(
+      Yup.object().shape({
+        sender: Yup.string().required('Sender is required'),
+        recipient: Yup.string().required('Recipient is required'), //.min(4, 'too short').required
+        tradableAmount: Yup.number().required().positive().integer(),
+        withRetire: Yup.boolean().required(),
+        retiredAmount: Yup.number().when('withRetire', {
+          is: true,
+          then: Yup.number().required().positive().integer(),
+        }),
+        note: Yup.string().when('withRetire', {
+          is: true,
+          then: Yup.string(),
+        }),
+        country: Yup.string().when('withRetire', {
+          is: true,
+          then: Yup.string().required(),
+        }),
+        stateProvince: Yup.string().when('withRetire', {
+          is: true,
+          then: Yup.string(),
+        }),
+        postalCode: Yup.string().when('withRetire', {
+          is: true,
+          then: Yup.string(),
+        }),
+        retirementLocation: Yup.string().when('withRetire', {
+          is: true,
+          then: Yup.string(),
+        }),
+      }),
+    )
+    .required('Must have recipients') // these constraints are shown if and only if inner constraints are satisfied
+    .min(1, 'Minimum of 1 recipient'),
+});
 
 export const RecipientsForm: React.FC<FormProps> = ({
   sender,
@@ -139,6 +178,7 @@ export const RecipientsForm: React.FC<FormProps> = ({
     <Formik
       initialValues={initialValues}
       // validate={validateHandler}
+      validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
       {({ values }) => (

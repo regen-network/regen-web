@@ -99,6 +99,13 @@ export interface RetireFormValues extends MetaRetireFormValues {
   retiredAmount: number;
 }
 
+interface RetireFormValuesArray {
+  recipients: RetireFormValues[];
+  // [key: string]: RetireFormValues[];
+}
+
+// type RetireFormValuesArray = Record<string, RetireFormValues[]>;
+
 interface CreditRetireFieldsProps extends BottomCreditRetireFieldsProps {
   batchDenom: string;
   availableTradableAmount: number;
@@ -106,33 +113,63 @@ interface CreditRetireFieldsProps extends BottomCreditRetireFieldsProps {
 
 export interface BottomCreditRetireFieldsProps {
   mapboxToken: string;
+  arrayPrefix?: string;
+  arrayIndex?: number;
 }
 
+type LocationType = {
+  country?: string;
+  stateProvince?: string;
+  postalCode?: string;
+};
+
 export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
-  ({ mapboxToken }) => {
+  ({ mapboxToken, arrayPrefix, arrayIndex }) => {
     const styles = useStyles();
-    const {
-      values: { country, stateProvince, postalCode },
-      setFieldValue,
-    } = useFormikContext<RetireFormValues>();
+    const { values, setFieldValue } = useFormikContext<
+      RetireFormValues | RetireFormValuesArray
+    >();
+
+    const item =
+      typeof arrayIndex === 'number'
+        ? (values as RetireFormValuesArray).recipients[arrayIndex]
+        : (values as RetireFormValues);
+
+    const { country, stateProvince, postalCode } = item;
 
     useEffect(() => {
-      const setRetirementLocation = async (): Promise<void> => {
+      const retirementLocationName = arrayPrefix
+        ? `${arrayPrefix}retirementLocation`
+        : 'retirementLocation';
+
+      const setRetirementLocation = async ({
+        country,
+        stateProvince,
+        postalCode,
+      }: LocationType): Promise<void> => {
         const isoString = await getISOString(mapboxToken, {
           countryKey: country,
           stateProvince,
           postalCode,
         });
-        setFieldValue('retirementLocation', isoString);
+        setFieldValue(retirementLocationName, isoString);
       };
 
       if (stateProvince || country || postalCode) {
-        setRetirementLocation();
+        setRetirementLocation({ country, stateProvince, postalCode });
       }
       if (!country) {
-        setFieldValue('retirementLocation', null);
+        setFieldValue(retirementLocationName, null);
       }
-    }, [country, stateProvince, postalCode, setFieldValue, mapboxToken]);
+    }, [
+      country,
+      stateProvince,
+      postalCode,
+      setFieldValue,
+      mapboxToken,
+      arrayPrefix,
+      arrayIndex,
+    ]);
 
     return (
       <>
@@ -140,7 +177,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
           Transaction note
         </Title>
         <Field
-          name="note"
+          name={arrayPrefix ? `${arrayPrefix}note` : 'note'}
           type="text"
           label="Add retirement transaction details (stored in the tx memo)"
           component={TextField}
@@ -157,16 +194,20 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
         </Description>
         <Grid container className={styles.stateCountryGrid}>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <LocationStateField country={country} optional={!postalCode} />
+            <LocationStateField
+              country={country}
+              optional={!postalCode}
+              arrayPrefix={arrayPrefix}
+            />
           </Grid>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <LocationCountryField />
+            <LocationCountryField arrayPrefix={arrayPrefix} />
           </Grid>
         </Grid>
         <Field
           component={ControlledTextField}
           label="Postal Code"
-          name="postalCode"
+          name={arrayPrefix ? `${arrayPrefix}postalCode` : 'postalCode'}
           optional
         />
       </>
@@ -177,16 +218,22 @@ export const CreditRetireFields = ({
   batchDenom,
   availableTradableAmount,
   mapboxToken,
+  arrayPrefix,
+  arrayIndex,
 }: CreditRetireFieldsProps): JSX.Element => {
   return (
     <>
       <AmountField
-        name="retiredAmount"
+        name={arrayPrefix ? `${arrayPrefix}retiredAmount` : 'retiredAmount'}
         label="Amount to retire"
         availableAmount={availableTradableAmount}
         denom={batchDenom}
       />
-      <BottomCreditRetireFields mapboxToken={mapboxToken} />
+      <BottomCreditRetireFields
+        mapboxToken={mapboxToken}
+        arrayPrefix={arrayPrefix}
+        arrayIndex={arrayIndex}
+      />
     </>
   );
 };

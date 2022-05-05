@@ -9,6 +9,7 @@ interface FieldProps {
   name?: string;
   className?: string;
   optional?: boolean;
+  arrayPrefix?: string;
 }
 
 const LocationStateField: React.FC<FieldProps> = ({
@@ -16,7 +17,10 @@ const LocationStateField: React.FC<FieldProps> = ({
   name = 'stateProvince',
   className,
   optional = false,
+  arrayPrefix,
 }) => {
+  const nameInput = arrayPrefix ? `${arrayPrefix}${name}` : name;
+
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
   const { setFieldValue } = useFormikContext();
 
@@ -46,13 +50,13 @@ const LocationStateField: React.FC<FieldProps> = ({
       return;
     }
     // reset state/province if country changes
-    setFieldValue(name, '');
+    setFieldValue(nameInput, '');
     searchState(country);
-  }, [country, setFieldValue, name]);
+  }, [country, setFieldValue, nameInput]);
 
   return (
     <Field
-      name={name}
+      name={nameInput}
       label="State / Region"
       options={stateOptions}
       component={SelectTextField}

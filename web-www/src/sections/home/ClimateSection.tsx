@@ -176,7 +176,7 @@ const ClimateSection: React.FC = (): JSX.Element => {
       <hr className={clsx(styles.line, styles.problemLine)} />
       <Card
         className={clsx(styles.card, styles.problemCard)}
-        borderColor={theme.palette.grey['100']}
+        borderColor="grey.100"
         borderRadius="10px"
       >
         <Label size="sm">{content?.problem?.title}</Label>
@@ -192,7 +192,7 @@ const ClimateSection: React.FC = (): JSX.Element => {
       {!downMd && <hr className={clsx(styles.line, styles.solutionLine)} />}
       <Card
         className={clsx(styles.card, styles.solutionCard)}
-        borderColor={theme.palette.grey['100']}
+        borderColor="grey.100"
         borderRadius="10px"
       >
         <Label size="sm" color="info.dark">

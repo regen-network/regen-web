@@ -33,7 +33,7 @@ export default function RegenCard({
       sx={[
         {
           border: 1,
-          borderColor: 'info.light',
+          borderColor: borderColor || 'info.light',
           borderRadius: borderRadius || '5px',
           maxWidth: width || '100%',
           height: height || 'inherit',

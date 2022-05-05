@@ -32,7 +32,8 @@ export default function RegenCard({
       elevation={elevation}
       sx={[
         {
-          border: `1px solid ${borderColor || 'info.light'}`,
+          border: 1,
+          borderColor: 'info.light',
           borderRadius: borderRadius || '5px',
           maxWidth: width || '100%',
           height: height || 'inherit',

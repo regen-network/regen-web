@@ -1,5 +1,4 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Backdrop from '@mui/material/Backdrop';
@@ -8,7 +7,6 @@ import Cookies from 'js-cookie';
 // TODO use Section component
 // import Section from '../section';
 import ContainedButton from '../buttons/ContainedButton';
-import { Theme } from '../../theme/muiTheme';
 import { Body } from '../typography';
 import { Box } from '@mui/material';
 
@@ -46,19 +44,9 @@ function setCookie(name: string, cookieValue: string): void {
   Cookies.set(name, cookieValue, { expires: 730 });
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  link: {
-    color: theme.palette.secondary.main,
-  },
-  backdrop: {
-    zIndex: 100,
-  },
-}));
-
 export default function CookiesBanner({
   privacyUrl,
 }: CookiesBannerProps): JSX.Element | null {
-  const classes = useStyles();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -83,7 +71,7 @@ export default function CookiesBanner({
 
   if (visible) {
     return (
-      <Backdrop className={classes.backdrop} open>
+      <Backdrop open sx={{ zIndex: 100 }}>
         <Box
           sx={theme => ({
             position: 'fixed',
@@ -94,13 +82,13 @@ export default function CookiesBanner({
             width: '100%',
             height: { sm: theme.spacing(19) },
             py: [5, 0],
-            boxShadow: theme.shadows[7],
+            boxShadow: 7,
           })}
         >
-          <Grid
-            container
+          <Box
             sx={theme => ({
               display: 'flex',
+              flexWrap: 'nowrap',
               alignItems: 'center',
               justifyContent: 'space-between',
               m: '0 auto',
@@ -114,10 +102,10 @@ export default function CookiesBanner({
               height: [theme.spacing(19), '100%'],
             })}
           >
-            <Body mobileSize="xs">
+            <Body mobileSize="xs" pr={5}>
               We use cookies to provide you with a great user experience. By
               using this site, you accept our use of{' '}
-              <Link className={classes.link} href={privacyUrl}>
+              <Link href={privacyUrl} color="secondary.main">
                 cookies policy
               </Link>
               .
@@ -133,14 +121,16 @@ export default function CookiesBanner({
               <ContainedButton
                 size="small"
                 onClick={accept}
-                sx={theme => ({
-                  minWidth: [theme.spacing(22), theme.spacing(33.25)],
+                sx={({ spacing }) => ({
+                  minWidth: [spacing(22), spacing(33.25)],
+                  height: spacing(8.75),
                 })}
               >
                 accept
               </ContainedButton>
               <Body
                 size="sm"
+                onClick={reject}
                 sx={{
                   color: 'info.main',
                   cursor: 'pointer',
@@ -152,7 +142,7 @@ export default function CookiesBanner({
                 Reject
               </Body>
             </Box>
-          </Grid>
+          </Box>
         </Box>
       </Backdrop>
     );

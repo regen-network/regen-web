@@ -29,6 +29,8 @@ export default function ProjectImpactCard({
   return (
     <Card
       className={className}
+      borderRadius="10px"
+      borderColor="grey.100"
       sx={{ display: 'flex', flexDirection: 'column' }}
     >
       <Box

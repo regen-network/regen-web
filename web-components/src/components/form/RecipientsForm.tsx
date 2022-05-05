@@ -81,7 +81,7 @@ export interface FormValues {
   recipients: Recipient[];
 }
 
-export const RecipientForm: React.FC<FormProps> = ({
+export const RecipientsForm: React.FC<FormProps> = ({
   sender,
   batchDenom,
   availableTradableAmount,

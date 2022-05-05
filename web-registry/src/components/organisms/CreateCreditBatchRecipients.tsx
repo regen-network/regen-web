@@ -3,8 +3,8 @@ import { styled } from '@mui/system';
 
 import {
   FormValues,
-  RecipientForm,
-} from 'web-components/lib/components/form/RecipientForm';
+  RecipientsForm,
+} from 'web-components/lib/components/form/RecipientsForm';
 import Title from 'web-components/lib/components/title';
 
 // TODO: add props for the form
@@ -30,7 +30,7 @@ export const CreateCreditBatchRecipients: React.FC<Props> = ({ issuer }) => {
         <Title sx={{ pb: [7.5, 10] }} variant="h3" align="center">
           Recipients
         </Title>
-        <RecipientForm
+        <RecipientsForm
           sender={issuer}
           batchDenom={'denom11192e1e7d9182e3'}
           availableTradableAmount={10}

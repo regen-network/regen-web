@@ -41,7 +41,7 @@ interface HeaderProps {
   onSignup?: () => void;
   onLogin?: () => void;
   onLogout?: () => void;
-  pathName?: string;
+  pathname?: string;
   transparent?: boolean;
 }
 
@@ -181,7 +181,7 @@ export default function Header({
   borderBottom = true,
   absolute = true,
   fullWidth = false,
-  pathName = '/',
+  pathname = '/',
   extras,
 }: HeaderProps): JSX.Element {
   const theme = useTheme();
@@ -237,7 +237,7 @@ export default function Header({
                     linkComponent={linkComponent}
                     item={item}
                     color={color}
-                    pathName={pathName}
+                    pathname={pathname}
                   />
                 );
               })}
@@ -249,7 +249,7 @@ export default function Header({
             <MobileMenu
               linkComponent={linkComponent}
               isRegistry={isRegistry}
-              pathName={pathName}
+              pathname={pathname}
               menuItems={menuItems}
               isAuthenticated={isAuthenticated}
               onLogin={onLogin}

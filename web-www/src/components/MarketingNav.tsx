@@ -237,7 +237,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
           location.pathname !== '/' &&
           !headerNoBorderBottomPages.test(location.pathname)
         }
-        pathName={location.pathname}
+        pathname={location.pathname}
       />
     </>
   );

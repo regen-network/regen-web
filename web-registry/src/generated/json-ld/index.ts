@@ -6,5 +6,6 @@
 // made for this purpose.
 
 export * from './batch-metadata';
+export * from './credit-class-metadata';
 export * from './project-metadata';
 export * from './vcs-project-metadata';

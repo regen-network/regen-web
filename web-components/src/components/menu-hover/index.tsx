@@ -71,7 +71,6 @@ const MenuHover = ({
   const [openedPopover, setOpenedPopover] = useState(false);
   const popoverAnchor = useRef(null);
 
-  // nullish coalescing operator ?? to avoid typescript error on undefined
   const styles = useStyles({ textColor: textColor ?? '' });
 
   const popoverEnter = (): void => {

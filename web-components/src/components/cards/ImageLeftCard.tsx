@@ -1,11 +1,11 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { CardContent } from '@mui/material';
+import { Box, CardContent } from '@mui/material';
 import ReactHtmlParser from 'react-html-parser';
 import cx from 'clsx';
 
 import Card from './Card';
-import Title from '../title';
+import { Title } from '../typography';
 import { Image } from '../image';
 import OutlinedButton from '../buttons/OutlinedButton';
 
@@ -56,9 +56,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'baseline',
     padding: theme.spacing(6.75),
   },
-  line: {
-    marginBottom: theme.spacing(4),
-  },
   button: {
     [theme.breakpoints.down('sm')]: {
       width: '100%',
@@ -96,10 +93,10 @@ function ImageLeftCard({
         backgroundImage
       />
       <CardContent className={styles.cardContent}>
-        <Title className={styles.line} variant="h4">
+        <Title sx={{ mb: 4 }} variant="h4">
           {ReactHtmlParser(title)}
         </Title>
-        {children && <div className={styles.line}>{children}</div>}
+        {children && <Box sx={{ mb: 4 }}>{children}</Box>}
         <OutlinedButton
           size="small"
           className={styles.button}

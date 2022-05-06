@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { loadStripe } from '@stripe/stripe-js';
 import { useParams } from 'react-router-dom';
@@ -10,12 +9,10 @@ import { useMutation } from '@apollo/client';
 import { Formik, Form, Field } from 'formik';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import { CreditPrice } from 'web-components/lib/components/buy-footer';
 import {
   requiredMessage,
   validateEmail,
@@ -26,6 +23,8 @@ import LocationCountryField from 'web-components/lib/components/inputs/LocationC
 import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
 // TODO: refactor countries dependency
 import { countries } from 'web-components/lib/utils/countries';
+import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
+import { SxProps } from '@mui/material';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 
@@ -36,20 +35,6 @@ const CREATE_USER_ORGANIZATION = loader(
 const CREATE_ADDRESS = loader('../../graphql/CreateAddress.graphql');
 
 const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    textAlign: 'center',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: '2rem',
-    },
-  },
-  subtitle: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(3.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(4),
-    },
-  },
   form: {
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(5.75),
@@ -57,20 +42,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(8.5),
     },
-  },
-  units: {
-    fontFamily: theme.typography.h1.fontFamily,
-    fontWeight: 800,
-    marginLeft: theme.spacing(4),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: '1.3125rem',
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: '1.125rem',
-    },
-  },
-  currency: {
-    marginLeft: theme.spacing(2),
   },
   unitsGrid: {
     [theme.breakpoints.up('sm')]: {
@@ -113,15 +84,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   green: {
     color: theme.palette.secondary.main,
   },
-  otherTitle: {
-    marginTop: theme.spacing(13),
-  },
   textFields: {
     [theme.breakpoints.up('sm')]: {
       width: '70%',
     },
   },
 }));
+
+const sxs = {
+  title: { mt: 13, mb: { xs: 4, sm: 3.75 } } as SxProps,
+};
 
 interface CreditsPurchaseFormProps {
   creditPrice: CreditPrice;
@@ -163,9 +135,7 @@ function CreditsPurchaseForm({
 
   return (
     <div>
-      <Title variant="h3" className={classes.title}>
-        Buy Credits
-      </Title>
+      <Title variant="h3">Buy Credits</Title>
       <Formik
         initialValues={{
           units: 1,
@@ -336,13 +306,13 @@ function CreditsPurchaseForm({
           return (
             <div>
               <Form className={classes.form} translate="yes">
-                <Title className={classes.subtitle} variant="h5">
+                <Title variant="h5" sx={{ mb: { xs: 4, sm: 3.75 } }}>
                   Number of credits
                 </Title>
-                <Description>
+                <Body>
                   (${formattedUnitPrice} {creditPrice.currency}/each), includes
                   10% service fee
-                </Description>
+                </Body>
                 <Grid
                   container
                   alignItems="center"
@@ -357,19 +327,16 @@ function CreditsPurchaseForm({
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography>
-                      <span className={classes.units}>= ${formattedTotal}</span>
-                      <span className={classes.currency}>
+                    <Title variant="h5" ml={4} fontWeight={800}>
+                      = ${formattedTotal}
+                      <Body as="span" ml={2}>
                         {creditPrice.currency}
-                      </span>
-                    </Typography>
+                      </Body>
+                    </Title>
                   </Grid>
                 </Grid>
 
-                <Title
-                  className={`${classes.subtitle} ${classes.otherTitle}`}
-                  variant="h5"
-                >
+                <Title variant="h5" sx={sxs.title}>
                   Credit ownership
                 </Title>
                 <div className={classes.textFields}>
@@ -403,17 +370,14 @@ function CreditsPurchaseForm({
                   </div>
                 )}
 
-                <Title
-                  className={`${classes.subtitle} ${classes.otherTitle}`}
-                  variant="h5"
-                >
+                <Title variant="h5" sx={sxs.title}>
                   Location of purchase
                 </Title>
-                <Description>
+                <Body>
                   Please enter a location for the retirement of these credits.
                   This prevents double counting of credits in different
                   locations. Note, these credits will be retired upon purchase.
-                </Description>
+                </Body>
                 <Field
                   component={TextField}
                   className={classes.cityTextField}

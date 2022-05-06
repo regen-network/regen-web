@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { TitleDescription } from 'web-components/lib/components/text-layouts';
+import { TitleBody } from 'web-components/lib/components/text-layouts';
 import Section from 'web-components/lib/components/section';
 import { DevApproachSectionQuery } from '../../generated/graphql';
 
@@ -55,10 +55,7 @@ const ApproachSection: React.FC = () => {
   return (
     <Section className={styles.section}>
       <div className={styles.caption}>{data?.caption}</div>
-      <TitleDescription
-        title={`${data?.header}`}
-        description={data?._rawBody}
-      />
+      <TitleBody title={`${data?.header}`} body={data?._rawBody} />
     </Section>
   );
 };

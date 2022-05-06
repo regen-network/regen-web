@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid, { GridDirection } from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+
 import UserAvatar from './UserAvatar';
-import { getFontSize } from '../../theme/sizing';
 import OrganizationIcon from '../icons/OrganizationIcon';
+import { Body, Title } from '../typography';
+import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
 
 export interface User {
   name: string;
@@ -17,75 +17,32 @@ export interface User {
 
 interface UserInfoProps {
   user: User;
-  size?: string;
+  size?: TextSize;
   direction?: GridDirection;
   border?: boolean;
   icon?: any;
 }
-
-interface StyleProps {
-  description?: string;
-  direction?: GridDirection;
-  size: string;
-}
-
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  text: (props: StyleProps) => ({
-    marginLeft:
-      props.size === 'project' ? theme.spacing(3.5) : theme.spacing(4.8),
-    textAlign: props.direction === 'column' ? 'center' : 'left',
-    alignSelf: 'center',
-  }),
-  name: (props: StyleProps) => ({
-    [theme.breakpoints.up('sm')]: {
-      fontSize: getFontSize(props.size).sm,
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: getFontSize(props.size).xs,
-    },
-    fontFamily:
-      props.size === 'xl'
-        ? theme.typography.h1.fontFamily
-        : theme.typography.fontFamily,
-    fontWeight: props.size === 'xl' ? 900 : 'bold',
-  }),
-  link: {
-    '&:link, &:visited, &:hover, &:active': {
-      textDecoration: 'none',
-      color: theme.palette.primary.contrastText,
-    },
-  },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: getFontSize('medium').sm,
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: getFontSize('medium').xs,
-    },
-    color: theme.palette.info.dark,
-    paddingTop: theme.spacing(2.8),
-  },
-  place: {
-    color: theme.palette.info.dark,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: getFontSize('small').sm,
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: getFontSize('small').xs,
-    },
-    paddingTop: theme.spacing(1.6),
-  },
-}));
-
 export default function UserInfo({
   user,
-  size = 'big',
+  size = 'lg',
   direction,
   border = true,
   icon,
 }: UserInfoProps): JSX.Element {
-  const styles = useStyles({ description: user.description, direction, size });
-  const name = <Typography className={styles.name}>{user.name}</Typography>;
+  const sizeVariant = getSizeVariant(size);
+  const mobileVariant = getSizeVariant(getMobileSize(size));
+  // title doesn't accept size as a prop, so manually setting it here
+  const name = (
+    <Title
+      sx={theme => ({
+        typography: [mobileVariant, sizeVariant],
+        fontFamily: theme.typography.h1.fontFamily,
+        fontWeight: theme.typography.h1.fontWeight,
+      })}
+    >
+      {user.name}
+    </Title>
+  );
 
   return (
     <Grid container direction={direction} wrap="nowrap">
@@ -105,26 +62,30 @@ export default function UserInfo({
           }
         />
       </Grid>
-      <Grid item className={styles.text}>
+      <Grid
+        item
+        sx={{
+          ml: size === 'xs' ? 3.5 : 4.8,
+          textAlign: direction === 'column' ? 'center' : 'left',
+          alignSelf: 'center',
+        }}
+      >
         {user.link ? (
-          <a
-            className={styles.link}
-            href={user.link}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={user.link} target="_blank" rel="noopener noreferrer">
             {name}
           </a>
         ) : (
           name
         )}
         {user.location && (
-          <Typography className={styles.place}>{user.location}</Typography>
+          <Body size="sm" pt={1.6}>
+            {user.location}
+          </Body>
         )}
         {user.description && (
-          <Typography className={styles.description}>
+          <Body size="md" pt={2.8}>
             {user.description}
-          </Typography>
+          </Body>
         )}
       </Grid>
     </Grid>

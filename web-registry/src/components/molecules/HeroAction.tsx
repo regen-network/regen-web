@@ -1,14 +1,14 @@
 import React from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
+import { Box, Grid } from '@mui/material';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import {
   BottomBannerFieldsFragment,
@@ -27,8 +27,6 @@ type Props = {
     root?: string;
     main?: string;
     section?: string;
-    title?: string;
-    description?: string;
     button?: string;
   };
 };
@@ -45,20 +43,6 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
     justifyContent: 'center',
     margin: '0 auto',
   },
-  content: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignContent: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontWeight: 900,
-    lineHeight: theme.typography.pxToRem(53.2),
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
-      lineHeight: theme.typography.pxToRem(44.8),
-    },
-  },
   btn: {
     margin: theme.spacing(10, 4, 0),
     [theme.breakpoints.down('sm')]: {
@@ -67,21 +51,6 @@ const useStyles = makeStyles<Theme, StyleProps>(theme => ({
       },
     },
   },
-  description: props => ({
-    color: props.lightBg
-      ? theme.palette.text.primary
-      : theme.palette.primary.main,
-    marginTop: theme.spacing(4),
-    textAlign: 'center',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(22),
-      lineHeight: theme.typography.pxToRem(33),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-      lineHeight: theme.typography.pxToRem(27),
-    },
-  }),
 }));
 
 /**
@@ -106,21 +75,31 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
       isBanner={props.isBanner}
     >
       <Grid container justifyContent="center">
-        <div className={styles.content}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignContent: 'center',
+            justifyContent: 'center',
+          }}
+        >
           <Title
             align="center"
             variant="h2"
+            mobileVariant="h3"
             color={lightBg ? 'textPrimary' : 'primary'}
-            className={cx(styles.title, classes?.title)}
           >
             {props.bottomBanner?.title}
           </Title>
           {!!props.bottomBanner?.descriptionRaw && (
-            <Description
-              className={cx(styles.description, classes?.description)}
+            <Body
+              size="xl"
+              align="center"
+              color={props.lightBg ? 'text.primary' : 'primary.main'}
+              mt={4}
             >
               <BlockContent content={props.bottomBanner.descriptionRaw} />
-            </Description>
+            </Body>
           )}
           <Grid container justifyContent="center">
             <Button
@@ -140,7 +119,7 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
               </OutlinedButton>
             )}
           </Grid>
-        </div>
+        </Box>
       </Grid>
     </BackgroundImgSection>
   );

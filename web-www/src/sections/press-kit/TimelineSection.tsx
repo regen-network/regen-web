@@ -5,8 +5,8 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Timeline from 'web-components/lib/components/timeline';
-import Description from 'web-components/lib/components/description';
 import { PresskitTimelineSectionQuery } from '../../generated/graphql';
+import { Body } from 'web-components/lib/components/typography';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -21,20 +21,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       textAlign: 'left',
       fontSize: theme.spacing(8),
-    },
-  },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      maxWidth: theme.spacing(188.5),
-      paddingBottom: theme.spacing(13.25),
-      paddingTop: theme.spacing(7.5),
-      textAlign: 'center',
-      margin: '0 auto',
-    },
-    [theme.breakpoints.down('sm')]: {
-      textAlign: 'left',
-      paddingBottom: theme.spacing(9.5),
-      paddingTop: theme.spacing(5),
     },
   },
 }));
@@ -58,12 +44,27 @@ const query = graphql`
 
 const TimelineSection = (): JSX.Element => {
   const styles = useStyles();
-  const { sanityPresskitPage: data } = useStaticQuery<PresskitTimelineSectionQuery>(query);
+  const { sanityPresskitPage: data } =
+    useStaticQuery<PresskitTimelineSectionQuery>(query);
   const content = data?.timelineSection;
 
   return (
-    <Section classes={{ root: styles.root, title: styles.title }} title={content?.header || ''}>
-      <Description className={styles.description}>{content?.description}</Description>
+    <Section
+      classes={{ root: styles.root, title: styles.title }}
+      title={content?.header || ''}
+    >
+      <Body
+        size="lg"
+        sx={{
+          textAlign: ['left', 'center'],
+          pb: [9.5, 13.25],
+          pt: [5, 7.5],
+          m: { sm: '0 auto' },
+          maxWidth: { sm: 754 },
+        }}
+      >
+        {content?.description}
+      </Body>
       <Timeline
         onViewOnLedger={() => null}
         events={content?.items as any[]}

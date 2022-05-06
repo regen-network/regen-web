@@ -1,57 +1,35 @@
 import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { Link, Typography } from '@mui/material';
+import { Box, Link } from '@mui/material';
 
 import Countdown from '../countdown';
+import { Subtitle } from '../typography';
 
 type Props = {
   launchDate: string;
-  className?: string;
 };
 
 const bannerBlue = '#6D9BDB';
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    textAlign: 'center',
-    background: bannerBlue,
-    [theme.breakpoints.up('md')]: {
-      padding: theme.spacing(5, 0),
-    },
-    [theme.breakpoints.down('md')]: {
-      padding: theme.spacing(4, 0),
-      borderBottom: `5px solid ${bannerBlue}`, // TODO: this is a hack to get around a weird display glitch that seems to be caused by the mobile drawer
-    },
-  },
-  text: {
-    color: 'white',
-    fontWeight: 700,
-    [theme.breakpoints.up('md')]: {
-      fontSize: theme.spacing(5),
-    },
-    [theme.breakpoints.down('md')]: {
-      fontSize: theme.spacing(4),
-    },
-  },
-  link: {
-    textDecoration: 'underline',
-  },
-}));
 
 const MainnetLaunchBanner: React.FC<Props> = props => {
-  const classes = useStyles();
   return new Date() < new Date(props.launchDate) ? (
-    <div className={clsx(classes.root, props.className)}>
-      <Typography className={classes.text}>
+    <Box
+      sx={{
+        textAlign: 'center',
+        backgroundColor: bannerBlue,
+        py: [4, 5],
+        borderBottom: `5px solid ${bannerBlue}`, // TODO: this is a hack to get around a weird display glitch that seems to be caused by the mobile drawer
+      }}
+    >
+      <Subtitle>
         <span role="img" aria-label="mainnet launch">
           🚀
         </span>{' '}
-        <Link className={classes.link} href="/mainnet/">
+        <Link href="/mainnet/" sx={{ textDecoration: 'underline' }}>
           Mainnet
         </Link>{' '}
         is launching in <Countdown date={props.launchDate} />
-      </Typography>
-    </div>
+      </Subtitle>
+    </Box>
   ) : null;
 };
 

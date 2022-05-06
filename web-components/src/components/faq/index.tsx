@@ -6,6 +6,7 @@ import Navigation from './Navigation';
 import Category from './Category';
 import { QuestionItem } from './Question';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
+import { Label } from '../typography';
 
 export interface FAQProps {
   categories: {
@@ -27,18 +28,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       float: 'left',
       marginRight: theme.spacing(15),
     },
-  },
-  back: {
-    fontSize: theme.spacing(3.5),
-    fontFamily: theme.typography.h1.fontFamily,
-    color: theme.palette.secondary.main,
-    letterSpacing: '1px',
-    textTransform: 'uppercase',
-    fontWeight: 800,
-    lineHeight: theme.spacing(4.5),
-    position: 'absolute',
-    top: theme.spacing(12),
-    cursor: 'pointer',
   },
   icon: {
     height: theme.spacing(2.25),
@@ -95,10 +84,20 @@ const FAQ = ({
       <Box display={{ xs: 'block', sm: 'none' }}>
         {header ? (
           <div>
-            <div className={classes.back} onClick={handleBack}>
+            <Label
+              mobileSize="sm"
+              color="secondary"
+              role="button"
+              onClick={handleBack}
+              sx={{
+                position: 'absolute',
+                cursor: 'pointer',
+                top: theme => theme.spacing(12),
+              }}
+            >
               <BreadcrumbIcon className={classes.icon} direction="prev" />
               back
-            </div>
+            </Label>
             <Category
               questionId={questionId}
               name={category.header}

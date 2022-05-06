@@ -7,39 +7,8 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import Section from 'web-components/lib/components/section';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { TokenMediaSectionQuery } from '../../generated/graphql';
-
-type Item = {
-  title: string;
-  date: string;
-  author: string;
-  url: string;
-  isTokenSale: boolean;
-  image: {
-    publicURL: string;
-  };
-};
-
-type Category = {
-  name: string;
-  buttonText: string;
-  showPlay: boolean;
-  items: Item[];
-};
-
-type QueryData = {
-  text: {
-    header: string;
-    categories: Category[];
-  };
-};
-
-type CardItem = Item & {
-  showPlay: boolean;
-  buttonText: string;
-  type: string;
-};
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -54,14 +23,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-  },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(38),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
-    },
   },
   headerWrap: {
     display: 'flex',
@@ -127,7 +88,11 @@ const MediaSection: React.FC = () => {
           padding={theme.spacing(2.5)}
           slidesToShow={slidesToShow}
           items={itemCards}
-          renderTitle={() => <Title className={styles.title}>Media</Title>}
+          renderTitle={() => (
+            <Title variant="h2" mobileVariant="h3">
+              Media
+            </Title>
+          )}
         />
       </div>
     </Section>

@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
-import { Link, Grid, Avatar } from '@mui/material';
+import { Grid, Avatar } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
 import cx from 'clsx';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Card from 'web-components/lib/components/cards/Card';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
-import { FundCallToActionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
+
+import type { Theme } from 'web-components/lib/theme/muiTheme';
+import type { FundCallToActionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>(theme => ({
   root: {
     display: 'flex',
-    paddingTop: theme.spacing(10),
+    paddingTop: theme.spacing(22.25),
     paddingBottom: theme.spacing(22.25),
   },
   card: {
@@ -45,20 +45,6 @@ const useStyles = makeStyles<Theme>(theme => ({
     width: theme.spacing(28),
     height: theme.spacing(28),
     overflow: 'initial',
-  },
-  title: {
-    lineHeight: '34.8px',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(24),
-    },
-  },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(22),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-    },
   },
   link: {
     cursor: 'pointer',
@@ -103,22 +89,17 @@ const CallToAction = (): JSX.Element => {
                     alt="Icon"
                   />
                 </Avatar>
-                <Title
-                  className={cx(styles.title, styles.verticalSpacing)}
-                  variant="h4"
-                  align="center"
-                >
+                <Title variant="h4" mobileVariant="h4" align="center" mb={4}>
                   {cta?.header || ''}
                 </Title>
-                <Description className={styles.description} align="center">
+                <Body size="xl" align="center">
                   <BlockContent
-                    noYMargin
                     content={cta?._rawDescription}
                     onClickModalLink={(href: string) =>
                       setModalIframeLink(href)
                     }
                   />
-                </Description>
+                </Body>
               </Card>
             </Grid>
           );

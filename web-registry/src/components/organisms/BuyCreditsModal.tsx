@@ -11,14 +11,17 @@ import ReactHtmlParser from 'react-html-parser';
 
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
+import {
+  Body,
+  Label,
+  Subtitle,
+  Title,
+} from 'web-components/lib/components/typography';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
-import { Label } from 'web-components/lib/components/label';
 import { Image } from 'web-components/lib/components/image';
 import Submit from 'web-components/lib/components/form/Submit';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
@@ -26,6 +29,7 @@ import LocationCountryField from 'web-components/lib/components/inputs/LocationC
 import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
 
 import { useWallet } from '../../lib/wallet';
+import { Box } from '@mui/material';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,42 +43,10 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  mainTitle: {
-    paddingTop: 0,
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(7.5),
-      paddingLeft: theme.spacing(7.5),
-      paddingRight: theme.spacing(7.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(6),
-      paddingLeft: 0,
-      paddingRight: 0,
-    },
-  },
   thumbnailCard: {
     display: 'flex',
     alignItems: 'center',
     height: theme.spacing(26.75),
-    '& a': {
-      color: theme.palette.secondary.main,
-      textDecoration: 'none',
-      fontWeight: 700,
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-      [theme.breakpoints.up('sm')]: {
-        fontSize: theme.typography.pxToRem(18),
-      },
-      [theme.breakpoints.down('sm')]: {
-        fontSize: theme.typography.pxToRem(12),
-      },
-    },
-  },
-  creditTitle: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-    },
   },
   cardContent: {
     display: 'flex',
@@ -109,10 +81,6 @@ const useStyles = makeStyles(theme => ({
       marginBottom: theme.spacing(10),
     },
   },
-  groupTitle: {
-    marginBottom: theme.spacing(2),
-    marginRight: theme.spacing(2),
-  },
   stateCountryGrid: {
     [theme.breakpoints.up('sm')]: {
       flexWrap: 'nowrap',
@@ -135,11 +103,6 @@ const useStyles = makeStyles(theme => ({
   creditInput: {
     width: theme.spacing(42.5),
   },
-  regenPerCredit: {
-    fontSize: theme.typography.pxToRem(16),
-    color: theme.palette.info.main,
-    marginBottom: theme.spacing(3),
-  },
   creditWidget: {
     display: 'flex',
     alignItems: 'center',
@@ -148,28 +111,6 @@ const useStyles = makeStyles(theme => ({
     height: theme.typography.pxToRem(26),
     alignSelf: 'flex-start',
     marginRight: theme.spacing(1.5),
-  },
-  regenCount: {
-    display: 'flex',
-    alignItems: 'baseline',
-  },
-  regenCountNumber: {
-    marginRight: theme.spacing(1.5),
-  },
-  regenLabel: {
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: '18px',
-      fontSize: theme.typography.pxToRem(14),
-    },
-    [theme.breakpoints.down('sm')]: {
-      lineHeight: '15.06px',
-      letterSpacing: '1px',
-      fontSize: theme.typography.pxToRem(12),
-    },
-  },
-  currencyEquivalent: {
-    color: theme.palette.info.dark,
-    fontSize: theme.typography.pxToRem(16),
   },
   marginRight: {
     marginRight: theme.spacing(4),
@@ -240,7 +181,11 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   return (
     <Modal open={open} onClose={onClose}>
       <div className={styles.root}>
-        <Title variant="h3" align="center" className={styles.mainTitle}>
+        <Title
+          variant="h3"
+          align="center"
+          sx={{ pt: 0, pb: { xs: 6, sm: 7.5 }, px: { xs: 0, sm: 7.5 } }}
+        >
           Buy Credits
         </Title>
         <Card className={cx(styles.thumbnailCard, styles.field)}>
@@ -256,13 +201,15 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
               backgroundImage
             />
             <div className={styles.flexColumn}>
-              <Title className={styles.creditTitle} variant="h5">
+              <Title sx={{ fontSize: { xs: 16, sm: 21 } }}>
                 {project.creditDenom && ReactHtmlParser(project.creditDenom)}{' '}
                 Credits
               </Title>
-              <Link to={`/projects/${project.id}`} target="_blank">
-                {project.name}
-              </Link>
+              <Subtitle size="lg" mobileSize="xs">
+                <Link to={`/projects/${project.id}`} target="_blank">
+                  {project.name}
+                </Link>
+              </Subtitle>
             </div>
           </CardContent>
         </Card>
@@ -294,15 +241,19 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
               <div>
                 <Form translate="yes">
                   <div className={styles.field}>
-                    <Title className={styles.groupTitle} variant="h5">
+                    <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                       Number of credits
                     </Title>
-                    <Description className={styles.regenPerCredit}>
+                    <Body
+                      size="md"
+                      mobileSize="md"
+                      sx={{ color: 'info.main', mb: 3 }}
+                    >
                       {`5 REGEN each.  ${
                         (project?.credits?.issued || 0) -
                         (project?.credits?.purchased || 0)
                       } credits available`}
-                    </Description>
+                    </Body>
                     <div className={styles.creditWidget}>
                       <div className={styles.marginRight}>
                         <Field
@@ -311,29 +262,26 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           name="creditCount"
                         />
                       </div>
-                      <Title className={styles.marginRight} variant="h6">
+                      <Title variant="h6" sx={{ mr: 4 }}>
                         =
                       </Title>
                       <div
                         className={cx(styles.flexColumn, styles.marginRight)}
                       >
-                        <div className={styles.regenCount}>
+                        <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
                           <RegenTokenIcon className={styles.regenIcon} />
-                          <Title
-                            variant="h4"
-                            className={styles.regenCountNumber}
-                          >
+                          <Title variant="h4" sx={{ mr: 1.5 }}>
                             500
                           </Title>
-                          <Label className={styles.regenLabel}>REGEN</Label>
-                        </div>
-                        <div className={styles.currencyEquivalent}>
+                          <Label size="sm">REGEN</Label>
+                        </Box>
+                        <Body size="md" mobileSize="md">
                           ($2345.00 USD)
-                        </div>
+                        </Body>
                       </div>
                     </div>
                   </div>
-                  <Title className={styles.groupTitle} variant="h5">
+                  <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                     Retirement of credits
                   </Title>
                   <Field
@@ -348,7 +296,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       value="autoretire"
                       checked={values['retirementAction'] === 'autoretire'}
                       label="Auto-retire credits"
-                      description="These credits will be retired upon purchase and will not be tradeable."
+                      description="These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
                     />
                     <Field
                       className={styles.toggle}
@@ -361,7 +309,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     />
                   </Field>
                   <Collapse in={values['retirementAction'] === 'autoretire'}>
-                    <Title className={styles.groupTitle} variant="h5">
+                    <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                       Retirement beneficiary
                     </Title>
                     <Field
@@ -373,7 +321,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       optional
                     />
                     <div className={styles.flex}>
-                      <Title className={styles.groupTitle} variant="h5">
+                      <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                         Credit retirement location
                       </Title>
                       <Tooltip
@@ -386,11 +334,11 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         </div>
                       </Tooltip>
                     </div>
-                    <Description className={styles.description}>
+                    <Body sx={{ color: 'info.dark', mb: { xs: 0, sm: 3 } }}>
                       Please enter a location for the retirement of these
                       credits. This prevents double counting of credits in
                       different locations. These credits will auto-retire.
-                    </Description>
+                    </Body>
                     <Grid container className={styles.stateCountryGrid}>
                       <Grid
                         item

@@ -1,12 +1,10 @@
 import React from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
 import AmountField from '../inputs/AmountField';
-import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
   CreditRetireFields,
@@ -14,6 +12,7 @@ import {
   validateCreditRetire,
   initialValues as initialValuesRetire,
   BottomCreditRetireFieldsProps,
+  RetirementReminder,
 } from './CreditRetireForm';
 import Submit from './Submit';
 import {
@@ -21,6 +20,7 @@ import {
   insufficientCredits,
   validateAmount,
 } from '../inputs/validation';
+import { Subtitle } from '../typography';
 import { RegenModalProps } from '../modal';
 
 /**
@@ -48,30 +48,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: theme.palette.info.light,
     },
   },
-  description: {
-    marginBottom: theme.spacing(5),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    '& a': {
-      cursor: 'pointer',
-    },
-  },
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
-    alignItems: 'initial',
-    '& .MuiCheckbox-root': {
-      alignSelf: 'end',
-    },
-  },
-  checkboxDescription: {
-    color: theme.palette.primary.contrastText,
-    fontSize: theme.spacing(4.5),
-    fontWeight: 'bold',
-    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -180,18 +158,21 @@ const CreditSendForm: React.FC<FormProps> = ({
             name="withRetire"
             className={styles.checkboxLabel}
             label={
-              <Description className={styles.checkboxDescription}>
+              <Subtitle size="lg" color="primary.contrastText">
                 Retire credits upon transfer
-              </Description>
+              </Subtitle>
             }
           />
 
           {values.withRetire && (
-            <CreditRetireFields
-              availableTradableAmount={availableTradableAmount}
-              batchDenom={batchDenom}
-              mapboxToken={mapboxToken}
-            />
+            <>
+              <RetirementReminder sx={{ mt: 8 }} />
+              <CreditRetireFields
+                availableTradableAmount={availableTradableAmount}
+                batchDenom={batchDenom}
+                mapboxToken={mapboxToken}
+              />
+            </>
           )}
 
           <Submit

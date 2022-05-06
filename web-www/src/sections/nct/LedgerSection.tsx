@@ -6,9 +6,8 @@ import { FluidObject } from 'gatsby-image';
 import { Box } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
-import Title from 'web-components/lib/components/title';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
-import { Label } from 'web-components/lib/components/label';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
 import type { NctLedgerSectionQuery } from '../../generated/graphql';
@@ -51,7 +50,7 @@ export const LedgerSection = (): JSX.Element => {
       }}
     >
       <BackgroundImage fluid={bg?.childImageSharp?.fluid as FluidObject}>
-        <Section sx={{ py: [20, 30] }}>
+        <Section sx={{ root: { py: [20, 30] } }}>
           <Box
             sx={{
               display: 'flex',
@@ -66,20 +65,12 @@ export const LedgerSection = (): JSX.Element => {
             <Title variant="h2" sx={{ mt: [4, 8], textAlign: 'center' }}>
               {data?.title}
             </Title>
-            <Label
-              sx={{
-                color: 'info.main',
-                fontSize: [14, 18],
-                textAlign: 'center',
-              }}
-            >
+            <Label color="info.main" align="center" mt={[4, 8]}>
               {data?.subtitle}
             </Label>
-            <BlockContent
-              noYMargin
-              content={data?._rawBody}
-              sxWrap={{ '& p': { fontSize: [18, 22], textAlign: 'center' } }}
-            />
+            <Body size="xl" align="center">
+              <BlockContent content={data?._rawBody} />
+            </Body>
             <OutlinedButton
               sx={{ px: [8, 12], mt: [4, 8] }}
               href={data?.button?.buttonLink?.buttonHref || ''}

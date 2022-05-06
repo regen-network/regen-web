@@ -7,6 +7,7 @@ import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
+import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { CreditSendModal } from 'web-components/lib/components/modal/CreditSendModal';
 import { CreditRetireModal } from 'web-components/lib/components/modal/CreditRetireModal';
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
@@ -211,12 +212,24 @@ export const txSuccessfulModal = (): JSX.Element => (
     ]}
   />
 );
+export const txErrorModal = (): JSX.Element => (
+  <TxErrorModal
+    open={true}
+    onClose={() => {}}
+    linkComponent={Link}
+    onViewPortfolio={() => alert('view on portofolio')}
+    cardTitle="Put in basket"
+    txHash="3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
+    txHashUrl="https://redwood.regen.aneka.io/txs/3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
+    error="Lorem ipsum dolor sit apsicing sit amut."
+  />
+);
 
 export const creditSendModal = (): JSX.Element => (
   <CreditSendModal
     sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'}
     batchDenom={'C01-20190101-20201010-02'}
-    availableTradableAmount="1000"
+    availableTradableAmount={1000}
     mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
     open={true}
     onClose={() => null}
@@ -228,7 +241,7 @@ export const creditRetireModal = (): JSX.Element => (
   <CreditRetireModal
     holder={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'}
     batchDenom={'C01-20190101-20201010-02'}
-    availableTradableAmount="1000"
+    availableTradableAmount={1000}
     mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
     open={true}
     onClose={() => null}

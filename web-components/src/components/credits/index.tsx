@@ -36,12 +36,12 @@ export default function Credits(props: CreditsProps): JSX.Element {
         <GaugeText
           number={props.numberOfHolders}
           label={`credit ${pluralize(props.numberOfHolders, 'holder')}`}
-          variant="body2"
+          textSize="xs"
         />
         <GaugeText
           number={props.numberOfProjects}
           label={pluralize(props.numberOfProjects, 'project')}
-          variant="body2"
+          textSize="xs"
         />
       </Grid>
     </Grid>

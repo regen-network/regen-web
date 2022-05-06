@@ -6,8 +6,9 @@ import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../../components/BackgroundSection';
-import Title from 'web-components/lib/components/title';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { SanityCaseStudyBottomSection } from '../../../generated/graphql';
+import { Box } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -19,20 +20,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(41),
       paddingBottom: theme.spacing(30),
-    },
-  },
-  title: {
-    color: theme.palette.primary.main,
-    position: 'relative',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(5.5),
-      lineHeight: '150%',
-    },
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: '140%',
-    },
-    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-      width: '69%',
     },
   },
   image: {
@@ -77,34 +64,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     bottom: theme.spacing(2.5),
     marginLeft: theme.spacing(-2),
   },
-  name: {
-    color: theme.palette.secondary.contrastText,
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    fontWeight: 800,
-  },
-  role: {
-    color: theme.palette.primary.main,
-    lineHeight: '150%',
-    paddingTop: theme.spacing(2),
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-  },
-  text: {
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: theme.spacing(4),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(5),
-    },
-  },
-  person: {
-    paddingTop: theme.spacing(10),
-  },
 }));
 
 const BottomSection: React.FC<SanityCaseStudyBottomSection> = ({
@@ -123,19 +82,34 @@ const BottomSection: React.FC<SanityCaseStudyBottomSection> = ({
       imageData={background?.image?.asset?.fluid}
       className={styles.root}
     >
-      <Title variant="h3" className={styles.title}>
+      <Title
+        variant="h3"
+        mobileVariant="h5"
+        color="primary"
+        sx={{
+          position: 'relative',
+          maxWidth: {
+            tablet: '69%',
+          },
+        }}
+      >
         <span className={clsx(styles.firstQuote, styles.quotes)}>“</span>
         <span className={styles.textQuote}>{quote}</span>
         <span className={clsx(styles.secondQuote, styles.quotes)}>”</span>
       </Title>
-      <Grid className={styles.person} container alignItems="center">
-        <Img className={styles.image} fluid={personImage?.image?.asset?.fluid as FluidObject} />
-        <div className={styles.text}>
-          <Title variant="h5" className={styles.name}>
+      <Grid container alignItems="center" sx={{ pt: 10 }}>
+        <Img
+          className={styles.image}
+          fluid={personImage?.image?.asset?.fluid as FluidObject}
+        />
+        <Box sx={{ pl: [4, 5] }}>
+          <Label size="lg" color="secondary.contrastText">
             {personName}
-          </Title>
-          <div className={styles.role}>{personRole}</div>
-        </div>
+          </Label>
+          <Body size="lg" mobileSize="sm" color="primary" pt={2}>
+            {personRole}
+          </Body>
+        </Box>
       </Grid>
     </BackgroundSection>
   );

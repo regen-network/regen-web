@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
+import { Box, Grid } from '@mui/material';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import { Formik, Form, Field } from 'formik';
 
@@ -92,7 +92,7 @@ const query = graphql`
   }
 `;
 
-const uppercase = (str: string | null) => {
+const uppercase = (str: string | null): string => {
   if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
@@ -130,7 +130,11 @@ const MediaPage: React.FC<PageProps> = ({ location }) => {
     <>
       <SEO title="Media" location={location} />
       <div className={styles.background}>
-        <Section title="Media" titleVariant="h1" classes={{ root: styles.section, title: styles.title }}>
+        <Section
+          title="Media"
+          titleVariant="h1"
+          classes={{ root: styles.section, title: styles.title }}
+        >
           <Formik
             initialValues={{
               category: 'all',
@@ -138,19 +142,33 @@ const MediaPage: React.FC<PageProps> = ({ location }) => {
             onSubmit={() => {}}
           >
             {({ values }) => {
-              const currentItems = values.category === 'all' ? items : grouped[values.category];
+              const currentItems =
+                values.category === 'all' ? items : grouped[values.category];
               return (
                 <>
                   <Form className={styles.form}>
-                    <Grid container wrap="nowrap" alignItems="center">
+                    <Box
+                      sx={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        width: '100%',
+                      }}
+                    >
                       <span className={styles.show}>show me:</span>
-                      <Field
-                        className={styles.select}
-                        options={categories}
-                        component={SelectTextField}
-                        name="category"
-                      />
-                    </Grid>
+                      <Box
+                        sx={theme => ({
+                          display: 'flex',
+                          width: { xs: '100%', sm: theme.spacing(67.5) },
+                        })}
+                      >
+                        <Field
+                          className={styles.select}
+                          options={categories}
+                          component={SelectTextField}
+                          name="category"
+                        />
+                      </Box>
+                    </Box>
                   </Form>
                   <Grid container spacing={6}>
                     {currentItems.map((item, i) => (

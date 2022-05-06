@@ -7,7 +7,7 @@ import Slider, { Settings as SlickSettings } from 'react-slick';
 import cx from 'clsx';
 
 import PrevNextButton from '../buttons/PrevNextButton';
-import Title from '../title';
+import { Title } from '../typography';
 
 export interface ResponsiveSliderProps {
   items?: JSX.Element[];

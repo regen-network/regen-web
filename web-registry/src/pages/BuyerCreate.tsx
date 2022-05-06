@@ -9,7 +9,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import Geocoder from 'web-components/lib/components/map/Geocoder';
 import { getErrorMessage } from 'web-components/lib/components/form/errors';
 import {

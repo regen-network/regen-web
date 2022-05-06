@@ -1,31 +1,18 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
+import { CardContent, useTheme } from '@mui/material';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import MediaCard from '../cards/MediaCard';
 import { parseText } from '../../utils/textParser';
+import { Body, Title } from '../typography';
+import { Theme } from '~/theme/muiTheme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     height: '100%',
     borderRadius: theme.spacing(2),
-  },
-  title: {
-    fontFamily: theme.typography.h1.fontFamily,
-    fontWeight: 900,
-  },
-  btn: {
-    marginTop: theme.spacing(4),
-    width: '100%',
-  },
-  cardContent: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
   },
 }));
 
@@ -49,19 +36,22 @@ const ImageActionCard: React.FC<Props> = props => {
       borderRadius="10px"
       borderColor={theme.palette.grey[100]}
     >
-      <CardContent className={styles.cardContent}>
+      <CardContent
+        sx={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}
+      >
         <div>
-          <Typography gutterBottom className={styles.title} variant="h5">
-            {parseText(props.title)}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="div">
-            {parseText(props.description)}
-          </Typography>
+          <Title variant="h5">{parseText(props.title)}</Title>
+          <Body>{parseText(props.description)}</Body>
         </div>
 
         <OutlinedButton
           size="small"
-          className={styles.btn}
+          sx={{ mt: 4, width: '100%' }}
           onClick={props.onClick}
         >
           {props.btnText}

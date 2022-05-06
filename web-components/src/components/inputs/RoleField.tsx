@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
-import { TextField } from '@mui/material';
+import { SxProps, TextField } from '@mui/material';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { FieldProps, FormikErrors } from 'formik';
 import cx from 'clsx';
 
 import FieldFormControl from './FieldFormControl';
-import { Label } from '../label';
+import { Label } from '../typography';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -30,11 +30,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-  },
-  label: {
-    fontSize: theme.typography.pxToRem(12),
-    color: theme.palette.secondary.main,
-    marginLeft: theme.spacing(2),
   },
   input: {
     borderRadius: 2,
@@ -121,6 +116,10 @@ function getLabel(o: any): string | undefined {
       : o['http://schema.org/legalName']
     : undefined;
 }
+
+const sxs = {
+  formLabel: { color: 'primary.contrastText', ml: 1 } as SxProps,
+};
 
 const RoleField: React.FC<Props> = ({
   className,
@@ -256,7 +255,7 @@ const RoleField: React.FC<Props> = ({
                     }}
                   >
                     <OrganizationIcon />
-                    <Label className={styles.label}>
+                    <Label size="xs" sx={sxs.formLabel}>
                       + Add New Organization
                     </Label>
                   </div>
@@ -274,7 +273,9 @@ const RoleField: React.FC<Props> = ({
                     }}
                   >
                     <UserIcon />
-                    <Label className={styles.label}>+ Add New Individual</Label>
+                    <Label size="xs" sx={sxs.formLabel}>
+                      + Add New Individual
+                    </Label>
                   </div>
                 ) as unknown as RoleOptionType,
               );

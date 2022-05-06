@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 import MinusIcon from '../icons/MinusIcon';
 import PlusIcon from '../icons/PlusIcon';
-import Title from '../title';
+import { Title } from '../typography';
 import Question, { QuestionItem } from './Question';
 
 interface StepFAQProps {

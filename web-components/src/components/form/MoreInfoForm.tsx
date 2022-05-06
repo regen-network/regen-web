@@ -1,11 +1,10 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 
-import Title from '../title';
+import { Body, Title } from '../typography';
 import TextField from '../inputs/TextField';
 import {
   requiredMessage,
@@ -32,26 +31,8 @@ interface Values {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(4.75),
-    },
-  },
   form: {
     paddingTop: theme.spacing(7.5),
-  },
-  usd: {
-    fontSize: theme.spacing(4),
-    marginTop: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(4.875),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: theme.spacing(2.75),
-    },
   },
   textField: {
     [theme.breakpoints.up('sm')]: {
@@ -71,12 +52,9 @@ export default function MoreInfoForm({
   const classes = useStyles();
   return (
     <div>
-      <Title align="center" variant="h4" className={classes.title}>
+      <Title align="center" variant="h4" sx={{ mb: [4.75, 5] }}>
         Yes, I’m interested in buying credits for myself or my organization!
       </Title>
-      {/* <Description align="center">
-        Fill out the form below, and someone from our team will get back to you soon.
-      </Description> */}
       <Formik
         initialValues={{
           budget: '',
@@ -205,7 +183,7 @@ export default function MoreInfoForm({
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography className={classes.usd}>USD</Typography>
+                    <Body sx={{ mt: 7, ml: [2.75, 4.875] }}>USD</Body>
                   </Grid>
                 </Grid>
                 <Field

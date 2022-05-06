@@ -1,14 +1,9 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { makeStyles, useTheme } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
+import { useTheme } from '@mui/styles';
+import { Grid, List, ListItem, Link, Box } from '@mui/material';
 
-import Title from '../title';
+import { Body, Label } from '../typography';
 import Section from '../section';
 import { HeaderLogoLink } from '../header/HeaderLogoLink';
 
@@ -19,137 +14,39 @@ export interface LinkItem {
   target?: '_blank' | '_self';
 }
 
-interface FooterItem extends LinkItem {
+interface FooterItemItem extends LinkItem {
   title: string;
 }
 
 export interface FooterItemProps {
   title: string;
-  items: FooterItem[];
+  items: FooterItemItem[];
   linkComponent?: React.FC<{ href: string }>;
 }
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    backgroundColor: theme.palette.info.dark,
-  },
-  section: {
-    '& a': {
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-      },
-      '&:hover': {
-        color: theme.palette.info.contrastText,
-      },
-    },
-  },
-  title: {
-    textTransform: 'uppercase',
-    color: theme.palette.primary.main,
-    fontWeight: 800,
-    letterSpacing: '1px',
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: theme.spacing(6.5),
-      marginBottom: theme.spacing(3.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      lineHeight: theme.spacing(4.5),
-      fontSize: theme.spacing(3.5),
-      marginBottom: theme.spacing(4.5),
-    },
-  },
-  subTitle: {
-    lineHeight: '150%',
-    color: theme.palette.primary.main,
-    padding: 0,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-      marginBottom: theme.spacing(1.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-      marginBottom: theme.spacing(1),
-    },
-  },
-  list: {
-    padding: 0,
-  },
-  mail: {
-    paddingTop: theme.spacing(4),
-  },
-  textField: {
-    paddingRight: theme.spacing(2.5),
-    '& .MuiInputBase-root': {
-      fontSize: theme.spacing(3.5),
-      height: theme.spacing(12.5),
-    },
-  },
-  button: {
-    fontSize: theme.spacing(3.5),
-    height: theme.spacing(12.5),
-    padding: theme.spacing(2.5),
-  },
-  bottomGrid: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(8.25),
-      marginBottom: theme.spacing(8.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(9),
-    },
-  },
-  bottom: {
-    color: theme.palette.primary.main,
-    lineHeight: '150%',
-    fontSize: theme.spacing(3.5),
-  },
-  newsletter: {
-    fontWeight: 'bold',
-    color: theme.palette.secondary.main,
-    lineHeight: '145%',
-    fontSize: theme.spacing(3),
-    paddingBottom: theme.spacing(5),
-    paddingTop: theme.spacing(2.5),
-    display: 'block',
-  },
-  separator: {
-    borderTop: 0,
-    borderColor: theme.palette.grey[50],
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(19.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(10),
-    },
-  },
-  link: {
-    color: theme.palette.secondary.main,
-  },
-}));
 
 const FooterItem: React.FC<FooterItemProps> = ({
   title,
   items,
   linkComponent: LinkComponent = Link,
 }) => {
-  const styles = useStyles({});
-
   return (
     <>
-      <Title className={styles.title} variant="h5">
+      <Label size="lg" mobileSize="sm" sx={{ mb: { xs: 3.5, sm: 3.75 } }}>
         {ReactHtmlParser(title)}
-      </Title>
-      <List className={styles.list}>
+      </Label>
+      <List sx={{ p: 0 }}>
         {items.map((item, index) => (
-          <ListItem className={styles.subTitle} key={index}>
-            <LinkComponent
-              href={item.href}
-              rel="noopener noreferrer"
-              target={item.target}
-            >
-              {ReactHtmlParser(item.title)}
-            </LinkComponent>
+          <ListItem sx={{ py: 0.75, px: 0 }} key={index}>
+            <Box component={'span'} sx={{ typography: ['body1', 'textLarge'] }}>
+              <LinkComponent
+                style={{ fontWeight: 'normal' }}
+                href={item.href}
+                rel="noopener noreferrer"
+                target={item.target}
+              >
+                {ReactHtmlParser(item.title)}
+              </LinkComponent>
+            </Box>
           </ListItem>
         ))}
       </List>
@@ -170,12 +67,23 @@ const Footer: React.FC<{
   linkComponent: LinkComponent = Link,
   iconLink: IconLink = HeaderLogoLink,
 }) => {
-  const styles = useStyles();
   const theme = useTheme();
 
   return (
-    <div className={styles.root}>
-      <Section classes={{ root: styles.section }}>
+    <Box
+      sx={{
+        backgroundColor: 'info.dark',
+        color: 'primary.main',
+        '& a': {
+          fontWeight: 'normal',
+          transition: 'color 200ms ease-in-out',
+          ':hover': {
+            color: 'info.contrastText',
+          },
+        },
+      }}
+    >
+      <Section>
         <Grid container spacing={10}>
           <Grid item xs={12} lg={3}>
             <Box
@@ -187,13 +95,16 @@ const Footer: React.FC<{
             >
               <IconLink color={theme.palette.primary.main} />
               <Box mt={4}>
-                <Typography className={styles.subTitle}>
+                <Body size="lg" color="primary">
                   A project of{' '}
-                  <a href="https://www.regen.network" className={styles.link}>
+                  <Link
+                    href="https://www.regen.network"
+                    sx={{ color: 'secondary.main' }}
+                  >
                     Regen Network
                     <br /> Development, Inc.
-                  </a>
-                </Typography>
+                  </Link>
+                </Body>
               </Box>
             </Box>
           </Grid>
@@ -223,23 +134,34 @@ const Footer: React.FC<{
         <Box mt={[10, 16.25]}>
           <SocialLinks />
         </Box>
-
-        <hr className={styles.separator} />
+        <Box
+          component="hr"
+          sx={{
+            borderTop: 1,
+            borderColor: 'grey.50',
+            mt: { xs: 10, sm: 19.75 },
+          }}
+        />
         <Grid
-          className={styles.bottomGrid}
+          sx={{
+            mt: { xs: 6, sm: 8.25 },
+            mb: { xs: 9, sm: 8.25 },
+          }}
           container
           justifyContent="space-between"
         >
-          <Grid item className={styles.bottom}>
-            <Link href={termsUrl}>Terms</Link> |{' '}
-            <Link href={privacyUrl}>Privacy</Link>
+          <Grid item>
+            <Body size="sm">
+              <Link href={termsUrl}>Terms</Link> |{' '}
+              <Link href={privacyUrl}>Privacy</Link>
+            </Body>
           </Grid>
-          <Grid item className={styles.bottom}>
-            © 2021 Regen Network Development, Inc
+          <Grid item>
+            <Body size="sm">© 2021 Regen Network Development, Inc</Body>
           </Grid>
         </Grid>
       </Section>
-    </div>
+    </Box>
   );
 };
 

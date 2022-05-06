@@ -5,10 +5,10 @@ import ReactHtmlParser from 'react-html-parser';
 
 import MediaCard from './MediaCard';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
-import Description from '../description';
 import ProjectPlaceInfo from '../place/ProjectPlaceInfo';
 import UserInfo, { User } from '../user/UserInfo';
 import { StandardInfo, formatStandardInfo } from '../../utils/format';
+import { Body, Label } from '../typography';
 
 interface Info extends StandardInfo {
   url?: string | null;
@@ -174,15 +174,13 @@ function PurchaseDetails({
   info: string;
   url?: string | null;
 }): JSX.Element {
-  const classes = useStyles();
   const parsedInfo = ReactHtmlParser(info);
-
   return (
     <div>
-      <span className={clsx(classes.details, classes.detailsContent)}>
+      <Label color="info.dark" size="sm" mobileSize="sm">
         {title}:{' '}
-      </span>
-      <Description className={classes.detailsContent}>
+      </Label>
+      <Body size="sm" mobileSize="sm" display="inline">
         {url ? (
           <a href={url} target="_blank" rel="noopener noreferrer">
             {parsedInfo}»
@@ -190,7 +188,7 @@ function PurchaseDetails({
         ) : (
           parsedInfo
         )}
-      </Description>
+      </Body>
     </div>
   );
 }
@@ -256,7 +254,7 @@ export default function ProjectCard({
       {registry && <div className={classes.separator} />}
       {registry && (
         <div className={classes.userInfo}>
-          <UserInfo user={registry} size="project" />
+          <UserInfo user={registry} size="xs" />
         </div>
       )}
       {purchaseInfo && <div className={classes.separator} />}

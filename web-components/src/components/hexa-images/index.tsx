@@ -3,8 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import ReactHtmlParser from 'react-html-parser';
 
-import Title from '../title';
-import Description from '../description';
+import { Body, Label, Title } from '../typography';
 import { BlockContent, SanityBlockOr } from '../block-content';
 
 interface HexaImage {
@@ -146,52 +145,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       margin: '0 auto',
     },
   },
-  title: {
-    color: theme.palette.secondary.main,
-    lineHeight: '140%',
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      paddingTop: theme.spacing(8),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(3.5),
-    },
-  },
-  role: {
-    textTransform: 'uppercase',
-    fontWeight: 800,
-    letterSpacing: '1px',
-    color: theme.palette.info.main,
-    '& p': {
-      margin: 0,
-    },
-    '& a': {
-      textDecoration: 'none',
-      color: theme.palette.info.main,
-      '&:link, &:visited, &:hover, &:active': {
-        textDecoration: 'none',
-        color: theme.palette.info.main,
-      },
-    },
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: theme.spacing(5.75),
-      paddingBottom: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-      lineHeight: theme.spacing(4.5),
-      paddingBottom: theme.spacing(3.5),
-    },
-  },
-  description: {
-    fontSize: theme.spacing(4.5),
-    lineHeight: '150%',
-    '& p': {
-      margin: 0,
-    },
-  },
   text: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       height: theme.spacing(70),
@@ -217,15 +170,20 @@ export default function HexaImages({ items }: HexaImagesProps): JSX.Element {
   return (
     <Grid className={classes.grid} container wrap="nowrap">
       <Grid item className={classes.text}>
-        <Title variant="h3" className={classes.title}>
+        <Title
+          variant="h3"
+          sx={{
+            color: 'secondary.main',
+            pt: { xs: 8, tablet: 0 },
+            pb: [3.5, 4.5],
+          }}
+        >
           {items[selected].name}
         </Title>
-        <Title variant="h6" className={classes.role}>
+        <Label as="div" sx={{ color: 'info.main', pb: [3.5, 4.5] }}>
           {renderText(items[selected].role)}
-        </Title>
-        <Description className={classes.description}>
-          {renderText(items[selected].description)}
-        </Description>
+        </Label>
+        <Body size="lg">{renderText(items[selected].description)}</Body>
       </Grid>
       <Grid container className={classes.images}>
         {items.map((item, i) => (

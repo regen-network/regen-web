@@ -1,9 +1,8 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Typography from '@mui/material/Typography';
-import cx from 'clsx';
+import { Box, styled } from '@mui/material';
 
 import PinIcon from '../icons/PinIcon';
+import { Body } from '../typography';
 
 interface PlaceInfoProps {
   children?: any;
@@ -15,29 +14,27 @@ interface PlaceInfoProps {
   showIcon?: boolean;
 }
 
-interface StyleProps {
-  fontSize?: string;
+interface BodyStyleProps {
   color?: string;
-  smFontSize?: string;
+  fontSizeOverride?: string;
+  smFontSizeOverride?: string;
 }
 
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: {
-    display: 'flex',
-  },
-  content: props => ({
+// TODO: this was converted from old MUI makestyles, and I haven't throughly tested the logic works
+const StyledBody = styled(Body, {
+  shouldForwardProp: prop =>
+    prop !== 'fontSizeOverride' && prop !== 'smFontSizeOverride',
+})<BodyStyleProps>(
+  ({ theme, fontSizeOverride, smFontSizeOverride, color }) => ({
+    color: color || theme.palette.primary.contrastText,
+    [theme.breakpoints.up('xs')]: {
+      fontSize: smFontSizeOverride || fontSizeOverride || theme.spacing(3.5),
+    },
     [theme.breakpoints.up('sm')]: {
-      fontSize: props.smFontSize || props.fontSize || theme.spacing(4.5),
+      fontSize: fontSizeOverride || theme.spacing(4.5),
     },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: props.fontSize || theme.spacing(3.5),
-    },
-    color: props.color || theme.palette.primary.contrastText,
   }),
-  icon: {
-    marginRight: theme.spacing(1.6),
-  },
-}));
+);
 
 export default function PlaceInfo({
   children,
@@ -47,15 +44,20 @@ export default function PlaceInfo({
   iconClassName,
   showIcon,
 }: PlaceInfoProps): JSX.Element {
-  const styles = useStyles({ smFontSize, fontSize, color });
   return (
-    <div className={styles.root}>
+    <Box sx={{ display: 'flex' }}>
       {showIcon && (
-        <span className={cx(styles.icon, iconClassName)}>
+        <Box component="span" className={iconClassName} sx={{ mr: 1.6 }}>
           <PinIcon />
-        </span>
+        </Box>
       )}
-      <Typography className={styles.content}>{children}</Typography>
-    </div>
+      <StyledBody
+        color={color}
+        fontSizeOverride={fontSize}
+        smFontSizeOverride={smFontSize}
+      >
+        {children}
+      </StyledBody>
+    </Box>
   );
 }

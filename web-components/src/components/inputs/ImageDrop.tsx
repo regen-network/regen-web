@@ -11,7 +11,7 @@ import FieldFormControl from './FieldFormControl';
 import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
-import { Label } from '../label';
+import { Label } from '../typography';
 import { getImageSrc } from '../image-crop/canvas-utils';
 
 export interface ImageDropProps extends FieldProps {
@@ -58,10 +58,6 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     background: theme.palette.grey[50],
     border: `2px dashed ${theme.palette.grey[100]}`,
-  },
-  label: {
-    marginBottom: theme.spacing(2),
-    fontSize: theme.typography.pxToRem(12),
   },
   or: {
     marginBottom: theme.spacing(4),
@@ -222,7 +218,9 @@ function ImageDrop({
               >
                 {isDesktop && !hideDragText && (
                   <>
-                    <Label className={styles.label}>drag and drop</Label>
+                    <Label size="xs" mb={2}>
+                      drag and drop
+                    </Label>
                     <span className={styles.or}>or</span>
                   </>
                 )}

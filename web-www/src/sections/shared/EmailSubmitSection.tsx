@@ -6,17 +6,13 @@ import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import NewsletterForm from 'web-components/lib/components/form/NewsletterForm';
-import Title from 'web-components/lib/components/title';
+import { Label, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { EmailSubmitSectionQuery } from '../../generated/graphql';
 
 interface Props {
   image?: object;
   altContent?: Content;
-  classes?: {
-    root?: string;
-    title?: string;
-  };
 }
 
 interface Content {
@@ -78,11 +74,7 @@ const query = graphql`
   }
 `;
 
-const EmailSubmitSection: React.FC<Props> = ({
-  image,
-  altContent,
-  classes,
-}) => {
+const EmailSubmitSection: React.FC<Props> = ({ image, altContent }) => {
   const styles = useStyles();
   const data = useStaticQuery<EmailSubmitSectionQuery>(query);
   const content = data.sanitySharedSections?.newsletter;
@@ -93,17 +85,28 @@ const EmailSubmitSection: React.FC<Props> = ({
       fluid={imageData as any}
       backgroundColor={`#040e18`}
     >
-      <div className={clsx(styles.root, classes?.root)} id="newsletter-signup">
-        <Title className={clsx(styles.title, classes?.title)} variant="h2">
+      <div className={clsx(styles.root)} id="newsletter-signup">
+        <Title
+          variant="h2"
+          mobileVariant="h3"
+          sx={{ color: 'primary.main', textAlign: 'center' }}
+        >
           {altContent?.header || content?.title}
         </Title>
-        <Title variant="h6" className={styles.description}>
+        <Label
+          sx={{
+            color: 'primary.main',
+            textAlign: 'center',
+            pt: [5, 7.5],
+            pb: [4, 6.25],
+          }}
+        >
           {altContent?.description ? (
             altContent.description
           ) : (
             <BlockContent content={content?._rawBody} />
           )}
-        </Title>
+        </Label>
         <NewsletterForm
           apiUri={process.env.GATSBY_API_URI}
           submitLabel={altContent?.buttonText}

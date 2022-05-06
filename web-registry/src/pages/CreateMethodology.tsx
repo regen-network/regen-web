@@ -169,6 +169,7 @@ const CreateMethodology: React.FC = () => {
       </CardMedia>
 
       <HeroAction
+        lightBg
         classes={{ main: styles.bottomSection }}
         bottomBanner={content?.peerReviewSection}
         openModal={openModal}

@@ -5,10 +5,10 @@ import Grid from '@mui/material/Grid';
 import Slider from 'react-slick';
 
 import Section from 'web-components/lib/components/section';
-import Description from 'web-components/lib/components/description';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
 import Action, { ActionProps } from 'web-components/lib/components/action';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Body } from 'web-components/lib/components/typography';
 
 export interface LandManagementActionsProps {
   actions: ActionProps[];
@@ -70,16 +70,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginLeft: theme.spacing(2.5),
     },
   },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(7),
-      fontSize: theme.typography.pxToRem(16),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(4),
-      fontSize: theme.typography.pxToRem(14),
-    },
-  },
 }));
 
 function LandManagementActions({
@@ -138,7 +128,7 @@ function LandManagementActions({
         </>
       }
     >
-      <Description className={styles.description}>{subtitle}</Description>
+      <Body mb={[4, 7]}>{subtitle}</Body>
       {isMobile ? (
         <div className={styles.swipe}>
           {actions.map(action => (

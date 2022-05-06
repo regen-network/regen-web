@@ -99,7 +99,8 @@ const RegistryNav: React.FC = () => {
         pathname,
         title:
           titleAlias[p?.metadata?.['schema:name']] ||
-          p?.metadata?.['schema:name'],
+          p?.metadata?.['schema:name'] ||
+          p?.handle,
         href: `/projects/${p?.handle}`,
         linkComponent: RegistryNavLink,
       })),
@@ -205,7 +206,7 @@ const RegistryNav: React.FC = () => {
       }
       transparent={isTransparent}
       absolute={isTransparent}
-      borderBottom={!isTransparent}
+      borderBottom={false} // TODO: there's some bug where this won't change on routes - hardcoded for now
       fullWidth={fullWidthRegExp.test(pathname)}
       pathName={pathname}
       extras={

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Box, Grid, SxProps, Theme, Typography } from '@mui/material';
+import { Box, Grid, SxProps, Theme } from '@mui/material';
 import dayjs from 'dayjs';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
 import { LabeledDetail } from 'web-components/lib/components/text-layouts';
+import { Body } from 'web-components/lib/components/typography';
 import { LinkWithArrow } from '../atoms';
 
 export const BatchInfoGrid: React.FC<{
@@ -58,10 +59,8 @@ const GridItem: React.FC = ({ children }) => (
 
 const BatchDetail: React.FC<{ label: string }> = ({ label, children }) => (
   <LabeledDetail label={label}>
-    <Typography
-      sx={{ display: 'flex', alignItems: 'center', fontSize: [16, 18] }}
-    >
+    <Body size="lg" sx={{ display: 'flex', alignItems: 'center' }}>
       {children}
-    </Typography>
+    </Body>
   </LabeledDetail>
 );

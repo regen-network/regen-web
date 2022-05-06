@@ -5,8 +5,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { PresskitEnableSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
 
@@ -33,14 +32,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.up('xl')]: {
       paddingRight: theme.spacing(5),
-    },
-  },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
     },
   },
   text: {
@@ -110,22 +101,26 @@ const query = graphql`
 
 const EnableSection = (): JSX.Element => {
   const styles = useStyles();
-  const { background, sanityPresskitPage: data } = useStaticQuery<PresskitEnableSectionQuery>(query);
+  const { background, sanityPresskitPage: data } =
+    useStaticQuery<PresskitEnableSectionQuery>(query);
   const content = data?.enableSection;
   return (
     <div className={styles.root}>
       <Grid container alignItems="center">
         <Grid xs={12} item className={styles.imageContainer}>
-          <Img className={styles.image} fluid={content?.image?.image?.asset?.fluid as FluidObject} />
+          <Img
+            className={styles.image}
+            fluid={content?.image?.image?.asset?.fluid as FluidObject}
+          />
           <div className={styles.imageBackground}>
             <Img fluid={background?.childImageSharp?.fluid as FluidObject} />
           </div>
         </Grid>
         <Grid xs={12} item className={styles.text}>
           <Title variant="h2">{content?.title}</Title>
-          <Description className={styles.description}>
+          <Body size="lg" sx={{ pt: [4, 7] }}>
             <BlockContent content={content?._rawBody} />
-          </Description>
+          </Body>
         </Grid>
       </Grid>
     </div>

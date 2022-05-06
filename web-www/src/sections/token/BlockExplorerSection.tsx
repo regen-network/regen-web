@@ -5,10 +5,9 @@ import BackgroundImage from 'gatsby-background-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import Title from 'web-components/lib/components/title';
+import { Body, Title } from 'web-components/lib/components/typography';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import DecentralizeIcon from 'web-components/lib/components/icons/DecentralizeIcon';
-import { MarketingDescription as Description } from '../../components/Description';
 import { TokenBlockExplorerSectionQuery } from '../../generated/graphql';
 import { FluidObject } from 'gatsby-image';
 import { BlockContent } from 'web-components/src/components/block-content';
@@ -34,40 +33,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   button: {
     width: theme.spacing(90),
   },
-  title: {
-    maxWidth: theme.spacing(172),
-    color: theme.palette.primary.main,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(38),
-      padding: theme.spacing(9.5, 0),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
-      padding: theme.spacing(7.5, 0),
-    },
-  },
   content: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-  },
-  description: {
-    color: theme.palette.primary.main,
-    fontSize: theme.spacing(5.75),
-    textAlign: 'center',
-    '& a': {
-      color: theme.palette.secondary.light,
-      '&:link': {
-        textDecoration: 'underline',
-      },
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(9.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(5),
-      padding: theme.spacing(0, 4, 7),
-    },
   },
 }));
 
@@ -106,10 +75,24 @@ const BlockExplorerSection = (): JSX.Element => {
       <Section classes={{ root: styles.root }}>
         <div className={styles.content}>
           <DecentralizeIcon />
-          <Title className={styles.title}>{data?.title}</Title>
-          <Description className={styles.description}>
-            <BlockContent noYMargin content={data?._rawBody} />
-          </Description>
+          <Title
+            variant="h2"
+            mobileVariant="h3"
+            sx={{
+              color: 'primary.main',
+              maxWidth: theme => theme.spacing(172),
+              py: [7.5, 9.5],
+            }}
+          >
+            {data?.title}
+          </Title>
+          <Body
+            size="xl"
+            align="center"
+            sx={{ color: 'primary.main', px: [5, 0], pb: [7, 9.5] }}
+          >
+            <BlockContent content={data?._rawBody} />
+          </Body>
           <ContainedButton
             size="large"
             className={styles.button}

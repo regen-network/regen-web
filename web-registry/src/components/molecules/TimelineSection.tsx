@@ -61,11 +61,7 @@ const TimelineSection: React.FC<Props> = ({ content }) => {
 
   return (
     <div className={styles.root}>
-      <Section
-        title={content.header || ''}
-        classes={{ title: styles.title }}
-        titleVariant="subtitle1"
-      >
+      <Section title={content.header || ''} classes={{ title: styles.title }}>
         <div className={styles.timeline}>
           {items.length > 0 && <Timeline items={items} />}
         </div>

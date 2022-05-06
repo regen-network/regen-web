@@ -1,12 +1,13 @@
 import React from 'react';
 import { Variant } from '@mui/material/styles/createTypography';
+import { Box, Link, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-
-import Grid from '@mui/material/Grid';
-import clsx from 'clsx';
 import { FluidObject } from 'gatsby-image';
 
+import clsx from 'clsx';
+
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Body, Title } from 'web-components/lib/components/typography';
 import BackgroundSection from './BackgroundSection';
 
 interface StyleProps {
@@ -34,75 +35,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingBottom: theme.spacing(15.5),
     },
   },
-  label: {
-    fontFamily: theme.typography.h1.fontFamily,
-    color: theme.palette.primary.main,
-    fontWeight: 900,
-    textAlign: 'center',
-    lineHeight: '145%',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(6),
-      paddingTop: theme.spacing(5.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-      paddingTop: theme.spacing(1.5),
-    },
-  },
-  iconContainer: props => ({
-    backgroundColor: theme.palette.secondary.main,
-    borderRadius: '50%',
-    display: 'block',
-    textDecoration: 'none',
-    '&:link, &:visited, &:hover, &:active': {
-      textDecoration: 'none',
-    },
-    '&:hover': {
-      backgroundColor: theme.palette.secondary.light,
-    },
-    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-      width: theme.spacing(30),
-      height: theme.spacing(30),
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: theme.spacing(15),
-      height: theme.spacing(15),
-    },
-    '& svg': {
-      color: 'transparent',
-      width: '100%',
-      height: '100%',
-      [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-        padding: props.small ? theme.spacing(6) : 0,
-      },
-      [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-        padding: props.small ? theme.spacing(3) : 0,
-      },
-    },
-  }),
-  icon: {
-    color: 'transparent',
-    width: '100%',
-    height: '100%',
-  },
-  link: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
-  followerCount: {
-    display: 'flex',
-    justifyContent: 'center',
-    textAlign: 'center',
-    color: theme.palette.primary.main,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-      paddingTop: theme.spacing(5.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(14),
-      paddingTop: theme.spacing(1.5),
-    },
-  },
 }));
 
 export interface IconLabelProps {
@@ -127,15 +59,78 @@ interface ConnectSectionProps {
   };
 }
 
-const IconLabel = ({ icon, label, subLabel, href, small = false }: IconLabelProps): JSX.Element => {
-  const classes = useStyles({ small });
+const IconLabel = ({
+  icon,
+  label,
+  subLabel,
+  href,
+  small = false,
+}: IconLabelProps): JSX.Element => {
   return (
     <div>
-      <a href={href} rel="noopener noreferrer" target="_blank" className={classes.link}>
-        <div className={classes.iconContainer}>{icon}</div>
-      </a>
-      <div className={classes.label}>{label}</div>
-      {subLabel && <div className={classes.followerCount}>{subLabel}</div>}
+      <Link
+        href={href}
+        rel="noopener noreferrer"
+        target="_blank"
+        sx={{ display: 'flex', justifyContent: 'center' }}
+      >
+        <Box
+          sx={theme => ({
+            bgcolor: 'secondary.main',
+            borderRadius: '50%',
+            transitionDuration: '200ms',
+            transitionProperty: 'color, background-color',
+            transitionTimingFunction: 'ease-in-out',
+            width: {
+              xs: theme.spacing(15),
+              tablet: theme.spacing(30),
+            },
+            height: {
+              xs: theme.spacing(15),
+              tablet: theme.spacing(30),
+            },
+            ':hover': {
+              bgcolor: 'secondary.light',
+            },
+            '& svg': {
+              color: 'transparent',
+              width: '100%',
+              height: '100%',
+              p: {
+                xs: small ? 3 : 0,
+                tablet: small ? 6 : 0,
+              },
+            },
+          })}
+        >
+          {icon}
+        </Box>
+      </Link>
+      <Title
+        color="primary"
+        align="center"
+        sx={{
+          fontSize: theme => [14, 16, theme.typography.h4.fontSize],
+          pt: [1.5, 5.25],
+        }}
+      >
+        {label}
+      </Title>
+      {subLabel && (
+        <Body
+          size="lg"
+          mobileSize="sm"
+          color="primary.main"
+          sx={{
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            pt: [1.5, 5.25],
+          }}
+        >
+          {subLabel}
+        </Body>
+      )}
     </div>
   );
 };
@@ -160,9 +155,9 @@ const ConnectSection = ({
       titleClassName={clsx(titleClassName, classes.title)}
       titleVariant={titleVariant}
     >
-      <Grid container spacing={4} justifyContent="space-between">
+      <Grid container spacing={4} justifyContent="center" rowGap={8}>
         {icons.map((item, i) => (
-          <Grid item xs={4} sm={2} className={itemClassName} key={i}>
+          <Grid item xs={4} md={2} className={itemClassName} key={i}>
             <IconLabel
               href={item.href}
               icon={item.icon}

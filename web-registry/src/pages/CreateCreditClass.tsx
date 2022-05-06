@@ -10,8 +10,7 @@ import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSl
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Modal from 'web-components/lib/components/modal';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { HeroTitle, HeroAction, OverviewCards } from '../components/molecules';
@@ -73,16 +72,6 @@ const useStyles = makeStyles(theme => ({
   resourcesRoot: {
     paddingTop: 0,
   },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(22),
-      lineHeight: theme.typography.pxToRem(33),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-      lineHeight: theme.typography.pxToRem(27),
-    },
-  },
 }));
 
 const CreateCreditClass: React.FC = () => {
@@ -118,9 +107,9 @@ const CreateCreditClass: React.FC = () => {
             {props.title}
           </Title>
           <Box pt={[5, 7]}>
-            <Description className={styles.description} align={align}>
+            <Body size="xl" align={align}>
               <BlockContent content={props.descriptionRaw} />
-            </Description>
+            </Body>
           </Box>
         </Box>
       </Grid>

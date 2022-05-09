@@ -26,7 +26,7 @@ import { RegenModalProps } from '../modal';
 /**
  * Send sends tradable credits from one account to another account.
  * Sent credits can either be tradable or retired on receipt.
- * https://docs.regen.network/modules/ecocredit/03_messages.html#msgsend
+ * https://buf.build/regen/regen-ledger/docs/main:regen.ecocredit.v1#regen.ecocredit.v1.Msg.Send
  *
  * Validation:
  *    sender: must be a valid address, and their signature must be present in the transaction
@@ -37,10 +37,6 @@ import { RegenModalProps } from '../modal';
  *    retired_amount: must not be negative
  *  if retired_amount is positive:
  *    retirement_location: must be a valid location
- *
- * Also:
- * https://docs.regen.network/modules/ecocredit/protobuf.html#msgsend
- * https://docs.regen.network/modules/ecocredit/protobuf.html#msgsend-sendcredits
  */
 
 const useStyles = makeStyles((theme: Theme) => ({

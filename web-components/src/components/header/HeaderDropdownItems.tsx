@@ -35,11 +35,13 @@ export type HeaderDropdownItemProps = {
   pathname: string;
   linkComponent: React.FC<NavLinkProps>;
   svg?: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  icon?: JSX.Element;
   right?: () => JSX.Element;
 };
 
 export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({
   svg: SVG,
+  icon,
   linkComponent: LinkComponent,
   ...props
 }) => {
@@ -56,6 +58,7 @@ export const HeaderDropdownItem: React.FC<HeaderDropdownItemProps> = ({
           <SVG />
         </Box>
       )}
+      {icon && <Box mr={3}>{icon}</Box>}
       <LinkComponent pathname={props.pathname} href={props.href}>
         {ReactHtmlParser(props.title)}
       </LinkComponent>

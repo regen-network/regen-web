@@ -2,7 +2,6 @@ import React from 'react';
 import { useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -14,10 +13,10 @@ import {
   HeaderDropdownColumn,
   HeaderDropdownItemProps,
 } from 'web-components/lib/components/header/HeaderDropdownItems';
+import { UserMenuItem } from 'web-components/lib/components/header/UserMenuItem';
 
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
-import { ReactComponent as Credits } from '../../assets/svgs/credits.svg';
 import DefaultAvatar from '../../assets/avatar.png';
 import { useMoreProjectsQuery } from '../../generated/graphql';
 import { useWallet } from '../../lib/wallet';
@@ -26,7 +25,7 @@ import { chainId } from '../../lib/ledger';
 const RegistryNav: React.FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { wallet, loaded } = useWallet();
+  const { wallet, loaded, disconnect } = useWallet();
   const theme = useTheme<Theme>();
   const desktop = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -138,35 +137,6 @@ const RegistryNav: React.FC = () => {
       title: 'Activity',
       href: '/stats/activity',
     });
-
-    if (loaded && wallet?.shortAddress && desktop) {
-      menuItems.push({
-        renderTitle: () => (
-          <Box display="flex" alignItems="center" sx={{ fontSize: 14 }}>
-            <Avatar
-              sx={{
-                height: 24,
-                width: 24,
-                mr: 2.75,
-                border: theme => `1px solid ${theme.palette.grey[100]}`,
-              }}
-              alt="default avatar"
-              src={DefaultAvatar}
-            />
-            {wallet.shortAddress}
-          </Box>
-        ),
-        dropdownItems: [
-          {
-            pathname,
-            linkComponent: RegistryNavLink,
-            title: 'My Portfolio',
-            href: '/ecocredits/dashboard',
-            svg: Credits,
-          },
-        ],
-      });
-    }
   }
 
   const headerColors: HeaderColors = {
@@ -189,6 +159,10 @@ const RegistryNav: React.FC = () => {
       '/land-stewards',
     ].some(route => pathname.startsWith(route));
 
+  const color = headerColors[pathname]
+    ? headerColors[pathname]
+    : theme.palette.primary.light;
+
   return (
     <Header
       isRegistry
@@ -199,18 +173,28 @@ const RegistryNav: React.FC = () => {
       onLogout={() => logout({ returnTo: window.location.origin })}
       onSignup={() => navigate('/signup')}
       menuItems={menuItems}
-      color={
-        headerColors[pathname]
-          ? headerColors[pathname]
-          : theme.palette.primary.light
-      }
+      color={color}
       transparent={isTransparent}
       absolute={isTransparent}
       borderBottom={false} // TODO: there's some bug where this won't change on routes - hardcoded for now
       fullWidth={fullWidthRegExp.test(pathname)}
-      pathName={pathname}
+      pathname={pathname}
       extras={
         <Box display="flex" justifyContent="center" alignItems="center">
+          {chainId &&
+            loaded &&
+            wallet?.shortAddress &&
+            disconnect &&
+            desktop && (
+              <UserMenuItem
+                address={wallet?.shortAddress}
+                avatar={DefaultAvatar}
+                disconnect={disconnect}
+                pathname={pathname}
+                color={color}
+                linkComponent={RegistryNavLink}
+              />
+            )}
           <WalletButton />
         </Box>
       }

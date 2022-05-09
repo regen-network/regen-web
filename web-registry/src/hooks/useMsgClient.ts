@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { StdFee, DeliverTxResponse } from '@cosmjs/stargate';
 
 import { useLedger } from '../ledger';
-import { Sender } from '../lib/wallet';
+import { Wallet } from '../lib/wallet';
 
 interface TxData {
   msgs: any[];
@@ -17,16 +17,24 @@ type MsgClientType = {
   ) => Promise<void>;
   setDeliverTxResponse: (txResult: DeliverTxResponse | undefined) => void;
   deliverTxResponse?: DeliverTxResponse;
-  error?: unknown;
-  wallet?: Sender;
+  setError: (error: string | undefined) => void;
+  error?: string;
+  wallet?: Wallet;
 };
+
+function assertIsError(error: unknown): asserts error is Error {
+  if (!(error instanceof Error)) {
+    throw error;
+  }
+}
 
 export default function useMsgClient(
   handleTxQueued: () => void,
   handleTxDelivered: () => void,
+  handleError: () => void,
 ): MsgClientType {
   const { api, wallet } = useLedger();
-  const [error, setError] = useState<unknown | undefined>();
+  const [error, setError] = useState<string | undefined>();
   const [deliverTxResponse, setDeliverTxResponse] = useState<
     DeliverTxResponse | undefined
   >();
@@ -46,19 +54,14 @@ export default function useMsgClient(
         gas: '200000',
       };
 
-      try {
-        const txBytes = await api.msgClient.sign(
-          wallet.address,
-          msgs,
-          fee || defaultFee,
-          memo || '',
-        );
+      const txBytes = await api.msgClient.sign(
+        wallet.address,
+        msgs,
+        fee || defaultFee,
+        memo || '',
+      );
 
-        return txBytes;
-      } catch (err) {
-        setError(err);
-        return;
-      }
+      return txBytes;
     },
     [api?.msgClient, wallet?.address],
   );
@@ -66,39 +69,43 @@ export default function useMsgClient(
   const broadcast = useCallback(
     async (txBytes: Uint8Array) => {
       if (!api?.msgClient || !txBytes) return;
-      try {
-        handleTxQueued();
-        const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
-        setDeliverTxResponse(_deliverTxResponse);
-        handleTxDelivered();
-      } catch (err) {
-        setError(err);
+      handleTxQueued();
+      const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
+      setDeliverTxResponse(_deliverTxResponse);
+      handleTxDelivered();
+      // The transaction suceeded iff code is 0.
+      if (_deliverTxResponse.code !== 0) {
+        setError(_deliverTxResponse.rawLog);
       }
     },
     [api?.msgClient, handleTxQueued, handleTxDelivered],
   );
 
   const signAndBroadcast = useCallback(
-    async (tx: TxData, onBroadcast?: () => void) => {
+    async (tx: TxData, closeForm?: () => void) => {
       try {
         const txBytes = await sign(tx);
         if (txBytes) {
-          if (onBroadcast) onBroadcast();
+          if (closeForm) closeForm();
           await broadcast(txBytes);
         }
       } catch (err) {
-        setError(err);
+        if (closeForm) closeForm();
+        handleError();
+        assertIsError(err);
+        setError(err.message);
       }
 
       return;
     },
-    [sign, broadcast],
+    [sign, broadcast, handleError],
   );
 
   return {
     signAndBroadcast,
     setDeliverTxResponse,
     deliverTxResponse,
+    setError,
     error,
     wallet,
   };

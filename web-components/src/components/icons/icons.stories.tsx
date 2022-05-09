@@ -59,6 +59,7 @@ import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIc
 import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
 import { HorizontalDotsIcon } from 'web-components/lib/components/icons/HorizontalDotsIcon';
 import { Spinner } from 'web-components/lib/components/icons/Spinner';
+import { BrokenLinkIcon } from 'web-components/lib/components/icons/BrokenLinkIcon';
 
 export default {
   title: 'Icons',
@@ -80,6 +81,8 @@ export const blockIcon = (): JSX.Element => <BlockIcon color="black" />;
 export const breadcrumbIcon = (): JSX.Element => (
   <BreadcrumbIcon direction={'down'} />
 );
+
+export const brokenLinkIcon = (): JSX.Element => <BrokenLinkIcon />;
 
 export const checkedIcon = (): JSX.Element => <CheckedIcon />;
 

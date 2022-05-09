@@ -76,7 +76,7 @@ const FooterItem = ({ title, items }: FooterItemProps): JSX.Element => {
               href={item.href}
               rel="noopener noreferrer"
               target={item.target}
-              sx={{ typography: ['body1', 'textLarge'] }}
+              sx={{ typography: ['textMedium', 'textLarge'] }}
             >
               {item.title}
             </Link>

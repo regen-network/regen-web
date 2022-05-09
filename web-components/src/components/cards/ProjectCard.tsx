@@ -254,7 +254,7 @@ export default function ProjectCard({
       {registry && <div className={classes.separator} />}
       {registry && (
         <div className={classes.userInfo}>
-          <UserInfo user={registry} size="xs" />
+          <UserInfo user={registry} size="sm" titleComponent="subtitle" />
         </div>
       )}
       {purchaseInfo && <div className={classes.separator} />}

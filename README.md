@@ -17,6 +17,8 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
     - [Deploying the Custom Login form to Auth0](#deploying-the-custom-login-form-to-auth0)
   - [Testing](#testing)
   - [Code style](#code-style)
+  - [Typography](#typography)
+    - [Sizing guide](#sizing-guide)
   - [Timeout Issue on Slower Connections](#timeout-issue-on-slower-connections)
 
 ## Installation
@@ -174,6 +176,41 @@ yarn format
 ```sh
 yarn lint
 ```
+
+## Typography
+
+This repo utilizes custom MUI Typography components to normalize styles with the mockups based on the typography in [figma](<https://www.figma.com/file/MuSpCtCdU2ns4cFAsPfvsx/Text-Styles-%26-Components-(current)?node-id=0:1>):
+
+1. `<Title />` corresponds to "Header" text in the mockups
+2. `<Label />` corresponds to "Button Text" in the mockups
+3. `<Subtitle />`
+4. `<Body />`
+
+Responsive styles are generally normalized (e.g. an `H1` on desktop translates to an `H3` on mobile in most cases), however these can be overridden with `variant` / `mobileVariant` (for Titles) and `size` / `mobileSize` (for the others). For example:
+
+```tsx
+<Title /> // renders an h1 (default) on desktop, h3 on mobile
+<Title variant="h3" /> // renders an h3 on desktop, h4 on mobile
+<Title variant="h3" mobileVariant="h3" /> // renders an h3 on desktop & mobile
+<Subtitle size="xl" mobileSize="sm" />
+<Body mobileSize="md" /> // keep default `md` size on mobile
+```
+
+All of these components also accept MUI's [SX Prop](https://mui.com/system/the-sx-prop/)
+
+### Sizing guide
+
+| **Px** | **Rem**  | **theme.spacing** |              **Components**               |
+| :----: | :------: | :---------------: | :---------------------------------------: |
+|  48px  |   3rem   |        12         |                    H1                     |
+|  38px  | 2.375rem |        9.5        |                    H2                     |
+|  32px  |   2rem   |         8         |                    H3                     |
+|  24px  |  1.5rem  |         6         |                    H4                     |
+|  21px  | 1.313rem |       5.25        |              H5, ButtonLarge              |
+|  18px  | 1.125rem |        4.5        | H6, subtitleLarge bodyLarge, buttonMedium |
+|  16px  |   1rem   |         4         |        subtitleMedium, bodyMedium         |
+|  14px  | 0.875rem |        3.5        |   subtitleSmall, bodySmall, buttonSmall   |
+|  12px  | 0.75rem  |         3         |  subtitleXSmall bodyXSmall, buttonXSmall  |
 
 ## Timeout Issue on Slower Connections
 

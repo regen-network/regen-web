@@ -209,6 +209,7 @@ const regenTheme = createTheme({
           h6: 'h6',
           textXLarge: 'p',
           textLarge: 'p',
+          textMedium: 'p',
           body1: 'p',
           textSmall: 'p',
           textXSmall: 'p',

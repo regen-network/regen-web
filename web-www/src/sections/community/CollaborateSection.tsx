@@ -69,6 +69,7 @@ const CollaborateSection = (): JSX.Element => {
         {data?.titleBody?.title}
       </Title>
       <Body
+        as="div"
         size="xl"
         mobileSize="md"
         sx={theme => ({

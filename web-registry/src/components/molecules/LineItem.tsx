@@ -15,7 +15,9 @@ const LineItem = ({ label, data }: LineItemProps): JSX.Element => {
       <Label size="xs" sx={{ color: 'primary.contrastText', mb: 2 }}>
         {label}
       </Label>
-      <Body mobileSize="md">{parseText(data)}</Body>
+      <Body as="div" mobileSize="md">
+        {parseText(data)}
+      </Body>
     </Box>
   );
 };

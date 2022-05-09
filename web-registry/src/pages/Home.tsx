@@ -115,6 +115,7 @@ const Home: React.FC = () => {
               {heroSection?.title}
             </Title>
             <Body
+              as="div"
               size="xl"
               mobileSize="md"
               sx={{ color: 'primary.main', my: 4 }}

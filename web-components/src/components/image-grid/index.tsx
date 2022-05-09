@@ -107,6 +107,7 @@ export default function ImageGrid({
           {title}
         </Title>
         <Body
+          as="div"
           size="xl"
           sx={theme => ({
             ml: even ? 'auto' : 0,

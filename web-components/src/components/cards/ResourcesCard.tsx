@@ -68,7 +68,11 @@ export default function ResourcesCard({
             {updated}
           </Body>
         )}
-        {description && <Body mt={2}>{parseText(description)}</Body>}
+        {description && (
+          <Body as="div" mt={2}>
+            {parseText(description)}
+          </Body>
+        )}
         <Box
           sx={{
             mt: [6, 8],

@@ -87,6 +87,7 @@ const BlockExplorerSection = (): JSX.Element => {
             {data?.title}
           </Title>
           <Body
+            as="div"
             size="xl"
             align="center"
             sx={{ color: 'primary.main', px: [5, 0], pb: [7, 9.5] }}

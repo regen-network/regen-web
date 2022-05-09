@@ -68,7 +68,7 @@ export const LedgerSection = (): JSX.Element => {
             <Label color="info.main" align="center" mt={[4, 8]}>
               {data?.subtitle}
             </Label>
-            <Body size="xl" align="center">
+            <Body as="div" size="xl" align="center">
               <BlockContent content={data?._rawBody} />
             </Body>
             <OutlinedButton

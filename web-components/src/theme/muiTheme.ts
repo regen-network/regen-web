@@ -95,8 +95,11 @@ const regenTheme = createTheme({
     textLarge: {
       fontSize: pxToRem(18),
     },
+    textMedium: {
+      fontSize: pxToRem(16),
+    },
     // MUI defaults to 'body1' for Typography text and I can't figure out how to
-    // override - this represents the equivalent of `textMedium`
+    // override - this is a duplicate of `textMedium`
     body1: {
       fontSize: pxToRem(16),
     },
@@ -224,6 +227,7 @@ declare module '@mui/material/styles' {
   interface TypographyVariants {
     textXLarge: React.CSSProperties;
     textLarge: React.CSSProperties;
+    textMedium: React.CSSProperties;
     textSmall: React.CSSProperties;
     textXSmall: React.CSSProperties;
   }
@@ -232,6 +236,7 @@ declare module '@mui/material/styles' {
   interface TypographyVariantsOptions {
     textXLarge?: React.CSSProperties;
     textLarge?: React.CSSProperties;
+    textMedium?: React.CSSProperties;
     textSmall?: React.CSSProperties;
     textXSmall?: React.CSSProperties;
   }
@@ -242,6 +247,7 @@ declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
     textXLarge: true;
     textLarge: true;
+    textMedium: true;
     textSmall: true;
     textXSmall: true;
   }

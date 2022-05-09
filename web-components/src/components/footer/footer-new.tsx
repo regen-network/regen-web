@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { useTheme } from '@mui/styles';
-import { Grid, List, ListItem, Link, Box } from '@mui/material';
+import { Grid, List, ListItem, Link, Box, Typography } from '@mui/material';
 
 import { Body, Label } from '../typography';
 import Section from '../section';
@@ -37,7 +37,10 @@ const FooterItem: React.FC<FooterItemProps> = ({
       <List sx={{ p: 0 }}>
         {items.map((item, index) => (
           <ListItem sx={{ py: 0.75, px: 0 }} key={index}>
-            <Box component={'span'} sx={{ typography: ['body1', 'textLarge'] }}>
+            <Box
+              component={'span'}
+              sx={{ typography: ['textMedium', 'textLarge'] }}
+            >
               <LinkComponent
                 style={{ fontWeight: 'normal' }}
                 href={item.href}
@@ -151,10 +154,10 @@ const Footer: React.FC<{
           justifyContent="space-between"
         >
           <Grid item>
-            <Body size="sm">
-              <Link href={termsUrl}>Terms</Link> |{' '}
-              <Link href={privacyUrl}>Privacy</Link>
-            </Body>
+            <Typography sx={{ typography: ['textMedium', 'textSmall'] }}>
+              <LinkComponent href={termsUrl}>Terms</LinkComponent> |{' '}
+              <LinkComponent href={privacyUrl}>Privacy</LinkComponent>
+            </Typography>
           </Grid>
           <Grid item>
             <Body size="sm">© 2021 Regen Network Development, Inc</Body>

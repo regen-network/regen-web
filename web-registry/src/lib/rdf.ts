@@ -47,13 +47,16 @@ export async function validate(
   return report;
 }
 
-// TODO: change to compact format, regen:
 export function getProjectPageBaseData(): any {
   return {
-    '@type': [
-      'http://regen.network/ProjectPage',
-      'http://regen.network/Project',
-    ],
+    '@context': {
+      regen: 'http://regen.network/',
+      schema: 'http://schema.org/',
+      xsd: 'http://www.w3.org/2001/XMLSchema#',
+      qudt: 'http://qudt.org/schema/qudt/',
+      unit: 'http://qudt.org/vocab/unit/',
+    },
+    '@type': ['regen:ProjectPage', 'regen:Project'],
   };
 }
 

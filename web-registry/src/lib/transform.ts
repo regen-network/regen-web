@@ -117,7 +117,7 @@ export function buildIssuanceModalData(
         creditVintage.endDate,
       ),
       monitoringPeriods,
-      projectName: project.metadata?.['http://schema.org/name'] || '',
+      projectName: project.metadata?.['schema:name'] || '',
       standard: {
         documentId:
           creditClassVersion?.metadata?.['http://regen.network/standard']?.[

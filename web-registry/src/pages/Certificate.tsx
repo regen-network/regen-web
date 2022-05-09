@@ -283,9 +283,7 @@ function CertificatePage(): JSX.Element {
                     'http://regen.network/creditDenom'
                   ]
                 }
-                projectName={
-                  project?.metadata?.['http://schema.org/name'] || ''
-                }
+                projectName={project?.metadata?.['schema:name'] || ''}
                 creditsUnits={units}
                 equivalentTonsCO2={units} // 1 credit <=> 1 ton CO2e
                 buyerName={
@@ -311,25 +309,19 @@ function CertificatePage(): JSX.Element {
           projects.push(
             <ProjectCard
               href={project.handle ? `/projects/${project.handle}` : undefined}
-              name={project.metadata?.['http://schema.org/name']}
-              imgSrc={
-                project.metadata?.['http://regen.network/previewPhoto']?.[
+              name={project.metadata?.['schema:name']}
+              imgSrc={project.metadata?.['regen:previewPhoto']?.['@value']}
+              place={project.metadata?.['schema:location']?.place_name}
+              area={
+                project.metadata?.['regen:size']?.['qudt:numericValue']?.[
                   '@value'
                 ]
               }
-              place={
-                project.metadata?.['http://schema.org/location']?.place_name
-              }
-              area={
-                project.metadata?.['http://regen.network/size']?.[
-                  'http://qudt.org/1.1/schema/qudt#numericValue'
-                ]?.['@value']
-              }
               areaUnit={
                 qudtUnitMap[
-                  project.metadata?.['http://regen.network/size']?.[
-                    'http://qudt.org/1.1/schema/qudt#unit'
-                  ]?.['@value'] as qudtUnit
+                  project.metadata?.['regen:projectSize']?.['qudt:unit']?.[
+                    '@value'
+                  ] as qudtUnit
                 ]
               }
               purchaseInfo={{
@@ -346,17 +338,13 @@ function CertificatePage(): JSX.Element {
                   documentId: creditClassVersion?.documentId,
                   name: creditClassVersion?.name || '',
                   version: creditClassVersion?.version || '',
-                  url: creditClassVersion?.metadata?.[
-                    'http://schema.org/url'
-                  ]?.['@value'],
+                  url: creditClassVersion?.metadata?.['schema:url']?.['@value'],
                 },
                 methodology: {
                   documentId: methodologyVersion?.documentId,
                   name: methodologyVersion?.name || '',
                   version: methodologyVersion?.version || '',
-                  url: methodologyVersion?.metadata?.[
-                    'http://schema.org/url'
-                  ]?.['@value'],
+                  url: methodologyVersion?.metadata?.['schema:url']?.['@value'],
                 },
                 projectType: project.type || '',
               }}
@@ -371,7 +359,7 @@ function CertificatePage(): JSX.Element {
   const currentVintage = currentPurchase?.creditVintageByCreditVintageId;
   const currentProject = currentVintage?.projectByProjectId;
   const externalProjectLink =
-    currentProject?.metadata?.['http://regen.network/externalProjectUrl'];
+    currentProject?.metadata?.['regen:externalProjectUrl'];
   const issuer = currentVintage?.partyByIssuerId;
   const retirements =
     currentVintage?.retirementsByCreditVintageId?.nodes?.filter(n =>
@@ -416,9 +404,9 @@ function CertificatePage(): JSX.Element {
           </Grid>
           {retirements?.map(
             (r, i) =>
-              r?.metadata?.['http://schema.org/url'] && (
+              r?.metadata?.['schema:url'] && (
                 <OutlinedButton
-                  href={r?.metadata?.['http://schema.org/url']}
+                  href={r?.metadata?.['schema:url']}
                   target="_blank"
                   className={classes.issuanceButton}
                 >

@@ -103,7 +103,7 @@ export type FormValues = IndividualFormValues | OrganizationFormValues;
 export type Option = IndividualOption | OrganizationOption;
 
 export function isIndividual(e: FormValues): e is IndividualFormValues {
-  if (e['@type'] && e['@type'].includes('http://regen.network/Individual')) {
+  if (e['@type'] && e['@type'].includes('regen:Individual')) {
     return true;
   }
   return false;
@@ -112,8 +112,8 @@ export function isIndividual(e: FormValues): e is IndividualFormValues {
 function getLabel(o: any): string | undefined {
   return o.id
     ? isIndividual(o)
-      ? o['http://schema.org/name']
-      : o['http://schema.org/legalName']
+      ? o['schema:name']
+      : o['schema:legalName']
     : undefined;
 }
 
@@ -250,7 +250,7 @@ const RoleField: React.FC<Props> = ({
                     onClick={e => {
                       e.stopPropagation();
                       setOrganizationEdit({
-                        'http://schema.org/legalName': state.inputValue,
+                        'schema:legalName': state.inputValue,
                       });
                     }}
                   >
@@ -268,7 +268,7 @@ const RoleField: React.FC<Props> = ({
                     onClick={e => {
                       e.stopPropagation();
                       setIndividualEdit({
-                        'http://schema.org/name': state.inputValue,
+                        'schema:name': state.inputValue,
                       });
                     }}
                   >

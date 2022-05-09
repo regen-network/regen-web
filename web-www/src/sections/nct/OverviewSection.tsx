@@ -81,7 +81,7 @@ export const OverviewSection = (): JSX.Element => {
               <Title variant="h1">{data?.title}</Title>
               <SanityImage {...(data?.titleIcon as any)} alt="NCT icon" />
             </Box>
-            <Body size="xl">
+            <Body as="div" size="xl">
               <BlockContent content={data?._rawBody} />
             </Body>
           </Box>

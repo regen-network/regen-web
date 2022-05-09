@@ -93,6 +93,7 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
           </Title>
           {!!props.bottomBanner?.descriptionRaw && (
             <Body
+              as="div"
               size="xl"
               align="center"
               color={props.lightBg ? 'text.primary' : 'primary.main'}

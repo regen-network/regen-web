@@ -151,7 +151,7 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
               {content?.header}
             </Title>
           </Box>
-          <Body size="xl" sx={{ color: 'info.dark' }}>
+          <Body as="div" size="xl" sx={{ color: 'info.dark' }}>
             <BlockContent content={_rawAbout} />
           </Body>
         </Grid>

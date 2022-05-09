@@ -65,6 +65,7 @@ const Staking = (): JSX.Element => {
       classes={{ root: styles.center }}
     >
       <Body
+        as="div"
         size="xl"
         sx={{
           py: 4,

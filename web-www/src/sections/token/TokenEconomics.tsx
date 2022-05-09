@@ -45,6 +45,7 @@ const TokenEconomics = (): JSX.Element => {
       classes={{ root: clsx(styles.root, styles.center), title: styles.title }}
     >
       <Body
+        as="div"
         size="xl"
         mobileSize="md"
         sx={{

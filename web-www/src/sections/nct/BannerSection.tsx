@@ -40,6 +40,7 @@ export const BannerSection = (): JSX.Element => {
             {data?.title}
           </Title>
           <Body
+            as="div"
             size="xl"
             sx={{ color: 'primary.main', textAlign: 'center', pt: 4 }}
           >

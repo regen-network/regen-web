@@ -144,6 +144,7 @@ const Question = ({
           )}
         </Title>
         <Body
+          as="div"
           size="lg"
           sx={[
             {

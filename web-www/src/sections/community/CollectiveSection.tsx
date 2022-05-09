@@ -81,6 +81,7 @@ const CollectiveSection = (): JSX.Element => {
         }}
       >
         <Body
+          as="div"
           size="xl"
           mobileSize="md"
           sx={{

@@ -87,7 +87,7 @@ const InfoSection = (): JSX.Element => {
           <Subtitle size="lg" color="info.main" my={4}>
             {data?.subtitle}
           </Subtitle>
-          <Body size="xl">
+          <Body as="div" size="xl">
             <BlockContent content={data?._rawBody} />
           </Body>
         </CardContent>

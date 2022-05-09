@@ -31,13 +31,6 @@ export interface MediaCardProps extends OptimizeImageProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'relative',
-  },
   image: {
     height: theme.spacing(48.75),
     position: 'relative',

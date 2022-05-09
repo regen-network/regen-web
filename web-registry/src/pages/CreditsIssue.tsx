@@ -206,7 +206,7 @@ function CreditsIssue(): JSX.Element {
               if (node) {
                 return (
                   <MenuItem key={node.id} value={node.id}>
-                    {node.metadata?.['http://schema.org/name']}
+                    {node.metadata?.['schema:name']}
                   </MenuItem>
                 );
               }

@@ -187,7 +187,7 @@ describe('validate', () => {
     const report2 = await validate(
       shapes,
       data,
-      'http://regen.network/ProjectPlanBasicInfoGroup',
+      'regen:ProjectPlanBasicInfoGroup',
     );
     expect(report2.conforms).toEqual(true);
   });

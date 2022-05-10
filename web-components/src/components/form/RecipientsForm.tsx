@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { makeStyles, styled } from '@mui/styles';
 import {
@@ -6,6 +7,8 @@ import {
   Field,
   // FormikErrors,
   FieldArray,
+  validateYupSchema,
+  yupToFormErrors,
 } from 'formik';
 import * as Yup from 'yup';
 
@@ -17,16 +20,17 @@ import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
   CreditRetireFields,
   RetireFormValues,
-  // validateCreditRetire,
+  RetirementReminder,
   initialValues as initialValuesRetire,
   BottomCreditRetireFieldsProps,
 } from './CreditRetireForm';
-// import {
-//   requiredMessage,
-//   insufficientCredits,
-//   validateAmount,
-// } from '../inputs/validation';
+import {
+  requiredMessage,
+  insufficientCredits,
+  invalidAmount,
+} from '../inputs/validation';
 import OutlinedButton from '../buttons/OutlinedButton';
+// import { SchemaLike } from 'yup/lib/types';
 
 const useStyles = makeStyles((theme: Theme) => ({
   //   senderField: {
@@ -86,34 +90,75 @@ const validationSchema = Yup.object().shape({
   recipients: Yup.array()
     .of(
       Yup.object().shape({
-        sender: Yup.string().required('Sender is required'),
-        recipient: Yup.string().required('Recipient is required'), //.min(4, 'too short').required
-        tradableAmount: Yup.number().required().positive().integer(),
+        sender: Yup.string().required(),
+        recipient: Yup.string().required(requiredMessage), // TODO: improve validation: .min(20, 'too short').required
+        tradableAmount: Yup.number()
+          .required(invalidAmount)
+          .positive()
+          .integer()
+          .min(1, invalidAmount)
+          .test(
+            'tradableAmount-test',
+            insufficientCredits,
+            // 'The amount of available credits has been exceeded',
+            (value, context): any => {
+              const totalAmount =
+                context.options.context?.values.recipients.reduce(
+                  (sum: number, recipient: Recipient) =>
+                    (sum += Number(recipient.tradableAmount)
+                      ? Number(recipient.tradableAmount)
+                      : 0),
+                  0,
+                );
+              return (
+                totalAmount <=
+                  context.options.context?.availableTradableAmount &&
+                (value as number) <=
+                  context.options.context?.availableTradableAmount
+              );
+            },
+          ),
+
         withRetire: Yup.boolean().required(),
-        retiredAmount: Yup.number().when('withRetire', {
-          is: true,
-          then: Yup.number().required().positive().integer(),
-        }),
-        note: Yup.string().when('withRetire', {
-          is: true,
-          then: Yup.string(),
-        }),
+        retiredAmount: Yup.number()
+          .when('withRetire', {
+            is: true,
+            then: Yup.number()
+              .required()
+              .positive()
+              .integer()
+              .min(1, invalidAmount),
+          })
+          .test(
+            'retiredAmount-test',
+            // insufficientCredits,
+            'The amount retired cannot exceed the amount allocated to this recipient',
+            (value, context): any => {
+              // eslint-disable-next-line no-console
+              console.log('retiredAmount-test', context);
+              return (value as number) <= context.parent.tradableAmount;
+            },
+          ),
+        // note: Yup.string().when('withRetire', {
+        //   is: true,
+        //   then: Yup.string(),
+        // }),
         country: Yup.string().when('withRetire', {
           is: true,
           then: Yup.string().required(),
         }),
-        stateProvince: Yup.string().when('withRetire', {
-          is: true,
-          then: Yup.string(),
-        }),
-        postalCode: Yup.string().when('withRetire', {
-          is: true,
-          then: Yup.string(),
-        }),
-        retirementLocation: Yup.string().when('withRetire', {
-          is: true,
-          then: Yup.string(),
-        }),
+        // stateProvince: Yup.string().when('withRetire', {
+        //   is: true,
+        //   then: Yup.string(),
+        // }),
+        // postalCode: Yup.string().when('withRetire', {
+        //   is: true,
+        //   then: Yup.string(),
+        // }),
+        // retirementLocation: Yup.string().when('withRetire', {
+        //   is: true,
+        //   then: Yup.string(),
+        // }),
       }),
     )
     .required('Must have recipients') // these constraints are shown if and only if inner constraints are satisfied
@@ -141,61 +186,43 @@ export const RecipientsForm: React.FC<FormProps> = ({
     recipients: [{ ...recipientInitialValues }],
   };
 
-  // const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
-  //   let errors: FormikErrors<FormValues> = {};
-
-  //   // if (!values.sender) {
-  //   //   errors.sender = requiredMessage;
-  //   // }
-  //   // if (!values.recipient) {
-  //   //   errors.recipient = requiredMessage;
-  //   // }
-
-  // const errAmount = validateAmount(
-  //   availableTradableAmount,
-  //   values.tradableAmount,
-  // );
-  // if (errAmount) errors.tradableAmount = errAmount;
-
-  // // Retire form validation (optional subform)
-  // if (values.withRetire) {
-  //   errors = validateCreditRetire(availableTradableAmount, values, errors);
-
-  //   // combo validation: issuance + retire
-  //   if (
-  //     Number(values.tradableAmount) + Number(values.retiredAmount) >
-  //     availableTradableAmount
-  //   ) {
-  //     errors.tradableAmount = insufficientCredits;
-  //     errors.retiredAmount = insufficientCredits;
-  //   }
-  // }
-
-  //   return errors;
-  // };
-
   return (
     <Formik
       initialValues={initialValues}
-      // validate={validateHandler}
-      validationSchema={validationSchema}
+      validate={(values: FormValues) => {
+        // eslint-disable-next-line no-console
+        console.log('validate values', values);
+        try {
+          validateYupSchema<FormValues>(values, validationSchema, true, {
+            values,
+            availableTradableAmount,
+          });
+        } catch (err) {
+          return yupToFormErrors(err);
+        }
+        return {};
+      }}
       onSubmit={onSubmit}
     >
-      {({ values }) => (
+      {({ values, errors }) => (
         <Form>
+          {console.log('> VALUES', values)}
+          {errors && console.log('> ERRORS', errors)}
           <FieldArray name="recipients">
             {({ insert, remove, push }) => (
               <div>
                 {values.recipients.length > 0 &&
-                  values.recipients.map((friend, index) => (
+                  values.recipients.map((recipient, index) => (
                     <Card key={index}>
-                      <button
-                        type="button"
-                        className="secondary"
-                        onClick={() => remove(index)}
-                      >
-                        X
-                      </button>
+                      {index > 0 && (
+                        <button
+                          type="button"
+                          className="secondary"
+                          onClick={() => remove(index)}
+                        >
+                          X Delete
+                        </button>
+                      )}
                       <Field
                         name={`recipients.${index}.recipient`}
                         type="text"
@@ -222,13 +249,16 @@ export const RecipientsForm: React.FC<FormProps> = ({
                       />
 
                       {values.recipients[index].withRetire && (
-                        <CreditRetireFields
-                          availableTradableAmount={availableTradableAmount}
-                          batchDenom={batchDenom}
-                          mapboxToken={mapboxToken}
-                          arrayIndex={index}
-                          arrayPrefix={`recipients.${index}.`}
-                        />
+                        <>
+                          <RetirementReminder />
+                          <CreditRetireFields
+                            availableTradableAmount={availableTradableAmount}
+                            batchDenom={batchDenom}
+                            mapboxToken={mapboxToken}
+                            arrayIndex={index}
+                            arrayPrefix={`recipients.${index}.`}
+                          />
+                        </>
                       )}
                     </Card>
                   ))}

@@ -138,6 +138,7 @@ const RoleField: React.FC<Props> = ({
   const [organizationEdit, setOrganizationEdit] = useState<any | null>();
   const [individualEdit, setIndividualEdit] = useState<any | null>(null);
   const [value, setValue] = useState<any | null>({});
+
   const { form, field } = fieldProps;
   useEffect(() => {
     const selectedValue =
@@ -207,7 +208,41 @@ const RoleField: React.FC<Props> = ({
               popupIndicator: styles.popupIndicator,
             }}
             disableClearable
-            options={options || []}
+            options={[
+              ...(options || []),
+              (
+                <div
+                  className={styles.add}
+                  onClick={e => {
+                    e.stopPropagation();
+                    setOrganizationEdit({
+                      'schema:legalName': '',
+                    });
+                  }}
+                >
+                  <OrganizationIcon />
+                  <Label size="xs" sx={sxs.formLabel}>
+                    + Add New Organization
+                  </Label>
+                </div>
+              ) as unknown as RoleOptionType,
+              (
+                <div
+                  className={styles.add}
+                  onClick={e => {
+                    e.stopPropagation();
+                    setIndividualEdit({
+                      'schema:name': '',
+                    });
+                  }}
+                >
+                  <UserIcon />
+                  <Label size="xs" sx={sxs.formLabel}>
+                    + Add New Individual
+                  </Label>
+                </div>
+              ) as unknown as RoleOptionType,
+            ]}
             forcePopupIcon
             value={value}
             getOptionLabel={o => getLabel(o) || ''}
@@ -216,6 +251,7 @@ const RoleField: React.FC<Props> = ({
               const label = getLabel(option);
               return <li {...props}>{label || option}</li>;
             }}
+            freeSolo
             onChange={(event, newValue, reason) => {
               if (reason === 'selectOption' && !newValue.inputValue) {
                 handleChange(newValue);
@@ -240,47 +276,6 @@ const RoleField: React.FC<Props> = ({
                 variant="outlined"
               />
             )}
-            filterOptions={(options, state) => {
-              const filtered = filter(options, state) as RoleOptionType[];
-              // Suggest the creation of a new value
-              filtered.push(
-                (
-                  <div
-                    className={styles.add}
-                    onClick={e => {
-                      e.stopPropagation();
-                      setOrganizationEdit({
-                        'schema:legalName': state.inputValue,
-                      });
-                    }}
-                  >
-                    <OrganizationIcon />
-                    <Label size="xs" sx={sxs.formLabel}>
-                      + Add New Organization
-                    </Label>
-                  </div>
-                ) as unknown as RoleOptionType,
-              );
-              filtered.push(
-                (
-                  <div
-                    className={styles.add}
-                    onClick={e => {
-                      e.stopPropagation();
-                      setIndividualEdit({
-                        'schema:name': state.inputValue,
-                      });
-                    }}
-                  >
-                    <UserIcon />
-                    <Label size="xs" sx={sxs.formLabel}>
-                      + Add New Individual
-                    </Label>
-                  </div>
-                ) as unknown as RoleOptionType,
-              );
-              return filtered;
-            }}
           />
         )}
       </FieldFormControl>

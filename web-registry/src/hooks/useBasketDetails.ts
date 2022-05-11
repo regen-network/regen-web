@@ -13,11 +13,11 @@ import useBankQuery from './useBankQuery';
 import useBasketQuery from './useBasketQuery';
 import useQueryListClassInfo from './useQueryListClassInfo';
 import useQueryListBatchInfo from './useQueryListBatchInfo';
-import { useProjectByBatchDenomLazyQuery } from '../generated/graphql';
+import { useProjectsByMetadataLazyQuery } from '../generated/graphql';
 
 import { BasketOverviewProps, CreditBatch } from '../components/organisms';
 
-import { getMetadataFromUint8Array } from '../lib/metadata-graph';
+import { getMetadata, getMetadataFromUint8Array } from '../lib/metadata-graph';
 
 dayjs.extend(duration);
 
@@ -75,7 +75,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
   // TODO: useEcocreditQuery + batch queries
   const basketBatches = useQueryListBatchInfo(batches);
 
-  const [fetchProjectByBatchDenom] = useProjectByBatchDenomLazyQuery();
+  const [fetchProjects] = useProjectsByMetadataLazyQuery();
   const [batchesProjects, setBatchesProjects] = useState<BatchWithProject[]>();
 
   // Batches string list query param for `useQueryListBatchInfo(batches)`
@@ -99,7 +99,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
             if (basketClass.info?.metadata) {
               try {
                 metadata = await getMetadataFromUint8Array(
-                  basketClass.info?.metadata,
+                  basketClass.info.metadata,
                 );
               } catch (err) {}
             }
@@ -133,32 +133,51 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
 
     async function fetchData(batches: string[]): Promise<void> {
       try {
-        const _batchesProjects = await Promise.all(
-          batches.map(async batchDenom => {
-            const batchProject = await fetchProjectByBatchDenom({
-              variables: { batchDenom },
-            });
+        if (basketBatches) {
+          const _batchesProjects = await Promise.all(
+            basketBatches.map(async batch => {
+              let batchMetadata;
+              if (batch.info?.metadata) {
+                batchMetadata = await getMetadataFromUint8Array(
+                  batch.info.metadata,
+                );
+              }
 
-            return {
-              batchDenom,
-              projectHandle:
-                batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
-                  ?.handle || '-',
-              projectName:
-                batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
-                  ?.metadata['schema:name'] || '-',
-            };
-          }),
-        );
+              const vcsProjectId = batchMetadata?.['regen:vcsProjectId'];
+              const data = await fetchProjects({
+                // skip: !vcsProjectId,
+                variables: {
+                  metadata: {
+                    'regen:vcsProjectId': {
+                      '@type': 'xsd:unsignedInt',
+                      '@value': vcsProjectId,
+                    },
+                  },
+                },
+              });
 
-        setBatchesProjects(_batchesProjects);
+              const batchProject = data?.meta.;
+              // return {
+              //   batchDenom,
+              //   projectHandle:
+              //     batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
+              //       ?.handle || '-',
+              //   projectName:
+              //     batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
+              //       ?.metadata['schema:name'] || '-',
+              // };
+            }),
+          );
+
+          setBatchesProjects(_batchesProjects);
+        }
       } catch (error) {
         console.error(error); // eslint-disable-line no-console
       }
     }
 
     fetchData(batches);
-  }, [batches, fetchProjectByBatchDenom]);
+  }, [basketBatches, fetchProjects]);
 
   // finally, data preparation for <BasketEcocreditsTable />
   useEffect(() => {

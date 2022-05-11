@@ -57,7 +57,8 @@ const query = graphql`
 
 const BlogSection: React.FC = () => {
   const styles = useStyles();
-  const { sanitySharedSections } = useStaticQuery<SharedBlogSectionQuery>(query);
+  const { sanitySharedSections } =
+    useStaticQuery<SharedBlogSectionQuery>(query);
   const content = sanitySharedSections?.blog;
   const posts: BlogPostProps[] =
     content?.posts?.map(
@@ -78,7 +79,12 @@ const BlogSection: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Section withSlider className={styles.root} title={content?.header || ''} titleVariant="h1">
+      <Section
+        withSlider
+        className={styles.root}
+        title={content?.header || ''}
+        titleVariant="h1"
+      >
         <BlogPosts posts={posts} />
       </Section>
     </div>

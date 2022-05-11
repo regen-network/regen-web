@@ -66,7 +66,7 @@ const CreditClassCards: React.FC<Props> = ({
         const title = isOnChainClass ? (
           `${blocksToText(c?.nameRaw)} (${c.path})`
         ) : (
-          <BlockContent noYMargin content={c?.nameRaw} />
+          <BlockContent content={c?.nameRaw} />
         );
         return (
           <Grid

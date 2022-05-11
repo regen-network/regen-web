@@ -1,12 +1,10 @@
 import React from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
 import AmountField from '../inputs/AmountField';
-import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
   CreditRetireFields,
@@ -22,12 +20,13 @@ import {
   insufficientCredits,
   validateAmount,
 } from '../inputs/validation';
+import { Subtitle } from '../typography';
 import { RegenModalProps } from '../modal';
 
 /**
  * Send sends tradable credits from one account to another account.
  * Sent credits can either be tradable or retired on receipt.
- * https://docs.regen.network/modules/ecocredit/03_messages.html#msgsend
+ * https://buf.build/regen/regen-ledger/docs/main:regen.ecocredit.v1#regen.ecocredit.v1.Msg.Send
  *
  * Validation:
  *    sender: must be a valid address, and their signature must be present in the transaction
@@ -38,10 +37,6 @@ import { RegenModalProps } from '../modal';
  *    retired_amount: must not be negative
  *  if retired_amount is positive:
  *    retirement_location: must be a valid location
- *
- * Also:
- * https://docs.regen.network/modules/ecocredit/protobuf.html#msgsend
- * https://docs.regen.network/modules/ecocredit/protobuf.html#msgsend-sendcredits
  */
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -53,30 +48,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       backgroundColor: theme.palette.info.light,
     },
   },
-  description: {
-    marginBottom: theme.spacing(5),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    '& a': {
-      cursor: 'pointer',
-    },
-  },
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
-    alignItems: 'initial',
-    '& .MuiCheckbox-root': {
-      alignSelf: 'end',
-    },
-  },
-  checkboxDescription: {
-    color: theme.palette.primary.contrastText,
-    fontSize: theme.spacing(4.5),
-    fontWeight: 'bold',
-    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -185,15 +158,15 @@ const CreditSendForm: React.FC<FormProps> = ({
             name="withRetire"
             className={styles.checkboxLabel}
             label={
-              <Description className={styles.checkboxDescription}>
+              <Subtitle size="lg" color="primary.contrastText">
                 Send additional retired credits
-              </Description>
+              </Subtitle>
             }
           />
 
           {values.withRetire && (
             <>
-              <RetirementReminder />
+              <RetirementReminder sx={{ mt: 8 }} />
               <CreditRetireFields
                 availableTradableAmount={availableTradableAmount}
                 batchDenom={batchDenom}

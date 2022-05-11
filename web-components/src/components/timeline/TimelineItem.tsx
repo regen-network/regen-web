@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-import Title from '../title';
+import { Title } from '../typography';
 import ContainedButton from '../buttons/ContainedButton';
 import ShieldIcon from '../icons/ShieldIcon';
 import { Event } from './';
@@ -154,10 +154,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     zIndex: 100,
   }),
-  summary: {
-    lineHeight: '150%',
-    display: 'flex',
-  },
   ledgerBtn: {
     padding: theme.spacing(2, 4),
     marginTop: theme.spacing(4),
@@ -190,7 +186,7 @@ export default function TimelineItem({
   return (
     <div className={classes.content}>
       {date && <div className={classes.date}>{date}</div>}
-      <Title className={classes.summary} variant="h5">
+      <Title variant="h5" sx={{ display: 'flex' }}>
         {summary}
       </Title>
       {description && (

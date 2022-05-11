@@ -5,7 +5,7 @@ import {
   FormValues,
   RecipientsForm,
 } from 'web-components/lib/components/form/RecipientsForm';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 
 // TODO: add props for the form
 type Props = {

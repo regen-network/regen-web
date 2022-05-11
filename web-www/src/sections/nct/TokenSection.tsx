@@ -1,19 +1,20 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Box, Typography } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
-import Title from 'web-components/lib/components/title';
 import {
-  BlockContent,
-  SanityBlockContent,
-} from 'web-components/src/components/block-content';
+  Body,
+  Label,
+  Subtitle,
+  Title,
+} from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/src/components/block-content';
 import Section from 'web-components/lib/components/section';
-import { formatDate } from 'web-components/lib/utils/format';
+// import { formatDate } from 'web-components/lib/utils/format';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import { Label } from 'web-components/lib/components/label';
-import Countdown from 'web-components/lib/components/countdown';
+// import Countdown from 'web-components/lib/components/countdown';
 
 import type { NctTokenSectionQuery } from '../../generated/graphql';
 
@@ -48,22 +49,13 @@ const query = graphql`
   }
 `;
 
-const BodyContent: React.FC<{ content: SanityBlockContent }> = ({
-  content,
-}) => (
-  <BlockContent
-    noYMargin
-    content={content}
-    sxWrap={{ '& p': { fontSize: [18, 22] } }}
-  />
-);
+const sxs = {
+  btnPad: { px: { xs: 8, sm: 12 } } as SxProps,
+};
 
 export const TokenSection = (): JSX.Element => {
   const { sanityNctPage } = useStaticQuery<NctTokenSectionQuery>(query);
   const data = sanityNctPage?.tokenSection;
-  const launchDate = sanityNctPage?.launchDate;
-
-  const btnPad = { px: { xs: 8, sm: 12 } } as const;
 
   const Card = (): JSX.Element => (
     <Box
@@ -110,8 +102,7 @@ export const TokenSection = (): JSX.Element => {
           px: [4, 12],
         }}
       >
-        {/* TODO remove manual line height. See: https://github.com/regen-network/regen-registry/issues/866 */}
-        <Title variant="h3" sx={{ lineHeight: { xs: '34.8px', sm: '44.8px' } }}>
+        <Title variant="h3">
           {data?.cardTitle}
           {/* TODO uncomment if we want to display countdown */}
           {/* <Box
@@ -125,19 +116,19 @@ export const TokenSection = (): JSX.Element => {
             <Countdown date={launchDate} />
           </Box> */}
         </Title>
-        <Typography
-          sx={{ fontSize: [16, 18], fontWeight: 700, color: 'info.main' }}
-        >
+        <Subtitle size="lg" color="info.main">
           {/* TODO uncomment if we want to formatted date based on CMS launch date */}
           {data?.cardSubtitle} {/* {formatDate(launchDate)} */}
-        </Typography>
-        <BodyContent content={data?._rawCardBody} />
+        </Subtitle>
+        <Body size="xl">
+          <BlockContent content={data?._rawCardBody} />
+        </Body>
         <ContainedButton
           sx={{
             alignSelf: 'start',
             mb: [8, 'inherit'],
             mt: [4, 8],
-            ...btnPad,
+            ...sxs.btnPad,
           }}
           href={data?.cardButton?.buttonLink?.buttonHref || ''}
           target={data?.cardButton?.buttonBlankTarget ? '_blank' : '_self'}
@@ -165,20 +156,22 @@ export const TokenSection = (): JSX.Element => {
         }}
       >
         <Title variant="h2">{data?.detailTitle}</Title>
-        <Label sx={{ fontSize: { xs: 14, sm: 18 }, color: 'info.main' }}>
+        <Label color="info.main">
           {data?.detailSubtitle} {/* {formatDate(launchDate)} */}
         </Label>
-        <BodyContent content={data?._rawDetailBody} />
+        <Body size="xl">
+          <BlockContent content={data?._rawDetailBody} />
+        </Body>
         <Box sx={{ display: 'flex', gap: 3, mt: [4, 8] }}>
           <OutlinedButton
-            sx={btnPad}
+            sx={sxs.btnPad}
             href={data?.detailButton1?.buttonLink?.buttonHref || ''}
             target={data?.detailButton1?.buttonBlankTarget ? '_blank' : '_self'}
           >
             {data?.detailButton1?.buttonText}
           </OutlinedButton>
           <ContainedButton
-            sx={btnPad}
+            sx={sxs.btnPad}
             href={data?.detailButton2?.buttonLink?.buttonHref || ''}
             target={data?.detailButton2?.buttonBlankTarget ? '_blank' : '_self'}
           >
@@ -209,7 +202,7 @@ export const TokenSection = (): JSX.Element => {
   );
 
   return (
-    <Section sx={{ pb: [22.25, 40] }}>
+    <Section sx={{ root: { pb: [22.25, 40] } }}>
       <Box sx={{ pt: [10, 12] }}>
         <Card />
       </Box>

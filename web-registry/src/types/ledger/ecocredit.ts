@@ -92,22 +92,3 @@ export interface QueryClassesResponse {
   classes: ClassInfo[];
   pagination?: PageResponse;
 }
-
-// TODO: pull these types from credit-class shacl schema
-export interface ApprovedMethodologyList {
-  '@type': 'schema:BreadcrumbList';
-  'schema:itemListElement': ApprovedMethodology[];
-  'schema:url': {
-    '@type': string;
-    '@value': string;
-  };
-}
-
-interface ApprovedMethodology {
-  '@type': 'regen:Methodology';
-  'schema:name': string;
-  'schema:url': {
-    '@type': string;
-    '@value': string;
-  };
-}

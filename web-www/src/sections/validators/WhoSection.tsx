@@ -6,9 +6,8 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { TitleDescription } from 'web-components/lib/components/text-layouts';
-import Description from 'web-components/lib/components/description';
-import Title from 'web-components/lib/components/title';
+import { TitleBody } from 'web-components/lib/components/text-layouts';
+import { Body, Title } from 'web-components/lib/components/typography';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
 import { ValidatorsWhoSectionQuery } from '../../generated/graphql';
@@ -17,20 +16,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   section: {
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(19.25),
-      paddingBottom: theme.spacing(12.5),
+      paddingBottom: theme.spacing(37.5),
     },
     [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(17.5),
-      paddingBottom: theme.spacing(15),
-    },
-  },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(7.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(5.25),
-      paddingBottom: theme.spacing(3.25),
+      paddingBottom: theme.spacing(15.25),
     },
   },
   description: {
@@ -50,6 +40,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   card: {
     height: theme.spacing(62.5),
+  },
+  slider: {
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing(4),
+    },
   },
 }));
 
@@ -99,9 +94,11 @@ const WhoSection = (): JSX.Element => {
       imageData={background?.childImageSharp?.fluid}
       topSection={false}
     >
-      <TitleDescription
+      <TitleBody
         title={data?.header || ''}
-        description={data?._rawBody}
+        body={data?._rawBody}
+        bodySize={['md', 'xl']}
+        sx={{ body: { maxWidth: 946 } }}
       />
       {(data?.validators || []).map((v, i) => {
         const items: JSX.Element[] = (v?.members || []).map((m, j) => (
@@ -114,13 +111,21 @@ const WhoSection = (): JSX.Element => {
         ));
 
         return (
-          <div key={i} className={styles.validators}>
-            <Title align="center" variant="h3" className={styles.title}>
+          <Box
+            key={i}
+            sx={{ pb: [0, 7], pt: [15, 20], ':last-of-type': { pb: [4, 10] } }}
+          >
+            <Title
+              align="center"
+              variant="h3"
+              mobileVariant="h5"
+              pb={[3.25, 7.75]}
+            >
               {v?.header}
             </Title>
-            <Description align="center" className={styles.description}>
+            <Body align="center" pb={[0, 10]}>
               {v?.description}
-            </Description>
+            </Body>
 
             <Box display={{ xs: 'none', sm: 'block' }}>
               <Grid container justifyContent="center" spacing={7}>
@@ -132,9 +137,13 @@ const WhoSection = (): JSX.Element => {
               </Grid>
             </Box>
             <Box display={{ xs: 'block', sm: 'none' }}>
-              <ResponsiveSlider itemWidth="90%" items={items} />
+              <ResponsiveSlider
+                itemWidth="90%"
+                items={items}
+                className={styles.slider}
+              />
             </Box>
-          </div>
+          </Box>
         );
       })}
     </BackgroundSection>

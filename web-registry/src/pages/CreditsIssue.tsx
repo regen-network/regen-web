@@ -18,7 +18,7 @@ import { DatePicker } from '@mui/lab';
 import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { useAllProjectsQuery } from '../generated/graphql';
 
 const ISSUE_CREDITS = gql`

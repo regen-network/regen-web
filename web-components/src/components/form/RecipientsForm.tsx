@@ -17,11 +17,10 @@ import {
   invalidAmount,
 } from '../inputs/validation';
 import TextField from '../inputs/TextField';
-import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import OutlinedButton from '../buttons/OutlinedButton';
 import TrashIcon from '../icons/TrashIcon';
-import { Label } from '../label';
+import { Subtitle, Label } from '../typography';
 
 const useStyles = makeStyles((theme: Theme) => ({
   description: {
@@ -202,9 +201,9 @@ export const RecipientsForm: React.FC<FormProps> = ({
                         type="checkbox"
                         className={styles.checkboxLabel}
                         label={
-                          <Description className={styles.checkboxDescription}>
+                          <Subtitle size="lg" color="primary.contrastText">
                             Send additional retired credits
-                          </Description>
+                          </Subtitle>
                         }
                       />
 

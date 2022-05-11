@@ -9,7 +9,9 @@ import SEO from '../components/seo';
 const ResourcesPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`
     query {
-      seoImage: file(relativePath: { eq: "resources-ledger-whitepaper-image.jpg" }) {
+      seoImage: file(
+        relativePath: { eq: "resources-ledger-whitepaper-image.jpg" }
+      ) {
         publicURL
       }
     }

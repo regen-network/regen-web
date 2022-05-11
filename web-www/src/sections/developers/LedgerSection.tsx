@@ -7,7 +7,7 @@ import SanityImage from 'gatsby-plugin-sanity-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import { TitleDescription } from 'web-components/lib/components/text-layouts';
+import { TitleBody } from 'web-components/lib/components/text-layouts';
 import { DevLedgerSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     left: 0,
     background:
       'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%)',
-  },
-  titleDesc: {
-    zIndex: 1,
   },
   cosmosImg: {
     [theme.breakpoints.up('sm')]: {
@@ -82,10 +79,10 @@ const LedgerSection = (): JSX.Element => {
             />
           )}
         </Box>
-        <TitleDescription
-          className={styles.titleDesc}
+        <TitleBody
           title={`${data?.header}`}
-          description={data?._rawBody}
+          body={data?._rawBody}
+          sx={{ root: { zIndex: 1 } }}
         />
       </Section>
       <div className={styles.bgGradient}>

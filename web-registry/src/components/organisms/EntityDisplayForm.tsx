@@ -7,9 +7,12 @@ import { Link as RouterLink, useParams } from 'react-router-dom';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import Modal from 'web-components/lib/components/modal';
-import Title from 'web-components/lib/components/title';
+import {
+  Body,
+  Subtitle,
+  Title,
+} from 'web-components/lib/components/typography';
 import Card from 'web-components/lib/components/cards/Card';
-import Description from 'web-components/lib/components/description';
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
@@ -94,22 +97,8 @@ type Errors = {
 };
 
 const useStyles = makeStyles(theme => ({
-  title: {
-    fontWeight: 700,
-    color: theme.palette.primary.contrastText,
-    fontFamily: theme.typography.fontFamily,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-    },
-  },
   field: {
     marginBottom: theme.spacing(8),
-  },
-  description: {
-    marginBottom: theme.spacing(4),
   },
   error: {
     marginTop: 0,
@@ -130,11 +119,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  modalTitle: {
-    maxWidth: '70%',
-    textAlign: 'center',
-    paddingBottom: theme.spacing(4),
-  },
   modalCard: {
     width: '100%',
     display: 'flex',
@@ -151,10 +135,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
-  },
-  examplePageText: {
-    fontSize: theme.typography.pxToRem(16),
-    paddingBottom: theme.spacing(5),
   },
   toggleDescription: {
     fontStyle: 'italic',
@@ -479,10 +459,10 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
           return (
             <Form translate="yes">
               <OnBoardingCard>
-                <Title className={styles.title}>
+                <Subtitle size="lg" sx={{ color: 'primary.contrastText' }}>
                   Choose the entities to show on the project page:
-                </Title>
-                <Description className={styles.description}>
+                </Subtitle>
+                <Body sx={{ mb: 4 }}>
                   Showing more entities increases the salability of the project.
                   You must show at least one entity on the project page. These
                   entities can only be edited in the previous step.&nbsp;
@@ -492,7 +472,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
                   >
                     See an example»
                   </Link>
-                </Description>
+                </Body>
 
                 {values['http://regen.network/landOwner'] &&
                   getToggle(
@@ -535,15 +515,18 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
       </Formik>
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
         <div className={styles.modalContent}>
-          <Title className={styles.modalTitle} variant="h5">
+          <Title
+            variant="h5"
+            sx={{ maxWidth: '70%', textAlign: 'center', pb: 4 }}
+          >
             Example of Entity Display
           </Title>
-          <Description className={styles.examplePageText}>
+          <Body size="md" mobileSize="md" sx={{ pb: 5 }}>
             See full{' '}
             <RouterLink to="/projects/wilmot" target="_blank">
               project page»
             </RouterLink>
-          </Description>
+          </Body>
           <Card className={styles.modalCard}>
             <ProjectTopCard
               classes={{

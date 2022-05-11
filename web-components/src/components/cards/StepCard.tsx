@@ -1,13 +1,12 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
-import { CardMedia } from '@mui/material';
+import { Box, CardMedia } from '@mui/material';
 import cx from 'clsx';
 
 import Card from '../cards/Card';
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
 import StepCircleBadge from '../icons/StepCircleBadge';
-import Title from '../title';
-import Description from '../description';
+import { Body, Label, Title } from '../typography';
 import Tag from '../tag';
 import StepFAQs from '../faq/StepFAQs';
 import { Image } from '../image';
@@ -61,13 +60,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   activeCard: {
     backgroundColor: theme.palette.primary.main,
   },
-  btn: {
-    margin: theme.spacing(3, 0, 5),
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(14),
-      padding: theme.spacing(2, 8),
-    },
-  },
   cardTop: {
     display: 'flex',
     flex: 1,
@@ -94,45 +86,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginRight: 0,
     borderRadius: 0,
     fontSize: theme.spacing(3),
-  },
-  cardBottom: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    padding: theme.spacing(3.5, 8, 6),
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(3.5, 3.5, 4),
-    },
-  },
-  step: {
-    color: theme.palette.info.main,
-    fontWeight: 800,
-    textTransform: 'uppercase',
-    fontSize: theme.spacing(3.5),
-  },
-  activeColor: {
-    color: theme.palette.secondary.main,
-  },
-  stepTitle: {
-    color: theme.palette.info.dark,
-    padding: theme.spacing(3.5, 0),
-    textAlign: 'center',
-    lineHeight: '145%',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-  },
-  activeTitle: {
-    color: theme.palette.primary.contrastText,
-  },
-  stepDescription: {
-    textAlign: 'center',
-    color: theme.palette.info.dark,
-    fontSize: theme.spacing(4.5),
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
   },
   media: {
     width: '100%',
@@ -221,31 +174,46 @@ function StepCard({
             )}
           </div>
         </div>
-        <div className={styles.cardBottom}>
-          <Title
-            variant="h6"
-            className={cx(styles.step, step.isActive && styles.activeColor)}
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'space-evenly',
+            pt: 3.5,
+            pb: [3.5, 8],
+            px: [4, 6],
+            gap: [2, 3],
+          }}
+        >
+          <Label
+            size="sm"
+            mobileSize="sm"
+            color={step.isActive ? 'secondary.main' : 'info.dark'}
           >
             step {step.stepNumber}
-          </Title>
+          </Label>
           <Title
             variant="h4"
-            className={cx(
-              styles.stepTitle,
-              step.isActive && styles.activeTitle,
-            )}
+            mobileVariant="h6"
+            align="center"
+            color={step.isActive ? 'primary.contrastText' : 'info.dark'}
           >
             {step.title}
           </Title>
-          <Description className={styles.stepDescription}>
+          <Body size="lg" align="center" color="info.dark">
             {step.description}
-          </Description>
+          </Body>
           {!!step.btnText && !!step.onBtnClick && (
-            <ContainedButton onClick={step.onBtnClick} className={styles.btn}>
+            <ContainedButton
+              size="large"
+              onClick={step.onBtnClick}
+              sx={{ mt: 3, mb: 5 }}
+            >
               {step.btnText}
             </ContainedButton>
           )}
-        </div>
+        </Box>
         {step.faqs && step.faqs.length > 0 && (
           <StepFAQs questionItems={step.faqs} isActive={step.isActive} />
         )}

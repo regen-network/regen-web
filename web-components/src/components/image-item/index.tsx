@@ -4,10 +4,8 @@ import { Variant } from '@mui/material/styles/createTypography';
 import clsx from 'clsx';
 import Grid from '@mui/material/Grid';
 
-import Title from '../title';
-import Description from '../description';
+import { Body, Title } from '../typography';
 import ContainedButton from '../buttons/ContainedButton';
-import { getFontSize } from '../../theme/sizing';
 
 export interface ImageItemProps {
   img: JSX.Element; // using pure img tag or gatsby-image
@@ -83,9 +81,7 @@ export default function ImageItem({
       >
         {title}
       </Title>
-      {description && (
-        <Description fontSize={getFontSize('big')}>{description}</Description>
-      )}
+      {description && <Body size="lg">{description}</Body>}
       {buttonText && buttonHref && (
         <ContainedButton
           size="large"

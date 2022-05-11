@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material';
+import { SxProps, Grid } from '@mui/material';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
@@ -10,8 +9,7 @@ import AmountField from '../inputs/AmountField';
 import LocationCountryField from '../inputs/LocationCountryField';
 import LocationStateField from '../inputs/LocationStateField';
 import ControlledTextField from '../inputs/ControlledTextField';
-import Title from '../title';
-import Description from '../description';
+import { Body, Title } from '../typography';
 import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
@@ -23,7 +21,7 @@ import { getISOString } from '../../utils/locationStandard';
  * send/transfer form, since it optionally includes the retirement of ecocredits.
  *
  * Retire retires a specified number of credits in the holder's account.
- * https://docs.regen.network/modules/ecocredit/03_messages.html#msgretire
+ * https://buf.build/regen/regen-ledger/docs/main:regen.ecocredit.v1#regen.ecocredit.v1.Msg.Retire
  *
  * Validation:
  *    holder: must be a valid address, and their signature must be present in the transaction
@@ -31,29 +29,9 @@ import { getISOString } from '../../utils/locationStandard';
  *      - batch_denom: must be a valid batch denomination
  *      - amount: must be positive (aka retiredAmount)
  *    location: must be a valid location
- *
- * Also:
- * https://docs.regen.network/modules/ecocredit/protobuf.html#msgretire
- * https://docs.regen.network/modules/ecocredit/protobuf.html#msgretire-retirecredits
  */
 
 const useStyles = makeStyles((theme: Theme) => ({
-  groupTitle: {
-    marginTop: theme.spacing(10.75),
-    marginBottom: theme.spacing(3),
-  },
-  description: {
-    marginBottom: 0,
-    '& a': {
-      cursor: 'pointer',
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(14),
-    },
-  },
   noteTextField: {
     '& label': {
       whiteSpace: 'unset',
@@ -78,7 +56,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface CreditRetireProps extends CreditRetireFieldsProps {
-  holder: string;
   onSubmit: (values: RetireFormValues) => void;
 }
 
@@ -107,6 +84,13 @@ interface CreditRetireFieldsProps extends BottomCreditRetireFieldsProps {
   batchDenom: string;
   availableTradableAmount: number;
 }
+
+const sxs = {
+  title: {
+    mt: 10.75,
+    mb: 3,
+  } as SxProps,
+};
 
 export interface BottomCreditRetireFieldsProps {
   mapboxToken: string;
@@ -170,7 +154,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
 
     return (
       <>
-        <Title className={styles.groupTitle} variant="h5">
+        <Title variant="h5" sx={sxs.title}>
           Transaction note
         </Title>
         <Field
@@ -182,13 +166,14 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
           optional
           defaultStyle={false}
         />
-        <Title className={styles.groupTitle} variant="h5">
+        <Title variant="h5" sx={sxs.title}>
           Location of retirement
         </Title>
-        <Description className={styles.description}>
+
+        <Body>
           Please enter a location for the retirement of these credits. This
           prevents double counting of credits in different locations.
-        </Description>
+        </Body>
         <Grid container className={styles.stateCountryGrid}>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
             <LocationStateField
@@ -235,32 +220,16 @@ export const CreditRetireFields = ({
   );
 };
 
-const Label = styled('div')(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  fontSize: theme.typography.pxToRem(16),
-  marginTop: theme.spacing(8),
-  [theme.breakpoints.up('sm')]: {
-    fontSize: theme.typography.pxToRem(18),
-  },
-}));
-
-const LabelCenter = styled('div')(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  fontSize: theme.typography.pxToRem(16),
-  textAlign: 'center',
-  [theme.breakpoints.up('sm')]: {
-    fontSize: theme.typography.pxToRem(18),
-  },
-}));
-
 export const RetirementReminder = ({
-  centered,
+  sx,
 }: {
-  centered?: boolean;
+  sx?: SxProps<Theme>;
 }): JSX.Element => {
-  const msg = 'Retirement is permanent and non-reversible.';
-  if (centered) return <LabelCenter>{msg}</LabelCenter>;
-  return <Label>{msg}</Label>;
+  return (
+    <Body size="lg" color="black" sx={sx}>
+      Retirement is permanent and non-reversible.
+    </Body>
+  );
 };
 
 export const validateCreditRetire = (
@@ -291,7 +260,6 @@ export const initialValues = {
 };
 
 const CreditRetireForm: React.FC<FormProps> = ({
-  holder,
   batchDenom,
   availableTradableAmount,
   mapboxToken,
@@ -312,9 +280,9 @@ const CreditRetireForm: React.FC<FormProps> = ({
       validate={validateHandler}
       onSubmit={onSubmit}
     >
-      {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
+      {({ submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
-          <RetirementReminder centered />
+          <RetirementReminder sx={{ textAlign: 'center', mb: 8 }} />
           <CreditRetireFields
             availableTradableAmount={availableTradableAmount}
             batchDenom={batchDenom}

@@ -9,7 +9,7 @@ import { Loading } from 'web-components/lib/components/loading';
 
 import { getBatchWithSupplyForDenom } from '../lib/ecocredit';
 import { getMetadata } from '../lib/metadata-graph';
-import { useBatchDetailsQuery } from '../generated/graphql';
+import { useProjectsByMetadataQuery } from '../generated/graphql';
 
 import type { BatchInfoWithSupply } from '../types/ledger/ecocredit';
 import type { BatchMetadataLD } from '../generated/json-ld';
@@ -54,17 +54,24 @@ export const BatchDetails: React.FC = () => {
     fetch();
   }, [batchDenom]);
 
+  const vcsProjectId = metadata?.['regen:vcsProjectId'];
   const {
     data: offchainData,
     loading: dbLoading,
     error,
-  } = useBatchDetailsQuery({
-    skip: !batchDenom,
-    variables: { batchDenom: batchDenom as string },
+  } = useProjectsByMetadataQuery({
+    skip: !vcsProjectId,
+    variables: {
+      metadata: {
+        'regen:vcsProjectId': {
+          '@type': 'xsd:unsignedInt',
+          '@value': vcsProjectId,
+        },
+      },
+    },
   });
 
-  const projectHandle =
-    offchainData?.creditVintageByBatchDenom?.projectByProjectId?.handle || '';
+  const project = offchainData?.allProjects?.nodes?.[0];
 
   if (ledgerLoading || dbLoading) return <Loading />;
 
@@ -99,7 +106,8 @@ export const BatchDetails: React.FC = () => {
           <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <BatchInfoGrid
               batch={batch}
-              projectHandle={projectHandle}
+              projectHandle={project?.handle}
+              projectName={project?.metadata?.['schema:name']}
               sx={{ py: 10, borderBottom: 1, borderColor: 'grey.100' }}
             />
             <Title variant="h5" sx={{ mt: 10, mb: 8 }}>

@@ -200,9 +200,10 @@ const getPartyFromMetadata = (
     type: metadataRole?.['@type'].includes('regen:Organization') // covers Organization or OrganizationDisplay
       ? 'ORGANIZATION' // to provide default image
       : '',
+    image: metadataRole?.['schema:image']?.['@value'],
+    address: metadataRole?.['schema:location']?.place_name || '',
     individual: '',
     role: '',
-    address: '',
   };
 };
 

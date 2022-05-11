@@ -338,13 +338,17 @@ function CertificatePage(): JSX.Element {
                   documentId: creditClassVersion?.documentId,
                   name: creditClassVersion?.name || '',
                   version: creditClassVersion?.version || '',
-                  url: creditClassVersion?.metadata?.['schema:url']?.['@value'],
+                  url: creditClassVersion?.metadata?.[
+                    'http://schema.org/url'
+                  ]?.['@value'],
                 },
                 methodology: {
                   documentId: methodologyVersion?.documentId,
                   name: methodologyVersion?.name || '',
                   version: methodologyVersion?.version || '',
-                  url: methodologyVersion?.metadata?.['schema:url']?.['@value'],
+                  url: methodologyVersion?.metadata?.[
+                    'http://schema.org/url'
+                  ]?.['@value'],
                 },
                 projectType: project.type || '',
               }}
@@ -404,9 +408,9 @@ function CertificatePage(): JSX.Element {
           </Grid>
           {retirements?.map(
             (r, i) =>
-              r?.metadata?.['schema:url'] && (
+              r?.metadata?.['http://schema.org/url'] && (
                 <OutlinedButton
-                  href={r?.metadata?.['schema:url']}
+                  href={r?.metadata?.['http://schema.org/url']}
                   target="_blank"
                   className={classes.issuanceButton}
                 >

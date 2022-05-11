@@ -32,8 +32,6 @@ export const CreateCreditBatchRecipients: React.FC<Props> = ({ issuer }) => {
         </Title>
         <RecipientsForm
           sender={issuer}
-          batchDenom={'denom11192e1e7d9182e3'}
-          availableTradableAmount={10}
           onSubmit={handleSave}
           mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN || ''}
         />

@@ -174,7 +174,7 @@ const CreditSendForm: React.FC<FormProps> = ({
           />
           <AmountField
             name={'tradableAmount'}
-            label={'Amount to send'}
+            label={'Amount tradable'}
             availableAmount={availableTradableAmount}
             denom={batchDenom}
           />
@@ -186,7 +186,7 @@ const CreditSendForm: React.FC<FormProps> = ({
             className={styles.checkboxLabel}
             label={
               <Description className={styles.checkboxDescription}>
-                Retire credits upon transfer
+                Send additional retired credits
               </Description>
             }
           />

@@ -1,41 +1,22 @@
 import React from 'react';
-import {
-  Formik,
-  Form,
-  Field,
-  // FormikErrors,
-  FieldArray,
-} from 'formik';
-import { makeStyles, styled } from '@mui/styles';
+import { Formik, Form, Field, FieldArray } from 'formik';
+import { makeStyles, styled, useTheme } from '@mui/styles';
 
 import { Theme } from '../../theme/muiTheme';
-import TextField from '../inputs/TextField';
-import AmountField from '../inputs/AmountField';
-import Description from '../description';
-import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
-  CreditRetireFields,
+  BottomCreditRetireFields,
   RetireFormValues,
-  // validateCreditRetire,
   initialValues as initialValuesRetire,
   BottomCreditRetireFieldsProps,
 } from './CreditRetireForm';
-// import {
-//   requiredMessage,
-//   insufficientCredits,
-//   validateAmount,
-// } from '../inputs/validation';
+import TextField from '../inputs/TextField';
+import Description from '../description';
+import CheckboxLabel from '../inputs/CheckboxLabel';
 import OutlinedButton from '../buttons/OutlinedButton';
+import TrashIcon from '../icons/TrashIcon';
+import { Label } from '../label';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  //   senderField: {
-  //     '& label': {
-  //       color: `${theme.palette.primary.contrastText} !important`,
-  //     },
-  //     '& .MuiInputBase-formControl': {
-  //       backgroundColor: theme.palette.info.light,
-  //     },
-  //   },
   description: {
     marginBottom: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
@@ -65,8 +46,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface FormProps extends BottomCreditRetireFieldsProps {
   sender: string;
-  batchDenom: string;
-  availableTradableAmount: number;
   onSubmit: (values: FormValues) => void;
 }
 
@@ -83,12 +62,11 @@ export interface FormValues {
 
 export const RecipientsForm: React.FC<FormProps> = ({
   sender,
-  batchDenom,
-  availableTradableAmount,
   mapboxToken,
   onSubmit,
 }) => {
   const styles = useStyles();
+  const theme = useTheme<Theme>();
 
   const recipientInitialValues = {
     sender,
@@ -149,26 +127,41 @@ export const RecipientsForm: React.FC<FormProps> = ({
                 {values.recipients.length > 0 &&
                   values.recipients.map((friend, index) => (
                     <Card key={index}>
-                      <button
-                        type="button"
-                        className="secondary"
-                        onClick={() => remove(index)}
-                      >
-                        X
-                      </button>
+                      {index > 0 && (
+                        <OutlinedButton
+                          sx={{
+                            border: 'none !important',
+                          }}
+                          onClick={() => remove(index)}
+                          startIcon={
+                            <TrashIcon color={theme.palette.secondary.main} />
+                          }
+                        >
+                          <Label
+                            sx={{
+                              fontSize: {
+                                xs: '14px',
+                                sm: '18px',
+                                color: theme.palette.info.dark,
+                              },
+                            }}
+                          >
+                            Delete
+                          </Label>
+                        </OutlinedButton>
+                      )}
                       <Field
                         name={`recipients.${index}.recipient`}
                         type="text"
                         label="Recipient address"
                         component={TextField}
                       />
-                      <AmountField
+                      <Field
                         name={`recipients.${index}.tradableAmount`}
-                        label={'Amount'}
-                        availableAmount={availableTradableAmount}
-                        denom={batchDenom}
+                        type="number"
+                        label="Amount tradable"
+                        component={TextField}
                       />
-
                       <Field
                         name={`recipients.${index}.withRetire`}
                         component={CheckboxLabel}
@@ -176,19 +169,25 @@ export const RecipientsForm: React.FC<FormProps> = ({
                         className={styles.checkboxLabel}
                         label={
                           <Description className={styles.checkboxDescription}>
-                            Retire credits upon issuance
+                            Send additional retired credits
                           </Description>
                         }
                       />
 
                       {values.recipients[index].withRetire && (
-                        <CreditRetireFields
-                          availableTradableAmount={availableTradableAmount}
-                          batchDenom={batchDenom}
-                          mapboxToken={mapboxToken}
-                          arrayIndex={index}
-                          arrayPrefix={`recipients.${index}.`}
-                        />
+                        <>
+                          <Field
+                            name={`recipients.${index}.retiredAmount`}
+                            type="number"
+                            label="Amount retired"
+                            component={TextField}
+                          />
+                          <BottomCreditRetireFields
+                            mapboxToken={mapboxToken}
+                            arrayIndex={index}
+                            arrayPrefix={`recipients.${index}.`}
+                          />
+                        </>
                       )}
                     </Card>
                   ))}

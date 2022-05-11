@@ -101,10 +101,7 @@ export interface RetireFormValues extends MetaRetireFormValues {
 
 interface RetireFormValuesArray {
   recipients: RetireFormValues[];
-  // [key: string]: RetireFormValues[];
 }
-
-// type RetireFormValuesArray = Record<string, RetireFormValues[]>;
 
 interface CreditRetireFieldsProps extends BottomCreditRetireFieldsProps {
   batchDenom: string;
@@ -197,11 +194,11 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
             <LocationStateField
               country={country}
               optional={!postalCode}
-              arrayPrefix={arrayPrefix}
+              name={`${arrayPrefix}stateProvince`}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <LocationCountryField arrayPrefix={arrayPrefix} />
+            <LocationCountryField name={`${arrayPrefix}country`} />
           </Grid>
         </Grid>
         <Field
@@ -225,7 +222,7 @@ export const CreditRetireFields = ({
     <>
       <AmountField
         name={arrayPrefix ? `${arrayPrefix}retiredAmount` : 'retiredAmount'}
-        label="Amount to retire"
+        label="Amount retired"
         availableAmount={availableTradableAmount}
         denom={batchDenom}
       />

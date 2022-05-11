@@ -1,24 +1,11 @@
-/* eslint-disable no-console */
 import React from 'react';
-import { makeStyles, styled } from '@mui/styles';
-import {
-  Formik,
-  Form,
-  Field,
-  // FormikErrors,
-  FieldArray,
-  validateYupSchema,
-  yupToFormErrors,
-} from 'formik';
+import { Formik, Form, Field, FieldArray } from 'formik';
 import * as Yup from 'yup';
+import { makeStyles, styled, useTheme } from '@mui/styles';
 
 import { Theme } from '../../theme/muiTheme';
-import TextField from '../inputs/TextField';
-import AmountField from '../inputs/AmountField';
-import Description from '../description';
-import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
-  CreditRetireFields,
+  BottomCreditRetireFields,
   RetireFormValues,
   RetirementReminder,
   initialValues as initialValuesRetire,
@@ -26,21 +13,17 @@ import {
 } from './CreditRetireForm';
 import {
   requiredMessage,
-  insufficientCredits,
+  // insufficientCredits,
   invalidAmount,
 } from '../inputs/validation';
+import TextField from '../inputs/TextField';
+import Description from '../description';
+import CheckboxLabel from '../inputs/CheckboxLabel';
 import OutlinedButton from '../buttons/OutlinedButton';
-// import { SchemaLike } from 'yup/lib/types';
+import TrashIcon from '../icons/TrashIcon';
+import { Label } from '../label';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  //   senderField: {
-  //     '& label': {
-  //       color: `${theme.palette.primary.contrastText} !important`,
-  //     },
-  //     '& .MuiInputBase-formControl': {
-  //       backgroundColor: theme.palette.info.light,
-  //     },
-  //   },
   description: {
     marginBottom: theme.spacing(5),
     [theme.breakpoints.up('sm')]: {
@@ -70,8 +53,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export interface FormProps extends BottomCreditRetireFieldsProps {
   sender: string;
-  batchDenom: string;
-  availableTradableAmount: number;
   onSubmit: (values: FormValues) => void;
 }
 
@@ -96,49 +77,17 @@ const validationSchema = Yup.object().shape({
           .required(invalidAmount)
           .positive()
           .integer()
-          .min(1, invalidAmount)
-          .test(
-            'tradableAmount-test',
-            insufficientCredits,
-            // 'The amount of available credits has been exceeded',
-            (value, context): any => {
-              const totalAmount =
-                context.options.context?.values.recipients.reduce(
-                  (sum: number, recipient: Recipient) =>
-                    (sum += Number(recipient.tradableAmount)
-                      ? Number(recipient.tradableAmount)
-                      : 0),
-                  0,
-                );
-              return (
-                totalAmount <=
-                  context.options.context?.availableTradableAmount &&
-                (value as number) <=
-                  context.options.context?.availableTradableAmount
-              );
-            },
-          ),
+          .min(1, invalidAmount),
 
         withRetire: Yup.boolean().required(),
-        retiredAmount: Yup.number()
-          .when('withRetire', {
-            is: true,
-            then: Yup.number()
-              .required()
-              .positive()
-              .integer()
-              .min(1, invalidAmount),
-          })
-          .test(
-            'retiredAmount-test',
-            // insufficientCredits,
-            'The amount retired cannot exceed the amount allocated to this recipient',
-            (value, context): any => {
-              // eslint-disable-next-line no-console
-              console.log('retiredAmount-test', context);
-              return (value as number) <= context.parent.tradableAmount;
-            },
-          ),
+        retiredAmount: Yup.number().when('withRetire', {
+          is: true,
+          then: Yup.number()
+            .required()
+            .positive()
+            .integer()
+            .min(1, invalidAmount),
+        }),
         // note: Yup.string().when('withRetire', {
         //   is: true,
         //   then: Yup.string(),
@@ -167,12 +116,11 @@ const validationSchema = Yup.object().shape({
 
 export const RecipientsForm: React.FC<FormProps> = ({
   sender,
-  batchDenom,
-  availableTradableAmount,
   mapboxToken,
   onSubmit,
 }) => {
   const styles = useStyles();
+  const theme = useTheme<Theme>();
 
   const recipientInitialValues = {
     sender,
@@ -189,25 +137,24 @@ export const RecipientsForm: React.FC<FormProps> = ({
   return (
     <Formik
       initialValues={initialValues}
-      validate={(values: FormValues) => {
-        // eslint-disable-next-line no-console
-        console.log('validate values', values);
-        try {
-          validateYupSchema<FormValues>(values, validationSchema, true, {
-            values,
-            availableTradableAmount,
-          });
-        } catch (err) {
-          return yupToFormErrors(err);
-        }
-        return {};
-      }}
+      validationSchema={validationSchema}
+      // validate={(values: FormValues) => {
+      //   // eslint-disable-next-line no-console
+      //   console.log('validate values', values);
+      //   try {
+      //     validateYupSchema<FormValues>(values, validationSchema, true, {
+      //       values,
+      //       availableTradableAmount,
+      //     });
+      //   } catch (err) {
+      //     return yupToFormErrors(err);
+      //   }
+      //   return {};
+      // }}
       onSubmit={onSubmit}
     >
       {({ values, errors }) => (
         <Form>
-          {console.log('> VALUES', values)}
-          {errors && console.log('> ERRORS', errors)}
           <FieldArray name="recipients">
             {({ insert, remove, push }) => (
               <div>
@@ -215,13 +162,27 @@ export const RecipientsForm: React.FC<FormProps> = ({
                   values.recipients.map((recipient, index) => (
                     <Card key={index}>
                       {index > 0 && (
-                        <button
-                          type="button"
-                          className="secondary"
+                        <OutlinedButton
+                          sx={{
+                            border: 'none !important',
+                          }}
                           onClick={() => remove(index)}
+                          startIcon={
+                            <TrashIcon color={theme.palette.secondary.main} />
+                          }
                         >
-                          X Delete
-                        </button>
+                          <Label
+                            sx={{
+                              fontSize: {
+                                xs: '14px',
+                                sm: '18px',
+                                color: theme.palette.info.dark,
+                              },
+                            }}
+                          >
+                            Delete
+                          </Label>
+                        </OutlinedButton>
                       )}
                       <Field
                         name={`recipients.${index}.recipient`}
@@ -229,13 +190,12 @@ export const RecipientsForm: React.FC<FormProps> = ({
                         label="Recipient address"
                         component={TextField}
                       />
-                      <AmountField
+                      <Field
                         name={`recipients.${index}.tradableAmount`}
-                        label={'Amount'}
-                        availableAmount={availableTradableAmount}
-                        denom={batchDenom}
+                        type="number"
+                        label="Amount tradable"
+                        component={TextField}
                       />
-
                       <Field
                         name={`recipients.${index}.withRetire`}
                         component={CheckboxLabel}
@@ -243,7 +203,7 @@ export const RecipientsForm: React.FC<FormProps> = ({
                         className={styles.checkboxLabel}
                         label={
                           <Description className={styles.checkboxDescription}>
-                            Retire credits upon issuance
+                            Send additional retired credits
                           </Description>
                         }
                       />
@@ -251,9 +211,13 @@ export const RecipientsForm: React.FC<FormProps> = ({
                       {values.recipients[index].withRetire && (
                         <>
                           <RetirementReminder />
-                          <CreditRetireFields
-                            availableTradableAmount={availableTradableAmount}
-                            batchDenom={batchDenom}
+                          <Field
+                            name={`recipients.${index}.retiredAmount`}
+                            type="number"
+                            label="Amount retired"
+                            component={TextField}
+                          />
+                          <BottomCreditRetireFields
                             mapboxToken={mapboxToken}
                             arrayIndex={index}
                             arrayPrefix={`recipients.${index}.`}

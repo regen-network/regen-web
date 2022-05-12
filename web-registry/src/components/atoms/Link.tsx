@@ -1,13 +1,9 @@
 import React from 'react';
+import { Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import MuiLink from '@mui/material/Link';
-import { SxProps } from '@mui/system';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { LinkItem } from 'web-components/lib/components/footer/footer-new';
 
-interface LinkProps extends LinkItem {
-  className?: string;
-  sx?: SxProps<Theme>;
+interface LinkProps extends MuiLinkProps {
+  href: string; // require href
 }
 
 /**

@@ -47,6 +47,8 @@ const LinkOrDash = ({
 
 const MetaDetail: React.FC<{ label: string }> = ({ label, children }) => (
   <LabeledDetail label={label} labelSize="xs">
-    <Body mobileSize="md">{children}</Body>
+    <Body mobileSize="md" styleLinks={false}>
+      {children}
+    </Body>
   </LabeledDetail>
 );

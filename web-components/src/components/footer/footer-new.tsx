@@ -11,7 +11,7 @@ import { SocialLinks } from './SocialLinks';
 
 export interface LinkItem {
   href: string;
-  target?: '_blank' | '_self';
+  target?: '_blank' | '_self' | string;
 }
 
 interface FooterItemItem extends LinkItem {

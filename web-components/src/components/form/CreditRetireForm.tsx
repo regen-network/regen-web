@@ -128,12 +128,16 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
         stateProvince,
         postalCode,
       }: LocationType): Promise<void> => {
-        const isoString = await getISOString(mapboxToken, {
-          countryKey: country,
-          stateProvince,
-          postalCode,
-        });
-        setFieldValue(retirementLocationName, isoString);
+        try {
+          const isoString = await getISOString(mapboxToken, {
+            countryKey: country,
+            stateProvince,
+            postalCode,
+          });
+          setFieldValue(retirementLocationName, isoString);
+        } catch (err) {
+          // TODO
+        }
       };
 
       if (stateProvince || country || postalCode) {

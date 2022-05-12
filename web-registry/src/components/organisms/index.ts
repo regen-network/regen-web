@@ -8,7 +8,6 @@ export * from './BasketsTable';
 export * from './BasketOverview';
 export * from './BuyCreditsModal';
 export * from './ConfirmationModal';
-export * from './CreateCreditBatchRecipients';
 export * from './CreditActivityTable';
 export * from './CreditBatches';
 export * from './ProjectCreditBatchesTable';

@@ -11,11 +11,7 @@ import {
   initialValues as initialValuesRetire,
   BottomCreditRetireFieldsProps,
 } from './CreditRetireForm';
-import {
-  requiredMessage,
-  // insufficientCredits,
-  invalidAmount,
-} from '../inputs/validation';
+import { requiredMessage, invalidAmount } from '../inputs/validation';
 import TextField from '../inputs/TextField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -77,7 +73,6 @@ const validationSchema = Yup.object().shape({
           .positive()
           .integer()
           .min(1, invalidAmount),
-
         withRetire: Yup.boolean().required(),
         retiredAmount: Yup.number().when('withRetire', {
           is: true,
@@ -87,26 +82,6 @@ const validationSchema = Yup.object().shape({
             .integer()
             .min(1, invalidAmount),
         }),
-        // note: Yup.string().when('withRetire', {
-        //   is: true,
-        //   then: Yup.string(),
-        // }),
-        country: Yup.string().when('withRetire', {
-          is: true,
-          then: Yup.string().required(),
-        }),
-        // stateProvince: Yup.string().when('withRetire', {
-        //   is: true,
-        //   then: Yup.string(),
-        // }),
-        // postalCode: Yup.string().when('withRetire', {
-        //   is: true,
-        //   then: Yup.string(),
-        // }),
-        // retirementLocation: Yup.string().when('withRetire', {
-        //   is: true,
-        //   then: Yup.string(),
-        // }),
       }),
     )
     .required('Must have recipients') // these constraints are shown if and only if inner constraints are satisfied
@@ -119,7 +94,6 @@ export const RecipientsForm: React.FC<FormProps> = ({
   onSubmit,
 }) => {
   const styles = useStyles();
-  const theme = useTheme<Theme>();
 
   const recipientInitialValues = {
     sender,
@@ -137,51 +111,18 @@ export const RecipientsForm: React.FC<FormProps> = ({
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      // validate={(values: FormValues) => {
-      //   // eslint-disable-next-line no-console
-      //   console.log('validate values', values);
-      //   try {
-      //     validateYupSchema<FormValues>(values, validationSchema, true, {
-      //       values,
-      //       availableTradableAmount,
-      //     });
-      //   } catch (err) {
-      //     return yupToFormErrors(err);
-      //   }
-      //   return {};
-      // }}
       onSubmit={onSubmit}
     >
-      {({ values, errors }) => (
+      {({ values }) => (
         <Form>
           <FieldArray name="recipients">
-            {({ insert, remove, push }) => (
+            {({ remove, push }) => (
               <div>
                 {values.recipients.length > 0 &&
                   values.recipients.map((recipient, index) => (
-                    <Card key={index}>
+                    <Card key={`recipient-${index}`}>
                       {index > 0 && (
-                        <OutlinedButton
-                          sx={{
-                            border: 'none !important',
-                          }}
-                          onClick={() => remove(index)}
-                          startIcon={
-                            <TrashIcon color={theme.palette.secondary.main} />
-                          }
-                        >
-                          <Label
-                            sx={{
-                              fontSize: {
-                                xs: '14px',
-                                sm: '18px',
-                                color: theme.palette.info.dark,
-                              },
-                            }}
-                          >
-                            Delete
-                          </Label>
-                        </OutlinedButton>
+                        <DeleteButton onClick={() => remove(index)} />
                       )}
                       <Field
                         name={`recipients.${index}.recipient`}
@@ -209,7 +150,7 @@ export const RecipientsForm: React.FC<FormProps> = ({
 
                       {values.recipients[index].withRetire && (
                         <>
-                          <RetirementReminder />
+                          <RetirementReminder sx={{ mt: 8 }} />
                           <Field
                             name={`recipients.${index}.retiredAmount`}
                             type="number"
@@ -226,13 +167,9 @@ export const RecipientsForm: React.FC<FormProps> = ({
                     </Card>
                   ))}
 
-                <Card>
-                  <OutlinedButton
-                    onClick={() => push({ ...recipientInitialValues })}
-                  >
-                    + Add recipient
-                  </OutlinedButton>
-                </Card>
+                <AddRecipientButton
+                  onClick={() => push({ ...recipientInitialValues })}
+                />
               </div>
             )}
           </FieldArray>
@@ -256,3 +193,43 @@ const Card = styled('div')(({ theme }) => ({
   borderRadius: '5px',
   backgroundColor: theme.palette.primary.main,
 }));
+
+interface ButtonProps {
+  onClick: () => void;
+}
+
+const DeleteButton: React.FC<ButtonProps> = ({ onClick }) => {
+  const theme = useTheme<Theme>();
+
+  return (
+    <OutlinedButton
+      size="small"
+      sx={{
+        border: 'none !important',
+        maxWidth: '100px',
+        alignSelf: 'flex-end',
+        mb: 4,
+      }}
+      onClick={onClick}
+      startIcon={<TrashIcon color={theme.palette.secondary.main} />}
+    >
+      <Label
+        sx={{
+          fontSize: {
+            xs: '14px',
+            sm: '18px',
+            color: theme.palette.info.dark,
+          },
+        }}
+      >
+        Delete
+      </Label>
+    </OutlinedButton>
+  );
+};
+
+const AddRecipientButton: React.FC<ButtonProps> = ({ onClick }) => (
+  <Card>
+    <OutlinedButton onClick={onClick}>+ Add recipient</OutlinedButton>
+  </Card>
+);

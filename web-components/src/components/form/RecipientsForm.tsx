@@ -19,30 +19,8 @@ import TrashIcon from '../icons/TrashIcon';
 import { Subtitle, Label } from '../typography';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  description: {
-    marginBottom: theme.spacing(5),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    '& a': {
-      cursor: 'pointer',
-    },
-  },
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
-    alignItems: 'initial',
-    '& .MuiCheckbox-root': {
-      alignSelf: 'end',
-    },
-  },
-  checkboxDescription: {
-    color: theme.palette.primary.contrastText,
-    fontSize: theme.spacing(4.5),
-    fontWeight: 'bold',
-    marginLeft: theme.spacing(1),
   },
 }));
 

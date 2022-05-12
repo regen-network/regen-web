@@ -13,13 +13,17 @@ import { EcocreditsSection, LineItemLabelAbove } from '../components/molecules';
 import { CreditBatches, MoreProjectsSection } from '../components/organisms';
 import { toTitleCase } from '../lib/titleCase';
 import { getAccountUrl } from '../lib/block-explorer';
-import { ClassInfo, ApprovedMethodologyList } from '../types/ledger/ecocredit';
+import { ClassInfo } from '../types/ledger/ecocredit';
 import { CreditClassByOnChainIdQuery } from '../generated/graphql';
+import {
+  CreditClassMetadataLD,
+  ApprovedMethodologies,
+} from '../generated/json-ld';
 
 interface CreditDetailsProps {
   dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
-  metadata?: any;
+  metadata?: CreditClassMetadataLD;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -106,6 +110,10 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   metadata,
 }) => {
   const styles = useStyles();
+  const offsetGenerationMethods = metadata?.['regen:offsetGenerationMethod'];
+  const sectoralScopes = metadata?.['regen:sectoralScope'];
+  const verificationMethod = metadata?.['regen:verificationMethod'];
+  const sourceRegistry = metadata?.['regen:sourceRegistry'];
 
   const Projects: React.FC = () => {
     const projects = dbClass?.projectsByCreditClassId?.nodes;
@@ -122,8 +130,10 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   };
 
   const ApprovedMethodologies: React.FC<{
-    methodologyList: ApprovedMethodologyList;
+    methodologyList?: ApprovedMethodologies;
   }> = ({ methodologyList }) => {
+    if (!methodologyList) return null;
+
     const methodologies = methodologyList?.['schema:itemListElement'];
     const count = methodologies?.length;
     const firstMethodology = methodologies?.[0];
@@ -208,21 +218,17 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                   </Body>
                 }
               />
-              {metadata?.['regen:sourceRegistry']?.['schema:name'] && (
+              {sourceRegistry?.['schema:name'] && (
                 <LineItemLabelAbove
                   label="registry"
                   data={
                     <Link
-                      href={
-                        metadata?.['regen:sourceRegistry']?.['schema:url']?.[
-                          '@value'
-                        ]
-                      }
+                      href={sourceRegistry?.['schema:url']?.['@value']}
                       target="_blank"
                     >
                       <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Body size="xl" sx={{ mr: 1 }}>
-                          {metadata?.['regen:sourceRegistry']?.['schema:name']}
+                          {sourceRegistry?.['schema:name']}
                         </Body>
                         <SmallArrowIcon
                           sx={{ mt: '-2px' }}
@@ -236,34 +242,42 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               <ApprovedMethodologies
                 methodologyList={metadata?.['regen:approvedMethodologies']}
               />
-              <LineItemLabelAbove
-                label="offset generation method"
-                data={metadata?.['regen:offsetGenerationMethod']?.[
-                  'schema:itemListElement'
-                ]?.map((method: string) => (
-                  <Body size="xl" key={method}>
-                    {toTitleCase(method)}
-                  </Body>
-                ))}
-              />
-              <LineItemLabelAbove
-                label="verification method"
-                data={
-                  <Body size="xl" sx={{ mr: 1 }}>
-                    {toTitleCase(metadata?.['regen:verificationMethod'])}
-                  </Body>
-                }
-              />
-              <LineItemLabelAbove
-                label="sectoral scope"
-                data={metadata?.['regen:sectoralScope']?.[
-                  'schema:itemListElement'
-                ]?.map((sector: string) => (
-                  <Body size="xl" key={sector}>
-                    {sector}
-                  </Body>
-                ))}
-              />
+              {offsetGenerationMethods && offsetGenerationMethods?.length > 0 && (
+                <LineItemLabelAbove
+                  label={`offset generation method${
+                    offsetGenerationMethods.length > 1 ? 's' : ''
+                  }`}
+                  data={
+                    <>
+                      {offsetGenerationMethods.map((method: string) => (
+                        <Body size="xl">{toTitleCase(method)}</Body>
+                      ))}
+                    </>
+                  }
+                />
+              )}
+              {verificationMethod && (
+                <LineItemLabelAbove
+                  label="verification method"
+                  data={
+                    <Body size="xl">{toTitleCase(verificationMethod)}</Body>
+                  }
+                />
+              )}
+              {sectoralScopes && sectoralScopes?.length > 0 && (
+                <LineItemLabelAbove
+                  label={`sectoral scope${
+                    sectoralScopes.length > 1 ? 's' : ''
+                  }`}
+                  data={
+                    <>
+                      {sectoralScopes.map((sector: string) => (
+                        <Body size="xl">{sector}</Body>
+                      ))}
+                    </>
+                  }
+                />
+              )}
             </Box>
           </Box>
           <Box

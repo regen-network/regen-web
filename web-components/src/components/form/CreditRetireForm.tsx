@@ -181,7 +181,6 @@ export const RetirementReminder = ({
 }: {
   sx?: SxProps<Theme>;
 }): JSX.Element => {
-  // const msg = 'Retirement is permanent and non-reversible.';
   return (
     <Body size="lg" color="black" sx={sx}>
       Retirement is permanent and non-reversible.
@@ -237,7 +236,7 @@ const CreditRetireForm: React.FC<FormProps> = ({
       validate={validateHandler}
       onSubmit={onSubmit}
     >
-      {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
+      {({ submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
           <RetirementReminder sx={{ textAlign: 'center', mb: 8 }} />
           <CreditRetireFields

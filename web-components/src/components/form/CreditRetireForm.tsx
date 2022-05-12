@@ -239,7 +239,7 @@ const CreditRetireForm: React.FC<FormProps> = ({
     >
       {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
-          <RetirementReminder sx={{ textAlign: 'center' }} />
+          <RetirementReminder sx={{ textAlign: 'center', mb: 8 }} />
           <CreditRetireFields
             availableTradableAmount={availableTradableAmount}
             batchDenom={batchDenom}

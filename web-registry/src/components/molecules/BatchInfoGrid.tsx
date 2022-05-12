@@ -35,6 +35,7 @@ export const BatchInfoGrid: React.FC<{
     <GridItem>
       <BatchDetail label="Credit Class">
         <LinkWithArrow
+          target="_self"
           href={`/credit-classes/${batch.class_id}`}
           label={batch.class_id}
         />
@@ -59,7 +60,11 @@ const GridItem: React.FC = ({ children }) => (
 
 const BatchDetail: React.FC<{ label: string }> = ({ label, children }) => (
   <LabeledDetail label={label}>
-    <Body size="lg" sx={{ display: 'flex', alignItems: 'center' }}>
+    <Body
+      size="lg"
+      styleLinks={false}
+      sx={{ display: 'flex', alignItems: 'center' }}
+    >
       {children}
     </Body>
   </LabeledDetail>

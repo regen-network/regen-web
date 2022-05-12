@@ -24,7 +24,6 @@ type Props = {
   lightBg?: boolean;
   isBanner?: boolean;
   classes?: {
-    root?: string;
     main?: string;
     section?: string;
     button?: string;
@@ -36,13 +35,22 @@ type StyleProps = {
 };
 
 const useStyles = makeStyles<Theme, StyleProps>(theme => ({
-  main: {
+  main: props => ({
     display: 'flex',
     flexDirection: 'column',
     alignContent: 'center',
     justifyContent: 'center',
     margin: '0 auto',
-  },
+    ...(!props.lightBg && {
+      '& a': {
+        transition: '200ms ease-in-out',
+        color: theme.palette.secondary.contrastText,
+        '&:hover': {
+          color: theme.palette.secondary.dark,
+        },
+      },
+    }),
+  }),
   btn: {
     margin: theme.spacing(10, 4, 0),
     [theme.breakpoints.down('sm')]: {
@@ -69,7 +77,6 @@ const HeroAction: React.FC<Props> = ({ classes, ...props }) => {
       img={props.img || ''}
       classes={{
         main: cx(styles.main, classes?.main),
-        root: classes?.root,
         section: cx(styles.section, classes?.section),
       }}
       isBanner={props.isBanner}

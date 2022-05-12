@@ -51,11 +51,12 @@ const useStyles = makeStyles(theme => ({
     },
   },
   bottomSectionWidth: {
-    maxWidth: theme.spacing(175),
+    maxWidth: theme.spacing(200),
   },
   bottomSection: {
     display: 'flex',
     justifyContent: 'center',
+    paddingBottom: theme.spacing(17.75),
   },
 }));
 

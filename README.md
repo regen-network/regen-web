@@ -19,6 +19,7 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
   - [Code style](#code-style)
   - [Typography](#typography)
     - [Sizing guide](#sizing-guide)
+    - [Gotchas](#gotchas)
   - [Timeout Issue on Slower Connections](#timeout-issue-on-slower-connections)
 
 ## Installation
@@ -196,7 +197,33 @@ Responsive styles are generally normalized (e.g. an `H1` on desktop translates t
 <Body mobileSize="md" /> // keep default `md` size on mobile
 ```
 
-All of these components also accept MUI's [SX Prop](https://mui.com/system/the-sx-prop/)
+One small gotcha: due to how `styled` components and the `sx` prop function together, if you want to use a custom `fontSize` through `sx`, you have to pass responsive values:
+
+```tsx
+<Title sx={{ fontSize: 12 }}> // does not work as expected
+<Title sx={{ fontSize: [12] }}> // works
+<Title sx={{ fontSize: [12, 18] }}> // works
+<Title sx={{ fontSize: { xs: 12 } }}> // works
+```
+
+All of these components also accept MUI's [SX Prop](https://mui.com/system/the-sx-prop/).
+
+The `<Body>` component by default will add styles to child `Link` and `ul/ol` elements, which can be overridden through props:
+
+```tsx
+<Body>
+  <Link>text</Link> // will render as green w/ bold text
+  <ol>
+    <li>list text</li> // will render with a green dot and custom positioning
+  </ol>
+</Body>
+<Body styleLinks={false} styleLists={false}>
+  <Link>text</Link> // will render as default text
+  <ol>
+    <li>list text</li> // will render with default list styles
+  </ol>
+</Body>
+```
 
 ### Sizing guide
 
@@ -211,6 +238,8 @@ All of these components also accept MUI's [SX Prop](https://mui.com/system/the-s
 |  16px  |   1rem   |         4         |        subtitleMedium, bodyMedium         |
 |  14px  | 0.875rem |        3.5        |   subtitleSmall, bodySmall, buttonSmall   |
 |  12px  | 0.75rem  |         3         |  subtitleXSmall bodyXSmall, buttonXSmall  |
+
+### Gotchas
 
 ## Timeout Issue on Slower Connections
 

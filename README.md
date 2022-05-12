@@ -19,7 +19,6 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
   - [Code style](#code-style)
   - [Typography](#typography)
     - [Sizing guide](#sizing-guide)
-    - [Gotchas](#gotchas)
   - [Timeout Issue on Slower Connections](#timeout-issue-on-slower-connections)
 
 ## Installation
@@ -238,8 +237,6 @@ The `<Body>` component by default will add styles to child `Link` and `ul/ol` el
 |  16px  |   1rem   |         4         |        subtitleMedium, bodyMedium         |
 |  14px  | 0.875rem |        3.5        |   subtitleSmall, bodySmall, buttonSmall   |
 |  12px  | 0.75rem  |         3         |  subtitleXSmall bodyXSmall, buttonXSmall  |
-
-### Gotchas
 
 ## Timeout Issue on Slower Connections
 

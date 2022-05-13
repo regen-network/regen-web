@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { useTheme } from '@mui/styles';
-import { Grid, List, ListItem, Link, Box, Typography } from '@mui/material';
+import { Grid, List, ListItem, Link, Box } from '@mui/material';
 
 import { Body, Label } from '../typography';
 import Section from '../section';
@@ -154,10 +154,10 @@ const Footer: React.FC<{
           justifyContent="space-between"
         >
           <Grid item>
-            <Typography sx={{ typography: ['textMedium', 'textSmall'] }}>
+            <Body styleLinks={false} color="primary">
               <LinkComponent href={termsUrl}>Terms</LinkComponent> |{' '}
               <LinkComponent href={privacyUrl}>Privacy</LinkComponent>
-            </Typography>
+            </Body>
           </Grid>
           <Grid item>
             <Body size="sm">© 2021 Regen Network Development, Inc</Body>

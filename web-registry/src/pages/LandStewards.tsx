@@ -56,13 +56,6 @@ const useStyles = makeStyles(theme => ({
     maxWidth: theme.spacing(192),
     minHeight: 0,
   },
-  bottomHeroDescription: {
-    [theme.breakpoints.down('sm')]: {
-      '& p': {
-        fontSize: theme.typography.pxToRem(20),
-      },
-    },
-  },
   bottomHeroButton: {
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
@@ -143,7 +136,6 @@ const LandStewards = (): JSX.Element => {
           classes={{
             main: styles.bottomHeroMain,
             section: styles.bottomHeroSection,
-            description: styles.bottomHeroDescription,
             button: styles.bottomHeroButton,
           }}
           img={content?.moreQuestionsSection?.image?.image?.asset?.url || ''}

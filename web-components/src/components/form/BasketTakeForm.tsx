@@ -4,9 +4,7 @@ import { makeStyles } from '@mui/styles';
 import { Collapse } from '@mui/material';
 import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
 
-import { Theme } from '../../theme/muiTheme';
 import AmountField from '../inputs/AmountField';
-import Description from '../description';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import {
   BottomCreditRetireFields,
@@ -18,7 +16,9 @@ import {
 } from './CreditRetireForm';
 import Submit from './Submit';
 import { validateAmount } from '../inputs/validation';
-import { RegenModalProps } from '../modal';
+import { Subtitle } from '../typography';
+import type { RegenModalProps } from '../modal';
+import type { Theme } from '../../theme/muiTheme';
 
 /**
  * Take - takes credits from a basket starting from the oldest credits first.
@@ -35,16 +35,6 @@ import { RegenModalProps } from '../modal';
 const useStyles = makeStyles((theme: Theme) => ({
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
-    alignItems: 'initial',
-    '& .MuiCheckbox-root': {
-      alignSelf: 'end',
-    },
-  },
-  checkboxDescription: {
-    color: theme.palette.primary.contrastText,
-    fontSize: theme.spacing(4.5),
-    fontWeight: 'bold',
-    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -157,15 +147,15 @@ const BasketTakeForm: React.FC<FormProps> = ({
               disabled={!basket.disableAutoRetire}
               className={styles.checkboxLabel}
               label={
-                <Description className={styles.checkboxDescription}>
+                <Subtitle size="lg" color="primary.contrastText">
                   Retire credits upon transfer
-                </Description>
+                </Subtitle>
               }
             />
             <Collapse in={values.retireOnTake} collapsedSize={0}>
               {values.retireOnTake && (
                 <>
-                  <RetirementReminder />
+                  <RetirementReminder sx={{ mt: 8 }} />
                   <BottomCreditRetireFields mapboxToken={mapboxToken} />
                 </>
               )}

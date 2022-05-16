@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
@@ -9,9 +10,9 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { MarketingDescription } from '../../components/Description';
 import { CommunityCollectiveSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
+import { Body, Title } from 'web-components/lib/components/typography';
 
 const useStyles = makeStyles<Theme>(theme => ({
   section: {
@@ -31,11 +32,6 @@ const useStyles = makeStyles<Theme>(theme => ({
       width: '100%',
     },
   },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(38),
-    },
-  },
   center: {
     display: 'flex',
     flexDirection: 'column',
@@ -45,22 +41,6 @@ const useStyles = makeStyles<Theme>(theme => ({
     },
   },
 }));
-
-type QueryData = {
-  bg: {
-    childImageSharp: {
-      fluid: FluidObject;
-    };
-  };
-  text: {
-    collectiveSection: {
-      title: string;
-      body: string;
-      buttonText: string;
-      signupFormUrl: string;
-    };
-  };
-};
 
 const query = graphql`
   query communityCollectiveSection {
@@ -94,15 +74,24 @@ const CollectiveSection = (): JSX.Element => {
   return (
     <BackgroundImage fluid={bg?.childImageSharp?.fluid as FluidObject}>
       <Section
-        title={data?.title || ''}
+        title={<Title variant="h2">{data?.title}</Title>}
         classes={{
           root: clsx(styles.section, styles.center),
           title: styles.title,
         }}
       >
-        <MarketingDescription className={clsx(styles.content, styles.center)}>
-          <BlockContent content={data?._rawBody} />
-        </MarketingDescription>
+        <Body
+          size="xl"
+          mobileSize="md"
+          sx={{
+            width: ['100%', '80%'],
+            pb: 7,
+            pt: 4,
+            maxWidth: 946,
+          }}
+        >
+          <BlockContent content={data?._rawBody} sx={{ color: 'info.dark' }} />
+        </Body>
         <ContainedButton size="large" onClick={() => setOpen(true)}>
           {data?.buttonText}
         </ContainedButton>

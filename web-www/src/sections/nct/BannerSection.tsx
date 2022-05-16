@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
 
-import Title from 'web-components/lib/components/title';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 
 import type { NctBannerSectionQuery } from '../../generated/graphql';
@@ -31,7 +31,7 @@ export const BannerSection = (): JSX.Element => {
 
   return (
     <BackgroundImage fluid={data?.image?.image?.asset?.fluid as FluidObject}>
-      <Section sx={{ py: [20, 30] }}>
+      <Section sx={{ root: { pb: [20, 30] } }}>
         <Box sx={{ maxWidth: 700, m: '0 auto' }}>
           <Title
             variant="h3"
@@ -39,17 +39,12 @@ export const BannerSection = (): JSX.Element => {
           >
             {data?.title}
           </Title>
-          <BlockContent
-            content={data?._rawBody}
-            sxWrap={{
-              maxWidth: 650,
-              '& p': {
-                color: 'primary.main',
-                fontSize: { xs: 18, sm: 22 },
-                textAlign: 'center',
-              },
-            }}
-          />
+          <Body
+            size="xl"
+            sx={{ color: 'primary.main', textAlign: 'center', pt: 4 }}
+          >
+            <BlockContent content={data?._rawBody} />
+          </Body>
         </Box>
       </Section>
     </BackgroundImage>

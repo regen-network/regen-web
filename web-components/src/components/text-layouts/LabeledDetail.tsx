@@ -1,31 +1,20 @@
 import React from 'react';
-import { Box, styled, SxProps, Theme } from '@mui/material';
-import { Label as UnstyledLabel } from '../label';
+import { Box, SxProps } from '@mui/material';
+import { Label } from '../typography';
 
-const Root = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(2),
-}));
-
-const Label = styled(UnstyledLabel)(({ theme }) => ({
-  color: theme.palette.info.main,
-  fontSize: 12,
-  [theme.breakpoints.up('sm')]: {
-    fontSize: 14,
-  },
-}));
+import type { LabelSize } from '../typography/sizing';
+import type { Theme } from '~/theme/muiTheme';
 
 /** Grey label over child elements */
 export const LabeledDetail: React.FC<{
   label: string;
-  sx?: {
-    root?: SxProps<Theme>;
-    label?: SxProps<Theme>;
-  };
-}> = ({ label, children, sx }) => (
-  <Root sx={sx?.root}>
-    <Label sx={sx?.label}>{label}</Label>
+  sx?: SxProps<Theme>;
+  labelSize?: LabelSize;
+}> = ({ label, children, labelSize, sx }) => (
+  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, ...sx }}>
+    <Label size={labelSize || 'sm'} color="info.main">
+      {label}
+    </Label>
     <div>{children}</div>
-  </Root>
+  </Box>
 );

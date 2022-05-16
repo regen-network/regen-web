@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/material';
 
 import { StyledTableContainer } from 'web-components/lib/components/table';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 
 import { ReactComponent as CloudData } from '../../assets/svgs/cloud-data.svg';
 

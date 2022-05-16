@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
-import Title from '../title';
+import { Title } from '../typography';
 import RegenIcon from '../icons/RegenIcon';
 import { pluralize } from '../../utils/pluralize';
 

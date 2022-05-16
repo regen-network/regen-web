@@ -1,20 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import { Link } from '@mui/material';
 import { SxProps } from '@mui/system';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { parseText } from 'web-components/lib/utils/textParser';
-
-const useStylesLink = makeStyles(theme => ({
-  arrowIcon: {
-    marginLeft: theme.spacing(1),
-    marginBottom: theme.spacing(0.3),
-    height: 9,
-    width: 13,
-  },
-}));
 
 export interface LinkWithArrowProps {
   sx?: SxProps<Theme>;
@@ -31,8 +21,6 @@ const LinkWithArrow: React.FC<LinkWithArrowProps> = ({
   className,
   target = '_blank',
 }) => {
-  const styles = useStylesLink();
-
   return (
     <Link
       href={href}
@@ -42,7 +30,7 @@ const LinkWithArrow: React.FC<LinkWithArrowProps> = ({
       rel="noreferrer"
     >
       {parseText(label)}
-      {href && <SmallArrowIcon className={styles.arrowIcon} />}
+      {href && <SmallArrowIcon sx={{ ml: 2, mb: 0.3, height: 9, width: 13 }} />}
     </Link>
   );
 };

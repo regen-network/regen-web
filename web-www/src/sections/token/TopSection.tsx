@@ -3,7 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import BackgroundSection from '../../components/BackgroundSection';
 import { TokenTopSectionQuery } from '../../generated/graphql';
 
@@ -48,7 +48,8 @@ const query = graphql`
 
 const TopSection = (): JSX.Element => {
   const styles = useStyles();
-  const { background, sanityTokenPage } = useStaticQuery<TokenTopSectionQuery>(query);
+  const { background, sanityTokenPage } =
+    useStaticQuery<TokenTopSectionQuery>(query);
   const data = sanityTokenPage?.topSection;
 
   return (

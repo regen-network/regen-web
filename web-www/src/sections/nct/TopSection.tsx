@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import BackgroundSection from '../../components/BackgroundSection';
 import { BlockContent } from 'web-components/src/components/block-content';
 
@@ -35,9 +35,8 @@ export const TopSection = (): JSX.Element => {
       }
       body={
         <BlockContent
-          noYMargin
           content={data?._rawBody}
-          sxWrap={{ '& p > a': { color: 'primary.main' } }}
+          sx={{ '& p > a': { color: 'primary.main' } }}
         />
       }
       imageData={data?.image?.image?.asset?.fluid}

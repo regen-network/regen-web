@@ -4,7 +4,7 @@ import cx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Card from 'web-components/lib/components/cards/Card';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { Methodology } from '../../mocks/mocks';
@@ -34,9 +34,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       padding: theme.spacing(8),
     },
   },
-  title: {
-    marginBottom: theme.spacing(4),
-  },
 }));
 
 function MethodologyDetailsColumn({
@@ -50,7 +47,7 @@ function MethodologyDetailsColumn({
   return (
     <div className={cx(classes?.root, className)}>
       <Card className={styles.card}>
-        <Title className={styles.title} variant="h4">
+        <Title variant="h4" sx={{ mb: 4 }}>
           Methodology Details
         </Title>
         {nameRaw && (

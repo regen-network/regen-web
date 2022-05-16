@@ -1,11 +1,10 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useTheme, Box } from '@mui/material';
 import { Dictionary } from 'lodash';
-import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Label } from 'web-components/lib/components/label';
-import Title from 'web-components/lib/components/title';
+import { Label } from 'web-components/lib/components/typography';
+import { Title } from 'web-components/lib/components/typography';
 import { formatNumber } from 'web-components/lib/utils/format';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 
@@ -15,16 +14,7 @@ interface StatisticProps {
   arrow?: 'upRight' | 'downLeft';
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  label: {
-    fontSize: theme.typography.pxToRem(14),
-    color: theme.palette.info.main,
-    whiteSpace: 'nowrap',
-  },
-}));
-
 const Statistic: React.FC<StatisticProps> = ({ label, count, arrow }) => {
-  const styles = useStyles();
   const theme = useTheme<Theme>();
 
   const getColor = (arrowDirection: string): string => {
@@ -37,7 +27,13 @@ const Statistic: React.FC<StatisticProps> = ({ label, count, arrow }) => {
 
   return (
     <Box sx={{ mt: 2 }}>
-      <Label className={styles.label}>{label}</Label>
+      <Label
+        size="sm"
+        mobileSize="sm"
+        sx={{ color: 'info.main', whiteSpace: 'nowrap' }}
+      >
+        {label}
+      </Label>
       <Box sx={{ display: 'flex', alignItems: 'center', pt: 2 }}>
         {arrow && (
           <Box

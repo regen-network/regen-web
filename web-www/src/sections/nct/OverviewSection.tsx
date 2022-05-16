@@ -1,16 +1,15 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
-import Title from 'web-components/lib/components/title';
+import { Body, Title, Label } from 'web-components/lib/components/typography';
 
 import { BlockContent } from 'web-components/src/components/block-content';
 import Section from 'web-components/lib/components/section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import { Label } from 'web-components/lib/components/label';
 
 import type { NctOverviewSectionQuery } from '../../generated/graphql';
 import type { FluidObject } from 'gatsby-image';
@@ -69,7 +68,7 @@ export const OverviewSection = (): JSX.Element => {
       Tag="section"
       fluid={data?.background?.asset?.fluid as FluidObject}
     >
-      <Section sx={{ pb: [22.25, 40] }}>
+      <Section sx={{ root: { pb: [22.25, 40] } }}>
         <Box
           sx={{
             display: 'flex',
@@ -82,11 +81,9 @@ export const OverviewSection = (): JSX.Element => {
               <Title variant="h1">{data?.title}</Title>
               <SanityImage {...(data?.titleIcon as any)} alt="NCT icon" />
             </Box>
-            <BlockContent
-              noYMargin
-              content={data?._rawBody}
-              sxWrap={{ '& p': { fontSize: [18, 22] } }}
-            />
+            <Body size="xl">
+              <BlockContent content={data?._rawBody} />
+            </Body>
           </Box>
           {/* TODO: this conditional check is temporary until the basket pages are live */}
           {data?.button?.buttonLink?.buttonHref && (
@@ -109,11 +106,11 @@ export const OverviewSection = (): JSX.Element => {
         >
           {data?.items?.map((item, i) => (
             <div key={i}>
-              <Label sx={{ fontSize: [14, 18] }}>{item?.label || ''}</Label>
+              <Label>{item?.label || ''}</Label>
               <OptionalLink link={item?.link?.buttonHref}>
-                <Typography sx={{ fontSize: [16, 18], pt: 2 }}>
+                <Body size="lg" pt={2}>
                   {item?.text}
-                </Typography>
+                </Body>
               </OptionalLink>
             </div>
           ))}

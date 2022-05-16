@@ -18,9 +18,7 @@ const TxErrorModal: React.FC<Props> = props => {
           value: {
             name: props.error,
           },
-          sx: {
-            color: 'error.main',
-          },
+          color: 'error.main',
         },
       ]}
       {...props}

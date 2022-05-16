@@ -5,12 +5,10 @@ import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-// import { getFontSize } from 'web-components/lib/theme/sizing';
 import Section from 'web-components/lib/components/section';
-import Title from 'web-components/lib/components/title';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
-import Description from 'web-components/lib/components/description';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ReadMore from 'web-components/lib/components/read-more';
 
@@ -45,29 +43,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     lineHeight: '150%',
     position: 'relative',
-  },
-  description: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
-      paddingTop: theme.spacing(7.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-      paddingTop: theme.spacing(3.75),
-    },
-  },
-  quotePersonName: {
-    color: theme.palette.secondary.main,
-    letterSpacing: '1px',
-    fontWeight: 800,
-    textTransform: 'uppercase',
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(5.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      paddingTop: theme.spacing(4),
-    },
   },
   quotePersonRole: {
     [theme.breakpoints.up('sm')]: {
@@ -276,9 +251,9 @@ function ProjectTopSection({
             </Title>
           )}
           {primaryDescription && (
-            <Description className={styles.description}>
+            <Body size="xl" mobileSize="md" pt={[3.75, 7.5]}>
               {primaryDescription}
-            </Description>
+            </Body>
           )}
           {isVCSProject && <AdditionalProjectMetadata metadata={metadata} />}
           <LazyLoad offset={50}>
@@ -322,8 +297,8 @@ function ProjectTopSection({
             <div>
               <Title
                 variant="h4"
-                sx={{ ml: { xs: 4, sm: 4.5 } }}
                 className={styles.tagline}
+                sx={{ ml: { xs: 4, sm: 4.5 } }}
               >
                 <QuoteMark sx={{ top: 16, left: { xs: -15, sm: -18 } }}>
                   “
@@ -335,12 +310,10 @@ function ProjectTopSection({
                   ”
                 </QuoteMark>
               </Title>
-              <Title variant="h6" className={styles.quotePersonName}>
+              <Label mobileSize="xs" color="secondary.main" pt={[4, 5.5]}>
                 {quote['schema:name']}
-              </Title>
-              <Description className={styles.quotePersonRole}>
-                {quote['schema:jobTitle']}
-              </Description>
+              </Label>
+              <Body mobileSize="xs">{quote['schema:jobTitle']}</Body>
             </div>
           )}
           {batchData?.totals && (

@@ -1,7 +1,6 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+import { Box, Grid, useMediaQuery, useTheme } from '@mui/material';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import cx from 'clsx';
@@ -13,8 +12,7 @@ import FAQSection from '../sections/shared/FAQSection';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import Description from 'web-components/lib/components/description';
-import Title from 'web-components/lib/components/title';
+import { Body, Title } from 'web-components/lib/components/typography';
 import Card from 'web-components/lib/components/cards/Card';
 import {
   requiredMessage,
@@ -27,7 +25,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import { BlockContent } from 'web-components/src/components/block-content';
 import Banner from 'web-components/lib/components/banner';
 
-import { ContactPageQuery } from '../generated/graphql';
+import type { ContactPageQuery } from '../generated/graphql';
 
 interface Values {
   name: string;
@@ -60,21 +58,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: theme.spacing(8),
     },
   },
-  subtitle: {
-    '& p': {
-      margin: 0,
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(10.5),
-      maxWidth: theme.spacing(139),
-      margin: '0 auto',
-      fontSize: theme.spacing(5.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(7.5),
-      fontSize: theme.spacing(4.5),
-    },
-  },
   container: {
     [theme.breakpoints.up('sm')]: {
       maxWidth: theme.spacing(175.25),
@@ -82,34 +65,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       margin: '0 auto',
     },
   },
-  email: {
-    paddingTop: theme.spacing(8.5),
-  },
-  body: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-  },
-  emailBody: {
-    lineHeight: '125%',
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(5.75),
-    },
-  },
   card: {
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(13.75)} ${theme.spacing(7.5)} ${theme.spacing(
-        12.75,
-      )}`,
+      padding: theme.spacing(13.75, 7.5, 12.75),
       marginBottom: theme.spacing(25),
     },
     [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(9.5)} ${theme.spacing(5)} ${theme.spacing(
-        11.25,
-      )}`,
+      padding: theme.spacing(9.5, 5, 11.25),
       marginBottom: theme.spacing(16.25),
     },
   },
@@ -134,46 +96,9 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
-  button: {
-    float: 'right',
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(15),
-      width: theme.spacing(65.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(12.5),
-      width: theme.spacing(38.75),
-    },
-  },
-  gridLeft: {
-    [theme.breakpoints.up('sm')]: {
-      paddingRight: theme.spacing(3.75),
-    },
-  },
-  gridRight: {
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(3.75),
-    },
-  },
   defaultSelect: {
     '& .MuiInputBase-root': {
       color: theme.palette.info.main,
-    },
-  },
-  messageForPartners: {
-    color: theme.palette.primary.contrastText,
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(-8.5),
-      fontSize: theme.spacing(5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(-7),
-      fontSize: theme.spacing(4),
-    },
-  },
-  contactInfo: {
-    [theme.breakpoints.up('sm')]: {
-      paddingRight: theme.spacing(5),
     },
   },
 }));
@@ -225,10 +150,18 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
           titleVariant="h1"
           classes={{ root: styles.section, title: styles.title }}
         >
-          <Description align="center" className={styles.subtitle}>
+          <Body
+            size="xl"
+            align="center"
+            sx={{
+              maxWidth: ['100%', 556],
+              pb: [7.5, 10.5],
+              m: { sm: '0 auto' },
+            }}
+          >
             <BlockContent content={data?._rawBody} />
-          </Description>
-          <div className={styles.container}>
+          </Body>
+          <Box sx={{ maxWidth: 700, m: '0 auto', pb: 32 }}>
             <Card elevation={1} className={styles.card}>
               <Formik
                 initialValues={{
@@ -292,41 +225,28 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                       <Form translate="yes">
                         <div>
                           <Grid container>
-                            <Grid
-                              item
-                              xs={12}
-                              sm={6}
-                              className={styles.gridLeft}
-                            >
+                            <Grid item xs={12} sm={6} sx={{ pr: [0, 3.75] }}>
                               <Field
                                 className={styles.textField}
                                 component={TextField}
                                 label="Your full name"
                                 name="name"
+                                forceDefaultStyle
                               />
                             </Grid>
-                            <Grid
-                              item
-                              xs={12}
-                              sm={6}
-                              className={styles.gridRight}
-                            >
+                            <Grid item xs={12} sm={6} sx={{ pl: [0, 3.75] }}>
                               <Field
                                 component={TextField}
                                 className={styles.textField}
                                 type="email"
                                 label="Your email address"
                                 name="email"
+                                forceDefaultStyle
                               />
                             </Grid>
                           </Grid>
                           <Grid container>
-                            <Grid
-                              item
-                              xs={12}
-                              sm={6}
-                              className={styles.gridLeft}
-                            >
+                            <Grid item xs={12} sm={6} sx={{ pr: [0, 3.75] }}>
                               <Field
                                 component={TextField}
                                 className={styles.textField}
@@ -336,12 +256,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                                 forceDefaultStyle
                               />
                             </Grid>
-                            <Grid
-                              item
-                              xs={12}
-                              sm={6}
-                              className={styles.gridRight}
-                            >
+                            <Grid item xs={12} sm={6} sx={{ pl: [0, 3.75] }}>
                               <Field
                                 options={[
                                   { value: '', label: 'Select one' },
@@ -362,11 +277,16 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                         </div>
                         {values.requestType ===
                           'partnerships@regen.network' && (
-                          <Description className={styles.messageForPartners}>
+                          <Body
+                            size="lg"
+                            mobileSize="md"
+                            color="primary.contrastText"
+                            sx={{ mt: [7, 8.5] }}
+                          >
                             <BlockContent
                               content={data?._rawMessageForPartners}
                             />
-                          </Description>
+                          </Body>
                         )}
                         <Field
                           component={TextField}
@@ -378,11 +298,15 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                           minRows={matches ? 6 : 4}
                         />
                         <ContainedButton
-                          sx={{ mt: 12.5 }}
+                          sx={{
+                            mt: 12.5,
+                            float: 'right',
+                            width: [155, 262],
+                          }}
                           disabled={
                             (submitCount > 0 && !isValid) || isSubmitting
                           }
-                          className={styles.button}
+                          size="large"
                           onClick={submitForm}
                         >
                           send
@@ -400,17 +324,17 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
               </Formik>
             </Card>
             <Grid container>
-              <Grid item xs={12} sm={6} className={styles.contactInfo}>
+              <Grid item xs={12} sm={6} sx={{ pr: [null, 5] }}>
                 <Title variant="h4">{data?.location?.title}</Title>
-                <Description className={styles.body}>
+                <Body size="lg" pt={2}>
                   <BlockContent content={data?.location?._rawBody} />
-                </Description>
-                <Title className={styles.email} variant="h4">
+                </Body>
+                <Title variant="h4" sx={{ pt: 8.5 }}>
                   {data?.email?.title}
                 </Title>
-                <Description className={cx(styles.emailBody, styles.body)}>
+                <Body size="lg" pt={2} pb={[5.75, 0]}>
                   <BlockContent content={data?.email?._rawBody} />
-                </Description>
+                </Body>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Img
@@ -420,7 +344,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                 />
               </Grid>
             </Grid>
-          </div>
+          </Box>
         </Section>
         <FAQSection
           header={data?.faq?.title || ''}

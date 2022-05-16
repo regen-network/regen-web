@@ -41,14 +41,29 @@ const CaseStudy: React.FC<Props> = ({ data, location }) => {
           'Explore Regen Network case studies where technology, science and regenerative land use practices intersect.'
         }
       />
-      <TopSection background={item?.background?.image?.asset?.fluid as FluidObject} name={item?.name || ''} />
+      <TopSection
+        background={item?.background?.image?.asset?.fluid as FluidObject}
+        name={item?.name || ''}
+      />
       <AboutSection {...(item?.aboutSection as SanityCaseStudyAboutSection)} />
-      <ContextSection {...(item?.contextSection as SanityCaseStudyContextSection)} />
-      <ApproachSection {...(item?.approachSection as SanityCaseStudyApproachSection)} />
-      <FigureSection {...(item?.figureSection as SanityCaseStudyFigureSection)} />
-      <FundingSection {...(item?.fundingSection as SanityCaseStudyFundingSection)} />
-      <ConclusionSection {...(item?.conclusionSection as SanityCaseStudyConclusionSection)} />
-      <BottomSection {...(item?.bottomSection as SanityCaseStudyBottomSection)} />
+      <ContextSection
+        {...(item?.contextSection as SanityCaseStudyContextSection)}
+      />
+      <ApproachSection
+        {...(item?.approachSection as SanityCaseStudyApproachSection)}
+      />
+      <FigureSection
+        {...(item?.figureSection as SanityCaseStudyFigureSection)}
+      />
+      <FundingSection
+        {...(item?.fundingSection as SanityCaseStudyFundingSection)}
+      />
+      <ConclusionSection
+        {...(item?.conclusionSection as SanityCaseStudyConclusionSection)}
+      />
+      <BottomSection
+        {...(item?.bottomSection as SanityCaseStudyBottomSection)}
+      />
     </>
   );
 };

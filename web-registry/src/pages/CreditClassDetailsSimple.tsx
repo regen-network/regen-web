@@ -3,9 +3,7 @@ import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Description from 'web-components/lib/components/description';
-import Title from 'web-components/lib/components/title';
-import { Label } from 'web-components/lib/components/label';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import ReadMore from 'web-components/lib/components/read-more';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { truncate } from 'web-components/lib/utils/truncate';
@@ -15,13 +13,17 @@ import { EcocreditsSection, LineItemLabelAbove } from '../components/molecules';
 import { CreditBatches, MoreProjectsSection } from '../components/organisms';
 import { toTitleCase } from '../lib/titleCase';
 import { getAccountUrl } from '../lib/block-explorer';
-import { ClassInfo, ApprovedMethodologyList } from '../types/ledger/ecocredit';
+import { ClassInfo } from '../types/ledger/ecocredit';
 import { CreditClassByOnChainIdQuery } from '../generated/graphql';
+import {
+  CreditClassMetadataLD,
+  ApprovedMethodologies,
+} from '../generated/json-ld';
 
 interface CreditDetailsProps {
   dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
-  metadata?: any;
+  metadata?: CreditClassMetadataLD;
 }
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -108,6 +110,10 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   metadata,
 }) => {
   const styles = useStyles();
+  const offsetGenerationMethods = metadata?.['regen:offsetGenerationMethod'];
+  const sectoralScopes = metadata?.['regen:sectoralScope'];
+  const verificationMethod = metadata?.['regen:verificationMethod'];
+  const sourceRegistry = metadata?.['regen:sourceRegistry'];
 
   const Projects: React.FC = () => {
     const projects = dbClass?.projectsByCreditClassId?.nodes;
@@ -124,8 +130,10 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   };
 
   const ApprovedMethodologies: React.FC<{
-    methodologyList: ApprovedMethodologyList;
+    methodologyList?: ApprovedMethodologies;
   }> = ({ methodologyList }) => {
+    if (!methodologyList) return null;
+
     const methodologies = methodologyList?.['schema:itemListElement'];
     const count = methodologies?.length;
     const firstMethodology = methodologies?.[0];
@@ -136,12 +144,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
         label="approved methodologies"
         data={
           <Box>
-            <Description
-              className={styles.description}
-              key={firstMethodology?.['schema:name']}
-            >
+            <Body size="xl" key={firstMethodology?.['schema:name']}>
               {firstMethodology?.['schema:name']}
-            </Description>
+            </Body>
             {count > 1 && (
               <Link
                 sx={{
@@ -152,7 +157,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 href={methodologyList?.['schema:url']?.['@value']}
                 target="_blank"
               >
-                <Label sx={{ mr: 2 }}>{`+ ${count - 1} more`}</Label>{' '}
+                <Label sx={{ fontSize: [16], mr: 2 }}>{`+ ${
+                  count - 1
+                } more`}</Label>{' '}
                 <SmallArrowIcon className={styles.arrow} />
               </Link>
             )}
@@ -184,13 +191,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
             }}
           >
             <Box sx={{ mb: 6 }}>
-              <Label
-                sx={{
-                  fontSize: { xs: 12, sm: 14 },
-                  color: 'info.dark',
-                  mb: 4,
-                }}
-              >
+              <Label size="sm" color="info.dark" mb={4}>
                 credit class
               </Label>
               <Title variant="h1">
@@ -212,30 +213,23 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               <LineItemLabelAbove
                 label="credit type"
                 data={
-                  <Description sx={{ mr: 1 }} className={styles.description}>
+                  <Body size="xl" sx={{ mr: 1 }}>
                     {toTitleCase(onChainClass.credit_type.name)}
-                  </Description>
+                  </Body>
                 }
               />
-              {metadata?.['regen:sourceRegistry']?.['schema:name'] && (
+              {sourceRegistry?.['schema:name'] && (
                 <LineItemLabelAbove
                   label="registry"
                   data={
                     <Link
-                      href={
-                        metadata?.['regen:sourceRegistry']?.['schema:url']?.[
-                          '@value'
-                        ]
-                      }
+                      href={sourceRegistry?.['schema:url']?.['@value']}
                       target="_blank"
                     >
                       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Description
-                          sx={{ mr: 1 }}
-                          className={styles.description}
-                        >
-                          {metadata?.['regen:sourceRegistry']?.['schema:name']}
-                        </Description>
+                        <Body size="xl" sx={{ mr: 1 }}>
+                          {sourceRegistry?.['schema:name']}
+                        </Body>
                         <SmallArrowIcon
                           sx={{ mt: '-2px' }}
                           className={styles.arrow}
@@ -248,34 +242,42 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               <ApprovedMethodologies
                 methodologyList={metadata?.['regen:approvedMethodologies']}
               />
-              <LineItemLabelAbove
-                label="offset generation method"
-                data={metadata?.['regen:offsetGenerationMethod']?.[
-                  'schema:itemListElement'
-                ]?.map((method: string) => (
-                  <Description className={styles.description} key={method}>
-                    {toTitleCase(method)}
-                  </Description>
-                ))}
-              />
-              <LineItemLabelAbove
-                label="verification method"
-                data={
-                  <Description sx={{ mr: 1 }} className={styles.description}>
-                    {toTitleCase(metadata?.['regen:verificationMethod'])}
-                  </Description>
-                }
-              />
-              <LineItemLabelAbove
-                label="sectoral scope"
-                data={metadata?.['regen:sectoralScope']?.[
-                  'schema:itemListElement'
-                ]?.map((sector: string) => (
-                  <Description className={styles.description} key={sector}>
-                    {sector}
-                  </Description>
-                ))}
-              />
+              {offsetGenerationMethods && offsetGenerationMethods?.length > 0 && (
+                <LineItemLabelAbove
+                  label={`offset generation method${
+                    offsetGenerationMethods.length > 1 ? 's' : ''
+                  }`}
+                  data={
+                    <>
+                      {offsetGenerationMethods.map((method: string) => (
+                        <Body size="xl">{toTitleCase(method)}</Body>
+                      ))}
+                    </>
+                  }
+                />
+              )}
+              {verificationMethod && (
+                <LineItemLabelAbove
+                  label="verification method"
+                  data={
+                    <Body size="xl">{toTitleCase(verificationMethod)}</Body>
+                  }
+                />
+              )}
+              {sectoralScopes && sectoralScopes?.length > 0 && (
+                <LineItemLabelAbove
+                  label={`sectoral scope${
+                    sectoralScopes.length > 1 ? 's' : ''
+                  }`}
+                  data={
+                    <>
+                      {sectoralScopes.map((sector: string) => (
+                        <Body size="xl">{sector}</Body>
+                      ))}
+                    </>
+                  }
+                />
+              )}
             </Box>
           </Box>
           <Box
@@ -286,7 +288,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
           >
             <Box className={styles.box}>
               <div className={styles.sidebarItemMargin}>
-                <Label className={styles.label}>admin</Label>
+                <Label size="xs" color="primary.contrastText" mb={3}>
+                  admin
+                </Label>
                 <Link
                   className={styles.link}
                   href={
@@ -301,7 +305,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 </Link>
               </div>
               <div className={styles.sidebarItemMargin}>
-                <Label className={styles.label}>issuers</Label>
+                <Label size="xs" color="primary.contrastText" mb={3}>
+                  issuers
+                </Label>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   {onChainClass?.issuers?.map((issuer: string) => (
                     <Link

@@ -247,13 +247,13 @@ function ToggleVariants(): JSX.Element {
 function RoleInput(): JSX.Element {
   const entitiesInit = [
     {
-      '@type': 'http://regen.network/Organization',
-      'http://schema.org/legalName': 'Impact Ag',
+      '@type': 'regen:Organization',
+      'schema:legalName': 'Impact Ag',
       id: 1,
     },
     {
-      '@type': 'http://regen.network/Individual',
-      'http://schema.org/name': 'Toby Grogan',
+      '@type': 'regen:Individual',
+      'schema:name': 'Toby Grogan',
       id: 2,
     },
   ];
@@ -265,7 +265,7 @@ function RoleInput(): JSX.Element {
     const entityOptions = entities.map(e => {
       return {
         ...e,
-        label: e['http://schema.org/name'] || e['http://schema.org/legalName'],
+        label: e['schema:name'] || e['schema:legalName'],
       };
     });
 

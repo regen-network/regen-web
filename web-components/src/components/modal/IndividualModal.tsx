@@ -27,11 +27,11 @@ export interface IndividualFormValues {
   id?: string;
   partyId?: string;
   projectCreator?: boolean;
-  '@type': 'http://regen.network/Individual';
-  'http://schema.org/name'?: string;
-  'http://schema.org/telephone'?: string;
-  'http://schema.org/email'?: string;
-  'http://regen.network/sharePermission'?: boolean;
+  '@type': 'regen:Individual';
+  'schema:name'?: string;
+  'schema:telephone'?: string;
+  'schema:email'?: string;
+  'regen:sharePermission'?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -108,10 +108,9 @@ function IndividualModal({
           validateOnMount
           initialValues={{
             ...individualEdit,
-            '@type': 'http://regen.network/Individual',
-            'http://regen.network/sharePermission':
-              individualEdit &&
-              !!individualEdit['http://regen.network/sharePermission'],
+            '@type': 'regen:Individual',
+            'regen:sharePermission':
+              individualEdit && !!individualEdit['regen:sharePermission'],
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -131,24 +130,24 @@ function IndividualModal({
                   <Field
                     component={ControlledTextField}
                     label="Full name"
-                    name="['http://schema.org/name']"
+                    name="schema:name"
                   />
                   <Field
                     component={ControlledTextField}
                     label="Email address"
-                    name="['http://schema.org/email']"
+                    name="schema:email"
                   />
                   <Field
                     component={PhoneField}
                     label="Phone number"
-                    name="['http://schema.org/telephone']"
+                    name="schema:telephone"
                   />
                 </OnBoardingCard>
                 <div className={cx(styles.permission, styles.matchFormPadding)}>
                   <Field
                     type="checkbox"
                     component={CheckboxLabel}
-                    name="['http://regen.network/sharePermission']"
+                    name="regen:sharePermission"
                     label={
                       <Body size="sm">
                         I have this individual’s permission to share their

@@ -20,17 +20,17 @@ interface StoryFormProps {
 }
 
 export interface StoryValues {
-  'http://regen.network/landStory': string;
-  'http://regen.network/landStewardStory': string;
-  'http://regen.network/landStewardStoryTitle': string;
-  'http://regen.network/projectQuote'?: Quote;
+  'regen:landStory': string;
+  'regen:landStewardStory': string;
+  'regen:landStewardStoryTitle': string;
+  'regen:projectQuote'?: Quote;
 }
 
 export interface StoryValuesErrors {
-  'http://regen.network/landStory'?: string;
-  'http://regen.network/landStewardStory'?: string;
-  'http://regen.network/landStewardStoryTitle'?: string;
-  'http://regen.network/projectQuote'?: QuoteErrors;
+  'regen:landStory'?: string;
+  'regen:landStewardStory'?: string;
+  'regen:landStewardStoryTitle'?: string;
+  'regen:projectQuote'?: QuoteErrors;
 }
 
 interface Example {
@@ -39,36 +39,36 @@ interface Example {
 }
 
 interface Quote {
-  'http://regen.network/quote': string;
-  'http://schema.org/name': string;
-  'http://schema.org/jobTitle': string;
+  'regen:quote': string;
+  'schema:name': string;
+  'schema:jobTitle': string;
 }
 
 interface QuoteErrors {
-  'http://regen.network/quote'?: string;
-  'http://schema.org/name'?: string;
-  'http://schema.org/jobTitle'?: string;
+  'regen:quote'?: string;
+  'schema:name'?: string;
+  'schema:jobTitle'?: string;
 }
 
 interface FieldNameExamples {
-  'http://regen.network/landStory': Example;
-  'http://regen.network/landStewardStory': Example;
-  'http://regen.network/landStewardStoryTitle': Example;
-  'http://regen.network/projectQuote': Example;
+  'regen:landStory': Example;
+  'regen:landStewardStory': Example;
+  'regen:landStewardStoryTitle': Example;
+  'regen:projectQuote': Example;
 }
 
 interface Errors {
-  'http://regen.network/landStory': string;
-  'http://regen.network/landStewardStory': string;
-  'http://regen.network/landStewardStoryTitle': string;
-  'http://regen.network/projectQuote': string;
+  'regen:landStory': string;
+  'regen:landStewardStory': string;
+  'regen:landStewardStoryTitle': string;
+  'regen:projectQuote': string;
 }
 
 type exampleFieldName =
-  | 'http://regen.network/landStory'
-  | 'http://regen.network/landStewardStory'
-  | 'http://regen.network/landStewardStoryTitle'
-  | 'http://regen.network/projectQuote';
+  | 'regen:landStory'
+  | 'regen:landStewardStory'
+  | 'regen:landStewardStoryTitle'
+  | 'regen:projectQuote';
 
 const useStyles = makeStyles((theme: Theme) => ({
   storyCard: {
@@ -95,22 +95,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const examples: FieldNameExamples = {
-  'http://regen.network/landStory': {
+  'regen:landStory': {
     type: 'Story of the Land',
     text: 'Wilmot is an extraordinary property high in the New England Tablelands at Ebor, New South Wales, Australia. Set on 1,854ha and at approximately 1,200m above sea level, average annual rainfall of 1,200mm, highly fertile volcanic basalt soils, and complimented by a series of pristine spring fed, year-round natural waterways including five waterfalls, it is quite simply a unique environment for growing cattle.',
   },
-  'http://regen.network/landStewardStory': {
+  'regen:landStewardStory': {
     type: 'Story of the Land Stewards',
     text:
       'Stu & Trish are the management team behind Wilmot Cattle Co and are driven by the exciting ecological opportunities they can foresee for the business. They have a wholehearted belief in regenerative agriculture and the benefits it will bring to the industry globally, as we collectively work to heal what has largely become a degraded landscape. They have a burning desire to succeed in agriculture and are very ambitious in the growth and development plans they have for Wilmot Cattle Co.\n\n' +
       'While Stu has managed the day to day operations of Wilmot since 2016, and now presides over the portfolio of all three properties in a General Manager capacity, Trish works tirelessly behind the scenes ensuring a high level of rigor around the data collection, management, and analysis of every aspect of the business. They firmly believe that you cannot manage what you do not measure and as such, the integrity of the data is paramount.\n\n' +
       'In their spare time, they enjoy exploring the natural wonders of Wilmot, including its five waterfalls and large areas of virtually native bushland, with their two kids Harry and Poppy. They all gain great satisfaction from discovering new species of plants and learning about their role in the ecosystem.',
   },
-  'http://regen.network/landStewardStoryTitle': {
+  'regen:landStewardStoryTitle': {
     type: 'Land Steward Story Title',
     text: 'Stuart Austin & Trisha Cowley have managed Wilmot since 2016',
   },
-  'http://regen.network/projectQuote': {
+  'regen:projectQuote': {
     type: 'Quote',
     text: 'We feel privileged to have the opportunity to manage cattle in a truly holistic and regenerative way on such a remarkable property.',
   },
@@ -118,12 +118,11 @@ const examples: FieldNameExamples = {
 
 const quoteError: string = 'You must fill in all the quote fields, or none';
 const errorMsgs: Errors = {
-  'http://regen.network/landStory': 'Please fill in the story of the land',
-  'http://regen.network/landStewardStory':
-    'Please fill in the story of the land stewards',
-  'http://regen.network/landStewardStoryTitle':
+  'regen:landStory': 'Please fill in the story of the land',
+  'regen:landStewardStory': 'Please fill in the story of the land stewards',
+  'regen:landStewardStoryTitle':
     'Please fill in a title for the land steward story',
-  'http://regen.network/projectQuote': quoteError,
+  'regen:projectQuote': quoteError,
 };
 
 const ModalContent: React.FC<{
@@ -182,15 +181,13 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
         validateOnMount
         initialValues={
           initialValues || {
-            'http://regen.network/landStory':
-              initialValues?.['http://regen.network/landStory'] || '',
-            'http://regen.network/landStewardStory':
-              initialValues?.['http://regen.network/landStewardStory'] || '',
-            'http://regen.network/landStewardStoryTitle':
-              initialValues?.['http://regen.network/landStewardStoryTitle'] ||
-              '',
-            'http://regen.network/projectQuote':
-              initialValues?.['http://regen.network/projectQuote'] || undefined,
+            'regen:landStory': initialValues?.['regen:landStory'] || '',
+            'regen:landStewardStory':
+              initialValues?.['regen:landStewardStory'] || '',
+            'regen:landStewardStoryTitle':
+              initialValues?.['regen:landStewardStoryTitle'] || '',
+            'regen:projectQuote':
+              initialValues?.['regen:projectQuote'] || undefined,
           }
         }
         validate={async (values: StoryValues) => {
@@ -204,19 +201,13 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
             );
             for (const result of report.results) {
               const path: keyof StoryValues = result.path.value;
-              if (path === 'http://regen.network/projectQuote') {
-                errors['http://regen.network/projectQuote'] = {
-                  'http://regen.network/quote': getProjectQuoteError(
+              if (path === 'regen:projectQuote') {
+                errors['regen:projectQuote'] = {
+                  'regen:quote': getProjectQuoteError(values, 'regen:quote'),
+                  'schema:name': getProjectQuoteError(values, 'schema:name'),
+                  'schema:jobTitle': getProjectQuoteError(
                     values,
-                    'http://regen.network/quote',
-                  ),
-                  'http://schema.org/name': getProjectQuoteError(
-                    values,
-                    'http://schema.org/name',
-                  ),
-                  'http://schema.org/jobTitle': getProjectQuoteError(
-                    values,
-                    'http://schema.org/jobTitle',
+                    'schema:jobTitle',
                   ),
                 };
               } else {
@@ -247,10 +238,8 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   component={ControlledTextField}
                   label="Story of the land"
                   description="Describe the story of this property."
-                  onExampleClick={() =>
-                    showExample('http://regen.network/landStory')
-                  }
-                  name="['http://regen.network/landStory']"
+                  onExampleClick={() => showExample('regen:landStory')}
+                  name="regen:landStory"
                   rows={5}
                   minRows={5}
                   multiline
@@ -262,10 +251,8 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   component={ControlledTextField}
                   label="Story of the land stewards"
                   description="Tell the story of who are they, what do they do on the land, what is their background, why are they excited to do this work."
-                  onExampleClick={() =>
-                    showExample('http://regen.network/landStewardStory')
-                  }
-                  name="['http://regen.network/landStewardStory']"
+                  onExampleClick={() => showExample('regen:landStewardStory')}
+                  name="regen:landStewardStory"
                   rows={16}
                   minRows={16}
                   multiline
@@ -276,9 +263,9 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   label="Land steward story title"
                   description="In one sentence, summarize the story above of the land stewards."
                   onExampleClick={() =>
-                    showExample('http://regen.network/landStewardStoryTitle')
+                    showExample('regen:landStewardStoryTitle')
                   }
-                  name="['http://regen.network/landStewardStoryTitle']"
+                  name="regen:landStewardStoryTitle"
                   rows={2}
                   minRows={2}
                   multiline
@@ -294,10 +281,8 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                   component={ControlledTextField}
                   label="Quote from land steward or other important stakeholder"
                   description="Choose an inspiring quote that helps others understand why this project is important."
-                  onExampleClick={() =>
-                    showExample('http://regen.network/projectQuote')
-                  }
-                  name="['http://regen.network/projectQuote'].['http://regen.network/quote']"
+                  onExampleClick={() => showExample('regen:projectQuote')}
+                  name="regen:projectQuote.regen:quote"
                   rows={16}
                   minRows={16}
                   multiline
@@ -306,13 +291,13 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                 <Field
                   component={ControlledTextField}
                   label="Name of person quoted"
-                  name="['http://regen.network/projectQuote'].['http://schema.org/name']"
+                  name="regen:projectQuote.schema:name"
                 />
                 <Field
                   className={styles.paddingTop}
                   component={ControlledTextField}
                   label="Title of person quoted"
-                  name="['http://regen.network/projectQuote'].['http://schema.org/jobTitle']"
+                  name="regen:projectQuote.schema:jobTitle"
                 />
               </OnBoardingCard>
 
@@ -337,9 +322,9 @@ function getProjectQuoteError(
   values: StoryValues,
   key: keyof Quote,
 ): string | undefined {
-  return values?.['http://regen.network/projectQuote']?.[key]
+  return values?.['regen:projectQuote']?.[key]
     ? undefined
-    : errorMsgs['http://regen.network/projectQuote'];
+    : errorMsgs['regen:projectQuote'];
 }
 
 export { StoryForm };

@@ -114,6 +114,8 @@ yarn graphql:codegen
 
 This should be done anytime a `.graphql` file is created or modified.
 
+GraphQLDocumentError: Field "${fieldName}" is not defined by type "${TableName}Filter". 
+
 Similarly, types can be generated for Sanity GraphQL Schema using:
 
 ```sh

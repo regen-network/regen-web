@@ -1,14 +1,12 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
-import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Body, Title } from 'web-components/lib/components/typography';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import Section from 'web-components/lib/components/section';
-import Description from 'web-components/lib/components/description';
-import { CommunityCollaborateSectionQuery, CommunityConnectSectionQuery } from '../../generated/graphql';
+import { CommunityCollaborateSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
 
@@ -22,25 +20,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(3),
       paddingTop: theme.spacing(17),
       paddingBottom: theme.spacing(25),
-    },
-  },
-  title: {
-    marginBottom: theme.spacing(8.5),
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(6.75),
-      fontSize: theme.typography.pxToRem(38),
-    },
-  },
-  body: {
-    textAlign: 'center',
-    marginBottom: theme.spacing(15),
-    maxWidth: theme.spacing(225),
-    margin: '0 auto',
-    [theme.breakpoints.down('md')]: {
-      fontSize: theme.spacing(4),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
     },
   },
 }));
@@ -73,7 +52,8 @@ const query = graphql`
 
 const CollaborateSection = (): JSX.Element => {
   const styles = useStyles();
-  const { sanityCommunityPage } = useStaticQuery<CommunityCollaborateSectionQuery>(query);
+  const { sanityCommunityPage } =
+    useStaticQuery<CommunityCollaborateSectionQuery>(query);
   const data = sanityCommunityPage?.collaborateSection;
   const resourceCards = data?.cards?.map(card => {
     return {
@@ -85,12 +65,22 @@ const CollaborateSection = (): JSX.Element => {
   });
   return (
     <Section className={styles.section}>
-      <Title className={styles.title} variant="h3" align="center">
+      <Title variant="h2" align="center" sx={{ mb: [8.5, 6.75] }}>
         {data?.titleBody?.title}
       </Title>
-      <Description className={styles.body}>
+      <Body
+        size="xl"
+        mobileSize="md"
+        sx={theme => ({
+          maxWidth: theme.spacing(225),
+          textAlign: 'center',
+          m: '0 auto',
+          pt: { sm: 4 },
+          pb: { xs: 20, sm: 23.25 },
+        })}
+      >
         <BlockContent content={data?.titleBody?._rawBody} />
-      </Description>
+      </Body>
       <ResourceCardsSlider target="_self" items={resourceCards || []} />
     </Section>
   );

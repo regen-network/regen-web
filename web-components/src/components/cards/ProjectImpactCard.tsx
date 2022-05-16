@@ -1,10 +1,8 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import cx from 'clsx';
+import { Box } from '@mui/material';
 
 import Card from './Card';
-import Title from '../title';
-import Description from '../description';
+import { Body, Label, Title } from '../typography';
 import { Image } from '../image';
 
 export interface ProjectImpactCardProps {
@@ -18,77 +16,6 @@ export interface ProjectImpactCardProps {
   imageStorageBaseUrl?: string;
 }
 
-interface StyleProps {
-  imgSrc: string;
-}
-
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  background: props => ({
-    backgroundImage: `url(${props.imgSrc})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    textAlign: 'center',
-    position: 'relative',
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(59),
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(50),
-    },
-  }),
-  title: {
-    color: theme.palette.primary.main,
-    position: 'absolute',
-    [theme.breakpoints.up('sm')]: {
-      left: theme.spacing(5),
-      bottom: theme.spacing(6),
-    },
-    [theme.breakpoints.down('sm')]: {
-      left: theme.spacing(4),
-      bottom: theme.spacing(5),
-    },
-  },
-  text: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(4),
-    },
-  },
-  tag: {
-    position: 'absolute',
-    top: theme.spacing(7.5),
-    left: 0,
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.primary.main,
-    textTransform: 'uppercase',
-    fontWeight: 800,
-    letterSpacing: '1px',
-    fontFamily: theme.typography.h1.fontFamily,
-    padding: theme.spacing(3),
-    borderRadius: '0px 2px 2px 0px',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-    },
-  },
-  description: {
-    fontSize: theme.typography.pxToRem(14),
-    flex: '1 0 auto',
-  },
-}));
-
 export default function ProjectImpactCard({
   name,
   description,
@@ -99,30 +26,83 @@ export default function ProjectImpactCard({
   imageStorageBaseUrl,
   apiServerUrl,
 }: ProjectImpactCardProps): JSX.Element {
-  const classes = useStyles({ imgSrc });
-
   return (
-    <Card className={cx(classes.root, className)}>
-      <div className={classes.background}>
-        <div className={classes.tag}>
+    <Card
+      className={className}
+      borderRadius="10px"
+      borderColor="grey.100"
+      sx={{ display: 'flex', flexDirection: 'column' }}
+    >
+      <Box
+        sx={theme => ({
+          display: 'flex',
+          backgroundImage: `url(${imgSrc})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          textAlign: 'center',
+          position: 'relative',
+          [theme.breakpoints.up('sm')]: {
+            height: theme.spacing(59),
+          },
+          [theme.breakpoints.down('sm')]: {
+            height: theme.spacing(50),
+          },
+        })}
+      >
+        <Label
+          size="sm"
+          sx={theme => ({
+            position: 'absolute',
+            top: theme.spacing(7.5),
+            left: 0,
+            backgroundColor: 'secondary.main',
+            color: 'primary.main',
+            borderRadius: '0px 2px 2px 0px',
+            p: 3,
+          })}
+        >
           {monitored ? 'primary impact' : 'co-benefit'}
-        </div>
-        <Title variant="h4" className={classes.title}>
+        </Label>
+        <Title
+          variant="h4"
+          sx={{
+            color: 'primary.main',
+            alignSelf: 'flex-end',
+            p: [4, 5],
+          }}
+        >
           {name}
         </Title>
-      </div>
-      <div className={classes.text}>
-        <Description className={classes.description}>{description}</Description>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          flexGrow: 1,
+          p: [4, 5],
+        }}
+      >
+        <Body
+          as="div"
+          size="sm"
+          mobileSize="sm"
+          sx={{ flex: '1 0 auto', pb: 4 }}
+        >
+          {description}
+        </Body>
         {standard && (
-          <Image
-            src={standard}
-            alt={standard}
-            imageStorageBaseUrl={imageStorageBaseUrl}
-            apiServerUrl={apiServerUrl}
-            width={140}
-          />
+          <Box sx={{ py: [2] }}>
+            <Image
+              src={standard}
+              alt={standard}
+              imageStorageBaseUrl={imageStorageBaseUrl}
+              apiServerUrl={apiServerUrl}
+              width={140}
+            />
+          </Box>
         )}
-      </div>
+      </Box>
     </Card>
   );
 }

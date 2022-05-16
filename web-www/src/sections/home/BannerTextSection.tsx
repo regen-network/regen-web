@@ -4,7 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import Box from '@mui/material/Box';
 
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 
 import type { Theme } from 'web-components/lib/theme/muiTheme';
@@ -68,10 +68,10 @@ const BannerTextSection: React.FC = () => {
           },
         })}
       >
-        <Title sx={{ color: 'primary.main' }} variant="h2">
+        <Title variant="h2" color="primary" align="center">
           {data?.title}
         </Title>
-        <Title variant="h4" sx={{ color: 'primary.main' }}>
+        <Title variant="h4" color="primary" align="center">
           <BlockContent content={data?._rawBody} />
         </Title>
       </Box>

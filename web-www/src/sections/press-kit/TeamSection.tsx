@@ -50,9 +50,11 @@ const query = graphql`
 `;
 const PressKitTeamSection = (): JSX.Element => {
   const styles = useStyles();
-  const { background, teamBackground, sanityPresskitPage: data } = useStaticQuery<PresskitTeamSectionQuery>(
-    query,
-  );
+  const {
+    background,
+    teamBackground,
+    sanityPresskitPage: data,
+  } = useStaticQuery<PresskitTeamSectionQuery>(query);
   const content = data?.teamSection;
   const members = content?.members?.map(m => ({
     ...m,
@@ -67,7 +69,9 @@ const PressKitTeamSection = (): JSX.Element => {
         members={members}
         title={content?.header || ''}
       >
-        <ContainedButton href="/team">{content?.buttonText}</ContainedButton>
+        <ContainedButton href="/team" size="large">
+          {content?.buttonText}
+        </ContainedButton>
       </TeamSection>
     </BackgroundImage>
   );

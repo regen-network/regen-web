@@ -6,7 +6,9 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import ProjectMedia, { Media } from 'web-components/lib/components/sliders/ProjectMedia';
+import ProjectMedia, {
+  Media,
+} from 'web-components/lib/components/sliders/ProjectMedia';
 import { PresskitPhotosSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -53,7 +55,8 @@ const query = graphql`
 
 const PhotosSection = (): JSX.Element => {
   const styles = useStyles();
-  const { sanityPresskitPage } = useStaticQuery<PresskitPhotosSectionQuery>(query);
+  const { sanityPresskitPage } =
+    useStaticQuery<PresskitPhotosSectionQuery>(query);
   const data = sanityPresskitPage?.photosSection;
   const assets = (data?.photos || []).map(photo => {
     return {
@@ -64,7 +67,10 @@ const PhotosSection = (): JSX.Element => {
   });
 
   return (
-    <Section title={data?.header || ''} classes={{ root: styles.root, title: styles.title }}>
+    <Section
+      title={data?.header || ''}
+      classes={{ root: styles.root, title: styles.title }}
+    >
       <div className={styles.slider}>
         <ProjectMedia xsBorderRadius assets={assets} />
       </div>

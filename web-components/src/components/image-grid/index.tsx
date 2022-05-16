@@ -2,9 +2,7 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 
-import Title from '../title';
-import Description from '../description';
-import { getFontSize } from '../../theme/sizing';
+import { Body, Title } from '../typography';
 
 export interface ImageGridProps {
   img: JSX.Element; // using pure img tag or gatsby-image
@@ -89,19 +87,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       maxWidth: '100%',
     },
   },
-  description: props => ({
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
-    },
-    [theme.breakpoints.between('md', 'xl')]: {
-      maxWidth: theme.spacing(115.5),
-    },
-    [theme.breakpoints.up('xl')]: {
-      maxWidth: theme.spacing(145),
-    },
-    marginLeft: props.even ? 'auto' : 0,
-    marginRight: props.even ? 0 : 'auto',
-  }),
 }));
 
 export default function ImageGrid({
@@ -121,12 +106,21 @@ export default function ImageGrid({
         <Title variant="h2" className={classes.title}>
           {title}
         </Title>
-        <Description
-          className={classes.description}
-          fontSize={getFontSize('xl')}
+        <Body
+          size="xl"
+          sx={theme => ({
+            ml: even ? 'auto' : 0,
+            mr: even ? 0 : 'auto',
+            [theme.breakpoints.between('md', 'xl')]: {
+              maxWidth: theme.spacing(115.5),
+            },
+            [theme.breakpoints.up('xl')]: {
+              maxWidth: theme.spacing(145),
+            },
+          })}
         >
           {description}
-        </Description>
+        </Body>
       </Grid>
     </Grid>
   );

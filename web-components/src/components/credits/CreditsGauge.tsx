@@ -28,14 +28,14 @@ export default function CreditsGauge(props: CreditsProps): JSX.Element {
             format
             number={props.purchased}
             label={`${pluralize(props.purchased, 'credit')} purchased`}
-            variant="body2"
+            textSize="xs"
           />
         )}
         <GaugeText
           format
           number={available}
           label={`${pluralize(available, 'credit')} available`}
-          variant="body2"
+          textSize="xs"
         />
       </Grid>
       {props.purchased > 0 && (

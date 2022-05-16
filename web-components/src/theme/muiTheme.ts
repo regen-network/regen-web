@@ -1,16 +1,5 @@
 import { createTheme } from '@mui/material/styles';
 
-declare module '@mui/material/styles' {
-  interface BreakpointOverrides {
-    xs: true;
-    sm: true;
-    tablet: true; // adds the `tablet` breakpoint
-    md: true;
-    lg: true;
-    xl: true;
-  }
-}
-
 const defaultTheme = createTheme({
   breakpoints: {
     values: {
@@ -24,7 +13,15 @@ const defaultTheme = createTheme({
   },
 });
 
+const { pxToRem } = defaultTheme.typography;
+
 const headerFontFamily = ['"Muli"', '-apple-system', 'sans-serif'].join(',');
+const defaultFontFamily = ['"Lato"', '-apple-system', 'sans-serif'].join(',');
+
+const headerDefaults = {
+  fontWeight: 900,
+  fontFamily: headerFontFamily,
+};
 
 const regenTheme = createTheme({
   palette: {
@@ -58,83 +55,58 @@ const regenTheme = createTheme({
       main: '#DE4526',
       light: '#E6735C',
     },
-    // contrastThreshold: 3,
-    // tonalOffset: 0.2,
   },
   spacing: (factor: number) => `${0.25 * factor}rem`,
   typography: {
-    fontFamily: ['"Lato"', '-apple-system', 'sans-serif'].join(','),
+    fontFamily: defaultFontFamily,
     h1: {
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '3rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '2rem',
-      },
-      fontFamily: headerFontFamily,
+      ...headerDefaults,
+      fontSize: pxToRem(48),
+      lineHeight: '130%',
     },
     h2: {
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '2.375rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '1.5rem',
-      },
+      ...headerDefaults,
+      fontSize: pxToRem(38),
+      lineHeight: '130%',
     },
     h3: {
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '2rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '1.5rem', // possible override: 1.3125rem
-      },
+      ...headerDefaults,
+      fontSize: pxToRem(32),
+      lineHeight: '140%',
     },
     h4: {
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '1.5rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '1.3125rem', // possible override: 1.125rem
-      },
+      ...headerDefaults,
+      fontSize: pxToRem(24),
+      lineHeight: '145%',
     },
     h5: {
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '1.3125rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '1.125rem',
-      },
+      ...headerDefaults,
+      fontSize: pxToRem(21),
+      lineHeight: '150%',
     },
     h6: {
-      fontSize: '1.125rem',
+      ...headerDefaults,
+      fontSize: pxToRem(18),
+      lineHeight: '150%',
     },
-    subtitle1: {
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '2.375rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '2rem',
-      },
+    textXLarge: {
+      fontSize: pxToRem(22),
     },
-    subtitle2: {
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '1.125rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '0.875rem',
-      },
+    textLarge: {
+      fontSize: pxToRem(18),
     },
+    // MUI defaults to 'body1' for Typography text and I can't figure out how to
+    // override - this represents the equivalent of `textMedium`
     body1: {
-      [defaultTheme.breakpoints.up('sm')]: {
-        fontSize: '1rem',
-      },
-      [defaultTheme.breakpoints.down('sm')]: {
-        fontSize: '0.875rem',
-      },
+      fontSize: pxToRem(16),
     },
-    body2: {
-      fontSize: '0.875rem',
+    textSmall: {
+      fontSize: pxToRem(14),
     },
+    textXSmall: {
+      fontSize: pxToRem(12),
+    },
+    // not the same as overline in Figma mockups (which isn't really used) - using for code font instead
     overline: {
       fontFamily: ['PT Mono', '"Lato"', '-apple-system', 'sans-serif'].join(
         ',',
@@ -186,33 +158,39 @@ const regenTheme = createTheme({
           },
         },
         sizeSmall: {
-          padding: defaultTheme.spacing(1, 2),
-          fontSize: '0.75rem',
-          lineHeight: '13.81px',
           [defaultTheme.breakpoints.up('sm')]: {
             padding: defaultTheme.spacing(1.125, 2.25),
+            fontSize: '0.875rem',
+            lineHeight: pxToRem(17.47),
+          },
+          [defaultTheme.breakpoints.down('sm')]: {
+            padding: defaultTheme.spacing(1, 2),
+            fontSize: '0.75rem',
+            lineHeight: pxToRem(13.81),
+          },
+        },
+        sizeMedium: {
+          [defaultTheme.breakpoints.up('sm')]: {
+            padding: defaultTheme.spacing(1.5, 3),
+            fontSize: '1.125rem',
+            lineHeight: pxToRem(22.49),
+          },
+          [defaultTheme.breakpoints.down('sm')]: {
+            padding: defaultTheme.spacing(1.25, 2.5),
             fontSize: '0.875rem',
             lineHeight: '17.47px',
           },
         },
-        sizeMedium: {
-          padding: defaultTheme.spacing(1.25, 2.5),
-          fontSize: '0.875rem',
-          lineHeight: '17.47px',
-          [defaultTheme.breakpoints.up('sm')]: {
-            padding: defaultTheme.spacing(1.5, 3),
-            fontSize: '1.125rem',
-            lineHeight: '22.49px',
-          },
-        },
         sizeLarge: {
-          padding: defaultTheme.spacing(1.5, 3),
-          fontSize: '1.125rem',
-          lineHeight: '22.49px',
           [defaultTheme.breakpoints.up('sm')]: {
             padding: defaultTheme.spacing(1.85, 6),
             fontSize: '1.313rem',
-            lineHeight: '26.36px',
+            lineHeight: pxToRem(26.36),
+          },
+          [defaultTheme.breakpoints.down('sm')]: {
+            padding: defaultTheme.spacing(1.5, 3),
+            fontSize: '1.125rem',
+            lineHeight: '22.49px',
           },
         },
       },
@@ -226,10 +204,11 @@ const regenTheme = createTheme({
           h4: 'h4',
           h5: 'h5',
           h6: 'h6',
-          subtitle1: 'h2',
-          subtitle2: 'h2',
+          textXLarge: 'p',
+          textLarge: 'p',
           body1: 'p',
-          body2: 'p',
+          textSmall: 'p',
+          textXSmall: 'p',
         },
       },
     },
@@ -240,6 +219,44 @@ const regenTheme = createTheme({
     },
   },
 });
+
+declare module '@mui/material/styles' {
+  interface TypographyVariants {
+    textXLarge: React.CSSProperties;
+    textLarge: React.CSSProperties;
+    textSmall: React.CSSProperties;
+    textXSmall: React.CSSProperties;
+  }
+
+  // allow configuration using `createTheme`
+  interface TypographyVariantsOptions {
+    textXLarge?: React.CSSProperties;
+    textLarge?: React.CSSProperties;
+    textSmall?: React.CSSProperties;
+    textXSmall?: React.CSSProperties;
+  }
+}
+
+// Update the Typography's variant prop options
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    textXLarge: true;
+    textLarge: true;
+    textSmall: true;
+    textXSmall: true;
+  }
+}
+
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xs: true;
+    sm: true;
+    tablet: true; // adds the `tablet` breakpoint
+    md: true;
+    lg: true;
+    xl: true;
+  }
+}
 
 type Theme = typeof regenTheme;
 

@@ -2,9 +2,8 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Body, Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
-import Description from 'web-components/lib/components/description';
 import { WalletAddrRegInstructionsSectionQuery } from '../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
 
@@ -50,17 +49,27 @@ const query = graphql`
 `;
 
 const InstructionsSection = (): JSX.Element => {
-  const { sanityWalletAddressRegistrationPage } = useStaticQuery<WalletAddrRegInstructionsSectionQuery>(
-    query,
-  );
+  const { sanityWalletAddressRegistrationPage } =
+    useStaticQuery<WalletAddrRegInstructionsSectionQuery>(query);
   const data = sanityWalletAddressRegistrationPage?.instructionSection;
   const styles = useStyles();
   return (
     <Section className={styles.section}>
-      <Title className={styles.title} variant="h3" align="center">
+      <Title variant="h3" align="center" sx={{ mb: [8.5, 6.75] }}>
         {data?.title}
       </Title>
-      <Description className={styles.body}>{<BlockContent content={data?._rawBody} />}</Description>
+      <Body
+        size="xl"
+        mobileSize="md"
+        sx={{
+          m: '0 auto',
+          maxWidth: theme => theme.spacing(225),
+          mb: [10, 12],
+          textAlign: 'center',
+        }}
+      >
+        <BlockContent content={data?._rawBody} />
+      </Body>
     </Section>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { ConnectSection, Maybe } from '../../generated/sanity-graphql';
@@ -79,7 +79,11 @@ function CreditClassConnectSection({ connectSection }: Props): JSX.Element {
         section: styles.section,
       }}
     >
-      <Title className={styles.header} variant="h2" align="center">
+      <Title
+        variant="h2"
+        mobileVariant="h3"
+        sx={{ color: 'primary.main', textAlign: 'center' }}
+      >
         {connectSection?.title || 'Connect and Learn'}
       </Title>
       <div className={styles.links}>

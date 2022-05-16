@@ -5,7 +5,7 @@ import { Box } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
 
-import Title from 'web-components/lib/components/title';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 
 import type { NctMarketplaceSectionQuery } from '../../generated/graphql';
@@ -31,10 +31,12 @@ export const MarketplaceSection = (): JSX.Element => {
   return (
     <Section
       sx={{
-        py: [20, 30],
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        root: {
+          py: [20, 30],
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        },
       }}
     >
       <SanityImage
@@ -51,10 +53,9 @@ export const MarketplaceSection = (): JSX.Element => {
         <Title variant="h2" sx={{ textAlign: 'center', my: [4, 8] }}>
           {data?.title}
         </Title>
-        <BlockContent
-          content={data?._rawBody}
-          sxWrap={{ '& p': { fontSize: [18, 22], textAlign: 'center' } }}
-        />
+        <Body size="xl" align="center">
+          <BlockContent content={data?._rawBody} />
+        </Body>
       </Box>
     </Section>
   );

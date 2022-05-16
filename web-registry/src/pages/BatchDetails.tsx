@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import Section from 'web-components/lib/components/section';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { Loading } from 'web-components/lib/components/loading';
 
 import { getBatchWithSupplyForDenom } from '../lib/ecocredit';
@@ -74,7 +74,7 @@ export const BatchDetails: React.FC = () => {
   return (
     <Box sx={{ backgroundColor: 'grey.50' }}>
       {/* default `Section` padding is higher on mobile - 22.25 is default above small */}
-      <Section sx={{ pt: [12, 22.25], pb: 22.25 }}>
+      <Section sx={{ root: { pt: [12, 22.25], pb: 22.25 } }}>
         <Box
           sx={{
             display: 'flex',

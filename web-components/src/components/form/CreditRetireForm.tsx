@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import { styled } from '@mui/material';
+import { SxProps, Grid } from '@mui/material';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField from '../inputs/TextField';
@@ -10,8 +9,7 @@ import AmountField from '../inputs/AmountField';
 import LocationCountryField from '../inputs/LocationCountryField';
 import LocationStateField from '../inputs/LocationStateField';
 import ControlledTextField from '../inputs/ControlledTextField';
-import Title from '../title';
-import Description from '../description';
+import { Body, Title } from '../typography';
 import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
@@ -34,22 +32,6 @@ import { getISOString } from '../../utils/locationStandard';
  */
 
 const useStyles = makeStyles((theme: Theme) => ({
-  groupTitle: {
-    marginTop: theme.spacing(10.75),
-    marginBottom: theme.spacing(3),
-  },
-  description: {
-    marginBottom: 0,
-    '& a': {
-      cursor: 'pointer',
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(14),
-    },
-  },
   noteTextField: {
     '& label': {
       whiteSpace: 'unset',
@@ -99,6 +81,13 @@ interface CreditRetireFieldsProps extends BottomCreditRetireFieldsProps {
   availableTradableAmount: number;
 }
 
+const sxs = {
+  title: {
+    mt: 10.75,
+    mb: 3,
+  } as SxProps,
+};
+
 export interface BottomCreditRetireFieldsProps {
   mapboxToken: string;
 }
@@ -131,7 +120,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
 
     return (
       <>
-        <Title className={styles.groupTitle} variant="h5">
+        <Title variant="h5" sx={sxs.title}>
           Transaction note
         </Title>
         <Field
@@ -143,13 +132,14 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
           optional
           defaultStyle={false}
         />
-        <Title className={styles.groupTitle} variant="h5">
+        <Title variant="h5" sx={sxs.title}>
           Location of retirement
         </Title>
-        <Description className={styles.description}>
+
+        <Body>
           Please enter a location for the retirement of these credits. This
           prevents double counting of credits in different locations.
-        </Description>
+        </Body>
         <Grid container className={styles.stateCountryGrid}>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
             <LocationStateField country={country} optional={!postalCode} />
@@ -186,32 +176,16 @@ export const CreditRetireFields = ({
   );
 };
 
-const Label = styled('div')(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  fontSize: theme.typography.pxToRem(16),
-  marginTop: theme.spacing(8),
-  [theme.breakpoints.up('sm')]: {
-    fontSize: theme.typography.pxToRem(18),
-  },
-}));
-
-const LabelCenter = styled('div')(({ theme }) => ({
-  color: theme.palette.primary.contrastText,
-  fontSize: theme.typography.pxToRem(16),
-  textAlign: 'center',
-  [theme.breakpoints.up('sm')]: {
-    fontSize: theme.typography.pxToRem(18),
-  },
-}));
-
 export const RetirementReminder = ({
-  centered,
+  sx,
 }: {
-  centered?: boolean;
+  sx?: SxProps<Theme>;
 }): JSX.Element => {
-  const msg = 'Retirement is permanent and non-reversible.';
-  if (centered) return <LabelCenter>{msg}</LabelCenter>;
-  return <Label>{msg}</Label>;
+  return (
+    <Body size="lg" color="black" sx={sx}>
+      Retirement is permanent and non-reversible.
+    </Body>
+  );
 };
 
 export const validateCreditRetire = (
@@ -262,9 +236,9 @@ const CreditRetireForm: React.FC<FormProps> = ({
       validate={validateHandler}
       onSubmit={onSubmit}
     >
-      {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
+      {({ submitForm, isSubmitting, isValid, submitCount, status }) => (
         <Form>
-          <RetirementReminder centered />
+          <RetirementReminder sx={{ textAlign: 'center', mb: 8 }} />
           <CreditRetireFields
             availableTradableAmount={availableTradableAmount}
             batchDenom={batchDenom}

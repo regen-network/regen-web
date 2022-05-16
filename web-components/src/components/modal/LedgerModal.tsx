@@ -13,7 +13,7 @@ import RegenLedgerIcon from '../icons/RegenLedgerIcon';
 import InfoIcon from '../icons/InfoIcon';
 import DropdownIcon from '../icons/DropdownIcon';
 import ContainedButton from '../buttons/ContainedButton';
-import Title from '../title';
+import { Title } from '../typography';
 import Tooltip from '../tooltip';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import { User } from '../user/UserInfo';

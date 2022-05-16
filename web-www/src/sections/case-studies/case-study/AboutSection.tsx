@@ -1,18 +1,19 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
+import { useTheme, Grid, Box, SxProps } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import MediaCard from 'web-components/lib/components/cards/MediaCard';
-import Title from 'web-components/lib/components/title';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
-import Description from 'web-components/lib/components/description';
 import { BlockContent } from 'web-components/src/components/block-content';
-import { CaseStudyAboutSectionQuery, SanityCaseStudyAboutSection } from '../../../generated/graphql';
+import {
+  CaseStudyAboutSectionQuery,
+  SanityCaseStudyAboutSection,
+} from '../../../generated/graphql';
 
 interface StyleProps {
   lineRotate?: string;
@@ -26,53 +27,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(25),
-    },
-  },
-  cardTitle: {
-    fontFamily: theme.typography.h1.fontFamily,
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    fontWeight: 800,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      lineHeight: theme.spacing(3.75),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-      lineHeight: theme.spacing(4.5),
-    },
-  },
-  title: {
-    [theme.breakpoints.down('md')]: {
-      paddingBottom: theme.spacing(8.75),
-    },
-  },
-  cardDescription: {
-    marginBottom: 0,
-    paddingTop: theme.spacing(1.25),
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      lineHeight: theme.spacing(3.75),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-      lineHeight: theme.spacing(4.5),
-    },
-  },
-  cardContent: {
-    padding: `0 ${theme.spacing(5)} ${theme.spacing(5)} ${theme.spacing(5)}`,
-  },
-  cardItem: {
-    paddingTop: theme.spacing(5),
-  },
-  about: {
-    lineHeight: '150%',
-    fontWeight: 500,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
     },
   },
   background: {
@@ -93,10 +47,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     borderRadius: '10px',
     border: `1px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.down('sm')]: {
-      padding: `${theme.spacing(3.5)} ${theme.spacing(24.25)} ${theme.spacing(3.5)} ${theme.spacing(3.5)}`,
+      padding: theme.spacing(3.5, 24.25, 3.5, 3.5),
     },
     [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(5)} ${theme.spacing(36)} ${theme.spacing(5)} ${theme.spacing(5)}`,
+      padding: theme.spacing(5, 36, 5, 5),
     },
   },
   line: props => ({
@@ -148,21 +102,31 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
   lineWidth,
   lineRotate,
 }) => {
-  const styles = useStyles({ lineRotate: lineRotate || 'rotate(-25deg)', lineWidth: lineWidth || '53%' });
+  const styles = useStyles({
+    lineRotate: lineRotate || 'rotate(-25deg)',
+    lineWidth: lineWidth || '53%',
+  });
   const theme = useTheme();
   const data = useStaticQuery<CaseStudyAboutSectionQuery>(query);
   const content = data?.sanityCaseStudiesPage?.aboutSection;
 
+  const sxs = {
+    title: { pb: { xs: 8.75, md: 6 } } as SxProps,
+  };
+
   return (
     <Section className={styles.root}>
       <Box display={{ xs: 'block', md: 'none' }}>
-        <Title align="center" variant="h2" className={styles.title}>
+        <Title variant="h2" align="center" sx={sxs.title}>
           {content?.header}
         </Title>
       </Box>
       <Grid container spacing={10}>
         <Grid item xs={12} md={6}>
-          <BackgroundImage className={styles.background} fluid={mapImage?.image?.asset?.fluid as FluidObject}>
+          <BackgroundImage
+            className={styles.background}
+            fluid={mapImage?.image?.asset?.fluid as FluidObject}
+          >
             <div className={styles.cardContainer}>
               <MediaCard
                 borderColor={theme.palette.grey[100]}
@@ -171,20 +135,11 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
                 imgSrc={aboutImage?.image?.asset?.url || ''}
                 backgroundGradient={false}
               >
-                <div className={styles.cardContent}>
-                  <div className={styles.cardItem}>
-                    <div className={styles.cardTitle}>{content?.practice}</div>
-                    <Description className={styles.cardDescription}>{practice}</Description>
-                  </div>
-                  <div className={styles.cardItem}>
-                    <div className={styles.cardTitle}>{content?.biome}</div>
-                    <Description className={styles.cardDescription}>{biome}</Description>
-                  </div>
-                  <div className={styles.cardItem}>
-                    <div className={styles.cardTitle}>{content?.region}</div>
-                    <Description className={styles.cardDescription}>{region}</Description>
-                  </div>
-                </div>
+                <Box sx={{ p: 5, pt: 2 }}>
+                  <CardItem label={content?.practice}>{practice}</CardItem>
+                  <CardItem label={content?.biome}>{biome}</CardItem>
+                  <CardItem label={content?.region}>{region}</CardItem>
+                </Box>
               </MediaCard>
               <hr className={styles.line} />
             </div>
@@ -192,15 +147,28 @@ const AboutSection: React.FC<SanityCaseStudyAboutSection> = ({
         </Grid>
         <Grid item xs={12} md={6} className={styles.gridItem}>
           <Box display={{ xs: 'none', md: 'block' }}>
-            <Title variant="h2" className={styles.title}>
+            <Title variant="h2" sx={sxs.title}>
               {content?.header}
             </Title>
           </Box>
-          <Description className={styles.about}>{<BlockContent content={_rawAbout} />}</Description>
+          <Body size="xl" sx={{ color: 'info.dark' }}>
+            <BlockContent content={_rawAbout} />
+          </Body>
         </Grid>
       </Grid>
     </Section>
   );
 };
+
+const CardItem: React.FC<{ label?: string | null }> = ({ label, children }) => (
+  <Box pt={2.5}>
+    <Label size="sm" pt={1.25}>
+      {label}
+    </Label>
+    <Body size="sm" pt={1.25}>
+      {children}
+    </Body>
+  </Box>
+);
 
 export default AboutSection;

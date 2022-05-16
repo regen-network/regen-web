@@ -5,25 +5,24 @@ import { makeStyles } from '@mui/styles';
 import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import Description from 'web-components/lib/components/description';
 import WalletConnectionButton from './WalletConnectionButton';
-import { FontSizes } from 'web-components/lib/theme/sizing';
-import { WalletAddrRegFormSectionQuery } from '../../generated/graphql';
+import { Body } from 'web-components/lib/components/typography';
+
+import type { WalletAddrRegFormSectionQuery } from '../../generated/graphql';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    paddingTop: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(10),
       paddingBottom: theme.spacing(23.25),
     },
     [theme.breakpoints.down('sm')]: {
       paddingLeft: theme.spacing(3),
-      paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(12),
     },
   },
@@ -57,19 +56,23 @@ const query = graphql`
 
 const FormSection = (): JSX.Element => {
   const styles = useStyles();
-  const { sanityWalletAddressRegistrationPage } = useStaticQuery<WalletAddrRegFormSectionQuery>(query);
+  const { sanityWalletAddressRegistrationPage } =
+    useStaticQuery<WalletAddrRegFormSectionQuery>(query);
   const data = sanityWalletAddressRegistrationPage?.formSection;
-  const [isRecaptchaVerified, setIsRecaptchaVerified] = useState<any>(undefined);
+  const [isRecaptchaVerified, setIsRecaptchaVerified] =
+    useState<any>(undefined);
   const [isKeplrDetected, setIsKeplrDetected] = useState(false);
   const recaptchaSiteKey = process.env.GATSBY_RECAPTCHA_SITE_KEY;
-  const fontSize: FontSizes = { xs: '1rem', sm: '1.375rem' };
 
   useEffect(() => {
     setTimeout(checkForKeplr, 300);
   });
 
-  const verifyRecaptchaResponse = async (userResponse: string | null): Promise<void> => {
-    const apiUri: string = process.env.GATSBY_API_URI || 'http://localhost:5000';
+  const verifyRecaptchaResponse = async (
+    userResponse: string | null,
+  ): Promise<void> => {
+    const apiUri: string =
+      process.env.GATSBY_API_URI || 'http://localhost:5000';
     axios
       .post(`${apiUri}/recaptcha/verify`, {
         userResponse,
@@ -77,7 +80,7 @@ const FormSection = (): JSX.Element => {
       .then(response => response.data)
       .then(data => setIsRecaptchaVerified(data.success))
       .catch(e => {
-        console.error(e);
+        console.error(e); // eslint-disable-line no-console
       });
   };
 
@@ -97,14 +100,24 @@ const FormSection = (): JSX.Element => {
         <WalletConnectionButton isKeplrDetected={isKeplrDetected} />
         {recaptchaSiteKey && !isRecaptchaVerified && (
           <div className={styles.recaptcha}>
-            <Description fontSize={fontSize}>
+            <Body size="xl">
               <p>{data?.recaptchaMessage}</p>
-            </Description>
-            <ReCAPTCHA onChange={verifyRecaptchaResponse} sitekey={recaptchaSiteKey} />
+            </Body>
+            <ReCAPTCHA
+              onChange={verifyRecaptchaResponse}
+              sitekey={recaptchaSiteKey}
+            />
           </div>
         )}
-        <Collapse in={isRecaptchaVerified} classes={{ wrapperInner: styles.flex }}>
-          <iframe className={styles.iframe} title="airtable-wallet-form" src={data?.airtableLink || ''} />
+        <Collapse
+          in={isRecaptchaVerified}
+          classes={{ wrapperInner: styles.flex }}
+        >
+          <iframe
+            className={styles.iframe}
+            title="airtable-wallet-form"
+            src={data?.airtableLink || ''}
+          />
         </Collapse>
       </div>
     </Section>

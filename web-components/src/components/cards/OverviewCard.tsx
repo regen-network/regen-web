@@ -7,6 +7,7 @@ import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';
 import InfoIconOutlined from '../icons/InfoIconOutlined';
 import InfoTooltip from '../tooltip/InfoTooltip';
+import { Body, Label } from '../typography';
 
 interface OverviewCardProps {
   className?: string;
@@ -53,59 +54,6 @@ const useStyles = makeStyles(theme => ({
       },
     },
   },
-  top: {
-    display: 'flex',
-    width: '100%',
-    height: theme.spacing(18),
-  },
-  cardTopThird: {
-    display: 'flex',
-    flex: 1,
-  },
-  cardTopRight: {
-    alignItems: 'flex-start',
-  },
-  iconWrap: {
-    justifyContent: 'center',
-  },
-  info: {
-    marginLeft: 'auto',
-    cursor: 'pointer',
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(-2),
-      marginRight: theme.spacing(-5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(-1.5),
-      marginRight: theme.spacing(-2),
-    },
-  },
-  bottom: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    width: '100%',
-  },
-  title: {
-    fontWeight: 800,
-    fontSize: theme.typography.pxToRem(14),
-    fontFamily: theme.typography.h1.fontFamily,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-    inlineSize: 'max-content',
-    position: 'relative',
-    display: 'inline-block',
-  },
-  description: {
-    display: 'flex',
-    justifyContent: 'center',
-    textAlign: 'center',
-    flexWrap: 'wrap',
-    color: theme.palette.info.dark,
-    fontSize: theme.typography.pxToRem(14),
-    paddingTop: theme.spacing(3),
-  },
   check: {
     height: theme.spacing(4.25),
     width: theme.spacing(4.25),
@@ -123,33 +71,67 @@ function OverviewCard({
   const styles = useStyles();
 
   return (
-    <Card className={clsx(className, styles.root, classes && classes.root)}>
-      <div className={styles.top}>
-        <div className={clsx(styles.cardTopThird)} />
+    // <Card className={clsx(className, styles.root, classes && classes.root)}>
+    <Card
+      className={clsx(className, classes?.root)}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        borderColor: 'grey.100',
+        width: { sm: 350 },
+        minWidth: [278],
+        minHeight: [163, 183],
+        mr: [3.25, 5.375],
+        mb: 5,
+        px: [4, 8],
+        py: [4, 5],
+        position: 'relative',
+      }}
+    >
+      <Box sx={{ display: 'flex', width: '100%', minHeight: 72 }}>
+        <Box sx={{ display: 'flex', flex: 1 }} />
         {icon && (
-          <div className={clsx(styles.cardTopThird, styles.iconWrap)}>
+          <Box sx={{ display: 'flex', flex: 1, justifyContent: 'center' }}>
             {icon}
-          </div>
+          </Box>
         )}
-        <div className={clsx(styles.cardTopThird, styles.cardTopRight)}>
+        <Box sx={{ display: 'flex', flex: 1, alignItems: 'flex-start' }}>
           {item.tooltip && (
             <InfoTooltip title={item.tooltip || ''} arrow placement="top">
-              <div className={styles.info}>
+              <Box
+                sx={{
+                  ml: 'auto',
+                  cursor: 'pointer',
+                  mt: [-1.5, -2],
+                  mr: [-2, -5],
+                }}
+              >
                 <InfoIconOutlined />
-              </div>
+              </Box>
             </InfoTooltip>
           )}
-        </div>
-      </div>
-      <div className={styles.bottom}>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          width: '100%',
+        }}
+      >
         <Box display="flex" justifyContent="center" pt={2}>
-          <div className={styles.title}>
+          <Label size="sm" mobileSize="sm">
             <CheckIcon className={styles.check} />
             {item.title}
-          </div>
+          </Label>
         </Box>
-        <div className={styles.description}>{item.description}</div>
-      </div>
+        <Body size="sm" sx={{ textAlign: 'center', pt: 3 }}>
+          {item.description}
+        </Body>
+      </Box>
     </Card>
   );
 }

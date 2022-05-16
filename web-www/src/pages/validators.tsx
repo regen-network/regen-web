@@ -18,7 +18,11 @@ const ValidatorsPage: React.FC<PageProps> = ({ location }) => {
   `);
   return (
     <>
-      <SEO title="Validators" location={location} imageUrl={data.seoImage.publicURL} />
+      <SEO
+        title="Validators"
+        location={location}
+        imageUrl={data.seoImage.publicURL}
+      />
       <TopSection />
       <WhatSection />
       <WhoSection />

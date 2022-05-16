@@ -1,12 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
 import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Body, Title } from 'web-components/lib/components/typography';
 import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import Section from 'web-components/lib/components/section';
@@ -66,14 +65,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: theme.spacing(4.5),
     paddingTop: theme.spacing(3.25),
   },
-  title: {
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(7.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(21.75),
-    },
-  },
 }));
 
 const query = graphql`
@@ -102,10 +93,20 @@ const PartnersPage: React.FC<PageProps> = ({ location }) => {
       <SEO title="Partners" location={location} />
       <div className={styles.sectionWrapper}>
         <Section className={styles.section}>
-          <Title className={styles.title} align="center" variant="h1">
+          <Title
+            align="center"
+            variant="h1"
+            sx={{ pb: { xs: 7.5, sm: 21.75 } }}
+          >
             {data?.header}
           </Title>
-          <Grid spacing={7} justifyContent="center" direction="row" alignItems="center" container>
+          <Grid
+            spacing={7}
+            justifyContent="center"
+            direction="row"
+            alignItems="center"
+            container
+          >
             {data?.partners?.map((partner, i) => (
               <Grid className={styles.item} xs={12} sm={4} item key={i}>
                 <GreenMediaCard
@@ -115,14 +116,21 @@ const PartnersPage: React.FC<PageProps> = ({ location }) => {
                 />
               </Grid>
             ))}
-            <Grid className={styles.item} xs={12} sm={6} md={4} item key="contact">
+            <Grid
+              className={styles.item}
+              xs={12}
+              sm={6}
+              md={4}
+              item
+              key="contact"
+            >
               <GreenCard className={clsx(styles.card, styles.contactCard)}>
                 <Title align="center" variant="h4">
                   {data?.contactHeader}
                 </Title>
-                <Typography className={styles.contactText}>
+                <Body size="lg" pt={3.25}>
                   <BlockContent content={data?._rawContactBody} />
-                </Typography>
+                </Body>
               </GreenCard>
             </Grid>
           </Grid>

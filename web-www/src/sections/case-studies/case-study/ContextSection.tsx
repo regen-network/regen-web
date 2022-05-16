@@ -4,11 +4,9 @@ import Grid from '@mui/material/Grid';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
-import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 import { SanityCaseStudyContextSection } from '../../../generated/graphql';
 
@@ -38,28 +36,11 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingLeft: theme.spacing(5),
     },
   },
-  title: {
-    [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-      paddingTop: theme.spacing(6),
-    },
-  },
-  description: {
-    lineHeight: '150%',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
-    },
-  },
   image: {
     float: 'right',
     width: '100%',
   },
   grid: {
-    // [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
-    //   alignItems: 'center',
-    // },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       flexDirection: 'column-reverse',
     },
@@ -87,30 +68,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   list: {
     listStyle: 'none',
     counterReset: 'challenge-counter',
-  },
-  item: {
-    counterIncrement: 'challenge-counter',
-    marginBottom: 0,
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(3),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(4.75),
-    },
-    '&::before': {
-      content: 'counter(challenge-counter)',
-      color: theme.palette.secondary.main,
-      fontWeight: 900,
-      marginLeft: theme.spacing(-6),
-      marginRight: theme.spacing(2.75),
-      fontFamily: theme.typography.h1.fontFamily,
-      [theme.breakpoints.up('sm')]: {
-        fontSize: theme.spacing(5.5),
-      },
-      [theme.breakpoints.down('sm')]: {
-        fontSize: theme.spacing(4.5),
-      },
-    },
   },
   imageContainer: {
     [theme.breakpoints.up(theme.breakpoints.values.tablet)]: {
@@ -146,34 +103,58 @@ const query = graphql`
   }
 `;
 
-const ContextSection: React.FC<SanityCaseStudyContextSection> = ({ _rawDescription, image, challenges }) => {
+const ContextSection: React.FC<SanityCaseStudyContextSection> = ({
+  _rawDescription,
+  image,
+  challenges,
+}) => {
   const styles = useStyles();
   const data = useStaticQuery(query);
   const content = data?.sanityCaseStudiesPage?.contextSection;
   return (
     <BackgroundImage fluid={data.bg.childImageSharp.fluid}>
       <div className={styles.root}>
-        <Grid className={styles.grid} container wrap="nowrap">
+        <Grid className={styles.grid} container wrap="nowrap" gap={3}>
           <Grid item xs={12} className={styles.text}>
-            <Title variant="h2" className={styles.title}>
+            <Title variant="h2" sx={{ pt: { tablet: 6 }, pb: 4 }}>
               {content?.header}
             </Title>
-            <Description className={styles.description}>
-              {<BlockContent content={_rawDescription} />}
-            </Description>
-            <Title variant="h2" className={styles.title}>
+            <Body size="xl" color="info.dark" sx={{ mb: 4 }}>
+              <BlockContent content={_rawDescription} />
+            </Body>
+            <Title variant="h2" sx={{ mt: [4, 7], mb: [2, 3] }}>
               {content.challenges}
             </Title>
             <ol className={styles.list}>
               {challenges?.map((text, i) => (
-                <Description key={i} component="li" className={clsx(styles.description, styles.item)}>
+                <Body
+                  key={i}
+                  size="xl"
+                  as="li"
+                  sx={{
+                    py: 1.25,
+                    counterIncrement: `challenge-counter`,
+                    '&::before': {
+                      content: 'counter(challenge-counter)',
+                      color: 'secondary.main',
+                      fontWeight: 900,
+                      marginLeft: -6,
+                      marginRight: 2.75,
+                      fontSize: [18, 22],
+                      fontFamily: 'h1.fontFamily',
+                    },
+                  }}
+                >
                   {text}
-                </Description>
+                </Body>
               ))}
             </ol>
           </Grid>
           <Grid item xs={12} className={styles.imageContainer}>
-            <Img fluid={image?.image?.asset?.fluid as FluidObject} className={styles.image} />
+            <Img
+              fluid={image?.image?.asset?.fluid as FluidObject}
+              className={styles.image}
+            />
           </Grid>
         </Grid>
       </div>

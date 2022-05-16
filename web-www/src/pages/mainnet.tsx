@@ -29,7 +29,8 @@ const query = graphql`
 `;
 
 const Mainnet: React.FC<PageProps> = ({ location }) => {
-  const { background, sanityMainnetPage: data } = useStaticQuery<MainnetPageQuery>(query);
+  const { background, sanityMainnetPage: data } =
+    useStaticQuery<MainnetPageQuery>(query);
   const launchDate = data?.launchDate || new Date();
 
   return (
@@ -46,7 +47,11 @@ const Mainnet: React.FC<PageProps> = ({ location }) => {
       <MediaSection />
       {new Date() < new Date(launchDate) && data?.livecastLink && (
         <FixedFooter justifyContent="flex-end">
-          <ContainedButton href={data?.livecastLink} target="_blank" rel="noopener noreferrer">
+          <ContainedButton
+            href={data?.livecastLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Register for Mainnet Livecast
           </ContainedButton>
         </FixedFooter>

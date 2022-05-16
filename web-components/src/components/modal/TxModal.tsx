@@ -1,9 +1,9 @@
 import React from 'react';
-import { Theme, Box, Typography } from '@mui/material';
+import { Theme, Box } from '@mui/material';
 import { SxProps } from '@mui/system';
 import { makeStyles } from '@mui/styles';
 
-import Title from '../title';
+import { Label, Subtitle, Title } from '../typography';
 import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
 import Modal, { RegenModalProps } from '../modal';
@@ -30,7 +30,7 @@ export interface Item {
     name: string | number;
     url?: string;
   };
-  sx?: SxProps<Theme>;
+  color?: string;
 }
 
 interface LinkProps extends LinkItem {
@@ -59,35 +59,18 @@ interface CardItemProps extends Item {
 }
 
 const CardItem: React.FC<CardItemProps> = ({
-  sx,
+  color,
   label,
   value,
   linkComponent: LinkComponent,
 }) => {
   return (
-    <Box sx={{ pt: 5, ...sx }}>
-      <Title
-        sx={{
-          textTransform: 'uppercase',
-          fontWeight: 800,
-          letterSpacing: '1px',
-          pb: {
-            xs: 3,
-            sm: 2.25,
-          },
-          fontSize: {
-            sm: 14,
-            xs: 12,
-          },
-        }}
-      >
+    <Box sx={{ pt: 5 }}>
+      <Label size="sm" sx={{ pb: [3, 2.25], color }}>
         {label}
-      </Title>
+      </Label>
 
-      <Typography
-        sx={{ fontWeight: 700, color: 'info.dark', ...sx }}
-        variant="subtitle2"
-      >
+      <Subtitle size="lg" mobileSize="sm" color={color || 'info.dark'}>
         {value.url ? (
           <LinkComponent
             sx={{ color: 'secondary.main' }}
@@ -99,7 +82,7 @@ const CardItem: React.FC<CardItemProps> = ({
         ) : (
           <>{value.name}</>
         )}
-      </Typography>
+      </Subtitle>
     </Box>
   );
 };

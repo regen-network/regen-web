@@ -6,10 +6,10 @@ import Img from 'gatsby-image';
 import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { HomeCarbonplusSectionQuery } from '../../generated/graphql';
+import { Box } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -28,40 +28,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   imageContainer: {
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingLeft: theme.spacing(9.5),
-    },
-  },
-  smallHeader: {
-    fontWeight: 800,
-    letterSpacing: '1px',
-    textTransform: 'uppercase',
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(7),
-    },
-  },
-  header: {
-    lineHeight: '140%',
-  },
-  featured: {
-    color: theme.palette.info.main,
-  },
-  creditName: {
-    color: theme.palette.secondary.main,
-  },
-  description: {
-    color: theme.palette.info.dark,
-    lineHeight: '150%',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-      paddingBottom: theme.spacing(4),
-      paddingTop: theme.spacing(4),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-      paddingBottom: theme.spacing(6),
-      paddingTop: theme.spacing(6),
     },
   },
   text: {
@@ -122,20 +88,18 @@ const CarbonplusSection: React.FC = (): JSX.Element => {
     <div className={styles.root}>
       <Grid className={styles.grid} container wrap="nowrap">
         <Grid item xs={12} className={styles.text}>
-          <Title variant="h6" className={styles.smallHeader}>
-            <span className={styles.featured}>
+          <Label sx={{ pb: [5, 7] }}>
+            <Box component="span" sx={{ color: 'info.main' }}>
               {content?.smallHeaderFeatured}{' '}
-            </span>
-            <span className={styles.creditName}>
+            </Box>
+            <Box component="span" sx={{ color: 'secondary.main' }}>
               {ReactHtmlParser(content?.smallHeaderCreditName || '')}
-            </span>
-          </Title>
-          <Title className={styles.header} variant="h3">
-            {ReactHtmlParser(content?.header || '')}
-          </Title>
-          <Description className={styles.description}>
+            </Box>
+          </Label>
+          <Title variant="h3">{ReactHtmlParser(content?.header || '')}</Title>
+          <Body size="lg" sx={{ color: 'info.dark', py: [4, 6] }}>
             {ReactHtmlParser(content?.description || '')}
-          </Description>
+          </Body>
           <ContainedButton
             size="large"
             className={styles.button}

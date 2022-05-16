@@ -106,7 +106,7 @@ For `/web-registry` there are two commands for the separate sources:
 
 1.  `yarn graphql:codegen`
 
-which generates types for both the Sanity items + any **_named_** GraphQL queries that live in the codebase (note - it does not generate types for unnamed queries)
+which generates types for any **_named_** GraphQL queries and mutations in `web-registry/src/graphql/*.graphql` (note - it does not generate types for unnamed queries)
 
 ```sh
 yarn graphql:codegen
@@ -114,9 +114,14 @@ yarn graphql:codegen
 
 This should be done anytime a `.graphql` file is created or modified.
 
-GraphQLDocumentError: Field "${fieldName}" is not defined by type "${TableName}Filter". 
+As part of https://github.com/regen-network/registry-server/pull/186, we've added some additional filtering features to our GraphQL server (using [postgraphile-plugin-connection-filter](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter)), though we restricted the filters to only work on certain fields and operators for now for [performance and security](https://github.com/graphile-contrib/postgraphile-plugin-connection-filter#performance-and-security) reasons:
+https://github.com/regen-network/registry-server/blob/aa97096c9a8e88e1af97655586e0222e263b8df5/server/Server.ts#L111-L115
 
-Similarly, types can be generated for Sanity GraphQL Schema using:
+If you try to use a filter that is not allowed yet, you'll get the following error when trying to generate types:
+`GraphQLDocumentError: Field "${fieldName}" is not defined by type "${TableName}Filter".`
+In this case, you might want to submit a PR on https://github.com/regen-network/registry-server first to allow more filtering options.
+
+Similarly, types can be generated for Sanity GraphQL Schema (from `web-registry/src/graphql/sanity/*.graphql`) using:
 
 ```sh
 yarn graphql:codegen-sanity

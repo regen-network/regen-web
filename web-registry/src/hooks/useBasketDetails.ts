@@ -17,7 +17,7 @@ import { useProjectsByMetadataLazyQuery } from '../generated/graphql';
 
 import { BasketOverviewProps, CreditBatch } from '../components/organisms';
 
-import { getMetadata, getMetadataFromUint8Array } from '../lib/metadata-graph';
+import { getMetadataFromUint8Array } from '../lib/metadata-graph';
 
 dayjs.extend(duration);
 
@@ -96,7 +96,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
         const _basketClasses = await Promise.all(
           basketClassesInfo.map(async basketClass => {
             let metadata;
-            if (basketClass.info?.metadata) {
+            if (basketClass.info?.metadata?.length) {
               try {
                 metadata = await getMetadataFromUint8Array(
                   basketClass.info.metadata,
@@ -126,7 +126,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
     fetchData(basketClassesInfo);
   }, [basketClassesInfo]);
 
-  // TODO ? creditaBatches data >> extract into its own hook / function ?
+  // TODO ? creditBatches data >> extract into its own hook / function ?
   // fetch project data related to credit batch using graphql lazy hook
   useEffect(() => {
     if (!batches) return;
@@ -137,7 +137,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
           const _batchesProjects = await Promise.all(
             basketBatches.map(async batch => {
               let batchMetadata;
-              if (batch.info) {
+              if (batch.info?.metadata?.length) {
                 // 1. Get batch metadata
                 batchMetadata = await getMetadataFromUint8Array(
                   batch.info.metadata,
@@ -160,14 +160,12 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
                 });
                 projectData = data;
               }
-
-              const batchProject =
-                projectData?.allProjects?.nodes?.[0]?.metadata;
+              const batchProject = projectData?.allProjects?.nodes?.[0];
               return {
                 batchDenom: batch.info?.batchDenom || '-',
                 projectHandle: (batchProject?.handle as string) || '-',
                 projectName:
-                  (batchProject?.metadata['schema:name'] as string) || '-',
+                  (batchProject?.metadata?.['schema:name'] as string) || '-',
               };
             }),
           );
@@ -180,7 +178,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
     }
 
     fetchData(batches);
-  }, [basketBatches, fetchProjects]);
+  }, [basketBatches, fetchProjects, batches]);
 
   // finally, data preparation for <BasketEcocreditsTable />
   useEffect(() => {

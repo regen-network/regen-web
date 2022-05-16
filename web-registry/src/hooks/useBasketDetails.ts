@@ -137,35 +137,38 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
           const _batchesProjects = await Promise.all(
             basketBatches.map(async batch => {
               let batchMetadata;
-              if (batch.info?.metadata) {
+              if (batch.info) {
+                // 1. Get batch metadata
                 batchMetadata = await getMetadataFromUint8Array(
                   batch.info.metadata,
                 );
               }
 
+              // 2. Fetch projects by vcsProjectId
+              let projectData;
               const vcsProjectId = batchMetadata?.['regen:vcsProjectId'];
-              const data = await fetchProjects({
-                // skip: !vcsProjectId,
-                variables: {
-                  metadata: {
-                    'regen:vcsProjectId': {
-                      '@type': 'xsd:unsignedInt',
-                      '@value': vcsProjectId,
+              if (vcsProjectId) {
+                const { data } = await fetchProjects({
+                  variables: {
+                    metadata: {
+                      'regen:vcsProjectId': {
+                        '@type': 'xsd:unsignedInt',
+                        '@value': vcsProjectId,
+                      },
                     },
                   },
-                },
-              });
+                });
+                projectData = data;
+              }
 
-              const batchProject = data?.meta.;
-              // return {
-              //   batchDenom,
-              //   projectHandle:
-              //     batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
-              //       ?.handle || '-',
-              //   projectName:
-              //     batchProject.data?.creditVintageByBatchDenom?.projectByProjectId
-              //       ?.metadata['schema:name'] || '-',
-              // };
+              const batchProject =
+                projectData?.allProjects?.nodes?.[0]?.metadata;
+              return {
+                batchDenom: batch.info?.batchDenom || '-',
+                projectHandle: (batchProject?.handle as string) || '-',
+                projectName:
+                  (batchProject?.metadata['schema:name'] as string) || '-',
+              };
             }),
           );
 

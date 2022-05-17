@@ -34,10 +34,10 @@ interface RolesFormProps {
 }
 
 export interface RolesValues {
-  'http://regen.network/landOwner'?: FormValues;
-  'http://regen.network/landSteward'?: FormValues;
-  'http://regen.network/projectDeveloper'?: FormValues;
-  'http://regen.network/projectOriginator'?: FormValues;
+  'regen:landOwner'?: FormValues;
+  'regen:landSteward'?: FormValues;
+  'regen:projectDeveloper'?: FormValues;
+  'regen:projectOriginator'?: FormValues;
 }
 
 const rolesErrorMessage = 'You must add one of the following roles.';
@@ -69,27 +69,26 @@ function getEntity(
         ?.organizationByOrganizationId;
     if (org) {
       return {
-        '@type': 'http://regen.network/Organization',
+        '@type': 'regen:Organization',
         id: org.id,
         partyId: org.partyId,
-        'http://schema.org/legalName': org.legalName,
-        'http://schema.org/telephone': user.phoneNumber || undefined,
-        'http://schema.org/email': user.email,
-        'http://regen.network/responsiblePerson': user.partyByPartyId?.name,
-        'http://regen.network/sharePermission': true,
-        'http://schema.org/location':
-          org.partyByPartyId?.addressByAddressId?.feature,
+        'schema:legalName': org.legalName,
+        'schema:telephone': user.phoneNumber || undefined,
+        'schema:email': user.email,
+        'regen:responsiblePerson': user.partyByPartyId?.name,
+        'regen:sharePermission': true,
+        'schema:location': org.partyByPartyId?.addressByAddressId?.feature,
         projectCreator: true,
       };
     } else {
       return {
-        '@type': 'http://regen.network/Individual',
+        '@type': 'regen:Individual',
         id: user.id,
         partyId: user.partyId,
-        'http://schema.org/name': user.partyByPartyId?.name,
-        'http://schema.org/telephone': user.phoneNumber || undefined,
-        'http://schema.org/email': user.email,
-        'http://regen.network/sharePermission': true,
+        'schema:name': user.partyByPartyId?.name,
+        'schema:telephone': user.phoneNumber || undefined,
+        'schema:email': user.email,
+        'regen:sharePermission': true,
         projectCreator: true,
       };
     }
@@ -197,10 +196,10 @@ const RolesForm: React.FC<RolesFormProps> = ({
         'http://regen.network/ProjectPageRolesGroup',
       );
       if (!report.conforms) {
-        errors['http://regen.network/landOwner'] = rolesErrorMessage;
-        errors['http://regen.network/landSteward'] = rolesErrorMessage;
-        errors['http://regen.network/projectDeveloper'] = rolesErrorMessage;
-        errors['http://regen.network/projectOriginator'] = rolesErrorMessage;
+        errors['regen:landOwner'] = rolesErrorMessage;
+        errors['regen:landSteward'] = rolesErrorMessage;
+        errors['regen:projectDeveloper'] = rolesErrorMessage;
+        errors['regen:projectOriginator'] = rolesErrorMessage;
       }
     }
     return errors;
@@ -215,9 +214,9 @@ const RolesForm: React.FC<RolesFormProps> = ({
         const userRes = await createUser({
           variables: {
             input: {
-              email: updatedEntity['http://schema.org/email'],
-              name: updatedEntity['http://schema.org/name'],
-              phoneNumber: updatedEntity['http://schema.org/telephone'],
+              email: updatedEntity['schema:email'],
+              name: updatedEntity['schema:name'],
+              phoneNumber: updatedEntity['schema:telephone'],
             },
           },
         });
@@ -241,9 +240,9 @@ const RolesForm: React.FC<RolesFormProps> = ({
           await updateUser(
             updatedEntity.id,
             updatedEntity.partyId,
-            updatedEntity['http://schema.org/email'],
-            updatedEntity['http://schema.org/name'],
-            updatedEntity['http://schema.org/telephone'],
+            updatedEntity['schema:email'],
+            updatedEntity['schema:name'],
+            updatedEntity['schema:telephone'],
           );
         }
       } catch (e) {
@@ -271,9 +270,9 @@ const RolesForm: React.FC<RolesFormProps> = ({
         const ownerRes = await createUser({
           variables: {
             input: {
-              email: updatedEntity['http://schema.org/email'],
-              name: updatedEntity['http://regen.network/responsiblePerson'],
-              phoneNumber: updatedEntity['http://schema.org/telephone'],
+              email: updatedEntity['schema:email'],
+              name: updatedEntity['regen:responsiblePerson'],
+              phoneNumber: updatedEntity['schema:telephone'],
             },
           },
         });
@@ -282,8 +281,8 @@ const RolesForm: React.FC<RolesFormProps> = ({
             variables: {
               input: {
                 ownerId: ownerRes?.data?.reallyCreateUser?.user?.id,
-                legalName: updatedEntity['http://schema.org/legalName'],
-                orgAddress: updatedEntity['http://schema.org/location'],
+                legalName: updatedEntity['schema:legalName'],
+                orgAddress: updatedEntity['schema:location'],
                 displayName: '', // temp values for now until EntityDisplay values are provided
                 image: '',
                 walletAddr: '',
@@ -318,7 +317,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
             input: {
               id: updatedEntity.id,
               organizationPatch: {
-                legalName: updatedEntity['http://schema.org/legalName'],
+                legalName: updatedEntity['schema:legalName'],
               },
             },
           },
@@ -328,7 +327,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
             input: {
               id: updatedEntity.addressId,
               addressPatch: {
-                feature: updatedEntity['http://schema.org/location'],
+                feature: updatedEntity['schema:location'],
               },
             },
           },
@@ -337,9 +336,9 @@ const RolesForm: React.FC<RolesFormProps> = ({
           await updateUser(
             updatedEntity.id,
             updatedEntity.ownerPartyId,
-            updatedEntity['http://schema.org/email'],
-            updatedEntity['http://regen.network/responsiblePerson'],
-            updatedEntity['http://schema.org/telephone'],
+            updatedEntity['schema:email'],
+            updatedEntity['regen:responsiblePerson'],
+            updatedEntity['schema:telephone'],
           );
         }
       } catch (e) {
@@ -363,14 +362,11 @@ const RolesForm: React.FC<RolesFormProps> = ({
         validateOnMount
         initialValues={
           initialValues || {
-            'http://regen.network/landOwner':
-              initialValues?.['http://regen.network/landOwner'],
-            'http://regen.network/landSteward':
-              initialValues?.['http://regen.network/landSteward'],
-            'http://regen.network/projectDeveloper':
-              initialValues?.['http://regen.network/projectDeveloper'],
-            'http://regen.network/projectOriginator':
-              initialValues?.['http://regen.network/projectOriginator'],
+            'regen:landOwner': initialValues?.['regen:landOwner'],
+            'regen:landSteward': initialValues?.['regen:landSteward'],
+            'regen:projectDeveloper': initialValues?.['regen:projectDeveloper'],
+            'regen:projectOriginator':
+              initialValues?.['regen:projectOriginator'],
           }
         }
         onSubmit={async (values, { setSubmitting, setTouched }) => {
@@ -402,7 +398,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
                   label="Land Owner"
                   optional
                   description="The individual or organization that owns this land."
-                  name="['http://regen.network/landOwner']"
+                  name="regen:landOwner"
                   options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveOrganization={saveOrganization}
@@ -415,7 +411,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
                   label="Land Steward"
                   optional
                   description="The individual or organization that is performing the work on the ground. This can be a farmer, rancher, conservationist, forester, fisherman, etc."
-                  name="['http://regen.network/landSteward']"
+                  name="regen:landSteward"
                   options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveOrganization={saveOrganization}
@@ -428,7 +424,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
                   label="Project Developer"
                   optional
                   description="The individual or organization that is in charge of managing the project and is the main point of contact with Regen Registry. "
-                  name="['http://regen.network/projectDeveloper']"
+                  name="regen:projectDeveloper"
                   options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveOrganization={saveOrganization}
@@ -441,7 +437,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
                   label="Project Originator"
                   optional
                   description="The individual or organization that helps initiate the project."
-                  name="['http://regen.network/projectOriginator']"
+                  name="regen:projectOriginator"
                   options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveOrganization={saveOrganization}

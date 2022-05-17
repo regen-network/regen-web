@@ -33,13 +33,13 @@ export interface OrganizationFormValues {
   addressId?: string;
   ownerId?: string;
   ownerPartyId?: string;
-  '@type': 'http://regen.network/Organization';
-  'http://schema.org/legalName'?: string;
-  'http://schema.org/telephone'?: string;
-  'http://schema.org/email'?: string;
-  'http://regen.network/responsiblePerson'?: string;
-  'http://regen.network/sharePermission'?: boolean;
-  'http://schema.org/location'?: GeocodeFeature;
+  '@type': 'regen:Organization';
+  'schema:legalName'?: string;
+  'schema:telephone'?: string;
+  'schema:email'?: string;
+  'regen:responsiblePerson'?: string;
+  'regen:sharePermission'?: boolean;
+  'schema:location'?: GeocodeFeature;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -111,10 +111,9 @@ function OrganizationModal({
           validateOnMount
           initialValues={{
             ...organizationEdit,
-            '@type': 'http://regen.network/Organization',
-            'http://regen.network/sharePermission':
-              organizationEdit &&
-              !!organizationEdit['http://regen.network/sharePermission'],
+            '@type': 'regen:Organization',
+            'regen:sharePermission':
+              organizationEdit && !!organizationEdit['regen:sharePermission'],
           }}
           validate={validate}
           onSubmit={async (values, { setSubmitting }) => {
@@ -135,7 +134,7 @@ function OrganizationModal({
                     component={ControlledTextField}
                     label="Organization legal name"
                     description="This is the name of the farm, ranch, cooperative, non-profit, or other organization."
-                    name="['http://schema.org/legalName']"
+                    name="schema:legalName"
                     placeholder="i.e. Cherrybrook Farms LLC"
                   />
                   <Field
@@ -143,7 +142,7 @@ function OrganizationModal({
                     label="Organization location"
                     description="This address is used for issuing credits.  If you choose to 
                     show this entity on the project page, only city, state/province, and country will be displayed."
-                    name="['http://schema.org/location']"
+                    name="schema:location"
                     placeholder="Start typing the location"
                     token={mapboxToken}
                   />
@@ -151,24 +150,24 @@ function OrganizationModal({
                     component={ControlledTextField}
                     label="Organization representative"
                     description="This is the person who will be signing the project plan (if applicable), and whose name will appear on credit issuance certificates if credits are issued to this organization."
-                    name="['http://regen.network/responsiblePerson']"
+                    name="regen:responsiblePerson"
                   />
                   <Field
                     component={ControlledTextField}
                     label="Email address"
-                    name="['http://schema.org/email']"
+                    name="schema:email"
                   />
                   <Field
                     component={PhoneField}
                     label="Phone number"
-                    name="['http://schema.org/telephone']"
+                    name="schema:telephone"
                   />
                 </OnBoardingCard>
                 <div className={cx(styles.permission, styles.matchFormPadding)}>
                   <Field
                     type="checkbox"
                     component={CheckboxLabel}
-                    name="['http://regen.network/sharePermission']"
+                    name="regen:sharePermission"
                     label={
                       <Body size="sm">
                         I have this organization’s permission to share their

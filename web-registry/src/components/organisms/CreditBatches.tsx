@@ -13,6 +13,7 @@ import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
+import { Link } from '../atoms';
 
 interface CreditBatchProps {
   creditClassId?: string;
@@ -129,8 +130,12 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
         ))}
         rows={batches.map(batch =>
           [
-            batch.class_id,
-            <Box className={styles.noWrap}>{batch.batch_denom}</Box>,
+            <Link href={`/credit-classes/${batch.class_id}`}>
+              batch.class_id
+            </Link>,
+            <Link href={`/credit-batches/${batch.batch_denom}`}>
+              <Box className={styles.noWrap}>{batch.batch_denom}</Box>
+            </Link>,
             <a
               href={getAccountUrl(batch.issuer)}
               target="_blank"

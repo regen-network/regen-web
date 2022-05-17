@@ -133,8 +133,11 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             <Link href={`/credit-classes/${batch.class_id}`}>
               {batch.class_id}
             </Link>,
-            <Link href={`/credit-batches/${batch.batch_denom}`}>
-              <Box className={styles.noWrap}>{batch.batch_denom}</Box>
+            <Link
+              className={styles.noWrap}
+              href={`/credit-batches/${batch.batch_denom}`}
+            >
+              {batch.batch_denom}
             </Link>,
             <a
               href={getAccountUrl(batch.issuer)}

@@ -131,7 +131,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
         rows={batches.map(batch =>
           [
             <Link href={`/credit-classes/${batch.class_id}`}>
-              batch.class_id
+              {batch.class_id}
             </Link>,
             <Link href={`/credit-batches/${batch.batch_denom}`}>
               <Box className={styles.noWrap}>{batch.batch_denom}</Box>

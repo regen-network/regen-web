@@ -68,17 +68,11 @@ function stripPartyIds(values: FormValues | undefined): FormValues | undefined {
 function stripIds(values: RolesValues): RolesValues {
   if (values) {
     return {
-      'http://regen.network/landOwner': stripPartyIds(
-        values['http://regen.network/landOwner'],
-      ),
-      'http://regen.network/landSteward': stripPartyIds(
-        values['http://regen.network/landSteward'],
-      ),
-      'http://regen.network/projectDeveloper': stripPartyIds(
-        values['http://regen.network/projectDeveloper'],
-      ),
-      'http://regen.network/projectOriginator': stripPartyIds(
-        values['http://regen.network/projectOriginator'],
+      'regen:landOwner': stripPartyIds(values['regen:landOwner']),
+      'regen:landSteward': stripPartyIds(values['regen:landSteward']),
+      'regen:projectDeveloper': stripPartyIds(values['regen:projectDeveloper']),
+      'regen:projectOriginator': stripPartyIds(
+        values['regen:projectOriginator'],
       ),
     };
   }
@@ -108,20 +102,20 @@ const Roles: React.FC = () => {
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
-      'http://regen.network/landOwner': {
-        ...metadata['http://regen.network/landOwner'],
+      'regen:landOwner': {
+        ...metadata['regen:landOwner'],
         ...getPartyIds(data?.projectById?.partyByLandOwnerId),
       },
-      'http://regen.network/landSteward': {
-        ...metadata['http://regen.network/landSteward'],
+      'regen:landSteward': {
+        ...metadata['regen:landSteward'],
         ...getPartyIds(data?.projectById?.partyByStewardId),
       },
-      'http://regen.network/projectDeveloper': {
-        ...metadata['http://regen.network/projectDeveloper'],
+      'regen:projectDeveloper': {
+        ...metadata['regen:projectDeveloper'],
         ...getPartyIds(data?.projectById?.partyByDeveloperId),
       },
-      'http://regen.network/projectOriginator': {
-        ...metadata['http://regen.network/projectOriginator'],
+      'regen:projectOriginator': {
+        ...metadata['regen:projectOriginator'],
         ...getPartyIds(data?.projectById?.partyByOriginatorId),
       },
     };
@@ -134,27 +128,27 @@ const Roles: React.FC = () => {
   async function submit(values: RolesValues): Promise<void> {
     let projectPatch: ProjectPatch = {};
 
-    if (values['http://regen.network/landOwner']?.partyId) {
+    if (values['regen:landOwner']?.partyId) {
       projectPatch = {
-        landOwnerId: values['http://regen.network/landOwner']?.partyId,
+        landOwnerId: values['regen:landOwner']?.partyId,
         ...projectPatch,
       };
     }
-    if (values['http://regen.network/landSteward']?.partyId) {
+    if (values['regen:landSteward']?.partyId) {
       projectPatch = {
-        stewardId: values['http://regen.network/landSteward']?.partyId,
+        stewardId: values['regen:landSteward']?.partyId,
         ...projectPatch,
       };
     }
-    if (values['http://regen.network/projectDeveloper']?.partyId) {
+    if (values['regen:projectDeveloper']?.partyId) {
       projectPatch = {
-        developerId: values['http://regen.network/projectDeveloper']?.partyId,
+        developerId: values['regen:projectDeveloper']?.partyId,
         ...projectPatch,
       };
     }
-    if (values['http://regen.network/projectOriginator']?.partyId) {
+    if (values['regen:projectOriginator']?.partyId) {
       projectPatch = {
-        originatorId: values['http://regen.network/projectOriginator']?.partyId,
+        originatorId: values['regen:projectOriginator']?.partyId,
         ...projectPatch,
       };
     }

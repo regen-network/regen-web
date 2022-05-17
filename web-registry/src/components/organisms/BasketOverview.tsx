@@ -213,9 +213,9 @@ interface ItemProps {
 const Item = ({ label, data, link }: ItemProps): JSX.Element => {
   return (
     <GridItem label={label}>
-      <DataText>
+      <Body styleLinks={false} mobileSize="md" color="info.dark">
         {link ? <LinkWithArrow href={link} label={data} /> : parseText(data)}
-      </DataText>
+      </Body>
     </GridItem>
   );
 };

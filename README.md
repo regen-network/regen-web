@@ -226,17 +226,18 @@ The `<Body>` component by default will add styles to child `Link` and `ul/ol` el
 
 ### Sizing guide
 
-| **Px** | **Rem**  | **theme.spacing** |              **Components**               |
-| :----: | :------: | :---------------: | :---------------------------------------: |
-|  48px  |   3rem   |        12         |                    H1                     |
-|  38px  | 2.375rem |        9.5        |                    H2                     |
-|  32px  |   2rem   |         8         |                    H3                     |
-|  24px  |  1.5rem  |         6         |                    H4                     |
-|  21px  | 1.313rem |       5.25        |              H5, ButtonLarge              |
-|  18px  | 1.125rem |        4.5        | H6, subtitleLarge bodyLarge, buttonMedium |
-|  16px  |   1rem   |         4         |        subtitleMedium, bodyMedium         |
-|  14px  | 0.875rem |        3.5        |   subtitleSmall, bodySmall, buttonSmall   |
-|  12px  | 0.75rem  |         3         |  subtitleXSmall bodyXSmall, buttonXSmall  |
+| **Px** | **Rem**  | **theme.spacing** |            **Figma Component**            |      **UI Components**       | **MUI Variants** |
+| :----: | :------: | ----------------- | :---------------------------------------: | :--------------------------: | :--------------: |
+|  48px  |   3rem   | 12                |                    H1                     |            Title             |        H1        |
+|  38px  | 2.375rem | 9.5               |                    H2                     |            Title             |        H2        |
+|  32px  |   2rem   | 8                 |                    H3                     |            Title             |        H3        |
+|  24px  |  1.5rem  | 6                 |                    H4                     |            Title             |        H4        |
+|  22px  | 1.375rem | 5.5               |        bodyXLarge, subtitleXLarge         |        Body, Subtitle        |    textXLarge    |
+|  21px  | 1.313rem | 5.252             |              H5, ButtonLarge              |         Title, Label         |        H5        |
+|  18px  | 1.125rem | 4.5               | H6, subtitleLarge bodyLarge, buttonMedium | Title, Subtitle, Body, Label |  h6, textLarge   |
+|  16px  |   1rem   | 4                 |        subtitleMedium, bodyMedium         |       Subtitle, Label        |    textMedium    |
+|  14px  | 0.875rem | 3.5               |   subtitleSmall, bodySmall, buttonSmall   |     Subtitle Body, Label     |    textSmall     |
+|  12px  | 0.75rem  | 3                 |  subtitleXSmall bodyXSmall, buttonXSmall  |     Subtitle Body, Label     |    textXSmall    |
 
 ## Timeout Issue on Slower Connections
 

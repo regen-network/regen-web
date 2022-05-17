@@ -27,9 +27,9 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
-  { id: 'issuer', numeric: false, label: 'issuer' },
-  { id: 'batch_denom', numeric: false, label: 'batch denom' },
   { id: 'class_id', numeric: false, label: 'credit class' },
+  { id: 'batch_denom', numeric: false, label: 'batch denom' },
+  { id: 'issuer', numeric: false, label: 'issuer' },
   {
     id: 'tradable_supply',
     numeric: true,
@@ -129,6 +129,8 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
         ))}
         rows={batches.map(batch =>
           [
+            batch.class_id,
+            <Box className={styles.noWrap}>{batch.batch_denom}</Box>,
             <a
               href={getAccountUrl(batch.issuer)}
               target="_blank"
@@ -136,8 +138,6 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             >
               {truncate(batch.issuer)}
             </a>,
-            <Box className={styles.noWrap}>{batch.batch_denom}</Box>,
-            batch.class_id,
             formatNumber(batch.tradable_supply),
             formatNumber(batch.retired_supply),
             formatNumber(batch.amount_cancelled),

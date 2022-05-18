@@ -1,0 +1,3 @@
+query ProjectsByMetadata($metadata: JSON) {
+  allProjects(filter: { metadata: { contains: $metadata }}) { nodes { handle, metadata  }}
+}

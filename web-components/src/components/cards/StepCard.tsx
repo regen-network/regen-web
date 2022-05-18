@@ -201,7 +201,7 @@ function StepCard({
           >
             {step.title}
           </Title>
-          <Body size="lg" align="center" color="info.dark">
+          <Body as="div" size="lg" align="center" color="info.dark">
             {step.description}
           </Body>
           {!!step.btnText && !!step.onBtnClick && (

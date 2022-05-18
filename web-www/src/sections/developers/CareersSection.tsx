@@ -77,6 +77,7 @@ const CareersSection: React.FC = () => {
         {data?.header}
       </Title>
       <Body
+        as="div"
         size="lg"
         align="center"
         sx={{ m: { sm: '0 auto' }, maxWidth: { sm: 754 } }}

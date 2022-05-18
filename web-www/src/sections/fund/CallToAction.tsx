@@ -92,7 +92,7 @@ const CallToAction = (): JSX.Element => {
                 <Title variant="h4" mobileVariant="h4" align="center" mb={4}>
                   {cta?.header || ''}
                 </Title>
-                <Body size="xl" align="center">
+                <Body as="div" size="xl" align="center">
                   <BlockContent
                     content={cta?._rawDescription}
                     onClickModalLink={(href: string) =>

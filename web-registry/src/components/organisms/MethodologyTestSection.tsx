@@ -49,7 +49,7 @@ function MethodologyTestSection({ title, descriptionRaw }: Props): JSX.Element {
           {title}
         </Title>
       )}
-      <Body size="xl" align="center">
+      <Body as="div" size="xl" align="center">
         <BlockContent content={descriptionRaw} />
       </Body>
     </BackgroundImgSection>

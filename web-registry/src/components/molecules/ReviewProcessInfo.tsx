@@ -42,7 +42,7 @@ const ReviewProcessInfo: React.FC<{
       {props.reviewSection?.timespan && (
         <Label color="secondary.main">{props.reviewSection?.timespan}</Label>
       )}
-      <Body size="xl" align="center">
+      <Body as="div" size="xl" align="center">
         <BlockContent content={props.reviewSection?.descriptionRaw} />
       </Body>
       {props.reviewSection?.button?.buttonText && (

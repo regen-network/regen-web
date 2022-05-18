@@ -53,7 +53,7 @@ export const MarketplaceSection = (): JSX.Element => {
         <Title variant="h2" sx={{ textAlign: 'center', my: [4, 8] }}>
           {data?.title}
         </Title>
-        <Body size="xl" align="center">
+        <Body as="div" size="xl" align="center">
           <BlockContent content={data?._rawBody} />
         </Body>
       </Box>

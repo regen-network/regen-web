@@ -36,18 +36,18 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
     <Box sx={{ backgroundColor: 'grey.50', pb: { xs: 21.25, sm: 28.28 } }}>
       <Section title="Portfolio" titleVariant="h2" titleAlign="left">
         {children}
-        <Box sx={{ pt: { xs: 9.25, sm: 8.5 } }}>
-          <Label sx={sxs.title}>basket tokens</Label>
-          <BasketsTable
-            basketTokens={basketTokens}
-            renderActionButtons={renderBasketActionButtons}
-          />
-        </Box>
         <Box sx={{ pt: 12.75 }}>
           <Label sx={sxs.title}>ecocredits</Label>
           <EcocreditsTable
             credits={credits}
             renderActionButtons={renderCreditActionButtons}
+          />
+        </Box>
+        <Box sx={{ pt: { xs: 9.25, sm: 8.5 } }}>
+          <Label sx={sxs.title}>basket tokens</Label>
+          <BasketsTable
+            basketTokens={basketTokens}
+            renderActionButtons={renderBasketActionButtons}
           />
         </Box>
       </Section>

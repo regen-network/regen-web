@@ -3,7 +3,7 @@ import Grid, { GridDirection } from '@mui/material/Grid';
 
 import UserAvatar from './UserAvatar';
 import OrganizationIcon from '../icons/OrganizationIcon';
-import { Body, Title } from '../typography';
+import { Body, Subtitle, Title } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
 
 export interface User {
@@ -19,6 +19,7 @@ interface UserInfoProps {
   user: User;
   size?: TextSize;
   direction?: GridDirection;
+  titleComponent?: 'title' | 'subtitle';
   border?: boolean;
   icon?: any;
 }
@@ -27,21 +28,25 @@ export default function UserInfo({
   size = 'lg',
   direction,
   border = true,
+  titleComponent = 'title',
   icon,
 }: UserInfoProps): JSX.Element {
   const sizeVariant = getSizeVariant(size);
-  const mobileVariant = getSizeVariant(getMobileSize(size));
-  // title doesn't accept size as a prop, so manually setting it here
+  const mobileSizeVariant = getSizeVariant(getMobileSize(size));
+  const TitleComponent = titleComponent === 'title' ? Title : Subtitle;
   const name = (
-    <Title
-      sx={theme => ({
-        typography: [mobileVariant, sizeVariant],
-        fontFamily: theme.typography.h1.fontFamily,
-        fontWeight: theme.typography.h1.fontWeight,
-      })}
+    <TitleComponent
+      sx={({ typography }) => {
+        return {
+          fontSize: [
+            typography[mobileSizeVariant].fontSize,
+            typography[sizeVariant].fontSize,
+          ],
+        };
+      }}
     >
       {user.name}
-    </Title>
+    </TitleComponent>
   );
 
   return (

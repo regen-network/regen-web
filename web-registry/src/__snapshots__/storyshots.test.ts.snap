@@ -101,6 +101,7 @@ exports[`Storyshots Action Action 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -347,6 +348,9 @@ exports[`Storyshots Action Action 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -478,6 +482,7 @@ exports[`Storyshots Action Action Long Description 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -724,6 +729,9 @@ exports[`Storyshots Action Action Long Description 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -855,6 +863,7 @@ exports[`Storyshots Blog Post Blog Post 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -1101,6 +1110,9 @@ exports[`Storyshots Blog Post Blog Post 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -1232,6 +1244,7 @@ exports[`Storyshots Buttons Contained Button 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -1478,6 +1491,9 @@ exports[`Storyshots Buttons Contained Button 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -1609,6 +1625,7 @@ exports[`Storyshots Buttons Expand Button 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -1855,6 +1872,9 @@ exports[`Storyshots Buttons Expand Button 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -1986,6 +2006,7 @@ exports[`Storyshots Buttons Next Button 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -2232,6 +2253,9 @@ exports[`Storyshots Buttons Next Button 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -2363,6 +2387,7 @@ exports[`Storyshots Buttons Outlined Button 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -2609,6 +2634,9 @@ exports[`Storyshots Buttons Outlined Button 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -2740,6 +2768,7 @@ exports[`Storyshots Buttons Prev Button 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -2986,6 +3015,9 @@ exports[`Storyshots Buttons Prev Button 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -3117,6 +3149,7 @@ exports[`Storyshots Buttons Table Action Buttons 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -3363,6 +3396,9 @@ exports[`Storyshots Buttons Table Action Buttons 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -3494,6 +3530,7 @@ exports[`Storyshots Cards Create Project Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -3740,6 +3777,9 @@ exports[`Storyshots Cards Create Project Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -3871,6 +3911,7 @@ exports[`Storyshots Cards Create Project Card Add Another 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -4117,6 +4158,9 @@ exports[`Storyshots Cards Create Project Card Add Another 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -4248,6 +4292,7 @@ exports[`Storyshots Cards Glance Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -4494,6 +4539,9 @@ exports[`Storyshots Cards Glance Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -4625,6 +4673,7 @@ exports[`Storyshots Cards Green Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -4871,6 +4920,9 @@ exports[`Storyshots Cards Green Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -5002,6 +5054,7 @@ exports[`Storyshots Cards Green Top Icon Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -5248,6 +5301,9 @@ exports[`Storyshots Cards Green Top Icon Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -5379,6 +5435,7 @@ exports[`Storyshots Cards Image Action Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -5625,6 +5682,9 @@ exports[`Storyshots Cards Image Action Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -5756,6 +5816,7 @@ exports[`Storyshots Cards Impact Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -6002,6 +6063,9 @@ exports[`Storyshots Cards Impact Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -6133,6 +6197,7 @@ exports[`Storyshots Cards Map Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -6379,6 +6444,9 @@ exports[`Storyshots Cards Map Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -6510,6 +6578,7 @@ exports[`Storyshots Cards Monitored Impact Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -6756,6 +6825,9 @@ exports[`Storyshots Cards Monitored Impact Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -6887,6 +6959,7 @@ exports[`Storyshots Cards On Boarding Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -7133,6 +7206,9 @@ exports[`Storyshots Cards On Boarding Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -7264,6 +7340,7 @@ exports[`Storyshots Cards Overview Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -7510,6 +7587,9 @@ exports[`Storyshots Cards Overview Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -7641,6 +7721,7 @@ exports[`Storyshots Cards Overview Cards Group 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -7887,6 +7968,9 @@ exports[`Storyshots Cards Overview Cards Group 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -8018,6 +8102,7 @@ exports[`Storyshots Cards Project Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -8264,6 +8349,9 @@ exports[`Storyshots Cards Project Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -8395,6 +8483,7 @@ exports[`Storyshots Cards Project Top Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -8641,6 +8730,9 @@ exports[`Storyshots Cards Project Top Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -8772,6 +8864,7 @@ exports[`Storyshots Cards Purchased Credits Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -9018,6 +9111,9 @@ exports[`Storyshots Cards Purchased Credits Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -9149,6 +9245,7 @@ exports[`Storyshots Cards Resources Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -9395,6 +9492,9 @@ exports[`Storyshots Cards Resources Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -9526,6 +9626,7 @@ exports[`Storyshots Cards Step Card 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -9772,6 +9873,9 @@ exports[`Storyshots Cards Step Card 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -9903,6 +10007,7 @@ exports[`Storyshots Certificate Certificate 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -10149,6 +10254,9 @@ exports[`Storyshots Certificate Certificate 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -10280,6 +10388,7 @@ exports[`Storyshots Charts Bar Chart 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -10526,6 +10635,9 @@ exports[`Storyshots Charts Bar Chart 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -10657,6 +10769,7 @@ exports[`Storyshots Credits Credit Details 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -10903,6 +11016,9 @@ exports[`Storyshots Credits Credit Details 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -11034,6 +11150,7 @@ exports[`Storyshots Credits Credits Gauge 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -11280,6 +11397,9 @@ exports[`Storyshots Credits Credits Gauge 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -11411,6 +11531,7 @@ exports[`Storyshots Document Document 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -11657,6 +11778,9 @@ exports[`Storyshots Document Document 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -11788,6 +11912,7 @@ exports[`Storyshots FAQ Category 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -12034,6 +12159,9 @@ exports[`Storyshots FAQ Category 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -12165,6 +12293,7 @@ exports[`Storyshots FAQ Faq 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -12411,6 +12540,9 @@ exports[`Storyshots FAQ Faq 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -12542,6 +12674,7 @@ exports[`Storyshots FAQ Navigation 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -12788,6 +12921,9 @@ exports[`Storyshots FAQ Navigation 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -12919,6 +13055,7 @@ exports[`Storyshots FAQ Question 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -13165,6 +13302,9 @@ exports[`Storyshots FAQ Question 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -13296,6 +13436,7 @@ exports[`Storyshots Footers Fixed Footer 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -13542,6 +13683,9 @@ exports[`Storyshots Footers Fixed Footer 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -13673,6 +13817,7 @@ exports[`Storyshots Footers Onboarding Footer 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -13919,6 +14064,9 @@ exports[`Storyshots Footers Onboarding Footer 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -14050,6 +14198,7 @@ exports[`Storyshots Footers Switch Footer 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -14296,6 +14445,9 @@ exports[`Storyshots Footers Switch Footer 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -14427,6 +14579,7 @@ exports[`Storyshots Forms Basket Put Form 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -14673,6 +14826,9 @@ exports[`Storyshots Forms Basket Put Form 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -14804,6 +14960,7 @@ exports[`Storyshots Forms Basket Take Form 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -15050,6 +15207,9 @@ exports[`Storyshots Forms Basket Take Form 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -15181,6 +15341,7 @@ exports[`Storyshots Forms Credit Retire Form 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -15427,6 +15588,9 @@ exports[`Storyshots Forms Credit Retire Form 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -15558,6 +15722,7 @@ exports[`Storyshots Forms Credit Send Form 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -15804,6 +15969,9 @@ exports[`Storyshots Forms Credit Send Form 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -15935,6 +16103,7 @@ exports[`Storyshots Forms Login Form 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -16181,6 +16350,9 @@ exports[`Storyshots Forms Login Form 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -16312,6 +16484,7 @@ exports[`Storyshots Forms Sign Up Form 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -16558,6 +16731,9 @@ exports[`Storyshots Forms Sign Up Form 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -16689,6 +16865,7 @@ exports[`Storyshots Forms User Profile 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -16935,6 +17112,9 @@ exports[`Storyshots Forms User Profile 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -17066,6 +17246,7 @@ exports[`Storyshots Icons Accountability Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -17312,6 +17493,9 @@ exports[`Storyshots Icons Accountability Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -17443,6 +17627,7 @@ exports[`Storyshots Icons Arrow Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -17689,6 +17874,9 @@ exports[`Storyshots Icons Arrow Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -17820,6 +18008,7 @@ exports[`Storyshots Icons Available Credits Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -18066,6 +18255,9 @@ exports[`Storyshots Icons Available Credits Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -18197,6 +18389,7 @@ exports[`Storyshots Icons Avatar Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -18443,6 +18636,9 @@ exports[`Storyshots Icons Avatar Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -18574,6 +18770,7 @@ exports[`Storyshots Icons Block Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -18820,6 +19017,9 @@ exports[`Storyshots Icons Block Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -18951,6 +19151,7 @@ exports[`Storyshots Icons Breadcrumb Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -19197,6 +19398,9 @@ exports[`Storyshots Icons Breadcrumb Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -19328,6 +19532,7 @@ exports[`Storyshots Icons Broken Link Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -19574,6 +19779,9 @@ exports[`Storyshots Icons Broken Link Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -19705,6 +19913,7 @@ exports[`Storyshots Icons Check Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -19951,6 +20160,9 @@ exports[`Storyshots Icons Check Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -20082,6 +20294,7 @@ exports[`Storyshots Icons Checked Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -20328,6 +20541,9 @@ exports[`Storyshots Icons Checked Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -20459,6 +20675,7 @@ exports[`Storyshots Icons Close Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -20705,6 +20922,9 @@ exports[`Storyshots Icons Close Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -20836,6 +21056,7 @@ exports[`Storyshots Icons Co Benefits Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -21082,6 +21303,9 @@ exports[`Storyshots Icons Co Benefits Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -21213,6 +21437,7 @@ exports[`Storyshots Icons Counting Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -21459,6 +21684,9 @@ exports[`Storyshots Icons Counting Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -21590,6 +21818,7 @@ exports[`Storyshots Icons Credits Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -21836,6 +22065,9 @@ exports[`Storyshots Icons Credits Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -21967,6 +22199,7 @@ exports[`Storyshots Icons Current Credits Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -22213,6 +22446,9 @@ exports[`Storyshots Icons Current Credits Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -22344,6 +22580,7 @@ exports[`Storyshots Icons Discord Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -22590,6 +22827,9 @@ exports[`Storyshots Icons Discord Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -22721,6 +22961,7 @@ exports[`Storyshots Icons Document Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -22967,6 +23208,9 @@ exports[`Storyshots Icons Document Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -23098,6 +23342,7 @@ exports[`Storyshots Icons Dropdown Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -23344,6 +23589,9 @@ exports[`Storyshots Icons Dropdown Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -23475,6 +23723,7 @@ exports[`Storyshots Icons Email Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -23721,6 +23970,9 @@ exports[`Storyshots Icons Email Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -23852,6 +24104,7 @@ exports[`Storyshots Icons Eye Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -24098,6 +24351,9 @@ exports[`Storyshots Icons Eye Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -24229,6 +24485,7 @@ exports[`Storyshots Icons Facebook Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -24475,6 +24732,9 @@ exports[`Storyshots Icons Facebook Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -24606,6 +24866,7 @@ exports[`Storyshots Icons Farmer Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -24852,6 +25113,9 @@ exports[`Storyshots Icons Farmer Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -24983,6 +25247,7 @@ exports[`Storyshots Icons Github Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -25229,6 +25494,9 @@ exports[`Storyshots Icons Github Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -25360,6 +25628,7 @@ exports[`Storyshots Icons Horizontal Dots Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -25606,6 +25875,9 @@ exports[`Storyshots Icons Horizontal Dots Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -25737,6 +26009,7 @@ exports[`Storyshots Icons Info Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -25983,6 +26256,9 @@ exports[`Storyshots Icons Info Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -26114,6 +26390,7 @@ exports[`Storyshots Icons Info Icon Outlined 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -26360,6 +26637,9 @@ exports[`Storyshots Icons Info Icon Outlined 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -26491,6 +26771,7 @@ exports[`Storyshots Icons Instagram Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -26737,6 +27018,9 @@ exports[`Storyshots Icons Instagram Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -26868,6 +27152,7 @@ exports[`Storyshots Icons Interface Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -27114,6 +27399,9 @@ exports[`Storyshots Icons Interface Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -27245,6 +27533,7 @@ exports[`Storyshots Icons Link Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -27491,6 +27780,9 @@ exports[`Storyshots Icons Link Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -27622,6 +27914,7 @@ exports[`Storyshots Icons Linked In Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -27868,6 +28161,9 @@ exports[`Storyshots Icons Linked In Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -27999,6 +28295,7 @@ exports[`Storyshots Icons Medium Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -28245,6 +28542,9 @@ exports[`Storyshots Icons Medium Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -28376,6 +28676,7 @@ exports[`Storyshots Icons Minus Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -28622,6 +28923,9 @@ exports[`Storyshots Icons Minus Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -28753,6 +29057,7 @@ exports[`Storyshots Icons Organization Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -28999,6 +29304,9 @@ exports[`Storyshots Icons Organization Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -29130,6 +29438,7 @@ exports[`Storyshots Icons Phone Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -29376,6 +29685,9 @@ exports[`Storyshots Icons Phone Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -29507,6 +29819,7 @@ exports[`Storyshots Icons Pin Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -29753,6 +30066,9 @@ exports[`Storyshots Icons Pin Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -29884,6 +30200,7 @@ exports[`Storyshots Icons Play Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -30130,6 +30447,9 @@ exports[`Storyshots Icons Play Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -30261,6 +30581,7 @@ exports[`Storyshots Icons Plus Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -30507,6 +30828,9 @@ exports[`Storyshots Icons Plus Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -30638,6 +30962,7 @@ exports[`Storyshots Icons Pointer Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -30884,6 +31209,9 @@ exports[`Storyshots Icons Pointer Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -31015,6 +31343,7 @@ exports[`Storyshots Icons Print Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -31261,6 +31590,9 @@ exports[`Storyshots Icons Print Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -31392,6 +31724,7 @@ exports[`Storyshots Icons Regen Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -31638,6 +31971,9 @@ exports[`Storyshots Icons Regen Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -31769,6 +32105,7 @@ exports[`Storyshots Icons Regen Ledger Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -32015,6 +32352,9 @@ exports[`Storyshots Icons Regen Ledger Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -32146,6 +32486,7 @@ exports[`Storyshots Icons Regen Logo Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -32392,6 +32733,9 @@ exports[`Storyshots Icons Regen Logo Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -32523,6 +32867,7 @@ exports[`Storyshots Icons Regen Token Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -32769,6 +33114,9 @@ exports[`Storyshots Icons Regen Token Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -32900,6 +33248,7 @@ exports[`Storyshots Icons Registration Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -33146,6 +33495,9 @@ exports[`Storyshots Icons Registration Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -33277,6 +33629,7 @@ exports[`Storyshots Icons Review Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -33523,6 +33876,9 @@ exports[`Storyshots Icons Review Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -33654,6 +34010,7 @@ exports[`Storyshots Icons Satellite Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -33900,6 +34257,9 @@ exports[`Storyshots Icons Satellite Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -34031,6 +34391,7 @@ exports[`Storyshots Icons Save Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -34277,6 +34638,9 @@ exports[`Storyshots Icons Save Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -34408,6 +34772,7 @@ exports[`Storyshots Icons Shaded Credits Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -34654,6 +35019,9 @@ exports[`Storyshots Icons Shaded Credits Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -34785,6 +35153,7 @@ exports[`Storyshots Icons Shield Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -35031,6 +35400,9 @@ exports[`Storyshots Icons Shield Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -35162,6 +35534,7 @@ exports[`Storyshots Icons Small Arrow Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -35408,6 +35781,9 @@ exports[`Storyshots Icons Small Arrow Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -35539,6 +35915,7 @@ exports[`Storyshots Icons Soil Sample Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -35785,6 +36162,9 @@ exports[`Storyshots Icons Soil Sample Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -35916,6 +36296,7 @@ exports[`Storyshots Icons Spinner 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -36162,6 +36543,9 @@ exports[`Storyshots Icons Spinner 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -36293,6 +36677,7 @@ exports[`Storyshots Icons Telegram Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -36539,6 +36924,9 @@ exports[`Storyshots Icons Telegram Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -36670,6 +37058,7 @@ exports[`Storyshots Icons Total Credits Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -36916,6 +37305,9 @@ exports[`Storyshots Icons Total Credits Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -37047,6 +37439,7 @@ exports[`Storyshots Icons Trash Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -37293,6 +37686,9 @@ exports[`Storyshots Icons Trash Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -37424,6 +37820,7 @@ exports[`Storyshots Icons Trust Document Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -37670,6 +38067,9 @@ exports[`Storyshots Icons Trust Document Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -37801,6 +38201,7 @@ exports[`Storyshots Icons Trust Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -38047,6 +38448,9 @@ exports[`Storyshots Icons Trust Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -38178,6 +38582,7 @@ exports[`Storyshots Icons Twitter Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -38424,6 +38829,9 @@ exports[`Storyshots Icons Twitter Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -38555,6 +38963,7 @@ exports[`Storyshots Icons Verified Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -38801,6 +39210,9 @@ exports[`Storyshots Icons Verified Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -38932,6 +39344,7 @@ exports[`Storyshots Icons Wallet Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -39178,6 +39591,9 @@ exports[`Storyshots Icons Wallet Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -39309,6 +39725,7 @@ exports[`Storyshots Icons Whitepaper Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -39555,6 +39972,9 @@ exports[`Storyshots Icons Whitepaper Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -39686,6 +40106,7 @@ exports[`Storyshots Icons Youtube Icon 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -39932,6 +40353,9 @@ exports[`Storyshots Icons Youtube Icon 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -40063,6 +40487,7 @@ exports[`Storyshots Image Grid Image Grid 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -40309,6 +40734,9 @@ exports[`Storyshots Image Grid Image Grid 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -40440,6 +40868,7 @@ exports[`Storyshots Image Image Default Quality 100 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -40686,6 +41115,9 @@ exports[`Storyshots Image Image Default Quality 100 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -40817,6 +41249,7 @@ exports[`Storyshots Image Item Image Item 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -41063,6 +41496,9 @@ exports[`Storyshots Image Item Image Item 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -41194,6 +41630,7 @@ exports[`Storyshots Image Original Image 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -41440,6 +41877,9 @@ exports[`Storyshots Image Original Image 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -41571,6 +42011,7 @@ exports[`Storyshots Inputs Roles Input 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -41817,6 +42258,9 @@ exports[`Storyshots Inputs Roles Input 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -41948,6 +42392,7 @@ exports[`Storyshots Inputs Toggle 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -42194,6 +42639,9 @@ exports[`Storyshots Inputs Toggle 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -42325,6 +42773,7 @@ exports[`Storyshots Loading Loading Spinner 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -42571,6 +43020,9 @@ exports[`Storyshots Loading Loading Spinner 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -42702,6 +43154,7 @@ exports[`Storyshots Map Map 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -42948,6 +43401,9 @@ exports[`Storyshots Map Map 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -43079,6 +43535,7 @@ exports[`Storyshots Modal Basket Put Modal 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -43325,6 +43782,9 @@ exports[`Storyshots Modal Basket Put Modal 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -43456,6 +43916,7 @@ exports[`Storyshots Modal Basket Take Modal 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -43702,6 +44163,9 @@ exports[`Storyshots Modal Basket Take Modal 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -43833,6 +44297,7 @@ exports[`Storyshots Modal Credit Retire Modal 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -44079,6 +44544,9 @@ exports[`Storyshots Modal Credit Retire Modal 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -44210,6 +44678,7 @@ exports[`Storyshots Modal Credit Send Modal 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -44456,6 +44925,9 @@ exports[`Storyshots Modal Credit Send Modal 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -44587,6 +45059,7 @@ exports[`Storyshots Modal Crop Round Image Modal 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -44833,6 +45306,9 @@ exports[`Storyshots Modal Crop Round Image Modal 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -44964,6 +45440,7 @@ exports[`Storyshots Modal Crop Square Image Modal 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -45210,6 +45687,9 @@ exports[`Storyshots Modal Crop Square Image Modal 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -45341,6 +45821,7 @@ exports[`Storyshots Modal Ledger Modal 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -45587,6 +46068,9 @@ exports[`Storyshots Modal Ledger Modal 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -45718,6 +46202,7 @@ exports[`Storyshots Modal Modal 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -45964,6 +46449,9 @@ exports[`Storyshots Modal Modal 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -46095,6 +46583,7 @@ exports[`Storyshots Modal Processing Modal 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -46341,6 +46830,9 @@ exports[`Storyshots Modal Processing Modal 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -46472,6 +46964,7 @@ exports[`Storyshots Modal Tx Error Modal 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -46718,6 +47211,9 @@ exports[`Storyshots Modal Tx Error Modal 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -46849,6 +47345,7 @@ exports[`Storyshots Modal Tx Successful Modal 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -47095,6 +47592,9 @@ exports[`Storyshots Modal Tx Successful Modal 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -47226,6 +47726,7 @@ exports[`Storyshots Party Party Address 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -47472,6 +47973,9 @@ exports[`Storyshots Party Party Address 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -47603,6 +48107,7 @@ exports[`Storyshots Place Project Place Info 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -47849,6 +48354,9 @@ exports[`Storyshots Place Project Place Info 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -47980,6 +48488,7 @@ exports[`Storyshots ReadMore Read More 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -48226,6 +48735,9 @@ exports[`Storyshots ReadMore Read More 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -48357,6 +48869,7 @@ exports[`Storyshots Sliders Project Media 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -48603,6 +49116,9 @@ exports[`Storyshots Sliders Project Media 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -48734,6 +49250,7 @@ exports[`Storyshots Sliders Project Media With Map 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -48980,6 +49497,9 @@ exports[`Storyshots Sliders Project Media With Map 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -49111,6 +49631,7 @@ exports[`Storyshots Sliders Protected Species 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -49357,6 +49878,9 @@ exports[`Storyshots Sliders Protected Species 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -49488,6 +50012,7 @@ exports[`Storyshots Table Actions Table 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -49734,6 +50259,9 @@ exports[`Storyshots Table Actions Table 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -49865,6 +50393,7 @@ exports[`Storyshots Table Documentation Table 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -50111,6 +50640,9 @@ exports[`Storyshots Table Documentation Table 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -50242,6 +50774,7 @@ exports[`Storyshots Table Table Pagination 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -50488,6 +51021,9 @@ exports[`Storyshots Table Table Pagination 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -50619,6 +51155,7 @@ exports[`Storyshots Tabs Mrv Tabs 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -50865,6 +51402,9 @@ exports[`Storyshots Tabs Mrv Tabs 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -50996,6 +51536,7 @@ exports[`Storyshots Text Layouts Labeled Detail 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -51242,6 +51783,9 @@ exports[`Storyshots Text Layouts Labeled Detail 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -51373,6 +51917,7 @@ exports[`Storyshots Text Layouts Labeled Number 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -51619,6 +52164,9 @@ exports[`Storyshots Text Layouts Labeled Number 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -51750,6 +52298,7 @@ exports[`Storyshots Text Layouts Title Description 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -51996,6 +52545,9 @@ exports[`Storyshots Text Layouts Title Description 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -52127,6 +52679,7 @@ exports[`Storyshots Timeline New Timeline 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -52373,6 +52926,9 @@ exports[`Storyshots Timeline New Timeline 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -52504,6 +53060,7 @@ exports[`Storyshots Timeline Timeline 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -52750,6 +53307,9 @@ exports[`Storyshots Timeline Timeline 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -52881,6 +53441,7 @@ exports[`Storyshots Timeline Timeline Item 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -53127,6 +53688,9 @@ exports[`Storyshots Timeline Timeline Item 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -53258,6 +53822,7 @@ exports[`Storyshots Tooltip Info 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -53504,6 +54069,9 @@ exports[`Storyshots Tooltip Info 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -53635,6 +54203,7 @@ exports[`Storyshots Tooltip Main Title 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -53881,6 +54450,9 @@ exports[`Storyshots Tooltip Main Title 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -54012,6 +54584,7 @@ exports[`Storyshots Typography Body 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -54258,6 +54831,9 @@ exports[`Storyshots Typography Body 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -54389,6 +54965,7 @@ exports[`Storyshots Typography Button Text 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -54635,6 +55212,9 @@ exports[`Storyshots Typography Button Text 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -54766,6 +55346,7 @@ exports[`Storyshots Typography Subtitle 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -55012,6 +55593,9 @@ exports[`Storyshots Typography Subtitle 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -55143,6 +55727,7 @@ exports[`Storyshots Typography Title 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -55389,6 +55974,9 @@ exports[`Storyshots Typography Title 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -55520,6 +56108,7 @@ exports[`Storyshots User Big User Avatar 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -55766,6 +56355,9 @@ exports[`Storyshots User Big User Avatar 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -55897,6 +56489,7 @@ exports[`Storyshots User Column User Info 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -56143,6 +56736,9 @@ exports[`Storyshots User Column User Info 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -56274,6 +56870,7 @@ exports[`Storyshots User Fallback User Avatar 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -56520,6 +57117,9 @@ exports[`Storyshots User Fallback User Avatar 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -56651,6 +57251,7 @@ exports[`Storyshots User Medium User Avatar 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -56897,6 +57498,9 @@ exports[`Storyshots User Medium User Avatar 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -57028,6 +57632,7 @@ exports[`Storyshots User User Avatar With Link 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -57274,6 +57879,9 @@ exports[`Storyshots User User Avatar With Link 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -57405,6 +58013,7 @@ exports[`Storyshots User User Info 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -57651,6 +58260,9 @@ exports[`Storyshots User User Info 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",
@@ -57782,6 +58394,7 @@ exports[`Storyshots User With Title 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -58028,6 +58641,9 @@ exports[`Storyshots User With Title 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",

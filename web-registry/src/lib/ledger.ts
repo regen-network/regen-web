@@ -1,6 +1,7 @@
 import getApiUri from './apiUri';
 
 export const chainId = process.env.REACT_APP_LEDGER_CHAIN_ID;
+export const nctBasket = process.env.REACT_APP_NCT_BASKET;
 
 // expLedger is a feature flag indicating the app is connected to a testnet with experimental features (Hambach).
 export const expLedger = process.env.REACT_APP_EXP_LEDGER;

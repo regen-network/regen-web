@@ -143,7 +143,12 @@ const BackgroundSection = ({
   // Tried to use && operator, but it doesn't seem to play nicely with passing in dynamic props to the object
   if (header) {
     headerJSX = (
-      <Title color="primary" variant={titleVariant} className={titleClassName}>
+      <Title
+        as="div"
+        color="primary"
+        variant={titleVariant}
+        className={titleClassName}
+      >
         {header}
       </Title>
     );

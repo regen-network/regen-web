@@ -84,10 +84,10 @@ function MethodologyTopSection({
           />
         </div>
         <div className={styles.text}>
-          <Title variant="h1">
+          <Title as="div" variant="h1">
             <BlockContent content={nameRaw} />
           </Title>
-          <Body size="xl" pt={4}>
+          <Body as="div" size="xl" pt={4}>
             <BlockContent content={descriptionRaw} />
           </Body>
         </div>

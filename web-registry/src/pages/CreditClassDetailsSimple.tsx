@@ -293,6 +293,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 </Label>
                 <Link
                   className={styles.link}
+                  target="_blank"
                   href={
                     onChainClass.admin
                       ? getAccountUrl(onChainClass.admin)

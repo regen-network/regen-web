@@ -7,7 +7,10 @@ import {
   QueryBasketResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
-import { QueryClassInfoResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import {
+  QueryClassInfoResponse,
+  QueryBatchInfoResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 
 import useBankQuery from './useBankQuery';
 import useBasketQuery from './useBasketQuery';
@@ -129,56 +132,56 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
   // TODO ? creditBatches data >> extract into its own hook / function ?
   // fetch project data related to credit batch using graphql lazy hook
   useEffect(() => {
-    if (!batches) return;
+    if (!basketBatches) return;
 
-    async function fetchData(batches: string[]): Promise<void> {
+    async function fetchData(
+      basketBatches: QueryBatchInfoResponse[],
+    ): Promise<void> {
       try {
-        if (basketBatches) {
-          const _batchesProjects = await Promise.all(
-            basketBatches.map(async batch => {
-              let batchMetadata;
-              if (batch.info?.metadata?.length) {
-                // 1. Get batch metadata
-                batchMetadata = await getMetadataFromUint8Array(
-                  batch.info.metadata,
-                );
-              }
+        const _batchesProjects = await Promise.all(
+          basketBatches.map(async batch => {
+            let batchMetadata;
+            if (batch.info?.metadata?.length) {
+              // 1. Get batch metadata
+              batchMetadata = await getMetadataFromUint8Array(
+                batch.info.metadata,
+              );
+            }
 
-              // 2. Fetch projects by vcsProjectId
-              let projectData;
-              const vcsProjectId = batchMetadata?.['regen:vcsProjectId'];
-              if (vcsProjectId) {
-                const { data } = await fetchProjects({
-                  variables: {
-                    metadata: {
-                      'regen:vcsProjectId': {
-                        '@type': 'xsd:unsignedInt',
-                        '@value': vcsProjectId,
-                      },
+            // 2. Fetch projects by vcsProjectId
+            let projectData;
+            const vcsProjectId = batchMetadata?.['regen:vcsProjectId'];
+            if (vcsProjectId) {
+              const { data } = await fetchProjects({
+                variables: {
+                  metadata: {
+                    'regen:vcsProjectId': {
+                      '@type': 'xsd:unsignedInt',
+                      '@value': vcsProjectId,
                     },
                   },
-                });
-                projectData = data;
-              }
-              const batchProject = projectData?.allProjects?.nodes?.[0];
-              return {
-                batchDenom: batch.info?.batchDenom || '-',
-                projectHandle: (batchProject?.handle as string) || '-',
-                projectName:
-                  (batchProject?.metadata?.['schema:name'] as string) || '-',
-              };
-            }),
-          );
+                },
+              });
+              projectData = data;
+            }
+            const batchProject = projectData?.allProjects?.nodes?.[0];
+            return {
+              batchDenom: batch.info?.batchDenom || '-',
+              projectHandle: (batchProject?.handle as string) || '-',
+              projectName:
+                (batchProject?.metadata?.['schema:name'] as string) || '-',
+            };
+          }),
+        );
 
-          setBatchesProjects(_batchesProjects);
-        }
+        setBatchesProjects(_batchesProjects);
       } catch (error) {
         console.error(error); // eslint-disable-line no-console
       }
     }
 
-    fetchData(batches);
-  }, [basketBatches, fetchProjects, batches]);
+    fetchData(basketBatches);
+  }, [basketBatches, fetchProjects]);
 
   // finally, data preparation for <BasketEcocreditsTable />
   useEffect(() => {

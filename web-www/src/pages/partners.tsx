@@ -128,7 +128,7 @@ const PartnersPage: React.FC<PageProps> = ({ location }) => {
                 <Title align="center" variant="h4">
                   {data?.contactHeader}
                 </Title>
-                <Body size="lg" pt={3.25}>
+                <Body as="div" size="lg" pt={3.25}>
                   <BlockContent content={data?._rawContactBody} />
                 </Body>
               </GreenCard>

@@ -8,7 +8,10 @@ import Img, { FluidObject } from 'gatsby-image';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import { TitleWithParagraphs } from './ApproachSection';
-import { CaseStudyFundingSectionQuery, SanityCaseStudyFundingSection } from '../../../generated/graphql';
+import {
+  CaseStudyFundingSectionQuery,
+  SanityCaseStudyFundingSection,
+} from '../../../generated/graphql';
 import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -63,12 +66,19 @@ const FundingSection: React.FC<SanityCaseStudyFundingSection> = ({
   return (
     <Section className={classes.root}>
       <Box display={{ xs: 'block', sm: 'none' }}>
-        <Img className={classes.image} fluid={image?.image?.asset?.fluid as FluidObject} />
+        <Img
+          className={classes.image}
+          fluid={image?.image?.asset?.fluid as FluidObject}
+        />
       </Box>
       <Grid container spacing={10}>
         <Grid item xs={12} md={6}>
           <TitleWithParagraphs
-            title={<div className={classes.title}>{<BlockContent content={content?._rawHeader} />}</div>}
+            title={
+              <div className={classes.title}>
+                {<BlockContent content={content?._rawHeader} />}
+              </div>
+            }
             paragraphs={[
               { title: content?.details || '', content: _rawDetails },
               { title: content?.results || '', content: _rawResults },
@@ -78,7 +88,10 @@ const FundingSection: React.FC<SanityCaseStudyFundingSection> = ({
         </Grid>
         <Grid item xs={12} md={6}>
           <Box display={{ xs: 'none', sm: 'block' }}>
-            <Img className={classes.image} fluid={image?.image?.asset?.fluid as FluidObject} />
+            <Img
+              className={classes.image}
+              fluid={image?.image?.asset?.fluid as FluidObject}
+            />
           </Box>
         </Grid>
       </Grid>

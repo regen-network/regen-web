@@ -55,7 +55,7 @@ export function getSizeVariant(size: TextSize): Variant {
       break;
     case 'md':
     default:
-      variant = 'body1';
+      variant = 'textMedium';
       break;
   }
   return variant as Variant;

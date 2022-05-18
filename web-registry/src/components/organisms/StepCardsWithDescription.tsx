@@ -29,7 +29,7 @@ const StepCardsWithDescription: React.FC<{
   return (
     <Grid container justifyContent="center" className={className}>
       {descriptionRaw && (
-        <Body size="xl" align="center" pb={8}>
+        <Body as="div" size="xl" align="center" pb={8}>
           <BlockContent content={descriptionRaw} />
         </Body>
       )}
@@ -47,7 +47,7 @@ const StepCardsWithDescription: React.FC<{
           <Title align="center" variant="h3" mobileVariant="h4" mt={[16, 24]}>
             {bottomDescription.title}
           </Title>
-          <Body size="xl" align="center" pt={[4, 10]}>
+          <Body as="div" size="xl" align="center" pt={[4, 10]}>
             <BlockContent content={bottomDescription.body} />
           </Body>
         </>

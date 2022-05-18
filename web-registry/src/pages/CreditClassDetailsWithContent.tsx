@@ -192,7 +192,7 @@ const CreditClassDetailsWithContent: React.FC<CreditDetailsProps> = ({
           titleWrap: styles.titleWrap,
         }}
       >
-        <Body size="xl" sx={{ maxWidth: { sm: 752 } }}>
+        <Body as="div" size="xl" sx={{ maxWidth: { sm: 752 } }}>
           <BlockContent content={content.descriptionRaw} />
         </Body>
       </Section>

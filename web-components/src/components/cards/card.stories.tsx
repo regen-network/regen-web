@@ -94,16 +94,30 @@ export const monitoredImpactCard = (): JSX.Element => (
 function onClick(): void {}
 
 export const projectCard = (): JSX.Element => (
-  <ProjectCard
-    name="Coorong Project"
-    place={'Adelaide, South Australia, Australia'}
-    area={200}
-    comingSoon={false}
-    areaUnit="hectares"
-    imgSrc="/coorong.png"
-    tag="biodiversity"
-    onClick={onClick}
-  />
+  <>
+    <ProjectCard
+      name="Coorong Project"
+      place={'Adelaide, South Australia, Australia'}
+      area={200}
+      comingSoon={false}
+      areaUnit="hectares"
+      imgSrc="/coorong.png"
+      tag="biodiversity"
+      onClick={onClick}
+    />
+
+    <ProjectCard
+      name="Coorong Project"
+      place={'Adelaide, South Australia, Australia'}
+      area={200}
+      comingSoon={false}
+      areaUnit="hectares"
+      imgSrc="/coorong.png"
+      tag="biodiversity"
+      onClick={onClick}
+      registry={{ name: 'registry', type: 'type' }}
+    />
+  </>
 );
 
 export const purchasedCreditsCard = (): JSX.Element => (

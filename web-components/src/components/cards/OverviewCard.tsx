@@ -128,7 +128,7 @@ function OverviewCard({
             {item.title}
           </Label>
         </Box>
-        <Body size="sm" sx={{ textAlign: 'center', pt: 3 }}>
+        <Body as="div" size="sm" sx={{ textAlign: 'center', pt: 3 }}>
           {item.description}
         </Body>
       </Box>

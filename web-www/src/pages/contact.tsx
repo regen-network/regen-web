@@ -151,6 +151,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
           classes={{ root: styles.section, title: styles.title }}
         >
           <Body
+            as="div"
             size="xl"
             align="center"
             sx={{
@@ -278,6 +279,7 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
                         {values.requestType ===
                           'partnerships@regen.network' && (
                           <Body
+                            as="div"
                             size="lg"
                             mobileSize="md"
                             color="primary.contrastText"
@@ -326,13 +328,13 @@ const ContactPage: React.FC<PageProps> = ({ location }) => {
             <Grid container>
               <Grid item xs={12} sm={6} sx={{ pr: [null, 5] }}>
                 <Title variant="h4">{data?.location?.title}</Title>
-                <Body size="lg" pt={2}>
+                <Body as="div" size="lg" pt={2}>
                   <BlockContent content={data?.location?._rawBody} />
                 </Body>
                 <Title variant="h4" sx={{ pt: 8.5 }}>
                   {data?.email?.title}
                 </Title>
-                <Body size="lg" pt={2} pb={[5.75, 0]}>
+                <Body as="div" size="lg" pt={2} pb={[5.75, 0]}>
                   <BlockContent content={data?.email?._rawBody} />
                 </Body>
               </Grid>

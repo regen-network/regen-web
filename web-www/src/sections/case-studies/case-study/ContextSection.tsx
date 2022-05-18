@@ -119,7 +119,7 @@ const ContextSection: React.FC<SanityCaseStudyContextSection> = ({
             <Title variant="h2" sx={{ pt: { tablet: 6 }, pb: 4 }}>
               {content?.header}
             </Title>
-            <Body size="xl" color="info.dark" sx={{ mb: 4 }}>
+            <Body as="div" size="xl" color="info.dark" sx={{ mb: 4 }}>
               <BlockContent content={_rawDescription} />
             </Body>
             <Title variant="h2" sx={{ mt: [4, 7], mb: [2, 3] }}>

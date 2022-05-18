@@ -189,17 +189,6 @@ const TextContainer = styled(Grid)(({ theme }) => ({
   },
 }));
 
-const DataText = styled(Body)(({ theme }) => ({
-  color: theme.palette.info.dark,
-  '& a': {
-    color: theme.palette.text.secondary,
-    fontWeight: 'normal',
-  },
-}));
-DataText.defaultProps = {
-  mobileSize: 'md',
-};
-
 /**
  * Basket summary item (subcomponents)
  */
@@ -213,9 +202,9 @@ interface ItemProps {
 const Item = ({ label, data, link }: ItemProps): JSX.Element => {
   return (
     <GridItem label={label}>
-      <DataText>
+      <Body styleLinks={false} mobileSize="md" color="info.dark">
         {link ? <LinkWithArrow href={link} label={data} /> : parseText(data)}
-      </DataText>
+      </Body>
     </GridItem>
   );
 };
@@ -234,13 +223,18 @@ const ItemWithLinkList = ({
   return (
     <GridItem label={label}>
       {data.map(item => (
-        <DataText key={`basket-${item.id}`}>
+        <Body
+          key={`baskets-${item.id}`}
+          styleLinks={false}
+          mobileSize="md"
+          color="info.dark"
+        >
           <LinkWithArrow
             href={link + item.id}
             label={item.name}
             sx={{ fontWeight: 'normal' }}
           />
-        </DataText>
+        </Body>
       ))}
     </GridItem>
   );

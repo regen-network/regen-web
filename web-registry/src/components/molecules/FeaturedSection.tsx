@@ -65,6 +65,7 @@ const FeaturedSection: React.FC<Props> = ({ content }) => {
             >
               <Grid item xs={12} sx={{ pr: { sm: 10 } }}>
                 <Title
+                  as="div"
                   variant="h3"
                   sx={{
                     mb: 4.5,
@@ -76,7 +77,7 @@ const FeaturedSection: React.FC<Props> = ({ content }) => {
                 >
                   <BlockContent content={content.titleRaw} />
                 </Title>
-                <Body size="lg" mobileSize="sm" sx={{ pb: [4.5, 7] }}>
+                <Body as="div" size="lg" mobileSize="sm" sx={{ pb: [4.5, 7] }}>
                   <BlockContent content={content.descriptionRaw} />
                 </Body>
                 <ContainedButton

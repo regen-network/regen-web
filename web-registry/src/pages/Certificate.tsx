@@ -7,7 +7,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import Certificate, {
   StakeholderInfo,
 } from 'web-components/lib/components/certificate';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
@@ -159,9 +159,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(4.25),
     paddingTop: theme.spacing(4),
   },
-  issuerName: {
-    paddingLeft: theme.spacing(3),
-  },
   issuanceButton: {
     marginRight: theme.spacing(1.25),
   },
@@ -286,9 +283,7 @@ function CertificatePage(): JSX.Element {
                     'http://regen.network/creditDenom'
                   ]
                 }
-                projectName={
-                  project?.metadata?.['http://schema.org/name'] || ''
-                }
+                projectName={project?.metadata?.['schema:name'] || ''}
                 creditsUnits={units}
                 equivalentTonsCO2={units} // 1 credit <=> 1 ton CO2e
                 buyerName={
@@ -314,25 +309,19 @@ function CertificatePage(): JSX.Element {
           projects.push(
             <ProjectCard
               href={project.handle ? `/projects/${project.handle}` : undefined}
-              name={project.metadata?.['http://schema.org/name']}
-              imgSrc={
-                project.metadata?.['http://regen.network/previewPhoto']?.[
+              name={project.metadata?.['schema:name']}
+              imgSrc={project.metadata?.['regen:previewPhoto']?.['@value']}
+              place={project.metadata?.['schema:location']?.place_name}
+              area={
+                project.metadata?.['regen:size']?.['qudt:numericValue']?.[
                   '@value'
                 ]
               }
-              place={
-                project.metadata?.['http://schema.org/location']?.place_name
-              }
-              area={
-                project.metadata?.['http://regen.network/size']?.[
-                  'http://qudt.org/1.1/schema/qudt#numericValue'
-                ]?.['@value']
-              }
               areaUnit={
                 qudtUnitMap[
-                  project.metadata?.['http://regen.network/size']?.[
-                    'http://qudt.org/1.1/schema/qudt#unit'
-                  ]?.['@value'] as qudtUnit
+                  project.metadata?.['regen:projectSize']?.['qudt:unit']?.[
+                    '@value'
+                  ] as qudtUnit
                 ]
               }
               purchaseInfo={{
@@ -374,7 +363,7 @@ function CertificatePage(): JSX.Element {
   const currentVintage = currentPurchase?.creditVintageByCreditVintageId;
   const currentProject = currentVintage?.projectByProjectId;
   const externalProjectLink =
-    currentProject?.metadata?.['http://regen.network/externalProjectUrl'];
+    currentProject?.metadata?.['regen:externalProjectUrl'];
   const issuer = currentVintage?.partyByIssuerId;
   const retirements =
     currentVintage?.retirementsByCreditVintageId?.nodes?.filter(n =>
@@ -413,7 +402,7 @@ function CertificatePage(): JSX.Element {
             {issuer.image && (
               <UserAvatar src={issuer.image} alt={issuer.image} />
             )}
-            <Title className={classes.issuerName} variant="h4">
+            <Title variant="h4" sx={{ pl: 3 }}>
               View on {issuer.name}
             </Title>
           </Grid>
@@ -442,7 +431,10 @@ function CertificatePage(): JSX.Element {
       )}
       <Grid container className={classes.share} alignItems="flex-end">
         <Grid item xs={12} sm={6}>
-          <Title className={classes.shareTitle} variant="h4">
+          <Title
+            variant="h4"
+            sx={{ pb: 3.75, textAlign: { xs: 'center', sm: 'inherit' } }}
+          >
             Share
           </Title>
           <ShareIcons

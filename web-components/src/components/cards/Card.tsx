@@ -1,7 +1,6 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Card from '@mui/material/Card';
-import { SxProps } from '@mui/material';
+import { SxProps, Card } from '@mui/material';
+import type { Theme } from '~/theme/muiTheme';
 
 interface RegenCardProps {
   children?: any;
@@ -15,24 +14,6 @@ interface RegenCardProps {
   sx?: SxProps<Theme>;
 }
 
-interface StyleProps {
-  width?: string;
-  height?: string;
-  borderColor?: string;
-  borderRadius?: string;
-  onClick?: () => void;
-}
-
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  root: props => ({
-    border: `1px solid ${props.borderColor || theme.palette.info.light}`,
-    borderRadius: props.borderRadius || '5px',
-    maxWidth: props.width || '100%',
-    height: props.height || 'inherit',
-    cursor: props.onClick ? 'pointer' : 'inherit',
-  }),
-}));
-
 export default function RegenCard({
   children,
   width,
@@ -42,21 +23,24 @@ export default function RegenCard({
   borderColor,
   borderRadius,
   className,
-  sx,
+  sx = [],
 }: RegenCardProps): JSX.Element {
-  const classes = useStyles({
-    width,
-    height,
-    borderColor,
-    borderRadius,
-    onClick,
-  });
   return (
     <Card
       onClick={onClick}
-      className={`${classes.root} ${className}`}
+      className={className}
       elevation={elevation}
-      sx={sx}
+      sx={[
+        {
+          border: 1,
+          borderColor: borderColor || 'info.light',
+          borderRadius: borderRadius || '5px',
+          maxWidth: width || '100%',
+          height: height || 'inherit',
+          cursor: onClick ? 'pointer' : 'inherit',
+        },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
     >
       {children}
     </Card>

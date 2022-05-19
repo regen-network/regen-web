@@ -1,138 +1,97 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
+import { Box, Grid } from '@mui/material';
 
-import Title from 'web-components/lib/components/title';
+import { Label, Title } from 'web-components/lib/components/typography';
 import { Image } from 'web-components/lib/components/image';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { DualImageSection } from '../../generated/sanity-graphql';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    position: 'relative',
-  },
-  amount: {
-    textShadow: theme.shadows[4],
-    lineHeight: '130%',
-    color: theme.palette.primary.main,
-    textAlign: 'center',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(20),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(25),
-    },
-  },
-  labelContainer: {
-    textAlign: 'center',
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(1.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(2.5),
-    },
-  },
-  item: {
-    [theme.breakpoints.down('sm')]: {
-      '&:first-child': {
-        padding: `${theme.spacing(34.25)} 0`,
-      },
-      padding: `${theme.spacing(30)} 0`,
-    },
-    [theme.breakpoints.up('sm')]: {
-      padding: `${theme.spacing(60.5)} 0`,
-    },
-  },
-  title: {
-    fontWeight: 800,
-    fontFamily: theme.typography.h1.fontFamily,
-    letterSpacing: '1px',
-    color: theme.palette.info.dark,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: theme.spacing(6.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-      lineHeight: theme.spacing(4.5),
-    },
-  },
-  titleContainer: {
-    position: 'absolute',
-    background: theme.palette.primary.main,
-    opacity: 0.8,
-    zIndex: 1,
-    borderRadius: '2px',
-    boxShadow: theme.shadows[4],
-    transform: 'translateX(-50%)',
-    left: '50%',
-    [theme.breakpoints.up('sm')]: {
-      top: theme.spacing(11),
-      padding: theme.spacing(2),
-    },
-    [theme.breakpoints.down('sm')]: {
-      top: theme.spacing(5),
-      padding: `${theme.spacing(3.5)} ${theme.spacing(3)}`,
-      width: '95%',
-    },
-  },
-  label: {
-    fontSize: theme.spacing(4.5),
-    color: theme.palette.primary.main,
-    lineHeight: theme.spacing(5.75),
-    fontWeight: 800,
-    fontFamily: theme.typography.h1.fontFamily,
-    letterSpacing: '1px',
-    textTransform: 'uppercase',
-    backgroundColor: theme.palette.secondary.main,
-    borderRadius: '2px',
-    padding: `${theme.spacing(1)} ${theme.spacing(2.5)}`,
-  },
-}));
-
-interface Props {
-  content: DualImageSection;
-}
-
-const TwoImageSection: React.FC<Props> = ({ content }) => {
-  const classes = useStyles();
-
-  return (
-    <Grid container className={classes.root}>
-      <div className={classes.titleContainer}>
-        <Title variant="h5" className={classes.title}>
-          {content?.title}
-        </Title>
-      </div>
-      <Grid item xs={12} sm={6}>
-        <Image
-          backgroundImage
-          src={content?.left?.image?.image?.asset?.url || ''}
+const LabeledImage = (props: {
+  imgSrc?: string | null;
+  text?: string | null;
+  label?: string | null;
+}): JSX.Element => (
+  <Image backgroundImage src={props.imgSrc || ''}>
+    <Box
+      sx={{
+        py: {
+          xs: 30,
+          sm: 60.5,
+        },
+        '&:first-child': {
+          py: { xs: 34.25, sm: 60.5 },
+        },
+      }}
+    >
+      <Title
+        sx={{
+          fontSize: [80, 100],
+          color: 'primary.main',
+          textAlign: 'center',
+          textShadow: theme => theme.shadows[4],
+        }}
+      >
+        {props.text}
+      </Title>
+      <Box
+        sx={{
+          textAlign: 'center',
+          pt: [1.5, 2.5],
+        }}
+      >
+        <Label
+          sx={{
+            color: 'primary.main',
+            backgroundColor: 'secondary.main',
+            borderRadius: '2px',
+            display: 'inline-block',
+            py: 1,
+            px: 2.5,
+          }}
         >
-          <div className={classes.item}>
-            <Title className={classes.amount}>{content?.left?.boldText}</Title>
-            <div className={classes.labelContainer}>
-              <span className={classes.label}>{content?.left?.label}</span>
-            </div>
-          </div>
-        </Image>
+          {props.label}
+        </Label>
+      </Box>
+    </Box>
+  </Image>
+);
+
+export const TwoImageSection: React.FC<{ content: DualImageSection }> = ({
+  content,
+}) => {
+  return (
+    <Grid container sx={{ position: 'relative' }}>
+      <Box
+        sx={theme => ({
+          position: 'absolute',
+          backgroundColor: 'primary.main',
+          opacity: '0.8',
+          borderRadius: '2px',
+          boxShadow: theme.shadows[4],
+          transform: 'translateX(-50%)',
+          left: '50%',
+          width: ['95%', 'auto'],
+          p: [theme.spacing(3.5, 3), theme.spacing(2, 4)],
+          top: [theme.spacing(5), theme.spacing(11)],
+        })}
+      >
+        <Label size="lg" mobileSize="sm" align="center" color="info.dark">
+          {content?.title}
+        </Label>
+      </Box>
+      <Grid item xs={12} sm={6}>
+        <LabeledImage
+          imgSrc={content?.left?.image?.image?.asset?.url}
+          text={content?.left?.boldText}
+          label={content?.left?.label}
+        />
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Image
-          backgroundImage
-          src={content?.right?.image?.image?.asset?.url || ''}
-        >
-          <div className={classes.item}>
-            <Title className={classes.amount}>{content?.right?.boldText}</Title>
-            <div className={classes.labelContainer}>
-              <span className={classes.label}>{content?.right?.label}</span>
-            </div>
-          </div>
-        </Image>
+        <LabeledImage
+          imgSrc={content?.right?.image?.image?.asset?.url}
+          text={content?.right?.boldText}
+          label={content?.right?.label}
+        />
       </Grid>
     </Grid>
   );
 };
-
-export { TwoImageSection };

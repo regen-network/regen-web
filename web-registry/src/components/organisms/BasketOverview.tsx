@@ -5,10 +5,13 @@ import { Grid, Box } from '@mui/material';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import Title from 'web-components/lib/components/title';
+import {
+  Body,
+  Label,
+  Subtitle,
+  Title,
+} from 'web-components/lib/components/typography';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import Description from 'web-components/lib/components/description';
-import { Label } from 'web-components/lib/components/label';
 import { parseText } from 'web-components/lib/utils/textParser';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
@@ -72,15 +75,15 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
             />
           </ImageContainer>
           <TextContainer item xs={12} sm={7}>
-            <Title variant="h1" className={styles.title}>
+            <Title variant="h1" sx={{ mb: [0, 2] }}>
               {name}
             </Title>
-            <Description className={styles.basketDenom}>
+            <Subtitle mt={2} color="info.main">
               {displayDenom}
-            </Description>
-            <Description className={styles.basketDescription}>
+            </Subtitle>
+            <Body size="xl" mt={2}>
               {description}
-            </Description>
+            </Body>
             <OnBoardingCard className={styles.card}>
               <Grid
                 container
@@ -145,25 +148,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       transform: 'translate(-50%, -50%)',
     },
   },
-  title: {
-    lineHeight: theme.spacing(9),
-    marginBottom: theme.spacing(2),
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(0),
-    },
-  },
-  basketDenom: {
-    fontWeight: 'bold',
-    marginTop: theme.spacing(2),
-    color: theme.palette.info.main,
-  },
-  basketDescription: {
-    fontSize: theme.typography.pxToRem(22),
-    marginTop: theme.spacing(2),
-    [theme.breakpoints.down('md')]: {
-      fontSize: theme.typography.pxToRem(18),
-    },
-  },
   card: {
     margin: theme.spacing(8, 0, 0),
     padding: theme.spacing(3, 5, 7),
@@ -209,25 +193,6 @@ const TextContainer = styled(Grid)(({ theme }) => ({
  * Basket summary item (subcomponents)
  */
 
-const useStylesItem = makeStyles(theme => ({
-  label: {
-    fontSize: theme.typography.pxToRem(12),
-    color: theme.palette.primary.contrastText,
-    letterSpacing: '1px',
-    lineHeight: '15px',
-    marginBottom: theme.spacing(2),
-  },
-  data: {
-    fontSize: theme.typography.pxToRem(16),
-    fontWeight: 400,
-    '& a': {
-      color: theme.palette.text.secondary,
-      fontSize: theme.typography.pxToRem(16),
-      fontWeight: 400,
-    },
-  },
-}));
-
 interface ItemProps {
   label: string;
   data: string;
@@ -235,13 +200,11 @@ interface ItemProps {
 }
 
 const Item = ({ label, data, link }: ItemProps): JSX.Element => {
-  const styles = useStylesItem();
-
   return (
     <GridItem label={label}>
-      <Description className={styles.data}>
+      <Body styleLinks={false} mobileSize="md" color="info.dark">
         {link ? <LinkWithArrow href={link} label={data} /> : parseText(data)}
-      </Description>
+      </Body>
     </GridItem>
   );
 };
@@ -257,14 +220,21 @@ const ItemWithLinkList = ({
   data,
   link,
 }: ItemWithListProps): JSX.Element => {
-  const styles = useStylesItem();
-
   return (
     <GridItem label={label}>
       {data.map(item => (
-        <Description key={`basket-${item.id}`} className={styles.data}>
-          <LinkWithArrow href={link + item.id} label={item.name} />
-        </Description>
+        <Body
+          key={`baskets-${item.id}`}
+          styleLinks={false}
+          mobileSize="md"
+          color="info.dark"
+        >
+          <LinkWithArrow
+            href={link + item.id}
+            label={item.name}
+            sx={{ fontWeight: 'normal' }}
+          />
+        </Body>
       ))}
     </GridItem>
   );
@@ -276,12 +246,12 @@ interface GridItemProps {
 }
 
 const GridItem = ({ label, children }: GridItemProps): JSX.Element => {
-  const styles = useStylesItem();
-
   return (
     <Grid item xs={12} sm={6}>
       <Box sx={{ mt: 4 }}>
-        <Label className={styles.label}>{label}</Label>
+        <Label size="xs" sx={{ color: 'primary.contrastText', mb: 2 }}>
+          {label}
+        </Label>
         {children}
       </Box>
     </Grid>

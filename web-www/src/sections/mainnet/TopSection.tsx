@@ -1,26 +1,13 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles } from '@mui/styles';
-import { Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Countdown from 'web-components/lib/components/countdown';
-import BackgroundSection from '../../components/BackgroundSection';
-import { MainnetTopSectionQuery } from '../../generated/graphql';
+import { Title } from 'web-components/lib/components/typography';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  headerWrap: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  countdown: {
-    color: '#FFFFFF',
-    display: 'inline-flex',
-    padding: theme.spacing(0, 2),
-    borderRadius: '5px',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-  },
-}));
+import BackgroundSection from '../../components/BackgroundSection';
+import type { MainnetTopSectionQuery } from '../../generated/graphql';
+import type { FluidObject } from 'gatsby-image';
 
 const query = graphql`
   query mainnetTopSection {
@@ -42,20 +29,28 @@ const query = graphql`
 `;
 
 const TopSection: React.FC = () => {
-  const { desktop, sanityMainnetPage } = useStaticQuery<MainnetTopSectionQuery>(query);
-  const styles = useStyles();
+  const { desktop, sanityMainnetPage } =
+    useStaticQuery<MainnetTopSectionQuery>(query);
   const data = sanityMainnetPage?.topSection;
   return (
     <BackgroundSection
       header={
-        <div className={styles.headerWrap}>
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <div>{data?.title}</div>
           <div>
-            <Typography variant="h1" className={styles.countdown}>
+            <Title
+              color="primary"
+              sx={{
+                px: 2,
+                borderRadius: '5px',
+                display: 'inline-flex',
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              }}
+            >
               <Countdown date={sanityMainnetPage?.launchDate} />
-            </Typography>
+            </Title>
           </div>
-        </div>
+        </Box>
       }
       linearGradient="linear-gradient(220.67deg, rgba(250, 235, 209, 0.6) 21.4%, rgba(125, 201, 191, 0.6) 46.63%, rgba(81, 93, 137, 0.6) 71.86%), linear-gradient(180deg, rgba(0, 0, 0, 0.684) 0%, rgba(0, 0, 0, 0) 97.78%)"
       body={<span>{data?.body}</span>}

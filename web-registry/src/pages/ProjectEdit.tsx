@@ -3,15 +3,15 @@ import { makeStyles, useTheme } from '@mui/styles';
 import { useMediaQuery } from '@mui/material';
 import { useNavigate, useParams, useLocation, Outlet } from 'react-router-dom';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Navigation from 'web-components/lib/components/faq/Navigation';
-import Title from 'web-components/lib/components/title';
+import { Label, Title } from 'web-components/lib/components/typography';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import Banner from 'web-components/lib/components/banner';
-import { Label } from 'web-components/lib/components/label';
 
 import { Link } from '../components/atoms';
 import { toTitleCase } from '../lib/titleCase';
+
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -56,9 +56,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('md')]: {
       position: 'absolute',
     },
-  },
-  title: {
-    flex: 1,
   },
   nav: {
     border: `1px solid ${theme.palette.grey[100]}`,
@@ -193,7 +190,7 @@ function ProjectEdit(): JSX.Element {
           <div className={styles.sectionContainer}>
             <div className={styles.section}>
               <div className={styles.topAlign}>
-                <Title className={styles.title} variant="h3" align="center">
+                <Title variant="h3" align="center" sx={{ flex: 1 }}>
                   {section ? titleCase(section) : 'Edit Project Page'}
                 </Title>
               </div>

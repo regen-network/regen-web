@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
+import { useTheme } from '@mui/material';
 import { Link } from '@mui/material';
 import { Formik, Form, Field } from 'formik';
 import { Link as RouterLink, useParams } from 'react-router-dom';
@@ -7,9 +8,12 @@ import { Link as RouterLink, useParams } from 'react-router-dom';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import Modal from 'web-components/lib/components/modal';
-import Title from 'web-components/lib/components/title';
+import {
+  Body,
+  Subtitle,
+  Title,
+} from 'web-components/lib/components/typography';
 import Card from 'web-components/lib/components/cards/Card';
-import Description from 'web-components/lib/components/description';
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
@@ -42,25 +46,25 @@ interface OrganizationDisplayValues
 export type DisplayValues = OrganizationDisplayValues | IndividualDisplayValues;
 
 export interface EntityDisplayValues {
-  'http://regen.network/landOwner'?: DisplayValues;
-  'http://regen.network/landSteward'?: DisplayValues;
-  'http://regen.network/projectDeveloper'?: DisplayValues;
-  'http://regen.network/projectOriginator'?: DisplayValues;
+  'regen:landOwner'?: DisplayValues;
+  'regen:landSteward'?: DisplayValues;
+  'regen:projectDeveloper'?: DisplayValues;
+  'regen:projectOriginator'?: DisplayValues;
 }
 
 export type EntityFieldName = keyof EntityDisplayValues;
 
 interface OrganizationDisplayShape {
-  'http://regen.network/showOnProjectPage': boolean;
-  'http://schema.org/name'?: string;
-  'http://schema.org/logo'?: urlType;
-  'http://schema.org/description'?: string;
+  'regen:showOnProjectPage': boolean;
+  'schema:name'?: string;
+  'schema:logo'?: urlType;
+  'schema:description'?: string;
 }
 
 interface IndividualDisplayShape {
-  'http://regen.network/showOnProjectPage': boolean;
-  'http://schema.org/image'?: urlType;
-  'http://schema.org/description'?: string;
+  'regen:showOnProjectPage': boolean;
+  'schema:image'?: urlType;
+  'schema:description'?: string;
 }
 
 interface FormletProps {
@@ -94,22 +98,8 @@ type Errors = {
 };
 
 const useStyles = makeStyles(theme => ({
-  title: {
-    fontWeight: 700,
-    color: theme.palette.primary.contrastText,
-    fontFamily: theme.typography.fontFamily,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-    },
-  },
   field: {
     marginBottom: theme.spacing(8),
-  },
-  description: {
-    marginBottom: theme.spacing(4),
   },
   error: {
     marginTop: 0,
@@ -130,11 +120,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  modalTitle: {
-    maxWidth: '70%',
-    textAlign: 'center',
-    paddingBottom: theme.spacing(4),
-  },
   modalCard: {
     width: '100%',
     display: 'flex',
@@ -151,10 +136,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
-  },
-  examplePageText: {
-    fontSize: theme.typography.pxToRem(16),
-    paddingBottom: theme.spacing(5),
   },
   toggleDescription: {
     fontStyle: 'italic',
@@ -173,10 +154,10 @@ const useStyles = makeStyles(theme => ({
 
 function getEntityTypeString(shaclRole: EntityFieldName): string {
   const friendlyRoles: { [key in EntityFieldName | 'default']: string } = {
-    'http://regen.network/landOwner': '(land owner)',
-    'http://regen.network/landSteward': '(land steward)',
-    'http://regen.network/projectDeveloper': '(project developer)',
-    'http://regen.network/projectOriginator': '(project originator)',
+    'regen:landOwner': '(land owner)',
+    'regen:landSteward': '(land steward)',
+    'regen:projectDeveloper': '(project developer)',
+    'regen:projectOriginator': '(project originator)',
     default: '',
   };
   return friendlyRoles[shaclRole] || friendlyRoles.default;
@@ -200,9 +181,7 @@ async function setType(
   const fieldName: string = `['${role}'].['@type']`;
   await setFieldValue(
     fieldName,
-    value
-      ? [`http://regen.network/${type}`, `http://regen.network/${type}Display`]
-      : `http://regen.network/${type}`,
+    value ? [`regen:${type}`, `regen:${type}Display`] : `regen:${type}`,
   );
   setFieldTouched(fieldName, true);
 }
@@ -224,19 +203,17 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
   return (
     <Field
       className={styles.field}
-      label={`${entity?.['http://schema.org/legalName']} ${getEntityTypeString(
-        role,
-      )}`}
+      label={`${entity?.['schema:legalName']} ${getEntityTypeString(role)}`}
       type="checkbox"
       component={Toggle}
-      name={`['${role}'].['http://regen.network/showOnProjectPage']`}
-      checked={!!entity?.['http://regen.network/showOnProjectPage']}
+      name={`['${role}'].['regen:showOnProjectPage']`}
+      checked={!!entity?.['regen:showOnProjectPage']}
       triggerOnChange={triggerOnChange}
       activeContent={
         <div className={styles.activeContent}>
           <Field
             component={ControlledTextField}
-            name={`['${role}'].['http://schema.org/name']`}
+            name={`['${role}'].['schema:name']`}
             label="Organization display name"
             optional
             placeholder="i.e. Cherrybrook Farms"
@@ -246,7 +223,7 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
             projectId={projectId}
             apiServerUrl={apiUri}
             label="Organization logo"
-            name={`['${role}'].['http://schema.org/logo'].@value`}
+            name={`['${role}'].['schema:logo'].@value`}
             fallbackAvatar={
               <OrganizationIcon
                 className={styles.organizationIcon}
@@ -258,7 +235,7 @@ const OrganizationFormlet: React.FC<OrganizationFormletProps> = ({
             charLimit={160}
             component={ControlledTextField}
             label="Short organization description"
-            name={`['${role}'].['http://schema.org/description']`}
+            name={`['${role}'].['schema:description']`}
             rows={4}
             minRows={4}
             multiline
@@ -285,12 +262,12 @@ const IndividualFormlet: React.FC<IndividualFormletProps> = ({
     <Field
       className={styles.field}
       classes={{ description: styles.toggleDescription }}
-      label={`${entity['http://schema.org/name']} ${getEntityTypeString(role)}`}
+      label={`${entity['schema:name']} ${getEntityTypeString(role)}`}
       description="recommended to increase salability"
       type="checkbox"
       component={Toggle}
-      name={`['${role}'].['http://regen.network/showOnProjectPage']`}
-      checked={!!entity['http://regen.network/showOnProjectPage']}
+      name={`['${role}'].['regen:showOnProjectPage']`}
+      checked={!!entity['regen:showOnProjectPage']}
       triggerOnChange={triggerOnChange}
       activeContent={
         <div className={styles.activeContent}>
@@ -298,7 +275,7 @@ const IndividualFormlet: React.FC<IndividualFormletProps> = ({
             className={styles.field}
             component={ImageUpload}
             label="Bio photo"
-            name={`['${role}'].['http://schema.org/image'].@value`}
+            name={`['${role}'].['schema:image'].@value`}
             projectId={projectId}
             apiServerUrl={apiUri}
           />
@@ -307,7 +284,7 @@ const IndividualFormlet: React.FC<IndividualFormletProps> = ({
             component={ControlledTextField}
             label="Short personal description"
             description="Describe any relevant background and experience."
-            name={`['${role}'].['http://schema.org/description']`}
+            name={`['${role}'].['schema:description']`}
             rows={4}
             minRows={4}
             multiline
@@ -361,15 +338,15 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
   if (!values) {
     return undefined;
   }
-  const initialURL: urlType = { '@type': 'http://schema.org/URL' };
+  const initialURL: urlType = { '@type': 'schema:URL' };
   if (isIndividual(values)) {
     return {
-      ...{ 'http://schema.org/image': initialURL },
+      ...{ 'schema:image': initialURL },
       ...values,
     };
   } else {
     return {
-      ...{ 'http://schema.org/logo': initialURL },
+      ...{ 'schema:logo': initialURL },
       ...values,
     };
   }
@@ -394,17 +371,17 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
         enableReinitialize
         validateOnMount
         initialValues={{
-          'http://regen.network/landOwner': getInitialValues(
-            initialValues?.['http://regen.network/landOwner'],
+          'regen:landOwner': getInitialValues(
+            initialValues?.['regen:landOwner'],
           ),
-          'http://regen.network/landSteward': getInitialValues(
-            initialValues?.['http://regen.network/landSteward'],
+          'regen:landSteward': getInitialValues(
+            initialValues?.['regen:landSteward'],
           ),
-          'http://regen.network/projectDeveloper': getInitialValues(
-            initialValues?.['http://regen.network/projectDeveloper'],
+          'regen:projectDeveloper': getInitialValues(
+            initialValues?.['regen:projectDeveloper'],
           ),
-          'http://regen.network/projectOriginator': getInitialValues(
-            initialValues?.['http://regen.network/projectOriginator'],
+          'regen:projectOriginator': getInitialValues(
+            initialValues?.['regen:projectOriginator'],
           ),
         }}
         validate={async (values: EntityDisplayValues): Promise<Errors> => {
@@ -417,18 +394,17 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
               const value: DisplayValues = values[
                 role as EntityFieldName
               ] as DisplayValues;
-              if (value?.['http://regen.network/showOnProjectPage']) {
+              if (value?.['regen:showOnProjectPage']) {
                 validateProject = false;
                 const report = await validate(
                   graphData.shaclGraphByUri.graph,
                   value,
-                  'http://regen.network/ProjectPageEntityDisplayGroup',
+                  'regen:ProjectPageEntityDisplayGroup',
                 );
                 for (const result of report.results) {
                   const path: any = result.path.value;
                   const error =
-                    path === 'http://schema.org/image' ||
-                    path === 'http://schema.org/logo'
+                    path === 'schema:image' || path === 'schema:logo'
                       ? { '@value': requiredMessage }
                       : requiredMessage;
                   errors[role as EntityFieldName] = { [path]: error };
@@ -443,7 +419,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
               const report = await validate(
                 graphData.shaclGraphByUri.graph,
                 projectPageData,
-                'http://regen.network/ProjectPageEntityDisplayGroup',
+                'regen:ProjectPageEntityDisplayGroup',
               );
               if (!report.conforms) {
                 // TODO: display the error banner in case of generic error
@@ -479,10 +455,10 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
           return (
             <Form translate="yes">
               <OnBoardingCard>
-                <Title className={styles.title}>
+                <Subtitle size="lg" sx={{ color: 'primary.contrastText' }}>
                   Choose the entities to show on the project page:
-                </Title>
-                <Description className={styles.description}>
+                </Subtitle>
+                <Body sx={{ mb: 4 }}>
                   Showing more entities increases the salability of the project.
                   You must show at least one entity on the project page. These
                   entities can only be edited in the previous step.&nbsp;
@@ -492,32 +468,32 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
                   >
                     See an example»
                   </Link>
-                </Description>
+                </Body>
 
-                {values['http://regen.network/landOwner'] &&
+                {values['regen:landOwner'] &&
                   getToggle(
-                    'http://regen.network/landOwner',
+                    'regen:landOwner',
                     values,
                     setFieldValue,
                     setFieldTouched,
                   )}
-                {values['http://regen.network/landSteward'] &&
+                {values['regen:landSteward'] &&
                   getToggle(
-                    'http://regen.network/landSteward',
+                    'regen:landSteward',
                     values,
                     setFieldValue,
                     setFieldTouched,
                   )}
-                {values['http://regen.network/projectDeveloper'] &&
+                {values['regen:projectDeveloper'] &&
                   getToggle(
-                    'http://regen.network/projectDeveloper',
+                    'regen:projectDeveloper',
                     values,
                     setFieldValue,
                     setFieldTouched,
                   )}
-                {values['http://regen.network/projectOriginator'] &&
+                {values['regen:projectOriginator'] &&
                   getToggle(
-                    'http://regen.network/projectOriginator',
+                    'regen:projectOriginator',
                     values,
                     setFieldValue,
                     setFieldTouched,
@@ -535,15 +511,18 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
       </Formik>
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
         <div className={styles.modalContent}>
-          <Title className={styles.modalTitle} variant="h5">
+          <Title
+            variant="h5"
+            sx={{ maxWidth: '70%', textAlign: 'center', pb: 4 }}
+          >
             Example of Entity Display
           </Title>
-          <Description className={styles.examplePageText}>
+          <Body size="md" mobileSize="md" sx={{ pb: 5 }}>
             See full{' '}
             <RouterLink to="/projects/wilmot" target="_blank">
               project page»
             </RouterLink>
-          </Description>
+          </Body>
           <Card className={styles.modalCard}>
             <ProjectTopCard
               classes={{

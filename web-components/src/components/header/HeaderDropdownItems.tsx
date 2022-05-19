@@ -3,7 +3,7 @@ import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 
-import Title from '../title';
+import { Title } from '../typography';
 import { NavLinkProps } from './NavLink';
 
 const useStyles = makeStyles(theme => {

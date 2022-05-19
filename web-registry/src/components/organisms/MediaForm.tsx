@@ -22,7 +22,7 @@ interface MediaFormProps {
 }
 
 export interface urlType {
-  '@type': 'http://schema.org/URL';
+  '@type': 'schema:URL';
   '@value'?: string;
 }
 
@@ -31,24 +31,24 @@ interface urlList {
 }
 
 export interface MediaValues {
-  'http://regen.network/previewPhoto'?: urlType;
-  'http://regen.network/galleryPhotos'?: urlList;
-  'http://regen.network/landStewardPhoto'?: urlType;
-  'http://regen.network/videoURL'?: urlType;
+  'regen:previewPhoto'?: urlType;
+  'regen:galleryPhotos'?: urlList;
+  'regen:landStewardPhoto'?: urlType;
+  'regen:videoURL'?: urlType;
 }
 
 type valueObject = { '@value'?: string };
 export interface MediaValuesErrors {
-  'http://regen.network/previewPhoto'?: valueObject;
-  'http://regen.network/galleryPhotos'?: string;
-  'http://regen.network/landStewardPhoto'?: valueObject;
-  'http://regen.network/videoURL'?: valueObject;
+  'regen:previewPhoto'?: valueObject;
+  'regen:galleryPhotos'?: string;
+  'regen:landStewardPhoto'?: valueObject;
+  'regen:videoURL'?: valueObject;
 }
 
 function getURLInitialValue(value?: urlType): urlType {
   return (
     value || {
-      '@type': 'http://schema.org/URL',
+      '@type': 'schema:URL',
     }
   );
 }
@@ -142,17 +142,17 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
         enableReinitialize
         validateOnMount
         initialValues={{
-          'http://regen.network/previewPhoto': getURLInitialValue(
-            initialValues?.['http://regen.network/previewPhoto'],
+          'regen:previewPhoto': getURLInitialValue(
+            initialValues?.['regen:previewPhoto'],
           ),
-          'http://regen.network/galleryPhotos': getURLListInitialValue(
-            initialValues?.['http://regen.network/galleryPhotos'],
+          'regen:galleryPhotos': getURLListInitialValue(
+            initialValues?.['regen:galleryPhotos'],
           ),
-          'http://regen.network/landStewardPhoto': getURLInitialValue(
-            initialValues?.['http://regen.network/landStewardPhoto'],
+          'regen:landStewardPhoto': getURLInitialValue(
+            initialValues?.['regen:landStewardPhoto'],
           ),
-          'http://regen.network/videoURL': getURLInitialValue(
-            initialValues?.['http://regen.network/videoURL'],
+          'regen:videoURL': getURLInitialValue(
+            initialValues?.['regen:videoURL'],
           ),
         }}
         validate={async (values): Promise<MediaValuesErrors> => {
@@ -162,21 +162,20 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
             const report = await validate(
               graphData.shaclGraphByUri.graph,
               projectPageData,
-              'http://regen.network/ProjectPageMediaGroup',
+              'regen:ProjectPageMediaGroup',
             );
             for (const result of report.results) {
               const path: string | undefined = result.path?.value;
               if (path) {
-                if (path === 'http://regen.network/previewPhoto') {
+                if (path === 'regen:previewPhoto') {
                   errors[path] = { '@value': requiredMessage };
                 } else {
                   // for gallery photos, display general error message below "Gallery Photos" section
-                  errors['http://regen.network/galleryPhotos'] =
-                    'You must add 4 photos';
+                  errors['regen:galleryPhotos'] = 'You must add 4 photos';
                 }
               } else {
                 // or constraint not satisfied on regen:landStewardPhoto/regen:videoURL
-                errors['http://regen.network/landStewardPhoto'] = {
+                errors['regen:landStewardPhoto'] = {
                   '@value': requiredMessage,
                 };
               }
@@ -207,7 +206,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   description="Choose the summary photo that will show up in project previews."
                   buttonText="+ Add preview Photo"
                   fixedCrop={cropAspect}
-                  name="['http://regen.network/previewPhoto'].@value"
+                  name="regen:previewPhoto.@value"
                   apiServerUrl={apiUri}
                   projectId={projectId}
                   isDrop
@@ -225,7 +224,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         component={ImageUpload}
                         buttonText="+ Add Photo"
                         fixedCrop={cropAspect}
-                        name="['http://regen.network/galleryPhotos'].@list[0].@value" // left
+                        name="regen:galleryPhotos.@list[0].@value" // left
                         apiServerUrl={apiUri}
                         projectId={projectId}
                         isDrop
@@ -243,7 +242,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
                             fixedCrop={cropAspect}
-                            name="['http://regen.network/galleryPhotos'].@list[1].@value" // top
+                            name="regen:galleryPhotos.@list[1].@value" // top
                             hideDragText
                             apiServerUrl={apiUri}
                             projectId={projectId}
@@ -255,7 +254,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
                             fixedCrop={cropAspect}
-                            name="['http://regen.network/galleryPhotos'].@list[2].@value" // bottom
+                            name="regen:galleryPhotos.@list[2].@value" // bottom
                             hideDragText
                             apiServerUrl={apiUri}
                             projectId={projectId}
@@ -275,7 +274,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
                             fixedCrop={cropAspect}
-                            name="['http://regen.network/galleryPhotos'].@list[1].@value" // top
+                            name="regen:galleryPhotos.@list[1].@value" // top
                             buttonText="+ Add Photo"
                             apiServerUrl={apiUri}
                             projectId={projectId}
@@ -292,7 +291,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
                             fixedCrop={cropAspect}
-                            name="['http://regen.network/galleryPhotos'].@list[2].@value" // bottom
+                            name="regen:galleryPhotos.@list[2].@value" // bottom
                             buttonText="+ Add Photo"
                             apiServerUrl={apiUri}
                             projectId={projectId}
@@ -308,32 +307,32 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         component={ImageUpload}
                         buttonText="+ Add Photo"
                         fixedCrop={cropAspect}
-                        name="['http://regen.network/galleryPhotos'].@list[3].@value" // right
+                        name="regen:galleryPhotos.@list[3].@value" // right
                         apiServerUrl={apiUri}
                         projectId={projectId}
                         isDrop
                       />
                     </Grid>
                   </Grid>
-                  {errors?.['http://regen.network/galleryPhotos'] &&
+                  {errors?.['regen:galleryPhotos'] &&
                     (getIn(
                       touched,
-                      `['http://regen.network/galleryPhotos'].@list[0].@value`,
+                      `['regen:galleryPhotos'].@list[0].@value`,
                     ) ||
                       getIn(
                         touched,
-                        `['http://regen.network/galleryPhotos'].@list[1].@value`,
+                        `['regen:galleryPhotos'].@list[1].@value`,
                       ) ||
                       getIn(
                         touched,
-                        `['http://regen.network/galleryPhotos'].@list[2].@value`,
+                        `['regen:galleryPhotos'].@list[2].@value`,
                       ) ||
                       getIn(
                         touched,
-                        `['http://regen.network/galleryPhotos'].@list[3].@value`,
+                        `['regen:galleryPhotos'].@list[3].@value`,
                       )) && (
                       <FormHelperText className={styles.error}>
-                        {errors?.['http://regen.network/galleryPhotos']}
+                        {errors?.['regen:galleryPhotos']}
                       </FormHelperText>
                     )}
                 </div>
@@ -343,7 +342,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   label="Video url"
                   optional
                   description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
-                  name="['http://regen.network/videoURL'].@value"
+                  name="regen:videoURL.@value"
                 /> */}
                 <Field
                   classes={{ root: styles.field, main: styles.fullSizeMedia }}
@@ -353,7 +352,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."
                   buttonText="+ Add Photo"
                   fixedCrop={cropAspect}
-                  name="['http://regen.network/landStewardPhoto'].@value"
+                  name="regen:landStewardPhoto.@value"
                   apiServerUrl={apiUri}
                   projectId={projectId}
                   isDrop

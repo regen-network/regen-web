@@ -2,15 +2,15 @@ import React from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import clsx from 'clsx';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import Description from 'web-components/lib/components/description';
 import Section from 'web-components/lib/components/section';
-
+import { Body } from 'web-components/lib/components/typography';
 import { WrappedImpactCard } from '../atoms';
-import { PracticesOutcomesSection as PracticesOutcomesSectionProps } from '../../generated/sanity-graphql';
+
+import type { Theme } from 'web-components/lib/theme/muiTheme';
+import type { PracticesOutcomesSection as PracticesOutcomesSectionProps } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -35,10 +35,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(20.75),
     },
-  },
-  note: {
-    float: 'right',
-    paddingTop: theme.spacing(7.25),
   },
   title: {
     [theme.breakpoints.up('lg')]: {
@@ -91,7 +87,7 @@ const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
         slidesToShow={outcomeCards.length <= 2 ? outcomeCards.length : 3}
         items={outcomeCards}
       />
-      <Description className={classes.note}>{content?.note}</Description>
+      <Body sx={{ pt: 7.25, float: 'right' }}>{content?.note}</Body>
     </Section>
   );
 };

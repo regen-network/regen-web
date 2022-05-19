@@ -1,32 +1,17 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
-import { Typography, useTheme } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import Section from 'web-components/lib/components/section';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import { MainnetMediaSectionQuery } from '../../generated/graphql';
+import { Title } from 'web-components/lib/components/typography';
+
+import type { MainnetMediaSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(10, 4, 20),
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(10, 0, 20),
-    },
-  },
-  main: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-  },
-  title: {
-    fontSize: theme.spacing(10),
-    fontWeight: 900,
-  },
   headerWrap: {
     display: 'flex',
     flexFlow: 'row nowrap',
@@ -77,8 +62,8 @@ const MediaSection: React.FC = () => {
   ));
 
   return (
-    <Section className={styles.root}>
-      <div className={styles.main}>
+    <Section sx={{ root: { pt: 10, pb: 20, px: [0, 4] } }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
         <ResponsiveSlider
           arrows
           itemWidth="90%"
@@ -89,13 +74,9 @@ const MediaSection: React.FC = () => {
           }}
           slidesToShow={3}
           items={itemCards}
-          renderTitle={() => (
-            <Typography variant="h1" className={styles.title}>
-              Media
-            </Typography>
-          )}
+          renderTitle={() => <Title variant="h2">Media</Title>}
         />
-      </div>
+      </Box>
     </Section>
   );
 };

@@ -18,7 +18,7 @@ import { DatePicker } from '@mui/lab';
 import ReactHtmlParser from 'react-html-parser';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { useAllProjectsQuery } from '../generated/graphql';
 
 const ISSUE_CREDITS = gql`
@@ -206,7 +206,7 @@ function CreditsIssue(): JSX.Element {
               if (node) {
                 return (
                   <MenuItem key={node.id} value={node.id}>
-                    {node.metadata?.['http://schema.org/name']}
+                    {node.metadata?.['schema:name']}
                   </MenuItem>
                 );
               }

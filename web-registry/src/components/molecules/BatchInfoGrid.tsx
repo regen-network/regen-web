@@ -1,17 +1,19 @@
 import React from 'react';
-import { Box, Grid, SxProps, Theme, Typography } from '@mui/material';
+import { Box, Grid, SxProps, Theme } from '@mui/material';
 import dayjs from 'dayjs';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
 import { LabeledDetail } from 'web-components/lib/components/text-layouts';
+import { Body } from 'web-components/lib/components/typography';
 import { LinkWithArrow } from '../atoms';
 
 export const BatchInfoGrid: React.FC<{
   batch: BatchInfoWithSupply;
-  projectHandle: string;
+  projectHandle?: string | null;
+  projectName?: string;
   sx?: SxProps<Theme>;
-}> = ({ batch, projectHandle: project, sx }) => (
+}> = ({ batch, projectHandle, projectName, sx }) => (
   <Grid
     container
     rowGap={6}
@@ -25,8 +27,8 @@ export const BatchInfoGrid: React.FC<{
       <BatchDetail label="Project">
         <Box component="span" sx={{ textTransform: 'capitalize' }}>
           <LinkWithArrow
-            label={project || '-'}
-            href={project ? `/projects/${project}` : ''}
+            label={projectName || '-'}
+            href={projectHandle ? `/projects/${projectHandle}` : ''}
           />
         </Box>
       </BatchDetail>
@@ -34,6 +36,7 @@ export const BatchInfoGrid: React.FC<{
     <GridItem>
       <BatchDetail label="Credit Class">
         <LinkWithArrow
+          target="_self"
           href={`/credit-classes/${batch.class_id}`}
           label={batch.class_id}
         />
@@ -58,10 +61,12 @@ const GridItem: React.FC = ({ children }) => (
 
 const BatchDetail: React.FC<{ label: string }> = ({ label, children }) => (
   <LabeledDetail label={label}>
-    <Typography
-      sx={{ display: 'flex', alignItems: 'center', fontSize: [16, 18] }}
+    <Body
+      size="lg"
+      styleLinks={false}
+      sx={{ display: 'flex', alignItems: 'center' }}
     >
       {children}
-    </Typography>
+    </Body>
   </LabeledDetail>
 );

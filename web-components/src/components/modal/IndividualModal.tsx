@@ -9,8 +9,7 @@ import OnBoardingCard from '../cards/OnBoardingCard';
 import PhoneField from '../inputs/PhoneField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
-import Title from '../title';
-import Description from '../description';
+import { Body, Title } from '../typography';
 import Tooltip from '../tooltip/InfoTooltip';
 import Modal from '.';
 import QuestionIcon from '../icons/QuestionIcon';
@@ -28,11 +27,11 @@ export interface IndividualFormValues {
   id?: string;
   partyId?: string;
   projectCreator?: boolean;
-  '@type': 'http://regen.network/Individual';
-  'http://schema.org/name'?: string;
-  'http://schema.org/telephone'?: string;
-  'http://schema.org/email'?: string;
-  'http://regen.network/sharePermission'?: boolean;
+  '@type': 'regen:Individual';
+  'schema:name'?: string;
+  'schema:telephone'?: string;
+  'schema:email'?: string;
+  'regen:sharePermission'?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -42,20 +41,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   card: {
     marginTop: 0,
-  },
-  title: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: 0,
-      paddingBottom: theme.spacing(7.5),
-      paddingLeft: theme.spacing(7.5),
-      paddingRight: theme.spacing(7.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(6),
-      paddingLeft: 0,
-      paddingRight: 0,
-    },
   },
   matchFormPadding: {
     [theme.breakpoints.up('sm')]: {
@@ -84,14 +69,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   permission: {
     display: 'flex',
   },
-  checkboxLabel: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-    },
-  },
   iconWrapper: {
     cursor: 'pointer',
   },
@@ -119,7 +96,11 @@ function IndividualModal({
   return (
     <Modal open={!!individualEdit} onClose={onClose}>
       <div className={styles.root}>
-        <Title variant="h4" align="center" className={styles.title}>
+        <Title
+          variant="h4"
+          align="center"
+          sx={{ px: [0, 7.5], pt: [8, 0], pb: [6, 7.5] }}
+        >
           {`${individualEdit && individualEdit.id ? 'Edit' : 'Add'} Individual`}
         </Title>
         <Formik
@@ -127,10 +108,9 @@ function IndividualModal({
           validateOnMount
           initialValues={{
             ...individualEdit,
-            '@type': 'http://regen.network/Individual',
-            'http://regen.network/sharePermission':
-              individualEdit &&
-              !!individualEdit['http://regen.network/sharePermission'],
+            '@type': 'regen:Individual',
+            'regen:sharePermission':
+              individualEdit && !!individualEdit['regen:sharePermission'],
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -150,29 +130,29 @@ function IndividualModal({
                   <Field
                     component={ControlledTextField}
                     label="Full name"
-                    name="['http://schema.org/name']"
+                    name="schema:name"
                   />
                   <Field
                     component={ControlledTextField}
                     label="Email address"
-                    name="['http://schema.org/email']"
+                    name="schema:email"
                   />
                   <Field
                     component={PhoneField}
                     label="Phone number"
-                    name="['http://schema.org/telephone']"
+                    name="schema:telephone"
                   />
                 </OnBoardingCard>
                 <div className={cx(styles.permission, styles.matchFormPadding)}>
                   <Field
                     type="checkbox"
                     component={CheckboxLabel}
-                    name="['http://regen.network/sharePermission']"
+                    name="regen:sharePermission"
                     label={
-                      <Description className={styles.checkboxLabel}>
+                      <Body size="sm">
                         I have this individual’s permission to share their
                         information with Regen Registry
-                      </Description>
+                      </Body>
                     }
                   />
                   <Tooltip

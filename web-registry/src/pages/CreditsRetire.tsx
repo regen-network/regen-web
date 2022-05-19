@@ -9,7 +9,7 @@ import Input from '@mui/material/Input';
 import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import { pluralize } from 'web-components/lib/utils/pluralize';
 import {
   useAllCreditVintagesQuery,
@@ -220,12 +220,8 @@ const CreditsRetire: React.FC<{
                 vintagesData.allCreditVintages &&
                 vintagesData.allCreditVintages.nodes.map((node: any) => (
                   <MenuItem key={node.id} value={node.id}>
-                    {
-                      node.projectByProjectId.metadata?.[
-                        'http://schema.org/name'
-                      ]
-                    }{' '}
-                    - {dateFormat.format(new Date(node.createdAt))}
+                    {node.projectByProjectId.metadata?.['schema:name']} -{' '}
+                    {dateFormat.format(new Date(node.createdAt))}
                   </MenuItem>
                 ))}
             </Select>

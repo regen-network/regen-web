@@ -22,7 +22,10 @@ const TermsService = ({ location }: props): JSX.Element => {
         location={location}
         description="Regen Network aligns economics with ecology to drive regenerative land management."
       />
-      <MarkdownSection title="Terms of Service" mdContent={data.markdownRemark.html} />
+      <MarkdownSection
+        title="Terms of Service"
+        mdContent={data.markdownRemark.html}
+      />
     </>
   );
 };

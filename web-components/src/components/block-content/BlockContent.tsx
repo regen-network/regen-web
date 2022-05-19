@@ -11,18 +11,10 @@ const CustomBlockContent: React.FC<{
   className?: string;
   content: SanityBlockContent;
   tooltipText?: string;
-  noYMargin?: boolean;
-  /** we can't pass `sx` directly, so use wrapper to target elements */
-  sxWrap?: SxProps<Theme>;
+  /** note: this is passed to the wrapper element */
+  sx?: SxProps<Theme>;
   onClickModalLink?: (href: string) => any;
-}> = ({
-  onClickModalLink,
-  content,
-  tooltipText,
-  className,
-  sxWrap = [],
-  noYMargin = false,
-}) => {
+}> = ({ onClickModalLink, content, tooltipText, className, sx = [] }) => {
   const serializers = {
     marks: {
       link: (props: any) => {
@@ -60,16 +52,17 @@ const CustomBlockContent: React.FC<{
   if (content) {
     return (
       <Box
+        component="span"
         sx={[
-          !!noYMargin && {
-            '& p:first-child': {
+          {
+            '& p:first-of-type': {
               marginTop: 0,
             },
-            '& p:last-child': {
+            '& p:last-of-type': {
               marginBottom: 0,
             },
           },
-          ...(Array.isArray(sxWrap) ? sxWrap : [sxWrap]),
+          ...(Array.isArray(sx) ? sx : [sx]),
         ]}
       >
         <BlockContent

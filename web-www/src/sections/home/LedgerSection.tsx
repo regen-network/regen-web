@@ -3,12 +3,11 @@ import BackgroundImage from 'gatsby-background-image';
 import { graphql, useStaticQuery } from 'gatsby';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
-import Typography from '@mui/material/Typography';
 import Img from 'gatsby-image';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { HomeLedgerSectionQuery } from '../../generated/graphql';
 
 let useStyles = makeStyles((theme: Theme) => ({
@@ -45,21 +44,6 @@ let useStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingRight: theme.spacing(4),
       width: '100%',
-    },
-  },
-  description: {
-    color: theme.palette.info.dark,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4),
-      lineHeight: '150%',
-      paddingTop: theme.spacing(3),
-      paddingBottom: theme.spacing(6),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
-      lineHeight: '160%',
-      paddingTop: theme.spacing(5),
-      paddingBottom: theme.spacing(8.5),
     },
   },
   green: {
@@ -122,9 +106,9 @@ const HomeLedger: React.FC = () => {
             <span className={styles.green}>Regen Ledger</span> powers{' '}
             <span className={styles.green}>Regen Registry</span>
           </Title>
-          <Typography className={styles.description}>
+          <Body size="xl" mobileSize="md" sx={{ pb: [6, 8.5], pt: [3, 5] }}>
             {content?.ledgerDescription}
-          </Typography>
+          </Body>
           <ContainedButton size="large" href="/developers">
             Learn More
           </ContainedButton>

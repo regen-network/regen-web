@@ -1,9 +1,8 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import { Typography } from '@mui/material';
-import clsx from 'clsx';
+import { Box } from '@mui/material';
 
 import ControlledFormLabel from '../form/ControlledFormLabel';
+import { Body } from '../typography';
 
 interface Props {
   className?: string;
@@ -14,49 +13,6 @@ interface Props {
   onExampleClick?: () => void;
   labelSubText?: string;
 }
-
-interface StyleProps {
-  optional?: boolean;
-  disabled?: boolean;
-  description?: string;
-}
-
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  description: props => ({
-    display: 'flex',
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(1),
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(1),
-      fontSize: theme.spacing(3),
-    },
-  }),
-  descriptionText: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-    },
-  },
-  txtGray: {
-    color: theme.palette.info.dark,
-  },
-  example: {
-    color: theme.palette.secondary.main,
-    cursor: 'pointer',
-  },
-  filler: {
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(3),
-    },
-  },
-}));
 
 /**
  *  This component provides styled decorations for label, description, and error message with our custom styles
@@ -70,7 +26,6 @@ export default function FormLabel({
   labelSubText,
   onExampleClick,
 }: Props): JSX.Element {
-  const styles = useStyles({ optional, disabled, description });
   return (
     <div className={className}>
       {label && (
@@ -83,19 +38,21 @@ export default function FormLabel({
         </ControlledFormLabel>
       )}
       {description && (
-        <div className={styles.description}>
-          <Typography
-            variant="body1"
-            className={clsx(styles.descriptionText, styles.txtGray)}
-          >
+        <Box sx={{ display: 'flex', mt: 1 }}>
+          <Body size="sm">
             {description}
             {onExampleClick && (
-              <span className={styles.example} onClick={onExampleClick}>
+              <Box
+                component="span"
+                role="button"
+                onClick={onExampleClick}
+                sx={{ color: 'secondary.main', cursor: 'pointer' }}
+              >
                 &nbsp;See an example»
-              </span>
+              </Box>
             )}
-          </Typography>
-        </div>
+          </Body>
+        </Box>
       )}
     </div>
   );

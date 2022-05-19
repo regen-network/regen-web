@@ -1,20 +1,15 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { FormControlLabel, Collapse } from '@mui/material';
-import clsx from 'clsx';
+import { FormControlLabel, Collapse, Box } from '@mui/material';
 import { FieldProps } from 'formik';
 
 import InfoIconOutlined from '../icons/InfoIconOutlined';
 import Tooltip from '../tooltip/InfoTooltip';
 import Radio from '../inputs/Radio';
 import Checkbox from '../inputs/Checkbox';
+import { Body } from '../typography';
 
 interface ToggleProps extends FieldProps {
   className?: string;
-  classes?: {
-    root?: string;
-    description?: string;
-  };
   label: string;
   type?: 'checkbox' | 'radio';
   checked: boolean;
@@ -27,88 +22,8 @@ interface ToggleProps extends FieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    border: `1px solid ${theme.palette.info.light}`,
-    display: 'flex',
-    flexDirection: 'column',
-    borderRadius: '5px',
-    margin: theme.spacing(3.25, 0, 0),
-    transition: '300ms ease-in-out;',
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(3.25),
-    },
-  },
-  top: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  active: {
-    backgroundColor: theme.palette.grey[50],
-    boxShadow: theme.shadows[1],
-    border: `1px solid ${theme.palette.secondary.contrastText}`,
-    '& .MuiTypography-body1': {
-      fontWeight: 'bold',
-    },
-  },
-  description: {
-    paddingLeft: theme.spacing(6),
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(12),
-    },
-  },
-  descriptionCheckbox: {
-    paddingLeft: theme.spacing(6.9),
-  },
-  disabled: {
-    color: theme.palette.grey[600],
-  },
-  disabledDescriptionCheckbox: {
-    paddingLeft: theme.spacing(8),
-  },
-  content: {
-    paddingTop: theme.spacing(4),
-  },
-  info: {
-    cursor: 'pointer',
-  },
-  checkbox: {
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
-  },
-  radio: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  formControlLabelRoot: {
-    alignItems: 'flex-start',
-    width: '100%',
-    '& .MuiFormControlLabel-label': {
-      marginLeft: theme.spacing(1),
-      [theme.breakpoints.up('sm')]: {
-        fontSize: theme.spacing(4.5),
-      },
-      [theme.breakpoints.down('sm')]: {
-        fontSize: theme.spacing(4),
-      },
-    },
-  },
-  formControlLabelWithDescription: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(2),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(1),
-    },
-  },
-}));
-
 const Toggle: React.FC<ToggleProps> = ({
   className,
-  classes,
   label,
   checked,
   description,
@@ -123,23 +38,34 @@ const Toggle: React.FC<ToggleProps> = ({
   meta,
   triggerOnChange,
 }) => {
-  const styles = useStyles();
-
   return (
-    <div
-      className={clsx(
-        styles.root,
-        checked && styles.active,
-        className,
-        classes && classes.root,
-      )}
+    <Box
+      sx={[
+        {
+          border: 1,
+          borderColor: 'info.light',
+          display: 'flex',
+          flexDirection: 'column',
+          borderRadius: '5px',
+          transition: '200ms ease-in-out;',
+          mt: 3.25,
+          p: [3.25, 3.5],
+        },
+        checked && {
+          borderColor: 'secondary.contrastText',
+          boxShadow: 1,
+          bgcolor: 'grey.50',
+        },
+      ]}
+      className={className}
     >
-      <div className={styles.top}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <FormControlLabel
+          sx={{ alignItems: 'flex-start' }}
           control={
             type === 'checkbox' ? (
               <Checkbox
-                className={styles.checkbox}
+                sx={{ py: 0.5 }}
                 field={field}
                 form={form}
                 meta={meta}
@@ -148,48 +74,67 @@ const Toggle: React.FC<ToggleProps> = ({
                 type="checkbox"
               />
             ) : (
-              <Radio className={styles.radio} />
+              <Radio sx={{ py: 1 }} />
             )
           }
-          label={label}
+          label={
+            <Body
+              size="lg"
+              color="black"
+              sx={[{ ml: 1 }, checked && { fontWeight: 700 }]}
+            >
+              {label}
+            </Body>
+          }
           value={value}
           disabled={disabled}
           checked={checked}
-          classes={{
-            root: styles.formControlLabelRoot,
-            label: description && styles.formControlLabelWithDescription,
-          }}
         />
         {tooltip && (
           <Tooltip arrow placement="top" title={tooltip}>
-            <div className={styles.info}>
+            <Box sx={{ cursor: 'pointer' }}>
               <InfoIconOutlined />
-            </div>
+            </Box>
           </Tooltip>
         )}
-      </div>
+      </Box>
       {description && (
-        <div
-          className={clsx(
-            styles.description,
-            type === 'checkbox' && styles.descriptionCheckbox,
-            disabled && styles.disabled,
-            disabled &&
-              type === 'checkbox' &&
-              styles.disabledDescriptionCheckbox,
-            classes && classes.description,
-          )}
+        <Body
+          size="md"
+          mobileSize="xs"
+          sx={[
+            {
+              pl: 6.9,
+            },
+            type === 'checkbox' && {
+              pl: 8,
+            },
+            !!disabled && {
+              color: 'grey.600',
+            },
+            !!disabled &&
+              type === 'checkbox' && {
+                pl: 8,
+              },
+          ]}
         >
           {description}
-        </div>
+        </Body>
       )}
-      {content && <div className={styles.content}>{content}</div>}
+      {content && <Box pt={4}>{content}</Box>}
       {activeContent && (
-        <Collapse in={checked} classes={{ wrapperInner: styles.content }}>
+        <Collapse
+          in={checked}
+          sx={{
+            '& 	.MuiCollapse-wrapperInner': {
+              pt: 4,
+            },
+          }}
+        >
           {activeContent}
         </Collapse>
       )}
-    </div>
+    </Box>
   );
 };
 

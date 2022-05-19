@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
+import { Box, useTheme } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import SanityImage from 'gatsby-plugin-sanity-image';
@@ -7,7 +8,7 @@ import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import Card from 'web-components/lib/components/cards/Card';
 
 import { HomeClimateSectionQuery } from '../../generated/graphql';
@@ -30,44 +31,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     [theme.breakpoints.down('md')]: {
       padding: `${theme.spacing(6)} ${theme.spacing(5)}`,
-    },
-  },
-  title: {
-    lineHeight: '135%',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(6),
-    },
-    [theme.breakpoints.down('md')]: {
-      paddingBottom: theme.spacing(3),
-    },
-    [theme.breakpoints.up('md')]: {
-      paddingBottom: theme.spacing(4),
-    },
-  },
-  cardTitle: {
-    fontWeight: 800,
-    color: theme.palette.info.dark,
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    lineHeight: theme.spacing(3.75),
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      lineHeight: theme.spacing(4.5),
-    },
-  },
-  cardContent: {
-    color: theme.palette.info.dark,
-    lineHeight: '140%',
-    paddingTop: theme.spacing(2),
-    [theme.breakpoints.up('xs')]: {
-      fontSize: theme.spacing(4.5),
-    },
-  },
-  description: {
-    lineHeight: '140%',
-    color: theme.palette.info.main,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(5.25),
     },
   },
   image: {
@@ -202,17 +165,24 @@ const ClimateSection: React.FC = (): JSX.Element => {
   const content = data.sanityHomePageWeb?.climateSection;
 
   return (
-    <div className={styles.root}>
+    <Box
+      className={styles.root}
+      sx={{
+        position: 'relative',
+        pt: { xs: 20.75, md: 9 },
+        color: 'info.dark',
+      }}
+    >
       <hr className={clsx(styles.line, styles.problemLine)} />
       <Card
         className={clsx(styles.card, styles.problemCard)}
-        borderColor={theme.palette.grey['100']}
+        borderColor="grey.100"
         borderRadius="10px"
       >
-        <Title className={styles.cardTitle} variant="body2">
-          {content?.problem?.title}
-        </Title>
-        <div className={styles.cardContent}>{content?.problem?.body}</div>
+        <Label size="sm">{content?.problem?.title}</Label>
+        <Body size="lg" sx={{ pt: 2 }}>
+          {content?.problem?.body}
+        </Body>
       </Card>
       <SanityImage
         {...(content?.image as any)}
@@ -222,24 +192,30 @@ const ClimateSection: React.FC = (): JSX.Element => {
       {!downMd && <hr className={clsx(styles.line, styles.solutionLine)} />}
       <Card
         className={clsx(styles.card, styles.solutionCard)}
-        borderColor={theme.palette.grey['100']}
+        borderColor="grey.100"
         borderRadius="10px"
       >
-        <Title className={styles.cardTitle} variant="body2">
+        <Label size="sm" color="info.dark">
           {content?.solution?.title}
-        </Title>
-        <div className={styles.cardContent}>{content?.solution?.body}</div>
+        </Label>
+        <Body size="lg" pt={2}>
+          {content?.solution?.body}
+        </Body>
         {downMd && <hr className={clsx(styles.line, styles.solutionLine)} />}
       </Card>
       <div className={styles.titleContainer}>
-        <Title variant="h1" className={styles.title}>
+        <Title
+          variant="h1"
+          mobileVariant="h4"
+          sx={{ color: 'black', pb: { xs: 3, md: 4 } }}
+        >
           {content?.header}
         </Title>
-        <Title variant="h3" className={styles.description}>
+        <Title variant="h3" mobileVariant="h5" sx={{ color: 'info.main' }}>
           {ReactHtmlParser(content?.description || '')}
         </Title>
       </div>
-    </div>
+    </Box>
   );
 };
 

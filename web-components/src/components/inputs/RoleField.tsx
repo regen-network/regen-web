@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
-import { TextField } from '@mui/material';
+import { SxProps, TextField } from '@mui/material';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import { FieldProps, FormikErrors } from 'formik';
 import cx from 'clsx';
 
 import FieldFormControl from './FieldFormControl';
-import { Label } from '../label';
+import { Label } from '../typography';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -30,11 +30,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-  },
-  label: {
-    fontSize: theme.typography.pxToRem(12),
-    color: theme.palette.secondary.main,
-    marginLeft: theme.spacing(2),
   },
   input: {
     borderRadius: 2,
@@ -108,7 +103,7 @@ export type FormValues = IndividualFormValues | OrganizationFormValues;
 export type Option = IndividualOption | OrganizationOption;
 
 export function isIndividual(e: FormValues): e is IndividualFormValues {
-  if (e['@type'] && e['@type'].includes('http://regen.network/Individual')) {
+  if (e['@type'] && e['@type'].includes('regen:Individual')) {
     return true;
   }
   return false;
@@ -117,10 +112,14 @@ export function isIndividual(e: FormValues): e is IndividualFormValues {
 function getLabel(o: any): string | undefined {
   return o.id
     ? isIndividual(o)
-      ? o['http://schema.org/name']
-      : o['http://schema.org/legalName']
+      ? o['schema:name']
+      : o['schema:legalName']
     : undefined;
 }
+
+const sxs = {
+  formLabel: { color: 'primary.contrastText', ml: 1 } as SxProps,
+};
 
 const RoleField: React.FC<Props> = ({
   className,
@@ -139,6 +138,7 @@ const RoleField: React.FC<Props> = ({
   const [organizationEdit, setOrganizationEdit] = useState<any | null>();
   const [individualEdit, setIndividualEdit] = useState<any | null>(null);
   const [value, setValue] = useState<any | null>({});
+
   const { form, field } = fieldProps;
   useEffect(() => {
     const selectedValue =
@@ -208,7 +208,41 @@ const RoleField: React.FC<Props> = ({
               popupIndicator: styles.popupIndicator,
             }}
             disableClearable
-            options={options || []}
+            options={[
+              ...(options || []),
+              (
+                <div
+                  className={styles.add}
+                  onClick={e => {
+                    e.stopPropagation();
+                    setOrganizationEdit({
+                      'schema:legalName': '',
+                    });
+                  }}
+                >
+                  <OrganizationIcon />
+                  <Label size="xs" sx={sxs.formLabel}>
+                    + Add New Organization
+                  </Label>
+                </div>
+              ) as unknown as RoleOptionType,
+              (
+                <div
+                  className={styles.add}
+                  onClick={e => {
+                    e.stopPropagation();
+                    setIndividualEdit({
+                      'schema:name': '',
+                    });
+                  }}
+                >
+                  <UserIcon />
+                  <Label size="xs" sx={sxs.formLabel}>
+                    + Add New Individual
+                  </Label>
+                </div>
+              ) as unknown as RoleOptionType,
+            ]}
             forcePopupIcon
             value={value}
             getOptionLabel={o => getLabel(o) || ''}
@@ -217,6 +251,7 @@ const RoleField: React.FC<Props> = ({
               const label = getLabel(option);
               return <li {...props}>{label || option}</li>;
             }}
+            freeSolo
             onChange={(event, newValue, reason) => {
               if (reason === 'selectOption' && !newValue.inputValue) {
                 handleChange(newValue);
@@ -241,45 +276,6 @@ const RoleField: React.FC<Props> = ({
                 variant="outlined"
               />
             )}
-            filterOptions={(options, state) => {
-              const filtered = filter(options, state) as RoleOptionType[];
-              // Suggest the creation of a new value
-              filtered.push(
-                (
-                  <div
-                    className={styles.add}
-                    onClick={e => {
-                      e.stopPropagation();
-                      setOrganizationEdit({
-                        'http://schema.org/legalName': state.inputValue,
-                      });
-                    }}
-                  >
-                    <OrganizationIcon />
-                    <Label className={styles.label}>
-                      + Add New Organization
-                    </Label>
-                  </div>
-                ) as unknown as RoleOptionType,
-              );
-              filtered.push(
-                (
-                  <div
-                    className={styles.add}
-                    onClick={e => {
-                      e.stopPropagation();
-                      setIndividualEdit({
-                        'http://schema.org/name': state.inputValue,
-                      });
-                    }}
-                  >
-                    <UserIcon />
-                    <Label className={styles.label}>+ Add New Individual</Label>
-                  </div>
-                ) as unknown as RoleOptionType,
-              );
-              return filtered;
-            }}
           />
         )}
       </FieldFormControl>

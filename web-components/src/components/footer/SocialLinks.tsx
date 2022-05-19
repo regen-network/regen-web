@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 
-import Title from '../title';
+import { Label, Title } from '../typography';
 import InstagramIcon from '../icons/social/InstagramIcon';
 import TelegramIcon from '../icons/social/TelegramIcon';
 import FacebookIcon from '../icons/social/FacebookIcon';
@@ -20,21 +20,6 @@ interface Props {
 }
 
 const useStyles = makeStyles(theme => ({
-  title: {
-    textTransform: 'uppercase',
-    color: theme.palette.primary.main,
-    fontWeight: 800,
-    letterSpacing: '1px',
-    [theme.breakpoints.up('sm')]: {
-      lineHeight: theme.spacing(6.5),
-      marginBottom: theme.spacing(3.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      lineHeight: theme.spacing(4.5),
-      fontSize: theme.spacing(3.5),
-      marginBottom: theme.spacing(4.5),
-    },
-  },
   social: {
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'center',
@@ -56,11 +41,6 @@ const useStyles = makeStyles(theme => ({
       height: theme.spacing(7.75),
     },
   },
-  community: {
-    [theme.breakpoints.up('sm')]: {
-      textAlign: 'center',
-    },
-  },
   smallIcon: {
     padding: theme.spacing(1.25),
   },
@@ -74,9 +54,12 @@ const SocialLinks: React.FC<Props> = ({ className }) => {
 
   return (
     <div className={className}>
-      <Title className={cx(styles.community, styles.title)} variant="h5">
+      <Label
+        size="lg"
+        sx={{ textAlign: { sm: 'center' }, mb: { xs: 4.5, sm: 3.75 } }}
+      >
         join the community
-      </Title>
+      </Label>
       <Grid container wrap="nowrap" className={styles.social}>
         <Link
           href="https://www.instagram.com/regennetwork/"

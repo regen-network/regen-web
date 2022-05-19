@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
 import TotalCreditsIcon from 'web-components/lib/components/icons/TotalCreditsIcon';
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';

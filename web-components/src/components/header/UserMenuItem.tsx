@@ -1,11 +1,11 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
 import { useTheme, styled } from '@mui/material';
 
 import { HeaderMenuHover, HeaderMenuHoverBase } from './HeaderMenuHover';
 import CreditsIcon from '../icons/CreditsIcon';
+import { Label } from '../typography';
 
 interface UserMenuItemProps extends HeaderMenuHoverBase {
   address: string;
@@ -72,21 +72,9 @@ const UserMenuItem: React.FC<UserMenuItemProps> = ({
         extras: (
           <Box sx={{ mx: -3.5 }}>
             <Separator />
-            {/* TODO replace with Label component from David's PR #906 */}
-            <Typography
-              sx={{
-                cursor: 'pointer',
-                fontSize: theme => `${theme.spacing(3)} !important`,
-                color: '#201F22',
-                fontFamily: theme => theme.typography.h1.fontFamily,
-                letterSpacing: '1px',
-                fontWeight: 800,
-                textTransform: 'uppercase',
-              }}
-              onClick={disconnect}
-            >
+            <Label size="xs" onClick={disconnect} sx={{ cursor: 'pointer' }}>
               disconnect »
-            </Typography>
+            </Label>
           </Box>
         ),
       }}

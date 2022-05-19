@@ -56,8 +56,8 @@ const ChooseCreditClass: React.FC = () => {
   ): Promise<void> {
     if (graphData?.shaclGraphByUri?.graph) {
       const metadata = getProjectPageBaseData();
-      metadata['http://regen.network/creditClass'] = {
-        '@type': 'http://regen.network/CreditClass',
+      metadata['regen:creditClass'] = {
+        '@type': 'regen:CreditClass',
         '@id': creditClassUri,
       };
       const report = await validate(

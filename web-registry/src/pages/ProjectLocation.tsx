@@ -34,8 +34,7 @@ const ProjectLocation: React.FC = () => {
   if (projectData?.projectById?.metadata) {
     const metadata = projectData.projectById.metadata;
     initialFieldValues = {
-      'http://schema.org/location':
-        metadata?.['http://schema.org/location'] || {},
+      'schema:location': metadata?.['schema:location'] || {},
     };
   }
 
@@ -58,7 +57,7 @@ const ProjectLocation: React.FC = () => {
 
   async function saveValues(values: ProjectLocationFormValues): Promise<void> {
     const metadata = { ...projectData?.projectById?.metadata, ...values };
-    const feature = values['http://schema.org/location'];
+    const feature = values['schema:location'];
     let addressId = projectData?.projectById?.addressId;
     // if there's a current address associated with project, update it, otherwise create a new one
     if (!addressId) {

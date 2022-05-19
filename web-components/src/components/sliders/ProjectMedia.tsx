@@ -74,7 +74,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
         '& ul': {
           margin: '8px 0 -6.5px',
           '& li': {
-            height: theme.spacing(2.5),
             width: theme.spacing(2.5),
             margin: '0 6.5px',
             '&.slick-active': {

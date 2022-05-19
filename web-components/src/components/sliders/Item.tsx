@@ -1,36 +1,27 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
+
+import { Subtitle } from '../typography';
 
 export interface ItemProps {
   name: string;
   imgSrc: string;
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    paddingLeft: theme.spacing(5),
-  },
-  img: {
-    borderRadius: '5px',
-  },
-  name: {
-    fontWeight: 'bold',
-    fontSize: '0.875rem',
-    lineHeight: '130%',
-    paddingTop: theme.spacing(1.5),
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-  },
-}));
-
 export default function Item({ name, imgSrc }: ItemProps): JSX.Element {
-  const classes = useStyles({});
   return (
-    <div className={classes.root}>
-      <img className={classes.img} src={imgSrc} alt={name} />
-      <Typography className={classes.name}>{name}</Typography>
-    </div>
+    <Box pl={5}>
+      <Box
+        component="img"
+        src={imgSrc}
+        alt={name}
+        sx={{ borderRadius: '5px' }}
+      />
+      <Subtitle
+        size="sm"
+        sx={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
+      >
+        {name}
+      </Subtitle>
+    </Box>
   );
 }

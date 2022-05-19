@@ -130,7 +130,10 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
         ))}
         rows={batches.map(batch =>
           [
-            <Link href={`/credit-classes/${batch.class_id}`}>
+            <Link
+              key={batch.class_id}
+              href={`/credit-classes/${batch.class_id}`}
+            >
               {batch.class_id}
             </Link>,
             <Link
@@ -146,9 +149,9 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             >
               {truncate(batch.issuer)}
             </a>,
-            formatNumber(batch.tradable_supply),
-            formatNumber(batch.retired_supply),
-            formatNumber(batch.amount_cancelled),
+            <>{formatNumber(batch.tradable_supply)}</>,
+            <>{formatNumber(batch.retired_supply)}</>,
+            <>{formatNumber(batch.amount_cancelled)}</>,
             <Box className={styles.noWrap}>
               {formatDate(batch.start_date as Date)}
             </Box>,
@@ -156,7 +159,9 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
               {formatDate(batch.end_date as Date)}
             </Box>,
             <Box className={styles.noWrap}>{batch.project_location}</Box>,
-          ].filter(item => !(creditClassId && item === batch.class_id)),
+          ].filter(item => {
+            return !(creditClassId && item?.key === batch.class_id);
+          }),
         )}
       />
     </Section>

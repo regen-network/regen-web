@@ -5,6 +5,7 @@ import { NameUrl } from '../../types/rdf';
 export interface BatchMetadataLD {
   '@context'?: Context;
   '@type': string;
+  'regen:vcsProjectId': number;
   'regen:vcsRetirementSerialNumber': string;
   'regen:additionalCertifications': NameUrl[];
 }

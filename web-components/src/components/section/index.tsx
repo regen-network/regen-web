@@ -119,6 +119,7 @@ const Section = ({
           )}
         >
           <Title
+            as="div"
             sx={sx?.title}
             className={clsx(styles.title, classes && classes.title)}
             variant={titleVariant}

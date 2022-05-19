@@ -5,7 +5,7 @@ import {
   FooterItemProps as FooterItem,
 } from 'web-components/lib/components/footer/footer-new';
 import { RegistryIconLink, Link } from '../atoms';
-import { chainId } from '../../lib/ledger';
+import { chainId, nctBasket } from '../../lib/ledger';
 
 const AppFooter: React.FC = () => {
   const { pathname } = useLocation();
@@ -58,10 +58,12 @@ const AppFooter: React.FC = () => {
   ];
 
   if (chainId) {
-    footerItems[0].items.unshift({
-      title: 'NCT',
-      href: '/baskets/eco.uC.NCT',
-    });
+    if (nctBasket) {
+      footerItems[0].items.unshift({
+        title: 'NCT',
+        href: '/baskets/eco.uC.NCT',
+      });
+    }
     footerItems[0].items.push({
       title: 'Activity',
       href: '/stats/activity',

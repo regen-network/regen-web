@@ -68,7 +68,7 @@ export const TitleWithParagraphs: React.FC<TitleWithParagraphsProps> = ({
         {paragraphs.map((p: Paragraph, i: number) => (
           <Box key={i} sx={{ mb: [7, 10] }}>
             <Label sx={{ fontSize: [16, 18], mb: [2, 4] }}>{p.title}</Label>
-            <Body size="lg" sx={{ mt: [4] }}>
+            <Body as="div" size="lg" sx={{ mt: [4] }}>
               {typeof p.content === 'string' ? (
                 ReactHtmlParser(p.content)
               ) : (
@@ -137,7 +137,7 @@ const ApproachSection: React.FC<SanityCaseStudyApproachSection> = ({
             className={classes.image}
             fluid={figureImage?.image?.asset?.fluid as FluidObject}
           />
-          <Body size="sm" as="div" sx={{ pt: [3, 4], color: 'info.dark' }}>
+          <Body as="div" size="sm" sx={{ pt: [3, 4], color: 'info.dark' }}>
             <BlockContent content={_rawFigureTitle} />
           </Body>
         </Grid>

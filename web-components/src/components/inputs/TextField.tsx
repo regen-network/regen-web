@@ -8,6 +8,8 @@ import clsx from 'clsx';
 import { DefaultStyleProps } from './FieldFormControl';
 import InputLabel from './InputLabel';
 
+// TODO: create styled component as described in issue: regen-network/regen-web/issues/955
+
 interface TriggerTextFieldProps extends TextFieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
   transformValue?: (v: any) => any;

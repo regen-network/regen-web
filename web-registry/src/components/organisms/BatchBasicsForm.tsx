@@ -97,6 +97,11 @@ const BatchBasicsForm: React.FC<{
           <Form>
             <OnBoardingCard>
               <CreditClassSelect name="classId" />
+              <ProjectSelect
+                creditClassId={values.classId}
+                name="metadata['regen:vcsProjectId']"
+                required
+              />
               <Box
                 sx={{
                   display: 'flex',
@@ -132,11 +137,6 @@ const BatchBasicsForm: React.FC<{
               </Body>
               {isVCS ? (
                 <>
-                  <ProjectSelect
-                    creditClassId={values.classId}
-                    name="metadata['regen:vcsProjectId']"
-                    required={isVCS}
-                  />
                   <Field
                     name="metadata['regen:vcsRetirementSerialNumber']"
                     label="VCS retirement serial number"

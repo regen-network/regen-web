@@ -118,7 +118,7 @@ const EnableSection = (): JSX.Element => {
         </Grid>
         <Grid xs={12} item className={styles.text}>
           <Title variant="h2">{content?.title}</Title>
-          <Body size="lg" sx={{ pt: [4, 7] }}>
+          <Body as="div" size="lg" sx={{ pt: [4, 7] }}>
             <BlockContent content={content?._rawBody} />
           </Body>
         </Grid>

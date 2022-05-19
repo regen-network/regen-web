@@ -45,8 +45,10 @@ const ImageActionCard: React.FC<Props> = props => {
         }}
       >
         <div>
-          <Title variant="h5">{parseText(props.title)}</Title>
-          <Body>{parseText(props.description)}</Body>
+          <Title as="div" variant="h5">
+            {parseText(props.title)}
+          </Title>
+          <Body as="div">{parseText(props.description)}</Body>
         </div>
 
         <OutlinedButton

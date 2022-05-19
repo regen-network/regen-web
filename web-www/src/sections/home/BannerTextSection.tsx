@@ -71,7 +71,14 @@ const BannerTextSection: React.FC = () => {
         <Title variant="h2" color="primary" align="center">
           {data?.title}
         </Title>
-        <Title variant="h4" color="primary" align="center">
+        <Title
+          as="div"
+          variant="h4"
+          mobileVariant="h6"
+          color="primary"
+          align="center"
+          mt={[3, 5]}
+        >
           <BlockContent content={data?._rawBody} />
         </Title>
       </Box>

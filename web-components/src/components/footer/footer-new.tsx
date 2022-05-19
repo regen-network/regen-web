@@ -11,7 +11,7 @@ import { SocialLinks } from './SocialLinks';
 
 export interface LinkItem {
   href: string;
-  target?: '_blank' | '_self';
+  target?: '_blank' | '_self' | string;
 }
 
 interface FooterItemItem extends LinkItem {
@@ -37,7 +37,10 @@ const FooterItem: React.FC<FooterItemProps> = ({
       <List sx={{ p: 0 }}>
         {items.map((item, index) => (
           <ListItem sx={{ py: 0.75, px: 0 }} key={index}>
-            <Box component={'span'} sx={{ typography: ['body1', 'textLarge'] }}>
+            <Box
+              component={'span'}
+              sx={{ typography: ['textMedium', 'textLarge'] }}
+            >
               <LinkComponent
                 style={{ fontWeight: 'normal' }}
                 href={item.href}
@@ -151,9 +154,9 @@ const Footer: React.FC<{
           justifyContent="space-between"
         >
           <Grid item>
-            <Body size="sm">
-              <Link href={termsUrl}>Terms</Link> |{' '}
-              <Link href={privacyUrl}>Privacy</Link>
+            <Body styleLinks={false} color="primary">
+              <LinkComponent href={termsUrl}>Terms</LinkComponent> |{' '}
+              <LinkComponent href={privacyUrl}>Privacy</LinkComponent>
             </Body>
           </Grid>
           <Grid item>

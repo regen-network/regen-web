@@ -130,10 +130,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
         ))}
         rows={batches.map(batch =>
           [
-            <Link
-              key={batch.class_id}
-              href={`/credit-classes/${batch.class_id}`}
-            >
+            <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
               {batch.class_id}
             </Link>,
             <Link
@@ -160,7 +157,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             </Box>,
             <Box className={styles.noWrap}>{batch.project_location}</Box>,
           ].filter(item => {
-            return !(creditClassId && item?.key === batch.class_id);
+            return !(creditClassId && item?.key === 'class_id');
           }),
         )}
       />

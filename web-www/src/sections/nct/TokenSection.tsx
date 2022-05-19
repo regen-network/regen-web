@@ -120,7 +120,7 @@ export const TokenSection = (): JSX.Element => {
           {/* TODO uncomment if we want to formatted date based on CMS launch date */}
           {data?.cardSubtitle} {/* {formatDate(launchDate)} */}
         </Subtitle>
-        <Body size="xl">
+        <Body as="div" size="xl">
           <BlockContent content={data?._rawCardBody} />
         </Body>
         <ContainedButton
@@ -159,7 +159,7 @@ export const TokenSection = (): JSX.Element => {
         <Label color="info.main">
           {data?.detailSubtitle} {/* {formatDate(launchDate)} */}
         </Label>
-        <Body size="xl">
+        <Body as="div" size="xl">
           <BlockContent content={data?._rawDetailBody} />
         </Body>
         <Box sx={{ display: 'flex', gap: 3, mt: [4, 8] }}>

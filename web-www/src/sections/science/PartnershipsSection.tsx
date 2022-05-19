@@ -91,7 +91,7 @@ const PartnershipsSection = (): JSX.Element => {
                 alt={p?.image?.imageAlt || ''}
                 fluid={p?.image?.image?.asset?.fluid as FluidObject}
               />
-              <Body size="lg" mobileSize="sm" pt={[0, 3.5]}>
+              <Body as="div" size="lg" mobileSize="sm" pt={[0, 3.5]}>
                 <BlockContent content={p?._rawBody} />
               </Body>
             </Grid>

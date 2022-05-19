@@ -107,7 +107,7 @@ const CreateCreditClass: React.FC = () => {
             {props.title}
           </Title>
           <Box pt={[5, 7]}>
-            <Body size="xl" align={align}>
+            <Body as="div" size="xl" align={align}>
               <BlockContent content={props.descriptionRaw} />
             </Body>
           </Box>

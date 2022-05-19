@@ -200,6 +200,7 @@ export type AddressProjectsByAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -222,6 +223,7 @@ export type AddressRetirementsByAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
+  filter?: Maybe<RetirementFilter>;
 };
 
 
@@ -354,6 +356,7 @@ export type AddressCreditVintagesByPurchaseAddressIdAndCreditVintageIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -398,6 +401,7 @@ export type AddressCreditVintagesByRetirementAddressIdAndCreditVintageIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A condition to be used against `Address` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -446,6 +450,7 @@ export type AddressCreditClassesByProjectAddressIdAndCreditClassIdManyToManyEdge
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `CreditVintage` values, with data from `Purchase`. */
@@ -518,6 +523,19 @@ export type AddressCreditVintagesByRetirementAddressIdAndCreditVintageIdManyToMa
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
+  filter?: Maybe<RetirementFilter>;
+};
+
+/** A filter to be used against `Address` object types. All fields are combined with a logical ‘and.’ */
+export type AddressFilter = {
+  /** Filter by the object’s `feature` field. */
+  feature?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<AddressFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<AddressFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<AddressFilter>;
 };
 
 /** An input for mutations affecting `Address` */
@@ -562,6 +580,7 @@ export type AddressPartiesByProjectAddressIdAndDeveloperIdManyToManyEdgeProjects
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -598,6 +617,7 @@ export type AddressPartiesByProjectAddressIdAndIssuerIdManyToManyEdgeProjectsByI
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -634,6 +654,7 @@ export type AddressPartiesByProjectAddressIdAndLandOwnerIdManyToManyEdgeProjects
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -670,6 +691,7 @@ export type AddressPartiesByProjectAddressIdAndOriginatorIdManyToManyEdgeProject
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -706,6 +728,7 @@ export type AddressPartiesByProjectAddressIdAndRegistryIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -742,6 +765,7 @@ export type AddressPartiesByProjectAddressIdAndResellerIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -778,6 +802,7 @@ export type AddressPartiesByProjectAddressIdAndStewardIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Purchase`. */
@@ -858,6 +883,7 @@ export type AddressUsersByProjectAddressIdAndCreatorIdManyToManyEdgeProjectsByCr
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `User` values, with data from `Purchase`. */
@@ -1002,6 +1028,7 @@ export type AddressWalletsByRetirementAddressIdAndWalletIdManyToManyEdgeRetireme
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
+  filter?: Maybe<RetirementFilter>;
 };
 
 /** A connection to a list of `Address` values. */
@@ -2178,6 +2205,7 @@ export type CreditClassCreditClassVersionsByIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditClassVersionsOrderBy>>;
   condition?: Maybe<CreditClassVersionCondition>;
+  filter?: Maybe<CreditClassVersionFilter>;
 };
 
 
@@ -2200,6 +2228,7 @@ export type CreditClassCreditVintagesByCreditClassIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -2211,6 +2240,7 @@ export type CreditClassProjectsByCreditClassIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -2233,6 +2263,7 @@ export type CreditClassProjectsByCreditVintageCreditClassIdAndProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -2321,6 +2352,7 @@ export type CreditClassAddressesByProjectCreditClassIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -2401,6 +2433,7 @@ export type CreditClassAddressesByProjectCreditClassIdAndAddressIdManyToManyEdge
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /**
@@ -2542,6 +2575,7 @@ export type CreditClassPartiesByCreditVintageCreditClassIdAndIssuerIdManyToManyE
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -2578,6 +2612,7 @@ export type CreditClassPartiesByProjectCreditClassIdAndDeveloperIdManyToManyEdge
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -2614,6 +2649,7 @@ export type CreditClassPartiesByProjectCreditClassIdAndIssuerIdManyToManyEdgePro
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -2650,6 +2686,7 @@ export type CreditClassPartiesByProjectCreditClassIdAndLandOwnerIdManyToManyEdge
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -2686,6 +2723,7 @@ export type CreditClassPartiesByProjectCreditClassIdAndOriginatorIdManyToManyEdg
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -2722,6 +2760,7 @@ export type CreditClassPartiesByProjectCreditClassIdAndRegistryIdManyToManyEdgeP
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -2758,6 +2797,7 @@ export type CreditClassPartiesByProjectCreditClassIdAndResellerIdManyToManyEdgeP
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -2794,6 +2834,7 @@ export type CreditClassPartiesByProjectCreditClassIdAndStewardIdManyToManyEdgePr
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** Represents an update to a `CreditClass`. Fields that are set will be updated. */
@@ -2842,6 +2883,7 @@ export type CreditClassProjectsByCreditVintageCreditClassIdAndProjectIdManyToMan
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `User` values, with data from `Project`. */
@@ -2878,6 +2920,7 @@ export type CreditClassUsersByProjectCreditClassIdAndCreatorIdManyToManyEdgeProj
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 export type CreditClassVersion = Node & {
@@ -2909,6 +2952,7 @@ export type CreditClassVersionCreditVintagesByCreditClassVersionIdAndCreditClass
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /**
@@ -2936,6 +2980,20 @@ export type CreditClassVersionCondition = {
   image?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `documentId` field. */
   documentId?: Maybe<Scalars['String']>;
+};
+
+/** A filter to be used against `CreditClassVersion` object types. All fields are combined with a logical ‘and.’ */
+export type CreditClassVersionFilter = {
+  /** Filter by the object’s `stateMachine` field. */
+  stateMachine?: Maybe<JsonFilter>;
+  /** Filter by the object’s `metadata` field. */
+  metadata?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<CreditClassVersionFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<CreditClassVersionFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<CreditClassVersionFilter>;
 };
 
 /** An input for mutations affecting `CreditClassVersion` */
@@ -3085,6 +3143,7 @@ export type CreditClassWalletsByCreditVintageCreditClassIdAndResellerIdManyToMan
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
@@ -3121,6 +3180,7 @@ export type CreditClassWalletsByCreditVintageCreditClassIdAndTokenizerIdManyToMa
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `CreditClass` values. */
@@ -3282,6 +3342,7 @@ export type CreditVintageRetirementsByCreditVintageIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
+  filter?: Maybe<RetirementFilter>;
 };
 
 
@@ -3359,6 +3420,7 @@ export type CreditVintageAddressesByPurchaseCreditVintageIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -3403,6 +3465,7 @@ export type CreditVintageAddressesByRetirementCreditVintageIdAndAddressIdArgs = 
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 /** A connection to a list of `Address` values, with data from `Purchase`. */
@@ -3475,6 +3538,7 @@ export type CreditVintageAddressesByRetirementCreditVintageIdAndAddressIdManyToM
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
+  filter?: Maybe<RetirementFilter>;
 };
 
 /**
@@ -3522,6 +3586,20 @@ export type CreditVintageCondition = {
   resellerId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `batchDenom` field. */
   batchDenom?: Maybe<Scalars['String']>;
+};
+
+/** A filter to be used against `CreditVintage` object types. All fields are combined with a logical ‘and.’ */
+export type CreditVintageFilter = {
+  /** Filter by the object’s `initialDistribution` field. */
+  initialDistribution?: Maybe<JsonFilter>;
+  /** Filter by the object’s `metadata` field. */
+  metadata?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<CreditVintageFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<CreditVintageFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<CreditVintageFilter>;
 };
 
 /** An input for mutations affecting `CreditVintage` */
@@ -3813,6 +3891,7 @@ export type CreditVintageWalletsByRetirementCreditVintageIdAndWalletIdManyToMany
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
+  filter?: Maybe<RetirementFilter>;
 };
 
 /** A connection to a list of `Wallet` values, with data from `Transaction`. */
@@ -5408,6 +5487,7 @@ export type EventCreditVintagesByEventIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -5430,6 +5510,7 @@ export type EventProjectsByDocumentEventIdAndProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A condition to be used against `Event` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -5797,6 +5878,12 @@ export type IssueCreditsPayload = {
 };
 
 
+/** A filter to be used against JSON fields. All fields are combined with a logical ‘and.’ */
+export type JsonFilter = {
+  /** Contains the specified JSON. */
+  contains?: Maybe<Scalars['JSON']>;
+};
+
 export type MetadataGraph = Node & {
   __typename?: 'MetadataGraph';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -5820,6 +5907,18 @@ export type MetadataGraphCondition = {
   updatedAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `metadata` field. */
   metadata?: Maybe<Scalars['JSON']>;
+};
+
+/** A filter to be used against `MetadataGraph` object types. All fields are combined with a logical ‘and.’ */
+export type MetadataGraphFilter = {
+  /** Filter by the object’s `metadata` field. */
+  metadata?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<MetadataGraphFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<MetadataGraphFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<MetadataGraphFilter>;
 };
 
 /** An input for mutations affecting `MetadataGraph` */
@@ -5939,6 +6038,7 @@ export type MethodologyMethodologyVersionsByIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<MethodologyVersionsOrderBy>>;
   condition?: Maybe<MethodologyVersionCondition>;
+  filter?: Maybe<MethodologyVersionFilter>;
 };
 
 
@@ -6059,6 +6159,7 @@ export type MethodologyVersionCreditVintagesByMethodologyVersionIdAndMethodology
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /**
@@ -6086,6 +6187,20 @@ export type MethodologyVersionCondition = {
   files?: Maybe<Scalars['JSON']>;
   /** Checks for equality with the object’s `documentId` field. */
   documentId?: Maybe<Scalars['String']>;
+};
+
+/** A filter to be used against `MethodologyVersion` object types. All fields are combined with a logical ‘and.’ */
+export type MethodologyVersionFilter = {
+  /** Filter by the object’s `metadata` field. */
+  metadata?: Maybe<JsonFilter>;
+  /** Filter by the object’s `files` field. */
+  files?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<MethodologyVersionFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<MethodologyVersionFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<MethodologyVersionFilter>;
 };
 
 /** An input for mutations affecting `MethodologyVersion` */
@@ -8110,6 +8225,7 @@ export type PartyCreditVintagesByIssuerIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -8121,6 +8237,7 @@ export type PartyProjectsByDeveloperIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -8132,6 +8249,7 @@ export type PartyProjectsByStewardIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -8143,6 +8261,7 @@ export type PartyProjectsByLandOwnerIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -8154,6 +8273,7 @@ export type PartyProjectsByRegistryIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -8165,6 +8285,7 @@ export type PartyProjectsByOriginatorIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -8176,6 +8297,7 @@ export type PartyProjectsByIssuerIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -8187,6 +8309,7 @@ export type PartyProjectsByResellerIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -8264,6 +8387,7 @@ export type PartyProjectsByCreditVintageIssuerIdAndProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -8341,6 +8465,7 @@ export type PartyAddressesByProjectDeveloperIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -8440,6 +8565,7 @@ export type PartyAddressesByProjectStewardIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -8539,6 +8665,7 @@ export type PartyAddressesByProjectLandOwnerIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -8638,6 +8765,7 @@ export type PartyAddressesByProjectRegistryIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -8748,6 +8876,7 @@ export type PartyAddressesByProjectOriginatorIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -8847,6 +8976,7 @@ export type PartyAddressesByProjectIssuerIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -8946,6 +9076,7 @@ export type PartyAddressesByProjectResellerIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -9012,6 +9143,7 @@ export type PartyCreditVintagesByTransactionBrokerIdAndCreditVintageIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -9045,6 +9177,7 @@ export type PartyAddressesByPurchasePartyIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -9056,6 +9189,7 @@ export type PartyCreditVintagesByPurchasePartyIdAndCreditVintageIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -9078,6 +9212,7 @@ export type PartyProjectsByProjectBrokerBrokerIdAndProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -9111,6 +9246,7 @@ export type PartyProjectsByProjectBrokerAuthorizedByPartyIdAndProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -9169,6 +9305,7 @@ export type PartyAddressesByProjectDeveloperIdAndAddressIdManyToManyEdgeProjects
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Address` values, with data from `Project`. */
@@ -9205,6 +9342,7 @@ export type PartyAddressesByProjectIssuerIdAndAddressIdManyToManyEdgeProjectsByA
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Address` values, with data from `Project`. */
@@ -9241,6 +9379,7 @@ export type PartyAddressesByProjectLandOwnerIdAndAddressIdManyToManyEdgeProjects
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Address` values, with data from `Project`. */
@@ -9277,6 +9416,7 @@ export type PartyAddressesByProjectOriginatorIdAndAddressIdManyToManyEdgeProject
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Address` values, with data from `Project`. */
@@ -9313,6 +9453,7 @@ export type PartyAddressesByProjectRegistryIdAndAddressIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Address` values, with data from `Project`. */
@@ -9349,6 +9490,7 @@ export type PartyAddressesByProjectResellerIdAndAddressIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Address` values, with data from `Project`. */
@@ -9385,6 +9527,7 @@ export type PartyAddressesByProjectStewardIdAndAddressIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Address` values, with data from `Purchase`. */
@@ -9481,6 +9624,7 @@ export type PartyCreditClassesByCreditVintageIssuerIdAndCreditClassIdManyToManyE
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -9517,6 +9661,7 @@ export type PartyCreditClassesByProjectDeveloperIdAndCreditClassIdManyToManyEdge
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -9553,6 +9698,7 @@ export type PartyCreditClassesByProjectIssuerIdAndCreditClassIdManyToManyEdgePro
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -9589,6 +9735,7 @@ export type PartyCreditClassesByProjectLandOwnerIdAndCreditClassIdManyToManyEdge
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -9625,6 +9772,7 @@ export type PartyCreditClassesByProjectOriginatorIdAndCreditClassIdManyToManyEdg
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -9661,6 +9809,7 @@ export type PartyCreditClassesByProjectRegistryIdAndCreditClassIdManyToManyEdgeP
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -9697,6 +9846,7 @@ export type PartyCreditClassesByProjectResellerIdAndCreditClassIdManyToManyEdgeP
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `Project`. */
@@ -9733,6 +9883,7 @@ export type PartyCreditClassesByProjectStewardIdAndCreditClassIdManyToManyEdgePr
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `CreditVintage` values, with data from `Purchase`. */
@@ -9963,6 +10114,7 @@ export type PartyPartiesByProjectDeveloperIdAndIssuerIdManyToManyEdgeProjectsByI
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -9999,6 +10151,7 @@ export type PartyPartiesByProjectDeveloperIdAndLandOwnerIdManyToManyEdgeProjects
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10035,6 +10188,7 @@ export type PartyPartiesByProjectDeveloperIdAndOriginatorIdManyToManyEdgeProject
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10071,6 +10225,7 @@ export type PartyPartiesByProjectDeveloperIdAndRegistryIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10107,6 +10262,7 @@ export type PartyPartiesByProjectDeveloperIdAndResellerIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10143,6 +10299,7 @@ export type PartyPartiesByProjectDeveloperIdAndStewardIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10179,6 +10336,7 @@ export type PartyPartiesByProjectIssuerIdAndDeveloperIdManyToManyEdgeProjectsByD
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10215,6 +10373,7 @@ export type PartyPartiesByProjectIssuerIdAndLandOwnerIdManyToManyEdgeProjectsByL
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10251,6 +10410,7 @@ export type PartyPartiesByProjectIssuerIdAndOriginatorIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10287,6 +10447,7 @@ export type PartyPartiesByProjectIssuerIdAndRegistryIdManyToManyEdgeProjectsByRe
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10323,6 +10484,7 @@ export type PartyPartiesByProjectIssuerIdAndResellerIdManyToManyEdgeProjectsByRe
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10359,6 +10521,7 @@ export type PartyPartiesByProjectIssuerIdAndStewardIdManyToManyEdgeProjectsBySte
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10395,6 +10558,7 @@ export type PartyPartiesByProjectLandOwnerIdAndDeveloperIdManyToManyEdgeProjects
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10431,6 +10595,7 @@ export type PartyPartiesByProjectLandOwnerIdAndIssuerIdManyToManyEdgeProjectsByI
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10467,6 +10632,7 @@ export type PartyPartiesByProjectLandOwnerIdAndOriginatorIdManyToManyEdgeProject
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10503,6 +10669,7 @@ export type PartyPartiesByProjectLandOwnerIdAndRegistryIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10539,6 +10706,7 @@ export type PartyPartiesByProjectLandOwnerIdAndResellerIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10575,6 +10743,7 @@ export type PartyPartiesByProjectLandOwnerIdAndStewardIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10611,6 +10780,7 @@ export type PartyPartiesByProjectOriginatorIdAndDeveloperIdManyToManyEdgeProject
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10647,6 +10817,7 @@ export type PartyPartiesByProjectOriginatorIdAndIssuerIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10683,6 +10854,7 @@ export type PartyPartiesByProjectOriginatorIdAndLandOwnerIdManyToManyEdgeProject
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10719,6 +10891,7 @@ export type PartyPartiesByProjectOriginatorIdAndRegistryIdManyToManyEdgeProjects
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10755,6 +10928,7 @@ export type PartyPartiesByProjectOriginatorIdAndResellerIdManyToManyEdgeProjects
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10791,6 +10965,7 @@ export type PartyPartiesByProjectOriginatorIdAndStewardIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10827,6 +11002,7 @@ export type PartyPartiesByProjectRegistryIdAndDeveloperIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10863,6 +11039,7 @@ export type PartyPartiesByProjectRegistryIdAndIssuerIdManyToManyEdgeProjectsByIs
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10899,6 +11076,7 @@ export type PartyPartiesByProjectRegistryIdAndLandOwnerIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10935,6 +11113,7 @@ export type PartyPartiesByProjectRegistryIdAndOriginatorIdManyToManyEdgeProjects
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -10971,6 +11150,7 @@ export type PartyPartiesByProjectRegistryIdAndResellerIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11007,6 +11187,7 @@ export type PartyPartiesByProjectRegistryIdAndStewardIdManyToManyEdgeProjectsByS
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11043,6 +11224,7 @@ export type PartyPartiesByProjectResellerIdAndDeveloperIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11079,6 +11261,7 @@ export type PartyPartiesByProjectResellerIdAndIssuerIdManyToManyEdgeProjectsByIs
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11115,6 +11298,7 @@ export type PartyPartiesByProjectResellerIdAndLandOwnerIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11151,6 +11335,7 @@ export type PartyPartiesByProjectResellerIdAndOriginatorIdManyToManyEdgeProjects
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11187,6 +11372,7 @@ export type PartyPartiesByProjectResellerIdAndRegistryIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11223,6 +11409,7 @@ export type PartyPartiesByProjectResellerIdAndStewardIdManyToManyEdgeProjectsByS
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11259,6 +11446,7 @@ export type PartyPartiesByProjectStewardIdAndDeveloperIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11295,6 +11483,7 @@ export type PartyPartiesByProjectStewardIdAndIssuerIdManyToManyEdgeProjectsByIss
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11331,6 +11520,7 @@ export type PartyPartiesByProjectStewardIdAndLandOwnerIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11367,6 +11557,7 @@ export type PartyPartiesByProjectStewardIdAndOriginatorIdManyToManyEdgeProjectsB
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11403,6 +11594,7 @@ export type PartyPartiesByProjectStewardIdAndRegistryIdManyToManyEdgeProjectsByR
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -11439,6 +11631,7 @@ export type PartyPartiesByProjectStewardIdAndResellerIdManyToManyEdgeProjectsByR
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** Represents an update to a `Party`. Fields that are set will be updated. */
@@ -11489,6 +11682,7 @@ export type PartyProjectsByCreditVintageIssuerIdAndProjectIdManyToManyEdgeCredit
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Project` values, with data from `ProjectBroker`. */
@@ -11710,6 +11904,7 @@ export type PartyUsersByProjectDeveloperIdAndCreatorIdManyToManyEdgeProjectsByCr
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `User` values, with data from `Project`. */
@@ -11746,6 +11941,7 @@ export type PartyUsersByProjectIssuerIdAndCreatorIdManyToManyEdgeProjectsByCreat
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `User` values, with data from `Project`. */
@@ -11782,6 +11978,7 @@ export type PartyUsersByProjectLandOwnerIdAndCreatorIdManyToManyEdgeProjectsByCr
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `User` values, with data from `Project`. */
@@ -11818,6 +12015,7 @@ export type PartyUsersByProjectOriginatorIdAndCreatorIdManyToManyEdgeProjectsByC
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `User` values, with data from `Project`. */
@@ -11854,6 +12052,7 @@ export type PartyUsersByProjectRegistryIdAndCreatorIdManyToManyEdgeProjectsByCre
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `User` values, with data from `Project`. */
@@ -11890,6 +12089,7 @@ export type PartyUsersByProjectResellerIdAndCreatorIdManyToManyEdgeProjectsByCre
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `User` values, with data from `Project`. */
@@ -11926,6 +12126,7 @@ export type PartyUsersByProjectStewardIdAndCreatorIdManyToManyEdgeProjectsByCrea
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `User` values, with data from `Purchase`. */
@@ -11998,6 +12199,7 @@ export type PartyWalletsByCreditVintageIssuerIdAndResellerIdManyToManyEdgeCredit
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
@@ -12034,6 +12236,7 @@ export type PartyWalletsByCreditVintageIssuerIdAndTokenizerIdManyToManyEdgeCredi
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Wallet` values, with data from `Purchase`. */
@@ -12228,6 +12431,7 @@ export type ProjectCreditVintagesByProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -12551,6 +12755,7 @@ export type ProjectCreditClassesByCreditVintageProjectIdAndCreditClassIdManyToMa
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Event` values, with data from `Document`. */
@@ -12587,6 +12792,18 @@ export type ProjectEventsByDocumentProjectIdAndEventIdManyToManyEdgeDocumentsByE
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<DocumentsOrderBy>>;
   condition?: Maybe<DocumentCondition>;
+};
+
+/** A filter to be used against `Project` object types. All fields are combined with a logical ‘and.’ */
+export type ProjectFilter = {
+  /** Filter by the object’s `metadata` field. */
+  metadata?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<ProjectFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<ProjectFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<ProjectFilter>;
 };
 
 /** An input for mutations affecting `Project` */
@@ -12650,6 +12867,7 @@ export type ProjectPartiesByCreditVintageProjectIdAndIssuerIdManyToManyEdgeCredi
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `ProjectBroker`. */
@@ -12829,6 +13047,7 @@ export type ProjectWalletsByCreditVintageProjectIdAndResellerIdManyToManyEdgeCre
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
@@ -12865,6 +13084,7 @@ export type ProjectWalletsByCreditVintageProjectIdAndTokenizerIdManyToManyEdgeCr
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Project` values. */
@@ -13031,6 +13251,7 @@ export type PurchaseCreditVintagesByTransactionPurchaseIdAndCreditVintageIdArgs 
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /**
@@ -13471,6 +13692,7 @@ export type QueryAllAddressesArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -13519,6 +13741,7 @@ export type QueryAllCreditClassVersionsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditClassVersionsOrderBy>>;
   condition?: Maybe<CreditClassVersionCondition>;
+  filter?: Maybe<CreditClassVersionFilter>;
 };
 
 
@@ -13531,6 +13754,7 @@ export type QueryAllCreditVintagesArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -13579,6 +13803,7 @@ export type QueryAllMetadataGraphsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<MetadataGraphsOrderBy>>;
   condition?: Maybe<MetadataGraphCondition>;
+  filter?: Maybe<MetadataGraphFilter>;
 };
 
 
@@ -13603,6 +13828,7 @@ export type QueryAllMethodologyVersionsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<MethodologyVersionsOrderBy>>;
   condition?: Maybe<MethodologyVersionCondition>;
+  filter?: Maybe<MethodologyVersionFilter>;
 };
 
 
@@ -13663,6 +13889,7 @@ export type QueryAllProjectsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -13699,6 +13926,7 @@ export type QueryAllRetirementsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
+  filter?: Maybe<RetirementFilter>;
 };
 
 
@@ -13711,6 +13939,7 @@ export type QueryAllShaclGraphsArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ShaclGraphsOrderBy>>;
   condition?: Maybe<ShaclGraphCondition>;
+  filter?: Maybe<ShaclGraphFilter>;
 };
 
 
@@ -14375,6 +14604,18 @@ export type RetirementCondition = {
   metadata?: Maybe<Scalars['JSON']>;
 };
 
+/** A filter to be used against `Retirement` object types. All fields are combined with a logical ‘and.’ */
+export type RetirementFilter = {
+  /** Filter by the object’s `metadata` field. */
+  metadata?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<RetirementFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<RetirementFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<RetirementFilter>;
+};
+
 /** An input for mutations affecting `Retirement` */
 export type RetirementInput = {
   id?: Maybe<Scalars['UUID']>;
@@ -14497,6 +14738,18 @@ export type ShaclGraphCondition = {
   updatedAt?: Maybe<Scalars['Datetime']>;
   /** Checks for equality with the object’s `graph` field. */
   graph?: Maybe<Scalars['JSON']>;
+};
+
+/** A filter to be used against `ShaclGraph` object types. All fields are combined with a logical ‘and.’ */
+export type ShaclGraphFilter = {
+  /** Filter by the object’s `graph` field. */
+  graph?: Maybe<JsonFilter>;
+  /** Checks for all expressions in this list. */
+  and?: Maybe<Array<ShaclGraphFilter>>;
+  /** Checks for any expressions in this list. */
+  or?: Maybe<Array<ShaclGraphFilter>>;
+  /** Negates the expression. */
+  not?: Maybe<ShaclGraphFilter>;
 };
 
 /** An input for mutations affecting `ShaclGraph` */
@@ -16213,6 +16466,7 @@ export type UserProjectsByCreatorIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -16312,6 +16566,7 @@ export type UserAddressesByProjectCreatorIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -16367,6 +16622,7 @@ export type UserAddressesByPurchaseUserIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -16378,6 +16634,7 @@ export type UserCreditVintagesByPurchaseUserIdAndCreditVintageIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -16400,6 +16657,7 @@ export type UserProjectsByProjectBrokerSignerIdAndProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -16458,6 +16716,7 @@ export type UserAddressesByProjectCreatorIdAndAddressIdManyToManyEdgeProjectsByA
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Address` values, with data from `Purchase`. */
@@ -16558,6 +16817,7 @@ export type UserCreditClassesByProjectCreatorIdAndCreditClassIdManyToManyEdgePro
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `CreditVintage` values, with data from `Purchase`. */
@@ -16744,6 +17004,7 @@ export type UserPartiesByProjectCreatorIdAndDeveloperIdManyToManyEdgeProjectsByD
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -16780,6 +17041,7 @@ export type UserPartiesByProjectCreatorIdAndIssuerIdManyToManyEdgeProjectsByIssu
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -16816,6 +17078,7 @@ export type UserPartiesByProjectCreatorIdAndLandOwnerIdManyToManyEdgeProjectsByL
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -16852,6 +17115,7 @@ export type UserPartiesByProjectCreatorIdAndOriginatorIdManyToManyEdgeProjectsBy
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -16888,6 +17152,7 @@ export type UserPartiesByProjectCreatorIdAndRegistryIdManyToManyEdgeProjectsByRe
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -16924,6 +17189,7 @@ export type UserPartiesByProjectCreatorIdAndResellerIdManyToManyEdgeProjectsByRe
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Project`. */
@@ -16960,6 +17226,7 @@ export type UserPartiesByProjectCreatorIdAndStewardIdManyToManyEdgeProjectsBySte
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Purchase`. */
@@ -17259,6 +17526,7 @@ export type WalletCreditVintagesByTokenizerIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -17270,6 +17538,7 @@ export type WalletCreditVintagesByResellerIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -17314,6 +17583,7 @@ export type WalletRetirementsByWalletIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
+  filter?: Maybe<RetirementFilter>;
 };
 
 
@@ -17325,6 +17595,7 @@ export type WalletAddressesByPartyWalletIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -17336,6 +17607,7 @@ export type WalletCreditVintagesByAccountBalanceWalletIdAndCreditVintageIdArgs =
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -17369,6 +17641,7 @@ export type WalletProjectsByCreditVintageTokenizerIdAndProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -17413,6 +17686,7 @@ export type WalletProjectsByCreditVintageResellerIdAndProjectIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<ProjectsOrderBy>>;
   condition?: Maybe<ProjectCondition>;
+  filter?: Maybe<ProjectFilter>;
 };
 
 
@@ -17468,6 +17742,7 @@ export type WalletCreditVintagesByTransactionFromWalletIdAndCreditVintageIdArgs 
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -17512,6 +17787,7 @@ export type WalletCreditVintagesByTransactionToWalletIdAndCreditVintageIdArgs = 
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -17534,6 +17810,7 @@ export type WalletAddressesByPurchaseBuyerWalletIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -17545,6 +17822,7 @@ export type WalletCreditVintagesByPurchaseBuyerWalletIdAndCreditVintageIdArgs = 
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 
@@ -17578,6 +17856,7 @@ export type WalletAddressesByRetirementWalletIdAndAddressIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<AddressesOrderBy>>;
   condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -17589,6 +17868,7 @@ export type WalletCreditVintagesByRetirementWalletIdAndCreditVintageIdArgs = {
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Address` values, with data from `Party`. */
@@ -17697,6 +17977,7 @@ export type WalletAddressesByRetirementWalletIdAndAddressIdManyToManyEdgeRetirem
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
+  filter?: Maybe<RetirementFilter>;
 };
 
 /** A condition to be used against `Wallet` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -17781,6 +18062,7 @@ export type WalletCreditClassesByCreditVintageResellerIdAndCreditClassIdManyToMa
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `CreditVintage`. */
@@ -17817,6 +18099,7 @@ export type WalletCreditClassesByCreditVintageTokenizerIdAndCreditClassIdManyToM
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `CreditVintage` values, with data from `AccountBalance`. */
@@ -17916,6 +18199,7 @@ export type WalletCreditVintagesByRetirementWalletIdAndCreditVintageIdManyToMany
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
+  filter?: Maybe<RetirementFilter>;
 };
 
 /** A connection to a list of `CreditVintage` values, with data from `Transaction`. */
@@ -18032,6 +18316,7 @@ export type WalletPartiesByCreditVintageResellerIdAndIssuerIdManyToManyEdgeCredi
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `CreditVintage`. */
@@ -18068,6 +18353,7 @@ export type WalletPartiesByCreditVintageTokenizerIdAndIssuerIdManyToManyEdgeCred
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Party` values, with data from `Purchase`. */
@@ -18220,6 +18506,7 @@ export type WalletProjectsByCreditVintageResellerIdAndProjectIdManyToManyEdgeCre
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Project` values, with data from `CreditVintage`. */
@@ -18256,6 +18543,7 @@ export type WalletProjectsByCreditVintageTokenizerIdAndProjectIdManyToManyEdgeCr
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Purchase` values, with data from `Transaction`. */
@@ -18400,6 +18688,7 @@ export type WalletWalletsByCreditVintageResellerIdAndTokenizerIdManyToManyEdgeCr
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Wallet` values, with data from `CreditVintage`. */
@@ -18436,6 +18725,7 @@ export type WalletWalletsByCreditVintageTokenizerIdAndResellerIdManyToManyEdgeCr
   after?: Maybe<Scalars['Cursor']>;
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
+  filter?: Maybe<CreditVintageFilter>;
 };
 
 /** A connection to a list of `Wallet` values, with data from `Transaction`. */
@@ -18947,22 +19237,6 @@ export type MoreProjectsQuery = (
   )> }
 );
 
-export type ProjectByBatchDenomQueryVariables = Exact<{
-  batchDenom: Scalars['String'];
-}>;
-
-
-export type ProjectByBatchDenomQuery = (
-  { __typename?: 'Query' }
-  & { creditVintageByBatchDenom?: Maybe<(
-    { __typename?: 'CreditVintage' }
-    & { projectByProjectId?: Maybe<(
-      { __typename?: 'Project' }
-      & Pick<Project, 'metadata' | 'handle'>
-    )> }
-  )> }
-);
-
 export type PartyFieldsFragment = (
   { __typename?: 'Party' }
   & Pick<Party, 'id' | 'type' | 'name' | 'description' | 'image'>
@@ -19140,6 +19414,22 @@ export type ProjectByIdQuery = (
         )>> }
       ) }
     )> }
+  )> }
+);
+
+export type ProjectsByMetadataQueryVariables = Exact<{
+  metadata?: Maybe<Scalars['JSON']>;
+}>;
+
+
+export type ProjectsByMetadataQuery = (
+  { __typename?: 'Query' }
+  & { allProjects?: Maybe<(
+    { __typename?: 'ProjectsConnection' }
+    & { nodes: Array<Maybe<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'handle' | 'metadata'>
+    )>> }
   )> }
 );
 
@@ -20447,44 +20737,6 @@ export function useMoreProjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type MoreProjectsQueryHookResult = ReturnType<typeof useMoreProjectsQuery>;
 export type MoreProjectsLazyQueryHookResult = ReturnType<typeof useMoreProjectsLazyQuery>;
 export type MoreProjectsQueryResult = Apollo.QueryResult<MoreProjectsQuery, MoreProjectsQueryVariables>;
-export const ProjectByBatchDenomDocument = gql`
-    query ProjectByBatchDenom($batchDenom: String!) {
-  creditVintageByBatchDenom(batchDenom: $batchDenom) {
-    projectByProjectId {
-      metadata
-      handle
-    }
-  }
-}
-    `;
-
-/**
- * __useProjectByBatchDenomQuery__
- *
- * To run a query within a React component, call `useProjectByBatchDenomQuery` and pass it any options that fit your needs.
- * When your component renders, `useProjectByBatchDenomQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useProjectByBatchDenomQuery({
- *   variables: {
- *      batchDenom: // value for 'batchDenom'
- *   },
- * });
- */
-export function useProjectByBatchDenomQuery(baseOptions: Apollo.QueryHookOptions<ProjectByBatchDenomQuery, ProjectByBatchDenomQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ProjectByBatchDenomQuery, ProjectByBatchDenomQueryVariables>(ProjectByBatchDenomDocument, options);
-      }
-export function useProjectByBatchDenomLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectByBatchDenomQuery, ProjectByBatchDenomQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ProjectByBatchDenomQuery, ProjectByBatchDenomQueryVariables>(ProjectByBatchDenomDocument, options);
-        }
-export type ProjectByBatchDenomQueryHookResult = ReturnType<typeof useProjectByBatchDenomQuery>;
-export type ProjectByBatchDenomLazyQueryHookResult = ReturnType<typeof useProjectByBatchDenomLazyQuery>;
-export type ProjectByBatchDenomQueryResult = Apollo.QueryResult<ProjectByBatchDenomQuery, ProjectByBatchDenomQueryVariables>;
 export const ProjectByHandleDocument = gql`
     query ProjectByHandle($handle: String!) {
   projectByHandle(handle: $handle) {
@@ -20653,6 +20905,44 @@ export function useProjectByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type ProjectByIdQueryHookResult = ReturnType<typeof useProjectByIdQuery>;
 export type ProjectByIdLazyQueryHookResult = ReturnType<typeof useProjectByIdLazyQuery>;
 export type ProjectByIdQueryResult = Apollo.QueryResult<ProjectByIdQuery, ProjectByIdQueryVariables>;
+export const ProjectsByMetadataDocument = gql`
+    query ProjectsByMetadata($metadata: JSON) {
+  allProjects(filter: {metadata: {contains: $metadata}}) {
+    nodes {
+      handle
+      metadata
+    }
+  }
+}
+    `;
+
+/**
+ * __useProjectsByMetadataQuery__
+ *
+ * To run a query within a React component, call `useProjectsByMetadataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectsByMetadataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectsByMetadataQuery({
+ *   variables: {
+ *      metadata: // value for 'metadata'
+ *   },
+ * });
+ */
+export function useProjectsByMetadataQuery(baseOptions?: Apollo.QueryHookOptions<ProjectsByMetadataQuery, ProjectsByMetadataQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProjectsByMetadataQuery, ProjectsByMetadataQueryVariables>(ProjectsByMetadataDocument, options);
+      }
+export function useProjectsByMetadataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectsByMetadataQuery, ProjectsByMetadataQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProjectsByMetadataQuery, ProjectsByMetadataQueryVariables>(ProjectsByMetadataDocument, options);
+        }
+export type ProjectsByMetadataQueryHookResult = ReturnType<typeof useProjectsByMetadataQuery>;
+export type ProjectsByMetadataLazyQueryHookResult = ReturnType<typeof useProjectsByMetadataLazyQuery>;
+export type ProjectsByMetadataQueryResult = Apollo.QueryResult<ProjectsByMetadataQuery, ProjectsByMetadataQueryVariables>;
 export const AllPurchasesByWalletIdDocument = gql`
     query AllPurchasesByWalletId($buyerWalletId: UUID) {
   allPurchases(first: 5, condition: {buyerWalletId: $buyerWalletId}) {

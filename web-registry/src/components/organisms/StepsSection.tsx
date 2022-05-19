@@ -82,7 +82,7 @@ function StepsSection({
           </Title>
         )}
         {descriptionRaw && (
-          <Body size="lg" sx={{ mb: 0 }}>
+          <Body as="div" size="lg" sx={{ mb: 0 }}>
             <BlockContent content={descriptionRaw} />
           </Body>
         )}

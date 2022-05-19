@@ -94,6 +94,7 @@ const EmailSubmitSection: React.FC<Props> = ({ image, altContent }) => {
           {altContent?.header || content?.title}
         </Title>
         <Label
+          as="div"
           sx={{
             color: 'primary.main',
             textAlign: 'center',

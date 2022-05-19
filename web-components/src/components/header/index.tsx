@@ -1,13 +1,11 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import { MenuList, useMediaQuery } from '@mui/material';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import cx from 'clsx';
 import Box from '@mui/material/Box';
 
 import MobileMenu from '../mobile-menu';
-import ContainedButton from '../buttons/ContainedButton';
 import { HeaderMenuHover, HeaderMenuItem } from './HeaderMenuHover';
 
 import { NavLink, NavLinkProps } from './NavLink';
@@ -187,28 +185,28 @@ export default function Header({
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
-  const RegistryLoginBtns: React.FC = () => (
-    <li>
-      {isAuthenticated ? (
-        <Button variant="text" className={styles.loginBtn} onClick={onLogout}>
-          Logout
-        </Button>
-      ) : (
-        <Box display="flex" flexWrap="nowrap" alignItems="center">
-          <Button variant="text" className={styles.loginBtn} onClick={onLogin}>
-            Login
-          </Button>
-          <ContainedButton
-            size="small"
-            className={styles.signUpBtn}
-            onClick={onSignup}
-          >
-            Sign Up
-          </ContainedButton>
-        </Box>
-      )}
-    </li>
-  );
+  // const RegistryLoginBtns: React.FC = () => (
+  //   <li>
+  //     {isAuthenticated ? (
+  //       <Button variant="text" className={styles.loginBtn} onClick={onLogout}>
+  //         Logout
+  //       </Button>
+  //     ) : (
+  //       <Box display="flex" flexWrap="nowrap" alignItems="center">
+  //         <Button variant="text" className={styles.loginBtn} onClick={onLogin}>
+  //           Login
+  //         </Button>
+  //         <ContainedButton
+  //           size="small"
+  //           className={styles.signUpBtn}
+  //           onClick={onSignup}
+  //         >
+  //           Sign Up
+  //         </ContainedButton>
+  //       </Box>
+  //     )}
+  //   </li>
+  // );
 
   const styles = useStyles({ color, borderBottom, fullWidth });
   return (

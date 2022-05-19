@@ -7,8 +7,7 @@ import clsx from 'clsx';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import BackgroundSection from '../../../components/BackgroundSection';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 import {
   CaseStudyConclusionSectionQuery,
@@ -18,20 +17,6 @@ import {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     borderTop: `1px solid ${theme.palette.grey[100]}`,
-  },
-  title: {
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(6),
-    },
-  },
-  description: {
-    lineHeight: '150%',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5.5),
-    },
   },
   withMargin: {
     [theme.breakpoints.down('sm')]: {
@@ -44,17 +29,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   image: {
     borderRadius: '10px',
     width: '100%',
-  },
-  imageTitle: {
-    lineHeight: '150%',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      paddingTop: theme.spacing(3),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-      paddingTop: theme.spacing(4),
-    },
   },
 }));
 
@@ -73,9 +47,13 @@ const query = graphql`
   }
 `;
 
-const ConclusionSection: React.FC<SanityCaseStudyConclusionSection> = ({ _rawDescription, images }) => {
+const ConclusionSection: React.FC<SanityCaseStudyConclusionSection> = ({
+  _rawDescription,
+  images,
+}) => {
   const styles = useStyles();
-  const { bg, sanityCaseStudiesPage: content } = useStaticQuery<CaseStudyConclusionSectionQuery>(query);
+  const { bg, sanityCaseStudiesPage: content } =
+    useStaticQuery<CaseStudyConclusionSectionQuery>(query);
   return (
     <BackgroundSection
       topSection={false}
@@ -89,19 +67,27 @@ const ConclusionSection: React.FC<SanityCaseStudyConclusionSection> = ({ _rawDes
             <div key={i}>
               <Img
                 fluid={img?.image?.image?.asset?.fluid as FluidObject}
-                className={images.length > 1 && i > 0 ? clsx(styles.withMargin, styles.image) : styles.image}
+                className={
+                  images.length > 1 && i > 0
+                    ? clsx(styles.withMargin, styles.image)
+                    : styles.image
+                }
               />
-              {img?.title && <Description className={styles.imageTitle}>{img.title}</Description>}
+              {img?.title && (
+                <Body size="sm" pt={[3, 4]}>
+                  {img.title}
+                </Body>
+              )}
             </div>
           ))}
         </Grid>
         <Grid item xs={12} sm={7}>
-          <Title variant="h2" className={styles.title}>
+          <Title variant="h2" pt={[6, 0]}>
             {content?.conclusionSectionHeader}
           </Title>
-          <Description className={styles.description}>
+          <Body as="div" size="xl" mt={[4, 7]}>
             <BlockContent content={_rawDescription} />
-          </Description>
+          </Body>
         </Grid>
       </Grid>
     </BackgroundSection>

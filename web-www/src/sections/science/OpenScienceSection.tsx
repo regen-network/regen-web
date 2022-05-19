@@ -3,10 +3,8 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import { getFontSize } from 'web-components/lib/theme/sizing';
 import BackgroundSection from '../../components/BackgroundSection';
 import { ScienceOpenScienceSectionQuery } from '../../generated/graphql';
 
@@ -26,28 +24,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
-  title: {
-    lineHeight: '145%',
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(13.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(5.5),
-    },
-  },
-  caption: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      paddingBottom: theme.spacing(0.5),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(1),
-    },
-    fontWeight: 800,
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    color: theme.palette.info.main,
-  },
   slider: {
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(-4),
@@ -55,15 +31,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   green: {
     color: theme.palette.secondary.main,
-  },
-  phaseTitle: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(5.25),
-      paddingBottom: theme.spacing(2),
-    },
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(3),
-    },
   },
 }));
 
@@ -98,25 +65,26 @@ const OpenScienceSection = (): JSX.Element => {
   return (
     <BackgroundSection
       className={styles.root}
-      linearGradient="unset"
+      linearGradient="linear-gradient(180deg, #FFFFFF 50.1%, rgba(255, 255, 255, 0) 92.28%)"
       topSection={false}
       imageData={data.background?.childImageSharp?.fluid}
     >
-      <Title className={styles.caption} variant="h6">
+      <Label mobileSize="xs" sx={{ color: 'info.main' }}>
         {content?.caption}
-      </Title>
-      <Title className={styles.title} variant="h1">
-        {content?.headerStart} <span className={styles.green}>{content?.headerGreen}</span>
+      </Label>
+      <Title variant="h1" mobileVariant="h5" sx={{ pb: [0, 13.5] }}>
+        {content?.headerStart}{' '}
+        <span className={styles.green}>{content?.headerGreen}</span>
       </Title>
       <ResponsiveSlider
         infinite={false}
         className={styles.slider}
         items={content?.phases?.map((phase, index) => (
           <div key={index}>
-            <Title variant="h3" className={styles.phaseTitle}>
+            <Title variant="h3" mobileVariant="h5" pb={[2, 3]}>
               {phase?.title}
             </Title>
-            <Description fontSize={getFontSize('big')}>{phase?.body}</Description>
+            <Body size="lg">{phase?.body}</Body>
           </div>
         ))}
       />

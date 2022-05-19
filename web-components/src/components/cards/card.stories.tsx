@@ -23,6 +23,7 @@ import { StepCard } from 'web-components/lib/components/cards/StepCard';
 import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
 import { QuestionItem } from '../../../lib/components/faq/Question';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
+import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 
 export default {
   title: 'Cards',
@@ -93,16 +94,30 @@ export const monitoredImpactCard = (): JSX.Element => (
 function onClick(): void {}
 
 export const projectCard = (): JSX.Element => (
-  <ProjectCard
-    name="Coorong Project"
-    place={'Adelaide, South Australia, Australia'}
-    area={200}
-    comingSoon={false}
-    areaUnit="hectares"
-    imgSrc="/coorong.png"
-    tag="biodiversity"
-    onClick={onClick}
-  />
+  <>
+    <ProjectCard
+      name="Coorong Project"
+      place={'Adelaide, South Australia, Australia'}
+      area={200}
+      comingSoon={false}
+      areaUnit="hectares"
+      imgSrc="/coorong.png"
+      tag="biodiversity"
+      onClick={onClick}
+    />
+
+    <ProjectCard
+      name="Coorong Project"
+      place={'Adelaide, South Australia, Australia'}
+      area={200}
+      comingSoon={false}
+      areaUnit="hectares"
+      imgSrc="/coorong.png"
+      tag="biodiversity"
+      onClick={onClick}
+      registry={{ name: 'registry', type: 'type' }}
+    />
+  </>
 );
 
 export const purchasedCreditsCard = (): JSX.Element => (
@@ -296,3 +311,13 @@ export const overviewCard = (): JSX.Element => (
 );
 
 export const overviewCardsGroup = (): JSX.Element => <OverviewCards />;
+
+export const resourcesCard = (): JSX.Element => (
+  <ResourcesCard
+    title="Resources"
+    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    link="#"
+    image={{ publicURL: '/coorong.png' }}
+    updated="July 4, 1776"
+  />
+);

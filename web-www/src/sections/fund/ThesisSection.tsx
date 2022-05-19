@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import Section from 'web-components/src/components/section';
-import { TitleDescription } from 'web-components/src/components/text-layouts';
+import { TitleBody } from 'web-components/src/components/text-layouts';
 import { FundThesisSectionQuery } from '../../generated/graphql';
 
 const query = graphql`
@@ -22,10 +22,7 @@ const ThesisSection = (): JSX.Element => {
 
   return (
     <Section>
-      <TitleDescription
-        title={data?.title || ''}
-        description={data?._rawBody}
-      />
+      <TitleBody title={data?.title || ''} body={data?._rawBody} />
     </Section>
   );
 };

@@ -8,7 +8,7 @@ import Section from 'web-components/lib/components/section';
 
 type Props = {
   img: string;
-  /** sets larger larger `minHeight` on mobile to match gatsby `BackgroundSection` */
+  /** sets larger `minHeight` on mobile to match gatsby `BackgroundSection` */
   isBanner?: boolean;
   linearGradient?: string;
   classes?: {
@@ -61,15 +61,22 @@ const BackgroundImgSection: React.FC<Props> = ({ classes, ...props }) => {
   });
 
   return (
-    <div className={props?.linearGradient ? styles.backgroundGradient : ''}>
-      <CardMedia image={props.img} classes={{ root: classes?.root }}>
-        <Section classes={{ root: cx(styles.section, classes?.section) }}>
-          <div className={cx(styles.main, classes && classes.main)}>
-            {props.children}
-          </div>
-        </Section>
-      </CardMedia>
-    </div>
+    // <div className={props?.linearGradient ? styles.backgroundGradient : ''}>
+    <CardMedia
+      image={props.img}
+      classes={{
+        root: cx(classes?.root, {
+          [styles.backgroundGradient]: props?.linearGradient,
+        }),
+      }}
+    >
+      <Section classes={{ root: cx(styles.section, classes?.section) }}>
+        <div className={cx(styles.main, classes && classes.main)}>
+          {props.children}
+        </div>
+      </Section>
+    </CardMedia>
+    // </div>
   );
 };
 

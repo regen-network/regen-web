@@ -12,7 +12,7 @@ import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 export interface ProjectLocationFormValues {
-  'http://schema.org/location': Partial<GeocodeFeature>;
+  'schema:location': Partial<GeocodeFeature>;
 }
 
 const ProjectLocationForm: React.FC<{
@@ -32,8 +32,7 @@ const ProjectLocationForm: React.FC<{
     <Formik
       enableReinitialize
       initialValues={{
-        'http://schema.org/location':
-          initialValues?.['http://schema.org/location'] || {},
+        'schema:location': initialValues?.['schema:location'] || {},
       }}
       validate={async (values: ProjectLocationFormValues) => {
         const errors: FormikErrors<
@@ -75,7 +74,7 @@ const ProjectLocationForm: React.FC<{
                 label="Location"
                 description="Type an address or latitude/longitude coordinates. This is the location that will appear in the project contracts, and on your project page."
                 placeholder="Start typing the location"
-                name="['http://schema.org/location']"
+                name="schema:location"
                 token={mapToken}
               />
             </OnBoardingCard>

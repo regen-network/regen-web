@@ -1,47 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import { Box } from '@mui/material';
 import clsx from 'clsx';
-import { Variant } from '@mui/material/styles/createTypography';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 interface SectionProps {
-  children?: any;
   mdContent: string;
-  className?: string;
   title?: string;
-  titleVariant?: Variant;
-  titleLineHeight?: string;
 }
 
-interface StyleProps {
-  titleLineHeight?: string;
-}
-
-const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
-  sectionPadding: {
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: theme.spacing(37.5),
-      paddingRight: theme.spacing(38.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingLeft: theme.spacing(2.8),
-      paddingRight: theme.spacing(2.8),
-    },
-  },
-  title: props => ({
-    lineHeight: props.titleLineHeight || '130%',
-    maxWidth: theme.spacing(350),
-    margin: '0px auto',
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(21.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(9.5),
-      paddingTop: theme.spacing(18.25),
-    },
-  }),
+const useStyles = makeStyles((theme: Theme) => ({
   text: {
     fontSize: theme.spacing(4.5),
     [theme.breakpoints.down('md')]: {
@@ -94,25 +64,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const MarkdownSection = ({
-  children,
-  mdContent,
-  className,
-  titleLineHeight,
-  titleVariant = 'h2',
-  title,
-}: SectionProps) => {
-  const classes = useStyles({ titleLineHeight });
+const MarkdownSection = ({ mdContent, title }: SectionProps): JSX.Element => {
+  const classes = useStyles();
   return (
-    <>
-      <Title className={clsx(classes.title, classes.sectionPadding)} variant="h1">
+    <Box sx={{ m: '0 auto', maxWidth: 1400, px: [2.8, 38] }}>
+      <Title variant="h1" mobileVariant="h2" sx={{ pt: [18.25, 21.25] }}>
         {title}
       </Title>
       <div
-        className={clsx(classes.sectionPadding, classes.text)}
+        className={clsx(classes.text)}
         dangerouslySetInnerHTML={{ __html: mdContent }}
       />
-    </>
+    </Box>
   );
 };
 

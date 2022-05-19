@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
-import Typography from '@mui/material/Typography';
 
-import Title from '../title';
+import { Body, Title } from '../typography';
 import CreditsIcon from '../icons/CreditsIcon';
+import { Box } from '@mui/material';
 
 export interface CreditInfoProps {
   creditClass: CreditClass;
@@ -46,54 +46,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       )}`,
     },
   }),
-  topBar: {
-    height: '10px',
-    width: '100%',
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    background: '#B9E1C7',
-    borderRadius: '5px 5px 0px 0px',
-  },
-  description: {
-    color: theme.palette.info.dark,
-    whiteSpace: 'pre-wrap',
-    marginTop: theme.spacing(3.75),
-    [theme.breakpoints.up('sm')]: {
-      marginRight: props => (props.background ? theme.spacing(11.75) : 0),
-      fontSize: '1.375rem',
-    },
-  },
-  activities: {
-    color: theme.palette.info.dark,
-    margin: 0,
-    paddingInlineStart: theme.spacing(2.5),
-    listStyle: 'none',
-    marginTop: theme.spacing(4.5),
-  },
-  activity: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    display: 'flex',
-    paddingBottom: theme.spacing(1.5),
-  },
-  bullet: {
-    color: theme.palette.secondary.main,
-    display: 'inline-block',
-    marginLeft: '-0.6rem',
-    fontSize: theme.spacing(2),
-    paddingRight: theme.spacing(1.25),
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(1.75),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(1.25),
-    },
-  },
   icon: {
     marginRight: theme.spacing(2.5),
     [theme.breakpoints.down('sm')]: {
@@ -143,19 +95,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       marginTop: theme.spacing(7),
     },
   },
-  activitiesTitle: {
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: '1.125rem',
-    },
-  },
-  activitiesDesc: {
-    marginLeft: theme.spacing(-2.5),
-    fontSize: theme.spacing(3.5),
-    marginBottom: theme.spacing(1.25),
-  },
 }));
 
 export default function CreditInfo({
@@ -171,7 +110,7 @@ export default function CreditInfo({
     <div className={classes.root}>
       <div className={classes.container}>
         <div className={classes.descriptionTitle}>
-          <Title className={classes.title} variant="h3">
+          <Title variant="h3">
             <span className={classes.icon}>
               <CreditsIcon color={theme.palette.secondary.main} />
             </span>
@@ -180,34 +119,38 @@ export default function CreditInfo({
         </div>
         {creditClass.description && (
           <div className={classes.descriptionItem}>
-            <Typography component="div" className={classes.description}>
+            <Body
+              size="xl"
+              sx={{ mt: 3.75, mr: { sm: background ? 11.75 : 0 } }}
+            >
               {ReactHtmlParser(creditClass.description)}
-            </Typography>
+            </Body>
           </div>
         )}
         <div className={classes.activitiesTitleContainer}>
-          <Title className={classes.activitiesTitle} variant="h4">
+          <Title variant="h4" mobileVariant="h6" sx={{ mt: [null, 3.5] }}>
             {title}
           </Title>
         </div>
         <div className={classes.activitiesItem}>
-          <ul className={classes.activities}>
+          <Box component="ul" sx={{ m: 0, mt: 4.5, paddingInlineStart: 0 }}>
             {creditClass.keyOutcomesActivitiesDesc && (
-              <Typography className={classes.activitiesDesc}>
+              <Body
+                size="xl"
+                sx={theme => ({
+                  ml: theme.spacing(-2.5),
+                  mb: theme.spacing(1.25),
+                })}
+              >
                 {creditClass.keyOutcomesActivitiesDesc}
-              </Typography>
+              </Body>
             )}
             {activities.map((activity, index) => (
-              <Typography
-                component="div"
-                key={index}
-                className={classes.activity}
-              >
-                <div className={classes.bullet}>•</div>
+              <Body key={index} size="lg" mobileSize="sm">
                 <li>{activity}</li>
-              </Typography>
+              </Body>
             ))}
-          </ul>
+          </Box>
         </div>
       </div>
     </div>

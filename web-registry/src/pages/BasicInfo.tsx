@@ -27,8 +27,8 @@ const BasicInfo: React.FC = () => {
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
-      'http://schema.org/name': metadata['http://schema.org/name'],
-      'http://regen.network/size': metadata['http://regen.network/size'],
+      'schema:name': metadata['schema:name'],
+      'regen:size': metadata['regen:size'],
     };
   }
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-mui';
 import { makeStyles } from '@mui/styles';
-import { Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -11,6 +11,7 @@ import DatePickField from 'web-components/lib/components/inputs/DatePickField';
 import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+import { Subtitle } from 'web-components/lib/components/typography';
 
 interface AdditionalityFormProps {
   submit: (values: AdditionalityValues) => Promise<void>;
@@ -42,26 +43,15 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
-  sectionLabel: {
-    marginBottom: theme.spacing(2),
-  },
-  activeContent: {
-    paddingBottom: theme.spacing(2),
-  },
-  contentLabel: {
-    fontWeight: 700,
-    fontSize: theme.spacing(3.5),
-    marginBottom: theme.spacing(1),
-  },
 }));
 
 export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
   const classes = useStyles();
 
-  const Label: React.FC = () => (
-    <Typography variant="h3" className={classes.contentLabel}>
+  const DateLabel: React.FC = () => (
+    <Subtitle size="sm" mb={1}>
       Choose a practice start date
-    </Typography>
+    </Subtitle>
   );
 
   return (
@@ -103,7 +93,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
         return (
           <Form>
             <OnBoardingCard className={classes.card}>
-              <ControlledFormLabel className={classes.sectionLabel}>
+              <ControlledFormLabel>
                 Which regenerative practices have you been applying and for how
                 long?
               </ControlledFormLabel>
@@ -117,8 +107,8 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
                   checked={!!values.rotationalGrazing}
                   tooltip="A managed grazing system where livestock are moved frequently among pasture divisions or paddocks based on forage quality and livestock nutrition needs. Portable fencing allows each paddock to rest and regrow until the next grazing rotation."
                   activeContent={
-                    <div className={classes.activeContent}>
-                      <Label />
+                    <Box pb={2}>
+                      <DateLabel />
                       <Field
                         component={DatePickField}
                         pickerViews={['year', 'month']}
@@ -126,7 +116,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
                         value={values.rotationalGrazingStartDate}
                         type="input"
                       />
-                    </div>
+                    </Box>
                   }
                 />
                 <Field
@@ -138,8 +128,8 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
                   checked={!!values.highDensityGrazing}
                   tooltip="In this form of rotational grazing, grazing animals, at a very high stocking density, graze a management unit for very short period of time."
                   activeContent={
-                    <div className={classes.activeContent}>
-                      <Label />
+                    <Box pb={2}>
+                      <DateLabel />
                       <Field
                         component={DatePickField}
                         pickerViews={['year', 'month']}
@@ -147,7 +137,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
                         value={values.highDensityGrazingStartDate}
                         type="input"
                       />
-                    </div>
+                    </Box>
                   }
                 />
                 <Field
@@ -159,8 +149,8 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
                   checked={!!values.residueGrazing}
                   tooltip="The practice of letting livestock graze crop residue after a crop has been harvested."
                   activeContent={
-                    <div className={classes.activeContent}>
-                      <Label />
+                    <Box pb={2}>
+                      <DateLabel />
                       <Field
                         component={DatePickField}
                         pickerViews={['year', 'month']}
@@ -168,7 +158,7 @@ export const AdditionalityForm: React.FC<AdditionalityFormProps> = props => {
                         value={values.residueGrazingStartDate}
                         type="input"
                       />
-                    </div>
+                    </Box>
                   }
                 />
                 <Field

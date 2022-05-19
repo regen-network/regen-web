@@ -26,14 +26,10 @@ const Media: React.FC = () => {
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
-      'http://regen.network/previewPhoto':
-        metadata['http://regen.network/previewPhoto'],
-      'http://regen.network/galleryPhotos':
-        metadata['http://regen.network/galleryPhotos'],
-      'http://regen.network/landStewardPhoto':
-        metadata['http://regen.network/landStewardPhoto'],
-      'http://regen.network/videoURL':
-        metadata['http://regen.network/videoURL'],
+      'regen:previewPhoto': metadata['regen:previewPhoto'],
+      'regen:galleryPhotos': metadata['regen:galleryPhotos'],
+      'regen:landStewardPhoto': metadata['regen:landStewardPhoto'],
+      'regen:videoURL': metadata['regen:videoURL'],
     };
   }
 

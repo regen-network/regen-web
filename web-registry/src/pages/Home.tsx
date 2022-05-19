@@ -5,7 +5,7 @@ import { Box, CardMedia, useMediaQuery } from '@mui/material';
 import Section from 'web-components/lib/components/section';
 import Modal from 'web-components/lib/components/modal';
 import { Loading } from 'web-components/lib/components/loading';
-import Title from 'web-components/lib/components/title';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { SanityButton } from '../components/atoms';
@@ -51,11 +51,12 @@ const useStyles = makeStyles(theme => ({
     },
   },
   bottomSectionWidth: {
-    maxWidth: theme.spacing(175),
+    maxWidth: theme.spacing(200),
   },
   bottomSection: {
     display: 'flex',
     justifyContent: 'center',
+    paddingBottom: theme.spacing(17.75),
   },
 }));
 
@@ -114,14 +115,14 @@ const Home: React.FC = () => {
             >
               {heroSection?.title}
             </Title>
-            <BlockContent
-              content={heroSection?.bodyRaw}
-              sxWrap={{
-                color: 'primary.main',
-                fontSize: { xs: 16, sm: 22 },
-                lineHeight: '150%',
-              }}
-            />
+            <Body
+              as="div"
+              size="xl"
+              mobileSize="md"
+              sx={{ color: 'primary.main', my: 4 }}
+            >
+              <BlockContent content={heroSection?.bodyRaw} />
+            </Body>
             <SanityButton
               size="large"
               btn={heroSection?.button}

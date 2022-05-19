@@ -1,12 +1,13 @@
 import React from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@mui/styles';
-import Typography from '@mui/material/Typography';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { BackgroundImgSection } from './BackgroundImgSection';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
+import { Body, Title } from 'web-components/lib/components/typography';
+import { SxProps } from '@mui/material';
 
 type Props = {
   img: string;
@@ -17,37 +18,19 @@ type Props = {
   isBanner?: boolean;
   classes?: {
     title?: string;
-    description?: string;
     main?: string;
     section?: string;
+  };
+  sxs?: {
+    title?: SxProps<Theme>;
+    main?: SxProps<Theme>;
+    section?: SxProps<Theme>;
   };
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
   main: {
     justifyContent: 'flex-end',
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(30),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(17),
-    },
-  },
-  title: {
-    color: theme.palette.primary.main,
-    fontWeight: 900,
-  },
-  description: {
-    color: theme.palette.primary.main,
-    marginTop: theme.spacing(5.5),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(22),
-      lineHeight: theme.typography.pxToRem(35.2),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-      lineHeight: theme.typography.pxToRem(25),
-    },
   },
 }));
 
@@ -69,20 +52,27 @@ const HeroTitle: React.FC<Props> = ({ classes, ...props }) => {
       }}
     >
       {props.title && (
-        <Typography variant="h1" className={cx(styles.title, classes?.title)}>
+        <Title variant="h1" sx={{ color: 'primary.main' }}>
           {props.title}
-        </Typography>
+        </Title>
       )}
       {props.descriptionRaw && (
-        <Typography
-          variant="h4"
-          className={cx(styles.description, classes?.description)}
+        <Body
+          as="div"
+          size="xl"
+          sx={{
+            color: 'primary.main',
+            mt: 4.5,
+            '& a': {
+              color: 'info.contrastText',
+            },
+          }}
         >
           <BlockContent
             content={props.descriptionRaw}
             tooltipText={props?.tooltipText || ''}
           />
-        </Typography>
+        </Body>
       )}
     </BackgroundImgSection>
   );

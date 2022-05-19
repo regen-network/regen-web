@@ -2,8 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
-import Description from 'web-components/lib/components/description';
+import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { OptimizedImage } from '../atoms/OptimizedImage';
@@ -49,15 +48,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
-  description: {
-    paddingTop: theme.spacing(4),
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(22),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(18),
-    },
-  },
   imageContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -94,12 +84,12 @@ function MethodologyTopSection({
           />
         </div>
         <div className={styles.text}>
-          <Title variant="h1">
+          <Title as="div" variant="h1">
             <BlockContent content={nameRaw} />
           </Title>
-          <Description className={styles.description}>
-            <BlockContent noYMargin content={descriptionRaw} />
-          </Description>
+          <Body as="div" size="xl" pt={4}>
+            <BlockContent content={descriptionRaw} />
+          </Body>
         </div>
       </div>
     </div>

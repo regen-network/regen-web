@@ -3,7 +3,7 @@ import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Crop } from 'react-image-crop';
 
 import ImageCrop from '../image-crop';
-import Title from '../title';
+import { Title } from '../typography';
 import Modal from './';
 
 export interface CropImageModalProps {

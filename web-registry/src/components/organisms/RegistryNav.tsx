@@ -20,7 +20,7 @@ import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 import DefaultAvatar from '../../assets/avatar.png';
 import { useMoreProjectsQuery } from '../../generated/graphql';
 import { useWallet } from '../../lib/wallet';
-import { chainId } from '../../lib/ledger';
+import { chainId, nctBasket } from '../../lib/ledger';
 
 const RegistryNav: React.FC = () => {
   const navigate = useNavigate();
@@ -98,7 +98,8 @@ const RegistryNav: React.FC = () => {
         pathname,
         title:
           titleAlias[p?.metadata?.['schema:name']] ||
-          p?.metadata?.['schema:name'],
+          p?.metadata?.['schema:name'] ||
+          p?.handle,
         href: `/projects/${p?.handle}`,
         linkComponent: RegistryNavLink,
       })),
@@ -128,11 +129,15 @@ const RegistryNav: React.FC = () => {
   ];
 
   if (chainId) {
-    menuItems.unshift({
-      title: 'NCT',
-      href: '/baskets/eco.uC.NCT',
-    });
-    menuItems.splice(2, 0, {
+    let start = 1;
+    if (nctBasket) {
+      menuItems.unshift({
+        title: 'NCT',
+        href: '/baskets/eco.uC.NCT',
+      });
+      start = 2;
+    }
+    menuItems.splice(start, 0, {
       title: 'Activity',
       href: '/stats/activity',
     });
@@ -175,7 +180,7 @@ const RegistryNav: React.FC = () => {
       color={color}
       transparent={isTransparent}
       absolute={isTransparent}
-      borderBottom={!isTransparent}
+      borderBottom={false} // TODO: there's some bug where this won't change on routes - hardcoded for now
       fullWidth={fullWidthRegExp.test(pathname)}
       pathname={pathname}
       extras={

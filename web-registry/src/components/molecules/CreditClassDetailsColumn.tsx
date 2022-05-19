@@ -4,7 +4,7 @@ import { Avatar } from '@mui/material';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
-import Title from 'web-components/lib/components/title';
+import { Title } from 'web-components/lib/components/typography';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
@@ -37,9 +37,6 @@ const useStyles = makeStyles(theme => ({
       width: '100%',
       padding: theme.spacing(12, 5.5),
     },
-  },
-  title: {
-    marginBottom: theme.spacing(4),
   },
   button: {
     marginTop: theme.spacing(1),
@@ -106,7 +103,7 @@ function CreditClassDetailsColumn({
   return (
     <div className={cx(classes?.root, className)}>
       <Card className={styles.card}>
-        <Title className={styles.title} variant="h4">
+        <Title variant="h4" sx={{ mb: 4 }}>
           Credit Details
         </Title>
         <div className={cx(styles.lineItem, styles.images)}>
@@ -186,7 +183,7 @@ function CreditClassDetailsColumn({
         ] && (
           <OutlinedButton
             size="small"
-            classes={{ root: styles.button }}
+            sx={{ mt: 4, w: 232 }}
             href={
               methodologyVersion?.metadata?.['http://schema.org/url']?.[
                 '@value'

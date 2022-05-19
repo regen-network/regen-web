@@ -1,42 +1,27 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import Title from 'web-components/lib/components/title';
+import { Label, Title } from 'web-components/lib/components/typography';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import { DocumentationTable } from 'web-components/lib/components/table/DocumentationTable';
 import BackgroundSection from '../../components/BackgroundSection';
-import { ResourcesRegistrySectionQuery, SanityDoc, SanityResource } from '../../generated/graphql';
-import { sanityDocsToDocuments, sanityResourcesToCardProps } from '../../util/sanity-transforms';
+import {
+  ResourcesRegistrySectionQuery,
+  SanityDoc,
+  SanityResource,
+} from '../../generated/graphql';
+import {
+  sanityDocsToDocuments,
+  sanityResourcesToCardProps,
+} from '../../util/sanity-transforms';
+import { SxProps } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    marginBottom: theme.spacing(8.5),
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(6.75),
-    },
-  },
   section: {
     borderBottom: `1px solid ${theme.palette.grey[300]}`,
-  },
-  subtitle: {
-    color: theme.palette.info.dark,
-    textTransform: 'uppercase',
-    fontWeight: 800,
-    letterSpacing: '1px',
-    margin: theme.spacing(8, 0),
-    '&:last-of-type': {
-      margin: theme.spacing(10, 0, 8),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
   },
   table: {
     border: `2px solid ${theme.palette.secondary.contrastText}`,
@@ -100,6 +85,13 @@ const RegistrySection = (): JSX.Element => {
   const data = useStaticQuery<ResourcesRegistrySectionQuery>(query);
   const content = data?.sanityResourcesPage?.registrySection;
 
+  const sxs = {
+    btn: {
+      color: 'info.dark',
+      my: 8,
+    } as SxProps,
+  };
+
   return (
     <BackgroundSection
       className={styles.section}
@@ -107,22 +99,23 @@ const RegistrySection = (): JSX.Element => {
       imageData={data?.background?.childImageSharp?.fluid}
       topSection={false}
     >
-      <Title className={styles.title} variant="h3" align="left">
+      <Title variant="h3" align="left" sx={{ mb: [6.75, 8.5] }}>
         {content?.header}
       </Title>
       {content?.subsections?.map((sub, i) => (
         <React.Fragment key={i}>
-          <Typography variant="h1" className={styles.subtitle}>
-            {sub?.title}
-          </Typography>
-          <ResourceCardsSlider items={sanityResourcesToCardProps(sub?.cards as SanityResource[])} />
+          <Label sx={sxs.btn}>{sub?.title}</Label>
+          <ResourceCardsSlider
+            items={sanityResourcesToCardProps(sub?.cards as SanityResource[])}
+          />
         </React.Fragment>
       ))}
-      <Typography variant="h1" className={styles.subtitle}>
-        {content?.documentTableTitle}
-      </Typography>
+      <Label sx={sxs.btn}>{content?.documentTableTitle}</Label>
       <Box className={styles.table}>
-        <DocumentationTable canClickRow rows={sanityDocsToDocuments(content?.documents as SanityDoc[])} />
+        <DocumentationTable
+          canClickRow
+          rows={sanityDocsToDocuments(content?.documents as SanityDoc[])}
+        />
       </Box>
     </BackgroundSection>
   );

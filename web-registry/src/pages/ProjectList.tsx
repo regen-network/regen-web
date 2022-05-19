@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { Typography } from '@mui/material';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Body } from 'web-components/lib/components/typography';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
 import {
@@ -13,16 +13,6 @@ import {
 } from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
-  subtitle: {
-    paddingTop: theme.spacing(4),
-    textAlign: 'center',
-    fontSize: theme.spacing(4),
-    color: theme.palette.info.dark,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4.5),
-      paddingTop: theme.spacing(5),
-    },
-  },
   cards: {
     display: 'flex',
     flexDirection: 'column',
@@ -94,9 +84,9 @@ const ProjectList: React.FC = () => {
       title={isFirstProject ? 'Create a Project' : 'Projects'}
     >
       {isFirstProject && (
-        <Typography className={classes.subtitle}>
+        <Body size="lg" align="center" sx={{ pt: [4, 5] }}>
           Get started with your first project.
-        </Typography>
+        </Body>
       )}
       <div className={classes.cards}>
         {/* TODO: Existing Projects. see regen-network/regen-registry#360 */}

@@ -27,14 +27,10 @@ const Story: React.FC = () => {
   if (data?.projectById?.metadata) {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
-      'http://regen.network/landStory':
-        metadata['http://regen.network/landStory'],
-      'http://regen.network/landStewardStory':
-        metadata['http://regen.network/landStory'],
-      'http://regen.network/landStewardStoryTitle':
-        metadata['http://regen.network/landStewardStoryTitle'],
-      'http://regen.network/projectQuote':
-        metadata['http://regen.network/projectQuote'],
+      'regen:landStory': metadata['regen:landStory'],
+      'regen:landStewardStory': metadata['regen:landStory'],
+      'regen:landStewardStoryTitle': metadata['regen:landStewardStoryTitle'],
+      'regen:projectQuote': metadata['regen:projectQuote'],
     };
   }
 

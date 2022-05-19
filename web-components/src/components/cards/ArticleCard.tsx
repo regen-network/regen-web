@@ -2,9 +2,10 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import MediaCard from './MediaCard';
-import Description from '../description';
 import OutlinedButton from '../buttons/OutlinedButton';
 import PlayIcon from '../icons/PlayIcon';
+import { Body } from '../typography';
+import { Box } from '@mui/material';
 
 function getBtnText(type?: string | null): string {
   switch (type) {
@@ -31,35 +32,6 @@ export interface ArticleCardProps {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  description: {
-    flex: '1 0 auto',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-      padding: `${theme.spacing(2.5)} ${theme.spacing(4)}`,
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-      padding: `${theme.spacing(2)} ${theme.spacing(5)}`,
-    },
-  },
-  author: {
-    fontWeight: 'bold',
-  },
-  button: {
-    marginBottom: theme.spacing(7.5),
-    maxWidth: theme.spacing(50),
-    [theme.breakpoints.down('sm')]: {
-      marginRight: theme.spacing(4),
-      marginLeft: theme.spacing(4),
-    },
-    [theme.breakpoints.up('sm')]: {
-      marginRight: theme.spacing(5),
-      marginLeft: theme.spacing(5),
-    },
-  },
-  separator: {
-    fontWeight: 100,
-  },
   play: {
     background: theme.palette.primary.main,
     borderRadius: '50%',
@@ -104,16 +76,25 @@ export default function ArticleCard({
           <PlayIcon className={styles.icon} />
         </div>
       )}
-      <Description className={styles.description}>
-        <span className={styles.author}>{author}</span>
-        <span className={styles.separator}>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+      <Body size="sm" sx={{ flex: '1 0 auto', py: [2.5, 2], px: [4, 5] }}>
+        <Box component="span" sx={{ fontWeight: 'bold' }}>
+          {author}
+        </Box>
+        <Box component="span" sx={{ fontWeight: 100 }}>
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+        </Box>
         <span>{date}</span>
-      </Description>
+      </Body>
       <OutlinedButton
         size="small"
-        className={styles.button}
         href={url}
         target="_blank"
+        sx={{
+          maxWidth: 200,
+          mt: 4,
+          mb: 7.5,
+          mx: [4, 5],
+        }}
       >
         {getBtnText(type)}
       </OutlinedButton>

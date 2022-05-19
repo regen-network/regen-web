@@ -2,13 +2,11 @@ import React, { useCallback, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
-import { makeStyles } from '@mui/styles';
 import Link from '@mui/material/Link';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Body } from 'web-components/lib/components/typography';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import Description from 'web-components/lib/components/description';
 import Banner from 'web-components/lib/components/banner';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import UserProfileForm, {
@@ -20,19 +18,6 @@ import {
   useUpdateUserByEmailMutation,
   useUpdatePartyByIdMutation,
 } from '../generated/graphql';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  resend: {
-    cursor: 'pointer',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(33, 0, 0),
-      fontSize: theme.spacing(4.5),
-    },
-  },
-}));
 
 const messageExpired: string = 'Access expired.';
 
@@ -144,16 +129,15 @@ function UserProfile(): JSX.Element {
     }
   }
 
-  const classes = useStyles();
   return (
     <OnBoardingSection formContainer title={title}>
       {success === 'true' && <Banner text="Email address confirmed!" />}
       {success === 'false' && message === messageExpired && (
         <>
           <OnBoardingCard>
-            <Description className={classes.resend}>
+            <Body size="xl" sx={{ pt: [33, 0], cursor: 'pointer' }}>
               <Link onClick={resendEmail}>Resend</Link> confirmation email.
-            </Description>
+            </Body>
           </OnBoardingCard>
           {!isSubmitting && error instanceof Object && (
             <ErrorBanner text={error.toString()} />

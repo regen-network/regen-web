@@ -16,14 +16,14 @@ import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 export interface BasicInfoFormValues {
-  'http://schema.org/name': string;
-  'http://regen.network/size': {
-    'http://qudt.org/1.1/schema/qudt#numericValue': {
-      '@type': 'http://www.w3.org/2001/XMLSchema#double';
+  'schema:name': string;
+  'regen:size': {
+    'qudt:numericValue': {
+      '@type': 'xsd:double';
       '@value'?: number | string;
     };
-    'http://qudt.org/1.1/schema/qudt#unit': {
-      '@type': string;
+    'qudt:unit': {
+      '@type': 'qudt:Unit';
       '@value': string;
     };
   };
@@ -84,18 +84,15 @@ const BasicInfoForm: React.FC<{
       enableReinitialize
       validateOnMount
       initialValues={{
-        'http://schema.org/name':
-          initialValues?.['http://schema.org/name'] || '',
-        'http://regen.network/size': initialValues?.[
-          'http://regen.network/size'
-        ] || {
-          'http://qudt.org/1.1/schema/qudt#numericValue': {
-            '@type': 'http://www.w3.org/2001/XMLSchema#double',
+        'schema:name': initialValues?.['schema:name'] || '',
+        'regen:size': initialValues?.['regen:size'] || {
+          'qudt:numericValue': {
+            '@type': 'xsd:double',
             '@value': undefined,
           },
-          'http://qudt.org/1.1/schema/qudt#unit': {
-            '@type': 'http://qudt.org/1.1/schema/qudt#unit',
-            '@value': 'http://qudt.org/1.1/vocab/unit#HA',
+          'qudt:unit': {
+            '@type': 'qudt:Unit',
+            '@value': 'unit:HA',
           },
         },
       }}
@@ -106,13 +103,13 @@ const BasicInfoForm: React.FC<{
           const report = await validate(
             graphData.shaclGraphByUri.graph,
             projectPageData,
-            'http://regen.network/ProjectPageBasicInfoGroup',
+            'regen:ProjectPageBasicInfoGroup',
           );
           for (const result of report.results) {
             const path: keyof BasicInfoFormValues = result.path.value;
-            if (path === 'http://regen.network/size') {
+            if (path === 'regen:size') {
               errors[path] = {
-                'http://qudt.org/1.1/schema/qudt#numericValue': {
+                'qudt:numericValue': {
                   '@value': requiredMessage,
                 },
               };
@@ -144,7 +141,7 @@ const BasicInfoForm: React.FC<{
                 label="Project name"
                 description="This is the name of the farm, ranch, property, or conservation project."
                 placeholder="i.e. Sunnybrook Farms"
-                name="['http://schema.org/name']"
+                name="schema:name"
               />
               <div className={classes.parcelSizeContainer}>
                 <InputLabel>Size in hectares or acres</InputLabel>
@@ -153,20 +150,20 @@ const BasicInfoForm: React.FC<{
                     className={clsx(classes.parcelField, classes.parcelSize)}
                     component={TextField}
                     type="number"
-                    name="['http://regen.network/size'].['http://qudt.org/1.1/schema/qudt#numericValue'].@value"
+                    name="regen:size.qudt:numericValue.@value"
                     defaultStyle={false}
                   />
                   <Field
                     className={clsx(classes.parcelField, classes.parcelUnit)}
                     component={SelectTextField}
-                    name="['http://regen.network/size'].['http://qudt.org/1.1/schema/qudt#unit'].@value"
+                    name="regen:size.qudt:unit.@value"
                     options={[
                       {
-                        value: 'http://qudt.org/1.1/vocab/unit#HA',
+                        value: 'unit:HA',
                         label: 'Hectares',
                       },
                       {
-                        value: 'http://qudt.org/1.1/vocab/unit#AC',
+                        value: 'unit:AC',
                         label: 'Acres',
                       },
                     ]}

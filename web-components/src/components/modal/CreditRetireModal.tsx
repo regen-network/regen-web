@@ -8,7 +8,6 @@ interface CreditRetireModalProps extends RegenModalProps, CreditRetireProps {}
 export const title = 'Retire';
 
 const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
-  holder,
   batchDenom,
   availableTradableAmount,
   mapboxToken,
@@ -18,7 +17,6 @@ const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
 }) => (
   <FormModalTemplate title={title} open={open} onClose={onClose}>
     <CreditRetireForm
-      holder={holder}
       availableTradableAmount={availableTradableAmount}
       batchDenom={batchDenom}
       mapboxToken={mapboxToken}

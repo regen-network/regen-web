@@ -21,10 +21,10 @@ import { useProjectEditContext } from '../pages/ProjectEdit';
 
 type roleIdField = 'developerId' | 'stewardId' | 'landOwnerId' | 'originatorId';
 const rolesMap: { [key in EntityFieldName]: roleIdField } = {
-  'http://regen.network/projectDeveloper': 'developerId',
-  'http://regen.network/landSteward': 'stewardId',
-  'http://regen.network/landOwner': 'landOwnerId',
-  'http://regen.network/projectOriginator': 'originatorId',
+  'regen:projectDeveloper': 'developerId',
+  'regen:landSteward': 'stewardId',
+  'regen:landOwner': 'landOwnerId',
+  'regen:projectOriginator': 'originatorId',
 };
 
 function getInitialValues(value: any): any {
@@ -51,17 +51,13 @@ const EntityDisplay: React.FC = () => {
       const metadata = data.projectById.metadata;
 
       setInitialValues({
-        'http://regen.network/landOwner': getInitialValues(
-          metadata['http://regen.network/landOwner'],
+        'regen:landOwner': getInitialValues(metadata['regen:landOwner']),
+        'regen:landSteward': getInitialValues(metadata['regen:landSteward']),
+        'regen:projectDeveloper': getInitialValues(
+          metadata['regen:projectDeveloper'],
         ),
-        'http://regen.network/landSteward': getInitialValues(
-          metadata['http://regen.network/landSteward'],
-        ),
-        'http://regen.network/projectDeveloper': getInitialValues(
-          metadata['http://regen.network/projectDeveloper'],
-        ),
-        'http://regen.network/projectOriginator': getInitialValues(
-          metadata['http://regen.network/projectOriginator'],
+        'regen:projectOriginator': getInitialValues(
+          metadata['regen:projectOriginator'],
         ),
       });
     }
@@ -82,16 +78,16 @@ const EntityDisplay: React.FC = () => {
           const roleIdFieldName: roleIdField =
             rolesMap[role as EntityFieldName];
           const roleId = data.projectById[roleIdFieldName];
-          if (value?.['http://regen.network/showOnProjectPage'] && roleId) {
+          if (value?.['regen:showOnProjectPage'] && roleId) {
             await updatePartyById({
               variables: {
                 input: {
                   id: roleId,
                   partyPatch: {
-                    description: value['http://schema.org/description'],
+                    description: value['schema:description'],
                     image: isIndividual(value)
-                      ? value['http://schema.org/image']?.['@value']
-                      : value['http://schema.org/logo']?.['@value'],
+                      ? value['schema:image']?.['@value']
+                      : value['schema:logo']?.['@value'],
                   },
                 },
               },

@@ -30,7 +30,7 @@ import { setPageView } from '../../lib/ga';
 import getApiUri from '../../lib/apiUri';
 import { buildIssuanceModalData } from '../../lib/transform';
 import { useLedger } from '../../ledger';
-import { chainId } from '../../lib/ledger';
+import { chainId } from '../../ledger';
 import { useWallet } from '../../lib/wallet';
 import {
   Documentation,

@@ -6,7 +6,7 @@ import { OfflineSigner } from '@cosmjs/proto-signing';
 
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { ledgerRPCUri, ledgerRESTUri, chainId } from './ledger';
+import { ledgerRPCUri, ledgerRESTUri, chainId } from '../ledger';
 
 const AUTO_CONNECT_WALLET_KEY = 'auto_connect_wallet';
 const KEPLR_WALLET_EXTENSION = 'keplr-wallet-extension';

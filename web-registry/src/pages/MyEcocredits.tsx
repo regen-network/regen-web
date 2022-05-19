@@ -46,7 +46,7 @@ import {
   useBasketTokens,
 } from '../hooks';
 import { BasketTokens } from '../hooks/useBasketTokens';
-import useMsgClient from '../hooks/useMsgClient';
+import { useLedger, useMsgClient } from '../ledger';
 import {
   PortfolioTemplate,
   WithBasketsProps,
@@ -58,7 +58,6 @@ import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg'
 import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-basket.svg';
 // import { ReactComponent as WithdrawIBC } from '../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
-import { useLedger } from '../ledger';
 import { getHashUrl } from '../lib/block-explorer';
 
 const useStyles = makeStyles((theme: Theme) => ({

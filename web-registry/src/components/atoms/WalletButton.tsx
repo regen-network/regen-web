@@ -5,7 +5,7 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { useWallet } from '../../lib/wallet';
-import { chainId } from '../../lib/ledger';
+import { chainId } from '../../ledger';
 import Keplr from '../../assets/keplr.png';
 
 const useStyles = makeStyles((theme: Theme) => ({

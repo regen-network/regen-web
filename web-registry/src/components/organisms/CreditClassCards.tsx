@@ -14,7 +14,7 @@ import {
 
 import { AllCreditClassQuery } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';
-import { onChainClassRegExp } from '../../lib/ledger';
+import { onChainClassRegExp } from '../../ledger';
 
 type Props = {
   btnText: string;

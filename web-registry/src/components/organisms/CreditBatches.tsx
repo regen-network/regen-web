@@ -10,7 +10,7 @@ import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
-import { ledgerRESTUri } from '../../lib/ledger';
+import { ledgerRESTUri } from '../../ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
 

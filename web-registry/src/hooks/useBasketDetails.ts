@@ -12,8 +12,8 @@ import {
   QueryBatchInfoResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 
-import useBankQuery from './useBankQuery';
-import useBasketQuery from './useBasketQuery';
+import { useBankQuery, useBasketQuery } from '../ledger';
+
 import useQueryListClassInfo from './useQueryListClassInfo';
 import useQueryListBatchInfo from './useQueryListBatchInfo';
 import { useProjectsByMetadataLazyQuery } from '../generated/graphql';

@@ -1,4 +1,4 @@
-import getApiUri from './apiUri';
+import getApiUri from '../lib/apiUri';
 
 export const chainId = process.env.REACT_APP_LEDGER_CHAIN_ID;
 export const nctBasket = process.env.REACT_APP_NCT_BASKET;

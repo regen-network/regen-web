@@ -20,7 +20,7 @@ import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 import DefaultAvatar from '../../assets/avatar.png';
 import { useMoreProjectsQuery } from '../../generated/graphql';
 import { useWallet } from '../../lib/wallet';
-import { chainId, nctBasket } from '../../lib/ledger';
+import { chainId, nctBasket } from '../../ledger';
 
 const RegistryNav: React.FC = () => {
   const navigate = useNavigate();

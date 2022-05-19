@@ -26,7 +26,7 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import { formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { ledgerRESTUri } from '../../lib/ledger';
+import { ledgerRESTUri } from '../../ledger';
 import { getHashUrl } from '../../lib/block-explorer';
 import { getEcocreditTxs } from '../../lib/ecocredit';
 

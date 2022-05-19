@@ -1,20 +1,20 @@
 import { useState, useEffect, useCallback } from 'react';
 
 // TODO: move query client creation to the ledger context ?
-import { QueryClientImpl } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
-import { useLedger } from '../ledger';
+import { useLedger } from '../context/LedgerContext';
 import {
   // types
-  BankQueryClient,
-  BankQueryProps,
-  BankQueryResponse,
+  BasketQueryClient,
+  BasketQueryProps,
   // queries
-  queryAllBalances,
-  queryBalance,
-  queryDenomMetadata,
-  queryDenomsMetadata,
-} from '../lib/bank';
+  queryBasket,
+  queryBasketBalances,
+  queryBaskets,
+  queryBasketBalance,
+  BasketQueryResponse,
+} from '../api/queries/basket';
 
 // TODO - this hook is still missing batch query functionality
 // TODO - this hook is still missing lazy query functionality
@@ -25,12 +25,12 @@ type QueryOutput<T> = {
   error: Error | undefined;
 };
 
-export default function useBankQuery<T extends BankQueryResponse>({
+export default function useBasketQuery<T extends BasketQueryResponse>({
   query,
   params,
-}: BankQueryProps): QueryOutput<T> {
+}: BasketQueryProps): QueryOutput<T> {
   const { api } = useLedger();
-  const [client, setClient] = useState<BankQueryClient>();
+  const [client, setClient] = useState<BasketQueryClient>();
 
   const [data, setData] = useState<T>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -43,23 +43,23 @@ export default function useBankQuery<T extends BankQueryResponse>({
     setClient(new QueryClientImpl(api.queryClient));
   }, [api?.queryClient, client]);
 
-  const allBalances = useCallback(
-    (client, params) => queryAllBalances({ client, request: params }),
+  const basket = useCallback(
+    (client, params) => queryBasket({ client, request: params }),
     [],
   );
 
-  const balance = useCallback(
-    (client, params) => queryBalance({ client, request: params }),
+  const baskets = useCallback(
+    (client, params) => queryBaskets({ client, request: params }),
     [],
   );
 
-  const denomMetadata = useCallback(
-    (client, params) => queryDenomMetadata({ client, request: params }),
+  const basketBalances = useCallback(
+    (client, params) => queryBasketBalances({ client, request: params }),
     [],
   );
 
-  const denomsMetadata = useCallback(
-    (client, params) => queryDenomsMetadata({ client, request: params }),
+  const basketBalance = useCallback(
+    (client, params) => queryBasketBalance({ client, request: params }),
     [],
   );
 
@@ -72,22 +72,22 @@ export default function useBankQuery<T extends BankQueryResponse>({
 
     let response;
     switch (query) {
-      case 'allBalances':
-        response = allBalances(client, params);
+      case 'basket':
+        response = basket(client, params);
         break;
-      case 'balance':
-        response = balance(client, params);
+      case 'baskets':
+        response = baskets(client, params);
         break;
-      case 'denomMetadata':
-        response = denomMetadata(client, params);
+      case 'basketBalances':
+        response = basketBalances(client, params);
         break;
-      case 'denomsMetadata':
-        response = denomsMetadata(client, params);
+      case 'basketBalance':
+        response = basketBalance(client, params);
         break;
       default:
         setError(
           new Error(
-            'You need to provide a valid bank query name (ie. allBalances)',
+            'You need to provide a valid basket query name (ie. basketBalances)',
           ),
         );
         setLoading(false);
@@ -107,10 +107,10 @@ export default function useBankQuery<T extends BankQueryResponse>({
     data,
     loading,
     error,
-    allBalances,
-    balance,
-    denomMetadata,
-    denomsMetadata,
+    basket,
+    baskets,
+    basketBalances,
+    basketBalance,
   ]);
 
   return { data, loading, error };

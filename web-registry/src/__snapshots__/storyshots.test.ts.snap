@@ -15341,6 +15341,7 @@ exports[`Storyshots Forms Credit Batch Recipients Form 1`] = `
                 "h5": "h5",
                 "h6": "h6",
                 "textLarge": "p",
+                "textMedium": "p",
                 "textSmall": "p",
                 "textXLarge": "p",
                 "textXSmall": "p",
@@ -15587,6 +15588,9 @@ exports[`Storyshots Forms Credit Batch Recipients Form 1`] = `
           },
           "textLarge": Object {
             "fontSize": "1.125rem",
+          },
+          "textMedium": Object {
+            "fontSize": "1rem",
           },
           "textSmall": Object {
             "fontSize": "0.875rem",

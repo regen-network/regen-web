@@ -121,7 +121,7 @@ const LaunchInfoSection: React.FC = () => {
               year: 'numeric',
             })}
           </Subtitle>
-          <Body size="xl">
+          <Body as="div" size="xl">
             <BlockContent content={data?._rawCardBody} />
           </Body>
           <Box

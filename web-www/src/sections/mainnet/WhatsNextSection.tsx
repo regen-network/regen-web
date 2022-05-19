@@ -71,6 +71,7 @@ const WhatsNextSection: React.FC = () => {
           {content?.title}
         </Title>
         <Body
+          as="div"
           size="xl"
           color="primary"
           align="center"

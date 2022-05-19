@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 
-import { BatchBasicsFormValues } from 'web-components/lib/components/form/BatchBasicsForm';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import Stepper from 'web-components/lib/components/stepper';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
-import { BatchBasicsForm } from '../components/organisms/BatchBasicsForm';
+import {
+  BatchBasicsForm,
+  BatchBasicsFormValues,
+} from '../components/organisms/BatchBasicsForm';
 import { chainId } from '../lib/ledger';
 import { useWallet } from '../lib/wallet';
 

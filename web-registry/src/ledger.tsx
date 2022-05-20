@@ -17,7 +17,9 @@ interface ConnectParams {
   signer?: OfflineSigner;
 }
 
-async function connect(options?: ConnectParams): Promise<RegenApi | undefined> {
+export async function connect(
+  options?: ConnectParams,
+): Promise<RegenApi | undefined> {
   // Create a new instance of the RegenApi class.
   const api = await RegenApi.connect({
     // RegenApi only supports using the Tendermint RPC to interact with a node for now.

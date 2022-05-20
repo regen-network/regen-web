@@ -55,6 +55,7 @@ import {
 import { client } from '../../sanity';
 import { getBatchesWithSupply, getBatchesTotal } from '../../lib/ecocredit';
 import { getMetadata } from '../../lib/metadata-graph';
+// import { getBatchesWithSupplyForDenoms } from '../../lib/ecocredit/api';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,

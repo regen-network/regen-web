@@ -28,6 +28,7 @@ export interface BatchInfo {
   start_date: string | Date;
   end_date: string | Date;
   project_location: string;
+  txhash?: string;
 }
 
 export interface QueryBatchesResponse {

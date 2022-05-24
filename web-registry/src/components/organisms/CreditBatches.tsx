@@ -16,7 +16,9 @@ import { getBatchesWithSupply } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
 
 interface CreditBatchProps {
-  creditClassId?: string;
+  creditClassId?: string | null;
+  creditBatches?: BatchInfoWithSupply[];
+  hideProjectLocation?: boolean;
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
@@ -90,6 +92,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const CreditBatches: React.FC<CreditBatchProps> = ({
   creditClassId,
+  creditBatches,
+  hideProjectLocation,
   titleAlign = 'center',
 }) => {
   const styles = useStyles();
@@ -97,21 +101,27 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   let columnsToShow = [...headCells];
 
   useEffect(() => {
-    const fetchData = (): void => {
+    if (!ledgerRESTUri) return;
+    if (!creditBatches) {
       getBatchesWithSupply(creditClassId)
         .then(sortableBatches => {
           setBatches(sortableBatches.data);
         })
         .catch(console.error); // eslint-disable-line no-console
-    };
+    } else {
+      setBatches(creditBatches);
+    }
+  }, [creditBatches, creditClassId]);
 
-    if (!ledgerRESTUri) return;
-    fetchData();
-  }, [creditClassId]);
-
-  // We hide the classId column if it creditClassId provided (redundant)
+  // We hide the classId column if creditClassId provided (redundant)
   if (creditClassId) {
     columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'class_id');
+  }
+  // Ditto for project location
+  if (hideProjectLocation) {
+    columnsToShow = headCells.filter(
+      (hc: HeadCell) => hc.id !== 'project_location',
+    );
   }
 
   return ledgerRESTUri && batches.length > 0 ? (

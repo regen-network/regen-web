@@ -142,7 +142,7 @@ function ProjectDetails(): JSX.Element {
       }
     };
     fetch();
-  }, [vcsProjectId, project]);
+  }, [project?.creditClassByCreditClassId?.onChainId, vcsProjectId]);
 
   const { data: projectsData } = useMoreProjectsQuery();
 

@@ -105,7 +105,7 @@ type LocationType = {
 };
 
 export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
-  ({ mapboxToken, arrayPrefix, arrayIndex }) => {
+  ({ mapboxToken, arrayPrefix = '', arrayIndex }) => {
     const styles = useStyles();
     const { values, setFieldValue } = useFormikContext<
       RetireFormValues | RetireFormValuesArray
@@ -119,9 +119,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
     const { country, stateProvince, postalCode } = item;
 
     useEffect(() => {
-      const retirementLocationName = arrayPrefix
-        ? `${arrayPrefix}retirementLocation`
-        : 'retirementLocation';
+      const retirementLocationName = `${arrayPrefix}retirementLocation`;
 
       const setRetirementLocation = async ({
         country,
@@ -153,7 +151,6 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
       setFieldValue,
       mapboxToken,
       arrayPrefix,
-      arrayIndex,
     ]);
 
     return (
@@ -162,7 +159,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
           Transaction note
         </Title>
         <Field
-          name={arrayPrefix ? `${arrayPrefix}note` : 'note'}
+          name={`${arrayPrefix}note`}
           type="text"
           label="Add retirement transaction details (stored in the tx memo)"
           component={TextField}
@@ -193,7 +190,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
         <Field
           component={ControlledTextField}
           label="Postal Code"
-          name={arrayPrefix ? `${arrayPrefix}postalCode` : 'postalCode'}
+          name={`${arrayPrefix}postalCode`}
           optional
         />
       </>
@@ -204,13 +201,13 @@ export const CreditRetireFields = ({
   batchDenom,
   availableTradableAmount,
   mapboxToken,
-  arrayPrefix,
+  arrayPrefix = '',
   arrayIndex,
 }: CreditRetireFieldsProps): JSX.Element => {
   return (
     <>
       <AmountField
-        name={arrayPrefix ? `${arrayPrefix}retiredAmount` : 'retiredAmount'}
+        name={`${arrayPrefix}retiredAmount`}
         label="Amount retired"
         availableAmount={availableTradableAmount}
         denom={batchDenom}

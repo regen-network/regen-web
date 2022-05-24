@@ -359,7 +359,7 @@ function ProjectTopSection({
           <CreditBatches
             creditClassId={project?.creditClassByCreditClassId?.onChainId}
             creditBatches={batchData.batches}
-            hideProjectLocation
+            projectPage
           />
         </Box>
       )}

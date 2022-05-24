@@ -116,9 +116,13 @@ function ProjectDetails(): JSX.Element {
 
     const fetch = async (): Promise<void> => {
       try {
-        const { data: batches } = await getBatchesWithSupply(
-          project?.creditClassByCreditClassId?.onChainId,
-        );
+        let batches: BatchInfoWithSupply[] = [];
+        if (project?.creditClassByCreditClassId?.onChainId) {
+          const { data } = await getBatchesWithSupply(
+            project?.creditClassByCreditClassId?.onChainId,
+          );
+          batches = data;
+        }
 
         const filteredBatches = await asyncFilter(
           batches,

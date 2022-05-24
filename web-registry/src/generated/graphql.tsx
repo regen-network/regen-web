@@ -19357,13 +19357,7 @@ export type ProjectByHandleQuery = (
     )>, partyByResellerId?: Maybe<(
       { __typename?: 'Party' }
       & PartyFieldsFragment
-    )>, creditVintagesByProjectId: (
-      { __typename?: 'CreditVintagesConnection' }
-      & { nodes: Array<Maybe<(
-        { __typename?: 'CreditVintage' }
-        & Pick<CreditVintage, 'batchDenom'>
-      )>> }
-    ), documentsByProjectId: (
+    )>, documentsByProjectId: (
       { __typename?: 'DocumentsConnection' }
       & { nodes: Array<Maybe<(
         { __typename?: 'Document' }
@@ -20789,11 +20783,6 @@ export const ProjectByHandleDocument = gql`
     }
     partyByResellerId {
       ...partyFields
-    }
-    creditVintagesByProjectId {
-      nodes {
-        batchDenom
-      }
     }
     documentsByProjectId {
       nodes {

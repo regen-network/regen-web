@@ -22,7 +22,7 @@ import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
-import { ProjectCreditBatchesTable } from '.';
+import { CreditBatches } from '.';
 import { ProjectBatchTotals, AdditionalProjectMetadata } from '../molecules';
 import { ProjectTopLink } from '../atoms';
 
@@ -356,7 +356,11 @@ function ProjectTopSection({
           <Title variant="h3" sx={{ pb: 8 }}>
             Credit Batches
           </Title>
-          <ProjectCreditBatchesTable batches={batchData.batches} />
+          <CreditBatches
+            creditClassId={project?.creditClassByCreditClassId?.onChainId}
+            creditBatches={batchData.batches}
+            hideProjectLocation
+          />
         </Box>
       )}
     </Section>

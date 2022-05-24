@@ -7,7 +7,7 @@ export interface VCSProjectMetadataLD extends ProjectMetadataLD {
   '@context': Context;
   '@type': string;
   'schema:description': TypeValue;
-  'regen:vcsProjectId': TypeValue;
+  'regen:vcsProjectId': string;
   'regen:vcsProjectPage': URL;
   'regen:vcsMethodology': TypeValue;
 }

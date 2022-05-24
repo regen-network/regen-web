@@ -25,6 +25,7 @@ import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+import Section from 'web-components/lib/components/section';
 
 import { setPageView } from '../../lib/ga';
 import getApiUri from '../../lib/apiUri';
@@ -52,7 +53,8 @@ import {
   EcologicalImpact,
 } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
-import { getBatchesWithSupplyForDenoms } from '../../lib/ecocredit';
+import { getBatchesWithSupply, getBatchesTotal } from '../../lib/ecocredit';
+import { getMetadata } from '../../lib/metadata-graph';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
@@ -61,7 +63,6 @@ import {
   ProjectMetadataLD,
   ProjectStakeholder,
 } from '../../generated/json-ld/index';
-import Section from 'web-components/lib/components/section';
 
 interface Project {
   creditPrice?: CreditPrice;
@@ -102,28 +103,33 @@ function ProjectDetails(): JSX.Element {
   });
   const metadata: ProjectMetadataLD = data?.projectByHandle?.metadata;
 
-  const vintageBatchDenoms: string[] = (
-    data?.projectByHandle?.creditVintagesByProjectId?.nodes || []
-  )
-    .map(v => v?.batchDenom || '')
-    .filter(Boolean);
+  const vcsProjectId = metadata?.['regen:vcsProjectId'];
+  // const vintageBatchDenoms: string[] = (
+  //   data?.projectByHandle?.creditVintagesByProjectId?.nodes || []
+  // )
+  //   .map(v => v?.batchDenom || '')
+  //   .filter(Boolean);
 
   useEffect(() => {
-    if (vintageBatchDenoms?.length > 0) {
-      const fetch = async (): Promise<void> => {
-        try {
-          const { batches, totals } = await getBatchesWithSupplyForDenoms(
-            vintageBatchDenoms,
-          );
-          setBatchData(batches);
-          setBatchTotals(totals);
-        } catch (err) {
-          console.error(err); // eslint-disable-line no-console
-        }
-      };
-      fetch();
-    }
-  }, [vintageBatchDenoms.length]); // eslint-disable-line react-hooks/exhaustive-deps
+    const fetch = async (): Promise<void> => {
+      try {
+        const { data: batches } = await getBatchesWithSupply();
+        const filteredBatches = batches.filter(async batch => {
+          let batchMetadata;
+          if (batch.metadata.length) {
+            batchMetadata = await getMetadata(batch.metadata);
+          }
+          return batchMetadata?.['regen:vcsProjectId'] === vcsProjectId;
+        });
+        const { totals } = await getBatchesTotal(filteredBatches);
+        setBatchData(filteredBatches);
+        setBatchTotals(totals);
+      } catch (err) {
+        console.error(err); // eslint-disable-line no-console
+      }
+    };
+    fetch();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const { data: projectsData } = useMoreProjectsQuery();
 

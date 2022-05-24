@@ -30,6 +30,7 @@ export interface ProjectMetadataLD {
   'regen:landStewardPhoto': URL;
   'regen:projectQuote': ProjectQuote;
   'regen:landStewardStoryTitle': string;
+  'regen:vcsProjectId'?: string;
 }
 
 interface ProjectSize {

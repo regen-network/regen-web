@@ -148,7 +148,7 @@ function ProjectTopSection({
     metadata?.['regen:landStory'] || metadata?.['schema:description'];
   const landStewardStoryTitle = metadata?.['regen:landStewardStoryTitle'];
   const landStewardStory = metadata?.['regen:landStewardStory'];
-  const isVCSProject = !!metadata?.['regen:vcsProjectId']?.['@value'];
+  const isVCSProject = !!metadata?.['regen:vcsProjectId'];
 
   const sdgIris = creditClassVersion?.metadata?.['http://regen.network/SDGs']?.[
     '@list'

@@ -111,7 +111,7 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
 };
 
 export const getBatchesWithSupply = async (
-  creditClassId?: string,
+  creditClassId?: string | null,
   params?: URLSearchParams,
 ): Promise<{
   data: BatchInfoWithSupply[];
@@ -168,7 +168,7 @@ export const queryEcoClasses = async (
 };
 
 export const queryEcoBatches = async (
-  creditClassId?: string,
+  creditClassId?: string | null,
   params?: URLSearchParams,
 ): Promise<QueryBatchesResponseV0> => {
   try {

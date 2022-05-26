@@ -16,7 +16,9 @@ import { getBatchesWithSupply } from '../../lib/ecocredit';
 import { getAccountUrl } from '../../lib/block-explorer';
 
 interface CreditBatchProps {
-  creditClassId?: string;
+  creditClassId?: string | null;
+  projectPage?: boolean;
+  creditBatches?: BatchInfoWithSupply[];
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
@@ -90,6 +92,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const CreditBatches: React.FC<CreditBatchProps> = ({
   creditClassId,
+  projectPage = false,
+  creditBatches,
   titleAlign = 'center',
 }) => {
   const styles = useStyles();
@@ -97,71 +101,90 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   let columnsToShow = [...headCells];
 
   useEffect(() => {
-    const fetchData = (): void => {
+    if (!ledgerRESTUri) return;
+    if (!projectPage) {
       getBatchesWithSupply(creditClassId)
         .then(sortableBatches => {
           setBatches(sortableBatches.data);
         })
         .catch(console.error); // eslint-disable-line no-console
-    };
+    } else if (creditBatches) {
+      setBatches(creditBatches);
+    }
+  }, [projectPage, creditClassId, creditBatches]);
 
-    if (!ledgerRESTUri) return;
-    fetchData();
-  }, [creditClassId]);
-
-  // We hide the classId column if it creditClassId provided (redundant)
+  // We hide the classId column if creditClassId provided (redundant)
   if (creditClassId) {
     columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'class_id');
   }
+  // Ditto for project location on project page
+  if (projectPage) {
+    columnsToShow = columnsToShow.filter(
+      (hc: HeadCell) => hc.id !== 'project_location',
+    );
+  }
+
+  const table = (
+    <ActionsTable
+      tableLabel="credit batch table"
+      headerRows={columnsToShow.map(headCell => (
+        <Box className={cx(headCell.wrap && styles.wrap)} key={headCell.id}>
+          {headCell.label}
+        </Box>
+      ))}
+      rows={batches.map(batch =>
+        [
+          <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
+            {batch.class_id}
+          </Link>,
+          <Link
+            className={styles.noWrap}
+            href={`/credit-batches/${batch.batch_denom}`}
+          >
+            {batch.batch_denom}
+          </Link>,
+          <a
+            href={getAccountUrl(batch.issuer)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {truncate(batch.issuer)}
+          </a>,
+          <>{formatNumber(batch.tradable_supply)}</>,
+          <>{formatNumber(batch.retired_supply)}</>,
+          <>{formatNumber(batch.amount_cancelled)}</>,
+          <Box className={styles.noWrap}>
+            {formatDate(batch.start_date as Date)}
+          </Box>,
+          <Box className={styles.noWrap}>
+            {formatDate(batch.end_date as Date)}
+          </Box>,
+          <Box key="project_location" className={styles.noWrap}>
+            {batch.project_location}
+          </Box>,
+        ].filter(item => {
+          return (
+            !(creditClassId && item?.key === 'class_id') &&
+            !(projectPage && item?.key === 'project_location')
+          );
+        }),
+      )}
+    />
+  );
 
   return ledgerRESTUri && batches.length > 0 ? (
-    <Section
-      classes={{ root: styles.section, title: styles.title }}
-      title="Credit Batches"
-      titleVariant="h2"
-      titleAlign={titleAlign}
-    >
-      <ActionsTable
-        tableLabel="credit batch table"
-        headerRows={columnsToShow.map(headCell => (
-          <Box className={cx(headCell.wrap && styles.wrap)} key={headCell.id}>
-            {headCell.label}
-          </Box>
-        ))}
-        rows={batches.map(batch =>
-          [
-            <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
-              {batch.class_id}
-            </Link>,
-            <Link
-              className={styles.noWrap}
-              href={`/credit-batches/${batch.batch_denom}`}
-            >
-              {batch.batch_denom}
-            </Link>,
-            <a
-              href={getAccountUrl(batch.issuer)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {truncate(batch.issuer)}
-            </a>,
-            <>{formatNumber(batch.tradable_supply)}</>,
-            <>{formatNumber(batch.retired_supply)}</>,
-            <>{formatNumber(batch.amount_cancelled)}</>,
-            <Box className={styles.noWrap}>
-              {formatDate(batch.start_date as Date)}
-            </Box>,
-            <Box className={styles.noWrap}>
-              {formatDate(batch.end_date as Date)}
-            </Box>,
-            <Box className={styles.noWrap}>{batch.project_location}</Box>,
-          ].filter(item => {
-            return !(creditClassId && item?.key === 'class_id');
-          }),
-        )}
-      />
-    </Section>
+    projectPage ? (
+      table
+    ) : (
+      <Section
+        classes={{ root: styles.section, title: styles.title }}
+        title="Credit Batches"
+        titleVariant="h2"
+        titleAlign={titleAlign}
+      >
+        {table}
+      </Section>
+    )
   ) : null;
 };
 

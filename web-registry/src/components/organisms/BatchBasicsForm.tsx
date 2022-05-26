@@ -36,7 +36,6 @@ export interface BatchBasicsFormValues {
   metadata?: Partial<VCSBatchMetadataLD>;
   // TODO: using the same metadata object for different field types created bugs,
   // so we need to set to separate property metadataJSON for non-C01 classes for now:
-  // so we need to set to separate property metadataJSON for non-C01 classes for now:
   metadataJSON?: string;
 }
 

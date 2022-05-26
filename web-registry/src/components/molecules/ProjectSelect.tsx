@@ -40,17 +40,17 @@ const ProjectSelect: React.FC<FieldProps> = ({
 
     const dbOptions =
       projects?.map(project => {
-        const projectId = project?.metadata?.['regen:vcsProjectId']?.['@value'];
+        const projectId = project?.metadata?.['regen:vcsProjectId'];
         return {
           label:
-            `${startCase(project?.handle || '')} ${
+            `${startCase(project?.metadata?.['schema:name'] || '')} ${
               projectId ? '(' + projectId + ')' : ''
             }` || '',
           value: projectId || '',
         };
       }) || [];
-    const projectOptions1 = [defaultProjectOption, ...dbOptions];
-    setProjectOptions(projectOptions1);
+    const options = [defaultProjectOption, ...dbOptions];
+    setProjectOptions(options);
   }, [
     creditClassId,
     setFieldValue,

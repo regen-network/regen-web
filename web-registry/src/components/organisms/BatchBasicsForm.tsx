@@ -8,7 +8,6 @@ import { Body } from 'web-components/lib/components/typography';
 import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import TextField from 'web-components/lib/components/inputs/TextField';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { DatePickField } from 'web-components/lib/components/inputs/DatePickField';
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -27,16 +26,17 @@ import {
 import { NameUrl } from 'web-components/lib/types/rdf';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-import { ProjectSelect, CreditClassSelect } from '../molecules';
+import {
+  ProjectSelect,
+  CreditClassSelect,
+  MetadataJSONField,
+} from '../molecules';
 
 export interface BatchBasicsFormValues {
   classId: string;
   startDate: Date | null;
   endDate: Date | null;
   metadata?: Partial<VCSBatchMetadataLD>;
-  // TODO: using the same metadata object for different field types created bugs,
-  // so we need to set to separate property metadataJSON for non-C01 classes for now:
-  metadataJSON?: string;
 }
 
 const vcsMetadataSchema: AnyObjectSchema = object({
@@ -89,7 +89,7 @@ const BatchBasicsForm: React.FC<{
         }
       }}
     >
-      {({ submitForm, isValid, isSubmitting, touched, values }) => {
+      {({ submitForm, isValid, isSubmitting, touched, values, errors }) => {
         const isVCS = values?.classId === 'C01';
 
         return (
@@ -150,19 +150,7 @@ const BatchBasicsForm: React.FC<{
                 </>
               ) : values?.classId ? (
                 <Box sx={{ mt: 10 }}>
-                  <InputLabel>Metadata</InputLabel>
-                  <Body size="sm" mt={1} mb={3}>
-                    Attach arbitrary JSON-LD metadata to the credit batch below.{' '}
-                    <a href="#TODO">Learn more»</a>
-                  </Body>
-                  <Field
-                    name="metadataJSON"
-                    component={ControlledTextField}
-                    multiline
-                    minRows={6}
-                    maxRows={18}
-                    defaultStyle={false}
-                  />
+                  <MetadataJSONField required={!isVCS} />
                 </Box>
               ) : null}
             </OnBoardingCard>

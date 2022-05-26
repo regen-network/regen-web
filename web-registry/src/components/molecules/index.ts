@@ -13,6 +13,7 @@ export * from './ImageGridSection';
 export * from './ImageItemsSection';
 export * from './LineItem';
 export * from './LineItemLabelAbove';
+export * from './MetadataJSONField';
 export * from './NoCredits';
 export * from './OverviewCards';
 export * from './PlanStepper';

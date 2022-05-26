@@ -52,7 +52,12 @@ import {
   EcologicalImpact,
 } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
+<<<<<<< HEAD
 import { getBatchesWithSupplyForDenoms } from '../../lib/ecocredit';
+=======
+import { getBatchesWithSupply, getBatchesTotal } from '../../lib/ecocredit/api';
+import { getMetadata } from '../../lib/metadata-graph';
+>>>>>>> f80e22a8 (Add tx hash to credit batch table (#957))
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,

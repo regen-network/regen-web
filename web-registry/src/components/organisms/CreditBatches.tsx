@@ -7,12 +7,17 @@ import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
+<<<<<<< HEAD
 import { truncate } from 'web-components/lib/utils/truncate';
+=======
+import { truncate, truncateHash } from 'web-components/lib/utils/truncate';
+import { Link } from '../atoms';
+>>>>>>> f80e22a8 (Add tx hash to credit batch table (#957))
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
-import { getBatchesWithSupply } from '../../lib/ecocredit';
-import { getAccountUrl } from '../../lib/block-explorer';
+import { getBatchesWithSupply } from '../../lib/ecocredit/api';
+import { getAccountUrl, getHashUrl } from '../../lib/block-explorer';
 
 interface CreditBatchProps {
   creditClassId?: string;
@@ -27,6 +32,12 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
+<<<<<<< HEAD
+=======
+  { id: 'txhash', numeric: false, label: 'tx hash' },
+  { id: 'class_id', numeric: false, label: 'credit class' },
+  { id: 'batch_denom', numeric: false, label: 'batch denom' },
+>>>>>>> f80e22a8 (Add tx hash to credit batch table (#957))
   { id: 'issuer', numeric: false, label: 'issuer' },
   { id: 'batch_denom', numeric: false, label: 'batch denom' },
   { id: 'class_id', numeric: false, label: 'credit class' },
@@ -112,6 +123,70 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   if (creditClassId) {
     columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'class_id');
   }
+<<<<<<< HEAD
+=======
+  // Ditto for project location on project page
+  if (projectPage) {
+    columnsToShow = columnsToShow.filter(
+      (hc: HeadCell) => hc.id !== 'project_location',
+    );
+  }
+
+  const table = (
+    <ActionsTable
+      tableLabel="credit batch table"
+      headerRows={columnsToShow.map(headCell => (
+        <Box className={cx(headCell.wrap && styles.wrap)} key={headCell.id}>
+          {headCell.label}
+        </Box>
+      ))}
+      rows={batches.map(batch =>
+        [
+          <Link
+            href={getHashUrl(batch.txhash)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {truncateHash(batch.txhash)}
+          </Link>,
+          <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
+            {batch.class_id}
+          </Link>,
+          <Link
+            className={styles.noWrap}
+            href={`/credit-batches/${batch.batch_denom}`}
+          >
+            {batch.batch_denom}
+          </Link>,
+          <a
+            href={getAccountUrl(batch.issuer)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {truncate(batch.issuer)}
+          </a>,
+          <>{formatNumber(batch.tradable_supply)}</>,
+          <>{formatNumber(batch.retired_supply)}</>,
+          <>{formatNumber(batch.amount_cancelled)}</>,
+          <Box className={styles.noWrap}>
+            {formatDate(batch.start_date as Date)}
+          </Box>,
+          <Box className={styles.noWrap}>
+            {formatDate(batch.end_date as Date)}
+          </Box>,
+          <Box key="project_location" className={styles.noWrap}>
+            {batch.project_location}
+          </Box>,
+        ].filter(item => {
+          return (
+            !(creditClassId && item?.key === 'class_id') &&
+            !(projectPage && item?.key === 'project_location')
+          );
+        }),
+      )}
+    />
+  );
+>>>>>>> f80e22a8 (Add tx hash to credit batch table (#957))
 
   return ledgerRESTUri && batches.length > 0 ? (
     <Section

@@ -6,3 +6,8 @@ export const truncate = (walletAddress: string | undefined): string => {
     stringLength,
   )}`.toLowerCase();
 };
+
+export const truncateHash = (txhash: string | undefined): string => {
+  if (!txhash) return '-';
+  return `${txhash.substring(0, 8)}...`.toLowerCase();
+};

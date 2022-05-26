@@ -7,7 +7,7 @@ import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 import { Loading } from 'web-components/lib/components/loading';
 
-import { getBatchWithSupplyForDenom } from '../lib/ecocredit';
+import { getBatchWithSupplyForDenom } from '../lib/ecocredit/api';
 import { getMetadata } from '../lib/metadata-graph';
 import { useProjectsByMetadataQuery } from '../generated/graphql';
 

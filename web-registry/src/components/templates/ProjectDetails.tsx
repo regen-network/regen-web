@@ -25,6 +25,7 @@ import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+import Section from 'web-components/lib/components/section';
 
 import { setPageView } from '../../lib/ga';
 import getApiUri from '../../lib/apiUri';
@@ -52,7 +53,8 @@ import {
   EcologicalImpact,
 } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
-import { getBatchesWithSupplyForDenoms } from '../../lib/ecocredit';
+import { getBatchesWithSupply, getBatchesTotal } from '../../lib/ecocredit/api';
+import { getMetadata } from '../../lib/metadata-graph';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
@@ -61,7 +63,6 @@ import {
   ProjectMetadataLD,
   ProjectStakeholder,
 } from '../../generated/json-ld/index';
-import Section from 'web-components/lib/components/section';
 
 interface Project {
   creditPrice?: CreditPrice;
@@ -70,7 +71,7 @@ interface Project {
 }
 
 // Update for testing purchase credits modal
-const project: Project = {};
+const testProject: Project = {};
 
 function getVisiblePartyName(party?: ProjectStakeholder): string | undefined {
   return party?.['regen:showOnProjectPage']
@@ -100,30 +101,48 @@ function ProjectDetails(): JSX.Element {
     skip: !projectId,
     variables: { handle: projectId as string },
   });
-  const metadata: ProjectMetadataLD = data?.projectByHandle?.metadata;
-
-  const vintageBatchDenoms: string[] = (
-    data?.projectByHandle?.creditVintagesByProjectId?.nodes || []
-  )
-    .map(v => v?.batchDenom || '')
-    .filter(Boolean);
+  const project = data?.projectByHandle;
+  const metadata: ProjectMetadataLD = project?.metadata;
+  const vcsProjectId = metadata?.['regen:vcsProjectId'];
 
   useEffect(() => {
-    if (vintageBatchDenoms?.length > 0) {
-      const fetch = async (): Promise<void> => {
-        try {
-          const { batches, totals } = await getBatchesWithSupplyForDenoms(
-            vintageBatchDenoms,
+    const asyncFilter = async (
+      arr: BatchInfoWithSupply[],
+      predicate: (batch: BatchInfoWithSupply) => Promise<boolean>,
+    ): Promise<BatchInfoWithSupply[]> => {
+      const results = await Promise.all(arr.map(predicate));
+      return arr.filter((_v, index) => results[index]);
+    };
+
+    const fetch = async (): Promise<void> => {
+      try {
+        let batches: BatchInfoWithSupply[] = [];
+        if (project?.creditClassByCreditClassId?.onChainId) {
+          const { data } = await getBatchesWithSupply(
+            project?.creditClassByCreditClassId?.onChainId,
           );
-          setBatchData(batches);
-          setBatchTotals(totals);
-        } catch (err) {
-          console.error(err); // eslint-disable-line no-console
+          batches = data;
         }
-      };
-      fetch();
-    }
-  }, [vintageBatchDenoms.length]); // eslint-disable-line react-hooks/exhaustive-deps
+
+        const filteredBatches = await asyncFilter(
+          batches,
+          async (batch: BatchInfoWithSupply) => {
+            let batchMetadata;
+            if (batch.metadata?.length) {
+              batchMetadata = await getMetadata(batch.metadata);
+            }
+            return batchMetadata?.['regen:vcsProjectId'] === vcsProjectId;
+          },
+        );
+        const { totals } = await getBatchesTotal(filteredBatches);
+        setBatchData(filteredBatches);
+        setBatchTotals(totals);
+      } catch (err) {
+        console.error(err); // eslint-disable-line no-console
+      }
+    };
+    fetch();
+  }, [project?.creditClassByCreditClassId?.onChainId, vcsProjectId]);
 
   const { data: projectsData } = useMoreProjectsQuery();
 
@@ -387,10 +406,10 @@ function ProjectDetails(): JSX.Element {
         </div>
       )}
 
-      {chainId && project.creditPrice ? (
+      {chainId && testProject.creditPrice ? (
         <BuyFooter
           onClick={() => setIsBuyCreditsModalOpen(true)}
-          creditPrice={project.creditPrice}
+          creditPrice={testProject.creditPrice}
         />
       ) : (
         <FixedFooter justifyContent="flex-end">
@@ -411,12 +430,12 @@ function ProjectDetails(): JSX.Element {
         </FixedFooter>
       )}
 
-      {project.creditPrice && project.stripePrice && (
+      {testProject.creditPrice && testProject.stripePrice && (
         <Modal open={open} onClose={handleClose}>
           <CreditsPurchaseForm
             onClose={handleClose}
-            creditPrice={project.creditPrice}
-            stripePrice={project.stripePrice}
+            creditPrice={testProject.creditPrice}
+            stripePrice={testProject.stripePrice}
           />
         </Modal>
       )}
@@ -438,7 +457,7 @@ function ProjectDetails(): JSX.Element {
           {...issuanceModalData}
         />
       )}
-      {data && creditClassVersion && chainId && project.creditPrice && (
+      {data && creditClassVersion && chainId && testProject.creditPrice && (
         <>
           <BuyCreditsModal
             open={isBuyCreditsModalOpen}
@@ -452,7 +471,7 @@ function ProjectDetails(): JSX.Element {
                 creditClassVersion.metadata?.[
                   'http://regen.network/creditDenom'
                 ] || creditClassName,
-              credits: project.credits,
+              credits: testProject.credits,
             }}
             imageStorageBaseUrl={imageStorageBaseUrl}
             apiServerUrl={apiServerUrl}

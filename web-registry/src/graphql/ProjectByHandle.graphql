@@ -118,11 +118,6 @@ query ProjectByHandle($handle: String!) {
     partyByResellerId {
       ...partyFields
     }
-    creditVintagesByProjectId {
-      nodes {
-        batchDenom
-      }
-    }
     documentsByProjectId {
       nodes {
         name

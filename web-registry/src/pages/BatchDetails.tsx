@@ -8,7 +8,7 @@ import { Title } from 'web-components/lib/components/typography';
 import { Loading } from 'web-components/lib/components/loading';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-import { getBatchWithSupplyForDenom } from '../lib/ecocredit';
+import { getBatchWithSupplyForDenom } from '../lib/ecocredit/api';
 import { getMetadata } from '../lib/metadata-graph';
 import { useProjectsByMetadataQuery } from '../generated/graphql';
 
@@ -63,10 +63,7 @@ export const BatchDetails: React.FC = () => {
     skip: !vcsProjectId,
     variables: {
       metadata: {
-        'regen:vcsProjectId': {
-          '@type': 'xsd:unsignedInt',
-          '@value': vcsProjectId,
-        },
+        'regen:vcsProjectId': vcsProjectId,
       },
     },
   });

@@ -135,6 +135,9 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
       ))}
       rows={batches.map(batch =>
         [
+          <Link href={getHashUrl(batch.txhash)}>
+            {truncateHash(batch.txhash)}
+          </Link>,
           <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
             {batch.class_id}
           </Link>,

@@ -173,7 +173,7 @@ export const getBatchWithSupplyForDenom = async (
 
 export const getReadableMessages = (txResponse: TxResponse): string => {
   return uniq(
-    txResponse?.logs[0]?.events
+    txResponse?.logs?.[0]?.events
       .filter(event => event.type === 'message')
       .map(event => {
         const action = event.attributes.find(

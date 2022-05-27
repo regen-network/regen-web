@@ -8,6 +8,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
+import { Link } from '../atoms';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
@@ -27,9 +28,9 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
-  { id: 'issuer', numeric: false, label: 'issuer' },
-  { id: 'batch_denom', numeric: false, label: 'batch denom' },
   { id: 'class_id', numeric: false, label: 'credit class' },
+  { id: 'batch_denom', numeric: false, label: 'batch denom' },
+  { id: 'issuer', numeric: false, label: 'issuer' },
   {
     id: 'tradable_supply',
     numeric: true,
@@ -129,6 +130,15 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
         ))}
         rows={batches.map(batch =>
           [
+            <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
+              {batch.class_id}
+            </Link>,
+            <Link
+              className={styles.noWrap}
+              href={`/credit-batches/${batch.batch_denom}`}
+            >
+              {batch.batch_denom}
+            </Link>,
             <a
               href={getAccountUrl(batch.issuer)}
               target="_blank"
@@ -136,11 +146,9 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             >
               {truncate(batch.issuer)}
             </a>,
-            <Box className={styles.noWrap}>{batch.batch_denom}</Box>,
-            batch.class_id,
-            formatNumber(batch.tradable_supply),
-            formatNumber(batch.retired_supply),
-            formatNumber(batch.amount_cancelled),
+            <>{formatNumber(batch.tradable_supply)}</>,
+            <>{formatNumber(batch.retired_supply)}</>,
+            <>{formatNumber(batch.amount_cancelled)}</>,
             <Box className={styles.noWrap}>
               {formatDate(batch.start_date as Date)}
             </Box>,
@@ -148,7 +156,9 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
               {formatDate(batch.end_date as Date)}
             </Box>,
             <Box className={styles.noWrap}>{batch.project_location}</Box>,
-          ].filter(item => !(creditClassId && item === batch.class_id)),
+          ].filter(item => {
+            return !(creditClassId && item?.key === 'class_id');
+          }),
         )}
       />
     </Section>

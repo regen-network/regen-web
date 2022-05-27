@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAuth0, OAuthError } from '@auth0/auth0-react';
-
 import { createBrowserHistory } from 'history';
-import isAdmin from './lib/admin';
-import { init as initGA } from './lib/ga';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
+
+import isAdmin from './lib/admin';
+import { init as initGA } from './lib/ga';
 import { ScrollToTop, ProtectedRoute } from './components/atoms';
 import { RegistryNav, AppFooter } from './components/organisms';
 
@@ -19,6 +19,7 @@ import {
   BatchDetails,
   BasketDetails,
   BuyerCreate,
+  BuyerCreditsTransfer,
   BuyersPage,
   CertificatePage,
   ChooseCreditClass,
@@ -26,9 +27,9 @@ import {
   CreateMethodology,
   CreditClassDetails,
   CreditsIssue,
-  BuyerCreditsTransfer,
   CreditsRetire,
   CreditsTransfer,
+  Dashboard,
   EntityDisplay,
   EcocreditsByAccount,
   Home,
@@ -36,7 +37,6 @@ import {
   Media,
   MethodologyDetails,
   MethodologyReviewProcess,
-  MyEcocredits,
   NotFoundPage,
   OrganizationProfile,
   PostPurchase,
@@ -104,7 +104,7 @@ const App: React.FC = (): JSX.Element => {
             path="post-purchase/:projectId/:walletId/:name"
             element={<PostPurchase />}
           />
-          <Route path="ecocredits/dashboard" element={<MyEcocredits />} />
+          <Route path="ecocredits/dashboard" element={<Dashboard />} />
           <Route
             path="ecocredits/accounts/:accountAddress"
             element={<EcocreditsByAccount />}
@@ -210,7 +210,6 @@ const App: React.FC = (): JSX.Element => {
               />
             </>
           )}
-          {/* <Route path="methodologies" element={<MethodologiesList />} /> TODO */}
           <Route
             path="methodologies/:methodologyId"
             element={<MethodologyDetails />}

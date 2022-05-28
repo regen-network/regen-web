@@ -7,7 +7,6 @@ import TableFooter from '@mui/material/TableFooter';
 import Box from '@mui/material/Box';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { Dictionary } from 'lodash';
 
 import {
   StyledTableContainer,
@@ -28,7 +27,7 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { ledgerRESTUri } from '../../lib/ledger';
 import { getHashUrl } from '../../lib/block-explorer';
-import { getEcocreditTxs } from '../../lib/ecocredit';
+import { getEcocreditTxs, getReadableMessages } from '../../lib/ecocredit/api';
 
 dayjs.extend(relativeTime);
 
@@ -57,15 +56,6 @@ const headCells: HeadCell[] = [
 
 const ROWS_PER_PAGE_OPTIONS = { options: [5, 10, 20, 50], default: 10 };
 
-// TODO: pull message type names directly from regen-js.
-const READABLE_NAMES: Dictionary<string> = {
-  '/regen.ecocredit.v1alpha1.MsgSend': 'send',
-  '/regen.ecocredit.v1alpha1.MsgRetire': 'retire',
-  '/regen.ecocredit.v1alpha1.MsgCreateClass': 'create credit class',
-  '/regen.ecocredit.v1alpha1.MsgCancel': 'cancel',
-  '/regen.ecocredit.v1alpha1.MsgCreateBatch': 'create batch',
-};
-
 const CreditActivityTable: React.FC = () => {
   const [txs, setTxs] = useState<TxRowData[]>([]);
   const [order, setOrder] = useState<Order>('desc');
@@ -79,29 +69,22 @@ const CreditActivityTable: React.FC = () => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const getReadableMessages = useCallback((txResponse: any): string[] => {
-    return txResponse?.tx?.body?.messages?.map((message: any) => {
-      return getReadableName(message['@type']);
-    });
-  }, []);
-
   const fetchData = useCallback(
     async (setCountTotal: (count: number) => void): Promise<void> => {
       try {
-        const tx_responses = await getEcocreditTxs();
-
-        const txRows: TxRowData[] = tx_responses.map((tx_response: any) => {
+        const txResponses = await getEcocreditTxs();
+        const txRows: TxRowData[] = txResponses.map(txResponse => {
           return {
-            date: tx_response.timestamp,
-            txhash: tx_response.txhash,
-            messages: getReadableMessages(tx_response).join(', '),
-            height: parseFloat(tx_response.height),
-            txUrl: getHashUrl(tx_response.txhash),
+            date: txResponse.timestamp,
+            txhash: txResponse.txhash,
+            messages: getReadableMessages(txResponse),
+            height: txResponse.height.getLowBits(),
+            txUrl: getHashUrl(txResponse.txhash),
           } as TxRowData;
         });
 
         setTxs(txRows);
-        const countTotal = tx_responses.length;
+        const countTotal = txResponses.length;
         if (countTotal) {
           setCountTotal(countTotal);
         }
@@ -110,12 +93,8 @@ const CreditActivityTable: React.FC = () => {
         console.error(err);
       }
     },
-    [getReadableMessages],
+    [],
   );
-
-  const getReadableName = (eventType: string): string => {
-    return READABLE_NAMES[eventType] || eventType;
-  };
 
   const createSortHandler =
     (property: keyof TxRowData) => (event: React.MouseEvent<unknown>) => {
@@ -142,7 +121,7 @@ const CreditActivityTable: React.FC = () => {
   useEffect(() => {
     if (!ledgerRESTUri) return;
     fetchData(setCountTotal);
-  }, [fetchData, getReadableMessages, setCountTotal]);
+  }, [fetchData, setCountTotal]);
 
   return (
     <StyledTableContainer
@@ -217,9 +196,7 @@ const CreditActivityTable: React.FC = () => {
                         {formatNumber(tx.height)}
                       </StyledTableCell>
                       <StyledTableCell>
-                        <OutlinedButton href={tx.txUrl} target="_blank">
-                          view transaction
-                        </OutlinedButton>
+                        <OutlinedButton>view transaction</OutlinedButton>
                       </StyledTableCell>
                     </StyledTableRow>
                   );

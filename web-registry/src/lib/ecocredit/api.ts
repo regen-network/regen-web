@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import qs from 'querystring';
-
+import { uniq } from 'lodash';
 import {
   QueryClientImpl,
   DeepPartial,
@@ -18,9 +17,16 @@ import {
   QueryCreditTypesResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
+import {
+  ServiceClientImpl,
+  GetTxsEventRequest,
+  GetTxsEventResponse,
+} from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-import { expLedger, ledgerRESTUri } from '../lib/ledger';
-import type { PageResponse } from '../types/ledger/base';
+import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
+import { connect as connectToApi } from '../../ledger';
+import { expLedger, ledgerRESTUri } from '../ledger';
+import type { PageResponse } from '../../types/ledger/base';
 import type {
   BatchInfo,
   QueryBatchInfoResponse as QueryBatchInfoResponseV0,
@@ -32,29 +38,17 @@ import type {
   BatchInfoWithBalance,
   QueryBatchesResponse as QueryBatchesResponseV0,
   QueryClassInfoResponse as QueryClassInfoResponseV0,
-} from '../types/ledger/ecocredit';
-
-const ECOCREDIT_MESSAGE_TYPES = {
-  SEND: "message.action='/regen.ecocredit.v1alpha1.MsgSend'",
-  CREATE_BATCH: "message.action='/regen.ecocredit.v1alpha1.MsgCreateBatch'",
-  CREATE_CLASS: "message.action='/regen.ecocredit.v1alpha1.MsgCreateClass'",
-  CANCEL: "message.action='/regen.ecocredit.v1alpha1.MsgCancel'",
-  RETIRE: "message.action='/regen.ecocredit.v1alpha1.MsgRetire'",
-};
+} from '../../types/ledger/ecocredit';
 
 // helpers for combining ledger queries (currently rest, regen-js in future)
 // into UI data structures
 
-export const getBatchesWithSupplyForDenoms = async (
-  denoms: string[],
+export const getBatchesTotal = async (
+  batches: BatchInfoWithSupply[],
 ): Promise<{
-  batches: BatchInfoWithSupply[];
   totals: BatchTotalsForProject;
 }> => {
   try {
-    const batches = await Promise.all(
-      denoms.map(denom => getBatchWithSupplyForDenom(denom)),
-    );
     const totals = batches.reduce(
       (acc, batch) => {
         acc.amount_cancelled += Number(batch?.amount_cancelled ?? 0);
@@ -68,11 +62,9 @@ export const getBatchesWithSupplyForDenoms = async (
         tradable_supply: 0,
       },
     );
-    return { batches, totals };
+    return { totals };
   } catch (err) {
-    throw new Error(
-      `Could not get batches with supply for denoms ${denoms}, ${err}`,
-    );
+    throw new Error(`Could not get batches total ${err}`);
   }
 };
 
@@ -102,14 +94,14 @@ export const getEcocreditsForAccount = async (
 
 export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
   let allTxs: TxResponse[] = [];
-
   // TODO: until ledger API supports "message.module='ecocredit'",
   // we must send separate requests for each message action type:
   return Promise.all(
     Object.values(ECOCREDIT_MESSAGE_TYPES).map(async msgType => {
-      return getTxsByEvent(msgType).then(({ data }) => {
-        allTxs = [...allTxs, ...data.tx_responses];
+      const response = await getTxsByEvent({
+        events: [`${messageActionEquals}'${msgType.message}'`],
       });
+      allTxs = [...allTxs, ...response.txResponses];
     }),
   ).then(() => {
     return allTxs;
@@ -117,7 +109,7 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
 };
 
 export const getBatchesWithSupply = async (
-  creditClassId?: string,
+  creditClassId?: string | null,
   params?: URLSearchParams,
 ): Promise<{
   data: BatchInfoWithSupply[];
@@ -125,28 +117,44 @@ export const getBatchesWithSupply = async (
 }> => {
   return queryEcoBatches(creditClassId, params).then(
     async ({ batches, pagination }) => {
-      const batchesWithSupply = await addSupplyDataToBatch(batches);
+      const batchesWithData = await addDataToBatch(batches);
       return {
-        data: batchesWithSupply,
+        data: batchesWithData,
         pagination: pagination,
       };
     },
   );
 };
 
-export const addSupplyDataToBatch = (
+/* Adds Tx Hash and supply info to batch for use in tables */
+export const addDataToBatch = async (
   batches: BatchInfo[],
 ): Promise<BatchInfoWithSupply[]> => {
   try {
+    const txs = await getTxsByEvent({
+      events: [
+        `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
+      ],
+    });
     return Promise.all(
       batches.map(async batch => {
-        const data = await queryEcoBatchSupply(batch.batch_denom);
-        return { ...batch, ...data };
+        const supplyData = await queryEcoBatchSupply(batch.batch_denom);
+        const txHash = getTxHashForBatch(txs.txResponses, batch.batch_denom);
+        batch.txhash = txHash;
+        return { ...batch, ...supplyData };
       }),
     );
   } catch (err) {
-    throw new Error(`Could not add supply to batches batches: ${err}`);
+    throw new Error(`Could not add data to batches batches: ${err}`);
   }
+};
+
+const getTxHashForBatch = (
+  txResponses: TxResponse[],
+  batchDenom: string,
+): string | undefined => {
+  const match = txResponses?.find(tx => tx.rawLog.includes(batchDenom));
+  return match?.txhash;
 };
 
 export const getBatchWithSupplyForDenom = async (
@@ -163,6 +171,27 @@ export const getBatchWithSupplyForDenom = async (
   }
 };
 
+export const getReadableMessages = (txResponse: TxResponse): string => {
+  return uniq(
+    txResponse?.logs?.[0]?.events
+      .filter(event => event.type === 'message')
+      .map(event => {
+        const action = event.attributes.find(
+          attr => attr.key === 'action',
+        )?.value;
+
+        return getReadableName(action);
+      }),
+  ).join(', ');
+};
+
+const getReadableName = (eventType?: string): string | undefined => {
+  if (!eventType) return undefined;
+  return Object.values(ECOCREDIT_MESSAGE_TYPES).find(
+    msgType => msgType.message === eventType,
+  )?.readable;
+};
+
 // the following consume Regen REST endpoints - will be replaced with regen-js
 
 export const queryEcoClasses = async (
@@ -174,7 +203,7 @@ export const queryEcoClasses = async (
 };
 
 export const queryEcoBatches = async (
-  creditClassId?: string,
+  creditClassId?: string | null,
   params?: URLSearchParams,
 ): Promise<QueryBatchesResponseV0> => {
   try {
@@ -272,15 +301,20 @@ const queryEcoBalance = async (
   }
 };
 
-export const getTxsByEvent = (msgType: string): Promise<AxiosResponse> => {
-  return axios.get(`${ledgerRESTUri}/cosmos/tx/v1beta1/txs`, {
-    params: {
-      events: [msgType],
-    },
-    paramsSerializer: params => {
-      return qs.stringify(params);
-    },
-  });
+export const getTxsByEvent = async (
+  request: DeepPartial<GetTxsEventRequest>,
+): Promise<GetTxsEventResponse> => {
+  const api = await connectToApi();
+  if (!api || !api?.queryClient) return Promise.reject();
+  const queryClient = new ServiceClientImpl(api.queryClient);
+  if (!queryClient) return Promise.reject();
+
+  try {
+    return queryClient.GetTxsEvent(request);
+  } catch (err) {
+    console.error(err); // eslint-disable-line no-console
+    return Promise.reject();
+  }
 };
 
 export const queryEcoClassInfo = async (

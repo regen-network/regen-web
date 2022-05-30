@@ -31,6 +31,7 @@ interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
   initialValues?: RolesValues;
   projectCreator?: GetOrganizationProfileByEmailQuery;
+  creditClassId?: string;
 }
 
 export interface RolesValues {

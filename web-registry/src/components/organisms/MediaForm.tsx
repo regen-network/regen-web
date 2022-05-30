@@ -9,7 +9,10 @@ import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
 // import { VideoInput } from 'web-components/lib/components/inputs/VideoInput'; //TODO: make this component easier to use with share links from youtube, vimeo, etc
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
-
+import {
+  urlType,
+  getURLInitialValue,
+} from 'web-components/lib/utils/schemaURL';
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
@@ -19,11 +22,6 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
   initialValues?: MediaValues;
-}
-
-export interface urlType {
-  '@type': 'schema:URL';
-  '@value'?: string;
 }
 
 interface urlList {
@@ -43,14 +41,6 @@ export interface MediaValuesErrors {
   'regen:galleryPhotos'?: string;
   'regen:landStewardPhoto'?: valueObject;
   'regen:videoURL'?: valueObject;
-}
-
-function getURLInitialValue(value?: urlType): urlType {
-  return (
-    value || {
-      '@type': 'schema:URL',
-    }
-  );
 }
 
 function getURLListInitialValue(value?: urlList): urlList {

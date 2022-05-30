@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const steps = ['Project Page', 'Finished'];
+const steps = ['Create Project', 'Review', 'Finished'];
 
 const PlanStepper: React.FC<PlanStepperProps> = ({ activeStep }) => {
   const classes = useStyles();

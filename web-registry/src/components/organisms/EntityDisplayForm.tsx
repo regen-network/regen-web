@@ -22,11 +22,14 @@ import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
 import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+import {
+  urlType,
+  getURLInitialValue,
+} from 'web-components/lib/utils/schemaURL';
 
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import getApiUri from '../../lib/apiUri';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import { urlType } from './MediaForm';
 import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 
@@ -338,7 +341,7 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
   if (!values) {
     return undefined;
   }
-  const initialURL: urlType = { '@type': 'schema:URL' };
+  const initialURL: urlType = getURLInitialValue();
   if (isIndividual(values)) {
     return {
       ...{ 'schema:image': initialURL },

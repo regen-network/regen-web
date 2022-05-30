@@ -173,55 +173,6 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   );
 
   return ledgerRESTUri && batches.length > 0 ? (
-<<<<<<< HEAD
-    <Section
-      classes={{ root: styles.section, title: styles.title }}
-      title="Credit Batches"
-      titleVariant="h2"
-      titleAlign={titleAlign}
-    >
-      <ActionsTable
-        tableLabel="credit batch table"
-        headerRows={columnsToShow.map(headCell => (
-          <Box className={cx(headCell.wrap && styles.wrap)} key={headCell.id}>
-            {headCell.label}
-          </Box>
-        ))}
-        rows={batches.map(batch =>
-          [
-            <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
-              {batch.class_id}
-            </Link>,
-            <Link
-              className={styles.noWrap}
-              href={`/credit-batches/${batch.batch_denom}`}
-            >
-              {batch.batch_denom}
-            </Link>,
-            <a
-              href={getAccountUrl(batch.issuer)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {truncate(batch.issuer)}
-            </a>,
-            <>{formatNumber(batch.tradable_supply)}</>,
-            <>{formatNumber(batch.retired_supply)}</>,
-            <>{formatNumber(batch.amount_cancelled)}</>,
-            <Box className={styles.noWrap}>
-              {formatDate(batch.start_date as Date)}
-            </Box>,
-            <Box className={styles.noWrap}>
-              {formatDate(batch.end_date as Date)}
-            </Box>,
-            <Box className={styles.noWrap}>{batch.project_location}</Box>,
-          ].filter(item => {
-            return !(creditClassId && item?.key === 'class_id');
-          }),
-        )}
-      />
-    </Section>
-=======
     projectPage ? (
       table
     ) : (
@@ -234,7 +185,6 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
         {table}
       </Section>
     )
->>>>>>> 8d6de78c (Update CreditBatches for project page)
   ) : null;
 };
 

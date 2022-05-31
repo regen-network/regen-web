@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { Statistic } from '../molecules';
-import { getBatchesWithSupply } from '../../lib/ecocredit';
+import { getBatchesWithSupply } from '../../lib/ecocredit/api';
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
 interface CreditTotalData {

@@ -15,7 +15,10 @@ export const getISOString = async (
   },
 ): Promise<string | undefined> => {
   const { countryKey, stateProvince, postalCode } = location;
-  if (!countryKey || !accessToken) return Promise.reject();
+  if (!countryKey || !accessToken)
+    return Promise.reject(
+      'Geocoding service is unavailable: missing `countryKey` or `accessToken`',
+    );
   if (!stateProvince) {
     return Promise.resolve(countryKey); // no need to search
   }

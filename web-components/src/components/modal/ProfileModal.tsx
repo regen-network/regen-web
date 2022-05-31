@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { useTheme, Box, styled } from '@mui/material';
+import { useTheme, Box } from '@mui/material';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 
 import { Button } from '../buttons/Button';
@@ -25,6 +25,7 @@ interface ProfileModalProps {
 }
 
 export interface ProfileFormValues {
+  id?: string;
   '@type': ProfileType;
   'schema:name'?: string;
   'schema:image'?: urlType;
@@ -33,12 +34,6 @@ export interface ProfileFormValues {
   // 'regen:sharePermission'?: boolean;
   'regen:showOnProjectPage': true;
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  card: {
-    marginTop: 0,
-  },
-}));
 
 function ProfileModal({
   profile,
@@ -66,10 +61,8 @@ function ProfileModal({
           validateOnMount
           initialValues={{
             ...profile,
-            // '@type': profile['@type'],
-            // 'regen:showOnProjectPage': true,
             // 'regen:sharePermission':
-            // profileEdit && !!profileEdit['regen:sharePermission'],
+            // profile && !!profile['regen:sharePermission'],
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -139,6 +132,12 @@ function ProfileModal({
     </Modal>
   );
 }
+
+const useStyles = makeStyles((theme: Theme) => ({
+  card: {
+    marginTop: 0,
+  },
+}));
 
 const ProfileOnBoardingCard: React.FC = ({ children }) => {
   const styles = useStyles();

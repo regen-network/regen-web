@@ -91,8 +91,11 @@ interface Props extends FieldProps {
   optional?: boolean;
   placeholder?: string;
   options?: FormValues[];
-  onSaveOrganization: (v: OrganizationFormValues) => Promise<any>;
-  onSaveIndividual: (v: IndividualFormValues) => Promise<any>;
+  onSaveOrganization: (
+    v: OrganizationFormValues,
+  ) => Promise<OrganizationFormValues>;
+  onSaveIndividual: (v: IndividualFormValues) => Promise<IndividualFormValues>;
+  onSaveProfile: (v: ProfileFormValues) => Promise<ProfileFormValues>;
   validateEntity: (values: FormValues) => Promise<FormikErrors<FormValues>>;
   mapboxToken: string;
   profile?: boolean;
@@ -142,6 +145,7 @@ const RoleField: React.FC<Props> = ({
   mapboxToken,
   onSaveOrganization,
   onSaveIndividual,
+  onSaveProfile,
   validateEntity,
   profile,
   ...fieldProps
@@ -163,7 +167,9 @@ const RoleField: React.FC<Props> = ({
     setValue(selectedValue);
   }, [field.value, options]);
 
-  const saveOrganization = async (org: any): Promise<void> => {
+  const saveOrganization = async (
+    org: OrganizationFormValues,
+  ): Promise<void> => {
     var savedOrg = await onSaveOrganization(org);
     closeOrganizationModal();
     form.setFieldValue(field.name, savedOrg);
@@ -177,7 +183,7 @@ const RoleField: React.FC<Props> = ({
     }
   };
 
-  const saveIndividual = async (user: any): Promise<void> => {
+  const saveIndividual = async (user: IndividualFormValues): Promise<void> => {
     var savedUser = await onSaveIndividual(user);
     closeIndividualModal();
     form.setFieldValue(field.name, savedUser);
@@ -187,6 +193,20 @@ const RoleField: React.FC<Props> = ({
         `['${fieldName}']` !== field.name
       ) {
         form.setFieldValue(`['${fieldName}']`, savedUser);
+      }
+    }
+  };
+
+  const saveProfile = async (profile: ProfileFormValues): Promise<void> => {
+    var savedProfile = await onSaveProfile(profile);
+    closeProfileModal();
+    form.setFieldValue(field.name, savedProfile);
+    for (const fieldName in form.values) {
+      if (
+        form.values[fieldName].id === savedProfile.id &&
+        `['${fieldName}']` !== field.name
+      ) {
+        form.setFieldValue(`['${fieldName}']`, savedProfile);
       }
     }
   };
@@ -343,7 +363,7 @@ const RoleField: React.FC<Props> = ({
         <ProfileModal
           profile={profileEdit}
           onClose={closeProfileModal}
-          onSubmit={saveIndividual}
+          onSubmit={saveProfile}
           validate={validateEntity}
         />
       )}

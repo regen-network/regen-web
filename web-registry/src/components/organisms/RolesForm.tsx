@@ -11,6 +11,7 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 import TextField from 'web-components/lib/components/inputs/TextField';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
+import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 
 import {
   validate,
@@ -98,6 +99,11 @@ const RolesForm: React.FC<RolesFormProps> = ({
     },
   });
 
+  // In case of on chain credit class id, we show a unified version
+  // of the organization/individual form, the profile form.
+  // The profile info will get displayed on the project page by default.
+  const profile = !!creditClassId;
+
   const [createUser] = useReallyCreateUserMutation();
   const [createOrganization] = useReallyCreateOrganizationMutation();
   const [updateUserById] = useUpdateUserByIdMutation();
@@ -154,10 +160,10 @@ const RolesForm: React.FC<RolesFormProps> = ({
     });
   };
 
-  const validateEntity = async (
-    e: FormValues,
-  ): Promise<FormikErrors<FormValues>> => {
-    const errors: FormikErrors<FormValues> = {};
+  const validateEntity = async <T extends object>(
+    e: T,
+  ): Promise<{ [key in keyof T]?: string }> => {
+    const errors: { [key in keyof T]?: string } = {};
     if (graphData?.shaclGraphByUri?.graph) {
       const report = await validate(
         graphData.shaclGraphByUri.graph,
@@ -165,7 +171,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
         'http://regen.network/ProjectPageRolesGroup',
       );
       for (const result of report.results) {
-        const path: keyof FormValues = result.path.value;
+        const path: keyof T = result.path.value;
         errors[path] = requiredMessage;
       }
     }
@@ -346,6 +352,27 @@ const RolesForm: React.FC<RolesFormProps> = ({
     return Promise.resolve(updatedEntity);
   };
 
+  const saveProfile = async (
+    updatedEntity: ProfileFormValues,
+  ): Promise<ProfileFormValues> => {
+    if (!updatedEntity.id) {
+      const id = entities.length + 1;
+      const newEntities = [
+        ...entities,
+        { ...updatedEntity, id: id.toString() },
+      ];
+      setEntities(newEntities);
+    } else {
+      const updatedEntities = entities.map((existingEntity: any) =>
+        existingEntity.id === updatedEntity.id
+          ? { ...updatedEntity }
+          : existingEntity,
+      );
+      setEntities(updatedEntities);
+    }
+    return Promise.resolve(updatedEntity);
+  };
+
   return (
     <>
       <Formik
@@ -420,14 +447,19 @@ const RolesForm: React.FC<RolesFormProps> = ({
                   component={RoleField}
                   label="Project Developer"
                   optional
-                  description="The individual or organization that is in charge of managing the project and is the main point of contact with Regen Registry. "
+                  description={`The individual or organization that is in charge of managing the project and ${
+                    profile
+                      ? 'will appear on the project page'
+                      : 'is the main point of contact with Regen Registry'
+                  }.`}
                   name="regen:projectDeveloper"
                   options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveOrganization={saveOrganization}
                   onSaveIndividual={saveIndividual}
+                  onSaveProfile={saveProfile}
                   validateEntity={validateEntity}
-                  profile={!!creditClassId}
+                  profile={profile}
                 />
                 {!creditClassId && (
                   <Field

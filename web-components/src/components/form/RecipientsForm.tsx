@@ -25,12 +25,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface FormProps extends BottomCreditRetireFieldsProps {
-  sender: string;
+  mapboxToken: string;
   onSubmit: (values: FormValues) => void;
 }
 
 export interface Recipient extends RetireFormValues {
-  sender: string;
   recipient: string;
   tradableAmount: number;
   withRetire: boolean;
@@ -44,7 +43,6 @@ const validationSchema = Yup.object().shape({
   recipients: Yup.array()
     .of(
       Yup.object().shape({
-        sender: Yup.string().required(),
         recipient: Yup.string().required(requiredMessage), // TODO: improve validation: .min(20, 'too short').required
         tradableAmount: Yup.number()
           .required(invalidAmount)
@@ -67,14 +65,12 @@ const validationSchema = Yup.object().shape({
 });
 
 export const RecipientsForm: React.FC<FormProps> = ({
-  sender,
   mapboxToken,
   onSubmit,
 }) => {
   const styles = useStyles();
 
   const recipientInitialValues = {
-    sender,
     recipient: '',
     tradableAmount: 0,
     withRetire: false,

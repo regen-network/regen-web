@@ -115,7 +115,6 @@ export const basketTakeForm = (): JSX.Element => (
 
 export const creditBatchRecipientsForm = (): JSX.Element => (
   <RecipientsForm
-    sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
     mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
     onSubmit={async (values: FormValues) =>
       alert('submit' + JSON.stringify(values, null, 2))

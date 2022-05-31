@@ -47,7 +47,7 @@ export async function validate(
   return report;
 }
 
-export function getProjectPageBaseData(): any {
+export function getProjectPageBaseData(creditClassId?: string | null): any {
   return {
     '@context': {
       regen: 'http://regen.network/',
@@ -56,7 +56,9 @@ export function getProjectPageBaseData(): any {
       qudt: 'http://qudt.org/schema/qudt/',
       unit: 'http://qudt.org/vocab/unit/',
     },
-    '@type': ['regen:ProjectPage', 'regen:Project'],
+    '@type': creditClassId
+      ? `regen:${creditClassId}-Project`
+      : ['regen:ProjectPage', 'regen:Project'],
   };
 }
 
@@ -66,3 +68,9 @@ export const qudtUnitMap = {
   'unit:HA': 'hectares',
   'unit:AC': 'acres',
 };
+
+export function getProjectShapeIri(creditClassId?: string | null): string {
+  return creditClassId
+    ? `http://regen.network/${creditClassId}-ProjectShape`
+    : 'http://regen.network/ProjectPageShape';
+}

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { useTheme, Box, styled } from '@mui/material';
 import { Formik, Form, Field, FormikErrors } from 'formik';
-import cx from 'clsx';
 
 import { Button } from '../buttons/Button';
 import ContainedButton from '../buttons/ContainedButton';
@@ -9,14 +9,14 @@ import OnBoardingCard from '../cards/OnBoardingCard';
 import ControlledTextField from '../inputs/ControlledTextField';
 import { ImageUpload } from '../inputs/ImageUpload';
 import { Title } from '../typography';
+import OrganizationIcon from '../icons/OrganizationIcon';
 import Modal from '.';
 import { urlType } from '../../utils/schemaURL';
 
 type ProfileType = 'regen:Individual' | 'regen:Organization';
 
 interface ProfileModalProps {
-  type: ProfileType;
-  profile?: ProfileFormValues;
+  profile: ProfileFormValues;
   onClose: () => void;
   onSubmit: (profile: ProfileFormValues) => void;
   validate: (
@@ -35,84 +35,39 @@ export interface ProfileFormValues {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
   card: {
     marginTop: 0,
-  },
-  matchFormPadding: {
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(0, 10),
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(0, 2.5),
-    },
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginTop: theme.spacing(10),
-  },
-  button: {
-    paddingLeft: theme.spacing(17),
-    paddingRight: theme.spacing(17),
-  },
-  cancelButton: {
-    color: theme.palette.info.main,
-    fontSize: theme.typography.pxToRem(12),
-    padding: 0,
-  },
-  permission: {
-    display: 'flex',
-  },
-  iconWrapper: {
-    cursor: 'pointer',
   },
 }));
 
 function ProfileModal({
-  type,
   profile,
   onClose,
   onSubmit,
   validate,
 }: ProfileModalProps): JSX.Element {
-  const styles = useStyles();
-  const [profileEdit, setIndividualEdit] = useState<
-    ProfileFormValues | undefined
-  >(undefined);
-
-  useEffect(() => {
-    setIndividualEdit(profile);
-
-    return function cleanup() {
-      setIndividualEdit(undefined);
-    };
-  }, [profile]);
+  const theme = useTheme();
+  const organization = profile['@type'] === 'regen:Organization';
 
   return (
-    <Modal open={!!profileEdit} onClose={onClose}>
-      <div className={styles.root}>
+    <Modal open={!!profile} onClose={onClose}>
+      <div>
         <Title
           variant="h4"
           align="center"
           sx={{ px: [0, 7.5], pt: [8, 0], pb: [6, 7.5] }}
         >
-          {`${profileEdit ? 'Edit' : 'Add'} ${
-            type === 'regen:Individual' ? 'Individual' : 'Organization'
+          {`${profile && profile['schema:name'] ? 'Edit' : 'Add'} ${
+            organization ? 'Organization' : 'Individual'
           }`}
         </Title>
         <Formik
           enableReinitialize
           validateOnMount
           initialValues={{
-            ...profileEdit,
-            '@type': type,
-            'regen:showOnProjectPage': true,
+            ...profile,
+            // '@type': profile['@type'],
+            // 'regen:showOnProjectPage': true,
             // 'regen:sharePermission':
             // profileEdit && !!profileEdit['regen:sharePermission'],
           }}
@@ -130,7 +85,7 @@ function ProfileModal({
           {({ submitForm, isValid, isSubmitting }) => {
             return (
               <Form>
-                <OnBoardingCard className={styles.card}>
+                <ProfileOnBoardingCard>
                   <Field
                     component={ControlledTextField}
                     label="Name"
@@ -140,6 +95,17 @@ function ProfileModal({
                     component={ImageUpload}
                     label="Profile image"
                     name="schema:image.@value"
+                    fallbackAvatar={
+                      organization && (
+                        <OrganizationIcon
+                          sx={{
+                            height: theme => theme.spacing(11),
+                            width: '100%',
+                          }}
+                          color={theme.palette.info.main}
+                        />
+                      )
+                    }
                     optional
                   />
                   <Field
@@ -148,7 +114,6 @@ function ProfileModal({
                     label="Description"
                     name="schema:description"
                     rows={4}
-                    minRows={4}
                     multiline
                     optional
                   />
@@ -159,41 +124,13 @@ function ProfileModal({
                     description="Make sure this is a valid wallet address. Can be added at a later date."
                     optional
                   />
-                </OnBoardingCard>
-                {/* <div className={cx(styles.permission, styles.matchFormPadding)}>
-                  <Field
-                    type="checkbox"
-                    component={CheckboxLabel}
-                    name="regen:sharePermission"
-                    label={
-                      <Body size="sm">
-                        I have this profile’s permission to share their
-                        information with Regen Registry
-                      </Body>
-                    }
-                  />
-                  <Tooltip
-                    arrow
-                    placement="top"
-                    title="Even if you work closely with this profile, make sure you have their permission to be part of Regen Registry."
-                  >
-                    <div className={styles.iconWrapper}>
-                      <QuestionIcon />
-                    </div>
-                  </Tooltip>
-                </div> */}
-                <div className={cx(styles.controls, styles.matchFormPadding)}>
-                  <Button onClick={onClose} className={styles.cancelButton}>
-                    cancel
-                  </Button>
-                  <ContainedButton
-                    onClick={submitForm}
-                    className={styles.button}
-                    disabled={!isValid || isSubmitting}
-                  >
-                    save
-                  </ContainedButton>
-                </div>
+                </ProfileOnBoardingCard>
+                <ProfileSubmitFooter
+                  submitForm={submitForm}
+                  isValid={isValid}
+                  isSubmitting={isSubmitting}
+                  onClose={onClose}
+                />
               </Form>
             );
           }}
@@ -203,4 +140,43 @@ function ProfileModal({
   );
 }
 
-export { ProfileModal };
+const ProfileOnBoardingCard: React.FC = ({ children }) => {
+  const styles = useStyles();
+
+  return <OnBoardingCard className={styles.card}>{children}</OnBoardingCard>;
+};
+
+const ProfileSubmitFooter: React.FC<{
+  submitForm: (() => Promise<void>) & (() => Promise<any>);
+  isValid: boolean;
+  isSubmitting: boolean;
+  onClose: () => void;
+}> = ({ submitForm, isValid, isSubmitting, onClose }) => (
+  <Box
+    sx={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      width: '100%',
+      mt: 10,
+      py: 0,
+      px: { xs: 2.5, sm: 10 },
+    }}
+  >
+    <Button
+      onClick={onClose}
+      sx={{ color: 'info.main', fontSize: [12], padding: [0], border: 'none' }}
+    >
+      cancel
+    </Button>
+    <ContainedButton
+      onClick={submitForm}
+      sx={{ px: [17] }}
+      disabled={!isValid || isSubmitting}
+    >
+      save
+    </ContainedButton>
+  </Box>
+);
+
+export { ProfileModal, ProfileSubmitFooter, ProfileOnBoardingCard };

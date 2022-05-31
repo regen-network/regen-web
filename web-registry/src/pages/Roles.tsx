@@ -12,6 +12,7 @@ import {
 } from '../components/templates';
 import { RolesForm, RolesValues } from '../components/organisms';
 import { useProjectEditContext } from '../pages/ProjectEdit';
+import { useWallet } from '../lib/wallet';
 import {
   useProjectByIdQuery,
   useGetOrganizationProfileByEmailQuery,
@@ -86,11 +87,16 @@ const Roles: React.FC = () => {
   const { user } = useAuth0();
   const userEmail = user?.email;
 
+  const { wallet } = useWallet();
+
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
   });
+  const project = data?.projectById;
+  const creditClassId = project?.creditClassByCreditClassId?.onChainId;
+
   const { data: userProfileData } = useGetOrganizationProfileByEmailQuery({
     skip: !userEmail,
     variables: {
@@ -98,25 +104,26 @@ const Roles: React.FC = () => {
     },
   });
 
-  let initialFieldValues: RolesValues | undefined;
-  if (data?.projectById?.metadata) {
-    const metadata = data.projectById.metadata;
-    initialFieldValues = {
+  let initialValues: RolesValues = { admin: wallet?.address };
+  if (project?.metadata) {
+    const metadata = project.metadata;
+    initialValues = {
+      ...initialValues,
       'regen:landOwner': {
         ...metadata['regen:landOwner'],
-        ...getPartyIds(data?.projectById?.partyByLandOwnerId),
+        ...getPartyIds(project?.partyByLandOwnerId),
       },
       'regen:landSteward': {
         ...metadata['regen:landSteward'],
-        ...getPartyIds(data?.projectById?.partyByStewardId),
+        ...getPartyIds(project?.partyByStewardId),
       },
       'regen:projectDeveloper': {
         ...metadata['regen:projectDeveloper'],
-        ...getPartyIds(data?.projectById?.partyByDeveloperId),
+        ...getPartyIds(project?.partyByDeveloperId),
       },
       'regen:projectOriginator': {
         ...metadata['regen:projectOriginator'],
-        ...getPartyIds(data?.projectById?.partyByOriginatorId),
+        ...getPartyIds(project?.partyByOriginatorId),
       },
     };
   }
@@ -158,7 +165,7 @@ const Roles: React.FC = () => {
     // update the related entities.
     // But there are not needed to make the project metadata valid
     // and are already stored through project relations (i.e. developerId, stewardId, etc.)
-    const metadata = { ...data?.projectById?.metadata, ...stripIds(values) };
+    const metadata = { ...project?.metadata, ...stripIds(values) };
     projectPatch = { metadata, ...projectPatch };
 
     try {
@@ -170,7 +177,8 @@ const Roles: React.FC = () => {
           },
         },
       });
-      !isEdit && navigate(`/project-pages/${projectId}/entity-display`);
+      const nextStep = creditClassId ? 'description' : 'entity-display';
+      !isEdit && navigate(`/project-pages/${projectId}/${nextStep}`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -182,8 +190,9 @@ const Roles: React.FC = () => {
     <EditFormTemplate>
       <RolesForm
         submit={submit}
-        initialValues={initialFieldValues}
+        initialValues={initialValues}
         projectCreator={userProfileData}
+        creditClassId={creditClassId}
       />
     </EditFormTemplate>
   ) : (
@@ -194,8 +203,9 @@ const Roles: React.FC = () => {
     >
       <RolesForm
         submit={submit}
-        initialValues={initialFieldValues}
+        initialValues={initialValues}
         projectCreator={userProfileData}
+        creditClassId={creditClassId}
       />
     </OnboardingFormTemplate>
   );

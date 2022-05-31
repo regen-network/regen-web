@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import Box from '@mui/material/Box';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-import cx from 'clsx';
 
-import { Button } from '../buttons/Button';
-import ContainedButton from '../buttons/ContainedButton';
-import OnBoardingCard from '../cards/OnBoardingCard';
 import PhoneField from '../inputs/PhoneField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import LocationField from '../inputs/LocationField';
@@ -15,6 +11,7 @@ import Tooltip from '../tooltip/InfoTooltip';
 import { Body, Title } from '../typography';
 import Modal from '.';
 import QuestionIcon from '../icons/QuestionIcon';
+import { ProfileSubmitFooter, ProfileOnBoardingCard } from './ProfileModal';
 
 interface OrganizationModalProps {
   organization?: OrganizationFormValues;
@@ -42,42 +39,6 @@ export interface OrganizationFormValues {
   'schema:location'?: GeocodeFeature;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  card: {
-    marginTop: 0,
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginTop: theme.spacing(10),
-  },
-  matchFormPadding: {
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(0, 10),
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(0, 2.5),
-    },
-  },
-  cancelButton: {
-    color: theme.palette.info.main,
-    fontSize: theme.typography.pxToRem(12),
-    padding: 0,
-  },
-  permission: {
-    display: 'flex',
-  },
-  iconWrapper: {
-    cursor: 'pointer',
-  },
-}));
-
 function OrganizationModal({
   organization,
   onClose,
@@ -85,7 +46,6 @@ function OrganizationModal({
   validate,
   mapboxToken,
 }: OrganizationModalProps): JSX.Element {
-  const styles = useStyles();
   const [organizationEdit, setOrganizationEdit] = useState<
     OrganizationFormValues | undefined
   >(organization);
@@ -96,7 +56,7 @@ function OrganizationModal({
 
   return (
     <Modal open={!!organizationEdit} onClose={onClose}>
-      <div className={styles.root}>
+      <div>
         <Title
           variant="h4"
           align="center"
@@ -129,7 +89,7 @@ function OrganizationModal({
           {({ values, submitForm, isValid, isSubmitting }) => {
             return (
               <Form>
-                <OnBoardingCard className={styles.card}>
+                <ProfileOnBoardingCard>
                   <Field
                     component={ControlledTextField}
                     label="Organization legal name"
@@ -162,41 +122,14 @@ function OrganizationModal({
                     label="Phone number"
                     name="schema:telephone"
                   />
-                </OnBoardingCard>
-                <div className={cx(styles.permission, styles.matchFormPadding)}>
-                  <Field
-                    type="checkbox"
-                    component={CheckboxLabel}
-                    name="regen:sharePermission"
-                    label={
-                      <Body size="sm">
-                        I have this organization’s permission to share their
-                        information with Regen Registry
-                      </Body>
-                    }
-                  />
-                  <Tooltip
-                    arrow
-                    placement="top"
-                    title="Even if you work closely with this organization, make sure you have their permission to be part of Regen Registry."
-                  >
-                    <div className={styles.iconWrapper}>
-                      <QuestionIcon />
-                    </div>
-                  </Tooltip>
-                </div>
-                <div className={cx(styles.controls, styles.matchFormPadding)}>
-                  <Button onClick={onClose} className={styles.cancelButton}>
-                    cancel
-                  </Button>
-                  <ContainedButton
-                    onClick={submitForm}
-                    disabled={!isValid || isSubmitting}
-                    sx={{ px: 17 }}
-                  >
-                    save
-                  </ContainedButton>
-                </div>
+                </ProfileOnBoardingCard>
+                <SharePermissionField />
+                <ProfileSubmitFooter
+                  submitForm={submitForm}
+                  isValid={isValid}
+                  isSubmitting={isSubmitting}
+                  onClose={onClose}
+                />
               </Form>
             );
           }}
@@ -206,4 +139,29 @@ function OrganizationModal({
   );
 }
 
-export { OrganizationModal };
+const SharePermissionField: React.FC = () => (
+  <Box sx={{ display: 'flex', py: 0, px: { xs: 2.5, sm: 10 } }}>
+    <Field
+      type="checkbox"
+      component={CheckboxLabel}
+      name="regen:sharePermission"
+      label={
+        <Body size="sm">
+          I have this organization’s permission to share their information with
+          Regen Registry
+        </Body>
+      }
+    />
+    <Tooltip
+      arrow
+      placement="top"
+      title="Even if you work closely with this organization, make sure you have their permission to be part of Regen Registry."
+    >
+      <Box sx={{ cursor: 'pointer' }}>
+        <QuestionIcon />
+      </Box>
+    </Tooltip>
+  </Box>
+);
+
+export { OrganizationModal, SharePermissionField };

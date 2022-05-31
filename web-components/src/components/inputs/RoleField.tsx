@@ -18,6 +18,7 @@ import {
   IndividualModal,
   IndividualFormValues,
 } from '../modal/IndividualModal';
+import { ProfileModal, ProfileFormValues } from '../modal/ProfileModal';
 
 const filter = createFilterOptions<RoleOptionType>();
 
@@ -25,6 +26,15 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.typography.pxToRem(40),
+    },
+    [theme.breakpoints.down('sm')]: {
+      marginTop: theme.typography.pxToRem(33),
+    },
+    '&:first-of-type': {
+      marginTop: 0,
+    },
   },
   add: {
     display: 'flex',
@@ -85,6 +95,7 @@ interface Props extends FieldProps {
   onSaveIndividual: (v: IndividualFormValues) => Promise<any>;
   validateEntity: (values: FormValues) => Promise<FormikErrors<FormValues>>;
   mapboxToken: string;
+  profile?: boolean;
 }
 
 interface RoleOptionType {
@@ -132,11 +143,17 @@ const RoleField: React.FC<Props> = ({
   onSaveOrganization,
   onSaveIndividual,
   validateEntity,
+  profile,
   ...fieldProps
 }) => {
   const styles = useStyles();
-  const [organizationEdit, setOrganizationEdit] = useState<any | null>();
-  const [individualEdit, setIndividualEdit] = useState<any | null>(null);
+  const [organizationEdit, setOrganizationEdit] =
+    useState<OrganizationFormValues | null>();
+  const [individualEdit, setIndividualEdit] =
+    useState<IndividualFormValues | null>(null);
+  const [profileEdit, setProfileEdit] = useState<ProfileFormValues | null>(
+    null,
+  );
   const [value, setValue] = useState<any | null>({});
 
   const { form, field } = fieldProps;
@@ -182,6 +199,10 @@ const RoleField: React.FC<Props> = ({
     setIndividualEdit(null);
   };
 
+  const closeProfileModal = (): void => {
+    setProfileEdit(null);
+  };
+
   const editEntity = (entity: FormValues): void => {
     if (isIndividual(entity)) {
       setIndividualEdit(entity);
@@ -215,9 +236,16 @@ const RoleField: React.FC<Props> = ({
                   className={styles.add}
                   onClick={e => {
                     e.stopPropagation();
-                    setOrganizationEdit({
-                      'schema:legalName': '',
-                    });
+                    if (profile) {
+                      setProfileEdit({
+                        '@type': 'regen:Organization',
+                        'regen:showOnProjectPage': true,
+                      });
+                    } else {
+                      setOrganizationEdit({
+                        '@type': 'regen:Organization',
+                      });
+                    }
                   }}
                 >
                   <OrganizationIcon />
@@ -231,9 +259,16 @@ const RoleField: React.FC<Props> = ({
                   className={styles.add}
                   onClick={e => {
                     e.stopPropagation();
-                    setIndividualEdit({
-                      'schema:name': '',
-                    });
+                    if (profile) {
+                      setProfileEdit({
+                        '@type': 'regen:Individual',
+                        'regen:showOnProjectPage': true,
+                      });
+                    } else {
+                      setIndividualEdit({
+                        '@type': 'regen:Individual',
+                      });
+                    }
                   }}
                 >
                   <UserIcon />
@@ -300,6 +335,14 @@ const RoleField: React.FC<Props> = ({
         <IndividualModal
           individual={individualEdit}
           onClose={closeIndividualModal}
+          onSubmit={saveIndividual}
+          validate={validateEntity}
+        />
+      )}
+      {profileEdit && (
+        <ProfileModal
+          profile={profileEdit}
+          onClose={closeProfileModal}
           onSubmit={saveIndividual}
           validate={validateEntity}
         />

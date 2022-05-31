@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import {
   RoleField,
@@ -10,10 +8,15 @@ import {
 } from 'web-components/lib/components/inputs/RoleField';
 import { Subtitle } from 'web-components/lib/components/typography';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+import TextField from 'web-components/lib/components/inputs/TextField';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
 
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import {
+  validate,
+  getProjectPageBaseData,
+  getProjectShapeIri,
+} from '../../lib/rdf';
 import { ProjectPageFooter } from '../molecules';
 import {
   useReallyCreateUserMutation,
@@ -31,7 +34,7 @@ interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
   initialValues?: RolesValues;
   projectCreator?: GetOrganizationProfileByEmailQuery;
-  creditClassId?: string;
+  creditClassId?: string | null;
 }
 
 export interface RolesValues {
@@ -39,26 +42,10 @@ export interface RolesValues {
   'regen:landSteward'?: FormValues;
   'regen:projectDeveloper'?: FormValues;
   'regen:projectOriginator'?: FormValues;
+  admin?: string;
 }
 
 const rolesErrorMessage = 'You must add one of the following roles.';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  storyCard: {
-    paddingBottom: 0,
-  },
-  field: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(12),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(10),
-    },
-  },
-  error: {
-    marginTop: 0,
-  },
-}));
 
 function getEntity(
   query?: GetOrganizationProfileByEmailQuery,
@@ -101,13 +88,13 @@ const RolesForm: React.FC<RolesFormProps> = ({
   submit,
   initialValues,
   projectCreator,
+  creditClassId,
 }) => {
   const [entities, setEntities] = useState<Array<FormValues>>([]);
-  const styles = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
-      uri: 'http://regen.network/ProjectPageShape',
+      uri: getProjectShapeIri(creditClassId),
     },
   });
 
@@ -190,7 +177,10 @@ const RolesForm: React.FC<RolesFormProps> = ({
   ): Promise<FormikErrors<RolesValues>> => {
     const errors: FormikErrors<RolesValues> = {};
     if (graphData?.shaclGraphByUri?.graph) {
-      const projectPageData = { ...getProjectPageBaseData(), ...values };
+      const projectPageData = {
+        ...getProjectPageBaseData(creditClassId),
+        ...values,
+      };
       const report = await validate(
         graphData.shaclGraphByUri.graph,
         projectPageData,
@@ -386,41 +376,47 @@ const RolesForm: React.FC<RolesFormProps> = ({
         {({ submitForm, isValid, isSubmitting, touched }) => {
           return (
             <Form translate="yes">
-              <OnBoardingCard className={styles.storyCard}>
-                <Subtitle
-                  size="lg"
-                  sx={{ color: 'primary.contrastText', mb: { xs: 10, sm: 12 } }}
-                >
-                  You must add one of the following roles.
-                </Subtitle>
+              <OnBoardingCard>
+                {!creditClassId && (
+                  <Subtitle
+                    size="lg"
+                    sx={{
+                      color: 'primary.contrastText',
+                      mb: { xs: 10, sm: 12 },
+                    }}
+                  >
+                    {rolesErrorMessage}
+                  </Subtitle>
+                )}
+                {!creditClassId && (
+                  <Field
+                    component={RoleField}
+                    label="Land Owner"
+                    optional
+                    description="The individual or organization that owns this land."
+                    name="regen:landOwner"
+                    options={entities}
+                    mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                    onSaveOrganization={saveOrganization}
+                    onSaveIndividual={saveIndividual}
+                    validateEntity={validateEntity}
+                  />
+                )}
+                {!creditClassId && (
+                  <Field
+                    component={RoleField}
+                    label="Land Steward"
+                    optional
+                    description="The individual or organization that is performing the work on the ground. This can be a farmer, rancher, conservationist, forester, fisherman, etc."
+                    name="regen:landSteward"
+                    options={entities}
+                    mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                    onSaveOrganization={saveOrganization}
+                    onSaveIndividual={saveIndividual}
+                    validateEntity={validateEntity}
+                  />
+                )}
                 <Field
-                  classes={{ root: styles.field }}
-                  component={RoleField}
-                  label="Land Owner"
-                  optional
-                  description="The individual or organization that owns this land."
-                  name="regen:landOwner"
-                  options={entities}
-                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                  onSaveOrganization={saveOrganization}
-                  onSaveIndividual={saveIndividual}
-                  validateEntity={validateEntity}
-                />
-                <Field
-                  classes={{ root: styles.field }}
-                  component={RoleField}
-                  label="Land Steward"
-                  optional
-                  description="The individual or organization that is performing the work on the ground. This can be a farmer, rancher, conservationist, forester, fisherman, etc."
-                  name="regen:landSteward"
-                  options={entities}
-                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                  onSaveOrganization={saveOrganization}
-                  onSaveIndividual={saveIndividual}
-                  validateEntity={validateEntity}
-                />
-                <Field
-                  classes={{ root: styles.field }}
                   component={RoleField}
                   label="Project Developer"
                   optional
@@ -431,20 +427,32 @@ const RolesForm: React.FC<RolesFormProps> = ({
                   onSaveOrganization={saveOrganization}
                   onSaveIndividual={saveIndividual}
                   validateEntity={validateEntity}
+                  profile={!!creditClassId}
                 />
-                <Field
-                  classes={{ root: styles.field }}
-                  component={RoleField}
-                  label="Project Originator"
-                  optional
-                  description="The individual or organization that helps initiate the project."
-                  name="regen:projectOriginator"
-                  options={entities}
-                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                  onSaveOrganization={saveOrganization}
-                  onSaveIndividual={saveIndividual}
-                  validateEntity={validateEntity}
-                />
+                {!creditClassId && (
+                  <Field
+                    component={RoleField}
+                    label="Project Originator"
+                    optional
+                    description="The individual or organization that helps initiate the project."
+                    name="regen:projectOriginator"
+                    options={entities}
+                    mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                    onSaveOrganization={saveOrganization}
+                    onSaveIndividual={saveIndividual}
+                    validateEntity={validateEntity}
+                  />
+                )}
+                {creditClassId && (
+                  <Field
+                    name="admin"
+                    type="text"
+                    label="Admin"
+                    component={TextField}
+                    // className={styles.senderField}
+                    disabled
+                  />
+                )}
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}

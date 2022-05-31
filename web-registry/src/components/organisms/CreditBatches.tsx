@@ -7,13 +7,13 @@ import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-import { truncate } from 'web-components/lib/utils/truncate';
+import { truncate, truncateHash } from 'web-components/lib/utils/truncate';
 import { Link } from '../atoms';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
-import { getBatchesWithSupply } from '../../lib/ecocredit';
-import { getAccountUrl } from '../../lib/block-explorer';
+import { getBatchesWithSupply } from '../../lib/ecocredit/api';
+import { getAccountUrl, getHashUrl } from '../../lib/block-explorer';
 
 interface CreditBatchProps {
   creditClassId?: string | null;
@@ -30,6 +30,7 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
+  { id: 'txhash', numeric: false, label: 'tx hash' },
   { id: 'class_id', numeric: false, label: 'credit class' },
   { id: 'batch_denom', numeric: false, label: 'batch denom' },
   { id: 'issuer', numeric: false, label: 'issuer' },
@@ -134,6 +135,13 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
       ))}
       rows={batches.map(batch =>
         [
+          <Link
+            href={getHashUrl(batch.txhash)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {truncateHash(batch.txhash)}
+          </Link>,
           <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
             {batch.class_id}
           </Link>,

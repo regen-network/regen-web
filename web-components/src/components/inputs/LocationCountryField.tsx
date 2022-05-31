@@ -7,11 +7,13 @@ import { countries } from '../../utils/countries';
 interface FieldProps {
   className?: string;
   optional?: boolean;
+  name?: string;
 }
 
 const LocationCountryField: React.FC<FieldProps> = ({
   className,
   optional = false,
+  name = 'country',
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
 
@@ -26,7 +28,7 @@ const LocationCountryField: React.FC<FieldProps> = ({
 
   return (
     <Field
-      name="country"
+      name={name}
       label="Country"
       component={SelectTextField}
       className={className}

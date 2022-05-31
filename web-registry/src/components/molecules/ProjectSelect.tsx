@@ -64,6 +64,7 @@ const ProjectSelect: React.FC<FieldProps> = ({
       name={name}
       component={SelectTextField}
       options={projectOptions}
+      required={required}
       {...props}
     />
   );

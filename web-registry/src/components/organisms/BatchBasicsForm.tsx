@@ -36,7 +36,7 @@ export interface BatchBasicsFormValues {
   classId: string;
   startDate: Date | null;
   endDate: Date | null;
-  metadata?: Partial<VCSBatchMetadataLD>;
+  metadata?: Partial<VCSBatchMetadataLD> | string;
 }
 
 const vcsMetadataSchema: AnyObjectSchema = object({
@@ -61,8 +61,8 @@ const basicsValidationSchema = object({
   metadata: object().when('classId', {
     is: 'C01',
     then: schema => vcsMetadataSchema,
+    otherwise: schema => JSONSchema,
   }),
-  metadataJSON: JSONSchema,
 });
 
 const BatchBasicsForm: React.FC<{

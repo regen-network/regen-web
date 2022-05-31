@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { SxProps, Grid } from '@mui/material';
@@ -14,6 +14,7 @@ import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import { getISOString } from '../../utils/locationStandard';
+import ErrorBanner from '../banner/ErrorBanner';
 
 /**
  * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).
@@ -110,6 +111,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
     const { values, setFieldValue } = useFormikContext<
       RetireFormValues | RetireFormValuesArray
     >();
+    const [geocodingError, setGeocodingError] = useState<boolean>(false);
 
     const item =
       typeof arrayIndex === 'number'
@@ -134,7 +136,9 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
           });
           setFieldValue(retirementLocationName, isoString);
         } catch (err) {
-          // TODO
+          // initially this effect may fail mainly because the accessToken
+          // (mapboxToken) is not set in the environment variables.
+          setGeocodingError(true);
         }
       };
 
@@ -151,10 +155,14 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
       setFieldValue,
       mapboxToken,
       arrayPrefix,
+      setGeocodingError,
     ]);
 
     return (
       <>
+        {geocodingError && (
+          <ErrorBanner text={'Geocoding service is unavailable'} />
+        )}
         <Title variant="h5" sx={sxs.title}>
           Transaction note
         </Title>

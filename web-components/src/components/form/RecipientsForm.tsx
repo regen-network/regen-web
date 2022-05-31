@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface FormProps extends BottomCreditRetireFieldsProps {
-  mapboxToken: string;
   onSubmit: (values: FormValues) => void;
 }
 

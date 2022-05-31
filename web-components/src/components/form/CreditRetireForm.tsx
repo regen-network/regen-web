@@ -111,7 +111,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
     const { values, setFieldValue } = useFormikContext<
       RetireFormValues | RetireFormValuesArray
     >();
-    const [geocodingError, setGeocodingError] = useState<boolean>(false);
+    const [geocodingError, setGeocodingError] = useState<string | null>(null);
 
     const item =
       typeof arrayIndex === 'number'
@@ -135,10 +135,13 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
             postalCode,
           });
           setFieldValue(retirementLocationName, isoString);
+          if (geocodingError) setGeocodingError(null);
         } catch (err) {
           // initially this effect may fail mainly because the accessToken
           // (mapboxToken) is not set in the environment variables.
-          setGeocodingError(true);
+          setGeocodingError(
+            (err as string) || 'Geocoding service not available',
+          );
         }
       };
 
@@ -155,14 +158,13 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
       setFieldValue,
       mapboxToken,
       arrayPrefix,
+      geocodingError,
       setGeocodingError,
     ]);
 
     return (
       <>
-        {geocodingError && (
-          <ErrorBanner text={'Geocoding service is unavailable'} />
-        )}
+        {geocodingError && <ErrorBanner text={geocodingError} />}
         <Title variant="h5" sx={sxs.title}>
           Transaction note
         </Title>

@@ -19,6 +19,7 @@ const MetadataJSONField: React.FC<FieldProps> = ({
 }) => {
   const {
     setFieldValue,
+    setFieldTouched,
     values: { classId, metadata },
   } = useFormikContext<BatchBasicsFormValues>();
   const [formikName, setFormikName] = useState('loading');
@@ -30,9 +31,10 @@ const MetadataJSONField: React.FC<FieldProps> = ({
       // using this timeout fixes a timing bug when transitioning from metadata Object
       setTimeout(() => {
         setFormikName(name);
+        setFieldTouched(name, false);
       }, 700);
     }
-  }, [classId, metadata, setFieldValue, name]);
+  }, [classId, metadata, setFieldValue, name, setFieldTouched]);
 
   return formikName === name && typeof metadata === 'string' ? (
     <>

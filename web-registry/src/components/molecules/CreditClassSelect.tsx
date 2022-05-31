@@ -13,11 +13,12 @@ import { BatchBasicsFormValues } from '../organisms/BatchBasicsForm';
 
 interface Props {
   name?: string;
+  required?: boolean;
 }
 
 const defaultCCOption = { value: '', label: 'Choose Credit Class' };
 
-const CreditClassSelect: React.FC<Props> = ({ name = 'classId', ...props }) => {
+const CreditClassSelect: React.FC<Props> = ({ name = 'classId', required }) => {
   const { setFieldValue } = useFormikContext<BatchBasicsFormValues>();
   const [creditClassOptions, setCreditClassOptions] = useState<Option[]>();
   const onChainClasses = useQueryListClasses();
@@ -54,7 +55,6 @@ const CreditClassSelect: React.FC<Props> = ({ name = 'classId', ...props }) => {
       required
       component={SelectTextField}
       options={creditClassOptions}
-      {...props}
     />
   );
 };

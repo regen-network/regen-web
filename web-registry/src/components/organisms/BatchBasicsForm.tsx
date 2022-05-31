@@ -95,7 +95,7 @@ const BatchBasicsForm: React.FC<{
         return (
           <Form>
             <OnBoardingCard>
-              <CreditClassSelect name="classId" />
+              <CreditClassSelect name="classId" required />
               <ProjectSelect
                 creditClassId={values.classId}
                 name="metadata['regen:vcsProjectId']"

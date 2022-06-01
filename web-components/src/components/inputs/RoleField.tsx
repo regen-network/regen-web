@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import { SxProps, TextField } from '@mui/material';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
-import { FieldProps, FormikErrors } from 'formik';
+import { FieldProps, FormikErrors, FormikProps } from 'formik';
 import cx from 'clsx';
 
 import FieldFormControl from './FieldFormControl';
@@ -135,6 +135,18 @@ const sxs = {
   formLabel: { color: 'primary.contrastText', ml: 1 } as SxProps,
 };
 
+function setFieldValueInOtherFields(
+  form: FormikProps<any>,
+  name: string,
+  value: any,
+): void {
+  for (const fieldName in form.values) {
+    if (form.values[fieldName].id === value.id && fieldName !== name) {
+      form.setFieldValue(fieldName, value);
+    }
+  }
+}
+
 const RoleField: React.FC<Props> = ({
   className,
   classes,
@@ -173,42 +185,21 @@ const RoleField: React.FC<Props> = ({
     var savedOrg = await onSaveOrganization(org);
     closeOrganizationModal();
     form.setFieldValue(field.name, savedOrg);
-    for (const fieldName in form.values) {
-      if (
-        form.values[fieldName].id === savedOrg.id &&
-        `['${fieldName}']` !== field.name
-      ) {
-        form.setFieldValue(`['${fieldName}']`, savedOrg);
-      }
-    }
+    setFieldValueInOtherFields(form, field.name, savedOrg);
   };
 
   const saveIndividual = async (user: IndividualFormValues): Promise<void> => {
     var savedUser = await onSaveIndividual(user);
     closeIndividualModal();
     form.setFieldValue(field.name, savedUser);
-    for (const fieldName in form.values) {
-      if (
-        form.values[fieldName].id === savedUser.id &&
-        `['${fieldName}']` !== field.name
-      ) {
-        form.setFieldValue(`['${fieldName}']`, savedUser);
-      }
-    }
+    setFieldValueInOtherFields(form, field.name, savedUser);
   };
 
   const saveProfile = async (profile: ProfileFormValues): Promise<void> => {
     var savedProfile = await onSaveProfile(profile);
     closeProfileModal();
     form.setFieldValue(field.name, savedProfile);
-    for (const fieldName in form.values) {
-      if (
-        form.values[fieldName].id === savedProfile.id &&
-        `['${fieldName}']` !== field.name
-      ) {
-        form.setFieldValue(`['${fieldName}']`, savedProfile);
-      }
-    }
+    setFieldValueInOtherFields(form, field.name, savedProfile);
   };
 
   const closeOrganizationModal = (): void => {

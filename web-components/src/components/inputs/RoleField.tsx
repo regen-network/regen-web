@@ -124,11 +124,7 @@ export function isIndividual(e: FormValues): e is IndividualFormValues {
 }
 
 function getLabel(o: any): string | undefined {
-  return o.id
-    ? isIndividual(o)
-      ? o['schema:name']
-      : o['schema:legalName']
-    : undefined;
+  return o.id ? o['schema:legalName'] || o['schema:name'] : undefined;
 }
 
 const sxs = {
@@ -220,6 +216,10 @@ const RoleField: React.FC<Props> = ({
     } else {
       setOrganizationEdit(entity);
     }
+  };
+
+  const editProfile = (entity: ProfileFormValues): void => {
+    setProfileEdit(entity);
   };
 
   return (
@@ -328,7 +328,7 @@ const RoleField: React.FC<Props> = ({
       {value && value.id && !value.projectCreator && (
         <OutlinedButton
           className={styles.edit}
-          onClick={() => editEntity(value)}
+          onClick={() => (profile ? editProfile(value) : editEntity(value))}
         >
           edit entity
         </OutlinedButton>

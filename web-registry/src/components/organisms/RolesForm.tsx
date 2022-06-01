@@ -16,7 +16,8 @@ import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileMo
 import {
   validate,
   getProjectPageBaseData,
-  getProjectShapeIri,
+  defaultProjectContext,
+  getCompactedPath,
 } from '../../lib/rdf';
 import { ProjectPageFooter } from '../molecules';
 import {
@@ -26,7 +27,6 @@ import {
   useUpdatePartyByIdMutation,
   useUpdateOrganizationByIdMutation,
   useUpdateAddressByIdMutation,
-  useShaclGraphByUriQuery,
   GetOrganizationProfileByEmailQuery,
   ShaclGraphByUriQuery,
 } from '../../generated/graphql';
@@ -94,9 +94,11 @@ const RolesForm: React.FC<RolesFormProps> = ({
   creditClassId,
   graphData,
 }) => {
-  const [entities, setEntities] = useState<Array<FormValues>>([]);
+  const [entities, setEntities] = useState<
+    Array<FormValues | ProfileFormValues>
+  >([]);
   const { confirmSave, isEdit } = useProjectEditContext();
-  console.log('g', graphData);
+
   // In case of on chain credit class id, we show a unified version
   // of the organization/individual form, the profile form.
   // The profile info will get displayed on the project page by default.
@@ -165,12 +167,15 @@ const RolesForm: React.FC<RolesFormProps> = ({
     if (graphData?.shaclGraphByUri?.graph) {
       const report = await validate(
         graphData.shaclGraphByUri.graph,
-        e,
+        { ...defaultProjectContext, ...e },
         'http://regen.network/ProjectPageRolesGroup',
       );
       for (const result of report.results) {
         const path: keyof T = result.path.value;
-        errors[path] = requiredMessage;
+        const compactedPath = getCompactedPath(path as string);
+        if (compactedPath) {
+          errors[compactedPath as keyof T] = requiredMessage;
+        }
       }
     }
     return errors;
@@ -355,10 +360,8 @@ const RolesForm: React.FC<RolesFormProps> = ({
   ): Promise<ProfileFormValues> => {
     if (!updatedEntity.id) {
       const id = entities.length + 1;
-      const newEntities = [
-        ...entities,
-        { ...updatedEntity, id: id.toString() },
-      ];
+      updatedEntity.id = id.toString();
+      const newEntities = [...entities, { ...updatedEntity }];
       setEntities(newEntities);
     } else {
       const updatedEntities = entities.map((existingEntity: any) =>

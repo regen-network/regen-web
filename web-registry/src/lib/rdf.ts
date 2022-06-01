@@ -47,15 +47,39 @@ export async function validate(
   return report;
 }
 
-export function getProjectPageBaseData(creditClassId?: string | null): any {
-  return {
+export const defaultProjectContext: { '@context': { [key: string]: string } } =
+  {
     '@context': {
       regen: 'http://regen.network/',
       schema: 'http://schema.org/',
       xsd: 'http://www.w3.org/2001/XMLSchema#',
       qudt: 'http://qudt.org/schema/qudt/',
       unit: 'http://qudt.org/vocab/unit/',
+      geojson: 'https://purl.org/geojson/vocab#',
     },
+  };
+
+// getCompactedPath returns the path that could be found in some compacted JSON-LD data
+// based on the expandedPath (comes from data returned by `validate` which returns expanded JSON-LD)
+// and the defaultProjectContext.
+// This is useful to map validation report results path to form field names which used compacted JSON-LD.
+export function getCompactedPath(expandedPath: string): string | undefined {
+  const context = defaultProjectContext['@context'];
+  const key = Object.keys(context).find(key =>
+    expandedPath.includes(context[key]),
+  );
+  if (key) {
+    const str = expandedPath.split(context[key]);
+    if (str.length >= 0) {
+      return `${key}:${str[1]}`;
+    }
+  }
+  return;
+}
+
+export function getProjectPageBaseData(creditClassId?: string | null): any {
+  return {
+    ...defaultProjectContext,
     '@type': creditClassId
       ? `regen:${creditClassId}-Project`
       : ['regen:ProjectPage', 'regen:Project'],

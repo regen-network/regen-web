@@ -15,7 +15,7 @@ export interface MetadataProps {
 const AdditionalProjectMetadata: React.FC<MetadataProps> = ({ metadata }) => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(false);
-  const projectId = metadata?.['regen:vcsProjectId']?.['@value'];
+  const projectId = metadata?.['regen:vcsProjectId'];
 
   if (!metadata || !projectId) {
     return null;

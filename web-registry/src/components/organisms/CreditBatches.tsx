@@ -7,20 +7,18 @@ import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-<<<<<<< HEAD
-import { truncate } from 'web-components/lib/utils/truncate';
-=======
 import { truncate, truncateHash } from 'web-components/lib/utils/truncate';
-import { Link } from '../atoms';
->>>>>>> f80e22a8 (Add tx hash to credit batch table (#957))
 
+import { Link } from '../atoms';
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
 import { getAccountUrl, getHashUrl } from '../../lib/block-explorer';
 
 interface CreditBatchProps {
-  creditClassId?: string;
+  creditClassId?: string | null;
+  projectPage?: boolean;
+  creditBatches?: BatchInfoWithSupply[];
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
@@ -32,15 +30,12 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
-<<<<<<< HEAD
-=======
   { id: 'txhash', numeric: false, label: 'tx hash' },
   { id: 'class_id', numeric: false, label: 'credit class' },
   { id: 'batch_denom', numeric: false, label: 'batch denom' },
->>>>>>> f80e22a8 (Add tx hash to credit batch table (#957))
-  { id: 'issuer', numeric: false, label: 'issuer' },
-  { id: 'batch_denom', numeric: false, label: 'batch denom' },
   { id: 'class_id', numeric: false, label: 'credit class' },
+  { id: 'batch_denom', numeric: false, label: 'batch denom' },
+  { id: 'issuer', numeric: false, label: 'issuer' },
   {
     id: 'tradable_supply',
     numeric: true,
@@ -100,6 +95,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const CreditBatches: React.FC<CreditBatchProps> = ({
   creditClassId,
+  projectPage = false,
+  creditBatches,
   titleAlign = 'center',
 }) => {
   const styles = useStyles();
@@ -107,24 +104,23 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   let columnsToShow = [...headCells];
 
   useEffect(() => {
-    const fetchData = (): void => {
+    if (!ledgerRESTUri) return;
+    if (!projectPage) {
       getBatchesWithSupply(creditClassId)
         .then(sortableBatches => {
           setBatches(sortableBatches.data);
         })
         .catch(console.error); // eslint-disable-line no-console
-    };
+    } else if (creditBatches) {
+      setBatches(creditBatches);
+    }
+  }, [projectPage, creditClassId, creditBatches]);
 
-    if (!ledgerRESTUri) return;
-    fetchData();
-  }, [creditClassId]);
-
-  // We hide the classId column if it creditClassId provided (redundant)
+  // We hide the classId column if creditClassId provided (redundant)
   if (creditClassId) {
     columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'class_id');
   }
-<<<<<<< HEAD
-=======
+
   // Ditto for project location on project page
   if (projectPage) {
     columnsToShow = columnsToShow.filter(
@@ -186,47 +182,20 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
       )}
     />
   );
->>>>>>> f80e22a8 (Add tx hash to credit batch table (#957))
 
   return ledgerRESTUri && batches.length > 0 ? (
-    <Section
-      classes={{ root: styles.section, title: styles.title }}
-      title="Credit Batches"
-      titleVariant="h2"
-      titleAlign={titleAlign}
-    >
-      <ActionsTable
-        tableLabel="credit batch table"
-        headerRows={columnsToShow.map(headCell => (
-          <Box className={cx(headCell.wrap && styles.wrap)} key={headCell.id}>
-            {headCell.label}
-          </Box>
-        ))}
-        rows={batches.map(batch =>
-          [
-            <a
-              href={getAccountUrl(batch.issuer)}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {truncate(batch.issuer)}
-            </a>,
-            <Box className={styles.noWrap}>{batch.batch_denom}</Box>,
-            batch.class_id,
-            formatNumber(batch.tradable_supply),
-            formatNumber(batch.retired_supply),
-            formatNumber(batch.amount_cancelled),
-            <Box className={styles.noWrap}>
-              {formatDate(batch.start_date as Date)}
-            </Box>,
-            <Box className={styles.noWrap}>
-              {formatDate(batch.end_date as Date)}
-            </Box>,
-            <Box className={styles.noWrap}>{batch.project_location}</Box>,
-          ].filter(item => !(creditClassId && item === batch.class_id)),
-        )}
-      />
-    </Section>
+    projectPage ? (
+      table
+    ) : (
+      <Section
+        classes={{ root: styles.section, title: styles.title }}
+        title="Credit Batches"
+        titleVariant="h2"
+        titleAlign={titleAlign}
+      >
+        {table}
+      </Section>
+    )
   ) : null;
 };
 

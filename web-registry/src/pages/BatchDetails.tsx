@@ -63,10 +63,7 @@ export const BatchDetails: React.FC = () => {
     skip: !vcsProjectId,
     variables: {
       metadata: {
-        'regen:vcsProjectId': {
-          '@type': 'xsd:unsignedInt',
-          '@value': vcsProjectId,
-        },
+        'regen:vcsProjectId': vcsProjectId,
       },
     },
   });

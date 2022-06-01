@@ -1,13 +1,13 @@
 import React from 'react';
 import { FieldProps } from 'formik';
 import { makeStyles } from '@mui/styles';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { SxProps, TextField } from '@mui/material';
 import { TextFieldProps } from 'formik-mui';
 
+import { Theme } from '../../theme/muiTheme';
 import FieldFormControl from './FieldFormControl';
 
 interface DatePickProps extends FieldProps {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { useTheme, Box } from '@mui/material';
 import { Formik, Form, Field, FormikErrors } from 'formik';
@@ -43,6 +43,13 @@ function ProfileModal({
 }: ProfileModalProps): JSX.Element {
   const theme = useTheme();
   const organization = profile['@type'] === 'regen:Organization';
+  const [profileEdit, setProfileEdit] = useState<ProfileFormValues | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    setProfileEdit(profile);
+  }, [profile]);
 
   return (
     <Modal open={!!profile} onClose={onClose}>
@@ -52,7 +59,7 @@ function ProfileModal({
           align="center"
           sx={{ px: [0, 7.5], pt: [8, 0], pb: [6, 7.5] }}
         >
-          {`${profile && profile['schema:name'] ? 'Edit' : 'Add'} ${
+          {`${profileEdit?.id ? 'Edit' : 'Add'} ${
             organization ? 'Organization' : 'Individual'
           }`}
         </Title>
@@ -60,9 +67,11 @@ function ProfileModal({
           enableReinitialize
           validateOnMount
           initialValues={{
-            ...profile,
+            ...profileEdit,
+            '@type': profile['@type'],
+            'regen:showOnProjectPage': true,
             // 'regen:sharePermission':
-            // profile && !!profile['regen:sharePermission'],
+            // profileEdit && !!profileEdit['regen:sharePermission'],
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
@@ -139,18 +148,27 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const ProfileOnBoardingCard: React.FC = ({ children }) => {
+const ProfileOnBoardingCard = ({
+  children,
+}: {
+  children?: React.ReactNode;
+}): JSX.Element => {
   const styles = useStyles();
 
   return <OnBoardingCard className={styles.card}>{children}</OnBoardingCard>;
 };
 
-const ProfileSubmitFooter: React.FC<{
+const ProfileSubmitFooter = ({
+  submitForm,
+  isValid,
+  isSubmitting,
+  onClose,
+}: {
   submitForm: (() => Promise<void>) & (() => Promise<any>);
   isValid: boolean;
   isSubmitting: boolean;
   onClose: () => void;
-}> = ({ submitForm, isValid, isSubmitting, onClose }) => (
+}): JSX.Element => (
   <Box
     sx={{
       display: 'flex',

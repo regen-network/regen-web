@@ -20,7 +20,9 @@ import {
   PartyFieldsFragment,
   Maybe,
   ProjectPatch,
+  useShaclGraphByUriQuery,
 } from '../generated/graphql';
+import { getProjectShapeIri } from '../lib/rdf';
 
 function getPartyIds(
   party?: Maybe<{ __typename?: 'Party' } & PartyFieldsFragment>,
@@ -101,6 +103,16 @@ const Roles: React.FC = () => {
     skip: !userEmail,
     variables: {
       email: userEmail as string,
+    },
+  });
+
+  const { data: graphData } = useShaclGraphByUriQuery({
+    // do not fetch SHACL Graph until we get the project
+    // and the optional on chain credit class id associatied to it,
+    // this prevents from fetching this twice
+    skip: !project,
+    variables: {
+      uri: getProjectShapeIri(creditClassId),
     },
   });
 
@@ -193,6 +205,7 @@ const Roles: React.FC = () => {
         initialValues={initialValues}
         projectCreator={userProfileData}
         creditClassId={creditClassId}
+        graphData={graphData}
       />
     </EditFormTemplate>
   ) : (
@@ -206,6 +219,7 @@ const Roles: React.FC = () => {
         initialValues={initialValues}
         projectCreator={userProfileData}
         creditClassId={creditClassId}
+        graphData={graphData}
       />
     </OnboardingFormTemplate>
   );

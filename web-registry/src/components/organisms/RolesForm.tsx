@@ -28,6 +28,7 @@ import {
   useUpdateAddressByIdMutation,
   useShaclGraphByUriQuery,
   GetOrganizationProfileByEmailQuery,
+  ShaclGraphByUriQuery,
 } from '../../generated/graphql';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 
@@ -36,6 +37,7 @@ interface RolesFormProps {
   initialValues?: RolesValues;
   projectCreator?: GetOrganizationProfileByEmailQuery;
   creditClassId?: string | null;
+  graphData?: ShaclGraphByUriQuery;
 }
 
 export interface RolesValues {
@@ -90,15 +92,11 @@ const RolesForm: React.FC<RolesFormProps> = ({
   initialValues,
   projectCreator,
   creditClassId,
+  graphData,
 }) => {
   const [entities, setEntities] = useState<Array<FormValues>>([]);
   const { confirmSave, isEdit } = useProjectEditContext();
-  const { data: graphData } = useShaclGraphByUriQuery({
-    variables: {
-      uri: getProjectShapeIri(creditClassId),
-    },
-  });
-
+  console.log('g', graphData);
   // In case of on chain credit class id, we show a unified version
   // of the organization/individual form, the profile form.
   // The profile info will get displayed on the project page by default.

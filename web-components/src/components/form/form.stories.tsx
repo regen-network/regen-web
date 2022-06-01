@@ -8,6 +8,10 @@ import { CreditSendForm } from 'web-components/lib/components/form/CreditSendFor
 import { CreditRetireForm } from 'web-components/lib/components/form/CreditRetireForm';
 import { BasketPutForm } from 'web-components/lib/components/form/BasketPutForm';
 import { BasketTakeForm } from 'web-components/lib/components/form/BasketTakeForm';
+import {
+  FormValues,
+  RecipientsForm,
+} from 'web-components/lib/components/form/RecipientsForm';
 
 export default {
   title: 'Forms',
@@ -106,5 +110,14 @@ export const basketTakeForm = (): JSX.Element => (
     mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
+  />
+);
+
+export const creditBatchRecipientsForm = (): JSX.Element => (
+  <RecipientsForm
+    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    onSubmit={async (values: FormValues) =>
+      alert('submit' + JSON.stringify(values, null, 2))
+    }
   />
 );

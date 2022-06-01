@@ -31,7 +31,20 @@ This project uses [lerna](https://github.com/lerna/lerna) with [yarn workspaces]
 - `web-www`: Regen website based on [Gatsby](https://www.gatsbyjs.org/)
 - `web-auth`: React application used for Auth0 Custom Universal Login
 
-Install dependencies using:
+### Prerequisites
+
+#### Mac
+
+To set up system dependencies run the following: 
+```sh
+brew install python
+sudo ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
+brew install vips
+```
+
+Note: `python` and `vips` are dependencies via `sharp`.
+
+### Install dependencies
 
 ```sh
 yarn install

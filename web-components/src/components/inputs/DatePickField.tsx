@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldProps } from 'formik';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -10,7 +11,6 @@ import { TextFieldProps } from 'formik-mui';
 import FieldFormControl from './FieldFormControl';
 
 interface DatePickProps extends FieldProps {
-  className?: string;
   sx?: SxProps<Theme>;
   label: string;
   optional?: boolean;
@@ -128,7 +128,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 
 const DatePickField: React.FC<DatePickProps> = ({
   label,
-  className,
   sx,
   optional = false,
   placeholder,
@@ -146,7 +145,6 @@ const DatePickField: React.FC<DatePickProps> = ({
 
   return (
     <FieldFormControl
-      className={className}
       label={label}
       optional={optional}
       disabled={form.isSubmitting}

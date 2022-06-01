@@ -10,7 +10,6 @@ export * from './BuyCreditsModal';
 export * from './ConfirmationModal';
 export * from './CreditActivityTable';
 export * from './CreditBatches';
-export * from './ProjectCreditBatchesTable';
 export * from './CreditClassCards';
 export * from './CreditClassConnectSection';
 export * from './CreditClassOverviewSection';

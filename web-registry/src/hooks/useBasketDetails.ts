@@ -155,10 +155,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
               const { data } = await fetchProjects({
                 variables: {
                   metadata: {
-                    'regen:vcsProjectId': {
-                      '@type': 'xsd:unsignedInt',
-                      '@value': vcsProjectId,
-                    },
+                    'regen:vcsProjectId': vcsProjectId,
                   },
                 },
               });

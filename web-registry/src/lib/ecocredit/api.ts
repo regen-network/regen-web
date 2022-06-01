@@ -43,16 +43,12 @@ import type {
 // helpers for combining ledger queries (currently rest, regen-js in future)
 // into UI data structures
 
-export const getBatchesWithSupplyForDenoms = async (
-  denoms: string[],
+export const getBatchesTotal = async (
+  batches: BatchInfoWithSupply[],
 ): Promise<{
-  batches: BatchInfoWithSupply[];
   totals: BatchTotalsForProject;
 }> => {
   try {
-    const batches = await Promise.all(
-      denoms.map(denom => getBatchWithSupplyForDenom(denom)),
-    );
     const totals = batches.reduce(
       (acc, batch) => {
         acc.amount_cancelled += Number(batch?.amount_cancelled ?? 0);
@@ -66,11 +62,9 @@ export const getBatchesWithSupplyForDenoms = async (
         tradable_supply: 0,
       },
     );
-    return { batches, totals };
+    return { totals };
   } catch (err) {
-    throw new Error(
-      `Could not get batches with supply for denoms ${denoms}, ${err}`,
-    );
+    throw new Error(`Could not get batches total ${err}`);
   }
 };
 
@@ -115,7 +109,7 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
 };
 
 export const getBatchesWithSupply = async (
-  creditClassId?: string,
+  creditClassId?: string | null,
   params?: URLSearchParams,
 ): Promise<{
   data: BatchInfoWithSupply[];
@@ -209,7 +203,7 @@ export const queryEcoClasses = async (
 };
 
 export const queryEcoBatches = async (
-  creditClassId?: string,
+  creditClassId?: string | null,
   params?: URLSearchParams,
 ): Promise<QueryBatchesResponseV0> => {
   try {

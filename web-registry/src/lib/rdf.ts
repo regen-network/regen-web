@@ -69,10 +69,7 @@ export function getCompactedPath(expandedPath: string): string | undefined {
     expandedPath.includes(context[key]),
   );
   if (key) {
-    const str = expandedPath.split(context[key]);
-    if (str.length >= 0) {
-      return `${key}:${str[1]}`;
-    }
+    return expandedPath.replace(context[key], `${key}:`);
   }
   return;
 }

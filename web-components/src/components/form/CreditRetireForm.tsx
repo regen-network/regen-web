@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { SxProps, Grid } from '@mui/material';
@@ -14,6 +14,7 @@ import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import { getISOString } from '../../utils/locationStandard';
+import ErrorBanner from '../banner/ErrorBanner';
 
 /**
  * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).
@@ -76,6 +77,10 @@ export interface RetireFormValues extends MetaRetireFormValues {
   retiredAmount: number;
 }
 
+interface RetireFormValuesArray {
+  recipients: RetireFormValues[];
+}
+
 interface CreditRetireFieldsProps extends BottomCreditRetireFieldsProps {
   batchDenom: string;
   availableTradableAmount: number;
@@ -90,41 +95,81 @@ const sxs = {
 
 export interface BottomCreditRetireFieldsProps {
   mapboxToken: string;
+  arrayPrefix?: string;
+  arrayIndex?: number;
 }
 
+type LocationType = {
+  country?: string;
+  stateProvince?: string;
+  postalCode?: string;
+};
+
 export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
-  ({ mapboxToken }) => {
+  ({ mapboxToken, arrayPrefix = '', arrayIndex }) => {
     const styles = useStyles();
-    const {
-      values: { country, stateProvince, postalCode },
-      setFieldValue,
-    } = useFormikContext<RetireFormValues>();
+    const { values, setFieldValue } = useFormikContext<
+      RetireFormValues | RetireFormValuesArray
+    >();
+    const [geocodingError, setGeocodingError] = useState<string | null>(null);
+
+    const item =
+      typeof arrayIndex === 'number'
+        ? (values as RetireFormValuesArray).recipients[arrayIndex]
+        : (values as RetireFormValues);
+
+    const { country, stateProvince, postalCode } = item;
 
     useEffect(() => {
-      const setRetirementLocation = async (): Promise<void> => {
-        const isoString = await getISOString(mapboxToken, {
-          countryKey: country,
-          stateProvince,
-          postalCode,
-        });
-        setFieldValue('retirementLocation', isoString);
+      const retirementLocationName = `${arrayPrefix}retirementLocation`;
+
+      const setRetirementLocation = async ({
+        country,
+        stateProvince,
+        postalCode,
+      }: LocationType): Promise<void> => {
+        try {
+          const isoString = await getISOString(mapboxToken, {
+            countryKey: country,
+            stateProvince,
+            postalCode,
+          });
+          setFieldValue(retirementLocationName, isoString);
+          if (geocodingError) setGeocodingError(null);
+        } catch (err) {
+          // initially this effect may fail mainly because the accessToken
+          // (mapboxToken) is not set in the environment variables.
+          setGeocodingError(
+            (err as string) || 'Geocoding service not available',
+          );
+        }
       };
 
       if (stateProvince || country || postalCode) {
-        setRetirementLocation();
+        setRetirementLocation({ country, stateProvince, postalCode });
       }
       if (!country) {
-        setFieldValue('retirementLocation', null);
+        setFieldValue(retirementLocationName, null);
       }
-    }, [country, stateProvince, postalCode, setFieldValue, mapboxToken]);
+    }, [
+      country,
+      stateProvince,
+      postalCode,
+      setFieldValue,
+      mapboxToken,
+      arrayPrefix,
+      geocodingError,
+      setGeocodingError,
+    ]);
 
     return (
       <>
+        {geocodingError && <ErrorBanner text={geocodingError} />}
         <Title variant="h5" sx={sxs.title}>
           Transaction note
         </Title>
         <Field
-          name="note"
+          name={`${arrayPrefix}note`}
           type="text"
           label="Add retirement transaction details (stored in the tx memo)"
           component={TextField}
@@ -142,16 +187,20 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
         </Body>
         <Grid container className={styles.stateCountryGrid}>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <LocationStateField country={country} optional={!postalCode} />
+            <LocationStateField
+              country={country}
+              optional={!postalCode}
+              name={`${arrayPrefix}stateProvince`}
+            />
           </Grid>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <LocationCountryField />
+            <LocationCountryField name={`${arrayPrefix}country`} />
           </Grid>
         </Grid>
         <Field
           component={ControlledTextField}
           label="Postal Code"
-          name="postalCode"
+          name={`${arrayPrefix}postalCode`}
           optional
         />
       </>
@@ -162,16 +211,22 @@ export const CreditRetireFields = ({
   batchDenom,
   availableTradableAmount,
   mapboxToken,
+  arrayPrefix = '',
+  arrayIndex,
 }: CreditRetireFieldsProps): JSX.Element => {
   return (
     <>
       <AmountField
-        name="retiredAmount"
-        label="Amount to retire"
+        name={`${arrayPrefix}retiredAmount`}
+        label="Amount retired"
         availableAmount={availableTradableAmount}
         denom={batchDenom}
       />
-      <BottomCreditRetireFields mapboxToken={mapboxToken} />
+      <BottomCreditRetireFields
+        mapboxToken={mapboxToken}
+        arrayPrefix={arrayPrefix}
+        arrayIndex={arrayIndex}
+      />
     </>
   );
 };

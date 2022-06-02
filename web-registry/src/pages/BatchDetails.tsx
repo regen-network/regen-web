@@ -6,13 +6,13 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 import { Loading } from 'web-components/lib/components/loading';
+import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
 import { getBatchWithSupplyForDenom } from '../lib/ecocredit/api';
 import { getMetadata } from '../lib/metadata-graph';
 import { useProjectsByMetadataQuery } from '../generated/graphql';
 
 import type { BatchInfoWithSupply } from '../types/ledger/ecocredit';
-import type { BatchMetadataLD } from '../generated/json-ld';
 import {
   BatchInfoGrid,
   BatchMetadata,
@@ -26,7 +26,7 @@ export const BatchDetails: React.FC = () => {
   const { batchDenom } = useParams();
   const [ledgerLoading, setLedgerLoading] = useState(false);
   const [batch, setBatch] = useState<BatchInfoWithSupply>();
-  const [metadata, setMetadata] = useState<BatchMetadataLD>();
+  const [metadata, setMetadata] = useState<VCSBatchMetadataLD>();
   const navigate = useNavigate();
   const walletContext = useWallet();
   const accountAddress = walletContext.wallet?.address;

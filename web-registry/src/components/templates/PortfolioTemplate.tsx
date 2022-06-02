@@ -8,9 +8,9 @@ import { Portfolio, PortfolioProps } from '../../components/organisms';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
 
 export const PortfolioTemplate: React.FC<PortfolioProps> = ({
+  children,
   credits,
   basketTokens,
-  children,
   renderCreditActionButtons,
   renderBasketActionButtons,
 }) => {

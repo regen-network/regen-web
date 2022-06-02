@@ -1,7 +1,7 @@
 import React from 'react';
 import Tab, { TabProps } from '@mui/material/Tab';
 import { styled } from '@mui/material';
-import { Subtitle } from 'web-components/lib/components/typography/Subtitle';
+import { Subtitle } from '../typography/Subtitle';
 
 interface Props extends TabProps {
   label: string;

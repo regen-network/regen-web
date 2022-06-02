@@ -1,10 +1,12 @@
 import * as React from 'react';
 import Tabs, { RegenTab } from 'web-components/lib/components/tabs';
+import { StyledTabs } from 'web-components/lib/components/tabs/StyledTabs';
+import { IconTab, a11yProps } from 'web-components/lib/components/tabs/IconTab';
 import {
   DocumentationTable,
   DocumentRowData,
 } from 'web-components/lib/components/table/DocumentationTable';
-
+import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import CreditDetails, {
   CreditInfoProps,
 } from 'web-components/lib/components/credits/CreditDetails';
@@ -75,4 +77,15 @@ const tabs: RegenTab[] = [creditDetailsTab, documentationTab];
 
 export const mrvTabs = (): JSX.Element => (
   <Tabs background="./background.jpg" tabs={tabs} />
+);
+
+export const styledTabs = (): JSX.Element => (
+  <StyledTabs
+    value={'portfolio'}
+    onChange={() => {}}
+    aria-label="dashboard tabs"
+  >
+    <IconTab label="Portfolio" icon={<ProjectPageIcon />} {...a11yProps(0)} />
+    <IconTab label="Projects" icon={<ProjectPageIcon />} {...a11yProps(1)} />
+  </StyledTabs>
 );

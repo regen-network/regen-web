@@ -6,10 +6,10 @@ import { uniq } from 'lodash';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import Section from 'web-components/lib/components/section';
+import { IconTab, a11yProps } from 'web-components/lib/components/tabs/IconTab';
+import { StyledTabs } from 'web-components/lib/components/tabs/StyledTabs';
+import { TabPanel } from 'web-components/lib/components/tabs/TabPanel';
 
-import { IconTab, a11yProps } from '../components/atoms/IconTab'; //TODO: to web-components
-import { StyledTabs } from '../components/atoms/StyledTabs'; //TODO: to web-components
-import { TabPanel } from '../components/atoms/TabPanel'; //TODO: to web-components
 import { MyEcocredits } from './';
 import { MyProjects } from '../components/organisms';
 import useQueryListClasses from '../hooks/useQueryListClasses';
@@ -60,9 +60,6 @@ const Dashboard: React.FC = () => {
             hidden={!isIssuer}
             {...a11yProps(1)}
           />
-          {/* <IconTab value="credit-classes" label="Credit Classes" /> */}
-          {/* <IconTab value="credit-batches" label="Credit Batches" /> */}
-          {/* <IconTab value="history" label="History" /> */}
         </StyledTabs>
         <Box sx={{ minHeight: 370 }}>
           <TabPanel value={value} index={0}>

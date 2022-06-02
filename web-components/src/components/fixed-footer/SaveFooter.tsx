@@ -86,7 +86,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const OnboardingFooter: React.FC<Props> = ({
+const SaveFooter: React.FC<Props> = ({
   saveText = 'Save & Next',
   hideProgress = false,
   ...props
@@ -140,4 +140,4 @@ const OnboardingFooter: React.FC<Props> = ({
   );
 };
 
-export default OnboardingFooter;
+export default SaveFooter;

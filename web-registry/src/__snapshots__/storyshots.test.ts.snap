@@ -52197,7 +52197,7 @@ exports[`Storyshots Table Table Pagination 1`] = `
 </StyledEngineProvider>
 `;
 
-exports[`Storyshots Tabs Mrv Tabs 1`] = `
+exports[`Storyshots Tabs Icon Tabs 1`] = `
 <StyledEngineProvider
   injectFirst={true}
 >
@@ -52578,7 +52578,7 @@ exports[`Storyshots Tabs Mrv Tabs 1`] = `
 </StyledEngineProvider>
 `;
 
-exports[`Storyshots Tabs Styled Tabs 1`] = `
+exports[`Storyshots Tabs Mrv Tabs 1`] = `
 <StyledEngineProvider
   injectFirst={true}
 >

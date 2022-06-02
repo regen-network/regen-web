@@ -7,7 +7,11 @@ import LocationField from 'web-components/lib/components/inputs/LocationField';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import {
+  validate,
+  getProjectPageBaseData,
+  getCompactedPath,
+} from '../../lib/rdf';
 import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 
@@ -47,8 +51,11 @@ const ProjectLocationForm: React.FC<{
           );
 
           for (const result of report.results) {
-            const path: keyof ProjectLocationFormValues = result.path.value;
-            errors[path] = requiredMessage;
+            const path: string = result.path.value;
+            const compactedPath = getCompactedPath(path) as
+              | keyof ProjectLocationFormValues
+              | undefined;
+            if (compactedPath) errors[compactedPath] = requiredMessage;
           }
         }
         return errors;

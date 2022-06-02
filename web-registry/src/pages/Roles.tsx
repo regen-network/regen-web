@@ -6,6 +6,7 @@ import {
   FormValues,
   isIndividual,
 } from 'web-components/lib/components/inputs/RoleField';
+import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 import {
   OnboardingFormTemplate,
   EditFormTemplate,
@@ -50,9 +51,22 @@ function getPartyIds(
   return null;
 }
 
-function stripPartyIds(values: FormValues | undefined): FormValues | undefined {
-  if (values?.id && values?.partyId) {
+function isFormValues(
+  values: FormValues | ProfileFormValues | undefined,
+): values is FormValues {
+  if ((values as FormValues)?.partyId) {
+    return true;
+  }
+  return false;
+}
+
+function stripPartyIds(
+  values: FormValues | ProfileFormValues | undefined,
+): FormValues | undefined {
+  if (values?.id) {
     delete values.id;
+  }
+  if (isFormValues(values)) {
     delete values.partyId;
     if (
       !isIndividual(values) &&

@@ -27,7 +27,11 @@ import {
   getURLInitialValue,
 } from 'web-components/lib/utils/schemaURL';
 
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import {
+  validate,
+  getProjectPageBaseData,
+  getCompactedPath,
+} from '../../lib/rdf';
 import getApiUri from '../../lib/apiUri';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectPageFooter } from '../molecules';
@@ -402,15 +406,21 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
                 const report = await validate(
                   graphData.shaclGraphByUri.graph,
                   value,
-                  'regen:ProjectPageEntityDisplayGroup',
+                  'http://regen.network/ProjectPageEntityDisplayGroup',
                 );
                 for (const result of report.results) {
-                  const path: any = result.path.value;
-                  const error =
-                    path === 'schema:image' || path === 'schema:logo'
-                      ? { '@value': requiredMessage }
-                      : requiredMessage;
-                  errors[role as EntityFieldName] = { [path]: error };
+                  const path: string = result.path.value;
+                  const compactedPath = getCompactedPath(path);
+                  if (compactedPath) {
+                    const error =
+                      compactedPath === 'schema:image' ||
+                      compactedPath === 'schema:logo'
+                        ? { '@value': requiredMessage }
+                        : requiredMessage;
+                    errors[role as EntityFieldName] = {
+                      [compactedPath]: error,
+                    };
+                  }
                 }
               }
             }
@@ -422,7 +432,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
               const report = await validate(
                 graphData.shaclGraphByUri.graph,
                 projectPageData,
-                'regen:ProjectPageEntityDisplayGroup',
+                'http://regen.network/ProjectPageEntityDisplayGroup',
               );
               if (!report.conforms) {
                 // TODO: display the error banner in case of generic error

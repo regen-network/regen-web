@@ -119,17 +119,26 @@ const RolesForm: React.FC<RolesFormProps> = ({
       if (creatorEntity) {
         values = [creatorEntity, ...values];
       }
-      initEntities = values.filter(
-        // Remove duplicates and empty values
-        (v, i, self) =>
-          self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
-      );
+      console.log('values', values);
+      if (!profile) {
+        initEntities = values.filter(
+          // Remove duplicates and empty values
+          (v, i, self) =>
+            self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
+        );
+      } else {
+        initEntities = values.filter(
+          // Remove empty values
+          (v, i, self) => !!v?.['@type'],
+        );
+      }
     } else if (creatorEntity) {
       initEntities = [creatorEntity];
     }
     setEntities(initEntities);
-  }, [initialValues, projectCreator]);
+  }, [initialValues, projectCreator, profile]);
 
+  console.log(entities);
   const updateUser = async (
     id: string,
     partyId: string,
@@ -171,10 +180,10 @@ const RolesForm: React.FC<RolesFormProps> = ({
         'http://regen.network/ProjectPageRolesGroup',
       );
       for (const result of report.results) {
-        const path: keyof T = result.path.value;
-        const compactedPath = getCompactedPath(path as string);
+        const path: string = result.path.value;
+        const compactedPath = getCompactedPath(path) as keyof T | undefined;
         if (compactedPath) {
-          errors[compactedPath as keyof T] = requiredMessage;
+          errors[compactedPath] = requiredMessage;
         }
       }
     }
@@ -195,6 +204,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
         projectPageData,
         'http://regen.network/ProjectPageRolesGroup',
       );
+      console.log(report);
       if (!report.conforms) {
         errors['regen:landOwner'] = rolesErrorMessage;
         errors['regen:landSteward'] = rolesErrorMessage;
@@ -482,16 +492,13 @@ const RolesForm: React.FC<RolesFormProps> = ({
                     type="text"
                     label="Admin"
                     component={TextField}
-                    // className={styles.senderField}
                     disabled
                   />
                 )}
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
-                saveDisabled={
-                  !isValid || isSubmitting || !Object.keys(touched).length
-                }
+                saveDisabled={!isValid || isSubmitting}
               />
             </Form>
           );

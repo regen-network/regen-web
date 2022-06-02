@@ -13,7 +13,11 @@ import {
   urlType,
   getURLInitialValue,
 } from 'web-components/lib/utils/schemaURL';
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import {
+  validate,
+  getProjectPageBaseData,
+  getCompactedPath,
+} from '../../lib/rdf';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
 import { ProjectPageFooter } from '../molecules';
@@ -152,13 +156,16 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
             const report = await validate(
               graphData.shaclGraphByUri.graph,
               projectPageData,
-              'regen:ProjectPageMediaGroup',
+              'http://regen.network/ProjectPageMediaGroup',
             );
             for (const result of report.results) {
               const path: string | undefined = result.path?.value;
               if (path) {
-                if (path === 'regen:previewPhoto') {
-                  errors[path] = { '@value': requiredMessage };
+                const compactedPath = getCompactedPath(path) as
+                  | keyof MediaValuesErrors
+                  | undefined;
+                if (compactedPath === 'regen:previewPhoto') {
+                  errors[compactedPath] = { '@value': requiredMessage };
                 } else {
                   // for gallery photos, display general error message below "Gallery Photos" section
                   errors['regen:galleryPhotos'] = 'You must add 4 photos';

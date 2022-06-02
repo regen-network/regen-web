@@ -11,7 +11,11 @@ import ControlledTextField from 'web-components/lib/components/inputs/Controlled
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import {
+  validate,
+  getProjectPageBaseData,
+  getCompactedPath,
+} from '../../lib/rdf';
 import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 
@@ -103,18 +107,22 @@ const BasicInfoForm: React.FC<{
           const report = await validate(
             graphData.shaclGraphByUri.graph,
             projectPageData,
-            'regen:ProjectPageBasicInfoGroup',
+            'http://regen.network/ProjectPageBasicInfoGroup',
           );
           for (const result of report.results) {
-            const path: keyof BasicInfoFormValues = result.path.value;
-            if (path === 'regen:size') {
-              errors[path] = {
+            const path: string = result.path.value;
+            const compactedPath = getCompactedPath(path) as
+              | keyof BasicInfoFormValues
+              | undefined;
+
+            if (compactedPath === 'regen:size') {
+              errors[compactedPath] = {
                 'qudt:numericValue': {
                   '@value': requiredMessage,
                 },
               };
-            } else {
-              errors[path] = requiredMessage;
+            } else if (compactedPath) {
+              errors[compactedPath] = requiredMessage;
             }
           }
         }

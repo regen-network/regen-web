@@ -1,10 +1,13 @@
 import React from 'react';
 import Tab, { TabProps } from '@mui/material/Tab';
 import { styled } from '@mui/material';
-import { Subtitle } from '../typography/Subtitle';
 
-interface Props extends TabProps {
+import { Subtitle } from '../typography/Subtitle';
+import { RegenTab } from './';
+
+export interface IconTabProps extends RegenTab {
   label: string;
+  icon?: JSX.Element;
   hidden?: boolean;
 }
 
@@ -24,14 +27,7 @@ const StyledTab = styled(Tab)<TabProps>(({ theme }) => ({
   },
 }));
 
-const a11yProps = (index: number): { id: string; 'aria-controls': string } => {
-  return {
-    id: `tab-${index}`,
-    'aria-controls': `tabpanel-${index}`,
-  };
-};
-
-const IconTab: React.FC<Props> = ({ label, hidden, ...props }) => {
+const IconTab: React.FC<IconTabProps> = ({ label, hidden, ...props }) => {
   return hidden ? null : (
     <StyledTab
       iconPosition="start"
@@ -47,4 +43,4 @@ const IconTab: React.FC<Props> = ({ label, hidden, ...props }) => {
   );
 };
 
-export { IconTab, a11yProps };
+export { IconTab };

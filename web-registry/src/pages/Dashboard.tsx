@@ -6,9 +6,8 @@ import { uniq } from 'lodash';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import Section from 'web-components/lib/components/section';
-import { IconTab, a11yProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
-import { TabPanel } from 'web-components/lib/components/tabs/TabPanel';
+import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 
 import { MyEcocredits } from './';
 import { MyProjects } from '../components/organisms';
@@ -16,9 +15,8 @@ import useQueryListClasses from '../hooks/useQueryListClasses';
 import { useWallet } from '../../src/lib/wallet';
 
 const Dashboard: React.FC = () => {
-  const [value, setValue] = useState(0);
-  const [isIssuer, setIsIssuer] = useState(false);
   const theme = useTheme();
+  const [isIssuer, setIsIssuer] = useState(false);
   const onChainClasses = useQueryListClasses();
   const { wallet } = useWallet();
 
@@ -29,46 +27,26 @@ const Dashboard: React.FC = () => {
     setIsIssuer(isAnIssuer);
   }, [onChainClasses?.classes, wallet?.address]);
 
-  const handleChange = (
-    event: React.SyntheticEvent,
-    newValue: number,
-  ): void => {
-    setValue(newValue);
-  };
+  const tabs: IconTabProps[] = [
+    {
+      label: 'Portfolio',
+      icon: (
+        <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
+      ),
+      children: <MyEcocredits />,
+    },
+    {
+      label: 'Projects',
+      icon: <ProjectPageIcon />,
+      children: <MyProjects />,
+      hidden: !isIssuer,
+    },
+  ];
 
   return (
     <Box sx={{ bgcolor: 'grey.50' }}>
       <Section>
-        <IconTabs
-          value={value}
-          onChange={handleChange}
-          aria-label="dashboard tabs"
-        >
-          <IconTab
-            label="Portfolio"
-            icon={
-              <CreditsIcon
-                color={theme.palette.secondary.main}
-                fontSize="small"
-              />
-            }
-            {...a11yProps(0)}
-          />
-          <IconTab
-            label="Projects"
-            icon={<ProjectPageIcon />}
-            hidden={!isIssuer}
-            {...a11yProps(1)}
-          />
-        </StyledTabs>
-        <Box sx={{ minHeight: 370 }}>
-          <TabPanel value={value} index={0}>
-            <MyEcocredits />
-          </TabPanel>
-          <TabPanel value={value} index={1} hidden={!isIssuer}>
-            <MyProjects />
-          </TabPanel>
-        </Box>
+        <IconTabs aria-label="dashboard tabs" tabs={tabs} />
       </Section>
     </Box>
   );

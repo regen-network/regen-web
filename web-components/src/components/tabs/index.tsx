@@ -39,7 +39,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-function a11yProps(index: any): object {
+export function a11yProps(index: any): object {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
@@ -129,7 +129,7 @@ export default function RegenTabs({
           variant="fullWidth"
           value={value}
           onChange={handleChange}
-          aria-label="mrv"
+          aria-label="tabs"
         >
           {tabs.map((tab, index) => (
             <CustomTab

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { Typography, InputProps, InputAdornment } from '@mui/material';
+import { Typography, InputProps, InputAdornment, SxProps } from '@mui/material';
 import { FieldProps } from 'formik';
 
 import FieldFormControl, { DefaultStyleProps } from './FieldFormControl';
@@ -16,6 +16,7 @@ interface ControlledTextFieldProps
   label?: string;
   optional?: boolean;
   onExampleClick?: () => void;
+  sx?: SxProps<Theme>;
 }
 
 export default function ControlledTextField({
@@ -31,6 +32,7 @@ export default function ControlledTextField({
   startAdornment,
   onExampleClick,
   defaultStyle = true,
+  sx,
   ...inputProps
 }: ControlledTextFieldProps): JSX.Element {
   const charsLeft =
@@ -60,6 +62,7 @@ export default function ControlledTextField({
       form={form}
       meta={meta}
       defaultStyle={defaultStyle}
+      sx={sx}
     >
       {({ handleChange, handleBlur }) => (
         <>

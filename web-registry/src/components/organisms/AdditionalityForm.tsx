@@ -7,7 +7,7 @@ import { Box } from '@mui/material';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
-import DatePickField from 'web-components/lib/components/inputs/DatePickField';
+import { DatePickField } from 'web-components/lib/components/inputs/DatePickField';
 import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';

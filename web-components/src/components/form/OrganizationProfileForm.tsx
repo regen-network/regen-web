@@ -6,7 +6,7 @@ import ImageField from '../inputs/ImageField';
 import { requiredMessage } from '../inputs/validation';
 import OnBoardingCard from '../cards/OnBoardingCard';
 import LocationField from '../inputs/LocationField';
-import OnboardingFooter from '../fixed-footer/OnboardingFooter';
+import SaveFooter from '../fixed-footer/SaveFooter';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
 
 interface FormProps {
@@ -108,7 +108,7 @@ const OrganizationProfileForm: React.FC<FormProps> = props => {
               />
             </OnBoardingCard>
 
-            <OnboardingFooter
+            <SaveFooter
               onSave={submitForm}
               saveText={'Save and Next'}
               onPrev={props.goBack} // TODO

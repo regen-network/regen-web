@@ -35,7 +35,7 @@ This project uses [lerna](https://github.com/lerna/lerna) with [yarn workspaces]
 
 #### Mac
 
-To set up system dependencies run the following: 
+If you haven't already, you can set up system dependencies run the following: 
 ```sh
 brew install python
 sudo ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python

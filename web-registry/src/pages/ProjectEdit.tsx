@@ -2,6 +2,7 @@ import React, { useState, createContext, useContext } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import { useMediaQuery } from '@mui/material';
 import { useNavigate, useParams, useLocation, Outlet } from 'react-router-dom';
+import { startCase } from 'lodash';
 
 import Navigation from 'web-components/lib/components/faq/Navigation';
 import { Label, Title } from 'web-components/lib/components/typography';
@@ -9,7 +10,6 @@ import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import Banner from 'web-components/lib/components/banner';
 
 import { Link } from '../components/atoms';
-import { toTitleCase } from '../lib/titleCase';
 
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
@@ -152,10 +152,6 @@ function ProjectEdit(): JSX.Element {
     />
   );
 
-  const titleCase = (str: string): string => {
-    return toTitleCase(str.replace('-', ' '));
-  };
-
   const confirmSave = (): void => {
     setSaved(true);
     setTimeout(() => {
@@ -191,7 +187,7 @@ function ProjectEdit(): JSX.Element {
             <div className={styles.section}>
               <div className={styles.topAlign}>
                 <Title variant="h3" align="center" sx={{ flex: 1 }}>
-                  {section ? titleCase(section) : 'Edit Project Page'}
+                  {section ? startCase(section) : 'Edit Project Page'}
                 </Title>
               </div>
               {isMobile && !section && <Nav />}

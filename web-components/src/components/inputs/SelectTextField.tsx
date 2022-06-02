@@ -49,12 +49,15 @@ export default function SelectTextField({
         IconComponent: DropdownIcon,
       }}
     >
-      {options &&
+      {options ? (
         options.map(option => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
-        ))}
+        ))
+      ) : (
+        <option key="loading">No options available</option>
+      )}
     </TextField>
   );
 }

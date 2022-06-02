@@ -6,6 +6,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import clsx from 'clsx';
 
 import { DefaultStyleProps } from './FieldFormControl';
+import InputLabel from './InputLabel';
+
+// TODO: create styled component as described in issue: regen-network/regen-web/issues/955
 
 interface TriggerTextFieldProps extends TextFieldProps {
   triggerOnChange?: (v: any) => Promise<void>;
@@ -52,22 +55,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
       [theme.breakpoints.down('sm')]: {
         marginBottom: props.errors ? theme.spacing(4.75) : 0,
-      },
-    },
-    '& .MuiFormLabel-root': {
-      '&.Mui-error': {
-        color: theme.palette.primary.contrastText,
-      },
-      '&::after': {
-        content: props.optional ? '" (optional)"' : '',
-        fontWeight: 'normal',
-        color: theme.palette.info.main,
-        [theme.breakpoints.up('sm')]: {
-          fontSize: theme.spacing(4),
-        },
-        [theme.breakpoints.down('sm')]: {
-          fontSize: theme.spacing(3.5),
-        },
       },
     },
     '& .MuiFormHelperText-root': {
@@ -205,6 +192,11 @@ export default function RegenTextField({
           <InputAdornment position="end">{endAdornment}</InputAdornment>
         ) : null,
       }}
+      label={
+        <InputLabel optional={optional} focused={false} required={false}>
+          {props.label}
+        </InputLabel>
+      }
       InputLabelProps={{ focused: false, required: false }}
       fullWidth
     >

@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
+import { startCase } from 'lodash';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
@@ -11,7 +12,6 @@ import { truncate } from 'web-components/lib/utils/truncate';
 import { Link } from '../components/atoms';
 import { EcocreditsSection, LineItemLabelAbove } from '../components/molecules';
 import { CreditBatches, MoreProjectsSection } from '../components/organisms';
-import { toTitleCase } from '../lib/titleCase';
 import { getAccountUrl } from '../lib/block-explorer';
 import { ClassInfo } from '../types/ledger/ecocredit';
 import { CreditClassByOnChainIdQuery } from '../generated/graphql';
@@ -214,7 +214,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 label="credit type"
                 data={
                   <Body size="xl" sx={{ mr: 1 }}>
-                    {toTitleCase(onChainClass.credit_type.name)}
+                    {startCase(onChainClass.credit_type.name)}
                   </Body>
                 }
               />
@@ -250,7 +250,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                   data={
                     <>
                       {offsetGenerationMethods.map((method: string) => (
-                        <Body size="xl">{toTitleCase(method)}</Body>
+                        <Body size="xl">{startCase(method)}</Body>
                       ))}
                     </>
                   }
@@ -259,9 +259,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
               {verificationMethod && (
                 <LineItemLabelAbove
                   label="verification method"
-                  data={
-                    <Body size="xl">{toTitleCase(verificationMethod)}</Body>
-                  }
+                  data={<Body size="xl">{startCase(verificationMethod)}</Body>}
                 />
               )}
               {sectoralScopes && sectoralScopes?.length > 0 && (

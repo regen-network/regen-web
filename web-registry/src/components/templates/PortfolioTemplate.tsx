@@ -3,21 +3,11 @@ import { Box } from '@mui/material';
 import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import Section from 'web-components/lib/components/section';
-import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 
-import { Portfolio } from '../../components/organisms';
+import { Portfolio, PortfolioProps } from '../../components/organisms';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
-import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
-import { BasketTokens } from '../../hooks/useBasketTokens';
 
-interface PortfolioTemplateProps {
-  credits?: BatchInfoWithBalance[];
-  basketTokens: BasketTokens[];
-  renderCreditActionButtons?: RenderActionButtonsFunc;
-  renderBasketActionButtons?: RenderActionButtonsFunc;
-}
-
-export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
+export const PortfolioTemplate: React.FC<PortfolioProps> = ({
   credits,
   basketTokens,
   children,
@@ -25,7 +15,7 @@ export const PortfolioTemplate: React.FC<PortfolioTemplateProps> = ({
   renderBasketActionButtons,
 }) => {
   return (
-    <Box sx={{ backgroundColor: 'grey.50', pb: { xs: 21.25, sm: 28.28 } }}>
+    <Box sx={{ backgroundColor: 'grey.50' }}>
       <Section title="Portfolio" titleVariant="h2" titleAlign="left">
         {children}
         <Portfolio

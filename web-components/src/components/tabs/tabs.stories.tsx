@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Tabs, { RegenTab } from 'web-components/lib/components/tabs';
-import { StyledTabs } from 'web-components/lib/components/tabs/StyledTabs';
+import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { IconTab, a11yProps } from 'web-components/lib/components/tabs/IconTab';
 import {
   DocumentationTable,
@@ -79,13 +79,9 @@ export const mrvTabs = (): JSX.Element => (
   <Tabs background="./background.jpg" tabs={tabs} />
 );
 
-export const styledTabs = (): JSX.Element => (
-  <StyledTabs
-    value={'portfolio'}
-    onChange={() => {}}
-    aria-label="dashboard tabs"
-  >
+export const iconTabs = (): JSX.Element => (
+  <IconTabs value="portfolio" onChange={() => {}} aria-label="dashboard tabs">
     <IconTab label="Portfolio" icon={<ProjectPageIcon />} {...a11yProps(0)} />
     <IconTab label="Projects" icon={<ProjectPageIcon />} {...a11yProps(1)} />
-  </StyledTabs>
+  </IconTabs>
 );

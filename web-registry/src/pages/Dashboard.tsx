@@ -7,7 +7,7 @@ import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import Section from 'web-components/lib/components/section';
 import { IconTab, a11yProps } from 'web-components/lib/components/tabs/IconTab';
-import { StyledTabs } from 'web-components/lib/components/tabs/StyledTabs';
+import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { TabPanel } from 'web-components/lib/components/tabs/TabPanel';
 
 import { MyEcocredits } from './';
@@ -39,7 +39,7 @@ const Dashboard: React.FC = () => {
   return (
     <Box sx={{ bgcolor: 'grey.50' }}>
       <Section>
-        <StyledTabs
+        <IconTabs
           value={value}
           onChange={handleChange}
           aria-label="dashboard tabs"

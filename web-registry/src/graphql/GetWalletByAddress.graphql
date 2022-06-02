@@ -9,6 +9,6 @@ query GetWalletByAddress($walletAddress: String!) {
           handle
         }
       }
-		}
+    }
   }
 }

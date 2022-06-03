@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Box, Grid } from '@mui/material';
-// import { useNavigate } from 'react-router-dom'; TODO Issue: regen-network/regen-registry#913
+// import { useNavigate } from 'react-router-dom'; // TODO Issue: regen-network/regen-registry#913
 
 import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
+import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
 import { useWallet } from '../../../src/lib/wallet';
 import {
@@ -15,7 +16,7 @@ import {
 const MyProjects: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { wallet } = useWallet();
-  // const navigate = useNavigate(); TODO Issue: regen-network/regen-registry#913
+  // const navigate = useNavigate(); // TODO Issue: regen-network/regen-registry#913
   const [createProject] = useCreateProjectMutation();
   const [createWallet] = useCreateWalletMutation();
   const { data: walletData } = useGetWalletByAddressQuery({
@@ -27,7 +28,7 @@ const MyProjects: React.FC = () => {
 
   const projects =
     walletData?.getWalletByAddress?.nodes?.[0]?.projectsByWalletId?.nodes;
-  const isFirstProject = !!projects && projects?.length < 1;
+  const isFirstProject = !projects || projects?.length < 1;
 
   async function submitCreateWallet(): Promise<void> {
     if (!wallet?.address) return Promise.reject();
@@ -68,7 +69,7 @@ const MyProjects: React.FC = () => {
       });
       const projectId = res?.data?.createProject?.project?.id;
       if (projectId) {
-        // navigate(`/projects/${projectId}/choose-credit-class`); TODO Issue: regen-network/regen-registry#913
+        // navigate(`/project-pages/${projectId}/choose-credit-class`); //TODO Issue: regen-network/regen-registry#913
       }
     } catch (e) {
       setError('Error creating project');
@@ -83,6 +84,18 @@ const MyProjects: React.FC = () => {
       }}
     >
       <Grid container spacing={8}>
+        {/* TODO: ProjectCards used below temporarily. Will probably be a new variation for this purpose */}
+        {projects?.map(project => (
+          <Grid item xs={12} md={6} lg={4}>
+            <ProjectCard
+              name={project?.handle || project?.id}
+              imgSrc={''}
+              place="TODO"
+              area={0}
+              areaUnit="ha"
+            />
+          </Grid>
+        ))}
         <Grid item xs={12} md={6} lg={4}>
           <CreateProjectCard
             isFirstProject={isFirstProject}

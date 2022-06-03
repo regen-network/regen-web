@@ -29,7 +29,7 @@ const CreateProjectCard: React.FC<CreateProjectCardProps> = ({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         height: theme.spacing(92.5),
-        minWidth: { xs: '100%', sm: theme.spacing(91.75) },
+        width: { xs: '100%', sm: theme.spacing(91.75) },
         background: 'info.light',
         p: { xs: 12, sm: 8, md: 12 },
       })}

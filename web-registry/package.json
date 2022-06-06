@@ -55,7 +55,9 @@
     "test": "react-scripts test",
     "test-update-snapshot": "react-scripts test --updateSnapshot",
     "graphql:codegen": "graphql-codegen --config codegen.yml",
-    "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml"
+    "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
   },
   "browserslist": {
     "production": [
@@ -78,6 +80,7 @@
     "@types/react-lazyload": "^3.1.0",
     "@types/storybook__addon-storyshots": "^5.3.1",
     "apollo": "^2.33.9",
+    "cypress": "^10.0.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.1",

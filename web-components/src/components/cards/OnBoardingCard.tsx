@@ -1,30 +1,29 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
-import clsx from 'clsx';
+import { SxProps, Theme } from '@mui/material';
 
 import Card from './Card';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    [theme.breakpoints.up('sm')]: {
-      margin: theme.spacing(9, 0, 12),
-      padding: theme.spacing(13.5, 10, 12.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      margin: theme.spacing(6.5, 0, 10),
-      padding: theme.spacing(8.5, 2.5, 10),
-    },
-  },
-}));
+type Props = {
+  className?: string;
+  sx?: SxProps<Theme>;
+};
 
-type Props = { className?: string };
-const OnBoardingCard: React.FC<Props> = ({ children, className }) => {
-  const classes = useStyles();
-  const theme = useTheme();
+const OnBoardingCard: React.FC<Props> = ({ children, className, sx = [] }) => {
   return (
     <Card
-      borderColor={theme.palette.grey[100]}
-      className={clsx(classes.root, className)}
+      borderColor="grey.100"
+      className={className}
+      sx={[
+        {
+          mx: 0,
+          mt: [6.5, 9],
+          mb: [10, 12],
+          px: [2.5, 10],
+          pt: [8.5, 13.5],
+          pb: [10, 12.5],
+        },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
     >
       {children}
     </Card>

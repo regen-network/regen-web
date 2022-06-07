@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { useTheme, Box } from '@mui/material';
 import { Formik, Form, Field, FormikErrors } from 'formik';
@@ -43,13 +43,6 @@ function ProfileModal({
 }: ProfileModalProps): JSX.Element {
   const theme = useTheme();
   const organization = profile['@type'] === 'regen:Organization';
-  const [profileEdit, setProfileEdit] = useState<ProfileFormValues | undefined>(
-    undefined,
-  );
-
-  // useEffect(() => {
-  //   setProfileEdit(profile);
-  // }, [profile]);
 
   return (
     <Modal open={!!profile} onClose={onClose}>
@@ -68,10 +61,8 @@ function ProfileModal({
           validateOnMount
           initialValues={{
             ...profile,
-            '@type': profile['@type'],
-            'regen:showOnProjectPage': true,
             // 'regen:sharePermission':
-            // profileEdit && !!profileEdit['regen:sharePermission'],
+            // profile && !!profile['regen:sharePermission'],
           }}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);

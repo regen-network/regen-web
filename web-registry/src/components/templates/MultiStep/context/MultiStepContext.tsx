@@ -1,4 +1,7 @@
-import React, { Dispatch } from 'react';
+import React from 'react';
+
+// TODO - persistence: localstorage / db
+// TODO - evaluate initial state from initial data (already persisted?)
 
 /**
  *
@@ -6,32 +9,37 @@ import React, { Dispatch } from 'react';
  *
  */
 
+type Step = {
+  id: string;
+  name: string;
+  title: string;
+  percentage?: number;
+};
+
 type ContextProps<T extends object> = {
   steps: Step[] | undefined;
   data: T;
-  saveData: Dispatch<T>;
+  // saveData: Dispatch<T>;
   activeStep: number;
   isLastStep: boolean;
   isReviewStep: boolean;
   handleNext: () => void;
   handleBack: () => void;
-};
-
-type Step = {
-  id: string;
-  name: string;
-  title: string;
+  handleSave: (_data: T) => void;
+  handleSaveNext: (_data: T) => void;
 };
 
 const initialValues = {
   steps: undefined,
   data: {},
-  saveData: () => {},
+  // saveData: () => {},
   activeStep: 0,
   isLastStep: false,
   isReviewStep: false,
   handleNext: () => {},
   handleBack: () => {},
+  handleSave: () => {},
+  handleSaveNext: () => {},
 };
 
 const MultiStepContext = React.createContext<ContextProps<{}>>(initialValues);
@@ -54,8 +62,30 @@ export function MultiStepProvider<T extends object>({
   children,
 }: React.PropsWithChildren<ProviderProps<T>>): JSX.Element {
   const [data, saveData] = React.useState<T | {}>(() => initialData);
-  const { activeStep, isLastStep, isReviewStep, handleNext, handleBack } =
-    useSteps(steps.length);
+  const { activeStep, isLastStep, isReviewStep, goNext, goBack } = useSteps(
+    steps.length,
+  );
+
+  const handleNext = (): void => {
+    // check
+    goNext();
+  };
+
+  const handleBack = (): void => {
+    // check
+    goBack();
+  };
+
+  const handleSave = (_data: T | {}): void => {
+    // check
+    saveData(_data);
+  };
+
+  const handleSaveNext = (_data: T | {}): void => {
+    // check
+    handleNext();
+    handleSave(_data);
+  };
 
   const value = {
     steps,
@@ -66,6 +96,8 @@ export function MultiStepProvider<T extends object>({
     isReviewStep,
     handleNext,
     handleBack,
+    handleSave,
+    handleSaveNext,
   };
 
   return (
@@ -93,8 +125,8 @@ type StepManagement = {
   activeStep: number;
   isLastStep: boolean;
   isReviewStep: boolean;
-  handleNext: () => void;
-  handleBack: () => void;
+  goNext: () => void;
+  goBack: () => void;
 };
 
 function useSteps(numSteps: number): StepManagement {
@@ -102,14 +134,20 @@ function useSteps(numSteps: number): StepManagement {
   const isLastStep = activeStep === numSteps - 1;
   const isReviewStep = activeStep === numSteps - 2;
 
-  const handleNext = (): void => setActiveStep(activeStep + 1);
-  const handleBack = (): void => setActiveStep(activeStep - 1);
+  const goNext = (): void => {
+    if (isLastStep) return;
+    setActiveStep(prev => prev + 1);
+  };
+  const goBack = (): void => {
+    if (activeStep === 0) return;
+    setActiveStep(prev => prev - 1);
+  };
 
   return {
     activeStep,
     isLastStep,
     isReviewStep,
-    handleNext,
-    handleBack,
+    goNext,
+    goBack,
   };
 }

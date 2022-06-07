@@ -1,6 +1,7 @@
 import React from 'react';
-import StepperSection from './components/StepperSection';
-import { MultiStepProvider, ProviderProps } from './context/MultiStepContext';
+
+import { MultiStepProvider, ProviderProps } from '../context/MultiStepContext';
+import StepperSection from './StepperSection';
 
 type MultiStepProps<T extends object> = ProviderProps<T> & {
   children: JSX.Element;

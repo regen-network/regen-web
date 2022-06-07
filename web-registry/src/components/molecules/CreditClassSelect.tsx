@@ -9,7 +9,6 @@ import { blocksToText } from 'web-components/lib/components/block-content';
 import { client } from '../../sanity';
 import useQueryListClasses from '../../hooks/useQueryListClasses';
 import { useAllCreditClassQuery } from '../../generated/sanity-graphql';
-import { BatchBasicsFormValues } from '../organisms/BatchBasicsForm';
 
 interface Props {
   name?: string;
@@ -18,8 +17,11 @@ interface Props {
 
 const defaultCCOption = { value: '', label: 'Choose Credit Class' };
 
-const CreditClassSelect: React.FC<Props> = ({ name = 'classId', required }) => {
-  const { setFieldValue } = useFormikContext<BatchBasicsFormValues>();
+export function CreditClassSelect<T>({
+  name = 'classId',
+  required,
+}: Props): React.ReactElement {
+  const { setFieldValue } = useFormikContext<T>();
   const [creditClassOptions, setCreditClassOptions] = useState<Option[]>();
   const onChainClasses = useQueryListClasses();
   const { data: creditClassData } = useAllCreditClassQuery({ client });
@@ -52,11 +54,9 @@ const CreditClassSelect: React.FC<Props> = ({ name = 'classId', required }) => {
     <Field
       name={name}
       label="Credit Class"
-      required
+      required={required}
       component={SelectTextField}
       options={creditClassOptions}
     />
   );
-};
-
-export { CreditClassSelect };
+}

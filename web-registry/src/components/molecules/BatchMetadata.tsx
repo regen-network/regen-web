@@ -3,14 +3,14 @@ import { Box } from '@mui/material';
 
 import { LabeledDetail } from 'web-components/lib/components/text-layouts';
 import { Body } from 'web-components/lib/components/typography';
-import { LinkWithArrow } from '../atoms';
+import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-import type { BatchMetadataLD } from '../../generated/json-ld';
+import { LinkWithArrow } from '../atoms';
 
 export const BatchMetadata = ({
   data,
 }: {
-  data?: BatchMetadataLD;
+  data?: VCSBatchMetadataLD;
 }): JSX.Element => {
   const additionalCertifications = data?.['regen:additionalCertifications'];
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldProps, getIn } from 'formik';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import { FormHelperText, FormControl } from '@mui/material';
+import { FormHelperText, FormControl, SxProps } from '@mui/material';
 import cx from 'clsx';
 
 import FormLabel from './FormLabel';
@@ -22,6 +22,7 @@ export interface DefaultStyleProps {
 interface Props extends FieldProps, DefaultStyleProps {
   children: (childProps: RenderProps) => React.ReactNode;
   className?: string;
+  sx?: SxProps<Theme>;
   description?: string;
   disabled?: boolean;
   optional?: boolean;
@@ -54,12 +55,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     },
   }),
   label: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(3),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(2),
-    },
+    marginBottom: theme.spacing(2.25),
   },
   firstOfType: {
     '&:first-of-type': {
@@ -86,6 +82,7 @@ export default function FieldFormControl({
   description,
   disabled,
   className,
+  sx,
   optional,
   labelSubText,
   onExampleClick,
@@ -122,16 +119,18 @@ export default function FieldFormControl({
     : className;
 
   return (
-    <FormControl className={cx(rootClasses)} fullWidth>
-      <FormLabel
-        className={styles.label}
-        label={label}
-        labelSubText={labelSubText}
-        optional={optional}
-        description={description}
-        onExampleClick={onExampleClick}
-        disabled={disabled}
-      />
+    <FormControl sx={sx} className={cx(rootClasses)} fullWidth>
+      {label && (
+        <FormLabel
+          className={styles.label}
+          label={label}
+          labelSubText={labelSubText}
+          optional={optional}
+          description={description}
+          onExampleClick={onExampleClick}
+          disabled={disabled}
+        />
+      )}
       {children({ handleChange, handleBlur })}
 
       {hasError && (

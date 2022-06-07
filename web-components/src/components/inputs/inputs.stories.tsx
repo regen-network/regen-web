@@ -6,6 +6,7 @@ import { RadioGroup } from 'formik-mui';
 import Toggle from './Toggle';
 import TextField from './TextField';
 import { RoleField } from './RoleField';
+import { DatePickField } from './DatePickField';
 import OnBoardingCard from '../cards/OnBoardingCard';
 // import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 // import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
@@ -326,3 +327,23 @@ function RoleInput(): JSX.Element {
 
 export const toggle = (): JSX.Element => <ToggleVariants />;
 export const rolesInput = (): JSX.Element => <RoleInput />;
+
+export const datePickField = (): JSX.Element => (
+  <Formik
+    initialValues={{
+      date: '',
+    }}
+    onSubmit={(values, actions) => {
+      alert(JSON.stringify(values, null, 2));
+      actions.resetForm();
+    }}
+  >
+    {() => {
+      return (
+        <Form>
+          <Field component={DatePickField} name="date" label="Date" />
+        </Form>
+      );
+    }}
+  </Formik>
+);

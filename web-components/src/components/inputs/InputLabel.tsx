@@ -2,8 +2,12 @@ import React from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import MuiInputLabel, { InputLabelProps } from '@mui/material/InputLabel';
 
-const useStyles = makeStyles<Theme>((theme: Theme) => ({
-  root: {
+interface LabelProps extends InputLabelProps {
+  optional?: boolean;
+}
+
+const useStyles = makeStyles<Theme, LabelProps>((theme: Theme) => ({
+  root: props => ({
     lineHeight: '140%',
     color: theme.palette.primary.contrastText,
     fontWeight: 'bold',
@@ -13,11 +17,28 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(4),
     },
-  },
+    '&.Mui-error': {
+      color: theme.palette.primary.contrastText,
+    },
+    '&::after': {
+      content: !!props.optional ? '" (optional)"' : '',
+      fontWeight: 'normal',
+      color: theme.palette.info.main,
+      [theme.breakpoints.up('sm')]: {
+        fontSize: theme.spacing(4),
+      },
+      [theme.breakpoints.down('sm')]: {
+        fontSize: theme.spacing(3.5),
+      },
+    },
+  }),
 }));
 
-export default function RegenInputLabel(props: InputLabelProps): JSX.Element {
-  const classes = useStyles();
+export default function RegenInputLabel({
+  optional = false,
+  ...props
+}): JSX.Element {
+  const classes = useStyles({ optional });
 
   return (
     <MuiInputLabel {...props} classes={{ root: classes.root }}>

@@ -41,10 +41,10 @@ interface RolesFormProps {
 }
 
 export interface RolesValues {
-  'regen:landOwner'?: FormValues;
-  'regen:landSteward'?: FormValues;
-  'regen:projectDeveloper'?: FormValues;
-  'regen:projectOriginator'?: FormValues;
+  'regen:landOwner'?: FormValues | ProfileFormValues;
+  'regen:landSteward'?: FormValues | ProfileFormValues;
+  'regen:projectDeveloper'?: FormValues | ProfileFormValues;
+  'regen:projectOriginator'?: FormValues | ProfileFormValues;
   admin?: string;
 }
 
@@ -115,30 +115,33 @@ const RolesForm: React.FC<RolesFormProps> = ({
     let initEntities: Array<FormValues> = [];
     const creatorEntity = getEntity(projectCreator);
     if (initialValues) {
-      let values = Object.values(initialValues);
+      // Remove 'admin' key from initialValues object
+      // because we don't want to add it to the entities yet.
+      // We might want to change that once Keplr login is implemented
+      // and the admin address is associated with an actual user/org profile.
+      const filteredValues: RolesValues = Object.keys(initialValues)
+        .filter(key => key !== 'admin')
+        .reduce((cur, key: string) => {
+          return Object.assign(cur, {
+            [key]: initialValues[key as keyof RolesValues],
+          });
+        }, {});
+
+      let values = Object.values(filteredValues);
       if (creatorEntity) {
         values = [creatorEntity, ...values];
       }
-      console.log('values', values);
-      if (!profile) {
-        initEntities = values.filter(
-          // Remove duplicates and empty values
-          (v, i, self) =>
-            self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
-        );
-      } else {
-        initEntities = values.filter(
-          // Remove empty values
-          (v, i, self) => !!v?.['@type'],
-        );
-      }
+      initEntities = values.filter(
+        // Remove duplicates and empty values
+        (v, i, self) =>
+          self.findIndex(t => t.id === v.id) === i && !!v?.['@type'],
+      );
     } else if (creatorEntity) {
       initEntities = [creatorEntity];
     }
     setEntities(initEntities);
-  }, [initialValues, projectCreator, profile]);
+  }, [initialValues, projectCreator]);
 
-  console.log(entities);
   const updateUser = async (
     id: string,
     partyId: string,
@@ -204,7 +207,6 @@ const RolesForm: React.FC<RolesFormProps> = ({
         projectPageData,
         'http://regen.network/ProjectPageRolesGroup',
       );
-      console.log(report);
       if (!report.conforms) {
         errors['regen:landOwner'] = rolesErrorMessage;
         errors['regen:landSteward'] = rolesErrorMessage;

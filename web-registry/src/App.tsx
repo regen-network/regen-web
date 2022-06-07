@@ -51,6 +51,7 @@ import {
   VerifyEmail,
   ProjectEdit,
   Activity,
+  CreateBatch,
 } from './pages';
 
 import './App.css';
@@ -108,6 +109,7 @@ const App: React.FC = (): JSX.Element => {
             path="ecocredits/accounts/:accountAddress"
             element={<EcocreditsByAccount />}
           />
+          <Route path="ecocredits/create-batch" element={<CreateBatch />} />
           <Route path="baskets/:basketDenom" element={<BasketDetails />} />
           <Route path="credit-batches/:batchDenom" element={<BatchDetails />} />
           <Route
@@ -118,7 +120,6 @@ const App: React.FC = (): JSX.Element => {
             path="organization-profile"
             element={<ProtectedRoute component={OrganizationProfile} />}
           />
-
           <Route
             path="project-pages"
             element={<ProtectedRoute component={ProjectList} />}

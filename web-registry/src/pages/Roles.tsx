@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { isEmpty } from 'lodash';
 
 import {
   FormValues,
@@ -26,8 +27,10 @@ import {
 import { getProjectShapeIri } from '../lib/rdf';
 
 function getPartyIds(
+  i: number,
   party?: Maybe<{ __typename?: 'Party' } & PartyFieldsFragment>,
-): Partial<FormValues> | null {
+  autoIncrementId?: boolean,
+): Partial<FormValues | ProfileFormValues> | null {
   if (party) {
     const p = {
       partyId: party.id,
@@ -46,6 +49,9 @@ function getPartyIds(
         ...p,
       };
     }
+  }
+  if (autoIncrementId) {
+    return { id: (i + 1).toString() };
   }
 
   return null;
@@ -133,24 +139,49 @@ const Roles: React.FC = () => {
   let initialValues: RolesValues = { admin: wallet?.address };
   if (project?.metadata) {
     const metadata = project.metadata;
+    let i = 0;
+    // In case of on chain credit class id, we don't save the entities in the db (yet),
+    // so we just use some auto-incremented ids instead of uuid to identify entities.
+    // This can be removed once Keplr login is fully implemented and we save the entities
+    // as parties/users/orgs in the db.
+    const landOwner = {
+      ...metadata['regen:landOwner'],
+      ...getPartyIds(
+        0,
+        project?.partyByLandOwnerId,
+        !isEmpty(metadata['regen:landOwner']) && !!creditClassId,
+      ),
+    };
+    const landSteward = {
+      ...metadata['regen:landSteward'],
+      ...getPartyIds(
+        landOwner?.id && creditClassId ? Number(landOwner.id) : i,
+        project?.partyByStewardId,
+        !isEmpty(metadata['regen:landSteward']) && !!creditClassId,
+      ),
+    };
+    const projectDeveloper = {
+      ...metadata['regen:projectDeveloper'],
+      ...getPartyIds(
+        landSteward?.id && creditClassId ? Number(landSteward.id) : i,
+        project?.partyByDeveloperId,
+        !isEmpty(metadata['regen:projectDeveloper']) && !!creditClassId,
+      ),
+    };
+    const projectOriginator = {
+      ...metadata['regen:projectOriginator'],
+      ...getPartyIds(
+        projectDeveloper?.id && creditClassId ? Number(projectDeveloper.id) : i,
+        project?.partyByOriginatorId,
+        !isEmpty(metadata['regen:projectOriginator']) && !!creditClassId,
+      ),
+    };
     initialValues = {
       ...initialValues,
-      'regen:landOwner': {
-        ...metadata['regen:landOwner'],
-        ...getPartyIds(project?.partyByLandOwnerId),
-      },
-      'regen:landSteward': {
-        ...metadata['regen:landSteward'],
-        ...getPartyIds(project?.partyByStewardId),
-      },
-      'regen:projectDeveloper': {
-        ...metadata['regen:projectDeveloper'],
-        ...getPartyIds(project?.partyByDeveloperId),
-      },
-      'regen:projectOriginator': {
-        ...metadata['regen:projectOriginator'],
-        ...getPartyIds(project?.partyByOriginatorId),
-      },
+      'regen:landOwner': landOwner,
+      'regen:landSteward': landSteward,
+      'regen:projectDeveloper': projectDeveloper,
+      'regen:projectOriginator': projectOriginator,
     };
   }
 
@@ -161,25 +192,37 @@ const Roles: React.FC = () => {
   async function submit(values: RolesValues): Promise<void> {
     let projectPatch: ProjectPatch = {};
 
-    if (values['regen:landOwner']?.partyId) {
+    if (
+      isFormValues(values['regen:landOwner']) &&
+      values['regen:landOwner']?.partyId
+    ) {
       projectPatch = {
         landOwnerId: values['regen:landOwner']?.partyId,
         ...projectPatch,
       };
     }
-    if (values['regen:landSteward']?.partyId) {
+    if (
+      isFormValues(values['regen:landSteward']) &&
+      values['regen:landSteward']?.partyId
+    ) {
       projectPatch = {
         stewardId: values['regen:landSteward']?.partyId,
         ...projectPatch,
       };
     }
-    if (values['regen:projectDeveloper']?.partyId) {
+    if (
+      isFormValues(values['regen:projectDeveloper']) &&
+      values['regen:projectDeveloper']?.partyId
+    ) {
       projectPatch = {
         developerId: values['regen:projectDeveloper']?.partyId,
         ...projectPatch,
       };
     }
-    if (values['regen:projectOriginator']?.partyId) {
+    if (
+      isFormValues(values['regen:projectOriginator']) &&
+      values['regen:projectOriginator']?.partyId
+    ) {
       projectPatch = {
         originatorId: values['regen:projectOriginator']?.partyId,
         ...projectPatch,

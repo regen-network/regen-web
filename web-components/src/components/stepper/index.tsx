@@ -1,6 +1,12 @@
 import React from 'react';
 import { makeStyles, DefaultTheme as Theme, withStyles } from '@mui/styles';
-import { Stepper, Step, StepLabel, StepConnector } from '@mui/material';
+import {
+  Stepper,
+  Step,
+  StepLabel,
+  StepConnector,
+  SxProps,
+} from '@mui/material';
 import clsx from 'clsx';
 
 import RegenStepIcon from './StepIcon';
@@ -10,6 +16,8 @@ interface StepperProps {
   activeStep: number;
   background?: string;
   steps: string[];
+  onStepClick?: (stepIndex: number) => void;
+  sx?: SxProps<Theme>;
 }
 
 interface StyleProps {
@@ -31,9 +39,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       padding: theme.spacing(3.5, 0),
     },
   },
-  step: {
-    width: theme.spacing(7.75),
-    height: theme.spacing(7.75),
+  hover: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   alternativeLabel: {
     '&.MuiStepLabel-label': {
@@ -82,22 +91,31 @@ const RegenStepper = ({
   activeStep,
   steps,
   background,
+  onStepClick,
+  sx,
 }: StepperProps): JSX.Element => {
   const classes = useStyles({ background });
 
   return (
     <div className={classes.root}>
       <Stepper
+        sx={sx}
         className={clsx(className, classes.stepper)}
         activeStep={activeStep}
         alternativeLabel
         connector={<RegenStepConnector />}
       >
-        {steps.map(label => (
-          <Step key={label}>
+        {steps.map((label, index) => (
+          <Step
+            key={label}
+            onClick={onStepClick ? () => onStepClick(index) : () => {}}
+          >
             <StepLabel
               classes={{
-                alternativeLabel: classes.alternativeLabel,
+                alternativeLabel: clsx(
+                  classes.alternativeLabel,
+                  onStepClick && classes.hover,
+                ),
               }}
               StepIconComponent={RegenStepIcon}
             >

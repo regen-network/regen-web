@@ -47,9 +47,9 @@ function ProfileModal({
     undefined,
   );
 
-  useEffect(() => {
-    setProfileEdit(profile);
-  }, [profile]);
+  // useEffect(() => {
+  //   setProfileEdit(profile);
+  // }, [profile]);
 
   return (
     <Modal open={!!profile} onClose={onClose}>
@@ -59,7 +59,7 @@ function ProfileModal({
           align="center"
           sx={{ px: [0, 7.5], pt: [8, 0], pb: [6, 7.5] }}
         >
-          {`${profileEdit?.id ? 'Edit' : 'Add'} ${
+          {`${profile?.id ? 'Edit' : 'Add'} ${
             organization ? 'Organization' : 'Individual'
           }`}
         </Title>
@@ -67,7 +67,7 @@ function ProfileModal({
           enableReinitialize
           validateOnMount
           initialValues={{
-            ...profileEdit,
+            ...profile,
             '@type': profile['@type'],
             'regen:showOnProjectPage': true,
             // 'regen:sharePermission':

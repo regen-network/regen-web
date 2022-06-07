@@ -244,6 +244,7 @@ const RoleField: React.FC<Props> = ({
               ...(options || []),
               (
                 <div
+                  key="add-new-organization"
                   className={styles.add}
                   onClick={e => {
                     e.stopPropagation();
@@ -267,6 +268,7 @@ const RoleField: React.FC<Props> = ({
               ) as unknown as RoleOptionType,
               (
                 <div
+                  key="add-new-individual"
                   className={styles.add}
                   onClick={e => {
                     e.stopPropagation();
@@ -295,7 +297,11 @@ const RoleField: React.FC<Props> = ({
             isOptionEqualToValue={o => o.id === field.value}
             renderOption={(props, option) => {
               const label = getLabel(option);
-              return <li {...props}>{label || option}</li>;
+              return (
+                <li {...props} key={option.id || option.key}>
+                  {label || option}
+                </li>
+              );
             }}
             freeSolo
             onChange={(event, newValue, reason) => {

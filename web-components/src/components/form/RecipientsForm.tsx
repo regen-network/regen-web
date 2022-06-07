@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, Field, FieldArray } from 'formik';
+import { Formik, Form, Field, FieldArray, useFormikContext } from 'formik';
 import * as Yup from 'yup';
 import { makeStyles, styled, useTheme } from '@mui/styles';
 
@@ -38,7 +38,7 @@ export interface FormValues {
   recipients: Recipient[];
 }
 
-const validationSchema = Yup.object().shape({
+export const validationSchema = Yup.object().shape({
   recipients: Yup.array()
     .of(
       Yup.object().shape({
@@ -63,90 +63,31 @@ const validationSchema = Yup.object().shape({
     .min(1, 'Minimum of 1 recipient'),
 });
 
+export const recipientInitialValues = {
+  recipient: '',
+  tradableAmount: 0,
+  withRetire: false,
+  ...initialValuesRetire,
+};
+
+export const initialValues = {
+  recipients: [{ ...recipientInitialValues }],
+};
+
 export const RecipientsForm: React.FC<FormProps> = ({
   mapboxToken,
   onSubmit,
 }) => {
-  const styles = useStyles();
-
-  const recipientInitialValues = {
-    recipient: '',
-    tradableAmount: 0,
-    withRetire: false,
-    ...initialValuesRetire,
-  };
-
-  const initialValues = {
-    recipients: [{ ...recipientInitialValues }],
-  };
-
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      {({ values }) => (
+      {() => (
+        // {({ values }) => (
         <Form>
-          <FieldArray name="recipients">
-            {({ remove, push }) => (
-              <div>
-                {values.recipients.length > 0 &&
-                  values.recipients.map((recipient, index) => (
-                    <Card key={`recipient-${index}`}>
-                      {index > 0 && (
-                        <DeleteButton onClick={() => remove(index)} />
-                      )}
-                      <Field
-                        name={`recipients.${index}.recipient`}
-                        type="text"
-                        label="Recipient address"
-                        component={TextField}
-                      />
-                      <Field
-                        name={`recipients.${index}.tradableAmount`}
-                        type="number"
-                        label="Amount tradable"
-                        component={TextField}
-                      />
-                      <Field
-                        name={`recipients.${index}.withRetire`}
-                        component={CheckboxLabel}
-                        type="checkbox"
-                        className={styles.checkboxLabel}
-                        label={
-                          <Subtitle size="lg" color="primary.contrastText">
-                            Send additional retired credits
-                          </Subtitle>
-                        }
-                      />
-
-                      {values.recipients[index].withRetire && (
-                        <>
-                          <RetirementReminder sx={{ mt: 8 }} />
-                          <Field
-                            name={`recipients.${index}.retiredAmount`}
-                            type="number"
-                            label="Amount retired"
-                            component={TextField}
-                          />
-                          <BottomCreditRetireFields
-                            mapboxToken={mapboxToken}
-                            arrayIndex={index}
-                            arrayPrefix={`recipients.${index}.`}
-                          />
-                        </>
-                      )}
-                    </Card>
-                  ))}
-
-                <AddRecipientButton
-                  onClick={() => push({ ...recipientInitialValues })}
-                />
-              </div>
-            )}
-          </FieldArray>
-
+          <RecipientsFieldArray mapboxToken={mapboxToken} />
           <Card>
             <OutlinedButton type="submit">Next</OutlinedButton>
           </Card>
@@ -206,3 +147,69 @@ const AddRecipientButton: React.FC<ButtonProps> = ({ onClick }) => (
     <OutlinedButton onClick={onClick}>+ Add recipient</OutlinedButton>
   </Card>
 );
+
+export function RecipientsFieldArray({
+  mapboxToken,
+}: BottomCreditRetireFieldsProps): React.ReactElement {
+  const styles = useStyles();
+  const { values } = useFormikContext<FormValues>();
+
+  return (
+    <FieldArray name="recipients">
+      {({ remove, push }) => (
+        <div>
+          {values.recipients.length > 0 &&
+            values.recipients.map((recipient, index) => (
+              <Card key={`recipient-${index}`}>
+                {index > 0 && <DeleteButton onClick={() => remove(index)} />}
+                <Field
+                  name={`recipients.${index}.recipient`}
+                  type="text"
+                  label="Recipient address"
+                  component={TextField}
+                />
+                <Field
+                  name={`recipients.${index}.tradableAmount`}
+                  type="number"
+                  label="Amount tradable"
+                  component={TextField}
+                />
+                <Field
+                  name={`recipients.${index}.withRetire`}
+                  component={CheckboxLabel}
+                  type="checkbox"
+                  className={styles.checkboxLabel}
+                  label={
+                    <Subtitle size="lg" color="primary.contrastText">
+                      Send additional retired credits
+                    </Subtitle>
+                  }
+                />
+
+                {values.recipients[index].withRetire && (
+                  <>
+                    <RetirementReminder sx={{ mt: 8 }} />
+                    <Field
+                      name={`recipients.${index}.retiredAmount`}
+                      type="number"
+                      label="Amount retired"
+                      component={TextField}
+                    />
+                    <BottomCreditRetireFields
+                      mapboxToken={mapboxToken}
+                      arrayIndex={index}
+                      arrayPrefix={`recipients.${index}.`}
+                    />
+                  </>
+                )}
+              </Card>
+            ))}
+
+          <AddRecipientButton
+            onClick={() => push({ ...recipientInitialValues })}
+          />
+        </div>
+      )}
+    </FieldArray>
+  );
+}

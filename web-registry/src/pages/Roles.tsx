@@ -255,31 +255,33 @@ const Roles: React.FC = () => {
     }
   }
 
-  return isEdit ? (
-    <EditFormTemplate>
-      <RolesForm
-        submit={submit}
-        initialValues={initialValues}
-        projectCreator={userProfileData}
-        creditClassId={creditClassId}
-        graphData={graphData}
-      />
-    </EditFormTemplate>
-  ) : (
-    <OnboardingFormTemplate
-      activeStep={0}
-      title="Roles"
-      saveAndExit={saveAndExit}
-    >
-      <RolesForm
-        submit={submit}
-        initialValues={initialValues}
-        projectCreator={userProfileData}
-        creditClassId={creditClassId}
-        graphData={graphData}
-      />
-    </OnboardingFormTemplate>
-  );
+  return project ? (
+    isEdit ? (
+      <EditFormTemplate>
+        <RolesForm
+          submit={submit}
+          initialValues={initialValues}
+          projectCreator={userProfileData}
+          creditClassId={creditClassId}
+          graphData={graphData}
+        />
+      </EditFormTemplate>
+    ) : (
+      <OnboardingFormTemplate
+        activeStep={0}
+        title="Roles"
+        saveAndExit={saveAndExit}
+      >
+        <RolesForm
+          submit={submit}
+          initialValues={initialValues}
+          projectCreator={userProfileData}
+          creditClassId={creditClassId}
+          graphData={graphData}
+        />
+      </OnboardingFormTemplate>
+    )
+  ) : null;
 };
 
 export { Roles };

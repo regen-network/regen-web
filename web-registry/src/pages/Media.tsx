@@ -12,7 +12,7 @@ import {
 } from '../generated/graphql';
 import { useProjectEditContext } from '../pages/ProjectEdit';
 
-const Media: React.FC = () => {
+const Media = (): JSX.Element => {
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
 

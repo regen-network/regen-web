@@ -66,3 +66,9 @@ export const qudtUnitMap = {
   'unit:HA': 'hectares',
   'unit:AC': 'acres',
 };
+
+export function getProjectShapeIri(creditClassId?: string | null): string {
+  return creditClassId
+    ? `http://regen.network/${creditClassId}-ProjectShape`
+    : 'http://regen.network/ProjectPageShape';
+}

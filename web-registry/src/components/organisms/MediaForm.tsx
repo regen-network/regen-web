@@ -1,13 +1,13 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
-import { useMediaQuery, Grid, FormHelperText } from '@mui/material';
-import { Formik, Form, Field, getIn } from 'formik';
+import { makeStyles } from '@mui/styles';
+// import { useMediaQuery, Grid, FormHelperText, SxProps } from '@mui/material';
+import { Formik, Form, Field } from 'formik';
 import { useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
 // import { VideoInput } from 'web-components/lib/components/inputs/VideoInput'; //TODO: make this component easier to use with share links from youtube, vimeo, etc
-import FormLabel from 'web-components/lib/components/inputs/FormLabel';
+// import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
 import { validate, getProjectPageBaseData } from '../../lib/rdf';
@@ -62,33 +62,12 @@ function getURLListInitialValue(value?: urlList): urlList {
 }
 
 const useStyles = makeStyles(theme => ({
-  storyCard: {
-    paddingBottom: 0,
-  },
-  description: {
-    marginBottom: 0,
-    fontSize: theme.typography.pxToRem(16),
-  },
   field: {
     [theme.breakpoints.up('sm')]: {
       marginBottom: theme.spacing(12),
     },
     [theme.breakpoints.down('sm')]: {
       marginBottom: theme.spacing(10),
-    },
-  },
-  error: {
-    color: theme.palette.error.main,
-    borderColor: theme.palette.error.main,
-    marginTop: theme.spacing(1),
-    marginBottom: 0,
-    fontFamily: '"Lato",-apple-system,sans-serif',
-    fontWeight: 'bold',
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(3.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
     },
   },
   fullSizeMedia: {
@@ -109,26 +88,23 @@ const useStyles = makeStyles(theme => ({
       height: theme.typography.pxToRem(139),
     },
   },
-  centerImages: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  centerSmall: {
-    maxHeight: theme.typography.pxToRem(72),
-  },
   smallButton: {
     fontSize: theme.typography.pxToRem(14),
     padding: theme.spacing(2, 3),
   },
 }));
 
+// const sxs = {
+//   galleryImage: { height: [139, 169], flex: { sm: 1 } } as SxProps,
+// };
+
 const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
-  const theme = useTheme();
+  // const theme = useTheme();
   const apiUri = getApiUri();
   const { projectId } = useParams();
   const { confirmSave, isEdit } = useProjectEditContext();
-  const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
+  // const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
   const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -198,7 +174,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
         {({ submitForm, isValid, isSubmitting, errors, touched }) => {
           return (
             <Form translate="yes">
-              <OnBoardingCard className={styles.storyCard}>
+              <OnBoardingCard sx={{ pb: [0] }}>
                 <Field
                   classes={{ root: styles.field, main: styles.fullSizeMedia }}
                   component={ImageUpload}
@@ -211,14 +187,14 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   projectId={projectId}
                   isDrop
                 />
-                <div className={styles.field}>
+                {/* <div className={styles.field}>
                   <FormLabel
                     label="Gallery Photos"
                     labelSubText="(min 4 photos)"
                     description="People love pictures of people! Upload images of the land stewards, in addition to the land and animals."
                   />
-                  <Grid container spacing={3} direction="row">
-                    <Grid item xs={6} sm="auto" className={styles.galleryImage}>
+                  <Grid container spacing={3} direction="row" sx={{ mt: 1 }}>
+                    <Grid item xs={6} sm="auto" sx={sxs.galleryImage}>
                       <Field
                         classes={{ button: styles.smallButton }}
                         component={ImageUpload}
@@ -234,10 +210,13 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                       <Grid
                         item
                         sm={3}
-                        className={styles.centerImages}
-                        direction="column"
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'space-between',
+                        }}
                       >
-                        <Grid item sm={12} className={styles.centerSmall}>
+                        <Grid item sm={12} sx={{ maxHeight: 72 }}>
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
@@ -249,7 +228,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             isDrop
                           />
                         </Grid>
-                        <Grid item sm={12} className={styles.centerSmall}>
+                        <Grid item sm={12} sx={{ maxHeight: 72 }}>
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
@@ -264,12 +243,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                       </Grid>
                     ) : (
                       <>
-                        <Grid
-                          item
-                          xs={6}
-                          sm={12}
-                          className={styles.galleryImage}
-                        >
+                        <Grid item xs={6} sm={12} sx={sxs.galleryImage}>
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
@@ -281,12 +255,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                             isDrop
                           />
                         </Grid>
-                        <Grid
-                          item
-                          xs={6}
-                          sm={12}
-                          className={styles.galleryImage}
-                        >
+                        <Grid item xs={6} sm={12} sx={sxs.galleryImage}>
                           <Field
                             classes={{ button: styles.smallButton }}
                             component={ImageUpload}
@@ -301,7 +270,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                       </>
                     )}
 
-                    <Grid item xs={6} sm="auto" className={styles.galleryImage}>
+                    <Grid item xs={6} sm="auto" sx={sxs.galleryImage}>
                       <Field
                         classes={{ button: styles.smallButton }}
                         component={ImageUpload}
@@ -331,11 +300,20 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                         touched,
                         `['regen:galleryPhotos'].@list[3].@value`,
                       )) && (
-                      <FormHelperText className={styles.error}>
+                      <FormHelperText
+                        sx={{
+                          color: 'error.main',
+                          borderColor: 'error.main',
+                          mt: 1,
+                          mb: 0,
+                          fontWeight: 'bold',
+                          typography: ['textXSmall', 'textSmall'],
+                        }}
+                      >
                         {errors?.['regen:galleryPhotos']}
                       </FormHelperText>
                     )}
-                </div>
+                </div> */}
                 {/* <Field
                   classes={{ root: styles.field }}
                   component={VideoInput}

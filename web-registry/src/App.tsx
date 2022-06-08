@@ -142,11 +142,8 @@ const App: React.FC = (): JSX.Element => {
               path="story"
               element={<ProtectedRoute component={Story} />}
             />
-            <Route
-              path="media"
-              element={<ProtectedRoute component={Media} />}
-            />
             {/* TODO: Update according to https://github.com/regen-network/regen-registry/issues/910 */}
+            <Route path="media" element={<Media />} />
             <Route path="roles" element={<Roles />} />
             <Route path="description" element={<Description />} />
             <Route

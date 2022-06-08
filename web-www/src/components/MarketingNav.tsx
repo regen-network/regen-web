@@ -1,18 +1,13 @@
 import React from 'react';
 import { useTheme } from '@mui/styles';
-import Box from '@mui/material/Box';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Header, { HeaderColors } from 'web-components/lib/components/header';
 import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
 import { NavLink } from 'web-components/lib/components/header/NavLink';
-import {
-  HeaderDropdownColumn,
-  HeaderDropdownItem,
-  HeaderDropdownItemProps,
-} from 'web-components/lib/components/header/HeaderDropdownItems';
+import { HeaderDropdownItemProps } from 'web-components/lib/components/header/HeaderDropdownItems';
 
-import RegistryIcon from '../../static/media/svgs/nav-dropdown/registry.svg';
+// import RegistryIcon from '../../static/media/svgs/nav-dropdown/registry.svg';
 import BuyersIcon from '../../static/media/svgs/nav-dropdown/buyers.svg';
 import LandStewardsIcon from '../../static/media/svgs/nav-dropdown/land-stewards.svg';
 import DevelopersIcon from '../../static/media/svgs/nav-dropdown/developers.svg';
@@ -24,6 +19,7 @@ interface BoolProps {
 }
 
 const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
+  const { pathname } = location;
   const theme = useTheme<Theme>();
   const headerColors: HeaderColors = {
     '/': theme.palette.primary.main,
@@ -53,6 +49,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
 
   const standardItems: HeaderDropdownItemProps[] = [
     {
+      pathname,
       title: 'Program Guide',
       href: 'https://library.regen.network/v/regen-registry-program-guide/',
       linkComponent: NavLink,
@@ -66,11 +63,13 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
     //   linkComponent: NavLink,
     // },
     {
+      pathname,
       title: 'Create a Methodology',
       href: 'https://registry.regen.network/create-methodology/',
       linkComponent: NavLink,
     },
     {
+      pathname,
       title: 'Methodology Review Process',
       href: 'https://registry.regen.network/methodology-review-process/',
       linkComponent: NavLink,
@@ -79,12 +78,14 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
 
   const stakeholderItemsRegistry: HeaderDropdownItemProps[] = [
     {
+      pathname,
       title: 'Buyers',
       href: 'https://registry.regen.network/buyers/',
       svg: BuyersIcon,
       linkComponent: NavLink,
     },
     {
+      pathname,
       title: 'Land Stewards',
       href: 'https://registry.regen.network/land-stewards/',
       svg: LandStewardsIcon,
@@ -94,18 +95,21 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
 
   const stakeholderItemsCommunity: HeaderDropdownItemProps[] = [
     {
+      pathname,
       title: 'Developers',
       href: '/developers/',
       svg: DevelopersIcon,
       linkComponent: NavLink,
     },
     {
+      pathname,
       title: 'Scientists',
       href: '/science/',
       svg: ScientistIcon,
       linkComponent: NavLink,
     },
     {
+      pathname,
       title: 'Validators',
       href: '/validators/',
       svg: ValidatorsIcon,
@@ -115,6 +119,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
 
   const mobileProgramItems: HeaderDropdownItemProps[] = [
     {
+      pathname,
       title: 'Registry Homepage',
       href: 'https://registry.regen.network/',
       linkComponent: NavLink,
@@ -123,43 +128,14 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
     ...howToItems,
   ];
 
-  const STACKED_COL_SPACE = 12;
-
   const menuItems: HeaderMenuItem[] = [
     {
       title: 'NCT',
       href: '/nct/',
-      isNew: true,
     },
     {
       title: 'Program',
       dropdownItems: mobileProgramItems,
-      render: () => (
-        <Box display="flex">
-          <Box mr={STACKED_COL_SPACE}>
-            <HeaderDropdownItem
-              title="Homepage"
-              href="https://registry.regen.network"
-              svg={RegistryIcon}
-              linkComponent={NavLink}
-            />
-            <Box mt={4}>
-              <HeaderDropdownColumn
-                title="Standard"
-                items={standardItems}
-                linkComponent={NavLink}
-              />
-            </Box>
-          </Box>
-          <Box>
-            <HeaderDropdownColumn
-              title="How Tos"
-              items={howToItems}
-              linkComponent={NavLink}
-            />
-          </Box>
-        </Box>
-      ),
     },
     {
       title: 'Stakeholders',
@@ -167,31 +143,19 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
         ...stakeholderItemsRegistry,
         ...stakeholderItemsCommunity,
       ],
-      render: () => (
-        <Box display="flex">
-          <Box mr={STACKED_COL_SPACE}>
-            <HeaderDropdownColumn
-              title="Registry"
-              items={stakeholderItemsRegistry}
-              linkComponent={NavLink}
-            />
-          </Box>
-          <Box>
-            <HeaderDropdownColumn
-              title="Community"
-              items={stakeholderItemsCommunity}
-              linkComponent={NavLink}
-            />
-          </Box>
-        </Box>
-      ),
     },
     {
       title: 'Blockchain',
       dropdownItems: [
-        { title: 'Mainnet', href: '/mainnet/', linkComponent: NavLink },
-        { title: 'Token', href: '/token/', linkComponent: NavLink },
         {
+          pathname,
+          title: 'Mainnet',
+          href: '/mainnet/',
+          linkComponent: NavLink,
+        },
+        { pathname, title: 'Token', href: '/token/', linkComponent: NavLink },
+        {
+          pathname,
           title: 'Community',
           href: '/community/',
           linkComponent: NavLink,
@@ -202,17 +166,24 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
       title: 'Learn More',
       dropdownItems: [
         {
+          pathname,
           title: 'Case Studies',
           href: '/case-studies/',
           linkComponent: NavLink,
         },
-        { title: 'Resources', href: '/resources/', linkComponent: NavLink },
-        { title: 'FAQ', href: '/faq/', linkComponent: NavLink },
-        { title: 'Team', href: '/team/', linkComponent: NavLink },
-        { title: 'Fund', href: '/fund/', linkComponent: NavLink },
         {
+          pathname,
+          title: 'Resources',
+          href: '/resources/',
+          linkComponent: NavLink,
+        },
+        { pathname, title: 'FAQ', href: '/faq/', linkComponent: NavLink },
+        { pathname, title: 'Team', href: '/team/', linkComponent: NavLink },
+        { pathname, title: 'Fund', href: '/fund/', linkComponent: NavLink },
+        {
+          pathname,
           title: 'Careers',
-          href: 'https://apply.workable.com/regen-network/',
+          href: 'https://regennetwork.notion.site/Careers-at-Regen-Network-fe7d9645a39843cfb7eaceb7171d95af',
           linkComponent: NavLink,
         },
       ],

@@ -139,7 +139,11 @@ function OrganizationModal({
   );
 }
 
-const SharePermissionField: React.FC = () => (
+const SharePermissionField = ({
+  children,
+}: {
+  children?: React.ReactNode;
+}): JSX.Element => (
   <Box sx={{ display: 'flex', py: 0, px: { xs: 2.5, sm: 10 } }}>
     <Field
       type="checkbox"

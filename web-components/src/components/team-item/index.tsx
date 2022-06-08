@@ -12,7 +12,7 @@ export interface TeamItemProps {
   description?: string;
   imgUrl: string;
   bgUrl: string;
-  linkedUrl?: string;
+  linkedinUrl?: string;
   githubUrl?: string;
   twitterUrl?: string;
 }
@@ -64,7 +64,7 @@ export default function TeamItem({
   // description, // legacy - some team members have descriptions, but we're no longer showing
   imgUrl,
   bgUrl,
-  linkedUrl,
+  linkedinUrl,
   githubUrl,
   twitterUrl,
 }: TeamItemProps): JSX.Element {
@@ -98,8 +98,8 @@ export default function TeamItem({
           <TwitterIcon color={theme.palette.secondary.main} />
         </a>
       )}
-      {linkedUrl && (
-        <a href={linkedUrl} target="_blank" rel="noopener noreferrer">
+      {linkedinUrl && (
+        <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
           <LinkedInIcon color={theme.palette.secondary.main} />
         </a>
       )}

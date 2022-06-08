@@ -236,7 +236,7 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
           }
         }}
       >
-        {({ submitForm, submitCount, isValid, isSubmitting, touched }) => {
+        {({ submitForm, isValid, isSubmitting, touched }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard className={styles.storyCard}>

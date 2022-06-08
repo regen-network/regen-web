@@ -33,7 +33,10 @@ const formModel = {
     {
       id: 'finished', // type: result
       name: 'Finished',
-      title: '',
+      resultTitle: {
+        success: 'Credits have been issued!',
+        error: 'Sorry, your transaction was not successful.',
+      },
     },
   ],
   validationSchema: [creditBasicsValidationSchema, recipientsValidationSchema],

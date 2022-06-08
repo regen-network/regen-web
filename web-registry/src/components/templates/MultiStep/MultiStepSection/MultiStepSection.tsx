@@ -8,12 +8,13 @@ type MultiStepProps<T extends object> = ProviderProps<T> & {
 };
 
 export default function MultiStepSection<T extends object>({
+  formId,
   steps,
   initialData,
   children,
 }: MultiStepProps<T>): JSX.Element {
   return (
-    <MultiStepProvider steps={steps} initialData={initialData}>
+    <MultiStepProvider formId={formId} steps={steps} initialData={initialData}>
       <StepperSection>{children}</StepperSection>
     </MultiStepProvider>
   );

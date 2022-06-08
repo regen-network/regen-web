@@ -13,7 +13,7 @@ import Result from './Result';
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 
 /**
- *
+ * Mocked submit process (2 steps: Post + Msg)
  */
 
 const handleTx = async (values: CreateBatchFormValues): Promise<void> => {
@@ -28,7 +28,8 @@ const handleTx = async (values: CreateBatchFormValues): Promise<void> => {
  *
  */
 
-type CreateBatchFormValues = CreditBasicsFormValues & RecipientsFormValues;
+export type CreateBatchFormValues = CreditBasicsFormValues &
+  RecipientsFormValues;
 
 /**
  *
@@ -42,11 +43,9 @@ type CreateBatchFormValues = CreditBasicsFormValues & RecipientsFormValues;
  */
 
 export default function CreateBatchMultiStepForm(): React.ReactElement {
-  // TODO - Move saveData to multi-step provider
   const {
     steps,
     data,
-    // saveData,
     activeStep,
     isLastStep,
     isReviewStep,
@@ -101,6 +100,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
 
   return (
     <Formik
+      enableReinitialize
       validateOnMount
       initialValues={data}
       validationSchema={currentValidationSchema}
@@ -109,6 +109,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
       {({ submitForm, isValid, isSubmitting, touched, values, errors }) => (
         <Form id={formModel.formId}>
           {JSON.stringify(data, null, 4)}
+          {console.log('** VALUES', values)}
 
           {renderStep(activeStep)}
 

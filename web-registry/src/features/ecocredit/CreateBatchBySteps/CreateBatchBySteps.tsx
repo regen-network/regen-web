@@ -14,6 +14,7 @@ import CreateBatchMultiStepForm from './CreateBatchMultiStepForm';
 function CreateBatchBySteps(): React.ReactElement {
   return (
     <MultiStepSection
+      formId={formModel.formId}
       steps={formModel.steps}
       initialData={formModel.initialValues}
     >

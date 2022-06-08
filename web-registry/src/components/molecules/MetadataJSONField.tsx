@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Field, FormikContextType, useFormikContext } from 'formik';
+import { Field, useFormikContext } from 'formik'; // FormikContextType
 
 import { Body } from 'web-components/lib/components/typography';
 import InputLabel from 'web-components/lib/components/inputs/InputLabel';

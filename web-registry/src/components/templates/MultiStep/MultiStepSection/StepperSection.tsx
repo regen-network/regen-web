@@ -14,13 +14,27 @@ import { useMultiStep } from '../context/MultiStepContext';
 
 type StepperSectionProps = {
   children: JSX.Element | JSX.Element[];
-  // children: React.ReactNode;
 };
 
 export default function StepperSection({
   children,
 }: StepperSectionProps): JSX.Element {
-  const { steps, activeStep } = useMultiStep();
+  const { steps, activeStep, isLastStep } = useMultiStep();
+
+  function getResultTitle(): string | undefined {
+    // TODO: manage success/error
+    // if (success)
+    return steps?.[activeStep].resultTitle?.success;
+    // if (error) return steps[activeStep].resultTitle?.error
+  }
+
+  // Because title for the Result step is special (success/error)..
+  let title = '';
+  if (steps) {
+    title = !isLastStep
+      ? steps[activeStep].title || ''
+      : getResultTitle() || '';
+  }
 
   return (
     <>
@@ -33,7 +47,8 @@ export default function StepperSection({
         onStepClick={() => {}}
       />
       <OnBoardingSection
-        title={steps ? steps[activeStep].title : ''}
+        // title={steps ? steps[activeStep].title : ''}
+        title={title}
         formContainer
       >
         <Box minHeight="50vh">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocalStorage } from '../../../../hooks/useLocalStorage';
 
 // TODO - persistence: localstorage / db
 // TODO - evaluate initial state from initial data (already persisted?)
@@ -12,14 +13,17 @@ import React from 'react';
 type Step = {
   id: string;
   name: string;
-  title: string;
+  title?: string;
+  resultTitle?: {
+    success: string;
+    error: string;
+  };
   percentage?: number;
 };
 
 type ContextProps<T extends object> = {
   steps: Step[] | undefined;
   data: T;
-  // saveData: Dispatch<T>;
   activeStep: number;
   isLastStep: boolean;
   isReviewStep: boolean;
@@ -32,7 +36,6 @@ type ContextProps<T extends object> = {
 const initialValues = {
   steps: undefined,
   data: {},
-  // saveData: () => {},
   activeStep: 0,
   isLastStep: false,
   isReviewStep: false,
@@ -51,17 +54,21 @@ const MultiStepContext = React.createContext<ContextProps<{}>>(initialValues);
  */
 
 export type ProviderProps<T extends object> = {
+  formId: string;
   initialData: T;
   steps: Step[];
   children?: JSX.Element | JSX.Element[];
 };
 
 export function MultiStepProvider<T extends object>({
+  formId,
   initialData,
   steps,
   children,
 }: React.PropsWithChildren<ProviderProps<T>>): JSX.Element {
-  const [data, saveData] = React.useState<T | {}>(() => initialData);
+  // storage
+  const [data, saveData] = useLocalStorage<T>(formId, initialData);
+
   const { activeStep, isLastStep, isReviewStep, goNext, goBack } = useSteps(
     steps.length,
   );
@@ -78,7 +85,7 @@ export function MultiStepProvider<T extends object>({
 
   const handleSave = (_data: T | {}): void => {
     // check
-    saveData(_data);
+    saveData(_data as T);
   };
 
   const handleSaveNext = (_data: T | {}): void => {
@@ -87,10 +94,9 @@ export function MultiStepProvider<T extends object>({
     handleSave(_data);
   };
 
-  const value = {
+  const value: ContextProps<T | {}> = {
     steps,
     data,
-    saveData,
     activeStep,
     isLastStep,
     isReviewStep,
@@ -109,10 +115,16 @@ export function MultiStepProvider<T extends object>({
 
 export function useMultiStep<T extends object>(): ContextProps<T> {
   const context = React.useContext(MultiStepContext);
+  // const context = React.useContext<ContextProps<T>>(
+  //   MultiStepContext as unknown as React.Context<ContextProps<T>>,
+  // );
+
   if (context === undefined) {
     throw new Error('useMultiStep must be used within a MultiStepProvider');
   }
+
   return context as unknown as ContextProps<T>;
+  // return context;
 }
 
 /**

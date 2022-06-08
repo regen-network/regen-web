@@ -183,7 +183,7 @@ const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
         {
           pathname,
           title: 'Careers',
-          href: 'https://apply.workable.com/regen-network/',
+          href: 'https://regennetwork.notion.site/Careers-at-Regen-Network-fe7d9645a39843cfb7eaceb7171d95af',
           linkComponent: NavLink,
         },
       ],

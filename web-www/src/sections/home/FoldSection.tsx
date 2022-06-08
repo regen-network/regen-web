@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const query = graphql`
   query homeFoldSection {
-    desktop: file(relativePath: { eq: "image43.jpg" }) {
+    desktop: file(relativePath: { eq: "people-walking-outline.jpg" }) {
       childImageSharp {
         fluid(quality: 90, maxWidth: 1920) {
           ...GatsbyImageSharpFluid_withWebp

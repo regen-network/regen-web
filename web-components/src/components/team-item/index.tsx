@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function TeamItem({
   name,
   title,
-  description,
+  // description, // legacy - some team members have descriptions, but we're no longer showing
   imgUrl,
   bgUrl,
   linkedUrl,
@@ -83,9 +83,11 @@ export default function TeamItem({
       <Label size="xs" sx={{ color: 'info.main', mb: 2.5 }}>
         {title}
       </Label>
-      <Body size="sm" mb={4.5}>
-        {description}
-      </Body>
+      {/* {description && (
+        <Body size="sm" mb={4.5}>
+          {description}
+        </Body>
+      )} */}
       {githubUrl && (
         <a href={githubUrl} target="_blank" rel="noopener noreferrer">
           <GithubIcon color={theme.palette.secondary.main} />

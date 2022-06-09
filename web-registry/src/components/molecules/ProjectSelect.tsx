@@ -11,6 +11,7 @@ interface FieldProps {
   creditClassId: string;
   name?: string;
   required?: boolean;
+  initialSelection?: number;
 }
 
 const defaultProjectOption = { value: '', label: 'Choose Project' };
@@ -19,6 +20,7 @@ const ProjectSelect: React.FC<FieldProps> = ({
   creditClassId,
   name = "metadata['regen:vcsProjectId']",
   required,
+  initialSelection,
   ...props
 }) => {
   const { data: dbDataByOnChainId } = useCreditClassByOnChainIdQuery({
@@ -33,8 +35,11 @@ const ProjectSelect: React.FC<FieldProps> = ({
       // reset options when creditClassID no longer has a selected element
       return;
     }
-    // reset project if creditClassID changes
-    setFieldValue(name, '');
+    if (!initialSelection) {
+      // reset project if creditClassID changes
+      setFieldValue(name, '');
+    }
+
     const projects =
       dbDataByOnChainId?.creditClassByOnChainId?.projectsByCreditClassId?.nodes;
 
@@ -56,6 +61,7 @@ const ProjectSelect: React.FC<FieldProps> = ({
     setFieldValue,
     name,
     dbDataByOnChainId?.creditClassByOnChainId?.projectsByCreditClassId?.nodes,
+    initialSelection,
   ]);
 
   return (

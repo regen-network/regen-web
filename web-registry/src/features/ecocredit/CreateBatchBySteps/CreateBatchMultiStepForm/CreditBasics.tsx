@@ -73,7 +73,22 @@ export const initialValues = {
 
 export default function CreditBasics(): React.ReactElement {
   const { values } = useFormikContext<CreditBasicsFormValues>();
+
   const isVCS = values.classId === 'C01';
+
+  // to check if the project id was already selected,
+  // to initialize <ProjectSelect /> correctly when coming back to the step
+  const functionCheckPrevSelection = (
+    isVCS: boolean,
+    values: CreditBasicsFormValues,
+  ): number | undefined => {
+    if (isVCS) {
+      const metadata = values.metadata as VCSBatchMetadataLD;
+      const projectId = metadata['regen:vcsProjectId'];
+      return projectId;
+    }
+    return;
+  };
 
   return (
     <OnBoardingCard>
@@ -82,6 +97,7 @@ export default function CreditBasics(): React.ReactElement {
         creditClassId={values.classId}
         name="metadata['regen:vcsProjectId']"
         required
+        initialSelection={functionCheckPrevSelection(isVCS, values)}
       />
       <Box
         sx={{
@@ -123,6 +139,9 @@ export default function CreditBasics(): React.ReactElement {
             required={isVCS}
             component={TextField}
           />
+
+          {/* TODO - Disabled */}
+
           {/* <AdditionalCerfications
             certifications={
               // values.metadata?.['regen:additionalCertifications'] as NameUrl[]

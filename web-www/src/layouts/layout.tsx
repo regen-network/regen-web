@@ -8,7 +8,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import Footer, { FooterItemProps as FooterItem } from 'web-components/lib/components/footer';
+import Footer, {
+  FooterItemProps as FooterItem,
+} from 'web-components/lib/components/footer';
 import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
@@ -97,7 +99,7 @@ const Layout: React.FC<Props> = ({ children, location }) => {
         },
         {
           title: 'Careers',
-          href: 'https://apply.workable.com/regen-network/',
+          href: 'https://regennetwork.notion.site/Careers-at-Regen-Network-fe7d9645a39843cfb7eaceb7171d95af',
           target: '_blank',
         },
         {

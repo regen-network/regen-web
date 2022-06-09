@@ -18,13 +18,15 @@ const query = graphql`
 `;
 
 const AdvisorSection = (): JSX.Element => {
-  const { background, sanityTeamPage } = useStaticQuery<TeamAdvisorSectionQuery>(query);
+  const { background, sanityTeamPage } =
+    useStaticQuery<TeamAdvisorSectionQuery>(query);
   const data = sanityTeamPage?.advisorSection;
   return (
     <TeamSection
-      alphabetized
       bgUrl={background?.publicURL || ''}
-      members={(data?.members || []).map(m => ({ imgUrl: m?.image?.asset?.url, ...m } as TeamItemProps))}
+      members={(data?.members || []).map(
+        m => ({ imgUrl: m?.image?.asset?.url, ...m } as TeamItemProps),
+      )}
       title={data?.title || ''}
     />
   );

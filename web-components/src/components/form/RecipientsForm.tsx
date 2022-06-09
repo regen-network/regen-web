@@ -85,7 +85,6 @@ export const RecipientsForm: React.FC<FormProps> = ({
       onSubmit={onSubmit}
     >
       {() => (
-        // {({ values }) => (
         <Form>
           <RecipientsFieldArray mapboxToken={mapboxToken} />
           <Card>

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useLocalStorage } from '../../../../hooks/useLocalStorage';
 
-// TODO - persistence: localstorage / db
-// TODO - evaluate initial state from initial data (already persisted?)
+// TODO - WIP - evaluate initial state from initial data (already persisted?)
+// TODO - persistence alternatives: component / localstorage / db
 
 /**
  *
@@ -27,6 +27,7 @@ type ContextProps<T extends object> = {
   activeStep: number;
   isLastStep: boolean;
   isReviewStep: boolean;
+  handleActiveStep: (step: number) => void;
   handleNext: () => void;
   handleBack: () => void;
   handleSave: (_data: T) => void;
@@ -39,6 +40,7 @@ const initialValues = {
   activeStep: 0,
   isLastStep: false,
   isReviewStep: false,
+  handleActiveStep: () => {},
   handleNext: () => {},
   handleBack: () => {},
   handleSave: () => {},
@@ -66,12 +68,15 @@ export function MultiStepProvider<T extends object>({
   steps,
   children,
 }: React.PropsWithChildren<ProviderProps<T>>): JSX.Element {
-  // storage
   const [data, saveData] = useLocalStorage<T>(formId, initialData);
-
-  const { activeStep, isLastStep, isReviewStep, goNext, goBack } = useSteps(
-    steps.length,
-  );
+  const {
+    activeStep,
+    setActiveStep,
+    isLastStep,
+    isReviewStep,
+    goNext,
+    goBack,
+  } = useSteps(steps.length);
 
   const handleNext = (): void => {
     // check
@@ -94,12 +99,19 @@ export function MultiStepProvider<T extends object>({
     handleSave(_data);
   };
 
+  const handleActiveStep = (step: number): void => {
+    if (step > steps.length) return;
+    if (step < 0) return;
+    setActiveStep(step);
+  };
+
   const value: ContextProps<T | {}> = {
     steps,
     data,
     activeStep,
     isLastStep,
     isReviewStep,
+    handleActiveStep,
     handleNext,
     handleBack,
     handleSave,
@@ -135,6 +147,7 @@ export function useMultiStep<T extends object>(): ContextProps<T> {
 
 type StepManagement = {
   activeStep: number;
+  setActiveStep: Dispatch<SetStateAction<number>>;
   isLastStep: boolean;
   isReviewStep: boolean;
   goNext: () => void;
@@ -157,6 +170,7 @@ function useSteps(numSteps: number): StepManagement {
 
   return {
     activeStep,
+    setActiveStep,
     isLastStep,
     isReviewStep,
     goNext,

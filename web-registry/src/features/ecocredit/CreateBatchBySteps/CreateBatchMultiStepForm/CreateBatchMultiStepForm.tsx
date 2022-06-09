@@ -62,7 +62,6 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     actions: any,
   ): Promise<void> {
     try {
-      // TODO: useMsgClient
       await handleTx(values);
       actions.setSubmitting(false);
       handleNext();
@@ -73,10 +72,8 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
 
   function handleSubmit(values: CreateBatchFormValues, actions: any): void {
     if (isReviewStep) {
-      console.log('SUBMIT: Step 1 - Open Keplr Wallet');
       submitForm(values, actions);
     } else {
-      console.log(`SAVE STEP: ${activeStep} - Save in <Session|Local>Storage`);
       handleSaveNext(values);
       actions.setTouched({});
       actions.setSubmitting(false);
@@ -108,16 +105,11 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     >
       {({ submitForm, isValid, isSubmitting, touched, values, errors }) => (
         <Form id={formModel.formId}>
-          {JSON.stringify(data, null, 4)}
-          {console.log('** VALUES', values)}
-
           {renderStep(activeStep)}
-
-          {/* TODO - Move to: MultiStepSection >>> StepperSection >>> StepperControls  */}
+          {/* TODO ? - Move to: MultiStepSection >>> StepperSection >>> StepperControls ?? */}
           {!isLastStep && (
             <SaveFooter
               onPrev={activeStep > 0 ? handleBack : undefined}
-              onNext={handleNext} // TODO - remove/disable
               onSave={submitForm}
               saveDisabled={!isValid || isSubmitting} // || !Object.keys(touched).length
               percentComplete={steps?.[activeStep].percentage || 0}

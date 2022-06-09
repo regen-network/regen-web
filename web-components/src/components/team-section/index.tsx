@@ -62,10 +62,9 @@ const TeamSection = ({
   children,
 }: TeamSectionProps): JSX.Element => {
   const classes = useStyles();
-  const sorted = members.sort((a, b) =>
-    firstName(a.name) > firstName(b.name) ? 1 : -1,
-  );
-  const teamMembers = alphabetized ? sorted : members;
+  const sortedMembers = alphabetized // avoid sorting if not alphabetized
+    ? members.sort((a, b) => (firstName(a.name) > firstName(b.name) ? 1 : -1))
+    : members;
 
   return (
     <Section
@@ -77,7 +76,7 @@ const TeamSection = ({
       }}
     >
       <Grid justifyContent="center" container direction="row">
-        {teamMembers.map((m: any, index: any) => {
+        {sortedMembers.map((m, index) => {
           return (
             <Grid
               className={classes.item}
@@ -93,7 +92,7 @@ const TeamSection = ({
                 description={m.description}
                 imgUrl={m.imgUrl}
                 bgUrl={bgUrl}
-                linkedUrl={m.linkedinUrl}
+                linkedinUrl={m.linkedinUrl}
                 twitterUrl={m.twitterUrl}
                 githubUrl={m.githubUrl}
               />

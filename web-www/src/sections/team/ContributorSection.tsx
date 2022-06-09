@@ -29,15 +29,17 @@ const query = graphql`
 `;
 
 const ContributorSection = (): JSX.Element => {
-  const { background, sanityTeamPage } = useStaticQuery<TeamContributorSectionQuery>(query);
+  const { background, sanityTeamPage } =
+    useStaticQuery<TeamContributorSectionQuery>(query);
   const data = sanityTeamPage?.contributorSection;
   const styles = useStyles();
   return (
     <div className={styles.root}>
       <TeamSection
-        alphabetized
         bgUrl={background?.publicURL || ''}
-        members={(data?.members || []).map(m => ({ imgUrl: m?.image?.asset?.url, ...m } as TeamItemProps))}
+        members={(data?.members || []).map(
+          m => ({ imgUrl: m?.image?.asset?.url, ...m } as TeamItemProps),
+        )}
         title={data?.title || ''}
       />
     </div>

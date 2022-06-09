@@ -27,6 +27,78 @@ export type Scalars = {
   UUID: any;
 };
 
+export type Account = Node & {
+  __typename?: 'Account';
+  /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
+  nodeId: Scalars['ID'];
+  id: Scalars['UUID'];
+  createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByAccountId: PartiesConnection;
+  /** Reads and enables pagination through a set of `Address`. */
+  addressesByPartyAccountIdAndAddressId: AccountAddressesByPartyAccountIdAndAddressIdManyToManyConnection;
+};
+
+
+export type AccountPartiesByAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
+};
+
+
+export type AccountAddressesByPartyAccountIdAndAddressIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AddressesOrderBy>>;
+  condition?: Maybe<AddressCondition>;
+  filter?: Maybe<AddressFilter>;
+};
+
+/** A connection to a list of `Address` values, with data from `Party`. */
+export type AccountAddressesByPartyAccountIdAndAddressIdManyToManyConnection = {
+  __typename?: 'AccountAddressesByPartyAccountIdAndAddressIdManyToManyConnection';
+  /** A list of `Address` objects. */
+  nodes: Array<Maybe<Address>>;
+  /** A list of edges which contains the `Address`, info from the `Party`, and the cursor to aid in pagination. */
+  edges: Array<AccountAddressesByPartyAccountIdAndAddressIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Address` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Address` edge in the connection, with data from `Party`. */
+export type AccountAddressesByPartyAccountIdAndAddressIdManyToManyEdge = {
+  __typename?: 'AccountAddressesByPartyAccountIdAndAddressIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Address` at the end of the edge. */
+  node?: Maybe<Address>;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByAddressId: PartiesConnection;
+};
+
+
+/** A `Address` edge in the connection, with data from `Party`. */
+export type AccountAddressesByPartyAccountIdAndAddressIdManyToManyEdgePartiesByAddressIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
+};
+
 export type AccountBalance = Node & {
   __typename?: 'AccountBalance';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -130,6 +202,65 @@ export enum AccountBalancesOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
+/** A condition to be used against `Account` object types. All fields are tested for equality and combined with a logical ‘and.’ */
+export type AccountCondition = {
+  /** Checks for equality with the object’s `id` field. */
+  id?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `createdAt` field. */
+  createdAt?: Maybe<Scalars['Datetime']>;
+  /** Checks for equality with the object’s `updatedAt` field. */
+  updatedAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** An input for mutations affecting `Account` */
+export type AccountInput = {
+  id?: Maybe<Scalars['UUID']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** Represents an update to a `Account`. Fields that are set will be updated. */
+export type AccountPatch = {
+  id?: Maybe<Scalars['UUID']>;
+  createdAt?: Maybe<Scalars['Datetime']>;
+  updatedAt?: Maybe<Scalars['Datetime']>;
+};
+
+/** A connection to a list of `Account` values. */
+export type AccountsConnection = {
+  __typename?: 'AccountsConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account` and cursor to aid in pagination. */
+  edges: Array<AccountsEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection. */
+export type AccountsEdge = {
+  __typename?: 'AccountsEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+};
+
+/** Methods to use when ordering `Account`. */
+export enum AccountsOrderBy {
+  Natural = 'NATURAL',
+  IdAsc = 'ID_ASC',
+  IdDesc = 'ID_DESC',
+  CreatedAtAsc = 'CREATED_AT_ASC',
+  CreatedAtDesc = 'CREATED_AT_DESC',
+  UpdatedAtAsc = 'UPDATED_AT_ASC',
+  UpdatedAtDesc = 'UPDATED_AT_DESC',
+  PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
+  PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
+}
+
 export type Address = Node & {
   __typename?: 'Address';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -146,8 +277,8 @@ export type Address = Node & {
   purchasesByAddressId: PurchasesConnection;
   /** Reads and enables pagination through a set of `Retirement`. */
   retirementsByAddressId: RetirementsConnection;
-  /** Reads and enables pagination through a set of `Wallet`. */
-  walletsByPartyAddressIdAndWalletId: AddressWalletsByPartyAddressIdAndWalletIdManyToManyConnection;
+  /** Reads and enables pagination through a set of `Account`. */
+  accountsByPartyAddressIdAndAccountId: AddressAccountsByPartyAddressIdAndAccountIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
   partiesByProjectAddressIdAndDeveloperId: AddressPartiesByProjectAddressIdAndDeveloperIdManyToManyConnection;
   /** Reads and enables pagination through a set of `Party`. */
@@ -227,14 +358,14 @@ export type AddressRetirementsByAddressIdArgs = {
 };
 
 
-export type AddressWalletsByPartyAddressIdAndWalletIdArgs = {
+export type AddressAccountsByPartyAddressIdAndAccountIdArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['Cursor']>;
   after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<WalletsOrderBy>>;
-  condition?: Maybe<WalletCondition>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
 };
 
 
@@ -402,6 +533,42 @@ export type AddressCreditVintagesByRetirementAddressIdAndCreditVintageIdArgs = {
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
   filter?: Maybe<CreditVintageFilter>;
+};
+
+/** A connection to a list of `Account` values, with data from `Party`. */
+export type AddressAccountsByPartyAddressIdAndAccountIdManyToManyConnection = {
+  __typename?: 'AddressAccountsByPartyAddressIdAndAccountIdManyToManyConnection';
+  /** A list of `Account` objects. */
+  nodes: Array<Maybe<Account>>;
+  /** A list of edges which contains the `Account`, info from the `Party`, and the cursor to aid in pagination. */
+  edges: Array<AddressAccountsByPartyAddressIdAndAccountIdManyToManyEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+  /** The count of *all* `Account` you could get from the connection. */
+  totalCount: Scalars['Int'];
+};
+
+/** A `Account` edge in the connection, with data from `Party`. */
+export type AddressAccountsByPartyAddressIdAndAccountIdManyToManyEdge = {
+  __typename?: 'AddressAccountsByPartyAddressIdAndAccountIdManyToManyEdge';
+  /** A cursor for use in pagination. */
+  cursor?: Maybe<Scalars['Cursor']>;
+  /** The `Account` at the end of the edge. */
+  node?: Maybe<Account>;
+  /** Reads and enables pagination through a set of `Party`. */
+  partiesByAccountId: PartiesConnection;
+};
+
+
+/** A `Account` edge in the connection, with data from `Party`. */
+export type AddressAccountsByPartyAddressIdAndAccountIdManyToManyEdgePartiesByAccountIdArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<PartiesOrderBy>>;
+  condition?: Maybe<PartyCondition>;
 };
 
 /** A condition to be used against `Address` object types. All fields are tested for equality and combined with a logical ‘and.’ */
@@ -922,42 +1089,6 @@ export type AddressUsersByPurchaseAddressIdAndUserIdManyToManyEdgePurchasesByUse
   condition?: Maybe<PurchaseCondition>;
 };
 
-/** A connection to a list of `Wallet` values, with data from `Party`. */
-export type AddressWalletsByPartyAddressIdAndWalletIdManyToManyConnection = {
-  __typename?: 'AddressWalletsByPartyAddressIdAndWalletIdManyToManyConnection';
-  /** A list of `Wallet` objects. */
-  nodes: Array<Maybe<Wallet>>;
-  /** A list of edges which contains the `Wallet`, info from the `Party`, and the cursor to aid in pagination. */
-  edges: Array<AddressWalletsByPartyAddressIdAndWalletIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Wallet` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Wallet` edge in the connection, with data from `Party`. */
-export type AddressWalletsByPartyAddressIdAndWalletIdManyToManyEdge = {
-  __typename?: 'AddressWalletsByPartyAddressIdAndWalletIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Wallet` at the end of the edge. */
-  node?: Maybe<Wallet>;
-  /** Reads and enables pagination through a set of `Party`. */
-  partiesByWalletId: PartiesConnection;
-};
-
-
-/** A `Wallet` edge in the connection, with data from `Party`. */
-export type AddressWalletsByPartyAddressIdAndWalletIdManyToManyEdgePartiesByWalletIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<PartiesOrderBy>>;
-  condition?: Maybe<PartyCondition>;
-};
-
 /** A connection to a list of `Wallet` values, with data from `Purchase`. */
 export type AddressWalletsByPurchaseAddressIdAndBuyerWalletIdManyToManyConnection = {
   __typename?: 'AddressWalletsByPurchaseAddressIdAndBuyerWalletIdManyToManyConnection';
@@ -1165,6 +1296,39 @@ export type CreateAccountBalancePayload = {
 /** The output of our create `AccountBalance` mutation. */
 export type CreateAccountBalancePayloadAccountBalanceEdgeArgs = {
   orderBy?: Maybe<Array<AccountBalancesOrderBy>>;
+};
+
+/** All input for the create `Account` mutation. */
+export type CreateAccountInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Account` to be created by this mutation. */
+  account: AccountInput;
+};
+
+/** The output of our create `Account` mutation. */
+export type CreateAccountPayload = {
+  __typename?: 'CreateAccountPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Account` that was created by this mutation. */
+  account?: Maybe<Account>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Account`. May be used by Relay 1. */
+  accountEdge?: Maybe<AccountsEdge>;
+};
+
+
+/** The output of our create `Account` mutation. */
+export type CreateAccountPayloadAccountEdgeArgs = {
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
 };
 
 /** All input for the create `Address` mutation. */
@@ -1733,6 +1897,8 @@ export type CreatePartyPayload = {
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Address` that is related to this `Party`. */
   addressByAddressId?: Maybe<Address>;
+  /** Reads a single `Account` that is related to this `Party`. */
+  accountByAccountId?: Maybe<Account>;
   /** An edge for our `Party`. May be used by Relay 1. */
   partyEdge?: Maybe<PartiesEdge>;
 };
@@ -4096,6 +4262,50 @@ export type DeleteAccountBalancePayloadAccountBalanceEdgeArgs = {
   orderBy?: Maybe<Array<AccountBalancesOrderBy>>;
 };
 
+/** All input for the `deleteAccountById` mutation. */
+export type DeleteAccountByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  id: Scalars['UUID'];
+};
+
+/** All input for the `deleteAccount` mutation. */
+export type DeleteAccountInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Account` to be deleted. */
+  nodeId: Scalars['ID'];
+};
+
+/** The output of our delete `Account` mutation. */
+export type DeleteAccountPayload = {
+  __typename?: 'DeleteAccountPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Account` that was deleted by this mutation. */
+  account?: Maybe<Account>;
+  deletedAccountId?: Maybe<Scalars['ID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Account`. May be used by Relay 1. */
+  accountEdge?: Maybe<AccountsEdge>;
+};
+
+
+/** The output of our delete `Account` mutation. */
+export type DeleteAccountPayloadAccountEdgeArgs = {
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+};
+
 /** All input for the `deleteAddressById` mutation. */
 export type DeleteAddressByIdInput = {
   /**
@@ -4836,6 +5046,16 @@ export type DeletePartyByIdInput = {
   id: Scalars['UUID'];
 };
 
+/** All input for the `deletePartyByWalletId` mutation. */
+export type DeletePartyByWalletIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  walletId: Scalars['UUID'];
+};
+
 /** All input for the `deleteParty` mutation. */
 export type DeletePartyInput = {
   /**
@@ -4864,6 +5084,8 @@ export type DeletePartyPayload = {
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Address` that is related to this `Party`. */
   addressByAddressId?: Maybe<Address>;
+  /** Reads a single `Account` that is related to this `Party`. */
+  accountByAccountId?: Maybe<Account>;
   /** An edge for our `Party`. May be used by Relay 1. */
   partyEdge?: Maybe<PartiesEdge>;
 };
@@ -5287,6 +5509,16 @@ export type DeleteUserPayload = {
 /** The output of our delete `User` mutation. */
 export type DeleteUserPayloadUserEdgeArgs = {
   orderBy?: Maybe<Array<UsersOrderBy>>;
+};
+
+/** All input for the `deleteWalletByAddr` mutation. */
+export type DeleteWalletByAddrInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  addr: Scalars['String'];
 };
 
 /** All input for the `deleteWalletById` mutation. */
@@ -6360,6 +6592,8 @@ export enum MrvsOrderBy {
 /** The root mutation type which contains root level fields which mutate data. */
 export type Mutation = {
   __typename?: 'Mutation';
+  /** Creates a single `Account`. */
+  createAccount?: Maybe<CreateAccountPayload>;
   /** Creates a single `AccountBalance`. */
   createAccountBalance?: Maybe<CreateAccountBalancePayload>;
   /** Creates a single `Address`. */
@@ -6410,6 +6644,10 @@ export type Mutation = {
   createUser?: Maybe<CreateUserPayload>;
   /** Creates a single `Wallet`. */
   createWallet?: Maybe<CreateWalletPayload>;
+  /** Updates a single `Account` using its globally unique id and a patch. */
+  updateAccount?: Maybe<UpdateAccountPayload>;
+  /** Updates a single `Account` using a unique key and a patch. */
+  updateAccountById?: Maybe<UpdateAccountPayload>;
   /** Updates a single `AccountBalance` using its globally unique id and a patch. */
   updateAccountBalance?: Maybe<UpdateAccountBalancePayload>;
   /** Updates a single `AccountBalance` using a unique key and a patch. */
@@ -6490,6 +6728,8 @@ export type Mutation = {
   updateParty?: Maybe<UpdatePartyPayload>;
   /** Updates a single `Party` using a unique key and a patch. */
   updatePartyById?: Maybe<UpdatePartyPayload>;
+  /** Updates a single `Party` using a unique key and a patch. */
+  updatePartyByWalletId?: Maybe<UpdatePartyPayload>;
   /** Updates a single `Project` using its globally unique id and a patch. */
   updateProject?: Maybe<UpdateProjectPayload>;
   /** Updates a single `Project` using a unique key and a patch. */
@@ -6532,6 +6772,12 @@ export type Mutation = {
   updateWallet?: Maybe<UpdateWalletPayload>;
   /** Updates a single `Wallet` using a unique key and a patch. */
   updateWalletById?: Maybe<UpdateWalletPayload>;
+  /** Updates a single `Wallet` using a unique key and a patch. */
+  updateWalletByAddr?: Maybe<UpdateWalletPayload>;
+  /** Deletes a single `Account` using its globally unique id. */
+  deleteAccount?: Maybe<DeleteAccountPayload>;
+  /** Deletes a single `Account` using a unique key. */
+  deleteAccountById?: Maybe<DeleteAccountPayload>;
   /** Deletes a single `AccountBalance` using its globally unique id. */
   deleteAccountBalance?: Maybe<DeleteAccountBalancePayload>;
   /** Deletes a single `AccountBalance` using a unique key. */
@@ -6612,6 +6858,8 @@ export type Mutation = {
   deleteParty?: Maybe<DeletePartyPayload>;
   /** Deletes a single `Party` using a unique key. */
   deletePartyById?: Maybe<DeletePartyPayload>;
+  /** Deletes a single `Party` using a unique key. */
+  deletePartyByWalletId?: Maybe<DeletePartyPayload>;
   /** Deletes a single `Project` using its globally unique id. */
   deleteProject?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `Project` using a unique key. */
@@ -6654,6 +6902,8 @@ export type Mutation = {
   deleteWallet?: Maybe<DeleteWalletPayload>;
   /** Deletes a single `Wallet` using a unique key. */
   deleteWalletById?: Maybe<DeleteWalletPayload>;
+  /** Deletes a single `Wallet` using a unique key. */
+  deleteWalletByAddr?: Maybe<DeleteWalletPayload>;
   createUserOrganization?: Maybe<CreateUserOrganizationPayload>;
   createUserOrganizationIfNeeded?: Maybe<CreateUserOrganizationIfNeededPayload>;
   getUserFirstOrganization?: Maybe<GetUserFirstOrganizationPayload>;
@@ -6667,6 +6917,12 @@ export type Mutation = {
   retireCredits?: Maybe<RetireCreditsPayload>;
   sendTransferCreditsConfirmation?: Maybe<SendTransferCreditsConfirmationPayload>;
   transferCredits?: Maybe<TransferCreditsPayload>;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationCreateAccountArgs = {
+  input: CreateAccountInput;
 };
 
 
@@ -6817,6 +7073,18 @@ export type MutationCreateUserArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateWalletArgs = {
   input: CreateWalletInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateAccountArgs = {
+  input: UpdateAccountInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateAccountByIdArgs = {
+  input: UpdateAccountByIdInput;
 };
 
 
@@ -7061,6 +7329,12 @@ export type MutationUpdatePartyByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdatePartyByWalletIdArgs = {
+  input: UpdatePartyByWalletIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProjectArgs = {
   input: UpdateProjectInput;
 };
@@ -7183,6 +7457,24 @@ export type MutationUpdateWalletArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateWalletByIdArgs = {
   input: UpdateWalletByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateWalletByAddrArgs = {
+  input: UpdateWalletByAddrInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteAccountArgs = {
+  input: DeleteAccountInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteAccountByIdArgs = {
+  input: DeleteAccountByIdInput;
 };
 
 
@@ -7427,6 +7719,12 @@ export type MutationDeletePartyByIdArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeletePartyByWalletIdArgs = {
+  input: DeletePartyByWalletIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteProjectArgs = {
   input: DeleteProjectInput;
 };
@@ -7549,6 +7847,12 @@ export type MutationDeleteWalletArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteWalletByIdArgs = {
   input: DeleteWalletByIdInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteWalletByAddrArgs = {
+  input: DeleteWalletByAddrInput;
 };
 
 
@@ -7942,6 +8246,8 @@ export enum PartiesOrderBy {
   DescriptionDesc = 'DESCRIPTION_DESC',
   ImageAsc = 'IMAGE_ASC',
   ImageDesc = 'IMAGE_DESC',
+  AccountIdAsc = 'ACCOUNT_ID_ASC',
+  AccountIdDesc = 'ACCOUNT_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
@@ -7960,10 +8266,13 @@ export type Party = Node & {
   roles?: Maybe<Array<Maybe<Scalars['String']>>>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
+  accountId?: Maybe<Scalars['UUID']>;
   /** Reads a single `Wallet` that is related to this `Party`. */
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Address` that is related to this `Party`. */
   addressByAddressId?: Maybe<Address>;
+  /** Reads a single `Account` that is related to this `Party`. */
+  accountByAccountId?: Maybe<Account>;
   /** Reads a single `User` that is related to this `Party`. */
   userByPartyId?: Maybe<User>;
   /**
@@ -9588,6 +9897,8 @@ export type PartyCondition = {
   description?: Maybe<Scalars['String']>;
   /** Checks for equality with the object’s `image` field. */
   image?: Maybe<Scalars['String']>;
+  /** Checks for equality with the object’s `accountId` field. */
+  accountId?: Maybe<Scalars['UUID']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `CreditVintage`. */
@@ -9970,6 +10281,7 @@ export type PartyInput = {
   roles?: Maybe<Array<Maybe<Scalars['String']>>>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
+  accountId?: Maybe<Scalars['UUID']>;
 };
 
 /** A connection to a list of `Methodology` values, with data from `CreditClass`. */
@@ -11646,6 +11958,7 @@ export type PartyPatch = {
   roles?: Maybe<Array<Maybe<Scalars['String']>>>;
   description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
+  accountId?: Maybe<Scalars['UUID']>;
 };
 
 /** A connection to a list of `Project` values, with data from `CreditVintage`. */
@@ -13524,6 +13837,8 @@ export type Query = Node & {
   nodeId: Scalars['ID'];
   /** Fetches an object given its globally unique `ID`. */
   node?: Maybe<Node>;
+  /** Reads and enables pagination through a set of `Account`. */
+  allAccounts?: Maybe<AccountsConnection>;
   /** Reads and enables pagination through a set of `AccountBalance`. */
   allAccountBalances?: Maybe<AccountBalancesConnection>;
   /** Reads and enables pagination through a set of `Address`. */
@@ -13574,6 +13889,7 @@ export type Query = Node & {
   allUsers?: Maybe<UsersConnection>;
   /** Reads and enables pagination through a set of `Wallet`. */
   allWallets?: Maybe<WalletsConnection>;
+  accountById?: Maybe<Account>;
   accountBalanceById?: Maybe<AccountBalance>;
   accountBalanceByCreditVintageIdAndWalletId?: Maybe<AccountBalance>;
   addressById?: Maybe<Address>;
@@ -13598,6 +13914,7 @@ export type Query = Node & {
   organizationByPartyIdAndType?: Maybe<Organization>;
   organizationMemberByMemberIdAndOrganizationId?: Maybe<OrganizationMember>;
   partyById?: Maybe<Party>;
+  partyByWalletId?: Maybe<Party>;
   projectById?: Maybe<Project>;
   projectByHandle?: Maybe<Project>;
   projectBrokerById?: Maybe<ProjectBroker>;
@@ -13611,9 +13928,12 @@ export type Query = Node & {
   userByPartyIdAndType?: Maybe<User>;
   userByAuth0Sub?: Maybe<User>;
   walletById?: Maybe<Wallet>;
+  walletByAddr?: Maybe<Wallet>;
   getAvailableCredits?: Maybe<Scalars['BigFloat']>;
   getCurrentUser?: Maybe<Scalars['String']>;
   getCurrentUserId?: Maybe<Scalars['UUID']>;
+  /** Reads a single `Account` using its globally unique `ID`. */
+  account?: Maybe<Account>;
   /** Reads a single `AccountBalance` using its globally unique `ID`. */
   accountBalance?: Maybe<AccountBalance>;
   /** Reads a single `Address` using its globally unique `ID`. */
@@ -13668,6 +13988,18 @@ export type Query = Node & {
 /** The root query type which gives access points into the data universe. */
 export type QueryNodeArgs = {
   nodeId: Scalars['ID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAllAccountsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+  condition?: Maybe<AccountCondition>;
 };
 
 
@@ -13980,6 +14312,12 @@ export type QueryAllWalletsArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryAccountByIdArgs = {
+  id: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryAccountBalanceByIdArgs = {
   id: Scalars['UUID'];
 };
@@ -14129,6 +14467,12 @@ export type QueryPartyByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryPartyByWalletIdArgs = {
+  walletId: Scalars['UUID'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryProjectByIdArgs = {
   id: Scalars['UUID'];
 };
@@ -14208,8 +14552,20 @@ export type QueryWalletByIdArgs = {
 
 
 /** The root query type which gives access points into the data universe. */
+export type QueryWalletByAddrArgs = {
+  addr: Scalars['String'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
 export type QueryGetAvailableCreditsArgs = {
   vintageId?: Maybe<Scalars['UUID']>;
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QueryAccountArgs = {
+  nodeId: Scalars['ID'];
 };
 
 
@@ -15054,6 +15410,53 @@ export type UpdateAccountBalancePayloadAccountBalanceEdgeArgs = {
   orderBy?: Maybe<Array<AccountBalancesOrderBy>>;
 };
 
+/** All input for the `updateAccountById` mutation. */
+export type UpdateAccountByIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Account` being updated. */
+  accountPatch: AccountPatch;
+  id: Scalars['UUID'];
+};
+
+/** All input for the `updateAccount` mutation. */
+export type UpdateAccountInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The globally unique `ID` which will identify a single `Account` to be updated. */
+  nodeId: Scalars['ID'];
+  /** An object where the defined keys will be set on the `Account` being updated. */
+  accountPatch: AccountPatch;
+};
+
+/** The output of our update `Account` mutation. */
+export type UpdateAccountPayload = {
+  __typename?: 'UpdateAccountPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The `Account` that was updated by this mutation. */
+  account?: Maybe<Account>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+  /** An edge for our `Account`. May be used by Relay 1. */
+  accountEdge?: Maybe<AccountsEdge>;
+};
+
+
+/** The output of our update `Account` mutation. */
+export type UpdateAccountPayloadAccountEdgeArgs = {
+  orderBy?: Maybe<Array<AccountsOrderBy>>;
+};
+
 /** All input for the `updateAddressById` mutation. */
 export type UpdateAddressByIdInput = {
   /**
@@ -15852,6 +16255,18 @@ export type UpdatePartyByIdInput = {
   id: Scalars['UUID'];
 };
 
+/** All input for the `updatePartyByWalletId` mutation. */
+export type UpdatePartyByWalletIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Party` being updated. */
+  partyPatch: PartyPatch;
+  walletId: Scalars['UUID'];
+};
+
 /** All input for the `updateParty` mutation. */
 export type UpdatePartyInput = {
   /**
@@ -15881,6 +16296,8 @@ export type UpdatePartyPayload = {
   walletByWalletId?: Maybe<Wallet>;
   /** Reads a single `Address` that is related to this `Party`. */
   addressByAddressId?: Maybe<Address>;
+  /** Reads a single `Account` that is related to this `Party`. */
+  accountByAccountId?: Maybe<Account>;
   /** An edge for our `Party`. May be used by Relay 1. */
   partyEdge?: Maybe<PartiesEdge>;
 };
@@ -16335,6 +16752,18 @@ export type UpdateUserPayload = {
 /** The output of our update `User` mutation. */
 export type UpdateUserPayloadUserEdgeArgs = {
   orderBy?: Maybe<Array<UsersOrderBy>>;
+};
+
+/** All input for the `updateWalletByAddr` mutation. */
+export type UpdateWalletByAddrInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Wallet` being updated. */
+  walletPatch: WalletPatch;
+  addr: Scalars['String'];
 };
 
 /** All input for the `updateWalletById` mutation. */
@@ -17414,7 +17843,12 @@ export type Wallet = Node & {
   createdAt: Scalars['Datetime'];
   updatedAt: Scalars['Datetime'];
   addr: Scalars['String'];
-  /** Reads and enables pagination through a set of `Party`. */
+  /** Reads a single `Party` that is related to this `Wallet`. */
+  partyByWalletId?: Maybe<Party>;
+  /**
+   * Reads and enables pagination through a set of `Party`.
+   * @deprecated Please use partyByWalletId instead
+   */
   partiesByWalletId: PartiesConnection;
   /** Reads and enables pagination through a set of `AccountBalance`. */
   accountBalancesByWalletId: AccountBalancesConnection;
@@ -17432,8 +17866,6 @@ export type Wallet = Node & {
   purchasesByBuyerWalletId: PurchasesConnection;
   /** Reads and enables pagination through a set of `Retirement`. */
   retirementsByWalletId: RetirementsConnection;
-  /** Reads and enables pagination through a set of `Address`. */
-  addressesByPartyWalletIdAndAddressId: WalletAddressesByPartyWalletIdAndAddressIdManyToManyConnection;
   /** Reads and enables pagination through a set of `CreditVintage`. */
   creditVintagesByAccountBalanceWalletIdAndCreditVintageId: WalletCreditVintagesByAccountBalanceWalletIdAndCreditVintageIdManyToManyConnection;
   /** Reads and enables pagination through a set of `CreditClass`. */
@@ -17584,18 +18016,6 @@ export type WalletRetirementsByWalletIdArgs = {
   orderBy?: Maybe<Array<RetirementsOrderBy>>;
   condition?: Maybe<RetirementCondition>;
   filter?: Maybe<RetirementFilter>;
-};
-
-
-export type WalletAddressesByPartyWalletIdAndAddressIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<AddressesOrderBy>>;
-  condition?: Maybe<AddressCondition>;
-  filter?: Maybe<AddressFilter>;
 };
 
 
@@ -17869,42 +18289,6 @@ export type WalletCreditVintagesByRetirementWalletIdAndCreditVintageIdArgs = {
   orderBy?: Maybe<Array<CreditVintagesOrderBy>>;
   condition?: Maybe<CreditVintageCondition>;
   filter?: Maybe<CreditVintageFilter>;
-};
-
-/** A connection to a list of `Address` values, with data from `Party`. */
-export type WalletAddressesByPartyWalletIdAndAddressIdManyToManyConnection = {
-  __typename?: 'WalletAddressesByPartyWalletIdAndAddressIdManyToManyConnection';
-  /** A list of `Address` objects. */
-  nodes: Array<Maybe<Address>>;
-  /** A list of edges which contains the `Address`, info from the `Party`, and the cursor to aid in pagination. */
-  edges: Array<WalletAddressesByPartyWalletIdAndAddressIdManyToManyEdge>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-  /** The count of *all* `Address` you could get from the connection. */
-  totalCount: Scalars['Int'];
-};
-
-/** A `Address` edge in the connection, with data from `Party`. */
-export type WalletAddressesByPartyWalletIdAndAddressIdManyToManyEdge = {
-  __typename?: 'WalletAddressesByPartyWalletIdAndAddressIdManyToManyEdge';
-  /** A cursor for use in pagination. */
-  cursor?: Maybe<Scalars['Cursor']>;
-  /** The `Address` at the end of the edge. */
-  node?: Maybe<Address>;
-  /** Reads and enables pagination through a set of `Party`. */
-  partiesByAddressId: PartiesConnection;
-};
-
-
-/** A `Address` edge in the connection, with data from `Party`. */
-export type WalletAddressesByPartyWalletIdAndAddressIdManyToManyEdgePartiesByAddressIdArgs = {
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
-  orderBy?: Maybe<Array<PartiesOrderBy>>;
-  condition?: Maybe<PartyCondition>;
 };
 
 /** A connection to a list of `Address` values, with data from `Purchase`. */

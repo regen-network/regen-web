@@ -154,7 +154,11 @@ const DatePickField: React.FC<DatePickProps> = ({
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
             renderInput={params => (
-              <TextField className={styles.root} {...params} />
+              <TextField
+                name={field.name}
+                className={styles.root}
+                {...params}
+              />
             )}
             openTo="year"
             disabled={form.isSubmitting}

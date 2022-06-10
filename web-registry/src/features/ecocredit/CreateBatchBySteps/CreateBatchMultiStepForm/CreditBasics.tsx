@@ -53,7 +53,7 @@ const JSONSchema = Yup.string().test(
   (value, context) => !!value && isValidJSON(value),
 );
 
-export const validationSchema = Yup.object({
+export const validationSchemaFields = {
   classId: Yup.string().required(requiredMessage),
   startDate: Yup.date().required(requiredMessage).typeError(invalidDate),
   endDate: Yup.date().required(requiredMessage).typeError(invalidDate),
@@ -62,7 +62,9 @@ export const validationSchema = Yup.object({
     then: schema => vcsMetadataSchema,
     otherwise: schema => JSONSchema,
   }),
-});
+};
+
+export const validationSchema = Yup.object(validationSchemaFields);
 
 export const initialValues = {
   classId: '',
@@ -72,9 +74,13 @@ export const initialValues = {
 };
 
 export default function CreditBasics(): React.ReactElement {
-  const { values } = useFormikContext<CreditBasicsFormValues>();
+  const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
 
   const isVCS = values.classId === 'C01';
+
+  React.useEffect(() => {
+    validateForm();
+  }, [validateForm]);
 
   // to check if the project id was already selected,
   // to initialize <ProjectSelect /> correctly when coming back to the step

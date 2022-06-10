@@ -38,7 +38,7 @@ export interface FormValues {
   recipients: Recipient[];
 }
 
-export const validationSchema = Yup.object().shape({
+export const validationSchemaFields = {
   recipients: Yup.array()
     .of(
       Yup.object().shape({
@@ -61,7 +61,9 @@ export const validationSchema = Yup.object().shape({
     )
     .required('Must have recipients') // these constraints are shown if and only if inner constraints are satisfied
     .min(1, 'Minimum of 1 recipient'),
-});
+};
+
+export const validationSchema = Yup.object().shape(validationSchemaFields);
 
 export const recipientInitialValues = {
   recipient: '',

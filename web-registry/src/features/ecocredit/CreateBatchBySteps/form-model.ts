@@ -1,9 +1,11 @@
 import {
   creditBasicsValidationSchema,
+  creditBasicsValidationSchemaFields,
   creditBasicsInitialValues,
 } from './CreateBatchMultiStepForm';
 import {
   validationSchema as recipientsValidationSchema,
+  validationSchemaFields as recipientsValidationSchemaFields,
   initialValues as recipientsInitialValues,
 } from 'web-components/lib/components/form/RecipientsForm';
 
@@ -16,19 +18,16 @@ const formModel = {
       id: 'credit-basics', // type: fields
       name: 'Credit Basics',
       title: 'Create Credit Batch',
-      percentage: 30,
     },
     {
       id: 'recipients', // type: fields
       name: 'Recipient(s)',
       title: 'Recipients',
-      percentage: 55,
     },
     {
       id: 'review', // type: submit
       name: 'Review',
       title: 'Review',
-      percentage: 85,
     },
     {
       id: 'finished', // type: result
@@ -40,6 +39,10 @@ const formModel = {
     },
   ],
   validationSchema: [creditBasicsValidationSchema, recipientsValidationSchema],
+  validationSchemaFields: {
+    ...creditBasicsValidationSchemaFields,
+    ...recipientsValidationSchemaFields,
+  },
   initialValues: {
     ...creditBasicsInitialValues,
     ...recipientsInitialValues,

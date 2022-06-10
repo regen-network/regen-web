@@ -16,7 +16,7 @@ function CreateBatchBySteps(): React.ReactElement {
     <MultiStepSection
       formId={formModel.formId}
       steps={formModel.steps}
-      initialData={formModel.initialValues}
+      initialValues={formModel.initialValues}
     >
       <CreateBatchMultiStepForm />
     </MultiStepSection>

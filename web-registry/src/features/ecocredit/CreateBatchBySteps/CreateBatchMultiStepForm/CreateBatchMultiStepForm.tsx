@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
 import React from 'react';
-import { Formik, Form } from 'formik';
+import { Formik, Form, FormikHelpers } from 'formik';
+import * as Yup from 'yup';
 
 import formModel from '../form-model';
 import { useMultiStep } from '../../../../components/templates/MultiStep';
@@ -44,39 +44,45 @@ export type CreateBatchFormValues = CreditBasicsFormValues &
 
 export default function CreateBatchMultiStepForm(): React.ReactElement {
   const {
-    steps,
     data,
     activeStep,
     isLastStep,
     isReviewStep,
+    percentComplete,
     handleNext,
     handleSaveNext,
     handleBack,
   } = useMultiStep<CreateBatchFormValues>();
 
-  const currentValidationSchema = formModel.validationSchema[activeStep];
+  const currentValidationSchema = isReviewStep
+    ? Yup.object(formModel.validationSchemaFields) // all fields
+    : formModel.validationSchema[activeStep];
 
-  // TODO: Formik Actions type
   async function submitForm(
     values: CreateBatchFormValues,
-    actions: any,
+    formikHelpers: FormikHelpers<CreateBatchFormValues>,
   ): Promise<void> {
     try {
       await handleTx(values);
-      actions.setSubmitting(false);
+      formikHelpers.setSubmitting(false);
+      // TODO - clear storage
       handleNext();
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err);
     }
   }
 
-  function handleSubmit(values: CreateBatchFormValues, actions: any): void {
+  function handleSubmit(
+    values: CreateBatchFormValues,
+    formikHelpers: FormikHelpers<CreateBatchFormValues>,
+  ): void | Promise<any> {
     if (isReviewStep) {
-      submitForm(values, actions);
+      submitForm(values, formikHelpers);
     } else {
       handleSaveNext(values);
-      actions.setTouched({});
-      actions.setSubmitting(false);
+      formikHelpers.setTouched({});
+      formikHelpers.setSubmitting(false);
     }
   }
 
@@ -103,7 +109,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
       validationSchema={currentValidationSchema}
       onSubmit={handleSubmit}
     >
-      {({ submitForm, isValid, isSubmitting, touched, values, errors }) => (
+      {({ submitForm, isValid, isSubmitting }) => (
         <Form id={formModel.formId}>
           {renderStep(activeStep)}
           {/* TODO ? - Move to: MultiStepSection >>> StepperSection >>> StepperControls ?? */}
@@ -111,8 +117,8 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
             <SaveFooter
               onPrev={activeStep > 0 ? handleBack : undefined}
               onSave={submitForm}
-              saveDisabled={!isValid || isSubmitting} // || !Object.keys(touched).length
-              percentComplete={steps?.[activeStep].percentage || 0}
+              saveDisabled={!isValid || isSubmitting}
+              percentComplete={percentComplete}
             />
           )}
         </Form>

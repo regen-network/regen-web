@@ -1,8 +1,9 @@
 import { default as CreateBatchMultiStepForm } from './CreateBatchMultiStepForm';
 export default CreateBatchMultiStepForm;
 
-// export type { CreateBatchFormValues } from './CreateBatchMultiStepForm';
-
-// config for Credit Basics fields
-export { validationSchema as creditBasicsValidationSchema } from './CreditBasics';
-export { initialValues as creditBasicsInitialValues } from './CreditBasics';
+// config about Credit Basics fields for formModel
+export {
+  validationSchema as creditBasicsValidationSchema,
+  validationSchemaFields as creditBasicsValidationSchemaFields,
+  initialValues as creditBasicsInitialValues,
+} from './CreditBasics';

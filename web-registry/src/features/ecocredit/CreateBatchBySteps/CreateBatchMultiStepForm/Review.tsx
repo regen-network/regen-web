@@ -21,7 +21,19 @@ import { Box } from '@mui/material';
 // TODO: Only covers case C01
 
 export default function Review(): JSX.Element {
-  const { values } = useFormikContext<CreateBatchFormValues>();
+  const { values, validateForm, isValid } =
+    useFormikContext<CreateBatchFormValues>();
+  const { handleResetReview } = useMultiStep();
+
+  // validate form on mount
+  React.useEffect(() => {
+    validateForm();
+  }, [validateForm]);
+
+  // check isValid change to reset in case is not valid
+  React.useEffect(() => {
+    if (!isValid) handleResetReview(values);
+  }, [handleResetReview, isValid, values]);
 
   return (
     <>

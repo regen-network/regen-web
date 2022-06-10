@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 
 type ReturnType<T> = [T, React.Dispatch<T>];
 
-export const useLocalStorage = <T>(
+export default function useLocalStorage<T>(
   key: string,
   initialValue?: T,
-): ReturnType<T> => {
+): ReturnType<T> {
   const [state, setState] = useState<T>(() => {
-    // this initialization happens just once
-    if (!initialValue) return;
+    // this way, as a fn, this initialization happens just once
     try {
       const value = localStorage.getItem(key);
       return value ? JSON.parse(value) : initialValue;
@@ -28,5 +27,7 @@ export const useLocalStorage = <T>(
     }
   }, [state, key]);
 
+  // TODO: Remove data (key/value)
+
   return [state, setState];
-};
+}

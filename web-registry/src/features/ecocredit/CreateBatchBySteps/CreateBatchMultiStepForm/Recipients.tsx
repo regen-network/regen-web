@@ -1,4 +1,6 @@
 import React from 'react';
+import { useFormikContext } from 'formik';
+
 import {
   RecipientsFieldArray,
   FormValues,
@@ -9,6 +11,12 @@ export type RecipientsFormValues = FormValues;
 export type RecipientFormValues = Recipient;
 
 export default function Recipients(): React.ReactElement {
+  const { validateForm } = useFormikContext<RecipientsFormValues>();
+
+  React.useEffect(() => {
+    validateForm();
+  }, [validateForm]);
+
   return (
     <>
       <RecipientsFieldArray

@@ -35,3 +35,6 @@
 //     }
 //   }
 // }
+
+// Add the Testing Library for Cypress
+import '@testing-library/cypress/add-commands';

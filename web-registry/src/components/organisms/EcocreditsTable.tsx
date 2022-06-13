@@ -61,11 +61,15 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
       ]}
       rows={credits.map((row, i) => {
         return [
-          row.batch_denom,
+          <Link href={`/credit-batches/${row.batch_denom}`}>
+            {row.batch_denom}
+          </Link>,
           <Link href={getAccountUrl(row.issuer as string)} target="_blank">
             {truncate(row.issuer as string)}
           </Link>,
-          row.class_id,
+          <Link key="class_id" href={`/credit-classes/${row.class_id}`}>
+            {row.class_id}
+          </Link>,
           formatNumber(row.tradable_amount),
           formatNumber(row.retired_amount),
           <GreyText>{formatDate(row.start_date)}</GreyText>,

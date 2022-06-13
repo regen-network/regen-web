@@ -1,0 +1,24 @@
+{
+  "formValues": {
+    "classId": "C01",
+    "startDate": "2017-06-20T12:58:30.000Z",
+    "endDate": "2024-06-11T12:58:35.000Z",
+    "metadata": {
+      "regen:vcsProjectId": "934",
+      "regen:vcsRetirementSerialNumber": "10695-239407151-239407157-VCS-VCU-466-VER-PG-14-2293-01062017-31122019-0"
+    },
+    "recipients": [
+      {
+        "recipient": "regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46",
+        "tradableAmount": 1500,
+        "withRetire": false,
+        "retiredAmount": 750,
+        "note": "",
+        "country": "US",
+        "stateProvince": "",
+        "retirementLocation": "US"
+      }
+    ]
+  },
+  "maxAllowedStep": 2
+}

@@ -3,66 +3,86 @@ describe('Create Batch by steps flow', () => {
   // Right now you have to disable the Auth check on the create batch page.
 
   before(() => {
-    cy.fixture('credit-batch-form.json').then(data => {
-      this.formValues = data;
+    cy.fixture('create-batch.json').then(data => {
+      this.formData = data;
     });
   });
 
-  it('Happy path, allows a issuer to enter credit and recipients details and issue a credit batch', () => {
-    const values = this.formValues;
+  // Happy path
+  it('allows a issuer to enter credit batch details and recipients details and issue a credit batch', () => {
+    const { formValues } = this.formData;
 
-    cy.viewport(1200, 2500);
     cy.visit('/ecocredits/create-batch');
 
-    cy.findByText(/reject/i).click(); // TODO - button
+    // TODO - button
+    cy.findByText(/reject/i).click(); // cookies
     // cy.findByRole('button', { name: /reject/i }).click();
-    // cy.contains(/reject/i).click(); // cookies
 
-    // step 1
+    /**
+     * Step 1
+     */
     cy.findByText(/create credit batch/i).should('be.visible'); // TODO - role heading
     // cy.findByRole('heading', { name: /create credit batch/i }).should('be.visible');
-    // cy.contains(/create credit batch/i).should('be.visible');
 
     cy.findByRole('button', { name: /save/i }).should('be.disabled');
-    // cy.contains(/next/i).should('be.disabled');
 
-    cy.findByRole('combobox', { name: /credit class/i }).select(values.classId);
-    // cy.findByLabelText(/credit class/i).select(values.classId);
-    // cy.get('select[name="classId"]').select('C01');
+    cy.findByRole('combobox', { name: /credit class/i }).select(
+      formValues.classId,
+    );
 
-    cy.findByRole('combobox', { name: /project/i }).select(values.projectId);
-    // cy.findByLabelText(/project/i).select(values.projectId);
-    // cy.get('select[name="metadata[\'regen:vcsProjectId\']"]').select('612');
+    // 'select[name="metadata[\'regen:vcsProjectId\']"]'
+    cy.findByRole('combobox', { name: /project/i }).select(
+      formValues.metadata['regen:vcsProjectId'],
+    );
 
-    cy.get('input[name="startDate"]').type(values.startDate); // TODO
-    // cy.findByLabelText(/start date/i).type('05/13/2018'); //  * Make sure you're using the "for" attribute or "aria-labelledby" attribute correctly.
-    cy.get('input[name="endDate"]').type(values.endDate);
+    const dateFormatOptions = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    };
+
+    // TODO - First place, role?.. second option, by label text:
+    // Make sure you're using the "for" attribute or "aria-labelledby" attribute correctly.
+    cy.get('input[name="startDate"]').type(
+      // format(formValues.startDate, 'MM/dd/yyyy'),
+      new Date(formValues.startDate).toLocaleDateString(
+        'en-US',
+        dateFormatOptions,
+      ),
+    );
+
+    // cy.findByLabelText(/start date/i).type(values.startDate);
+    cy.get('input[name="endDate"]').type(
+      // formValues.endDate
+      new Date(formValues.endDate).toLocaleDateString(
+        'en-US',
+        dateFormatOptions,
+      ),
+    );
+    // cy.findByLabelText(/end date/i).type(values.endDate);
 
     cy.findByLabelText(/VCS retirement serial number/i).type(
-      values["metadata['regen:vcsRetirementSerialNumber']"],
+      formValues.metadata['regen:vcsRetirementSerialNumber'],
     );
-    // cy.get('input[name="metadata[\'regen:vcsRetirementSerialNumber\']"]').type(
-    //   '10695-239407151-239407157-VCS-VCU-466-VER-PG-14-2293-01062017-31122019-0',
-    // );
 
-    cy.findByRole('button', { name: /save/i }).should('be.enabled');
-    // cy.contains(/next/i).should('be.enabled');
-    // cy.contains(/next/i).click();
     cy.findByRole('button', { name: /save/i }).click();
 
-    // step 2
+    /**
+     * Step 2
+     */
     cy.findByText(/recipients/i).should('be.visible'); // TODO - role heading
-    // cy.contains(/recipients/i).should('be.visible');
     cy.findByRole('button', { name: /save/i }).should('be.disabled');
-    // cy.contains(/next/i).should('be.disabled');
 
-    cy.findByLabelText(/recipient address/i).type(values.recipientAddress);
+    cy.findByLabelText(/recipient address/i).type(
+      formValues.recipients[0].recipient,
+    );
     // cy.get('input[name="recipients.0.recipient"]').type(
     //   'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
     // );
 
-    cy.findByLabelText(/amount tradable/i).type(values.tradableAmount);
-    // cy.get('input[name="recipients.0.tradableAmount"]').type('1500');
+    cy.findByLabelText(/amount tradable/i).type(
+      formValues.recipients[0].tradableAmount,
+    );
 
     cy.findByRole('button', { name: /save/i }).should('be.enabled');
 
@@ -72,14 +92,16 @@ describe('Create Batch by steps flow', () => {
 
     cy.findByRole('button', { name: /save/i }).should('be.disabled');
 
-    cy.findByLabelText(/amount retired/i).type(values.retiredAmount);
+    cy.findByLabelText(/amount retired/i).type(
+      formValues.recipients[0].retiredAmount,
+    );
 
-    cy.findByRole('button', { name: /save/i }).should('be.enabled');
-    // cy.contains(/next/i).should('be.enabled');
     cy.findByRole('button', { name: /save/i }).click();
-    // cy.contains(/next/i).click();
 
-    // step 3
+    /**
+     * Step 3
+     */
+
     // TODO - Found multiple elements with the text: /review/i
     // cy.findByText(/review/i).should('be.visible'); // TODO - role heading
     cy.contains(/review/i).should('be.visible'); // but two elements....
@@ -93,8 +115,25 @@ describe('Create Batch by steps flow', () => {
     cy.contains(/next/i).should('be.enabled');
     cy.contains(/next/i).click();
 
-    // step 4
+    /**
+     * Step 4
+     */
     cy.findByText(/credits have been issued/i).should('be.visible'); // TODO - role heading
     // cy.contains(/credits have been issued/i).should('be.visible');
   });
+
+  it('retreives valid persisted data in local storage and goes directly to review step', () => {
+    const values = this.formData;
+    localStorage.setItem('create-batch-form', JSON.stringify(values));
+
+    cy.visit('/ecocredits/create-batch');
+    // TODO - button
+    cy.findByText(/reject/i).click(); // cookies
+
+    cy.contains(/review/i).should('be.visible'); // but two elements....
+
+    cy.contains(/next/i).should('be.enabled');
+  });
+
+  // TODO - navigate / edit previous steps
 });

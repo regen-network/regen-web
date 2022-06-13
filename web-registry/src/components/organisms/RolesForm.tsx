@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 
@@ -101,6 +102,8 @@ const RolesForm: React.FC<RolesFormProps> = ({
   initialValues,
   projectCreator,
 }) => {
+  const navigate = useNavigate();
+  const { projectId } = useParams();
   const [entities, setEntities] = useState<Array<FormValues>>([]);
   const styles = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
@@ -447,6 +450,8 @@ const RolesForm: React.FC<RolesFormProps> = ({
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
+                onPrev={() => navigate(`/project-pages/${projectId}/location`)}
+                onNext={() => navigate(`/project-pages/${projectId}/story`)}
                 saveDisabled={
                   !isValid || isSubmitting || !Object.keys(touched).length
                 }

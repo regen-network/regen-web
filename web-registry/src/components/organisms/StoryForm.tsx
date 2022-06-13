@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
@@ -151,6 +152,8 @@ const ModalContent: React.FC<{
 
 const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
   const styles = useStyles();
+  const navigate = useNavigate();
+  const { projectId } = useParams();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -303,6 +306,8 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
 
               <ProjectPageFooter
                 onSave={submitForm}
+                onPrev={() => navigate(`/project-pages/${projectId}/roles`)}
+                onNext={() => navigate(`/project-pages/${projectId}/media`)}
                 saveDisabled={
                   !isValid || isSubmitting || !Object.keys(touched).length
                 }

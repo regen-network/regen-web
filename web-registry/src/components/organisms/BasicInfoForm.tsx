@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import clsx from 'clsx';
 
@@ -71,6 +72,8 @@ const BasicInfoForm: React.FC<{
   submit: (values: BasicInfoFormValues) => Promise<void>;
   initialValues?: BasicInfoFormValues;
 }> = ({ submit, initialValues }) => {
+  const navigate = useNavigate();
+  const { projectId } = useParams();
   const classes = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -174,6 +177,7 @@ const BasicInfoForm: React.FC<{
             </OnBoardingCard>
             <ProjectPageFooter
               onSave={submitForm}
+              onNext={() => navigate(`/project-pages/${projectId}/location`)}
               saveDisabled={
                 !isValid || isSubmitting || !Object.keys(touched).length
               }

@@ -138,16 +138,16 @@ const App: React.FC = (): JSX.Element => {
               element={<ProtectedRoute component={ProjectLocation} />}
             />
             <Route
+              path="roles"
+              element={<ProtectedRoute component={Roles} />}
+            />
+            <Route
               path="story"
               element={<ProtectedRoute component={Story} />}
             />
             <Route
               path="media"
               element={<ProtectedRoute component={Media} />}
-            />
-            <Route
-              path="roles"
-              element={<ProtectedRoute component={Roles} />}
             />
             <Route
               path="entity-display"

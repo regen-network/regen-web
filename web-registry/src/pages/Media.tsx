@@ -27,8 +27,9 @@ const Media = (): JSX.Element => {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
       'regen:previewPhoto': metadata['regen:previewPhoto'],
+      'regen:creditText': metadata['regen:creditText'],
       'regen:galleryPhotos': metadata['regen:galleryPhotos'],
-      'regen:landStewardPhoto': metadata['regen:landStewardPhoto'],
+      // 'regen:landStewardPhoto': metadata['regen:landStewardPhoto'],
       'regen:videoURL': metadata['regen:videoURL'],
     };
   }

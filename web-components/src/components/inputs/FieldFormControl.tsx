@@ -32,7 +32,6 @@ interface Props extends FieldProps, DefaultStyleProps {
 }
 
 interface StyleProps {
-  optional?: boolean;
   disabled?: boolean;
   description?: string;
   error: boolean;
@@ -106,7 +105,6 @@ export default function FieldFormControl({
 
   const hasError = fieldTouched && errorMessage;
   const styles = useStyles({
-    optional,
     disabled,
     description,
     error: hasError,

@@ -30,8 +30,9 @@ export default function ControlledFormLabel({
           '&::after': {
             color: 'info.main',
             fontWeight: 'normal',
+            ml: 1,
             fontSize: [14, 16],
-            content: optional ? '" (optional)"' : '""',
+            content: optional ? '"(optional)"' : '""',
           },
         }}
       >

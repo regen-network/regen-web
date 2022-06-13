@@ -1,12 +1,13 @@
 import React from 'react';
+import cx from 'clsx';
 import { makeStyles } from '@mui/styles';
 // import { useMediaQuery, Grid, FormHelperText, SxProps } from '@mui/material';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, FieldArray } from 'formik';
 import { useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
-// import { VideoInput } from 'web-components/lib/components/inputs/VideoInput'; //TODO: make this component easier to use with share links from youtube, vimeo, etc
+import { VideoInput } from 'web-components/lib/components/inputs/VideoInput'; //TODO: make this component easier to use with share links from youtube, vimeo, etc
 // import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
@@ -15,6 +16,7 @@ import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
 import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
+import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
@@ -32,8 +34,9 @@ interface urlList {
 
 export interface MediaValues {
   'regen:previewPhoto'?: urlType;
+  'regen:creditText'?: string;
   'regen:galleryPhotos'?: urlList;
-  'regen:landStewardPhoto'?: urlType;
+  // 'regen:landStewardPhoto'?: urlType;
   'regen:videoURL'?: urlType;
 }
 
@@ -62,16 +65,9 @@ function getURLListInitialValue(value?: urlList): urlList {
 }
 
 const useStyles = makeStyles(theme => ({
-  field: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(12),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(10),
-    },
-  },
   fullSizeMedia: {
     width: '100%',
+    marginTop: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       height: theme.typography.pxToRem(290),
     },
@@ -79,26 +75,17 @@ const useStyles = makeStyles(theme => ({
       height: theme.typography.pxToRem(210),
     },
   },
-  galleryImage: {
+  padTop: {
     [theme.breakpoints.up('sm')]: {
-      height: theme.typography.pxToRem(169),
-      flex: 1,
+      marginTop: theme.spacing(10),
     },
     [theme.breakpoints.down('sm')]: {
-      height: theme.typography.pxToRem(139),
+      marginTop: theme.spacing(8),
     },
-  },
-  smallButton: {
-    fontSize: theme.typography.pxToRem(14),
-    padding: theme.spacing(2, 3),
   },
 }));
 
-// const sxs = {
-//   galleryImage: { height: [139, 169], flex: { sm: 1 } } as SxProps,
-// };
-
-const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
+const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
   const styles = useStyles();
   // const theme = useTheme();
   const apiUri = getApiUri();
@@ -108,7 +95,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
   const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
-      uri: 'http://regen.network/ProjectPageShape',
+      uri: 'http://regen.network/C01-ProjectShape',
     },
   });
 
@@ -124,9 +111,9 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
           'regen:galleryPhotos': getURLListInitialValue(
             initialValues?.['regen:galleryPhotos'],
           ),
-          'regen:landStewardPhoto': getURLInitialValue(
-            initialValues?.['regen:landStewardPhoto'],
-          ),
+          // 'regen:landStewardPhoto': getURLInitialValue(
+          //   initialValues?.['regen:landStewardPhoto'],
+          // ),
           'regen:videoURL': getURLInitialValue(
             initialValues?.['regen:videoURL'],
           ),
@@ -160,32 +147,84 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
           return errors;
         }}
         onSubmit={async (values, { setSubmitting, setTouched }) => {
-          setSubmitting(true);
-          try {
-            await submit(values);
-            setSubmitting(false);
-            setTouched({}); // reset to untouched
-            if (isEdit && confirmSave) confirmSave();
-          } catch (e) {
-            setSubmitting(false);
-          }
+          console.log('values :>> ', values);
+          // setSubmitting(true);
+          // try {
+          //   await submit(values);
+          //   setSubmitting(false);
+          //   setTouched({}); // reset to untouched
+          //   if (isEdit && confirmSave) confirmSave();
+          // } catch (e) {
+          //   setSubmitting(false);
+          // }
         }}
       >
-        {({ submitForm, isValid, isSubmitting, errors, touched }) => {
+        {({ submitForm, isValid, isSubmitting, errors, values, touched }) => {
+          const shouldRenderPhoto = (i: number): boolean => {
+            if (!values['regen:previewPhoto']['@value']) return false;
+            return Boolean(
+              values['regen:galleryPhotos']['@list'][i - 1]?.['@value'],
+            );
+          };
           return (
             <Form translate="yes">
-              <OnBoardingCard sx={{ pb: [0] }}>
+              <OnBoardingCard>
                 <Field
-                  classes={{ root: styles.field, main: styles.fullSizeMedia }}
+                  classes={{ main: styles.fullSizeMedia }}
                   component={ImageUpload}
-                  label="Preview photo"
-                  description="Choose the summary photo that will show up in project previews."
-                  buttonText="+ Add preview Photo"
+                  label="Photos"
+                  description="Choose the photos that will show up on the project page. The first photo will be your preview photo."
+                  buttonText="+ Add Photo"
                   fixedCrop={cropAspect}
                   name="regen:previewPhoto.@value"
                   apiServerUrl={apiUri}
                   projectId={projectId}
+                  optional
                   isDrop
+                />
+                <FieldArray name="photos">
+                  {({ insert, remove, push }) => (
+                    <div>
+                      {values['regen:galleryPhotos']['@list'].map((photo, i) =>
+                        shouldRenderPhoto(i) ? (
+                          <Field
+                            key={i}
+                            classes={{
+                              main:
+                                i === 0 // margin only on first photo
+                                  ? cx(styles.fullSizeMedia, styles.padTop)
+                                  : styles.fullSizeMedia,
+                            }}
+                            component={ImageUpload}
+                            buttonText="+ Add Photo"
+                            fixedCrop={cropAspect}
+                            name={`regen:galleryPhotos.@list[${i}].@value`}
+                            apiServerUrl={apiUri}
+                            projectId={projectId}
+                            // defaultStyle={false}
+                            optional
+                            isDrop
+                          />
+                        ) : null,
+                      )}
+                    </div>
+                  )}
+                </FieldArray>
+                <Field
+                  optional
+                  name="regen:creditText"
+                  // classes={{ root: styles.field }}
+                  component={ControlledTextField}
+                  label="Photo Credit"
+                />
+                <Field
+                  // classes={{ root: styles.field }}
+                  // defaultStyle={false}
+                  component={VideoInput}
+                  label="Video url"
+                  optional
+                  description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
+                  name="regen:videoURL.@value"
                 />
                 {/* <div className={styles.field}>
                   <FormLabel
@@ -315,14 +354,6 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                     )}
                 </div> */}
                 {/* <Field
-                  classes={{ root: styles.field }}
-                  component={VideoInput}
-                  label="Video url"
-                  optional
-                  description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
-                  name="regen:videoURL.@value"
-                /> */}
-                <Field
                   classes={{ root: styles.field, main: styles.fullSizeMedia }}
                   component={ImageUpload}
                   label="Land Steward photo"
@@ -334,7 +365,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
                   apiServerUrl={apiUri}
                   projectId={projectId}
                   isDrop
-                />
+                /> */}
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}

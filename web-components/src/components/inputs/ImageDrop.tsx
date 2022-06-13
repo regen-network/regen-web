@@ -63,9 +63,6 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(4),
     fontSize: theme.typography.pxToRem(12),
   },
-  button: {
-    fontSize: theme.typography.pxToRem(18),
-  },
   deleteButton: {
     background: theme.palette.primary.main,
     position: 'absolute',
@@ -241,7 +238,7 @@ function ImageDrop({
                 />
                 <label htmlFor={`btn-file-input-${field.name}`}>
                   <OutlinedButton
-                    classes={{ root: cx(styles.button, classes?.button) }}
+                    classes={{ root: classes?.button }}
                     isImageBtn
                   >
                     {buttonText || '+ add'}

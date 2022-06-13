@@ -18,7 +18,7 @@ I have...
 - [ ] provided instructions on how to test
 - [ ] reviewed "Files changed" and left comments if necessary
 - [ ] confirmed all CI checks have passed
-- [ ] set up backport PRs for `redwood` and `hambach` (see below)
+- [ ] once the PR is closed, set up backport PRs for `redwood` and `hambach` (see below)
 
 #### Setting up backport PRs
 

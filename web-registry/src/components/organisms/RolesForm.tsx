@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
+import { useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import {
@@ -31,6 +32,7 @@ import {
   ShaclGraphByUriQuery,
 } from '../../generated/graphql';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
+import getApiUri from '../../lib/apiUri';
 
 interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
@@ -94,6 +96,8 @@ const RolesForm: React.FC<RolesFormProps> = ({
   creditClassId,
   graphData,
 }) => {
+  const apiUri = getApiUri();
+  const { projectId } = useParams();
   const [entities, setEntities] = useState<
     Array<FormValues | ProfileFormValues>
   >([]);
@@ -440,6 +444,8 @@ const RolesForm: React.FC<RolesFormProps> = ({
                     onSaveOrganization={saveOrganization}
                     onSaveIndividual={saveIndividual}
                     validateEntity={validateEntity}
+                    apiServerUrl={apiUri}
+                    projectId={projectId}
                   />
                 )}
                 {!creditClassId && (
@@ -454,6 +460,8 @@ const RolesForm: React.FC<RolesFormProps> = ({
                     onSaveOrganization={saveOrganization}
                     onSaveIndividual={saveIndividual}
                     validateEntity={validateEntity}
+                    apiServerUrl={apiUri}
+                    projectId={projectId}
                   />
                 )}
                 <Field
@@ -473,6 +481,8 @@ const RolesForm: React.FC<RolesFormProps> = ({
                   onSaveProfile={saveProfile}
                   validateEntity={validateEntity}
                   profile={profile}
+                  apiServerUrl={apiUri}
+                  projectId={projectId}
                 />
                 {!creditClassId && (
                   <Field
@@ -486,6 +496,8 @@ const RolesForm: React.FC<RolesFormProps> = ({
                     onSaveOrganization={saveOrganization}
                     onSaveIndividual={saveIndividual}
                     validateEntity={validateEntity}
+                    apiServerUrl={apiUri}
+                    projectId={projectId}
                   />
                 )}
                 {creditClassId && (

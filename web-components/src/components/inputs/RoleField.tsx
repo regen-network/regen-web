@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import { SxProps, TextField } from '@mui/material';
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+import Autocomplete from '@mui/material/Autocomplete';
 import { FieldProps, FormikErrors, FormikProps } from 'formik';
 import cx from 'clsx';
 
@@ -19,8 +19,7 @@ import {
   IndividualFormValues,
 } from '../modal/IndividualModal';
 import { ProfileModal, ProfileFormValues } from '../modal/ProfileModal';
-
-const filter = createFilterOptions<RoleOptionType>();
+import { getURLInitialValue } from '../../utils/schemaURL';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -98,6 +97,8 @@ interface Props extends FieldProps {
   onSaveProfile: (v: ProfileFormValues) => Promise<ProfileFormValues>;
   validateEntity: (values: FormValues) => Promise<FormikErrors<FormValues>>;
   mapboxToken: string;
+  apiServerUrl: string;
+  projectId: string;
   profile?: boolean;
 }
 
@@ -156,6 +157,8 @@ const RoleField: React.FC<Props> = ({
   onSaveProfile,
   validateEntity,
   profile,
+  apiServerUrl,
+  projectId,
   ...fieldProps
 }) => {
   const styles = useStyles();
@@ -252,6 +255,7 @@ const RoleField: React.FC<Props> = ({
                       setProfileEdit({
                         '@type': 'regen:Organization',
                         'regen:showOnProjectPage': true,
+                        'schema:image': getURLInitialValue(),
                       });
                     } else {
                       setOrganizationEdit({
@@ -276,6 +280,7 @@ const RoleField: React.FC<Props> = ({
                       setProfileEdit({
                         '@type': 'regen:Individual',
                         'regen:showOnProjectPage': true,
+                        'schema:image': getURLInitialValue(),
                       });
                     } else {
                       setIndividualEdit({
@@ -362,6 +367,8 @@ const RoleField: React.FC<Props> = ({
           onClose={closeProfileModal}
           onSubmit={saveProfile}
           validate={validateEntity}
+          apiServerUrl={apiServerUrl}
+          projectId={projectId}
         />
       )}
     </div>

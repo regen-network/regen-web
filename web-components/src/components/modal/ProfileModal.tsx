@@ -22,6 +22,8 @@ interface ProfileModalProps {
   validate: (
     values: ProfileFormValues,
   ) => Promise<FormikErrors<ProfileFormValues>>;
+  apiServerUrl: string;
+  projectId: string;
 }
 
 export interface ProfileFormValues {
@@ -40,6 +42,8 @@ function ProfileModal({
   onClose,
   onSubmit,
   validate,
+  apiServerUrl,
+  projectId,
 }: ProfileModalProps): JSX.Element {
   const theme = useTheme();
   const organization = profile['@type'] === 'regen:Organization';
@@ -99,6 +103,8 @@ function ProfileModal({
                         />
                       )
                     }
+                    apiServerUrl={apiServerUrl}
+                    projectId={projectId}
                     optional
                   />
                   <Field

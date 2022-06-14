@@ -2446,6 +2446,7 @@ export type QuerySanityCreditClassArgs = {
   _key: Maybe<StringQueryOperatorInput>;
   iri: Maybe<SanitySlugFilterInput>;
   path: Maybe<StringQueryOperatorInput>;
+  image: Maybe<SanityCustomImageFilterInput>;
   ecologicalImpact: Maybe<SanityEcologicalImpactRelationFilterListInput>;
   overviewCards: Maybe<SanityCardFilterListInput>;
   sdgs: Maybe<SanitySdgFilterListInput>;
@@ -2456,6 +2457,7 @@ export type QuerySanityCreditClassArgs = {
   shortDescription: Maybe<SanityBlockFilterListInput>;
   _rawName: Maybe<JsonQueryOperatorInput>;
   _rawIri: Maybe<JsonQueryOperatorInput>;
+  _rawImage: Maybe<JsonQueryOperatorInput>;
   _rawDescription: Maybe<JsonQueryOperatorInput>;
   _rawShortDescription: Maybe<JsonQueryOperatorInput>;
   _rawEcologicalImpact: Maybe<JsonQueryOperatorInput>;
@@ -2715,7 +2717,7 @@ export type QuerySanityHomePageArgs = {
   _updatedAt: Maybe<DateQueryOperatorInput>;
   _rev: Maybe<StringQueryOperatorInput>;
   _key: Maybe<StringQueryOperatorInput>;
-  heroSection: Maybe<SanityHeroSectionFilterInput>;
+  heroSection: Maybe<SanityHomePageTopSectionFilterInput>;
   bottomBanner: Maybe<SanityBottomBannerFilterInput>;
   _rawHeroSection: Maybe<JsonQueryOperatorInput>;
   _rawBottomBanner: Maybe<JsonQueryOperatorInput>;
@@ -8285,6 +8287,7 @@ export type SanityCreditClass = SanityDocument & Node & {
   _key: Maybe<Scalars['String']>;
   iri: Maybe<SanitySlug>;
   path: Maybe<Scalars['String']>;
+  image: Maybe<SanityCustomImage>;
   ecologicalImpact: Maybe<Array<Maybe<SanityEcologicalImpactRelation>>>;
   overviewCards: Maybe<Array<Maybe<SanityCard>>>;
   sdgs: Maybe<Array<Maybe<SanitySdg>>>;
@@ -8295,6 +8298,7 @@ export type SanityCreditClass = SanityDocument & Node & {
   shortDescription: Maybe<Array<Maybe<SanityBlock>>>;
   _rawName: Maybe<Scalars['JSON']>;
   _rawIri: Maybe<Scalars['JSON']>;
+  _rawImage: Maybe<Scalars['JSON']>;
   _rawDescription: Maybe<Scalars['JSON']>;
   _rawShortDescription: Maybe<Scalars['JSON']>;
   _rawEcologicalImpact: Maybe<Scalars['JSON']>;
@@ -8331,6 +8335,11 @@ export type SanityCreditClass_RawNameArgs = {
 
 
 export type SanityCreditClass_RawIriArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityCreditClass_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
@@ -8409,6 +8418,51 @@ export enum SanityCreditClassFieldsEnum {
   IriType = 'iri____type',
   IriCurrent = 'iri___current',
   Path = 'path',
+  ImageKey = 'image____key',
+  ImageType = 'image____type',
+  ImageImageHref = 'image___imageHref',
+  ImageImageKey = 'image___image____key',
+  ImageImageType = 'image___image____type',
+  ImageImageAssetId = 'image___image___asset____id',
+  ImageImageAssetType = 'image___image___asset____type',
+  ImageImageAssetCreatedAt = 'image___image___asset____createdAt',
+  ImageImageAssetUpdatedAt = 'image___image___asset____updatedAt',
+  ImageImageAssetRev = 'image___image___asset____rev',
+  ImageImageAssetKey = 'image___image___asset____key',
+  ImageImageAssetOriginalFilename = 'image___image___asset___originalFilename',
+  ImageImageAssetLabel = 'image___image___asset___label',
+  ImageImageAssetTitle = 'image___image___asset___title',
+  ImageImageAssetDescription = 'image___image___asset___description',
+  ImageImageAssetAltText = 'image___image___asset___altText',
+  ImageImageAssetSha1hash = 'image___image___asset___sha1hash',
+  ImageImageAssetExtension = 'image___image___asset___extension',
+  ImageImageAssetMimeType = 'image___image___asset___mimeType',
+  ImageImageAssetSize = 'image___image___asset___size',
+  ImageImageAssetAssetId = 'image___image___asset___assetId',
+  ImageImageAssetUploadId = 'image___image___asset___uploadId',
+  ImageImageAssetPath = 'image___image___asset___path',
+  ImageImageAssetUrl = 'image___image___asset___url',
+  ImageImageAssetRawMetadata = 'image___image___asset____rawMetadata',
+  ImageImageAssetRawSource = 'image___image___asset____rawSource',
+  ImageImageAssetId = 'image___image___asset___id',
+  ImageImageAssetChildren = 'image___image___asset___children',
+  ImageImageHotspotKey = 'image___image___hotspot____key',
+  ImageImageHotspotType = 'image___image___hotspot____type',
+  ImageImageHotspotX = 'image___image___hotspot___x',
+  ImageImageHotspotY = 'image___image___hotspot___y',
+  ImageImageHotspotHeight = 'image___image___hotspot___height',
+  ImageImageHotspotWidth = 'image___image___hotspot___width',
+  ImageImageCropKey = 'image___image___crop____key',
+  ImageImageCropType = 'image___image___crop____type',
+  ImageImageCropTop = 'image___image___crop___top',
+  ImageImageCropBottom = 'image___image___crop___bottom',
+  ImageImageCropLeft = 'image___image___crop___left',
+  ImageImageCropRight = 'image___image___crop___right',
+  ImageImageRawAsset = 'image___image____rawAsset',
+  ImageImageRawHotspot = 'image___image____rawHotspot',
+  ImageImageRawCrop = 'image___image____rawCrop',
+  ImageImageAlt = 'image___imageAlt',
+  ImageRawImage = 'image____rawImage',
   EcologicalImpact = 'ecologicalImpact',
   EcologicalImpactKey = 'ecologicalImpact____key',
   EcologicalImpactType = 'ecologicalImpact____type',
@@ -8891,6 +8945,7 @@ export enum SanityCreditClassFieldsEnum {
   ShortDescriptionRawChildren = 'shortDescription____rawChildren',
   RawName = '_rawName',
   RawIri = '_rawIri',
+  RawImage = '_rawImage',
   RawDescription = '_rawDescription',
   RawShortDescription = '_rawShortDescription',
   RawEcologicalImpact = '_rawEcologicalImpact',
@@ -8995,6 +9050,7 @@ export type SanityCreditClassFilterInput = {
   _key: Maybe<StringQueryOperatorInput>;
   iri: Maybe<SanitySlugFilterInput>;
   path: Maybe<StringQueryOperatorInput>;
+  image: Maybe<SanityCustomImageFilterInput>;
   ecologicalImpact: Maybe<SanityEcologicalImpactRelationFilterListInput>;
   overviewCards: Maybe<SanityCardFilterListInput>;
   sdgs: Maybe<SanitySdgFilterListInput>;
@@ -9005,6 +9061,7 @@ export type SanityCreditClassFilterInput = {
   shortDescription: Maybe<SanityBlockFilterListInput>;
   _rawName: Maybe<JsonQueryOperatorInput>;
   _rawIri: Maybe<JsonQueryOperatorInput>;
+  _rawImage: Maybe<JsonQueryOperatorInput>;
   _rawDescription: Maybe<JsonQueryOperatorInput>;
   _rawShortDescription: Maybe<JsonQueryOperatorInput>;
   _rawEcologicalImpact: Maybe<JsonQueryOperatorInput>;
@@ -12044,7 +12101,7 @@ export type SanityHomePage = SanityDocument & Node & {
   _updatedAt: Maybe<Scalars['Date']>;
   _rev: Maybe<Scalars['String']>;
   _key: Maybe<Scalars['String']>;
-  heroSection: Maybe<SanityHeroSection>;
+  heroSection: Maybe<SanityHomePageTopSection>;
   bottomBanner: Maybe<SanityBottomBanner>;
   _rawHeroSection: Maybe<Scalars['JSON']>;
   _rawBottomBanner: Maybe<Scalars['JSON']>;
@@ -12119,19 +12176,51 @@ export enum SanityHomePageFieldsEnum {
   HeroSectionKey = 'heroSection____key',
   HeroSectionType = 'heroSection____type',
   HeroSectionTitle = 'heroSection___title',
-  HeroSectionTooltipText = 'heroSection___tooltipText',
-  HeroSectionDescription = 'heroSection___description',
-  HeroSectionDescriptionKey = 'heroSection___description____key',
-  HeroSectionDescriptionType = 'heroSection___description____type',
-  HeroSectionDescriptionChildren = 'heroSection___description___children',
-  HeroSectionDescriptionChildrenKey = 'heroSection___description___children____key',
-  HeroSectionDescriptionChildrenType = 'heroSection___description___children____type',
-  HeroSectionDescriptionChildrenMarks = 'heroSection___description___children___marks',
-  HeroSectionDescriptionChildrenText = 'heroSection___description___children___text',
-  HeroSectionDescriptionStyle = 'heroSection___description___style',
-  HeroSectionDescriptionList = 'heroSection___description___list',
-  HeroSectionDescriptionRawChildren = 'heroSection___description____rawChildren',
-  HeroSectionRawDescription = 'heroSection____rawDescription',
+  HeroSectionButtonKey = 'heroSection___button____key',
+  HeroSectionButtonType = 'heroSection___button____type',
+  HeroSectionButtonButtonText = 'heroSection___button___buttonText',
+  HeroSectionButtonButtonLinkKey = 'heroSection___button___buttonLink____key',
+  HeroSectionButtonButtonLinkType = 'heroSection___button___buttonLink____type',
+  HeroSectionButtonButtonLinkButtonHref = 'heroSection___button___buttonLink___buttonHref',
+  HeroSectionButtonButtonLinkRawButtonDoc = 'heroSection___button___buttonLink____rawButtonDoc',
+  HeroSectionButtonButtonModal = 'heroSection___button___buttonModal',
+  HeroSectionButtonButtonBlankTarget = 'heroSection___button___buttonBlankTarget',
+  HeroSectionButtonRawButtonLink = 'heroSection___button____rawButtonLink',
+  HeroSectionBackgroundKey = 'heroSection___background____key',
+  HeroSectionBackgroundType = 'heroSection___background____type',
+  HeroSectionBackgroundImageHref = 'heroSection___background___imageHref',
+  HeroSectionBackgroundImageKey = 'heroSection___background___image____key',
+  HeroSectionBackgroundImageType = 'heroSection___background___image____type',
+  HeroSectionBackgroundImageRawAsset = 'heroSection___background___image____rawAsset',
+  HeroSectionBackgroundImageRawHotspot = 'heroSection___background___image____rawHotspot',
+  HeroSectionBackgroundImageRawCrop = 'heroSection___background___image____rawCrop',
+  HeroSectionBackgroundImageAlt = 'heroSection___background___imageAlt',
+  HeroSectionBackgroundRawImage = 'heroSection___background____rawImage',
+  HeroSectionIconKey = 'heroSection___icon____key',
+  HeroSectionIconType = 'heroSection___icon____type',
+  HeroSectionIconImageHref = 'heroSection___icon___imageHref',
+  HeroSectionIconImageKey = 'heroSection___icon___image____key',
+  HeroSectionIconImageType = 'heroSection___icon___image____type',
+  HeroSectionIconImageRawAsset = 'heroSection___icon___image____rawAsset',
+  HeroSectionIconImageRawHotspot = 'heroSection___icon___image____rawHotspot',
+  HeroSectionIconImageRawCrop = 'heroSection___icon___image____rawCrop',
+  HeroSectionIconImageAlt = 'heroSection___icon___imageAlt',
+  HeroSectionIconRawImage = 'heroSection___icon____rawImage',
+  HeroSectionBody = 'heroSection___body',
+  HeroSectionBodyKey = 'heroSection___body____key',
+  HeroSectionBodyType = 'heroSection___body____type',
+  HeroSectionBodyChildren = 'heroSection___body___children',
+  HeroSectionBodyChildrenKey = 'heroSection___body___children____key',
+  HeroSectionBodyChildrenType = 'heroSection___body___children____type',
+  HeroSectionBodyChildrenMarks = 'heroSection___body___children___marks',
+  HeroSectionBodyChildrenText = 'heroSection___body___children___text',
+  HeroSectionBodyStyle = 'heroSection___body___style',
+  HeroSectionBodyList = 'heroSection___body___list',
+  HeroSectionBodyRawChildren = 'heroSection___body____rawChildren',
+  HeroSectionRawBody = 'heroSection____rawBody',
+  HeroSectionRawButton = 'heroSection____rawButton',
+  HeroSectionRawBackground = 'heroSection____rawBackground',
+  HeroSectionRawIcon = 'heroSection____rawIcon',
   BottomBannerKey = 'bottomBanner____key',
   BottomBannerType = 'bottomBanner____type',
   BottomBannerTitle = 'bottomBanner___title',
@@ -12277,7 +12366,7 @@ export type SanityHomePageFilterInput = {
   _updatedAt: Maybe<DateQueryOperatorInput>;
   _rev: Maybe<StringQueryOperatorInput>;
   _key: Maybe<StringQueryOperatorInput>;
-  heroSection: Maybe<SanityHeroSectionFilterInput>;
+  heroSection: Maybe<SanityHomePageTopSectionFilterInput>;
   bottomBanner: Maybe<SanityBottomBannerFilterInput>;
   _rawHeroSection: Maybe<JsonQueryOperatorInput>;
   _rawBottomBanner: Maybe<JsonQueryOperatorInput>;
@@ -12300,6 +12389,55 @@ export type SanityHomePageGroupConnection = {
 export type SanityHomePageSortInput = {
   fields: Maybe<Array<Maybe<SanityHomePageFieldsEnum>>>;
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
+};
+
+export type SanityHomePageTopSection = {
+  __typename?: 'SanityHomePageTopSection';
+  _key: Maybe<Scalars['String']>;
+  _type: Maybe<Scalars['String']>;
+  title: Maybe<Scalars['String']>;
+  button: Maybe<SanityButton>;
+  background: Maybe<SanityCustomImage>;
+  icon: Maybe<SanityCustomImage>;
+  body: Maybe<Array<Maybe<SanityBlock>>>;
+  _rawBody: Maybe<Scalars['JSON']>;
+  _rawButton: Maybe<Scalars['JSON']>;
+  _rawBackground: Maybe<Scalars['JSON']>;
+  _rawIcon: Maybe<Scalars['JSON']>;
+};
+
+
+export type SanityHomePageTopSection_RawBodyArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityHomePageTopSection_RawButtonArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityHomePageTopSection_RawBackgroundArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+
+export type SanityHomePageTopSection_RawIconArgs = {
+  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+};
+
+export type SanityHomePageTopSectionFilterInput = {
+  _key: Maybe<StringQueryOperatorInput>;
+  _type: Maybe<StringQueryOperatorInput>;
+  title: Maybe<StringQueryOperatorInput>;
+  button: Maybe<SanityButtonFilterInput>;
+  background: Maybe<SanityCustomImageFilterInput>;
+  icon: Maybe<SanityCustomImageFilterInput>;
+  body: Maybe<SanityBlockFilterListInput>;
+  _rawBody: Maybe<JsonQueryOperatorInput>;
+  _rawButton: Maybe<JsonQueryOperatorInput>;
+  _rawBackground: Maybe<JsonQueryOperatorInput>;
+  _rawIcon: Maybe<JsonQueryOperatorInput>;
 };
 
 export type SanityHomePageWeb = SanityDocument & Node & {

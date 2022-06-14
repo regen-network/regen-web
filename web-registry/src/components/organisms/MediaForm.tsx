@@ -162,6 +162,7 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
         {({ submitForm, isValid, isSubmitting, errors, values, touched }) => {
           const shouldRenderPhoto = (i: number): boolean => {
             if (!values['regen:previewPhoto']['@value']) return false;
+            if (values['regen:previewPhoto']['@value'] && i === 0) return true;
             return Boolean(
               values['regen:galleryPhotos']['@list'][i - 1]?.['@value'],
             );
@@ -205,7 +206,9 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
                             optional
                             isDrop
                           />
-                        ) : null,
+                        ) : (
+                          <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
+                        ),
                       )}
                     </div>
                   )}
@@ -218,8 +221,6 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
                   label="Photo Credit"
                 />
                 <Field
-                  // classes={{ root: styles.field }}
-                  // defaultStyle={false}
                   component={VideoInput}
                   label="Video url"
                   optional
@@ -370,7 +371,7 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
               <ProjectPageFooter
                 onSave={submitForm}
                 saveDisabled={
-                  !isValid || isSubmitting || !Object.keys(touched).length
+                  !isValid || isSubmitting || !Object.keys(touched)?.length
                 }
               />
             </Form>

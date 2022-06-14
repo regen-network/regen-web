@@ -1,7 +1,7 @@
 query GetWalletByAddress($walletAddress: String!) {
-	getWalletByAddress(walletAddress: $walletAddress) {
+  getWalletByAddress(walletAddress: $walletAddress) {
     nodes {
-		  id
+      id
       addr
       projectsByWalletId {
         nodes {

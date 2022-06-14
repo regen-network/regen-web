@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
-import { CardMedia, IconButton, Collapse, LinearProgress } from '@mui/material';
+import {
+  CardMedia,
+  IconButton,
+  Collapse,
+  LinearProgress,
+  useMediaQuery,
+} from '@mui/material';
 import { FieldProps } from 'formik';
 import cx from 'clsx';
+import ReactPlayer from 'react-player';
 
 import Card from '../cards/Card';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -39,16 +46,6 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     position: 'relative',
   },
-  video: {
-    width: '100%',
-    borderRadius: 5,
-    [theme.breakpoints.up('sm')]: {
-      height: theme.typography.pxToRem(318),
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: theme.typography.pxToRem(210),
-    },
-  },
   inputRow: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -71,9 +68,6 @@ const useStyles = makeStyles(theme => ({
       background: theme.palette.grey[100],
     },
   },
-  progress: {
-    marginBottom: theme.spacing(4),
-  },
 }));
 
 function VideoInput({
@@ -86,9 +80,10 @@ function VideoInput({
   ...fieldProps
 }: VideoInputProps): JSX.Element {
   const [videoUrl, setVideoUrl] = useState('');
-  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const styles = useStyles();
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { form, field } = fieldProps;
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
@@ -102,7 +97,7 @@ function VideoInput({
   const handleDelete = (): void => {
     form.setFieldValue(field.name, null);
     setVideoUrl('');
-    setIframeLoaded(false);
+    setVideoLoaded(false);
   };
 
   return (
@@ -123,15 +118,16 @@ function VideoInput({
                   entered: styles.collapse,
                   hidden: styles.collapseHidden,
                 }}
-                in={iframeLoaded}
+                in={videoLoaded}
               >
                 <Card className={styles.preview}>
                   <CardMedia
-                    className={styles.video}
-                    component="iframe"
-                    src={field.value}
-                    frameBorder="0"
-                    onLoad={() => setIframeLoaded(true)}
+                    component={ReactPlayer}
+                    url={field.value}
+                    onReady={() => setVideoLoaded(true)}
+                    sx={{ width: '100%', borderRadius: 5, height: [210, 318] }}
+                    height={isMobile ? 210 : 318}
+                    width="100%"
                   />
                   <IconButton
                     classes={{ root: styles.deleteButton }}
@@ -143,8 +139,8 @@ function VideoInput({
                   </IconButton>
                 </Card>
               </Collapse>
-              {!iframeLoaded && (
-                <LinearProgress color="secondary" className={styles.progress} />
+              {!videoLoaded && (
+                <LinearProgress color="secondary" sx={{ mb: 4 }} />
               )}
             </>
           )}

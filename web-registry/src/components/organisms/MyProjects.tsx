@@ -9,7 +9,7 @@ import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { useWallet } from '../../../src/lib/wallet';
 import {
   useCreateProjectMutation,
-  useGetWalletByAddressQuery,
+  useWalletByAddrQuery,
   useCreateWalletMutation,
 } from '../../generated/graphql';
 
@@ -19,15 +19,14 @@ const MyProjects: React.FC = () => {
   // const navigate = useNavigate(); // TODO Issue: regen-network/regen-registry#913
   const [createProject] = useCreateProjectMutation();
   const [createWallet] = useCreateWalletMutation();
-  const { data: walletData } = useGetWalletByAddressQuery({
+  const { data: walletData } = useWalletByAddrQuery({
     variables: {
-      walletAddress: wallet?.address as string,
+      addr: wallet?.address as string,
     },
     fetchPolicy: 'cache-and-network',
   });
 
-  const projects =
-    walletData?.getWalletByAddress?.nodes?.[0]?.projectsByWalletId?.nodes;
+  const projects = walletData?.walletByAddr?.projectsByWalletId?.nodes;
   const isFirstProject = !projects || projects?.length < 1;
 
   async function submitCreateWallet(): Promise<void> {
@@ -52,7 +51,7 @@ const MyProjects: React.FC = () => {
   }
 
   async function submitCreateProject(): Promise<void> {
-    let walletId = walletData?.getWalletByAddress?.nodes?.[0]?.id;
+    let walletId = walletData?.walletByAddr?.id;
     if (!walletId) {
       walletId = await submitCreateWallet();
     }

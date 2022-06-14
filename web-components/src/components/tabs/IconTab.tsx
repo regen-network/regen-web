@@ -26,7 +26,11 @@ const StyledTab = styled(Tab)<TabProps>(({ theme }) => ({
   },
 }));
 
-const IconTab: React.FC<IconTabProps> = ({ label, hidden, ...props }) => {
+const IconTab = ({
+  label,
+  hidden,
+  ...props
+}: IconTabProps): JSX.Element | null => {
   return hidden ? null : (
     <StyledTab
       iconPosition="start"

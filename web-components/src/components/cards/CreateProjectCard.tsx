@@ -1,6 +1,5 @@
 import React from 'react';
-import { SxProps } from '@mui/material';
-import { Theme } from '@mui/material';
+import { SxProps, Theme } from '@mui/material';
 
 import Card from './Card';
 import OutlinedButton from '../buttons/OutlinedButton';

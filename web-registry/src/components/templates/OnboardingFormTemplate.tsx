@@ -6,8 +6,8 @@ import { PlanStepper } from '../molecules';
 
 type Props = {
   title: string;
-  saveAndExit: () => Promise<void>;
   activeStep: number;
+  saveAndExit?: () => Promise<void>;
 };
 
 const OnboardingFormTemplate: React.FC<Props> = props => {
@@ -16,10 +16,13 @@ const OnboardingFormTemplate: React.FC<Props> = props => {
       <PlanStepper activeStep={props.activeStep} />
       <OnBoardingSection
         title={props.title}
-        linkText="Save & Exit"
-        onLinkClick={props.saveAndExit}
         formContainer
-        exampleProjectUrl="/projects/wilmot"
+        // Only commenting this for now if at some point,
+        // we want to add back the "save & exit" feature
+        // https://github.com/regen-network/regen-registry/issues/553
+        // linkText="Save & Exit"
+        // onLinkClick={props.saveAndExit}
+        // exampleProjectUrl="/projects/wilmot"
       >
         <Box minHeight="50vh">{props.children}</Box>
       </OnBoardingSection>

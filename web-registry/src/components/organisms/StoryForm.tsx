@@ -11,7 +11,11 @@ import Modal from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
 import { ProjectPageFooter } from '../molecules';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import {
+  validate,
+  getProjectPageBaseData,
+  getCompactedPath,
+} from '../../lib/rdf';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface StoryFormProps {
@@ -200,8 +204,11 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
               'http://regen.network/ProjectPageStoryGroup',
             );
             for (const result of report.results) {
-              const path: keyof StoryValues = result.path.value;
-              if (path === 'regen:projectQuote') {
+              const path: string = result.path.value;
+              const compactedPath = getCompactedPath(path) as
+                | keyof StoryValues
+                | undefined;
+              if (compactedPath === 'regen:projectQuote') {
                 errors['regen:projectQuote'] = {
                   'regen:quote': getProjectQuoteError(values, 'regen:quote'),
                   'schema:name': getProjectQuoteError(values, 'schema:name'),
@@ -210,8 +217,8 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
                     'schema:jobTitle',
                   ),
                 };
-              } else {
-                errors[path] = errorMsgs[path];
+              } else if (compactedPath) {
+                errors[compactedPath] = errorMsgs[compactedPath];
               }
             }
           }

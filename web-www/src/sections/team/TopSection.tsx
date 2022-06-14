@@ -6,14 +6,14 @@ import { TeamTopSectionQuery } from '../../generated/graphql';
 
 const query = graphql`
   query teamTopSection {
-    background: file(relativePath: { eq: "gulls.jpg" }) {
+    background: file(relativePath: { eq: "people-walking-outline.jpg" }) {
       childImageSharp {
         fluid(quality: 90) {
           ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-    backgroundMobile: file(relativePath: { eq: "gulls.jpg" }) {
+    backgroundMobile: file(relativePath: { eq: "people-walking-outline.jpg" }) {
       childImageSharp {
         fluid(quality: 90) {
           ...GatsbyImageSharpFluid_withWebp
@@ -32,7 +32,8 @@ const query = graphql`
 const TopSection = (): JSX.Element => {
   const gradient =
     'linear-gradient(209.83deg, rgba(250, 235, 209, 0.9) 11.05%, rgba(125, 201, 191, 0.9) 43.17%, rgba(81, 93, 137, 0.9) 75.29%)';
-  const { background, backgroundMobile, sanityTeamPage } = useStaticQuery<TeamTopSectionQuery>(query);
+  const { background, backgroundMobile, sanityTeamPage } =
+    useStaticQuery<TeamTopSectionQuery>(query);
   const data = sanityTeamPage?.topSection;
   return (
     <BackgroundSection

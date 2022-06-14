@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { useParams } from 'react-router-dom';
+import { Bech32Address } from '@keplr-wallet/cosmos';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import {
@@ -8,7 +9,10 @@ import {
   FormValues,
 } from 'web-components/lib/components/inputs/RoleField';
 import { Subtitle } from 'web-components/lib/components/typography';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+import {
+  requiredMessage,
+  invalidAddress,
+} from 'web-components/lib/components/inputs/validation';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
@@ -33,6 +37,7 @@ import {
 } from '../../generated/graphql';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import getApiUri from '../../lib/apiUri';
+import { chainInfo } from '../../lib/wallet';
 
 interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
@@ -176,10 +181,24 @@ const RolesForm: React.FC<RolesFormProps> = ({
     });
   };
 
-  const validateEntity = async <T extends object>(
+  const validateEntity = async <T extends ProfileFormValues | FormValues>(
     e: T,
   ): Promise<{ [key in keyof T]?: string }> => {
     const errors: { [key in keyof T]?: string } = {};
+    // We perform a separate validation for regen address
+    // because SHACL doesn't support bech32 address validation
+    const p = e as ProfileFormValues;
+    if (p['regen:address']) {
+      try {
+        Bech32Address.validate(
+          p['regen:address'],
+          chainInfo.bech32Config.bech32PrefixAccAddr,
+        );
+      } catch (e) {
+        const addrPath = 'regen:address' as keyof T;
+        errors[addrPath] = invalidAddress;
+      }
+    }
     if (graphData?.shaclGraphByUri?.graph) {
       const report = await validate(
         graphData.shaclGraphByUri.graph,
@@ -194,6 +213,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
         }
       }
     }
+    console.log(errors);
     return errors;
   };
 

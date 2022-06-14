@@ -6,12 +6,13 @@ import CreateProjectCard from 'web-components/lib/components/cards/CreateProject
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
-import { useWallet } from '../../../src/lib/wallet';
+import { useWallet } from '../../lib/wallet';
 import {
   useCreateProjectMutation,
   useWalletByAddrQuery,
   useCreateWalletMutation,
 } from '../../generated/graphql';
+import { getProjectPageBaseData } from '../../lib/rdf';
 
 const MyProjects: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -62,6 +63,7 @@ const MyProjects: React.FC = () => {
           input: {
             project: {
               walletId,
+              metadata: getProjectPageBaseData(),
             },
           },
         },

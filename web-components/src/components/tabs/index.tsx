@@ -10,6 +10,7 @@ import Tab, { TabProps } from '@mui/material/Tab';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 export interface RegenTab extends TabProps {
+  content?: JSX.Element;
   label: string;
 }
 
@@ -144,7 +145,7 @@ export default function RegenTabs({
         (tab, index) =>
           value === index && (
             <div key={`content-${index}`} className={classes.content}>
-              {tab.children}
+              {tab.content}
             </div>
           ),
       )}

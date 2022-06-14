@@ -33,12 +33,12 @@ const Dashboard: React.FC = () => {
       icon: (
         <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
       ),
-      children: <MyEcocredits />,
+      content: <MyEcocredits />,
     },
     {
       label: 'Projects',
       icon: <ProjectPageIcon />,
-      children: <MyProjects />,
+      content: <MyProjects />,
       hidden: !isIssuer,
     },
   ];

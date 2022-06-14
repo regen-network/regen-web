@@ -125,10 +125,8 @@ const App: React.FC = (): JSX.Element => {
             element={<ProtectedRoute component={ProjectList} />}
           />
           <Route path="project-pages/:projectId">
-            <Route
-              path="choose-credit-class"
-              element={<ProtectedRoute component={ChooseCreditClass} />}
-            />
+            {/* TODO: Update according to https://github.com/regen-network/regen-registry/issues/910 */}
+            <Route path="choose-credit-class" element={<ChooseCreditClass />} />
             <Route
               path="basic-info"
               element={<ProtectedRoute component={BasicInfo} />}

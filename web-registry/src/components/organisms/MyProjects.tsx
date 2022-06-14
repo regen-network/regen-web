@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Grid } from '@mui/material';
-// import { useNavigate } from 'react-router-dom'; // TODO Issue: regen-network/regen-registry#913
+import { useNavigate } from 'react-router-dom';
 
 import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
@@ -17,7 +17,7 @@ import { getProjectPageBaseData } from '../../lib/rdf';
 const MyProjects: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { wallet } = useWallet();
-  // const navigate = useNavigate(); // TODO Issue: regen-network/regen-registry#913
+  const navigate = useNavigate();
   const [createProject] = useCreateProjectMutation();
   const [createWallet] = useCreateWalletMutation();
   const { data: walletData } = useWalletByAddrQuery({
@@ -70,7 +70,7 @@ const MyProjects: React.FC = () => {
       });
       const projectId = res?.data?.createProject?.project?.id;
       if (projectId) {
-        // navigate(`/project-pages/${projectId}/choose-credit-class`); //TODO Issue: regen-network/regen-registry#913
+        navigate(`/project-pages/${projectId}/choose-credit-class`);
       }
     } catch (e) {
       setError('Error creating project');

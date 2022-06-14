@@ -213,7 +213,6 @@ const RolesForm: React.FC<RolesFormProps> = ({
         }
       }
     }
-    console.log(errors);
     return errors;
   };
 

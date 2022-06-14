@@ -6,7 +6,6 @@ import { Subtitle } from '../typography/Subtitle';
 import { RegenTab } from './';
 
 export interface IconTabProps extends RegenTab {
-  label: string;
   icon?: JSX.Element;
   hidden?: boolean;
 }

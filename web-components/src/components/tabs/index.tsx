@@ -6,12 +6,11 @@ import {
   DefaultTheme as Theme,
 } from '@mui/styles';
 import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Tab, { TabProps } from '@mui/material/Tab';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-export interface RegenTab {
+export interface RegenTab extends TabProps {
   label: string;
-  children?: any;
 }
 
 interface RegenTabsProps {

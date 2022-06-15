@@ -138,10 +138,6 @@ const App: React.FC = (): JSX.Element => {
               element={<ProtectedRoute component={ProjectLocation} />}
             />
             <Route
-              path="roles"
-              element={<ProtectedRoute component={Roles} />}
-            />
-            <Route
               path="story"
               element={<ProtectedRoute component={Story} />}
             />
@@ -149,6 +145,8 @@ const App: React.FC = (): JSX.Element => {
               path="media"
               element={<ProtectedRoute component={Media} />}
             />
+            {/* TODO: Update according to https://github.com/regen-network/regen-registry/issues/910 */}
+            <Route path="roles" element={<Roles />} />
             <Route
               path="entity-display"
               element={<ProtectedRoute component={EntityDisplay} />}

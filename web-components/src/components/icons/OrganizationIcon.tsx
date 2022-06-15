@@ -1,17 +1,20 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
+import { SxProps, Theme } from '@mui/material';
 
 interface IconProps {
   className?: string;
   color?: string;
+  sx?: SxProps<Theme>;
 }
 
 export default function OrganizationIcon({
   className,
   color,
+  sx,
 }: IconProps): JSX.Element {
   return (
-    <SvgIcon className={className} viewBox="0 0 23 22">
+    <SvgIcon className={className} viewBox="0 0 23 22" sx={sx}>
       <svg
         width="23"
         height="22"

@@ -10,6 +10,7 @@ export const invalidURL: string = `Please enter a valid URL`;
 export const invalidVCSRetirement: string = `Please enter a valid VCS retirement serial number`;
 export const invalidVCSID: string = `Please enter a valid VCS Project ID`;
 export const invalidJSON: string = 'Please enter valid JSON-LD';
+export const invalidAddress: string = 'Invalid address';
 
 export const numericOnlyRE = /^\d*$/gm;
 

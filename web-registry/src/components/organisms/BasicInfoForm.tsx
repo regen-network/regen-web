@@ -19,6 +19,7 @@ import {
 } from '../../lib/rdf';
 import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
+import { Box } from '@mui/material';
 
 export interface BasicInfoFormValues {
   'schema:name': string;
@@ -35,16 +36,6 @@ export interface BasicInfoFormValues {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  parcelSizeContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(12),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(3),
-    },
-  },
   parcelField: {
     marginTop: theme.spacing(4),
   },
@@ -65,10 +56,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       marginLeft: theme.spacing(1.25),
       width: '43%',
     },
-  },
-  row: {
-    display: 'flex',
-    justifyContent: 'space-between',
   },
 }));
 
@@ -154,9 +141,17 @@ const BasicInfoForm: React.FC<{
                 placeholder="i.e. Sunnybrook Farms"
                 name="schema:name"
               />
-              <div className={classes.parcelSizeContainer}>
+              <Box
+                sx={{ display: 'flex', flexDirection: 'column', pt: [3, 12] }}
+              >
                 <InputLabel>Size in hectares or acres</InputLabel>
-                <div className={classes.row}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                  }}
+                >
                   <Field
                     className={clsx(classes.parcelField, classes.parcelSize)}
                     component={TextField}
@@ -180,8 +175,8 @@ const BasicInfoForm: React.FC<{
                     ]}
                     defaultStyle={false}
                   />
-                </div>
-              </div>
+                </Box>
+              </Box>
             </OnBoardingCard>
             <ProjectPageFooter
               onSave={submitForm}

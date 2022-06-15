@@ -2,7 +2,14 @@ import React from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@mui/styles';
 // import { useMediaQuery, Grid, FormHelperText, SxProps } from '@mui/material';
-import { Formik, Form, Field, FieldArray } from 'formik';
+import {
+  Formik,
+  Form,
+  Field,
+  FieldArray,
+  FormikErrors,
+  FormikHelpers,
+} from 'formik';
 import { useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -93,6 +100,45 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
     },
   });
 
+  const validateForm = async (
+    values: MediaValues,
+  ): Promise<FormikErrors<MediaValues>> => {
+    const errors: FormikErrors<MediaValues> = {};
+    if (graphData?.shaclGraphByUri?.graph) {
+      const projectPageData = { ...getProjectPageBaseData(), ...values };
+      const report = await validate(
+        graphData.shaclGraphByUri.graph,
+        projectPageData,
+        'http://regen.network/ProjectPageDescriptionGroup',
+      );
+      for (const result of report.results) {
+        const path: string = result.path.value;
+        const compactedPath = getCompactedPath(path) as
+          | keyof MediaValues
+          | undefined;
+        if (compactedPath) {
+          errors[compactedPath] = requiredMessage;
+        }
+      }
+    }
+    return errors;
+  };
+
+  const onSubmit = async (
+    values: MediaValues,
+    { setSubmitting, setTouched }: FormikHelpers<MediaValues>,
+  ): Promise<void> => {
+    setSubmitting(true);
+    try {
+      await submit(values);
+      setSubmitting(false);
+      setTouched({}); // reset to untouched
+      if (isEdit && confirmSave) confirmSave();
+    } catch (e) {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <>
       <Formik
@@ -112,56 +158,45 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
             initialValues?.['regen:videoURL'],
           ),
         }}
-        validate={async (values): Promise<MediaValuesErrors> => {
-          const errors: MediaValuesErrors = {};
-          if (graphData?.shaclGraphByUri?.graph) {
-            const projectPageData = { ...getProjectPageBaseData(), ...values };
-            const report = await validate(
-              graphData.shaclGraphByUri.graph,
-              projectPageData,
-              'http://regen.network/ProjectPageMediaGroup',
-            );
-            for (const result of report.results) {
-              const path: string | undefined = result.path?.value;
-              if (path) {
-                const compactedPath = getCompactedPath(path) as
-                  | keyof MediaValuesErrors
-                  | undefined;
-                if (compactedPath === 'regen:previewPhoto') {
-                  errors[compactedPath] = { '@value': requiredMessage };
-                } else {
-                  // for gallery photos, display general error message below "Gallery Photos" section
-                  errors['regen:galleryPhotos'] = 'You must add 4 photos';
-                }
-              } else {
-                // or constraint not satisfied on regen:landStewardPhoto/regen:videoURL
-                errors['regen:landStewardPhoto'] = {
-                  '@value': requiredMessage,
-                };
-              }
-            }
-          }
-          return errors;
-        }}
-        onSubmit={async (values, { setSubmitting, setTouched }) => {
-          console.log('values :>> ', values);
-          // setSubmitting(true);
-          // try {
-          //   await submit(values);
-          //   setSubmitting(false);
-          //   setTouched({}); // reset to untouched
-          //   if (isEdit && confirmSave) confirmSave();
-          // } catch (e) {
-          //   setSubmitting(false);
-          // }
-        }}
+        // validate={async (values): Promise<MediaValuesErrors> => {
+        //   const errors: MediaValuesErrors = {};
+        //   if (graphData?.shaclGraphByUri?.graph) {
+        //     const projectPageData = { ...getProjectPageBaseData(), ...values };
+        //     const report = await validate(
+        //       graphData.shaclGraphByUri.graph,
+        //       projectPageData,
+        //       'http://regen.network/ProjectPageMediaGroup',
+        //     );
+        //     for (const result of report.results) {
+        //       const path: string | undefined = result.path?.value;
+        //       if (path) {
+        //         const compactedPath = getCompactedPath(path) as
+        //           | keyof MediaValuesErrors
+        //           | undefined;
+        //         if (compactedPath === 'regen:previewPhoto') {
+        //           errors[compactedPath] = { '@value': requiredMessage };
+        //         } else {
+        //           // for gallery photos, display general error message below "Gallery Photos" section
+        //           errors['regen:galleryPhotos'] = 'You must add 4 photos';
+        //         }
+        //       } else {
+        //         // or constraint not satisfied on regen:landStewardPhoto/regen:videoURL
+        //         errors['regen:landStewardPhoto'] = {
+        //           '@value': requiredMessage,
+        //         };
+        //       }
+        //     }
+        //   }
+        //   return errors;
+        // }}
+        onSubmit={onSubmit}
       >
         {({ submitForm, isValid, isSubmitting, errors, values, touched }) => {
           const shouldRenderPhoto = (i: number): boolean => {
-            if (!values['regen:previewPhoto']['@value']) return false;
+            if (!values['regen:previewPhoto']?.['@value']) return false;
             if (values['regen:previewPhoto']['@value'] && i === 0) return true;
             return Boolean(
-              values['regen:galleryPhotos']['@list'][i - 1]?.['@value'],
+              values['regen:galleryPhotos']?.['@list'][i - 1]?.['@value'],
             );
           };
           return (
@@ -181,47 +216,47 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
                   isDrop
                 />
                 <FieldArray name="photos">
-                  {({ insert, remove, push }) => (
+                  {() => (
                     <div>
-                      {values['regen:galleryPhotos']['@list'].map((photo, i) =>
-                        shouldRenderPhoto(i) ? (
-                          <Field
-                            key={i}
-                            classes={{
-                              main:
-                                i === 0 // margin only on first photo
-                                  ? cx(styles.fullSizeMedia, styles.padTop)
-                                  : styles.fullSizeMedia,
-                            }}
-                            component={ImageUpload}
-                            buttonText="+ Add Photo"
-                            fixedCrop={cropAspect}
-                            name={`regen:galleryPhotos.@list[${i}].@value`}
-                            apiServerUrl={apiUri}
-                            projectId={projectId}
-                            // defaultStyle={false}
-                            optional
-                            isDrop
-                          />
-                        ) : (
-                          <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
-                        ),
+                      {(values['regen:galleryPhotos']?.['@list'] || []).map(
+                        (_photo, i) =>
+                          shouldRenderPhoto(i) ? (
+                            <Field
+                              key={i}
+                              classes={{
+                                main:
+                                  i === 0 // margin only on first photo
+                                    ? cx(styles.fullSizeMedia, styles.padTop)
+                                    : styles.fullSizeMedia,
+                              }}
+                              component={ImageUpload}
+                              buttonText="+ Add Photo"
+                              fixedCrop={cropAspect}
+                              name={`regen:galleryPhotos.@list[${i}].@value`}
+                              apiServerUrl={apiUri}
+                              projectId={projectId}
+                              // defaultStyle={false}
+                              optional
+                              isDrop
+                            />
+                          ) : (
+                            <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
+                          ),
                       )}
                     </div>
                   )}
                 </FieldArray>
                 <Field
                   optional
-                  name="regen:creditText"
-                  // classes={{ root: styles.field }}
                   component={ControlledTextField}
                   label="Photo Credit"
+                  name="regen:creditText"
                 />
                 <Field
-                  component={VideoInput}
-                  label="Video url"
                   optional
+                  component={VideoInput}
                   description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
+                  label="Video url"
                   name="regen:videoURL.@value"
                 />
                 {/* <div className={styles.field}>

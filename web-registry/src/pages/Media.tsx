@@ -29,7 +29,6 @@ const Media = (): JSX.Element => {
       'regen:previewPhoto': metadata['regen:previewPhoto'],
       'regen:creditText': metadata['regen:creditText'],
       'regen:galleryPhotos': metadata['regen:galleryPhotos'],
-      // 'regen:landStewardPhoto': metadata['regen:landStewardPhoto'],
       'regen:videoURL': metadata['regen:videoURL'],
     };
   }

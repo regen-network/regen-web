@@ -286,14 +286,12 @@ const CreditsTransfer: React.FC<{
               onChange={handleVintageChange}
             >
               {vintagesData?.allCreditVintages?.nodes?.map(node => {
-                return (
-                  !!node && (
-                    <MenuItem key={node?.id} value={node?.id}>
-                      {node?.projectByProjectId?.metadata?.['schema:name']} -{' '}
-                      {dateFormat.format(new Date(node?.createdAt))}
-                    </MenuItem>
-                  )
-                );
+                return !!node ? (
+                  <MenuItem key={node?.id} value={node?.id}>
+                    {node?.projectByProjectId?.metadata?.['schema:name']} -{' '}
+                    {dateFormat.format(new Date(node?.createdAt))}
+                  </MenuItem>
+                ) : null;
               })}
             </Select>
           </FormControl>

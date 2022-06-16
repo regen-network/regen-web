@@ -134,6 +134,7 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
   const ImageField = (props: {
     name: string;
     description?: string;
+    label?: string;
     customMarginTop?: boolean;
   }): JSX.Element => (
     <Field
@@ -144,7 +145,7 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
         ),
       }}
       component={ImageUpload}
-      label="Photos"
+      label={props.label}
       description={props.description}
       buttonText="+ Add Photo"
       fixedCrop={cropAspect}
@@ -190,6 +191,7 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
                 <ImageField
                   name="regen:previewPhoto.@value"
                   description="Choose the photos that will show up on the project page. The first photo will be your preview photo."
+                  label="Photos"
                 />
                 <FieldArray name="photos">
                   {() => (

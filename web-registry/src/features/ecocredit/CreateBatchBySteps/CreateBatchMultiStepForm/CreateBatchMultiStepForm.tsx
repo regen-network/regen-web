@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 
 import { useMultiStep } from '../../../../components/templates/MultiStep';
@@ -42,9 +43,12 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
 
   const {
     status: submitStatus,
+    // createBatchResponse,
+    deliverTxResponse,
+    isSubmitModalOpen,
+    error: submitError,
     createBatch,
-    msgResponse,
-    error,
+    closeSubmitModal,
   } = useCreateBatch();
 
   const currentValidationSchema = isReviewStep
@@ -63,7 +67,6 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     formikHelpers: FormikHelpers<CreateBatchFormValues>,
   ): void {
     if (isReviewStep) {
-      // submitForm(values, formikHelpers);
       createBatch(values);
     } else {
       handleSaveNext(values);
@@ -86,33 +89,33 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
   }
 
   if (isLastStep && submitStatus === 'finished')
-    return <Result response={msgResponse} error={error} />;
+    return <Result response={deliverTxResponse} error={submitError} />;
 
   return (
-    <Formik
-      enableReinitialize
-      validateOnMount
-      initialValues={data}
-      validationSchema={currentValidationSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ submitForm, isValid, isSubmitting }) => (
-        <Form id={formModel.formId}>
-          {renderStep(activeStep)}
-          {/* 
-            TODO ? - Move to: MultiStepSection >>>
-            >>> StepperSection >>> StepperControls ?? 
-          */}
-          {!isLastStep && (
-            <SaveFooter
-              onPrev={activeStep > 0 ? handleBack : undefined}
-              onSave={submitForm}
-              saveDisabled={!isValid || isSubmitting}
-              percentComplete={percentComplete}
-            />
-          )}
-        </Form>
-      )}
-    </Formik>
+    <>
+      <Formik
+        enableReinitialize
+        validateOnMount
+        initialValues={data}
+        validationSchema={currentValidationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ submitForm, isValid, isSubmitting }) => (
+          <Form id={formModel.formId}>
+            {renderStep(activeStep)}
+            {/* TODO ? - Move to: MultiStepSection >>> >>> StepperSection >>> StepperControls ?? */}
+            {!isLastStep && (
+              <SaveFooter
+                onPrev={activeStep > 0 ? handleBack : undefined}
+                onSave={submitForm}
+                saveDisabled={!isValid || isSubmitting}
+                percentComplete={percentComplete}
+              />
+            )}
+          </Form>
+        )}
+      </Formik>
+      <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
+    </>
   );
 }

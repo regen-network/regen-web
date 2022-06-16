@@ -1,13 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react';
+import { DeliverTxResponse } from '@cosmjs/stargate';
+
 import {
   MsgCreateBatch,
-  MsgCreateBatchResponse,
   MsgCreateBatch_BatchIssuance,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
-import React from 'react';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+
+import { useLedger } from '../../../ledger';
 import getApiUri from '../../../lib/apiUri';
-import { useWallet } from '../../../lib/wallet';
+import useMsgClient from '../../../hooks/useMsgClient';
+
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
 // Disclaimer - Right now, just case "C01"
@@ -56,18 +59,12 @@ type IriSuccessProp = {
   iri: string;
 };
 
-// type IriErrorProp = {
-//   error: string;
-// };
-
 type MetadataProp<T> = {
   metadata: T;
 };
 
 type IriFromMetadataSuccess<T> = IriSuccessProp & MetadataProp<T>;
-// type IriFromMetadataError = IriErrorProp;
 type IriFromMetadata<T> = IriFromMetadataSuccess<T>;
-// type IriFromMetadata<T> = IriFromMetadataSuccess<T> | IriFromMetadataError;
 
 async function generateIri<T>(
   metadata: T,
@@ -91,122 +88,127 @@ async function generateIri<T>(
   }
 }
 
-// TODO - facked >>> useMsgClient()
-async function submitMessage(
-  message: MsgCreateBatch,
-): Promise<MsgCreateBatchResponse> {
-  function _sleep(ms: number): Promise<MsgCreateBatchResponse> {
-    return new Promise(resolve =>
-      setTimeout(
-        () =>
-          resolve({
-            $type: 'regen.ecocredit.v1alpha1.MsgCreateBatchResponse',
-            batchDenom: 'batch-denom-foo-bar',
-          }),
-        ms,
-      ),
-    );
+async function prepareMsg(
+  issuer: string,
+  data: CreateBatchFormValues,
+): Promise<Partial<MsgCreateBatch> | undefined> {
+  // First, complete the metadata
+  const metadata: VCSBatchMetadataLD | undefined = prepareMetadata(
+    data.metadata as Partial<VCSBatchMetadataLD>,
+  );
+  if (!metadata) return;
+
+  // then, generate the offchain iri from the metadata
+  let iriResponse: IriFromMetadataSuccess<VCSBatchMetadataLD> | undefined;
+
+  try {
+    iriResponse = await generateIri(metadata);
+    if (!iriResponse) return;
+  } catch (err) {
+    throw new Error(err as string);
   }
-  alert(JSON.stringify(message, null, 2));
-  return await _sleep(1000);
+
+  // finally, build de Msg DTO
+  const issuance: MsgCreateBatch_BatchIssuance[] = data.recipients.map(
+    recipient => {
+      let issuanceRecipient: Partial<MsgCreateBatch_BatchIssuance> = {
+        recipient: recipient.recipient,
+        tradableAmount: recipient.tradableAmount.toString(),
+        retiredAmount: '0',
+      };
+      if (recipient.withRetire && recipient.retiredAmount > 0) {
+        issuanceRecipient.retiredAmount = recipient.retiredAmount.toString();
+        issuanceRecipient.retirementLocation = recipient.retirementLocation;
+        // TODO - check optional fields (notes)
+      }
+      return issuanceRecipient as MsgCreateBatch_BatchIssuance;
+    },
+  );
+
+  return MsgCreateBatch.fromPartial({
+    issuer,
+    classId: data.classId,
+    issuance: issuance,
+    metadata: stringToUint8Array(iriResponse.iri),
+    startDate: new Date(data.startDate as Date),
+    endDate: new Date(data.endDate as Date),
+    projectLocation: 'US', // TODO - Missing
+  });
 }
 
-type SubmissionStatus =
-  | 'idle'
-  // | 'validation-metadata-processing'
-  // | 'validation-metadata-success'
-  // | 'validation-metadata-error'
-  // | 'generation-iri-processing'
-  // | 'generation-iri-success'
-  // | 'generation-iri-error'
-  // // | 'preparation-msg'
-  | 'processing' // | 'sending-msg'
-  | 'finished';
+type SubmissionStatus = 'idle' | 'message' | 'sign' | 'broadcast' | 'finished';
 
 type CreateBatchFn = (data: CreateBatchFormValues) => Promise<void>;
 
-// type ReturnType = [SubmissionStatus, CreateBatchFn];
 type ReturnType = {
   status: SubmissionStatus;
+  deliverTxResponse: DeliverTxResponse | undefined;
+  error: string | undefined; // Error | string | undefined;
+  isSubmitModalOpen: boolean;
   createBatch: CreateBatchFn;
-  msgResponse: MsgCreateBatchResponse | undefined;
-  error: Error | undefined;
+  closeSubmitModal: () => void;
 };
 
 export default function useCreateBatch(): ReturnType {
-  const { wallet } = useWallet();
+  const { api } = useLedger();
+  const { wallet, signAndBroadcast, deliverTxResponse, error, setError } =
+    useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+  const accountAddress = wallet?.address;
 
   const [status, setStatus] = React.useState<SubmissionStatus>('idle');
-  const [msgResponse, setMsgResponse] =
-    React.useState<MsgCreateBatchResponse>();
-  const [error, setError] = React.useState<Error>();
+  const [isSubmitModalOpen, setIsSubmitModalOpen] =
+    React.useState<boolean>(false);
+
+  function handleTxQueued(): void {
+    setStatus('broadcast');
+    setIsSubmitModalOpen(true);
+  }
+
+  function handleTxDelivered(): void {
+    setStatus('finished');
+    setIsSubmitModalOpen(false);
+  }
+
+  function handleError(): void {
+    setIsSubmitModalOpen(false);
+    setStatus('finished');
+  }
+
+  function closeSubmitModal(): void {
+    setIsSubmitModalOpen(false);
+  }
 
   const createBatch = async (data: CreateBatchFormValues): Promise<void> => {
-    if (!wallet?.address) return;
-    if (!data.startDate || !data.endDate) return;
+    if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
+    if (!data.startDate || !data.endDate) return Promise.reject();
 
-    // TODO: first, check if iri already exists in data input ?
-    // if already exist, then check prepared data
+    let message: Partial<MsgCreateBatch> | undefined;
 
-    // Checks and set initial state
-    setStatus('processing');
-
-    const metadata: VCSBatchMetadataLD | undefined = prepareMetadata(
-      data.metadata as Partial<VCSBatchMetadataLD>,
-    );
-
-    if (!metadata) return;
-
-    const iriResponse: IriFromMetadataSuccess<VCSBatchMetadataLD> | undefined =
-      await generateIri(metadata);
-
-    if (!iriResponse) return;
-
-    const issuance: MsgCreateBatch_BatchIssuance[] = data.recipients.map(
-      recipient => {
-        let issuanceRecipient: Partial<MsgCreateBatch_BatchIssuance> = {
-          recipient: recipient.recipient,
-          tradableAmount: recipient.tradableAmount.toString(),
-          retiredAmount: '0',
-        };
-        if (recipient.withRetire && recipient.retiredAmount > 0) {
-          issuanceRecipient.retiredAmount = recipient.retiredAmount.toString();
-          issuanceRecipient.retirementLocation = recipient.retirementLocation;
-          // TODO - check optional fields (notes)
-        }
-        return issuanceRecipient as MsgCreateBatch_BatchIssuance;
-      },
-    );
+    // this check is to bypass if status is `sign` or `broadcast`
+    if (status === 'idle' || status === 'message') {
+      try {
+        setStatus('message');
+        message = await prepareMsg(accountAddress, data);
+        if (!message) return;
+      } catch (err) {
+        setError(err as string);
+      }
+    }
 
     try {
-      const message: MsgCreateBatch = {
-        $type: 'regen.ecocredit.v1alpha1.MsgCreateBatch',
-        issuer: wallet.address,
-        classId: data.classId,
-        issuance: issuance,
-        metadata: stringToUint8Array(iriResponse.iri),
-        startDate: data.startDate,
-        endDate: data.endDate,
-        projectLocation: '', // TODO - Missing
-      };
-
-      const tx = await submitMessage(message);
-
-      // TODO: success / error
-      if (tx) {
-        // eslint-disable-next-line no-console
-        console.log('finally por try', tx);
-        // setStatus('finished');
-        setMsgResponse(tx);
-      }
+      setStatus('sign');
+      await signAndBroadcast({ msgs: [message] });
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err);
-      setError(err as Error);
-    } finally {
-      setStatus('finished');
+      setError(err as string);
     }
   };
 
-  return { status, createBatch, msgResponse, error };
+  return {
+    status,
+    deliverTxResponse,
+    isSubmitModalOpen,
+    error,
+    createBatch,
+    closeSubmitModal,
+  };
 }

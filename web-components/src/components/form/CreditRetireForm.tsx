@@ -100,7 +100,7 @@ export interface BottomCreditRetireFieldsProps {
 }
 
 type LocationType = {
-  country?: string;
+  country: string;
   stateProvince?: string;
   postalCode?: string;
 };
@@ -134,6 +134,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
             stateProvince,
             postalCode,
           });
+
           setFieldValue(retirementLocationName, isoString);
           if (geocodingError) setGeocodingError(null);
         } catch (err) {

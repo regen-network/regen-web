@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@mui/styles';
-// import { useMediaQuery, Grid, FormHelperText, SxProps } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import {
   Formik,
   Form,
@@ -9,13 +9,12 @@ import {
   FieldArray,
   FormikErrors,
   FormikHelpers,
+  getIn,
 } from 'formik';
-import { useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
-import { VideoInput } from 'web-components/lib/components/inputs/VideoInput'; //TODO: make this component easier to use with share links from youtube, vimeo, etc
-// import FormLabel from 'web-components/lib/components/inputs/FormLabel';
+import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import {
   urlType,
@@ -25,12 +24,14 @@ import {
   validate,
   getProjectPageBaseData,
   getCompactedPath,
+  getProjectShapeIri,
 } from '../../lib/rdf';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
 import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
+import { FormHelperText } from '@mui/material';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
@@ -45,16 +46,7 @@ export interface MediaValues {
   'regen:previewPhoto'?: urlType;
   'regen:creditText'?: string;
   'regen:galleryPhotos'?: urlList;
-  // 'regen:landStewardPhoto'?: urlType;
   'regen:videoURL'?: urlType;
-}
-
-type valueObject = { '@value'?: string };
-export interface MediaValuesErrors {
-  'regen:previewPhoto'?: valueObject;
-  'regen:galleryPhotos'?: string;
-  'regen:landStewardPhoto'?: valueObject;
-  'regen:videoURL'?: valueObject;
 }
 
 function getURLListInitialValue(value?: urlList): urlList {
@@ -76,7 +68,7 @@ const useStyles = makeStyles(theme => ({
       height: theme.typography.pxToRem(210),
     },
   },
-  padTop: {
+  customMarginTop: {
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(10),
     },
@@ -86,21 +78,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const projectShapeIri = getProjectShapeIri('C01');
+
 const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
   const styles = useStyles();
-  // const theme = useTheme();
   const apiUri = getApiUri();
   const { projectId } = useParams();
   const { confirmSave, isEdit } = useProjectEditContext();
-  // const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
   const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
-      uri: 'http://regen.network/C01-ProjectShape',
+      uri: projectShapeIri,
     },
   });
 
-  const validateForm = async (
+  const handleValidate = async (
     values: MediaValues,
   ): Promise<FormikErrors<MediaValues>> => {
     const errors: FormikErrors<MediaValues> = {};
@@ -109,7 +101,7 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
       const report = await validate(
         graphData.shaclGraphByUri.graph,
         projectPageData,
-        'http://regen.network/ProjectPageDescriptionGroup',
+        projectShapeIri,
       );
       for (const result of report.results) {
         const path: string = result.path.value;
@@ -124,7 +116,7 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
     return errors;
   };
 
-  const onSubmit = async (
+  const handleSubmit = async (
     values: MediaValues,
     { setSubmitting, setTouched }: FormikHelpers<MediaValues>,
   ): Promise<void> => {
@@ -139,6 +131,31 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
     }
   };
 
+  const ImageField = (props: {
+    name: string;
+    description?: string;
+    customMarginTop?: boolean;
+  }): JSX.Element => (
+    <Field
+      classes={{
+        main: cx(
+          styles.fullSizeMedia,
+          props.customMarginTop && styles.customMarginTop,
+        ),
+      }}
+      component={ImageUpload}
+      label="Photos"
+      description={props.description}
+      buttonText="+ Add Photo"
+      fixedCrop={cropAspect}
+      name={props.name}
+      apiServerUrl={apiUri}
+      projectId={projectId}
+      optional
+      isDrop
+    />
+  );
+
   return (
     <>
       <Formik
@@ -151,45 +168,13 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
           'regen:galleryPhotos': getURLListInitialValue(
             initialValues?.['regen:galleryPhotos'],
           ),
-          // 'regen:landStewardPhoto': getURLInitialValue(
-          //   initialValues?.['regen:landStewardPhoto'],
-          // ),
+          'regen:creditText': initialValues?.['regen:creditText'] || '',
           'regen:videoURL': getURLInitialValue(
             initialValues?.['regen:videoURL'],
           ),
         }}
-        // validate={async (values): Promise<MediaValuesErrors> => {
-        //   const errors: MediaValuesErrors = {};
-        //   if (graphData?.shaclGraphByUri?.graph) {
-        //     const projectPageData = { ...getProjectPageBaseData(), ...values };
-        //     const report = await validate(
-        //       graphData.shaclGraphByUri.graph,
-        //       projectPageData,
-        //       'http://regen.network/ProjectPageMediaGroup',
-        //     );
-        //     for (const result of report.results) {
-        //       const path: string | undefined = result.path?.value;
-        //       if (path) {
-        //         const compactedPath = getCompactedPath(path) as
-        //           | keyof MediaValuesErrors
-        //           | undefined;
-        //         if (compactedPath === 'regen:previewPhoto') {
-        //           errors[compactedPath] = { '@value': requiredMessage };
-        //         } else {
-        //           // for gallery photos, display general error message below "Gallery Photos" section
-        //           errors['regen:galleryPhotos'] = 'You must add 4 photos';
-        //         }
-        //       } else {
-        //         // or constraint not satisfied on regen:landStewardPhoto/regen:videoURL
-        //         errors['regen:landStewardPhoto'] = {
-        //           '@value': requiredMessage,
-        //         };
-        //       }
-        //     }
-        //   }
-        //   return errors;
-        // }}
-        onSubmit={onSubmit}
+        validate={handleValidate}
+        onSubmit={handleSubmit}
       >
         {({ submitForm, isValid, isSubmitting, errors, values, touched }) => {
           const shouldRenderPhoto = (i: number): boolean => {
@@ -202,18 +187,9 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
           return (
             <Form translate="yes">
               <OnBoardingCard>
-                <Field
-                  classes={{ main: styles.fullSizeMedia }}
-                  component={ImageUpload}
-                  label="Photos"
-                  description="Choose the photos that will show up on the project page. The first photo will be your preview photo."
-                  buttonText="+ Add Photo"
-                  fixedCrop={cropAspect}
+                <ImageField
                   name="regen:previewPhoto.@value"
-                  apiServerUrl={apiUri}
-                  projectId={projectId}
-                  optional
-                  isDrop
+                  description="Choose the photos that will show up on the project page. The first photo will be your preview photo."
                 />
                 <FieldArray name="photos">
                   {() => (
@@ -221,28 +197,45 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
                       {(values['regen:galleryPhotos']?.['@list'] || []).map(
                         (_photo, i) =>
                           shouldRenderPhoto(i) ? (
-                            <Field
+                            <ImageField
                               key={i}
-                              classes={{
-                                main:
-                                  i === 0 // margin only on first photo
-                                    ? cx(styles.fullSizeMedia, styles.padTop)
-                                    : styles.fullSizeMedia,
-                              }}
-                              component={ImageUpload}
-                              buttonText="+ Add Photo"
-                              fixedCrop={cropAspect}
                               name={`regen:galleryPhotos.@list[${i}].@value`}
-                              apiServerUrl={apiUri}
-                              projectId={projectId}
-                              // defaultStyle={false}
-                              optional
-                              isDrop
+                              customMarginTop={i === 0} // FieldArray has custom margin which interferes with how the first photo renders. This is a hacky workaround
                             />
                           ) : (
                             <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
                           ),
                       )}
+                      {errors?.['regen:galleryPhotos'] &&
+                        (getIn(
+                          touched,
+                          `['regen:galleryPhotos'].@list[0].@value`,
+                        ) ||
+                          getIn(
+                            touched,
+                            `['regen:galleryPhotos'].@list[1].@value`,
+                          ) ||
+                          getIn(
+                            touched,
+                            `['regen:galleryPhotos'].@list[2].@value`,
+                          ) ||
+                          getIn(
+                            touched,
+                            `['regen:galleryPhotos'].@list[3].@value`,
+                          )) && (
+                          <FormHelperText
+                            sx={{
+                              color: 'error.main',
+                              borderColor: 'error.main',
+                              mt: 1,
+                              mb: 0,
+                              fontWeight: 'bold',
+                              typography: ['textXSmall', 'textSmall'],
+                            }}
+                          >
+                            {errors?.['regen:galleryPhotos']}
+                          </FormHelperText>
+                        )}
                     </div>
                   )}
                 </FieldArray>
@@ -259,152 +252,10 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
                   label="Video url"
                   name="regen:videoURL.@value"
                 />
-                {/* <div className={styles.field}>
-                  <FormLabel
-                    label="Gallery Photos"
-                    labelSubText="(min 4 photos)"
-                    description="People love pictures of people! Upload images of the land stewards, in addition to the land and animals."
-                  />
-                  <Grid container spacing={3} direction="row" sx={{ mt: 1 }}>
-                    <Grid item xs={6} sm="auto" sx={sxs.galleryImage}>
-                      <Field
-                        classes={{ button: styles.smallButton }}
-                        component={ImageUpload}
-                        buttonText="+ Add Photo"
-                        fixedCrop={cropAspect}
-                        name="regen:galleryPhotos.@list[0].@value" // left
-                        apiServerUrl={apiUri}
-                        projectId={projectId}
-                        isDrop
-                      />
-                    </Grid>
-                    {isTabletOrLarger ? (
-                      <Grid
-                        item
-                        sm={3}
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                          justifyContent: 'space-between',
-                        }}
-                      >
-                        <Grid item sm={12} sx={{ maxHeight: 72 }}>
-                          <Field
-                            classes={{ button: styles.smallButton }}
-                            component={ImageUpload}
-                            fixedCrop={cropAspect}
-                            name="regen:galleryPhotos.@list[1].@value" // top
-                            hideDragText
-                            apiServerUrl={apiUri}
-                            projectId={projectId}
-                            isDrop
-                          />
-                        </Grid>
-                        <Grid item sm={12} sx={{ maxHeight: 72 }}>
-                          <Field
-                            classes={{ button: styles.smallButton }}
-                            component={ImageUpload}
-                            fixedCrop={cropAspect}
-                            name="regen:galleryPhotos.@list[2].@value" // bottom
-                            hideDragText
-                            apiServerUrl={apiUri}
-                            projectId={projectId}
-                            isDrop
-                          />
-                        </Grid>
-                      </Grid>
-                    ) : (
-                      <>
-                        <Grid item xs={6} sm={12} sx={sxs.galleryImage}>
-                          <Field
-                            classes={{ button: styles.smallButton }}
-                            component={ImageUpload}
-                            fixedCrop={cropAspect}
-                            name="regen:galleryPhotos.@list[1].@value" // top
-                            buttonText="+ Add Photo"
-                            apiServerUrl={apiUri}
-                            projectId={projectId}
-                            isDrop
-                          />
-                        </Grid>
-                        <Grid item xs={6} sm={12} sx={sxs.galleryImage}>
-                          <Field
-                            classes={{ button: styles.smallButton }}
-                            component={ImageUpload}
-                            fixedCrop={cropAspect}
-                            name="regen:galleryPhotos.@list[2].@value" // bottom
-                            buttonText="+ Add Photo"
-                            apiServerUrl={apiUri}
-                            projectId={projectId}
-                            isDrop
-                          />
-                        </Grid>
-                      </>
-                    )}
-
-                    <Grid item xs={6} sm="auto" sx={sxs.galleryImage}>
-                      <Field
-                        classes={{ button: styles.smallButton }}
-                        component={ImageUpload}
-                        buttonText="+ Add Photo"
-                        fixedCrop={cropAspect}
-                        name="regen:galleryPhotos.@list[3].@value" // right
-                        apiServerUrl={apiUri}
-                        projectId={projectId}
-                        isDrop
-                      />
-                    </Grid>
-                  </Grid>
-                  {errors?.['regen:galleryPhotos'] &&
-                    (getIn(
-                      touched,
-                      `['regen:galleryPhotos'].@list[0].@value`,
-                    ) ||
-                      getIn(
-                        touched,
-                        `['regen:galleryPhotos'].@list[1].@value`,
-                      ) ||
-                      getIn(
-                        touched,
-                        `['regen:galleryPhotos'].@list[2].@value`,
-                      ) ||
-                      getIn(
-                        touched,
-                        `['regen:galleryPhotos'].@list[3].@value`,
-                      )) && (
-                      <FormHelperText
-                        sx={{
-                          color: 'error.main',
-                          borderColor: 'error.main',
-                          mt: 1,
-                          mb: 0,
-                          fontWeight: 'bold',
-                          typography: ['textXSmall', 'textSmall'],
-                        }}
-                      >
-                        {errors?.['regen:galleryPhotos']}
-                      </FormHelperText>
-                    )}
-                </div> */}
-                {/* <Field
-                  classes={{ root: styles.field, main: styles.fullSizeMedia }}
-                  component={ImageUpload}
-                  label="Land Steward photo"
-                  // labelSubText="(required if you don’t add a video)" TODO: uncomment when video input is ready
-                  description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."
-                  buttonText="+ Add Photo"
-                  fixedCrop={cropAspect}
-                  name="regen:landStewardPhoto.@value"
-                  apiServerUrl={apiUri}
-                  projectId={projectId}
-                  isDrop
-                /> */}
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
-                saveDisabled={
-                  !isValid || isSubmitting || !Object.keys(touched)?.length
-                }
+                saveDisabled={!isValid || isSubmitting}
               />
             </Form>
           );

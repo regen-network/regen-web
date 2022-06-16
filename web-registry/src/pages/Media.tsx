@@ -53,6 +53,7 @@ const Media = (): JSX.Element => {
         },
       });
     } catch (e) {
+      console.error('error saving media form', e); // eslint-disable-line no-console
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
       // console.log(e);

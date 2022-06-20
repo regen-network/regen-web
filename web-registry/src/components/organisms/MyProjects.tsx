@@ -13,6 +13,7 @@ import {
   useCreateWalletMutation,
 } from '../../generated/graphql';
 import { getProjectPageBaseData } from '../../lib/rdf';
+import { DashboardTemplate } from '../templates';
 
 const MyProjects: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -78,13 +79,19 @@ const MyProjects: React.FC = () => {
   }
 
   return (
-    <Box
+    <DashboardTemplate
       sx={{
         display: 'flex',
-        py: 10,
+        pt: 10,
       }}
     >
       <Grid container spacing={8}>
+        <Grid item xs={12} md={6} lg={4}>
+          <CreateProjectCard
+            isFirstProject={isFirstProject}
+            onClick={submitCreateProject}
+          />
+        </Grid>
         {/* TODO: ProjectCards used below temporarily. Will probably be a new variation for this purpose */}
         {projects?.map(project => (
           <Grid item xs={12} md={6} lg={4}>
@@ -97,15 +104,9 @@ const MyProjects: React.FC = () => {
             />
           </Grid>
         ))}
-        <Grid item xs={12} md={6} lg={4}>
-          <CreateProjectCard
-            isFirstProject={isFirstProject}
-            onClick={submitCreateProject}
-          />
-        </Grid>
       </Grid>
       {error && <ErrorBanner text={error} />}
-    </Box>
+    </DashboardTemplate>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { styled, CardMedia } from '@mui/material';
+import { styled, CardMedia, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import cx from 'clsx';
 
@@ -28,6 +28,7 @@ export interface MediaCardProps extends OptimizeImageProps {
   backgroundGradient?: boolean;
   imageClassName?: string;
   titleOverwrite?: boolean;
+  sx?: SxProps<Theme>;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -67,6 +68,7 @@ export default function MediaCard({
   titleOverwrite = true,
   imageStorageBaseUrl,
   apiServerUrl,
+  sx = [],
 }: MediaCardProps): JSX.Element {
   const classes = useStyles({});
 
@@ -115,13 +117,16 @@ export default function MediaCard({
       elevation={elevation}
       borderColor={borderColor}
       borderRadius={borderRadius}
-      sx={{
-        height: '100%',
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'relative',
-      }}
+      sx={[
+        {
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+        },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
     >
       {href ? (
         <a href={href} target={target}>

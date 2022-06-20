@@ -4,9 +4,10 @@ import { Box, SxProps } from '@mui/material';
 import { Label } from 'web-components/lib/components/typography';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 
-import { EcocreditsTable, BasketsTable } from '../../components/organisms';
+import { EcocreditsTable, BasketsTable } from './';
 import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 import { BasketTokens } from '../../hooks/useBasketTokens';
+import { DashboardTemplate } from '../templates';
 
 export interface PortfolioProps {
   credits?: BatchInfoWithBalance[];
@@ -29,7 +30,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
   renderBasketActionButtons,
 }) => {
   return (
-    <Box sx={{ pb: { xs: 21.25, sm: 28.28 } }}>
+    <DashboardTemplate>
       <Box sx={{ pt: 12.75 }}>
         <Label sx={sxs.title}>ecocredits</Label>
         <EcocreditsTable
@@ -44,6 +45,6 @@ export const Portfolio: React.FC<PortfolioProps> = ({
           renderActionButtons={renderBasketActionButtons}
         />
       </Box>
-    </Box>
+    </DashboardTemplate>
   );
 };

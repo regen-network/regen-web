@@ -47,7 +47,6 @@ import {
 } from '../hooks';
 import { BasketTokens } from '../hooks/useBasketTokens';
 import useMsgClient from '../hooks/useMsgClient';
-import { WithBasketsProps, withBaskets } from '../components/templates';
 import { Link } from '../components/atoms';
 import { Portfolio } from '../components/organisms';
 // import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
@@ -57,6 +56,7 @@ import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-baske
 // import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
 import { useLedger } from '../ledger';
 import { getHashUrl } from '../lib/block-explorer';
+import useQueryBaskets from '../hooks/useQueryBaskets';
 
 const useStyles = makeStyles((theme: Theme) => ({
   arrow: {
@@ -65,9 +65,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
+export const MyEcocredits = (): JSX.Element => {
   const styles = useStyles();
   const theme = useTheme();
+
+  const baskets = useQueryBaskets();
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
@@ -477,5 +479,3 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
     </>
   );
 };
-
-export const MyEcocredits = withBaskets(WrappedMyEcocredits);

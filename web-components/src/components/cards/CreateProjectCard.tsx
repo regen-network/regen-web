@@ -1,5 +1,5 @@
 import React from 'react';
-import { SxProps, Theme } from '@mui/material';
+import { SxProps, useTheme, Theme } from '@mui/material';
 
 import Card from './Card';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -19,6 +19,8 @@ const CreateProjectCard: React.FC<CreateProjectCardProps> = ({
   onClick,
   isFirstProject,
 }) => {
+  const theme = useTheme();
+
   return (
     <Card
       className={className}
@@ -28,25 +30,28 @@ const CreateProjectCard: React.FC<CreateProjectCardProps> = ({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         height: theme.spacing(92.5),
-        width: { xs: '100%', sm: theme.spacing(91.75) },
-        background: 'info.light',
+        backgroundColor: 'info.light',
         p: { xs: 12, sm: 8, md: 12 },
       })}
+      borderRadius="10px"
+      borderColor={theme.palette.grey[100]}
     >
-      <ProjectPageIcon
-        sx={theme => ({
-          color: 'info.main',
-          height: theme.spacing(14.75),
-          width: theme.spacing(18.25),
-        })}
-      />
+      {isFirstProject && (
+        <ProjectPageIcon
+          sx={theme => ({
+            color: 'info.main',
+            height: theme.spacing(14.75),
+            width: theme.spacing(18.25),
+          })}
+        />
+      )}
       {isFirstProject && (
         <Title variant="h4" align="center">
           You have not created any projects yet
         </Title>
       )}
       <OutlinedButton sx={{ width: '100%' }} onClick={onClick}>
-        {isFirstProject ? '+ create project' : 'add another project'}
+        + create project
       </OutlinedButton>
     </Card>
   );

@@ -104,7 +104,10 @@ const App: React.FC = (): JSX.Element => {
             path="post-purchase/:projectId/:walletId/:name"
             element={<PostPurchase />}
           />
-          <Route path="ecocredits/dashboard" element={<MyEcocredits />} />
+          <Route
+            path="ecocredits/dashboard"
+            element={<KeplrRoute component={MyEcocredits} />}
+          />
           <Route
             path="ecocredits/accounts/:accountAddress"
             element={<EcocreditsByAccount />}

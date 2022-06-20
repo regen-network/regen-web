@@ -220,7 +220,7 @@ export const MyEcocredits = (): JSX.Element => {
       setCardItems([
         {
           label: 'batch denom',
-          value: { name: batchDenom },
+          value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
         },
         {
           label: 'recipient',
@@ -292,7 +292,7 @@ export const MyEcocredits = (): JSX.Element => {
       setCardItems([
         {
           label: 'batch denom',
-          value: { name: batchDenom },
+          value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
         },
         {
           label: 'number of credits',

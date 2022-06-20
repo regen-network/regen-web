@@ -16,6 +16,7 @@ export * from './CreditClassDetails';
 export * from './CreditsIssue';
 export * from './CreditsRetire';
 export * from './CreditsTransfer';
+export * from './Dashboard';
 export * from './Description';
 export * from './EcocreditsByAccount';
 export * from './Eligibility';

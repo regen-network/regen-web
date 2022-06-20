@@ -73,6 +73,7 @@ const ProjectCards: React.FC<Props> = props => {
     project: MoreProjectFieldsFragment;
   }> = ({ project }) => (
     <ProjectCard
+      sx={theme => ({ width: { xs: theme.spacing(73), md: '100%' } })}
       name={project.metadata?.['schema:name']}
       imgSrc={
         project.metadata?.['regen:previewPhoto']?.['@value'] || DefaultProject

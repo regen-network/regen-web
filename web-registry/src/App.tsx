@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useAuth0, OAuthError } from '@auth0/auth0-react';
-
 import { createBrowserHistory } from 'history';
-import isAdmin from './lib/admin';
-import { init as initGA } from './lib/ga';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
+
+import isAdmin from './lib/admin';
+import { init as initGA } from './lib/ga';
 import { ScrollToTop, ProtectedRoute } from './components/atoms';
 import { RegistryNav, AppFooter } from './components/organisms';
 
@@ -29,6 +29,7 @@ import {
   CreditsIssue,
   CreditsRetire,
   CreditsTransfer,
+  Dashboard,
   Description,
   EntityDisplay,
   EcocreditsByAccount,
@@ -37,7 +38,6 @@ import {
   Media,
   MethodologyDetails,
   MethodologyReviewProcess,
-  MyEcocredits,
   NotFoundPage,
   OrganizationProfile,
   PostPurchase,
@@ -105,7 +105,7 @@ const App: React.FC = (): JSX.Element => {
             path="post-purchase/:projectId/:walletId/:name"
             element={<PostPurchase />}
           />
-          <Route path="ecocredits/dashboard" element={<MyEcocredits />} />
+          <Route path="ecocredits/dashboard" element={<Dashboard />} />
           <Route
             path="ecocredits/accounts/:accountAddress"
             element={<EcocreditsByAccount />}
@@ -126,10 +126,8 @@ const App: React.FC = (): JSX.Element => {
             element={<ProtectedRoute component={ProjectList} />}
           />
           <Route path="project-pages/:projectId">
-            <Route
-              path="choose-credit-class"
-              element={<ProtectedRoute component={ChooseCreditClass} />}
-            />
+            {/* TODO: Update according to https://github.com/regen-network/regen-registry/issues/910 */}
+            <Route path="choose-credit-class" element={<ChooseCreditClass />} />
             <Route
               path="basic-info"
               element={<ProtectedRoute component={BasicInfo} />}
@@ -207,7 +205,6 @@ const App: React.FC = (): JSX.Element => {
               />
             </>
           )}
-          {/* <Route path="methodologies" element={<MethodologiesList />} /> TODO */}
           <Route
             path="methodologies/:methodologyId"
             element={<MethodologyDetails />}

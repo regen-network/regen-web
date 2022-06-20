@@ -9,7 +9,7 @@ import Modal from './';
 export interface CropImageModalProps {
   open: boolean;
   onClose: () => void;
-  onSubmit: (image: HTMLImageElement) => void;
+  onSubmit: (image: HTMLImageElement) => Promise<void>;
   circularCrop?: boolean;
   initialImage: string;
   fixedCrop?: Partial<Crop>;

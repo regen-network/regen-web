@@ -11,11 +11,13 @@ interface TxData {
   memo?: string;
 }
 
+export type SignAndBroadcastType = (
+  message: TxData,
+  onBroadcast?: () => void, // an optional callback that gets called between sign and broadcast
+) => Promise<void>;
+
 type MsgClientType = {
-  signAndBroadcast: (
-    message: TxData,
-    onBroadcast?: () => void, // an optional callback that gets called between sign and broadcast
-  ) => Promise<void>;
+  signAndBroadcast: SignAndBroadcastType;
   setDeliverTxResponse: (txResult: DeliverTxResponse | undefined) => void;
   deliverTxResponse?: DeliverTxResponse;
   setError: (error: string | undefined) => void;

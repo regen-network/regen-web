@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useTheme, Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import {
-  MsgSend,
-  MsgRetire,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
-import {
-  MsgPut,
-  MsgTake,
-} from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
+import { useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-
+import React, { useState } from 'react';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import {
   BasketPutModal,
   title as basketPutTitle,
@@ -23,53 +13,57 @@ import {
   title as basketTakeTitle,
 } from 'web-components/lib/components/modal/BasketTakeModal';
 import {
-  CreditSendModal,
-  title as creditSendTitle,
-} from 'web-components/lib/components/modal/CreditSendModal';
-import {
   CreditRetireModal,
   title as creditRetireTitle,
 } from 'web-components/lib/components/modal/CreditRetireModal';
-
+import {
+  CreditSendModal,
+  title as creditSendTitle,
+} from 'web-components/lib/components/modal/CreditSendModal';
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
-import { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
-import { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
-import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
-import { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm';
-import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-
+// import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
+// import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
+// import { ReactComponent as Sell } from '../../assets/svgs/sell.svg';
+import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
+import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
+import { Link } from '../../components/atoms';
+import { Portfolio } from '../../components/organisms/Portfolio';
 import {
-  useEcocredits,
   useBasketsWithClasses,
   useBasketTokens,
-} from '../hooks';
-import { BasketTokens } from '../hooks/useBasketTokens';
-import useMsgClient from '../hooks/useMsgClient';
-import { Link } from '../components/atoms';
-import { Portfolio } from '../components/organisms';
-// import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
-import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg';
-import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-basket.svg';
-// import { ReactComponent as WithdrawIBC } from '../assets/svgs/withdraw-ibc.svg';
-// import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
-import { useLedger } from '../ledger';
-import { getHashUrl } from '../lib/block-explorer';
-import useQueryBaskets from '../hooks/useQueryBaskets';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  arrow: {
-    width: theme.spacing(6),
-    height: theme.spacing(6),
-  },
-}));
+  useEcocredits,
+} from '../../hooks';
+import { BasketTokens } from '../../hooks/useBasketTokens';
+import useMsgClient from '../../hooks/useMsgClient';
+import useQueryBaskets from '../../hooks/useQueryBaskets';
+import { useLedger } from '../../ledger';
+import { getHashUrl } from '../../lib/block-explorer';
+import useBasketPutSubmit from './hooks/useBasketPutSubmit';
+import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
+import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
+import useCreditSendSubmit from './hooks/useCreditSendSubmit';
+import { default as useStyles } from './hooks/useMyEcocreditsStyles';
+import useOpenTakeModal from './hooks/useOpenTakeModal';
+import useUpdateCrediBaskets from './hooks/useUpdateCrediBaskets';
 
 export const MyEcocredits = (): JSX.Element => {
-  const styles = useStyles();
-  const theme = useTheme();
-
-  const baskets = useQueryBaskets();
+  const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
+  const [creditSendOpen, setCreditSendOpen] = useState<number>(-1);
+  const [creditRetireOpen, setCreditRetireOpen] = useState<number>(-1);
+  const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
+  const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+  const [creditBaskets, setCreditBaskets] = useState<
+    (QueryBasketResponse | undefined)[][]
+  >([]);
+  const [basketTakeTokens, setBasketTakeTokens] = useState<
+    BasketTokens | undefined
+  >(undefined);
+  const [txModalTitle, setTxModalTitle] = useState<string | undefined>(
+    undefined,
+  );
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
@@ -82,6 +76,10 @@ export const MyEcocredits = (): JSX.Element => {
     setError(undefined);
   };
 
+  const handleError = (): void => {
+    setIsProcessingModalOpen(false);
+  };
+
   const handleTxDelivered = (): void => {
     setIsProcessingModalOpen(false);
     // Refetch basket/ecocredits data so it shows latest values
@@ -89,11 +87,6 @@ export const MyEcocredits = (): JSX.Element => {
     fetchCredits();
   };
 
-  const handleError = (): void => {
-    setIsProcessingModalOpen(false);
-  };
-
-  const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   const {
     signAndBroadcast,
     setDeliverTxResponse,
@@ -102,206 +95,78 @@ export const MyEcocredits = (): JSX.Element => {
     error,
     setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+
+  const { api } = useLedger();
+  const styles = useStyles();
+  const theme = useTheme();
+  const baskets = useQueryBaskets();
+  const txHash = deliverTxResponse?.transactionHash;
+  const txHashUrl = getHashUrl(txHash);
   const accountAddress = wallet?.address;
   const { credits, fetchCredits } = useEcocredits(accountAddress);
+  const basketsWithClasses = useBasketsWithClasses(baskets);
+  const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   const { basketTokens, fetchBasketTokens } = useBasketTokens(
     accountAddress,
     baskets,
   );
-  const basketsWithClasses = useBasketsWithClasses(baskets);
-  const { api } = useLedger();
 
-  const [creditBaskets, setCreditBaskets] = useState<
-    (QueryBasketResponse | undefined)[][]
-  >([]);
-  const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
-  const [creditSendOpen, setCreditSendOpen] = useState<number>(-1);
-  const [creditRetireOpen, setCreditRetireOpen] = useState<number>(-1);
-  const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
-  const [basketTakeTokens, setBasketTakeTokens] = useState<
-    BasketTokens | undefined
-  >(undefined);
-  const [txModalTitle, setTxModalTitle] = useState<string | undefined>(
-    undefined,
-  );
-  const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+  useUpdateCrediBaskets({ basketsWithClasses, credits, setCreditBaskets });
 
-  const txHash = deliverTxResponse?.transactionHash;
-  const txHashUrl = getHashUrl(txHash);
+  const openTakeModal = useOpenTakeModal({
+    basketTokens,
+    basketsWithClasses,
+    setBasketTakeTokens,
+  });
 
-  useEffect(() => {
-    // Get available baskets to put credits into
-    if (basketsWithClasses && basketsWithClasses.length > 0) {
-      setCreditBaskets(
-        credits.map(c =>
-          basketsWithClasses.filter(b => b?.classes.includes(c.class_id)),
-        ),
-      );
-    }
-  }, [credits, basketsWithClasses]);
+  const basketTakeSubmit = useBasketTakeSubmit({
+    api,
+    accountAddress,
+    basketTakeTitle,
+    baskets,
+    setBasketTakeTokens,
+    setCardItems,
+    setTxModalTitle,
+    signAndBroadcast,
+  });
 
-  const openTakeModal = (rowIndex: number): void => {
-    const selectedBasketDenom =
-      basketsWithClasses?.[rowIndex]?.basket?.basketDenom;
-    if (selectedBasketDenom) {
-      const selectedBasketTokens = basketTokens.find(
-        bt => bt.basket.basketDenom === selectedBasketDenom,
-      );
-      setBasketTakeTokens(selectedBasketTokens);
-    }
-  };
+  const creditSendSubmit = useCreditSendSubmit({
+    api,
+    accountAddress,
+    creditSendOpen,
+    creditSendTitle,
+    credits,
+    setCardItems,
+    setCreditSendOpen,
+    setTxModalTitle,
+    signAndBroadcast,
+  });
 
-  const basketTakeSubmit = async (values: MsgTakeValues): Promise<void> => {
-    if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
+  const basketPutSubmit = useBasketPutSubmit({
+    accountAddress,
+    baskets,
+    basketPutOpen,
+    basketPutTitle,
+    basketTakeTitle,
+    credits,
+    setBasketPutOpen,
+    setBasketTakeTokens,
+    setCardItems,
+    setTxModalTitle,
+    signAndBroadcast,
+  });
 
-    const amount = values?.amount;
-    const basket = baskets?.baskets.find(
-      b => b.basketDenom === values.basketDenom,
-    );
-
-    const msg = MsgTake.fromPartial({
-      owner: accountAddress,
-      basketDenom: values.basketDenom,
-      amount,
-      retirementLocation: values.retirementLocation || '',
-      retireOnTake: values.retireOnTake || false,
-    });
-
-    const tx = {
-      msgs: [msg],
-      fee: undefined,
-      memo: values?.retirementNote,
-    };
-
-    await signAndBroadcast(tx, () => setBasketTakeTokens(undefined));
-
-    if (basket && amount) {
-      setCardItems([
-        {
-          label: 'basket',
-          value: { name: basket.name },
-        },
-        {
-          label: 'amount',
-          value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
-        },
-      ]);
-      setTxModalTitle(basketTakeTitle);
-    }
-  };
-
-  const creditSendSubmit = async (
-    values: CreditSendFormValues,
-  ): Promise<void> => {
-    if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
-    const batchDenom = credits[creditSendOpen].batch_denom;
-    const recipient = values.recipient;
-    const msg = MsgSend.fromPartial({
-      sender: accountAddress,
-      recipient,
-      credits: [
-        {
-          batchDenom,
-          tradableAmount: values.tradableAmount.toString(),
-          retiredAmount: values.retiredAmount.toString(),
-          retirementLocation: values.retirementLocation,
-        },
-      ],
-    });
-
-    const tx = {
-      msgs: [msg],
-      fee: undefined,
-      memo: values?.note,
-    };
-
-    await signAndBroadcast(tx, () => setCreditSendOpen(-1));
-    if (batchDenom && recipient) {
-      setCardItems([
-        {
-          label: 'batch denom',
-          value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
-        },
-        {
-          label: 'recipient',
-          value: { name: recipient },
-        },
-      ]);
-      setTxModalTitle(creditSendTitle);
-    }
-  };
-
-  const basketPutSubmit = async (
-    values: BasketPutFormValues,
-  ): Promise<void> => {
-    const amount = values.amount?.toString();
-    const msg = MsgPut.fromPartial({
-      basketDenom: values.basketDenom,
-      owner: accountAddress,
-      credits: [
-        {
-          batchDenom: credits[basketPutOpen].batch_denom,
-          amount,
-        },
-      ],
-    });
-    await signAndBroadcast({ msgs: [msg] }, () => setBasketPutOpen(-1));
-    const basket = baskets?.baskets.find(
-      b => b.basketDenom === values.basketDenom,
-    );
-    if (basket && amount) {
-      setCardItems([
-        {
-          label: 'basket',
-          value: { name: basket.name },
-        },
-        {
-          label: 'amount',
-          value: { name: amount },
-        },
-      ]);
-      setTxModalTitle(basketPutTitle);
-    }
-  };
-
-  const creditRetireSubmit = async (
-    values: CreditRetireFormValues,
-  ): Promise<void> => {
-    if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
-    const batchDenom = credits[creditRetireOpen].batch_denom;
-    const amount = values.retiredAmount.toString();
-    const msg = MsgRetire.fromPartial({
-      holder: accountAddress,
-      location: values.retirementLocation,
-      credits: [
-        {
-          batchDenom,
-          amount,
-        },
-      ],
-    });
-
-    const tx = {
-      msgs: [msg],
-      fee: undefined,
-      memo: values?.note,
-    };
-
-    await signAndBroadcast(tx, () => setCreditRetireOpen(-1));
-    if (batchDenom && amount) {
-      setCardItems([
-        {
-          label: 'batch denom',
-          value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
-        },
-        {
-          label: 'number of credits',
-          value: { name: amount },
-        },
-      ]);
-      setTxModalTitle(creditRetireTitle);
-    }
-  };
+  const creditRetireSubmit = useCreditRetireSubmit({
+    api,
+    accountAddress,
+    creditRetireOpen,
+    creditRetireTitle,
+    credits,
+    setCardItems,
+    setCreditRetireOpen,
+    setTxModalTitle,
+    signAndBroadcast,
+  });
 
   return (
     <>

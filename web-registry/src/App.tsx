@@ -7,7 +7,7 @@ import isAdmin from './lib/admin';
 import { init as initGA } from './lib/ga';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
-import { ScrollToTop, ProtectedRoute } from './components/atoms';
+import { ScrollToTop, ProtectedRoute, KeplrRoute } from './components/atoms';
 import { RegistryNav, AppFooter } from './components/organisms';
 
 import {
@@ -109,7 +109,10 @@ const App: React.FC = (): JSX.Element => {
             path="ecocredits/accounts/:accountAddress"
             element={<EcocreditsByAccount />}
           />
-          <Route path="ecocredits/create-batch" element={<CreateBatch />} />
+          <Route
+            path="ecocredits/create-batch"
+            element={<KeplrRoute component={CreateBatch} />}
+          />
           <Route path="baskets/:basketDenom" element={<BasketDetails />} />
           <Route path="credit-batches/:batchDenom" element={<BatchDetails />} />
           <Route
@@ -127,57 +130,38 @@ const App: React.FC = (): JSX.Element => {
           <Route path="project-pages/:projectId">
             <Route
               path="choose-credit-class"
-              element={<ProtectedRoute component={ChooseCreditClass} />}
+              element={<KeplrRoute component={ChooseCreditClass} />}
             />
             <Route
               path="basic-info"
-              element={<ProtectedRoute component={BasicInfo} />}
+              element={<KeplrRoute component={BasicInfo} />}
             />
             <Route
               path="location"
-              element={<ProtectedRoute component={ProjectLocation} />}
+              element={<KeplrRoute component={ProjectLocation} />}
             />
-            <Route
-              path="story"
-              element={<ProtectedRoute component={Story} />}
-            />
-            <Route
-              path="media"
-              element={<ProtectedRoute component={Media} />}
-            />
-            {/* TODO: Update according to https://github.com/regen-network/regen-registry/issues/910 */}
-            <Route path="roles" element={<Roles />} />
+            <Route path="story" element={<KeplrRoute component={Story} />} />
+            <Route path="media" element={<KeplrRoute component={Media} />} />
+            <Route path="roles" element={<KeplrRoute component={Roles} />} />
             <Route
               path="entity-display"
-              element={<ProtectedRoute component={EntityDisplay} />}
+              element={<KeplrRoute component={EntityDisplay} />}
             />
-            <Route
-              path="edit"
-              element={<ProtectedRoute component={ProjectEdit} />}
-            >
+            <Route path="edit" element={<KeplrRoute component={ProjectEdit} />}>
               <Route
                 path="basic-info"
-                element={<ProtectedRoute component={BasicInfo} />}
+                element={<KeplrRoute component={BasicInfo} />}
               />
               <Route
                 path="location"
-                element={<ProtectedRoute component={ProjectLocation} />}
+                element={<KeplrRoute component={ProjectLocation} />}
               />
-              <Route
-                path="story"
-                element={<ProtectedRoute component={Story} />}
-              />
-              <Route
-                path="media"
-                element={<ProtectedRoute component={Media} />}
-              />
-              <Route
-                path="roles"
-                element={<ProtectedRoute component={Roles} />}
-              />
+              <Route path="story" element={<KeplrRoute component={Story} />} />
+              <Route path="media" element={<KeplrRoute component={Media} />} />
+              <Route path="roles" element={<KeplrRoute component={Roles} />} />
               <Route
                 path="entity-display"
-                element={<ProtectedRoute component={EntityDisplay} />}
+                element={<KeplrRoute component={EntityDisplay} />}
               />
             </Route>
           </Route>

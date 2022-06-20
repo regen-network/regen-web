@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field, FormikErrors } from 'formik';
+import { useParams } from 'react-router-dom';
+import { Bech32Address } from '@keplr-wallet/cosmos';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import {
   RoleField,
   FormValues,
 } from 'web-components/lib/components/inputs/RoleField';
 import { Subtitle } from 'web-components/lib/components/typography';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+import {
+  requiredMessage,
+  invalidAddress,
+} from 'web-components/lib/components/inputs/validation';
+import TextField from 'web-components/lib/components/inputs/TextField';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
+import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import {
+  validate,
+  getProjectPageBaseData,
+  defaultProjectContext,
+  getCompactedPath,
+} from '../../lib/rdf';
 import { ProjectPageFooter } from '../molecules';
 import {
   useReallyCreateUserMutation,
@@ -22,42 +32,30 @@ import {
   useUpdatePartyByIdMutation,
   useUpdateOrganizationByIdMutation,
   useUpdateAddressByIdMutation,
-  useShaclGraphByUriQuery,
   GetOrganizationProfileByEmailQuery,
+  ShaclGraphByUriQuery,
 } from '../../generated/graphql';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
+import getApiUri from '../../lib/apiUri';
+import { chainInfo } from '../../lib/wallet';
 
 interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
   initialValues?: RolesValues;
   projectCreator?: GetOrganizationProfileByEmailQuery;
+  creditClassId?: string | null;
+  graphData?: ShaclGraphByUriQuery;
 }
 
 export interface RolesValues {
-  'regen:landOwner'?: FormValues;
-  'regen:landSteward'?: FormValues;
-  'regen:projectDeveloper'?: FormValues;
-  'regen:projectOriginator'?: FormValues;
+  'regen:landOwner'?: FormValues | ProfileFormValues;
+  'regen:landSteward'?: FormValues | ProfileFormValues;
+  'regen:projectDeveloper'?: FormValues | ProfileFormValues;
+  'regen:projectOriginator'?: FormValues | ProfileFormValues;
+  admin?: string;
 }
 
 const rolesErrorMessage = 'You must add one of the following roles.';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  storyCard: {
-    paddingBottom: 0,
-  },
-  field: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(12),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(10),
-    },
-  },
-  error: {
-    marginTop: 0,
-  },
-}));
 
 function getEntity(
   query?: GetOrganizationProfileByEmailQuery,
@@ -100,15 +98,20 @@ const RolesForm: React.FC<RolesFormProps> = ({
   submit,
   initialValues,
   projectCreator,
+  creditClassId,
+  graphData,
 }) => {
-  const [entities, setEntities] = useState<Array<FormValues>>([]);
-  const styles = useStyles();
+  const apiUri = getApiUri();
+  const { projectId } = useParams();
+  const [entities, setEntities] = useState<
+    Array<FormValues | ProfileFormValues>
+  >([]);
   const { confirmSave, isEdit } = useProjectEditContext();
-  const { data: graphData } = useShaclGraphByUriQuery({
-    variables: {
-      uri: 'http://regen.network/ProjectPageShape',
-    },
-  });
+
+  // In case of on chain credit class id, we show a unified version
+  // of the organization/individual form, the profile form.
+  // The profile info will get displayed on the project page by default.
+  const profile = !!creditClassId;
 
   const [createUser] = useReallyCreateUserMutation();
   const [createOrganization] = useReallyCreateOrganizationMutation();
@@ -121,7 +124,19 @@ const RolesForm: React.FC<RolesFormProps> = ({
     let initEntities: Array<FormValues> = [];
     const creatorEntity = getEntity(projectCreator);
     if (initialValues) {
-      let values = Object.values(initialValues);
+      // Remove 'admin' key from initialValues object
+      // because we don't want to add it to the entities yet.
+      // We might want to change that once Keplr login is implemented
+      // and the admin address is associated with an actual user/org profile.
+      const filteredValues: RolesValues = Object.keys(initialValues)
+        .filter(key => key !== 'admin')
+        .reduce((cur, key: string) => {
+          return Object.assign(cur, {
+            [key]: initialValues[key as keyof RolesValues],
+          });
+        }, {});
+
+      let values = Object.values(filteredValues);
       if (creatorEntity) {
         values = [creatorEntity, ...values];
       }
@@ -166,19 +181,36 @@ const RolesForm: React.FC<RolesFormProps> = ({
     });
   };
 
-  const validateEntity = async (
-    e: FormValues,
-  ): Promise<FormikErrors<FormValues>> => {
-    const errors: FormikErrors<FormValues> = {};
+  const validateEntity = async <T extends ProfileFormValues | FormValues>(
+    e: T,
+  ): Promise<{ [key in keyof T]?: string }> => {
+    const errors: { [key in keyof T]?: string } = {};
+    // We perform a separate validation for regen address
+    // because SHACL doesn't support bech32 address validation
+    const p = e as ProfileFormValues;
+    if (p['regen:address']) {
+      try {
+        Bech32Address.validate(
+          p['regen:address'],
+          chainInfo.bech32Config.bech32PrefixAccAddr,
+        );
+      } catch (e) {
+        const addrPath = 'regen:address' as keyof T;
+        errors[addrPath] = invalidAddress;
+      }
+    }
     if (graphData?.shaclGraphByUri?.graph) {
       const report = await validate(
         graphData.shaclGraphByUri.graph,
-        e,
+        { ...defaultProjectContext, ...e },
         'http://regen.network/ProjectPageRolesGroup',
       );
       for (const result of report.results) {
-        const path: keyof FormValues = result.path.value;
-        errors[path] = requiredMessage;
+        const path: string = result.path.value;
+        const compactedPath = getCompactedPath(path) as keyof T | undefined;
+        if (compactedPath) {
+          errors[compactedPath] = requiredMessage;
+        }
       }
     }
     return errors;
@@ -189,7 +221,10 @@ const RolesForm: React.FC<RolesFormProps> = ({
   ): Promise<FormikErrors<RolesValues>> => {
     const errors: FormikErrors<RolesValues> = {};
     if (graphData?.shaclGraphByUri?.graph) {
-      const projectPageData = { ...getProjectPageBaseData(), ...values };
+      const projectPageData = {
+        ...getProjectPageBaseData(creditClassId),
+        ...values,
+      };
       const report = await validate(
         graphData.shaclGraphByUri.graph,
         projectPageData,
@@ -355,6 +390,25 @@ const RolesForm: React.FC<RolesFormProps> = ({
     return Promise.resolve(updatedEntity);
   };
 
+  const saveProfile = async (
+    updatedEntity: ProfileFormValues,
+  ): Promise<ProfileFormValues> => {
+    if (!updatedEntity.id) {
+      const id = entities.length + 1;
+      updatedEntity.id = id.toString();
+      const newEntities = [...entities, { ...updatedEntity }];
+      setEntities(newEntities);
+    } else {
+      const updatedEntities = entities.map((existingEntity: any) =>
+        existingEntity.id === updatedEntity.id
+          ? { ...updatedEntity }
+          : existingEntity,
+      );
+      setEntities(updatedEntities);
+    }
+    return Promise.resolve(updatedEntity);
+  };
+
   return (
     <>
       <Formik
@@ -385,71 +439,99 @@ const RolesForm: React.FC<RolesFormProps> = ({
         {({ submitForm, isValid, isSubmitting, touched }) => {
           return (
             <Form translate="yes">
-              <OnBoardingCard className={styles.storyCard}>
-                <Subtitle
-                  size="lg"
-                  sx={{ color: 'primary.contrastText', mb: { xs: 10, sm: 12 } }}
-                >
-                  You must add one of the following roles.
-                </Subtitle>
+              <OnBoardingCard>
+                {!creditClassId && (
+                  <Subtitle
+                    size="lg"
+                    sx={{
+                      color: 'primary.contrastText',
+                      mb: { xs: 10, sm: 12 },
+                    }}
+                  >
+                    {rolesErrorMessage}
+                  </Subtitle>
+                )}
+                {!creditClassId && (
+                  <Field
+                    component={RoleField}
+                    label="Land Owner"
+                    optional
+                    description="The individual or organization that owns this land."
+                    name="regen:landOwner"
+                    options={entities}
+                    mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                    onSaveOrganization={saveOrganization}
+                    onSaveIndividual={saveIndividual}
+                    validateEntity={validateEntity}
+                    apiServerUrl={apiUri}
+                    projectId={projectId}
+                  />
+                )}
+                {!creditClassId && (
+                  <Field
+                    component={RoleField}
+                    label="Land Steward"
+                    optional
+                    description="The individual or organization that is performing the work on the ground. This can be a farmer, rancher, conservationist, forester, fisherman, etc."
+                    name="regen:landSteward"
+                    options={entities}
+                    mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                    onSaveOrganization={saveOrganization}
+                    onSaveIndividual={saveIndividual}
+                    validateEntity={validateEntity}
+                    apiServerUrl={apiUri}
+                    projectId={projectId}
+                  />
+                )}
                 <Field
-                  classes={{ root: styles.field }}
-                  component={RoleField}
-                  label="Land Owner"
-                  optional
-                  description="The individual or organization that owns this land."
-                  name="regen:landOwner"
-                  options={entities}
-                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                  onSaveOrganization={saveOrganization}
-                  onSaveIndividual={saveIndividual}
-                  validateEntity={validateEntity}
-                />
-                <Field
-                  classes={{ root: styles.field }}
-                  component={RoleField}
-                  label="Land Steward"
-                  optional
-                  description="The individual or organization that is performing the work on the ground. This can be a farmer, rancher, conservationist, forester, fisherman, etc."
-                  name="regen:landSteward"
-                  options={entities}
-                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                  onSaveOrganization={saveOrganization}
-                  onSaveIndividual={saveIndividual}
-                  validateEntity={validateEntity}
-                />
-                <Field
-                  classes={{ root: styles.field }}
                   component={RoleField}
                   label="Project Developer"
                   optional
-                  description="The individual or organization that is in charge of managing the project and is the main point of contact with Regen Registry. "
+                  description={`The individual or organization that is in charge of managing the project and ${
+                    profile
+                      ? 'will appear on the project page'
+                      : 'is the main point of contact with Regen Registry'
+                  }.`}
                   name="regen:projectDeveloper"
                   options={entities}
                   mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
                   onSaveOrganization={saveOrganization}
                   onSaveIndividual={saveIndividual}
+                  onSaveProfile={saveProfile}
                   validateEntity={validateEntity}
+                  profile={profile}
+                  apiServerUrl={apiUri}
+                  projectId={projectId}
                 />
-                <Field
-                  classes={{ root: styles.field }}
-                  component={RoleField}
-                  label="Project Originator"
-                  optional
-                  description="The individual or organization that helps initiate the project."
-                  name="regen:projectOriginator"
-                  options={entities}
-                  mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                  onSaveOrganization={saveOrganization}
-                  onSaveIndividual={saveIndividual}
-                  validateEntity={validateEntity}
-                />
+                {!creditClassId && (
+                  <Field
+                    component={RoleField}
+                    label="Project Originator"
+                    optional
+                    description="The individual or organization that helps initiate the project."
+                    name="regen:projectOriginator"
+                    options={entities}
+                    mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                    onSaveOrganization={saveOrganization}
+                    onSaveIndividual={saveIndividual}
+                    validateEntity={validateEntity}
+                    apiServerUrl={apiUri}
+                    projectId={projectId}
+                  />
+                )}
+                {creditClassId && (
+                  <Field
+                    name="admin"
+                    type="text"
+                    label="Admin"
+                    component={TextField}
+                    disabled
+                  />
+                )}
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
-                saveDisabled={
-                  !isValid || isSubmitting || !Object.keys(touched).length
-                }
+                saveDisabled={!isValid || isSubmitting}
               />
             </Form>
           );

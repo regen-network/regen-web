@@ -40,14 +40,6 @@ import { RegenModalProps } from '../modal';
  */
 
 const useStyles = makeStyles((theme: Theme) => ({
-  senderField: {
-    '& label': {
-      color: `${theme.palette.primary.contrastText} !important`,
-    },
-    '& .MuiInputBase-formControl': {
-      backgroundColor: theme.palette.info.light,
-    },
-  },
   checkboxLabel: {
     marginTop: theme.spacing(10.75),
   },
@@ -136,7 +128,6 @@ const CreditSendForm: React.FC<FormProps> = ({
             type="text"
             label="Sender"
             component={TextField}
-            className={styles.senderField}
             disabled
           />
           <Field

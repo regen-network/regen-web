@@ -9,8 +9,15 @@ import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
 // import { VideoInput } from 'web-components/lib/components/inputs/VideoInput'; //TODO: make this component easier to use with share links from youtube, vimeo, etc
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
-
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import {
+  urlType,
+  getURLInitialValue,
+} from 'web-components/lib/utils/schemaURL';
+import {
+  validate,
+  getProjectPageBaseData,
+  getCompactedPath,
+} from '../../lib/rdf';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
 import { ProjectPageFooter } from '../molecules';
@@ -19,11 +26,6 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
   initialValues?: MediaValues;
-}
-
-export interface urlType {
-  '@type': 'schema:URL';
-  '@value'?: string;
 }
 
 interface urlList {
@@ -43,14 +45,6 @@ export interface MediaValuesErrors {
   'regen:galleryPhotos'?: string;
   'regen:landStewardPhoto'?: valueObject;
   'regen:videoURL'?: valueObject;
-}
-
-function getURLInitialValue(value?: urlType): urlType {
-  return (
-    value || {
-      '@type': 'schema:URL',
-    }
-  );
 }
 
 function getURLListInitialValue(value?: urlList): urlList {
@@ -162,13 +156,16 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
             const report = await validate(
               graphData.shaclGraphByUri.graph,
               projectPageData,
-              'regen:ProjectPageMediaGroup',
+              'http://regen.network/ProjectPageMediaGroup',
             );
             for (const result of report.results) {
               const path: string | undefined = result.path?.value;
               if (path) {
-                if (path === 'regen:previewPhoto') {
-                  errors[path] = { '@value': requiredMessage };
+                const compactedPath = getCompactedPath(path) as
+                  | keyof MediaValuesErrors
+                  | undefined;
+                if (compactedPath === 'regen:previewPhoto') {
+                  errors[compactedPath] = { '@value': requiredMessage };
                 } else {
                   // for gallery photos, display general error message below "Gallery Photos" section
                   errors['regen:galleryPhotos'] = 'You must add 4 photos';

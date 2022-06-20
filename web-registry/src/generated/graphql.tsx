@@ -20489,6 +20489,22 @@ export type CreateUserOrganizationIfNeededMutation = (
   )> }
 );
 
+export type CreateWalletMutationVariables = Exact<{
+  input: CreateWalletInput;
+}>;
+
+
+export type CreateWalletMutation = (
+  { __typename?: 'Mutation' }
+  & { createWallet?: Maybe<(
+    { __typename?: 'CreateWalletPayload' }
+    & { wallet?: Maybe<(
+      { __typename?: 'Wallet' }
+      & Pick<Wallet, 'id' | 'addr'>
+    )> }
+  )> }
+);
+
 export type CreditClassByOnChainIdQueryVariables = Exact<{
   onChainId: Scalars['String'];
 }>;
@@ -20652,6 +20668,26 @@ export type GetUserProfileByEmailQuery = (
         & ProjectFragment
       ) }
     )> }
+  )> }
+);
+
+export type WalletByAddrQueryVariables = Exact<{
+  addr: Scalars['String'];
+}>;
+
+
+export type WalletByAddrQuery = (
+  { __typename?: 'Query' }
+  & { walletByAddr?: Maybe<(
+    { __typename?: 'Wallet' }
+    & Pick<Wallet, 'id' | 'addr'>
+    & { projectsByWalletId: (
+      { __typename?: 'ProjectsConnection' }
+      & { nodes: Array<Maybe<(
+        { __typename?: 'Project' }
+        & Pick<Project, 'id' | 'handle' | 'metadata'>
+      )>> }
+    ) }
   )> }
 );
 
@@ -21822,6 +21858,42 @@ export function useCreateUserOrganizationIfNeededMutation(baseOptions?: Apollo.M
 export type CreateUserOrganizationIfNeededMutationHookResult = ReturnType<typeof useCreateUserOrganizationIfNeededMutation>;
 export type CreateUserOrganizationIfNeededMutationResult = Apollo.MutationResult<CreateUserOrganizationIfNeededMutation>;
 export type CreateUserOrganizationIfNeededMutationOptions = Apollo.BaseMutationOptions<CreateUserOrganizationIfNeededMutation, CreateUserOrganizationIfNeededMutationVariables>;
+export const CreateWalletDocument = gql`
+    mutation CreateWallet($input: CreateWalletInput!) {
+  createWallet(input: $input) {
+    wallet {
+      id
+      addr
+    }
+  }
+}
+    `;
+export type CreateWalletMutationFn = Apollo.MutationFunction<CreateWalletMutation, CreateWalletMutationVariables>;
+
+/**
+ * __useCreateWalletMutation__
+ *
+ * To run a mutation, you first call `useCreateWalletMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateWalletMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createWalletMutation, { data, loading, error }] = useCreateWalletMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateWalletMutation(baseOptions?: Apollo.MutationHookOptions<CreateWalletMutation, CreateWalletMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateWalletMutation, CreateWalletMutationVariables>(CreateWalletDocument, options);
+      }
+export type CreateWalletMutationHookResult = ReturnType<typeof useCreateWalletMutation>;
+export type CreateWalletMutationResult = Apollo.MutationResult<CreateWalletMutation>;
+export type CreateWalletMutationOptions = Apollo.BaseMutationOptions<CreateWalletMutation, CreateWalletMutationVariables>;
 export const CreditClassByOnChainIdDocument = gql`
     query CreditClassByOnChainId($onChainId: String!) {
   creditClassByOnChainId(onChainId: $onChainId) {
@@ -22139,6 +22211,49 @@ export function useGetUserProfileByEmailLazyQuery(baseOptions?: Apollo.LazyQuery
 export type GetUserProfileByEmailQueryHookResult = ReturnType<typeof useGetUserProfileByEmailQuery>;
 export type GetUserProfileByEmailLazyQueryHookResult = ReturnType<typeof useGetUserProfileByEmailLazyQuery>;
 export type GetUserProfileByEmailQueryResult = Apollo.QueryResult<GetUserProfileByEmailQuery, GetUserProfileByEmailQueryVariables>;
+export const WalletByAddrDocument = gql`
+    query walletByAddr($addr: String!) {
+  walletByAddr(addr: $addr) {
+    id
+    addr
+    projectsByWalletId {
+      nodes {
+        id
+        handle
+        metadata
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useWalletByAddrQuery__
+ *
+ * To run a query within a React component, call `useWalletByAddrQuery` and pass it any options that fit your needs.
+ * When your component renders, `useWalletByAddrQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useWalletByAddrQuery({
+ *   variables: {
+ *      addr: // value for 'addr'
+ *   },
+ * });
+ */
+export function useWalletByAddrQuery(baseOptions: Apollo.QueryHookOptions<WalletByAddrQuery, WalletByAddrQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<WalletByAddrQuery, WalletByAddrQueryVariables>(WalletByAddrDocument, options);
+      }
+export function useWalletByAddrLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<WalletByAddrQuery, WalletByAddrQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<WalletByAddrQuery, WalletByAddrQueryVariables>(WalletByAddrDocument, options);
+        }
+export type WalletByAddrQueryHookResult = ReturnType<typeof useWalletByAddrQuery>;
+export type WalletByAddrLazyQueryHookResult = ReturnType<typeof useWalletByAddrLazyQuery>;
+export type WalletByAddrQueryResult = Apollo.QueryResult<WalletByAddrQuery, WalletByAddrQueryVariables>;
 export const MoreProjectsDocument = gql`
     query MoreProjects {
   allProjects {

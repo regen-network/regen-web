@@ -9,14 +9,21 @@ interface Props {
   component: React.ComponentType;
 }
 
-const KeplrRoute = ({ component: Component }: Props): JSX.Element | null => {
+const KeplrRoute = ({ component: Component }: Props): JSX.Element => {
   const { loaded, wallet } = useWallet();
 
-  return chainId && wallet?.shortAddress ? (
-    <Component />
-  ) : loaded ? ( // <-- this helps avoid flashing the error banner on refresh
-    <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
-  ) : null;
+  const connected = chainId && wallet?.shortAddress;
+  // this helps avoid flashing the error banner on refresh
+  const displayErrorBanner = !connected && loaded;
+
+  return (
+    <>
+      {connected && <Component />}
+      {displayErrorBanner && (
+        <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
+      )}
+    </>
+  );
 };
 
 export { KeplrRoute };

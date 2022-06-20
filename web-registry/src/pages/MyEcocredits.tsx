@@ -221,7 +221,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       setCardItems([
         {
           label: 'batch denom',
-          value: { name: batchDenom },
+          value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
         },
         {
           label: 'recipient',
@@ -293,7 +293,7 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
       setCardItems([
         {
           label: 'batch denom',
-          value: { name: batchDenom },
+          value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
         },
         {
           label: 'number of credits',

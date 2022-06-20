@@ -192,6 +192,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
               country={country}
               optional={!postalCode}
               name={`${arrayPrefix}stateProvince`}
+              initialSelection={stateProvince}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>

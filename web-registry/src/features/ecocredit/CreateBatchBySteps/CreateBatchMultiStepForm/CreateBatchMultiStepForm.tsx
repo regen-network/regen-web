@@ -30,6 +30,7 @@ export type CreateBatchFormValues = CreditBasicsFormValues &
   RecipientsFormValues;
 
 export default function CreateBatchMultiStepForm(): React.ReactElement {
+  // state for fill-the-form flow
   const {
     data,
     activeStep,
@@ -41,6 +42,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     handleBack,
   } = useMultiStep<CreateBatchFormValues>();
 
+  // state for submit flow
   const {
     status: submitStatus,
     // createBatchResponse,

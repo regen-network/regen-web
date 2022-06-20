@@ -16,7 +16,7 @@ import {
   Label,
   Subtitle,
 } from 'web-components/lib/components/typography';
-import { Box } from '@mui/material';
+import { Box, Link } from '@mui/material';
 
 // TODO: Only covers case C01
 
@@ -80,6 +80,13 @@ function CreditBatchInfo({ data }: CreditBatchInfoProps): JSX.Element {
         name={'VCS retirement serial number'}
         value={metadata['regen:vcsRetirementSerialNumber']}
       />
+      {metadata['regen:additionalCertifications'].map((cert, index) => (
+        <AdditionalCertificationDisplay
+          key={`additional-certification-${index}`}
+          name={cert['schema:name']}
+          url={cert['schema:url']['@value']}
+        />
+      ))}
     </OnBoardingCard>
   );
 }
@@ -136,6 +143,31 @@ function ItemDisplay({ name, value }: ItemDisplayProps): JSX.Element {
         {name}
       </Subtitle>
       <Body size="lg">{value}</Body>
+    </>
+  );
+}
+
+type AdditionalCertificationDisplayProps = {
+  name: string;
+  url?: string;
+};
+
+function AdditionalCertificationDisplay({
+  name,
+  url,
+}: AdditionalCertificationDisplayProps): JSX.Element {
+  return (
+    <>
+      <Subtitle size="lg" sx={{ mt: 9, mb: 2 }}>
+        Additional certification url
+      </Subtitle>
+      {url ? (
+        <Link sx={{ color: 'secondary.main' }} href={url} target="_blank">
+          {url}
+        </Link>
+      ) : (
+        <Body size="lg">{name}</Body>
+      )}
     </>
   );
 }

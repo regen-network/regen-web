@@ -29,6 +29,9 @@ function prepareMetadata(
   const retirementSerialNumber =
     partialMetadata['regen:vcsRetirementSerialNumber'];
 
+  const additionalCertifications =
+    partialMetadata['regen:additionalCertifications'];
+
   if (!projectId || !retirementSerialNumber) return;
 
   const metadata: VCSBatchMetadataLD = {
@@ -40,17 +43,8 @@ function prepareMetadata(
     '@type': 'regen:C01-CreditBatch',
     'regen:vcsProjectId': projectId,
     'regen:vcsRetirementSerialNumber': retirementSerialNumber,
-    // TODO - additionalCertifications
-    'regen:additionalCertifications': [],
+    'regen:additionalCertifications': additionalCertifications || [],
   };
-  // TODO - additionalCertifications
-  // {
-  //   'schema:name': '',
-  //   'schema:url': {
-  //     '@type': 'schema:URL',
-  //     '@value': '',
-  //   },
-  // }
 
   return metadata;
 }
@@ -82,8 +76,6 @@ async function generateIri<T>(
     if (!data || data.error) return;
     return data;
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error('Error:', err);
     throw new Error(`Error in iri generation service: ${err}`);
   }
 }

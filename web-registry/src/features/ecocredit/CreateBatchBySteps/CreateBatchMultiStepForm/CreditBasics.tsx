@@ -146,17 +146,15 @@ export default function CreditBasics(): React.ReactElement {
             component={TextField}
           />
 
-          {/* TODO - Disabled */}
-
-          {/* <AdditionalCerfications
+          <AdditionalCerfications
             certifications={
               // values.metadata?.['regen:additionalCertifications'] as NameUrl[]
               // (values.metadata as Partial<VCSBatchMetadataLD>) &&
-              (values.metadata?.[
+              (values.metadata as VCSBatchMetadataLD)[
                 'regen:additionalCertifications'
-              ] as NameUrl[]) || []
+              ] || []
             }
-          /> */}
+          />
         </>
       ) : values?.classId ? (
         <MetadataJSONField required={!isVCS} />
@@ -165,7 +163,6 @@ export default function CreditBasics(): React.ReactElement {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const AdditionalCerfications: React.FC<{
   certifications: NameUrl[];
 }> = ({ certifications }) => {

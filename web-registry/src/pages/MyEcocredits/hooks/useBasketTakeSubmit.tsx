@@ -1,15 +1,13 @@
-import { RegenApi } from '@regen-network/api/lib';
 import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
-import { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm';
-import { BasketTokens } from '../../../hooks/useBasketTokens';
-import { useStateSetter } from '../../../types/react/use-state';
-import { Item } from 'web-components/lib/components/modal/TxModal';
-import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
 import { useCallback } from 'react';
+import { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm';
+import { Item } from 'web-components/lib/components/modal/TxModal';
+import { BasketTokens } from '../../../hooks/useBasketTokens';
+import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
+import { useStateSetter } from '../../../types/react/use-state';
 
 type Props = {
-  api?: RegenApi;
   accountAddress?: string;
   baskets?: QueryBasketsResponse;
   basketTakeTitle: string;
@@ -22,7 +20,6 @@ type Props = {
 type ReturnType = (values: MsgTakeValues) => Promise<void>;
 
 const useBasketTakeSubmit = ({
-  api,
   accountAddress,
   baskets,
   basketTakeTitle,
@@ -33,8 +30,7 @@ const useBasketTakeSubmit = ({
 }: Props): ReturnType => {
   const basketTakeSubmit = useCallback(
     async (values: MsgTakeValues): Promise<void> => {
-      if (!api?.msgClient?.broadcast || !accountAddress)
-        return Promise.reject();
+      if (!accountAddress) return Promise.reject();
 
       const amount = values?.amount;
       const basket = baskets?.baskets.find(
@@ -73,7 +69,6 @@ const useBasketTakeSubmit = ({
     },
     [
       accountAddress,
-      api?.msgClient?.broadcast,
       basketTakeTitle,
       baskets?.baskets,
       setBasketTakeTokens,

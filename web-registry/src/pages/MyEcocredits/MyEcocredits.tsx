@@ -68,7 +68,6 @@ const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
 import { BasketTokens } from '../../hooks/useBasketTokens';
 import useMsgClient from '../../hooks/useMsgClient';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
-import { useLedger } from '../../ledger';
 import { getHashUrl } from '../../lib/block-explorer';
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
@@ -126,7 +125,6 @@ export const MyEcocredits = (): JSX.Element => {
     setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
 
-  const { api } = useLedger();
   const styles = useStyles();
   const theme = useTheme();
   const baskets = useQueryBaskets();
@@ -150,7 +148,6 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const basketTakeSubmit = useBasketTakeSubmit({
-    api,
     accountAddress,
     basketTakeTitle,
     baskets,
@@ -161,7 +158,6 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const creditSendSubmit = useCreditSendSubmit({
-    api,
     accountAddress,
     creditSendOpen,
     creditSendTitle,
@@ -187,7 +183,6 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const creditRetireSubmit = useCreditRetireSubmit({
-    api,
     accountAddress,
     creditRetireOpen,
     creditRetireTitle,

@@ -1,4 +1,3 @@
-import { RegenApi } from '@regen-network/api/lib';
 import { MsgRetire } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
 import { useCallback } from 'react';
 import { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
@@ -8,7 +7,6 @@ import { BatchInfoWithBalance } from '../../../types/ledger/ecocredit';
 import { useStateSetter } from '../../../types/react/use-state';
 
 type Props = {
-  api?: RegenApi;
   accountAddress?: string;
   credits: BatchInfoWithBalance[];
   creditRetireOpen: number;
@@ -22,7 +20,6 @@ type Props = {
 type ReturnType = (values: CreditRetireFormValues) => Promise<void>;
 
 const useCreditRetireSubmit = ({
-  api,
   accountAddress,
   credits,
   creditRetireOpen,
@@ -34,8 +31,7 @@ const useCreditRetireSubmit = ({
 }: Props): ReturnType => {
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormValues): Promise<void> => {
-      if (!api?.msgClient?.broadcast || !accountAddress)
-        return Promise.reject();
+      if (!accountAddress) return Promise.reject();
       const batchDenom = credits[creditRetireOpen].batch_denom;
       const amount = values.retiredAmount.toString();
       const msg = MsgRetire.fromPartial({
@@ -72,7 +68,6 @@ const useCreditRetireSubmit = ({
     },
     [
       accountAddress,
-      api?.msgClient?.broadcast,
       creditRetireOpen,
       creditRetireTitle,
       credits,

@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
+import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
 import { useMultiStep } from '../../../../components/templates/MultiStep';
 
@@ -57,6 +58,10 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     ? Yup.object(formModel.validationSchemaFields) // all fields
     : formModel.validationSchema[activeStep];
 
+  const [creditClassSelected, setCreditClassSelected] =
+    React.useState<Option>();
+  const [projectSelected, setProjectSelected] = React.useState<Option>();
+
   React.useEffect(() => {
     if (submitStatus === 'finished') {
       handleNext();
@@ -71,7 +76,11 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     if (isReviewStep) {
       createBatch(values);
     } else {
-      handleSaveNext(values);
+      const dataDisplay = {
+        creditClass: creditClassSelected,
+        project: projectSelected,
+      };
+      handleSaveNext(values, dataDisplay);
       formikHelpers.setTouched({});
       formikHelpers.setSubmitting(false);
     }
@@ -80,7 +89,12 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
   function renderStep(activeStep: number): React.ReactElement {
     switch (activeStep) {
       case 0:
-        return <CreditBasics />;
+        return (
+          <CreditBasics
+            saveCreditClassSelected={setCreditClassSelected}
+            saveProjectSelected={setProjectSelected}
+          />
+        );
       case 1:
         return <Recipients />;
       case 2:
@@ -105,7 +119,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
         {({ submitForm, isValid, isSubmitting }) => (
           <Form id={formModel.formId}>
             {renderStep(activeStep)}
-            {/* TODO ? - Move to: MultiStepSection >>> >>> StepperSection >>> StepperControls ?? */}
+            {/* TODO ? - Move to?: MultiStepSection > StepperSection > StepperControls */}
             {!isLastStep && (
               <SaveFooter
                 onPrev={activeStep > 0 ? handleBack : undefined}

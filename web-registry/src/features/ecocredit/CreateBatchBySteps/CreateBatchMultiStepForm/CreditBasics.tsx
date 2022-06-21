@@ -24,6 +24,7 @@ import {
 } from 'web-components/lib/components/inputs/validation';
 import { NameUrl } from 'web-components/lib/types/rdf';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
 import {
   ProjectSelect,
@@ -70,13 +71,43 @@ export const initialValues = {
   classId: '',
   startDate: null,
   endDate: null,
-  metadata: '', // undefined,
+  metadata: '',
 };
 
-export default function CreditBasics(): React.ReactElement {
-  const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
+type Props = {
+  saveCreditClassSelected: (creditClass: Option) => void;
+  saveProjectSelected: (project: Option) => void;
+};
 
+export default function CreditBasics({
+  saveCreditClassSelected,
+  saveProjectSelected,
+}: Props): React.ReactElement {
+  const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
+  const metadata = values.metadata as VCSBatchMetadataLD;
+  const projectId = metadata['regen:vcsProjectId'];
   const isVCS = values.classId === 'C01';
+
+  // to store on partial submit the selected credit class option,
+  // and the project option in order to complete display name in Review step
+  const [creditClassOptions, setCreditClassOptions] =
+    React.useState<Option[]>();
+  const [projectOptions, setProjectOptions] = React.useState<Option[]>();
+
+  React.useEffect(() => {
+    const isFound = creditClassOptions?.find(
+      item => item.value === values.classId,
+    );
+    if (isFound) saveCreditClassSelected(isFound);
+  }, [values.classId, creditClassOptions, saveCreditClassSelected]);
+
+  React.useEffect(() => {
+    if (!projectId) return;
+    const isFound = projectOptions?.find(
+      item => item.value.toString() === projectId.toString(),
+    );
+    if (isFound) saveProjectSelected(isFound);
+  }, [projectId, projectOptions, saveProjectSelected]);
 
   React.useEffect(() => {
     validateForm();
@@ -98,12 +129,17 @@ export default function CreditBasics(): React.ReactElement {
 
   return (
     <OnBoardingCard>
-      <CreditClassSelect<CreditBasicsFormValues> name="classId" required />
+      <CreditClassSelect<CreditBasicsFormValues>
+        name="classId"
+        required
+        saveOptions={setCreditClassOptions}
+      />
       <ProjectSelect
         creditClassId={values.classId}
         name="metadata['regen:vcsProjectId']"
         required
         initialSelection={functionCheckPrevSelection(isVCS, values)}
+        saveOptions={setProjectOptions}
       />
       <Box
         sx={{
@@ -148,8 +184,6 @@ export default function CreditBasics(): React.ReactElement {
 
           <AdditionalCerfications
             certifications={
-              // values.metadata?.['regen:additionalCertifications'] as NameUrl[]
-              // (values.metadata as Partial<VCSBatchMetadataLD>) &&
               (values.metadata as VCSBatchMetadataLD)[
                 'regen:additionalCertifications'
               ] || []
@@ -178,6 +212,7 @@ const AdditionalCerfications: React.FC<{
           <>
             {certifications.map((cert, index) => (
               <Box
+                key={`additional-certifications-${index}`}
                 sx={{
                   display: 'flex',
                   justifyContent: 'space-between',

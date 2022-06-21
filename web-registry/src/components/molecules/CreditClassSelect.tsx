@@ -13,6 +13,7 @@ import { useAllCreditClassQuery } from '../../generated/sanity-graphql';
 interface Props {
   name?: string;
   required?: boolean;
+  saveOptions?: (options: Option[]) => void;
 }
 
 const defaultCCOption = { value: '', label: 'Choose Credit Class' };
@@ -20,6 +21,7 @@ const defaultCCOption = { value: '', label: 'Choose Credit Class' };
 export function CreditClassSelect<T>({
   name = 'classId',
   required,
+  saveOptions,
 }: Props): React.ReactElement {
   const { setFieldValue } = useFormikContext<T>();
   const [creditClassOptions, setCreditClassOptions] = useState<Option[]>();
@@ -44,11 +46,13 @@ export function CreditClassSelect<T>({
           };
         }) || [];
 
-      const creditClassOptions = [defaultCCOption, ...ccOptions];
+      // optionally, saved in parent container
+      if (saveOptions) saveOptions(ccOptions);
 
+      const creditClassOptions = [defaultCCOption, ...ccOptions];
       setCreditClassOptions(creditClassOptions);
     }
-  }, [onChainClasses, creditClassData, setFieldValue]);
+  }, [onChainClasses, creditClassData, setFieldValue, saveOptions]);
 
   return (
     <Field

@@ -17,13 +17,15 @@ import {
   Subtitle,
 } from 'web-components/lib/components/typography';
 import { Box, Link } from '@mui/material';
+import { formatDate } from 'web-components/lib/utils/format';
+import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
 // TODO: Only covers case C01
 
 export default function Review(): JSX.Element {
   const { values, validateForm, isValid } =
     useFormikContext<CreateBatchFormValues>();
-  const { handleResetReview } = useMultiStep();
+  const { dataDisplay, handleResetReview } = useMultiStep();
 
   // validate form on mount
   React.useEffect(() => {
@@ -37,7 +39,11 @@ export default function Review(): JSX.Element {
 
   return (
     <>
-      <CreditBatchInfo data={values as CreditBasicsFormValues} />
+      <CreditBatchInfo
+        data={values as CreditBasicsFormValues}
+        dataDisplay={dataDisplay}
+        // reviewDisplay={reviewDisplay}
+      />
       {values.recipients.map((recipient, index) => (
         <RecipientInfo
           key={`recipient-${index + 1}`}
@@ -51,9 +57,16 @@ export default function Review(): JSX.Element {
 
 type CreditBatchInfoProps = {
   data: CreditBasicsFormValues;
+  dataDisplay: {
+    creditClass: Option;
+    project: Option;
+  };
 };
 
-function CreditBatchInfo({ data }: CreditBatchInfoProps): JSX.Element {
+function CreditBatchInfo({
+  data,
+  dataDisplay,
+}: CreditBatchInfoProps): JSX.Element {
   const { handleActiveStep } = useMultiStep();
   const metadata = data.metadata as VCSBatchMetadataLD;
 
@@ -70,17 +83,20 @@ function CreditBatchInfo({ data }: CreditBatchInfoProps): JSX.Element {
         <Label size="sm">Credit batch info</Label>
         <EditButton onClick={() => handleActiveStep(0)} />
       </Box>
-      <ItemDisplay name={'Credit Class'} value={data.classId} />
-      <ItemDisplay name={'Project'} value={metadata['regen:vcsProjectId']} />
+      <ItemDisplay
+        name={'Credit Class'}
+        value={dataDisplay.creditClass.label}
+      />
+      <ItemDisplay name={'Project'} value={dataDisplay.project.label} />
       <ItemDisplay
         name={'Start and end date'}
-        value={`${data.startDate} - ${data.endDate}`}
+        value={`${formatDate(data.startDate)} - ${formatDate(data.endDate)}`}
       />
       <ItemDisplay
         name={'VCS retirement serial number'}
         value={metadata['regen:vcsRetirementSerialNumber']}
       />
-      {metadata['regen:additionalCertifications'].map((cert, index) => (
+      {metadata['regen:additionalCertifications']?.map((cert, index) => (
         <AdditionalCertificationDisplay
           key={`additional-certification-${index}`}
           name={cert['schema:name']}

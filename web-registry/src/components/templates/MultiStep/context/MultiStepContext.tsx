@@ -26,6 +26,7 @@ type ContextProps<T extends object> = {
   steps: Step[] | undefined;
   data: T;
   maxAllowedStep: number;
+  dataDisplay?: any;
   activeStep: number;
   isLastStep: boolean;
   isReviewStep: boolean;
@@ -34,7 +35,7 @@ type ContextProps<T extends object> = {
   handleNext: () => void;
   handleBack: () => void;
   handleSave: (formValues: T, nextStep: number) => void;
-  handleSaveNext: (formValues: T) => void;
+  handleSaveNext: (formValues: T, dataDisplay: any) => void;
   handleResetReview: (formValues: T) => void;
 };
 
@@ -64,6 +65,7 @@ const MultiStepContext = React.createContext<ContextProps<{}>>(initialValues);
 
 type FormData<T> = {
   formValues: T;
+  dataDisplay?: any; // optional, complementary data to display in review step (ie. projectName, because value field is projectId)
   maxAllowedStep: number;
 };
 
@@ -115,20 +117,28 @@ export function MultiStepProvider<T extends object>({
     goBack();
   };
 
-  const handleSave = (formValues: T | {}, nextStep: number): void => {
-    saveData({
+  const handleSave = (
+    formValues: T | {},
+    nextStep: number,
+    dataDisplay?: any,
+  ): void => {
+    let _data: FormData<T> = {
       formValues: formValues as T,
       maxAllowedStep: nextStep,
-    });
+    };
+    if (dataDisplay) _data.dataDisplay = dataDisplay;
+    saveData(_data);
   };
 
-  const handleSaveNext = (formValues: T | {}): void => {
+  const handleSaveNext = (formValues: T | {}, dataDisplay?: any): void => {
     const nextStep = activeStep + 1;
     const maxAllowed = Math.max(nextStep, maxAllowedStep);
-    handleSave(formValues, maxAllowed);
+    handleSave(formValues, maxAllowed, dataDisplay);
     handleNext();
   };
 
+  // this reset does not clean the stored data, it simply forces the form to start
+  // from step 0 so that the form itself validates as the flow is carried out manually.
   const handleResetReview = (formValues: T | {}): void => {
     // reset to step 0, both active (local) and allowed (storage) states
     handleSave(formValues, 0);
@@ -139,6 +149,7 @@ export function MultiStepProvider<T extends object>({
     steps,
     data: data?.formValues || initialValues,
     maxAllowedStep,
+    dataDisplay: data?.dataDisplay,
     activeStep,
     isLastStep,
     isReviewStep,

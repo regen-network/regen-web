@@ -1,1 +1,1 @@
-export { ChooseCreditClass as default } from './ChooseCreditClass';
+export { ChooseCreditClassPage as default } from './ChooseCreditClassPage';

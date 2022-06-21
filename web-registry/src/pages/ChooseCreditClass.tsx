@@ -6,12 +6,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
+import { validate, getProjectPageBaseData } from '../lib/rdf';
 import {
   useUpdateProjectByIdMutation,
   useAllCreditClassesQuery,
   useShaclGraphByUriQuery,
-} from '../../generated/graphql';
+} from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {

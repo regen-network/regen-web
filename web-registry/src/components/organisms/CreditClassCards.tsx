@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Grid from '@mui/material/Grid';
+import Grid, { GridProps } from '@mui/material/Grid';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
@@ -19,13 +19,7 @@ import { onChainClassRegExp } from '../../lib/ledger';
 type Props = {
   btnText: string;
   creditClassesContent?: AllCreditClassQuery['allCreditClass'];
-  justifyContent?:
-    | 'center'
-    | 'space-around'
-    | 'space-between'
-    | 'space-evenly'
-    | 'flex-end'
-    | 'flex-start';
+  justifyContent?: GridProps['justifyContent'];
   classes?: {
     root?: string;
     card?: string;

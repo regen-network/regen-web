@@ -1,10 +1,13 @@
 import * as React from 'react';
 import Tabs, { RegenTab } from 'web-components/lib/components/tabs';
+import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
+import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import {
   DocumentationTable,
   DocumentRowData,
 } from 'web-components/lib/components/table/DocumentationTable';
-
+import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
+import CoBenefitsIcon from 'web-components/lib/components/icons/CoBenefitsIcon';
 import CreditDetails, {
   CreditInfoProps,
 } from 'web-components/lib/components/credits/CreditDetails';
@@ -76,3 +79,18 @@ const tabs: RegenTab[] = [creditDetailsTab, documentationTab];
 export const mrvTabs = (): JSX.Element => (
   <Tabs background="./background.jpg" tabs={tabs} />
 );
+
+const demoTabs: IconTabProps[] = [
+  {
+    label: 'Portfolio',
+    icon: <CoBenefitsIcon />,
+    children: <>portolio content</>,
+  },
+  {
+    label: 'Projects',
+    icon: <ProjectPageIcon />,
+    children: <>projects content</>,
+  },
+];
+
+export const iconTabs = (): JSX.Element => <IconTabs tabs={demoTabs} />;

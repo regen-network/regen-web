@@ -1,17 +1,20 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import { isEmpty } from 'lodash';
 
 import {
   FormValues,
   isIndividual,
 } from 'web-components/lib/components/inputs/RoleField';
+import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
 import {
   OnboardingFormTemplate,
   EditFormTemplate,
 } from '../components/templates';
 import { RolesForm, RolesValues } from '../components/organisms';
 import { useProjectEditContext } from '../pages/ProjectEdit';
+import { useWallet } from '../lib/wallet';
 import {
   useProjectByIdQuery,
   useGetOrganizationProfileByEmailQuery,
@@ -19,11 +22,15 @@ import {
   PartyFieldsFragment,
   Maybe,
   ProjectPatch,
+  useShaclGraphByUriQuery,
 } from '../generated/graphql';
+import { getProjectShapeIri } from '../lib/rdf';
 
 function getPartyIds(
+  i: number,
   party?: Maybe<{ __typename?: 'Party' } & PartyFieldsFragment>,
-): Partial<FormValues> | null {
+  autoIncrementId?: boolean,
+): Partial<FormValues | ProfileFormValues> | null {
   if (party) {
     const p = {
       partyId: party.id,
@@ -43,13 +50,29 @@ function getPartyIds(
       };
     }
   }
+  if (autoIncrementId) {
+    return { id: (i + 1).toString() };
+  }
 
   return null;
 }
 
-function stripPartyIds(values: FormValues | undefined): FormValues | undefined {
-  if (values?.id && values?.partyId) {
+function isFormValues(
+  values: FormValues | ProfileFormValues | undefined,
+): values is FormValues {
+  if ((values as FormValues)?.partyId) {
+    return true;
+  }
+  return false;
+}
+
+function stripPartyIds(
+  values: FormValues | ProfileFormValues | undefined,
+): FormValues | undefined {
+  if (values?.id) {
     delete values.id;
+  }
+  if (isFormValues(values)) {
     delete values.partyId;
     if (
       !isIndividual(values) &&
@@ -86,11 +109,16 @@ const Roles: React.FC = () => {
   const { user } = useAuth0();
   const userEmail = user?.email;
 
+  const { wallet } = useWallet();
+
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
   });
+  const project = data?.projectById;
+  const creditClassId = project?.creditClassByCreditClassId?.onChainId;
+
   const { data: userProfileData } = useGetOrganizationProfileByEmailQuery({
     skip: !userEmail,
     variables: {
@@ -98,26 +126,62 @@ const Roles: React.FC = () => {
     },
   });
 
-  let initialFieldValues: RolesValues | undefined;
-  if (data?.projectById?.metadata) {
-    const metadata = data.projectById.metadata;
-    initialFieldValues = {
-      'regen:landOwner': {
-        ...metadata['regen:landOwner'],
-        ...getPartyIds(data?.projectById?.partyByLandOwnerId),
-      },
-      'regen:landSteward': {
-        ...metadata['regen:landSteward'],
-        ...getPartyIds(data?.projectById?.partyByStewardId),
-      },
-      'regen:projectDeveloper': {
-        ...metadata['regen:projectDeveloper'],
-        ...getPartyIds(data?.projectById?.partyByDeveloperId),
-      },
-      'regen:projectOriginator': {
-        ...metadata['regen:projectOriginator'],
-        ...getPartyIds(data?.projectById?.partyByOriginatorId),
-      },
+  const { data: graphData } = useShaclGraphByUriQuery({
+    // do not fetch SHACL Graph until we get the project
+    // and the optional on chain credit class id associatied to it,
+    // this prevents from fetching this twice
+    skip: !project,
+    variables: {
+      uri: getProjectShapeIri(creditClassId),
+    },
+  });
+
+  let initialValues: RolesValues = { admin: wallet?.address };
+  if (project?.metadata) {
+    const metadata = project.metadata;
+    let i = 0;
+    // In case of on chain credit class id, we don't save the entities in the db (yet),
+    // so we just use some auto-incremented ids instead of uuid to identify entities.
+    // This can be removed once Keplr login is fully implemented and we save the entities
+    // as parties/users/orgs in the db.
+    const landOwner = {
+      ...metadata['regen:landOwner'],
+      ...getPartyIds(
+        0,
+        project?.partyByLandOwnerId,
+        !isEmpty(metadata['regen:landOwner']) && !!creditClassId,
+      ),
+    };
+    const landSteward = {
+      ...metadata['regen:landSteward'],
+      ...getPartyIds(
+        landOwner?.id && creditClassId ? Number(landOwner.id) : i,
+        project?.partyByStewardId,
+        !isEmpty(metadata['regen:landSteward']) && !!creditClassId,
+      ),
+    };
+    const projectDeveloper = {
+      ...metadata['regen:projectDeveloper'],
+      ...getPartyIds(
+        landSteward?.id && creditClassId ? Number(landSteward.id) : i,
+        project?.partyByDeveloperId,
+        !isEmpty(metadata['regen:projectDeveloper']) && !!creditClassId,
+      ),
+    };
+    const projectOriginator = {
+      ...metadata['regen:projectOriginator'],
+      ...getPartyIds(
+        projectDeveloper?.id && creditClassId ? Number(projectDeveloper.id) : i,
+        project?.partyByOriginatorId,
+        !isEmpty(metadata['regen:projectOriginator']) && !!creditClassId,
+      ),
+    };
+    initialValues = {
+      ...initialValues,
+      'regen:landOwner': landOwner,
+      'regen:landSteward': landSteward,
+      'regen:projectDeveloper': projectDeveloper,
+      'regen:projectOriginator': projectOriginator,
     };
   }
 
@@ -128,25 +192,37 @@ const Roles: React.FC = () => {
   async function submit(values: RolesValues): Promise<void> {
     let projectPatch: ProjectPatch = {};
 
-    if (values['regen:landOwner']?.partyId) {
+    if (
+      isFormValues(values['regen:landOwner']) &&
+      values['regen:landOwner']?.partyId
+    ) {
       projectPatch = {
         landOwnerId: values['regen:landOwner']?.partyId,
         ...projectPatch,
       };
     }
-    if (values['regen:landSteward']?.partyId) {
+    if (
+      isFormValues(values['regen:landSteward']) &&
+      values['regen:landSteward']?.partyId
+    ) {
       projectPatch = {
         stewardId: values['regen:landSteward']?.partyId,
         ...projectPatch,
       };
     }
-    if (values['regen:projectDeveloper']?.partyId) {
+    if (
+      isFormValues(values['regen:projectDeveloper']) &&
+      values['regen:projectDeveloper']?.partyId
+    ) {
       projectPatch = {
         developerId: values['regen:projectDeveloper']?.partyId,
         ...projectPatch,
       };
     }
-    if (values['regen:projectOriginator']?.partyId) {
+    if (
+      isFormValues(values['regen:projectOriginator']) &&
+      values['regen:projectOriginator']?.partyId
+    ) {
       projectPatch = {
         originatorId: values['regen:projectOriginator']?.partyId,
         ...projectPatch,
@@ -158,7 +234,7 @@ const Roles: React.FC = () => {
     // update the related entities.
     // But there are not needed to make the project metadata valid
     // and are already stored through project relations (i.e. developerId, stewardId, etc.)
-    const metadata = { ...data?.projectById?.metadata, ...stripIds(values) };
+    const metadata = { ...project?.metadata, ...stripIds(values) };
     projectPatch = { metadata, ...projectPatch };
 
     try {
@@ -170,7 +246,8 @@ const Roles: React.FC = () => {
           },
         },
       });
-      !isEdit && navigate(`/project-pages/${projectId}/entity-display`);
+      const nextStep = creditClassId ? 'description' : 'entity-display';
+      !isEdit && navigate(`/project-pages/${projectId}/${nextStep}`);
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -178,27 +255,33 @@ const Roles: React.FC = () => {
     }
   }
 
-  return isEdit ? (
-    <EditFormTemplate>
-      <RolesForm
-        submit={submit}
-        initialValues={initialFieldValues}
-        projectCreator={userProfileData}
-      />
-    </EditFormTemplate>
-  ) : (
-    <OnboardingFormTemplate
-      activeStep={0}
-      title="Roles"
-      saveAndExit={saveAndExit}
-    >
-      <RolesForm
-        submit={submit}
-        initialValues={initialFieldValues}
-        projectCreator={userProfileData}
-      />
-    </OnboardingFormTemplate>
-  );
+  return project ? (
+    isEdit ? (
+      <EditFormTemplate>
+        <RolesForm
+          submit={submit}
+          initialValues={initialValues}
+          projectCreator={userProfileData}
+          creditClassId={creditClassId}
+          graphData={graphData}
+        />
+      </EditFormTemplate>
+    ) : (
+      <OnboardingFormTemplate
+        activeStep={0}
+        title="Roles"
+        saveAndExit={saveAndExit}
+      >
+        <RolesForm
+          submit={submit}
+          initialValues={initialValues}
+          projectCreator={userProfileData}
+          creditClassId={creditClassId}
+          graphData={graphData}
+        />
+      </OnboardingFormTemplate>
+    )
+  ) : null;
 };
 
 export { Roles };

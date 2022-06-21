@@ -12,7 +12,7 @@ interface Props {
 const KeplrRoute = ({ component: Component }: Props): JSX.Element => {
   const { loaded, wallet } = useWallet();
 
-  const connected = chainId && wallet?.shortAddress;
+  const connected = chainId && wallet?.address;
   // this helps avoid flashing the error banner on refresh
   const displayErrorBanner = !connected && loaded;
 

@@ -30,39 +30,10 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
 import { Link } from '../../components/atoms';
-import { Portfolio } from '../../components/organisms/Portfolio';
+import { PortfolioTemplate } from '../../components/templates/PortfolioTemplate';
 import {
   useBasketsWithClasses,
   useBasketTokens,
-<<<<<<< HEAD:web-registry/src/pages/MyEcocredits.tsx
-} from '../hooks';
-import { BasketTokens } from '../hooks/useBasketTokens';
-import useMsgClient from '../hooks/useMsgClient';
-import {
-  PortfolioTemplate,
-  WithBasketsProps,
-  withBaskets,
-} from '../components/templates';
-import { Link } from '../components/atoms';
-// import { ReactComponent as Sell } from '../assets/svgs/sell.svg';
-import { ReactComponent as PutInBasket } from '../assets/svgs/put-in-basket.svg';
-import { ReactComponent as TakeFromBasket } from '../assets/svgs/take-from-basket.svg';
-// import { ReactComponent as WithdrawIBC } from '../assets/svgs/withdraw-ibc.svg';
-// import { ReactComponent as DepositIBC } from '../assets/svgs/deposit-ibc.svg';
-import { useLedger } from '../ledger';
-import { getHashUrl } from '../lib/block-explorer';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  arrow: {
-    width: theme.spacing(6),
-    height: theme.spacing(6),
-  },
-}));
-
-const WrappedMyEcocredits: React.FC<WithBasketsProps> = ({ baskets }) => {
-  const styles = useStyles();
-  const theme = useTheme();
-=======
   useEcocredits,
 } from '../../hooks';
 import { BasketTokens } from '../../hooks/useBasketTokens';
@@ -92,7 +63,6 @@ export const MyEcocredits = (): JSX.Element => {
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>(
     undefined,
   );
->>>>>>> 6abf11e7 (refactor: split callbacks into hooks):web-registry/src/pages/MyEcocredits/MyEcocredits.tsx
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
@@ -369,5 +339,3 @@ export const MyEcocredits = (): JSX.Element => {
     </>
   );
 };
-
-export const MyEcocredits = withBaskets(WrappedMyEcocredits);

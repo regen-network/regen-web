@@ -185,20 +185,16 @@ const RegistryNav: React.FC = () => {
       pathname={pathname}
       extras={
         <Box display="flex" justifyContent="center" alignItems="center">
-          {chainId &&
-            loaded &&
-            wallet?.shortAddress &&
-            disconnect &&
-            desktop && (
-              <UserMenuItem
-                address={wallet?.shortAddress}
-                avatar={DefaultAvatar}
-                disconnect={disconnect}
-                pathname={pathname}
-                color={color}
-                linkComponent={RegistryNavLink}
-              />
-            )}
+          {chainId && loaded && wallet?.address && disconnect && desktop && (
+            <UserMenuItem
+              address={wallet?.shortAddress}
+              avatar={DefaultAvatar}
+              disconnect={disconnect}
+              pathname={pathname}
+              color={color}
+              linkComponent={RegistryNavLink}
+            />
+          )}
           <WalletButton />
         </Box>
       }

@@ -1,4 +1,3 @@
-import { RegenApi } from '@regen-network/api/lib';
 import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
 import { useCallback } from 'react';
 import { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
@@ -8,7 +7,6 @@ import { BatchInfoWithBalance } from '../../../types/ledger/ecocredit';
 import { useStateSetter } from '../../../types/react/use-state';
 
 type Props = {
-  api?: RegenApi;
   accountAddress?: string;
   credits: BatchInfoWithBalance[];
   creditSendOpen: number;
@@ -22,7 +20,6 @@ type Props = {
 type ReturnType = (values: CreditSendFormValues) => Promise<void>;
 
 const useCreditSendSubmit = ({
-  api,
   accountAddress,
   credits,
   creditSendOpen,
@@ -34,8 +31,7 @@ const useCreditSendSubmit = ({
 }: Props): ReturnType => {
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormValues): Promise<void> => {
-      if (!api?.msgClient?.broadcast || !accountAddress)
-        return Promise.reject();
+      if (!accountAddress) return Promise.reject();
       const batchDenom = credits[creditSendOpen].batch_denom;
       const recipient = values.recipient;
       const msg = MsgSend.fromPartial({
@@ -74,7 +70,6 @@ const useCreditSendSubmit = ({
     },
     [
       accountAddress,
-      api?.msgClient?.broadcast,
       creditSendOpen,
       creditSendTitle,
       credits,

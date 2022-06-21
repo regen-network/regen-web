@@ -10,7 +10,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 export interface ImageCropProps {
   image: string;
   circularCrop?: boolean;
-  onCropSubmit: (blob: HTMLImageElement) => void;
+  onCropSubmit: (blob: HTMLImageElement) => Promise<void>;
   onCancel: () => void;
   fixedCrop: Partial<Crop>;
 }
@@ -62,6 +62,7 @@ export default function ImageCrop({
   const classes = useStyles();
   const imgRef = useRef<any>(null);
   const [crop, setCrop] = useState<Partial<Crop>>(fixedCrop);
+  const [loading, setLoading] = useState<boolean>(false);
   const [completedCrop, setCompletedCrop] = useState<Crop | undefined>(
     undefined,
   );
@@ -71,10 +72,12 @@ export default function ImageCrop({
     if (!!completedCrop) {
       try {
         const currentImage = imgRef.current;
+        setLoading(true);
         const croppedImg = await getCroppedImg(currentImage, completedCrop);
-
-        onCropSubmit(croppedImg);
-      } catch (e) {}
+        await onCropSubmit(croppedImg);
+      } catch (e) {
+        setLoading(false);
+      }
     }
   }, [completedCrop, onCropSubmit]);
 
@@ -141,7 +144,7 @@ export default function ImageCrop({
         <ContainedButton
           onClick={showCroppedImage}
           className={classes.button}
-          disabled={!completedCrop}
+          disabled={!completedCrop || loading}
         >
           Apply
         </ContainedButton>

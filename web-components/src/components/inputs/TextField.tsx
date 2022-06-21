@@ -47,6 +47,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       '&.Mui-focused': {
         display: 'block',
       },
+      '&.Mui-disabled': {
+        color: theme.palette.primary.contrastText,
+      },
     },
     '& .MuiInputBase-formControl': {
       marginTop: props.label ? theme.spacing(2.25) : 0,
@@ -55,6 +58,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       },
       [theme.breakpoints.down('sm')]: {
         marginBottom: props.errors ? theme.spacing(4.75) : 0,
+      },
+      '&.Mui-disabled': {
+        backgroundColor: theme.palette.info.light,
       },
     },
     '& .MuiFormHelperText-root': {

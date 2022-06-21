@@ -3,6 +3,7 @@ import { StdFee, DeliverTxResponse } from '@cosmjs/stargate';
 
 import { useLedger } from '../ledger';
 import { Wallet } from '../lib/wallet';
+import { assertIsError } from '../lib/error';
 
 interface TxData {
   msgs: any[];
@@ -10,23 +11,19 @@ interface TxData {
   memo?: string;
 }
 
+export type SignAndBroadcastType = (
+  message: TxData,
+  onBroadcast?: () => void, // an optional callback that gets called between sign and broadcast
+) => Promise<void>;
+
 type MsgClientType = {
-  signAndBroadcast: (
-    message: TxData,
-    onBroadcast?: () => void, // an optional callback that gets called between sign and broadcast
-  ) => Promise<void>;
+  signAndBroadcast: SignAndBroadcastType;
   setDeliverTxResponse: (txResult: DeliverTxResponse | undefined) => void;
   deliverTxResponse?: DeliverTxResponse;
   setError: (error: string | undefined) => void;
   error?: string;
   wallet?: Wallet;
 };
-
-function assertIsError(error: unknown): asserts error is Error {
-  if (!(error instanceof Error)) {
-    throw error;
-  }
-}
 
 export default function useMsgClient(
   handleTxQueued: () => void,

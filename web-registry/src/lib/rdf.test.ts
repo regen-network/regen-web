@@ -1,4 +1,4 @@
-import { validate } from './rdf';
+import { validate, getCompactedPath } from './rdf';
 
 describe('validate', () => {
   it('validate against property shapes with given group', async () => {
@@ -190,5 +190,16 @@ describe('validate', () => {
       'http://regen.network/ProjectPlanBasicInfoGroup',
     );
     expect(report2.conforms).toEqual(true);
+  });
+});
+
+describe('getCompactedPath', () => {
+  it('returns path from compacted JSON-LD', () => {
+    const compactedPath = getCompactedPath('http://schema.org/name');
+    expect(compactedPath).toEqual('schema:name');
+  });
+  it('returns undefined if path not found', () => {
+    const compactedPath = getCompactedPath('http://schema2.org/name');
+    expect(compactedPath).toEqual(undefined);
   });
 });

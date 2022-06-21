@@ -7,7 +7,7 @@ interface PlanStepperProps {
   activeStep: number;
 }
 
-const steps = ['Project Page', 'Finished'];
+const steps = ['Create Project', 'Review', 'Finished'];
 
 const PlanStepper: React.FC<PlanStepperProps> = ({ activeStep }) => {
   return (

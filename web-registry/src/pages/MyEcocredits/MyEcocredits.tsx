@@ -30,7 +30,7 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
 import { Link } from '../../components/atoms';
-import { PortfolioTemplate } from '../../components/templates/PortfolioTemplate';
+import { Portfolio } from '../../components/organisms/Portfolio';
 import {
   useBasketsWithClasses,
   useBasketTokens,
@@ -165,7 +165,7 @@ export const MyEcocredits = (): JSX.Element => {
 
   return (
     <>
-      <PortfolioTemplate
+      <Portfolio
         credits={credits}
         basketTokens={basketTokens}
         renderCreditActionButtons={

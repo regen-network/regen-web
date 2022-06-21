@@ -60,6 +60,7 @@ import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
 import { HorizontalDotsIcon } from 'web-components/lib/components/icons/HorizontalDotsIcon';
 import { Spinner } from 'web-components/lib/components/icons/Spinner';
 import { BrokenLinkIcon } from 'web-components/lib/components/icons/BrokenLinkIcon';
+import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 
 export default {
   title: 'Icons',
@@ -147,6 +148,8 @@ export const plusIcon = (): JSX.Element => <PlusIcon />;
 export const pointerIcon = (): JSX.Element => <PointerIcon />;
 
 export const printIcon = (): JSX.Element => <PrintIcon />;
+
+export const projectPageIcon = (): JSX.Element => <ProjectPageIcon />;
 
 export const regenIcon = (): JSX.Element => <RegenIcon />;
 

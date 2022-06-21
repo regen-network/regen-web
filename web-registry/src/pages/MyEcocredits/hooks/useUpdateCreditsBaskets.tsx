@@ -11,7 +11,7 @@ type Props = {
 
 type ReturnType = void;
 
-const useUpdateCrediBaskets = ({
+const useUpdateCreditsBaskets = ({
   basketsWithClasses,
   credits,
   setCreditBaskets,
@@ -28,4 +28,4 @@ const useUpdateCrediBaskets = ({
   }, [credits, basketsWithClasses, setCreditBaskets]);
 };
 
-export default useUpdateCrediBaskets;
+export default useUpdateCreditsBaskets;

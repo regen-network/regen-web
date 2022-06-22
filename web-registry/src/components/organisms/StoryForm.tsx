@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
@@ -21,6 +20,8 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface StoryFormProps {
   submit: (values: StoryValues) => Promise<void>;
+  onNext?: () => void;
+  onPrev?: () => void;
   initialValues?: StoryValues;
 }
 
@@ -154,10 +155,12 @@ const ModalContent: React.FC<{
   );
 };
 
-const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
+const StoryForm: React.FC<StoryFormProps> = ({
+  submit,
+  initialValues,
+  ...props
+}) => {
   const styles = useStyles();
-  const navigate = useNavigate();
-  const { projectId } = useParams();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -313,8 +316,8 @@ const StoryForm: React.FC<StoryFormProps> = ({ submit, initialValues }) => {
 
               <ProjectPageFooter
                 onSave={submitForm}
-                onPrev={() => navigate(`/project-pages/${projectId}/roles`)}
-                onNext={() => navigate(`/project-pages/${projectId}/media`)}
+                onPrev={props.onPrev}
+                onNext={props.onNext}
                 saveDisabled={
                   !isValid || isSubmitting || !Object.keys(touched).length
                 }

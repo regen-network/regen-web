@@ -60,9 +60,18 @@ const Story: React.FC = () => {
     }
   }
 
+  const Form = (): JSX.Element => (
+    <StoryForm
+      submit={submit}
+      initialValues={initialFieldValues}
+      onPrev={() => navigate(`/project-pages/${projectId}/entity-display`)}
+      onNext={() => navigate(`/project-pages/${projectId}/media`)}
+    />
+  );
+
   return isEdit ? (
     <EditFormTemplate>
-      <StoryForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -70,7 +79,7 @@ const Story: React.FC = () => {
       title="Story"
       saveAndExit={saveAndExit}
     >
-      <StoryForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </OnboardingFormTemplate>
   );
 };

@@ -47,6 +47,10 @@ const Description: React.FC = () => {
     return Promise.resolve();
   };
 
+  function navigateNext(): void {
+    navigate(`/project-pages/${projectId}/media`);
+  }
+
   async function submit(values: DescriptionValues): Promise<void> {
     const metadata = { ...data?.projectById?.metadata, ...values };
     try {
@@ -60,7 +64,7 @@ const Description: React.FC = () => {
           },
         },
       });
-      !isEdit && navigate(`/project-pages/${projectId}/media`);
+      !isEdit && navigateNext();
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -68,13 +72,19 @@ const Description: React.FC = () => {
     }
   }
 
+  const Form = (): JSX.Element => (
+    <DescriptionForm
+      submit={submit}
+      onNext={navigateNext}
+      onPrev={() => navigate(`/project-pages/${projectId}/roles`)}
+      initialValues={initialFieldValues}
+      graphData={graphData}
+    />
+  );
+
   return isEdit ? (
     <EditFormTemplate>
-      <DescriptionForm
-        submit={submit}
-        initialValues={initialFieldValues}
-        graphData={graphData}
-      />
+      <Form />
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -82,11 +92,7 @@ const Description: React.FC = () => {
       title="Description"
       saveAndExit={saveAndExit}
     >
-      <DescriptionForm
-        submit={submit}
-        initialValues={initialFieldValues}
-        graphData={graphData}
-      />
+      <Form />
     </OnboardingFormTemplate>
   );
 };

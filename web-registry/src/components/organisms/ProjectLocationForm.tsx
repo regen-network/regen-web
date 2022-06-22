@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -25,9 +24,9 @@ const ProjectLocationForm: React.FC<{
   submit: (values: ProjectLocationFormValues) => Promise<void>;
   saveAndExit: (values: ProjectLocationFormValues) => Promise<void>;
   initialValues?: ProjectLocationFormValues;
-}> = ({ submit, initialValues, mapToken }) => {
-  const navigate = useNavigate();
-  const { projectId } = useParams();
+  onNext?: () => void;
+  onPrev?: () => void;
+}> = ({ submit, initialValues, mapToken, ...props }) => {
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -90,8 +89,8 @@ const ProjectLocationForm: React.FC<{
             </OnBoardingCard>
             <ProjectPageFooter
               onSave={submitForm}
-              onPrev={() => navigate(`/project-pages/${projectId}/basic-info`)}
-              onNext={() => navigate(`/project-pages/${projectId}/roles`)}
+              onPrev={props.onPrev}
+              onNext={props.onNext}
               saveDisabled={
                 !isValid ||
                 isSubmitting ||

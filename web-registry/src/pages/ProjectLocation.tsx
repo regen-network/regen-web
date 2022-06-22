@@ -97,14 +97,20 @@ const ProjectLocation: React.FC = () => {
     });
   }
 
+  const Form = (): JSX.Element => (
+    <ProjectLocationForm
+      submit={submit}
+      saveAndExit={saveAndExit}
+      mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
+      initialValues={initialFieldValues}
+      onPrev={() => navigate(`/project-pages/${projectId}/basic-info`)}
+      onNext={() => navigate(`/project-pages/${projectId}/roles`)}
+    />
+  );
+
   return isEdit ? (
     <EditFormTemplate>
-      <ProjectLocationForm
-        submit={submit}
-        saveAndExit={saveAndExit}
-        mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
-        initialValues={initialFieldValues}
-      />
+      <Form />
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -112,12 +118,7 @@ const ProjectLocation: React.FC = () => {
       title="Location"
       saveAndExit={saveAndExit}
     >
-      <ProjectLocationForm
-        submit={submit}
-        saveAndExit={saveAndExit}
-        mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
-        initialValues={initialFieldValues}
-      />
+      <Form />
     </OnboardingFormTemplate>
   );
 };

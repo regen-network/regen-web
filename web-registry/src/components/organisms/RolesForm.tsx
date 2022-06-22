@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Bech32Address } from '@keplr-wallet/cosmos';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -41,6 +41,8 @@ import { chainInfo } from '../../lib/wallet';
 
 interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
+  onNext?: () => void;
+  onPrev?: () => void;
   initialValues?: RolesValues;
   projectCreator?: GetOrganizationProfileByEmailQuery;
   creditClassId?: string | null;
@@ -100,10 +102,10 @@ const RolesForm: React.FC<RolesFormProps> = ({
   projectCreator,
   creditClassId,
   graphData,
+  ...props
 }) => {
   const apiUri = getApiUri();
   const { projectId } = useParams();
-  const navigate = useNavigate();
   const [entities, setEntities] = useState<
     Array<FormValues | ProfileFormValues>
   >([]);
@@ -532,8 +534,8 @@ const RolesForm: React.FC<RolesFormProps> = ({
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
-                onPrev={() => navigate(`/project-pages/${projectId}/location`)}
-                onNext={() => navigate(`/project-pages/${projectId}/story`)}
+                onPrev={props.onPrev}
+                onNext={props.onNext}
                 saveDisabled={!isValid || isSubmitting}
               />
             </Form>

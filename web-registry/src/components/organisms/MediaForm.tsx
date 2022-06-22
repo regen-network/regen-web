@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
 import { useMediaQuery, Grid, FormHelperText } from '@mui/material';
 import { Formik, Form, Field, getIn } from 'formik';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
@@ -25,6 +25,8 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
+  onPrev?: () => void;
+  onNext?: () => void;
   initialValues?: MediaValues;
 }
 
@@ -116,12 +118,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
+const MediaForm: React.FC<MediaFormProps> = ({ initialValues, ...props }) => {
   const styles = useStyles();
   const theme = useTheme();
   const apiUri = getApiUri();
   const { projectId } = useParams();
-  const navigate = useNavigate();
   const { confirmSave, isEdit } = useProjectEditContext();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
   const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
@@ -184,7 +185,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
         onSubmit={async (values, { setSubmitting, setTouched }) => {
           setSubmitting(true);
           try {
-            await submit(values);
+            await props.submit(values);
             setSubmitting(false);
             setTouched({}); // reset to untouched
             if (isEdit && confirmSave) confirmSave();
@@ -358,8 +359,8 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
-                // onNext={() => null} // TODO route to /metadata
-                onPrev={() => navigate(`/project-pages/${projectId}/story`)}
+                onNext={props.onNext}
+                onPrev={props.onPrev}
                 saveDisabled={
                   !isValid || isSubmitting || !Object.keys(touched).length
                 }

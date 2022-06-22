@@ -67,6 +67,10 @@ const EntityDisplay: React.FC = () => {
     // TODO: functionality
   }
 
+  function navigateNext(): void {
+    navigate(`/project-pages/${projectId}/story`);
+  }
+
   async function submit(values: EntityDisplayValues): Promise<void> {
     try {
       // update project stakeholders' parties
@@ -107,16 +111,25 @@ const EntityDisplay: React.FC = () => {
           },
         },
       });
-      !isEdit && navigate(`/project-pages/${projectId}/story`);
+      !isEdit && navigateNext();
     } catch (e) {
       // TODO: display the error banner in case of server error
       // https://github.com/regen-network/regen-registry/issues/554
     }
   }
 
+  const Form = (): JSX.Element => (
+    <EntityDisplayForm
+      submit={submit}
+      initialValues={initialValues}
+      onNext={navigateNext}
+      onPrev={() => navigate(`/project-pages/${projectId}/roles`)}
+    />
+  );
+
   return isEdit ? (
     <EditFormTemplate>
-      <EntityDisplayForm submit={submit} initialValues={initialValues} />
+      <Form />
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -124,7 +137,7 @@ const EntityDisplay: React.FC = () => {
       title="Entity Display"
       saveAndExit={saveAndExit}
     >
-      <EntityDisplayForm submit={submit} initialValues={initialValues} />
+      <Form />
     </OnboardingFormTemplate>
   );
 };

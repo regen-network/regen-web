@@ -189,6 +189,11 @@ const Roles: React.FC = () => {
     // TODO: functionality
   }
 
+  function navigateNext(): void {
+    const nextStep = creditClassId ? 'description' : 'entity-display';
+    navigate(`/project-pages/${projectId}/${nextStep}`);
+  }
+
   async function submit(values: RolesValues): Promise<void> {
     let projectPatch: ProjectPatch = {};
 
@@ -246,8 +251,7 @@ const Roles: React.FC = () => {
           },
         },
       });
-      const nextStep = creditClassId ? 'description' : 'entity-display';
-      !isEdit && navigate(`/project-pages/${projectId}/${nextStep}`);
+      !isEdit && navigateNext();
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -255,16 +259,22 @@ const Roles: React.FC = () => {
     }
   }
 
+  const Form = (): JSX.Element => (
+    <RolesForm
+      submit={submit}
+      onNext={navigateNext}
+      onPrev={() => navigate(`/project-pages/${projectId}/location`)}
+      initialValues={initialValues}
+      projectCreator={userProfileData}
+      creditClassId={creditClassId}
+      graphData={graphData}
+    />
+  );
+
   return project ? (
     isEdit ? (
       <EditFormTemplate>
-        <RolesForm
-          submit={submit}
-          initialValues={initialValues}
-          projectCreator={userProfileData}
-          creditClassId={creditClassId}
-          graphData={graphData}
-        />
+        <Form />
       </EditFormTemplate>
     ) : (
       <OnboardingFormTemplate
@@ -272,13 +282,7 @@ const Roles: React.FC = () => {
         title="Roles"
         saveAndExit={saveAndExit}
       >
-        <RolesForm
-          submit={submit}
-          initialValues={initialValues}
-          projectCreator={userProfileData}
-          creditClassId={creditClassId}
-          graphData={graphData}
-        />
+        <Form />
       </OnboardingFormTemplate>
     )
   ) : null;

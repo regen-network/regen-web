@@ -58,9 +58,17 @@ const BasicInfo: React.FC = () => {
     }
   }
 
+  const Form = (): JSX.Element => (
+    <BasicInfoForm
+      submit={submit}
+      initialValues={initialFieldValues}
+      onNext={() => navigate(`/project-pages/${projectId}/location`)}
+    />
+  );
+
   return isEdit ? (
     <EditFormTemplate>
-      <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -68,7 +76,7 @@ const BasicInfo: React.FC = () => {
       title="Basic Info"
       saveAndExit={saveAndExit}
     >
-      <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </OnboardingFormTemplate>
   );
 };

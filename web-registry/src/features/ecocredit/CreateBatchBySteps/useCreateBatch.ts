@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
 import {
@@ -63,17 +64,8 @@ async function generateIri<T>(
   metadata: T,
 ): Promise<IriFromMetadata<T> | undefined> {
   try {
-    const response = await fetch(getApiUri() + iriUrl, {
-      method: 'POST',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      }),
-      body: JSON.stringify(metadata),
-    });
-    const data = await response.json();
-    if (!data || data.error) return;
-    return data;
+    const response = await axios.post(getApiUri() + iriUrl, metadata);
+    return response.data;
   } catch (err) {
     throw new Error(`Error in iri generation service: ${err}`);
   }

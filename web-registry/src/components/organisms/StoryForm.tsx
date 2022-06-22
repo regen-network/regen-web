@@ -155,11 +155,7 @@ const ModalContent: React.FC<{
   );
 };
 
-const StoryForm: React.FC<StoryFormProps> = ({
-  submit,
-  initialValues,
-  ...props
-}) => {
+const StoryForm: React.FC<StoryFormProps> = ({ initialValues, ...props }) => {
   const styles = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -233,7 +229,7 @@ const StoryForm: React.FC<StoryFormProps> = ({
         onSubmit={async (values, { setSubmitting, setTouched }) => {
           setSubmitting(true);
           try {
-            await submit(values);
+            await props.submit(values);
             setSubmitting(false);
             setTouched({}); // reset to untouched
             if (isEdit && confirmSave) confirmSave();

@@ -97,7 +97,6 @@ function getEntity(
 }
 
 const RolesForm: React.FC<RolesFormProps> = ({
-  submit,
   initialValues,
   projectCreator,
   creditClassId,
@@ -429,7 +428,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
         onSubmit={async (values, { setSubmitting, setTouched }) => {
           setSubmitting(true);
           try {
-            await submit(values);
+            await props.submit(values);
             setSubmitting(false);
             setTouched({}); // reset to untouched
             if (isEdit && confirmSave) confirmSave();

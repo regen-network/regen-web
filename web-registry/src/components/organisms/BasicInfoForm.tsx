@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import { Box } from '@mui/material';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import clsx from 'clsx';
 
@@ -18,7 +19,6 @@ import {
 } from '../../lib/rdf';
 import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
-import { Box } from '@mui/material';
 
 export interface BasicInfoFormValues {
   'schema:name': string;

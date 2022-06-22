@@ -46,7 +46,6 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
   // state for submit flow
   const {
     status: submitStatus,
-    // createBatchResponse,
     deliverTxResponse,
     isSubmitModalOpen,
     error: submitError,
@@ -76,10 +75,13 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     if (isReviewStep) {
       createBatch(values);
     } else {
-      const dataDisplay = {
-        creditClass: creditClassSelected,
-        project: projectSelected,
-      };
+      let dataDisplay;
+      if (creditClassSelected && projectSelected) {
+        dataDisplay = {
+          creditClass: creditClassSelected,
+          project: projectSelected,
+        };
+      }
       handleSaveNext(values, dataDisplay);
       formikHelpers.setTouched({});
       formikHelpers.setSubmitting(false);

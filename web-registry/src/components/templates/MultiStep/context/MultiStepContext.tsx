@@ -36,7 +36,7 @@ type ContextProps<T extends object> = {
   handleBack: () => void;
   handleSave: (formValues: T, nextStep: number) => void;
   handleSaveNext: (formValues: T, dataDisplay: any) => void;
-  handleResetReview: (formValues: T) => void;
+  handleResetReview: () => void;
 };
 
 const initialValues = {
@@ -126,7 +126,8 @@ export function MultiStepProvider<T extends object>({
       formValues: formValues as T,
       maxAllowedStep: nextStep,
     };
-    if (dataDisplay) _data.dataDisplay = dataDisplay;
+    if (dataDisplay || data?.dataDisplay)
+      _data.dataDisplay = dataDisplay || data?.dataDisplay;
     saveData(_data);
   };
 
@@ -139,9 +140,9 @@ export function MultiStepProvider<T extends object>({
 
   // this reset does not clean the stored data, it simply forces the form to start
   // from step 0 so that the form itself validates as the flow is carried out manually.
-  const handleResetReview = (formValues: T | {}): void => {
+  const handleResetReview = (): void => {
     // reset to step 0, both active (local) and allowed (storage) states
-    handleSave(formValues, 0);
+    handleSave(data?.formValues || {}, 0, data?.dataDisplay);
     handleActiveStep(0);
   };
 

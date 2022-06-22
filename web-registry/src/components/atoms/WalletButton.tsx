@@ -49,7 +49,7 @@ const WalletButton: React.FC = () => {
 
   return chainId ? (
     <div className={styles.root}>
-      {!wallet?.shortAddress && loaded && !connectionType && (
+      {!wallet?.address && loaded && !connectionType && (
         <OutlinedButton onClick={connectToKeplr} sx={{ height: 40 }}>
           <img className={styles.icon} src={Keplr} alt="keplr" />
           connect wallet

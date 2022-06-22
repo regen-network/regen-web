@@ -3,14 +3,11 @@ import Box from '@mui/material/Box';
 
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import Stepper from 'web-components/lib/components/stepper';
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
 import {
   BatchBasicsForm,
   BatchBasicsFormValues,
 } from '../components/organisms/BatchBasicsForm';
-import { chainId } from '../lib/ledger';
-import { useWallet } from '../lib/wallet';
 
 const steps = [
   { stepName: 'Credit Basics', sectionTitle: 'Create Credit Batch' },
@@ -20,7 +17,6 @@ const steps = [
 ];
 
 const CreateBatch: React.FC = () => {
-  const { loaded, wallet } = useWallet();
   const [activeStep, setActiveStep] = useState(0);
 
   const handleBasicsSubmit = (values: BatchBasicsFormValues): Promise<void> => {
@@ -29,7 +25,7 @@ const CreateBatch: React.FC = () => {
     return Promise.resolve();
   };
 
-  return chainId && wallet?.shortAddress ? (
+  return (
     <>
       <Stepper
         sx={{ mw: 240 }}
@@ -43,9 +39,7 @@ const CreateBatch: React.FC = () => {
         </Box>
       </OnBoardingSection>
     </>
-  ) : loaded ? ( // <-- this helps avoid flashing the error banner on refresh
-    <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
-  ) : null;
+  );
 };
 
 export { CreateBatch };

@@ -6,12 +6,12 @@ import {
   DefaultTheme as Theme,
 } from '@mui/styles';
 import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Tab, { TabProps } from '@mui/material/Tab';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-export interface RegenTab {
+export interface RegenTab extends TabProps {
+  content?: JSX.Element;
   label: string;
-  children?: any;
 }
 
 interface RegenTabsProps {
@@ -39,7 +39,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-function a11yProps(index: any): object {
+export function a11yProps(index: any): object {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
@@ -129,7 +129,7 @@ export default function RegenTabs({
           variant="fullWidth"
           value={value}
           onChange={handleChange}
-          aria-label="mrv"
+          aria-label="tabs"
         >
           {tabs.map((tab, index) => (
             <CustomTab
@@ -145,7 +145,7 @@ export default function RegenTabs({
         (tab, index) =>
           value === index && (
             <div key={`content-${index}`} className={classes.content}>
-              {tab.children}
+              {tab.content}
             </div>
           ),
       )}

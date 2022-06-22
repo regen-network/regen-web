@@ -1,52 +1,58 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import clsx from 'clsx';
+import { SxProps, useTheme, Theme } from '@mui/material';
 
 import Card from './Card';
-import ContainedButton from '../buttons/ContainedButton';
 import OutlinedButton from '../buttons/OutlinedButton';
+import { Title } from '../typography/Title';
+import { ProjectPageIcon } from '../icons/ProjectPageIcon';
 
 interface CreateProjectCardProps {
   className?: string;
+  sx?: SxProps<Theme>;
   onClick: () => void;
   isFirstProject: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  createPlanCard: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: theme.spacing(60.5),
-    background: theme.palette.info.light,
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(78.25),
-    },
-  },
-  createPlanButton: {
-    paddingLeft: theme.spacing(14),
-    paddingRight: theme.spacing(14),
-  },
-}));
-
 const CreateProjectCard: React.FC<CreateProjectCardProps> = ({
   className,
+  sx,
   onClick,
   isFirstProject,
 }) => {
-  const classes = useStyles();
+  const theme = useTheme();
 
   return (
-    <Card className={clsx(className, classes.createPlanCard)}>
-      {isFirstProject ? (
-        <ContainedButton className={classes.createPlanButton} onClick={onClick}>
-          + create project
-        </ContainedButton>
-      ) : (
-        <OutlinedButton className={classes.createPlanButton} onClick={onClick}>
-          add another project
-        </OutlinedButton>
+    <Card
+      className={className}
+      sx={theme => ({
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        height: { xs: theme.spacing(62.5), sm: theme.spacing(92.5) },
+        backgroundColor: 'info.light',
+        p: { xs: 12, sm: 8, md: 12 },
+      })}
+      borderRadius="10px"
+      borderColor={theme.palette.grey[100]}
+    >
+      {isFirstProject && (
+        <ProjectPageIcon
+          sx={theme => ({
+            color: 'info.main',
+            height: theme.spacing(14.75),
+            width: theme.spacing(18.25),
+          })}
+        />
       )}
+      {isFirstProject && (
+        <Title variant="h4" align="center">
+          You have not created any projects yet
+        </Title>
+      )}
+      <OutlinedButton sx={{ width: '100%' }} onClick={onClick}>
+        + create project
+      </OutlinedButton>
     </Card>
   );
 };

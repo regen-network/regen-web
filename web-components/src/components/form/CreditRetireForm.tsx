@@ -135,7 +135,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
             postalCode,
           });
 
-          setFieldValue(retirementLocationName, isoString);
+          setFieldValue(retirementLocationName, isoString || country);
           if (geocodingError) setGeocodingError(null);
         } catch (err) {
           // initially this effect may fail mainly because the accessToken

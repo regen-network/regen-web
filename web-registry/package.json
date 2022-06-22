@@ -55,9 +55,7 @@
     "test": "react-scripts test",
     "test-update-snapshot": "react-scripts test --updateSnapshot",
     "graphql:codegen": "graphql-codegen --config codegen.yml",
-    "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml",
-    "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml"
   },
   "browserslist": {
     "production": [
@@ -75,14 +73,12 @@
     "@keplr-wallet/types": "^0.9.0",
     "@keplr-wallet/cosmos": "^0.10.5",
     "@storybook/addon-storyshots": "^6.3.12",
-    "@testing-library/cypress": "^8.0.3",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/mapbox__mapbox-sdk": "^0.11.1",
     "@types/react-lazyload": "^3.1.0",
     "@types/storybook__addon-storyshots": "^5.3.1",
     "apollo": "^2.33.9",
-    "cypress": "^10.0.2",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.1",

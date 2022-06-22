@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Formik, Form, Field, FormikErrors } from 'formik';
-import cx from 'clsx';
 
-import { Button } from '../buttons/Button';
-import ContainedButton from '../buttons/ContainedButton';
-import OnBoardingCard from '../cards/OnBoardingCard';
+import { ProfileSubmitFooter, ProfileOnBoardingCard } from './ProfileModal';
 import PhoneField from '../inputs/PhoneField';
 import ControlledTextField from '../inputs/ControlledTextField';
-import CheckboxLabel from '../inputs/CheckboxLabel';
-import { Body, Title } from '../typography';
-import Tooltip from '../tooltip/InfoTooltip';
+import { Title } from '../typography';
 import Modal from '.';
-import QuestionIcon from '../icons/QuestionIcon';
+import { SharePermissionField } from './OrganizationModal';
 
 interface IndividualModalProps {
   individual?: IndividualFormValues;
@@ -34,53 +28,12 @@ export interface IndividualFormValues {
   'regen:sharePermission'?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  card: {
-    marginTop: 0,
-  },
-  matchFormPadding: {
-    [theme.breakpoints.up('sm')]: {
-      padding: theme.spacing(0, 10),
-    },
-    [theme.breakpoints.down('sm')]: {
-      padding: theme.spacing(0, 2.5),
-    },
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginTop: theme.spacing(10),
-  },
-  button: {
-    paddingLeft: theme.spacing(17),
-    paddingRight: theme.spacing(17),
-  },
-  cancelButton: {
-    color: theme.palette.info.main,
-    fontSize: theme.typography.pxToRem(12),
-    padding: 0,
-  },
-  permission: {
-    display: 'flex',
-  },
-  iconWrapper: {
-    cursor: 'pointer',
-  },
-}));
-
 function IndividualModal({
   individual,
   onClose,
   onSubmit,
   validate,
 }: IndividualModalProps): JSX.Element {
-  const styles = useStyles();
   const [individualEdit, setIndividualEdit] = useState<
     IndividualFormValues | undefined
   >(undefined);
@@ -95,7 +48,7 @@ function IndividualModal({
 
   return (
     <Modal open={!!individualEdit} onClose={onClose}>
-      <div className={styles.root}>
+      <div>
         <Title
           variant="h4"
           align="center"
@@ -126,7 +79,7 @@ function IndividualModal({
           {({ submitForm, isValid, isSubmitting }) => {
             return (
               <Form>
-                <OnBoardingCard className={styles.card}>
+                <ProfileOnBoardingCard>
                   <Field
                     component={ControlledTextField}
                     label="Full name"
@@ -142,41 +95,14 @@ function IndividualModal({
                     label="Phone number"
                     name="schema:telephone"
                   />
-                </OnBoardingCard>
-                <div className={cx(styles.permission, styles.matchFormPadding)}>
-                  <Field
-                    type="checkbox"
-                    component={CheckboxLabel}
-                    name="regen:sharePermission"
-                    label={
-                      <Body size="sm">
-                        I have this individual’s permission to share their
-                        information with Regen Registry
-                      </Body>
-                    }
-                  />
-                  <Tooltip
-                    arrow
-                    placement="top"
-                    title="Even if you work closely with this individual, make sure you have their permission to be part of Regen Registry."
-                  >
-                    <div className={styles.iconWrapper}>
-                      <QuestionIcon />
-                    </div>
-                  </Tooltip>
-                </div>
-                <div className={cx(styles.controls, styles.matchFormPadding)}>
-                  <Button onClick={onClose} className={styles.cancelButton}>
-                    cancel
-                  </Button>
-                  <ContainedButton
-                    onClick={submitForm}
-                    className={styles.button}
-                    disabled={!isValid || isSubmitting}
-                  >
-                    save
-                  </ContainedButton>
-                </div>
+                </ProfileOnBoardingCard>
+                <SharePermissionField />
+                <ProfileSubmitFooter
+                  submitForm={submitForm}
+                  isValid={isValid}
+                  isSubmitting={isSubmitting}
+                  onClose={onClose}
+                />
               </Form>
             );
           }}

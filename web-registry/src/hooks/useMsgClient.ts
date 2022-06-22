@@ -3,6 +3,7 @@ import { StdFee, DeliverTxResponse } from '@cosmjs/stargate';
 
 import { useLedger } from '../ledger';
 import { Wallet } from '../lib/wallet';
+import { assertIsError } from '../lib/error';
 
 interface TxData {
   msgs: any[];
@@ -23,12 +24,6 @@ type MsgClientType = {
   error?: string;
   wallet?: Wallet;
 };
-
-function assertIsError(error: unknown): asserts error is Error {
-  if (!(error instanceof Error)) {
-    throw error;
-  }
-}
 
 export default function useMsgClient(
   handleTxQueued: () => void,

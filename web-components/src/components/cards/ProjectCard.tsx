@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useTheme, makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
+import { useTheme, Theme, SxProps } from '@mui/material';
 import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
 
@@ -43,6 +44,7 @@ export interface ProjectCardProps {
   target?: string;
   imageStorageBaseUrl?: string;
   apiServerUrl?: string;
+  sx?: SxProps<Theme>;
 }
 
 function getAbbreviation(unit: string): string {
@@ -57,14 +59,6 @@ function getAbbreviation(unit: string): string {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  mediaCard: {
-    [theme.breakpoints.down('md')]: {
-      width: theme.spacing(73),
-    },
-    '@media (max-width: 340px)': {
-      width: theme.spacing(70),
-    },
-  },
   separator: {
     border: `0.5px solid ${theme.palette.grey[100]}`,
     [theme.breakpoints.up('sm')]: {
@@ -208,6 +202,7 @@ export default function ProjectCard({
   target,
   imageStorageBaseUrl,
   apiServerUrl,
+  sx,
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const classes = useStyles();
@@ -234,7 +229,7 @@ export default function ProjectCard({
       target={target}
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
-      className={classes.mediaCard}
+      sx={sx}
     >
       <div className={classes.placeInfo}>
         <ProjectPlaceInfo

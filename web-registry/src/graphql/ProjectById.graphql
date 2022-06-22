@@ -20,6 +20,7 @@ query ProjectById($id: UUID!) {
     }
     creditClassByCreditClassId {
       id
+      onChainId
       creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
         nodes {
           name

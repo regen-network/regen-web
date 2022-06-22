@@ -17,6 +17,7 @@ import CheckboxLabel from '../inputs/CheckboxLabel';
 import OutlinedButton from '../buttons/OutlinedButton';
 import TrashIcon from '../icons/TrashIcon';
 import { Subtitle, Label } from '../typography';
+import OnBoardingCard from '../cards/OnBoardingCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   checkboxLabel: {
@@ -144,9 +145,9 @@ const DeleteButton: React.FC<ButtonProps> = ({ onClick }) => {
 };
 
 const AddRecipientButton: React.FC<ButtonProps> = ({ onClick }) => (
-  <Card>
+  <OnBoardingCard>
     <OutlinedButton onClick={onClick}>+ Add recipient</OutlinedButton>
-  </Card>
+  </OnBoardingCard>
 );
 
 export function RecipientsFieldArray({
@@ -161,7 +162,7 @@ export function RecipientsFieldArray({
         <div>
           {values.recipients.length > 0 &&
             values.recipients.map((recipient, index) => (
-              <Card key={`recipient-${index}`}>
+              <OnBoardingCard key={`recipient-${index}`}>
                 {index > 0 && <DeleteButton onClick={() => remove(index)} />}
                 <Field
                   name={`recipients.${index}.recipient`}
@@ -203,7 +204,7 @@ export function RecipientsFieldArray({
                     />
                   </>
                 )}
-              </Card>
+              </OnBoardingCard>
             ))}
 
           <AddRecipientButton

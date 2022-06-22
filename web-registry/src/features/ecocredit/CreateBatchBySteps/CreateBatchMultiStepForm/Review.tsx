@@ -10,14 +10,17 @@ import { RecipientFormValues } from './Recipients';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-// import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
+import EditIcon from 'web-components/lib/components/icons/EditIcon';
 import {
   Body,
   Label,
   Subtitle,
 } from 'web-components/lib/components/typography';
 import { Box, Link } from '@mui/material';
-import { formatDate } from 'web-components/lib/utils/format';
+import {
+  formatDate,
+  getFormattedNumber,
+} from 'web-components/lib/utils/format';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
 // TODO: Only covers case C01
@@ -34,15 +37,14 @@ export default function Review(): JSX.Element {
 
   // check isValid change to reset in case is not valid
   React.useEffect(() => {
-    if (!isValid) handleResetReview(values);
-  }, [handleResetReview, isValid, values]);
+    if (!isValid) handleResetReview();
+  }, [handleResetReview, isValid]);
 
   return (
     <>
       <CreditBatchInfo
         data={values as CreditBasicsFormValues}
         dataDisplay={dataDisplay}
-        // reviewDisplay={reviewDisplay}
       />
       {values.recipients.map((recipient, index) => (
         <RecipientInfo
@@ -85,9 +87,12 @@ function CreditBatchInfo({
       </Box>
       <ItemDisplay
         name={'Credit Class'}
-        value={dataDisplay.creditClass.label}
+        value={dataDisplay?.creditClass?.label || data.classId}
       />
-      <ItemDisplay name={'Project'} value={dataDisplay.project.label} />
+      <ItemDisplay
+        name={'Project'}
+        value={dataDisplay?.project?.label || metadata['regen:vcsProjectId']}
+      />
       <ItemDisplay
         name={'Start and end date'}
         value={`${formatDate(data.startDate)} - ${formatDate(data.endDate)}`}
@@ -128,10 +133,16 @@ function RecipientInfo({ data, index }: RecipientInfoProps): JSX.Element {
         <EditButton onClick={() => handleActiveStep(1)} />
       </Box>
       <ItemDisplay name={'Recipient address'} value={data.recipient} />
-      <ItemDisplay name={'Amount tradable'} value={data.tradableAmount} />
+      <ItemDisplay
+        name={'Amount tradable'}
+        value={getFormattedNumber(data.tradableAmount)}
+      />
       {data.withRetire && (
         <>
-          <ItemDisplay name={'Amount retired'} value={data.retiredAmount} />
+          <ItemDisplay
+            name={'Amount retired'}
+            value={getFormattedNumber(data.retiredAmount)}
+          />
           {data.note && (
             <ItemDisplay name={'Retirement note'} value={data.note} />
           )}
@@ -175,7 +186,7 @@ function AdditionalCertificationDisplay({
   return (
     <>
       <Subtitle size="lg" sx={{ mt: 9, mb: 2 }}>
-        Additional certification url
+        Additional certification {url && 'url'}
       </Subtitle>
       {url ? (
         <Link sx={{ color: 'secondary.main' }} href={url} target="_blank">
@@ -193,7 +204,6 @@ interface ButtonProps {
 }
 
 function EditButton({ onClick }: ButtonProps): JSX.Element {
-  // const theme = useTheme<Theme>();
   return (
     <OutlinedButton
       size="small"
@@ -203,8 +213,14 @@ function EditButton({ onClick }: ButtonProps): JSX.Element {
         alignSelf: 'flex-end',
       }}
       onClick={onClick}
-      startIcon={'✏️'}
-      // <TrashIcon color={theme.palette.secondary.main} />
+      startIcon={
+        <EditIcon
+          sx={{
+            height: 13,
+            width: 13,
+          }}
+        />
+      }
     >
       <Label size="sm" sx={{ color: 'info.dark' }}>
         Edit

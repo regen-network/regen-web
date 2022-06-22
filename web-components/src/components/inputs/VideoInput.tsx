@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { FieldProps } from 'formik';
 import cx from 'clsx';
-import ReactPlayer from 'react-player';
+import ReactPlayerLazy from 'react-player/lazy';
 
 import Card from '../cards/Card';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -122,11 +122,13 @@ function VideoInput({
               >
                 <Card className={styles.preview}>
                   <CardMedia
-                    component={ReactPlayer}
+                    sx={{ width: '100%', borderRadius: 5, height: [210, 318] }}
+                    // note: the following props are passed to ReactPlayer
+                    component={ReactPlayerLazy}
                     url={field.value}
                     onReady={() => setVideoLoaded(true)}
-                    sx={{ width: '100%', borderRadius: 5, height: [210, 318] }}
                     height={isMobile ? 210 : 318}
+                    fallback={<div>Loading video player...</div>}
                     width="100%"
                   />
                   <IconButton

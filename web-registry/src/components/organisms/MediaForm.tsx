@@ -1,6 +1,7 @@
 import React from 'react';
 import cx from 'clsx';
 import { makeStyles } from '@mui/styles';
+import { FormHelperText } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import {
   Formik,
@@ -13,6 +14,7 @@ import {
 } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
 import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
@@ -30,8 +32,6 @@ import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import getApiUri from '../../lib/apiUri';
 import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import { FormHelperText } from '@mui/material';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;

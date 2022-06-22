@@ -10,7 +10,6 @@ import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-ca
 import { useLedger } from '../../../ledger';
 import getApiUri from '../../../lib/apiUri';
 import useMsgClient from '../../../hooks/useMsgClient';
-
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
 // Disclaimer - Right now, just case "C01"
@@ -135,7 +134,7 @@ type CreateBatchFn = (data: CreateBatchFormValues) => Promise<void>;
 type ReturnType = {
   status: SubmissionStatus;
   deliverTxResponse: DeliverTxResponse | undefined;
-  error: string | undefined; // Error | string | undefined;
+  error: string | undefined;
   isSubmitModalOpen: boolean;
   createBatch: CreateBatchFn;
   closeSubmitModal: () => void;

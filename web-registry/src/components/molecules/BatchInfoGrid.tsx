@@ -1,15 +1,12 @@
 import React from 'react';
 import { Box, Grid, SxProps, Theme } from '@mui/material';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-
-import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
 import { LabeledDetail } from 'web-components/lib/components/text-layouts';
 import { Body } from 'web-components/lib/components/typography';
-import { LinkWithArrow } from '../atoms';
+import { formatDate } from 'web-components/lib/utils/format';
 
-dayjs.extend(utc);
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
+import { LinkWithArrow } from '../atoms';
 
 export const BatchInfoGrid: React.FC<{
   batch: BatchInfoWithSupply;
@@ -54,7 +51,7 @@ export const BatchInfoGrid: React.FC<{
 );
 
 const batchDate = (date: string | Date): string =>
-  dayjs.utc(date).format('MMM D, YYYY');
+  formatDate(date, 'MMM D, YYYY', true);
 
 const GridItem: React.FC = ({ children }) => (
   <Grid item xs={12} sm={5}>

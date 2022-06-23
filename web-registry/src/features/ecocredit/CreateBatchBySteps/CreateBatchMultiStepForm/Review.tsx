@@ -106,6 +106,11 @@ function CreditBatchInfo({
           key={`additional-certification-${index}`}
           name={cert['schema:name']}
           url={cert['schema:url']['@value']}
+          index={
+            metadata['regen:additionalCertifications']?.length > 1
+              ? `${index + 1}`
+              : undefined
+          }
         />
       ))}
     </OnBoardingCard>
@@ -177,23 +182,30 @@ function ItemDisplay({ name, value }: ItemDisplayProps): JSX.Element {
 type AdditionalCertificationDisplayProps = {
   name: string;
   url?: string;
+  index?: string;
 };
 
 function AdditionalCertificationDisplay({
   name,
   url,
+  index,
 }: AdditionalCertificationDisplayProps): JSX.Element {
   return (
     <>
       <Subtitle size="lg" sx={{ mt: 9, mb: 2 }}>
-        Additional certification {url && 'url'}
+        Additional certification {index}
       </Subtitle>
-      {url ? (
-        <Link sx={{ color: 'secondary.main' }} href={url} target="_blank">
-          {url}
-        </Link>
-      ) : (
-        <Body size="lg">{name}</Body>
+      <Body size="lg">{name}</Body>
+
+      {url && (
+        <>
+          <Subtitle size="lg" sx={{ mt: 9, mb: 2 }}>
+            Additional certification {index} url
+          </Subtitle>
+          <Link sx={{ color: 'secondary.main' }} href={url} target="_blank">
+            {url}
+          </Link>
+        </>
       )}
     </>
   );

@@ -17,25 +17,23 @@ import { getAccountUrl, getHashUrl } from '../../../../lib/block-explorer';
 
 type ResultProps = {
   response?: DeliverTxResponse;
-  error?: Error | string;
+  error?: string;
 };
 
 export default function Result({
   response,
   error,
 }: ResultProps): React.ReactElement {
+  if (error) return <ErrorResult error={error} />;
+  return response ? <SuccessResult response={response} /> : <div />;
+}
+
+type SuccessProps = {
+  response: DeliverTxResponse;
+};
+
+const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
   const navigate = useNavigate();
-
-  if (error)
-    return (
-      <>
-        <h1>Some error!</h1>
-      </>
-    );
-
-  if (response)
-    // eslint-disable-next-line no-console
-    console.log('** Finished response', response);
 
   // Parsing the response...
   const responseLog = response?.rawLog && JSON.parse(response?.rawLog);
@@ -68,16 +66,21 @@ export default function Result({
     };
   });
 
+  const batchDenom = receiveBatchDenom.value.replace(/"/g, '');
+
   return (
     <>
       <OnBoardingCard>
         <Title variant="h5">Create Credit Batch</Title>
         <CardItem
           label="batch denom"
-          value={{ name: receiveBatchDenom.value.replace(/"/g, '') }}
+          value={{ name: batchDenom }}
           linkComponent={Link}
         />
-        <RecipientsCardItem label="recipient(s)" values={recipients} />
+        <CardItemList
+          label={`recipient${recipients.length > 1 && 's'}`}
+          values={recipients}
+        />
         <CardItem
           label="hash"
           value={{
@@ -87,41 +90,67 @@ export default function Result({
           linkComponent={Link}
         />
       </OnBoardingCard>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <OutlinedButton
+          onClick={() => navigate(`/credit-batches/${batchDenom}`)}
+        >
+          SEE CREDIT BATCH
+        </OutlinedButton>
+      </Box>
+    </>
+  );
+};
+
+type ErrorResultProps = {
+  error: string;
+};
+
+const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <OnBoardingCard>
+        <Title variant="h5">Create Credit Batch</Title>
+        <CardItem
+          color="error.main"
+          label="error"
+          value={{ name: error }}
+          linkComponent={Link}
+        />
+      </OnBoardingCard>
       <OutlinedButton onClick={() => navigate('/ecocredits/dashboard')}>
-        SEE CREDIT BATCH
+        SEE ALL CREDIT BATCHES
       </OutlinedButton>
     </>
   );
-}
+};
 
 type LinkItem = {
   name: string;
   url: string;
 };
 
-type RecipientsCardItemProps = {
+type CardItemListProps = {
   label: string;
   values: LinkItem[];
 };
 
-const RecipientsCardItem: React.FC<RecipientsCardItemProps> = ({
-  label,
-  values,
-}) => {
+const CardItemList: React.FC<CardItemListProps> = ({ label, values }) => {
   return (
     <Box sx={{ pt: 5 }}>
       <Label size="sm" sx={{ pb: [3, 2.25] }}>
         {label}
       </Label>
       <Subtitle size="lg" mobileSize="sm" color={'info.dark'}>
-        {values.map((recipient, index) => (
+        {values.map((item, index) => (
           <Link
-            key={`recipient-link-${index}`}
+            key={`card-item-link-${index}`}
             sx={{ color: 'secondary.main' }}
-            href={recipient.url}
+            href={item.url}
             target="_blank"
           >
-            {recipient.name}
+            {item.name}
             {values.length > index + 1 && ', '}
           </Link>
         ))}

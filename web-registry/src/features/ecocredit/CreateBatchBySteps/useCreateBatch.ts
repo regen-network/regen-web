@@ -119,7 +119,13 @@ async function prepareMsg(
   });
 }
 
-type SubmissionStatus = 'idle' | 'message' | 'sign' | 'broadcast' | 'finished';
+type SubmissionStatus =
+  | 'idle'
+  | 'message'
+  | 'sign'
+  | 'broadcast'
+  | 'success'
+  | 'error';
 
 type CreateBatchFn = (data: CreateBatchFormValues) => Promise<void>;
 
@@ -148,13 +154,13 @@ export default function useCreateBatch(): ReturnType {
   }
 
   function handleTxDelivered(): void {
-    setStatus('finished');
+    setStatus('success');
     setIsSubmitModalOpen(false);
   }
 
   function handleError(): void {
     setIsSubmitModalOpen(false);
-    setStatus('finished');
+    setStatus('error');
   }
 
   function closeSubmitModal(): void {

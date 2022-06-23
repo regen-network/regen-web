@@ -37,7 +37,7 @@ export default function useLocalStorage<T>(
   const removeData = (): void => {
     try {
       localStorage.removeItem(key);
-      // reset state ?
+      // reset state to initial values
       saveData(initialValue);
     } catch (err) {
       // eslint-disable-next-line no-console

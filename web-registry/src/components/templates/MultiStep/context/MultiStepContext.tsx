@@ -34,9 +34,11 @@ type ContextProps<T extends object> = {
   handleActiveStep: (step: number) => void;
   handleNext: () => void;
   handleBack: () => void;
-  handleSave: (formValues: T, nextStep: number) => void;
   handleSaveNext: (formValues: T, dataDisplay: any) => void;
   handleResetReview: () => void;
+  handleSuccess: () => void;
+  handleError: () => void;
+  resultStatus: ResultStatus;
 };
 
 const initialValues = {
@@ -47,12 +49,14 @@ const initialValues = {
   isLastStep: false,
   isReviewStep: false,
   percentComplete: 0,
+  resultStatus: undefined,
   handleActiveStep: () => {},
   handleNext: () => {},
   handleBack: () => {},
-  handleSave: () => {},
   handleSaveNext: () => {},
   handleResetReview: () => {},
+  handleSuccess: () => {},
+  handleError: () => {},
 };
 
 const MultiStepContext = React.createContext<ContextProps<{}>>(initialValues);
@@ -62,6 +66,8 @@ const MultiStepContext = React.createContext<ContextProps<{}>>(initialValues);
  * Context provider wrapper, prepared with custom logic
  *
  */
+
+type ResultStatus = 'success' | 'error' | undefined;
 
 type FormData<T> = {
   formValues: T;
@@ -87,7 +93,7 @@ export function MultiStepProvider<T extends object>({
   // So initially, data (from storage) is `undefined` or
   // previously persisted data.
   // If undefined, then we return the initialValues
-  const { data, saveData } = useLocalStorage<FormData<T>>(formId);
+  const { data, saveData, removeData } = useLocalStorage<FormData<T>>(formId);
 
   const maxAllowedStep = data?.maxAllowedStep || 0;
 
@@ -100,6 +106,8 @@ export function MultiStepProvider<T extends object>({
     goNext,
     goBack,
   } = useSteps(steps.length);
+
+  const [resultStatus, setResultStatus] = React.useState<ResultStatus>();
 
   // initial step on mount
   React.useEffect(() => {
@@ -141,9 +149,24 @@ export function MultiStepProvider<T extends object>({
   // this reset does not clean the stored data, it simply forces the form to start
   // from step 0 so that the form itself validates as the flow is carried out manually.
   const handleResetReview = (): void => {
-    // reset to step 0, both active (local) and allowed (storage) states
     handleSave(data?.formValues || {}, 0, data?.dataDisplay);
     handleActiveStep(0);
+  };
+
+  const handleSuccess = (): void => {
+    setResultStatus('success');
+    handleNext();
+    handleResetData();
+  };
+
+  // TODO - differentiate various types of errors
+  const handleError = (): void => {
+    setResultStatus('error');
+    handleNext();
+  };
+
+  const handleResetData = (): void => {
+    removeData();
   };
 
   const value: ContextProps<T | {}> = {
@@ -158,9 +181,11 @@ export function MultiStepProvider<T extends object>({
     handleActiveStep,
     handleNext,
     handleBack,
-    handleSave,
     handleSaveNext,
     handleResetReview,
+    handleSuccess,
+    handleError,
+    resultStatus,
   };
 
   return (
@@ -172,16 +197,12 @@ export function MultiStepProvider<T extends object>({
 
 export function useMultiStep<T extends object>(): ContextProps<T> {
   const context = React.useContext(MultiStepContext);
-  // const context = React.useContext<ContextProps<T>>(
-  //   MultiStepContext as unknown as React.Context<ContextProps<T>>,
-  // );
 
   if (context === undefined) {
     throw new Error('useMultiStep must be used within a MultiStepProvider');
   }
 
   return context as unknown as ContextProps<T>;
-  // return context;
 }
 
 /**

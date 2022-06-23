@@ -19,22 +19,17 @@ type StepperSectionProps = {
 export default function StepperSection({
   children,
 }: StepperSectionProps): JSX.Element {
-  const { steps, activeStep, isLastStep } = useMultiStep();
+  const { steps, activeStep, resultStatus } = useMultiStep();
 
-  function getResultTitle(): string | undefined {
-    // TODO: manage success/error
-    // if (success)
-    return steps?.[activeStep].resultTitle?.success;
-    // if (error) return steps[activeStep].resultTitle?.error
+  function getResultTitle(
+    resultStatus: 'success' | 'error',
+  ): string | undefined {
+    return steps?.[activeStep].resultTitle?.[resultStatus];
   }
 
-  // Because title for the Result step is special (success/error)..
   let title = '';
-  if (steps) {
-    title = !isLastStep
-      ? steps[activeStep].title || ''
-      : getResultTitle() || '';
-  }
+  if (resultStatus) title = getResultTitle(resultStatus) || '';
+  if (steps && !resultStatus) title = steps[activeStep].title || '';
 
   return (
     <>
@@ -46,14 +41,10 @@ export default function StepperSection({
         // onStepClick={(stepIndex: number) => setActiveStep(stepIndex)}
         onStepClick={() => {}}
       />
-      <OnBoardingSection
-        // title={steps ? steps[activeStep].title : ''}
-        title={title}
-        formContainer
-      >
+      <OnBoardingSection title={title} formContainer>
         <Box minHeight="50vh">
           {children}
-          {/* TODO - <StepperControls /> (with saveFooter)  */}
+          {/* TODO ? - <StepperControls /> (with saveFooter)  */}
         </Box>
       </OnBoardingSection>
     </>

@@ -24,7 +24,7 @@ import Result from './Result';
  *     - Formik instance (context)
  *     - Render the corresponding step (view with fields)
  *     - Handle partial submits
- *     - Apply the corresponding validation schema (TODO ? - move to context provider ?)
+ *     - Apply the corresponding validation schema
  */
 
 export type CreateBatchFormValues = CreditBasicsFormValues &
@@ -38,9 +38,11 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     isLastStep,
     isReviewStep,
     percentComplete,
-    handleNext,
     handleSaveNext,
     handleBack,
+    handleSuccess,
+    handleError,
+    resultStatus,
   } = useMultiStep<CreateBatchFormValues>();
 
   // state for submit flow
@@ -62,11 +64,9 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
   const [projectSelected, setProjectSelected] = React.useState<Option>();
 
   React.useEffect(() => {
-    if (submitStatus === 'finished') {
-      handleNext();
-      // TODO - if 'success' => clear storage
-    }
-  }, [submitStatus, handleNext]);
+    if (submitStatus === 'success') handleSuccess();
+    if (submitStatus === 'error') handleError();
+  }, [submitStatus, handleSuccess, handleError]);
 
   function handleSubmit(
     values: CreateBatchFormValues,
@@ -106,7 +106,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     }
   }
 
-  if (isLastStep && submitStatus === 'finished')
+  if (isLastStep && resultStatus)
     return <Result response={deliverTxResponse} error={submitError} />;
 
   return (

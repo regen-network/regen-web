@@ -55,6 +55,14 @@ const ProjectLocation: React.FC = () => {
     }
   }
 
+  function navigatePrev(): void {
+    navigate(`/project-pages/${projectId}/basic-info`);
+  }
+
+  function navigateNext(): void {
+    navigate(`/project-pages/${projectId}/roles`);
+  }
+
   async function saveValues(values: ProjectLocationFormValues): Promise<void> {
     const metadata = { ...projectData?.projectById?.metadata, ...values };
     const feature = values['schema:location'];
@@ -103,8 +111,8 @@ const ProjectLocation: React.FC = () => {
       saveAndExit={saveAndExit}
       mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
       initialValues={initialFieldValues}
-      onPrev={() => navigate(`/project-pages/${projectId}/basic-info`)}
-      onNext={() => navigate(`/project-pages/${projectId}/roles`)}
+      onPrev={navigatePrev}
+      onNext={navigateNext}
     />
   );
 

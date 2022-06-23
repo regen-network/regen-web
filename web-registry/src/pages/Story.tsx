@@ -60,12 +60,20 @@ const Story: React.FC = () => {
     }
   }
 
+  function navigateNext(): void {
+    navigate(`/project-pages/${projectId}/media`);
+  }
+
+  function navigatePrev(): void {
+    navigate(`/project-pages/${projectId}/entity-display`);
+  }
+
   const Form = (): JSX.Element => (
     <StoryForm
       submit={submit}
       initialValues={initialFieldValues}
-      onPrev={() => navigate(`/project-pages/${projectId}/entity-display`)}
-      onNext={() => navigate(`/project-pages/${projectId}/media`)}
+      onPrev={navigatePrev}
+      onNext={navigateNext}
     />
   );
 

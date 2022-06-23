@@ -36,6 +36,10 @@ const BasicInfo: React.FC = () => {
     // TODO: functionality
   }
 
+  function navigateNext(): void {
+    navigate(`/project-pages/${projectId}/location`);
+  }
+
   async function submit(values: BasicInfoFormValues): Promise<void> {
     const metadata = { ...data?.projectById?.metadata, ...values };
     try {
@@ -62,7 +66,7 @@ const BasicInfo: React.FC = () => {
     <BasicInfoForm
       submit={submit}
       initialValues={initialFieldValues}
-      onNext={() => navigate(`/project-pages/${projectId}/location`)}
+      onNext={navigateNext}
     />
   );
 

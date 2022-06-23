@@ -194,6 +194,10 @@ const Roles: React.FC = () => {
     navigate(`/project-pages/${projectId}/${nextStep}`);
   }
 
+  function navigatePrev(): void {
+    navigate(`/project-pages/${projectId}/location`);
+  }
+
   async function submit(values: RolesValues): Promise<void> {
     let projectPatch: ProjectPatch = {};
 
@@ -263,7 +267,7 @@ const Roles: React.FC = () => {
     <RolesForm
       submit={submit}
       onNext={navigateNext}
-      onPrev={() => navigate(`/project-pages/${projectId}/location`)}
+      onPrev={navigatePrev}
       initialValues={initialValues}
       projectCreator={userProfileData}
       creditClassId={creditClassId}

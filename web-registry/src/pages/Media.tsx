@@ -43,14 +43,14 @@ const Media: React.FC = () => {
 
   function navigateNext(): void {
     // TODO: replace 'review' with path name once
-    // https://github.com/regen-network/regen-registry/issues/899 is merged
+    // https://github.com/regen-network/regen-registry/issues/447 is merged
     const nextStep = creditClassId ? 'metadata' : 'review';
     navigate(`/project-pages/${projectId}/${nextStep}`);
   }
 
   function navigatePrev(): void {
-    const nextStep = creditClassId ? 'story' : 'description';
-    navigate(`/project-pages/${projectId}/${nextStep}`);
+    const prevStep = creditClassId ? 'story' : 'description';
+    navigate(`/project-pages/${projectId}/${prevStep}`);
   }
 
   async function submit(values: MediaValues): Promise<void> {

@@ -71,6 +71,10 @@ const EntityDisplay: React.FC = () => {
     navigate(`/project-pages/${projectId}/story`);
   }
 
+  function navigatePrev(): void {
+    navigate(`/project-pages/${projectId}/roles`);
+  }
+
   async function submit(values: EntityDisplayValues): Promise<void> {
     try {
       // update project stakeholders' parties
@@ -123,7 +127,7 @@ const EntityDisplay: React.FC = () => {
       submit={submit}
       initialValues={initialValues}
       onNext={navigateNext}
-      onPrev={() => navigate(`/project-pages/${projectId}/roles`)}
+      onPrev={navigatePrev}
     />
   );
 

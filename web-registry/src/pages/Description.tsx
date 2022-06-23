@@ -51,6 +51,10 @@ const Description: React.FC = () => {
     navigate(`/project-pages/${projectId}/media`);
   }
 
+  function navigatePrev(): void {
+    navigate(`/project-pages/${projectId}/roles`);
+  }
+
   async function submit(values: DescriptionValues): Promise<void> {
     const metadata = { ...data?.projectById?.metadata, ...values };
     try {
@@ -76,7 +80,7 @@ const Description: React.FC = () => {
     <DescriptionForm
       submit={submit}
       onNext={navigateNext}
-      onPrev={() => navigate(`/project-pages/${projectId}/roles`)}
+      onPrev={navigatePrev}
       initialValues={initialFieldValues}
       graphData={graphData}
     />

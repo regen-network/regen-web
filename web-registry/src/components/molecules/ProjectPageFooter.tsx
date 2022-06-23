@@ -6,6 +6,8 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface Props {
   onSave: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
   saveText?: string;
   saveDisabled: boolean;
 }
@@ -28,8 +30,8 @@ const ProjectPageFooter: React.FC<Props> = ({
     <SaveFooter
       saveText={saveText || 'Save and Next'}
       onSave={onSave}
-      onPrev={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
-      onNext={() => null} // TODO https://github.com/regen-network/regen-registry/issues/561
+      onPrev={props.onPrev}
+      onNext={props.onNext}
       hideProgress={false} // TODO
       saveDisabled={saveDisabled}
       percentComplete={0} // TODO

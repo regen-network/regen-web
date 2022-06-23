@@ -186,7 +186,11 @@ export default function useCreateBatch(): ReturnType {
 
     try {
       setStatus('sign');
-      await signAndBroadcast({ msgs: [message] });
+      const recipientNote = data.recipients.find(recipient => recipient.note);
+      await signAndBroadcast({
+        msgs: [message],
+        memo: recipientNote?.note,
+      });
     } catch (err) {
       setError(err as string);
     }

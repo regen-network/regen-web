@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   OnboardingFormTemplate,
@@ -14,6 +14,7 @@ import { useProjectEditContext } from '../pages/ProjectEdit';
 
 const Media: React.FC = () => {
   const { projectId } = useParams();
+  const navigate = useNavigate();
   const { isEdit } = useProjectEditContext();
 
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -21,10 +22,12 @@ const Media: React.FC = () => {
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
   });
+  const project = data?.projectById;
+  const creditClassId = project?.creditClassByCreditClassId?.onChainId;
 
   let initialFieldValues: MediaValues | undefined;
-  if (data?.projectById?.metadata) {
-    const metadata = data.projectById.metadata;
+  if (project?.metadata) {
+    const metadata = project.metadata;
     initialFieldValues = {
       'regen:previewPhoto': metadata['regen:previewPhoto'],
       'regen:galleryPhotos': metadata['regen:galleryPhotos'],
@@ -38,8 +41,20 @@ const Media: React.FC = () => {
     return Promise.resolve();
   };
 
+  function navigateNext(): void {
+    // TODO: replace 'review' with path name once
+    // https://github.com/regen-network/regen-registry/issues/447 is merged
+    const nextStep = creditClassId ? 'metadata' : 'review';
+    navigate(`/project-pages/${projectId}/${nextStep}`);
+  }
+
+  function navigatePrev(): void {
+    const prevStep = creditClassId ? 'story' : 'description';
+    navigate(`/project-pages/${projectId}/${prevStep}`);
+  }
+
   async function submit(values: MediaValues): Promise<void> {
-    const metadata = { ...data?.projectById?.metadata, ...values };
+    const metadata = { ...project?.metadata, ...values };
     try {
       await updateProject({
         variables: {
@@ -51,6 +66,7 @@ const Media: React.FC = () => {
           },
         },
       });
+      if (!isEdit) navigateNext();
     } catch (e) {
       // TODO: Should we display the error banner here?
       // https://github.com/regen-network/regen-registry/issues/554
@@ -58,9 +74,18 @@ const Media: React.FC = () => {
     }
   }
 
+  const Form = (): JSX.Element => (
+    <MediaForm
+      submit={submit}
+      initialValues={initialFieldValues}
+      onNext={navigateNext}
+      onPrev={navigatePrev}
+    />
+  );
+
   return isEdit ? (
     <EditFormTemplate>
-      <MediaForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -68,7 +93,7 @@ const Media: React.FC = () => {
       title="Media"
       saveAndExit={saveAndExit}
     >
-      <MediaForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </OnboardingFormTemplate>
   );
 };

@@ -60,9 +60,26 @@ const Story: React.FC = () => {
     }
   }
 
+  function navigateNext(): void {
+    navigate(`/project-pages/${projectId}/media`);
+  }
+
+  function navigatePrev(): void {
+    navigate(`/project-pages/${projectId}/entity-display`);
+  }
+
+  const Form = (): JSX.Element => (
+    <StoryForm
+      submit={submit}
+      initialValues={initialFieldValues}
+      onPrev={navigatePrev}
+      onNext={navigateNext}
+    />
+  );
+
   return isEdit ? (
     <EditFormTemplate>
-      <StoryForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -70,7 +87,7 @@ const Story: React.FC = () => {
       title="Story"
       saveAndExit={saveAndExit}
     >
-      <StoryForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </OnboardingFormTemplate>
   );
 };

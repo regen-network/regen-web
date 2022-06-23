@@ -25,6 +25,8 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
+  onPrev?: () => void;
+  onNext?: () => void;
   initialValues?: MediaValues;
 }
 
@@ -116,7 +118,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
+const MediaForm: React.FC<MediaFormProps> = ({ initialValues, ...props }) => {
   const styles = useStyles();
   const theme = useTheme();
   const apiUri = getApiUri();
@@ -183,7 +185,7 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
         onSubmit={async (values, { setSubmitting, setTouched }) => {
           setSubmitting(true);
           try {
-            await submit(values);
+            await props.submit(values);
             setSubmitting(false);
             setTouched({}); // reset to untouched
             if (isEdit && confirmSave) confirmSave();
@@ -357,6 +359,8 @@ const MediaForm: React.FC<MediaFormProps> = ({ submit, initialValues }) => {
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
+                onNext={props.onNext}
+                onPrev={props.onPrev}
                 saveDisabled={
                   !isValid || isSubmitting || !Object.keys(touched).length
                 }

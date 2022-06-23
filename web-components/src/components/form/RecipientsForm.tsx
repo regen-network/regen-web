@@ -18,6 +18,7 @@ import OutlinedButton from '../buttons/OutlinedButton';
 import TrashIcon from '../icons/TrashIcon';
 import { Subtitle, Label } from '../typography';
 import OnBoardingCard from '../cards/OnBoardingCard';
+import Box from '@mui/material/Box';
 
 const useStyles = makeStyles((theme: Theme) => ({
   checkboxLabel: {
@@ -121,9 +122,9 @@ const DeleteButton: React.FC<ButtonProps> = ({ onClick }) => {
     <OutlinedButton
       size="small"
       sx={{
-        border: 'none !important',
+        border: 'none',
         maxWidth: '100px',
-        alignSelf: 'flex-end',
+        float: 'right',
         mb: 4,
       }}
       onClick={onClick}
@@ -146,7 +147,9 @@ const DeleteButton: React.FC<ButtonProps> = ({ onClick }) => {
 
 const AddRecipientButton: React.FC<ButtonProps> = ({ onClick }) => (
   <OnBoardingCard>
-    <OutlinedButton onClick={onClick}>+ Add recipient</OutlinedButton>
+    <OutlinedButton onClick={onClick} sx={{ width: '100%' }}>
+      + Add recipient
+    </OutlinedButton>
   </OnBoardingCard>
 );
 

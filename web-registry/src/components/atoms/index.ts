@@ -1,3 +1,4 @@
+export * from './KeplrRoute';
 export * from './Link';
 export * from './LinkWithArrow';
 export * from './OptimizedImage';

@@ -16,6 +16,8 @@ import {
 
 interface DescriptionFormProps {
   submit: (values: DescriptionValues) => Promise<void>;
+  onNext?: () => void;
+  onPrev?: () => void;
   initialValues?: DescriptionValues;
   graphData?: ShaclGraphByUriQuery;
 }
@@ -28,6 +30,7 @@ const DescriptionForm = ({
   submit,
   initialValues,
   graphData,
+  ...props
 }: DescriptionFormProps): JSX.Element => {
   const { confirmSave, isEdit } = useProjectEditContext();
 
@@ -100,6 +103,8 @@ const DescriptionForm = ({
             </OnBoardingCard>
             <ProjectPageFooter
               onSave={submitForm}
+              onNext={props.onNext}
+              onPrev={props.onPrev}
               saveDisabled={
                 !isValid || isSubmitting || !Object.keys(touched).length
               }

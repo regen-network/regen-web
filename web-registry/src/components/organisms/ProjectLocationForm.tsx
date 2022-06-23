@@ -24,7 +24,9 @@ const ProjectLocationForm: React.FC<{
   submit: (values: ProjectLocationFormValues) => Promise<void>;
   saveAndExit: (values: ProjectLocationFormValues) => Promise<void>;
   initialValues?: ProjectLocationFormValues;
-}> = ({ submit, initialValues, mapToken }) => {
+  onNext?: () => void;
+  onPrev?: () => void;
+}> = ({ submit, initialValues, mapToken, ...props }) => {
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
     variables: {
@@ -87,6 +89,8 @@ const ProjectLocationForm: React.FC<{
             </OnBoardingCard>
             <ProjectPageFooter
               onSave={submitForm}
+              onPrev={props.onPrev}
+              onNext={props.onNext}
               saveDisabled={
                 !isValid ||
                 isSubmitting ||

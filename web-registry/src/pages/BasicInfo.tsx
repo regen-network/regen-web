@@ -36,6 +36,10 @@ const BasicInfo: React.FC = () => {
     // TODO: functionality
   }
 
+  function navigateNext(): void {
+    navigate(`/project-pages/${projectId}/location`);
+  }
+
   async function submit(values: BasicInfoFormValues): Promise<void> {
     const metadata = { ...data?.projectById?.metadata, ...values };
     try {
@@ -58,9 +62,17 @@ const BasicInfo: React.FC = () => {
     }
   }
 
+  const Form = (): JSX.Element => (
+    <BasicInfoForm
+      submit={submit}
+      initialValues={initialFieldValues}
+      onNext={navigateNext}
+    />
+  );
+
   return isEdit ? (
     <EditFormTemplate>
-      <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -68,7 +80,7 @@ const BasicInfo: React.FC = () => {
       title="Basic Info"
       saveAndExit={saveAndExit}
     >
-      <BasicInfoForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </OnboardingFormTemplate>
   );
 };

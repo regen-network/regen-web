@@ -35,6 +35,8 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface MediaFormProps {
   submit: (values: MediaValues) => Promise<void>;
+  onPrev?: () => void;
+  onNext?: () => void;
   initialValues?: MediaValues;
 }
 
@@ -80,7 +82,10 @@ const useStyles = makeStyles(theme => ({
 
 const projectShapeIri = getProjectShapeIri('C01');
 
-const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
+const MediaForm = ({
+  initialValues,
+  ...props
+}: MediaFormProps): JSX.Element => {
   const styles = useStyles();
   const apiUri = getApiUri();
   const { projectId } = useParams();
@@ -122,7 +127,7 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
   ): Promise<void> => {
     setSubmitting(true);
     try {
-      await submit(values);
+      await props.submit(values);
       setSubmitting(false);
       setTouched({}); // reset to untouched
       if (isEdit && confirmSave) confirmSave();
@@ -257,7 +262,11 @@ const MediaForm = ({ submit, initialValues }: MediaFormProps): JSX.Element => {
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
-                saveDisabled={!isValid || isSubmitting}
+                onNext={props.onNext}
+                onPrev={props.onPrev}
+                saveDisabled={
+                  !isValid || isSubmitting || !Object.keys(touched).length
+                }
               />
             </Form>
           );

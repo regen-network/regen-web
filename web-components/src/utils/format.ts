@@ -1,4 +1,7 @@
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+dayjs.extend(utc);
 
 export function getFormattedDate(
   date?: string | Date | null,
@@ -46,7 +49,9 @@ export function formatStandardInfo(info: StandardInfo): string {
 export function formatDate(
   date: dayjs.ConfigType,
   format: string = 'MMMM D, YYYY',
+  utc?: boolean,
 ): string {
+  if (utc) return dayjs.utc(date).format(format);
   return dayjs(date).format(format);
 }
 

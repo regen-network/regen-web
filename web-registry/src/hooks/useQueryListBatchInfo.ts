@@ -16,19 +16,18 @@ export default function useQueryListBatchInfo(
   const [dataList, setDataList] = useState<QueryBatchResponse[]>();
 
   useEffect(() => {
-    if (!api?.queryClient) return;
+    if (!api?.queryClient || queryClient) return;
     const _queryClient: QueryClientImpl = new QueryClientImpl(api.queryClient);
     setQueryClient(_queryClient);
-  }, [api?.queryClient]);
+  }, [api?.queryClient, queryClient]);
 
   useEffect(() => {
     if (!queryClient || !basketBatches) return;
-
     async function fetchData(
       client: QueryClientImpl,
       batches: string[],
     ): Promise<void> {
-      Promise.all(
+      await Promise.all(
         batches.map(
           async (batchDenom: string) => await client.Batch({ batchDenom }),
         ),

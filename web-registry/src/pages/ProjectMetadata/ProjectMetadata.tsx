@@ -27,6 +27,7 @@ const ProjectMetadata: React.FC = () => {
   });
   const project = data?.projectById;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
+  const isVCS = creditClassId === 'C01';
   let metadata: ProjectMetadataLD | undefined;
 
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -49,11 +50,13 @@ const ProjectMetadata: React.FC = () => {
 
   return isEdit ? (
     <EditFormTemplate>
-      <ProjectMetadataForm
-        submit={submit}
-        initialValues={metadata}
-        graphData={graphData}
-      />
+      {!isVCS && (
+        <ProjectMetadataForm
+          submit={submit}
+          initialValues={metadata}
+          graphData={graphData}
+        />
+      )}
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -61,11 +64,13 @@ const ProjectMetadata: React.FC = () => {
       title="Metadata"
       saveAndExit={saveAndExit}
     >
-      <ProjectMetadataForm
-        submit={submit}
-        initialValues={metadata}
-        graphData={graphData}
-      />
+      {!isVCS && (
+        <ProjectMetadataForm
+          submit={submit}
+          initialValues={metadata}
+          graphData={graphData}
+        />
+      )}
     </OnboardingFormTemplate>
   );
 };

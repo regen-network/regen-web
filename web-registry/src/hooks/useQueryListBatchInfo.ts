@@ -9,34 +9,33 @@ import { useLedger } from '../ledger';
 
 // is a wrapper for a batch of requests
 export default function useQueryListBatchInfo(
-  basketBatches?: string[],
+  batchDenoms?: string[],
 ): QueryBatchInfoResponse[] | undefined {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl>();
   const [dataList, setDataList] = useState<QueryBatchInfoResponse[]>();
 
   useEffect(() => {
-    if (!api?.queryClient) return;
+    if (!api?.queryClient || queryClient) return;
     const _queryClient: QueryClientImpl = new QueryClientImpl(api.queryClient);
     setQueryClient(_queryClient);
-  }, [api?.queryClient]);
+  }, [api?.queryClient, queryClient]);
 
   useEffect(() => {
-    if (!queryClient || !basketBatches) return;
-
+    if (!queryClient || !batchDenoms) return;
     async function fetchData(
       client: QueryClientImpl,
       batches: string[],
     ): Promise<void> {
-      Promise.all(
+      await Promise.all(
         batches.map(
           async (batchDenom: string) => await client.BatchInfo({ batchDenom }),
         ),
       ).then(setDataList);
     }
 
-    fetchData(queryClient, basketBatches);
-  }, [queryClient, basketBatches]);
+    fetchData(queryClient, batchDenoms);
+  }, [queryClient, batchDenoms]);
 
   return dataList;
 }

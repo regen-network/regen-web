@@ -39,6 +39,8 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
+  onNext?: () => void;
+  onPrev?: () => void;
   initialValues?: EntityDisplayValues;
 }
 
@@ -362,6 +364,7 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
 const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
   submit,
   initialValues,
+  ...props
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const styles = useStyles();
@@ -514,6 +517,8 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
+                onNext={props.onNext}
+                onPrev={props.onPrev}
                 saveDisabled={
                   !isValid || isSubmitting || !Object.keys(touched).length
                 }

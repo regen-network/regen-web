@@ -41,6 +41,8 @@ import { chainInfo } from '../../lib/wallet';
 
 interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;
+  onNext?: () => void;
+  onPrev?: () => void;
   initialValues?: RolesValues;
   projectCreator?: GetOrganizationProfileByEmailQuery;
   creditClassId?: string | null;
@@ -95,11 +97,11 @@ function getEntity(
 }
 
 const RolesForm: React.FC<RolesFormProps> = ({
-  submit,
   initialValues,
   projectCreator,
   creditClassId,
   graphData,
+  ...props
 }) => {
   const apiUri = getApiUri();
   const { projectId } = useParams();
@@ -426,7 +428,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
         onSubmit={async (values, { setSubmitting, setTouched }) => {
           setSubmitting(true);
           try {
-            await submit(values);
+            await props.submit(values);
             setSubmitting(false);
             setTouched({}); // reset to untouched
             if (isEdit && confirmSave) confirmSave();
@@ -531,6 +533,8 @@ const RolesForm: React.FC<RolesFormProps> = ({
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
+                onPrev={props.onPrev}
+                onNext={props.onNext}
                 saveDisabled={!isValid || isSubmitting}
               />
             </Form>

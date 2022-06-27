@@ -23,7 +23,7 @@ import { OrganizationFormValues } from 'web-components/lib/components/modal/Orga
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import {
-  urlType,
+  UrlType,
   getURLInitialValue,
 } from 'web-components/lib/utils/schemaURL';
 
@@ -66,13 +66,13 @@ export type EntityFieldName = keyof EntityDisplayValues;
 interface OrganizationDisplayShape {
   'regen:showOnProjectPage': boolean;
   'schema:name'?: string;
-  'schema:logo'?: urlType;
+  'schema:logo'?: UrlType;
   'schema:description'?: string;
 }
 
 interface IndividualDisplayShape {
   'regen:showOnProjectPage': boolean;
-  'schema:image'?: urlType;
+  'schema:image'?: UrlType;
   'schema:description'?: string;
 }
 
@@ -347,7 +347,7 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
   if (!values) {
     return undefined;
   }
-  const initialURL: urlType = getURLInitialValue();
+  const initialURL: UrlType = getURLInitialValue();
   if (isIndividual(values)) {
     return {
       ...{ 'schema:image': initialURL },

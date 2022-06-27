@@ -111,7 +111,7 @@ function VideoInput({
     >
       {() => (
         <>
-          {!!field.value && (
+          {!!field.value ? (
             <>
               <Collapse
                 classes={{
@@ -145,23 +145,23 @@ function VideoInput({
                 <LinearProgress color="secondary" sx={{ mb: 4 }} />
               )}
             </>
+          ) : (
+            <div className={cx(styles.inputRow, classes?.main)}>
+              <Input
+                className={styles.input}
+                onChange={handleChange}
+                value={videoUrl}
+                placeholder="Add video url"
+              />
+              <OutlinedButton
+                classes={{ root: cx(styles.button, classes?.button) }}
+                onClick={handleUrlSubmit}
+                aria-label="set video url"
+              >
+                {buttonText || '+ video'}
+              </OutlinedButton>
+            </div>
           )}
-
-          <div className={cx(styles.inputRow, classes?.main)}>
-            <Input
-              className={styles.input}
-              onChange={handleChange}
-              value={videoUrl}
-              placeholder="Add video url"
-            />
-            <OutlinedButton
-              classes={{ root: cx(styles.button, classes?.button) }}
-              onClick={handleUrlSubmit}
-              aria-label="set video url"
-            >
-              {buttonText || '+ video'}
-            </OutlinedButton>
-          </div>
         </>
       )}
     </FieldFormControl>

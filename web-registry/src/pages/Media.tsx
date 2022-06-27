@@ -2,38 +2,69 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import {
+  getURLInitialValue,
+  getURLListInitialValue,
+} from 'web-components/lib/utils/schemaURL';
+import { Loading } from 'web-components/lib/components/loading';
+
+import {
   OnboardingFormTemplate,
   EditFormTemplate,
 } from '../components/templates';
-import { MediaForm, MediaValues } from '../components/organisms';
+import MediaForm, {
+  MediaValues,
+  isVCSValues,
+} from '../components/organisms/MediaForm';
+import { useProjectEditContext } from '../pages/ProjectEdit';
+import { getProjectShapeIri } from '../lib/rdf';
 import {
   useProjectByIdQuery,
+  useShaclGraphByUriQuery,
   useUpdateProjectByIdMutation,
 } from '../generated/graphql';
-import { useProjectEditContext } from '../pages/ProjectEdit';
 
 const Media = (): JSX.Element => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const { isEdit } = useProjectEditContext();
-
   const [updateProject] = useUpdateProjectByIdMutation();
-  const { data } = useProjectByIdQuery({
+  const { data: projectData, loading: loadingProject } = useProjectByIdQuery({
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
   });
-  const project = data?.projectById;
+  const project = projectData?.projectById;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
 
-  let initialFieldValues: MediaValues | undefined;
-  if (project?.metadata) {
-    const metadata = project.metadata;
-    initialFieldValues = {
-      'regen:previewPhoto': metadata['regen:previewPhoto'],
-      'regen:creditText': metadata['regen:creditText'],
-      'regen:galleryPhotos': metadata['regen:galleryPhotos'],
-      'regen:videoURL': metadata['regen:videoURL'],
-    };
+  const { data: graphData } = useShaclGraphByUriQuery({
+    // do not fetch SHACL Graph until we get the project
+    // and the optional on chain credit class id associatied to it,
+    // this prevents from fetching twice
+    skip: !project,
+    variables: {
+      uri: getProjectShapeIri(creditClassId),
+    },
+  });
+
+  function getInitialFormValues(): MediaValues {
+    let values: MediaValues = {};
+    const metadata = project?.metadata || {};
+    values['regen:previewPhoto'] = getURLInitialValue(
+      metadata['regen:previewPhoto'],
+    );
+    values['regen:galleryPhotos'] = getURLListInitialValue(
+      4,
+      metadata['regen:galleryPhotos'],
+    );
+    values['regen:videoURL'] = getURLInitialValue(metadata['regen:videoURL']);
+
+    if (isVCSValues(values, creditClassId)) {
+      values['regen:creditText'] = metadata['regen:creditText'] || '';
+    } else {
+      values['regen:landStewardPhoto'] = getURLInitialValue(
+        metadata['regen:landStewardPhoto'],
+      );
+    }
+    return values;
   }
 
   const saveAndExit = (): Promise<void> => {
@@ -78,11 +109,15 @@ const Media = (): JSX.Element => {
   const Form = (): JSX.Element => (
     <MediaForm
       submit={submit}
-      initialValues={initialFieldValues}
+      creditClassId={creditClassId}
+      graphData={graphData}
+      initialValues={getInitialFormValues()}
       onNext={navigateNext}
       onPrev={navigatePrev}
     />
   );
+
+  if (loadingProject) return <Loading />;
 
   return isEdit ? (
     <EditFormTemplate>

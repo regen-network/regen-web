@@ -18,7 +18,6 @@ import OutlinedButton from '../buttons/OutlinedButton';
 import TrashIcon from '../icons/TrashIcon';
 import { Subtitle, Label } from '../typography';
 import OnBoardingCard from '../cards/OnBoardingCard';
-import Box from '@mui/material/Box';
 
 const useStyles = makeStyles((theme: Theme) => ({
   checkboxLabel: {

@@ -13,7 +13,7 @@ import {
 } from '../components/templates';
 import MediaForm, {
   MediaValues,
-  isVCSValues,
+  isSimpleValues,
 } from '../components/organisms/MediaForm';
 import { useProjectEditContext } from '../pages/ProjectEdit';
 import { getProjectShapeIri } from '../lib/rdf';
@@ -57,7 +57,7 @@ const Media = (): JSX.Element => {
     );
     values['regen:videoURL'] = getURLInitialValue(metadata['regen:videoURL']);
 
-    if (isVCSValues(values, creditClassId)) {
+    if (isSimpleValues(values, creditClassId)) {
       values['regen:creditText'] = metadata['regen:creditText'] || '';
     } else {
       values['regen:landStewardPhoto'] = getURLInitialValue(

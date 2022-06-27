@@ -9,25 +9,24 @@ import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
 import getApiUri from '../../../lib/apiUri';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
-import type { MediaBaseValues, MediaBaseErrors } from './MediaForm';
+import { MediaBaseValues, MediaBaseErrors, cropAspect } from './MediaForm';
 
-export interface MediaValuesVCS extends MediaBaseValues {
+export interface MediaValuesSimple extends MediaBaseValues {
   'regen:creditText'?: string;
 }
 
-export interface MediaErrorsVCS extends MediaBaseErrors {
+export interface MediaErrorsSimple extends MediaBaseErrors {
   'regen:creditText'?: string;
   'regen:galleryPhotos'?: {
     '@list'?: Array<{ '@value'?: string }>;
   };
 }
 
-/** Simplified media form for VCS projects */
-const MediaFormVCS = (): JSX.Element => {
+/** Simplified media form content for new project-page flow */
+const MediaFormSimple = (): JSX.Element => {
   const styles = useMediaFormStyles();
   const apiUri = getApiUri();
   const { projectId } = useParams();
-  const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
 
   const ImageField = (props: {
     name: string;
@@ -49,7 +48,7 @@ const MediaFormVCS = (): JSX.Element => {
     />
   );
 
-  const { values } = useFormikContext<MediaValuesVCS>();
+  const { values } = useFormikContext<MediaValuesSimple>();
 
   const shouldRenderGalleryPhoto = (i: number): boolean => {
     // don't show option for gallery if there is no preview photo
@@ -91,4 +90,4 @@ const MediaFormVCS = (): JSX.Element => {
   );
 };
 
-export { MediaFormVCS };
+export { MediaFormSimple };

@@ -18,15 +18,14 @@ import { UrlType } from 'web-components/lib/utils/schemaURL';
 import getApiUri from '../../../lib/apiUri';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
-import { cropAspect } from './MediaForm';
-import type { MediaBaseValues, MediaBaseErrors } from './MediaForm';
+import { cropAspect, MediaBaseValues, MediaBaseErrors } from './MediaForm';
 
-export interface MediaValuesNonVCS extends MediaBaseValues {
+export interface MediaValuesLegacy extends MediaBaseValues {
   'regen:landStewardPhoto'?: UrlType;
 }
 
 type valueObject = { '@value': string };
-export interface MediaErrorsNonVCS extends MediaBaseErrors {
+export interface MediaErrorsLegacy extends MediaBaseErrors {
   'regen:galleryPhotos'?: string;
   'regen:landStewardPhoto'?: valueObject;
 }
@@ -41,8 +40,8 @@ const GalleryImgGrid = styled(Grid)(({ theme }) => ({
   },
 }));
 
-/** Media form for non-VCS projects */
-const MediaFormNonVCS = (): JSX.Element => {
+/** Form content for legacy projects */
+const MediaFormLegacy = (): JSX.Element => {
   const styles = useMediaFormStyles();
   const theme = useTheme();
   const apiUri = getApiUri();
@@ -93,7 +92,7 @@ const MediaFormNonVCS = (): JSX.Element => {
     />
   );
 
-  const { errors, touched } = useFormikContext<MediaValuesNonVCS>();
+  const { errors, touched } = useFormikContext<MediaValuesLegacy>();
 
   return (
     <Form translate="yes">
@@ -205,4 +204,4 @@ const MediaFormNonVCS = (): JSX.Element => {
   );
 };
 
-export { MediaFormNonVCS };
+export { MediaFormLegacy };

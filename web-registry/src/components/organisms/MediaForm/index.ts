@@ -1,2 +1,2 @@
 export * from './MediaForm';
-export { MediaForm as default } from './MediaForm';
+export { MediaFormContext as default } from './MediaForm';

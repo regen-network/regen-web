@@ -12,11 +12,11 @@ import {
 } from '../../../lib/rdf';
 import { ProjectPageFooter } from '../../molecules';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
-import { MediaFormVCS } from './MediaFormVCS';
-import { MediaFormNonVCS } from './MediaFormNonVCS';
+import { MediaFormSimple } from './MediaFormSimple';
+import { MediaFormLegacy } from './MediaFormLegacy';
 
-import type { MediaValuesVCS, MediaErrorsVCS } from './MediaFormVCS';
-import type { MediaErrorsNonVCS, MediaValuesNonVCS } from './MediaFormNonVCS';
+import type { MediaValuesSimple, MediaErrorsSimple } from './MediaFormSimple';
+import type { MediaErrorsLegacy, MediaValuesLegacy } from './MediaFormLegacy';
 import type { ShaclGraphByUriQuery, Maybe } from '../../../generated/graphql';
 
 export interface MediaBaseValues {
@@ -31,20 +31,20 @@ export interface MediaBaseErrors {
   'regen:videoURL'?: ValueObject;
 }
 
-export type MediaValues = MediaValuesVCS | MediaValuesNonVCS;
-type MediaErrors = MediaErrorsVCS | MediaErrorsNonVCS;
+export type MediaValues = MediaValuesSimple | MediaValuesLegacy;
+type MediaErrors = MediaErrorsSimple | MediaErrorsLegacy;
 
-export function isVCSValues(
+export function isSimpleValues(
   _values: MediaValues,
   ccId?: Maybe<string> | string,
-): _values is MediaValuesVCS {
+): _values is MediaValuesSimple {
   return !!ccId;
 }
 
-function isVCSErrors(
+function isSimpleErrors(
   _errors: MediaErrors,
   ccId?: Maybe<string> | string,
-): _errors is MediaErrorsVCS {
+): _errors is MediaErrorsSimple {
   return !!ccId;
 }
 
@@ -59,7 +59,8 @@ interface MediaFormProps {
   graphData?: ShaclGraphByUriQuery;
 }
 
-export const MediaForm = ({
+/** Formik Context + handlers for legacy and new media */
+export const MediaFormContext = ({
   initialValues,
   graphData,
   creditClassId,
@@ -110,8 +111,8 @@ export const MediaForm = ({
             errors[compactedPath] = { '@value': requiredMessage };
           }
           if (compactedPath === 'regen:galleryPhotos') {
-            if (!isVCSErrors(errors, creditClassId)) {
-              errors[compactedPath] = requiredMessage;
+            if (!isSimpleErrors(errors, creditClassId)) {
+              errors[compactedPath] = 'You must add 4 photos';
             }
           }
         }
@@ -131,7 +132,7 @@ export const MediaForm = ({
       >
         {({ submitForm, isValid, isSubmitting, touched }) => (
           <>
-            {!!creditClassId ? <MediaFormVCS /> : <MediaFormNonVCS />}
+            {!!creditClassId ? <MediaFormSimple /> : <MediaFormLegacy />}
             <ProjectPageFooter
               onSave={submitForm}
               onNext={props.onNext}

@@ -170,14 +170,16 @@ function ImageDrop({
     }
   };
 
-  const handleDelete: IconButtonProps['onClick'] =
-    e =>
-    async (imageUrl: string): Promise<void> => {
+  const handleDelete: IconButtonProps['onClick'] = e => {
+    if (field.value) {
       form.setFieldValue(field.name, null);
-      if (onDelete) await onDelete(imageUrl);
       setInitialImage('');
       setFileName('');
+    }
+    return async (imageUrl: string): Promise<void> => {
+      if (onDelete) await onDelete(imageUrl);
     };
+  };
 
   return (
     <>

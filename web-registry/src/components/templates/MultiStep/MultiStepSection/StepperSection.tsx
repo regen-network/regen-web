@@ -24,7 +24,9 @@ export default function StepperSection({
   function getResultTitle(
     resultStatus: 'success' | 'error',
   ): string | undefined {
-    return steps?.[activeStep].resultTitle?.[resultStatus];
+    return resultStatus === 'success'
+      ? steps?.[activeStep].resultTitle?.[resultStatus]
+      : undefined;
   }
 
   let title = '';
@@ -37,15 +39,10 @@ export default function StepperSection({
         sx={{ mw: 240 }}
         steps={steps ? steps.map(step => step.name) : []}
         activeStep={activeStep}
-        // TODO ?
-        // onStepClick={(stepIndex: number) => setActiveStep(stepIndex)}
         onStepClick={() => {}}
       />
       <OnBoardingSection title={title} formContainer>
-        <Box minHeight="50vh">
-          {children}
-          {/* TODO ? - <StepperControls /> (with saveFooter)  */}
-        </Box>
+        <Box minHeight="50vh">{children}</Box>
       </OnBoardingSection>
     </>
   );

@@ -1,6 +1,8 @@
 import React from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useNavigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import {
   // Body,
@@ -8,10 +10,11 @@ import {
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
-import { Box } from '@mui/material';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { CardItem } from 'web-components/lib/components/modal/TxModal';
+import { BrokenLinkIcon } from 'web-components/lib/components/icons/BrokenLinkIcon';
 import { truncate } from 'web-components/lib/utils/truncate';
+
 import { Link } from '../../../../components/atoms';
 import { getAccountUrl, getHashUrl } from '../../../../lib/block-explorer';
 
@@ -78,7 +81,7 @@ const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
           linkComponent={Link}
         />
         <CardItemList
-          label={`recipient${recipients.length > 1 && 's'}`}
+          label={`recipient${recipients.length > 1 ? 's' : ''}`}
           values={recipients}
         />
         <CardItem
@@ -110,6 +113,27 @@ const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
 
   return (
     <>
+      <Box
+        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
+        <BrokenLinkIcon sx={{ pb: 4.5 }} />
+        <Title
+          sx={{
+            lineHeight: {
+              xs: '150%',
+              sm: '140%',
+            },
+            px: {
+              sm: 10,
+              xs: 6.5,
+            },
+          }}
+          align="center"
+          variant="h3"
+        >
+          Sorry, your transaction was not successful.
+        </Title>
+      </Box>
       <OnBoardingCard>
         <Title variant="h5">Create Credit Batch</Title>
         <CardItem
@@ -119,9 +143,11 @@ const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
           linkComponent={Link}
         />
       </OnBoardingCard>
-      <OutlinedButton onClick={() => navigate('/ecocredits/dashboard')}>
-        SEE ALL CREDIT BATCHES
-      </OutlinedButton>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <OutlinedButton onClick={() => navigate('/ecocredits/dashboard')}>
+          SEE ALL CREDIT BATCHES
+        </OutlinedButton>
+      </Box>
     </>
   );
 };

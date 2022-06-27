@@ -1,26 +1,29 @@
 import React from 'react';
-import axios from 'axios';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
 import {
   MsgCreateBatch,
   MsgCreateBatch_BatchIssuance,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
-import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
 import { useLedger } from '../../../ledger';
-import getApiUri from '../../../lib/apiUri';
 import useMsgClient from '../../../hooks/useMsgClient';
+import {
+  generateIri,
+  IriFromMetadataSuccess,
+  stringToUint8Array,
+} from '../../../lib/metadata-graph';
+
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
-// Disclaimer - Right now, just case "C01"
+// TODO
+// `projectLocation` is hardcoded to 'US' in MsgCreateBatch.fromPartial
+// This case has not been implemented because the data source changes with the update to
+// ecocredits v1, where the information is already part of the project entity in the ledger.
 
-const iriUrl = '/iri-gen';
-
-function stringToUint8Array(metadata: string): Uint8Array {
-  const encoder = new TextEncoder();
-  return encoder.encode(metadata);
-}
+// TODO
+// Right now, just case "C01" (aka. VCS)
 
 function prepareMetadata(
   partialMetadata: Partial<VCSBatchMetadataLD>,
@@ -47,28 +50,6 @@ function prepareMetadata(
   };
 
   return metadata;
-}
-
-type IriSuccessProp = {
-  iri: string;
-};
-
-type MetadataProp<T> = {
-  metadata: T;
-};
-
-type IriFromMetadataSuccess<T> = IriSuccessProp & MetadataProp<T>;
-type IriFromMetadata<T> = IriFromMetadataSuccess<T>;
-
-async function generateIri<T>(
-  metadata: T,
-): Promise<IriFromMetadata<T> | undefined> {
-  try {
-    const response = await axios.post(getApiUri() + iriUrl, metadata);
-    return response.data;
-  } catch (err) {
-    throw new Error(`Error in iri generation service: ${err}`);
-  }
 }
 
 async function prepareMsg(
@@ -102,7 +83,6 @@ async function prepareMsg(
       if (recipient.withRetire && recipient.retiredAmount > 0) {
         issuanceRecipient.retiredAmount = recipient.retiredAmount.toString();
         issuanceRecipient.retirementLocation = recipient.retirementLocation;
-        // TODO - check optional fields (notes)
       }
       return issuanceRecipient as MsgCreateBatch_BatchIssuance;
     },
@@ -115,7 +95,8 @@ async function prepareMsg(
     metadata: stringToUint8Array(iriResponse.iri),
     startDate: new Date(data.startDate as Date),
     endDate: new Date(data.endDate as Date),
-    projectLocation: 'US', // TODO - Missing
+    // TODO - Hardcoded projectLocation
+    projectLocation: 'US',
   });
 }
 

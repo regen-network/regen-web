@@ -129,7 +129,7 @@ export default function CreditBasics({
 
   return (
     <OnBoardingCard>
-      <CreditClassSelect<CreditBasicsFormValues>
+      <CreditClassSelect
         name="classId"
         required
         saveOptions={setCreditClassOptions}

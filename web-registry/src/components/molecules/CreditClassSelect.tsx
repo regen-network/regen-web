@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Field, useFormikContext } from 'formik';
+import { Field } from 'formik';
+import { QueryClassesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 
 import SelectTextField, {
   Option,
 } from 'web-components/lib/components/inputs/SelectTextField';
-import { blocksToText } from 'web-components/lib/components/block-content';
 
-import { client } from '../../sanity';
-import useQueryListClasses from '../../hooks/useQueryListClasses';
-import { useAllCreditClassQuery } from '../../generated/sanity-graphql';
+import useEcocreditQuery from '../../hooks/useEcocreditQuery';
+import { getMetadataFromUint8Array } from '../../lib/metadata-graph';
 
 interface Props {
   name?: string;
@@ -18,41 +17,51 @@ interface Props {
 
 const defaultCCOption = { value: '', label: 'Choose Credit Class' };
 
-export function CreditClassSelect<T>({
+export function CreditClassSelect({
   name = 'classId',
   required,
   saveOptions,
 }: Props): React.ReactElement {
-  const { setFieldValue } = useFormikContext<T>();
   const [creditClassOptions, setCreditClassOptions] = useState<Option[]>();
-  const onChainClasses = useQueryListClasses();
-  const { data: creditClassData } = useAllCreditClassQuery({ client });
+
+  const { data } = useEcocreditQuery<QueryClassesResponse>({
+    query: 'classes',
+    params: {},
+  });
 
   useEffect(() => {
-    const onChainClassIDs = onChainClasses?.classes?.map(c => c.classId);
-    if (onChainClassIDs && onChainClassIDs.length > 0) {
-      const creditClassesContent = creditClassData?.allCreditClass;
-      const ccOptions =
-        onChainClassIDs?.map(onChainClassId => {
-          const contentMatch = creditClassesContent?.find(
-            content => content.path === onChainClassId,
-          );
+    async function prepareData(): Promise<void> {
+      if (!data || !data.classes) return;
+
+      const creditClassesOptions = await Promise.all(
+        data.classes.map(async creditClass => {
+          const creditClassId = creditClass.classId;
+
+          let metadata;
+          try {
+            metadata = await getMetadataFromUint8Array(creditClass.metadata);
+          } catch (e) {}
+
+          const className = metadata && metadata['schema:name'];
 
           return {
-            value: onChainClassId,
-            label: contentMatch
-              ? `${blocksToText(contentMatch?.nameRaw)} (${onChainClassId})`
-              : onChainClassId,
+            value: creditClassId,
+            label: className
+              ? `${className} (${creditClassId})`
+              : creditClassId,
           };
-        }) || [];
+        }),
+      );
 
       // optionally, saved in parent container
-      if (saveOptions) saveOptions(ccOptions);
+      if (saveOptions) saveOptions(creditClassesOptions);
 
-      const creditClassOptions = [defaultCCOption, ...ccOptions];
+      const creditClassOptions = [defaultCCOption, ...creditClassesOptions];
       setCreditClassOptions(creditClassOptions);
     }
-  }, [onChainClasses, creditClassData, setFieldValue, saveOptions]);
+
+    prepareData();
+  }, [data, saveOptions]);
 
   return (
     <Field

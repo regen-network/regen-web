@@ -32,7 +32,7 @@ export interface MediaBaseErrors {
 }
 
 export type MediaValues = MediaValuesSimple | MediaValuesLegacy;
-type MediaErrors = MediaErrorsSimple | MediaErrorsLegacy;
+export type MediaErrors = MediaErrorsSimple | MediaErrorsLegacy;
 
 export function isSimpleValues(
   _values: MediaValues,
@@ -60,7 +60,7 @@ interface MediaFormProps {
 }
 
 /** Formik Context + handlers for legacy and new media */
-export const MediaFormContext = ({
+export const MediaForm = ({
   initialValues,
   graphData,
   creditClassId,

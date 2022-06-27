@@ -11,10 +11,11 @@ import {
   OnboardingFormTemplate,
   EditFormTemplate,
 } from '../components/templates';
-import MediaForm, {
+import {
+  MediaForm,
   MediaValues,
   isSimpleValues,
-} from '../components/organisms/MediaForm';
+} from '../components/organisms';
 import { useProjectEditContext } from '../pages/ProjectEdit';
 import { getProjectShapeIri } from '../lib/rdf';
 import {
@@ -36,9 +37,6 @@ const Media = (): JSX.Element => {
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
 
   const { data: graphData } = useShaclGraphByUriQuery({
-    // do not fetch SHACL Graph until we get the project
-    // and the optional on chain credit class id associatied to it,
-    // this prevents from fetching twice
     skip: !project,
     variables: {
       uri: getProjectShapeIri(creditClassId),

@@ -1,2 +1,2 @@
-export * from './MediaForm';
-export { MediaFormContext as default } from './MediaForm';
+export { MediaForm, isSimpleValues } from './MediaForm';
+export type { MediaValues } from './MediaForm';

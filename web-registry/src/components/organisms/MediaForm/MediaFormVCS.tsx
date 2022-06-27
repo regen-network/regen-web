@@ -7,8 +7,9 @@ import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
 import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
 
 import getApiUri from '../../../lib/apiUri';
-import type { MediaBaseValues, MediaBaseErrors } from './MediaForm';
 import { useMediaFormStyles } from './useMediaFormStyles';
+
+import type { MediaBaseValues, MediaBaseErrors } from './MediaForm';
 
 export interface MediaValuesVCS extends MediaBaseValues {
   'regen:creditText'?: string;

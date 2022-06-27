@@ -4,6 +4,7 @@ import { Formik, FormikHelpers } from 'formik';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { UrlType, UrlList } from 'web-components/lib/utils/schemaURL';
+
 import {
   validate,
   getProjectPageBaseData,
@@ -11,13 +12,12 @@ import {
 } from '../../../lib/rdf';
 import { ProjectPageFooter } from '../../molecules';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
-import { MediaFormVCS, MediaValuesVCS, MediaErrorsVCS } from './MediaFormVCS';
-import {
-  MediaFormNonVCS,
-  MediaErrorsNonVCS,
-  MediaValuesNonVCS,
-} from './MediaFormNonVCS';
-import { ShaclGraphByUriQuery, Maybe } from '../../../generated/graphql';
+import { MediaFormVCS } from './MediaFormVCS';
+import { MediaFormNonVCS } from './MediaFormNonVCS';
+
+import type { MediaValuesVCS, MediaErrorsVCS } from './MediaFormVCS';
+import type { MediaErrorsNonVCS, MediaValuesNonVCS } from './MediaFormNonVCS';
+import type { ShaclGraphByUriQuery, Maybe } from '../../../generated/graphql';
 
 export interface MediaBaseValues {
   'regen:previewPhoto'?: UrlType;

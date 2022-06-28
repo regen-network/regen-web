@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -64,7 +65,12 @@ const ProjectMetadata: React.FC = () => {
       title="Metadata"
       saveAndExit={saveAndExit}
     >
-      {!isVCS && (
+      {isVCS ? (
+        // TODO https://github.com/regen-network/regen-registry/issues/908
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          {'VCS metadata form not implemented yet'}
+        </Box>
+      ) : (
         <ProjectMetadataForm
           submit={submit}
           initialValues={metadata}

@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
-import { merge } from 'lodash';
-import { cloneDeep } from 'lodash';
+import { merge, cloneDeep } from 'lodash';
 import { ProjectMetadataValues } from '../../../components/organisms';
 import { ProjectByIdQuery } from '../../../generated/graphql';
 import { useUpdateProjectByIdMutation } from '../../../generated/graphql';

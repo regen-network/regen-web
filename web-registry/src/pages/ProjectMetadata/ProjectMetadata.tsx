@@ -1,8 +1,7 @@
-import { Box } from '@mui/material';
 import React from 'react';
+import { omit } from 'lodash';
 import { useParams } from 'react-router-dom';
 
-import { ProjectMetadataForm } from '../../components/organisms';
 import {
   EditFormTemplate,
   OnboardingFormTemplate,
@@ -17,6 +16,8 @@ import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
 import useProjectMetadataSave from './hooks/useProjectMetadataSave';
 import useProjectMetadataSubmit from './hooks/useProjectMetadataSubmit';
+import ProjectMetadataSelectedForm from './ProjectMetadata.SelectedForm';
+import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
 
 const ProjectMetadata: React.FC = () => {
   const { projectId } = useParams();
@@ -29,7 +30,7 @@ const ProjectMetadata: React.FC = () => {
   const project = data?.projectById;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
   const isVCS = creditClassId === 'C01';
-  let metadata: ProjectMetadataLD | undefined;
+  let metadata: Partial<ProjectMetadataLD> | undefined;
 
   const { data: graphData } = useShaclGraphByUriQuery({
     skip: !project,
@@ -39,7 +40,7 @@ const ProjectMetadata: React.FC = () => {
   });
 
   if (project?.metadata) {
-    metadata = project.metadata;
+    metadata = omit(project.metadata, OMITTED_METADATA_KEYS);
   }
 
   const saveAndExit = useProjectMetadataSave();
@@ -51,13 +52,12 @@ const ProjectMetadata: React.FC = () => {
 
   return isEdit ? (
     <EditFormTemplate>
-      {!isVCS && (
-        <ProjectMetadataForm
-          submit={submit}
-          initialValues={metadata}
-          graphData={graphData}
-        />
-      )}
+      <ProjectMetadataSelectedForm
+        submit={submit}
+        metadata={metadata}
+        graphData={graphData}
+        isVCS={isVCS}
+      />
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -65,18 +65,12 @@ const ProjectMetadata: React.FC = () => {
       title="Metadata"
       saveAndExit={saveAndExit}
     >
-      {isVCS ? (
-        // TODO https://github.com/regen-network/regen-registry/issues/908
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          {'VCS metadata form not implemented yet'}
-        </Box>
-      ) : (
-        <ProjectMetadataForm
-          submit={submit}
-          initialValues={metadata}
-          graphData={graphData}
-        />
-      )}
+      <ProjectMetadataSelectedForm
+        submit={submit}
+        metadata={metadata}
+        graphData={graphData}
+        isVCS={isVCS}
+      />
     </OnboardingFormTemplate>
   );
 };

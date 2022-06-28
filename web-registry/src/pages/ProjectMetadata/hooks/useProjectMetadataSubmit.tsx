@@ -10,13 +10,15 @@ type Props = {
   updateProject: ReturnType<typeof useUpdateProjectByIdMutation>[0];
 };
 
-type ReturnedType = (values: ProjectMetadataValues) => Promise<void>;
+export type useProjectMetadataSubmitReturnedType = (
+  values: ProjectMetadataValues,
+) => Promise<void>;
 
 const useProjectMetadataSubmit = ({
   project,
   projectId,
   updateProject,
-}: Props): ReturnedType => {
+}: Props): useProjectMetadataSubmitReturnedType => {
   const projectMetadataSubmit = useCallback(
     async function submit(values: ProjectMetadataValues): Promise<void> {
       const parsedMetaData = JSON.parse(values.metadata);

@@ -15,7 +15,7 @@ import { validationSchema } from './ProjectMetadataForm.utils';
 
 interface ProjectMetadataFormProps {
   submit: (values: ProjectMetadataValues) => Promise<void>;
-  initialValues?: ProjectMetadataLD;
+  initialValues?: Partial<ProjectMetadataLD>;
   graphData?: ShaclGraphByUriQuery;
 }
 

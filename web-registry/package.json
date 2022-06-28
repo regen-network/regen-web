@@ -14,7 +14,7 @@
     "@mui/material": "^5.1.0",
     "@mui/styles": "^5.1.0",
     "@rdfjs/parser-jsonld": "^1.2.1",
-    "@regen-network/api": "^0.2.2",
+    "@regen-network/api": "^0.3.0",
     "@stripe/stripe-js": "^1.5.0",
     "@types/auth0-js": "^9.14.5",
     "@types/clientjs": "^0.1.0",
@@ -70,8 +70,8 @@
     ]
   },
   "devDependencies": {
-    "@keplr-wallet/types": "^0.9.0",
     "@keplr-wallet/cosmos": "^0.10.5",
+    "@keplr-wallet/types": "^0.9.0",
     "@storybook/addon-storyshots": "^6.3.12",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",

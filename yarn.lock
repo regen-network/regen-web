@@ -4603,10 +4603,10 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
-"@regen-network/api@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@regen-network/api/-/api-0.2.2.tgz#7fc4b8c5fbf81387350bd2be12b3403939f3156f"
-  integrity sha512-gGRnql9L31Q8cOH4FIMXvRnd+LaQADFDdPeGbPPCQH97/fY0YmC7lVe0+bNLDWvAK4xsxD6kjSuDL192k3jB6A==
+"@regen-network/api@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@regen-network/api/-/api-0.3.0.tgz#dcb62908e28a04a404459125f3ad45bd7cf507fb"
+  integrity sha512-7mO8ssoB4oQeZXVcdI258KJNIwExyofhvrS8tG7R6tufui+bmOpLStJGrrU3tPqsQufYOqzUqh1u/pNdWcVBEQ==
   dependencies:
     "@cosmjs/stargate" "^0.27.0"
 

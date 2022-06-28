@@ -85,10 +85,7 @@ export const MediaForm = ({
 
   const handleValidate = async (values: MediaValues): Promise<MediaErrors> => {
     const errors: MediaErrors = {};
-    console.log(values);
-
     if (graphData?.shaclGraphByUri?.graph) {
-      console.log('graph');
       const projectPageData = {
         ...getProjectPageBaseData(creditClassId),
         ...values,
@@ -99,12 +96,6 @@ export const MediaForm = ({
         'http://regen.network/ProjectPageMediaGroup',
       );
       for (const result of report.results) {
-        console.log(result.message);
-        console.log(result.path);
-        console.log(result.focusNode);
-        console.log(result.severity);
-        console.log(result.sourceConstraintComponent);
-        console.log(result.sourceShape);
         const path: string = result.path?.value;
         let compactedPath: keyof MediaValues | undefined;
         if (path) {
@@ -135,7 +126,6 @@ export const MediaForm = ({
         }
       }
     }
-    console.log(errors);
     return errors;
   };
 

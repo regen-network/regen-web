@@ -1,6 +1,6 @@
 export interface UrlType {
   '@type': 'schema:URL';
-  '@value'?: string;
+  '@value'?: string | null;
 }
 
 export interface UrlList {
@@ -11,6 +11,7 @@ export function getURLInitialValue(value?: UrlType): UrlType {
   return (
     value || {
       '@type': 'schema:URL',
+      '@value': null,
     }
   );
 }

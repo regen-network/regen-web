@@ -85,7 +85,10 @@ export const MediaForm = ({
 
   const handleValidate = async (values: MediaValues): Promise<MediaErrors> => {
     const errors: MediaErrors = {};
+    console.log(values);
+
     if (graphData?.shaclGraphByUri?.graph) {
+      console.log('graph');
       const projectPageData = {
         ...getProjectPageBaseData(creditClassId),
         ...values,
@@ -96,28 +99,43 @@ export const MediaForm = ({
         'http://regen.network/ProjectPageMediaGroup',
       );
       for (const result of report.results) {
-        const path: string = result.path.value;
-        const compactedPath = getCompactedPath(path) as
-          | keyof MediaValues
-          | undefined;
-        if (compactedPath) {
-          if (
-            [
-              'regen:previewPhoto',
-              'regen:videoURL',
-              'regen:landStewardPhoto',
-            ].includes(compactedPath)
-          ) {
-            errors[compactedPath] = { '@value': requiredMessage };
-          }
-          if (compactedPath === 'regen:galleryPhotos') {
-            if (!isSimpleErrors(errors, creditClassId)) {
-              errors[compactedPath] = 'You must add 4 photos';
+        console.log(result.message);
+        console.log(result.path);
+        console.log(result.focusNode);
+        console.log(result.severity);
+        console.log(result.sourceConstraintComponent);
+        console.log(result.sourceShape);
+        const path: string = result.path?.value;
+        let compactedPath: keyof MediaValues | undefined;
+        if (path) {
+          compactedPath = getCompactedPath(path) as
+            | keyof MediaValues
+            | undefined;
+        }
+        // Legacy validation logic
+        if (!isSimpleErrors(errors, creditClassId)) {
+          if (path) {
+            if (compactedPath === 'regen:previewPhoto') {
+              errors[compactedPath] = { '@value': requiredMessage };
+            } else {
+              // for gallery photos, display general error message below "Gallery Photos" section
+              errors['regen:galleryPhotos'] = 'You must add 4 photos';
             }
+          } else {
+            // sh:or constraint not satisfied on regen:landStewardPhoto/regen:videoURL
+            errors['regen:landStewardPhoto'] = {
+              '@value': requiredMessage,
+            };
+          }
+        } else {
+          // Simple validation logic
+          if (compactedPath) {
+            errors[compactedPath] = { '@value': requiredMessage };
           }
         }
       }
     }
+    console.log(errors);
     return errors;
   };
 

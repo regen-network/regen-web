@@ -1,6 +1,6 @@
 type ReturnedType = () => Promise<void>;
 
-const useProjectMetadataSave = (): ReturnedType => {
+export const useProjectMetadataSave = (): ReturnedType => {
   const saveAndExit = (): Promise<void> => {
     // TODO: functionality
     return Promise.resolve();
@@ -8,5 +8,3 @@ const useProjectMetadataSave = (): ReturnedType => {
 
   return saveAndExit;
 };
-
-export default useProjectMetadataSave;

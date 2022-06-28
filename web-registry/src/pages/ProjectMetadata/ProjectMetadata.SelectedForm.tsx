@@ -12,7 +12,7 @@ type Props = {
   graphData?: ShaclGraphByUriQuery;
 };
 
-const ProjectMetadataSelectedForm = ({
+export const ProjectMetadataSelectedForm = ({
   graphData,
   isVCS,
   metadata,
@@ -30,4 +30,3 @@ const ProjectMetadataSelectedForm = ({
       graphData={graphData}
     />
   );
-export default ProjectMetadataSelectedForm;

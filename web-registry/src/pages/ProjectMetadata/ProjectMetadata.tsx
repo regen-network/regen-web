@@ -14,12 +14,12 @@ import {
 import { ProjectMetadataLD } from '../../generated/json-ld';
 import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
-import useProjectMetadataSave from './hooks/useProjectMetadataSave';
-import useProjectMetadataSubmit from './hooks/useProjectMetadataSubmit';
-import ProjectMetadataSelectedForm from './ProjectMetadata.SelectedForm';
 import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
+import { useProjectMetadataSave } from './hooks/useProjectMetadataSave';
+import { useProjectMetadataSubmit } from './hooks/useProjectMetadataSubmit';
+import { ProjectMetadataSelectedForm } from './ProjectMetadata.SelectedForm';
 
-const ProjectMetadata: React.FC = () => {
+export const ProjectMetadata: React.FC = () => {
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
   const [updateProject] = useUpdateProjectByIdMutation();
@@ -74,5 +74,3 @@ const ProjectMetadata: React.FC = () => {
     </OnboardingFormTemplate>
   );
 };
-
-export { ProjectMetadata };

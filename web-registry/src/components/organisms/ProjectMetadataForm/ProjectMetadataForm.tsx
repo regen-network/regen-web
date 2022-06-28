@@ -10,7 +10,7 @@ import { ShaclGraphByUriQuery } from '../../../generated/graphql';
 import { ProjectMetadataLD } from '../../../generated/json-ld';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../../molecules';
-import useProjectMetadataFormSubmit from './hooks/useProjectMetadataFormSubmit';
+import { useProjectMetadataFormSubmit } from './hooks/useProjectMetadataFormSubmit';
 import { validationSchema } from './ProjectMetadataForm.utils';
 
 interface ProjectMetadataFormProps {
@@ -23,7 +23,7 @@ export interface ProjectMetadataValues {
   metadata: string;
 }
 
-const ProjectMetadataForm = ({
+export const ProjectMetadataForm = ({
   submit,
   initialValues,
 }: ProjectMetadataFormProps): JSX.Element => {
@@ -75,5 +75,3 @@ const ProjectMetadataForm = ({
     </Formik>
   );
 };
-
-export { ProjectMetadataForm };

@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
 import { merge, cloneDeep } from 'lodash';
 import { ProjectMetadataValues } from '../../../components/organisms';
-import { ProjectByIdQuery } from '../../../generated/graphql';
-import { useUpdateProjectByIdMutation } from '../../../generated/graphql';
+import {
+  ProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+} from '../../../generated/graphql';
 
 type Props = {
   project?: ProjectByIdQuery['projectById'];
@@ -14,7 +16,7 @@ export type useProjectMetadataSubmitReturnedType = (
   values: ProjectMetadataValues,
 ) => Promise<void>;
 
-const useProjectMetadataSubmit = ({
+export const useProjectMetadataSubmit = ({
   project,
   projectId,
   updateProject,
@@ -46,5 +48,3 @@ const useProjectMetadataSubmit = ({
 
   return projectMetadataSubmit;
 };
-
-export default useProjectMetadataSubmit;

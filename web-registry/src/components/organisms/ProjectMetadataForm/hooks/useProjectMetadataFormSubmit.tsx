@@ -8,16 +8,16 @@ type Props = {
   submit: (values: ProjectMetadataValues) => void;
 };
 
-type ReturnType = (
+type ReturnedType = (
   values: ProjectMetadataValues,
   { setSubmitting, setTouched }: FormikHelpers<ProjectMetadataValues>,
 ) => Promise<void>;
 
-const useProjectMetadataFormSubmit = ({
+export const useProjectMetadataFormSubmit = ({
   isEdit,
   confirmSave,
   submit,
-}: Props): ReturnType => {
+}: Props): ReturnedType => {
   const onSubmit = useCallback(
     async (
       values: ProjectMetadataValues,
@@ -38,5 +38,3 @@ const useProjectMetadataFormSubmit = ({
 
   return onSubmit;
 };
-
-export default useProjectMetadataFormSubmit;

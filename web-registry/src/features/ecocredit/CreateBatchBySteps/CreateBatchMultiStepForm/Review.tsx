@@ -1,7 +1,9 @@
 import React from 'react';
 import { useFormikContext } from 'formik';
+import { makeStyles } from '@mui/styles';
 
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { useMultiStep } from '../../../../components/templates/MultiStep';
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
@@ -24,6 +26,16 @@ import {
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
 // TODO: Only covers case C01
+
+const useStyles = makeStyles((theme: Theme) => ({
+  infoCard: {
+    marginBottom: theme.spacing(0),
+  },
+  recipientsCard: {
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(0),
+  },
+}));
 
 export default function Review(): JSX.Element {
   const { values, validateForm, isValid } =
@@ -69,11 +81,12 @@ function CreditBatchInfo({
   data,
   dataDisplay,
 }: CreditBatchInfoProps): JSX.Element {
+  const styles = useStyles();
   const { handleActiveStep } = useMultiStep();
   const metadata = data.metadata as VCSBatchMetadataLD;
 
   return (
-    <OnBoardingCard>
+    <OnBoardingCard className={styles.infoCard}>
       <Box
         sx={{
           display: 'flex',
@@ -123,9 +136,10 @@ type RecipientInfoProps = {
 };
 
 function RecipientInfo({ data, index }: RecipientInfoProps): JSX.Element {
+  const styles = useStyles();
   const { handleActiveStep } = useMultiStep();
   return (
-    <OnBoardingCard>
+    <OnBoardingCard className={styles.recipientsCard}>
       <Box
         sx={{
           display: 'flex',
@@ -202,7 +216,11 @@ function AdditionalCertificationDisplay({
           <Subtitle size="lg" sx={{ mt: 9, mb: 2 }}>
             Additional certification {index} url
           </Subtitle>
-          <Link sx={{ color: 'secondary.main' }} href={url} target="_blank">
+          <Link
+            sx={{ color: 'secondary.main', fontWeight: 'bold' }}
+            href={url}
+            target="_blank"
+          >
             {url}
           </Link>
         </>

@@ -218,7 +218,8 @@ const AdditionalCerfications: React.FC<{
                   justifyContent: 'space-between',
                   mt: 3,
                   py: 2,
-                  px: 5,
+                  pl: 5,
+                  pr: 2,
                   border: 1,
                   borderColor: 'info.light',
                   bgcolor: 'grey.50',
@@ -227,7 +228,7 @@ const AdditionalCerfications: React.FC<{
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   <span>{cert['schema:name']}</span>
                   <Link
-                    sx={{ color: 'secondary.main' }}
+                    sx={{ color: 'secondary.main', fontWeight: 'bold' }}
                     href={cert['schema:url']['@value']}
                     target="_blank"
                   >

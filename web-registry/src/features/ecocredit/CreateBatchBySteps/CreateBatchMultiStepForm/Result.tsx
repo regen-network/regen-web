@@ -77,7 +77,10 @@ const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
         <Title variant="h5">Create Credit Batch</Title>
         <CardItem
           label="batch denom"
-          value={{ name: batchDenom }}
+          value={{
+            name: batchDenom,
+            url: `/credit-batches/${batchDenom}`,
+          }}
           linkComponent={Link}
         />
         <CardItemList

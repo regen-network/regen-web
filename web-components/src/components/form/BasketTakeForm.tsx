@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
 import { Collapse } from '@mui/material';
-import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
+import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import AmountField from '../inputs/AmountField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
@@ -54,7 +54,7 @@ interface CreditTakeFormValues extends MetaRetireFormValues {
 }
 
 export interface BasketTakeProps extends BottomCreditRetireFieldsProps {
-  basket: Basket;
+  basket: BasketInfo;
   basketDisplayDenom: string;
   accountAddress: string;
   balance: number;
@@ -79,7 +79,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
 
   const initialValues = {
     amount: 0,
-    retireOnTake: !basket.disableAutoRetire,
+    retireOnTake: !basket,
     note: '',
     country: 'US',
     stateProvince: '',

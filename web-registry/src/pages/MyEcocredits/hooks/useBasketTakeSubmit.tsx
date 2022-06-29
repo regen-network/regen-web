@@ -41,7 +41,6 @@ const useBasketTakeSubmit = ({
         owner: accountAddress,
         basketDenom: values.basketDenom,
         amount,
-        retirementLocation: values.retirementLocation || '',
         retireOnTake: values.retireOnTake || false,
       });
 

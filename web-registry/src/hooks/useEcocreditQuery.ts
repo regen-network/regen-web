@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
 // TODO: move query client creation to the ledger context ?
-import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { useLedger } from '../ledger';
 import {

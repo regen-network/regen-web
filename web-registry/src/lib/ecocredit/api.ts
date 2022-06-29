@@ -5,17 +5,17 @@ import {
   DeepPartial,
   QueryBalanceRequest,
   QueryBalanceResponse,
-  QueryBatchesRequest,
-  QueryBatchesResponse,
-  QueryBatchInfoRequest,
-  QueryBatchInfoResponse,
+  QueryBatchesByClassRequest,
+  QueryBatchesByClassResponse,
+  QueryBatchRequest,
+  QueryBatchResponse,
   QueryClassesRequest,
   QueryClassesResponse,
-  QueryClassInfoRequest,
-  QueryClassInfoResponse,
+  QueryClassRequest,
+  QueryClassResponse,
   QueryCreditTypesRequest,
   QueryCreditTypesResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import {
   ServiceClientImpl,
@@ -197,7 +197,7 @@ const getReadableName = (eventType?: string): string | undefined => {
 export const queryEcoClasses = async (
   params?: URLSearchParams,
 ): Promise<AxiosResponse<QueryClassesResponseV0>> => {
-  return axios.get(`${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes`, {
+  return axios.get(`${ledgerRESTUri}/regen/ecocredit/v1/classes`, {
     params,
   });
 };
@@ -217,7 +217,7 @@ export const queryEcoBatches = async (
         params.set('class_id', creditClassId);
       }
       const { data } = await axios.get(
-        `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches`,
+        `${ledgerRESTUri}/regen/ecocredit/v1/batches`,
         {
           params,
         },
@@ -236,7 +236,7 @@ export const queryEcoBatches = async (
         const arr: BatchInfo[] = await Promise.all(
           classes.map(async c => {
             const { data } = await axios.get(
-              `${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes/${c.class_id}/batches`,
+              `${ledgerRESTUri}/regen/ecocredit/v1/classes/${c.class_id}/batches`,
             );
             return data.batches;
           }),
@@ -245,7 +245,7 @@ export const queryEcoBatches = async (
         batches = arr.flat();
       } else {
         const { data } = await axios.get(
-          `${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes/${creditClassId}/batches`,
+          `${ledgerRESTUri}/regen/ecocredit/v1/classes/${creditClassId}/batches`,
         );
         batches = data.batches;
       }
@@ -264,7 +264,7 @@ export const queryEcoBatchInfo = async (
 ): Promise<QueryBatchInfoResponseV0> => {
   try {
     const { data } = await axios.get(
-      `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches/${denom}`,
+      `${ledgerRESTUri}/regen/ecocredit/v1/batches/${denom}`,
     );
     return data;
   } catch (err) {
@@ -277,7 +277,7 @@ export const queryEcoBatchSupply = async (
 ): Promise<QuerySupplyResponse> => {
   try {
     const { data } = await axios.get(
-      `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/supply`,
+      `${ledgerRESTUri}/regen/ecocredit/v1/batches/${batchDenom}/supply`,
     );
     return data;
   } catch (err) {
@@ -291,7 +291,7 @@ const queryEcoBalance = async (
 ): Promise<QueryBalanceResponseV0> => {
   try {
     const { data } = await axios.get<QueryBalanceResponseV0>(
-      `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches/${batchDenom}/balance/${account}`,
+      `${ledgerRESTUri}/regen/ecocredit/v1/batches/${batchDenom}/balance/${account}`,
     );
     return data;
   } catch (err) {
@@ -322,7 +322,7 @@ export const queryEcoClassInfo = async (
 ): Promise<QueryClassInfoResponseV0> => {
   try {
     const { data } = await axios.get(
-      `${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes/${class_id}`,
+      `${ledgerRESTUri}/regen/ecocredit/v1/classes/${class_id}`,
     );
     return data;
   } catch (err) {
@@ -368,17 +368,17 @@ type BalanceParams = {
 
 type BatchInfoParams = {
   query: 'batchInfo';
-  params: DeepPartial<QueryBatchInfoRequest>;
+  params: DeepPartial<QueryBatchRequest>;
 };
 
 type BatchesParams = {
   query: 'batches';
-  params: DeepPartial<QueryBatchesRequest>;
+  params: DeepPartial<QueryBatchesByClassRequest>;
 };
 
 type ClassInfoParams = {
   query: 'classInfo';
-  params: DeepPartial<QueryClassInfoRequest>;
+  params: DeepPartial<QueryBatchRequest>;
 };
 
 type ClassesParams = {
@@ -403,9 +403,9 @@ export type EcocreditQueryProps =
 
 export type EcocreditQueryResponse =
   | QueryBalanceResponse
-  | QueryBatchInfoResponse
-  | QueryBatchesResponse
-  | QueryClassInfoResponse
+  | QueryBatchResponse
+  | QueryBatchesByClassResponse
+  | QueryClassResponse
   | QueryClassesResponse
   | QueryCreditTypesResponse;
 
@@ -427,7 +427,7 @@ export const queryBalance = async ({
 }: QueryBalanceProps): Promise<QueryBalanceResponse> => {
   try {
     return await client.Balance({
-      account: request.account,
+      address: request.address,
       batchDenom: request.batchDenom,
     });
   } catch (err) {
@@ -440,15 +440,15 @@ export const queryBalance = async ({
 // Batch info
 
 interface QueryBatchInfoProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryBatchInfoRequest>;
+  request: DeepPartial<QueryBatchRequest>;
 }
 
 export const queryBatchInfo = async ({
   client,
   request,
-}: QueryBatchInfoProps): Promise<QueryBatchInfoResponse> => {
+}: QueryBatchInfoProps): Promise<QueryBatchResponse> => {
   try {
-    return await client.BatchInfo({
+    return await client.Batch({
       batchDenom: request.batchDenom,
     });
   } catch (err) {
@@ -461,15 +461,15 @@ export const queryBatchInfo = async ({
 // Batches
 
 interface QueryBatchesProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryBatchesRequest>;
+  request: DeepPartial<QueryBatchesByClassRequest>;
 }
 
 export const queryBatches = async ({
   client,
   request,
-}: QueryBatchesProps): Promise<QueryBatchesResponse> => {
+}: QueryBatchesProps): Promise<QueryBatchesByClassResponse> => {
   try {
-    return await client.Batches({
+    return await client.BatchesByClass({
       classId: request.classId,
     });
   } catch (err) {
@@ -482,15 +482,15 @@ export const queryBatches = async ({
 // Class info
 
 interface QueryClassInfoProps extends EcocreditQueryClientProps {
-  request: DeepPartial<QueryClassInfoRequest>;
+  request: DeepPartial<QueryClassRequest>;
 }
 
 export const queryClassInfo = async ({
   client,
   request,
-}: QueryClassInfoProps): Promise<QueryClassInfoResponse> => {
+}: QueryClassInfoProps): Promise<QueryClassResponse> => {
   try {
-    return await client.ClassInfo({
+    return await client.Class({
       classId: request.classId,
     });
   } catch (err) {

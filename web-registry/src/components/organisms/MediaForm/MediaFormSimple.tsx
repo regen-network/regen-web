@@ -3,7 +3,10 @@ import { useParams } from 'react-router-dom';
 import { Form, Field, useFormikContext } from 'formik';
 
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
+import {
+  ImageUpload,
+  ImageUploadProps,
+} from 'web-components/lib/components/inputs/ImageUpload';
 import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
 
 import getApiUri from '../../../lib/apiUri';
@@ -25,30 +28,19 @@ export interface MediaErrorsSimple extends MediaBaseErrors {
 /** Simplified media form content for new project-page flow */
 const MediaFormSimple = (): JSX.Element => {
   const styles = useMediaFormStyles();
-  const apiUri = getApiUri();
+  const apiServerUrl = getApiUri();
   const { projectId } = useParams();
-
-  const ImageField = (props: {
-    name: string;
-    description?: string;
-    label?: string;
-  }): JSX.Element => (
-    <Field
-      classes={{ main: styles.fullSizeMedia }}
-      component={ImageUpload}
-      label={props.label}
-      description={props.description}
-      buttonText="+ Add Photo"
-      fixedCrop={cropAspect}
-      name={props.name}
-      apiServerUrl={apiUri}
-      projectId={projectId}
-      optional
-      isDrop
-    />
-  );
-
   const { values } = useFormikContext<MediaValuesSimple>();
+
+  const imgDefaultProps: Partial<ImageUploadProps> = {
+    apiServerUrl,
+    projectId,
+    optional: true,
+    isDrop: true,
+    classes: { main: styles.fullSizeMedia },
+    buttonText: '+ Add Photo',
+    fixedCrop: cropAspect,
+  };
 
   const shouldRenderGalleryPhoto = (i: number): boolean => {
     // don't show option for gallery if there is no preview photo
@@ -61,14 +53,23 @@ const MediaFormSimple = (): JSX.Element => {
 
   return (
     <Form translate="yes">
-      <ImageField
+      <Field
+        {...imgDefaultProps}
         name="regen:previewPhoto.@value"
         description="Choose the photos that will show up on the project page. The first photo will be your preview photo."
         label="Photos"
+        component={ImageUpload}
       />
       {(values['regen:galleryPhotos']?.['@list'] || []).map((_photo, i) =>
         shouldRenderGalleryPhoto(i) ? (
-          <ImageField key={i} name={`regen:galleryPhotos.@list[${i}].@value`} />
+          <Field
+            {...imgDefaultProps}
+            key={i}
+            name={`regen:galleryPhotos.@list[${i}].@value`}
+            description="Choose the photos that will show up on the project page. The first photo will be your preview photo."
+            label="Photos"
+            component={ImageUpload}
+          />
         ) : (
           <React.Fragment key={i} /> // Formik expects a react element - this avoids console bug
         ),

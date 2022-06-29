@@ -49,6 +49,7 @@ const MediaFormLegacy = (): JSX.Element => {
   const theme = useTheme();
   const apiUri = getApiUri();
   const { projectId } = useParams();
+  const { errors, touched } = useFormikContext<MediaValuesLegacy>();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
 
   /** defaults for image fields */
@@ -68,8 +69,6 @@ const MediaFormLegacy = (): JSX.Element => {
     ...imgFieldProps,
     classes: { main: styles.fullSizeMedia },
   };
-
-  const { errors, touched } = useFormikContext<MediaValuesLegacy>();
 
   return (
     <Form translate="yes">

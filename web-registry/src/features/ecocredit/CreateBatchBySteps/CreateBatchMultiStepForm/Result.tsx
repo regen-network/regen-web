@@ -5,7 +5,6 @@ import { Box } from '@mui/material';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import {
-  // Body,
   Label,
   Subtitle,
   Title,

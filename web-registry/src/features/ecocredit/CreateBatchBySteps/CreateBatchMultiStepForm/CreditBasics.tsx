@@ -18,7 +18,6 @@ import {
   vcsRetirementSerialRE,
   invalidVCSRetirement,
   invalidVCSID,
-  numericOnlyRE,
   isValidJSON,
   invalidJSON,
 } from 'web-components/lib/components/inputs/validation';
@@ -40,9 +39,11 @@ export interface CreditBasicsFormValues {
 }
 
 const vcsMetadataSchema: Yup.AnyObjectSchema = Yup.object({
-  'regen:vcsProjectId': Yup.string()
+  'regen:vcsProjectId': Yup.number()
+    .positive()
+    .integer()
     .required(requiredMessage)
-    .matches(numericOnlyRE, { message: invalidVCSID }),
+    .typeError(invalidVCSID),
   'regen:vcsRetirementSerialNumber': Yup.string()
     .required(requiredMessage)
     .matches(vcsRetirementSerialRE, { message: invalidVCSRetirement }),

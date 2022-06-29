@@ -15,6 +15,8 @@ import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
 import Review from './Review';
 import Result from './Result';
+import NotFound from 'web-components/lib/components/not-found';
+import RotationalGrazing from '../../../../assets/rotational-grazing.png';
 
 /**
  *
@@ -102,7 +104,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
       case 2:
         return <Review />;
       default:
-        return <div>Not Found</div>;
+        return <NotFound img={<img alt="home" src={RotationalGrazing} />} />;
     }
   }
 
@@ -121,7 +123,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
         {({ submitForm, isValid, isSubmitting }) => (
           <Form id={formModel.formId}>
             {renderStep(activeStep)}
-            {/* TODO ? - Move to?: MultiStepSection > StepperSection > StepperControls */}
+            {/* TODO ? - Move to: MultiStepSection > StepperSection > StepperControls */}
             {!isLastStep && (
               <SaveFooter
                 onPrev={activeStep > 0 ? handleBack : undefined}

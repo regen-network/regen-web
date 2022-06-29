@@ -17,8 +17,10 @@ import {
 
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
-// TODO
-// `projectLocation` is hardcoded to 'US' in MsgCreateBatch.fromPartial
+// TODO - Deprecated
+// `projectLocation` won't be needed anymore starting from v4.0
+// https://github.com/regen-network/regen-registry/issues/968
+// right now `projectLocation` is hardcoded to 'US' in MsgCreateBatch.fromPartial
 // This case has not been implemented because the data source changes with the update to
 // ecocredits v1, where the information is already part of the project entity in the ledger.
 
@@ -28,14 +30,17 @@ import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMul
 function prepareMetadata(
   partialMetadata: Partial<VCSBatchMetadataLD>,
 ): VCSBatchMetadataLD | undefined {
-  const projectId = partialMetadata['regen:vcsProjectId'];
+  const projectIdRaw = partialMetadata['regen:vcsProjectId'];
   const retirementSerialNumber =
     partialMetadata['regen:vcsRetirementSerialNumber'];
 
   const additionalCertifications =
     partialMetadata['regen:additionalCertifications'];
 
-  if (!projectId || !retirementSerialNumber) return;
+  if (!projectIdRaw || !retirementSerialNumber) return;
+
+  const projectId =
+    typeof projectIdRaw === 'number' ? projectIdRaw : parseInt(projectIdRaw);
 
   const metadata: VCSBatchMetadataLD = {
     '@context': {
@@ -95,7 +100,8 @@ async function prepareMsg(
     metadata: stringToUint8Array(iriResponse.iri),
     startDate: new Date(data.startDate as Date),
     endDate: new Date(data.endDate as Date),
-    // TODO - Hardcoded projectLocation
+    // TODO - Deprecated - Hardcoded projectLocation (see comment above)
+    // projectLocation won't be needed anymore starting from v4.0
     projectLocation: 'US',
   });
 }

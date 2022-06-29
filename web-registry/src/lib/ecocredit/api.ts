@@ -322,7 +322,7 @@ export const queryEcoClassInfo = async (
 ): Promise<QueryClassInfoResponseV0> => {
   try {
     const { data } = await axios.get(
-      `${ledgerRESTUri}/regen/ecocredit/v1/classes/${class_id}`,
+      `${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes/${class_id}`,
     );
     return data;
   } catch (err) {

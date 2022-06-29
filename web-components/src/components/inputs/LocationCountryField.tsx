@@ -6,7 +6,7 @@ import { countries } from '../../utils/countries';
 
 interface FieldProps {
   className?: string;
-  optional?: boolean | string;
+  optional?: boolean;
   name?: string;
 }
 

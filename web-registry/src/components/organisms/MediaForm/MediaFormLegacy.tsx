@@ -85,7 +85,7 @@ const MediaFormLegacy = (): JSX.Element => {
         <FormLabel
           description="People love pictures of people! Upload images of the land stewards, in addition to the land and animals."
           label="Gallery Photos"
-          labelSubText="(min 4 photos)"
+          optional="(min 4 photos)"
         />
         <Grid container spacing={3} direction="row" sx={{ mt: 1 }}>
           <GalleryImgGrid item xs={6} sm="auto">
@@ -179,9 +179,9 @@ const MediaFormLegacy = (): JSX.Element => {
           )}
       </Box>
       <Field
+        optional
         component={VideoInput}
         label="Video url"
-        optional
         description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
         name="regen:videoURL.@value"
       />
@@ -191,7 +191,7 @@ const MediaFormLegacy = (): JSX.Element => {
         component={ImageUpload}
         description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."
         label="Preview photo"
-        labelSubText="(required if you don’t add a video)"
+        optional="(required if you don’t add a video)"
         name="regen:landStewardPhoto.@value"
       />
     </Form>

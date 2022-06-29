@@ -13,7 +13,7 @@ import FieldFormControl from './FieldFormControl';
 interface DatePickProps extends FieldProps {
   sx?: SxProps<Theme>;
   label: string;
-  optional?: boolean;
+  optional?: boolean | string;
   placeholder?: string;
 }
 
@@ -137,7 +137,7 @@ const DatePickField: React.FC<DatePickProps> = ({
   const styles = useStyles({
     disabled: form.isSubmitting,
     errors: !!form.errors[field.name],
-    optional,
+    optional: !!optional,
     field,
     form,
     meta,

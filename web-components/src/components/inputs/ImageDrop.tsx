@@ -22,8 +22,7 @@ export interface ImageDropProps extends FieldProps {
     button?: string;
   };
   label?: string;
-  optional?: boolean;
-  labelSubText?: string;
+  optional?: boolean | string;
   buttonText?: string;
   fixedCrop: Partial<Crop>;
   hideDragText?: boolean;
@@ -84,7 +83,6 @@ function ImageDrop({
   classes,
   label,
   optional,
-  labelSubText,
   buttonText,
   fixedCrop,
   hideDragText,
@@ -188,7 +186,6 @@ function ImageDrop({
         label={label}
         disabled={form.isSubmitting}
         optional={optional}
-        labelSubText={labelSubText}
         {...fieldProps}
       >
         {() =>

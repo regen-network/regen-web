@@ -25,8 +25,7 @@ export interface VideoInputProps extends FieldProps {
     button?: string;
   };
   label?: string;
-  optional?: boolean;
-  labelSubText?: string;
+  optional?: boolean | string;
   buttonText?: string;
 }
 
@@ -75,7 +74,6 @@ function VideoInput({
   classes,
   label,
   optional,
-  labelSubText,
   buttonText,
   ...fieldProps
 }: VideoInputProps): JSX.Element {
@@ -106,7 +104,6 @@ function VideoInput({
       label={label}
       disabled={form.isSubmitting}
       optional={optional}
-      labelSubText={labelSubText}
       {...fieldProps}
     >
       {() => (

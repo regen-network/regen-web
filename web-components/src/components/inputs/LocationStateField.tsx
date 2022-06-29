@@ -8,7 +8,7 @@ interface FieldProps {
   country: string;
   name?: string;
   className?: string;
-  optional?: boolean;
+  optional?: boolean | string;
 }
 
 const LocationStateField: React.FC<FieldProps> = ({

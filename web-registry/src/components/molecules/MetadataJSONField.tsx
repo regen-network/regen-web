@@ -1,23 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { Field, useFormikContext } from 'formik'; // FormikContextType
+import { Field, useFormikContext } from 'formik';
 
 import { Body } from 'web-components/lib/components/typography';
 import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { Box } from '@mui/material';
+import { CreditBasicsFormValues } from '../../features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics';
+
+// TODO
+// Make this component more generic, so that it doesn't depend
+// on specific types/interfaces of a particular form.
 
 interface FieldProps {
   name?: string;
   required?: boolean;
 }
 
-export function MetadataJSONField<T extends object>({
+export function MetadataJSONField({
   name = 'metadata',
   required,
   ...props
 }: FieldProps): JSX.Element {
-  const { setFieldValue, setFieldTouched, values } = useFormikContext<T>();
-  const { classId, metadata }: any = values; // TODO: T
+  const {
+    setFieldValue,
+    setFieldTouched,
+    values: { classId, metadata },
+  } = useFormikContext<CreditBasicsFormValues>();
   const [formikName, setFormikName] = useState('loading');
 
   useEffect(() => {

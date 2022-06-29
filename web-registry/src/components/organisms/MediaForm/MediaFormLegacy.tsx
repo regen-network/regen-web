@@ -10,7 +10,10 @@ import {
 import { Form, Field, getIn, useFormikContext } from 'formik';
 import { useParams } from 'react-router-dom';
 
-import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
+import {
+  ImageUpload,
+  ImageUploadProps,
+} from 'web-components/lib/components/inputs/ImageUpload';
 import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
 import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 import { UrlType } from 'web-components/lib/utils/schemaURL';
@@ -40,7 +43,7 @@ const GalleryImgGrid = styled(Grid)(({ theme }) => ({
   },
 }));
 
-/** Form content for legacy projects */
+/** Form content for legacy projects - must be used within a <Formik> context */
 const MediaFormLegacy = (): JSX.Element => {
   const styles = useMediaFormStyles();
   const theme = useTheme();
@@ -48,72 +51,50 @@ const MediaFormLegacy = (): JSX.Element => {
   const { projectId } = useParams();
   const isTabletOrLarger = useMediaQuery(theme.breakpoints.up('sm'));
 
-  const ImageFieldFull = ({
-    buttonText = '+ Add Photo',
-    ...props
-  }: {
-    buttonText?: string;
-    description?: string;
-    label?: string;
-    labelSubText?: string;
-    name: string;
-  }): JSX.Element => (
-    <Field
-      apiServerUrl={apiUri}
-      buttonText={buttonText}
-      classes={{ main: styles.fullSizeMedia }}
-      component={ImageUpload}
-      description={props.description}
-      fixedCrop={cropAspect}
-      label={props.label}
-      labelSubText={props.labelSubText}
-      name={props.name}
-      projectId={projectId}
-      optional
-      isDrop
-    />
-  );
+  /** defaults for image fields */
+  const imgFieldProps: Partial<ImageUploadProps> = {
+    isDrop: true,
+    apiServerUrl: apiUri,
+    fixedCrop: cropAspect,
+    projectId: projectId,
+  };
 
-  const ImageFieldSmall = (props: {
-    buttonText?: string;
-    hideDragText?: boolean;
-    name: string;
-  }): JSX.Element => (
-    <Field
-      apiServerUrl={apiUri}
-      buttonText={props.buttonText}
-      classes={{ button: styles.smallButton }}
-      component={ImageUpload}
-      fixedCrop={cropAspect}
-      hideDragText={props.hideDragText}
-      name={props.name}
-      projectId={projectId}
-      isDrop
-    />
-  );
+  const smallImgFieldProps: Partial<ImageUploadProps> = {
+    ...imgFieldProps,
+    classes: { button: styles.smallButton },
+  };
+
+  const largeImgFieldProps: Partial<ImageUploadProps> = {
+    ...imgFieldProps,
+    classes: { main: styles.fullSizeMedia },
+  };
 
   const { errors, touched } = useFormikContext<MediaValuesLegacy>();
 
   return (
     <Form translate="yes">
-      <ImageFieldFull
+      <Field
+        {...largeImgFieldProps}
         buttonText="+ Add preview Photo"
+        component={ImageUpload}
         description="Choose the summary photo that will show up in project previews."
         label="Preview photo"
         name="regen:previewPhoto.@value"
       />
       <Box sx={{ mt: [8, 10] }}>
         <FormLabel
+          description="People love pictures of people! Upload images of the land stewards, in addition to the land and animals."
           label="Gallery Photos"
           labelSubText="(min 4 photos)"
-          description="People love pictures of people! Upload images of the land stewards, in addition to the land and animals."
         />
         <Grid container spacing={3} direction="row" sx={{ mt: 1 }}>
           <GalleryImgGrid item xs={6} sm="auto">
             {/* left */}
-            <ImageFieldSmall
-              name="regen:galleryPhotos.@list[0].@value"
+            <Field
+              {...smallImgFieldProps}
               buttonText="+ Add Photo"
+              component={ImageUpload}
+              name="regen:galleryPhotos.@list[0].@value"
             />
           </GalleryImgGrid>
           {isTabletOrLarger ? (
@@ -128,15 +109,19 @@ const MediaFormLegacy = (): JSX.Element => {
             >
               <Grid item sm={12} sx={{ maxHeight: 72 }}>
                 {/* top */}
-                <ImageFieldSmall
+                <Field
+                  {...smallImgFieldProps}
                   hideDragText
+                  component={ImageUpload}
                   name="regen:galleryPhotos.@list[1].@value"
                 />
               </Grid>
               <Grid item sm={12} sx={{ maxHeight: 72 }}>
                 {/* bottom */}
-                <ImageFieldSmall
+                <Field
+                  {...smallImgFieldProps}
                   hideDragText
+                  component={ImageUpload}
                   name="regen:galleryPhotos.@list[2].@value"
                 />
               </Grid>
@@ -145,15 +130,19 @@ const MediaFormLegacy = (): JSX.Element => {
             <>
               <GalleryImgGrid item xs={6} sm={12}>
                 {/* top */}
-                <ImageFieldSmall
+                <Field
+                  {...smallImgFieldProps}
                   buttonText="+ Add Photo"
+                  component={ImageUpload}
                   name="regen:galleryPhotos.@list[1].@value"
                 />
               </GalleryImgGrid>
               <GalleryImgGrid item xs={6} sm={12}>
                 {/* bottom */}
-                <ImageFieldSmall
+                <Field
+                  {...smallImgFieldProps}
                   buttonText="+ Add Photo"
+                  component={ImageUpload}
                   name="regen:galleryPhotos.@list[2].@value"
                 />
               </GalleryImgGrid>
@@ -162,9 +151,11 @@ const MediaFormLegacy = (): JSX.Element => {
 
           <GalleryImgGrid item xs={6} sm="auto">
             {/* right */}
-            <ImageFieldSmall
-              buttonText="+ Add Photo"
+            <Field
+              {...smallImgFieldProps}
               name="regen:galleryPhotos.@list[3].@value"
+              buttonText="+ Add Photo"
+              component={ImageUpload}
             />
           </GalleryImgGrid>
         </Grid>
@@ -194,10 +185,13 @@ const MediaFormLegacy = (): JSX.Element => {
         description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
         name="regen:videoURL.@value"
       />
-      <ImageFieldFull
-        label="Land Steward photo"
-        labelSubText="(required if you don’t add a video)"
+      <Field
+        {...largeImgFieldProps}
+        buttonText="+ Add Photo"
+        component={ImageUpload}
         description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."
+        label="Preview photo"
+        labelSubText="(required if you don’t add a video)"
         name="regen:landStewardPhoto.@value"
       />
     </Form>

@@ -9,6 +9,7 @@ interface FieldProps {
   name?: string;
   className?: string;
   optional?: boolean;
+  initialSelection?: string;
 }
 
 const LocationStateField: React.FC<FieldProps> = ({
@@ -16,11 +17,14 @@ const LocationStateField: React.FC<FieldProps> = ({
   name = 'stateProvince',
   className,
   optional = false,
+  initialSelection,
 }) => {
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
   const { setFieldValue } = useFormikContext();
 
-  const searchState = async (countryId: string): Promise<void> => {
+  const searchState = async (
+    countryId: string,
+  ): Promise<Option[] | [] | void> => {
     const resp = await axios({
       url:
         'https://geodata.solutions/api/api.php?type=getStates&countryId=' +
@@ -34,8 +38,7 @@ const LocationStateField: React.FC<FieldProps> = ({
         value: data.result[key],
         label: data.result[key],
       }));
-      options.unshift({ value: '', label: 'Please choose a state' });
-      setStateOptions(options);
+      return options;
     }
   };
 
@@ -45,10 +48,28 @@ const LocationStateField: React.FC<FieldProps> = ({
       setStateOptions([]);
       return;
     }
-    // reset state/province if country changes
-    setFieldValue(name, '');
-    searchState(country);
-  }, [country, setFieldValue, name]);
+
+    searchState(country).then(options => {
+      if (!options || !Array.isArray(options)) return;
+
+      // first, check initial selection (selected/persisted) or default empty value
+      if (
+        initialSelection &&
+        options.some(opt => opt.value === initialSelection)
+      ) {
+        setFieldValue(name, initialSelection);
+      } else {
+        (options as Option[]).unshift({
+          value: '',
+          label: 'Please choose a state',
+        });
+        setFieldValue(name, '');
+      }
+
+      // finaly, set options
+      setStateOptions(options);
+    });
+  }, [country, setFieldValue, name, initialSelection]);
 
   return (
     <Field

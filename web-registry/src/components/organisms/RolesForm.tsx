@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import { useParams } from 'react-router-dom';
-import { Bech32Address } from '@keplr-wallet/cosmos';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import {
@@ -12,6 +11,7 @@ import { Subtitle } from 'web-components/lib/components/typography';
 import {
   requiredMessage,
   invalidAddress,
+  isValidAddress,
 } from 'web-components/lib/components/inputs/validation';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
@@ -191,12 +191,11 @@ const RolesForm: React.FC<RolesFormProps> = ({
     // because SHACL doesn't support bech32 address validation
     const p = e as ProfileFormValues;
     if (p['regen:address']) {
-      try {
-        Bech32Address.validate(
-          p['regen:address'],
-          chainInfo.bech32Config.bech32PrefixAccAddr,
-        );
-      } catch (e) {
+      const isValid = isValidAddress(
+        p['regen:address'],
+        chainInfo.bech32Config.bech32PrefixAccAddr,
+      );
+      if (!isValid) {
         const addrPath = 'regen:address' as keyof T;
         errors[addrPath] = invalidAddress;
       }

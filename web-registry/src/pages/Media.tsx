@@ -13,8 +13,8 @@ import {
 import { useProjectEditContext } from '../pages/ProjectEdit';
 
 const Media: React.FC = () => {
-  const { projectId } = useParams();
   const navigate = useNavigate();
+  const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
 
   const [updateProject] = useUpdateProjectByIdMutation();

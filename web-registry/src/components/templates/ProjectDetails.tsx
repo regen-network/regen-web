@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { useTheme } from '@mui/styles';
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation, useParams } from 'react-router-dom';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
@@ -22,7 +22,6 @@ import SEO from 'web-components/lib/components/seo';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
-import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import Section from 'web-components/lib/components/section';
@@ -63,6 +62,10 @@ import {
   ProjectMetadataLD,
   ProjectStakeholder,
 } from '../../generated/json-ld/index';
+
+const StaticMap = lazy(
+  () => import('web-components/lib/components/map/StaticMap'),
+);
 
 interface Project {
   creditPrice?: CreditPrice;
@@ -247,10 +250,13 @@ function ProjectDetails(): JSX.Element {
   }
   if (geojson) {
     noGalleryAssets.push(
-      <StaticMap
-        geojson={geojson}
-        mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-      />,
+      <Suspense fallback={<CircularProgress color="secondary" />}>
+        <StaticMap
+          geojson={geojson}
+          mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        />
+        ,
+      </Suspense>,
     );
   }
   const assets = noGallery

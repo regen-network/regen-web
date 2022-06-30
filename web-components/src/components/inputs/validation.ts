@@ -8,6 +8,7 @@ export const requirementAgreement: string = 'You must agree to continue';
 export const invalidAmount: string = 'Please enter a valid amount';
 export const insufficientCredits: string = `You don't have enough credits`;
 export const invalidDate: string = `Invalid date`;
+export const invalidPastDate: string = `Must be a date in the past`;
 export const invalidURL: string = `Please enter a valid URL`;
 export const invalidVCSRetirement: string = `Please enter a valid VCS retirement serial number`;
 export const invalidVCSID: string = `Please enter a valid VCS Project ID`;

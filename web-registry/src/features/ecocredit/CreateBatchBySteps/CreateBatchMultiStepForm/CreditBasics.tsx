@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useFormikContext, Field, FieldArray } from 'formik';
 import * as Yup from 'yup';
+import { isPast } from 'date-fns';
 import { Box, IconButton, Link } from '@mui/material';
 import { useTheme, DefaultTheme as Theme } from '@mui/styles';
 
@@ -15,6 +16,7 @@ import { AddCertificationModal } from 'web-components/lib/components/modal/AddCe
 import {
   requiredMessage,
   invalidDate,
+  invalidPastDate,
   vcsRetirementSerialRE,
   invalidVCSRetirement,
   invalidVCSID,
@@ -55,10 +57,25 @@ const JSONSchema = Yup.string().test(
   (value, context) => !!value && isValidJSON(value),
 );
 
+const isPastDateTest = {
+  name: 'is-past-date',
+  message: invalidPastDate,
+  test: (value: Date | undefined) => {
+    if (!value) return false;
+    return isPast(value);
+  },
+};
+
 export const validationSchemaFields = {
   classId: Yup.string().required(requiredMessage),
-  startDate: Yup.date().required(requiredMessage).typeError(invalidDate),
-  endDate: Yup.date().required(requiredMessage).typeError(invalidDate),
+  startDate: Yup.date()
+    .required(requiredMessage)
+    .typeError(invalidDate)
+    .test({ ...isPastDateTest }),
+  endDate: Yup.date()
+    .required(requiredMessage)
+    .typeError(invalidDate)
+    .test({ ...isPastDateTest }),
   metadata: Yup.object().when('classId', {
     is: 'C01',
     then: schema => vcsMetadataSchema,
@@ -156,7 +173,7 @@ export default function CreditBasics({
             placeholder="Start Date"
             name="startDate"
             required
-            maxDate={values.endDate}
+            maxDate={values.endDate || new Date()}
             component={DatePickField}
           />
         </Box>
@@ -167,6 +184,7 @@ export default function CreditBasics({
             name="endDate"
             required
             minDate={values.startDate}
+            maxDate={new Date()}
             component={DatePickField}
           />
         </Box>

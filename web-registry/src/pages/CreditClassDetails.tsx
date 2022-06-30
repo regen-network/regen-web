@@ -10,7 +10,7 @@ import {
 import { client } from '../sanity';
 import { CreditClassDetailsWithContent } from './CreditClassDetailsWithContent';
 import { CreditClassDetailsSimple } from './CreditClassDetailsSimple';
-import { queryEcoClassInfo } from '../lib/ecocredit/api';
+import { queryEcoClassInfo, queryClassIssuers } from '../lib/ecocredit/api';
 import { getMetadata } from '../lib/metadata-graph';
 import { onChainClassRegExp } from '../lib/ledger';
 
@@ -44,6 +44,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
     undefined,
   );
   const [metadata, setMetadata] = useState<any>(undefined);
+  const [issuers, setIssuers] = useState<string[] | undefined>(undefined);
 
   const { data: contentData } = useAllCreditClassQuery({ client });
   const content = contentData?.allCreditClass?.find(
@@ -84,6 +85,21 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
     fetch();
   }, [creditClassId, isOnChainClassId]);
 
+  useEffect(() => {
+    const fetch = async (): Promise<void> => {
+      if (creditClassId && isOnChainClassId) {
+        try {
+          const { issuers } = await queryClassIssuers(creditClassId);
+          if (issuers) setIssuers(issuers);
+        } catch (err) {
+          // eslint-disable-next-line
+          console.error(err);
+        }
+      }
+    };
+    fetch();
+  }, [creditClassId, isOnChainClassId]);
+
   if (content && dbCreditClassByUri) {
     return (
       <CreditClassDetailsWithContent
@@ -98,6 +114,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         dbClass={dbCreditClassByOnChainId}
         onChainClass={onChainClass}
         metadata={metadata}
+        issuers={issuers}
       />
     );
   } else {

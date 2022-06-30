@@ -23,6 +23,7 @@ import {
 interface CreditDetailsProps {
   dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
+  issuers?: string[];
   metadata?: CreditClassMetadataLD;
 }
 
@@ -107,6 +108,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   dbClass,
   onChainClass,
+  issuers,
   metadata,
 }) => {
   const styles = useStyles();
@@ -302,8 +304,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                   issuers
                 </Label>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  {/* TODO: getIssuers v4 */}
-                  {/* {onChainClass?.issuers?.map((issuer: string) => (
+                  {issuers?.map((issuer: string) => (
                     <Link
                       className={styles.link}
                       href={getAccountUrl(issuer)}
@@ -312,7 +313,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                     >
                       {truncate(issuer)}
                     </Link>
-                  ))} */}
+                  ))}
                 </Box>
               </div>
             </Box>

@@ -17,6 +17,7 @@ import {
   QueryCreditTypesResponse,
   QuerySupplyResponse,
   BatchInfo,
+  QueryClassIssuersResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import { PageResponse } from '@regen-network/api/lib/generated/cosmos/base/query/v1beta1/pagination';
@@ -117,13 +118,12 @@ export const getBatchesWithSupply = async (
   data: IBatchInfoWithSupply[];
   pagination?: PageResponse;
 }> => {
-    const batches = await queryEcoBatches(creditClassId, params);
-    const batchesWithData = await addDataToBatch(batches);
-    return {
-      data: batchesWithData,
-      // pagination: pagination, TODO
-    };
-  });
+  const batches = await queryEcoBatches(creditClassId, params);
+  const batchesWithData = await addDataToBatch(batches);
+  return {
+    data: batchesWithData,
+    // pagination: pagination, TODO
+  };
 };
 
 /** Adds Tx Hash and supply info to batch for use in tables */
@@ -205,12 +205,12 @@ const getReadableName = (eventType?: string): string | undefined => {
   )?.readable;
 };
 
-// the following consume Regen REST endpoints - will be replaced with regen-js
-
 export const queryEcoClasses = async (): Promise<QueryClassesResponse> => {
   const client = await getQueryClient();
   return client.Classes({});
 };
+
+// the following consume Regen REST endpoints - will be replaced with regen-js
 
 export const queryEcoBatches = async (
   creditClassId?: string | null,
@@ -322,6 +322,17 @@ export const queryEcoClassInfo = async (
   const client = await getQueryClient();
   try {
     return client.Class({ classId });
+  } catch (err) {
+    throw new Error(`Error fetching class info: ${err}`);
+  }
+};
+
+export const queryClassIssuers = async (
+  classId: string,
+): Promise<QueryClassIssuersResponse> => {
+  const client = await getQueryClient();
+  try {
+    return client.ClassIssuers({ classId });
   } catch (err) {
     throw new Error(`Error fetching class info: ${err}`);
   }

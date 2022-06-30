@@ -54,6 +54,7 @@ import {
   Activity,
   CreateBatch,
 } from './pages';
+import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 import './App.css';
 
@@ -150,6 +151,10 @@ const App: React.FC = (): JSX.Element => {
               element={<KeplrRoute component={Description} />}
             />
             <Route path="media" element={<KeplrRoute component={Media} />} />
+            <Route
+              path="metadata"
+              element={<KeplrRoute component={ProjectMetadata} />}
+            />
             <Route path="roles" element={<KeplrRoute component={Roles} />} />
             <Route
               path="entity-display"

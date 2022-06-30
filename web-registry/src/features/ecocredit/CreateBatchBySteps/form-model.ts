@@ -4,12 +4,14 @@ import {
   creditBasicsInitialValues,
 } from './CreateBatchMultiStepForm';
 import {
-  validationSchema as recipientsValidationSchema,
-  validationSchemaFields as recipientsValidationSchemaFields,
+  getValidationSchema,
+  getValidationSchemaFields,
   initialValues as recipientsInitialValues,
 } from 'web-components/lib/components/form/RecipientsForm';
+import { chainInfo } from '../../../lib/wallet';
 
-// TODO - typed data structure with multi-step types
+// address prefix `regen` used to narrow address validation for recipients
+const addressPrefix = chainInfo.bech32Config.bech32PrefixAccAddr;
 
 const formModel = {
   formId: 'create-batch-form',
@@ -38,10 +40,13 @@ const formModel = {
       },
     },
   ],
-  validationSchema: [creditBasicsValidationSchema, recipientsValidationSchema],
+  validationSchema: [
+    creditBasicsValidationSchema,
+    getValidationSchema(addressPrefix),
+  ],
   validationSchemaFields: {
     ...creditBasicsValidationSchemaFields,
-    ...recipientsValidationSchemaFields,
+    ...getValidationSchemaFields(addressPrefix),
   },
   initialValues: {
     ...creditBasicsInitialValues,

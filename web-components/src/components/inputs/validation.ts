@@ -66,7 +66,7 @@ export function isValidJSON(str: string): boolean {
   return true;
 }
 
-export function validateAddress(value: string, prefix?: string): boolean {
+export function isValidAddress(value: string, prefix?: string): boolean {
   try {
     // throws an error if the address is invalid
     Bech32Address.validate(value, prefix);

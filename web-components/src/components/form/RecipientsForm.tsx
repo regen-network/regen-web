@@ -15,7 +15,7 @@ import {
   requiredMessage,
   invalidAmount,
   invalidRegenAddress,
-  validateAddress,
+  isValidAddress,
 } from '../inputs/validation';
 import TextField from '../inputs/TextField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export interface FormProps extends BottomCreditRetireFieldsProps {
+  addressPrefix: string;
   onSubmit: (values: FormValues) => void;
 }
 
@@ -44,38 +45,49 @@ export interface FormValues {
   recipients: Recipient[];
 }
 
-export const validationSchemaFields = {
-  recipients: Yup.array()
-    .of(
-      Yup.object().shape({
-        recipient: Yup.string()
-          .required(requiredMessage)
-          .test('is-regen-address', invalidRegenAddress, value =>
-            typeof value === 'string'
-              ? validateAddress(value, 'regen') // hardcoded prefix `regen`
-              : false,
-          ),
-        tradableAmount: Yup.number()
-          .required(invalidAmount)
-          .positive()
-          .integer()
-          .min(1, invalidAmount),
-        withRetire: Yup.boolean().required(),
-        retiredAmount: Yup.number().when('withRetire', {
-          is: true,
-          then: Yup.number()
-            .required()
+type ReturnType = {
+  recipients: Yup.ArraySchema<Yup.AnyObjectSchema>;
+};
+
+// validationSchemaFields
+export function getValidationSchemaFields(addressPrefix: string): ReturnType {
+  return {
+    recipients: Yup.array()
+      .of(
+        Yup.object().shape({
+          recipient: Yup.string()
+            .required(requiredMessage)
+            .test('is-regen-address', invalidRegenAddress, value =>
+              typeof value === 'string'
+                ? isValidAddress(value, addressPrefix)
+                : false,
+            ),
+          tradableAmount: Yup.number()
+            .required(invalidAmount)
             .positive()
             .integer()
             .min(1, invalidAmount),
+          withRetire: Yup.boolean().required(),
+          retiredAmount: Yup.number().when('withRetire', {
+            is: true,
+            then: Yup.number()
+              .required()
+              .positive()
+              .integer()
+              .min(1, invalidAmount),
+          }),
         }),
-      }),
-    )
-    .required('Must have recipients') // these constraints are shown if and only if inner constraints are satisfied
-    .min(1, 'Minimum of 1 recipient'),
-};
+      )
+      .required('Must have recipients') // these constraints are shown if and only if inner constraints are satisfied
+      .min(1, 'Minimum of 1 recipient'),
+  };
+}
 
-export const validationSchema = Yup.object().shape(validationSchemaFields);
+export function getValidationSchema(
+  addressPrefix: string,
+): Yup.AnyObjectSchema {
+  return Yup.object().shape(getValidationSchemaFields(addressPrefix));
+}
 
 export const recipientInitialValues = {
   recipient: '',
@@ -89,13 +101,14 @@ export const initialValues = {
 };
 
 export const RecipientsForm: React.FC<FormProps> = ({
+  addressPrefix,
   mapboxToken,
   onSubmit,
 }) => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={getValidationSchema(addressPrefix)}
       onSubmit={onSubmit}
     >
       {() => (

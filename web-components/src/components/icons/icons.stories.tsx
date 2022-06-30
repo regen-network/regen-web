@@ -61,6 +61,7 @@ import { HorizontalDotsIcon } from 'web-components/lib/components/icons/Horizont
 import { Spinner } from 'web-components/lib/components/icons/Spinner';
 import { BrokenLinkIcon } from 'web-components/lib/components/icons/BrokenLinkIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
+import EditIcon from 'web-components/lib/components/icons/EditIcon';
 
 export default {
   title: 'Icons',
@@ -106,6 +107,8 @@ export const discordIcon = (): JSX.Element => <DiscordIcon />;
 export const documentIcon = (): JSX.Element => <DocumentIcon />;
 
 export const dropdownIcon = (): JSX.Element => <DropdownIcon />;
+
+export const editIcon = (): JSX.Element => <EditIcon />;
 
 export const emailIcon = (): JSX.Element => <EmailIcon />;
 

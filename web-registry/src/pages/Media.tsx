@@ -13,10 +13,6 @@ import {
 import { useProjectEditContext } from '../pages/ProjectEdit';
 
 const Media: React.FC = () => {
-<<<<<<< HEAD
-=======
-  const navigate = useNavigate();
->>>>>>> 9bb07624 (feat: add non vcs metadata form (#1003))
   const { projectId } = useParams();
   const { isEdit } = useProjectEditContext();
 

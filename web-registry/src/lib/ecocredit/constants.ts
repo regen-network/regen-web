@@ -12,7 +12,7 @@ import {
   MsgUpdateClassAdmin,
   MsgUpdateClassIssuers,
   MsgUpdateClassMetadata,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
 export const messageActionEquals = 'message.action=';
 

@@ -35,8 +35,11 @@ import type {
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
 
-// helpers for combining ledger queries (currently rest, regen-js in future)
-// into UI data structures
+const getCosmosServiceClient = async (): Promise<ServiceClientImpl> => {
+  const api = await connectToApi();
+  if (!api || !api?.queryClient) return Promise.reject();
+  return new ServiceClientImpl(api.queryClient);
+};
 
 const getQueryClient = async (): Promise<QueryClientImpl> => {
   const api = await connectToApi();
@@ -114,7 +117,7 @@ export const getBatchesWithSupply = async (
   data: IBatchInfoWithSupply[];
   pagination?: PageResponse;
 }> => {
-  return queryEcoBatches(creditClassId, params).then(async batches => {
+    const batches = await queryEcoBatches(creditClassId, params);
     const batchesWithData = await addDataToBatch(batches);
     return {
       data: batchesWithData,
@@ -123,16 +126,18 @@ export const getBatchesWithSupply = async (
   });
 };
 
-/* Adds Tx Hash and supply info to batch for use in tables */
+/** Adds Tx Hash and supply info to batch for use in tables */
 export const addDataToBatch = async (
   batches: BatchInfo[],
 ): Promise<IBatchInfoWithSupply[]> => {
   try {
+    /* TODO: this is limited to 100 results. We need to find a better way */
     const txs = await getTxsByEvent({
       events: [
         `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
       ],
     });
+
     return Promise.all(
       batches.map(async batch => {
         const supplyData = await queryEcoBatchSupply(batch.denom);
@@ -202,9 +207,7 @@ const getReadableName = (eventType?: string): string | undefined => {
 
 // the following consume Regen REST endpoints - will be replaced with regen-js
 
-export const queryEcoClasses = async (
-  params?: URLSearchParams,
-): Promise<QueryClassesResponse> => {
+export const queryEcoClasses = async (): Promise<QueryClassesResponse> => {
   const client = await getQueryClient();
   return client.Classes({});
 };
@@ -232,7 +235,7 @@ export const queryEcoBatches = async (
       );
       return data;
     } else {
-      // With regen-ledger v3.0, we first have to query all classes and then batches per class.
+      // With regen-ledger v4.0, we first have to query all classes and then batches per class.
       // The url pagination params are just ignored here since they can't really be used.
       // Indeed we cannot know in advance how many credit classes should be queried initially
       // to get the desired number of credit batches.
@@ -241,15 +244,17 @@ export const queryEcoBatches = async (
         const { classes } = await queryEcoClasses();
         const arr = await Promise.all(
           classes.map(async c => {
-            const data = await client.BatchesByClass({ classId: c.id });
-            return data.batches;
+            const { batches } = await client.BatchesByClass({ classId: c.id });
+            return batches;
           }),
         );
 
         batches = arr.flat();
       } else {
-        const data = await client.BatchesByClass({ classId: creditClassId });
-        batches = data.batches;
+        const { batches } = await client.BatchesByClass({
+          classId: creditClassId,
+        });
+        return batches;
       }
 
       return batches;
@@ -265,8 +270,7 @@ export const queryEcoBatchInfo = async (
   const client = await getQueryClient();
 
   try {
-    const data = client.Batch({ batchDenom: denom });
-    return data;
+    return client.Batch({ batchDenom: denom });
   } catch (err) {
     throw new Error(`Error fetching batch by denom: ${denom}, err: ${err}`);
   }
@@ -277,8 +281,7 @@ export const queryEcoBatchSupply = async (
 ): Promise<QuerySupplyResponse> => {
   const client = await getQueryClient();
   try {
-    const data = await client.Supply({ batchDenom });
-    return data;
+    return client.Supply({ batchDenom });
   } catch (err) {
     throw new Error(`Error fetching batch supply: ${err}`);
   }
@@ -291,8 +294,7 @@ const queryEcoBalance = async (
   const client = await getQueryClient();
 
   try {
-    const data = await client.Balance({ address, batchDenom });
-    return data;
+    return client.Balance({ address, batchDenom });
   } catch (err) {
     throw new Error(
       `Error fetching account ecocredits for batch ${batchDenom}, address ${address}, err: ${err}`,
@@ -303,13 +305,11 @@ const queryEcoBalance = async (
 export const getTxsByEvent = async (
   request: DeepPartial<GetTxsEventRequest>,
 ): Promise<GetTxsEventResponse> => {
-  const api = await connectToApi();
-  if (!api || !api?.queryClient) return Promise.reject();
-  const queryClient = new ServiceClientImpl(api.queryClient);
-  if (!queryClient) return Promise.reject();
+  const serviceClient = await getCosmosServiceClient();
+  if (!serviceClient) return Promise.reject();
 
   try {
-    return queryClient.GetTxsEvent(request);
+    return serviceClient.GetTxsEvent(request);
   } catch (err) {
     console.error(err); // eslint-disable-line no-console
     return Promise.reject();
@@ -321,12 +321,14 @@ export const queryEcoClassInfo = async (
 ): Promise<QueryClassResponse> => {
   const client = await getQueryClient();
   try {
-    const data = await client.Class({ classId });
-    return data;
+    return client.Class({ classId });
   } catch (err) {
     throw new Error(`Error fetching class info: ${err}`);
   }
 };
+
+// helpers for combining ledger queries (currently rest, regen-js in future)
+// into UI data structures
 
 /**
  *

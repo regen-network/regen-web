@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   getURLInitialValue,
   getURLListInitialValue,
+  UrlList,
 } from 'web-components/lib/utils/schemaURL';
 import { Loading } from 'web-components/lib/components/loading';
 
@@ -23,6 +24,9 @@ import {
   useShaclGraphByUriQuery,
   useUpdateProjectByIdMutation,
 } from '../generated/graphql';
+
+const getGalleryInitialValue = (metadata: UrlList): UrlList =>
+  getURLListInitialValue(4, metadata);
 
 const Media = (): JSX.Element => {
   const { projectId } = useParams();
@@ -49,8 +53,7 @@ const Media = (): JSX.Element => {
     values['regen:previewPhoto'] = getURLInitialValue(
       metadata['regen:previewPhoto'],
     );
-    values['regen:galleryPhotos'] = getURLListInitialValue(
-      4,
+    values['regen:galleryPhotos'] = getGalleryInitialValue(
       metadata['regen:galleryPhotos'],
     );
     values['regen:videoURL'] = getURLInitialValue(metadata['regen:videoURL']);

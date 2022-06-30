@@ -1,10 +1,10 @@
-import React, { Suspense, useState } from 'react';
+import React from 'react';
 import bbox from '@turf/bbox';
 import { FeatureCollection } from 'geojson';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import PinIcon from '../icons/PinIcon';
-import { CircularProgress } from '@mui/material';
+import { useState } from 'react';
 import { Marker, StaticMap } from 'react-map-gl';
+import PinIcon from '../icons/PinIcon';
 
 interface MapProps {
   geojson: FeatureCollection;
@@ -48,20 +48,18 @@ export default function Map({ geojson, mapboxToken }: MapProps): JSX.Element {
   };
 
   return (
-    <Suspense fallback={<CircularProgress color="secondary" />}>
-      <StaticMap
-        {...viewPort}
-        width="100%"
-        height="100%"
-        mapboxApiAccessToken={mapboxToken}
-        mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
-        onLoad={onLoad}
-        attributionControl={false}
-      >
-        <Marker latitude={boundary.latitude} longitude={boundary.longitude}>
-          <PinIcon fontSize="large" size={35} />
-        </Marker>
-      </StaticMap>
-    </Suspense>
+    <StaticMap
+      {...viewPort}
+      width="100%"
+      height="100%"
+      mapboxApiAccessToken={mapboxToken}
+      mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
+      onLoad={onLoad}
+      attributionControl={false}
+    >
+      <Marker latitude={boundary.latitude} longitude={boundary.longitude}>
+        <PinIcon fontSize="large" size={35} />
+      </Marker>
+    </StaticMap>
   );
 }

@@ -180,7 +180,7 @@ const MediaFormLegacy = (): JSX.Element => {
       <Field
         optional
         component={VideoInput}
-        label="Video url"
+        label="Video Url"
         description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
         name="regen:videoURL.@value"
       />
@@ -189,7 +189,7 @@ const MediaFormLegacy = (): JSX.Element => {
         buttonText="+ Add Photo"
         component={ImageUpload}
         description="Upload a nice portrait of the land stewards and their families. This should be different from the other photos of land stewards you uploaded in the gallery above."
-        label="Preview photo"
+        label="Land Steward Photo"
         optional="(required if you don’t add a video)"
         name="regen:landStewardPhoto.@value"
       />

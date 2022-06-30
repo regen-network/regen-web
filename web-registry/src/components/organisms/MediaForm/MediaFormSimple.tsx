@@ -66,8 +66,6 @@ const MediaFormSimple = (): JSX.Element => {
             {...imgDefaultProps}
             key={i}
             name={`regen:galleryPhotos.@list[${i}].@value`}
-            description="Choose the photos that will show up on the project page. The first photo will be your preview photo."
-            label="Photos"
             component={ImageUpload}
           />
         ) : (
@@ -84,7 +82,7 @@ const MediaFormSimple = (): JSX.Element => {
         optional
         component={VideoInput}
         description="Copy and paste a video url from YouTube, Vimeo, or Facebook."
-        label="Video url"
+        label="Video Url"
         name="regen:videoURL.@value"
       />
     </Form>

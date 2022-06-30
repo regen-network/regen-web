@@ -145,9 +145,7 @@ export const MediaForm = ({
               onSave={submitForm}
               onNext={props.onNext}
               onPrev={props.onPrev}
-              saveDisabled={
-                !isValid || isSubmitting || !Object.keys(touched).length
-              }
+              saveDisabled={!isValid || isSubmitting}
             />
           </>
         )}

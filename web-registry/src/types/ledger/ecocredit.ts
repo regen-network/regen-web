@@ -1,19 +1,6 @@
 import type { PageResponse } from './base';
 import {
-  QueryClientImpl,
-  DeepPartial,
-  QueryBalanceRequest,
   QueryBalanceResponse,
-  QueryBatchesByClassRequest,
-  QueryBatchesByClassResponse,
-  QueryBatchRequest,
-  QueryBatchResponse,
-  QueryClassesRequest,
-  QueryClassesResponse,
-  QueryClassRequest,
-  QueryClassResponse,
-  QueryCreditTypesRequest,
-  QueryCreditTypesResponse,
   QuerySupplyResponse,
   BatchInfo,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';

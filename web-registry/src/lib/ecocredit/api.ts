@@ -33,7 +33,6 @@ import type {
   IBatchInfoWithBalance,
   IBatchInfoWithSupply,
   BatchTotalsForProject,
-  QueryClassInfoResponse as QueryClassInfoResponseV0,
 } from '../../types/ledger/ecocredit';
 
 // helpers for combining ledger queries (currently rest, regen-js in future)
@@ -318,12 +317,11 @@ export const getTxsByEvent = async (
 };
 
 export const queryEcoClassInfo = async (
-  class_id: string,
-): Promise<QueryClassInfoResponseV0> => {
+  classId: string,
+): Promise<QueryClassResponse> => {
+  const client = await getQueryClient();
   try {
-    const { data } = await axios.get(
-      `${ledgerRESTUri}/regen/ecocredit/v1alpha1/classes/${class_id}`,
-    );
+    const data = await client.Class({ classId });
     return data;
   } catch (err) {
     throw new Error(`Error fetching class info: ${err}`);
@@ -511,7 +509,7 @@ export const queryClasses = async ({
   request,
 }: QueryClassesProps): Promise<QueryClassesResponse> => {
   try {
-    return await client.Classes({});
+    return await client.Classes(request);
   } catch (err) {
     throw new Error(
       `Error in the Classes query of the ledger ecocredit module: ${err}`,
@@ -530,7 +528,7 @@ export const queryCreditTypes = async ({
   request,
 }: QueryCreditTypesProps): Promise<QueryCreditTypesResponse> => {
   try {
-    return await client.CreditTypes({});
+    return await client.CreditTypes(request);
   } catch (err) {
     throw new Error(
       `Error in the CreditTypes query of the ledger ecocredit module: ${err}`,

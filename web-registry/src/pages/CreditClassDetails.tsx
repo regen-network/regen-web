@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Routes, Route } from 'react-router-dom';
+import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { useAllCreditClassQuery } from '../generated/sanity-graphql';
 import {
@@ -12,7 +13,6 @@ import { CreditClassDetailsSimple } from './CreditClassDetailsSimple';
 import { queryEcoClassInfo } from '../lib/ecocredit/api';
 import { getMetadata } from '../lib/metadata-graph';
 import { onChainClassRegExp } from '../lib/ledger';
-import { ClassInfo } from '../types/ledger/ecocredit';
 
 interface CreditDetailsProps {
   isLandSteward?: boolean;
@@ -69,7 +69,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
       if (creditClassId && isOnChainClassId) {
         try {
           const res = await queryEcoClassInfo(creditClassId);
-          const classInfo = res?.info;
+          const classInfo = res?.class;
           if (classInfo) {
             setOnChainClass(classInfo);
             const data = await getMetadata(classInfo.metadata);

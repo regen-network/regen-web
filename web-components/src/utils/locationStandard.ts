@@ -39,8 +39,11 @@ export const getISOString = async (
         .sort((p: any) => p.relevance);
 
       const result = placeCodes?.[0]?.properties?.short_code || '';
-      if (!!result) placeCode = result;
-      if (postalCode) placeCode += ` ${postalCode}`;
+      if (!!result) {
+        placeCode = result;
+        const isResultValid = countryKey.toUpperCase() !== result.toUpperCase();
+        if (isResultValid && postalCode) placeCode += ` ${postalCode}`;
+      }
     });
 
   // If country-only, mapbox returns lowercase ('us'), so need toUppercase here for ledger

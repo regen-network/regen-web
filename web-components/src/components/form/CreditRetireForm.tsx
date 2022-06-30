@@ -100,7 +100,7 @@ export interface BottomCreditRetireFieldsProps {
 }
 
 type LocationType = {
-  country?: string;
+  country: string;
   stateProvince?: string;
   postalCode?: string;
 };
@@ -134,7 +134,8 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
             stateProvince,
             postalCode,
           });
-          setFieldValue(retirementLocationName, isoString);
+
+          setFieldValue(retirementLocationName, isoString || country);
           if (geocodingError) setGeocodingError(null);
         } catch (err) {
           // initially this effect may fail mainly because the accessToken
@@ -162,21 +163,33 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
       setGeocodingError,
     ]);
 
+    // showNotesField
+    // When in the same form we have a set of credit retirement (for example,
+    // because there are several recipients when we issue a batch of credits),
+    // we only show the retirement note fields for the first occurrence (first recipient)
+    const noArray = arrayPrefix === '' && typeof arrayIndex === 'undefined';
+    const isFirstItem = !noArray && arrayIndex === 0;
+    const showNotesField = noArray || isFirstItem;
+
     return (
       <>
         {geocodingError && <ErrorBanner text={geocodingError} />}
-        <Title variant="h5" sx={sxs.title}>
-          Transaction note
-        </Title>
-        <Field
-          name={`${arrayPrefix}note`}
-          type="text"
-          label="Add retirement transaction details (stored in the tx memo)"
-          component={TextField}
-          className={styles.noteTextField}
-          optional
-          defaultStyle={false}
-        />
+        {showNotesField && (
+          <>
+            <Title variant="h5" sx={sxs.title}>
+              Transaction note
+            </Title>
+            <Field
+              name={`${arrayPrefix}note`}
+              type="text"
+              label="Add retirement transaction details (stored in the tx memo)"
+              component={TextField}
+              className={styles.noteTextField}
+              optional
+              defaultStyle={false}
+            />
+          </>
+        )}
         <Title variant="h5" sx={sxs.title}>
           Location of retirement
         </Title>
@@ -191,6 +204,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
               country={country}
               optional={!postalCode}
               name={`${arrayPrefix}stateProvince`}
+              initialSelection={stateProvince}
             />
           </Grid>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>

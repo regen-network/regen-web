@@ -12,6 +12,7 @@ import { RegistryNav, AppFooter } from './components/organisms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 import './App.css';
+import PageLoader from './components/atoms/PageLoader';
 
 const Additionality = lazy(() => import('./pages/Additionality'));
 const Admin = lazy(() => import('./pages/Admin'));
@@ -81,10 +82,10 @@ const App: React.FC = (): JSX.Element => {
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Suspense fallback={'Page is loading...'}>
-        <ScrollToTop />
-        <div>
-          <RegistryNav />
+      <ScrollToTop />
+      <div>
+        <RegistryNav />
+        <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="verify-email" element={<VerifyEmail />} />
@@ -232,12 +233,12 @@ const App: React.FC = (): JSX.Element => {
             <Route path="stats/activity" element={<Activity />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-          <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
-          <footer>
-            <AppFooter />
-          </footer>
-        </div>
-      </Suspense>
+        </Suspense>
+        <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
+        <footer>
+          <AppFooter />
+        </footer>
+      </div>
     </BrowserRouter>
   );
 };

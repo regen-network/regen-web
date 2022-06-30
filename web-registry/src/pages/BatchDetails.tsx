@@ -12,7 +12,7 @@ import { getBatchWithSupplyForDenom } from '../lib/ecocredit/api';
 import { getMetadata } from '../lib/metadata-graph';
 import { useProjectsByMetadataQuery } from '../generated/graphql';
 
-import type { BatchInfoWithSupply } from '../types/ledger/ecocredit';
+import type { IBatchInfoWithSupply } from '../types/ledger/ecocredit';
 import {
   BatchInfoGrid,
   BatchMetadata,
@@ -25,13 +25,13 @@ import { useEcocredits } from '../hooks';
 export const BatchDetails: React.FC = () => {
   const { batchDenom } = useParams();
   const [ledgerLoading, setLedgerLoading] = useState(false);
-  const [batch, setBatch] = useState<BatchInfoWithSupply>();
+  const [batch, setBatch] = useState<IBatchInfoWithSupply>();
   const [metadata, setMetadata] = useState<VCSBatchMetadataLD>();
   const navigate = useNavigate();
   const walletContext = useWallet();
   const accountAddress = walletContext.wallet?.address;
   const { credits: userEcocredits } = useEcocredits(accountAddress);
-  const isUserBatch = userEcocredits.some(c => c.batch_denom === batchDenom);
+  const isUserBatch = userEcocredits.some(c => c.denom === batchDenom);
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {

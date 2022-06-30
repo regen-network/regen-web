@@ -3,12 +3,12 @@ import { useCallback } from 'react';
 import { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
-import { BatchInfoWithBalance } from '../../../types/ledger/ecocredit';
+import { IBatchInfoWithBalance } from '../../../types/ledger/ecocredit';
 import { useStateSetter } from '../../../types/react/use-state';
 
 type Props = {
   accountAddress?: string;
-  credits: BatchInfoWithBalance[];
+  credits: IBatchInfoWithBalance[];
   creditRetireOpen: number;
   creditRetireTitle: string;
   signAndBroadcast: SignAndBroadcastType;
@@ -32,7 +32,7 @@ const useCreditRetireSubmit = ({
   const creditRetireSubmit = useCallback(
     async (values: CreditRetireFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
-      const batchDenom = credits[creditRetireOpen].batch_denom;
+      const batchDenom = credits[creditRetireOpen].denom;
       const amount = values.retiredAmount.toString();
       const msg = MsgRetire.fromPartial({
         holder: accountAddress,

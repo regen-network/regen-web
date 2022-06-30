@@ -9,8 +9,7 @@ import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate, truncateHash } from 'web-components/lib/utils/truncate';
 import { Link } from '../atoms';
-
-import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
+import type { IBatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
 import { getAccountUrl, getHashUrl } from '../../lib/block-explorer';
@@ -18,12 +17,12 @@ import { getAccountUrl, getHashUrl } from '../../lib/block-explorer';
 interface CreditBatchProps {
   creditClassId?: string | null;
   projectPage?: boolean;
-  creditBatches?: BatchInfoWithSupply[];
+  creditBatches?: IBatchInfoWithSupply[];
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
 interface HeadCell {
-  id: keyof BatchInfoWithSupply;
+  id: keyof IBatchInfoWithSupply;
   label: string;
   numeric: boolean;
   wrap?: boolean;
@@ -31,30 +30,29 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   { id: 'txhash', numeric: false, label: 'tx hash' },
-  { id: 'class_id', numeric: false, label: 'credit class' },
-  { id: 'batch_denom', numeric: false, label: 'batch denom' },
+  // { id: 'class_id', numeric: false, label: 'credit class' },
+  { id: 'denom', numeric: false, label: 'batch denom' },
   { id: 'issuer', numeric: false, label: 'issuer' },
   {
-    id: 'tradable_supply',
+    id: 'tradableSupply',
     numeric: true,
     label: 'total amount tradable',
     wrap: true,
   },
   {
-    id: 'retired_supply',
+    id: 'retiredSupply',
     numeric: true,
     label: 'total amount retired',
     wrap: true,
   },
   {
-    id: 'amount_cancelled',
+    id: 'cancelledAmount',
     numeric: true,
     label: 'total amount cancelled',
     wrap: true,
   },
-  { id: 'start_date', numeric: true, label: 'start date' },
-  { id: 'end_date', numeric: true, label: 'end date' },
-  { id: 'project_location', numeric: false, label: 'project location' },
+  { id: 'startDate', numeric: true, label: 'start date' },
+  { id: 'endDate', numeric: true, label: 'end date' },
 ];
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -98,7 +96,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   titleAlign = 'center',
 }) => {
   const styles = useStyles();
-  const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
+  const [batches, setBatches] = useState<IBatchInfoWithSupply[]>([]);
   let columnsToShow = [...headCells];
 
   useEffect(() => {
@@ -116,13 +114,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
 
   // We hide the classId column if creditClassId provided (redundant)
   if (creditClassId) {
-    columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'class_id');
-  }
-  // Ditto for project location on project page
-  if (projectPage) {
-    columnsToShow = columnsToShow.filter(
-      (hc: HeadCell) => hc.id !== 'project_location',
-    );
+    columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'classId');
   }
 
   const table = (
@@ -142,14 +134,14 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             {truncateHash(batch.txhash)}
           </Link>,
-          <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
-            {batch.class_id}
-          </Link>,
+          // <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
+          //   {batch.class_id}
+          // </Link>,
           <Link
             className={styles.noWrap}
-            href={`/credit-batches/${batch.batch_denom}`}
+            href={`/credit-batches/${batch.denom}`}
           >
-            {batch.batch_denom}
+            {batch.denom}
           </Link>,
           <a
             href={getAccountUrl(batch.issuer)}
@@ -158,23 +150,17 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             {truncate(batch.issuer)}
           </a>,
-          <>{formatNumber(batch.tradable_supply)}</>,
-          <>{formatNumber(batch.retired_supply)}</>,
-          <>{formatNumber(batch.amount_cancelled)}</>,
+          <>{formatNumber(batch.tradableSupply)}</>,
+          <>{formatNumber(batch.retiredSupply)}</>,
+          <>{formatNumber(batch.cancelledAmount)}</>,
           <Box className={styles.noWrap}>
-            {formatDate(batch.start_date as Date)}
+            {formatDate(batch.startDate as Date)}
           </Box>,
           <Box className={styles.noWrap}>
-            {formatDate(batch.end_date as Date)}
-          </Box>,
-          <Box key="project_location" className={styles.noWrap}>
-            {batch.project_location}
+            {formatDate(batch.endDate as Date)}
           </Box>,
         ].filter(item => {
-          return (
-            !(creditClassId && item?.key === 'class_id') &&
-            !(projectPage && item?.key === 'project_location')
-          );
+          return !(creditClassId && item?.key === 'class_id');
         }),
       )}
     />

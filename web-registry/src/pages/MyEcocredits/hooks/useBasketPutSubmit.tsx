@@ -5,7 +5,7 @@ import { FormValues as BasketPutFormValues } from 'web-components/lib/components
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { BasketTokens } from '../../../hooks/useBasketTokens';
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
-import { BatchInfoWithBalance } from '../../../types/ledger/ecocredit';
+import { IBatchInfoWithBalance } from '../../../types/ledger/ecocredit';
 import { useStateSetter } from '../../../types/react/use-state';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
   baskets?: QueryBasketsResponse;
   basketPutOpen: number;
   basketPutTitle: string;
-  credits: BatchInfoWithBalance[];
+  credits: IBatchInfoWithBalance[];
   basketTakeTitle: string;
   signAndBroadcast: SignAndBroadcastType;
   setBasketPutOpen: useStateSetter<number>;
@@ -43,7 +43,7 @@ const useBasketPutSubmit = ({
         owner: accountAddress,
         credits: [
           {
-            batchDenom: credits[basketPutOpen].batch_denom,
+            batchDenom: credits[basketPutOpen].denom,
             amount,
           },
         ],

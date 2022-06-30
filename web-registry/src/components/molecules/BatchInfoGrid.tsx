@@ -1,15 +1,15 @@
 import React from 'react';
 import { Box, Grid, SxProps, Theme } from '@mui/material';
-import dayjs from 'dayjs';
-
-import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
 import { LabeledDetail } from 'web-components/lib/components/text-layouts';
 import { Body } from 'web-components/lib/components/typography';
+import { formatDate } from 'web-components/lib/utils/format';
+
+import type { IBatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { LinkWithArrow } from '../atoms';
 
 export const BatchInfoGrid: React.FC<{
-  batch: BatchInfoWithSupply;
+  batch: IBatchInfoWithSupply;
   projectHandle?: string | null;
   projectName?: string;
   sx?: SxProps<Theme>;
@@ -21,7 +21,7 @@ export const BatchInfoGrid: React.FC<{
     sx={{ justifyContent: 'space-between', ...sx }}
   >
     <GridItem>
-      <BatchDetail label="Batch Denom">{batch.batch_denom}</BatchDetail>
+      <BatchDetail label="Batch Denom">{batch.denom}</BatchDetail>
     </GridItem>
     <GridItem>
       <BatchDetail label="Project">
@@ -37,21 +37,23 @@ export const BatchInfoGrid: React.FC<{
       <BatchDetail label="Credit Class">
         <LinkWithArrow
           target="_self"
-          href={`/credit-classes/${batch.class_id}`}
-          label={batch.class_id}
+          href={`/credit-classes/${batch.classId}`}
+          label={batch.classId || 'TODO'}
         />
       </BatchDetail>
     </GridItem>
     <GridItem>
       <BatchDetail label="Batch start and end date">
-        {batchDate(batch.start_date) + ' - ' + batchDate(batch.end_date)}
+        {batchDate(batch?.startDate) + ' - ' + batchDate(batch?.endDate)}
       </BatchDetail>
     </GridItem>
   </Grid>
 );
 
-const batchDate = (date: string | Date): string =>
-  dayjs(date).format('MMM D, YYYY');
+const batchDate = (date?: string | Date): string => {
+  if (!date) return '-';
+  return formatDate(date, 'MMM D, YYYY');
+};
 
 const GridItem: React.FC = ({ children }) => (
   <Grid item xs={12} sm={5}>

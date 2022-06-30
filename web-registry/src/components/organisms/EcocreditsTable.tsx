@@ -11,7 +11,10 @@ import { truncate } from 'web-components/lib/utils/truncate';
 import { Link } from '../atoms';
 import { NoCredits } from '../molecules';
 import { getAccountUrl } from '../../lib/block-explorer';
-import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
+import type {
+  IBatchInfoWithBalance,
+  IBatchInfoWithSupply,
+} from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -23,7 +26,7 @@ const BreakText = styled('div')({
 });
 
 type EcocreditsTableProps = {
-  credits?: BatchInfoWithBalance[];
+  credits?: IBatchInfoWithSupply[] | IBatchInfoWithBalance[];
   renderActionButtons?: RenderActionButtonsFunc;
 };
 
@@ -52,29 +55,32 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
           Batch Denom
         </Box>,
         'Issuer',
-        'Credit Class',
+        // 'Credit Class',
         <BreakText>Amount Tradable</BreakText>,
         <BreakText>Amount Retired</BreakText>,
+        <BreakText>Balance</BreakText>,
         'Batch Start Date',
         'Batch End Date',
-        'Project Location',
       ]}
       rows={credits.map((row, i) => {
         return [
-          <Link href={`/credit-batches/${row.batch_denom}`}>
-            {row.batch_denom}
-          </Link>,
+          <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
           <Link href={getAccountUrl(row.issuer as string)} target="_blank">
             {truncate(row.issuer as string)}
           </Link>,
-          <Link key="class_id" href={`/credit-classes/${row.class_id}`}>
-            {row.class_id}
-          </Link>,
-          formatNumber(row.tradable_amount),
-          formatNumber(row.retired_amount),
-          <GreyText>{formatDate(row.start_date)}</GreyText>,
-          <GreyText>{formatDate(row.end_date)}</GreyText>,
-          row.project_location,
+          // <Link key="class_id" href={`/credit-classes/${row.classId}`}>
+          //   {row.classId}
+          // </Link>,
+          formatNumber(
+            (row as IBatchInfoWithSupply)?.tradableSupply ||
+              (row as IBatchInfoWithBalance)?.balance?.tradableAmount,
+          ),
+          formatNumber(
+            (row as IBatchInfoWithSupply)?.retiredSupply ||
+              (row as IBatchInfoWithBalance)?.balance?.retiredAmount,
+          ),
+          <GreyText>{formatDate(row.startDate)}</GreyText>,
+          <GreyText>{formatDate(row.endDate)}</GreyText>,
         ];
       })}
     />

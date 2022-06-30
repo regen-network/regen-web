@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { uniq } from 'lodash';
 import {
   QueryClientImpl,
@@ -15,8 +15,11 @@ import {
   QueryClassResponse,
   QueryCreditTypesRequest,
   QueryCreditTypesResponse,
+  QuerySupplyResponse,
+  BatchInfo,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
+import { PageResponse } from '@regen-network/api/lib/generated/cosmos/base/query/v1beta1/pagination';
 import {
   ServiceClientImpl,
   GetTxsEventRequest,
@@ -26,40 +29,39 @@ import {
 import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
 import { connect as connectToApi } from '../../ledger';
 import { expLedger, ledgerRESTUri } from '../ledger';
-import type { PageResponse } from '../../types/ledger/base';
 import type {
-  BatchInfo,
-  QueryBatchInfoResponse as QueryBatchInfoResponseV0,
-  BatchInfoWithSupply,
-  QuerySupplyResponse,
+  IBatchInfoWithBalance,
+  IBatchInfoWithSupply,
   BatchTotalsForProject,
-  QueryBalanceResponse as QueryBalanceResponseV0,
-  QueryClassesResponse as QueryClassesResponseV0,
-  BatchInfoWithBalance,
-  QueryBatchesResponse as QueryBatchesResponseV0,
   QueryClassInfoResponse as QueryClassInfoResponseV0,
 } from '../../types/ledger/ecocredit';
 
 // helpers for combining ledger queries (currently rest, regen-js in future)
 // into UI data structures
 
+const getQueryClient = async (): Promise<QueryClientImpl> => {
+  const api = await connectToApi();
+  if (!api || !api?.queryClient) return Promise.reject();
+  return new QueryClientImpl(api.queryClient);
+};
+
 export const getBatchesTotal = async (
-  batches: BatchInfoWithSupply[],
+  batches: IBatchInfoWithSupply[],
 ): Promise<{
   totals: BatchTotalsForProject;
 }> => {
   try {
     const totals = batches.reduce(
       (acc, batch) => {
-        acc.amount_cancelled += Number(batch?.amount_cancelled ?? 0);
-        acc.retired_supply += Number(batch?.retired_supply ?? 0);
-        acc.tradable_supply += Number(batch?.tradable_supply ?? 0);
+        acc.cancelledAmount += Number(batch?.cancelledAmount ?? 0);
+        acc.retiredSupply += Number(batch?.retiredSupply ?? 0);
+        acc.tradableSupply += Number(batch?.tradableSupply ?? 0);
         return acc;
       },
       {
-        amount_cancelled: 0,
-        retired_supply: 0,
-        tradable_supply: 0,
+        cancelledAmount: 0,
+        retiredSupply: 0,
+        tradableSupply: 0,
       },
     );
     return { totals };
@@ -70,12 +72,12 @@ export const getBatchesTotal = async (
 
 export const getEcocreditsForAccount = async (
   account: string,
-): Promise<BatchInfoWithBalance[]> => {
+): Promise<IBatchInfoWithBalance[]> => {
   try {
-    const { batches } = await queryEcoBatches();
+    const batches = await queryEcoBatches();
     const credits = await Promise.all(
       batches.map(async batch => {
-        const credits = await queryEcoBalance(batch.batch_denom, account);
+        const credits = await queryEcoBalance(batch.denom, account);
         return {
           ...batch,
           ...credits,
@@ -83,9 +85,7 @@ export const getEcocreditsForAccount = async (
       }),
     );
     // filter out batches that don't have any credits
-    const filteredCredits = credits.filter(
-      c => Number(c.tradable_amount) > 0 || Number(c.retired_amount) > 0,
-    );
+    const filteredCredits = credits.filter(c => Number(c.balance) > 0);
     return filteredCredits;
   } catch (err) {
     throw new Error(`Could not get ecocredits for account ${account}, ${err}`);
@@ -112,24 +112,22 @@ export const getBatchesWithSupply = async (
   creditClassId?: string | null,
   params?: URLSearchParams,
 ): Promise<{
-  data: BatchInfoWithSupply[];
+  data: IBatchInfoWithSupply[];
   pagination?: PageResponse;
 }> => {
-  return queryEcoBatches(creditClassId, params).then(
-    async ({ batches, pagination }) => {
-      const batchesWithData = await addDataToBatch(batches);
-      return {
-        data: batchesWithData,
-        pagination: pagination,
-      };
-    },
-  );
+  return queryEcoBatches(creditClassId, params).then(async batches => {
+    const batchesWithData = await addDataToBatch(batches);
+    return {
+      data: batchesWithData,
+      // pagination: pagination, TODO
+    };
+  });
 };
 
 /* Adds Tx Hash and supply info to batch for use in tables */
 export const addDataToBatch = async (
   batches: BatchInfo[],
-): Promise<BatchInfoWithSupply[]> => {
+): Promise<IBatchInfoWithSupply[]> => {
   try {
     const txs = await getTxsByEvent({
       events: [
@@ -138,10 +136,9 @@ export const addDataToBatch = async (
     });
     return Promise.all(
       batches.map(async batch => {
-        const supplyData = await queryEcoBatchSupply(batch.batch_denom);
-        const txHash = getTxHashForBatch(txs.txResponses, batch.batch_denom);
-        batch.txhash = txHash;
-        return { ...batch, ...supplyData };
+        const supplyData = await queryEcoBatchSupply(batch.denom);
+        const txhash = getTxHashForBatch(txs.txResponses, batch.denom);
+        return { ...batch, ...supplyData, txhash };
       }),
     );
   } catch (err) {
@@ -159,11 +156,23 @@ const getTxHashForBatch = (
 
 export const getBatchWithSupplyForDenom = async (
   denom: string,
-): Promise<BatchInfoWithSupply> => {
+): Promise<IBatchInfoWithSupply> => {
   try {
-    const { info } = await queryEcoBatchInfo(denom);
+    const { batch } = await queryEcoBatchInfo(denom);
     const supply = await queryEcoBatchSupply(denom);
-    return { ...info, ...supply };
+    const batchWithSupply = {
+      ...batch,
+      ...supply,
+      issuer: batch?.issuer || '',
+      projectId: batch?.projectId || '',
+      denom: batch?.denom || '',
+      metadata: batch?.metadata || '',
+      startDate: batch?.startDate || new Date(),
+      endDate: batch?.endDate || new Date(),
+      issuanceDate: batch?.issuanceDate || new Date(),
+      open: !!batch?.open,
+    };
+    return batchWithSupply;
   } catch (err) {
     throw new Error(
       `Could not get batches with supply for denom ${denom}, ${err}`,
@@ -196,16 +205,16 @@ const getReadableName = (eventType?: string): string | undefined => {
 
 export const queryEcoClasses = async (
   params?: URLSearchParams,
-): Promise<AxiosResponse<QueryClassesResponseV0>> => {
-  return axios.get(`${ledgerRESTUri}/regen/ecocredit/v1/classes`, {
-    params,
-  });
+): Promise<QueryClassesResponse> => {
+  const client = await getQueryClient();
+  return client.Classes({});
 };
 
 export const queryEcoBatches = async (
   creditClassId?: string | null,
   params?: URLSearchParams,
-): Promise<QueryBatchesResponseV0> => {
+): Promise<BatchInfo[]> => {
+  const client = await getQueryClient();
   try {
     // Currently, the experimental testnet Hambach is running an old version of regen-ledger (v2.0.0-beta1)
     // which provides a different API than latest v3.0 for querying credit batches.
@@ -217,7 +226,7 @@ export const queryEcoBatches = async (
         params.set('class_id', creditClassId);
       }
       const { data } = await axios.get(
-        `${ledgerRESTUri}/regen/ecocredit/v1/batches`,
+        `${ledgerRESTUri}/regen/ecocredit/v1alpha1/batches`,
         {
           params,
         },
@@ -230,29 +239,21 @@ export const queryEcoBatches = async (
       // to get the desired number of credit batches.
       let batches: BatchInfo[] = [];
       if (!creditClassId) {
-        const {
-          data: { classes },
-        } = await queryEcoClasses();
-        const arr: BatchInfo[] = await Promise.all(
+        const { classes } = await queryEcoClasses();
+        const arr = await Promise.all(
           classes.map(async c => {
-            const { data } = await axios.get(
-              `${ledgerRESTUri}/regen/ecocredit/v1/classes/${c.class_id}/batches`,
-            );
+            const data = await client.BatchesByClass({ classId: c.id });
             return data.batches;
           }),
         );
 
         batches = arr.flat();
       } else {
-        const { data } = await axios.get(
-          `${ledgerRESTUri}/regen/ecocredit/v1/classes/${creditClassId}/batches`,
-        );
+        const data = await client.BatchesByClass({ classId: creditClassId });
         batches = data.batches;
       }
 
-      return {
-        batches,
-      };
+      return batches;
     }
   } catch (err) {
     throw new Error(`Error fetching batches: ${err}`);
@@ -261,11 +262,11 @@ export const queryEcoBatches = async (
 
 export const queryEcoBatchInfo = async (
   denom: string,
-): Promise<QueryBatchInfoResponseV0> => {
+): Promise<QueryBatchResponse> => {
+  const client = await getQueryClient();
+
   try {
-    const { data } = await axios.get(
-      `${ledgerRESTUri}/regen/ecocredit/v1/batches/${denom}`,
-    );
+    const data = client.Batch({ batchDenom: denom });
     return data;
   } catch (err) {
     throw new Error(`Error fetching batch by denom: ${denom}, err: ${err}`);
@@ -275,10 +276,9 @@ export const queryEcoBatchInfo = async (
 export const queryEcoBatchSupply = async (
   batchDenom: string,
 ): Promise<QuerySupplyResponse> => {
+  const client = await getQueryClient();
   try {
-    const { data } = await axios.get(
-      `${ledgerRESTUri}/regen/ecocredit/v1/batches/${batchDenom}/supply`,
-    );
+    const data = await client.Supply({ batchDenom });
     return data;
   } catch (err) {
     throw new Error(`Error fetching batch supply: ${err}`);
@@ -287,16 +287,16 @@ export const queryEcoBatchSupply = async (
 
 const queryEcoBalance = async (
   batchDenom: string,
-  account: string,
-): Promise<QueryBalanceResponseV0> => {
+  address: string,
+): Promise<QueryBalanceResponse> => {
+  const client = await getQueryClient();
+
   try {
-    const { data } = await axios.get<QueryBalanceResponseV0>(
-      `${ledgerRESTUri}/regen/ecocredit/v1/batches/${batchDenom}/balance/${account}`,
-    );
+    const data = await client.Balance({ address, batchDenom });
     return data;
   } catch (err) {
     throw new Error(
-      `Error fetching account ecocredits for batch ${batchDenom}, account ${account}, err: ${err}`,
+      `Error fetching account ecocredits for batch ${batchDenom}, address ${address}, err: ${err}`,
     );
   }
 };
@@ -537,3 +537,27 @@ export const queryCreditTypes = async ({
     );
   }
 };
+
+// export declare class QueryClientImpl implements Query {
+//   private readonly rpc;
+//   constructor(rpc: Rpc);
+//   Classes(request: DeepPartial<QueryClassesRequest>): Promise<QueryClassesResponse>;
+//   ClassesByAdmin(request: DeepPartial<QueryClassesByAdminRequest>): Promise<QueryClassesByAdminResponse>;
+//   Class(request: DeepPartial<QueryClassRequest>): Promise<QueryClassResponse>;
+//   ClassIssuers(request: DeepPartial<QueryClassIssuersRequest>): Promise<QueryClassIssuersResponse>;
+//   Projects(request: DeepPartial<QueryProjectsRequest>): Promise<QueryProjectsResponse>;
+//   ProjectsByClass(request: DeepPartial<QueryProjectsByClassRequest>): Promise<QueryProjectsByClassResponse>;
+//   ProjectsByReferenceId(request: DeepPartial<QueryProjectsByReferenceIdRequest>): Promise<QueryProjectsByReferenceIdResponse>;
+//   ProjectsByAdmin(request: DeepPartial<QueryProjectsByAdminRequest>): Promise<QueryProjectsByAdminResponse>;
+//   Project(request: DeepPartial<QueryProjectRequest>): Promise<QueryProjectResponse>;
+//   Batches(request: DeepPartial<QueryBatchesRequest>): Promise<QueryBatchesResponse>;
+//   BatchesByIssuer(request: DeepPartial<QueryBatchesByIssuerRequest>): Promise<QueryBatchesByIssuerResponse>;
+//   BatchesByClass(request: DeepPartial<QueryBatchesByClassRequest>): Promise<QueryBatchesByClassResponse>;
+//   BatchesByProject(request: DeepPartial<QueryBatchesByProjectRequest>): Promise<QueryBatchesByProjectResponse>;
+//   Batch(request: DeepPartial<QueryBatchRequest>): Promise<QueryBatchResponse>;
+//   Balance(request: DeepPartial<QueryBalanceRequest>): Promise<QueryBalanceResponse>;
+//   Balances(request: DeepPartial<QueryBalancesRequest>): Promise<QueryBalancesResponse>;
+//   Supply(request: DeepPartial<QuerySupplyRequest>): Promise<QuerySupplyResponse>;
+//   CreditTypes(request: DeepPartial<QueryCreditTypesRequest>): Promise<QueryCreditTypesResponse>;
+//   Params(request: DeepPartial<QueryParamsRequest>): Promise<QueryParamsResponse>;
+// }

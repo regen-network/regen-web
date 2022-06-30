@@ -56,7 +56,7 @@ import { client } from '../../sanity';
 import { getBatchesWithSupply, getBatchesTotal } from '../../lib/ecocredit/api';
 import { getMetadata } from '../../lib/metadata-graph';
 import {
-  BatchInfoWithSupply,
+  IBatchInfoWithSupply,
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
 import {
@@ -86,7 +86,7 @@ function ProjectDetails(): JSX.Element {
   const walletContext = useWallet();
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
+  const [batchData, setBatchData] = useState<IBatchInfoWithSupply[]>([]);
   const [batchTotals, setBatchTotals] = useState<BatchTotalsForProject>();
   const [geojson, setGeojson] = useState<any | null>(null);
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
@@ -107,16 +107,16 @@ function ProjectDetails(): JSX.Element {
 
   useEffect(() => {
     const asyncFilter = async (
-      arr: BatchInfoWithSupply[],
-      predicate: (batch: BatchInfoWithSupply) => Promise<boolean>,
-    ): Promise<BatchInfoWithSupply[]> => {
+      arr: IBatchInfoWithSupply[],
+      predicate: (batch: IBatchInfoWithSupply) => Promise<boolean>,
+    ): Promise<IBatchInfoWithSupply[]> => {
       const results = await Promise.all(arr.map(predicate));
       return arr.filter((_v, index) => results[index]);
     };
 
     const fetch = async (): Promise<void> => {
       try {
-        let batches: BatchInfoWithSupply[] = [];
+        let batches: IBatchInfoWithSupply[] = [];
         if (project?.creditClassByCreditClassId?.onChainId) {
           const { data } = await getBatchesWithSupply(
             project?.creditClassByCreditClassId?.onChainId,
@@ -126,7 +126,7 @@ function ProjectDetails(): JSX.Element {
 
         const filteredBatches = await asyncFilter(
           batches,
-          async (batch: BatchInfoWithSupply) => {
+          async (batch: IBatchInfoWithSupply) => {
             let batchMetadata;
             if (batch.metadata?.length) {
               batchMetadata = await getMetadata(batch.metadata);

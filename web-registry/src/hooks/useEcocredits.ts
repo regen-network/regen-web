@@ -2,13 +2,13 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { ledgerRESTUri } from '../lib/ledger';
 import { getEcocreditsForAccount } from '../lib/ecocredit/api';
-import type { BatchInfoWithBalance } from '../types/ledger/ecocredit';
+import type { IBatchInfoWithBalance } from '../types/ledger/ecocredit';
 
 export default function useEcocredits(address?: string): {
-  credits: BatchInfoWithBalance[];
+  credits: IBatchInfoWithBalance[];
   fetchCredits: () => Promise<void>;
 } {
-  const [credits, setCredits] = useState<BatchInfoWithBalance[]>([]);
+  const [credits, setCredits] = useState<IBatchInfoWithBalance[]>([]);
 
   const fetchCredits = useCallback(async (): Promise<void> => {
     if (!address) return;

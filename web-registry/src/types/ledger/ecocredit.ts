@@ -1,35 +1,47 @@
 import type { PageResponse } from './base';
+import {
+  QueryClientImpl,
+  DeepPartial,
+  QueryBalanceRequest,
+  QueryBalanceResponse,
+  QueryBatchesByClassRequest,
+  QueryBatchesByClassResponse,
+  QueryBatchRequest,
+  QueryBatchResponse,
+  QueryClassesRequest,
+  QueryClassesResponse,
+  QueryClassRequest,
+  QueryClassResponse,
+  QueryCreditTypesRequest,
+  QueryCreditTypesResponse,
+  QuerySupplyResponse,
+  BatchInfo,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 /** Map keys from another type to values of number type */
 type MapToNumber<T> = { [K in keyof T]: number };
 
-/** combines the ledger `BatchInfo` with ledger `QuerySupplyResponse` */
-export interface BatchInfoWithSupply extends BatchInfo, QuerySupplyResponse {}
-
-/** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
-export interface BatchInfoWithBalance extends BatchInfo, QueryBalanceResponse {}
-
-/** `QueryBatchSupplyResponse` + `amount_cancelled` to display summed totals on project page */
+/** `QuerySupplyResponse`  */
 export interface BatchTotalsForProject
-  extends MapToNumber<QuerySupplyResponse> {
-  amount_cancelled: number;
+  extends MapToNumber<Omit<QuerySupplyResponse, '$type'>> {}
+
+export interface IBatchInfo extends Omit<BatchInfo, '$type'> {}
+
+// /** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
+export interface IBatchInfoWithBalance
+  extends IBatchInfo,
+    Omit<QueryBalanceResponse, '$type'> {}
+
+// /** combines the ledger `BatchInfo` with ledger `QuerySupplyResponse` */
+export interface IBatchInfoWithSupply
+  extends IBatchInfo,
+    Omit<QuerySupplyResponse, '$type'> {
+  txhash?: string;
+  classId?: string;
 }
 
 // The following interfaces should be removed once we migrate
 // the current queries to use regen-js instead of REST
-
-export interface BatchInfo {
-  class_id: string;
-  metadata: string;
-  batch_denom: string;
-  issuer: string;
-  total_amount: number;
-  amount_cancelled: number;
-  start_date: string | Date;
-  end_date: string | Date;
-  project_location: string;
-  txhash?: string;
-}
 
 export interface QueryBatchesResponse {
   batches: BatchInfo[];
@@ -44,15 +56,15 @@ export interface QueryBatchInfoResponse {
   info: BatchInfo;
 }
 
-export interface QuerySupplyResponse {
-  tradable_supply: string;
-  retired_supply: string;
-}
+// export interface QuerySupplyResponse {
+//   tradable_supply: string;
+//   retired_supply: string;
+// }
 
-export interface QueryBalanceResponse {
-  tradable_amount: string;
-  retired_amount: string;
-}
+// export interface QueryBalanceResponse {
+//   tradable_amount: string;
+//   retired_amount: string;
+// }
 
 // REST based interfaces (snake_case props)
 // remove after api/queries upgrade
@@ -89,7 +101,7 @@ interface CreditType {
   unit: string;
 }
 
-export interface QueryClassesResponse {
-  classes: ClassInfo[];
-  pagination?: PageResponse;
-}
+// export interface QueryClassesResponse {
+//   classes: ClassInfo[];
+//   pagination?: PageResponse;
+// }

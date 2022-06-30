@@ -3,12 +3,12 @@ import { useCallback } from 'react';
 import { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
-import { BatchInfoWithBalance } from '../../../types/ledger/ecocredit';
+import { IBatchInfoWithBalance } from '../../../types/ledger/ecocredit';
 import { useStateSetter } from '../../../types/react/use-state';
 
 type Props = {
   accountAddress?: string;
-  credits: BatchInfoWithBalance[];
+  credits: IBatchInfoWithBalance[];
   creditSendOpen: number;
   creditSendTitle: string;
   signAndBroadcast: SignAndBroadcastType;
@@ -32,7 +32,7 @@ const useCreditSendSubmit = ({
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
-      const batchDenom = credits[creditSendOpen].batch_denom;
+      const batchDenom = credits[creditSendOpen].denom;
       const recipient = values.recipient;
       const msg = MsgSend.fromPartial({
         sender: accountAddress,

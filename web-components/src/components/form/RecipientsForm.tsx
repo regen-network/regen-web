@@ -11,7 +11,12 @@ import {
   initialValues as initialValuesRetire,
   BottomCreditRetireFieldsProps,
 } from './CreditRetireForm';
-import { requiredMessage, invalidAmount } from '../inputs/validation';
+import {
+  requiredMessage,
+  invalidAmount,
+  invalidRegenAddress,
+  validateAddress,
+} from '../inputs/validation';
 import TextField from '../inputs/TextField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -43,7 +48,13 @@ export const validationSchemaFields = {
   recipients: Yup.array()
     .of(
       Yup.object().shape({
-        recipient: Yup.string().required(requiredMessage), // TODO: improve validation: .min(20, 'too short').required
+        recipient: Yup.string()
+          .required(requiredMessage)
+          .test('is-regen-address', invalidRegenAddress, value =>
+            typeof value === 'string'
+              ? validateAddress(value, 'regen') // hardcoded prefix `regen`
+              : false,
+          ),
         tradableAmount: Yup.number()
           .required(invalidAmount)
           .positive()

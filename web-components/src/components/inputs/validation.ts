@@ -1,3 +1,5 @@
+import { Bech32Address } from '@keplr-wallet/cosmos';
+
 export const requiredMessage: string = 'This field is required';
 export const invalidEmailMessage: string = 'Please enter a valid email address';
 export const invalidPassword: string =
@@ -11,6 +13,7 @@ export const invalidVCSRetirement: string = `Please enter a valid VCS retirement
 export const invalidVCSID: string = `Please enter a valid VCS Project ID`;
 export const invalidJSON: string = 'Please enter valid JSON-LD';
 export const invalidAddress: string = 'Invalid address';
+export const invalidRegenAddress: string = 'Invalid regen address';
 
 export const numericOnlyRE = /^\d*$/gm;
 
@@ -60,4 +63,14 @@ export function isValidJSON(str: string): boolean {
     return false;
   }
   return true;
+}
+
+export function validateAddress(value: string, prefix?: string): boolean {
+  try {
+    // throws an error if the address is invalid
+    Bech32Address.validate(value, prefix);
+    return true;
+  } catch (error) {
+    return false;
+  }
 }

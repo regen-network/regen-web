@@ -1,1 +1,1 @@
-export { MyEcocredits } from './MyEcocredits';
+export { MyEcocredits as default } from './MyEcocredits';

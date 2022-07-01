@@ -22,10 +22,10 @@ import SEO from 'web-components/lib/components/seo';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
-import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import Section from 'web-components/lib/components/section';
+import StaticMap from 'web-components/lib/components/map/StaticMap';
 
 import { setPageView } from '../../lib/ga';
 import getApiUri from '../../lib/apiUri';

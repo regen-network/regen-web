@@ -1,5 +1,5 @@
 import Parser from '@rdfjs/parser-jsonld';
-import SHACLValidator, { ValidationReport } from 'rdf-validate-shacl';
+import { ValidationReport } from 'rdf-validate-shacl';
 import factory from 'rdf-ext';
 import DatasetExt from 'rdf-ext/lib/Dataset';
 import { Readable } from 'stream';
@@ -28,23 +28,28 @@ export async function validate(
 ): ValidationReport {
   const shapes = await loadDataset(JSON.stringify(shapesJSON));
   const data = await loadDataset(JSON.stringify(dataJSON));
+  const result: ValidationReport = await import('./rdf-lib').then(
+    async ({ SHACLValidator }) => {
+      const validator = new SHACLValidator(shapes, { factory, group });
+      const report = await validator.validate(data);
 
-  const validator = new SHACLValidator(shapes, { factory, group });
-  const report = validator.validate(data);
+      // console.log(report);
+      // for (const result of report.results) {
+      //   // See https://www.w3.org/TR/shacl/#results-validation-result for details
+      //   // about each property
+      //   console.log(result.message);
+      //   console.log(result.path);
+      //   console.log(result.focusNode);
+      //   console.log(result.severity);
+      //   console.log(result.sourceConstraintComponent);
+      //   console.log(result.sourceShape);
+      // }
 
-  // console.log(report);
-  // for (const result of report.results) {
-  //   // See https://www.w3.org/TR/shacl/#results-validation-result for details
-  //   // about each property
-  //   console.log(result.message);
-  //   console.log(result.path);
-  //   console.log(result.focusNode);
-  //   console.log(result.severity);
-  //   console.log(result.sourceConstraintComponent);
-  //   console.log(result.sourceShape);
-  // }
+      return report;
+    },
+  );
 
-  return report;
+  return result;
 }
 
 export const defaultProjectContext: { '@context': { [key: string]: string } } =

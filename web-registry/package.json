@@ -56,7 +56,8 @@
     "test": "react-scripts test",
     "test-update-snapshot": "react-scripts test --updateSnapshot",
     "graphql:codegen": "graphql-codegen --config codegen.yml",
-    "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml"
+    "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
   },
   "browserslist": {
     "production": [
@@ -83,6 +84,7 @@
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.1",
     "react-test-renderer": "^16.12.0",
-    "require-context.macro": "^1.2.2"
+    "require-context.macro": "^1.2.2",
+    "source-map-explorer": "^2.5.2"
   }
 }

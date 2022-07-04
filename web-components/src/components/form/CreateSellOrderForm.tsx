@@ -48,7 +48,6 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
   };
 
   useEffect(() => {
-    batchDenoms.unshift({ value: '', label: 'choose batch' });
     setOptions(batchDenoms);
   }, [batchDenoms]);
 

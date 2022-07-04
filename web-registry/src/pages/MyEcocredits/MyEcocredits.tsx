@@ -1,6 +1,6 @@
 import { useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
@@ -12,6 +12,7 @@ import {
   BasketTakeModal,
   title as basketTakeTitle,
 } from 'web-components/lib/components/modal/BasketTakeModal';
+import { CreateSellOrderModal } from 'web-components/lib/components/modal/CreateSellOrderModal';
 import {
   CreditRetireModal,
   title as creditRetireTitle,
@@ -27,6 +28,7 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 // import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
 // import { ReactComponent as Sell } from '../../assets/svgs/sell.svg';
+import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
 import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
 import { Link } from '../../components/atoms';
@@ -42,16 +44,20 @@ import useQueryBaskets from '../../hooks/useQueryBaskets';
 import { getHashUrl } from '../../lib/block-explorer';
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
+import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import { default as useStyles } from './hooks/useMyEcocreditsStyles';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
+import { CREATE_SELL_ORDER_SHORT } from './MyEcocredits.contants';
+import { getOtherSellOrderBatchDenomOptions } from './MyEcocredits.utils';
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
   const [creditSendOpen, setCreditSendOpen] = useState<number>(-1);
   const [creditRetireOpen, setCreditRetireOpen] = useState<number>(-1);
+  const [sellOrderCreateOpen, setSellOrderCreateOpen] = useState<number>(-1);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [creditBaskets, setCreditBaskets] = useState<
@@ -60,7 +66,13 @@ export const MyEcocredits = (): JSX.Element => {
   const [basketTakeTokens, setBasketTakeTokens] = useState<
     BasketTokens | undefined
   >(undefined);
+  const [txModalHeader, setTxModalHeader] = useState<string | undefined>(
+    undefined,
+  );
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>(
+    undefined,
+  );
+  const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>(
     undefined,
   );
 
@@ -71,6 +83,8 @@ export const MyEcocredits = (): JSX.Element => {
   const handleTxModalClose = (): void => {
     setCardItems(undefined);
     setTxModalTitle(undefined);
+    setTxModalHeader(undefined);
+    setTxButtonTitle(undefined);
     setDeliverTxResponse(undefined);
     setError(undefined);
   };
@@ -163,6 +177,14 @@ export const MyEcocredits = (): JSX.Element => {
     signAndBroadcast,
   });
 
+  const createSellOrderSubmit = useCreateSellOrderSubmit({
+    setCardItems,
+    setTxModalHeader,
+    setTxModalTitle,
+    setSellOrderCreateOpen,
+    setTxButtonTitle,
+  });
+
   return (
     <>
       <Portfolio
@@ -184,6 +206,11 @@ export const MyEcocredits = (): JSX.Element => {
                   //   // eslint-disable-next-line no-console
                   //   onClick: () => console.log(`TODO sell credit ${i}`),
                   // },
+                  {
+                    icon: <AvailableCreditsIcon className={styles.arrow} />,
+                    label: CREATE_SELL_ORDER_SHORT,
+                    onClick: () => setSellOrderCreateOpen(i),
+                  },
                   {
                     icon: (
                       <ArrowDownIcon
@@ -308,22 +335,44 @@ export const MyEcocredits = (): JSX.Element => {
           onSubmit={basketTakeSubmit}
         />
       )}
+      {sellOrderCreateOpen > -1 && !!accountAddress && (
+        <CreateSellOrderModal
+          batchDenoms={[
+            {
+              label: credits[sellOrderCreateOpen].batch_denom,
+              value: credits[sellOrderCreateOpen].batch_denom,
+            },
+            ...getOtherSellOrderBatchDenomOptions({
+              credits,
+              sellOrderCreateOpen,
+            }),
+          ]}
+          sellDenom={'REGEN'}
+          availableTradableAmount={100000}
+          open={true}
+          onClose={() => setSellOrderCreateOpen(-1)}
+          onSubmit={createSellOrderSubmit}
+        />
+      )}
       <ProcessingModal
         open={!deliverTxResponse && isProcessingModalOpen}
         onClose={() => setIsProcessingModalOpen(false)}
       />
-      {!error && txHash && cardItems && txModalTitle && (
-        <TxSuccessfulModal
-          open={!error && (!!txModalTitle || !!deliverTxResponse)}
-          onClose={handleTxModalClose}
-          txHash={txHash}
-          txHashUrl={txHashUrl}
-          cardTitle={txModalTitle}
-          cardItems={cardItems}
-          linkComponent={Link}
-          onViewPortfolio={handleTxModalClose}
-        />
-      )}
+      {(!error && txHash && cardItems && txModalTitle) ||
+        (true && (
+          <TxSuccessfulModal
+            open={!error && (!!txModalTitle || !!deliverTxResponse)}
+            onClose={handleTxModalClose}
+            txHash={txHash ?? ''}
+            txHashUrl={txHashUrl}
+            title={txModalHeader}
+            cardTitle={txModalTitle ?? ''}
+            buttonTitle={txButtonTitle}
+            cardItems={cardItems}
+            linkComponent={Link}
+            onViewPortfolio={handleTxModalClose}
+          />
+        ))}
       {error && txModalTitle && (
         <TxErrorModal
           error={error}

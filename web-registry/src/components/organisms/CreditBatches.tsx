@@ -154,10 +154,10 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           <>{formatNumber(batch.retiredSupply)}</>,
           <>{formatNumber(batch.cancelledAmount)}</>,
           <Box className={styles.noWrap}>
-            {formatDate(batch.startDate as Date)}
+            {formatDate(batch.startDate as Date, undefined, true)}
           </Box>,
           <Box className={styles.noWrap}>
-            {formatDate(batch.endDate as Date)}
+            {formatDate(batch.endDate as Date, undefined, true)}
           </Box>,
         ].filter(item => {
           return !(creditClassId && item?.key === 'class_id');

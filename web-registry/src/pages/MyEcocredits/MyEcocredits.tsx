@@ -46,7 +46,7 @@ import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import { default as useStyles } from './hooks/useMyEcocreditsStyles';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
-import useUpdateCrediBaskets from './hooks/useUpdateCrediBaskets';
+import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
@@ -109,7 +109,7 @@ export const MyEcocredits = (): JSX.Element => {
     baskets,
   );
 
-  useUpdateCrediBaskets({ basketsWithClasses, credits, setCreditBaskets });
+  useUpdateCreditBaskets({ basketsWithClasses, credits, setCreditBaskets });
 
   const openTakeModal = useOpenTakeModal({
     basketTokens,

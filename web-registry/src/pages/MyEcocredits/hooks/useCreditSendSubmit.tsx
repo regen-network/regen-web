@@ -55,16 +55,26 @@ const useCreditSendSubmit = ({
 
       await signAndBroadcast(tx, () => setCreditSendOpen(-1));
       if (batchDenom && recipient) {
-        setCardItems([
-          {
-            label: 'batch denom',
-            value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
-          },
-          {
-            label: 'recipient',
-            value: { name: recipient },
-          },
-        ]);
+        setCardItems(
+          [
+            {
+              label: 'batch denom',
+              value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
+            },
+            {
+              label: 'amount tradable',
+              value: { name: values.tradableAmount.toString() },
+            },
+            {
+              label: 'amount retired',
+              value: { name: values.retiredAmount.toString() },
+            },
+            {
+              label: 'recipient',
+              value: { name: recipient },
+            },
+          ].filter(item => item.value.name !== '0'),
+        );
         setTxModalTitle(creditSendTitle);
       }
     },

@@ -52,7 +52,7 @@ export const BatchInfoGrid: React.FC<{
 
 const batchDate = (date?: string | Date): string => {
   if (!date) return '-';
-  return formatDate(date, 'MMM D, YYYY');
+  return formatDate(date, 'MMM D, YYYY', true);
 };
 
 const GridItem: React.FC = ({ children }) => (

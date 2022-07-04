@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField, { RegenTextFieldProps } from '../inputs/TextField';
-import { getFormattedNumber } from 'web-components/src/utils/format';
+import { getFormattedNumber } from '../../utils/format';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textField: {

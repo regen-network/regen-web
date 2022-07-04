@@ -11,6 +11,9 @@ interface CreateSellOrderModalProps
     CreateSellOrderProps {}
 
 export const title = 'Create Sell Order';
+export const shortTitle = 'Sell';
+export const successTitle = 'Your sell order was created!';
+export const buttonTitle = 'VIEW YOUR SELL ORDERS';
 
 const CreateSellOrderModal: React.FC<CreateSellOrderModalProps> = ({
   batchDenoms,

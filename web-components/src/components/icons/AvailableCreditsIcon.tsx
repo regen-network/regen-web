@@ -1,6 +1,7 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import cx from 'classnames';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -9,11 +10,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export default function AvailableCreditsIcon(): JSX.Element {
+interface IconProps {
+  className?: string;
+}
+
+export default function AvailableCreditsIcon({
+  className,
+}: IconProps): JSX.Element {
   const classes = useStyles({});
 
   return (
-    <SvgIcon viewBox="0 0 57 69" className={classes.root}>
+    <SvgIcon
+      viewBox="0 0 57 69"
+      className={cx(className ? className : classes.root)}
+    >
       <svg
         width="57"
         height="69"

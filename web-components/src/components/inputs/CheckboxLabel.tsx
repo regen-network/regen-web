@@ -17,6 +17,7 @@ interface CheckboxLabelProps extends CheckboxProps {
 export default function CheckboxLabel({
   label,
   disabled,
+  sx = [],
   ...props
 }: CheckboxLabelProps): JSX.Element {
   const {
@@ -30,7 +31,7 @@ export default function CheckboxLabel({
     <>
       <FormControlLabel
         className={props.className}
-        sx={{ ml: 0 }}
+        sx={[{ ml: 0 }, ...(Array.isArray(sx) ? sx : [sx])]}
         control={
           <Checkbox
             sx={{ p: 0, mr: 3.5 }}

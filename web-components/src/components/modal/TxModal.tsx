@@ -58,7 +58,7 @@ interface CardItemProps extends Item {
   linkComponent: LinkComponentProp;
 }
 
-const CardItem: React.FC<CardItemProps> = ({
+export const CardItem: React.FC<CardItemProps> = ({
   color,
   label,
   value,

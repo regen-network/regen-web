@@ -1,26 +1,30 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 
+import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import {
+  ClassInfo,
+  QueryBatchResponse,
+  QueryClassesResponse,
+  QueryClassResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import {
   QueryBasketBalancesResponse,
   QueryBasketResponse,
+  QueryBasketsResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
-import {
-  QueryClassInfoResponse,
-  QueryBatchInfoResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 
 import useBankQuery from './useBankQuery';
 import useBasketQuery from './useBasketQuery';
-import useQueryListClassInfo from './useQueryListClassInfo';
 import useQueryListBatchInfo from './useQueryListBatchInfo';
 import { useProjectsByMetadataLazyQuery } from '../generated/graphql';
 
 import { BasketOverviewProps, CreditBatch } from '../components/organisms';
 
-import { getMetadataFromUint8Array } from '../lib/metadata-graph';
+import { getMetadata } from '../lib/metadata-graph';
+import useEcocreditQuery from './useEcocreditQuery';
 
 dayjs.extend(duration);
 
@@ -37,7 +41,7 @@ type BasketDetails = {
   creditBatches: CreditBatch[];
 };
 
-type ClassInfo = {
+type BasketClassInfo = {
   id: string;
   name: string;
 };
@@ -55,6 +59,13 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
 
   // Data to fetch and process
 
+  // TODO - remove
+  // const { data: baskets } = useBasketQuery<QueryBasketsResponse>({
+  //   query: 'baskets',
+  //   params: {},
+  // });
+  // console.log('*** All baskets', baskets);
+
   const { data: basket } = useBasketQuery<QueryBasketResponse>({
     query: 'basket',
     params: { basketDenom },
@@ -64,6 +75,7 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
     query: 'basketBalances',
     params: { basketDenom },
   });
+  console.log('*** basketBalances', basketBalances);
 
   const { data: basketMetadata } = useBankQuery<QueryDenomMetadataResponse>({
     query: 'denomMetadata',
@@ -71,12 +83,20 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
   });
 
   // TODO: useEcocreditQuery + batch queries
-  const basketClassesInfo = useQueryListClassInfo(basket?.classes);
-  const [basketClasses, setBasketClasses] = useState<ClassInfo[]>();
+  const { data: classesResponse } = useEcocreditQuery<QueryClassesResponse>({
+    query: 'classes',
+    params: {},
+  });
+  const basketClassesInfo = classesResponse?.classes;
+  // console.log('*** basketClassesInfo', basketClassesInfo);
+
+  const [basketClasses, setBasketClasses] = useState<BasketClassInfo[]>();
+  // console.log('*** basketClasses', basketClasses);
 
   const [batches, setBatches] = useState<string[]>();
   // TODO: useEcocreditQuery + batch queries
   const basketBatches = useQueryListBatchInfo(batches);
+  console.log('*** basketClasses', basketClasses);
 
   const [fetchProjects] = useProjectsByMetadataLazyQuery();
   const [batchesProjects, setBatchesProjects] = useState<BatchWithProject[]>();
@@ -92,30 +112,27 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
   useEffect(() => {
     if (!basketClassesInfo || basketClassesInfo.length === 0) return;
 
-    async function fetchData(
-      basketClassesInfo: QueryClassInfoResponse[],
-    ): Promise<void> {
+    async function fetchData(basketClassesInfo: ClassInfo[]): Promise<void> {
       try {
         const _basketClasses = await Promise.all(
           basketClassesInfo.map(async basketClass => {
             let metadata;
-            if (basketClass.info?.metadata?.length) {
+            if (basketClass.metadata?.length) {
               try {
-                metadata = await getMetadataFromUint8Array(
-                  basketClass.info.metadata,
-                );
+                metadata = await getMetadata(basketClass.metadata);
+                console.log('*** metadata', metadata);
               } catch (err) {}
             }
 
             let basketClassName;
-            if (basketClass.info?.classId) {
+            if (basketClass.id) {
               basketClassName = metadata
-                ? `${metadata['schema:name']} (${basketClass.info?.classId})`
-                : basketClass.info?.classId;
+                ? `${metadata['schema:name']} (${basketClass.id})`
+                : basketClass.id;
             }
 
             return {
-              id: basketClass.info?.classId || '-',
+              id: basketClass.id || '-',
               name: basketClassName || '-',
             };
           }),
@@ -131,54 +148,52 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
 
   // TODO ? creditBatches data >> extract into its own hook / function ?
   // fetch project data related to credit batch using graphql lazy hook
-  useEffect(() => {
-    if (!basketBatches) return;
+  // useEffect(() => {
+  //   if (!basketBatches) return;
 
-    async function fetchData(
-      basketBatches: QueryBatchInfoResponse[],
-    ): Promise<void> {
-      try {
-        const _batchesProjects = await Promise.all(
-          basketBatches.map(async batch => {
-            let batchMetadata;
-            if (batch.info?.metadata?.length) {
-              // 1. Get batch metadata
-              batchMetadata = await getMetadataFromUint8Array(
-                batch.info.metadata,
-              );
-            }
+  //   async function fetchData(
+  //     basketBatches: QueryBatchResponse[],
+  //   ): Promise<void> {
+  //     try {
+  //       const _batchesProjects = await Promise.all(
+  //         basketBatches.map(async batch => {
+  //           let batchMetadata;
+  //           if (batch.info?.metadata?.length) {
+  //             // 1. Get batch metadata
+  //             batchMetadata = await getMetadata(batch.info.metadata);
+  //           }
 
-            // 2. Fetch projects by vcsProjectId
-            let projectData;
-            const vcsProjectId = batchMetadata?.['regen:vcsProjectId'];
-            if (vcsProjectId) {
-              const { data } = await fetchProjects({
-                variables: {
-                  metadata: {
-                    'regen:vcsProjectId': vcsProjectId,
-                  },
-                },
-              });
-              projectData = data;
-            }
-            const batchProject = projectData?.allProjects?.nodes?.[0];
-            return {
-              batchDenom: batch.info?.batchDenom || '-',
-              projectHandle: (batchProject?.handle as string) || '-',
-              projectName:
-                (batchProject?.metadata?.['schema:name'] as string) || '-',
-            };
-          }),
-        );
+  //           // 2. Fetch projects by vcsProjectId
+  //           let projectData;
+  //           const vcsProjectId = batchMetadata?.['regen:vcsProjectId'];
+  //           if (vcsProjectId) {
+  //             const { data } = await fetchProjects({
+  //               variables: {
+  //                 metadata: {
+  //                   'regen:vcsProjectId': vcsProjectId,
+  //                 },
+  //               },
+  //             });
+  //             projectData = data;
+  //           }
+  //           const batchProject = projectData?.allProjects?.nodes?.[0];
+  //           return {
+  //             batchDenom: batch.info?.batchDenom || '-',
+  //             projectHandle: (batchProject?.handle as string) || '-',
+  //             projectName:
+  //               (batchProject?.metadata?.['schema:name'] as string) || '-',
+  //           };
+  //         }),
+  //       );
 
-        setBatchesProjects(_batchesProjects);
-      } catch (error) {
-        console.error(error); // eslint-disable-line no-console
-      }
-    }
+  //       setBatchesProjects(_batchesProjects);
+  //     } catch (error) {
+  //       console.error(error); // eslint-disable-line no-console
+  //     }
+  //   }
 
-    fetchData(basketBatches);
-  }, [basketBatches, fetchProjects]);
+  //   fetchData(basketBatches);
+  // }, [basketBatches, fetchProjects]);
 
   // finally, data preparation for <BasketEcocreditsTable />
   useEffect(() => {

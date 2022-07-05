@@ -7,17 +7,19 @@ import {
   QueryBalanceResponse,
   QueryBatchesByClassRequest,
   QueryBatchesByClassResponse,
+  BatchInfo,
   QueryBatchRequest,
   QueryBatchResponse,
   QueryClassesRequest,
   QueryClassesResponse,
   QueryClassRequest,
   QueryClassResponse,
+  QueryClassIssuersResponse,
   QueryCreditTypesRequest,
   QueryCreditTypesResponse,
+  QueryProjectsRequest,
+  QueryProjectsResponse,
   QuerySupplyResponse,
-  BatchInfo,
-  QueryClassIssuersResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import { PageResponse } from '@regen-network/api/lib/generated/cosmos/base/query/v1beta1/pagination';
@@ -402,13 +404,19 @@ type CreditTypesParams = {
   params: DeepPartial<QueryCreditTypesRequest>;
 };
 
+type ProjectsParams = {
+  query: 'projects';
+  params: DeepPartial<QueryProjectsRequest>;
+};
+
 export type EcocreditQueryProps =
   | BalanceParams
   | BatchInfoParams
   | BatchesParams
   | ClassInfoParams
   | ClassesParams
-  | CreditTypesParams;
+  | CreditTypesParams
+  | ProjectsParams;
 
 // typing the response
 
@@ -418,7 +426,8 @@ export type EcocreditQueryResponse =
   | QueryBatchesByClassResponse
   | QueryClassResponse
   | QueryClassesResponse
-  | QueryCreditTypesResponse;
+  | QueryCreditTypesResponse
+  | QueryProjectsResponse;
 
 /**
  *
@@ -545,6 +554,25 @@ export const queryCreditTypes = async ({
   } catch (err) {
     throw new Error(
       `Error in the CreditTypes query of the ledger ecocredit module: ${err}`,
+    );
+  }
+};
+
+// Projects
+
+interface QueryProjectsProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QueryProjectsRequest>;
+}
+
+export const queryProjects = async ({
+  client,
+  request,
+}: QueryProjectsProps): Promise<QueryProjectsResponse> => {
+  try {
+    return await client.Projects(request);
+  } catch (err) {
+    throw new Error(
+      `Error in the Projects query of the ledger ecocredit module: ${err}`,
     );
   }
 };

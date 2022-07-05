@@ -8,6 +8,7 @@ import {
   // types
   EcocreditQueryClient,
   EcocreditQueryProps,
+  EcocreditQueryResponse,
   // queries
   queryBalance,
   queryBatchInfo,
@@ -15,7 +16,7 @@ import {
   queryClassInfo,
   queryClasses,
   queryCreditTypes,
-  EcocreditQueryResponse,
+  queryProjects,
 } from '../lib/ecocredit/api';
 
 // TODO - this hook is still missing batch query functionality
@@ -75,6 +76,11 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     [],
   );
 
+  const projects = useCallback(
+    (client, params) => queryProjects({ client, request: params }),
+    [],
+  );
+
   useEffect(() => {
     if (!client) return;
     if (!params) return;
@@ -101,6 +107,9 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
         break;
       case 'creditTypes':
         response = creditTypes(client, params);
+        break;
+      case 'projects':
+        response = projects(client, params);
         break;
       default:
         setError(
@@ -131,6 +140,7 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     classInfo,
     classes,
     creditTypes,
+    projects,
   ]);
 
   return { data, loading, error };

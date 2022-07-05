@@ -1,4 +1,4 @@
-import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
+import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { useCallback } from 'react';
 import { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
 import { Item } from 'web-components/lib/components/modal/TxModal';

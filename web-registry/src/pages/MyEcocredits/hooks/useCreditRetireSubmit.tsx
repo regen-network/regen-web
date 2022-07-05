@@ -1,4 +1,4 @@
-import { MsgRetire } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
+import { MsgRetire } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { useCallback } from 'react';
 import { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -35,8 +35,8 @@ const useCreditRetireSubmit = ({
       const batchDenom = credits[creditRetireOpen].denom;
       const amount = values.retiredAmount.toString();
       const msg = MsgRetire.fromPartial({
-        holder: accountAddress,
-        location: values.retirementLocation,
+        owner: accountAddress,
+        jurisdiction: values.retirementJurisdiction,
         credits: [
           {
             batchDenom,

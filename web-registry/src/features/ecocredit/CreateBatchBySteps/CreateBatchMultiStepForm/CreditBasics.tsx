@@ -33,6 +33,8 @@ import {
   MetadataJSONField,
 } from '../../../../components/molecules';
 
+// TODO - remove CreditClass selector (but not ClassId state...)
+
 export interface CreditBasicsFormValues {
   classId: string;
   startDate: Date | null;
@@ -41,9 +43,7 @@ export interface CreditBasicsFormValues {
 }
 
 const vcsMetadataSchema: Yup.AnyObjectSchema = Yup.object({
-  'regen:vcsProjectId': Yup.number()
-    .positive()
-    .integer()
+  'regen:vcsProjectId': Yup.string()
     .required(requiredMessage)
     .typeError(invalidVCSID),
   'regen:vcsRetirementSerialNumber': Yup.string()
@@ -106,6 +106,8 @@ export default function CreditBasics({
   const projectId = metadata['regen:vcsProjectId'];
   const isVCS = values.classId === 'C01';
 
+  console.log('**** values', values);
+
   // to store on partial submit the selected credit class option,
   // and the project option in order to complete display name in Review step
   const [creditClassOptions, setCreditClassOptions] =
@@ -153,7 +155,7 @@ export default function CreditBasics({
         saveOptions={setCreditClassOptions}
       />
       <ProjectSelect
-        creditClassId={values.classId}
+        // creditClassId={values.classId}
         name="metadata['regen:vcsProjectId']"
         required
         initialSelection={functionCheckPrevSelection(isVCS, values)}

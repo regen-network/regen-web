@@ -14,10 +14,11 @@ import { ProjectPageFooter } from '../../molecules';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';
 import { MediaFormSimple } from './MediaFormSimple';
 import { MediaFormLegacy } from './MediaFormLegacy';
+import { isSimpleMediaFormErrors } from './MediaForm.utils';
 
 import type { MediaValuesSimple, MediaErrorsSimple } from './MediaFormSimple';
 import type { MediaErrorsLegacy, MediaValuesLegacy } from './MediaFormLegacy';
-import type { ShaclGraphByUriQuery, Maybe } from '../../../generated/graphql';
+import type { ShaclGraphByUriQuery } from '../../../generated/graphql';
 
 export interface MediaBaseValues {
   'regen:previewPhoto'?: UrlType;
@@ -33,13 +34,6 @@ export interface MediaBaseErrors {
 
 export type MediaValues = MediaValuesSimple | MediaValuesLegacy;
 export type MediaErrors = MediaErrorsSimple | MediaErrorsLegacy;
-
-function isSimpleErrors(
-  _errors: MediaErrors,
-  ccId?: Maybe<string> | string,
-): _errors is MediaErrorsSimple {
-  return !!ccId;
-}
 
 export const cropAspect = { aspect: 322 / 211 }; // px values pulled from mockups (width / height)
 
@@ -97,7 +91,7 @@ export const MediaForm = ({
             | undefined;
         }
         // Legacy validation logic
-        if (!isSimpleErrors(errors, creditClassId)) {
+        if (!isSimpleMediaFormErrors(errors, creditClassId)) {
           if (path) {
             if (compactedPath === 'regen:previewPhoto') {
               errors[compactedPath] = { '@value': requiredMessage };

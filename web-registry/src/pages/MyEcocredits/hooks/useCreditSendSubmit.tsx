@@ -42,7 +42,7 @@ const useCreditSendSubmit = ({
             batchDenom,
             tradableAmount: values.tradableAmount.toString(),
             retiredAmount: values.retiredAmount.toString(),
-            retirementLocation: values.retirementLocation,
+            retirementJurisdiction: values.retirementJurisdiction,
           },
         ],
       });

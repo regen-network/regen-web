@@ -44,7 +44,7 @@ export interface MsgTakeValues {
   basketDenom: string;
   amount: string;
   retireOnTake: boolean;
-  retirementLocation?: string;
+  retirementJurisdiction?: string;
   retirementNote?: string;
 }
 
@@ -83,7 +83,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
     note: '',
     country: 'US',
     stateProvince: '',
-    retirementLocation: undefined,
+    retirementJurisdiction: undefined,
   };
 
   const validateHandler = (
@@ -118,7 +118,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
       basketDenom: basket.basketDenom,
       amount: (values.amount * Math.pow(10, basket.exponent)).toString(),
       retireOnTake: !!values.retireOnTake,
-      retirementLocation: values.retirementLocation,
+      retirementJurisdiction: values.retirementJurisdiction,
       retirementNote: values?.note,
     };
 

@@ -12,11 +12,12 @@ import {
   EditFormTemplate,
 } from '../../components/templates';
 import {
-  isSimpleMediaFormValues,
   MediaForm,
   MediaValues,
-} from '../../components/organisms';
+  MediaValuesSimple,
+} from '../../components/organisms/MediaForm';
 import {
+  Maybe,
   useProjectByIdQuery,
   useShaclGraphByUriQuery,
   useUpdateProjectByIdMutation,
@@ -25,6 +26,13 @@ import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
 
 const PHOTO_COUNT = 4;
+
+function isSimpleValues(
+  _values: MediaValues,
+  ccId?: Maybe<string> | string,
+): _values is MediaValuesSimple {
+  return !!ccId;
+}
 
 const Media = (): JSX.Element => {
   const { projectId } = useParams();
@@ -57,7 +65,7 @@ const Media = (): JSX.Element => {
     );
     values['regen:videoURL'] = getURLInitialValue(metadata['regen:videoURL']);
 
-    if (isSimpleMediaFormValues(values, creditClassId)) {
+    if (isSimpleValues(values, creditClassId)) {
       values['regen:creditText'] = metadata['regen:creditText'] || '';
     } else {
       values['regen:landStewardPhoto'] = getURLInitialValue(

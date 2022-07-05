@@ -34,13 +34,6 @@ export interface MediaBaseErrors {
 export type MediaValues = MediaValuesSimple | MediaValuesLegacy;
 export type MediaErrors = MediaErrorsSimple | MediaErrorsLegacy;
 
-export function isSimpleMediaFormValues(
-  _values: MediaValues,
-  ccId?: Maybe<string> | string,
-): _values is MediaValuesSimple {
-  return !!ccId;
-}
-
 function isSimpleErrors(
   _errors: MediaErrors,
   ccId?: Maybe<string> | string,

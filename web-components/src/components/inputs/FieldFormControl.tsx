@@ -25,14 +25,12 @@ interface Props extends FieldProps, DefaultStyleProps {
   sx?: SxProps<Theme>;
   description?: string;
   disabled?: boolean;
-  optional?: boolean;
+  optional?: boolean | string;
   label?: string;
   onExampleClick?: () => void;
-  labelSubText?: string;
 }
 
 interface StyleProps {
-  optional?: boolean;
   disabled?: boolean;
   description?: string;
   error: boolean;
@@ -84,7 +82,6 @@ export default function FieldFormControl({
   className,
   sx,
   optional,
-  labelSubText,
   onExampleClick,
   defaultStyle = true,
   forceDefaultStyle = false,
@@ -106,7 +103,6 @@ export default function FieldFormControl({
 
   const hasError = fieldTouched && errorMessage;
   const styles = useStyles({
-    optional,
     disabled,
     description,
     error: hasError,
@@ -124,7 +120,6 @@ export default function FieldFormControl({
         <FormLabel
           className={styles.label}
           label={label}
-          labelSubText={labelSubText}
           optional={optional}
           description={description}
           onExampleClick={onExampleClick}

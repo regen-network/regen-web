@@ -87,7 +87,7 @@ interface Props extends FieldProps {
   };
   description?: string;
   label?: string;
-  optional?: boolean;
+  optional?: boolean | string;
   placeholder?: string;
   options?: FormValues[];
   onSaveOrganization: (

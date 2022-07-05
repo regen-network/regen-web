@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {
   getURLInitialValue,
   getURLListInitialValue,
-  UrlList,
 } from 'web-components/lib/utils/schemaURL';
 import { Loading } from 'web-components/lib/components/loading';
 
@@ -13,7 +12,7 @@ import {
   EditFormTemplate,
 } from '../../components/templates';
 import {
-  isSimpleValues,
+  isSimpleMediaFormValues,
   MediaForm,
   MediaValues,
 } from '../../components/organisms';
@@ -25,8 +24,7 @@ import {
 import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
 
-const getGalleryInitialValue = (metadata: UrlList): UrlList =>
-  getURLListInitialValue(4, metadata);
+const PHOTO_COUNT = 4;
 
 const Media = (): JSX.Element => {
   const { projectId } = useParams();
@@ -53,12 +51,13 @@ const Media = (): JSX.Element => {
     values['regen:previewPhoto'] = getURLInitialValue(
       metadata['regen:previewPhoto'],
     );
-    values['regen:galleryPhotos'] = getGalleryInitialValue(
+    values['regen:galleryPhotos'] = getURLListInitialValue(
+      PHOTO_COUNT,
       metadata['regen:galleryPhotos'],
     );
     values['regen:videoURL'] = getURLInitialValue(metadata['regen:videoURL']);
 
-    if (isSimpleValues(values, creditClassId)) {
+    if (isSimpleMediaFormValues(values, creditClassId)) {
       values['regen:creditText'] = metadata['regen:creditText'] || '';
     } else {
       values['regen:landStewardPhoto'] = getURLInitialValue(

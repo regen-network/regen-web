@@ -20,7 +20,7 @@ export interface RegenTextFieldProps
     DefaultStyleProps {
   children?: any;
   errors?: boolean;
-  optional?: boolean;
+  optional?: boolean | string;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
 }
@@ -173,7 +173,7 @@ export default function RegenTextField({
   endAdornment,
   ...props
 }: RegenTextFieldProps): JSX.Element {
-  const styles = useStyles({ ...props, optional, errors });
+  const styles = useStyles({ ...props, errors, optional: !!optional });
   const baseClasses = [styles.root, props.className];
   const defaultClasses = [styles.default, ...baseClasses];
   const rootClasses = defaultStyle
@@ -199,7 +199,7 @@ export default function RegenTextField({
         ) : null,
       }}
       label={
-        <InputLabel optional={optional} focused={false} required={false}>
+        <InputLabel optional={!!optional} focused={false} required={false}>
           {props.label}
         </InputLabel>
       }

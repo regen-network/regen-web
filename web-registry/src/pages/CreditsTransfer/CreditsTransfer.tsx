@@ -141,7 +141,7 @@ const CreditsTransfer: React.FC<{
     setBuyerWalletId(event.target.value);
     if (partiesData && partiesData.allParties) {
       const selectedParty = partiesData.allParties.nodes.find(
-        (party: any) => party.walletId === event.target.value,
+        party => party?.walletId === event.target.value,
       );
       setAddressId(selectedParty?.addressId);
     }
@@ -177,7 +177,7 @@ const CreditsTransfer: React.FC<{
     vintageId
   ) {
     vintage = vintagesData.allCreditVintages.nodes.find(
-      (node: any) => node.id === vintageId,
+      node => node?.id === vintageId,
     );
     newBalances = vintage.accountBalancesByCreditVintageId.nodes;
 
@@ -285,14 +285,14 @@ const CreditsTransfer: React.FC<{
               value={vintageId}
               onChange={handleVintageChange}
             >
-              {vintagesData &&
-                vintagesData.allCreditVintages &&
-                vintagesData.allCreditVintages.nodes.map((node: any) => (
-                  <MenuItem key={node.id} value={node.id}>
-                    {node.projectByProjectId.metadata?.['schema:name']} -{' '}
-                    {dateFormat.format(new Date(node.createdAt))}
+              {vintagesData?.allCreditVintages?.nodes?.map(node => {
+                return !!node ? (
+                  <MenuItem key={node?.id} value={node?.id}>
+                    {node?.projectByProjectId?.metadata?.['schema:name']} -{' '}
+                    {dateFormat.format(new Date(node?.createdAt))}
                   </MenuItem>
-                ))}
+                ) : null;
+              })}
             </Select>
           </FormControl>
           {!passedBuyerWalletId && (

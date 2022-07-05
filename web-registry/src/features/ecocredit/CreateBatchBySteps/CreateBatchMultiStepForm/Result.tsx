@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useNavigate } from 'react-router-dom';
@@ -37,44 +38,48 @@ type SuccessProps = {
 const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
   const navigate = useNavigate();
 
+  // TODO - disabled (parse and display)
+
+  console.log('*** RESULT', response);
+
   // Parsing the response...
-  const responseLog = response?.rawLog && JSON.parse(response?.rawLog);
-  const responseLogEvents = responseLog && responseLog[0].events;
+  // const responseLog = response?.rawLog && JSON.parse(response?.rawLog);
+  // const responseLogEvents = responseLog && responseLog[0].events;
 
-  const eventCreateBatch =
-    responseLogEvents &&
-    responseLogEvents.find((event: any) =>
-      event.type.includes('.EventCreateBatch'),
-    );
+  // const eventCreateBatch =
+  //   responseLogEvents &&
+  //   responseLogEvents.find((event: any) =>
+  //     event.type.includes('.EventCreateBatch'),
+  //   );
 
-  const receiveBatchDenom =
-    eventCreateBatch &&
-    eventCreateBatch.attributes?.find((obj: any) => obj.key === 'batch_denom');
+  // const receiveBatchDenom =
+  //   eventCreateBatch &&
+  //   eventCreateBatch.attributes?.find((obj: any) => obj.key === 'batch_denom');
 
-  const eventReceive =
-    responseLogEvents &&
-    responseLogEvents.find((event: any) =>
-      event.type.includes('.EventReceive'),
-    );
+  // const eventReceive =
+  //   responseLogEvents &&
+  //   responseLogEvents.find((event: any) =>
+  //     event.type.includes('.EventReceive'),
+  //   );
 
-  const recipientsLog =
-    eventReceive &&
-    eventReceive.attributes?.filter((obj: any) => obj.key === 'recipient');
-  const recipients = recipientsLog.map(({ value }: { value: string }) => {
-    const recipientAddress = value.replace(/"/g, '');
-    return {
-      name: truncate(recipientAddress),
-      url: getAccountUrl(recipientAddress),
-    };
-  });
+  // const recipientsLog =
+  //   eventReceive &&
+  //   eventReceive.attributes?.filter((obj: any) => obj.key === 'recipient');
+  // const recipients = recipientsLog.map(({ value }: { value: string }) => {
+  //   const recipientAddress = value.replace(/"/g, '');
+  //   return {
+  //     name: truncate(recipientAddress),
+  //     url: getAccountUrl(recipientAddress),
+  //   };
+  // });
 
-  const batchDenom = receiveBatchDenom.value.replace(/"/g, '');
+  // const batchDenom = receiveBatchDenom.value.replace(/"/g, '');
 
   return (
     <>
       <OnBoardingCard>
         <Title variant="h5">Create Credit Batch</Title>
-        <CardItem
+        {/* <CardItem
           label="batch denom"
           value={{
             name: batchDenom,
@@ -93,15 +98,15 @@ const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
             url: getHashUrl(response?.transactionHash),
           }}
           linkComponent={Link}
-        />
+        /> */}
       </OnBoardingCard>
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      {/* <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <OutlinedButton
           onClick={() => navigate(`/credit-batches/${batchDenom}`)}
         >
           SEE CREDIT BATCH
         </OutlinedButton>
-      </Box>
+      </Box> */}
     </>
   );
 };

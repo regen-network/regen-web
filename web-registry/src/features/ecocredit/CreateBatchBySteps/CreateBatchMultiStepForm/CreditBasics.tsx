@@ -106,8 +106,6 @@ export default function CreditBasics({
   const projectId = metadata['regen:vcsProjectId'];
   const isVCS = values.classId === 'C01';
 
-  console.log('**** values', values);
-
   // to store on partial submit the selected credit class option,
   // and the project option in order to complete display name in Review step
   const [creditClassOptions, setCreditClassOptions] =
@@ -138,7 +136,7 @@ export default function CreditBasics({
   const functionCheckPrevSelection = (
     isVCS: boolean,
     values: CreditBasicsFormValues,
-  ): number | undefined => {
+  ): string | undefined => {
     if (isVCS) {
       const metadata = values.metadata as VCSBatchMetadataLD;
       const projectId = metadata['regen:vcsProjectId'];

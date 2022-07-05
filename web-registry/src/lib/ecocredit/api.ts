@@ -336,7 +336,7 @@ export const queryClassIssuers = async (
   try {
     return client.ClassIssuers({ classId });
   } catch (err) {
-    throw new Error(`Error fetching class info: ${err}`);
+    throw new Error(`Error fetching issuer info: ${err}`);
   }
 };
 

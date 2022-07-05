@@ -50,10 +50,8 @@ export const BatchInfoGrid: React.FC<{
   </Grid>
 );
 
-const batchDate = (date?: string | Date): string => {
-  if (!date) return '-';
-  return formatDate(date, 'MMM D, YYYY', true);
-};
+const batchDate = (date: string | Date): string =>
+  formatDate(date, 'MMM D, YYYY', true);
 
 const GridItem: React.FC = ({ children }) => (
   <Grid item xs={12} sm={5}>

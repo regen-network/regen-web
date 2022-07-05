@@ -8,8 +8,8 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate, truncateHash } from 'web-components/lib/utils/truncate';
-import { Link } from '../atoms';
 
+import { Link } from '../atoms';
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
@@ -162,10 +162,10 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           <>{formatNumber(batch.retired_supply)}</>,
           <>{formatNumber(batch.amount_cancelled)}</>,
           <Box className={styles.noWrap}>
-            {formatDate(batch.start_date as Date)}
+            {formatDate(batch.start_date as Date, undefined, true)}
           </Box>,
           <Box className={styles.noWrap}>
-            {formatDate(batch.end_date as Date)}
+            {formatDate(batch.end_date as Date, undefined, true)}
           </Box>,
           <Box key="project_location" className={styles.noWrap}>
             {batch.project_location}

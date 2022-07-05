@@ -32,8 +32,6 @@ const Dashboard: React.FC = () => {
     },
   ];
 
-  console.log('isIssuer ', isIssuer);
-
   return (
     <Box sx={{ bgcolor: 'grey.50' }}>
       <Section>

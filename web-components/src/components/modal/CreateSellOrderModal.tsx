@@ -18,7 +18,7 @@ export const buttonTitle = 'VIEW YOUR SELL ORDERS';
 const CreateSellOrderModal: React.FC<CreateSellOrderModalProps> = ({
   batchDenoms,
   sellDenom,
-  availableTradableAmount,
+  availableAmountByBatch,
   open,
   onClose,
   onSubmit,
@@ -27,7 +27,7 @@ const CreateSellOrderModal: React.FC<CreateSellOrderModalProps> = ({
     <CreateSellOrderForm
       batchDenoms={batchDenoms}
       sellDenom={sellDenom}
-      availableTradableAmount={availableTradableAmount}
+      availableAmountByBatch={availableAmountByBatch}
       onClose={onClose}
       onSubmit={onSubmit}
     />

@@ -29,6 +29,7 @@ export interface Item {
   value: {
     name: string | number;
     url?: string;
+    icon?: React.ReactNode;
   };
   color?: string;
 }
@@ -72,6 +73,7 @@ export const CardItem: React.FC<CardItemProps> = ({
       </Label>
 
       <Subtitle size="lg" mobileSize="sm" color={color || 'info.dark'}>
+        {value.icon && value.icon}
         {value.url ? (
           <LinkComponent
             sx={{ color: 'secondary.main' }}

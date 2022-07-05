@@ -51,7 +51,10 @@ import { default as useStyles } from './hooks/useMyEcocreditsStyles';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
 import { CREATE_SELL_ORDER_SHORT } from './MyEcocredits.contants';
-import { getOtherSellOrderBatchDenomOptions } from './MyEcocredits.utils';
+import {
+  getAvailableAmountByBatch,
+  getOtherSellOrderBatchDenomOptions,
+} from './MyEcocredits.utils';
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
@@ -348,7 +351,7 @@ export const MyEcocredits = (): JSX.Element => {
             }),
           ]}
           sellDenom={'REGEN'}
-          availableTradableAmount={100000}
+          availableAmountByBatch={getAvailableAmountByBatch({ credits })}
           open={true}
           onClose={() => setSellOrderCreateOpen(-1)}
           onSubmit={createSellOrderSubmit}
@@ -358,21 +361,20 @@ export const MyEcocredits = (): JSX.Element => {
         open={!deliverTxResponse && isProcessingModalOpen}
         onClose={() => setIsProcessingModalOpen(false)}
       />
-      {(!error && txHash && cardItems && txModalTitle) ||
-        (true && (
-          <TxSuccessfulModal
-            open={!error && (!!txModalTitle || !!deliverTxResponse)}
-            onClose={handleTxModalClose}
-            txHash={txHash ?? ''}
-            txHashUrl={txHashUrl}
-            title={txModalHeader}
-            cardTitle={txModalTitle ?? ''}
-            buttonTitle={txButtonTitle}
-            cardItems={cardItems}
-            linkComponent={Link}
-            onViewPortfolio={handleTxModalClose}
-          />
-        ))}
+      {!error && txHash && cardItems && txModalTitle && (
+        <TxSuccessfulModal
+          open={!error && (!!txModalTitle || !!deliverTxResponse)}
+          onClose={handleTxModalClose}
+          txHash={txHash ?? ''}
+          txHashUrl={txHashUrl}
+          title={txModalHeader}
+          cardTitle={txModalTitle ?? ''}
+          buttonTitle={txButtonTitle}
+          cardItems={cardItems}
+          linkComponent={Link}
+          onViewPortfolio={handleTxModalClose}
+        />
+      )}
       {error && txModalTitle && (
         <TxErrorModal
           error={error}

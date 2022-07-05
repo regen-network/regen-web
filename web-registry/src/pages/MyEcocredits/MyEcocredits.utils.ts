@@ -17,3 +17,18 @@ export const getOtherSellOrderBatchDenomOptions = ({
       label: credit.batch_denom,
       value: credit.batch_denom,
     }));
+
+type getAvailableAmountByBatchProps = {
+  credits: BatchInfoWithBalance[];
+};
+
+export const getAvailableAmountByBatch = ({
+  credits,
+}: getAvailableAmountByBatchProps) =>
+  credits.reduce(
+    (acc, credit) => ({
+      ...acc,
+      [credit.batch_denom]: Number(credit.tradable_amount),
+    }),
+    {} as { [key: string]: number },
+  );

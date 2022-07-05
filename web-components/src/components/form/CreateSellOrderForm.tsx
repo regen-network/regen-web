@@ -15,7 +15,7 @@ import { Box, useTheme } from '@mui/material';
 export interface CreateSellOrderProps {
   batchDenoms: Option[];
   sellDenom: string;
-  availableTradableAmount: number;
+  availableAmountByBatch: { [batchDenom: string]: number };
   onSubmit: (values: FormValues) => Promise<void>;
 }
 
@@ -33,7 +33,7 @@ export interface FormValues {
 const CreateSellOrderForm: React.FC<FormProps> = ({
   sellDenom,
   batchDenoms,
-  availableTradableAmount,
+  availableAmountByBatch,
   onClose,
   onSubmit,
 }) => {
@@ -41,7 +41,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
   const theme = useTheme();
 
   const initialValues = {
-    basketDenom: undefined,
+    batchDenom: batchDenoms[0].value,
     price: undefined,
     amount: undefined,
     disableAutoRetire: false,
@@ -57,7 +57,13 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
     if (!values.batchDenom) {
       errors.batchDenom = requiredMessage;
     }
-    const errAmount = validateAmount(availableTradableAmount, values.amount);
+    if (!values.price) {
+      errors.price = requiredMessage;
+    }
+    const errAmount = validateAmount(
+      availableAmountByBatch[values.batchDenom ?? ''],
+      values.amount,
+    );
     if (errAmount) errors.amount = errAmount;
 
     return errors;
@@ -105,7 +111,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
           <AmountField
             name="amount"
             label="Amount to sell"
-            availableAmount={availableTradableAmount}
+            availableAmount={availableAmountByBatch[values.batchDenom ?? '']}
             denom={values.batchDenom ?? ''}
           />
           <Field
@@ -127,6 +133,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
             submitCount={submitCount}
             submitForm={submitForm}
             label="Create Sell Order"
+            colorVariant="gradientBlueGreen"
           />
         </Form>
       )}

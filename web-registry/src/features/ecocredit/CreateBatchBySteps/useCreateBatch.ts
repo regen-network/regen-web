@@ -15,30 +15,20 @@ import {
 
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
-// TODO - Deprecated
-// `projectLocation` won't be needed anymore starting from v4.0
-// https://github.com/regen-network/regen-registry/issues/968
-// right now `projectLocation` is hardcoded to 'US' in MsgCreateBatch.fromPartial
-// This case has not been implemented because the data source changes with the update to
-// ecocredits v1, where the information is already part of the project entity in the ledger.
-
 // TODO
 // Right now, just case "C01" (aka. VCS)
 
 function prepareMetadata(
   partialMetadata: Partial<VCSBatchMetadataLD>,
 ): VCSBatchMetadataLD | undefined {
-  const projectIdRaw = partialMetadata['regen:vcsProjectId'];
+  const projectId = partialMetadata['regen:vcsProjectId'];
   const retirementSerialNumber =
     partialMetadata['regen:vcsRetirementSerialNumber'];
 
   const additionalCertifications =
     partialMetadata['regen:additionalCertifications'];
 
-  if (!projectIdRaw || !retirementSerialNumber) return;
-
-  const projectId =
-    typeof projectIdRaw === 'number' ? projectIdRaw : parseInt(projectIdRaw);
+  if (!projectId || !retirementSerialNumber) return;
 
   const metadata: VCSBatchMetadataLD = {
     '@context': {
@@ -67,11 +57,7 @@ async function prepareMsg(
 
   // TODO - Fixed it on the fast track, retrieving the projectId from the metadata.
   // We have to refactor and handle the projectId field as a value in the form.
-  const projectIdRaw: string | number | undefined =
-    metadata['regen:vcsProjectId'];
-  if (!projectIdRaw) return;
-  const projectId =
-    typeof projectIdRaw === 'number' ? projectIdRaw.toString() : projectIdRaw;
+  const projectId: string = metadata['regen:vcsProjectId'];
 
   // then, generate the offchain iri from the metadata
   let iriResponse: IriFromMetadataSuccess<VCSBatchMetadataLD> | undefined;
@@ -105,7 +91,7 @@ async function prepareMsg(
     metadata: iriResponse.iri, // TODO - confirmation - stringToUint8Array(iriResponse.iri),
     startDate: new Date(data.startDate as Date),
     endDate: new Date(data.endDate as Date),
-    open: false, // TODO - confirmation
+    open: false, // TODO - confirmation default
     // originTx - not informed here // TODO - confirmation
   });
 }

@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense } from 'react';
 import bbox from '@turf/bbox';
-import { Marker, WebMercatorViewport, StaticMap } from 'react-map-gl';
 import { FeatureCollection } from 'geojson';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { useState } from 'react';
 import PinIcon from '../icons/PinIcon';
+import { CircularProgress } from '@mui/material';
+
+const StaticMap = lazy(() => import('./lib/StaticMap'));
+const Marker = lazy(() => import('./lib/Marker'));
 
 interface MapProps {
   geojson: FeatureCollection;
@@ -27,36 +31,40 @@ export default function Map({ geojson, mapboxToken }: MapProps): JSX.Element {
   const onLoad = (): void => {
     if (viewPort) {
       const [minLng, minLat, maxLng, maxLat] = bbox(geojson);
-      const webViewport = new WebMercatorViewport(viewPort);
-      const { longitude, latitude, zoom, width, height } =
-        webViewport.fitBounds([
-          [minLng, minLat],
-          [maxLng, maxLat],
-        ]);
-      setViewPort({
-        longitude,
-        latitude,
-        zoom: 4,
-        width,
-        height,
+      import('./lib/WebMercatorViewport').then(({ WebMercatorViewport }) => {
+        const webViewport = new WebMercatorViewport(viewPort);
+        const { longitude, latitude, zoom, width, height } =
+          webViewport.fitBounds([
+            [minLng, minLat],
+            [maxLng, maxLat],
+          ]);
+        setViewPort({
+          longitude,
+          latitude,
+          zoom: 4,
+          width,
+          height,
+        });
+        setBoundary({ longitude, latitude, zoom });
       });
-      setBoundary({ longitude, latitude, zoom });
     }
   };
 
   return (
-    <StaticMap
-      {...viewPort}
-      width="100%"
-      height="100%"
-      mapboxApiAccessToken={mapboxToken}
-      mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
-      onLoad={onLoad}
-      attributionControl={false}
-    >
-      <Marker latitude={boundary.latitude} longitude={boundary.longitude}>
-        <PinIcon fontSize="large" size={35} />
-      </Marker>
-    </StaticMap>
+    <Suspense fallback={<CircularProgress color="secondary" />}>
+      <StaticMap
+        {...viewPort}
+        width="100%"
+        height="100%"
+        mapboxApiAccessToken={mapboxToken}
+        mapStyle="mapbox://styles/mapbox/satellite-streets-v10"
+        onLoad={onLoad}
+        attributionControl={false}
+      >
+        <Marker latitude={boundary.latitude} longitude={boundary.longitude}>
+          <PinIcon fontSize="large" size={35} />
+        </Marker>
+      </StaticMap>
+    </Suspense>
   );
 }

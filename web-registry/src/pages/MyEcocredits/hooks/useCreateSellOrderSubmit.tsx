@@ -2,11 +2,13 @@ import { useCallback } from 'react';
 import { FormValues as CreateSellOrderFormValues } from 'web-components/lib/components/form/CreateSellOrderForm';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
+import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { useStateSetter } from '../../../types/react/use-state';
 import {
   CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_HEADER,
 } from '../MyEcocredits.contants';
+import { Box } from '@mui/material';
 
 type Props = {
   setCardItems: useStateSetter<Item[] | undefined>;
@@ -39,7 +41,20 @@ const useCreateSellOrderSubmit = ({
           },
           {
             label: 'price per credit',
-            value: { name: String(price) },
+            value: {
+              name: String(price),
+              icon: (
+                <Box
+                  sx={{
+                    mr: '4px',
+                    display: 'inline-block',
+                    verticalAlign: 'middle',
+                  }}
+                >
+                  <RegenTokenIcon />
+                </Box>
+              ),
+            },
           },
           {
             label: 'number of credits',

@@ -17,36 +17,9 @@ import { truncate } from 'web-components/lib/utils/truncate';
 import { Link } from '../../../../components/atoms';
 import { getAccountUrl, getHashUrl } from '../../../../lib/block-explorer';
 
-type ResultProps = {
-  response?: DeliverTxResponse;
-  error?: string;
-};
-
-export default function Result({
-  response,
-  error,
-}: ResultProps): React.ReactElement {
-  if (error) return <ErrorResult error={error} />;
-
-  // if response, check if false "success" response because `unauthorized` error
-  if (typeof response?.rawLog === 'string')
-    return <ErrorResult error={response.rawLog} />;
-
-  return response ? <SuccessResult response={response} /> : <div />;
-}
-
-type SuccessProps = {
-  response: DeliverTxResponse;
-};
-
-const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
-  const navigate = useNavigate();
-
-  // Parsing the response, specifically the content in the key `rawLog`
-  // is an array with a single element, and this is an object with a single key `events`
-  const responseLog = response?.rawLog && JSON.parse(response?.rawLog);
-  const responseLogEvents = responseLog && responseLog[0].events;
-
+function parseSuccessResponseLog(
+  responseLogEvents: [any],
+): Omit<SuccessProps, 'txHash'> {
   // get the batch denom from the `EventCreateBatch` event log
   let batchDenom = '';
   try {
@@ -66,7 +39,7 @@ const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
   } catch (err) {}
 
   // get the recipients from the `EventTransfer` event log
-  let recipients;
+  let recipients = [];
   try {
     const eventTransfer =
       responseLogEvents &&
@@ -87,6 +60,77 @@ const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
     });
   } catch (err) {}
 
+  return { batchDenom, recipients };
+}
+
+type ResultProps = {
+  response?: DeliverTxResponse;
+  error?: string;
+};
+
+export default function Result({
+  response,
+  error,
+}: ResultProps): React.ReactElement {
+  const [responseProcessed, setResponseProcessed] = React.useState<
+    SuccessProps | string
+  >();
+
+  // if response, check if false "success" response because `unauthorized` error
+  // if we can parse rawLog, then we assume it is a success response
+  // if fails parsing rawLog, is because it is already a string with the error message
+  React.useEffect(() => {
+    if (!response) return;
+
+    try {
+      // Parsing the response, specifically the content in the key `rawLog`
+      // is an array with a single element, and this is an object with a single key `events`
+      const responseLog = response.rawLog && JSON.parse(response.rawLog);
+      const responseLogEvents: [any] = responseLog && responseLog[0].events;
+      const { batchDenom, recipients } =
+        parseSuccessResponseLog(responseLogEvents);
+
+      setResponseProcessed({
+        batchDenom,
+        recipients,
+        txHash: response.transactionHash,
+      });
+    } catch (e) {
+      setResponseProcessed(response.rawLog);
+    }
+  }, [response]);
+
+  if (error) return <ErrorResult error={error} />;
+
+  if (typeof responseProcessed === 'string')
+    return <ErrorResult error={responseProcessed} />;
+
+  return response ? (
+    <SuccessResult
+      batchDenom={responseProcessed?.batchDenom || ''}
+      recipients={responseProcessed?.recipients || []}
+      txHash={responseProcessed?.txHash || ''}
+    />
+  ) : (
+    <div />
+  );
+}
+
+type Recipient = { name: string; url: string };
+
+type SuccessProps = {
+  batchDenom: string;
+  recipients: Recipient[] | [];
+  txHash: string;
+};
+
+const SuccessResult = ({
+  batchDenom,
+  recipients,
+  txHash,
+}: SuccessProps): React.ReactElement => {
+  const navigate = useNavigate();
+
   return (
     <>
       <OnBoardingCard>
@@ -106,8 +150,8 @@ const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
         <CardItem
           label="hash"
           value={{
-            name: truncate(response.transactionHash),
-            url: getHashUrl(response.transactionHash),
+            name: truncate(txHash),
+            url: getHashUrl(txHash),
           }}
           linkComponent={Link}
         />

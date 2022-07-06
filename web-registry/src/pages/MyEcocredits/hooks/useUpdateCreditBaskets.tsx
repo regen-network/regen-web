@@ -19,11 +19,14 @@ const useUpdateCreditBaskets = ({
   useEffect(() => {
     // Get available baskets to put credits into
     if (basketsWithClasses && basketsWithClasses.length > 0) {
-      // setCreditBaskets(
-      //   credits.map(c =>
-      //     basketsWithClasses.filter(b => b?.classes.includes(c.classId)),
-      //   ),
-      // );
+      setCreditBaskets(
+        credits.map(credit =>
+          basketsWithClasses.filter(
+            basket =>
+              credit.classId && basket?.classes.includes(credit.classId),
+          ),
+        ),
+      );
     }
   }, [credits, basketsWithClasses, setCreditBaskets]);
 };

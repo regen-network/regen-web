@@ -91,7 +91,14 @@ export const getEcocreditsForAccount = async (
       }),
     );
     // filter out batches that don't have any credits
-    return credits.filter(c => Number(c.balance) > 0);
+    return credits.filter(credit => {
+      const { balance } = credit;
+      return (
+        Number(balance?.tradableAmount) > 0 ||
+        Number(balance?.escrowedAmount) > 0 ||
+        Number(balance?.retiredAmount) > 0
+      );
+    });
   } catch (err) {
     throw new Error(`Could not get ecocredits for account ${account}, ${err}`);
   }

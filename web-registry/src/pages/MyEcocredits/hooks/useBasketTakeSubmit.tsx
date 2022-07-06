@@ -33,8 +33,8 @@ const useBasketTakeSubmit = ({
       if (!accountAddress) return Promise.reject();
 
       const amount = values?.amount;
-      const basket = baskets?.baskets.find(
-        b => b.basketDenom === values.basketDenom,
+      const basket = baskets?.basketsInfo?.find(
+        basketInfo => basketInfo.basketDenom === values.basketDenom,
       );
 
       const msg = MsgTake.fromPartial({
@@ -69,7 +69,7 @@ const useBasketTakeSubmit = ({
     [
       accountAddress,
       basketTakeTitle,
-      baskets?.baskets,
+      baskets?.basketsInfo,
       setBasketTakeTokens,
       setCardItems,
       setTxModalTitle,

@@ -16,7 +16,9 @@ export interface IBatchInfo extends Omit<BatchInfo, '$type'> {}
 // /** combines the ledger `BatchInfo` with ledger `QueryBalanceResponse` */
 export interface BatchInfoWithBalance
   extends IBatchInfo,
-    Omit<QueryBalanceResponse, '$type'> {}
+    Omit<QueryBalanceResponse, '$type'> {
+  classId?: string;
+}
 
 // /** combines the ledger `BatchInfo` with ledger `QuerySupplyResponse` */
 export interface BatchInfoWithSupply

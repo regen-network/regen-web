@@ -55,7 +55,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
           Batch Denom
         </Box>,
         'Issuer',
-        // 'Credit Class',
+        'Credit Class',
         <BreakText>Amount Tradable</BreakText>,
         <BreakText>Amount Retired</BreakText>,
         <BreakText>Balance</BreakText>,
@@ -68,9 +68,9 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
           <Link href={getAccountUrl(row.issuer as string)} target="_blank">
             {truncate(row.issuer as string)}
           </Link>,
-          // <Link key="class_id" href={`/credit-classes/${row.classId}`}>
-          //   {row.classId}
-          // </Link>,
+          <Link key="class_id" href={`/credit-classes/${row.classId}`}>
+            {row.classId}
+          </Link>,
           formatNumber(
             (row as BatchInfoWithSupply)?.tradableSupply ||
               (row as BatchInfoWithBalance)?.balance?.tradableAmount,

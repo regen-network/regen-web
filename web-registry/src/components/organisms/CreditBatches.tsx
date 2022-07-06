@@ -30,7 +30,7 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   { id: 'txhash', numeric: false, label: 'tx hash' },
-  // { id: 'class_id', numeric: false, label: 'credit class' },
+  { id: 'classId', numeric: false, label: 'credit class' },
   { id: 'denom', numeric: false, label: 'batch denom' },
   { id: 'issuer', numeric: false, label: 'issuer' },
   {
@@ -134,9 +134,9 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             {truncateHash(batch.txhash)}
           </Link>,
-          // <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
-          //   {batch.class_id}
-          // </Link>,
+          <Link key="classId" href={`/credit-classes/${batch.classId}`}>
+            {batch.classId}
+          </Link>,
           <Link
             className={styles.noWrap}
             href={`/credit-batches/${batch.denom}`}

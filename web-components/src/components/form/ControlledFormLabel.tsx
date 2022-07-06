@@ -1,12 +1,11 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { Body, Subtitle } from '../typography';
+import { Subtitle } from '../typography';
 
 interface Props {
   children: React.ReactNode;
   disabled?: boolean;
-  optional?: boolean;
-  labelSubText?: string;
+  optional?: boolean | string;
 }
 
 /**
@@ -16,8 +15,9 @@ export default function ControlledFormLabel({
   children,
   optional,
   disabled,
-  labelSubText,
 }: Props): JSX.Element {
+  const optionalText =
+    typeof optional === 'string' ? `"${optional}"` : '"(optional)"';
   return (
     <Box
       sx={{ display: 'flex', flexDirection: 'column', alignItems: 'baseline' }}
@@ -30,18 +30,14 @@ export default function ControlledFormLabel({
           '&::after': {
             color: 'info.main',
             fontWeight: 'normal',
+            ml: 1,
             fontSize: [14, 16],
-            content: optional ? '" (optional)"' : '""',
+            content: optional ? optionalText : '""',
           },
         }}
       >
         {children}
       </Subtitle>
-      {labelSubText && (
-        <Body ml={1} color="info.main">
-          &nbsp;{labelSubText}
-        </Body>
-      )}
     </Box>
   );
 }

@@ -23,7 +23,7 @@ import { OrganizationFormValues } from 'web-components/lib/components/modal/Orga
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import {
-  urlType,
+  UrlType,
   getURLInitialValue,
 } from 'web-components/lib/utils/schemaURL';
 
@@ -39,6 +39,8 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;
+  onNext?: () => void;
+  onPrev?: () => void;
   initialValues?: EntityDisplayValues;
 }
 
@@ -64,13 +66,13 @@ export type EntityFieldName = keyof EntityDisplayValues;
 interface OrganizationDisplayShape {
   'regen:showOnProjectPage': boolean;
   'schema:name'?: string;
-  'schema:logo'?: urlType;
+  'schema:logo'?: UrlType;
   'schema:description'?: string;
 }
 
 interface IndividualDisplayShape {
   'regen:showOnProjectPage': boolean;
-  'schema:image'?: urlType;
+  'schema:image'?: UrlType;
   'schema:description'?: string;
 }
 
@@ -345,7 +347,7 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
   if (!values) {
     return undefined;
   }
-  const initialURL: urlType = getURLInitialValue();
+  const initialURL: UrlType = getURLInitialValue();
   if (isIndividual(values)) {
     return {
       ...{ 'schema:image': initialURL },
@@ -362,6 +364,7 @@ function getInitialValues(values?: DisplayValues): DisplayValues | undefined {
 const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
   submit,
   initialValues,
+  ...props
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const styles = useStyles();
@@ -514,6 +517,8 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
               </OnBoardingCard>
               <ProjectPageFooter
                 onSave={submitForm}
+                onNext={props.onNext}
+                onPrev={props.onPrev}
                 saveDisabled={
                   !isValid || isSubmitting || !Object.keys(touched).length
                 }

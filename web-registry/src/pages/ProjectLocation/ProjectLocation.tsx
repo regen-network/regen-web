@@ -55,6 +55,14 @@ const ProjectLocation: React.FC = () => {
     }
   }
 
+  function navigatePrev(): void {
+    navigate(`/project-pages/${projectId}/basic-info`);
+  }
+
+  function navigateNext(): void {
+    navigate(`/project-pages/${projectId}/roles`);
+  }
+
   async function saveValues(values: ProjectLocationFormValues): Promise<void> {
     const metadata = { ...projectData?.projectById?.metadata, ...values };
     const feature = values['schema:location'];
@@ -97,14 +105,20 @@ const ProjectLocation: React.FC = () => {
     });
   }
 
+  const Form = (): JSX.Element => (
+    <ProjectLocationForm
+      submit={submit}
+      saveAndExit={saveAndExit}
+      mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
+      initialValues={initialFieldValues}
+      onPrev={navigatePrev}
+      onNext={navigateNext}
+    />
+  );
+
   return isEdit ? (
     <EditFormTemplate>
-      <ProjectLocationForm
-        submit={submit}
-        saveAndExit={saveAndExit}
-        mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
-        initialValues={initialFieldValues}
-      />
+      <Form />
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -112,12 +126,7 @@ const ProjectLocation: React.FC = () => {
       title="Location"
       saveAndExit={saveAndExit}
     >
-      <ProjectLocationForm
-        submit={submit}
-        saveAndExit={saveAndExit}
-        mapToken={process.env.REACT_APP_MAPBOX_TOKEN as string}
-        initialValues={initialFieldValues}
-      />
+      <Form />
     </OnboardingFormTemplate>
   );
 };

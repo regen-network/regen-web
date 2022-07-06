@@ -14,7 +14,7 @@ interface ControlledTextFieldProps
   charLimit?: number;
   description?: string;
   label?: string;
-  optional?: boolean;
+  optional?: boolean | string;
   onExampleClick?: () => void;
   sx?: SxProps<Theme>;
 }

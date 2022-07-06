@@ -9,7 +9,7 @@ import 'react-phone-input-2/lib/style.css';
 interface RegenPhoneFieldProps extends FieldProps {
   className?: string;
   label: string;
-  optional?: boolean;
+  optional?: boolean | string;
   placeholder?: string;
 }
 

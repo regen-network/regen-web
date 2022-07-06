@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
-import { CardMedia, IconButton, Collapse, LinearProgress } from '@mui/material';
+import {
+  CardMedia,
+  IconButton,
+  Collapse,
+  LinearProgress,
+  useMediaQuery,
+} from '@mui/material';
 import { FieldProps } from 'formik';
 import cx from 'clsx';
+import ReactPlayerLazy from 'react-player/lazy';
 
 import Card from '../cards/Card';
 import OutlinedButton from '../buttons/OutlinedButton';
@@ -18,8 +25,7 @@ export interface VideoInputProps extends FieldProps {
     button?: string;
   };
   label?: string;
-  optional?: boolean;
-  labelSubText?: string;
+  optional?: boolean | string;
   buttonText?: string;
 }
 
@@ -38,16 +44,6 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     width: '100%',
     position: 'relative',
-  },
-  video: {
-    width: '100%',
-    borderRadius: 5,
-    [theme.breakpoints.up('sm')]: {
-      height: theme.typography.pxToRem(318),
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: theme.typography.pxToRem(210),
-    },
   },
   inputRow: {
     display: 'flex',
@@ -71,9 +67,6 @@ const useStyles = makeStyles(theme => ({
       background: theme.palette.grey[100],
     },
   },
-  progress: {
-    marginBottom: theme.spacing(4),
-  },
 }));
 
 function VideoInput({
@@ -81,14 +74,14 @@ function VideoInput({
   classes,
   label,
   optional,
-  labelSubText,
   buttonText,
   ...fieldProps
 }: VideoInputProps): JSX.Element {
   const [videoUrl, setVideoUrl] = useState('');
-  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   const styles = useStyles();
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { form, field } = fieldProps;
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>): void => {
@@ -102,7 +95,7 @@ function VideoInput({
   const handleDelete = (): void => {
     form.setFieldValue(field.name, null);
     setVideoUrl('');
-    setIframeLoaded(false);
+    setVideoLoaded(false);
   };
 
   return (
@@ -111,27 +104,29 @@ function VideoInput({
       label={label}
       disabled={form.isSubmitting}
       optional={optional}
-      labelSubText={labelSubText}
       {...fieldProps}
     >
       {() => (
         <>
-          {!!field.value && (
+          {!!field.value ? (
             <>
               <Collapse
                 classes={{
                   entered: styles.collapse,
                   hidden: styles.collapseHidden,
                 }}
-                in={iframeLoaded}
+                in={videoLoaded}
               >
                 <Card className={styles.preview}>
                   <CardMedia
-                    className={styles.video}
-                    component="iframe"
-                    src={field.value}
-                    frameBorder="0"
-                    onLoad={() => setIframeLoaded(true)}
+                    sx={{ width: '100%', borderRadius: 5, height: [210, 318] }}
+                    // note: the following props are passed to ReactPlayer
+                    component={ReactPlayerLazy}
+                    url={field.value}
+                    onReady={() => setVideoLoaded(true)}
+                    height={isMobile ? 210 : 318}
+                    fallback={<div>Loading video player...</div>}
+                    width="100%"
                   />
                   <IconButton
                     classes={{ root: styles.deleteButton }}
@@ -143,27 +138,27 @@ function VideoInput({
                   </IconButton>
                 </Card>
               </Collapse>
-              {!iframeLoaded && (
-                <LinearProgress color="secondary" className={styles.progress} />
+              {!videoLoaded && (
+                <LinearProgress color="secondary" sx={{ mb: 4 }} />
               )}
             </>
+          ) : (
+            <div className={cx(styles.inputRow, classes?.main)}>
+              <Input
+                className={styles.input}
+                onChange={handleChange}
+                value={videoUrl}
+                placeholder="Add video url"
+              />
+              <OutlinedButton
+                classes={{ root: cx(styles.button, classes?.button) }}
+                onClick={handleUrlSubmit}
+                aria-label="set video url"
+              >
+                {buttonText || '+ video'}
+              </OutlinedButton>
+            </div>
           )}
-
-          <div className={cx(styles.inputRow, classes?.main)}>
-            <Input
-              className={styles.input}
-              onChange={handleChange}
-              value={videoUrl}
-              placeholder="Add video url"
-            />
-            <OutlinedButton
-              classes={{ root: cx(styles.button, classes?.button) }}
-              onClick={handleUrlSubmit}
-              aria-label="set video url"
-            >
-              {buttonText || '+ video'}
-            </OutlinedButton>
-          </div>
         </>
       )}
     </FieldFormControl>

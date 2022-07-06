@@ -22,7 +22,7 @@ interface Props extends FieldProps {
   className?: string;
   description?: string;
   label?: string;
-  optional?: boolean;
+  optional?: boolean | string;
   placeholder?: string;
   types?: GeocodeQueryType[];
   token: string;

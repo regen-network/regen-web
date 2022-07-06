@@ -8,18 +8,16 @@ import { FormModalTemplate } from './FormModalTemplate';
 
 interface CreateSellOrderModalProps
   extends RegenModalProps,
-    CreateSellOrderProps {}
-
-export const title = 'Create Sell Order';
-export const shortTitle = 'Sell';
-export const successTitle = 'Your sell order was created!';
-export const buttonTitle = 'VIEW YOUR SELL ORDERS';
+    CreateSellOrderProps {
+  title: string;
+}
 
 const CreateSellOrderModal: React.FC<CreateSellOrderModalProps> = ({
   batchDenoms,
   sellDenom,
   availableAmountByBatch,
   open,
+  title,
   onClose,
   onSubmit,
 }) => (

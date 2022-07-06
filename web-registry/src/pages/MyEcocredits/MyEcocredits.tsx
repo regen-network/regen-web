@@ -50,7 +50,10 @@ import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import { default as useStyles } from './hooks/useMyEcocreditsStyles';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
-import { CREATE_SELL_ORDER_SHORT } from './MyEcocredits.contants';
+import {
+  CREATE_SELL_ORDER_SHORT,
+  CREATE_SELL_ORDER_TITLE,
+} from './MyEcocredits.contants';
 import {
   getAvailableAmountByBatch,
   getOtherSellOrderBatchDenomOptions,
@@ -355,6 +358,7 @@ export const MyEcocredits = (): JSX.Element => {
           open={true}
           onClose={() => setSellOrderCreateOpen(-1)}
           onSubmit={createSellOrderSubmit}
+          title={CREATE_SELL_ORDER_TITLE}
         />
       )}
       <ProcessingModal

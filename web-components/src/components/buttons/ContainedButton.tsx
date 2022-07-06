@@ -10,46 +10,37 @@ interface ContainedButtonProps extends ButtonProps {
   colorVariant?: ContainedColorVariant;
 }
 
-const StyledButton = styled(Button)<ContainedButtonProps>(
-  ({ theme, colorVariant = 'secondary' }) => {
-    const isSecondary = colorVariant === 'secondary';
-    const isGradientBlueGreen = colorVariant === 'gradientBlueGreen';
-
-    if (isSecondary) {
-      return {
-        borderColor: theme.palette.secondary.main,
-        color: theme.palette.primary.main,
-        '&:disabled': {
-          color: theme.palette.grey[50],
-          backgroundColor: theme.palette.grey[100],
-          borderColor: theme.palette.grey[100],
-        },
-        '&:hover': {
-          borderColor: theme.palette.secondary.dark,
-        },
-      };
-    }
-
-    if (isGradientBlueGreen) {
-      return {
-        color: theme.palette.primary.main,
+const StyledButton = styled(Button, {
+  shouldForwardProp: prop => prop !== 'colorVariant',
+})<ContainedButtonProps>(({ theme, colorVariant = 'secondary' }) => {
+  const isSecondary = colorVariant === 'secondary';
+  const isGradientBlueGreen = colorVariant === 'gradientBlueGreen';
+  return {
+    color: theme.palette.primary.main,
+    '&:disabled': {
+      color: theme.palette.grey[50],
+      backgroundColor: theme.palette.grey[100],
+      borderColor: theme.palette.grey[100],
+    },
+    ...(isSecondary && {
+      borderColor: theme.palette.secondary.main,
+      '&:hover': {
+        borderColor: theme.palette.secondary.dark,
+      },
+    }),
+    ...(isGradientBlueGreen && {
+      background:
+        'linear-gradient(204.4deg, #527984 5.94%, #79C6AA 51.92%, #C4DAB5 97.89%)',
+      '&:hover': {
         background:
-          'linear-gradient(204.4deg, #527984 5.94%, #79C6AA 51.92%, #C4DAB5 97.89%)',
-        '&:disabled': {
-          color: theme.palette.grey[50],
-          background: theme.palette.grey[100],
-          borderColor: theme.palette.grey[100],
-        },
-        '&:hover': {
-          background:
-            'linear-gradient(204.4deg, #52798470 5.94%, #79C6AA70 51.92%, #C4DAB570 97.89%)',
-        },
-      };
-    }
-
-    return {};
-  },
-);
+          'linear-gradient(204.4deg, #52798470 5.94%, #79C6AA70 51.92%, #C4DAB570 97.89%)',
+      },
+    }),
+  };
+});
+StyledButton.defaultProps = {
+  colorVariant: 'secondary',
+};
 
 export default function ContainedButton(
   props: ContainedButtonProps,

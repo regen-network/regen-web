@@ -120,6 +120,16 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   const verificationMethod = metadata?.['regen:verificationMethod'];
   const sourceRegistry = metadata?.['regen:sourceRegistry'];
 
+  const getCreditType = (creditTypeAbbrev: string): string => {
+    // TODO: add credit types as they come online, or fetch from ledger somehow
+    return (
+      {
+        // eslint-disable-next-line prettier/prettier
+        'C': 'Carbon',
+      }[creditTypeAbbrev] || creditTypeAbbrev
+    );
+  };
+
   const Projects: React.FC = () => {
     const projects = dbClass?.projectsByCreditClassId?.nodes;
     if (!projects || projects.length < 1) return null;
@@ -219,7 +229,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 label="credit type"
                 data={
                   <Body size="xl" sx={{ mr: 1 }}>
-                    {startCase(onChainClass.creditTypeAbbrev)}
+                    {getCreditType(onChainClass.creditTypeAbbrev)}
                   </Body>
                 }
               />

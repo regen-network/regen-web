@@ -20,6 +20,8 @@ import {
   QueryProjectsRequest,
   QueryProjectsResponse,
   QuerySupplyResponse,
+  QueryProjectsByClassRequest,
+  QueryProjectsByClassResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import {
@@ -164,7 +166,7 @@ const getTxHashForBatch = (
   return match?.txhash;
 };
 
-const getClassIdForBatch = (batch: BatchInfo): string | undefined => {
+const getClassIdForBatch = (batch?: BatchInfo): string | undefined => {
   return batch?.denom?.split('-')?.[0] || '-';
 };
 
@@ -185,6 +187,7 @@ export const getBatchWithSupplyForDenom = async (
       endDate: batch?.endDate || new Date(),
       issuanceDate: batch?.issuanceDate || new Date(),
       open: !!batch?.open,
+      classId: getClassIdForBatch(batch),
     };
     return batchWithSupply;
   } catch (err) {
@@ -289,6 +292,17 @@ export const queryClassIssuers = async (
     return client.ClassIssuers({ classId });
   } catch (err) {
     throw new Error(`Error fetching issuer info: ${err}`);
+  }
+};
+
+export const queryProjectsByClass = async (
+  classId: string,
+): Promise<QueryProjectsByClassResponse> => {
+  const client = await getQueryClient();
+  try {
+    return client.ProjectsByClass({ classId });
+  } catch (err) {
+    throw new Error(`Error fetching projects by class: ${err}`);
   }
 };
 

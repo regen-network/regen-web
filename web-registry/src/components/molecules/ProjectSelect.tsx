@@ -5,12 +5,8 @@ import { startCase } from 'lodash';
 import SelectTextField, {
   Option,
 } from 'web-components/lib/components/inputs/SelectTextField';
-import useEcocreditQuery from '../../hooks/useEcocreditQuery';
-import {
-  ProjectInfo,
-  QueryProjectsByClassRequest,
-  QueryProjectsResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { queryProjectsByClass } from '../../lib/ecocredit/api';
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 interface FieldProps {
   name?: string;
@@ -30,26 +26,16 @@ const ProjectSelect: React.FC<FieldProps> = ({
   saveOptions,
   ...props
 }) => {
-  const { data } = useEcocreditQuery<QueryProjectsResponse>({
-    query: 'projects',
-    params: {},
-  });
-
   const { setFieldValue } = useFormikContext();
   const [projectOptions, setProjectOptions] = useState<Option[]>([]);
 
   useEffect(() => {
-    setProjectOptions([]);
-    // reset options when creditClassID no longer has a selected element
-    if (creditClassId === '') return;
+    const fetchData = async () => {
+      if (!creditClassId) return;
+      const data = await queryProjectsByClass(creditClassId);
 
-    // reset project if creditClassID changes
-    if (!initialSelection) setFieldValue(name, '');
-
-    const options =
-      data?.projects
-        .filter(project => project.classId === creditClassId)
-        .map((project: ProjectInfo) => {
+      const options =
+        data?.projects.map((project: ProjectInfo) => {
           return {
             label:
               `${startCase(project?.metadata?.['schema:name' as any] || '')} ${
@@ -59,10 +45,20 @@ const ProjectSelect: React.FC<FieldProps> = ({
           };
         }) || [];
 
-    if (saveOptions) saveOptions(options);
+      if (saveOptions) saveOptions(options);
 
-    setProjectOptions([defaultProjectOption, ...options]);
-  }, [data, setFieldValue, name, initialSelection, saveOptions, creditClassId]);
+      setProjectOptions([defaultProjectOption, ...options]);
+    };
+
+    setProjectOptions([]);
+    // reset options when creditClassID no longer has a selected element
+    if (creditClassId === '') return;
+
+    // reset project if creditClassID changes
+    if (!initialSelection) setFieldValue(name, '');
+
+    fetchData();
+  }, [setFieldValue, name, initialSelection, saveOptions, creditClassId]);
 
   return (
     <Field

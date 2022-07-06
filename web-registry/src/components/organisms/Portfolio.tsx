@@ -5,12 +5,12 @@ import { Label } from 'web-components/lib/components/typography';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 
 import { EcocreditsTable, BasketsTable } from './';
-import type { IBatchInfoWithBalance } from '../../types/ledger/ecocredit';
+import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 import { BasketTokens } from '../../hooks/useBasketTokens';
 import { DashboardTemplate } from '../templates';
 
 export interface PortfolioProps {
-  credits?: IBatchInfoWithBalance[];
+  credits?: BatchInfoWithBalance[];
   basketTokens: BasketTokens[];
   renderCreditActionButtons?: RenderActionButtonsFunc;
   renderBasketActionButtons?: RenderActionButtonsFunc;

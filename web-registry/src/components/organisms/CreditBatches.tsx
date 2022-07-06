@@ -9,7 +9,7 @@ import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate, truncateHash } from 'web-components/lib/utils/truncate';
 import { Link } from '../atoms';
-import type { IBatchInfoWithSupply } from '../../types/ledger/ecocredit';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
 import { getAccountUrl, getHashUrl } from '../../lib/block-explorer';
@@ -17,12 +17,12 @@ import { getAccountUrl, getHashUrl } from '../../lib/block-explorer';
 interface CreditBatchProps {
   creditClassId?: string | null;
   projectPage?: boolean;
-  creditBatches?: IBatchInfoWithSupply[];
+  creditBatches?: BatchInfoWithSupply[];
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
 interface HeadCell {
-  id: keyof IBatchInfoWithSupply;
+  id: keyof BatchInfoWithSupply;
   label: string;
   numeric: boolean;
   wrap?: boolean;
@@ -96,7 +96,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   titleAlign = 'center',
 }) => {
   const styles = useStyles();
-  const [batches, setBatches] = useState<IBatchInfoWithSupply[]>([]);
+  const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
   let columnsToShow = [...headCells];
 
   useEffect(() => {

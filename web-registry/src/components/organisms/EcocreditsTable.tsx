@@ -12,8 +12,8 @@ import { Link } from '../atoms';
 import { NoCredits } from '../molecules';
 import { getAccountUrl } from '../../lib/block-explorer';
 import type {
-  IBatchInfoWithBalance,
-  IBatchInfoWithSupply,
+  BatchInfoWithBalance,
+  BatchInfoWithSupply,
 } from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
@@ -26,7 +26,7 @@ const BreakText = styled('div')({
 });
 
 type EcocreditsTableProps = {
-  credits?: IBatchInfoWithSupply[] | IBatchInfoWithBalance[];
+  credits?: BatchInfoWithSupply[] | BatchInfoWithBalance[];
   renderActionButtons?: RenderActionButtonsFunc;
 };
 
@@ -72,12 +72,12 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
           //   {row.classId}
           // </Link>,
           formatNumber(
-            (row as IBatchInfoWithSupply)?.tradableSupply ||
-              (row as IBatchInfoWithBalance)?.balance?.tradableAmount,
+            (row as BatchInfoWithSupply)?.tradableSupply ||
+              (row as BatchInfoWithBalance)?.balance?.tradableAmount,
           ),
           formatNumber(
-            (row as IBatchInfoWithSupply)?.retiredSupply ||
-              (row as IBatchInfoWithBalance)?.balance?.retiredAmount,
+            (row as BatchInfoWithSupply)?.retiredSupply ||
+              (row as BatchInfoWithBalance)?.balance?.retiredAmount,
           ),
           <GreyText>{formatDate(row.startDate)}</GreyText>,
           <GreyText>{formatDate(row.endDate)}</GreyText>,

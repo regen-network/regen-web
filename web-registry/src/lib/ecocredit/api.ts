@@ -33,8 +33,8 @@ import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
 import { connect as connectToApi } from '../../ledger';
 import { expLedger, ledgerRESTUri } from '../ledger';
 import type {
-  IBatchInfoWithBalance,
-  IBatchInfoWithSupply,
+  BatchInfoWithBalance,
+  BatchInfoWithSupply,
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
 
@@ -51,7 +51,7 @@ const getQueryClient = async (): Promise<QueryClientImpl> => {
 };
 
 export const getBatchesTotal = async (
-  batches: IBatchInfoWithSupply[],
+  batches: BatchInfoWithSupply[],
 ): Promise<{
   totals: BatchTotalsForProject;
 }> => {
@@ -77,7 +77,7 @@ export const getBatchesTotal = async (
 
 export const getEcocreditsForAccount = async (
   account: string,
-): Promise<IBatchInfoWithBalance[]> => {
+): Promise<BatchInfoWithBalance[]> => {
   try {
     const batches = await queryEcoBatches();
     const credits = await Promise.all(
@@ -117,7 +117,7 @@ export const getBatchesWithSupply = async (
   creditClassId?: string | null,
   params?: URLSearchParams,
 ): Promise<{
-  data: IBatchInfoWithSupply[];
+  data: BatchInfoWithSupply[];
   pagination?: PageResponse;
 }> => {
   const batches = await queryEcoBatches(creditClassId, params);
@@ -131,7 +131,7 @@ export const getBatchesWithSupply = async (
 /** Adds Tx Hash and supply info to batch for use in tables */
 export const addDataToBatch = async (
   batches: BatchInfo[],
-): Promise<IBatchInfoWithSupply[]> => {
+): Promise<BatchInfoWithSupply[]> => {
   try {
     /* TODO: this is limited to 100 results. We need to find a better way */
     const txs = await getTxsByEvent({
@@ -162,7 +162,7 @@ const getTxHashForBatch = (
 
 export const getBatchWithSupplyForDenom = async (
   denom: string,
-): Promise<IBatchInfoWithSupply> => {
+): Promise<BatchInfoWithSupply> => {
   try {
     const { batch } = await queryEcoBatchInfo(denom);
     const supply = await queryEcoBatchSupply(denom);

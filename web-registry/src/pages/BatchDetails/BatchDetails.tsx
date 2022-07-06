@@ -12,7 +12,7 @@ import { getBatchWithSupplyForDenom } from '../../lib/ecocredit/api';
 import { getMetadata } from '../../lib/metadata-graph';
 import { useProjectsByMetadataQuery } from '../../generated/graphql';
 
-import type { IBatchInfoWithSupply } from '../../types/ledger/ecocredit';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import {
   BatchInfoGrid,
   BatchMetadata,
@@ -25,7 +25,7 @@ import { useEcocredits } from '../../hooks';
 export const BatchDetails: React.FC = () => {
   const { batchDenom } = useParams();
   const [ledgerLoading, setLedgerLoading] = useState(false);
-  const [batch, setBatch] = useState<IBatchInfoWithSupply>();
+  const [batch, setBatch] = useState<BatchInfoWithSupply>();
   const [metadata, setMetadata] = useState<VCSBatchMetadataLD>();
   const navigate = useNavigate();
   const walletContext = useWallet();

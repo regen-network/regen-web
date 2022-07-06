@@ -3,10 +3,10 @@ import { Grid, SxProps, Theme } from '@mui/material';
 
 import { LabeledNumber } from 'web-components/lib/components/text-layouts';
 
-import type { IBatchInfoWithSupply } from '../../types/ledger/ecocredit';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
 export const BatchTotalsGrid: React.FC<{
-  batch: IBatchInfoWithSupply;
+  batch: BatchInfoWithSupply;
   sx?: SxProps<Theme>;
 }> = ({ batch, sx }) => (
   <Grid

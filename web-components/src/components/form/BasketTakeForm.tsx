@@ -79,7 +79,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
 
   const initialValues = {
     amount: 0,
-    retireOnTake: !basket,
+    retireOnTake: !basket.disableAutoRetire,
     note: '',
     country: 'US',
     stateProvince: '',

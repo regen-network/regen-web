@@ -42,6 +42,7 @@ const useBasketTakeSubmit = ({
         basketDenom: values.basketDenom,
         amount,
         retireOnTake: values.retireOnTake || false,
+        retirementJurisdiction: values.retirementJurisdiction,
       });
 
       const tx = {

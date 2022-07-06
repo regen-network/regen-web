@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   getURLInitialValue,
@@ -24,13 +24,9 @@ import {
 import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
 
-<<<<<<< HEAD
-const Media: React.FC = () => {
-=======
 const PHOTO_COUNT = 4;
 
 const Media = (): JSX.Element => {
->>>>>>> 8fd95f26 (feat: create simplified media form (#990))
   const { projectId } = useParams();
   const navigate = useNavigate();
   const { isEdit } = useProjectEditContext();
@@ -39,18 +35,6 @@ const Media = (): JSX.Element => {
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
   });
-<<<<<<< HEAD
-
-  let initialFieldValues: MediaValues | undefined;
-  if (data?.projectById?.metadata) {
-    const metadata = data.projectById.metadata;
-    initialFieldValues = {
-      'regen:previewPhoto': metadata['regen:previewPhoto'],
-      'regen:galleryPhotos': metadata['regen:galleryPhotos'],
-      'regen:landStewardPhoto': metadata['regen:landStewardPhoto'],
-      'regen:videoURL': metadata['regen:videoURL'],
-    };
-=======
   const project = projectData?.projectById;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
 
@@ -81,7 +65,6 @@ const Media = (): JSX.Element => {
       );
     }
     return values;
->>>>>>> 8fd95f26 (feat: create simplified media form (#990))
   }
 
   const saveAndExit = (): Promise<void> => {
@@ -89,8 +72,20 @@ const Media = (): JSX.Element => {
     return Promise.resolve();
   };
 
+  function navigateNext(): void {
+    // TODO: replace 'review' with path name once
+    // https://github.com/regen-network/regen-registry/issues/447 is merged
+    const nextStep = creditClassId ? 'metadata' : 'review';
+    navigate(`/project-pages/${projectId}/${nextStep}`);
+  }
+
+  function navigatePrev(): void {
+    const prevStep = creditClassId ? 'story' : 'description';
+    navigate(`/project-pages/${projectId}/${prevStep}`);
+  }
+
   async function submit(values: MediaValues): Promise<void> {
-    const metadata = { ...data?.projectById?.metadata, ...values };
+    const metadata = { ...project?.metadata, ...values };
     try {
       await updateProject({
         variables: {
@@ -102,6 +97,7 @@ const Media = (): JSX.Element => {
           },
         },
       });
+      if (!isEdit) navigateNext();
     } catch (e) {
       console.error('error saving media form', e); // eslint-disable-line no-console
       // TODO: Should we display the error banner here?
@@ -110,8 +106,6 @@ const Media = (): JSX.Element => {
     }
   }
 
-<<<<<<< HEAD
-=======
   const Form = (): JSX.Element => (
     <MediaForm
       submit={submit}
@@ -125,10 +119,9 @@ const Media = (): JSX.Element => {
 
   if (loadingProject) return <Loading />;
 
->>>>>>> 8fd95f26 (feat: create simplified media form (#990))
   return isEdit ? (
     <EditFormTemplate>
-      <MediaForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </EditFormTemplate>
   ) : (
     <OnboardingFormTemplate
@@ -136,7 +129,7 @@ const Media = (): JSX.Element => {
       title="Media"
       saveAndExit={saveAndExit}
     >
-      <MediaForm submit={submit} initialValues={initialFieldValues} />
+      <Form />
     </OnboardingFormTemplate>
   );
 };

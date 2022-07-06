@@ -50,6 +50,169 @@ const getQueryClient = async (): Promise<QueryClientImpl> => {
   return new QueryClientImpl(api.queryClient);
 };
 
+export const getBatchesTotal = async (
+  batches: BatchInfoWithSupply[],
+): Promise<{
+  totals: BatchTotalsForProject;
+}> => {
+  try {
+    const totals = batches.reduce(
+      (acc, batch) => {
+        acc.cancelledAmount += Number(batch?.cancelledAmount ?? 0);
+        acc.retiredSupply += Number(batch?.retiredSupply ?? 0);
+        acc.tradableSupply += Number(batch?.tradableSupply ?? 0);
+        return acc;
+      },
+      {
+        cancelledAmount: 0,
+        retiredSupply: 0,
+        tradableSupply: 0,
+      },
+    );
+    return { totals };
+  } catch (err) {
+    throw new Error(`Could not get batches total ${err}`);
+  }
+};
+
+export const getEcocreditsForAccount = async (
+  account: string,
+): Promise<BatchInfoWithBalance[]> => {
+  try {
+    const batches = await queryEcoBatches();
+    const credits = await Promise.all(
+      batches.map(async batch => {
+        const credits = await queryEcoBalance(batch.denom, account);
+        const classId = getClassIdForBatch(batch);
+        return {
+          ...batch,
+          ...credits,
+          classId,
+        };
+      }),
+    );
+    // filter out batches that don't have any credits
+    return credits.filter(c => Number(c.balance) > 0);
+  } catch (err) {
+    throw new Error(`Could not get ecocredits for account ${account}, ${err}`);
+  }
+};
+
+export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
+  let allTxs: TxResponse[] = [];
+  // TODO: until ledger API supports "message.module='ecocredit'",
+  // we must send separate requests for each message action type:
+  return Promise.all(
+    Object.values(ECOCREDIT_MESSAGE_TYPES).map(async msgType => {
+      const response = await getTxsByEvent({
+        events: [`${messageActionEquals}'${msgType.message}'`],
+      });
+      allTxs = [...allTxs, ...response.txResponses];
+    }),
+  ).then(() => {
+    return allTxs;
+  });
+};
+
+export const getBatchesWithSupply = async (
+  creditClassId?: string | null,
+  params?: URLSearchParams,
+): Promise<{
+  data: BatchInfoWithSupply[];
+  pagination?: PageResponse;
+}> => {
+  const batches = await queryEcoBatches(creditClassId, params);
+  const batchesWithData = await addDataToBatch(batches);
+  return {
+    data: batchesWithData,
+    // pagination: pagination, TODO
+  };
+};
+
+/** Adds Tx Hash and supply info to batch for use in tables */
+export const addDataToBatch = async (
+  batches: BatchInfo[],
+): Promise<BatchInfoWithSupply[]> => {
+  try {
+    /* TODO: this is limited to 100 results. We need to find a better way */
+    const txs = await getTxsByEvent({
+      events: [
+        `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
+      ],
+    });
+
+    return Promise.all(
+      batches.map(async batch => {
+        const supplyData = await queryEcoBatchSupply(batch.denom);
+        const txhash = getTxHashForBatch(txs.txResponses, batch.denom);
+        const classId = getClassIdForBatch(batch);
+        return { ...batch, ...supplyData, txhash, classId };
+      }),
+    );
+  } catch (err) {
+    throw new Error(`Could not add data to batches batches: ${err}`);
+  }
+};
+
+const getTxHashForBatch = (
+  txResponses: TxResponse[],
+  batchDenom: string,
+): string | undefined => {
+  const match = txResponses?.find(tx => tx.rawLog.includes(batchDenom));
+  return match?.txhash;
+};
+
+const getClassIdForBatch = (batch: BatchInfo): string | undefined => {
+  return batch?.denom?.split('-')?.[0] || '-';
+};
+
+export const getBatchWithSupplyForDenom = async (
+  denom: string,
+): Promise<BatchInfoWithSupply> => {
+  try {
+    const { batch } = await queryEcoBatchInfo(denom);
+    const supply = await queryEcoBatchSupply(denom);
+    const batchWithSupply: BatchInfoWithSupply = {
+      ...batch,
+      ...supply,
+      issuer: batch?.issuer || '',
+      projectId: batch?.projectId || '',
+      denom: batch?.denom || '',
+      metadata: batch?.metadata || '',
+      startDate: batch?.startDate || new Date(),
+      endDate: batch?.endDate || new Date(),
+      issuanceDate: batch?.issuanceDate || new Date(),
+      open: !!batch?.open,
+    };
+    return batchWithSupply;
+  } catch (err) {
+    throw new Error(
+      `Could not get batches with supply for denom ${denom}, ${err}`,
+    );
+  }
+};
+
+export const getReadableMessages = (txResponse: TxResponse): string => {
+  return uniq(
+    txResponse?.logs?.[0]?.events
+      .filter(event => event.type === 'message')
+      .map(event => {
+        const action = event.attributes.find(
+          attr => attr.key === 'action',
+        )?.value;
+
+        return getReadableName(action);
+      }),
+  ).join(', ');
+};
+
+const getReadableName = (eventType?: string): string | undefined => {
+  if (!eventType) return undefined;
+  return Object.values(ECOCREDIT_MESSAGE_TYPES).find(
+    msgType => msgType.message === eventType,
+  )?.readable;
+};
+
 export const queryEcoClasses = async (): Promise<QueryClassesResponse> => {
   const client = await getQueryClient();
   return client.Classes({});
@@ -127,7 +290,8 @@ export const queryClassIssuers = async (
   }
 };
 
-// helpers for combining ledger queries into UI data structures
+// helpers for combining ledger queries (currently rest, regen-js in future)
+// into UI data structures
 
 /**
  *
@@ -363,8 +527,6 @@ export const queryProjects = async ({
   }
 };
 
-// Methods that supplement ledger responses with additional data:
-
 // queryEcoBatches consumes Regen REST endpoints - will be replaced with regen-js
 export const queryEcoBatches = async (
   creditClassId?: string | null,
@@ -420,167 +582,4 @@ export const queryEcoBatches = async (
   } catch (err) {
     throw new Error(`Error fetching batches: ${err}`);
   }
-};
-
-export const getBatchesTotal = async (
-  batches: BatchInfoWithSupply[],
-): Promise<{
-  totals: BatchTotalsForProject;
-}> => {
-  try {
-    const totals = batches.reduce(
-      (acc, batch) => {
-        acc.cancelledAmount += Number(batch?.cancelledAmount ?? 0);
-        acc.retiredSupply += Number(batch?.retiredSupply ?? 0);
-        acc.tradableSupply += Number(batch?.tradableSupply ?? 0);
-        return acc;
-      },
-      {
-        cancelledAmount: 0,
-        retiredSupply: 0,
-        tradableSupply: 0,
-      },
-    );
-    return { totals };
-  } catch (err) {
-    throw new Error(`Could not get batches total ${err}`);
-  }
-};
-
-export const getEcocreditsForAccount = async (
-  account: string,
-): Promise<BatchInfoWithBalance[]> => {
-  try {
-    const batches = await queryEcoBatches();
-    const credits = await Promise.all(
-      batches.map(async batch => {
-        const credits = await queryEcoBalance(batch.denom, account);
-        const classId = getClassIdForBatch(batch);
-        return {
-          ...batch,
-          ...credits,
-          classId,
-        };
-      }),
-    );
-    // filter out batches that don't have any credits
-    return credits.filter(c => Number(c.balance) > 0);
-  } catch (err) {
-    throw new Error(`Could not get ecocredits for account ${account}, ${err}`);
-  }
-};
-
-export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
-  let allTxs: TxResponse[] = [];
-  // TODO: until ledger API supports "message.module='ecocredit'",
-  // we must send separate requests for each message action type:
-  return Promise.all(
-    Object.values(ECOCREDIT_MESSAGE_TYPES).map(async msgType => {
-      const response = await getTxsByEvent({
-        events: [`${messageActionEquals}'${msgType.message}'`],
-      });
-      allTxs = [...allTxs, ...response.txResponses];
-    }),
-  ).then(() => {
-    return allTxs;
-  });
-};
-
-export const getBatchesWithSupply = async (
-  creditClassId?: string | null,
-  params?: URLSearchParams,
-): Promise<{
-  data: BatchInfoWithSupply[];
-  pagination?: PageResponse;
-}> => {
-  const batches = await queryEcoBatches(creditClassId, params);
-  const batchesWithData = await addDataToBatch(batches);
-  return {
-    data: batchesWithData,
-    // pagination: pagination, TODO
-  };
-};
-
-/** Adds Tx Hash and supply info to batch for use in tables */
-export const addDataToBatch = async (
-  batches: BatchInfo[],
-): Promise<BatchInfoWithSupply[]> => {
-  try {
-    /* TODO: this is limited to 100 results. We need to find a better way */
-    const txs = await getTxsByEvent({
-      events: [
-        `${messageActionEquals}'${ECOCREDIT_MESSAGE_TYPES.CREATE_BATCH.message}'`,
-      ],
-    });
-
-    return Promise.all(
-      batches.map(async batch => {
-        const supplyData = await queryEcoBatchSupply(batch.denom);
-        const txhash = getTxHashForBatch(txs.txResponses, batch.denom);
-        const classId = getClassIdForBatch(batch);
-        return { ...batch, ...supplyData, txhash, classId };
-      }),
-    );
-  } catch (err) {
-    throw new Error(`Could not add data to batches batches: ${err}`);
-  }
-};
-
-const getTxHashForBatch = (
-  txResponses: TxResponse[],
-  batchDenom: string,
-): string | undefined => {
-  const match = txResponses?.find(tx => tx.rawLog.includes(batchDenom));
-  return match?.txhash;
-};
-
-const getClassIdForBatch = (batch: BatchInfo): string | undefined => {
-  return batch?.denom?.split('-')?.[0] || '-';
-};
-
-export const getBatchWithSupplyForDenom = async (
-  denom: string,
-): Promise<BatchInfoWithSupply> => {
-  try {
-    const { batch } = await queryEcoBatchInfo(denom);
-    const supply = await queryEcoBatchSupply(denom);
-    const batchWithSupply: BatchInfoWithSupply = {
-      ...batch,
-      ...supply,
-      issuer: batch?.issuer || '',
-      projectId: batch?.projectId || '',
-      denom: batch?.denom || '',
-      metadata: batch?.metadata || '',
-      startDate: batch?.startDate || new Date(),
-      endDate: batch?.endDate || new Date(),
-      issuanceDate: batch?.issuanceDate || new Date(),
-      open: !!batch?.open,
-    };
-    return batchWithSupply;
-  } catch (err) {
-    throw new Error(
-      `Could not get batches with supply for denom ${denom}, ${err}`,
-    );
-  }
-};
-
-export const getReadableMessages = (txResponse: TxResponse): string => {
-  return uniq(
-    txResponse?.logs?.[0]?.events
-      .filter(event => event.type === 'message')
-      .map(event => {
-        const action = event.attributes.find(
-          attr => attr.key === 'action',
-        )?.value;
-
-        return getReadableName(action);
-      }),
-  ).join(', ');
-};
-
-const getReadableName = (eventType?: string): string | undefined => {
-  if (!eventType) return undefined;
-  return Object.values(ECOCREDIT_MESSAGE_TYPES).find(
-    msgType => msgType.message === eventType,
-  )?.readable;
 };

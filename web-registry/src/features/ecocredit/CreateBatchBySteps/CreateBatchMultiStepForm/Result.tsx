@@ -27,6 +27,11 @@ export default function Result({
   error,
 }: ResultProps): React.ReactElement {
   if (error) return <ErrorResult error={error} />;
+
+  // if response, check if false "success" response because `unauthorized` error
+  if (typeof response?.rawLog === 'string')
+    return <ErrorResult error={response.rawLog} />;
+
   return response ? <SuccessResult response={response} /> : <div />;
 }
 

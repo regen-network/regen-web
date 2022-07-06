@@ -22,7 +22,6 @@ import {
   QuerySupplyResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
-import { PageResponse } from '@regen-network/api/lib/generated/cosmos/base/query/v1beta1/pagination';
 import {
   ServiceClientImpl,
   GetTxsEventRequest,
@@ -119,14 +118,10 @@ export const getBatchesWithSupply = async (
   params?: URLSearchParams,
 ): Promise<{
   data: BatchInfoWithSupply[];
-  pagination?: PageResponse;
 }> => {
   const batches = await queryEcoBatches(creditClassId, params);
   const batchesWithData = await addDataToBatch(batches);
-  return {
-    data: batchesWithData,
-    // pagination: pagination, TODO
-  };
+  return { data: batchesWithData };
 };
 
 /** Adds Tx Hash and supply info to batch for use in tables */

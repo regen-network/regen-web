@@ -38,7 +38,7 @@ export const BatchInfoGrid: React.FC<{
         <LinkWithArrow
           target="_self"
           href={`/credit-classes/${batch.classId}`}
-          label={batch.classId || 'TODO'}
+          label={batch?.classId || '-'}
         />
       </BatchDetail>
     </GridItem>

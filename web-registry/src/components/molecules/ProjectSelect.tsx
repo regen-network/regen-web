@@ -8,6 +8,7 @@ import SelectTextField, {
 import useEcocreditQuery from '../../hooks/useEcocreditQuery';
 import {
   ProjectInfo,
+  QueryProjectsByClassRequest,
   QueryProjectsResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
@@ -15,13 +16,14 @@ interface FieldProps {
   name?: string;
   required?: boolean;
   initialSelection?: string;
+  creditClassId?: string;
   saveOptions?: (options: Option[]) => void;
 }
 
 const defaultProjectOption = { value: '', label: 'Choose Project' };
 
 const ProjectSelect: React.FC<FieldProps> = ({
-  // TODO - name = 'projectId'
+  creditClassId,
   name = "metadata['regen:vcsProjectId']",
   required,
   initialSelection,
@@ -38,25 +40,29 @@ const ProjectSelect: React.FC<FieldProps> = ({
 
   useEffect(() => {
     setProjectOptions([]);
+    // reset options when creditClassID no longer has a selected element
+    if (creditClassId === '') return;
+
     // reset project if creditClassID changes
     if (!initialSelection) setFieldValue(name, '');
 
     const options =
-      data?.projects.map((project: ProjectInfo) => {
-        return {
-          // TODO - project name from metadata
-          label:
-            `${startCase(project?.metadata?.['schema:name' as any] || '')} ${
-              project.id ? '(' + project.id + ')' : ''
-            }` || '',
-          value: project.id || '',
-        };
-      }) || [];
+      data?.projects
+        .filter(project => project.classId === creditClassId)
+        .map((project: ProjectInfo) => {
+          return {
+            label:
+              `${startCase(project?.metadata?.['schema:name' as any] || '')} ${
+                project.id ? '(' + project.id + ')' : ''
+              }` || '',
+            value: project.id || '',
+          };
+        }) || [];
 
     if (saveOptions) saveOptions(options);
 
     setProjectOptions([defaultProjectOption, ...options]);
-  }, [data, setFieldValue, name, initialSelection, saveOptions]);
+  }, [data, setFieldValue, name, initialSelection, saveOptions, creditClassId]);
 
   return (
     <Field

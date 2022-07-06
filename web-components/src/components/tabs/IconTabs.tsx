@@ -44,7 +44,7 @@ const IconTabs: React.FC<IconTabsProps> = ({ tabs }) => {
       {tabs.map(
         (tab, index) =>
           value === index && (
-            <TabPanel value={value} index={index}>
+            <TabPanel value={value} index={index} key={`tab-content-${index}`}>
               {tab.content}
             </TabPanel>
           ),

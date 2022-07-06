@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useNavigate } from 'react-router-dom';
@@ -38,48 +37,56 @@ type SuccessProps = {
 const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
   const navigate = useNavigate();
 
-  // TODO - disabled (parse and display)
+  // Parsing the response, specifically the content in the key `rawLog`
+  // is an array with a single element, and this is an object with a single key `events`
+  const responseLog = response?.rawLog && JSON.parse(response?.rawLog);
+  const responseLogEvents = responseLog && responseLog[0].events;
 
-  console.log('*** RESULT', response);
+  // get the batch denom from the `EventCreateBatch` event log
+  let batchDenom = '';
+  try {
+    const eventCreateBatch =
+      responseLogEvents &&
+      responseLogEvents.find((event: any) =>
+        event.type.includes('.EventCreateBatch'),
+      );
 
-  // Parsing the response...
-  // const responseLog = response?.rawLog && JSON.parse(response?.rawLog);
-  // const responseLogEvents = responseLog && responseLog[0].events;
+    const batchDenomRaw =
+      eventCreateBatch &&
+      eventCreateBatch.attributes?.find(
+        (obj: any) => obj.key === 'batch_denom',
+      );
 
-  // const eventCreateBatch =
-  //   responseLogEvents &&
-  //   responseLogEvents.find((event: any) =>
-  //     event.type.includes('.EventCreateBatch'),
-  //   );
+    batchDenom = batchDenomRaw.value.replace(/"/g, '');
+  } catch (err) {}
 
-  // const receiveBatchDenom =
-  //   eventCreateBatch &&
-  //   eventCreateBatch.attributes?.find((obj: any) => obj.key === 'batch_denom');
+  // get the recipients from the `EventTransfer` event log
+  let recipients;
+  try {
+    const eventTransfer =
+      responseLogEvents &&
+      responseLogEvents.find((event: any) =>
+        event.type.includes('.EventTransfer'),
+      );
 
-  // const eventReceive =
-  //   responseLogEvents &&
-  //   responseLogEvents.find((event: any) =>
-  //     event.type.includes('.EventReceive'),
-  //   );
+    const recipientsLog =
+      eventTransfer &&
+      eventTransfer.attributes?.filter((obj: any) => obj.key === 'recipient');
 
-  // const recipientsLog =
-  //   eventReceive &&
-  //   eventReceive.attributes?.filter((obj: any) => obj.key === 'recipient');
-  // const recipients = recipientsLog.map(({ value }: { value: string }) => {
-  //   const recipientAddress = value.replace(/"/g, '');
-  //   return {
-  //     name: truncate(recipientAddress),
-  //     url: getAccountUrl(recipientAddress),
-  //   };
-  // });
-
-  // const batchDenom = receiveBatchDenom.value.replace(/"/g, '');
+    recipients = recipientsLog.map(({ value }: { value: string }) => {
+      const recipientAddress = value.replace(/"/g, '');
+      return {
+        name: truncate(recipientAddress),
+        url: getAccountUrl(recipientAddress),
+      };
+    });
+  } catch (err) {}
 
   return (
     <>
       <OnBoardingCard>
         <Title variant="h5">Create Credit Batch</Title>
-        {/* <CardItem
+        <CardItem
           label="batch denom"
           value={{
             name: batchDenom,
@@ -88,25 +95,25 @@ const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
           linkComponent={Link}
         />
         <CardItemList
-          label={`recipient${recipients.length > 1 ? 's' : ''}`}
-          values={recipients}
+          label={`recipient${(recipients && recipients.length) > 1 ? 's' : ''}`}
+          values={recipients || []}
         />
         <CardItem
           label="hash"
           value={{
-            name: truncate(response?.transactionHash),
-            url: getHashUrl(response?.transactionHash),
+            name: truncate(response.transactionHash),
+            url: getHashUrl(response.transactionHash),
           }}
           linkComponent={Link}
-        /> */}
+        />
       </OnBoardingCard>
-      {/* <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <OutlinedButton
           onClick={() => navigate(`/credit-batches/${batchDenom}`)}
         >
           SEE CREDIT BATCH
         </OutlinedButton>
-      </Box> */}
+      </Box>
     </>
   );
 };
@@ -176,17 +183,19 @@ const CardItemList: React.FC<CardItemListProps> = ({ label, values }) => {
         {label}
       </Label>
       <Subtitle size="lg" mobileSize="sm" color={'info.dark'}>
-        {values.map((item, index) => (
-          <Link
-            key={`card-item-link-${index}`}
-            sx={{ color: 'secondary.main' }}
-            href={item.url}
-            target="_blank"
-          >
-            {item.name}
-            {values.length > index + 1 && ', '}
-          </Link>
-        ))}
+        {!values.length
+          ? '-'
+          : values.map((item, index) => (
+              <Link
+                key={`card-item-link-${index}`}
+                sx={{ color: 'secondary.main' }}
+                href={item.url}
+                target="_blank"
+              >
+                {item.name}
+                {values.length > index + 1 && ', '}
+              </Link>
+            ))}
       </Subtitle>
     </Box>
   );

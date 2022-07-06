@@ -6,7 +6,7 @@ export * from './BasketEcocredits';
 export * from './BasketEcocreditsTable';
 export * from './BasketsTable';
 export * from './BasketOverview';
-export * from './BuyCreditsModal';
+export * from './BuyCreditsModal/BuyCreditsModal';
 export * from './ConfirmationModal';
 export * from './CreditActivityTable';
 export * from './CreditBatches';

@@ -43,7 +43,7 @@ import {
   BuyCreditsModal,
   ConfirmationModal,
 } from '../organisms';
-import { Credits } from '../organisms/BuyCreditsModal';
+import { Credits } from '../organisms/BuyCreditsModal/BuyCreditsModal';
 import {
   useMoreProjectsQuery,
   useProjectByHandleQuery,
@@ -71,7 +71,11 @@ interface Project {
 }
 
 // Update for testing purchase credits modal
-const testProject: Project = {};
+const testProject: Project = {
+  creditPrice: { unitPrice: 1, currency: 'regen' },
+  stripePrice: '1',
+  credits: { issued: 10, purchased: 1 },
+};
 
 function getVisiblePartyName(party?: ProjectStakeholder): string | undefined {
   return party?.['regen:showOnProjectPage']
@@ -466,7 +470,10 @@ function ProjectDetails(): JSX.Element {
             project={{
               id: projectId as string,
               name: data.projectByHandle?.metadata?.['schema:name'],
-              image: data.projectByHandle?.metadata?.['regen:previewPhoto'],
+              image:
+                data.projectByHandle?.metadata?.['regen:previewPhoto'][
+                  '@value'
+                ],
               creditDenom:
                 creditClassVersion.metadata?.[
                   'http://regen.network/creditDenom'

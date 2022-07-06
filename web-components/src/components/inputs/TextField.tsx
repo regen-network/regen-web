@@ -23,6 +23,7 @@ export interface RegenTextFieldProps
   optional?: boolean;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
+  customInputProps?: { min?: number; max?: number };
 }
 
 interface StyleProps extends TextFieldProps {
@@ -171,6 +172,7 @@ export default function RegenTextField({
   children,
   startAdornment,
   endAdornment,
+  customInputProps = {},
   ...props
 }: RegenTextFieldProps): JSX.Element {
   const styles = useStyles({ ...props, optional, errors });
@@ -197,6 +199,7 @@ export default function RegenTextField({
         endAdornment: endAdornment ? (
           <InputAdornment position="end">{endAdornment}</InputAdornment>
         ) : null,
+        inputProps: { ...customInputProps },
       }}
       label={
         <InputLabel optional={optional} focused={false} required={false}>

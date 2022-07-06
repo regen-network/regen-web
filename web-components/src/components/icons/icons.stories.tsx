@@ -62,6 +62,7 @@ import { Spinner } from 'web-components/lib/components/icons/Spinner';
 import { BrokenLinkIcon } from 'web-components/lib/components/icons/BrokenLinkIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import EditIcon from 'web-components/lib/components/icons/EditIcon';
+import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 
 export default {
   title: 'Icons',
@@ -201,3 +202,5 @@ export const whitepaperIcon = (): JSX.Element => (
 );
 
 export const youtubeIcon = (): JSX.Element => <YoutubeIcon />;
+
+export const celebrateIcon = (): JSX.Element => <CelebrateIcon />;

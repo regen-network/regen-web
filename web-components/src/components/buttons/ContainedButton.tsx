@@ -1,6 +1,7 @@
 import React from 'react';
 import Button, { ButtonProps } from '@mui/material/Button';
 import { styled } from '@mui/material';
+import { Box } from '@mui/system';
 
 export type ContainedColorVariant = 'secondary' | 'gradientBlueGreen';
 
@@ -30,6 +31,7 @@ const StyledButton = styled(Button, {
       },
     }),
     ...(isGradientBlueGreen && {
+      border: 0,
       background:
         'linear-gradient(204.4deg, #527984 5.94%, #79C6AA 51.92%, #C4DAB5 97.89%)',
       '&:hover': {
@@ -46,9 +48,14 @@ StyledButton.defaultProps = {
 export default function ContainedButton(
   props: ContainedButtonProps,
 ): JSX.Element {
+  const isGradientBlueGreen = props.colorVariant === 'gradientBlueGreen';
   return (
     <StyledButton color="secondary" variant="contained" {...props}>
-      {props.children}
+      {isGradientBlueGreen ? (
+        <Box sx={{ p: 0.5 }}>{props.children}</Box>
+      ) : (
+        props.children
+      )}
     </StyledButton>
   );
 }

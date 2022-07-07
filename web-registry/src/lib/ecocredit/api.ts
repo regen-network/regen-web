@@ -20,7 +20,6 @@ import {
   QueryProjectsRequest,
   QueryProjectsResponse,
   QuerySupplyResponse,
-  QueryProjectsByClassRequest,
   QueryProjectsByClassResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';

@@ -3,7 +3,7 @@
     {
       "id": "carbonplus-grasslands",
       "imageSrc": "https://regen-registry.s3.amazonaws.com/methodologies/carbonplus_grasslands/grasslands.png",
-      "version": "0.9 (Beta)",
+      "version": "1.0",
       "program": "Regen Registry",
       "methodologyDesigner": "Regen Network Development, Inc",
       "uncertaintyDeductions": "Included",

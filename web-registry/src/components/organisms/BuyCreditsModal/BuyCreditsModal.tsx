@@ -305,7 +305,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   submitCount={submitCount}
                   submitForm={submitForm}
                   label="purchase"
-                  colorVariant="gradientBlueGreen"
                 />
               </div>
             );

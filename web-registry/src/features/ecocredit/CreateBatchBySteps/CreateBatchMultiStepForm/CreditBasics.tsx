@@ -77,7 +77,7 @@ export const validationSchemaFields = {
     .typeError(invalidDate)
     .test({ ...isPastDateTest }),
   metadata: Yup.object().when('classId', {
-    // TODO: this is a hack to make V$ testnet work. C02 is a copy of C01 on V4. In PROD/mainnet, this should only be C01
+    // TODO: this is a hack to make V4 testnet work. C02 is a copy of C01 on V4. In PROD/mainnet, this should only be C01
     is: (val: string) => val === 'C01' || val === 'C02',
     then: schema => vcsMetadataSchema,
     otherwise: schema => JSONSchema,
@@ -105,7 +105,7 @@ export default function CreditBasics({
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
   const metadata = values.metadata as VCSBatchMetadataLD;
   const projectId = metadata['regen:vcsProjectId'];
-  // TODO: this is a hack to make V$ testnet work. C02 is a copy of C01 on V4. In PROD/mainnet, this should only be C01.
+  // TODO: this is a hack to make V4 testnet work. C02 is a copy of C01 on V4. In PROD/mainnet, this should only be C01.
   const isVCS = values.classId === 'C01' || values.classId === 'C02';
 
   // to store on partial submit the selected credit class option,

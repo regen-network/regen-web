@@ -22,8 +22,7 @@ export interface ImageDropProps extends FieldProps {
     button?: string;
   };
   label?: string;
-  optional?: boolean;
-  labelSubText?: string;
+  optional?: boolean | string;
   buttonText?: string;
   fixedCrop: Partial<Crop>;
   hideDragText?: boolean;
@@ -63,9 +62,6 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(4),
     fontSize: theme.typography.pxToRem(12),
   },
-  button: {
-    fontSize: theme.typography.pxToRem(18),
-  },
   deleteButton: {
     background: theme.palette.primary.main,
     position: 'absolute',
@@ -87,7 +83,6 @@ function ImageDrop({
   classes,
   label,
   optional,
-  labelSubText,
   buttonText,
   fixedCrop,
   hideDragText,
@@ -173,14 +168,16 @@ function ImageDrop({
     }
   };
 
-  const handleDelete: IconButtonProps['onClick'] =
-    e =>
-    async (imageUrl: string): Promise<void> => {
-      form.setFieldValue(field.name, undefined);
-      if (onDelete) await onDelete(imageUrl);
+  const handleDelete: IconButtonProps['onClick'] = e => {
+    if (field.value) {
+      form.setFieldValue(field.name, null);
       setInitialImage('');
       setFileName('');
+    }
+    return async (imageUrl: string): Promise<void> => {
+      if (onDelete) await onDelete(imageUrl);
     };
+  };
 
   return (
     <>
@@ -189,7 +186,6 @@ function ImageDrop({
         label={label}
         disabled={form.isSubmitting}
         optional={optional}
-        labelSubText={labelSubText}
         {...fieldProps}
       >
         {() =>
@@ -241,7 +237,7 @@ function ImageDrop({
                 />
                 <label htmlFor={`btn-file-input-${field.name}`}>
                   <OutlinedButton
-                    classes={{ root: cx(styles.button, classes?.button) }}
+                    classes={{ root: classes?.button }}
                     isImageBtn
                   >
                     {buttonText || '+ add'}

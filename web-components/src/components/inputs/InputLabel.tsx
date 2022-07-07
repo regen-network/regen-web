@@ -37,7 +37,7 @@ const useStyles = makeStyles<Theme, LabelProps>((theme: Theme) => ({
 export default function RegenInputLabel({
   optional = false,
   ...props
-}): JSX.Element {
+}: LabelProps): JSX.Element {
   const classes = useStyles({ optional });
 
   return (

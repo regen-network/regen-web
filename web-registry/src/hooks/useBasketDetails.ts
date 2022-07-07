@@ -25,6 +25,7 @@ import { BasketOverviewProps, CreditBatch } from '../components/organisms';
 
 import { getMetadata } from '../lib/metadata-graph';
 import useEcocreditQuery from './useEcocreditQuery';
+import useQueryListClassInfo from './useQueryListClassInfo';
 
 dayjs.extend(duration);
 
@@ -59,13 +60,6 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
 
   // Data to fetch and process
 
-  // TODO - remove
-  // const { data: baskets } = useBasketQuery<QueryBasketsResponse>({
-  //   query: 'baskets',
-  //   params: {},
-  // });
-  // console.log('*** All baskets', baskets);
-
   const { data: basket } = useBasketQuery<QueryBasketResponse>({
     query: 'basket',
     params: { basketDenom },
@@ -75,7 +69,6 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
     query: 'basketBalances',
     params: { basketDenom },
   });
-  console.log('*** basketBalances', basketBalances);
 
   const { data: basketMetadata } = useBankQuery<QueryDenomMetadataResponse>({
     query: 'denomMetadata',
@@ -83,56 +76,51 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
   });
 
   // TODO: useEcocreditQuery + batch queries
-  const { data: classesResponse } = useEcocreditQuery<QueryClassesResponse>({
-    query: 'classes',
-    params: {},
-  });
-  const basketClassesInfo = classesResponse?.classes;
-  // console.log('*** basketClassesInfo', basketClassesInfo);
-
+  const basketClassesInfo = useQueryListClassInfo(basket?.classes);
   const [basketClasses, setBasketClasses] = useState<BasketClassInfo[]>();
-  // console.log('*** basketClasses', basketClasses);
 
   const [batches, setBatches] = useState<string[]>();
+
   // TODO: useEcocreditQuery + batch queries
   const basketBatches = useQueryListBatchInfo(batches);
-  console.log('*** basketClasses', basketClasses);
 
   const [fetchProjects] = useProjectsByMetadataLazyQuery();
   const [batchesProjects, setBatchesProjects] = useState<BatchWithProject[]>();
 
   // Batches string list query param for `useQueryListBatchInfo(batches)`
   useEffect(() => {
-    if (!basketBalances?.balances) return;
-    setBatches(basketBalances.balances.map(balance => balance.batchDenom));
-  }, [basketBalances?.balances]);
+    if (!basketBalances?.balancesInfo) return;
+    setBatches(basketBalances.balancesInfo.map(balance => balance.batchDenom));
+  }, [basketBalances?.balancesInfo]);
 
   // TODO ? overview data: extract into its own hook / function ?
   // fetch credit classes metadata
   useEffect(() => {
     if (!basketClassesInfo || basketClassesInfo.length === 0) return;
 
-    async function fetchData(basketClassesInfo: ClassInfo[]): Promise<void> {
+    async function fetchData(
+      basketClassesInfo: QueryClassResponse[],
+    ): Promise<void> {
       try {
         const _basketClasses = await Promise.all(
           basketClassesInfo.map(async basketClass => {
+            const { class: classInfo } = basketClass;
             let metadata;
-            if (basketClass.metadata?.length) {
+            if (classInfo?.metadata.length) {
               try {
-                metadata = await getMetadata(basketClass.metadata);
-                console.log('*** metadata', metadata);
+                metadata = await getMetadata(classInfo.metadata);
               } catch (err) {}
             }
 
             let basketClassName;
-            if (basketClass.id) {
+            if (classInfo?.id) {
               basketClassName = metadata
-                ? `${metadata['schema:name']} (${basketClass.id})`
-                : basketClass.id;
+                ? `${metadata['schema:name']} (${classInfo?.id})`
+                : classInfo?.id;
             }
 
             return {
-              id: basketClass.id || '-',
+              id: classInfo?.id || '-',
               name: basketClassName || '-',
             };
           }),
@@ -197,9 +185,10 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
 
   // finally, data preparation for <BasketEcocreditsTable />
   useEffect(() => {
-    if (!basketBalances?.balances || !basketBatches || !batchesProjects) return;
+    if (!basketBalances?.balancesInfo || !basketBatches || !batchesProjects)
+      return;
 
-    const _creditBatches = basketBalances.balances.map(basketBalance => {
+    const _creditBatches = basketBalances.balancesInfo.map(basketBalance => {
       const _basketBatch = basketBatches.find(
         basketBatch =>
           basketBatch.info?.batchDenom === basketBalance.batchDenom,
@@ -230,13 +219,13 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
   useEffect(() => {
     if (!basket || !basketMetadata || !basketBalances || !basketClasses) return;
 
-    const totalAmount = basketBalances?.balances.reduce(
+    const totalAmount = basketBalances?.balancesInfo.reduce(
       (acc, obj) => acc + parseFloat(obj.balance),
       0,
     );
 
     const _overview: BasketOverviewProps = {
-      name: basket?.basket?.name || '-',
+      name: basket.basketInfo?.name || '-',
       displayDenom: basketMetadata?.metadata?.display || '-',
       description: basketMetadata?.metadata?.description || '-',
       totalAmount: totalAmount || 0,
@@ -253,12 +242,12 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
       allowedCreditClasses: basketClasses,
     };
 
-    const minStartDate = basket.basket?.dateCriteria?.minStartDate;
+    const minStartDate = basket.basketInfo?.dateCriteria?.minStartDate;
     if (minStartDate) {
       _overview.minStartDate = minStartDate.toISOString();
     }
 
-    const startDateWindow = basket.basket?.dateCriteria?.startDateWindow;
+    const startDateWindow = basket.basketInfo?.dateCriteria?.startDateWindow;
     if (startDateWindow) {
       _overview.startDateWindow = formatDuration(
         startDateWindow.seconds.toNumber(),

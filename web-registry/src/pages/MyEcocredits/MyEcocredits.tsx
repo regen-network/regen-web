@@ -1,4 +1,4 @@
-import { useTheme } from '@mui/material';
+import { SxProps, useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { useState } from 'react';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
@@ -47,7 +47,6 @@ import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
 import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
-import { default as useStyles } from './hooks/useMyEcocreditsStyles';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
 import {
@@ -58,6 +57,7 @@ import {
   getAvailableAmountByBatch,
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
@@ -115,7 +115,6 @@ export const MyEcocredits = (): JSX.Element => {
     setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
 
-  const styles = useStyles();
   const theme = useTheme();
   const baskets = useQueryBaskets();
   const txHash = deliverTxResponse?.transactionHash;
@@ -191,6 +190,13 @@ export const MyEcocredits = (): JSX.Element => {
     setTxButtonTitle,
   });
 
+  const sxs = {
+    arrow: {
+      width: theme.spacing(6),
+      height: theme.spacing(6),
+    } as SxProps<Theme>,
+  };
+
   return (
     <>
       <Portfolio
@@ -213,14 +219,14 @@ export const MyEcocredits = (): JSX.Element => {
                   //   onClick: () => console.log(`TODO sell credit ${i}`),
                   // },
                   {
-                    icon: <AvailableCreditsIcon className={styles.arrow} />,
+                    icon: <AvailableCreditsIcon sx={sxs.arrow} />,
                     label: CREATE_SELL_ORDER_SHORT,
                     onClick: () => setSellOrderCreateOpen(i),
                   },
                   {
                     icon: (
                       <ArrowDownIcon
-                        className={styles.arrow}
+                        sx={sxs.arrow}
                         color={theme.palette.secondary.main}
                         direction="next"
                       />
@@ -231,7 +237,7 @@ export const MyEcocredits = (): JSX.Element => {
                   {
                     icon: (
                       <ArrowDownIcon
-                        className={styles.arrow}
+                        sx={sxs.arrow}
                         color={theme.palette.secondary.main}
                         direction="down"
                       />

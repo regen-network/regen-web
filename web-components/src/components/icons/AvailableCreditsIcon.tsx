@@ -1,28 +1,25 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import cx from 'classnames';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    width: theme.spacing(14.25),
-    height: theme.spacing(17.25),
-  },
-}));
+import { Theme } from '~/theme/muiTheme';
+import { SxProps } from '@mui/material';
 
 interface IconProps {
-  className?: string;
+  sx?: SxProps<Theme>;
 }
 
 export default function AvailableCreditsIcon({
-  className,
+  sx = [],
 }: IconProps): JSX.Element {
-  const classes = useStyles({});
-
   return (
     <SvgIcon
       viewBox="0 0 57 69"
-      className={cx(className ? className : classes.root)}
+      sx={[
+        theme => ({
+          width: theme.spacing(14.25),
+          height: theme.spacing(17.25),
+        }),
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
     >
       <svg
         width="57"

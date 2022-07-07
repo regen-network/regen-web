@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, FormikErrors } from 'formik';
+import { Box } from '@mui/material';
 
 import AmountField from '../inputs/AmountField';
 import SelectTextField, { Option } from '../inputs/SelectTextField';
@@ -9,8 +10,7 @@ import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import NumberTextField from '../inputs/NumberTextField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
-import { Subtitle } from '../typography';
-import { Box, useTheme } from '@mui/material';
+import { Label, Subtitle } from '../typography';
 
 export interface CreateSellOrderProps {
   batchDenoms: Option[];
@@ -38,7 +38,6 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
   onSubmit,
 }) => {
   const [options, setOptions] = useState<Option[]>([]);
-  const theme = useTheme();
 
   const initialValues = {
     batchDenom: batchDenoms[0].value,
@@ -82,11 +81,9 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
             label="Batch denom"
             component={SelectTextField}
             options={options}
-            sx={{ mb: theme.spacing(10.5) }}
+            sx={{ mb: 10.5 }}
           />
-          <Box
-            sx={{ display: 'flex', alignItems: 'end', mb: theme.spacing(0.5) }}
-          >
+          <Box sx={{ display: 'flex', alignItems: 'end', mb: 0.5 }}>
             <Field
               component={NumberTextField}
               name="price"
@@ -96,17 +93,9 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
               arrows={false}
               sx={{ maxWidth: '238px' }}
             />
-            <Box
-              sx={{
-                mb: theme.spacing(5),
-                ml: theme.spacing(5),
-                fontWeight: '800',
-                color: 'info.dark',
-                fontSize: theme.typography.textSmall,
-              }}
-            >
+            <Label size="sm" sx={{ mb: 5, ml: 5, color: 'info.dark' }}>
               {sellDenom}
-            </Box>
+            </Label>
           </Box>
           <AmountField
             name="amount"
@@ -123,7 +112,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
                 Disable auto-retire
               </Subtitle>
             }
-            sx={{ mt: theme.spacing(12) }}
+            sx={{ mt: 12 }}
           />
           <Submit
             isSubmitting={isSubmitting}

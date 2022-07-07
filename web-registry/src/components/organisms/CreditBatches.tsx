@@ -9,7 +9,7 @@ import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate, truncateHash } from 'web-components/lib/utils/truncate';
 import { Link } from '../atoms';
-import type { IBatchInfoWithSupply } from '../../types/ledger/ecocredit';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
 import { getAccountUrl, getHashUrl } from '../../lib/block-explorer';
@@ -17,12 +17,12 @@ import { getAccountUrl, getHashUrl } from '../../lib/block-explorer';
 interface CreditBatchProps {
   creditClassId?: string | null;
   projectPage?: boolean;
-  creditBatches?: IBatchInfoWithSupply[];
+  creditBatches?: BatchInfoWithSupply[];
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
 interface HeadCell {
-  id: keyof IBatchInfoWithSupply;
+  id: keyof BatchInfoWithSupply;
   label: string;
   numeric: boolean;
   wrap?: boolean;
@@ -30,7 +30,7 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   { id: 'txhash', numeric: false, label: 'tx hash' },
-  // { id: 'class_id', numeric: false, label: 'credit class' },
+  { id: 'classId', numeric: false, label: 'credit class' },
   { id: 'denom', numeric: false, label: 'batch denom' },
   { id: 'issuer', numeric: false, label: 'issuer' },
   {
@@ -96,7 +96,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   titleAlign = 'center',
 }) => {
   const styles = useStyles();
-  const [batches, setBatches] = useState<IBatchInfoWithSupply[]>([]);
+  const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
   let columnsToShow = [...headCells];
 
   useEffect(() => {
@@ -134,9 +134,9 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             {truncateHash(batch.txhash)}
           </Link>,
-          // <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
-          //   {batch.class_id}
-          // </Link>,
+          <Link key="classId" href={`/credit-classes/${batch.classId}`}>
+            {batch.classId}
+          </Link>,
           <Link
             className={styles.noWrap}
             href={`/credit-batches/${batch.denom}`}

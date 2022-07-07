@@ -172,7 +172,7 @@ export const MyEcocredits = (): JSX.Element => {
           credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1
             ? (i: number) => {
                 // No CTA available without tradable credit for given credit batch
-                if (Number(credits[i].balance?.tradableAmount) <= 0) {
+                if (Number(credits[i]?.balance?.tradableAmount) <= 0) {
                   return undefined;
                 }
                 const buttons = [

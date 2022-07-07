@@ -5,11 +5,11 @@ import { LabeledDetail } from 'web-components/lib/components/text-layouts';
 import { Body } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
 
-import type { IBatchInfoWithSupply } from '../../types/ledger/ecocredit';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { LinkWithArrow } from '../atoms';
 
 export const BatchInfoGrid: React.FC<{
-  batch: IBatchInfoWithSupply;
+  batch: BatchInfoWithSupply;
   projectHandle?: string | null;
   projectName?: string;
   sx?: SxProps<Theme>;
@@ -38,7 +38,7 @@ export const BatchInfoGrid: React.FC<{
         <LinkWithArrow
           target="_self"
           href={`/credit-classes/${batch.classId}`}
-          label={batch.classId || 'TODO'}
+          label={batch?.classId || '-'}
         />
       </BatchDetail>
     </GridItem>

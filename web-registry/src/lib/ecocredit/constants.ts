@@ -12,6 +12,7 @@ import {
   MsgUpdateClassAdmin,
   MsgUpdateClassIssuers,
   MsgUpdateClassMetadata,
+  MsgCreateProject,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
 export const messageActionEquals = 'message.action=';
@@ -61,5 +62,9 @@ export const ECOCREDIT_MESSAGE_TYPES = {
   TAKE_FROM_BASKET: {
     message: `/${MsgTake.$type}`,
     readable: 'take from basket',
+  },
+  CREATE_PROJECT: {
+    message: `/${MsgCreateProject.$type}`,
+    readable: 'create project',
   },
 };

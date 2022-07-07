@@ -3,12 +3,12 @@ import { useCallback } from 'react';
 import { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
-import { IBatchInfoWithBalance } from '../../../types/ledger/ecocredit';
+import { BatchInfoWithBalance } from '../../../types/ledger/ecocredit';
 import { useStateSetter } from '../../../types/react/use-state';
 
 type Props = {
   accountAddress?: string;
-  credits: IBatchInfoWithBalance[];
+  credits: BatchInfoWithBalance[];
   creditRetireOpen: number;
   creditRetireTitle: string;
   signAndBroadcast: SignAndBroadcastType;

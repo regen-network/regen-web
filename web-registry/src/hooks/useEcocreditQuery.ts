@@ -12,7 +12,7 @@ import {
   // queries
   queryBalance,
   queryBatchInfo,
-  queryBatches,
+  queryBatchesByClass,
   queryClassInfo,
   queryClasses,
   queryCreditTypes,
@@ -57,7 +57,7 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
   );
 
   const batches = useCallback(
-    (client, params) => queryBatches({ client, request: params }),
+    (client, params) => queryBatchesByClass({ client, request: params }),
     [],
   );
 

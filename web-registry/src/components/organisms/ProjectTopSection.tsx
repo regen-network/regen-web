@@ -19,7 +19,7 @@ import { getSanityImgSrc } from '../../lib/imgSrc';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { client } from '../../sanity';
 import {
-  IBatchInfoWithSupply,
+  BatchInfoWithSupply,
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
 import { CreditBatches } from '.';
@@ -118,7 +118,7 @@ function ProjectTopSection({
   geojson?: any;
   isGISFile?: boolean;
   batchData?: {
-    batches?: IBatchInfoWithSupply[];
+    batches?: BatchInfoWithSupply[];
     totals?: BatchTotalsForProject;
   };
 }): JSX.Element {

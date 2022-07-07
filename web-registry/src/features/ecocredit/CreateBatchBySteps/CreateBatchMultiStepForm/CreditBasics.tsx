@@ -153,7 +153,7 @@ export default function CreditBasics({
         saveOptions={setCreditClassOptions}
       />
       <ProjectSelect
-        // creditClassId={values.classId}
+        creditClassId={values.classId}
         name="metadata['regen:vcsProjectId']"
         required
         initialSelection={functionCheckPrevSelection(isVCS, values)}

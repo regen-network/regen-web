@@ -29,7 +29,7 @@ import type { Theme } from '../../theme/muiTheme';
  *    amount: must not be empty
  *    basket_denom: must be a valid batch denomination
  *  if retire_on_take is true:
- *    retirement_location: must be a valid location
+ *    retirement_jurisdiction: must be a valid location
  */
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -79,7 +79,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
 
   const initialValues = {
     amount: 0,
-    retireOnTake: !basket,
+    retireOnTake: !basket.disableAutoRetire,
     note: '',
     country: 'US',
     stateProvince: '',

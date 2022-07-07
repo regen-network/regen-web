@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { IBatchInfoWithBalance } from '../../../types/ledger/ecocredit';
+import { BatchInfoWithBalance } from '../../../types/ledger/ecocredit';
 import { useStateSetter } from '../../../types/react/use-state';
 
 type Props = {
   basketsWithClasses: (QueryBasketResponse | undefined)[];
-  credits: IBatchInfoWithBalance[];
+  credits: BatchInfoWithBalance[];
   setCreditBaskets: useStateSetter<(QueryBasketResponse | undefined)[][]>;
 };
 
@@ -19,11 +19,14 @@ const useUpdateCreditBaskets = ({
   useEffect(() => {
     // Get available baskets to put credits into
     if (basketsWithClasses && basketsWithClasses.length > 0) {
-      // setCreditBaskets(
-      //   credits.map(c =>
-      //     basketsWithClasses.filter(b => b?.classes.includes(c.classId)),
-      //   ),
-      // );
+      setCreditBaskets(
+        credits.map(credit =>
+          basketsWithClasses.filter(
+            basket =>
+              credit.classId && basket?.classes.includes(credit.classId),
+          ),
+        ),
+      );
     }
   }, [credits, basketsWithClasses, setCreditBaskets]);
 };

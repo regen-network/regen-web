@@ -61,6 +61,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
         <BreakText>Balance</BreakText>,
         'Batch Start Date',
         'Batch End Date',
+        // 'Project Location', TODO: regen-network/regen-registry#1015
       ]}
       rows={credits.map((row, i) => {
         return [
@@ -81,6 +82,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
           ),
           <GreyText>{formatDate(row.startDate)}</GreyText>,
           <GreyText>{formatDate(row.endDate)}</GreyText>,
+          // row.project_location,  TODO: regen-network/regen-registry#1015
         ];
       })}
     />

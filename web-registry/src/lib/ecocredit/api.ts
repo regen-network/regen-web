@@ -550,7 +550,7 @@ export const queryEcoBatches = async (
   const client = await getQueryClient();
   try {
     // Currently, the experimental testnet Hambach is running an old version of regen-ledger (v2.0.0-beta1)
-    // which provides a different API than latest v3.0 for querying credit batches.
+    // which provides a different API than latest v4.0 for querying credit batches.
     if (expLedger) {
       if (creditClassId) {
         if (!params) {

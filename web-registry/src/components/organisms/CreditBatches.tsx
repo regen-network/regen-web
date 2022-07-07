@@ -8,6 +8,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate, truncateHash } from 'web-components/lib/utils/truncate';
+
 import { Link } from '../atoms';
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { ledgerRESTUri } from '../../lib/ledger';
@@ -51,6 +52,8 @@ const headCells: HeadCell[] = [
     label: 'total amount cancelled',
     wrap: true,
   },
+  // TODO: regen-network/regen-registry#1015
+  // { id: 'project_location', numeric: false, label: 'project location' },
   { id: 'startDate', numeric: true, label: 'start date' },
   { id: 'endDate', numeric: true, label: 'end date' },
 ];
@@ -159,6 +162,10 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           <Box className={styles.noWrap}>
             {formatDate(batch.endDate as Date, undefined, true)}
           </Box>,
+          // TODO: regen-network/regen-registry#1015
+          // <Box key="project_location" className={styles.noWrap}>
+          //   {batch.project_location}
+          // </Box>,
         ].filter(item => {
           return !(creditClassId && item?.key === 'class_id');
         }),

@@ -30,7 +30,7 @@ export type CreditBatch = {
   totalAmount: string;
   startDate: Date | string;
   endDate: Date | string;
-  projectLocation: string;
+  projectJurisdiction: string;
   // Project info
   projectHandle: string;
   projectName: string;
@@ -95,7 +95,7 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
           item.classId,
           <GreyText>{formatDate(item.startDate)}</GreyText>,
           <GreyText>{formatDate(item.endDate)}</GreyText>,
-          item.projectLocation,
+          item.projectJurisdiction,
         ];
       })}
     />

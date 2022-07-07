@@ -11,7 +11,7 @@ import { ImageUpload } from '../inputs/ImageUpload';
 import { Title } from '../typography';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import Modal from '.';
-import { urlType } from '../../utils/schemaURL';
+import { UrlType } from '../../utils/schemaURL';
 
 type ProfileType = 'regen:Individual' | 'regen:Organization';
 
@@ -30,7 +30,7 @@ export interface ProfileFormValues {
   id?: string;
   '@type': ProfileType;
   'schema:name'?: string;
-  'schema:image'?: urlType;
+  'schema:image'?: UrlType;
   'schema:description'?: string;
   'regen:address'?: string;
   // 'regen:sharePermission'?: boolean;

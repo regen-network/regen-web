@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import { Box } from '@mui/material';
 import { Formik, Form, Field, FormikErrors } from 'formik';
 import clsx from 'clsx';
 
@@ -34,16 +35,6 @@ export interface BasicInfoFormValues {
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  parcelSizeContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(12),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(3),
-    },
-  },
   parcelField: {
     marginTop: theme.spacing(4),
   },
@@ -65,16 +56,13 @@ const useStyles = makeStyles((theme: Theme) => ({
       width: '43%',
     },
   },
-  row: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
 }));
 
 const BasicInfoForm: React.FC<{
   submit: (values: BasicInfoFormValues) => Promise<void>;
   initialValues?: BasicInfoFormValues;
-}> = ({ submit, initialValues }) => {
+  onNext?: () => void;
+}> = ({ submit, initialValues, onNext }) => {
   const classes = useStyles();
   const { confirmSave, isEdit } = useProjectEditContext();
   const { data: graphData } = useShaclGraphByUriQuery({
@@ -151,9 +139,17 @@ const BasicInfoForm: React.FC<{
                 placeholder="i.e. Sunnybrook Farms"
                 name="schema:name"
               />
-              <div className={classes.parcelSizeContainer}>
+              <Box
+                sx={{ display: 'flex', flexDirection: 'column', pt: [3, 12] }}
+              >
                 <InputLabel>Size in hectares or acres</InputLabel>
-                <div className={classes.row}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                  }}
+                >
                   <Field
                     className={clsx(classes.parcelField, classes.parcelSize)}
                     component={TextField}
@@ -177,11 +173,12 @@ const BasicInfoForm: React.FC<{
                     ]}
                     defaultStyle={false}
                   />
-                </div>
-              </div>
+                </Box>
+              </Box>
             </OnBoardingCard>
             <ProjectPageFooter
               onSave={submitForm}
+              onNext={onNext}
               saveDisabled={
                 !isValid || isSubmitting || !Object.keys(touched).length
               }

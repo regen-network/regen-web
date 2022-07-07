@@ -20,6 +20,7 @@ const StyledButton = styled(Button, {
     '&:disabled': {
       color: theme.palette.grey[50],
       backgroundColor: theme.palette.grey[100],
+      background: theme.palette.grey[100],
       borderColor: theme.palette.grey[100],
     },
     ...(isSecondary && {

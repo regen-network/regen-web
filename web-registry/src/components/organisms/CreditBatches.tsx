@@ -119,6 +119,13 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   if (creditClassId) {
     columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'classId');
   }
+  // Ditto for project location on project page
+  // TODO: regen-network/regen-registry#1015
+  // if (projectPage) {
+  //   columnsToShow = columnsToShow.filter(
+  //     (hc: HeadCell) => hc.id !== 'project_location',
+  //   );
+  // }
 
   const table = (
     <ActionsTable

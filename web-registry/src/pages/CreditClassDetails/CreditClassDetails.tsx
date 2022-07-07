@@ -66,7 +66,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   const dbCreditClassByUri = dbDataByUri?.creditClassByUri;
 
   useEffect(() => {
-    const fetch = async (): Promise<void> => {
+    const fetchData = async (): Promise<void> => {
       if (creditClassId && isOnChainClassId) {
         try {
           const res = await queryEcoClassInfo(creditClassId);
@@ -82,7 +82,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         }
       }
     };
-    fetch();
+    fetchData();
   }, [creditClassId, isOnChainClassId]);
 
   useEffect(() => {

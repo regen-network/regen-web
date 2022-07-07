@@ -305,7 +305,7 @@ export const queryProjectsByClass = async (
   }
 };
 
-// helpers for combining ledger queries (currently rest, regen-js in future)
+// helpers for combining ledger queries
 // into UI data structures
 
 /**

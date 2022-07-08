@@ -1,4 +1,6 @@
 import React from 'react';
+import { Box, Grid } from '@mui/material';
+
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
 import AvatarIcon from 'web-components/lib/components/icons/AvatarIcon';
@@ -68,136 +70,117 @@ export default {
   component: ArrowDownIcon,
 };
 
-export const arrowIcon = (): JSX.Element => (
-  <ArrowDownIcon color={'#000'} direction={'down'} />
+function LabeledIcon(props: {
+  icon: React.ReactElement;
+  label: string;
+}): JSX.Element {
+  return (
+    <Grid
+      item
+      sm={1.5}
+      sx={{
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        textAlign: 'center',
+        gap: 8,
+      }}
+    >
+      <Box
+        sx={{
+          height: 70,
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+        }}
+      >
+        {props.icon}
+      </Box>
+      <div>{props.label}</div>
+    </Grid>
+  );
+}
+
+export const allIcons = (): JSX.Element => (
+  <Grid container>
+    <LabeledIcon icon={<AccountabilityIcon />} label="AccountabilityIcon" />
+    <LabeledIcon
+      icon={<ArrowDownIcon color={'#000'} direction={'down'} />}
+      label="ArrowDownIcon"
+    />
+    <LabeledIcon icon={<AvatarIcon />} label="Avatar" />
+    <LabeledIcon
+      icon={<AvailableCreditsIcon sx={{ height: 40 }} />}
+      label="AvailableCreditsIcon"
+    />
+    <LabeledIcon icon={<BlockIcon color="black" />} label="BlackIcon" />
+    <LabeledIcon
+      icon={<BreadcrumbIcon direction="down" />}
+      label="BreadcrumbIcon"
+    />
+
+    <LabeledIcon icon={<BrokenLinkIcon />} label="BrokenLinkIcon" />
+    <LabeledIcon icon={<CheckedIcon />} label="CheckedIcon" />
+    <LabeledIcon icon={<CheckIcon />} label="CheckIcon" />
+    <LabeledIcon icon={<CloseIcon />} label="CloseIcon" />
+    <LabeledIcon icon={<CoBenefitsIcon />} label="CoBenefitsIcon" />
+    <LabeledIcon icon={<CountingIcon />} label="CountingIcon" />
+    <LabeledIcon icon={<CreditsIcon color="#000" />} label="CreditsIcon" />
+    <LabeledIcon
+      icon={<CurrentCreditsIcon color="#4FB573" />}
+      label="CurrentCreditsIcon"
+    />
+    <LabeledIcon icon={<DiscordIcon color="blue" />} label="DiscordIcon" />
+    <LabeledIcon icon={<DocumentIcon />} label="DocumentIcon" />
+    <LabeledIcon icon={<DropdownIcon />} label="DropdownIcon" />
+    <LabeledIcon icon={<EditIcon />} label="EditIcon" />
+    <LabeledIcon icon={<EmailIcon color="grey" />} label="EmailIcon" />
+    <LabeledIcon icon={<EyeIcon />} label="EyeIcon" />
+    <LabeledIcon icon={<FacebookIcon color="blue" />} label="FacebookIcon" />
+    <LabeledIcon icon={<FarmerIcon />} label="FarmerIcon" />
+    <LabeledIcon icon={<GithubIcon color="grey" />} label="GithubIcon" />
+    <LabeledIcon icon={<HorizontalDotsIcon />} label="HorizontalDotsIcon" />
+    <LabeledIcon icon={<InfoIcon />} label="InfoIcon" />
+    <LabeledIcon icon={<InfoIconOutlined />} label="InfoIconOutlined" />
+    <LabeledIcon icon={<InstagramIcon />} label="InstagramIcon" />
+    <LabeledIcon icon={<InterfaceIcon />} label="InterfaceIcon" />
+    <LabeledIcon icon={<LinkedInIcon color="blue" />} label="LinkedInIcon" />
+    <LabeledIcon icon={<LinkIcon />} label="LinkIcon" />
+    <LabeledIcon icon={<MediumIcon color="grey" />} label="MediumIcon" />
+    <LabeledIcon icon={<MinusIcon />} label="MinusIcon" />
+    <LabeledIcon icon={<OrganizationIcon />} label="OrganizationIcon" />
+    <LabeledIcon icon={<PhoneIcon />} label="PhoneIcon" />
+    <LabeledIcon icon={<PinIcon fontSize="small" />} label="PinIcon" />
+    <LabeledIcon icon={<PlayIcon height={'20px'} />} label="PlayIcon" />
+    <LabeledIcon icon={<PlusIcon />} label="PlusIcon" />
+    <LabeledIcon icon={<PointerIcon />} label="PointerIcon" />
+    <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
+    <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
+    <LabeledIcon icon={<RegenIcon />} label="RegenIcon" />
+    <LabeledIcon icon={<RegenLedgerIcon />} label="RegenLedgerIcon" />
+    <LabeledIcon icon={<RegenLogoIcon color="grey" />} label="RegenLogoIcon" />
+    <LabeledIcon icon={<RegenTokenIcon />} label="RegenTokenIcon" />
+    <LabeledIcon icon={<RegistrationIcon />} label="RegistrationIcon" />
+    <LabeledIcon icon={<ReviewIcon />} label="ReviewIcon" />
+    <LabeledIcon icon={<SatelliteIcon />} label="SatelliteIcon" />
+    <LabeledIcon icon={<SaveIcon color="green" />} label="SaveIcon" />
+    <LabeledIcon icon={<ShadedCreditsIcon />} label="ShadedCreditsIcon" />
+    <LabeledIcon icon={<ShieldIcon />} label="ShieldIcon" />
+    <LabeledIcon icon={<SmallArrowIcon />} label="SmallArrowIcon" />
+    <LabeledIcon icon={<SoilSampleIcon />} label="SoilSampleIcon" />
+    <LabeledIcon icon={<Spinner />} label="Spinner" />
+    <LabeledIcon icon={<TelegramIcon color="blue" />} label="TelegramIcon" />
+    <LabeledIcon icon={<TotalCreditsIcon />} label="TotalCreditsIcon" />
+    <LabeledIcon icon={<TrashIcon color="grey" />} label="TrashIcon" />
+    <LabeledIcon icon={<TrustIcon />} label="TrustIcon" />
+    <LabeledIcon icon={<TrustDocumentIcon />} label="TrustDocumentIcon" />
+    <LabeledIcon icon={<TwitterIcon color="blue" />} label="TwitterIcon" />
+    <LabeledIcon icon={<VerifiedIcon color="#000" />} label="VerifiedIcon" />
+    <LabeledIcon icon={<WalletIcon />} label="WalletIcon" />
+    <LabeledIcon
+      icon={<WhitepaperIcon color="grey" />}
+      label="WhitepaperIcon"
+    />
+    <LabeledIcon icon={<YoutubeIcon color="red" />} label="YoutubeIcon" />
+  </Grid>
 );
-
-export const accountabilityIcon = (): JSX.Element => <AccountabilityIcon />;
-
-export const availableCreditsIcon = (): JSX.Element => <AvailableCreditsIcon />;
-
-export const avatarIcon = (): JSX.Element => <AvatarIcon />;
-
-export const blockIcon = (): JSX.Element => <BlockIcon color="black" />;
-
-export const breadcrumbIcon = (): JSX.Element => (
-  <BreadcrumbIcon direction={'down'} />
-);
-
-export const brokenLinkIcon = (): JSX.Element => <BrokenLinkIcon />;
-
-export const checkedIcon = (): JSX.Element => <CheckedIcon />;
-
-export const checkIcon = (): JSX.Element => <CheckIcon />;
-
-export const closeIcon = (): JSX.Element => <CloseIcon />;
-
-export const coBenefitsIcon = (): JSX.Element => <CoBenefitsIcon />;
-
-export const countingIcon = (): JSX.Element => <CountingIcon />;
-
-export const creditsIcon = (): JSX.Element => <CreditsIcon color={'#000'} />;
-
-export const currentCreditsIcon = (): JSX.Element => (
-  <CurrentCreditsIcon color={'#4FB573'} />
-);
-
-export const discordIcon = (): JSX.Element => <DiscordIcon />;
-
-export const documentIcon = (): JSX.Element => <DocumentIcon />;
-
-export const dropdownIcon = (): JSX.Element => <DropdownIcon />;
-
-export const editIcon = (): JSX.Element => <EditIcon />;
-
-export const emailIcon = (): JSX.Element => <EmailIcon />;
-
-export const eyeIcon = (): JSX.Element => <EyeIcon />;
-
-export const facebookIcon = (): JSX.Element => <FacebookIcon />;
-
-export const farmerIcon = (): JSX.Element => <FarmerIcon />;
-
-export const githubIcon = (): JSX.Element => <GithubIcon />;
-
-export const horizontalDotsIcon = (): JSX.Element => <HorizontalDotsIcon />;
-
-export const infoIcon = (): JSX.Element => <InfoIcon />;
-
-export const infoIconOutlined = (): JSX.Element => <InfoIconOutlined />;
-
-export const instagramIcon = (): JSX.Element => <InstagramIcon />;
-
-export const interfaceIcon = (): JSX.Element => <InterfaceIcon />;
-
-export const linkedInIcon = (): JSX.Element => <LinkedInIcon />;
-
-export const linkIcon = (): JSX.Element => <LinkIcon color="black" />;
-
-export const mediumIcon = (): JSX.Element => <MediumIcon />;
-
-export const minusIcon = (): JSX.Element => <MinusIcon />;
-
-export const organizationIcon = (): JSX.Element => <OrganizationIcon />;
-
-export const phoneIcon = (): JSX.Element => <PhoneIcon />;
-
-export const pinIcon = (): JSX.Element => <PinIcon fontSize={'small'} />;
-
-export const playIcon = (): JSX.Element => <PlayIcon />;
-
-export const plusIcon = (): JSX.Element => <PlusIcon />;
-
-export const pointerIcon = (): JSX.Element => <PointerIcon />;
-
-export const printIcon = (): JSX.Element => <PrintIcon />;
-
-export const projectPageIcon = (): JSX.Element => <ProjectPageIcon />;
-
-export const regenIcon = (): JSX.Element => <RegenIcon />;
-
-export const regenLedgerIcon = (): JSX.Element => <RegenLedgerIcon />;
-
-export const regenLogoIcon = (): JSX.Element => <RegenLogoIcon />;
-
-export const regenTokenIcon = (): JSX.Element => <RegenTokenIcon />;
-
-export const registrationIcon = (): JSX.Element => <RegistrationIcon />;
-
-export const reviewIcon = (): JSX.Element => <ReviewIcon />;
-
-export const satelliteIcon = (): JSX.Element => <SatelliteIcon />;
-
-export const saveIcon = (): JSX.Element => <SaveIcon />;
-
-export const shadedCreditsIcon = (): JSX.Element => <ShadedCreditsIcon />;
-
-export const shieldIcon = (): JSX.Element => <ShieldIcon />;
-
-export const smallArrowIcon = (): JSX.Element => <SmallArrowIcon />;
-
-export const soilSampleIcon = (): JSX.Element => <SoilSampleIcon />;
-
-export const spinner = (): JSX.Element => <Spinner />;
-
-export const telegramIcon = (): JSX.Element => <TelegramIcon />;
-
-export const totalCreditsIcon = (): JSX.Element => <TotalCreditsIcon />;
-
-export const trashIcon = (): JSX.Element => <TrashIcon />;
-
-export const trustDocumentIcon = (): JSX.Element => <TrustDocumentIcon />;
-
-export const trustIcon = (): JSX.Element => <TrustIcon />;
-
-export const twitterIcon = (): JSX.Element => <TwitterIcon />;
-
-export const verifiedIcon = (): JSX.Element => <VerifiedIcon color={'#000'} />;
-
-export const walletIcon = (): JSX.Element => <WalletIcon />;
-
-export const whitepaperIcon = (): JSX.Element => (
-  <WhitepaperIcon color="black" />
-);
-
-export const youtubeIcon = (): JSX.Element => <YoutubeIcon />;

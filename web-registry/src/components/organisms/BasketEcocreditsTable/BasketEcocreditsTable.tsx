@@ -9,9 +9,9 @@ import {
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { Link } from '../atoms';
-import { NoCredits } from '../molecules';
-import { getAccountUrl } from '../../lib/block-explorer';
+import { Link } from '../../atoms';
+import { NoCredits } from '../../molecules';
+import { getAccountUrl } from '../../../lib/block-explorer';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -41,7 +41,7 @@ type BasketEcocreditsTableProps = {
   renderActionButtons?: RenderActionButtonsFunc;
 };
 
-const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
+export const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
   batches,
   renderActionButtons,
 }) => {
@@ -101,5 +101,3 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
     />
   );
 };
-
-export default BasketEcocreditsTable;

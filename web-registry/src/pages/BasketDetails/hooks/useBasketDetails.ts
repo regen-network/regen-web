@@ -13,15 +13,18 @@ import {
   QueryBasketResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
-import useBankQuery from './useBankQuery';
-import useBasketQuery from './useBasketQuery';
-import useQueryListBatchInfo from './useQueryListBatchInfo';
+import useBankQuery from '../../../hooks/useBankQuery';
+import useBasketQuery from '../../../hooks/useBasketQuery';
+import useQueryListBatchInfo from '../../../hooks/useQueryListBatchInfo';
 
-import { BasketOverviewProps, CreditBatch } from '../components/organisms';
+import {
+  BasketOverviewProps,
+  CreditBatch,
+} from '../../../components/organisms';
 
-import { getMetadata } from '../lib/metadata-graph';
-import useQueryListClassInfo from './useQueryListClassInfo';
-import useQueryListProjectInfo from './useQueryListProjectInfo';
+import { getMetadata } from '../../../lib/metadata-graph';
+import useQueryListClassInfo from '../../../hooks/useQueryListClassInfo';
+import useQueryListProjectInfo from '../../../hooks/useQueryListProjectInfo';
 
 dayjs.extend(duration);
 

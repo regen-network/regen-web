@@ -11,9 +11,7 @@ import {
 
 import useBankQuery from '../../../../hooks/useBankQuery';
 import useBasketQuery from '../../../../hooks/useBasketQuery';
-
 import { BasketOverviewProps } from '../../../../components/organisms';
-
 import { getMetadata } from '../../../../lib/metadata-graph';
 import useQueryListClassInfo from '../../../../hooks/useQueryListClassInfo';
 
@@ -36,10 +34,7 @@ const useBasketOverview = (
   basketDenom?: string,
   basketBalances?: QueryBasketBalancesResponse,
 ): BasketOverviewProps | undefined => {
-  // Data to prepare for the UI
   const [overview, setOverview] = useState<BasketOverviewProps>();
-
-  // Data to fetch and process
 
   const { data: basket } = useBasketQuery<QueryBasketResponse>({
     query: 'basket',
@@ -51,12 +46,9 @@ const useBasketOverview = (
     params: { denom: basketDenom },
   });
 
-  // TODO: useEcocreditQuery + batch queries
   const basketClassesInfo = useQueryListClassInfo(basket?.classes);
   const [basketClasses, setBasketClasses] = useState<BasketClassInfo[]>();
 
-  // TODO ? overview data: extract into its own hook / function ?
-  // fetch credit classes metadata
   useEffect(() => {
     if (!basketClassesInfo || basketClassesInfo.length === 0) return;
 
@@ -96,25 +88,7 @@ const useBasketOverview = (
     fetchData(basketClassesInfo);
   }, [basketClassesInfo]);
 
-  // TODO ? creditBatches data >> extract into its own hook / function ?
-  // fetch project data related to credit batch using graphql lazy hook
-
-  // prepare the list of unique project ids
-  // useEffect(() => {
-  //   if (!basketBatches) return;
-  //   let _projects = [
-  //     ...new Map(
-  //       basketBatches.map(basketBatch => [
-  //         basketBatch.batch?.projectId || '',
-  //         basketBatch.batch?.projectId || '',
-  //       ]),
-  //     ).values(),
-  //   ];
-  //   setProjects(_projects.filter(id => id !== ''));
-  // }, [basketBatches]);
-
   // finally, data preparation for <BasketOverview />
-  // TODO ? split state update into different useEffect based on data source ?
   useEffect(() => {
     if (!basket || !basketMetadata || !basketBalances || !basketClasses) return;
 
@@ -128,11 +102,10 @@ const useBasketOverview = (
       displayDenom: basketMetadata?.metadata?.display || '-',
       description: basketMetadata?.metadata?.description || '-',
       totalAmount: totalAmount || 0,
-      // TODO: hardcoded curator
-      curator: basketMetadata
+      curator: basket.basketInfo?.curator
         ? {
-            name: 'Regen Network Development, Inc.',
-            address: 'regen1sv6a7ry6nrls84z0w5lauae4mgmw3kh2mg97ht',
+            name: basket.basketInfo?.curator,
+            address: basket.basketInfo?.curator,
           }
         : {
             name: '-',

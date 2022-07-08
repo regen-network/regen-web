@@ -60,7 +60,7 @@ const data: DocumentRowData[] = [
 
 const creditDetailsTab: RegenTab = {
   label: 'Overview',
-  children: (
+  content: (
     <CreditDetails
       creditClass={details.creditClass}
       activities={details.activities}
@@ -71,7 +71,7 @@ const creditDetailsTab: RegenTab = {
 
 const documentationTab: RegenTab = {
   label: 'Documentation',
-  children: <DocumentationTable rows={data} />,
+  content: <DocumentationTable rows={data} />,
 };
 
 const tabs: RegenTab[] = [creditDetailsTab, documentationTab];
@@ -84,12 +84,12 @@ const demoTabs: IconTabProps[] = [
   {
     label: 'Portfolio',
     icon: <CoBenefitsIcon />,
-    children: <>portolio content</>,
+    content: <>portolio content</>,
   },
   {
     label: 'Projects',
     icon: <ProjectPageIcon />,
-    children: <>projects content</>,
+    content: <>projects content</>,
   },
 ];
 

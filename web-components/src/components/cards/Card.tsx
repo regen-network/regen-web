@@ -1,8 +1,8 @@
 import React from 'react';
-import { SxProps, Card } from '@mui/material';
+import { SxProps, Card as MuiCard } from '@mui/material';
 import type { Theme } from '~/theme/muiTheme';
 
-interface RegenCardProps {
+interface Props {
   children?: any;
   width?: string;
   height?: string;
@@ -14,7 +14,7 @@ interface RegenCardProps {
   sx?: SxProps<Theme>;
 }
 
-export default function RegenCard({
+export function Card({
   children,
   width,
   height,
@@ -24,9 +24,9 @@ export default function RegenCard({
   borderRadius,
   className,
   sx = [],
-}: RegenCardProps): JSX.Element {
+}: Props): JSX.Element {
   return (
-    <Card
+    <MuiCard
       onClick={onClick}
       className={className}
       elevation={elevation}
@@ -43,6 +43,8 @@ export default function RegenCard({
       ]}
     >
       {children}
-    </Card>
+    </MuiCard>
   );
 }
+
+export default Card;

@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
-import { useWallet } from '../../lib/wallet';
+import { useWallet } from '../../../lib/wallet';
 import {
   useCreateProjectMutation,
   useWalletByAddrQuery,
   useCreateWalletMutation,
-} from '../../generated/graphql';
-import { getProjectPageBaseData } from '../../lib/rdf';
-import { DashboardTemplate } from '../templates';
+} from '../../../generated/graphql';
+import { getProjectPageBaseData } from '../../../lib/rdf';
+import { DashboardTemplate } from '../../../components/templates';
+import { DashboardCreateCard } from 'web-components/lib/components/cards/DashboardCreateCard';
+import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 
-const MyProjects: React.FC = () => {
+const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
   const { wallet } = useWallet();
   const navigate = useNavigate();
@@ -87,14 +88,26 @@ const MyProjects: React.FC = () => {
     >
       <Grid container spacing={8}>
         <Grid item xs={12} md={6} lg={4}>
-          <CreateProjectCard
-            isFirstProject={isFirstProject}
+          <DashboardCreateCard
+            title={isFirstProject ? 'Create your first project' : ''}
             onClick={submitCreateProject}
+            buttonText="+ create project"
+            icon={
+              isFirstProject && (
+                <ProjectPageIcon
+                  sx={theme => ({
+                    color: 'info.main',
+                    height: theme.spacing(14.75),
+                    width: theme.spacing(18.25),
+                  })}
+                />
+              )
+            }
           />
         </Grid>
         {/* TODO: ProjectCards used below temporarily. Will probably be a new variation for this purpose */}
-        {projects?.map(project => (
-          <Grid item xs={12} md={6} lg={4}>
+        {projects?.map((project, i) => (
+          <Grid key={i} item xs={12} md={6} lg={4}>
             <ProjectCard
               name={project?.handle || project?.id}
               imgSrc={''}

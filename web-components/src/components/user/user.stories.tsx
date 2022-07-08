@@ -1,7 +1,6 @@
-import * as React from 'react';
-import UserAvatar from 'web-components/lib/components/user/UserAvatar';
-import UserInfo, { User } from 'web-components/lib/components/user/UserInfo';
-import UserInfoWithTitle from 'web-components/lib/components/user/UserInfoWithTitle';
+import UserAvatar from '../../components/user/UserAvatar';
+import UserInfo, { User } from '../../components/user/UserInfo';
+import UserInfoWithTitle from '../../components/user/UserInfoWithTitle';
 
 export default {
   title: 'User',

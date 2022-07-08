@@ -10,17 +10,16 @@ interface TabPanelProps {
 
 const TabPanel: React.FC<TabPanelProps> = props => {
   const { children, value, index, hidden, ...other } = props;
-  const isHidden = hidden || value !== index;
 
   return (
     <div
       role="tabpanel"
-      hidden={isHidden}
+      hidden={!!hidden}
       id={`tabpanel-${index}`}
       aria-labelledby={`tab-${index}`}
       {...other}
     >
-      {!isHidden && <Box sx={{ p: 3 }}>{children}</Box>}
+      <Box sx={{ p: 3 }}>{children}</Box>
     </div>
   );
 };

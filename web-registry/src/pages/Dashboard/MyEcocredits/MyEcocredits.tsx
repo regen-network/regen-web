@@ -27,19 +27,19 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 // import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
 // import { ReactComponent as Sell } from '../../assets/svgs/sell.svg';
-import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
-import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
-import { Link } from '../../components/atoms';
-import { Portfolio } from '../../components/organisms/Portfolio';
+import { ReactComponent as PutInBasket } from '../../../assets/svgs/put-in-basket.svg';
+import { ReactComponent as TakeFromBasket } from '../../../assets/svgs/take-from-basket.svg';
+import { Link } from '../../../components/atoms';
+import { Portfolio } from '../../../components/organisms/Portfolio';
 import {
   useBasketsWithClasses,
   useBasketTokens,
   useEcocredits,
-} from '../../hooks';
-import { BasketTokens } from '../../hooks/useBasketTokens';
-import useMsgClient from '../../hooks/useMsgClient';
-import useQueryBaskets from '../../hooks/useQueryBaskets';
-import { getHashUrl } from '../../lib/block-explorer';
+} from '../../../hooks';
+import { BasketTokens } from '../../../hooks/useBasketTokens';
+import useMsgClient from '../../../hooks/useMsgClient';
+import useQueryBaskets from '../../../hooks/useQueryBaskets';
+import { getHashUrl } from '../../../lib/block-explorer';
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
 import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';

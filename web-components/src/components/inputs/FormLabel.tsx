@@ -8,10 +8,9 @@ interface Props {
   className?: string;
   description?: string;
   disabled?: boolean;
-  optional?: boolean;
+  optional?: boolean | string;
   label?: string;
   onExampleClick?: () => void;
-  labelSubText?: string;
 }
 
 /**
@@ -23,17 +22,12 @@ export default function FormLabel({
   disabled,
   className,
   optional,
-  labelSubText,
   onExampleClick,
 }: Props): JSX.Element {
   return (
     <div className={className}>
       {label && (
-        <ControlledFormLabel
-          optional={optional}
-          disabled={disabled}
-          labelSubText={labelSubText}
-        >
+        <ControlledFormLabel optional={optional} disabled={disabled}>
           {label}
         </ControlledFormLabel>
       )}

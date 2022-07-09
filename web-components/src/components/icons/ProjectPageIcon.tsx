@@ -1,15 +1,10 @@
 import React from 'react';
-import SvgIcon from '@mui/material/SvgIcon';
-import { SxProps, Theme } from '@mui/material';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
-interface IconProps {
-  sx?: SxProps<Theme>;
-}
-
-const ProjectPageIcon: React.FC<IconProps> = ({ sx }) => {
+export const ProjectPageIcon: React.FC<SvgIconProps> = props => {
   return (
     <SvgIcon
-      sx={sx}
+      {...props}
       width="73"
       height="59"
       viewBox="0 0 73 59"
@@ -101,5 +96,3 @@ const ProjectPageIcon: React.FC<IconProps> = ({ sx }) => {
     </SvgIcon>
   );
 };
-
-export { ProjectPageIcon };

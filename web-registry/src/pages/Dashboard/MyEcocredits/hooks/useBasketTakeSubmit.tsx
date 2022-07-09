@@ -3,9 +3,9 @@ import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket
 import { useCallback } from 'react';
 import { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm';
 import { Item } from 'web-components/lib/components/modal/TxModal';
-import { BasketTokens } from '../../../hooks/useBasketTokens';
-import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
-import { useStateSetter } from '../../../types/react/use-state';
+import { BasketTokens } from '../../../../hooks/useBasketTokens';
+import { SignAndBroadcastType } from '../../../../hooks/useMsgClient';
+import { useStateSetter } from '../../../../types/react/use-state';
 
 type Props = {
   accountAddress?: string;

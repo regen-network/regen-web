@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useTheme } from '@mui/styles';
 import { Box } from '@mui/material';
 import { uniq } from 'lodash';
@@ -8,13 +8,29 @@ import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPage
 import Section from 'web-components/lib/components/section';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
+import { CreditsIconWithFolder } from 'web-components/lib/components/icons/CreditsIconWithFolder';
+import { Spinner } from 'web-components/lib/components/icons/Spinner';
+import { Center } from 'web-components/lib/components/box';
 
-import { MyProjects } from '../../components/organisms';
 import useQueryListClasses from '../../hooks/useQueryListClasses';
 import { useWallet } from '../../lib/wallet';
-import MyEcocredits from '../MyEcocredits';
 
-const Dashboard: React.FC = () => {
+const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
+const MyProjects = React.lazy(() => import('./MyProjects'));
+
+const LazyLoad: React.FC = ({ children }) => (
+  <Suspense
+    fallback={
+      <Center>
+        <Spinner />
+      </Center>
+    }
+  >
+    {children}
+  </Suspense>
+);
+
+const Dashboard = (): JSX.Element => {
   const theme = useTheme();
   const [isIssuer, setIsIssuer] = useState(false);
   const onChainClasses = useQueryListClasses();
@@ -33,19 +49,25 @@ const Dashboard: React.FC = () => {
       icon: (
         <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
       ),
-      content: <MyEcocredits />,
+      content: <LazyLoad children={<MyEcocredits />} />,
     },
     {
       label: 'Projects',
       icon: <ProjectPageIcon />,
-      content: <MyProjects />,
+      content: <LazyLoad children={<MyProjects />} />,
+      hidden: !isIssuer,
+    },
+    {
+      label: 'Credit Classes',
+      icon: <CreditsIconWithFolder sx={{ opacity: '70%' }} />,
+      content: <LazyLoad children={<MyProjects />} />,
       hidden: !isIssuer,
     },
   ];
 
   return (
     <Box sx={{ bgcolor: 'grey.50' }}>
-      <Section>
+      <Section sx={{ root: { pb: [21.25, 28.28] } }}>
         <IconTabs aria-label="dashboard tabs" tabs={tabs} />
       </Section>
     </Box>

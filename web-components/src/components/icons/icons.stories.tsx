@@ -1,69 +1,72 @@
 import React from 'react';
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
+import { FlexCol } from '../box';
 
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
-import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
-import AvatarIcon from 'web-components/lib/components/icons/AvatarIcon';
-import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
-import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
-import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
-import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
-import PinIcon from 'web-components/lib/components/icons/PinIcon';
-import PointerIcon from 'web-components/lib/components/icons/PointerIcon';
-import RegenIcon from 'web-components/lib/components/icons/RegenIcon';
-import RegenLogoIcon from 'web-components/lib/components/icons/RegenLogoIcon';
-import TotalCreditsIcon from 'web-components/lib/components/icons/TotalCreditsIcon';
-import VerifiedIcon from 'web-components/lib/components/icons/VerifiedIcon';
-import PlayIcon from 'web-components/lib/components/icons/PlayIcon';
-import DocumentIcon from 'web-components/lib/components/icons/DocumentIcon';
-import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
-import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
-import PhoneIcon from 'web-components/lib/components/icons/PhoneIcon';
-import DropdownIcon from 'web-components/lib/components/icons/DropdownIcon';
-import CheckIcon from 'web-components/lib/components/icons/CheckIcon';
-import CheckedIcon from 'web-components/lib/components/icons/CheckedIcon';
-import BreadcrumbIcon from 'web-components/lib/components/icons/BreadcrumbIcon';
-import FacebookIcon from 'web-components/lib/components/icons/social/FacebookIcon';
-import InstagramIcon from 'web-components/lib/components/icons/social/InstagramIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
-import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
-import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
-import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
-import YoutubeIcon from 'web-components/lib/components/icons/social/YoutubeIcon';
-import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
-import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
-import BlockIcon from 'web-components/lib/components/icons/BlockIcon';
-import LinkIcon from 'web-components/lib/components/icons/LinkIcon';
-import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
-import RegenLedgerIcon from 'web-components/lib/components/icons/RegenLedgerIcon';
-import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
-import ShieldIcon from 'web-components/lib/components/icons/ShieldIcon';
-import PlusIcon from 'web-components/lib/components/icons/PlusIcon';
-import MinusIcon from 'web-components/lib/components/icons/MinusIcon';
-import InterfaceIcon from 'web-components/lib/components/icons/InterfaceIcon';
-import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
-import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
-import RegistrationIcon from 'web-components/lib/components/icons/RegistrationIcon';
-import ShadedCreditsIcon from 'web-components/lib/components/icons/ShadedCreditsIcon';
-import TrustDocumentIcon from 'web-components/lib/components/icons/TrustDocumentIcon';
-import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
-import ReviewIcon from 'web-components/lib/components/icons/ReviewIcon';
-import InfoIconOutlined from 'web-components/lib/components/icons/InfoIconOutlined';
-import CoBenefitsIcon from 'web-components/lib/components/icons/CoBenefitsIcon';
-import CountingIcon from 'web-components/lib/components/icons/CountingIcon';
-import SatelliteIcon from 'web-components/lib/components/icons/SatelliteIcon';
-import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import SoilSampleIcon from 'web-components/lib/components/icons/SoilSampleIcon';
-import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
-import { WalletIcon } from 'web-components/lib/components/icons/WalletIcon';
-import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
-import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
-import { HorizontalDotsIcon } from 'web-components/lib/components/icons/HorizontalDotsIcon';
-import { Spinner } from 'web-components/lib/components/icons/Spinner';
-import { BrokenLinkIcon } from 'web-components/lib/components/icons/BrokenLinkIcon';
-import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
-import EditIcon from 'web-components/lib/components/icons/EditIcon';
+import AccountabilityIcon from './AccountabilityIcon';
+import ArrowDownIcon from './ArrowDownIcon';
+import AvailableCreditsIcon from './AvailableCreditsIcon';
+import AvatarIcon from './AvatarIcon';
+import BlockIcon from './BlockIcon';
+import BreadcrumbIcon from './BreadcrumbIcon';
+import { BrokenLinkIcon } from './BrokenLinkIcon';
+import CheckedIcon from './CheckedIcon';
+import CheckIcon from './CheckIcon';
+import CloseIcon from './CloseIcon';
+import CoBenefitsIcon from './CoBenefitsIcon';
+import CountingIcon from './CountingIcon';
+import CreditsIcon from './CreditsIcon';
+import { CreditClassIcon } from './CreditClassIcon';
+import CurrentCreditsIcon from './CurrentCreditsIcon';
+import DiscordIcon from './social/DiscordIcon';
+import DocumentIcon from './DocumentIcon';
+import DropdownIcon from './DropdownIcon';
+import EditIcon from './EditIcon';
+import EmailIcon from './EmailIcon';
+import EyeIcon from './EyeIcon';
+import FacebookIcon from './social/FacebookIcon';
+import FarmerIcon from './FarmerIcon';
+import GithubIcon from './social/GithubIcon';
+import { HorizontalDotsIcon } from './HorizontalDotsIcon';
+import InfoIcon from './InfoIcon';
+import InfoIconOutlined from './InfoIconOutlined';
+import InstagramIcon from './social/InstagramIcon';
+import InterfaceIcon from './InterfaceIcon';
+import LinkedInIcon from './social/LinkedInIcon';
+import LinkIcon from './LinkIcon';
+import MediumIcon from './social/MediumIcon';
+import MinusIcon from './MinusIcon';
+import OrganizationIcon from './OrganizationIcon';
+import PhoneIcon from './PhoneIcon';
+import PinIcon from './PinIcon';
+import PlayIcon from './PlayIcon';
+import PlusIcon from './PlusIcon';
+import PointerIcon from './PointerIcon';
+import PrintIcon from './PrintIcon';
+import { ProjectPageIcon } from './ProjectPageIcon';
+import { ProjectPageIconSmall } from './ProjectPageIconSmall';
+import RegenIcon from './RegenIcon';
+import RegenLedgerIcon from './RegenLedgerIcon';
+import RegenLogoIcon from './RegenLogoIcon';
+import { RegenTokenIcon } from './RegenTokenIcon';
+import RegistrationIcon from './RegistrationIcon';
+import ReviewIcon from './ReviewIcon';
+import SatelliteIcon from './SatelliteIcon';
+import { SaveIcon } from './SaveIcon';
+import ShadedCreditsIcon from './ShadedCreditsIcon';
+import ShieldIcon from './ShieldIcon';
+import SmallArrowIcon from './SmallArrowIcon';
+import { Spinner } from './Spinner';
+import SoilSampleIcon from './SoilSampleIcon';
+import TelegramIcon from './social/TelegramIcon';
+import TotalCreditsIcon from './TotalCreditsIcon';
+import TrashIcon from './TrashIcon';
+import TrustDocumentIcon from './TrustDocumentIcon';
+import TrustIcon from './TrustIcon';
+import TwitterIcon from './social/TwitterIcon';
+import VerifiedIcon from './VerifiedIcon';
+import WhitepaperIcon from './WhitepaperIcon';
+import YoutubeIcon from './social/YoutubeIcon';
+import { WalletIcon } from './WalletIcon';
 
 export default {
   title: 'Icons',
@@ -75,40 +78,33 @@ function LabeledIcon(props: {
   label: string;
 }): JSX.Element {
   return (
-    <Grid
-      item
-      sm={1.5}
-      sx={{
-        flexDirection: 'column',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        textAlign: 'center',
-        gap: 8,
-      }}
-    >
-      <Box
+    <Grid item sm={3} md={2} lg={1.5} sx={{ border: 1, borderRadius: 3 }}>
+      <FlexCol
         sx={{
-          height: 70,
-          display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'center',
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          height: '100%',
+          minHeight: 50,
+          py: 4,
         }}
       >
-        {props.icon}
-      </Box>
-      <div>{props.label}</div>
+        <div>{props.icon}</div>
+        <div>{props.label}</div>
+      </FlexCol>
     </Grid>
   );
 }
 
 export const allIcons = (): JSX.Element => (
-  <Grid container>
+  <Grid container gap={4}>
     <LabeledIcon icon={<AccountabilityIcon />} label="AccountabilityIcon" />
     <LabeledIcon
-      icon={<ArrowDownIcon color={'#000'} direction={'down'} />}
+      icon={
+        <ArrowDownIcon color={'#000'} direction={'down'} fontSize="large" />
+      }
       label="ArrowDownIcon"
     />
-    <LabeledIcon icon={<AvatarIcon />} label="Avatar" />
+    <LabeledIcon icon={<AvatarIcon sx={{ height: 40 }} />} label="Avatar" />
     <LabeledIcon
       icon={<AvailableCreditsIcon sx={{ height: 40 }} />}
       label="AvailableCreditsIcon"
@@ -125,7 +121,14 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<CloseIcon />} label="CloseIcon" />
     <LabeledIcon icon={<CoBenefitsIcon />} label="CoBenefitsIcon" />
     <LabeledIcon icon={<CountingIcon />} label="CountingIcon" />
-    <LabeledIcon icon={<CreditsIcon color="#000" />} label="CreditsIcon" />
+    <LabeledIcon
+      icon={<CreditsIcon color="green" sx={{ height: 25 }} />}
+      label="CreditsIcon"
+    />
+    <LabeledIcon
+      icon={<CreditClassIcon sx={{ color: 'secondary.main' }} />}
+      label="CreditClassIcon"
+    />
     <LabeledIcon
       icon={<CurrentCreditsIcon color="#4FB573" />}
       label="CurrentCreditsIcon"
@@ -156,6 +159,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<PointerIcon />} label="PointerIcon" />
     <LabeledIcon icon={<PrintIcon />} label="PrintIcon" />
     <LabeledIcon icon={<ProjectPageIcon />} label="ProjectPageIcon" />
+    <LabeledIcon icon={<ProjectPageIconSmall />} label="ProjectPageIconSmall" />
     <LabeledIcon icon={<RegenIcon />} label="RegenIcon" />
     <LabeledIcon icon={<RegenLedgerIcon />} label="RegenLedgerIcon" />
     <LabeledIcon icon={<RegenLogoIcon color="grey" />} label="RegenLogoIcon" />

@@ -15,7 +15,7 @@ interface CreateProjectCardProps {
 
 const CreateProjectCard: React.FC<CreateProjectCardProps> = ({
   className,
-  sx,
+  sx = [],
   onClick,
   isFirstProject,
 }) => {

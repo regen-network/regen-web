@@ -1,6 +1,6 @@
-import UserAvatar from '../../components/user/UserAvatar';
-import UserInfo, { User } from '../../components/user/UserInfo';
-import UserInfoWithTitle from '../../components/user/UserInfoWithTitle';
+import UserAvatar from './UserAvatar';
+import UserInfo, { User } from './UserInfo';
+import UserInfoWithTitle from './UserInfoWithTitle';
 
 export default {
   title: 'User',

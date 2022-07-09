@@ -8,7 +8,7 @@ import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPage
 import Section from 'web-components/lib/components/section';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
-import { CreditsIconWithFolder } from 'web-components/lib/components/icons/CreditsIconWithFolder';
+import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import { Spinner } from 'web-components/lib/components/icons/Spinner';
 import { Center } from 'web-components/lib/components/box';
 
@@ -59,7 +59,7 @@ const Dashboard = (): JSX.Element => {
     },
     {
       label: 'Credit Classes',
-      icon: <CreditsIconWithFolder sx={{ opacity: '70%' }} />,
+      icon: <CreditClassIcon sx={{ opacity: '70%' }} />,
       content: <LazyLoad children={<MyProjects />} />,
       hidden: !isIssuer,
     },

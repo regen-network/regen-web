@@ -4,7 +4,7 @@ import Card from '../Card';
 import { Title } from '../../typography';
 import OutlinedButton from '../../buttons/OutlinedButton';
 
-interface Props {
+export interface DashboardCreateCardProps {
   sx?: SxProps<Theme>;
   onClick: () => void;
   title?: string;
@@ -18,7 +18,7 @@ export const DashboardCreateCard = ({
   onClick,
   title,
   sx = [],
-}: Props) => {
+}: DashboardCreateCardProps) => {
   return (
     <Card
       sx={[

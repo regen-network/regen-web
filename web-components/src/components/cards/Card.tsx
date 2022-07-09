@@ -2,18 +2,6 @@ import React from 'react';
 import { SxProps, Card as MuiCard } from '@mui/material';
 import type { Theme } from '~/theme/muiTheme';
 
-interface Props {
-  children?: any;
-  width?: string;
-  height?: string;
-  onClick?: () => void;
-  elevation?: number;
-  borderColor?: string;
-  borderRadius?: string;
-  className?: string;
-  sx?: SxProps<Theme>;
-}
-
 export function Card({
   children,
   width,
@@ -24,7 +12,17 @@ export function Card({
   borderRadius,
   className,
   sx = [],
-}: Props): JSX.Element {
+}: {
+  children?: any;
+  width?: string;
+  height?: string;
+  onClick?: () => void;
+  elevation?: number;
+  borderColor?: string;
+  borderRadius?: string;
+  className?: string;
+  sx?: SxProps<Theme>;
+}): JSX.Element {
   return (
     <MuiCard
       onClick={onClick}

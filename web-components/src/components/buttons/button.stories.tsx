@@ -1,10 +1,11 @@
-import * as React from 'react';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
-import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+
+import * as React from 'react';
+import OutlinedButton from './OutlinedButton';
+import PrevNextButton from './PrevNextButton';
+import ContainedButton from './ContainedButton';
+import { TableActionButtons } from './TableActionButtons';
+import { ExpandButton } from './ExpandButton';
 
 export default {
   title: 'Buttons',

@@ -1,6 +1,5 @@
-import * as React from 'react';
-import PlaceInfo from 'web-components/lib/components/place/PlaceInfo';
-import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
+import PlaceInfo from './PlaceInfo';
+import ProjectPlaceInfo from './ProjectPlaceInfo';
 
 export default {
   title: 'Place',

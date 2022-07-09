@@ -1,9 +1,6 @@
-import * as React from 'react';
-import {
-  TitleBody,
-  LabeledNumber,
-  LabeledDetail,
-} from 'web-components/lib/components/text-layouts';
+import { LabeledDetail } from './LabeledDetail';
+import { LabeledNumber } from './LabeledNumber';
+import { TitleBody } from './TitleBody';
 
 export default {
   title: 'Text Layouts',

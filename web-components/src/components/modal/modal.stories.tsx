@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Button, Card, Avatar, CardMedia, Link } from '@mui/material';
 import Long from 'long';
 
-import Modal from 'web-components/lib/components/modal';
-import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
-import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
-import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
-import { CreditSendModal } from 'web-components/lib/components/modal/CreditSendModal';
-import { CreditRetireModal } from 'web-components/lib/components/modal/CreditRetireModal';
-import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
-import { BasketTakeModal } from 'web-components/lib/components/modal/BasketTakeModal';
+import Modal from '.';
+import IssuanceModal from './IssuanceModal';
+import CropImageModal from './CropImageModal';
+import { ProcessingModal } from './ProcessingModal';
+import { TxSuccessfulModal } from './TxSuccessfulModal';
+import { TxErrorModal } from './TxErrorModal';
+import { CreditSendModal } from './CreditSendModal';
+import { CreditRetireModal } from './CreditRetireModal';
+import { BasketPutModal } from './BasketPutModal';
+import { BasketTakeModal } from './BasketTakeModal';
 
 export default {
   title: 'Modal',
@@ -139,7 +139,9 @@ function OpenCropImageModal(props: CropStoryProps): JSX.Element {
     setOpen(false);
   };
 
-  const handleSubmit = (croppedImage: HTMLImageElement): void => {
+  const handleSubmit = async (
+    croppedImage: HTMLImageElement,
+  ): Promise<void> => {
     const imageUrl = croppedImage.src;
     setImage(imageUrl);
     setOpen(false);
@@ -230,7 +232,7 @@ export const creditSendModal = (): JSX.Element => (
     sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'}
     batchDenom={'C01-20190101-20201010-02'}
     availableTradableAmount={1000}
-    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN || ''}
     open={true}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
@@ -239,10 +241,9 @@ export const creditSendModal = (): JSX.Element => (
 
 export const creditRetireModal = (): JSX.Element => (
   <CreditRetireModal
-    holder={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'}
     batchDenom={'C01-20190101-20201010-02'}
     availableTradableAmount={1000}
-    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN || ''}
     open={true}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
@@ -275,7 +276,7 @@ export const basketTakeModal = (): JSX.Element => (
       exponent: 6,
     }}
     balance={9999}
-    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN || ''}
     onClose={() => null}
     onSubmit={() => alert('submit')}
   />

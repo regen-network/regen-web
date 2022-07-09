@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  Title,
-  Subtitle,
-  Body,
-  Label,
-} from 'web-components/lib/components/typography';
+import { Title, Subtitle, Body, Label } from '../../components/typography';
 
 export default {
   title: 'Typography',

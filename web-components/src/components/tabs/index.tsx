@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
-import {
-  makeStyles,
-  useTheme,
-  withStyles,
-  DefaultTheme as Theme,
-} from '@mui/styles';
-import Tabs from '@mui/material/Tabs';
+import { useState } from 'react';
+
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import Tabs, { TabsProps } from '@mui/material/Tabs';
 import Tab, { TabProps } from '@mui/material/Tab';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { styled } from '@mui/material';
 
 export interface RegenTab extends TabProps {
   content?: JSX.Element;
@@ -39,20 +36,20 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-export function a11yProps(index: any): object {
+export function a11yProps(index: string | number): Record<string, unknown> {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
-const CustomTabs = withStyles((theme: Theme) => ({
+const CustomTabs = styled(Tabs)({
   indicator: {
     display: 'none',
   },
-}))(Tabs);
+});
 
-const CustomTab = withStyles((theme: Theme) => ({
+const CustomTab = styled(Tab)(({ theme }) => ({
   root: {
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 800,
@@ -103,7 +100,7 @@ const CustomTab = withStyles((theme: Theme) => ({
     borderRight: `2px solid ${theme.palette.secondary.dark}`,
     zIndex: 2,
   },
-}))(Tab);
+}));
 
 export default function RegenTabs({
   tabs,
@@ -115,10 +112,7 @@ export default function RegenTabs({
 
   const [value, setValue] = useState(0);
 
-  const handleChange = (
-    event: React.ChangeEvent<{}>,
-    newValue: number,
-  ): void => {
+  const handleChange: TabsProps['onChange'] = (_, newValue) => {
     setValue(newValue);
   };
 

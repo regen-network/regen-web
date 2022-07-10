@@ -1,6 +1,10 @@
 import React from 'react';
-import { TablePagination as MuiTablePagination, Grid } from '@mui/material';
-import { makeStyles, withStyles } from '@mui/styles';
+import {
+  TablePagination as MuiTablePagination,
+  Grid,
+  styled,
+} from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { Theme } from '../../theme/muiTheme';
 import PrevNextButton from '../buttons/PrevNextButton';
 
@@ -14,7 +18,9 @@ const useStylesAction = makeStyles((theme: Theme) => ({
   },
 }));
 
-const TablePaginationActions = (props: any): any => {
+// TODO: type these props
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const TablePaginationActions = (props: any): JSX.Element | null => {
   const classes = useStylesAction();
   const { count, page, rowsPerPage, onPageChange } = props;
   const pageTotal = Math.ceil(count / rowsPerPage);
@@ -54,7 +60,7 @@ const TablePaginationActions = (props: any): any => {
   );
 };
 
-const StyledTablePagination = withStyles((theme: Theme) => ({
+const StyledTablePagination = styled(MuiTablePagination)(({ theme }) => ({
   root: {
     height: theme.spacing(29),
     borderTop: `1px solid ${theme.palette.info.light}`,
@@ -103,8 +109,7 @@ const StyledTablePagination = withStyles((theme: Theme) => ({
   displayedRows: {
     marginRight: theme.spacing(7.5),
   },
-}))(MuiTablePagination);
-
+}));
 export interface TablePaginationProps {
   rowsPerPageOptions: number[];
   count: number;

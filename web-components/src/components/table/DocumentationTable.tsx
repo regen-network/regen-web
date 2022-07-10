@@ -104,7 +104,7 @@ function EnhancedTableHead(props: EnhancedTableProps): JSX.Element {
       onRequestSort(event, property);
     };
 
-  let headCells: HeadCell[] = [
+  const headCells: HeadCell[] = [
     { id: 'name', numeric: false, label: 'Name of document' },
     { id: 'type', numeric: true, label: 'Document type' },
     { id: 'date', numeric: true, label: 'Date of upload' },
@@ -171,7 +171,7 @@ const DocumentationTable: React.FC<DocumentationTableProps> = ({
 
   const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
-  let hasViewOnLedgerColumn: boolean = false;
+  let hasViewOnLedgerColumn = false;
   for (const r of rows) {
     if (
       r.eventByEventId?.creditVintageByEventId?.txHash &&

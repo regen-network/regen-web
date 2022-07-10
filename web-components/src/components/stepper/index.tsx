@@ -1,11 +1,11 @@
-import React from 'react';
-import { makeStyles, DefaultTheme as Theme, withStyles } from '@mui/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import {
   Stepper,
   Step,
   StepLabel,
   StepConnector,
   SxProps,
+  styled,
 } from '@mui/material';
 import clsx from 'clsx';
 
@@ -59,7 +59,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const RegenStepConnector = withStyles((theme: Theme) => ({
+const RegenStepConnector = styled(StepConnector)(({ theme }) => ({
   alternativeLabel: {
     [theme.breakpoints.up('sm')]: {
       top: theme.spacing(3.75),
@@ -85,7 +85,7 @@ const RegenStepConnector = withStyles((theme: Theme) => ({
   line: {
     borderColor: theme.palette.info.main,
   },
-}))(StepConnector);
+}));
 
 const RegenStepper = ({
   className,
@@ -109,7 +109,7 @@ const RegenStepper = ({
         {steps.map((label, index) => (
           <Step
             key={label}
-            onClick={onStepClick ? () => onStepClick(index) : () => {}}
+            onClick={() => (onStepClick ? onStepClick(index) : null)}
           >
             <StepLabel
               classes={{

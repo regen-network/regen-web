@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import bbox from '@turf/bbox';
 // import { FeatureCollection } from 'geojson'; TODO
 // import { AllGeoJSON } from '@turf/helpers';
@@ -125,6 +125,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface PopupInfo {
   lngLat: number[];
   feature: any;
+}
+
+function isFeatureCollection(
+  data: unknown,
+): data is FeatureCollection<Geometry, GeoJsonProperties> {
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'type' in data &&
+    'features' in data
+  );
 }
 
 export default function Map({ geojson, mapboxToken }: MapProps): JSX.Element {

@@ -51,34 +51,33 @@ const Seller = (): JSX.Element => {
   }, [getAccessTokenSilently, user]);
 
   const viewDashboard = useCallback(
-    (account?: boolean) =>
-      (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        const getLoginLink = async (): Promise<void> => {
-          try {
-            const accessToken = await getAccessTokenSilently();
-            const apiUri = getApiUri();
-            const res = await axios({
-              method: 'POST',
-              url: `${apiUri}/create-login-link`,
-              data: {
-                accountId: data?.userByEmail?.stripeAccountId,
-              },
-              headers: { authorization: `Bearer ${accessToken}` },
-            });
-            let url = res.data.url;
-            if (account) {
-              // Directly link to the account tab
-              url = url + '#/account';
-            }
-            window.open(url, '_blank') || window.location.assign(url);
-          } catch (e) {
-            // TODO handle error, no design yet
-            // console.log(e.message);
+    (account?: boolean) => () => {
+      const getLoginLink = async (): Promise<void> => {
+        try {
+          const accessToken = await getAccessTokenSilently();
+          const apiUri = getApiUri();
+          const res = await axios({
+            method: 'POST',
+            url: `${apiUri}/create-login-link`,
+            data: {
+              accountId: data?.userByEmail?.stripeAccountId,
+            },
+            headers: { authorization: `Bearer ${accessToken}` },
+          });
+          let url = res.data.url;
+          if (account) {
+            // Directly link to the account tab
+            url = url + '#/account';
           }
-        };
+          window.open(url, '_blank') || window.location.assign(url);
+        } catch (e) {
+          // TODO handle error, no design yet
+          // console.log(e.message);
+        }
+      };
 
-        getLoginLink();
-      },
+      getLoginLink();
+    },
     [data, getAccessTokenSilently],
   );
 

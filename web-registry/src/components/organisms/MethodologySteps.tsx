@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -84,7 +83,7 @@ function MethodologySteps({ steps }: Props): JSX.Element {
             key={i}
             stepNumber={i}
             stepCard={s}
-            openModal={() => {}}
+            openModal={() => null}
           />
         ))}
       </div>

@@ -39,7 +39,7 @@ function CreditClassDetails(): JSX.Element {
 }
 
 function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
-  let { creditClassId } = useParams();
+  const { creditClassId } = useParams();
   const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
     undefined,
   );

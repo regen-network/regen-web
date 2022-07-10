@@ -22,6 +22,8 @@ type Step = {
   };
 };
 
+/* eslint-disable @typescript-eslint/ban-types */
+// TODO: can we change the typing here?
 type ContextProps<T extends object> = {
   steps: Step[] | undefined;
   data: T;
@@ -50,13 +52,13 @@ const initialValues = {
   isReviewStep: false,
   percentComplete: 0,
   resultStatus: undefined,
-  handleActiveStep: () => {},
-  handleNext: () => {},
-  handleBack: () => {},
-  handleSaveNext: () => {},
-  handleResetReview: () => {},
-  handleSuccess: () => {},
-  handleError: () => {},
+  handleActiveStep: () => null,
+  handleNext: () => null,
+  handleBack: () => null,
+  handleSaveNext: () => null,
+  handleResetReview: () => null,
+  handleSuccess: () => null,
+  handleError: () => null,
 };
 
 const MultiStepContext = React.createContext<ContextProps<{}>>(initialValues);
@@ -130,7 +132,7 @@ export function MultiStepProvider<T extends object>({
     nextStep: number,
     dataDisplay?: any,
   ): void => {
-    let _data: FormData<T> = {
+    const _data: FormData<T> = {
       formValues: formValues as T,
       maxAllowedStep: nextStep,
     };

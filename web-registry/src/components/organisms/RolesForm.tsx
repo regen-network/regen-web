@@ -437,7 +437,7 @@ const RolesForm: React.FC<RolesFormProps> = ({
         }}
         validate={validateProject}
       >
-        {({ submitForm, isValid, isSubmitting, touched }) => {
+        {({ submitForm, isValid, isSubmitting }) => {
           return (
             <Form translate="yes">
               <OnBoardingCard>

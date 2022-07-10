@@ -54,7 +54,7 @@ const vcsMetadataSchema: Yup.AnyObjectSchema = Yup.object({
 const JSONSchema = Yup.string().test(
   'is-json',
   invalidJSON,
-  (value, context) => !!value && isValidJSON(value),
+  value => !!value && isValidJSON(value),
 );
 
 const isPastDateTest = {
@@ -78,8 +78,8 @@ export const validationSchemaFields = {
     .test({ ...isPastDateTest }),
   metadata: Yup.object().when('classId', {
     is: 'C01',
-    then: schema => vcsMetadataSchema,
-    otherwise: schema => JSONSchema,
+    then: () => vcsMetadataSchema,
+    otherwise: () => JSONSchema,
   }),
 };
 

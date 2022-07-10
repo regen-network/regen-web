@@ -40,7 +40,9 @@ export function CreditClassSelect({
           let metadata;
           try {
             metadata = await getMetadataFromUint8Array(creditClass.metadata);
-          } catch (e) {}
+          } catch (e) {
+            console.error(e); // eslint-disable-line no-console
+          }
 
           const className = metadata && metadata['schema:name'];
 

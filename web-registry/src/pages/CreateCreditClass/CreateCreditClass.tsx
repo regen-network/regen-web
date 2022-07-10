@@ -94,8 +94,8 @@ const CreateCreditClass: React.FC = () => {
     setOpen(true);
   };
 
-  const outcomeCards = content?.outcomes?.map(outcome => (
-    <WrappedImpactCard outcome={outcome} />
+  const outcomeCards = content?.outcomes?.map((outcome, i) => (
+    <WrappedImpactCard key={i} outcome={outcome} />
   ));
 
   const SubtitleAndDescription: React.FC<{
@@ -222,8 +222,8 @@ const CreateCreditClass: React.FC = () => {
                 : false
             }
             slidesToShow={resourceCardsShown}
-            items={content?.resources?.map(resource => (
-              <WrappedResourcesCard resource={resource} />
+            items={content?.resources?.map((resource, i) => (
+              <WrappedResourcesCard key={i} resource={resource} />
             ))}
           />
         </Section>

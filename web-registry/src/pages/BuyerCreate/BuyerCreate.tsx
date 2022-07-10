@@ -48,9 +48,11 @@ const BuyerCreate: React.FC<{
 
   const [buyerType, setBuyerType] = useState<string>('organization');
   const [orgName, setOrgName] = useState<string>('');
-  const [orgAddress, setOrgAddress] = useState<string | object>('');
+  const [orgAddress, setOrgAddress] = useState<
+    string | Record<string, unknown>
+  >('');
   const [name, setName] = useState<string>('');
-  const [address, setAddress] = useState<string | object>('');
+  const [address, setAddress] = useState<string | Record<string, unknown>>('');
   const [email, setEmail] = useState<string>('');
   const [walletId, setWalletId] = useState<string>('');
   const [addressId, setAddressId] = useState<string>('');

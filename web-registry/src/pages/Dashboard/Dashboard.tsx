@@ -49,19 +49,31 @@ const Dashboard = (): JSX.Element => {
       icon: (
         <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
       ),
-      content: <LazyLoad children={<MyEcocredits />} />,
+      content: (
+        <LazyLoad>
+          <MyEcocredits />
+        </LazyLoad>
+      ),
     },
     {
       label: 'Projects',
       icon: <ProjectPageIcon />,
-      content: <LazyLoad children={<MyProjects />} />,
       hidden: !isIssuer,
+      content: (
+        <LazyLoad>
+          <MyProjects />
+        </LazyLoad>
+      ),
     },
     {
       label: 'Credit Classes',
       icon: <CreditClassIcon sx={{ opacity: '70%' }} />,
-      content: <LazyLoad children={<MyProjects />} />,
       hidden: !isIssuer,
+      content: (
+        <LazyLoad>
+          <MyProjects />
+        </LazyLoad>
+      ),
     },
   ];
 

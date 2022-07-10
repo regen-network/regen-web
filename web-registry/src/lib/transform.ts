@@ -18,7 +18,7 @@ import {
 // TODO get generated type for creditVintage and project from graphql schema.
 export function buildIssuanceModalData(
   data?: ProjectByHandleQuery,
-  creditVintage?: any,
+  creditVintage?: any, // eslint-disable-line
 ): IssuanceModalData | null {
   const project = data?.projectByHandle;
   if (project && creditVintage) {

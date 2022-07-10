@@ -166,7 +166,7 @@ const CreditsTransfer: React.FC<{
   if (partiesError) return <div>Error! ${partiesError.message}</div>;
 
   let newBalances: Balance[];
-  let sendersBalances: Result[] = [];
+  const sendersBalances: Result[] = [];
   let receiverBalance: Result | undefined;
   let vintage: any;
   if (
@@ -193,7 +193,7 @@ const CreditsTransfer: React.FC<{
       ) as Party;
 
     // Build response list of senders/buyer old/new balance
-    for (var i: number = 0; i < newBalances.length; i++) {
+    for (let i = 0; i < newBalances.length; i++) {
       const oldBalance = findOldBalance(i);
       const party = findParty(i);
       if (party) {
@@ -286,7 +286,7 @@ const CreditsTransfer: React.FC<{
               onChange={handleVintageChange}
             >
               {vintagesData?.allCreditVintages?.nodes?.map(node => {
-                return !!node ? (
+                return node ? (
                   <MenuItem key={node?.id} value={node?.id}>
                     {node?.projectByProjectId?.metadata?.['schema:name']} -{' '}
                     {dateFormat.format(new Date(node?.createdAt))}

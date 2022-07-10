@@ -15,7 +15,7 @@ export const CreateCreditClassCard = ({
 }: Props) => {
   let title;
   let icon;
-  if (!!isFirstProject) {
+  if (isFirstProject) {
     title = 'You have not created any credit classes yet';
     icon = (
       <CreditClassIcon

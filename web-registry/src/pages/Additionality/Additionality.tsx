@@ -11,7 +11,7 @@ const Additionality: React.FC = () => {
   }
 
   async function submitAdditionality(
-    values: AdditionalityValues,
+    values: AdditionalityValues, // eslint-disable-line
   ): Promise<void> {
     // TODO
     return Promise.resolve();

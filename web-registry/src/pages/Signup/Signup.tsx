@@ -43,14 +43,14 @@ function Signup(): JSX.Element {
                   },
                 },
               })
-                .then(resp => {
+                .then(() => {
                   // Subscribe to mailing list
                   if (updates === true) {
                     axios
                       .post(`${getApiUri()}/mailerlite`, {
                         email,
                       })
-                      .then(resp => {
+                      .then(() => {
                         resolve();
                         navigate(`/verify-email?email=${email}`);
                       })

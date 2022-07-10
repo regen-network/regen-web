@@ -22,8 +22,8 @@ async function loadDataset(jsonLd: string): Promise<DatasetExt> {
 // If an optional group is passed, it will validate against shapes
 // of the given sh:group.
 export async function validate(
-  shapesJSON: any,
-  dataJSON: any,
+  shapesJSON: any, // eslint-disable-line
+  dataJSON: any, // eslint-disable-line
   group?: string,
 ): ValidationReport {
   const shapes = await loadDataset(JSON.stringify(shapesJSON));

@@ -83,7 +83,7 @@ function UserProfile(): JSX.Element {
       .post(`${getApiUri()}/auth/verification-email`, {
         email,
       })
-      .then(resp => {
+      .then(() => {
         setSubmitting(false);
         setStatus('Email resent! Please check your inbox.');
         setError(null);

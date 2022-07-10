@@ -15,7 +15,7 @@ export const CreateProjectCard = ({
 }: Props) => {
   let title;
   let icon;
-  if (!!isFirstProject) {
+  if (isFirstProject) {
     title = 'Create your first project';
     icon = (
       <ProjectPageIcon

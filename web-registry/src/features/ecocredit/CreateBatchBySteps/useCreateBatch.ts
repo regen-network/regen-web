@@ -80,7 +80,7 @@ async function prepareMsg(
   // finally, build de Msg DTO
   const issuance: MsgCreateBatch_BatchIssuance[] = data.recipients.map(
     recipient => {
-      let issuanceRecipient: Partial<MsgCreateBatch_BatchIssuance> = {
+      const issuanceRecipient: Partial<MsgCreateBatch_BatchIssuance> = {
         recipient: recipient.recipient,
         tradableAmount: recipient.tradableAmount.toString(),
         retiredAmount: '0',

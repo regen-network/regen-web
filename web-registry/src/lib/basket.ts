@@ -107,8 +107,8 @@ interface QueryBasketsProps extends BasketQueryClientProps {
 
 export const queryBaskets = async ({
   client,
-  request,
-}: QueryBasketsProps): Promise<QueryBasketsResponse> => {
+}: // request,
+QueryBasketsProps): Promise<QueryBasketsResponse> => {
   try {
     return await client.Baskets({});
   } catch (err) {

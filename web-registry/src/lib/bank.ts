@@ -150,7 +150,7 @@ interface QueryDenomsMetadataProps extends BankQueryClientProps {
 
 export const queryDenomsMetadata = async ({
   client,
-  request,
+  request, // eslint-disable-line
 }: QueryDenomsMetadataProps): Promise<QueryDenomsMetadataResponse> => {
   try {
     return await client.DenomsMetadata({});

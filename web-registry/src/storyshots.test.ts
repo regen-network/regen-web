@@ -10,7 +10,7 @@ configure({ adapter: new Adapter() });
 initStoryshots({
   configPath: path.resolve(__dirname, '../../web-storybook/.storybook'),
   framework: 'react',
-  test: ({ story, context }) => {
+  test: ({ story }) => {
     const storyElement = story.render();
     const shallowTree = shallow(storyElement);
 

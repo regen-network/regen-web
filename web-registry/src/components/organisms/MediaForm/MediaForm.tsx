@@ -1,4 +1,3 @@
-import React from 'react';
 import { Formik, FormikHelpers } from 'formik';
 
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
@@ -122,9 +121,9 @@ export const MediaForm = ({
         validate={handleValidate}
         onSubmit={handleSubmit}
       >
-        {({ submitForm, isValid, isSubmitting, touched }) => (
+        {({ submitForm, isValid, isSubmitting }) => (
           <>
-            {!!creditClassId ? <MediaFormSimple /> : <MediaFormLegacy />}
+            {creditClassId ? <MediaFormSimple /> : <MediaFormLegacy />}
             <ProjectPageFooter
               onSave={submitForm}
               onNext={props.onNext}

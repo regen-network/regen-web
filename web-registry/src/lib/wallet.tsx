@@ -129,7 +129,8 @@ export const chainInfo = {
 
 const WalletContext = createContext<ContextType>({
   loaded: false,
-  setTxResult: (txResult: DeliverTxResponse | undefined) => {},
+  // TODO:
+  setTxResult: (txResult: DeliverTxResponse | undefined) => {}, //eslint-disable-line
 });
 
 export const WalletProvider: React.FC = ({ children }) => {

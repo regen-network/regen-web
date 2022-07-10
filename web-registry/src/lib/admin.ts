@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 export default function isAdmin(user: any): boolean {
   return (
     user &&

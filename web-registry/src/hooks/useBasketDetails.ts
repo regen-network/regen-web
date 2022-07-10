@@ -104,7 +104,9 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
                 metadata = await getMetadataFromUint8Array(
                   basketClass.info.metadata,
                 );
-              } catch (err) {}
+              } catch (err) {
+                // TODO: handle err
+              }
             }
 
             let basketClassName;

@@ -252,8 +252,10 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                   }`}
                   data={
                     <>
-                      {offsetGenerationMethods.map((method: string) => (
-                        <Body size="xl">{startCase(method)}</Body>
+                      {offsetGenerationMethods.map((method, i) => (
+                        <Body key={i} size="xl">
+                          {startCase(method)}
+                        </Body>
                       ))}
                     </>
                   }
@@ -272,8 +274,10 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                   }`}
                   data={
                     <>
-                      {sectoralScopes.map((sector: string) => (
-                        <Body size="xl">{sector}</Body>
+                      {sectoralScopes.map((sector, i) => (
+                        <Body key={i} size="xl">
+                          {sector}
+                        </Body>
                       ))}
                     </>
                   }

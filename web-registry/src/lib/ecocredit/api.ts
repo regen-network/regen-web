@@ -508,8 +508,8 @@ interface QueryClassesProps extends EcocreditQueryClientProps {
 
 export const queryClasses = async ({
   client,
-  request,
-}: QueryClassesProps): Promise<QueryClassesResponse> => {
+}: // request,
+QueryClassesProps): Promise<QueryClassesResponse> => {
   try {
     return await client.Classes({});
   } catch (err) {
@@ -527,8 +527,8 @@ interface QueryCreditTypesProps extends EcocreditQueryClientProps {
 
 export const queryCreditTypes = async ({
   client,
-  request,
-}: QueryCreditTypesProps): Promise<QueryCreditTypesResponse> => {
+}: // request,
+QueryCreditTypesProps): Promise<QueryCreditTypesResponse> => {
   try {
     return await client.CreditTypes({});
   } catch (err) {

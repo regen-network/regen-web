@@ -18,16 +18,15 @@ module.exports = {
     },
   },
   rules: {
-    'no-empty': 'off',
-    'no-console': 'warn',
-    'no-useless-escape': 'off',
+    '@typescript-eslint/no-unused-vars': 'off', // TODO enable this line and fix errors
+    '@typescript-eslint/no-explicit-any': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/no-unescaped-entities': 'off',
-    '@typescript-eslint/explicit-function-return-type': [
-      'error',
-      {
-        allowExpressions: true,
-      },
-    ],
+    // '@typescript-eslint/explicit-function-return-type': [
+    //   'error',
+    //   {
+    //     allowExpressions: true,
+    //   },
+    // ],
   },
 };

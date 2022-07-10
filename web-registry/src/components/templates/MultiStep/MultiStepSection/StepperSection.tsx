@@ -1,4 +1,3 @@
-import React from 'react';
 import Box from '@mui/material/Box';
 
 import Stepper from 'web-components/lib/components/stepper';
@@ -39,7 +38,7 @@ export default function StepperSection({
         sx={{ mw: 240 }}
         steps={steps ? steps.map(step => step.name) : []}
         activeStep={activeStep}
-        onStepClick={() => {}}
+        onStepClick={() => null}
       />
       <OnBoardingSection title={title} formContainer>
         <Box minHeight="50vh">{children}</Box>

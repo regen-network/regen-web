@@ -197,8 +197,8 @@ function CertificatePage(): JSX.Element {
     data = dataByBuyerWalletId;
   }
 
-  let items: JSX.Element[] = [];
-  let projects: JSX.Element[] = [];
+  const items: JSX.Element[] = [];
+  const projects: JSX.Element[] = [];
   if (data?.allPurchases?.nodes) {
     const nodes = data.allPurchases.nodes;
     for (let i = 0; i < nodes.length; i++) {
@@ -410,6 +410,7 @@ function CertificatePage(): JSX.Element {
             (r, i) =>
               r?.metadata?.['http://schema.org/url'] && (
                 <OutlinedButton
+                  key={i}
                   href={r?.metadata?.['http://schema.org/url']}
                   target="_blank"
                   className={classes.issuanceButton}

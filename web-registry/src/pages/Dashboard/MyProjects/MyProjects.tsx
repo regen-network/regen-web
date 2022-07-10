@@ -16,7 +16,7 @@ import { DashboardTemplate } from '../../../components/templates';
 import { DashboardCreateCard } from 'web-components/lib/components/cards/DashboardCreateCard';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 
-const MyProjects = () => {
+const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
   const { wallet } = useWallet();
   const navigate = useNavigate();

@@ -189,7 +189,9 @@ function CreditsIssue(): JSX.Element {
                 },
               },
             });
-          } catch (e) {}
+          } catch (e) {
+            // TODO: error handling
+          }
         }}
         noValidate
         autoComplete="off"

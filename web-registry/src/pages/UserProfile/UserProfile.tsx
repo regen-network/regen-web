@@ -19,7 +19,7 @@ import {
   useUpdatePartyByIdMutation,
 } from '../../generated/graphql';
 
-const messageExpired: string = 'Access expired.';
+const messageExpired = 'Access expired.';
 
 function UserProfile(): JSX.Element {
   const { user } = useAuth0();
@@ -32,7 +32,7 @@ function UserProfile(): JSX.Element {
   const message = search.get('message');
   const email = search.get('email');
 
-  let title: string = 'User Profile';
+  let title = 'User Profile';
   const showForm: boolean =
     success === null ||
     success === 'true' ||

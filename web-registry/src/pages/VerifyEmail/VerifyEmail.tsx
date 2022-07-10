@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import Link from '@mui/material/Link';
 import axios from 'axios';
 
@@ -22,7 +22,7 @@ function VerifyEmail(): JSX.Element {
       .post(`${getApiUri()}/auth/verification-email`, {
         email,
       })
-      .then(resp => {
+      .then(() => {
         setSubmitting(false);
         setStatus('Email resent! Please check your inbox.');
         setError(null);
@@ -47,7 +47,7 @@ function VerifyEmail(): JSX.Element {
         </Body>
       </OnBoardingCard>
       <Body size="xl" sx={{ cursor: 'pointer', pt: [33, 0], px: [2.5, 10] }}>
-        Don’t see anything? <Link onClick={resendEmail}>Resend email</Link>.
+        Don't see anything? <Link onClick={resendEmail}>Resend email</Link>.
       </Body>
       {!isSubmitting && error && <ErrorBanner text={error.toString()} />}
       {!isSubmitting && status && <Banner text={status} />}

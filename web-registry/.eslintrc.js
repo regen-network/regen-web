@@ -1,9 +1,6 @@
-const baseConfig = require('../.eslintrc');
+const baseConfig = require('../.eslintrc'); // eslint-disable-line
 
 module.exports = {
   ...baseConfig,
   ignorePatterns: ['src/generated/*.tsx'],
-  rules: {
-    'react/react-in-jsx-scope': 'off',
-  },
 };

@@ -1,12 +1,28 @@
 module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    jest: true,
+    node: true,
+  },
   extends: [
-    'react-app',
-    'plugin:prettier/recommended', // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
   ],
+  plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
+  settings: {
+    'import/resolver': {
+      typescript: {},
+    },
+  },
   rules: {
     'no-empty': 'off',
     'no-console': 'warn',
     'no-useless-escape': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/no-unescaped-entities': 'off',
     '@typescript-eslint/explicit-function-return-type': [
       'error',
       {

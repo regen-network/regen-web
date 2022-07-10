@@ -18,7 +18,6 @@ interface FieldProps {
 
 export function MetadataJSONField({
   name = 'metadata',
-  required,
   ...props
 }: FieldProps): JSX.Element {
   const {

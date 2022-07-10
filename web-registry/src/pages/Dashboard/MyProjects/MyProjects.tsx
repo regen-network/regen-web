@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
-import { DashboardCreateCard } from 'web-components/lib/components/cards/DashboardCreateCard';
-import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 
 import { useWallet } from 'lib/wallet';
 import {

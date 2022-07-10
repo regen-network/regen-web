@@ -60,7 +60,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
         'Batch End Date',
         'Project Location',
       ]}
-      rows={credits.map((row, i) => {
+      rows={credits.map(row => {
         return [
           <Link href={`/credit-batches/${row.batch_denom}`}>
             {row.batch_denom}

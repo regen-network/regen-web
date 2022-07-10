@@ -127,17 +127,6 @@ interface PopupInfo {
   feature: any;
 }
 
-function isFeatureCollection(
-  data: unknown,
-): data is FeatureCollection<Geometry, GeoJsonProperties> {
-  return (
-    typeof data === 'object' &&
-    data !== null &&
-    'type' in data &&
-    'features' in data
-  );
-}
-
 export default function Map({ geojson, mapboxToken }: MapProps): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();

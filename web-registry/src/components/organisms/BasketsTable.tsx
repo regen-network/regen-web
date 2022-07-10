@@ -29,8 +29,8 @@ export const BasketsTable: React.FC<BasketTableProps> = ({
       tableLabel="baskets table"
       renderActionButtons={renderActionButtons}
       headerRows={[
-        /* eslint-disable react/jsx-key */
         <Box
+          key={'asset'}
           sx={{
             minWidth: {
               xs: 'auto',
@@ -45,7 +45,7 @@ export const BasketsTable: React.FC<BasketTableProps> = ({
       ]}
       rows={basketTokens.map((row, i) => {
         return [
-          <Grid container wrap="nowrap">
+          <Grid container wrap="nowrap" key={i}>
             <Grid item>
               <BasketIcon />
             </Grid>
@@ -69,7 +69,6 @@ export const BasketsTable: React.FC<BasketTableProps> = ({
               )
             : 0,
         ];
-        /* eslint-enable react/jsx-key */
       })}
     />
   );

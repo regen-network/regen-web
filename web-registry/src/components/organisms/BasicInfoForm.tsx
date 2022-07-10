@@ -128,7 +128,7 @@ const BasicInfoForm: React.FC<{
         }
       }}
     >
-      {({ submitForm, submitCount, isValid, isSubmitting, touched }) => {
+      {({ submitForm, isValid, isSubmitting, touched }) => {
         return (
           <Form>
             <OnBoardingCard>

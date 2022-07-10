@@ -3,18 +3,15 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
+    "rootDir": "src",
     "outDir": "build",
     "resolveJsonModule": true,
-    "rootDir": "src",
     "allowJs": true,
     "jsx": "react-jsx",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": "./src"
   },
   "include": [
     "src",

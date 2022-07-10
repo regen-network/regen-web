@@ -92,7 +92,7 @@ function GridItem({
 
 function PostPurchase(): JSX.Element {
   const classes = useStyles();
-  let { walletId, projectId, name } = useParams();
+  const { walletId, projectId, name } = useParams();
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'short',
@@ -109,7 +109,7 @@ function PostPurchase(): JSX.Element {
     variables: { id: walletId },
   });
 
-  const url: string = `projects/${projectId}`;
+  const url = `projects/${projectId}`;
 
   const units: number | undefined =
     walletData &&

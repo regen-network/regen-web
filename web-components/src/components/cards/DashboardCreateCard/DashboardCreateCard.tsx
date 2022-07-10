@@ -9,7 +9,7 @@ export interface DashboardCreateCardProps {
   onClick: () => void;
   title?: string;
   buttonText: string;
-  icon?: JSX.Element | null | false;
+  icon?: JSX.Element;
 }
 
 export const DashboardCreateCard = ({

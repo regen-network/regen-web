@@ -1,4 +1,3 @@
-import React from 'react';
 import Question, { QuestionItem } from './Question';
 import Category from './Category';
 import Navigation from './Navigation';

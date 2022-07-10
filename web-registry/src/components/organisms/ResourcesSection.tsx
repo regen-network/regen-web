@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
 import { ResourceFieldsFragment, Maybe } from '../../generated/sanity-graphql';
 import { WrappedResourcesCard } from '../atoms/WrappedResourcesCard';
@@ -24,8 +22,8 @@ function ResourcesSection({
         classes={classes}
         title={title || 'Resources'}
         items={
-          resources?.map(resource => (
-            <WrappedResourcesCard resource={resource} />
+          resources?.map((resource, i) => (
+            <WrappedResourcesCard key={i} resource={resource} />
           )) || []
         }
       />

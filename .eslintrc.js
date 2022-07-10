@@ -22,13 +22,17 @@ module.exports = {
     },
   },
   rules: {
-    '@typescript-eslint/explicit-function-return-type': [
-      'error',
-      {
-        allowExpressions: true,
-      },
-    ],
-    '@typescript-eslint/no-unused-vars': 'off', // TODO enable this line and fix errors
+    // TODO possibly delete the following - leaving for now in case we want to
+    // enforce types on all functions, but the this config setup still enforces
+    // on module boundaries, which is the major concern. This allows implicit
+    // types as long as they aren't exported
+
+    // '@typescript-eslint/explicit-function-return-type': [
+    //   'error',
+    //   {
+    //     allowExpressions: true,
+    //   },
+    // ],
     '@typescript-eslint/no-explicit-any': 'off', // TODO enable this line and fix errors
     'react/react-in-jsx-scope': 'off',
     'react/no-unescaped-entities': 'off',

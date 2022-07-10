@@ -7,8 +7,10 @@ export default {
 
 const voidFunc = (): void => void null;
 
-export const createProjectCard = () => <CreateProjectCard onClick={voidFunc} />;
+export const createProjectCard = (): JSX.Element => (
+  <CreateProjectCard onClick={voidFunc} />
+);
 
-export const createProjectCardFirstProject = () => (
+export const createProjectCardFirstProject = (): JSX.Element => (
   <CreateProjectCard isFirstProject onClick={voidFunc} />
 );

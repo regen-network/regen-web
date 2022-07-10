@@ -28,7 +28,7 @@ type Props = {
   };
 };
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   main: {
     justifyContent: 'flex-end',
   },

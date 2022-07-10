@@ -17,7 +17,6 @@ import TrustIcon from '../icons/TrustIcon';
 import ProjectCard from './ProjectCard';
 import GreenCard from './GreenCard';
 import GreenTopIconCard from './GreenTopIconCard';
-import CreateProjectCard from './CreateProjectCard';
 import ImageActionCard from './ImageActionCard';
 import { StepCard } from './StepCard';
 import FarmerIcon from '../icons/FarmerIcon';
@@ -169,14 +168,6 @@ export const greenTopIconCard = (): JSX.Element => (
 
 export const onBoardingCard = (): JSX.Element => (
   <OnBoardingCard>some content</OnBoardingCard>
-);
-
-export const createProjectCard = (): JSX.Element => (
-  <CreateProjectCard isFirstProject onClick={() => {}} />
-);
-
-export const createProjectCardAddAnother = (): JSX.Element => (
-  <CreateProjectCard isFirstProject={false} onClick={() => {}} />
 );
 
 export const imageActionCard = (): JSX.Element => (

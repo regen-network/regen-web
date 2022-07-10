@@ -9,10 +9,10 @@ interface Props {
 }
 
 export const CreateProjectCard = ({
-  sx = [],
+  sx,
   onClick,
   isFirstProject,
-}: Props) => {
+}: Props): JSX.Element => {
   let title;
   let icon;
   if (isFirstProject) {

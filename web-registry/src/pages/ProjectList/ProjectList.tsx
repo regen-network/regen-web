@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { Body } from 'web-components/lib/components/typography';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
+import { FlexCol } from 'web-components/lib/components/box';
 
+import { CreateProjectCard } from 'components/molecules/CreateProjectCard';
 import {
   useCreateProjectMutation,
   useGetUserProfileByEmailQuery,
-} from '../../generated/graphql';
-import { FlexCol } from 'web-components/lib/components/box';
+} from 'generated/graphql';
 
 const ProjectList: React.FC = () => {
   // const theme = useTheme();

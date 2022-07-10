@@ -4,17 +4,18 @@ import { useNavigate } from 'react-router-dom';
 
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import { DashboardCreateCard } from 'web-components/lib/components/cards/DashboardCreateCard';
+import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 
-import { useWallet } from '../../../lib/wallet';
+import { useWallet } from 'lib/wallet';
 import {
   useCreateProjectMutation,
   useWalletByAddrQuery,
   useCreateWalletMutation,
-} from '../../../generated/graphql';
-import { getProjectPageBaseData } from '../../../lib/rdf';
-import { DashboardTemplate } from '../../../components/templates';
-import { DashboardCreateCard } from 'web-components/lib/components/cards/DashboardCreateCard';
-import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
+} from 'generated/graphql';
+import { getProjectPageBaseData } from 'lib/rdf';
+import { DashboardTemplate } from 'components/templates';
+import { CreateProjectCard } from 'components/molecules/CreateProjectCard';
 
 const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
@@ -88,21 +89,9 @@ const MyProjects = (): JSX.Element => {
     >
       <Grid container spacing={8}>
         <Grid item xs={12} md={6} lg={4}>
-          <DashboardCreateCard
-            title={isFirstProject ? 'Create your first project' : ''}
+          <CreateProjectCard
+            isFirstProject={isFirstProject}
             onClick={submitCreateProject}
-            buttonText="+ create project"
-            icon={
-              isFirstProject ? (
-                <ProjectPageIcon
-                  sx={theme => ({
-                    color: 'info.main',
-                    height: theme.spacing(14.75),
-                    width: theme.spacing(18.25),
-                  })}
-                />
-              ) : undefined
-            }
           />
         </Grid>
         {/* TODO: ProjectCards used below temporarily. Will probably be a new variation for this purpose */}

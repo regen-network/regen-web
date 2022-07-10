@@ -5,20 +5,17 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { UrlType, UrlList } from 'web-components/lib/utils/schemaURL';
 
-import {
-  validate,
-  getProjectPageBaseData,
-  getCompactedPath,
-} from '../../../lib/rdf';
-import { ProjectPageFooter } from '../../molecules';
-import { useProjectEditContext } from '../../../pages/ProjectEdit';
+import { validate, getProjectPageBaseData, getCompactedPath } from 'lib/rdf';
+import { useProjectEditContext } from 'pages/ProjectEdit';
+import { ProjectPageFooter } from 'components/molecules';
+
 import { MediaFormSimple } from './MediaFormSimple';
 import { MediaFormLegacy } from './MediaFormLegacy';
 import { isSimpleMediaFormErrors } from './MediaForm.utils';
 
 import type { MediaValuesSimple, MediaErrorsSimple } from './MediaFormSimple';
 import type { MediaErrorsLegacy, MediaValuesLegacy } from './MediaFormLegacy';
-import type { ShaclGraphByUriQuery } from '../../../generated/graphql';
+import type { ShaclGraphByUriQuery } from 'generated/graphql';
 
 export interface MediaBaseValues {
   'regen:previewPhoto'?: UrlType;

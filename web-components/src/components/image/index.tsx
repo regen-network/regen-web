@@ -69,8 +69,8 @@ const Image: React.FC<ImageProps> = ({
   }, [rest, imgRef, serverFailed]);
 
   useEffect(() => {
-    if (!!delay) {
-      let delayTimer = setTimeout(() => setReadyToLoad(true), delay);
+    if (delay) {
+      const delayTimer = setTimeout(() => setReadyToLoad(true), delay);
       return () => {
         clearTimeout(delayTimer);
       };

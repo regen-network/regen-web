@@ -5,17 +5,17 @@ import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClass
 interface Props {
   sx?: SxProps<Theme>;
   onClick: () => void;
-  isFirstProject?: boolean;
+  isFirstCreditClass?: boolean;
 }
 
 export const CreateCreditClassCard = ({
   sx = [],
   onClick,
-  isFirstProject,
-}: Props) => {
+  isFirstCreditClass,
+}: Props): JSX.Element => {
   let title;
   let icon;
-  if (isFirstProject) {
+  if (isFirstCreditClass) {
     title = 'You have not created any credit classes yet';
     icon = (
       <CreditClassIcon

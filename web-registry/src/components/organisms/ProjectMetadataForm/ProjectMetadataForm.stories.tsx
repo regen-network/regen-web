@@ -1,3 +1,4 @@
+import { Center } from 'web-components/lib/components/box';
 import { ProjectMetadataForm } from './ProjectMetadataForm';
 
 export default {
@@ -6,5 +7,7 @@ export default {
 };
 
 export const projectMetadataForm = (): JSX.Element => (
-  <ProjectMetadataForm submit={() => Promise.resolve()} />
+  <Center sx={{ m: '0 auto', maxWidth: 740 }}>
+    <ProjectMetadataForm submit={() => Promise.resolve()} />
+  </Center>
 );

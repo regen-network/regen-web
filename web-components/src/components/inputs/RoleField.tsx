@@ -181,21 +181,21 @@ const RoleField: React.FC<Props> = ({
   const saveOrganization = async (
     org: OrganizationFormValues,
   ): Promise<void> => {
-    var savedOrg = await onSaveOrganization(org);
+    const savedOrg = await onSaveOrganization(org);
     closeOrganizationModal();
     form.setFieldValue(field.name, savedOrg);
     setFieldValueInOtherFields(form, field.name, savedOrg);
   };
 
   const saveIndividual = async (user: IndividualFormValues): Promise<void> => {
-    var savedUser = await onSaveIndividual(user);
+    const savedUser = await onSaveIndividual(user);
     closeIndividualModal();
     form.setFieldValue(field.name, savedUser);
     setFieldValueInOtherFields(form, field.name, savedUser);
   };
 
   const saveProfile = async (profile: ProfileFormValues): Promise<void> => {
-    var savedProfile = await onSaveProfile(profile);
+    const savedProfile = await onSaveProfile(profile);
     closeProfileModal();
     form.setFieldValue(field.name, savedProfile);
     setFieldValueInOtherFields(form, field.name, savedProfile);

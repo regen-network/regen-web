@@ -48,7 +48,7 @@ export function formatStandardInfo(info: StandardInfo): string {
  * "December 31, 2016") */
 export function formatDate(
   date: dayjs.ConfigType,
-  format: string = 'MMMM D, YYYY',
+  format = 'MMMM D, YYYY',
   utc?: boolean,
 ): string {
   if (utc) return dayjs.utc(date).format(format);

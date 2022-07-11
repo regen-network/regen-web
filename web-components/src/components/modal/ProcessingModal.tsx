@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-interface Props extends RegenModalProps {}
+type Props = RegenModalProps
 
 const ProcessingModal: React.FC<Props> = ({ open, onClose }) => {
   const styles = useStyles();

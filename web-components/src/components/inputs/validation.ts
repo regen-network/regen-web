@@ -1,20 +1,20 @@
 import { Bech32Address } from '@keplr-wallet/cosmos';
 
-export const requiredMessage: string = 'This field is required';
-export const invalidEmailMessage: string = 'Please enter a valid email address';
-export const invalidPassword: string =
+export const requiredMessage = 'This field is required';
+export const invalidEmailMessage = 'Please enter a valid email address';
+export const invalidPassword =
   'Your password must contain at least 1 letter, 1 number, 1 special character (!@#$%^&*) and at least 8 characters';
-export const requirementAgreement: string = 'You must agree to continue';
-export const invalidAmount: string = 'Please enter a valid amount';
-export const insufficientCredits: string = `You don't have enough credits`;
-export const invalidDate: string = `Invalid date`;
-export const invalidPastDate: string = `Must be a date in the past`;
-export const invalidURL: string = `Please enter a valid URL`;
-export const invalidVCSRetirement: string = `Please enter a valid VCS retirement serial number`;
-export const invalidVCSID: string = `Please enter a valid VCS Project ID`;
-export const invalidJSON: string = 'Please enter valid JSON-LD';
-export const invalidAddress: string = 'Invalid address';
-export const invalidRegenAddress: string = 'Invalid regen address';
+export const requirementAgreement = 'You must agree to continue';
+export const invalidAmount = 'Please enter a valid amount';
+export const insufficientCredits = `You don't have enough credits`;
+export const invalidDate = `Invalid date`;
+export const invalidPastDate = `Must be a date in the past`;
+export const invalidURL = `Please enter a valid URL`;
+export const invalidVCSRetirement = `Please enter a valid VCS retirement serial number`;
+export const invalidVCSID = `Please enter a valid VCS Project ID`;
+export const invalidJSON = 'Please enter valid JSON-LD';
+export const invalidAddress = 'Invalid address';
+export const invalidRegenAddress = 'Invalid regen address';
 
 export const numericOnlyRE = /^\d*$/gm;
 

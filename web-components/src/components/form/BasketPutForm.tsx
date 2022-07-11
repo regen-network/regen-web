@@ -44,7 +44,7 @@ const BasketPutForm: React.FC<FormProps> = ({
   }, [basketOptions]);
 
   const validateHandler = (values: FormValues): FormikErrors<FormValues> => {
-    let errors: FormikErrors<FormValues> = {};
+    const errors: FormikErrors<FormValues> = {};
 
     if (!values.basketDenom) {
       errors.basketDenom = requiredMessage;

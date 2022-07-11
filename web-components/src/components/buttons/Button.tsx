@@ -1,6 +1,8 @@
-import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { Button as MuiButton } from '@mui/material';
+import {
+  Button as MuiButton,
+  ButtonProps as MuiButtonProps,
+} from '@mui/material';
 import cx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
@@ -14,7 +16,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Button({ ...props }): JSX.Element {
+function Button(props: MuiButtonProps): JSX.Element {
   const styles = useStyles();
 
   return (

@@ -35,6 +35,6 @@ module.exports = {
     // ],
     '@typescript-eslint/no-explicit-any': 'off', // TODO enable this line and fix errors
     'react/react-in-jsx-scope': 'off',
-    'react/no-unescaped-entities': 'off',
+    'react/no-unescaped-entities': 'off', // TODO: enable this line and fix errors
   },
 };

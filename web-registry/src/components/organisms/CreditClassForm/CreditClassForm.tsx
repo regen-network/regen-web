@@ -2,47 +2,44 @@ import { Field, Form, Formik } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-
 import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
 import { Body } from 'web-components/lib/components/typography';
-import { ShaclGraphByUriQuery } from '../../../generated/graphql';
-import { ProjectMetadataLD } from '../../../generated/json-ld';
-import { useProjectEditContext } from '../../../pages/ProjectEdit';
-import { ProjectPageFooter } from '../../molecules';
-import { useProjectMetadataFormSubmit } from './hooks/useProjectMetadataFormSubmit';
-import { validationSchema } from './ProjectMetadataForm.utils';
 
-interface ProjectMetadataFormProps {
-  submit: (values: ProjectMetadataValues) => Promise<void>;
-  initialValues?: Partial<ProjectMetadataLD>;
-  graphData?: ShaclGraphByUriQuery;
-}
+// import { ShaclGraphByUriQuery } from 'generated/graphql';
+// import { ProjectMetadataLD } from 'generated/json-ld';
+// import { useProjectEditContext } from 'pages/ProjectEdit';
+import { ProjectPageFooter } from 'components/molecules';
 
 export interface ProjectMetadataValues {
   metadata: string;
 }
 
-export const ProjectMetadataForm = ({
-  submit,
-  initialValues,
-}: ProjectMetadataFormProps): JSX.Element => {
-  const { confirmSave, isEdit } = useProjectEditContext();
+// interface CreditClassFormProps {
+//   submit: (values: CreditClassValues) => Promise<void>;
+//   initialValues?: Partial<CreditClassValues>;
+// }
 
-  const onSubmit = useProjectMetadataFormSubmit({
-    confirmSave,
-    isEdit,
-    submit,
-  });
+// interface CreditClassValues {
+//   admin: string;
+// }
+
+export function CreditClassForm(): JSX.Element {
+  // const { confirmSave, isEdit } = useProjectEditContext();
+
+  // const onSubmit = useProjectMetadataFormSubmit({
+  //   confirmSave,
+  //   isEdit,
+  //   submit,
+  // });
+  // const handleSubmit =
 
   return (
     <Formik
       enableReinitialize
       validateOnMount
-      initialValues={{
-        metadata: initialValues ? JSON.stringify(initialValues) : '',
-      }}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
+      initialValues={{ test: 'any' }}
+      // validationSchema={validationSchema}
+      onSubmit={() => void null}
     >
       {({ submitForm, isValid, isSubmitting, touched }) => {
         return (
@@ -73,4 +70,4 @@ export const ProjectMetadataForm = ({
       }}
     </Formik>
   );
-};
+}

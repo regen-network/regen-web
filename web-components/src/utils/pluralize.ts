@@ -1,7 +1,7 @@
 export function pluralize(
   count: number,
   noun: string,
-  suffix: string = 's',
+  suffix = 's',
 ): string {
   return `${noun}${count > 1 ? suffix : ''}`;
 }

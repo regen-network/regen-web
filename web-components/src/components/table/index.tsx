@@ -1,18 +1,19 @@
 import React from 'react';
+import { withStyles } from '@mui/styles';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
-import { styled, TableSortLabel, TableSortLabelProps } from '@mui/material';
+import { TableSortLabel, TableSortLabelProps } from '@mui/material';
 import DropdownIcon from '../icons/DropdownIcon';
 
-const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+const StyledTableContainer = withStyles(theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     overflowY: 'hidden',
   },
-}));
+}))(TableContainer);
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+const StyledTableRow = withStyles(theme => ({
   root: {
     color: theme.palette.info.dark,
     height: theme.spacing(25),
@@ -26,9 +27,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
       padding: theme.spacing(4, 4),
     },
   },
-}));
+}))(TableRow);
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = withStyles(theme => ({
   head: {
     fontFamily: theme.typography.h1.fontFamily,
     fontWeight: 800,
@@ -79,7 +80,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       },
     },
   },
-}));
+}))(TableCell);
 
 const StyledTableSortLabel: React.FC<TableSortLabelProps> = props => {
   return (

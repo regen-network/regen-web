@@ -195,7 +195,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 }));
 
 function getThumbnailStyle(thumbsTranslate: number): object {
-  const translate: string = `translate(${thumbsTranslate}px, 0)`;
+  const translate = `translate(${thumbsTranslate}px, 0)`;
   return {
     WebkitTransform: translate,
     MozTransform: translate,
@@ -218,7 +218,7 @@ export default function ProjectMedia({
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
-  let thumbnailsWrapper: any = useRef(null);
+  const thumbnailsWrapper: any = useRef(null);
   const [thumbnailsWrapperWidth, setThumbnailsWrapperWidth] = useState(0);
   const [thumbnailsTranslate, setThumbnailsTranslate] = useState(0);
 

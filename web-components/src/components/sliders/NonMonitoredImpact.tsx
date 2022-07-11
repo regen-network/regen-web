@@ -43,7 +43,7 @@ export default function NonMonitoredImpact({
   };
 
   // TODO build reusable HOC slider component
-  let slider: any = useRef(null);
+  const slider: any = useRef(null);
 
   const slickPrev = useCallback(() => {
     if (slider && slider.current) {

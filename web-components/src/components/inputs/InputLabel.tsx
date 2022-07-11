@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme, LabelProps>((theme: Theme) => ({
       color: theme.palette.primary.contrastText,
     },
     '&::after': {
-      content: !!props.optional ? '" (optional)"' : '',
+      content: props.optional ? '" (optional)"' : '',
       fontWeight: 'normal',
       color: theme.palette.info.main,
       [theme.breakpoints.up('sm')]: {

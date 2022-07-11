@@ -12,7 +12,7 @@ interface GlanceCardProps extends OptimizeImageProps {
   text: string[];
   imgSrc?: string;
   geojson?: any;
-  isGISFile?: Boolean;
+  isGISFile?: boolean;
   mapboxToken?: string;
 }
 

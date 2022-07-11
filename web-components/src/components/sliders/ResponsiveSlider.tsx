@@ -167,7 +167,7 @@ export default function ResponsiveSlider({
 
   const styles = useStyles({ gridView, padding, title, itemWidth });
 
-  let slider: any = useRef(null);
+  const slider: any = useRef(null);
 
   const slickPrev = useCallback(() => {
     if (slider && slider.current) {

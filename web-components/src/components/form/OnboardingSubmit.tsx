@@ -48,7 +48,7 @@ export const OnboardingSubmit: React.FC<Props> = ({
 }) => {
   const classes = useStyles();
   return (
-    <Grid container justifyContent={!!onCancel ? 'space-between' : 'flex-end'}>
+    <Grid container justifyContent={onCancel ? 'space-between' : 'flex-end'}>
       {!!onCancel && (
         <ContainedButton
           variant="text"

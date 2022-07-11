@@ -12,5 +12,5 @@ export const createCreditClassCard = () => (
 );
 
 export const createCreditClassCardFirstProject = () => (
-  <CreateCreditClassCard isFirstProject onClick={voidFunc} />
+  <CreateCreditClassCard isFirstCreditClass onClick={voidFunc} />
 );

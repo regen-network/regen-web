@@ -22,11 +22,11 @@ export function truncate(
       rest: '',
     };
   }
-  let truncated: string = '';
+  let truncated = '';
   let restLength = str.length;
 
   if (sentences) {
-    for (var i: number = 0; i < sentences.length; i++) {
+    for (let i = 0; i < sentences.length; i++) {
       if (
         restLength > restMinLength
           ? truncated.length < maxLength

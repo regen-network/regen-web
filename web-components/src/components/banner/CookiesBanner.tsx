@@ -13,8 +13,8 @@ interface CookiesBannerProps {
   privacyUrl: string;
 }
 
-const rejectCookieName: string = 'cookies-rejected';
-const cookieName: string =
+const rejectCookieName = 'cookies-rejected';
+const cookieName =
   'gatsby-plugin-google-analytics-gdpr_cookies-enabled';
 
 function getCookieValue(name: string): string | undefined {

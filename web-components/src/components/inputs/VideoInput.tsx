@@ -108,7 +108,7 @@ function VideoInput({
     >
       {() => (
         <>
-          {!!field.value ? (
+          {field.value ? (
             <>
               <Collapse
                 classes={{

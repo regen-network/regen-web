@@ -39,7 +39,7 @@ export const getISOString = async (
         .sort((p: any) => p.relevance);
 
       const result = placeCodes?.[0]?.properties?.short_code || '';
-      if (!!result) {
+      if (result) {
         placeCode = result;
         const isResultValid = countryKey.toUpperCase() !== result.toUpperCase();
         if (isResultValid && postalCode) placeCode += ` ${postalCode}`;

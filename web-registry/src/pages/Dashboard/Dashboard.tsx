@@ -17,6 +17,7 @@ import { useWallet } from '../../lib/wallet';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
 const MyProjects = React.lazy(() => import('./MyProjects'));
+const MyCreditClasses = React.lazy(() => import('./MyCreditClasses'));
 
 const LazyLoad: React.FC = ({ children }) => (
   <Suspense
@@ -71,7 +72,7 @@ const Dashboard = (): JSX.Element => {
       hidden: !isIssuer,
       content: (
         <LazyLoad>
-          <MyProjects />
+          <MyCreditClasses />
         </LazyLoad>
       ),
     },

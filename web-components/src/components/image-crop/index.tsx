@@ -69,7 +69,7 @@ export default function ImageCrop({
   const mobileMatches = useMediaQuery('(max-width:834px)');
 
   const showCroppedImage = useCallback(async () => {
-    if (!!completedCrop) {
+    if (completedCrop) {
       try {
         const currentImage = imgRef.current;
         setLoading(true);

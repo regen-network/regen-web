@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration';
 
 import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 import { QueryClassResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
@@ -9,21 +7,13 @@ import {
   QueryBasketResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
+import { formatDuration } from 'web-components/lib/utils/format';
+
 import useBankQuery from '../../../../hooks/useBankQuery';
 import useBasketQuery from '../../../../hooks/useBasketQuery';
 import { BasketOverviewProps } from '../../../../components/organisms';
 import { getMetadata } from '../../../../lib/metadata-graph';
 import useQueryListClassInfo from '../../../../hooks/useQueryListClassInfo';
-
-dayjs.extend(duration);
-
-function formatDuration(seconds: number): string {
-  const _duration = dayjs.duration(seconds, 'seconds');
-  const durationArr = _duration.humanize().split(' ');
-  const condition = durationArr[1].charAt(durationArr[1].length - 1) === 's';
-  const textPart = condition ? durationArr[1].slice(0, -1) : durationArr[1];
-  return `${durationArr[0]}-${textPart}`;
-}
 
 type BasketClassInfo = {
   id: string;

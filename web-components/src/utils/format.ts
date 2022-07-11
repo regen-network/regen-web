@@ -1,7 +1,9 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import duration from 'dayjs/plugin/duration';
 
 dayjs.extend(utc);
+dayjs.extend(duration);
 
 export function getFormattedDate(
   date?: string | Date | null,
@@ -59,4 +61,12 @@ export function formatNumber(num: number | string | undefined): string {
   if (!num) return '-';
   if (typeof num === 'string') num = parseFloat(num);
   return num > 0 ? Math.floor(num).toLocaleString() : '-';
+}
+
+export function formatDuration(seconds: number): string {
+  const _duration = dayjs.duration(seconds, 'seconds');
+  const durationArr = _duration.humanize().split(' ');
+  const condition = durationArr[1].charAt(durationArr[1].length - 1) === 's';
+  const textPart = condition ? durationArr[1].slice(0, -1) : durationArr[1];
+  return `${durationArr[0]}-${textPart}`;
 }

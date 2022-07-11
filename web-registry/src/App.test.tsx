@@ -29,6 +29,7 @@ const mockedAuth0 = useAuth0 as jest.Mock;
 
 describe('App', () => {
   beforeAll(() => {
+    // eslint-disable-next-line
     // @ts-ignore
     window.matchMedia = createMatchMedia(window.innerWidth);
   });

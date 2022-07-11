@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { MediaForm, MediaValues } from './MediaForm';
 
 export default {
@@ -11,11 +12,11 @@ const initialValues: MediaValues = {
   'regen:landStewardPhoto': { '@type': 'schema:URL', '@value': '' },
 };
 
-export const mediaFormLegacy = () => (
+export const mediaFormLegacy: FC = () => (
   <MediaForm initialValues={initialValues} submit={async () => void null} />
 );
 
-export const mediaForm = () => (
+export const mediaForm: FC = () => (
   <MediaForm
     creditClassId="1235"
     initialValues={initialValues}

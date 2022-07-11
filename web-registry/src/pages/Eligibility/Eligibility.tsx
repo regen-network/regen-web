@@ -19,7 +19,7 @@ const Eligibility: React.FC = () => {
   }
 
   async function submitIncludesGrasslands(
-    values: IncludesGrasslandsValues,
+    values: IncludesGrasslandsValues, // eslint-disable-line
   ): Promise<void> {
     // TODO: functionality:
     // if includesGrasslands === true, next screen is 'Eligibility: Land Use History'

@@ -19,20 +19,21 @@ module.exports = {
     },
     'import/resolver': {
       typescript: {},
+      node: {
+        paths: ['src'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
     },
   },
   rules: {
-    // TODO possibly delete the following - leaving for now in case we want to
-    // enforce types on all functions, but the this config setup still enforces
-    // on module boundaries, which is the major concern. This allows implicit
-    // types as long as they aren't exported
-
-    // '@typescript-eslint/explicit-function-return-type': [
-    //   'error',
-    //   {
-    //     allowExpressions: true,
-    //   },
-    // ],
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/explicit-function-return-type': [
+      'error',
+      {
+        allowExpressions: true,
+      },
+    ],
+    'no-empty': 'off',
     '@typescript-eslint/no-explicit-any': 'off', // TODO enable this line and fix errors
     'react/react-in-jsx-scope': 'off',
     'react/no-unescaped-entities': 'off', // TODO: enable this line and fix errors

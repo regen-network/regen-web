@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { CreateCreditClassCard } from './CreateCreditClassCard';
 
 export default {
@@ -7,10 +8,10 @@ export default {
 
 const voidFunc = (): void => void null;
 
-export const createCreditClassCard = () => (
+export const createCreditClassCard: FC = () => (
   <CreateCreditClassCard onClick={voidFunc} />
 );
 
-export const createCreditClassCardFirstProject = () => (
+export const createCreditClassCardFirstProject: FC = () => (
   <CreateCreditClassCard isFirstCreditClass onClick={voidFunc} />
 );

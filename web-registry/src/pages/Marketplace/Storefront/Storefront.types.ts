@@ -19,7 +19,7 @@ export type SellOrderStatus =
 export type NormalizedSellOrder = {
   id: string;
   expiration?: string;
-  project?: string;
+  project?: { name?: string; handle: string };
   status?: SellOrderStatus;
   askAmount: string;
   askDenom: string;

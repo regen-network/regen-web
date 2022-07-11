@@ -26,11 +26,14 @@ const getSellOrdersTableRow = ({
     creditClass,
     batchStartDate,
     batchEndDate,
+    project,
   },
 }: Props): React.ReactNode[] => [
   <Link href={`/marketplace/sell-order/${id}`}>{id}</Link>,
   <Box sx={{ color: 'info.main' }}>{dayjs(expiration).fromNow()}</Box>,
-  <Link href={`/projects/Wilmot}`}>{'??'}</Link>,
+  <WithLoader isLoading={!project?.name}>
+    <Link href={`/projects/${project?.handle}}`}>{project?.name}</Link>
+  </WithLoader>,
   <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
     <Box sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
       {askDenom === 'usdc' && <USDCIcon />}

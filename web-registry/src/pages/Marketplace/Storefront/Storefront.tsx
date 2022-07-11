@@ -16,8 +16,12 @@ import { getHashUrl } from '../../../lib/block-explorer';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import { BUY_SELL_ORDER_ACTION } from './Storefront.constants';
 import { sellOrdersMock, txHashMock } from './Storefront.mock';
-import normalizeSellOrders from './Storefront.normalizer';
+import {
+  normalizeProjectsNameByHandle,
+  normalizeSellOrders,
+} from './Storefront.normalizer';
 import { sortByExpirationDate } from './Storefront.utils';
+import { useMoreProjectsQuery } from '../../../generated/graphql';
 
 export const Storefront = (): JSX.Element => {
   const sellOrdersResponse = { sellOrders: sellOrdersMock };
@@ -27,6 +31,8 @@ export const Storefront = (): JSX.Element => {
     [sellOrders],
   );
   const batchInfos = useQueryListBatchInfo(batchDenoms) ?? [];
+  const { data: projectsData } = useMoreProjectsQuery();
+
   const [selectedSellOrder, setSelectedSellOrder] = useState<number | null>(
     null,
   );
@@ -38,9 +44,14 @@ export const Storefront = (): JSX.Element => {
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const isBuyModalOpen = selectedSellOrder !== null;
 
+  const projectsNameByHandleMap = normalizeProjectsNameByHandle({
+    projects: projectsData?.allProjects,
+  });
+
   const normalizedSellOrders = normalizeSellOrders({
     batchInfos,
     sellOrders,
+    projectsNameByHandleMap,
   }).sort(sortByExpirationDate);
 
   const buySellOrderSubmit = useBuySellOrderSubmit({

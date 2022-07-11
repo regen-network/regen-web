@@ -174,7 +174,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           //   {batch.project_location}
           // </Box>,
         ].filter(item => {
-          return !(creditClassId && item?.key === 'class_id');
+          return !(creditClassId && item?.key === 'classId');
           // && !(projectPage && item?.key === 'project_location')
         }),
       )}

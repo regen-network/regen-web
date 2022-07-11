@@ -11,10 +11,7 @@ import { truncate } from 'web-components/lib/utils/truncate';
 import { Link } from '../atoms';
 import { NoCredits } from '../molecules';
 import { getAccountUrl } from '../../lib/block-explorer';
-import type {
-  BatchInfoWithBalance,
-  BatchInfoWithSupply,
-} from '../../types/ledger/ecocredit';
+import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -26,7 +23,7 @@ const BreakText = styled('div')({
 });
 
 type EcocreditsTableProps = {
-  credits?: BatchInfoWithSupply[] | BatchInfoWithBalance[];
+  credits?: BatchInfoWithBalance[];
   renderActionButtons?: RenderActionButtonsFunc;
 };
 
@@ -58,7 +55,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
         'Credit Class',
         <BreakText>Amount Tradable</BreakText>,
         <BreakText>Amount Retired</BreakText>,
-        <BreakText>Balance</BreakText>,
+        <BreakText>Amount Escrowed</BreakText>,
         'Batch Start Date',
         'Batch End Date',
         // 'Project Location', TODO: regen-network/regen-registry#1015
@@ -72,14 +69,9 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
           <Link key="class_id" href={`/credit-classes/${row.classId}`}>
             {row.classId}
           </Link>,
-          formatNumber(
-            (row as BatchInfoWithSupply)?.tradableSupply ||
-              (row as BatchInfoWithBalance)?.balance?.tradableAmount,
-          ),
-          formatNumber(
-            (row as BatchInfoWithSupply)?.retiredSupply ||
-              (row as BatchInfoWithBalance)?.balance?.retiredAmount,
-          ),
+          formatNumber(row.balance?.tradableAmount),
+          formatNumber(row.balance?.retiredAmount),
+          formatNumber(row.balance?.escrowedAmount),
           <GreyText>{formatDate(row.startDate)}</GreyText>,
           <GreyText>{formatDate(row.endDate)}</GreyText>,
           // row.project_location,  TODO: regen-network/regen-registry#1015

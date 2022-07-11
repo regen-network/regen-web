@@ -1,132 +1,38 @@
-import React from 'react';
-import { makeStyles } from '@mui/styles';
-import { Link } from 'react-router-dom';
-import Grid from '@mui/material/Grid';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
-import { Formik, Form, Field } from 'formik';
-import { RadioGroup } from 'formik-mui';
+import Grid from '@mui/material/Grid';
 import cx from 'clsx';
+import { Field, Form, Formik } from 'formik';
+import { RadioGroup } from 'formik-mui';
+import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import { Link } from 'react-router-dom';
 
-import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
+import Submit from 'web-components/lib/components/form/Submit';
+import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
+import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
+import { Image } from 'web-components/lib/components/image';
+import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
+import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
+import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
+import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
+import Toggle from 'web-components/lib/components/inputs/Toggle';
+import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
+import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 import {
   Body,
   Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
-import Toggle from 'web-components/lib/components/inputs/Toggle';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
-import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
-import { Image } from 'web-components/lib/components/image';
-import Submit from 'web-components/lib/components/form/Submit';
-import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
-import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
-import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
 
-import { useWallet } from '../../lib/wallet';
-import { Box } from '@mui/material';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    height: '100%',
-    borderRadius: theme.spacing(2),
-  },
-  flex: {
-    display: 'flex',
-  },
-  flexColumn: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  thumbnailCard: {
-    display: 'flex',
-    alignItems: 'center',
-    height: theme.spacing(26.75),
-  },
-  cardContent: {
-    display: 'flex',
-    alignItems: 'center',
-    '&:last-child': {
-      paddingBottom: theme.spacing(4),
-    },
-  },
-  projectThumbnail: {
-    height: theme.spacing(12.5),
-    width: theme.spacing(12.5),
-    borderRadius: 5,
-  },
-  description: {
-    '& a': {
-      cursor: 'pointer',
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.typography.pxToRem(16),
-      marginBottom: theme.spacing(3),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: 0,
-      fontSize: theme.typography.pxToRem(14),
-    },
-  },
-  field: {
-    [theme.breakpoints.up('sm')]: {
-      marginBottom: theme.spacing(12),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(10),
-    },
-  },
-  stateCountryGrid: {
-    [theme.breakpoints.up('sm')]: {
-      flexWrap: 'nowrap',
-    },
-  },
-  stateCountryTextField: {
-    marginTop: theme.spacing(6),
-    [theme.breakpoints.up('sm')]: {
-      '&:first-of-type': {
-        marginRight: theme.spacing(2.375),
-      },
-      '&:last-of-type': {
-        marginLeft: theme.spacing(2.375),
-      },
-    },
-  },
-  postalCodeField: {
-    marginTop: theme.spacing(6),
-  },
-  creditInput: {
-    width: theme.spacing(42.5),
-  },
-  creditWidget: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  regenIcon: {
-    height: theme.typography.pxToRem(26),
-    alignSelf: 'flex-start',
-    marginRight: theme.spacing(1.5),
-  },
-  marginRight: {
-    marginRight: theme.spacing(4),
-  },
-  info: {
-    cursor: 'pointer',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontWeight: 'bold',
-    fontSize: theme.typography.pxToRem(16),
-  },
-  toggle: {
-    backgroundColor: theme.palette.primary.main,
-  },
-}));
+import { Box, useTheme } from '@mui/material';
+import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
+import { useWallet } from '../../../lib/wallet';
+import { getSellOrderLabel } from './BuyCreditsModal.utils';
+import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
+import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 
 export interface Credits {
   purchased: number;
@@ -134,7 +40,10 @@ export interface Credits {
 }
 
 interface BuyCreditsModalProps extends RegenModalProps {
-  onTxQueued: (txBytes: Uint8Array) => void;
+  open: boolean;
+  onClose: () => void;
+  onTxQueued?: (txBytes: Uint8Array) => void;
+  onSubmit?: (values: any) => Promise<void>;
   initialValues?: BuyCreditsValues;
   project: {
     id: string;
@@ -148,16 +57,21 @@ interface BuyCreditsModalProps extends RegenModalProps {
 }
 
 export interface BuyCreditsValues {
-  retirementBeneficiary: string;
+  retirementNote: string;
   stateProvince: string;
   country: string;
   postalCode: string;
   retirementAction: string;
   creditCount: number;
+  price: number;
+  askDenom: string;
+  batchDenom: string;
+  sellOrderId: string;
 }
 
 const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   open,
+  onSubmit,
   onClose,
   onTxQueued,
   initialValues,
@@ -165,15 +79,18 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   apiServerUrl,
   imageStorageBaseUrl,
 }) => {
-  const styles = useStyles();
+  const styles = useBuyCreditsModalStyles();
+  const theme = useTheme();
   const walletContext = useWallet();
 
   const submit = async (values: BuyCreditsValues): Promise<void> => {
     const recipient = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'; // test account
     const amount = values.creditCount;
-    if (walletContext.signSend && walletContext.broadcast) {
+    if (onSubmit) {
+      onSubmit(values);
+    } else if (walletContext.signSend && walletContext.broadcast) {
       const txBytes = await walletContext.signSend(amount, recipient);
-      onTxQueued(txBytes);
+      onTxQueued && onTxQueued(txBytes);
       onClose();
     }
   };
@@ -186,46 +103,39 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           align="center"
           sx={{ pt: 0, pb: { xs: 6, sm: 7.5 }, px: { xs: 0, sm: 7.5 } }}
         >
-          Buy Credits
+          {'Buy Ecocredits'}
         </Title>
-        <Card className={cx(styles.thumbnailCard, styles.field)}>
-          <CardContent className={styles.cardContent}>
-            <Image
-              className={cx(styles.projectThumbnail, styles.marginRight)}
-              src={
-                project.image ||
-                'https://regen-registry.s3.amazonaws.com/projects/wilmot/time-controlled-rotational-grazing.jpg'
-              } // TODO: more generic fallback
-              imageStorageBaseUrl={imageStorageBaseUrl}
-              apiServerUrl={apiServerUrl}
-              backgroundImage
-            />
-            <div className={styles.flexColumn}>
-              <Title sx={{ fontSize: { xs: 16, sm: 21 } }}>
-                {project.creditDenom && ReactHtmlParser(project.creditDenom)}{' '}
-                Credits
-              </Title>
-              <Subtitle size="lg" mobileSize="xs">
-                <Link to={`/projects/${project.id}`} target="_blank">
-                  {project.name}
-                </Link>
-              </Subtitle>
-            </div>
-          </CardContent>
-        </Card>
+        {project.name && (
+          <Card className={cx(styles.thumbnailCard, styles.field)}>
+            <CardContent className={styles.cardContent}>
+              <Image
+                className={cx(styles.projectThumbnail, styles.marginRight)}
+                src={
+                  project.image ||
+                  'https://regen-registry.s3.amazonaws.com/projects/wilmot/time-controlled-rotational-grazing.jpg'
+                } // TODO: more generic fallback
+                imageStorageBaseUrl={imageStorageBaseUrl}
+                apiServerUrl={apiServerUrl}
+                backgroundImage
+              />
+              <div className={styles.flexColumn}>
+                <Title sx={{ fontSize: { xs: 16, sm: 21 } }}>
+                  {project.creditDenom && ReactHtmlParser(project.creditDenom)}{' '}
+                  Credits
+                </Title>
+                <Subtitle size="lg" mobileSize="xs">
+                  <Link to={`/projects/${project.id}`} target="_blank">
+                    {project.name}
+                  </Link>
+                </Subtitle>
+              </div>
+            </CardContent>
+          </Card>
+        )}
         <Formik
           enableReinitialize
           validateOnMount
-          initialValues={
-            initialValues || {
-              creditCount: 0,
-              retirementBeneficiary: '',
-              stateProvince: '',
-              country: '',
-              postalCode: '',
-              retirementAction: 'autoretire',
-            }
-          }
+          initialValues={initialValues || BUY_CREDITS_MODAL_DEFAULT_VALUES}
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             try {
@@ -240,19 +150,41 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
             return (
               <div>
                 <Form translate="yes">
+                  <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
+                    {'Sell order ID'}
+                  </Title>
+                  <Field
+                    name="sellOrderId"
+                    component={SelectTextField}
+                    options={[
+                      {
+                        label: getSellOrderLabel(initialValues),
+                        value: initialValues?.sellOrderId,
+                      },
+                    ]}
+                    sx={{ mb: theme.spacing(10.5) }}
+                    disabled
+                  />
                   <div className={styles.field}>
                     <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                      Number of credits
+                      Amount of credits
                     </Title>
                     <Body
                       size="md"
                       mobileSize="md"
-                      sx={{ color: 'info.main', mb: 3 }}
+                      sx={{
+                        color: 'primary.contrastText',
+                        fontWeight: 700,
+                        mb: 3,
+                      }}
                     >
-                      {`5 REGEN each.  ${
-                        (project?.credits?.issued || 0) -
-                        (project?.credits?.purchased || 0)
-                      } credits available`}
+                      {`${initialValues?.price} REGEN/per credit `}
+                    </Body>
+                    <Body
+                      size="md"
+                      sx={{ color: 'primary.light', fontWeight: 700, mb: 3 }}
+                    >
+                      Batch denom: C01001-20190101-20200101-001
                     </Body>
                     <div className={styles.creditWidget}>
                       <div className={styles.marginRight}>
@@ -260,6 +192,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           className={cx(styles.creditInput)}
                           component={NumberTextField}
                           name="creditCount"
+                          min={1}
                         />
                       </div>
                       <Title variant="h6" sx={{ mr: 4 }}>
@@ -271,13 +204,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
                           <RegenTokenIcon className={styles.regenIcon} />
                           <Title variant="h4" sx={{ mr: 1.5 }}>
-                            500
+                            {values.creditCount * (initialValues?.price ?? 0)}
                           </Title>
-                          <Label size="sm">REGEN</Label>
+                          <Label size="sm" sx={{ color: 'info.dark' }}>
+                            {'REGEN'}
+                          </Label>
                         </Box>
-                        <Body size="md" mobileSize="md">
-                          ($2345.00 USD)
-                        </Body>
                       </div>
                     </div>
                   </div>
@@ -310,14 +242,13 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   </Field>
                   <Collapse in={values['retirementAction'] === 'autoretire'}>
                     <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                      Retirement beneficiary
+                      Retirement note
                     </Title>
                     <Field
                       className={styles.field}
                       component={ControlledTextField}
-                      label="Your name or organization name"
-                      description="Please note that this name will be publically viewable on the ledger."
-                      name="retirementBeneficiary"
+                      label="Add retirement transaction details (stored in the tx memo)"
+                      name="retirementNote"
                       optional
                     />
                     <div className={styles.flex}>

@@ -44,15 +44,23 @@ export const Storefront = (): JSX.Element => {
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const isBuyModalOpen = selectedSellOrder !== null;
 
-  const projectsNameByHandleMap = normalizeProjectsNameByHandle({
-    projects: projectsData?.allProjects,
-  });
+  const projectsNameByHandleMap = useMemo(
+    () =>
+      normalizeProjectsNameByHandle({
+        projects: projectsData?.allProjects,
+      }),
+    [projectsData],
+  );
 
-  const normalizedSellOrders = normalizeSellOrders({
-    batchInfos,
-    sellOrders,
-    projectsNameByHandleMap,
-  }).sort(sortByExpirationDate);
+  const normalizedSellOrders = useMemo(
+    () =>
+      normalizeSellOrders({
+        batchInfos,
+        sellOrders,
+        projectsNameByHandleMap,
+      }).sort(sortByExpirationDate),
+    [batchInfos, sellOrders, projectsNameByHandleMap],
+  );
 
   const buySellOrderSubmit = useBuySellOrderSubmit({
     setCardItems,

@@ -30,6 +30,8 @@ const ProjectSelect: React.FC<FieldProps> = ({
   const [projectOptions, setProjectOptions] = useState<Option[]>([]);
 
   useEffect(() => {
+    let ignore = false;
+
     const fetchData = async () => {
       if (!creditClassId) return;
       const data = await queryProjectsByClass(creditClassId);
@@ -45,9 +47,10 @@ const ProjectSelect: React.FC<FieldProps> = ({
           };
         }) || [];
 
-      if (saveOptions) saveOptions(options);
-
-      setProjectOptions([defaultProjectOption, ...options]);
+      if (!ignore) {
+        if (saveOptions) saveOptions(options);
+        setProjectOptions([defaultProjectOption, ...options]);
+      }
     };
 
     setProjectOptions([]);
@@ -58,6 +61,10 @@ const ProjectSelect: React.FC<FieldProps> = ({
     if (!initialSelection) setFieldValue(name, '');
 
     fetchData();
+
+    return () => {
+      ignore = true;
+    };
   }, [setFieldValue, name, initialSelection, saveOptions, creditClassId]);
 
   return (

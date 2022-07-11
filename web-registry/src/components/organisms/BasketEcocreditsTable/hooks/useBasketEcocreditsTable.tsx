@@ -40,14 +40,13 @@ const useBasketEcocreditsTable = (
   // prepare the list of unique project ids
   useEffect(() => {
     if (!basketBatches) return;
-    let _projects = [
-      ...new Map(
-        basketBatches.map(basketBatch => [
-          basketBatch.batch?.projectId || '',
-          basketBatch.batch?.projectId || '',
-        ]),
-      ).values(),
+
+    const _projects = [
+      ...new Set(
+        basketBatches.map(basketBatch => basketBatch.batch?.projectId || ''),
+      ),
     ];
+
     setProjects(_projects.filter(id => id !== ''));
   }, [basketBatches]);
 

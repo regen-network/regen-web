@@ -9,9 +9,9 @@ type Props = {
 
 const normalizeSellOrders = ({
   batchInfos,
-  sellOrders = [],
+  sellOrders,
 }: Props): NormalizedSellOrder[] =>
-  sellOrders.map(
+  sellOrders?.map(
     (
       { askAmount, askDenom, batchDenom, id, quantity, seller, expiration },
       index,
@@ -20,16 +20,18 @@ const normalizeSellOrders = ({
       expiration,
       project: undefined,
       status: 'Partially filled',
-      askAmount,
-      askDenom,
+      askAmount: askAmount,
+      askDenom: batchDenom,
       amountAvailable: quantity,
       amountSold: undefined,
       creditClass: '',
-      batchDenom,
-      batchStartDate: batchInfos ? batchInfos[index]?.batch?.startDate : null,
-      batchEndDate: batchInfos ? batchInfos[index]?.batch?.endDate : null,
+      batchDenom: batchDenom,
+      batchStartDate: batchInfos
+        ? batchInfos[index]?.batch?.startDate
+        : undefined,
+      batchEndDate: batchInfos ? batchInfos[index]?.batch?.endDate : undefined,
       seller,
     }),
-  );
+  ) ?? [];
 
 export default normalizeSellOrders;

@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import { ImageActionCard } from 'web-components/lib/components/cards/ImageActionCard';
 import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 
-import DefaultCreditClassImage from '../../../assets/default-credit-class.png';
+import DefaultCreditClassImage from '../../assets/default-credit-class.png';
 
 interface ClassOptionProps {
   title: string;

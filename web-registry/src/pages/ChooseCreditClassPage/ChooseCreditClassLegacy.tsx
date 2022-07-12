@@ -3,12 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { ChooseCreditClassGrid } from './ChooseCreditClass.Grid';
 import { ChooseCreditClassItem } from './ChooseCreditClass.Item';
-import { validate, getProjectPageBaseData } from '../../../lib/rdf';
+import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import {
   useUpdateProjectByIdMutation,
   useAllCreditClassesQuery,
   useShaclGraphByUriQuery,
-} from '../../../generated/graphql';
+} from '../../generated/graphql';
 import { useErrorTimeout } from './hooks/useErrorTimeout';
 
 const ChooseCreditClassLegacy: React.FC = () => {

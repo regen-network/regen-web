@@ -9,7 +9,7 @@ export * from './BuyerCreditsTransfer';
 export * from './Buyers';
 export * from './Certificate';
 export * from './CreateBatch';
-export * from './ChooseCreditClass';
+export * from './ChooseCreditClassPage';
 export * from './CreateCreditClass';
 export * from './CreateMethodology';
 export * from './CreditClassDetails';

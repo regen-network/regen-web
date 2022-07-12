@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ChooseCreditClass } from '../../components/organisms/ChooseCreditClass/ChooseCreditClass';
-import { ChooseCreditClassLegacy } from '../../components/organisms/ChooseCreditClass/ChooseCreditClassLegacy';
+import { ChooseCreditClass } from './ChooseCreditClass';
+import { ChooseCreditClassLegacy } from './ChooseCreditClassLegacy';
 
 const ChooseCreditClassPage: React.FC<{ legacy?: boolean }> = ({ legacy }) => {
   return legacy ? <ChooseCreditClassLegacy /> : <ChooseCreditClass />;

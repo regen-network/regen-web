@@ -6,11 +6,11 @@ import { ChooseCreditClassGrid } from './ChooseCreditClass.Grid';
 import { ChooseCreditClassItem } from './ChooseCreditClass.Item';
 import { useGetCreditClassOptions } from './hooks/useGetCreditClassOptions';
 import { useErrorTimeout } from './hooks/useErrorTimeout';
-import { validate, getProjectPageBaseData } from '../../../lib/rdf';
+import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import {
   useUpdateProjectByIdMutation,
   useShaclGraphByUriQuery,
-} from '../../../generated/graphql';
+} from '../../generated/graphql';
 
 const ChooseCreditClass: React.FC = () => {
   const navigate = useNavigate();

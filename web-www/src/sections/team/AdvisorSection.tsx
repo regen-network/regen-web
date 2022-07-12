@@ -23,7 +23,7 @@ const AdvisorSection = (): JSX.Element => {
   const { background, sanityTeamPage } =
     useStaticQuery<TeamAdvisorSectionQuery>(query);
   const data = sanityTeamPage?.advisorSection;
-  const teamMembers = !!data?.members ? data.members : [];
+  const teamMembers = data?.members ? data.members : [];
   return (
     <TeamSection
       bgUrl={background?.publicURL || ''}

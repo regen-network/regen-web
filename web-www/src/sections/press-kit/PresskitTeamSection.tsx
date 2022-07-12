@@ -52,7 +52,7 @@ const PressKitTeamSection = (): JSX.Element => {
     sanityPresskitPage: data,
   } = useStaticQuery<PresskitTeamSectionQuery>(query);
   const content = data?.teamSection;
-  const members = !!content?.members || [];
+  const members = !!content?.members ? content.members : [];
   return (
     <BackgroundImage fluid={background?.childImageSharp?.fluid as FluidObject}>
       <TeamSection

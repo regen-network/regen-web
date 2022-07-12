@@ -72,7 +72,7 @@ export const TeamSection = ({
       }}
     >
       <Grid justifyContent="center" container direction="row">
-        {members?.length &&
+        {!!members?.length &&
           members.length > 0 &&
           members.map((m, index) => {
             return (

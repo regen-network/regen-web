@@ -11,6 +11,7 @@
     "@sanity/image-url": "^1.0.1",
     "axios": "^0.21.1",
     "clsx": "1.1.0",
+    "eslint-config-react-app": "^5.2.1",
     "formik": "2.2.9",
     "gatsby": "^2.21.0",
     "gatsby-background-image": "^1.1.1",
@@ -56,9 +57,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "lint": "tsc --noEmit && eslint src/**/*.{js,jsx,ts,tsx,json}",
-    "lint-fix": "tsc --noEmit && eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "format": "prettier --write \"**/*.{js,jsx,json,md,tsx}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

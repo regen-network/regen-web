@@ -8,9 +8,9 @@
     "copy-assets": "cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",
     "watch": "yarn remove-previous-files && tsc --watch && yarn copy-assets",
     "build": "yarn remove-previous-files && tsc && yarn copy-assets",
-    "lint": "tsc --noEmit && eslint src/**/*.{js,jsx,ts,tsx,json}",
-    "lint-fix": "tsc --noEmit && eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
-    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+    "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
+    "lint": "tsc --noEmit && eslint -c .eslintrc.js --max-warnings 0 'src/**/*.ts{,x}'",
+    "lint-fix": "tsc --noEmit && eslint --fix -c .eslintrc.js --max-warnings 0 'src/**/*.ts{,x}'"
   },
   "browserslist": [
     ">0.2%",

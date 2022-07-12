@@ -6,6 +6,7 @@ import clsx from 'clsx';
 
 import { Theme } from '../../theme/muiTheme';
 import TextField, { RegenTextFieldProps } from '../inputs/TextField';
+import { getFormattedNumber } from '../../utils/format';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textField: {
@@ -74,7 +75,9 @@ const AuxiliarLabel: React.FC<AuxiliarLabelProps> = ({
   return (
     <span className={className}>
       <span className={styles.availableLabel}>Available:</span>{' '}
-      <span className={styles.availableAmount}>{availableAmount}</span>
+      <span className={styles.availableAmount}>
+        {getFormattedNumber(availableAmount)}
+      </span>
       <span className={styles.denom}>{denom}</span>
     </span>
   );

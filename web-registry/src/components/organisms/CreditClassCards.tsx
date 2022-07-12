@@ -6,7 +6,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid, { GridProps } from '@mui/material/Grid';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
+import { ImageActionCard } from 'web-components/lib/components/cards/ImageActionCard';
 import {
   BlockContent,
   blocksToText,

@@ -24,6 +24,7 @@ type Props = {
   btnText: string;
   className?: string;
   disabled?: boolean;
+  startIcon?: React.ReactNode;
 };
 
 const ImageActionCard: React.FC<Props> = props => {
@@ -60,6 +61,7 @@ const ImageActionCard: React.FC<Props> = props => {
           sx={{ mt: 5, width: '100%' }}
           onClick={props.onClick}
           disabled={props.disabled}
+          startIcon={props.startIcon}
         >
           {props.btnText}
         </OutlinedButton>
@@ -68,4 +70,4 @@ const ImageActionCard: React.FC<Props> = props => {
   );
 };
 
-export default ImageActionCard;
+export { ImageActionCard };

@@ -25,14 +25,12 @@ const UserMenuItem: React.FC<UserMenuItemProps> = ({
   avatar,
   disconnect,
   pathname,
-  color,
   linkComponent,
 }) => {
   const theme = useTheme();
   return (
     <HeaderMenuHover
       pathname={pathname}
-      color={color}
       linkComponent={linkComponent}
       item={{
         renderTitle: () => (

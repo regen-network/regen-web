@@ -66,7 +66,6 @@ export interface HeaderMenuItem extends MenuTitle {
 
 export interface HeaderMenuHoverBase {
   pathname: string;
-  color: string;
   linkComponent: React.FC<NavLinkProps>;
 }
 
@@ -77,7 +76,6 @@ interface HeaderMenuHoverProps extends HeaderMenuHoverBase {
 const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
   item,
   pathname,
-  color,
   linkComponent: LinkComponent,
 }) => {
   const theme = useTheme();
@@ -97,11 +95,12 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
     }
     return (
       <MenuHover
-        dropdownColor={
-          color === theme.palette.primary.light
-            ? theme.palette.secondary.main
-            : theme.palette.secondary.contrastText
-        }
+        // dropdownColor={
+        //   color === theme.palette.primary.light
+        //     ? theme.palette.secondary.main
+        //     : theme.palette.secondary.contrastText
+        // }
+        dropdownColor={theme.palette.secondary.contrastText}
         title={item.title}
         renderTitle={item.renderTitle}
         classes={{ title: styles.title }}

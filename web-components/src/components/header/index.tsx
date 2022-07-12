@@ -234,7 +234,6 @@ export default function Header({
                     key={index}
                     linkComponent={linkComponent}
                     item={item}
-                    color={color}
                     pathname={pathname}
                   />
                 );

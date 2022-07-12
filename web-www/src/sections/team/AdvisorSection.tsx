@@ -1,8 +1,10 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import TeamSection from 'web-components/lib/components/team-section';
-import { TeamAdvisorSectionQuery } from '../../generated/graphql';
-import { TeamItemProps } from 'web-components/lib/components/team-item';
+import { TeamSection } from '../../components/TeamSection';
+import {
+  SanityRegenTeamMember,
+  TeamAdvisorSectionQuery,
+} from '../../generated/graphql';
 
 const query = graphql`
   query teamAdvisorSection {
@@ -21,12 +23,11 @@ const AdvisorSection = (): JSX.Element => {
   const { background, sanityTeamPage } =
     useStaticQuery<TeamAdvisorSectionQuery>(query);
   const data = sanityTeamPage?.advisorSection;
+  const teamMembers = !!data?.members ? data.members : [];
   return (
     <TeamSection
       bgUrl={background?.publicURL || ''}
-      members={(data?.members || []).map(
-        m => ({ imgUrl: m?.image?.asset?.url, ...m } as TeamItemProps),
-      )}
+      members={teamMembers as SanityRegenTeamMember[]}
       title={data?.title || ''}
     />
   );

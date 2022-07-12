@@ -1,14 +1,14 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
+import { Theme, Grid } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
-import TeamItem, { TeamItemProps } from '../team-item';
-import Section from '../section';
+import Section from 'web-components/lib/components/section';
+import { TeamItem } from './TeamItem';
+import type { SanityRegenTeamMember } from '../../generated/graphql';
 
 interface TeamSectionProps {
-  alphabetized?: boolean;
-  members: TeamItemProps[];
+  members?: SanityRegenTeamMember[];
   title: string;
   children?: React.ReactNode;
   bgUrl: string;
@@ -58,13 +58,9 @@ export const TeamSection = ({
   className,
   bgUrl,
   gridMd = 4,
-  alphabetized = false,
   children,
 }: TeamSectionProps): JSX.Element => {
   const classes = useStyles();
-  const sortedMembers = alphabetized // avoid sorting if not alphabetized
-    ? members.sort((a, b) => (firstName(a.name) > firstName(b.name) ? 1 : -1))
-    : members;
 
   return (
     <Section
@@ -76,34 +72,28 @@ export const TeamSection = ({
       }}
     >
       <Grid justifyContent="center" container direction="row">
-        {sortedMembers.map((m, index) => {
-          return (
-            <Grid
-              className={classes.item}
-              xs={12}
-              sm={6}
-              md={gridMd}
-              item
-              key={index}
-            >
-              <TeamItem
-                name={m.name}
-                title={m.title}
-                description={m.description}
-                imgUrl={m.imgUrl}
-                bgUrl={bgUrl}
-                linkedinUrl={m.linkedinUrl}
-                twitterUrl={m.twitterUrl}
-                githubUrl={m.githubUrl}
-              />
-            </Grid>
-          );
-        })}
+        {members?.length &&
+          members.length > 0 &&
+          members.map((m, index) => {
+            return (
+              <Grid
+                className={classes.item}
+                xs={12}
+                sm={6}
+                md={gridMd}
+                item
+                key={index}
+              >
+                <TeamItem
+                  member={m}
+                  bgUrl={bgUrl}
+                  sx={{ py: 7, px: { sm: 8 } }}
+                />
+              </Grid>
+            );
+          })}
       </Grid>
       {children}
     </Section>
   );
 };
-
-// sorting by first name alone was causing weird firefox behavior
-const firstName = (name: string): string => name.toLowerCase().replace(' ', '');

@@ -24374,19 +24374,21 @@ export type ImageWithPreviewFragment = (
   & ImageFragment
 );
 
+export type TeamMemberFieldsFragment = (
+  { __typename?: 'SanityRegenTeamMember' }
+  & Pick<SanityRegenTeamMember, 'name' | 'title' | 'description' | 'linkedinUrl' | 'twitterUrl' | 'githubUrl'>
+  & { image: Maybe<(
+    { __typename?: 'SanityImage' }
+    & ImageWithPreviewFragment
+  )> }
+);
+
 export type TeamSectionFieldsFragment = (
   { __typename?: 'SanityTeamSection' }
   & Pick<SanityTeamSection, 'title'>
   & { members: Maybe<Array<Maybe<(
     { __typename?: 'SanityRegenTeamMember' }
-    & Pick<SanityRegenTeamMember, 'name' | 'title' | 'description' | 'linkedinUrl' | 'twitterUrl' | 'githubUrl'>
-    & { image: Maybe<(
-      { __typename?: 'SanityImage' }
-      & { asset: Maybe<(
-        { __typename?: 'SanityImageAsset' }
-        & Pick<SanityImageAsset, 'url' | 'extension'>
-      )> }
-    )> }
+    & TeamMemberFieldsFragment
   )>>> }
 );
 
@@ -25821,14 +25823,7 @@ export type PresskitTeamSectionQuery = (
       & Pick<SanityPresskitTeamSection, 'header' | 'buttonText'>
       & { members: Maybe<Array<Maybe<(
         { __typename?: 'SanityRegenTeamMember' }
-        & Pick<SanityRegenTeamMember, 'name' | 'title'>
-        & { image: Maybe<(
-          { __typename?: 'SanityImage' }
-          & { asset: Maybe<(
-            { __typename?: 'SanityImageAsset' }
-            & Pick<SanityImageAsset, 'url'>
-          )> }
-        )> }
+        & TeamMemberFieldsFragment
       )>>> }
     )> }
   )> }
@@ -26239,23 +26234,6 @@ export type TeamAdvisorSectionQuery = (
   )>, sanityTeamPage: Maybe<(
     { __typename?: 'SanityTeamPage' }
     & { advisorSection: Maybe<(
-      { __typename?: 'SanityTeamSection' }
-      & TeamSectionFieldsFragment
-    )> }
-  )> }
-);
-
-export type TeamContributorSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TeamContributorSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )>, sanityTeamPage: Maybe<(
-    { __typename?: 'SanityTeamPage' }
-    & { contributorSection: Maybe<(
       { __typename?: 'SanityTeamSection' }
       & TeamSectionFieldsFragment
     )> }

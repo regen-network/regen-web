@@ -1,10 +1,11 @@
 import * as React from 'react';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ContainedButton, { ContainedColorVariant } from './ContainedButton';
+import { Box } from '@mui/material';
 
 export default {
   title: 'Buttons',
@@ -15,9 +16,30 @@ export const outlinedButton = (): JSX.Element => (
   <OutlinedButton startIcon={<ArrowDownwardIcon />}>read more</OutlinedButton>
 );
 
-export const containedButton: React.FC = () => (
-  <ContainedButton>Contained</ContainedButton>
-);
+export const containedButton = (): JSX.Element => {
+  const colorVariants: ContainedColorVariant[] = [
+    'secondary',
+    'gradientBlueGreen',
+  ];
+
+  return (
+    <Box sx={{ display: 'flex' }}>
+      {colorVariants.map(colorVariant => (
+        <Box
+          key={colorVariant}
+          sx={{ mr: '8px', display: 'flex', flexDirection: 'column' }}
+        >
+          <ContainedButton colorVariant={colorVariant} sx={{ mb: '8px' }}>
+            Contained
+          </ContainedButton>
+          <ContainedButton colorVariant={colorVariant} disabled>
+            Disabled
+          </ContainedButton>
+        </Box>
+      ))}
+    </Box>
+  );
+};
 
 export const nextButton = (): JSX.Element => (
   <PrevNextButton direction="next" />

@@ -12,6 +12,7 @@ import { CreditSendModal } from 'web-components/lib/components/modal/CreditSendM
 import { CreditRetireModal } from 'web-components/lib/components/modal/CreditRetireModal';
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
 import { BasketTakeModal } from 'web-components/lib/components/modal/BasketTakeModal';
+import { CreateSellOrderModal } from 'web-components/src/components/modal/CreateSellOrderModal';
 
 export default {
   title: 'Modal',
@@ -278,5 +279,21 @@ export const basketTakeModal = (): JSX.Element => (
     mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={() => alert('submit')}
+  />
+);
+
+export const createSellOrderModal = (): JSX.Element => (
+  <CreateSellOrderModal
+    batchDenoms={[
+      {
+        label: 'C01-20190101-20201010-003',
+        value: 'C01-20190101-20201010-003',
+      },
+    ]}
+    sellDenom={'REGEN'}
+    availableTradableAmount={100000}
+    open={true}
+    onClose={() => null}
+    onSubmit={async () => alert('submit')}
   />
 );

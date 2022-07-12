@@ -52,7 +52,11 @@ export default function NumberTextField({
   } = props;
   return (
     <div className={classes.root}>
-      <TextField {...props} type="number" />
+      <TextField
+        {...props}
+        type="number"
+        inputProps={{ step: increment, lang: 'en' }}
+      />
       {arrows && (
         <Grid container className={classes.arrows}>
           <Grid

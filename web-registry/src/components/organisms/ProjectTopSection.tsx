@@ -170,7 +170,7 @@ function ProjectTopSection({
         <Grid item xs={12} md={8} sx={{ pr: { md: 19 } }}>
           {/* TODO Show on-chain project id if no off-chain name */}
           <Title variant="h1">{metadata?.['schema:name']}</Title>
-          <Box sx={{ pt: { xs: 5, sm: 6 } }}>
+          <Box sx={{ pt: { xs: 5, sm: 6, minHeight: '186px' } }}>
             <ProjectPlaceInfo
               iconClassName={styles.icon}
               // TODO Format and show on-chain project location if no off-chain location
@@ -230,7 +230,15 @@ function ProjectTopSection({
               )}
             </Box>
           </Box>
-
+          {/* Used to prevent layout shift */}
+          <Box
+            sx={{
+              minHeight:
+                data && (!isGISFile || (isGISFile && geojson))
+                  ? '0px'
+                  : '200px',
+            }}
+          />
           {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
               <Box sx={{ pt: 6 }}>
@@ -245,6 +253,12 @@ function ProjectTopSection({
               </Box>
             </LazyLoad>
           )}
+          {/* Used to prevent layout shift */}
+          <Box
+            sx={{
+              minHeight: metadata ? '0px' : '200px',
+            }}
+          />
           {landStewardStoryTitle && (
             <Title sx={{ pt: { xs: 11.75, sm: 14 } }} variant="h2">
               Story

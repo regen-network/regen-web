@@ -31,30 +31,31 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   { id: 'txhash', numeric: false, label: 'tx hash' },
-  { id: 'class_id', numeric: false, label: 'credit class' },
-  { id: 'batch_denom', numeric: false, label: 'batch denom' },
+  { id: 'classId', numeric: false, label: 'credit class' },
+  { id: 'denom', numeric: false, label: 'batch denom' },
   { id: 'issuer', numeric: false, label: 'issuer' },
   {
-    id: 'tradable_supply',
+    id: 'tradableSupply',
     numeric: true,
     label: 'total amount tradable',
     wrap: true,
   },
   {
-    id: 'retired_supply',
+    id: 'retiredSupply',
     numeric: true,
     label: 'total amount retired',
     wrap: true,
   },
   {
-    id: 'amount_cancelled',
+    id: 'cancelledAmount',
     numeric: true,
     label: 'total amount cancelled',
     wrap: true,
   },
-  { id: 'start_date', numeric: true, label: 'start date' },
-  { id: 'end_date', numeric: true, label: 'end date' },
-  { id: 'project_location', numeric: false, label: 'project location' },
+  // TODO: regen-network/regen-registry#1015
+  // { id: 'project_location', numeric: false, label: 'project location' },
+  { id: 'startDate', numeric: true, label: 'start date' },
+  { id: 'endDate', numeric: true, label: 'end date' },
 ];
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -116,14 +117,15 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
 
   // We hide the classId column if creditClassId provided (redundant)
   if (creditClassId) {
-    columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'class_id');
+    columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'classId');
   }
   // Ditto for project location on project page
-  if (projectPage) {
-    columnsToShow = columnsToShow.filter(
-      (hc: HeadCell) => hc.id !== 'project_location',
-    );
-  }
+  // TODO: regen-network/regen-registry#1015
+  // if (projectPage) {
+  //   columnsToShow = columnsToShow.filter(
+  //     (hc: HeadCell) => hc.id !== 'project_location',
+  //   );
+  // }
 
   const table = (
     <ActionsTable
@@ -142,14 +144,14 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             {truncateHash(batch.txhash)}
           </Link>,
-          <Link key="class_id" href={`/credit-classes/${batch.class_id}`}>
-            {batch.class_id}
+          <Link key="classId" href={`/credit-classes/${batch.classId}`}>
+            {batch.classId}
           </Link>,
           <Link
             className={styles.noWrap}
-            href={`/credit-batches/${batch.batch_denom}`}
+            href={`/credit-batches/${batch.denom}`}
           >
-            {batch.batch_denom}
+            {batch.denom}
           </Link>,
           <a
             href={getAccountUrl(batch.issuer)}
@@ -158,23 +160,22 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             {truncate(batch.issuer)}
           </a>,
-          <>{formatNumber(batch.tradable_supply)}</>,
-          <>{formatNumber(batch.retired_supply)}</>,
-          <>{formatNumber(batch.amount_cancelled)}</>,
+          <>{formatNumber(batch.tradableSupply)}</>,
+          <>{formatNumber(batch.retiredSupply)}</>,
+          <>{formatNumber(batch.cancelledAmount)}</>,
           <Box className={styles.noWrap}>
-            {formatDate(batch.start_date as Date, undefined, true)}
+            {formatDate(batch.startDate as Date, undefined, true)}
           </Box>,
           <Box className={styles.noWrap}>
-            {formatDate(batch.end_date as Date, undefined, true)}
+            {formatDate(batch.endDate as Date, undefined, true)}
           </Box>,
-          <Box key="project_location" className={styles.noWrap}>
-            {batch.project_location}
-          </Box>,
+          // TODO: regen-network/regen-registry#1015
+          // <Box key="project_location" className={styles.noWrap}>
+          //   {batch.project_location}
+          // </Box>,
         ].filter(item => {
-          return (
-            !(creditClassId && item?.key === 'class_id') &&
-            !(projectPage && item?.key === 'project_location')
-          );
+          return !(creditClassId && item?.key === 'classId');
+          // && !(projectPage && item?.key === 'project_location')
         }),
       )}
     />

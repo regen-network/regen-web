@@ -70,7 +70,8 @@ export default function useMsgClient(
       const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
       setDeliverTxResponse(_deliverTxResponse);
       handleTxDelivered();
-      // The transaction suceeded iff code is 0.
+      // The transaction succeeded iff code is 0.
+      // TODO: this can give false positives. Some errors return code 0.
       if (_deliverTxResponse.code !== 0) {
         setError(_deliverTxResponse.rawLog);
       }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Routes, Route } from 'react-router-dom';
+import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { useAllCreditClassQuery } from '../../generated/sanity-graphql';
 import {
@@ -9,10 +10,9 @@ import {
 import { client } from '../../sanity';
 import CreditClassDetailsWithContent from '../CreditClassDetailsWithContent';
 import CreditClassDetailsSimple from '../CreditClassDetailsSimple';
-import { queryEcoClassInfo } from '../../lib/ecocredit/api';
+import { queryEcoClassInfo, queryClassIssuers } from '../../lib/ecocredit/api';
 import { getMetadata } from '../../lib/metadata-graph';
 import { onChainClassRegExp } from '../../lib/ledger';
-import { ClassInfo } from '../../types/ledger/ecocredit';
 
 interface CreditDetailsProps {
   isLandSteward?: boolean;
@@ -44,6 +44,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
     undefined,
   );
   const [metadata, setMetadata] = useState<any>(undefined);
+  const [issuers, setIssuers] = useState<string[] | undefined>(undefined);
 
   const { data: contentData } = useAllCreditClassQuery({ client });
   const content = contentData?.allCreditClass?.find(
@@ -65,16 +66,31 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
   const dbCreditClassByUri = dbDataByUri?.creditClassByUri;
 
   useEffect(() => {
-    const fetch = async (): Promise<void> => {
+    const fetchData = async (): Promise<void> => {
       if (creditClassId && isOnChainClassId) {
         try {
           const res = await queryEcoClassInfo(creditClassId);
-          const classInfo = res?.info;
+          const classInfo = res?.class;
           if (classInfo) {
             setOnChainClass(classInfo);
             const data = await getMetadata(classInfo.metadata);
             setMetadata(data);
           }
+        } catch (err) {
+          // eslint-disable-next-line
+          console.error(err);
+        }
+      }
+    };
+    fetchData();
+  }, [creditClassId, isOnChainClassId]);
+
+  useEffect(() => {
+    const fetch = async (): Promise<void> => {
+      if (creditClassId && isOnChainClassId) {
+        try {
+          const { issuers } = await queryClassIssuers(creditClassId);
+          if (issuers) setIssuers(issuers);
         } catch (err) {
           // eslint-disable-next-line
           console.error(err);
@@ -98,6 +114,7 @@ function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
         dbClass={dbCreditClassByOnChainId}
         onChainClass={onChainClass}
         metadata={metadata}
+        issuers={issuers}
       />
     );
   } else {

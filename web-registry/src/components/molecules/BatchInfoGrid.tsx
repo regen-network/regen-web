@@ -21,7 +21,7 @@ export const BatchInfoGrid: React.FC<{
     sx={{ justifyContent: 'space-between', ...sx }}
   >
     <GridItem>
-      <BatchDetail label="Batch Denom">{batch.batch_denom}</BatchDetail>
+      <BatchDetail label="Batch Denom">{batch.denom}</BatchDetail>
     </GridItem>
     <GridItem>
       <BatchDetail label="Project">
@@ -37,21 +37,23 @@ export const BatchInfoGrid: React.FC<{
       <BatchDetail label="Credit Class">
         <LinkWithArrow
           target="_self"
-          href={`/credit-classes/${batch.class_id}`}
-          label={batch.class_id}
+          href={`/credit-classes/${batch.classId}`}
+          label={batch?.classId || '-'}
         />
       </BatchDetail>
     </GridItem>
     <GridItem>
       <BatchDetail label="Batch start and end date">
-        {batchDate(batch.start_date) + ' - ' + batchDate(batch.end_date)}
+        {batchDate(batch?.startDate) + ' - ' + batchDate(batch?.endDate)}
       </BatchDetail>
     </GridItem>
   </Grid>
 );
 
-const batchDate = (date: string | Date): string =>
-  formatDate(date, 'MMM D, YYYY', true);
+const batchDate = (date?: string | Date): string => {
+  if (!date) return '-';
+  return formatDate(date, 'MMM D, YYYY', true);
+};
 
 const GridItem: React.FC = ({ children }) => (
   <Grid item xs={12} sm={5}>

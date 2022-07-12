@@ -169,10 +169,10 @@ export const MyEcocredits = (): JSX.Element => {
         credits={credits}
         basketTokens={basketTokens}
         renderCreditActionButtons={
-          credits.findIndex(c => Number(c.tradable_amount) > 0) > -1
+          credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1
             ? (i: number) => {
                 // No CTA available without tradable credit for given credit batch
-                if (Number(credits[i].tradable_amount) <= 0) {
+                if (Number(credits[i]?.balance?.tradableAmount) <= 0) {
                   return undefined;
                 }
                 const buttons = [
@@ -250,9 +250,9 @@ export const MyEcocredits = (): JSX.Element => {
       {creditSendOpen > -1 && !!accountAddress && (
         <CreditSendModal
           sender={accountAddress}
-          batchDenom={credits[creditSendOpen].batch_denom}
+          batchDenom={credits[creditSendOpen].denom}
           availableTradableAmount={Number(
-            credits[creditSendOpen].tradable_amount,
+            credits[creditSendOpen].balance?.tradableAmount,
           )}
           mapboxToken={mapboxToken}
           open={creditSendOpen > -1}
@@ -271,9 +271,9 @@ export const MyEcocredits = (): JSX.Element => {
               .filter(v => v.label && v.value) as Option[]
           }
           availableTradableAmount={Number(
-            credits[basketPutOpen].tradable_amount,
+            credits[basketPutOpen].balance?.tradableAmount,
           )}
-          batchDenom={credits[basketPutOpen].batch_denom}
+          batchDenom={credits[basketPutOpen].denom}
           open={basketPutOpen > -1}
           onClose={() => setBasketPutOpen(-1)}
           onSubmit={basketPutSubmit}
@@ -281,9 +281,9 @@ export const MyEcocredits = (): JSX.Element => {
       )}
       {creditRetireOpen > -1 && !!accountAddress && (
         <CreditRetireModal
-          batchDenom={credits[creditRetireOpen].batch_denom}
+          batchDenom={credits[creditRetireOpen].denom}
           availableTradableAmount={Number(
-            credits[creditRetireOpen].tradable_amount,
+            credits[creditRetireOpen].balance?.tradableAmount,
           )}
           mapboxToken={mapboxToken}
           open={creditRetireOpen > -1}

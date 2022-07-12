@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 
 import {
-  QueryClassResponse,
+  QueryProjectResponse,
   QueryClientImpl,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { useLedger } from '../ledger';
 
 // is a wrapper for a batch of requests
-export default function useQueryListClassInfo(
-  classes?: string[],
-): QueryClassResponse[] | undefined {
+export default function useQueryListProjectInfo(
+  projectIds?: string[],
+): QueryProjectResponse[] | undefined {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl>();
-  const [dataList, setDataList] = useState<QueryClassResponse[]>();
+  const [dataList, setDataList] = useState<QueryProjectResponse[]>();
 
   useEffect(() => {
     if (!api?.queryClient) return;
@@ -22,19 +22,21 @@ export default function useQueryListClassInfo(
   }, [api?.queryClient]);
 
   useEffect(() => {
-    if (!queryClient || !classes) return;
+    if (!queryClient || !projectIds) return;
 
     async function fetchData(
       client: QueryClientImpl,
-      classes: string[],
+      projects: string[],
     ): Promise<void> {
       Promise.all(
-        classes.map(async (classId: string) => await client.Class({ classId })),
+        projects.map(
+          async (projectId: string) => await client.Project({ projectId }),
+        ),
       ).then(setDataList);
     }
 
-    fetchData(queryClient, classes);
-  }, [queryClient, classes]);
+    fetchData(queryClient, projectIds);
+  }, [queryClient, projectIds]);
 
   return dataList;
 }

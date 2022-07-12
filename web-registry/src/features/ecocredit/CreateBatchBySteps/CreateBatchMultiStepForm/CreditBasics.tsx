@@ -33,6 +33,8 @@ import {
   MetadataJSONField,
 } from '../../../../components/molecules';
 
+// TODO - remove CreditClass selector (but not ClassId state...)
+
 export interface CreditBasicsFormValues {
   classId: string;
   startDate: Date | null;
@@ -41,9 +43,7 @@ export interface CreditBasicsFormValues {
 }
 
 const vcsMetadataSchema: Yup.AnyObjectSchema = Yup.object({
-  'regen:vcsProjectId': Yup.number()
-    .positive()
-    .integer()
+  'regen:vcsProjectId': Yup.string()
     .required(requiredMessage)
     .typeError(invalidVCSID),
   'regen:vcsRetirementSerialNumber': Yup.string()
@@ -77,7 +77,8 @@ export const validationSchemaFields = {
     .typeError(invalidDate)
     .test({ ...isPastDateTest }),
   metadata: Yup.object().when('classId', {
-    is: 'C01',
+    // TODO: this is a hack to make V4 testnet work. C02 is a copy of C01 on V4. In PROD/mainnet, this should only be C01
+    is: (val: string) => val === 'C01' || val === 'C02',
     then: schema => vcsMetadataSchema,
     otherwise: schema => JSONSchema,
   }),
@@ -104,7 +105,8 @@ export default function CreditBasics({
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
   const metadata = values.metadata as VCSBatchMetadataLD;
   const projectId = metadata['regen:vcsProjectId'];
-  const isVCS = values.classId === 'C01';
+  // TODO: this is a hack to make V4 testnet work. C02 is a copy of C01 on V4. In PROD/mainnet, this should only be C01.
+  const isVCS = values.classId === 'C01' || values.classId === 'C02';
 
   // to store on partial submit the selected credit class option,
   // and the project option in order to complete display name in Review step
@@ -136,7 +138,7 @@ export default function CreditBasics({
   const functionCheckPrevSelection = (
     isVCS: boolean,
     values: CreditBasicsFormValues,
-  ): number | undefined => {
+  ): string | undefined => {
     if (isVCS) {
       const metadata = values.metadata as VCSBatchMetadataLD;
       const projectId = metadata['regen:vcsProjectId'];

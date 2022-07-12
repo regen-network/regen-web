@@ -165,10 +165,10 @@ function RecipientInfo({ data, index }: RecipientInfoProps): JSX.Element {
           {data.note && (
             <ItemDisplay name={'Retirement note'} value={data.note} />
           )}
-          {data.retirementLocation && (
+          {data.retirementJurisdiction && (
             <ItemDisplay
               name={'Retirement location'}
-              value={data.retirementLocation}
+              value={data.retirementJurisdiction}
             />
           )}
         </>

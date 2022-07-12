@@ -43,7 +43,7 @@ const useBasketPutSubmit = ({
         owner: accountAddress,
         credits: [
           {
-            batchDenom: credits[basketPutOpen].batch_denom,
+            batchDenom: credits[basketPutOpen].denom,
             amount,
           },
         ],

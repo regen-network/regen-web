@@ -1,10 +1,8 @@
 import React from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
-import {
-  MsgCreateBatch,
-  MsgCreateBatch_BatchIssuance,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
+import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
 import { useLedger } from '../../../ledger';
@@ -12,17 +10,10 @@ import useMsgClient from '../../../hooks/useMsgClient';
 import {
   generateIri,
   IriFromMetadataSuccess,
-  stringToUint8Array,
+  // stringToUint8Array,
 } from '../../../lib/metadata-graph';
 
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
-
-// TODO - Deprecated
-// `projectLocation` won't be needed anymore starting from v4.0
-// https://github.com/regen-network/regen-registry/issues/968
-// right now `projectLocation` is hardcoded to 'US' in MsgCreateBatch.fromPartial
-// This case has not been implemented because the data source changes with the update to
-// ecocredits v1, where the information is already part of the project entity in the ledger.
 
 // TODO
 // Right now, just case "C01" (aka. VCS)
@@ -30,17 +21,14 @@ import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMul
 function prepareMetadata(
   partialMetadata: Partial<VCSBatchMetadataLD>,
 ): VCSBatchMetadataLD | undefined {
-  const projectIdRaw = partialMetadata['regen:vcsProjectId'];
+  const projectId = partialMetadata['regen:vcsProjectId'];
   const retirementSerialNumber =
     partialMetadata['regen:vcsRetirementSerialNumber'];
 
   const additionalCertifications =
     partialMetadata['regen:additionalCertifications'];
 
-  if (!projectIdRaw || !retirementSerialNumber) return;
-
-  const projectId =
-    typeof projectIdRaw === 'number' ? projectIdRaw : parseInt(projectIdRaw);
+  if (!projectId || !retirementSerialNumber) return;
 
   const metadata: VCSBatchMetadataLD = {
     '@context': {
@@ -67,6 +55,10 @@ async function prepareMsg(
   );
   if (!metadata) return;
 
+  // TODO - Fixed it on the fast track, retrieving the projectId from the metadata.
+  // We have to refactor and handle the projectId field as a value in the form.
+  const projectId: string = metadata['regen:vcsProjectId'];
+
   // then, generate the offchain iri from the metadata
   let iriResponse: IriFromMetadataSuccess<VCSBatchMetadataLD> | undefined;
 
@@ -78,31 +70,29 @@ async function prepareMsg(
   }
 
   // finally, build de Msg DTO
-  const issuance: MsgCreateBatch_BatchIssuance[] = data.recipients.map(
-    recipient => {
-      let issuanceRecipient: Partial<MsgCreateBatch_BatchIssuance> = {
-        recipient: recipient.recipient,
-        tradableAmount: recipient.tradableAmount.toString(),
-        retiredAmount: '0',
-      };
-      if (recipient.withRetire && recipient.retiredAmount > 0) {
-        issuanceRecipient.retiredAmount = recipient.retiredAmount.toString();
-        issuanceRecipient.retirementLocation = recipient.retirementLocation;
-      }
-      return issuanceRecipient as MsgCreateBatch_BatchIssuance;
-    },
-  );
+  const issuance: BatchIssuance[] = data.recipients.map(recipient => {
+    let issuanceRecipient: Partial<BatchIssuance> = {
+      recipient: recipient.recipient,
+      tradableAmount: recipient.tradableAmount.toString(),
+      retiredAmount: '0',
+    };
+    if (recipient.withRetire && recipient.retiredAmount > 0) {
+      issuanceRecipient.retiredAmount = recipient.retiredAmount.toString();
+      issuanceRecipient.retirementJurisdiction =
+        recipient.retirementJurisdiction;
+    }
+    return issuanceRecipient as BatchIssuance;
+  });
 
   return MsgCreateBatch.fromPartial({
     issuer,
-    classId: data.classId,
+    projectId: projectId,
     issuance: issuance,
-    metadata: stringToUint8Array(iriResponse.iri),
+    metadata: iriResponse.iri, // TODO - confirmation - stringToUint8Array(iriResponse.iri),
     startDate: new Date(data.startDate as Date),
     endDate: new Date(data.endDate as Date),
-    // TODO - Deprecated - Hardcoded projectLocation (see comment above)
-    // projectLocation won't be needed anymore starting from v4.0
-    projectLocation: 'US',
+    open: false, // TODO - confirmation default
+    // originTx - not informed here // TODO - confirmation
   });
 }
 

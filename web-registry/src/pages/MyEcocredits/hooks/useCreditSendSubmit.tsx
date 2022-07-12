@@ -1,4 +1,4 @@
-import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
+import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { useCallback } from 'react';
 import { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -32,7 +32,7 @@ const useCreditSendSubmit = ({
   const creditSendSubmit = useCallback(
     async (values: CreditSendFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
-      const batchDenom = credits[creditSendOpen].batch_denom;
+      const batchDenom = credits[creditSendOpen].denom;
       const recipient = values.recipient;
       const msg = MsgSend.fromPartial({
         sender: accountAddress,
@@ -42,7 +42,7 @@ const useCreditSendSubmit = ({
             batchDenom,
             tradableAmount: values.tradableAmount.toString(),
             retiredAmount: values.retiredAmount.toString(),
-            retirementLocation: values.retirementLocation,
+            retirementJurisdiction: values.retirementJurisdiction,
           },
         ],
       });

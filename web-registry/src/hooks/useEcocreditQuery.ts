@@ -1,21 +1,22 @@
 import { useState, useEffect, useCallback } from 'react';
 
 // TODO: move query client creation to the ledger context ?
-import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { useLedger } from '../ledger';
 import {
   // types
   EcocreditQueryClient,
   EcocreditQueryProps,
+  EcocreditQueryResponse,
   // queries
   queryBalance,
   queryBatchInfo,
-  queryBatches,
+  queryBatchesByClass,
   queryClassInfo,
   queryClasses,
   queryCreditTypes,
-  EcocreditQueryResponse,
+  queryProjects,
 } from '../lib/ecocredit/api';
 
 // TODO - this hook is still missing batch query functionality
@@ -56,7 +57,7 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
   );
 
   const batches = useCallback(
-    (client, params) => queryBatches({ client, request: params }),
+    (client, params) => queryBatchesByClass({ client, request: params }),
     [],
   );
 
@@ -72,6 +73,11 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
 
   const creditTypes = useCallback(
     (client, params) => queryCreditTypes({ client, request: params }),
+    [],
+  );
+
+  const projects = useCallback(
+    (client, params) => queryProjects({ client, request: params }),
     [],
   );
 
@@ -102,6 +108,9 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
       case 'creditTypes':
         response = creditTypes(client, params);
         break;
+      case 'projects':
+        response = projects(client, params);
+        break;
       default:
         setError(
           new Error(
@@ -131,6 +140,7 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     classInfo,
     classes,
     creditTypes,
+    projects,
   ]);
 
   return { data, loading, error };

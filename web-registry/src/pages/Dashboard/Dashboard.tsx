@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTheme } from '@mui/styles';
 import { Box } from '@mui/material';
-import { uniq } from 'lodash';
 
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
@@ -10,22 +9,12 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 
 import { MyProjects } from '../../components/organisms';
-import useQueryListClasses from '../../hooks/useQueryListClasses';
-import { useWallet } from '../../lib/wallet';
 import MyEcocredits from '../MyEcocredits';
+import useQueryIfIssuer from '../../hooks/useQueryIfIssuer';
 
 const Dashboard: React.FC = () => {
   const theme = useTheme();
-  const [isIssuer, setIsIssuer] = useState(false);
-  const onChainClasses = useQueryListClasses();
-  const { wallet } = useWallet();
-
-  useEffect(() => {
-    const issuers = uniq(onChainClasses?.classes?.map(cc => cc.issuers).flat());
-    const isAnIssuer =
-      !!wallet?.address && issuers.indexOf(wallet.address) > -1;
-    setIsIssuer(isAnIssuer);
-  }, [onChainClasses?.classes, wallet?.address]);
+  const isIssuer = useQueryIfIssuer();
 
   const tabs: IconTabProps[] = [
     {

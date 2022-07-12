@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 import { startCase } from 'lodash';
+import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
@@ -16,7 +17,6 @@ import {
 } from '../../components/molecules';
 import { CreditBatches, MoreProjectsSection } from '../../components/organisms';
 import { getAccountUrl } from '../../lib/block-explorer';
-import { ClassInfo } from '../../types/ledger/ecocredit';
 import { CreditClassByOnChainIdQuery } from '../../generated/graphql';
 import {
   CreditClassMetadataLD,
@@ -26,6 +26,7 @@ import {
 interface CreditDetailsProps {
   dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
+  issuers?: string[];
   metadata?: CreditClassMetadataLD;
 }
 
@@ -110,6 +111,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   dbClass,
   onChainClass,
+  issuers,
   metadata,
 }) => {
   const styles = useStyles();
@@ -117,6 +119,16 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   const sectoralScopes = metadata?.['regen:sectoralScope'];
   const verificationMethod = metadata?.['regen:verificationMethod'];
   const sourceRegistry = metadata?.['regen:sourceRegistry'];
+
+  const getCreditType = (creditTypeAbbrev: string): string => {
+    // TODO: add credit types as they come online, or fetch from ledger somehow
+    return (
+      {
+        // eslint-disable-next-line prettier/prettier
+        'C': 'Carbon',
+      }[creditTypeAbbrev] || creditTypeAbbrev
+    );
+  };
 
   const Projects: React.FC = () => {
     const projects = dbClass?.projectsByCreditClassId?.nodes;
@@ -198,7 +210,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 credit class
               </Label>
               <Title variant="h1">
-                {metadata?.['schema:name']} ({onChainClass.class_id})
+                {metadata?.['schema:name']} ({onChainClass.id})
               </Title>
             </Box>
             {metadata?.['schema:description'] && (
@@ -217,7 +229,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 label="credit type"
                 data={
                   <Body size="xl" sx={{ mr: 1 }}>
-                    {startCase(onChainClass.credit_type.name)}
+                    {getCreditType(onChainClass.creditTypeAbbrev)}
                   </Body>
                 }
               />
@@ -295,15 +307,9 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 <Link
                   className={styles.link}
                   target="_blank"
-                  href={
-                    onChainClass.admin
-                      ? getAccountUrl(onChainClass.admin)
-                      : getAccountUrl(onChainClass?.designer)
-                  }
+                  href={getAccountUrl(onChainClass.admin)}
                 >
-                  {onChainClass.admin
-                    ? truncate(onChainClass.admin)
-                    : truncate(onChainClass?.designer)}
+                  {truncate(onChainClass.admin)}
                 </Link>
               </div>
               <div className={styles.sidebarItemMargin}>
@@ -311,7 +317,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                   issuers
                 </Label>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  {onChainClass?.issuers?.map((issuer: string) => (
+                  {issuers?.map((issuer: string) => (
                     <Link
                       className={styles.link}
                       href={getAccountUrl(issuer)}
@@ -329,10 +335,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
       </EcocreditsSection>
       <Projects />
       <div className="topo-background-alternate">
-        <CreditBatches
-          creditClassId={onChainClass.class_id}
-          titleAlign="left"
-        />
+        <CreditBatches creditClassId={onChainClass.id} titleAlign="left" />
       </div>
     </Box>
   );

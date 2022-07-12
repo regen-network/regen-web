@@ -31,7 +31,7 @@ export const BatchDetails: React.FC = () => {
   const walletContext = useWallet();
   const accountAddress = walletContext.wallet?.address;
   const { credits: userEcocredits } = useEcocredits(accountAddress);
-  const isUserBatch = userEcocredits.some(c => c.batch_denom === batchDenom);
+  const isUserBatch = userEcocredits.some(c => c.denom === batchDenom);
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {

@@ -2,7 +2,6 @@ export * from './AdditionalityForm';
 export * from './AdminNav';
 export * from './AppFooter';
 export * from './BasicInfoForm';
-export * from './BasketEcocredits';
 export * from './BasketEcocreditsTable';
 export * from './BasketsTable';
 export * from './BasketOverview';

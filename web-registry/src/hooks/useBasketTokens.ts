@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
+import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import {
   QueryBalanceResponse,
@@ -11,7 +11,7 @@ import useQueryBalance from './useQueryBalance';
 import useQueryDenomMetadata from './useQueryDenomMetadata';
 
 export interface BasketTokens {
-  basket: Basket;
+  basket: BasketInfo;
   balance?: QueryBalanceResponse;
   metadata?: QueryDenomMetadataResponse;
 }
@@ -31,7 +31,7 @@ export default function useBasketTokens(
     if (!baskets) return;
 
     const _basketTokens = await Promise.all(
-      baskets.baskets.map(async basket => ({
+      baskets.basketsInfo.map(async basket => ({
         basket,
         balance: await fetchBalance({
           address,

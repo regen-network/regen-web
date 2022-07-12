@@ -42,7 +42,7 @@ interface Props extends FieldProps {
   className?: string;
   description?: string;
   label?: string;
-  optional?: boolean;
+  optional?: boolean | string;
   fallbackAvatar?: JSX.Element;
   transformValue?: (v: any) => any;
   triggerOnChange?: (v: any) => Promise<void>;

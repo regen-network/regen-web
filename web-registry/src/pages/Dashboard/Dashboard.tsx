@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { useTheme } from '@mui/styles';
-import { Box } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 import { uniq } from 'lodash';
 
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
@@ -10,13 +10,14 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import { Spinner } from 'web-components/lib/components/icons/Spinner';
-import { Center } from 'web-components/lib/components/box';
+import { Center, Flex } from 'web-components/lib/components/box';
 
-import useQueryListClasses from '../../hooks/useQueryListClasses';
-import { useWallet } from '../../lib/wallet';
+import useQueryListClasses from 'hooks/useQueryListClasses';
+import { useWallet } from 'lib/wallet';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
 const MyProjects = React.lazy(() => import('./MyProjects'));
+const MyCreditClasses = React.lazy(() => import('./MyCreditClasses'));
 
 const LazyLoad: React.FC = ({ children }) => (
   <Suspense
@@ -30,6 +31,10 @@ const LazyLoad: React.FC = ({ children }) => (
   </Suspense>
 );
 
+const sxs = {
+  padTop: { pt: 10, pb: [21.25, 28.28] } as SxProps,
+};
+
 const Dashboard = (): JSX.Element => {
   const theme = useTheme();
   const [isIssuer, setIsIssuer] = useState(false);
@@ -41,7 +46,7 @@ const Dashboard = (): JSX.Element => {
     const isAnIssuer =
       !!wallet?.address && issuers.indexOf(wallet.address) > -1;
     setIsIssuer(isAnIssuer);
-  }, [onChainClasses?.classes, wallet?.address]);
+  }, [onChainClasses, wallet]);
 
   const tabs: IconTabProps[] = [
     {
@@ -61,7 +66,9 @@ const Dashboard = (): JSX.Element => {
       hidden: !isIssuer,
       content: (
         <LazyLoad>
-          <MyProjects />
+          <Flex sx={sxs.padTop}>
+            <MyProjects />
+          </Flex>
         </LazyLoad>
       ),
     },
@@ -71,7 +78,9 @@ const Dashboard = (): JSX.Element => {
       hidden: !isIssuer,
       content: (
         <LazyLoad>
-          <MyProjects />
+          <Flex sx={sxs.padTop}>
+            <MyCreditClasses />
+          </Flex>
         </LazyLoad>
       ),
     },

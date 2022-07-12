@@ -4,17 +4,16 @@ import { useNavigate } from 'react-router-dom';
 
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
+import { DashboardCreateCard } from 'web-components/lib/components/cards/DashboardCreateCard';
 
-import { useWallet } from '../../../lib/wallet';
+import { useWallet } from 'lib/wallet';
 import {
   useCreateProjectMutation,
   useWalletByAddrQuery,
   useCreateWalletMutation,
-} from '../../../generated/graphql';
-import { getProjectPageBaseData } from '../../../lib/rdf';
-import { DashboardTemplate } from '../../../components/templates';
-import { DashboardCreateCard } from 'web-components/lib/components/cards/DashboardCreateCard';
-import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
+} from 'generated/graphql';
+import { getProjectPageBaseData } from 'lib/rdf';
 
 const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
@@ -80,12 +79,7 @@ const MyProjects = (): JSX.Element => {
   }
 
   return (
-    <DashboardTemplate
-      sx={{
-        display: 'flex',
-        pt: 10,
-      }}
-    >
+    <>
       <Grid container spacing={8}>
         <Grid item xs={12} md={6} lg={4}>
           <DashboardCreateCard
@@ -119,7 +113,7 @@ const MyProjects = (): JSX.Element => {
         ))}
       </Grid>
       {error && <ErrorBanner text={error} />}
-    </DashboardTemplate>
+    </>
   );
 };
 

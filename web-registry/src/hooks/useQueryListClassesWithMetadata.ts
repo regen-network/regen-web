@@ -25,25 +25,23 @@ export function useQueryListClassesWithMetadata(): ClassInfoWithMetadata[] {
       await Promise.all(
         creditClasses.classes.map(
           async (creditClass: ClassInfoWithMetadata) => {
-            if (creditClass?.metadata?.length) {
-              try {
-                const metadataJson = await getMetadataFromUint8Array(
-                  creditClass.metadata,
-                );
-                return {
-                  ...creditClass,
-                  metadataJson,
-                };
-              } catch (e) {
-                // eslint-disable-next-line no-console
-                console.error(
-                  `Metadata not found for class ${creditClass.classId}:\n`,
-                  e,
-                );
-                return creditClass;
-              }
+            if (!creditClass?.metadata?.length) return creditClass;
+            try {
+              const metadataJson = await getMetadataFromUint8Array(
+                creditClass.metadata,
+              );
+              return {
+                ...creditClass,
+                metadataJson,
+              };
+            } catch (e) {
+              // eslint-disable-next-line no-console
+              console.error(
+                `Metadata not found for class ${creditClass.classId}:\n`,
+                e,
+              );
+              return creditClass;
             }
-            return creditClass;
           },
         ),
       ).then(responses => {

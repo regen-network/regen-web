@@ -1,24 +1,9 @@
 import React from 'react';
-import SvgIcon from '@mui/material/SvgIcon';
-import { Theme } from '~/theme/muiTheme';
-import { SxProps } from '@mui/material';
+import { SvgIcon, SvgIconProps } from '@mui/material';
 
-interface IconProps {
-  sx?: SxProps<Theme>;
-}
-
-export function CreditClassIcon({ sx = [] }: IconProps): JSX.Element {
+export function CreditClassIcon(props: SvgIconProps): JSX.Element {
   return (
-    <SvgIcon
-      viewBox="0 0 20 17"
-      sx={[
-        // theme => ({
-        //   width: theme.spacing(14.25),
-        //   height: theme.spacing(17.25),
-        // }),
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
-    >
+    <SvgIcon viewBox="0 0 20 17" {...props}>
       <svg
         width="20"
         height="17"

@@ -38,23 +38,22 @@ const ChooseCreditClassLegacy: React.FC = () => {
         metadata,
         'http://regen.network/ProjectPageCreditClassGroup',
       );
-      if (report.conforms) {
-        try {
-          await updateProject({
-            variables: {
-              input: {
-                id: projectId,
-                projectPatch: {
-                  creditClassId,
-                  metadata,
-                },
+      if (!report.conforms) return;
+      try {
+        await updateProject({
+          variables: {
+            input: {
+              id: projectId,
+              projectPatch: {
+                creditClassId,
+                metadata,
               },
             },
-          });
-          navigate(`/project-pages/${projectId}/basic-info`);
-        } catch (e) {
-          setError(`There was a problem updating this project: ${e}`);
-        }
+          },
+        });
+        navigate(`/project-pages/${projectId}/basic-info`);
+      } catch (e) {
+        setError(`There was a problem updating this project: ${e}`);
       }
     }
   }

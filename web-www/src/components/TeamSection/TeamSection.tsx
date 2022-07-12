@@ -1,6 +1,6 @@
 import React from 'react';
-import { Theme, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Theme, Grid } from '@mui/material';
 import clsx from 'clsx';
 
 import Section from 'web-components/lib/components/section';

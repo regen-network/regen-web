@@ -35,6 +35,17 @@ const Background = styled('img')({
   objectFit: 'cover',
 });
 
+const Image = styled(SanityImage)({
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: '50% 25%',
+  transform: 'scale(0.9)',
+});
+
 export interface TeamItemProps {
   member: SanityRegenTeamMember;
   bgUrl: string;
@@ -57,21 +68,7 @@ export function TeamItem({
         })}
       >
         <Hexagon sx={{ zIndex: 1 }}>
-          <SanityImage
-            {...(member.image as any)}
-            style={{
-              position: 'absolute',
-              top: '0',
-              left: '0',
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: '50% 25%',
-              transform: 'scale(0.9)',
-            }}
-            alt={member.name}
-            sx={{ objectPosition: '50% 0%' }}
-          />
+          <Image {...(member.image as any)} width={150} alt={member.name} />
         </Hexagon>
         <Hexagon
           sx={{

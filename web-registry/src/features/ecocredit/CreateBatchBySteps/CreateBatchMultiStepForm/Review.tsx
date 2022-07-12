@@ -1,41 +1,23 @@
 import React from 'react';
 import { useFormikContext } from 'formik';
-import { makeStyles } from '@mui/styles';
+import { Link } from '@mui/material';
 
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-
-import { useMultiStep } from '../../../../components/templates/MultiStep';
-import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
-import { CreditBasicsFormValues } from './CreditBasics';
-import { RecipientFormValues } from './Recipients';
-
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import EditIcon from 'web-components/lib/components/icons/EditIcon';
-import {
-  Body,
-  Label,
-  Subtitle,
-} from 'web-components/lib/components/typography';
-import { Box, Link } from '@mui/material';
+import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
+import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
+import { Body, Subtitle } from 'web-components/lib/components/typography';
 import {
   formatDate,
   getFormattedNumber,
 } from 'web-components/lib/utils/format';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
-// TODO: Only covers case C01
+import { useMultiStep } from '../../../../components/templates/MultiStep';
+import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
+import { CreditBasicsFormValues } from './CreditBasics';
+import { RecipientFormValues } from './Recipients';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  infoCard: {
-    marginBottom: theme.spacing(0),
-  },
-  recipientsCard: {
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(0),
-  },
-}));
+// TODO: Only covers case C01
 
 export default function Review(): JSX.Element {
   const { values, validateForm, isValid } =
@@ -81,23 +63,14 @@ function CreditBatchInfo({
   data,
   dataDisplay,
 }: CreditBatchInfoProps): JSX.Element {
-  const styles = useStyles();
   const { handleActiveStep } = useMultiStep();
   const metadata = data.metadata as VCSBatchMetadataLD;
 
   return (
-    <OnBoardingCard className={styles.infoCard}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Label size="sm">Credit batch info</Label>
-        <EditButton onClick={() => handleActiveStep(0)} />
-      </Box>
+    <ReviewCard
+      title="Credit Batch Info"
+      onEditClick={() => handleActiveStep(0)}
+    >
       <ItemDisplay
         name={'Credit Class'}
         value={dataDisplay?.creditClass?.label || data.classId}
@@ -126,7 +99,7 @@ function CreditBatchInfo({
           }
         />
       ))}
-    </OnBoardingCard>
+    </ReviewCard>
   );
 }
 
@@ -136,21 +109,12 @@ type RecipientInfoProps = {
 };
 
 function RecipientInfo({ data, index }: RecipientInfoProps): JSX.Element {
-  const styles = useStyles();
   const { handleActiveStep } = useMultiStep();
   return (
-    <OnBoardingCard className={styles.recipientsCard}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Label size="sm">Recipient {index}</Label>
-        <EditButton onClick={() => handleActiveStep(1)} />
-      </Box>
+    <ReviewCard
+      title={`Recipient ${index}`}
+      onEditClick={() => handleActiveStep(1)}
+    >
       <ItemDisplay name={'Recipient address'} value={data.recipient} />
       <ItemDisplay
         name={'Amount tradable'}
@@ -173,23 +137,7 @@ function RecipientInfo({ data, index }: RecipientInfoProps): JSX.Element {
           )}
         </>
       )}
-    </OnBoardingCard>
-  );
-}
-
-type ItemDisplayProps = {
-  name: string;
-  value: string | number;
-};
-
-function ItemDisplay({ name, value }: ItemDisplayProps): JSX.Element {
-  return (
-    <>
-      <Subtitle size="lg" sx={{ mt: 9, mb: 2 }}>
-        {name}
-      </Subtitle>
-      <Body size="lg">{value}</Body>
-    </>
+    </ReviewCard>
   );
 }
 
@@ -226,28 +174,5 @@ function AdditionalCertificationDisplay({
         </>
       )}
     </>
-  );
-}
-
-interface ButtonProps {
-  onClick: () => void;
-}
-
-function EditButton({ onClick }: ButtonProps): JSX.Element {
-  return (
-    <OutlinedButton
-      size="small"
-      sx={{
-        border: 'none !important',
-        maxWidth: '100px',
-        alignSelf: 'flex-end',
-      }}
-      onClick={onClick}
-      startIcon={<EditIcon sx={{ height: 13, width: 13 }} />}
-    >
-      <Label size="sm" sx={{ color: 'info.dark' }}>
-        Edit
-      </Label>
-    </OutlinedButton>
   );
 }

@@ -32,6 +32,7 @@ import {
   CreditClassSelect,
   MetadataJSONField,
 } from '../../../../components/molecules';
+import { isVCSCreditClass } from '../../../../lib/ecocredit/api';
 
 // TODO - remove CreditClass selector (but not ClassId state...)
 
@@ -105,8 +106,7 @@ export default function CreditBasics({
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
   const metadata = values.metadata as VCSBatchMetadataLD;
   const projectId = metadata['regen:vcsProjectId'];
-  // TODO: this is a hack to make V4 testnet work. C02 is a copy of C01 on V4. In PROD/mainnet, this should only be C01.
-  const isVCS = values.classId === 'C01' || values.classId === 'C02';
+  const isVCS = isVCSCreditClass(values.classId);
 
   // to store on partial submit the selected credit class option,
   // and the project option in order to complete display name in Review step

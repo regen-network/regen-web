@@ -49,6 +49,7 @@ const PostPurchase = lazy(() => import('./pages/PostPurchase'));
 const Project = lazy(() => import('./pages/Project'));
 const ProjectList = lazy(() => import('./pages/ProjectList'));
 const ProjectLocation = lazy(() => import('./pages/ProjectLocation'));
+const ProjectReview = lazy(() => import('./pages/ProjectReview'));
 const Roles = lazy(() => import('./pages/Roles'));
 const Seller = lazy(() => import('./pages/Seller'));
 const Signup = lazy(() => import('./pages/Signup'));
@@ -164,6 +165,10 @@ const App: React.FC = (): JSX.Element => {
               <Route
                 path="entity-display"
                 element={<KeplrRoute component={EntityDisplay} />}
+              />
+              <Route
+                path="review"
+                element={<KeplrRoute component={ProjectReview} />}
               />
               <Route
                 path="edit"

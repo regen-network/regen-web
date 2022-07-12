@@ -18,6 +18,7 @@ import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
 import { useProjectMetadataSave } from './hooks/useProjectMetadataSave';
 import { useProjectMetadataSubmit } from './hooks/useProjectMetadataSubmit';
 import { ProjectMetadataSelectedForm } from './ProjectMetadata.SelectedForm';
+import { isVCSCreditClass } from '../../lib/ecocredit/api';
 
 export const ProjectMetadata: React.FC = () => {
   const { projectId } = useParams();
@@ -29,7 +30,7 @@ export const ProjectMetadata: React.FC = () => {
   });
   const project = data?.projectById;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
-  const isVCS = creditClassId === 'C01';
+  const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
   let metadata: Partial<ProjectMetadataLD> | undefined;
 
   const { data: graphData } = useShaclGraphByUriQuery({

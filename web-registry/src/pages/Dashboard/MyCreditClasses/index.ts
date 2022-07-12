@@ -1,1 +1,1 @@
-export * from './MyCreditClasses';
+export { MyCreditClasses as default } from './MyCreditClasses';

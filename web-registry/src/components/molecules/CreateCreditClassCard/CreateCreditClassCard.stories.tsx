@@ -11,6 +11,6 @@ export const createCreditClassCard = () => (
   <CreateCreditClassCard onClick={voidFunc} />
 );
 
-export const createCreditClassCardFirstProject = () => (
-  <CreateCreditClassCard isFirstProject onClick={voidFunc} />
+export const createCreditClassCardFirstProject = (): JSX.Element => (
+  <CreateCreditClassCard isFirstCreditClass onClick={voidFunc} />
 );

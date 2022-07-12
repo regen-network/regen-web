@@ -65,22 +65,16 @@ export const MyEcocredits = (): JSX.Element => {
   const [creditRetireOpen, setCreditRetireOpen] = useState<number>(-1);
   const [sellOrderCreateOpen, setSellOrderCreateOpen] = useState<number>(-1);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
-  const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+  const [cardItems, setCardItems] = useState<Item[] | undefined>();
   const [creditBaskets, setCreditBaskets] = useState<
     (QueryBasketResponse | undefined)[][]
   >([]);
   const [basketTakeTokens, setBasketTakeTokens] = useState<
     BasketTokens | undefined
-  >(undefined);
-  const [txModalHeader, setTxModalHeader] = useState<string | undefined>(
-    undefined,
-  );
-  const [txModalTitle, setTxModalTitle] = useState<string | undefined>(
-    undefined,
-  );
-  const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>(
-    undefined,
-  );
+  >();
+  const [txModalHeader, setTxModalHeader] = useState<string | undefined>();
+  const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
+  const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);

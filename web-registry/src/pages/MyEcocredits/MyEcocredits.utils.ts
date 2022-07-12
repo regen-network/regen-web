@@ -1,6 +1,6 @@
 import { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 
-type getOtherSellOrderBatchDenomOptionsProps = {
+type GetOtherSellOrderBatchDenomOptionsProps = {
   credits: BatchInfoWithBalance[];
   sellOrderCreateOpen: number;
 };
@@ -8,7 +8,7 @@ type getOtherSellOrderBatchDenomOptionsProps = {
 export const getOtherSellOrderBatchDenomOptions = ({
   credits,
   sellOrderCreateOpen,
-}: getOtherSellOrderBatchDenomOptionsProps) =>
+}: GetOtherSellOrderBatchDenomOptionsProps) =>
   credits
     .filter(
       credit => credit.batch_denom !== credits[sellOrderCreateOpen].batch_denom,

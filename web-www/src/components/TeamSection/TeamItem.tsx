@@ -35,6 +35,12 @@ const Background = styled('img')({
   objectFit: 'cover',
 });
 
+const ImageWrap = styled('div')(({ theme }) => ({
+  position: 'relative',
+  width: theme.spacing(44.75),
+  height: theme.spacing(44.75),
+}));
+
 export interface TeamItemProps {
   member: SanityRegenTeamMember;
   bgUrl: string;
@@ -47,25 +53,19 @@ export function TeamItem({
   sx = [],
 }: TeamItemProps): JSX.Element {
   const theme = useTheme();
+  // These shoudln't be necessary, but are here to work around a bug with sanity image
+
   return (
     <Root sx={sx}>
-      <Box
-        sx={theme => ({
-          position: 'relative',
-          width: theme.spacing(44.75),
-          height: theme.spacing(44.75),
-        })}
-      >
+      <ImageWrap>
         <Hexagon sx={{ zIndex: 1 }}>
           <SanityImage
             {...(member.image as any)}
             alt={member.name}
             width={150}
             style={{
-              position: 'absolute',
-              top: '0',
-              left: '0',
-              maxWidth: '180px', // necessary to prevent a weird layout thrash
+              maxWidth: '180px',
+              maxHeight: '180px',
               height: '100%',
               objectFit: 'cover',
               objectPosition: '50% 25%',
@@ -82,7 +82,7 @@ export function TeamItem({
         >
           <Background src={bgUrl} alt="background" />
         </Hexagon>
-      </Box>
+      </ImageWrap>
 
       <Title variant="h4" align="center" sx={{ my: 2 }}>
         {member.name}

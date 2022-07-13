@@ -1,8 +1,11 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import TeamSection from 'web-components/lib/components/team-section';
-import { TeamAdvisorSectionQuery } from '../../generated/graphql';
-import { TeamItemProps } from 'web-components/lib/components/team-item';
+import { Box } from '@mui/material';
+import { TeamSection } from '../../components/TeamSection';
+import {
+  SanityRegenTeamMember,
+  TeamAdvisorSectionQuery,
+} from '../../generated/graphql';
 
 const query = graphql`
   query teamAdvisorSection {
@@ -17,18 +20,28 @@ const query = graphql`
   }
 `;
 
+/** Note: this shows as the Board of Directions section on the site  */
 const AdvisorSection = (): JSX.Element => {
   const { background, sanityTeamPage } =
     useStaticQuery<TeamAdvisorSectionQuery>(query);
   const data = sanityTeamPage?.advisorSection;
+  const teamMembers = data?.members ? data.members : [];
   return (
-    <TeamSection
-      bgUrl={background?.publicURL || ''}
-      members={(data?.members || []).map(
-        m => ({ imgUrl: m?.image?.asset?.url, ...m } as TeamItemProps),
-      )}
-      title={data?.title || ''}
-    />
+    <Box
+      sx={{
+        bgcolor: 'grey.50',
+        borderTop: 1,
+        borderTopColor: 'info.light',
+        borderBottom: 1,
+        borderBottomColor: 'info.light',
+      }}
+    >
+      <TeamSection
+        bgUrl={background?.publicURL || ''}
+        members={teamMembers as SanityRegenTeamMember[]}
+        title={data?.title || ''}
+      />
+    </Box>
   );
 };
 

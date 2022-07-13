@@ -29,6 +29,7 @@ export interface Item {
   value: {
     name: string | number;
     url?: string;
+    icon?: React.ReactNode;
   };
   color?: string;
 }
@@ -48,6 +49,7 @@ interface Props extends TxModalProps {
 export interface TxModalProps extends RegenModalProps {
   onViewPortfolio: () => void;
   cardTitle: string;
+  buttonTitle?: string;
   cardItems?: Item[];
   linkComponent: LinkComponentProp;
   txHash: string;
@@ -71,6 +73,7 @@ export const CardItem: React.FC<CardItemProps> = ({
       </Label>
 
       <Subtitle size="lg" mobileSize="sm" color={color || 'info.dark'}>
+        {value.icon && value.icon}
         {value.url ? (
           <LinkComponent
             sx={{ color: 'secondary.main' }}
@@ -90,6 +93,7 @@ export const CardItem: React.FC<CardItemProps> = ({
 const TxModal: React.FC<Props> = ({
   icon,
   title,
+  buttonTitle = 'view your portfolio',
   open,
   onClose,
   onViewPortfolio,
@@ -141,7 +145,7 @@ const TxModal: React.FC<Props> = ({
         sx={{ fontSize: { xs: 12, sm: 18 } }}
         onClick={onViewPortfolio}
       >
-        view your portfolio
+        {buttonTitle}
       </OutlinedButton>
     </Modal>
   );

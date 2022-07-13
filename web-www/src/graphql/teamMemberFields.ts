@@ -6,7 +6,9 @@ export const teamSectionFields = graphql`
     title
     description
     image {
-      ...ImageWithPreview
+      asset {
+        url
+      }
     }
     linkedinUrl
     twitterUrl

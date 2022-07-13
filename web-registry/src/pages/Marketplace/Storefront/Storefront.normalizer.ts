@@ -1,9 +1,9 @@
-import { QueryBatchInfoResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import { QueryBatchResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { NormalizedSellOrder, SellOrder } from './Storefront.types';
 
 type Props = {
   sellOrders: SellOrder[];
-  batchInfos: QueryBatchInfoResponse[];
+  batchInfos?: QueryBatchResponse[];
 };
 
 const normalizeSellOrders = ({
@@ -23,10 +23,10 @@ const normalizeSellOrders = ({
       askDenom: ask_denom,
       amountAvailable: quantity,
       amountSold: undefined,
-      creditClass: batchInfos[index]?.info?.classId,
+      creditClass: batchInfos ? batchInfos[index]?.batch?.denom : null,
       batchDenom: batch_denom,
-      batchStartDate: batchInfos[index]?.info?.startDate,
-      batchEndDate: batchInfos[index]?.info?.endDate,
+      batchStartDate: batchInfos ? batchInfos[index]?.batch?.startDate : null,
+      batchEndDate: batchInfos ? batchInfos[index]?.batch?.endDate : null,
       seller,
     }),
   );

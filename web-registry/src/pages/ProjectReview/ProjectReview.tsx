@@ -9,6 +9,7 @@ import { OnboardingFormTemplate } from '../../components/templates';
 import { useProjectByIdQuery } from '../../generated/graphql';
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
+import { Box } from '@mui/material';
 
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();
@@ -108,7 +109,20 @@ export const ProjectReview: React.FC = () => {
             />
           </>
         ) : (
-          <>not vcs</>
+          <Box
+            sx={theme => ({
+              backgroundColor: theme.palette.primary.main,
+              maxHeight: theme.spacing(88),
+              fontSize: theme.spacing(3.5),
+              padding: theme.spacing(4),
+              marginTop: theme.spacing(3.5),
+              border: `1px solid ${theme.palette.grey[600]}`,
+              overflowX: 'scroll',
+              overflowY: 'scroll',
+            })}
+          >
+            <pre>{metadata && JSON.stringify(metadata, null, 2)}</pre>
+          </Box>
         )}
       </ReviewCard>
     </OnboardingFormTemplate>

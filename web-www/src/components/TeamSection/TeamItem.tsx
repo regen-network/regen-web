@@ -1,4 +1,5 @@
 import React from 'react';
+import SanityImage from 'gatsby-plugin-sanity-image';
 import { Box, styled, SxProps, useTheme } from '@mui/material';
 
 import { Label, Title } from 'web-components/lib/components/typography';
@@ -7,7 +8,6 @@ import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon'
 import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { SanityRegenTeamMember } from '../../generated/graphql';
-import SanityImage from 'gatsby-plugin-sanity-image';
 
 const Root = styled('div')({
   display: 'flex',
@@ -53,8 +53,6 @@ export function TeamItem({
   sx = [],
 }: TeamItemProps): JSX.Element {
   const theme = useTheme();
-  // These shoudln't be necessary, but are here to work around a bug with sanity image
-
   return (
     <Root sx={sx}>
       <ImageWrap>
@@ -62,7 +60,7 @@ export function TeamItem({
           <SanityImage
             {...(member.image as any)}
             alt={member.name}
-            width={150}
+            width={180}
             style={{
               maxWidth: '180px',
               maxHeight: '180px',

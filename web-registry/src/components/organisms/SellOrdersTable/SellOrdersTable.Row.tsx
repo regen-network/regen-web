@@ -39,7 +39,7 @@ const getSellOrdersTableRow = ({
     {`${formatNumber(askAmount)}`}
   </Box>,
   <Box>{formatNumber(amountAvailable)}</Box>,
-  <WithLoader isLoading={!creditClass}>
+  <WithLoader isLoading={creditClass === null}>
     <Link href={`/credit-classes/${creditClass}`}>{creditClass}</Link>
   </WithLoader>,
   <Link
@@ -55,11 +55,15 @@ const getSellOrdersTableRow = ({
   >
     {batchDenom}
   </Link>,
-  <WithLoader isLoading={!batchStartDate}>
-    <Box sx={{ color: 'info.main' }}>{formatDate(batchStartDate)}</Box>
+  <WithLoader isLoading={batchStartDate === null}>
+    <Box sx={{ color: 'info.main' }}>
+      {batchStartDate ? formatDate(batchStartDate) : ''}
+    </Box>
   </WithLoader>,
-  <WithLoader isLoading={!batchEndDate}>
-    <Box sx={{ color: 'info.main' }}>{formatDate(batchEndDate)}</Box>
+  <WithLoader isLoading={batchEndDate === null}>
+    <Box sx={{ color: 'info.main' }}>
+      {batchEndDate ? formatDate(batchEndDate) : ''}
+    </Box>
   </WithLoader>,
   <Link href={getAccountUrl(seller)} target="_blank">
     {truncate(seller)}

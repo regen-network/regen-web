@@ -25,9 +25,9 @@ export type NormalizedSellOrder = {
   askDenom: string;
   amountAvailable: string;
   amountSold?: string;
-  creditClass?: string;
+  creditClass?: string | null;
   batchDenom: string;
-  batchStartDate?: Date;
-  batchEndDate?: Date;
+  batchStartDate?: Date | null;
+  batchEndDate?: Date | null;
   seller: string;
 };

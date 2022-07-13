@@ -26,7 +26,7 @@ export const Storefront = (): JSX.Element => {
     () => sellOrders.map(sellOrder => sellOrder.batch_denom),
     [sellOrders],
   );
-  const batchInfos = useQueryListBatchInfo(batchDenoms) ?? [];
+  const batchInfos = useQueryListBatchInfo(batchDenoms);
   const [selectedSellOrder, setSelectedSellOrder] = useState<number | null>(
     null,
   );

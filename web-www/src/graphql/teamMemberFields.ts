@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 
-export const teamSectionFields = graphql`
+export const teamMemberFields = graphql`
   fragment teamMemberFields on SanityRegenTeamMember {
     name
     title

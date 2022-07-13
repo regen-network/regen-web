@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/styles';
-import { Box } from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation, useParams } from 'react-router-dom';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
@@ -326,7 +326,11 @@ function ProjectDetails(): JSX.Element {
           />
         </Box>
       )}
-      {assets.length === 0 && loading && <Box sx={getMediaBoxStyles(theme)} />}
+      {assets.length === 0 && loading && (
+        <Box sx={getMediaBoxStyles(theme)}>
+          <Skeleton height={theme.spacing(78.75)} />
+        </Box>
+      )}
       <ProjectTopSection
         data={data}
         batchData={{

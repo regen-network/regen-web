@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Skeleton } from '@mui/material';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
@@ -26,7 +26,6 @@ import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
-import { getTopLinksBoxHeight } from './ProjectTopSection.utils';
 
 function ProjectTopSection({
   data,
@@ -103,15 +102,9 @@ function ProjectTopSection({
                 display: 'flex',
                 flexDirection: 'column',
                 mt: 2.5,
-                minHeight: getTopLinksBoxHeight({
-                  creditClass,
-                  methodologyVersion,
-                  creditClassVersion,
-                  isVCSProject,
-                  registry,
-                }),
               }}
             >
+              {!metadata && <Skeleton variant="text" height={124} />}
               {creditClass && creditClassVersion && (
                 <>
                   <ProjectTopLink
@@ -164,14 +157,9 @@ function ProjectTopSection({
             </Box>
           </Box>
           {/* Used to prevent layout shift */}
-          <Box
-            sx={{
-              minHeight:
-                data && (!isGISFile || (isGISFile && geojson))
-                  ? '0px'
-                  : '200px',
-            }}
-          />
+          {(!data || isGISFile === undefined || (isGISFile && !geojson)) && (
+            <Skeleton height={200} />
+          )}
           {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
               <Box sx={{ pt: 6 }}>
@@ -187,11 +175,7 @@ function ProjectTopSection({
             </LazyLoad>
           )}
           {/* Used to prevent layout shift */}
-          <Box
-            sx={{
-              minHeight: metadata ? '0px' : '200px',
-            }}
-          />
+          {!metadata && <Skeleton height={200} />}
           {landStewardStoryTitle && (
             <Title sx={{ pt: { xs: 11.75, sm: 14 } }} variant="h2">
               Story

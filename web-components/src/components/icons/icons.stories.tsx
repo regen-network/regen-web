@@ -3,6 +3,7 @@ import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
 import AvatarIcon from 'web-components/lib/components/icons/AvatarIcon';
 import CloseIcon from 'web-components/lib/components/icons/CloseIcon';
+import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
 import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
@@ -95,6 +96,8 @@ export const closeIcon = (): JSX.Element => <CloseIcon />;
 export const coBenefitsIcon = (): JSX.Element => <CoBenefitsIcon />;
 
 export const countingIcon = (): JSX.Element => <CountingIcon />;
+
+export const creditClassIcon = (): JSX.Element => <CreditClassIcon />;
 
 export const creditsIcon = (): JSX.Element => <CreditsIcon color={'#000'} />;
 

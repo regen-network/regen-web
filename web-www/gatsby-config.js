@@ -13,7 +13,7 @@ module.exports = {
     'gatsby-plugin-layout',
     'gatsby-plugin-regen-theme',
     'gatsby-plugin-mui-jss',
-    // 'gatsby-plugin-material-ui',
+    'gatsby-plugin-material-ui',
     'gatsby-plugin-mui-emotion',
     {
       resolve: `gatsby-source-sanity`,

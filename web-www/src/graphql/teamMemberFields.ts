@@ -9,6 +9,7 @@ export const teamSectionFields = graphql`
       asset {
         url
       }
+      ...ImageWithPreview
     }
     linkedinUrl
     twitterUrl

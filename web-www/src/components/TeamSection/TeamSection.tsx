@@ -42,9 +42,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       paddingBottom: theme.spacing(21.5),
     },
   },
-  item: {
-    textAlign: 'center',
-  },
   title: {
     display: 'inline-block',
     marginBottom: theme.spacing(10.5),
@@ -77,7 +74,7 @@ export const TeamSection = ({
           members.map((m, index) => {
             return (
               <Grid
-                className={classes.item}
+                sx={{ textAlign: 'center' }}
                 xs={12}
                 sm={6}
                 md={gridMd}

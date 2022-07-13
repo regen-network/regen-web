@@ -23,7 +23,9 @@ const BuyerCreate = lazy(() => import('./pages/BuyerCreate'));
 const BuyerCreditsTransfer = lazy(() => import('./pages/BuyerCreditsTransfer'));
 const BuyersPage = lazy(() => import('./pages/Buyers'));
 const CertificatePage = lazy(() => import('./pages/Certificate'));
-const ChooseCreditClass = lazy(() => import('./pages/ChooseCreditClass'));
+const ChooseCreditClassPage = lazy(
+  () => import('./pages/ChooseCreditClassPage'),
+);
 const CreateCreditClass = lazy(() => import('./pages/CreateCreditClass'));
 const CreateMethodology = lazy(() => import('./pages/CreateMethodology'));
 const CreditClassDetails = lazy(() => import('./pages/CreditClassDetails'));
@@ -138,7 +140,7 @@ const App: React.FC = (): JSX.Element => {
             <Route path="project-pages/:projectId">
               <Route
                 path="choose-credit-class"
-                element={<KeplrRoute component={ChooseCreditClass} />}
+                element={<KeplrRoute component={ChooseCreditClassPage} />}
               />
               <Route
                 path="basic-info"

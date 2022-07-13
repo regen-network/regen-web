@@ -1,29 +1,30 @@
 import { Box, useTheme } from '@mui/material';
 import { useMemo, useState } from 'react';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
-import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import { Link } from '../../../components/atoms';
 import { BuyCreditsModal } from '../../../components/organisms';
 import SellOrdersTable from '../../../components/organisms/SellOrdersTable/SellOrdersTable';
 import useQueryListBatchInfo from '../../../hooks/useQueryListBatchInfo';
+import { useQuerySellOrders } from '../../../hooks/useQuerySellOrders';
 import { getHashUrl } from '../../../lib/block-explorer';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import { BUY_SELL_ORDER_ACTION } from './Storefront.constants';
-import { sellOrdersMock, txHashMock } from './Storefront.mock';
+import { txHashMock } from './Storefront.mock';
 import normalizeSellOrders from './Storefront.normalizer';
 import { sortByExpirationDate } from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
-  const sellOrdersResponse = { sellOrders: sellOrdersMock };
-  const sellOrders = sellOrdersResponse.sellOrders;
+  const sellOrdersResponse = useQuerySellOrders();
+  const sellOrders = sellOrdersResponse?.sellOrders;
   const batchDenoms = useMemo(
-    () => sellOrders.map(sellOrder => sellOrder.batch_denom),
+    () => sellOrders?.map(sellOrder => sellOrder.batchDenom),
     [sellOrders],
   );
   const batchInfos = useQueryListBatchInfo(batchDenoms);
@@ -64,7 +65,7 @@ export const Storefront = (): JSX.Element => {
     askDenom,
     batchDenom,
     id: orderId,
-  } = normalizedSellOrders[selectedSellOrder ?? 0];
+  } = normalizedSellOrders[selectedSellOrder ?? 0] ?? {};
 
   const initalValues = useMemo(
     () => ({

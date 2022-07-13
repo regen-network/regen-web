@@ -4,7 +4,7 @@ export const sellOrdersMock: SellOrder[] = [
   {
     id: '1',
     seller: 'regen1qwa9xy0997j5mrc4dxn7jrcvvkpm3uwuldkrmg',
-    batch_denom: 'C01-20180101-20200101-001',
+    batch_denom: 'C02-001-19930101-20031031-001',
     quantity: '4.2',
     ask_denom: 'uregen',
     ask_amount: '17',
@@ -14,7 +14,7 @@ export const sellOrdersMock: SellOrder[] = [
   {
     id: '2',
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-    batch_denom: 'C01-20180101-20200101-001',
+    batch_denom: 'C02-001-19930101-20031031-001',
     quantity: '100',
     ask_denom: 'uregen',
     ask_amount: '20',
@@ -24,7 +24,7 @@ export const sellOrdersMock: SellOrder[] = [
   {
     id: '3',
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-    batch_denom: 'C01-20180101-20200101-001',
+    batch_denom: 'C02-001-19930101-20031031-001',
     quantity: '200',
     ask_denom: 'uregen',
     ask_amount: '10',
@@ -34,7 +34,7 @@ export const sellOrdersMock: SellOrder[] = [
   {
     id: '4',
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-    batch_denom: 'C01-20180101-20200101-001',
+    batch_denom: 'C02-001-19930101-20031031-001',
     quantity: '300',
     ask_denom: 'uregen',
     ask_amount: '15',
@@ -44,7 +44,7 @@ export const sellOrdersMock: SellOrder[] = [
   {
     id: '5',
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-    batch_denom: 'C01-20180101-20200101-001',
+    batch_denom: 'C02-001-19930101-20031031-001',
     quantity: '100',
     ask_denom: 'uregen',
     ask_amount: '11',
@@ -54,7 +54,7 @@ export const sellOrdersMock: SellOrder[] = [
   {
     id: '6',
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-    batch_denom: 'C01-20180101-20200101-001',
+    batch_denom: 'C02-001-19930101-20031031-001',
     quantity: '200',
     ask_denom: 'uregen',
     ask_amount: '8',
@@ -64,7 +64,7 @@ export const sellOrdersMock: SellOrder[] = [
   {
     id: '7',
     seller: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-    batch_denom: 'C01-20180101-20200101-001',
+    batch_denom: 'C02-001-19930101-20031031-001',
     quantity: '300',
     ask_denom: 'uregen',
     ask_amount: '7',

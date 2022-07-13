@@ -5,6 +5,7 @@ import { client } from '../../../sanity';
 import { useAllCreditClassQuery } from '../../../generated/sanity-graphql';
 import { useAllCreditClassesQuery } from '../../../generated/graphql';
 import { useWallet } from '../../../lib/wallet';
+import { queryClassIssuers } from '../../../lib/ecocredit/api';
 
 interface CreditClassOption {
   id: string;
@@ -29,47 +30,53 @@ function useGetCreditClassOptions(): {
   const { data: creditClassContentData } = useAllCreditClassQuery({ client });
 
   useEffect(() => {
-    if (!wallet?.address || onChainClasses?.length < 1) {
-      return;
-    }
+    const setupOptions = async () => {
+      if (!wallet?.address || onChainClasses?.length < 1) return;
 
-    const offChainClasses =
-      offChainCreditClasses?.allCreditClasses?.nodes?.filter(
-        offChain =>
-          offChain?.onChainId &&
-          onChainClasses?.findIndex(
-            onChain => onChain.classId === offChain.onChainId,
-          ) > -1,
-      ) || [];
+      const offChainClasses =
+        offChainCreditClasses?.allCreditClasses?.nodes?.filter(
+          offChain =>
+            offChain?.onChainId &&
+            onChainClasses?.findIndex(
+              onChain => onChain.id === offChain.onChainId,
+            ) > -1,
+        ) || [];
 
-    const creditClassesContent = creditClassContentData?.allCreditClass;
-    const ccOptions =
-      onChainClasses?.map(onChainClass => {
-        const creditClassOnChainId = onChainClass?.classId;
-        const contentMatch = creditClassesContent?.find(
-          content => content.path === creditClassOnChainId,
-        );
-        const offChainMatch = offChainClasses.find(
-          offChainClass => offChainClass?.onChainId === creditClassOnChainId,
-        );
-        const metadata = onChainClass?.metadataJson || {};
-        const name = metadata?.['schema:name'];
-        const title = name
-          ? `${name} (${creditClassOnChainId})`
-          : creditClassOnChainId;
+      const creditClassesContent = creditClassContentData?.allCreditClass;
 
-        return {
-          id: offChainMatch?.id || '',
-          onChainId: creditClassOnChainId || '',
-          imageSrc: contentMatch?.image?.image?.asset?.url || '',
-          title: title || '',
-          description: metadata?.['schema:description'],
-          disabled: !onChainClass.issuers.includes(wallet.address),
-        };
-      }) || [];
+      const ccOptions = await Promise.all(
+        onChainClasses?.map(async onChainClass => {
+          const creditClassOnChainId = onChainClass?.id;
+          const contentMatch = creditClassesContent?.find(
+            content => content.path === creditClassOnChainId,
+          );
+          const offChainMatch = offChainClasses.find(
+            offChainClass => offChainClass?.onChainId === creditClassOnChainId,
+          );
+          const metadata = onChainClass?.metadataJson || {};
+          const name = metadata?.['schema:name'];
+          const title = name
+            ? `${name} (${creditClassOnChainId})`
+            : creditClassOnChainId;
+          const { issuers } = await queryClassIssuers(onChainClass.id);
+          const isIssuer = issuers?.includes(wallet.address);
 
-    setCreditClassOptions(ccOptions);
-    setLoading(false);
+          return {
+            id: offChainMatch?.id || '',
+            onChainId: creditClassOnChainId || '',
+            imageSrc: contentMatch?.image?.image?.asset?.url || '',
+            title: title || '',
+            description: metadata?.['schema:description'],
+            disabled: !isIssuer,
+          };
+        }) || [],
+      );
+
+      setCreditClassOptions(ccOptions);
+      setLoading(false);
+    };
+
+    setupOptions();
   }, [onChainClasses, creditClassContentData, offChainCreditClasses, wallet]);
 
   return { creditClassOptions, loading };

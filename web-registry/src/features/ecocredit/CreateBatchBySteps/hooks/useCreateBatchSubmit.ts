@@ -5,15 +5,15 @@ import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit
 import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-import { useLedger } from '../../../ledger';
-import useMsgClient from '../../../hooks/useMsgClient';
+import { useLedger } from '../../../../ledger';
+import useMsgClient from '../../../../hooks/useMsgClient';
 import {
   generateIri,
   IriFromMetadataSuccess,
   // stringToUint8Array,
-} from '../../../lib/metadata-graph';
+} from '../../../../lib/metadata-graph';
 
-import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
+import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
 // TODO
 // Right now, just case "C01" (aka. VCS)
@@ -115,7 +115,7 @@ type ReturnType = {
   closeSubmitModal: () => void;
 };
 
-export default function useCreateBatch(): ReturnType {
+export default function useCreateBatchSubmit(): ReturnType {
   const { api } = useLedger();
   const { wallet, signAndBroadcast, deliverTxResponse, error, setError } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);

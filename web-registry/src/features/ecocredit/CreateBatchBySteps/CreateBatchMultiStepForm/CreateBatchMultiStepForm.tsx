@@ -9,7 +9,7 @@ import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { useMultiStep } from '../../../../components/templates/MultiStep';
 
 import formModel from '../form-model';
-import useCreateBatch from '../useCreateBatch';
+import useCreateBatchSubmit from '../hooks/useCreateBatchSubmit';
 
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
@@ -55,7 +55,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     error: submitError,
     createBatch,
     closeSubmitModal,
-  } = useCreateBatch();
+  } = useCreateBatchSubmit();
 
   const currentValidationSchema = isReviewStep
     ? Yup.object(formModel.validationSchemaFields) // all fields

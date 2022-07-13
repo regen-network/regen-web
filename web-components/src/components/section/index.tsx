@@ -38,7 +38,7 @@ interface StyleProps {
 
 const Root = styled(Box, {
   name: 'RegenSection',
-  shouldForwardProp: prop => prop !== 'sx' && prop !== 'withSlider',
+  shouldForwardProp: prop => prop !== 'withSlider',
 })<{ withSlider: boolean }>(({ theme, withSlider }) => ({
   maxWidth: theme.breakpoints.values.lg,
   margin: '0 auto',

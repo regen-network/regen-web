@@ -4,6 +4,7 @@ query AllCreditClasses {
       id
       uri
       standard
+      onChainId
       creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
         nodes {
           name

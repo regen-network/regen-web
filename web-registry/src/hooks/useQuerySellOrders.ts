@@ -1,4 +1,4 @@
-/* import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   QueryClientImpl,
@@ -7,7 +7,7 @@ import {
 
 import { useLedger } from '../ledger';
 
-export default function useQuerySellOrders():
+export const useQuerySellOrders = function ():
   | QuerySellOrdersResponse
   | undefined {
   const { api } = useLedger();
@@ -33,7 +33,4 @@ export default function useQuerySellOrders():
   }, [queryClient]);
 
   return sellOrders;
-}
- */
-
-export {};
+};

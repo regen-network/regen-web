@@ -1,30 +1,31 @@
+import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { QueryBatchResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { NormalizedSellOrder, SellOrder } from './Storefront.types';
+import { NormalizedSellOrder } from './Storefront.types';
 
 type Props = {
-  sellOrders: SellOrder[];
+  sellOrders?: SellOrderInfo[];
   batchInfos?: QueryBatchResponse[];
 };
 
 const normalizeSellOrders = ({
   batchInfos,
-  sellOrders,
+  sellOrders = [],
 }: Props): NormalizedSellOrder[] =>
   sellOrders.map(
     (
-      { ask_amount, ask_denom, batch_denom, id, quantity, seller, expiration },
+      { askAmount, askDenom, batchDenom, id, quantity, seller, expiration },
       index,
     ) => ({
-      id,
+      id: String(id),
       expiration,
       project: undefined,
       status: 'Partially filled',
-      askAmount: ask_amount,
-      askDenom: ask_denom,
+      askAmount,
+      askDenom,
       amountAvailable: quantity,
       amountSold: undefined,
-      creditClass: batchInfos ? batchInfos[index]?.batch?.denom : null,
-      batchDenom: batch_denom,
+      creditClass: '',
+      batchDenom,
       batchStartDate: batchInfos ? batchInfos[index]?.batch?.startDate : null,
       batchEndDate: batchInfos ? batchInfos[index]?.batch?.endDate : null,
       seller,

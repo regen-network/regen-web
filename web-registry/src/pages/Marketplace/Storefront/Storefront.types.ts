@@ -18,7 +18,7 @@ export type SellOrderStatus =
 
 export type NormalizedSellOrder = {
   id: string;
-  expiration?: string;
+  expiration?: Date;
   project?: string;
   status?: SellOrderStatus;
   askAmount: string;

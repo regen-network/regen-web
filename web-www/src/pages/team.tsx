@@ -3,7 +3,6 @@ import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
 import TopSection from '../sections/team/TopSection';
 import CoreTeam from '../sections/team/CoreTeamSection';
-import ContributorSection from '../sections/team/ContributorSection';
 import AdvisorSection from '../sections/team/AdvisorSection';
 import SEO from '../components/seo';
 
@@ -25,7 +24,6 @@ const ResourcesPage: React.FC<PageProps> = ({ location }) => {
       />
       <TopSection />
       <CoreTeam />
-      <ContributorSection />
       <AdvisorSection />
     </>
   );

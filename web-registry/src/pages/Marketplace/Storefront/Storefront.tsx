@@ -51,16 +51,24 @@ export const Storefront = (): JSX.Element => {
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const navigate = useNavigate();
 
-  const projectsInfosByHandleMap = normalizeProjectsInfosByHandleMap({
-    offChainProjects: offChainProjects?.allProjects,
-    onChainProjects: onChainProjects?.projects,
-  });
+  const projectsInfosByHandleMap = useMemo(
+    () =>
+      normalizeProjectsInfosByHandleMap({
+        offChainProjects: offChainProjects?.allProjects,
+        onChainProjects: onChainProjects?.projects,
+      }),
+    [offChainProjects, onChainProjects],
+  );
 
-  const normalizedSellOrders = normalizeSellOrders({
-    batchInfos,
-    sellOrders,
-    projectsInfosByHandleMap,
-  }).sort(sortByExpirationDate);
+  const normalizedSellOrders = useMemo(
+    () =>
+      normalizeSellOrders({
+        batchInfos,
+        sellOrders,
+        projectsInfosByHandleMap,
+      }).sort(sortByExpirationDate),
+    [batchInfos, sellOrders, projectsInfosByHandleMap],
+  );
 
   const handleTxQueued = () => setIsProcessingModalOpen(true);
   const handleTxDelivered = () => {

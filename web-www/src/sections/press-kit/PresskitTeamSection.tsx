@@ -5,11 +5,13 @@ import BackgroundImage from 'gatsby-background-image';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import TeamSection from 'web-components/lib/components/team-section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { TeamItemProps } from 'web-components/lib/components/team-item';
 
-import { PresskitTeamSectionQuery } from '../../generated/graphql';
+import {
+  PresskitTeamSectionQuery,
+  SanityRegenTeamMember,
+} from '../../generated/graphql';
+import { TeamSection } from '../../components/TeamSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -36,13 +38,7 @@ const query = graphql`
         header
         buttonText
         members {
-          name
-          title
-          image {
-            asset {
-              url
-            }
-          }
+          ...teamMemberFields
         }
       }
     }
@@ -56,17 +52,14 @@ const PressKitTeamSection = (): JSX.Element => {
     sanityPresskitPage: data,
   } = useStaticQuery<PresskitTeamSectionQuery>(query);
   const content = data?.teamSection;
-  const members = content?.members?.map(m => ({
-    ...m,
-    imgUrl: m?.image?.asset?.url,
-  })) as TeamItemProps[];
+  const members = !!content?.members ? content.members : [];
   return (
     <BackgroundImage fluid={background?.childImageSharp?.fluid as FluidObject}>
       <TeamSection
         gridMd={3}
         titleClassName={styles.title}
         bgUrl={teamBackground?.publicURL || ''}
-        members={members}
+        members={members as SanityRegenTeamMember[]}
         title={content?.header || ''}
       >
         <ContainedButton href="/team" size="large">

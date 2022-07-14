@@ -7,7 +7,7 @@ import TopSection from '../sections/press-kit//TopSection';
 import TitleDescriptionSection from '../sections/press-kit/TitleDescriptionSection';
 import EnableSection from '../sections/press-kit/EnableSection';
 import TimelineSection from '../sections/press-kit/TimelineSection';
-import TeamSection from '../sections/press-kit/TeamSection';
+import TeamSection from '../sections/press-kit/PresskitTeamSection';
 import FeaturedSection from '../sections/press-kit/FeaturedSection';
 import AwardsSection from '../sections/press-kit/AwardsSection';
 import LogosSection from '../sections/press-kit/LogosSection';

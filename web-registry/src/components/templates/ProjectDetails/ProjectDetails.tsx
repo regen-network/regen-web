@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/styles';
-import { Box } from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
 import * as togeojson from '@mapbox/togeojson';
 import { useLocation, useParams } from 'react-router-dom';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
@@ -27,12 +27,12 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import Section from 'web-components/lib/components/section';
 import StaticMap from 'web-components/lib/components/map/StaticMap';
 
-import { setPageView } from '../../lib/ga';
-import getApiUri from '../../lib/apiUri';
-import { buildIssuanceModalData } from '../../lib/transform';
-import { useLedger } from '../../ledger';
-import { chainId } from '../../lib/ledger';
-import { useWallet } from '../../lib/wallet';
+import { setPageView } from '../../../lib/ga';
+import getApiUri from '../../../lib/apiUri';
+import { buildIssuanceModalData } from '../../../lib/transform';
+import { useLedger } from '../../../ledger';
+import { chainId } from '../../../lib/ledger';
+import { useWallet } from '../../../lib/wallet';
 import {
   Documentation,
   ProjectTopSection,
@@ -42,27 +42,31 @@ import {
   LandManagementActions,
   BuyCreditsModal,
   ConfirmationModal,
-} from '../organisms';
-import { Credits } from '../organisms/BuyCreditsModal';
+} from '../../organisms';
+import { Credits } from '../../organisms/BuyCreditsModal';
 import {
   useMoreProjectsQuery,
   useProjectByHandleQuery,
-} from '../../generated/graphql';
+} from '../../../generated/graphql';
 import {
   useEcologicalImpactByIriQuery,
   EcologicalImpact,
-} from '../../generated/sanity-graphql';
-import { client } from '../../sanity';
-import { getBatchesWithSupply, getBatchesTotal } from '../../lib/ecocredit/api';
-import { getMetadata } from '../../lib/metadata-graph';
+} from '../../../generated/sanity-graphql';
+import { client } from '../../../sanity';
+import {
+  getBatchesWithSupply,
+  getBatchesTotal,
+} from '../../../lib/ecocredit/api';
+import { getMetadata } from '../../../lib/metadata-graph';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
-} from '../../types/ledger/ecocredit';
+} from '../../../types/ledger/ecocredit';
 import {
   ProjectMetadataLD,
   ProjectStakeholder,
-} from '../../generated/json-ld/index';
+} from '../../../generated/json-ld/index';
+import { getMediaBoxStyles } from './ProjectDetails.styles';
 
 interface Project {
   creditPrice?: CreditPrice;
@@ -97,7 +101,7 @@ function ProjectDetails(): JSX.Element {
   }
 
   // fetch project
-  const { data } = useProjectByHandleQuery({
+  const { data, loading } = useProjectByHandleQuery({
     skip: !projectId,
     variables: { handle: projectId as string },
   });
@@ -311,14 +315,21 @@ function ProjectDetails(): JSX.Element {
       />
 
       {assets.length > 0 && (
-        <ProjectMedia
-          assets={assets}
-          gridView
-          mobileHeight={theme.spacing(78.75)}
-          imageStorageBaseUrl={imageStorageBaseUrl}
-          apiServerUrl={apiServerUrl}
-          imageCredits={metadata?.['schema:creditText']}
-        />
+        <Box sx={getMediaBoxStyles(theme)}>
+          <ProjectMedia
+            assets={assets}
+            gridView
+            mobileHeight={theme.spacing(78.75)}
+            imageStorageBaseUrl={imageStorageBaseUrl}
+            apiServerUrl={apiServerUrl}
+            imageCredits={metadata?.['schema:creditText']}
+          />
+        </Box>
+      )}
+      {assets.length === 0 && loading && (
+        <Box sx={getMediaBoxStyles(theme)}>
+          <Skeleton height={theme.spacing(78.75)} />
+        </Box>
       )}
       <ProjectTopSection
         data={data}

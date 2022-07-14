@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React from 'react';
+// import { useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { Title } from 'web-components/lib/components/typography';
@@ -11,8 +11,7 @@ import { Link } from '../../components/atoms';
 import { Box } from '@mui/system';
 
 const ProjectFinished: React.FC = () => {
-  const { projectId } = useParams();
-  const navigate = useNavigate();
+  // const { projectId } = useParams();
 
   return (
     <OnboardingFormTemplate activeStep={2} title="Project has been created!">

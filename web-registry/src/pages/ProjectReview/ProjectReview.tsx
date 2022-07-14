@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
@@ -193,11 +193,11 @@ export const ProjectReview: React.FC = () => {
               overflowY: 'scroll',
             })}
           >
-            <pre>{metadata && JSON.stringify(metadata, null, 2)}</pre>
+            <pre>{!!metadata && JSON.stringify(metadata, null, 2)}</pre>
           </Box>
         )}
       </ReviewCard>
-      <ProjectPageFooter onSave={submit} saveDisabled={false} />
+      <ProjectPageFooter onSave={submit} saveDisabled={isSubmitModalOpen} />
       <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
     </OnboardingFormTemplate>
   );

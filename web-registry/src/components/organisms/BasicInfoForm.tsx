@@ -97,24 +97,24 @@ const BasicInfoForm: React.FC<{
             projectPageData,
             'http://regen.network/ProjectPageBasicInfoGroup',
           );
-          // for (const result of report.results) {
-          //   const path: string = result.path.value;
-          //   console.log('result', result);
+          for (const result of report.results) {
+            const path: string = result.path.value;
+            console.log('result', result);
 
-          //   const compactedPath = getCompactedPath(path) as
-          //     | keyof BasicInfoFormValues
-          //     | undefined;
+            const compactedPath = getCompactedPath(path) as
+              | keyof BasicInfoFormValues
+              | undefined;
 
-          //   if (compactedPath === 'regen:projectSize') {
-          //     errors[compactedPath] = {
-          //       'qudt:numericValue': {
-          //         '@value': requiredMessage,
-          //       },
-          //     };
-          //   } else if (compactedPath) {
-          //     errors[compactedPath] = requiredMessage;
-          //   }
-          // }
+            if (compactedPath === 'regen:projectSize') {
+              errors[compactedPath] = {
+                'qudt:numericValue': {
+                  '@value': requiredMessage,
+                },
+              };
+            } else if (compactedPath) {
+              errors[compactedPath] = requiredMessage;
+            }
+          }
         }
         return errors;
       }}

@@ -8,7 +8,7 @@ import ContainedButton from 'web-components/lib/components/buttons/ContainedButt
 import { SaveIcon } from 'web-components/lib/components/icons/SaveIcon';
 
 interface Props {
-  onSave: () => void;
+  onSave: (() => void) | ((values: any) => Promise<void>);
   saveDisabled: boolean;
   saveText?: string;
 }

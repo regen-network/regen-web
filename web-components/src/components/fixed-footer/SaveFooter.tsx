@@ -38,7 +38,7 @@ const StyledLinearProgress = withStyles((theme: Theme) =>
 interface Props {
   onPrev?: () => void;
   onNext?: () => void;
-  onSave: () => void;
+  onSave: (() => void) | ((values: any) => Promise<void>);
   saveDisabled: boolean;
   saveText?: string;
   hideProgress?: boolean;

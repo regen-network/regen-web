@@ -56,7 +56,7 @@ const useBuySellOrderSubmit = ({
         orders: [
           {
             sellOrderId: sellOrderId,
-            bidPrice: { amount: String(creditCount), denom: askDenom },
+            bidPrice: { amount: String(price), denom: askDenom },
             disableAutoRetire: retirementAction === 'manual',
             quantity: String(creditCount),
             retirementJurisdiction: `${stateProvince} ${postalCode} ${country}`,

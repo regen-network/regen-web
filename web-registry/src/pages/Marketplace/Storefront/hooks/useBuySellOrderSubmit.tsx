@@ -4,7 +4,9 @@ import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIc
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
 import { BuyCreditsValues } from '../../../../components/organisms';
+import { SignAndBroadcastType } from '../../../../hooks/useMsgClient';
 import { useStateSetter } from '../../../../types/react/use-state';
+import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import {
   BUY_SELL_ORDER_BUTTON,
   BUY_SELL_ORDER_HEADER,
@@ -12,31 +14,63 @@ import {
 } from '../Storefront.constants';
 
 type Props = {
+  accountAddress?: string;
+  signAndBroadcast: SignAndBroadcastType;
   setCardItems: useStateSetter<Item[] | undefined>;
   setTxModalTitle: useStateSetter<string>;
   setTxModalHeader: useStateSetter<string>;
   setTxButtonTitle: useStateSetter<string>;
   setSelectedSellOrder: useStateSetter<number | null>;
-  setIsProcessingModalOpen: useStateSetter<boolean>;
 };
 
 type ReturnType = (values: BuyCreditsValues) => Promise<void>;
 
 const useBuySellOrderSubmit = ({
+  accountAddress,
+  signAndBroadcast,
   setTxModalHeader,
   setCardItems,
   setTxModalTitle,
   setTxButtonTitle,
   setSelectedSellOrder,
-  setIsProcessingModalOpen,
 }: Props): ReturnType => {
   const buySellOrderSubmit = useCallback(
     async (values: BuyCreditsValues): Promise<void> => {
-      const { batchDenom, price, creditCount } = values;
-      setIsProcessingModalOpen(true);
-      setSelectedSellOrder(null);
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      setIsProcessingModalOpen(false);
+      if (!accountAddress) return Promise.reject();
+
+      const {
+        batchDenom,
+        price,
+        creditCount,
+        sellOrderId,
+        retirementNote,
+        stateProvince,
+        retirementAction,
+        country,
+        askDenom,
+        postalCode,
+      } = values;
+
+      const msg = MsgBuyDirect.fromPartial({
+        buyer: accountAddress,
+        orders: [
+          {
+            sellOrderId: sellOrderId,
+            bidPrice: { amount: String(creditCount), denom: askDenom },
+            disableAutoRetire: retirementAction === 'manual',
+            quantity: String(creditCount),
+            retirementJurisdiction: `${stateProvince} ${postalCode} ${country}`,
+          },
+        ],
+      });
+
+      const tx = {
+        msgs: [msg],
+        fee: undefined,
+        memo: retirementNote,
+      };
+
+      signAndBroadcast(tx, () => setSelectedSellOrder(null));
 
       if (batchDenom && creditCount) {
         setCardItems([
@@ -77,7 +111,8 @@ const useBuySellOrderSubmit = ({
       setTxModalHeader,
       setSelectedSellOrder,
       setTxButtonTitle,
-      setIsProcessingModalOpen,
+      accountAddress,
+      signAndBroadcast,
     ],
   );
 

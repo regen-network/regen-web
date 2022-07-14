@@ -51,6 +51,8 @@ const useBuySellOrderSubmit = ({
         postalCode,
       } = values;
       const disableAutoRetire = retirementAction === 'manual';
+      const stateProvinceValue = stateProvince ? `-${stateProvince}` : '';
+      const postalCodeValue = stateProvince ? ` ${postalCode}` : '';
 
       const msg = MsgBuyDirect.fromPartial({
         buyer: accountAddress,
@@ -60,7 +62,9 @@ const useBuySellOrderSubmit = ({
             bidPrice: { amount: String(price), denom: askDenom },
             disableAutoRetire,
             quantity: String(creditCount),
-            retirementJurisdiction: `${stateProvince} ${postalCode} ${country}`,
+            retirementJurisdiction: disableAutoRetire
+              ? ''
+              : `${country}${stateProvinceValue}${postalCodeValue}`,
           },
         ],
       });

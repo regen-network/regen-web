@@ -35,7 +35,7 @@ const LocationStateField: React.FC<FieldProps> = ({
     if (respOK) {
       const data = await resp.data;
       const options = Object.keys(data.result).map(key => ({
-        value: data.result[key],
+        value: key.replace(/\"/g, ''),
         label: data.result[key],
       }));
       return options;

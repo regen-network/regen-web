@@ -50,6 +50,7 @@ const useBuySellOrderSubmit = ({
         askDenom,
         postalCode,
       } = values;
+      const disableAutoRetire = retirementAction === 'manual';
 
       const msg = MsgBuyDirect.fromPartial({
         buyer: accountAddress,
@@ -57,7 +58,7 @@ const useBuySellOrderSubmit = ({
           {
             sellOrderId: sellOrderId,
             bidPrice: { amount: String(price), denom: askDenom },
-            disableAutoRetire: retirementAction === 'manual',
+            disableAutoRetire,
             quantity: String(creditCount),
             retirementJurisdiction: `${stateProvince} ${postalCode} ${country}`,
           },
@@ -96,7 +97,7 @@ const useBuySellOrderSubmit = ({
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
-            label: 'amount retired',
+            label: disableAutoRetire ? 'NUMBER OF CREDIT' : 'amount retired',
             value: { name: getFormattedNumber(creditCount) },
           },
         ]);

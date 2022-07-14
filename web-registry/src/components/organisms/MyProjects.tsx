@@ -98,7 +98,7 @@ const MyProjects: React.FC = () => {
             <ProjectCard
               name={project?.handle || project?.id}
               imgSrc={''}
-              place="TODO"
+              place=""
               area={0}
               areaUnit="ha"
             />

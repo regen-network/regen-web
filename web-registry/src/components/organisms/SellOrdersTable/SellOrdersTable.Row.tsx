@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import dayjs from 'dayjs';
 import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
@@ -23,14 +24,16 @@ const getSellOrdersTableRow = ({
     amountAvailable,
     seller,
     expiration,
-    creditClass,
     batchStartDate,
     batchEndDate,
+    project,
   },
 }: Props): React.ReactNode[] => [
   <Link href={`/marketplace/sell-order/${id}`}>{id}</Link>,
   <Box sx={{ color: 'info.main' }}>{dayjs(expiration).fromNow()}</Box>,
-  <Link href={`/projects/Wilmot}`}>{'??'}</Link>,
+  <WithLoader isLoading={project?.name === undefined}>
+    <Link href={`/projects/${project?.id}}`}>{project?.name}</Link>
+  </WithLoader>,
   <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
     <Box sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
       {askDenom === 'usdc' && <USDCIcon />}
@@ -39,8 +42,10 @@ const getSellOrdersTableRow = ({
     {`${formatNumber(askAmount)}`}
   </Box>,
   <Box>{formatNumber(amountAvailable)}</Box>,
-  <WithLoader isLoading={creditClass === null}>
-    <Link href={`/credit-classes/${creditClass}`}>{creditClass}</Link>
+  <WithLoader isLoading={project?.classIdUrl === undefined}>
+    <Link href={`/credit-classes/${project?.classIdUrl}`}>
+      {project?.classIdName && ReactHtmlParser(project?.classIdName)}
+    </Link>
   </WithLoader>,
   <Link
     href={`/credit-batches/${batchDenom}`}
@@ -55,12 +60,12 @@ const getSellOrdersTableRow = ({
   >
     {batchDenom}
   </Link>,
-  <WithLoader isLoading={batchStartDate === null}>
+  <WithLoader isLoading={batchStartDate === undefined}>
     <Box sx={{ color: 'info.main' }}>
       {batchStartDate ? formatDate(batchStartDate) : ''}
     </Box>
   </WithLoader>,
-  <WithLoader isLoading={batchEndDate === null}>
+  <WithLoader isLoading={batchEndDate === undefined}>
     <Box sx={{ color: 'info.main' }}>
       {batchEndDate ? formatDate(batchEndDate) : ''}
     </Box>

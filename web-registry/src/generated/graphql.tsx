@@ -6133,29 +6133,6 @@ export type GetUserFirstOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
 };
 
-/** All input for the `getWalletByAddr` mutation. */
-export type GetWalletByAddrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  addr?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `getWalletByAddr` mutation. */
-export type GetWalletByAddrPayload = {
-  __typename?: 'GetWalletByAddrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  walletId?: Maybe<Scalars['UUID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
 /** All input for the `getWalletContactEmail` mutation. */
 export type GetWalletContactEmailInput = {
   /**
@@ -7034,7 +7011,6 @@ export type Mutation = {
   createUserOrganization?: Maybe<CreateUserOrganizationPayload>;
   createUserOrganizationIfNeeded?: Maybe<CreateUserOrganizationIfNeededPayload>;
   getUserFirstOrganization?: Maybe<GetUserFirstOrganizationPayload>;
-  getWalletByAddr?: Maybe<GetWalletByAddrPayload>;
   getWalletContactEmail?: Maybe<GetWalletContactEmailPayload>;
   isAdmin?: Maybe<IsAdminPayload>;
   issueCredits?: Maybe<IssueCreditsPayload>;
@@ -7999,12 +7975,6 @@ export type MutationCreateUserOrganizationIfNeededArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationGetUserFirstOrganizationArgs = {
   input: GetUserFirstOrganizationInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationGetWalletByAddrArgs = {
-  input: GetWalletByAddrInput;
 };
 
 
@@ -14425,8 +14395,6 @@ export type Query = Node & {
   getAvailableCredits?: Maybe<Scalars['BigFloat']>;
   getCurrentUser?: Maybe<Scalars['String']>;
   getCurrentUserId?: Maybe<Scalars['UUID']>;
-  /** Reads and enables pagination through a set of `Wallet`. */
-  getWalletByAddress?: Maybe<WalletsConnection>;
   /** Reads a single `Account` using its globally unique `ID`. */
   account?: Maybe<Account>;
   /** Reads a single `AccountBalance` using its globally unique `ID`. */
@@ -15055,17 +15023,6 @@ export type QueryWalletByAddrArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryGetAvailableCreditsArgs = {
   vintageId?: Maybe<Scalars['UUID']>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryGetWalletByAddressArgs = {
-  walletAddress?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
 };
 
 
@@ -20388,10 +20345,10 @@ export type AllProjectsQuery = (
     { __typename?: 'ProjectsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'metadata'>
+      & Pick<Project, 'id' | 'handle' | 'metadata'>
       & { creditClassByCreditClassId?: Maybe<(
         { __typename?: 'CreditClass' }
-        & Pick<CreditClass, 'id'>
+        & Pick<CreditClass, 'id' | 'onChainId'>
         & { methodologyByMethodologyId?: Maybe<(
           { __typename?: 'Methodology' }
           & Pick<Methodology, 'id'>
@@ -20406,7 +20363,7 @@ export type AllProjectsQuery = (
           { __typename?: 'CreditClassVersionsConnection' }
           & { nodes: Array<Maybe<(
             { __typename?: 'CreditClassVersion' }
-            & Pick<CreditClassVersion, 'id' | 'createdAt' | 'name' | 'version'>
+            & Pick<CreditClassVersion, 'id' | 'createdAt' | 'name' | 'version' | 'metadata'>
           )>> }
         ) }
       )> }
@@ -21633,9 +21590,11 @@ export const AllProjectsDocument = gql`
   allProjects {
     nodes {
       id
+      handle
       metadata
       creditClassByCreditClassId {
         id
+        onChainId
         methodologyByMethodologyId {
           id
           methodologyVersionsById {
@@ -21653,6 +21612,7 @@ export const AllProjectsDocument = gql`
             createdAt
             name
             version
+            metadata
           }
         }
       }

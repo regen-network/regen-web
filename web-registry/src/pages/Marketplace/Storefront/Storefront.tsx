@@ -14,12 +14,17 @@ import { Link } from '../../../components/atoms';
 import { BuyCreditsModal } from '../../../components/organisms';
 import SellOrdersTable from '../../../components/organisms/SellOrdersTable/SellOrdersTable';
 import useMsgClient from '../../../hooks/useMsgClient';
+import { useAllProjectsQuery } from '../../../generated/graphql';
 import useQueryListBatchInfo from '../../../hooks/useQueryListBatchInfo';
+import useQueryProjects from '../../../hooks/useQueryProjects';
 import { useQuerySellOrders } from '../../../hooks/useQuerySellOrders';
 import { getHashUrl } from '../../../lib/block-explorer';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import { BUY_SELL_ORDER_ACTION } from './Storefront.constants';
-import normalizeSellOrders from './Storefront.normalizer';
+import {
+  normalizeProjectsInfosByHandleMap,
+  normalizeSellOrders,
+} from './Storefront.normalizer';
 import { sortByExpirationDate } from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
@@ -30,6 +35,11 @@ export const Storefront = (): JSX.Element => {
     [sellOrders],
   );
   const batchInfos = useQueryListBatchInfo(batchDenoms);
+  // offchain stored Projects
+  const { data: offChainProjects } = useAllProjectsQuery();
+  // onChain stored Projects
+  const onChainProjects = useQueryProjects();
+
   const [selectedSellOrder, setSelectedSellOrder] = useState<number | null>(
     null,
   );
@@ -41,9 +51,15 @@ export const Storefront = (): JSX.Element => {
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const navigate = useNavigate();
 
+  const projectsInfosByHandleMap = normalizeProjectsInfosByHandleMap({
+    offChainProjects: offChainProjects?.allProjects,
+    onChainProjects: onChainProjects?.projects,
+  });
+
   const normalizedSellOrders = normalizeSellOrders({
     batchInfos,
     sellOrders,
+    projectsInfosByHandleMap,
   }).sort(sortByExpirationDate);
 
   const handleTxQueued = () => setIsProcessingModalOpen(true);

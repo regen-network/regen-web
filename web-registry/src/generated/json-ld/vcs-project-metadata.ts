@@ -6,7 +6,7 @@ import { ProjectMetadataLD } from './project-metadata';
 export interface VCSProjectMetadataLD extends ProjectMetadataLD {
   '@context': Context;
   '@type': string;
-  'schema:description': TypeValue;
+  'schema:description': string;
   'regen:vcsProjectId': number;
   'regen:vcsProjectPage': URL;
   'regen:vcsMethodology': TypeValue;

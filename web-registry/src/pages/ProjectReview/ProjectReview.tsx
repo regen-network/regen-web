@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
@@ -10,14 +10,17 @@ import { useProjectByIdQuery } from '../../generated/graphql';
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { Box } from '@mui/material';
+import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();
+  const navigate = useNavigate();
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
   });
   const project = data?.projectById;
+  const editPath = `/project-pages/${projectId}`;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
   const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
   const metadata: Partial<VCSProjectMetadataLD> = project?.metadata;
@@ -26,26 +29,46 @@ export const ProjectReview: React.FC = () => {
 
   return (
     <OnboardingFormTemplate
-      activeStep={2}
+      activeStep={1}
       title="Review"
       saveAndExit={() => Promise.resolve()}
     >
-      <ReviewCard title="Basic Info" onEditClick={() => {}}>
+      <ReviewCard
+        title="Basic Info"
+        onEditClick={() => navigate(`${editPath}/basic-info`)}
+      >
         <ItemDisplay name="Name" value={metadata?.['schema:name']} />
         <ItemDisplay
           name="Size"
           value={`${
-            metadata?.['regen:projectSize']?.['qudt:numericValue'] || '-'
-          } ${metadata?.['regen:projectSize']?.['qudt:unit'] || '-'}`}
+            metadata?.['regen:projectSize']?.['qudt:numericValue']?.[
+              '@value'
+            ] || '-'
+          } ${
+            qudtUnitMap[
+              metadata?.['regen:projectSize']?.['qudt:unit']?.[
+                '@value'
+              ] as qudtUnit
+            ]
+          }`}
         />
       </ReviewCard>
-      <ReviewCard title="Location" onEditClick={() => {}}>
+      <ReviewCard
+        title="Location"
+        onEditClick={() => navigate(`${editPath}/location`)}
+      >
         <ItemDisplay value={metadata?.['schema:location']?.place_name} />
       </ReviewCard>
-      <ReviewCard title="Description" onEditClick={() => {}}>
-        <ItemDisplay value={metadata?.['schema:description']?.['@value']} />
+      <ReviewCard
+        title="Description"
+        onEditClick={() => navigate(`${editPath}/description`)}
+      >
+        <ItemDisplay value={metadata?.['schema:description']} />
       </ReviewCard>
-      <ReviewCard title="Photos" onEditClick={() => {}}>
+      <ReviewCard
+        title="Photos"
+        onEditClick={() => navigate(`${editPath}/media`)}
+      >
         {metadata?.['regen:previewPhoto']?.['@value'] && (
           <Photo imgSrc={metadata?.['regen:previewPhoto']?.['@value']} />
         )}
@@ -55,7 +78,10 @@ export const ProjectReview: React.FC = () => {
             <Photo imgSrc={photo?.['@value']} />
           ))}
       </ReviewCard>
-      <ReviewCard title="Roles" onEditClick={() => {}}>
+      <ReviewCard
+        title="Roles"
+        onEditClick={() => navigate(`${editPath}/roles`)}
+      >
         {metadata?.['regen:projectDeveloper'] && (
           <>
             <ItemDisplay
@@ -70,7 +96,10 @@ export const ProjectReview: React.FC = () => {
           </>
         )}
       </ReviewCard>
-      <ReviewCard title="Metadata" onEditClick={() => {}}>
+      <ReviewCard
+        title="Metadata"
+        onEditClick={() => navigate(`${editPath}/metadata`)}
+      >
         {isVCS ? (
           <>
             <ItemDisplay

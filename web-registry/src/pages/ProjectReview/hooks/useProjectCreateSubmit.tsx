@@ -1,6 +1,5 @@
 import { MsgCreateProject } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
-import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useCallback, useState } from 'react';
 import {
   ProjectMetadataLD,
   VCSProjectMetadataLD,
@@ -11,76 +10,80 @@ import {
   IriFromMetadataSuccess,
 } from '../../../lib/metadata-graph';
 
-export interface MsgCreateProjectValues {}
-
-type Props = {
+interface MsgCreateProjectValues {
   classId: string;
   admin: string;
   metadata: Partial<ProjectMetadataLD> | Partial<VCSProjectMetadataLD>;
   jurisdiction: string;
   referenceId?: string;
+}
+
+interface Props {
   signAndBroadcast: SignAndBroadcastType;
   onSuccess: () => void;
+}
+
+type ReturnType = {
+  projectCreateSubmit: (values: MsgCreateProjectValues) => Promise<void>;
+  isSubmitModalOpen: boolean;
+  closeSubmitModal: () => void;
 };
 
-type ReturnType = (values: MsgCreateProject) => Promise<void>;
-
 const useProjectCreateSubmit = ({
-  classId,
-  admin,
-  metadata,
-  jurisdiction,
-  referenceId,
   signAndBroadcast,
   onSuccess,
 }: Props): ReturnType => {
-  const navigate = useNavigate();
-  const projectCreateSubmit = useCallback(async (): Promise<void> => {
-    if (!classId) return Promise.reject();
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
 
-    let iriResponse:
-      | IriFromMetadataSuccess<
-          Partial<ProjectMetadataLD> | Partial<VCSProjectMetadataLD>
-        >
-      | undefined;
+  const closeSubmitModal = () => setIsSubmitModalOpen(false);
 
-    try {
-      iriResponse = await generateIri(metadata);
-      if (!iriResponse) return;
-    } catch (err) {
-      throw new Error(err as string);
-    }
-
-    const msg = MsgCreateProject.fromPartial({
+  const projectCreateSubmit = useCallback(
+    async ({
       classId,
       admin,
-      metadata: iriResponse.iri,
+      metadata,
       jurisdiction,
       referenceId,
-    });
+    }: MsgCreateProjectValues): Promise<void> => {
+      if (!classId) return Promise.reject();
 
-    const tx = {
-      msgs: [msg],
-      fee: undefined,
-    };
+      let iriResponse:
+        | IriFromMetadataSuccess<
+            Partial<ProjectMetadataLD> | Partial<VCSProjectMetadataLD>
+          >
+        | undefined;
 
-    try {
-      await signAndBroadcast(tx, () => console.log('signAndBroadcast sent'));
-      onSuccess();
-    } catch (e) {
-      console.error(e);
-    }
-  }, [
-    admin,
-    classId,
-    jurisdiction,
-    metadata,
-    referenceId,
-    signAndBroadcast,
-    onSuccess,
-  ]);
+      try {
+        iriResponse = await generateIri(metadata);
+        if (!iriResponse) return;
+      } catch (err) {
+        throw new Error(err as string);
+      }
 
-  return projectCreateSubmit;
+      const msg = MsgCreateProject.fromPartial({
+        classId,
+        admin,
+        metadata: iriResponse.iri,
+        jurisdiction,
+        referenceId,
+      });
+
+      const tx = {
+        msgs: [msg],
+        fee: undefined,
+      };
+
+      try {
+        await signAndBroadcast(tx, () => setIsSubmitModalOpen(true));
+        onSuccess();
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    [onSuccess, signAndBroadcast],
+  );
+
+  return { projectCreateSubmit, isSubmitModalOpen, closeSubmitModal };
 };
 
 export { useProjectCreateSubmit };

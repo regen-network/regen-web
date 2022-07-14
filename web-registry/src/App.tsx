@@ -47,6 +47,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const OrganizationProfile = lazy(() => import('./pages/OrganizationProfile'));
 const PostPurchase = lazy(() => import('./pages/PostPurchase'));
 const Project = lazy(() => import('./pages/Project'));
+const ProjectFinished = lazy(() => import('./pages/ProjectFinished'));
 const ProjectList = lazy(() => import('./pages/ProjectList'));
 const ProjectLocation = lazy(() => import('./pages/ProjectLocation'));
 const ProjectReview = lazy(() => import('./pages/ProjectReview'));
@@ -169,6 +170,10 @@ const App: React.FC = (): JSX.Element => {
               <Route
                 path="review"
                 element={<KeplrRoute component={ProjectReview} />}
+              />
+              <Route
+                path="finished"
+                element={<KeplrRoute component={ProjectFinished} />}
               />
               <Route
                 path="edit"

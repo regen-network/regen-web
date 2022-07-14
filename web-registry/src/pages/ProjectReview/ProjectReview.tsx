@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 
 import { OnboardingFormTemplate } from '../../components/templates';
 import { useProjectByIdQuery } from '../../generated/graphql';
@@ -44,6 +45,11 @@ export const ProjectReview: React.FC = () => {
     // error,
     // setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+  const { projectCreateSubmit, isSubmitModalOpen, closeSubmitModal } =
+    useProjectCreateSubmit({
+      signAndBroadcast,
+      onSuccess: () => navigate(`${editPath}/finished`),
+    });
   const project = data?.projectById;
   const editPath = `/project-pages/${projectId}`;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
@@ -53,15 +59,15 @@ export const ProjectReview: React.FC = () => {
 
   console.log('project', project);
 
-  const projectCreateSubmit = useProjectCreateSubmit({
-    classId: creditClassId || '',
-    admin: wallet?.address || '',
-    metadata,
-    jurisdiction,
-    // referenceId:,
-    signAndBroadcast,
-    onSuccess: () => navigate(`${editPath}/finished`),
-  });
+  const submit = () => {
+    projectCreateSubmit({
+      classId: creditClassId || '',
+      admin: wallet?.address || '',
+      metadata,
+      jurisdiction,
+      // referenceId:,
+    });
+  };
 
   return (
     <OnboardingFormTemplate
@@ -191,7 +197,8 @@ export const ProjectReview: React.FC = () => {
           </Box>
         )}
       </ReviewCard>
-      <ProjectPageFooter onSave={projectCreateSubmit} saveDisabled={false} />
+      <ProjectPageFooter onSave={submit} saveDisabled={false} />
+      <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
     </OnboardingFormTemplate>
   );
 };

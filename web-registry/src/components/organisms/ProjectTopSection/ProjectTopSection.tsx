@@ -1,112 +1,31 @@
-import React from 'react';
-import { makeStyles } from '@mui/styles';
-import { Box, Grid, styled } from '@mui/material';
+import { Box, Grid, Skeleton } from '@mui/material';
 import cx from 'clsx';
 import LazyLoad from 'react-lazyload';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import Section from 'web-components/lib/components/section';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
+import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import ReadMore from 'web-components/lib/components/read-more';
+import Section from 'web-components/lib/components/section';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { ProjectByHandleQuery } from '../../generated/graphql';
-import { useSdgByIriQuery } from '../../generated/sanity-graphql';
-import { getParty, getDisplayParty } from '../../lib/transform';
-import { getSanityImgSrc } from '../../lib/imgSrc';
-import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
-import { client } from '../../sanity';
+import { CreditBatches } from '..';
+import { ProjectByHandleQuery } from '../../../generated/graphql';
+import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
+import { getSanityImgSrc } from '../../../lib/imgSrc';
+import { qudtUnit, qudtUnitMap } from '../../../lib/rdf';
+import { getDisplayParty, getParty } from '../../../lib/transform';
+import { client } from '../../../sanity';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
-} from '../../types/ledger/ecocredit';
-import { CreditBatches } from '.';
-import { ProjectBatchTotals, AdditionalProjectMetadata } from '../molecules';
-import { ProjectTopLink } from '../atoms';
-
-const useStyles = makeStyles((theme: Theme) => ({
-  section: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(16),
-      paddingBottom: theme.spacing(27.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(6.5),
-      paddingBottom: theme.spacing(20.5),
-    },
-  },
-  tagline: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(4.5),
-    },
-    lineHeight: '150%',
-    position: 'relative',
-  },
-  quotePersonRole: {
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(4),
-    },
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(3),
-    },
-  },
-  media: {
-    width: '100%',
-    borderRadius: '5px',
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(12.5),
-      marginBottom: theme.spacing(12.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(8.5),
-      marginBottom: theme.spacing(8.5),
-    },
-  },
-  iframe: {
-    border: 'none',
-    [theme.breakpoints.up('sm')]: {
-      height: theme.spacing(109.5),
-    },
-    [theme.breakpoints.down('sm')]: {
-      height: theme.spacing(55.25),
-    },
-  },
-  quotes: {
-    color: theme.palette.secondary.main,
-    lineHeight: 0,
-    zIndex: 0,
-    position: 'absolute',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.spacing(9),
-    },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: theme.spacing(12),
-    },
-  },
-  icon: {
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: theme.spacing(1),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(0.25),
-    },
-  },
-}));
-
-const QuoteMark = styled('span')(({ theme }) => ({
-  color: theme.palette.secondary.main,
-  lineHeight: 0,
-  zIndex: 0,
-  position: 'absolute',
-  [theme.breakpoints.down('sm')]: {
-    fontSize: theme.spacing(9),
-  },
-  [theme.breakpoints.up('sm')]: {
-    fontSize: theme.spacing(12),
-  },
-}));
+} from '../../../types/ledger/ecocredit';
+import { ProjectTopLink } from '../../atoms';
+import { AdditionalProjectMetadata, ProjectBatchTotals } from '../../molecules';
+import {
+  ProjectTopSectionQuoteMark,
+  useProjectTopSectionStyles,
+} from './ProjectTopSection.styles';
 
 function ProjectTopSection({
   data,
@@ -122,7 +41,7 @@ function ProjectTopSection({
     totals?: BatchTotalsForProject;
   };
 }): JSX.Element {
-  const styles = useStyles();
+  const styles = useProjectTopSectionStyles();
 
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
@@ -178,7 +97,14 @@ function ProjectTopSection({
               area={area}
               areaUnit={unit && qudtUnitMap[unit]}
             />
-            <Box sx={{ display: 'flex', flexDirection: 'column', mt: 2.5 }}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                mt: 2.5,
+              }}
+            >
+              {!metadata && <Skeleton variant="text" height={124} />}
               {creditClass && creditClassVersion && (
                 <>
                   <ProjectTopLink
@@ -230,7 +156,10 @@ function ProjectTopSection({
               )}
             </Box>
           </Box>
-
+          {/* Used to prevent layout shift */}
+          {(!data || isGISFile === undefined || (isGISFile && !geojson)) && (
+            <Skeleton height={200} />
+          )}
           {geojson && isGISFile && glanceText && (
             <LazyLoad offset={50} once>
               <Box sx={{ pt: 6 }}>
@@ -245,6 +174,8 @@ function ProjectTopSection({
               </Box>
             </LazyLoad>
           )}
+          {/* Used to prevent layout shift */}
+          {!metadata && <Skeleton height={200} />}
           {landStewardStoryTitle && (
             <Title sx={{ pt: { xs: 11.75, sm: 14 } }} variant="h2">
               Story
@@ -300,15 +231,19 @@ function ProjectTopSection({
                 className={styles.tagline}
                 sx={{ ml: { xs: 4, sm: 4.5 } }}
               >
-                <QuoteMark sx={{ top: 16, left: { xs: -15, sm: -18 } }}>
+                <ProjectTopSectionQuoteMark
+                  sx={{ top: 16, left: { xs: -15, sm: -18 } }}
+                >
                   “
-                </QuoteMark>
+                </ProjectTopSectionQuoteMark>
                 <Box component="span" sx={{ position: 'relative', zIndex: 1 }}>
                   {quote['regen:quote']}
                 </Box>
-                <QuoteMark sx={{ ml: -2.5, bottom: { xs: 14, sm: 16 } }}>
+                <ProjectTopSectionQuoteMark
+                  sx={{ ml: -2.5, bottom: { xs: 14, sm: 16 } }}
+                >
                   ”
-                </QuoteMark>
+                </ProjectTopSectionQuoteMark>
               </Title>
               <Label mobileSize="xs" color="secondary.main" pt={[4, 5.5]}>
                 {quote['schema:name']}

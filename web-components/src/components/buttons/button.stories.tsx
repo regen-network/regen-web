@@ -1,9 +1,10 @@
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { Box } from '@mui/material';
 
 import * as React from 'react';
 import OutlinedButton from './OutlinedButton';
 import PrevNextButton from './PrevNextButton';
-import ContainedButton from './ContainedButton';
+import ContainedButton, { ContainedColorVariant } from './ContainedButton';
 import { TableActionButtons } from './TableActionButtons';
 import { ExpandButton } from './ExpandButton';
 
@@ -16,9 +17,30 @@ export const outlinedButton = (): JSX.Element => (
   <OutlinedButton startIcon={<ArrowDownwardIcon />}>read more</OutlinedButton>
 );
 
-export const containedButton: React.FC = () => (
-  <ContainedButton>Contained</ContainedButton>
-);
+export const containedButton = (): JSX.Element => {
+  const colorVariants: ContainedColorVariant[] = [
+    'secondary',
+    'gradientBlueGreen',
+  ];
+
+  return (
+    <Box sx={{ display: 'flex' }}>
+      {colorVariants.map(colorVariant => (
+        <Box
+          key={colorVariant}
+          sx={{ mr: '8px', display: 'flex', flexDirection: 'column' }}
+        >
+          <ContainedButton colorVariant={colorVariant} sx={{ mb: '8px' }}>
+            Contained
+          </ContainedButton>
+          <ContainedButton colorVariant={colorVariant} disabled>
+            Disabled
+          </ContainedButton>
+        </Box>
+      ))}
+    </Box>
+  );
+};
 
 export const nextButton = (): JSX.Element => (
   <PrevNextButton direction="next" />

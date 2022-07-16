@@ -26,6 +26,11 @@ const styleCallback = (theme: Theme): any => ({
       backgroundColor: theme.palette.secondary.light,
       borderColor: theme.palette.secondary.light,
     },
+    '&:disabled': {
+      color: theme.palette.grey[100],
+      background: theme.palette.grey[50],
+      borderColor: theme.palette.grey[100],
+    },
   },
 });
 

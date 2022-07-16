@@ -6,7 +6,7 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { BasketTokens } from '../../../../hooks/useBasketTokens';
 import { SignAndBroadcastType } from '../../../../hooks/useMsgClient';
 import { BatchInfoWithBalance } from '../../../../types/ledger/ecocredit';
-import { useStateSetter } from '../../../../types/react/use-state';
+import { UseStateSetter } from '../../../../types/react/use-state';
 
 type Props = {
   accountAddress?: string;
@@ -16,10 +16,10 @@ type Props = {
   credits: BatchInfoWithBalance[];
   basketTakeTitle: string;
   signAndBroadcast: SignAndBroadcastType;
-  setBasketPutOpen: useStateSetter<number>;
-  setBasketTakeTokens: useStateSetter<BasketTokens | undefined>;
-  setCardItems: useStateSetter<Item[] | undefined>;
-  setTxModalTitle: useStateSetter<string | undefined>;
+  setBasketPutOpen: UseStateSetter<number>;
+  setBasketTakeTokens: UseStateSetter<BasketTokens | undefined>;
+  setCardItems: UseStateSetter<Item[] | undefined>;
+  setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
 type ReturnType = (values: BasketPutFormValues) => Promise<void>;

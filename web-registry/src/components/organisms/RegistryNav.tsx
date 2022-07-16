@@ -191,7 +191,6 @@ const RegistryNav: React.FC = () => {
               avatar={DefaultAvatar}
               disconnect={disconnect}
               pathname={pathname}
-              color={color}
               linkComponent={RegistryNavLink}
             />
           )}

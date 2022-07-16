@@ -1,4 +1,5 @@
 import React from 'react';
+import { PageProps } from 'gatsby';
 import { useTheme } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -18,7 +19,9 @@ interface BoolProps {
   [key: string]: boolean;
 }
 
-const MarketingNav: React.FC<{ location: Location }> = ({ location }) => {
+const MarketingNav: React.FC<{ location: PageProps['location'] }> = ({
+  location,
+}) => {
   const { pathname } = location;
   const theme = useTheme<Theme>();
   const headerColors: HeaderColors = {

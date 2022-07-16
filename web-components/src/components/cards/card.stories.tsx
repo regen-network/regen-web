@@ -18,7 +18,7 @@ import ProjectCard from './ProjectCard';
 import GreenCard from './GreenCard';
 import GreenTopIconCard from './GreenTopIconCard';
 import CreateProjectCard from './CreateProjectCard';
-import ImageActionCard from './ImageActionCard';
+import { ImageActionCard } from './ImageActionCard';
 import { StepCard } from './StepCard';
 import FarmerIcon from '../icons/FarmerIcon';
 import { OverviewCard } from './OverviewCard';

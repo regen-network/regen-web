@@ -1,13 +1,15 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { SxProps } from '@mui/material';
 import { Theme } from '~/theme/muiTheme';
+import { SxProps } from '@mui/material';
 
-type Props = {
+interface IconProps {
   sx?: SxProps<Theme>;
-};
+}
 
-export default function AvailableCreditsIcon({ sx = [] }: Props): JSX.Element {
+export default function AvailableCreditsIcon({
+  sx = [],
+}: IconProps): JSX.Element {
   return (
     <SvgIcon
       viewBox="0 0 57 69"

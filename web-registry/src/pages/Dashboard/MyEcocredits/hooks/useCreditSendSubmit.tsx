@@ -4,7 +4,7 @@ import { FormValues as CreditSendFormValues } from 'web-components/lib/component
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { SignAndBroadcastType } from '../../../../hooks/useMsgClient';
 import { BatchInfoWithBalance } from '../../../../types/ledger/ecocredit';
-import { useStateSetter } from '../../../../types/react/use-state';
+import { UseStateSetter } from '../../../../types/react/use-state';
 
 type Props = {
   accountAddress?: string;
@@ -12,9 +12,9 @@ type Props = {
   creditSendOpen: number;
   creditSendTitle: string;
   signAndBroadcast: SignAndBroadcastType;
-  setCreditSendOpen: useStateSetter<number>;
-  setCardItems: useStateSetter<Item[] | undefined>;
-  setTxModalTitle: useStateSetter<string | undefined>;
+  setCreditSendOpen: UseStateSetter<number>;
+  setCardItems: UseStateSetter<Item[] | undefined>;
+  setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
 type ReturnType = (values: CreditSendFormValues) => Promise<void>;

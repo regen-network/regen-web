@@ -1,15 +1,8 @@
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import { SvgIcon, SvgIconProps } from '@mui/material';
 
 export function CreditClassIcon(props: SvgIconProps): JSX.Element {
   return (
-    <SvgIcon
-      {...props}
-      width="20"
-      height="17"
-      viewBox="0 0 20 17"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <SvgIcon viewBox="0 0 20 17" {...props}>
       <svg
         width="20"
         height="17"
@@ -19,7 +12,7 @@ export function CreditClassIcon(props: SvgIconProps): JSX.Element {
       >
         <path
           d="M1 3H17C18.1046 3 19 3.89543 19 5V14C19 15.1046 18.1046 16 17 16H3C1.89543 16 1 15.1046 1 14V3Z"
-          fill="transparent"
+          fill="none"
           stroke="currentColor"
           strokeWidth="2"
         />
@@ -55,7 +48,7 @@ export function CreditClassIcon(props: SvgIconProps): JSX.Element {
         />
         <path
           d="M0.5 1C0.5 0.723858 0.723858 0.5 1 0.5H6.03163C6.18001 0.5 6.32074 0.565911 6.41574 0.679908L7.93248 2.5H1C0.723858 2.5 0.5 2.27614 0.5 2V1Z"
-          fill="transparent"
+          fill="none"
           stroke="currentColor"
         />
       </svg>

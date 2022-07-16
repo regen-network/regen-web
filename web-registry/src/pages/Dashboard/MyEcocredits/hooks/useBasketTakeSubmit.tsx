@@ -5,16 +5,16 @@ import { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { BasketTokens } from '../../../../hooks/useBasketTokens';
 import { SignAndBroadcastType } from '../../../../hooks/useMsgClient';
-import { useStateSetter } from '../../../../types/react/use-state';
+import { UseStateSetter } from '../../../../types/react/use-state';
 
 type Props = {
   accountAddress?: string;
   baskets?: QueryBasketsResponse;
   basketTakeTitle: string;
   signAndBroadcast: SignAndBroadcastType;
-  setBasketTakeTokens: useStateSetter<BasketTokens | undefined>;
-  setCardItems: useStateSetter<Item[] | undefined>;
-  setTxModalTitle: useStateSetter<string | undefined>;
+  setBasketTakeTokens: UseStateSetter<BasketTokens | undefined>;
+  setCardItems: UseStateSetter<Item[] | undefined>;
+  setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
 type ReturnType = (values: MsgTakeValues) => Promise<void>;

@@ -8,7 +8,7 @@
  */
 
 // UI layout components containing the custom context provider
-export { default as MultiStepSection } from './MultiStepSection/MultiStepSection';
+export { MultiStepTemplate } from './MultiStepTemplate';
 
 // hook to use the custom context provider
-export { useMultiStep } from './context/MultiStepContext';
+export { useMultiStep } from './MultiStepContext';

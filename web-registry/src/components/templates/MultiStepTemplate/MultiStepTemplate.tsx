@@ -1,13 +1,11 @@
-import React from 'react';
-
-import { MultiStepProvider, ProviderProps } from '../context/MultiStepContext';
-import StepperSection from './StepperSection';
+import { MultiStepProvider, ProviderProps } from './MultiStepContext';
+import { StepperSection } from './StepperSection';
 
 type MultiStepProps<T extends object> = ProviderProps<T> & {
   children: JSX.Element;
 };
 
-export default function MultiStepSection<T extends object>({
+export function MultiStepTemplate<T extends object>({
   formId,
   steps,
   initialValues,

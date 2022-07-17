@@ -29,6 +29,7 @@ const ChooseCreditClassPage = lazy(
 const CreateCreditClassInfo = lazy(
   () => import('./pages/CreateCreditClassInfo'),
 );
+const CreateCreditClass = lazy(() => import('./pages/CreateCreditClass'));
 const CreateMethodology = lazy(() => import('./pages/CreateMethodology'));
 const CreditClassDetails = lazy(() => import('./pages/CreditClassDetails'));
 const CreditsIssue = lazy(() => import('./pages/CreditsIssue'));
@@ -233,10 +234,14 @@ const App: React.FC = (): JSX.Element => {
               path="methodologies/:methodologyId"
               element={<MethodologyDetails />}
             />
-            <Route
+            <Route path="credit-classes">
+              <Route path=":creditClassId" element={<CreditClassDetails />} />
+              <Route path="create" element={<CreateCreditClass />} />
+            </Route>
+            {/* <Route
               path="credit-classes/:creditClassId/*"
               element={<CreditClassDetails />}
-            />
+            /> */}
             <Route path="stats/activity" element={<Activity />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

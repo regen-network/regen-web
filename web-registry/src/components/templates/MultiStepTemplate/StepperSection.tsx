@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Stepper from 'web-components/lib/components/stepper';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 
-import { useMultiStep } from '../context/MultiStepContext';
+import { useMultiStep } from './MultiStepContext';
 
 /**
  *
@@ -15,9 +15,8 @@ type StepperSectionProps = {
   children: JSX.Element | JSX.Element[];
 };
 
-export default function StepperSection({
-  children,
-}: StepperSectionProps): JSX.Element {
+// TODO: this should maybe live in MultiStepTemplate.tsx
+export function StepperSection({ children }: StepperSectionProps): JSX.Element {
   const { steps, activeStep, resultStatus } = useMultiStep();
 
   function getResultTitle(

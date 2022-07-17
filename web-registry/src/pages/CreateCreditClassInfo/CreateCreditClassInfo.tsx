@@ -13,21 +13,16 @@ import Modal from 'web-components/lib/components/modal';
 import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
-import {
-  HeroTitle,
-  HeroAction,
-  OverviewCards,
-} from '../../components/molecules';
-import { StepCardsWithDescription } from '../../components/organisms';
-import { WrappedImpactCard } from '../../components/atoms';
-import { WrappedResourcesCard } from '../../components/atoms';
+import { WrappedImpactCard, WrappedResourcesCard } from 'components/atoms';
+import { HeroTitle, HeroAction, OverviewCards } from 'components/molecules';
+import { StepCardsWithDescription } from 'components/organisms';
 
-import fernImg from '../../assets/fern-in-hands.png';
-import writingOnPaperImg from '../../assets/writing-on-paper.png';
-import topographyImg from '../../assets/topography-pattern-cutout-1.png';
+import fernImg from 'assets/fern-in-hands.png';
+import writingOnPaperImg from 'assets/writing-on-paper.png';
+import topographyImg from 'assets/topography-pattern-cutout-1.png';
 
-import { useAllCreateCreditClassPageQuery } from '../../generated/sanity-graphql';
-import { client } from '../../sanity';
+import { useAllCreateCreditClassPageQuery } from 'generated/sanity-graphql';
+import { client } from 'sanity';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -78,7 +73,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreateCreditClass: React.FC = () => {
+const CreateCreditClassInfo: React.FC = () => {
   const styles = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -248,4 +243,4 @@ const CreateCreditClass: React.FC = () => {
   );
 };
 
-export { CreateCreditClass };
+export { CreateCreditClassInfo };

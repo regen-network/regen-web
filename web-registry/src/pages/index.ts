@@ -10,7 +10,7 @@ export * from './Buyers';
 export * from './Certificate';
 export * from './CreateBatch';
 export * from './ChooseCreditClassPage';
-export * from './CreateCreditClass';
+export * from './CreateCreditClassInfo';
 export * from './CreateMethodology';
 export * from './CreditClassDetails';
 export * from './CreditsIssue';

@@ -26,7 +26,9 @@ const CertificatePage = lazy(() => import('./pages/Certificate'));
 const ChooseCreditClassPage = lazy(
   () => import('./pages/ChooseCreditClassPage'),
 );
-const CreateCreditClass = lazy(() => import('./pages/CreateCreditClass'));
+const CreateCreditClassInfo = lazy(
+  () => import('./pages/CreateCreditClassInfo'),
+);
 const CreateMethodology = lazy(() => import('./pages/CreateMethodology'));
 const CreditClassDetails = lazy(() => import('./pages/CreditClassDetails'));
 const CreditsIssue = lazy(() => import('./pages/CreditsIssue'));
@@ -97,7 +99,10 @@ const App: React.FC = (): JSX.Element => {
             <Route path="projects/wilmot/admin" element={<Seller />} />
             <Route path="buyers" element={<BuyersPage />} />
             <Route path="create-methodology" element={<CreateMethodology />} />
-            <Route path="create-credit-class" element={<CreateCreditClass />} />
+            <Route
+              path="create-credit-class"
+              element={<CreateCreditClassInfo />}
+            />
             <Route path="land-stewards" element={<LandStewards />} />
             <Route
               path="methodology-review-process"

@@ -15,7 +15,7 @@ type FetchBasket = (
   request: DeepPartial<QueryBasketRequest>,
 ) => Promise<QueryBasketResponse | undefined>;
 
-export default function useQueryBasket(basketDenom?: string): {
+export function useQueryBasket(basketDenom?: string): {
   basket: QueryBasketResponse | undefined;
   fetchBasket: FetchBasket;
 } {

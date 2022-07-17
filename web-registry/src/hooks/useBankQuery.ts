@@ -25,7 +25,7 @@ type QueryOutput<T> = {
   error: Error | undefined;
 };
 
-export default function useBankQuery<T extends BankQueryResponse>({
+export function useBankQuery<T extends BankQueryResponse>({
   query,
   params,
 }: BankQueryProps): QueryOutput<T> {

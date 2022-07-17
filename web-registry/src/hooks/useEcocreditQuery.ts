@@ -16,7 +16,7 @@ import {
   queryClasses,
   queryCreditTypes,
   EcocreditQueryResponse,
-} from '../lib/ecocredit/api';
+} from 'lib/ecocredit/api';
 
 // TODO - this hook is still missing batch query functionality
 // TODO - this hook is still missing lazy query functionality
@@ -27,7 +27,7 @@ type QueryOutput<T> = {
   error: Error | undefined;
 };
 
-export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
+export function useEcocreditQuery<T extends EcocreditQueryResponse>({
   query,
   params,
 }: EcocreditQueryProps): QueryOutput<T> {

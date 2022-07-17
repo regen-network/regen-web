@@ -9,7 +9,7 @@ import { useLedger } from '../ledger';
 
 // TODO: Use useBasketQuery instead.
 
-export default function useQueryBaskets(): QueryBasketsResponse | undefined {
+export function useQueryBaskets(): QueryBasketsResponse | undefined {
   const { api } = useLedger();
   const [baskets, setBaskets] = useState<QueryBasketsResponse | undefined>();
 

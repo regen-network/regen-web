@@ -8,7 +8,7 @@ import {
 import { useLedger } from '../ledger';
 
 // is a wrapper for a batch of requests
-export default function useQueryListClassInfo(
+export function useQueryListClassInfo(
   classes?: string[],
 ): QueryClassInfoResponse[] | undefined {
   const { api } = useLedger();

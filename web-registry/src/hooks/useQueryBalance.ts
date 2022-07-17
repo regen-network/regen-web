@@ -15,7 +15,7 @@ type FetchBalance = (
   request: DeepPartial<QueryBalanceRequest>,
 ) => Promise<QueryBalanceResponse | undefined>;
 
-export default function useQueryBalance(): FetchBalance {
+export function useQueryBalance(): FetchBalance {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl | undefined>();
 

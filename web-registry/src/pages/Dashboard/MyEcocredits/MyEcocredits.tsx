@@ -34,10 +34,13 @@ import { ReactComponent as PutInBasket } from 'assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from 'assets/svgs/take-from-basket.svg';
 import { Link } from 'components/atoms';
 import { Portfolio } from 'components/organisms/Portfolio';
-import { useBasketsWithClasses, useBasketTokens, useEcocredits } from 'hooks';
-import { BasketTokens } from 'hooks/useBasketTokens';
-import useMsgClient from 'hooks/useMsgClient';
-import useQueryBaskets from 'hooks/useQueryBaskets';
+import {
+  useBasketsWithClasses,
+  useBasketTokens,
+  useEcocredits,
+  useMsgClient,
+  useQueryBaskets,
+} from 'hooks';
 import { getHashUrl } from 'lib/block-explorer';
 
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
@@ -56,6 +59,7 @@ import {
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
+import type { BasketTokens } from 'hooks/useBasketTokens';
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);

@@ -6,11 +6,10 @@ import { truncate } from 'web-components/lib/utils/truncate';
 import { Body, Label } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 
-import { LinkWithArrow } from '../../components/atoms';
-import { getAccountUrl } from '../../lib/block-explorer';
-import { useEcocredits, useBasketTokens } from '../../hooks';
-import { Portfolio } from '../../components/organisms';
-import useQueryBaskets from '../../hooks/useQueryBaskets';
+import { getAccountUrl } from 'lib/block-explorer';
+import { LinkWithArrow } from 'components/atoms';
+import { Portfolio } from 'components/organisms';
+import { useEcocredits, useBasketTokens, useQueryBaskets } from 'hooks';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const baskets = useQueryBaskets();

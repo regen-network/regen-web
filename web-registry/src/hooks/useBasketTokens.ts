@@ -7,8 +7,8 @@ import {
   QueryDenomMetadataResponse,
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
-import useQueryBalance from './useQueryBalance';
-import useQueryDenomMetadata from './useQueryDenomMetadata';
+import { useQueryBalance } from './useQueryBalance';
+import { useQueryDenomMetadata } from './useQueryDenomMetadata';
 
 export interface BasketTokens {
   basket: Basket;
@@ -16,7 +16,7 @@ export interface BasketTokens {
   metadata?: QueryDenomMetadataResponse;
 }
 
-export default function useBasketTokens(
+export function useBasketTokens(
   address?: string,
   baskets?: QueryBasketsResponse,
 ): {

@@ -7,7 +7,7 @@ interface StorageApi<T> {
   removeData: () => void;
 }
 
-export default function useLocalStorage<T>(
+export function useLocalStorage<T>(
   key: string,
   initialValue?: T,
 ): StorageApi<T> {

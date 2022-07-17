@@ -1,5 +1,5 @@
 import React from 'react';
-import useLocalStorage from '../../../../hooks/useLocalStorage';
+import { useLocalStorage } from 'hooks';
 
 // TODO - persistence alternatives: component / localstorage / db
 // Instead of directly using the local storage hook here, we should use an

@@ -8,7 +8,7 @@ import {
 import { useLedger } from '../ledger';
 
 // is a wrapper for a batch of requests
-export default function useQueryListBatchInfo(
+export function useQueryListBatchInfo(
   basketBatches?: string[],
 ): QueryBatchInfoResponse[] | undefined {
   const { api } = useLedger();

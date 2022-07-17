@@ -12,15 +12,14 @@ import {
   QueryBatchInfoResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 
-import useBankQuery from './useBankQuery';
-import useBasketQuery from './useBasketQuery';
-import useQueryListClassInfo from './useQueryListClassInfo';
-import useQueryListBatchInfo from './useQueryListBatchInfo';
-import { useProjectsByMetadataLazyQuery } from '../generated/graphql';
+import { getMetadataFromUint8Array } from 'lib/metadata-graph';
+import { useProjectsByMetadataLazyQuery } from 'generated/graphql';
+import { BasketOverviewProps, CreditBatch } from 'components/organisms';
 
-import { BasketOverviewProps, CreditBatch } from '../components/organisms';
-
-import { getMetadataFromUint8Array } from '../lib/metadata-graph';
+import { useBankQuery } from './useBankQuery';
+import { useBasketQuery } from './useBasketQuery';
+import { useQueryListBatchInfo } from './useQueryListBatchInfo';
+import { useQueryListClassInfo } from './useQueryListClassInfo';
 
 dayjs.extend(duration);
 
@@ -48,7 +47,7 @@ type BatchWithProject = {
   projectName: string;
 };
 
-const useBasketDetails = (basketDenom?: string): BasketDetails => {
+export const useBasketDetails = (basketDenom?: string): BasketDetails => {
   // Data to prepare for the UI
   const [overview, setOverview] = useState<BasketOverviewProps>();
   const [creditBatches, setCreditBatches] = useState<CreditBatch[]>([]);
@@ -255,5 +254,3 @@ const useBasketDetails = (basketDenom?: string): BasketDetails => {
 
   return { overview, creditBatches };
 };
-
-export default useBasketDetails;

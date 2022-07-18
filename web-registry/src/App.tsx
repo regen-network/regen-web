@@ -59,6 +59,8 @@ const ProjectEdit = lazy(() => import('./pages/ProjectEdit'));
 const Activity = lazy(() => import('./pages/Activity'));
 const CreateBatch = lazy(() => import('./pages/CreateBatch'));
 const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
+const MyOrders = lazy(() => import('./pages/Marketplace/MyOrders'));
+const MarketplaceNavigation = lazy(() => import('./pages/Marketplace'));
 
 export const history = createBrowserHistory();
 
@@ -234,10 +236,14 @@ const App: React.FC = (): JSX.Element => {
               element={<CreditClassDetails />}
             />
             <Route path="stats/activity" element={<Activity />} />
-            <Route path="marketplace">
+            <Route path="marketplace" element={<MarketplaceNavigation />}>
               <Route
                 path="storefront"
                 element={<KeplrRoute component={Storefront} />}
+              />
+              <Route
+                path="my-orders"
+                element={<KeplrRoute component={MyOrders} />}
               />
             </Route>
             <Route path="*" element={<NotFoundPage />} />

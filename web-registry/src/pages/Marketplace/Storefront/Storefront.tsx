@@ -6,7 +6,6 @@ import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 import { Link } from '../../../components/atoms';
 import { BuyCreditsModal } from '../../../components/organisms';
@@ -85,23 +84,21 @@ export const Storefront = (): JSX.Element => {
 
   return (
     <>
-      <Section>
-        <Title variant="h2">Sell orders</Title>
-        <Box sx={{ paddingBottom: '150px' }}>
-          <SellOrdersTable
-            sellOrders={normalizedSellOrders}
-            renderActionButtonsFunc={(i: number) => (
-              <OutlinedButton
-                startIcon={<CreditsIcon color={theme.palette.secondary.main} />}
-                size="small"
-                onClick={() => setSelectedSellOrder(i)}
-              >
-                {BUY_SELL_ORDER_ACTION}
-              </OutlinedButton>
-            )}
-          />
-        </Box>
-      </Section>
+      <Title variant="h2">Sell orders</Title>
+      <Box sx={{ paddingBottom: '150px' }}>
+        <SellOrdersTable
+          sellOrders={normalizedSellOrders}
+          renderActionButtonsFunc={(i: number) => (
+            <OutlinedButton
+              startIcon={<CreditsIcon color={theme.palette.secondary.main} />}
+              size="small"
+              onClick={() => setSelectedSellOrder(i)}
+            >
+              {BUY_SELL_ORDER_ACTION}
+            </OutlinedButton>
+          )}
+        />
+      </Box>
       <BuyCreditsModal
         open={isBuyModalOpen}
         onClose={() => setSelectedSellOrder(null)}

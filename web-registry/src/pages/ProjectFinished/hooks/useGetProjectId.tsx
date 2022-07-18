@@ -5,7 +5,6 @@ const useGetProjectId = (deliverTxResponse?: DeliverTxResponse): string => {
   const [projectId, setProjectId] = useState('');
 
   useEffect(() => {
-    console.log('deliverTxResponse', deliverTxResponse);
     if (deliverTxResponse?.rawLog) {
       const rawLog = JSON.parse(deliverTxResponse?.rawLog);
       // regen.ecocredit.v1.EventCreateProject

@@ -1,5 +1,5 @@
 import { MsgCreateProject } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import {
   ProjectMetadataLD,
   VCSProjectMetadataLD,
@@ -24,15 +24,9 @@ interface Props {
 
 type ReturnType = {
   projectCreateSubmit: (values: MsgCreateProjectValues) => Promise<void>;
-  isSubmitModalOpen: boolean;
-  closeSubmitModal: () => void;
 };
 
 const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
-  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
-
-  const closeSubmitModal = () => setIsSubmitModalOpen(false);
-
   const projectCreateSubmit = useCallback(
     async ({
       classId,
@@ -70,7 +64,7 @@ const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
       };
 
       try {
-        await signAndBroadcast(tx, () => setIsSubmitModalOpen(true));
+        await signAndBroadcast(tx);
       } catch (e) {
         console.error('useProjectCreateSubmit', e);
       }
@@ -78,7 +72,7 @@ const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
     [signAndBroadcast],
   );
 
-  return { projectCreateSubmit, isSubmitModalOpen, closeSubmitModal };
+  return { projectCreateSubmit };
 };
 
 export { useProjectCreateSubmit };

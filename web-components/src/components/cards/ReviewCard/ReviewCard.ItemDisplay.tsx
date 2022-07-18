@@ -4,7 +4,7 @@ import { Subtitle, Body } from '../../typography';
 
 export interface ItemDisplayProps {
   name?: string;
-  value?: string | number;
+  value?: string | number | JSX.Element;
 }
 
 const ItemDisplay: React.FC<ItemDisplayProps> = ({ name, value }) => {

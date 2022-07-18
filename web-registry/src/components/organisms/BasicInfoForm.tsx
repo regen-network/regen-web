@@ -10,13 +10,13 @@ import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+// import { requiredMessage } from 'web-components/lib/components/inputs/validation'; TODO: regen-registry#1048
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import {
-  validate,
-  getProjectPageBaseData,
-  getCompactedPath,
-} from '../../lib/rdf';
+// import {
+//   validate,
+//   getProjectPageBaseData,
+//   getCompactedPath,
+// } from '../../lib/rdf'; TODO: regen-registry#1048
 import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
 
@@ -91,28 +91,29 @@ const BasicInfoForm: React.FC<{
       validate={async (values: BasicInfoFormValues) => {
         const errors: FormikErrors<BasicInfoFormValues> = {};
         if (graphData?.shaclGraphByUri?.graph) {
-          const projectPageData = { ...getProjectPageBaseData(), ...values };
-          const report = await validate(
-            graphData.shaclGraphByUri.graph,
-            projectPageData,
-            'http://regen.network/ProjectPageBasicInfoGroup',
-          );
-          for (const result of report.results) {
-            const path: string = result.path.value;
-            const compactedPath = getCompactedPath(path) as
-              | keyof BasicInfoFormValues
-              | undefined;
-
-            if (compactedPath === 'regen:size') {
-              errors[compactedPath] = {
-                'qudt:numericValue': {
-                  '@value': requiredMessage,
-                },
-              };
-            } else if (compactedPath) {
-              errors[compactedPath] = requiredMessage;
-            }
-          }
+          // TODO: Fix Validation. regen-registry#1048 .
+          // Temporarily commented out to enable testing.
+          // const projectPageData = { ...getProjectPageBaseData(), ...values };
+          // const report = await validate(
+          //   graphData.shaclGraphByUri.graph,
+          //   projectPageData,
+          //   'http://regen.network/ProjectPageBasicInfoGroup',
+          // );
+          // for (const result of report.results) {
+          //   const path: string = result.path.value;
+          //   const compactedPath = getCompactedPath(path) as
+          //     | keyof BasicInfoFormValues
+          //     | undefined;
+          //   if (compactedPath === 'regen:size') {
+          //     errors[compactedPath] = {
+          //       'qudt:numericValue': {
+          //         '@value': requiredMessage,
+          //       },
+          //     };
+          //   } else if (compactedPath) {
+          //     errors[compactedPath] = requiredMessage;
+          //   }
+          // }
         }
         return errors;
       }}

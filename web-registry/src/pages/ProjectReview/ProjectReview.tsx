@@ -31,9 +31,12 @@ export const ProjectReview: React.FC = () => {
     fetchPolicy: 'cache-and-network',
   });
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+
+  const closeSubmitModal = () => setIsSubmitModalOpen(false);
 
   const handleTxQueued = (): void => {
-    console.log('handleTxQueued');
+    setIsSubmitModalOpen(true);
   };
 
   const handleTxModalClose = (): void => {
@@ -49,7 +52,7 @@ export const ProjectReview: React.FC = () => {
 
   const handleTxDelivered = (deliverTxResponse: DeliverTxResponse): void => {
     createProjectContext.deliverTxResponse = deliverTxResponse;
-    navigate(`${editPath}/finished/`);
+    navigate(`${editPath}/finished`);
   };
 
   const {
@@ -60,8 +63,7 @@ export const ProjectReview: React.FC = () => {
     setError,
     setDeliverTxResponse,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
-  const { projectCreateSubmit, isSubmitModalOpen, closeSubmitModal } =
-    useProjectCreateSubmit({ signAndBroadcast });
+  const { projectCreateSubmit } = useProjectCreateSubmit({ signAndBroadcast });
   const project = data?.projectById;
   const editPath = `/project-pages/${projectId}`;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
@@ -77,9 +79,10 @@ export const ProjectReview: React.FC = () => {
       admin: wallet?.address || '',
       metadata,
       jurisdiction,
-      // referenceId: '', // TODO
+      referenceId: isVCS ? `VCS-${metadata?.['regen:vcsProjectId']}` : '', //TODO
     });
   };
+  console.log(project);
 
   return (
     <OnboardingFormTemplate activeStep={1} title="Review">
@@ -164,7 +167,20 @@ export const ProjectReview: React.FC = () => {
             <ItemDisplay
               name="Project activity url"
               value={
-                metadata?.['regen:projectActivity']?.['schema:url']?.['@value']
+                <Link
+                  target="_blank"
+                  href={
+                    metadata?.['regen:projectActivity']?.['schema:url']?.[
+                      '@value'
+                    ] || ''
+                  }
+                >
+                  {
+                    metadata?.['regen:projectActivity']?.['schema:url']?.[
+                      '@value'
+                    ]
+                  }
+                </Link>
               }
             />
             <ItemDisplay
@@ -173,7 +189,14 @@ export const ProjectReview: React.FC = () => {
             />
             <ItemDisplay
               name="VCS project page url"
-              value={metadata?.['regen:vcsProjectPage']?.['@value']}
+              value={
+                <Link
+                  target="_blank"
+                  href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
+                >
+                  {metadata?.['regen:vcsProjectPage']?.['@value']}
+                </Link>
+              }
             />
             <ItemDisplay
               name="Project duration"
@@ -181,11 +204,26 @@ export const ProjectReview: React.FC = () => {
             />
             <ItemDisplay
               name="VCS methodology name"
-              value={metadata?.['regen:vcsMethodology']?.['@value']}
+              value={metadata?.['regen:vcsMethodology']?.['schema:name']}
             />
             <ItemDisplay
               name="VCS methodology url"
-              value={metadata?.['regen:vcsMethodology']?.['@value']}
+              value={
+                <Link
+                  target="_blank"
+                  href={
+                    metadata?.['regen:vcsMethodology']?.['schema:url']?.[
+                      '@value'
+                    ] || ''
+                  }
+                >
+                  {
+                    metadata?.['regen:vcsMethodology']?.['schema:url']?.[
+                      '@value'
+                    ]
+                  }
+                </Link>
+              }
             />
           </>
         ) : (

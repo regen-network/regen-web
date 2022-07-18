@@ -27,3 +27,5 @@ export interface BatchInfoWithSupply
   txhash?: string;
   classId?: string;
 }
+
+export type ClassID = 'C01' | 'C02' | 'C03';

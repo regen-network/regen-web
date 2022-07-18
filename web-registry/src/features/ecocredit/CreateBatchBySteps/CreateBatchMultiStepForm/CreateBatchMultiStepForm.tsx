@@ -1,22 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import NotFound from 'web-components/lib/components/not-found';
+import RotationalGrazing from '../../../../assets/rotational-grazing.png';
 
 import { useMultiStep } from '../../../../components/templates/MultiStep';
-
 import formModel from '../form-model';
 import useCreateBatchSubmit from '../hooks/useCreateBatchSubmit';
-
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
 import Review from './Review';
 import Result from './Result';
-import NotFound from 'web-components/lib/components/not-found';
-import RotationalGrazing from '../../../../assets/rotational-grazing.png';
 
 /**
  *
@@ -61,11 +59,9 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     ? Yup.object(formModel.validationSchemaFields) // all fields
     : formModel.validationSchema[activeStep];
 
-  const [creditClassSelected, setCreditClassSelected] =
-    React.useState<Option>();
-  const [projectSelected, setProjectSelected] = React.useState<Option>();
+  const [projectOptionSelected, setProjectOptionSelected] = useState<Option>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (submitStatus === 'success') handleSuccess();
     if (submitStatus === 'error') handleError();
   }, [submitStatus, handleSuccess, handleError]);
@@ -78,10 +74,9 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
       createBatch(values);
     } else {
       let dataDisplay;
-      if (creditClassSelected && projectSelected) {
+      if (projectOptionSelected) {
         dataDisplay = {
-          creditClass: creditClassSelected,
-          project: projectSelected,
+          project: projectOptionSelected,
         };
       }
       handleSaveNext(values, dataDisplay);
@@ -94,10 +89,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     switch (activeStep) {
       case 0:
         return (
-          <CreditBasics
-            saveCreditClassSelected={setCreditClassSelected}
-            saveProjectSelected={setProjectSelected}
-          />
+          <CreditBasics saveProjectOptionSelected={setProjectOptionSelected} />
         );
       case 1:
         return <Recipients />;
@@ -123,7 +115,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
         {({ submitForm, isValid, isSubmitting }) => (
           <Form id={formModel.formId}>
             {renderStep(activeStep)}
-            {/* TODO ? - Move to: MultiStepSection > StepperSection > StepperControls */}
+
             {!isLastStep && (
               <SaveFooter
                 onPrev={activeStep > 0 ? handleBack : undefined}

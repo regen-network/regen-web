@@ -1,29 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
+import { Box, Link } from '@mui/material';
 
-import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-
-import { useMultiStep } from '../../../../components/templates/MultiStep';
-import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
-import { CreditBasicsFormValues } from './CreditBasics';
-import { RecipientFormValues } from './Recipients';
-
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import EditIcon from 'web-components/lib/components/icons/EditIcon';
 import {
   Body,
   Label,
   Subtitle,
 } from 'web-components/lib/components/typography';
-import { Box, Link } from '@mui/material';
 import {
   formatDate,
   getFormattedNumber,
 } from 'web-components/lib/utils/format';
+import EditIcon from 'web-components/lib/components/icons/EditIcon';
+import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+
+import { useMultiStep } from '../../../../components/templates/MultiStep';
+
+import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
+import { CreditBasicsFormValues } from './CreditBasics';
+import { RecipientFormValues } from './Recipients';
 
 // TODO: Only covers case C01
 
@@ -42,13 +42,11 @@ export default function Review(): JSX.Element {
     useFormikContext<CreateBatchFormValues>();
   const { dataDisplay, handleResetReview } = useMultiStep();
 
-  // validate form on mount
-  React.useEffect(() => {
+  useEffect(() => {
     validateForm();
   }, [validateForm]);
 
-  // check isValid change to reset in case is not valid
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isValid) handleResetReview();
   }, [handleResetReview, isValid]);
 
@@ -99,12 +97,8 @@ function CreditBatchInfo({
         <EditButton onClick={() => handleActiveStep(0)} />
       </Box>
       <ItemDisplay
-        name={'Credit Class'}
-        value={dataDisplay?.creditClass?.label || data.classId}
-      />
-      <ItemDisplay
         name={'Project'}
-        value={dataDisplay?.project?.label || metadata['regen:vcsProjectId']}
+        value={dataDisplay?.project?.label || data.projectId}
       />
       <ItemDisplay
         name={'Start and end date'}

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormikContext, Field, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import { isPast } from 'date-fns';
+import { startCase } from 'lodash';
 import { Box, IconButton, Link } from '@mui/material';
 import { useTheme, DefaultTheme as Theme } from '@mui/styles';
+import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Body } from 'web-components/lib/components/typography';
 import InputLabel from 'web-components/lib/components/inputs/InputLabel';
@@ -19,33 +21,34 @@ import {
   invalidPastDate,
   vcsRetirementSerialRE,
   invalidVCSRetirement,
-  invalidVCSID,
   isValidJSON,
   invalidJSON,
 } from 'web-components/lib/components/inputs/validation';
 import { NameUrl } from 'web-components/lib/types/rdf';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 
-import {
-  ProjectSelect,
-  CreditClassSelect,
-  MetadataJSONField,
-} from '../../../../components/molecules';
+import useQueryProjectsByIssuer from '../../../../hooks/useQueryProjectsByIssuer';
+import { MetadataJSONField } from '../../../../components/molecules';
+import { useWallet } from '../../../../lib/wallet';
+import { ClassID } from '../../../../types/ledger/ecocredit';
 
-// TODO - remove CreditClass selector (but not ClassId state...)
+const defaultProjectOption = { value: '', label: 'Choose Project' };
+
+function getClassIdFromProjectId(projectId: string): ClassID {
+  const split = projectId.split('-');
+  return split[0] as ClassID;
+}
 
 export interface CreditBasicsFormValues {
-  classId: string;
+  projectId: string;
   startDate: Date | null;
   endDate: Date | null;
   metadata?: Partial<VCSBatchMetadataLD> | string | undefined;
 }
 
 const vcsMetadataSchema: Yup.AnyObjectSchema = Yup.object({
-  'regen:vcsProjectId': Yup.string()
-    .required(requiredMessage)
-    .typeError(invalidVCSID),
   'regen:vcsRetirementSerialNumber': Yup.string()
     .required(requiredMessage)
     .matches(vcsRetirementSerialRE, { message: invalidVCSRetirement }),
@@ -67,7 +70,7 @@ const isPastDateTest = {
 };
 
 export const validationSchemaFields = {
-  classId: Yup.string().required(requiredMessage),
+  projectId: Yup.string().required(requiredMessage),
   startDate: Yup.date()
     .required(requiredMessage)
     .typeError(invalidDate)
@@ -76,9 +79,9 @@ export const validationSchemaFields = {
     .required(requiredMessage)
     .typeError(invalidDate)
     .test({ ...isPastDateTest }),
-  metadata: Yup.object().when('classId', {
+  metadata: Yup.object().when('projectId', {
     // TODO: this is a hack to make V4 testnet work. C02 is a copy of C01 on V4. In PROD/mainnet, this should only be C01
-    is: (val: string) => val === 'C01' || val === 'C02',
+    is: (val: string) => val?.startsWith('C01') || val?.startsWith('C02'),
     then: schema => vcsMetadataSchema,
     otherwise: schema => JSONSchema,
   }),
@@ -87,79 +90,77 @@ export const validationSchemaFields = {
 export const validationSchema = Yup.object(validationSchemaFields);
 
 export const initialValues = {
-  classId: '',
+  projectId: '',
   startDate: null,
   endDate: null,
   metadata: '',
 };
 
 type Props = {
-  saveCreditClassSelected: (creditClass: Option) => void;
-  saveProjectSelected: (project: Option) => void;
+  saveProjectOptionSelected: (project: Option) => void;
 };
 
 export default function CreditBasics({
-  saveCreditClassSelected,
-  saveProjectSelected,
+  saveProjectOptionSelected,
 }: Props): React.ReactElement {
+  const { wallet } = useWallet();
+  const { data: projects } = useQueryProjectsByIssuer(wallet!.address);
+
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
-  const metadata = values.metadata as VCSBatchMetadataLD;
-  const projectId = metadata['regen:vcsProjectId'];
-  // TODO: this is a hack to make V4 testnet work. C02 is a copy of C01 on V4. In PROD/mainnet, this should only be C01.
-  const isVCS = values.classId === 'C01' || values.classId === 'C02';
 
-  // to store on partial submit the selected credit class option,
-  // and the project option in order to complete display name in Review step
-  const [creditClassOptions, setCreditClassOptions] =
-    React.useState<Option[]>();
-  const [projectOptions, setProjectOptions] = React.useState<Option[]>();
+  const [projectOptions, setProjectOptions] = useState<Option[]>([]);
+  const [classId, setClassId] = useState<ClassID>();
+  const [isVCS, setIsVCS] = useState<boolean>();
 
-  React.useEffect(() => {
-    const isFound = creditClassOptions?.find(
-      item => item.value === values.classId,
-    );
-    if (isFound) saveCreditClassSelected(isFound);
-  }, [values.classId, creditClassOptions, saveCreditClassSelected]);
+  const { projectId } = values;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!projectId) return;
+    const _classId = getClassIdFromProjectId(projectId);
+    setClassId(_classId);
+    setIsVCS(_classId === 'C01' || _classId === 'C02');
+  }, [projectId]);
+
+  useEffect(() => {
+    if (!projects.length) return;
+
+    const options =
+      projects.map((project: ProjectInfo) => {
+        const projectId = project.id;
+        const projectName = startCase(
+          project?.metadata?.['schema:name' as any] || '',
+        );
+        const projectNameWithId = `${projectName} (${projectId})`;
+        return {
+          label: projectNameWithId || projectId,
+          value: projectId,
+        };
+      }) || [];
+
+    setProjectOptions([defaultProjectOption, ...options]);
+  }, [projects, setProjectOptions]);
+
+  useEffect(() => {
+    if (!projectId || !projects.length) return;
+
     const isFound = projectOptions?.find(
       item => item.value.toString() === projectId.toString(),
     );
-    if (isFound) saveProjectSelected(isFound);
-  }, [projectId, projectOptions, saveProjectSelected]);
+    if (isFound) saveProjectOptionSelected(isFound);
+  }, [projectId, projectOptions, projects, saveProjectOptionSelected]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     validateForm();
   }, [validateForm]);
 
-  // to check if the project id was already selected,
-  // to initialize <ProjectSelect /> correctly when coming back to the step
-  const functionCheckPrevSelection = (
-    isVCS: boolean,
-    values: CreditBasicsFormValues,
-  ): string | undefined => {
-    if (isVCS) {
-      const metadata = values.metadata as VCSBatchMetadataLD;
-      const projectId = metadata['regen:vcsProjectId'];
-      return projectId;
-    }
-    return;
-  };
-
   return (
     <OnBoardingCard>
-      <CreditClassSelect
-        name="classId"
+      <Field
+        label="Project"
+        name="projectId"
+        component={SelectTextField}
+        options={projectOptions}
         required
-        saveOptions={setCreditClassOptions}
-      />
-      <ProjectSelect
-        creditClassId={values.classId}
-        name="metadata['regen:vcsProjectId']"
-        required
-        initialSelection={functionCheckPrevSelection(isVCS, values)}
-        saveOptions={setProjectOptions}
       />
       <Box
         sx={{
@@ -211,8 +212,8 @@ export default function CreditBasics({
             }
           />
         </>
-      ) : values?.classId ? (
-        <MetadataJSONField required={!isVCS} />
+      ) : projectId && classId ? (
+        <MetadataJSONField classId={classId} required={!isVCS} />
       ) : null}
     </OnBoardingCard>
   );

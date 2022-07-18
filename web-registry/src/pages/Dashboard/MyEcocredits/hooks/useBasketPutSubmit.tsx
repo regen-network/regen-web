@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
+import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 import type { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import type { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 import type { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
 import type { Item } from 'web-components/lib/components/modal/TxModal';
 import type { BasketTokens } from 'hooks/useBasketTokens';

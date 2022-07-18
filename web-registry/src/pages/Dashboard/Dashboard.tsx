@@ -48,6 +48,9 @@ const Dashboard = (): JSX.Element => {
     setIsIssuer(isAnIssuer);
   }, [onChainClasses, wallet]);
 
+  // TODO: Does it make more sense to handle these as nested routes, maybe using
+  // react-router's <Outlet /> component?
+  // https://reactrouter.com/docs/en/v6/getting-started/overview#nested-routes
   const tabs: IconTabProps[] = [
     {
       label: 'Portfolio',

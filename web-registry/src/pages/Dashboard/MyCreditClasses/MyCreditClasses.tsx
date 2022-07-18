@@ -1,13 +1,17 @@
 import { Grid } from '@mui/material';
-import { CreateCreditClassCard } from 'components/molecules/CreateCreditClassCard';
+import { useNavigate } from 'react-router-dom';
+
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
+import { CreateCreditClassCard } from 'components/molecules/CreateCreditClassCard';
+
 export const MyCreditClasses = (): JSX.Element => {
+  const navigate = useNavigate();
   const isFirstCreditClass = false;
   const error = '';
 
-  async function submitCreateCreditClass(): Promise<void> {
-    return Promise.resolve();
+  function handleCreate(): void {
+    navigate('/credit-classes/create');
   }
 
   return (
@@ -16,8 +20,9 @@ export const MyCreditClasses = (): JSX.Element => {
         <Grid item xs={12} md={6} lg={4}>
           <CreateCreditClassCard
             isFirstCreditClass={isFirstCreditClass}
-            onClick={submitCreateCreditClass}
+            onClick={handleCreate}
           />
+          {/* TODO: display user credits */}
         </Grid>
       </Grid>
       {error && <ErrorBanner text={error} />}

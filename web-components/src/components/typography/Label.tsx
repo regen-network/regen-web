@@ -25,7 +25,7 @@ interface Props extends TypographyProps {
 }
 
 export const Label = styled(Typography, {
-  name: 'RegenButtonText',
+  name: 'RegenLabel',
   shouldForwardProp: prop => prop !== 'size' && prop !== 'mobileSize',
 })<Props>(({ theme, mobileSize, size = 'md' }) => {
   const { breakpoints, typography } = theme;

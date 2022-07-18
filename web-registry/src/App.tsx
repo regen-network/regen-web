@@ -101,6 +101,7 @@ const App: React.FC = (): JSX.Element => {
             <Route path="buyers" element={<BuyersPage />} />
             <Route path="create-methodology" element={<CreateMethodology />} />
             <Route
+              // TODO: thould this route be moved to /credit-classes?
               path="create-credit-class"
               element={<CreateCreditClassInfo />}
             />
@@ -235,8 +236,13 @@ const App: React.FC = (): JSX.Element => {
               element={<MethodologyDetails />}
             />
             <Route path="credit-classes">
+              {/* TODO: Index route is same as /create-credit-class for now */}
+              <Route index element={<CreateCreditClassInfo />} />
               <Route path=":creditClassId" element={<CreditClassDetails />} />
-              <Route path="create" element={<CreateCreditClass />} />
+              <Route
+                path="create"
+                element={<KeplrRoute component={CreateCreditClass} />}
+              />
             </Route>
             {/* <Route
               path="credit-classes/:creditClassId/*"

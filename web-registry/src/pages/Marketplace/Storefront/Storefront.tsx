@@ -1,6 +1,8 @@
 import { Box, useTheme } from '@mui/material';
+import { noop } from 'lodash';
 import { useMemo, useState } from 'react';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
@@ -8,21 +10,25 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
+import { ConfirmModal as CancelConfirmModal } from 'web-components/lib/components/modal/ConfirmModal';
 import { Link } from '../../../components/atoms';
 import { BuyCreditsModal } from '../../../components/organisms';
 import SellOrdersTable from '../../../components/organisms/SellOrdersTable/SellOrdersTable';
+import useMsgClient from '../../../hooks/useMsgClient';
 import useQueryListBatchInfo from '../../../hooks/useQueryListBatchInfo';
 import { useQuerySellOrders } from '../../../hooks/useQuerySellOrders';
 import { getHashUrl } from '../../../lib/block-explorer';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import { BUY_SELL_ORDER_ACTION } from './Storefront.constants';
-import { txHashMock } from './Storefront.mock';
+import { sellOrdersMock, txHashMock } from './Storefront.mock';
 import normalizeSellOrders from './Storefront.normalizer';
-import { sortByExpirationDate } from './Storefront.utils';
+import { getCancelCardItems, sortByExpirationDate } from './Storefront.utils';
+import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
+import { SellOrderActions } from './Storefront.types';
 
 export const Storefront = (): JSX.Element => {
-  const sellOrdersResponse = useQuerySellOrders();
-  const sellOrders = sellOrdersResponse?.sellOrders;
+  const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
+  const sellOrders = sellOrdersMock ?? sellOrdersResponse?.sellOrders;
   const batchDenoms = useMemo(
     () => sellOrders?.map(sellOrder => sellOrder.batchDenom),
     [sellOrders],
@@ -37,12 +43,29 @@ export const Storefront = (): JSX.Element => {
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
-  const isBuyModalOpen = selectedSellOrder !== null;
+  const [selectedAction, setSelectedAction] = useState<SellOrderActions>();
+  const isBuyModalOpen = selectedSellOrder !== null && selectedAction === 'buy';
+  const isCancelModalOpen =
+    selectedSellOrder !== null && selectedAction === 'cancel';
 
   const normalizedSellOrders = normalizeSellOrders({
     batchInfos,
     sellOrders,
   }).sort(sortByExpirationDate);
+
+  const handleTxQueued = () => setIsProcessingModalOpen(true);
+  const handleTxDelivered = () => {
+    setIsProcessingModalOpen(false);
+    refetchSellOrders();
+  };
+  const handleError = () => setIsProcessingModalOpen(false);
+
+  const { wallet, signAndBroadcast } = useMsgClient(
+    handleTxQueued,
+    handleTxDelivered,
+    handleError,
+  );
+  const accountAddress = wallet?.address;
 
   const buySellOrderSubmit = useBuySellOrderSubmit({
     setCardItems,
@@ -53,11 +76,28 @@ export const Storefront = (): JSX.Element => {
     setIsProcessingModalOpen,
   });
 
+  const cancelSellOrderSubmit = useCancelSellOrderSubmit({
+    selectedSellOrder: normalizedSellOrders[selectedSellOrder ?? 0],
+    setCardItems,
+    setSelectedSellOrder,
+    setTxButtonTitle,
+    setTxModalHeader,
+    setTxModalTitle,
+    setIsProcessingModalOpen,
+    signAndBroadcast,
+    accountAddress,
+  });
+
   const handleTxModalClose = (): void => {
     setCardItems(undefined);
     setTxModalTitle('');
     setTxModalHeader('');
     setTxModalTitle('');
+    setSelectedAction(undefined);
+  };
+
+  const handleCancelModalClose = (): void => {
+    setSelectedSellOrder(null);
   };
 
   const {
@@ -90,15 +130,44 @@ export const Storefront = (): JSX.Element => {
         <Box sx={{ paddingBottom: '150px' }}>
           <SellOrdersTable
             sellOrders={normalizedSellOrders}
-            renderActionButtonsFunc={(i: number) => (
-              <OutlinedButton
-                startIcon={<CreditsIcon color={theme.palette.secondary.main} />}
-                size="small"
-                onClick={() => setSelectedSellOrder(i)}
-              >
-                {BUY_SELL_ORDER_ACTION}
-              </OutlinedButton>
-            )}
+            renderActionButtonsFunc={(i: number) => {
+              const isOwnSellOrder =
+                normalizedSellOrders[i].seller === accountAddress;
+
+              return isOwnSellOrder ? (
+                <TableActionButtons
+                  buttons={[
+                    {
+                      label: `Cancel`,
+                      onClick: () => {
+                        setSelectedAction('cancel');
+                        setSelectedSellOrder(i);
+                      },
+                    },
+                    {
+                      label: `Change`,
+                      onClick: () => {
+                        setSelectedAction('change');
+                        setSelectedSellOrder(i);
+                      },
+                    },
+                  ]}
+                />
+              ) : (
+                <OutlinedButton
+                  startIcon={
+                    <CreditsIcon color={theme.palette.secondary.main} />
+                  }
+                  size="small"
+                  onClick={() => {
+                    setSelectedAction('buy');
+                    setSelectedSellOrder(i);
+                  }}
+                >
+                  {BUY_SELL_ORDER_ACTION}
+                </OutlinedButton>
+              );
+            }}
           />
         </Box>
       </Section>
@@ -127,6 +196,18 @@ export const Storefront = (): JSX.Element => {
         linkComponent={Link}
         onViewPortfolio={handleTxModalClose}
         icon={<CelebrateIcon sx={{ width: '85px', height: '106px' }} />}
+      />
+      <CancelConfirmModal
+        open={isCancelModalOpen}
+        onClose={handleCancelModalClose}
+        linkComponent={Link}
+        onConfirm={cancelSellOrderSubmit}
+        onConfirmTitle="Yes, cancel sell order"
+        onCancelTitle="WHOOPS, EXIT"
+        title="Are you sure would you like to cancel this sell order?"
+        cardItems={getCancelCardItems(
+          normalizedSellOrders[selectedSellOrder ?? 0],
+        )}
       />
     </>
   );

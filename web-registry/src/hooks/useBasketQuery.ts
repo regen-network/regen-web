@@ -25,7 +25,7 @@ type QueryOutput<T> = {
   error: Error | undefined;
 };
 
-export function useBasketQuery<T extends BasketQueryResponse>({
+export default function useBasketQuery<T extends BasketQueryResponse>({
   query,
   params,
 }: BasketQueryProps): QueryOutput<T> {

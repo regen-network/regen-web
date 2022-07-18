@@ -5,13 +5,13 @@ import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1al
 
 import { getMetadataFromUint8Array } from 'lib/metadata-graph';
 import { CreditClassMetadataLD } from 'generated/json-ld';
-import { useQueryListClasses } from './useQueryListClasses';
+import useQueryListClasses from './useQueryListClasses';
 
 interface ClassInfoWithMetadata extends ClassInfo {
   metadataJson?: Partial<CreditClassMetadataLD>;
 }
 
-export function useQueryListClassesWithMetadata(): ClassInfoWithMetadata[] {
+export default function useQueryListClassesWithMetadata(): ClassInfoWithMetadata[] {
   const creditClasses = useQueryListClasses();
   const [classList, setClassList] = useState<ClassInfoWithMetadata[]>([]);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
-export const ProjectPageIconSmall: React.FC<SvgIconProps> = props => {
+export const ProjectPageIconSmall = (props: SvgIconProps): JSX.Element => {
   return (
     <SvgIcon
       {...props}

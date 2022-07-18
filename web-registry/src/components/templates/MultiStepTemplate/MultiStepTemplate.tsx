@@ -1,4 +1,4 @@
-import { MultiStepProvider, ProviderProps } from './MultiStepContext';
+import { MultiStepProvider, ProviderProps } from './MultiStep.context';
 import { StepperSection } from './StepperSection';
 
 type MultiStepProps<T extends object> = ProviderProps<T> & {

@@ -7,7 +7,9 @@ import {
 
 import { useLedger } from '../ledger';
 
-export function useQueryListClasses(): QueryClassesResponse | undefined {
+export default function useQueryListClasses():
+  | QueryClassesResponse
+  | undefined {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl>();
   const [classList, setClassList] = useState<QueryClassesResponse | undefined>(

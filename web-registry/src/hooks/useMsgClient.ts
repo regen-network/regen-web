@@ -25,7 +25,7 @@ type MsgClientType = {
   wallet?: Wallet;
 };
 
-export function useMsgClient(
+export default function useMsgClient(
   handleTxQueued: () => void,
   handleTxDelivered: () => void,
   handleError: () => void,

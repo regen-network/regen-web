@@ -13,7 +13,7 @@ type FetchDenomMetadata = (
   denom: string,
 ) => Promise<QueryDenomMetadataResponse | undefined>;
 
-export function useQueryDenomMetadata(): FetchDenomMetadata {
+export default function useQueryDenomMetadata(): FetchDenomMetadata {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl | undefined>();
 

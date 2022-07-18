@@ -4,7 +4,7 @@ import { ledgerRESTUri } from 'lib/ledger';
 import { getEcocreditsForAccount } from 'lib/ecocredit/api';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
-export function useEcocredits(address?: string): {
+export default function useEcocredits(address?: string): {
   credits: BatchInfoWithBalance[];
   fetchCredits: () => Promise<void>;
 } {

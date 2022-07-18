@@ -5,9 +5,9 @@ import {
   QueryBasketResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
-import { useQueryBasket } from './useQueryBasket';
+import useQueryBasket from './useQueryBasket';
 
-export function useBasketsWithClasses(
+export default function useBasketsWithClasses(
   baskets?: QueryBasketsResponse,
 ): (QueryBasketResponse | undefined)[] {
   const { fetchBasket } = useQueryBasket();

@@ -27,7 +27,7 @@ type QueryOutput<T> = {
   error: Error | undefined;
 };
 
-export function useEcocreditQuery<T extends EcocreditQueryResponse>({
+export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
   query,
   params,
 }: EcocreditQueryProps): QueryOutput<T> {

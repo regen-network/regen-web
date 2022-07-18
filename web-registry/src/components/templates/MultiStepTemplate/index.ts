@@ -11,4 +11,4 @@
 export { MultiStepTemplate } from './MultiStepTemplate';
 
 // hook to use the custom context provider
-export { useMultiStep } from './MultiStepContext';
+export { useMultiStep } from './MultiStep.context';

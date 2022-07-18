@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Stepper from 'web-components/lib/components/stepper';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 
-import { useMultiStep } from './MultiStepContext';
+import { useMultiStep } from './MultiStep.context';
 
 /**
  *

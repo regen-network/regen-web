@@ -123,7 +123,7 @@ export const MediaForm = ({
       >
         {({ submitForm, isValid, isSubmitting }) => (
           <>
-            {creditClassId ? <MediaFormSimple /> : <MediaFormLegacy />}
+            {!!creditClassId ? <MediaFormSimple /> : <MediaFormLegacy />}
             <ProjectPageFooter
               onSave={submitForm}
               onNext={props.onNext}

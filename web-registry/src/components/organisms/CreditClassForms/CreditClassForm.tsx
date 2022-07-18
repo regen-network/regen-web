@@ -21,7 +21,7 @@ export interface CreditClassValues {
 export const creditClassBaseValues: CreditClassValues = {
   admin: '',
   issuers: [''],
-  creditTypeAbbr: '',
+  creditTypeAbbr: '', // TODO: this should probably be a full `CreditType`
   metadata: '',
   fee: '',
 };

@@ -1,10 +1,10 @@
 import { MsgRetire } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
 import { useCallback } from 'react';
-import { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
-import { Item } from 'web-components/lib/components/modal/TxModal';
-import { SignAndBroadcastType } from '../../../../hooks/useMsgClient';
-import { BatchInfoWithBalance } from '../../../../types/ledger/ecocredit';
-import { UseStateSetter } from '../../../../types/react/use-state';
+import type { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
+import type { Item } from 'web-components/lib/components/modal/TxModal';
+import type { SignAndBroadcastType } from 'hooks/useMsgClient';
+import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import type { UseStateSetter } from 'types/react/use-state';
 
 type Props = {
   accountAddress?: string;

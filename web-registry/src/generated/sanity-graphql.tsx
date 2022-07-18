@@ -3614,7 +3614,6 @@ export type RegenTeamMember = Document & {
   _key?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
   image?: Maybe<Image>;
   linkedinUrl?: Maybe<Scalars['String']>;
   twitterUrl?: Maybe<Scalars['String']>;
@@ -3632,7 +3631,6 @@ export type RegenTeamMemberFilter = {
   _key?: Maybe<StringFilter>;
   name?: Maybe<StringFilter>;
   title?: Maybe<StringFilter>;
-  description?: Maybe<StringFilter>;
   image?: Maybe<ImageFilter>;
   linkedinUrl?: Maybe<StringFilter>;
   twitterUrl?: Maybe<StringFilter>;
@@ -3648,7 +3646,6 @@ export type RegenTeamMemberSorting = {
   _key?: Maybe<SortOrder>;
   name?: Maybe<SortOrder>;
   title?: Maybe<SortOrder>;
-  description?: Maybe<SortOrder>;
   image?: Maybe<ImageSorting>;
   linkedinUrl?: Maybe<SortOrder>;
   twitterUrl?: Maybe<SortOrder>;
@@ -5342,7 +5339,6 @@ export type TeamPage = Document & {
   _key?: Maybe<Scalars['String']>;
   topSection?: Maybe<TitleBody>;
   coreSection?: Maybe<TeamSection>;
-  contributorSection?: Maybe<TeamSection>;
   advisorSection?: Maybe<TeamSection>;
 };
 
@@ -5357,7 +5353,6 @@ export type TeamPageFilter = {
   _key?: Maybe<StringFilter>;
   topSection?: Maybe<TitleBodyFilter>;
   coreSection?: Maybe<TeamSectionFilter>;
-  contributorSection?: Maybe<TeamSectionFilter>;
   advisorSection?: Maybe<TeamSectionFilter>;
 };
 
@@ -5370,7 +5365,6 @@ export type TeamPageSorting = {
   _key?: Maybe<SortOrder>;
   topSection?: Maybe<TitleBodySorting>;
   coreSection?: Maybe<TeamSectionSorting>;
-  contributorSection?: Maybe<TeamSectionSorting>;
   advisorSection?: Maybe<TeamSectionSorting>;
 };
 

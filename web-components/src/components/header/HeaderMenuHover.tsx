@@ -42,21 +42,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-// TODO I made this for the NCT page, but there were conflicts with master. Leaving to use for #856
-// const NewIcon = styled('div')(({ theme }) => ({
-//   position: 'absolute',
-//   top: '-7px',
-//   right: '-28px',
-//   backgroundColor: '#3D7ACF', // not in theme
-//   height: '10px',
-//   width: '30px',
-//   display: 'flex',
-//   alignItems: 'center',
-//   justifyContent: 'center',
-//   padding: '1px',
-//   borderRadius: '3px',
-// }));
-
 export interface HeaderMenuItem extends MenuTitle {
   href?: string;
   renderDropdownItems?: () => JSX.Element;
@@ -66,7 +51,6 @@ export interface HeaderMenuItem extends MenuTitle {
 
 export interface HeaderMenuHoverBase {
   pathname: string;
-  color: string;
   linkComponent: React.FC<NavLinkProps>;
 }
 
@@ -77,7 +61,6 @@ interface HeaderMenuHoverProps extends HeaderMenuHoverBase {
 const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
   item,
   pathname,
-  color,
   linkComponent: LinkComponent,
 }) => {
   const theme = useTheme();
@@ -97,11 +80,7 @@ const HeaderMenuHover: React.FC<HeaderMenuHoverProps> = ({
     }
     return (
       <MenuHover
-        dropdownColor={
-          color === theme.palette.primary.light
-            ? theme.palette.secondary.main
-            : theme.palette.secondary.contrastText
-        }
+        dropdownColor={theme.palette.secondary.contrastText}
         title={item.title}
         renderTitle={item.renderTitle}
         classes={{ title: styles.title }}

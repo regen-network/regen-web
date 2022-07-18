@@ -18,7 +18,6 @@ const useGetJurisdiction = (
       if (!mapboxToken) return Promise.reject();
       const location = metadata?.['schema:location'];
       if (!location) setJurisdiction('');
-      console.log(location);
       const context: GeocodeFeature[] = location?.context || [];
       let countryKey = '';
       let stateProvince = '';
@@ -45,10 +44,7 @@ const useGetJurisdiction = (
           postalCode,
         });
 
-        console.log('isoString', isoString);
-
         if (geocodingError) setGeocodingError(null);
-
         if (isoString) setJurisdiction(isoString);
       } catch (err) {
         // initially this effect may fail mainly because the accessToken

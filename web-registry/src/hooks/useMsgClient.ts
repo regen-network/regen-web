@@ -27,7 +27,7 @@ type MsgClientType = {
 
 export default function useMsgClient(
   handleTxQueued: () => void,
-  handleTxDelivered: () => void,
+  handleTxDelivered: (deliverTxResponse: DeliverTxResponse) => void,
   handleError: () => void,
 ): MsgClientType {
   const { api, wallet } = useLedger();
@@ -69,7 +69,7 @@ export default function useMsgClient(
       handleTxQueued();
       const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
       setDeliverTxResponse(_deliverTxResponse);
-      handleTxDelivered();
+      handleTxDelivered(_deliverTxResponse);
       // The transaction succeeded iff code is 0.
       // TODO: this can give false positives. Some errors return code 0.
       if (_deliverTxResponse.code !== 0) {

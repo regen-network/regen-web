@@ -1,17 +1,21 @@
 import React from 'react';
-// import { useParams } from 'react-router-dom';
+import { Box } from '@mui/system';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { Title } from 'web-components/lib/components/typography';
 import { CardItem } from 'web-components/lib/components/modal/TxModal';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { truncateHash } from 'web-components/lib/utils/truncate';
 
 import { OnboardingFormTemplate } from '../../components/templates';
 import { Link } from '../../components/atoms';
-import { Box } from '@mui/system';
+import { getHashUrl } from '../../lib/block-explorer';
+import { useCreateProjectContext } from '../../features/ecocredit/CreateProject/CreateProjectContext';
+import { useGetProjectId } from './hooks/useGetProjectId';
 
 const ProjectFinished: React.FC = () => {
-  // const { projectId } = useParams();
+  const { deliverTxResponse } = useCreateProjectContext();
+  const projectId = useGetProjectId(deliverTxResponse);
 
   return (
     <OnboardingFormTemplate activeStep={2} title="Project has been created!">
@@ -27,22 +31,22 @@ const ProjectFinished: React.FC = () => {
           <CardItem
             label="project id"
             value={{
-              name: 'C02-007',
+              name: projectId,
             }}
             linkComponent={Link}
           />
           <CardItem
             label="hash"
             value={{
-              name: 'xyz123',
-              url: `#`, // TODO
+              name: truncateHash(deliverTxResponse?.transactionHash) || '',
+              url: getHashUrl(deliverTxResponse?.transactionHash),
             }}
             linkComponent={Link}
           />
         </OnBoardingCard>
         <OutlinedButton
           sx={{ margin: '0 auto' }}
-          href={'/projects/projectId/TODO'}
+          href={`/projects/${projectId}`}
         >
           see project page
         </OutlinedButton>

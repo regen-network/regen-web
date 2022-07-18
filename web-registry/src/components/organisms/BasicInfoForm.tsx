@@ -90,32 +90,30 @@ const BasicInfoForm: React.FC<{
       }}
       validate={async (values: BasicInfoFormValues) => {
         const errors: FormikErrors<BasicInfoFormValues> = {};
-        if (graphData?.shaclGraphByUri?.graph) {
-          const projectPageData = { ...getProjectPageBaseData(), ...values };
-          const report = await validate(
-            graphData.shaclGraphByUri.graph,
-            projectPageData,
-            'http://regen.network/ProjectPageBasicInfoGroup',
-          );
-          for (const result of report.results) {
-            const path: string = result.path.value;
-            console.log('result', result);
+        // if (graphData?.shaclGraphByUri?.graph) {
+        //   const projectPageData = { ...getProjectPageBaseData(), ...values };
+        //   const report = await validate(
+        //     graphData.shaclGraphByUri.graph,
+        //     projectPageData,
+        //     'http://regen.network/ProjectPageBasicInfoGroup',
+        //   );
+        //   for (const result of report.results) {
+        //     const path: string = result.path.value;
+        //     const compactedPath = getCompactedPath(path) as
+        //       | keyof BasicInfoFormValues
+        //       | undefined;
 
-            const compactedPath = getCompactedPath(path) as
-              | keyof BasicInfoFormValues
-              | undefined;
-
-            if (compactedPath === 'regen:projectSize') {
-              errors[compactedPath] = {
-                'qudt:numericValue': {
-                  '@value': requiredMessage,
-                },
-              };
-            } else if (compactedPath) {
-              errors[compactedPath] = requiredMessage;
-            }
-          }
-        }
+        //     if (compactedPath === 'regen:projectSize') {
+        //       errors[compactedPath] = {
+        //         'qudt:numericValue': {
+        //           '@value': requiredMessage,
+        //         },
+        //       };
+        //     } else if (compactedPath) {
+        //       errors[compactedPath] = requiredMessage;
+        //     }
+        //   }
+        // }
         return errors;
       }}
       onSubmit={async (values, { setSubmitting, setTouched }) => {

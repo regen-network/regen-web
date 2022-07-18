@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { DeliverTxResponse } from '@cosmjs/stargate';
 
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
@@ -16,10 +17,12 @@ import { ProjectPageFooter } from '../../components/molecules';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
 import useMsgClient from '../../hooks/useMsgClient';
 import { useGetJurisdiction } from './hooks/useGetJurisdiction';
+import { useCreateProjectContext } from '../../features/ecocredit/CreateProject/CreateProjectContext';
 
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
+  const createProjectContext = useCreateProjectContext();
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
@@ -33,22 +36,24 @@ export const ProjectReview: React.FC = () => {
     console.log('handleError');
   };
 
-  const handleTxDelivered = (): void => {
-    console.log('handleTxDelivered');
+  const handleTxDelivered = (deliverTxResponse: DeliverTxResponse): void => {
+    createProjectContext.deliverTxResponse = deliverTxResponse;
   };
 
   const {
     signAndBroadcast,
     // setDeliverTxResponse,
     wallet,
-    // deliverTxResponse,
-    // error,
+    error,
     // setError,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const { projectCreateSubmit, isSubmitModalOpen, closeSubmitModal } =
     useProjectCreateSubmit({
       signAndBroadcast,
-      onSuccess: () => navigate(`${editPath}/finished`),
+      onSuccess: () => {
+        if (!error) navigate(`${editPath}/finished/`);
+        console.error(error);
+      },
     });
   const project = data?.projectById;
   const editPath = `/project-pages/${projectId}`;
@@ -57,15 +62,13 @@ export const ProjectReview: React.FC = () => {
   const metadata: Partial<VCSProjectMetadataLD> = project?.metadata;
   const jurisdiction = useGetJurisdiction(metadata);
 
-  console.log('project', project);
-
   const submit = () => {
     projectCreateSubmit({
       classId: creditClassId || '',
       admin: wallet?.address || '',
       metadata,
       jurisdiction,
-      // referenceId:,
+      // referenceId: projectId, // TODO: using db id here for reference - is this correct?
     });
   };
 

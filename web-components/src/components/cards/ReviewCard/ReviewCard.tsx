@@ -1,19 +1,16 @@
 import React from 'react';
-import { Box, SxProps } from '@mui/material';
-import { DefaultTheme as Theme } from '@mui/styles';
+import { Box } from '@mui/material';
 
 import { Label } from '../../typography';
 import OnBoardingCard from '../OnBoardingCard';
 import { EditButton } from '../../buttons/EditButton';
 
 export interface ReviewCardProps {
-  sx?: SxProps<Theme>;
   title: string;
   onEditClick: () => void;
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = ({
-  sx,
   title,
   onEditClick,
   children,
@@ -24,11 +21,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
         {
           mt: 5,
           mb: 0,
-          // '&:first-of-type': {
-          //   mt: 0,
-          // },
         },
-        // ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
       <Box

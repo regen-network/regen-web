@@ -22,7 +22,7 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 export interface BasicInfoFormValues {
   'schema:name': string;
-  'regen:projectSize': {
+  'regen:size': {
     'qudt:numericValue': {
       '@type': 'xsd:double';
       '@value'?: number | string;
@@ -77,7 +77,7 @@ const BasicInfoForm: React.FC<{
       validateOnMount
       initialValues={{
         'schema:name': initialValues?.['schema:name'] || '',
-        'regen:projectSize': initialValues?.['regen:projectSize'] || {
+        'regen:size': initialValues?.['regen:size'] || {
           'qudt:numericValue': {
             '@type': 'xsd:double',
             '@value': undefined,
@@ -90,30 +90,30 @@ const BasicInfoForm: React.FC<{
       }}
       validate={async (values: BasicInfoFormValues) => {
         const errors: FormikErrors<BasicInfoFormValues> = {};
-        // if (graphData?.shaclGraphByUri?.graph) {
-        //   const projectPageData = { ...getProjectPageBaseData(), ...values };
-        //   const report = await validate(
-        //     graphData.shaclGraphByUri.graph,
-        //     projectPageData,
-        //     'http://regen.network/ProjectPageBasicInfoGroup',
-        //   );
-        //   for (const result of report.results) {
-        //     const path: string = result.path.value;
-        //     const compactedPath = getCompactedPath(path) as
-        //       | keyof BasicInfoFormValues
-        //       | undefined;
+        if (graphData?.shaclGraphByUri?.graph) {
+          const projectPageData = { ...getProjectPageBaseData(), ...values };
+          const report = await validate(
+            graphData.shaclGraphByUri.graph,
+            projectPageData,
+            'http://regen.network/ProjectPageBasicInfoGroup',
+          );
+          for (const result of report.results) {
+            const path: string = result.path.value;
+            const compactedPath = getCompactedPath(path) as
+              | keyof BasicInfoFormValues
+              | undefined;
 
-        //     if (compactedPath === 'regen:projectSize') {
-        //       errors[compactedPath] = {
-        //         'qudt:numericValue': {
-        //           '@value': requiredMessage,
-        //         },
-        //       };
-        //     } else if (compactedPath) {
-        //       errors[compactedPath] = requiredMessage;
-        //     }
-        //   }
-        // }
+            if (compactedPath === 'regen:size') {
+              errors[compactedPath] = {
+                'qudt:numericValue': {
+                  '@value': requiredMessage,
+                },
+              };
+            } else if (compactedPath) {
+              errors[compactedPath] = requiredMessage;
+            }
+          }
+        }
         return errors;
       }}
       onSubmit={async (values, { setSubmitting, setTouched }) => {
@@ -154,13 +154,13 @@ const BasicInfoForm: React.FC<{
                     className={clsx(classes.parcelField, classes.parcelSize)}
                     component={TextField}
                     type="number"
-                    name="regen:projectSize.qudt:numericValue.@value"
+                    name="regen:size.qudt:numericValue.@value"
                     defaultStyle={false}
                   />
                   <Field
                     className={clsx(classes.parcelField, classes.parcelUnit)}
                     component={SelectTextField}
-                    name="regen:projectSize.qudt:unit.@value"
+                    name="regen:size.qudt:unit.@value"
                     options={[
                       {
                         value: 'unit:HA',

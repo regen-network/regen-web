@@ -2,7 +2,6 @@ import React from 'react';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import EditIcon from '../icons/EditIcon';
-
 import { Label } from '../typography';
 
 interface ButtonProps {

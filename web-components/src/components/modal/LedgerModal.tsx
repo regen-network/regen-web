@@ -532,7 +532,6 @@ export default function LedgerModal({
                         .replace(/\n/g, '<br>')
                         .replace(/[ ]/g, '&nbsp;'),
                     )}
-                    //
                   </Grid>
                 </Grid>
                 {open ? null : <div className={classes.gradient} />}

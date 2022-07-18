@@ -602,5 +602,5 @@ export const queryEcoBatches = async (
 export const isVCSCreditClass = (creditClassId?: string): boolean => {
   // TODO: this is a hack to make V4 testnet work. C02 is a copy of C01 on V4.
   // In PROD/mainnet, this should only be C01.
-  return creditClassId === 'C01';
+  return creditClassId === 'C01' || creditClassId === 'C02';
 };

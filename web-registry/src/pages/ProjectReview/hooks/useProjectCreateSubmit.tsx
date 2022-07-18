@@ -20,7 +20,6 @@ interface MsgCreateProjectValues {
 
 interface Props {
   signAndBroadcast: SignAndBroadcastType;
-  onSuccess: () => void;
 }
 
 type ReturnType = {
@@ -29,10 +28,7 @@ type ReturnType = {
   closeSubmitModal: () => void;
 };
 
-const useProjectCreateSubmit = ({
-  signAndBroadcast,
-  onSuccess,
-}: Props): ReturnType => {
+const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
 
   const closeSubmitModal = () => setIsSubmitModalOpen(false);
@@ -75,12 +71,11 @@ const useProjectCreateSubmit = ({
 
       try {
         await signAndBroadcast(tx, () => setIsSubmitModalOpen(true));
-        onSuccess();
       } catch (e) {
-        console.error(e);
+        console.error('useProjectCreateSubmit', e);
       }
     },
-    [onSuccess, signAndBroadcast],
+    [signAndBroadcast],
   );
 
   return { projectCreateSubmit, isSubmitModalOpen, closeSubmitModal };

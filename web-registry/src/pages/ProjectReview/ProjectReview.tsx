@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
@@ -6,6 +6,7 @@ import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/Revie
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
 import { OnboardingFormTemplate } from '../../components/templates';
 import { useProjectByIdQuery } from '../../generated/graphql';
@@ -18,6 +19,8 @@ import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
 import useMsgClient from '../../hooks/useMsgClient';
 import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useCreateProjectContext } from '../../features/ecocredit/CreateProject/CreateProjectContext';
+import { Link } from '../../components/atoms';
+import { getHashUrl } from '../../lib/block-explorer';
 
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();
@@ -27,40 +30,46 @@ export const ProjectReview: React.FC = () => {
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
   });
+  const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
 
   const handleTxQueued = (): void => {
     console.log('handleTxQueued');
   };
 
+  const handleTxModalClose = (): void => {
+    setTxModalTitle(undefined);
+    setDeliverTxResponse(undefined);
+    setError(undefined);
+  };
+
   const handleError = (): void => {
-    console.log('handleError');
+    closeSubmitModal();
+    setTxModalTitle('MsgCreateProject Error');
   };
 
   const handleTxDelivered = (deliverTxResponse: DeliverTxResponse): void => {
     createProjectContext.deliverTxResponse = deliverTxResponse;
+    navigate(`${editPath}/finished/`);
   };
 
   const {
     signAndBroadcast,
-    // setDeliverTxResponse,
+    deliverTxResponse,
     wallet,
     error,
-    // setError,
+    setError,
+    setDeliverTxResponse,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const { projectCreateSubmit, isSubmitModalOpen, closeSubmitModal } =
-    useProjectCreateSubmit({
-      signAndBroadcast,
-      onSuccess: () => {
-        if (!error) navigate(`${editPath}/finished/`);
-        console.error(error);
-      },
-    });
+    useProjectCreateSubmit({ signAndBroadcast });
   const project = data?.projectById;
   const editPath = `/project-pages/${projectId}`;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
   const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
   const metadata: Partial<VCSProjectMetadataLD> = project?.metadata;
   const jurisdiction = useGetJurisdiction(metadata);
+  const txHash = deliverTxResponse?.transactionHash;
+  const txHashUrl = getHashUrl(txHash);
 
   const submit = () => {
     projectCreateSubmit({
@@ -68,16 +77,12 @@ export const ProjectReview: React.FC = () => {
       admin: wallet?.address || '',
       metadata,
       jurisdiction,
-      // referenceId: projectId, // TODO: using db id here for reference - is this correct?
+      // referenceId: '', // TODO
     });
   };
 
   return (
-    <OnboardingFormTemplate
-      activeStep={1}
-      title="Review"
-      saveAndExit={() => Promise.resolve()}
-    >
+    <OnboardingFormTemplate activeStep={1} title="Review">
       <ReviewCard
         title="Basic Info"
         onEditClick={() => navigate(`${editPath}/basic-info`)}
@@ -202,6 +207,19 @@ export const ProjectReview: React.FC = () => {
       </ReviewCard>
       <ProjectPageFooter onSave={submit} saveDisabled={isSubmitModalOpen} />
       <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
+      {error && txModalTitle && (
+        <TxErrorModal
+          error={error}
+          open={!!error && (!!txModalTitle || !!deliverTxResponse)}
+          onClose={handleTxModalClose}
+          txHash={txHash || ''}
+          txHashUrl={txHashUrl}
+          cardTitle={txModalTitle}
+          linkComponent={Link}
+          onViewPortfolio={handleTxModalClose}
+          buttonTitle="close"
+        />
+      )}
     </OnboardingFormTemplate>
   );
 };

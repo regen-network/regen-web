@@ -21,6 +21,7 @@ import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useCreateProjectContext } from '../../features/ecocredit/CreateProject/CreateProjectContext';
 import { Link } from '../../components/atoms';
 import { getHashUrl } from '../../lib/block-explorer';
+import { VCSMetadata } from './ProjectReview.VCSMetadata';
 
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();
@@ -155,77 +156,7 @@ export const ProjectReview: React.FC = () => {
         onEditClick={() => navigate(`${editPath}/metadata`)}
       >
         {isVCS ? (
-          <>
-            <ItemDisplay
-              name="Offset generation method"
-              value={metadata?.['regen:offsetGenerationMethod']}
-            />
-            <ItemDisplay
-              name="Project activity"
-              value={metadata?.['regen:projectActivity']?.['schema:name']}
-            />
-            <ItemDisplay
-              name="Project activity url"
-              value={
-                <Link
-                  target="_blank"
-                  href={
-                    metadata?.['regen:projectActivity']?.['schema:url']?.[
-                      '@value'
-                    ] || ''
-                  }
-                >
-                  {
-                    metadata?.['regen:projectActivity']?.['schema:url']?.[
-                      '@value'
-                    ]
-                  }
-                </Link>
-              }
-            />
-            <ItemDisplay
-              name="VCS project ID"
-              value={metadata?.['regen:vcsProjectId']}
-            />
-            <ItemDisplay
-              name="VCS project page url"
-              value={
-                <Link
-                  target="_blank"
-                  href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
-                >
-                  {metadata?.['regen:vcsProjectPage']?.['@value']}
-                </Link>
-              }
-            />
-            <ItemDisplay
-              name="Project duration"
-              value={metadata?.['regen:projectStartDate']?.['@value']}
-            />
-            <ItemDisplay
-              name="VCS methodology name"
-              value={metadata?.['regen:vcsMethodology']?.['schema:name']}
-            />
-            <ItemDisplay
-              name="VCS methodology url"
-              value={
-                <Link
-                  target="_blank"
-                  href={
-                    metadata?.['regen:vcsMethodology']?.['schema:url']?.[
-                      '@value'
-                    ] || ''
-                  }
-                >
-                  {
-                    metadata?.['regen:vcsMethodology']?.['schema:url']?.[
-                      '@value'
-                    ]
-                  }
-                </Link>
-              }
-            />
-          </>
+          <VCSMetadata metadata={metadata} />
         ) : (
           <Box
             sx={theme => ({

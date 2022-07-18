@@ -8,13 +8,13 @@ const useGetProjectId = (deliverTxResponse?: DeliverTxResponse): string => {
     console.log('deliverTxResponse', deliverTxResponse);
     if (deliverTxResponse?.rawLog) {
       const rawLog = JSON.parse(deliverTxResponse?.rawLog);
-      const event = rawLog?.[0]?.events?.find(
-        (event: any) => event?.type?.includes('EventCreateProject'), //regen.ecocredit.v1.EventCreateProject
+      // regen.ecocredit.v1.EventCreateProject
+      const event = rawLog?.[0]?.events?.find((event: any) =>
+        event?.type?.includes('EventCreateProject'),
       );
       const _projectId = event?.attributes
-        ?.find((att: any) => att?.key === 'project_id')
-        ?.value?.replace('"', '');
-      console.log('_projectId', _projectId);
+        ?.find((attribute: any) => attribute?.key === 'project_id')
+        ?.value?.replace(/['"]+/g, '');
       setProjectId(_projectId);
     }
   }, [deliverTxResponse]);

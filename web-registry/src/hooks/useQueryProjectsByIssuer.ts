@@ -19,6 +19,8 @@ export default function useQueryProjectsByIssuer(issuer: string) {
   useEffect(() => {
     if (!projectsResponse?.projects) return;
 
+    let ignore = false;
+
     const fetchData = async (): Promise<void> => {
       try {
         const _projects = await Promise.all(
@@ -35,12 +37,18 @@ export default function useQueryProjectsByIssuer(issuer: string) {
             };
           }),
         );
-        setProjects(_projects);
+        if (!ignore) {
+          setProjects(_projects);
+        }
       } catch (error) {
         console.error(error); // eslint-disable-line no-console
       }
     };
     fetchData();
+
+    return () => {
+      ignore = true;
+    };
   }, [projectsResponse?.projects]);
 
   return { data: projects };

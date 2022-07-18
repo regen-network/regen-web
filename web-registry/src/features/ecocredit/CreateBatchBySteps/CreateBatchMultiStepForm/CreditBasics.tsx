@@ -132,7 +132,7 @@ export default function CreditBasics({
         );
         const projectNameWithId = `${projectName} (${projectId})`;
         return {
-          label: projectNameWithId || projectId,
+          label: projectName ? projectNameWithId : projectId,
           value: projectId,
         };
       }) || [];

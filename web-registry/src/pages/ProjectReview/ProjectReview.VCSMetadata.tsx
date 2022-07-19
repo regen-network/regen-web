@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
+import { formatDate } from 'web-components/lib/utils/format';
 
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
 import { Link } from '../../components/atoms';
@@ -50,8 +51,10 @@ const VCSMetadata: React.FC<Props> = ({ metadata }) => {
         }
       />
       <ItemDisplay
-        name="Project duration"
-        value={metadata?.['regen:projectStartDate']?.['@value']}
+        name="Project start and end date"
+        value={`${formatDate(
+          metadata?.['regen:projectStartDate']?.['@value'],
+        )} - ${formatDate(metadata?.['regen:projectEndDate']?.['@value'])}`}
       />
       <ItemDisplay
         name="VCS methodology name"

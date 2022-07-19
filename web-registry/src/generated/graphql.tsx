@@ -261,6 +261,29 @@ export enum AccountsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
+/** All input for the `addAddrToAccount` mutation. */
+export type AddAddrToAccountInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  addr?: Maybe<Scalars['String']>;
+  vPartyType?: Maybe<PartyType>;
+};
+
+/** The output of our `addAddrToAccount` mutation. */
+export type AddAddrToAccountPayload = {
+  __typename?: 'AddAddrToAccountPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+};
+
 export type Address = Node & {
   __typename?: 'Address';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -6100,6 +6123,50 @@ export type FlywaySchemaHistoryPatch = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
+/** All input for the `getCurrentAccount` mutation. */
+export type GetCurrentAccountInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+/** The output of our `getCurrentAccount` mutation. */
+export type GetCurrentAccountPayload = {
+  __typename?: 'GetCurrentAccountPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  accountId?: Maybe<Scalars['UUID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+};
+
+/** All input for the `getCurrentAddrs` mutation. */
+export type GetCurrentAddrsInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+/** The output of our `getCurrentAddrs` mutation. */
+export type GetCurrentAddrsPayload = {
+  __typename?: 'GetCurrentAddrsPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  addrs?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+};
+
 /** All input for the `getUserFirstOrganization` mutation. */
 export type GetUserFirstOrganizationInput = {
   /**
@@ -6131,29 +6198,6 @@ export type GetUserFirstOrganizationPayload = {
 /** The output of our `getUserFirstOrganization` mutation. */
 export type GetUserFirstOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
-};
-
-/** All input for the `getWalletByAddr` mutation. */
-export type GetWalletByAddrInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  addr?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `getWalletByAddr` mutation. */
-export type GetWalletByAddrPayload = {
-  __typename?: 'GetWalletByAddrPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  walletId?: Maybe<Scalars['UUID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
 };
 
 /** All input for the `getWalletContactEmail` mutation. */
@@ -7031,10 +7075,12 @@ export type Mutation = {
   deleteWalletById?: Maybe<DeleteWalletPayload>;
   /** Deletes a single `Wallet` using a unique key. */
   deleteWalletByAddr?: Maybe<DeleteWalletPayload>;
+  addAddrToAccount?: Maybe<AddAddrToAccountPayload>;
   createUserOrganization?: Maybe<CreateUserOrganizationPayload>;
   createUserOrganizationIfNeeded?: Maybe<CreateUserOrganizationIfNeededPayload>;
+  getCurrentAccount?: Maybe<GetCurrentAccountPayload>;
+  getCurrentAddrs?: Maybe<GetCurrentAddrsPayload>;
   getUserFirstOrganization?: Maybe<GetUserFirstOrganizationPayload>;
-  getWalletByAddr?: Maybe<GetWalletByAddrPayload>;
   getWalletContactEmail?: Maybe<GetWalletContactEmailPayload>;
   isAdmin?: Maybe<IsAdminPayload>;
   issueCredits?: Maybe<IssueCreditsPayload>;
@@ -7985,6 +8031,12 @@ export type MutationDeleteWalletByAddrArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationAddAddrToAccountArgs = {
+  input: AddAddrToAccountInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateUserOrganizationArgs = {
   input: CreateUserOrganizationInput;
 };
@@ -7997,14 +8049,20 @@ export type MutationCreateUserOrganizationIfNeededArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationGetUserFirstOrganizationArgs = {
-  input: GetUserFirstOrganizationInput;
+export type MutationGetCurrentAccountArgs = {
+  input: GetCurrentAccountInput;
 };
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationGetWalletByAddrArgs = {
-  input: GetWalletByAddrInput;
+export type MutationGetCurrentAddrsArgs = {
+  input: GetCurrentAddrsInput;
+};
+
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationGetUserFirstOrganizationArgs = {
+  input: GetUserFirstOrganizationInput;
 };
 
 
@@ -14425,8 +14483,6 @@ export type Query = Node & {
   getAvailableCredits?: Maybe<Scalars['BigFloat']>;
   getCurrentUser?: Maybe<Scalars['String']>;
   getCurrentUserId?: Maybe<Scalars['UUID']>;
-  /** Reads and enables pagination through a set of `Wallet`. */
-  getWalletByAddress?: Maybe<WalletsConnection>;
   /** Reads a single `Account` using its globally unique `ID`. */
   account?: Maybe<Account>;
   /** Reads a single `AccountBalance` using its globally unique `ID`. */
@@ -15055,17 +15111,6 @@ export type QueryWalletByAddrArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryGetAvailableCreditsArgs = {
   vintageId?: Maybe<Scalars['UUID']>;
-};
-
-
-/** The root query type which gives access points into the data universe. */
-export type QueryGetWalletByAddressArgs = {
-  walletAddress?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['Cursor']>;
-  after?: Maybe<Scalars['Cursor']>;
 };
 
 

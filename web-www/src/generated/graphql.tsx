@@ -3113,7 +3113,6 @@ export type QuerySanityRegenTeamMemberArgs = {
   _key: Maybe<StringQueryOperatorInput>;
   name: Maybe<StringQueryOperatorInput>;
   title: Maybe<StringQueryOperatorInput>;
-  description: Maybe<StringQueryOperatorInput>;
   image: Maybe<SanityImageFilterInput>;
   linkedinUrl: Maybe<StringQueryOperatorInput>;
   twitterUrl: Maybe<StringQueryOperatorInput>;
@@ -3388,11 +3387,9 @@ export type QuerySanityTeamPageArgs = {
   _key: Maybe<StringQueryOperatorInput>;
   topSection: Maybe<SanityTitleBodyFilterInput>;
   coreSection: Maybe<SanityTeamSectionFilterInput>;
-  contributorSection: Maybe<SanityTeamSectionFilterInput>;
   advisorSection: Maybe<SanityTeamSectionFilterInput>;
   _rawTopSection: Maybe<JsonQueryOperatorInput>;
   _rawCoreSection: Maybe<JsonQueryOperatorInput>;
-  _rawContributorSection: Maybe<JsonQueryOperatorInput>;
   _rawAdvisorSection: Maybe<JsonQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
@@ -18279,7 +18276,6 @@ export enum SanityPresskitPageFieldsEnum {
   TeamSectionMembersKey = 'teamSection___members____key',
   TeamSectionMembersName = 'teamSection___members___name',
   TeamSectionMembersTitle = 'teamSection___members___title',
-  TeamSectionMembersDescription = 'teamSection___members___description',
   TeamSectionMembersImageKey = 'teamSection___members___image____key',
   TeamSectionMembersImageType = 'teamSection___members___image____type',
   TeamSectionMembersImageRawAsset = 'teamSection___members___image____rawAsset',
@@ -18653,7 +18649,6 @@ export type SanityRegenTeamMember = SanityDocument & Node & {
   _key: Maybe<Scalars['String']>;
   name: Maybe<Scalars['String']>;
   title: Maybe<Scalars['String']>;
-  description: Maybe<Scalars['String']>;
   image: Maybe<SanityImage>;
   linkedinUrl: Maybe<Scalars['String']>;
   twitterUrl: Maybe<Scalars['String']>;
@@ -18724,7 +18719,6 @@ export enum SanityRegenTeamMemberFieldsEnum {
   Key = '_key',
   Name = 'name',
   Title = 'title',
-  Description = 'description',
   ImageKey = 'image____key',
   ImageType = 'image____type',
   ImageAssetId = 'image___asset____id',
@@ -18906,7 +18900,6 @@ export type SanityRegenTeamMemberFilterInput = {
   _key: Maybe<StringQueryOperatorInput>;
   name: Maybe<StringQueryOperatorInput>;
   title: Maybe<StringQueryOperatorInput>;
-  description: Maybe<StringQueryOperatorInput>;
   image: Maybe<SanityImageFilterInput>;
   linkedinUrl: Maybe<StringQueryOperatorInput>;
   twitterUrl: Maybe<StringQueryOperatorInput>;
@@ -21123,11 +21116,9 @@ export type SanityTeamPage = SanityDocument & Node & {
   _key: Maybe<Scalars['String']>;
   topSection: Maybe<SanityTitleBody>;
   coreSection: Maybe<SanityTeamSection>;
-  contributorSection: Maybe<SanityTeamSection>;
   advisorSection: Maybe<SanityTeamSection>;
   _rawTopSection: Maybe<Scalars['JSON']>;
   _rawCoreSection: Maybe<Scalars['JSON']>;
-  _rawContributorSection: Maybe<Scalars['JSON']>;
   _rawAdvisorSection: Maybe<Scalars['JSON']>;
   id: Scalars['ID'];
   parent: Maybe<Node>;
@@ -21158,11 +21149,6 @@ export type SanityTeamPage_RawTopSectionArgs = {
 
 
 export type SanityTeamPage_RawCoreSectionArgs = {
-  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
-};
-
-
-export type SanityTeamPage_RawContributorSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
@@ -21223,7 +21209,6 @@ export enum SanityTeamPageFieldsEnum {
   CoreSectionMembersKey = 'coreSection___members____key',
   CoreSectionMembersName = 'coreSection___members___name',
   CoreSectionMembersTitle = 'coreSection___members___title',
-  CoreSectionMembersDescription = 'coreSection___members___description',
   CoreSectionMembersImageKey = 'coreSection___members___image____key',
   CoreSectionMembersImageType = 'coreSection___members___image____type',
   CoreSectionMembersImageRawAsset = 'coreSection___members___image____rawAsset',
@@ -21248,43 +21233,6 @@ export enum SanityTeamPageFieldsEnum {
   CoreSectionMembersInternalOwner = 'coreSection___members___internal___owner',
   CoreSectionMembersInternalType = 'coreSection___members___internal___type',
   CoreSectionRawMembers = 'coreSection____rawMembers',
-  ContributorSectionKey = 'contributorSection____key',
-  ContributorSectionType = 'contributorSection____type',
-  ContributorSectionTitle = 'contributorSection___title',
-  ContributorSectionMembers = 'contributorSection___members',
-  ContributorSectionMembersId = 'contributorSection___members____id',
-  ContributorSectionMembersType = 'contributorSection___members____type',
-  ContributorSectionMembersCreatedAt = 'contributorSection___members____createdAt',
-  ContributorSectionMembersUpdatedAt = 'contributorSection___members____updatedAt',
-  ContributorSectionMembersRev = 'contributorSection___members____rev',
-  ContributorSectionMembersKey = 'contributorSection___members____key',
-  ContributorSectionMembersName = 'contributorSection___members___name',
-  ContributorSectionMembersTitle = 'contributorSection___members___title',
-  ContributorSectionMembersDescription = 'contributorSection___members___description',
-  ContributorSectionMembersImageKey = 'contributorSection___members___image____key',
-  ContributorSectionMembersImageType = 'contributorSection___members___image____type',
-  ContributorSectionMembersImageRawAsset = 'contributorSection___members___image____rawAsset',
-  ContributorSectionMembersImageRawHotspot = 'contributorSection___members___image____rawHotspot',
-  ContributorSectionMembersImageRawCrop = 'contributorSection___members___image____rawCrop',
-  ContributorSectionMembersLinkedinUrl = 'contributorSection___members___linkedinUrl',
-  ContributorSectionMembersTwitterUrl = 'contributorSection___members___twitterUrl',
-  ContributorSectionMembersGithubUrl = 'contributorSection___members___githubUrl',
-  ContributorSectionMembersRawImage = 'contributorSection___members____rawImage',
-  ContributorSectionMembersId = 'contributorSection___members___id',
-  ContributorSectionMembersParentId = 'contributorSection___members___parent___id',
-  ContributorSectionMembersParentChildren = 'contributorSection___members___parent___children',
-  ContributorSectionMembersChildren = 'contributorSection___members___children',
-  ContributorSectionMembersChildrenId = 'contributorSection___members___children___id',
-  ContributorSectionMembersChildrenChildren = 'contributorSection___members___children___children',
-  ContributorSectionMembersInternalContent = 'contributorSection___members___internal___content',
-  ContributorSectionMembersInternalContentDigest = 'contributorSection___members___internal___contentDigest',
-  ContributorSectionMembersInternalDescription = 'contributorSection___members___internal___description',
-  ContributorSectionMembersInternalFieldOwners = 'contributorSection___members___internal___fieldOwners',
-  ContributorSectionMembersInternalIgnoreType = 'contributorSection___members___internal___ignoreType',
-  ContributorSectionMembersInternalMediaType = 'contributorSection___members___internal___mediaType',
-  ContributorSectionMembersInternalOwner = 'contributorSection___members___internal___owner',
-  ContributorSectionMembersInternalType = 'contributorSection___members___internal___type',
-  ContributorSectionRawMembers = 'contributorSection____rawMembers',
   AdvisorSectionKey = 'advisorSection____key',
   AdvisorSectionType = 'advisorSection____type',
   AdvisorSectionTitle = 'advisorSection___title',
@@ -21297,7 +21245,6 @@ export enum SanityTeamPageFieldsEnum {
   AdvisorSectionMembersKey = 'advisorSection___members____key',
   AdvisorSectionMembersName = 'advisorSection___members___name',
   AdvisorSectionMembersTitle = 'advisorSection___members___title',
-  AdvisorSectionMembersDescription = 'advisorSection___members___description',
   AdvisorSectionMembersImageKey = 'advisorSection___members___image____key',
   AdvisorSectionMembersImageType = 'advisorSection___members___image____type',
   AdvisorSectionMembersImageRawAsset = 'advisorSection___members___image____rawAsset',
@@ -21324,7 +21271,6 @@ export enum SanityTeamPageFieldsEnum {
   AdvisorSectionRawMembers = 'advisorSection____rawMembers',
   RawTopSection = '_rawTopSection',
   RawCoreSection = '_rawCoreSection',
-  RawContributorSection = '_rawContributorSection',
   RawAdvisorSection = '_rawAdvisorSection',
   Id = 'id',
   ParentId = 'parent___id',
@@ -21423,11 +21369,9 @@ export type SanityTeamPageFilterInput = {
   _key: Maybe<StringQueryOperatorInput>;
   topSection: Maybe<SanityTitleBodyFilterInput>;
   coreSection: Maybe<SanityTeamSectionFilterInput>;
-  contributorSection: Maybe<SanityTeamSectionFilterInput>;
   advisorSection: Maybe<SanityTeamSectionFilterInput>;
   _rawTopSection: Maybe<JsonQueryOperatorInput>;
   _rawCoreSection: Maybe<JsonQueryOperatorInput>;
-  _rawContributorSection: Maybe<JsonQueryOperatorInput>;
   _rawAdvisorSection: Maybe<JsonQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
@@ -24240,7 +24184,7 @@ export type ImageWithPreviewFragment = (
 
 export type TeamMemberFieldsFragment = (
   { __typename?: 'SanityRegenTeamMember' }
-  & Pick<SanityRegenTeamMember, 'name' | 'title' | 'description' | 'linkedinUrl' | 'twitterUrl' | 'githubUrl'>
+  & Pick<SanityRegenTeamMember, 'name' | 'title' | 'linkedinUrl' | 'twitterUrl' | 'githubUrl'>
   & { image: Maybe<(
     { __typename?: 'SanityImage' }
     & { asset: Maybe<(

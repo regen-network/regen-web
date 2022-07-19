@@ -28,7 +28,7 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 // import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
 // import { ReactComponent as Sell } from '../../assets/svgs/sell.svg';
-import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
+import AvailableCreditsIconAlt from 'web-components/lib/components/icons/AvailableCreditsIconAlt';
 import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
 import { Link } from '../../components/atoms';
@@ -50,6 +50,7 @@ import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
 import {
+  CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_SHORT,
   CREATE_SELL_ORDER_TITLE,
 } from './MyEcocredits.contants';
@@ -58,6 +59,8 @@ import {
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
+import { useNavigate } from 'react-router-dom';
+import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);
@@ -75,6 +78,7 @@ export const MyEcocredits = (): JSX.Element => {
   const [txModalHeader, setTxModalHeader] = useState<string | undefined>();
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
+  const navigate = useNavigate();
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
@@ -87,6 +91,13 @@ export const MyEcocredits = (): JSX.Element => {
     setTxButtonTitle(undefined);
     setDeliverTxResponse(undefined);
     setError(undefined);
+  };
+
+  const onButtonClick = (): void => {
+    handleTxModalClose();
+    if (txButtonTitle === CREATE_SELL_ORDER_BUTTON) {
+      navigate('/marketplace/storefront');
+    }
   };
 
   const handleError = (): void => {
@@ -122,6 +133,7 @@ export const MyEcocredits = (): JSX.Element => {
     baskets,
   );
 
+  useUpdateTxModalTitle({ setTxModalTitle, deliverTxResponse });
   useUpdateCreditBaskets({ basketsWithClasses, credits, setCreditBaskets });
 
   const openTakeModal = useOpenTakeModal({
@@ -177,9 +189,10 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const createSellOrderSubmit = useCreateSellOrderSubmit({
+    accountAddress,
+    signAndBroadcast,
     setCardItems,
     setTxModalHeader,
-    setTxModalTitle,
     setSellOrderCreateOpen,
     setTxButtonTitle,
   });
@@ -213,7 +226,7 @@ export const MyEcocredits = (): JSX.Element => {
                   //   onClick: () => console.log(`TODO sell credit ${i}`),
                   // },
                   {
-                    icon: <AvailableCreditsIcon sx={sxs.arrow} />,
+                    icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
                     label: CREATE_SELL_ORDER_SHORT,
                     onClick: () => setSellOrderCreateOpen(i),
                   },
@@ -345,10 +358,8 @@ export const MyEcocredits = (): JSX.Element => {
         <CreateSellOrderModal
           batchDenoms={[
             {
-              label:
-                credits[sellOrderCreateOpen].balance?.tradableAmount ?? '0',
-              value:
-                credits[sellOrderCreateOpen].balance?.tradableAmount ?? '0',
+              label: credits[sellOrderCreateOpen].denom ?? '0',
+              value: credits[sellOrderCreateOpen].denom ?? '0',
             },
             ...getOtherSellOrderBatchDenomOptions({
               credits,
@@ -367,7 +378,7 @@ export const MyEcocredits = (): JSX.Element => {
         open={!deliverTxResponse && isProcessingModalOpen}
         onClose={() => setIsProcessingModalOpen(false)}
       />
-      {!error && txHash && cardItems && txModalTitle && (
+      {!error && txHash && cardItems && (txModalTitle || txModalHeader) && (
         <TxSuccessfulModal
           open={!error && (!!txModalTitle || !!deliverTxResponse)}
           onClose={handleTxModalClose}
@@ -378,19 +389,19 @@ export const MyEcocredits = (): JSX.Element => {
           buttonTitle={txButtonTitle}
           cardItems={cardItems}
           linkComponent={Link}
-          onViewPortfolio={handleTxModalClose}
+          onButtonClick={onButtonClick}
         />
       )}
-      {error && txModalTitle && (
+      {error && (txModalTitle || txModalHeader) && (
         <TxErrorModal
           error={error}
           open={!!error && (!!txModalTitle || !!deliverTxResponse)}
           onClose={handleTxModalClose}
           txHash={txHash || ''}
           txHashUrl={txHashUrl}
-          cardTitle={txModalTitle}
+          cardTitle={txModalTitle ?? ''}
           linkComponent={Link}
-          onViewPortfolio={handleTxModalClose}
+          onButtonClick={onButtonClick}
         />
       )}
     </>

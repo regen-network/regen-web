@@ -47,7 +47,7 @@ interface Props extends TxModalProps {
 }
 
 export interface TxModalProps extends RegenModalProps {
-  onViewPortfolio: () => void;
+  onButtonClick: () => void;
   cardTitle: string;
   buttonTitle?: string;
   cardItems?: Item[];
@@ -96,7 +96,7 @@ const TxModal: React.FC<Props> = ({
   buttonTitle = 'view your portfolio',
   open,
   onClose,
-  onViewPortfolio,
+  onButtonClick,
   cardTitle,
   cardItems,
   txHash,
@@ -143,7 +143,7 @@ const TxModal: React.FC<Props> = ({
       </Card>
       <OutlinedButton
         sx={{ fontSize: { xs: 12, sm: 18 } }}
-        onClick={onViewPortfolio}
+        onClick={onButtonClick}
       >
         {buttonTitle}
       </OutlinedButton>

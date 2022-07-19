@@ -3,16 +3,19 @@ import { FormValues as CreateSellOrderFormValues } from 'web-components/lib/comp
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
+import { MsgSell } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
 import { useStateSetter } from '../../../types/react/use-state';
 import {
   CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_HEADER,
 } from '../MyEcocredits.contants';
 import { Box } from '@mui/material';
+import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
 
 type Props = {
+  accountAddress?: string;
+  signAndBroadcast: SignAndBroadcastType;
   setCardItems: useStateSetter<Item[] | undefined>;
-  setTxModalTitle: useStateSetter<string | undefined>;
   setTxModalHeader: useStateSetter<string | undefined>;
   setTxButtonTitle: useStateSetter<string | undefined>;
   setSellOrderCreateOpen: useStateSetter<number>;
@@ -20,18 +23,40 @@ type Props = {
 
 type ReturnType = (values: CreateSellOrderFormValues) => Promise<void>;
 
+const PRICE_DENOM = 'uregen';
+
 const useCreateSellOrderSubmit = ({
+  accountAddress,
+  signAndBroadcast,
   setTxModalHeader,
   setCardItems,
-  setTxModalTitle,
   setTxButtonTitle,
   setSellOrderCreateOpen,
 }: Props): ReturnType => {
   const basketPutSubmit = useCallback(
     async (values: CreateSellOrderFormValues): Promise<void> => {
-      const { amount, batchDenom, price } = values;
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      setSellOrderCreateOpen(-1);
+      if (!accountAddress) return Promise.reject();
+
+      const { amount, batchDenom, price, disableAutoRetire } = values;
+      const msg = MsgSell.fromPartial({
+        seller: accountAddress,
+        orders: [
+          {
+            batchDenom,
+            quantity: String(amount),
+            askPrice: { denom: PRICE_DENOM, amount: String(price) },
+            disableAutoRetire,
+          },
+        ],
+      });
+
+      const tx = {
+        msgs: [msg],
+        fee: undefined,
+        memo: undefined,
+      };
+
+      signAndBroadcast(tx, () => setSellOrderCreateOpen(-1));
 
       if (batchDenom && amount) {
         setCardItems([
@@ -62,16 +87,16 @@ const useCreateSellOrderSubmit = ({
           },
         ]);
         setTxModalHeader(CREATE_SELL_ORDER_HEADER);
-        setTxModalTitle(`Sell Order #xxx`);
         setTxButtonTitle(CREATE_SELL_ORDER_BUTTON);
       }
     },
     [
+      accountAddress,
       setCardItems,
-      setTxModalTitle,
       setTxModalHeader,
       setSellOrderCreateOpen,
       setTxButtonTitle,
+      signAndBroadcast,
     ],
   );
 

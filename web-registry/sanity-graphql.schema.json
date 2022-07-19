@@ -31511,18 +31511,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "image",
             "description": null,
             "args": [],
@@ -31697,18 +31685,6 @@
             "deprecationReason": null
           },
           {
-            "name": "description",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "StringFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "image",
             "description": null,
             "type": {
@@ -31853,18 +31829,6 @@
           },
           {
             "name": "title",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "SortOrder",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "description",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -45763,18 +45727,6 @@
             "deprecationReason": null
           },
           {
-            "name": "contributorSection",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "TeamSection",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "advisorSection",
             "description": null,
             "args": [],
@@ -45913,18 +45865,6 @@
             "deprecationReason": null
           },
           {
-            "name": "contributorSection",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "TeamSectionFilter",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "advisorSection",
             "description": null,
             "type": {
@@ -46033,18 +45973,6 @@
           },
           {
             "name": "coreSection",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "TeamSectionSorting",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "contributorSection",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",

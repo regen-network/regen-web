@@ -9,7 +9,7 @@ export default function useUpdateProjectClass(projectId: string) {
     if (!projectId) return;
     const _classId = projectId.split('-')[0] as ClassID;
     setClassId(_classId);
-    setIsVCS(_classId === 'C01' || _classId === 'C02');
+    setIsVCS(_classId === 'C01' || _classId === 'C02'); // TODO: just 'C01' when v4 is in mainnet
   }, [projectId]);
 
   return { classId, isVCS };

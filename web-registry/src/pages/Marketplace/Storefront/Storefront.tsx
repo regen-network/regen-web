@@ -56,7 +56,6 @@ export const Storefront = (): JSX.Element => {
     setCardItems(undefined);
     setTxModalTitle('');
     setTxModalHeader('');
-    setTxModalTitle('');
     setDeliverTxResponse(undefined);
     setError(undefined);
   };

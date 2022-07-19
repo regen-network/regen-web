@@ -204,7 +204,7 @@ export const ProjectReview: React.FC = () => {
           txHashUrl={txHashUrl}
           cardTitle={txModalTitle}
           linkComponent={Link}
-          onViewPortfolio={handleTxModalClose}
+          onButtonClick={handleTxModalClose}
           buttonTitle="close"
         />
       )}

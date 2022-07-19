@@ -1,17 +1,9 @@
 import React from 'react';
-import {
-  CardMedia,
-  CardMediaProps,
-  useTheme,
-  useMediaQuery,
-} from '@mui/material';
+import { CardMedia, CardMediaProps } from '@mui/material';
 
 import Card from '../Card';
 
 const Photo: React.FC<CardMediaProps> = ({ src }) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
   return (
     <Card
       sx={{
@@ -20,7 +12,11 @@ const Photo: React.FC<CardMediaProps> = ({ src }) => {
         height: [216, 293],
       }}
     >
-      <CardMedia component="img" src={src} height={isMobile ? 216 : 293} />
+      <CardMedia
+        sx={{ height: { xs: 216, sm: 293 } }}
+        component="img"
+        src={src}
+      />
     </Card>
   );
 };

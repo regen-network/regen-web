@@ -32,6 +32,27 @@ export const createCreditClassSteps = [
   },
 ];
 
+const CurrentStep = (props: {
+  activeStep: number;
+  disabledFields: string[];
+}): JSX.Element => {
+  switch (props.activeStep) {
+    case 0:
+      return (
+        <CreditClassForm
+          id="create-credit-class"
+          disabledFields={props.disabledFields}
+        />
+      );
+    case 1:
+      return <CreditClassReview />;
+    case 2:
+      return <CreditClassFinished hash={mockTxHash} classId={mockClassId} />;
+    default:
+      return <NotFound img={<img alt="home" src={RotationalGrazing} />} />;
+  }
+};
+
 /** must be used within a `MultiStep` context  */
 export const CreateCreditClassForm = (props: {
   onSubmit: (values: CreditClassValues) => void;
@@ -45,27 +66,8 @@ export const CreateCreditClassForm = (props: {
     isLastStep,
   } = useMultiStep<CreditClassValues>();
 
-  const disabledFields: string[] = [];
-  if (!!data.admin.length) disabledFields.push('admin');
-  if (!!data.fee.length) disabledFields.push('fee');
-
-  const CurrentStep = (): React.ReactElement => {
-    switch (activeStep) {
-      case 0:
-        return (
-          <CreditClassForm
-            id="create-credit-class"
-            disabledFields={disabledFields}
-          />
-        );
-      case 1:
-        return <CreditClassReview />;
-      case 2:
-        return <CreditClassFinished hash={mockTxHash} classId={mockClassId} />;
-      default:
-        return <NotFound img={<img alt="home" src={RotationalGrazing} />} />;
-    }
-  };
+  // TODO we probably want to compute these dynamically once we hook up data
+  const disabledFields = ['admin', 'fee'];
 
   return (
     <Formik
@@ -77,7 +79,10 @@ export const CreateCreditClassForm = (props: {
     >
       {({ submitForm, isValid, isSubmitting }) => (
         <>
-          <CurrentStep />
+          <CurrentStep
+            activeStep={activeStep}
+            disabledFields={disabledFields}
+          />
           {!isLastStep && (
             <SaveFooter
               onPrev={activeStep > 0 ? handleBack : undefined}

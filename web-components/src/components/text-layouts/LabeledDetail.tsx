@@ -17,7 +17,7 @@ export const LabeledDetail: React.FC<{
     <Label
       size={labelSize || 'sm'}
       sx={[
-        { color: 'info.main' },
+        { color: 'info.main', width: '100%' },
         ...(Array.isArray(sxLabel) ? sxLabel : [sxLabel]),
       ]}
     >

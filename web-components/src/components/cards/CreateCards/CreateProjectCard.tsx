@@ -1,6 +1,7 @@
 import { SxProps, Theme } from '@mui/material';
-import { DashboardCreateCard } from 'web-components/lib/components/cards/DashboardCreateCard';
-import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
+
+import { CreateCard } from './CreateCard';
+import { ProjectPageIcon } from '../../icons/ProjectPageIcon';
 
 interface Props {
   sx?: SxProps<Theme>;
@@ -8,13 +9,11 @@ interface Props {
   isFirstProject?: boolean;
 }
 
-export const CreateProjectCard = ({
-  sx = [],
-  onClick,
-  isFirstProject,
-}: Props) => {
-  let title;
-  let icon;
+function getCardData(isFirstProject?: boolean): {
+  title?: string;
+  icon?: React.ReactElement;
+} {
+  let title, icon;
   if (isFirstProject) {
     title = 'Create your first project';
     icon = (
@@ -27,8 +26,17 @@ export const CreateProjectCard = ({
       />
     );
   }
+  return { title, icon };
+}
+
+export const CreateProjectCard = ({
+  sx = [],
+  onClick,
+  isFirstProject,
+}: Props): JSX.Element => {
+  const { title, icon } = getCardData(isFirstProject);
   return (
-    <DashboardCreateCard
+    <CreateCard
       sx={sx}
       title={title}
       onClick={onClick}

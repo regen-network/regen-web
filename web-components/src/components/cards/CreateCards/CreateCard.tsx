@@ -4,7 +4,7 @@ import Card from '../Card';
 import { Title } from '../../typography';
 import OutlinedButton from '../../buttons/OutlinedButton';
 
-export interface DashboardCreateCardProps {
+export interface CreateCardProps {
   sx?: SxProps<Theme>;
   onClick: () => void;
   title?: string;
@@ -12,13 +12,14 @@ export interface DashboardCreateCardProps {
   icon?: JSX.Element;
 }
 
-export const DashboardCreateCard = ({
+/** base component for making other create cards */
+export const CreateCard = ({
   buttonText,
   icon,
   onClick,
   title,
   sx = [],
-}: DashboardCreateCardProps) => {
+}: CreateCardProps): JSX.Element => {
   return (
     <Card
       sx={[

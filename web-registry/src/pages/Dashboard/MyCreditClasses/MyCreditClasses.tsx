@@ -2,8 +2,7 @@ import { Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-
-import { CreateCreditClassCard } from 'components/molecules/CreateCreditClassCard';
+import { CreateCreditClassCard } from 'web-components/lib/components/cards/CreateCards';
 
 export const MyCreditClasses = (): JSX.Element => {
   const navigate = useNavigate();

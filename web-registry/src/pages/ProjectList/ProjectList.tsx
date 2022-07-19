@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Body } from 'web-components/lib/components/typography';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
+import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards';
 
 import {
   useCreateProjectMutation,

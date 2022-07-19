@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import { client } from 'sanity';
+import { useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CardMedia from '@mui/material/CardMedia';
 import Box from '@mui/material/Box';
@@ -22,59 +23,10 @@ import writingOnPaperImg from 'assets/writing-on-paper.png';
 import topographyImg from 'assets/topography-pattern-cutout-1.png';
 
 import { useAllCreateCreditClassPageQuery } from 'generated/sanity-graphql';
-import { client } from 'sanity';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    background: theme.palette.primary.main,
-  },
-  heroMain: {
-    maxWidth: theme.typography.pxToRem(744),
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(22),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(12),
-    },
-  },
-  padBottom: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(20),
-    },
-  },
-  topoSection: {
-    background: theme.palette.grey[50],
-    borderTop: `1px solid ${theme.palette.grey[100]}`,
-    borderBottom: `1px solid ${theme.palette.grey[100]}`,
-  },
-  sectionTitle: {
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
-      lineHeight: theme.typography.pxToRem(41.6),
-    },
-  },
-  bottomSection: {
-    maxWidth: theme.typography.pxToRem(946),
-    paddingBottom: theme.typography.pxToRem(100),
-  },
-  resourcesTitle: {
-    textTransform: 'none',
-    color: theme.palette.text.primary,
-    fontWeight: 900,
-    [theme.breakpoints.down('sm')]: {
-      fontSize: theme.typography.pxToRem(32),
-    },
-  },
-  resourcesRoot: {
-    paddingTop: 0,
-  },
-}));
+import { useCreditClassInfoStyles } from './CreditClassInfo.styles';
 
 const CreateCreditClassInfo: React.FC = () => {
-  const styles = useStyles();
+  const styles = useCreditClassInfoStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string | undefined>();

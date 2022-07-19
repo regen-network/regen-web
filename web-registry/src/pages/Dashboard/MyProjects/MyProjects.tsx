@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
-import { DashboardCreateCard } from 'web-components/lib/components/cards/DashboardCreateCard';
+import { CreateCard } from 'web-components/lib/components/cards/CreateCard';
 
 import { useWallet } from 'lib/wallet';
 import {
@@ -82,7 +82,7 @@ const MyProjects = (): JSX.Element => {
     <>
       <Grid container spacing={8}>
         <Grid item xs={12} md={6} lg={4}>
-          <DashboardCreateCard
+          <CreateCard
             title={isFirstProject ? 'Create your first project' : ''}
             onClick={submitCreateProject}
             buttonText="+ create project"

@@ -23,10 +23,7 @@ export const ScrollableCodebox = (props: {
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
-      <pre>
-        {code}
-        {/* <code>{code}</code> */}
-      </pre>
+      <pre>{code}</pre>
     </Box>
   );
 };

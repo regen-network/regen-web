@@ -1,6 +1,6 @@
 import { SxProps, Theme } from '@mui/material';
-import { DashboardCreateCard } from 'web-components/lib/components/cards/DashboardCreateCard';
-import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
+import { CreateCard } from './CreateCard';
+import { CreditClassIcon } from '../../icons/CreditClassIcon';
 
 interface Props {
   sx?: SxProps<Theme>;
@@ -28,7 +28,7 @@ export const CreateCreditClassCard = ({
     );
   }
   return (
-    <DashboardCreateCard
+    <CreateCard
       sx={sx}
       title={title}
       onClick={onClick}

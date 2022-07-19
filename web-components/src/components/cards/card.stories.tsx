@@ -114,9 +114,10 @@ export const projectCard = (): JSX.Element => (
       comingSoon={false}
       areaUnit="hectares"
       imgSrc="/coorong.png"
-      tag="biodiversity"
       onClick={onClick}
-      purchaseInfo={{}}
+      purchaseInfo={{
+        sellInfo: { creditsAvailable: '1,200', pricePerTon: '17.20-24.20 ' },
+      }}
       sx={{ maxWidth: 338, mr: 10 }}
     />
 

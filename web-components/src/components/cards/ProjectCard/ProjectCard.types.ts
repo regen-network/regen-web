@@ -16,4 +16,8 @@ export interface PurchaseInfo {
   creditClass?: CreditClassInfo;
   methodology?: Info;
   projectType?: string;
+  sellInfo?: {
+    pricePerTon: string;
+    creditsAvailable: string;
+  };
 }

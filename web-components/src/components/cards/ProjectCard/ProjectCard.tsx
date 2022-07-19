@@ -1,5 +1,5 @@
 import React from 'react';
-import { SxProps, Theme, useTheme } from '@mui/material';
+import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { useState } from 'react';
 
@@ -12,6 +12,10 @@ import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
 import { PurchaseInfo } from './ProjectCard.types';
 import { getAbbreviation } from './ProjectCard.utils';
+import { Body, Subtitle } from '../../typography';
+import { RegenTokenIcon } from '../../icons/RegenTokenIcon';
+import OutlinedButton from '../../buttons/OutlinedButton';
+import CurrentCreditsIcon from '../../icons/CurrentCreditsIcon';
 
 export interface ProjectCardProps {
   name: string;
@@ -22,6 +26,7 @@ export interface ProjectCardProps {
   registry?: User | null;
   tag?: string;
   onClick?: () => void;
+  onButtonClick?: () => void;
   comingSoon?: boolean;
   purchaseInfo?: PurchaseInfo;
   href?: string;
@@ -39,6 +44,7 @@ export default function ProjectCard({
   areaUnit,
   registry,
   onClick,
+  onButtonClick,
   tag,
   comingSoon = false,
   purchaseInfo,
@@ -159,6 +165,61 @@ export default function ProjectCard({
                   title="additional certifications"
                   info={additionalCertifications.join(', ')}
                 />
+              )}
+              {purchaseInfo?.sellInfo && (
+                <>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      mb: 5,
+                    }}
+                  >
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                      <Subtitle
+                        size="xs"
+                        mobileSize="xxs"
+                        color="info.main"
+                        sx={{ mb: 1 }}
+                      >
+                        {'PRICE PER TON'}
+                      </Subtitle>
+                      <Box sx={{ display: 'flex' }}>
+                        <RegenTokenIcon />
+                        <Body
+                          size="md"
+                          mobileSize="sm"
+                          sx={{ fontWeight: 700, ml: 2 }}
+                        >
+                          {purchaseInfo.sellInfo.pricePerTon}
+                        </Body>
+                      </Box>
+                    </Box>
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                      <Subtitle
+                        size="xs"
+                        mobileSize="xxs"
+                        color="info.main"
+                        sx={{ mb: 1 }}
+                      >
+                        {'CREDITS AVAILABLE'}
+                      </Subtitle>
+                      <Body size="md" mobileSize="sm" sx={{ fontWeight: 700 }}>
+                        {purchaseInfo.sellInfo.creditsAvailable}
+                      </Body>
+                    </Box>
+                  </Box>
+                  <OutlinedButton
+                    onClick={onButtonClick}
+                    size="small"
+                    startIcon={
+                      <CurrentCreditsIcon height="18px" width="18px" />
+                    }
+                    sx={{ width: '100%' }}
+                  >
+                    {'BUY ECOCREDITS'}
+                  </OutlinedButton>
+                </>
               )}
             </div>
           )}

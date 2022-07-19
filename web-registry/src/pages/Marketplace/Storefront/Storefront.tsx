@@ -1,9 +1,11 @@
 import { Box, useTheme } from '@mui/material';
 import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import Section from 'web-components/lib/components/section';
@@ -11,17 +13,17 @@ import { Title } from 'web-components/lib/components/typography';
 import { Link } from '../../../components/atoms';
 import { BuyCreditsModal } from '../../../components/organisms';
 import SellOrdersTable from '../../../components/organisms/SellOrdersTable/SellOrdersTable';
+import useMsgClient from '../../../hooks/useMsgClient';
 import useQueryListBatchInfo from '../../../hooks/useQueryListBatchInfo';
 import { useQuerySellOrders } from '../../../hooks/useQuerySellOrders';
 import { getHashUrl } from '../../../lib/block-explorer';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import { BUY_SELL_ORDER_ACTION } from './Storefront.constants';
-import { txHashMock } from './Storefront.mock';
 import normalizeSellOrders from './Storefront.normalizer';
 import { sortByExpirationDate } from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
-  const sellOrdersResponse = useQuerySellOrders();
+  const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
   const batchDenoms = useMemo(
     () => sellOrders?.map(sellOrder => sellOrder.batchDenom),
@@ -37,28 +39,54 @@ export const Storefront = (): JSX.Element => {
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
-  const isBuyModalOpen = selectedSellOrder !== null;
+  const navigate = useNavigate();
 
   const normalizedSellOrders = normalizeSellOrders({
     batchInfos,
     sellOrders,
   }).sort(sortByExpirationDate);
 
+  const handleTxQueued = () => setIsProcessingModalOpen(true);
+  const handleTxDelivered = () => {
+    setIsProcessingModalOpen(false);
+    refetchSellOrders();
+  };
+  const handleError = () => setIsProcessingModalOpen(false);
+  const handleTxModalClose = (): void => {
+    setCardItems(undefined);
+    setTxModalTitle('');
+    setTxModalHeader('');
+    setDeliverTxResponse(undefined);
+    setError(undefined);
+  };
+
+  const onButtonClick = (): void => {
+    handleTxModalClose();
+    navigate('/ecocredits/dashboard');
+  };
+
+  const {
+    signAndBroadcast,
+    setDeliverTxResponse,
+    wallet,
+    deliverTxResponse,
+    error,
+    setError,
+  } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+  const accountAddress = wallet?.address;
+  const txHash = deliverTxResponse?.transactionHash;
+  const txHashUrl = getHashUrl(txHash);
+  const isBuyModalOpen = selectedSellOrder !== null;
+
   const buySellOrderSubmit = useBuySellOrderSubmit({
+    accountAddress,
+    signAndBroadcast,
     setCardItems,
     setSelectedSellOrder,
     setTxButtonTitle,
     setTxModalHeader,
     setTxModalTitle,
-    setIsProcessingModalOpen,
   });
-
-  const handleTxModalClose = (): void => {
-    setCardItems(undefined);
-    setTxModalTitle('');
-    setTxModalHeader('');
-    setTxModalTitle('');
-  };
 
   const {
     askAmount,
@@ -116,17 +144,28 @@ export const Storefront = (): JSX.Element => {
         onClose={() => setIsProcessingModalOpen(false)}
       />
       <TxSuccessfulModal
-        open={!!cardItems}
+        open={!!txHash && !error}
         onClose={handleTxModalClose}
-        txHash={txHashMock}
-        txHashUrl={getHashUrl(txHashMock)}
+        txHash={txHash ?? ''}
+        txHashUrl={txHashUrl}
         title={txModalHeader}
         cardTitle={txModalTitle}
         buttonTitle={txButtonTitle}
         cardItems={cardItems}
         linkComponent={Link}
-        onViewPortfolio={handleTxModalClose}
+        onViewPortfolio={onButtonClick}
         icon={<CelebrateIcon sx={{ width: '85px', height: '106px' }} />}
+      />
+      <TxErrorModal
+        error={error ?? ''}
+        open={!!error}
+        onClose={handleTxModalClose}
+        txHash={txHash ?? ''}
+        txHashUrl={txHashUrl}
+        cardTitle={txModalTitle}
+        buttonTitle={txButtonTitle}
+        linkComponent={Link}
+        onViewPortfolio={onButtonClick}
       />
     </>
   );

@@ -277,7 +277,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         sm={6}
                         className={styles.stateCountryTextField}
                       >
-                        <LocationStateField country={values.country} optional />
+                        <LocationCountryField />
                       </Grid>
                       <Grid
                         item
@@ -285,7 +285,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         sm={6}
                         className={styles.stateCountryTextField}
                       >
-                        <LocationCountryField />
+                        <LocationStateField country={values.country} optional />
                       </Grid>
                     </Grid>
                     <Field

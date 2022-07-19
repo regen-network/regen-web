@@ -75,11 +75,7 @@ interface Project {
 }
 
 // Update for testing purchase credits modal
-const testProject: Project = {
-  creditPrice: { unitPrice: 1, currency: 'regen' },
-  stripePrice: '1',
-  credits: { issued: 10, purchased: 1 },
-};
+const testProject: Project = {};
 
 function getVisiblePartyName(party?: ProjectStakeholder): string | undefined {
   return party?.['regen:showOnProjectPage']

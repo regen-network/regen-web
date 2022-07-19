@@ -400,6 +400,7 @@ export const MyEcocredits = (): JSX.Element => {
           txHash={txHash || ''}
           txHashUrl={txHashUrl}
           cardTitle={txModalTitle ?? ''}
+          buttonTitle={txButtonTitle}
           linkComponent={Link}
           onButtonClick={onButtonClick}
         />

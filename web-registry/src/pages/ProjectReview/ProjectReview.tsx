@@ -116,7 +116,6 @@ export const ProjectReview: React.FC = () => {
         onEditClick={() => navigate(`${editPath}/location`)}
       >
         <ItemDisplay value={metadata?.['schema:location']?.place_name} />
-        <ItemDisplay value={jurisdiction} />
       </ReviewCard>
       <ReviewCard
         title="Description"

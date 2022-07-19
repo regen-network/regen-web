@@ -63,11 +63,7 @@ const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
         fee: undefined,
       };
 
-      try {
-        await signAndBroadcast(tx);
-      } catch (e) {
-        console.error('useProjectCreateSubmit', e);
-      }
+      await signAndBroadcast(tx);
     },
     [signAndBroadcast],
   );

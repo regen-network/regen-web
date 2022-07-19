@@ -68,15 +68,17 @@ export default function useMsgClient(
       if (!api?.msgClient || !txBytes) return;
       handleTxQueued();
       const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
-      setDeliverTxResponse(_deliverTxResponse);
-      handleTxDelivered(_deliverTxResponse);
       // The transaction succeeded iff code is 0.
       // TODO: this can give false positives. Some errors return code 0.
       if (_deliverTxResponse.code !== 0) {
         setError(_deliverTxResponse.rawLog);
+        handleError();
+      } else {
+        setDeliverTxResponse(_deliverTxResponse);
+        handleTxDelivered(_deliverTxResponse);
       }
     },
-    [api?.msgClient, handleTxQueued, handleTxDelivered],
+    [api?.msgClient, handleTxQueued, handleTxDelivered, handleError],
   );
 
   const signAndBroadcast = useCallback(

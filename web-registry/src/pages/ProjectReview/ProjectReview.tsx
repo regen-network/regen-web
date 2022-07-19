@@ -83,7 +83,6 @@ export const ProjectReview: React.FC = () => {
       referenceId: isVCS ? `VCS-${metadata?.['regen:vcsProjectId']}` : '', //TODO
     });
   };
-  console.log(project);
 
   return (
     <OnboardingFormTemplate activeStep={1} title="Review">

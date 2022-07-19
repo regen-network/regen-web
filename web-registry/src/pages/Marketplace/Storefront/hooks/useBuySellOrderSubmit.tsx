@@ -101,7 +101,7 @@ const useBuySellOrderSubmit = ({
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
-            label: disableAutoRetire ? 'NUMBER OF CREDIT' : 'amount retired',
+            label: disableAutoRetire ? 'NUMBER OF CREDITS' : 'amount retired',
             value: { name: getFormattedNumber(creditCount) },
           },
         ]);

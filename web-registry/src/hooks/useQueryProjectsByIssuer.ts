@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import {
-  ProjectInfo,
-  QueryProjectsByAdminResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { QueryProjectsByAdminResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { getMetadata } from '../lib/metadata-graph';
 import useEcocreditQuery from './useEcocreditQuery';
+import type { ProjectWithMetadataObj as Project } from '../types/ledger/ecocredit';
 
 export default function useQueryProjectsByIssuer(issuer: string) {
   const { data: projectsResponse } =
@@ -14,7 +12,7 @@ export default function useQueryProjectsByIssuer(issuer: string) {
       params: { admin: issuer },
     });
 
-  const [projects, setProjects] = useState<ProjectInfo[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
     if (!projectsResponse?.projects) return;
@@ -29,7 +27,9 @@ export default function useQueryProjectsByIssuer(issuer: string) {
             if (project.metadata.length) {
               try {
                 metadata = await getMetadata(project.metadata);
-              } catch (err) {}
+              } catch (error) {
+                console.error(error);
+              }
             }
             return {
               ...project,
@@ -41,7 +41,7 @@ export default function useQueryProjectsByIssuer(issuer: string) {
           setProjects(_projects);
         }
       } catch (error) {
-        console.error(error); // eslint-disable-line no-console
+        console.error(error);
       }
     };
     fetchData();
@@ -51,5 +51,5 @@ export default function useQueryProjectsByIssuer(issuer: string) {
     };
   }, [projectsResponse?.projects]);
 
-  return { data: projects };
+  return projects;
 }

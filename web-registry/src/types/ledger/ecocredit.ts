@@ -2,6 +2,7 @@ import {
   QueryBalanceResponse,
   QuerySupplyResponse,
   BatchInfo,
+  ProjectInfo,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 /** Map keys from another type to values of number type */
@@ -29,3 +30,9 @@ export interface BatchInfoWithSupply
 }
 
 export type ClassID = 'C01' | 'C02' | 'C03';
+
+type GenericObject = { [key: string]: any };
+
+export interface ProjectWithMetadataObj extends Omit<ProjectInfo, 'metadata'> {
+  metadata: GenericObject;
+}

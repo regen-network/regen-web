@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useFormikContext, Field, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import { isPast } from 'date-fns';
-import { startCase } from 'lodash';
 import { Box, IconButton, Link } from '@mui/material';
 import { useTheme, DefaultTheme as Theme } from '@mui/styles';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Body } from 'web-components/lib/components/typography';
 import InputLabel from 'web-components/lib/components/inputs/InputLabel';
@@ -32,14 +30,10 @@ import SelectTextField from 'web-components/lib/components/inputs/SelectTextFiel
 import useQueryProjectsByIssuer from '../../../../hooks/useQueryProjectsByIssuer';
 import { MetadataJSONField } from '../../../../components/molecules';
 import { useWallet } from '../../../../lib/wallet';
-import { ClassID } from '../../../../types/ledger/ecocredit';
 
-const defaultProjectOption = { value: '', label: 'Choose Project' };
-
-function getClassIdFromProjectId(projectId: string): ClassID {
-  const split = projectId.split('-');
-  return split[0] as ClassID;
-}
+import useUpdateProjectClass from '../hooks/useUpdateProjectClass';
+import useUpdateProjectOptions from '../hooks/useUpdateProjectOptions';
+import useSaveProjectSelectedOption from '../hooks/useSaveProjectSelectedOption';
 
 export interface CreditBasicsFormValues {
   projectId: string;
@@ -104,50 +98,21 @@ export default function CreditBasics({
   saveProjectOptionSelected,
 }: Props): React.ReactElement {
   const { wallet } = useWallet();
-  const { data: projects } = useQueryProjectsByIssuer(wallet!.address);
+  const projects = useQueryProjectsByIssuer(wallet!.address);
 
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
-
-  const [projectOptions, setProjectOptions] = useState<Option[]>([]);
-  const [classId, setClassId] = useState<ClassID>();
-  const [isVCS, setIsVCS] = useState<boolean>();
-
   const { projectId } = values;
 
-  useEffect(() => {
-    if (!projectId) return;
-    const _classId = getClassIdFromProjectId(projectId);
-    setClassId(_classId);
-    setIsVCS(_classId === 'C01' || _classId === 'C02');
-  }, [projectId]);
+  const { classId, isVCS } = useUpdateProjectClass(projectId);
 
-  useEffect(() => {
-    if (!projects.length) return;
+  const projectOptions = useUpdateProjectOptions(projects);
 
-    const options =
-      projects.map((project: ProjectInfo) => {
-        const projectId = project.id;
-        const projectName = startCase(
-          project?.metadata?.['schema:name' as any] || '',
-        );
-        const projectNameWithId = `${projectName} (${projectId})`;
-        return {
-          label: projectName ? projectNameWithId : projectId,
-          value: projectId,
-        };
-      }) || [];
-
-    setProjectOptions([defaultProjectOption, ...options]);
-  }, [projects, setProjectOptions]);
-
-  useEffect(() => {
-    if (!projectId || !projects.length) return;
-
-    const isFound = projectOptions?.find(
-      item => item.value.toString() === projectId.toString(),
-    );
-    if (isFound) saveProjectOptionSelected(isFound);
-  }, [projectId, projectOptions, projects, saveProjectOptionSelected]);
+  useSaveProjectSelectedOption({
+    projectId,
+    projectOptions,
+    projects,
+    saveProjectOptionSelected,
+  });
 
   useEffect(() => {
     validateForm();

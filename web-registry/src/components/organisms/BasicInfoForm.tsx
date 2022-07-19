@@ -22,7 +22,7 @@ import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 export interface BasicInfoFormValues {
   'schema:name': string;
-  'regen:size': {
+  'regen:projectSize': {
     'qudt:numericValue': {
       '@type': 'xsd:double';
       '@value'?: number | string;
@@ -77,7 +77,7 @@ const BasicInfoForm: React.FC<{
       validateOnMount
       initialValues={{
         'schema:name': initialValues?.['schema:name'] || '',
-        'regen:size': initialValues?.['regen:size'] || {
+        'regen:projectSize': initialValues?.['regen:projectSize'] || {
           'qudt:numericValue': {
             '@type': 'xsd:double',
             '@value': undefined,
@@ -155,13 +155,13 @@ const BasicInfoForm: React.FC<{
                     className={clsx(classes.parcelField, classes.parcelSize)}
                     component={TextField}
                     type="number"
-                    name="regen:size.qudt:numericValue.@value"
+                    name="regen:projectSize.qudt:numericValue.@value"
                     defaultStyle={false}
                   />
                   <Field
                     className={clsx(classes.parcelField, classes.parcelUnit)}
                     component={SelectTextField}
-                    name="regen:size.qudt:unit.@value"
+                    name="regen:projectSize.qudt:unit.@value"
                     options={[
                       {
                         value: 'unit:HA',

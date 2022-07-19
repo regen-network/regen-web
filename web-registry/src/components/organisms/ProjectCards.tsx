@@ -6,7 +6,7 @@ import { makeStyles, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import ProjectCard from 'web-components/lib/components/cards/ProjectCard/ProjectCard';
 
 import { MoreProjectFieldsFragment, Maybe } from '../../generated/graphql';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';

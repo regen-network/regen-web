@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import ProjectCard from 'web-components/lib/components/cards/ProjectCard/ProjectCard';
 
 import { useWallet } from '../../lib/wallet';
 import {

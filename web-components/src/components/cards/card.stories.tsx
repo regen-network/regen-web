@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { makeStyles } from '@mui/styles';
-import { Theme } from '@mui/material';
+import { Box, Theme } from '@mui/material';
 
 import Card from 'web-components/lib/components/cards/Card';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
@@ -14,7 +14,6 @@ import { User } from 'web-components/lib/components/user/UserInfo';
 import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
 import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
 import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
 import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
@@ -24,6 +23,7 @@ import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
 import { QuestionItem } from '../../../lib/components/faq/Question';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
+import ProjectCard from './ProjectCard/ProjectCard';
 
 export default {
   title: 'Cards',
@@ -94,7 +94,7 @@ export const monitoredImpactCard = (): JSX.Element => (
 function onClick(): void {}
 
 export const projectCard = (): JSX.Element => (
-  <>
+  <Box sx={{ display: 'flex' }}>
     <ProjectCard
       name="Coorong Project"
       place={'Adelaide, South Australia, Australia'}
@@ -104,6 +104,20 @@ export const projectCard = (): JSX.Element => (
       imgSrc="/coorong.png"
       tag="biodiversity"
       onClick={onClick}
+      sx={{ maxWidth: 338, mr: 10 }}
+    />
+
+    <ProjectCard
+      name="Coorong Project"
+      place={'Adelaide, South Australia, Australia'}
+      area={200}
+      comingSoon={false}
+      areaUnit="hectares"
+      imgSrc="/coorong.png"
+      tag="biodiversity"
+      onClick={onClick}
+      purchaseInfo={{}}
+      sx={{ maxWidth: 338, mr: 10 }}
     />
 
     <ProjectCard
@@ -116,8 +130,9 @@ export const projectCard = (): JSX.Element => (
       tag="biodiversity"
       onClick={onClick}
       registry={{ name: 'registry', type: 'type' }}
+      sx={{ maxWidth: 338, mr: 10 }}
     />
-  </>
+  </Box>
 );
 
 export const purchasedCreditsCard = (): JSX.Element => (

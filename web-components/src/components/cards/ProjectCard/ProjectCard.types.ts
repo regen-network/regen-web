@@ -1,0 +1,19 @@
+import { StandardInfo } from '~/utils/format';
+
+interface Info extends StandardInfo {
+  url?: string | null;
+}
+
+interface CreditClassInfo extends Info {
+  standard: boolean;
+}
+
+export interface PurchaseInfo {
+  units?: number;
+  vintageId?: string;
+  vintageMetadata?: any;
+  vintagePeriod?: string;
+  creditClass?: CreditClassInfo;
+  methodology?: Info;
+  projectType?: string;
+}

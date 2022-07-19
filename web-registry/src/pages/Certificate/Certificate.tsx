@@ -13,7 +13,7 @@ import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import Section from 'web-components/lib/components/section';
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import ProjectCard from 'web-components/lib/components/cards/ProjectCard/ProjectCard';
 import UserAvatar from 'web-components/lib/components/user/UserAvatar';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 

@@ -4,7 +4,9 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Slider from 'react-slick';
 import Grid from '@mui/material/Grid';
 
-import ProjectCard, { ProjectCardProps } from '../cards/ProjectCard';
+import ProjectCard, {
+  ProjectCardProps,
+} from '../cards/ProjectCard/ProjectCard';
 
 export interface ProjectCardsProps {
   projects: ProjectCardProps[];

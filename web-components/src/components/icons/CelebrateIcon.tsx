@@ -1,16 +1,8 @@
-import { SvgIcon, SxProps, Theme } from '@mui/material';
-import * as React from 'react';
+import React from 'react';
+import { SvgIcon, SvgIconProps } from '@mui/material';
 
-type Props = {
-  sx?: SxProps<Theme>;
-};
-
-export const CelebrateIcon = ({ sx = [] }: Props): JSX.Element => (
-  <SvgIcon
-    sx={...Array.isArray(sx) ? sx : [sx]}
-    fill="none"
-    viewBox="0 0 85 106"
-  >
+export const CelebrateIcon = (props: SvgIconProps): JSX.Element => (
+  <SvgIcon fill="none" viewBox="0 0 85 106" {...props}>
     <path
       d="m57.725 60.095-34.51 32.743 1.161-47.529 33.35 14.786Zm.544-.516.344.363-.344-.363Z"
       fill="#B9E1C7"

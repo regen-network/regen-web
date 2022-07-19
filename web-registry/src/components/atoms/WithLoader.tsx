@@ -1,14 +1,19 @@
 import React from 'react';
-import { CircularProgress } from '@mui/material';
+import { Box, CircularProgress, SxProps, Theme } from '@mui/material';
 
 type Props = {
   isLoading: boolean;
   children: JSX.Element;
+  sx?: SxProps<Theme>;
 };
 
-const WithLoader = ({ isLoading, children }: Props): JSX.Element => {
+const WithLoader = ({ isLoading, children, sx }: Props): JSX.Element => {
   if (isLoading) {
-    return <CircularProgress color="secondary" />;
+    return (
+      <Box sx={sx}>
+        <CircularProgress color="secondary" />
+      </Box>
+    );
   }
 
   return children;

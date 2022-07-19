@@ -181,7 +181,7 @@ export const Storefront = (): JSX.Element => {
         buttonTitle={txButtonTitle}
         cardItems={cardItems}
         linkComponent={Link}
-        onViewPortfolio={onButtonClick}
+        onButtonClick={onButtonClick}
         icon={<CelebrateIcon sx={{ width: '85px', height: '106px' }} />}
       />
       <TxErrorModal
@@ -193,7 +193,7 @@ export const Storefront = (): JSX.Element => {
         cardTitle={txModalTitle}
         buttonTitle={txButtonTitle}
         linkComponent={Link}
-        onViewPortfolio={onButtonClick}
+        onButtonClick={onButtonClick}
       />
     </>
   );

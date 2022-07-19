@@ -47,6 +47,7 @@
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-inline-source": "^4.0.0",
-    "gulp-replace": "^1.0.0"
+    "gulp-replace": "^1.0.0",
+    "storybook-addon-react-router-v6": "^0.1.10"
   }
 }

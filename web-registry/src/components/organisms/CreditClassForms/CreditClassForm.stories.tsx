@@ -1,91 +1,26 @@
-import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import { Formik } from 'formik';
 import { Center } from 'web-components/lib/components/box';
+
+import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import {
   CreateCreditClassForm,
   createCreditClassSteps,
 } from './CreateCreditClassForm';
+import { CreditClassFinished } from './CreditClassFinished';
 import {
   CreditClassForm,
   creditClassBaseValues,
   CreditClassValues,
 } from './CreditClassForm';
-import { ReviewCreditClass } from './ReviewCreditClass';
+import { CreditClassReview } from './CreditClassReview';
+import { mockMetadata, mockTxHash } from './CreditClass.mocks';
 
-export default {
-  title: 'Registry/Organisms/Credit Class Form',
-  component: CreditClassForm,
-};
-
-const stubMetadata = {
-  '@context': {
-    schema: 'http://schema.org/',
-    regen: 'http://regen.network/',
-    qudt: 'http://qudt.org/schema/qudt/',
-    unit: 'http://qudt.org/vocab/unit/',
-    xsd: 'http://www.w3.org/2001/XMLSchema#',
-  },
-  '@type': 'regen:C01-Project',
-  'schema:name': '',
-  'regen:vcsProjectId': 0,
-  'regen:vcsProjectPage': {
-    '@type': 'schema:URL',
-    '@value': '',
-  },
-  'schema:description': '',
-  'regen:projectDeveloper': {
-    '@type': 'regen:OrganizationDisplay',
-    'schema:name': '',
-    'schema:description': '',
-    'regen:address': '',
-    'regen:showOnProjectPage': true,
-  },
-  'regen:projectType': '',
-  'regen:projectActivity': {
-    'schema:name': '',
-    'schema:url': {
-      '@type': 'schema:URL',
-      '@value': '',
-    },
-  },
-  'regen:offsetGenerationMethod': '',
-  'regen:vcsMethodology': {
-    'schema:name': '',
-    'schema:url': {
-      '@type': 'schema:URL',
-      '@value': '',
-    },
-  },
-  'regen:projectSize': {
-    'qudt:unit': {
-      '@type': 'qudt:Unit',
-      '@value': 'unit:HA',
-    },
-    'qudt:numericValue': {
-      '@type': 'xsd:double',
-      '@value': 0,
-    },
-  },
-  'regen:projectStartDate': {
-    '@type': 'xsd:date',
-    '@value': '',
-  },
-  'regen:projectEndDate': {
-    '@type': 'xsd:date',
-    '@value': '',
-  },
-  'schema:location': {
-    '@context': {
-      type: '@type',
-      '@vocab': 'https://purl.org/geojson/vocab#',
-      coordinates: {
-        '@container': '@list',
-      },
-      bbox: {
-        '@container': '@list',
-      },
-    },
-  },
+const fullFormValues: CreditClassValues = {
+  admin: mockTxHash,
+  issuers: [mockTxHash, mockTxHash, mockTxHash],
+  creditTypeAbbr: 'REGEN',
+  fee: '20 REGEN',
+  metadata: JSON.stringify(mockMetadata, null, 2),
 };
 
 const onSubmit = () => void null;
@@ -112,20 +47,17 @@ export const createCreditClassForm = (): JSX.Element => (
   </MultiStepTemplate>
 );
 
-export const reviewCreditClass = (): JSX.Element => (
+export const creditClassReview = (): JSX.Element => (
   <Formik initialValues={fullFormValues} onSubmit={onSubmit}>
-    <ReviewCreditClass />
+    <CreditClassReview />
   </Formik>
 );
 
-const fullFormValues: CreditClassValues = {
-  admin: 'cosmos15h5eszss2wtavw2x73f66jqp00sh4kewqf9ah0',
-  issuers: [
-    'cosmos15h5eszss2wtavw2x73f66jqp00sh4kewqf9ah0',
-    'cosmos15h5eszss2wtavw2x73f66jqp00sh4kewqf9ah0',
-    'cosmos15h5eszss2wtavw2x73f66jqp00sh4kewqf9ah0',
-  ],
-  creditTypeAbbr: 'REGEN',
-  fee: '20 REGEN',
-  metadata: JSON.stringify(stubMetadata, null, 2),
+export const creditClassFinished = (): JSX.Element => (
+  <CreditClassFinished classId="C01" hash={mockTxHash} />
+);
+
+export default {
+  title: 'Registry/Organisms/Credit Class Form',
+  component: CreditClassForm,
 };

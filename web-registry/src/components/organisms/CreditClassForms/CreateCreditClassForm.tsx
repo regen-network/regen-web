@@ -6,8 +6,11 @@ import RotationalGrazing from 'assets/rotational-grazing.png';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { CreditClassForm } from './CreditClassForm';
+import { CreditClassReview } from './CreditClassReview';
+import { CreditClassFinished } from './CreditClassFinished';
+import { mockTxHash, mockClassId } from './CreditClass.mocks';
+
 import type { CreditClassValues } from './CreditClassForm';
-import { ReviewCreditClass } from './ReviewCreditClass';
 
 export const createCreditClassSteps = [
   {
@@ -56,9 +59,9 @@ export const CreateCreditClassForm = (props: {
           />
         );
       case 1:
-        return <ReviewCreditClass />;
+        return <CreditClassReview />;
       case 2:
-        return <ReviewCreditClass />;
+        return <CreditClassFinished hash={mockTxHash} classId={mockClassId} />;
       default:
         return <NotFound img={<img alt="home" src={RotationalGrazing} />} />;
     }
@@ -78,7 +81,7 @@ export const CreateCreditClassForm = (props: {
           {!isLastStep && (
             <SaveFooter
               onPrev={activeStep > 0 ? handleBack : undefined}
-              onSave={activeStep === 1 ? submitForm : handleNext}
+              onSave={handleNext} // TODO this should handle submission
               saveDisabled={!isValid || isSubmitting}
               percentComplete={percentComplete}
             />

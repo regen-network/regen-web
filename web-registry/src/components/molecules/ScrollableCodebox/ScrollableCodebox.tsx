@@ -14,6 +14,7 @@ export const ScrollableCodebox = (props: {
           width: '100%',
           border: 1,
           borderColor: 'grey.100',
+          backgroundColor: 'grey.50',
           borderRadius: '2px',
           color: 'info.dark',
           overflowY: 'scroll',

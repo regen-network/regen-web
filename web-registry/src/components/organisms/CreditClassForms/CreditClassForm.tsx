@@ -14,14 +14,14 @@ export interface CreditClassValues {
   admin: string;
   issuers: string[];
   metadata: string;
-  creditTypeAbbr: string;
+  creditTypeAbbr: string; // TODO: this should probably be a full `CreditType`
   fee: string;
 }
 
 export const creditClassBaseValues: CreditClassValues = {
   admin: '',
   issuers: [''],
-  creditTypeAbbr: '', // TODO: this should probably be a full `CreditType`
+  creditTypeAbbr: '',
   metadata: '',
   fee: '',
 };
@@ -31,11 +31,11 @@ export const CreditClassForm = (props: {
   disabledFields?: string[];
 }): JSX.Element => {
   const { disabledFields = [] } = props;
-  const fieldDisabled = (field: string): boolean =>
-    disabledFields.includes(field);
-
   const { values } = useFormikContext<CreditClassValues>();
   const theme = useTheme();
+
+  const fieldDisabled = (field: string): boolean =>
+    disabledFields.includes(field);
 
   return (
     <Form translate="yes" id={props.id}>
@@ -52,6 +52,7 @@ export const CreditClassForm = (props: {
             <Box sx={{ mt: [6, 4] }}>
               {values.issuers.map((_, index) => (
                 <Field
+                  key={index}
                   component={ControlledTextField}
                   defaultStyle={false}
                   label={index === 0 && 'Issuers'}
@@ -99,7 +100,6 @@ export const CreditClassForm = (props: {
         />
         <Field
           component={ControlledTextField}
-          // component={RegenTextField}
           multiline
           label="Metadata"
           description="Attach arbitrary JSON-LD metadata to the credit batch below. "
@@ -108,7 +108,6 @@ export const CreditClassForm = (props: {
         />
         <Field
           component={RegenTextField}
-          // component={ControlledTextField}
           label="Credit class creation fee"
           name="fee"
           type="string"

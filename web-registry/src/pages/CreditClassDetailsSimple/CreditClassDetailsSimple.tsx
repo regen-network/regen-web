@@ -1,12 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
 import { startCase } from 'lodash';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import ReadMore from 'web-components/lib/components/read-more';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
+import ReadMore from 'web-components/lib/components/read-more';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from 'web-components/lib/utils/truncate';
 
 import { Link } from '../../components/atoms';
@@ -15,13 +15,13 @@ import {
   LineItemLabelAbove,
 } from '../../components/molecules';
 import { CreditBatches, MoreProjectsSection } from '../../components/organisms';
-import { getAccountUrl } from '../../lib/block-explorer';
-import { ClassInfo } from '../../types/ledger/ecocredit';
 import { CreditClassByOnChainIdQuery } from '../../generated/graphql';
 import {
-  CreditClassMetadataLD,
   ApprovedMethodologies,
+  CreditClassMetadataLD,
 } from '../../generated/json-ld';
+import { getAccountUrl } from '../../lib/block-explorer';
+import { ClassInfo } from '../../types/ledger/ecocredit';
 
 interface CreditDetailsProps {
   dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];

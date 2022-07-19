@@ -1,8 +1,9 @@
 import React from 'react';
 import { Box, SxProps } from '@mui/material';
-import { Label } from '../typography';
 
+import { Label } from '../typography';
 import type { LabelSize } from '../typography/sizing';
+
 import type { Theme } from '~/theme/muiTheme';
 
 /** Grey label over child elements */

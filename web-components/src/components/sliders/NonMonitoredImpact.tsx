@@ -1,7 +1,8 @@
-import React, { useRef, useCallback } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Grid from '@mui/material/Grid';
+import React, { useCallback, useRef } from 'react';
 import Slider from 'react-slick';
+import Grid from '@mui/material/Grid';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+
 import PrevNextButton from '../buttons/PrevNextButton';
 import ImpactCard, { ImpactCardProps } from '../cards/ImpactCard';
 

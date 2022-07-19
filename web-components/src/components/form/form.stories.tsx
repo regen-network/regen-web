@@ -1,17 +1,17 @@
 import * as React from 'react';
 import Long from 'long';
 
-import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
-// import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
-import LoginForm from 'web-components/lib/components/form/LoginForm';
-import { CreditSendForm } from 'web-components/lib/components/form/CreditSendForm';
-import { CreditRetireForm } from 'web-components/lib/components/form/CreditRetireForm';
 import { BasketPutForm } from 'web-components/lib/components/form/BasketPutForm';
 import { BasketTakeForm } from 'web-components/lib/components/form/BasketTakeForm';
+import { CreditRetireForm } from 'web-components/lib/components/form/CreditRetireForm';
+import { CreditSendForm } from 'web-components/lib/components/form/CreditSendForm';
+// import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
+import LoginForm from 'web-components/lib/components/form/LoginForm';
 import {
   FormValues,
   RecipientsForm,
 } from 'web-components/lib/components/form/RecipientsForm';
+import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
 
 export default {
   title: 'Forms',

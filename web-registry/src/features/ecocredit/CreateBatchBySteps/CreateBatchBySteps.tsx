@@ -1,8 +1,8 @@
 import React from 'react';
-import { MultiStepSection } from '../../../components/templates/MultiStep';
 
-import formModel from './form-model';
+import { MultiStepSection } from '../../../components/templates/MultiStep';
 import CreateBatchMultiStepForm from './CreateBatchMultiStepForm';
+import formModel from './form-model';
 
 /**
  * Container integrating with:

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 export interface DocumentInfo {
   name: string;

@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { Image } from 'web-components/lib/components/image';
 
 export default {

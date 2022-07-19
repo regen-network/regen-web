@@ -1,12 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Body } from 'web-components/lib/components/typography';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+import { Body } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import {
   useCreateProjectMutation,
   useGetUserProfileByEmailQuery,

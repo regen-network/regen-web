@@ -9,10 +9,10 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { PageProps } from 'gatsby';
 
+import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 import Footer, {
   FooterItemProps as FooterItem,
 } from 'web-components/lib/components/footer';
-import CookiesFooter from 'web-components/lib/components/banner/CookiesBanner';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { MarketingNav } from '../components/MarketingNav';
@@ -23,7 +23,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const Layout: React.FC<PageProps> = ({ children, location }) => {
+type Props = {
+  location: PageProps['location'];
+};
+
+const Layout: React.FC<Props> = ({ children, location }) => {
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
       title: 'get involved',

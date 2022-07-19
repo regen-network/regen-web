@@ -1,26 +1,26 @@
 import React from 'react';
-import { useTheme } from '@mui/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Box from '@mui/material/Box';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+import Box from '@mui/material/Box';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Header, { HeaderColors } from 'web-components/lib/components/header';
-import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
-import { NavLink } from 'web-components/lib/components/header/NavLink';
 import {
   HeaderDropdownColumn,
   HeaderDropdownItemProps,
 } from 'web-components/lib/components/header/HeaderDropdownItems';
+import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
+import { NavLink } from 'web-components/lib/components/header/NavLink';
 import { UserMenuItem } from 'web-components/lib/components/header/UserMenuItem';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
-import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 import DefaultAvatar from '../../assets/avatar.png';
+import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 import { useMoreProjectsQuery } from '../../generated/graphql';
-import { useWallet } from '../../lib/wallet';
 import { chainId, nctBasket } from '../../lib/ledger';
+import { useWallet } from '../../lib/wallet';
+import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
 
 const RegistryNav: React.FC = () => {
   const navigate = useNavigate();

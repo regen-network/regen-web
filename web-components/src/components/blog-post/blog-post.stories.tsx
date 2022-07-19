@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import BlogPost from 'web-components/lib/components/blog-post';
 
 export default {

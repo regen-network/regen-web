@@ -1,6 +1,6 @@
 import React from 'react';
-import Button, { ButtonProps } from '@mui/material/Button';
 import { styled } from '@mui/material';
+import Button, { ButtonProps } from '@mui/material/Button';
 import { Box } from '@mui/system';
 
 export type ContainedColorVariant = 'secondary' | 'gradientBlueGreen';

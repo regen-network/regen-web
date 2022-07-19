@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '@mui/styles';
 import { Box } from '@mui/material';
+import { useTheme } from '@mui/styles';
 import { uniq } from 'lodash';
 
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import Section from 'web-components/lib/components/section';
-import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
+import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
 import { MyProjects } from '../../components/organisms';
 import useQueryListClasses from '../../hooks/useQueryListClasses';

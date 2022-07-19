@@ -1,12 +1,12 @@
 import React from 'react';
 import { graphql, PageProps, useStaticQuery } from 'gatsby';
 
-import TopSection from '../sections/community/TopSection';
-import CollaborateSection from '../sections/community/CollaborateSection';
-import ConnectSection from '../sections/community/ConnectSection';
-import CollectiveSection from '../sections/community/CollectiveSection';
-import GoToSection from '../sections/community/GoToSection';
 import SEO from '../components/seo';
+import CollaborateSection from '../sections/community/CollaborateSection';
+import CollectiveSection from '../sections/community/CollectiveSection';
+import ConnectSection from '../sections/community/ConnectSection';
+import GoToSection from '../sections/community/GoToSection';
+import TopSection from '../sections/community/TopSection';
 
 const CommunityPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`

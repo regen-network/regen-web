@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import Action from 'web-components/lib/components/action';
 
 export default {

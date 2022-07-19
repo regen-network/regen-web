@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
-import { ResourceFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+
+import { Maybe, ResourceFieldsFragment } from '../../generated/sanity-graphql';
 import { WrappedResourcesCard } from '../atoms/WrappedResourcesCard';
 
 interface ProjectImpactProps {

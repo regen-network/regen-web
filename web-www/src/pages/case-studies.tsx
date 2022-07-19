@@ -1,9 +1,9 @@
 import React from 'react';
 import { PageProps } from 'gatsby';
 
-import TopSection from '../sections/case-studies/TopSection';
-import ListSection from '../sections/case-studies/ListSection';
 import SEO from '../components/seo';
+import ListSection from '../sections/case-studies/ListSection';
+import TopSection from '../sections/case-studies/TopSection';
 
 const CaseStudiesPage: React.FC<PageProps> = ({ location }) => {
   return (

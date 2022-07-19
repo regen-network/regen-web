@@ -8,7 +8,10 @@ type GetOtherSellOrderBatchDenomOptionsProps = {
 export const getOtherSellOrderBatchDenomOptions = ({
   credits,
   sellOrderCreateOpen,
-}: GetOtherSellOrderBatchDenomOptionsProps) =>
+}: GetOtherSellOrderBatchDenomOptionsProps): {
+  label: string;
+  value: string;
+}[] =>
   credits
     .filter(
       credit => credit.batch_denom !== credits[sellOrderCreateOpen].batch_denom,
@@ -24,7 +27,9 @@ type getAvailableAmountByBatchProps = {
 
 export const getAvailableAmountByBatch = ({
   credits,
-}: getAvailableAmountByBatchProps) =>
+}: getAvailableAmountByBatchProps): {
+  [key: string]: number;
+} =>
   credits.reduce(
     (acc, credit) => ({
       ...acc,

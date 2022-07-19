@@ -1,9 +1,11 @@
 import * as React from 'react';
-import TimelineItem from 'web-components/lib/components/timeline/TimelineItem';
+
 import Timeline, { Event } from 'web-components/lib/components/timeline';
 import NewTimeline, {
   Item,
 } from 'web-components/lib/components/timeline/NewTimeline';
+import TimelineItem from 'web-components/lib/components/timeline/TimelineItem';
+
 import theme from '../../theme/muiTheme';
 
 export default {

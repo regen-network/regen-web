@@ -1,5 +1,6 @@
 import React from 'react';
-import { SxProps, Card } from '@mui/material';
+import { Card, SxProps } from '@mui/material';
+
 import type { Theme } from '~/theme/muiTheme';
 
 interface RegenCardProps {

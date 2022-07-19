@@ -1,15 +1,15 @@
 import * as React from 'react';
+import Grid from '@mui/material/Grid';
+
+import StaticMap from 'web-components/lib/components/map/StaticMap';
 import { ItemProps } from 'web-components/lib/components/sliders/Item';
+import ProjectMedia, {
+  Asset,
+  Media,
+} from 'web-components/lib/components/sliders/ProjectMedia';
 import ProtectedSpecies, {
   ProtectedSpeciesProps,
 } from 'web-components/lib/components/sliders/ProtectedSpecies';
-import ProjectMedia, {
-  Media,
-  Asset,
-} from 'web-components/lib/components/sliders/ProjectMedia';
-import StaticMap from 'web-components/lib/components/map/StaticMap';
-
-import Grid from '@mui/material/Grid';
 
 export default {
   title: 'Sliders',

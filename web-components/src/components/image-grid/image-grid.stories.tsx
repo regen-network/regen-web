@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import ImageGrid from 'web-components/lib/components/image-grid';
 
 export default {

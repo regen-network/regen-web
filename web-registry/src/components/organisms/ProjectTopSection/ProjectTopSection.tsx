@@ -1,6 +1,6 @@
+import LazyLoad from 'react-lazyload';
 import { Box, Grid, Skeleton } from '@mui/material';
 import cx from 'clsx';
-import LazyLoad from 'react-lazyload';
 
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
@@ -9,7 +9,6 @@ import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { CreditBatches } from '..';
 import { ProjectByHandleQuery } from '../../../generated/graphql';
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
@@ -22,6 +21,7 @@ import {
 } from '../../../types/ledger/ecocredit';
 import { ProjectTopLink } from '../../atoms';
 import { AdditionalProjectMetadata, ProjectBatchTotals } from '../../molecules';
+import { CreditBatches } from '..';
 import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,

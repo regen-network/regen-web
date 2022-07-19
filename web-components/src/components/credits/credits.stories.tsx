@@ -1,8 +1,8 @@
 import * as React from 'react';
+
 import CreditDetails, {
   CreditInfoProps,
 } from 'web-components/lib/components/credits/CreditDetails';
-
 // import Credits from 'web-components/lib/components/credits/';
 // import Gauge from 'web-components/lib/components/credits/Gauge';
 // import GaugeText from 'web-components/lib/components/credits/GaugeText';

@@ -1,11 +1,13 @@
 import * as React from 'react';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { Box } from '@mui/material';
+
+import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
-import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+
 import ContainedButton, { ContainedColorVariant } from './ContainedButton';
-import { Box } from '@mui/material';
 
 export default {
   title: 'Buttons',

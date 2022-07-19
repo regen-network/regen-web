@@ -1,14 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
+import { Body, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { OptimizedImage } from '../atoms/OptimizedImage';
-import { Methodology } from '../../mocks/mocks';
 import topoBackground from '../../assets/background.jpg';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
+import { Methodology } from '../../mocks/mocks';
+import { OptimizedImage } from '../atoms/OptimizedImage';
 
 type Props = {
   methodology: Methodology;

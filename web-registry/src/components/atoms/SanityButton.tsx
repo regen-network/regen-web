@@ -1,6 +1,6 @@
 import React from 'react';
-import { ButtonProps, SxProps, Theme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { ButtonProps, SxProps, Theme } from '@mui/material';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';

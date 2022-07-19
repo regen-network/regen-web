@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Certificate from 'web-components/lib/components/certificate';
 
 export default {

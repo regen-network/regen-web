@@ -1,5 +1,6 @@
 import ReactGA from 'react-ga';
 import Cookies from 'js-cookie';
+
 import 'clientjs';
 
 const COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED =

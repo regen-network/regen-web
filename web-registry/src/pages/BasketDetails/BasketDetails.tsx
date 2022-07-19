@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
+import { BasketEcocredits, BasketOverview } from '../../components/organisms';
 import { useBasketDetails } from '../../hooks';
-import { BasketOverview, BasketEcocredits } from '../../components/organisms';
 
 const BasketDetails: React.FC = () => {
   const { basketDenom } = useParams<{ basketDenom: string }>();

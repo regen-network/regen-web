@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import { SxProps, useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { useState } from 'react';
+
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+// import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
+// import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
+// import { ReactComponent as Sell } from '../../assets/svgs/sell.svg';
+import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import {
   BasketPutModal,
@@ -25,10 +30,8 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-// import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
-// import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
-// import { ReactComponent as Sell } from '../../assets/svgs/sell.svg';
-import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
 import { Link } from '../../components/atoms';
@@ -57,7 +60,6 @@ import {
   getAvailableAmountByBatch,
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);

@@ -1,16 +1,17 @@
 import * as React from 'react';
-import Tabs, { RegenTab } from 'web-components/lib/components/tabs';
-import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
-import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
+
+import CreditDetails, {
+  CreditInfoProps,
+} from 'web-components/lib/components/credits/CreditDetails';
+import CoBenefitsIcon from 'web-components/lib/components/icons/CoBenefitsIcon';
+import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import {
   DocumentationTable,
   DocumentRowData,
 } from 'web-components/lib/components/table/DocumentationTable';
-import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
-import CoBenefitsIcon from 'web-components/lib/components/icons/CoBenefitsIcon';
-import CreditDetails, {
-  CreditInfoProps,
-} from 'web-components/lib/components/credits/CreditDetails';
+import Tabs, { RegenTab } from 'web-components/lib/components/tabs';
+import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
+import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
 export default {
   title: 'Tabs',

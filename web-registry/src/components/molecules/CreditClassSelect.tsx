@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Field } from 'formik';
+import React, { useEffect, useState } from 'react';
 import { QueryClassesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import { Field } from 'formik';
 
 import SelectTextField, {
   Option,

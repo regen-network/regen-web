@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import PlaceInfo from 'web-components/lib/components/place/PlaceInfo';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@mui/styles';
-import { useTheme, Theme, SxProps } from '@mui/material';
-import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
+import { SxProps, Theme, useTheme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import clsx from 'clsx';
 
-import MediaCard from './MediaCard';
+import { formatStandardInfo, StandardInfo } from '../../utils/format';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import ProjectPlaceInfo from '../place/ProjectPlaceInfo';
-import UserInfo, { User } from '../user/UserInfo';
-import { StandardInfo, formatStandardInfo } from '../../utils/format';
 import { Body, Label } from '../typography';
+import UserInfo, { User } from '../user/UserInfo';
+import MediaCard from './MediaCard';
 
 interface Info extends StandardInfo {
   url?: string | null;

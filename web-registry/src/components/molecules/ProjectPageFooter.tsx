@@ -1,8 +1,9 @@
 import React from 'react';
 
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
-import { EditProjectPageFooter } from './EditProjectPageFooter';
+
 import { useProjectEditContext } from '../../pages/ProjectEdit';
+import { EditProjectPageFooter } from './EditProjectPageFooter';
 
 interface Props {
   onSave: () => void;

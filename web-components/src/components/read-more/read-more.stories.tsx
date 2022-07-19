@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import ReadMore from 'web-components/lib/components/read-more';
 
 export default {

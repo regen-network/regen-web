@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Form, Field, useFormikContext } from 'formik';
+import { Field, Form, useFormikContext } from 'formik';
 
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import {
@@ -10,9 +10,8 @@ import {
 import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
 
 import getApiUri from '../../../lib/apiUri';
+import { cropAspect, MediaBaseErrors, MediaBaseValues } from './MediaForm';
 import { useMediaFormStyles } from './useMediaFormStyles';
-
-import { MediaBaseValues, MediaBaseErrors, cropAspect } from './MediaForm';
 
 export interface MediaValuesSimple extends MediaBaseValues {
   'regen:creditText'?: string;

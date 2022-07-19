@@ -1,8 +1,9 @@
 import * as React from 'react';
+
 import {
-  TitleBody,
-  LabeledNumber,
   LabeledDetail,
+  LabeledNumber,
+  TitleBody,
 } from 'web-components/lib/components/text-layouts';
 
 export default {

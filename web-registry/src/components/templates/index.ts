@@ -1,4 +1,4 @@
-export * from './EditFormTemplate';
-export * from './ProjectDetails';
-export * from './OnboardingFormTemplate';
 export * from './DashboardTemplate';
+export * from './EditFormTemplate';
+export * from './OnboardingFormTemplate';
+export * from './ProjectDetails';

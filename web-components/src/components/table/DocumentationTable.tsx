@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@mui/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableHead from '@mui/material/TableHead';
+import { makeStyles } from '@mui/styles';
 // import TablePagination from '@mui/material/TablePagination';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import clsx from 'clsx';
 
+import { getFormattedDate } from '../../utils/format';
+import ContainedButton from '../buttons/ContainedButton';
+import OutlinedButton from '../buttons/OutlinedButton';
+import DocumentIcon from '../icons/DocumentIcon';
+import EyeIcon from '../icons/EyeIcon';
+import ShieldIcon from '../icons/ShieldIcon';
 import {
-  StyledTableContainer,
   StyledTableCell,
+  StyledTableContainer,
   StyledTableRow,
   StyledTableSortLabel,
 } from '.';
-
-import { getComparator, stableSort, Order } from './sort';
-import DocumentIcon from '../icons/DocumentIcon';
-import EyeIcon from '../icons/EyeIcon';
-import OutlinedButton from '../buttons/OutlinedButton';
-import { getFormattedDate } from '../../utils/format';
-import ContainedButton from '../buttons/ContainedButton';
-import ShieldIcon from '../icons/ShieldIcon';
+import { getComparator, Order, stableSort } from './sort';
 
 interface DocumentRowData {
   name: string;
@@ -280,4 +279,4 @@ const DocumentationTable: React.FC<DocumentationTableProps> = ({
   );
 };
 
-export { DocumentationTable, DocumentRowData, Document };
+export { Document, DocumentationTable, DocumentRowData };

@@ -3,13 +3,13 @@ import Table from '@mui/material/Table';
 import TableFooter from '@mui/material/TableFooter';
 import TableRow from '@mui/material/TableRow';
 
+import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
+import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import {
   DocumentationTable,
   DocumentRowData,
 } from 'web-components/lib/components/table/DocumentationTable';
 import { TablePagination } from 'web-components/lib/components/table/TablePagination';
-import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
-import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 
 export default {
   title: 'Table',

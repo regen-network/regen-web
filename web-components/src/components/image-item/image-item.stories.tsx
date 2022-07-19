@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import ImageItem from 'web-components/lib/components/image-item';
 
 export default {

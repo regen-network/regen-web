@@ -1,15 +1,16 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { TitleBody } from 'web-components/lib/components/text-layouts';
+import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
-import { ScienceTitleDescriptionSectionQuery } from '../../generated/graphql';
+import { TitleBody } from 'web-components/lib/components/text-layouts';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { BlockContent } from 'web-components/src/components/block-content';
+
+import { ScienceTitleDescriptionSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   outcomes: {

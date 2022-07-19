@@ -1,17 +1,17 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { useTheme, Box } from '@mui/material';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import { Box, useTheme } from '@mui/material';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { Field, Form, Formik, FormikErrors } from 'formik';
 
+import { UrlType } from '../../utils/schemaURL';
 import { Button } from '../buttons/Button';
 import ContainedButton from '../buttons/ContainedButton';
 import OnBoardingCard from '../cards/OnBoardingCard';
+import OrganizationIcon from '../icons/OrganizationIcon';
 import ControlledTextField from '../inputs/ControlledTextField';
 import { ImageUpload } from '../inputs/ImageUpload';
 import { Title } from '../typography';
-import OrganizationIcon from '../icons/OrganizationIcon';
 import Modal from '.';
-import { UrlType } from '../../utils/schemaURL';
 
 type ProfileType = 'regen:Individual' | 'regen:Organization';
 
@@ -193,4 +193,4 @@ const ProfileSubmitFooter = ({
   </Box>
 );
 
-export { ProfileModal, ProfileSubmitFooter, ProfileOnBoardingCard };
+export { ProfileModal, ProfileOnBoardingCard, ProfileSubmitFooter };

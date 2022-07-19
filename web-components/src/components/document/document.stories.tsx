@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import Document from 'web-components/lib/components/document';
 
 export default {

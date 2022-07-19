@@ -36,7 +36,7 @@ export const Storefront = (): JSX.Element => {
   );
   const batchInfos = useQueryListBatchInfo(batchDenoms);
   // offchain stored Projects
-  const { data: offChainProjects } = useAllProjectsQuery();
+  const { data: offChainProjectData } = useAllProjectsQuery();
   // onChain stored Projects
   const onChainProjects = useQueryProjects();
 
@@ -54,10 +54,10 @@ export const Storefront = (): JSX.Element => {
   const projectsInfosByHandleMap = useMemo(
     () =>
       normalizeProjectsInfosByHandleMap({
-        offChainProjects: offChainProjects?.allProjects,
+        offChainProjects: offChainProjectData?.allProjects,
         onChainProjects: onChainProjects?.projects,
       }),
-    [offChainProjects, onChainProjects],
+    [offChainProjectData, onChainProjects],
   );
 
   const normalizedSellOrders = useMemo(

@@ -1,4 +1,5 @@
 import { Box, useTheme } from '@mui/material';
+import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -14,12 +15,17 @@ import { Link } from '../../../components/atoms';
 import { BuyCreditsModal } from '../../../components/organisms';
 import SellOrdersTable from '../../../components/organisms/SellOrdersTable/SellOrdersTable';
 import useMsgClient from '../../../hooks/useMsgClient';
+import { useAllProjectsQuery } from '../../../generated/graphql';
+import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
 import useQueryListBatchInfo from '../../../hooks/useQueryListBatchInfo';
 import { useQuerySellOrders } from '../../../hooks/useQuerySellOrders';
 import { getHashUrl } from '../../../lib/block-explorer';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import { BUY_SELL_ORDER_ACTION } from './Storefront.constants';
-import normalizeSellOrders from './Storefront.normalizer';
+import {
+  normalizeProjectsInfosByHandleMap,
+  normalizeSellOrders,
+} from './Storefront.normalizer';
 import { sortByExpirationDate } from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
@@ -30,6 +36,14 @@ export const Storefront = (): JSX.Element => {
     [sellOrders],
   );
   const batchInfos = useQueryListBatchInfo(batchDenoms);
+  // offchain stored Projects
+  const { data: offChainProjectData } = useAllProjectsQuery();
+  // onChain stored Projects
+  const { data: onChainProjects } = useEcocreditQuery<QueryProjectsResponse>({
+    query: 'projects',
+    params: {},
+  });
+
   const [selectedSellOrder, setSelectedSellOrder] = useState<number | null>(
     null,
   );
@@ -41,10 +55,24 @@ export const Storefront = (): JSX.Element => {
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const navigate = useNavigate();
 
-  const normalizedSellOrders = normalizeSellOrders({
-    batchInfos,
-    sellOrders,
-  }).sort(sortByExpirationDate);
+  const projectsInfosByHandleMap = useMemo(
+    () =>
+      normalizeProjectsInfosByHandleMap({
+        offChainProjects: offChainProjectData?.allProjects,
+        onChainProjects: onChainProjects?.projects,
+      }),
+    [offChainProjectData, onChainProjects],
+  );
+
+  const normalizedSellOrders = useMemo(
+    () =>
+      normalizeSellOrders({
+        batchInfos,
+        sellOrders,
+        projectsInfosByHandleMap,
+      }).sort(sortByExpirationDate),
+    [batchInfos, sellOrders, projectsInfosByHandleMap],
+  );
 
   const handleTxQueued = () => setIsProcessingModalOpen(true);
   const handleTxDelivered = () => {

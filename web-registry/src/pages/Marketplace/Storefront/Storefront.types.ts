@@ -19,13 +19,17 @@ export type SellOrderStatus =
 export type NormalizedSellOrder = {
   id: string;
   expiration?: Date;
-  project?: string;
+  project?: {
+    name?: string | null;
+    id: string;
+    classIdName?: string | null;
+    classIdUrl?: string | null;
+  };
   status?: SellOrderStatus;
   askAmount: string;
   askDenom: string;
   amountAvailable: string;
   amountSold?: string;
-  creditClass?: string | null;
   batchDenom: string;
   batchStartDate?: Date | null;
   batchEndDate?: Date | null;

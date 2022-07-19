@@ -358,13 +358,8 @@ export const MyEcocredits = (): JSX.Element => {
         <CreateSellOrderModal
           batchDenoms={[
             {
-<<<<<<< HEAD
               label: credits[sellOrderCreateOpen].batch_denom,
               value: credits[sellOrderCreateOpen].batch_denom,
-=======
-              label: credits[sellOrderCreateOpen].denom ?? '0',
-              value: credits[sellOrderCreateOpen].denom ?? '0',
->>>>>>> f1a741f5 (feat: 1006 Wire sell order action (#1052))
             },
             ...getOtherSellOrderBatchDenomOptions({
               credits,

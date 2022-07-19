@@ -28,7 +28,7 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 // import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
 // import { ReactComponent as Sell } from '../../assets/svgs/sell.svg';
-import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
+import AvailableCreditsIconAlt from 'web-components/lib/components/icons/AvailableCreditsIconAlt';
 import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
 import { Link } from '../../components/atoms';
@@ -226,7 +226,7 @@ export const MyEcocredits = (): JSX.Element => {
                   //   onClick: () => console.log(`TODO sell credit ${i}`),
                   // },
                   {
-                    icon: <AvailableCreditsIcon sx={sxs.arrow} />,
+                    icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
                     label: CREATE_SELL_ORDER_SHORT,
                     onClick: () => setSellOrderCreateOpen(i),
                   },

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { Box, CardMedia, useMediaQuery, useTheme } from '@mui/material';
+import ReactPlayerLazy from 'react-player/lazy';
 
+import Card from 'web-components/lib/components/cards/Card';
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
@@ -12,7 +15,6 @@ import { OnboardingFormTemplate } from '../../components/templates';
 import { useProjectByIdQuery } from '../../generated/graphql';
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
-import { Box } from '@mui/material';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { ProjectPageFooter } from '../../components/molecules';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
@@ -27,6 +29,8 @@ export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const createProjectContext = useCreateProjectContext();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { data } = useProjectByIdQuery({
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
@@ -73,6 +77,7 @@ export const ProjectReview: React.FC = () => {
   const jurisdiction = useGetJurisdiction(metadata);
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
+  const videoUrl = metadata?.['regen:videoURL']?.['@value'];
 
   const submit = () => {
     projectCreateSubmit({
@@ -120,17 +125,33 @@ export const ProjectReview: React.FC = () => {
         <ItemDisplay value={metadata?.['schema:description']} />
       </ReviewCard>
       <ReviewCard
-        title="Photos"
+        title={videoUrl ? 'Media' : 'Photos'}
         onEditClick={() => navigate(`${editPath}/media`)}
       >
         {metadata?.['regen:previewPhoto']?.['@value'] && (
-          <Photo imgSrc={metadata?.['regen:previewPhoto']?.['@value']} />
+          <Photo src={metadata?.['regen:previewPhoto']?.['@value']} />
         )}
         {metadata?.['regen:galleryPhotos']?.['@list']
           ?.filter(photo => !!photo?.['@value'])
           ?.map(photo => (
-            <Photo imgSrc={photo?.['@value']} />
+            <Photo src={photo?.['@value']} />
           ))}
+        {videoUrl && (
+          <Card
+            sx={{
+              mt: 9,
+              mb: 2,
+            }}
+          >
+            <CardMedia
+              component={ReactPlayerLazy}
+              url={videoUrl}
+              fallback={<div>Loading video player...</div>}
+              height={isMobile ? 216 : 293}
+              width="100%"
+            />
+          </Card>
+        )}
       </ReviewCard>
       <ReviewCard
         title="Roles"

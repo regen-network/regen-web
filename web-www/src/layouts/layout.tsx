@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+import { PageProps } from 'gatsby';
 
 import Footer, {
   FooterItemProps as FooterItem,
@@ -16,17 +17,13 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { MarketingNav } from '../components/MarketingNav';
 
-interface Props {
-  location: Location;
-}
-
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     background: theme.palette.primary.main,
   },
 }));
 
-const Layout: React.FC<Props> = ({ children, location }) => {
+const Layout: React.FC<PageProps> = ({ children, location }) => {
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
       title: 'get involved',

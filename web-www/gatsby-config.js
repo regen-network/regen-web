@@ -76,15 +76,6 @@ module.exports = {
         footnotes: true,
         pedantic: true,
         gfm: true,
-        // Plugins configs
-        plugins: [
-          {
-            resolve: `gatsby-remark-images`,
-            options: {
-              maxWidth: 800,
-            },
-          },
-        ],
       },
     },
     {

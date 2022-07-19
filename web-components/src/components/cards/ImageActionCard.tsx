@@ -23,6 +23,8 @@ type Props = {
   title: string | JSX.Element;
   btnText: string;
   className?: string;
+  disabled?: boolean;
+  startIcon?: React.ReactNode;
 };
 
 const ImageActionCard: React.FC<Props> = props => {
@@ -42,19 +44,24 @@ const ImageActionCard: React.FC<Props> = props => {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
+          padding: 5,
         }}
       >
         <div>
           <Title as="div" variant="h5">
             {parseText(props.title)}
           </Title>
-          <Body as="div">{parseText(props.description)}</Body>
+          <Body as="div" sx={{ mt: 3 }}>
+            {parseText(props.description)}
+          </Body>
         </div>
 
         <OutlinedButton
           size="small"
-          sx={{ mt: 4, width: '100%' }}
+          sx={{ mt: 5, width: '100%' }}
           onClick={props.onClick}
+          disabled={props.disabled}
+          startIcon={props.startIcon}
         >
           {props.btnText}
         </OutlinedButton>
@@ -63,4 +70,4 @@ const ImageActionCard: React.FC<Props> = props => {
   );
 };
 
-export default ImageActionCard;
+export { ImageActionCard };

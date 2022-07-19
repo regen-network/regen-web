@@ -23,6 +23,7 @@ export interface RegenTextFieldProps
   optional?: boolean | string;
   startAdornment?: React.ReactNode;
   endAdornment?: React.ReactNode;
+  step?: number;
 }
 
 interface StyleProps extends TextFieldProps {

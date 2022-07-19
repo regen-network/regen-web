@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import {
   QueryClientImpl,
@@ -7,14 +7,21 @@ import {
 
 import { useLedger } from '../ledger';
 
-export const useQuerySellOrders = function ():
-  | QuerySellOrdersResponse
-  | undefined {
+export const useQuerySellOrders = function (): {
+  sellOrdersResponse: QuerySellOrdersResponse | undefined;
+  refetchSellOrders: () => void;
+} {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl>();
-  const [sellOrders, setSellOrders] = useState<
+  const [sellOrdersResponse, setSellOrdersResponse] = useState<
     QuerySellOrdersResponse | undefined
   >(undefined);
+  const [refetchCount, setRefetchCount] = useState(0);
+
+  const refetchSellOrders = useCallback(
+    () => setRefetchCount(refetchCount + 1),
+    [refetchCount],
+  );
 
   useEffect(() => {
     if (!api?.queryClient) return;
@@ -26,11 +33,11 @@ export const useQuerySellOrders = function ():
     if (!queryClient) return;
 
     async function fetchData(client: QueryClientImpl): Promise<void> {
-      await client.SellOrders({}).then(setSellOrders);
+      await client.SellOrders({}).then(setSellOrdersResponse);
     }
 
     fetchData(queryClient);
-  }, [queryClient]);
+  }, [queryClient, refetchCount]);
 
-  return sellOrders;
+  return { sellOrdersResponse, refetchSellOrders };
 };

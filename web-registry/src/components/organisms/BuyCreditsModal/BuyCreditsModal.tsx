@@ -214,10 +214,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                             flexWrap: 'wrap',
                           }}
                         >
-                          <RegenTokenIcon className={styles.regenIcon} />
-                          <Title variant="h4" sx={{ mr: 1.5 }}>
-                            {values.creditCount * (initialValues?.price ?? 0)}
-                          </Title>
+                          <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
+                            <RegenTokenIcon className={styles.regenIcon} />
+                            <Title variant="h4" sx={{ mr: 1.5 }}>
+                              {values.creditCount * (initialValues?.price ?? 0)}
+                            </Title>
+                          </Box>
                           <Label size="sm" sx={{ color: 'info.dark' }}>
                             {'REGEN'}
                           </Label>

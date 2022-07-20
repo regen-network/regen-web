@@ -11,6 +11,6 @@ export default function ErrorBanner({
 }: BannerBaseProps): JSX.Element {
   const theme = useTheme();
   return (
-    <Banner text={text} duration={duration} color={theme.palette.error.light} />
+    <Banner text={text} duration={duration} color={theme.palette.error.dark} />
   );
 }

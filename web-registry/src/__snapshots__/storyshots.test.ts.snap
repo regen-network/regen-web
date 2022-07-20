@@ -104,6 +104,32 @@ exports[`Storyshots Buttons Contained Button 1`] = `
 </MemoryRouter>
 `;
 
+exports[`Storyshots Buttons Edit Button 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots Buttons Expand Button 1`] = `
 <MemoryRouter
   initialEntries={
@@ -235,58 +261,6 @@ exports[`Storyshots Buttons Table Action Buttons 1`] = `
 `;
 
 exports[`Storyshots Buttons Text Button 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      "/",
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    />
-  </Routes>
-</MemoryRouter>
-`;
-
-exports[`Storyshots Cards Create Project Card 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      "/",
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    />
-  </Routes>
-</MemoryRouter>
-`;
-
-exports[`Storyshots Cards Create Project Card Add Another 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
@@ -702,7 +676,7 @@ exports[`Storyshots Cards Step Card 1`] = `
 </MemoryRouter>
 `;
 
-exports[`Storyshots Cards/Dashboard Create Card No Title Or Icon 1`] = `
+exports[`Storyshots Cards/Create Card Create Credit Class Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
@@ -728,7 +702,215 @@ exports[`Storyshots Cards/Dashboard Create Card No Title Or Icon 1`] = `
 </MemoryRouter>
 `;
 
-exports[`Storyshots Cards/Dashboard Create Card With Title And Icon 1`] = `
+exports[`Storyshots Cards/Create Card Create Project Card 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Cards/Create Card First Credit Class Card 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Cards/Create Card First Project Card 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Cards/Create Card No Title Or Icon 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Cards/Create Card With Title And Icon 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Cards/ReviewCard Item Display 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Cards/ReviewCard Photo 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Cards/ReviewCard Review Card 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Cards/ReviewCard Review Card Base 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
@@ -1899,110 +2081,6 @@ exports[`Storyshots Place Project Place Info 1`] = `
 `;
 
 exports[`Storyshots ReadMore Read More 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      "/",
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    />
-  </Routes>
-</MemoryRouter>
-`;
-
-exports[`Storyshots Registry/Molecules/CreateCreditClassCard Create Credit Class Card 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      "/",
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    />
-  </Routes>
-</MemoryRouter>
-`;
-
-exports[`Storyshots Registry/Molecules/CreateCreditClassCard Create Credit Class Card First Project 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      "/",
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    />
-  </Routes>
-</MemoryRouter>
-`;
-
-exports[`Storyshots Registry/Molecules/CreateProjectCard Create Project Card 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      "/",
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    />
-  </Routes>
-</MemoryRouter>
-`;
-
-exports[`Storyshots Registry/Molecules/CreateProjectCard Create Project Card First Project 1`] = `
 <MemoryRouter
   initialEntries={
     Array [

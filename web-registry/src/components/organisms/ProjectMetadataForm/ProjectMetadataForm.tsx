@@ -17,6 +17,8 @@ interface ProjectMetadataFormProps {
   submit: (values: ProjectMetadataValues) => Promise<void>;
   initialValues?: Partial<ProjectMetadataLD>;
   graphData?: ShaclGraphByUriQuery;
+  onNext?: () => void;
+  onPrev?: () => void;
 }
 
 export interface ProjectMetadataValues {
@@ -26,6 +28,8 @@ export interface ProjectMetadataValues {
 export const ProjectMetadataForm = ({
   submit,
   initialValues,
+  onNext,
+  onPrev,
 }: ProjectMetadataFormProps): JSX.Element => {
   const { confirmSave, isEdit } = useProjectEditContext();
 
@@ -65,6 +69,8 @@ export const ProjectMetadataForm = ({
             </OnBoardingCard>
             <ProjectPageFooter
               onSave={submitForm}
+              onNext={onNext}
+              onPrev={onPrev}
               saveDisabled={
                 !isValid || isSubmitting || !Object.keys(touched).length
               }

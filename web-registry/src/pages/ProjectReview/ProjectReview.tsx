@@ -187,7 +187,11 @@ export const ProjectReview: React.FC = () => {
           </Box>
         )}
       </ReviewCard>
-      <ProjectPageFooter onSave={submit} saveDisabled={isSubmitModalOpen} />
+      <ProjectPageFooter
+        onSave={submit}
+        onPrev={() => navigate(`${editPath}/metadata`)}
+        saveDisabled={isSubmitModalOpen}
+      />
       <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
       {error && txModalTitle && (
         <TxErrorModal

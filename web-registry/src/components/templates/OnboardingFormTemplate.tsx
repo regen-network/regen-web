@@ -12,7 +12,7 @@ type Props = {
 
 const OnboardingFormTemplate: React.FC<Props> = props => {
   return (
-    <>
+    <Box sx={{ bgcolor: 'grey.50' }}>
       <PlanStepper activeStep={props.activeStep} />
       <OnBoardingSection
         title={props.title}
@@ -26,7 +26,7 @@ const OnboardingFormTemplate: React.FC<Props> = props => {
       >
         <Box minHeight="50vh">{props.children}</Box>
       </OnBoardingSection>
-    </>
+    </Box>
   );
 };
 

@@ -9,6 +9,8 @@ type Props = {
   submit: useProjectMetadataSubmitReturnedType;
   metadata?: Partial<ProjectMetadataLD>;
   graphData?: ShaclGraphByUriQuery;
+  onNext?: () => void;
+  onPrev?: () => void;
 };
 
 export const ProjectMetadataSelectedForm = ({
@@ -16,6 +18,8 @@ export const ProjectMetadataSelectedForm = ({
   isVCS,
   metadata,
   submit,
+  onNext,
+  onPrev,
 }: Props): JSX.Element => (
   // isVCS ? (
   //   // TODO https://github.com/regen-network/regen-registry/issues/908
@@ -28,6 +32,8 @@ export const ProjectMetadataSelectedForm = ({
     submit={submit}
     initialValues={metadata}
     graphData={graphData}
+    onNext={onNext}
+    onPrev={onPrev}
   />
 );
 // );

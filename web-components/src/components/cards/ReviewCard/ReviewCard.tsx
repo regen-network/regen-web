@@ -21,8 +21,8 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
     <OnBoardingCard
       sx={[
         {
-          mt: 5,
-          mb: 0,
+          mt: [2.5],
+          mb: [0],
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}

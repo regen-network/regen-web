@@ -93,7 +93,7 @@ export const CreditClassForm = (props: {
           name="creditTypeAbbr"
           options={[
             // TODO:
-            { value: '', label: '' },
+            { value: '', label: 'Choose a credit type' },
             { value: 'ct1', label: 'Credit type 1' },
             { value: 'ct2', label: 'Credit type 2' },
           ]}

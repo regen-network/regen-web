@@ -21,6 +21,8 @@ import {
   QueryProjectsResponse,
   QuerySupplyResponse,
   QueryProjectsByClassResponse,
+  QueryProjectsByAdminRequest,
+  QueryProjectsByAdminResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import {
@@ -374,6 +376,11 @@ type ProjectsParams = {
   params: DeepPartial<QueryProjectsRequest>;
 };
 
+type ProjectsByAdminParams = {
+  query: 'projectsByAdmin';
+  params: DeepPartial<QueryProjectsByAdminRequest>;
+};
+
 export type EcocreditQueryProps =
   | BalanceParams
   | BatchInfoParams
@@ -381,7 +388,8 @@ export type EcocreditQueryProps =
   | ClassInfoParams
   | ClassesParams
   | CreditTypesParams
-  | ProjectsParams;
+  | ProjectsParams
+  | ProjectsByAdminParams;
 
 // typing the response
 
@@ -392,7 +400,8 @@ export type EcocreditQueryResponse =
   | QueryClassResponse
   | QueryClassesResponse
   | QueryCreditTypesResponse
-  | QueryProjectsResponse;
+  | QueryProjectsResponse
+  | QueryProjectsByAdminResponse;
 
 /**
  *
@@ -541,6 +550,31 @@ export const queryProjects = async ({
     );
   }
 };
+
+// ProjectsByAdmin
+
+interface QueryProjectsByAdminProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QueryProjectsByAdminRequest>;
+}
+
+export const queryProjectsByAdmin = async ({
+  client,
+  request,
+}: QueryProjectsByAdminProps): Promise<QueryProjectsByAdminResponse> => {
+  try {
+    return await client.ProjectsByAdmin(request);
+  } catch (err) {
+    throw new Error(
+      `Error in the Projects query of the ledger ecocredit module: ${err}`,
+    );
+  }
+};
+
+/**
+ *
+ * Backwards compatibility, will be removed
+ *
+ */
 
 // queryEcoBatches consumes Regen REST endpoints - will be replaced with regen-js
 export const queryEcoBatches = async (

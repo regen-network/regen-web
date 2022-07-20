@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormikContext } from 'formik';
 import { Link } from '@mui/material';
 
-import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
-import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
-import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 import {
   formatDate,
   getFormattedNumber,
 } from 'web-components/lib/utils/format';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
+import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 
 import { useMultiStep } from '../../../../components/templates/MultiStep';
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
@@ -24,13 +24,11 @@ export default function Review(): JSX.Element {
     useFormikContext<CreateBatchFormValues>();
   const { dataDisplay, handleResetReview } = useMultiStep();
 
-  // validate form on mount
-  React.useEffect(() => {
+  useEffect(() => {
     validateForm();
   }, [validateForm]);
 
-  // check isValid change to reset in case is not valid
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isValid) handleResetReview();
   }, [handleResetReview, isValid]);
 
@@ -72,12 +70,8 @@ function CreditBatchInfo({
       onEditClick={() => handleActiveStep(0)}
     >
       <ItemDisplay
-        name={'Credit Class'}
-        value={dataDisplay?.creditClass?.label || data.classId}
-      />
-      <ItemDisplay
         name={'Project'}
-        value={dataDisplay?.project?.label || metadata['regen:vcsProjectId']}
+        value={dataDisplay?.project?.label || data.projectId}
       />
       <ItemDisplay
         name={'Start and end date'}

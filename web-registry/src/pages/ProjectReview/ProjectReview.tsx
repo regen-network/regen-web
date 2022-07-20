@@ -92,6 +92,7 @@ export const ProjectReview: React.FC = () => {
   return (
     <OnboardingFormTemplate activeStep={1} title="Review">
       <ReviewCard
+        sx={{ mt: [8, 10] }}
         title="Basic Info"
         onEditClick={() => navigate(`${editPath}/basic-info`)}
       >

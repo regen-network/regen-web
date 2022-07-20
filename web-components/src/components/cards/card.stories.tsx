@@ -23,7 +23,7 @@ import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
 import { QuestionItem } from '../../../lib/components/faq/Question';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
-import ProjectCard from './ProjectCard/ProjectCard';
+import ProjectCard from './ProjectCard';
 
 export default {
   title: 'Cards',

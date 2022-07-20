@@ -36,7 +36,7 @@ export interface ProjectCardProps {
   sx?: SxProps<Theme>;
 }
 
-export default function ProjectCard({
+export function ProjectCard({
   name,
   imgSrc,
   place,

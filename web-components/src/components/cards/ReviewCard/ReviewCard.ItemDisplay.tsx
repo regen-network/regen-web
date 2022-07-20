@@ -7,15 +7,21 @@ export interface ItemDisplayProps {
   value?: string | number | JSX.Element;
 }
 
-const ItemDisplay: React.FC<ItemDisplayProps> = ({ name, value }) => {
+const ItemDisplay: React.FC<{
+  name: string;
+  children: ReactNode;
+  sx?: SxProps<Theme>;
+}> = props => {
+  const { name, children, sx = [] } = props;
   return (
-    <>
-      <Subtitle size="lg" sx={{ mt: 9, mb: 2 }}>
-        {name}
-      </Subtitle>
-      <Body size="lg">{value}</Body>
-    </>
+    <Box
+      sx={[
+        { display: 'flex', flexDirection: 'column', gap: 2 },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
+    >
+      <Subtitle size="lg">{name}</Subtitle>
+      <Body size="lg">{children}</Body>
+    </Box>
   );
 };
-
-export { ItemDisplay };

@@ -94,7 +94,7 @@ export const monitoredImpactCard = (): JSX.Element => (
 function onClick(): void {}
 
 export const projectCard = (): JSX.Element => (
-  <Box sx={{ display: 'flex' }}>
+  <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
     <ProjectCard
       name="Coorong Project"
       place={'Adelaide, South Australia, Australia'}
@@ -104,7 +104,7 @@ export const projectCard = (): JSX.Element => (
       imgSrc="/coorong.png"
       tag="biodiversity"
       onClick={onClick}
-      sx={{ maxWidth: 338, mr: 10 }}
+      sx={{ maxWidth: 338, mr: 10, mb: 10 }}
     />
 
     <ProjectCard
@@ -118,7 +118,7 @@ export const projectCard = (): JSX.Element => (
       purchaseInfo={{
         sellInfo: { creditsAvailable: '1,200', pricePerTon: '17.20-24.20 ' },
       }}
-      sx={{ maxWidth: 338, mr: 10 }}
+      sx={{ maxWidth: 338, mr: 10, mb: 10 }}
     />
 
     <ProjectCard
@@ -131,7 +131,7 @@ export const projectCard = (): JSX.Element => (
       tag="biodiversity"
       onClick={onClick}
       registry={{ name: 'registry', type: 'type' }}
-      sx={{ maxWidth: 338, mr: 10 }}
+      sx={{ maxWidth: 338 }}
     />
   </Box>
 );

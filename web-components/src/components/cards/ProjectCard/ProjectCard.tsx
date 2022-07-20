@@ -180,7 +180,7 @@ export default function ProjectCard({
                         size="xs"
                         mobileSize="xxs"
                         color="info.main"
-                        sx={{ mb: 1 }}
+                        sx={{ mb: 1, fontWeight: 800 }}
                       >
                         {'PRICE PER TON'}
                       </Subtitle>
@@ -189,7 +189,11 @@ export default function ProjectCard({
                         <Body
                           size="md"
                           mobileSize="sm"
-                          sx={{ fontWeight: 700, ml: 2 }}
+                          sx={{
+                            fontWeight: 700,
+                            ml: 2,
+                            color: 'primary.contrastText',
+                          }}
                         >
                           {purchaseInfo.sellInfo.pricePerTon}
                         </Body>
@@ -200,11 +204,15 @@ export default function ProjectCard({
                         size="xs"
                         mobileSize="xxs"
                         color="info.main"
-                        sx={{ mb: 1 }}
+                        sx={{ mb: 1, fontWeight: 800 }}
                       >
                         {'CREDITS AVAILABLE'}
                       </Subtitle>
-                      <Body size="md" mobileSize="sm" sx={{ fontWeight: 700 }}>
+                      <Body
+                        size="md"
+                        mobileSize="sm"
+                        sx={{ fontWeight: 700, color: 'primary.contrastText' }}
+                      >
                         {purchaseInfo.sellInfo.creditsAvailable}
                       </Body>
                     </Box>

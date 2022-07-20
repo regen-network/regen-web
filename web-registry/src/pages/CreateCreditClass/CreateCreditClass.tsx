@@ -1,14 +1,14 @@
 import { Box } from 'web-components/lib/components/box';
 
-import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
-import { useWallet } from 'lib/wallet';
+import { MultiStepTemplate } from '../../components/templates/MultiStep';
+import { useWallet } from '../../lib/wallet';
 import {
   CreateCreditClassForm,
   createCreditClassSteps,
   creditClassBaseValues,
-} from 'components/organisms/CreditClassForms';
+} from '../../components/organisms/CreditClassForms';
 
-import type { CreditClassValues } from 'components/organisms/CreditClassForms';
+import type { CreditClassValues } from '../../components/organisms/CreditClassForms';
 
 export const CreateCreditClass = (): JSX.Element => {
   const { wallet } = useWallet();

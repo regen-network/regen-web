@@ -2,9 +2,9 @@ import { Formik } from 'formik';
 
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import NotFound from 'web-components/lib/components/not-found';
-import RotationalGrazing from 'assets/rotational-grazing.png';
+import RotationalGrazing from '../../../assets/rotational-grazing.png';
 
-import { useMultiStep } from 'components/templates/MultiStepTemplate';
+import { useMultiStep } from '../../../components/templates/MultiStep';
 import { CreditClassForm } from './CreditClassForm';
 import { CreditClassReview } from './CreditClassReview';
 import { CreditClassFinished } from './CreditClassFinished';

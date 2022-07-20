@@ -29,7 +29,6 @@ export * from './MethodologySteps';
 export * from './MethodologyTestSection';
 export * from './MethodologyTopSection';
 export * from './MoreProjectsSection';
-export * from './MyProjects';
 export * from './Portfolio';
 export * from './ProjectCards';
 export * from './ProjectImpactSection';

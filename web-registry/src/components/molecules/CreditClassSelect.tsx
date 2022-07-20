@@ -5,9 +5,8 @@ import { QueryClassesResponse } from '@regen-network/api/lib/generated/regen/eco
 import SelectTextField, {
   Option,
 } from 'web-components/lib/components/inputs/SelectTextField';
-
-import { useEcocreditQuery } from 'hooks';
-import { getMetadataFromUint8Array } from 'lib/metadata-graph';
+import useEcocreditQuery from '../../hooks/useEcocreditQuery';
+import { getMetadataFromUint8Array } from '../../lib/metadata-graph';
 
 interface Props {
   name?: string;

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { client } from 'sanity';
 import { useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CardMedia from '@mui/material/CardMedia';
@@ -14,15 +13,23 @@ import Modal from 'web-components/lib/components/modal';
 import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
-import { WrappedImpactCard, WrappedResourcesCard } from 'components/atoms';
-import { HeroTitle, HeroAction, OverviewCards } from 'components/molecules';
-import { StepCardsWithDescription } from 'components/organisms';
+import { client } from '../../sanity';
+import {
+  WrappedImpactCard,
+  WrappedResourcesCard,
+} from '../../components/atoms';
+import {
+  HeroTitle,
+  HeroAction,
+  OverviewCards,
+} from '../../components/molecules';
+import { StepCardsWithDescription } from '../../components/organisms';
 
-import fernImg from 'assets/fern-in-hands.png';
-import writingOnPaperImg from 'assets/writing-on-paper.png';
-import topographyImg from 'assets/topography-pattern-cutout-1.png';
+import fernImg from '../../assets/fern-in-hands.png';
+import writingOnPaperImg from '../../assets/writing-on-paper.png';
+import topographyImg from '../../assets/topography-pattern-cutout-1.png';
 
-import { useAllCreateCreditClassPageQuery } from 'generated/sanity-graphql';
+import { useAllCreateCreditClassPageQuery } from '../../generated/sanity-graphql';
 import { useCreditClassInfoStyles } from './CreditClassInfo.styles';
 
 const CreateCreditClassInfo: React.FC = () => {

@@ -6,13 +6,13 @@ import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
 
-import { useWallet } from 'lib/wallet';
-import { getProjectPageBaseData } from 'lib/rdf';
+import { useWallet } from '../../../lib/wallet';
+import { getProjectPageBaseData } from '../../../lib/rdf';
 import {
   useCreateProjectMutation,
   useWalletByAddrQuery,
   useCreateWalletMutation,
-} from 'generated/graphql';
+} from '../../../generated/graphql';
 
 const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);

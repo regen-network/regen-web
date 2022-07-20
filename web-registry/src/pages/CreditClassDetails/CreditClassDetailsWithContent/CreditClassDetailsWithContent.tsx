@@ -10,8 +10,9 @@ import Banner from 'web-components/lib/components/banner';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchFooter';
 import { BlockContent } from 'web-components/lib/components/block-content';
+import { Body } from 'web-components/lib/components/typography';
 
-import { HeroTitle } from 'components/molecules';
+import { HeroTitle } from '../../../components/molecules';
 import {
   ImpactSection,
   ResourcesSection,
@@ -20,13 +21,15 @@ import {
   MediaSection,
   // CreditClassConnectSection,
   CreditClassOverviewSection,
-} from 'components/organisms';
-import hero from 'assets/credit-class-grasslands-hero.png';
-import getApiUri from 'lib/apiUri';
-import { onBtnClick } from 'lib/button';
-import { useMoreProjectsQuery, CreditClassByUriQuery } from 'generated/graphql';
-import { CreditClass } from 'generated/sanity-graphql';
-import { Body } from 'web-components/lib/components/typography';
+} from '../../../components/organisms';
+import hero from '../../../assets/credit-class-grasslands-hero.png';
+import getApiUri from '../../../lib/apiUri';
+import { onBtnClick } from '../../../lib/button';
+import {
+  useMoreProjectsQuery,
+  CreditClassByUriQuery,
+} from '../../../generated/graphql';
+import { CreditClass } from '../../../generated/sanity-graphql';
 
 interface CreditDetailsProps {
   dbClass: CreditClassByUriQuery['creditClassByUri'];

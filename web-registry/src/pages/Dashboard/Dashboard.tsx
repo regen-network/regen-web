@@ -12,8 +12,8 @@ import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClass
 import { Spinner } from 'web-components/lib/components/icons/Spinner';
 import { Center, Flex } from 'web-components/lib/components/box';
 
-import { useQueryListClasses } from 'hooks';
-import { useWallet } from 'lib/wallet';
+import useQueryListClasses from '../../hooks/useQueryListClasses';
+import { useWallet } from '../../lib/wallet';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
 const MyProjects = React.lazy(() => import('./MyProjects'));

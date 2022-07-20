@@ -27,29 +27,24 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
 
-// import { ReactComponent as WithdrawIBC } from 'assets/svgs/withdraw-ibc.svg';
-// import { ReactComponent as DepositIBC } from 'assets/svgs/deposit-ibc.svg';
-// import { ReactComponent as Sell } from 'assets/svgs/sell.svg';
-import { ReactComponent as PutInBasket } from 'assets/svgs/put-in-basket.svg';
-import { ReactComponent as TakeFromBasket } from 'assets/svgs/take-from-basket.svg';
-import { Link } from 'components/atoms';
-import { Portfolio } from 'components/organisms/Portfolio';
+// import { ReactComponent as WithdrawIBC } from '../../../assets/svgs/withdraw-ibc.svg';
+// import { ReactComponent as DepositIBC } from '../../../assets/svgs/deposit-ibc.svg';
+// import { ReactComponent as Sell } from '../../../assets/svgs/sell.svg';
+import { ReactComponent as PutInBasket } from '../../../assets/svgs/put-in-basket.svg';
+import { ReactComponent as TakeFromBasket } from '../../../assets/svgs/take-from-basket.svg';
+import { Link } from '../../../components/atoms';
+import { Portfolio } from '../../../components/organisms/Portfolio';
+import { getHashUrl } from '../../../lib/block-explorer';
+
+import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
+import type { BasketTokens } from '../../../hooks/useBasketTokens';
+import useMsgClient from '../../../hooks/useMsgClient';
+import useQueryBaskets from '../../../hooks/useQueryBaskets';
 import {
   useBasketsWithClasses,
   useBasketTokens,
   useEcocredits,
-  useMsgClient,
-  useQueryBaskets,
-} from 'hooks';
-import { getHashUrl } from 'lib/block-explorer';
-
-import useBasketPutSubmit from './hooks/useBasketPutSubmit';
-import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
-import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
-import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
-import useCreditSendSubmit from './hooks/useCreditSendSubmit';
-import useOpenTakeModal from './hooks/useOpenTakeModal';
-import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
+} from '../../../hooks';
 import {
   CREATE_SELL_ORDER_SHORT,
   CREATE_SELL_ORDER_TITLE,
@@ -58,8 +53,15 @@ import {
   getAvailableAmountByBatch,
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
+
+import useBasketPutSubmit from './hooks/useBasketPutSubmit';
+import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
+import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
+import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
+import useCreditSendSubmit from './hooks/useCreditSendSubmit';
+import useOpenTakeModal from './hooks/useOpenTakeModal';
+
 import type { Theme } from 'web-components/lib/theme/muiTheme';
-import type { BasketTokens } from 'hooks/useBasketTokens';
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);

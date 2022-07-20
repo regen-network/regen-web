@@ -4,8 +4,8 @@ import { Box, SxProps } from '@mui/material';
 import { Label } from 'web-components/lib/components/typography';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 
-import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-import { BasketTokens } from 'hooks/useBasketTokens';
+import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
+import { BasketTokens } from '../../hooks/useBasketTokens';
 import { EcocreditsTable, BasketsTable } from './';
 
 export interface PortfolioProps {

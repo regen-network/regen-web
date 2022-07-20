@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocalStorage } from 'hooks';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 
 // TODO - persistence alternatives: component / localstorage / db
 // Instead of directly using the local storage hook here, we should use an
@@ -93,7 +93,8 @@ export function MultiStepProvider<T extends object>({
   // So initially, data (from storage) is `undefined` or
   // previously persisted data.
   // If undefined, then we return the initialValues
-  const { data, saveData, removeData } = useLocalStorage<FormData<T>>(formId);
+  const { data, saveData, removeData } =
+    useLocalStorage(key)<FormData<T>>(formId);
 
   const maxAllowedStep = data?.maxAllowedStep || 0;
 

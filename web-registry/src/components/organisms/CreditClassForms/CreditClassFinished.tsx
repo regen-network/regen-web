@@ -8,7 +8,7 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { LabeledDetail } from 'web-components/lib/components/text-layouts';
 import { Body, Title } from 'web-components/lib/components/typography';
 
-import { getHashUrl } from 'lib/block-explorer';
+import { getHashUrl } from '../../../lib/block-explorer';
 
 const sxs = {
   label: { color: 'black' } as SxProps,

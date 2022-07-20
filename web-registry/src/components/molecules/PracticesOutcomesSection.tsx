@@ -63,7 +63,9 @@ const PracticesOutcomesSection: React.FC<Props> = ({ content }) => {
     })) || [];
 
   const outcomeCards =
-    outcomes?.map(outcome => <WrappedImpactCard outcome={outcome} />) || [];
+    outcomes?.map((outcome, i) => (
+      <WrappedImpactCard key={i} outcome={outcome} />
+    )) || [];
 
   return (
     <Section

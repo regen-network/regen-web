@@ -1,11 +1,15 @@
-import * as React from 'react';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
-import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
-import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ContainedButton, { ContainedColorVariant } from './ContainedButton';
 import { Box } from '@mui/material';
+
+import * as React from 'react';
+import OutlinedButton from './OutlinedButton';
+import PrevNextButton from './PrevNextButton';
+import ContainedButton, { ContainedColorVariant } from './ContainedButton';
+import { TableActionButtons } from './TableActionButtons';
+import { ExpandButton } from './ExpandButton';
+import { TextButton } from './TextButton';
+import { FlexCol } from '../box';
+import { EditButton } from './EditButton';
 
 export default {
   title: 'Buttons',
@@ -68,3 +72,17 @@ export const expandButton = (): JSX.Element => (
     <ExpandButton onClick={() => {}} expanded={true} />
   </>
 );
+
+export const textButton = (): JSX.Element => (
+  <FlexCol sx={{ alignItems: 'flex-start' }}>
+    <TextButton textSize="lg">Text button lg</TextButton>
+    <TextButton textSize="md">Text button md</TextButton>
+    <TextButton textSize="sm">Text button sm</TextButton>
+    <TextButton textSize="xs">Text button xs</TextButton>
+    <TextButton sx={{ color: 'red', py: [10] }}>
+      Text button custom styles
+    </TextButton>
+  </FlexCol>
+);
+
+export const editButton = () => <EditButton onClick={() => {}} />;

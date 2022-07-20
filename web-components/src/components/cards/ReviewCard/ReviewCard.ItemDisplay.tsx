@@ -1,14 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
+import { Box, SxProps, Theme } from '@mui/material';
 
 import { Subtitle, Body } from '../../typography';
 
-export interface ItemDisplayProps {
-  name?: string;
-  value?: string | number | JSX.Element;
-}
-
 const ItemDisplay: React.FC<{
-  name: string;
+  name?: string;
   children: ReactNode;
   sx?: SxProps<Theme>;
 }> = props => {
@@ -16,7 +12,12 @@ const ItemDisplay: React.FC<{
   return (
     <Box
       sx={[
-        { display: 'flex', flexDirection: 'column', gap: 2 },
+        {
+          display: 'flex',
+          flexDirection: 'column',
+          mt: 9,
+          mb: 2,
+        },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
@@ -25,3 +26,5 @@ const ItemDisplay: React.FC<{
     </Box>
   );
 };
+
+export { ItemDisplay };

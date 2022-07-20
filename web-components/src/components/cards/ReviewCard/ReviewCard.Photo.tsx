@@ -3,13 +3,14 @@ import { CardMedia, CardMediaProps } from '@mui/material';
 
 import Card from '../Card';
 
-const Photo: React.FC<CardMediaProps> = ({ src }) => {
+const Photo = ({ src, sx = [] }: CardMediaProps): JSX.Element => {
   return (
     <Card
       sx={{
         mt: 9,
         mb: 2,
         height: [216, 293],
+        ...(Array.isArray(sx) ? sx : [sx]),
       }}
     >
       <CardMedia

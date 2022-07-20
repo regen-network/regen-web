@@ -95,33 +95,30 @@ export const ProjectReview: React.FC = () => {
         title="Basic Info"
         onEditClick={() => navigate(`${editPath}/basic-info`)}
       >
-        <ItemDisplay name="Name" value={metadata?.['schema:name']} />
-        <ItemDisplay
-          name="Size"
-          value={`${
-            metadata?.['regen:projectSize']?.['qudt:numericValue']?.[
-              '@value'
-            ] || '-'
-          } ${
+        <ItemDisplay name="Name">{metadata?.['schema:name']}</ItemDisplay>
+        <ItemDisplay name="Size">
+          {metadata?.['regen:projectSize']?.['qudt:numericValue']?.['@value'] ||
+            '-'}{' '}
+          {
             qudtUnitMap[
               metadata?.['regen:projectSize']?.['qudt:unit']?.[
                 '@value'
               ] as qudtUnit
             ]
-          }`}
-        />
+          }
+        </ItemDisplay>
       </ReviewCard>
       <ReviewCard
         title="Location"
         onEditClick={() => navigate(`${editPath}/location`)}
       >
-        <ItemDisplay value={metadata?.['schema:location']?.place_name} />
+        <ItemDisplay>{metadata?.['schema:location']?.place_name}</ItemDisplay>
       </ReviewCard>
       <ReviewCard
         title="Description"
         onEditClick={() => navigate(`${editPath}/description`)}
       >
-        <ItemDisplay value={metadata?.['schema:description']} />
+        <ItemDisplay>{metadata?.['schema:description']}</ItemDisplay>
       </ReviewCard>
       <ReviewCard
         title={videoUrl ? 'Media' : 'Photos'}
@@ -158,15 +155,12 @@ export const ProjectReview: React.FC = () => {
       >
         {metadata?.['regen:projectDeveloper'] && (
           <>
-            <ItemDisplay
-              name="Project Developer"
-              value={metadata?.['regen:projectDeveloper']?.['schema:name']}
-            />
-            <ItemDisplay
-              value={
-                metadata?.['regen:projectDeveloper']?.['schema:description']
-              }
-            />
+            <ItemDisplay name="Project Developer">
+              {metadata?.['regen:projectDeveloper']?.['schema:name']}
+            </ItemDisplay>
+            <ItemDisplay>
+              {metadata?.['regen:projectDeveloper']?.['schema:description']}
+            </ItemDisplay>
           </>
         )}
       </ReviewCard>

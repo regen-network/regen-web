@@ -13,7 +13,7 @@ function EditButton({ onClick }: ButtonProps): JSX.Element {
     <OutlinedButton
       size="small"
       sx={{
-        border: 'none !important',
+        border: 'none',
         maxWidth: '100px',
         alignSelf: 'flex-end',
       }}

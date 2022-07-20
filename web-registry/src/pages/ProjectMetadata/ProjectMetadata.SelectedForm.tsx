@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Box } from '@mui/system';
 import { ProjectMetadataForm } from '../../components/organisms/ProjectMetadataForm/ProjectMetadataForm';
 import { ProjectMetadataLD } from '../../generated/json-ld';
 import { useProjectMetadataSubmitReturnedType } from './hooks/useProjectMetadataSubmit';
@@ -20,6 +19,7 @@ export const ProjectMetadataSelectedForm = ({
 }: Props): JSX.Element => (
   // isVCS ? (
   //   // TODO https://github.com/regen-network/regen-registry/issues/908
+  //   // Temporarily using ProjectMetadataForm for all cases
   //   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
   //     {'VCS metadata form not implemented yet'}
   //   </Box>

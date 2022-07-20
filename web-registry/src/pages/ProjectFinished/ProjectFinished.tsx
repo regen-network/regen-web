@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { Title } from 'web-components/lib/components/typography';
@@ -16,6 +17,7 @@ import { useGetProjectId } from './hooks/useGetProjectId';
 const ProjectFinished: React.FC = () => {
   const { deliverTxResponse } = useCreateProjectContext();
   const projectId = useGetProjectId(deliverTxResponse);
+  const navigate = useNavigate();
 
   return (
     <OnboardingFormTemplate activeStep={2} title="Project has been created!">
@@ -46,7 +48,8 @@ const ProjectFinished: React.FC = () => {
         </OnBoardingCard>
         <OutlinedButton
           sx={{ margin: '0 auto' }}
-          href={`/projects/${projectId}`}
+          role="link"
+          onClick={() => navigate(`/projects/${projectId}`)}
         >
           see project page
         </OutlinedButton>

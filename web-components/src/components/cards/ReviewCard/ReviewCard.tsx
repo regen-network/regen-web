@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, SxProps, Theme } from '@mui/material';
 
 import { Label } from '../../typography';
 import OnBoardingCard from '../OnBoardingCard';
@@ -8,12 +8,14 @@ import { EditButton } from '../../buttons/EditButton';
 export interface ReviewCardProps {
   title: string;
   onEditClick: () => void;
+  sx?: SxProps<Theme>;
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = ({
   title,
   onEditClick,
   children,
+  sx = [],
 }) => {
   return (
     <OnBoardingCard
@@ -22,6 +24,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
           mt: 5,
           mb: 0,
         },
+        ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
       <Box

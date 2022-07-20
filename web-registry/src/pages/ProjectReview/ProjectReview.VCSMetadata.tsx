@@ -13,67 +13,52 @@ interface Props {
 const VCSMetadata: React.FC<Props> = ({ metadata }) => {
   return (
     <>
-      <ItemDisplay
-        name="Offset generation method"
-        value={metadata?.['regen:offsetGenerationMethod']}
-      />
-      <ItemDisplay
-        name="Project activity"
-        value={metadata?.['regen:projectActivity']?.['schema:name']}
-      />
-      <ItemDisplay
-        name="Project activity url"
-        value={
-          <Link
-            target="_blank"
-            href={
-              metadata?.['regen:projectActivity']?.['schema:url']?.['@value'] ||
-              ''
-            }
-          >
-            {metadata?.['regen:projectActivity']?.['schema:url']?.['@value']}
-          </Link>
-        }
-      />
-      <ItemDisplay
-        name="VCS project ID"
-        value={metadata?.['regen:vcsProjectId']}
-      />
-      <ItemDisplay
-        name="VCS project page url"
-        value={
-          <Link
-            target="_blank"
-            href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
-          >
-            {metadata?.['regen:vcsProjectPage']?.['@value']}
-          </Link>
-        }
-      />
-      <ItemDisplay
-        name="Project start and end date"
-        value={`${formatDate(
-          metadata?.['regen:projectStartDate']?.['@value'],
-        )} - ${formatDate(metadata?.['regen:projectEndDate']?.['@value'])}`}
-      />
-      <ItemDisplay
-        name="VCS methodology name"
-        value={metadata?.['regen:vcsMethodology']?.['schema:name']}
-      />
-      <ItemDisplay
-        name="VCS methodology url"
-        value={
-          <Link
-            target="_blank"
-            href={
-              metadata?.['regen:vcsMethodology']?.['schema:url']?.['@value'] ||
-              ''
-            }
-          >
-            {metadata?.['regen:vcsMethodology']?.['schema:url']?.['@value']}
-          </Link>
-        }
-      />
+      <ItemDisplay name="Offset generation method">
+        {metadata?.['regen:offsetGenerationMethod']}
+      </ItemDisplay>
+      <ItemDisplay name="Project activity">
+        {metadata?.['regen:projectActivity']?.['schema:name']}
+      </ItemDisplay>
+      <ItemDisplay name="Project activity url">
+        <Link
+          target="_blank"
+          href={
+            metadata?.['regen:projectActivity']?.['schema:url']?.['@value'] ||
+            ''
+          }
+        >
+          {metadata?.['regen:projectActivity']?.['schema:url']?.['@value']}
+        </Link>
+      </ItemDisplay>
+      <ItemDisplay name="VCS project ID">
+        {metadata?.['regen:vcsProjectId']}
+      </ItemDisplay>
+      <ItemDisplay name="VCS project page url">
+        <Link
+          target="_blank"
+          href={metadata?.['regen:vcsProjectPage']?.['@value'] || ''}
+        >
+          {metadata?.['regen:vcsProjectPage']?.['@value']}
+        </Link>
+      </ItemDisplay>
+      <ItemDisplay name="Project start and end date">{`${formatDate(
+        metadata?.['regen:projectStartDate']?.['@value'],
+      )} - ${formatDate(
+        metadata?.['regen:projectEndDate']?.['@value'],
+      )}`}</ItemDisplay>
+      <ItemDisplay name="VCS methodology name">
+        {metadata?.['regen:vcsMethodology']?.['schema:name']}
+      </ItemDisplay>
+      <ItemDisplay name="VCS methodology url">
+        <Link
+          target="_blank"
+          href={
+            metadata?.['regen:vcsMethodology']?.['schema:url']?.['@value'] || ''
+          }
+        >
+          {metadata?.['regen:vcsMethodology']?.['schema:url']?.['@value']}
+        </Link>
+      </ItemDisplay>
     </>
   );
 };

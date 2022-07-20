@@ -69,18 +69,15 @@ function CreditBatchInfo({
       title="Credit Batch Info"
       onEditClick={() => handleActiveStep(0)}
     >
-      <ItemDisplay
-        name={'Project'}
-        value={dataDisplay?.project?.label || data.projectId}
-      />
-      <ItemDisplay
-        name={'Start and end date'}
-        value={`${formatDate(data.startDate)} - ${formatDate(data.endDate)}`}
-      />
-      <ItemDisplay
-        name={'VCS retirement serial number'}
-        value={metadata['regen:vcsRetirementSerialNumber']}
-      />
+      <ItemDisplay name={'Project'}>
+        {dataDisplay?.project?.label || data.projectId}
+      </ItemDisplay>
+      <ItemDisplay name={'Start and end date'}>
+        {`${formatDate(data.startDate)} - ${formatDate(data.endDate)}`}
+      </ItemDisplay>
+      <ItemDisplay name={'VCS retirement serial number'}>
+        {metadata['regen:vcsRetirementSerialNumber']}
+      </ItemDisplay>
       {metadata['regen:additionalCertifications']?.map((cert, index) => (
         <AdditionalCertificationDisplay
           key={`additional-certification-${index}`}
@@ -109,25 +106,22 @@ function RecipientInfo({ data, index }: RecipientInfoProps): JSX.Element {
       title={`Recipient ${index}`}
       onEditClick={() => handleActiveStep(1)}
     >
-      <ItemDisplay name={'Recipient address'} value={data.recipient} />
-      <ItemDisplay
-        name={'Amount tradable'}
-        value={getFormattedNumber(data.tradableAmount)}
-      />
+      <ItemDisplay name={'Recipient address'}>{data.recipient}</ItemDisplay>
+      <ItemDisplay name={'Amount tradable'}>
+        {getFormattedNumber(data.tradableAmount)}
+      </ItemDisplay>
       {data.withRetire && (
         <>
-          <ItemDisplay
-            name={'Amount retired'}
-            value={getFormattedNumber(data.retiredAmount)}
-          />
+          <ItemDisplay name={'Amount retired'}>
+            {getFormattedNumber(data.retiredAmount)}
+          </ItemDisplay>
           {data.note && (
-            <ItemDisplay name={'Retirement note'} value={data.note} />
+            <ItemDisplay name={'Retirement note'}>{data.note}</ItemDisplay>
           )}
           {data.retirementJurisdiction && (
-            <ItemDisplay
-              name={'Retirement location'}
-              value={data.retirementJurisdiction}
-            />
+            <ItemDisplay name={'Retirement location'}>
+              {data.retirementJurisdiction}
+            </ItemDisplay>
           )}
         </>
       )}

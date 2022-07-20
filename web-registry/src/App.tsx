@@ -234,11 +234,8 @@ const App: React.FC = (): JSX.Element => {
               element={<CreditClassDetails />}
             />
             <Route path="stats/activity" element={<Activity />} />
-            <Route path="marketplace">
-              <Route
-                path="storefront"
-                element={<KeplrRoute component={Storefront} />}
-              />
+            <Route>
+              <Route path="storefront" element={<Storefront />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

@@ -27,6 +27,8 @@ import {
   normalizeSellOrders,
 } from './Storefront.normalizer';
 import { sortByExpirationDate } from './Storefront.utils';
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
+import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 
 export const Storefront = (): JSX.Element => {
   const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
@@ -38,6 +40,7 @@ export const Storefront = (): JSX.Element => {
   const batchInfos = useQueryListBatchInfo(batchDenoms);
   // offchain stored Projects
   const { data: offChainProjectData } = useAllProjectsQuery();
+
   // onChain stored Projects
   const { data: onChainProjects } = useEcocreditQuery<QueryProjectsResponse>({
     query: 'projects',
@@ -53,7 +56,9 @@ export const Storefront = (): JSX.Element => {
   const [txModalHeader, setTxModalHeader] = useState<string>('');
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+  const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const navigate = useNavigate();
+  useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
   const projectsInfosByHandleMap = useMemo(
     () =>
@@ -140,9 +145,11 @@ export const Storefront = (): JSX.Element => {
   );
 
   return (
-    <>
+    <Box sx={{ backgroundColor: 'grey.50' }}>
       <Section>
-        <Title variant="h2">Sell orders</Title>
+        <Title variant="h2" sx={{ mb: 8.5 }}>
+          Sell orders
+        </Title>
         <Box sx={{ paddingBottom: '150px' }}>
           <SellOrdersTable
             sellOrders={normalizedSellOrders}
@@ -150,7 +157,13 @@ export const Storefront = (): JSX.Element => {
               <OutlinedButton
                 startIcon={<CreditsIcon color={theme.palette.secondary.main} />}
                 size="small"
-                onClick={() => setSelectedSellOrder(i)}
+                onClick={() => {
+                  if (accountAddress) {
+                    setSelectedSellOrder(i);
+                  } else {
+                    setDisplayErrorBanner(true);
+                  }
+                }}
               >
                 {BUY_SELL_ORDER_ACTION}
               </OutlinedButton>
@@ -195,6 +208,9 @@ export const Storefront = (): JSX.Element => {
         linkComponent={Link}
         onButtonClick={onButtonClick}
       />
-    </>
+      {displayErrorBanner && (
+        <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
+      )}
+    </Box>
   );
 };

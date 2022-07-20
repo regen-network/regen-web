@@ -184,7 +184,12 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       size="md"
                       sx={{ color: 'primary.light', fontWeight: 700, mb: 3 }}
                     >
-                      Batch denom: C01001-20190101-20200101-001
+                      Batch denom:{' '}
+                      <Body
+                        sx={{ fontWeight: 'normal', display: 'inline-block' }}
+                      >
+                        {initialValues?.batchDenom}
+                      </Body>
                     </Body>
                     <div className={styles.creditWidget}>
                       <div className={styles.marginRight}>
@@ -193,6 +198,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           component={NumberTextField}
                           name="creditCount"
                           min={1}
+                          max={initialValues?.creditCount}
                         />
                       </div>
                       <Title variant="h6" sx={{ mr: 4 }}>
@@ -201,7 +207,13 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <div
                         className={cx(styles.flexColumn, styles.marginRight)}
                       >
-                        <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'baseline',
+                            flexWrap: 'wrap',
+                          }}
+                        >
                           <RegenTokenIcon className={styles.regenIcon} />
                           <Title variant="h4" sx={{ mr: 1.5 }}>
                             {values.creditCount * (initialValues?.price ?? 0)}

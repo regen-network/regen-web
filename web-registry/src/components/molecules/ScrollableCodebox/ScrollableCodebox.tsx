@@ -1,6 +1,7 @@
 import { SxProps, Box } from '@mui/material';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+/** simple div to allow display of json data for now */
 export const ScrollableCodebox = (props: {
   sx?: SxProps<Theme>;
   code: string;
@@ -11,6 +12,7 @@ export const ScrollableCodebox = (props: {
       sx={[
         {
           height: 205,
+          px: 3,
           width: '100%',
           border: 1,
           borderColor: 'grey.100',

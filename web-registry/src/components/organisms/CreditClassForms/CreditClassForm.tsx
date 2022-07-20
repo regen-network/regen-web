@@ -75,12 +75,12 @@ export const CreditClassForm = (props: {
                 />
               ))}
               <TextButton
-                fontSize="sm"
+                textSize="sm"
                 onClick={e => {
                   e.preventDefault();
                   push('');
                 }}
-                sx={{ float: 'right', mt: [8] }}
+                sx={{ float: 'right', mt: [5.5] }}
               >
                 {'+ add another issuer'}
               </TextButton>

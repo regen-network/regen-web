@@ -18,16 +18,16 @@ const LINE_HEIGHTS = {
 };
 
 interface Props extends ButtonProps {
-  fontSize?: LabelSize;
-  mobileFontSize?: LabelSize;
+  textSize?: LabelSize;
+  mobileTextSize?: LabelSize;
 }
 
 export const TextButton = styled(Button, {
   name: 'RegenTextButton',
   shouldForwardProp: prop => prop !== 'size' && prop !== 'mobileFontSize',
-})<Props>(({ theme, mobileFontSize, fontSize = 'md' as LabelSize }) => {
+})<Props>(({ theme, mobileTextSize, textSize = 'md' as LabelSize }) => {
   const { breakpoints, typography } = theme;
-  const _mobileSize = mobileFontSize || getMobileSize(fontSize);
+  const _mobileSize = mobileTextSize || getMobileSize(textSize);
   return {
     color: theme.palette.secondary.main,
     border: 'none',
@@ -40,8 +40,8 @@ export const TextButton = styled(Button, {
     [breakpoints.up('sm')]: {
       padding: 0,
       margin: 0,
-      fontSize: typography.pxToRem(SIZES[fontSize]),
-      lineHeight: typography.pxToRem(LINE_HEIGHTS[fontSize]),
+      fontSize: typography.pxToRem(SIZES[textSize]),
+      lineHeight: typography.pxToRem(LINE_HEIGHTS[textSize]),
     },
     [breakpoints.down('sm')]: {
       padding: 0,

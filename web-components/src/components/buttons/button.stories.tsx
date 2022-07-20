@@ -9,6 +9,7 @@ import { TableActionButtons } from './TableActionButtons';
 import { ExpandButton } from './ExpandButton';
 import { TextButton } from './TextButton';
 import { FlexCol } from '../box';
+import { EditButton } from './EditButton';
 
 export default {
   title: 'Buttons',
@@ -74,12 +75,14 @@ export const expandButton = (): JSX.Element => (
 
 export const textButton = (): JSX.Element => (
   <FlexCol sx={{ alignItems: 'flex-start' }}>
-    <TextButton fontSize="lg">Text button lg</TextButton>
-    <TextButton fontSize="md">Text button md</TextButton>
-    <TextButton fontSize="sm">Text button sm</TextButton>
-    <TextButton fontSize="xs">Text button xs</TextButton>
+    <TextButton textSize="lg">Text button lg</TextButton>
+    <TextButton textSize="md">Text button md</TextButton>
+    <TextButton textSize="sm">Text button sm</TextButton>
+    <TextButton textSize="xs">Text button xs</TextButton>
     <TextButton sx={{ color: 'red', py: [10] }}>
       Text button custom styles
     </TextButton>
   </FlexCol>
 );
+
+export const editButton = () => <EditButton onClick={() => {}} />;

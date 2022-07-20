@@ -4,17 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 import { Body } from 'web-components/lib/components/typography';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards';
+import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
+import { FlexCol } from 'web-components/lib/components/box';
 
 import {
   useCreateProjectMutation,
   useGetUserProfileByEmailQuery,
 } from '../../generated/graphql';
-import { FlexCol } from 'web-components/lib/components/box';
 
 const ProjectList: React.FC = () => {
-  // const theme = useTheme();
-  // const isMobile = useMediaQuery(theme.breakpoints.down('md')); used for navigating to edit
   const navigate = useNavigate();
 
   // TODO Create provider to get directly user data if logged in

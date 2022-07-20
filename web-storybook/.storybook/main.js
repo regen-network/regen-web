@@ -28,6 +28,12 @@ module.exports = {
       new TsconfigPathsPlugin({
         configFile: path.resolve(__dirname, '../../web-registry/tsconfig.json'),
       }),
+      new TsconfigPathsPlugin({
+        configFile: path.resolve(
+          __dirname,
+          '../../web-components/tsconfig.json',
+        ),
+      }),
     ];
     return config;
   },

@@ -1,2 +1,2 @@
-export * from './CreateProjectCard';
-export * from './CreateCreditClassCard';
+export { CreateProjectCard } from './CreateProjectCard';
+export { CreateCreditClassCard } from './CreateCreditClassCard';

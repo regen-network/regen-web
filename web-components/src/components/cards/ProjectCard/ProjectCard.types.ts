@@ -1,4 +1,4 @@
-import { StandardInfo } from '~/utils/format';
+import { StandardInfo } from '../../../utils/format';
 
 interface Info extends StandardInfo {
   url?: string | null;

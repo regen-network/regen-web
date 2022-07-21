@@ -1,22 +1,20 @@
-import * as React from 'react';
 import Long from 'long';
 
-import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
-// import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
-import LoginForm from 'web-components/lib/components/form/LoginForm';
-import { CreditSendForm } from 'web-components/lib/components/form/CreditSendForm';
-import { CreditRetireForm } from 'web-components/lib/components/form/CreditRetireForm';
-import { BasketPutForm } from 'web-components/lib/components/form/BasketPutForm';
-import { BasketTakeForm } from 'web-components/lib/components/form/BasketTakeForm';
-import {
-  FormValues,
-  RecipientsForm,
-} from 'web-components/lib/components/form/RecipientsForm';
+import UserProfileForm from './UserProfileForm';
+// import OrganizationProfileForm from './OrganizationProfileForm';
+import LoginForm from './LoginForm';
+import { CreditSendForm } from './CreditSendForm';
+import { CreditRetireForm } from './CreditRetireForm';
+import { BasketPutForm } from './BasketPutForm';
+import { BasketTakeForm } from './BasketTakeForm';
+import { FormValues, RecipientsForm } from './RecipientsForm';
 
 export default {
   title: 'Forms',
   component: LoginForm,
 };
+
+const MAPBOX_TOKEN = process.env.STORYBOOK_MAPBOX_TOKEN || '';
 
 const submit = async (): Promise<void> => {
   return new Promise((resolve, reject) => {
@@ -26,7 +24,7 @@ const submit = async (): Promise<void> => {
 
 export const userProfile = (): JSX.Element => (
   <UserProfileForm
-    submit={() => null}
+    submit={submit}
     initialValues={{ name: 'Name', roleTitle: 'Role title' }}
   />
 );
@@ -47,7 +45,7 @@ export const signUpForm = (): JSX.Element => (
   <LoginForm
     submit={submit}
     termsLink="https://www.regen.network/terms-service/"
-    loginFromSignup={() => null}
+    loginFromSignup={submit}
     privacyLink="https://www.regen.network/privacy-policy/"
   />
 );
@@ -66,7 +64,7 @@ export const creditSendForm = (): JSX.Element => (
     sender={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
     availableTradableAmount={1000}
     batchDenom={'C01-20190101-20201010-02'}
-    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    mapboxToken={MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
   />
@@ -74,10 +72,9 @@ export const creditSendForm = (): JSX.Element => (
 
 export const creditRetireForm = (): JSX.Element => (
   <CreditRetireForm
-    holder={'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'} // test account
     availableTradableAmount={1000}
     batchDenom={'C01-20190101-20201010-02'}
-    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    mapboxToken={MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
   />
@@ -107,7 +104,7 @@ export const basketTakeForm = (): JSX.Element => (
       exponent: 6,
     }}
     balance={9999}
-    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    mapboxToken={MAPBOX_TOKEN}
     onClose={() => null}
     onSubmit={async () => alert('submit')}
   />
@@ -116,7 +113,7 @@ export const basketTakeForm = (): JSX.Element => (
 export const creditBatchRecipientsForm = (): JSX.Element => (
   <RecipientsForm
     addressPrefix={'regen'}
-    mapboxToken={process.env.STORYBOOK_MAPBOX_TOKEN}
+    mapboxToken={MAPBOX_TOKEN}
     onSubmit={async (values: FormValues) =>
       alert('submit' + JSON.stringify(values, null, 2))
     }

@@ -16,7 +16,7 @@ import {
   queryClasses,
   queryCreditTypes,
   EcocreditQueryResponse,
-} from '../lib/ecocredit/api';
+} from 'lib/ecocredit/api';
 
 // TODO - this hook is still missing batch query functionality
 // TODO - this hook is still missing lazy query functionality

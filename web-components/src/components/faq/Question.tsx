@@ -18,7 +18,7 @@ export interface QuestionItem {
   answer: string | JSX.Element;
 }
 
-interface QuestionProps extends QuestionItem {
+export interface QuestionProps extends QuestionItem {
   first?: boolean;
   last?: boolean;
   questionId?: string;

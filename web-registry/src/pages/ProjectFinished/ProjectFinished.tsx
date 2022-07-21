@@ -11,7 +11,7 @@ import { truncateHash } from 'web-components/lib/utils/truncate';
 import { OnboardingFormTemplate } from '../../components/templates';
 import { Link } from '../../components/atoms';
 import { getHashUrl } from '../../lib/block-explorer';
-import { useCreateProjectContext } from '../../features/ecocredit/CreateProject/CreateProjectContext';
+import { useCreateProjectContext } from '../ProjectCreate';
 import { useGetProjectId } from './hooks/useGetProjectId';
 
 const ProjectFinished: React.FC = () => {

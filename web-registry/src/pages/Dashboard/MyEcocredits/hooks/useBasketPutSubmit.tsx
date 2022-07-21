@@ -4,10 +4,10 @@ import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/
 import type { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import type { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
 import type { Item } from 'web-components/lib/components/modal/TxModal';
-import type { BasketTokens } from 'hooks/useBasketTokens';
-import type { SignAndBroadcastType } from 'hooks/useMsgClient';
-import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-import type { UseStateSetter } from 'types/react/use-state';
+import type { BasketTokens } from '../../../../hooks/useBasketTokens';
+import type { SignAndBroadcastType } from '../../../../hooks/useMsgClient';
+import type { BatchInfoWithBalance } from '../../../../types/ledger/ecocredit';
+import type { useStateSetter } from '../../../../types/react/use-state';
 
 type Props = {
   accountAddress?: string;
@@ -17,10 +17,10 @@ type Props = {
   credits: BatchInfoWithBalance[];
   basketTakeTitle: string;
   signAndBroadcast: SignAndBroadcastType;
-  setBasketPutOpen: UseStateSetter<number>;
-  setBasketTakeTokens: UseStateSetter<BasketTokens | undefined>;
-  setCardItems: UseStateSetter<Item[] | undefined>;
-  setTxModalTitle: UseStateSetter<string | undefined>;
+  setBasketPutOpen: useStateSetter<number>;
+  setBasketTakeTokens: useStateSetter<BasketTokens | undefined>;
+  setCardItems: useStateSetter<Item[] | undefined>;
+  setTxModalTitle: useStateSetter<string | undefined>;
 };
 
 type ReturnType = (values: BasketPutFormValues) => Promise<void>;

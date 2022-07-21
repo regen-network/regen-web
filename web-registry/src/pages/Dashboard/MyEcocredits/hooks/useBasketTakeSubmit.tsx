@@ -5,18 +5,18 @@ import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket
 import type { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm';
 import type { Item } from 'web-components/lib/components/modal/TxModal';
 
-import type { SignAndBroadcastType } from 'hooks/useMsgClient';
-import type { BasketTokens } from 'hooks/useBasketTokens';
-import type { UseStateSetter } from 'types/react/use-state';
+import type { SignAndBroadcastType } from '../../../../hooks/useMsgClient';
+import type { BasketTokens } from '../../../../hooks/useBasketTokens';
+import type { useStateSetter } from '../../../../types/react/use-state';
 
 type Props = {
   accountAddress?: string;
   baskets?: QueryBasketsResponse;
   basketTakeTitle: string;
   signAndBroadcast: SignAndBroadcastType;
-  setBasketTakeTokens: UseStateSetter<BasketTokens | undefined>;
-  setCardItems: UseStateSetter<Item[] | undefined>;
-  setTxModalTitle: UseStateSetter<string | undefined>;
+  setBasketTakeTokens: useStateSetter<BasketTokens | undefined>;
+  setCardItems: useStateSetter<Item[] | undefined>;
+  setTxModalTitle: useStateSetter<string | undefined>;
 };
 
 type ReturnType = (values: MsgTakeValues) => Promise<void>;

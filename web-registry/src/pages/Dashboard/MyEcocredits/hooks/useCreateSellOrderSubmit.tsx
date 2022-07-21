@@ -4,7 +4,7 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 
-import { UseStateSetter } from 'types/react/use-state';
+import { useStateSetter } from '../../../../types/react/use-state';
 import {
   CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_HEADER,
@@ -12,11 +12,11 @@ import {
 import { Box } from '@mui/material';
 
 type Props = {
-  setCardItems: UseStateSetter<Item[] | undefined>;
-  setTxModalTitle: UseStateSetter<string | undefined>;
-  setTxModalHeader: UseStateSetter<string | undefined>;
-  setTxButtonTitle: UseStateSetter<string | undefined>;
-  setSellOrderCreateOpen: UseStateSetter<number>;
+  setCardItems: useStateSetter<Item[] | undefined>;
+  setTxModalTitle: useStateSetter<string | undefined>;
+  setTxModalHeader: useStateSetter<string | undefined>;
+  setTxButtonTitle: useStateSetter<string | undefined>;
+  setSellOrderCreateOpen: useStateSetter<number>;
 };
 
 type ReturnType = (values: CreateSellOrderFormValues) => Promise<void>;

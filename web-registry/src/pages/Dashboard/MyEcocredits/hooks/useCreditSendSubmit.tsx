@@ -2,9 +2,9 @@ import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1alph
 import { useCallback } from 'react';
 import type { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
 import type { Item } from 'web-components/lib/components/modal/TxModal';
-import type { SignAndBroadcastType } from 'hooks/useMsgClient';
-import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-import type { UseStateSetter } from 'types/react/use-state';
+import type { SignAndBroadcastType } from '../../../../hooks/useMsgClient';
+import type { BatchInfoWithBalance } from '../../../../types/ledger/ecocredit';
+import type { useStateSetter } from '../../../../types/react/use-state';
 
 type Props = {
   accountAddress?: string;
@@ -12,9 +12,9 @@ type Props = {
   creditSendOpen: number;
   creditSendTitle: string;
   signAndBroadcast: SignAndBroadcastType;
-  setCreditSendOpen: UseStateSetter<number>;
-  setCardItems: UseStateSetter<Item[] | undefined>;
-  setTxModalTitle: UseStateSetter<string | undefined>;
+  setCreditSendOpen: useStateSetter<number>;
+  setCardItems: useStateSetter<Item[] | undefined>;
+  setTxModalTitle: useStateSetter<string | undefined>;
 };
 
 type ReturnType = (values: CreditSendFormValues) => Promise<void>;

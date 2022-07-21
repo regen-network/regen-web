@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
 import type { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-import type { UseStateSetter } from 'types/react/use-state';
+import type { BatchInfoWithBalance } from '../../../../types/ledger/ecocredit';
+import type { useStateSetter } from '../../../../types/react/use-state';
 
 type Props = {
   basketsWithClasses: (QueryBasketResponse | undefined)[];
   credits: BatchInfoWithBalance[];
-  setCreditBaskets: UseStateSetter<(QueryBasketResponse | undefined)[][]>;
+  setCreditBaskets: useStateSetter<(QueryBasketResponse | undefined)[][]>;
 };
 
 type ReturnType = void;

@@ -1,4 +1,4 @@
-import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { BatchInfoWithBalance } from '../../../types/ledger/ecocredit';
 
 type GetOtherSellOrderBatchDenomOptionsProps = {
   credits: BatchInfoWithBalance[];

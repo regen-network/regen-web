@@ -2,9 +2,9 @@ import { MsgRetire } from '@regen-network/api/lib/generated/regen/ecocredit/v1al
 import { useCallback } from 'react';
 import type { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
 import type { Item } from 'web-components/lib/components/modal/TxModal';
-import type { SignAndBroadcastType } from 'hooks/useMsgClient';
-import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-import type { UseStateSetter } from 'types/react/use-state';
+import type { SignAndBroadcastType } from '../../../../hooks/useMsgClient';
+import type { BatchInfoWithBalance } from '../../../../types/ledger/ecocredit';
+import type { useStateSetter } from '../../../../types/react/use-state';
 
 type Props = {
   accountAddress?: string;
@@ -12,9 +12,9 @@ type Props = {
   creditRetireOpen: number;
   creditRetireTitle: string;
   signAndBroadcast: SignAndBroadcastType;
-  setCreditRetireOpen: UseStateSetter<number>;
-  setCardItems: UseStateSetter<Item[] | undefined>;
-  setTxModalTitle: UseStateSetter<string | undefined>;
+  setCreditRetireOpen: useStateSetter<number>;
+  setCardItems: useStateSetter<Item[] | undefined>;
+  setTxModalTitle: useStateSetter<string | undefined>;
 };
 
 type ReturnType = (values: CreditRetireFormValues) => Promise<void>;

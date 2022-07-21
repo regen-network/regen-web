@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
-import type { BasketTokens } from 'hooks/useBasketTokens';
-import type { UseStateSetter } from 'types/react/use-state';
+import type { BasketTokens } from '../../../../hooks/useBasketTokens';
+import type { useStateSetter } from '../../../../types/react/use-state';
 
 type Props = {
   basketTokens: BasketTokens[];
   basketsWithClasses: (QueryBasketResponse | undefined)[];
-  setBasketTakeTokens: UseStateSetter<BasketTokens | undefined>;
+  setBasketTakeTokens: useStateSetter<BasketTokens | undefined>;
 };
 
 type ReturnType = (rowIndex: number) => void;

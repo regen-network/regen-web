@@ -93,8 +93,7 @@ export function MultiStepProvider<T extends object>({
   // So initially, data (from storage) is `undefined` or
   // previously persisted data.
   // If undefined, then we return the initialValues
-  const { data, saveData, removeData } =
-    useLocalStorage(key)<FormData<T>>(formId);
+  const { data, saveData, removeData } = useLocalStorage<FormData<T>>(formId);
 
   const maxAllowedStep = data?.maxAllowedStep || 0;
 

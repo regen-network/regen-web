@@ -55,19 +55,13 @@ export const ProjectReview: React.FC = () => {
     setTxModalTitle('MsgCreateProject Error');
   };
 
-  const handleTxDelivered = (deliverTxResponse: DeliverTxResponse): void => {
-    setDeliverTxResponse(deliverTxResponse);
+  const handleTxDelivered = (_deliverTxResponse: DeliverTxResponse): void => {
+    setDeliverTxResponse(_deliverTxResponse);
     navigate(`${editPath}/finished`);
   };
 
-  const {
-    signAndBroadcast,
-    deliverTxResponse,
-    wallet,
-    error,
-    setError,
-    // setDeliverTxResponse,
-  } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+  const { signAndBroadcast, deliverTxResponse, wallet, error, setError } =
+    useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const { projectCreateSubmit } = useProjectCreateSubmit({ signAndBroadcast });
   const project = data?.projectById;
   const editPath = `/project-pages/${projectId}`;

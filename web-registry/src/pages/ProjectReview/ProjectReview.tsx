@@ -11,6 +11,7 @@ import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
+import { VCSMetadata } from './ProjectReview.VCSMetadata';
 import { OnboardingFormTemplate } from '../../components/templates';
 import { useProjectByIdQuery } from '../../generated/graphql';
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
@@ -23,7 +24,6 @@ import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { Link } from '../../components/atoms';
 import { getHashUrl } from '../../lib/block-explorer';
-import { VCSMetadata } from './ProjectReview.VCSMetadata';
 
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();

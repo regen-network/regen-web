@@ -24,6 +24,9 @@ import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
 import { QuestionItem } from '../../../lib/components/faq/Question';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
+import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
+import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
+import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
 
 export default {
   title: 'Cards',
@@ -320,4 +323,20 @@ export const resourcesCard = (): JSX.Element => (
     image={{ publicURL: '/coorong.png' }}
     updated="July 4, 1776"
   />
+);
+
+export const reviewCard = (): JSX.Element => (
+  <ReviewCard title="Review Card" onEditClick={() => {}}>
+    <ItemDisplay name="Name A">Description A</ItemDisplay>
+    <ItemDisplay name="Name B">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+      amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua.
+    </ItemDisplay>
+    <ItemDisplay name="URL">
+      <a href="http://www.url.com/">www.url.com</a>
+    </ItemDisplay>
+    <Photo src="/coorong.png" />
+  </ReviewCard>
 );

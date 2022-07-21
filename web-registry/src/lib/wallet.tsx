@@ -210,99 +210,6 @@ export const WalletProvider: React.FC = ({ children }) => {
     }
   }, []);
 
-  /**
-   * Sign a transaction for sending tokens to a reciptient
-   */
-  // TODO Remove, we don't need this anymore, we should use @regen-network/api instead
-  const signSend = async (
-    amount: number,
-    recipient: string,
-  ): Promise<Uint8Array> => {
-    amount *= 1000000;
-    amount = Math.floor(amount);
-
-    const client = await getClient();
-    const fee = {
-      amount: [
-        {
-          denom: 'uregen',
-          amount: '100', //TODO: what should fee and gas be?
-        },
-      ],
-      gas: '200000',
-    };
-
-    const msgSend = {
-      fromAddress: wallet.address,
-      toAddress: recipient,
-      amount: [
-        {
-          denom: 'uregen',
-          amount: amount.toString(),
-        },
-      ],
-    };
-    const msgAny = {
-      typeUrl: '/cosmos.bank.v1beta1.MsgSend',
-      value: msgSend,
-    };
-
-    try {
-      const txRaw = await client.sign(wallet.address, [msgAny], fee, '');
-      const txBytes = TxRaw.encode(txRaw).finish();
-      return txBytes;
-    } catch (err) {
-      alert(`Client sign error: ${err}`);
-      return Promise.reject();
-    }
-  };
-
-  /**
-   * Broadcast a signed transaction and wait for transaction hash
-   */
-  // TODO Remove, we don't need this anymore, we should use @regen-network/api instead
-  const broadcast = async (signedTxBytes: Uint8Array): Promise<string> => {
-    const client = await getClient();
-    const result = await client.broadcastTx(signedTxBytes);
-    setTxResult(result);
-
-    return result.transactionHash;
-  };
-
-  // TODO Remove, we don't need this anymore, we should use @regen-network/api instead
-  const getClient = async (): Promise<SigningStargateClient> => {
-    if (chainId && ledgerRPCUri) {
-      try {
-        await window?.keplr?.enable(chainId);
-        const offlineSigner =
-          !!window.getOfflineSignerAuto &&
-          (await window.getOfflineSignerAuto(chainId));
-
-        if (offlineSigner) {
-          if (!wallet.address) {
-            const [senderAccount] = await offlineSigner.getAccounts();
-            setWallet({
-              address: senderAccount.address,
-              shortAddress: `${senderAccount.address.substring(0, 10)}...`,
-            });
-          }
-
-          const client = await SigningStargateClient.connectWithSigner(
-            ledgerRPCUri,
-            offlineSigner,
-            defaultClientOptions,
-          );
-
-          return client;
-        }
-      } catch (err) {
-        alert(`Wallet error: ${err}`);
-        return Promise.reject();
-      }
-    }
-    return Promise.reject('No chain id or endpoint provided');
-  };
-
   return (
     <WalletContext.Provider
       value={{
@@ -314,8 +221,6 @@ export const WalletProvider: React.FC = ({ children }) => {
         error,
 
         // TODO Remove
-        signSend,
-        broadcast,
         txResult,
         setTxResult,
       }}

@@ -80,12 +80,13 @@ export const ProjectReview: React.FC = () => {
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
 
   const submit = () => {
+    const vcsProjectId = metadata?.['regen:videoURL']?.['@value'];
     projectCreateSubmit({
       classId: creditClassId || '',
       admin: wallet?.address || '',
       metadata,
       jurisdiction,
-      referenceId: isVCS ? `VCS-${metadata?.['regen:vcsProjectId']}` : '', //TODO
+      referenceId: isVCS && vcsProjectId ? `VCS-${vcsProjectId}` : '', //TODO
     });
   };
 

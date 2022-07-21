@@ -11,7 +11,7 @@ type Props = {
 const OnBoardingCard: React.FC<Props> = ({ children, className, sx = [] }) => {
   return (
     <Card
-      borderColor="grey.100"
+      borderColor="info.light"
       className={className}
       sx={[
         {

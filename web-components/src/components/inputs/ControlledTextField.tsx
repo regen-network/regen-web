@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { Typography, InputProps, InputAdornment, SxProps } from '@mui/material';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { InputProps, InputAdornment, SxProps } from '@mui/material';
 import { FieldProps } from 'formik';
 
 import FieldFormControl, { DefaultStyleProps } from './FieldFormControl';
@@ -71,7 +71,7 @@ export default function ControlledTextField({
             onBlur={({ target: { value } }) => handleBlur(value)}
             onChange={e => handleFieldChange(e, handleChange)}
             value={field.value}
-            disabled={form.isSubmitting}
+            disabled={!!inputProps.disabled || form.isSubmitting}
             startAdornment={
               startAdornment ? (
                 <InputAdornment position="start">

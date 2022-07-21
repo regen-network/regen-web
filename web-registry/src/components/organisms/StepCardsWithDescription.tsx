@@ -8,7 +8,7 @@ import {
   StepCardFieldsFragment,
   Maybe,
   Scalars,
-} from '../../generated/sanity-graphql';
+} from 'generated/sanity-graphql';
 
 const StepCardsWithDescription: React.FC<{
   descriptionRaw?: Maybe<Scalars['JSON']>;
@@ -36,6 +36,7 @@ const StepCardsWithDescription: React.FC<{
       <Grid container justifyContent="center" sx={{ maxWidth: 752 }}>
         {stepCards?.map((card, i) => (
           <WrappedStepCard
+            key={i}
             stepNumber={i}
             stepCard={card}
             openModal={openModal}

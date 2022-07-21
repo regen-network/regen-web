@@ -1,9 +1,6 @@
-import * as React from 'react';
-import TimelineItem from 'web-components/lib/components/timeline/TimelineItem';
-import Timeline, { Event } from 'web-components/lib/components/timeline';
-import NewTimeline, {
-  Item,
-} from 'web-components/lib/components/timeline/NewTimeline';
+import TimelineItem from './TimelineItem';
+import Timeline, { Event } from '.';
+import NewTimeline, { Item } from './NewTimeline';
 import theme from '../../theme/muiTheme';
 
 export default {
@@ -44,13 +41,16 @@ const events: Event[] = [
   },
 ];
 
+const voidFunc = (): void => void null;
+
 export const timeline = (): JSX.Element => (
-  <Timeline events={events} completedItemIndex={1} />
+  <Timeline onViewOnLedger={voidFunc} events={events} completedItemIndex={1} />
 );
 export const timelineItem = (): JSX.Element => (
   <TimelineItem
     date={events[0].date as string}
     summary={events[0].summary}
+    onViewOnLedger={voidFunc}
     // modalData={{ creditClass: 1, numberOfCredits: 1 }}
     description={events[0].description}
     circleColor={theme.palette.secondary.main}

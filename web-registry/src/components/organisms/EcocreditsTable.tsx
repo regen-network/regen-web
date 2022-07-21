@@ -38,6 +38,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
     <ActionsTable
       tableLabel="ecocredits table"
       renderActionButtons={renderActionButtons}
+      /* eslint-disable react/jsx-key */
       headerRows={[
         <Box
           sx={{
@@ -74,6 +75,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
           row.project_location,
         ];
       })}
+      /* eslint-enable react/jsx-key */
     />
   );
 };

@@ -135,6 +135,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
         </Box>
       ))}
       rows={batches.map(batch =>
+        /* eslint-disable react/jsx-key */
         [
           <Link
             href={getHashUrl(batch.txhash)}
@@ -172,6 +173,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           );
         }),
       )}
+      /* eslint-enable react/jsx-key */
     />
   );
 

@@ -1,5 +1,4 @@
-import * as React from 'react';
-import Document from 'web-components/lib/components/document';
+import Document from './';
 
 export default {
   title: 'Document',

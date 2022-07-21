@@ -46,7 +46,7 @@ const Media = (): JSX.Element => {
   });
 
   function getInitialFormValues(): MediaValues {
-    let values: MediaValues = {};
+    const values: MediaValues = {};
     const metadata = project?.metadata || {};
     values['regen:previewPhoto'] = getURLInitialValue(
       metadata['regen:previewPhoto'],

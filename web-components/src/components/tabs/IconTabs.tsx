@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Tabs, { TabsProps } from '@mui/material/Tabs';
 import { styled } from '@mui/material';
-import { TabPanel } from './TabPanel';
 import { IconTab, IconTabProps } from './IconTab';
 import { a11yProps } from './';
+import { TabPanel } from './TabPanel';
 
 interface IconTabsProps {
   tabs: IconTabProps[];
@@ -41,14 +41,16 @@ const IconTabs: React.FC<IconTabsProps> = ({ tabs }) => {
           ))}
         </StyledTabs>
       </div>
-      {tabs.map(
-        (tab, index) =>
-          value === index && (
-            <TabPanel value={value} index={index}>
-              {tab.content}
-            </TabPanel>
-          ),
-      )}
+      {tabs.map((tab, index) => (
+        <TabPanel
+          key={index}
+          value={value}
+          index={index}
+          hidden={tab.hidden || value !== index}
+        >
+          {tab.content}
+        </TabPanel>
+      ))}
     </div>
   );
 };

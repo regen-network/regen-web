@@ -7,7 +7,6 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 import ReadMore from 'web-components/lib/components/read-more';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import { truncate } from 'web-components/lib/utils/truncate';
 
 import { Link } from '../../components/atoms';
 import {
@@ -15,13 +14,13 @@ import {
   LineItemLabelAbove,
 } from '../../components/molecules';
 import { CreditBatches, MoreProjectsSection } from '../../components/organisms';
-import { getAccountUrl } from '../../lib/block-explorer';
 import { ClassInfo } from '../../types/ledger/ecocredit';
 import { CreditClassByOnChainIdQuery } from '../../generated/graphql';
 import {
   CreditClassMetadataLD,
   ApprovedMethodologies,
 } from '../../generated/json-ld';
+import { AccountLink } from '../../components/atoms/AccountLink';
 
 interface CreditDetailsProps {
   dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
@@ -292,19 +291,10 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 <Label size="xs" color="primary.contrastText" mb={3}>
                   admin
                 </Label>
-                <Link
+                <AccountLink
                   className={styles.link}
-                  target="_blank"
-                  href={
-                    onChainClass.admin
-                      ? getAccountUrl(onChainClass.admin)
-                      : getAccountUrl(onChainClass?.designer)
-                  }
-                >
-                  {onChainClass.admin
-                    ? truncate(onChainClass.admin)
-                    : truncate(onChainClass?.designer)}
-                </Link>
+                  address={onChainClass.admin || onChainClass.designer || ''}
+                />
               </div>
               <div className={styles.sidebarItemMargin}>
                 <Label size="xs" color="primary.contrastText" mb={3}>
@@ -312,14 +302,11 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 </Label>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   {onChainClass?.issuers?.map((issuer: string) => (
-                    <Link
-                      className={styles.link}
-                      href={getAccountUrl(issuer)}
-                      target="_blank"
+                    <AccountLink
                       key={issuer}
-                    >
-                      {truncate(issuer)}
-                    </Link>
+                      className={styles.link}
+                      address={issuer}
+                    />
                   ))}
                 </Box>
               </div>

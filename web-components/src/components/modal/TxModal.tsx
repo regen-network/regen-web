@@ -78,7 +78,7 @@ export const CardItem: React.FC<CardItemProps> = ({
           <LinkComponent
             sx={{ color: 'secondary.main' }}
             href={value.url}
-            target="_blank"
+            target={value.url.startsWith('/') ? '_self' : '_blank'}
           >
             {value.name}
           </LinkComponent>

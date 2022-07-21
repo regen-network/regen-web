@@ -58,6 +58,7 @@ const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
 const ProjectEdit = lazy(() => import('./pages/ProjectEdit'));
 const Activity = lazy(() => import('./pages/Activity'));
 const CreateBatch = lazy(() => import('./pages/CreateBatch'));
+const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 
 export const history = createBrowserHistory();
 
@@ -233,6 +234,9 @@ const App: React.FC = (): JSX.Element => {
               element={<CreditClassDetails />}
             />
             <Route path="stats/activity" element={<Activity />} />
+            <Route>
+              <Route path="storefront" element={<Storefront />} />
+            </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

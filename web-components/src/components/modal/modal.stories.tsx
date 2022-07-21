@@ -13,6 +13,7 @@ import { CreditRetireModal } from 'web-components/lib/components/modal/CreditRet
 import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
 import { BasketTakeModal } from 'web-components/lib/components/modal/BasketTakeModal';
 import { CreateSellOrderModal } from 'web-components/src/components/modal/CreateSellOrderModal';
+import { ConfirmModal } from './ConfirmModal';
 
 export default {
   title: 'Modal',
@@ -197,6 +198,25 @@ export const cropRoundImageModal = (): JSX.Element => (
 );
 export const processingModal = (): JSX.Element => (
   <ProcessingModal open={true} onClose={() => {}} />
+);
+export const confirmModal = (): JSX.Element => (
+  <ConfirmModal
+    open={true}
+    onClose={() => {}}
+    linkComponent={Link}
+    onConfirm={() => alert('confirmed!')}
+    onConfirmTitle="Yes, cancel sell order"
+    onCancelTitle="WHOOPS, EXIT"
+    title="Are you sure would you like to cancel this sell order?"
+    cardItems={[
+      { label: 'sell order id:', value: { name: '233' } },
+      { label: 'quantity:', value: { name: 1000 } },
+      {
+        label: 'batch denom:',
+        value: { name: 'C01-20190101-20201010-003', url: '/' },
+      },
+    ]}
+  />
 );
 export const txSuccessfulModal = (): JSX.Element => (
   <TxSuccessfulModal

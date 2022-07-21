@@ -261,29 +261,6 @@ export enum AccountsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC'
 }
 
-/** All input for the `addAddrToAccount` mutation. */
-export type AddAddrToAccountInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  addr?: Maybe<Scalars['String']>;
-  vPartyType?: Maybe<PartyType>;
-};
-
-/** The output of our `addAddrToAccount` mutation. */
-export type AddAddrToAccountPayload = {
-  __typename?: 'AddAddrToAccountPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
 export type Address = Node & {
   __typename?: 'Address';
   /** A globally unique identifier. Can be used in various places throughout the system to identify this single value. */
@@ -6123,50 +6100,6 @@ export type FlywaySchemaHistoryPatch = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
-/** All input for the `getCurrentAccount` mutation. */
-export type GetCurrentAccountInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `getCurrentAccount` mutation. */
-export type GetCurrentAccountPayload = {
-  __typename?: 'GetCurrentAccountPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  accountId?: Maybe<Scalars['UUID']>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
-/** All input for the `getCurrentAddrs` mutation. */
-export type GetCurrentAddrsInput = {
-  /**
-   * An arbitrary string value with no semantic meaning. Will be included in the
-   * payload verbatim. May be used to track mutations by the client.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-/** The output of our `getCurrentAddrs` mutation. */
-export type GetCurrentAddrsPayload = {
-  __typename?: 'GetCurrentAddrsPayload';
-  /**
-   * The exact same `clientMutationId` that was provided in the mutation input,
-   * unchanged and unused. May be used by a client to track mutations.
-   */
-  clientMutationId?: Maybe<Scalars['String']>;
-  addrs?: Maybe<Array<Maybe<Scalars['String']>>>;
-  /** Our root query field type. Allows us to run any query from our mutation payload. */
-  query?: Maybe<Query>;
-};
-
 /** All input for the `getUserFirstOrganization` mutation. */
 export type GetUserFirstOrganizationInput = {
   /**
@@ -7075,11 +7008,8 @@ export type Mutation = {
   deleteWalletById?: Maybe<DeleteWalletPayload>;
   /** Deletes a single `Wallet` using a unique key. */
   deleteWalletByAddr?: Maybe<DeleteWalletPayload>;
-  addAddrToAccount?: Maybe<AddAddrToAccountPayload>;
   createUserOrganization?: Maybe<CreateUserOrganizationPayload>;
   createUserOrganizationIfNeeded?: Maybe<CreateUserOrganizationIfNeededPayload>;
-  getCurrentAccount?: Maybe<GetCurrentAccountPayload>;
-  getCurrentAddrs?: Maybe<GetCurrentAddrsPayload>;
   getUserFirstOrganization?: Maybe<GetUserFirstOrganizationPayload>;
   getWalletContactEmail?: Maybe<GetWalletContactEmailPayload>;
   isAdmin?: Maybe<IsAdminPayload>;
@@ -8031,12 +7961,6 @@ export type MutationDeleteWalletByAddrArgs = {
 
 
 /** The root mutation type which contains root level fields which mutate data. */
-export type MutationAddAddrToAccountArgs = {
-  input: AddAddrToAccountInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateUserOrganizationArgs = {
   input: CreateUserOrganizationInput;
 };
@@ -8045,18 +7969,6 @@ export type MutationCreateUserOrganizationArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationCreateUserOrganizationIfNeededArgs = {
   input: CreateUserOrganizationIfNeededInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationGetCurrentAccountArgs = {
-  input: GetCurrentAccountInput;
-};
-
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationGetCurrentAddrsArgs = {
-  input: GetCurrentAddrsInput;
 };
 
 
@@ -20433,10 +20345,10 @@ export type AllProjectsQuery = (
     { __typename?: 'ProjectsConnection' }
     & { nodes: Array<Maybe<(
       { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'metadata'>
+      & Pick<Project, 'id' | 'handle' | 'metadata'>
       & { creditClassByCreditClassId?: Maybe<(
         { __typename?: 'CreditClass' }
-        & Pick<CreditClass, 'id'>
+        & Pick<CreditClass, 'id' | 'onChainId'>
         & { methodologyByMethodologyId?: Maybe<(
           { __typename?: 'Methodology' }
           & Pick<Methodology, 'id'>
@@ -20451,7 +20363,7 @@ export type AllProjectsQuery = (
           { __typename?: 'CreditClassVersionsConnection' }
           & { nodes: Array<Maybe<(
             { __typename?: 'CreditClassVersion' }
-            & Pick<CreditClassVersion, 'id' | 'createdAt' | 'name' | 'version'>
+            & Pick<CreditClassVersion, 'id' | 'createdAt' | 'name' | 'version' | 'metadata'>
           )>> }
         ) }
       )> }
@@ -21678,9 +21590,11 @@ export const AllProjectsDocument = gql`
   allProjects {
     nodes {
       id
+      handle
       metadata
       creditClassByCreditClassId {
         id
+        onChainId
         methodologyByMethodologyId {
           id
           methodologyVersionsById {
@@ -21698,6 +21612,7 @@ export const AllProjectsDocument = gql`
             createdAt
             name
             version
+            metadata
           }
         }
       }

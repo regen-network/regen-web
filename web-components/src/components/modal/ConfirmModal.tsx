@@ -1,14 +1,13 @@
 import React from 'react';
-import { Theme, Box } from '@mui/material';
+import { Theme, Box, Button } from '@mui/material';
 import { SxProps } from '@mui/system';
 import { makeStyles } from '@mui/styles';
 
 import { Label, Subtitle, Title } from '../typography';
-import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
-import Modal, { RegenModalProps } from '../modal';
+import Modal, { RegenModalProps } from '.';
 import { LinkItem } from '../footer/footer-new';
-import { truncate } from '../../utils/truncate';
+import ContainedButton from '../buttons/ContainedButton';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,14 +40,13 @@ interface LinkProps extends LinkItem {
 
 type LinkComponentProp = React.FC<LinkProps>;
 
-export interface TxModalProps extends RegenModalProps {
-  onButtonClick: () => void;
-  cardTitle: string;
-  buttonTitle?: string;
+export interface ConfirmModalProps extends RegenModalProps {
+  onConfirm: () => void;
+  cardTitle?: string;
+  onCancelTitle?: string;
+  onConfirmTitle?: string;
   cardItems?: Item[];
   linkComponent: LinkComponentProp;
-  txHash: string;
-  txHashUrl: string;
   icon?: JSX.Element;
   title?: string;
 }
@@ -64,7 +62,7 @@ export const CardItem: React.FC<CardItemProps> = ({
   linkComponent: LinkComponent,
 }) => {
   return (
-    <Box sx={{ pt: 5 }}>
+    <Box sx={{ pt: 5, ':first-child': { pt: 0 } }}>
       <Label size="sm" sx={{ pb: [3, 2.25], color }}>
         {label}
       </Label>
@@ -87,17 +85,16 @@ export const CardItem: React.FC<CardItemProps> = ({
   );
 };
 
-const TxModal: React.FC<TxModalProps> = ({
+const ConfirmModal: React.FC<ConfirmModalProps> = ({
   icon,
   title,
-  buttonTitle = 'view your portfolio',
+  onCancelTitle,
+  onConfirmTitle,
   open,
   onClose,
-  onButtonClick,
+  onConfirm,
   cardTitle,
   cardItems,
-  txHash,
-  txHashUrl,
   linkComponent,
 }) => {
   const styles = useStyles();
@@ -128,24 +125,33 @@ const TxModal: React.FC<TxModalProps> = ({
           mb: { sm: 10, xs: 7.5 },
         }}
       >
-        <Title variant="h5">{cardTitle}</Title>
+        {cardTitle && <Title variant="h5">{cardTitle}</Title>}
         {cardItems?.map((item, i) => (
           <CardItem {...item} linkComponent={linkComponent} key={i} />
         ))}
-        <CardItem
-          label="hash"
-          value={{ name: truncate(txHash), url: txHashUrl }}
-          linkComponent={linkComponent}
-        />
       </Card>
-      <OutlinedButton
-        sx={{ fontSize: { xs: 12, sm: 18 } }}
-        onClick={onButtonClick}
-      >
-        {buttonTitle}
-      </OutlinedButton>
+      <Box sx={{ display: 'flex' }}>
+        <Button
+          onClick={onClose}
+          variant="text"
+          size="small"
+          sx={{
+            border: 0,
+            color: 'info.main',
+          }}
+        >
+          {onCancelTitle}
+        </Button>
+        <ContainedButton
+          colorVariant="gradientBlueGreen"
+          sx={{ fontSize: { xs: 12, sm: 18 } }}
+          onClick={onConfirm}
+        >
+          {onConfirmTitle}
+        </ContainedButton>
+      </Box>
     </Modal>
   );
 };
 
-export { TxModal };
+export { ConfirmModal };

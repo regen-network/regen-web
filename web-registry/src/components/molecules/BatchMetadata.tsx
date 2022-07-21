@@ -21,8 +21,9 @@ export const BatchMetadata = ({
       <MetaDetail label="additional certifications">
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {additionalCertifications && additionalCertifications?.length > 0
-            ? additionalCertifications?.map(cert => (
+            ? additionalCertifications?.map((cert, i) => (
                 <LinkOrDash
+                  key={i}
                   href={cert?.['schema:url']?.['@value']}
                   label={cert?.['schema:name']}
                 />

@@ -26,6 +26,9 @@ const CertificatePage = lazy(() => import('./pages/Certificate'));
 const ChooseCreditClassPage = lazy(
   () => import('./pages/ChooseCreditClassPage'),
 );
+const CreateCreditClassInfo = lazy(
+  () => import('./pages/CreateCreditClassInfo'),
+);
 const CreateCreditClass = lazy(() => import('./pages/CreateCreditClass'));
 const CreateMethodology = lazy(() => import('./pages/CreateMethodology'));
 const CreditClassDetails = lazy(() => import('./pages/CreditClassDetails'));
@@ -97,7 +100,11 @@ const App: React.FC = (): JSX.Element => {
             <Route path="projects/wilmot/admin" element={<Seller />} />
             <Route path="buyers" element={<BuyersPage />} />
             <Route path="create-methodology" element={<CreateMethodology />} />
-            <Route path="create-credit-class" element={<CreateCreditClass />} />
+            <Route
+              // TODO: thould this route be moved to /credit-classes?
+              path="create-credit-class"
+              element={<CreateCreditClassInfo />}
+            />
             <Route path="land-stewards" element={<LandStewards />} />
             <Route
               path="methodology-review-process"
@@ -228,10 +235,19 @@ const App: React.FC = (): JSX.Element => {
               path="methodologies/:methodologyId"
               element={<MethodologyDetails />}
             />
-            <Route
+            <Route path="credit-classes">
+              {/* TODO: Index route is same as /create-credit-class for now */}
+              <Route index element={<CreateCreditClassInfo />} />
+              <Route path=":creditClassId" element={<CreditClassDetails />} />
+              <Route
+                path="create"
+                element={<KeplrRoute component={CreateCreditClass} />}
+              />
+            </Route>
+            {/* <Route
               path="credit-classes/:creditClassId/*"
               element={<CreditClassDetails />}
-            />
+            /> */}
             <Route path="stats/activity" element={<Activity />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

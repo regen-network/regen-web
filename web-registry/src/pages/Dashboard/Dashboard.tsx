@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useTheme } from '@mui/styles';
-import { Box } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 import { uniq } from 'lodash';
 
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
@@ -8,13 +8,34 @@ import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPage
 import Section from 'web-components/lib/components/section';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
+import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
+import { Spinner } from 'web-components/lib/components/icons/Spinner';
+import { Center, Flex } from 'web-components/lib/components/box';
 
-import { MyProjects } from '../../components/organisms';
-import useQueryListClasses from '../../hooks/useQueryListClasses';
-import { useWallet } from '../../lib/wallet';
-import MyEcocredits from '../MyEcocredits';
+import { useQueryListClasses } from 'hooks';
+import { useWallet } from 'lib/wallet';
 
-const Dashboard: React.FC = () => {
+const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
+const MyProjects = React.lazy(() => import('./MyProjects'));
+const MyCreditClasses = React.lazy(() => import('./MyCreditClasses'));
+
+const LazyLoad: React.FC = ({ children }) => (
+  <Suspense
+    fallback={
+      <Center>
+        <Spinner />
+      </Center>
+    }
+  >
+    {children}
+  </Suspense>
+);
+
+const sxs = {
+  padTop: { pt: 10, pb: [21.25, 28.28] } as SxProps,
+};
+
+const Dashboard = (): JSX.Element => {
   const theme = useTheme();
   const [isIssuer, setIsIssuer] = useState(false);
   const onChainClasses = useQueryListClasses();
@@ -25,27 +46,53 @@ const Dashboard: React.FC = () => {
     const isAnIssuer =
       !!wallet?.address && issuers.indexOf(wallet.address) > -1;
     setIsIssuer(isAnIssuer);
-  }, [onChainClasses?.classes, wallet?.address]);
+  }, [onChainClasses, wallet]);
 
+  // TODO: We should handle these as nested routes, converting this to an
+  // <Outlet> layout component if we think we'll need to route to a page
+  // directly. See:
+  // https://reactrouter.com/docs/en/v6/getting-started/overview#nested-routes
   const tabs: IconTabProps[] = [
     {
       label: 'Portfolio',
       icon: (
         <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
       ),
-      content: <MyEcocredits />,
+      content: (
+        <LazyLoad>
+          <MyEcocredits />
+        </LazyLoad>
+      ),
     },
     {
       label: 'Projects',
       icon: <ProjectPageIcon />,
-      content: <MyProjects />,
       hidden: !isIssuer,
+      content: (
+        <LazyLoad>
+          <Flex sx={sxs.padTop}>
+            <MyProjects />
+          </Flex>
+        </LazyLoad>
+      ),
+    },
+    {
+      label: 'Credit Classes',
+      icon: <CreditClassIcon sx={{ opacity: '70%' }} />,
+      hidden: !isIssuer,
+      content: (
+        <LazyLoad>
+          <Flex sx={sxs.padTop}>
+            <MyCreditClasses />
+          </Flex>
+        </LazyLoad>
+      ),
     },
   ];
 
   return (
     <Box sx={{ bgcolor: 'grey.50' }}>
-      <Section>
+      <Section sx={{ root: { pb: [21.25, 28.28] } }}>
         <IconTabs aria-label="dashboard tabs" tabs={tabs} />
       </Section>
     </Box>

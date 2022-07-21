@@ -7,13 +7,13 @@ import {
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-import { useLedger } from '../../../ledger';
-import useMsgClient from '../../../hooks/useMsgClient';
+import { useLedger } from 'ledger';
+import { useMsgClient } from 'hooks';
 import {
   generateIri,
   IriFromMetadataSuccess,
   stringToUint8Array,
-} from '../../../lib/metadata-graph';
+} from 'lib/metadata-graph';
 
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
@@ -80,7 +80,7 @@ async function prepareMsg(
   // finally, build de Msg DTO
   const issuance: MsgCreateBatch_BatchIssuance[] = data.recipients.map(
     recipient => {
-      let issuanceRecipient: Partial<MsgCreateBatch_BatchIssuance> = {
+      const issuanceRecipient: Partial<MsgCreateBatch_BatchIssuance> = {
         recipient: recipient.recipient,
         tradableAmount: recipient.tradableAmount.toString(),
         retiredAmount: '0',

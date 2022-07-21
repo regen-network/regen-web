@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import axios from 'axios';
@@ -189,7 +188,6 @@ function CreditsPurchaseForm({
           setSubmitting(true);
           try {
             let walletId: string;
-            let addressId: string;
             let result;
 
             // Create address
@@ -213,7 +211,7 @@ function CreditsPurchaseForm({
                 },
               },
             });
-            addressId = addressResult.data.createAddress.address.id;
+            const addressId = addressResult.data.createAddress.address.id;
 
             // Create user/org
             if (orgType === true) {

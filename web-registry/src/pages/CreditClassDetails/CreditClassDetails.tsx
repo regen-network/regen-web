@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Routes, Route } from 'react-router-dom';
 
-import { useAllCreditClassQuery } from '../../generated/sanity-graphql';
+import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import {
   useCreditClassByOnChainIdQuery,
   useCreditClassByUriQuery,
-} from '../../generated/graphql';
-import { client } from '../../sanity';
-import CreditClassDetailsWithContent from '../CreditClassDetailsWithContent';
-import CreditClassDetailsSimple from '../CreditClassDetailsSimple';
-import { queryEcoClassInfo } from '../../lib/ecocredit/api';
-import { getMetadata } from '../../lib/metadata-graph';
-import { onChainClassRegExp } from '../../lib/ledger';
-import { ClassInfo } from '../../types/ledger/ecocredit';
+} from 'generated/graphql';
+import { client } from 'sanity';
+import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
+import CreditClassDetailsSimple from './CreditClassDetailsSimple';
+import { queryEcoClassInfo } from 'lib/ecocredit/api';
+import { getMetadata } from 'lib/metadata-graph';
+import { onChainClassRegExp } from 'lib/ledger';
+import { ClassInfo } from 'types/ledger/ecocredit';
 
 interface CreditDetailsProps {
   isLandSteward?: boolean;
@@ -39,7 +39,7 @@ function CreditClassDetails(): JSX.Element {
 }
 
 function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
-  let { creditClassId } = useParams();
+  const { creditClassId } = useParams();
   const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
     undefined,
   );

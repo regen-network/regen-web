@@ -1,12 +1,26 @@
-import { Outlet } from 'react-router-dom';
-import { CreateProjectProvider } from './ProjectCreate.context';
+import { useState } from 'react';
+import { DeliverTxResponse } from '@cosmjs/stargate';
+import { Outlet, useOutletContext } from 'react-router-dom';
+
+type ContextType = {
+  deliverTxResponse?: DeliverTxResponse;
+  setDeliverTxResponse: (deliverTxResponse?: DeliverTxResponse) => void;
+};
 
 export const ProjectCreate = (): JSX.Element => {
-  // note: we could also use react-router's built in oulet context for this.
-  // See: https://reactrouter.com/docs/en/v6/hooks/use-outlet-context
-  return (
-    <CreateProjectProvider>
-      <Outlet />
-    </CreateProjectProvider>
-  );
+  // TODO: possibly replace these with `useMsgClient` and pass downstream
+  const [deliverTxResponse, setDeliverTxResponse] =
+    useState<DeliverTxResponse>();
+
+  return <Outlet context={{ deliverTxResponse, setDeliverTxResponse }} />;
+};
+
+export const useCreateProjectContext = (): ContextType => {
+  const context = useOutletContext<ContextType>();
+  if (context === undefined) {
+    throw new Error(
+      'useCreateProjectContext must be used within a nested ProjectCreate route',
+    );
+  }
+  return context;
 };

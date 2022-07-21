@@ -28,7 +28,7 @@ import { VCSMetadata } from './ProjectReview.VCSMetadata';
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const createProjectContext = useCreateProjectContext();
+  const { setDeliverTxResponse } = useCreateProjectContext();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { data } = useProjectByIdQuery({
@@ -56,7 +56,7 @@ export const ProjectReview: React.FC = () => {
   };
 
   const handleTxDelivered = (deliverTxResponse: DeliverTxResponse): void => {
-    createProjectContext.deliverTxResponse = deliverTxResponse;
+    setDeliverTxResponse(deliverTxResponse);
     navigate(`${editPath}/finished`);
   };
 
@@ -66,7 +66,7 @@ export const ProjectReview: React.FC = () => {
     wallet,
     error,
     setError,
-    setDeliverTxResponse,
+    // setDeliverTxResponse,
   } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const { projectCreateSubmit } = useProjectCreateSubmit({ signAndBroadcast });
   const project = data?.projectById;

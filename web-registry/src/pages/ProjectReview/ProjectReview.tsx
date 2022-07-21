@@ -31,7 +31,7 @@ export const ProjectReview: React.FC = () => {
   const { setDeliverTxResponse } = useCreateProjectContext();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const { data } = useProjectByIdQuery({
+  const { data, loading } = useProjectByIdQuery({
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',
   });
@@ -85,7 +85,7 @@ export const ProjectReview: React.FC = () => {
   };
 
   return (
-    <OnboardingFormTemplate activeStep={1} title="Review">
+    <OnboardingFormTemplate activeStep={1} title="Review" loading={loading}>
       <ReviewCard
         sx={{ mt: [8, 10] }}
         title="Basic Info"

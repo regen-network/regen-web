@@ -1,6 +1,6 @@
 import React from 'react';
 import { omit } from 'lodash';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   EditFormTemplate,
@@ -18,9 +18,11 @@ import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
 import { useProjectMetadataSave } from './hooks/useProjectMetadataSave';
 import { useProjectMetadataSubmit } from './hooks/useProjectMetadataSubmit';
 import { ProjectMetadataSelectedForm } from './ProjectMetadata.SelectedForm';
+import { isVCSCreditClass } from '../../lib/ecocredit/api';
 
 export const ProjectMetadata: React.FC = () => {
   const { projectId } = useParams();
+  const navigate = useNavigate();
   const { isEdit } = useProjectEditContext();
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({
@@ -29,8 +31,9 @@ export const ProjectMetadata: React.FC = () => {
   });
   const project = data?.projectById;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
-  const isVCS = creditClassId === 'C01';
+  const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
   let metadata: Partial<ProjectMetadataLD> | undefined;
+  const editPath = `/project-pages/${projectId}`;
 
   const { data: graphData } = useShaclGraphByUriQuery({
     skip: !project,
@@ -57,6 +60,8 @@ export const ProjectMetadata: React.FC = () => {
         metadata={metadata}
         graphData={graphData}
         isVCS={isVCS}
+        onNext={() => navigate(`${editPath}/review`)}
+        onPrev={() => navigate(`${editPath}/media`)}
       />
     </EditFormTemplate>
   ) : (
@@ -70,6 +75,8 @@ export const ProjectMetadata: React.FC = () => {
         metadata={metadata}
         graphData={graphData}
         isVCS={isVCS}
+        onNext={() => navigate(`${editPath}/review`)}
+        onPrev={() => navigate(`${editPath}/media`)}
       />
     </OnboardingFormTemplate>
   );

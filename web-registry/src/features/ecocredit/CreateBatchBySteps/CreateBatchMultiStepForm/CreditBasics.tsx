@@ -102,9 +102,7 @@ export default function CreditBasics({
 
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
   const { projectId } = values;
-
   const { classId, isVCS } = useUpdateProjectClass(projectId);
-
   const projectOptions = useUpdateProjectOptions(projects);
 
   useSaveProjectSelectedOption({

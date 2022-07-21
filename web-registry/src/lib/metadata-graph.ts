@@ -7,21 +7,6 @@ export const getMetadata = async (iri: string): Promise<any> => {
   return data;
 };
 
-export const getMetadataFromUint8Array = async (
-  metadata: Uint8Array,
-): Promise<any> => {
-  const metadataStr = uint8ArrayToBase64(metadata);
-  return metadataStr && getMetadata(metadataStr);
-};
-
-function uint8ArrayToBase64(arr: Uint8Array): string {
-  return btoa(
-    Array.from(arr)
-      .map(c => String.fromCharCode(c))
-      .join(''),
-  );
-}
-
 /**
  * Generate IRI
  */
@@ -54,11 +39,6 @@ export async function generateIri<T>(
 /**
  * Metadata transformations
  */
-
-export function uint8ArrayToString(metadata: Uint8Array): string {
-  const decoder = new TextDecoder();
-  return decoder.decode(metadata);
-}
 
 export function stringToUint8Array(metadata: string): Uint8Array {
   const encoder = new TextEncoder();

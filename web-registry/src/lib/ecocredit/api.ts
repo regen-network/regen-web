@@ -23,6 +23,8 @@ import {
   QueryProjectsByClassResponse,
   QueryProjectsByAdminRequest,
   QueryProjectsByAdminResponse,
+  QueryProjectRequest,
+  QueryProjectResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import {
@@ -381,6 +383,11 @@ type ProjectsByAdminParams = {
   params: DeepPartial<QueryProjectsByAdminRequest>;
 };
 
+type ProjectParams = {
+  query: 'project';
+  params: DeepPartial<QueryProjectRequest>;
+};
+
 export type EcocreditQueryProps =
   | BalanceParams
   | BatchInfoParams
@@ -389,7 +396,8 @@ export type EcocreditQueryProps =
   | ClassesParams
   | CreditTypesParams
   | ProjectsParams
-  | ProjectsByAdminParams;
+  | ProjectsByAdminParams
+  | ProjectParams;
 
 // typing the response
 
@@ -401,7 +409,8 @@ export type EcocreditQueryResponse =
   | QueryClassesResponse
   | QueryCreditTypesResponse
   | QueryProjectsResponse
-  | QueryProjectsByAdminResponse;
+  | QueryProjectsByAdminResponse
+  | QueryProjectResponse;
 
 /**
  *
@@ -565,7 +574,26 @@ export const queryProjectsByAdmin = async ({
     return await client.ProjectsByAdmin(request);
   } catch (err) {
     throw new Error(
-      `Error in the Projects query of the ledger ecocredit module: ${err}`,
+      `Error in the ProjectsByAdmin query of the ledger ecocredit module: ${err}`,
+    );
+  }
+};
+
+// Project (by id)
+
+interface QueryProjectProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QueryProjectRequest>;
+}
+
+export const queryProject = async ({
+  client,
+  request,
+}: QueryProjectProps): Promise<QueryProjectResponse> => {
+  try {
+    return await client.Project(request);
+  } catch (err) {
+    throw new Error(
+      `Error in the Project query of the ledger ecocredit module: ${err}`,
     );
   }
 };

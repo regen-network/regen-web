@@ -21,6 +21,10 @@ import {
   QueryProjectsResponse,
   QuerySupplyResponse,
   QueryProjectsByClassResponse,
+  QueryProjectsByAdminRequest,
+  QueryProjectsByAdminResponse,
+  QueryProjectRequest,
+  QueryProjectResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import {
@@ -374,6 +378,16 @@ type ProjectsParams = {
   params: DeepPartial<QueryProjectsRequest>;
 };
 
+type ProjectsByAdminParams = {
+  query: 'projectsByAdmin';
+  params: DeepPartial<QueryProjectsByAdminRequest>;
+};
+
+type ProjectParams = {
+  query: 'project';
+  params: DeepPartial<QueryProjectRequest>;
+};
+
 export type EcocreditQueryProps =
   | BalanceParams
   | BatchInfoParams
@@ -381,7 +395,9 @@ export type EcocreditQueryProps =
   | ClassInfoParams
   | ClassesParams
   | CreditTypesParams
-  | ProjectsParams;
+  | ProjectsParams
+  | ProjectsByAdminParams
+  | ProjectParams;
 
 // typing the response
 
@@ -392,7 +408,9 @@ export type EcocreditQueryResponse =
   | QueryClassResponse
   | QueryClassesResponse
   | QueryCreditTypesResponse
-  | QueryProjectsResponse;
+  | QueryProjectsResponse
+  | QueryProjectsByAdminResponse
+  | QueryProjectResponse;
 
 /**
  *
@@ -542,6 +560,50 @@ export const queryProjects = async ({
   }
 };
 
+// ProjectsByAdmin
+
+interface QueryProjectsByAdminProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QueryProjectsByAdminRequest>;
+}
+
+export const queryProjectsByAdmin = async ({
+  client,
+  request,
+}: QueryProjectsByAdminProps): Promise<QueryProjectsByAdminResponse> => {
+  try {
+    return await client.ProjectsByAdmin(request);
+  } catch (err) {
+    throw new Error(
+      `Error in the ProjectsByAdmin query of the ledger ecocredit module: ${err}`,
+    );
+  }
+};
+
+// Project (by id)
+
+interface QueryProjectProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QueryProjectRequest>;
+}
+
+export const queryProject = async ({
+  client,
+  request,
+}: QueryProjectProps): Promise<QueryProjectResponse> => {
+  try {
+    return await client.Project(request);
+  } catch (err) {
+    throw new Error(
+      `Error in the Project query of the ledger ecocredit module: ${err}`,
+    );
+  }
+};
+
+/**
+ *
+ * Backwards compatibility, will be removed
+ *
+ */
+
 // queryEcoBatches consumes Regen REST endpoints - will be replaced with regen-js
 export const queryEcoBatches = async (
   creditClassId?: string | null,
@@ -597,4 +659,10 @@ export const queryEcoBatches = async (
   } catch (err) {
     throw new Error(`Error fetching batches: ${err}`);
   }
+};
+
+export const isVCSCreditClass = (creditClassId?: string): boolean => {
+  // TODO: this is a hack to make V4 testnet work. C02 is a copy of C01 on V4.
+  // In PROD/mainnet, this should only be C01.
+  return creditClassId === 'C01' || creditClassId === 'C02';
 };

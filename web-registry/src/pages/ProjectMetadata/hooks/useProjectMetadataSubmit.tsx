@@ -5,6 +5,7 @@ import {
   ProjectByIdQuery,
   useUpdateProjectByIdMutation,
 } from '../../../generated/graphql';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   project?: ProjectByIdQuery['projectById'];
@@ -21,6 +22,7 @@ export const useProjectMetadataSubmit = ({
   projectId,
   updateProject,
 }: Props): useProjectMetadataSubmitReturnedType => {
+  const navigate = useNavigate();
   const projectMetadataSubmit = useCallback(
     async function submit(values: ProjectMetadataValues): Promise<void> {
       const parsedMetaData = JSON.parse(values.metadata);
@@ -38,12 +40,13 @@ export const useProjectMetadataSubmit = ({
             },
           },
         });
+        navigate(`/project-pages/${projectId}/review`);
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
       }
     },
-    [project, projectId, updateProject],
+    [navigate, project?.metadata, projectId, updateProject],
   );
 
   return projectMetadataSubmit;

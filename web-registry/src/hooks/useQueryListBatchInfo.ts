@@ -9,34 +9,37 @@ import { useLedger } from '../ledger';
 
 // is a wrapper for a batch of requests
 export default function useQueryListBatchInfo(
-  basketBatches?: string[],
+  batches?: string[],
 ): QueryBatchResponse[] | undefined {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl>();
   const [dataList, setDataList] = useState<QueryBatchResponse[]>();
 
   useEffect(() => {
-    if (!api?.queryClient) return;
+    if (!api?.queryClient || queryClient) return;
     const _queryClient: QueryClientImpl = new QueryClientImpl(api.queryClient);
     setQueryClient(_queryClient);
-  }, [api?.queryClient]);
+  }, [api?.queryClient, queryClient]);
 
   useEffect(() => {
-    if (!queryClient || !basketBatches) return;
-
-    async function fetchData(
-      client: QueryClientImpl,
-      batches: string[],
-    ): Promise<void> {
-      Promise.all(
-        batches.map(
-          async (batchDenom: string) => await client.Batch({ batchDenom }),
-        ),
-      ).then(setDataList);
+    async function fetchData(): Promise<void> {
+      if (queryClient && batches) {
+        await Promise.all(
+          batches.map(
+            async (batchDenom: string) =>
+              await queryClient.Batch({ batchDenom }),
+          ),
+        )
+          .then(setDataList)
+          .catch(e => {
+            console.error(e);
+            setDataList([]);
+          });
+      }
     }
 
-    fetchData(queryClient, basketBatches);
-  }, [queryClient, basketBatches]);
+    fetchData();
+  }, [queryClient, batches]);
 
   return dataList;
 }

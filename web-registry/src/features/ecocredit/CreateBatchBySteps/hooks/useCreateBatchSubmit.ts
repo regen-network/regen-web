@@ -1,27 +1,26 @@
-import React from 'react';
+import { useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
 import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-import { useLedger } from '../../../ledger';
-import useMsgClient from '../../../hooks/useMsgClient';
+import { useLedger } from '../../../../ledger';
+import useMsgClient from '../../../../hooks/useMsgClient';
 import {
   generateIri,
   IriFromMetadataSuccess,
-  // stringToUint8Array,
-} from '../../../lib/metadata-graph';
+} from '../../../../lib/metadata-graph';
 
-import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
+import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
 // TODO
 // Right now, just case "C01" (aka. VCS)
 
 function prepareMetadata(
+  projectId: string,
   partialMetadata: Partial<VCSBatchMetadataLD>,
 ): VCSBatchMetadataLD | undefined {
-  const projectId = partialMetadata['regen:vcsProjectId'];
   const retirementSerialNumber =
     partialMetadata['regen:vcsRetirementSerialNumber'];
 
@@ -51,13 +50,10 @@ async function prepareMsg(
 ): Promise<Partial<MsgCreateBatch> | undefined> {
   // First, complete the metadata
   const metadata: VCSBatchMetadataLD | undefined = prepareMetadata(
+    data.projectId,
     data.metadata as Partial<VCSBatchMetadataLD>,
   );
   if (!metadata) return;
-
-  // TODO - Fixed it on the fast track, retrieving the projectId from the metadata.
-  // We have to refactor and handle the projectId field as a value in the form.
-  const projectId: string = metadata['regen:vcsProjectId'];
 
   // then, generate the offchain iri from the metadata
   let iriResponse: IriFromMetadataSuccess<VCSBatchMetadataLD> | undefined;
@@ -69,7 +65,7 @@ async function prepareMsg(
     throw new Error(err as string);
   }
 
-  // finally, build de Msg DTO
+  // finally, build de Msg for Tx
   const issuance: BatchIssuance[] = data.recipients.map(recipient => {
     let issuanceRecipient: Partial<BatchIssuance> = {
       recipient: recipient.recipient,
@@ -86,13 +82,11 @@ async function prepareMsg(
 
   return MsgCreateBatch.fromPartial({
     issuer,
-    projectId: projectId,
+    projectId: data.projectId,
     issuance: issuance,
-    metadata: iriResponse.iri, // TODO - confirmation - stringToUint8Array(iriResponse.iri),
+    metadata: iriResponse.iri,
     startDate: new Date(data.startDate as Date),
     endDate: new Date(data.endDate as Date),
-    open: false, // TODO - confirmation default
-    // originTx - not informed here // TODO - confirmation
   });
 }
 
@@ -115,15 +109,14 @@ type ReturnType = {
   closeSubmitModal: () => void;
 };
 
-export default function useCreateBatch(): ReturnType {
+export default function useCreateBatchSubmit(): ReturnType {
   const { api } = useLedger();
   const { wallet, signAndBroadcast, deliverTxResponse, error, setError } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const accountAddress = wallet?.address;
 
-  const [status, setStatus] = React.useState<SubmissionStatus>('idle');
-  const [isSubmitModalOpen, setIsSubmitModalOpen] =
-    React.useState<boolean>(false);
+  const [status, setStatus] = useState<SubmissionStatus>('idle');
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState<boolean>(false);
 
   function handleTxQueued(): void {
     setStatus('broadcast');

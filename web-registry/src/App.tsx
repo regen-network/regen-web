@@ -47,8 +47,11 @@ const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const OrganizationProfile = lazy(() => import('./pages/OrganizationProfile'));
 const PostPurchase = lazy(() => import('./pages/PostPurchase'));
 const Project = lazy(() => import('./pages/Project'));
+const ProjectCreate = lazy(() => import('./pages/ProjectCreate'));
+const ProjectFinished = lazy(() => import('./pages/ProjectFinished'));
 const ProjectList = lazy(() => import('./pages/ProjectList'));
 const ProjectLocation = lazy(() => import('./pages/ProjectLocation'));
+const ProjectReview = lazy(() => import('./pages/ProjectReview'));
 const Roles = lazy(() => import('./pages/Roles'));
 const Seller = lazy(() => import('./pages/Seller'));
 const Signup = lazy(() => import('./pages/Signup'));
@@ -58,6 +61,7 @@ const VerifyEmail = lazy(() => import('./pages/VerifyEmail'));
 const ProjectEdit = lazy(() => import('./pages/ProjectEdit'));
 const Activity = lazy(() => import('./pages/Activity'));
 const CreateBatch = lazy(() => import('./pages/CreateBatch'));
+const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 
 export const history = createBrowserHistory();
 
@@ -134,41 +138,15 @@ const App: React.FC = (): JSX.Element => {
               element={<ProtectedRoute component={OrganizationProfile} />}
             />
             <Route
-              path="project-pages"
+              path="project-list"
               element={<ProtectedRoute component={ProjectList} />}
             />
-            <Route path="project-pages/:projectId">
-              <Route
-                path="choose-credit-class"
-                element={<KeplrRoute component={ChooseCreditClassPage} />}
-              />
-              <Route
-                path="basic-info"
-                element={<KeplrRoute component={BasicInfo} />}
-              />
-              <Route
-                path="location"
-                element={<KeplrRoute component={ProjectLocation} />}
-              />
-              <Route path="story" element={<KeplrRoute component={Story} />} />
-              <Route
-                path="description"
-                element={<KeplrRoute component={Description} />}
-              />
-              <Route path="media" element={<KeplrRoute component={Media} />} />
-              <Route
-                path="metadata"
-                element={<KeplrRoute component={ProjectMetadata} />}
-              />
-              <Route path="roles" element={<KeplrRoute component={Roles} />} />
-              <Route
-                path="entity-display"
-                element={<KeplrRoute component={EntityDisplay} />}
-              />
-              <Route
-                path="edit"
-                element={<KeplrRoute component={ProjectEdit} />}
-              >
+            <Route path="project-pages">
+              <Route path=":projectId" element={<ProjectCreate />}>
+                <Route
+                  path="choose-credit-class"
+                  element={<KeplrRoute component={ChooseCreditClassPage} />}
+                />
                 <Route
                   path="basic-info"
                   element={<KeplrRoute component={BasicInfo} />}
@@ -182,8 +160,16 @@ const App: React.FC = (): JSX.Element => {
                   element={<KeplrRoute component={Story} />}
                 />
                 <Route
+                  path="description"
+                  element={<KeplrRoute component={Description} />}
+                />
+                <Route
                   path="media"
                   element={<KeplrRoute component={Media} />}
+                />
+                <Route
+                  path="metadata"
+                  element={<KeplrRoute component={ProjectMetadata} />}
                 />
                 <Route
                   path="roles"
@@ -193,6 +179,43 @@ const App: React.FC = (): JSX.Element => {
                   path="entity-display"
                   element={<KeplrRoute component={EntityDisplay} />}
                 />
+                <Route
+                  path="review"
+                  element={<KeplrRoute component={ProjectReview} />}
+                />
+                <Route
+                  path="finished"
+                  element={<KeplrRoute component={ProjectFinished} />}
+                />
+                <Route
+                  path="edit"
+                  element={<KeplrRoute component={ProjectEdit} />}
+                >
+                  <Route
+                    path="basic-info"
+                    element={<KeplrRoute component={BasicInfo} />}
+                  />
+                  <Route
+                    path="location"
+                    element={<KeplrRoute component={ProjectLocation} />}
+                  />
+                  <Route
+                    path="story"
+                    element={<KeplrRoute component={Story} />}
+                  />
+                  <Route
+                    path="media"
+                    element={<KeplrRoute component={Media} />}
+                  />
+                  <Route
+                    path="roles"
+                    element={<KeplrRoute component={Roles} />}
+                  />
+                  <Route
+                    path="entity-display"
+                    element={<KeplrRoute component={EntityDisplay} />}
+                  />
+                </Route>
               </Route>
             </Route>
             <Route path="admin" element={<Admin />} />
@@ -233,6 +256,9 @@ const App: React.FC = (): JSX.Element => {
               element={<CreditClassDetails />}
             />
             <Route path="stats/activity" element={<Activity />} />
+            <Route>
+              <Route path="storefront" element={<Storefront />} />
+            </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

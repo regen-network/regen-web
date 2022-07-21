@@ -96,7 +96,7 @@ export const MyEcocredits = (): JSX.Element => {
   const onButtonClick = (): void => {
     handleTxModalClose();
     if (txButtonTitle === CREATE_SELL_ORDER_BUTTON) {
-      navigate('/marketplace/storefront');
+      navigate('/storefront');
     }
   };
 
@@ -400,6 +400,7 @@ export const MyEcocredits = (): JSX.Element => {
           txHash={txHash || ''}
           txHashUrl={txHashUrl}
           cardTitle={txModalTitle ?? ''}
+          buttonTitle={txButtonTitle}
           linkComponent={Link}
           onButtonClick={onButtonClick}
         />

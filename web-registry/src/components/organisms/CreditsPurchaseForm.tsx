@@ -389,7 +389,7 @@ function CreditsPurchaseForm({
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <LocationStateField name="state" country={values.country} />
+                    <LocationCountryField />
                   </Grid>
                   <Grid
                     item
@@ -397,7 +397,7 @@ function CreditsPurchaseForm({
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <LocationCountryField />
+                    <LocationStateField name="state" country={values.country} />
                   </Grid>
                 </Grid>
 

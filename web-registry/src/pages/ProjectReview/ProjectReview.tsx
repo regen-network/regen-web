@@ -20,7 +20,7 @@ import { ProjectPageFooter } from '../../components/molecules';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
 import useMsgClient from '../../hooks/useMsgClient';
 import { useGetJurisdiction } from './hooks/useGetJurisdiction';
-import { useCreateProjectContext } from '../../features/ecocredit/CreateProject/CreateProjectContext';
+import { useCreateProjectContext } from '../ProjectCreate';
 import { Link } from '../../components/atoms';
 import { getHashUrl } from '../../lib/block-explorer';
 import { VCSMetadata } from './ProjectReview.VCSMetadata';

@@ -47,6 +47,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const OrganizationProfile = lazy(() => import('./pages/OrganizationProfile'));
 const PostPurchase = lazy(() => import('./pages/PostPurchase'));
 const Project = lazy(() => import('./pages/Project'));
+const ProjectCreate = lazy(() => import('./pages/ProjectCreate'));
 const ProjectFinished = lazy(() => import('./pages/ProjectFinished'));
 const ProjectList = lazy(() => import('./pages/ProjectList'));
 const ProjectLocation = lazy(() => import('./pages/ProjectLocation'));
@@ -139,7 +140,7 @@ const App: React.FC = (): JSX.Element => {
               path="project-pages"
               element={<ProtectedRoute component={ProjectList} />}
             />
-            <Route path="project-pages/:projectId">
+            <Route path="project-pages/:projectId" element={ProjectCreate}>
               <Route
                 path="choose-credit-class"
                 element={<KeplrRoute component={ChooseCreditClassPage} />}

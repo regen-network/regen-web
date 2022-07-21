@@ -1,10 +1,12 @@
 import { Box, useTheme } from '@mui/material';
 import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
+import { ConfirmModal as CancelConfirmModal } from 'web-components/lib/components/modal/ConfirmModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
@@ -14,21 +16,25 @@ import { Title } from 'web-components/lib/components/typography';
 import { Link } from '../../../components/atoms';
 import { BuyCreditsModal } from '../../../components/organisms';
 import SellOrdersTable from '../../../components/organisms/SellOrdersTable/SellOrdersTable';
-import useMsgClient from '../../../hooks/useMsgClient';
 import { useAllProjectsQuery } from '../../../generated/graphql';
 import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
+import useMsgClient from '../../../hooks/useMsgClient';
 import useQueryListBatchInfo from '../../../hooks/useQueryListBatchInfo';
 import { useQuerySellOrders } from '../../../hooks/useQuerySellOrders';
 import { getHashUrl } from '../../../lib/block-explorer';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
-import { BUY_SELL_ORDER_ACTION } from './Storefront.constants';
+import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
+import { useResetErrorBanner } from './hooks/useResetErrorBanner';
+import {
+  BUY_SELL_ORDER_ACTION,
+  CANCEL_SELL_ORDER_ACTION,
+} from './Storefront.constants';
 import {
   normalizeProjectsInfosByHandleMap,
   normalizeSellOrders,
 } from './Storefront.normalizer';
-import { sortByExpirationDate } from './Storefront.utils';
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
-import { useResetErrorBanner } from './hooks/useResetErrorBanner';
+import { SellOrderActions } from './Storefront.types';
+import { getCancelCardItems, sortByExpirationDate } from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
   const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
@@ -57,7 +63,10 @@ export const Storefront = (): JSX.Element => {
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
-  const navigate = useNavigate();
+  const [selectedAction, setSelectedAction] = useState<SellOrderActions>();
+  const isBuyModalOpen = selectedSellOrder !== null && selectedAction === 'buy';
+  const isCancelModalOpen =
+    selectedSellOrder !== null && selectedAction === 'cancel';
   useResetErrorBanner({ displayErrorBanner, setDisplayErrorBanner });
 
   const projectsInfosByHandleMap = useMemo(
@@ -91,11 +100,15 @@ export const Storefront = (): JSX.Element => {
     setTxModalHeader('');
     setDeliverTxResponse(undefined);
     setError(undefined);
+    setSelectedAction(undefined);
+  };
+
+  const handleCancelModalClose = (): void => {
+    setSelectedSellOrder(null);
   };
 
   const onButtonClick = (): void => {
     handleTxModalClose();
-    navigate('/ecocredits/dashboard');
   };
 
   const {
@@ -109,7 +122,6 @@ export const Storefront = (): JSX.Element => {
   const accountAddress = wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
-  const isBuyModalOpen = selectedSellOrder !== null;
 
   const buySellOrderSubmit = useBuySellOrderSubmit({
     accountAddress,
@@ -119,6 +131,18 @@ export const Storefront = (): JSX.Element => {
     setTxButtonTitle,
     setTxModalHeader,
     setTxModalTitle,
+  });
+
+  const cancelSellOrderSubmit = useCancelSellOrderSubmit({
+    selectedSellOrder: normalizedSellOrders[selectedSellOrder ?? 0],
+    setCardItems,
+    setSelectedSellOrder,
+    setTxButtonTitle,
+    setTxModalHeader,
+    setTxModalTitle,
+    setIsProcessingModalOpen,
+    signAndBroadcast,
+    accountAddress,
   });
 
   const {
@@ -153,21 +177,41 @@ export const Storefront = (): JSX.Element => {
         <Box sx={{ paddingBottom: '150px' }}>
           <SellOrdersTable
             sellOrders={normalizedSellOrders}
-            renderActionButtonsFunc={(i: number) => (
-              <OutlinedButton
-                startIcon={<CreditsIcon color={theme.palette.secondary.main} />}
-                size="small"
-                onClick={() => {
-                  if (accountAddress) {
-                    setSelectedSellOrder(i);
-                  } else {
-                    setDisplayErrorBanner(true);
+            renderActionButtonsFunc={(i: number) => {
+              const isOwnSellOrder =
+                normalizedSellOrders[i]?.seller === accountAddress;
+
+              return isOwnSellOrder ? (
+                <TableActionButtons
+                  buttons={[
+                    {
+                      label: CANCEL_SELL_ORDER_ACTION,
+                      onClick: () => {
+                        setSelectedAction('cancel');
+                        setSelectedSellOrder(i);
+                      },
+                    },
+                  ]}
+                />
+              ) : (
+                <OutlinedButton
+                  startIcon={
+                    <CreditsIcon color={theme.palette.secondary.main} />
                   }
-                }}
-              >
-                {BUY_SELL_ORDER_ACTION}
-              </OutlinedButton>
-            )}
+                  size="small"
+                  onClick={() => {
+                    if (accountAddress) {
+                      setSelectedAction('buy');
+                      setSelectedSellOrder(i);
+                    } else {
+                      setDisplayErrorBanner(true);
+                    }
+                  }}
+                >
+                  {BUY_SELL_ORDER_ACTION}
+                </OutlinedButton>
+              );
+            }}
           />
         </Box>
       </Section>
@@ -195,7 +239,11 @@ export const Storefront = (): JSX.Element => {
         cardItems={cardItems}
         linkComponent={Link}
         onButtonClick={onButtonClick}
-        icon={<CelebrateIcon sx={{ width: '85px', height: '106px' }} />}
+        icon={
+          selectedAction === 'buy' ? (
+            <CelebrateIcon sx={{ width: '85px', height: '106px' }} />
+          ) : undefined
+        }
       />
       <TxErrorModal
         error={error ?? ''}
@@ -207,6 +255,18 @@ export const Storefront = (): JSX.Element => {
         buttonTitle={txButtonTitle}
         linkComponent={Link}
         onButtonClick={onButtonClick}
+      />
+      <CancelConfirmModal
+        open={isCancelModalOpen}
+        onClose={handleCancelModalClose}
+        linkComponent={Link}
+        onConfirm={cancelSellOrderSubmit}
+        onConfirmTitle="Yes, cancel sell order"
+        onCancelTitle="WHOOPS, EXIT"
+        title="Are you sure would you like to cancel this sell order?"
+        cardItems={getCancelCardItems(
+          normalizedSellOrders[selectedSellOrder ?? 0] ?? {},
+        )}
       />
       {displayErrorBanner && (
         <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />

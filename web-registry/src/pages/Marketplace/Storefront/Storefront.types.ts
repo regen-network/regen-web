@@ -1,14 +1,3 @@
-export type SellOrder = {
-  id: string;
-  seller: string;
-  batch_denom: string;
-  quantity: string;
-  ask_denom: string;
-  ask_amount: string;
-  disable_auto_retire: boolean;
-  expiration?: string;
-};
-
 export type SellOrderStatus =
   | 'Not yet filled'
   | 'Partially filled'
@@ -35,3 +24,5 @@ export type NormalizedSellOrder = {
   batchEndDate?: Date | null;
   seller: string;
 };
+
+export type SellOrderActions = 'buy' | 'cancel' | 'change';

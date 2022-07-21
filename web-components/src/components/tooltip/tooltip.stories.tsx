@@ -1,6 +1,5 @@
-import * as React from 'react';
-import Tooltip from 'web-components/lib/components/tooltip';
-import InfoTooltip from 'web-components/lib/components/tooltip/InfoTooltip';
+import Tooltip from './';
+import InfoTooltip from './InfoTooltip';
 
 export default {
   title: 'Tooltip',

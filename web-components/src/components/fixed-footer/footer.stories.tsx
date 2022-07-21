@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
-import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchFooter';
+import FixedFooter from './';
+import SaveFooter from './SaveFooter';
+import { SwitchFooter } from './SwitchFooter';
 
 export default {
   title: 'Footers',

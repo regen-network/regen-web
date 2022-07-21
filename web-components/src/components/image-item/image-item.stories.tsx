@@ -1,5 +1,4 @@
-import * as React from 'react';
-import ImageItem from 'web-components/lib/components/image-item';
+import ImageItem from '.';
 
 export default {
   title: 'Image Item',

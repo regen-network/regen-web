@@ -12,15 +12,14 @@ import {
   QueryBatchInfoResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 
+import { getMetadataFromUint8Array } from 'lib/metadata-graph';
+import { useProjectsByMetadataLazyQuery } from 'generated/graphql';
+import { BasketOverviewProps, CreditBatch } from 'components/organisms';
+
 import useBankQuery from './useBankQuery';
 import useBasketQuery from './useBasketQuery';
-import useQueryListClassInfo from './useQueryListClassInfo';
 import useQueryListBatchInfo from './useQueryListBatchInfo';
-import { useProjectsByMetadataLazyQuery } from '../generated/graphql';
-
-import { BasketOverviewProps, CreditBatch } from '../components/organisms';
-
-import { getMetadataFromUint8Array } from '../lib/metadata-graph';
+import useQueryListClassInfo from './useQueryListClassInfo';
 
 dayjs.extend(duration);
 

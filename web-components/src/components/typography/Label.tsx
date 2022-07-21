@@ -21,15 +21,15 @@ const LINE_HEIGHTS = {
   xxs: 12,
 };
 
-interface Props extends TypographyProps {
+export interface LabelProps extends TypographyProps {
   size?: LabelSize;
   mobileSize?: LabelSize;
 }
 
 export const Label = styled(Typography, {
-  name: 'RegenButtonText',
+  name: 'RegenLabel',
   shouldForwardProp: prop => prop !== 'size' && prop !== 'mobileSize',
-})<Props>(({ theme, mobileSize, size = 'md' }) => {
+})<LabelProps>(({ theme, mobileSize, size = 'md' }) => {
   const { breakpoints, typography } = theme;
   const _mobileSize = mobileSize || getMobileSize(size);
   return {

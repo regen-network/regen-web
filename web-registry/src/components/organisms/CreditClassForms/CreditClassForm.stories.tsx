@@ -1,0 +1,63 @@
+import { Formik } from 'formik';
+import { Center } from 'web-components/lib/components/box';
+
+import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
+import {
+  CreateCreditClassForm,
+  createCreditClassSteps,
+} from './CreateCreditClassForm';
+import { CreditClassFinished } from './CreditClassFinished';
+import {
+  CreditClassForm,
+  creditClassBaseValues,
+  CreditClassValues,
+} from './CreditClassForm';
+import { CreditClassReview } from './CreditClassReview';
+import { mockMetadata, mockTxHash } from './CreditClass.mocks';
+
+const fullFormValues: CreditClassValues = {
+  admin: mockTxHash,
+  issuers: [mockTxHash, mockTxHash, mockTxHash],
+  creditTypeAbbr: 'REGEN',
+  fee: '20 REGEN',
+  metadata: JSON.stringify(mockMetadata, null, 2),
+};
+
+const onSubmit = () => void null;
+
+export const creditClassForm = (): JSX.Element => (
+  <Center sx={{ m: '0 auto', maxWidth: 740 }}>
+    <Formik initialValues={creditClassBaseValues} onSubmit={onSubmit}>
+      <CreditClassForm />
+    </Formik>
+  </Center>
+);
+
+export const createCreditClassForm = (): JSX.Element => (
+  <MultiStepTemplate
+    formId="create-credit-class-story"
+    initialValues={{
+      ...creditClassBaseValues,
+      admin: 'adminAddress',
+      fee: '20 REGEN',
+    }}
+    steps={createCreditClassSteps}
+  >
+    <CreateCreditClassForm onSubmit={console.log} />
+  </MultiStepTemplate>
+);
+
+export const creditClassReview = (): JSX.Element => (
+  <Formik initialValues={fullFormValues} onSubmit={onSubmit}>
+    <CreditClassReview />
+  </Formik>
+);
+
+export const creditClassFinished = (): JSX.Element => (
+  <CreditClassFinished classId="C01" hash={mockTxHash} />
+);
+
+export default {
+  title: 'Registry/Organisms/Credit Class Form',
+  component: CreditClassForm,
+};

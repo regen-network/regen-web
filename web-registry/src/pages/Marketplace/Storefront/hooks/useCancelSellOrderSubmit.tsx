@@ -65,7 +65,7 @@ const useCancelSellOrderSubmit = ({
         value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
       },
       {
-        label: 'price per credits',
+        label: 'price per credit',
         value: {
           name: askAmount,
           icon: (

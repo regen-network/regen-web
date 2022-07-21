@@ -192,6 +192,7 @@ export const Storefront = (): JSX.Element => {
                       },
                     },
                   ]}
+                  sx={{ width: '100%' }}
                 />
               ) : (
                 <OutlinedButton

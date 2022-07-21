@@ -1,35 +1,18 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { Body } from 'web-components/lib/components/typography';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
+import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
+import { FlexCol } from 'web-components/lib/components/box';
+
 import {
   useCreateProjectMutation,
   useGetUserProfileByEmailQuery,
 } from '../../generated/graphql';
 
-const useStyles = makeStyles((theme: Theme) => ({
-  cards: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  createCard: {
-    marginTop: theme.spacing(6),
-    [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(8),
-    },
-  },
-}));
-
 const ProjectList: React.FC = () => {
-  const classes = useStyles();
-  // const theme = useTheme();
-  // const isMobile = useMediaQuery(theme.breakpoints.down('md')); used for navigating to edit
   const navigate = useNavigate();
 
   // TODO Create provider to get directly user data if logged in
@@ -88,14 +71,14 @@ const ProjectList: React.FC = () => {
           Get started with your first project.
         </Body>
       )}
-      <div className={classes.cards}>
+      <FlexCol sx={{ justifyContent: 'center' }}>
         {/* TODO: Existing Projects. see regen-network/regen-registry#360 */}
         <CreateProjectCard
-          className={classes.createCard}
+          sx={{ mt: [6, 8] }}
           onClick={submitCreateProject}
           isFirstProject={isFirstProject}
         />
-      </div>
+      </FlexCol>
     </OnBoardingSection>
   );
 };

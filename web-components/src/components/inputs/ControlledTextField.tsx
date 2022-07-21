@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import { InputAdornment, InputProps, SxProps } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
+=======
+import React from 'react';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { InputProps, InputAdornment, SxProps } from '@mui/material';
+>>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
 import { FieldProps } from 'formik';
 import React from 'react';
 
@@ -71,7 +77,7 @@ export default function ControlledTextField({
             onBlur={({ target: { value } }) => handleBlur(value)}
             onChange={e => handleFieldChange(e, handleChange)}
             value={field.value}
-            disabled={form.isSubmitting}
+            disabled={!!inputProps.disabled || form.isSubmitting}
             startAdornment={
               startAdornment ? (
                 <InputAdornment position="start">

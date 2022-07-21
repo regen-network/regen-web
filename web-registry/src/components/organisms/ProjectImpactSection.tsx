@@ -107,7 +107,7 @@ function ProjectImpactSection({
     lazyload: true,
   };
 
-  let slider: any = useRef(null);
+  const slider: any = useRef(null);
 
   const slickPrev = useCallback(() => {
     if (slider && slider.current) {

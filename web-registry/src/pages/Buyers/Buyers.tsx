@@ -115,7 +115,7 @@ const BuyersPage = (): JSX.Element => {
           isBanner
           img={content?.faqSection?.image?.image?.asset?.url || ''}
           bottomBanner={content?.faqSection}
-          openModal={() => {}}
+          openModal={() => null}
         />
       )}
 

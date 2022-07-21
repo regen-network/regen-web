@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Tabs, { TabsProps } from '@mui/material/Tabs';
 import { styled } from '@mui/material';
-import { TabPanel } from './TabPanel';
 import { IconTab, IconTabProps } from './IconTab';
 import { a11yProps } from './';
+import { TabPanel } from './TabPanel';
 
 interface IconTabsProps {
   tabs: IconTabProps[];
@@ -41,6 +41,7 @@ const IconTabs: React.FC<IconTabsProps> = ({ tabs }) => {
           ))}
         </StyledTabs>
       </div>
+<<<<<<< HEAD
       {tabs.map(
         (tab, index) =>
           value === index && (
@@ -49,6 +50,18 @@ const IconTabs: React.FC<IconTabsProps> = ({ tabs }) => {
             </TabPanel>
           ),
       )}
+=======
+      {tabs.map((tab, index) => (
+        <TabPanel
+          key={index}
+          value={value}
+          index={index}
+          hidden={tab.hidden || value !== index}
+        >
+          {tab.content}
+        </TabPanel>
+      ))}
+>>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
     </div>
   );
 };

@@ -88,13 +88,16 @@ export const getEcocreditsForAccount = async (
       batches.map(async batch => {
         const credits = await queryEcoBalance(batch.denom, account);
         const classId = getClassIdForBatch(batch);
+        const project = await getProject(batch.projectId);
         return {
           ...batch,
           ...credits,
           classId,
+          projectLocation: project.project?.jurisdiction,
         };
       }),
     );
+
     // filter out batches that don't have any credits
     return credits.filter(credit => {
       const { balance } = credit;
@@ -153,7 +156,14 @@ export const addDataToBatch = async (
         const supplyData = await queryEcoBatchSupply(batch.denom);
         const txhash = getTxHashForBatch(txs.txResponses, batch.denom);
         const classId = getClassIdForBatch(batch);
-        return { ...batch, ...supplyData, txhash, classId };
+        const project = await getProject(batch.projectId);
+        return {
+          ...batch,
+          ...supplyData,
+          txhash,
+          classId,
+          projectLocation: project.project?.jurisdiction,
+        };
       }),
     );
   } catch (err) {
@@ -306,6 +316,15 @@ export const queryProjectsByClass = async (
     return client.ProjectsByClass({ classId });
   } catch (err) {
     throw new Error(`Error fetching projects by class: ${err}`);
+  }
+};
+
+const getProject = async (projectId: string): Promise<QueryProjectResponse> => {
+  const client = await getQueryClient();
+  try {
+    return client.Project({ projectId });
+  } catch (err) {
+    throw new Error(`Error fetching project: ${err}`);
   }
 };
 

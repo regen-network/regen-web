@@ -52,10 +52,9 @@ const headCells: HeadCell[] = [
     label: 'total amount cancelled',
     wrap: true,
   },
-  // TODO: regen-network/regen-registry#1015
-  // { id: 'project_location', numeric: false, label: 'project location' },
   { id: 'startDate', numeric: true, label: 'start date' },
   { id: 'endDate', numeric: true, label: 'end date' },
+  { id: 'projectLocation', numeric: false, label: 'project location' },
 ];
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -120,12 +119,11 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
     columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'classId');
   }
   // Ditto for project location on project page
-  // TODO: regen-network/regen-registry#1015
-  // if (projectPage) {
-  //   columnsToShow = columnsToShow.filter(
-  //     (hc: HeadCell) => hc.id !== 'project_location',
-  //   );
-  // }
+  if (projectPage) {
+    columnsToShow = columnsToShow.filter(
+      (hc: HeadCell) => hc.id !== 'projectLocation',
+    );
+  }
 
   const table = (
     <ActionsTable
@@ -169,13 +167,14 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           <Box className={styles.noWrap}>
             {formatDate(batch.endDate as Date, undefined, true)}
           </Box>,
-          // TODO: regen-network/regen-registry#1015
-          // <Box key="project_location" className={styles.noWrap}>
-          //   {batch.project_location}
-          // </Box>,
+          <Box key="projectLocation" className={styles.noWrap}>
+            {batch.projectLocation}
+          </Box>,
         ].filter(item => {
-          return !(creditClassId && item?.key === 'classId');
-          // && !(projectPage && item?.key === 'project_location')
+          return (
+            !(creditClassId && item?.key === 'classId') &&
+            !(projectPage && item?.key === 'projectLocation')
+          );
         }),
       )}
     />

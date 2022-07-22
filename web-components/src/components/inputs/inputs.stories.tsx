@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Button, FormLabel } from '@mui/material';
-import { Field, Form, Formik } from 'formik';
+import { useState, useEffect } from 'react';
+import { FormLabel, Button } from '@mui/material';
+import { Formik, Form, Field } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
-import OnBoardingCard from '../cards/OnBoardingCard';
-import { DatePickField } from './DatePickField';
-import { RoleField } from './RoleField';
-import TextField from './TextField';
 import Toggle from './Toggle';
+import TextField from './TextField';
+import { RoleField } from './RoleField';
+import { DatePickField } from './DatePickField';
+import OnBoardingCard from '../cards/OnBoardingCard';
 // import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 // import SelectTextField, { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
@@ -15,66 +15,6 @@ export default {
   title: 'Inputs',
   component: TextField,
 };
-
-// function EditableTextField(): JSX.Element {
-//   const [value, setValue] = useState('');
-//   return (
-//     <TextField
-//       required={true}
-//       type={'text'}
-//       value={value}
-//       onChange={e => setValue(e.target.value)}
-//       label={'Label'}
-//     />
-//   );
-// }
-//
-// const currencies: Option[] = [
-//   {
-//     value: 'USD',
-//     label: '$',
-//   },
-//   {
-//     value: 'EUR',
-//     label: '€',
-//   },
-//   {
-//     value: 'BTC',
-//     label: '฿',
-//   },
-//   {
-//     value: 'JPY',
-//     label: '¥',
-//   },
-// ];
-//
-// function EditableSelectTextField(): JSX.Element {
-//   const [value, setValue] = useState('');
-//   return (
-//     <SelectTextField
-//       options={currencies}
-//       required={true}
-//       value={value}
-//       onChange={e => setValue(e.target.value)}
-//       label={'Currency'}
-//     />
-//   );
-// }
-//
-// function EditableCheckboxLabel(): JSX.Element {
-//   const [value, setValue] = useState(true);
-//   return (
-//     <CheckboxLabel
-//       checked={value}
-//       onChange={e => setValue(e.target.checked)}
-//       label={'This is a label'}
-//     />
-//   );
-// }
-//
-// export const textField = (): JSX.Element => <EditableTextField />;
-// export const selectTextField = (): JSX.Element => <EditableSelectTextField />;
-// export const checkboxLabel = (): JSX.Element => <EditableCheckboxLabel />;
 
 function ToggleVariants(): JSX.Element {
   return (
@@ -263,7 +203,7 @@ function RoleInput(): JSX.Element {
   const [options, setOptions] = useState<any>([]);
 
   useEffect(() => {
-    const entityOptions = entities.map(e => {
+    const entityOptions = entities.map((e: any) => {
       return {
         ...e,
         label: e['schema:name'] || e['schema:legalName'],
@@ -282,7 +222,7 @@ function RoleInput(): JSX.Element {
       ];
       setEntities(newEntities);
     } else {
-      const updatedEntities = entities.map(existingEntity =>
+      const updatedEntities = entities.map((existingEntity: any) =>
         existingEntity.id === updatedEntity.id
           ? { ...updatedEntity }
           : existingEntity,

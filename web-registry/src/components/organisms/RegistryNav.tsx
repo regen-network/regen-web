@@ -30,7 +30,7 @@ const RegistryNav: React.FC = () => {
   const desktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-  const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
+  const fullWidthRegExp = /projects\/[a-z-]+/;
   const { data: projectsData } = useMoreProjectsQuery();
 
   //  each custom dropdown still needs to be passed `dropdownItems` to render

@@ -7,7 +7,7 @@ import { ExpandButton } from '../buttons/ExpandButton';
 import { Body } from '../typography';
 import { Texts, truncate } from './truncate';
 
-interface ReadMoreProps {
+export interface ReadMoreProps {
   children: string;
   maxLength?: number;
   restMinLength?: number;

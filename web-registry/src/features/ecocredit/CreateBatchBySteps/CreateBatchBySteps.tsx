@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MultiStepSection } from '../../../components/templates/MultiStep';
+import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 import CreateBatchMultiStepForm from './CreateBatchMultiStepForm';
 import formModel from './form-model';
 
@@ -13,13 +13,13 @@ import formModel from './form-model';
 
 function CreateBatchBySteps(): React.ReactElement {
   return (
-    <MultiStepSection
+    <MultiStepTemplate
       formId={formModel.formId}
       steps={formModel.steps}
       initialValues={formModel.initialValues}
     >
       <CreateBatchMultiStepForm />
-    </MultiStepSection>
+    </MultiStepTemplate>
   );
 }
 

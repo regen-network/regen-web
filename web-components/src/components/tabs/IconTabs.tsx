@@ -42,14 +42,16 @@ const IconTabs: React.FC<IconTabsProps> = ({ tabs }) => {
           ))}
         </StyledTabs>
       </div>
-      {tabs.map(
-        (tab, index) =>
-          value === index && (
-            <TabPanel value={value} index={index}>
-              {tab.content}
-            </TabPanel>
-          ),
-      )}
+      {tabs.map((tab, index) => (
+        <TabPanel
+          key={index}
+          value={value}
+          index={index}
+          hidden={tab.hidden || value !== index}
+        >
+          {tab.content}
+        </TabPanel>
+      ))}
     </div>
   );
 };

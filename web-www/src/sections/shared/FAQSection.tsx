@@ -68,7 +68,7 @@ const FAQSection = ({
   children,
 }: FAQSectionProps): JSX.Element => {
   const classes = useStyles();
-  const theme = useTheme<Theme>();
+  const theme = useTheme();
   return (
     <BackgroundImage Tag="div" fluid={imageData}>
       <Section

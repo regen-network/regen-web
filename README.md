@@ -35,7 +35,8 @@ This project uses [lerna](https://github.com/lerna/lerna) with [yarn workspaces]
 
 #### Mac
 
-If you haven't already, you can set up system dependencies by running the following commands: 
+If you haven't already, you can set up system dependencies by running the following commands:
+
 ```sh
 brew install python
 sudo ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
@@ -256,8 +257,8 @@ The `<Body>` component by default will add styles to child `Link` and `ul/ol` el
 |  21px  | 1.313rem | 5.252             |              H5, ButtonLarge              |         Title, Label         |        H5        |
 |  18px  | 1.125rem | 4.5               | H6, subtitleLarge bodyLarge, buttonMedium | Title, Subtitle, Body, Label |  h6, textLarge   |
 |  16px  |   1rem   | 4                 |        subtitleMedium, bodyMedium         |       Subtitle, Label        |    textMedium    |
-|  14px  | 0.875rem | 3.5               |   subtitleSmall, bodySmall, buttonSmall   |     Subtitle Body, Label     |    textSmall     |
-|  12px  | 0.75rem  | 3                 |  subtitleXSmall bodyXSmall, buttonXSmall  |     Subtitle Body, Label     |    textXSmall    |
+|  14px  | 0.875rem | 3.5               |   subtitleSmall, bodySmall, buttonSmall   |    Subtitle, Body, Label     |    textSmall     |
+|  12px  | 0.75rem  | 3                 |  subtitleXSmall bodyXSmall, buttonXSmall  |    Subtitle, Body, Label     |    textXSmall    |
 
 ## Timeout Issue on Slower Connections
 

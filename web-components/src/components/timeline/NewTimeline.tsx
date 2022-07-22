@@ -13,7 +13,7 @@ import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
 import Modal from '../modal';
-import Tag from '../tag';
+import TagComponent from '../tag';
 import { Title } from '../typography';
 
 interface StyleProps {
@@ -21,14 +21,14 @@ interface StyleProps {
   even?: boolean;
 }
 
-interface TagType {
+interface Tag {
   name: string;
   color: string;
 }
 
 export interface Item {
   title: string;
-  tags: TagType[];
+  tags: Tag[];
   imgSrc?: string;
   url?: string;
 }
@@ -189,7 +189,7 @@ function Content({ item, index, onTitleClick }: ContentProps): JSX.Element {
         </Title>
         <div className={classes.tags}>
           {item.tags.map((t, i) => (
-            <Tag key={i} name={t.name} color={t.color} />
+            <TagComponent key={i} name={t.name} color={t.color} />
           ))}
         </div>
       </Grid>

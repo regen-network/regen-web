@@ -23,11 +23,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-type Props = {
-  location: PageProps['location'];
-};
-
-const Layout: React.FC<Props> = ({ children, location }) => {
+const Layout: React.FC<PageProps> = ({ children, location }) => {
   const footerItems: [FooterItem, FooterItem, FooterItem] = [
     {
       title: 'get involved',

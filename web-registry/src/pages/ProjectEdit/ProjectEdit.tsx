@@ -114,7 +114,7 @@ type ContextType = {
 };
 
 const ProjectEditContext = createContext<ContextType>({
-  confirmSave: () => {},
+  confirmSave: () => {}, // eslint-disable-line
   isEdit: false,
 });
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import * as togeojson from '@mapbox/togeojson';
 import { Box, Skeleton } from '@mui/material';
@@ -31,31 +31,17 @@ import { getFormattedDate } from 'web-components/lib/utils/format';
 import {
   useMoreProjectsQuery,
   useProjectByHandleQuery,
-} from '../../../generated/graphql';
-import {
-  ProjectMetadataLD,
-  ProjectStakeholder,
-} from '../../../generated/json-ld/index';
+} from 'generated/graphql';
+import { ProjectMetadataLD, ProjectStakeholder } from 'generated/json-ld/index';
 import {
   EcologicalImpact,
   useEcologicalImpactByIriQuery,
-} from '../../../generated/sanity-graphql';
-import { useLedger } from '../../../ledger';
-import getApiUri from '../../../lib/apiUri';
-import {
-  getBatchesTotal,
-  getBatchesWithSupply,
-} from '../../../lib/ecocredit/api';
-import { setPageView } from '../../../lib/ga';
-import { chainId } from '../../../lib/ledger';
-import { getMetadata } from '../../../lib/metadata-graph';
-import { buildIssuanceModalData } from '../../../lib/transform';
-import { useWallet } from '../../../lib/wallet';
-import { client } from '../../../sanity';
+} from 'generated/sanity-graphql';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
-} from '../../../types/ledger/ecocredit';
+} from 'types/ledger/ecocredit';
+
 import {
   BuyCreditsModal,
   ConfirmationModal,
@@ -65,8 +51,17 @@ import {
   MoreProjectsSection,
   ProjectImpactSection,
   ProjectTopSection,
-} from '../../organisms';
-import { Credits } from '../../organisms/BuyCreditsModal';
+} from 'components/organisms';
+import { Credits } from 'components/organisms/BuyCreditsModal';
+import { useLedger } from 'ledger';
+import getApiUri from 'lib/apiUri';
+import { getBatchesTotal, getBatchesWithSupply } from 'lib/ecocredit/api';
+import { setPageView } from 'lib/ga';
+import { chainId } from 'lib/ledger';
+import { getMetadata } from 'lib/metadata-graph';
+import { buildIssuanceModalData } from 'lib/transform';
+import { useWallet } from 'lib/wallet';
+import { client } from 'sanity';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 
 interface Project {

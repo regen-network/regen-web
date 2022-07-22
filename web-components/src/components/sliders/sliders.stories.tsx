@@ -1,15 +1,9 @@
-import * as React from 'react';
-import Grid from '@mui/material/Grid';
+import { ItemProps } from './Item';
+import ProtectedSpecies from './ProtectedSpecies';
+import ProjectMedia, { Media, Asset } from './ProjectMedia';
+import StaticMap from '../map/StaticMap';
 
-import StaticMap from 'web-components/lib/components/map/StaticMap';
-import { ItemProps } from 'web-components/lib/components/sliders/Item';
-import ProjectMedia, {
-  Asset,
-  Media,
-} from 'web-components/lib/components/sliders/ProjectMedia';
-import ProtectedSpecies, {
-  ProtectedSpeciesProps,
-} from 'web-components/lib/components/sliders/ProtectedSpecies';
+import Grid from '@mui/material/Grid';
 
 export default {
   title: 'Sliders',
@@ -21,18 +15,7 @@ const item: ItemProps = {
   imgSrc: './melaleuca-b.png',
 };
 
-const species: ProtectedSpeciesProps = [
-  item,
-  item,
-  item,
-  item,
-  item,
-  item,
-  item,
-  item,
-  item,
-  item,
-];
+const species = [item, item, item, item, item, item, item, item, item, item];
 
 // export const protectedSpeciesItem = (): JSX.Element => (
 //   <Item name={text('Name', item.name)} imgSrc={item.imgSrc} />

@@ -71,7 +71,7 @@ export default function ControlledTextField({
             onBlur={({ target: { value } }) => handleBlur(value)}
             onChange={e => handleFieldChange(e, handleChange)}
             value={field.value}
-            disabled={form.isSubmitting}
+            disabled={!!inputProps.disabled || form.isSubmitting}
             startAdornment={
               startAdornment ? (
                 <InputAdornment position="start">

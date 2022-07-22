@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import Grid from '@mui/material/Grid';
 import { DefaultTheme as Theme, makeStyles, withStyles } from '@mui/styles';

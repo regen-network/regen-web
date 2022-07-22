@@ -1,8 +1,5 @@
 module.exports = {
-  extends: [
-    'react-app',
-    'plugin:prettier/recommended', // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
-  ],
+  extends: ['react-app', 'plugin:prettier/recommended'],
   plugins: ['simple-import-sort'],
   rules: {
     'no-empty': 'off',
@@ -13,6 +10,7 @@ module.exports = {
     'import/first': 'error',
     'import/newline-after-import': 'error',
     'import/no-duplicates': 'error',
+    'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-function-return-type': [
       'error',
       {
@@ -33,10 +31,15 @@ module.exports = {
               ['^react', '^@?\\w'],
               // web-components
               ['^(web-components)(/.*|$)'],
+              // assets and generated files
+              ['^(generated|graphql|types)(/.*|$)'],
               // Absolute imports and Relative imports.
-              ['^(lib|hooks|types|components)(/.*|$)', '^\\.'],
-              // for scss imports.
-              ['^[^.]'],
+              [
+                '^(components|hooks|features|util|lib|pages|apollo|sanity|ledger)(/.*|$)',
+                '^\\.',
+              ],
+              // mocks, assets
+              ['^(mocks|assets|static)(/.*|$)', '^[^.]'],
             ],
           },
         ],

@@ -2,6 +2,8 @@
   "extends": "../tsconfig.json",
   "jsx": "react-jsx",
   "compilerOptions": {
-    "jsx": "preserve"
+    "jsx": "react-jsx",
+    "rootDir": "src",
+    "baseUrl": "./src"
   }
 }

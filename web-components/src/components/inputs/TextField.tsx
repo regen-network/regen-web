@@ -39,6 +39,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       color: theme.palette.primary.contrastText,
       fontWeight: 'bold',
       position: 'relative',
+      textAlign: 'left',
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(4.5),
       },

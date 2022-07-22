@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CreateBatchBySteps } from '../../features/ecocredit/CreateBatchBySteps';
+import { CreateBatchBySteps } from 'features/ecocredit/CreateBatchBySteps';
 
 const CreateBatch: React.FC = () => {
   return <CreateBatchBySteps />;

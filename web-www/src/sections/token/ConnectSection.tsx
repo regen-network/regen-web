@@ -42,7 +42,7 @@ const TokenConnectSection = (): JSX.Element => {
   const { background, sanityTokenPage: data } =
     useStaticQuery<TokenConnectSectionQuery>(query);
   const styles = useStyles();
-  const theme = useTheme<Theme>();
+  const theme = useTheme();
   const icons: IconLabelProps[] = [
     {
       icon: (

@@ -8,7 +8,8 @@ import {
   Maybe,
   Scalars,
   StepCardFieldsFragment,
-} from '../../generated/sanity-graphql';
+} from 'generated/sanity-graphql';
+
 import { WrappedStepCard } from '../atoms';
 
 const StepCardsWithDescription: React.FC<{
@@ -37,6 +38,7 @@ const StepCardsWithDescription: React.FC<{
       <Grid container justifyContent="center" sx={{ maxWidth: 752 }}>
         {stepCards?.map((card, i) => (
           <WrappedStepCard
+            key={i}
             stepNumber={i}
             stepCard={card}
             openModal={openModal}

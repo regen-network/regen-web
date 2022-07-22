@@ -28,7 +28,6 @@ export * from './Media';
 export * from './MethodologiesList';
 export * from './MethodologyDetails';
 export * from './MethodologyReviewProcess';
-export * from './MyEcocredits';
 export * from './NotFound';
 export * from './OrganizationProfile';
 export * from './PostPurchase';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
@@ -6,11 +5,10 @@ import Section from 'web-components/lib/components/section';
 import { Body, Label } from 'web-components/lib/components/typography';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { LinkWithArrow } from '../../components/atoms';
-import { Portfolio } from '../../components/organisms';
-import { useBasketTokens, useEcocredits } from '../../hooks';
-import useQueryBaskets from '../../hooks/useQueryBaskets';
-import { getAccountUrl } from '../../lib/block-explorer';
+import { LinkWithArrow } from 'components/atoms';
+import { Portfolio } from 'components/organisms';
+import { useBasketTokens, useEcocredits, useQueryBaskets } from 'hooks';
+import { getAccountUrl } from 'lib/block-explorer';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const baskets = useQueryBaskets();

@@ -6,8 +6,8 @@ import SelectTextField, {
   Option,
 } from 'web-components/lib/components/inputs/SelectTextField';
 
-import useEcocreditQuery from '../../hooks/useEcocreditQuery';
-import { getMetadataFromUint8Array } from '../../lib/metadata-graph';
+import { useEcocreditQuery } from 'hooks';
+import { getMetadataFromUint8Array } from 'lib/metadata-graph';
 
 interface Props {
   name?: string;
@@ -40,7 +40,9 @@ export function CreditClassSelect({
           let metadata;
           try {
             metadata = await getMetadataFromUint8Array(creditClass.metadata);
-          } catch (e) {}
+          } catch (e) {
+            console.error(e); // eslint-disable-line no-console
+          }
 
           const className = metadata && metadata['schema:name'];
 

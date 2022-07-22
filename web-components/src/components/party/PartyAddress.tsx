@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 import DropdownIcon from '../icons/DropdownIcon';

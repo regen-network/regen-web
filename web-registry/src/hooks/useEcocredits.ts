@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { getEcocreditsForAccount } from '../lib/ecocredit/api';
-import { ledgerRESTUri } from '../lib/ledger';
-import type { BatchInfoWithBalance } from '../types/ledger/ecocredit';
+import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+
+import { getEcocreditsForAccount } from 'lib/ecocredit/api';
+import { ledgerRESTUri } from 'lib/ledger';
 
 export default function useEcocredits(address?: string): {
   credits: BatchInfoWithBalance[];

@@ -56,7 +56,7 @@ const CommunityConnectSection: React.FC = () => {
     useStaticQuery<CommunityConnectSectionQuery>(query);
   const content = data?.connectSection;
   const styles = useStyles();
-  const theme = useTheme<Theme>();
+  const theme = useTheme();
   const icons: IconLabelProps[] = [
     {
       icon: (

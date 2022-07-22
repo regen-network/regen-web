@@ -41,7 +41,7 @@ const ValidatorsConnectSection = (): JSX.Element => {
   const { background, sanityValidatorsPage: data } =
     useStaticQuery<ValidatorsConnectSectionQuery>(query);
   const classes = useStyles();
-  const theme = useTheme<Theme>();
+  const theme = useTheme();
   const icons: IconLabelProps[] = [
     {
       icon: (

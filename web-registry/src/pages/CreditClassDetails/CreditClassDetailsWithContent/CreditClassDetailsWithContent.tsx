@@ -12,7 +12,6 @@ import Section from 'web-components/lib/components/section';
 import { Body } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import hero from 'assets/credit-class-grasslands-hero.png';
 import { CreditClassByUriQuery, useMoreProjectsQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
 
@@ -28,6 +27,8 @@ import {
 } from 'components/organisms';
 import getApiUri from 'lib/apiUri';
 import { onBtnClick } from 'lib/button';
+
+import hero from 'assets/credit-class-grasslands-hero.png';
 
 interface CreditDetailsProps {
   dbClass: CreditClassByUriQuery['creditClassByUri'];

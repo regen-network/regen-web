@@ -29,12 +29,6 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
-// import { ReactComponent as WithdrawIBC } from 'assets/svgs/withdraw-ibc.svg';
-// import { ReactComponent as DepositIBC } from 'assets/svgs/deposit-ibc.svg';
-// import { ReactComponent as Sell } from 'assets/svgs/sell.svg';
-import { ReactComponent as PutInBasket } from 'assets/svgs/put-in-basket.svg';
-import { ReactComponent as TakeFromBasket } from 'assets/svgs/take-from-basket.svg';
-
 import { Link } from 'components/atoms';
 import { Portfolio } from 'components/organisms/Portfolio';
 import {
@@ -61,6 +55,12 @@ import {
   getAvailableAmountByBatch,
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
+
+// import { ReactComponent as WithdrawIBC } from 'assets/svgs/withdraw-ibc.svg';
+// import { ReactComponent as DepositIBC } from 'assets/svgs/deposit-ibc.svg';
+// import { ReactComponent as Sell } from 'assets/svgs/sell.svg';
+import { ReactComponent as PutInBasket } from 'assets/svgs/put-in-basket.svg';
+import { ReactComponent as TakeFromBasket } from 'assets/svgs/take-from-basket.svg';
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);

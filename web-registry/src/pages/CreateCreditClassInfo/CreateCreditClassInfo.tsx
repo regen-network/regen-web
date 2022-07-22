@@ -13,9 +13,6 @@ import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
 import { Body, Title } from 'web-components/lib/components/typography';
 
-import fernImg from 'assets/fern-in-hands.png';
-import topographyImg from 'assets/topography-pattern-cutout-1.png';
-import writingOnPaperImg from 'assets/writing-on-paper.png';
 import { useAllCreateCreditClassPageQuery } from 'generated/sanity-graphql';
 
 import { WrappedImpactCard, WrappedResourcesCard } from 'components/atoms';
@@ -23,6 +20,10 @@ import { HeroAction, HeroTitle, OverviewCards } from 'components/molecules';
 import { StepCardsWithDescription } from 'components/organisms';
 import { client } from 'sanity';
 import { useCreditClassInfoStyles } from './CreditClassInfo.styles';
+
+import fernImg from 'assets/fern-in-hands.png';
+import topographyImg from 'assets/topography-pattern-cutout-1.png';
+import writingOnPaperImg from 'assets/writing-on-paper.png';
 
 const CreateCreditClassInfo: React.FC = () => {
   const styles = useCreditClassInfoStyles();

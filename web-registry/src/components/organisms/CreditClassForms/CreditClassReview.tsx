@@ -8,6 +8,7 @@ import {
 
 import { ScrollableCodebox } from 'components/molecules/ScrollableCodebox';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
+
 import type { CreditClassValues } from './CreditClassForm';
 
 export const CreditClassReview = (): JSX.Element => {

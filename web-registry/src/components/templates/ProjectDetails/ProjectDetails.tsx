@@ -62,6 +62,7 @@ import {
   ProjectTopSection,
 } from 'components/organisms';
 import { Credits } from 'components/organisms/BuyCreditsModal';
+
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 
 interface Project {

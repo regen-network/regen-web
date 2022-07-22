@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import { QuestionItem } from '@/faq/Question';
-import CurrentCreditsIcon from '@/icons/CurrentCreditsIcon';
-import FarmerIcon from '@/icons/FarmerIcon';
-import TrustIcon from '@/icons/TrustIcon';
-import { User } from '@/user/UserInfo';
+import { QuestionItem } from '../faq/Question';
+import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
+import FarmerIcon from '../icons/FarmerIcon';
+import TrustIcon from '../icons/TrustIcon';
+import { User } from '../user/UserInfo';
 import Card from './Card';
 import GlanceCard from './GlanceCard';
 import GreenCard from './GreenCard';

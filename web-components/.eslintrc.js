@@ -14,10 +14,8 @@ module.exports = {
               // Packages. `react` related packages come first.
               // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
               ['^react', '^@?\\w'],
-              // assets and generated files
-              ['^~\\/'],
-              // Absolute imports, relative imports
-              ['^@\\/', '^\\.'],
+              //  relative imports
+              ['^\\.'],
             ],
           },
         ],

@@ -7,6 +7,7 @@ import { Label } from 'web-components/lib/components/typography';
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
 import { BasketTokens } from 'hooks/useBasketTokens';
+
 import { BasketsTable, EcocreditsTable } from './';
 
 export interface PortfolioProps {

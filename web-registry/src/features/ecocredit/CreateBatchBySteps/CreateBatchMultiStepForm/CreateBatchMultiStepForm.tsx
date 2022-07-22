@@ -8,13 +8,13 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import NotFound from 'web-components/lib/components/not-found';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
+
 import formModel from '../form-model';
 import useCreateBatch from '../useCreateBatch';
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
 import Result from './Result';
 import Review from './Review';
-
 import RotationalGrazing from 'assets/rotational-grazing.png';
 
 /**

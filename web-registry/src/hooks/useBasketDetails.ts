@@ -15,6 +15,7 @@ import { useProjectsByMetadataLazyQuery } from 'generated/graphql';
 import { getMetadataFromUint8Array } from 'lib/metadata-graph';
 
 import { BasketOverviewProps, CreditBatch } from 'components/organisms';
+
 import useBankQuery from './useBankQuery';
 import useBasketQuery from './useBasketQuery';
 import useQueryListBatchInfo from './useQueryListBatchInfo';

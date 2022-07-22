@@ -5,10 +5,11 @@ import Section from 'web-components/lib/components/section';
 import { Body, Label } from 'web-components/lib/components/typography';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+import { getAccountUrl } from 'lib/block-explorer';
+
 import { LinkWithArrow } from 'components/atoms';
 import { Portfolio } from 'components/organisms';
 import { useBasketTokens, useEcocredits, useQueryBaskets } from 'hooks';
-import { getAccountUrl } from 'lib/block-explorer';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const baskets = useQueryBaskets();

@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-
 import { getEcocreditsForAccount } from 'lib/ecocredit/api';
 import { ledgerRESTUri } from 'lib/ledger';
 

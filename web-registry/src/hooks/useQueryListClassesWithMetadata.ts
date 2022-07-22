@@ -3,8 +3,8 @@ import { QueryClassesResponse } from '@regen-network/api/lib/generated/regen/eco
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/types';
 
 import { CreditClassMetadataLD } from 'generated/json-ld';
-
 import { getMetadataFromUint8Array } from 'lib/metadata-graph';
+
 import useQueryListClasses from './useQueryListClasses';
 
 interface ClassInfoWithMetadata extends ClassInfo {

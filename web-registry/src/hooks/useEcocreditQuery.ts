@@ -15,6 +15,7 @@ import {
   queryClassInfo,
   queryCreditTypes,
 } from 'lib/ecocredit/api';
+
 import { useLedger } from '../ledger';
 
 // TODO - this hook is still missing batch query functionality

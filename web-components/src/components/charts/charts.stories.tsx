@@ -1,5 +1,6 @@
 import * as React from 'react';
 import dayjs from 'dayjs';
+
 import BarChart from './BarChart';
 
 export default {

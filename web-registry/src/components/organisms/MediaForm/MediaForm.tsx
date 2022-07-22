@@ -5,10 +5,11 @@ import { requiredMessage } from 'web-components/lib/components/inputs/validation
 import { UrlList, UrlType } from 'web-components/lib/utils/schemaURL';
 
 import type { ShaclGraphByUriQuery } from 'generated/graphql';
-
-import { ProjectPageFooter } from 'components/molecules';
 import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
+
 import { useProjectEditContext } from 'pages/ProjectEdit';
+import { ProjectPageFooter } from 'components/molecules';
+
 import { isSimpleMediaFormErrors } from './MediaForm.utils';
 import type { MediaErrorsLegacy, MediaValuesLegacy } from './MediaFormLegacy';
 import { MediaFormLegacy } from './MediaFormLegacy';

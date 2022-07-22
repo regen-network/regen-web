@@ -20,29 +20,10 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.tsx', '*.ts'],
+      files: ['*.stories.tsx'],
       rules: {
-        'simple-import-sort/imports': [
-          'error',
-          {
-            groups: [
-              // Packages. `react` related packages come first.
-              // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
-              ['^react', '^@?\\w'],
-              // web-components
-              ['^(web-components)(/.*|$)'],
-              // assets and generated files
-              ['^(generated|graphql|types)(/.*|$)'],
-              // Absolute imports and Relative imports.
-              [
-                '^(components|hooks|features|util|lib|pages|apollo|sanity|ledger)(/.*|$)',
-                '^\\.',
-              ],
-              // mocks, assets
-              ['^(mocks|assets|static)(/.*|$)', '^[^.]'],
-            ],
-          },
-        ],
+        'import/no-anonymous-default-export': 'off',
+        '@typescript-eslint/explicit-function-return-type': 'off',
       },
     },
   ],

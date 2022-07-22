@@ -9,11 +9,12 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate, truncateHash } from 'web-components/lib/utils/truncate';
 
-import { getAccountUrl, getHashUrl } from '../../lib/block-explorer';
-import { getBatchesWithSupply } from '../../lib/ecocredit/api';
-import { ledgerRESTUri } from '../../lib/ledger';
-import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
-import { Link } from '../atoms';
+import type { BatchInfoWithSupply } from 'types/ledger/ecocredit';
+import { getAccountUrl, getHashUrl } from 'lib/block-explorer';
+import { getBatchesWithSupply } from 'lib/ecocredit/api';
+import { ledgerRESTUri } from 'lib/ledger';
+
+import { Link } from 'components/atoms';
 
 interface CreditBatchProps {
   creditClassId?: string | null;

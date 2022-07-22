@@ -29,6 +29,8 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { getHashUrl } from 'lib/block-explorer';
+
 import { Link } from 'components/atoms';
 import { Portfolio } from 'components/organisms/Portfolio';
 import {
@@ -39,7 +41,6 @@ import {
   useQueryBaskets,
 } from 'hooks';
 import type { BasketTokens } from 'hooks/useBasketTokens';
-import { getHashUrl } from 'lib/block-explorer';
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
 import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';

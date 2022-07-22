@@ -12,8 +12,9 @@ import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
-import { useQueryListClasses } from 'hooks';
 import { useWallet } from 'lib/wallet';
+
+import { useQueryListClasses } from 'hooks';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
 const MyProjects = React.lazy(() => import('./MyProjects'));

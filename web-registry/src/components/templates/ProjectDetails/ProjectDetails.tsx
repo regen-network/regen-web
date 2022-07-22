@@ -41,6 +41,15 @@ import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
 } from 'types/ledger/ecocredit';
+import { useLedger } from 'ledger';
+import getApiUri from 'lib/apiUri';
+import { getBatchesTotal, getBatchesWithSupply } from 'lib/ecocredit/api';
+import { setPageView } from 'lib/ga';
+import { chainId } from 'lib/ledger';
+import { getMetadata } from 'lib/metadata-graph';
+import { buildIssuanceModalData } from 'lib/transform';
+import { useWallet } from 'lib/wallet';
+import { client } from 'sanity';
 
 import {
   BuyCreditsModal,
@@ -53,15 +62,6 @@ import {
   ProjectTopSection,
 } from 'components/organisms';
 import { Credits } from 'components/organisms/BuyCreditsModal';
-import { useLedger } from 'ledger';
-import getApiUri from 'lib/apiUri';
-import { getBatchesTotal, getBatchesWithSupply } from 'lib/ecocredit/api';
-import { setPageView } from 'lib/ga';
-import { chainId } from 'lib/ledger';
-import { getMetadata } from 'lib/metadata-graph';
-import { buildIssuanceModalData } from 'lib/transform';
-import { useWallet } from 'lib/wallet';
-import { client } from 'sanity';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 
 interface Project {

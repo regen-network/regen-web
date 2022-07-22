@@ -14,11 +14,11 @@ import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSl
 import { Body, Title } from 'web-components/lib/components/typography';
 
 import { useAllCreateCreditClassPageQuery } from 'generated/sanity-graphql';
+import { client } from 'sanity';
 
 import { WrappedImpactCard, WrappedResourcesCard } from 'components/atoms';
 import { HeroAction, HeroTitle, OverviewCards } from 'components/molecules';
 import { StepCardsWithDescription } from 'components/organisms';
-import { client } from 'sanity';
 import { useCreditClassInfoStyles } from './CreditClassInfo.styles';
 
 import fernImg from 'assets/fern-in-hands.png';

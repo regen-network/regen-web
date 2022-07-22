@@ -14,6 +14,8 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { CreditClassByUriQuery, useMoreProjectsQuery } from 'generated/graphql';
 import { CreditClass } from 'generated/sanity-graphql';
+import getApiUri from 'lib/apiUri';
+import { onBtnClick } from 'lib/button';
 
 import { HeroTitle } from 'components/molecules';
 import {
@@ -25,8 +27,6 @@ import {
   ResourcesSection,
   StepsSection,
 } from 'components/organisms';
-import getApiUri from 'lib/apiUri';
-import { onBtnClick } from 'lib/button';
 
 import hero from 'assets/credit-class-grasslands-hero.png';
 

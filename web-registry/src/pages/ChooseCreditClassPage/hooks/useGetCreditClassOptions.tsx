@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { useAllCreditClassesQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
-
-import { useQueryListClassesWithMetadata } from 'hooks';
 import { useWallet } from 'lib/wallet';
 import { client } from 'sanity';
+
+import { useQueryListClassesWithMetadata } from 'hooks';
 
 interface CreditClassOption {
   id: string;

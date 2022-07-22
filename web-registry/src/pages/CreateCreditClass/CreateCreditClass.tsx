@@ -1,5 +1,7 @@
 import { Box } from 'web-components/lib/components/box';
 
+import { useWallet } from 'lib/wallet';
+
 import type { CreditClassValues } from 'components/organisms/CreditClassForms';
 import {
   CreateCreditClassForm,
@@ -7,7 +9,6 @@ import {
   creditClassBaseValues,
 } from 'components/organisms/CreditClassForms';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
-import { useWallet } from 'lib/wallet';
 
 export const CreateCreditClass = (): JSX.Element => {
   const { wallet } = useWallet();

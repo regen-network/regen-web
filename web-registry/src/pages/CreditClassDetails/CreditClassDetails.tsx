@@ -7,11 +7,11 @@ import {
 } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { ClassInfo } from 'types/ledger/ecocredit';
-
 import { queryEcoClassInfo } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
 import { getMetadata } from 'lib/metadata-graph';
 import { client } from 'sanity';
+
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
 

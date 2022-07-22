@@ -15,11 +15,11 @@ import {
   CreditClassMetadataLD,
 } from 'generated/json-ld';
 import { ClassInfo } from 'types/ledger/ecocredit';
+import { getAccountUrl } from 'lib/block-explorer';
 
 import { Link } from 'components/atoms';
 import { EcocreditsSection, LineItemLabelAbove } from 'components/molecules';
 import { CreditBatches, MoreProjectsSection } from 'components/organisms';
-import { getAccountUrl } from 'lib/block-explorer';
 
 interface CreditDetailsProps {
   dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];

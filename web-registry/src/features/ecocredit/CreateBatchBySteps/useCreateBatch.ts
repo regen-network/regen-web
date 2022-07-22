@@ -7,13 +7,14 @@ import {
 
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-import { useMsgClient } from 'hooks';
 import { useLedger } from 'ledger';
 import {
   generateIri,
   IriFromMetadataSuccess,
   stringToUint8Array,
 } from 'lib/metadata-graph';
+
+import { useMsgClient } from 'hooks';
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
 // TODO - Deprecated

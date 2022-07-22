@@ -11,7 +11,6 @@ import {
   useCreateWalletMutation,
   useWalletByAddrQuery,
 } from 'generated/graphql';
-
 import { getProjectPageBaseData } from 'lib/rdf';
 import { useWallet } from 'lib/wallet';
 

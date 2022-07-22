@@ -6,8 +6,9 @@ import {
   FooterItemProps as FooterItem,
 } from 'web-components/lib/components/footer/footer-new';
 
-import { chainId, nctBasket } from '../../lib/ledger';
-import { Link, RegistryIconLink } from '../atoms';
+import { chainId, nctBasket } from 'lib/ledger';
+
+import { Link, RegistryIconLink } from 'components/atoms';
 
 const AppFooter: React.FC = () => {
   const { pathname } = useLocation();

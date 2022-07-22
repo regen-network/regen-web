@@ -5,7 +5,7 @@ import { makeStyles } from '@mui/styles';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { useMultiStep } from '../../../../components/templates/MultiStep';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
 import { CreditBasicsFormValues } from './CreditBasics';
 import { RecipientFormValues } from './Recipients';

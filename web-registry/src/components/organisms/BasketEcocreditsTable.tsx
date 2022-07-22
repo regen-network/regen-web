@@ -54,6 +54,7 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
       tableLabel="basket ecocredits table"
       renderActionButtons={renderActionButtons}
       headerRows={[
+        /* eslint-disable react/jsx-key */
         <Box sx={{ minWidth: '8rem' }}>Project</Box>,
         <Box sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}>
           Batch Denom
@@ -97,6 +98,7 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
           <GreyText>{formatDate(item.endDate)}</GreyText>,
           item.projectLocation,
         ];
+        /* eslint-enable react/jsx-key */
       })}
     />
   );

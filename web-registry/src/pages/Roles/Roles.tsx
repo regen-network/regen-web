@@ -139,7 +139,7 @@ const Roles: React.FC = () => {
   let initialValues: RolesValues = { admin: wallet?.address };
   if (project?.metadata) {
     const metadata = project.metadata;
-    let i = 0;
+    const i = 0;
     // In case of on chain credit class id, we don't save the entities in the db (yet),
     // so we just use some auto-incremented ids instead of uuid to identify entities.
     // This can be removed once Keplr login is fully implemented and we save the entities

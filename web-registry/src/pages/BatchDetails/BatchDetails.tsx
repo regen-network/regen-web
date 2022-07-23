@@ -95,7 +95,6 @@ export const BatchDetails: React.FC = () => {
               size="small"
               component={Link}
               href="/ecocredits/dashboard"
-              // onClick={() => navigate('')}
             >
               view in portfolio
             </OutlinedButton>

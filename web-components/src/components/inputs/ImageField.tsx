@@ -127,7 +127,7 @@ export default function ImageField({
               id={inputId}
             />
             <label htmlFor={inputId}>
-              <OutlinedButton isImageBtn className={styles.button}>
+              <OutlinedButton component="span" className={styles.button}>
                 Add Image
               </OutlinedButton>
             </label>

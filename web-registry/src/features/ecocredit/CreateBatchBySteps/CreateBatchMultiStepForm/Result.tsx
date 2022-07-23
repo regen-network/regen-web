@@ -146,7 +146,7 @@ const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
         />
       </OnBoardingCard>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <OutlinedButton onClick={() => navigate('/ecocredits/dashboard')}>
+        <OutlinedButton href="/ecocredits/dashboard" component={Link}>
           SEE ALL CREDIT BATCHES
         </OutlinedButton>
       </Box>

@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 import * as React from 'react';
 import OutlinedButton from './OutlinedButton';
 import PrevNextButton from './PrevNextButton';
-import ContainedButton, { ContainedColorVariant } from './ContainedButton';
+import ContainedButton from './ContainedButton';
 import { TableActionButtons } from './TableActionButtons';
 import { ExpandButton } from './ExpandButton';
 import { TextButton } from './TextButton';
@@ -21,26 +21,12 @@ export const outlinedButton = (): JSX.Element => (
 );
 
 export const containedButton = (): JSX.Element => {
-  const colorVariants: ContainedColorVariant[] = [
-    'secondary',
-    'gradientBlueGreen',
-  ];
-
   return (
     <Box sx={{ display: 'flex' }}>
-      {colorVariants.map(colorVariant => (
-        <Box
-          key={colorVariant}
-          sx={{ mr: '8px', display: 'flex', flexDirection: 'column' }}
-        >
-          <ContainedButton colorVariant={colorVariant} sx={{ mb: '8px' }}>
-            Contained
-          </ContainedButton>
-          <ContainedButton colorVariant={colorVariant} disabled>
-            Disabled
-          </ContainedButton>
-        </Box>
-      ))}
+      <Box sx={{ mr: '8px', display: 'flex', flexDirection: 'column' }}>
+        <ContainedButton sx={{ mb: '8px' }}>Contained</ContainedButton>
+        <ContainedButton disabled>Disabled</ContainedButton>
+      </Box>
     </Box>
   );
 };

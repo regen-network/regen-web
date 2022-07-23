@@ -6,7 +6,7 @@ import EyeIcon from '../icons/EyeIcon';
 import MediaCard from './MediaCard';
 import { parseText } from '../../utils/textParser';
 import { Body, Label } from '../typography';
-import { Box } from '@mui/material';
+import { Box, Link } from '@mui/material';
 
 export interface ResourcesCardProps {
   image: { publicURL: string };
@@ -85,6 +85,7 @@ export default function ResourcesCard({
         >
           <OutlinedButton
             size="small"
+            // as={Link}
             target={target}
             href={link}
             startIcon={<EyeIcon />}

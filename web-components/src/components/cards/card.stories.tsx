@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { makeStyles } from '@mui/styles';
-import { Theme } from '@mui/material';
+import { Box, Theme } from '@mui/material';
 
 import Card from './Card';
 import ProjectTopCard from './ProjectTopCard';
@@ -14,7 +14,6 @@ import { User } from '../user/UserInfo';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import TrustIcon from '../icons/TrustIcon';
-import ProjectCard from './ProjectCard';
 import GreenCard from './GreenCard';
 import GreenTopIconCard from './GreenTopIconCard';
 import { ImageActionCard } from './ImageActionCard';
@@ -23,6 +22,7 @@ import FarmerIcon from '../icons/FarmerIcon';
 import { OverviewCard } from './OverviewCard';
 import ResourcesCard from './ResourcesCard';
 import { QuestionItem } from '../faq/Question';
+import ProjectCard from './ProjectCard';
 
 export default {
   title: 'Cards',
@@ -75,7 +75,7 @@ export const monitoredImpactCard = (): JSX.Element => (
 function onClick(): void {}
 
 export const projectCard = (): JSX.Element => (
-  <>
+  <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
     <ProjectCard
       name="Coorong Project"
       place={'Adelaide, South Australia, Australia'}
@@ -85,6 +85,21 @@ export const projectCard = (): JSX.Element => (
       imgSrc="/coorong.png"
       tag="biodiversity"
       onClick={onClick}
+      sx={{ maxWidth: 338, mr: 10, mb: 10 }}
+    />
+
+    <ProjectCard
+      name="Coorong Project"
+      place={'Adelaide, South Australia, Australia'}
+      area={200}
+      comingSoon={false}
+      areaUnit="hectares"
+      imgSrc="/coorong.png"
+      onClick={onClick}
+      purchaseInfo={{
+        sellInfo: { creditsAvailable: '1,200', pricePerTon: '17.20-24.20 ' },
+      }}
+      sx={{ maxWidth: 338, mr: 10, mb: 10 }}
     />
 
     <ProjectCard
@@ -97,8 +112,9 @@ export const projectCard = (): JSX.Element => (
       tag="biodiversity"
       onClick={onClick}
       registry={{ name: 'registry', type: 'type' }}
+      sx={{ maxWidth: 338 }}
     />
-  </>
+  </Box>
 );
 
 export const purchasedCreditsCard = (): JSX.Element => (

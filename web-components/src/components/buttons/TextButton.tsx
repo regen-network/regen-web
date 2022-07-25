@@ -7,6 +7,7 @@ const SIZES = {
   md: 18,
   sm: 14,
   xs: 12,
+  xxs: 10,
 };
 
 const LINE_HEIGHTS = {
@@ -15,6 +16,7 @@ const LINE_HEIGHTS = {
   md: 23,
   sm: 18,
   xs: 15,
+  xxs: 12,
 };
 
 interface Props extends ButtonProps {

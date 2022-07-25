@@ -31,6 +31,13 @@ export const containedButton = (): JSX.Element => {
   );
 };
 
+export const combined = (): JSX.Element => (
+  <Box>
+    <ContainedButton>Contained</ContainedButton>
+    <OutlinedButton>Outlined</OutlinedButton>
+  </Box>
+);
+
 export const nextButton = (): JSX.Element => (
   <PrevNextButton direction="next" />
 );

@@ -10,26 +10,8 @@ import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { User } from 'web-components/lib/components/user/UserInfo';
 
-<<<<<<< HEAD
-// import CreditCard, { CreditInfo } from 'web-components/lib/components/cards/CreditCard';
-import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
-import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
-import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
-import GreenCard from 'web-components/lib/components/cards/GreenCard';
-import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
-import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
-import ImageActionCard from 'web-components/lib/components/cards/ImageActionCard';
-import { StepCard } from 'web-components/lib/components/cards/StepCard';
-import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
-import { QuestionItem } from '../../../lib/components/faq/Question';
-import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
-import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
-import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
-import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
-import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
-=======
 // import CreditCard, { CreditInfo } from './CreditCard';
+import CreateProjectCard from './CreateProjectCard';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import TrustIcon from '../icons/TrustIcon';
@@ -42,7 +24,9 @@ import { OverviewCard } from './OverviewCard';
 import ResourcesCard from './ResourcesCard';
 import { QuestionItem } from '../faq/Question';
 import ProjectCard from './ProjectCard';
->>>>>>> 3ec2a825 (feat: 938 Update project card with sell info (#1076))
+import ReviewCard from './ReviewCard';
+import { ItemDisplay } from './ReviewCard/ReviewCard.ItemDisplay';
+import { Photo } from './ReviewCard/ReviewCard.Photo';
 
 export default {
   title: 'Cards',

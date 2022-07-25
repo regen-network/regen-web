@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { makeStyles } from '@mui/styles';
-import { Theme } from '@mui/material';
+import { Box, Theme } from '@mui/material';
 
 import Card from 'web-components/lib/components/cards/Card';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
@@ -10,6 +10,7 @@ import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { User } from 'web-components/lib/components/user/UserInfo';
 
+<<<<<<< HEAD
 // import CreditCard, { CreditInfo } from 'web-components/lib/components/cards/CreditCard';
 import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
 import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
@@ -24,6 +25,21 @@ import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
 import { QuestionItem } from '../../../lib/components/faq/Question';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
+=======
+// import CreditCard, { CreditInfo } from './CreditCard';
+import PurchasedCreditsCard from './PurchasedCreditsCard';
+import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
+import TrustIcon from '../icons/TrustIcon';
+import GreenCard from './GreenCard';
+import GreenTopIconCard from './GreenTopIconCard';
+import { ImageActionCard } from './ImageActionCard';
+import { StepCard } from './StepCard';
+import FarmerIcon from '../icons/FarmerIcon';
+import { OverviewCard } from './OverviewCard';
+import ResourcesCard from './ResourcesCard';
+import { QuestionItem } from '../faq/Question';
+import ProjectCard from './ProjectCard';
+>>>>>>> 3ec2a825 (feat: 938 Update project card with sell info (#1076))
 
 export default {
   title: 'Cards',
@@ -94,7 +110,7 @@ export const monitoredImpactCard = (): JSX.Element => (
 function onClick(): void {}
 
 export const projectCard = (): JSX.Element => (
-  <>
+  <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
     <ProjectCard
       name="Coorong Project"
       place={'Adelaide, South Australia, Australia'}
@@ -104,6 +120,21 @@ export const projectCard = (): JSX.Element => (
       imgSrc="/coorong.png"
       tag="biodiversity"
       onClick={onClick}
+      sx={{ maxWidth: 338, mr: 10, mb: 10 }}
+    />
+
+    <ProjectCard
+      name="Coorong Project"
+      place={'Adelaide, South Australia, Australia'}
+      area={200}
+      comingSoon={false}
+      areaUnit="hectares"
+      imgSrc="/coorong.png"
+      onClick={onClick}
+      purchaseInfo={{
+        sellInfo: { creditsAvailable: '1,200', pricePerTon: '17.20-24.20 ' },
+      }}
+      sx={{ maxWidth: 338, mr: 10, mb: 10 }}
     />
 
     <ProjectCard
@@ -116,8 +147,9 @@ export const projectCard = (): JSX.Element => (
       tag="biodiversity"
       onClick={onClick}
       registry={{ name: 'registry', type: 'type' }}
+      sx={{ maxWidth: 338 }}
     />
-  </>
+  </Box>
 );
 
 export const purchasedCreditsCard = (): JSX.Element => (

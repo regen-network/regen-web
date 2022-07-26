@@ -109,6 +109,9 @@ const regenTheme = createTheme({
     textXSmall: {
       fontSize: pxToRem(12),
     },
+    textXXSmall: {
+      fontSize: pxToRem(10),
+    },
     // not the same as overline in Figma mockups (which isn't really used) - using for code font instead
     overline: {
       fontFamily: ['PT Mono', '"Lato"', '-apple-system', 'sans-serif'].join(
@@ -231,6 +234,7 @@ declare module '@mui/material/styles' {
     textMedium: React.CSSProperties;
     textSmall: React.CSSProperties;
     textXSmall: React.CSSProperties;
+    textXXSmall: React.CSSProperties;
   }
 
   // allow configuration using `createTheme`
@@ -240,6 +244,7 @@ declare module '@mui/material/styles' {
     textMedium?: React.CSSProperties;
     textSmall?: React.CSSProperties;
     textXSmall?: React.CSSProperties;
+    textXXSmall?: React.CSSProperties;
   }
 }
 
@@ -251,6 +256,7 @@ declare module '@mui/material/Typography' {
     textMedium: true;
     textSmall: true;
     textXSmall: true;
+    textXXSmall: true;
   }
 }
 

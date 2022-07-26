@@ -5,9 +5,9 @@
   "dependencies": {
     "@apollo/client": "^3.4.17",
     "@auth0/auth0-react": "^1.8.0",
-    "@cosmjs/stargate": "^0.28.0",
-    "@cosmjs/proto-signing": "^0.28.0",
-		"@cosmjs/tendermint-rpc": "^0.28.0",
+    "@cosmjs/stargate": "^0.28.11",
+    "@cosmjs/proto-signing": "^0.28.11",
+		"@cosmjs/tendermint-rpc": "^0.28.11",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mapbox/togeojson": "^0.16.0",

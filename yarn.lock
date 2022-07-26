@@ -1565,7 +1565,7 @@
     long "^4.0.0"
     protobufjs "~6.10.2"
 
-"@cosmjs/proto-signing@0.28.11", "@cosmjs/proto-signing@^0.28.0":
+"@cosmjs/proto-signing@0.28.11", "@cosmjs/proto-signing@^0.28.11":
   version "0.28.11"
   resolved "https://registry.yarnpkg.com/@cosmjs/proto-signing/-/proto-signing-0.28.11.tgz#7eecb60a025ab55a409441daa14a07bb1d9b2825"
   integrity sha512-ym0DpLff+0RBkD/mtFf6wrzyuGhcbcjuDMEdcUWOrJTo6n8DXeRmHkJkyy/mrG3QC4tQX/A81+DhfkANQmgcxw==
@@ -1625,7 +1625,7 @@
     protobufjs "~6.10.2"
     xstream "^11.14.0"
 
-"@cosmjs/stargate@^0.28.0":
+"@cosmjs/stargate@^0.28.11":
   version "0.28.11"
   resolved "https://registry.yarnpkg.com/@cosmjs/stargate/-/stargate-0.28.11.tgz#ad89a008ead81cea884714570276523310e95822"
   integrity sha512-UyFH/mTNNKTZohVhj+SmjCRv/xopqU/UinGedmWzs4MqEZteX9xs6D3HTmRCgpmBQ03lpbTslE/FhhT9Hkl9KQ==
@@ -1672,7 +1672,7 @@
     readonly-date "^1.0.0"
     xstream "^11.14.0"
 
-"@cosmjs/tendermint-rpc@0.28.11", "@cosmjs/tendermint-rpc@^0.28.0":
+"@cosmjs/tendermint-rpc@0.28.11", "@cosmjs/tendermint-rpc@^0.28.11":
   version "0.28.11"
   resolved "https://registry.yarnpkg.com/@cosmjs/tendermint-rpc/-/tendermint-rpc-0.28.11.tgz#00c5854b14f24fd5eb0a5f11bd7278fc02d6815d"
   integrity sha512-TUhWsUYxbKftQmHQK5TBH62vNaKB1ybxoFZ2uJtGMVvY3jcBux7P0Ll/u5nwrM0ETAeo2RjucehJUpGBy9q+HQ==

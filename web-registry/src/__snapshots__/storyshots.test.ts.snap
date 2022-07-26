@@ -361,6 +361,9 @@ exports[`Storyshots Action Action 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -741,6 +744,9 @@ exports[`Storyshots Action Action Long Description 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -1123,6 +1129,9 @@ exports[`Storyshots Blog Post Blog Post 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -1503,6 +1512,9 @@ exports[`Storyshots Buttons Contained Button 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -1885,6 +1897,9 @@ exports[`Storyshots Buttons Expand Button 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -2265,6 +2280,9 @@ exports[`Storyshots Buttons Next Button 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -2647,6 +2665,9 @@ exports[`Storyshots Buttons Outlined Button 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -3027,6 +3048,9 @@ exports[`Storyshots Buttons Prev Button 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -3409,6 +3433,9 @@ exports[`Storyshots Buttons Table Action Buttons 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -3789,6 +3816,9 @@ exports[`Storyshots Cards Create Project Card 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -4171,6 +4201,9 @@ exports[`Storyshots Cards Create Project Card Add Another 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -4551,6 +4584,9 @@ exports[`Storyshots Cards Glance Card 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -4933,6 +4969,9 @@ exports[`Storyshots Cards Green Card 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -5313,6 +5352,9 @@ exports[`Storyshots Cards Green Top Icon Card 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -5695,6 +5737,9 @@ exports[`Storyshots Cards Image Action Card 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -6075,6 +6120,9 @@ exports[`Storyshots Cards Impact Card 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -6457,6 +6505,9 @@ exports[`Storyshots Cards Map Card 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -6837,6 +6888,9 @@ exports[`Storyshots Cards Monitored Impact Card 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -7219,6 +7273,9 @@ exports[`Storyshots Cards On Boarding Card 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -7599,6 +7656,9 @@ exports[`Storyshots Cards Overview Card 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -7981,6 +8041,9 @@ exports[`Storyshots Cards Overview Cards Group 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -8361,6 +8424,9 @@ exports[`Storyshots Cards Project Card 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -8743,6 +8809,9 @@ exports[`Storyshots Cards Project Top Card 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -9123,6 +9192,9 @@ exports[`Storyshots Cards Purchased Credits Card 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -9505,6 +9577,9 @@ exports[`Storyshots Cards Resources Card 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -9885,6 +9960,9 @@ exports[`Storyshots Cards Step Card 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -10267,6 +10345,9 @@ exports[`Storyshots Certificate Certificate 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -10647,6 +10728,9 @@ exports[`Storyshots Charts Bar Chart 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -11029,6 +11113,9 @@ exports[`Storyshots Credits Credit Details 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -11409,6 +11496,9 @@ exports[`Storyshots Credits Credits Gauge 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -11791,6 +11881,9 @@ exports[`Storyshots Document Document 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -12171,6 +12264,9 @@ exports[`Storyshots FAQ Category 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -12553,6 +12649,9 @@ exports[`Storyshots FAQ Faq 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -12933,6 +13032,9 @@ exports[`Storyshots FAQ Navigation 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -13315,6 +13417,9 @@ exports[`Storyshots FAQ Question 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -13695,6 +13800,9 @@ exports[`Storyshots Footers Fixed Footer 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -14077,6 +14185,9 @@ exports[`Storyshots Footers Save Footer 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -14457,6 +14568,9 @@ exports[`Storyshots Footers Switch Footer 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -14839,6 +14953,9 @@ exports[`Storyshots Forms Basket Put Form 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -15219,6 +15336,9 @@ exports[`Storyshots Forms Basket Take Form 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -15601,6 +15721,9 @@ exports[`Storyshots Forms Credit Batch Recipients Form 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -15981,6 +16104,9 @@ exports[`Storyshots Forms Credit Retire Form 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -16363,6 +16489,9 @@ exports[`Storyshots Forms Credit Send Form 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -16743,6 +16872,9 @@ exports[`Storyshots Forms Login Form 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -17125,6 +17257,9 @@ exports[`Storyshots Forms Sign Up Form 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -17505,6 +17640,9 @@ exports[`Storyshots Forms User Profile 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -17887,6 +18025,9 @@ exports[`Storyshots Icons Accountability Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -18267,6 +18408,9 @@ exports[`Storyshots Icons Arrow Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -18649,6 +18793,9 @@ exports[`Storyshots Icons Available Credits Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -19029,6 +19176,9 @@ exports[`Storyshots Icons Avatar Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -19411,6 +19561,9 @@ exports[`Storyshots Icons Block Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -19791,6 +19944,9 @@ exports[`Storyshots Icons Breadcrumb Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -20173,6 +20329,9 @@ exports[`Storyshots Icons Broken Link Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -20553,6 +20712,9 @@ exports[`Storyshots Icons Check Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -20935,6 +21097,9 @@ exports[`Storyshots Icons Checked Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -21315,6 +21480,9 @@ exports[`Storyshots Icons Close Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -21697,6 +21865,9 @@ exports[`Storyshots Icons Co Benefits Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -22077,6 +22248,9 @@ exports[`Storyshots Icons Counting Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -22459,6 +22633,9 @@ exports[`Storyshots Icons Credit Class Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -22839,6 +23016,9 @@ exports[`Storyshots Icons Credits Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -23221,6 +23401,9 @@ exports[`Storyshots Icons Current Credits Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -23601,6 +23784,9 @@ exports[`Storyshots Icons Discord Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -23983,6 +24169,9 @@ exports[`Storyshots Icons Document Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -24363,6 +24552,9 @@ exports[`Storyshots Icons Dropdown Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -24745,6 +24937,9 @@ exports[`Storyshots Icons Edit Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -25125,6 +25320,9 @@ exports[`Storyshots Icons Email Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -25507,6 +25705,9 @@ exports[`Storyshots Icons Eye Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -25887,6 +26088,9 @@ exports[`Storyshots Icons Facebook Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -26269,6 +26473,9 @@ exports[`Storyshots Icons Farmer Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -26649,6 +26856,9 @@ exports[`Storyshots Icons Github Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -27031,6 +27241,9 @@ exports[`Storyshots Icons Horizontal Dots Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -27411,6 +27624,9 @@ exports[`Storyshots Icons Info Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -27793,6 +28009,9 @@ exports[`Storyshots Icons Info Icon Outlined 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -28173,6 +28392,9 @@ exports[`Storyshots Icons Instagram Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -28555,6 +28777,9 @@ exports[`Storyshots Icons Interface Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -28935,6 +29160,9 @@ exports[`Storyshots Icons Link Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -29317,6 +29545,9 @@ exports[`Storyshots Icons Linked In Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -29697,6 +29928,9 @@ exports[`Storyshots Icons Medium Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -30079,6 +30313,9 @@ exports[`Storyshots Icons Minus Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -30459,6 +30696,9 @@ exports[`Storyshots Icons Organization Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -30841,6 +31081,9 @@ exports[`Storyshots Icons Phone Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -31221,6 +31464,9 @@ exports[`Storyshots Icons Pin Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -31603,6 +31849,9 @@ exports[`Storyshots Icons Play Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -31983,6 +32232,9 @@ exports[`Storyshots Icons Plus Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -32365,6 +32617,9 @@ exports[`Storyshots Icons Pointer Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -32745,6 +33000,9 @@ exports[`Storyshots Icons Print Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -33127,6 +33385,9 @@ exports[`Storyshots Icons Project Page Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -33507,6 +33768,9 @@ exports[`Storyshots Icons Regen Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -33889,6 +34153,9 @@ exports[`Storyshots Icons Regen Ledger Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -34269,6 +34536,9 @@ exports[`Storyshots Icons Regen Logo Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -34651,6 +34921,9 @@ exports[`Storyshots Icons Regen Token Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -35031,6 +35304,9 @@ exports[`Storyshots Icons Registration Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -35413,6 +35689,9 @@ exports[`Storyshots Icons Review Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -35793,6 +36072,9 @@ exports[`Storyshots Icons Satellite Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -36175,6 +36457,9 @@ exports[`Storyshots Icons Save Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -36555,6 +36840,9 @@ exports[`Storyshots Icons Shaded Credits Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -36937,6 +37225,9 @@ exports[`Storyshots Icons Shield Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -37317,6 +37608,9 @@ exports[`Storyshots Icons Small Arrow Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -37699,6 +37993,9 @@ exports[`Storyshots Icons Soil Sample Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -38079,6 +38376,9 @@ exports[`Storyshots Icons Spinner 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -38461,6 +38761,9 @@ exports[`Storyshots Icons Telegram Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -38841,6 +39144,9 @@ exports[`Storyshots Icons Total Credits Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -39223,6 +39529,9 @@ exports[`Storyshots Icons Trash Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -39603,6 +39912,9 @@ exports[`Storyshots Icons Trust Document Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -39985,6 +40297,9 @@ exports[`Storyshots Icons Trust Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -40365,6 +40680,9 @@ exports[`Storyshots Icons Twitter Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -40747,6 +41065,9 @@ exports[`Storyshots Icons Verified Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -41127,6 +41448,9 @@ exports[`Storyshots Icons Wallet Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -41509,6 +41833,9 @@ exports[`Storyshots Icons Whitepaper Icon 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -41889,6 +42216,9 @@ exports[`Storyshots Icons Youtube Icon 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -42271,6 +42601,9 @@ exports[`Storyshots Image Grid Image Grid 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -42651,6 +42984,9 @@ exports[`Storyshots Image Image Default Quality 100 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -43033,6 +43369,9 @@ exports[`Storyshots Image Item Image Item 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -43413,6 +43752,9 @@ exports[`Storyshots Image Original Image 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -43795,6 +44137,9 @@ exports[`Storyshots Inputs Date Pick Field 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -44175,6 +44520,9 @@ exports[`Storyshots Inputs Roles Input 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -44557,6 +44905,9 @@ exports[`Storyshots Inputs Toggle 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -44937,6 +45288,9 @@ exports[`Storyshots Loading Loading Spinner 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -45319,6 +45673,9 @@ exports[`Storyshots Map Map 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -45699,6 +46056,9 @@ exports[`Storyshots Modal Basket Put Modal 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -46081,6 +46441,9 @@ exports[`Storyshots Modal Basket Take Modal 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -46461,6 +46824,9 @@ exports[`Storyshots Modal Create Sell Order Modal 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -46843,6 +47209,9 @@ exports[`Storyshots Modal Credit Retire Modal 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -47223,6 +47592,9 @@ exports[`Storyshots Modal Credit Send Modal 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -47605,6 +47977,9 @@ exports[`Storyshots Modal Crop Round Image Modal 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -47985,6 +48360,9 @@ exports[`Storyshots Modal Crop Square Image Modal 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -48367,6 +48745,9 @@ exports[`Storyshots Modal Ledger Modal 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -48747,6 +49128,9 @@ exports[`Storyshots Modal Modal 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -49129,6 +49513,9 @@ exports[`Storyshots Modal Processing Modal 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -49509,6 +49896,9 @@ exports[`Storyshots Modal Tx Error Modal 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -49891,6 +50281,9 @@ exports[`Storyshots Modal Tx Successful Modal 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -50271,6 +50664,9 @@ exports[`Storyshots Party Party Address 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -50653,6 +51049,9 @@ exports[`Storyshots Place Project Place Info 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -51033,6 +51432,9 @@ exports[`Storyshots ReadMore Read More 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -51415,6 +51817,9 @@ exports[`Storyshots Sliders Project Media 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -51795,6 +52200,9 @@ exports[`Storyshots Sliders Project Media With Map 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -52177,6 +52585,9 @@ exports[`Storyshots Sliders Protected Species 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -52557,6 +52968,9 @@ exports[`Storyshots Table Actions Table 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -52939,6 +53353,9 @@ exports[`Storyshots Table Documentation Table 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -53319,6 +53736,9 @@ exports[`Storyshots Table Table Pagination 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -53701,6 +54121,9 @@ exports[`Storyshots Tabs Icon Tabs 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -54081,6 +54504,9 @@ exports[`Storyshots Tabs Mrv Tabs 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -54463,6 +54889,9 @@ exports[`Storyshots Text Layouts Labeled Detail 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -54843,6 +55272,9 @@ exports[`Storyshots Text Layouts Labeled Number 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -55225,6 +55657,9 @@ exports[`Storyshots Text Layouts Title Description 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -55605,6 +56040,9 @@ exports[`Storyshots Timeline New Timeline 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -55987,6 +56425,9 @@ exports[`Storyshots Timeline Timeline 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -56367,6 +56808,9 @@ exports[`Storyshots Timeline Timeline Item 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -56749,6 +57193,9 @@ exports[`Storyshots Tooltip Info 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -57129,6 +57576,9 @@ exports[`Storyshots Tooltip Main Title 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -57511,6 +57961,9 @@ exports[`Storyshots Typography Body 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -57891,6 +58344,9 @@ exports[`Storyshots Typography Button Text 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -58273,6 +58729,9 @@ exports[`Storyshots Typography Subtitle 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -58653,6 +59112,9 @@ exports[`Storyshots Typography Title 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -59035,6 +59497,9 @@ exports[`Storyshots User Big User Avatar 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -59415,6 +59880,9 @@ exports[`Storyshots User Column User Info 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -59797,6 +60265,9 @@ exports[`Storyshots User Fallback User Avatar 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -60177,6 +60648,9 @@ exports[`Storyshots User Medium User Avatar 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {
@@ -60559,6 +61033,9 @@ exports[`Storyshots User User Avatar With Link 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -60940,6 +61417,9 @@ exports[`Storyshots User User Info 1`] = `
           "textXSmall": Object {
             "fontSize": "0.75rem",
           },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
+          },
         },
         "zIndex": Object {
           "appBar": 1100,
@@ -61320,6 +61800,9 @@ exports[`Storyshots User With Title 1`] = `
           },
           "textXSmall": Object {
             "fontSize": "0.75rem",
+          },
+          "textXXSmall": Object {
+            "fontSize": "0.625rem",
           },
         },
         "zIndex": Object {

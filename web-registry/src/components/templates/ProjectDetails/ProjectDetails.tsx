@@ -59,12 +59,14 @@ function ProjectDetails(): JSX.Element {
     txClient = new ServiceClientImpl(api.queryClient);
   }
 
-  // fetch project
+  // fetch project by handle
   const { data, loading } = useProjectByHandleQuery({
     skip: !projectId,
     variables: { handle: projectId as string },
   });
   const project = data?.projectByHandle;
+
+  // or fetch project by onChainId: TODO
 
   // from project.metadata
   const metadata: ProjectMetadataLD = project?.metadata;

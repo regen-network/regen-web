@@ -19,6 +19,7 @@ export interface BatchInfoWithBalance
   extends IBatchInfo,
     Omit<QueryBalanceResponse, '$type'> {
   classId?: string;
+  projectLocation?: string;
 }
 
 // /** combines the ledger `BatchInfo` with ledger `QuerySupplyResponse` */
@@ -27,6 +28,7 @@ export interface BatchInfoWithSupply
     Omit<QuerySupplyResponse, '$type'> {
   txhash?: string;
   classId?: string;
+  projectLocation?: string;
 }
 
 export type ClassID = 'C01' | 'C02' | 'C03';

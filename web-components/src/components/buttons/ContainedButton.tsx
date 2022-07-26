@@ -10,9 +10,9 @@ const ContainedButton = styled(Button)(({ theme }) => {
     backgroundSize: '150% 100%',
     backgroundPosition: '75% 0',
     color: theme.palette.primary.main,
-    borderImageSlice: 1,
-    borderImageSource: gradient,
+    borderColor: 'transparent',
     transition: 'all 0.2s ease-in-out',
+    backgroundOrigin: 'border-box',
     ':hover': {
       // a bit hacky -
       // You can't transition a background gradient directly, so we handle through positioning

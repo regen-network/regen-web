@@ -50,6 +50,7 @@ export default function useMsgClient(
         ],
         gas: '200000',
       };
+      console.log('msgs', msgs);
 
       const txBytes = await api.msgClient.sign(
         wallet.address,
@@ -57,6 +58,8 @@ export default function useMsgClient(
         fee || defaultFee,
         memo || '',
       );
+
+      console.log('txBytes', txBytes);
 
       return txBytes;
     },
@@ -70,6 +73,8 @@ export default function useMsgClient(
       const _deliverTxResponse = await api.msgClient.broadcast(txBytes);
       // The transaction succeeded iff code is 0.
       // TODO: this can give false positives. Some errors return code 0.
+      console.log('_deliverTxResponse', _deliverTxResponse);
+
       if (_deliverTxResponse.code !== 0) {
         setError(_deliverTxResponse.rawLog);
         handleError();

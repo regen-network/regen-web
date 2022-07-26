@@ -1,8 +1,8 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { SigningStargateClient, DeliverTxResponse } from '@cosmjs/stargate';
-import { Window as KeplrWindow } from '@keplr-wallet/types';
-import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { OfflineSigner } from '@cosmjs/proto-signing';
+import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
+import { Window as KeplrWindow } from '@keplr-wallet/types';
 
 import { truncate } from 'web-components/lib/utils/truncate';
 
@@ -171,8 +171,8 @@ export const WalletProvider: React.FC = ({ children }) => {
       // Also, it will request user to unlock the wallet if the wallet is locked.
       await window.keplr.enable(chainId);
 
-      const offlineSigner = window.getOfflineSignerAuto
-        ? await window.getOfflineSignerAuto(chainId)
+      const offlineSigner = window.getOfflineSigner
+        ? window.getOfflineSigner(chainId)
         : undefined;
       const key = await window.keplr.getKey(chainId);
       if (key && key.bech32Address && offlineSigner) {

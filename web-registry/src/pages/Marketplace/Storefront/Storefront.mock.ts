@@ -1,4 +1,4 @@
-import { longify } from '@cosmjs/stargate/build/queries/utils';
+import { longify } from '@cosmjs/stargate/build/queryclient/utils';
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
 export const sellOrdersMock: SellOrderInfo[] = [

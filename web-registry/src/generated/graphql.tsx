@@ -20838,7 +20838,7 @@ export type WalletByAddrQuery = (
       { __typename?: 'ProjectsConnection' }
       & { nodes: Array<Maybe<(
         { __typename?: 'Project' }
-        & Pick<Project, 'id' | 'handle' | 'metadata'>
+        & Pick<Project, 'id' | 'onChainId' | 'handle' | 'metadata'>
       )>> }
     ) }
   )> }
@@ -21038,6 +21038,30 @@ export type ProjectByIdQuery = (
         & { nodes: Array<Maybe<(
           { __typename?: 'CreditClassVersion' }
           & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
+        )>> }
+      ) }
+    )> }
+  )> }
+);
+
+export type ProjectByOnChainIdQueryVariables = Exact<{
+  onChainId: Scalars['String'];
+}>;
+
+
+export type ProjectByOnChainIdQuery = (
+  { __typename?: 'Query' }
+  & { projectByOnChainId?: Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'metadata'>
+    & { creditClassByCreditClassId?: Maybe<(
+      { __typename?: 'CreditClass' }
+      & Pick<CreditClass, 'onChainId'>
+      & { creditClassVersionsById: (
+        { __typename?: 'CreditClassVersionsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'CreditClassVersion' }
+          & Pick<CreditClassVersion, 'name' | 'metadata'>
         )>> }
       ) }
     )> }
@@ -22376,6 +22400,7 @@ export const WalletByAddrDocument = gql`
     projectsByWalletId {
       nodes {
         id
+        onChainId
         handle
         metadata
       }
@@ -22611,6 +22636,50 @@ export function useProjectByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type ProjectByIdQueryHookResult = ReturnType<typeof useProjectByIdQuery>;
 export type ProjectByIdLazyQueryHookResult = ReturnType<typeof useProjectByIdLazyQuery>;
 export type ProjectByIdQueryResult = Apollo.QueryResult<ProjectByIdQuery, ProjectByIdQueryVariables>;
+export const ProjectByOnChainIdDocument = gql`
+    query ProjectByOnChainId($onChainId: String!) {
+  projectByOnChainId(onChainId: $onChainId) {
+    metadata
+    creditClassByCreditClassId {
+      onChainId
+      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+        nodes {
+          name
+          metadata
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useProjectByOnChainIdQuery__
+ *
+ * To run a query within a React component, call `useProjectByOnChainIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectByOnChainIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectByOnChainIdQuery({
+ *   variables: {
+ *      onChainId: // value for 'onChainId'
+ *   },
+ * });
+ */
+export function useProjectByOnChainIdQuery(baseOptions: Apollo.QueryHookOptions<ProjectByOnChainIdQuery, ProjectByOnChainIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ProjectByOnChainIdQuery, ProjectByOnChainIdQueryVariables>(ProjectByOnChainIdDocument, options);
+      }
+export function useProjectByOnChainIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectByOnChainIdQuery, ProjectByOnChainIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ProjectByOnChainIdQuery, ProjectByOnChainIdQueryVariables>(ProjectByOnChainIdDocument, options);
+        }
+export type ProjectByOnChainIdQueryHookResult = ReturnType<typeof useProjectByOnChainIdQuery>;
+export type ProjectByOnChainIdLazyQueryHookResult = ReturnType<typeof useProjectByOnChainIdLazyQuery>;
+export type ProjectByOnChainIdQueryResult = Apollo.QueryResult<ProjectByOnChainIdQuery, ProjectByOnChainIdQueryVariables>;
 export const ProjectsByMetadataDocument = gql`
     query ProjectsByMetadata($metadata: JSON) {
   allProjects(filter: {metadata: {contains: $metadata}}) {

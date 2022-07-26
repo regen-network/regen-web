@@ -2,6 +2,7 @@ import { useTheme } from '@mui/styles';
 import { Box, Skeleton } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { gql } from '@apollo/client';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
@@ -17,7 +18,10 @@ import {
   MoreProjectsSection,
 } from '../../organisms';
 import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
-import { useProjectByHandleQuery } from '../../../generated/graphql';
+import {
+  useProjectByHandleQuery,
+  useProjectByOnChainIdQuery,
+} from '../../../generated/graphql';
 import { ProjectMetadataLD } from '../../../generated/json-ld/index';
 import useOtherProjects from './hooks/useOtherProjects';
 import useImpact from './hooks/useImpact';
@@ -32,6 +36,7 @@ import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { TransactionModals } from './ProjectDetails.TransactionModals';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
+import { graphql } from 'graphql';
 
 interface Project {
   creditPrice?: CreditPrice;
@@ -64,9 +69,17 @@ function ProjectDetails(): JSX.Element {
     skip: !projectId,
     variables: { handle: projectId as string },
   });
-  const project = data?.projectByHandle;
+  let project: any = data?.projectByHandle; // TODO: any
 
   // or fetch project by onChainId: TODO
+  const { data: _data, loading: _loading } = useProjectByOnChainIdQuery({
+    skip: !projectId,
+    variables: { onChainId: projectId as string },
+  });
+
+  if (!project) project = _data?.projectByOnChainId;
+
+  console.log('project', project);
 
   // from project.metadata
   const metadata: ProjectMetadataLD = project?.metadata;

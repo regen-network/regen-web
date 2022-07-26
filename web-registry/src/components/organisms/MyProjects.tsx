@@ -96,7 +96,7 @@ const MyProjects: React.FC = () => {
         {projects?.map(project => (
           <Grid item xs={12} md={6} lg={4}>
             <ProjectCard
-              name={project?.handle || project?.id}
+              name={project?.handle || project?.onChainId || project?.id}
               imgSrc={''}
               place="TODO"
               area={0}

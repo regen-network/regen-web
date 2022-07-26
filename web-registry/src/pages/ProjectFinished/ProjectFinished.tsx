@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box } from '@mui/system';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { Title } from 'web-components/lib/components/typography';
@@ -13,11 +13,30 @@ import { Link } from '../../components/atoms';
 import { getHashUrl } from '../../lib/block-explorer';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { useGetProjectId } from './hooks/useGetProjectId';
+import { useUpdateProjectByIdMutation } from '../../generated/graphql';
 
 const ProjectFinished: React.FC = () => {
   const { deliverTxResponse } = useCreateProjectContext();
-  const projectId = useGetProjectId(deliverTxResponse);
+  const { projectId } = useParams();
   const navigate = useNavigate();
+  const projectOnChainId = useGetProjectId(deliverTxResponse);
+  const [updateProject] = useUpdateProjectByIdMutation();
+
+  // TODO: run mutation in review success, fetch from DB here?
+  useEffect((): void => {
+    if (!!projectOnChainId) {
+      updateProject({
+        variables: {
+          input: {
+            id: projectId,
+            projectPatch: {
+              onChainId: projectOnChainId,
+            },
+          },
+        },
+      });
+    }
+  }, [projectId, projectOnChainId, updateProject]);
 
   return (
     <OnboardingFormTemplate activeStep={2} title="Project has been created!">
@@ -33,7 +52,7 @@ const ProjectFinished: React.FC = () => {
           <CardItem
             label="project id"
             value={{
-              name: projectId,
+              name: projectOnChainId,
             }}
             linkComponent={Link}
           />
@@ -49,7 +68,7 @@ const ProjectFinished: React.FC = () => {
         <OutlinedButton
           sx={{ margin: '0 auto' }}
           role="link"
-          onClick={() => navigate(`/projects/${projectId}`)}
+          onClick={() => navigate(`/projects/${projectOnChainId}`)}
         >
           see project page
         </OutlinedButton>

@@ -1,0 +1,14 @@
+query ProjectByOnChainId($onChainId: String!) {
+  projectByOnChainId(onChainId: $onChainId) {
+    metadata
+    creditClassByCreditClassId {
+      onChainId
+      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+        nodes {
+          name
+          metadata
+        }
+      }
+    }
+  }
+}

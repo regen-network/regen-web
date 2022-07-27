@@ -8,11 +8,13 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import Card from 'web-components/lib/components/cards/Card';
 import { Title } from 'web-components/lib/components/typography';
 
-import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
-import Sequestration from '../../assets/svgs/sequestration.svg';
-import { CreditClassByUriQuery } from '../../generated/graphql';
-import { Maybe, Scalars } from '../../generated/sanity-graphql';
+import { CreditClassByUriQuery } from 'generated/graphql';
+import { Maybe, Scalars } from 'generated/sanity-graphql';
+
 import { LineItem } from './LineItem';
+
+import CarbonCreditFruit from 'assets/svgs/carbon-credit-fruit.svg';
+import Sequestration from 'assets/svgs/sequestration.svg';
 
 interface CreditClassDetailsColumnProps {
   dbClass: CreditClassByUriQuery['creditClassByUri'];

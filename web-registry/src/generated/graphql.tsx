@@ -20870,6 +20870,55 @@ export type MoreProjectsQuery = (
   )> }
 );
 
+export type ProjectByHandleQueryVariables = Exact<{
+  handle: Scalars['String'];
+}>;
+
+
+export type ProjectByHandleQuery = (
+  { __typename?: 'Query' }
+  & { projectByHandle?: Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'onChainId'>
+  )> }
+);
+
+export type ProjectByIdQueryVariables = Exact<{
+  id: Scalars['UUID'];
+}>;
+
+
+export type ProjectByIdQuery = (
+  { __typename?: 'Query' }
+  & { projectById?: Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'metadata' | 'developerId' | 'originatorId' | 'landOwnerId' | 'stewardId' | 'addressId'>
+    & { partyByDeveloperId?: Maybe<(
+      { __typename?: 'Party' }
+      & PartyFieldsFragment
+    )>, partyByStewardId?: Maybe<(
+      { __typename?: 'Party' }
+      & PartyFieldsFragment
+    )>, partyByLandOwnerId?: Maybe<(
+      { __typename?: 'Party' }
+      & PartyFieldsFragment
+    )>, partyByOriginatorId?: Maybe<(
+      { __typename?: 'Party' }
+      & PartyFieldsFragment
+    )>, creditClassByCreditClassId?: Maybe<(
+      { __typename?: 'CreditClass' }
+      & Pick<CreditClass, 'id' | 'onChainId'>
+      & { creditClassVersionsById: (
+        { __typename?: 'CreditClassVersionsConnection' }
+        & { nodes: Array<Maybe<(
+          { __typename?: 'CreditClassVersion' }
+          & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
+        )>> }
+      ) }
+    )> }
+  )> }
+);
+
 export type PartyFieldsFragment = (
   { __typename?: 'Party' }
   & Pick<Party, 'id' | 'type' | 'name' | 'description' | 'image'>
@@ -20929,14 +20978,14 @@ export type CreditVintageFieldsFragment = (
   )> }
 );
 
-export type ProjectByHandleQueryVariables = Exact<{
-  handle: Scalars['String'];
+export type ProjectByOnChainIdQueryVariables = Exact<{
+  onChainId: Scalars['String'];
 }>;
 
 
-export type ProjectByHandleQuery = (
+export type ProjectByOnChainIdQuery = (
   { __typename?: 'Query' }
-  & { projectByHandle?: Maybe<(
+  & { projectByOnChainId?: Maybe<(
     { __typename?: 'Project' }
     & Pick<Project, 'metadata'>
     & { eventsByProjectId: (
@@ -21005,66 +21054,6 @@ export type ProjectByHandleQuery = (
         )> }
       )>> }
     ) }
-  )> }
-);
-
-export type ProjectByIdQueryVariables = Exact<{
-  id: Scalars['UUID'];
-}>;
-
-
-export type ProjectByIdQuery = (
-  { __typename?: 'Query' }
-  & { projectById?: Maybe<(
-    { __typename?: 'Project' }
-    & Pick<Project, 'metadata' | 'developerId' | 'originatorId' | 'landOwnerId' | 'stewardId' | 'addressId'>
-    & { partyByDeveloperId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByStewardId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByLandOwnerId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, partyByOriginatorId?: Maybe<(
-      { __typename?: 'Party' }
-      & PartyFieldsFragment
-    )>, creditClassByCreditClassId?: Maybe<(
-      { __typename?: 'CreditClass' }
-      & Pick<CreditClass, 'id' | 'onChainId'>
-      & { creditClassVersionsById: (
-        { __typename?: 'CreditClassVersionsConnection' }
-        & { nodes: Array<Maybe<(
-          { __typename?: 'CreditClassVersion' }
-          & Pick<CreditClassVersion, 'name' | 'version' | 'metadata'>
-        )>> }
-      ) }
-    )> }
-  )> }
-);
-
-export type ProjectByOnChainIdQueryVariables = Exact<{
-  onChainId: Scalars['String'];
-}>;
-
-
-export type ProjectByOnChainIdQuery = (
-  { __typename?: 'Query' }
-  & { projectByOnChainId?: Maybe<(
-    { __typename?: 'Project' }
-    & Pick<Project, 'metadata'>
-    & { creditClassByCreditClassId?: Maybe<(
-      { __typename?: 'CreditClass' }
-      & Pick<CreditClass, 'onChainId'>
-      & { creditClassVersionsById: (
-        { __typename?: 'CreditClassVersionsConnection' }
-        & { nodes: Array<Maybe<(
-          { __typename?: 'CreditClassVersion' }
-          & Pick<CreditClassVersion, 'name' | 'metadata'>
-        )>> }
-      ) }
-    )> }
   )> }
 );
 
@@ -22475,76 +22464,10 @@ export type MoreProjectsQueryResult = Apollo.QueryResult<MoreProjectsQuery, More
 export const ProjectByHandleDocument = gql`
     query ProjectByHandle($handle: String!) {
   projectByHandle(handle: $handle) {
-    eventsByProjectId(orderBy: DATE_ASC) {
-      nodes {
-        date
-        summary
-        description
-        creditVintageByEventId {
-          ...creditVintageFields
-        }
-      }
-    }
-    metadata
-    partyByRegistryId {
-      name
-      organizationByPartyId {
-        website
-      }
-    }
-    creditClassByCreditClassId {
-      standard
-      onChainId
-      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
-        nodes {
-          name
-          metadata
-        }
-      }
-      methodologyByMethodologyId {
-        methodologyVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
-          nodes {
-            name
-            metadata
-          }
-        }
-      }
-    }
-    partyByDeveloperId {
-      ...partyFields
-    }
-    partyByStewardId {
-      ...partyFields
-    }
-    partyByLandOwnerId {
-      ...partyFields
-    }
-    partyByIssuerId {
-      ...partyFields
-    }
-    partyByResellerId {
-      ...partyFields
-    }
-    documentsByProjectId {
-      nodes {
-        name
-        type
-        date
-        url
-        eventByEventId {
-          date
-          summary
-          description
-          creditVintageByEventId {
-            ...creditVintageFields
-          }
-        }
-      }
-    }
+    onChainId
   }
 }
-    ${CreditVintageFieldsFragmentDoc}
-${PartyFieldsFragmentDoc}`;
+    `;
 
 /**
  * __useProjectByHandleQuery__
@@ -22639,8 +22562,25 @@ export type ProjectByIdQueryResult = Apollo.QueryResult<ProjectByIdQuery, Projec
 export const ProjectByOnChainIdDocument = gql`
     query ProjectByOnChainId($onChainId: String!) {
   projectByOnChainId(onChainId: $onChainId) {
+    eventsByProjectId(orderBy: DATE_ASC) {
+      nodes {
+        date
+        summary
+        description
+        creditVintageByEventId {
+          ...creditVintageFields
+        }
+      }
+    }
     metadata
+    partyByRegistryId {
+      name
+      organizationByPartyId {
+        website
+      }
+    }
     creditClassByCreditClassId {
+      standard
       onChainId
       creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
         nodes {
@@ -22648,10 +22588,50 @@ export const ProjectByOnChainIdDocument = gql`
           metadata
         }
       }
+      methodologyByMethodologyId {
+        methodologyVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+          nodes {
+            name
+            metadata
+          }
+        }
+      }
+    }
+    partyByDeveloperId {
+      ...partyFields
+    }
+    partyByStewardId {
+      ...partyFields
+    }
+    partyByLandOwnerId {
+      ...partyFields
+    }
+    partyByIssuerId {
+      ...partyFields
+    }
+    partyByResellerId {
+      ...partyFields
+    }
+    documentsByProjectId {
+      nodes {
+        name
+        type
+        date
+        url
+        eventByEventId {
+          date
+          summary
+          description
+          creditVintageByEventId {
+            ...creditVintageFields
+          }
+        }
+      }
     }
   }
 }
-    `;
+    ${CreditVintageFieldsFragmentDoc}
+${PartyFieldsFragmentDoc}`;
 
 /**
  * __useProjectByOnChainIdQuery__

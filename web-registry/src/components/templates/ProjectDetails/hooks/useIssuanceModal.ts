@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
-import { ProjectByHandleQuery } from '../../../../generated/graphql';
+import { ProjectByOnChainIdQuery } from '../../../../generated/graphql';
 import { buildIssuanceModalData } from '../../../../lib/transform';
 
 export default function useIssuanceModal(
-  data: ProjectByHandleQuery | undefined,
+  data: ProjectByOnChainIdQuery | undefined,
 ) {
   const [issuanceModalData, setIssuanceModalData] =
     useState<IssuanceModalData | null>(null);

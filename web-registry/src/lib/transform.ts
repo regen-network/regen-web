@@ -4,7 +4,7 @@ import { DocumentInfo } from 'web-components/lib/components/document';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
 import {
-  ProjectByHandleQuery,
+  ProjectByOnChainIdQuery,
   PartyFieldsFragment,
   Maybe,
 } from '../generated/graphql';
@@ -17,10 +17,10 @@ import {
 // to a Timeline Event based on some optional credit vintage data.
 // TODO get generated type for creditVintage and project from graphql schema.
 export function buildIssuanceModalData(
-  data?: ProjectByHandleQuery,
+  data?: ProjectByOnChainIdQuery,
   creditVintage?: any,
 ): IssuanceModalData | null {
-  const project = data?.projectByHandle;
+  const project = data?.projectByOnChainId;
   if (project && creditVintage) {
     const documents = project.documentsByProjectId.nodes;
     const issuerWallet = creditVintage.walletByTokenizerId;

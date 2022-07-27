@@ -2,7 +2,6 @@ import { useTheme } from '@mui/styles';
 import { Box, Skeleton } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-import { gql } from '@apollo/client';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
@@ -36,7 +35,6 @@ import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { TransactionModals } from './ProjectDetails.TransactionModals';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
-import { graphql } from 'graphql';
 
 interface Project {
   creditPrice?: CreditPrice;
@@ -64,20 +62,23 @@ function ProjectDetails(): JSX.Element {
     txClient = new ServiceClientImpl(api.queryClient);
   }
 
-  // fetch project by handle
-  const { data, loading } = useProjectByHandleQuery({
-    skip: !projectId,
+  // first, check if projectId is handle or onChainId
+  const isOnChainId = projectId?.startsWith('C'); //TODO regex
+
+  // then, if projectId is handle, query project by handle to get onChainId
+  const { data: _data, loading: _loading } = useProjectByHandleQuery({
+    skip: isOnChainId,
     variables: { handle: projectId as string },
   });
-  let project: any = data?.projectByHandle; // TODO: any
+  const onChainId = isOnChainId ? projectId : _data?.projectByHandle?.onChainId;
 
-  // or fetch project by onChainId: TODO
-  const { data: _data, loading: _loading } = useProjectByOnChainIdQuery({
-    skip: !projectId,
-    variables: { onChainId: projectId as string },
+  // then fetch project by onChainId
+  const { data, loading } = useProjectByOnChainIdQuery({
+    skip: !isOnChainId,
+    variables: { onChainId: onChainId as string },
   });
 
-  if (!project) project = _data?.projectByOnChainId;
+  const project = data?.projectByOnChainId;
 
   console.log('project', project);
 
@@ -111,8 +112,11 @@ function ProjectDetails(): JSX.Element {
     creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
   ];
 
+  console.log('creditClassVersion?.metadata', creditClassVersion?.metadata);
+
   //
   const { geojson, isGISFile, setGeojson } = useGeojson(metadata);
+  console.log('geojson', geojson);
 
   const seoData = useSeo({
     metadata,
@@ -123,6 +127,7 @@ function ProjectDetails(): JSX.Element {
   const mediaData = useMedia({ metadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
   const otherProjects = useOtherProjects(projectId as string);
+  const isLoading = loading || _loading;
 
   const {
     issuanceModalData,
@@ -140,7 +145,7 @@ function ProjectDetails(): JSX.Element {
         imageUrl={seoData.imageUrl}
       />
 
-      {mediaData.assets.length === 0 && loading && (
+      {mediaData.assets.length === 0 && isLoading && (
         <Box sx={getMediaBoxStyles(theme)}>
           <Skeleton height={theme.spacing(78.75)} />
         </Box>
@@ -160,7 +165,7 @@ function ProjectDetails(): JSX.Element {
       )}
 
       <ProjectTopSection
-        data={data}
+        data={data || _data}
         batchData={{
           batches: batchData,
           totals: batchTotals,

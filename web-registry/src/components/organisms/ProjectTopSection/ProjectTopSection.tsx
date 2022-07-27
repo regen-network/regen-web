@@ -10,7 +10,7 @@ import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
 import { CreditBatches } from '..';
-import { ProjectByOnChainIdQuery } from '../../../generated/graphql';
+// import { ProjectByOnChainIdQuery } from '../../../generated/graphql';
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { qudtUnit, qudtUnitMap } from '../../../lib/rdf';
@@ -27,16 +27,13 @@ import {
   useProjectTopSectionStyles,
 } from './ProjectTopSection.styles';
 
-//TODO: make this ProjectTopSectionLegacy
-//TODO: ProjectTopSection accepts only onchain data?
-
 function ProjectTopSection({
   data,
   geojson,
   isGISFile,
   batchData,
 }: {
-  data?: ProjectByOnChainIdQuery;
+  data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
   geojson?: any;
   isGISFile?: boolean;
   batchData?: {
@@ -49,7 +46,7 @@ function ProjectTopSection({
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
-  const project = data?.projectByOnChainId;
+  const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
   const metadata = project?.metadata;
   console.log('project top section', project);
 

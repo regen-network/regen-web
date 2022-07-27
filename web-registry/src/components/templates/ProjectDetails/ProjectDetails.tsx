@@ -65,24 +65,29 @@ function ProjectDetails(): JSX.Element {
   // first, check if projectId is handle or onChainId
   const isOnChainId = projectId?.startsWith('C'); //TODO regex
 
-  // then, if projectId is handle, query project by handle to get onChainId
-  const { data: _data, loading: _loading } = useProjectByHandleQuery({
+  // if projectId is handle, query project by handle
+  const { data: dataByHandle, loading: _loading } = useProjectByHandleQuery({
     skip: isOnChainId,
     variables: { handle: projectId as string },
   });
-  const onChainId = isOnChainId ? projectId : _data?.projectByHandle?.onChainId;
 
-  // then fetch project by onChainId
-  const { data, loading } = useProjectByOnChainIdQuery({
+  // else fetch project by onChainId
+  const { data: dataByOnChainId, loading } = useProjectByOnChainIdQuery({
     skip: !isOnChainId,
-    variables: { onChainId: onChainId as string },
+    variables: { onChainId: projectId as string },
   });
 
-  const project = data?.projectByOnChainId;
+  // TODO: when all projects are on-chain, just use dataByOnChainId
+  const data = isOnChainId ? dataByOnChainId : dataByHandle;
+  const project = isOnChainId
+    ? dataByOnChainId?.projectByOnChainId
+    : dataByHandle?.projectByHandle;
 
   console.log('project', project);
 
   // from project.metadata
+  // TODO: do proper onchain metadata fetch
+  // const nonQueryableMetadata: ProjectMetadataLD = project?.metadata;
   const metadata: ProjectMetadataLD = project?.metadata;
   const vcsProjectId = metadata?.['regen:vcsProjectId'];
   const managementActions =
@@ -128,6 +133,7 @@ function ProjectDetails(): JSX.Element {
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
   const otherProjects = useOtherProjects(projectId as string);
   const isLoading = loading || _loading;
+  console.log('impactData', impactData);
 
   const {
     issuanceModalData,
@@ -165,7 +171,7 @@ function ProjectDetails(): JSX.Element {
       )}
 
       <ProjectTopSection
-        data={data || _data}
+        data={data}
         batchData={{
           batches: batchData,
           totals: batchTotals,
@@ -174,7 +180,7 @@ function ProjectDetails(): JSX.Element {
         isGISFile={isGISFile}
       />
 
-      {impactData && (
+      {impactData?.length > 0 && (
         <div className="topo-background-alternate">
           <ProjectImpactSection impact={impactData} />
         </div>

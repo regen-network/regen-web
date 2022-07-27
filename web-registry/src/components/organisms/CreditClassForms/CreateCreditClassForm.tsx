@@ -2,15 +2,15 @@ import { Formik } from 'formik';
 
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import NotFound from 'web-components/lib/components/not-found';
-import RotationalGrazing from 'assets/rotational-grazing.png';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
+
+import { mockClassId, mockTxHash } from './CreditClass.mocks';
+import { CreditClassFinished } from './CreditClassFinished';
+import type { CreditClassValues } from './CreditClassForm';
 import { CreditClassForm } from './CreditClassForm';
 import { CreditClassReview } from './CreditClassReview';
-import { CreditClassFinished } from './CreditClassFinished';
-import { mockTxHash, mockClassId } from './CreditClass.mocks';
-
-import type { CreditClassValues } from './CreditClassForm';
+import RotationalGrazing from 'assets/rotational-grazing.png';
 
 export const createCreditClassSteps = [
   {

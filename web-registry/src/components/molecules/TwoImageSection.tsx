@@ -1,8 +1,9 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
 
-import { Label, Title } from 'web-components/lib/components/typography';
 import { Image } from 'web-components/lib/components/image';
+import { Label, Title } from 'web-components/lib/components/typography';
+
 import { DualImageSection } from '../../generated/sanity-graphql';
 
 const LabeledImage = (props: {

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { useTheme } from '@mui/styles';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+
 import PlaceInfo from './PlaceInfo';
 
 interface CreditPlaceInfoProps {

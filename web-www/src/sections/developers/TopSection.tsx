@@ -1,8 +1,9 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import BackgroundSection from '../../components/BackgroundSection';
 import { DevelopersTopSectionQuery } from '../../generated/graphql';
 
@@ -45,7 +46,8 @@ const query = graphql`
 
 const TopSection = (): JSX.Element => {
   const styles = useStyles();
-  const { sanityDevelopersPage, background } = useStaticQuery<DevelopersTopSectionQuery>(query);
+  const { sanityDevelopersPage, background } =
+    useStaticQuery<DevelopersTopSectionQuery>(query);
   const data = sanityDevelopersPage?.topSection;
   const imageData = background?.childImageSharp?.fluid;
   return (

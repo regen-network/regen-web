@@ -1,11 +1,11 @@
 import React from 'react';
+import { InputAdornment, InputProps, SxProps } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { InputProps, InputAdornment, SxProps } from '@mui/material';
 import { FieldProps } from 'formik';
 
+import { Body } from '../typography';
 import FieldFormControl, { DefaultStyleProps } from './FieldFormControl';
 import Input from './Input';
-import { Body } from '../typography';
 
 interface ControlledTextFieldProps
   extends FieldProps,

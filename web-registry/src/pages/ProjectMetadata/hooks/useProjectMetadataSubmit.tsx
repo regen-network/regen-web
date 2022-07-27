@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
-import { merge, cloneDeep } from 'lodash';
+import { cloneDeep, merge } from 'lodash';
+
 import { ProjectMetadataValues } from '../../../components/organisms';
 import {
   ProjectByIdQuery,

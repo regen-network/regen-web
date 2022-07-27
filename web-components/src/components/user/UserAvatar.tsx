@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Avatar from '@mui/material/Avatar';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 interface UserAvatarProps {
   alt?: string;

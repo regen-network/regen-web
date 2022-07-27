@@ -1,21 +1,20 @@
 import React from 'react';
-import { Formik, Form, FormikHelpers } from 'formik';
+import { Form, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+import NotFound from 'web-components/lib/components/not-found';
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import formModel from '../form-model';
 import useCreateBatch from '../useCreateBatch';
-
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
-import Review from './Review';
 import Result from './Result';
-import NotFound from 'web-components/lib/components/not-found';
+import Review from './Review';
 import RotationalGrazing from 'assets/rotational-grazing.png';
 
 /**

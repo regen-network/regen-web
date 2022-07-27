@@ -1,33 +1,32 @@
 import React, { useRef, useState } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
-import Grid from '@mui/material/Grid';
 import ReactToPrint from 'react-to-print';
+import Grid from '@mui/material/Grid';
+import { makeStyles, useTheme } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import Certificate, {
   StakeholderInfo,
 } from 'web-components/lib/components/certificate';
-import { Title } from 'web-components/lib/components/typography';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 import PrintIcon from 'web-components/lib/components/icons/PrintIcon';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
 import Section from 'web-components/lib/components/section';
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
+import { Title } from 'web-components/lib/components/typography';
 import UserAvatar from 'web-components/lib/components/user/UserAvatar';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
-
-import {
-  useAllPurchasesByStripeIdQuery,
-  useAllPurchasesByWalletIdQuery,
-  Maybe,
-  ProjectPartyFragment,
-} from '../../generated/graphql';
-import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 
 import background from '../../assets/certificate-bg.png';
 import pageBackground from '../../assets/certificate-page-bg.jpg';
 import projectsBackground from '../../assets/certificate-projects-bg.jpg';
+import {
+  Maybe,
+  ProjectPartyFragment,
+  useAllPurchasesByStripeIdQuery,
+  useAllPurchasesByWalletIdQuery,
+} from '../../generated/graphql';
+import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

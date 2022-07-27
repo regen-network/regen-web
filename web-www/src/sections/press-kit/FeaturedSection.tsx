@@ -1,11 +1,12 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { PresskitFeaturedSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -65,7 +66,8 @@ const query = graphql`
 
 const FeaturedSection = (): JSX.Element => {
   const styles = useStyles();
-  const { sanityPresskitPage } = useStaticQuery<PresskitFeaturedSectionQuery>(query);
+  const { sanityPresskitPage } =
+    useStaticQuery<PresskitFeaturedSectionQuery>(query);
   const data = sanityPresskitPage?.featuredSection;
 
   const items: JSX.Element[] = (data?.articles || []).map(item => (
@@ -80,7 +82,11 @@ const FeaturedSection = (): JSX.Element => {
   ));
 
   return (
-    <Section withSlider title={data?.header || ''} classes={{ title: styles.title }}>
+    <Section
+      withSlider
+      title={data?.header || ''}
+      classes={{ title: styles.title }}
+    >
       <ResponsiveSlider
         infinite={false}
         className={styles.slider}

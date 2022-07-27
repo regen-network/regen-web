@@ -1,9 +1,10 @@
 import React from 'react';
 import { Box } from '@mui/system';
+
 import { ProjectMetadataForm } from '../../components/organisms/ProjectMetadataForm/ProjectMetadataForm';
+import { ShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectMetadataLD } from '../../generated/json-ld';
 import { useProjectMetadataSubmitReturnedType } from './hooks/useProjectMetadataSubmit';
-import { ShaclGraphByUriQuery } from '../../generated/graphql';
 
 type Props = {
   isVCS: boolean;

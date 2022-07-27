@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import React, { useEffect, useState } from 'react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import Box from '@mui/material/Box';
+import { Field, Form, Formik, FormikErrors } from 'formik';
 
-import PhoneField from '../inputs/PhoneField';
+import QuestionIcon from '../icons/QuestionIcon';
+import CheckboxLabel from '../inputs/CheckboxLabel';
 import ControlledTextField from '../inputs/ControlledTextField';
 import LocationField from '../inputs/LocationField';
-import CheckboxLabel from '../inputs/CheckboxLabel';
+import PhoneField from '../inputs/PhoneField';
 import Tooltip from '../tooltip/InfoTooltip';
 import { Body, Title } from '../typography';
 import Modal from '.';
-import QuestionIcon from '../icons/QuestionIcon';
-import { ProfileSubmitFooter, ProfileOnBoardingCard } from './ProfileModal';
+import { ProfileOnBoardingCard, ProfileSubmitFooter } from './ProfileModal';
 
 interface OrganizationModalProps {
   organization?: OrganizationFormValues;

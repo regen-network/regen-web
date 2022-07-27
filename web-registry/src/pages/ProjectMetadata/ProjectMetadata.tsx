@@ -1,6 +1,6 @@
 import React from 'react';
-import { omit } from 'lodash';
 import { useParams } from 'react-router-dom';
+import { omit } from 'lodash';
 
 import {
   EditFormTemplate,
@@ -14,9 +14,9 @@ import {
 import { ProjectMetadataLD } from '../../generated/json-ld';
 import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
-import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
 import { useProjectMetadataSave } from './hooks/useProjectMetadataSave';
 import { useProjectMetadataSubmit } from './hooks/useProjectMetadataSubmit';
+import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
 import { ProjectMetadataSelectedForm } from './ProjectMetadata.SelectedForm';
 
 export const ProjectMetadata: React.FC = () => {

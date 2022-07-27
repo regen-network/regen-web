@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import Tabs, { TabsProps } from '@mui/material/Tabs';
 import { styled } from '@mui/material';
-import { IconTab, IconTabProps } from './IconTab';
+import Tabs, { TabsProps } from '@mui/material/Tabs';
+
 import { a11yProps } from './';
+import { IconTab, IconTabProps } from './IconTab';
 import { TabPanel } from './TabPanel';
 
 interface IconTabsProps {

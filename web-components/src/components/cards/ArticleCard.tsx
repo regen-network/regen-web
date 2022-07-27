@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Box } from '@mui/material';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
-import MediaCard from './MediaCard';
 import OutlinedButton from '../buttons/OutlinedButton';
 import PlayIcon from '../icons/PlayIcon';
 import { Body } from '../typography';
-import { Box } from '@mui/material';
+import MediaCard from './MediaCard';
 
 function getBtnText(type?: string | null): string {
   switch (type) {

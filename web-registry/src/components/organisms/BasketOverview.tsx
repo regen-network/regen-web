@@ -1,9 +1,9 @@
 import React from 'react';
+import { Box, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { styled } from '@mui/system';
-import { Grid, Box } from '@mui/material';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Section from 'web-components/lib/components/section';
 import {
   Body,
@@ -11,15 +11,15 @@ import {
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import { parseText } from 'web-components/lib/utils/textParser';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
+import { parseText } from 'web-components/lib/utils/textParser';
 
+import topoImg from '../../assets/background-contour-2.svg';
+import forestImg from '../../assets/forest-token.png';
 import { getAccountUrl } from '../../lib/block-explorer';
 import { LinkWithArrow } from '../atoms/LinkWithArrow';
 import { OptimizedImage } from '../atoms/OptimizedImage';
-import topoImg from '../../assets/background-contour-2.svg';
-import forestImg from '../../assets/forest-token.png';
 
 type CreditClass = {
   id: string;

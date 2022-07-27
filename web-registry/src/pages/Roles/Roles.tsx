@@ -8,23 +8,24 @@ import {
   isIndividual,
 } from 'web-components/lib/components/inputs/RoleField';
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
-import {
-  OnboardingFormTemplate,
-  EditFormTemplate,
-} from '../../components/templates';
+
 import { RolesForm, RolesValues } from '../../components/organisms';
-import { useProjectEditContext } from '../ProjectEdit';
-import { useWallet } from '../../lib/wallet';
 import {
-  useProjectByIdQuery,
-  useGetOrganizationProfileByEmailQuery,
-  useUpdateProjectByIdMutation,
-  PartyFieldsFragment,
+  EditFormTemplate,
+  OnboardingFormTemplate,
+} from '../../components/templates';
+import {
   Maybe,
+  PartyFieldsFragment,
   ProjectPatch,
+  useGetOrganizationProfileByEmailQuery,
+  useProjectByIdQuery,
   useShaclGraphByUriQuery,
+  useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
 import { getProjectShapeIri } from '../../lib/rdf';
+import { useWallet } from '../../lib/wallet';
+import { useProjectEditContext } from '../ProjectEdit';
 
 function getPartyIds(
   i: number,

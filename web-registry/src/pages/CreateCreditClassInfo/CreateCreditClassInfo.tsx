@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-import { client } from 'sanity';
-import { useTheme } from '@mui/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import CardMedia from '@mui/material/CardMedia';
 import Box from '@mui/material/Box';
+import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/styles';
 
+import { BlockContent } from 'web-components/lib/components/block-content';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import FixedFooter from 'web-components/lib/components/fixed-footer';
+import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Modal from 'web-components/lib/components/modal';
 import { Body, Title } from 'web-components/lib/components/typography';
-import { BlockContent } from 'web-components/lib/components/block-content';
-
-import { WrappedImpactCard, WrappedResourcesCard } from 'components/atoms';
-import { HeroTitle, HeroAction, OverviewCards } from 'components/molecules';
-import { StepCardsWithDescription } from 'components/organisms';
-
-import fernImg from 'assets/fern-in-hands.png';
-import writingOnPaperImg from 'assets/writing-on-paper.png';
-import topographyImg from 'assets/topography-pattern-cutout-1.png';
 
 import { useAllCreateCreditClassPageQuery } from 'generated/sanity-graphql';
+import { client } from 'sanity';
+
+import { WrappedImpactCard, WrappedResourcesCard } from 'components/atoms';
+import { HeroAction, HeroTitle, OverviewCards } from 'components/molecules';
+import { StepCardsWithDescription } from 'components/organisms';
+
 import { useCreditClassInfoStyles } from './CreditClassInfo.styles';
+import fernImg from 'assets/fern-in-hands.png';
+import topographyImg from 'assets/topography-pattern-cutout-1.png';
+import writingOnPaperImg from 'assets/writing-on-paper.png';
 
 const CreateCreditClassInfo: React.FC = () => {
   const styles = useCreditClassInfoStyles();

@@ -1,15 +1,16 @@
 import React from 'react';
+import { Box, Grid, SxProps, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { useTheme, Grid, Box, SxProps } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
-import { FluidObject } from 'gatsby-image';
 import BackgroundImage from 'gatsby-background-image';
+import { FluidObject } from 'gatsby-image';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import MediaCard from 'web-components/lib/components/cards/MediaCard';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { BlockContent } from 'web-components/src/components/block-content';
+
 import {
   CaseStudyAboutSectionQuery,
   SanityCaseStudyAboutSection,

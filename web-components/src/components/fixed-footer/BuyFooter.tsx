@@ -3,10 +3,10 @@ import { Box, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import ContainedButton from '../buttons/ContainedButton';
-import FixedFooter from './';
+import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import { Body, Title } from '../typography';
+import FixedFooter from './';
 
 export interface CreditPrice {
   unitPrice: number;

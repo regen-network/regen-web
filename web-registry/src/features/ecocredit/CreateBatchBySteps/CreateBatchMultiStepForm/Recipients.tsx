@@ -2,9 +2,9 @@ import React from 'react';
 import { useFormikContext } from 'formik';
 
 import {
-  RecipientsFieldArray,
   FormValues,
   Recipient,
+  RecipientsFieldArray,
 } from 'web-components/lib/components/form/RecipientsForm';
 
 export type RecipientsFormValues = FormValues;

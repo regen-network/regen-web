@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import Tabs, { TabsProps } from '@mui/material/Tabs';
 import { styled } from '@mui/material';
+<<<<<<< HEAD
 import { TabPanel } from './TabPanel';
 import { IconTab, IconTabProps } from './IconTab';
 import { a11yProps } from './';
+=======
+import Tabs, { TabsProps } from '@mui/material/Tabs';
+
+import { a11yProps } from './';
+import { IconTab, IconTabProps } from './IconTab';
+import { TabPanel } from './TabPanel';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 interface IconTabsProps {
   tabs: IconTabProps[];

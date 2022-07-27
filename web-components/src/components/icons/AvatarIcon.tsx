@@ -1,7 +1,14 @@
 import React from 'react';
+<<<<<<< HEAD
 import SvgIcon from '@mui/material/SvgIcon';
 import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
+=======
+import { SxProps } from '@mui/material';
+import SvgIcon from '@mui/material/SvgIcon';
+
+import { Theme } from '~/theme/muiTheme';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 interface IconProps {
   className?: string;

@@ -1,16 +1,16 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
 import Img, { FluidObject } from 'gatsby-image';
 
 import { Body } from 'web-components/lib/components/typography';
-import BackgroundSection from '../../../components/BackgroundSection';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
+import BackgroundSection from '../../../components/BackgroundSection';
 import type {
   SanityCaseStudyFigure,
   SanityCaseStudyFigureSection,
 } from '../../../generated/graphql';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 interface StyleProps {
   figures: SanityCaseStudyFigure[];

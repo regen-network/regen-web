@@ -1,19 +1,36 @@
+<<<<<<< HEAD:web-registry/src/components/organisms/MyProjects.tsx
 import React, { useState } from 'react';
 import { Grid } from '@mui/material';
+=======
+import { useState } from 'react';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/pages/Dashboard/MyProjects/MyProjects.tsx
 import { useNavigate } from 'react-router-dom';
+import { Grid } from '@mui/material';
 
 import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
+<<<<<<< HEAD:web-registry/src/components/organisms/MyProjects.tsx
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
 import { useWallet } from '../../lib/wallet';
+=======
+import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
+import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/pages/Dashboard/MyProjects/MyProjects.tsx
 import {
   useCreateProjectMutation,
-  useWalletByAddrQuery,
   useCreateWalletMutation,
+<<<<<<< HEAD:web-registry/src/components/organisms/MyProjects.tsx
 } from '../../generated/graphql';
 import { getProjectPageBaseData } from '../../lib/rdf';
 import { DashboardTemplate } from '../templates';
+=======
+  useWalletByAddrQuery,
+} from 'generated/graphql';
+import { getProjectPageBaseData } from 'lib/rdf';
+import { useWallet } from 'lib/wallet';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/pages/Dashboard/MyProjects/MyProjects.tsx
 
 const MyProjects: React.FC = () => {
   const [error, setError] = useState<string | null>(null);

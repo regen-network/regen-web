@@ -1,6 +1,7 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { Box } from '@mui/material';
+import { graphql, useStaticQuery } from 'gatsby';
+
 import { TeamSection } from '../../components/TeamSection';
 import {
   SanityRegenTeamMember,

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Step, StepCard } from 'web-components/lib/components/cards/StepCard';
+import { QuestionItem } from 'web-components/lib/components/faq/Question';
 import AccountabilityIcon from 'web-components/lib/components/icons/AccountabilityIcon';
 import FarmerIcon from 'web-components/lib/components/icons/FarmerIcon';
 import InterfaceIcon from 'web-components/lib/components/icons/InterfaceIcon';
@@ -10,9 +11,8 @@ import ReviewIcon from 'web-components/lib/components/icons/ReviewIcon';
 import ShadedCreditsIcon from 'web-components/lib/components/icons/ShadedCreditsIcon';
 import TrustDocumentIcon from 'web-components/lib/components/icons/TrustDocumentIcon';
 import TrustIcon from 'web-components/lib/components/icons/TrustIcon';
-import { StepCard, Step } from 'web-components/lib/components/cards/StepCard';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { QuestionItem } from 'web-components/lib/components/faq/Question';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   content: {

@@ -1,7 +1,9 @@
 import React from 'react';
-import { useFormikContext } from 'formik';
+import { Box, Link } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useFormikContext } from 'formik';
 
+<<<<<<< HEAD
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
@@ -11,19 +13,29 @@ import { CreditBasicsFormValues } from './CreditBasics';
 import { RecipientFormValues } from './Recipients';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+=======
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import EditIcon from 'web-components/lib/components/icons/EditIcon';
+import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import {
   Body,
   Label,
   Subtitle,
 } from 'web-components/lib/components/typography';
-import { Box, Link } from '@mui/material';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 import {
   formatDate,
   getFormattedNumber,
 } from 'web-components/lib/utils/format';
-import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
+
+import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
+import { CreditBasicsFormValues } from './CreditBasics';
+import { RecipientFormValues } from './Recipients';
 
 // TODO: Only covers case C01
 

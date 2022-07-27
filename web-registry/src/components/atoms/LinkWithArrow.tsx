@@ -1,9 +1,10 @@
 import React from 'react';
 import { SxProps } from '@mui/system';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { parseText } from 'web-components/lib/utils/textParser';
+
 import { Link } from './Link';
 
 export interface LinkWithArrowProps {

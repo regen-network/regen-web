@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { deleteImage, uploadImage } from '../../utils/s3';
 import { ImageDrop, ImageDropProps } from './ImageDrop';
 import ImageField from './ImageField';
-import { uploadImage, deleteImage } from '../../utils/s3';
 
 export interface ImageUploadProps extends ImageDropProps {
   apiServerUrl?: string;

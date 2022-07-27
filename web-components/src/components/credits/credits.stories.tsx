@@ -1,4 +1,5 @@
 import * as React from 'react';
+<<<<<<< HEAD
 import CreditDetails, {
   CreditInfoProps,
 } from 'web-components/lib/components/credits/CreditDetails';
@@ -7,6 +8,14 @@ import CreditDetails, {
 // import Gauge from 'web-components/lib/components/credits/Gauge';
 // import GaugeText from 'web-components/lib/components/credits/GaugeText';
 import CreditsGauge from 'web-components/lib/components/credits/CreditsGauge';
+=======
+
+import CreditDetails, { CreditInfoProps } from './CreditDetails';
+// import Credits from './';
+// import Gauge from './Gauge';
+// import GaugeText from './GaugeText';
+import CreditsGauge from './CreditsGauge';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 // const credit: CreditsProps = {
 //   numberOfHolders: 1021,

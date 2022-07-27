@@ -1,4 +1,5 @@
 import * as React from 'react';
+<<<<<<< HEAD
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
@@ -6,6 +7,19 @@ import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ContainedButton, { ContainedColorVariant } from './ContainedButton';
 import { Box } from '@mui/material';
+=======
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { Box } from '@mui/material';
+
+import { FlexCol } from '../box';
+import ContainedButton, { ContainedColorVariant } from './ContainedButton';
+import { EditButton } from './EditButton';
+import { ExpandButton } from './ExpandButton';
+import OutlinedButton from './OutlinedButton';
+import PrevNextButton from './PrevNextButton';
+import { TableActionButtons } from './TableActionButtons';
+import { TextButton } from './TextButton';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'Buttons',

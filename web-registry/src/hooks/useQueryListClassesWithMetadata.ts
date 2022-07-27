@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import { QueryClassesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/types';
 
+<<<<<<< HEAD
 import { getMetadataFromUint8Array } from '../lib/metadata-graph';
+=======
+import { CreditClassMetadataLD } from 'generated/json-ld';
+import { getMetadataFromUint8Array } from 'lib/metadata-graph';
+
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import useQueryListClasses from './useQueryListClasses';
 import { CreditClassMetadataLD } from '../generated/json-ld';
 

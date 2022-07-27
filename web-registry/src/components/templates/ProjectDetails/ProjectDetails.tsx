@@ -1,71 +1,68 @@
-import React, { useState, useEffect } from 'react';
-import { useTheme } from '@mui/styles';
-import { Box, Skeleton } from '@mui/material';
-import * as togeojson from '@mapbox/togeojson';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
+import * as togeojson from '@mapbox/togeojson';
+import { Box, Skeleton } from '@mui/material';
+import { useTheme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { getFormattedDate } from 'web-components/lib/utils/format';
+import Banner from 'web-components/lib/components/banner';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import FixedFooter from 'web-components/lib/components/fixed-footer';
+import BuyFooter, {
+  CreditPrice,
+} from 'web-components/lib/components/fixed-footer/BuyFooter';
+import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
+import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
+import StaticMap from 'web-components/lib/components/map/StaticMap';
+import Modal from 'web-components/lib/components/modal';
 import IssuanceModal, {
   IssuanceModalData,
 } from 'web-components/lib/components/modal/IssuanceModal';
-import Timeline from 'web-components/lib/components/timeline';
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+import Section from 'web-components/lib/components/section';
+import SEO from 'web-components/lib/components/seo';
 import ProjectMedia, {
   Asset,
 } from 'web-components/lib/components/sliders/ProjectMedia';
-import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
-import Modal from 'web-components/lib/components/modal';
-import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
-import Banner from 'web-components/lib/components/banner';
-import SEO from 'web-components/lib/components/seo';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
-import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
-import Section from 'web-components/lib/components/section';
-import StaticMap from 'web-components/lib/components/map/StaticMap';
+import Timeline from 'web-components/lib/components/timeline';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import { getFormattedDate } from 'web-components/lib/utils/format';
 
-import { setPageView } from '../../../lib/ga';
-import getApiUri from '../../../lib/apiUri';
-import { buildIssuanceModalData } from '../../../lib/transform';
-import { useLedger } from '../../../ledger';
-import { chainId } from '../../../lib/ledger';
-import { useWallet } from '../../../lib/wallet';
-import {
-  Documentation,
-  ProjectTopSection,
-  ProjectImpactSection,
-  MoreProjectsSection,
-  CreditsPurchaseForm,
-  LandManagementActions,
-  BuyCreditsModal,
-  ConfirmationModal,
-} from '../../organisms';
-import { Credits } from '../../organisms/BuyCreditsModal';
 import {
   useMoreProjectsQuery,
   useProjectByHandleQuery,
-} from '../../../generated/graphql';
+} from 'generated/graphql';
+import { ProjectMetadataLD, ProjectStakeholder } from 'generated/json-ld/index';
 import {
-  useEcologicalImpactByIriQuery,
   EcologicalImpact,
-} from '../../../generated/sanity-graphql';
-import { client } from '../../../sanity';
-import {
-  getBatchesWithSupply,
-  getBatchesTotal,
-} from '../../../lib/ecocredit/api';
-import { getMetadata } from '../../../lib/metadata-graph';
+  useEcologicalImpactByIriQuery,
+} from 'generated/sanity-graphql';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
-} from '../../../types/ledger/ecocredit';
+} from 'types/ledger/ecocredit';
+import { useLedger } from 'ledger';
+import getApiUri from 'lib/apiUri';
+import { getBatchesTotal, getBatchesWithSupply } from 'lib/ecocredit/api';
+import { setPageView } from 'lib/ga';
+import { chainId } from 'lib/ledger';
+import { getMetadata } from 'lib/metadata-graph';
+import { buildIssuanceModalData } from 'lib/transform';
+import { useWallet } from 'lib/wallet';
+import { client } from 'sanity';
+
 import {
-  ProjectMetadataLD,
-  ProjectStakeholder,
-} from '../../../generated/json-ld/index';
+  BuyCreditsModal,
+  ConfirmationModal,
+  CreditsPurchaseForm,
+  Documentation,
+  LandManagementActions,
+  MoreProjectsSection,
+  ProjectImpactSection,
+  ProjectTopSection,
+} from 'components/organisms';
+import { Credits } from 'components/organisms/BuyCreditsModal';
+
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 
 interface Project {

@@ -1,10 +1,9 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
 import SanityImage from 'gatsby-plugin-sanity-image';
-import { Box } from '@mui/material';
 
 import Section from 'web-components/lib/components/section';
-
 import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
 

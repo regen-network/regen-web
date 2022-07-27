@@ -1,28 +1,28 @@
 import React from 'react';
-import { Formik, Form, Field, FieldArray, useFormikContext } from 'formik';
-import * as Yup from 'yup';
 import { makeStyles, styled, useTheme } from '@mui/styles';
+import { Field, FieldArray, Form, Formik, useFormikContext } from 'formik';
+import * as Yup from 'yup';
 
 import { Theme } from '../../theme/muiTheme';
+import OutlinedButton from '../buttons/OutlinedButton';
+import OnBoardingCard from '../cards/OnBoardingCard';
+import TrashIcon from '../icons/TrashIcon';
+import CheckboxLabel from '../inputs/CheckboxLabel';
+import TextField from '../inputs/TextField';
 import {
-  BottomCreditRetireFields,
-  RetireFormValues,
-  RetirementReminder,
-  initialValues as initialValuesRetire,
-  BottomCreditRetireFieldsProps,
-} from './CreditRetireForm';
-import {
-  requiredMessage,
   invalidAmount,
   invalidRegenAddress,
   isValidAddress,
+  requiredMessage,
 } from '../inputs/validation';
-import TextField from '../inputs/TextField';
-import CheckboxLabel from '../inputs/CheckboxLabel';
-import OutlinedButton from '../buttons/OutlinedButton';
-import TrashIcon from '../icons/TrashIcon';
-import { Subtitle, Label } from '../typography';
-import OnBoardingCard from '../cards/OnBoardingCard';
+import { Label, Subtitle } from '../typography';
+import {
+  BottomCreditRetireFields,
+  BottomCreditRetireFieldsProps,
+  initialValues as initialValuesRetire,
+  RetireFormValues,
+  RetirementReminder,
+} from './CreditRetireForm';
 
 const useStyles = makeStyles((theme: Theme) => ({
   checkboxLabel: {

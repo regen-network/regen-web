@@ -3,8 +3,8 @@ import FormControlLabel, {
   FormControlLabelProps,
 } from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
-import { CheckboxProps } from 'formik-mui';
 import { getIn } from 'formik';
+import { CheckboxProps } from 'formik-mui';
 
 import Checkbox from '../inputs/Checkbox';
 import { Subtitle } from '../typography';

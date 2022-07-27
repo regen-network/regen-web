@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import Modal from 'web-components/lib/components/modal';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
+import Modal from 'web-components/lib/components/modal';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import {
-  StepCardFieldsFragment,
   Maybe,
   Scalars,
+  StepCardFieldsFragment,
 } from '../../generated/sanity-graphql';
 import { WrappedStepCard } from '../atoms';
 

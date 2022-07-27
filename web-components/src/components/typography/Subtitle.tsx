@@ -1,4 +1,5 @@
 import { styled, Typography, TypographyProps } from '@mui/material';
+
 import { getSizeVariants, TextSize } from './sizing';
 
 interface Props extends TypographyProps {

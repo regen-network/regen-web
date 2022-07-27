@@ -1,16 +1,16 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import axios from 'axios';
-import { Formik, Form, Field } from 'formik';
 import clsx from 'clsx';
+import { Field, Form, Formik } from 'formik';
 
-import TextField from '../inputs/TextField';
 import ContainedButton from '../buttons/ContainedButton';
+import TextField from '../inputs/TextField';
 import {
+  invalidEmailMessage,
   requiredMessage,
   validateEmail,
-  invalidEmailMessage,
 } from '../inputs/validation';
 import { Body } from '../typography';
 

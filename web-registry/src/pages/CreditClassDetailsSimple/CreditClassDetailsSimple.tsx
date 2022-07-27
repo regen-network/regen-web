@@ -1,14 +1,15 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
 import { startCase } from 'lodash';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import ReadMore from 'web-components/lib/components/read-more';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
+import ReadMore from 'web-components/lib/components/read-more';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+<<<<<<< HEAD:web-registry/src/pages/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx
 import { Link } from '../../components/atoms';
 import {
   EcocreditsSection,
@@ -18,10 +19,23 @@ import { CreditBatches, MoreProjectsSection } from '../../components/organisms';
 import { getAccountUrl } from '../../lib/block-explorer';
 import { ClassInfo } from '../../types/ledger/ecocredit';
 import { CreditClassByOnChainIdQuery } from '../../generated/graphql';
+=======
+import { CreditClassByOnChainIdQuery } from 'generated/graphql';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx
 import {
-  CreditClassMetadataLD,
   ApprovedMethodologies,
+<<<<<<< HEAD:web-registry/src/pages/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx
 } from '../../generated/json-ld';
+=======
+  CreditClassMetadataLD,
+} from 'generated/json-ld';
+import { ClassInfo } from 'types/ledger/ecocredit';
+import { getAccountUrl } from 'lib/block-explorer';
+
+import { Link } from 'components/atoms';
+import { EcocreditsSection, LineItemLabelAbove } from 'components/molecules';
+import { CreditBatches, MoreProjectsSection } from 'components/organisms';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx
 
 interface CreditDetailsProps {
   dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];

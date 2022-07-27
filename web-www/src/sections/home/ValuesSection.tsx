@@ -1,12 +1,13 @@
 import React from 'react';
-import SanityImage from 'gatsby-plugin-sanity-image';
-import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
+import SanityImage from 'gatsby-plugin-sanity-image';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
-import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import Section from 'web-components/lib/components/section';
+import ImageItems from 'web-components/lib/components/sliders/ImageItems';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { HomeValuesSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({

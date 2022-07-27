@@ -1,3 +1,4 @@
+<<<<<<< HEAD:web-registry/src/pages/MyEcocredits/hooks/useBasketTakeSubmit.tsx
 import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 import { useCallback } from 'react';
@@ -6,6 +7,19 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { BasketTokens } from '../../../hooks/useBasketTokens';
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
 import { useStateSetter } from '../../../types/react/use-state';
+=======
+import { useCallback } from 'react';
+import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import { MsgTake } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
+
+import type { MsgTakeValues } from 'web-components/lib/components/form/BasketTakeForm';
+import type { Item } from 'web-components/lib/components/modal/TxModal';
+
+import type { UseStateSetter } from 'types/react/use-state';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/pages/Dashboard/MyEcocredits/hooks/useBasketTakeSubmit.tsx
+
+import type { BasketTokens } from 'hooks/useBasketTokens';
+import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 type Props = {
   accountAddress?: string;

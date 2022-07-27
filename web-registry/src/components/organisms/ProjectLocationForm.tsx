@@ -1,19 +1,19 @@
 import React from 'react';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import LocationField from 'web-components/lib/components/inputs/LocationField';
-import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import {
-  validate,
-  getProjectPageBaseData,
   getCompactedPath,
+  getProjectPageBaseData,
+  validate,
 } from '../../lib/rdf';
-import { ProjectPageFooter } from '../molecules';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
+import { ProjectPageFooter } from '../molecules';
 
 export interface ProjectLocationFormValues {
   'schema:location': Partial<GeocodeFeature>;

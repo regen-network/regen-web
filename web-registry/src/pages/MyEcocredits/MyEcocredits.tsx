@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { SxProps, useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { useState } from 'react';
+
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import {
   BasketPutModal,
@@ -25,6 +27,7 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
+<<<<<<< HEAD:web-registry/src/pages/MyEcocredits/MyEcocredits.tsx
 // import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
 // import { ReactComponent as Sell } from '../../assets/svgs/sell.svg';
@@ -33,15 +36,31 @@ import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.s
 import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
 import { Link } from '../../components/atoms';
 import { Portfolio } from '../../components/organisms/Portfolio';
+=======
+import type { Theme } from 'web-components/lib/theme/muiTheme';
+
+import { getHashUrl } from 'lib/block-explorer';
+
+import { Link } from 'components/atoms';
+import { Portfolio } from 'components/organisms/Portfolio';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/pages/Dashboard/MyEcocredits/MyEcocredits.tsx
 import {
   useBasketsWithClasses,
   useBasketTokens,
   useEcocredits,
+<<<<<<< HEAD:web-registry/src/pages/MyEcocredits/MyEcocredits.tsx
 } from '../../hooks';
 import { BasketTokens } from '../../hooks/useBasketTokens';
 import useMsgClient from '../../hooks/useMsgClient';
 import useQueryBaskets from '../../hooks/useQueryBaskets';
 import { getHashUrl } from '../../lib/block-explorer';
+=======
+  useMsgClient,
+  useQueryBaskets,
+} from 'hooks';
+import type { BasketTokens } from 'hooks/useBasketTokens';
+
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/pages/Dashboard/MyEcocredits/MyEcocredits.tsx
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
 import useCreateSellOrderSubmit from './hooks/useCreateSellOrderSubmit';
@@ -57,7 +76,15 @@ import {
   getAvailableAmountByBatch,
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
+<<<<<<< HEAD:web-registry/src/pages/MyEcocredits/MyEcocredits.tsx
 import type { Theme } from 'web-components/lib/theme/muiTheme';
+=======
+// import { ReactComponent as WithdrawIBC } from 'assets/svgs/withdraw-ibc.svg';
+// import { ReactComponent as DepositIBC } from 'assets/svgs/deposit-ibc.svg';
+// import { ReactComponent as Sell } from 'assets/svgs/sell.svg';
+import { ReactComponent as PutInBasket } from 'assets/svgs/put-in-basket.svg';
+import { ReactComponent as TakeFromBasket } from 'assets/svgs/take-from-basket.svg';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/pages/Dashboard/MyEcocredits/MyEcocredits.tsx
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);

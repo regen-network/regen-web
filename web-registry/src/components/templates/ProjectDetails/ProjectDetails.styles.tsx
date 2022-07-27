@@ -1,4 +1,5 @@
 import { SxProps } from '@mui/material';
+
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 export const getMediaBoxStyles = (theme: Theme): SxProps<Theme> => ({

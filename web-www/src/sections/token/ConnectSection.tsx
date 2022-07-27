@@ -1,12 +1,15 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, useTheme } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
-import ConnectSection, { IconLabelProps } from '../../components/ConnectSection';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
+import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
 import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import ConnectSection, {
+  IconLabelProps,
+} from '../../components/ConnectSection';
 import { TokenConnectSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -36,23 +39,39 @@ const query = graphql`
 `;
 
 const TokenConnectSection = (): JSX.Element => {
-  const { background, sanityTokenPage: data } = useStaticQuery<TokenConnectSectionQuery>(query);
+  const { background, sanityTokenPage: data } =
+    useStaticQuery<TokenConnectSectionQuery>(query);
   const styles = useStyles();
   const theme = useTheme();
   const icons: IconLabelProps[] = [
     {
-      icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      icon: (
+        <TelegramIcon
+          color={theme.palette.primary.main}
+          hoverColor={theme.palette.secondary.main}
+        />
+      ),
       href: 'https://t.me/regennetworkdevannounce',
       label: 'Telegram',
     },
     {
-      icon: <DiscordIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      icon: (
+        <DiscordIcon
+          color={theme.palette.primary.main}
+          hoverColor={theme.palette.secondary.main}
+        />
+      ),
       href: 'https://discord.gg/BDcBJu3',
       label: 'Discord community',
       small: true,
     },
     {
-      icon: <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      icon: (
+        <TwitterIcon
+          color={theme.palette.primary.main}
+          hoverColor={theme.palette.secondary.main}
+        />
+      ),
       href: 'https://twitter.com/regen_network',
       label: 'Twitter',
     },

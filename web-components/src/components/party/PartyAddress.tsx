@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React, { useState } from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+=======
+import { useState } from 'react';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 import DropdownIcon from '../icons/DropdownIcon';
 import { User } from '../user/UserInfo';

@@ -3,14 +3,14 @@ import { makeStyles, useTheme } from '@mui/styles';
 import clsx from 'clsx';
 
 import { ImageItemProps } from 'web-components/lib/components/image-item';
+import Section from 'web-components/lib/components/section';
 import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import Section from 'web-components/lib/components/section';
 import { Body } from 'web-components/lib/components/typography';
-import { WrappedImpactCard } from '../atoms';
-
 import type { Theme } from 'web-components/lib/theme/muiTheme';
+
 import type { PracticesOutcomesSection as PracticesOutcomesSectionProps } from '../../generated/sanity-graphql';
+import { WrappedImpactCard } from '../atoms';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

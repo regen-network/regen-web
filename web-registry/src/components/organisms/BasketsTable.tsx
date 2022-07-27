@@ -7,9 +7,9 @@ import {
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatNumber } from 'web-components/lib/utils/format';
 
+import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
 import { BasketTokens } from '../../hooks/useBasketTokens';
 import { NoCredits } from '../molecules';
-import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
 
 type BasketTableProps = {
   basketTokens: BasketTokens[];

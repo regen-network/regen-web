@@ -1,5 +1,10 @@
 import React from 'react';
+<<<<<<< HEAD
 import { SxProps, Card } from '@mui/material';
+=======
+import { Card as MuiCard, SxProps } from '@mui/material';
+
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import type { Theme } from '~/theme/muiTheme';
 
 interface RegenCardProps {

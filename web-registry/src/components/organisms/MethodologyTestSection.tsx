@@ -1,13 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
+import { Body, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { BackgroundImgSection } from '../molecules/BackgroundImgSection';
 import testMethodologyImg from '../../assets/test-methodology.png';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
+import { BackgroundImgSection } from '../molecules/BackgroundImgSection';
 
 type Props = {
   title?: string | null;

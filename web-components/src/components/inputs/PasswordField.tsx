@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useTheme, makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import React, { useEffect, useState } from 'react';
 // import zxcvbn, { ZXCVBNScore } from 'zxcvbn';
 // import { ZXCVBNResult } from 'zxcvbn';
 import IconButton from '@mui/material/IconButton';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
 
 import EyeIcon from '../icons/EyeIcon';
 import TextField, { RegenTextFieldProps } from './TextField';

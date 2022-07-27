@@ -1,10 +1,15 @@
 import * as React from 'react';
+<<<<<<< HEAD
 import {
   Title,
   Subtitle,
   Body,
   Label,
 } from 'web-components/lib/components/typography';
+=======
+
+import { Body, Label, Subtitle, Title } from '../../components/typography';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'Typography',

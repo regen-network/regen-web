@@ -1,11 +1,12 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import Section from 'web-components/lib/components/section';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { CaseStudiesListSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -58,7 +59,8 @@ const query = graphql`
 
 const ListSection: React.FC = () => {
   const styles = useStyles();
-  const { sanityCaseStudiesPage: data } = useStaticQuery<CaseStudiesListSectionQuery>(query);
+  const { sanityCaseStudiesPage: data } =
+    useStaticQuery<CaseStudiesListSectionQuery>(query);
   return (
     <Section
       classes={{ root: styles.section, title: styles.title }}

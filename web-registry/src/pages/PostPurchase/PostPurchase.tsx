@@ -1,18 +1,18 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import { Box, Grid } from '@mui/material';
-import { useQuery, gql } from '@apollo/client';
-import { useParams } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
+import { useParams } from 'react-router-dom';
+import { gql, useQuery } from '@apollo/client';
+import { Box, Grid } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import Section from 'web-components/lib/components/section';
 import GreenCard from 'web-components/lib/components/cards/GreenCard';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
 import ShareIcons from 'web-components/lib/components/icons/ShareIcons';
+import Section from 'web-components/lib/components/section';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import sum from '../../lib/sum';
 import CowIllustration from '../../assets/cow-illustration.png';
+import sum from '../../lib/sum';
 
 const PROJECT = gql`
   query ProjectByHandle($handle: String!) {

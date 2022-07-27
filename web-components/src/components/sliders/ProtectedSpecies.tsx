@@ -1,9 +1,10 @@
-import React, { useRef, useCallback } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import ProtectedSpeciesItem, { ItemProps } from './Item';
+import React, { useCallback, useRef } from 'react';
 import Slider from 'react-slick';
+import Grid from '@mui/material/Grid';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+
 import PrevNextButton from '../buttons/PrevNextButton';
+import ProtectedSpeciesItem, { ItemProps } from './Item';
 
 export interface ProtectedSpeciesProps {
   species: ItemProps[];

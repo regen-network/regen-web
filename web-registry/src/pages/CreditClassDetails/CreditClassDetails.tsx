@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Routes, Route } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 
+<<<<<<< HEAD
 import { useAllCreditClassQuery } from '../../generated/sanity-graphql';
 import {
   useCreditClassByOnChainIdQuery,
@@ -13,6 +14,21 @@ import { queryEcoClassInfo } from '../../lib/ecocredit/api';
 import { getMetadata } from '../../lib/metadata-graph';
 import { onChainClassRegExp } from '../../lib/ledger';
 import { ClassInfo } from '../../types/ledger/ecocredit';
+=======
+import {
+  useCreditClassByOnChainIdQuery,
+  useCreditClassByUriQuery,
+} from 'generated/graphql';
+import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+import { ClassInfo } from 'types/ledger/ecocredit';
+import { queryEcoClassInfo } from 'lib/ecocredit/api';
+import { onChainClassRegExp } from 'lib/ledger';
+import { getMetadata } from 'lib/metadata-graph';
+import { client } from 'sanity';
+
+import CreditClassDetailsSimple from './CreditClassDetailsSimple';
+import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 interface CreditDetailsProps {
   isLandSteward?: boolean;

@@ -1,13 +1,13 @@
 import React, { ReactChild } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
-import BackgroundImage from 'gatsby-background-image';
-import { Link } from 'gatsby';
-import { FluidObject } from 'gatsby-image';
 import clsx from 'clsx';
+import { Link } from 'gatsby';
+import BackgroundImage from 'gatsby-background-image';
+import { FluidObject } from 'gatsby-image';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import Section from 'web-components/lib/components/section';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 interface FAQSectionProps {
   category?: string;
@@ -61,13 +61,21 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-const FAQSection = ({ header, imageData, category, children }: FAQSectionProps): JSX.Element => {
+const FAQSection = ({
+  header,
+  imageData,
+  category,
+  children,
+}: FAQSectionProps): JSX.Element => {
   const classes = useStyles();
   const theme = useTheme();
   return (
     <BackgroundImage Tag="div" fluid={imageData}>
       <Section
-        classes={{ root: clsx(classes.root, children && classes.withChildren), title: classes.title }}
+        classes={{
+          root: clsx(classes.root, children && classes.withChildren),
+          title: classes.title,
+        }}
         titleColor={theme.palette.primary.main}
         title={header}
       >

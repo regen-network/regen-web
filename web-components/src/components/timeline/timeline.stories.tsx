@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import * as React from 'react';
 import TimelineItem from 'web-components/lib/components/timeline/TimelineItem';
 import Timeline, { Event } from 'web-components/lib/components/timeline';
@@ -5,6 +6,12 @@ import NewTimeline, {
   Item,
 } from 'web-components/lib/components/timeline/NewTimeline';
 import theme from '../../theme/muiTheme';
+=======
+import theme from '../../theme/muiTheme';
+import Timeline, { Event } from '.';
+import NewTimeline, { Item } from './NewTimeline';
+import TimelineItem from './TimelineItem';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'Timeline',

@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
 import AvatarIcon from 'web-components/lib/components/icons/AvatarIcon';
@@ -63,6 +64,76 @@ import { Spinner } from 'web-components/lib/components/icons/Spinner';
 import { BrokenLinkIcon } from 'web-components/lib/components/icons/BrokenLinkIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
 import EditIcon from 'web-components/lib/components/icons/EditIcon';
+=======
+import { Grid } from '@mui/material';
+
+import { FlexCol } from '../box';
+import AccountabilityIcon from './AccountabilityIcon';
+import ArrowDownIcon from './ArrowDownIcon';
+import AvailableCreditsIcon from './AvailableCreditsIcon';
+import AvatarIcon from './AvatarIcon';
+import BlockIcon from './BlockIcon';
+import BreadcrumbIcon from './BreadcrumbIcon';
+import { BrokenLinkIcon } from './BrokenLinkIcon';
+import CheckedIcon from './CheckedIcon';
+import CheckIcon from './CheckIcon';
+import CloseIcon from './CloseIcon';
+import CoBenefitsIcon from './CoBenefitsIcon';
+import CountingIcon from './CountingIcon';
+import { CreditClassIcon } from './CreditClassIcon';
+import CreditsIcon from './CreditsIcon';
+import CurrentCreditsIcon from './CurrentCreditsIcon';
+import DocumentIcon from './DocumentIcon';
+import DropdownIcon from './DropdownIcon';
+import EditIcon from './EditIcon';
+import EmailIcon from './EmailIcon';
+import EyeIcon from './EyeIcon';
+import FarmerIcon from './FarmerIcon';
+import { HorizontalDotsIcon } from './HorizontalDotsIcon';
+import InfoIcon from './InfoIcon';
+import InfoIconOutlined from './InfoIconOutlined';
+import InterfaceIcon from './InterfaceIcon';
+import LinkIcon from './LinkIcon';
+import MinusIcon from './MinusIcon';
+import OrganizationIcon from './OrganizationIcon';
+import PhoneIcon from './PhoneIcon';
+import PinIcon from './PinIcon';
+import PlayIcon from './PlayIcon';
+import PlusIcon from './PlusIcon';
+import PointerIcon from './PointerIcon';
+import PrintIcon from './PrintIcon';
+import { ProjectPageIcon } from './ProjectPageIcon';
+import { ProjectPageIconSmall } from './ProjectPageIconSmall';
+import RegenIcon from './RegenIcon';
+import RegenLedgerIcon from './RegenLedgerIcon';
+import RegenLogoIcon from './RegenLogoIcon';
+import { RegenTokenIcon } from './RegenTokenIcon';
+import RegistrationIcon from './RegistrationIcon';
+import ReviewIcon from './ReviewIcon';
+import SatelliteIcon from './SatelliteIcon';
+import { SaveIcon } from './SaveIcon';
+import ShadedCreditsIcon from './ShadedCreditsIcon';
+import ShieldIcon from './ShieldIcon';
+import SmallArrowIcon from './SmallArrowIcon';
+import DiscordIcon from './social/DiscordIcon';
+import FacebookIcon from './social/FacebookIcon';
+import GithubIcon from './social/GithubIcon';
+import InstagramIcon from './social/InstagramIcon';
+import LinkedInIcon from './social/LinkedInIcon';
+import MediumIcon from './social/MediumIcon';
+import TelegramIcon from './social/TelegramIcon';
+import TwitterIcon from './social/TwitterIcon';
+import YoutubeIcon from './social/YoutubeIcon';
+import SoilSampleIcon from './SoilSampleIcon';
+import { Spinner } from './Spinner';
+import TotalCreditsIcon from './TotalCreditsIcon';
+import TrashIcon from './TrashIcon';
+import TrustDocumentIcon from './TrustDocumentIcon';
+import TrustIcon from './TrustIcon';
+import VerifiedIcon from './VerifiedIcon';
+import { WalletIcon } from './WalletIcon';
+import WhitepaperIcon from './WhitepaperIcon';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'Icons',

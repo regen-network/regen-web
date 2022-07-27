@@ -1,8 +1,9 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import BackgroundSection from '../../components/BackgroundSection';
 import { WalletAddrRegTopSectionQuery } from '../../generated/graphql';
 
@@ -36,9 +37,8 @@ const query = graphql`
 
 const TopSection = (): JSX.Element => {
   const styles = useStyles();
-  const { background, sanityWalletAddressRegistrationPage } = useStaticQuery<WalletAddrRegTopSectionQuery>(
-    query,
-  );
+  const { background, sanityWalletAddressRegistrationPage } =
+    useStaticQuery<WalletAddrRegTopSectionQuery>(query);
   const data = sanityWalletAddressRegistrationPage?.topSection;
   return (
     <BackgroundSection

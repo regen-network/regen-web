@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Box } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Box } from '@mui/material';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { Loading } from 'web-components/lib/components/loading';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
-import { Loading } from 'web-components/lib/components/loading';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-import { getBatchWithSupplyForDenom } from '../../lib/ecocredit/api';
-import { getMetadata } from '../../lib/metadata-graph';
-import { useProjectsByMetadataQuery } from '../../generated/graphql';
-
-import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import {
   BatchInfoGrid,
   BatchMetadata,
   BatchTotalsGrid,
 } from '../../components/molecules';
-import { NotFoundPage } from '../NotFound/NotFound';
-import { useWallet } from '../../lib/wallet';
+import { useProjectsByMetadataQuery } from '../../generated/graphql';
 import { useEcocredits } from '../../hooks';
+import { getBatchWithSupplyForDenom } from '../../lib/ecocredit/api';
+import { getMetadata } from '../../lib/metadata-graph';
+import { useWallet } from '../../lib/wallet';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
+import { NotFoundPage } from '../NotFound/NotFound';
 
 export const BatchDetails: React.FC = () => {
   const { batchDenom } = useParams();

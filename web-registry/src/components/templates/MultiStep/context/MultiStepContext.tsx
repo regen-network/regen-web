@@ -1,5 +1,10 @@
 import React from 'react';
+<<<<<<< HEAD:web-registry/src/components/templates/MultiStep/context/MultiStepContext.tsx
 import useLocalStorage from '../../../../hooks/useLocalStorage';
+=======
+
+import { useLocalStorage } from 'hooks';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/components/templates/MultiStepTemplate/MultiStep.context.tsx
 
 // TODO - persistence alternatives: component / localstorage / db
 // Instead of directly using the local storage hook here, we should use an

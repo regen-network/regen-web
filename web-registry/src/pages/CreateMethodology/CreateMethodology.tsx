@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
 import CardMedia from '@mui/material/CardMedia';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { makeStyles, useTheme } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import FixedFooter from 'web-components/lib/components/fixed-footer';
+import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import Modal from 'web-components/lib/components/modal';
-
-import { HeroTitle, HeroAction } from '../../components/molecules';
-import { StepCardsWithDescription } from '../../components/organisms';
-import { WrappedImpactCard } from '../../components/atoms';
-import { WrappedResourcesCard } from '../../components/atoms';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import fernImg from '../../assets/fern-in-hands.png';
 // import writingOnPaperImg from '../../assets/writing-on-paper.png';
 import topographyImg from '../../assets/topography-pattern-full-1.png';
-
+import {
+  WrappedImpactCard,
+  WrappedResourcesCard,
+} from '../../components/atoms';
+import { HeroAction, HeroTitle } from '../../components/molecules';
+import { StepCardsWithDescription } from '../../components/organisms';
 import { useAllCreateMethodologyPageQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 

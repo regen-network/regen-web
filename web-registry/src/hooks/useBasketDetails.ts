@@ -1,17 +1,24 @@
-import { useState, useEffect } from 'react';
-import dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration';
-
+import { useEffect, useState } from 'react';
+import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 import {
   QueryBasketBalancesResponse,
   QueryBasketResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 import {
-  QueryClassInfoResponse,
   QueryBatchInfoResponse,
+  QueryClassInfoResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
 
+<<<<<<< HEAD
+=======
+import { useProjectsByMetadataLazyQuery } from 'generated/graphql';
+import { getMetadataFromUint8Array } from 'lib/metadata-graph';
+
+import { BasketOverviewProps, CreditBatch } from 'components/organisms';
+
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import useBankQuery from './useBankQuery';
 import useBasketQuery from './useBasketQuery';
 import useQueryListClassInfo from './useQueryListClassInfo';

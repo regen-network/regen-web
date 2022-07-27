@@ -1,13 +1,21 @@
 import React from 'react';
 import { Box, SxProps } from '@mui/material';
 
-import { Label } from 'web-components/lib/components/typography';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
+import { Label } from 'web-components/lib/components/typography';
 
+<<<<<<< HEAD
 import { EcocreditsTable, BasketsTable } from './';
 import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
 import { BasketTokens } from '../../hooks/useBasketTokens';
 import { DashboardTemplate } from '../templates';
+=======
+import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+
+import { BasketTokens } from 'hooks/useBasketTokens';
+
+import { BasketsTable, EcocreditsTable } from './';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export interface PortfolioProps {
   credits?: BatchInfoWithBalance[];

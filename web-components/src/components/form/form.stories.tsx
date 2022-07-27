@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Long from 'long';
 
+<<<<<<< HEAD
 import UserProfileForm from 'web-components/lib/components/form/UserProfileForm';
 // import OrganizationProfileForm from 'web-components/lib/components/form/OrganizationProfileForm';
 import LoginForm from 'web-components/lib/components/form/LoginForm';
@@ -12,6 +13,16 @@ import {
   FormValues,
   RecipientsForm,
 } from 'web-components/lib/components/form/RecipientsForm';
+=======
+import { BasketPutForm } from './BasketPutForm';
+import { BasketTakeForm } from './BasketTakeForm';
+import { CreditRetireForm } from './CreditRetireForm';
+import { CreditSendForm } from './CreditSendForm';
+// import OrganizationProfileForm from './OrganizationProfileForm';
+import LoginForm from './LoginForm';
+import { FormValues, RecipientsForm } from './RecipientsForm';
+import UserProfileForm from './UserProfileForm';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'Forms',

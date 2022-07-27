@@ -1,10 +1,10 @@
 import React from 'react';
-import { useStaticQuery, graphql, PageProps } from 'gatsby';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
 
-import TopSection from '../sections/team/TopSection';
-import CoreTeam from '../sections/team/CoreTeamSection';
-import AdvisorSection from '../sections/team/AdvisorSection';
 import SEO from '../components/seo';
+import AdvisorSection from '../sections/team/AdvisorSection';
+import CoreTeam from '../sections/team/CoreTeamSection';
+import TopSection from '../sections/team/TopSection';
 
 const ResourcesPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`

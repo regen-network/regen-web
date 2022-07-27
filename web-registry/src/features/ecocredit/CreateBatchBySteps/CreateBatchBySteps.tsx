@@ -1,8 +1,13 @@
 import React from 'react';
+<<<<<<< HEAD
 import { MultiStepSection } from '../../../components/templates/MultiStep';
+=======
 
-import formModel from './form-model';
+import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
+
 import CreateBatchMultiStepForm from './CreateBatchMultiStepForm';
+import formModel from './form-model';
 
 /**
  * Container integrating with:

@@ -1,7 +1,13 @@
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -14,16 +20,6 @@ export type Scalars = {
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
 };
-
-
-
-
-
-
-
-
-
-
 
 export type AvifOptions = {
   quality: Maybe<Scalars['Int']>;
@@ -44,7 +40,6 @@ export type BooleanQueryOperatorInput = {
   in: Maybe<Array<Maybe<Scalars['Boolean']>>>;
   nin: Maybe<Array<Maybe<Scalars['Boolean']>>>;
 };
-
 
 export type DateQueryOperatorInput = {
   eq: Maybe<Scalars['Date']>;
@@ -100,14 +95,12 @@ export type Directory = Node & {
   internal: Internal;
 };
 
-
 export type DirectoryModifiedTimeArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type DirectoryAccessTimeArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -116,14 +109,12 @@ export type DirectoryAccessTimeArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type DirectoryChangeTimeArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type DirectoryBirthTimeArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -132,7 +123,6 @@ export type DirectoryBirthTimeArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type DirectoryAtimeArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -140,14 +130,12 @@ export type DirectoryAtimeArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type DirectoryMtimeArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type DirectoryCtimeArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -166,11 +154,9 @@ export type DirectoryConnection = {
   group: Array<DirectoryGroupConnection>;
 };
 
-
 export type DirectoryConnectionDistinctArgs = {
   field: DirectoryFieldsEnum;
 };
-
 
 export type DirectoryConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -304,7 +290,7 @@ export enum DirectoryFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type DirectoryFilterInput = {
@@ -421,14 +407,12 @@ export type File = Node & {
   internal: Internal;
 };
 
-
 export type FileModifiedTimeArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type FileAccessTimeArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -437,14 +421,12 @@ export type FileAccessTimeArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type FileChangeTimeArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type FileBirthTimeArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -453,7 +435,6 @@ export type FileBirthTimeArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type FileAtimeArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -461,14 +442,12 @@ export type FileAtimeArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type FileMtimeArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type FileCtimeArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -487,11 +466,9 @@ export type FileConnection = {
   group: Array<FileGroupConnection>;
 };
 
-
 export type FileConnectionDistinctArgs = {
   field: FileFieldsEnum;
 };
-
 
 export type FileConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -920,7 +897,7 @@ export enum FileFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type FileFilterInput = {
@@ -1005,7 +982,7 @@ export enum ImageCropFocus {
   West = 'WEST',
   Northwest = 'NORTHWEST',
   Entropy = 'ENTROPY',
-  Attention = 'ATTENTION'
+  Attention = 'ATTENTION',
 }
 
 export enum ImageFit {
@@ -1013,7 +990,7 @@ export enum ImageFit {
   Contain = 'CONTAIN',
   Fill = 'FILL',
   Inside = 'INSIDE',
-  Outside = 'OUTSIDE'
+  Outside = 'OUTSIDE',
 }
 
 export enum ImageFormat {
@@ -1022,20 +999,20 @@ export enum ImageFormat {
   Jpg = 'JPG',
   Png = 'PNG',
   Webp = 'WEBP',
-  Avif = 'AVIF'
+  Avif = 'AVIF',
 }
 
 export enum ImageLayout {
   Fixed = 'FIXED',
   FullWidth = 'FULL_WIDTH',
-  Constrained = 'CONSTRAINED'
+  Constrained = 'CONSTRAINED',
 }
 
 export enum ImagePlaceholder {
   DominantColor = 'DOMINANT_COLOR',
   TracedSvg = 'TRACED_SVG',
   Blurred = 'BLURRED',
-  None = 'NONE'
+  None = 'NONE',
 }
 
 export type ImageSharp = Node & {
@@ -1054,7 +1031,6 @@ export type ImageSharp = Node & {
   children: Array<Node>;
   internal: Internal;
 };
-
 
 export type ImageSharpFixedArgs = {
   width: Maybe<Scalars['Int']>;
@@ -1078,7 +1054,6 @@ export type ImageSharpFixedArgs = {
   trim?: Maybe<Scalars['Float']>;
 };
 
-
 export type ImageSharpResolutionsArgs = {
   width: Maybe<Scalars['Int']>;
   height: Maybe<Scalars['Int']>;
@@ -1100,7 +1075,6 @@ export type ImageSharpResolutionsArgs = {
   rotate?: Maybe<Scalars['Int']>;
   trim?: Maybe<Scalars['Float']>;
 };
-
 
 export type ImageSharpFluidArgs = {
   maxWidth: Maybe<Scalars['Int']>;
@@ -1126,7 +1100,6 @@ export type ImageSharpFluidArgs = {
   srcSetBreakpoints?: Maybe<Array<Maybe<Scalars['Int']>>>;
 };
 
-
 export type ImageSharpSizesArgs = {
   maxWidth: Maybe<Scalars['Int']>;
   maxHeight: Maybe<Scalars['Int']>;
@@ -1151,7 +1124,6 @@ export type ImageSharpSizesArgs = {
   srcSetBreakpoints?: Maybe<Array<Maybe<Scalars['Int']>>>;
 };
 
-
 export type ImageSharpGatsbyImageDataArgs = {
   layout?: Maybe<ImageLayout>;
   width: Maybe<Scalars['Int']>;
@@ -1172,7 +1144,6 @@ export type ImageSharpGatsbyImageDataArgs = {
   transformOptions: Maybe<TransformOptions>;
   backgroundColor: Maybe<Scalars['String']>;
 };
-
 
 export type ImageSharpResizeArgs = {
   width: Maybe<Scalars['Int']>;
@@ -1206,11 +1177,9 @@ export type ImageSharpConnection = {
   group: Array<ImageSharpGroupConnection>;
 };
 
-
 export type ImageSharpConnectionDistinctArgs = {
   field: ImageSharpFieldsEnum;
 };
-
 
 export type ImageSharpConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -1365,7 +1334,7 @@ export enum ImageSharpFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type ImageSharpFilterInput = {
@@ -1588,7 +1557,6 @@ export type JpgOptions = {
   progressive: Maybe<Scalars['Boolean']>;
 };
 
-
 export type JsonQueryOperatorInput = {
   eq: Maybe<Scalars['JSON']>;
   ne: Maybe<Scalars['JSON']>;
@@ -1601,7 +1569,7 @@ export type JsonQueryOperatorInput = {
 export enum MarkdownExcerptFormats {
   Plain = 'PLAIN',
   Html = 'HTML',
-  Markdown = 'MARKDOWN'
+  Markdown = 'MARKDOWN',
 }
 
 export type MarkdownHeading = {
@@ -1627,7 +1595,7 @@ export enum MarkdownHeadingLevels {
   H3 = 'h3',
   H4 = 'h4',
   H5 = 'h5',
-  H6 = 'h6'
+  H6 = 'h6',
 }
 
 export type MarkdownRemark = Node & {
@@ -1649,24 +1617,20 @@ export type MarkdownRemark = Node & {
   internal: Internal;
 };
 
-
 export type MarkdownRemarkExcerptArgs = {
   pruneLength?: Maybe<Scalars['Int']>;
   truncate?: Maybe<Scalars['Boolean']>;
   format?: Maybe<MarkdownExcerptFormats>;
 };
 
-
 export type MarkdownRemarkExcerptAstArgs = {
   pruneLength?: Maybe<Scalars['Int']>;
   truncate?: Maybe<Scalars['Boolean']>;
 };
 
-
 export type MarkdownRemarkHeadingsArgs = {
   depth: Maybe<MarkdownHeadingLevels>;
 };
-
 
 export type MarkdownRemarkTableOfContentsArgs = {
   absolute?: Maybe<Scalars['Boolean']>;
@@ -1685,11 +1649,9 @@ export type MarkdownRemarkConnection = {
   group: Array<MarkdownRemarkGroupConnection>;
 };
 
-
 export type MarkdownRemarkConnectionDistinctArgs = {
   field: MarkdownRemarkFieldsEnum;
 };
-
 
 export type MarkdownRemarkConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -1806,7 +1768,7 @@ export enum MarkdownRemarkFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type MarkdownRemarkFilterInput = {
@@ -1921,7 +1883,7 @@ export enum PotraceTurnPolicy {
   TurnpolicyLeft = 'TURNPOLICY_LEFT',
   TurnpolicyRight = 'TURNPOLICY_RIGHT',
   TurnpolicyMinority = 'TURNPOLICY_MINORITY',
-  TurnpolicyMajority = 'TURNPOLICY_MAJORITY'
+  TurnpolicyMajority = 'TURNPOLICY_MAJORITY',
 }
 
 export type Query = {
@@ -2026,7 +1988,6 @@ export type Query = {
   allSitePlugin: SitePluginConnection;
 };
 
-
 export type QueryFileArgs = {
   sourceInstanceName: Maybe<StringQueryOperatorInput>;
   absolutePath: Maybe<StringQueryOperatorInput>;
@@ -2072,14 +2033,12 @@ export type QueryFileArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllFileArgs = {
   filter: Maybe<FileFilterInput>;
   sort: Maybe<FileSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QueryDirectoryArgs = {
   sourceInstanceName: Maybe<StringQueryOperatorInput>;
@@ -2121,14 +2080,12 @@ export type QueryDirectoryArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllDirectoryArgs = {
   filter: Maybe<DirectoryFilterInput>;
   sort: Maybe<DirectorySortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySiteArgs = {
   buildTime: Maybe<DateQueryOperatorInput>;
@@ -2143,14 +2100,12 @@ export type QuerySiteArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSiteArgs = {
   filter: Maybe<SiteFilterInput>;
   sort: Maybe<SiteSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySitePageArgs = {
   path: Maybe<StringQueryOperatorInput>;
@@ -2169,14 +2124,12 @@ export type QuerySitePageArgs = {
   componentPath: Maybe<StringQueryOperatorInput>;
 };
 
-
 export type QueryAllSitePageArgs = {
   filter: Maybe<SitePageFilterInput>;
   sort: Maybe<SitePageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityBuyersPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2202,14 +2155,12 @@ export type QuerySanityBuyersPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityBuyersPageArgs = {
   filter: Maybe<SanityBuyersPageFilterInput>;
   sort: Maybe<SanityBuyersPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityCaseStudiesPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2239,14 +2190,12 @@ export type QuerySanityCaseStudiesPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityCaseStudiesPageArgs = {
   filter: Maybe<SanityCaseStudiesPageFilterInput>;
   sort: Maybe<SanityCaseStudiesPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityCaseStudyPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2283,14 +2232,12 @@ export type QuerySanityCaseStudyPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityCaseStudyPageArgs = {
   filter: Maybe<SanityCaseStudyPageFilterInput>;
   sort: Maybe<SanityCaseStudyPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityCommunityPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2315,14 +2262,12 @@ export type QuerySanityCommunityPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityCommunityPageArgs = {
   filter: Maybe<SanityCommunityPageFilterInput>;
   sort: Maybe<SanityCommunityPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityContactPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2350,14 +2295,12 @@ export type QuerySanityContactPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityContactPageArgs = {
   filter: Maybe<SanityContactPageFilterInput>;
   sort: Maybe<SanityContactPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityCreateCreditClassPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2389,14 +2332,12 @@ export type QuerySanityCreateCreditClassPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityCreateCreditClassPageArgs = {
   filter: Maybe<SanityCreateCreditClassPageFilterInput>;
   sort: Maybe<SanityCreateCreditClassPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityCreateMethodologyPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2428,14 +2369,12 @@ export type QuerySanityCreateMethodologyPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityCreateMethodologyPageArgs = {
   filter: Maybe<SanityCreateMethodologyPageFilterInput>;
   sort: Maybe<SanityCreateMethodologyPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityCreditClassArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2471,14 +2410,12 @@ export type QuerySanityCreditClassArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityCreditClassArgs = {
   filter: Maybe<SanityCreditClassFilterInput>;
   sort: Maybe<SanityCreditClassSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityDevelopersPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2505,14 +2442,12 @@ export type QuerySanityDevelopersPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityDevelopersPageArgs = {
   filter: Maybe<SanityDevelopersPageFilterInput>;
   sort: Maybe<SanityDevelopersPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityDocArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2531,14 +2466,12 @@ export type QuerySanityDocArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityDocArgs = {
   filter: Maybe<SanityDocFilterInput>;
   sort: Maybe<SanityDocSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityEcologicalImpactArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2562,14 +2495,12 @@ export type QuerySanityEcologicalImpactArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityEcologicalImpactArgs = {
   filter: Maybe<SanityEcologicalImpactFilterInput>;
   sort: Maybe<SanityEcologicalImpactSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityEcologicalOutcomeArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2589,14 +2520,12 @@ export type QuerySanityEcologicalOutcomeArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityEcologicalOutcomeArgs = {
   filter: Maybe<SanityEcologicalOutcomeFilterInput>;
   sort: Maybe<SanityEcologicalOutcomeSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityFaqArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2614,14 +2543,12 @@ export type QuerySanityFaqArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityFaqArgs = {
   filter: Maybe<SanityFaqFilterInput>;
   sort: Maybe<SanityFaqSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityFaqPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2638,14 +2565,12 @@ export type QuerySanityFaqPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityFaqPageArgs = {
   filter: Maybe<SanityFaqPageFilterInput>;
   sort: Maybe<SanityFaqPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityFeaturedSectionArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2669,14 +2594,12 @@ export type QuerySanityFeaturedSectionArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityFeaturedSectionArgs = {
   filter: Maybe<SanityFeaturedSectionFilterInput>;
   sort: Maybe<SanityFeaturedSectionSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityFundPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2701,14 +2624,12 @@ export type QuerySanityFundPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityFundPageArgs = {
   filter: Maybe<SanityFundPageFilterInput>;
   sort: Maybe<SanityFundPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityHomePageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2727,14 +2648,12 @@ export type QuerySanityHomePageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityHomePageArgs = {
   filter: Maybe<SanityHomePageFilterInput>;
   sort: Maybe<SanityHomePageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityHomePageWebArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2762,14 +2681,12 @@ export type QuerySanityHomePageWebArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityHomePageWebArgs = {
   filter: Maybe<SanityHomePageWebFilterInput>;
   sort: Maybe<SanityHomePageWebSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityImageGridItemArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2789,14 +2706,12 @@ export type QuerySanityImageGridItemArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityImageGridItemArgs = {
   filter: Maybe<SanityImageGridItemFilterInput>;
   sort: Maybe<SanityImageGridItemSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityLandManagementPracticeArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2816,14 +2731,12 @@ export type QuerySanityLandManagementPracticeArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityLandManagementPracticeArgs = {
   filter: Maybe<SanityLandManagementPracticeFilterInput>;
   sort: Maybe<SanityLandManagementPracticeSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityLandStewardsPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2856,14 +2769,12 @@ export type QuerySanityLandStewardsPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityLandStewardsPageArgs = {
   filter: Maybe<SanityLandStewardsPageFilterInput>;
   sort: Maybe<SanityLandStewardsPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityMainnetPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2889,14 +2800,12 @@ export type QuerySanityMainnetPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityMainnetPageArgs = {
   filter: Maybe<SanityMainnetPageFilterInput>;
   sort: Maybe<SanityMainnetPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityMediaArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2918,14 +2827,12 @@ export type QuerySanityMediaArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityMediaArgs = {
   filter: Maybe<SanityMediaFilterInput>;
   sort: Maybe<SanityMediaSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityMethodologyArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2955,14 +2862,12 @@ export type QuerySanityMethodologyArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityMethodologyArgs = {
   filter: Maybe<SanityMethodologyFilterInput>;
   sort: Maybe<SanityMethodologySortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityMethodologyReviewProcessPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -2987,14 +2892,12 @@ export type QuerySanityMethodologyReviewProcessPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityMethodologyReviewProcessPageArgs = {
   filter: Maybe<SanityMethodologyReviewProcessPageFilterInput>;
   sort: Maybe<SanityMethodologyReviewProcessPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityNctPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3026,14 +2929,12 @@ export type QuerySanityNctPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityNctPageArgs = {
   filter: Maybe<SanityNctPageFilterInput>;
   sort: Maybe<SanityNctPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityPartnersPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3054,14 +2955,12 @@ export type QuerySanityPartnersPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityPartnersPageArgs = {
   filter: Maybe<SanityPartnersPageFilterInput>;
   sort: Maybe<SanityPartnersPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityPresskitPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3095,14 +2994,12 @@ export type QuerySanityPresskitPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityPresskitPageArgs = {
   filter: Maybe<SanityPresskitPageFilterInput>;
   sort: Maybe<SanityPresskitPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityRegenTeamMemberArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3124,14 +3021,12 @@ export type QuerySanityRegenTeamMemberArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityRegenTeamMemberArgs = {
   filter: Maybe<SanityRegenTeamMemberFilterInput>;
   sort: Maybe<SanityRegenTeamMemberSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityResourceArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3155,14 +3050,12 @@ export type QuerySanityResourceArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityResourceArgs = {
   filter: Maybe<SanityResourceFilterInput>;
   sort: Maybe<SanityResourceSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityResourcesPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3183,14 +3076,12 @@ export type QuerySanityResourcesPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityResourcesPageArgs = {
   filter: Maybe<SanityResourcesPageFilterInput>;
   sort: Maybe<SanityResourcesPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityFileAssetArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3219,14 +3110,12 @@ export type QuerySanityFileAssetArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityFileAssetArgs = {
   filter: Maybe<SanityFileAssetFilterInput>;
   sort: Maybe<SanityFileAssetSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityImageAssetArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3260,14 +3149,12 @@ export type QuerySanityImageAssetArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityImageAssetArgs = {
   filter: Maybe<SanityImageAssetFilterInput>;
   sort: Maybe<SanityImageAssetSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanitySciencePageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3292,14 +3179,12 @@ export type QuerySanitySciencePageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanitySciencePageArgs = {
   filter: Maybe<SanitySciencePageFilterInput>;
   sort: Maybe<SanitySciencePageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanitySdgArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3319,14 +3204,12 @@ export type QuerySanitySdgArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanitySdgArgs = {
   filter: Maybe<SanitySdgFilterInput>;
   sort: Maybe<SanitySdgSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanitySharedSectionsArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3345,14 +3228,12 @@ export type QuerySanitySharedSectionsArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanitySharedSectionsArgs = {
   filter: Maybe<SanitySharedSectionsFilterInput>;
   sort: Maybe<SanitySharedSectionsSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityTagArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3369,14 +3250,12 @@ export type QuerySanityTagArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityTagArgs = {
   filter: Maybe<SanityTagFilterInput>;
   sort: Maybe<SanityTagSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityTeamPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3397,14 +3276,12 @@ export type QuerySanityTeamPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityTeamPageArgs = {
   filter: Maybe<SanityTeamPageFilterInput>;
   sort: Maybe<SanityTeamPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityTokenPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3436,14 +3313,12 @@ export type QuerySanityTokenPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityTokenPageArgs = {
   filter: Maybe<SanityTokenPageFilterInput>;
   sort: Maybe<SanityTokenPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityValidatorsPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3467,14 +3342,12 @@ export type QuerySanityValidatorsPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityValidatorsPageArgs = {
   filter: Maybe<SanityValidatorsPageFilterInput>;
   sort: Maybe<SanityValidatorsPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySanityWalletAddressRegistrationPageArgs = {
   _id: Maybe<StringQueryOperatorInput>;
@@ -3497,14 +3370,12 @@ export type QuerySanityWalletAddressRegistrationPageArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllSanityWalletAddressRegistrationPageArgs = {
   filter: Maybe<SanityWalletAddressRegistrationPageFilterInput>;
   sort: Maybe<SanityWalletAddressRegistrationPageSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QueryMarkdownRemarkArgs = {
   id: Maybe<StringQueryOperatorInput>;
@@ -3524,14 +3395,12 @@ export type QueryMarkdownRemarkArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllMarkdownRemarkArgs = {
   filter: Maybe<MarkdownRemarkFilterInput>;
   sort: Maybe<MarkdownRemarkSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QueryImageSharpArgs = {
   fixed: Maybe<ImageSharpFixedFilterInput>;
@@ -3547,14 +3416,12 @@ export type QueryImageSharpArgs = {
   internal: Maybe<InternalFilterInput>;
 };
 
-
 export type QueryAllImageSharpArgs = {
   filter: Maybe<ImageSharpFilterInput>;
   sort: Maybe<ImageSharpSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySiteBuildMetadataArgs = {
   id: Maybe<StringQueryOperatorInput>;
@@ -3564,14 +3431,12 @@ export type QuerySiteBuildMetadataArgs = {
   buildTime: Maybe<DateQueryOperatorInput>;
 };
 
-
 export type QueryAllSiteBuildMetadataArgs = {
   filter: Maybe<SiteBuildMetadataFilterInput>;
   sort: Maybe<SiteBuildMetadataSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
-
 
 export type QuerySitePluginArgs = {
   id: Maybe<StringQueryOperatorInput>;
@@ -3588,7 +3453,6 @@ export type QuerySitePluginArgs = {
   pluginFilepath: Maybe<StringQueryOperatorInput>;
   packageJson: Maybe<SitePluginPackageJsonFilterInput>;
 };
-
 
 export type QueryAllSitePluginArgs = {
   filter: Maybe<SitePluginFilterInput>;
@@ -3623,7 +3487,6 @@ export type SanityBasicStepCardSection = {
   _rawStepCards: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityBasicStepCardSection_RawStepCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -3649,7 +3512,6 @@ export type SanityBlock = {
   list: Maybe<Scalars['String']>;
   _rawChildren: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityBlock_RawChildrenArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -3680,11 +3542,9 @@ export type SanityBlogPost = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityBlogPost_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityBlogPost_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -3713,7 +3573,6 @@ export type SanityBlogSection = {
   posts: Maybe<Array<Maybe<SanityBlogPost>>>;
   _rawPosts: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityBlogSection_RawPostsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -3761,21 +3620,17 @@ export type SanityBottomBanner = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityBottomBanner_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityBottomBanner_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityBottomBanner_RawSecondButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityBottomBanner_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -3806,7 +3661,6 @@ export type SanityButton = {
   _rawButtonLink: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityButton_RawButtonLinkArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -3836,21 +3690,17 @@ export type SanityBuyer = {
   _rawCtaButton: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityBuyer_RawHeroSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityBuyer_RawResourcesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityBuyer_RawVideosArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityBuyer_RawCtaButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -3870,31 +3720,31 @@ export type SanityBuyerFilterInput = {
   _rawCtaButton: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityBuyersPage = SanityDocument & Node & {
-  __typename?: 'SanityBuyersPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  heroSection: Maybe<SanityHeroSection>;
-  imageGridSection: Maybe<SanityImageGridSection>;
-  featuredSection: Maybe<SanityFeaturedSection>;
-  faqSection: Maybe<SanityBottomBanner>;
-  footerButtonText: Maybe<Scalars['String']>;
-  metadata: Maybe<SanityPageMetadata>;
-  _rawHeroSection: Maybe<Scalars['JSON']>;
-  _rawImageGridSection: Maybe<Scalars['JSON']>;
-  _rawFeaturedSection: Maybe<Scalars['JSON']>;
-  _rawFaqSection: Maybe<Scalars['JSON']>;
-  _rawMetadata: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityBuyersPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityBuyersPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    heroSection: Maybe<SanityHeroSection>;
+    imageGridSection: Maybe<SanityImageGridSection>;
+    featuredSection: Maybe<SanityFeaturedSection>;
+    faqSection: Maybe<SanityBottomBanner>;
+    footerButtonText: Maybe<Scalars['String']>;
+    metadata: Maybe<SanityPageMetadata>;
+    _rawHeroSection: Maybe<Scalars['JSON']>;
+    _rawImageGridSection: Maybe<Scalars['JSON']>;
+    _rawFeaturedSection: Maybe<Scalars['JSON']>;
+    _rawFaqSection: Maybe<Scalars['JSON']>;
+    _rawMetadata: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityBuyersPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -3903,7 +3753,6 @@ export type SanityBuyersPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityBuyersPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -3911,26 +3760,21 @@ export type SanityBuyersPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityBuyersPage_RawHeroSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityBuyersPage_RawImageGridSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityBuyersPage_RawFeaturedSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityBuyersPage_RawFaqSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityBuyersPage_RawMetadataArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -3946,11 +3790,9 @@ export type SanityBuyersPageConnection = {
   group: Array<SanityBuyersPageGroupConnection>;
 };
 
-
 export type SanityBuyersPageConnectionDistinctArgs = {
   field: SanityBuyersPageFieldsEnum;
 };
-
 
 export type SanityBuyersPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -4312,7 +4154,7 @@ export enum SanityBuyersPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityBuyersPageFilterInput = {
@@ -4366,7 +4208,6 @@ export type SanityCallToAction = {
   linkUrl: Maybe<Scalars['String']>;
   _rawImage: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityCallToAction_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -4424,16 +4265,13 @@ export type SanityCard = {
   _rawTooltip: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCard_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCard_RawIconArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCard_RawTooltipArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -4521,7 +4359,6 @@ export type SanityCaseStudiesFundingSection = {
   _rawHeader: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCaseStudiesFundingSection_RawHeaderArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -4551,35 +4388,35 @@ export type SanityCaseStudiesListSectionFilterInput = {
   view: Maybe<StringQueryOperatorInput>;
 };
 
-export type SanityCaseStudiesPage = SanityDocument & Node & {
-  __typename?: 'SanityCaseStudiesPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleBody>;
-  listSection: Maybe<SanityCaseStudiesListSection>;
-  aboutSection: Maybe<SanityCaseStudiesAboutSection>;
-  contextSection: Maybe<SanityCaseStudiesContextSection>;
-  approachSection: Maybe<SanityCaseStudiesApproachSection>;
-  fundingSection: Maybe<SanityCaseStudiesFundingSection>;
-  caseStudies: Maybe<Array<Maybe<SanityCaseStudyPage>>>;
-  conclusionSectionHeader: Maybe<Scalars['String']>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawListSection: Maybe<Scalars['JSON']>;
-  _rawAboutSection: Maybe<Scalars['JSON']>;
-  _rawContextSection: Maybe<Scalars['JSON']>;
-  _rawApproachSection: Maybe<Scalars['JSON']>;
-  _rawFundingSection: Maybe<Scalars['JSON']>;
-  _rawCaseStudies: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityCaseStudiesPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityCaseStudiesPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleBody>;
+    listSection: Maybe<SanityCaseStudiesListSection>;
+    aboutSection: Maybe<SanityCaseStudiesAboutSection>;
+    contextSection: Maybe<SanityCaseStudiesContextSection>;
+    approachSection: Maybe<SanityCaseStudiesApproachSection>;
+    fundingSection: Maybe<SanityCaseStudiesFundingSection>;
+    caseStudies: Maybe<Array<Maybe<SanityCaseStudyPage>>>;
+    conclusionSectionHeader: Maybe<Scalars['String']>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawListSection: Maybe<Scalars['JSON']>;
+    _rawAboutSection: Maybe<Scalars['JSON']>;
+    _rawContextSection: Maybe<Scalars['JSON']>;
+    _rawApproachSection: Maybe<Scalars['JSON']>;
+    _rawFundingSection: Maybe<Scalars['JSON']>;
+    _rawCaseStudies: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityCaseStudiesPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -4588,7 +4425,6 @@ export type SanityCaseStudiesPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCaseStudiesPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -4596,36 +4432,29 @@ export type SanityCaseStudiesPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCaseStudiesPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudiesPage_RawListSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCaseStudiesPage_RawAboutSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudiesPage_RawContextSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCaseStudiesPage_RawApproachSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCaseStudiesPage_RawFundingSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudiesPage_RawCaseStudiesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -4641,11 +4470,9 @@ export type SanityCaseStudiesPageConnection = {
   group: Array<SanityCaseStudiesPageGroupConnection>;
 };
 
-
 export type SanityCaseStudiesPageConnectionDistinctArgs = {
   field: SanityCaseStudiesPageFieldsEnum;
 };
-
 
 export type SanityCaseStudiesPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -5048,7 +4875,7 @@ export enum SanityCaseStudiesPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityCaseStudiesPageFilterInput = {
@@ -5111,16 +4938,13 @@ export type SanityCaseStudyAboutSection = {
   _rawAboutImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCaseStudyAboutSection_RawAboutArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCaseStudyAboutSection_RawMapImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyAboutSection_RawAboutImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -5159,26 +4983,21 @@ export type SanityCaseStudyApproachSection = {
   _rawFigureTitle: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCaseStudyApproachSection_RawDetailsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyApproachSection_RawResultsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCaseStudyApproachSection_RawNextArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCaseStudyApproachSection_RawFigureImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyApproachSection_RawFigureTitleArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -5213,11 +5032,9 @@ export type SanityCaseStudyBottomSection = {
   _rawPersonImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCaseStudyBottomSection_RawBackgroundArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyBottomSection_RawPersonImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -5245,11 +5062,9 @@ export type SanityCaseStudyConclusionSection = {
   _rawImages: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCaseStudyConclusionSection_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyConclusionSection_RawImagesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -5275,11 +5090,9 @@ export type SanityCaseStudyContextSection = {
   _rawDescription: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCaseStudyContextSection_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyContextSection_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -5304,7 +5117,6 @@ export type SanityCaseStudyFigure = {
   spacing: Maybe<Scalars['String']>;
   _rawImage: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityCaseStudyFigure_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -5334,11 +5146,9 @@ export type SanityCaseStudyFigureSection = {
   _rawFigures: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCaseStudyFigureSection_RawBackgroundArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyFigureSection_RawFiguresArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -5368,21 +5178,17 @@ export type SanityCaseStudyFundingSection = {
   _rawNext: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCaseStudyFundingSection_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyFundingSection_RawDetailsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCaseStudyFundingSection_RawResultsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyFundingSection_RawNextArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -5401,42 +5207,42 @@ export type SanityCaseStudyFundingSectionFilterInput = {
   _rawNext: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityCaseStudyPage = SanityDocument & Node & {
-  __typename?: 'SanityCaseStudyPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  name: Maybe<Scalars['String']>;
-  slug: Maybe<SanitySlug>;
-  cardImage: Maybe<SanityCustomImage>;
-  background: Maybe<SanityCustomImage>;
-  description: Maybe<Scalars['String']>;
-  aboutSection: Maybe<SanityCaseStudyAboutSection>;
-  contextSection: Maybe<SanityCaseStudyContextSection>;
-  approachSection: Maybe<SanityCaseStudyApproachSection>;
-  figureSection: Maybe<SanityCaseStudyFigureSection>;
-  fundingSection: Maybe<SanityCaseStudyFundingSection>;
-  conclusionSection: Maybe<SanityCaseStudyConclusionSection>;
-  bottomSection: Maybe<SanityCaseStudyBottomSection>;
-  _rawSlug: Maybe<Scalars['JSON']>;
-  _rawCardImage: Maybe<Scalars['JSON']>;
-  _rawBackground: Maybe<Scalars['JSON']>;
-  _rawAboutSection: Maybe<Scalars['JSON']>;
-  _rawContextSection: Maybe<Scalars['JSON']>;
-  _rawApproachSection: Maybe<Scalars['JSON']>;
-  _rawFigureSection: Maybe<Scalars['JSON']>;
-  _rawFundingSection: Maybe<Scalars['JSON']>;
-  _rawConclusionSection: Maybe<Scalars['JSON']>;
-  _rawBottomSection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityCaseStudyPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityCaseStudyPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    name: Maybe<Scalars['String']>;
+    slug: Maybe<SanitySlug>;
+    cardImage: Maybe<SanityCustomImage>;
+    background: Maybe<SanityCustomImage>;
+    description: Maybe<Scalars['String']>;
+    aboutSection: Maybe<SanityCaseStudyAboutSection>;
+    contextSection: Maybe<SanityCaseStudyContextSection>;
+    approachSection: Maybe<SanityCaseStudyApproachSection>;
+    figureSection: Maybe<SanityCaseStudyFigureSection>;
+    fundingSection: Maybe<SanityCaseStudyFundingSection>;
+    conclusionSection: Maybe<SanityCaseStudyConclusionSection>;
+    bottomSection: Maybe<SanityCaseStudyBottomSection>;
+    _rawSlug: Maybe<Scalars['JSON']>;
+    _rawCardImage: Maybe<Scalars['JSON']>;
+    _rawBackground: Maybe<Scalars['JSON']>;
+    _rawAboutSection: Maybe<Scalars['JSON']>;
+    _rawContextSection: Maybe<Scalars['JSON']>;
+    _rawApproachSection: Maybe<Scalars['JSON']>;
+    _rawFigureSection: Maybe<Scalars['JSON']>;
+    _rawFundingSection: Maybe<Scalars['JSON']>;
+    _rawConclusionSection: Maybe<Scalars['JSON']>;
+    _rawBottomSection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityCaseStudyPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -5445,7 +5251,6 @@ export type SanityCaseStudyPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCaseStudyPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -5453,51 +5258,41 @@ export type SanityCaseStudyPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCaseStudyPage_RawSlugArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyPage_RawCardImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCaseStudyPage_RawBackgroundArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyPage_RawAboutSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCaseStudyPage_RawContextSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyPage_RawApproachSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCaseStudyPage_RawFigureSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyPage_RawFundingSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCaseStudyPage_RawConclusionSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCaseStudyPage_RawBottomSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -5513,11 +5308,9 @@ export type SanityCaseStudyPageConnection = {
   group: Array<SanityCaseStudyPageGroupConnection>;
 };
 
-
 export type SanityCaseStudyPageConnectionDistinctArgs = {
   field: SanityCaseStudyPageFieldsEnum;
 };
-
 
 export type SanityCaseStudyPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -5985,7 +5778,7 @@ export enum SanityCaseStudyPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityCaseStudyPageFilterInput = {
@@ -6056,16 +5849,13 @@ export type SanityClimateSection = {
   _rawProblem: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityClimateSection_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityClimateSection_RawSolutionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityClimateSection_RawProblemArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -6094,11 +5884,9 @@ export type SanityCommunityCollaborateSection = {
   _rawCards: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCommunityCollaborateSection_RawTitleBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCommunityCollaborateSection_RawCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -6123,7 +5911,6 @@ export type SanityCommunityCollectiveSection = {
   body: Maybe<Array<Maybe<SanityBlock>>>;
   _rawBody: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityCommunityCollectiveSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -6193,30 +5980,30 @@ export type SanityCommunityGoToSectionFilterInput = {
   blogButtonHref: Maybe<StringQueryOperatorInput>;
 };
 
-export type SanityCommunityPage = SanityDocument & Node & {
-  __typename?: 'SanityCommunityPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleBody>;
-  connectSection: Maybe<SanityCommunityConnectSection>;
-  goToSection: Maybe<SanityCommunityGoToSection>;
-  collectiveSection: Maybe<SanityCommunityCollectiveSection>;
-  collaborateSection: Maybe<SanityCommunityCollaborateSection>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawConnectSection: Maybe<Scalars['JSON']>;
-  _rawGoToSection: Maybe<Scalars['JSON']>;
-  _rawCollectiveSection: Maybe<Scalars['JSON']>;
-  _rawCollaborateSection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityCommunityPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityCommunityPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleBody>;
+    connectSection: Maybe<SanityCommunityConnectSection>;
+    goToSection: Maybe<SanityCommunityGoToSection>;
+    collectiveSection: Maybe<SanityCommunityCollectiveSection>;
+    collaborateSection: Maybe<SanityCommunityCollaborateSection>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawConnectSection: Maybe<Scalars['JSON']>;
+    _rawGoToSection: Maybe<Scalars['JSON']>;
+    _rawCollectiveSection: Maybe<Scalars['JSON']>;
+    _rawCollaborateSection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityCommunityPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -6225,7 +6012,6 @@ export type SanityCommunityPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCommunityPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -6233,26 +6019,21 @@ export type SanityCommunityPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCommunityPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCommunityPage_RawConnectSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCommunityPage_RawGoToSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCommunityPage_RawCollectiveSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCommunityPage_RawCollaborateSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -6268,11 +6049,9 @@ export type SanityCommunityPageConnection = {
   group: Array<SanityCommunityPageGroupConnection>;
 };
 
-
 export type SanityCommunityPageConnectionDistinctArgs = {
   field: SanityCommunityPageFieldsEnum;
 };
-
 
 export type SanityCommunityPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -6454,7 +6233,7 @@ export enum SanityCommunityPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityCommunityPageFilterInput = {
@@ -6504,7 +6283,6 @@ export type SanityConnectSection = {
   _rawLinks: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityConnectSection_RawLinksArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -6530,16 +6308,13 @@ export type SanityConnectSectionLink = {
   _rawHref: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityConnectSectionLink_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityConnectSectionLink_RawIconArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityConnectSectionLink_RawHrefArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -6561,33 +6336,33 @@ export type SanityConnectSectionLinkFilterListInput = {
   elemMatch: Maybe<SanityConnectSectionLinkFilterInput>;
 };
 
-export type SanityContactPage = SanityDocument & Node & {
-  __typename?: 'SanityContactPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  header: Maybe<Scalars['String']>;
-  formRequestTypes: Maybe<Array<Maybe<SanityRequestType>>>;
-  location: Maybe<SanityTitleImageCustomBody>;
-  email: Maybe<SanityTitleCustomBody>;
-  faq: Maybe<SanityTitleImage>;
-  body: Maybe<Array<Maybe<SanityBlock>>>;
-  messageForPartners: Maybe<Array<Maybe<SanityBlock>>>;
-  _rawBody: Maybe<Scalars['JSON']>;
-  _rawFormRequestTypes: Maybe<Scalars['JSON']>;
-  _rawMessageForPartners: Maybe<Scalars['JSON']>;
-  _rawLocation: Maybe<Scalars['JSON']>;
-  _rawEmail: Maybe<Scalars['JSON']>;
-  _rawFaq: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityContactPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityContactPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    header: Maybe<Scalars['String']>;
+    formRequestTypes: Maybe<Array<Maybe<SanityRequestType>>>;
+    location: Maybe<SanityTitleImageCustomBody>;
+    email: Maybe<SanityTitleCustomBody>;
+    faq: Maybe<SanityTitleImage>;
+    body: Maybe<Array<Maybe<SanityBlock>>>;
+    messageForPartners: Maybe<Array<Maybe<SanityBlock>>>;
+    _rawBody: Maybe<Scalars['JSON']>;
+    _rawFormRequestTypes: Maybe<Scalars['JSON']>;
+    _rawMessageForPartners: Maybe<Scalars['JSON']>;
+    _rawLocation: Maybe<Scalars['JSON']>;
+    _rawEmail: Maybe<Scalars['JSON']>;
+    _rawFaq: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityContactPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -6596,7 +6371,6 @@ export type SanityContactPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityContactPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -6604,31 +6378,25 @@ export type SanityContactPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityContactPage_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityContactPage_RawFormRequestTypesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityContactPage_RawMessageForPartnersArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityContactPage_RawLocationArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityContactPage_RawEmailArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityContactPage_RawFaqArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -6644,11 +6412,9 @@ export type SanityContactPageConnection = {
   group: Array<SanityContactPageGroupConnection>;
 };
 
-
 export type SanityContactPageConnectionDistinctArgs = {
   field: SanityContactPageFieldsEnum;
 };
-
 
 export type SanityContactPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -6844,7 +6610,7 @@ export enum SanityContactPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityContactPageFilterInput = {
@@ -6888,37 +6654,37 @@ export type SanityContactPageSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type SanityCreateCreditClassPage = SanityDocument & Node & {
-  __typename?: 'SanityCreateCreditClassPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  heroSection: Maybe<SanityHeroSection>;
-  stepCardSection: Maybe<SanityStepCardSection>;
-  creditTypeSection: Maybe<SanityCreditTypeSection>;
-  outcomeSection: Maybe<SanityHeroSection>;
-  outcomes: Maybe<Array<Maybe<SanityEcologicalOutcome>>>;
-  resources: Maybe<Array<Maybe<SanityResource>>>;
-  bottomBanner: Maybe<SanityBottomBanner>;
-  footerLink: Maybe<Scalars['String']>;
-  metadata: Maybe<SanityPageMetadata>;
-  _rawHeroSection: Maybe<Scalars['JSON']>;
-  _rawStepCardSection: Maybe<Scalars['JSON']>;
-  _rawCreditTypeSection: Maybe<Scalars['JSON']>;
-  _rawOutcomeSection: Maybe<Scalars['JSON']>;
-  _rawOutcomes: Maybe<Scalars['JSON']>;
-  _rawResources: Maybe<Scalars['JSON']>;
-  _rawBottomBanner: Maybe<Scalars['JSON']>;
-  _rawMetadata: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityCreateCreditClassPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityCreateCreditClassPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    heroSection: Maybe<SanityHeroSection>;
+    stepCardSection: Maybe<SanityStepCardSection>;
+    creditTypeSection: Maybe<SanityCreditTypeSection>;
+    outcomeSection: Maybe<SanityHeroSection>;
+    outcomes: Maybe<Array<Maybe<SanityEcologicalOutcome>>>;
+    resources: Maybe<Array<Maybe<SanityResource>>>;
+    bottomBanner: Maybe<SanityBottomBanner>;
+    footerLink: Maybe<Scalars['String']>;
+    metadata: Maybe<SanityPageMetadata>;
+    _rawHeroSection: Maybe<Scalars['JSON']>;
+    _rawStepCardSection: Maybe<Scalars['JSON']>;
+    _rawCreditTypeSection: Maybe<Scalars['JSON']>;
+    _rawOutcomeSection: Maybe<Scalars['JSON']>;
+    _rawOutcomes: Maybe<Scalars['JSON']>;
+    _rawResources: Maybe<Scalars['JSON']>;
+    _rawBottomBanner: Maybe<Scalars['JSON']>;
+    _rawMetadata: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityCreateCreditClassPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -6927,7 +6693,6 @@ export type SanityCreateCreditClassPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCreateCreditClassPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -6935,41 +6700,33 @@ export type SanityCreateCreditClassPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCreateCreditClassPage_RawHeroSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreateCreditClassPage_RawStepCardSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreateCreditClassPage_RawCreditTypeSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreateCreditClassPage_RawOutcomeSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreateCreditClassPage_RawOutcomesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreateCreditClassPage_RawResourcesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreateCreditClassPage_RawBottomBannerArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreateCreditClassPage_RawMetadataArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -6985,11 +6742,9 @@ export type SanityCreateCreditClassPageConnection = {
   group: Array<SanityCreateCreditClassPageGroupConnection>;
 };
 
-
 export type SanityCreateCreditClassPageConnectionDistinctArgs = {
   field: SanityCreateCreditClassPageFieldsEnum;
 };
-
 
 export type SanityCreateCreditClassPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -7536,7 +7291,7 @@ export enum SanityCreateCreditClassPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityCreateCreditClassPageFilterInput = {
@@ -7584,37 +7339,37 @@ export type SanityCreateCreditClassPageSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type SanityCreateMethodologyPage = SanityDocument & Node & {
-  __typename?: 'SanityCreateMethodologyPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  heroSection: Maybe<SanityHeroSection>;
-  stepCardSection: Maybe<SanityStepCardSection>;
-  outcomeSection: Maybe<SanityHeroSection>;
-  outcomes: Maybe<Array<Maybe<SanityEcologicalOutcome>>>;
-  resources: Maybe<Array<Maybe<SanityResource>>>;
-  peerReviewSection: Maybe<SanityBottomBanner>;
-  createCreditClassSection: Maybe<SanityBottomBanner>;
-  footerLink: Maybe<Scalars['String']>;
-  metadata: Maybe<SanityPageMetadata>;
-  _rawHeroSection: Maybe<Scalars['JSON']>;
-  _rawStepCardSection: Maybe<Scalars['JSON']>;
-  _rawOutcomeSection: Maybe<Scalars['JSON']>;
-  _rawOutcomes: Maybe<Scalars['JSON']>;
-  _rawResources: Maybe<Scalars['JSON']>;
-  _rawPeerReviewSection: Maybe<Scalars['JSON']>;
-  _rawCreateCreditClassSection: Maybe<Scalars['JSON']>;
-  _rawMetadata: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityCreateMethodologyPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityCreateMethodologyPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    heroSection: Maybe<SanityHeroSection>;
+    stepCardSection: Maybe<SanityStepCardSection>;
+    outcomeSection: Maybe<SanityHeroSection>;
+    outcomes: Maybe<Array<Maybe<SanityEcologicalOutcome>>>;
+    resources: Maybe<Array<Maybe<SanityResource>>>;
+    peerReviewSection: Maybe<SanityBottomBanner>;
+    createCreditClassSection: Maybe<SanityBottomBanner>;
+    footerLink: Maybe<Scalars['String']>;
+    metadata: Maybe<SanityPageMetadata>;
+    _rawHeroSection: Maybe<Scalars['JSON']>;
+    _rawStepCardSection: Maybe<Scalars['JSON']>;
+    _rawOutcomeSection: Maybe<Scalars['JSON']>;
+    _rawOutcomes: Maybe<Scalars['JSON']>;
+    _rawResources: Maybe<Scalars['JSON']>;
+    _rawPeerReviewSection: Maybe<Scalars['JSON']>;
+    _rawCreateCreditClassSection: Maybe<Scalars['JSON']>;
+    _rawMetadata: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityCreateMethodologyPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -7623,7 +7378,6 @@ export type SanityCreateMethodologyPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCreateMethodologyPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -7631,41 +7385,33 @@ export type SanityCreateMethodologyPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCreateMethodologyPage_RawHeroSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreateMethodologyPage_RawStepCardSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreateMethodologyPage_RawOutcomeSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreateMethodologyPage_RawOutcomesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreateMethodologyPage_RawResourcesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreateMethodologyPage_RawPeerReviewSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreateMethodologyPage_RawCreateCreditClassSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreateMethodologyPage_RawMetadataArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -7681,11 +7427,9 @@ export type SanityCreateMethodologyPageConnection = {
   group: Array<SanityCreateMethodologyPageGroupConnection>;
 };
 
-
 export type SanityCreateMethodologyPageConnectionDistinctArgs = {
   field: SanityCreateMethodologyPageFieldsEnum;
 };
-
 
 export type SanityCreateMethodologyPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -8197,7 +7941,7 @@ export enum SanityCreateMethodologyPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityCreateMethodologyPageFilterInput = {
@@ -8259,56 +8003,53 @@ export type SanityCreateMethodologyStepCardSection = {
   _rawStepCards: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCreateMethodologyStepCardSection_RawMainDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreateMethodologyStepCardSection_RawBottomDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreateMethodologyStepCardSection_RawStepCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-export type SanityCreditClass = SanityDocument & Node & {
-  __typename?: 'SanityCreditClass';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  iri: Maybe<SanitySlug>;
-  path: Maybe<Scalars['String']>;
-  image: Maybe<SanityCustomImage>;
-  ecologicalImpact: Maybe<Array<Maybe<SanityEcologicalImpactRelation>>>;
-  overviewCards: Maybe<Array<Maybe<SanityCard>>>;
-  sdgs: Maybe<Array<Maybe<SanitySdg>>>;
-  buyer: Maybe<SanityBuyer>;
-  landSteward: Maybe<SanityLandSteward>;
-  name: Maybe<Array<Maybe<SanityBlock>>>;
-  description: Maybe<Array<Maybe<SanityBlock>>>;
-  shortDescription: Maybe<Array<Maybe<SanityBlock>>>;
-  _rawName: Maybe<Scalars['JSON']>;
-  _rawIri: Maybe<Scalars['JSON']>;
-  _rawImage: Maybe<Scalars['JSON']>;
-  _rawDescription: Maybe<Scalars['JSON']>;
-  _rawShortDescription: Maybe<Scalars['JSON']>;
-  _rawEcologicalImpact: Maybe<Scalars['JSON']>;
-  _rawOverviewCards: Maybe<Scalars['JSON']>;
-  _rawSdgs: Maybe<Scalars['JSON']>;
-  _rawBuyer: Maybe<Scalars['JSON']>;
-  _rawLandSteward: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityCreditClass = SanityDocument &
+  Node & {
+    __typename?: 'SanityCreditClass';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    iri: Maybe<SanitySlug>;
+    path: Maybe<Scalars['String']>;
+    image: Maybe<SanityCustomImage>;
+    ecologicalImpact: Maybe<Array<Maybe<SanityEcologicalImpactRelation>>>;
+    overviewCards: Maybe<Array<Maybe<SanityCard>>>;
+    sdgs: Maybe<Array<Maybe<SanitySdg>>>;
+    buyer: Maybe<SanityBuyer>;
+    landSteward: Maybe<SanityLandSteward>;
+    name: Maybe<Array<Maybe<SanityBlock>>>;
+    description: Maybe<Array<Maybe<SanityBlock>>>;
+    shortDescription: Maybe<Array<Maybe<SanityBlock>>>;
+    _rawName: Maybe<Scalars['JSON']>;
+    _rawIri: Maybe<Scalars['JSON']>;
+    _rawImage: Maybe<Scalars['JSON']>;
+    _rawDescription: Maybe<Scalars['JSON']>;
+    _rawShortDescription: Maybe<Scalars['JSON']>;
+    _rawEcologicalImpact: Maybe<Scalars['JSON']>;
+    _rawOverviewCards: Maybe<Scalars['JSON']>;
+    _rawSdgs: Maybe<Scalars['JSON']>;
+    _rawBuyer: Maybe<Scalars['JSON']>;
+    _rawLandSteward: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityCreditClass_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -8317,7 +8058,6 @@ export type SanityCreditClass_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCreditClass_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -8325,51 +8065,41 @@ export type SanityCreditClass_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityCreditClass_RawNameArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreditClass_RawIriArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreditClass_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreditClass_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreditClass_RawShortDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreditClass_RawEcologicalImpactArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreditClass_RawOverviewCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreditClass_RawSdgsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreditClass_RawBuyerArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreditClass_RawLandStewardArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -8385,11 +8115,9 @@ export type SanityCreditClassConnection = {
   group: Array<SanityCreditClassGroupConnection>;
 };
 
-
 export type SanityCreditClassConnectionDistinctArgs = {
   field: SanityCreditClassFieldsEnum;
 };
-
 
 export type SanityCreditClassConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -9035,7 +8763,7 @@ export enum SanityCreditClassFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityCreditClassFilterInput = {
@@ -9104,21 +8832,17 @@ export type SanityCreditTypeSection = {
   _rawFlexCreditCards: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCreditTypeSection_RawDescriptionTopArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreditTypeSection_RawDescriptionBottomArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityCreditTypeSection_RawInstitutionalCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityCreditTypeSection_RawFlexCreditCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -9150,7 +8874,6 @@ export type SanityCustomImage = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityCustomImage_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -9173,7 +8896,6 @@ export type SanityDevApproachSection = {
   body: Maybe<Array<Maybe<SanityBlock>>>;
   _rawBody: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityDevApproachSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -9200,11 +8922,9 @@ export type SanityDevCareersSection = {
   _rawButton: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityDevCareersSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityDevCareersSection_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -9232,11 +8952,9 @@ export type SanityDevLedgerSection = {
   _rawBody: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityDevLedgerSection_RawCosmosImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityDevLedgerSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -9263,11 +8981,9 @@ export type SanityDevOpenAgSection = {
   _rawBody: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityDevOpenAgSection_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityDevOpenAgSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -9300,47 +9016,44 @@ export type SanityDevTestnetSection = {
   _rawButton: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityDevTestnetSection_RawRightColumnContentArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityDevTestnetSection_RawLeftColumnContentArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityDevTestnetSection_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-export type SanityDevelopersPage = SanityDocument & Node & {
-  __typename?: 'SanityDevelopersPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleBody>;
-  approachSection: Maybe<SanityDevApproachSection>;
-  involvedSectionHeader: Maybe<Scalars['String']>;
-  ledgerSection: Maybe<SanityDevLedgerSection>;
-  openAgSection: Maybe<SanityDevOpenAgSection>;
-  connectSectionHeader: Maybe<Scalars['String']>;
-  careersSection: Maybe<SanityDevCareersSection>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawApproachSection: Maybe<Scalars['JSON']>;
-  _rawLedgerSection: Maybe<Scalars['JSON']>;
-  _rawOpenAgSection: Maybe<Scalars['JSON']>;
-  _rawCareersSection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityDevelopersPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityDevelopersPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleBody>;
+    approachSection: Maybe<SanityDevApproachSection>;
+    involvedSectionHeader: Maybe<Scalars['String']>;
+    ledgerSection: Maybe<SanityDevLedgerSection>;
+    openAgSection: Maybe<SanityDevOpenAgSection>;
+    connectSectionHeader: Maybe<Scalars['String']>;
+    careersSection: Maybe<SanityDevCareersSection>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawApproachSection: Maybe<Scalars['JSON']>;
+    _rawLedgerSection: Maybe<Scalars['JSON']>;
+    _rawOpenAgSection: Maybe<Scalars['JSON']>;
+    _rawCareersSection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityDevelopersPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -9349,7 +9062,6 @@ export type SanityDevelopersPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityDevelopersPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -9357,26 +9069,21 @@ export type SanityDevelopersPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityDevelopersPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityDevelopersPage_RawApproachSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityDevelopersPage_RawLedgerSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityDevelopersPage_RawOpenAgSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityDevelopersPage_RawCareersSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -9392,11 +9099,9 @@ export type SanityDevelopersPageConnection = {
   group: Array<SanityDevelopersPageGroupConnection>;
 };
 
-
 export type SanityDevelopersPageConnectionDistinctArgs = {
   field: SanityDevelopersPageFieldsEnum;
 };
-
 
 export type SanityDevelopersPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -9669,7 +9374,7 @@ export enum SanityDevelopersPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityDevelopersPageFilterInput = {
@@ -9712,24 +9417,24 @@ export type SanityDevelopersPageSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type SanityDoc = SanityDocument & Node & {
-  __typename?: 'SanityDoc';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  href: Maybe<Scalars['String']>;
-  name: Maybe<Scalars['String']>;
-  date: Maybe<Scalars['Date']>;
-  type: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityDoc = SanityDocument &
+  Node & {
+    __typename?: 'SanityDoc';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    href: Maybe<Scalars['String']>;
+    name: Maybe<Scalars['String']>;
+    date: Maybe<Scalars['Date']>;
+    type: Maybe<Scalars['String']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityDoc_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -9738,14 +9443,12 @@ export type SanityDoc_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityDoc_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type SanityDocDateArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -9764,11 +9467,9 @@ export type SanityDocConnection = {
   group: Array<SanityDocGroupConnection>;
 };
 
-
 export type SanityDocConnectionDistinctArgs = {
   field: SanityDocFieldsEnum;
 };
-
 
 export type SanityDocConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -9879,7 +9580,7 @@ export enum SanityDocFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityDocFilterInput = {
@@ -9938,11 +9639,9 @@ export type SanityDocumentation = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityDocumentation_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityDocumentation_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -9969,11 +9668,9 @@ export type SanityDualImageSection = {
   _rawRight: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityDualImageSection_RawLeftArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityDualImageSection_RawRightArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -9989,29 +9686,29 @@ export type SanityDualImageSectionFilterInput = {
   _rawRight: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityEcologicalImpact = SanityDocument & Node & {
-  __typename?: 'SanityEcologicalImpact';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  name: Maybe<Scalars['String']>;
-  iri: Maybe<SanitySlug>;
-  image: Maybe<SanityCustomImage>;
-  standard: Maybe<SanityCustomImage>;
-  description: Maybe<Array<Maybe<SanityBlock>>>;
-  _rawIri: Maybe<Scalars['JSON']>;
-  _rawDescription: Maybe<Scalars['JSON']>;
-  _rawImage: Maybe<Scalars['JSON']>;
-  _rawStandard: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityEcologicalImpact = SanityDocument &
+  Node & {
+    __typename?: 'SanityEcologicalImpact';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    name: Maybe<Scalars['String']>;
+    iri: Maybe<SanitySlug>;
+    image: Maybe<SanityCustomImage>;
+    standard: Maybe<SanityCustomImage>;
+    description: Maybe<Array<Maybe<SanityBlock>>>;
+    _rawIri: Maybe<Scalars['JSON']>;
+    _rawDescription: Maybe<Scalars['JSON']>;
+    _rawImage: Maybe<Scalars['JSON']>;
+    _rawStandard: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityEcologicalImpact_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -10020,7 +9717,6 @@ export type SanityEcologicalImpact_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityEcologicalImpact_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -10028,21 +9724,17 @@ export type SanityEcologicalImpact_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityEcologicalImpact_RawIriArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityEcologicalImpact_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityEcologicalImpact_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityEcologicalImpact_RawStandardArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -10058,11 +9750,9 @@ export type SanityEcologicalImpactConnection = {
   group: Array<SanityEcologicalImpactGroupConnection>;
 };
 
-
 export type SanityEcologicalImpactConnectionDistinctArgs = {
   field: SanityEcologicalImpactFieldsEnum;
 };
-
 
 export type SanityEcologicalImpactConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -10278,7 +9968,7 @@ export enum SanityEcologicalImpactFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityEcologicalImpactFilterInput = {
@@ -10322,7 +10012,6 @@ export type SanityEcologicalImpactRelation = {
   _rawEcologicalImpact: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityEcologicalImpactRelation_RawEcologicalImpactArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -10344,25 +10033,25 @@ export type SanityEcologicalImpactSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type SanityEcologicalOutcome = SanityDocument & Node & {
-  __typename?: 'SanityEcologicalOutcome';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-  image: Maybe<SanityCustomImage>;
-  description: Maybe<Array<Maybe<SanityBlock>>>;
-  _rawDescription: Maybe<Scalars['JSON']>;
-  _rawImage: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityEcologicalOutcome = SanityDocument &
+  Node & {
+    __typename?: 'SanityEcologicalOutcome';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    title: Maybe<Scalars['String']>;
+    image: Maybe<SanityCustomImage>;
+    description: Maybe<Array<Maybe<SanityBlock>>>;
+    _rawDescription: Maybe<Scalars['JSON']>;
+    _rawImage: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityEcologicalOutcome_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -10371,7 +10060,6 @@ export type SanityEcologicalOutcome_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityEcologicalOutcome_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -10379,11 +10067,9 @@ export type SanityEcologicalOutcome_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityEcologicalOutcome_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityEcologicalOutcome_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -10399,11 +10085,9 @@ export type SanityEcologicalOutcomeConnection = {
   group: Array<SanityEcologicalOutcomeGroupConnection>;
 };
 
-
 export type SanityEcologicalOutcomeConnectionDistinctArgs = {
   field: SanityEcologicalOutcomeFieldsEnum;
 };
-
 
 export type SanityEcologicalOutcomeConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -10569,7 +10253,7 @@ export enum SanityEcologicalOutcomeFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityEcologicalOutcomeFilterInput = {
@@ -10609,23 +10293,23 @@ export type SanityEcologicalOutcomeSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type SanityFaq = SanityDocument & Node & {
-  __typename?: 'SanityFaq';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  question: Maybe<Scalars['String']>;
-  answer: Maybe<Array<Maybe<SanityBlock>>>;
-  _rawAnswer: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityFaq = SanityDocument &
+  Node & {
+    __typename?: 'SanityFaq';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    question: Maybe<Scalars['String']>;
+    answer: Maybe<Array<Maybe<SanityBlock>>>;
+    _rawAnswer: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityFaq_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -10634,14 +10318,12 @@ export type SanityFaq_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityFaq_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type SanityFaq_RawAnswerArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -10655,7 +10337,6 @@ export type SanityFaqCategory = {
   questions: Maybe<Array<Maybe<SanityFaq>>>;
   _rawQuestions: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityFaqCategory_RawQuestionsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -10683,11 +10364,9 @@ export type SanityFaqConnection = {
   group: Array<SanityFaqGroupConnection>;
 };
 
-
 export type SanityFaqConnectionDistinctArgs = {
   field: SanityFaqFieldsEnum;
 };
-
 
 export type SanityFaqConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -10807,7 +10486,7 @@ export enum SanityFaqFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityFaqFilterInput = {
@@ -10840,22 +10519,22 @@ export type SanityFaqGroupConnection = {
   fieldValue: Maybe<Scalars['String']>;
 };
 
-export type SanityFaqPage = SanityDocument & Node & {
-  __typename?: 'SanityFaqPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  categories: Maybe<Array<Maybe<SanityFaqCategory>>>;
-  _rawCategories: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityFaqPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityFaqPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    categories: Maybe<Array<Maybe<SanityFaqCategory>>>;
+    _rawCategories: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityFaqPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -10864,14 +10543,12 @@ export type SanityFaqPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityFaqPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type SanityFaqPage_RawCategoriesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -10887,11 +10564,9 @@ export type SanityFaqPageConnection = {
   group: Array<SanityFaqPageGroupConnection>;
 };
 
-
 export type SanityFaqPageConnectionDistinctArgs = {
   field: SanityFaqPageFieldsEnum;
 };
-
 
 export type SanityFaqPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -11034,7 +10709,7 @@ export enum SanityFaqPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityFaqPageFilterInput = {
@@ -11072,29 +10747,29 @@ export type SanityFaqSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type SanityFeaturedSection = SanityDocument & Node & {
-  __typename?: 'SanityFeaturedSection';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  header: Maybe<Scalars['String']>;
-  button: Maybe<SanityButton>;
-  image: Maybe<SanityCustomImage>;
-  title: Maybe<Array<Maybe<SanityBlock>>>;
-  description: Maybe<Array<Maybe<SanityBlock>>>;
-  _rawTitle: Maybe<Scalars['JSON']>;
-  _rawButton: Maybe<Scalars['JSON']>;
-  _rawImage: Maybe<Scalars['JSON']>;
-  _rawDescription: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityFeaturedSection = SanityDocument &
+  Node & {
+    __typename?: 'SanityFeaturedSection';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    header: Maybe<Scalars['String']>;
+    button: Maybe<SanityButton>;
+    image: Maybe<SanityCustomImage>;
+    title: Maybe<Array<Maybe<SanityBlock>>>;
+    description: Maybe<Array<Maybe<SanityBlock>>>;
+    _rawTitle: Maybe<Scalars['JSON']>;
+    _rawButton: Maybe<Scalars['JSON']>;
+    _rawImage: Maybe<Scalars['JSON']>;
+    _rawDescription: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityFeaturedSection_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -11103,7 +10778,6 @@ export type SanityFeaturedSection_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityFeaturedSection_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -11111,21 +10785,17 @@ export type SanityFeaturedSection_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityFeaturedSection_RawTitleArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityFeaturedSection_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityFeaturedSection_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityFeaturedSection_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -11141,11 +10811,9 @@ export type SanityFeaturedSectionConnection = {
   group: Array<SanityFeaturedSectionGroupConnection>;
 };
 
-
 export type SanityFeaturedSectionConnectionDistinctArgs = {
   field: SanityFeaturedSectionFieldsEnum;
 };
-
 
 export type SanityFeaturedSectionConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -11346,7 +11014,7 @@ export enum SanityFeaturedSectionFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityFeaturedSectionFilterInput = {
@@ -11394,39 +11062,38 @@ export type SanityFile = {
   _rawAsset: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityFile_RawAssetArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-export type SanityFileAsset = SanityDocument & Node & {
-  __typename?: 'SanityFileAsset';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  originalFilename: Maybe<Scalars['String']>;
-  label: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-  description: Maybe<Scalars['String']>;
-  altText: Maybe<Scalars['String']>;
-  sha1hash: Maybe<Scalars['String']>;
-  extension: Maybe<Scalars['String']>;
-  mimeType: Maybe<Scalars['String']>;
-  size: Maybe<Scalars['Float']>;
-  assetId: Maybe<Scalars['String']>;
-  path: Maybe<Scalars['String']>;
-  url: Maybe<Scalars['String']>;
-  source: Maybe<SanityAssetSourceData>;
-  _rawSource: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityFileAsset = SanityDocument &
+  Node & {
+    __typename?: 'SanityFileAsset';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    originalFilename: Maybe<Scalars['String']>;
+    label: Maybe<Scalars['String']>;
+    title: Maybe<Scalars['String']>;
+    description: Maybe<Scalars['String']>;
+    altText: Maybe<Scalars['String']>;
+    sha1hash: Maybe<Scalars['String']>;
+    extension: Maybe<Scalars['String']>;
+    mimeType: Maybe<Scalars['String']>;
+    size: Maybe<Scalars['Float']>;
+    assetId: Maybe<Scalars['String']>;
+    path: Maybe<Scalars['String']>;
+    url: Maybe<Scalars['String']>;
+    source: Maybe<SanityAssetSourceData>;
+    _rawSource: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityFileAsset_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -11435,14 +11102,12 @@ export type SanityFileAsset_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityFileAsset_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type SanityFileAsset_RawSourceArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -11458,11 +11123,9 @@ export type SanityFileAssetConnection = {
   group: Array<SanityFileAssetGroupConnection>;
 };
 
-
 export type SanityFileAssetConnectionDistinctArgs = {
   field: SanityFileAssetFieldsEnum;
 };
-
 
 export type SanityFileAssetConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -11587,7 +11250,7 @@ export enum SanityFileAssetFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityFileAssetFilterInput = {
@@ -11644,11 +11307,9 @@ export type SanityFullStepCardSection = {
   _rawStepCards: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityFullStepCardSection_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityFullStepCardSection_RawStepCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -11680,11 +11341,9 @@ export type SanityFundCallToAction = {
   _rawDescription: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityFundCallToAction_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityFundCallToAction_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -11704,30 +11363,30 @@ export type SanityFundCallToActionFilterListInput = {
   elemMatch: Maybe<SanityFundCallToActionFilterInput>;
 };
 
-export type SanityFundPage = SanityDocument & Node & {
-  __typename?: 'SanityFundPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  seoTitle: Maybe<Scalars['String']>;
-  seoDescription: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleCustomBody>;
-  foldSection: Maybe<SanityTitleCustomBody>;
-  thesisSection: Maybe<SanityTitleCustomBody>;
-  callsToAction: Maybe<Array<Maybe<SanityFundCallToAction>>>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawFoldSection: Maybe<Scalars['JSON']>;
-  _rawThesisSection: Maybe<Scalars['JSON']>;
-  _rawCallsToAction: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityFundPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityFundPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    seoTitle: Maybe<Scalars['String']>;
+    seoDescription: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleCustomBody>;
+    foldSection: Maybe<SanityTitleCustomBody>;
+    thesisSection: Maybe<SanityTitleCustomBody>;
+    callsToAction: Maybe<Array<Maybe<SanityFundCallToAction>>>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawFoldSection: Maybe<Scalars['JSON']>;
+    _rawThesisSection: Maybe<Scalars['JSON']>;
+    _rawCallsToAction: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityFundPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -11736,7 +11395,6 @@ export type SanityFundPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityFundPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -11744,21 +11402,17 @@ export type SanityFundPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityFundPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityFundPage_RawFoldSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityFundPage_RawThesisSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityFundPage_RawCallsToActionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -11774,11 +11428,9 @@ export type SanityFundPageConnection = {
   group: Array<SanityFundPageGroupConnection>;
 };
 
-
 export type SanityFundPageConnectionDistinctArgs = {
   field: SanityFundPageFieldsEnum;
 };
-
 
 export type SanityFundPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -11993,7 +11645,7 @@ export enum SanityFundPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityFundPageFilterInput = {
@@ -12061,7 +11713,6 @@ export type SanityHeroSection = {
   _rawDescription: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityHeroSection_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -12090,24 +11741,24 @@ export type SanityHomeFoldSectionFilterInput = {
   body: Maybe<StringQueryOperatorInput>;
 };
 
-export type SanityHomePage = SanityDocument & Node & {
-  __typename?: 'SanityHomePage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  heroSection: Maybe<SanityHomePageTopSection>;
-  bottomBanner: Maybe<SanityBottomBanner>;
-  _rawHeroSection: Maybe<Scalars['JSON']>;
-  _rawBottomBanner: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityHomePage = SanityDocument &
+  Node & {
+    __typename?: 'SanityHomePage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    heroSection: Maybe<SanityHomePageTopSection>;
+    bottomBanner: Maybe<SanityBottomBanner>;
+    _rawHeroSection: Maybe<Scalars['JSON']>;
+    _rawBottomBanner: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityHomePage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -12116,7 +11767,6 @@ export type SanityHomePage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityHomePage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -12124,11 +11774,9 @@ export type SanityHomePage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityHomePage_RawHeroSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityHomePage_RawBottomBannerArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -12144,11 +11792,9 @@ export type SanityHomePageConnection = {
   group: Array<SanityHomePageGroupConnection>;
 };
 
-
 export type SanityHomePageConnectionDistinctArgs = {
   field: SanityHomePageFieldsEnum;
 };
-
 
 export type SanityHomePageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -12353,7 +11999,7 @@ export enum SanityHomePageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityHomePageFilterInput = {
@@ -12403,21 +12049,17 @@ export type SanityHomePageTopSection = {
   _rawIcon: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityHomePageTopSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityHomePageTopSection_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityHomePageTopSection_RawBackgroundArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityHomePageTopSection_RawIconArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -12437,33 +12079,33 @@ export type SanityHomePageTopSectionFilterInput = {
   _rawIcon: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityHomePageWeb = SanityDocument & Node & {
-  __typename?: 'SanityHomePageWeb';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  homeFoldSection: Maybe<SanityHomeFoldSection>;
-  marketplaceSection: Maybe<SanityMarketplaceSection>;
-  bannerTextSection: Maybe<SanityTitleImageCustomBody>;
-  climateSection: Maybe<SanityClimateSection>;
-  carbonPlusSection: Maybe<SanityCarbonPlusSection>;
-  ledgerDescription: Maybe<Scalars['String']>;
-  valuesSection: Maybe<SanityHomeValuesSection>;
-  _rawHomeFoldSection: Maybe<Scalars['JSON']>;
-  _rawMarketplaceSection: Maybe<Scalars['JSON']>;
-  _rawBannerTextSection: Maybe<Scalars['JSON']>;
-  _rawClimateSection: Maybe<Scalars['JSON']>;
-  _rawCarbonPlusSection: Maybe<Scalars['JSON']>;
-  _rawValuesSection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityHomePageWeb = SanityDocument &
+  Node & {
+    __typename?: 'SanityHomePageWeb';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    homeFoldSection: Maybe<SanityHomeFoldSection>;
+    marketplaceSection: Maybe<SanityMarketplaceSection>;
+    bannerTextSection: Maybe<SanityTitleImageCustomBody>;
+    climateSection: Maybe<SanityClimateSection>;
+    carbonPlusSection: Maybe<SanityCarbonPlusSection>;
+    ledgerDescription: Maybe<Scalars['String']>;
+    valuesSection: Maybe<SanityHomeValuesSection>;
+    _rawHomeFoldSection: Maybe<Scalars['JSON']>;
+    _rawMarketplaceSection: Maybe<Scalars['JSON']>;
+    _rawBannerTextSection: Maybe<Scalars['JSON']>;
+    _rawClimateSection: Maybe<Scalars['JSON']>;
+    _rawCarbonPlusSection: Maybe<Scalars['JSON']>;
+    _rawValuesSection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityHomePageWeb_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -12472,7 +12114,6 @@ export type SanityHomePageWeb_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityHomePageWeb_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -12480,31 +12121,25 @@ export type SanityHomePageWeb_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityHomePageWeb_RawHomeFoldSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityHomePageWeb_RawMarketplaceSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityHomePageWeb_RawBannerTextSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityHomePageWeb_RawClimateSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityHomePageWeb_RawCarbonPlusSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityHomePageWeb_RawValuesSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -12520,11 +12155,9 @@ export type SanityHomePageWebConnection = {
   group: Array<SanityHomePageWebGroupConnection>;
 };
 
-
 export type SanityHomePageWebConnectionDistinctArgs = {
   field: SanityHomePageWebFieldsEnum;
 };
-
 
 export type SanityHomePageWebConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -12772,7 +12405,7 @@ export enum SanityHomePageWebFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityHomePageWebFilterInput = {
@@ -12825,7 +12458,6 @@ export type SanityHomeValuesSection = {
   _rawImageItems: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityHomeValuesSection_RawImageItemsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -12850,54 +12482,51 @@ export type SanityImage = {
   _rawCrop: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityImage_RawAssetArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityImage_RawHotspotArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityImage_RawCropArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-export type SanityImageAsset = SanityDocument & Node & {
-  __typename?: 'SanityImageAsset';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  originalFilename: Maybe<Scalars['String']>;
-  label: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-  description: Maybe<Scalars['String']>;
-  altText: Maybe<Scalars['String']>;
-  sha1hash: Maybe<Scalars['String']>;
-  extension: Maybe<Scalars['String']>;
-  mimeType: Maybe<Scalars['String']>;
-  size: Maybe<Scalars['Float']>;
-  assetId: Maybe<Scalars['String']>;
-  uploadId: Maybe<Scalars['String']>;
-  path: Maybe<Scalars['String']>;
-  url: Maybe<Scalars['String']>;
-  metadata: Maybe<SanityImageMetadata>;
-  source: Maybe<SanityAssetSourceData>;
-  _rawMetadata: Maybe<Scalars['JSON']>;
-  _rawSource: Maybe<Scalars['JSON']>;
-  fixed: Maybe<SanityImageFixed>;
-  fluid: Maybe<SanityImageFluid>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityImageAsset = SanityDocument &
+  Node & {
+    __typename?: 'SanityImageAsset';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    originalFilename: Maybe<Scalars['String']>;
+    label: Maybe<Scalars['String']>;
+    title: Maybe<Scalars['String']>;
+    description: Maybe<Scalars['String']>;
+    altText: Maybe<Scalars['String']>;
+    sha1hash: Maybe<Scalars['String']>;
+    extension: Maybe<Scalars['String']>;
+    mimeType: Maybe<Scalars['String']>;
+    size: Maybe<Scalars['Float']>;
+    assetId: Maybe<Scalars['String']>;
+    uploadId: Maybe<Scalars['String']>;
+    path: Maybe<Scalars['String']>;
+    url: Maybe<Scalars['String']>;
+    metadata: Maybe<SanityImageMetadata>;
+    source: Maybe<SanityAssetSourceData>;
+    _rawMetadata: Maybe<Scalars['JSON']>;
+    _rawSource: Maybe<Scalars['JSON']>;
+    fixed: Maybe<SanityImageFixed>;
+    fluid: Maybe<SanityImageFluid>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityImageAsset_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -12906,7 +12535,6 @@ export type SanityImageAsset_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityImageAsset_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -12914,23 +12542,19 @@ export type SanityImageAsset_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityImageAsset_RawMetadataArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityImageAsset_RawSourceArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityImageAssetFixedArgs = {
   width?: Maybe<Scalars['Int']>;
   height: Maybe<Scalars['Int']>;
   toFormat?: Maybe<SanityImageFormat>;
 };
-
 
 export type SanityImageAssetFluidArgs = {
   maxWidth?: Maybe<Scalars['Int']>;
@@ -12949,11 +12573,9 @@ export type SanityImageAssetConnection = {
   group: Array<SanityImageAssetGroupConnection>;
 };
 
-
 export type SanityImageAssetConnectionDistinctArgs = {
   field: SanityImageAssetFieldsEnum;
 };
-
 
 export type SanityImageAssetConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -13164,7 +12786,7 @@ export enum SanityImageAssetFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityImageAssetFilterInput = {
@@ -13224,7 +12846,6 @@ export type SanityImageBoldTextLabel = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityImageBoldTextLabel_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -13267,11 +12888,9 @@ export type SanityImageCustomBody = {
   _rawBody: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityImageCustomBody_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityImageCustomBody_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -13368,28 +12987,28 @@ export enum SanityImageFormat {
   NoChange = 'NO_CHANGE',
   Jpg = 'JPG',
   Png = 'PNG',
-  Webp = 'WEBP'
+  Webp = 'WEBP',
 }
 
-export type SanityImageGridItem = SanityDocument & Node & {
-  __typename?: 'SanityImageGridItem';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  header: Maybe<Scalars['String']>;
-  image: Maybe<SanityCustomImage>;
-  description: Maybe<Array<Maybe<SanityBlock>>>;
-  _rawDescription: Maybe<Scalars['JSON']>;
-  _rawImage: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityImageGridItem = SanityDocument &
+  Node & {
+    __typename?: 'SanityImageGridItem';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    header: Maybe<Scalars['String']>;
+    image: Maybe<SanityCustomImage>;
+    description: Maybe<Array<Maybe<SanityBlock>>>;
+    _rawDescription: Maybe<Scalars['JSON']>;
+    _rawImage: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityImageGridItem_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -13398,7 +13017,6 @@ export type SanityImageGridItem_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityImageGridItem_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -13406,11 +13024,9 @@ export type SanityImageGridItem_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityImageGridItem_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityImageGridItem_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -13426,11 +13042,9 @@ export type SanityImageGridItemConnection = {
   group: Array<SanityImageGridItemGroupConnection>;
 };
 
-
 export type SanityImageGridItemConnectionDistinctArgs = {
   field: SanityImageGridItemFieldsEnum;
 };
-
 
 export type SanityImageGridItemConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -13596,7 +13210,7 @@ export enum SanityImageGridItemFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityImageGridItemFilterInput = {
@@ -13646,11 +13260,9 @@ export type SanityImageGridSection = {
   _rawItems: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityImageGridSection_RawBackgroundImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityImageGridSection_RawItemsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -13693,7 +13305,6 @@ export type SanityImageItemsSection = {
   _rawImageCards: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityImageItemsSection_RawImageCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -13716,11 +13327,9 @@ export type SanityImageLink = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityImageLink_RawLinkArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityImageLink_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -13755,16 +13364,13 @@ export type SanityImageMetadata = {
   _rawPalette: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityImageMetadata_RawLocationArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityImageMetadata_RawDimensionsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityImageMetadata_RawPaletteArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -13805,36 +13411,29 @@ export type SanityImagePalette = {
   _rawMuted: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityImagePalette_RawDarkMutedArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityImagePalette_RawLightVibrantArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityImagePalette_RawDarkVibrantArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityImagePalette_RawVibrantArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityImagePalette_RawDominantArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityImagePalette_RawLightMutedArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityImagePalette_RawMutedArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -13887,7 +13486,6 @@ export type SanityImageWithTitle = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityImageWithTitle_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -13914,7 +13512,6 @@ export type SanityLabeledTextLinkable = {
   _rawLink: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityLabeledTextLinkable_RawLinkArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -13932,25 +13529,25 @@ export type SanityLabeledTextLinkableFilterListInput = {
   elemMatch: Maybe<SanityLabeledTextLinkableFilterInput>;
 };
 
-export type SanityLandManagementPractice = SanityDocument & Node & {
-  __typename?: 'SanityLandManagementPractice';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-  icon: Maybe<SanityImage>;
-  description: Maybe<Array<Maybe<SanityBlock>>>;
-  _rawDescription: Maybe<Scalars['JSON']>;
-  _rawIcon: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityLandManagementPractice = SanityDocument &
+  Node & {
+    __typename?: 'SanityLandManagementPractice';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    title: Maybe<Scalars['String']>;
+    icon: Maybe<SanityImage>;
+    description: Maybe<Array<Maybe<SanityBlock>>>;
+    _rawDescription: Maybe<Scalars['JSON']>;
+    _rawIcon: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityLandManagementPractice_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -13959,7 +13556,6 @@ export type SanityLandManagementPractice_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityLandManagementPractice_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -13967,11 +13563,9 @@ export type SanityLandManagementPractice_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityLandManagementPractice_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityLandManagementPractice_RawIconArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -13987,11 +13581,9 @@ export type SanityLandManagementPracticeConnection = {
   group: Array<SanityLandManagementPracticeGroupConnection>;
 };
 
-
 export type SanityLandManagementPracticeConnectionDistinctArgs = {
   field: SanityLandManagementPracticeFieldsEnum;
 };
-
 
 export type SanityLandManagementPracticeConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -14192,7 +13784,7 @@ export enum SanityLandManagementPracticeFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityLandManagementPracticeFilterInput = {
@@ -14252,31 +13844,25 @@ export type SanityLandSteward = {
   _rawConnectSection: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityLandSteward_RawHeroSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityLandSteward_RawResourcesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityLandSteward_RawVideosArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityLandSteward_RawCtaButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityLandSteward_RawStepsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityLandSteward_RawConnectSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -14301,38 +13887,38 @@ export type SanityLandStewardFilterInput = {
   _rawConnectSection: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityLandStewardsPage = SanityDocument & Node & {
-  __typename?: 'SanityLandStewardsPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  heroSection: Maybe<SanityHeroSection>;
-  designedForFarmersSection: Maybe<SanityImageItemsSection>;
-  joinFarmersSection: Maybe<SanityDualImageSection>;
-  practicesOutcomesSection: Maybe<SanityPracticesOutcomesSection>;
-  timelineSection: Maybe<SanityTimelineSection>;
-  featuredSection: Maybe<SanityFeaturedSection>;
-  moreQuestionsSection: Maybe<SanityBottomBanner>;
-  footerButton: Maybe<SanityButton>;
-  metadata: Maybe<SanityPageMetadata>;
-  _rawHeroSection: Maybe<Scalars['JSON']>;
-  _rawDesignedForFarmersSection: Maybe<Scalars['JSON']>;
-  _rawJoinFarmersSection: Maybe<Scalars['JSON']>;
-  _rawPracticesOutcomesSection: Maybe<Scalars['JSON']>;
-  _rawTimelineSection: Maybe<Scalars['JSON']>;
-  _rawFeaturedSection: Maybe<Scalars['JSON']>;
-  _rawMoreQuestionsSection: Maybe<Scalars['JSON']>;
-  _rawFooterButton: Maybe<Scalars['JSON']>;
-  _rawMetadata: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityLandStewardsPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityLandStewardsPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    heroSection: Maybe<SanityHeroSection>;
+    designedForFarmersSection: Maybe<SanityImageItemsSection>;
+    joinFarmersSection: Maybe<SanityDualImageSection>;
+    practicesOutcomesSection: Maybe<SanityPracticesOutcomesSection>;
+    timelineSection: Maybe<SanityTimelineSection>;
+    featuredSection: Maybe<SanityFeaturedSection>;
+    moreQuestionsSection: Maybe<SanityBottomBanner>;
+    footerButton: Maybe<SanityButton>;
+    metadata: Maybe<SanityPageMetadata>;
+    _rawHeroSection: Maybe<Scalars['JSON']>;
+    _rawDesignedForFarmersSection: Maybe<Scalars['JSON']>;
+    _rawJoinFarmersSection: Maybe<Scalars['JSON']>;
+    _rawPracticesOutcomesSection: Maybe<Scalars['JSON']>;
+    _rawTimelineSection: Maybe<Scalars['JSON']>;
+    _rawFeaturedSection: Maybe<Scalars['JSON']>;
+    _rawMoreQuestionsSection: Maybe<Scalars['JSON']>;
+    _rawFooterButton: Maybe<Scalars['JSON']>;
+    _rawMetadata: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityLandStewardsPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -14341,7 +13927,6 @@ export type SanityLandStewardsPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityLandStewardsPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -14349,46 +13934,37 @@ export type SanityLandStewardsPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityLandStewardsPage_RawHeroSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityLandStewardsPage_RawDesignedForFarmersSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityLandStewardsPage_RawJoinFarmersSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityLandStewardsPage_RawPracticesOutcomesSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityLandStewardsPage_RawTimelineSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityLandStewardsPage_RawFeaturedSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityLandStewardsPage_RawMoreQuestionsSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityLandStewardsPage_RawFooterButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityLandStewardsPage_RawMetadataArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -14404,11 +13980,9 @@ export type SanityLandStewardsPageConnection = {
   group: Array<SanityLandStewardsPageGroupConnection>;
 };
 
-
 export type SanityLandStewardsPageConnectionDistinctArgs = {
   field: SanityLandStewardsPageFieldsEnum;
 };
-
 
 export type SanityLandStewardsPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -14905,7 +14479,7 @@ export enum SanityLandStewardsPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityLandStewardsPageFilterInput = {
@@ -14963,7 +14537,6 @@ export type SanityLink = {
   _rawButtonDoc: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityLink_RawButtonDocArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -14987,7 +14560,6 @@ export type SanityMainnetActionItem = {
   icon: Maybe<SanityCustomImage>;
   _rawIcon: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityMainnetActionItem_RawIconArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -15020,11 +14592,9 @@ export type SanityMainnetInfoItem = {
   _rawIcon: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityMainnetInfoItem_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityMainnetInfoItem_RawIconArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -15059,16 +14629,13 @@ export type SanityMainnetLaunchInfoSection = {
   _rawActionItems: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityMainnetLaunchInfoSection_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityMainnetLaunchInfoSection_RawCardBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityMainnetLaunchInfoSection_RawActionItemsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -15087,31 +14654,31 @@ export type SanityMainnetLaunchInfoSectionFilterInput = {
   _rawActionItems: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityMainnetPage = SanityDocument & Node & {
-  __typename?: 'SanityMainnetPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  launchDate: Maybe<Scalars['Date']>;
-  seoDescription: Maybe<Scalars['String']>;
-  livecastLink: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleBody>;
-  launchInfoSection: Maybe<SanityMainnetLaunchInfoSection>;
-  whatsNextSection: Maybe<SanityMainnetWhatsNextSection>;
-  mediaItems: Maybe<Array<Maybe<SanityMedia>>>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawLaunchInfoSection: Maybe<Scalars['JSON']>;
-  _rawWhatsNextSection: Maybe<Scalars['JSON']>;
-  _rawMediaItems: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityMainnetPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityMainnetPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    launchDate: Maybe<Scalars['Date']>;
+    seoDescription: Maybe<Scalars['String']>;
+    livecastLink: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleBody>;
+    launchInfoSection: Maybe<SanityMainnetLaunchInfoSection>;
+    whatsNextSection: Maybe<SanityMainnetWhatsNextSection>;
+    mediaItems: Maybe<Array<Maybe<SanityMedia>>>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawLaunchInfoSection: Maybe<Scalars['JSON']>;
+    _rawWhatsNextSection: Maybe<Scalars['JSON']>;
+    _rawMediaItems: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityMainnetPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -15120,14 +14687,12 @@ export type SanityMainnetPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityMainnetPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type SanityMainnetPageLaunchDateArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -15136,21 +14701,17 @@ export type SanityMainnetPageLaunchDateArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityMainnetPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityMainnetPage_RawLaunchInfoSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityMainnetPage_RawWhatsNextSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityMainnetPage_RawMediaItemsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -15166,11 +14727,9 @@ export type SanityMainnetPageConnection = {
   group: Array<SanityMainnetPageGroupConnection>;
 };
 
-
 export type SanityMainnetPageConnectionDistinctArgs = {
   field: SanityMainnetPageFieldsEnum;
 };
-
 
 export type SanityMainnetPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -15425,7 +14984,7 @@ export enum SanityMainnetPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityMainnetPageFilterInput = {
@@ -15478,11 +15037,9 @@ export type SanityMainnetWhatsNextSection = {
   _rawInfoItems: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityMainnetWhatsNextSection_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityMainnetWhatsNextSection_RawInfoItemsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -15510,11 +15067,9 @@ export type SanityMarketplaceSection = {
   _rawCallToActions: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityMarketplaceSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityMarketplaceSection_RawCallToActionsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -15531,27 +15086,27 @@ export type SanityMarketplaceSectionFilterInput = {
   _rawCallToActions: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityMedia = SanityDocument & Node & {
-  __typename?: 'SanityMedia';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-  author: Maybe<Scalars['String']>;
-  date: Maybe<Scalars['Date']>;
-  image: Maybe<SanityCustomImage>;
-  href: Maybe<Scalars['String']>;
-  type: Maybe<Scalars['String']>;
-  _rawImage: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityMedia = SanityDocument &
+  Node & {
+    __typename?: 'SanityMedia';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    title: Maybe<Scalars['String']>;
+    author: Maybe<Scalars['String']>;
+    date: Maybe<Scalars['Date']>;
+    image: Maybe<SanityCustomImage>;
+    href: Maybe<Scalars['String']>;
+    type: Maybe<Scalars['String']>;
+    _rawImage: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityMedia_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -15560,7 +15115,6 @@ export type SanityMedia_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityMedia_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -15568,14 +15122,12 @@ export type SanityMedia_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityMediaDateArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type SanityMedia_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -15591,11 +15143,9 @@ export type SanityMediaConnection = {
   group: Array<SanityMediaGroupConnection>;
 };
 
-
 export type SanityMediaConnectionDistinctArgs = {
   field: SanityMediaFieldsEnum;
 };
-
 
 export type SanityMediaConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -15753,7 +15303,7 @@ export enum SanityMediaFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityMediaFilterInput = {
@@ -15795,35 +15345,35 @@ export type SanityMediaSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type SanityMethodology = SanityDocument & Node & {
-  __typename?: 'SanityMethodology';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  path: Maybe<Scalars['String']>;
-  steps: Maybe<SanityBasicStepCardSection>;
-  documentation: Maybe<SanityDocumentation>;
-  ecologicalImpact: Maybe<Array<Maybe<SanityEcologicalImpactRelation>>>;
-  resources: Maybe<Array<Maybe<SanityResource>>>;
-  bottomSection: Maybe<SanityHeroSection>;
-  name: Maybe<Array<Maybe<SanityBlock>>>;
-  description: Maybe<Array<Maybe<SanityBlock>>>;
-  _rawName: Maybe<Scalars['JSON']>;
-  _rawDescription: Maybe<Scalars['JSON']>;
-  _rawSteps: Maybe<Scalars['JSON']>;
-  _rawDocumentation: Maybe<Scalars['JSON']>;
-  _rawEcologicalImpact: Maybe<Scalars['JSON']>;
-  _rawResources: Maybe<Scalars['JSON']>;
-  _rawBottomSection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityMethodology = SanityDocument &
+  Node & {
+    __typename?: 'SanityMethodology';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    path: Maybe<Scalars['String']>;
+    steps: Maybe<SanityBasicStepCardSection>;
+    documentation: Maybe<SanityDocumentation>;
+    ecologicalImpact: Maybe<Array<Maybe<SanityEcologicalImpactRelation>>>;
+    resources: Maybe<Array<Maybe<SanityResource>>>;
+    bottomSection: Maybe<SanityHeroSection>;
+    name: Maybe<Array<Maybe<SanityBlock>>>;
+    description: Maybe<Array<Maybe<SanityBlock>>>;
+    _rawName: Maybe<Scalars['JSON']>;
+    _rawDescription: Maybe<Scalars['JSON']>;
+    _rawSteps: Maybe<Scalars['JSON']>;
+    _rawDocumentation: Maybe<Scalars['JSON']>;
+    _rawEcologicalImpact: Maybe<Scalars['JSON']>;
+    _rawResources: Maybe<Scalars['JSON']>;
+    _rawBottomSection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityMethodology_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -15832,7 +15382,6 @@ export type SanityMethodology_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityMethodology_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -15840,36 +15389,29 @@ export type SanityMethodology_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityMethodology_RawNameArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityMethodology_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityMethodology_RawStepsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityMethodology_RawDocumentationArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityMethodology_RawEcologicalImpactArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityMethodology_RawResourcesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityMethodology_RawBottomSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -15885,11 +15427,9 @@ export type SanityMethodologyConnection = {
   group: Array<SanityMethodologyGroupConnection>;
 };
 
-
 export type SanityMethodologyConnectionDistinctArgs = {
   field: SanityMethodologyFieldsEnum;
 };
-
 
 export type SanityMethodologyConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -16260,7 +15800,7 @@ export enum SanityMethodologyFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityMethodologyFilterInput = {
@@ -16301,30 +15841,30 @@ export type SanityMethodologyGroupConnection = {
   fieldValue: Maybe<Scalars['String']>;
 };
 
-export type SanityMethodologyReviewProcessPage = SanityDocument & Node & {
-  __typename?: 'SanityMethodologyReviewProcessPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  heroSection: Maybe<SanityHeroSection>;
-  internalReviewSection: Maybe<SanityReviewSection>;
-  externalReviewSection: Maybe<SanityReviewSection>;
-  bottomBanner: Maybe<SanityBottomBanner>;
-  metadata: Maybe<SanityPageMetadata>;
-  _rawHeroSection: Maybe<Scalars['JSON']>;
-  _rawInternalReviewSection: Maybe<Scalars['JSON']>;
-  _rawExternalReviewSection: Maybe<Scalars['JSON']>;
-  _rawBottomBanner: Maybe<Scalars['JSON']>;
-  _rawMetadata: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityMethodologyReviewProcessPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityMethodologyReviewProcessPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    heroSection: Maybe<SanityHeroSection>;
+    internalReviewSection: Maybe<SanityReviewSection>;
+    externalReviewSection: Maybe<SanityReviewSection>;
+    bottomBanner: Maybe<SanityBottomBanner>;
+    metadata: Maybe<SanityPageMetadata>;
+    _rawHeroSection: Maybe<Scalars['JSON']>;
+    _rawInternalReviewSection: Maybe<Scalars['JSON']>;
+    _rawExternalReviewSection: Maybe<Scalars['JSON']>;
+    _rawBottomBanner: Maybe<Scalars['JSON']>;
+    _rawMetadata: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityMethodologyReviewProcessPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -16333,7 +15873,6 @@ export type SanityMethodologyReviewProcessPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityMethodologyReviewProcessPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -16341,26 +15880,21 @@ export type SanityMethodologyReviewProcessPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityMethodologyReviewProcessPage_RawHeroSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityMethodologyReviewProcessPage_RawInternalReviewSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityMethodologyReviewProcessPage_RawExternalReviewSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityMethodologyReviewProcessPage_RawBottomBannerArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityMethodologyReviewProcessPage_RawMetadataArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -16376,11 +15910,9 @@ export type SanityMethodologyReviewProcessPageConnection = {
   group: Array<SanityMethodologyReviewProcessPageGroupConnection>;
 };
 
-
 export type SanityMethodologyReviewProcessPageConnectionDistinctArgs = {
   field: SanityMethodologyReviewProcessPageFieldsEnum;
 };
-
 
 export type SanityMethodologyReviewProcessPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -16698,7 +16230,7 @@ export enum SanityMethodologyReviewProcessPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityMethodologyReviewProcessPageFilterInput = {
@@ -16754,7 +16286,6 @@ export type SanityNameTitleImage = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityNameTitleImage_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -16773,16 +16304,13 @@ export type SanityNctLedgerSection = {
   _rawButton: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityNctLedgerSection_RawIconArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityNctLedgerSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityNctLedgerSection_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -16818,26 +16346,21 @@ export type SanityNctOverviewSection = {
   _rawItems: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityNctOverviewSection_RawBackgroundArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityNctOverviewSection_RawTitleIconArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityNctOverviewSection_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityNctOverviewSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityNctOverviewSection_RawItemsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -16859,37 +16382,37 @@ export type SanityNctOverviewSectionFilterInput = {
   _rawItems: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityNctPage = SanityDocument & Node & {
-  __typename?: 'SanityNctPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  seo: Maybe<SanitySeo>;
-  launchDate: Maybe<Scalars['Date']>;
-  topSection: Maybe<SanityTitleImageCustomBody>;
-  overviewSection: Maybe<SanityNctOverviewSection>;
-  tokenSection: Maybe<SanityNctTokenSection>;
-  banner: Maybe<SanityTitleImageCustomBody>;
-  marketplaceSection: Maybe<SanityTitleImageCustomBody>;
-  ledgerSection: Maybe<SanityNctLedgerSection>;
-  mediaItems: Maybe<Array<Maybe<SanityMedia>>>;
-  _rawSeo: Maybe<Scalars['JSON']>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawOverviewSection: Maybe<Scalars['JSON']>;
-  _rawTokenSection: Maybe<Scalars['JSON']>;
-  _rawBanner: Maybe<Scalars['JSON']>;
-  _rawMarketplaceSection: Maybe<Scalars['JSON']>;
-  _rawLedgerSection: Maybe<Scalars['JSON']>;
-  _rawMediaItems: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityNctPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityNctPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    seo: Maybe<SanitySeo>;
+    launchDate: Maybe<Scalars['Date']>;
+    topSection: Maybe<SanityTitleImageCustomBody>;
+    overviewSection: Maybe<SanityNctOverviewSection>;
+    tokenSection: Maybe<SanityNctTokenSection>;
+    banner: Maybe<SanityTitleImageCustomBody>;
+    marketplaceSection: Maybe<SanityTitleImageCustomBody>;
+    ledgerSection: Maybe<SanityNctLedgerSection>;
+    mediaItems: Maybe<Array<Maybe<SanityMedia>>>;
+    _rawSeo: Maybe<Scalars['JSON']>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawOverviewSection: Maybe<Scalars['JSON']>;
+    _rawTokenSection: Maybe<Scalars['JSON']>;
+    _rawBanner: Maybe<Scalars['JSON']>;
+    _rawMarketplaceSection: Maybe<Scalars['JSON']>;
+    _rawLedgerSection: Maybe<Scalars['JSON']>;
+    _rawMediaItems: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityNctPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -16898,14 +16421,12 @@ export type SanityNctPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityNctPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type SanityNctPageLaunchDateArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -16914,41 +16435,33 @@ export type SanityNctPageLaunchDateArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityNctPage_RawSeoArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityNctPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityNctPage_RawOverviewSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityNctPage_RawTokenSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityNctPage_RawBannerArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityNctPage_RawMarketplaceSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityNctPage_RawLedgerSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityNctPage_RawMediaItemsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -16964,11 +16477,9 @@ export type SanityNctPageConnection = {
   group: Array<SanityNctPageGroupConnection>;
 };
 
-
 export type SanityNctPageConnectionDistinctArgs = {
   field: SanityNctPageFieldsEnum;
 };
-
 
 export type SanityNctPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -17540,7 +17051,7 @@ export enum SanityNctPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityNctPageFilterInput = {
@@ -17612,36 +17123,29 @@ export type SanityNctTokenSection = {
   _rawDetailButton2: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityNctTokenSection_RawCardImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityNctTokenSection_RawCardBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityNctTokenSection_RawCardButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityNctTokenSection_RawDetailImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityNctTokenSection_RawDetailBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityNctTokenSection_RawDetailButton1Args = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityNctTokenSection_RawDetailButton2Args = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -17679,7 +17183,6 @@ export type SanityPageMetadata = {
   _rawOpenGraphImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityPageMetadata_RawOpenGraphImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -17701,7 +17204,6 @@ export type SanityPartnerLogo = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityPartnerLogo_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -17718,26 +17220,26 @@ export type SanityPartnerLogoFilterListInput = {
   elemMatch: Maybe<SanityPartnerLogoFilterInput>;
 };
 
-export type SanityPartnersPage = SanityDocument & Node & {
-  __typename?: 'SanityPartnersPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  header: Maybe<Scalars['String']>;
-  contactHeader: Maybe<Scalars['String']>;
-  partners: Maybe<Array<Maybe<SanityPartnerLogo>>>;
-  contactBody: Maybe<Array<Maybe<SanityBlock>>>;
-  _rawContactBody: Maybe<Scalars['JSON']>;
-  _rawPartners: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityPartnersPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityPartnersPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    header: Maybe<Scalars['String']>;
+    contactHeader: Maybe<Scalars['String']>;
+    partners: Maybe<Array<Maybe<SanityPartnerLogo>>>;
+    contactBody: Maybe<Array<Maybe<SanityBlock>>>;
+    _rawContactBody: Maybe<Scalars['JSON']>;
+    _rawPartners: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityPartnersPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -17746,7 +17248,6 @@ export type SanityPartnersPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityPartnersPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -17754,11 +17255,9 @@ export type SanityPartnersPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityPartnersPage_RawContactBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityPartnersPage_RawPartnersArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -17774,11 +17273,9 @@ export type SanityPartnersPageConnection = {
   group: Array<SanityPartnersPageGroupConnection>;
 };
 
-
 export type SanityPartnersPageConnectionDistinctArgs = {
   field: SanityPartnersPageFieldsEnum;
 };
-
 
 export type SanityPartnersPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -17945,7 +17442,7 @@ export enum SanityPartnersPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityPartnersPageFilterInput = {
@@ -17994,11 +17491,9 @@ export type SanityPracticesOutcomesSection = {
   _rawOutcomes: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityPracticesOutcomesSection_RawPracticesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityPracticesOutcomesSection_RawOutcomesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -18024,7 +17519,6 @@ export type SanityPresskitAwardsSection = {
   _rawItems: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityPresskitAwardsSection_RawItemsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -18045,7 +17539,6 @@ export type SanityPresskitFeaturedSection = {
   articles: Maybe<Array<Maybe<SanityMedia>>>;
   _rawArticles: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityPresskitFeaturedSection_RawArticlesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -18076,39 +17569,39 @@ export type SanityPresskitLogosSectionFilterInput = {
   buttonLink: Maybe<StringQueryOperatorInput>;
 };
 
-export type SanityPresskitPage = SanityDocument & Node & {
-  __typename?: 'SanityPresskitPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleBody>;
-  titleDescriptionSection: Maybe<SanityTitleCustomBody>;
-  enableSection: Maybe<SanityTitleImageCustomBody>;
-  timelineSection: Maybe<SanityPresskitTimelineSection>;
-  teamSection: Maybe<SanityPresskitTeamSection>;
-  featuredSection: Maybe<SanityPresskitFeaturedSection>;
-  awardsSection: Maybe<SanityPresskitAwardsSection>;
-  logosSection: Maybe<SanityPresskitLogosSection>;
-  connectSectionHeader: Maybe<Scalars['String']>;
-  photosSection: Maybe<SanityPresskitPhotosSection>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawTitleDescriptionSection: Maybe<Scalars['JSON']>;
-  _rawEnableSection: Maybe<Scalars['JSON']>;
-  _rawTimelineSection: Maybe<Scalars['JSON']>;
-  _rawTeamSection: Maybe<Scalars['JSON']>;
-  _rawFeaturedSection: Maybe<Scalars['JSON']>;
-  _rawAwardsSection: Maybe<Scalars['JSON']>;
-  _rawLogosSection: Maybe<Scalars['JSON']>;
-  _rawPhotosSection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityPresskitPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityPresskitPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleBody>;
+    titleDescriptionSection: Maybe<SanityTitleCustomBody>;
+    enableSection: Maybe<SanityTitleImageCustomBody>;
+    timelineSection: Maybe<SanityPresskitTimelineSection>;
+    teamSection: Maybe<SanityPresskitTeamSection>;
+    featuredSection: Maybe<SanityPresskitFeaturedSection>;
+    awardsSection: Maybe<SanityPresskitAwardsSection>;
+    logosSection: Maybe<SanityPresskitLogosSection>;
+    connectSectionHeader: Maybe<Scalars['String']>;
+    photosSection: Maybe<SanityPresskitPhotosSection>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawTitleDescriptionSection: Maybe<Scalars['JSON']>;
+    _rawEnableSection: Maybe<Scalars['JSON']>;
+    _rawTimelineSection: Maybe<Scalars['JSON']>;
+    _rawTeamSection: Maybe<Scalars['JSON']>;
+    _rawFeaturedSection: Maybe<Scalars['JSON']>;
+    _rawAwardsSection: Maybe<Scalars['JSON']>;
+    _rawLogosSection: Maybe<Scalars['JSON']>;
+    _rawPhotosSection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityPresskitPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -18117,7 +17610,6 @@ export type SanityPresskitPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityPresskitPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -18125,46 +17617,37 @@ export type SanityPresskitPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityPresskitPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityPresskitPage_RawTitleDescriptionSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityPresskitPage_RawEnableSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityPresskitPage_RawTimelineSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityPresskitPage_RawTeamSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityPresskitPage_RawFeaturedSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityPresskitPage_RawAwardsSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityPresskitPage_RawLogosSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityPresskitPage_RawPhotosSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -18180,11 +17663,9 @@ export type SanityPresskitPageConnection = {
   group: Array<SanityPresskitPageGroupConnection>;
 };
 
-
 export type SanityPresskitPageConnectionDistinctArgs = {
   field: SanityPresskitPageFieldsEnum;
 };
-
 
 export type SanityPresskitPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -18496,7 +17977,7 @@ export enum SanityPresskitPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityPresskitPageFilterInput = {
@@ -18555,7 +18036,6 @@ export type SanityPresskitPhotosSection = {
   _rawPhotos: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityPresskitPhotosSection_RawPhotosArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -18577,7 +18057,6 @@ export type SanityPresskitTeamSection = {
   members: Maybe<Array<Maybe<SanityRegenTeamMember>>>;
   _rawMembers: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityPresskitTeamSection_RawMembersArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -18624,7 +18103,6 @@ export type SanityPresskitTimelineSection = {
   _rawItems: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityPresskitTimelineSection_RawItemsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -18639,27 +18117,27 @@ export type SanityPresskitTimelineSectionFilterInput = {
   _rawItems: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityRegenTeamMember = SanityDocument & Node & {
-  __typename?: 'SanityRegenTeamMember';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  name: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-  image: Maybe<SanityImage>;
-  linkedinUrl: Maybe<Scalars['String']>;
-  twitterUrl: Maybe<Scalars['String']>;
-  githubUrl: Maybe<Scalars['String']>;
-  _rawImage: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityRegenTeamMember = SanityDocument &
+  Node & {
+    __typename?: 'SanityRegenTeamMember';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    name: Maybe<Scalars['String']>;
+    title: Maybe<Scalars['String']>;
+    image: Maybe<SanityImage>;
+    linkedinUrl: Maybe<Scalars['String']>;
+    twitterUrl: Maybe<Scalars['String']>;
+    githubUrl: Maybe<Scalars['String']>;
+    _rawImage: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityRegenTeamMember_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -18668,14 +18146,12 @@ export type SanityRegenTeamMember_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityRegenTeamMember_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type SanityRegenTeamMember_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -18691,11 +18167,9 @@ export type SanityRegenTeamMemberConnection = {
   group: Array<SanityRegenTeamMemberGroupConnection>;
 };
 
-
 export type SanityRegenTeamMemberConnectionDistinctArgs = {
   field: SanityRegenTeamMemberFieldsEnum;
 };
-
 
 export type SanityRegenTeamMemberConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -18888,7 +18362,7 @@ export enum SanityRegenTeamMemberFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityRegenTeamMemberFilterInput = {
@@ -18954,29 +18428,29 @@ export type SanityResolveReferencesConfiguration = {
   maxDepth: Scalars['Int'];
 };
 
-export type SanityResource = SanityDocument & Node & {
-  __typename?: 'SanityResource';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  image: Maybe<SanityCustomImage>;
-  button: Maybe<SanityButton>;
-  lastUpdated: Maybe<Scalars['Date']>;
-  title: Maybe<Array<Maybe<SanityBlock>>>;
-  description: Maybe<Array<Maybe<SanityBlock>>>;
-  _rawTitle: Maybe<Scalars['JSON']>;
-  _rawDescription: Maybe<Scalars['JSON']>;
-  _rawImage: Maybe<Scalars['JSON']>;
-  _rawButton: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityResource = SanityDocument &
+  Node & {
+    __typename?: 'SanityResource';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    image: Maybe<SanityCustomImage>;
+    button: Maybe<SanityButton>;
+    lastUpdated: Maybe<Scalars['Date']>;
+    title: Maybe<Array<Maybe<SanityBlock>>>;
+    description: Maybe<Array<Maybe<SanityBlock>>>;
+    _rawTitle: Maybe<Scalars['JSON']>;
+    _rawDescription: Maybe<Scalars['JSON']>;
+    _rawImage: Maybe<Scalars['JSON']>;
+    _rawButton: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityResource_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -18985,14 +18459,12 @@ export type SanityResource_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityResource_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type SanityResourceLastUpdatedArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -19001,21 +18473,17 @@ export type SanityResourceLastUpdatedArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityResource_RawTitleArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityResource_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityResource_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityResource_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -19031,11 +18499,9 @@ export type SanityResourceConnection = {
   group: Array<SanityResourceGroupConnection>;
 };
 
-
 export type SanityResourceConnectionDistinctArgs = {
   field: SanityResourceFieldsEnum;
 };
-
 
 export type SanityResourceConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -19236,7 +18702,7 @@ export enum SanityResourceFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityResourceFilterInput = {
@@ -19293,7 +18759,6 @@ export type SanityResourcesCard = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityResourcesCard_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -19323,7 +18788,6 @@ export type SanityResourcesLedgerSection = {
   _rawCards: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityResourcesLedgerSection_RawCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -19336,26 +18800,26 @@ export type SanityResourcesLedgerSectionFilterInput = {
   _rawCards: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityResourcesPage = SanityDocument & Node & {
-  __typename?: 'SanityResourcesPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleBody>;
-  registrySection: Maybe<SanityResourcesRegistrySection>;
-  ledgerSection: Maybe<SanityResourcesLedgerSection>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawRegistrySection: Maybe<Scalars['JSON']>;
-  _rawLedgerSection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityResourcesPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityResourcesPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleBody>;
+    registrySection: Maybe<SanityResourcesRegistrySection>;
+    ledgerSection: Maybe<SanityResourcesLedgerSection>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawRegistrySection: Maybe<Scalars['JSON']>;
+    _rawLedgerSection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityResourcesPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -19364,7 +18828,6 @@ export type SanityResourcesPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityResourcesPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -19372,16 +18835,13 @@ export type SanityResourcesPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityResourcesPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityResourcesPage_RawRegistrySectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityResourcesPage_RawLedgerSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -19397,11 +18857,9 @@ export type SanityResourcesPageConnection = {
   group: Array<SanityResourcesPageGroupConnection>;
 };
 
-
 export type SanityResourcesPageConnectionDistinctArgs = {
   field: SanityResourcesPageFieldsEnum;
 };
-
 
 export type SanityResourcesPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -19622,7 +19080,7 @@ export enum SanityResourcesPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityResourcesPageFilterInput = {
@@ -19671,11 +19129,9 @@ export type SanityResourcesRegistrySection = {
   _rawSubsections: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityResourcesRegistrySection_RawDocumentsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityResourcesRegistrySection_RawSubsectionsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -19700,7 +19156,6 @@ export type SanityResourcesRegistrySubSection = {
   cards: Maybe<Array<Maybe<SanityResource>>>;
   _rawCards: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityResourcesRegistrySubSection_RawCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -19734,16 +19189,13 @@ export type SanityReviewSection = {
   _rawStepCardsSubsections: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityReviewSection_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityReviewSection_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityReviewSection_RawStepCardsSubsectionsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -19777,16 +19229,13 @@ export type SanityScienceCommunityMember = {
   _rawDescription: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityScienceCommunityMember_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityScienceCommunityMember_RawRoleArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityScienceCommunityMember_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -19818,7 +19267,6 @@ export type SanityScienceCommunitySection = {
   _rawMembers: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityScienceCommunitySection_RawMembersArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -19843,7 +19291,6 @@ export type SanityScienceOpenScienceSection = {
   _rawPhases: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityScienceOpenScienceSection_RawPhasesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -19858,30 +19305,30 @@ export type SanityScienceOpenScienceSectionFilterInput = {
   _rawPhases: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanitySciencePage = SanityDocument & Node & {
-  __typename?: 'SanitySciencePage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleBody>;
-  titleDescriptionSection: Maybe<SanityScienceTitleDescriptionSection>;
-  openScienceSection: Maybe<SanityScienceOpenScienceSection>;
-  partnershipSection: Maybe<SanitySciencePartnershipSection>;
-  communitySection: Maybe<SanityScienceCommunitySection>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawTitleDescriptionSection: Maybe<Scalars['JSON']>;
-  _rawOpenScienceSection: Maybe<Scalars['JSON']>;
-  _rawPartnershipSection: Maybe<Scalars['JSON']>;
-  _rawCommunitySection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanitySciencePage = SanityDocument &
+  Node & {
+    __typename?: 'SanitySciencePage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleBody>;
+    titleDescriptionSection: Maybe<SanityScienceTitleDescriptionSection>;
+    openScienceSection: Maybe<SanityScienceOpenScienceSection>;
+    partnershipSection: Maybe<SanitySciencePartnershipSection>;
+    communitySection: Maybe<SanityScienceCommunitySection>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawTitleDescriptionSection: Maybe<Scalars['JSON']>;
+    _rawOpenScienceSection: Maybe<Scalars['JSON']>;
+    _rawPartnershipSection: Maybe<Scalars['JSON']>;
+    _rawCommunitySection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanitySciencePage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -19890,7 +19337,6 @@ export type SanitySciencePage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanitySciencePage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -19898,26 +19344,21 @@ export type SanitySciencePage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanitySciencePage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanitySciencePage_RawTitleDescriptionSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanitySciencePage_RawOpenScienceSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanitySciencePage_RawPartnershipSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanitySciencePage_RawCommunitySectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -19933,11 +19374,9 @@ export type SanitySciencePageConnection = {
   group: Array<SanitySciencePageGroupConnection>;
 };
 
-
 export type SanitySciencePageConnectionDistinctArgs = {
   field: SanitySciencePageFieldsEnum;
 };
-
 
 export type SanitySciencePageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -20168,7 +19607,7 @@ export enum SanitySciencePageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanitySciencePageFilterInput = {
@@ -20218,7 +19657,6 @@ export type SanitySciencePartnershipSection = {
   _rawPartners: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanitySciencePartnershipSection_RawPartnersArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -20242,11 +19680,9 @@ export type SanityScienceTitleDescriptionSection = {
   _rawOutcomes: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityScienceTitleDescriptionSection_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityScienceTitleDescriptionSection_RawOutcomesArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -20262,25 +19698,25 @@ export type SanityScienceTitleDescriptionSectionFilterInput = {
   _rawOutcomes: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanitySdg = SanityDocument & Node & {
-  __typename?: 'SanitySdg';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
-  iri: Maybe<SanitySlug>;
-  image: Maybe<SanityCustomImage>;
-  _rawIri: Maybe<Scalars['JSON']>;
-  _rawImage: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanitySdg = SanityDocument &
+  Node & {
+    __typename?: 'SanitySdg';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    title: Maybe<Scalars['String']>;
+    iri: Maybe<SanitySlug>;
+    image: Maybe<SanityCustomImage>;
+    _rawIri: Maybe<Scalars['JSON']>;
+    _rawImage: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanitySdg_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -20289,7 +19725,6 @@ export type SanitySdg_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanitySdg_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -20297,11 +19732,9 @@ export type SanitySdg_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanitySdg_RawIriArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanitySdg_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -20317,11 +19750,9 @@ export type SanitySdgConnection = {
   group: Array<SanitySdgGroupConnection>;
 };
 
-
 export type SanitySdgConnectionDistinctArgs = {
   field: SanitySdgFieldsEnum;
 };
-
 
 export type SanitySdgConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -20479,7 +19910,7 @@ export enum SanitySdgFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanitySdgFilterInput = {
@@ -20529,7 +19960,6 @@ export type SanitySeo = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanitySeo_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -20543,24 +19973,24 @@ export type SanitySeoFilterInput = {
   _rawImage: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanitySharedSections = SanityDocument & Node & {
-  __typename?: 'SanitySharedSections';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  newsletter: Maybe<SanityTitleCustomBody>;
-  blog: Maybe<SanityBlogSection>;
-  _rawNewsletter: Maybe<Scalars['JSON']>;
-  _rawBlog: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanitySharedSections = SanityDocument &
+  Node & {
+    __typename?: 'SanitySharedSections';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    newsletter: Maybe<SanityTitleCustomBody>;
+    blog: Maybe<SanityBlogSection>;
+    _rawNewsletter: Maybe<Scalars['JSON']>;
+    _rawBlog: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanitySharedSections_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -20569,7 +19999,6 @@ export type SanitySharedSections_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanitySharedSections_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -20577,11 +20006,9 @@ export type SanitySharedSections_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanitySharedSections_RawNewsletterArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanitySharedSections_RawBlogArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -20597,11 +20024,9 @@ export type SanitySharedSectionsConnection = {
   group: Array<SanitySharedSectionsGroupConnection>;
 };
 
-
 export type SanitySharedSectionsConnectionDistinctArgs = {
   field: SanitySharedSectionsFieldsEnum;
 };
-
 
 export type SanitySharedSectionsConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -20748,7 +20173,7 @@ export enum SanitySharedSectionsFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanitySharedSectionsFilterInput = {
@@ -20835,26 +20260,21 @@ export type SanityStepCard = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityStepCard_RawIconArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityStepCard_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityStepCard_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityStepCard_RawFaqsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityStepCard_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -20894,11 +20314,9 @@ export type SanityStepCardSection = {
   _rawStepCards: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityStepCardSection_RawDescriptionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityStepCardSection_RawStepCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -20914,22 +20332,22 @@ export type SanityStepCardSectionFilterInput = {
   _rawStepCards: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityTag = SanityDocument & Node & {
-  __typename?: 'SanityTag';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  name: Maybe<Scalars['String']>;
-  color: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityTag = SanityDocument &
+  Node & {
+    __typename?: 'SanityTag';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    name: Maybe<Scalars['String']>;
+    color: Maybe<Scalars['String']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityTag_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -20937,7 +20355,6 @@ export type SanityTag_CreatedAtArgs = {
   difference: Maybe<Scalars['String']>;
   locale: Maybe<Scalars['String']>;
 };
-
 
 export type SanityTag_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -20956,11 +20373,9 @@ export type SanityTagConnection = {
   group: Array<SanityTagGroupConnection>;
 };
 
-
 export type SanityTagConnectionDistinctArgs = {
   field: SanityTagFieldsEnum;
 };
-
 
 export type SanityTagConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -21069,7 +20484,7 @@ export enum SanityTagFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityTagFilterInput = {
@@ -21106,26 +20521,26 @@ export type SanityTagSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type SanityTeamPage = SanityDocument & Node & {
-  __typename?: 'SanityTeamPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleBody>;
-  coreSection: Maybe<SanityTeamSection>;
-  advisorSection: Maybe<SanityTeamSection>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawCoreSection: Maybe<Scalars['JSON']>;
-  _rawAdvisorSection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityTeamPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityTeamPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleBody>;
+    coreSection: Maybe<SanityTeamSection>;
+    advisorSection: Maybe<SanityTeamSection>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawCoreSection: Maybe<Scalars['JSON']>;
+    _rawAdvisorSection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityTeamPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -21134,7 +20549,6 @@ export type SanityTeamPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityTeamPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -21142,16 +20556,13 @@ export type SanityTeamPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityTeamPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityTeamPage_RawCoreSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityTeamPage_RawAdvisorSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -21167,11 +20578,9 @@ export type SanityTeamPageConnection = {
   group: Array<SanityTeamPageGroupConnection>;
 };
 
-
 export type SanityTeamPageConnectionDistinctArgs = {
   field: SanityTeamPageFieldsEnum;
 };
-
 
 export type SanityTeamPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -21357,7 +20766,7 @@ export enum SanityTeamPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityTeamPageFilterInput = {
@@ -21403,7 +20812,6 @@ export type SanityTeamSection = {
   _rawMembers: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityTeamSection_RawMembersArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -21428,11 +20836,9 @@ export type SanityTimelineItem = {
   _rawTags: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityTimelineItem_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityTimelineItem_RawTagsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -21461,7 +20867,6 @@ export type SanityTimelineSection = {
   timelineItems: Maybe<Array<Maybe<SanityTimelineItem>>>;
   _rawTimelineItems: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityTimelineSection_RawTimelineItemsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -21494,11 +20899,9 @@ export type SanityTitleBodyButton = {
   _rawButton: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityTitleBodyButton_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityTitleBodyButton_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -21534,7 +20937,6 @@ export type SanityTitleCustomBody = {
   _rawBody: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityTitleCustomBody_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -21556,7 +20958,6 @@ export type SanityTitleImage = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityTitleImage_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -21570,7 +20971,6 @@ export type SanityTitleImageBody = {
   body: Maybe<Scalars['String']>;
   _rawImage: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityTitleImageBody_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -21587,11 +20987,9 @@ export type SanityTitleImageCustomBody = {
   _rawBody: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityTitleImageCustomBody_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityTitleImageCustomBody_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -21625,7 +21023,6 @@ export type SanityTitleImageLink = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityTitleImageLink_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -21655,11 +21052,9 @@ export type SanityTokenInfoSection = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityTokenInfoSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityTokenInfoSection_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -21693,37 +21088,37 @@ export type SanityTokenNewsletterSectionFilterInput = {
   inputText: Maybe<StringQueryOperatorInput>;
 };
 
-export type SanityTokenPage = SanityDocument & Node & {
-  __typename?: 'SanityTokenPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleBody>;
-  tokenEconomics: Maybe<SanityTitleCustomBody>;
-  infoSection: Maybe<SanityTokenInfoSection>;
-  poolSection: Maybe<SanityTokenPoolSection>;
-  stakingSection: Maybe<SanityTitleBodyButton>;
-  blockExplorerSection: Maybe<SanityTitleBodyButton>;
-  connectSectionHeader: Maybe<Scalars['String']>;
-  mediaCards: Maybe<Array<Maybe<SanityMedia>>>;
-  newsletterSection: Maybe<SanityTokenNewsletterSection>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawTokenEconomics: Maybe<Scalars['JSON']>;
-  _rawInfoSection: Maybe<Scalars['JSON']>;
-  _rawPoolSection: Maybe<Scalars['JSON']>;
-  _rawStakingSection: Maybe<Scalars['JSON']>;
-  _rawBlockExplorerSection: Maybe<Scalars['JSON']>;
-  _rawMediaCards: Maybe<Scalars['JSON']>;
-  _rawNewsletterSection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityTokenPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityTokenPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleBody>;
+    tokenEconomics: Maybe<SanityTitleCustomBody>;
+    infoSection: Maybe<SanityTokenInfoSection>;
+    poolSection: Maybe<SanityTokenPoolSection>;
+    stakingSection: Maybe<SanityTitleBodyButton>;
+    blockExplorerSection: Maybe<SanityTitleBodyButton>;
+    connectSectionHeader: Maybe<Scalars['String']>;
+    mediaCards: Maybe<Array<Maybe<SanityMedia>>>;
+    newsletterSection: Maybe<SanityTokenNewsletterSection>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawTokenEconomics: Maybe<Scalars['JSON']>;
+    _rawInfoSection: Maybe<Scalars['JSON']>;
+    _rawPoolSection: Maybe<Scalars['JSON']>;
+    _rawStakingSection: Maybe<Scalars['JSON']>;
+    _rawBlockExplorerSection: Maybe<Scalars['JSON']>;
+    _rawMediaCards: Maybe<Scalars['JSON']>;
+    _rawNewsletterSection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityTokenPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -21732,7 +21127,6 @@ export type SanityTokenPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityTokenPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -21740,41 +21134,33 @@ export type SanityTokenPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityTokenPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityTokenPage_RawTokenEconomicsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityTokenPage_RawInfoSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityTokenPage_RawPoolSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityTokenPage_RawStakingSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityTokenPage_RawBlockExplorerSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityTokenPage_RawMediaCardsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityTokenPage_RawNewsletterSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -21790,11 +21176,9 @@ export type SanityTokenPageConnection = {
   group: Array<SanityTokenPageGroupConnection>;
 };
 
-
 export type SanityTokenPageConnectionDistinctArgs = {
   field: SanityTokenPageFieldsEnum;
 };
-
 
 export type SanityTokenPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -22160,7 +21544,7 @@ export enum SanityTokenPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityTokenPageFilterInput = {
@@ -22220,11 +21604,9 @@ export type SanityTokenPoolSection = {
   _rawMobileImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityTokenPoolSection_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityTokenPoolSection_RawMobileImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -22252,11 +21634,9 @@ export type SanityTokenUnlockSection = {
   _rawButton: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityTokenUnlockSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityTokenUnlockSection_RawButtonArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -22271,7 +21651,6 @@ export type SanityValidator = {
   members: Maybe<Array<Maybe<SanityImageLink>>>;
   _rawMembers: Maybe<Scalars['JSON']>;
 };
-
 
 export type SanityValidator_RawMembersArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -22301,11 +21680,9 @@ export type SanityValidatorWhoSection = {
   _rawValidators: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityValidatorWhoSection_RawBodyArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityValidatorWhoSection_RawValidatorsArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -22321,29 +21698,29 @@ export type SanityValidatorWhoSectionFilterInput = {
   _rawValidators: Maybe<JsonQueryOperatorInput>;
 };
 
-export type SanityValidatorsPage = SanityDocument & Node & {
-  __typename?: 'SanityValidatorsPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleBody>;
-  whatSection: Maybe<SanityTitleCustomBody>;
-  whoSection: Maybe<SanityValidatorWhoSection>;
-  connectSectionHeader: Maybe<Scalars['String']>;
-  whySection: Maybe<SanityTitleCustomBody>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawWhatSection: Maybe<Scalars['JSON']>;
-  _rawWhoSection: Maybe<Scalars['JSON']>;
-  _rawWhySection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityValidatorsPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityValidatorsPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleBody>;
+    whatSection: Maybe<SanityTitleCustomBody>;
+    whoSection: Maybe<SanityValidatorWhoSection>;
+    connectSectionHeader: Maybe<Scalars['String']>;
+    whySection: Maybe<SanityTitleCustomBody>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawWhatSection: Maybe<Scalars['JSON']>;
+    _rawWhoSection: Maybe<Scalars['JSON']>;
+    _rawWhySection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityValidatorsPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -22352,7 +21729,6 @@ export type SanityValidatorsPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityValidatorsPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -22360,21 +21736,17 @@ export type SanityValidatorsPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityValidatorsPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityValidatorsPage_RawWhatSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityValidatorsPage_RawWhoSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityValidatorsPage_RawWhySectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -22390,11 +21762,9 @@ export type SanityValidatorsPageConnection = {
   group: Array<SanityValidatorsPageGroupConnection>;
 };
 
-
 export type SanityValidatorsPageConnectionDistinctArgs = {
   field: SanityValidatorsPageFieldsEnum;
 };
-
 
 export type SanityValidatorsPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -22567,7 +21937,7 @@ export enum SanityValidatorsPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityValidatorsPageFilterInput = {
@@ -22617,7 +21987,6 @@ export type SanityValuesImageItem = {
   _rawImage: Maybe<Scalars['JSON']>;
 };
 
-
 export type SanityValuesImageItem_RawImageArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
@@ -22650,28 +22019,28 @@ export type SanityWalletAddressRegistrationFormSectionFilterInput = {
   recaptchaMessage: Maybe<StringQueryOperatorInput>;
 };
 
-export type SanityWalletAddressRegistrationPage = SanityDocument & Node & {
-  __typename?: 'SanityWalletAddressRegistrationPage';
-  _id: Maybe<Scalars['String']>;
-  _type: Maybe<Scalars['String']>;
-  _createdAt: Maybe<Scalars['Date']>;
-  _updatedAt: Maybe<Scalars['Date']>;
-  _rev: Maybe<Scalars['String']>;
-  _key: Maybe<Scalars['String']>;
-  topSection: Maybe<SanityTitleBody>;
-  instructionSection: Maybe<SanityTitleCustomBody>;
-  walletSection: Maybe<SanityWalletAddressRegistrationWalletSection>;
-  formSection: Maybe<SanityWalletAddressRegistrationFormSection>;
-  _rawTopSection: Maybe<Scalars['JSON']>;
-  _rawInstructionSection: Maybe<Scalars['JSON']>;
-  _rawWalletSection: Maybe<Scalars['JSON']>;
-  _rawFormSection: Maybe<Scalars['JSON']>;
-  id: Scalars['ID'];
-  parent: Maybe<Node>;
-  children: Array<Node>;
-  internal: Internal;
-};
-
+export type SanityWalletAddressRegistrationPage = SanityDocument &
+  Node & {
+    __typename?: 'SanityWalletAddressRegistrationPage';
+    _id: Maybe<Scalars['String']>;
+    _type: Maybe<Scalars['String']>;
+    _createdAt: Maybe<Scalars['Date']>;
+    _updatedAt: Maybe<Scalars['Date']>;
+    _rev: Maybe<Scalars['String']>;
+    _key: Maybe<Scalars['String']>;
+    topSection: Maybe<SanityTitleBody>;
+    instructionSection: Maybe<SanityTitleCustomBody>;
+    walletSection: Maybe<SanityWalletAddressRegistrationWalletSection>;
+    formSection: Maybe<SanityWalletAddressRegistrationFormSection>;
+    _rawTopSection: Maybe<Scalars['JSON']>;
+    _rawInstructionSection: Maybe<Scalars['JSON']>;
+    _rawWalletSection: Maybe<Scalars['JSON']>;
+    _rawFormSection: Maybe<Scalars['JSON']>;
+    id: Scalars['ID'];
+    parent: Maybe<Node>;
+    children: Array<Node>;
+    internal: Internal;
+  };
 
 export type SanityWalletAddressRegistrationPage_CreatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -22680,7 +22049,6 @@ export type SanityWalletAddressRegistrationPage_CreatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityWalletAddressRegistrationPage_UpdatedAtArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -22688,21 +22056,17 @@ export type SanityWalletAddressRegistrationPage_UpdatedAtArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-
 export type SanityWalletAddressRegistrationPage_RawTopSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityWalletAddressRegistrationPage_RawInstructionSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
 
-
 export type SanityWalletAddressRegistrationPage_RawWalletSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
 };
-
 
 export type SanityWalletAddressRegistrationPage_RawFormSectionArgs = {
   resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
@@ -22718,11 +22082,9 @@ export type SanityWalletAddressRegistrationPageConnection = {
   group: Array<SanityWalletAddressRegistrationPageGroupConnection>;
 };
 
-
 export type SanityWalletAddressRegistrationPageConnectionDistinctArgs = {
   field: SanityWalletAddressRegistrationPageFieldsEnum;
 };
-
 
 export type SanityWalletAddressRegistrationPageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -22872,7 +22234,7 @@ export enum SanityWalletAddressRegistrationPageFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SanityWalletAddressRegistrationPageFilterInput = {
@@ -22921,10 +22283,10 @@ export type SanityWalletAddressRegistrationWalletSection = {
   _rawNoWalletFound: Maybe<Scalars['JSON']>;
 };
 
-
-export type SanityWalletAddressRegistrationWalletSection_RawNoWalletFoundArgs = {
-  resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
-};
+export type SanityWalletAddressRegistrationWalletSection_RawNoWalletFoundArgs =
+  {
+    resolveReferences: Maybe<SanityResolveReferencesConfiguration>;
+  };
 
 export type SanityWalletAddressRegistrationWalletSectionFilterInput = {
   _key: Maybe<StringQueryOperatorInput>;
@@ -22949,7 +22311,6 @@ export type Site = Node & {
   internal: Internal;
 };
 
-
 export type SiteBuildTimeArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
@@ -22965,7 +22326,6 @@ export type SiteBuildMetadata = Node & {
   internal: Internal;
   buildTime: Maybe<Scalars['Date']>;
 };
-
 
 export type SiteBuildMetadataBuildTimeArgs = {
   formatString: Maybe<Scalars['String']>;
@@ -22984,11 +22344,9 @@ export type SiteBuildMetadataConnection = {
   group: Array<SiteBuildMetadataGroupConnection>;
 };
 
-
 export type SiteBuildMetadataConnectionDistinctArgs = {
   field: SiteBuildMetadataFieldsEnum;
 };
-
 
 export type SiteBuildMetadataConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -23090,7 +22448,7 @@ export enum SiteBuildMetadataFieldsEnum {
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
   InternalType = 'internal___type',
-  BuildTime = 'buildTime'
+  BuildTime = 'buildTime',
 }
 
 export type SiteBuildMetadataFilterInput = {
@@ -23126,11 +22484,9 @@ export type SiteConnection = {
   group: Array<SiteGroupConnection>;
 };
 
-
 export type SiteConnectionDistinctArgs = {
   field: SiteFieldsEnum;
 };
-
 
 export type SiteConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -23240,7 +22596,7 @@ export enum SiteFieldsEnum {
   InternalIgnoreType = 'internal___ignoreType',
   InternalMediaType = 'internal___mediaType',
   InternalOwner = 'internal___owner',
-  InternalType = 'internal___type'
+  InternalType = 'internal___type',
 }
 
 export type SiteFilterInput = {
@@ -23294,11 +22650,9 @@ export type SitePageConnection = {
   group: Array<SitePageGroupConnection>;
 };
 
-
 export type SitePageConnectionDistinctArgs = {
   field: SitePageFieldsEnum;
 };
-
 
 export type SitePageConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -23518,7 +22872,7 @@ export enum SitePageFieldsEnum {
   PluginCreatorPackageJsonPeerDependenciesVersion = 'pluginCreator___packageJson___peerDependencies___version',
   PluginCreatorPackageJsonKeywords = 'pluginCreator___packageJson___keywords',
   PluginCreatorId = 'pluginCreatorId',
-  ComponentPath = 'componentPath'
+  ComponentPath = 'componentPath',
 }
 
 export type SitePageFilterInput = {
@@ -23580,11 +22934,9 @@ export type SitePluginConnection = {
   group: Array<SitePluginGroupConnection>;
 };
 
-
 export type SitePluginConnectionDistinctArgs = {
   field: SitePluginFieldsEnum;
 };
-
 
 export type SitePluginConnectionGroupArgs = {
   skip: Maybe<Scalars['Int']>;
@@ -23746,7 +23098,7 @@ export enum SitePluginFieldsEnum {
   PackageJsonPeerDependencies = 'packageJson___peerDependencies',
   PackageJsonPeerDependenciesName = 'packageJson___peerDependencies___name',
   PackageJsonPeerDependenciesVersion = 'packageJson___peerDependencies___version',
-  PackageJsonKeywords = 'packageJson___keywords'
+  PackageJsonKeywords = 'packageJson___keywords',
 }
 
 export type SitePluginFilterInput = {
@@ -23984,7 +23336,7 @@ export type SiteSortInput = {
 
 export enum SortOrderEnum {
   Asc = 'ASC',
-  Desc = 'DESC'
+  Desc = 'DESC',
 }
 
 export type StringQueryOperatorInput = {
@@ -24009,2577 +23361,3333 @@ export type WebPOptions = {
   quality: Maybe<Scalars['Int']>;
 };
 
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_1_Query = (
-  { __typename?: 'Query' }
-  & { seoImage: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )>, site: Maybe<(
-    { __typename?: 'Site' }
-    & { siteMetadata: Maybe<(
-      { __typename?: 'SiteSiteMetadata' }
-      & Pick<SiteSiteMetadata, 'title' | 'description' | 'author' | 'siteUrl'>
-    )> }
-  )> }
-);
-
-export type ButtonFieldsFragment = (
-  { __typename?: 'SanityButton' }
-  & Pick<SanityButton, 'buttonText' | 'buttonModal' | 'buttonBlankTarget'>
-  & { buttonLink: Maybe<(
-    { __typename?: 'SanityLink' }
-    & LinkFieldsFragment
-  )> }
-);
-
-export type CallToActionFieldsFragment = (
-  { __typename?: 'SanityCallToAction' }
-  & Pick<SanityCallToAction, 'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'>
-  & { image: Maybe<(
-    { __typename?: 'SanityImage' }
-    & ImageFragment
-  )> }
-);
-
-export type CustomImageFieldsFragment = (
-  { __typename?: 'SanityCustomImage' }
-  & Pick<SanityCustomImage, 'imageAlt' | 'imageHref'>
-  & { image: Maybe<(
-    { __typename?: 'SanityImage' }
-    & { asset: Maybe<(
-      { __typename?: 'SanityImageAsset' }
-      & Pick<SanityImageAsset, 'url'>
-    )> }
-    & ImageWithPreviewFragment
-  )> }
-);
-
-export type FluidSanityImageFieldsFragment = (
-  { __typename?: 'SanityImage' }
-  & { asset: Maybe<(
-    { __typename?: 'SanityImageAsset' }
-    & { fluid: Maybe<(
-      { __typename?: 'SanityImageFluid' }
-      & GatsbySanityImageFluidFragment
-    )> }
-  )> }
-);
-
-export type FluidSanityImageFields_WithWebpFragment = (
-  { __typename?: 'SanityImage' }
-  & { asset: Maybe<(
-    { __typename?: 'SanityImageAsset' }
-    & { fluid: Maybe<(
-      { __typename?: 'SanityImageFluid' }
-      & GatsbySanityImageFluid_WithWebpFragment
-    )> }
-  )> }
-);
-
-export type FluidCustomImageFieldsFragment = (
-  { __typename?: 'SanityCustomImage' }
-  & Pick<SanityCustomImage, 'imageAlt'>
-  & { image: Maybe<(
-    { __typename?: 'SanityImage' }
-    & FluidSanityImageFieldsFragment
-  )> }
-);
-
-export type FluidCustomImageFields_WithWebpFragment = (
-  { __typename?: 'SanityCustomImage' }
-  & Pick<SanityCustomImage, 'imageAlt'>
-  & { image: Maybe<(
-    { __typename?: 'SanityImage' }
-    & FluidSanityImageFields_WithWebpFragment
-  )> }
-);
-
-export type GatsbyImageSharpFluid_WithWebpFragment = (
-  { __typename?: 'ImageSharpFluid' }
-  & Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>
-);
-
-export type GatsbyImageSharpFluidFragment = (
-  { __typename?: 'ImageSharpFluid' }
-  & Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>
-);
-
-export type GatsbyImageSharpFixedFragment = (
-  { __typename?: 'ImageSharpFixed' }
-  & Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>
-);
-
-export type GatsbyImageSharpFixed_WithWebpFragment = (
-  { __typename?: 'ImageSharpFixed' }
-  & Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>
-);
-
-export type GatsbySanityImageFluid_WithWebpFragment = (
-  { __typename?: 'SanityImageFluid' }
-  & Pick<SanityImageFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>
-);
-
-export type GatsbySanityImageFluidFragment = (
-  { __typename?: 'SanityImageFluid' }
-  & Pick<SanityImageFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>
-);
-
-export type GatsbySanityImageFixed_WithWebpFragment = (
-  { __typename?: 'SanityImageFixed' }
-  & Pick<SanityImageFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>
-);
-
-export type GatsbySanityImageFixedFragment = (
-  { __typename?: 'SanityImageFixed' }
-  & Pick<SanityImageFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>
-);
-
-export type LinkFieldsFragment = (
-  { __typename?: 'SanityLink' }
-  & Pick<SanityLink, 'buttonHref'>
-  & { buttonDoc: Maybe<(
-    { __typename?: 'SanityDoc' }
-    & Pick<SanityDoc, 'href'>
-  )> }
-);
-
-export type MediaFieldsFragment = (
-  { __typename?: 'SanityMedia' }
-  & Pick<SanityMedia, 'title' | 'author' | 'date' | 'href' | 'type'>
-  & { image: Maybe<(
-    { __typename?: 'SanityCustomImage' }
-    & CustomImageFieldsFragment
-  )> }
-);
-
-export type ImageFragment = (
-  { __typename?: 'SanityImage' }
-  & { hotspot: Maybe<(
-    { __typename?: 'SanityImageHotspot' }
-    & Pick<SanityImageHotspot, 'height' | 'width' | 'x' | 'y'>
-  )>, crop: Maybe<(
-    { __typename?: 'SanityImageCrop' }
-    & Pick<SanityImageCrop, 'bottom' | 'left' | 'right' | 'top'>
-  )>, asset: Maybe<(
-    { __typename?: 'SanityImageAsset' }
-    & Pick<SanityImageAsset, '_id' | 'url'>
-  )> }
-);
-
-export type ImageWithPreviewFragment = (
-  { __typename?: 'SanityImage' }
-  & { asset: Maybe<(
-    { __typename?: 'SanityImageAsset' }
-    & Pick<SanityImageAsset, 'url'>
-    & { metadata: Maybe<(
-      { __typename?: 'SanityImageMetadata' }
-      & { preview: SanityImageMetadata['lqip'] }
-    )> }
-  )> }
-  & ImageFragment
-);
-
-export type TeamMemberFieldsFragment = (
-  { __typename?: 'SanityRegenTeamMember' }
-  & Pick<SanityRegenTeamMember, 'name' | 'title' | 'linkedinUrl' | 'twitterUrl' | 'githubUrl'>
-  & { image: Maybe<(
-    { __typename?: 'SanityImage' }
-    & { asset: Maybe<(
-      { __typename?: 'SanityImageAsset' }
-      & Pick<SanityImageAsset, 'url'>
-    )> }
-  )> }
-);
-
-export type TeamSectionFieldsFragment = (
-  { __typename?: 'SanityTeamSection' }
-  & Pick<SanityTeamSection, 'title'>
-  & { members: Maybe<Array<Maybe<(
-    { __typename?: 'SanityRegenTeamMember' }
-    & TeamMemberFieldsFragment
-  )>>> }
-);
-
-export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_2_Query = (
-  { __typename?: 'Query' }
-  & { grazing: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_3_Query = (
-  { __typename?: 'Query' }
-  & { seoImage: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )> }
-);
-
-export type ContactPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ContactPageQuery = (
-  { __typename?: 'Query' }
-  & { sanityContactPage: Maybe<(
-    { __typename?: 'SanityContactPage' }
-    & Pick<SanityContactPage, 'header' | '_rawBody' | '_rawMessageForPartners'>
-    & { formRequestTypes: Maybe<Array<Maybe<(
-      { __typename?: 'SanityRequestType' }
-      & Pick<SanityRequestType, 'label' | 'value'>
-    )>>>, location: Maybe<(
-      { __typename?: 'SanityTitleImageCustomBody' }
-      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFieldsFragment
-      )> }
-    )>, email: Maybe<(
-      { __typename?: 'SanityTitleCustomBody' }
-      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
-    )>, faq: Maybe<(
-      { __typename?: 'SanityTitleImage' }
-      & Pick<SanityTitleImage, 'title'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFieldsFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_4_Query = (
-  { __typename?: 'Query' }
-  & { seoImage: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )> }
-);
-
-export type FaqPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FaqPageQuery = (
-  { __typename?: 'Query' }
-  & { sanityFaqPage: Maybe<(
-    { __typename?: 'SanityFaqPage' }
-    & { categories: Maybe<Array<Maybe<(
-      { __typename?: 'SanityFaqCategory' }
-      & Pick<SanityFaqCategory, 'header'>
-      & { questions: Maybe<Array<Maybe<(
-        { __typename?: 'SanityFaq' }
-        & Pick<SanityFaq, 'question' | '_rawAnswer'>
-      )>>> }
-    )>>> }
-  )> }
-);
-
-export type FundPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FundPageQuery = (
-  { __typename?: 'Query' }
-  & { seoImage: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )>, sanityFundPage: Maybe<(
-    { __typename?: 'SanityFundPage' }
-    & Pick<SanityFundPage, 'seoTitle' | 'seoDescription'>
-  )> }
-);
-
-export type HomePageWebQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type HomePageWebQuery = (
-  { __typename?: 'Query' }
-  & { seoImage: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )>, background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, backgroundMobile: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type MainnetPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MainnetPageQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityMainnetPage: Maybe<(
-    { __typename?: 'SanityMainnetPage' }
-    & Pick<SanityMainnetPage, 'launchDate' | 'seoDescription' | 'livecastLink'>
-  )> }
-);
-
-export type MediaPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MediaPageQuery = (
-  { __typename?: 'Query' }
-  & { allSanityMedia: (
-    { __typename?: 'SanityMediaConnection' }
-    & { nodes: Array<(
-      { __typename?: 'SanityMedia' }
-      & Pick<SanityMedia, 'title' | 'author' | 'date' | 'type' | 'href'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & { image: Maybe<(
-          { __typename?: 'SanityImage' }
-          & { asset: Maybe<(
-            { __typename?: 'SanityImageAsset' }
-            & Pick<SanityImageAsset, 'url'>
-          )> }
-        )> }
-      )> }
-    )> }
-  ) }
-);
-
-export type NctPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type NctPageQuery = (
-  { __typename?: 'Query' }
-  & { sanityNctPage: Maybe<(
-    { __typename?: 'SanityNctPage' }
-    & { seo: Maybe<(
-      { __typename?: 'SanitySeo' }
-      & Pick<SanitySeo, 'title' | 'description'>
-      & { image: Maybe<(
-        { __typename?: 'SanityImage' }
-        & { asset: Maybe<(
-          { __typename?: 'SanityImageAsset' }
-          & Pick<SanityImageAsset, 'url'>
-        )> }
-      )> }
-    )> }
-  )> }
-);
-
-export type PartnersPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PartnersPageQuery = (
-  { __typename?: 'Query' }
-  & { sanityPartnersPage: Maybe<(
-    { __typename?: 'SanityPartnersPage' }
-    & Pick<SanityPartnersPage, 'header' | 'contactHeader' | '_rawContactBody'>
-    & { partners: Maybe<Array<Maybe<(
-      { __typename?: 'SanityPartnerLogo' }
-      & Pick<SanityPartnerLogo, 'link'>
-      & { image: Maybe<(
-        { __typename?: 'SanityImage' }
-        & { asset: Maybe<(
-          { __typename?: 'SanityImageAsset' }
-          & Pick<SanityImageAsset, 'url'>
-        )> }
-      )> }
-    )>>> }
-  )> }
-);
-
-export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_5_Query = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_6_Query = (
-  { __typename?: 'Query' }
-  & { markdownRemark: Maybe<(
-    { __typename?: 'MarkdownRemark' }
-    & Pick<MarkdownRemark, 'html'>
-  )> }
-);
-
-export type Unnamed_7_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_7_Query = (
-  { __typename?: 'Query' }
-  & { seoImage: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )> }
-);
-
-export type Unnamed_8_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_8_Query = (
-  { __typename?: 'Query' }
-  & { seoImage: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )>, image: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluidFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_9_Query = (
-  { __typename?: 'Query' }
-  & { seoImage: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )> }
-);
-
-export type Unnamed_10_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_10_Query = (
-  { __typename?: 'Query' }
-  & { markdownRemark: Maybe<(
-    { __typename?: 'MarkdownRemark' }
-    & Pick<MarkdownRemark, 'html'>
-  )> }
-);
-
-export type TokenPageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TokenPageQuery = (
-  { __typename?: 'Query' }
-  & { seoImage: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )>, emailImage: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluidFragment
-      )> }
-    )> }
-  )>, sanityTokenPage: Maybe<(
-    { __typename?: 'SanityTokenPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )>, newsletterSection: Maybe<(
-      { __typename?: 'SanityTokenNewsletterSection' }
-      & Pick<SanityTokenNewsletterSection, 'header' | 'buttonText' | 'inputText'>
-    )> }
-  )> }
-);
-
-export type Unnamed_11_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_11_Query = (
-  { __typename?: 'Query' }
-  & { seoImage: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )> }
-);
-
-export type Unnamed_12_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_12_Query = (
-  { __typename?: 'Query' }
-  & { seoImage: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )> }
-);
-
-export type CaseStudiesListSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CaseStudiesListSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityCaseStudiesPage: Maybe<(
-    { __typename?: 'SanityCaseStudiesPage' }
-    & { listSection: Maybe<(
-      { __typename?: 'SanityCaseStudiesListSection' }
-      & Pick<SanityCaseStudiesListSection, 'header' | 'view'>
-    )>, topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )>, caseStudies: Maybe<Array<Maybe<(
-      { __typename?: 'SanityCaseStudyPage' }
-      & Pick<SanityCaseStudyPage, 'name' | 'description'>
-      & { slug: Maybe<(
-        { __typename?: 'SanitySlug' }
-        & Pick<SanitySlug, 'current'>
-      )>, cardImage: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & { image: Maybe<(
-          { __typename?: 'SanityImage' }
-          & { asset: Maybe<(
-            { __typename?: 'SanityImageAsset' }
-            & Pick<SanityImageAsset, 'url'>
-          )> }
-        )> }
-      )> }
-    )>>> }
-  )> }
-);
-
-export type CaseStudyTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CaseStudyTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityCaseStudiesPage: Maybe<(
-    { __typename?: 'SanityCaseStudiesPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type CaseStudyAboutSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CaseStudyAboutSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityCaseStudiesPage: Maybe<(
-    { __typename?: 'SanityCaseStudiesPage' }
-    & { aboutSection: Maybe<(
-      { __typename?: 'SanityCaseStudiesAboutSection' }
-      & Pick<SanityCaseStudiesAboutSection, 'header' | 'practice' | 'biome' | 'region'>
-    )> }
-  )> }
-);
-
-export type CaseStudyApproachSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CaseStudyApproachSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityCaseStudiesPage: Maybe<(
-    { __typename?: 'SanityCaseStudiesPage' }
-    & { approachSection: Maybe<(
-      { __typename?: 'SanityCaseStudiesApproachSection' }
-      & Pick<SanityCaseStudiesApproachSection, 'header' | 'subheader' | 'details' | 'results' | 'next'>
-    )> }
-  )> }
-);
-
-export type CaseStudyConclusionSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CaseStudyConclusionSectionQuery = (
-  { __typename?: 'Query' }
-  & { bg: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityCaseStudiesPage: Maybe<(
-    { __typename?: 'SanityCaseStudiesPage' }
-    & Pick<SanityCaseStudiesPage, 'conclusionSectionHeader'>
-  )> }
-);
-
-export type CaseStudyContextSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CaseStudyContextSectionQuery = (
-  { __typename?: 'Query' }
-  & { bg: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, imageBg: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityCaseStudiesPage: Maybe<(
-    { __typename?: 'SanityCaseStudiesPage' }
-    & { contextSection: Maybe<(
-      { __typename?: 'SanityCaseStudiesContextSection' }
-      & Pick<SanityCaseStudiesContextSection, 'header' | 'challenges'>
-    )> }
-  )> }
-);
-
-export type CaseStudyFundingSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CaseStudyFundingSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityCaseStudiesPage: Maybe<(
-    { __typename?: 'SanityCaseStudiesPage' }
-    & { fundingSection: Maybe<(
-      { __typename?: 'SanityCaseStudiesFundingSection' }
-      & Pick<SanityCaseStudiesFundingSection, '_rawHeader' | 'details' | 'results' | 'next'>
-    )> }
-  )> }
-);
-
-export type CommunityCollaborateSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CommunityCollaborateSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityCommunityPage: Maybe<(
-    { __typename?: 'SanityCommunityPage' }
-    & { collaborateSection: Maybe<(
-      { __typename?: 'SanityCommunityCollaborateSection' }
-      & { titleBody: Maybe<(
-        { __typename?: 'SanityTitleCustomBody' }
-        & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
-      )>, cards: Maybe<Array<Maybe<(
-        { __typename?: 'SanityResourcesCard' }
-        & Pick<SanityResourcesCard, 'title' | 'description' | 'buttonText' | 'buttonHref'>
-        & { image: Maybe<(
-          { __typename?: 'SanityCustomImage' }
-          & { image: Maybe<(
-            { __typename?: 'SanityImage' }
-            & { asset: Maybe<(
-              { __typename?: 'SanityImageAsset' }
-              & Pick<SanityImageAsset, 'url'>
-            )> }
-          )> }
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type CommunityCollectiveSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CommunityCollectiveSectionQuery = (
-  { __typename?: 'Query' }
-  & { bg: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityCommunityPage: Maybe<(
-    { __typename?: 'SanityCommunityPage' }
-    & { collectiveSection: Maybe<(
-      { __typename?: 'SanityCommunityCollectiveSection' }
-      & Pick<SanityCommunityCollectiveSection, 'title' | '_rawBody' | 'buttonText' | 'signupFormUrl'>
-    )> }
-  )> }
-);
-
-export type CommunityConnectSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CommunityConnectSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityCommunityPage: Maybe<(
-    { __typename?: 'SanityCommunityPage' }
-    & { connectSection: Maybe<(
-      { __typename?: 'SanityCommunityConnectSection' }
-      & Pick<SanityCommunityConnectSection, 'header' | 'telegramSubLabel' | 'telegramUrl' | 'twitterSubLabel' | 'twitterUrl' | 'discordSubLabel' | 'discordUrl'>
-    )> }
-  )> }
-);
-
-export type CommunityGoToSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CommunityGoToSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityCommunityPage: Maybe<(
-    { __typename?: 'SanityCommunityPage' }
-    & { goToSection: Maybe<(
-      { __typename?: 'SanityCommunityGoToSection' }
-      & Pick<SanityCommunityGoToSection, 'blogButtonText' | 'discussionButtonHref' | 'discussionButtonText' | 'discussionLabel' | 'blogLabel' | 'videoButtonHref' | 'videoLabel' | 'videoButtonText' | 'blogButtonHref'>
-    )> }
-  )> }
-);
-
-export type CommunityTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CommunityTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { desktop: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityCommunityPage: Maybe<(
-    { __typename?: 'SanityCommunityPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type DevApproachSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type DevApproachSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityDevelopersPage: Maybe<(
-    { __typename?: 'SanityDevelopersPage' }
-    & { approachSection: Maybe<(
-      { __typename?: 'SanityDevApproachSection' }
-      & Pick<SanityDevApproachSection, 'caption' | 'header' | '_rawBody'>
-    )> }
-  )> }
-);
-
-export type DevCareersSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type DevCareersSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityDevelopersPage: Maybe<(
-    { __typename?: 'SanityDevelopersPage' }
-    & { careersSection: Maybe<(
-      { __typename?: 'SanityDevCareersSection' }
-      & Pick<SanityDevCareersSection, 'caption' | 'header' | '_rawBody'>
-      & { button: Maybe<(
-        { __typename?: 'SanityButton' }
-        & ButtonFieldsFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type DevConnectSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type DevConnectSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityDevelopersPage: Maybe<(
-    { __typename?: 'SanityDevelopersPage' }
-    & Pick<SanityDevelopersPage, 'connectSectionHeader'>
-  )> }
-);
-
-export type DevInvolvedSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type DevInvolvedSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityDevelopersPage: Maybe<(
-    { __typename?: 'SanityDevelopersPage' }
-    & Pick<SanityDevelopersPage, 'involvedSectionHeader'>
-  )> }
-);
-
-export type DevLedgerSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type DevLedgerSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityDevelopersPage: Maybe<(
-    { __typename?: 'SanityDevelopersPage' }
-    & { ledgerSection: Maybe<(
-      { __typename?: 'SanityDevLedgerSection' }
-      & Pick<SanityDevLedgerSection, 'header' | '_rawBody'>
-      & { cosmosImage: Maybe<(
-        { __typename?: 'SanityImage' }
-        & ImageWithPreviewFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type DevOpenAgSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type DevOpenAgSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityDevelopersPage: Maybe<(
-    { __typename?: 'SanityDevelopersPage' }
-    & { openAgSection: Maybe<(
-      { __typename?: 'SanityDevOpenAgSection' }
-      & Pick<SanityDevOpenAgSection, 'header' | '_rawBody'>
-      & { image: Maybe<(
-        { __typename?: 'SanityImage' }
-        & ImageWithPreviewFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type DevelopersTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type DevelopersTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityDevelopersPage: Maybe<(
-    { __typename?: 'SanityDevelopersPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type FundCallToActionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FundCallToActionQuery = (
-  { __typename?: 'Query' }
-  & { sanityFundPage: Maybe<(
-    { __typename?: 'SanityFundPage' }
-    & { callsToAction: Maybe<Array<Maybe<(
-      { __typename?: 'SanityFundCallToAction' }
-      & Pick<SanityFundCallToAction, 'header' | '_rawDescription'>
-      & { image: Maybe<(
-        { __typename?: 'SanityImage' }
-        & ImageFragment
-      )> }
-    )>>> }
-  )> }
-);
-
-export type FundFoldSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FundFoldSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityFundPage: Maybe<(
-    { __typename?: 'SanityFundPage' }
-    & { foldSection: Maybe<(
-      { __typename?: 'SanityTitleCustomBody' }
-      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
-    )> }
-  )> }
-);
-
-export type FundThesisSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FundThesisSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityFundPage: Maybe<(
-    { __typename?: 'SanityFundPage' }
-    & { thesisSection: Maybe<(
-      { __typename?: 'SanityTitleCustomBody' }
-      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
-    )> }
-  )> }
-);
-
-export type FundTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FundTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityFundPage: Maybe<(
-    { __typename?: 'SanityFundPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleCustomBody' }
-      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
-    )> }
-  )> }
-);
-
-export type BannerTextSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type BannerTextSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityHomePageWeb: Maybe<(
-    { __typename?: 'SanityHomePageWeb' }
-    & { bannerTextSection: Maybe<(
-      { __typename?: 'SanityTitleImageCustomBody' }
-      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFieldsFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type HomeCarbonplusSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type HomeCarbonplusSectionQuery = (
-  { __typename?: 'Query' }
-  & { cow: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityHomePageWeb: Maybe<(
-    { __typename?: 'SanityHomePageWeb' }
-    & { carbonPlusSection: Maybe<(
-      { __typename?: 'SanityCarbonPlusSection' }
-      & Pick<SanityCarbonPlusSection, 'smallHeaderFeatured' | 'smallHeaderCreditName' | 'header' | 'description' | 'linkText' | 'linkUrl'>
-    )> }
-  )> }
-);
-
-export type HomeClimateSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type HomeClimateSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityHomePageWeb: Maybe<(
-    { __typename?: 'SanityHomePageWeb' }
-    & { climateSection: Maybe<(
-      { __typename?: 'SanityClimateSection' }
-      & Pick<SanityClimateSection, 'header' | 'description'>
-      & { image: Maybe<(
-        { __typename?: 'SanityImage' }
-        & ImageWithPreviewFragment
-      )>, solution: Maybe<(
-        { __typename?: 'SanityTitleBody' }
-        & Pick<SanityTitleBody, 'title' | 'body'>
-      )>, problem: Maybe<(
-        { __typename?: 'SanityTitleBody' }
-        & Pick<SanityTitleBody, 'title' | 'body'>
-      )> }
-    )> }
-  )> }
-);
-
-export type HomeFoldSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type HomeFoldSectionQuery = (
-  { __typename?: 'Query' }
-  & { desktop: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityHomePageWeb: Maybe<(
-    { __typename?: 'SanityHomePageWeb' }
-    & { homeFoldSection: Maybe<(
-      { __typename?: 'SanityHomeFoldSection' }
-      & Pick<SanityHomeFoldSection, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type HomeLedgerSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type HomeLedgerSectionQuery = (
-  { __typename?: 'Query' }
-  & { bg: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, ledger: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityHomePageWeb: Maybe<(
-    { __typename?: 'SanityHomePageWeb' }
-    & Pick<SanityHomePageWeb, 'ledgerDescription'>
-  )> }
-);
-
-export type HomeMarketPlaceSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type HomeMarketPlaceSectionQuery = (
-  { __typename?: 'Query' }
-  & { bg: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityHomePageWeb: Maybe<(
-    { __typename?: 'SanityHomePageWeb' }
-    & { marketplaceSection: Maybe<(
-      { __typename?: 'SanityMarketplaceSection' }
-      & Pick<SanityMarketplaceSection, 'header' | 'tooltip'>
-      & { body: Maybe<(
-        { __typename?: 'SanityBodyGreenTextWithPopover' }
-        & Pick<SanityBodyGreenTextWithPopover, 'green' | 'middle' | 'popover' | 'end'>
-      )>, callToActions: Maybe<Array<Maybe<(
-        { __typename?: 'SanityCallToAction' }
-        & CallToActionFieldsFragment
-      )>>> }
-    )> }
-  )> }
-);
-
-export type HomeValuesSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type HomeValuesSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityHomePageWeb: Maybe<(
-    { __typename?: 'SanityHomePageWeb' }
-    & { valuesSection: Maybe<(
-      { __typename?: 'SanityHomeValuesSection' }
-      & Pick<SanityHomeValuesSection, 'header'>
-      & { imageItems: Maybe<Array<Maybe<(
-        { __typename?: 'SanityValuesImageItem' }
-        & Pick<SanityValuesImageItem, 'title' | 'description'>
-        & { image: Maybe<(
-          { __typename?: 'SanityImage' }
-          & ImageFragment
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type MainnetLaunchInfoSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MainnetLaunchInfoSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityMainnetPage: Maybe<(
-    { __typename?: 'SanityMainnetPage' }
-    & Pick<SanityMainnetPage, 'launchDate'>
-    & { launchInfoSection: Maybe<(
-      { __typename?: 'SanityMainnetLaunchInfoSection' }
-      & Pick<SanityMainnetLaunchInfoSection, 'title' | 'cardTitle' | '_rawCardBody'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFields_WithWebpFragment
-      )>, actionItems: Maybe<Array<Maybe<(
-        { __typename?: 'SanityMainnetActionItem' }
-        & Pick<SanityMainnetActionItem, 'title' | 'linkText' | 'linkUrl' | 'description'>
-        & { icon: Maybe<(
-          { __typename?: 'SanityCustomImage' }
-          & Pick<SanityCustomImage, 'imageAlt'>
-          & { image: Maybe<(
-            { __typename?: 'SanityImage' }
-            & ImageFragment
-          )> }
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type MainnetMediaSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MainnetMediaSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityMainnetPage: Maybe<(
-    { __typename?: 'SanityMainnetPage' }
-    & { mediaItems: Maybe<Array<Maybe<(
-      { __typename?: 'SanityMedia' }
-      & MediaFieldsFragment
-    )>>> }
-  )> }
-);
-
-export type MainnetTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MainnetTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { desktop: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityMainnetPage: Maybe<(
-    { __typename?: 'SanityMainnetPage' }
-    & Pick<SanityMainnetPage, 'launchDate'>
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type MainnetWhatsNextSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MainnetWhatsNextSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityMainnetPage: Maybe<(
-    { __typename?: 'SanityMainnetPage' }
-    & { whatsNextSection: Maybe<(
-      { __typename?: 'SanityMainnetWhatsNextSection' }
-      & Pick<SanityMainnetWhatsNextSection, 'title' | '_rawDescription'>
-      & { infoItems: Maybe<Array<Maybe<(
-        { __typename?: 'SanityMainnetInfoItem' }
-        & Pick<SanityMainnetInfoItem, 'title' | '_rawDescription' | 'gitLink'>
-        & { icon: Maybe<(
-          { __typename?: 'SanityCustomImage' }
-          & { image: Maybe<(
-            { __typename?: 'SanityImage' }
-            & { asset: Maybe<(
-              { __typename?: 'SanityImageAsset' }
-              & Pick<SanityImageAsset, 'url'>
-            )> }
-          )> }
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type NctBannerSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type NctBannerSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityNctPage: Maybe<(
-    { __typename?: 'SanityNctPage' }
-    & { banner: Maybe<(
-      { __typename?: 'SanityTitleImageCustomBody' }
-      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFieldsFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type NctLedgerSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type NctLedgerSectionQuery = (
-  { __typename?: 'Query' }
-  & { bg: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityNctPage: Maybe<(
-    { __typename?: 'SanityNctPage' }
-    & { ledgerSection: Maybe<(
-      { __typename?: 'SanityNctLedgerSection' }
-      & Pick<SanityNctLedgerSection, 'title' | 'subtitle' | '_rawBody'>
-      & { icon: Maybe<(
-        { __typename?: 'SanityImage' }
-        & ImageWithPreviewFragment
-      )>, button: Maybe<(
-        { __typename?: 'SanityButton' }
-        & ButtonFieldsFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type NctMarketplaceSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type NctMarketplaceSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityNctPage: Maybe<(
-    { __typename?: 'SanityNctPage' }
-    & { marketplaceSection: Maybe<(
-      { __typename?: 'SanityTitleImageCustomBody' }
-      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & CustomImageFieldsFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type NctMediaSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type NctMediaSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityNctPage: Maybe<(
-    { __typename?: 'SanityNctPage' }
-    & { mediaItems: Maybe<Array<Maybe<(
-      { __typename?: 'SanityMedia' }
-      & MediaFieldsFragment
-    )>>> }
-  )> }
-);
-
-export type NctOverviewSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type NctOverviewSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityNctPage: Maybe<(
-    { __typename?: 'SanityNctPage' }
-    & { overviewSection: Maybe<(
-      { __typename?: 'SanityNctOverviewSection' }
-      & Pick<SanityNctOverviewSection, 'title' | '_rawBody'>
-      & { background: Maybe<(
-        { __typename?: 'SanityImage' }
-        & FluidSanityImageFieldsFragment
-      )>, titleIcon: Maybe<(
-        { __typename?: 'SanityImage' }
-        & ImageWithPreviewFragment
-      )>, button: Maybe<(
-        { __typename?: 'SanityButton' }
-        & ButtonFieldsFragment
-      )>, items: Maybe<Array<Maybe<(
-        { __typename?: 'SanityLabeledTextLinkable' }
-        & Pick<SanityLabeledTextLinkable, 'label' | 'text'>
-        & { link: Maybe<(
-          { __typename?: 'SanityLink' }
-          & LinkFieldsFragment
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type NctTokenSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type NctTokenSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityNctPage: Maybe<(
-    { __typename?: 'SanityNctPage' }
-    & Pick<SanityNctPage, 'launchDate'>
-    & { tokenSection: Maybe<(
-      { __typename?: 'SanityNctTokenSection' }
-      & Pick<SanityNctTokenSection, 'cardTitle' | 'cardSubtitle' | '_rawCardBody' | 'detailTitle' | 'detailSubtitle' | '_rawDetailBody'>
-      & { cardImage: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & CustomImageFieldsFragment
-      )>, cardButton: Maybe<(
-        { __typename?: 'SanityButton' }
-        & ButtonFieldsFragment
-      )>, detailImage: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & CustomImageFieldsFragment
-      )>, detailButton1: Maybe<(
-        { __typename?: 'SanityButton' }
-        & ButtonFieldsFragment
-      )>, detailButton2: Maybe<(
-        { __typename?: 'SanityButton' }
-        & ButtonFieldsFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type NctTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type NctTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityNctPage: Maybe<(
-    { __typename?: 'SanityNctPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleImageCustomBody' }
-      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFields_WithWebpFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type PresskitAwardsSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PresskitAwardsSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityPresskitPage: Maybe<(
-    { __typename?: 'SanityPresskitPage' }
-    & { awardsSection: Maybe<(
-      { __typename?: 'SanityPresskitAwardsSection' }
-      & Pick<SanityPresskitAwardsSection, 'header'>
-      & { items: Maybe<Array<Maybe<(
-        { __typename?: 'SanityTitleImageLink' }
-        & Pick<SanityTitleImageLink, 'title' | 'link'>
-        & { image: Maybe<(
-          { __typename?: 'SanityImage' }
-          & FluidSanityImageFields_WithWebpFragment
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type PresskitConnectSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PresskitConnectSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityPresskitPage: Maybe<(
-    { __typename?: 'SanityPresskitPage' }
-    & Pick<SanityPresskitPage, 'connectSectionHeader'>
-  )> }
-);
-
-export type PresskitEnableSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PresskitEnableSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityPresskitPage: Maybe<(
-    { __typename?: 'SanityPresskitPage' }
-    & { enableSection: Maybe<(
-      { __typename?: 'SanityTitleImageCustomBody' }
-      & Pick<SanityTitleImageCustomBody, 'title' | '_rawBody'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFields_WithWebpFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type PresskitFeaturedSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PresskitFeaturedSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityPresskitPage: Maybe<(
-    { __typename?: 'SanityPresskitPage' }
-    & { featuredSection: Maybe<(
-      { __typename?: 'SanityPresskitFeaturedSection' }
-      & Pick<SanityPresskitFeaturedSection, 'header'>
-      & { articles: Maybe<Array<Maybe<(
-        { __typename?: 'SanityMedia' }
-        & Pick<SanityMedia, 'title' | 'author' | 'date' | 'href' | 'type'>
-        & { image: Maybe<(
-          { __typename?: 'SanityCustomImage' }
-          & { image: Maybe<(
-            { __typename?: 'SanityImage' }
-            & { asset: Maybe<(
-              { __typename?: 'SanityImageAsset' }
-              & Pick<SanityImageAsset, 'url'>
-            )> }
-          )> }
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type PresskitLogosSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PresskitLogosSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityPresskitPage: Maybe<(
-    { __typename?: 'SanityPresskitPage' }
-    & { logosSection: Maybe<(
-      { __typename?: 'SanityPresskitLogosSection' }
-      & Pick<SanityPresskitLogosSection, 'header' | 'buttonText' | 'buttonLink'>
-    )> }
-  )> }
-);
-
-export type PresskitPhotosSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PresskitPhotosSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityPresskitPage: Maybe<(
-    { __typename?: 'SanityPresskitPage' }
-    & { photosSection: Maybe<(
-      { __typename?: 'SanityPresskitPhotosSection' }
-      & Pick<SanityPresskitPhotosSection, 'header'>
-      & { photos: Maybe<Array<Maybe<(
-        { __typename?: 'SanityImage' }
-        & { asset: Maybe<(
-          { __typename?: 'SanityImageAsset' }
-          & Pick<SanityImageAsset, 'url'>
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type PresskitTeamSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PresskitTeamSectionQuery = (
-  { __typename?: 'Query' }
-  & { teamBackground: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )>, background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityPresskitPage: Maybe<(
-    { __typename?: 'SanityPresskitPage' }
-    & { teamSection: Maybe<(
-      { __typename?: 'SanityPresskitTeamSection' }
-      & Pick<SanityPresskitTeamSection, 'header' | 'buttonText'>
-      & { members: Maybe<Array<Maybe<(
-        { __typename?: 'SanityRegenTeamMember' }
-        & TeamMemberFieldsFragment
-      )>>> }
-    )> }
-  )> }
-);
-
-export type PresskitTimelineSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PresskitTimelineSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityPresskitPage: Maybe<(
-    { __typename?: 'SanityPresskitPage' }
-    & { timelineSection: Maybe<(
-      { __typename?: 'SanityPresskitTimelineSection' }
-      & Pick<SanityPresskitTimelineSection, 'header' | 'description' | 'completedItemIndex'>
-      & { items: Maybe<Array<Maybe<(
-        { __typename?: 'SanityPresskitTimelineItem' }
-        & Pick<SanityPresskitTimelineItem, 'date' | 'summary' | 'description'>
-      )>>> }
-    )> }
-  )> }
-);
-
-export type PresskitTitleDescriptionSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PresskitTitleDescriptionSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityPresskitPage: Maybe<(
-    { __typename?: 'SanityPresskitPage' }
-    & { titleDescriptionSection: Maybe<(
-      { __typename?: 'SanityTitleCustomBody' }
-      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
-    )> }
-  )> }
-);
-
-export type PresskitTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PresskitTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityPresskitPage: Maybe<(
-    { __typename?: 'SanityPresskitPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type ResourcesLedgerSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ResourcesLedgerSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityResourcesPage: Maybe<(
-    { __typename?: 'SanityResourcesPage' }
-    & { ledgerSection: Maybe<(
-      { __typename?: 'SanityResourcesLedgerSection' }
-      & Pick<SanityResourcesLedgerSection, 'header'>
-      & { cards: Maybe<Array<Maybe<(
-        { __typename?: 'SanityResource' }
-        & Pick<SanityResource, '_rawTitle' | '_rawDescription' | 'lastUpdated'>
-        & { button: Maybe<(
-          { __typename?: 'SanityButton' }
-          & Pick<SanityButton, 'buttonText'>
-          & { buttonLink: Maybe<(
-            { __typename?: 'SanityLink' }
-            & Pick<SanityLink, 'buttonHref'>
-            & { buttonDoc: Maybe<(
-              { __typename?: 'SanityDoc' }
-              & Pick<SanityDoc, 'href'>
-            )> }
-          )> }
-        )>, image: Maybe<(
-          { __typename?: 'SanityCustomImage' }
-          & Pick<SanityCustomImage, 'imageHref'>
-          & { image: Maybe<(
-            { __typename?: 'SanityImage' }
-            & { asset: Maybe<(
-              { __typename?: 'SanityImageAsset' }
-              & Pick<SanityImageAsset, 'extension' | 'url'>
-            )> }
-          )> }
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type ResourcesRegistrySectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ResourcesRegistrySectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityResourcesPage: Maybe<(
-    { __typename?: 'SanityResourcesPage' }
-    & { registrySection: Maybe<(
-      { __typename?: 'SanityResourcesRegistrySection' }
-      & Pick<SanityResourcesRegistrySection, 'header' | 'documentTableTitle'>
-      & { documents: Maybe<Array<Maybe<(
-        { __typename?: 'SanityDoc' }
-        & Pick<SanityDoc, 'name' | 'type' | 'date' | 'href'>
-      )>>>, subsections: Maybe<Array<Maybe<(
-        { __typename?: 'SanityResourcesRegistrySubSection' }
-        & Pick<SanityResourcesRegistrySubSection, 'title'>
-        & { cards: Maybe<Array<Maybe<(
-          { __typename?: 'SanityResource' }
-          & Pick<SanityResource, '_rawTitle' | 'lastUpdated' | '_rawDescription'>
-          & { image: Maybe<(
-            { __typename?: 'SanityCustomImage' }
-            & Pick<SanityCustomImage, 'imageHref'>
-            & { image: Maybe<(
-              { __typename?: 'SanityImage' }
-              & { asset: Maybe<(
-                { __typename?: 'SanityImageAsset' }
-                & Pick<SanityImageAsset, 'extension' | 'url'>
-              )> }
-            )> }
-          )>, button: Maybe<(
-            { __typename?: 'SanityButton' }
-            & Pick<SanityButton, 'buttonText'>
-            & { buttonLink: Maybe<(
-              { __typename?: 'SanityLink' }
-              & Pick<SanityLink, 'buttonHref'>
-              & { buttonDoc: Maybe<(
-                { __typename?: 'SanityDoc' }
-                & Pick<SanityDoc, 'href'>
-              )> }
-            )> }
-          )> }
-        )>>> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type ResourcesTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ResourcesTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, backgroundMobile: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityResourcesPage: Maybe<(
-    { __typename?: 'SanityResourcesPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type ScienceCommunitySectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ScienceCommunitySectionQuery = (
-  { __typename?: 'Query' }
-  & { arrow: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanitySciencePage: Maybe<(
-    { __typename?: 'SanitySciencePage' }
-    & { communitySection: Maybe<(
-      { __typename?: 'SanityScienceCommunitySection' }
-      & Pick<SanityScienceCommunitySection, 'caption' | 'header'>
-      & { members: Maybe<Array<Maybe<(
-        { __typename?: 'SanityScienceCommunityMember' }
-        & Pick<SanityScienceCommunityMember, 'name' | '_rawRole' | '_rawDescription'>
-        & { image: Maybe<(
-          { __typename?: 'SanityCustomImage' }
-          & Pick<SanityCustomImage, 'imageHref'>
-          & { image: Maybe<(
-            { __typename?: 'SanityImage' }
-            & { asset: Maybe<(
-              { __typename?: 'SanityImageAsset' }
-              & Pick<SanityImageAsset, 'url'>
-            )> }
-          )> }
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type ScienceOpenScienceSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ScienceOpenScienceSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanitySciencePage: Maybe<(
-    { __typename?: 'SanitySciencePage' }
-    & { openScienceSection: Maybe<(
-      { __typename?: 'SanityScienceOpenScienceSection' }
-      & Pick<SanityScienceOpenScienceSection, 'headerStart' | 'headerGreen' | 'caption'>
-      & { phases: Maybe<Array<Maybe<(
-        { __typename?: 'SanityTitleBody' }
-        & Pick<SanityTitleBody, 'title' | 'body'>
-      )>>> }
-    )> }
-  )> }
-);
-
-export type SciencePartnershipsSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SciencePartnershipsSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanitySciencePage: Maybe<(
-    { __typename?: 'SanitySciencePage' }
-    & { partnershipSection: Maybe<(
-      { __typename?: 'SanitySciencePartnershipSection' }
-      & Pick<SanitySciencePartnershipSection, 'header'>
-      & { partners: Maybe<Array<Maybe<(
-        { __typename?: 'SanityImageCustomBody' }
-        & Pick<SanityImageCustomBody, '_rawBody'>
-        & { image: Maybe<(
-          { __typename?: 'SanityCustomImage' }
-          & FluidCustomImageFields_WithWebpFragment
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type ScienceTitleDescriptionSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ScienceTitleDescriptionSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanitySciencePage: Maybe<(
-    { __typename?: 'SanitySciencePage' }
-    & { titleDescriptionSection: Maybe<(
-      { __typename?: 'SanityScienceTitleDescriptionSection' }
-      & Pick<SanityScienceTitleDescriptionSection, 'title' | '_rawDescription'>
-      & { outcomes: Maybe<Array<Maybe<(
-        { __typename?: 'SanityEcologicalOutcome' }
-        & Pick<SanityEcologicalOutcome, 'title' | '_rawDescription'>
-        & { image: Maybe<(
-          { __typename?: 'SanityCustomImage' }
-          & Pick<SanityCustomImage, 'imageHref'>
-          & { image: Maybe<(
-            { __typename?: 'SanityImage' }
-            & { asset: Maybe<(
-              { __typename?: 'SanityImageAsset' }
-              & Pick<SanityImageAsset, 'extension' | 'url'>
-            )> }
-          )> }
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type ScienceTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ScienceTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, backgroundMobile: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanitySciencePage: Maybe<(
-    { __typename?: 'SanitySciencePage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type SharedBlogSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SharedBlogSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanitySharedSections: Maybe<(
-    { __typename?: 'SanitySharedSections' }
-    & { blog: Maybe<(
-      { __typename?: 'SanityBlogSection' }
-      & Pick<SanityBlogSection, 'header'>
-      & { posts: Maybe<Array<Maybe<(
-        { __typename?: 'SanityBlogPost' }
-        & Pick<SanityBlogPost, 'header' | 'url' | '_rawDescription'>
-        & { image: Maybe<(
-          { __typename?: 'SanityCustomImage' }
-          & CustomImageFieldsFragment
-        )> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type EmailSubmitSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type EmailSubmitSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanitySharedSections: Maybe<(
-    { __typename?: 'SanitySharedSections' }
-    & { newsletter: Maybe<(
-      { __typename?: 'SanityTitleCustomBody' }
-      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
-    )> }
-  )>, desktop: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type TeamAdvisorSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TeamAdvisorSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )>, sanityTeamPage: Maybe<(
-    { __typename?: 'SanityTeamPage' }
-    & { advisorSection: Maybe<(
-      { __typename?: 'SanityTeamSection' }
-      & TeamSectionFieldsFragment
-    )> }
-  )> }
-);
-
-export type TeamCoreTeamSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TeamCoreTeamSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & Pick<File, 'publicURL'>
-  )>, sanityTeamPage: Maybe<(
-    { __typename?: 'SanityTeamPage' }
-    & { coreSection: Maybe<(
-      { __typename?: 'SanityTeamSection' }
-      & TeamSectionFieldsFragment
-    )> }
-  )> }
-);
-
-export type TeamTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TeamTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, backgroundMobile: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityTeamPage: Maybe<(
-    { __typename?: 'SanityTeamPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type TokenBlockExplorerSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TokenBlockExplorerSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityTokenPage: Maybe<(
-    { __typename?: 'SanityTokenPage' }
-    & { blockExplorerSection: Maybe<(
-      { __typename?: 'SanityTitleBodyButton' }
-      & Pick<SanityTitleBodyButton, 'title' | '_rawBody'>
-      & { button: Maybe<(
-        { __typename?: 'SanityButton' }
-        & Pick<SanityButton, 'buttonText'>
-        & { buttonLink: Maybe<(
-          { __typename?: 'SanityLink' }
-          & Pick<SanityLink, 'buttonHref'>
-        )> }
-      )> }
-    )> }
-  )> }
-);
-
-export type TokenConnectSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TokenConnectSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityTokenPage: Maybe<(
-    { __typename?: 'SanityTokenPage' }
-    & Pick<SanityTokenPage, 'connectSectionHeader'>
-  )> }
-);
-
-export type TokenInfoSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TokenInfoSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityTokenPage: Maybe<(
-    { __typename?: 'SanityTokenPage' }
-    & { infoSection: Maybe<(
-      { __typename?: 'SanityTokenInfoSection' }
-      & Pick<SanityTokenInfoSection, 'title' | 'subtitle' | '_rawBody'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFields_WithWebpFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type TokenMediaSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TokenMediaSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityTokenPage: Maybe<(
-    { __typename?: 'SanityTokenPage' }
-    & { mediaCards: Maybe<Array<Maybe<(
-      { __typename?: 'SanityMedia' }
-      & MediaFieldsFragment
-    )>>> }
-  )> }
-);
-
-export type TokenStakingQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TokenStakingQuery = (
-  { __typename?: 'Query' }
-  & { sanityTokenPage: Maybe<(
-    { __typename?: 'SanityTokenPage' }
-    & { stakingSection: Maybe<(
-      { __typename?: 'SanityTitleBodyButton' }
-      & Pick<SanityTitleBodyButton, 'title' | '_rawBody'>
-      & { button: Maybe<(
-        { __typename?: 'SanityButton' }
-        & Pick<SanityButton, 'buttonText'>
-        & { buttonLink: Maybe<(
-          { __typename?: 'SanityLink' }
-          & Pick<SanityLink, 'buttonHref'>
-        )> }
-      )> }
-    )> }
-  )> }
-);
-
-export type Unnamed_13_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_13_Query = (
-  { __typename?: 'Query' }
-  & { bg: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type TokenEconomicsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TokenEconomicsQuery = (
-  { __typename?: 'Query' }
-  & { sanityTokenPage: Maybe<(
-    { __typename?: 'SanityTokenPage' }
-    & { tokenEconomics: Maybe<(
-      { __typename?: 'SanityTitleCustomBody' }
-      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
-    )> }
-  )> }
-);
-
-export type TokenPoolQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TokenPoolQuery = (
-  { __typename?: 'Query' }
-  & { sanityTokenPage: Maybe<(
-    { __typename?: 'SanityTokenPage' }
-    & { poolSection: Maybe<(
-      { __typename?: 'SanityTokenPoolSection' }
-      & Pick<SanityTokenPoolSection, 'title' | 'subtitle'>
-      & { image: Maybe<(
-        { __typename?: 'SanityImage' }
-        & ImageFragment
-      )>, mobileImage: Maybe<(
-        { __typename?: 'SanityImage' }
-        & ImageFragment
-      )> }
-    )> }
-  )> }
-);
-
-export type TokenTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TokenTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityTokenPage: Maybe<(
-    { __typename?: 'SanityTokenPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type ValidatorsConnectSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ValidatorsConnectSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityValidatorsPage: Maybe<(
-    { __typename?: 'SanityValidatorsPage' }
-    & Pick<SanityValidatorsPage, 'connectSectionHeader'>
-  )> }
-);
-
-export type ValidatorsTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ValidatorsTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityValidatorsPage: Maybe<(
-    { __typename?: 'SanityValidatorsPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type ValidatorsWhatSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ValidatorsWhatSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityValidatorsPage: Maybe<(
-    { __typename?: 'SanityValidatorsPage' }
-    & { whatSection: Maybe<(
-      { __typename?: 'SanityTitleCustomBody' }
-      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
-    )> }
-  )> }
-);
-
-export type ValidatorsWhoSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ValidatorsWhoSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityValidatorsPage: Maybe<(
-    { __typename?: 'SanityValidatorsPage' }
-    & { whoSection: Maybe<(
-      { __typename?: 'SanityValidatorWhoSection' }
-      & Pick<SanityValidatorWhoSection, 'header' | '_rawBody'>
-      & { validators: Maybe<Array<Maybe<(
-        { __typename?: 'SanityValidator' }
-        & Pick<SanityValidator, 'header' | 'description'>
-        & { members: Maybe<Array<Maybe<(
-          { __typename?: 'SanityImageLink' }
-          & { link: Maybe<(
-            { __typename?: 'SanityLink' }
-            & Pick<SanityLink, 'buttonHref'>
-          )>, image: Maybe<(
-            { __typename?: 'SanityCustomImage' }
-            & { image: Maybe<(
-              { __typename?: 'SanityImage' }
-              & { asset: Maybe<(
-                { __typename?: 'SanityImageAsset' }
-                & Pick<SanityImageAsset, 'url'>
-              )> }
-            )> }
-          )> }
-        )>>> }
-      )>>> }
-    )> }
-  )> }
-);
-
-export type ValidatorsWhySectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ValidatorsWhySectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityValidatorsPage: Maybe<(
-    { __typename?: 'SanityValidatorsPage' }
-    & { whySection: Maybe<(
-      { __typename?: 'SanityTitleCustomBody' }
-      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
-    )> }
-  )> }
-);
-
-export type WalletAddrRegFormSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type WalletAddrRegFormSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityWalletAddressRegistrationPage: Maybe<(
-    { __typename?: 'SanityWalletAddressRegistrationPage' }
-    & { formSection: Maybe<(
-      { __typename?: 'SanityWalletAddressRegistrationFormSection' }
-      & Pick<SanityWalletAddressRegistrationFormSection, 'airtableLink' | 'recaptchaMessage'>
-    )> }
-  )> }
-);
-
-export type WalletAddrRegInstructionsSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type WalletAddrRegInstructionsSectionQuery = (
-  { __typename?: 'Query' }
-  & { sanityWalletAddressRegistrationPage: Maybe<(
-    { __typename?: 'SanityWalletAddressRegistrationPage' }
-    & { instructionSection: Maybe<(
-      { __typename?: 'SanityTitleCustomBody' }
-      & Pick<SanityTitleCustomBody, 'title' | '_rawBody'>
-    )> }
-  )> }
-);
-
-export type WalletAddrRegTopSectionQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type WalletAddrRegTopSectionQuery = (
-  { __typename?: 'Query' }
-  & { background: Maybe<(
-    { __typename?: 'File' }
-    & { childImageSharp: Maybe<(
-      { __typename?: 'ImageSharp' }
-      & { fluid: Maybe<(
-        { __typename?: 'ImageSharpFluid' }
-        & GatsbyImageSharpFluid_WithWebpFragment
-      )> }
-    )> }
-  )>, sanityWalletAddressRegistrationPage: Maybe<(
-    { __typename?: 'SanityWalletAddressRegistrationPage' }
-    & { topSection: Maybe<(
-      { __typename?: 'SanityTitleBody' }
-      & Pick<SanityTitleBody, 'title' | 'body'>
-    )> }
-  )> }
-);
-
-export type WalletConnectButtonQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type WalletConnectButtonQuery = (
-  { __typename?: 'Query' }
-  & { sanityWalletAddressRegistrationPage: Maybe<(
-    { __typename?: 'SanityWalletAddressRegistrationPage' }
-    & { walletSection: Maybe<(
-      { __typename?: 'SanityWalletAddressRegistrationWalletSection' }
-      & Pick<SanityWalletAddressRegistrationWalletSection, 'buttonText' | 'walletFoundButtonText' | '_rawNoWalletFound'>
-    )> }
-  )> }
-);
+export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_1_Query = { __typename?: 'Query' } & {
+  seoImage: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+  site: Maybe<
+    { __typename?: 'Site' } & {
+      siteMetadata: Maybe<
+        { __typename?: 'SiteSiteMetadata' } & Pick<
+          SiteSiteMetadata,
+          'title' | 'description' | 'author' | 'siteUrl'
+        >
+      >;
+    }
+  >;
+};
+
+export type ButtonFieldsFragment = { __typename?: 'SanityButton' } & Pick<
+  SanityButton,
+  'buttonText' | 'buttonModal' | 'buttonBlankTarget'
+> & { buttonLink: Maybe<{ __typename?: 'SanityLink' } & LinkFieldsFragment> };
+
+export type CallToActionFieldsFragment = {
+  __typename?: 'SanityCallToAction';
+} & Pick<
+  SanityCallToAction,
+  'caption' | 'header' | 'description' | 'linkText' | 'linkUrl'
+> & { image: Maybe<{ __typename?: 'SanityImage' } & ImageFragment> };
+
+export type CustomImageFieldsFragment = {
+  __typename?: 'SanityCustomImage';
+} & Pick<SanityCustomImage, 'imageAlt' | 'imageHref'> & {
+    image: Maybe<
+      { __typename?: 'SanityImage' } & {
+        asset: Maybe<
+          { __typename?: 'SanityImageAsset' } & Pick<SanityImageAsset, 'url'>
+        >;
+      } & ImageWithPreviewFragment
+    >;
+  };
+
+export type FluidSanityImageFieldsFragment = { __typename?: 'SanityImage' } & {
+  asset: Maybe<
+    { __typename?: 'SanityImageAsset' } & {
+      fluid: Maybe<
+        { __typename?: 'SanityImageFluid' } & GatsbySanityImageFluidFragment
+      >;
+    }
+  >;
+};
+
+export type FluidSanityImageFields_WithWebpFragment = {
+  __typename?: 'SanityImage';
+} & {
+  asset: Maybe<
+    { __typename?: 'SanityImageAsset' } & {
+      fluid: Maybe<
+        {
+          __typename?: 'SanityImageFluid';
+        } & GatsbySanityImageFluid_WithWebpFragment
+      >;
+    }
+  >;
+};
+
+export type FluidCustomImageFieldsFragment = {
+  __typename?: 'SanityCustomImage';
+} & Pick<SanityCustomImage, 'imageAlt'> & {
+    image: Maybe<
+      { __typename?: 'SanityImage' } & FluidSanityImageFieldsFragment
+    >;
+  };
+
+export type FluidCustomImageFields_WithWebpFragment = {
+  __typename?: 'SanityCustomImage';
+} & Pick<SanityCustomImage, 'imageAlt'> & {
+    image: Maybe<
+      { __typename?: 'SanityImage' } & FluidSanityImageFields_WithWebpFragment
+    >;
+  };
+
+export type GatsbyImageSharpFluid_WithWebpFragment = {
+  __typename?: 'ImageSharpFluid';
+} & Pick<
+  ImageSharpFluid,
+  | 'base64'
+  | 'aspectRatio'
+  | 'src'
+  | 'srcSet'
+  | 'srcWebp'
+  | 'srcSetWebp'
+  | 'sizes'
+>;
+
+export type GatsbyImageSharpFluidFragment = {
+  __typename?: 'ImageSharpFluid';
+} & Pick<
+  ImageSharpFluid,
+  'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'
+>;
+
+export type GatsbyImageSharpFixedFragment = {
+  __typename?: 'ImageSharpFixed';
+} & Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
+
+export type GatsbyImageSharpFixed_WithWebpFragment = {
+  __typename?: 'ImageSharpFixed';
+} & Pick<
+  ImageSharpFixed,
+  'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'
+>;
+
+export type GatsbySanityImageFluid_WithWebpFragment = {
+  __typename?: 'SanityImageFluid';
+} & Pick<
+  SanityImageFluid,
+  | 'base64'
+  | 'aspectRatio'
+  | 'src'
+  | 'srcSet'
+  | 'srcWebp'
+  | 'srcSetWebp'
+  | 'sizes'
+>;
+
+export type GatsbySanityImageFluidFragment = {
+  __typename?: 'SanityImageFluid';
+} & Pick<
+  SanityImageFluid,
+  | 'base64'
+  | 'aspectRatio'
+  | 'src'
+  | 'srcSet'
+  | 'srcWebp'
+  | 'srcSetWebp'
+  | 'sizes'
+>;
+
+export type GatsbySanityImageFixed_WithWebpFragment = {
+  __typename?: 'SanityImageFixed';
+} & Pick<
+  SanityImageFixed,
+  'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'
+>;
+
+export type GatsbySanityImageFixedFragment = {
+  __typename?: 'SanityImageFixed';
+} & Pick<
+  SanityImageFixed,
+  'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'
+>;
+
+export type LinkFieldsFragment = { __typename?: 'SanityLink' } & Pick<
+  SanityLink,
+  'buttonHref'
+> & {
+    buttonDoc: Maybe<{ __typename?: 'SanityDoc' } & Pick<SanityDoc, 'href'>>;
+  };
+
+export type MediaFieldsFragment = { __typename?: 'SanityMedia' } & Pick<
+  SanityMedia,
+  'title' | 'author' | 'date' | 'href' | 'type'
+> & {
+    image: Maybe<
+      { __typename?: 'SanityCustomImage' } & CustomImageFieldsFragment
+    >;
+  };
+
+export type ImageFragment = { __typename?: 'SanityImage' } & {
+  hotspot: Maybe<
+    { __typename?: 'SanityImageHotspot' } & Pick<
+      SanityImageHotspot,
+      'height' | 'width' | 'x' | 'y'
+    >
+  >;
+  crop: Maybe<
+    { __typename?: 'SanityImageCrop' } & Pick<
+      SanityImageCrop,
+      'bottom' | 'left' | 'right' | 'top'
+    >
+  >;
+  asset: Maybe<
+    { __typename?: 'SanityImageAsset' } & Pick<SanityImageAsset, '_id' | 'url'>
+  >;
+};
+
+export type ImageWithPreviewFragment = { __typename?: 'SanityImage' } & {
+  asset: Maybe<
+    { __typename?: 'SanityImageAsset' } & Pick<SanityImageAsset, 'url'> & {
+        metadata: Maybe<
+          { __typename?: 'SanityImageMetadata' } & {
+            preview: SanityImageMetadata['lqip'];
+          }
+        >;
+      }
+  >;
+} & ImageFragment;
+
+export type TeamMemberFieldsFragment = {
+  __typename?: 'SanityRegenTeamMember';
+} & Pick<
+  SanityRegenTeamMember,
+  'name' | 'title' | 'linkedinUrl' | 'twitterUrl' | 'githubUrl'
+> & {
+    image: Maybe<
+      { __typename?: 'SanityImage' } & {
+        asset: Maybe<
+          { __typename?: 'SanityImageAsset' } & Pick<SanityImageAsset, 'url'>
+        >;
+      }
+    >;
+  };
+
+export type TeamSectionFieldsFragment = {
+  __typename?: 'SanityTeamSection';
+} & Pick<SanityTeamSection, 'title'> & {
+    members: Maybe<
+      Array<
+        Maybe<
+          { __typename?: 'SanityRegenTeamMember' } & TeamMemberFieldsFragment
+        >
+      >
+    >;
+  };
+
+export type Unnamed_2_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_2_Query = { __typename?: 'Query' } & {
+  grazing: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+};
+
+export type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_3_Query = { __typename?: 'Query' } & {
+  seoImage: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+};
+
+export type ContactPageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type ContactPageQuery = { __typename?: 'Query' } & {
+  sanityContactPage: Maybe<
+    { __typename?: 'SanityContactPage' } & Pick<
+      SanityContactPage,
+      'header' | '_rawBody' | '_rawMessageForPartners'
+    > & {
+        formRequestTypes: Maybe<
+          Array<
+            Maybe<
+              { __typename?: 'SanityRequestType' } & Pick<
+                SanityRequestType,
+                'label' | 'value'
+              >
+            >
+          >
+        >;
+        location: Maybe<
+          { __typename?: 'SanityTitleImageCustomBody' } & Pick<
+            SanityTitleImageCustomBody,
+            'title' | '_rawBody'
+          > & {
+              image: Maybe<
+                {
+                  __typename?: 'SanityCustomImage';
+                } & FluidCustomImageFieldsFragment
+              >;
+            }
+        >;
+        email: Maybe<
+          { __typename?: 'SanityTitleCustomBody' } & Pick<
+            SanityTitleCustomBody,
+            'title' | '_rawBody'
+          >
+        >;
+        faq: Maybe<
+          { __typename?: 'SanityTitleImage' } & Pick<
+            SanityTitleImage,
+            'title'
+          > & {
+              image: Maybe<
+                {
+                  __typename?: 'SanityCustomImage';
+                } & FluidCustomImageFieldsFragment
+              >;
+            }
+        >;
+      }
+  >;
+};
+
+export type Unnamed_4_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_4_Query = { __typename?: 'Query' } & {
+  seoImage: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+};
+
+export type FaqPageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FaqPageQuery = { __typename?: 'Query' } & {
+  sanityFaqPage: Maybe<
+    { __typename?: 'SanityFaqPage' } & {
+      categories: Maybe<
+        Array<
+          Maybe<
+            { __typename?: 'SanityFaqCategory' } & Pick<
+              SanityFaqCategory,
+              'header'
+            > & {
+                questions: Maybe<
+                  Array<
+                    Maybe<
+                      { __typename?: 'SanityFaq' } & Pick<
+                        SanityFaq,
+                        'question' | '_rawAnswer'
+                      >
+                    >
+                  >
+                >;
+              }
+          >
+        >
+      >;
+    }
+  >;
+};
+
+export type FundPageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FundPageQuery = { __typename?: 'Query' } & {
+  seoImage: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+  sanityFundPage: Maybe<
+    { __typename?: 'SanityFundPage' } & Pick<
+      SanityFundPage,
+      'seoTitle' | 'seoDescription'
+    >
+  >;
+};
+
+export type HomePageWebQueryVariables = Exact<{ [key: string]: never }>;
+
+export type HomePageWebQuery = { __typename?: 'Query' } & {
+  seoImage: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  backgroundMobile: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+};
+
+export type MainnetPageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MainnetPageQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityMainnetPage: Maybe<
+    { __typename?: 'SanityMainnetPage' } & Pick<
+      SanityMainnetPage,
+      'launchDate' | 'seoDescription' | 'livecastLink'
+    >
+  >;
+};
+
+export type MediaPageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MediaPageQuery = { __typename?: 'Query' } & {
+  allSanityMedia: { __typename?: 'SanityMediaConnection' } & {
+    nodes: Array<
+      { __typename?: 'SanityMedia' } & Pick<
+        SanityMedia,
+        'title' | 'author' | 'date' | 'type' | 'href'
+      > & {
+          image: Maybe<
+            { __typename?: 'SanityCustomImage' } & {
+              image: Maybe<
+                { __typename?: 'SanityImage' } & {
+                  asset: Maybe<
+                    { __typename?: 'SanityImageAsset' } & Pick<
+                      SanityImageAsset,
+                      'url'
+                    >
+                  >;
+                }
+              >;
+            }
+          >;
+        }
+    >;
+  };
+};
+
+export type NctPageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type NctPageQuery = { __typename?: 'Query' } & {
+  sanityNctPage: Maybe<
+    { __typename?: 'SanityNctPage' } & {
+      seo: Maybe<
+        { __typename?: 'SanitySeo' } & Pick<
+          SanitySeo,
+          'title' | 'description'
+        > & {
+            image: Maybe<
+              { __typename?: 'SanityImage' } & {
+                asset: Maybe<
+                  { __typename?: 'SanityImageAsset' } & Pick<
+                    SanityImageAsset,
+                    'url'
+                  >
+                >;
+              }
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type PartnersPageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type PartnersPageQuery = { __typename?: 'Query' } & {
+  sanityPartnersPage: Maybe<
+    { __typename?: 'SanityPartnersPage' } & Pick<
+      SanityPartnersPage,
+      'header' | 'contactHeader' | '_rawContactBody'
+    > & {
+        partners: Maybe<
+          Array<
+            Maybe<
+              { __typename?: 'SanityPartnerLogo' } & Pick<
+                SanityPartnerLogo,
+                'link'
+              > & {
+                  image: Maybe<
+                    { __typename?: 'SanityImage' } & {
+                      asset: Maybe<
+                        { __typename?: 'SanityImageAsset' } & Pick<
+                          SanityImageAsset,
+                          'url'
+                        >
+                      >;
+                    }
+                  >;
+                }
+            >
+          >
+        >;
+      }
+  >;
+};
+
+export type Unnamed_5_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_5_Query = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+};
+
+export type Unnamed_6_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_6_Query = { __typename?: 'Query' } & {
+  markdownRemark: Maybe<
+    { __typename?: 'MarkdownRemark' } & Pick<MarkdownRemark, 'html'>
+  >;
+};
+
+export type Unnamed_7_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_7_Query = { __typename?: 'Query' } & {
+  seoImage: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+};
+
+export type Unnamed_8_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_8_Query = { __typename?: 'Query' } & {
+  seoImage: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+  image: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            { __typename?: 'ImageSharpFluid' } & GatsbyImageSharpFluidFragment
+          >;
+        }
+      >;
+    }
+  >;
+};
+
+export type Unnamed_9_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_9_Query = { __typename?: 'Query' } & {
+  seoImage: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+};
+
+export type Unnamed_10_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_10_Query = { __typename?: 'Query' } & {
+  markdownRemark: Maybe<
+    { __typename?: 'MarkdownRemark' } & Pick<MarkdownRemark, 'html'>
+  >;
+};
+
+export type TokenPageQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TokenPageQuery = { __typename?: 'Query' } & {
+  seoImage: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+  emailImage: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            { __typename?: 'ImageSharpFluid' } & GatsbyImageSharpFluidFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityTokenPage: Maybe<
+    { __typename?: 'SanityTokenPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+      newsletterSection: Maybe<
+        { __typename?: 'SanityTokenNewsletterSection' } & Pick<
+          SanityTokenNewsletterSection,
+          'header' | 'buttonText' | 'inputText'
+        >
+      >;
+    }
+  >;
+};
+
+export type Unnamed_11_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_11_Query = { __typename?: 'Query' } & {
+  seoImage: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+};
+
+export type Unnamed_12_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_12_Query = { __typename?: 'Query' } & {
+  seoImage: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+};
+
+export type CaseStudiesListSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type CaseStudiesListSectionQuery = { __typename?: 'Query' } & {
+  sanityCaseStudiesPage: Maybe<
+    { __typename?: 'SanityCaseStudiesPage' } & {
+      listSection: Maybe<
+        { __typename?: 'SanityCaseStudiesListSection' } & Pick<
+          SanityCaseStudiesListSection,
+          'header' | 'view'
+        >
+      >;
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+      caseStudies: Maybe<
+        Array<
+          Maybe<
+            { __typename?: 'SanityCaseStudyPage' } & Pick<
+              SanityCaseStudyPage,
+              'name' | 'description'
+            > & {
+                slug: Maybe<
+                  { __typename?: 'SanitySlug' } & Pick<SanitySlug, 'current'>
+                >;
+                cardImage: Maybe<
+                  { __typename?: 'SanityCustomImage' } & {
+                    image: Maybe<
+                      { __typename?: 'SanityImage' } & {
+                        asset: Maybe<
+                          { __typename?: 'SanityImageAsset' } & Pick<
+                            SanityImageAsset,
+                            'url'
+                          >
+                        >;
+                      }
+                    >;
+                  }
+                >;
+              }
+          >
+        >
+      >;
+    }
+  >;
+};
+
+export type CaseStudyTopSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type CaseStudyTopSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityCaseStudiesPage: Maybe<
+    { __typename?: 'SanityCaseStudiesPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+    }
+  >;
+};
+
+export type CaseStudyAboutSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type CaseStudyAboutSectionQuery = { __typename?: 'Query' } & {
+  sanityCaseStudiesPage: Maybe<
+    { __typename?: 'SanityCaseStudiesPage' } & {
+      aboutSection: Maybe<
+        { __typename?: 'SanityCaseStudiesAboutSection' } & Pick<
+          SanityCaseStudiesAboutSection,
+          'header' | 'practice' | 'biome' | 'region'
+        >
+      >;
+    }
+  >;
+};
+
+export type CaseStudyApproachSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type CaseStudyApproachSectionQuery = { __typename?: 'Query' } & {
+  sanityCaseStudiesPage: Maybe<
+    { __typename?: 'SanityCaseStudiesPage' } & {
+      approachSection: Maybe<
+        { __typename?: 'SanityCaseStudiesApproachSection' } & Pick<
+          SanityCaseStudiesApproachSection,
+          'header' | 'subheader' | 'details' | 'results' | 'next'
+        >
+      >;
+    }
+  >;
+};
+
+export type CaseStudyConclusionSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type CaseStudyConclusionSectionQuery = { __typename?: 'Query' } & {
+  bg: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityCaseStudiesPage: Maybe<
+    { __typename?: 'SanityCaseStudiesPage' } & Pick<
+      SanityCaseStudiesPage,
+      'conclusionSectionHeader'
+    >
+  >;
+};
+
+export type CaseStudyContextSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type CaseStudyContextSectionQuery = { __typename?: 'Query' } & {
+  bg: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  imageBg: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityCaseStudiesPage: Maybe<
+    { __typename?: 'SanityCaseStudiesPage' } & {
+      contextSection: Maybe<
+        { __typename?: 'SanityCaseStudiesContextSection' } & Pick<
+          SanityCaseStudiesContextSection,
+          'header' | 'challenges'
+        >
+      >;
+    }
+  >;
+};
+
+export type CaseStudyFundingSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type CaseStudyFundingSectionQuery = { __typename?: 'Query' } & {
+  sanityCaseStudiesPage: Maybe<
+    { __typename?: 'SanityCaseStudiesPage' } & {
+      fundingSection: Maybe<
+        { __typename?: 'SanityCaseStudiesFundingSection' } & Pick<
+          SanityCaseStudiesFundingSection,
+          '_rawHeader' | 'details' | 'results' | 'next'
+        >
+      >;
+    }
+  >;
+};
+
+export type CommunityCollaborateSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type CommunityCollaborateSectionQuery = { __typename?: 'Query' } & {
+  sanityCommunityPage: Maybe<
+    { __typename?: 'SanityCommunityPage' } & {
+      collaborateSection: Maybe<
+        { __typename?: 'SanityCommunityCollaborateSection' } & {
+          titleBody: Maybe<
+            { __typename?: 'SanityTitleCustomBody' } & Pick<
+              SanityTitleCustomBody,
+              'title' | '_rawBody'
+            >
+          >;
+          cards: Maybe<
+            Array<
+              Maybe<
+                { __typename?: 'SanityResourcesCard' } & Pick<
+                  SanityResourcesCard,
+                  'title' | 'description' | 'buttonText' | 'buttonHref'
+                > & {
+                    image: Maybe<
+                      { __typename?: 'SanityCustomImage' } & {
+                        image: Maybe<
+                          { __typename?: 'SanityImage' } & {
+                            asset: Maybe<
+                              { __typename?: 'SanityImageAsset' } & Pick<
+                                SanityImageAsset,
+                                'url'
+                              >
+                            >;
+                          }
+                        >;
+                      }
+                    >;
+                  }
+              >
+            >
+          >;
+        }
+      >;
+    }
+  >;
+};
+
+export type CommunityCollectiveSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type CommunityCollectiveSectionQuery = { __typename?: 'Query' } & {
+  bg: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityCommunityPage: Maybe<
+    { __typename?: 'SanityCommunityPage' } & {
+      collectiveSection: Maybe<
+        { __typename?: 'SanityCommunityCollectiveSection' } & Pick<
+          SanityCommunityCollectiveSection,
+          'title' | '_rawBody' | 'buttonText' | 'signupFormUrl'
+        >
+      >;
+    }
+  >;
+};
+
+export type CommunityConnectSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type CommunityConnectSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityCommunityPage: Maybe<
+    { __typename?: 'SanityCommunityPage' } & {
+      connectSection: Maybe<
+        { __typename?: 'SanityCommunityConnectSection' } & Pick<
+          SanityCommunityConnectSection,
+          | 'header'
+          | 'telegramSubLabel'
+          | 'telegramUrl'
+          | 'twitterSubLabel'
+          | 'twitterUrl'
+          | 'discordSubLabel'
+          | 'discordUrl'
+        >
+      >;
+    }
+  >;
+};
+
+export type CommunityGoToSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type CommunityGoToSectionQuery = { __typename?: 'Query' } & {
+  sanityCommunityPage: Maybe<
+    { __typename?: 'SanityCommunityPage' } & {
+      goToSection: Maybe<
+        { __typename?: 'SanityCommunityGoToSection' } & Pick<
+          SanityCommunityGoToSection,
+          | 'blogButtonText'
+          | 'discussionButtonHref'
+          | 'discussionButtonText'
+          | 'discussionLabel'
+          | 'blogLabel'
+          | 'videoButtonHref'
+          | 'videoLabel'
+          | 'videoButtonText'
+          | 'blogButtonHref'
+        >
+      >;
+    }
+  >;
+};
+
+export type CommunityTopSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type CommunityTopSectionQuery = { __typename?: 'Query' } & {
+  desktop: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityCommunityPage: Maybe<
+    { __typename?: 'SanityCommunityPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+    }
+  >;
+};
+
+export type DevApproachSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DevApproachSectionQuery = { __typename?: 'Query' } & {
+  sanityDevelopersPage: Maybe<
+    { __typename?: 'SanityDevelopersPage' } & {
+      approachSection: Maybe<
+        { __typename?: 'SanityDevApproachSection' } & Pick<
+          SanityDevApproachSection,
+          'caption' | 'header' | '_rawBody'
+        >
+      >;
+    }
+  >;
+};
+
+export type DevCareersSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DevCareersSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityDevelopersPage: Maybe<
+    { __typename?: 'SanityDevelopersPage' } & {
+      careersSection: Maybe<
+        { __typename?: 'SanityDevCareersSection' } & Pick<
+          SanityDevCareersSection,
+          'caption' | 'header' | '_rawBody'
+        > & {
+            button: Maybe<
+              { __typename?: 'SanityButton' } & ButtonFieldsFragment
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type DevConnectSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DevConnectSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityDevelopersPage: Maybe<
+    { __typename?: 'SanityDevelopersPage' } & Pick<
+      SanityDevelopersPage,
+      'connectSectionHeader'
+    >
+  >;
+};
+
+export type DevInvolvedSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DevInvolvedSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityDevelopersPage: Maybe<
+    { __typename?: 'SanityDevelopersPage' } & Pick<
+      SanityDevelopersPage,
+      'involvedSectionHeader'
+    >
+  >;
+};
+
+export type DevLedgerSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DevLedgerSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityDevelopersPage: Maybe<
+    { __typename?: 'SanityDevelopersPage' } & {
+      ledgerSection: Maybe<
+        { __typename?: 'SanityDevLedgerSection' } & Pick<
+          SanityDevLedgerSection,
+          'header' | '_rawBody'
+        > & {
+            cosmosImage: Maybe<
+              { __typename?: 'SanityImage' } & ImageWithPreviewFragment
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type DevOpenAgSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DevOpenAgSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityDevelopersPage: Maybe<
+    { __typename?: 'SanityDevelopersPage' } & {
+      openAgSection: Maybe<
+        { __typename?: 'SanityDevOpenAgSection' } & Pick<
+          SanityDevOpenAgSection,
+          'header' | '_rawBody'
+        > & {
+            image: Maybe<
+              { __typename?: 'SanityImage' } & ImageWithPreviewFragment
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type DevelopersTopSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type DevelopersTopSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityDevelopersPage: Maybe<
+    { __typename?: 'SanityDevelopersPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+    }
+  >;
+};
+
+export type FundCallToActionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FundCallToActionQuery = { __typename?: 'Query' } & {
+  sanityFundPage: Maybe<
+    { __typename?: 'SanityFundPage' } & {
+      callsToAction: Maybe<
+        Array<
+          Maybe<
+            { __typename?: 'SanityFundCallToAction' } & Pick<
+              SanityFundCallToAction,
+              'header' | '_rawDescription'
+            > & { image: Maybe<{ __typename?: 'SanityImage' } & ImageFragment> }
+          >
+        >
+      >;
+    }
+  >;
+};
+
+export type FundFoldSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FundFoldSectionQuery = { __typename?: 'Query' } & {
+  sanityFundPage: Maybe<
+    { __typename?: 'SanityFundPage' } & {
+      foldSection: Maybe<
+        { __typename?: 'SanityTitleCustomBody' } & Pick<
+          SanityTitleCustomBody,
+          'title' | '_rawBody'
+        >
+      >;
+    }
+  >;
+};
+
+export type FundThesisSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FundThesisSectionQuery = { __typename?: 'Query' } & {
+  sanityFundPage: Maybe<
+    { __typename?: 'SanityFundPage' } & {
+      thesisSection: Maybe<
+        { __typename?: 'SanityTitleCustomBody' } & Pick<
+          SanityTitleCustomBody,
+          'title' | '_rawBody'
+        >
+      >;
+    }
+  >;
+};
+
+export type FundTopSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FundTopSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityFundPage: Maybe<
+    { __typename?: 'SanityFundPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleCustomBody' } & Pick<
+          SanityTitleCustomBody,
+          'title' | '_rawBody'
+        >
+      >;
+    }
+  >;
+};
+
+export type BannerTextSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type BannerTextSectionQuery = { __typename?: 'Query' } & {
+  sanityHomePageWeb: Maybe<
+    { __typename?: 'SanityHomePageWeb' } & {
+      bannerTextSection: Maybe<
+        { __typename?: 'SanityTitleImageCustomBody' } & Pick<
+          SanityTitleImageCustomBody,
+          'title' | '_rawBody'
+        > & {
+            image: Maybe<
+              {
+                __typename?: 'SanityCustomImage';
+              } & FluidCustomImageFieldsFragment
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type HomeCarbonplusSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type HomeCarbonplusSectionQuery = { __typename?: 'Query' } & {
+  cow: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityHomePageWeb: Maybe<
+    { __typename?: 'SanityHomePageWeb' } & {
+      carbonPlusSection: Maybe<
+        { __typename?: 'SanityCarbonPlusSection' } & Pick<
+          SanityCarbonPlusSection,
+          | 'smallHeaderFeatured'
+          | 'smallHeaderCreditName'
+          | 'header'
+          | 'description'
+          | 'linkText'
+          | 'linkUrl'
+        >
+      >;
+    }
+  >;
+};
+
+export type HomeClimateSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type HomeClimateSectionQuery = { __typename?: 'Query' } & {
+  sanityHomePageWeb: Maybe<
+    { __typename?: 'SanityHomePageWeb' } & {
+      climateSection: Maybe<
+        { __typename?: 'SanityClimateSection' } & Pick<
+          SanityClimateSection,
+          'header' | 'description'
+        > & {
+            image: Maybe<
+              { __typename?: 'SanityImage' } & ImageWithPreviewFragment
+            >;
+            solution: Maybe<
+              { __typename?: 'SanityTitleBody' } & Pick<
+                SanityTitleBody,
+                'title' | 'body'
+              >
+            >;
+            problem: Maybe<
+              { __typename?: 'SanityTitleBody' } & Pick<
+                SanityTitleBody,
+                'title' | 'body'
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type HomeFoldSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type HomeFoldSectionQuery = { __typename?: 'Query' } & {
+  desktop: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityHomePageWeb: Maybe<
+    { __typename?: 'SanityHomePageWeb' } & {
+      homeFoldSection: Maybe<
+        { __typename?: 'SanityHomeFoldSection' } & Pick<
+          SanityHomeFoldSection,
+          'title' | 'body'
+        >
+      >;
+    }
+  >;
+};
+
+export type HomeLedgerSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type HomeLedgerSectionQuery = { __typename?: 'Query' } & {
+  bg: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  ledger: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityHomePageWeb: Maybe<
+    { __typename?: 'SanityHomePageWeb' } & Pick<
+      SanityHomePageWeb,
+      'ledgerDescription'
+    >
+  >;
+};
+
+export type HomeMarketPlaceSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type HomeMarketPlaceSectionQuery = { __typename?: 'Query' } & {
+  bg: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityHomePageWeb: Maybe<
+    { __typename?: 'SanityHomePageWeb' } & {
+      marketplaceSection: Maybe<
+        { __typename?: 'SanityMarketplaceSection' } & Pick<
+          SanityMarketplaceSection,
+          'header' | 'tooltip'
+        > & {
+            body: Maybe<
+              { __typename?: 'SanityBodyGreenTextWithPopover' } & Pick<
+                SanityBodyGreenTextWithPopover,
+                'green' | 'middle' | 'popover' | 'end'
+              >
+            >;
+            callToActions: Maybe<
+              Array<
+                Maybe<
+                  {
+                    __typename?: 'SanityCallToAction';
+                  } & CallToActionFieldsFragment
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type HomeValuesSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type HomeValuesSectionQuery = { __typename?: 'Query' } & {
+  sanityHomePageWeb: Maybe<
+    { __typename?: 'SanityHomePageWeb' } & {
+      valuesSection: Maybe<
+        { __typename?: 'SanityHomeValuesSection' } & Pick<
+          SanityHomeValuesSection,
+          'header'
+        > & {
+            imageItems: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityValuesImageItem' } & Pick<
+                    SanityValuesImageItem,
+                    'title' | 'description'
+                  > & {
+                      image: Maybe<
+                        { __typename?: 'SanityImage' } & ImageFragment
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type MainnetLaunchInfoSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type MainnetLaunchInfoSectionQuery = { __typename?: 'Query' } & {
+  sanityMainnetPage: Maybe<
+    { __typename?: 'SanityMainnetPage' } & Pick<
+      SanityMainnetPage,
+      'launchDate'
+    > & {
+        launchInfoSection: Maybe<
+          { __typename?: 'SanityMainnetLaunchInfoSection' } & Pick<
+            SanityMainnetLaunchInfoSection,
+            'title' | 'cardTitle' | '_rawCardBody'
+          > & {
+              image: Maybe<
+                {
+                  __typename?: 'SanityCustomImage';
+                } & FluidCustomImageFields_WithWebpFragment
+              >;
+              actionItems: Maybe<
+                Array<
+                  Maybe<
+                    { __typename?: 'SanityMainnetActionItem' } & Pick<
+                      SanityMainnetActionItem,
+                      'title' | 'linkText' | 'linkUrl' | 'description'
+                    > & {
+                        icon: Maybe<
+                          { __typename?: 'SanityCustomImage' } & Pick<
+                            SanityCustomImage,
+                            'imageAlt'
+                          > & {
+                              image: Maybe<
+                                { __typename?: 'SanityImage' } & ImageFragment
+                              >;
+                            }
+                        >;
+                      }
+                  >
+                >
+              >;
+            }
+        >;
+      }
+  >;
+};
+
+export type MainnetMediaSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MainnetMediaSectionQuery = { __typename?: 'Query' } & {
+  sanityMainnetPage: Maybe<
+    { __typename?: 'SanityMainnetPage' } & {
+      mediaItems: Maybe<
+        Array<Maybe<{ __typename?: 'SanityMedia' } & MediaFieldsFragment>>
+      >;
+    }
+  >;
+};
+
+export type MainnetTopSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MainnetTopSectionQuery = { __typename?: 'Query' } & {
+  desktop: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityMainnetPage: Maybe<
+    { __typename?: 'SanityMainnetPage' } & Pick<
+      SanityMainnetPage,
+      'launchDate'
+    > & {
+        topSection: Maybe<
+          { __typename?: 'SanityTitleBody' } & Pick<
+            SanityTitleBody,
+            'title' | 'body'
+          >
+        >;
+      }
+  >;
+};
+
+export type MainnetWhatsNextSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type MainnetWhatsNextSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityMainnetPage: Maybe<
+    { __typename?: 'SanityMainnetPage' } & {
+      whatsNextSection: Maybe<
+        { __typename?: 'SanityMainnetWhatsNextSection' } & Pick<
+          SanityMainnetWhatsNextSection,
+          'title' | '_rawDescription'
+        > & {
+            infoItems: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityMainnetInfoItem' } & Pick<
+                    SanityMainnetInfoItem,
+                    'title' | '_rawDescription' | 'gitLink'
+                  > & {
+                      icon: Maybe<
+                        { __typename?: 'SanityCustomImage' } & {
+                          image: Maybe<
+                            { __typename?: 'SanityImage' } & {
+                              asset: Maybe<
+                                { __typename?: 'SanityImageAsset' } & Pick<
+                                  SanityImageAsset,
+                                  'url'
+                                >
+                              >;
+                            }
+                          >;
+                        }
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type NctBannerSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type NctBannerSectionQuery = { __typename?: 'Query' } & {
+  sanityNctPage: Maybe<
+    { __typename?: 'SanityNctPage' } & {
+      banner: Maybe<
+        { __typename?: 'SanityTitleImageCustomBody' } & Pick<
+          SanityTitleImageCustomBody,
+          'title' | '_rawBody'
+        > & {
+            image: Maybe<
+              {
+                __typename?: 'SanityCustomImage';
+              } & FluidCustomImageFieldsFragment
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type NctLedgerSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type NctLedgerSectionQuery = { __typename?: 'Query' } & {
+  bg: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityNctPage: Maybe<
+    { __typename?: 'SanityNctPage' } & {
+      ledgerSection: Maybe<
+        { __typename?: 'SanityNctLedgerSection' } & Pick<
+          SanityNctLedgerSection,
+          'title' | 'subtitle' | '_rawBody'
+        > & {
+            icon: Maybe<
+              { __typename?: 'SanityImage' } & ImageWithPreviewFragment
+            >;
+            button: Maybe<
+              { __typename?: 'SanityButton' } & ButtonFieldsFragment
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type NctMarketplaceSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type NctMarketplaceSectionQuery = { __typename?: 'Query' } & {
+  sanityNctPage: Maybe<
+    { __typename?: 'SanityNctPage' } & {
+      marketplaceSection: Maybe<
+        { __typename?: 'SanityTitleImageCustomBody' } & Pick<
+          SanityTitleImageCustomBody,
+          'title' | '_rawBody'
+        > & {
+            image: Maybe<
+              { __typename?: 'SanityCustomImage' } & CustomImageFieldsFragment
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type NctMediaSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type NctMediaSectionQuery = { __typename?: 'Query' } & {
+  sanityNctPage: Maybe<
+    { __typename?: 'SanityNctPage' } & {
+      mediaItems: Maybe<
+        Array<Maybe<{ __typename?: 'SanityMedia' } & MediaFieldsFragment>>
+      >;
+    }
+  >;
+};
+
+export type NctOverviewSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type NctOverviewSectionQuery = { __typename?: 'Query' } & {
+  sanityNctPage: Maybe<
+    { __typename?: 'SanityNctPage' } & {
+      overviewSection: Maybe<
+        { __typename?: 'SanityNctOverviewSection' } & Pick<
+          SanityNctOverviewSection,
+          'title' | '_rawBody'
+        > & {
+            background: Maybe<
+              { __typename?: 'SanityImage' } & FluidSanityImageFieldsFragment
+            >;
+            titleIcon: Maybe<
+              { __typename?: 'SanityImage' } & ImageWithPreviewFragment
+            >;
+            button: Maybe<
+              { __typename?: 'SanityButton' } & ButtonFieldsFragment
+            >;
+            items: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityLabeledTextLinkable' } & Pick<
+                    SanityLabeledTextLinkable,
+                    'label' | 'text'
+                  > & {
+                      link: Maybe<
+                        { __typename?: 'SanityLink' } & LinkFieldsFragment
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type NctTokenSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type NctTokenSectionQuery = { __typename?: 'Query' } & {
+  sanityNctPage: Maybe<
+    { __typename?: 'SanityNctPage' } & Pick<SanityNctPage, 'launchDate'> & {
+        tokenSection: Maybe<
+          { __typename?: 'SanityNctTokenSection' } & Pick<
+            SanityNctTokenSection,
+            | 'cardTitle'
+            | 'cardSubtitle'
+            | '_rawCardBody'
+            | 'detailTitle'
+            | 'detailSubtitle'
+            | '_rawDetailBody'
+          > & {
+              cardImage: Maybe<
+                { __typename?: 'SanityCustomImage' } & CustomImageFieldsFragment
+              >;
+              cardButton: Maybe<
+                { __typename?: 'SanityButton' } & ButtonFieldsFragment
+              >;
+              detailImage: Maybe<
+                { __typename?: 'SanityCustomImage' } & CustomImageFieldsFragment
+              >;
+              detailButton1: Maybe<
+                { __typename?: 'SanityButton' } & ButtonFieldsFragment
+              >;
+              detailButton2: Maybe<
+                { __typename?: 'SanityButton' } & ButtonFieldsFragment
+              >;
+            }
+        >;
+      }
+  >;
+};
+
+export type NctTopSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type NctTopSectionQuery = { __typename?: 'Query' } & {
+  sanityNctPage: Maybe<
+    { __typename?: 'SanityNctPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleImageCustomBody' } & Pick<
+          SanityTitleImageCustomBody,
+          'title' | '_rawBody'
+        > & {
+            image: Maybe<
+              {
+                __typename?: 'SanityCustomImage';
+              } & FluidCustomImageFields_WithWebpFragment
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type PresskitAwardsSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type PresskitAwardsSectionQuery = { __typename?: 'Query' } & {
+  sanityPresskitPage: Maybe<
+    { __typename?: 'SanityPresskitPage' } & {
+      awardsSection: Maybe<
+        { __typename?: 'SanityPresskitAwardsSection' } & Pick<
+          SanityPresskitAwardsSection,
+          'header'
+        > & {
+            items: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityTitleImageLink' } & Pick<
+                    SanityTitleImageLink,
+                    'title' | 'link'
+                  > & {
+                      image: Maybe<
+                        {
+                          __typename?: 'SanityImage';
+                        } & FluidSanityImageFields_WithWebpFragment
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type PresskitConnectSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type PresskitConnectSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityPresskitPage: Maybe<
+    { __typename?: 'SanityPresskitPage' } & Pick<
+      SanityPresskitPage,
+      'connectSectionHeader'
+    >
+  >;
+};
+
+export type PresskitEnableSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type PresskitEnableSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityPresskitPage: Maybe<
+    { __typename?: 'SanityPresskitPage' } & {
+      enableSection: Maybe<
+        { __typename?: 'SanityTitleImageCustomBody' } & Pick<
+          SanityTitleImageCustomBody,
+          'title' | '_rawBody'
+        > & {
+            image: Maybe<
+              {
+                __typename?: 'SanityCustomImage';
+              } & FluidCustomImageFields_WithWebpFragment
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type PresskitFeaturedSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type PresskitFeaturedSectionQuery = { __typename?: 'Query' } & {
+  sanityPresskitPage: Maybe<
+    { __typename?: 'SanityPresskitPage' } & {
+      featuredSection: Maybe<
+        { __typename?: 'SanityPresskitFeaturedSection' } & Pick<
+          SanityPresskitFeaturedSection,
+          'header'
+        > & {
+            articles: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityMedia' } & Pick<
+                    SanityMedia,
+                    'title' | 'author' | 'date' | 'href' | 'type'
+                  > & {
+                      image: Maybe<
+                        { __typename?: 'SanityCustomImage' } & {
+                          image: Maybe<
+                            { __typename?: 'SanityImage' } & {
+                              asset: Maybe<
+                                { __typename?: 'SanityImageAsset' } & Pick<
+                                  SanityImageAsset,
+                                  'url'
+                                >
+                              >;
+                            }
+                          >;
+                        }
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type PresskitLogosSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type PresskitLogosSectionQuery = { __typename?: 'Query' } & {
+  sanityPresskitPage: Maybe<
+    { __typename?: 'SanityPresskitPage' } & {
+      logosSection: Maybe<
+        { __typename?: 'SanityPresskitLogosSection' } & Pick<
+          SanityPresskitLogosSection,
+          'header' | 'buttonText' | 'buttonLink'
+        >
+      >;
+    }
+  >;
+};
+
+export type PresskitPhotosSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type PresskitPhotosSectionQuery = { __typename?: 'Query' } & {
+  sanityPresskitPage: Maybe<
+    { __typename?: 'SanityPresskitPage' } & {
+      photosSection: Maybe<
+        { __typename?: 'SanityPresskitPhotosSection' } & Pick<
+          SanityPresskitPhotosSection,
+          'header'
+        > & {
+            photos: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityImage' } & {
+                    asset: Maybe<
+                      { __typename?: 'SanityImageAsset' } & Pick<
+                        SanityImageAsset,
+                        'url'
+                      >
+                    >;
+                  }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type PresskitTeamSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type PresskitTeamSectionQuery = { __typename?: 'Query' } & {
+  teamBackground: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityPresskitPage: Maybe<
+    { __typename?: 'SanityPresskitPage' } & {
+      teamSection: Maybe<
+        { __typename?: 'SanityPresskitTeamSection' } & Pick<
+          SanityPresskitTeamSection,
+          'header' | 'buttonText'
+        > & {
+            members: Maybe<
+              Array<
+                Maybe<
+                  {
+                    __typename?: 'SanityRegenTeamMember';
+                  } & TeamMemberFieldsFragment
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type PresskitTimelineSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type PresskitTimelineSectionQuery = { __typename?: 'Query' } & {
+  sanityPresskitPage: Maybe<
+    { __typename?: 'SanityPresskitPage' } & {
+      timelineSection: Maybe<
+        { __typename?: 'SanityPresskitTimelineSection' } & Pick<
+          SanityPresskitTimelineSection,
+          'header' | 'description' | 'completedItemIndex'
+        > & {
+            items: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityPresskitTimelineItem' } & Pick<
+                    SanityPresskitTimelineItem,
+                    'date' | 'summary' | 'description'
+                  >
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type PresskitTitleDescriptionSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type PresskitTitleDescriptionSectionQuery = { __typename?: 'Query' } & {
+  sanityPresskitPage: Maybe<
+    { __typename?: 'SanityPresskitPage' } & {
+      titleDescriptionSection: Maybe<
+        { __typename?: 'SanityTitleCustomBody' } & Pick<
+          SanityTitleCustomBody,
+          'title' | '_rawBody'
+        >
+      >;
+    }
+  >;
+};
+
+export type PresskitTopSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type PresskitTopSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityPresskitPage: Maybe<
+    { __typename?: 'SanityPresskitPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+    }
+  >;
+};
+
+export type ResourcesLedgerSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type ResourcesLedgerSectionQuery = { __typename?: 'Query' } & {
+  sanityResourcesPage: Maybe<
+    { __typename?: 'SanityResourcesPage' } & {
+      ledgerSection: Maybe<
+        { __typename?: 'SanityResourcesLedgerSection' } & Pick<
+          SanityResourcesLedgerSection,
+          'header'
+        > & {
+            cards: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityResource' } & Pick<
+                    SanityResource,
+                    '_rawTitle' | '_rawDescription' | 'lastUpdated'
+                  > & {
+                      button: Maybe<
+                        { __typename?: 'SanityButton' } & Pick<
+                          SanityButton,
+                          'buttonText'
+                        > & {
+                            buttonLink: Maybe<
+                              { __typename?: 'SanityLink' } & Pick<
+                                SanityLink,
+                                'buttonHref'
+                              > & {
+                                  buttonDoc: Maybe<
+                                    { __typename?: 'SanityDoc' } & Pick<
+                                      SanityDoc,
+                                      'href'
+                                    >
+                                  >;
+                                }
+                            >;
+                          }
+                      >;
+                      image: Maybe<
+                        { __typename?: 'SanityCustomImage' } & Pick<
+                          SanityCustomImage,
+                          'imageHref'
+                        > & {
+                            image: Maybe<
+                              { __typename?: 'SanityImage' } & {
+                                asset: Maybe<
+                                  { __typename?: 'SanityImageAsset' } & Pick<
+                                    SanityImageAsset,
+                                    'extension' | 'url'
+                                  >
+                                >;
+                              }
+                            >;
+                          }
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type ResourcesRegistrySectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type ResourcesRegistrySectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityResourcesPage: Maybe<
+    { __typename?: 'SanityResourcesPage' } & {
+      registrySection: Maybe<
+        { __typename?: 'SanityResourcesRegistrySection' } & Pick<
+          SanityResourcesRegistrySection,
+          'header' | 'documentTableTitle'
+        > & {
+            documents: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityDoc' } & Pick<
+                    SanityDoc,
+                    'name' | 'type' | 'date' | 'href'
+                  >
+                >
+              >
+            >;
+            subsections: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityResourcesRegistrySubSection' } & Pick<
+                    SanityResourcesRegistrySubSection,
+                    'title'
+                  > & {
+                      cards: Maybe<
+                        Array<
+                          Maybe<
+                            { __typename?: 'SanityResource' } & Pick<
+                              SanityResource,
+                              '_rawTitle' | 'lastUpdated' | '_rawDescription'
+                            > & {
+                                image: Maybe<
+                                  { __typename?: 'SanityCustomImage' } & Pick<
+                                    SanityCustomImage,
+                                    'imageHref'
+                                  > & {
+                                      image: Maybe<
+                                        { __typename?: 'SanityImage' } & {
+                                          asset: Maybe<
+                                            {
+                                              __typename?: 'SanityImageAsset';
+                                            } & Pick<
+                                              SanityImageAsset,
+                                              'extension' | 'url'
+                                            >
+                                          >;
+                                        }
+                                      >;
+                                    }
+                                >;
+                                button: Maybe<
+                                  { __typename?: 'SanityButton' } & Pick<
+                                    SanityButton,
+                                    'buttonText'
+                                  > & {
+                                      buttonLink: Maybe<
+                                        { __typename?: 'SanityLink' } & Pick<
+                                          SanityLink,
+                                          'buttonHref'
+                                        > & {
+                                            buttonDoc: Maybe<
+                                              {
+                                                __typename?: 'SanityDoc';
+                                              } & Pick<SanityDoc, 'href'>
+                                            >;
+                                          }
+                                      >;
+                                    }
+                                >;
+                              }
+                          >
+                        >
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type ResourcesTopSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type ResourcesTopSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  backgroundMobile: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityResourcesPage: Maybe<
+    { __typename?: 'SanityResourcesPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+    }
+  >;
+};
+
+export type ScienceCommunitySectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type ScienceCommunitySectionQuery = { __typename?: 'Query' } & {
+  arrow: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanitySciencePage: Maybe<
+    { __typename?: 'SanitySciencePage' } & {
+      communitySection: Maybe<
+        { __typename?: 'SanityScienceCommunitySection' } & Pick<
+          SanityScienceCommunitySection,
+          'caption' | 'header'
+        > & {
+            members: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityScienceCommunityMember' } & Pick<
+                    SanityScienceCommunityMember,
+                    'name' | '_rawRole' | '_rawDescription'
+                  > & {
+                      image: Maybe<
+                        { __typename?: 'SanityCustomImage' } & Pick<
+                          SanityCustomImage,
+                          'imageHref'
+                        > & {
+                            image: Maybe<
+                              { __typename?: 'SanityImage' } & {
+                                asset: Maybe<
+                                  { __typename?: 'SanityImageAsset' } & Pick<
+                                    SanityImageAsset,
+                                    'url'
+                                  >
+                                >;
+                              }
+                            >;
+                          }
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type ScienceOpenScienceSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type ScienceOpenScienceSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanitySciencePage: Maybe<
+    { __typename?: 'SanitySciencePage' } & {
+      openScienceSection: Maybe<
+        { __typename?: 'SanityScienceOpenScienceSection' } & Pick<
+          SanityScienceOpenScienceSection,
+          'headerStart' | 'headerGreen' | 'caption'
+        > & {
+            phases: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityTitleBody' } & Pick<
+                    SanityTitleBody,
+                    'title' | 'body'
+                  >
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type SciencePartnershipsSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type SciencePartnershipsSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanitySciencePage: Maybe<
+    { __typename?: 'SanitySciencePage' } & {
+      partnershipSection: Maybe<
+        { __typename?: 'SanitySciencePartnershipSection' } & Pick<
+          SanitySciencePartnershipSection,
+          'header'
+        > & {
+            partners: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityImageCustomBody' } & Pick<
+                    SanityImageCustomBody,
+                    '_rawBody'
+                  > & {
+                      image: Maybe<
+                        {
+                          __typename?: 'SanityCustomImage';
+                        } & FluidCustomImageFields_WithWebpFragment
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type ScienceTitleDescriptionSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type ScienceTitleDescriptionSectionQuery = { __typename?: 'Query' } & {
+  sanitySciencePage: Maybe<
+    { __typename?: 'SanitySciencePage' } & {
+      titleDescriptionSection: Maybe<
+        { __typename?: 'SanityScienceTitleDescriptionSection' } & Pick<
+          SanityScienceTitleDescriptionSection,
+          'title' | '_rawDescription'
+        > & {
+            outcomes: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityEcologicalOutcome' } & Pick<
+                    SanityEcologicalOutcome,
+                    'title' | '_rawDescription'
+                  > & {
+                      image: Maybe<
+                        { __typename?: 'SanityCustomImage' } & Pick<
+                          SanityCustomImage,
+                          'imageHref'
+                        > & {
+                            image: Maybe<
+                              { __typename?: 'SanityImage' } & {
+                                asset: Maybe<
+                                  { __typename?: 'SanityImageAsset' } & Pick<
+                                    SanityImageAsset,
+                                    'extension' | 'url'
+                                  >
+                                >;
+                              }
+                            >;
+                          }
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type ScienceTopSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type ScienceTopSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  backgroundMobile: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanitySciencePage: Maybe<
+    { __typename?: 'SanitySciencePage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+    }
+  >;
+};
+
+export type SharedBlogSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type SharedBlogSectionQuery = { __typename?: 'Query' } & {
+  sanitySharedSections: Maybe<
+    { __typename?: 'SanitySharedSections' } & {
+      blog: Maybe<
+        { __typename?: 'SanityBlogSection' } & Pick<
+          SanityBlogSection,
+          'header'
+        > & {
+            posts: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityBlogPost' } & Pick<
+                    SanityBlogPost,
+                    'header' | 'url' | '_rawDescription'
+                  > & {
+                      image: Maybe<
+                        {
+                          __typename?: 'SanityCustomImage';
+                        } & CustomImageFieldsFragment
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type EmailSubmitSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type EmailSubmitSectionQuery = { __typename?: 'Query' } & {
+  sanitySharedSections: Maybe<
+    { __typename?: 'SanitySharedSections' } & {
+      newsletter: Maybe<
+        { __typename?: 'SanityTitleCustomBody' } & Pick<
+          SanityTitleCustomBody,
+          'title' | '_rawBody'
+        >
+      >;
+    }
+  >;
+  desktop: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+};
+
+export type TeamAdvisorSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TeamAdvisorSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+  sanityTeamPage: Maybe<
+    { __typename?: 'SanityTeamPage' } & {
+      advisorSection: Maybe<
+        { __typename?: 'SanityTeamSection' } & TeamSectionFieldsFragment
+      >;
+    }
+  >;
+};
+
+export type TeamCoreTeamSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TeamCoreTeamSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<{ __typename?: 'File' } & Pick<File, 'publicURL'>>;
+  sanityTeamPage: Maybe<
+    { __typename?: 'SanityTeamPage' } & {
+      coreSection: Maybe<
+        { __typename?: 'SanityTeamSection' } & TeamSectionFieldsFragment
+      >;
+    }
+  >;
+};
+
+export type TeamTopSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TeamTopSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  backgroundMobile: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityTeamPage: Maybe<
+    { __typename?: 'SanityTeamPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+    }
+  >;
+};
+
+export type TokenBlockExplorerSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type TokenBlockExplorerSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityTokenPage: Maybe<
+    { __typename?: 'SanityTokenPage' } & {
+      blockExplorerSection: Maybe<
+        { __typename?: 'SanityTitleBodyButton' } & Pick<
+          SanityTitleBodyButton,
+          'title' | '_rawBody'
+        > & {
+            button: Maybe<
+              { __typename?: 'SanityButton' } & Pick<
+                SanityButton,
+                'buttonText'
+              > & {
+                  buttonLink: Maybe<
+                    { __typename?: 'SanityLink' } & Pick<
+                      SanityLink,
+                      'buttonHref'
+                    >
+                  >;
+                }
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type TokenConnectSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TokenConnectSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityTokenPage: Maybe<
+    { __typename?: 'SanityTokenPage' } & Pick<
+      SanityTokenPage,
+      'connectSectionHeader'
+    >
+  >;
+};
+
+export type TokenInfoSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TokenInfoSectionQuery = { __typename?: 'Query' } & {
+  sanityTokenPage: Maybe<
+    { __typename?: 'SanityTokenPage' } & {
+      infoSection: Maybe<
+        { __typename?: 'SanityTokenInfoSection' } & Pick<
+          SanityTokenInfoSection,
+          'title' | 'subtitle' | '_rawBody'
+        > & {
+            image: Maybe<
+              {
+                __typename?: 'SanityCustomImage';
+              } & FluidCustomImageFields_WithWebpFragment
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type TokenMediaSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TokenMediaSectionQuery = { __typename?: 'Query' } & {
+  sanityTokenPage: Maybe<
+    { __typename?: 'SanityTokenPage' } & {
+      mediaCards: Maybe<
+        Array<Maybe<{ __typename?: 'SanityMedia' } & MediaFieldsFragment>>
+      >;
+    }
+  >;
+};
+
+export type TokenStakingQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TokenStakingQuery = { __typename?: 'Query' } & {
+  sanityTokenPage: Maybe<
+    { __typename?: 'SanityTokenPage' } & {
+      stakingSection: Maybe<
+        { __typename?: 'SanityTitleBodyButton' } & Pick<
+          SanityTitleBodyButton,
+          'title' | '_rawBody'
+        > & {
+            button: Maybe<
+              { __typename?: 'SanityButton' } & Pick<
+                SanityButton,
+                'buttonText'
+              > & {
+                  buttonLink: Maybe<
+                    { __typename?: 'SanityLink' } & Pick<
+                      SanityLink,
+                      'buttonHref'
+                    >
+                  >;
+                }
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type Unnamed_13_QueryVariables = Exact<{ [key: string]: never }>;
+
+export type Unnamed_13_Query = { __typename?: 'Query' } & {
+  bg: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+};
+
+export type TokenEconomicsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TokenEconomicsQuery = { __typename?: 'Query' } & {
+  sanityTokenPage: Maybe<
+    { __typename?: 'SanityTokenPage' } & {
+      tokenEconomics: Maybe<
+        { __typename?: 'SanityTitleCustomBody' } & Pick<
+          SanityTitleCustomBody,
+          'title' | '_rawBody'
+        >
+      >;
+    }
+  >;
+};
+
+export type TokenPoolQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TokenPoolQuery = { __typename?: 'Query' } & {
+  sanityTokenPage: Maybe<
+    { __typename?: 'SanityTokenPage' } & {
+      poolSection: Maybe<
+        { __typename?: 'SanityTokenPoolSection' } & Pick<
+          SanityTokenPoolSection,
+          'title' | 'subtitle'
+        > & {
+            image: Maybe<{ __typename?: 'SanityImage' } & ImageFragment>;
+            mobileImage: Maybe<{ __typename?: 'SanityImage' } & ImageFragment>;
+          }
+      >;
+    }
+  >;
+};
+
+export type TokenTopSectionQueryVariables = Exact<{ [key: string]: never }>;
+
+export type TokenTopSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityTokenPage: Maybe<
+    { __typename?: 'SanityTokenPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+    }
+  >;
+};
+
+export type ValidatorsConnectSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type ValidatorsConnectSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityValidatorsPage: Maybe<
+    { __typename?: 'SanityValidatorsPage' } & Pick<
+      SanityValidatorsPage,
+      'connectSectionHeader'
+    >
+  >;
+};
+
+export type ValidatorsTopSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type ValidatorsTopSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityValidatorsPage: Maybe<
+    { __typename?: 'SanityValidatorsPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+    }
+  >;
+};
+
+export type ValidatorsWhatSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type ValidatorsWhatSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityValidatorsPage: Maybe<
+    { __typename?: 'SanityValidatorsPage' } & {
+      whatSection: Maybe<
+        { __typename?: 'SanityTitleCustomBody' } & Pick<
+          SanityTitleCustomBody,
+          'title' | '_rawBody'
+        >
+      >;
+    }
+  >;
+};
+
+export type ValidatorsWhoSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type ValidatorsWhoSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityValidatorsPage: Maybe<
+    { __typename?: 'SanityValidatorsPage' } & {
+      whoSection: Maybe<
+        { __typename?: 'SanityValidatorWhoSection' } & Pick<
+          SanityValidatorWhoSection,
+          'header' | '_rawBody'
+        > & {
+            validators: Maybe<
+              Array<
+                Maybe<
+                  { __typename?: 'SanityValidator' } & Pick<
+                    SanityValidator,
+                    'header' | 'description'
+                  > & {
+                      members: Maybe<
+                        Array<
+                          Maybe<
+                            { __typename?: 'SanityImageLink' } & {
+                              link: Maybe<
+                                { __typename?: 'SanityLink' } & Pick<
+                                  SanityLink,
+                                  'buttonHref'
+                                >
+                              >;
+                              image: Maybe<
+                                { __typename?: 'SanityCustomImage' } & {
+                                  image: Maybe<
+                                    { __typename?: 'SanityImage' } & {
+                                      asset: Maybe<
+                                        {
+                                          __typename?: 'SanityImageAsset';
+                                        } & Pick<SanityImageAsset, 'url'>
+                                      >;
+                                    }
+                                  >;
+                                }
+                              >;
+                            }
+                          >
+                        >
+                      >;
+                    }
+                >
+              >
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type ValidatorsWhySectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type ValidatorsWhySectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityValidatorsPage: Maybe<
+    { __typename?: 'SanityValidatorsPage' } & {
+      whySection: Maybe<
+        { __typename?: 'SanityTitleCustomBody' } & Pick<
+          SanityTitleCustomBody,
+          'title' | '_rawBody'
+        >
+      >;
+    }
+  >;
+};
+
+export type WalletAddrRegFormSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type WalletAddrRegFormSectionQuery = { __typename?: 'Query' } & {
+  sanityWalletAddressRegistrationPage: Maybe<
+    { __typename?: 'SanityWalletAddressRegistrationPage' } & {
+      formSection: Maybe<
+        { __typename?: 'SanityWalletAddressRegistrationFormSection' } & Pick<
+          SanityWalletAddressRegistrationFormSection,
+          'airtableLink' | 'recaptchaMessage'
+        >
+      >;
+    }
+  >;
+};
+
+export type WalletAddrRegInstructionsSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type WalletAddrRegInstructionsSectionQuery = { __typename?: 'Query' } & {
+  sanityWalletAddressRegistrationPage: Maybe<
+    { __typename?: 'SanityWalletAddressRegistrationPage' } & {
+      instructionSection: Maybe<
+        { __typename?: 'SanityTitleCustomBody' } & Pick<
+          SanityTitleCustomBody,
+          'title' | '_rawBody'
+        >
+      >;
+    }
+  >;
+};
+
+export type WalletAddrRegTopSectionQueryVariables = Exact<{
+  [key: string]: never;
+}>;
+
+export type WalletAddrRegTopSectionQuery = { __typename?: 'Query' } & {
+  background: Maybe<
+    { __typename?: 'File' } & {
+      childImageSharp: Maybe<
+        { __typename?: 'ImageSharp' } & {
+          fluid: Maybe<
+            {
+              __typename?: 'ImageSharpFluid';
+            } & GatsbyImageSharpFluid_WithWebpFragment
+          >;
+        }
+      >;
+    }
+  >;
+  sanityWalletAddressRegistrationPage: Maybe<
+    { __typename?: 'SanityWalletAddressRegistrationPage' } & {
+      topSection: Maybe<
+        { __typename?: 'SanityTitleBody' } & Pick<
+          SanityTitleBody,
+          'title' | 'body'
+        >
+      >;
+    }
+  >;
+};
+
+export type WalletConnectButtonQueryVariables = Exact<{ [key: string]: never }>;
+
+export type WalletConnectButtonQuery = { __typename?: 'Query' } & {
+  sanityWalletAddressRegistrationPage: Maybe<
+    { __typename?: 'SanityWalletAddressRegistrationPage' } & {
+      walletSection: Maybe<
+        { __typename?: 'SanityWalletAddressRegistrationWalletSection' } & Pick<
+          SanityWalletAddressRegistrationWalletSection,
+          'buttonText' | 'walletFoundButtonText' | '_rawNoWalletFound'
+        >
+      >;
+    }
+  >;
+};
 
 export type CaseStudyTemplateQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
+export type CaseStudyTemplateQuery = { __typename?: 'Query' } & {
+  sanityCaseStudyPage: Maybe<
+    { __typename?: 'SanityCaseStudyPage' } & Pick<
+      SanityCaseStudyPage,
+      'name' | 'description'
+    > & {
+        background: Maybe<
+          {
+            __typename?: 'SanityCustomImage';
+          } & FluidCustomImageFields_WithWebpFragment
+        >;
+        aboutSection: Maybe<
+          { __typename?: 'SanityCaseStudyAboutSection' } & Pick<
+            SanityCaseStudyAboutSection,
+            | '_rawAbout'
+            | 'practice'
+            | 'biome'
+            | 'region'
+            | 'lineRotate'
+            | 'lineWidth'
+          > & {
+              aboutImage: Maybe<
+                { __typename?: 'SanityCustomImage' } & {
+                  image: Maybe<
+                    { __typename?: 'SanityImage' } & {
+                      asset: Maybe<
+                        { __typename?: 'SanityImageAsset' } & Pick<
+                          SanityImageAsset,
+                          'url'
+                        >
+                      >;
+                    }
+                  >;
+                }
+              >;
+              mapImage: Maybe<
+                {
+                  __typename?: 'SanityCustomImage';
+                } & FluidCustomImageFields_WithWebpFragment
+              >;
+            }
+        >;
+        contextSection: Maybe<
+          { __typename?: 'SanityCaseStudyContextSection' } & Pick<
+            SanityCaseStudyContextSection,
+            '_rawDescription' | 'challenges'
+          > & {
+              image: Maybe<
+                {
+                  __typename?: 'SanityCustomImage';
+                } & FluidCustomImageFields_WithWebpFragment
+              >;
+            }
+        >;
+        approachSection: Maybe<
+          { __typename?: 'SanityCaseStudyApproachSection' } & Pick<
+            SanityCaseStudyApproachSection,
+            | 'description'
+            | '_rawDetails'
+            | '_rawResults'
+            | '_rawNext'
+            | '_rawFigureTitle'
+          > & {
+              figureImage: Maybe<
+                {
+                  __typename?: 'SanityCustomImage';
+                } & FluidCustomImageFields_WithWebpFragment
+              >;
+            }
+        >;
+        figureSection: Maybe<
+          { __typename?: 'SanityCaseStudyFigureSection' } & Pick<
+            SanityCaseStudyFigureSection,
+            'title'
+          > & {
+              background: Maybe<
+                {
+                  __typename?: 'SanityCustomImage';
+                } & FluidCustomImageFields_WithWebpFragment
+              >;
+              figures: Maybe<
+                Array<
+                  Maybe<
+                    { __typename?: 'SanityCaseStudyFigure' } & Pick<
+                      SanityCaseStudyFigure,
+                      'title' | 'spacing'
+                    > & {
+                        image: Maybe<
+                          {
+                            __typename?: 'SanityCustomImage';
+                          } & FluidCustomImageFields_WithWebpFragment
+                        >;
+                      }
+                  >
+                >
+              >;
+            }
+        >;
+        fundingSection: Maybe<
+          { __typename?: 'SanityCaseStudyFundingSection' } & Pick<
+            SanityCaseStudyFundingSection,
+            '_rawDetails' | '_rawResults' | '_rawNext'
+          > & {
+              image: Maybe<
+                {
+                  __typename?: 'SanityCustomImage';
+                } & FluidCustomImageFields_WithWebpFragment
+              >;
+            }
+        >;
+        conclusionSection: Maybe<
+          { __typename?: 'SanityCaseStudyConclusionSection' } & Pick<
+            SanityCaseStudyConclusionSection,
+            '_rawDescription'
+          > & {
+              images: Maybe<
+                Array<
+                  Maybe<
+                    { __typename?: 'SanityImageWithTitle' } & Pick<
+                      SanityImageWithTitle,
+                      'title'
+                    > & {
+                        image: Maybe<
+                          {
+                            __typename?: 'SanityCustomImage';
+                          } & FluidCustomImageFields_WithWebpFragment
+                        >;
+                      }
+                  >
+                >
+              >;
+            }
+        >;
+        bottomSection: Maybe<
+          { __typename?: 'SanityCaseStudyBottomSection' } & Pick<
+            SanityCaseStudyBottomSection,
+            'quote' | 'personName' | 'personRole'
+          > & {
+              personImage: Maybe<
+                {
+                  __typename?: 'SanityCustomImage';
+                } & FluidCustomImageFields_WithWebpFragment
+              >;
+              background: Maybe<
+                {
+                  __typename?: 'SanityCustomImage';
+                } & FluidCustomImageFields_WithWebpFragment
+              >;
+            }
+        >;
+      }
+  >;
+};
 
-export type CaseStudyTemplateQuery = (
-  { __typename?: 'Query' }
-  & { sanityCaseStudyPage: Maybe<(
-    { __typename?: 'SanityCaseStudyPage' }
-    & Pick<SanityCaseStudyPage, 'name' | 'description'>
-    & { background: Maybe<(
-      { __typename?: 'SanityCustomImage' }
-      & FluidCustomImageFields_WithWebpFragment
-    )>, aboutSection: Maybe<(
-      { __typename?: 'SanityCaseStudyAboutSection' }
-      & Pick<SanityCaseStudyAboutSection, '_rawAbout' | 'practice' | 'biome' | 'region' | 'lineRotate' | 'lineWidth'>
-      & { aboutImage: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & { image: Maybe<(
-          { __typename?: 'SanityImage' }
-          & { asset: Maybe<(
-            { __typename?: 'SanityImageAsset' }
-            & Pick<SanityImageAsset, 'url'>
-          )> }
-        )> }
-      )>, mapImage: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFields_WithWebpFragment
-      )> }
-    )>, contextSection: Maybe<(
-      { __typename?: 'SanityCaseStudyContextSection' }
-      & Pick<SanityCaseStudyContextSection, '_rawDescription' | 'challenges'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFields_WithWebpFragment
-      )> }
-    )>, approachSection: Maybe<(
-      { __typename?: 'SanityCaseStudyApproachSection' }
-      & Pick<SanityCaseStudyApproachSection, 'description' | '_rawDetails' | '_rawResults' | '_rawNext' | '_rawFigureTitle'>
-      & { figureImage: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFields_WithWebpFragment
-      )> }
-    )>, figureSection: Maybe<(
-      { __typename?: 'SanityCaseStudyFigureSection' }
-      & Pick<SanityCaseStudyFigureSection, 'title'>
-      & { background: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFields_WithWebpFragment
-      )>, figures: Maybe<Array<Maybe<(
-        { __typename?: 'SanityCaseStudyFigure' }
-        & Pick<SanityCaseStudyFigure, 'title' | 'spacing'>
-        & { image: Maybe<(
-          { __typename?: 'SanityCustomImage' }
-          & FluidCustomImageFields_WithWebpFragment
-        )> }
-      )>>> }
-    )>, fundingSection: Maybe<(
-      { __typename?: 'SanityCaseStudyFundingSection' }
-      & Pick<SanityCaseStudyFundingSection, '_rawDetails' | '_rawResults' | '_rawNext'>
-      & { image: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFields_WithWebpFragment
-      )> }
-    )>, conclusionSection: Maybe<(
-      { __typename?: 'SanityCaseStudyConclusionSection' }
-      & Pick<SanityCaseStudyConclusionSection, '_rawDescription'>
-      & { images: Maybe<Array<Maybe<(
-        { __typename?: 'SanityImageWithTitle' }
-        & Pick<SanityImageWithTitle, 'title'>
-        & { image: Maybe<(
-          { __typename?: 'SanityCustomImage' }
-          & FluidCustomImageFields_WithWebpFragment
-        )> }
-      )>>> }
-    )>, bottomSection: Maybe<(
-      { __typename?: 'SanityCaseStudyBottomSection' }
-      & Pick<SanityCaseStudyBottomSection, 'quote' | 'personName' | 'personRole'>
-      & { personImage: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFields_WithWebpFragment
-      )>, background: Maybe<(
-        { __typename?: 'SanityCustomImage' }
-        & FluidCustomImageFields_WithWebpFragment
-      )> }
-    )> }
-  )> }
-);
+export type Unnamed_14_QueryVariables = Exact<{ [key: string]: never }>;
 
-export type Unnamed_14_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_14_Query = (
-  { __typename?: 'Query' }
-  & { sanityFaqPage: Maybe<(
-    { __typename?: 'SanityFaqPage' }
-    & { categories: Maybe<Array<Maybe<(
-      { __typename?: 'SanityFaqCategory' }
-      & Pick<SanityFaqCategory, 'header'>
-      & { questions: Maybe<Array<Maybe<(
-        { __typename?: 'SanityFaq' }
-        & Pick<SanityFaq, 'question' | '_rawAnswer'>
-      )>>> }
-    )>>> }
-  )> }
-);
+export type Unnamed_14_Query = { __typename?: 'Query' } & {
+  sanityFaqPage: Maybe<
+    { __typename?: 'SanityFaqPage' } & {
+      categories: Maybe<
+        Array<
+          Maybe<
+            { __typename?: 'SanityFaqCategory' } & Pick<
+              SanityFaqCategory,
+              'header'
+            > & {
+                questions: Maybe<
+                  Array<
+                    Maybe<
+                      { __typename?: 'SanityFaq' } & Pick<
+                        SanityFaq,
+                        'question' | '_rawAnswer'
+                      >
+                    >
+                  >
+                >;
+              }
+          >
+        >
+      >;
+    }
+  >;
+};

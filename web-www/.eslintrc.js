@@ -21,8 +21,8 @@ module.exports = {
               ['^react', '^@?\\w'],
               // web-components
               ['^(web-components)(/.*|$)'],
-              // Relative imports and assets
-              ['^\\.', '^(assets)(/.*|$)'],
+              // Relative imports
+              ['^\\.'],
             ],
           },
         ],

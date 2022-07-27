@@ -22,10 +22,16 @@ module.exports = {
                 '^(generated|graphql|types|mocks)(/.*|$)',
                 '^(apollo|sanity|ledger|lib)(/.*|$)',
               ],
-              // Absolute imports .
-              ['^(pages)(/.*|$)', '^(components|hooks|features)(/.*|$)'],
-              // Relative imports and assets
-              ['^\\.', '^(assets)(/.*|$)'],
+              // React-specific - hooks & components
+              [
+                '^(features|pages)(/.*|$)',
+                '^(components)(/.*|$)',
+                '^(hooks)(/.*|$)',
+              ],
+              // Relative imports
+              ['^\\.'],
+              // assets
+              ['^(assets)(/.*|$)'],
             ],
           },
         ],

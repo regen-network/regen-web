@@ -170,7 +170,6 @@ const CardItemList: React.FC<CardItemListProps> = ({ label, values }) => {
             key={`card-item-link-${index}`}
             sx={{ color: 'secondary.main' }}
             href={item.url}
-            target="_blank"
           >
             {item.name}
             {values.length > index + 1 && ', '}

@@ -6,12 +6,11 @@ import {
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-import { truncate } from 'web-components/lib/utils/truncate';
 
-import { getAccountUrl } from '../../lib/block-explorer';
-import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
-import { Link } from '../atoms';
-import { NoCredits } from '../molecules';
+import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+
+import { AccountLink, Link } from 'components/atoms';
+import { NoCredits } from 'components/molecules';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -65,9 +64,7 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
           <Link href={`/credit-batches/${row.batch_denom}`}>
             {row.batch_denom}
           </Link>,
-          <Link href={getAccountUrl(row.issuer as string)} target="_blank">
-            {truncate(row.issuer as string)}
-          </Link>,
+          <AccountLink address={row.issuer} />,
           <Link key="class_id" href={`/credit-classes/${row.class_id}`}>
             {row.class_id}
           </Link>,

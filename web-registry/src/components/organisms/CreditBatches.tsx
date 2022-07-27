@@ -7,14 +7,14 @@ import Section from 'web-components/lib/components/section';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-import { truncate, truncateHash } from 'web-components/lib/utils/truncate';
+import { truncateHash } from 'web-components/lib/utils/truncate';
 
 import type { BatchInfoWithSupply } from 'types/ledger/ecocredit';
-import { getAccountUrl, getHashUrl } from 'lib/block-explorer';
+import { getHashUrl } from 'lib/block-explorer';
 import { getBatchesWithSupply } from 'lib/ecocredit/api';
 import { ledgerRESTUri } from 'lib/ledger';
 
-import { Link } from 'components/atoms';
+import { AccountLink, Link } from 'components/atoms';
 
 interface CreditBatchProps {
   creditClassId?: string | null;
@@ -153,13 +153,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             {batch.batch_denom}
           </Link>,
-          <a
-            href={getAccountUrl(batch.issuer)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {truncate(batch.issuer)}
-          </a>,
+          <AccountLink address={batch.issuer} />,
           <>{formatNumber(batch.tradable_supply)}</>,
           <>{formatNumber(batch.retired_supply)}</>,
           <>{formatNumber(batch.amount_cancelled)}</>,

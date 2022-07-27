@@ -6,11 +6,10 @@ import {
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-import { truncate } from 'web-components/lib/utils/truncate';
 
-import { getAccountUrl } from '../../lib/block-explorer';
-import { Link } from '../atoms';
-import { NoCredits } from '../molecules';
+import { Link } from 'components/atoms';
+import { AccountLink } from 'components/atoms/AccountLink';
+import { NoCredits } from 'components/molecules';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -88,9 +87,7 @@ const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
           >
             {item.batchDenom}
           </Box>,
-          <Link href={getAccountUrl(item.issuer as string)} target="_blank">
-            {truncate(item.issuer as string)}
-          </Link>,
+          <AccountLink address={item.issuer} />,
           formatNumber(item.totalAmount),
           item.classId,
           <GreyText>{formatDate(item.startDate)}</GreyText>,

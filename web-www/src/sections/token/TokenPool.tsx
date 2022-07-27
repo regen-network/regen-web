@@ -1,14 +1,15 @@
 import React from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { graphql, useStaticQuery } from 'gatsby';
 import clsx from 'clsx';
-
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import Section from 'web-components/lib/components/section';
-import { TokenPoolQuery } from '../../generated/graphql';
+import { graphql, useStaticQuery } from 'gatsby';
 import SanityImage from 'gatsby-plugin-sanity-image';
+
+import Section from 'web-components/lib/components/section';
 import { Body, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import { TokenPoolQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {

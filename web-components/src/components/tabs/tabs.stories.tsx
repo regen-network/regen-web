@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import * as React from 'react';
 import Tabs, { RegenTab } from 'web-components/lib/components/tabs';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
@@ -11,6 +12,18 @@ import CoBenefitsIcon from 'web-components/lib/components/icons/CoBenefitsIcon';
 import CreditDetails, {
   CreditInfoProps,
 } from 'web-components/lib/components/credits/CreditDetails';
+=======
+import CreditDetails, { CreditInfoProps } from '../credits/CreditDetails';
+import CoBenefitsIcon from '../icons/CoBenefitsIcon';
+import { ProjectPageIcon } from '../icons/ProjectPageIcon';
+import {
+  DocumentationTable,
+  DocumentRowData,
+} from '../table/DocumentationTable';
+import Tabs, { RegenTab } from '.';
+import { IconTabProps } from './IconTab';
+import { IconTabs } from './IconTabs';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'Tabs',

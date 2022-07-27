@@ -1,12 +1,12 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Box from '@mui/material/Box';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
-import Navigation from './Navigation';
-import Category from './Category';
-import { QuestionItem } from './Question';
 import BreadcrumbIcon from '../icons/BreadcrumbIcon';
 import { Label } from '../typography';
+import Category from './Category';
+import Navigation from './Navigation';
+import { QuestionItem } from './Question';
 
 export interface FAQProps {
   categories: {

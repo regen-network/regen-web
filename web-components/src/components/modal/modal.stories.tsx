@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Card, Avatar, CardMedia, Link } from '@mui/material';
+import { Avatar, Button, Card, CardMedia, Link } from '@mui/material';
 import Long from 'long';
 
+<<<<<<< HEAD
 import Modal from 'web-components/lib/components/modal';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
@@ -14,6 +15,19 @@ import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutMod
 import { BasketTakeModal } from 'web-components/lib/components/modal/BasketTakeModal';
 import { CreateSellOrderModal } from 'web-components/src/components/modal/CreateSellOrderModal';
 import { ConfirmModal } from './ConfirmModal';
+=======
+import Modal from '.';
+import { BasketPutModal } from './BasketPutModal';
+import { BasketTakeModal } from './BasketTakeModal';
+import { CreateSellOrderModal } from './CreateSellOrderModal';
+import { CreditRetireModal } from './CreditRetireModal';
+import { CreditSendModal } from './CreditSendModal';
+import CropImageModal from './CropImageModal';
+import IssuanceModal from './IssuanceModal';
+import { ProcessingModal } from './ProcessingModal';
+import { TxErrorModal } from './TxErrorModal';
+import { TxSuccessfulModal } from './TxSuccessfulModal';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'Modal',

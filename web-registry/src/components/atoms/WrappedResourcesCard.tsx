@@ -1,11 +1,12 @@
 import React from 'react';
 
-import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import { BlockContent } from 'web-components/lib/components/block-content';
+import ResourcesCard from 'web-components/lib/components/cards/ResourcesCard';
 import { getFormattedDate } from 'web-components/lib/utils/format';
-import { ResourceFieldsFragment, Maybe } from '../../generated/sanity-graphql';
-import { getSanityImgSrc } from '../../lib/imgSrc';
+
+import { Maybe, ResourceFieldsFragment } from '../../generated/sanity-graphql';
 import { getBtnHref } from '../../lib/button';
+import { getSanityImgSrc } from '../../lib/imgSrc';
 
 /**
  * ResourcesCard wrapping content from Sanity

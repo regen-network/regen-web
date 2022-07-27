@@ -1,5 +1,5 @@
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import * as React from 'react';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 import ThemeProvider from '../../theme/RegenThemeProvider';
 

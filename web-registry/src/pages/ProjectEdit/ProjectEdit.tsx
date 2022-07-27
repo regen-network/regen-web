@@ -1,17 +1,16 @@
-import React, { useState, createContext, useContext } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import React, { createContext, useContext, useState } from 'react';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
-import { useNavigate, useParams, useLocation, Outlet } from 'react-router-dom';
+import { makeStyles, useTheme } from '@mui/styles';
 import { startCase } from 'lodash';
 
-import Navigation from 'web-components/lib/components/faq/Navigation';
-import { Label, Title } from 'web-components/lib/components/typography';
-import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import Banner from 'web-components/lib/components/banner';
+import Navigation from 'web-components/lib/components/faq/Navigation';
+import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import { Label, Title } from 'web-components/lib/components/typography';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { Link } from '../../components/atoms';
-
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
-
+import { useCallback, useEffect, useState } from 'react';
 import {
-  QueryDenomMetadataResponse,
   QueryClientImpl,
+  QueryDenomMetadataResponse,
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 import { useLedger } from '../ledger';

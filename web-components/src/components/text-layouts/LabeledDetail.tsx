@@ -1,8 +1,15 @@
 import React from 'react';
+<<<<<<< HEAD
 import { Box, SxProps } from '@mui/material';
 import { Label } from '../typography';
+=======
+import { SxProps } from '@mui/material';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
+import { FlexCol } from '../box';
+import { Label } from '../typography';
 import type { LabelSize } from '../typography/sizing';
+
 import type { Theme } from '~/theme/muiTheme';
 
 /** Grey label over child elements */

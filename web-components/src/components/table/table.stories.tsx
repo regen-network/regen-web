@@ -3,6 +3,7 @@ import Table from '@mui/material/Table';
 import TableFooter from '@mui/material/TableFooter';
 import TableRow from '@mui/material/TableRow';
 
+<<<<<<< HEAD
 import {
   DocumentationTable,
   DocumentRowData,
@@ -10,6 +11,12 @@ import {
 import { TablePagination } from 'web-components/lib/components/table/TablePagination';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
+=======
+import { TableActionButtons } from '../buttons/TableActionButtons';
+import { ActionsTable } from './ActionsTable';
+import { DocumentationTable, DocumentRowData } from './DocumentationTable';
+import { TablePagination } from './TablePagination';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'Table',

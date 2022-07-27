@@ -3,9 +3,13 @@ export * from './AdminNav';
 export * from './AppFooter';
 export * from './BasicInfoForm';
 export * from './BasketEcocreditsTable';
-export * from './BasketsTable';
 export * from './BasketOverview';
+<<<<<<< HEAD
 export * from './BuyCreditsModal/BuyCreditsModal';
+=======
+export * from './BasketsTable';
+export * from './BuyCreditsModal';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 export * from './ConfirmationModal';
 export * from './CreditActivityTable';
 export * from './CreditBatches';

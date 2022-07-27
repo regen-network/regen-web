@@ -1,11 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
+<<<<<<< HEAD
 import { useQueryListClassesWithMetadata } from '../../../hooks/useQueryListClassesWithMetadata';
 import { client } from '../../../sanity';
 import { useAllCreditClassQuery } from '../../../generated/sanity-graphql';
 import { useAllCreditClassesQuery } from '../../../generated/graphql';
 import { useWallet } from '../../../lib/wallet';
 import { queryClassIssuers } from '../../../lib/ecocredit/api';
+=======
+import { useAllCreditClassesQuery } from 'generated/graphql';
+import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+import { useWallet } from 'lib/wallet';
+import { client } from 'sanity';
+
+import { useQueryListClassesWithMetadata } from 'hooks';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 interface CreditClassOption {
   id: string;

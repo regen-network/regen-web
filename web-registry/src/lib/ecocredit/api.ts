@@ -1,7 +1,15 @@
+<<<<<<< HEAD
 import axios from 'axios';
 import { uniq } from 'lodash';
+=======
+import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import {
-  QueryClientImpl,
+  GetTxsEventRequest,
+  GetTxsEventResponse,
+  ServiceClientImpl,
+} from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
+import {
   DeepPartial,
   QueryBalanceRequest,
   QueryBalanceResponse,
@@ -12,6 +20,7 @@ import {
   QueryBatchResponse,
   QueryClassesRequest,
   QueryClassesResponse,
+<<<<<<< HEAD
   QueryClassRequest,
   QueryClassResponse,
   QueryClassIssuersResponse,
@@ -32,15 +41,41 @@ import {
   GetTxsEventRequest,
   GetTxsEventResponse,
 } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+=======
+  QueryClassInfoRequest,
+  QueryClassInfoResponse,
+  QueryClientImpl,
+  QueryCreditTypesRequest,
+  QueryCreditTypesResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import axios, { AxiosResponse } from 'axios';
+import { uniq } from 'lodash';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
-import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
 import { connect as connectToApi } from '../../ledger';
+<<<<<<< HEAD
 import { expLedger, ledgerRESTUri } from '../ledger';
 import type {
   BatchInfoWithBalance,
   BatchInfoWithSupply,
   BatchTotalsForProject,
+=======
+import type { PageResponse } from '../../types/ledger/base';
+import type {
+  BatchInfo,
+  BatchInfoWithBalance,
+  BatchInfoWithSupply,
+  BatchTotalsForProject,
+  QueryBalanceResponse as QueryBalanceResponseV0,
+  QueryBatchesResponse as QueryBatchesResponseV0,
+  QueryBatchInfoResponse as QueryBatchInfoResponseV0,
+  QueryClassesResponse as QueryClassesResponseV0,
+  QueryClassInfoResponse as QueryClassInfoResponseV0,
+  QuerySupplyResponse,
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 } from '../../types/ledger/ecocredit';
+import { expLedger, ledgerRESTUri } from '../ledger';
+import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
 
 const getCosmosServiceClient = async (): Promise<ServiceClientImpl> => {
   const api = await connectToApi();

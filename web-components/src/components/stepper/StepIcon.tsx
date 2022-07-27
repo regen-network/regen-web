@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { StepIconProps } from '@mui/material/StepIcon';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({

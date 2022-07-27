@@ -1,10 +1,19 @@
 import React from 'react';
+<<<<<<< HEAD
 import { SxProps, useTheme, Theme } from '@mui/material';
 
 import Card from './Card';
 import OutlinedButton from '../buttons/OutlinedButton';
 import { Title } from '../typography/Title';
 import { ProjectPageIcon } from '../icons/ProjectPageIcon';
+=======
+import { SxProps, Theme, useTheme } from '@mui/material';
+
+import OutlinedButton from '../buttons/OutlinedButton';
+import { ProjectPageIcon } from '../icons/ProjectPageIcon';
+import { Title } from '../typography/Title';
+import Card from './Card';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 interface CreateProjectCardProps {
   className?: string;

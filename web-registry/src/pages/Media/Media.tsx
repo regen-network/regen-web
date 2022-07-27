@@ -1,21 +1,21 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { Loading } from 'web-components/lib/components/loading';
 import {
   getURLInitialValue,
   getURLListInitialValue,
 } from 'web-components/lib/utils/schemaURL';
-import { Loading } from 'web-components/lib/components/loading';
 
 import {
-  OnboardingFormTemplate,
-  EditFormTemplate,
-} from '../../components/templates';
-import {
+  isSimpleMediaFormValues,
   MediaForm,
   MediaValues,
-  isSimpleMediaFormValues,
 } from '../../components/organisms/MediaForm';
+import {
+  EditFormTemplate,
+  OnboardingFormTemplate,
+} from '../../components/templates';
 import {
   useProjectByIdQuery,
   useShaclGraphByUriQuery,

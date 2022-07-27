@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
-import { IconButton, IconButtonProps, useMediaQuery } from '@mui/material';
-import { FieldProps } from 'formik';
-import { Crop } from 'react-image-crop';
-import cx from 'clsx';
 import { useDropzone } from 'react-dropzone';
+import { Crop } from 'react-image-crop';
+import { IconButton, IconButtonProps, useMediaQuery } from '@mui/material';
+import { makeStyles, useTheme } from '@mui/styles';
+import cx from 'clsx';
+import { FieldProps } from 'formik';
 
 import OutlinedButton from '../buttons/OutlinedButton';
-import FieldFormControl from './FieldFormControl';
-import CropImageModal from '../modal/CropImageModal';
 import TrashIcon from '../icons/TrashIcon';
 import { Image } from '../image';
-import { Label } from '../typography';
 import { getImageSrc } from '../image-crop/canvas-utils';
+import CropImageModal from '../modal/CropImageModal';
+import { Label } from '../typography';
+import FieldFormControl from './FieldFormControl';
 
 export interface ImageDropProps extends FieldProps {
   className?: string;

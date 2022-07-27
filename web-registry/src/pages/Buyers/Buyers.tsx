@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@mui/styles';
 import { useLocation } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
 
-import SEO from 'web-components/lib/components/seo';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import FixedFooter from 'web-components/lib/components/fixed-footer';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import Modal from 'web-components/lib/components/modal';
+import SEO from 'web-components/lib/components/seo';
 
+import buyersHero from '../../assets/buyers-top.jpg';
 import {
-  HeroTitle,
   FeaturedSection,
   HeroAction,
+  HeroTitle,
   ImageGridSection,
 } from '../../components/molecules';
 import { MoreProjectsSection } from '../../components/organisms';
-import { client } from '../../sanity';
-import { useAllBuyersPageQuery } from '../../generated/sanity-graphql';
 import { useMoreProjectsQuery } from '../../generated/graphql';
-import buyersHero from '../../assets/buyers-top.jpg';
+import { useAllBuyersPageQuery } from '../../generated/sanity-graphql';
+import { client } from '../../sanity';
 
 const useStyles = makeStyles(theme => ({
   heroMain: {

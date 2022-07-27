@@ -1,9 +1,9 @@
 import React from 'react';
-import { useTheme, DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import Slider from 'react-slick';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Slider from 'react-slick';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import clsx from 'clsx';
 
 import ResourcesCard, { ResourcesCardProps } from '../cards/ResourcesCard';
 

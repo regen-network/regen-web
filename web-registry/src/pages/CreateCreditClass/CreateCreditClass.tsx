@@ -13,6 +13,7 @@ import Modal from 'web-components/lib/components/modal';
 import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
 
+<<<<<<< HEAD
 import {
   HeroTitle,
   HeroAction,
@@ -118,6 +119,24 @@ const CreateCreditClass: React.FC = () => {
         </Box>
       </Grid>
     );
+=======
+import { useWallet } from 'lib/wallet';
+
+import type { CreditClassValues } from 'components/organisms/CreditClassForms';
+import {
+  CreateCreditClassForm,
+  createCreditClassSteps,
+  creditClassBaseValues,
+} from 'components/organisms/CreditClassForms';
+import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
+
+export const CreateCreditClass = (): JSX.Element => {
+  const { wallet } = useWallet();
+  const formValues: CreditClassValues = {
+    ...creditClassBaseValues,
+    admin: wallet?.address || '',
+    fee: '20 REGEN',
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
   };
 
   const OverviewWrap: React.FC = ({ children }) => (

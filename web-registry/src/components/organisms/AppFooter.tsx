@@ -1,11 +1,14 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+
 import {
   Footer,
   FooterItemProps as FooterItem,
 } from 'web-components/lib/components/footer/footer-new';
-import { RegistryIconLink, Link } from '../atoms';
-import { chainId, nctBasket } from '../../lib/ledger';
+
+import { chainId, nctBasket } from 'lib/ledger';
+
+import { Link, RegistryIconLink } from 'components/atoms';
 
 const AppFooter: React.FC = () => {
   const { pathname } = useLocation();

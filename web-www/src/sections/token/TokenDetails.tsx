@@ -1,10 +1,11 @@
 import React from 'react';
+import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import { FluidObject } from 'gatsby-image';
-import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import TokenPool from './TokenPool';
 
 type QueryData = {

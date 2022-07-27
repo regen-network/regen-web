@@ -1,3 +1,4 @@
+<<<<<<< HEAD:web-registry/src/pages/MyEcocredits/hooks/useCreditRetireSubmit.tsx
 import { MsgRetire } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { useCallback } from 'react';
 import { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
@@ -5,6 +6,18 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
 import { BatchInfoWithBalance } from '../../../types/ledger/ecocredit';
 import { useStateSetter } from '../../../types/react/use-state';
+=======
+import { useCallback } from 'react';
+import { MsgRetire } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
+
+import type { RetireFormValues as CreditRetireFormValues } from 'web-components/lib/components/form/CreditRetireForm';
+import type { Item } from 'web-components/lib/components/modal/TxModal';
+
+import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import type { UseStateSetter } from 'types/react/use-state';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/pages/Dashboard/MyEcocredits/hooks/useCreditRetireSubmit.tsx
+
+import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 type Props = {
   accountAddress?: string;

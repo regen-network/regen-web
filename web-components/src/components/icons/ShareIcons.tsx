@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
 
-import TwitterIcon from './social/TwitterIcon';
+import copyTextToClipboard from '../../utils/copy';
+import Banner from '../banner';
+import LinkIcon from './LinkIcon';
 import FacebookIcon from './social/FacebookIcon';
 import LinkedInIcon from './social/LinkedInIcon';
 import TelegramIcon from './social/TelegramIcon';
-import LinkIcon from './LinkIcon';
-import copyTextToClipboard from '../../utils/copy';
-import Banner from '../banner';
+import TwitterIcon from './social/TwitterIcon';
 
 interface ShareIconsProps {
   url: string;

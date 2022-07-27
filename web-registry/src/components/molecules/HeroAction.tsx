@@ -1,13 +1,12 @@
 import React from 'react';
-import cx from 'clsx';
-import { makeStyles } from '@mui/styles';
 import { Box, Grid } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import cx from 'clsx';
 
-import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { Body, Title } from 'web-components/lib/components/typography';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import {

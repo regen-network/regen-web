@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
 import { Title } from 'web-components/lib/components/typography';

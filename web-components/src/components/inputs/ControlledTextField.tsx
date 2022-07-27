@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import React from 'react';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import { InputAdornment, InputProps, SxProps } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';

@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@mui/styles';
-import { Formik, Form, Field } from 'formik';
 import { Link } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+import { Field, Form, Formik } from 'formik';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import Card from 'web-components/lib/components/cards/Card';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import { Body, Title } from 'web-components/lib/components/typography';
 import Modal from 'web-components/lib/components/modal';
-import Card from 'web-components/lib/components/cards/Card';
-import { ProjectPageFooter } from '../molecules';
+import { Body, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import {
-  validate,
-  getProjectPageBaseData,
   getCompactedPath,
+  getProjectPageBaseData,
+  validate,
 } from '../../lib/rdf';
 import { useProjectEditContext } from '../../pages/ProjectEdit';
+import { ProjectPageFooter } from '../molecules';
 
 interface StoryFormProps {
   submit: (values: StoryValues) => Promise<void>;

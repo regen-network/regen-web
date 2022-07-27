@@ -2,14 +2,24 @@ export * from './Activity';
 export * from './Additionality';
 export * from './Admin';
 export * from './BasicInfo';
+<<<<<<< HEAD
 export * from './BatchDetails';
 export * from './BasketDetails';
+=======
+export * from './BasketDetails';
+export * from './BatchDetails';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 export * from './BuyerCreate';
 export * from './BuyerCreditsTransfer';
 export * from './Buyers';
 export * from './Certificate';
+<<<<<<< HEAD
 export * from './CreateBatch';
 export * from './ChooseCreditClassPage';
+=======
+export * from './ChooseCreditClassPage';
+export * from './CreateBatch';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 export * from './CreateCreditClass';
 export * from './CreateMethodology';
 export * from './CreditClassDetails';
@@ -28,7 +38,10 @@ export * from './Media';
 export * from './MethodologiesList';
 export * from './MethodologyDetails';
 export * from './MethodologyReviewProcess';
+<<<<<<< HEAD
 export * from './MyEcocredits';
+=======
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 export * from './NotFound';
 export * from './OrganizationProfile';
 export * from './PostPurchase';

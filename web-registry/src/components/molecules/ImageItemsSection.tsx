@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ImageItemProps } from 'web-components/lib/components/image-item';
-import ImageItems from 'web-components/lib/components/sliders/ImageItems';
 import Section from 'web-components/lib/components/section';
+import ImageItems from 'web-components/lib/components/sliders/ImageItems';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { ImageItemsSection as ImageItemsSectionProps } from '../../generated/sanity-graphql';
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 
+<<<<<<< HEAD
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 
@@ -10,6 +11,10 @@ import {
   BasketOverview,
   BasketEcocreditsTable,
 } from '../../components/organisms';
+=======
+import { BasketEcocredits, BasketOverview } from '../../components/organisms';
+import { useBasketDetails } from '../../hooks';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 const BasketDetails: React.FC = () => {
   const { basketDenom } = useParams<{ basketDenom: string }>();

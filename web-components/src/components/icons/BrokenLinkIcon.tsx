@@ -1,7 +1,6 @@
 import React from 'react';
-import { Theme } from '@mui/material';
+import { SxProps, Theme } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
-import { SxProps } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 interface BrokenLinkIconProps {

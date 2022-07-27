@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-import { Body, Title } from '../typography';
-import OutlinedButton from '../buttons/OutlinedButton';
 import { BlockContent, SanityBlockOr } from '../block-content';
+import OutlinedButton from '../buttons/OutlinedButton';
+import { Body, Title } from '../typography';
 
 export interface BlogPostProps {
   header: string;

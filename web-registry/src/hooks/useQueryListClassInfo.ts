@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import {
+<<<<<<< HEAD
   QueryClassResponse,
   QueryClientImpl,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+=======
+  QueryClassInfoResponse,
+  QueryClientImpl,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 import { useLedger } from '../ledger';
 

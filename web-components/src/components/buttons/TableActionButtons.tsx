@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { Box, Menu, MenuItem, SxProps, Theme } from '@mui/material';
 import OutlinedButton from './OutlinedButton';
+=======
+import { Box, Menu, MenuItem } from '@mui/material';
+
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import { HorizontalDotsIcon } from '../icons/HorizontalDotsIcon';
+import OutlinedButton from './OutlinedButton';
 
 /** Displays a dropdown icon with action buttons */
 const TableActionButtons: React.FC<{

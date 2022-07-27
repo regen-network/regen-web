@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import * as React from 'react';
 import { ItemProps } from 'web-components/lib/components/sliders/Item';
 import ProtectedSpecies, {
@@ -10,6 +11,14 @@ import ProjectMedia, {
 import StaticMap from 'web-components/lib/components/map/StaticMap';
 
 import Grid from '@mui/material/Grid';
+=======
+import Grid from '@mui/material/Grid';
+
+import StaticMap from '../map/StaticMap';
+import { ItemProps } from './Item';
+import ProjectMedia, { Asset, Media } from './ProjectMedia';
+import ProtectedSpecies from './ProtectedSpecies';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'Sliders',

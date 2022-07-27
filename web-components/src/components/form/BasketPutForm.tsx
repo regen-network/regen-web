@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import AmountField from '../inputs/AmountField';
 import SelectTextField, { Option } from '../inputs/SelectTextField';
-
-import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
+import Submit from './Submit';
 
 export interface BasketPutProps {
   basketOptions: Option[];

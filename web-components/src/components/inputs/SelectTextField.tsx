@@ -1,11 +1,17 @@
 import React from 'react';
+<<<<<<< HEAD
 import { TextFieldProps } from 'formik-mui';
 import { makeStyles } from '@mui/styles';
 import { Theme, useTheme } from '@mui/material';
+=======
+import { Theme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { TextFieldProps } from 'formik-mui';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 import DropdownIcon from '../icons/DropdownIcon';
-import TextField from './TextField';
 import { DefaultStyleProps } from './FieldFormControl';
+import TextField from './TextField';
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {

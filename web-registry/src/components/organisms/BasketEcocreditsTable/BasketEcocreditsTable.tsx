@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
-import { styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
 
 import {
   ActionsTable,
@@ -9,9 +8,15 @@ import {
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+<<<<<<< HEAD:web-registry/src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx
 import { Link } from '../../atoms';
 import { NoCredits } from '../../molecules';
 import { getAccountUrl } from '../../../lib/block-explorer';
+=======
+import { getAccountUrl } from '../../lib/block-explorer';
+import { Link } from '../atoms';
+import { NoCredits } from '../molecules';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/components/organisms/BasketEcocreditsTable.tsx
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,

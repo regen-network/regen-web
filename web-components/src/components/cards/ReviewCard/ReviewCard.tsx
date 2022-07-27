@@ -1,9 +1,20 @@
 import React from 'react';
+<<<<<<< HEAD
 import { Box, SxProps, Theme } from '@mui/material';
 
 import { Label } from '../../typography';
 import OnBoardingCard from '../OnBoardingCard';
 import { EditButton } from '../../buttons/EditButton';
+=======
+import { SxProps } from '@mui/material';
+
+import { Flex } from '../../box';
+import { EditButton } from '../../buttons/EditButton';
+import { Label } from '../../typography';
+import OnBoardingCard from '../OnBoardingCard';
+
+import type { Theme } from '~/theme/muiTheme';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export interface ReviewCardProps {
   title: string;

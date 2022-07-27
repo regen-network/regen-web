@@ -1,20 +1,37 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { Formik, Form, FormikHelpers } from 'formik';
+=======
+import React from 'react';
+import { Form, Formik, FormikHelpers } from 'formik';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import * as Yup from 'yup';
 
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+<<<<<<< HEAD
 import NotFound from 'web-components/lib/components/not-found';
 import RotationalGrazing from '../../../../assets/rotational-grazing.png';
+=======
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+import NotFound from 'web-components/lib/components/not-found';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 import { useMultiStep } from '../../../../components/templates/MultiStep';
 import formModel from '../form-model';
+<<<<<<< HEAD
 import useCreateBatchSubmit from '../hooks/useCreateBatchSubmit';
+=======
+import useCreateBatch from '../useCreateBatch';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
-import Review from './Review';
 import Result from './Result';
+<<<<<<< HEAD
+=======
+import Review from './Review';
+import RotationalGrazing from 'assets/rotational-grazing.png';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 /**
  *

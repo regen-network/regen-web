@@ -1,16 +1,37 @@
+<<<<<<< HEAD
+=======
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import { useAuth0 } from '@auth0/auth0-react';
 import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/styles';
+<<<<<<< HEAD
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import Header, { HeaderColors } from 'web-components/lib/components/header';
 import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
+=======
+
+import Header, { HeaderColors } from 'web-components/lib/components/header';
+import {
+  HeaderDropdownColumn,
+  HeaderDropdownItemProps,
+} from 'web-components/lib/components/header/HeaderDropdownItems';
+import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
+import { NavLink } from 'web-components/lib/components/header/NavLink';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import { UserMenuItem } from 'web-components/lib/components/header/UserMenuItem';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import DefaultAvatar from '../../assets/avatar.png';
+<<<<<<< HEAD
+=======
+import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
+import { useMoreProjectsQuery } from '../../generated/graphql';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import { chainId, nctBasket } from '../../lib/ledger';
 import { useWallet } from '../../lib/wallet';
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { TxModal, TxModalProps } from './TxModal';
 import { BrokenLinkIcon } from '../icons/BrokenLinkIcon';
+import { TxModal, TxModalProps } from './TxModal';
 
 interface Props extends TxModalProps {
   error: string;

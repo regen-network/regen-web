@@ -1,13 +1,13 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
-import { object, string, AnyObjectSchema } from 'yup';
+import { Field, Form, Formik } from 'formik';
+import { AnyObjectSchema, object, string } from 'yup';
 
-import Submit from './Submit';
+import { NameUrl } from '../../types/rdf';
+import OnBoardingCard from '../cards/OnBoardingCard';
+import TextField from '../inputs/TextField';
 import { invalidURL, requiredMessage } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
-import TextField from '../inputs/TextField';
-import OnBoardingCard from '../cards/OnBoardingCard';
-import { NameUrl } from '../../types/rdf';
+import Submit from './Submit';
 
 export interface CertificationProps {
   onSubmit: (values: NameUrl) => void;

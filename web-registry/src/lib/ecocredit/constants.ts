@@ -4,11 +4,11 @@ import {
   MsgTake,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 import {
-  MsgSend,
-  MsgRetire,
+  MsgCancel,
   MsgCreateBatch,
   MsgCreateClass,
-  MsgCancel,
+  MsgRetire,
+  MsgSend,
   MsgUpdateClassAdmin,
   MsgUpdateClassIssuers,
   MsgUpdateClassMetadata,

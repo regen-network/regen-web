@@ -1,14 +1,20 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 
-import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
-import { WrappedStepCard } from '../atoms';
+import { Body, Title } from 'web-components/lib/components/typography';
+
 import {
-  StepCardFieldsFragment,
   Maybe,
   Scalars,
+<<<<<<< HEAD
 } from '../../generated/sanity-graphql';
+=======
+  StepCardFieldsFragment,
+} from 'generated/sanity-graphql';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
+
+import { WrappedStepCard } from '../atoms';
 
 const StepCardsWithDescription: React.FC<{
   descriptionRaw?: Maybe<Scalars['JSON']>;

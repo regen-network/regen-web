@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import Question, {
   QuestionItem,
@@ -5,6 +6,12 @@ import Question, {
 import Category from 'web-components/lib/components/faq/Category';
 import Navigation from 'web-components/lib/components/faq/Navigation';
 import FAQ from 'web-components/lib/components/faq';
+=======
+import FAQ from './';
+import Category from './Category';
+import Navigation from './Navigation';
+import Question, { QuestionItem } from './Question';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'FAQ',

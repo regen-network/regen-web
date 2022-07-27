@@ -1,29 +1,43 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { useFormikContext, Field, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import { isPast } from 'date-fns';
+=======
+import React, { useState } from 'react';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import { Box, IconButton, Link } from '@mui/material';
-import { useTheme, DefaultTheme as Theme } from '@mui/styles';
+import { DefaultTheme as Theme, useTheme } from '@mui/styles';
+import { isPast } from 'date-fns';
+import { Field, FieldArray, useFormikContext } from 'formik';
+import * as Yup from 'yup';
 
-import { Body } from 'web-components/lib/components/typography';
-import InputLabel from 'web-components/lib/components/inputs/InputLabel';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import TextField from 'web-components/lib/components/inputs/TextField';
-import { DatePickField } from 'web-components/lib/components/inputs/DatePickField';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
-import { AddCertificationModal } from 'web-components/lib/components/modal/AddCertificationModal';
+import { DatePickField } from 'web-components/lib/components/inputs/DatePickField';
+import InputLabel from 'web-components/lib/components/inputs/InputLabel';
+import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import TextField from 'web-components/lib/components/inputs/TextField';
 import {
-  requiredMessage,
   invalidDate,
+  invalidJSON,
   invalidPastDate,
+<<<<<<< HEAD
   vcsRetirementSerialRE,
+=======
+  invalidVCSID,
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
   invalidVCSRetirement,
   isValidJSON,
-  invalidJSON,
+  requiredMessage,
+  vcsRetirementSerialRE,
 } from 'web-components/lib/components/inputs/validation';
+import { AddCertificationModal } from 'web-components/lib/components/modal/AddCertificationModal';
+import { Body } from 'web-components/lib/components/typography';
 import { NameUrl } from 'web-components/lib/types/rdf';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
+<<<<<<< HEAD
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 
@@ -34,6 +48,14 @@ import { useWallet } from '../../../../lib/wallet';
 import useUpdateProjectClass from '../hooks/useUpdateProjectClass';
 import useUpdateProjectOptions from '../hooks/useUpdateProjectOptions';
 import useSaveProjectSelectedOption from '../hooks/useSaveProjectSelectedOption';
+=======
+
+import {
+  CreditClassSelect,
+  MetadataJSONField,
+  ProjectSelect,
+} from '../../../../components/molecules';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export interface CreditBasicsFormValues {
   projectId: string;

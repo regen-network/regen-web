@@ -1,15 +1,12 @@
 import React from 'react';
-import { ButtonProps, SxProps, Theme } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { ButtonProps, SxProps, Theme } from '@mui/material';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 
-import type {
-  ButtonFieldsFragment,
-  Maybe,
-} from '../../generated/sanity-graphql';
-import { getBtnHref, isInternalLink, openLink } from '../../lib/button';
+import type { ButtonFieldsFragment, Maybe } from 'generated/sanity-graphql';
+import { getBtnHref, isInternalLink, openLink } from 'lib/button';
 
 interface Props extends ButtonProps {
   btn?: Maybe<ButtonFieldsFragment>;

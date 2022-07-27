@@ -2,15 +2,15 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
+import {
+  useShaclGraphByUriQuery,
+  useUpdateProjectByIdMutation,
+} from '../../generated/graphql';
+import { getProjectPageBaseData, validate } from '../../lib/rdf';
 import { ChooseCreditClassGrid } from './ChooseCreditClass.Grid';
 import { ChooseCreditClassItem } from './ChooseCreditClass.Item';
-import { useGetCreditClassOptions } from './hooks/useGetCreditClassOptions';
 import { useErrorTimeout } from './hooks/useErrorTimeout';
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
-import {
-  useUpdateProjectByIdMutation,
-  useShaclGraphByUriQuery,
-} from '../../generated/graphql';
+import { useGetCreditClassOptions } from './hooks/useGetCreditClassOptions';
 
 const ChooseCreditClass: React.FC = () => {
   const navigate = useNavigate();

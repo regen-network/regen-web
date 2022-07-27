@@ -1,18 +1,19 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
-import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
+import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
+import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
+import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
 import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
-import { DevConnectSectionQuery } from '../../generated/graphql';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import ConnectSection, {
   IconLabelProps,
 } from '../../components/ConnectSection';
+import { DevConnectSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {

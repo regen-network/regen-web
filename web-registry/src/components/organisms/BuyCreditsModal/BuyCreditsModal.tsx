@@ -1,3 +1,4 @@
+<<<<<<< HEAD:web-registry/src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
 import Grid from '@mui/material/Grid';
@@ -7,6 +8,19 @@ import { RadioGroup } from 'formik-mui';
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Link } from 'react-router-dom';
+=======
+import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
+import { Link } from 'react-router-dom';
+import { Box } from '@mui/material';
+import CardContent from '@mui/material/CardContent';
+import Collapse from '@mui/material/Collapse';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+import cx from 'clsx';
+import { Field, Form, Formik } from 'formik';
+import { RadioGroup } from 'formik-mui';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/components/organisms/BuyCreditsModal.tsx
 
 import Card from 'web-components/lib/components/cards/Card';
 import Submit from 'web-components/lib/components/form/Submit';
@@ -26,6 +40,11 @@ import {
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
+<<<<<<< HEAD:web-registry/src/components/organisms/BuyCreditsModal/BuyCreditsModal.tsx
+=======
+
+import { useWallet } from '../../lib/wallet';
+>>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/components/organisms/BuyCreditsModal.tsx
 
 import { Box, useTheme } from '@mui/material';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';

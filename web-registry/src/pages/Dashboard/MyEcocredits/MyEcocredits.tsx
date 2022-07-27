@@ -57,6 +57,7 @@ import {
   getAvailableAmountByBatch,
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
+
 // import { ReactComponent as WithdrawIBC } from 'assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from 'assets/svgs/deposit-ibc.svg';
 // import { ReactComponent as Sell } from 'assets/svgs/sell.svg';

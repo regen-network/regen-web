@@ -1,10 +1,10 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Field, Form, Formik } from 'formik';
 
 import OnBoardingCard from '../cards/OnBoardingCard';
 import ControlledTextField from '../inputs/ControlledTextField';
-import PhoneField from '../inputs/PhoneField';
 import ImageField from '../inputs/ImageField';
+import PhoneField from '../inputs/PhoneField';
 import { requiredMessage } from '../inputs/validation';
 import { OnboardingSubmit } from './OnboardingSubmit';
 

@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import React, { useEffect, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Collapse } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import ReCAPTCHA from 'react-google-recaptcha';
 import axios from 'axios';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import Section from 'web-components/lib/components/section';
-import WalletConnectionButton from './WalletConnectionButton';
 import { Body } from 'web-components/lib/components/typography';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import type { WalletAddrRegFormSectionQuery } from '../../generated/graphql';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
+import WalletConnectionButton from './WalletConnectionButton';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {

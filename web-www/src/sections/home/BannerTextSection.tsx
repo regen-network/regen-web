@@ -1,15 +1,15 @@
 import React from 'react';
+import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import Box from '@mui/material/Box';
+import type { FluidObject } from 'gatsby-image';
 
 import { Title } from 'web-components/lib/components/typography';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 import { BlockContent } from 'web-components/src/components/block-content';
 
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 import type { BannerTextSectionQuery } from '../../generated/graphql';
-import type { FluidObject } from 'gatsby-image';
 
 const useStyles = makeStyles((theme: Theme) => ({
   gradient: {

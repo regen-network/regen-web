@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { IntercomProvider } from 'react-use-intercom';
 import { Auth0Provider } from '@auth0/auth0-react';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 import { AuthApolloProvider } from './apollo';
+import App from './App';
 import { LedgerProvider } from './ledger';
 import { WalletProvider } from './lib/wallet';
+import * as serviceWorker from './serviceWorker';
 // import history from './lib/history';
 
 const config = {

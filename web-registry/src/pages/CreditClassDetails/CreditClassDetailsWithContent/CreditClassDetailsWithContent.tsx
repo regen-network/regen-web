@@ -1,32 +1,34 @@
 import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import { useParams, useNavigate } from 'react-router-dom';
 import cx from 'clsx';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import Section from 'web-components/lib/components/section';
-import Modal from 'web-components/lib/components/modal';
 import Banner from 'web-components/lib/components/banner';
-import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
-import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchFooter';
 import { BlockContent } from 'web-components/lib/components/block-content';
+import { SwitchFooter } from 'web-components/lib/components/fixed-footer/SwitchFooter';
+import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
+import Modal from 'web-components/lib/components/modal';
+import Section from 'web-components/lib/components/section';
+import { Body } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import { CreditClassByUriQuery, useMoreProjectsQuery } from 'generated/graphql';
+import { CreditClass } from 'generated/sanity-graphql';
+import getApiUri from 'lib/apiUri';
+import { onBtnClick } from 'lib/button';
 
 import { HeroTitle } from 'components/molecules';
 import {
-  ImpactSection,
-  ResourcesSection,
-  StepsSection,
-  MoreProjectsSection,
-  MediaSection,
   // CreditClassConnectSection,
   CreditClassOverviewSection,
+  ImpactSection,
+  MediaSection,
+  MoreProjectsSection,
+  ResourcesSection,
+  StepsSection,
 } from 'components/organisms';
+
 import hero from 'assets/credit-class-grasslands-hero.png';
-import getApiUri from 'lib/apiUri';
-import { onBtnClick } from 'lib/button';
-import { useMoreProjectsQuery, CreditClassByUriQuery } from 'generated/graphql';
-import { CreditClass } from 'generated/sanity-graphql';
-import { Body } from 'web-components/lib/components/typography';
 
 interface CreditDetailsProps {
   dbClass: CreditClassByUriQuery['creditClassByUri'];

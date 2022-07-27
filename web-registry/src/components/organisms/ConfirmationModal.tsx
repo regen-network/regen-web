@@ -1,14 +1,15 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import { Avatar, Box, Link } from '@mui/material';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { Avatar, Box, Link } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
 import Card from 'web-components/lib/components/cards/Card';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
-import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+
 import CowIllustration from '../../assets/cow-illustration.png';
+import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
 
 interface Props extends RegenModalProps {
   data?: DeliverTxResponse;

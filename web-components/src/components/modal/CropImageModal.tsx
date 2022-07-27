@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Crop } from 'react-image-crop';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 import ImageCrop from '../image-crop';
 import { Title } from '../typography';

@@ -1,14 +1,15 @@
 import {
-  creditBasicsValidationSchema,
-  creditBasicsValidationSchemaFields,
-  creditBasicsInitialValues,
-} from './CreateBatchMultiStepForm';
-import {
   getValidationSchema,
   getValidationSchemaFields,
   initialValues as recipientsInitialValues,
 } from 'web-components/lib/components/form/RecipientsForm';
+
 import { chainInfo } from '../../../lib/wallet';
+import {
+  creditBasicsInitialValues,
+  creditBasicsValidationSchema,
+  creditBasicsValidationSchemaFields,
+} from './CreateBatchMultiStepForm';
 
 // address prefix `regen` used to narrow address validation for recipients
 const addressPrefix = chainInfo.bech32Config.bech32PrefixAccAddr;

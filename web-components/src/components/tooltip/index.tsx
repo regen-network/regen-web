@@ -1,5 +1,5 @@
-import { withStyles, DefaultTheme as Theme } from '@mui/styles';
 import Tooltip from '@mui/material/Tooltip';
+import { DefaultTheme as Theme, withStyles } from '@mui/styles';
 
 function arrowGenerator(): any {
   return {

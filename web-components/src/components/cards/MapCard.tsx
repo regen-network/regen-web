@@ -1,8 +1,9 @@
 import React from 'react';
-import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Card from './Card';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+
 import CloseIcon from '../icons/CloseIcon';
+import Card from './Card';
 // import useMediaQuery from '@mui/material/useMediaQuery';
 
 export interface MapCardProps {

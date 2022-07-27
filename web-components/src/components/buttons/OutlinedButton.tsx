@@ -1,5 +1,5 @@
-import Button from '@mui/material/Button';
 import { styled } from '@mui/material';
+import Button from '@mui/material/Button';
 
 const OutlinedButton = styled(Button)(({ theme }) => ({
   color: theme.palette.secondary.main,

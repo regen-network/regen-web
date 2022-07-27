@@ -2,19 +2,20 @@ import React from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box } from '@mui/material';
 
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import { BrokenLinkIcon } from 'web-components/lib/components/icons/BrokenLinkIcon';
+import { CardItem } from 'web-components/lib/components/modal/TxModal';
 import {
   Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import { CardItem } from 'web-components/lib/components/modal/TxModal';
-import { BrokenLinkIcon } from 'web-components/lib/components/icons/BrokenLinkIcon';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { Link } from 'components/atoms';
 import { getAccountUrl, getHashUrl } from 'lib/block-explorer';
+
+import { Link } from 'components/atoms';
 
 type ResultProps = {
   response?: DeliverTxResponse;

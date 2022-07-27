@@ -1,19 +1,19 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import { Box } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
-import SanityImage from 'gatsby-plugin-sanity-image';
 import BackgroundImage from 'gatsby-background-image';
+import type { FluidObject } from 'gatsby-image';
+import SanityImage from 'gatsby-plugin-sanity-image';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
 import Tooltip from 'web-components/lib/components/tooltip';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import type { HomeMarketPlaceSectionQuery } from '../../generated/graphql';
-import type { FluidObject } from 'gatsby-image';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
-import { Box } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

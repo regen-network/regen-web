@@ -1,6 +1,6 @@
-import { makeStyles } from '@mui/styles';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
 
 import RegistryIcon from 'web-components/lib/components/icons/RegistryIcon';
 

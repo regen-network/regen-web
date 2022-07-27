@@ -1,10 +1,10 @@
 import { Field, Form, Formik } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-
 import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
+import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { Body } from 'web-components/lib/components/typography';
+
 import { ShaclGraphByUriQuery } from '../../../generated/graphql';
 import { ProjectMetadataLD } from '../../../generated/json-ld';
 import { useProjectEditContext } from '../../../pages/ProjectEdit';

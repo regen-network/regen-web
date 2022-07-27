@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles, DefaultTheme as Theme, withStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import clsx from 'clsx';
+import { useEffect, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import Grid from '@mui/material/Grid';
+import { DefaultTheme as Theme, makeStyles, withStyles } from '@mui/styles';
 import {
-  ServiceClientImpl,
   GetTxResponse,
+  ServiceClientImpl,
 } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import clsx from 'clsx';
 
-import Modal, { RegenModalProps } from './index';
-import RegenLedgerIcon from '../icons/RegenLedgerIcon';
-import InfoIcon from '../icons/InfoIcon';
-import DropdownIcon from '../icons/DropdownIcon';
-import ContainedButton from '../buttons/ContainedButton';
-import { Title } from '../typography';
-import Tooltip from '../tooltip';
-import BreadcrumbIcon from '../icons/BreadcrumbIcon';
-import { User } from '../user/UserInfo';
 import { parseText } from '../../utils/textParser';
+import ContainedButton from '../buttons/ContainedButton';
+import BreadcrumbIcon from '../icons/BreadcrumbIcon';
+import DropdownIcon from '../icons/DropdownIcon';
+import InfoIcon from '../icons/InfoIcon';
+import RegenLedgerIcon from '../icons/RegenLedgerIcon';
+import Tooltip from '../tooltip';
+import { Title } from '../typography';
+import { User } from '../user/UserInfo';
+import Modal, { RegenModalProps } from './index';
 
 export interface Party extends User {
   role: string;
@@ -305,7 +305,7 @@ export default function LedgerModal({
           hash: txHash,
         })
         .then(setTxRes)
-        .catch(console.error);
+        .catch(console.error); // eslint-disable-line no-console
     }
   }, [txClient, txHash]);
 

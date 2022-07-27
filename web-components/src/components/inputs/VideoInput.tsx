@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
+import ReactPlayerLazy from 'react-player/lazy';
 import {
   CardMedia,
-  IconButton,
   Collapse,
+  IconButton,
   LinearProgress,
   useMediaQuery,
 } from '@mui/material';
-import { FieldProps } from 'formik';
+import { makeStyles, useTheme } from '@mui/styles';
 import cx from 'clsx';
-import ReactPlayerLazy from 'react-player/lazy';
+import { FieldProps } from 'formik';
 
-import Card from '../cards/Card';
 import OutlinedButton from '../buttons/OutlinedButton';
+import Card from '../cards/Card';
+import TrashIcon from '../icons/TrashIcon';
 import FieldFormControl from './FieldFormControl';
 import Input from './Input';
-import TrashIcon from '../icons/TrashIcon';
 
 export interface VideoInputProps extends FieldProps {
   className?: string;

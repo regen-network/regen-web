@@ -1,11 +1,11 @@
 import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
-import { Body } from 'web-components/lib/components/typography';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
 import { FlexCol } from 'web-components/lib/components/box';
+import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+import { Body } from 'web-components/lib/components/typography';
 
 import {
   useCreateProjectMutation,

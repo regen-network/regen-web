@@ -1,12 +1,13 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { graphql, useStaticQuery } from 'gatsby';
 import clsx from 'clsx';
+import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { Body, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { HomeFoldSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({

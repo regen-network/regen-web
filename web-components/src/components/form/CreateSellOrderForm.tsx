@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Formik, Form, Field, FormikErrors } from 'formik';
 import { Box } from '@mui/material';
+import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import AmountField from '../inputs/AmountField';
+import CheckboxLabel from '../inputs/CheckboxLabel';
+import NumberTextField from '../inputs/NumberTextField';
 import SelectTextField, { Option } from '../inputs/SelectTextField';
-
-import Submit from './Submit';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
-import NumberTextField from '../inputs/NumberTextField';
-import CheckboxLabel from '../inputs/CheckboxLabel';
 import { Label, Subtitle } from '../typography';
+import Submit from './Submit';
 
 export interface CreateSellOrderProps {
   batchDenoms: Option[];

@@ -1,17 +1,17 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { FluidObject } from 'gatsby-image';
-import BackgroundImage from 'gatsby-background-image';
 import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
+import BackgroundImage from 'gatsby-background-image';
+import { FluidObject } from 'gatsby-image';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { TeamSection } from '../../components/TeamSection';
 import {
   PresskitTeamSectionQuery,
   SanityRegenTeamMember,
 } from '../../generated/graphql';
-import { TeamSection } from '../../components/TeamSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { FieldProps } from 'formik';
 import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder, {
-  GeocodeQueryType,
   GeocodeFeature,
+  GeocodeQueryType,
 } from '@mapbox/mapbox-sdk/services/geocoding';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { FieldProps } from 'formik';
+
 import FieldFormControl from './FieldFormControl';
 import Input from './Input';
 

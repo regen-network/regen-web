@@ -1,9 +1,9 @@
-import { ItemProps } from './Item';
-import ProtectedSpecies from './ProtectedSpecies';
-import ProjectMedia, { Media, Asset } from './ProjectMedia';
-import StaticMap from '../map/StaticMap';
-
 import Grid from '@mui/material/Grid';
+
+import StaticMap from '../map/StaticMap';
+import { ItemProps } from './Item';
+import ProjectMedia, { Asset, Media } from './ProjectMedia';
+import ProtectedSpecies from './ProtectedSpecies';
 
 export default {
   title: 'Sliders',

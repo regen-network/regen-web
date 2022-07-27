@@ -1,10 +1,10 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
-
-import { Body, Title } from '../typography';
-import CreditsIcon from '../icons/CreditsIcon';
 import { Box } from '@mui/material';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+
+import CreditsIcon from '../icons/CreditsIcon';
+import { Body, Title } from '../typography';
 
 export interface CreditInfoProps {
   creditClass: CreditClass;

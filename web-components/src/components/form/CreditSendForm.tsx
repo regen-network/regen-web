@@ -1,27 +1,27 @@
 import React from 'react';
-import { Formik, Form, Field, FormikErrors } from 'formik';
 import { makeStyles } from '@mui/styles';
+import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import { Theme } from '../../theme/muiTheme';
-import TextField from '../inputs/TextField';
 import AmountField from '../inputs/AmountField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
+import TextField from '../inputs/TextField';
 import {
-  CreditRetireFields,
-  RetireFormValues,
-  validateCreditRetire,
-  initialValues as initialValuesRetire,
-  BottomCreditRetireFieldsProps,
-  RetirementReminder,
-} from './CreditRetireForm';
-import Submit from './Submit';
-import {
-  requiredMessage,
   insufficientCredits,
+  requiredMessage,
   validateAmount,
 } from '../inputs/validation';
-import { Subtitle } from '../typography';
 import { RegenModalProps } from '../modal';
+import { Subtitle } from '../typography';
+import {
+  BottomCreditRetireFieldsProps,
+  CreditRetireFields,
+  initialValues as initialValuesRetire,
+  RetireFormValues,
+  RetirementReminder,
+  validateCreditRetire,
+} from './CreditRetireForm';
+import Submit from './Submit';
 
 /**
  * Send sends tradable credits from one account to another account.

@@ -1,6 +1,6 @@
-import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+
 import ContainedButton from '../buttons/ContainedButton';
 
 interface SubmitProps {
@@ -16,7 +16,7 @@ interface SubmitProps {
   label?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   submitButton: {
     textAlign: 'right',
     maxWidth: 'max-content',

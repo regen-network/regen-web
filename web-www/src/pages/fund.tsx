@@ -1,12 +1,12 @@
 import React from 'react';
-import { useStaticQuery, graphql, PageProps } from 'gatsby';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
 
 import SEO from '../components/seo';
-import TopSection from '../sections/fund/TopSection';
+import { FundPageQuery } from '../generated/graphql';
+import CallToAction from '../sections/fund/CallToAction';
 import FoldSection from '../sections/fund/FoldSection';
 import ThesisSection from '../sections/fund/ThesisSection';
-import CallToAction from '../sections/fund/CallToAction';
-import { FundPageQuery } from '../generated/graphql';
+import TopSection from '../sections/fund/TopSection';
 
 const query = graphql`
   query fundPage {

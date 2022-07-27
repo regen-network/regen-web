@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-import Card from './Card';
-import { Body, Label, Title } from '../typography';
 import { Image } from '../image';
+import { Body, Label, Title } from '../typography';
+import Card from './Card';
 
 export interface ProjectImpactCardProps {
   className?: string;

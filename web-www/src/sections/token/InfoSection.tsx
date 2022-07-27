@@ -1,19 +1,19 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { CardContent } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 
+import Card from 'web-components/lib/components/cards/Card';
 import Section from 'web-components/lib/components/section';
 import {
   Body,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
-import Card from 'web-components/lib/components/cards/Card';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 import { BlockContent } from 'web-components/src/components/block-content';
 
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 import type { TokenInfoSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({

@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from 'react';
 import {
   ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
   ApolloLink,
+  ApolloProvider,
   HttpLink,
+  InMemoryCache,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { useAuth0 } from '@auth0/auth0-react';

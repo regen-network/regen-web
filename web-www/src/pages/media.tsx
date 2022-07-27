@@ -1,15 +1,16 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import { Box, Grid } from '@mui/material';
-import { useStaticQuery, graphql, PageProps } from 'gatsby';
-import { Formik, Form, Field } from 'formik';
+import { makeStyles } from '@mui/styles';
+import { Field, Form, Formik } from 'formik';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import Section from 'web-components/lib/components/section';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
-import { MediaPageQuery, SanityMedia } from '../generated/graphql';
+import Section from 'web-components/lib/components/section';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import SEO from '../components/seo';
+import { MediaPageQuery, SanityMedia } from '../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   background: {

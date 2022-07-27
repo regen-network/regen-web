@@ -2,9 +2,9 @@ import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import { Title } from 'web-components/lib/components/typography';
-import BackgroundSection from '../../components/BackgroundSection';
 import { BlockContent } from 'web-components/src/components/block-content';
 
+import BackgroundSection from '../../components/BackgroundSection';
 import type { NctTopSectionQuery } from '../../generated/graphql';
 
 const query = graphql`

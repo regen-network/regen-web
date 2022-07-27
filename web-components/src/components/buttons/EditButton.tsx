@@ -1,9 +1,11 @@
 import { SxProps } from '@mui/material';
-import { Theme } from '~/theme/muiTheme';
+
 import OutlinedButton from '../buttons/OutlinedButton';
 import EditIcon from '../icons/EditIcon';
 import { Label } from '../typography';
 import { TextButton } from './TextButton';
+
+import { Theme } from '~/theme/muiTheme';
 
 interface ButtonProps {
   onClick: () => void;

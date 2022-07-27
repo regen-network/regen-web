@@ -1,9 +1,10 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { TextFieldProps } from 'formik-mui';
 import Grid from '@mui/material/Grid';
-import TextField from './TextField';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { TextFieldProps } from 'formik-mui';
+
 import SpinIcon from '../icons/SpinIcon';
+import TextField from './TextField';
 
 export interface NumberTextFieldProps extends TextFieldProps {
   increment?: number;

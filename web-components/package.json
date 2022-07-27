@@ -8,9 +8,10 @@
     "copy-assets": "cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",
     "watch": "yarn remove-previous-files && tsc --watch && yarn copy-assets",
     "build": "yarn remove-previous-files && tsc && yarn copy-assets",
+    "lint": "tsc --noEmit && eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
+    "lint-fix": "tsc --noEmit && eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
     "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
-    "lint": "tsc --noEmit && eslint -c .eslintrc.js --max-warnings 0 'src/**/*.ts{,x}'",
-    "lint-fix": "tsc --noEmit && eslint --fix -c .eslintrc.js --max-warnings 0 'src/**/*.ts{,x}'"
+    "format-and-fix": "yarn format && yarn lint-fix"
   },
   "browserslist": [
     ">0.2%",
@@ -65,6 +66,8 @@
   "devDependencies": {
     "@types/mapbox__mapbox-sdk": "^0.11.1",
     "@types/react-lazyload": "^3.1.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "2.4.1",
     "storybook-addon-react-router-v6": "^0.1.10"
   }

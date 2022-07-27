@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import PlayIcon from 'web-components/lib/components/icons/PlayIcon';
 import Modal from '@mui/material/Modal';
+import { makeStyles } from '@mui/styles';
+
+import PlayIcon from 'web-components/lib/components/icons/PlayIcon';
 
 const useStyles = makeStyles(theme => ({
   root: {

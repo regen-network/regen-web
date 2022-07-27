@@ -1,5 +1,5 @@
-import { makeStyles } from '@mui/styles';
 import { Theme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
 const useMyEcocreditsStyles = makeStyles((theme: Theme) => ({
   arrow: {

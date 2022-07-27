@@ -1,4 +1,5 @@
-import { withStyles, DefaultTheme as Theme } from '@mui/styles';
+import { DefaultTheme as Theme, withStyles } from '@mui/styles';
+
 import Tooltip from './';
 
 const InfoTooltip = withStyles((theme: Theme) => ({

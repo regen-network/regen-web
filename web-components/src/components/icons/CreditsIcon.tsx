@@ -1,6 +1,6 @@
 import React from 'react';
-import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import { SxProps, Theme } from '@mui/material';
+import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 interface CreditsIconProps {
   color: string;

@@ -1,7 +1,7 @@
 import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Grid } from '@mui/material';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import clsx from 'clsx';
 
 import ContainedButton from '../buttons/ContainedButton';
 

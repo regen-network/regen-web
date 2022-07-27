@@ -1,7 +1,10 @@
-import axios, { AxiosResponse } from 'axios';
-import { uniq } from 'lodash';
+import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import {
-  QueryClientImpl,
+  GetTxsEventRequest,
+  GetTxsEventResponse,
+  ServiceClientImpl,
+} from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import {
   DeepPartial,
   QueryBalanceRequest,
   QueryBalanceResponse,
@@ -13,32 +16,29 @@ import {
   QueryClassesResponse,
   QueryClassInfoRequest,
   QueryClassInfoResponse,
+  QueryClientImpl,
   QueryCreditTypesRequest,
   QueryCreditTypesResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
-import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
-import {
-  ServiceClientImpl,
-  GetTxsEventRequest,
-  GetTxsEventResponse,
-} from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import axios, { AxiosResponse } from 'axios';
+import { uniq } from 'lodash';
 
-import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
 import { connect as connectToApi } from '../../ledger';
-import { expLedger, ledgerRESTUri } from '../ledger';
 import type { PageResponse } from '../../types/ledger/base';
 import type {
   BatchInfo,
-  QueryBatchInfoResponse as QueryBatchInfoResponseV0,
+  BatchInfoWithBalance,
   BatchInfoWithSupply,
-  QuerySupplyResponse,
   BatchTotalsForProject,
   QueryBalanceResponse as QueryBalanceResponseV0,
-  QueryClassesResponse as QueryClassesResponseV0,
-  BatchInfoWithBalance,
   QueryBatchesResponse as QueryBatchesResponseV0,
+  QueryBatchInfoResponse as QueryBatchInfoResponseV0,
+  QueryClassesResponse as QueryClassesResponseV0,
   QueryClassInfoResponse as QueryClassInfoResponseV0,
+  QuerySupplyResponse,
 } from '../../types/ledger/ecocredit';
+import { expLedger, ledgerRESTUri } from '../ledger';
+import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
 
 // helpers for combining ledger queries (currently rest, regen-js in future)
 // into UI data structures

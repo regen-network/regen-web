@@ -1,13 +1,13 @@
 import React from 'react';
+import { Box, Grid, Link } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
-import { Box, Link, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import clsx from 'clsx';
 import { FluidObject } from 'gatsby-image';
 
-import clsx from 'clsx';
-
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { Body, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import BackgroundSection from './BackgroundSection';
 
 interface StyleProps {

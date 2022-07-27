@@ -1,6 +1,7 @@
 import React from 'react';
-import { TablePagination as MuiTablePagination, Grid } from '@mui/material';
+import { Grid, TablePagination as MuiTablePagination } from '@mui/material';
 import { makeStyles, withStyles } from '@mui/styles';
+
 import { Theme } from '../../theme/muiTheme';
 import PrevNextButton from '../buttons/PrevNextButton';
 

@@ -1,12 +1,12 @@
+import { DocumentInfo } from 'web-components/lib/components/document';
 import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
 import { Party } from 'web-components/lib/components/modal/LedgerModal';
-import { DocumentInfo } from 'web-components/lib/components/document';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
 import {
-  ProjectByHandleQuery,
-  PartyFieldsFragment,
   Maybe,
+  PartyFieldsFragment,
+  ProjectByHandleQuery,
 } from '../generated/graphql';
 import {
   ProjectMetadataLD,

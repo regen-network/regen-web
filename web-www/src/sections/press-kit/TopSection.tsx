@@ -23,7 +23,8 @@ const query = graphql`
 `;
 
 const TopSection = (): JSX.Element => {
-  const { sanityPresskitPage: data, background } = useStaticQuery<PresskitTopSectionQuery>(query);
+  const { sanityPresskitPage: data, background } =
+    useStaticQuery<PresskitTopSectionQuery>(query);
   const content = data?.topSection;
   const imageData = background?.childImageSharp?.fluid;
   return (

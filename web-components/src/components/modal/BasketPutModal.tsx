@@ -1,7 +1,8 @@
 import React from 'react';
+
+import { BasketPutForm, BasketPutProps } from '../form/BasketPutForm';
 import { RegenModalProps } from '../modal';
 import { FormModalTemplate } from './FormModalTemplate';
-import { BasketPutForm, BasketPutProps } from '../form/BasketPutForm';
 
 interface BasketPutModalProps extends RegenModalProps, BasketPutProps {}
 

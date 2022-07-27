@@ -2,11 +2,12 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import Timeline from 'web-components/lib/components/timeline';
-import { PresskitTimelineSectionQuery } from '../../generated/graphql';
 import { Body } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import { PresskitTimelineSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

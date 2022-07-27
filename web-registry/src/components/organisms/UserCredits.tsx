@@ -1,14 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
 import { Link } from 'react-router-dom';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
 import PurchasedCreditsCard from 'web-components/lib/components/cards/PurchasedCreditsCard';
-import TotalCreditsIcon from 'web-components/lib/components/icons/TotalCreditsIcon';
-import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
 import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
+import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
+import TotalCreditsIcon from 'web-components/lib/components/icons/TotalCreditsIcon';
+import { Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

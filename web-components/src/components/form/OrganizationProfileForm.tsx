@@ -1,13 +1,13 @@
 import React from 'react';
-import { Form, Formik, Field } from 'formik';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { Field, Form, Formik } from 'formik';
 
+import OnBoardingCard from '../cards/OnBoardingCard';
+import SaveFooter from '../fixed-footer/SaveFooter';
 import ControlledTextField from '../inputs/ControlledTextField';
 import ImageField from '../inputs/ImageField';
-import { requiredMessage } from '../inputs/validation';
-import OnBoardingCard from '../cards/OnBoardingCard';
 import LocationField from '../inputs/LocationField';
-import SaveFooter from '../fixed-footer/SaveFooter';
-import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { requiredMessage } from '../inputs/validation';
 
 interface FormProps {
   submit: (values: OrgProfileFormValues) => Promise<void>;

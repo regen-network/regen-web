@@ -1,12 +1,12 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
+import Grid from '@mui/material/Grid';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import clsx from 'clsx';
 
-import { Title } from '../typography';
-import RegenIcon from '../icons/RegenIcon';
 import { pluralize } from '../../utils/pluralize';
+import RegenIcon from '../icons/RegenIcon';
+import { Title } from '../typography';
 
 export interface StakeholderInfo {
   companyName: string;

@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Link as MuiLink, LinkProps as MuiLinkProps } from '@mui/material';
+
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { getAccountUrl } from '../../lib/block-explorer';
+import { getAccountUrl } from 'lib/block-explorer';
 
 interface AccountLinkProps extends MuiLinkProps {
   address: string;

@@ -1,23 +1,23 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@mui/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { makeStyles, useTheme } from '@mui/styles';
 import cx from 'clsx';
 
+import { BlockContent } from 'web-components/lib/components/block-content';
+import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
-import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
-import { BlockContent } from 'web-components/lib/components/block-content';
 
+import { CreditClassByUriQuery } from '../../generated/graphql';
 import {
   CardFieldsFragment,
-  Sdg,
   Maybe,
   Scalars,
+  Sdg,
 } from '../../generated/sanity-graphql';
-import { CreditClassByUriQuery } from '../../generated/graphql';
-import { SDGs } from './SDGs';
 import { CreditClassDetailsColumn } from '../molecules/CreditClassDetailsColumn';
+import { SDGs } from './SDGs';
 
 interface CreditClassOverviewSectionProps {
   dbClass: CreditClassByUriQuery['creditClassByUri'];

@@ -1,12 +1,12 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { Box } from '@mui/material';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
+import { parseText } from '../../utils/textParser';
 import OutlinedButton from '../buttons/OutlinedButton';
 import EyeIcon from '../icons/EyeIcon';
-import MediaCard from './MediaCard';
-import { parseText } from '../../utils/textParser';
 import { Body, Label } from '../typography';
-import { Box } from '@mui/material';
+import MediaCard from './MediaCard';
 
 export interface ResourcesCardProps {
   image: { publicURL: string };

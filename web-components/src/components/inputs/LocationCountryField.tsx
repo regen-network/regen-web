@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Field } from 'formik';
 
-import SelectTextField, { Option } from './SelectTextField';
 import { countries } from '../../utils/countries';
+import SelectTextField, { Option } from './SelectTextField';
 
 interface FieldProps {
   className?: string;

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
-import { styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
 
 import {
   ActionsTable,
@@ -8,9 +7,9 @@ import {
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
-import { AccountLink } from '../atoms/AccountLink';
-import { Link } from '../atoms';
-import { NoCredits } from '../molecules';
+import { Link } from 'components/atoms';
+import { AccountLink } from 'components/atoms/AccountLink';
+import { NoCredits } from 'components/molecules';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,

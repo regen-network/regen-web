@@ -7,10 +7,10 @@ import {
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 
-import { Link } from '../atoms';
-import { NoCredits } from '../molecules';
-import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
-import { AccountLink } from '../atoms/AccountLink';
+import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+
+import { AccountLink, Link } from 'components/atoms';
+import { NoCredits } from 'components/molecules';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,

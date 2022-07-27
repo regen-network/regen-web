@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { Field, Form, Formik, FormikErrors } from 'formik';
 
-import { ProfileSubmitFooter, ProfileOnBoardingCard } from './ProfileModal';
-import PhoneField from '../inputs/PhoneField';
 import ControlledTextField from '../inputs/ControlledTextField';
+import PhoneField from '../inputs/PhoneField';
 import { Title } from '../typography';
 import Modal from '.';
 import { SharePermissionField } from './OrganizationModal';
+import { ProfileOnBoardingCard, ProfileSubmitFooter } from './ProfileModal';
 
 interface IndividualModalProps {
   individual?: IndividualFormValues;

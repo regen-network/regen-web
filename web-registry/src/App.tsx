@@ -1,18 +1,18 @@
 import React, { lazy, Suspense, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useAuth0, OAuthError } from '@auth0/auth0-react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { OAuthError, useAuth0 } from '@auth0/auth0-react';
 import { createBrowserHistory } from 'history';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 
+import { KeplrRoute, ProtectedRoute, ScrollToTop } from './components/atoms';
+import PageLoader from './components/atoms/PageLoader';
+import { AppFooter, RegistryNav } from './components/organisms';
 import isAdmin from './lib/admin';
 import { init as initGA } from './lib/ga';
-import { ScrollToTop, ProtectedRoute, KeplrRoute } from './components/atoms';
-import { RegistryNav, AppFooter } from './components/organisms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 import './App.css';
-import PageLoader from './components/atoms/PageLoader';
 
 const Additionality = lazy(() => import('./pages/Additionality'));
 const Admin = lazy(() => import('./pages/Admin'));

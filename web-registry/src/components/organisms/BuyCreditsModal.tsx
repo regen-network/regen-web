@@ -1,35 +1,35 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
+import ReactHtmlParser from 'react-html-parser';
 import { Link } from 'react-router-dom';
-import Grid from '@mui/material/Grid';
+import { Box } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
-import { Formik, Form, Field } from 'formik';
-import { RadioGroup } from 'formik-mui';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
-import ReactHtmlParser from 'react-html-parser';
+import { Field, Form, Formik } from 'formik';
+import { RadioGroup } from 'formik-mui';
 
-import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Card from 'web-components/lib/components/cards/Card';
+import Submit from 'web-components/lib/components/form/Submit';
+import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
+import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
+import { Image } from 'web-components/lib/components/image';
+import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
+import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
+import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
+import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
+import Toggle from 'web-components/lib/components/inputs/Toggle';
+import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
+import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 import {
   Body,
   Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
-import Toggle from 'web-components/lib/components/inputs/Toggle';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
-import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
-import { Image } from 'web-components/lib/components/image';
-import Submit from 'web-components/lib/components/form/Submit';
-import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
-import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
-import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
 
 import { useWallet } from '../../lib/wallet';
-import { Box } from '@mui/material';
 
 const useStyles = makeStyles(theme => ({
   root: {

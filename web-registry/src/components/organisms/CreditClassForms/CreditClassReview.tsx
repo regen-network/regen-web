@@ -1,13 +1,13 @@
 import { useFormikContext } from 'formik';
 
-import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { Box, FlexCol } from 'web-components/lib/components/box';
 import {
-  ReviewCard,
   ItemDisplay,
+  ReviewCard,
 } from 'web-components/lib/components/cards/ReviewCard';
 
 import { ScrollableCodebox } from 'components/molecules/ScrollableCodebox';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import type { CreditClassValues } from './CreditClassForm';
 

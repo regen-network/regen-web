@@ -1,14 +1,14 @@
 import React from 'react';
-import { Theme, Box } from '@mui/material';
-import { SxProps } from '@mui/system';
+import { Box, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { SxProps } from '@mui/system';
 
-import { Label, Subtitle, Title } from '../typography';
+import { truncate } from '../../utils/truncate';
 import OutlinedButton from '../buttons/OutlinedButton';
 import Card from '../cards/Card';
-import Modal, { RegenModalProps } from '../modal';
 import { LinkItem } from '../footer/footer-new';
-import { truncate } from '../../utils/truncate';
+import Modal, { RegenModalProps } from '../modal';
+import { Label, Subtitle, Title } from '../typography';
 
 const useStyles = makeStyles(theme => ({
   root: {

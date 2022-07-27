@@ -1,5 +1,6 @@
 import React from 'react';
-import { SxProps, Card as MuiCard } from '@mui/material';
+import { Card as MuiCard, SxProps } from '@mui/material';
+
 import type { Theme } from '~/theme/muiTheme';
 
 export function Card({

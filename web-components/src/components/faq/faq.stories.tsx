@@ -1,7 +1,7 @@
-import Question, { QuestionItem } from './Question';
+import FAQ from './';
 import Category from './Category';
 import Navigation from './Navigation';
-import FAQ from './';
+import Question, { QuestionItem } from './Question';
 
 export default {
   title: 'FAQ',

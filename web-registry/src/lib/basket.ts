@@ -1,14 +1,14 @@
 import {
-  QueryClientImpl,
   DeepPartial,
+  QueryBasketBalanceRequest,
+  QueryBasketBalanceResponse,
+  QueryBasketBalancesRequest,
+  QueryBasketBalancesResponse,
   QueryBasketRequest,
   QueryBasketResponse,
   QueryBasketsRequest,
   QueryBasketsResponse,
-  QueryBasketBalancesRequest,
-  QueryBasketBalancesResponse,
-  QueryBasketBalanceResponse,
-  QueryBasketBalanceRequest,
+  QueryClientImpl,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 // TODO: pagination not implemented yet

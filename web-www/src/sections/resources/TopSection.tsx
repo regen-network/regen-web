@@ -23,7 +23,9 @@ const TopSection = (): JSX.Element => {
               }
             }
           }
-          backgroundMobile: file(relativePath: { eq: "resources-top-image-mobile.jpg" }) {
+          backgroundMobile: file(
+            relativePath: { eq: "resources-top-image-mobile.jpg" }
+          ) {
             childImageSharp {
               fluid(quality: 90) {
                 ...GatsbyImageSharpFluid_withWebp

@@ -319,7 +319,9 @@ export const queryProjectsByClass = async (
   }
 };
 
-const getProject = async (projectId: string): Promise<QueryProjectResponse> => {
+export const getProject = async (
+  projectId: string,
+): Promise<QueryProjectResponse> => {
   const client = await getQueryClient();
   try {
     return client.Project({ projectId });

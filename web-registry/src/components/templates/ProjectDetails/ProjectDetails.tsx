@@ -2,6 +2,7 @@ import { useTheme } from '@mui/styles';
 import { Box, Skeleton } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
@@ -35,6 +36,8 @@ import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { TransactionModals } from './ProjectDetails.TransactionModals';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
+import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
+import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
 
 interface Project {
   creditPrice?: CreditPrice;
@@ -77,21 +80,25 @@ function ProjectDetails(): JSX.Element {
     variables: { onChainId: projectId as string },
   });
 
+  const { data: projectResponse } = useEcocreditQuery<QueryProjectResponse>({
+    query: 'project',
+    params: { projectId },
+  });
+  const onChainProject = projectResponse?.project;
+
   // TODO: when all projects are on-chain, just use dataByOnChainId
   const data = isOnChainId ? dataByOnChainId : dataByHandle;
   const project = isOnChainId
     ? dataByOnChainId?.projectByOnChainId
     : dataByHandle?.projectByHandle;
 
-  console.log('project', project);
-
-  // from project.metadata
-  // TODO: do proper onchain metadata fetch
-  // const nonQueryableMetadata: ProjectMetadataLD = project?.metadata;
-  const metadata: ProjectMetadataLD = project?.metadata;
-  const vcsProjectId = metadata?.['regen:vcsProjectId'];
+  const offChainProjectMetadata: ProjectMetadataLD = project?.metadata;
+  const onChainProjectMetadata = useQueryMetadataGraph(
+    onChainProject?.metadata,
+  );
+  const vcsProjectId = onChainProjectMetadata?.['regen:vcsProjectId'];
   const managementActions =
-    metadata?.['regen:landManagementActions']?.['@list'];
+    offChainProjectMetadata?.['regen:landManagementActions']?.['@list'];
 
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
   const { batchData, batchTotals } = useBatches({
@@ -117,23 +124,20 @@ function ProjectDetails(): JSX.Element {
     creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
   ];
 
-  console.log('creditClassVersion?.metadata', creditClassVersion?.metadata);
-
-  //
-  const { geojson, isGISFile, setGeojson } = useGeojson(metadata);
-  console.log('geojson', geojson);
+  const { geojson, isGISFile, setGeojson } = useGeojson(
+    offChainProjectMetadata,
+  );
 
   const seoData = useSeo({
-    metadata,
+    metadata: offChainProjectMetadata,
     creditClassName,
     // metadataLocation,
     handleReset: () => setGeojson(null),
   });
-  const mediaData = useMedia({ metadata, geojson });
+  const mediaData = useMedia({ metadata: offChainProjectMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
   const otherProjects = useOtherProjects(projectId as string);
   const isLoading = loading || _loading;
-  console.log('impactData', impactData);
 
   const {
     issuanceModalData,
@@ -223,7 +227,7 @@ function ProjectDetails(): JSX.Element {
 
       {isTxMode && (
         <TransactionModals
-          metadata={metadata}
+          metadata={onChainProjectMetadata}
           projectId={projectId}
           testProject={testProject}
           creditDenom={creditClassDenom || creditClassName}

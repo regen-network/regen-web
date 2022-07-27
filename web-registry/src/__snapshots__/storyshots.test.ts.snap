@@ -78,6 +78,32 @@ exports[`Storyshots Blog Post Blog Post 1`] = `
 </MemoryRouter>
 `;
 
+exports[`Storyshots Buttons Combined 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots Buttons Contained Button 1`] = `
 <MemoryRouter
   initialEntries={

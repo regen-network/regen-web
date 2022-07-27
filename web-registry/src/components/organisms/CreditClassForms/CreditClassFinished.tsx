@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { Link, SxProps } from '@mui/material';
 import { truncate } from 'lodash';
 
@@ -19,7 +18,6 @@ export const CreditClassFinished = (props: {
   hash: string;
 }): JSX.Element => {
   const { classId, hash } = props;
-  const navigate = useNavigate();
   return (
     <FlexCol>
       <OnBoardingCard>
@@ -39,8 +37,8 @@ export const CreditClassFinished = (props: {
       </OnBoardingCard>
       <OutlinedButton
         sx={{ alignSelf: 'center' }}
-        role="link"
-        onClick={() => navigate(`/credit-classes/${classId}`)}
+        component={Link}
+        href={`/credit-classes/${classId}`}
       >
         see credit class page
       </OutlinedButton>

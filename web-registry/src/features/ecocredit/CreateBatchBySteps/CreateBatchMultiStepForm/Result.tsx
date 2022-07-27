@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box } from '@mui/material';
 
@@ -14,8 +13,9 @@ import {
 } from 'web-components/lib/components/typography';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { Link } from '../../../../components/atoms';
-import { getAccountUrl, getHashUrl } from '../../../../lib/block-explorer';
+import { getAccountUrl, getHashUrl } from 'lib/block-explorer';
+
+import { Link } from 'components/atoms';
 
 function parseSuccessResponseLog(
   responseLogEvents: [any],
@@ -124,12 +124,48 @@ type SuccessProps = {
   txHash: string;
 };
 
+<<<<<<< HEAD
 const SuccessResult = ({
   batchDenom,
   recipients,
   txHash,
 }: SuccessProps): React.ReactElement => {
   const navigate = useNavigate();
+=======
+const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
+  // Parsing the response...
+  const responseLog = response?.rawLog && JSON.parse(response?.rawLog);
+  const responseLogEvents = responseLog && responseLog[0].events;
+
+  const eventCreateBatch =
+    responseLogEvents &&
+    responseLogEvents.find((event: any) =>
+      event.type.includes('.EventCreateBatch'),
+    );
+
+  const receiveBatchDenom =
+    eventCreateBatch &&
+    eventCreateBatch.attributes?.find((obj: any) => obj.key === 'batch_denom');
+
+  const eventReceive =
+    responseLogEvents &&
+    responseLogEvents.find((event: any) =>
+      event.type.includes('.EventReceive'),
+    );
+
+  const recipientsLog =
+    eventReceive &&
+    eventReceive.attributes?.filter((obj: any) => obj.key === 'recipient');
+  const recipients = recipientsLog.map(({ value }: { value: string }) => {
+    const recipientAddress = value.replace(/"/g, '');
+    return {
+      name: truncate(recipientAddress),
+      url: getAccountUrl(recipientAddress),
+    };
+  });
+
+  const batchDenom = receiveBatchDenom.value.replace(/"/g, '');
+>>>>>>> 35ff03bc (Feat 1014 new button colors (#1085))
 
   return (
     <>
@@ -157,9 +193,7 @@ const SuccessResult = ({
         />
       </OnBoardingCard>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <OutlinedButton
-          onClick={() => navigate(`/credit-batches/${batchDenom}`)}
-        >
+        <OutlinedButton component={Link} href={`/credit-batches/${batchDenom}`}>
           SEE CREDIT BATCH
         </OutlinedButton>
       </Box>
@@ -172,8 +206,6 @@ type ErrorResultProps = {
 };
 
 const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
-  const navigate = useNavigate();
-
   return (
     <>
       <Box
@@ -207,7 +239,7 @@ const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
         />
       </OnBoardingCard>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <OutlinedButton onClick={() => navigate('/ecocredits/dashboard')}>
+        <OutlinedButton href="/ecocredits/dashboard" component={Link}>
           SEE ALL CREDIT BATCHES
         </OutlinedButton>
       </Box>

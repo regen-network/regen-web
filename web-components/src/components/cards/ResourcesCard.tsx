@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
@@ -85,6 +84,7 @@ export default function ResourcesCard({
         >
           <OutlinedButton
             size="small"
+            // as={Link}
             target={target}
             href={link}
             startIcon={<EyeIcon />}

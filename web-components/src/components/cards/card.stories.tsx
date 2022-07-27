@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Theme } from '@mui/material';
+import { Box, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 import { QuestionItem } from '../faq/Question';
@@ -18,7 +18,6 @@ import OnBoardingCard from './OnBoardingCard';
 import { OverviewCard } from './OverviewCard';
 import ProjectCard from './ProjectCard';
 import ProjectTopCard from './ProjectTopCard';
-// import CreditCard, { CreditInfo } from './CreditCard';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
 import ResourcesCard from './ResourcesCard';
 import { StepCard } from './StepCard';
@@ -74,7 +73,7 @@ export const monitoredImpactCard = (): JSX.Element => (
 function onClick(): void {}
 
 export const projectCard = (): JSX.Element => (
-  <>
+  <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' } }}>
     <ProjectCard
       name="Coorong Project"
       place={'Adelaide, South Australia, Australia'}
@@ -84,6 +83,21 @@ export const projectCard = (): JSX.Element => (
       imgSrc="/coorong.png"
       tag="biodiversity"
       onClick={onClick}
+      sx={{ maxWidth: 338, mr: 10, mb: 10 }}
+    />
+
+    <ProjectCard
+      name="Coorong Project"
+      place={'Adelaide, South Australia, Australia'}
+      area={200}
+      comingSoon={false}
+      areaUnit="hectares"
+      imgSrc="/coorong.png"
+      onClick={onClick}
+      purchaseInfo={{
+        sellInfo: { creditsAvailable: '1,200', pricePerTon: '17.20-24.20 ' },
+      }}
+      sx={{ maxWidth: 338, mr: 10, mb: 10 }}
     />
 
     <ProjectCard
@@ -96,8 +110,9 @@ export const projectCard = (): JSX.Element => (
       tag="biodiversity"
       onClick={onClick}
       registry={{ name: 'registry', type: 'type' }}
+      sx={{ maxWidth: 338 }}
     />
-  </>
+  </Box>
 );
 
 export const purchasedCreditsCard = (): JSX.Element => (

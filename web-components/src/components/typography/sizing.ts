@@ -1,6 +1,7 @@
 import { Variant } from '@mui/material/styles/createTypography';
 
 export type TextSize =
+  | 'xxs' // 10px
   | 'xs' // 12px
   | 'sm' // 14px
   | 'md' // 16px
@@ -41,6 +42,9 @@ export function getMobileSize(size: TextSize): TextSize {
 export function getSizeVariant(size: TextSize): Variant {
   let variant;
   switch (size) {
+    case 'xxs':
+      variant = 'textXXSmall';
+      break;
     case 'xs':
       variant = 'textXSmall';
       break;

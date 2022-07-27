@@ -7,6 +7,9 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
 - [Regen Website](#regen-website)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+      - [Mac](#mac)
+    - [Install dependencies](#install-dependencies)
   - [Environment variables](#environment-variables)
   - [Development](#development)
   - [Deployment](#deployment)
@@ -188,15 +191,17 @@ yarn test-update-snapshot
 ## Code style
 
 [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) are used as
-code formatter and linter respectively:
+code formatter and linter.
+
+Code can be formatted and any auto-fixable errors corrected through the command:
 
 ```sh
-yarn format
+yarn format-and-fix
 ```
 
-```sh
-yarn lint
-```
+If you are using VsCode, there are suggested workspace settings in `.vscode/settings.json.suggested` - copy those over to your workspace `settings.json` and things should format automatically.
+
+Note: You'll need the VsCode extensions for [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 ## Typography
 

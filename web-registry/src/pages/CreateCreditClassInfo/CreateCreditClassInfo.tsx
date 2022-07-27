@@ -21,6 +21,7 @@ import { HeroAction, HeroTitle, OverviewCards } from 'components/molecules';
 import { StepCardsWithDescription } from 'components/organisms';
 
 import { useCreditClassInfoStyles } from './CreditClassInfo.styles';
+
 import fernImg from 'assets/fern-in-hands.png';
 import topographyImg from 'assets/topography-pattern-cutout-1.png';
 import writingOnPaperImg from 'assets/writing-on-paper.png';

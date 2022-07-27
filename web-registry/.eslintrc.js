@@ -22,6 +22,7 @@ module.exports = {
                 '^(generated|graphql|types|mocks)(/.*|$)',
                 '^(apollo|sanity|ledger|lib)(/.*|$)',
               ],
+<<<<<<< HEAD
               // React-specific - hooks & components
               [
                 '^(features|pages)(/.*|$)',
@@ -32,6 +33,12 @@ module.exports = {
               ['^\\.'],
               // assets
               ['^(assets)(/.*|$)'],
+=======
+              // Absolute imports .
+              ['^(pages)(/.*|$)', '^(components|hooks|features)(/.*|$)'],
+              // Relative imports and assets
+              ['^\\.', '^(assets)(/.*|$)'],
+>>>>>>> master
             ],
           },
         ],

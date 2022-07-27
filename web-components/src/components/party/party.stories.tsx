@@ -1,6 +1,4 @@
-import * as React from 'react';
-
-import PartyAddress from 'web-components/lib/components/party/PartyAddress';
+import PartyAddress from './PartyAddress';
 
 export default {
   title: 'Party',

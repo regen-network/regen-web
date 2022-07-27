@@ -1,11 +1,11 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import {
-  OnboardingFormTemplate,
-  EditFormTemplate,
-} from '../../components/templates';
 import { StoryForm, StoryValues } from '../../components/organisms';
+import {
+  EditFormTemplate,
+  OnboardingFormTemplate,
+} from '../../components/templates';
 import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,

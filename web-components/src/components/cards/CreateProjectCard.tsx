@@ -1,10 +1,10 @@
 import React from 'react';
-import { SxProps, useTheme, Theme } from '@mui/material';
+import { SxProps, Theme, useTheme } from '@mui/material';
 
-import Card from './Card';
 import OutlinedButton from '../buttons/OutlinedButton';
-import { Title } from '../typography/Title';
 import { ProjectPageIcon } from '../icons/ProjectPageIcon';
+import { Title } from '../typography/Title';
+import Card from './Card';
 
 interface CreateProjectCardProps {
   className?: string;

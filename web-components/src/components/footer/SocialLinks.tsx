@@ -1,19 +1,19 @@
 import React from 'react';
-import cx from 'clsx';
-import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
+import { makeStyles } from '@mui/styles';
+import cx from 'clsx';
 
-import { Label, Title } from '../typography';
-import InstagramIcon from '../icons/social/InstagramIcon';
-import TelegramIcon from '../icons/social/TelegramIcon';
+import DiscordIcon from '../icons/social/DiscordIcon';
 import FacebookIcon from '../icons/social/FacebookIcon';
-import TwitterIcon from '../icons/social/TwitterIcon';
+import GithubIcon from '../icons/social/GithubIcon';
+import InstagramIcon from '../icons/social/InstagramIcon';
 import LinkedInIcon from '../icons/social/LinkedInIcon';
 import MediumIcon from '../icons/social/MediumIcon';
+import TelegramIcon from '../icons/social/TelegramIcon';
+import TwitterIcon from '../icons/social/TwitterIcon';
 import YoutubeIcon from '../icons/social/YoutubeIcon';
-import GithubIcon from '../icons/social/GithubIcon';
-import DiscordIcon from '../icons/social/DiscordIcon';
+import { Label } from '../typography';
 
 interface Props {
   className?: string;

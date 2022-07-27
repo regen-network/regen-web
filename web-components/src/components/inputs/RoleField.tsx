@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
+import React, { useEffect, useState } from 'react';
 import { SxProps, TextField } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
-import { FieldProps, FormikErrors, FormikProps } from 'formik';
+import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
+import { FieldProps, FormikErrors, FormikProps } from 'formik';
 
-import FieldFormControl from './FieldFormControl';
-import { Label } from '../typography';
+import { getURLInitialValue } from '../../utils/schemaURL';
+import OutlinedButton from '../buttons/OutlinedButton';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
-import OutlinedButton from '../buttons/OutlinedButton';
 import {
-  OrganizationModal,
-  OrganizationFormValues,
-} from '../modal/OrganizationModal';
-import {
-  IndividualModal,
   IndividualFormValues,
+  IndividualModal,
 } from '../modal/IndividualModal';
-import { ProfileModal, ProfileFormValues } from '../modal/ProfileModal';
-import { getURLInitialValue } from '../../utils/schemaURL';
+import {
+  OrganizationFormValues,
+  OrganizationModal,
+} from '../modal/OrganizationModal';
+import { ProfileFormValues, ProfileModal } from '../modal/ProfileModal';
+import { Label } from '../typography';
+import FieldFormControl from './FieldFormControl';
 
 const useStyles = makeStyles(theme => ({
   root: {

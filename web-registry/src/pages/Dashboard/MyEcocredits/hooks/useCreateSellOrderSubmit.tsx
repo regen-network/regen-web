@@ -1,21 +1,24 @@
 import { useCallback } from 'react';
+import { Box } from '@mui/material';
+
 import { FormValues as CreateSellOrderFormValues } from 'web-components/lib/components/form/CreateSellOrderForm';
+import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
-import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
-import { useStateSetter } from '../../../types/react/use-state';
+
+import { UseStateSetter } from 'types/react/use-state';
+
 import {
   CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_HEADER,
 } from '../MyEcocredits.contants';
-import { Box } from '@mui/material';
 
 type Props = {
-  setCardItems: useStateSetter<Item[] | undefined>;
-  setTxModalTitle: useStateSetter<string | undefined>;
-  setTxModalHeader: useStateSetter<string | undefined>;
-  setTxButtonTitle: useStateSetter<string | undefined>;
-  setSellOrderCreateOpen: useStateSetter<number>;
+  setCardItems: UseStateSetter<Item[] | undefined>;
+  setTxModalTitle: UseStateSetter<string | undefined>;
+  setTxModalHeader: UseStateSetter<string | undefined>;
+  setTxButtonTitle: UseStateSetter<string | undefined>;
+  setSellOrderCreateOpen: UseStateSetter<number>;
 };
 
 type ReturnType = (values: CreateSellOrderFormValues) => Promise<void>;

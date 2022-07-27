@@ -1,7 +1,7 @@
 import React from 'react';
-import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
 import Grid, { GridProps } from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
 
 interface FixedFooterProps {
   children?: any;

@@ -1,12 +1,15 @@
-import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 import { useCallback } from 'react';
-import { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
-import { Item } from 'web-components/lib/components/modal/TxModal';
-import { BasketTokens } from '../../../hooks/useBasketTokens';
-import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
-import { BatchInfoWithBalance } from '../../../types/ledger/ecocredit';
-import { useStateSetter } from '../../../types/react/use-state';
+import type { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
+
+import type { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
+import type { Item } from 'web-components/lib/components/modal/TxModal';
+
+import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import type { UseStateSetter } from 'types/react/use-state';
+
+import type { BasketTokens } from 'hooks/useBasketTokens';
+import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 type Props = {
   accountAddress?: string;
@@ -16,10 +19,10 @@ type Props = {
   credits: BatchInfoWithBalance[];
   basketTakeTitle: string;
   signAndBroadcast: SignAndBroadcastType;
-  setBasketPutOpen: useStateSetter<number>;
-  setBasketTakeTokens: useStateSetter<BasketTokens | undefined>;
-  setCardItems: useStateSetter<Item[] | undefined>;
-  setTxModalTitle: useStateSetter<string | undefined>;
+  setBasketPutOpen: UseStateSetter<number>;
+  setBasketTakeTokens: UseStateSetter<BasketTokens | undefined>;
+  setCardItems: UseStateSetter<Item[] | undefined>;
+  setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
 type ReturnType = (values: BasketPutFormValues) => Promise<void>;

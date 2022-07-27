@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
+
 import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 

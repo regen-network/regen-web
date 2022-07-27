@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import { Grid } from '@mui/material';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Grid } from '@mui/material';
 
-import CreateProjectCard from 'web-components/lib/components/cards/CreateProjectCard';
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
+import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 
-import { useWallet } from '../../lib/wallet';
 import {
   useCreateProjectMutation,
-  useWalletByAddrQuery,
   useCreateWalletMutation,
-} from '../../generated/graphql';
-import { getProjectPageBaseData } from '../../lib/rdf';
-import { DashboardTemplate } from '../templates';
+  useWalletByAddrQuery,
+} from 'generated/graphql';
+import { getProjectPageBaseData } from 'lib/rdf';
+import { useWallet } from 'lib/wallet';
 
-const MyProjects: React.FC = () => {
+const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
   const { wallet } = useWallet();
   const navigate = useNavigate();
@@ -79,12 +78,7 @@ const MyProjects: React.FC = () => {
   }
 
   return (
-    <DashboardTemplate
-      sx={{
-        display: 'flex',
-        pt: 10,
-      }}
-    >
+    <>
       <Grid container spacing={8}>
         <Grid item xs={12} md={6} lg={4}>
           <CreateProjectCard
@@ -93,8 +87,8 @@ const MyProjects: React.FC = () => {
           />
         </Grid>
         {/* TODO: ProjectCards used below temporarily. Will probably be a new variation for this purpose */}
-        {projects?.map(project => (
-          <Grid item xs={12} md={6} lg={4}>
+        {projects?.map((project, i) => (
+          <Grid key={i} item xs={12} md={6} lg={4}>
             <ProjectCard
               name={project?.handle || project?.id}
               imgSrc={''}
@@ -106,7 +100,7 @@ const MyProjects: React.FC = () => {
         ))}
       </Grid>
       {error && <ErrorBanner text={error} />}
-    </DashboardTemplate>
+    </>
   );
 };
 

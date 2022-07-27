@@ -1,17 +1,17 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
+import { BlockContent } from 'web-components/lib/components/block-content';
 import {
   Body,
   Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
-import { BlockContent } from 'web-components/lib/components/block-content';
 
 import {
-  ReviewSectionFieldsFragment,
   Maybe,
+  ReviewSectionFieldsFragment,
 } from '../../generated/sanity-graphql';
 import { SanityButton } from '../atoms';
 

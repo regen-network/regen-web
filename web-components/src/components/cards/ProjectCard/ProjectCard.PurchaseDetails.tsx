@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
+
 import { Body, Label } from '../../typography';
 
 export function PurchaseDetails({

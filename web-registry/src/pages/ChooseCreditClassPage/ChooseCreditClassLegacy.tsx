@@ -1,14 +1,14 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { ChooseCreditClassGrid } from './ChooseCreditClass.Grid';
-import { ChooseCreditClassItem } from './ChooseCreditClass.Item';
-import { validate, getProjectPageBaseData } from '../../lib/rdf';
 import {
-  useUpdateProjectByIdMutation,
   useAllCreditClassesQuery,
   useShaclGraphByUriQuery,
+  useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
+import { getProjectPageBaseData, validate } from '../../lib/rdf';
+import { ChooseCreditClassGrid } from './ChooseCreditClass.Grid';
+import { ChooseCreditClassItem } from './ChooseCreditClass.Item';
 import { useErrorTimeout } from './hooks/useErrorTimeout';
 
 const ChooseCreditClassLegacy: React.FC = () => {

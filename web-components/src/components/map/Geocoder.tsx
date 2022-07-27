@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder, {
   GeocodeQueryType,
 } from '@mapbox/mapbox-sdk/services/geocoding';
+import TextField from '@mui/material/TextField';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 interface GeocoderProps {
   token: string | undefined;

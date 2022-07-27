@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import ReactHtmlParser from 'react-html-parser';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-import { Title } from '../typography';
 import ContainedButton from '../buttons/ContainedButton';
 import ShieldIcon from '../icons/ShieldIcon';
+import { Title } from '../typography';
 import { Event } from './';
 
 interface TimelineItemProps extends Event {

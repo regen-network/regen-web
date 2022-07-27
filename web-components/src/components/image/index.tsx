@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import React, { useEffect, useRef, useState } from 'react';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
 import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';

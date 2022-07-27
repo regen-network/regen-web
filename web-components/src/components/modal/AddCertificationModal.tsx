@@ -1,10 +1,11 @@
 import React from 'react';
-import { RegenModalProps } from '../modal';
-import { FormModalTemplate } from './FormModalTemplate';
+
 import {
   CertificationForm,
   CertificationProps,
 } from '../form/CertificationForm';
+import { RegenModalProps } from '../modal';
+import { FormModalTemplate } from './FormModalTemplate';
 
 interface AddCertificationModalProps
   extends RegenModalProps,

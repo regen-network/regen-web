@@ -1,16 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { useStaticQuery, graphql } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
+import { FluidObject } from 'gatsby-image';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import DecentralizeIcon from 'web-components/lib/components/icons/DecentralizeIcon';
-import { TokenBlockExplorerSectionQuery } from '../../generated/graphql';
-import { FluidObject } from 'gatsby-image';
+import Section from 'web-components/lib/components/section';
+import { Body, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { BlockContent } from 'web-components/src/components/block-content';
+
+import { TokenBlockExplorerSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

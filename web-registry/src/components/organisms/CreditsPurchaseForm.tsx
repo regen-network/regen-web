@@ -1,30 +1,29 @@
-import React from 'react';
-import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import axios from 'axios';
-import { loadStripe } from '@stripe/stripe-js';
 import { useParams } from 'react-router-dom';
-import { loader } from 'graphql.macro';
 import { useMutation } from '@apollo/client';
-import { Formik, Form, Field } from 'formik';
+import { SxProps } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
+import { Field, Form, Formik } from 'formik';
+import { loader } from 'graphql.macro';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Body, Title } from 'web-components/lib/components/typography';
-import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
-import TextField from 'web-components/lib/components/inputs/TextField';
-import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import {
-  requiredMessage,
-  validateEmail,
-  invalidEmailMessage,
-} from 'web-components/lib/components/inputs/validation';
+import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import Submit from 'web-components/lib/components/form/Submit';
+import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
 import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
+import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
+import TextField from 'web-components/lib/components/inputs/TextField';
+import {
+  invalidEmailMessage,
+  requiredMessage,
+  validateEmail,
+} from 'web-components/lib/components/inputs/validation';
+import { Body, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 // TODO: refactor countries dependency
 import { countries } from 'web-components/lib/utils/countries';
-import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
-import { SxProps } from '@mui/material';
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 
@@ -189,7 +188,6 @@ function CreditsPurchaseForm({
           setSubmitting(true);
           try {
             let walletId: string;
-            let addressId: string;
             let result;
 
             // Create address
@@ -213,7 +211,7 @@ function CreditsPurchaseForm({
                 },
               },
             });
-            addressId = addressResult.data.createAddress.address.id;
+            const addressId = addressResult.data.createAddress.address.id;
 
             // Create user/org
             if (orgType === true) {
@@ -391,7 +389,7 @@ function CreditsPurchaseForm({
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <LocationStateField name="state" country={values.country} />
+                    <LocationCountryField />
                   </Grid>
                   <Grid
                     item
@@ -399,7 +397,7 @@ function CreditsPurchaseForm({
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <LocationCountryField />
+                    <LocationStateField name="state" country={values.country} />
                   </Grid>
                 </Grid>
 

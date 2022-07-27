@@ -2,11 +2,12 @@ import React from 'react';
 import LazyLoad from 'react-lazyload';
 import { Box, styled, SxProps, useTheme } from '@mui/material';
 
-import { Label, Title } from 'web-components/lib/components/typography';
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
 import LinkedInIcon from 'web-components/lib/components/icons/social/LinkedInIcon';
+import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
+import { Label, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { SanityRegenTeamMember } from '../../generated/graphql';
 
 const Root = styled('div')({

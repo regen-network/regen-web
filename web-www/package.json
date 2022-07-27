@@ -11,7 +11,6 @@
     "@sanity/image-url": "^1.0.1",
     "axios": "^0.21.1",
     "clsx": "1.1.0",
-    "eslint-config-react-app": "^5.2.1",
     "formik": "2.2.9",
     "gatsby": "^2.21.0",
     "gatsby-background-image": "^1.1.1",
@@ -47,6 +46,8 @@
     "web-components": "0.0.0"
   },
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "prettier": "2.4.1"
   },
   "keywords": [
@@ -55,7 +56,10 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,json,md,tsx}\"",
+    "lint": "tsc --noEmit && eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
+    "lint-fix": "eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
+    "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
+    "format-and-fix": "yarn format && yarn lint-fix",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import MuiInputLabel, { InputLabelProps } from '@mui/material/InputLabel';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 interface LabelProps extends InputLabelProps {
   optional?: boolean;

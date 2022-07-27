@@ -1,16 +1,17 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
-import ConnectSection, {
-  IconLabelProps,
-} from '../../components/ConnectSection';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import RegenLogoIcon from 'web-components/lib/components/icons/RegenLogoIcon';
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
 import GithubIcon from 'web-components/lib/components/icons/social/GithubIcon';
 import WhitepaperIcon from 'web-components/lib/components/icons/WhitepaperIcon';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import ConnectSection, {
+  IconLabelProps,
+} from '../../components/ConnectSection';
 import { DevInvolvedSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({

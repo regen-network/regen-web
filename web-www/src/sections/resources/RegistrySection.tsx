@@ -1,12 +1,14 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles } from '@mui/styles';
+import { SxProps } from '@mui/material';
 import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Label, Title } from 'web-components/lib/components/typography';
 import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import { DocumentationTable } from 'web-components/lib/components/table/DocumentationTable';
+import { Label, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import BackgroundSection from '../../components/BackgroundSection';
 import {
   ResourcesRegistrySectionQuery,
@@ -17,7 +19,6 @@ import {
   sanityDocsToDocuments,
   sanityResourcesToCardProps,
 } from '../../util/sanity-transforms';
-import { SxProps } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {

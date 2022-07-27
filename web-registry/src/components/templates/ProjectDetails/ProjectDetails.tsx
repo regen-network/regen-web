@@ -30,14 +30,14 @@ import useGeojson from './hooks/useGeojson';
 import useMedia from './hooks/useMedia';
 import useIssuanceModal from './hooks/useIssuanceModal';
 import useBatches from './hooks/useBatches';
+import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
+import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
 import { MoreInfo } from './ProjectDetails.MoreInfo';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { TransactionModals } from './ProjectDetails.TransactionModals';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
-import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
-import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
 
 interface Project {
   creditPrice?: CreditPrice;
@@ -50,7 +50,6 @@ const testProject: Project = {};
 
 function ProjectDetails(): JSX.Element {
   const theme = useTheme<Theme>();
-
   const { projectId } = useParams();
 
   // Page mode (info/Tx)
@@ -66,13 +65,15 @@ function ProjectDetails(): JSX.Element {
   }
 
   // first, check if projectId is handle or onChainId
-  const isOnChainId = projectId?.startsWith('C'); //TODO regex
+  const isOnChainId =
+    !!projectId && /([A-Z]{1}[\d]+)([-])([\d{3,}])\w+/.test(projectId);
 
   // if projectId is handle, query project by handle
-  const { data: dataByHandle, loading: _loading } = useProjectByHandleQuery({
-    skip: isOnChainId,
-    variables: { handle: projectId as string },
-  });
+  const { data: dataByHandle, loading: loadingDataByHandle } =
+    useProjectByHandleQuery({
+      skip: isOnChainId,
+      variables: { handle: projectId as string },
+    });
 
   // else fetch project by onChainId
   const { data: dataByOnChainId, loading } = useProjectByOnChainIdQuery({
@@ -128,6 +129,7 @@ function ProjectDetails(): JSX.Element {
     offChainProjectMetadata,
   );
 
+  // TODO: what should be used here?
   const seoData = useSeo({
     metadata: offChainProjectMetadata,
     creditClassName,
@@ -137,7 +139,7 @@ function ProjectDetails(): JSX.Element {
   const mediaData = useMedia({ metadata: offChainProjectMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
   const otherProjects = useOtherProjects(projectId as string);
-  const isLoading = loading || _loading;
+  const isLoading = loading || loadingDataByHandle;
 
   const {
     issuanceModalData,

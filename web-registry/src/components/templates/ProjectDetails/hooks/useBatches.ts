@@ -34,7 +34,7 @@ export default function useBatches({
       try {
         let batches: BatchInfoWithSupply[] = [];
         if (creditClassId) {
-          const { data } = await getBatchesWithSupply(creditClassId);
+          const { data } = await getBatchesWithSupply(creditClassId); // TODO: should be batches by project
           batches = data;
         }
 

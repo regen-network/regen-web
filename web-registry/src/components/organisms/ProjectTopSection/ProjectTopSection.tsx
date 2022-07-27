@@ -10,7 +10,6 @@ import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
 import { CreditBatches } from '..';
-// import { ProjectByOnChainIdQuery } from '../../../generated/graphql';
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { qudtUnit, qudtUnitMap } from '../../../lib/rdf';
@@ -48,7 +47,6 @@ function ProjectTopSection({
 
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
   const metadata = project?.metadata;
-  console.log('project top section', project);
 
   const registry = project?.partyByRegistryId;
   const videoURL = metadata?.['regen:videoURL']?.['@value'];

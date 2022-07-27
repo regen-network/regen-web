@@ -43,8 +43,12 @@ const VCSMetadata: React.FC<Props> = ({ metadata }) => {
       </ItemDisplay>
       <ItemDisplay name="Project start and end date">{`${formatDate(
         metadata?.['regen:projectStartDate']?.['@value'],
+        undefined,
+        true,
       )} - ${formatDate(
         metadata?.['regen:projectEndDate']?.['@value'],
+        undefined,
+        true,
       )}`}</ItemDisplay>
       <ItemDisplay name="VCS methodology name">
         {metadata?.['regen:vcsMethodology']?.['schema:name']}

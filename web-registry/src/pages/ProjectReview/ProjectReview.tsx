@@ -74,7 +74,7 @@ export const ProjectReview: React.FC = () => {
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
 
   const submit = () => {
-    const vcsProjectId = metadata?.['regen:videoURL']?.['@value'];
+    const vcsProjectId = metadata?.['regen:vcsProjectId'];
     projectCreateSubmit({
       classId: creditClassId || '',
       admin: wallet?.address || '',

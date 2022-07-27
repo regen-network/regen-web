@@ -43,7 +43,6 @@ const useGetJurisdiction = (
           stateProvince,
           postalCode,
         });
-
         if (geocodingError) setGeocodingError(null);
         if (isoString) setJurisdiction(isoString);
       } catch (err) {

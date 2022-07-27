@@ -2,6 +2,7 @@ query ProjectByOnChainId($onChainId: String!) {
   projectByOnChainId(onChainId: $onChainId) {
     metadata
     creditClassByCreditClassId {
+      standard
       onChainId
       creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
         nodes {
@@ -9,6 +10,21 @@ query ProjectByOnChainId($onChainId: String!) {
           metadata
         }
       }
+    }
+    partyByDeveloperId {
+      ...partyFields
+    }
+    partyByStewardId {
+      ...partyFields
+    }
+    partyByLandOwnerId {
+      ...partyFields
+    }
+    partyByIssuerId {
+      ...partyFields
+    }
+    partyByResellerId {
+      ...partyFields
     }
   }
 }

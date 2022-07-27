@@ -1,14 +1,14 @@
 import React from 'react';
-import { useStaticQuery, graphql, PageProps } from 'gatsby';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
 
 import SEO from '../components/seo';
-import TopSection from '../sections/developers/TopSection';
-import InvolvedSection from '../sections/developers/InvolvedSection';
 import ApproachSection from '../sections/developers/ApproachSection';
+import CareersSection from '../sections/developers/CareersSection';
+import ConnectSection from '../sections/developers/ConnectSection';
+import InvolvedSection from '../sections/developers/InvolvedSection';
 import LedgerSection from '../sections/developers/LedgerSection';
 import OpenAgSection from '../sections/developers/OpenAgSection';
-import ConnectSection from '../sections/developers/ConnectSection';
-import CareersSection from '../sections/developers/CareersSection';
+import TopSection from '../sections/developers/TopSection';
 
 const query = graphql`
   query {

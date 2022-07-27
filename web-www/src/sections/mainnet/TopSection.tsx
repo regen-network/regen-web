@@ -1,13 +1,13 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { Box } from '@mui/material';
+import { graphql, useStaticQuery } from 'gatsby';
+import type { FluidObject } from 'gatsby-image';
 
 import Countdown from 'web-components/lib/components/countdown';
 import { Title } from 'web-components/lib/components/typography';
 
 import BackgroundSection from '../../components/BackgroundSection';
 import type { MainnetTopSectionQuery } from '../../generated/graphql';
-import type { FluidObject } from 'gatsby-image';
 
 const query = graphql`
   query mainnetTopSection {

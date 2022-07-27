@@ -1,12 +1,11 @@
 import React from 'react';
-import { useTheme, Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { Dictionary } from 'lodash';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Label } from 'web-components/lib/components/typography';
-import { Title } from 'web-components/lib/components/typography';
-import { formatNumber } from 'web-components/lib/utils/format';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import { Label, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import { formatNumber } from 'web-components/lib/utils/format';
 
 interface StatisticProps {
   label: string;

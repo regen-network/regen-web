@@ -2,14 +2,14 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { BlockContent } from 'web-components/lib/components/block-content';
 import Card from 'web-components/lib/components/cards/Card';
 import { Title } from 'web-components/lib/components/typography';
-import { BlockContent } from 'web-components/lib/components/block-content';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { Maybe, Scalars } from '../../generated/sanity-graphql';
 import { Methodology } from '../../mocks/mocks';
 import { LineItem } from './LineItem';
-import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
 interface MethodologyDetailsColumnProps {
   nameRaw?: Maybe<Scalars['JSON']>;

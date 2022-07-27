@@ -2,8 +2,9 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import { Maybe, Sdg } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';
-import { Sdg, Maybe } from '../../generated/sanity-graphql';
 
 interface Props {
   sdgs: Array<Maybe<Sdg>>;

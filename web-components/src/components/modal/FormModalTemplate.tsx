@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
+
 import Modal, { RegenModalProps } from '../modal';
 import { Body, Title } from '../typography';
 

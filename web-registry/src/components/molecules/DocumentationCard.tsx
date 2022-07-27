@@ -1,8 +1,8 @@
 import React from 'react';
+import { Box } from '@mui/material';
 
 import { ImageLeftCard } from 'web-components/lib/components/cards/ImageLeftCard';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { Box } from '@mui/material';
 
 const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
 const apiServerUrl = process.env.REACT_APP_API_URI;

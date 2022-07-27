@@ -1,8 +1,8 @@
 import React from 'react';
 
-import UserInfo, { User } from '../user/UserInfo';
-import type { TextSize } from '../typography/sizing';
 import { Label } from '../typography';
+import type { TextSize } from '../typography/sizing';
+import UserInfo, { User } from '../user/UserInfo';
 
 interface Props {
   user: User;

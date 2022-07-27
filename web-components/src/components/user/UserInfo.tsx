@@ -1,10 +1,10 @@
 import React from 'react';
 import Grid, { GridDirection } from '@mui/material/Grid';
 
-import UserAvatar from './UserAvatar';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import { Body, Subtitle, Title } from '../typography';
 import { getMobileSize, getSizeVariant, TextSize } from '../typography/sizing';
+import UserAvatar from './UserAvatar';
 
 export interface User {
   name: string;

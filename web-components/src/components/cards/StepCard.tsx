@@ -1,17 +1,17 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import { Box, CardMedia } from '@mui/material';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
 import cx from 'clsx';
 
+import ContainedButton from '../buttons/ContainedButton';
 import Card from '../cards/Card';
+import { QuestionItem } from '../faq/Question';
+import StepFAQs from '../faq/StepFAQs';
 import ArrowFilledIcon from '../icons/ArrowFilledIcon';
 import StepCircleBadge from '../icons/StepCircleBadge';
-import { Body, Label, Title } from '../typography';
-import Tag from '../tag';
-import StepFAQs from '../faq/StepFAQs';
 import { Image } from '../image';
-import { QuestionItem } from '../faq/Question';
-import ContainedButton from '../buttons/ContainedButton';
+import Tag from '../tag';
+import { Body, Label, Title } from '../typography';
 
 export interface StepCardProps {
   className?: string;

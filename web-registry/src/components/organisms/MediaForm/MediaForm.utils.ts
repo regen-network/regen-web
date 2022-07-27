@@ -1,5 +1,5 @@
-import { MediaErrors, MediaValues } from './MediaForm';
 import type { Maybe } from '../../../generated/graphql';
+import { MediaErrors, MediaValues } from './MediaForm';
 import type { MediaErrorsSimple, MediaValuesSimple } from './MediaFormSimple';
 
 export function isSimpleMediaFormErrors(

@@ -2,9 +2,9 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
-import { Body, Title } from '../typography';
 import { Spinner } from '../icons/Spinner';
 import Modal, { RegenModalProps } from '../modal';
+import { Body, Title } from '../typography';
 
 const useStyles = makeStyles(theme => ({
   root: {

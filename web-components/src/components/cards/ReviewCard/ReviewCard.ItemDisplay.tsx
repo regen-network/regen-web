@@ -1,30 +1,21 @@
-import React, { ReactNode } from 'react';
-import { Box, SxProps, Theme } from '@mui/material';
+import { ReactNode } from 'react';
+import { SxProps } from '@mui/material';
 
-import { Subtitle, Body } from '../../typography';
+import { FlexCol } from '../../box';
+import { Body, Subtitle } from '../../typography';
 
-const ItemDisplay: React.FC<{
-  name?: string;
+import type { Theme } from '~/theme/muiTheme';
+
+export const ItemDisplay = (props: {
+  name: string;
   children: ReactNode;
   sx?: SxProps<Theme>;
-}> = props => {
+}): JSX.Element => {
   const { name, children, sx = [] } = props;
   return (
-    <Box
-      sx={[
-        {
-          display: 'flex',
-          flexDirection: 'column',
-          mt: 9,
-          mb: 2,
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
-    >
+    <FlexCol sx={[{ gap: 2 }, ...(Array.isArray(sx) ? sx : [sx])]}>
       <Subtitle size="lg">{name}</Subtitle>
       <Body size="lg">{children}</Body>
-    </Box>
+    </FlexCol>
   );
 };
-
-export { ItemDisplay };

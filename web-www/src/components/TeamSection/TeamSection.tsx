@@ -1,11 +1,12 @@
 import React from 'react';
+import { Grid, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { Theme, Grid } from '@mui/material';
 import clsx from 'clsx';
 
 import Section from 'web-components/lib/components/section';
-import { TeamItem } from './TeamItem';
+
 import type { SanityRegenTeamMember } from '../../generated/graphql';
+import { TeamItem } from './TeamItem';
 
 interface TeamSectionProps {
   members?: SanityRegenTeamMember[];

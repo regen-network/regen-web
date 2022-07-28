@@ -1,14 +1,16 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 
-import { Body, Title } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/lib/components/block-content';
-import { WrappedStepCard } from '../atoms';
+import { Body, Title } from 'web-components/lib/components/typography';
+
 import {
-  StepCardFieldsFragment,
   Maybe,
   Scalars,
-} from '../../generated/sanity-graphql';
+  StepCardFieldsFragment,
+} from 'generated/sanity-graphql';
+
+import { WrappedStepCard } from '../atoms';
 
 const StepCardsWithDescription: React.FC<{
   descriptionRaw?: Maybe<Scalars['JSON']>;
@@ -36,6 +38,7 @@ const StepCardsWithDescription: React.FC<{
       <Grid container justifyContent="center" sx={{ maxWidth: 752 }}>
         {stepCards?.map((card, i) => (
           <WrappedStepCard
+            key={i}
             stepNumber={i}
             stepCard={card}
             openModal={openModal}

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { Box } from '@mui/material';
 import { Field, useFormikContext } from 'formik';
 
-import { Body } from 'web-components/lib/components/typography';
-import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import { Box } from '@mui/material';
-import { CreditBasicsFormValues } from '../../features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics';
-import { ClassID } from '../../types/ledger/ecocredit';
+import InputLabel from 'web-components/lib/components/inputs/InputLabel';
+import { Body } from 'web-components/lib/components/typography';
 
+import type { ClassID } from 'types/ledger/ecocredit';
+
+import type { CreditBasicsFormValues } from 'features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics';
 // TODO
 // Make this component more generic, so that it doesn't depend
 // on specific types/interfaces of a particular form.

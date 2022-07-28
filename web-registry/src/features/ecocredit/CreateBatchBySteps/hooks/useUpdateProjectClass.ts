@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
+
 import type { ClassID } from '../../../../types/ledger/ecocredit';
 
-export default function useUpdateProjectClass(projectId: string) {
+export default function useUpdateProjectClass(projectId: string): {
+  classId?: ClassID;
+  isVCS?: boolean;
+} {
   const [classId, setClassId] = useState<ClassID>();
   const [isVCS, setIsVCS] = useState<boolean>();
 

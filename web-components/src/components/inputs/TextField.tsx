@@ -1,9 +1,9 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { fieldToTextField, TextFieldProps } from 'formik-mui';
-import MuiTextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
+import MuiTextField from '@mui/material/TextField';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
+import { fieldToTextField, TextFieldProps } from 'formik-mui';
 
 import { DefaultStyleProps } from './FieldFormControl';
 import InputLabel from './InputLabel';
@@ -40,6 +40,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       color: theme.palette.primary.contrastText,
       fontWeight: 'bold',
       position: 'relative',
+      textAlign: 'left',
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(4.5),
       },

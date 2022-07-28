@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Box, Collapse, useTheme } from '@mui/material';
-import { Title } from 'web-components/lib/components/typography';
+
 import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
+import { Title } from 'web-components/lib/components/typography';
 import { formatDate } from 'web-components/lib/utils/format';
 
+import { VCSProjectMetadataLD } from '../../generated/json-ld';
 import { LinkWithArrow, LinkWithArrowProps } from '../atoms';
 import { LineItemLabelAbove, LineItemLabelAboveProps } from '../molecules';
-import { VCSProjectMetadataLD } from '../../generated/json-ld';
 
 export interface MetadataProps {
   metadata?: VCSProjectMetadataLD;

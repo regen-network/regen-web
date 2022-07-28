@@ -1,9 +1,9 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
-import { Variant } from '@mui/material/styles/createTypography';
-import Grid from '@mui/material/Grid';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import React, { useCallback, useRef, useState } from 'react';
 import Slider, { Settings as SlickSettings } from 'react-slick';
+import Grid from '@mui/material/Grid';
+import { Variant } from '@mui/material/styles/createTypography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
 import cx from 'clsx';
 
 import PrevNextButton from '../buttons/PrevNextButton';

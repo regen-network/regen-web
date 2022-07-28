@@ -1,11 +1,14 @@
-import * as React from 'react';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
-import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
-import { ExpandButton } from 'web-components/lib/components/buttons/ExpandButton';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ContainedButton, { ContainedColorVariant } from './ContainedButton';
 import { Box } from '@mui/material';
+
+import { FlexCol } from '../box';
+import ContainedButton from './ContainedButton';
+import { EditButton } from './EditButton';
+import { ExpandButton } from './ExpandButton';
+import OutlinedButton from './OutlinedButton';
+import PrevNextButton from './PrevNextButton';
+import { TableActionButtons } from './TableActionButtons';
+import { TextButton } from './TextButton';
 
 export default {
   title: 'Buttons',
@@ -17,29 +20,22 @@ export const outlinedButton = (): JSX.Element => (
 );
 
 export const containedButton = (): JSX.Element => {
-  const colorVariants: ContainedColorVariant[] = [
-    'secondary',
-    'gradientBlueGreen',
-  ];
-
   return (
     <Box sx={{ display: 'flex' }}>
-      {colorVariants.map(colorVariant => (
-        <Box
-          key={colorVariant}
-          sx={{ mr: '8px', display: 'flex', flexDirection: 'column' }}
-        >
-          <ContainedButton colorVariant={colorVariant} sx={{ mb: '8px' }}>
-            Contained
-          </ContainedButton>
-          <ContainedButton colorVariant={colorVariant} disabled>
-            Disabled
-          </ContainedButton>
-        </Box>
-      ))}
+      <Box sx={{ mr: '8px', display: 'flex', flexDirection: 'column' }}>
+        <ContainedButton sx={{ mb: '8px' }}>Contained</ContainedButton>
+        <ContainedButton disabled>Disabled</ContainedButton>
+      </Box>
     </Box>
   );
 };
+
+export const combined = (): JSX.Element => (
+  <Box>
+    <ContainedButton>Contained</ContainedButton>
+    <OutlinedButton>Outlined</OutlinedButton>
+  </Box>
+);
 
 export const nextButton = (): JSX.Element => (
   <PrevNextButton direction="next" />
@@ -68,3 +64,17 @@ export const expandButton = (): JSX.Element => (
     <ExpandButton onClick={() => {}} expanded={true} />
   </>
 );
+
+export const textButton = (): JSX.Element => (
+  <FlexCol sx={{ alignItems: 'flex-start' }}>
+    <TextButton textSize="lg">Text button lg</TextButton>
+    <TextButton textSize="md">Text button md</TextButton>
+    <TextButton textSize="sm">Text button sm</TextButton>
+    <TextButton textSize="xs">Text button xs</TextButton>
+    <TextButton sx={{ color: 'red', py: [10] }}>
+      Text button custom styles
+    </TextButton>
+  </FlexCol>
+);
+
+export const editButton = () => <EditButton onClick={() => {}} />;

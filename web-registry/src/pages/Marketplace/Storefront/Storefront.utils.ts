@@ -1,4 +1,5 @@
 import { Item } from 'web-components/lib/components/modal/ConfirmModal';
+
 import { NormalizedSellOrder } from './Storefront.types';
 
 export const sortByExpirationDate = (

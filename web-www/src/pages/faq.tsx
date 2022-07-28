@@ -1,10 +1,11 @@
 import React from 'react';
-import { useStaticQuery, graphql, PageProps } from 'gatsby';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
+
+import { BlockContent } from 'web-components/lib/components/block-content';
+import { FAQProps } from 'web-components/lib/components/faq';
 
 import Faq from '../components/Faq';
-import { FAQProps } from 'web-components/lib/components/faq';
 import { FaqPageQuery } from '../generated/graphql';
-import { BlockContent } from 'web-components/lib/components/block-content';
 
 const query = graphql`
   query faqPage {

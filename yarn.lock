@@ -12075,6 +12075,14 @@ enhanced-resolve@^4.3.0:
     memory-fs "^0.5.0"
     tapable "^1.0.0"
 
+enhanced-resolve@^5.7.0:
+  version "5.10.0"
+  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-5.10.0.tgz#0dc579c3bb2a1032e357ac45b8f3a6f3ad4fb1e6"
+  integrity sha512-T0yTFjdpldGY8PmuXXR0PyQ1ufZpEGiHVrp7zHKB7jdR4qlmZHhONVM5AQOAWXuF/w3dnHbEQVrNptJgt7F+cQ==
+  dependencies:
+    graceful-fs "^4.2.4"
+    tapable "^2.2.0"
+
 enquire.js@^2.1.6:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/enquire.js/-/enquire.js-2.1.6.tgz#3e8780c9b8b835084c3f60e166dbc3c2a3c89814"
@@ -12509,6 +12517,11 @@ eslint-plugin-react-hooks@^4.2.0:
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.3.0.tgz#318dbf312e06fab1c835a4abef00121751ac1172"
   integrity sha512-XslZy0LnMn+84NEG9jSGR6eGqaZB3133L8xewQo3fQagbQuGt7a63gf+P1NGKZavEYEC3UXaWEAA/AqDkuN6xA==
 
+eslint-plugin-react-hooks@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.6.0.tgz#4c3e697ad95b77e93f8646aaa1630c1ba607edd3"
+  integrity sha512-oFc7Itz9Qxh2x4gNHStv3BqJq54ExXmfC+a1NjAta66IAN87Wu0R/QArgIS9qKzX3dXKPI9H5crl9QchNMY9+g==
+
 eslint-plugin-react@^7.20.6, eslint-plugin-react@^7.21.5:
   version "7.28.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.28.0.tgz#8f3ff450677571a659ce76efc6d80b6a525adbdf"
@@ -12528,6 +12541,11 @@ eslint-plugin-react@^7.20.6, eslint-plugin-react@^7.21.5:
     resolve "^2.0.0-next.3"
     semver "^6.3.0"
     string.prototype.matchall "^4.0.6"
+
+eslint-plugin-simple-import-sort@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-simple-import-sort/-/eslint-plugin-simple-import-sort-7.0.0.tgz#a1dad262f46d2184a90095a60c66fef74727f0f8"
+  integrity sha512-U3vEDB5zhYPNfxT5TYR7u01dboFZp+HNpnGhkDB2g/2E4wZ/g1Q9Ton8UwCLfRV9yAKyYqDh62oHOamvkFxsvw==
 
 eslint-plugin-testing-library@^3.9.2:
   version "3.10.2"
@@ -20243,6 +20261,11 @@ minimist@^1.1.0, minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.3, minimist@^1.
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
+minimist@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
+  integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
+
 minipass-collect@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/minipass-collect/-/minipass-collect-1.0.2.tgz#22b813bf745dc6edba2576b940022ad6edc8c617"
@@ -23823,7 +23846,7 @@ react-image-crop@^9.0.5:
   dependencies:
     clsx "^1.1.1"
 
-react-inspector@^5.1.0:
+react-inspector@^5.1.0, react-inspector@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/react-inspector/-/react-inspector-5.1.1.tgz#58476c78fde05d5055646ed8ec02030af42953c8"
   integrity sha512-GURDaYzoLbW8pMGXwYPDBIv6nqei4kK7LPRZ9q9HCZF54wqXz/dnylBp/kfE9XmekBhHvLDdcYeyIwSrvtOiWg==
@@ -26241,6 +26264,13 @@ store2@^2.12.0:
   resolved "https://registry.yarnpkg.com/store2/-/store2-2.13.1.tgz#fae7b5bb9d35fc53dc61cd262df3abb2f6e59022"
   integrity sha512-iJtHSGmNgAUx0b/MCS6ASGxb//hGrHHRgzvN+K5bvkBTN7A9RTpPSf1WSp+nPGvWCJ1jRnvY7MKnuqfoi3OEqg==
 
+storybook-addon-react-router-v6@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/storybook-addon-react-router-v6/-/storybook-addon-react-router-v6-0.1.10.tgz#16b66f4482317b14173bcf974049d3e867cfca88"
+  integrity sha512-eeJUdtELmck3VlUISCgX/3oEwY+/7wzqa4+5BOiYbkp4BKZIEwaQbiSdsmmXzWQLG5zRRNEbgk6dA3tZwV060w==
+  dependencies:
+    react-inspector "^5.1.1"
+
 stream-browserify@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-2.0.2.tgz#87521d38a44aa7ee91ce1cd2a47df0cb49dd660b"
@@ -26931,6 +26961,11 @@ tapable@^1.0.0, tapable@^1.1.3:
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-1.1.3.tgz#a1fccc06b58db61fd7a45da2da44f5f3a3e67ba2"
   integrity sha512-4WK/bYZmj8xLr+HUCODHGF1ZFzsYffasLUgEiMBY4fgtltdO6B4WJtlSbPaDTLpYTcGVwM2qLnFTICEcNxs3kA==
 
+tapable@^2.2.0:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.2.1.tgz#1967a73ef4060a82f12ab96af86d52fdb76eeca0"
+  integrity sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==
+
 tar-fs@^2.0.0, tar-fs@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/tar-fs/-/tar-fs-2.1.1.tgz#489a15ab85f1f0befabb370b7de4f9eb5cbe8784"
@@ -27528,6 +27563,15 @@ ts-pnp@1.2.0, ts-pnp@^1.1.6:
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
 
+tsconfig-paths-webpack-plugin@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/tsconfig-paths-webpack-plugin/-/tsconfig-paths-webpack-plugin-3.5.2.tgz#01aafff59130c04a8c4ebc96a3045c43c376449a"
+  integrity sha512-EhnfjHbzm5IYI9YPNVIxx1moxMI4bpHD2e0zTXeDNQcwjjRaGepP7IhTHJkyDBG0CAOoxRfe7jCG630Ou+C6Pw==
+  dependencies:
+    chalk "^4.1.0"
+    enhanced-resolve "^5.7.0"
+    tsconfig-paths "^3.9.0"
+
 tsconfig-paths@^3.12.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.12.0.tgz#19769aca6ee8f6a1a341e38c8fa45dd9fb18899b"
@@ -27536,6 +27580,16 @@ tsconfig-paths@^3.12.0:
     "@types/json5" "^0.0.29"
     json5 "^1.0.1"
     minimist "^1.2.0"
+    strip-bom "^3.0.0"
+
+tsconfig-paths@^3.9.0:
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.14.1.tgz#ba0734599e8ea36c862798e920bcf163277b137a"
+  integrity sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==
+  dependencies:
+    "@types/json5" "^0.0.29"
+    json5 "^1.0.1"
+    minimist "^1.2.6"
     strip-bom "^3.0.0"
 
 tslib@^1, tslib@^1.0.0, tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:

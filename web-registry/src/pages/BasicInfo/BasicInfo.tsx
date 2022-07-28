@@ -1,15 +1,14 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { BasicInfoForm, BasicInfoFormValues } from '../../components/organisms';
-import {
-  OnboardingFormTemplate,
-  EditFormTemplate,
-} from '../../components/templates';
 import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
-} from '../../generated/graphql';
+} from 'generated/graphql';
+
+import { BasicInfoForm, BasicInfoFormValues } from 'components/organisms';
+import { EditFormTemplate, OnboardingFormTemplate } from 'components/templates';
+
 import { useProjectEditContext } from '../ProjectEdit';
 
 const BasicInfo: React.FC = () => {

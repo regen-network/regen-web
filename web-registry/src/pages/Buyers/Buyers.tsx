@@ -1,24 +1,26 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@mui/styles';
 import { useLocation } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
 
-import SEO from 'web-components/lib/components/seo';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import FixedFooter from 'web-components/lib/components/fixed-footer';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
 import Modal from 'web-components/lib/components/modal';
+import SEO from 'web-components/lib/components/seo';
+
+import { useMoreProjectsQuery } from 'generated/graphql';
+import { useAllBuyersPageQuery } from 'generated/sanity-graphql';
+import { client } from 'sanity';
 
 import {
-  HeroTitle,
   FeaturedSection,
   HeroAction,
+  HeroTitle,
   ImageGridSection,
-} from '../../components/molecules';
-import { MoreProjectsSection } from '../../components/organisms';
-import { client } from '../../sanity';
-import { useAllBuyersPageQuery } from '../../generated/sanity-graphql';
-import { useMoreProjectsQuery } from '../../generated/graphql';
-import buyersHero from '../../assets/buyers-top.jpg';
+} from 'components/molecules';
+import { MoreProjectsSection } from 'components/organisms';
+
+import buyersHero from 'assets/buyers-top.jpg';
 
 const useStyles = makeStyles(theme => ({
   heroMain: {
@@ -115,7 +117,7 @@ const BuyersPage = (): JSX.Element => {
           isBanner
           img={content?.faqSection?.image?.image?.asset?.url || ''}
           bottomBanner={content?.faqSection}
-          openModal={() => {}}
+          openModal={() => null}
         />
       )}
 

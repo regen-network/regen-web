@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import clsx from 'clsx';
 import ReactHtmlParser from 'react-html-parser';
-
-import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
+import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import MenuItem from '@mui/material/MenuItem';
 // import Divider from '@mui/material/Divider';
 import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import Box from '@mui/material/Box';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import clsx from 'clsx';
 
-import HamburgerIcon from '../icons/HamburgerIcon';
+import { HeaderMenuItem } from '../header/HeaderMenuHover';
+import { NavLinkProps } from '../header/NavLink';
 // import ContainedButton from '../buttons/ContainedButton';
 // import Button from '@mui/material/Button';
 import CloseIcon from '../icons/CloseIcon';
-import { HeaderMenuItem } from '../header/HeaderMenuHover';
-import { NavLinkProps } from '../header/NavLink';
+import HamburgerIcon from '../icons/HamburgerIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

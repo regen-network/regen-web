@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
 import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-import { truncate, truncateHash } from 'web-components/lib/utils/truncate';
+import { truncateHash } from 'web-components/lib/utils/truncate';
 
-import { Link } from '../atoms';
-import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
-import { ledgerRESTUri } from '../../lib/ledger';
+import { AccountLink, Link } from 'components/atoms';
+
+import { getHashUrl } from '../../lib/block-explorer';
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
-import { getAccountUrl, getHashUrl } from '../../lib/block-explorer';
+import { ledgerRESTUri } from '../../lib/ledger';
+import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 
 interface CreditBatchProps {
   creditClassId?: string | null;
@@ -128,12 +129,16 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   const table = (
     <ActionsTable
       tableLabel="credit batch table"
-      headerRows={columnsToShow.map(headCell => (
-        <Box className={cx(headCell.wrap && styles.wrap)} key={headCell.id}>
+      headerRows={columnsToShow.map((headCell, i) => (
+        <Box
+          className={cx(headCell.wrap && styles.wrap)}
+          key={`${String(headCell?.id)}-${i}`}
+        >
           {headCell.label}
         </Box>
       ))}
       rows={batches.map(batch =>
+        /* eslint-disable react/jsx-key */
         [
           <Link
             href={getHashUrl(batch.txhash)}
@@ -151,13 +156,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             {batch.denom}
           </Link>,
-          <a
-            href={getAccountUrl(batch.issuer)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {truncate(batch.issuer)}
-          </a>,
+          <AccountLink address={batch.issuer} />,
           <>{formatNumber(batch.tradableSupply)}</>,
           <>{formatNumber(batch.retiredSupply)}</>,
           <>{formatNumber(batch.cancelledAmount)}</>,
@@ -177,6 +176,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           );
         }),
       )}
+      /* eslint-enable react/jsx-key */
     />
   );
 

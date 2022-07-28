@@ -1,17 +1,15 @@
 import React from 'react';
-import { Box } from '@mui/material';
-import { styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
 
 import {
   ActionsTable,
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
-import { truncate } from 'web-components/lib/utils/truncate';
 
-import { Link } from '../../atoms';
-import { NoCredits } from '../../molecules';
-import { getAccountUrl } from '../../../lib/block-explorer';
+import { Link } from 'components/atoms';
+import { AccountLink } from 'components/atoms/AccountLink';
+import { NoCredits } from 'components/molecules';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -54,6 +52,7 @@ export const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
       tableLabel="basket ecocredits table"
       renderActionButtons={renderActionButtons}
       headerRows={[
+        /* eslint-disable react/jsx-key */
         <Box sx={{ minWidth: '8rem' }}>Project</Box>,
         <Box sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}>
           Batch Denom
@@ -88,15 +87,14 @@ export const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
           >
             {item.batchDenom}
           </Box>,
-          <Link href={getAccountUrl(item.issuer as string)} target="_blank">
-            {truncate(item.issuer as string)}
-          </Link>,
+          <AccountLink address={item.issuer} />,
           formatNumber(item.totalAmount),
           item.classId,
           <GreyText>{formatDate(item.startDate)}</GreyText>,
           <GreyText>{formatDate(item.endDate)}</GreyText>,
           item.projectJurisdiction,
         ];
+        /* eslint-enable react/jsx-key */
       })}
     />
   );

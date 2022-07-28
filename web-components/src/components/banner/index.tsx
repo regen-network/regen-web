@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Snackbar from '@mui/material/Snackbar';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 export interface BannerBaseProps {
   text: string;

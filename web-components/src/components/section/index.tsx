@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Box, styled, SxProps } from '@mui/material';
-import clsx from 'clsx';
 import { Variant } from '@mui/material/styles/createTypography';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import clsx from 'clsx';
 
-import { Title } from '../typography';
 import { parseText } from '../../utils/textParser';
+import { Title } from '../typography';
 
 export interface SectionProps {
   children?: any;

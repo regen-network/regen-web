@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
   ApolloLink,
+  ApolloProvider,
   HttpLink,
+  InMemoryCache,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -35,9 +35,13 @@ export const AuthApolloProvider = ({
             body: JSON.stringify(user),
             method: 'POST',
           });
-        } catch (e) {}
+        } catch (e) {
+          console.error(e); // eslint-disable-line no-console
+        }
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error(e); // eslint-disable-line no-console
+    }
   }, [apiUri, getAccessTokenSilently, isAuthenticated, user]);
 
   useEffect(() => {

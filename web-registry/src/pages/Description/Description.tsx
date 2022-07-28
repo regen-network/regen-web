@@ -1,18 +1,17 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
-  OnboardingFormTemplate,
-  EditFormTemplate,
-} from '../../components/templates';
-import { DescriptionForm, DescriptionValues } from '../../components/organisms';
-import {
   useProjectByIdQuery,
-  useUpdateProjectByIdMutation,
   useShaclGraphByUriQuery,
-} from '../../generated/graphql';
+  useUpdateProjectByIdMutation,
+} from 'generated/graphql';
+import { getProjectShapeIri } from 'lib/rdf';
+
+import { DescriptionForm, DescriptionValues } from 'components/organisms';
+import { EditFormTemplate, OnboardingFormTemplate } from 'components/templates';
+
 import { useProjectEditContext } from '../ProjectEdit';
-import { getProjectShapeIri } from '../../lib/rdf';
 
 const Description: React.FC = () => {
   const navigate = useNavigate();

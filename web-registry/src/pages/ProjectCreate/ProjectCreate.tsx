@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Outlet, useOutletContext } from 'react-router-dom';
+import { DeliverTxResponse } from '@cosmjs/stargate';
 
 type ContextType = {
   deliverTxResponse?: DeliverTxResponse;

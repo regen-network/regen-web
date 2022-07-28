@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import BackgroundSection from '../../components/BackgroundSection';
 import { ScienceTopSectionQuery } from '../../generated/graphql';
 
@@ -43,7 +44,8 @@ const TopSection = (): JSX.Element => {
   const gradient =
     'linear-gradient(180deg, rgba(0, 0, 0, 0.684) 0%, rgba(0, 0, 0, 0) 97.78%), linear-gradient(235.95deg, rgba(250, 235, 209, 0.7) 22.17%, rgba(125, 201, 191, 0.7) 46.11%, rgba(81, 93, 137, 0.7) 70.05%)';
   const styles = useStyles();
-  const { background, backgroundMobile, sanitySciencePage } = useStaticQuery<ScienceTopSectionQuery>(query);
+  const { background, backgroundMobile, sanitySciencePage } =
+    useStaticQuery<ScienceTopSectionQuery>(query);
   const data = sanitySciencePage?.topSection;
 
   return (

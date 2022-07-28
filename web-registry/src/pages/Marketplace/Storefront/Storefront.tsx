@@ -1,6 +1,7 @@
+import { useMemo, useState } from 'react';
 import { Box, useTheme } from '@mui/material';
 import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { useMemo, useState } from 'react';
+
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
@@ -13,6 +14,7 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
+
 import { Link } from '../../../components/atoms';
 import { BuyCreditsModal } from '../../../components/organisms';
 import SellOrdersTable from '../../../components/organisms/SellOrdersTable/SellOrdersTable';
@@ -88,12 +90,12 @@ export const Storefront = (): JSX.Element => {
     [batchInfos, sellOrders, projectsInfosByHandleMap],
   );
 
-  const handleTxQueued = () => setIsProcessingModalOpen(true);
-  const handleTxDelivered = () => {
+  const handleTxQueued = (): void => setIsProcessingModalOpen(true);
+  const handleTxDelivered = (): void => {
     setIsProcessingModalOpen(false);
     refetchSellOrders();
   };
-  const handleError = () => setIsProcessingModalOpen(false);
+  const handleError = (): void => setIsProcessingModalOpen(false);
   const handleTxModalClose = (): void => {
     setCardItems(undefined);
     setTxModalTitle('');

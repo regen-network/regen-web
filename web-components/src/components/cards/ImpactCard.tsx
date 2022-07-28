@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
-import Card from './Card';
 import { Body, Subtitle } from '../typography';
+import Card from './Card';
 // import VerifiedIcon from '../icons/VerifiedIcon';
 
 export interface ImpactCardProps {

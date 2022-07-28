@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import {
   QueryBatchResponse,
   QueryClientImpl,
@@ -32,6 +31,7 @@ export default function useQueryListBatchInfo(
         )
           .then(setDataList)
           .catch(e => {
+            // eslint-disable-next-line no-console
             console.error(e);
             setDataList([]);
           });

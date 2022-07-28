@@ -1,6 +1,6 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
 interface PlayIconProps extends React.HTMLProps<HTMLDivElement> {

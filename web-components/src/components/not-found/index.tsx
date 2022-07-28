@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Box from '@mui/material/Box';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 import ContainedButton from '../buttons/ContainedButton';
 import { Body, Label, Title } from '../typography';

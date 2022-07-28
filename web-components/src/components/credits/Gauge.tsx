@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
 interface GaugeProps {
   amount: number;

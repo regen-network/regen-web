@@ -1,18 +1,18 @@
 import React, { lazy, Suspense, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useAuth0, OAuthError } from '@auth0/auth0-react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { OAuthError, useAuth0 } from '@auth0/auth0-react';
 import { createBrowserHistory } from 'history';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 
+import { KeplrRoute, ProtectedRoute, ScrollToTop } from './components/atoms';
+import PageLoader from './components/atoms/PageLoader';
+import { AppFooter, RegistryNav } from './components/organisms';
 import isAdmin from './lib/admin';
 import { init as initGA } from './lib/ga';
-import { ScrollToTop, ProtectedRoute, KeplrRoute } from './components/atoms';
-import { RegistryNav, AppFooter } from './components/organisms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 import './App.css';
-import PageLoader from './components/atoms/PageLoader';
 
 const Additionality = lazy(() => import('./pages/Additionality'));
 const Admin = lazy(() => import('./pages/Admin'));
@@ -27,6 +27,9 @@ const ChooseCreditClassPage = lazy(
   () => import('./pages/ChooseCreditClassPage'),
 );
 const CreateCreditClass = lazy(() => import('./pages/CreateCreditClass'));
+const CreateCreditClassInfo = lazy(
+  () => import('./pages/CreateCreditClassInfo'),
+);
 const CreateMethodology = lazy(() => import('./pages/CreateMethodology'));
 const CreditClassDetails = lazy(() => import('./pages/CreditClassDetails'));
 const CreditsIssue = lazy(() => import('./pages/CreditsIssue'));
@@ -101,7 +104,11 @@ const App: React.FC = (): JSX.Element => {
             <Route path="projects/wilmot/admin" element={<Seller />} />
             <Route path="buyers" element={<BuyersPage />} />
             <Route path="create-methodology" element={<CreateMethodology />} />
-            <Route path="create-credit-class" element={<CreateCreditClass />} />
+            <Route
+              // TODO: thould this route be moved to /credit-classes?
+              path="create-credit-class"
+              element={<CreateCreditClassInfo />}
+            />
             <Route path="land-stewards" element={<LandStewards />} />
             <Route
               path="methodology-review-process"
@@ -116,6 +123,7 @@ const App: React.FC = (): JSX.Element => {
               path="ecocredits/dashboard"
               element={<KeplrRoute component={Dashboard} />}
             />
+            <Route path="projects/:projectId" element={<Project />} />
             <Route
               path="ecocredits/accounts/:accountAddress"
               element={<EcocreditsByAccount />}
@@ -142,7 +150,10 @@ const App: React.FC = (): JSX.Element => {
               element={<ProtectedRoute component={ProjectList} />}
             />
             <Route path="project-pages">
-              <Route path=":projectId" element={<ProjectCreate />}>
+              <Route
+                path="project-pages/:projectId"
+                element={<ProjectCreate />}
+              >
                 <Route
                   path="choose-credit-class"
                   element={<KeplrRoute component={ChooseCreditClassPage} />}
@@ -180,14 +191,6 @@ const App: React.FC = (): JSX.Element => {
                   element={<KeplrRoute component={EntityDisplay} />}
                 />
                 <Route
-                  path="review"
-                  element={<KeplrRoute component={ProjectReview} />}
-                />
-                <Route
-                  path="finished"
-                  element={<KeplrRoute component={ProjectFinished} />}
-                />
-                <Route
                   path="edit"
                   element={<KeplrRoute component={ProjectEdit} />}
                 >
@@ -215,6 +218,51 @@ const App: React.FC = (): JSX.Element => {
                     path="entity-display"
                     element={<KeplrRoute component={EntityDisplay} />}
                   />
+                  <Route
+                    path="roles"
+                    element={<KeplrRoute component={Roles} />}
+                  />
+                  <Route
+                    path="entity-display"
+                    element={<KeplrRoute component={EntityDisplay} />}
+                  />
+                  <Route
+                    path="review"
+                    element={<KeplrRoute component={ProjectReview} />}
+                  />
+                  <Route
+                    path="finished"
+                    element={<KeplrRoute component={ProjectFinished} />}
+                  />
+                  <Route
+                    path="edit"
+                    element={<KeplrRoute component={ProjectEdit} />}
+                  >
+                    <Route
+                      path="basic-info"
+                      element={<KeplrRoute component={BasicInfo} />}
+                    />
+                    <Route
+                      path="location"
+                      element={<KeplrRoute component={ProjectLocation} />}
+                    />
+                    <Route
+                      path="story"
+                      element={<KeplrRoute component={Story} />}
+                    />
+                    <Route
+                      path="media"
+                      element={<KeplrRoute component={Media} />}
+                    />
+                    <Route
+                      path="roles"
+                      element={<KeplrRoute component={Roles} />}
+                    />
+                    <Route
+                      path="entity-display"
+                      element={<KeplrRoute component={EntityDisplay} />}
+                    />
+                  </Route>
                 </Route>
               </Route>
             </Route>
@@ -251,14 +299,17 @@ const App: React.FC = (): JSX.Element => {
               path="methodologies/:methodologyId"
               element={<MethodologyDetails />}
             />
-            <Route
-              path="credit-classes/:creditClassId/*"
-              element={<CreditClassDetails />}
-            />
-            <Route path="stats/activity" element={<Activity />} />
-            <Route>
-              <Route path="storefront" element={<Storefront />} />
+            <Route path="credit-classes">
+              {/* TODO: Index route is same as /create-credit-class for now */}
+              <Route index element={<CreateCreditClassInfo />} />
+              <Route path=":creditClassId" element={<CreditClassDetails />} />
+              <Route
+                path="create"
+                element={<KeplrRoute component={CreateCreditClass} />}
+              />
             </Route>
+            <Route path="stats/activity" element={<Activity />} />
+            <Route path="storefront" element={<Storefront />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

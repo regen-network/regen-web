@@ -1,8 +1,7 @@
-import React from 'react';
 import { ProjectMetadataForm } from '../../components/organisms/ProjectMetadataForm/ProjectMetadataForm';
+import { ShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectMetadataLD } from '../../generated/json-ld';
 import { useProjectMetadataSubmitReturnedType } from './hooks/useProjectMetadataSubmit';
-import { ShaclGraphByUriQuery } from '../../generated/graphql';
 
 type Props = {
   isVCS: boolean;
@@ -21,13 +20,6 @@ export const ProjectMetadataSelectedForm = ({
   onNext,
   onPrev,
 }: Props): JSX.Element => (
-  // isVCS ? (
-  //   // TODO https://github.com/regen-network/regen-registry/issues/908
-  //   // Temporarily using ProjectMetadataForm for all cases
-  //   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-  //     {'VCS metadata form not implemented yet'}
-  //   </Box>
-  // ) : (
   <ProjectMetadataForm
     submit={submit}
     initialValues={metadata}

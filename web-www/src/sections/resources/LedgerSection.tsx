@@ -1,11 +1,12 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
-import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
 import Section from 'web-components/lib/components/section';
+import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
+import { Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import {
   ResourcesLedgerSectionQuery,
   SanityResource,

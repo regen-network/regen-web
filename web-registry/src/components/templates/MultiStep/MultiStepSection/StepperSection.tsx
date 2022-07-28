@@ -1,8 +1,8 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 
-import Stepper from 'web-components/lib/components/stepper';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+import Stepper from 'web-components/lib/components/stepper';
 
 import { useMultiStep } from '../context/MultiStepContext';
 

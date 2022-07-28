@@ -1,11 +1,13 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import ReactCrop, { Crop } from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Button } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+
 import ContainedButton from '../buttons/ContainedButton';
 import { getCroppedImg } from './canvas-utils';
-import useMediaQuery from '@mui/material/useMediaQuery';
+
+import 'react-image-crop/dist/ReactCrop.css';
 
 export interface ImageCropProps {
   image: string;

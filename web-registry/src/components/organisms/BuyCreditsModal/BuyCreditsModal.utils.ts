@@ -1,6 +1,8 @@
 import { BuyCreditsValues } from './BuyCreditsModal';
 
-export const getSellOrderLabel = (sellOrder: BuyCreditsValues | undefined) => {
+export const getSellOrderLabel = (
+  sellOrder: BuyCreditsValues | undefined,
+): string => {
   const { sellOrderId, price, askDenom = '', creditCount } = sellOrder || {};
   return `${sellOrderId} (${price} ${askDenom
     .substring(1)

@@ -1,14 +1,19 @@
 import React from 'react';
-import clsx from 'clsx';
-import { DefaultTheme as Theme } from '@mui/styles';
-import { withStyles, createStyles, makeStyles, useTheme } from '@mui/styles';
-import LinearProgress from '@mui/material/LinearProgress';
 import Grid from '@mui/material/Grid';
+import LinearProgress from '@mui/material/LinearProgress';
+import {
+  createStyles,
+  DefaultTheme as Theme,
+  makeStyles,
+  useTheme,
+  withStyles,
+} from '@mui/styles';
+import clsx from 'clsx';
 
-import FixedFooter from './';
-import ArrowDownIcon from '../icons/ArrowDownIcon';
-import OutlinedButton from '../buttons/OutlinedButton';
 import ContainedButton from '../buttons/ContainedButton';
+import OutlinedButton from '../buttons/OutlinedButton';
+import ArrowDownIcon from '../icons/ArrowDownIcon';
+import FixedFooter from './';
 
 const StyledLinearProgress = withStyles((theme: Theme) =>
   createStyles({

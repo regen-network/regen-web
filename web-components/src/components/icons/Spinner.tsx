@@ -1,7 +1,7 @@
 import React from 'react';
+import { styled } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
 import { keyframes } from '@mui/styled-engine';
-import { styled } from '@mui/material';
 
 interface IconProps {
   className?: string;

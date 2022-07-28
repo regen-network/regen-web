@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { useQueryListClassesWithMetadata } from '../../../hooks/useQueryListClassesWithMetadata';
-import { client } from '../../../sanity';
-import { useAllCreditClassQuery } from '../../../generated/sanity-graphql';
-import { useAllCreditClassesQuery } from '../../../generated/graphql';
-import { useWallet } from '../../../lib/wallet';
-import { queryClassIssuers } from '../../../lib/ecocredit/api';
+import { useAllCreditClassesQuery } from 'generated/graphql';
+import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+import { queryClassIssuers } from 'lib/ecocredit/api';
+import { useWallet } from 'lib/wallet';
+import { client } from 'sanity';
+
+import { useQueryListClassesWithMetadata } from 'hooks/useQueryListClassesWithMetadata';
 
 interface CreditClassOption {
   id: string;
@@ -30,7 +31,7 @@ function useGetCreditClassOptions(): {
   const { data: creditClassContentData } = useAllCreditClassQuery({ client });
 
   useEffect(() => {
-    const setupOptions = async () => {
+    const setupOptions = async (): Promise<void> => {
       if (!wallet?.address || onChainClasses?.length < 1) return;
 
       const offChainClasses =

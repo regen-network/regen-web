@@ -1,9 +1,12 @@
 import React from 'react';
-import { Box, SxProps, Theme } from '@mui/material';
+import { SxProps } from '@mui/material';
 
+import { Flex } from '../../box';
+import { EditButton } from '../../buttons/EditButton';
 import { Label } from '../../typography';
 import OnBoardingCard from '../OnBoardingCard';
-import { EditButton } from '../../buttons/EditButton';
+
+import type { Theme } from '~/theme/muiTheme';
 
 export interface ReviewCardProps {
   title: string;
@@ -11,23 +14,15 @@ export interface ReviewCardProps {
   sx?: SxProps<Theme>;
 }
 
-const ReviewCard: React.FC<ReviewCardProps> = ({
+export const ReviewCard: React.FC<ReviewCardProps> = ({
   title,
   onEditClick,
   children,
-  sx = [],
+  sx,
 }) => {
   return (
-    <OnBoardingCard
-      sx={[
-        {
-          mt: [2.5],
-          mb: [0],
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
-    >
-      <Box
+    <OnBoardingCard sx={sx}>
+      <Flex
         sx={{
           display: 'flex',
           flexDirection: 'row',
@@ -37,10 +32,8 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
       >
         <Label size="sm">{title}</Label>
         <EditButton onClick={onEditClick} />
-      </Box>
+      </Flex>
       {children}
     </OnBoardingCard>
   );
 };
-
-export { ReviewCard };

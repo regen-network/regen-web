@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Box, Menu, MenuItem, SxProps, Theme } from '@mui/material';
-import OutlinedButton from './OutlinedButton';
+import { Box, Menu, MenuItem, SxProps } from '@mui/material';
+import type { Theme } from 'lib/theme/muiTheme';
+
 import { HorizontalDotsIcon } from '../icons/HorizontalDotsIcon';
+import OutlinedButton from './OutlinedButton';
 
 /** Displays a dropdown icon with action buttons */
 const TableActionButtons: React.FC<{

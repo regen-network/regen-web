@@ -14,7 +14,7 @@ exports.onClientEntry = () => {
 // Wraps every page in a component
 exports.wrapPageElement = ({ element }) => {
   return (
-    <IntercomProvider appId={intercomAppId} autoBoot>
+    <IntercomProvider appId={intercomAppId} initializeDelay={500}>
       {element}
     </IntercomProvider>
   );

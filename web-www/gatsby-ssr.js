@@ -7,7 +7,7 @@ const intercomAppId = process.env.GATSBY_INTERCOM_APP_ID || '';
 // // Wraps every page in a component
 export const wrapPageElement = ({ element }) => {
   return (
-    <IntercomProvider appId={intercomAppId} autoBoot>
+    <IntercomProvider appId={intercomAppId} initializeDelay={500}>
       {element}
     </IntercomProvider>
   );

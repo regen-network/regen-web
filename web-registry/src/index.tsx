@@ -44,7 +44,7 @@ ReactDOM.render(
     cacheLocation="localstorage"
   >
     <AuthApolloProvider>
-      <IntercomProvider appId={intercomId} autoBoot>
+      <IntercomProvider appId={intercomId} initializeDelay={500}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <WalletProvider>
             <LedgerProvider>

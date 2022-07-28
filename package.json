@@ -2,6 +2,7 @@
   "name": "regen-web",
   "private": true,
   "description": "Regen Website",
+  "sideEffects": false,
   "homepage": "https://github.com/regen-network/regen-web",
   "bugs": {
     "url": "https://github.com/regen-network/regen-web/issues"

@@ -2,9 +2,7 @@
   "name": "web-registry",
   "version": "0.0.0",
   "private": true,
-  "sideEffects": [
-    "**/*.css"
-  ],
+  "sideEffects": false,
   "dependencies": {
     "@apollo/client": "^3.4.17",
     "@auth0/auth0-react": "^1.8.0",

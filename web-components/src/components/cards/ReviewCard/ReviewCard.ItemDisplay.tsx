@@ -13,7 +13,15 @@ export const ItemDisplay = (props: {
 }): JSX.Element => {
   const { name, children, sx = [] } = props;
   return (
-    <FlexCol sx={[{ gap: 2 }, ...(Array.isArray(sx) ? sx : [sx])]}>
+    <FlexCol
+      sx={[
+        {
+          mt: 9,
+          mb: 2,
+        },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
+    >
       {name && <Subtitle size="lg">{name}</Subtitle>}
       <Body size="lg">{children}</Body>
     </FlexCol>

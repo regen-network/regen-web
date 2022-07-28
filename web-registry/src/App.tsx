@@ -123,7 +123,6 @@ const App: React.FC = (): JSX.Element => {
               path="ecocredits/dashboard"
               element={<KeplrRoute component={Dashboard} />}
             />
-            <Route path="projects/:projectId" element={<Project />} />
             <Route
               path="ecocredits/accounts/:accountAddress"
               element={<EcocreditsByAccount />}
@@ -150,10 +149,8 @@ const App: React.FC = (): JSX.Element => {
               element={<ProtectedRoute component={ProjectList} />}
             />
             <Route path="project-pages">
-              <Route
-                path="project-pages/:projectId"
-                element={<ProjectCreate />}
-              >
+              {/* Beginning of Project Create flow */}
+              <Route path=":projectId" element={<ProjectCreate />}>
                 <Route
                   path="choose-credit-class"
                   element={<KeplrRoute component={ChooseCreditClassPage} />}
@@ -191,6 +188,15 @@ const App: React.FC = (): JSX.Element => {
                   element={<KeplrRoute component={EntityDisplay} />}
                 />
                 <Route
+                  path="review"
+                  element={<KeplrRoute component={ProjectReview} />}
+                />
+                <Route
+                  path="finished"
+                  element={<KeplrRoute component={ProjectFinished} />}
+                />
+                {/* End of Project Create flow */}
+                <Route
                   path="edit"
                   element={<KeplrRoute component={ProjectEdit} />}
                 >
@@ -218,51 +224,6 @@ const App: React.FC = (): JSX.Element => {
                     path="entity-display"
                     element={<KeplrRoute component={EntityDisplay} />}
                   />
-                  <Route
-                    path="roles"
-                    element={<KeplrRoute component={Roles} />}
-                  />
-                  <Route
-                    path="entity-display"
-                    element={<KeplrRoute component={EntityDisplay} />}
-                  />
-                  <Route
-                    path="review"
-                    element={<KeplrRoute component={ProjectReview} />}
-                  />
-                  <Route
-                    path="finished"
-                    element={<KeplrRoute component={ProjectFinished} />}
-                  />
-                  <Route
-                    path="edit"
-                    element={<KeplrRoute component={ProjectEdit} />}
-                  >
-                    <Route
-                      path="basic-info"
-                      element={<KeplrRoute component={BasicInfo} />}
-                    />
-                    <Route
-                      path="location"
-                      element={<KeplrRoute component={ProjectLocation} />}
-                    />
-                    <Route
-                      path="story"
-                      element={<KeplrRoute component={Story} />}
-                    />
-                    <Route
-                      path="media"
-                      element={<KeplrRoute component={Media} />}
-                    />
-                    <Route
-                      path="roles"
-                      element={<KeplrRoute component={Roles} />}
-                    />
-                    <Route
-                      path="entity-display"
-                      element={<KeplrRoute component={EntityDisplay} />}
-                    />
-                  </Route>
                 </Route>
               </Route>
             </Route>

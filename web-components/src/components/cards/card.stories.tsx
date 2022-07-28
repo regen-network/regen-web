@@ -20,7 +20,7 @@ import ProjectCard from './ProjectCard';
 import ProjectTopCard from './ProjectTopCard';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
 import ResourcesCard from './ResourcesCard';
-import ReviewCard from './ReviewCard';
+import { ReviewCard } from './ReviewCard';
 import { ItemDisplay } from './ReviewCard/ReviewCard.ItemDisplay';
 import { Photo } from './ReviewCard/ReviewCard.Photo';
 import { StepCard } from './StepCard';

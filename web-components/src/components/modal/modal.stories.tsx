@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Avatar, Button, Card, CardMedia, Link } from '@mui/material';
-import Long from 'long';
 
 import Modal from '.';
 import { BasketPutModal } from './BasketPutModal';
@@ -288,8 +287,8 @@ export const basketTakeModal = (): JSX.Element => (
     accountAddress="123xyz"
     basketDisplayDenom="eco.C.rNCT"
     basket={{
-      id: new Long(1),
-      $type: 'regen.ecocredit.basket.v1.Basket',
+      $type: 'regen.ecocredit.basket.v1.BasketInfo',
+      curator: 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4',
       name: 'rNCT',
       basketDenom: 'eco.uC.rNCT',
       creditTypeAbbrev: 'C',

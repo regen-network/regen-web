@@ -7,7 +7,6 @@ import { Field } from 'formik';
 import { Theme } from '../../theme/muiTheme';
 import { getFormattedNumber } from '../../utils/format';
 import TextField, { RegenTextFieldProps } from '../inputs/TextField';
-import { getFormattedNumber } from '../../utils/format';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textField: {

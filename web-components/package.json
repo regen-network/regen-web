@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "main": "build/index.js",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "remove-previous-files": "shx rm -rf ./lib/* ./tsconfig.tsbuildinfo",
     "copy-assets": "cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",

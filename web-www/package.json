@@ -2,6 +2,9 @@
   "name": "web-www",
   "private": true,
   "version": "0.0.1",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "dependencies": {
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",

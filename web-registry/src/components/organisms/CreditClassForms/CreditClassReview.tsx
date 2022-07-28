@@ -7,7 +7,7 @@ import {
 } from 'web-components/lib/components/cards/ReviewCard';
 
 import { ScrollableCodebox } from 'components/molecules/ScrollableCodebox';
-import { useMultiStep } from 'components/templates/MultiStepTemplate';
+import { useMultiStep } from 'components/templates/MultiStepTemplate/MultiStep.context';
 
 import type { CreditClassValues } from './CreditClassForm';
 

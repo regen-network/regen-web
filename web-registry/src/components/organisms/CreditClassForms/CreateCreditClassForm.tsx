@@ -3,7 +3,7 @@ import { Formik } from 'formik';
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import NotFound from 'web-components/lib/components/not-found';
 
-import { useMultiStep } from 'components/templates/MultiStepTemplate';
+import { useMultiStep } from 'components/templates/MultiStepTemplate/MultiStep.context';
 
 import { mockClassId, mockTxHash } from './CreditClass.mocks';
 import { CreditClassFinished } from './CreditClassFinished';

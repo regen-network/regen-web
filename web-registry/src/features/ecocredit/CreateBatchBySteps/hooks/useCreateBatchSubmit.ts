@@ -138,7 +138,8 @@ export default function useCreateBatchSubmit(): ReturnType {
 
   const createBatch = async (data: CreateBatchFormValues): Promise<void> => {
     if (!api?.msgClient?.broadcast || !accountAddress) return Promise.reject();
-    if (!data.startDate || !data.endDate) return Promise.reject();
+    if (!data.startDate || !data.endDate)
+      return Promise.reject('No dates provided');
 
     let message: Partial<MsgCreateBatch> | undefined;
 

@@ -169,7 +169,7 @@ export default function CreditBasics({
 
           <AdditionalCerfications
             certifications={
-              (values.metadata as VCSBatchMetadataLD)[
+              (values.metadata as VCSBatchMetadataLD)?.[
                 'regen:additionalCertifications'
               ] || []
             }

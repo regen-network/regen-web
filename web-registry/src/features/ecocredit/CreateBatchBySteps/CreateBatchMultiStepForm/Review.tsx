@@ -12,7 +12,8 @@ import {
   getFormattedNumber,
 } from 'web-components/lib/utils/format';
 
-import { useMultiStep } from '../../../../components/templates/MultiStep';
+import { useMultiStep } from 'components/templates/MultiStepTemplate/MultiStep.context';
+
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
 import { CreditBasicsFormValues } from './CreditBasics';
 import { RecipientFormValues } from './Recipients';
@@ -76,15 +77,15 @@ function CreditBatchInfo({
         {`${formatDate(data.startDate)} - ${formatDate(data.endDate)}`}
       </ItemDisplay>
       <ItemDisplay name={'VCS retirement serial number'}>
-        {metadata['regen:vcsRetirementSerialNumber']}
+        {metadata?.['regen:vcsRetirementSerialNumber']}
       </ItemDisplay>
-      {metadata['regen:additionalCertifications']?.map((cert, index) => (
+      {metadata?.['regen:additionalCertifications']?.map((cert, index) => (
         <AdditionalCertificationDisplay
           key={`additional-certification-${index}`}
           name={cert['schema:name']}
           url={cert['schema:url']['@value']}
           index={
-            metadata['regen:additionalCertifications']?.length > 1
+            metadata?.['regen:additionalCertifications']?.length > 1
               ? `${index + 1}`
               : undefined
           }

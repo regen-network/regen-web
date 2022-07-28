@@ -7,8 +7,9 @@ import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import NotFound from 'web-components/lib/components/not-found';
 
+import { useMultiStep } from 'components/templates/MultiStepTemplate/MultiStep.context';
+
 import RotationalGrazing from '../../../../assets/rotational-grazing.png';
-import { useMultiStep } from '../../../../components/templates/MultiStep';
 import formModel from '../form-model';
 import useCreateBatchSubmit from '../hooks/useCreateBatchSubmit';
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';

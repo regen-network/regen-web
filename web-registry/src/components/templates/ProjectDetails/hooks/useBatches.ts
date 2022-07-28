@@ -1,62 +1,39 @@
 import { useState, useEffect } from 'react';
 import { Maybe } from '../../../../generated/graphql';
 import {
-  getBatchesWithSupply,
   getBatchesTotal,
+  getBatchesByProjectWithSupply,
 } from '../../../../lib/ecocredit/api';
-import { getMetadata } from '../../../../lib/metadata-graph';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
 } from '../../../../types/ledger/ecocredit';
 
 interface InputProps {
-  creditClassId: Maybe<string> | undefined;
-  vcsProjectId: number | undefined;
+  projectId: Maybe<string> | undefined;
 }
-export default function useBatches({
-  creditClassId,
-  vcsProjectId,
-}: InputProps) {
+export default function useBatches({ projectId }: InputProps) {
   const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
   const [batchTotals, setBatchTotals] = useState<BatchTotalsForProject>();
 
   useEffect(() => {
-    const asyncFilter = async (
-      arr: BatchInfoWithSupply[],
-      predicate: (batch: BatchInfoWithSupply) => Promise<boolean>,
-    ): Promise<BatchInfoWithSupply[]> => {
-      const results = await Promise.all(arr.map(predicate));
-      return arr.filter((_v, index) => results[index]);
-    };
-
-    const fetch = async (): Promise<void> => {
+    const fetchData = async (): Promise<void> => {
       try {
         let batches: BatchInfoWithSupply[] = [];
-        if (creditClassId) {
-          const { data } = await getBatchesWithSupply(creditClassId); // TODO: should be batches by project
+        if (projectId) {
+          const { data } = await getBatchesByProjectWithSupply(projectId);
           batches = data;
         }
 
-        const filteredBatches = await asyncFilter(
-          batches,
-          async (batch: BatchInfoWithSupply) => {
-            let batchMetadata;
-            if (batch.metadata?.length) {
-              batchMetadata = await getMetadata(batch.metadata);
-            }
-            return batchMetadata?.['regen:vcsProjectId'] === vcsProjectId;
-          },
-        );
-        const { totals } = await getBatchesTotal(filteredBatches);
-        setBatchData(filteredBatches);
+        const { totals } = await getBatchesTotal(batches);
+        setBatchData(batches);
         setBatchTotals(totals);
       } catch (err) {
         console.error(err); // eslint-disable-line no-console
       }
     };
-    fetch();
-  }, [creditClassId, vcsProjectId]);
+    fetchData();
+  }, [projectId]);
 
   return { batchData, batchTotals };
 }

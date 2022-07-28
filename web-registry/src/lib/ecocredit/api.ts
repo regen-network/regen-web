@@ -25,6 +25,8 @@ import {
   QueryProjectsByAdminResponse,
   QueryProjectRequest,
   QueryProjectResponse,
+  QueryBatchesByProjectResponse,
+  QueryBatchesByProjectRequest,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import {
@@ -136,6 +138,22 @@ export const getBatchesWithSupply = async (
 }> => {
   const batches = await queryEcoBatches(creditClassId, params);
   const batchesWithData = await addDataToBatch(batches);
+  return { data: batchesWithData };
+};
+
+export const getBatchesByProjectWithSupply = async (
+  projectId?: string | null,
+  params?: URLSearchParams,
+): Promise<{
+  data: BatchInfoWithSupply[];
+}> => {
+  if (!projectId) return Promise.resolve({ data: [] });
+  const client = await getQueryClient();
+  const batches = await queryBatchesByProject({
+    client,
+    request: { projectId },
+  });
+  const batchesWithData = await addDataToBatch(batches?.batches);
   return { data: batchesWithData };
 };
 
@@ -379,6 +397,11 @@ type BatchesParams = {
   params: DeepPartial<QueryBatchesByClassRequest>;
 };
 
+type BatchesByProjectParams = {
+  query: 'batchesByProject';
+  params: DeepPartial<QueryBatchesByProjectRequest>;
+};
+
 type ClassInfoParams = {
   query: 'classInfo';
   params: DeepPartial<QueryBatchRequest>;
@@ -413,6 +436,7 @@ export type EcocreditQueryProps =
   | BalanceParams
   | BatchInfoParams
   | BatchesParams
+  | BatchesByProjectParams
   | ClassInfoParams
   | ClassesParams
   | CreditTypesParams
@@ -426,6 +450,7 @@ export type EcocreditQueryResponse =
   | QueryBalanceResponse
   | QueryBatchResponse
   | QueryBatchesByClassResponse
+  | QueryBatchesByProjectResponse
   | QueryClassResponse
   | QueryClassesResponse
   | QueryCreditTypesResponse
@@ -495,6 +520,25 @@ export const queryBatchesByClass = async ({
   try {
     return await client.BatchesByClass({
       classId: request.classId,
+    });
+  } catch (err) {
+    throw new Error(
+      `Error in the Batches query of the ledger ecocredit module: ${err}`,
+    );
+  }
+};
+
+interface QueryBatchesByProjectProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QueryBatchesByProjectRequest>;
+}
+
+export const queryBatchesByProject = async ({
+  client,
+  request,
+}: QueryBatchesByProjectProps): Promise<QueryBatchesByProjectResponse> => {
+  try {
+    return await client.BatchesByProject({
+      projectId: request.projectId,
     });
   } catch (err) {
     throw new Error(

@@ -71,14 +71,18 @@ function ProjectDetails(): JSX.Element {
   // if projectId is handle, query project by handle
   const { data: dataByHandle, loading: loadingDataByHandle } =
     useProjectByHandleQuery({
-      skip: isOnChainId,
+      skip: !projectId,
       variables: { handle: projectId as string },
     });
+
+  const onChainProjectId = isOnChainId
+    ? projectId
+    : dataByHandle?.projectByHandle?.onChainId;
 
   // else fetch project by onChainId
   const { data: dataByOnChainId, loading } = useProjectByOnChainIdQuery({
     skip: !isOnChainId,
-    variables: { onChainId: projectId as string },
+    variables: { onChainId: onChainProjectId as string },
   });
 
   const { data: projectResponse } = useEcocreditQuery<QueryProjectResponse>({
@@ -97,14 +101,11 @@ function ProjectDetails(): JSX.Element {
   const onChainProjectMetadata = useQueryMetadataGraph(
     onChainProject?.metadata,
   );
-  const vcsProjectId = onChainProjectMetadata?.['regen:vcsProjectId'];
   const managementActions =
     offChainProjectMetadata?.['regen:landManagementActions']?.['@list'];
 
-  const creditClassId = project?.creditClassByCreditClassId?.onChainId;
   const { batchData, batchTotals } = useBatches({
-    creditClassId,
-    vcsProjectId,
+    projectId: onChainProjectId,
   });
 
   // with project query

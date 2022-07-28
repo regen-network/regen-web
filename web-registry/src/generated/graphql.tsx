@@ -20846,7 +20846,7 @@ export type WalletByAddrQuery = (
 
 export type MoreProjectFieldsFragment = (
   { __typename?: 'Project' }
-  & Pick<Project, 'handle' | 'metadata'>
+  & Pick<Project, 'handle' | 'onChainId' | 'metadata'>
   & { creditClassByCreditClassId?: Maybe<(
     { __typename?: 'CreditClass' }
     & Pick<CreditClass, 'uri'>
@@ -21494,6 +21494,7 @@ export const ProjectFragmentDoc = gql`
 export const MoreProjectFieldsFragmentDoc = gql`
     fragment moreProjectFields on Project {
   handle
+  onChainId
   metadata
   creditClassByCreditClassId {
     uri

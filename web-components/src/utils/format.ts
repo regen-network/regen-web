@@ -53,7 +53,7 @@ export function formatDate(
   format: string = 'MMMM D, YYYY',
   utc?: boolean,
 ): string {
-  if (!date) return '-';
+  if (!date) return '';
   if (utc) return dayjs.utc(date).format(format);
   return dayjs(date).format(format);
 }

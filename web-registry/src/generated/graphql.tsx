@@ -21017,7 +21017,7 @@ export type ProjectByIdQuery = (
   { __typename?: 'Query' }
   & { projectById?: Maybe<(
     { __typename?: 'Project' }
-    & Pick<Project, 'metadata' | 'developerId' | 'originatorId' | 'landOwnerId' | 'stewardId' | 'addressId'>
+    & Pick<Project, 'metadata' | 'developerId' | 'originatorId' | 'landOwnerId' | 'stewardId' | 'addressId' | 'onChainId'>
     & { partyByDeveloperId?: Maybe<(
       { __typename?: 'Party' }
       & PartyFieldsFragment
@@ -22639,6 +22639,7 @@ export const ProjectByIdDocument = gql`
     landOwnerId
     stewardId
     addressId
+    onChainId
     partyByDeveloperId {
       ...partyFields
     }

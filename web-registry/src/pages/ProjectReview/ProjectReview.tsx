@@ -12,8 +12,12 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
+import { getOnChainProjectId } from './ProjectReview.util';
 import { OnboardingFormTemplate } from '../../components/templates';
-import { useProjectByIdQuery } from '../../generated/graphql';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+} from '../../generated/graphql';
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
@@ -37,6 +41,7 @@ export const ProjectReview: React.FC = () => {
   });
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+  const [updateProject] = useUpdateProjectByIdMutation();
 
   const closeSubmitModal = () => setIsSubmitModalOpen(false);
 
@@ -55,12 +60,25 @@ export const ProjectReview: React.FC = () => {
     setTxModalTitle('MsgCreateProject Error');
   };
 
-  const handleTxDelivered = (_deliverTxResponse: DeliverTxResponse): void => {
+  const handleTxDelivered = async (
+    _deliverTxResponse: DeliverTxResponse,
+  ): Promise<void> => {
     setDeliverTxResponse(_deliverTxResponse);
+    const projectOnChainId = getOnChainProjectId(_deliverTxResponse);
+    await updateProject({
+      variables: {
+        input: {
+          id: projectId,
+          projectPatch: {
+            onChainId: projectOnChainId,
+          },
+        },
+      },
+    });
     navigate(`${editPath}/finished`);
   };
 
-  const { signAndBroadcast, deliverTxResponse, wallet, error, setError } =
+  const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const { projectCreateSubmit } = useProjectCreateSubmit({ signAndBroadcast });
   const project = data?.projectById;
@@ -73,9 +91,9 @@ export const ProjectReview: React.FC = () => {
   const txHashUrl = getHashUrl(txHash);
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
 
-  const submit = () => {
+  const submit = async () => {
     const vcsProjectId = metadata?.['regen:vcsProjectId'];
-    projectCreateSubmit({
+    await projectCreateSubmit({
       classId: creditClassId || '',
       admin: wallet?.address || '',
       metadata,

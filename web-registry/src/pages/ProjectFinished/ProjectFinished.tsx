@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box } from '@mui/system';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -12,34 +12,24 @@ import { OnboardingFormTemplate } from '../../components/templates';
 import { Link } from '../../components/atoms';
 import { getHashUrl } from '../../lib/block-explorer';
 import { useCreateProjectContext } from '../ProjectCreate';
-import { useGetProjectId } from './hooks/useGetProjectId';
-import { useUpdateProjectByIdMutation } from '../../generated/graphql';
+import { useProjectByIdQuery } from '../../generated/graphql';
 
 const ProjectFinished: React.FC = () => {
   const { deliverTxResponse } = useCreateProjectContext();
   const { projectId } = useParams();
   const navigate = useNavigate();
-  const projectOnChainId = useGetProjectId(deliverTxResponse);
-  const [updateProject] = useUpdateProjectByIdMutation();
-
-  // TODO: run mutation in review success, fetch from DB here?
-  useEffect((): void => {
-    if (!!projectOnChainId) {
-      updateProject({
-        variables: {
-          input: {
-            id: projectId,
-            projectPatch: {
-              onChainId: projectOnChainId,
-            },
-          },
-        },
-      });
-    }
-  }, [projectId, projectOnChainId, updateProject]);
+  const { data, loading } = useProjectByIdQuery({
+    variables: { id: projectId },
+    fetchPolicy: 'cache-and-network',
+  });
+  const projectOnChainId = data?.projectById?.onChainId || '';
 
   return (
-    <OnboardingFormTemplate activeStep={2} title="Project has been created!">
+    <OnboardingFormTemplate
+      activeStep={2}
+      title="Project has been created!"
+      loading={loading}
+    >
       <Box
         sx={{
           display: 'flex',

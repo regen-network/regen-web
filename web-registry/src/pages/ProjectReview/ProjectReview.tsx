@@ -98,7 +98,7 @@ export const ProjectReview: React.FC = () => {
       admin: wallet?.address || '',
       metadata,
       jurisdiction,
-      referenceId: isVCS && vcsProjectId ? `VCS-${vcsProjectId}` : '', //TODO
+      referenceId: isVCS && vcsProjectId ? `VCS-${vcsProjectId}` : '', // TODO: regen-network/regen-registry#1104
     });
   };
 

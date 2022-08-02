@@ -10,7 +10,7 @@ import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-ca
 
 import { getBatchWithSupplyForDenom } from '../../lib/ecocredit/api';
 import { getMetadata } from '../../lib/metadata-graph';
-import { useProjectsByMetadataQuery } from '../../generated/graphql';
+import { useProjectByOnChainIdQuery } from '../../generated/graphql';
 
 import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import {
@@ -54,21 +54,19 @@ export const BatchDetails: React.FC = () => {
     fetch();
   }, [batchDenom]);
 
-  const vcsProjectId = metadata?.['regen:vcsProjectId'];
+  const onChainId = batch?.projectId || '';
   const {
     data: offchainData,
     loading: dbLoading,
     error,
-  } = useProjectsByMetadataQuery({
-    skip: !vcsProjectId,
+  } = useProjectByOnChainIdQuery({
+    skip: !onChainId,
     variables: {
-      metadata: {
-        'regen:vcsProjectId': vcsProjectId,
-      },
+      onChainId,
     },
   });
 
-  const project = offchainData?.allProjects?.nodes?.[0];
+  const project = offchainData?.projectByOnChainId;
 
   if (ledgerLoading || dbLoading) return <Loading />;
 
@@ -103,7 +101,7 @@ export const BatchDetails: React.FC = () => {
           <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <BatchInfoGrid
               batch={batch}
-              projectHandle={project?.handle}
+              projectOnChainId={onChainId}
               projectName={project?.metadata?.['schema:name']}
               sx={{ py: 10, borderBottom: 1, borderColor: 'grey.100' }}
             />

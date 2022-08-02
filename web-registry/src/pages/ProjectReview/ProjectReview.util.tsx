@@ -1,6 +1,17 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import { getISOString } from 'web-components/lib/utils/locationStandard';
+import { countries } from 'web-components/lib/utils/countries';
+import {
+  ProjectMetadataLD,
+  VCSProjectMetadataLD,
+} from '../../generated/json-ld';
 
-const getOnChainProjectId = (deliverTxResponse?: DeliverTxResponse): string => {
+const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN;
+
+export const getOnChainProjectId = (
+  deliverTxResponse?: DeliverTxResponse,
+): string => {
   if (!deliverTxResponse?.rawLog) return '';
   const rawLog = JSON.parse(deliverTxResponse?.rawLog);
   // regen.ecocredit.v1.EventCreateProject
@@ -13,4 +24,59 @@ const getOnChainProjectId = (deliverTxResponse?: DeliverTxResponse): string => {
   return projectId;
 };
 
-export { getOnChainProjectId };
+export const getJurisdiction = async (
+  metadata: Partial<ProjectMetadataLD> | Partial<VCSProjectMetadataLD>,
+): Promise<string | undefined> => {
+  if (!mapboxToken) return Promise.reject();
+  let isoString;
+  const location = metadata?.['schema:location'];
+  console.log('location', location);
+  if (!location) return Promise.resolve('');
+  const context: GeocodeFeature[] = location?.context || [];
+  let countryKey = '';
+  let stateProvince = '';
+  let postalCode = '';
+  context.forEach(ctx => {
+    if (ctx.id.includes('country')) {
+      countryKey = ctx.text;
+      return;
+    }
+    if (ctx.id.includes('region')) {
+      stateProvince = ctx.text;
+      return;
+    }
+    if (ctx.id.includes('postcode')) {
+      postalCode = ctx.text;
+      return;
+    }
+  });
+
+  // if GeocodeFeature context is insufficient, we can get a country code from place_name
+  if (!countryKey && location?.place_name) {
+    const placeSegments = location.place_name.split(',');
+    // find the country key
+    placeSegments.forEach(segment => {
+      const foundKey = Object.keys(countries).find(key => {
+        return countries[key].toLowerCase() === segment.trim().toLowerCase();
+      });
+      if (foundKey) {
+        countryKey = foundKey;
+        return;
+      }
+    });
+  }
+
+  try {
+    isoString = await getISOString(mapboxToken, {
+      countryKey,
+      stateProvince,
+      postalCode,
+    });
+  } catch (err) {
+    // initially this effect may fail mainly because the accessToken
+    // (mapboxToken) is not set in the environment variables.
+    console.error(err);
+    return Promise.reject(err);
+  }
+  return Promise.resolve(isoString);
+};

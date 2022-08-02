@@ -10,10 +10,10 @@ import { LinkWithArrow } from '../atoms';
 
 export const BatchInfoGrid: React.FC<{
   batch: BatchInfoWithSupply;
-  projectHandle?: string | null;
+  projectOnChainId?: string | null;
   projectName?: string;
   sx?: SxProps<Theme>;
-}> = ({ batch, projectHandle, projectName, sx }) => (
+}> = ({ batch, projectOnChainId, projectName, sx }) => (
   <Grid
     container
     rowGap={6}
@@ -28,7 +28,7 @@ export const BatchInfoGrid: React.FC<{
         <Box component="span" sx={{ textTransform: 'capitalize' }}>
           <LinkWithArrow
             label={projectName || '-'}
-            href={projectHandle ? `/projects/${projectHandle}` : ''}
+            href={projectOnChainId ? `/projects/${projectOnChainId}` : ''}
           />
         </Box>
       </BatchDetail>

@@ -12,7 +12,7 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
-import { getOnChainProjectId } from './ProjectReview.util';
+import { getOnChainProjectId, getJurisdiction } from './ProjectReview.util';
 import { OnboardingFormTemplate } from '../../components/templates';
 import {
   useProjectByIdQuery,
@@ -24,7 +24,6 @@ import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { ProjectPageFooter } from '../../components/molecules';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
 import useMsgClient from '../../hooks/useMsgClient';
-import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { Link } from '../../components/atoms';
 import { getHashUrl } from '../../lib/block-explorer';
@@ -86,18 +85,22 @@ export const ProjectReview: React.FC = () => {
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
   const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
   const metadata: Partial<VCSProjectMetadataLD> = project?.metadata;
-  const jurisdiction = useGetJurisdiction(metadata);
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
-
   const submit = async () => {
+    const jurisdiction = await getJurisdiction(metadata);
+    // eslint-disable-next-line
+    console.log(
+      'Jurisdiction ISO string based on location provided:',
+      jurisdiction,
+    );
     const vcsProjectId = metadata?.['regen:vcsProjectId'];
     await projectCreateSubmit({
       classId: creditClassId || '',
       admin: wallet?.address || '',
       metadata,
-      jurisdiction,
+      jurisdiction: jurisdiction || '',
       referenceId: isVCS && vcsProjectId ? `VCS-${vcsProjectId}` : '', // TODO: regen-network/regen-registry#1104
     });
   };

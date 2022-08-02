@@ -13,6 +13,7 @@ export default function useQueryIfIssuer(): boolean {
   const onChainClasses = useQueryListClasses();
 
   useEffect(() => {
+    // eslint-disable-next-line
     const queryIfIssuer = async () => {
       if (!wallet?.address || !onChainClasses?.classes?.length) {
         setIsIssuer(false);

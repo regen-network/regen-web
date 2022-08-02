@@ -2,16 +2,16 @@ import * as React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Box, Theme } from '@mui/material';
 
-import Card from 'web-components/lib/components/cards/Card';
-import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
-import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
-import MapCard from 'web-components/lib/components/cards/MapCard';
-import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import { User } from 'web-components/lib/components/user/UserInfo';
+import Card from './Card';
+import ProjectTopCard from './ProjectTopCard';
+import ImpactCard from './ImpactCard';
+import MapCard from './MapCard';
+import GlanceCard from './GlanceCard';
+import OnBoardingCard from './OnBoardingCard';
+import { User } from '../user/UserInfo';
 
 // import CreditCard, { CreditInfo } from './CreditCard';
-import CreateProjectCard from './CreateProjectCard';
+import { CreateProjectCard } from './CreateCards';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import TrustIcon from '../icons/TrustIcon';
@@ -24,7 +24,7 @@ import { OverviewCard } from './OverviewCard';
 import ResourcesCard from './ResourcesCard';
 import { QuestionItem } from '../faq/Question';
 import ProjectCard from './ProjectCard';
-import ReviewCard from './ReviewCard';
+import { ReviewCard } from './ReviewCard';
 import { ItemDisplay } from './ReviewCard/ReviewCard.ItemDisplay';
 import { Photo } from './ReviewCard/ReviewCard.Photo';
 
@@ -52,6 +52,14 @@ const landSteward: User = {
     'The Ngarrindjeri culture is centered around the lower lakes of the Murray River.',
 };
 
+export const createProjectCard = (): JSX.Element => (
+  <CreateProjectCard isFirstProject onClick={() => {}} />
+);
+
+export const createProjectCardAddAnother = (): JSX.Element => (
+  <CreateProjectCard isFirstProject={false} onClick={() => {}} />
+);
+
 export const projectTopCard = (): JSX.Element => (
   <ProjectTopCard
     projectDeveloper={projectDeveloper}
@@ -75,24 +83,6 @@ export const monitoredImpactCard = (): JSX.Element => (
     monitored
   />
 );
-
-// const creditInfo: CreditInfo = {
-//   name: 'REDD+ in the Amazon',
-//   description: 'Reduce the emissions from deforestation and forest degradation in the Amazon',
-//   imgSrc: '/Polyculture.png',
-//   place: 'Brazil',
-//   outcome: 'carbon sequestration',
-//   numberOfHolders: 1021,
-//   numberOfProjects: 25,
-//   amount: 70000,
-//   totalAmount: 93211,
-//   // unit: 'USD'
-// };
-//
-//
-// export const creditCard = (): JSX.Element => (
-//   <CreditCard credit={creditInfo} onClick={onClick} width="20.5rem" />
-// );
 
 function onClick(): void {}
 
@@ -188,14 +178,6 @@ export const greenTopIconCard = (): JSX.Element => (
 
 export const onBoardingCard = (): JSX.Element => (
   <OnBoardingCard>some content</OnBoardingCard>
-);
-
-export const createProjectCard = (): JSX.Element => (
-  <CreateProjectCard isFirstProject onClick={() => {}} />
-);
-
-export const createProjectCardAddAnother = (): JSX.Element => (
-  <CreateProjectCard isFirstProject={false} onClick={() => {}} />
 );
 
 export const imageActionCard = (): JSX.Element => (

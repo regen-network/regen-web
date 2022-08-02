@@ -8,8 +8,8 @@ import {
   useCreditClassByUriQuery,
 } from '../../generated/graphql';
 import { client } from '../../sanity';
-import CreditClassDetailsWithContent from '../CreditClassDetailsWithContent';
-import CreditClassDetailsSimple from '../CreditClassDetailsSimple';
+import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
+import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 import { queryEcoClassInfo, queryClassIssuers } from '../../lib/ecocredit/api';
 import { getMetadata } from '../../lib/metadata-graph';
 import { onChainClassRegExp } from '../../lib/ledger';
@@ -39,7 +39,7 @@ function CreditClassDetails(): JSX.Element {
 }
 
 function CreditClassDetail({ isLandSteward }: CreditDetailsProps): JSX.Element {
-  let { creditClassId } = useParams();
+  const { creditClassId } = useParams();
   const [onChainClass, setOnChainClass] = useState<ClassInfo | undefined>(
     undefined,
   );

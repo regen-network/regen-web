@@ -122,7 +122,6 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
             submitCount={submitCount}
             submitForm={submitForm}
             label="Create Sell Order"
-            colorVariant="gradientBlueGreen"
           />
         </Form>
       )}

@@ -122,7 +122,7 @@ const examples: FieldNameExamples = {
   },
 };
 
-const quoteError: string = 'You must fill in all the quote fields, or none';
+const quoteError = 'You must fill in all the quote fields, or none';
 const errorMsgs: Errors = {
   'regen:landStory': 'Please fill in the story of the land',
   'regen:landStewardStory': 'Please fill in the story of the land stewards',

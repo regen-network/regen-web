@@ -1,5 +1,4 @@
-import React from 'react';
-import Certificate from 'web-components/lib/components/certificate';
+import Certificate from '.';
 
 export default {
   title: 'Certificate',
@@ -8,6 +7,8 @@ export default {
 
 export const certificate = (): JSX.Element => (
   <Certificate
+    certificateTitle="Title for cert"
+    projectName="Project name"
     background="./certificate-bg.png"
     creditName="Carbon<i>Plus</i> Grasslands"
     creditsUnits={1000}

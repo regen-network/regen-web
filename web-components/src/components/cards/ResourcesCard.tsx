@@ -85,6 +85,7 @@ export default function ResourcesCard({
         >
           <OutlinedButton
             size="small"
+            // as={Link}
             target={target}
             href={link}
             startIcon={<EyeIcon />}

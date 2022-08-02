@@ -1,10 +1,7 @@
-import React from 'react';
-import Question, {
-  QuestionItem,
-} from 'web-components/lib/components/faq/Question';
-import Category from 'web-components/lib/components/faq/Category';
-import Navigation from 'web-components/lib/components/faq/Navigation';
-import FAQ from 'web-components/lib/components/faq';
+import Question, { QuestionItem } from './Question';
+import Category from './Category';
+import Navigation from './Navigation';
+import FAQ from './';
 
 export default {
   title: 'FAQ',

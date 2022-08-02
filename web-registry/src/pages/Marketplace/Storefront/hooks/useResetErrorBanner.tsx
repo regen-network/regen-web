@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { DEFAULT_DURATION } from 'web-components/lib/components/banner/ErrorBanner';
-import { useStateSetter } from '../../../../types/react/use-state';
+import { UseStateSetter } from '../../../../types/react/use-state';
 
 type Props = {
   displayErrorBanner: boolean;
-  setDisplayErrorBanner: useStateSetter<boolean>;
+  setDisplayErrorBanner: UseStateSetter<boolean>;
 };
 
 export const useResetErrorBanner = ({
   displayErrorBanner,
   setDisplayErrorBanner,
-}: Props) => {
+}: Props): void => {
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     if (displayErrorBanner) {

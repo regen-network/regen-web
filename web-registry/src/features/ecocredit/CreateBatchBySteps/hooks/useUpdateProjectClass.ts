@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { ClassID } from '../../../../types/ledger/ecocredit';
 
+// eslint-disable-next-line
 export default function useUpdateProjectClass(projectId: string) {
   const [classId, setClassId] = useState<ClassID>();
   const [isVCS, setIsVCS] = useState<boolean>();

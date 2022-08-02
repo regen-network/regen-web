@@ -88,12 +88,12 @@ export const Storefront = (): JSX.Element => {
     [batchInfos, sellOrders, projectsInfosByHandleMap],
   );
 
-  const handleTxQueued = () => setIsProcessingModalOpen(true);
-  const handleTxDelivered = () => {
+  const handleTxQueued = (): void => setIsProcessingModalOpen(true);
+  const handleTxDelivered = (): void => {
     setIsProcessingModalOpen(false);
     refetchSellOrders();
   };
-  const handleError = () => setIsProcessingModalOpen(false);
+  const handleError = (): void => setIsProcessingModalOpen(false);
   const handleTxModalClose = (): void => {
     setCardItems(undefined);
     setTxModalTitle('');

@@ -32,7 +32,7 @@ export default function useQueryListBatchInfo(
         )
           .then(setDataList)
           .catch(e => {
-            console.error(e);
+            console.error(e); // eslint-disable-line no-console
             setDataList([]);
           });
       }

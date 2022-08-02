@@ -1,6 +1,5 @@
 import React from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
@@ -14,8 +13,8 @@ import { CardItem } from 'web-components/lib/components/modal/TxModal';
 import { BrokenLinkIcon } from 'web-components/lib/components/icons/BrokenLinkIcon';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { Link } from '../../../../components/atoms';
-import { getAccountUrl, getHashUrl } from '../../../../lib/block-explorer';
+import { Link } from 'components/atoms';
+import { getAccountUrl, getHashUrl } from 'lib/block-explorer';
 
 function parseSuccessResponseLog(
   responseLogEvents: [any],
@@ -129,8 +128,6 @@ const SuccessResult = ({
   recipients,
   txHash,
 }: SuccessProps): React.ReactElement => {
-  const navigate = useNavigate();
-
   return (
     <>
       <OnBoardingCard>
@@ -157,9 +154,7 @@ const SuccessResult = ({
         />
       </OnBoardingCard>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <OutlinedButton
-          onClick={() => navigate(`/credit-batches/${batchDenom}`)}
-        >
+        <OutlinedButton component={Link} href={`/credit-batches/${batchDenom}`}>
           SEE CREDIT BATCH
         </OutlinedButton>
       </Box>
@@ -172,8 +167,6 @@ type ErrorResultProps = {
 };
 
 const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
-  const navigate = useNavigate();
-
   return (
     <>
       <Box
@@ -207,7 +200,7 @@ const ErrorResult = ({ error }: ErrorResultProps): React.ReactElement => {
         />
       </OnBoardingCard>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <OutlinedButton onClick={() => navigate('/ecocredits/dashboard')}>
+        <OutlinedButton href="/ecocredits/dashboard" component={Link}>
           SEE ALL CREDIT BATCHES
         </OutlinedButton>
       </Box>

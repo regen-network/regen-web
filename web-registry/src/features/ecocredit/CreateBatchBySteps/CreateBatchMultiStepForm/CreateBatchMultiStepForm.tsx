@@ -8,7 +8,7 @@ import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import NotFound from 'web-components/lib/components/not-found';
 import RotationalGrazing from '../../../../assets/rotational-grazing.png';
 
-import { useMultiStep } from '../../../../components/templates/MultiStep';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import formModel from '../form-model';
 import useCreateBatchSubmit from '../hooks/useCreateBatchSubmit';
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
@@ -115,7 +115,6 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
         {({ submitForm, isValid, isSubmitting }) => (
           <Form id={formModel.formId}>
             {renderStep(activeStep)}
-
             {!isLastStep && (
               <SaveFooter
                 onPrev={activeStep > 0 ? handleBack : undefined}

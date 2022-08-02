@@ -187,7 +187,7 @@ async function setType(
     shouldValidate?: boolean | undefined,
   ) => void,
 ): Promise<void> {
-  const fieldName: string = `['${role}'].['@type']`;
+  const fieldName = `['${role}'].['@type']`;
   await setFieldValue(
     fieldName,
     value ? [`regen:${type}`, `regen:${type}Display`] : `regen:${type}`,
@@ -396,7 +396,7 @@ const EntityDisplayForm: React.FC<EntityDisplayFormProps> = ({
         }}
         validate={async (values: EntityDisplayValues): Promise<Errors> => {
           const errors: Errors = {};
-          let validateProject: boolean = true;
+          let validateProject = true;
           if (graphData?.shaclGraphByUri?.graph) {
             // Validate role specific data so we can display field specific errors
             // for roles shown on project page

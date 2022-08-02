@@ -30,7 +30,7 @@ function useGetCreditClassOptions(): {
   const { data: creditClassContentData } = useAllCreditClassQuery({ client });
 
   useEffect(() => {
-    const setupOptions = async () => {
+    const setupOptions = async (): Promise<void> => {
       if (!wallet?.address || onChainClasses?.length < 1) return;
 
       const offChainClasses =

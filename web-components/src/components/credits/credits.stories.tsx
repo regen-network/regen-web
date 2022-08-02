@@ -1,12 +1,10 @@
 import * as React from 'react';
-import CreditDetails, {
-  CreditInfoProps,
-} from 'web-components/lib/components/credits/CreditDetails';
+import CreditDetails, { CreditInfoProps } from './CreditDetails';
 
-// import Credits from 'web-components/lib/components/credits/';
-// import Gauge from 'web-components/lib/components/credits/Gauge';
-// import GaugeText from 'web-components/lib/components/credits/GaugeText';
-import CreditsGauge from 'web-components/lib/components/credits/CreditsGauge';
+// import Credits from './';
+// import Gauge from './Gauge';
+// import GaugeText from './GaugeText';
+import CreditsGauge from './CreditsGauge';
 
 // const credit: CreditsProps = {
 //   numberOfHolders: 1021,
@@ -21,8 +19,11 @@ export default {
 };
 
 const details: CreditInfoProps = {
+  title: 'title',
   creditClass: {
     name: 'Australian Biodiversity Units (ABU’s)',
+    keyOutcomesActivitiesDesc:
+      'description for outcomes lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
     tag: 'soil',
     description:
       'ABU’s are an Australian Government endorsed biodiversity credit. An individual ABU represents a 1.5m square area of land of significant environmental value that has been placed under a conservation covenant and agreed management plan. The covenant and management plan secure the long term preservation of the site and ensure the biodiversity value is protected in perpetuity. Vegetation types may include forests, grasslands, mallees, saltmarshes, scrubs, shrublands, wetlands, and woodlands. ABU’s are an innovative and unique way for organisations to preserve a tangible section of Australia’s unique natural habitat.',

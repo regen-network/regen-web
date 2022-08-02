@@ -38,7 +38,7 @@ export const ProjectReview: React.FC = () => {
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
 
-  const closeSubmitModal = () => setIsSubmitModalOpen(false);
+  const closeSubmitModal = (): void => setIsSubmitModalOpen(false);
 
   const handleTxQueued = (): void => {
     setIsSubmitModalOpen(true);
@@ -73,7 +73,7 @@ export const ProjectReview: React.FC = () => {
   const txHashUrl = getHashUrl(txHash);
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
 
-  const submit = () => {
+  const submit = (): void => {
     const vcsProjectId = metadata?.['regen:videoURL']?.['@value'];
     projectCreateSubmit({
       classId: creditClassId || '',

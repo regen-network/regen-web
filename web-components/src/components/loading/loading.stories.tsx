@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { Loading } from 'web-components/lib/components/loading';
+import { Loading } from '.';
 
 export default {
   title: 'Loading',

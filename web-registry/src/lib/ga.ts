@@ -22,7 +22,7 @@ function determineClientId(): number {
 }
 
 function initializeGA(): void {
-  var gaOptions = {};
+  let gaOptions = {};
   if (!isCookiesEnabled()) {
     const clientFingerprint = determineClientId();
     gaOptions = {

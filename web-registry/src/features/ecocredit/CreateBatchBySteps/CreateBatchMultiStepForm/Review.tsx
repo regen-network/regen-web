@@ -12,7 +12,7 @@ import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-ca
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 
-import { useMultiStep } from '../../../../components/templates/MultiStep';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
 import { CreditBasicsFormValues } from './CreditBasics';
 import { RecipientFormValues } from './Recipients';

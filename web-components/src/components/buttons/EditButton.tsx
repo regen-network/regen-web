@@ -15,7 +15,6 @@ function EditButton({ onClick }: ButtonProps): JSX.Element {
       sx={{
         border: 'none',
         maxWidth: '100px',
-        alignSelf: 'flex-end',
       }}
       onClick={onClick}
       startIcon={<EditIcon sx={{ height: 13, width: 13 }} />}

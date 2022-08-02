@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import DropdownIcon from '../icons/DropdownIcon';
-import { User } from '../user/UserInfo';
 
 interface PartyAddressProps {
   name: string;

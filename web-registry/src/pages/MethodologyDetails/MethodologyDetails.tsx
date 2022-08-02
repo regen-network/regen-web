@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { useParams } from 'react-router-dom';
 
@@ -29,7 +28,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 
 function MethodologyDetails(): JSX.Element {
   const styles = useStyles();
-  let { methodologyId } = useParams();
+  const { methodologyId } = useParams();
   const { data } = useAllMethodologyQuery({ client });
   const content = data?.allMethodology?.find(
     methodology => methodology.path === methodologyId,

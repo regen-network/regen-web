@@ -1,1 +1,3 @@
-export { ReviewCard as default } from './ReviewCard';
+export * from './ReviewCard';
+export * from './ReviewCard.ItemDisplay';
+export * from './ReviewCard.Photo';

@@ -20,7 +20,7 @@ function getDefaultMobileVariant(variant: Variant): Variant {
   }
 }
 
-interface Props extends TypographyProps {
+export interface TitleProps extends TypographyProps {
   variant?: Variant;
   mobileVariant?: Variant;
 }
@@ -28,7 +28,7 @@ interface Props extends TypographyProps {
 export const Title = styled(Typography, {
   name: 'RegenTitle',
   shouldForwardProp: prop => prop !== 'mobileVariant',
-})<Props>(({ theme, mobileVariant, variant = 'h1' }) => {
+})<TitleProps>(({ theme, mobileVariant, variant = 'h1' }) => {
   const { breakpoints, typography } = theme;
   const { up, down } = breakpoints;
   const typographyVariant = typography[variant];

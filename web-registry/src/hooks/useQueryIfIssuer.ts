@@ -13,7 +13,7 @@ export default function useQueryIfIssuer(): boolean {
   const onChainClasses = useQueryListClasses();
 
   useEffect(() => {
-    const queryIfIssuer = async () => {
+    const queryIfIssuer = async (): Promise<void> => {
       if (!wallet?.address || !onChainClasses?.classes?.length) {
         setIsIssuer(false);
         return;

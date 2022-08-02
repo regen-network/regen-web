@@ -3,35 +3,22 @@ import { FormValues as CreateSellOrderFormValues } from 'web-components/lib/comp
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
-<<<<<<< HEAD:web-registry/src/pages/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx
 import { MsgSell } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
-import { useStateSetter } from '../../../types/react/use-state';
-=======
-
 import { UseStateSetter } from 'types/react/use-state';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044)):web-registry/src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx
 import {
   CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_HEADER,
 } from '../MyEcocredits.contants';
 import { Box } from '@mui/material';
-import { SignAndBroadcastType } from '../../../hooks/useMsgClient';
+import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 type Props = {
-<<<<<<< HEAD:web-registry/src/pages/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx
   accountAddress?: string;
   signAndBroadcast: SignAndBroadcastType;
-  setCardItems: useStateSetter<Item[] | undefined>;
-  setTxModalHeader: useStateSetter<string | undefined>;
-  setTxButtonTitle: useStateSetter<string | undefined>;
-  setSellOrderCreateOpen: useStateSetter<number>;
-=======
   setCardItems: UseStateSetter<Item[] | undefined>;
-  setTxModalTitle: UseStateSetter<string | undefined>;
   setTxModalHeader: UseStateSetter<string | undefined>;
   setTxButtonTitle: UseStateSetter<string | undefined>;
   setSellOrderCreateOpen: UseStateSetter<number>;
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044)):web-registry/src/pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit.tsx
 };
 
 type ReturnType = (values: CreateSellOrderFormValues) => Promise<void>;

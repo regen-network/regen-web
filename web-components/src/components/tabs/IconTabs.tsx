@@ -41,16 +41,6 @@ const IconTabs: React.FC<IconTabsProps> = ({ tabs }) => {
           ))}
         </StyledTabs>
       </div>
-<<<<<<< HEAD
-      {tabs.map(
-        (tab, index) =>
-          value === index && (
-            <TabPanel value={value} index={index} key={tab.label}>
-              {tab.content}
-            </TabPanel>
-          ),
-      )}
-=======
       {tabs.map((tab, index) => (
         <TabPanel
           key={index}
@@ -61,7 +51,6 @@ const IconTabs: React.FC<IconTabsProps> = ({ tabs }) => {
           {tab.content}
         </TabPanel>
       ))}
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
     </div>
   );
 };

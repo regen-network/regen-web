@@ -5,24 +5,9 @@ import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit
 import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-<<<<<<< HEAD:web-registry/src/features/ecocredit/CreateBatchBySteps/hooks/useCreateBatchSubmit.ts
-import { useLedger } from '../../../../ledger';
-import useMsgClient from '../../../../hooks/useMsgClient';
-import {
-  generateIri,
-  IriFromMetadataSuccess,
-} from '../../../../lib/metadata-graph';
-=======
 import { useLedger } from 'ledger';
 import { useMsgClient } from 'hooks';
-import {
-  generateIri,
-  IriFromMetadataSuccess,
-  stringToUint8Array,
-} from 'lib/metadata-graph';
-
-import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044)):web-registry/src/features/ecocredit/CreateBatchBySteps/useCreateBatch.ts
+import { generateIri, IriFromMetadataSuccess } from 'lib/metadata-graph';
 
 import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
@@ -77,7 +62,6 @@ async function prepareMsg(
     throw new Error(err as string);
   }
 
-<<<<<<< HEAD:web-registry/src/features/ecocredit/CreateBatchBySteps/hooks/useCreateBatchSubmit.ts
   // finally, build de Msg for Tx
   const issuance: BatchIssuance[] = data.recipients.map(recipient => {
     let issuanceRecipient: Partial<BatchIssuance> = {
@@ -92,23 +76,6 @@ async function prepareMsg(
     }
     return issuanceRecipient as BatchIssuance;
   });
-=======
-  // finally, build de Msg DTO
-  const issuance: MsgCreateBatch_BatchIssuance[] = data.recipients.map(
-    recipient => {
-      const issuanceRecipient: Partial<MsgCreateBatch_BatchIssuance> = {
-        recipient: recipient.recipient,
-        tradableAmount: recipient.tradableAmount.toString(),
-        retiredAmount: '0',
-      };
-      if (recipient.withRetire && recipient.retiredAmount > 0) {
-        issuanceRecipient.retiredAmount = recipient.retiredAmount.toString();
-        issuanceRecipient.retirementLocation = recipient.retirementLocation;
-      }
-      return issuanceRecipient as MsgCreateBatch_BatchIssuance;
-    },
-  );
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044)):web-registry/src/features/ecocredit/CreateBatchBySteps/useCreateBatch.ts
 
   return MsgCreateBatch.fromPartial({
     issuer,

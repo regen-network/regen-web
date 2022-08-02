@@ -23,70 +23,7 @@ const RegistryNav: React.FC = () => {
   const desktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-<<<<<<< HEAD
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
-=======
-  const fullWidthRegExp = /projects\/[a-z-]+/;
-  const { data: projectsData } = useMoreProjectsQuery();
-
-  //  each custom dropdown still needs to be passed `dropdownItems` to render
-  //  correctly on mobile, so I declare here to avoid duplicate code
-
-  const carbonPlusItems: HeaderDropdownItemProps[] = [
-    {
-      pathname,
-      linkComponent: RegistryNavLink,
-      title: 'Carbon<i>Plus</i> Grasslands credit class',
-      href: '/credit-classes/carbonplus-grasslands',
-      svg: Cow /* , right: () => <PeerReviewed /> */,
-    },
-    {
-      pathname,
-      linkComponent: RegistryNavLink,
-      title: 'Carbon<i>Plus</i> Grasslands methodology',
-      href: '/methodologies/carbonplus-grasslands',
-      svg: Cow,
-      /* right: () => <PeerReviewed />, */
-    },
-  ];
-
-  const programHowToItems: HeaderDropdownItemProps[] = [
-    {
-      pathname,
-      linkComponent: NavLink,
-      href: 'https://library.regen.network/v/regen-registry-program-guide/',
-      title: 'Program Guide',
-    },
-    // { href: '/create-credit-class', title: 'Create a Credit Class', linkComponent: RegistryNavLink },
-    {
-      pathname,
-      href: '/create-methodology',
-      title: 'Create a Methodology',
-      linkComponent: RegistryNavLink,
-    },
-    {
-      pathname,
-      href: '/methodology-review-process',
-      title: 'Methodology Review Process',
-      linkComponent: RegistryNavLink,
-    },
-    {
-      pathname,
-      href: 'https://library.regen.network/',
-      title: 'Regen Registry Library',
-      linkComponent: RegistryNavLink,
-    },
-    // { href: '/become-a-monitor', title: 'Become a Monitor' },
-    // { href: '/become-a-verifier', title: 'Become a Verifier' },
-  ];
-
-  /** for pages where we don't want to render full `name` */
-  const titleAlias: { [title: string]: string } = {
-    'The Kasigau Corridor REDD Project - Phase II The Community Ranches':
-      'Kasigau Corridor',
-    'The Mai Ndombe REDD+ Project': 'Mai Ndombe',
-  };
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
 
   const menuItems: HeaderMenuItem[] = [
     {

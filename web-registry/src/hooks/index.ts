@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-=======
 export { default as useBankQuery } from './useBankQuery';
-export { default as useBasketDetails } from './useBasketDetails';
 export { default as useBasketQuery } from './useBasketQuery';
 export { default as useBasketsWithClasses } from './useBasketsWithClasses';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
 export { default as useBasketTokens } from './useBasketTokens';
 export { default as useEcocreditQuery } from './useEcocreditQuery';
 export { default as useEcocredits } from './useEcocredits';

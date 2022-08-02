@@ -11,17 +11,10 @@ import OnBoardingCard from './OnBoardingCard';
 import { User } from '../user/UserInfo';
 
 // import CreditCard, { CreditInfo } from './CreditCard';
-<<<<<<< HEAD
-import CreateProjectCard from './CreateProjectCard';
-import PurchasedCreditsCard from './PurchasedCreditsCard';
-import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
-import TrustIcon from '../icons/TrustIcon';
-=======
 import PurchasedCreditsCard from './PurchasedCreditsCard';
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import TrustIcon from '../icons/TrustIcon';
 import ProjectCard from './ProjectCard';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
 import GreenCard from './GreenCard';
 import GreenTopIconCard from './GreenTopIconCard';
 import { ImageActionCard } from './ImageActionCard';
@@ -30,13 +23,9 @@ import FarmerIcon from '../icons/FarmerIcon';
 import { OverviewCard } from './OverviewCard';
 import ResourcesCard from './ResourcesCard';
 import { QuestionItem } from '../faq/Question';
-<<<<<<< HEAD
-import ProjectCard from './ProjectCard';
-import ReviewCard from './ReviewCard';
+import { ReviewCard } from './ReviewCard';
 import { ItemDisplay } from './ReviewCard/ReviewCard.ItemDisplay';
 import { Photo } from './ReviewCard/ReviewCard.Photo';
-=======
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
 
 export default {
   title: 'Cards',

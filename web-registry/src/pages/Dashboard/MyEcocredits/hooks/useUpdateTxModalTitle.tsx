@@ -1,15 +1,16 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useEffect } from 'react';
-import { useStateSetter } from '../../../types/react/use-state';
+import { UseStateSetter } from 'types/react/use-state';
 
 type Props = {
   deliverTxResponse?: DeliverTxResponse;
-  setTxModalTitle: useStateSetter<string | undefined>;
+  setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
 const SELL_ORDER_EVENT_TYPE = 'regen.ecocredit.marketplace.v1.EventSell';
 const SELL_ORDER_ATTRIBUTE_KEY = 'sell_order_id';
 
+// eslint-disable-next-line
 export const useUpdateTxModalTitle = ({
   deliverTxResponse,
   setTxModalTitle,

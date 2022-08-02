@@ -16,15 +16,10 @@ import {
   queryClassInfo,
   queryClasses,
   queryCreditTypes,
-<<<<<<< HEAD
   queryProjects,
   queryProjectsByAdmin,
   queryProject,
 } from '../lib/ecocredit/api';
-=======
-  EcocreditQueryResponse,
-} from 'lib/ecocredit/api';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
 
 // TODO - this hook is still missing batch query functionality
 // TODO - this hook is still missing lazy query functionality

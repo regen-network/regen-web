@@ -13,6 +13,7 @@ type NormalizeprojectsInfosByHandleMapProps = {
   onChainProjects?: ProjectInfo[];
 };
 
+// eslint-disable-next-line
 export const normalizeProjectsInfosByHandleMap = ({
   offChainProjects,
   onChainProjects = [],

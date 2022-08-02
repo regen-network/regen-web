@@ -5,26 +5,17 @@ import * as Yup from 'yup';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-import NotFound from 'web-components/lib/components/not-found';
-import RotationalGrazing from '../../../../assets/rotational-grazing.png';
 
-<<<<<<< HEAD
-import { useMultiStep } from '../../../../components/templates/MultiStep';
-=======
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
 import formModel from '../form-model';
 import useCreateBatchSubmit from '../hooks/useCreateBatchSubmit';
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
 import Review from './Review';
 import Result from './Result';
-<<<<<<< HEAD
-=======
 import NotFound from 'web-components/lib/components/not-found';
 import RotationalGrazing from 'assets/rotational-grazing.png';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
 
 /**
  *
@@ -125,11 +116,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
         {({ submitForm, isValid, isSubmitting }) => (
           <Form id={formModel.formId}>
             {renderStep(activeStep)}
-<<<<<<< HEAD
-
-=======
             {/* TODO ? - Move to: MultiStepTemplate > StepperSection > StepperControls */}
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
             {!isLastStep && (
               <SaveFooter
                 onPrev={activeStep > 0 ? handleBack : undefined}

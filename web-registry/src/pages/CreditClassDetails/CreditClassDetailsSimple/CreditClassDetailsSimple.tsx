@@ -10,23 +10,11 @@ import ReadMore from 'web-components/lib/components/read-more';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-<<<<<<< HEAD:web-registry/src/pages/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx
-import { Link } from '../../components/atoms';
-import {
-  EcocreditsSection,
-  LineItemLabelAbove,
-} from '../../components/molecules';
-import { CreditBatches, MoreProjectsSection } from '../../components/organisms';
-import { getAccountUrl } from '../../lib/block-explorer';
-import { CreditClassByOnChainIdQuery } from '../../generated/graphql';
-=======
 import { Link } from 'components/atoms';
 import { EcocreditsSection, LineItemLabelAbove } from 'components/molecules';
 import { CreditBatches, MoreProjectsSection } from 'components/organisms';
 import { getAccountUrl } from 'lib/block-explorer';
-import { ClassInfo } from 'types/ledger/ecocredit';
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044)):web-registry/src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx
 import {
   CreditClassMetadataLD,
   ApprovedMethodologies,
@@ -134,7 +122,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
     return (
       {
         // eslint-disable-next-line prettier/prettier
-        'C': 'Carbon',
+        C: 'Carbon',
       }[creditTypeAbbrev] || creditTypeAbbrev
     );
   };

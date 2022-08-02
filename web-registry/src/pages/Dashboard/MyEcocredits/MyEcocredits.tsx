@@ -1,4 +1,5 @@
 import { SxProps, useTheme } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { useState } from 'react';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
@@ -25,17 +26,7 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-<<<<<<< HEAD:web-registry/src/pages/MyEcocredits/MyEcocredits.tsx
-// import { ReactComponent as WithdrawIBC } from '../../assets/svgs/withdraw-ibc.svg';
-// import { ReactComponent as DepositIBC } from '../../assets/svgs/deposit-ibc.svg';
-// import { ReactComponent as Sell } from '../../assets/svgs/sell.svg';
 import AvailableCreditsIconAlt from 'web-components/lib/components/icons/AvailableCreditsIconAlt';
-import { ReactComponent as PutInBasket } from '../../assets/svgs/put-in-basket.svg';
-import { ReactComponent as TakeFromBasket } from '../../assets/svgs/take-from-basket.svg';
-import { Link } from '../../components/atoms';
-import { Portfolio } from '../../components/organisms/Portfolio';
-=======
-import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
 
 // import { ReactComponent as WithdrawIBC } from 'assets/svgs/withdraw-ibc.svg';
 // import { ReactComponent as DepositIBC } from 'assets/svgs/deposit-ibc.svg';
@@ -44,7 +35,6 @@ import { ReactComponent as PutInBasket } from 'assets/svgs/put-in-basket.svg';
 import { ReactComponent as TakeFromBasket } from 'assets/svgs/take-from-basket.svg';
 import { Link } from 'components/atoms';
 import { Portfolio } from 'components/organisms/Portfolio';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044)):web-registry/src/pages/Dashboard/MyEcocredits/MyEcocredits.tsx
 import {
   useBasketsWithClasses,
   useBasketTokens,
@@ -71,12 +61,8 @@ import {
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
-<<<<<<< HEAD:web-registry/src/pages/MyEcocredits/MyEcocredits.tsx
-import { useNavigate } from 'react-router-dom';
 import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
-=======
 import type { BasketTokens } from 'hooks/useBasketTokens';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044)):web-registry/src/pages/Dashboard/MyEcocredits/MyEcocredits.tsx
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);

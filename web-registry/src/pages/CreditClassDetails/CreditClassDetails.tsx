@@ -6,24 +6,13 @@ import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import {
   useCreditClassByOnChainIdQuery,
   useCreditClassByUriQuery,
-<<<<<<< HEAD
-} from '../../generated/graphql';
-import { client } from '../../sanity';
-import CreditClassDetailsWithContent from '../CreditClassDetailsWithContent';
-import CreditClassDetailsSimple from '../CreditClassDetailsSimple';
-import { queryEcoClassInfo, queryClassIssuers } from '../../lib/ecocredit/api';
-import { getMetadata } from '../../lib/metadata-graph';
-import { onChainClassRegExp } from '../../lib/ledger';
-=======
 } from 'generated/graphql';
 import { client } from 'sanity';
-import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
-import CreditClassDetailsSimple from './CreditClassDetailsSimple';
-import { queryEcoClassInfo } from 'lib/ecocredit/api';
+import { queryEcoClassInfo, queryClassIssuers } from 'lib/ecocredit/api';
 import { getMetadata } from 'lib/metadata-graph';
 import { onChainClassRegExp } from 'lib/ledger';
-import { ClassInfo } from 'types/ledger/ecocredit';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
+import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
+import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 
 interface CreditDetailsProps {
   isLandSteward?: boolean;

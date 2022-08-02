@@ -1,20 +1,11 @@
 import { useState, useEffect } from 'react';
 
-<<<<<<< HEAD
-import { useQueryListClassesWithMetadata } from '../../../hooks/useQueryListClassesWithMetadata';
-import { client } from '../../../sanity';
-import { useAllCreditClassQuery } from '../../../generated/sanity-graphql';
-import { useAllCreditClassesQuery } from '../../../generated/graphql';
-import { useWallet } from '../../../lib/wallet';
-import { queryClassIssuers } from '../../../lib/ecocredit/api';
-=======
+import useQueryListClassesWithMetadata from 'hooks/useQueryListClassesWithMetadata';
 import { client } from 'sanity';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { useAllCreditClassesQuery } from 'generated/graphql';
 import { useWallet } from 'lib/wallet';
-
-import { useQueryListClassesWithMetadata } from 'hooks';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
+import { queryClassIssuers } from 'lib/ecocredit/api';
 
 interface CreditClassOption {
   id: string;
@@ -39,6 +30,7 @@ function useGetCreditClassOptions(): {
   const { data: creditClassContentData } = useAllCreditClassQuery({ client });
 
   useEffect(() => {
+    // eslint-disable-next-line
     const setupOptions = async () => {
       if (!wallet?.address || onChainClasses?.length < 1) return;
 

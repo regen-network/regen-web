@@ -7,10 +7,7 @@ const SIZES = {
   md: 18,
   sm: 14,
   xs: 12,
-<<<<<<< HEAD
   xxs: 10,
-=======
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
 };
 
 const LINE_HEIGHTS = {
@@ -19,10 +16,7 @@ const LINE_HEIGHTS = {
   md: 23,
   sm: 18,
   xs: 15,
-<<<<<<< HEAD
   xxs: 12,
-=======
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
 };
 
 interface Props extends ButtonProps {

@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-import { InputAdornment, InputProps, SxProps } from '@mui/material';
-import { DefaultTheme as Theme } from '@mui/styles';
-=======
 import React from 'react';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { InputProps, InputAdornment, SxProps } from '@mui/material';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
 import { FieldProps } from 'formik';
-import React from 'react';
 
 import { Body } from '../typography';
 import FieldFormControl, { DefaultStyleProps } from './FieldFormControl';

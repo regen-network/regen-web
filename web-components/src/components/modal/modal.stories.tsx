@@ -2,20 +2,6 @@ import React, { useState } from 'react';
 import { Button, Card, Avatar, CardMedia, Link } from '@mui/material';
 import Long from 'long';
 
-<<<<<<< HEAD
-import Modal from 'web-components/lib/components/modal';
-import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
-import CropImageModal from 'web-components/lib/components/modal/CropImageModal';
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
-import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
-import { CreditSendModal } from 'web-components/lib/components/modal/CreditSendModal';
-import { CreditRetireModal } from 'web-components/lib/components/modal/CreditRetireModal';
-import { BasketPutModal } from 'web-components/lib/components/modal/BasketPutModal';
-import { BasketTakeModal } from 'web-components/lib/components/modal/BasketTakeModal';
-import { CreateSellOrderModal } from 'web-components/src/components/modal/CreateSellOrderModal';
-import { ConfirmModal } from './ConfirmModal';
-=======
 import Modal from '.';
 import IssuanceModal from './IssuanceModal';
 import CropImageModal from './CropImageModal';
@@ -27,7 +13,7 @@ import { CreditRetireModal } from './CreditRetireModal';
 import { BasketPutModal } from './BasketPutModal';
 import { BasketTakeModal } from './BasketTakeModal';
 import { CreateSellOrderModal } from './CreateSellOrderModal';
->>>>>>> 7755e82f (Feat: Create credit class UI + absolute paths, storybook in registry (#1044))
+import { ConfirmModal } from './ConfirmModal';
 
 export default {
   title: 'Modal',
@@ -239,7 +225,7 @@ export const txSuccessfulModal = (): JSX.Element => (
     open={true}
     onClose={() => {}}
     linkComponent={Link}
-    onViewPortfolio={() => alert('view on portofolio')}
+    onButtonClick={() => alert('view on portofolio')}
     cardTitle="Put in basket"
     txHash="3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
     txHashUrl="https://redwood.regen.aneka.io/txs/3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
@@ -254,7 +240,7 @@ export const txErrorModal = (): JSX.Element => (
     open={true}
     onClose={() => {}}
     linkComponent={Link}
-    onViewPortfolio={() => alert('view on portofolio')}
+    onButtonClick={() => alert('view on portofolio')}
     cardTitle="Put in basket"
     txHash="3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
     txHashUrl="https://redwood.regen.aneka.io/txs/3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
@@ -302,8 +288,8 @@ export const basketTakeModal = (): JSX.Element => (
     accountAddress="123xyz"
     basketDisplayDenom="eco.C.rNCT"
     basket={{
-      id: new Long(1),
-      $type: 'regen.ecocredit.basket.v1.Basket',
+      curator: 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4',
+      $type: 'regen.ecocredit.basket.v1.BasketInfo',
       name: 'rNCT',
       basketDenom: 'eco.uC.rNCT',
       creditTypeAbbrev: 'C',

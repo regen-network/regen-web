@@ -95,8 +95,8 @@ export const basketTakeForm = (): JSX.Element => (
     accountAddress="123xyz"
     basketDisplayDenom="eco.C.rNCT"
     basket={{
-      id: new Long(1),
-      $type: 'regen.ecocredit.basket.v1.Basket',
+      curator: 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4',
+      $type: 'regen.ecocredit.basket.v1.BasketInfo',
       name: 'rNCT',
       basketDenom: 'eco.uC.rNCT',
       creditTypeAbbrev: 'C',

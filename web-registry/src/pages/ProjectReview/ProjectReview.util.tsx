@@ -27,11 +27,12 @@ export const getOnChainProjectId = (
 export const getJurisdiction = async (
   metadata: Partial<ProjectMetadataLD> | Partial<VCSProjectMetadataLD>,
 ): Promise<string | undefined> => {
-  if (!mapboxToken) return Promise.reject();
+  if (!mapboxToken) return Promise.reject('Missing map API token');
   let isoString;
   const location = metadata?.['schema:location'];
-  console.log('location', location);
-  if (!location) return Promise.resolve('');
+  if (!location?.context || !location?.place_name) {
+    return Promise.reject('Please select a location for this project.');
+  }
   const context: GeocodeFeature[] = location?.context || [];
   let countryKey = '';
   let stateProvince = '';
@@ -73,9 +74,6 @@ export const getJurisdiction = async (
       postalCode,
     });
   } catch (err) {
-    // initially this effect may fail mainly because the accessToken
-    // (mapboxToken) is not set in the environment variables.
-    console.error(err);
     return Promise.reject(err);
   }
   return Promise.resolve(isoString);

@@ -10,6 +10,7 @@ import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/Revi
 import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
 import { getOnChainProjectId, getJurisdiction } from './ProjectReview.util';
@@ -40,6 +41,7 @@ export const ProjectReview: React.FC = () => {
   });
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+  const [bannerError, setBannerError] = useState('');
   const [updateProject] = useUpdateProjectByIdMutation();
 
   const closeSubmitModal = () => setIsSubmitModalOpen(false);
@@ -89,12 +91,20 @@ export const ProjectReview: React.FC = () => {
   const txHashUrl = getHashUrl(txHash);
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
   const submit = async () => {
-    const jurisdiction = await getJurisdiction(metadata);
-    // eslint-disable-next-line
-    console.log(
-      'Jurisdiction ISO string based on location provided:',
-      jurisdiction,
-    );
+    let jurisdiction;
+    try {
+      jurisdiction = await getJurisdiction(metadata);
+      // eslint-disable-next-line
+      console.log(
+        'Jurisdiction ISO string based on location provided:',
+        jurisdiction,
+      );
+    } catch (err) {
+      setBannerError(
+        `Error getting ISO string for jurisdiction: ${err as string}`,
+      );
+      return;
+    }
     const vcsProjectId = metadata?.['regen:vcsProjectId'];
     await projectCreateSubmit({
       classId: creditClassId || '',
@@ -223,6 +233,7 @@ export const ProjectReview: React.FC = () => {
           buttonTitle="close"
         />
       )}
+      {bannerError && <ErrorBanner text={bannerError} />}
     </OnboardingFormTemplate>
   );
 };

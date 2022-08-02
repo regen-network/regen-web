@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
 import cx from 'clsx';
 
 import Section from 'web-components/lib/components/section';
-import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncateHash } from 'web-components/lib/utils/truncate';
 

@@ -1,11 +1,10 @@
-import React, { lazy, Suspense, useState } from 'react';
-import { CircularProgress } from '@mui/material';
+import React, { lazy, Suspense } from 'react';
 import bbox from '@turf/bbox';
 import { FeatureCollection } from 'geojson';
-
-import PinIcon from '../icons/PinIcon';
-
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { useState } from 'react';
+import PinIcon from '../icons/PinIcon';
+import { CircularProgress } from '@mui/material';
 
 const StaticMap = lazy(() => import('./lib/StaticMap'));
 const Marker = lazy(() => import('./lib/Marker'));

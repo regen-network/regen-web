@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, Collapse, FormControlLabel } from '@mui/material';
+import { FormControlLabel, Collapse, Box } from '@mui/material';
 import { FieldProps } from 'formik';
 
 import InfoIconOutlined from '../icons/InfoIconOutlined';
-import Checkbox from '../inputs/Checkbox';
-import Radio from '../inputs/Radio';
 import Tooltip from '../tooltip/InfoTooltip';
+import Radio from '../inputs/Radio';
+import Checkbox from '../inputs/Checkbox';
 import { Body } from '../typography';
 
 interface ToggleProps extends FieldProps {

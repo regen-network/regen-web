@@ -1,14 +1,14 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
 import {
-  VictoryAxis,
   VictoryBar,
-  VictoryBarProps,
   VictoryChart,
-  VictoryContainer,
-  VictoryLabel,
+  VictoryAxis,
   VictoryTheme,
   VictoryTooltip,
+  VictoryContainer,
+  VictoryBarProps,
+  VictoryLabel,
 } from 'victory';
 
 export interface BarChartProps extends VictoryBarProps {

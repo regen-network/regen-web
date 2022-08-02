@@ -1,19 +1,18 @@
-import { useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
+import { useParams } from 'react-router-dom';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-
-import topoBackground from '../../assets/background.jpg';
 import {
-  ImpactSection,
-  MethodologyDocumentationSection,
-  MethodologySteps,
-  MethodologyTestSection,
   MethodologyTopSection,
+  MethodologySteps,
+  MethodologyDocumentationSection,
+  ImpactSection,
   ResourcesSection,
+  MethodologyTestSection,
 } from '../../components/organisms';
-import { useAllMethodologyQuery } from '../../generated/sanity-graphql';
 import mock from '../../mocks/mock.json';
+import topoBackground from '../../assets/background.jpg';
+import { useAllMethodologyQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({

@@ -2,11 +2,11 @@ import React from 'react';
 import { CardMedia } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import ImageGrid from 'web-components/lib/components/image-grid';
 import Card from 'web-components/lib/components/cards/Card';
 import { Image } from 'web-components/lib/components/image';
-import ImageGrid from 'web-components/lib/components/image-grid';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { ImageGridSection as ImageGridSectionProps } from '../../generated/sanity-graphql';
 

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { PageProps, navigate } from 'gatsby';
 import { makeStyles } from '@mui/styles';
-import { navigate, PageProps } from 'gatsby';
 
-import FAQ, { FAQProps } from 'web-components/lib/components/faq';
-import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-
 import SEO from '../components/seo';
+import Section from 'web-components/lib/components/section';
+import FAQ, { FAQProps } from 'web-components/lib/components/faq';
 
 interface Props extends PageProps, FAQProps {}
 

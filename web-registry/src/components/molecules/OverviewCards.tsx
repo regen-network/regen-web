@@ -2,10 +2,9 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
 import { OverviewCard } from 'web-components/lib/components/cards/OverviewCard';
-
-import { CardFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import { BlockContent } from 'web-components/lib/components/block-content';
+import { Maybe, CardFieldsFragment } from '../../generated/sanity-graphql';
 
 const useStyles = makeStyles(theme => ({
   wrap: {

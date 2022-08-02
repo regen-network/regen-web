@@ -1,10 +1,9 @@
 import React from 'react';
-import { TableSortLabel, TableSortLabelProps } from '@mui/material';
+import { withStyles } from '@mui/styles';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
-import { withStyles } from '@mui/styles';
-
+import { TableSortLabel, TableSortLabelProps } from '@mui/material';
 import DropdownIcon from '../icons/DropdownIcon';
 
 const StyledTableContainer = withStyles(theme => ({
@@ -102,9 +101,9 @@ const getTablePaginationPadding = (
 };
 
 export {
-  getTablePaginationPadding,
-  StyledTableCell,
   StyledTableContainer,
   StyledTableRow,
+  StyledTableCell,
   StyledTableSortLabel,
+  getTablePaginationPadding,
 };

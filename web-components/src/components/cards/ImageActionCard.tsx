@@ -1,13 +1,12 @@
 import React from 'react';
-import { CardContent, useTheme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
+import { makeStyles } from '@mui/styles';
+import { CardContent, useTheme } from '@mui/material';
 
-import { parseText } from '../../utils/textParser';
 import OutlinedButton from '../buttons/OutlinedButton';
 import MediaCard from '../cards/MediaCard';
+import { parseText } from '../../utils/textParser';
 import { Body, Title } from '../typography';
-
 import { Theme } from '~/theme/muiTheme';
 
 const useStyles = makeStyles((theme: Theme) => ({

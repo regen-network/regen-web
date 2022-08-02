@@ -1,13 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Body, Title } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import BackgroundSection from '../../components/BackgroundSection';
 import { BlockContent } from 'web-components/src/components/block-content';
 
-import BackgroundSection from '../../components/BackgroundSection';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 import type { DevCareersSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({

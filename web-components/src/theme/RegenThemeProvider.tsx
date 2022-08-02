@@ -1,13 +1,12 @@
+import {
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+} from '@mui/material/styles';
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import {
-  StyledEngineProvider,
-  Theme,
-  ThemeProvider,
-} from '@mui/material/styles';
 
 import theme from './muiTheme';
-
 import 'web-components/src/theme/index.css';
 
 declare module '@mui/styles/defaultTheme' {

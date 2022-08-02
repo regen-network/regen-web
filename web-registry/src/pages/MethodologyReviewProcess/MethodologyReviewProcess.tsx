@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
 import { makeStyles, useTheme } from '@mui/styles';
+import Box from '@mui/material/Box';
 
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 
-import fernImg from '../../assets/fern-in-hands.png';
-import topographyImg from '../../assets/topography-pattern-cutout-1.png';
-import typewriterReview from '../../assets/typewriter-review.png';
-import { WrappedStepCard } from '../../components/atoms';
 import {
-  BackgroundImgSection,
-  HeroAction,
   HeroTitle,
+  HeroAction,
   ReviewProcessInfo,
+  BackgroundImgSection,
 } from '../../components/molecules';
+import { WrappedStepCard } from '../../components/atoms';
+
+import typewriterReview from '../../assets/typewriter-review.png';
+import topographyImg from '../../assets/topography-pattern-cutout-1.png';
+import fernImg from '../../assets/fern-in-hands.png';
+
 import { useAllMethodologyReviewProcessPageQuery } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 

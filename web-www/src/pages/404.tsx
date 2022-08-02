@@ -1,10 +1,8 @@
 import React from 'react';
 import { graphql, PageProps, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
-
-import NotFound from 'web-components/lib/components/not-found';
-
 import SEO from '../components/seo';
+import NotFound from 'web-components/lib/components/not-found';
 
 const NotFoundPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`

@@ -1,15 +1,15 @@
 import React from 'react';
-import { graphql, PageProps, useStaticQuery } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 
 import SEO from '../components/seo';
-import { MainnetPageQuery } from '../generated/graphql';
-import LaunchInfoSection from '../sections/mainnet/LaunchInfoSection';
-import MediaSection from '../sections/mainnet/MediaSection';
 import TopSection from '../sections/mainnet/TopSection';
+import LaunchInfoSection from '../sections/mainnet/LaunchInfoSection';
 import WhatsNextSection from '../sections/mainnet/WhatsNextSection';
+import MediaSection from '../sections/mainnet/MediaSection';
+import { MainnetPageQuery } from '../generated/graphql';
 
 const query = graphql`
   query mainnetPage {

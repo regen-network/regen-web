@@ -1,6 +1,5 @@
 import React from 'react';
 import { Grid, SxProps, Theme } from '@mui/material';
-
 import { LabeledNumber } from 'web-components/lib/components/text-layouts';
 
 import type { BatchTotalsForProject } from '../../types/ledger/ecocredit';

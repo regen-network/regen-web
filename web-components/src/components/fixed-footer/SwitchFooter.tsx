@@ -1,9 +1,10 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
+import { DefaultTheme as Theme } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
-import ContainedButton from '../buttons/ContainedButton';
 import FixedFooter from './';
+import ContainedButton from '../buttons/ContainedButton';
 
 interface SwitchFooterProps {
   buttonText: string;

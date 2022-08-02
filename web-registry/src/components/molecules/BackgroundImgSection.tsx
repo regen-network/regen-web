@@ -1,10 +1,10 @@
 import React from 'react';
-import CardMedia from '@mui/material/CardMedia';
-import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
+import { makeStyles } from '@mui/styles';
+import CardMedia from '@mui/material/CardMedia';
 
-import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/lib/components/section';
 
 type Props = {
   img: string;

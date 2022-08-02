@@ -1,6 +1,5 @@
 import { styled } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 export const useProjectTopSectionStyles = makeStyles((theme: Theme) => ({

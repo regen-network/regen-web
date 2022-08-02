@@ -1,6 +1,6 @@
 import {
-  ButtonFieldsFragment,
   LinkFieldsFragment,
+  ButtonFieldsFragment,
   Maybe,
 } from '../generated/sanity-graphql';
 

@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import {
-  QueryBasketResponse,
   QueryBasketsResponse,
+  QueryBasketResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import useQueryBasket from './useQueryBasket';

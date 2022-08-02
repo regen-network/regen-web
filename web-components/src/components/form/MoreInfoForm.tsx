@@ -1,18 +1,18 @@
 import React from 'react';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
-import { Field, Form, Formik } from 'formik';
 
-import CheckboxGroup from '../inputs/CheckboxGroup';
-import SelectTextField from '../inputs/SelectTextField';
+import { Body, Title } from '../typography';
 import TextField from '../inputs/TextField';
 import {
-  invalidEmailMessage,
   requiredMessage,
   validateEmail,
+  invalidEmailMessage,
 } from '../inputs/validation';
-import { Body, Title } from '../typography';
+import CheckboxGroup from '../inputs/CheckboxGroup';
+import SelectTextField from '../inputs/SelectTextField';
 import Submit from './Submit';
 
 interface MoreInfoFormProps {

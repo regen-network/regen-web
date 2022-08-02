@@ -1,13 +1,12 @@
 import React from 'react';
-import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/lib/components/section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import RegenIcon from 'web-components/lib/components/icons/RegenIcon';
-import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-
 import { PresskitLogosSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -54,20 +53,14 @@ const query = graphql`
 
 const LogosSection = (): JSX.Element => {
   const styles = useStyles();
-  const { sanityPresskitPage } =
-    useStaticQuery<PresskitLogosSectionQuery>(query);
+  const { sanityPresskitPage } = useStaticQuery<PresskitLogosSectionQuery>(query);
   const data = sanityPresskitPage?.logosSection;
 
   return (
-    <Section
-      title={data?.header || ''}
-      classes={{ root: styles.root, title: styles.title }}
-    >
+    <Section title={data?.header || ''} classes={{ root: styles.root, title: styles.title }}>
       <Grid container alignItems="center" direction="column">
         <RegenIcon className={styles.logo} />
-        <ContainedButton href={data?.buttonLink || ''}>
-          {data?.buttonText}
-        </ContainedButton>
+        <ContainedButton href={data?.buttonLink || ''}>{data?.buttonText}</ContainedButton>
       </Grid>
     </Section>
   );

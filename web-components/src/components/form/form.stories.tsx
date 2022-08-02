@@ -1,13 +1,13 @@
 import Long from 'long';
 
-import { BasketPutForm } from './BasketPutForm';
-import { BasketTakeForm } from './BasketTakeForm';
-import { CreditRetireForm } from './CreditRetireForm';
-import { CreditSendForm } from './CreditSendForm';
+import UserProfileForm from './UserProfileForm';
 // import OrganizationProfileForm from './OrganizationProfileForm';
 import LoginForm from './LoginForm';
+import { CreditSendForm } from './CreditSendForm';
+import { CreditRetireForm } from './CreditRetireForm';
+import { BasketPutForm } from './BasketPutForm';
+import { BasketTakeForm } from './BasketTakeForm';
 import { FormValues, RecipientsForm } from './RecipientsForm';
-import UserProfileForm from './UserProfileForm';
 
 export default {
   title: 'Forms',

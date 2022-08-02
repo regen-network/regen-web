@@ -1,7 +1,7 @@
 import { SxProps, Theme } from '@mui/material';
 
-import { ProjectPageIcon } from '../../icons/ProjectPageIcon';
 import { CreateCard } from './CreateCard';
+import { ProjectPageIcon } from '../../icons/ProjectPageIcon';
 
 interface Props {
   sx?: SxProps<Theme>;

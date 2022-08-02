@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Field, useFormikContext } from 'formik';
 import { startCase } from 'lodash';
 
 import SelectTextField, {
   Option,
 } from 'web-components/lib/components/inputs/SelectTextField';
-
 import { useCreditClassByOnChainIdQuery } from '../../generated/graphql';
 
 interface FieldProps {

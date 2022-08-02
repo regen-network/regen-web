@@ -1,9 +1,8 @@
 import { useCallback } from 'react';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
-import type { UseStateSetter } from 'types/react/use-state';
-
 import type { BasketTokens } from 'hooks/useBasketTokens';
+import type { UseStateSetter } from 'types/react/use-state';
 
 type Props = {
   basketTokens: BasketTokens[];

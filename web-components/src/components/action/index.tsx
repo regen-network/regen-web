@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import ReactHtmlParser from 'react-html-parser';
 import { makeStyles } from '@mui/styles';
+import ReactHtmlParser from 'react-html-parser';
 import clsx from 'clsx';
 
-import { ExpandButton } from '../buttons/ExpandButton';
-import { Texts, truncate } from '../read-more/truncate';
+import { truncate, Texts } from '../read-more/truncate';
 import { Body, Subtitle } from '../typography';
+import { ExpandButton } from '../buttons/ExpandButton';
 
 export interface ActionProps {
   name: string;

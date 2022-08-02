@@ -1,20 +1,20 @@
 import { Formik, FormikHelpers } from 'formik';
 
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
-import { UrlList, UrlType } from 'web-components/lib/utils/schemaURL';
+import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import { UrlType, UrlList } from 'web-components/lib/utils/schemaURL';
 
-import type { ShaclGraphByUriQuery } from 'generated/graphql';
-import { getCompactedPath, getProjectPageBaseData, validate } from 'lib/rdf';
-
+import { validate, getProjectPageBaseData, getCompactedPath } from 'lib/rdf';
 import { useProjectEditContext } from 'pages/ProjectEdit';
 import { ProjectPageFooter } from 'components/molecules';
 
-import { isSimpleMediaFormErrors } from './MediaForm.utils';
-import type { MediaErrorsLegacy, MediaValuesLegacy } from './MediaFormLegacy';
-import { MediaFormLegacy } from './MediaFormLegacy';
-import type { MediaErrorsSimple, MediaValuesSimple } from './MediaFormSimple';
 import { MediaFormSimple } from './MediaFormSimple';
+import { MediaFormLegacy } from './MediaFormLegacy';
+import { isSimpleMediaFormErrors } from './MediaForm.utils';
+
+import type { MediaValuesSimple, MediaErrorsSimple } from './MediaFormSimple';
+import type { MediaErrorsLegacy, MediaValuesLegacy } from './MediaFormLegacy';
+import type { ShaclGraphByUriQuery } from 'generated/graphql';
 
 export interface MediaBaseValues {
   'regen:previewPhoto'?: UrlType;

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
 import { Field } from 'formik';
+import { makeStyles } from '@mui/styles';
+import { Grid } from '@mui/material';
+import clsx from 'clsx';
 
 import { Theme } from '../../theme/muiTheme';
-import { getFormattedNumber } from '../../utils/format';
 import TextField, { RegenTextFieldProps } from '../inputs/TextField';
+import { getFormattedNumber } from '../../utils/format';
 
 const useStyles = makeStyles((theme: Theme) => ({
   textField: {

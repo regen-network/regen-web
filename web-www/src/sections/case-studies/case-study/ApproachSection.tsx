@@ -1,20 +1,19 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
-import { Box } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import { graphql, useStaticQuery } from 'gatsby';
+import ReactHtmlParser from 'react-html-parser';
 import Img, { FluidObject } from 'gatsby-image';
 
-import Section from 'web-components/lib/components/section';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+import Section from 'web-components/lib/components/section';
+import { SanityCaseStudyApproachSection } from '../../../generated/graphql';
 import {
   BlockContent,
   SanityBlockOr,
 } from 'web-components/src/components/block-content';
-
-import { SanityCaseStudyApproachSection } from '../../../generated/graphql';
+import { Box } from '@mui/material';
 
 interface Paragraph {
   title: string | Element;

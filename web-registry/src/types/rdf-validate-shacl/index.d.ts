@@ -8,7 +8,6 @@
 declare module 'rdf-validate-shacl' {
   import * as RDF from 'rdf-js';
   import DataFactory = require('./src/data-factory');
-
   export import ValidationReport = require('./src/validation-report');
 
   declare namespace SHACLValidator {

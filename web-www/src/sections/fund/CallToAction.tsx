@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { Avatar, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
+import { Grid, Avatar } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
+import cx from 'clsx';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
 import Card from 'web-components/lib/components/cards/Card';
-import Modal from 'web-components/lib/components/modal';
-import Section from 'web-components/lib/components/section';
 import { Body, Title } from 'web-components/lib/components/typography';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/lib/components/section';
+import Modal from 'web-components/lib/components/modal';
 import { BlockContent } from 'web-components/src/components/block-content';
 
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 import type { FundCallToActionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>(theme => ({

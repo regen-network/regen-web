@@ -1,15 +1,15 @@
 import React from 'react';
-import { Box, SxProps } from '@mui/material';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import Link from '@mui/material/Link';
 
-import NewsletterForm from '../form/NewsletterForm';
-import Section from '../section';
 import { Body, Label } from '../typography';
+import Section from '../section';
+import NewsletterForm from '../form/NewsletterForm';
 import { SocialLinks } from './SocialLinks';
+import { Box, SxProps } from '@mui/material';
 
 export interface FooterItemProps {
   title: string;

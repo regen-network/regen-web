@@ -1,16 +1,15 @@
 import React from 'react';
+import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 
-import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
-import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
+import BackgroundSection from '../../components/BackgroundSection';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import { TitleBody } from 'web-components/lib/components/text-layouts';
 import { Body, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-
-import BackgroundSection from '../../components/BackgroundSection';
+import ResponsiveSlider from 'web-components/lib/components/sliders/ResponsiveSlider';
+import GreenMediaCard from 'web-components/lib/components/cards/GreenMediaCard';
 import { ValidatorsWhoSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({

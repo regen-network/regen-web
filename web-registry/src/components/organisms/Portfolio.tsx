@@ -1,14 +1,12 @@
 import React from 'react';
 import { Box, SxProps } from '@mui/material';
 
-import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 import { Label } from 'web-components/lib/components/typography';
+import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-
 import { BasketTokens } from 'hooks/useBasketTokens';
-
-import { BasketsTable, EcocreditsTable } from './';
+import { EcocreditsTable, BasketsTable } from './';
 
 export interface PortfolioProps {
   credits?: BatchInfoWithBalance[];

@@ -1,7 +1,6 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import cx from 'clsx';
-
 import Tooltip from '../tooltip';
 
 const useStyles = makeStyles((theme: Theme) => ({

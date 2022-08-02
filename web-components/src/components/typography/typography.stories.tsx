@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-import { Body, Label, Subtitle, Title } from '../../components/typography';
+import { Title, Subtitle, Body, Label } from '../../components/typography';
 
 export default {
   title: 'Typography',

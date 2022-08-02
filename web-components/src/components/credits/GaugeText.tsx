@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Body, Title } from '../typography';
 import { TextSize } from '../typography/sizing';
 

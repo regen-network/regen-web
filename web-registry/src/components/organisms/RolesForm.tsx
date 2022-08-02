@@ -1,43 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Formik, Form, Field, FormikErrors } from 'formik';
 import { useParams } from 'react-router-dom';
-import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import {
-  FormValues,
   RoleField,
+  FormValues,
 } from 'web-components/lib/components/inputs/RoleField';
-import TextField from 'web-components/lib/components/inputs/TextField';
+import { Subtitle } from 'web-components/lib/components/typography';
 import {
+  requiredMessage,
   invalidAddress,
   isValidAddress,
-  requiredMessage,
 } from 'web-components/lib/components/inputs/validation';
+import TextField from 'web-components/lib/components/inputs/TextField';
 import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
 import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
 import { ProfileFormValues } from 'web-components/lib/components/modal/ProfileModal';
-import { Subtitle } from 'web-components/lib/components/typography';
 
 import {
-  GetOrganizationProfileByEmailQuery,
-  ShaclGraphByUriQuery,
-  useReallyCreateOrganizationMutation,
-  useReallyCreateUserMutation,
-  useUpdateAddressByIdMutation,
-  useUpdateOrganizationByIdMutation,
-  useUpdatePartyByIdMutation,
-  useUpdateUserByIdMutation,
-} from '../../generated/graphql';
-import getApiUri from '../../lib/apiUri';
-import {
+  validate,
+  getProjectPageBaseData,
   defaultProjectContext,
   getCompactedPath,
-  getProjectPageBaseData,
-  validate,
 } from '../../lib/rdf';
-import { chainInfo } from '../../lib/wallet';
-import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
+import {
+  useReallyCreateUserMutation,
+  useReallyCreateOrganizationMutation,
+  useUpdateUserByIdMutation,
+  useUpdatePartyByIdMutation,
+  useUpdateOrganizationByIdMutation,
+  useUpdateAddressByIdMutation,
+  GetOrganizationProfileByEmailQuery,
+  ShaclGraphByUriQuery,
+} from '../../generated/graphql';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
+import getApiUri from '../../lib/apiUri';
+import { chainInfo } from '../../lib/wallet';
 
 interface RolesFormProps {
   submit: (values: RolesValues) => Promise<void>;

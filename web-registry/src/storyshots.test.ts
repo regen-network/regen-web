@@ -1,10 +1,9 @@
 import initStoryshots from '@storybook/addon-storyshots';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import toJson from 'enzyme-to-json';
 import path from 'path';
-
 import './jest.mock';
+import { configure, shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
+import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 

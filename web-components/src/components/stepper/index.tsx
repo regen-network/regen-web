@@ -1,12 +1,12 @@
 import React from 'react';
+import { makeStyles, DefaultTheme as Theme, withStyles } from '@mui/styles';
 import {
-  Step,
-  StepConnector,
-  StepLabel,
   Stepper,
+  Step,
+  StepLabel,
+  StepConnector,
   SxProps,
 } from '@mui/material';
-import { DefaultTheme as Theme, makeStyles, withStyles } from '@mui/styles';
 import clsx from 'clsx';
 
 import RegenStepIcon from './StepIcon';

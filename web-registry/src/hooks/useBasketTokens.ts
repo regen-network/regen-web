@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+
+import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
+import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import {
   QueryBalanceResponse,
   QueryDenomMetadataResponse,
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
-import { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
 
 import useQueryBalance from './useQueryBalance';
 import useQueryDenomMetadata from './useQueryDenomMetadata';

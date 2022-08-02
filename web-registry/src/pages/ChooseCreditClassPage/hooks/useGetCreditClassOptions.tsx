@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import { useAllCreditClassesQuery } from 'generated/graphql';
-import { useAllCreditClassQuery } from 'generated/sanity-graphql';
-import { useWallet } from 'lib/wallet';
 import { client } from 'sanity';
+import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+import { useAllCreditClassesQuery } from 'generated/graphql';
+import { useWallet } from 'lib/wallet';
 
 import { useQueryListClassesWithMetadata } from 'hooks';
 

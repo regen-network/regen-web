@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@mui/styles';
 import { SxProps, TextField } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
 import { FieldProps, FormikErrors, FormikProps } from 'formik';
+import cx from 'clsx';
 
-import { getURLInitialValue } from '../../utils/schemaURL';
-import OutlinedButton from '../buttons/OutlinedButton';
+import FieldFormControl from './FieldFormControl';
+import { Label } from '../typography';
 import OrganizationIcon from '../icons/OrganizationIcon';
 import UserIcon from '../icons/UserIcon';
+import OutlinedButton from '../buttons/OutlinedButton';
 import {
-  IndividualFormValues,
-  IndividualModal,
-} from '../modal/IndividualModal';
-import {
-  OrganizationFormValues,
   OrganizationModal,
+  OrganizationFormValues,
 } from '../modal/OrganizationModal';
-import { ProfileFormValues, ProfileModal } from '../modal/ProfileModal';
-import { Label } from '../typography';
-import FieldFormControl from './FieldFormControl';
+import {
+  IndividualModal,
+  IndividualFormValues,
+} from '../modal/IndividualModal';
+import { ProfileModal, ProfileFormValues } from '../modal/ProfileModal';
+import { getURLInitialValue } from '../../utils/schemaURL';
 
 const useStyles = makeStyles(theme => ({
   root: {

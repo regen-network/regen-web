@@ -1,8 +1,7 @@
 import React from 'react';
-
-import { BasketTakeForm, BasketTakeProps } from '../form/BasketTakeForm';
-import { FormModalTemplate } from './FormModalTemplate';
 import { RegenModalProps } from './index';
+import { FormModalTemplate } from './FormModalTemplate';
+import { BasketTakeForm, BasketTakeProps } from '../form/BasketTakeForm';
 
 export interface TakeModalProps extends RegenModalProps, BasketTakeProps {}
 

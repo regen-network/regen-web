@@ -1,7 +1,7 @@
 import React from 'react';
-import LazyLoad from 'react-lazyload';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+import LazyLoad from 'react-lazyload';
 import cx from 'clsx';
 
 import ResponsiveSlider from '../sliders/ResponsiveSlider';

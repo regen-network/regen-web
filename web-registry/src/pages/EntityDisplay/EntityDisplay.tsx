@@ -2,21 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
-
 import {
-  DisplayValues,
+  OnboardingFormTemplate,
+  EditFormTemplate,
+} from '../../components/templates';
+import {
   EntityDisplayForm,
   EntityDisplayValues,
   EntityFieldName,
+  DisplayValues,
 } from '../../components/organisms';
 import {
-  EditFormTemplate,
-  OnboardingFormTemplate,
-} from '../../components/templates';
-import {
   useProjectByIdQuery,
-  useUpdatePartyByIdMutation,
   useUpdateProjectByIdMutation,
+  useUpdatePartyByIdMutation,
 } from '../../generated/graphql';
 import { useProjectEditContext } from '../ProjectEdit';
 

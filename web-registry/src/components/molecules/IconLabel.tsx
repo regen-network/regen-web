@@ -1,12 +1,11 @@
 import React from 'react';
-import { Avatar } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Avatar } from '@mui/material';
 import cx from 'clsx';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-
+import { Body, Title } from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/lib/components/block-content';
 import { Maybe, Scalars } from '../../generated/sanity-graphql';
 
 export interface IconLabelProps {

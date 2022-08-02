@@ -1,15 +1,15 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
-import { Box, useTheme } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { Box, useTheme } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import SanityImage from 'gatsby-plugin-sanity-image';
+import ReactHtmlParser from 'react-html-parser';
+import clsx from 'clsx';
 
-import Card from 'web-components/lib/components/cards/Card';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+import Card from 'web-components/lib/components/cards/Card';
 
 import { HomeClimateSectionQuery } from '../../generated/graphql';
 

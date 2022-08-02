@@ -1,14 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { MockedProvider } from '@apollo/client/testing';
 import { useAuth0 } from '@auth0/auth0-react';
+import { MockedProvider } from '@apollo/client/testing';
 import mediaQuery from 'css-mediaquery';
-
 import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
-import App from './App';
-
 import './jest.mock';
+import App from './App';
 
 function createMatchMedia(width: unknown) {
   return (query: string) => ({

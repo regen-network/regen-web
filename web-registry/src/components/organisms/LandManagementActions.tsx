@@ -1,14 +1,14 @@
-import React, { useCallback, useRef } from 'react';
-import Slider from 'react-slick';
-import Grid from '@mui/material/Grid';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import React, { useRef, useCallback } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Grid from '@mui/material/Grid';
+import Slider from 'react-slick';
 
-import Action, { ActionProps } from 'web-components/lib/components/action';
-import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
 import Section from 'web-components/lib/components/section';
-import { Body } from 'web-components/lib/components/typography';
+import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
+import Action, { ActionProps } from 'web-components/lib/components/action';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Body } from 'web-components/lib/components/typography';
 
 export interface LandManagementActionsProps {
   actions: ActionProps[];

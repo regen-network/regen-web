@@ -1,12 +1,12 @@
 import React from 'react';
-import { Avatar } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Avatar } from '@mui/material';
 import cx from 'clsx';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import Card from 'web-components/lib/components/cards/Card';
 import { Title } from 'web-components/lib/components/typography';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { CreditClassByUriQuery } from 'generated/graphql';
 import { Maybe, Scalars } from 'generated/sanity-graphql';

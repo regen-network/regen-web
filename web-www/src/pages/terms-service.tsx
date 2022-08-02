@@ -1,8 +1,7 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-
-import MarkdownSection from '../components/MarkdownSection';
 import SEO from '../components/seo';
+import { useStaticQuery, graphql } from 'gatsby';
+import MarkdownSection from '../components/MarkdownSection';
 
 interface props {
   location: Location;

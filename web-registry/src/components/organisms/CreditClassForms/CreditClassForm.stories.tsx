@@ -1,21 +1,19 @@
 import { Formik } from 'formik';
-
 import { Center } from 'web-components/lib/components/box';
 
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
-
 import {
   CreateCreditClassForm,
   createCreditClassSteps,
 } from './CreateCreditClassForm';
-import { mockMetadata, mockTxHash } from './CreditClass.mocks';
 import { CreditClassFinished } from './CreditClassFinished';
 import {
-  creditClassBaseValues,
   CreditClassForm,
+  creditClassBaseValues,
   CreditClassValues,
 } from './CreditClassForm';
 import { CreditClassReview } from './CreditClassReview';
+import { mockMetadata, mockTxHash } from './CreditClass.mocks';
 
 const fullFormValues: CreditClassValues = {
   admin: mockTxHash,
@@ -45,7 +43,7 @@ export const createCreditClassForm = (): JSX.Element => (
     }}
     steps={createCreditClassSteps}
   >
-    <CreateCreditClassForm onSubmit={() => null} />
+    <CreateCreditClassForm onSubmit={console.log} />
   </MultiStepTemplate>
 );
 

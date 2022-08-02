@@ -1,17 +1,18 @@
 import React from 'react';
-import { Box, Link } from '@mui/material';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
-import type { FluidObject } from 'gatsby-image';
+import { Box, Link } from '@mui/material';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
+import { Body, Title, Label } from 'web-components/lib/components/typography';
+
+import { BlockContent } from 'web-components/src/components/block-content';
+import Section from 'web-components/lib/components/section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
-import Section from 'web-components/lib/components/section';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { BlockContent } from 'web-components/src/components/block-content';
 
 import type { NctOverviewSectionQuery } from '../../generated/graphql';
+import type { FluidObject } from 'gatsby-image';
 
 const query = graphql`
   query nctOverviewSection {

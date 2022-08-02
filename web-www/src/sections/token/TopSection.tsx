@@ -1,10 +1,9 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
 
-import { Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-
+import { Title } from 'web-components/lib/components/typography';
 import BackgroundSection from '../../components/BackgroundSection';
 import { TokenTopSectionQuery } from '../../generated/graphql';
 

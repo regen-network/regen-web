@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, SxProps } from '@mui/material';
+import { Formik, Form, Field, FormikErrors, useFormikContext } from 'formik';
 import { makeStyles } from '@mui/styles';
-import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
+import { SxProps, Grid } from '@mui/material';
 
 import { Theme } from '../../theme/muiTheme';
-import { getISOString } from '../../utils/locationStandard';
-import ErrorBanner from '../banner/ErrorBanner';
+import TextField from '../inputs/TextField';
 import AmountField from '../inputs/AmountField';
-import ControlledTextField from '../inputs/ControlledTextField';
 import LocationCountryField from '../inputs/LocationCountryField';
 import LocationStateField from '../inputs/LocationStateField';
-import TextField from '../inputs/TextField';
-import { requiredMessage, validateAmount } from '../inputs/validation';
-import { RegenModalProps } from '../modal';
+import ControlledTextField from '../inputs/ControlledTextField';
 import { Body, Title } from '../typography';
 import Submit from './Submit';
+import { requiredMessage, validateAmount } from '../inputs/validation';
+import { RegenModalProps } from '../modal';
+import { getISOString } from '../../utils/locationStandard';
+import ErrorBanner from '../banner/ErrorBanner';
 
 /**
  * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).

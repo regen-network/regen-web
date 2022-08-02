@@ -1,13 +1,12 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
-import Slider from 'react-slick';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import React, { useState, useRef, useCallback, useLayoutEffect } from 'react';
+import { makeStyles, DefaultTheme as Theme, useTheme } from '@mui/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-
-import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Slider from 'react-slick';
 import PlayIcon from '../icons/PlayIcon';
 import { Image, OptimizeImageProps } from '../image';
+import { getOptimizedImageSrc } from '../../utils/optimizedImageSrc';
 
 export interface Media {
   src: string;

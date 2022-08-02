@@ -1,28 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { Box, CardMedia, useMediaQuery } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, useTheme } from '@mui/styles';
+import { Box, CardMedia, useMediaQuery } from '@mui/material';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { Loading } from 'web-components/lib/components/loading';
-import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
+import Modal from 'web-components/lib/components/modal';
+import { Loading } from 'web-components/lib/components/loading';
 import { Body, Title } from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
-import topographyImg from '../../assets/background-contour-1.jpg';
-import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
 import { BackgroundImgSection, HeroAction } from '../../components/molecules';
 import {
-  CreditBatches,
-  CreditClassCards,
   ProjectCards,
+  CreditClassCards,
+  CreditBatches,
 } from '../../components/organisms';
-import { useMoreProjectsQuery } from '../../generated/graphql';
-import {
-  useAllCreditClassQuery,
-  useAllHomePageQuery,
-} from '../../generated/sanity-graphql';
+
+import topographyImg from '../../assets/background-contour-1.jpg';
+import horsesImg from '../../assets/horses-grazing.png';
+
 import { client } from '../../sanity';
+import {
+  useAllHomePageQuery,
+  useAllCreditClassQuery,
+} from '../../generated/sanity-graphql';
+import { useMoreProjectsQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles(theme => ({
   section: {

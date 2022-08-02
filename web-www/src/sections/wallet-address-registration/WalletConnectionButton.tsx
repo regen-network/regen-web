@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { Alert, AlertTitle } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { makeStyles } from '@mui/styles';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
-
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import { Alert, AlertTitle } from '@mui/material';
 import { WalletConnectButtonQuery } from '../../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 interface Keplr {
   enable: (chainId: string) => Promise<any>;

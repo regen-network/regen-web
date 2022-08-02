@@ -1,8 +1,7 @@
 import React from 'react';
-
-import { CreditSendForm, CreditSendProps } from '../form/CreditSendForm';
 import { RegenModalProps } from '../modal';
 import { FormModalTemplate } from './FormModalTemplate';
+import { CreditSendForm, CreditSendProps } from '../form/CreditSendForm';
 
 interface CreditSendModalProps extends RegenModalProps, CreditSendProps {}
 

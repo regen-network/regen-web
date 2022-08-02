@@ -1,8 +1,15 @@
 import React from 'react';
 import { graphql, PageProps } from 'gatsby';
-import { FluidObject } from 'gatsby-image';
 
 import SEO from '../components/seo';
+import TopSection from '../sections/case-studies/case-study/TopSection';
+import AboutSection from '../sections/case-studies/case-study/AboutSection';
+import ContextSection from '../sections/case-studies/case-study/ContextSection';
+import ApproachSection from '../sections/case-studies/case-study/ApproachSection';
+import FigureSection from '../sections/case-studies/case-study/FigureSection';
+import FundingSection from '../sections/case-studies/case-study/FundingSection';
+import ConclusionSection from '../sections/case-studies/case-study/ConclusionSection';
+import BottomSection from '../sections/case-studies/case-study/BottomSection';
 import {
   CaseStudyTemplateQuery,
   SanityCaseStudyAboutSection,
@@ -13,14 +20,7 @@ import {
   SanityCaseStudyFigureSection,
   SanityCaseStudyFundingSection,
 } from '../generated/graphql';
-import AboutSection from '../sections/case-studies/case-study/AboutSection';
-import ApproachSection from '../sections/case-studies/case-study/ApproachSection';
-import BottomSection from '../sections/case-studies/case-study/BottomSection';
-import ConclusionSection from '../sections/case-studies/case-study/ConclusionSection';
-import ContextSection from '../sections/case-studies/case-study/ContextSection';
-import FigureSection from '../sections/case-studies/case-study/FigureSection';
-import FundingSection from '../sections/case-studies/case-study/FundingSection';
-import TopSection from '../sections/case-studies/case-study/TopSection';
+import { FluidObject } from 'gatsby-image';
 
 interface Props extends PageProps {
   data: CaseStudyTemplateQuery;

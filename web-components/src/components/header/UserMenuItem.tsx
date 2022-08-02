@@ -1,11 +1,11 @@
 import React from 'react';
-import { styled, useTheme } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import { useTheme, styled } from '@mui/material';
 
+import { HeaderMenuHover, HeaderMenuHoverBase } from './HeaderMenuHover';
 import CreditsIcon from '../icons/CreditsIcon';
 import { Label } from '../typography';
-import { HeaderMenuHover, HeaderMenuHoverBase } from './HeaderMenuHover';
 
 interface UserMenuItemProps extends HeaderMenuHoverBase {
   address: string;

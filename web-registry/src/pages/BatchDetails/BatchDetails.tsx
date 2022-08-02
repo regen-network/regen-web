@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import { Loading } from 'web-components/lib/components/loading';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
+import { Loading } from 'web-components/lib/components/loading';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
 import { useProjectsByMetadataQuery } from 'generated/graphql';

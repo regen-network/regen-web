@@ -1,8 +1,7 @@
 import React from 'react';
-
-import { CreditRetireForm, CreditRetireProps } from '../form/CreditRetireForm';
 import { RegenModalProps } from '../modal';
 import { FormModalTemplate } from './FormModalTemplate';
+import { CreditRetireForm, CreditRetireProps } from '../form/CreditRetireForm';
 
 interface CreditRetireModalProps extends RegenModalProps, CreditRetireProps {}
 

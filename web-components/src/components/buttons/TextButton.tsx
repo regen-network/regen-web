@@ -1,5 +1,4 @@
 import { Button, ButtonProps, styled } from '@mui/material';
-
 import { getMobileSize, LabelSize } from '../typography/sizing';
 
 const SIZES = {

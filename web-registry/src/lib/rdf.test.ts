@@ -1,4 +1,4 @@
-import { getCompactedPath, validate } from './rdf';
+import { validate, getCompactedPath } from './rdf';
 
 describe('validate', () => {
   it('validate against property shapes with given group', async () => {

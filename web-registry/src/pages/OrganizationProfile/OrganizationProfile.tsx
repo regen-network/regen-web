@@ -1,32 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
+
 import {
-  Collapse,
   FormControl,
+  RadioGroup,
   FormControlLabel,
   Radio,
-  RadioGroup,
+  Collapse,
   Zoom,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import FormLabel from 'web-components/lib/components/form/ControlledFormLabel';
 import OrganizationProfileForm, {
   OrgProfileFormValues,
 } from 'web-components/lib/components/form/OrganizationProfileForm';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import {
   useGetOrganizationProfileByEmailQuery,
-  useReallyCreateOrganizationMutation,
-  useUpdateAddressByIdMutation,
-  useUpdateOrganizationByPartyIdMutation,
   useUpdatePartyByIdMutation,
+  useReallyCreateOrganizationMutation,
+  useUpdateOrganizationByPartyIdMutation,
+  useUpdateAddressByIdMutation,
 } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({

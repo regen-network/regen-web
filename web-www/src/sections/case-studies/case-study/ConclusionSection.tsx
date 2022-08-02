@@ -1,15 +1,14 @@
 import React from 'react';
-import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import Grid from '@mui/material/Grid';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
+import clsx from 'clsx';
 
-import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
-
 import BackgroundSection from '../../../components/BackgroundSection';
+import { Body, Title } from 'web-components/lib/components/typography';
+import { BlockContent } from 'web-components/src/components/block-content';
 import {
   CaseStudyConclusionSectionQuery,
   SanityCaseStudyConclusionSection,

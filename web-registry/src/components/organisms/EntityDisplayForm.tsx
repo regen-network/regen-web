@@ -1,40 +1,41 @@
 import React, { useState } from 'react';
-import { Link as RouterLink, useParams } from 'react-router-dom';
-import { Link, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { Field, Form, Formik } from 'formik';
+import { useTheme } from '@mui/material';
+import { Link } from '@mui/material';
+import { Formik, Form, Field } from 'formik';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 
-import Card from 'web-components/lib/components/cards/Card';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
-import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
-import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import Modal from 'web-components/lib/components/modal';
-import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
-import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
 import {
   Body,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
+import Card from 'web-components/lib/components/cards/Card';
+import OrganizationIcon from 'web-components/lib/components/icons/OrganizationIcon';
+import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
+import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
+import { ImageUpload } from 'web-components/lib/components/inputs/ImageUpload';
+import { isIndividual } from 'web-components/lib/components/inputs/RoleField';
+import { OrganizationFormValues } from 'web-components/lib/components/modal/OrganizationModal';
+import { IndividualFormValues } from 'web-components/lib/components/modal/IndividualModal';
+import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import {
-  getURLInitialValue,
   UrlType,
+  getURLInitialValue,
 } from 'web-components/lib/utils/schemaURL';
 
-import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import getApiUri from '../../lib/apiUri';
 import {
-  getCompactedPath,
-  getProjectPageBaseData,
   validate,
+  getProjectPageBaseData,
+  getCompactedPath,
 } from '../../lib/rdf';
-import { useProjectEditContext } from '../../pages/ProjectEdit';
+import getApiUri from '../../lib/apiUri';
+import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectPageFooter } from '../molecules';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 interface EntityDisplayFormProps {
   submit: (values: EntityDisplayValues) => Promise<void>;

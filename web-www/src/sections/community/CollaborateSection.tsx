@@ -1,15 +1,14 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
 
-import { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
-import Section from 'web-components/lib/components/section';
-import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
-import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
-
+import { Body, Title } from 'web-components/lib/components/typography';
+import ResourceCardsSlider from 'web-components/lib/components/sliders/ResourceCards';
+import Section from 'web-components/lib/components/section';
 import { CommunityCollaborateSectionQuery } from '../../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
+import { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
 
 const useStyles = makeStyles((theme: Theme) => ({
   section: {

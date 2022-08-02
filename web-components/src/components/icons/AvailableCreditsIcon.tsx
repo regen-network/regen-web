@@ -1,8 +1,7 @@
 import React from 'react';
-import { SxProps } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
-
 import { Theme } from '~/theme/muiTheme';
+import { SxProps } from '@mui/material';
 
 interface IconProps {
   sx?: SxProps<Theme>;

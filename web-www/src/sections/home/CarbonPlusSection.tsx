@@ -1,16 +1,15 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
-import { Box } from '@mui/material';
-import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import Img from 'gatsby-image';
+import ReactHtmlParser from 'react-html-parser';
 
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { HomeCarbonplusSectionQuery } from '../../generated/graphql';
+import { Box } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

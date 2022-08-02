@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import { Box, Grid, Link, List, ListItem } from '@mui/material';
 import { useTheme } from '@mui/styles';
+import { Grid, List, ListItem, Link, Box } from '@mui/material';
 
-import { HeaderLogoLink } from '../header/HeaderLogoLink';
-import Section from '../section';
 import { Body, Label } from '../typography';
+import Section from '../section';
+import { HeaderLogoLink } from '../header/HeaderLogoLink';
+
 import { SocialLinks } from './SocialLinks';
 
 export interface LinkItem {

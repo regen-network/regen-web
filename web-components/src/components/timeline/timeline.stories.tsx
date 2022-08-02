@@ -1,7 +1,7 @@
-import theme from '../../theme/muiTheme';
+import TimelineItem from './TimelineItem';
 import Timeline, { Event } from '.';
 import NewTimeline, { Item } from './NewTimeline';
-import TimelineItem from './TimelineItem';
+import theme from '../../theme/muiTheme';
 
 export default {
   title: 'Timeline',

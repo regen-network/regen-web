@@ -1,11 +1,11 @@
 import React from 'react';
-import { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { TextFieldProps } from 'formik-mui';
+import { makeStyles } from '@mui/styles';
+import { Theme } from '@mui/material';
 
 import DropdownIcon from '../icons/DropdownIcon';
-import { DefaultStyleProps } from './FieldFormControl';
 import TextField from './TextField';
+import { DefaultStyleProps } from './FieldFormControl';
 
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {

@@ -1,10 +1,9 @@
 import React from 'react';
 import { Box } from '@mui/material';
-
-import Credits from '../credits';
-import CreditPlaceInfo from '../place/CreditPlaceInfo';
-import { Body } from '../typography';
 import MediaCard from './MediaCard';
+import CreditPlaceInfo from '../place/CreditPlaceInfo';
+import Credits from '../credits';
+import { Body } from '../typography';
 
 export interface CreditInfo {
   name: string;

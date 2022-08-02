@@ -1,8 +1,7 @@
 import React from 'react';
 
-import Stepper from 'web-components/lib/components/stepper';
-
 import background from '../../assets/topography-pattern-full-1.png';
+import Stepper from 'web-components/lib/components/stepper';
 
 interface PlanStepperProps {
   activeStep: number;

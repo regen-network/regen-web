@@ -1,5 +1,5 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 
 import GreenCard from '../cards/GreenCard';
 import { Label } from '../typography';

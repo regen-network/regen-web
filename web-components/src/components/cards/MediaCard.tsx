@@ -1,12 +1,13 @@
-import { CardMedia, styled, SxProps } from '@mui/material';
-import { Variant } from '@mui/material/styles/createTypography';
+import React from 'react';
 import { makeStyles } from '@mui/styles';
+import { styled, CardMedia, SxProps } from '@mui/material';
+import { Variant } from '@mui/material/styles/createTypography';
 import cx from 'clsx';
 
-import { parseText } from '../../utils/textParser';
+import Card from './Card';
 import { Image, OptimizeImageProps } from '../image';
 import { Label, Title } from '../typography';
-import Card from './Card';
+import { parseText } from '../../utils/textParser';
 
 import type { Theme } from '~/theme/muiTheme';
 

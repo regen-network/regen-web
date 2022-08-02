@@ -1,6 +1,5 @@
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
-
-import { TypeValue, URL } from 'web-components/lib/types/rdf';
+import { URL, TypeValue } from 'web-components/lib/types/rdf';
 
 export interface ProjectMetadataLD {
   '@context': Context;

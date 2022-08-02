@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 
-import {
-  formatStandardInfo,
-  getFormattedDate,
-  getFormattedNumber,
-  StandardInfo,
-} from '../../utils/format';
-import { pluralize } from '../../utils/pluralize';
-import Document, { DocumentInfo } from '../document';
-import PartyAddress from '../party/PartyAddress';
+import LedgerModal, { Party, Item } from './LedgerModal';
 import { RegenModalProps } from './';
-import LedgerModal, { Item, Party } from './LedgerModal';
+import PartyAddress from '../party/PartyAddress';
+import Document, { DocumentInfo } from '../document';
+import { getFormattedDate, getFormattedNumber } from '../../utils/format';
+import { pluralize } from '../../utils/pluralize';
+import { formatStandardInfo, StandardInfo } from '../../utils/format';
 
 export interface IssuanceModalData {
   link?: string;

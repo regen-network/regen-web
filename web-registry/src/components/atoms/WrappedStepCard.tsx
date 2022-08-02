@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
 import { StepCard } from 'web-components/lib/components/cards/StepCard';
-
-import { Maybe, StepCardFieldsFragment } from '../../generated/sanity-graphql';
+import { BlockContent } from 'web-components/lib/components/block-content';
+import { StepCardFieldsFragment, Maybe } from '../../generated/sanity-graphql';
 import { onBtnClick } from '../../lib/button';
 
 /**

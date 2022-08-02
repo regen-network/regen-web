@@ -1,11 +1,10 @@
 import React from 'react';
-import { Box, SxProps } from '@mui/material';
+import { Grid, Box, SxProps } from '@mui/material';
 
-import { BlockContent, SanityBlockOr } from '../block-content';
-import OutlinedButton from '../buttons/OutlinedButton';
-import { Body, Title } from '../typography';
 import Card from './Card';
-
+import OutlinedButton from '../buttons/OutlinedButton';
+import { BlockContent, SanityBlockOr } from '../block-content';
+import { Body, Title } from '../typography';
 import type { Theme } from '~/theme/muiTheme';
 
 const GreenTopIconCard: React.FC<{

@@ -1,8 +1,7 @@
 import React from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
-
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import GreenCard from './GreenCard';
+import clsx from 'clsx';
 
 export interface GreenMediaCardProps {
   imageUrl: string;

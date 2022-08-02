@@ -1,13 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Box } from '@mui/material';
-import Backdrop from '@mui/material/Backdrop';
+import React, { useCallback, useState, useEffect } from 'react';
 import Link from '@mui/material/Link';
+import Backdrop from '@mui/material/Backdrop';
 import Cookies from 'js-cookie';
 
 // TODO use Section component
 // import Section from '../section';
 import ContainedButton from '../buttons/ContainedButton';
 import { Body } from '../typography';
+import { Box } from '@mui/material';
 
 interface CookiesBannerProps {
   privacyUrl: string;

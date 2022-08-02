@@ -1,8 +1,8 @@
 import React from 'react';
-import { graphql, PageProps, useStaticQuery } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 
-import MarkdownSection from '../components/MarkdownSection';
 import SEO from '../components/seo';
+import MarkdownSection from '../components/MarkdownSection';
 
 const PrivacyPolicy: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`

@@ -1,27 +1,25 @@
 import React, { useState } from 'react';
-import LazyLoad from 'react-lazyload';
-import ReactMapGL, {
-  Layer,
-  Marker,
-  NavigationControl,
-  Popup,
-  Source,
-  WebMercatorViewport,
-} from 'react-map-gl';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import bbox from '@turf/bbox';
 // import { FeatureCollection } from 'geojson'; TODO
 // import { AllGeoJSON } from '@turf/helpers';
-import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
-import bbox from '@turf/bbox';
-
-// import MapCards from '../sliders/MapCards';
-import OutlinedButton from '../buttons/OutlinedButton';
-import MapCard from '../cards/MapCard';
+import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import ReactMapGL, {
+  Popup,
+  Marker,
+  Source,
+  Layer,
+  NavigationControl,
+  WebMercatorViewport,
+} from 'react-map-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import PinIcon from '../icons/PinIcon';
 import PointerIcon from '../icons/PointerIcon';
+import MapCard from '../cards/MapCard';
+// import MapCards from '../sliders/MapCards';
+import OutlinedButton from '../buttons/OutlinedButton';
 import ZoomIcon from '../icons/ZoomIcon';
-
-import 'mapbox-gl/dist/mapbox-gl.css';
+import LazyLoad from 'react-lazyload';
 
 interface GeoJson {
   features: any[];

@@ -1,15 +1,14 @@
 import React from 'react';
-import Grid from '@mui/material/Grid';
-import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
+import Grid from '@mui/material/Grid';
 import Img, { FluidObject } from 'gatsby-image';
 
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
-
+import { Body, Title } from 'web-components/lib/components/typography';
+import Section from 'web-components/lib/components/section';
 import { SciencePartnershipsSectionQuery } from '../../generated/graphql';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

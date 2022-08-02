@@ -6,16 +6,16 @@ import {
   ProjectLocationFormValues,
 } from '../../components/organisms';
 import {
-  EditFormTemplate,
   OnboardingFormTemplate,
+  EditFormTemplate,
 } from '../../components/templates';
-import {
-  useCreateAddressMutation,
-  useProjectByIdQuery,
-  useUpdateAddressByIdMutation,
-  useUpdateProjectByIdMutation,
-} from '../../generated/graphql';
 import { useProjectEditContext } from '../ProjectEdit';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+  useUpdateAddressByIdMutation,
+  useCreateAddressMutation,
+} from '../../generated/graphql';
 
 const ProjectLocation: React.FC = () => {
   const navigate = useNavigate();

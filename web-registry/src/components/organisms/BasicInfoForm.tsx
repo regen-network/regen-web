@@ -1,25 +1,24 @@
 import React from 'react';
-import { Box } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Box } from '@mui/material';
+import { Formik, Form, Field, FormikErrors } from 'formik';
 import clsx from 'clsx';
-import { Field, Form, Formik, FormikErrors } from 'formik';
 
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import InputLabel from 'web-components/lib/components/inputs/InputLabel';
-import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
-import TextField from 'web-components/lib/components/inputs/TextField';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-
+import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import InputLabel from 'web-components/lib/components/inputs/InputLabel';
+import TextField from 'web-components/lib/components/inputs/TextField';
+import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
+import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
+import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
 import {
-  getCompactedPath,
-  getProjectPageBaseData,
   validate,
+  getProjectPageBaseData,
+  getCompactedPath,
 } from '../../lib/rdf';
-import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 export interface BasicInfoFormValues {
   'schema:name': string;

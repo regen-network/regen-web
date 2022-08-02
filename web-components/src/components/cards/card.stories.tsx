@@ -1,26 +1,28 @@
 import * as React from 'react';
-import { Box, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Box, Theme } from '@mui/material';
 
-import { QuestionItem } from '../faq/Question';
-import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
-import FarmerIcon from '../icons/FarmerIcon';
-import TrustIcon from '../icons/TrustIcon';
-import { User } from '../user/UserInfo';
 import Card from './Card';
+import ProjectTopCard from './ProjectTopCard';
+import ImpactCard from './ImpactCard';
+import MapCard from './MapCard';
 import GlanceCard from './GlanceCard';
+import OnBoardingCard from './OnBoardingCard';
+import { User } from '../user/UserInfo';
+
+// import CreditCard, { CreditInfo } from './CreditCard';
+import PurchasedCreditsCard from './PurchasedCreditsCard';
+import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
+import TrustIcon from '../icons/TrustIcon';
 import GreenCard from './GreenCard';
 import GreenTopIconCard from './GreenTopIconCard';
 import { ImageActionCard } from './ImageActionCard';
-import ImpactCard from './ImpactCard';
-import MapCard from './MapCard';
-import OnBoardingCard from './OnBoardingCard';
-import { OverviewCard } from './OverviewCard';
-import ProjectCard from './ProjectCard';
-import ProjectTopCard from './ProjectTopCard';
-import PurchasedCreditsCard from './PurchasedCreditsCard';
-import ResourcesCard from './ResourcesCard';
 import { StepCard } from './StepCard';
+import FarmerIcon from '../icons/FarmerIcon';
+import { OverviewCard } from './OverviewCard';
+import ResourcesCard from './ResourcesCard';
+import { QuestionItem } from '../faq/Question';
+import ProjectCard from './ProjectCard';
 
 export default {
   title: 'Cards',

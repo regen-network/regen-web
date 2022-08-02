@@ -1,10 +1,9 @@
 import React from 'react';
-import { graphql, PageProps, useStaticQuery } from 'gatsby';
-
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import SEO from '../components/seo';
-import FormSection from '../sections/wallet-address-registration/FormSection';
-import InstructionsSection from '../sections/wallet-address-registration/InstructionsSection';
 import TopSection from '../sections/wallet-address-registration/TopSection';
+import InstructionsSection from '../sections/wallet-address-registration/InstructionsSection';
+import FormSection from '../sections/wallet-address-registration/FormSection';
 
 const WalletAddressRegistrationPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`

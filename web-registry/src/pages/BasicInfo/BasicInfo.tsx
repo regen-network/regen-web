@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { BasicInfoForm, BasicInfoFormValues } from '../../components/organisms';
 import {
-  EditFormTemplate,
   OnboardingFormTemplate,
+  EditFormTemplate,
 } from '../../components/templates';
 import {
   useProjectByIdQuery,

@@ -1,7 +1,5 @@
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
-
-import { Maybe, ResourceFieldsFragment } from 'generated/sanity-graphql';
-
+import { ResourceFieldsFragment, Maybe } from 'generated/sanity-graphql';
 import { WrappedResourcesCard } from 'components/atoms/WrappedResourcesCard';
 
 interface ProjectImpactProps {

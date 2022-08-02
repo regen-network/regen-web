@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
 import { ERROR_TIMEOUT } from '../ChooseCreditClass.config';
 

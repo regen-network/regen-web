@@ -1,11 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { BlockContent } from 'web-components/src/components/block-content';
-
 import BackgroundSection from '../../components/BackgroundSection';
+import { BlockContent } from 'web-components/src/components/block-content';
 import { FundTopSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles<Theme>(theme => ({
@@ -37,8 +36,7 @@ const query = graphql`
 
 const TopSection = (): JSX.Element => {
   const styles = useStyles();
-  const { background, sanityFundPage } =
-    useStaticQuery<FundTopSectionQuery>(query);
+  const { background, sanityFundPage } = useStaticQuery<FundTopSectionQuery>(query);
   const data = sanityFundPage?.topSection;
 
   return (

@@ -1,14 +1,13 @@
 import React from 'react';
+import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
-import { graphql, useStaticQuery } from 'gatsby';
 
-import Section from 'web-components/lib/components/section';
-import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/lib/components/section';
 import { BlockContent } from 'web-components/src/components/block-content';
-
 import { TokenEconomicsQuery } from '../../generated/graphql';
+import { Body, Title } from 'web-components/lib/components/typography';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
   root: {

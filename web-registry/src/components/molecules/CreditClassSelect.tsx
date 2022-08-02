@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { QueryClassesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+import React, { useState, useEffect } from 'react';
 import { Field } from 'formik';
+import { QueryClassesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 
 import SelectTextField, {
   Option,
 } from 'web-components/lib/components/inputs/SelectTextField';
 
-import { getMetadataFromUint8Array } from 'lib/metadata-graph';
-
 import { useEcocreditQuery } from 'hooks';
+import { getMetadataFromUint8Array } from 'lib/metadata-graph';
 
 interface Props {
   name?: string;

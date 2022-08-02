@@ -1,10 +1,9 @@
 import React from 'react';
-
+import { RegenModalProps } from '.';
 import {
   CreateSellOrderForm,
   CreateSellOrderProps,
 } from '../form/CreateSellOrderForm';
-import { RegenModalProps } from '.';
 import { FormModalTemplate } from './FormModalTemplate';
 
 interface CreateSellOrderModalProps

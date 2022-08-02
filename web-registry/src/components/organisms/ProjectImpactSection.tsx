@@ -1,16 +1,16 @@
 import React, { useCallback, useRef } from 'react';
-import LazyLoad from 'react-lazyload';
-import Slider from 'react-slick';
+import { makeStyles, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { makeStyles, useTheme } from '@mui/styles';
+import LazyLoad from 'react-lazyload';
+import Slider from 'react-slick';
 import cx from 'clsx';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 import ProjectImpactCard from 'web-components/lib/components/cards/ProjectImpactCard';
 import Section from 'web-components/lib/components/section';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import PrevNextButton from 'web-components/lib/components/buttons/PrevNextButton';
+import { BlockContent } from 'web-components/lib/components/block-content';
 
 import { EcologicalImpact } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';

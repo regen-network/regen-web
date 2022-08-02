@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import RegenIcon from '../icons/RegenIcon';
 
 const useStyles = makeStyles<Theme, { isLoaded: boolean }>(theme => {

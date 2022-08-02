@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import getApiUri from './apiUri';
 
 export const getMetadata = async (metadata: string): Promise<any> => {

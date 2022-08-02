@@ -1,11 +1,10 @@
 import React from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-
-import { TeamSection } from '../../components/TeamSection';
 import {
   SanityRegenTeamMember,
   TeamCoreTeamSectionQuery,
 } from '../../generated/graphql';
+import { TeamSection } from '../../components/TeamSection';
 
 const query = graphql`
   query teamCoreTeamSection {

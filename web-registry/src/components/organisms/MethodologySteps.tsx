@@ -1,13 +1,13 @@
 import { makeStyles } from '@mui/styles';
 
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 
-import {
-  BasicStepCardSectionFieldsFragment,
-  Maybe,
-} from '../../generated/sanity-graphql';
 import { WrappedStepCard } from '../atoms/WrappedStepCard';
+import {
+  Maybe,
+  BasicStepCardSectionFieldsFragment,
+} from '../../generated/sanity-graphql';
 
 type Props = {
   steps?: Maybe<BasicStepCardSectionFieldsFragment>;

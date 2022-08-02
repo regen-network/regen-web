@@ -1,10 +1,9 @@
 import React, { ReactNode } from 'react';
 import { SxProps } from '@mui/material';
-
 import { FlexCol } from '../../box';
-import { Body, Subtitle } from '../../typography';
-
 import type { Theme } from '~/theme/muiTheme';
+
+import { Subtitle, Body } from '../../typography';
 
 export const ItemDisplay = (props: {
   name: string;

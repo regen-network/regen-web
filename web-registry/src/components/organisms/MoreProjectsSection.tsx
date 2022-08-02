@@ -1,13 +1,13 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import { makeStyles, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import cx from 'clsx';
 
-import Section from 'web-components/lib/components/section';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import Section from 'web-components/lib/components/section';
 
-import { Maybe, MoreProjectFieldsFragment } from '../../generated/graphql';
+import { MoreProjectFieldsFragment, Maybe } from '../../generated/graphql';
 import { ProjectCards } from './ProjectCards';
 
 interface MoreProjectsProps {

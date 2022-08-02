@@ -1,9 +1,9 @@
 import React from 'react';
-import InputAdornment from '@mui/material/InputAdornment';
-import MuiTextField from '@mui/material/TextField';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
-import clsx from 'clsx';
+import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { fieldToTextField, TextFieldProps } from 'formik-mui';
+import MuiTextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import clsx from 'clsx';
 
 import { DefaultStyleProps } from './FieldFormControl';
 import InputLabel from './InputLabel';

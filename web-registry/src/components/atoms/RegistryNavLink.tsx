@@ -1,8 +1,7 @@
 import React from 'react';
-
 import {
-  NavLinkProps,
   useNavLinkStyles,
+  NavLinkProps,
 } from 'web-components/lib/components/header/NavLink';
 
 import { Link } from './Link';

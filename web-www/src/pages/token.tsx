@@ -1,18 +1,18 @@
 import React from 'react';
-import { graphql, PageProps, useStaticQuery } from 'gatsby';
+import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import { FluidObject } from 'gatsby-image';
 
 import SEO from '../components/seo';
-import { TokenPageQuery } from '../generated/graphql';
-import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
+import TopSection from '../sections/token/TopSection';
+import TokenEconomics from '../sections/token/TokenEconomics';
+import InfoSection from '../sections/token/InfoSection';
+import Staking from '../sections/token/Staking';
 import BlockExplorerSection from '../sections/token/BlockExplorerSection';
 import ConnectSection from '../sections/token/ConnectSection';
-import InfoSection from '../sections/token/InfoSection';
 import MediaSection from '../sections/token/MediaSection';
-import Staking from '../sections/token/Staking';
 import TokenDetails from '../sections/token/TokenDetails';
-import TokenEconomics from '../sections/token/TokenEconomics';
-import TopSection from '../sections/token/TopSection';
+import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
+import { TokenPageQuery } from '../generated/graphql';
 
 const query = graphql`
   query tokenPage {

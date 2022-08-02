@@ -1,14 +1,13 @@
 import React from 'react';
-import { SxProps } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
+import { makeStyles } from '@mui/styles';
 
-import { BlockContent } from 'web-components/lib/components/block-content';
-import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-
-import { Maybe, Scalars } from '../../generated/sanity-graphql';
+import { BlockContent } from 'web-components/lib/components/block-content';
 import { BackgroundImgSection } from './BackgroundImgSection';
+import { Maybe, Scalars } from '../../generated/sanity-graphql';
+import { Body, Title } from 'web-components/lib/components/typography';
+import { SxProps } from '@mui/material';
 
 type Props = {
   img: string;

@@ -1,13 +1,13 @@
 import React from 'react';
-import type { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
+import { makeStyles } from '@mui/styles';
 
-import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
+import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
+import { sanityMediaToArticleCardProps } from '../../util/sanity-transforms';
 
 import type { NctMediaSectionQuery } from '../../generated/graphql';
-import { sanityMediaToArticleCardProps } from '../../util/sanity-transforms';
+import type { Theme } from '@mui/material';
 
 const useStyles = makeStyles((theme: Theme) => ({
   card: {

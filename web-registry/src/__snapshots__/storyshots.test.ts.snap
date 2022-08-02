@@ -312,6 +312,58 @@ exports[`Storyshots Buttons Text Button 1`] = `
 </MemoryRouter>
 `;
 
+exports[`Storyshots Cards Create Project Card 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Cards Create Project Card Add Another 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots Cards Glance Card 1`] = `
 <MemoryRouter
   initialEntries={
@@ -651,6 +703,32 @@ exports[`Storyshots Cards Purchased Credits Card 1`] = `
 `;
 
 exports[`Storyshots Cards Resources Card 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Cards Review Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
@@ -1769,6 +1847,32 @@ exports[`Storyshots Modal Basket Put Modal 1`] = `
 `;
 
 exports[`Storyshots Modal Basket Take Modal 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      "/",
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Modal Confirm Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [

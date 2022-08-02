@@ -38,6 +38,7 @@ import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { TransactionModals } from './ProjectDetails.TransactionModals';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
+import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 
 interface Project {
   creditPrice?: CreditPrice;
@@ -148,6 +149,8 @@ function ProjectDetails(): JSX.Element {
     setIssuanceModalOpen,
     viewOnLedger,
   } = useIssuanceModal(data);
+
+  if (!project) return <NotFoundPage />;
 
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>

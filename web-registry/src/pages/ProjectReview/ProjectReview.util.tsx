@@ -1,7 +1,9 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+
 import { getISOString } from 'web-components/lib/utils/locationStandard';
 import { countries } from 'web-components/lib/utils/countries';
+
 import {
   ProjectMetadataLD,
   VCSProjectMetadataLD,

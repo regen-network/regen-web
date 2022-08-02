@@ -1,0 +1,125 @@
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { DeliverTxResponse } from '@cosmjs/stargate';
+import { Box, Grid } from '@mui/material';
+import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+
+import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
+import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
+
+import { Link } from '../../components/atoms';
+import useEcocreditQuery from '../../hooks/useEcocreditQuery';
+import useMsgClient from '../../hooks/useMsgClient';
+import { useQuerySellOrders } from '../../hooks/useQuerySellOrders';
+import { getHashUrl } from '../../lib/block-explorer';
+import { getProjectDisplayData, ProjectOnSale } from './Projects.normalize';
+
+const IMAGE_STORAGE_BASE_URL = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
+const API_URI = process.env.REACT_APP_API_URI;
+
+export const Projects: React.FC = () => {
+  const navigate = useNavigate();
+  const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+  const [projectsWithOrders, setProjectsWithOrders] = useState<ProjectOnSale[]>(
+    [],
+  );
+  // const [bannerError, setBannerError] = useState('');
+  const { data } = useEcocreditQuery<QueryProjectsResponse>({
+    query: 'projects',
+    params: {},
+  });
+  const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
+  const sellOrders = sellOrdersResponse?.sellOrders;
+  const projects = data?.projects;
+
+  useEffect(() => {
+    const normalize = async (): Promise<void> => {
+      if (projects && sellOrders) {
+        const _projectsWithOrders = await getProjectDisplayData(
+          projects,
+          sellOrders,
+        );
+        setProjectsWithOrders(_projectsWithOrders);
+      }
+    };
+
+    normalize();
+  }, [projects, sellOrders]);
+
+  const closeSubmitModal = (): void => setIsSubmitModalOpen(false);
+
+  const handleTxQueued = (): void => {
+    setIsSubmitModalOpen(true);
+  };
+
+  const handleTxModalClose = (): void => {
+    setTxModalTitle(undefined);
+    setError(undefined);
+  };
+
+  const handleError = (): void => {
+    closeSubmitModal();
+    setTxModalTitle('Buy Credits Error');
+  };
+
+  const handleTxDelivered = async (
+    _deliverTxResponse: DeliverTxResponse,
+  ): Promise<void> => {
+    console.log('_deliverTxResponse', _deliverTxResponse);
+  };
+
+  const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =
+    useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+
+  const txHash = deliverTxResponse?.transactionHash;
+  const txHashUrl = getHashUrl(txHash);
+
+  return (
+    <Box
+      justifyContent={'center'}
+      sx={{
+        bgcolor: 'grey.50',
+        borderTop: 1,
+        borderColor: 'grey.100',
+        p: 8.75,
+      }}
+    >
+      <Grid container spacing={4.75} justifyContent="center">
+        {projectsWithOrders?.map(project => (
+          <Grid item key={project?.id}>
+            <ProjectCard
+              name={project?.name}
+              imgSrc={project?.imgSrc}
+              place={project?.place}
+              area={project?.area}
+              areaUnit={project?.areaUnit}
+              onButtonClick={() => {}}
+              purchaseInfo={project.purchaseInfo}
+              onClick={() => navigate(`/projects/${project.id}`)}
+              imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+              apiServerUrl={API_URI}
+              sx={{ minWidth: [300, 338], maxWidth: 338, mr: 10, mb: 10 }}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
+      {error && txModalTitle && (
+        <TxErrorModal
+          error={error}
+          open={!!error && (!!txModalTitle || !!deliverTxResponse)}
+          onClose={handleTxModalClose}
+          txHash={txHash || ''}
+          txHashUrl={txHashUrl}
+          cardTitle={txModalTitle}
+          linkComponent={Link}
+          onButtonClick={handleTxModalClose}
+          buttonTitle="close"
+        />
+      )}
+      {/* {bannerError && <ErrorBanner text={bannerError} />} */}
+    </Box>
+  );
+};

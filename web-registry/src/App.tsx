@@ -50,6 +50,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const OrganizationProfile = lazy(() => import('./pages/OrganizationProfile'));
 const PostPurchase = lazy(() => import('./pages/PostPurchase'));
 const Project = lazy(() => import('./pages/Project'));
+const Projects = lazy(() => import('./pages/Projects'));
 const ProjectCreate = lazy(() => import('./pages/ProjectCreate'));
 const ProjectFinished = lazy(() => import('./pages/ProjectFinished'));
 const ProjectList = lazy(() => import('./pages/ProjectList'));
@@ -114,6 +115,7 @@ const App: React.FC = (): JSX.Element => {
               path="methodology-review-process"
               element={<MethodologyReviewProcess />}
             />
+            <Route path="projects" element={<Projects />} />
             <Route path="projects/:projectId" element={<Project />} />
             <Route
               path="post-purchase/:projectId/:walletId/:name"

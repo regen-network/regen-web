@@ -1,3 +1,4 @@
+import { GraphPointer } from 'clownface';
 import {
   BlankNode,
   DataFactory,
@@ -7,7 +8,6 @@ import {
   Quad,
   Term,
 } from 'rdf-js';
-import { GraphPointer } from 'clownface';
 
 declare namespace ValidationReport {
   interface Options {

@@ -1,17 +1,17 @@
 import React from 'react';
-import { PageProps } from 'gatsby';
 import { useTheme } from '@mui/styles';
+import { PageProps } from 'gatsby';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Header, { HeaderColors } from 'web-components/lib/components/header';
+import { HeaderDropdownItemProps } from 'web-components/lib/components/header/HeaderDropdownItems';
 import { HeaderMenuItem } from 'web-components/lib/components/header/HeaderMenuHover';
 import { NavLink } from 'web-components/lib/components/header/NavLink';
-import { HeaderDropdownItemProps } from 'web-components/lib/components/header/HeaderDropdownItems';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 // import RegistryIcon from '../../static/media/svgs/nav-dropdown/registry.svg';
 import BuyersIcon from '../../static/media/svgs/nav-dropdown/buyers.svg';
-import LandStewardsIcon from '../../static/media/svgs/nav-dropdown/land-stewards.svg';
 import DevelopersIcon from '../../static/media/svgs/nav-dropdown/developers.svg';
+import LandStewardsIcon from '../../static/media/svgs/nav-dropdown/land-stewards.svg';
 import ScientistIcon from '../../static/media/svgs/nav-dropdown/scientists.svg';
 import ValidatorsIcon from '../../static/media/svgs/nav-dropdown/validators.svg';
 

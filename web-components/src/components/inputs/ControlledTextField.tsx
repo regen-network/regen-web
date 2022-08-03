@@ -1,6 +1,6 @@
 import React from 'react';
+import { InputAdornment, InputProps, SxProps } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
-import { InputProps, InputAdornment, SxProps } from '@mui/material';
 import { FieldProps } from 'formik';
 
 import { Body } from '../typography';

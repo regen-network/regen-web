@@ -1,12 +1,13 @@
+import React from 'react';
+import ReactHtmlParser from 'react-html-parser';
+import { Link } from 'react-router-dom';
+import { Box, useTheme } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
 import Grid from '@mui/material/Grid';
 import cx from 'clsx';
 import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
-import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
-import { Link } from 'react-router-dom';
 
 import Card from 'web-components/lib/components/cards/Card';
 import Submit from 'web-components/lib/components/form/Submit';
@@ -17,6 +18,7 @@ import ControlledTextField from 'web-components/lib/components/inputs/Controlled
 import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
 import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
+import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
@@ -27,12 +29,10 @@ import {
   Title,
 } from 'web-components/lib/components/typography';
 
-import { Box, useTheme } from '@mui/material';
-import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import { useWallet } from '../../../lib/wallet';
-import { getSellOrderLabel } from './BuyCreditsModal.utils';
-import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
+import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
+import { getSellOrderLabel } from './BuyCreditsModal.utils';
 
 export interface Credits {
   purchased: number;

@@ -1,15 +1,17 @@
 import React from 'react';
-import { useTheme } from '@mui/styles';
-import { Box, Skeleton } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import { Box, Skeleton } from '@mui/material';
+import { useTheme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
+import {
+  CreditPrice,
+} from 'web-components/lib/components/fixed-footer/BuyFooter';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
-import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import SEO from 'web-components/lib/components/seo';
-import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
+import ProjectMediafrom 'web-components/lib/components/sliders/ProjectMedia';
 
 import { useLedger } from '../../../ledger';
 import { chainId } from '../../../lib/ledger';

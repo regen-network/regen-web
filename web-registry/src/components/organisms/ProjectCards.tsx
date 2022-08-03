@@ -1,16 +1,16 @@
 import React from 'react';
-import clsx from 'clsx';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
-import { makeStyles, useTheme } from '@mui/styles';
+import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { makeStyles, useTheme } from '@mui/styles';
+import clsx from 'clsx';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { MoreProjectFieldsFragment, Maybe } from '../../generated/graphql';
-import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import DefaultProject from '../../assets/default-project.jpg';
+import { Maybe, MoreProjectFieldsFragment } from '../../generated/graphql';
+import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 
 type Props = {
   projects: Array<Maybe<MoreProjectFieldsFragment | undefined>>;

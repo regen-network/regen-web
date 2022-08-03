@@ -2,14 +2,14 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import useBasketDetails from './hooks/useBasketDetails';
 import {
-  BasketOverview,
   BasketEcocreditsTable,
+  BasketOverview,
 } from '../../components/organisms';
+import useBasketDetails from './hooks/useBasketDetails';
 
 const BasketDetails: React.FC = () => {
   const { basketDenom } = useParams<{ basketDenom: string }>();

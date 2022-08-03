@@ -1,6 +1,7 @@
+import { useMemo, useState } from 'react';
 import { Box, useTheme } from '@mui/material';
 import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { useMemo, useState } from 'react';
+
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
@@ -13,15 +14,18 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
-import { Link } from '../../../components/atoms';
-import { BuyCreditsModal } from '../../../components/organisms';
-import SellOrdersTable from '../../../components/organisms/SellOrdersTable/SellOrdersTable';
-import { useAllProjectsQuery } from '../../../generated/graphql';
-import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
-import useMsgClient from '../../../hooks/useMsgClient';
-import useQueryListBatchInfo from '../../../hooks/useQueryListBatchInfo';
-import { useQuerySellOrders } from '../../../hooks/useQuerySellOrders';
-import { getHashUrl } from '../../../lib/block-explorer';
+
+import { useAllProjectsQuery } from 'generated/graphql';
+import { getHashUrl } from 'lib/block-explorer';
+
+import { Link } from 'components/atoms';
+import { BuyCreditsModal } from 'components/organisms';
+import SellOrdersTable from 'components/organisms/SellOrdersTable/SellOrdersTable';
+import useEcocreditQuery from 'hooks/useEcocreditQuery';
+import useMsgClient from 'hooks/useMsgClient';
+import useQueryListBatchInfo from 'hooks/useQueryListBatchInfo';
+import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
+
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
 import { useResetErrorBanner } from './hooks/useResetErrorBanner';

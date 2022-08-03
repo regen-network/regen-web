@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import ReactPlayerLazy from 'react-player/lazy';
+import { useNavigate, useParams } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, CardMedia, useMediaQuery, useTheme } from '@mui/material';
-import ReactPlayerLazy from 'react-player/lazy';
 
 import Card from 'web-components/lib/components/cards/Card';
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
@@ -14,20 +14,20 @@ import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
 import { getOnChainProjectId, getJurisdiction } from './ProjectReview.util';
+import { Link } from '../../components/atoms';
+import { ProjectPageFooter } from '../../components/molecules';
 import { OnboardingFormTemplate } from '../../components/templates';
 import {
   useProjectByIdQuery,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
+import useMsgClient from '../../hooks/useMsgClient';
+import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
-import { ProjectPageFooter } from '../../components/molecules';
-import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
-import useMsgClient from '../../hooks/useMsgClient';
 import { useCreateProjectContext } from '../ProjectCreate';
-import { Link } from '../../components/atoms';
-import { getHashUrl } from '../../lib/block-explorer';
+import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
 
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();

@@ -1,10 +1,10 @@
 import React from 'react';
+import { SxProps, Theme } from '@mui/material';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
-import { SxProps, Theme } from '@mui/material';
 
-import { Direction, StyleProps, DirectionRotate } from './ArrowDownIcon';
+import { Direction, DirectionRotate, StyleProps } from './ArrowDownIcon';
 
 interface ArrowDownIconProps {
   className?: string;

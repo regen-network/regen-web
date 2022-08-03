@@ -1,8 +1,12 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { Box, SxProps } from '@mui/material';
+import { graphql, useStaticQuery } from 'gatsby';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
+// import { formatDate } from 'web-components/lib/utils/format';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import Section from 'web-components/lib/components/section';
 import {
   Body,
   Label,
@@ -10,12 +14,8 @@ import {
   Title,
 } from 'web-components/lib/components/typography';
 import { BlockContent } from 'web-components/src/components/block-content';
-import Section from 'web-components/lib/components/section';
-// import { formatDate } from 'web-components/lib/utils/format';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-// import Countdown from 'web-components/lib/components/countdown';
 
+// import Countdown from 'web-components/lib/components/countdown';
 import type { NctTokenSectionQuery } from '../../generated/graphql';
 
 const query = graphql`

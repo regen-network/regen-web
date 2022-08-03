@@ -1,12 +1,12 @@
-import React, { useEffect, useState, createContext } from 'react';
-import { SigningStargateClient, DeliverTxResponse } from '@cosmjs/stargate';
+import React, { createContext, useEffect, useState } from 'react';
+import { OfflineSigner } from '@cosmjs/proto-signing';
+import { DeliverTxResponse, SigningStargateClient } from '@cosmjs/stargate';
 import { Window as KeplrWindow } from '@keplr-wallet/types';
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
-import { OfflineSigner } from '@cosmjs/proto-signing';
 
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { ledgerRPCUri, ledgerRESTUri, chainId } from './ledger';
+import { chainId, ledgerRESTUri, ledgerRPCUri } from './ledger';
 
 const AUTO_CONNECT_WALLET_KEY = 'auto_connect_wallet';
 const KEPLR_WALLET_EXTENSION = 'keplr-wallet-extension';

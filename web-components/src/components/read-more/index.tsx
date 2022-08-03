@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import cx from 'clsx';
 import Fade from '@mui/material/Fade';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import cx from 'clsx';
 
 import { ExpandButton } from '../buttons/ExpandButton';
-import { truncate, Texts } from './truncate';
 import { Body } from '../typography';
+import { Texts, truncate } from './truncate';
 
 export interface ReadMoreProps {
   children: string;

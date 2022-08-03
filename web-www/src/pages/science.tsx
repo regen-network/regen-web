@@ -1,14 +1,14 @@
 import React from 'react';
-import { useStaticQuery, graphql, PageProps } from 'gatsby';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
 
-import TopSection from '../sections/science/TopSection';
-import TitleDescriptionSection from '../sections/science/TitleDescriptionSection';
+import SEO from '../components/seo';
+import CommunitySection from '../sections/science/CommunitySection';
 import OpenScienceSection from '../sections/science/OpenScienceSection';
 import PartnershipsSection from '../sections/science/PartnershipsSection';
-import CommunitySection from '../sections/science/CommunitySection';
+import TitleDescriptionSection from '../sections/science/TitleDescriptionSection';
+import TopSection from '../sections/science/TopSection';
 import BlogSection from '../sections/shared/BlogSection';
 import EmailSubmitSection from '../sections/shared/EmailSubmitSection';
-import SEO from '../components/seo';
 
 const SciencePage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`

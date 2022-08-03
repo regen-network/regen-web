@@ -1,20 +1,24 @@
-import axios from 'axios';
-import { uniq } from 'lodash';
+import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import {
-  QueryClientImpl,
+  GetTxsEventRequest,
+  GetTxsEventResponse,
+  ServiceClientImpl,
+} from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import {
+  BatchInfo,
   DeepPartial,
   QueryBalanceRequest,
   QueryBalanceResponse,
   QueryBatchesByClassRequest,
   QueryBatchesByClassResponse,
-  BatchInfo,
   QueryBatchRequest,
   QueryBatchResponse,
   QueryClassesRequest,
   QueryClassesResponse,
+  QueryClassIssuersResponse,
   QueryClassRequest,
   QueryClassResponse,
-  QueryClassIssuersResponse,
+  QueryClientImpl,
   QueryCreditTypesRequest,
   QueryCreditTypesResponse,
   QueryProjectsRequest,
@@ -28,21 +32,17 @@ import {
   QueryBatchesByProjectResponse,
   QueryBatchesByProjectRequest,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
-import {
-  ServiceClientImpl,
-  GetTxsEventRequest,
-  GetTxsEventResponse,
-} from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import axios from 'axios';
+import { uniq } from 'lodash';
 
-import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
 import { connect as connectToApi } from '../../ledger';
-import { expLedger, ledgerRESTUri } from '../ledger';
 import type {
   BatchInfoWithBalance,
   BatchInfoWithSupply,
   BatchTotalsForProject,
 } from '../../types/ledger/ecocredit';
+import { expLedger, ledgerRESTUri } from '../ledger';
+import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';
 
 const getCosmosServiceClient = async (): Promise<ServiceClientImpl> => {
   const api = await connectToApi();

@@ -1,7 +1,7 @@
 import Parser from '@rdfjs/parser-jsonld';
-import { ValidationReport } from 'rdf-validate-shacl';
 import factory from 'rdf-ext';
 import DatasetExt from 'rdf-ext/lib/Dataset';
+import { ValidationReport } from 'rdf-validate-shacl';
 import { Readable } from 'stream';
 
 // loadDataset parses and loads the given JSON-LD string into

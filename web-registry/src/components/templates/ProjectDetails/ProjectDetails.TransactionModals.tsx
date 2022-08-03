@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Modal } from '@mui/material';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { useWallet } from '../../../lib/wallet';

@@ -1,12 +1,12 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
-import Card from './Card';
 import { Title } from '../typography';
-import UserInfoWithTitle from '../user/UserInfoWithTitle';
 import { User } from '../user/UserInfo';
+import UserInfoWithTitle from '../user/UserInfoWithTitle';
+import Card from './Card';
 
 export interface SDG {
   imageUrl: string;

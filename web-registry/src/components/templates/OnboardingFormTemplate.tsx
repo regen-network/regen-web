@@ -1,9 +1,10 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import { PlanStepper } from '../molecules';
 import { Loading } from 'web-components/lib/components/loading';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+
+import { PlanStepper } from '../molecules';
 
 type Props = {
   title: string;

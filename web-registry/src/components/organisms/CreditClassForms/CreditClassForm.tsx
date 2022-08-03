@@ -1,12 +1,12 @@
 import { Box, useTheme } from '@mui/material';
-import { Form, Field, FieldArray, useFormikContext } from 'formik';
+import { Field, FieldArray, Form, useFormikContext } from 'formik';
 
+import { TextButton } from 'web-components/lib/components/buttons/TextButton';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
+import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import RegenTextField from 'web-components/lib/components/inputs/TextField';
-import TrashIcon from 'web-components/lib/components/icons/TrashIcon';
-import { TextButton } from 'web-components/lib/components/buttons/TextButton';
 
 /** Values modeled on ledger v1 ecocredit MsgCreateClass. See:
  * https://buf.build/regen/regen-ledger/docs/main:regen.ecocredit.v1#regen.ecocredit.v1.MsgCreateClass */

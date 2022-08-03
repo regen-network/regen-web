@@ -1,10 +1,12 @@
-import { Box } from '@mui/material';
-import dayjs from 'dayjs';
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import { Box } from '@mui/material';
+import dayjs from 'dayjs';
+
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
+
 import { ReactComponent as USDCIcon } from '../../../assets/svgs/usdc.svg';
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';

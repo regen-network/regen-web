@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  ClassInfo,
+  QueryClassesResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { QueryClassesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { CreditClassMetadataLD } from 'generated/json-ld';
 
 import { getMetadata } from '../lib/metadata-graph';
-import { CreditClassMetadataLD } from 'generated/json-ld';
 import useQueryListClasses from './useQueryListClasses';
 
 interface ClassInfoWithMetadata extends ClassInfo {

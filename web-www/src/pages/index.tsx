@@ -1,19 +1,19 @@
 import React from 'react';
-import { useStaticQuery, graphql, PageProps } from 'gatsby';
 import { useTheme } from '@mui/material';
-import BackgroundImage from 'gatsby-background-image';
 import Box from '@mui/material/Box';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
+import BackgroundImage from 'gatsby-background-image';
 
 import SEO from '../components/seo';
-import HomeFoldSection from '../sections/home/FoldSection';
-import MarketplaceSection from '../sections/home/MarketplaceSection';
-import HomeLedger from '../sections/home/LedgerSection';
-import HomeValuesSection from '../sections/home/ValuesSection';
-import ClimateSection from '../sections/home/ClimateSection';
-import CarbonPlusSection from '../sections/home/CarbonPlusSection';
-import BlogSection from '../sections/shared/BlogSection';
 import { HomePageWebQuery } from '../generated/graphql';
 import { BannerTextSection } from '../sections/home/BannerTextSection';
+import CarbonPlusSection from '../sections/home/CarbonPlusSection';
+import ClimateSection from '../sections/home/ClimateSection';
+import HomeFoldSection from '../sections/home/FoldSection';
+import HomeLedger from '../sections/home/LedgerSection';
+import MarketplaceSection from '../sections/home/MarketplaceSection';
+import HomeValuesSection from '../sections/home/ValuesSection';
+import BlogSection from '../sections/shared/BlogSection';
 
 const query = graphql`
   query homePageWeb {

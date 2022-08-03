@@ -1,24 +1,25 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/material';
-import { Formik, Form, Field, FormikErrors } from 'formik';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
+import { Field, Form, Formik, FormikErrors } from 'formik';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import InputLabel from 'web-components/lib/components/inputs/InputLabel';
-import TextField from 'web-components/lib/components/inputs/TextField';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
+import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
+import TextField from 'web-components/lib/components/inputs/TextField';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 // import { requiredMessage } from 'web-components/lib/components/inputs/validation'; TODO: regen-registry#1048
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 // import {
 //   validate,
 //   getProjectPageBaseData,
 //   getCompactedPath,
 // } from '../../lib/rdf'; TODO: regen-registry#1048
 import { ProjectPageFooter } from '../molecules';
-import { useProjectEditContext } from '../../pages/ProjectEdit';
 
 export interface BasicInfoFormValues {
   'schema:name': string;

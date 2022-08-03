@@ -1,14 +1,14 @@
 import React from 'react';
-import cx from 'clsx';
-import { makeStyles, useTheme } from '@mui/styles';
 import { MenuItem } from '@mui/material';
+import { makeStyles, useTheme } from '@mui/styles';
+import cx from 'clsx';
 
 import MenuHover, { MenuTitle } from '../menu-hover';
-import { NavLinkProps } from './NavLink';
 import {
   HeaderDropdownColumn,
   HeaderDropdownItemProps,
 } from './HeaderDropdownItems';
+import { NavLinkProps } from './NavLink';
 
 const useStyles = makeStyles(theme => ({
   menuItem: {

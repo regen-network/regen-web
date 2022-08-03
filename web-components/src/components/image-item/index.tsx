@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { Variant } from '@mui/material/styles/createTypography';
-import clsx from 'clsx';
 import Grid from '@mui/material/Grid';
+import { Variant } from '@mui/material/styles/createTypography';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import clsx from 'clsx';
 
-import { Body, Title } from '../typography';
 import ContainedButton from '../buttons/ContainedButton';
+import { Body, Title } from '../typography';
 
 export interface ImageItemProps {
   img: JSX.Element; // using pure img tag or gatsby-image

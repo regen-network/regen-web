@@ -1,6 +1,6 @@
 import React from 'react';
 import SvgIcon from '@mui/material/SvgIcon';
-import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
 import clsx from 'clsx';
 
 import { directionRotate, StyleProps } from './ArrowDownIcon';

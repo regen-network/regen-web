@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
-import { makeStyles } from '@mui/styles';
-import { DefaultTheme as Theme } from '@mui/styles';
-import { Popover, MenuList, Paper } from '@mui/material';
+import React, { useRef, useState } from 'react';
+import { MenuList, Paper, Popover } from '@mui/material';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+
 import DropdownIcon from '../icons/DropdownIcon';
 
 const useStyles = makeStyles((theme: Theme) => ({

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
+import { queryClassIssuers } from '../lib/ecocredit/api';
 import { useWallet } from '../lib/wallet';
 import useQueryListClasses from './useQueryListClasses';
-import { queryClassIssuers } from '../lib/ecocredit/api';
 
 /**
  * Simply returns if user's wallet address was found in an on-chain credit class issuer list

@@ -1,9 +1,9 @@
-import { useState, useCallback } from 'react';
-import { StdFee, DeliverTxResponse } from '@cosmjs/stargate';
+import { useCallback, useState } from 'react';
+import { DeliverTxResponse, StdFee } from '@cosmjs/stargate';
 
 import { useLedger } from '../ledger';
-import { Wallet } from '../lib/wallet';
 import { assertIsError } from '../lib/error';
+import { Wallet } from '../lib/wallet';
 
 interface TxData {
   msgs: any[];

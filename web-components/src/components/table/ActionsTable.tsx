@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Box,
+  styled,
   Table,
   TableBody,
+  TableFooter,
   TableHead,
   TableRow,
-  Box,
-  TableFooter,
-  styled,
 } from '@mui/material';
+
 import {
+  getTablePaginationPadding,
   StyledTableCell,
   StyledTableContainer,
   StyledTableRow,
-  getTablePaginationPadding,
   // StyledTableSortLabel,
 } from './';
 // import {

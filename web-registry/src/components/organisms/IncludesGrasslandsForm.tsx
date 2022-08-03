@@ -1,10 +1,10 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import Toggle from 'web-components/lib/components/inputs/Toggle';
 import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
+import Toggle from 'web-components/lib/components/inputs/Toggle';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
 interface IncludesGrasslandsFormProps {

@@ -8,10 +8,10 @@ import {
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { Link } from '../atoms';
-import { NoCredits } from '../molecules';
 import { getAccountUrl } from '../../lib/block-explorer';
 import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
+import { Link } from '../atoms';
+import { NoCredits } from '../molecules';
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,

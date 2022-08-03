@@ -1,3 +1,4 @@
+export * from './AccountLink';
 export * from './KeplrRoute';
 export * from './Link';
 export * from './LinkWithArrow';

@@ -3,6 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 import Section from 'web-components/src/components/section';
 import { TitleBody } from 'web-components/src/components/text-layouts';
+
 import { FundThesisSectionQuery } from '../../generated/graphql';
 
 const query = graphql`

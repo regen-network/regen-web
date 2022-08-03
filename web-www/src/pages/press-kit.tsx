@@ -4,15 +4,15 @@ import BackgroundImage from 'gatsby-background-image';
 
 import SEO from '../components/seo';
 import TopSection from '../sections/press-kit//TopSection';
-import TitleDescriptionSection from '../sections/press-kit/TitleDescriptionSection';
-import EnableSection from '../sections/press-kit/EnableSection';
-import TimelineSection from '../sections/press-kit/TimelineSection';
-import TeamSection from '../sections/press-kit/PresskitTeamSection';
-import FeaturedSection from '../sections/press-kit/FeaturedSection';
 import AwardsSection from '../sections/press-kit/AwardsSection';
-import LogosSection from '../sections/press-kit/LogosSection';
 import ConnectSection from '../sections/press-kit/ConnectSection';
+import EnableSection from '../sections/press-kit/EnableSection';
+import FeaturedSection from '../sections/press-kit/FeaturedSection';
+import LogosSection from '../sections/press-kit/LogosSection';
 import PhotosSection from '../sections/press-kit/PhotosSection';
+import TeamSection from '../sections/press-kit/PresskitTeamSection';
+import TimelineSection from '../sections/press-kit/TimelineSection';
+import TitleDescriptionSection from '../sections/press-kit/TitleDescriptionSection';
 
 const PressKitPage: React.FC<PageProps> = ({ location }) => {
   const data = useStaticQuery(graphql`

@@ -1,5 +1,4 @@
-import * as React from 'react';
-import Action from 'web-components/lib/components/action';
+import Action from '.';
 
 export default {
   title: 'Action',

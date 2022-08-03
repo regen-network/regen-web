@@ -1,24 +1,25 @@
 import React from 'react';
+import { Box, Grid, LinearProgress, Theme } from '@mui/material';
+import { createStyles, makeStyles, withStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
-import { Grid, LinearProgress, Theme, Box } from '@mui/material';
-import { withStyles, createStyles, makeStyles } from '@mui/styles';
 import Img, { FluidObject } from 'gatsby-image';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
-import { getFormattedDate } from 'web-components/lib/utils/format';
-import Section from 'web-components/lib/components/section';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import {
-  MainnetLaunchInfoSectionQuery,
-  SanityMainnetActionItem,
-} from '../../generated/graphql';
-import { BlockContent } from 'web-components/src/components/block-content';
+import Section from 'web-components/lib/components/section';
 import {
   Body,
   Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
+import { getFormattedDate } from 'web-components/lib/utils/format';
+import { BlockContent } from 'web-components/src/components/block-content';
+
+import {
+  MainnetLaunchInfoSectionQuery,
+  SanityMainnetActionItem,
+} from '../../generated/graphql';
 
 const StyledLinearProgress = withStyles((theme: Theme) =>
   createStyles({

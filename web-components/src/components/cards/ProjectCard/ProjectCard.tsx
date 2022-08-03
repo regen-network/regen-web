@@ -1,21 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
-import { useState } from 'react';
 
 import { formatStandardInfo } from '../../../utils/format';
+import OutlinedButton from '../../buttons/OutlinedButton';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
+import CurrentCreditsIcon from '../../icons/CurrentCreditsIcon';
+import { RegenTokenIcon } from '../../icons/RegenTokenIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
+import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import MediaCard from '../MediaCard';
 import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
 import { PurchaseInfo } from './ProjectCard.types';
 import { getAbbreviation } from './ProjectCard.utils';
-import { Body, Subtitle } from '../../typography';
-import { RegenTokenIcon } from '../../icons/RegenTokenIcon';
-import OutlinedButton from '../../buttons/OutlinedButton';
-import CurrentCreditsIcon from '../../icons/CurrentCreditsIcon';
 
 export interface ProjectCardProps {
   name: string;

@@ -4,11 +4,11 @@ import { makeStyles } from '@mui/styles';
 import { Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import creditClassConnectImg from '../../assets/credit-class-connect-bg.png';
 import { ConnectSection, Maybe } from '../../generated/sanity-graphql';
+import { getLinkHref } from '../../lib/button';
 import { BackgroundImgSection } from '../molecules/BackgroundImgSection';
 import { IconLabel } from '../molecules/IconLabel';
-import creditClassConnectImg from '../../assets/credit-class-connect-bg.png';
-import { getLinkHref } from '../../lib/button';
 
 type Props = {
   connectSection?: Maybe<ConnectSection>;

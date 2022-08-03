@@ -1,18 +1,19 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
 import { graphql, useStaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
-import { TitleWithParagraphs } from './ApproachSection';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import { BlockContent } from 'web-components/src/components/block-content';
+
 import {
   CaseStudyFundingSectionQuery,
   SanityCaseStudyFundingSection,
 } from '../../../generated/graphql';
-import { BlockContent } from 'web-components/src/components/block-content';
+import { TitleWithParagraphs } from './ApproachSection';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

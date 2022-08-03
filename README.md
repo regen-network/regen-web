@@ -7,6 +7,9 @@ The website for the [Regen Network](https://regen.network) decentralized infrast
 - [Regen Website](#regen-website)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+      - [Mac](#mac)
+    - [Install dependencies](#install-dependencies)
   - [Environment variables](#environment-variables)
   - [Development](#development)
   - [Deployment](#deployment)
@@ -35,7 +38,8 @@ This project uses [lerna](https://github.com/lerna/lerna) with [yarn workspaces]
 
 #### Mac
 
-If you haven't already, you can set up system dependencies by running the following commands: 
+If you haven't already, you can set up system dependencies by running the following commands:
+
 ```sh
 brew install python
 sudo ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
@@ -187,15 +191,17 @@ yarn test-update-snapshot
 ## Code style
 
 [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) are used as
-code formatter and linter respectively:
+code formatter and linter.
+
+Code can be formatted and any auto-fixable errors corrected through the command:
 
 ```sh
-yarn format
+yarn format-and-fix
 ```
 
-```sh
-yarn lint
-```
+If you are using VsCode, there are suggested workspace settings in `.vscode/settings.json.suggested` - copy those over to your workspace `settings.json` and things should format automatically.
+
+Note: You'll need the VsCode extensions for [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) and [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 ## Typography
 
@@ -256,8 +262,8 @@ The `<Body>` component by default will add styles to child `Link` and `ul/ol` el
 |  21px  | 1.313rem | 5.252             |              H5, ButtonLarge              |         Title, Label         |        H5        |
 |  18px  | 1.125rem | 4.5               | H6, subtitleLarge bodyLarge, buttonMedium | Title, Subtitle, Body, Label |  h6, textLarge   |
 |  16px  |   1rem   | 4                 |        subtitleMedium, bodyMedium         |       Subtitle, Label        |    textMedium    |
-|  14px  | 0.875rem | 3.5               |   subtitleSmall, bodySmall, buttonSmall   |     Subtitle Body, Label     |    textSmall     |
-|  12px  | 0.75rem  | 3                 |  subtitleXSmall bodyXSmall, buttonXSmall  |     Subtitle Body, Label     |    textXSmall    |
+|  14px  | 0.875rem | 3.5               |   subtitleSmall, bodySmall, buttonSmall   |    Subtitle, Body, Label     |    textSmall     |
+|  12px  | 0.75rem  | 3                 |  subtitleXSmall bodyXSmall, buttonXSmall  |    Subtitle, Body, Label     |    textXSmall    |
 
 ## Timeout Issue on Slower Connections
 

@@ -1,27 +1,26 @@
 import React from 'react';
-import { useTheme } from '@mui/styles';
-import {
-  useMediaQuery,
-  Grid,
-  FormHelperText,
-  styled,
-  Box,
-} from '@mui/material';
-import { Form, Field, getIn, useFormikContext } from 'formik';
 import { useParams } from 'react-router-dom';
+import {
+  Box,
+  FormHelperText,
+  Grid,
+  styled,
+  useMediaQuery,
+} from '@mui/material';
+import { useTheme } from '@mui/styles';
+import { Field, Form, getIn, useFormikContext } from 'formik';
 
+import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 import {
   ImageUpload,
   ImageUploadProps,
 } from 'web-components/lib/components/inputs/ImageUpload';
 import { VideoInput } from 'web-components/lib/components/inputs/VideoInput';
-import FormLabel from 'web-components/lib/components/inputs/FormLabel';
 import { UrlType } from 'web-components/lib/utils/schemaURL';
 
 import getApiUri from '../../../lib/apiUri';
+import { cropAspect, MediaBaseErrors, MediaBaseValues } from './MediaForm';
 import { useMediaFormStyles } from './useMediaFormStyles';
-
-import { cropAspect, MediaBaseValues, MediaBaseErrors } from './MediaForm';
 
 export interface MediaValuesLegacy extends MediaBaseValues {
   'regen:landStewardPhoto'?: UrlType;

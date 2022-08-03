@@ -1,16 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import EyeIcon from 'web-components/lib/components/icons/EyeIcon';
 import Section from 'web-components/lib/components/section';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { DocumentationCard } from '../molecules/DocumentationCard';
-import { MethodologyDetailsColumn } from '../molecules/MethodologyDetailsColumn';
-import { Methodology } from '../../mocks/mocks';
 import { Documentation, Maybe, Scalars } from '../../generated/sanity-graphql';
 import { getBtnHref, isInternalLink } from '../../lib/button';
 import { getSanityImgSrc } from '../../lib/imgSrc';
+import { Methodology } from '../../mocks/mocks';
+import { DocumentationCard } from '../molecules/DocumentationCard';
+import { MethodologyDetailsColumn } from '../molecules/MethodologyDetailsColumn';
 
 interface Props {
   nameRaw?: Maybe<Scalars['JSON']>;

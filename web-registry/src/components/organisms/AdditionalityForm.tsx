@@ -1,17 +1,17 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
-import { RadioGroup } from 'formik-mui';
-import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { Field, Form, Formik } from 'formik';
+import { RadioGroup } from 'formik-mui';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import Toggle from 'web-components/lib/components/inputs/Toggle';
-import { DatePickField } from 'web-components/lib/components/inputs/DatePickField';
 import ControlledFormLabel from 'web-components/lib/components/form/ControlledFormLabel';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
+import { DatePickField } from 'web-components/lib/components/inputs/DatePickField';
+import Toggle from 'web-components/lib/components/inputs/Toggle';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 import { Subtitle } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 interface AdditionalityFormProps {
   submit: (values: AdditionalityValues) => Promise<void>;

@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 
 interface PrevNextButtonProps {

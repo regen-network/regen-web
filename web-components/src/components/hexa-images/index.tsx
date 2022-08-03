@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Grid from '@mui/material/Grid';
 import ReactHtmlParser from 'react-html-parser';
+import Grid from '@mui/material/Grid';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
-import { Body, Label, Title } from '../typography';
 import { BlockContent, SanityBlockOr } from '../block-content';
+import { Body, Label, Title } from '../typography';
 
 interface HexaImage {
   name: string;

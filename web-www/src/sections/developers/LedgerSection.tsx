@@ -1,13 +1,14 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 import Img from 'gatsby-image';
 import SanityImage from 'gatsby-plugin-sanity-image';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
 import { TitleBody } from 'web-components/lib/components/text-layouts';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { DevLedgerSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({

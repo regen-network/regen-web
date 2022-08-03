@@ -1,8 +1,8 @@
-import React from 'react';
-
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
-import { ResourceFieldsFragment, Maybe } from '../../generated/sanity-graphql';
-import { WrappedResourcesCard } from '../atoms/WrappedResourcesCard';
+
+import { Maybe, ResourceFieldsFragment } from 'generated/sanity-graphql';
+
+import { WrappedResourcesCard } from 'components/atoms/WrappedResourcesCard';
 
 interface ProjectImpactProps {
   resources?: Maybe<Array<Maybe<ResourceFieldsFragment>>>;
@@ -24,8 +24,11 @@ function ResourcesSection({
         classes={classes}
         title={title || 'Resources'}
         items={
-          resources?.map(resource => (
-            <WrappedResourcesCard resource={resource} />
+          resources?.map((resource, i) => (
+            <WrappedResourcesCard
+              key={resource?.lastUpdated + i}
+              resource={resource}
+            />
           )) || []
         }
       />

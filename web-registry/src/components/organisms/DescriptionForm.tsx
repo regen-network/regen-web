@@ -1,18 +1,18 @@
 import React from 'react';
-import { Formik, FormikErrors, FormikHelpers, Form, Field } from 'formik';
+import { Field, Form, Formik, FormikErrors, FormikHelpers } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import { requiredMessage } from 'web-components/lib/components/inputs/validation';
 
-import { useProjectEditContext } from '../../pages/ProjectEdit';
-import { ProjectPageFooter } from '../molecules';
 import { ShaclGraphByUriQuery } from '../../generated/graphql';
 import {
-  validate,
-  getProjectPageBaseData,
   getCompactedPath,
+  getProjectPageBaseData,
+  validate,
 } from '../../lib/rdf';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
+import { ProjectPageFooter } from '../molecules';
 
 interface DescriptionFormProps {
   submit: (values: DescriptionValues) => Promise<void>;

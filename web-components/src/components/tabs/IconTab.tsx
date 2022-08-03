@@ -1,6 +1,6 @@
 import React from 'react';
-import Tab, { TabProps } from '@mui/material/Tab';
 import { styled } from '@mui/material';
+import Tab, { TabProps } from '@mui/material/Tab';
 
 import { Subtitle } from '../typography/Subtitle';
 import { RegenTab } from './';

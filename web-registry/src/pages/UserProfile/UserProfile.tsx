@@ -1,23 +1,24 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 import Link from '@mui/material/Link';
+import axios from 'axios';
 
-import { Body } from 'web-components/lib/components/typography';
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import Banner from 'web-components/lib/components/banner';
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
+import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import UserProfileForm, {
   UserProfileValues,
 } from 'web-components/lib/components/form/UserProfileForm';
-import getApiUri from '../../lib/apiUri';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+import { Body } from 'web-components/lib/components/typography';
+
 import {
   useGetUserProfileByEmailQuery,
-  useUpdateUserByEmailMutation,
   useUpdatePartyByIdMutation,
+  useUpdateUserByEmailMutation,
 } from '../../generated/graphql';
+import getApiUri from '../../lib/apiUri';
 
 const messageExpired: string = 'Access expired.';
 

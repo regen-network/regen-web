@@ -1,4 +1,3 @@
-import React from 'react';
 import { SvgIcon, SvgIconProps } from '@mui/material';
 
 export function CreditClassIcon(props: SvgIconProps): JSX.Element {

@@ -1,7 +1,8 @@
 import React from 'react';
-import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
-import Card from './Card';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
 import clsx from 'clsx';
+
+import Card from './Card';
 
 export interface GreenCardProps {
   children?: any;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import ArticleCard from 'web-components/lib/components/cards/ArticleCard';
-import { getFormattedDate } from 'web-components/lib/utils/format';
 import { SliderSection } from 'web-components/lib/components/section/SliderSection';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+import { getFormattedDate } from 'web-components/lib/utils/format';
 
-import { MediaFieldsFragment, Maybe } from '../../generated/sanity-graphql';
+import { Maybe, MediaFieldsFragment } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';
 
 interface MediaSectionProps {

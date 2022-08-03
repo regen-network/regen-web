@@ -1,15 +1,16 @@
 import React from 'react';
-import { graphql, StaticQuery } from 'gatsby';
+import { Grid, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { useTheme, Grid } from '@mui/material';
+import { graphql, StaticQuery } from 'gatsby';
 import Img, { FluidObject } from 'gatsby-image';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { Title } from 'web-components/lib/components/typography';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
-import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
 import HexaImages from 'web-components/lib/components/hexa-images';
+import MediumIcon from 'web-components/lib/components/icons/social/MediumIcon';
+import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
+import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
+import { Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import BackgroundSection from '../../components/BackgroundSection';
 import { ScienceCommunitySectionQuery } from '../../generated/graphql';
 

@@ -1,14 +1,15 @@
 import React, { useCallback } from 'react';
-import axios from 'axios';
-import { useMutation } from '@apollo/client';
-import { loader } from 'graphql.macro';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
 import { useAuth0 } from '@auth0/auth0-react';
+import axios from 'axios';
+import { loader } from 'graphql.macro';
 
 import LoginForm, {
   Values,
 } from 'web-components/lib/components/form/LoginForm';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+
 import auth0 from '../../auth0';
 import getApiUri from '../../lib/apiUri';
 

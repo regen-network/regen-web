@@ -1,6 +1,6 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Input as MuiInput, InputProps } from '@mui/material';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     '& .MuiInputAdornment-root p': {
       color: theme.palette.info.main,
+    },
+    '&.Mui-disabled': {
+      backgroundColor: theme.palette.info.light,
     },
     '&.Mui-error': {
       '& input, & .MuiSelect-select': {

@@ -1,6 +1,7 @@
 import React from 'react';
-import { makeStyles, useTheme, DefaultTheme as Theme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
+import { DefaultTheme as Theme, makeStyles, useTheme } from '@mui/styles';
+
 import Card from './Card';
 
 interface CreditCardProps {

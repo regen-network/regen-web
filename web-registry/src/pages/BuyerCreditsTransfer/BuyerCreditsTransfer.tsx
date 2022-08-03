@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
-
-import { makeStyles } from '@mui/styles';
-import Stepper from '@mui/material/Stepper';
+import React, { useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import { makeStyles } from '@mui/styles';
 
-import CreditsTransfer from '../CreditsTransfer';
-import CreditsRetire from '../CreditsRetire';
 import BuyerCreate from '../BuyerCreate';
+import CreditsRetire from '../CreditsRetire';
+import CreditsTransfer from '../CreditsTransfer';
 
 const useStyles = makeStyles(theme => ({
   stepper: {

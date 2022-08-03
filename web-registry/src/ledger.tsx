@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { RegenApi } from '@regen-network/api';
+import React, { useEffect, useState } from 'react';
 import { OfflineSigner } from '@cosmjs/proto-signing';
+import { RegenApi } from '@regen-network/api';
 
-import { ledgerRPCUri, ledgerExpRPCUri, expLedger } from './lib/ledger';
+import { expLedger, ledgerExpRPCUri, ledgerRPCUri } from './lib/ledger';
 import { useWallet, Wallet } from './lib/wallet';
 
 interface ContextValue {

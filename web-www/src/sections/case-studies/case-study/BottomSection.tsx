@@ -1,14 +1,15 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import Img, { FluidObject } from 'gatsby-image';
-import clsx from 'clsx';
-
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import BackgroundSection from '../../../components/BackgroundSection';
-import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { SanityCaseStudyBottomSection } from '../../../generated/graphql';
 import { Box } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+import clsx from 'clsx';
+import Img, { FluidObject } from 'gatsby-image';
+
+import { Body, Label, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import BackgroundSection from '../../../components/BackgroundSection';
+import { SanityCaseStudyBottomSection } from '../../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

@@ -1,10 +1,5 @@
 import * as React from 'react';
-import {
-  Title,
-  Subtitle,
-  Body,
-  Label,
-} from 'web-components/lib/components/typography';
+import { Title, Subtitle, Body, Label } from '../../components/typography';
 
 export default {
   title: 'Typography',
@@ -48,7 +43,7 @@ export const body = (): JSX.Element => (
   </>
 );
 
-export const buttonText = (): JSX.Element => (
+export const label = (): JSX.Element => (
   <>
     <Label size="lg">Label size LG</Label>
     <Label>Label size md (default)</Label>

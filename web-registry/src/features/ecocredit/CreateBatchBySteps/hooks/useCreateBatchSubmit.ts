@@ -5,12 +5,9 @@ import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit
 import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-import { useLedger } from '../../../../ledger';
-import useMsgClient from '../../../../hooks/useMsgClient';
-import {
-  generateIri,
-  IriFromMetadataSuccess,
-} from '../../../../lib/metadata-graph';
+import { useLedger } from 'ledger';
+import { useMsgClient } from 'hooks';
+import { generateIri, IriFromMetadataSuccess } from 'lib/metadata-graph';
 
 import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 

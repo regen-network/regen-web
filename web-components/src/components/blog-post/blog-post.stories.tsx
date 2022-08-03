@@ -1,5 +1,4 @@
-import * as React from 'react';
-import BlogPost from 'web-components/lib/components/blog-post';
+import BlogPost from '.';
 
 export default {
   title: 'Blog Post',

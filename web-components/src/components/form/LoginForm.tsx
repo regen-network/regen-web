@@ -25,7 +25,7 @@ import {
 } from './errors';
 import { Body, Subtitle } from '../typography';
 
-interface LoginFormProps {
+export interface LoginFormProps {
   signupFromLogin?: string; // link to loginFromSignup page
   loginFromSignup?: () => Promise<void>; // auth0 loginWithRedirect
   privacyLink?: string;

@@ -44,7 +44,7 @@ export const ProjectReview: React.FC = () => {
   const [bannerError, setBannerError] = useState('');
   const [updateProject] = useUpdateProjectByIdMutation();
 
-  const closeSubmitModal = () => setIsSubmitModalOpen(false);
+  const closeSubmitModal = (): void => setIsSubmitModalOpen(false);
 
   const handleTxQueued = (): void => {
     setIsSubmitModalOpen(true);
@@ -90,7 +90,7 @@ export const ProjectReview: React.FC = () => {
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
-  const submit = async () => {
+  const submit = async (): Promise<void> => {
     let jurisdiction;
     try {
       jurisdiction = await getJurisdiction(metadata);

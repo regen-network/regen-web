@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     '& .MuiInputAdornment-root p': {
       color: theme.palette.info.main,
     },
+    '&.Mui-disabled': {
+      backgroundColor: theme.palette.info.light,
+    },
     '&.Mui-error': {
       '& input, & .MuiSelect-select': {
         borderColor: theme.palette.error.main,

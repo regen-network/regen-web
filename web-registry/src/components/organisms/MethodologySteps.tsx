@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
@@ -64,10 +63,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: 4,
     marginRight: 8,
   },
-  coBenefitsIcon: {
-    width: theme.spacing(19.25),
-    height: theme.spacing(24.75),
-  },
 }));
 
 function MethodologySteps({ steps }: Props): JSX.Element {
@@ -88,7 +83,7 @@ function MethodologySteps({ steps }: Props): JSX.Element {
             key={i}
             stepNumber={i}
             stepCard={s}
-            openModal={() => {}}
+            openModal={() => null}
           />
         ))}
       </div>

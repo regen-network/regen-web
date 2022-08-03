@@ -94,7 +94,11 @@ exports[`Storyshots Buttons Combined 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >

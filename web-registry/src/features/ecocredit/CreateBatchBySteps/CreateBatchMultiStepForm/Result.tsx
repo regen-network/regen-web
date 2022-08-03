@@ -232,7 +232,6 @@ const CardItemList: React.FC<CardItemListProps> = ({ label, values }) => {
         {label}
       </Label>
       <Subtitle size="lg" mobileSize="sm" color={'info.dark'}>
-<<<<<<< HEAD
         {!values.length
           ? '-'
           : values.map((item, index) => (
@@ -246,18 +245,6 @@ const CardItemList: React.FC<CardItemListProps> = ({ label, values }) => {
                 {values.length > index + 1 && ', '}
               </Link>
             ))}
-=======
-        {values.map((item, index) => (
-          <Link
-            key={`card-item-link-${index}`}
-            sx={{ color: 'secondary.main' }}
-            href={item.url}
-          >
-            {item.name}
-            {values.length > index + 1 && ', '}
-          </Link>
-        ))}
->>>>>>> 53515798 (David/982 link to portfolio (#1084))
       </Subtitle>
     </Box>
   );

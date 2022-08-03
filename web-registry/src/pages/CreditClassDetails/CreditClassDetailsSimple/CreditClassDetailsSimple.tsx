@@ -14,11 +14,7 @@ import {
   ApprovedMethodologies,
   CreditClassMetadataLD,
 } from 'generated/json-ld';
-<<<<<<< HEAD
 import { getAccountUrl } from 'lib/block-explorer';
-=======
-import { ClassInfo } from 'types/ledger/ecocredit';
->>>>>>> 53515798 (David/982 link to portfolio (#1084))
 
 import { Link } from 'components/atoms';
 import { AccountLink } from 'components/atoms/AccountLink';
@@ -312,35 +308,20 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 </Label>
                 <AccountLink
                   className={styles.link}
-<<<<<<< HEAD
-                  target="_blank"
-                  href={getAccountUrl(onChainClass.admin)}
-                >
-                  {truncate(onChainClass.admin)}
-                </Link>
-=======
-                  address={onChainClass.admin || onChainClass.designer || ''}
+                  address={onChainClass.admin}
                 />
->>>>>>> 53515798 (David/982 link to portfolio (#1084))
               </div>
               <div className={styles.sidebarItemMargin}>
                 <Label size="xs" color="primary.contrastText" mb={3}>
                   issuers
                 </Label>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-<<<<<<< HEAD
                   {issuers?.map((issuer: string) => (
-                    <Link
+                    <AccountLink
+                      key={issuer}
+                      address={issuer}
                       className={styles.link}
                       href={getAccountUrl(issuer)}
-                      target="_blank"
-=======
-                  {onChainClass?.issuers?.map((issuer: string) => (
-                    <AccountLink
->>>>>>> 53515798 (David/982 link to portfolio (#1084))
-                      key={issuer}
-                      className={styles.link}
-                      address={issuer}
                     />
                   ))}
                 </Box>

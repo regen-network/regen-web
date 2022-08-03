@@ -62,21 +62,10 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
       ]}
       rows={credits.map((row, i) => {
         return [
-<<<<<<< HEAD
           <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
-          <Link href={getAccountUrl(row.issuer as string)} target="_blank">
-            {truncate(row.issuer as string)}
-          </Link>,
+          <AccountLink address={row.issuer} />,
           <Link key="class_id" href={`/credit-classes/${row.classId}`}>
             {row.classId}
-=======
-          <Link href={`/credit-batches/${row.batch_denom}`}>
-            {row.batch_denom}
-          </Link>,
-          <AccountLink address={row.issuer} />,
-          <Link key="class_id" href={`/credit-classes/${row.class_id}`}>
-            {row.class_id}
->>>>>>> 53515798 (David/982 link to portfolio (#1084))
           </Link>,
           formatNumber(row.balance?.tradableAmount),
           formatNumber(row.balance?.retiredAmount),

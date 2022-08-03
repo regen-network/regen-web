@@ -2,14 +2,15 @@ import React, { Suspense } from 'react';
 import { Box, SxProps } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
+import { Center, Flex } from 'web-components/lib/components/box';
+import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
-import Section from 'web-components/lib/components/section';
-import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
-import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
-import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import { Spinner } from 'web-components/lib/components/icons/Spinner';
-import { Center, Flex } from 'web-components/lib/components/box';
+import Section from 'web-components/lib/components/section';
+import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
+import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
+
 import useQueryIfIssuer from 'hooks/useQueryIfIssuer';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));

@@ -1,12 +1,12 @@
 import { QueryBasketBalancesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
-import useBasketQuery from '../../../hooks/useBasketQuery';
 import {
   BasketOverviewProps,
-  useBasketOverview,
   CreditBatch,
   useBasketEcocreditsTable,
+  useBasketOverview,
 } from '../../../components/organisms';
+import useBasketQuery from '../../../hooks/useBasketQuery';
 
 type BasketDetails = {
   overview?: BasketOverviewProps;

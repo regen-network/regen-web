@@ -1,5 +1,6 @@
-import { DeliverTxResponse } from '@cosmjs/stargate';
 import { useEffect } from 'react';
+import { DeliverTxResponse } from '@cosmjs/stargate';
+
 import { UseStateSetter } from 'types/react/use-state';
 
 type Props = {

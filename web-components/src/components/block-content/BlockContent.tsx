@@ -1,8 +1,8 @@
 import React from 'react';
+import { Box, SxProps, Theme } from '@mui/material';
 import BlockContent from '@sanity/block-content-to-react';
 
 import { UnderlineTooltip } from '../tooltip/UnderlineTooltip';
-import { Box, SxProps, Theme } from '@mui/material';
 
 export type SanityBlockContent = any[] | any; // copied from Sanity's types
 export type SanityBlockOr<T> = T | SanityBlockContent;

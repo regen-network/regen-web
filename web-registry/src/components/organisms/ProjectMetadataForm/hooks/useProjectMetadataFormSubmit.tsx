@@ -1,5 +1,6 @@
-import { FormikHelpers } from 'formik';
 import { useCallback } from 'react';
+import { FormikHelpers } from 'formik';
+
 import { ProjectMetadataValues } from '../ProjectMetadataForm';
 
 type Props = {

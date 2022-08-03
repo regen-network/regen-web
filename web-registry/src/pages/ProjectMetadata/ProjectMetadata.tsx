@@ -1,6 +1,6 @@
 import React from 'react';
-import { omit } from 'lodash';
 import { useNavigate, useParams } from 'react-router-dom';
+import { omit } from 'lodash';
 
 import {
   EditFormTemplate,
@@ -12,13 +12,13 @@ import {
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
 import { ProjectMetadataLD } from '../../generated/json-ld';
+import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
-import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
 import { useProjectMetadataSave } from './hooks/useProjectMetadataSave';
 import { useProjectMetadataSubmit } from './hooks/useProjectMetadataSubmit';
+import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
 import { ProjectMetadataSelectedForm } from './ProjectMetadata.SelectedForm';
-import { isVCSCreditClass } from '../../lib/ecocredit/api';
 
 export const ProjectMetadata: React.FC = () => {
   const { projectId } = useParams();

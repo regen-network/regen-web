@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
+
 import { DEFAULT_DURATION } from 'web-components/lib/components/banner/ErrorBanner';
+
 import { UseStateSetter } from 'types/react/use-state';
 
 type Props = {

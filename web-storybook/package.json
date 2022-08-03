@@ -16,6 +16,8 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "storybook-addon-react-router-v6": "^0.1.10",
     "tsconfig-paths-webpack-plugin": "^3.5.2"
   },

@@ -1,13 +1,14 @@
 import React from 'react';
-import BackgroundImage from 'gatsby-background-image';
-import { graphql, useStaticQuery } from 'gatsby';
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
+import BackgroundImage from 'gatsby-background-image';
 import Img from 'gatsby-image';
 
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { Body, Title } from 'web-components/lib/components/typography';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import { HomeLedgerSectionQuery } from '../../generated/graphql';
 
 let useStyles = makeStyles((theme: Theme) => ({

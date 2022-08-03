@@ -1,13 +1,13 @@
-import Tabs, { RegenTab } from '.';
-import { IconTabs } from './IconTabs';
-import { IconTabProps } from './IconTab';
+import CreditDetails, { CreditInfoProps } from '../credits/CreditDetails';
+import CoBenefitsIcon from '../icons/CoBenefitsIcon';
+import { ProjectPageIcon } from '../icons/ProjectPageIcon';
 import {
   DocumentationTable,
   DocumentRowData,
 } from '../table/DocumentationTable';
-import { ProjectPageIcon } from '../icons/ProjectPageIcon';
-import CoBenefitsIcon from '../icons/CoBenefitsIcon';
-import CreditDetails, { CreditInfoProps } from '../credits/CreditDetails';
+import Tabs, { RegenTab } from '.';
+import { IconTabProps } from './IconTab';
+import { IconTabs } from './IconTabs';
 
 export default {
   title: 'Tabs',

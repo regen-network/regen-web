@@ -1,8 +1,8 @@
 import {
-  QueryBalanceResponse,
-  QuerySupplyResponse,
   BatchInfo,
   ProjectInfo,
+  QueryBalanceResponse,
+  QuerySupplyResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 /** Map keys from another type to values of number type */

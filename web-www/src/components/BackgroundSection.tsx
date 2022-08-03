@@ -1,13 +1,12 @@
 import React from 'react';
+import { useMediaQuery, useTheme } from '@mui/material';
+import type { Variant } from '@mui/material/styles/createTypography';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 import BackgroundImage from 'gatsby-background-image';
-import { makeStyles } from '@mui/styles';
-import { useMediaQuery, useTheme } from '@mui/material';
 
 import { Body, Title } from 'web-components/lib/components/typography';
-
 import type { Theme } from 'web-components/lib/theme/muiTheme';
-import type { Variant } from '@mui/material/styles/createTypography';
 
 interface Props {
   className?: string;

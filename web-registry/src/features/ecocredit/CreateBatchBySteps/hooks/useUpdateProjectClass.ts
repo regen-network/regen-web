@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import type { ClassID } from 'types/ledger/ecocredit';
 
 export default function useUpdateProjectClass(projectId: string): {

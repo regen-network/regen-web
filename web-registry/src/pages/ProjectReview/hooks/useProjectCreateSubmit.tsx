@@ -1,5 +1,6 @@
-import { MsgCreateProject } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { useCallback } from 'react';
+import { MsgCreateProject } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+
 import {
   ProjectMetadataLD,
   VCSProjectMetadataLD,

@@ -1,12 +1,12 @@
 import {
-  QueryClientImpl,
   DeepPartial,
-  QueryBalanceRequest,
-  QueryBalanceResponse,
-  QueryDenomMetadataRequest,
-  QueryDenomMetadataResponse,
   QueryAllBalancesRequest,
   QueryAllBalancesResponse,
+  QueryBalanceRequest,
+  QueryBalanceResponse,
+  QueryClientImpl,
+  QueryDenomMetadataRequest,
+  QueryDenomMetadataResponse,
   QueryDenomsMetadataRequest,
   QueryDenomsMetadataResponse,
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';

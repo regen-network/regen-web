@@ -1,19 +1,18 @@
-import { useState, useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import { QueryDenomMetadataResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
-import { QueryClassResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import {
   QueryBasketBalancesResponse,
   QueryBasketResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+import { QueryClassResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { formatDuration } from 'web-components/lib/utils/format';
 
+import { BasketOverviewProps } from '../../../../components/organisms';
 import useBankQuery from '../../../../hooks/useBankQuery';
 import useBasketQuery from '../../../../hooks/useBasketQuery';
-import { BasketOverviewProps } from '../../../../components/organisms';
-import { getMetadata } from '../../../../lib/metadata-graph';
 import useQueryListClassInfo from '../../../../hooks/useQueryListClassInfo';
+import { getMetadata } from '../../../../lib/metadata-graph';
 
 type BasketClassInfo = {
   id: string;

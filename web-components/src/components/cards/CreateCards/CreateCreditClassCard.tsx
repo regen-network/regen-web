@@ -1,6 +1,7 @@
 import { SxProps, Theme } from '@mui/material';
-import { CreateCard } from './CreateCard';
+
 import { CreditClassIcon } from '../../icons/CreditClassIcon';
+import { CreateCard } from './CreateCard';
 
 interface Props {
   sx?: SxProps<Theme>;

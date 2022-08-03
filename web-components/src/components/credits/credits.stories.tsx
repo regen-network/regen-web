@@ -1,6 +1,4 @@
-import * as React from 'react';
 import CreditDetails, { CreditInfoProps } from './CreditDetails';
-
 // import Credits from './';
 // import Gauge from './Gauge';
 // import GaugeText from './GaugeText';

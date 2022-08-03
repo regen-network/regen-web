@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
+import React, { useEffect, useState } from 'react';
 import { Box, Link, useTheme } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
-import BreadcrumbIcon from '../icons/BreadcrumbIcon';
-import { Body, Label, Title } from '../typography';
-import LinkIcon from '../icons/LinkIcon';
-import Banner from '../banner';
 import copyTextToClipboard from '../../utils/copy';
 import { parseText } from '../../utils/textParser';
+import Banner from '../banner';
+import BreadcrumbIcon from '../icons/BreadcrumbIcon';
+import LinkIcon from '../icons/LinkIcon';
+import { Body, Label, Title } from '../typography';
 
 import type { Theme } from '~/theme/muiTheme';
 

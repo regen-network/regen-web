@@ -1,9 +1,11 @@
-import { SxProps, useTheme } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { SxProps, useTheme } from '@mui/material';
+import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
+
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
+import AvailableCreditsIconAlt from 'web-components/lib/components/icons/AvailableCreditsIconAlt';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import {
   BasketPutModal,
@@ -26,13 +28,10 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
-import AvailableCreditsIconAlt from 'web-components/lib/components/icons/AvailableCreditsIconAlt';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
-// import { ReactComponent as WithdrawIBC } from 'assets/svgs/withdraw-ibc.svg';
-// import { ReactComponent as DepositIBC } from 'assets/svgs/deposit-ibc.svg';
-// import { ReactComponent as Sell } from 'assets/svgs/sell.svg';
-import { ReactComponent as PutInBasket } from 'assets/svgs/put-in-basket.svg';
-import { ReactComponent as TakeFromBasket } from 'assets/svgs/take-from-basket.svg';
+import { getHashUrl } from 'lib/block-explorer';
+
 import { Link } from 'components/atoms';
 import { Portfolio } from 'components/organisms/Portfolio';
 import {
@@ -42,7 +41,7 @@ import {
   useMsgClient,
   useQueryBaskets,
 } from 'hooks';
-import { getHashUrl } from 'lib/block-explorer';
+import type { BasketTokens } from 'hooks/useBasketTokens';
 
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
@@ -51,6 +50,7 @@ import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
+import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
 import {
   CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_SHORT,
@@ -60,9 +60,12 @@ import {
   getAvailableAmountByBatch,
   getOtherSellOrderBatchDenomOptions,
 } from './MyEcocredits.utils';
-import type { Theme } from 'web-components/lib/theme/muiTheme';
-import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
-import type { BasketTokens } from 'hooks/useBasketTokens';
+
+// import { ReactComponent as WithdrawIBC } from 'assets/svgs/withdraw-ibc.svg';
+// import { ReactComponent as DepositIBC } from 'assets/svgs/deposit-ibc.svg';
+// import { ReactComponent as Sell } from 'assets/svgs/sell.svg';
+import { ReactComponent as PutInBasket } from 'assets/svgs/put-in-basket.svg';
+import { ReactComponent as TakeFromBasket } from 'assets/svgs/take-from-basket.svg';
 
 export const MyEcocredits = (): JSX.Element => {
   const [basketPutOpen, setBasketPutOpen] = useState<number>(-1);

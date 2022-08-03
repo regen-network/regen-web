@@ -1,29 +1,29 @@
 import React from 'react';
-import { Formik, Form, Field } from 'formik';
-import { Box, Link, Grid } from '@mui/material';
+import { Box, Grid, Link } from '@mui/material';
+import { Field, Form, Formik } from 'formik';
 
-import TextField from '../inputs/TextField';
-import PasswordField from '../inputs/PasswordField';
 import ErrorBanner from '../banner/ErrorBanner';
 import ContainedButton from '../buttons/ContainedButton';
 import OnBoardingCard from '../cards/OnBoardingCard';
 import CheckboxLabel from '../inputs/CheckboxLabel';
+import PasswordField from '../inputs/PasswordField';
+import TextField from '../inputs/TextField';
 import {
+  invalidEmailMessage,
   invalidPassword,
-  validatePassword,
   requiredMessage,
   requirementAgreement,
   validateEmail,
-  invalidEmailMessage,
+  validatePassword,
 } from '../inputs/validation';
+import { Body, Subtitle } from '../typography';
 import {
   errors,
-  SignupCode,
-  LoginCode,
   getErrorMessage,
   isAuth0Error,
+  LoginCode,
+  SignupCode,
 } from './errors';
-import { Body, Subtitle } from '../typography';
 
 export interface LoginFormProps {
   signupFromLogin?: string; // link to loginFromSignup page

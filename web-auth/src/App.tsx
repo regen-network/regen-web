@@ -1,13 +1,13 @@
 import React, { useCallback } from 'react';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { makeStyles } from '@mui/styles';
 import { WebAuth } from 'auth0-js';
 import axios from 'axios';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
-import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import LoginForm, {
   Values,
 } from 'web-components/lib/components/form/LoginForm';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 const searchParams = new URLSearchParams(window.location.search);

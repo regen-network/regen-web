@@ -1,16 +1,17 @@
 import React from 'react';
+
+import type { ArticleCardProps } from 'web-components/lib/components/cards/ArticleCard';
+import type { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
+import type { Document } from 'web-components/lib/components/table/DocumentationTable';
+import { formatDate } from 'web-components/lib/utils/format';
 import { BlockContent } from 'web-components/src/components/block-content';
+
 import {
   Maybe,
   MediaFieldsFragment,
   SanityDoc,
   SanityResource,
 } from '../generated/graphql';
-
-import type { ResourcesCardProps } from 'web-components/lib/components/cards/ResourcesCard';
-import type { Document } from 'web-components/lib/components/table/DocumentationTable';
-import type { ArticleCardProps } from 'web-components/lib/components/cards/ArticleCard';
-import { formatDate } from 'web-components/lib/utils/format';
 
 /**
  *

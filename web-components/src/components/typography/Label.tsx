@@ -1,4 +1,5 @@
 import { styled, Typography, TypographyProps } from '@mui/material';
+
 import { getMobileSize, LabelSize } from './sizing';
 
 // correspond to pixel sizes in the theme for button text, which differ from other sizing in values + no `xl`

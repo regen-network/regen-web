@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles, DefaultTheme as Theme } from '@mui/styles';
 import Button, { ButtonProps } from '@mui/material/Button';
+import { DefaultTheme as Theme, withStyles } from '@mui/styles';
 import { SxProps } from '@mui/system';
 
 interface OutlinedButtonProps extends ButtonProps {

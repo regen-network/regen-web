@@ -1,13 +1,13 @@
 import React from 'react';
-import { Theme, Box, Button } from '@mui/material';
-import { SxProps } from '@mui/system';
+import { Box, Button, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { SxProps } from '@mui/system';
 
-import { Label, Subtitle, Title } from '../typography';
-import Card from '../cards/Card';
-import Modal, { RegenModalProps } from '.';
-import { LinkItem } from '../footer/footer-new';
 import ContainedButton from '../buttons/ContainedButton';
+import Card from '../cards/Card';
+import { LinkItem } from '../footer/footer-new';
+import { Label, Subtitle, Title } from '../typography';
+import Modal, { RegenModalProps } from '.';
 
 const useStyles = makeStyles(theme => ({
   root: {

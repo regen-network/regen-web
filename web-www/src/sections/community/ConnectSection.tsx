@@ -1,12 +1,15 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
 import { makeStyles, useTheme } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import ConnectSection, { IconLabelProps } from '../../components/ConnectSection';
-import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
-import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
 import DiscordIcon from 'web-components/lib/components/icons/social/DiscordIcon';
+import TelegramIcon from 'web-components/lib/components/icons/social/TelegramIcon';
+import TwitterIcon from 'web-components/lib/components/icons/social/TwitterIcon';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import ConnectSection, {
+  IconLabelProps,
+} from '../../components/ConnectSection';
 import { CommunityConnectSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -49,27 +52,43 @@ const query = graphql`
   }
 `;
 const CommunityConnectSection: React.FC = () => {
-  const { background, sanityCommunityPage: data } = useStaticQuery<CommunityConnectSectionQuery>(query);
+  const { background, sanityCommunityPage: data } =
+    useStaticQuery<CommunityConnectSectionQuery>(query);
   const content = data?.connectSection;
   const styles = useStyles();
   const theme = useTheme();
   const icons: IconLabelProps[] = [
     {
-      icon: <TelegramIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      icon: (
+        <TelegramIcon
+          color={theme.palette.primary.main}
+          hoverColor={theme.palette.secondary.main}
+        />
+      ),
       href: content?.telegramUrl || '',
       label: 'Telegram',
       subLabel: content?.telegramSubLabel || '',
     },
 
     {
-      icon: <TwitterIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      icon: (
+        <TwitterIcon
+          color={theme.palette.primary.main}
+          hoverColor={theme.palette.secondary.main}
+        />
+      ),
       href: content?.twitterUrl || '',
       label: 'Twitter',
       subLabel: content?.twitterSubLabel || '',
     },
 
     {
-      icon: <DiscordIcon color={theme.palette.primary.main} hoverColor={theme.palette.secondary.main} />,
+      icon: (
+        <DiscordIcon
+          color={theme.palette.primary.main}
+          hoverColor={theme.palette.secondary.main}
+        />
+      ),
       href: content?.discordUrl || '',
       label: 'Discord',
       subLabel: content?.discordSubLabel || '',

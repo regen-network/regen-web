@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
 import { Box, Grid } from '@mui/material';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 
-import Card from './Card';
-import { Body, Label } from '../typography';
-import StaticMap from '../map/StaticMap';
 import { Image, OptimizeImageProps } from '../image';
+import StaticMap from '../map/StaticMap';
+import { Body, Label } from '../typography';
+import Card from './Card';
 
 interface GlanceCardProps extends OptimizeImageProps {
   title?: string;

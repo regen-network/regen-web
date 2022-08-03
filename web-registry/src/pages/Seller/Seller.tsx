@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
+import { gql, useQuery } from '@apollo/client';
 import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
-import { useQuery, gql } from '@apollo/client';
+
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
+import { Title } from 'web-components/lib/components/typography';
 
 import { AdminNav } from '../../components/organisms';
 import getApiUri from '../../lib/apiUri';
-
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import { Title } from 'web-components/lib/components/typography';
 
 const GET_USER = gql`
   query UserByEmail($email: String!) {

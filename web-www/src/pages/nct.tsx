@@ -1,7 +1,8 @@
 import React from 'react';
-import { useStaticQuery, graphql, PageProps } from 'gatsby';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
 
 import SEO from '../components/seo';
+import type { NctPageQuery } from '../generated/graphql';
 import {
   BannerSection,
   LedgerSection,
@@ -11,8 +12,6 @@ import {
   TokenSection,
   TopSection,
 } from '../sections/nct';
-
-import type { NctPageQuery } from '../generated/graphql';
 
 const query = graphql`
   query nctPage {

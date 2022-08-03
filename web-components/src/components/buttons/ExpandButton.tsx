@@ -1,9 +1,9 @@
 import React from 'react';
 import { ButtonProps, useTheme } from '@mui/material';
 
+import type { Theme } from '../../theme/muiTheme';
 import OutlinedButton from '../buttons/OutlinedButton';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
-import type { Theme } from '../../theme/muiTheme';
 
 interface Props extends ButtonProps {
   expanded?: boolean;

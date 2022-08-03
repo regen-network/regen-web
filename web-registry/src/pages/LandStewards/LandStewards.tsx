@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@mui/styles';
 import { useLocation } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import Modal from 'web-components/lib/components/modal';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import SEO from 'web-components/lib/components/seo';
 
-import { useAllLandStewardsPageQuery } from '../../generated/sanity-graphql';
-import { client } from '../../sanity';
+import landStewardsHero from '../../assets/land-stewards-top.jpg';
 import {
-  HeroTitle,
-  ImageItemsSection,
-  TwoImageSection,
-  PracticesOutcomesSection,
-  TimelineSection,
   FeaturedSection,
   HeroAction,
+  HeroTitle,
+  ImageItemsSection,
+  PracticesOutcomesSection,
+  TimelineSection,
+  TwoImageSection,
 } from '../../components/molecules';
-import landStewardsHero from '../../assets/land-stewards-top.jpg';
+import { useAllLandStewardsPageQuery } from '../../generated/sanity-graphql';
+import { client } from '../../sanity';
 
 const useStyles = makeStyles(theme => ({
   heroMain: {

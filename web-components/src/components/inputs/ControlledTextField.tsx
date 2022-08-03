@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { Typography, InputProps, InputAdornment, SxProps } from '@mui/material';
+import { InputAdornment, InputProps, SxProps } from '@mui/material';
+import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';
 
+import { Body } from '../typography';
 import FieldFormControl, { DefaultStyleProps } from './FieldFormControl';
 import Input from './Input';
-import { Body } from '../typography';
 
 interface ControlledTextFieldProps
   extends FieldProps,
@@ -71,7 +71,7 @@ export default function ControlledTextField({
             onBlur={({ target: { value } }) => handleBlur(value)}
             onChange={e => handleFieldChange(e, handleChange)}
             value={field.value}
-            disabled={form.isSubmitting}
+            disabled={!!inputProps.disabled || form.isSubmitting}
             startAdornment={
               startAdornment ? (
                 <InputAdornment position="start">

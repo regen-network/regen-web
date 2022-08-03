@@ -1,13 +1,14 @@
 import React from 'react';
 import { Box, SxProps } from '@mui/material';
 
-import { Label } from 'web-components/lib/components/typography';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
+import { Label } from 'web-components/lib/components/typography';
 
-import { EcocreditsTable, BasketsTable } from './';
-import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
-import { BasketTokens } from '../../hooks/useBasketTokens';
-import { DashboardTemplate } from '../templates';
+import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+
+import { BasketTokens } from 'hooks/useBasketTokens';
+
+import { BasketsTable, EcocreditsTable } from './';
 
 export interface PortfolioProps {
   credits?: BatchInfoWithBalance[];
@@ -30,7 +31,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
   renderBasketActionButtons,
 }) => {
   return (
-    <DashboardTemplate>
+    <Box sx={{ pb: { xs: 21.25, sm: 28.28 } }}>
       <Box sx={{ pt: 12.75 }}>
         <Label sx={sxs.title}>ecocredits</Label>
         <EcocreditsTable
@@ -45,6 +46,6 @@ export const Portfolio: React.FC<PortfolioProps> = ({
           renderActionButtons={renderBasketActionButtons}
         />
       </Box>
-    </DashboardTemplate>
+    </Box>
   );
 };

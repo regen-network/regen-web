@@ -1,6 +1,8 @@
 import React from 'react';
+
 import NotFound from 'web-components/lib/components/not-found';
-import RotationalGrazing from '../../assets/rotational-grazing.png';
+
+import RotationalGrazing from 'assets/rotational-grazing.png';
 
 const NotFoundPage = (): JSX.Element => {
   return (

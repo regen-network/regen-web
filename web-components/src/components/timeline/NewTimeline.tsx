@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Timeline from '@mui/lab/Timeline';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
+import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
-import { Title } from '../typography';
 import Modal from '../modal';
-import Tag from '../tag';
+import TagComponent from '../tag';
+import { Title } from '../typography';
 
 interface StyleProps {
   color?: string;
@@ -189,7 +189,7 @@ function Content({ item, index, onTitleClick }: ContentProps): JSX.Element {
         </Title>
         <div className={classes.tags}>
           {item.tags.map((t, i) => (
-            <Tag key={i} name={t.name} color={t.color} />
+            <TagComponent key={i} name={t.name} color={t.color} />
           ))}
         </div>
       </Grid>

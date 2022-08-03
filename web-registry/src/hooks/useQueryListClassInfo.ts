@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import {
-  QueryClientImpl,
   QueryClassInfoResponse,
+  QueryClientImpl,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
 
 import { useLedger } from '../ledger';

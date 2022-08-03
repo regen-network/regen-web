@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
 
 import SEO from 'web-components/lib/components/seo';
 
@@ -18,7 +18,13 @@ interface Props {
   location?: Location;
 }
 
-function SEOWebsite({ location, description = '', lang = 'en', imageUrl, title }: Props): JSX.Element {
+function SEOWebsite({
+  location,
+  description = '',
+  lang = 'en',
+  imageUrl,
+  title,
+}: Props): JSX.Element {
   const { seoImage, site } = useStaticQuery(
     graphql`
       query {

@@ -1,11 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@mui/styles';
-import { Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+import { Link } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
-import Section from './index';
 import { Body } from '../typography';
+import Section from './index';
 
 interface OnBoardingSectionProps {
   title: string;

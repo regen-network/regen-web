@@ -1,14 +1,14 @@
 import React from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
-import { makeStyles } from '@mui/styles';
 import Grid from '@mui/material/Grid';
+import { makeStyles } from '@mui/styles';
+import { graphql, useStaticQuery } from 'gatsby';
+
+import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
+import { Body, Title } from 'web-components/lib/components/typography';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
+import { BlockContent } from 'web-components/src/components/block-content';
 
 import BackgroundSection from '../../components/BackgroundSection';
-import GreenTopIconCard from 'web-components/lib/components/cards/GreenTopIconCard';
-import { BlockContent } from 'web-components/src/components/block-content';
-import { Body, Title } from 'web-components/lib/components/typography';
-
-import type { Theme } from 'web-components/lib/theme/muiTheme';
 import type { MainnetWhatsNextSectionQuery } from '../../generated/graphql';
 
 const useStyles = makeStyles((theme: Theme) => ({

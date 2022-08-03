@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
 import { TablePagination, TablePaginationProps } from './TablePagination';
 
 /**

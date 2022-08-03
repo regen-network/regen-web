@@ -1,19 +1,19 @@
-import React from 'react';
-import { makeStyles } from '@mui/styles';
 import { useParams } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
 
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import {
-  MethodologyTopSection,
-  MethodologySteps,
-  MethodologyDocumentationSection,
-  ImpactSection,
-  ResourcesSection,
-  MethodologyTestSection,
-} from '../../components/organisms';
-import mock from '../../mocks/mock.json';
+
 import topoBackground from '../../assets/background.jpg';
+import {
+  ImpactSection,
+  MethodologyDocumentationSection,
+  MethodologySteps,
+  MethodologyTestSection,
+  MethodologyTopSection,
+  ResourcesSection,
+} from '../../components/organisms';
 import { useAllMethodologyQuery } from '../../generated/sanity-graphql';
+import mock from '../../mocks/mock.json';
 import { client } from '../../sanity';
 
 const useStyles = makeStyles<Theme>((theme: Theme) => ({
@@ -29,7 +29,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 
 function MethodologyDetails(): JSX.Element {
   const styles = useStyles();
-  let { methodologyId } = useParams();
+  const { methodologyId } = useParams();
   const { data } = useAllMethodologyQuery({ client });
   const content = data?.allMethodology?.find(
     methodology => methodology.path === methodologyId,

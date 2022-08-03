@@ -1,7 +1,7 @@
 import React from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
+import { makeStyles } from '@mui/styles';
+import clsx from 'clsx';
 
 import Card from '../cards/Card';
 import CheckIcon from '../icons/CheckIcon';

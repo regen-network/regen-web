@@ -1,16 +1,15 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 
-import { truncate } from 'web-components/lib/utils/truncate';
-import { Body, Label } from 'web-components/lib/components/typography';
 import Section from 'web-components/lib/components/section';
+import { Body, Label } from 'web-components/lib/components/typography';
+import { truncate } from 'web-components/lib/utils/truncate';
 
-import { LinkWithArrow } from '../../components/atoms';
-import { getAccountUrl } from '../../lib/block-explorer';
-import { useEcocredits, useBasketTokens } from '../../hooks';
-import { Portfolio } from '../../components/organisms';
-import useQueryBaskets from '../../hooks/useQueryBaskets';
+import { getAccountUrl } from 'lib/block-explorer';
+
+import { LinkWithArrow } from 'components/atoms';
+import { Portfolio } from 'components/organisms';
+import { useBasketTokens, useEcocredits, useQueryBaskets } from 'hooks';
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const baskets = useQueryBaskets();

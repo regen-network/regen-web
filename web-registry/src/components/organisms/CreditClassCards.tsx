@@ -1,16 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@mui/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import Grid, { GridProps } from '@mui/material/Grid';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { makeStyles, useTheme } from '@mui/styles';
+import clsx from 'clsx';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { ImageActionCard } from 'web-components/lib/components/cards/ImageActionCard';
 import {
   BlockContent,
   blocksToText,
 } from 'web-components/lib/components/block-content';
+import { ImageActionCard } from 'web-components/lib/components/cards/ImageActionCard';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { AllCreditClassQuery } from '../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../lib/imgSrc';

@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import Section from 'web-components/lib/components/section';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 import BasketEcocreditsTable, { CreditBatch } from './BasketEcocreditsTable';
 
 const useStyles = makeStyles((theme: Theme) => ({

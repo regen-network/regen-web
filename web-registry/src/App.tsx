@@ -1,18 +1,18 @@
 import React, { lazy, Suspense, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useAuth0, OAuthError } from '@auth0/auth0-react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { OAuthError, useAuth0 } from '@auth0/auth0-react';
 import { createBrowserHistory } from 'history';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 
+import { KeplrRoute, ProtectedRoute, ScrollToTop } from './components/atoms';
+import PageLoader from './components/atoms/PageLoader';
+import { AppFooter, RegistryNav } from './components/organisms';
 import isAdmin from './lib/admin';
 import { init as initGA } from './lib/ga';
-import { ScrollToTop, ProtectedRoute, KeplrRoute } from './components/atoms';
-import { RegistryNav, AppFooter } from './components/organisms';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 import './App.css';
-import PageLoader from './components/atoms/PageLoader';
 
 const Additionality = lazy(() => import('./pages/Additionality'));
 const Admin = lazy(() => import('./pages/Admin'));
@@ -25,6 +25,9 @@ const BuyersPage = lazy(() => import('./pages/Buyers'));
 const CertificatePage = lazy(() => import('./pages/Certificate'));
 const ChooseCreditClassPage = lazy(
   () => import('./pages/ChooseCreditClassPage'),
+);
+const CreateCreditClassInfo = lazy(
+  () => import('./pages/CreateCreditClassInfo'),
 );
 const CreateCreditClass = lazy(() => import('./pages/CreateCreditClass'));
 const CreateMethodology = lazy(() => import('./pages/CreateMethodology'));
@@ -97,7 +100,11 @@ const App: React.FC = (): JSX.Element => {
             <Route path="projects/wilmot/admin" element={<Seller />} />
             <Route path="buyers" element={<BuyersPage />} />
             <Route path="create-methodology" element={<CreateMethodology />} />
-            <Route path="create-credit-class" element={<CreateCreditClass />} />
+            <Route
+              // TODO: thould this route be moved to /credit-classes?
+              path="create-credit-class"
+              element={<CreateCreditClassInfo />}
+            />
             <Route path="land-stewards" element={<LandStewards />} />
             <Route
               path="methodology-review-process"
@@ -228,10 +235,19 @@ const App: React.FC = (): JSX.Element => {
               path="methodologies/:methodologyId"
               element={<MethodologyDetails />}
             />
-            <Route
+            <Route path="credit-classes">
+              {/* TODO: Index route is same as /create-credit-class for now */}
+              <Route index element={<CreateCreditClassInfo />} />
+              <Route path=":creditClassId" element={<CreditClassDetails />} />
+              <Route
+                path="create"
+                element={<KeplrRoute component={CreateCreditClass} />}
+              />
+            </Route>
+            {/* <Route
               path="credit-classes/:creditClassId/*"
               element={<CreditClassDetails />}
-            />
+            /> */}
             <Route path="stats/activity" element={<Activity />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

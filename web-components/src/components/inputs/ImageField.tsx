@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { makeStyles, DefaultTheme as Theme } from '@mui/styles';
-import { Box, Avatar } from '@mui/material';
+import { Avatar, Box } from '@mui/material';
+import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import { FieldProps } from 'formik';
 
 import OutlinedButton from '../buttons/OutlinedButton';
-import FieldFormControl from './FieldFormControl';
-import CropImageModal from '../modal/CropImageModal';
 import AvatarIcon from '../icons/AvatarIcon';
 import { getImageSrc } from '../image-crop/canvas-utils';
+import CropImageModal from '../modal/CropImageModal';
+import FieldFormControl from './FieldFormControl';
 
 const useStyles = makeStyles((theme: Theme) => ({
   avatar: {
@@ -127,7 +127,7 @@ export default function ImageField({
               id={inputId}
             />
             <label htmlFor={inputId}>
-              <OutlinedButton isImageBtn className={styles.button}>
+              <OutlinedButton component="span" className={styles.button}>
                 Add Image
               </OutlinedButton>
             </label>

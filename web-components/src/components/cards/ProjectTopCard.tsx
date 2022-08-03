@@ -37,6 +37,9 @@ const useStyles = makeStyles(theme => ({
         12.5,
       )}`,
     },
+    '& :only-child': {
+      marginBottom: 0,
+    },
   },
   separator: {
     border: `1px solid ${theme.palette.grey[100]}`,

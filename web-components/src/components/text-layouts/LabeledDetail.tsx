@@ -1,10 +1,5 @@
 import React from 'react';
 import { SxProps } from '@mui/material';
-<<<<<<< HEAD
-=======
-import { Label } from '../typography';
-import { FlexCol } from '../box';
->>>>>>> v4
 
 import { FlexCol } from '../box';
 import { Label } from '../typography';

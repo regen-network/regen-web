@@ -1,15 +1,15 @@
+import * as React from 'react';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { Box } from '@mui/material';
 
-import * as React from 'react';
+import { FlexCol } from '../box';
+import ContainedButton, { ContainedColorVariant } from './ContainedButton';
+import { EditButton } from './EditButton';
+import { ExpandButton } from './ExpandButton';
 import OutlinedButton from './OutlinedButton';
 import PrevNextButton from './PrevNextButton';
-import ContainedButton, { ContainedColorVariant } from './ContainedButton';
 import { TableActionButtons } from './TableActionButtons';
-import { ExpandButton } from './ExpandButton';
 import { TextButton } from './TextButton';
-import { FlexCol } from '../box';
-import { EditButton } from './EditButton';
 
 export default {
   title: 'Buttons',

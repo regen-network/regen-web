@@ -1,32 +1,18 @@
 import { useState } from 'react';
-<<<<<<< HEAD:web-registry/src/pages/Dashboard/MyProjects/MyProjects.tsx
-=======
-import { Grid } from '@mui/material';
->>>>>>> v4:web-registry/src/components/organisms/MyProjects.tsx
 import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
 import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
 import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
-import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
 
-<<<<<<< HEAD:web-registry/src/pages/Dashboard/MyProjects/MyProjects.tsx
-=======
-import { useWallet } from 'lib/wallet';
-import { getProjectPageBaseData } from 'lib/rdf';
->>>>>>> v4:web-registry/src/components/organisms/MyProjects.tsx
 import {
   useCreateProjectMutation,
   useCreateWalletMutation,
-<<<<<<< HEAD:web-registry/src/pages/Dashboard/MyProjects/MyProjects.tsx
   useWalletByAddrQuery,
 } from 'generated/graphql';
 import { getProjectPageBaseData } from 'lib/rdf';
 import { useWallet } from 'lib/wallet';
-=======
-} from 'generated/graphql';
->>>>>>> v4:web-registry/src/components/organisms/MyProjects.tsx
 
 const MyProjects = (): JSX.Element => {
   const [error, setError] = useState<string | null>(null);

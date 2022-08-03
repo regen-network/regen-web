@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { BasketPutForm } from './BasketPutForm';
 import { BasketTakeForm } from './BasketTakeForm';
 import { CreditRetireForm } from './CreditRetireForm';
@@ -7,18 +6,6 @@ import { CreditSendForm } from './CreditSendForm';
 import LoginForm from './LoginForm';
 import { FormValues, RecipientsForm } from './RecipientsForm';
 import UserProfileForm from './UserProfileForm';
-=======
-import Long from 'long';
-
-import UserProfileForm from './UserProfileForm';
-// import OrganizationProfileForm from './OrganizationProfileForm';
-import LoginForm from './LoginForm';
-import { CreditSendForm } from './CreditSendForm';
-import { CreditRetireForm } from './CreditRetireForm';
-import { BasketPutForm } from './BasketPutForm';
-import { BasketTakeForm } from './BasketTakeForm';
-import { FormValues, RecipientsForm } from './RecipientsForm';
->>>>>>> v4
 
 export default {
   title: 'Forms',

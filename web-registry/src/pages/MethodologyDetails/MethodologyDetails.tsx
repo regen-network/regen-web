@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-import { makeStyles } from '@mui/styles';
->>>>>>> v4
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 

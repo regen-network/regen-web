@@ -2,7 +2,6 @@ import { Formik } from 'formik';
 
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import NotFound from 'web-components/lib/components/not-found';
-<<<<<<< HEAD
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
@@ -11,18 +10,8 @@ import { CreditClassFinished } from './CreditClassFinished';
 import type { CreditClassValues } from './CreditClassForm';
 import { CreditClassForm } from './CreditClassForm';
 import { CreditClassReview } from './CreditClassReview';
-import RotationalGrazing from 'assets/rotational-grazing.png';
-=======
-import RotationalGrazing from 'assets/rotational-grazing.png';
 
-import { useMultiStep } from 'components/templates/MultiStepTemplate';
-import { CreditClassForm } from './CreditClassForm';
-import { CreditClassReview } from './CreditClassReview';
-import { CreditClassFinished } from './CreditClassFinished';
-import { mockTxHash, mockClassId } from './CreditClass.mocks';
-
-import type { CreditClassValues } from './CreditClassForm';
->>>>>>> v4
+import RotationalGrazing from 'assets/rotational-grazing.png';
 
 export const createCreditClassSteps = [
   {

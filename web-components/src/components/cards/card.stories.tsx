@@ -2,30 +2,13 @@ import * as React from 'react';
 import { Box, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-<<<<<<< HEAD
 import { QuestionItem } from '../faq/Question';
-=======
-import Card from './Card';
-import ProjectTopCard from './ProjectTopCard';
-import ImpactCard from './ImpactCard';
-import MapCard from './MapCard';
-import GlanceCard from './GlanceCard';
-import OnBoardingCard from './OnBoardingCard';
-import { User } from '../user/UserInfo';
-
-// import CreditCard, { CreditInfo } from './CreditCard';
-import PurchasedCreditsCard from './PurchasedCreditsCard';
->>>>>>> v4
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import FarmerIcon from '../icons/FarmerIcon';
 import TrustIcon from '../icons/TrustIcon';
-<<<<<<< HEAD
 import { User } from '../user/UserInfo';
 import Card from './Card';
 import GlanceCard from './GlanceCard';
-=======
-import ProjectCard from './ProjectCard';
->>>>>>> v4
 import GreenCard from './GreenCard';
 import GreenTopIconCard from './GreenTopIconCard';
 import { ImageActionCard } from './ImageActionCard';
@@ -33,16 +16,11 @@ import ImpactCard from './ImpactCard';
 import MapCard from './MapCard';
 import OnBoardingCard from './OnBoardingCard';
 import { OverviewCard } from './OverviewCard';
-<<<<<<< HEAD
 import ProjectCard from './ProjectCard';
 import ProjectTopCard from './ProjectTopCard';
 // import CreditCard, { CreditInfo } from './CreditCard';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
 import ResourcesCard from './ResourcesCard';
-=======
-import ResourcesCard from './ResourcesCard';
-import { QuestionItem } from '../faq/Question';
->>>>>>> v4
 import { ReviewCard } from './ReviewCard';
 import { ItemDisplay } from './ReviewCard/ReviewCard.ItemDisplay';
 import { Photo } from './ReviewCard/ReviewCard.Photo';

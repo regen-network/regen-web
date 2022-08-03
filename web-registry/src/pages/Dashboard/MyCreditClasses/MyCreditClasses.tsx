@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
-=======
-import { Grid } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
->>>>>>> v4
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CreateCreditClassCard } from 'web-components/lib/components/cards/CreateCards';

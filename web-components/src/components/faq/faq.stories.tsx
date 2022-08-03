@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 import FAQ from './';
 import Category from './Category';
 import Navigation from './Navigation';
 import Question, { QuestionItem } from './Question';
-=======
-import Question, { QuestionItem } from './Question';
-import Category from './Category';
-import Navigation from './Navigation';
-import FAQ from './';
->>>>>>> v4
 
 export default {
   title: 'FAQ',

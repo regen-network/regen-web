@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-import TimelineItem from './TimelineItem';
-import Timeline, { Event } from '.';
-import NewTimeline, { Item } from './NewTimeline';
->>>>>>> v4
 import theme from '../../theme/muiTheme';
 import Timeline, { Event } from '.';
 import NewTimeline, { Item } from './NewTimeline';

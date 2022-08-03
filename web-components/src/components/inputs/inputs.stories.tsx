@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 import { useEffect, useState } from 'react';
 import { Button, FormLabel } from '@mui/material';
 import { Field, Form, Formik } from 'formik';
-=======
-import { useState, useEffect } from 'react';
-import { FormLabel, Button } from '@mui/material';
-import { Formik, Form, Field } from 'formik';
->>>>>>> v4
 import { RadioGroup } from 'formik-mui';
 
 import OnBoardingCard from '../cards/OnBoardingCard';

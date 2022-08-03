@@ -1,14 +1,9 @@
 import { useCallback } from 'react';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
-<<<<<<< HEAD:web-registry/src/pages/Dashboard/MyEcocredits/hooks/useOpenTakeModal.tsx
 import type { UseStateSetter } from 'types/react/use-state';
 
 import type { BasketTokens } from 'hooks/useBasketTokens';
-=======
-import type { BasketTokens } from 'hooks/useBasketTokens';
-import type { UseStateSetter } from 'types/react/use-state';
->>>>>>> v4:web-registry/src/pages/MyEcocredits/hooks/useOpenTakeModal.tsx
 
 type Props = {
   basketTokens: BasketTokens[];

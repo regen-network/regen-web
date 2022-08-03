@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import { Box, SxProps } from '@mui/material';
 
-=======
-import { SxProps, Box } from '@mui/material';
->>>>>>> v4
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 /** simple div to allow display of json data for now */

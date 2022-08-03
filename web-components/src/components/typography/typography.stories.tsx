@@ -1,10 +1,4 @@
-import * as React from 'react';
-<<<<<<< HEAD
-
 import { Body, Label, Subtitle, Title } from '../../components/typography';
-=======
-import { Title, Subtitle, Body, Label } from '../../components/typography';
->>>>>>> v4
 
 export default {
   title: 'Typography',

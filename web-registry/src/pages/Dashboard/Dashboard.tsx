@@ -9,20 +9,13 @@ import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPage
 import { Spinner } from 'web-components/lib/components/icons/Spinner';
 import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
-<<<<<<< HEAD
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
-=======
-import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
-import { Spinner } from 'web-components/lib/components/icons/Spinner';
-import { Center, Flex } from 'web-components/lib/components/box';
->>>>>>> v4
 import useQueryIfIssuer from 'hooks/useQueryIfIssuer';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
 const MyProjects = React.lazy(() => import('./MyProjects'));
 const MyCreditClasses = React.lazy(() => import('./MyCreditClasses'));
-<<<<<<< HEAD
 
 const LazyLoad: React.FC = ({ children }) => (
   <Suspense
@@ -40,25 +33,6 @@ const sxs = {
   padTop: { pt: 10, pb: [21.25, 28.28] } as SxProps,
 };
 
-=======
-
-const LazyLoad: React.FC = ({ children }) => (
-  <Suspense
-    fallback={
-      <Center>
-        <Spinner />
-      </Center>
-    }
-  >
-    {children}
-  </Suspense>
-);
-
-const sxs = {
-  padTop: { pt: 10, pb: [21.25, 28.28] } as SxProps,
-};
-
->>>>>>> v4
 const Dashboard = (): JSX.Element => {
   const theme = useTheme();
   const isIssuer = useQueryIfIssuer();

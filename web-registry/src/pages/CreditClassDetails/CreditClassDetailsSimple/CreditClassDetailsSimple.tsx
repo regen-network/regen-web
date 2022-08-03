@@ -10,7 +10,6 @@ import { Body, Label, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-<<<<<<< HEAD:web-registry/src/pages/CreditClassDetails/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import {
   ApprovedMethodologies,
@@ -21,17 +20,6 @@ import { getAccountUrl } from 'lib/block-explorer';
 import { Link } from 'components/atoms';
 import { EcocreditsSection, LineItemLabelAbove } from 'components/molecules';
 import { CreditBatches, MoreProjectsSection } from 'components/organisms';
-=======
-import { Link } from 'components/atoms';
-import { EcocreditsSection, LineItemLabelAbove } from 'components/molecules';
-import { CreditBatches, MoreProjectsSection } from 'components/organisms';
-import { getAccountUrl } from 'lib/block-explorer';
-import { CreditClassByOnChainIdQuery } from 'generated/graphql';
-import {
-  CreditClassMetadataLD,
-  ApprovedMethodologies,
-} from 'generated/json-ld';
->>>>>>> v4:web-registry/src/pages/CreditClassDetailsSimple/CreditClassDetailsSimple.tsx
 
 interface CreditDetailsProps {
   dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];

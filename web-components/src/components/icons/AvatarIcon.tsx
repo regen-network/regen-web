@@ -1,11 +1,6 @@
-import React from 'react';
 import { SxProps } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
-<<<<<<< HEAD
 
-=======
-import { SxProps } from '@mui/material';
->>>>>>> v4
 import { Theme } from '~/theme/muiTheme';
 
 interface IconProps {

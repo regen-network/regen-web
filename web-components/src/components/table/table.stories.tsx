@@ -2,17 +2,10 @@ import Table from '@mui/material/Table';
 import TableFooter from '@mui/material/TableFooter';
 import TableRow from '@mui/material/TableRow';
 
-<<<<<<< HEAD
 import { TableActionButtons } from '../buttons/TableActionButtons';
 import { ActionsTable } from './ActionsTable';
 import { DocumentationTable, DocumentRowData } from './DocumentationTable';
 import { TablePagination } from './TablePagination';
-=======
-import { DocumentationTable, DocumentRowData } from './DocumentationTable';
-import { TablePagination } from './TablePagination';
-import { ActionsTable } from './ActionsTable';
-import { TableActionButtons } from '../buttons/TableActionButtons';
->>>>>>> v4
 
 export default {
   title: 'Table',

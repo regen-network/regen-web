@@ -7,14 +7,10 @@ import { Body, Title } from 'web-components/lib/components/typography';
 import {
   Maybe,
   Scalars,
-<<<<<<< HEAD
   StepCardFieldsFragment,
 } from 'generated/sanity-graphql';
 
 import { WrappedStepCard } from '../atoms';
-=======
-} from 'generated/sanity-graphql';
->>>>>>> v4
 
 const StepCardsWithDescription: React.FC<{
   descriptionRaw?: Maybe<Scalars['JSON']>;

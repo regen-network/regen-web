@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-<<<<<<< HEAD:web-registry/src/pages/Dashboard/MyEcocredits/hooks/useBasketPutSubmit.tsx
 import type { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 
@@ -11,17 +10,6 @@ import type { UseStateSetter } from 'types/react/use-state';
 
 import type { BasketTokens } from 'hooks/useBasketTokens';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
-=======
-
-import { MsgPut } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
-import type { QueryBasketsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import type { FormValues as BasketPutFormValues } from 'web-components/lib/components/form/BasketPutForm';
-import type { Item } from 'web-components/lib/components/modal/TxModal';
-import type { BasketTokens } from 'hooks/useBasketTokens';
-import type { SignAndBroadcastType } from 'hooks/useMsgClient';
-import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
-import type { UseStateSetter } from 'types/react/use-state';
->>>>>>> v4:web-registry/src/pages/MyEcocredits/hooks/useBasketPutSubmit.tsx
 
 type Props = {
   accountAddress?: string;

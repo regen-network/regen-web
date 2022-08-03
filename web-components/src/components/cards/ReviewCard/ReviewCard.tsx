@@ -1,22 +1,11 @@
 import React from 'react';
 import { SxProps } from '@mui/material';
-<<<<<<< HEAD
-=======
-import { Flex } from '../../box';
->>>>>>> v4
 
 import { Flex } from '../../box';
 import { EditButton } from '../../buttons/EditButton';
 import { Label } from '../../typography';
-<<<<<<< HEAD
 import OnBoardingCard from '../OnBoardingCard';
 
-import type { Theme } from '~/theme/muiTheme';
-=======
-import { EditButton } from '../../buttons/EditButton';
->>>>>>> v4
-
-import OnBoardingCard from '../OnBoardingCard';
 import type { Theme } from '~/theme/muiTheme';
 
 export interface ReviewCardProps {

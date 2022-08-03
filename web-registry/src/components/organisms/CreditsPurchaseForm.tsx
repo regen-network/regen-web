@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 import { useParams } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { SxProps } from '@mui/material';
-=======
-import { makeStyles } from '@mui/styles';
->>>>>>> v4
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import { loadStripe } from '@stripe/stripe-js';

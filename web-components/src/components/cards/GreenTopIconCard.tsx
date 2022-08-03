@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, SxProps } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 
 import { BlockContent, SanityBlockOr } from '../block-content';
 import OutlinedButton from '../buttons/OutlinedButton';

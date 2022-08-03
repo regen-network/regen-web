@@ -20,14 +20,15 @@ const LinkWithArrow: React.FC<LinkWithArrowProps> = ({
   href,
   label,
   className,
-  target = '_blank',
+  target,
 }) => {
+  const defaultTarget = href.startsWith('/') ? '_self' : '_blank';
   return (
     <Link
       href={href}
       className={className}
       sx={{ color: 'info.dark', ...sx }}
-      target={target}
+      target={target || defaultTarget}
       rel="noreferrer"
     >
       {parseText(label)}

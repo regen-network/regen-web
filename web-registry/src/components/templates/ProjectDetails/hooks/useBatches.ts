@@ -12,7 +12,10 @@ import {
 interface InputProps {
   projectId: Maybe<string> | undefined;
 }
-export default function useBatches({ projectId }: InputProps) {
+export default function useBatches({ projectId }: InputProps): {
+  batchData: BatchInfoWithSupply[];
+  batchTotals: BatchTotalsForProject | undefined;
+} {
   const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
   const [batchTotals, setBatchTotals] = useState<BatchTotalsForProject>();
 

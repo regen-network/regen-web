@@ -1,10 +1,12 @@
+import React from 'react';
+
 import { LandManagementActions } from '../../organisms';
 
 interface InputProps {
   actions: any;
 }
 
-export function ManagementActions({ actions }: InputProps) {
+export function ManagementActions({ actions }: InputProps): JSX.Element {
   return (
     <>
       <div className="topo-background-alternate">

@@ -12,7 +12,7 @@ export default function useQueryMetadataGraph(
   const [metadata, setMetadata] = useState();
 
   useEffect(() => {
-    const fetchMetadata = async (iri?: string) => {
+    const fetchMetadata = async (iri?: string): Promise<void> => {
       if (!iri) {
         setMetadata(undefined);
         return;

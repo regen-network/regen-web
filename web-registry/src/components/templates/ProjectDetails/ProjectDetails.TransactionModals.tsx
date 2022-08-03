@@ -24,7 +24,7 @@ export function TransactionModals({
   projectId,
   metadata,
   creditDenom,
-}: InputProps) {
+}: InputProps): JSX.Element {
   const walletContext = useWallet();
 
   const [isCreditsPurchaseModalOpen, setIsCreditsPurchaseModalOpen] =

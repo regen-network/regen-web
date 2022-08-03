@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, useEffect, useState } from 'react';
 import * as togeojson from '@mapbox/togeojson';
 
-export default function useGeojson(metadata: any) {
+export default function useGeojson(metadata: any): {
+  geojson: any;
+  isGISFile: boolean;
+  setGeojson: Dispatch<any>;
+} {
   const [geojson, setGeojson] = useState<any | null>(null);
 
   // Convert kml to geojson

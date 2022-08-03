@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import Section from 'web-components/lib/components/section';
@@ -14,7 +15,7 @@ export function ProjectTimeline({
   events,
   txClient,
   viewOnLedger,
-}: InputProps) {
+}: InputProps): JSX.Element {
   return (
     <Box
       className="topo-background-alternate"

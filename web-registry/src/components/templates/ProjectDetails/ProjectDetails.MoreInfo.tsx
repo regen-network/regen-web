@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Modal } from '@mui/material';
+
 import Banner from 'web-components/lib/components/banner';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import FixedFooter from 'web-components/lib/components/fixed-footer';
 import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
 import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
+
 import getApiUri from '../../../lib/apiUri';
 
-export function MoreInfo() {
+export function MoreInfo(): JSX.Element {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 

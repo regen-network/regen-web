@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Box, SxProps } from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 
 import Card from './Card';
 import OutlinedButton from '../buttons/OutlinedButton';

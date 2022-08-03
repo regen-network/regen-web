@@ -13,7 +13,7 @@ interface InputProps {
 export default function useImpact({
   coBenefitsIris,
   primaryImpactIRI,
-}: InputProps) {
+}: InputProps): EcologicalImpact[] {
   const { data: primaryImpactData } = useEcologicalImpactByIriQuery({
     client,
     variables: {

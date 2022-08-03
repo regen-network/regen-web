@@ -6,7 +6,7 @@ interface StyleProps {
   color?: string;
 }
 
-interface TagProps {
+export interface TagProps {
   className?: string;
   color: string;
   name: string;

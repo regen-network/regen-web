@@ -305,6 +305,7 @@ export default function LedgerModal({
           hash: txHash,
         })
         .then(setTxRes)
+        // eslint-disable-next-line no-console
         .catch(console.error);
     }
   }, [txClient, txHash]);

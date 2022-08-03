@@ -1,3 +1,4 @@
+import React from 'react-router';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { Documentation } from '../../organisms';
 
@@ -11,7 +12,7 @@ export function ProjectDocumentation({
   docs,
   txClient,
   viewOnLedger,
-}: InputProps) {
+}: InputProps): JSX.Element {
   return (
     <>
       <div className="topo-background-alternate">

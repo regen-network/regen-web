@@ -14,21 +14,16 @@ import clsx from 'clsx';
 
 import { Title } from '../typography';
 import Modal from '../modal';
-import Tag from '../tag';
+import Tag, { TagProps } from '../tag';
 
 interface StyleProps {
   color?: string;
   even?: boolean;
 }
 
-interface Tag {
-  name: string;
-  color: string;
-}
-
 export interface Item {
   title: string;
-  tags: Tag[];
+  tags: TagProps[];
   imgSrc?: string;
   url?: string;
 }

@@ -7,12 +7,8 @@ import { Body, Title } from 'web-components/lib/components/typography';
 import {
   Maybe,
   Scalars,
-<<<<<<< HEAD
-} from '../../generated/sanity-graphql';
-=======
   StepCardFieldsFragment,
 } from 'generated/sanity-graphql';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 import { WrappedStepCard } from '../atoms';
 
@@ -42,6 +38,7 @@ const StepCardsWithDescription: React.FC<{
       <Grid container justifyContent="center" sx={{ maxWidth: 752 }}>
         {stepCards?.map((card, i) => (
           <WrappedStepCard
+            key={i}
             stepNumber={i}
             stepCard={card}
             openModal={openModal}

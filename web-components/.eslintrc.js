@@ -2,8 +2,6 @@ const baseConfig = require('../.eslintrc');
 
 module.exports = {
   ...baseConfig,
-<<<<<<< HEAD
-=======
   overrides: [
     ...baseConfig.overrides,
     {
@@ -24,5 +22,4 @@ module.exports = {
       },
     },
   ],
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 };

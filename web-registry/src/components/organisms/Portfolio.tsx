@@ -4,18 +4,11 @@ import { Box, SxProps } from '@mui/material';
 import { RenderActionButtonsFunc } from 'web-components/lib/components/table/ActionsTable';
 import { Label } from 'web-components/lib/components/typography';
 
-<<<<<<< HEAD
-import { EcocreditsTable, BasketsTable } from './';
-import type { BatchInfoWithBalance } from '../../types/ledger/ecocredit';
-import { BasketTokens } from '../../hooks/useBasketTokens';
-import { DashboardTemplate } from '../templates';
-=======
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
 import { BasketTokens } from 'hooks/useBasketTokens';
 
 import { BasketsTable, EcocreditsTable } from './';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export interface PortfolioProps {
   credits?: BatchInfoWithBalance[];
@@ -38,7 +31,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
   renderBasketActionButtons,
 }) => {
   return (
-    <DashboardTemplate>
+    <Box sx={{ pb: { xs: 21.25, sm: 28.28 } }}>
       <Box sx={{ pt: 12.75 }}>
         <Label sx={sxs.title}>ecocredits</Label>
         <EcocreditsTable
@@ -53,6 +46,6 @@ export const Portfolio: React.FC<PortfolioProps> = ({
           renderActionButtons={renderBasketActionButtons}
         />
       </Box>
-    </DashboardTemplate>
+    </Box>
   );
 };

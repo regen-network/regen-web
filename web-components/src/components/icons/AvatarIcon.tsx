@@ -1,31 +1,22 @@
 import React from 'react';
-<<<<<<< HEAD
-import SvgIcon from '@mui/material/SvgIcon';
-import { makeStyles } from '@mui/styles';
-import cx from 'clsx';
-=======
 import { SxProps } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
 
 import { Theme } from '~/theme/muiTheme';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 interface IconProps {
-  className?: string;
+  sx?: SxProps<Theme>;
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    height: '100%',
-  },
-}));
-
-export default function AvatarIcon({ className }: IconProps): JSX.Element {
-  const styles = useStyles();
-
+export default function AvatarIcon({ sx = [] }: IconProps): JSX.Element {
   return (
-    <SvgIcon className={cx(styles.root, className)} viewBox="0 0 97 97">
+    <SvgIcon
+      sx={[
+        { width: '100%', height: '100%' },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
+      viewBox="0 0 97 97"
+    >
       <svg
         width="97"
         height="97"

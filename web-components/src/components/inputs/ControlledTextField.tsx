@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-=======
 import React from 'react';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import { InputAdornment, InputProps, SxProps } from '@mui/material';
 import { DefaultTheme as Theme } from '@mui/styles';
 import { FieldProps } from 'formik';
-import React from 'react';
 
 import { Body } from '../typography';
 import FieldFormControl, { DefaultStyleProps } from './FieldFormControl';
@@ -75,7 +71,7 @@ export default function ControlledTextField({
             onBlur={({ target: { value } }) => handleBlur(value)}
             onChange={e => handleFieldChange(e, handleChange)}
             value={field.value}
-            disabled={form.isSubmitting}
+            disabled={!!inputProps.disabled || form.isSubmitting}
             startAdornment={
               startAdornment ? (
                 <InputAdornment position="start">

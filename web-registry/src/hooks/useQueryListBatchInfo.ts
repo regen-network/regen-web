@@ -31,6 +31,7 @@ export default function useQueryListBatchInfo(
         )
           .then(setDataList)
           .catch(e => {
+            // eslint-disable-next-line
             console.error(e);
             setDataList([]);
           });

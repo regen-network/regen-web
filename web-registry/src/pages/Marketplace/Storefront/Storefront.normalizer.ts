@@ -3,8 +3,9 @@ import {
   ProjectInfo,
   QueryBatchResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { NormalizedSellOrder } from './Storefront.types';
+
 import { AllProjectsQuery } from '../../../generated/graphql';
+import { NormalizedSellOrder } from './Storefront.types';
 
 /* normalizeprojectsInfosByHandleMap */
 
@@ -13,6 +14,7 @@ type NormalizeprojectsInfosByHandleMapProps = {
   onChainProjects?: ProjectInfo[];
 };
 
+// eslint-disable-next-line
 export const normalizeProjectsInfosByHandleMap = ({
   offChainProjects,
   onChainProjects = [],

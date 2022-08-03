@@ -1,5 +1,4 @@
-import * as React from 'react';
-import ImageGrid from 'web-components/lib/components/image-grid';
+import ImageGrid from '.';
 
 export default {
   title: 'Image Grid',

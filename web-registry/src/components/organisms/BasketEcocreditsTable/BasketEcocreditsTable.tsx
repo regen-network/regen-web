@@ -8,15 +8,9 @@ import {
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-<<<<<<< HEAD:web-registry/src/components/organisms/BasketEcocreditsTable/BasketEcocreditsTable.tsx
+import { getAccountUrl } from '../../../lib/block-explorer';
 import { Link } from '../../atoms';
 import { NoCredits } from '../../molecules';
-import { getAccountUrl } from '../../../lib/block-explorer';
-=======
-import { getAccountUrl } from '../../lib/block-explorer';
-import { Link } from '../atoms';
-import { NoCredits } from '../molecules';
->>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/components/organisms/BasketEcocreditsTable.tsx
 
 const GreyText = styled('span')(({ theme }) => ({
   color: theme.palette.info.main,
@@ -59,6 +53,7 @@ export const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
       tableLabel="basket ecocredits table"
       renderActionButtons={renderActionButtons}
       headerRows={[
+        /* eslint-disable react/jsx-key */
         <Box sx={{ minWidth: '8rem' }}>Project</Box>,
         <Box sx={{ minWidth: { xs: '8rem', sm: '11rem', md: 'auto' } }}>
           Batch Denom
@@ -102,6 +97,7 @@ export const BasketEcocreditsTable: React.FC<BasketEcocreditsTableProps> = ({
           <GreyText>{formatDate(item.endDate)}</GreyText>,
           item.projectJurisdiction,
         ];
+        /* eslint-enable react/jsx-key */
       })}
     />
   );

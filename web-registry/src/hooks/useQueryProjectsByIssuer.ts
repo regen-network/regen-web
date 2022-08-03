@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { QueryProjectsByAdminResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { getMetadata } from '../lib/metadata-graph';
-import useEcocreditQuery from './useEcocreditQuery';
 import type { ProjectWithMetadataObj as Project } from '../types/ledger/ecocredit';
+import useEcocreditQuery from './useEcocreditQuery';
 
-export default function useQueryProjectsByIssuer(issuer: string) {
+export default function useQueryProjectsByIssuer(issuer: string): Project[] {
   const { data: projectsResponse } =
     useEcocreditQuery<QueryProjectsByAdminResponse>({
       query: 'projectsByAdmin',
@@ -28,6 +28,7 @@ export default function useQueryProjectsByIssuer(issuer: string) {
               try {
                 metadata = await getMetadata(project.metadata);
               } catch (error) {
+                // eslint-disable-next-line
                 console.error(error);
               }
             }
@@ -41,6 +42,7 @@ export default function useQueryProjectsByIssuer(issuer: string) {
           setProjects(_projects);
         }
       } catch (error) {
+        // eslint-disable-next-line
         console.error(error);
       }
     };

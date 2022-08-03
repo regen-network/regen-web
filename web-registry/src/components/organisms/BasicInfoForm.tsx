@@ -8,28 +8,17 @@ import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
-<<<<<<< HEAD
+import TextField from 'web-components/lib/components/inputs/TextField';
+import { Theme } from 'web-components/lib/theme/muiTheme';
+
 // import { requiredMessage } from 'web-components/lib/components/inputs/validation'; TODO: regen-registry#1048
 import { useShaclGraphByUriQuery } from '../../generated/graphql';
+import { useProjectEditContext } from '../../pages/ProjectEdit';
 // import {
 //   validate,
 //   getProjectPageBaseData,
 //   getCompactedPath,
 // } from '../../lib/rdf'; TODO: regen-registry#1048
-import { ProjectPageFooter } from '../molecules';
-=======
-import TextField from 'web-components/lib/components/inputs/TextField';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-
-import { useShaclGraphByUriQuery } from '../../generated/graphql';
-import {
-  getCompactedPath,
-  getProjectPageBaseData,
-  validate,
-} from '../../lib/rdf';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
-import { useProjectEditContext } from '../../pages/ProjectEdit';
 import { ProjectPageFooter } from '../molecules';
 
 export interface BasicInfoFormValues {

@@ -25,7 +25,7 @@ import {
   SignupCode,
 } from './errors';
 
-interface LoginFormProps {
+export interface LoginFormProps {
   signupFromLogin?: string; // link to loginFromSignup page
   loginFromSignup?: () => Promise<void>; // auth0 loginWithRedirect
   privacyLink?: string;

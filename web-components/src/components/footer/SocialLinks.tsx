@@ -13,7 +13,7 @@ import MediumIcon from '../icons/social/MediumIcon';
 import TelegramIcon from '../icons/social/TelegramIcon';
 import TwitterIcon from '../icons/social/TwitterIcon';
 import YoutubeIcon from '../icons/social/YoutubeIcon';
-import { Label } from '../typography';
+import { Label, Title } from '../typography';
 
 interface Props {
   className?: string;

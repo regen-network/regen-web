@@ -2,21 +2,7 @@ import * as React from 'react';
 import { Box, Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-<<<<<<< HEAD
-import Card from 'web-components/lib/components/cards/Card';
-import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
-import ImpactCard from 'web-components/lib/components/cards/ImpactCard';
-import MapCard from 'web-components/lib/components/cards/MapCard';
-import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import { User } from 'web-components/lib/components/user/UserInfo';
-
-// import CreditCard, { CreditInfo } from './CreditCard';
-import CreateProjectCard from './CreateProjectCard';
-import PurchasedCreditsCard from './PurchasedCreditsCard';
-=======
 import { QuestionItem } from '../faq/Question';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import CurrentCreditsIcon from '../icons/CurrentCreditsIcon';
 import FarmerIcon from '../icons/FarmerIcon';
 import TrustIcon from '../icons/TrustIcon';
@@ -31,16 +17,14 @@ import MapCard from './MapCard';
 import OnBoardingCard from './OnBoardingCard';
 import { OverviewCard } from './OverviewCard';
 import ProjectCard from './ProjectCard';
-<<<<<<< HEAD
-import ReviewCard from './ReviewCard';
-import { ItemDisplay } from './ReviewCard/ReviewCard.ItemDisplay';
-import { Photo } from './ReviewCard/ReviewCard.Photo';
-=======
 import ProjectTopCard from './ProjectTopCard';
+// import CreditCard, { CreditInfo } from './CreditCard';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
 import ResourcesCard from './ResourcesCard';
+import { ReviewCard } from './ReviewCard';
+import { ItemDisplay } from './ReviewCard/ReviewCard.ItemDisplay';
+import { Photo } from './ReviewCard/ReviewCard.Photo';
 import { StepCard } from './StepCard';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'Cards',
@@ -89,24 +73,6 @@ export const monitoredImpactCard = (): JSX.Element => (
     monitored
   />
 );
-
-// const creditInfo: CreditInfo = {
-//   name: 'REDD+ in the Amazon',
-//   description: 'Reduce the emissions from deforestation and forest degradation in the Amazon',
-//   imgSrc: '/Polyculture.png',
-//   place: 'Brazil',
-//   outcome: 'carbon sequestration',
-//   numberOfHolders: 1021,
-//   numberOfProjects: 25,
-//   amount: 70000,
-//   totalAmount: 93211,
-//   // unit: 'USD'
-// };
-//
-//
-// export const creditCard = (): JSX.Element => (
-//   <CreditCard credit={creditInfo} onClick={onClick} width="20.5rem" />
-// );
 
 function onClick(): void {}
 
@@ -202,14 +168,6 @@ export const greenTopIconCard = (): JSX.Element => (
 
 export const onBoardingCard = (): JSX.Element => (
   <OnBoardingCard>some content</OnBoardingCard>
-);
-
-export const createProjectCard = (): JSX.Element => (
-  <CreateProjectCard isFirstProject onClick={() => {}} />
-);
-
-export const createProjectCardAddAnother = (): JSX.Element => (
-  <CreateProjectCard isFirstProject={false} onClick={() => {}} />
 );
 
 export const imageActionCard = (): JSX.Element => (

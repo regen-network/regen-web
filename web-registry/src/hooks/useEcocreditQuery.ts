@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 // TODO: move query client creation to the ledger context ?
 import { QueryClientImpl } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { useLedger } from '../ledger';
 import {
   // types
   EcocreditQueryClient,
@@ -9,27 +10,15 @@ import {
   EcocreditQueryResponse,
   // queries
   queryBalance,
-<<<<<<< HEAD
-  queryBatchInfo,
   queryBatchesByClass,
-  queryClassInfo,
-=======
-  queryBatches,
   queryBatchInfo,
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
   queryClasses,
   queryClassInfo,
   queryCreditTypes,
-<<<<<<< HEAD
+  queryProject,
   queryProjects,
   queryProjectsByAdmin,
-  queryProject,
 } from '../lib/ecocredit/api';
-=======
-} from 'lib/ecocredit/api';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
-
-import { useLedger } from '../ledger';
 
 // TODO - this hook is still missing batch query functionality
 // TODO - this hook is still missing lazy query functionality

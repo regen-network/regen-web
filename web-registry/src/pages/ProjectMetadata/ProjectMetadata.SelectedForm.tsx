@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
-=======
-import { Box } from '@mui/system';
 
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import { ProjectMetadataForm } from '../../components/organisms/ProjectMetadataForm/ProjectMetadataForm';
 import { ShaclGraphByUriQuery } from '../../generated/graphql';
 import { ProjectMetadataLD } from '../../generated/json-ld';

@@ -1,11 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD
-import { omit } from 'lodash';
 import { useNavigate, useParams } from 'react-router-dom';
-=======
-import { useParams } from 'react-router-dom';
 import { omit } from 'lodash';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 import {
   EditFormTemplate,
@@ -17,13 +12,13 @@ import {
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
 import { ProjectMetadataLD } from '../../generated/json-ld';
+import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
 import { useProjectMetadataSave } from './hooks/useProjectMetadataSave';
 import { useProjectMetadataSubmit } from './hooks/useProjectMetadataSubmit';
 import { OMITTED_METADATA_KEYS } from './ProjectMetadata.config';
 import { ProjectMetadataSelectedForm } from './ProjectMetadata.SelectedForm';
-import { isVCSCreditClass } from '../../lib/ecocredit/api';
 
 export const ProjectMetadata: React.FC = () => {
   const { projectId } = useParams();

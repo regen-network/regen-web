@@ -1,20 +1,12 @@
 import { useEffect, useState } from 'react';
 
-<<<<<<< HEAD
-import { useQueryListClassesWithMetadata } from '../../../hooks/useQueryListClassesWithMetadata';
-import { client } from '../../../sanity';
-import { useAllCreditClassQuery } from '../../../generated/sanity-graphql';
-import { useAllCreditClassesQuery } from '../../../generated/graphql';
-import { useWallet } from '../../../lib/wallet';
-import { queryClassIssuers } from '../../../lib/ecocredit/api';
-=======
 import { useAllCreditClassesQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+import { queryClassIssuers } from 'lib/ecocredit/api';
 import { useWallet } from 'lib/wallet';
 import { client } from 'sanity';
 
-import { useQueryListClassesWithMetadata } from 'hooks';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
+import useQueryListClassesWithMetadata from 'hooks/useQueryListClassesWithMetadata';
 
 interface CreditClassOption {
   id: string;
@@ -39,6 +31,7 @@ function useGetCreditClassOptions(): {
   const { data: creditClassContentData } = useAllCreditClassQuery({ client });
 
   useEffect(() => {
+    // eslint-disable-next-line
     const setupOptions = async () => {
       if (!wallet?.address || onChainClasses?.length < 1) return;
 

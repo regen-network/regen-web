@@ -4,12 +4,8 @@ export * from './AppFooter';
 export * from './BasicInfoForm';
 export * from './BasketEcocreditsTable';
 export * from './BasketOverview';
-<<<<<<< HEAD
-export * from './BuyCreditsModal/BuyCreditsModal';
-=======
 export * from './BasketsTable';
-export * from './BuyCreditsModal';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
+export * from './BuyCreditsModal/BuyCreditsModal';
 export * from './ConfirmationModal';
 export * from './CreditActivityTable';
 export * from './CreditBatches';
@@ -32,7 +28,6 @@ export * from './MethodologySteps';
 export * from './MethodologyTestSection';
 export * from './MethodologyTopSection';
 export * from './MoreProjectsSection';
-export * from './MyProjects';
 export * from './Portfolio';
 export * from './ProjectCards';
 export * from './ProjectImpactSection';

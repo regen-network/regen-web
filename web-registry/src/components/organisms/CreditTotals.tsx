@@ -5,12 +5,8 @@ import { makeStyles } from '@mui/styles';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
-<<<<<<< HEAD
 import { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
-=======
-import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { Statistic } from '../molecules';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 interface CreditTotalData {
   tradeable: number;

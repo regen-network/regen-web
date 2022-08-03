@@ -1,15 +1,6 @@
 import * as React from 'react';
-<<<<<<< HEAD
-import {
-  Title,
-  Subtitle,
-  Body,
-  Label,
-} from 'web-components/lib/components/typography';
-=======
 
 import { Body, Label, Subtitle, Title } from '../../components/typography';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export default {
   title: 'Typography',
@@ -53,7 +44,7 @@ export const body = (): JSX.Element => (
   </>
 );
 
-export const buttonText = (): JSX.Element => (
+export const label = (): JSX.Element => (
   <>
     <Label size="lg">Label size LG</Label>
     <Label>Label size md (default)</Label>

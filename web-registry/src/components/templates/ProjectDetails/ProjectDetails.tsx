@@ -28,49 +28,34 @@ import Timeline from 'web-components/lib/components/timeline';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { getFormattedDate } from 'web-components/lib/utils/format';
 
-<<<<<<< HEAD
-import { setPageView } from '../../../lib/ga';
-import getApiUri from '../../../lib/apiUri';
-import { buildIssuanceModalData } from '../../../lib/transform';
-import { useLedger } from '../../../ledger';
-import { chainId } from '../../../lib/ledger';
-import { useWallet } from '../../../lib/wallet';
-import {
-  Documentation,
-  ProjectTopSection,
-  ProjectImpactSection,
-  MoreProjectsSection,
-  CreditsPurchaseForm,
-  LandManagementActions,
-  BuyCreditsModal,
-  ConfirmationModal,
-} from '../../organisms';
-import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
-=======
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import {
   useMoreProjectsQuery,
   useProjectByHandleQuery,
-} from 'generated/graphql';
-import { ProjectMetadataLD, ProjectStakeholder } from 'generated/json-ld/index';
+} from '../../../generated/graphql';
+import {
+  ProjectMetadataLD,
+  ProjectStakeholder,
+} from '../../../generated/json-ld/index';
 import {
   EcologicalImpact,
   useEcologicalImpactByIriQuery,
-} from 'generated/sanity-graphql';
+} from '../../../generated/sanity-graphql';
+import { useLedger } from '../../../ledger';
+import getApiUri from '../../../lib/apiUri';
+import {
+  getBatchesTotal,
+  getBatchesWithSupply,
+} from '../../../lib/ecocredit/api';
+import { setPageView } from '../../../lib/ga';
+import { chainId } from '../../../lib/ledger';
+import { getMetadata } from '../../../lib/metadata-graph';
+import { buildIssuanceModalData } from '../../../lib/transform';
+import { useWallet } from '../../../lib/wallet';
+import { client } from '../../../sanity';
 import {
   BatchInfoWithSupply,
   BatchTotalsForProject,
-} from 'types/ledger/ecocredit';
-import { useLedger } from 'ledger';
-import getApiUri from 'lib/apiUri';
-import { getBatchesTotal, getBatchesWithSupply } from 'lib/ecocredit/api';
-import { setPageView } from 'lib/ga';
-import { chainId } from 'lib/ledger';
-import { getMetadata } from 'lib/metadata-graph';
-import { buildIssuanceModalData } from 'lib/transform';
-import { useWallet } from 'lib/wallet';
-import { client } from 'sanity';
-
+} from '../../../types/ledger/ecocredit';
 import {
   BuyCreditsModal,
   ConfirmationModal,
@@ -80,9 +65,8 @@ import {
   MoreProjectsSection,
   ProjectImpactSection,
   ProjectTopSection,
-} from 'components/organisms';
-import { Credits } from 'components/organisms/BuyCreditsModal';
-
+} from '../../organisms';
+import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
 
 interface Project {

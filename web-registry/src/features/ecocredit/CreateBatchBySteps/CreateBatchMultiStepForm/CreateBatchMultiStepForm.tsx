@@ -1,37 +1,21 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-import { Formik, Form, FormikHelpers } from 'formik';
-=======
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import * as Yup from 'yup';
 
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-<<<<<<< HEAD
-import NotFound from 'web-components/lib/components/not-found';
-import RotationalGrazing from '../../../../assets/rotational-grazing.png';
-=======
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import NotFound from 'web-components/lib/components/not-found';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
-import { useMultiStep } from '../../../../components/templates/MultiStep';
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
+
 import formModel from '../form-model';
-<<<<<<< HEAD
 import useCreateBatchSubmit from '../hooks/useCreateBatchSubmit';
-=======
-import useCreateBatch from '../useCreateBatch';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
 import Result from './Result';
-<<<<<<< HEAD
-=======
 import Review from './Review';
 import RotationalGrazing from 'assets/rotational-grazing.png';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 /**
  *
@@ -132,7 +116,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
         {({ submitForm, isValid, isSubmitting }) => (
           <Form id={formModel.formId}>
             {renderStep(activeStep)}
-
+            {/* TODO ? - Move to: MultiStepTemplate > StepperSection > StepperControls */}
             {!isLastStep && (
               <SaveFooter
                 onPrev={activeStep > 0 ? handleBack : undefined}

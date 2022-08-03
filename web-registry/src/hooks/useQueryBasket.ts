@@ -50,7 +50,6 @@ export default function useQueryBasket(basketDenom?: string): {
         /* eslint-disable */
         .catch(console.error);
     }
-
   }, [api?.queryClient, basketDenom]);
 
   return { basket, fetchBasket };

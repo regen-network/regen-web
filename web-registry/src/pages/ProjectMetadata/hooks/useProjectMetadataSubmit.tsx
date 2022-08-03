@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { cloneDeep, merge } from 'lodash';
 
 import { ProjectMetadataValues } from '../../../components/organisms';
@@ -6,7 +7,6 @@ import {
   ProjectByIdQuery,
   useUpdateProjectByIdMutation,
 } from '../../../generated/graphql';
-import { useNavigate } from 'react-router-dom';
 
 type Props = {
   project?: ProjectByIdQuery['projectById'];

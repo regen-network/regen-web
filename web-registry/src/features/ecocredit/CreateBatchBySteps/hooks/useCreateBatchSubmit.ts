@@ -1,36 +1,14 @@
 import { useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-<<<<<<< HEAD:web-registry/src/features/ecocredit/CreateBatchBySteps/hooks/useCreateBatchSubmit.ts
-
 import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
-import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
-
-import { useLedger } from '../../../../ledger';
-import useMsgClient from '../../../../hooks/useMsgClient';
-import {
-  generateIri,
-  IriFromMetadataSuccess,
-} from '../../../../lib/metadata-graph';
-=======
-import {
-  MsgCreateBatch,
-  MsgCreateBatch_BatchIssuance,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
 
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
 import { useLedger } from 'ledger';
-import {
-  generateIri,
-  IriFromMetadataSuccess,
-  stringToUint8Array,
-} from 'lib/metadata-graph';
+import { generateIri, IriFromMetadataSuccess } from 'lib/metadata-graph';
 
 import { useMsgClient } from 'hooks';
-
-import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
->>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/features/ecocredit/CreateBatchBySteps/useCreateBatch.ts
 
 import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 

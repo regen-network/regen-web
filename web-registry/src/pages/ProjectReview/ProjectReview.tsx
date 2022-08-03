@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import ReactPlayerLazy from 'react-player/lazy';
+import { useNavigate, useParams } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, CardMedia, useMediaQuery, useTheme } from '@mui/material';
-import ReactPlayerLazy from 'react-player/lazy';
 
 import Card from 'web-components/lib/components/cards/Card';
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
@@ -11,19 +11,19 @@ import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
-import { VCSMetadata } from './ProjectReview.VCSMetadata';
+import { Link } from '../../components/atoms';
+import { ProjectPageFooter } from '../../components/molecules';
 import { OnboardingFormTemplate } from '../../components/templates';
 import { useProjectByIdQuery } from '../../generated/graphql';
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
+import useMsgClient from '../../hooks/useMsgClient';
+import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
-import { ProjectPageFooter } from '../../components/molecules';
-import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
-import useMsgClient from '../../hooks/useMsgClient';
-import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useCreateProjectContext } from '../ProjectCreate';
-import { Link } from '../../components/atoms';
-import { getHashUrl } from '../../lib/block-explorer';
+import { useGetJurisdiction } from './hooks/useGetJurisdiction';
+import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
+import { VCSMetadata } from './ProjectReview.VCSMetadata';
 
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();
@@ -38,7 +38,7 @@ export const ProjectReview: React.FC = () => {
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
 
-  const closeSubmitModal = () => setIsSubmitModalOpen(false);
+  const closeSubmitModal = (): void => setIsSubmitModalOpen(false);
 
   const handleTxQueued = (): void => {
     setIsSubmitModalOpen(true);
@@ -73,7 +73,7 @@ export const ProjectReview: React.FC = () => {
   const txHashUrl = getHashUrl(txHash);
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
 
-  const submit = () => {
+  const submit = (): void => {
     const vcsProjectId = metadata?.['regen:videoURL']?.['@value'];
     projectCreateSubmit({
       classId: creditClassId || '',

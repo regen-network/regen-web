@@ -1,10 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD
-import { Box, SxProps } from '@mui/material';
-import { Label } from '../typography';
-=======
 import { SxProps } from '@mui/material';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 import { FlexCol } from '../box';
 import { Label } from '../typography';
@@ -16,12 +11,19 @@ import type { Theme } from '~/theme/muiTheme';
 export const LabeledDetail: React.FC<{
   label: string;
   sx?: SxProps<Theme>;
+  sxLabel?: SxProps<Theme>;
   labelSize?: LabelSize;
-}> = ({ label, children, labelSize, sx }) => (
-  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, ...sx }}>
-    <Label size={labelSize || 'sm'} color="info.main">
+}> = ({ label, children, labelSize, sx = [], sxLabel = [] }) => (
+  <FlexCol sx={{ gap: 2, ...sx }}>
+    <Label
+      size={labelSize || 'sm'}
+      sx={[
+        { color: 'info.main', width: '100%' },
+        ...(Array.isArray(sxLabel) ? sxLabel : [sxLabel]),
+      ]}
+    >
       {label}
     </Label>
     <div>{children}</div>
-  </Box>
+  </FlexCol>
 );

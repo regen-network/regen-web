@@ -7762,14 +7762,6 @@ export type MutationDeleteWalletByAddrArgs = {
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
-<<<<<<< HEAD
-=======
-export type MutationAddAddrToAccountArgs = {
-  input: AddAddrToAccountInput;
-};
-
-/** The root mutation type which contains root level fields which mutate data. */
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 export type MutationCreateUserOrganizationArgs = {
   input: CreateUserOrganizationInput;
 };
@@ -7780,19 +7772,6 @@ export type MutationCreateUserOrganizationIfNeededArgs = {
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
-<<<<<<< HEAD
-=======
-export type MutationGetCurrentAccountArgs = {
-  input: GetCurrentAccountInput;
-};
-
-/** The root mutation type which contains root level fields which mutate data. */
-export type MutationGetCurrentAddrsArgs = {
-  input: GetCurrentAddrsInput;
-};
-
-/** The root mutation type which contains root level fields which mutate data. */
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 export type MutationGetUserFirstOrganizationArgs = {
   input: GetUserFirstOrganizationInput;
 };
@@ -19890,127 +19869,6 @@ export enum WalletsOrderBy {
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
 }
 
-<<<<<<< HEAD
-export type AllCreditClassesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllCreditClassesQuery = (
-  { __typename?: 'Query' }
-  & { allCreditClasses?: Maybe<(
-    { __typename?: 'CreditClassesConnection' }
-    & { nodes: Array<Maybe<(
-      { __typename?: 'CreditClass' }
-      & Pick<CreditClass, 'id' | 'uri' | 'standard' | 'onChainId'>
-      & { creditClassVersionsById: (
-        { __typename?: 'CreditClassVersionsConnection' }
-        & { nodes: Array<Maybe<(
-          { __typename?: 'CreditClassVersion' }
-          & Pick<CreditClassVersion, 'name' | 'description' | 'image'>
-        )>> }
-      ) }
-    )>> }
-  )> }
-);
-
-export type AllCreditVintagesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllCreditVintagesQuery = (
-  { __typename?: 'Query' }
-  & { allCreditVintages?: Maybe<(
-    { __typename?: 'CreditVintagesConnection' }
-    & { nodes: Array<Maybe<(
-      { __typename?: 'CreditVintage' }
-      & Pick<CreditVintage, 'id' | 'createdAt' | 'initialDistribution'>
-      & { creditClassByCreditClassId?: Maybe<(
-        { __typename?: 'CreditClass' }
-        & { creditClassVersionsById: (
-          { __typename?: 'CreditClassVersionsConnection' }
-          & { nodes: Array<Maybe<(
-            { __typename?: 'CreditClassVersion' }
-            & Pick<CreditClassVersion, 'name' | 'createdAt'>
-          )>> }
-        ) }
-      )>, projectByProjectId?: Maybe<(
-        { __typename?: 'Project' }
-        & Pick<Project, 'metadata' | 'developerId' | 'stewardId' | 'landOwnerId'>
-        & { partyByLandOwnerId?: Maybe<(
-          { __typename?: 'Party' }
-          & Pick<Party, 'name'>
-        )>, partyByStewardId?: Maybe<(
-          { __typename?: 'Party' }
-          & Pick<Party, 'name'>
-        )>, partyByDeveloperId?: Maybe<(
-          { __typename?: 'Party' }
-          & Pick<Party, 'name'>
-        )> }
-      )>, accountBalancesByCreditVintageId: (
-        { __typename?: 'AccountBalancesConnection' }
-        & { nodes: Array<Maybe<(
-          { __typename?: 'AccountBalance' }
-          & Pick<AccountBalance, 'id' | 'walletId' | 'liquidBalance'>
-        )>> }
-      ) }
-    )>> }
-  )> }
-);
-
-export type AllPartiesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllPartiesQuery = (
-  { __typename?: 'Query' }
-  & { allParties?: Maybe<(
-    { __typename?: 'PartiesConnection' }
-    & { nodes: Array<Maybe<(
-      { __typename?: 'Party' }
-      & Pick<Party, 'id' | 'type' | 'name' | 'walletId' | 'addressId'>
-      & { addressByAddressId?: Maybe<(
-        { __typename?: 'Address' }
-        & Pick<Address, 'feature'>
-      )>, userByPartyId?: Maybe<(
-        { __typename?: 'User' }
-        & Pick<User, 'id'>
-      )> }
-    )>> }
-  )> }
-);
-
-export type AllProjectsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllProjectsQuery = (
-  { __typename?: 'Query' }
-  & { allProjects?: Maybe<(
-    { __typename?: 'ProjectsConnection' }
-    & { nodes: Array<Maybe<(
-      { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'handle' | 'metadata'>
-      & { creditClassByCreditClassId?: Maybe<(
-        { __typename?: 'CreditClass' }
-        & Pick<CreditClass, 'id' | 'onChainId'>
-        & { methodologyByMethodologyId?: Maybe<(
-          { __typename?: 'Methodology' }
-          & Pick<Methodology, 'id'>
-          & { methodologyVersionsById: (
-            { __typename?: 'MethodologyVersionsConnection' }
-            & { nodes: Array<Maybe<(
-              { __typename?: 'MethodologyVersion' }
-              & Pick<MethodologyVersion, 'id' | 'createdAt' | 'name' | 'version'>
-            )>> }
-          ) }
-        )>, creditClassVersionsById: (
-          { __typename?: 'CreditClassVersionsConnection' }
-          & { nodes: Array<Maybe<(
-            { __typename?: 'CreditClassVersion' }
-            & Pick<CreditClassVersion, 'id' | 'createdAt' | 'name' | 'version' | 'metadata'>
-          )>> }
-        ) }
-      )> }
-    )>> }
-  )> }
-);
-=======
 export type AllCreditClassesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type AllCreditClassesQuery = { __typename?: 'Query' } & {
@@ -20132,9 +19990,15 @@ export type AllProjectsQuery = { __typename?: 'Query' } & {
     { __typename?: 'ProjectsConnection' } & {
       nodes: Array<
         Maybe<
-          { __typename?: 'Project' } & Pick<Project, 'id' | 'metadata'> & {
+          { __typename?: 'Project' } & Pick<
+            Project,
+            'id' | 'handle' | 'metadata'
+          > & {
               creditClassByCreditClassId?: Maybe<
-                { __typename?: 'CreditClass' } & Pick<CreditClass, 'id'> & {
+                { __typename?: 'CreditClass' } & Pick<
+                  CreditClass,
+                  'id' | 'onChainId'
+                > & {
                     methodologyByMethodologyId?: Maybe<
                       { __typename?: 'Methodology' } & Pick<
                         Methodology,
@@ -20161,7 +20025,7 @@ export type AllProjectsQuery = { __typename?: 'Query' } & {
                         Maybe<
                           { __typename?: 'CreditClassVersion' } & Pick<
                             CreditClassVersion,
-                            'id' | 'createdAt' | 'name' | 'version'
+                            'id' | 'createdAt' | 'name' | 'version' | 'metadata'
                           >
                         >
                       >;
@@ -20174,7 +20038,6 @@ export type AllProjectsQuery = { __typename?: 'Query' } & {
     }
   >;
 };
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 export type BatchDetailsQueryVariables = Exact<{
   batchDenom: Scalars['String'];
@@ -21549,26 +21412,15 @@ export type AllPartiesQueryResult = Apollo.QueryResult<
   AllPartiesQueryVariables
 >;
 export const AllProjectsDocument = gql`
-<<<<<<< HEAD
-    query AllProjects {
-  allProjects {
-    nodes {
-      id
-      handle
-      metadata
-      creditClassByCreditClassId {
-        id
-        onChainId
-        methodologyByMethodologyId {
-=======
   query AllProjects {
     allProjects {
       nodes {
         id
+        handle
         metadata
         creditClassByCreditClassId {
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
           id
+          onChainId
           methodologyByMethodologyId {
             id
             methodologyVersionsById {
@@ -21586,21 +21438,10 @@ export const AllProjectsDocument = gql`
               createdAt
               name
               version
+              metadata
             }
           }
         }
-<<<<<<< HEAD
-        creditClassVersionsById {
-          nodes {
-            id
-            createdAt
-            name
-            version
-            metadata
-          }
-        }
-=======
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
       }
     }
   }

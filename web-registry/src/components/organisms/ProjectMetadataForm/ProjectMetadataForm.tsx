@@ -1,4 +1,3 @@
-import React from 'react';
 import { Field, Form, Formik } from 'formik';
 
 import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';

@@ -1,12 +1,8 @@
 import React from 'react';
 import { Collapse } from '@mui/material';
-<<<<<<< HEAD
-import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-=======
 import { makeStyles } from '@mui/styles';
-import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
+import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { Field, Form, Formik, FormikErrors } from 'formik';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 import type { Theme } from '../../theme/muiTheme';
 import AmountField from '../inputs/AmountField';

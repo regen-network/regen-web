@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
 import { styled } from '@mui/material';
-<<<<<<< HEAD
-import { TabPanel } from './TabPanel';
-import { IconTab, IconTabProps } from './IconTab';
-import { a11yProps } from './';
-=======
 import Tabs, { TabsProps } from '@mui/material/Tabs';
 
 import { a11yProps } from './';
 import { IconTab, IconTabProps } from './IconTab';
 import { TabPanel } from './TabPanel';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 interface IconTabsProps {
   tabs: IconTabProps[];
@@ -48,14 +42,16 @@ const IconTabs: React.FC<IconTabsProps> = ({ tabs }) => {
           ))}
         </StyledTabs>
       </div>
-      {tabs.map(
-        (tab, index) =>
-          value === index && (
-            <TabPanel value={value} index={index} key={tab.label}>
-              {tab.content}
-            </TabPanel>
-          ),
-      )}
+      {tabs.map((tab, index) => (
+        <TabPanel
+          key={index}
+          value={value}
+          index={index}
+          hidden={tab.hidden || value !== index}
+        >
+          {tab.content}
+        </TabPanel>
+      ))}
     </div>
   );
 };

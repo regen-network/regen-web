@@ -1,46 +1,19 @@
-<<<<<<< HEAD
 import React, { useEffect } from 'react';
-import { useFormikContext } from 'formik';
 import { Link } from '@mui/material';
-
-import { Body, Subtitle } from 'web-components/lib/components/typography';
-=======
-import React from 'react';
-import { Box, Link } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 import { useFormikContext } from 'formik';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import EditIcon from 'web-components/lib/components/icons/EditIcon';
+import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
+import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-import {
-  Body,
-  Label,
-  Subtitle,
-} from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Body, Subtitle } from 'web-components/lib/components/typography';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import {
   formatDate,
   getFormattedNumber,
 } from 'web-components/lib/utils/format';
-<<<<<<< HEAD
-import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
-import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
-import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
-=======
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
-import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
-import { CreditBasicsFormValues } from './CreditBasics';
-import { RecipientFormValues } from './Recipients';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
-
-import { useMultiStep } from '../../../../components/templates/MultiStep';
 import { CreateBatchFormValues } from './CreateBatchMultiStepForm';
 import { CreditBasicsFormValues } from './CreditBasics';
 import { RecipientFormValues } from './Recipients';

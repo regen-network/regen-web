@@ -1,25 +1,9 @@
 import React from 'react';
-<<<<<<< HEAD
-import { SxProps, Card } from '@mui/material';
-=======
 import { Card as MuiCard, SxProps } from '@mui/material';
 
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import type { Theme } from '~/theme/muiTheme';
 
-interface RegenCardProps {
-  children?: any;
-  width?: string;
-  height?: string;
-  onClick?: () => void;
-  elevation?: number;
-  borderColor?: string;
-  borderRadius?: string;
-  className?: string;
-  sx?: SxProps<Theme>;
-}
-
-export default function RegenCard({
+export function Card({
   children,
   width,
   height,
@@ -29,9 +13,19 @@ export default function RegenCard({
   borderRadius,
   className,
   sx = [],
-}: RegenCardProps): JSX.Element {
+}: {
+  children?: any;
+  width?: string;
+  height?: string;
+  onClick?: () => void;
+  elevation?: number;
+  borderColor?: string;
+  borderRadius?: string;
+  className?: string;
+  sx?: SxProps<Theme>;
+}): JSX.Element {
   return (
-    <Card
+    <MuiCard
       onClick={onClick}
       className={className}
       elevation={elevation}
@@ -48,6 +42,8 @@ export default function RegenCard({
       ]}
     >
       {children}
-    </Card>
+    </MuiCard>
   );
 }
+
+export default Card;

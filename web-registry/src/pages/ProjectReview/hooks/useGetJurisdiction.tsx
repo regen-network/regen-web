@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
-import { getISOString } from 'web-components/lib/utils/locationStandard';
+import { useEffect, useState } from 'react';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+
+import { getISOString } from 'web-components/lib/utils/locationStandard';
+
 import {
   ProjectMetadataLD,
   VCSProjectMetadataLD,

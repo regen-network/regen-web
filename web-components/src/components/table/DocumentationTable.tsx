@@ -33,7 +33,7 @@ interface Document extends DocumentRowData {
   eventByEventId?: any;
 }
 
-interface DocumentationTableProps {
+export interface DocumentationTableProps {
   className?: string;
   rows: Document[];
   canClickRow?: boolean;

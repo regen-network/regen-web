@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
 const useGetProjectId = (deliverTxResponse?: DeliverTxResponse): string => {

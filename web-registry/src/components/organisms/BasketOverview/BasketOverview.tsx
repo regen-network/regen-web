@@ -15,19 +15,11 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { parseText } from 'web-components/lib/utils/textParser';
 
-<<<<<<< HEAD:web-registry/src/components/organisms/BasketOverview/BasketOverview.tsx
+import topoImg from '../../../assets/background-contour-2.svg';
+import forestImg from '../../../assets/forest-token.png';
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { LinkWithArrow } from '../../atoms/LinkWithArrow';
 import { OptimizedImage } from '../../atoms/OptimizedImage';
-import topoImg from '../../../assets/background-contour-2.svg';
-import forestImg from '../../../assets/forest-token.png';
-=======
-import topoImg from '../../assets/background-contour-2.svg';
-import forestImg from '../../assets/forest-token.png';
-import { getAccountUrl } from '../../lib/block-explorer';
-import { LinkWithArrow } from '../atoms/LinkWithArrow';
-import { OptimizedImage } from '../atoms/OptimizedImage';
->>>>>>> 92528156 (David/eslint simple import sort (#1075)):web-registry/src/components/organisms/BasketOverview.tsx
 
 type CreditClass = {
   id: string;

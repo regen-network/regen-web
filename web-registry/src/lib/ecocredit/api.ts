@@ -1,78 +1,43 @@
-<<<<<<< HEAD
-import axios from 'axios';
-import { uniq } from 'lodash';
-=======
 import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
 import {
   GetTxsEventRequest,
   GetTxsEventResponse,
   ServiceClientImpl,
 } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import {
+  BatchInfo,
   DeepPartial,
   QueryBalanceRequest,
   QueryBalanceResponse,
   QueryBatchesByClassRequest,
   QueryBatchesByClassResponse,
-  BatchInfo,
   QueryBatchRequest,
   QueryBatchResponse,
   QueryClassesRequest,
   QueryClassesResponse,
-<<<<<<< HEAD
+  QueryClassIssuersResponse,
   QueryClassRequest,
   QueryClassResponse,
-  QueryClassIssuersResponse,
-  QueryCreditTypesRequest,
-  QueryCreditTypesResponse,
-  QueryProjectsRequest,
-  QueryProjectsResponse,
-  QuerySupplyResponse,
-  QueryProjectsByClassResponse,
-  QueryProjectsByAdminRequest,
-  QueryProjectsByAdminResponse,
-  QueryProjectRequest,
-  QueryProjectResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { TxResponse } from '@regen-network/api/lib/generated/cosmos/base/abci/v1beta1/abci';
-import {
-  ServiceClientImpl,
-  GetTxsEventRequest,
-  GetTxsEventResponse,
-} from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
-=======
-  QueryClassInfoRequest,
-  QueryClassInfoResponse,
   QueryClientImpl,
   QueryCreditTypesRequest,
   QueryCreditTypesResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
-import axios, { AxiosResponse } from 'axios';
+  QueryProjectRequest,
+  QueryProjectResponse,
+  QueryProjectsByAdminRequest,
+  QueryProjectsByAdminResponse,
+  QueryProjectsByClassResponse,
+  QueryProjectsRequest,
+  QueryProjectsResponse,
+  QuerySupplyResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import axios from 'axios';
 import { uniq } from 'lodash';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 
 import { connect as connectToApi } from '../../ledger';
-<<<<<<< HEAD
-import { expLedger, ledgerRESTUri } from '../ledger';
 import type {
   BatchInfoWithBalance,
   BatchInfoWithSupply,
   BatchTotalsForProject,
-=======
-import type { PageResponse } from '../../types/ledger/base';
-import type {
-  BatchInfo,
-  BatchInfoWithBalance,
-  BatchInfoWithSupply,
-  BatchTotalsForProject,
-  QueryBalanceResponse as QueryBalanceResponseV0,
-  QueryBatchesResponse as QueryBatchesResponseV0,
-  QueryBatchInfoResponse as QueryBatchInfoResponseV0,
-  QueryClassesResponse as QueryClassesResponseV0,
-  QueryClassInfoResponse as QueryClassInfoResponseV0,
-  QuerySupplyResponse,
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 } from '../../types/ledger/ecocredit';
 import { expLedger, ledgerRESTUri } from '../ledger';
 import { ECOCREDIT_MESSAGE_TYPES, messageActionEquals } from './constants';

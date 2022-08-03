@@ -1,11 +1,6 @@
-<<<<<<< HEAD
-import React from 'react';
-import { makeStyles } from '@mui/styles';
-=======
 import { useParams } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { SxProps } from '@mui/material';
->>>>>>> 92528156 (David/eslint simple import sort (#1075))
 import Grid from '@mui/material/Grid';
 import { makeStyles } from '@mui/styles';
 import { loadStripe } from '@stripe/stripe-js';
@@ -193,7 +188,6 @@ function CreditsPurchaseForm({
           setSubmitting(true);
           try {
             let walletId: string;
-            let addressId: string;
             let result;
 
             // Create address
@@ -217,7 +211,7 @@ function CreditsPurchaseForm({
                 },
               },
             });
-            addressId = addressResult.data.createAddress.address.id;
+            const addressId = addressResult.data.createAddress.address.id;
 
             // Create user/org
             if (orgType === true) {

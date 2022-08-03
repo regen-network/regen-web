@@ -124,49 +124,11 @@ type SuccessProps = {
   txHash: string;
 };
 
-<<<<<<< HEAD
 const SuccessResult = ({
   batchDenom,
   recipients,
   txHash,
 }: SuccessProps): React.ReactElement => {
-  const navigate = useNavigate();
-=======
-const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
-  // Parsing the response...
-  const responseLog = response?.rawLog && JSON.parse(response?.rawLog);
-  const responseLogEvents = responseLog && responseLog[0].events;
-
-  const eventCreateBatch =
-    responseLogEvents &&
-    responseLogEvents.find((event: any) =>
-      event.type.includes('.EventCreateBatch'),
-    );
-
-  const receiveBatchDenom =
-    eventCreateBatch &&
-    eventCreateBatch.attributes?.find((obj: any) => obj.key === 'batch_denom');
-
-  const eventReceive =
-    responseLogEvents &&
-    responseLogEvents.find((event: any) =>
-      event.type.includes('.EventReceive'),
-    );
-
-  const recipientsLog =
-    eventReceive &&
-    eventReceive.attributes?.filter((obj: any) => obj.key === 'recipient');
-  const recipients = recipientsLog.map(({ value }: { value: string }) => {
-    const recipientAddress = value.replace(/"/g, '');
-    return {
-      name: truncate(recipientAddress),
-      url: getAccountUrl(recipientAddress),
-    };
-  });
-
-  const batchDenom = receiveBatchDenom.value.replace(/"/g, '');
->>>>>>> 35ff03bc (Feat 1014 new button colors (#1085))
-
   return (
     <>
       <OnBoardingCard>

@@ -237,8 +237,8 @@ function ImageDrop({
                 />
                 <label htmlFor={`btn-file-input-${field.name}`}>
                   <OutlinedButton
+                    component="span"
                     classes={{ root: classes?.button }}
-                    isImageBtn
                   >
                     {buttonText || '+ add'}
                   </OutlinedButton>

@@ -1,14 +1,10 @@
-import React from 'react';
 import Grid from '@mui/material/Grid';
-import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
-import ContainedButton, {
-  ContainedColorVariant,
-} from '../buttons/ContainedButton';
+import ContainedButton from '../buttons/ContainedButton';
 
 interface SubmitProps {
   className?: string;
-  colorVariant?: ContainedColorVariant;
   submitCount: number;
   isValid: boolean;
   isSubmitting: boolean;
@@ -20,7 +16,7 @@ interface SubmitProps {
   label?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(theme => ({
   submitButton: {
     textAlign: 'right',
     maxWidth: 'max-content',
@@ -70,7 +66,6 @@ export default function Submit({
   submitCount,
   submitForm,
   label = 'submit',
-  colorVariant = 'secondary',
 }: SubmitProps): JSX.Element {
   const classes = useStyles();
   return (
@@ -109,7 +104,6 @@ export default function Submit({
             className={classes.button}
             disabled={(submitCount > 0 && !isValid) || isSubmitting}
             onClick={submitForm}
-            colorVariant={colorVariant}
           >
             {label}
           </ContainedButton>

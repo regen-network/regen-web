@@ -143,7 +143,6 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
           {onCancelTitle}
         </Button>
         <ContainedButton
-          colorVariant="gradientBlueGreen"
           sx={{ fontSize: { xs: 12, sm: 18 } }}
           onClick={onConfirm}
         >

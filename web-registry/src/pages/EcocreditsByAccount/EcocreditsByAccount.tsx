@@ -7,9 +7,16 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { getAccountUrl } from 'lib/block-explorer';
 
+<<<<<<< HEAD
 import { LinkWithArrow } from 'components/atoms';
 import { Portfolio } from 'components/organisms';
 import { useBasketTokens, useEcocredits, useQueryBaskets } from 'hooks';
+=======
+import { getAccountUrl } from 'lib/block-explorer';
+import { LinkWithArrow } from 'components/atoms';
+import { Portfolio } from 'components/organisms';
+import { useEcocredits, useBasketTokens, useQueryBaskets } from 'hooks';
+>>>>>>> v4
 
 export const EcocreditsByAccount = (): JSX.Element => {
   const baskets = useQueryBaskets();

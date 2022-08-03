@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+<<<<<<< HEAD
 import { useAllCreditClassesQuery } from 'generated/graphql';
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { queryClassIssuers } from 'lib/ecocredit/api';
@@ -7,6 +8,14 @@ import { useWallet } from 'lib/wallet';
 import { client } from 'sanity';
 
 import useQueryListClassesWithMetadata from 'hooks/useQueryListClassesWithMetadata';
+=======
+import useQueryListClassesWithMetadata from 'hooks/useQueryListClassesWithMetadata';
+import { client } from 'sanity';
+import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+import { useAllCreditClassesQuery } from 'generated/graphql';
+import { useWallet } from 'lib/wallet';
+import { queryClassIssuers } from 'lib/ecocredit/api';
+>>>>>>> v4
 
 interface CreditClassOption {
   id: string;

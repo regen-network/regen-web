@@ -1,4 +1,8 @@
 import React from 'react';
+<<<<<<< HEAD
+=======
+import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
+>>>>>>> v4
 
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 

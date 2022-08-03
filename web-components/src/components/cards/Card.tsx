@@ -1,8 +1,14 @@
 import React from 'react';
+<<<<<<< HEAD
 import { Card as MuiCard, SxProps } from '@mui/material';
 
 import type { Theme } from '~/theme/muiTheme';
 
+=======
+import { SxProps, Card as MuiCard } from '@mui/material';
+import type { Theme } from '~/theme/muiTheme';
+
+>>>>>>> v4
 export function Card({
   children,
   width,

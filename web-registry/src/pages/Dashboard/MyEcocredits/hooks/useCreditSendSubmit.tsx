@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+<<<<<<< HEAD:web-registry/src/pages/Dashboard/MyEcocredits/hooks/useCreditSendSubmit.tsx
 import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
 
 import type { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
@@ -8,6 +9,13 @@ import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import type { UseStateSetter } from 'types/react/use-state';
 
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
+=======
+import type { FormValues as CreditSendFormValues } from 'web-components/lib/components/form/CreditSendForm';
+import type { Item } from 'web-components/lib/components/modal/TxModal';
+import type { SignAndBroadcastType } from 'hooks/useMsgClient';
+import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import type { UseStateSetter } from 'types/react/use-state';
+>>>>>>> v4:web-registry/src/pages/MyEcocredits/hooks/useCreditSendSubmit.tsx
 
 type Props = {
   accountAddress?: string;

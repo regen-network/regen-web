@@ -8,7 +8,13 @@ import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 
 import { BasketTokens } from 'hooks/useBasketTokens';
 
+<<<<<<< HEAD
 import { BasketsTable, EcocreditsTable } from './';
+=======
+import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
+import { BasketTokens } from 'hooks/useBasketTokens';
+import { EcocreditsTable, BasketsTable } from './';
+>>>>>>> v4
 
 export interface PortfolioProps {
   credits?: BatchInfoWithBalance[];

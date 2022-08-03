@@ -4,8 +4,11 @@ import * as Yup from 'yup';
 
 import SaveFooter from 'web-components/lib/components/fixed-footer/SaveFooter';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+<<<<<<< HEAD
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import NotFound from 'web-components/lib/components/not-found';
+=======
+>>>>>>> v4
 
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
@@ -14,7 +17,11 @@ import useCreateBatchSubmit from '../hooks/useCreateBatchSubmit';
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
 import Result from './Result';
+<<<<<<< HEAD
 import Review from './Review';
+=======
+import NotFound from 'web-components/lib/components/not-found';
+>>>>>>> v4
 import RotationalGrazing from 'assets/rotational-grazing.png';
 
 /**

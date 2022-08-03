@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
+<<<<<<< HEAD:web-registry/src/pages/Dashboard/MyEcocredits/hooks/useUpdateTxModalTitle.tsx
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
+=======
+>>>>>>> v4:web-registry/src/pages/MyEcocredits/hooks/useUpdateTxModalTitle.tsx
 import { UseStateSetter } from 'types/react/use-state';
 
 type Props = {

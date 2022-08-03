@@ -5,12 +5,19 @@ import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/m
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
+<<<<<<< HEAD
 
 import { UseStateSetter } from 'types/react/use-state';
 
 import { BuyCreditsValues } from 'components/organisms';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
+=======
+import { BuyCreditsValues } from 'components/organisms';
+import { SignAndBroadcastType } from 'hooks/useMsgClient';
+import { UseStateSetter } from 'types/react/use-state';
+import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+>>>>>>> v4
 import {
   BUY_SELL_ORDER_BUTTON,
   BUY_SELL_ORDER_HEADER,

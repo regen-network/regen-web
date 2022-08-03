@@ -1,5 +1,6 @@
 import { useFormikContext } from 'formik';
 
+<<<<<<< HEAD
 import { Box, FlexCol } from 'web-components/lib/components/box';
 import {
   ItemDisplay,
@@ -8,6 +9,16 @@ import {
 
 import { ScrollableCodebox } from 'components/molecules/ScrollableCodebox';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
+=======
+import { useMultiStep } from 'components/templates/MultiStepTemplate';
+import { Box, FlexCol } from 'web-components/lib/components/box';
+import {
+  ReviewCard,
+  ItemDisplay,
+} from 'web-components/lib/components/cards/ReviewCard';
+
+import { ScrollableCodebox } from 'components/molecules/ScrollableCodebox';
+>>>>>>> v4
 
 import type { CreditClassValues } from './CreditClassForm';
 

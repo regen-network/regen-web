@@ -1,11 +1,22 @@
 import React from 'react';
+<<<<<<< HEAD
+=======
+import { useAuth0 } from '@auth0/auth0-react';
+>>>>>>> v4
 import { useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
+<<<<<<< HEAD
 import { FlexCol } from 'web-components/lib/components/box';
 import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 import { Body } from 'web-components/lib/components/typography';
+=======
+import { Body } from 'web-components/lib/components/typography';
+import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
+import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
+import { FlexCol } from 'web-components/lib/components/box';
+>>>>>>> v4
 
 import {
   useCreateProjectMutation,

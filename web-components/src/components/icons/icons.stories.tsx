@@ -1,7 +1,12 @@
 import React from 'react';
 import { Grid } from '@mui/material';
+<<<<<<< HEAD
 
 import { FlexCol } from '../box';
+=======
+import { FlexCol } from '../box';
+
+>>>>>>> v4
 import AccountabilityIcon from './AccountabilityIcon';
 import ArrowDownIcon from './ArrowDownIcon';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
@@ -14,20 +19,41 @@ import CheckIcon from './CheckIcon';
 import CloseIcon from './CloseIcon';
 import CoBenefitsIcon from './CoBenefitsIcon';
 import CountingIcon from './CountingIcon';
+<<<<<<< HEAD
 import { CreditClassIcon } from './CreditClassIcon';
 import CreditsIcon from './CreditsIcon';
 import CurrentCreditsIcon from './CurrentCreditsIcon';
+=======
+import CreditsIcon from './CreditsIcon';
+import { CreditClassIcon } from './CreditClassIcon';
+import CurrentCreditsIcon from './CurrentCreditsIcon';
+import DiscordIcon from './social/DiscordIcon';
+>>>>>>> v4
 import DocumentIcon from './DocumentIcon';
 import DropdownIcon from './DropdownIcon';
 import EditIcon from './EditIcon';
 import EmailIcon from './EmailIcon';
 import EyeIcon from './EyeIcon';
+<<<<<<< HEAD
 import FarmerIcon from './FarmerIcon';
 import { HorizontalDotsIcon } from './HorizontalDotsIcon';
 import InfoIcon from './InfoIcon';
 import InfoIconOutlined from './InfoIconOutlined';
 import InterfaceIcon from './InterfaceIcon';
 import LinkIcon from './LinkIcon';
+=======
+import FacebookIcon from './social/FacebookIcon';
+import FarmerIcon from './FarmerIcon';
+import GithubIcon from './social/GithubIcon';
+import { HorizontalDotsIcon } from './HorizontalDotsIcon';
+import InfoIcon from './InfoIcon';
+import InfoIconOutlined from './InfoIconOutlined';
+import InstagramIcon from './social/InstagramIcon';
+import InterfaceIcon from './InterfaceIcon';
+import LinkedInIcon from './social/LinkedInIcon';
+import LinkIcon from './LinkIcon';
+import MediumIcon from './social/MediumIcon';
+>>>>>>> v4
 import MinusIcon from './MinusIcon';
 import OrganizationIcon from './OrganizationIcon';
 import PhoneIcon from './PhoneIcon';
@@ -49,6 +75,7 @@ import { SaveIcon } from './SaveIcon';
 import ShadedCreditsIcon from './ShadedCreditsIcon';
 import ShieldIcon from './ShieldIcon';
 import SmallArrowIcon from './SmallArrowIcon';
+<<<<<<< HEAD
 import DiscordIcon from './social/DiscordIcon';
 import FacebookIcon from './social/FacebookIcon';
 import GithubIcon from './social/GithubIcon';
@@ -60,13 +87,26 @@ import TwitterIcon from './social/TwitterIcon';
 import YoutubeIcon from './social/YoutubeIcon';
 import SoilSampleIcon from './SoilSampleIcon';
 import { Spinner } from './Spinner';
+=======
+import { Spinner } from './Spinner';
+import SoilSampleIcon from './SoilSampleIcon';
+import TelegramIcon from './social/TelegramIcon';
+>>>>>>> v4
 import TotalCreditsIcon from './TotalCreditsIcon';
 import TrashIcon from './TrashIcon';
 import TrustDocumentIcon from './TrustDocumentIcon';
 import TrustIcon from './TrustIcon';
+<<<<<<< HEAD
 import VerifiedIcon from './VerifiedIcon';
 import { WalletIcon } from './WalletIcon';
 import WhitepaperIcon from './WhitepaperIcon';
+=======
+import TwitterIcon from './social/TwitterIcon';
+import VerifiedIcon from './VerifiedIcon';
+import WhitepaperIcon from './WhitepaperIcon';
+import YoutubeIcon from './social/YoutubeIcon';
+import { WalletIcon } from './WalletIcon';
+>>>>>>> v4
 
 export default {
   title: 'Icons',

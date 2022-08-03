@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
+<<<<<<< HEAD
 
 import type { ClassID } from 'types/ledger/ecocredit';
 
+=======
+import type { ClassID } from 'types/ledger/ecocredit';
+
+>>>>>>> v4
 export default function useUpdateProjectClass(projectId: string): {
   classId: ClassID | undefined;
   isVCS: boolean | undefined;

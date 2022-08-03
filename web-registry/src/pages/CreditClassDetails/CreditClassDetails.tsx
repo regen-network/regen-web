@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+<<<<<<< HEAD
+=======
+import { useAllCreditClassQuery } from 'generated/sanity-graphql';
+>>>>>>> v4
 import {
   useCreditClassByOnChainIdQuery,
   useCreditClassByUriQuery,
 } from 'generated/graphql';
+<<<<<<< HEAD
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { queryClassIssuers, queryEcoClassInfo } from 'lib/ecocredit/api';
 import { onChainClassRegExp } from 'lib/ledger';
@@ -14,6 +19,14 @@ import { client } from 'sanity';
 
 import CreditClassDetailsSimple from './CreditClassDetailsSimple';
 import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
+=======
+import { client } from 'sanity';
+import { queryEcoClassInfo, queryClassIssuers } from 'lib/ecocredit/api';
+import { getMetadata } from 'lib/metadata-graph';
+import { onChainClassRegExp } from 'lib/ledger';
+import CreditClassDetailsWithContent from './CreditClassDetailsWithContent';
+import CreditClassDetailsSimple from './CreditClassDetailsSimple';
+>>>>>>> v4
 
 interface CreditDetailsProps {
   isLandSteward?: boolean;

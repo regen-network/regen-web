@@ -1,5 +1,8 @@
 import React from 'react';
+<<<<<<< HEAD:web-registry/src/components/templates/MultiStepTemplate/MultiStep.context.tsx
 
+=======
+>>>>>>> v4:web-registry/src/components/templates/MultiStep/context/MultiStepContext.tsx
 import { useLocalStorage } from 'hooks';
 
 // TODO - persistence alternatives: component / localstorage / db

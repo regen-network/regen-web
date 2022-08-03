@@ -7,6 +7,7 @@ import {
 import { CreditClassMetadataLD } from 'generated/json-ld';
 
 import { getMetadata } from '../lib/metadata-graph';
+import { CreditClassMetadataLD } from 'generated/json-ld';
 import useQueryListClasses from './useQueryListClasses';
 
 interface ClassInfoWithMetadata extends ClassInfo {

@@ -3,8 +3,21 @@ import { Avatar, Button, Card, CardMedia, Link } from '@mui/material';
 import Long from 'long';
 
 import Modal from '.';
+<<<<<<< HEAD
 import { BasketPutModal } from './BasketPutModal';
 import { BasketTakeModal } from './BasketTakeModal';
+=======
+import IssuanceModal from './IssuanceModal';
+import CropImageModal from './CropImageModal';
+import { ProcessingModal } from './ProcessingModal';
+import { TxSuccessfulModal } from './TxSuccessfulModal';
+import { TxErrorModal } from './TxErrorModal';
+import { CreditSendModal } from './CreditSendModal';
+import { CreditRetireModal } from './CreditRetireModal';
+import { BasketPutModal } from './BasketPutModal';
+import { BasketTakeModal } from './BasketTakeModal';
+import { CreateSellOrderModal } from './CreateSellOrderModal';
+>>>>>>> v4
 import { ConfirmModal } from './ConfirmModal';
 import { CreateSellOrderModal } from './CreateSellOrderModal';
 import { CreditRetireModal } from './CreditRetireModal';

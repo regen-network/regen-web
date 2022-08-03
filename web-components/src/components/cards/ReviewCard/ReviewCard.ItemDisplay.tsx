@@ -1,11 +1,19 @@
 import React, { ReactNode } from 'react';
 import { SxProps } from '@mui/material';
+<<<<<<< HEAD
+=======
+import { FlexCol } from '../../box';
+import type { Theme } from '~/theme/muiTheme';
+>>>>>>> v4
 
 import { FlexCol } from '../../box';
 import { Body, Subtitle } from '../../typography';
 
+<<<<<<< HEAD
 import type { Theme } from '~/theme/muiTheme';
 
+=======
+>>>>>>> v4
 export const ItemDisplay = (props: {
   name?: string;
   children: ReactNode;

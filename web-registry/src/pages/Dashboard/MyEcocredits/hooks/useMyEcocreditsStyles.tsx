@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+=======
+import { makeStyles } from '@mui/styles';
+import { Theme } from '@mui/material';
+>>>>>>> v4
 
 const useMyEcocreditsStyles = makeStyles((theme: Theme) => ({
   arrow: {

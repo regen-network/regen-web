@@ -48,8 +48,8 @@
     "web-components": "0.0.0"
   },
   "scripts": {
-    "lint": "tsc --noEmit && eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
-    "lint-fix": "tsc --noEmit && eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
+    "lint": "eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
+    "lint-fix": "eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
     "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
     "format-and-fix": "yarn format && yarn lint-fix",
     "start": "react-scripts start",

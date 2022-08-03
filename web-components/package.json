@@ -8,8 +8,8 @@
     "copy-assets": "cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",
     "watch": "yarn remove-previous-files && tsc --watch && yarn copy-assets",
     "build": "yarn remove-previous-files && tsc && yarn copy-assets",
-    "lint": "tsc --noEmit && eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
-    "lint-fix": "tsc --noEmit && eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
+    "lint": "eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",
+    "lint-fix": "eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
     "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
     "format-and-fix": "yarn format && yarn lint-fix"
   },

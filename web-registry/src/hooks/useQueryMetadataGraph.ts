@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { getMetadata } from '../lib/metadata-graph';
 import { ProjectMetadataLD } from '../generated/json-ld';
+import { getMetadata } from '../lib/metadata-graph';
 
 /**
  * Returns metadata from off-chain metadata-graph resolver

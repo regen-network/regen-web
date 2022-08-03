@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Modal } from '@mui/material';
+
+import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
+
 import { useWallet } from '../../../lib/wallet';
 import {
-  CreditsPurchaseForm,
   BuyCreditsModal,
   ConfirmationModal,
+  CreditsPurchaseForm,
 } from '../../organisms';
-import BuyFooter from 'web-components/lib/components/fixed-footer/BuyFooter';
 
 const IMAGE_STORAGE_BASE_URL = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
 const API_URI = process.env.REACT_APP_API_URI;

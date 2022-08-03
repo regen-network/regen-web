@@ -13,7 +13,7 @@ import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
 import Modal from '../modal';
-import Tag, { TagProps } from '../tag';
+import Tag from '../tag';
 import { Title } from '../typography';
 
 interface StyleProps {

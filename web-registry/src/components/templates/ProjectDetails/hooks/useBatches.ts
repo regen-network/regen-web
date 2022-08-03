@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
 import { Maybe } from '../../../../generated/graphql';
 import {
-  getBatchesTotal,
   getBatchesByProjectWithSupply,
+  getBatchesTotal,
 } from '../../../../lib/ecocredit/api';
 import {
   BatchInfoWithSupply,

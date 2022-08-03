@@ -5,43 +5,41 @@ import { useTheme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import {
-  CreditPrice,
-} from 'web-components/lib/components/fixed-footer/BuyFooter';
+import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
-import ProjectMediafrom 'web-components/lib/components/sliders/ProjectMedia';
+import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
+import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { useLedger } from '../../../ledger';
-import { chainId } from '../../../lib/ledger';
-import {
-  ProjectTopSection,
-  ProjectImpactSection,
-  MoreProjectsSection,
-} from '../../organisms';
-import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
 import {
   useProjectByHandleQuery,
   useProjectByOnChainIdQuery,
 } from '../../../generated/graphql';
 import { ProjectMetadataLD } from '../../../generated/json-ld/index';
-import useOtherProjects from './hooks/useOtherProjects';
-import useImpact from './hooks/useImpact';
-import useSeo from './hooks/useSeo';
-import useGeojson from './hooks/useGeojson';
-import useMedia from './hooks/useMedia';
-import useIssuanceModal from './hooks/useIssuanceModal';
-import useBatches from './hooks/useBatches';
-import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
 import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
-import { MoreInfo } from './ProjectDetails.MoreInfo';
-import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
-import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
-import { TransactionModals } from './ProjectDetails.TransactionModals';
-import { ManagementActions } from './ProjectDetails.ManagementActions';
-import { getMediaBoxStyles } from './ProjectDetails.styles';
+import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
+import { useLedger } from '../../../ledger';
+import { chainId } from '../../../lib/ledger';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
+import {
+  MoreProjectsSection,
+  ProjectImpactSection,
+  ProjectTopSection,
+} from '../../organisms';
+import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
+import useBatches from './hooks/useBatches';
+import useGeojson from './hooks/useGeojson';
+import useImpact from './hooks/useImpact';
+import useIssuanceModal from './hooks/useIssuanceModal';
+import useMedia from './hooks/useMedia';
+import useOtherProjects from './hooks/useOtherProjects';
+import useSeo from './hooks/useSeo';
+import { ManagementActions } from './ProjectDetails.ManagementActions';
+import { MoreInfo } from './ProjectDetails.MoreInfo';
+import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
+import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
+import { getMediaBoxStyles } from './ProjectDetails.styles';
+import { TransactionModals } from './ProjectDetails.TransactionModals';
 
 interface Project {
   creditPrice?: CreditPrice;

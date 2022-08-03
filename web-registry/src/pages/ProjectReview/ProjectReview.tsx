@@ -4,16 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, CardMedia, useMediaQuery, useTheme } from '@mui/material';
 
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import Card from 'web-components/lib/components/cards/Card';
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 import { Photo } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.Photo';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
-import { VCSMetadata } from './ProjectReview.VCSMetadata';
-import { getOnChainProjectId, getJurisdiction } from './ProjectReview.util';
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
 import { OnboardingFormTemplate } from '../../components/templates';
@@ -28,6 +26,8 @@ import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { useCreateProjectContext } from '../ProjectCreate';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
+import { getJurisdiction, getOnChainProjectId } from './ProjectReview.util';
+import { VCSMetadata } from './ProjectReview.VCSMetadata';
 
 export const ProjectReview: React.FC = () => {
   const { projectId } = useParams();

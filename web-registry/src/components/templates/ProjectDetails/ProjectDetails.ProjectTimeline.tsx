@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+
 import Section from 'web-components/lib/components/section';
 import Timeline from 'web-components/lib/components/timeline';
 import { getFormattedDate } from 'web-components/lib/utils/format';

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
 import { ProjectStakeholder } from '../../../../generated/json-ld';
 import { setPageView } from '../../../../lib/ga';
 

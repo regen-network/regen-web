@@ -9,8 +9,6 @@ import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { CreditBatches } from '..';
-import { ProjectByHandleQuery } from '../../../generated/graphql';
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { qudtUnit, qudtUnitMap } from '../../../lib/rdf';
@@ -22,6 +20,7 @@ import {
 } from '../../../types/ledger/ecocredit';
 import { ProjectTopLink } from '../../atoms';
 import { AdditionalProjectMetadata, ProjectBatchTotals } from '../../molecules';
+import { CreditBatches } from '..';
 import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,

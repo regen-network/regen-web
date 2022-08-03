@@ -1,5 +1,7 @@
 import { useState } from 'react';
+
 import { IssuanceModalData } from 'web-components/lib/components/modal/IssuanceModal';
+
 import { ProjectByOnChainIdQuery } from '../../../../generated/graphql';
 import { buildIssuanceModalData } from '../../../../lib/transform';
 

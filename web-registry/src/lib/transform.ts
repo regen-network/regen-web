@@ -4,9 +4,9 @@ import { Party } from 'web-components/lib/components/modal/LedgerModal';
 import { getFormattedPeriod } from 'web-components/lib/utils/format';
 
 import {
-  ProjectByOnChainIdQuery,
   Maybe,
   PartyFieldsFragment,
+  ProjectByOnChainIdQuery,
 } from '../generated/graphql';
 import {
   ProjectMetadataLD,

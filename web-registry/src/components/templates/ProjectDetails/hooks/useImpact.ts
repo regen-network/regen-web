@@ -1,9 +1,9 @@
 import { Maybe } from '../../../../generated/graphql';
-import { client } from '../../../../sanity';
 import {
   EcologicalImpact,
   useEcologicalImpactByIriQuery,
 } from '../../../../generated/sanity-graphql';
+import { client } from '../../../../sanity';
 
 interface InputProps {
   coBenefitsIris: Maybe<string | string[]> | undefined;

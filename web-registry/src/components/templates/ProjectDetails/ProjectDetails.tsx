@@ -1,3 +1,4 @@
+import React from 'react';
 import { useTheme } from '@mui/styles';
 import { Box, Skeleton } from '@mui/material';
 import { useParams } from 'react-router-dom';
@@ -150,8 +151,7 @@ function ProjectDetails(): JSX.Element {
     viewOnLedger,
   } = useIssuanceModal(data);
 
-  if (!project) return <NotFoundPage />;
-
+  if (!isLoading && !project) return <NotFoundPage />;
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO

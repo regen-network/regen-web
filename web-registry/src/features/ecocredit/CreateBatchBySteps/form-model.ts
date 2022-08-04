@@ -9,7 +9,7 @@ import {
   creditBasicsInitialValues,
   creditBasicsValidationSchema,
   creditBasicsValidationSchemaFields,
-} from './CreateBatchMultiStepForm';
+} from './CreateBatchMultiStepForm/CreditBasics';
 
 // address prefix `regen` used to narrow address validation for recipients
 const addressPrefix = chainInfo.bech32Config.bech32PrefixAccAddr;

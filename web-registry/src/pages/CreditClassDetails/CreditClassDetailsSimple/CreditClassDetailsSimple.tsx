@@ -7,8 +7,7 @@ import { startCase } from 'lodash';
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import ReadMore from 'web-components/lib/components/read-more';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
-import { truncate } from 'web-components/lib/utils/truncate';
+import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { CreditClassByOnChainIdQuery } from 'generated/graphql';
 import {
@@ -18,6 +17,7 @@ import {
 import { getAccountUrl } from 'lib/block-explorer';
 
 import { Link } from 'components/atoms';
+import { AccountLink } from 'components/atoms/AccountLink';
 import { EcocreditsSection, LineItemLabelAbove } from 'components/molecules';
 import { CreditBatches, MoreProjectsSection } from 'components/organisms';
 
@@ -306,13 +306,10 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 <Label size="xs" color="primary.contrastText" mb={3}>
                   admin
                 </Label>
-                <Link
+                <AccountLink
                   className={styles.link}
-                  target="_blank"
-                  href={getAccountUrl(onChainClass.admin)}
-                >
-                  {truncate(onChainClass.admin)}
-                </Link>
+                  address={onChainClass.admin}
+                />
               </div>
               <div className={styles.sidebarItemMargin}>
                 <Label size="xs" color="primary.contrastText" mb={3}>
@@ -320,14 +317,12 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 </Label>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                   {issuers?.map((issuer: string) => (
-                    <Link
+                    <AccountLink
+                      key={issuer}
+                      address={issuer}
                       className={styles.link}
                       href={getAccountUrl(issuer)}
-                      target="_blank"
-                      key={issuer}
-                    >
-                      {truncate(issuer)}
-                    </Link>
+                    />
                   ))}
                 </Box>
               </div>

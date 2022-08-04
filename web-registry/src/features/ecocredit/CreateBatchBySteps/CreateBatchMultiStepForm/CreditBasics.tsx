@@ -39,7 +39,7 @@ export interface CreditBasicsFormValues {
   projectId: string;
   startDate: Date | null;
   endDate: Date | null;
-  metadata?: Partial<VCSBatchMetadataLD> | string | undefined;
+  metadata?: Partial<VCSBatchMetadataLD>;
 }
 
 const vcsMetadataSchema: Yup.AnyObjectSchema = Yup.object({
@@ -63,7 +63,7 @@ const isPastDateTest = {
   },
 };
 
-export const validationSchemaFields = {
+export const creditBasicsValidationSchemaFields = {
   projectId: Yup.string().required(requiredMessage),
   startDate: Yup.date()
     .required(requiredMessage)
@@ -81,9 +81,11 @@ export const validationSchemaFields = {
   }),
 };
 
-export const validationSchema = Yup.object(validationSchemaFields);
+export const creditBasicsValidationSchema = Yup.object(
+  creditBasicsValidationSchemaFields,
+);
 
-export const initialValues = {
+export const creditBasicsInitialValues = {
   projectId: '',
   startDate: null,
   endDate: null,
@@ -98,7 +100,7 @@ export default function CreditBasics({
   saveProjectOptionSelected,
 }: Props): React.ReactElement {
   const { wallet } = useWallet();
-  const projects = useQueryProjectsByIssuer(wallet!.address);
+  const projects = useQueryProjectsByIssuer(wallet!.address); // TODO: We should not use the typescript bypass! here (should try to avoid using period)
 
   const { values, validateForm } = useFormikContext<CreditBasicsFormValues>();
   const { projectId } = values;
@@ -169,9 +171,7 @@ export default function CreditBasics({
 
           <AdditionalCerfications
             certifications={
-              (values.metadata as VCSBatchMetadataLD)[
-                'regen:additionalCertifications'
-              ] || []
+              values.metadata?.['regen:additionalCertifications'] || []
             }
           />
         </>

@@ -1,9 +1,8 @@
-import * as React from 'react';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { Box } from '@mui/material';
 
-import { FlexCol } from '../box';
-import ContainedButton, { ContainedColorVariant } from './ContainedButton';
+import { Flex, FlexCol } from '../box';
+import ContainedButton from './ContainedButton';
 import { EditButton } from './EditButton';
 import { ExpandButton } from './ExpandButton';
 import OutlinedButton from './OutlinedButton';
@@ -17,33 +16,31 @@ export default {
 };
 
 export const outlinedButton = (): JSX.Element => (
-  <OutlinedButton startIcon={<ArrowDownwardIcon />}>read more</OutlinedButton>
+  <Flex sx={{ gap: 4 }}>
+    <OutlinedButton startIcon={<ArrowDownwardIcon />}>read more</OutlinedButton>
+    <OutlinedButton disabled startIcon={<ArrowDownwardIcon />}>
+      disabled
+    </OutlinedButton>
+  </Flex>
 );
 
 export const containedButton = (): JSX.Element => {
-  const colorVariants: ContainedColorVariant[] = [
-    'secondary',
-    'gradientBlueGreen',
-  ];
-
   return (
     <Box sx={{ display: 'flex' }}>
-      {colorVariants.map(colorVariant => (
-        <Box
-          key={colorVariant}
-          sx={{ mr: '8px', display: 'flex', flexDirection: 'column' }}
-        >
-          <ContainedButton colorVariant={colorVariant} sx={{ mb: '8px' }}>
-            Contained
-          </ContainedButton>
-          <ContainedButton colorVariant={colorVariant} disabled>
-            Disabled
-          </ContainedButton>
-        </Box>
-      ))}
+      <Box sx={{ mr: '8px', display: 'flex', flexDirection: 'column' }}>
+        <ContainedButton sx={{ mb: '8px' }}>Contained</ContainedButton>
+        <ContainedButton disabled>Disabled</ContainedButton>
+      </Box>
     </Box>
   );
 };
+
+export const combined = (): JSX.Element => (
+  <Box>
+    <ContainedButton>Contained</ContainedButton>
+    <OutlinedButton>Outlined</OutlinedButton>
+  </Box>
+);
 
 export const nextButton = (): JSX.Element => (
   <PrevNextButton direction="next" />

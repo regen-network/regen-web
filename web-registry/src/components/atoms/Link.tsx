@@ -7,9 +7,15 @@ interface LinkProps extends MuiLinkProps {
 }
 
 /**
- * @returns a Material UI `Link` - will use React Router for local links
+ * @returns a Material UI `Link` - will use React Router for local links.
+ * Defaults to `target='_blank'` for external links.
  */
-export const Link: React.FC<LinkProps> = ({ href, children, ...linkProps }) => {
+export const Link: React.FC<LinkProps> = ({
+  href,
+  children,
+  target,
+  ...linkProps
+}) => {
   const isInternalLink = (href: string): boolean =>
     !!href && href.startsWith('/');
 
@@ -18,7 +24,7 @@ export const Link: React.FC<LinkProps> = ({ href, children, ...linkProps }) => {
       {children}
     </MuiLink>
   ) : (
-    <MuiLink {...linkProps} href={href}>
+    <MuiLink {...linkProps} href={href} target={target || '_blank'}>
       {children}
     </MuiLink>
   );

@@ -89,7 +89,7 @@ export function getValidationSchema(
   return Yup.object().shape(getValidationSchemaFields(addressPrefix));
 }
 
-export const recipientInitialValues = {
+const recipientInitialValues = {
   recipient: '',
   tradableAmount: 0,
   withRetire: false,

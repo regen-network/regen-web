@@ -36,7 +36,8 @@ const useProjectCreateSubmit = ({ signAndBroadcast }: Props): ReturnType => {
       jurisdiction,
       referenceId,
     }: MsgCreateProjectValues): Promise<void> => {
-      if (!classId) return Promise.reject();
+      if (!classId)
+        return Promise.reject('cant create project without a class ID');
 
       let iriResponse:
         | IriFromMetadataSuccess<

@@ -25,6 +25,7 @@
     "build-components": "lerna run --scope web-components build --stream",
     "build-storybook": "yarn build-components && lerna run build-storybook --stream",
     "build-auth": "yarn build-components && lerna run --scope web-auth build --stream",
+    "clean": "find . -iname 'node_modules' -maxdepth 2 | xargs rm -rf",
     "format": "lerna run format",
     "lint": "lerna run lint",
     "format-and-fix": "lerna run format-and-fix",

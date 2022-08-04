@@ -27,6 +27,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     textAlign: 'center',
     color: theme.palette.primary.main,
     lineHeight: '150%',
+    margin: '0 auto',
     [theme.breakpoints.up('sm')]: {
       paddingBottom: theme.spacing(18),
     },

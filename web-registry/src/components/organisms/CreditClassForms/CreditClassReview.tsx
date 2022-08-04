@@ -15,7 +15,11 @@ export const CreditClassReview = (): JSX.Element => {
   const { values } = useFormikContext<CreditClassValues>();
   const { handleBack } = useMultiStep();
   return (
-    <ReviewCard title="Credit Class Info" onEditClick={handleBack}>
+    <ReviewCard
+      title="Credit Class Info"
+      onEditClick={handleBack}
+      sx={{ mt: [8, 10] }}
+    >
       <ItemDisplay name="Admin">{values.admin}</ItemDisplay>
       <ItemDisplay name="Issuers">
         {values.issuers.map((item, i) => (

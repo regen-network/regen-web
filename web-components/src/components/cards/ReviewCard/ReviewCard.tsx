@@ -18,14 +18,14 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
   title,
   onEditClick,
   children,
-  sx,
+  sx = [],
 }) => {
   return (
-    <OnBoardingCard sx={sx}>
+    <OnBoardingCard
+      sx={[{ mt: [2.5, 2.5], mb: [0, 0] }, ...(Array.isArray(sx) ? sx : [sx])]}
+    >
       <Flex
         sx={{
-          display: 'flex',
-          flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
         }}

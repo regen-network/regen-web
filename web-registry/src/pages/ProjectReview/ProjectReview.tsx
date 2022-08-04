@@ -118,9 +118,9 @@ export const ProjectReview: React.FC = () => {
   return (
     <OnboardingFormTemplate activeStep={1} title="Review" loading={loading}>
       <ReviewCard
-        sx={{ mt: [8, 10] }}
         title="Basic Info"
         onEditClick={() => navigate(`${editPath}/basic-info`)}
+        sx={{ mt: [8, 10] }}
       >
         <ItemDisplay name="Name">{metadata?.['schema:name']}</ItemDisplay>
         <ItemDisplay name="Size">

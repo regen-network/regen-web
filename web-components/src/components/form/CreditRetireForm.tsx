@@ -200,15 +200,15 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
         </Body>
         <Grid container className={styles.stateCountryGrid}>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
+            <LocationCountryField name={`${arrayPrefix}country`} />
+          </Grid>
+          <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
             <LocationStateField
               country={country}
               optional={!postalCode}
               name={`${arrayPrefix}stateProvince`}
               initialSelection={stateProvince}
             />
-          </Grid>
-          <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <LocationCountryField name={`${arrayPrefix}country`} />
           </Grid>
         </Grid>
         <Field

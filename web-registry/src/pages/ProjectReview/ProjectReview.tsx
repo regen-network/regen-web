@@ -160,12 +160,7 @@ export const ProjectReview: React.FC = () => {
             <Photo src={photo?.['@value']} />
           ))}
         {videoUrl && (
-          <Card
-            sx={{
-              mt: 9,
-              mb: 2,
-            }}
-          >
+          <Card>
             <CardMedia
               component={ReactPlayerLazy}
               url={videoUrl}

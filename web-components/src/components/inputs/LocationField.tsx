@@ -38,7 +38,18 @@ const LocationField: React.FC<Props> = ({
   placeholder,
   transformValue,
   triggerOnChange,
-  types = ['address'],
+  // https://docs.mapbox.com/api/search/geocoding/#data-types
+  types = [
+    'country',
+    'region',
+    'postcode',
+    'district',
+    'place',
+    'locality',
+    'neighborhood',
+    'address',
+    'poi',
+  ],
   token: accessToken,
   ...fieldProps
 }) => {

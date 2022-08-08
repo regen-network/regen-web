@@ -20,7 +20,7 @@ import {
 } from '../../../types/ledger/ecocredit';
 import { ProjectTopLink } from '../../atoms';
 import { AdditionalProjectMetadata, ProjectBatchTotals } from '../../molecules';
-import { CreditBatches } from '../CreditBatches';
+import { CreditBatches } from '..';
 import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,

@@ -25,12 +25,12 @@ export const Projects: React.FC = () => {
   const [projectsWithOrders, setProjectsWithOrders] = useState<ProjectOnSale[]>(
     [],
   );
-  // const [bannerError, setBannerError] = useState('');
+  // const [bannerError, setBannerError] = useState(''); // TODO setting up for #1055
   const { data } = useEcocreditQuery<QueryProjectsResponse>({
     query: 'projects',
     params: {},
   });
-  const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
+  const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
   const projects = data?.projects;
 
@@ -67,11 +67,14 @@ export const Projects: React.FC = () => {
   const handleTxDelivered = async (
     _deliverTxResponse: DeliverTxResponse,
   ): Promise<void> => {
-    console.log('_deliverTxResponse', _deliverTxResponse);
+    // console.log('_deliverTxResponse', _deliverTxResponse); TODO #1055
   };
 
-  const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =
-    useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+  const { error, setError, deliverTxResponse } = useMsgClient(
+    handleTxQueued,
+    handleTxDelivered,
+    handleError,
+  );
 
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
@@ -95,7 +98,7 @@ export const Projects: React.FC = () => {
               place={project?.place}
               area={project?.area}
               areaUnit={project?.areaUnit}
-              onButtonClick={() => {}}
+              // onButtonClick={() => {}} TODO #1055
               purchaseInfo={project.purchaseInfo}
               onClick={() => navigate(`/projects/${project.id}`)}
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
@@ -119,7 +122,7 @@ export const Projects: React.FC = () => {
           buttonTitle="close"
         />
       )}
-      {/* {bannerError && <ErrorBanner text={bannerError} />} */}
+      {/* {bannerError && <ErrorBanner text={bannerError} />} TODO #1055 */}
     </Box>
   );
 };

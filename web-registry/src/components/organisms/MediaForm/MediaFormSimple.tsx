@@ -14,11 +14,11 @@ import { cropAspect, MediaBaseErrors, MediaBaseValues } from './MediaForm';
 import { useMediaFormStyles } from './useMediaFormStyles';
 
 export interface MediaValuesSimple extends MediaBaseValues {
-  'regen:creditText'?: string;
+  'schema:creditText'?: string;
 }
 
 export interface MediaErrorsSimple extends MediaBaseErrors {
-  'regen:creditText'?: string;
+  'schema:creditText'?: string;
   'regen:galleryPhotos'?: {
     '@list'?: Array<{ '@value'?: string }>;
   };
@@ -75,7 +75,7 @@ const MediaFormSimple = (): JSX.Element => {
         optional
         component={ControlledTextField}
         label="Photo Credit"
-        name="regen:creditText"
+        name="schema:creditText"
       />
       <Field
         optional

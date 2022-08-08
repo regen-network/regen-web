@@ -6,7 +6,7 @@ export default {
 };
 
 const initialValues: MediaValues = {
-  'regen:creditText': '',
+  'schema:creditText': '',
   'regen:galleryPhotos': { '@list': [] },
   'regen:landStewardPhoto': { '@type': 'schema:URL', '@value': '' },
 };

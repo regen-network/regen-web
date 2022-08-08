@@ -16,7 +16,7 @@ interface ReturnType {
   assets: any;
   imageStorageBaseUrl?: string;
   apiServerUrl?: string;
-  imageCredits: any;
+  imageCredits?: string;
 }
 
 export default function useMedia({

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useEffect } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { OAuthError, useAuth0 } from '@auth0/auth0-react';
 import { createBrowserHistory } from 'history';
@@ -9,7 +9,7 @@ import { KeplrRoute, ProtectedRoute, ScrollToTop } from './components/atoms';
 import PageLoader from './components/atoms/PageLoader';
 import { AppFooter, RegistryNav } from './components/organisms';
 import isAdmin from './lib/admin';
-import { init as initGA } from './lib/ga';
+import { useGoogleAnalyticsInit } from './lib/ga';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 import './App.css';
@@ -72,9 +72,7 @@ export const history = createBrowserHistory();
 const App: React.FC = (): JSX.Element => {
   const { user, isLoading, error } = useAuth0();
 
-  useEffect(() => {
-    initGA();
-  });
+  useGoogleAnalyticsInit();
 
   if (isLoading) {
     return <div></div>;

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, CardMedia, useMediaQuery, useTheme } from '@mui/material';
 
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import Card from 'web-components/lib/components/cards/Card';
 import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
 import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
@@ -14,15 +15,18 @@ import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Link } from '../../components/atoms';
 import { ProjectPageFooter } from '../../components/molecules';
 import { OnboardingFormTemplate } from '../../components/templates';
-import { useProjectByIdQuery } from '../../generated/graphql';
+import {
+  useProjectByIdQuery,
+  useUpdateProjectByIdMutation,
+} from '../../generated/graphql';
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
 import useMsgClient from '../../hooks/useMsgClient';
 import { getHashUrl } from '../../lib/block-explorer';
 import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { qudtUnit, qudtUnitMap } from '../../lib/rdf';
 import { useCreateProjectContext } from '../ProjectCreate';
-import { useGetJurisdiction } from './hooks/useGetJurisdiction';
 import { useProjectCreateSubmit } from './hooks/useProjectCreateSubmit';
+import { getJurisdiction, getOnChainProjectId } from './ProjectReview.util';
 import { VCSMetadata } from './ProjectReview.VCSMetadata';
 
 export const ProjectReview: React.FC = () => {
@@ -37,6 +41,8 @@ export const ProjectReview: React.FC = () => {
   });
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+  const [bannerError, setBannerError] = useState('');
+  const [updateProject] = useUpdateProjectByIdMutation();
 
   const closeSubmitModal = (): void => setIsSubmitModalOpen(false);
 
@@ -55,12 +61,25 @@ export const ProjectReview: React.FC = () => {
     setTxModalTitle('MsgCreateProject Error');
   };
 
-  const handleTxDelivered = (_deliverTxResponse: DeliverTxResponse): void => {
+  const handleTxDelivered = async (
+    _deliverTxResponse: DeliverTxResponse,
+  ): Promise<void> => {
     setDeliverTxResponse(_deliverTxResponse);
+    const projectOnChainId = getOnChainProjectId(_deliverTxResponse);
+    await updateProject({
+      variables: {
+        input: {
+          id: projectId,
+          projectPatch: {
+            onChainId: projectOnChainId,
+          },
+        },
+      },
+    });
     navigate(`${editPath}/finished`);
   };
 
-  const { signAndBroadcast, deliverTxResponse, wallet, error, setError } =
+  const { signAndBroadcast, wallet, error, setError, deliverTxResponse } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const { projectCreateSubmit } = useProjectCreateSubmit({ signAndBroadcast });
   const project = data?.projectById;
@@ -68,28 +87,40 @@ export const ProjectReview: React.FC = () => {
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
   const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
   const metadata: Partial<VCSProjectMetadataLD> = project?.metadata;
-  const jurisdiction = useGetJurisdiction(metadata);
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const videoUrl = metadata?.['regen:videoURL']?.['@value'];
-
-  const submit = (): void => {
-    const vcsProjectId = metadata?.['regen:videoURL']?.['@value'];
-    projectCreateSubmit({
+  const submit = async (): Promise<void> => {
+    let jurisdiction;
+    try {
+      jurisdiction = await getJurisdiction(metadata);
+      // eslint-disable-next-line
+      console.log(
+        'Jurisdiction ISO string based on location provided:',
+        jurisdiction,
+      );
+    } catch (err) {
+      setBannerError(
+        `Error getting ISO string for jurisdiction: ${err as string}`,
+      );
+      return;
+    }
+    const vcsProjectId = metadata?.['regen:vcsProjectId'];
+    await projectCreateSubmit({
       classId: creditClassId || '',
       admin: wallet?.address || '',
       metadata,
-      jurisdiction,
-      referenceId: isVCS && vcsProjectId ? `VCS-${vcsProjectId}` : '', //TODO
+      jurisdiction: jurisdiction || '',
+      referenceId: isVCS && vcsProjectId ? `VCS-${vcsProjectId}` : '', // TODO: regen-network/regen-registry#1104
     });
   };
 
   return (
     <OnboardingFormTemplate activeStep={1} title="Review" loading={loading}>
       <ReviewCard
-        sx={{ mt: [8, 10] }}
         title="Basic Info"
         onEditClick={() => navigate(`${editPath}/basic-info`)}
+        sx={{ mt: [8, 10] }}
       >
         <ItemDisplay name="Name">{metadata?.['schema:name']}</ItemDisplay>
         <ItemDisplay name="Size">
@@ -129,12 +160,7 @@ export const ProjectReview: React.FC = () => {
             <Photo src={photo?.['@value']} />
           ))}
         {videoUrl && (
-          <Card
-            sx={{
-              mt: 9,
-              mb: 2,
-            }}
-          >
+          <Card>
             <CardMedia
               component={ReactPlayerLazy}
               url={videoUrl}
@@ -202,6 +228,7 @@ export const ProjectReview: React.FC = () => {
           buttonTitle="close"
         />
       )}
+      {bannerError && <ErrorBanner text={bannerError} />}
     </OnboardingFormTemplate>
   );
 };

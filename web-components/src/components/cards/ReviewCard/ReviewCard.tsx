@@ -1,7 +1,7 @@
 import React from 'react';
 import { SxProps } from '@mui/material';
 
-import { Flex } from '../../box';
+import { Flex, FlexCol } from '../../box';
 import { EditButton } from '../../buttons/EditButton';
 import { Label } from '../../typography';
 import OnBoardingCard from '../OnBoardingCard';
@@ -18,14 +18,14 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
   title,
   onEditClick,
   children,
-  sx,
+  sx = [],
 }) => {
   return (
-    <OnBoardingCard sx={sx}>
+    <OnBoardingCard
+      sx={[{ mt: [2.5, 2.5], mb: [0, 0] }, ...(Array.isArray(sx) ? sx : [sx])]}
+    >
       <Flex
         sx={{
-          display: 'flex',
-          flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
         }}
@@ -33,7 +33,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
         <Label size="sm">{title}</Label>
         <EditButton onClick={onEditClick} />
       </Flex>
-      {children}
+      <FlexCol sx={{ mt: [4, 7], pb: 4, gap: [8, 10] }}>{children}</FlexCol>
     </OnBoardingCard>
   );
 };

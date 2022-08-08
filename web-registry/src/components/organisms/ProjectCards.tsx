@@ -100,12 +100,13 @@ const ProjectCards: React.FC<Props> = props => {
   return isMobile ? (
     <div className={styles.swipe}>
       {props.projects.map((project, i) => {
+        const projectId = project?.onChainId || project?.handle;
         return (
           project && (
             <Link
               className={styles.swipeItem}
-              key={project.handle || i}
-              href={`/projects/${project.handle}`}
+              key={projectId || i}
+              href={`/projects/${projectId}`}
             >
               <LinkedProject project={project} />
             </Link>
@@ -120,18 +121,19 @@ const ProjectCards: React.FC<Props> = props => {
       spacing={5}
     >
       {props.projects.map((project, i) => {
+        const projectId = project?.onChainId || project?.handle;
         return (
           project && (
             <Grid
               item
               sm={6}
               md={4}
-              key={project.handle || i}
+              key={projectId || i}
               className={styles.item}
             >
               <Link
                 className={styles.projectCard}
-                href={`/projects/${project.handle}`}
+                href={`/projects/${projectId}`}
               >
                 <LinkedProject project={project} />
               </Link>

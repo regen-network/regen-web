@@ -69,6 +69,7 @@ function CreditBatchInfo({
     <ReviewCard
       title="Credit Batch Info"
       onEditClick={() => handleActiveStep(0)}
+      sx={{ mt: [8, 10] }}
     >
       <ItemDisplay name={'Project'}>
         {dataDisplay?.project?.label || data.projectId}

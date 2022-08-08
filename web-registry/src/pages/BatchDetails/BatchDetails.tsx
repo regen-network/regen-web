@@ -103,7 +103,7 @@ export const BatchDetails: React.FC = () => {
             <BatchInfoGrid
               batch={batch}
               projectOnChainId={onChainId}
-              projectName={project?.metadata?.['schema:name']}
+              projectName={project?.metadata?.['schema:name'] || onChainId}
               sx={{ py: 10, borderBottom: 1, borderColor: 'grey.100' }}
             />
             <Title variant="h5" sx={{ mt: 10, mb: 8 }}>

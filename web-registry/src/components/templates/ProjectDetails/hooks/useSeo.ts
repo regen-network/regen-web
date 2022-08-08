@@ -13,7 +13,7 @@ function getVisiblePartyName(party?: ProjectStakeholder): string | undefined {
 interface InputProps {
   metadata: any;
   creditClassName: string | undefined;
-  handleReset: any;
+  handleReset?: () => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -35,7 +35,7 @@ export default function useSeo({
 
   useEffect(() => {
     setPageView(location);
-    handleReset(); // reset when location changes
+    handleReset && handleReset(); // reset when location changes
   }, [location, handleReset]);
 
   const siteMetadata = {

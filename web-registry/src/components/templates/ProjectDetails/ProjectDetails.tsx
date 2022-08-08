@@ -128,16 +128,11 @@ function ProjectDetails(): JSX.Element {
     creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
   ];
 
-  const { geojson, isGISFile, setGeojson } = useGeojson(
-    offChainProjectMetadata,
-  );
+  const { geojson, isGISFile } = useGeojson(offChainProjectMetadata);
 
-  // TODO: what should be used here?
   const seoData = useSeo({
     metadata: offChainProjectMetadata,
     creditClassName,
-    // metadataLocation,
-    handleReset: () => setGeojson(null),
   });
   const mediaData = useMedia({ metadata: offChainProjectMetadata, geojson });
   const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });

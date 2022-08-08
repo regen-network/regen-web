@@ -1,10 +1,12 @@
-import { Dispatch, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as togeojson from '@mapbox/togeojson';
+
+import { UseStateSetter } from 'types/react/use-state';
 
 export default function useGeojson(metadata: any): {
   geojson: any;
   isGISFile: boolean;
-  setGeojson: Dispatch<any>;
+  setGeojson: UseStateSetter<any | null>;
 } {
   const [geojson, setGeojson] = useState<any | null>(null);
 
@@ -15,8 +17,8 @@ export default function useGeojson(metadata: any): {
   const metadataLocation = metadata?.['schema:location'];
 
   useEffect(() => {
-    if (!geojson && isGISFile) {
-      fetch(mapFile)
+    const fetchData = async (): Promise<void> => {
+      await fetch(mapFile)
         .then(r => r.text())
         .then(text => {
           let geojson;
@@ -28,6 +30,10 @@ export default function useGeojson(metadata: any): {
           }
           setGeojson(geojson);
         });
+    };
+
+    if (!geojson && isGISFile) {
+      fetchData();
     } else if (metadataLocation) {
       setGeojson(metadataLocation);
     }

@@ -11,11 +11,9 @@ import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
-import { useWallet } from 'lib/wallet';
-
+import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
 import useQueryIfIssuer from 'hooks/useQueryIfIssuer';
-import useQueryListClasses from 'hooks/useQueryListClasses';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
 const MyProjects = React.lazy(() => import('./MyProjects'));
@@ -38,20 +36,10 @@ const sxs = {
 };
 
 const Dashboard = (): JSX.Element => {
-  const { wallet } = useWallet();
   const theme = useTheme();
   const isIssuer = useQueryIfIssuer();
   const isCreditClassCreator = useQueryIfCreditClassCreator();
-  const classes = useQueryListClasses();
-  const adminClasses = classes?.classes.filter(
-    x => x.admin === wallet?.address,
-  );
-  let isCreditClassAdmin: boolean;
-  if (adminClasses) {
-    isCreditClassAdmin = adminClasses.length > 0;
-  } else {
-    isCreditClassAdmin = false;
-  }
+  const isCreditClassAdmin = useQueryIfCreditClassAdmin();
   const creditClassTabHidden = !(isCreditClassCreator || isCreditClassAdmin);
 
   // TODO: We should handle these as nested routes, converting this to an

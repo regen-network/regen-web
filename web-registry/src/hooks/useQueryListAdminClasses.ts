@@ -15,7 +15,7 @@ export function useQueryListAdminClasses(): ClassInfo[] | undefined {
     if (!wallet?.address) {
       setAdminClassList(undefined);
     } else {
-      const adminClasses = classList?.classes.filter(
+      const adminClasses = classList?.classes?.filter(
         x => x.admin === wallet.address,
       );
       setAdminClassList(adminClasses);

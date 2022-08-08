@@ -89,7 +89,13 @@ export const Projects: React.FC = () => {
         p: 8.75,
       }}
     >
-      <Grid container spacing={4.75} justifyContent="center">
+      <Grid
+        container
+        rowGap={4.5}
+        columnGap={5}
+        flexWrap="wrap"
+        justifyContent="center"
+      >
         {projectsWithOrders?.map(project => (
           <Grid item key={project?.id}>
             <ProjectCard
@@ -103,7 +109,8 @@ export const Projects: React.FC = () => {
               onClick={() => navigate(`/projects/${project.id}`)}
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
               apiServerUrl={API_URI}
-              sx={{ minWidth: [300, 338], maxWidth: 338, mr: 10, mb: 10 }}
+              truncateTitle={true}
+              sx={{ width: 338, height: 479 }}
             />
           </Grid>
         ))}

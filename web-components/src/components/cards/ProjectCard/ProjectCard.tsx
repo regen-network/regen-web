@@ -10,13 +10,13 @@ import { RegenTokenIcon } from '../../icons/RegenTokenIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
 import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
-import MediaCard from '../MediaCard';
+import MediaCard, { MediaCardProps } from '../MediaCard';
 import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
 import { PurchaseInfo } from './ProjectCard.types';
 import { getAbbreviation } from './ProjectCard.utils';
 
-export interface ProjectCardProps {
+export interface ProjectCardProps extends MediaCardProps {
   name: string;
   imgSrc: string;
   place: string;
@@ -52,6 +52,7 @@ export function ProjectCard({
   imageStorageBaseUrl,
   apiServerUrl,
   sx,
+  ...mediaCardProps
 }: ProjectCardProps): JSX.Element {
   const theme = useTheme();
   const classes = useProjectCardStyles();
@@ -79,6 +80,7 @@ export function ProjectCard({
       imageStorageBaseUrl={imageStorageBaseUrl}
       apiServerUrl={apiServerUrl}
       sx={sx}
+      {...mediaCardProps}
     >
       <div className={classes.placeInfo}>
         <ProjectPlaceInfo

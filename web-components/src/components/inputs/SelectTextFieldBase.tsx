@@ -6,6 +6,10 @@ import DropdownIcon from '../icons/DropdownIcon';
 import { DefaultStyleProps } from './FieldFormControl';
 import TextFieldBase from './TextFieldBase';
 
+// This is a SelectTextField with formik props stripped out so it can be used outside
+// of a Formik context.
+// TODO: use this as a style base for SelectTextField
+
 const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     '& select': {

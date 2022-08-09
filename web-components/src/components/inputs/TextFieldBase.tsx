@@ -8,6 +8,7 @@ import { DefaultStyleProps } from './FieldFormControl';
 import InputLabel from './InputLabel';
 
 // TODO: create styled component as described in issue: regen-network/regen-web/issues/955
+// These styles are copied from TextField. Instead, use this as a style base for TextField
 
 export interface RegenTextFieldProps
   extends DefaultStyleProps,

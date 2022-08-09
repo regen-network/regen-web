@@ -8,15 +8,15 @@ import { getMetadata } from 'lib/metadata-graph';
 
 import DefaultProject from '../../assets/default-project.jpg';
 
-export interface ProjectOnSale extends ProjectCardProps {
+export interface ProjectWithOrderData extends ProjectCardProps {
   id: string;
 }
 
 export const getProjectDisplayData = async (
   projects: ProjectInfo[],
   sellOrders: SellOrderInfo[],
-): Promise<ProjectOnSale[]> => {
-  const projectsWithOrders = await Promise.all(
+): Promise<ProjectWithOrderData[]> => {
+  const projectsWithOrderData = await Promise.all(
     projects?.map(async project => {
       const purchaseInfo = getPurchaseInfo(project.id, sellOrders);
       let metadata;
@@ -42,13 +42,10 @@ export const getProjectDisplayData = async (
           metadata?.['regen:projectSize']?.['qudt:unit']?.['@value'] || '',
         purchaseInfo,
         href: `/projects/${project.id}`,
-      } as ProjectOnSale;
+      } as ProjectWithOrderData;
     }),
   );
-  return projectsWithOrders.filter(project => {
-    const creditsAvail = project?.purchaseInfo?.sellInfo?.creditsAvailable;
-    return creditsAvail && creditsAvail > 0;
-  }); // TODO: should this be filtered?
+  return projectsWithOrderData;
 };
 
 const getPurchaseInfo = (
@@ -58,7 +55,13 @@ const getPurchaseInfo = (
   const ordersForThisProject = sellOrders.filter(order =>
     order.batchDenom.startsWith(projectId),
   );
-  if (!ordersForThisProject.length) return {};
+  if (!ordersForThisProject.length)
+    return {
+      sellInfo: {
+        pricePerTon: `-`,
+        creditsAvailable: 0,
+      },
+    };
 
   const creditsAvailable = ordersForThisProject
     .map(order => parseInt(order.quantity))
@@ -67,8 +70,8 @@ const getPurchaseInfo = (
   const prices = ordersForThisProject
     .map(order => parseInt(order.askAmount))
     .sort((a, b) => a - b);
-  const priceMin = prices[0];
-  const priceMax = prices[prices.length - 1];
+  const priceMin = prices?.[0];
+  const priceMax = prices?.[prices.length - 1];
 
   return {
     sellInfo: {

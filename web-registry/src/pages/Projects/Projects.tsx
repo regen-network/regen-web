@@ -13,7 +13,10 @@ import useEcocreditQuery from '../../hooks/useEcocreditQuery';
 import useMsgClient from '../../hooks/useMsgClient';
 import { useQuerySellOrders } from '../../hooks/useQuerySellOrders';
 import { getHashUrl } from '../../lib/block-explorer';
-import { getProjectDisplayData, ProjectOnSale } from './Projects.normalize';
+import {
+  getProjectDisplayData,
+  ProjectWithOrderData,
+} from './Projects.normalize';
 
 const IMAGE_STORAGE_BASE_URL = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
 const API_URI = process.env.REACT_APP_API_URI;
@@ -22,9 +25,9 @@ export const Projects: React.FC = () => {
   const navigate = useNavigate();
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
-  const [projectsWithOrders, setProjectsWithOrders] = useState<ProjectOnSale[]>(
-    [],
-  );
+  const [projectsWithOrders, setProjectsWithOrders] = useState<
+    ProjectWithOrderData[]
+  >([]);
   // const [bannerError, setBannerError] = useState(''); // TODO setting up for #1055
   const { data } = useEcocreditQuery<QueryProjectsResponse>({
     query: 'projects',

@@ -214,7 +214,7 @@ export function ProjectCard({
                         mobileSize="sm"
                         sx={{ fontWeight: 700, color: 'primary.contrastText' }}
                       >
-                        {purchaseInfo.sellInfo.creditsAvailable}
+                        {purchaseInfo.sellInfo.creditsAvailable || '-'}
                       </Body>
                     </Box>
                   </Box>
@@ -224,6 +224,7 @@ export function ProjectCard({
                     startIcon={
                       <CurrentCreditsIcon height="18px" width="18px" />
                     }
+                    disabled={purchaseInfo.sellInfo.creditsAvailable === 0}
                     sx={{ width: '100%' }}
                   >
                     {'BUY ECOCREDITS'}

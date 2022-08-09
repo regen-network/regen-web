@@ -219,6 +219,7 @@ const useStylesOverview = makeStyles((theme: Theme) => ({
   creditsIcon: {
     width: 63,
     height: 72,
+    color: theme.palette.secondary.main,
   },
 }));
 

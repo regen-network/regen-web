@@ -36,9 +36,10 @@ export default function SelectTextFieldBase({
   options,
   disabled,
   label,
-  ...props
+  defaultStyle,
+  ...selectProps
 }: SelectTextFieldProps): JSX.Element {
-  const styles = useStyles({ default: !!props.defaultStyle });
+  const styles = useStyles({ default: !!defaultStyle });
   const theme = useTheme();
 
   return (
@@ -52,8 +53,9 @@ export default function SelectTextFieldBase({
         IconComponent: disabled
           ? () => <DropdownIcon color={theme.palette.grey['400']} />
           : DropdownIcon,
+        ...selectProps,
       }}
-      defaultStyle={props.defaultStyle}
+      defaultStyle={defaultStyle}
     >
       {options ? (
         options.map(option => (

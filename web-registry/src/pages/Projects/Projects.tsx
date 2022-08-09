@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, SelectChangeEvent } from '@mui/material';
 import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { fieldToSelect, fieldToTextField } from 'formik-mui';
 
 import { Flex } from 'web-components/lib/components/box';
 import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
 import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectTextFieldBase';
+import { Loading } from 'web-components/lib/components/loading';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
-import { Label } from 'web-components/lib/components/typography';
 
 import { Link } from '../../components/atoms';
 import useEcocreditQuery from '../../hooks/useEcocreditQuery';
@@ -18,15 +17,18 @@ import useMsgClient from '../../hooks/useMsgClient';
 import { useQuerySellOrders } from '../../hooks/useQuerySellOrders';
 import { getHashUrl } from '../../lib/block-explorer';
 import { useProjectsSellOrders } from './hooks/useProjectsSellOrders';
-
-const IMAGE_STORAGE_BASE_URL = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
-const API_URI = process.env.REACT_APP_API_URI;
+import { useSortProjects } from './hooks/useSortProjects';
+import {
+  API_URI,
+  IMAGE_STORAGE_BASE_URL,
+  sortOptions,
+} from './Projects.config';
 
 export const Projects: React.FC = () => {
   const navigate = useNavigate();
+  const [sort, setSort] = useState<string>(sortOptions[0].value);
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
-
   // const [bannerError, setBannerError] = useState(''); // TODO setting up for #1055
   const { data, loading } = useEcocreditQuery<QueryProjectsResponse>({
     query: 'projects',
@@ -35,7 +37,19 @@ export const Projects: React.FC = () => {
   const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
   const projects = data?.projects;
-  const projectsWithOrderData = useProjectsSellOrders({ projects, sellOrders });
+  const projectsWithOrderData = useProjectsSellOrders({
+    projects,
+    sellOrders,
+  });
+
+  const handleSort = (event: SelectChangeEvent<unknown>): void => {
+    setSort(event.target.value as string);
+  };
+
+  const sortedProjects = useSortProjects({
+    projects: projectsWithOrderData,
+    sort,
+  });
 
   const closeSubmitModal = (): void => setIsSubmitModalOpen(false);
 
@@ -68,13 +82,7 @@ export const Projects: React.FC = () => {
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
 
-  const sortOptions = [
-    { label: 'Price  - low to high', value: 'price-ascending' },
-    { label: 'Price  - high to low', value: 'price-descending' },
-    { label: 'Credits available  - high to low', value: 'credits-descending' },
-    { label: 'Credits available  - low to high', value: 'credits-ascending' },
-  ];
-
+  if (loading) return <Loading />;
   return (
     <Box
       justifyContent={'center'}
@@ -104,7 +112,11 @@ export const Projects: React.FC = () => {
               <Box sx={{ width: 75 }}>
                 <span>Sort by:</span>
               </Box>
-              <SelectTextFieldBase options={sortOptions} defaultStyle={false} />
+              <SelectTextFieldBase
+                options={sortOptions}
+                defaultStyle={false}
+                onChange={handleSort}
+              />
             </Flex>
           </Flex>
         </Flex>
@@ -116,7 +128,7 @@ export const Projects: React.FC = () => {
         flexWrap="wrap"
         justifyContent="center"
       >
-        {projectsWithOrderData?.map(project => (
+        {sortedProjects?.map(project => (
           <Grid item key={project?.id}>
             <ProjectCard
               name={project?.name}

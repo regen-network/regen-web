@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, Grid } from '@mui/material';
@@ -13,10 +13,7 @@ import useEcocreditQuery from '../../hooks/useEcocreditQuery';
 import useMsgClient from '../../hooks/useMsgClient';
 import { useQuerySellOrders } from '../../hooks/useQuerySellOrders';
 import { getHashUrl } from '../../lib/block-explorer';
-import {
-  getProjectDisplayData,
-  ProjectWithOrderData,
-} from './Projects.normalize';
+import { useProjectsSellOrders } from './hooks/useProjectsSellOrders';
 
 const IMAGE_STORAGE_BASE_URL = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
 const API_URI = process.env.REACT_APP_API_URI;
@@ -25,9 +22,7 @@ export const Projects: React.FC = () => {
   const navigate = useNavigate();
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
-  const [projectsWithOrders, setProjectsWithOrders] = useState<
-    ProjectWithOrderData[]
-  >([]);
+
   // const [bannerError, setBannerError] = useState(''); // TODO setting up for #1055
   const { data } = useEcocreditQuery<QueryProjectsResponse>({
     query: 'projects',
@@ -36,20 +31,7 @@ export const Projects: React.FC = () => {
   const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
   const projects = data?.projects;
-
-  useEffect(() => {
-    const normalize = async (): Promise<void> => {
-      if (projects && sellOrders) {
-        const _projectsWithOrders = await getProjectDisplayData(
-          projects,
-          sellOrders,
-        );
-        setProjectsWithOrders(_projectsWithOrders);
-      }
-    };
-
-    normalize();
-  }, [projects, sellOrders]);
+  const projectsWithOrderData = useProjectsSellOrders({ projects, sellOrders });
 
   const closeSubmitModal = (): void => setIsSubmitModalOpen(false);
 
@@ -99,7 +81,7 @@ export const Projects: React.FC = () => {
         flexWrap="wrap"
         justifyContent="center"
       >
-        {projectsWithOrders?.map(project => (
+        {projectsWithOrderData?.map(project => (
           <Grid item key={project?.id}>
             <ProjectCard
               name={project?.name}

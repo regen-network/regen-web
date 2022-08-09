@@ -10,6 +10,7 @@ import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectText
 import { Loading } from 'web-components/lib/components/loading';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
+import { Body, Subtitle } from 'web-components/lib/components/typography';
 
 import { Link } from '../../components/atoms';
 import useEcocreditQuery from '../../hooks/useEcocreditQuery';
@@ -107,10 +108,13 @@ export const Projects: React.FC = () => {
             flex={1}
             sx={{ pb: 5 }}
           >
-            <span>Projects ({projectsWithOrderData.length})</span>
+            <Flex>
+              <Subtitle size="lg">Projects</Subtitle>
+              <Body size="lg"> ({projectsWithOrderData.length})</Body>
+            </Flex>
             <Flex alignItems="center">
-              <Box sx={{ width: 75 }}>
-                <span>Sort by:</span>
+              <Box sx={{ width: 63 }}>
+                <Body size="xs">Sort by:</Body>
               </Box>
               <SelectTextFieldBase
                 options={sortOptions}

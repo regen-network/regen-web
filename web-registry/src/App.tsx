@@ -69,10 +69,13 @@ const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 
 export const history = createBrowserHistory();
 
+const GoogleAnalytics: React.FC = (): JSX.Element => {
+  useGoogleAnalyticsInit();
+  return <></>;
+};
+
 const App: React.FC = (): JSX.Element => {
   const { user, isLoading, error } = useAuth0();
-
-  useGoogleAnalyticsInit();
 
   if (isLoading) {
     return <div></div>;
@@ -90,6 +93,7 @@ const App: React.FC = (): JSX.Element => {
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <GoogleAnalytics />
       <ScrollToTop />
       <div>
         <RegistryNav />

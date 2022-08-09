@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, Grid } from '@mui/material';
 import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { Field, Form, Formik } from 'formik';
 
+import { Flex } from 'web-components/lib/components/box';
 import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
+import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 
@@ -64,6 +67,12 @@ export const Projects: React.FC = () => {
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
 
+  const sortOptions = [
+    { label: 'Sort by Price', value: 'price' },
+    { label: 'Sort by Credits Available', value: 'credits' },
+  ];
+  const initialValues = sortOptions[0];
+
   return (
     <Box
       justifyContent={'center'}
@@ -74,6 +83,20 @@ export const Projects: React.FC = () => {
         p: 8.75,
       }}
     >
+      <Flex>
+        <span>Projects ({projectsWithOrderData.length})</span>
+        <Formik initialValues={initialValues} onSubmit={() => {}}>
+          {({ values }) => (
+            <Form>
+              <Field
+                label="Sort"
+                component={SelectTextField}
+                options={sortOptions}
+              />
+            </Form>
+          )}
+        </Formik>
+      </Flex>
       <Grid
         container
         rowGap={4.5}

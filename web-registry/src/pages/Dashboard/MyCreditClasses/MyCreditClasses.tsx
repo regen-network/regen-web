@@ -7,7 +7,6 @@ import { CreateCreditClassCard } from 'web-components/lib/components/cards/Creat
 interface MyCreditClassesProps {
   isCreditClassCreator: boolean;
   isCreditClassAdmin: boolean;
-  hideFromUser: boolean;
 }
 
 export const MyCreditClasses = ({

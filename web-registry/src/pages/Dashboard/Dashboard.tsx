@@ -80,7 +80,6 @@ const Dashboard = (): JSX.Element => {
             <MyCreditClasses
               isCreditClassCreator={isCreditClassCreator}
               isCreditClassAdmin={isCreditClassAdmin}
-              hideFromUser={creditClassTabHidden}
             />
           </Flex>
         </LazyLoad>

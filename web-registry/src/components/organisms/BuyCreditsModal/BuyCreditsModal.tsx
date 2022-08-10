@@ -33,7 +33,6 @@ import {
 
 import { SellOrderInfoNormalized } from 'pages/Projects/hooks/useProjectsSellOrders';
 
-import { useWallet } from '../../../lib/wallet';
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
 import { getSellOrderLabel } from './BuyCreditsModal.utils';
@@ -86,17 +85,20 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 }) => {
   const styles = useBuyCreditsModalStyles();
   const theme = useTheme();
-  const walletContext = useWallet();
 
   const submit = async (values: BuyCreditsValues): Promise<void> => {
-    const recipient = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'; // test account
-    const amount = values.creditCount;
-    if (onSubmit) {
-      onSubmit(values);
-    } else if (walletContext.signSend && walletContext.broadcast) {
-      const txBytes = await walletContext.signSend(amount, recipient);
-      onTxQueued && onTxQueued(txBytes);
-      onClose();
+    const selectedSellOrder = project?.sellOrders?.find(
+      sellOrder => sellOrder.id === values.sellOrderId,
+    );
+
+    if (onSubmit && selectedSellOrder) {
+      const fullValues: BuyCreditsValues = {
+        ...values,
+        price: parseInt(selectedSellOrder.askAmount),
+        batchDenom: selectedSellOrder.batchDenom,
+        sellOrderId: selectedSellOrder.id,
+      };
+      onSubmit(fullValues);
     }
   };
 
@@ -181,6 +183,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           }}
         >
           {({ values, submitForm, isValid, isSubmitting, submitCount }) => {
+            const selectedSellOrder = project?.sellOrders?.find(
+              sellOrder => sellOrder.id === values?.sellOrderId,
+            );
+
             return (
               <div>
                 <Form translate="yes">
@@ -207,7 +213,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         mb: 3,
                       }}
                     >
-                      {`${initialValues?.price} REGEN/per credit `}
+                      {`${selectedSellOrder?.askAmount} REGEN/per credit `}
                     </Body>
                     <Body
                       size="md"
@@ -217,7 +223,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <Body
                         sx={{ fontWeight: 'normal', display: 'inline-block' }}
                       >
-                        {initialValues?.batchDenom}
+                        {selectedSellOrder?.batchDenom}
                       </Body>
                     </Body>
                     <div className={styles.creditWidget}>
@@ -227,7 +233,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           component={NumberTextField}
                           name="creditCount"
                           min={1}
-                          max={initialValues?.creditCount}
+                          max={selectedSellOrder?.quantity}
                         />
                       </div>
                       <Title variant="h6" sx={{ mr: 4 }}>
@@ -246,7 +252,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
                             <RegenTokenIcon className={styles.regenIcon} />
                             <Title variant="h4" sx={{ mr: 1.5 }}>
-                              {values.creditCount * (initialValues?.price ?? 0)}
+                              {values.creditCount *
+                                ((selectedSellOrder?.askAmount &&
+                                  parseInt(selectedSellOrder.askAmount)) ||
+                                  0) || '-'}
                             </Title>
                           </Box>
                           <Label size="sm" sx={{ color: 'info.dark' }}>
@@ -272,6 +281,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       checked={values['retirementAction'] === 'autoretire'}
                       label="Auto-retire credits"
                       description="These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
+                      disabled={!!selectedSellOrder?.disableAutoRetire} // TODO
                     />
                     <Field
                       className={styles.toggle}

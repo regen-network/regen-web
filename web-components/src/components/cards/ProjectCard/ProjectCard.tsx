@@ -220,7 +220,6 @@ export function ProjectCard({
                   </Box>
                   <OutlinedButton
                     onClick={event => {
-                      event.preventDefault();
                       event.stopPropagation();
                       onButtonClick && onButtonClick();
                     }}

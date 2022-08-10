@@ -123,10 +123,9 @@ export const Projects: React.FC = () => {
           gridGap: '1.125rem',
           flex: 1,
           justifyContent: 'center',
-          '& :first-child': { gridColumn: '1 / -1' },
         }}
       >
-        <Flex flex={1}>
+        <Flex flex={1} sx={{ gridColumn: '1 / -1' }}>
           <Flex
             justifyContent="space-between"
             alignItems="center"
@@ -173,7 +172,8 @@ export const Projects: React.FC = () => {
         onClose={closeBuyModal}
         onSubmit={buySellOrderSubmit}
         project={{
-          id: selectedProject?.id?.toString() ?? '',
+          id: selectedProject?.id.toString() ?? '',
+          sellOrders: selectedProject?.sellOrders,
         }}
         // initialValues={initalValues}
       />

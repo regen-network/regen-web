@@ -113,7 +113,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 
     // projects with multiple orders
     if (project?.sellOrders?.length) {
-      return project?.sellOrders.map(sellOrder => {
+      const sellOrderOptions = project?.sellOrders.map(sellOrder => {
         return {
           label: `${sellOrder.id} (${
             sellOrder.askAmount
@@ -123,6 +123,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           value: sellOrder.id,
         };
       });
+      return [{ label: 'Choose a sell order', value: '' }, ...sellOrderOptions];
     }
 
     return [];
@@ -191,7 +192,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     component={SelectTextField}
                     options={getOptions()}
                     sx={{ mb: theme.spacing(10.5) }}
-                    disabled={getOptions()?.length === 1}
+                    disabled={!!initialValues?.sellOrderId}
                   />
                   <div className={styles.field}>
                     <Title variant="h5" sx={{ mb: 2, mr: 2 }}>

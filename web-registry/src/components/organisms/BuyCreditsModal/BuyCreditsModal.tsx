@@ -18,7 +18,9 @@ import ControlledTextField from 'web-components/lib/components/inputs/Controlled
 import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
 import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
+import SelectTextField, {
+  Option,
+} from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
@@ -28,6 +30,8 @@ import {
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
+
+import { SellOrderInfoNormalized } from 'pages/Projects/hooks/useProjectsSellOrders';
 
 import { useWallet } from '../../../lib/wallet';
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
@@ -51,6 +55,7 @@ interface BuyCreditsModalProps extends RegenModalProps {
     image?: string;
     creditDenom?: string;
     credits?: Credits;
+    sellOrders?: SellOrderInfoNormalized[];
   };
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
@@ -93,6 +98,34 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
       onTxQueued && onTxQueued(txBytes);
       onClose();
     }
+  };
+
+  const getOptions = (): Option[] => {
+    // sell order table case
+    if (initialValues?.sellOrderId) {
+      return [
+        {
+          label: getSellOrderLabel(initialValues),
+          value: initialValues?.sellOrderId,
+        },
+      ];
+    }
+
+    // projects with multiple orders
+    if (project?.sellOrders?.length) {
+      return project?.sellOrders.map(sellOrder => {
+        return {
+          label: `${sellOrder.id} (${
+            sellOrder.askAmount
+          } ${sellOrder.askDenom.substring(1)}/credit: ${
+            sellOrder.quantity
+          } credits available)`,
+          value: sellOrder.id,
+        };
+      });
+    }
+
+    return [];
   };
 
   return (
@@ -156,14 +189,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   <Field
                     name="sellOrderId"
                     component={SelectTextField}
-                    options={[
-                      {
-                        label: getSellOrderLabel(initialValues),
-                        value: initialValues?.sellOrderId,
-                      },
-                    ]}
+                    options={getOptions()}
                     sx={{ mb: theme.spacing(10.5) }}
-                    disabled
+                    disabled={getOptions()?.length === 1}
                   />
                   <div className={styles.field}>
                     <Title variant="h5" sx={{ mb: 2, mr: 2 }}>

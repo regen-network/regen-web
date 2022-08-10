@@ -14,6 +14,15 @@ type Props = {
   sellOrders?: SellOrderInfo[];
 };
 
+export interface SellOrderInfoNormalized extends Omit<SellOrderInfo, 'id'> {
+  id: string;
+}
+
+export interface ProjectWithOrderData extends ProjectCardProps {
+  id: string;
+  sellOrders: SellOrderInfoNormalized[];
+}
+
 export const useProjectsSellOrders = ({
   projects,
   sellOrders,
@@ -38,10 +47,6 @@ export const useProjectsSellOrders = ({
   return projectsWithOrders;
 };
 
-export interface ProjectWithOrderData extends ProjectCardProps {
-  id: string;
-}
-
 const getProjectDisplayData = async (
   projects: ProjectInfo[],
   sellOrders: SellOrderInfo[],
@@ -58,6 +63,12 @@ const getProjectDisplayData = async (
           console.error(error);
         }
       }
+      const sellOrdersNormalized = sellOrders.map(sellOrder => {
+        return {
+          ...sellOrder,
+          id: String(sellOrder.id),
+        };
+      });
 
       return {
         id: project.id,
@@ -72,6 +83,7 @@ const getProjectDisplayData = async (
           metadata?.['regen:projectSize']?.['qudt:unit']?.['@value'] || '',
         purchaseInfo,
         href: `/projects/${project.id}`,
+        sellOrders: sellOrdersNormalized,
       } as ProjectWithOrderData;
     }),
   );

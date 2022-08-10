@@ -14,6 +14,7 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
 import useQueryIfIssuer from 'hooks/useQueryIfIssuer';
+import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
 const MyProjects = React.lazy(() => import('./MyProjects'));
@@ -40,6 +41,8 @@ const Dashboard = (): JSX.Element => {
   const isIssuer = useQueryIfIssuer();
   const isCreditClassCreator = useQueryIfCreditClassCreator();
   const isCreditClassAdmin = useQueryIfCreditClassAdmin();
+  const isProjectAdmin = useQueryIfProjectAdmin();
+  const projectTabHidden = !(isIssuer || isProjectAdmin);
   const creditClassTabHidden = !(isCreditClassCreator || isCreditClassAdmin);
 
   // TODO: We should handle these as nested routes, converting this to an
@@ -61,11 +64,11 @@ const Dashboard = (): JSX.Element => {
     {
       label: 'Projects',
       icon: <ProjectPageIcon />,
-      hidden: !isIssuer,
+      hidden: projectTabHidden,
       content: (
         <LazyLoad>
           <Flex sx={sxs.padTop}>
-            <MyProjects />
+            <MyProjects isIssuer={isIssuer} isProjectAdmin={isProjectAdmin} />
           </Flex>
         </LazyLoad>
       ),

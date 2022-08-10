@@ -114,15 +114,22 @@ function getPriceExtremes(
   highB: number;
   lowB: number;
 } {
-  const pricesA = a.purchaseInfo?.sellInfo?.pricePerTon.split('-');
-  const lowA = (pricesA?.[0] && parseInt(pricesA[0] as string)) || 0;
-  const highA = (pricesA?.[1] && parseInt(pricesA[1] as string)) || 0;
-
-  const pricesB = b.purchaseInfo?.sellInfo?.pricePerTon.split('-');
-  const lowB = (pricesB?.[0] && parseInt(pricesB[0] as string)) || 0;
-  const highB = (pricesB?.[1] && parseInt(pricesB[1] as string)) || 0;
+  const lowA = getExtreme(a, 'low');
+  const highA = getExtreme(a, 'high');
+  const lowB = getExtreme(b, 'low');
+  const highB = getExtreme(b, 'high');
 
   return { highA, lowA, highB, lowB };
+}
+
+function getExtreme(
+  project: ProjectWithOrderData,
+  highOrLow: 'high' | 'low',
+): number {
+  const prices = project.purchaseInfo?.sellInfo?.pricePerTon.split('-');
+  const index = highOrLow === 'high' ? 1 : 0;
+  const extreme = (prices?.[index] && parseInt(prices[index] as string)) || 0;
+  return extreme;
 }
 
 function getQuantities(

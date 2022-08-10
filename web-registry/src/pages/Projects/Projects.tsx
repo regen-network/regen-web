@@ -85,8 +85,7 @@ export const Projects: React.FC = () => {
 
   if (loading) return <Loading />;
   return (
-    <Box
-      justifyContent="center"
+    <Flex
       sx={{
         bgcolor: 'grey.50',
         borderTop: 1,
@@ -95,12 +94,15 @@ export const Projects: React.FC = () => {
         pb: 25,
       }}
     >
-      <Grid
-        container
-        rowGap={4.5}
-        columnGap={5}
-        flexWrap="wrap"
-        justifyContent="center"
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 338px))',
+          gridGap: '1.125rem',
+          flex: 1,
+          justifyContent: 'center',
+          '& :first-child': { gridColumn: '1 / -1' },
+        }}
       >
         <Flex flex={1}>
           <Flex
@@ -125,14 +127,6 @@ export const Projects: React.FC = () => {
             </Flex>
           </Flex>
         </Flex>
-      </Grid>
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 338px))',
-          gridGap: '1.125rem',
-        }}
-      >
         {sortedProjects?.map(project => (
           <Box key={project?.id}>
             <ProjectCard
@@ -167,6 +161,6 @@ export const Projects: React.FC = () => {
         />
       )}
       {/* {bannerError && <ErrorBanner text={bannerError} />} TODO #1055 */}
-    </Box>
+    </Flex>
   );
 };

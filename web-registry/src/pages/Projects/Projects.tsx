@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { Box, Grid, SelectChangeEvent } from '@mui/material';
+import { Box, SelectChangeEvent } from '@mui/material';
 import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Flex } from 'web-components/lib/components/box';
@@ -90,7 +90,8 @@ export const Projects: React.FC = () => {
         bgcolor: 'grey.50',
         borderTop: 1,
         borderColor: 'grey.100',
-        p: 8.75,
+        px: [6, 8.75],
+        pt: 8.75,
         pb: 25,
       }}
     >
@@ -115,8 +116,8 @@ export const Projects: React.FC = () => {
               <Subtitle size="lg">Projects</Subtitle>
               <Body size="lg"> ({projectsWithOrderData.length})</Body>
             </Flex>
-            <Flex alignItems="center">
-              <Box sx={{ width: 63 }}>
+            <Flex alignItems="center" sx={{ width: ['60%', 'auto'] }}>
+              <Box sx={{ width: [0, 63], visibility: ['hidden', 'visible'] }}>
                 <Body size="xs">Sort by:</Body>
               </Box>
               <SelectTextFieldBase

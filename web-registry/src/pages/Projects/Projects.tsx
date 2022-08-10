@@ -12,12 +12,17 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 
+import { BuyCreditsModal } from 'components/organisms';
+
 import { Link } from '../../components/atoms';
 import useEcocreditQuery from '../../hooks/useEcocreditQuery';
 import useMsgClient from '../../hooks/useMsgClient';
 import { useQuerySellOrders } from '../../hooks/useQuerySellOrders';
 import { getHashUrl } from '../../lib/block-explorer';
-import { useProjectsSellOrders } from './hooks/useProjectsSellOrders';
+import {
+  ProjectWithOrderData,
+  useProjectsSellOrders,
+} from './hooks/useProjectsSellOrders';
 import { useSortProjects } from './hooks/useSortProjects';
 import {
   API_URI,
@@ -29,7 +34,10 @@ export const Projects: React.FC = () => {
   const navigate = useNavigate();
   const [sort, setSort] = useState<string>(sortOptions[0].value);
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
-  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
+  const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
+  const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] =
+    useState<ProjectWithOrderData | null>(null);
   // const [bannerError, setBannerError] = useState(''); // TODO setting up for #1055
   const { data, loading } = useEcocreditQuery<QueryProjectsResponse>({
     query: 'projects',
@@ -52,10 +60,23 @@ export const Projects: React.FC = () => {
     sort,
   });
 
-  const closeSubmitModal = (): void => setIsSubmitModalOpen(false);
+  const buySellOrderSubmit = async (): Promise<void> => {
+    console.log('submit');
+    return Promise.resolve();
+  };
+
+  const closeBuyModal = (): void => setIsBuyModalOpen(false);
+
+  const closeProcessingModal = (): void => setIsProcessingModalOpen(false);
+
+  const openBuyModal = (project: ProjectWithOrderData): void => {
+    console.log(project);
+    setSelectedProject(project);
+    setIsBuyModalOpen(true);
+  };
 
   const handleTxQueued = (): void => {
-    setIsSubmitModalOpen(true);
+    setIsBuyModalOpen(true);
   };
 
   const handleTxModalClose = (): void => {
@@ -64,7 +85,7 @@ export const Projects: React.FC = () => {
   };
 
   const handleError = (): void => {
-    closeSubmitModal();
+    closeBuyModal();
     setTxModalTitle('Buy Credits Error');
   };
 
@@ -136,7 +157,7 @@ export const Projects: React.FC = () => {
               place={project?.place}
               area={project?.area}
               areaUnit={project?.areaUnit}
-              // onButtonClick={() => {}} TODO #1055
+              onButtonClick={() => openBuyModal(project)}
               purchaseInfo={project.purchaseInfo}
               onClick={() => navigate(`/projects/${project.id}`)}
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
@@ -147,7 +168,19 @@ export const Projects: React.FC = () => {
           </Box>
         ))}
       </Box>
-      <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
+      <BuyCreditsModal
+        open={isBuyModalOpen}
+        onClose={closeBuyModal}
+        onSubmit={buySellOrderSubmit}
+        project={{
+          id: selectedProject?.id?.toString() ?? '',
+        }}
+        // initialValues={initalValues}
+      />
+      <ProcessingModal
+        open={isProcessingModalOpen}
+        onClose={closeProcessingModal}
+      />
       {error && txModalTitle && (
         <TxErrorModal
           error={error}

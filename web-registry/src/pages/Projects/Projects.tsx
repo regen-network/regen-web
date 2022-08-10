@@ -10,9 +10,11 @@ import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectText
 import { Loading } from 'web-components/lib/components/loading';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
+import { Item } from 'web-components/lib/components/modal/TxModal';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 
-import { BuyCreditsModal } from 'components/organisms';
+import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit';
+import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
 
 import { Link } from '../../components/atoms';
 import useEcocreditQuery from '../../hooks/useEcocreditQuery';
@@ -33,9 +35,12 @@ import {
 export const Projects: React.FC = () => {
   const navigate = useNavigate();
   const [sort, setSort] = useState<string>(sortOptions[0].value);
-  const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
+  const [txModalTitle, setTxModalTitle] = useState<string>('');
+  const [txButtonTitle, setTxButtonTitle] = useState<string>('');
+  const [txModalHeader, setTxModalHeader] = useState<string>('');
+  const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
   // const [bannerError, setBannerError] = useState(''); // TODO setting up for #1055
@@ -60,49 +65,55 @@ export const Projects: React.FC = () => {
     sort,
   });
 
-  const buySellOrderSubmit = async (): Promise<void> => {
-    console.log('submit');
-    return Promise.resolve();
-  };
-
   const closeBuyModal = (): void => setIsBuyModalOpen(false);
 
   const closeProcessingModal = (): void => setIsProcessingModalOpen(false);
 
   const openBuyModal = (project: ProjectWithOrderData): void => {
-    console.log(project);
     setSelectedProject(project);
     setIsBuyModalOpen(true);
   };
 
   const handleTxQueued = (): void => {
-    setIsBuyModalOpen(true);
+    setIsProcessingModalOpen(true);
   };
 
   const handleTxModalClose = (): void => {
-    setTxModalTitle(undefined);
+    setTxModalTitle('');
     setError(undefined);
   };
 
   const handleError = (): void => {
-    closeBuyModal();
+    closeProcessingModal();
     setTxModalTitle('Buy Credits Error');
   };
 
   const handleTxDelivered = async (
     _deliverTxResponse: DeliverTxResponse,
   ): Promise<void> => {
-    // console.log('_deliverTxResponse', _deliverTxResponse); TODO #1055
+    console.log('_deliverTxResponse', _deliverTxResponse);
   };
 
-  const { error, setError, deliverTxResponse } = useMsgClient(
-    handleTxQueued,
-    handleTxDelivered,
-    handleError,
-  );
-
+  const {
+    signAndBroadcast,
+    setDeliverTxResponse,
+    wallet,
+    deliverTxResponse,
+    error,
+    setError,
+  } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+  const accountAddress = wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
+
+  const buySellOrderSubmit = useBuySellOrderSubmit({
+    accountAddress,
+    signAndBroadcast,
+    setCardItems,
+    setTxButtonTitle,
+    setTxModalHeader,
+    setTxModalTitle,
+  });
 
   if (loading) return <Loading />;
   return (
@@ -175,7 +186,6 @@ export const Projects: React.FC = () => {
           id: selectedProject?.id.toString() ?? '',
           sellOrders: selectedProject?.sellOrders,
         }}
-        // initialValues={initalValues}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

@@ -24,7 +24,7 @@ type Props = {
   setTxModalTitle: UseStateSetter<string>;
   setTxModalHeader: UseStateSetter<string>;
   setTxButtonTitle: UseStateSetter<string>;
-  setSelectedSellOrder: UseStateSetter<number | null>;
+  setSelectedSellOrder?: UseStateSetter<number | null>;
 };
 
 type ReturnType = (values: BuyCreditsValues) => Promise<void>;
@@ -58,6 +58,7 @@ const useBuySellOrderSubmit = ({
       const stateProvinceValue = stateProvince ? `-${stateProvince}` : '';
       const postalCodeValue = stateProvince ? ` ${postalCode}` : '';
 
+      console.log(values);
       const msg = MsgBuyDirect.fromPartial({
         buyer: accountAddress,
         orders: [
@@ -79,7 +80,10 @@ const useBuySellOrderSubmit = ({
         memo: retirementNote,
       };
 
-      signAndBroadcast(tx, () => setSelectedSellOrder(null));
+      signAndBroadcast(
+        tx,
+        () => setSelectedSellOrder && setSelectedSellOrder(null),
+      );
 
       if (batchDenom && creditCount) {
         setCardItems([

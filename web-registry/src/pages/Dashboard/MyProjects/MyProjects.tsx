@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
@@ -90,7 +90,7 @@ const MyProjects = (): JSX.Element => {
         {projects?.map((project, i) => (
           <Grid key={i} item xs={12} md={6} lg={4}>
             <ProjectCard
-              name={project?.handle || project?.id}
+              name={project?.handle || project?.onChainId || project?.id}
               imgSrc={''}
               place="TODO"
               area={0}

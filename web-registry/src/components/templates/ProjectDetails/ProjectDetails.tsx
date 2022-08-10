@@ -1,69 +1,45 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import * as togeojson from '@mapbox/togeojson';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import { Box, Skeleton } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
+import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import Banner from 'web-components/lib/components/banner';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import FixedFooter from 'web-components/lib/components/fixed-footer';
-import BuyFooter, {
-  CreditPrice,
-} from 'web-components/lib/components/fixed-footer/BuyFooter';
-import MoreInfoForm from 'web-components/lib/components/form/MoreInfoForm';
-import EmailIcon from 'web-components/lib/components/icons/EmailIcon';
-import StaticMap from 'web-components/lib/components/map/StaticMap';
-import Modal from 'web-components/lib/components/modal';
-import IssuanceModal, {
-  IssuanceModalData,
-} from 'web-components/lib/components/modal/IssuanceModal';
-import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
-import Section from 'web-components/lib/components/section';
+import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
+import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
-import ProjectMedia, {
-  Asset,
-} from 'web-components/lib/components/sliders/ProjectMedia';
-import Timeline from 'web-components/lib/components/timeline';
+import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import { Theme } from 'web-components/lib/theme/muiTheme';
-import { getFormattedDate } from 'web-components/lib/utils/format';
 
 import {
-  useMoreProjectsQuery,
   useProjectByHandleQuery,
-} from 'generated/graphql';
-import { ProjectMetadataLD, ProjectStakeholder } from 'generated/json-ld/index';
+  useProjectByOnChainIdQuery,
+} from '../../../generated/graphql';
+import { ProjectMetadataLD } from '../../../generated/json-ld/index';
+import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
+import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
+import { useLedger } from '../../../ledger';
+import { chainId } from '../../../lib/ledger';
+import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 import {
-  EcologicalImpact,
-  useEcologicalImpactByIriQuery,
-} from 'generated/sanity-graphql';
-import {
-  BatchInfoWithSupply,
-  BatchTotalsForProject,
-} from 'types/ledger/ecocredit';
-import { useLedger } from 'ledger';
-import getApiUri from 'lib/apiUri';
-import { getBatchesTotal, getBatchesWithSupply } from 'lib/ecocredit/api';
-import { setPageView } from 'lib/ga';
-import { chainId } from 'lib/ledger';
-import { getMetadata } from 'lib/metadata-graph';
-import { buildIssuanceModalData } from 'lib/transform';
-import { useWallet } from 'lib/wallet';
-import { client } from 'sanity';
-
-import {
-  BuyCreditsModal,
-  ConfirmationModal,
-  CreditsPurchaseForm,
-  Documentation,
-  LandManagementActions,
   MoreProjectsSection,
   ProjectImpactSection,
   ProjectTopSection,
-} from 'components/organisms';
-import { Credits } from 'components/organisms/BuyCreditsModal';
-
+} from '../../organisms';
+import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
+import useBatches from './hooks/useBatches';
+import useGeojson from './hooks/useGeojson';
+import useImpact from './hooks/useImpact';
+import useIssuanceModal from './hooks/useIssuanceModal';
+import useMedia from './hooks/useMedia';
+import useOtherProjects from './hooks/useOtherProjects';
+import useSeo from './hooks/useSeo';
+import { ManagementActions } from './ProjectDetails.ManagementActions';
+import { MoreInfo } from './ProjectDetails.MoreInfo';
+import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
+import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
+import { TransactionModals } from './ProjectDetails.TransactionModals';
 
 interface Project {
   creditPrice?: CreditPrice;
@@ -74,203 +50,76 @@ interface Project {
 // Update for testing purchase credits modal
 const testProject: Project = {};
 
-function getVisiblePartyName(party?: ProjectStakeholder): string | undefined {
-  return party?.['regen:showOnProjectPage']
-    ? party?.['schema:name']
-    : undefined;
-}
-
 function ProjectDetails(): JSX.Element {
-  const { api } = useLedger({ forceExp: true });
-  const { projectId } = useParams();
   const theme = useTheme<Theme>();
-  const walletContext = useWallet();
-  const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [batchData, setBatchData] = useState<BatchInfoWithSupply[]>([]);
-  const [batchTotals, setBatchTotals] = useState<BatchTotalsForProject>();
-  const [geojson, setGeojson] = useState<any | null>(null);
-  const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
-  const apiServerUrl = process.env.REACT_APP_API_URI;
+  const { projectId } = useParams();
+
+  // Page mode (info/Tx)
+  const isInfoMode = !(chainId && testProject.creditPrice);
+  const isTxMode =
+    chainId && (testProject.creditPrice || testProject.stripePrice);
+
+  // Tx client
+  const { api } = useLedger({ forceExp: true });
   let txClient: ServiceClientImpl | undefined;
   if (api) {
     txClient = new ServiceClientImpl(api.queryClient);
   }
 
-  // fetch project
-  const { data, loading } = useProjectByHandleQuery({
-    skip: !projectId,
-    variables: { handle: projectId as string },
+  // first, check if projectId is handle or onChainId
+  const isOnChainId =
+    !!projectId && /([A-Z]{1}[\d]+)([-])([\d{3,}])\w+/.test(projectId);
+
+  // if projectId is handle, query project by handle
+  const { data: dataByHandle, loading: loadingDataByHandle } =
+    useProjectByHandleQuery({
+      skip: !projectId,
+      variables: { handle: projectId as string },
+    });
+
+  const onChainProjectId = isOnChainId
+    ? projectId
+    : dataByHandle?.projectByHandle?.onChainId;
+
+  // else fetch project by onChainId
+  const { data: dataByOnChainId, loading } = useProjectByOnChainIdQuery({
+    skip: !isOnChainId,
+    variables: { onChainId: onChainProjectId as string },
   });
-  const project = data?.projectByHandle;
-  const metadata: ProjectMetadataLD = project?.metadata;
-  const vcsProjectId = metadata?.['regen:vcsProjectId'];
 
-  useEffect(() => {
-    const asyncFilter = async (
-      arr: BatchInfoWithSupply[],
-      predicate: (batch: BatchInfoWithSupply) => Promise<boolean>,
-    ): Promise<BatchInfoWithSupply[]> => {
-      const results = await Promise.all(arr.map(predicate));
-      return arr.filter((_v, index) => results[index]);
-    };
+  const { data: projectResponse } = useEcocreditQuery<QueryProjectResponse>({
+    query: 'project',
+    params: { projectId },
+  });
+  const onChainProject = projectResponse?.project;
 
-    const fetch = async (): Promise<void> => {
-      try {
-        let batches: BatchInfoWithSupply[] = [];
-        if (project?.creditClassByCreditClassId?.onChainId) {
-          const { data } = await getBatchesWithSupply(
-            project?.creditClassByCreditClassId?.onChainId,
-          );
-          batches = data;
-        }
+  // TODO: when all projects are on-chain, just use dataByOnChainId
+  const data = isOnChainId ? dataByOnChainId : dataByHandle;
+  const project = isOnChainId
+    ? dataByOnChainId?.projectByOnChainId
+    : dataByHandle?.projectByHandle;
 
-        const filteredBatches = await asyncFilter(
-          batches,
-          async (batch: BatchInfoWithSupply) => {
-            let batchMetadata;
-            if (batch.metadata?.length) {
-              batchMetadata = await getMetadata(batch.metadata);
-            }
-            return batchMetadata?.['regen:vcsProjectId'] === vcsProjectId;
-          },
-        );
-        const { totals } = await getBatchesTotal(filteredBatches);
-        setBatchData(filteredBatches);
-        setBatchTotals(totals);
-      } catch (err) {
-        console.error(err); // eslint-disable-line no-console
-      }
-    };
-    fetch();
-  }, [project?.creditClassByCreditClassId?.onChainId, vcsProjectId]);
-
-  const { data: projectsData } = useMoreProjectsQuery();
-
-  const [submitted, setSubmitted] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    setPageView(location);
-    setGeojson(null); // reset when location changes
-  }, [location]);
-
-  const otherProjects = projectsData?.allProjects?.nodes?.filter(
-    p => p?.handle !== projectId,
+  const offChainProjectMetadata: ProjectMetadataLD = project?.metadata;
+  const onChainProjectMetadata = useQueryMetadataGraph(
+    onChainProject?.metadata,
   );
+  const managementActions =
+    offChainProjectMetadata?.['regen:landManagementActions']?.['@list'];
 
-  // Convert kml to geojson
-  const mapFile: string = metadata?.['regen:boundaries']?.['@value'];
-  const isGISFile: boolean = /\.(json|kml)$/i.test(mapFile);
-  const isKMLFile: boolean = /\.kml$/i.test(mapFile);
-  const metadataLocation = metadata?.['schema:location'];
+  const { batchData, batchTotals } = useBatches({
+    projectId: onChainProjectId,
+  });
 
-  useEffect(() => {
-    if (!geojson && isGISFile) {
-      fetch(mapFile)
-        .then(r => r.text())
-        .then(text => {
-          let geojson;
-          if (isKMLFile) {
-            const dom = new DOMParser().parseFromString(text, 'text/xml');
-            geojson = togeojson.kml(dom);
-          } else {
-            geojson = JSON.parse(text);
-          }
-          setGeojson(geojson);
-        });
-    } else if (metadataLocation) {
-      setGeojson(metadataLocation);
-    }
-  }, [geojson, isGISFile, isKMLFile, mapFile, metadataLocation]);
-
-  // Modal
-  const [open, setOpen] = useState(false);
-  const handleOpen = (): void => {
-    setOpen(true);
-  };
-
-  const handleClose = (): void => {
-    setOpen(false);
-  };
-
-  const [issuanceModalData, setIssuanceModalData] =
-    useState<IssuanceModalData | null>(null);
-  const [issuanceModalOpen, setIssuanceModalOpen] = useState(false);
-  const [isBuyCreditsModalOpen, setIsBuyCreditsModalOpen] = useState(false);
-
-  const viewOnLedger = (creditVintage: any): void => {
-    if (creditVintage?.txHash) {
-      if (creditVintage.txHash !== issuanceModalData?.txHash) {
-        const issuanceData = buildIssuanceModalData(data, creditVintage);
-        setIssuanceModalData(issuanceData);
-      }
-      setIssuanceModalOpen(true);
-    }
-  };
-
-  const handleProcessingModalClose = (): void => {
-    if (walletContext?.txResult?.transactionHash) {
-      setIsConfirmationModalOpen(true);
-    }
-    setIsProcessingModalOpen(false);
-  };
-
-  const handleConfirmationModalClose = (): void => {
-    setIsProcessingModalOpen(false);
-    setIsConfirmationModalOpen(false);
-    walletContext.setTxResult(undefined);
-  };
-
-  const handleTxQueued = (txBytes: Uint8Array): void => {
-    setIsProcessingModalOpen(true);
-    if (walletContext?.broadcast) {
-      walletContext.broadcast(txBytes);
-    }
-  };
+  // with project query
+  const projectEvents = project?.eventsByProjectId?.nodes;
+  const projectDocs = project?.documentsByProjectId?.nodes;
 
   const creditClassVersion =
-    data?.projectByHandle?.creditClassByCreditClassId?.creditClassVersionsById
-      ?.nodes?.[0];
+    project?.creditClassByCreditClassId?.creditClassVersionsById?.nodes?.[0];
+
   const creditClassName = creditClassVersion?.name;
-  const partyName =
-    getVisiblePartyName(metadata?.['regen:landSteward']) ||
-    getVisiblePartyName(metadata?.['regen:projectDeveloper']) ||
-    getVisiblePartyName(metadata?.['regen:landOwner']) ||
-    getVisiblePartyName(metadata?.['regen:projectOriginator']);
-  const projectAddress = metadataLocation?.['place_name'];
-  const galleryPhotos = metadata?.['regen:galleryPhotos']?.['@list'];
-  const noGallery = !galleryPhotos || galleryPhotos?.length === 0;
-  const previewPhoto = metadata?.['regen:previewPhoto']?.['@value'];
-  const noGalleryAssets: Asset[] = [];
-  if (previewPhoto) {
-    noGalleryAssets.push({ src: previewPhoto, type: 'image' });
-  }
-  if (geojson) {
-    noGalleryAssets.push(
-      <StaticMap
-        geojson={geojson}
-        mapboxToken={process.env.REACT_APP_MAPBOX_TOKEN}
-      />,
-    );
-  }
-  const assets = noGallery
-    ? noGalleryAssets
-    : galleryPhotos.map((photo: { '@value': string }) => ({
-        src: photo['@value'],
-        type: 'image',
-      }));
-
-  const siteMetadata = {
-    title: `Regen Network Registry`,
-    description:
-      creditClassName && partyName && projectAddress
-        ? `Learn about ${creditClassName} credits sourced from ${partyName} in ${projectAddress}.`
-        : '',
-    author: `Regen Network`,
-    siteUrl: `${window.location.origin}`,
-  };
-
+  const creditClassDenom =
+    creditClassVersion?.metadata?.['http://regen.network/creditDenom'];
   const coBenefitsIris =
     creditClassVersion?.metadata?.['http://regen.network/coBenefits']?.[
       '@list'
@@ -278,56 +127,54 @@ function ProjectDetails(): JSX.Element {
   const primaryImpactIRI = [
     creditClassVersion?.metadata?.['http://regen.network/indicator']?.['@id'],
   ];
-  const { data: primaryImpactData } = useEcologicalImpactByIriQuery({
-    client,
-    variables: {
-      iris: primaryImpactIRI,
-    },
-    skip: !primaryImpactIRI,
+
+  const { geojson, isGISFile } = useGeojson(offChainProjectMetadata);
+
+  const seoData = useSeo({
+    metadata: offChainProjectMetadata,
+    creditClassName,
   });
-  const { data: coBenefitData } = useEcologicalImpactByIriQuery({
-    client,
-    variables: {
-      iris: coBenefitsIris,
-    },
-    skip: !coBenefitsIris,
-  });
+  const mediaData = useMedia({ metadata: offChainProjectMetadata, geojson });
+  const impactData = useImpact({ coBenefitsIris, primaryImpactIRI });
+  const otherProjects = useOtherProjects(projectId as string);
+  const isLoading = loading || loadingDataByHandle;
 
-  let impactData: EcologicalImpact[] = [];
-  if (primaryImpactData && primaryImpactData.allEcologicalImpact?.length) {
-    impactData = [...primaryImpactData?.allEcologicalImpact];
-  }
+  const {
+    issuanceModalData,
+    issuanceModalOpen,
+    setIssuanceModalOpen,
+    viewOnLedger,
+  } = useIssuanceModal(data);
 
-  if (coBenefitData && coBenefitData.allEcologicalImpact?.length) {
-    impactData = [...impactData, ...coBenefitData?.allEcologicalImpact];
-  }
-
+  if (!isLoading && !project) return <NotFoundPage />;
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
       <SEO
-        location={location}
-        siteMetadata={siteMetadata}
-        title={metadata?.['schema:name']}
-        imageUrl={metadata?.['schema:image']?.['@value']}
+        location={seoData.location}
+        siteMetadata={seoData.siteMetadata}
+        title={seoData.title}
+        imageUrl={seoData.imageUrl}
       />
 
-      {assets.length > 0 && (
-        <Box sx={getMediaBoxStyles(theme)}>
-          <ProjectMedia
-            assets={assets}
-            gridView
-            mobileHeight={theme.spacing(78.75)}
-            imageStorageBaseUrl={imageStorageBaseUrl}
-            apiServerUrl={apiServerUrl}
-            imageCredits={metadata?.['schema:creditText']}
-          />
-        </Box>
-      )}
-      {assets.length === 0 && loading && (
+      {mediaData.assets.length === 0 && isLoading && (
         <Box sx={getMediaBoxStyles(theme)}>
           <Skeleton height={theme.spacing(78.75)} />
         </Box>
       )}
+
+      {mediaData.assets.length > 0 && (
+        <Box sx={getMediaBoxStyles(theme)}>
+          <ProjectMedia
+            gridView
+            assets={mediaData.assets}
+            apiServerUrl={mediaData.apiServerUrl}
+            imageStorageBaseUrl={mediaData.imageStorageBaseUrl}
+            imageCredits={mediaData.imageCredits}
+            mobileHeight={theme.spacing(78.75)}
+          />
+        </Box>
+      )}
+
       <ProjectTopSection
         data={data}
         batchData={{
@@ -337,76 +184,30 @@ function ProjectDetails(): JSX.Element {
         geojson={geojson}
         isGISFile={isGISFile}
       />
-      {impactData.length > 0 && (
+
+      {impactData?.length > 0 && (
         <div className="topo-background-alternate">
           <ProjectImpactSection impact={impactData} />
         </div>
       )}
 
-      {data?.projectByHandle?.documentsByProjectId?.nodes &&
-        data.projectByHandle.documentsByProjectId.nodes.length > 0 && (
-          <div className="topo-background-alternate">
-            <Documentation
-              txClient={txClient}
-              onViewOnLedger={viewOnLedger}
-              documents={data?.projectByHandle?.documentsByProjectId?.nodes.map(
-                doc => ({
-                  name: doc?.name || '',
-                  type: doc?.type || '',
-                  date: doc?.date || '',
-                  url: doc?.url || '',
-                  ledger: '',
-                  eventByEventId: doc?.eventByEventId,
-                }),
-              )}
-            />
-          </div>
-        )}
-
-      {metadata?.['regen:landManagementActions']?.['@list'] && (
-        <div className="topo-background-alternate">
-          <LandManagementActions
-            actions={metadata?.['regen:landManagementActions']?.['@list']?.map(
-              (action: any) => ({
-                name: action['schema:name'],
-                description: action['schema:description'],
-                imgSrc: action['schema:image']?.['@value'],
-              }),
-            )}
-            title="Land Management Actions"
-            subtitle="This is how the project developers are planning to achieve the primary impact."
-          />
-        </div>
+      {projectDocs && projectDocs.length > 0 && (
+        <ProjectDocumentation
+          docs={projectDocs}
+          txClient={txClient}
+          viewOnLedger={viewOnLedger}
+        />
       )}
 
-      {data?.projectByHandle?.eventsByProjectId?.nodes &&
-        data.projectByHandle.eventsByProjectId.nodes.length > 0 && (
-          <Box
-            className="topo-background-alternate"
-            sx={{ pb: { xs: 17, sm: 22.25 } }}
-          >
-            <Section titleVariant="h2" title="Timeline" titleAlign="left">
-              <Box sx={{ mt: { xs: 10, sm: 12 } }}>
-                <Timeline
-                  txClient={txClient}
-                  onViewOnLedger={viewOnLedger}
-                  events={data.projectByHandle.eventsByProjectId.nodes.map(
-                    node => ({
-                      date: getFormattedDate(node?.date, {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      }),
-                      summary: node?.summary || '',
-                      description: node?.description || '',
-                      creditVintage: node?.creditVintageByEventId,
-                    }),
-                  )}
-                />
-              </Box>
-            </Section>
-          </Box>
-        )}
+      {managementActions && <ManagementActions actions={managementActions} />}
+
+      {projectEvents && projectEvents?.length > 0 && (
+        <ProjectTimeline
+          events={projectEvents}
+          txClient={txClient}
+          viewOnLedger={viewOnLedger}
+        />
+      )}
 
       {otherProjects && otherProjects.length > 0 && (
         <div className="topo-background-alternate">
@@ -414,49 +215,6 @@ function ProjectDetails(): JSX.Element {
         </div>
       )}
 
-      {chainId && testProject.creditPrice ? (
-        <BuyFooter
-          onClick={() => setIsBuyCreditsModalOpen(true)}
-          creditPrice={testProject.creditPrice}
-        />
-      ) : (
-        <FixedFooter justifyContent="flex-end">
-          <>
-            <ContainedButton
-              size="large"
-              onClick={handleOpen}
-              startIcon={<EmailIcon />}
-            >
-              send me more info
-            </ContainedButton>
-            {/*
-            <OutlinedButton className={styles.callButton} startIcon={<PhoneIcon />}>
-              schedule a call
-            </OutlinedButton>
-          */}
-          </>
-        </FixedFooter>
-      )}
-
-      {testProject.creditPrice && testProject.stripePrice && (
-        <Modal open={open} onClose={handleClose}>
-          <CreditsPurchaseForm
-            onClose={handleClose}
-            creditPrice={testProject.creditPrice}
-            stripePrice={testProject.stripePrice}
-          />
-        </Modal>
-      )}
-      <Modal open={open} onClose={handleClose}>
-        <MoreInfoForm
-          apiUrl={getApiUri()}
-          onClose={handleClose}
-          onSubmit={() => {
-            handleClose();
-            setSubmitted(true);
-          }}
-        />
-      </Modal>
       {issuanceModalData && (
         <IssuanceModal
           txClient={txClient}
@@ -465,42 +223,17 @@ function ProjectDetails(): JSX.Element {
           {...issuanceModalData}
         />
       )}
-      {data && creditClassVersion && chainId && testProject.creditPrice && (
-        <>
-          <BuyCreditsModal
-            open={isBuyCreditsModalOpen}
-            onClose={() => setIsBuyCreditsModalOpen(false)}
-            onTxQueued={txRaw => handleTxQueued(txRaw)}
-            project={{
-              id: projectId as string,
-              name: data.projectByHandle?.metadata?.['schema:name'],
-              image: data.projectByHandle?.metadata?.['regen:previewPhoto'],
-              creditDenom:
-                creditClassVersion.metadata?.[
-                  'http://regen.network/creditDenom'
-                ] || creditClassName,
-              credits: testProject.credits,
-            }}
-            imageStorageBaseUrl={imageStorageBaseUrl}
-            apiServerUrl={apiServerUrl}
-          />
-          <ProcessingModal
-            open={
-              !walletContext?.txResult?.transactionHash && isProcessingModalOpen
-            }
-            onClose={handleProcessingModalClose}
-          />
-          <ConfirmationModal
-            open={
-              !!isConfirmationModalOpen ||
-              !!walletContext?.txResult?.transactionHash
-            }
-            onClose={handleConfirmationModalClose}
-            data={walletContext.txResult}
-          />
-        </>
+
+      {isInfoMode && <MoreInfo />}
+
+      {isTxMode && (
+        <TransactionModals
+          metadata={onChainProjectMetadata}
+          projectId={projectId}
+          testProject={testProject}
+          creditDenom={creditClassDenom || creditClassName}
+        />
       )}
-      {submitted && <Banner text="Thanks for submitting your information!" />}
     </Box>
   );
 }

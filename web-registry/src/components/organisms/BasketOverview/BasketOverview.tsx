@@ -15,11 +15,11 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { parseText } from 'web-components/lib/utils/textParser';
 
-import topoImg from '../../assets/background-contour-2.svg';
-import forestImg from '../../assets/forest-token.png';
-import { getAccountUrl } from '../../lib/block-explorer';
-import { LinkWithArrow } from '../atoms/LinkWithArrow';
-import { OptimizedImage } from '../atoms/OptimizedImage';
+import topoImg from '../../../assets/background-contour-2.svg';
+import forestImg from '../../../assets/forest-token.png';
+import { getAccountUrl } from '../../../lib/block-explorer';
+import { LinkWithArrow } from '../../atoms/LinkWithArrow';
+import { OptimizedImage } from '../../atoms/OptimizedImage';
 
 type CreditClass = {
   id: string;

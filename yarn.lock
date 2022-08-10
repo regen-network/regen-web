@@ -4603,10 +4603,10 @@
     prop-types "^15.6.1"
     react-lifecycles-compat "^3.0.4"
 
-"@regen-network/api@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@regen-network/api/-/api-0.2.2.tgz#7fc4b8c5fbf81387350bd2be12b3403939f3156f"
-  integrity sha512-gGRnql9L31Q8cOH4FIMXvRnd+LaQADFDdPeGbPPCQH97/fY0YmC7lVe0+bNLDWvAK4xsxD6kjSuDL192k3jB6A==
+"@regen-network/api@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@regen-network/api/-/api-0.3.0.tgz#dcb62908e28a04a404459125f3ad45bd7cf507fb"
+  integrity sha512-7mO8ssoB4oQeZXVcdI258KJNIwExyofhvrS8tG7R6tufui+bmOpLStJGrrU3tPqsQufYOqzUqh1u/pNdWcVBEQ==
   dependencies:
     "@cosmjs/stargate" "^0.27.0"
 
@@ -26265,9 +26265,9 @@ store2@^2.12.0:
   integrity sha512-iJtHSGmNgAUx0b/MCS6ASGxb//hGrHHRgzvN+K5bvkBTN7A9RTpPSf1WSp+nPGvWCJ1jRnvY7MKnuqfoi3OEqg==
 
 storybook-addon-react-router-v6@^0.1.10:
-  version "0.1.10"
-  resolved "https://registry.yarnpkg.com/storybook-addon-react-router-v6/-/storybook-addon-react-router-v6-0.1.10.tgz#16b66f4482317b14173bcf974049d3e867cfca88"
-  integrity sha512-eeJUdtELmck3VlUISCgX/3oEwY+/7wzqa4+5BOiYbkp4BKZIEwaQbiSdsmmXzWQLG5zRRNEbgk6dA3tZwV060w==
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/storybook-addon-react-router-v6/-/storybook-addon-react-router-v6-0.1.13.tgz#5a3c8ce275d9a109fe48288b43d3fa8854410cd5"
+  integrity sha512-yC7f8HnEi9+8/ei/beoBF4+8ydH2BpcT8UOlCdQWyu1zNeRyKQsRWSUOztPCcVlfWdUa3R5PLCm5cVC0ymtoXg==
   dependencies:
     react-inspector "^5.1.1"
 

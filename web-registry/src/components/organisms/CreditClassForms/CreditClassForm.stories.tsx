@@ -45,7 +45,8 @@ export const createCreditClassForm = (): JSX.Element => (
     }}
     steps={createCreditClassSteps}
   >
-    <CreateCreditClassForm onSubmit={() => null} />
+    {/* eslint-disable-next-line no-console */}
+    <CreateCreditClassForm onSubmit={console.log} />
   </MultiStepTemplate>
 );
 

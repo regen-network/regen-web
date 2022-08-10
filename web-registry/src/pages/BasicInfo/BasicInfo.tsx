@@ -28,7 +28,7 @@ const BasicInfo: React.FC = () => {
     const metadata = data.projectById.metadata;
     initialFieldValues = {
       'schema:name': metadata['schema:name'],
-      'regen:size': metadata['regen:size'],
+      'regen:projectSize': metadata['regen:projectSize'],
     };
   }
 

@@ -55,24 +55,24 @@ export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({
         'Credit Class',
         <BreakText>Amount Tradable</BreakText>,
         <BreakText>Amount Retired</BreakText>,
+        <BreakText>Amount Escrowed</BreakText>,
         'Batch Start Date',
         'Batch End Date',
         'Project Location',
       ]}
       rows={credits.map((row, i) => {
         return [
-          <Link href={`/credit-batches/${row.batch_denom}`}>
-            {row.batch_denom}
-          </Link>,
+          <Link href={`/credit-batches/${row.denom}`}>{row.denom}</Link>,
           <AccountLink address={row.issuer} />,
-          <Link key="class_id" href={`/credit-classes/${row.class_id}`}>
-            {row.class_id}
+          <Link key="class_id" href={`/credit-classes/${row.classId}`}>
+            {row.classId}
           </Link>,
-          formatNumber(row.tradable_amount),
-          formatNumber(row.retired_amount),
-          <GreyText>{formatDate(row.start_date)}</GreyText>,
-          <GreyText>{formatDate(row.end_date)}</GreyText>,
-          row.project_location,
+          formatNumber(row.balance?.tradableAmount),
+          formatNumber(row.balance?.retiredAmount),
+          formatNumber(row.balance?.escrowedAmount),
+          <GreyText>{formatDate(row.startDate)}</GreyText>,
+          <GreyText>{formatDate(row.endDate)}</GreyText>,
+          row.projectLocation,
         ];
       })}
       /* eslint-enable react/jsx-key */

@@ -1,0 +1,70 @@
+query ProjectByOnChainId($onChainId: String!) {
+  projectByOnChainId(onChainId: $onChainId) {
+    eventsByProjectId(orderBy: DATE_ASC) {
+      nodes {
+        date
+        summary
+        description
+        creditVintageByEventId {
+          ...creditVintageFields
+        }
+      }
+    }
+    metadata
+    partyByRegistryId {
+      name
+      organizationByPartyId {
+        website
+      }
+    }
+    creditClassByCreditClassId {
+      standard
+      onChainId
+      creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+        nodes {
+          name
+          metadata
+        }
+      }
+      methodologyByMethodologyId {
+        methodologyVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+          nodes {
+            name
+            metadata
+          }
+        }
+      }
+    }
+    partyByDeveloperId {
+      ...partyFields
+    }
+    partyByStewardId {
+      ...partyFields
+    }
+    partyByLandOwnerId {
+      ...partyFields
+    }
+    partyByIssuerId {
+      ...partyFields
+    }
+    partyByResellerId {
+      ...partyFields
+    }
+    documentsByProjectId {
+      nodes {
+        name
+        type
+        date
+        url
+        eventByEventId {
+          date
+          summary
+          description
+          creditVintageByEventId {
+            ...creditVintageFields
+          }
+        }
+      }
+    }
+  }
+}

@@ -13,7 +13,7 @@ import { DefaultTheme as Theme, makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
 import Modal from '../modal';
-import TagComponent from '../tag';
+import Tag from '../tag';
 import { Title } from '../typography';
 
 interface StyleProps {
@@ -21,14 +21,14 @@ interface StyleProps {
   even?: boolean;
 }
 
-interface Tag {
+interface TagType {
   name: string;
   color: string;
 }
 
 export interface Item {
   title: string;
-  tags: Tag[];
+  tags: TagType[];
   imgSrc?: string;
   url?: string;
 }

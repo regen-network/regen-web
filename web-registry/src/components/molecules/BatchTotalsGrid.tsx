@@ -16,19 +16,21 @@ export const BatchTotalsGrid: React.FC<{
     sx={{ justifyContent: 'space-between', ...sx }}
   >
     <GridItem>
-      <LabeledNumber label="Total Credits Issued" number={batch.total_amount} />
-    </GridItem>
-    <GridItem>
-      <LabeledNumber label="Credits Tradable" number={batch.tradable_supply} />
-    </GridItem>
-    <GridItem>
-      <LabeledNumber label="Credits Retired" number={batch.retired_supply} />
-    </GridItem>
-    <GridItem>
       <LabeledNumber
-        label="Credits Cancelled"
-        number={batch.amount_cancelled}
+        label="Total Credits Issued"
+        number={
+          +batch.tradableSupply + +batch.retiredSupply + +batch.cancelledAmount
+        }
       />
+    </GridItem>
+    <GridItem>
+      <LabeledNumber label="Credits Tradable" number={batch.tradableSupply} />
+    </GridItem>
+    <GridItem>
+      <LabeledNumber label="Credits Retired" number={batch.retiredSupply} />
+    </GridItem>
+    <GridItem>
+      <LabeledNumber label="Credits Cancelled" number={batch.cancelledAmount} />
     </GridItem>
   </Grid>
 );

@@ -1,3 +1,4 @@
+import React from 'react';
 import { CardMedia, styled, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from '@mui/styles';

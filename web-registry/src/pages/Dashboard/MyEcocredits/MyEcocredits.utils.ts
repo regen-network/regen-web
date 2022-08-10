@@ -13,12 +13,10 @@ export const getOtherSellOrderBatchDenomOptions = ({
   value: string;
 }[] =>
   credits
-    .filter(
-      credit => credit.batch_denom !== credits[sellOrderCreateOpen].batch_denom,
-    )
+    .filter(credit => credit.denom !== credits[sellOrderCreateOpen].denom)
     .map(credit => ({
-      label: credit.batch_denom,
-      value: credit.batch_denom,
+      label: credit.denom,
+      value: credit.denom,
     }));
 
 type getAvailableAmountByBatchProps = {
@@ -33,7 +31,7 @@ export const getAvailableAmountByBatch = ({
   credits.reduce(
     (acc, credit) => ({
       ...acc,
-      [credit.batch_denom]: Number(credit.tradable_amount),
+      [credit.denom]: Number(credit.balance?.tradableAmount),
     }),
     {} as { [key: string]: number },
   );

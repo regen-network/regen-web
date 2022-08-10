@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Menu, MenuItem } from '@mui/material';
+import { Box, Menu, MenuItem, SxProps, Theme } from '@mui/material';
 
 import { HorizontalDotsIcon } from '../icons/HorizontalDotsIcon';
 import OutlinedButton from './OutlinedButton';
@@ -7,7 +7,8 @@ import OutlinedButton from './OutlinedButton';
 /** Displays a dropdown icon with action buttons */
 const TableActionButtons: React.FC<{
   buttons: { label: string; onClick: () => void; icon?: JSX.Element }[];
-}> = ({ buttons }) => {
+  sx?: SxProps<Theme>;
+}> = ({ buttons, sx }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   function handleMobileMenuOpen({
@@ -26,6 +27,7 @@ const TableActionButtons: React.FC<{
         onClick={handleMobileMenuOpen}
         size="small"
         aria-controls="table-menu-buttons"
+        sx={sx}
       >
         <HorizontalDotsIcon />
       </OutlinedButton>

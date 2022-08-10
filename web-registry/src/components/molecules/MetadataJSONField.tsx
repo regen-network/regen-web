@@ -7,6 +7,7 @@ import InputLabel from 'web-components/lib/components/inputs/InputLabel';
 import { Body } from 'web-components/lib/components/typography';
 
 import { CreditBasicsFormValues } from '../../features/ecocredit/CreateBatchBySteps/CreateBatchMultiStepForm/CreditBasics';
+import { ClassID } from '../../types/ledger/ecocredit';
 
 // TODO
 // Make this component more generic, so that it doesn't depend
@@ -15,17 +16,19 @@ import { CreditBasicsFormValues } from '../../features/ecocredit/CreateBatchBySt
 interface FieldProps {
   name?: string;
   required?: boolean;
+  classId: ClassID;
 }
 
 export function MetadataJSONField({
   name = 'metadata',
   required,
+  classId,
   ...props
 }: FieldProps): JSX.Element {
   const {
     setFieldValue,
     setFieldTouched,
-    values: { classId, metadata },
+    values: { metadata },
   } = useFormikContext<CreditBasicsFormValues>();
   const [formikName, setFormikName] = useState('loading');
 

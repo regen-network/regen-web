@@ -18,8 +18,12 @@ import OnBoardingCard from './OnBoardingCard';
 import { OverviewCard } from './OverviewCard';
 import ProjectCard from './ProjectCard';
 import ProjectTopCard from './ProjectTopCard';
+// import CreditCard, { CreditInfo } from './CreditCard';
 import PurchasedCreditsCard from './PurchasedCreditsCard';
 import ResourcesCard from './ResourcesCard';
+import { ReviewCard } from './ReviewCard';
+import { ItemDisplay } from './ReviewCard/ReviewCard.ItemDisplay';
+import { Photo } from './ReviewCard/ReviewCard.Photo';
 import { StepCard } from './StepCard';
 
 export default {
@@ -307,4 +311,20 @@ export const resourcesCard = (): JSX.Element => (
     image={{ publicURL: '/coorong.png' }}
     updated="July 4, 1776"
   />
+);
+
+export const reviewCard = (): JSX.Element => (
+  <ReviewCard title="Review Card" onEditClick={() => {}}>
+    <ItemDisplay name="Name A">Description A</ItemDisplay>
+    <ItemDisplay name="Name B">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+      amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+      labore et dolore magna aliqua.
+    </ItemDisplay>
+    <ItemDisplay name="URL">
+      <a href="http://www.url.com/">www.url.com</a>
+    </ItemDisplay>
+    <Photo src="/coorong.png" />
+  </ReviewCard>
 );

@@ -86,12 +86,13 @@ export const Projects: React.FC = () => {
   if (loading) return <Loading />;
   return (
     <Box
-      justifyContent={'center'}
+      justifyContent="center"
       sx={{
         bgcolor: 'grey.50',
         borderTop: 1,
         borderColor: 'grey.100',
         p: 8.75,
+        pb: 25,
       }}
     >
       <Grid
@@ -125,15 +126,15 @@ export const Projects: React.FC = () => {
           </Flex>
         </Flex>
       </Grid>
-      <Grid
-        container
-        rowGap={4.5}
-        columnGap={5}
-        flexWrap="wrap"
-        justifyContent="center"
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 338px))',
+          gridGap: '1.125rem',
+        }}
       >
         {sortedProjects?.map(project => (
-          <Grid item key={project?.id}>
+          <Box key={project?.id}>
             <ProjectCard
               name={project?.name}
               imgSrc={project?.imgSrc}
@@ -148,9 +149,9 @@ export const Projects: React.FC = () => {
               truncateTitle={true}
               sx={{ width: 338, height: 479 }}
             />
-          </Grid>
+          </Box>
         ))}
-      </Grid>
+      </Box>
       <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
       {error && txModalTitle && (
         <TxErrorModal

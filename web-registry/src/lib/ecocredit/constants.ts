@@ -4,6 +4,12 @@ import {
   MsgTake,
 } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/tx';
 import {
+  MsgBuyDirect,
+  MsgCancelSellOrder,
+  MsgSell,
+  MsgUpdateSellOrders,
+} from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/tx';
+import {
   MsgCancel,
   MsgCreateBatch,
   MsgCreateClass,
@@ -66,5 +72,21 @@ export const ECOCREDIT_MESSAGE_TYPES = {
   CREATE_PROJECT: {
     message: `/${MsgCreateProject.$type}`,
     readable: 'create project',
+  },
+  BUY_DIRECT: {
+    message: `/${MsgBuyDirect.$type}`,
+    readable: 'buy sell order',
+  },
+  ISSUE_SELL_ORDER: {
+    message: `/${MsgSell.$type}`,
+    readable: 'issue sell order',
+  },
+  CANCEL_SELL_ORDER: {
+    message: `/${MsgCancelSellOrder.$type}`,
+    readable: 'cancel sell order',
+  },
+  UPDATE_SELL_ORDER: {
+    message: `/${MsgUpdateSellOrders.$type}`,
+    readable: 'update sell order',
   },
 };

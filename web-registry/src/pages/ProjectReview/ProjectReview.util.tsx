@@ -41,7 +41,7 @@ export const getJurisdiction = async (
   let postalCode = '';
   context.forEach(ctx => {
     if (ctx.id.includes('country')) {
-      countryKey = ctx.text;
+      countryKey = getCountryKey(ctx.text);
       return;
     }
     if (ctx.id.includes('region')) {
@@ -59,9 +59,7 @@ export const getJurisdiction = async (
     const placeSegments = location.place_name.split(',');
     // find the country key
     placeSegments.forEach(segment => {
-      const foundKey = Object.keys(countries).find(key => {
-        return countries[key].toLowerCase() === segment.trim().toLowerCase();
-      });
+      const foundKey = getCountryKey(segment);
       if (foundKey) {
         countryKey = foundKey;
         return;
@@ -79,4 +77,12 @@ export const getJurisdiction = async (
     return Promise.reject(err);
   }
   return Promise.resolve(isoString);
+};
+
+const getCountryKey = (country: string): string => {
+  const foundKey = Object.keys(countries).find(key => {
+    return countries[key].toLowerCase() === country.trim().toLowerCase();
+  });
+  if (foundKey) return foundKey;
+  return '';
 };

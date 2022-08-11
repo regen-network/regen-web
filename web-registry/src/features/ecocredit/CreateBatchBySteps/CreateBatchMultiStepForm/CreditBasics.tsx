@@ -74,8 +74,7 @@ export const creditBasicsValidationSchemaFields = {
     .typeError(invalidDate)
     .test({ ...isPastDateTest }),
   metadata: Yup.object().when('projectId', {
-    // TODO: this is a hack to make V4 testnet work. C02 is a copy of C01 on V4. In PROD/mainnet, this should only be C01
-    is: (val: string) => val?.startsWith('C01') || val?.startsWith('C02'),
+    is: (val: string) => val?.startsWith('C01'),
     then: schema => vcsMetadataSchema,
     otherwise: schema => JSONSchema,
   }),

@@ -92,14 +92,25 @@ const CreditSendForm: React.FC<FormProps> = ({
       errors.recipient = requiredMessage;
     }
 
-    const errAmount = validateAmount(
-      availableTradableAmount,
-      values.tradableAmount,
-    );
-    if (errAmount) errors.tradableAmount = errAmount;
+    if (!values.withRetire) {
+      const errAmount = validateAmount(
+        availableTradableAmount,
+        values.tradableAmount,
+      );
+      if (errAmount) errors.tradableAmount = errAmount;
+    }
 
     // Retire form validation (optional subform)
     if (values.withRetire) {
+      // also check tradable amount because with retirement is allowed to be zero
+      const errAmount = validateAmount(
+        availableTradableAmount,
+        values.tradableAmount,
+        undefined,
+        true, //zero allowed
+      );
+      if (errAmount) errors.tradableAmount = errAmount;
+
       errors = validateCreditRetire(availableTradableAmount, values, errors);
 
       // combo validation: send + retire

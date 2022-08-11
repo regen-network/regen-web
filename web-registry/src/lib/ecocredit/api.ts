@@ -23,6 +23,7 @@ import {
   QueryClientImpl,
   QueryCreditTypesRequest,
   QueryCreditTypesResponse,
+  QueryParamsResponse,
   QueryProjectRequest,
   QueryProjectResponse,
   QueryProjectsByAdminRequest,
@@ -361,7 +362,7 @@ export const getProject = async (
  *  - ClassInfo
  *  - Classes
  *  - CreditTypes
- *  - Params        (TODO)
+ *  - Params
  *  - Supply        (TODO)
  *
  */
@@ -659,6 +660,19 @@ export const queryProject = async ({
   } catch (err) {
     throw new Error(
       `Error in the Project query of the ledger ecocredit module: ${err}`,
+    );
+  }
+};
+
+// Params
+
+export const queryParams = async (): Promise<QueryParamsResponse> => {
+  const client = await getQueryClient();
+  try {
+    return await client.Params({});
+  } catch (err) {
+    throw new Error(
+      `Error in the Params query of the ledger ecocredit module: ${err}`,
     );
   }
 };

@@ -11,6 +11,8 @@ import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
+import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
+import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
 import useQueryIfIssuer from 'hooks/useQueryIfIssuer';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
@@ -36,6 +38,9 @@ const sxs = {
 const Dashboard = (): JSX.Element => {
   const theme = useTheme();
   const isIssuer = useQueryIfIssuer();
+  const isCreditClassCreator = useQueryIfCreditClassCreator();
+  const isCreditClassAdmin = useQueryIfCreditClassAdmin();
+  const creditClassTabHidden = !(isCreditClassCreator || isCreditClassAdmin);
 
   // TODO: We should handle these as nested routes, converting this to an
   // <Outlet> layout component if we think we'll need to route to a page
@@ -68,11 +73,14 @@ const Dashboard = (): JSX.Element => {
     {
       label: 'Credit Classes',
       icon: <CreditClassIcon sx={{ opacity: '70%' }} />,
-      hidden: !isIssuer,
+      hidden: creditClassTabHidden,
       content: (
         <LazyLoad>
           <Flex sx={sxs.padTop}>
-            <MyCreditClasses />
+            <MyCreditClasses
+              isCreditClassCreator={isCreditClassCreator}
+              isCreditClassAdmin={isCreditClassAdmin}
+            />
           </Flex>
         </LazyLoad>
       ),

@@ -34,7 +34,6 @@ const RegistryNav: React.FC = () => {
   const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
   const { data: projectsData } = useMoreProjectsQuery();
   // TODO: this feature flag can be deleted when marketplace is launched in PROD
-  // const isPROD = process.env.REACT_APP_SANITY_DATASET === 'production';
   const isMAINNET = chainId === 'regen-1';
 
   //  each custom dropdown still needs to be passed `dropdownItems` to render

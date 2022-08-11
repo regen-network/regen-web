@@ -35,7 +35,10 @@ import { SellOrderInfoNormalized } from 'pages/Projects/hooks/useProjectsSellOrd
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
-import { getSellOrderLabel } from './BuyCreditsModal.utils';
+import {
+  getSellOrderInfoLabel,
+  getSellOrderLabel,
+} from './BuyCreditsModal.utils';
 
 export interface Credits {
   purchased: number;
@@ -117,11 +120,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
     if (project?.sellOrders?.length) {
       const sellOrderOptions = project?.sellOrders.map(sellOrder => {
         return {
-          label: `${sellOrder.id} (${
-            sellOrder.askAmount
-          } ${sellOrder.askDenom.substring(1)}/credit: ${
-            sellOrder.quantity
-          } credits available)`,
+          label: getSellOrderInfoLabel(sellOrder),
           value: sellOrder.id,
         };
       });
@@ -186,7 +185,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
             const selectedSellOrder = project?.sellOrders?.find(
               sellOrder => sellOrder.id === values?.sellOrderId,
             );
-
             return (
               <div>
                 <Form translate="yes">

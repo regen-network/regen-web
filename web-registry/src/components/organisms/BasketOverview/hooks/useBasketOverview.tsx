@@ -111,7 +111,7 @@ const useBasketOverview = (
     const startDateWindow = basket.basketInfo?.dateCriteria?.startDateWindow;
     if (startDateWindow) {
       _overview.startDateWindow = formatDuration(
-        startDateWindow.seconds.toNumber(),
+        startDateWindow?.seconds?.toNumber(),
       );
     }
 

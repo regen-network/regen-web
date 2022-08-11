@@ -10,9 +10,9 @@ import {
   OnboardingFormTemplate,
 } from '../../components/templates';
 import {
-  useCreateAddressMutation,
+  // useCreateAddressMutation,
   useProjectByIdQuery,
-  useUpdateAddressByIdMutation,
+  // useUpdateAddressByIdMutation,
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
 import { useProjectEditContext } from '../ProjectEdit';
@@ -23,8 +23,8 @@ const ProjectLocation: React.FC = () => {
   const { isEdit } = useProjectEditContext();
 
   const [updateProject] = useUpdateProjectByIdMutation();
-  const [createAddress] = useCreateAddressMutation();
-  const [updateAddress] = useUpdateAddressByIdMutation();
+  // const [createAddress] = useCreateAddressMutation();
+  // const [updateAddress] = useUpdateAddressByIdMutation();
   const { data: projectData } = useProjectByIdQuery({
     variables: { id: projectId },
     fetchPolicy: 'cache-and-network',

@@ -128,7 +128,7 @@ function getExtreme(
 ): number {
   const prices = project.purchaseInfo?.sellInfo?.pricePerTon?.split('-');
   const index = highOrLow === 'high' ? 1 : 0;
-  const extreme = (prices?.[index] && parseInt(prices[index] as string)) || 0;
+  const extreme = (prices?.[index] && parseInt(String(prices[index]))) || 0;
   return extreme;
 }
 

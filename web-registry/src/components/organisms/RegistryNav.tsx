@@ -18,6 +18,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { useMoreProjectsQuery } from 'generated/graphql';
 
 import DefaultAvatar from '../../assets/avatar.png';
+import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 import { chainId, nctBasket } from '../../lib/ledger';
 import { useWallet } from '../../lib/wallet';
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
@@ -108,6 +109,10 @@ const RegistryNav: React.FC = () => {
       })),
     },
     {
+      title: 'Activity',
+      href: '/stats/activity',
+    },
+    {
       title: 'Program',
       dropdownItems: [...carbonPlusItems, ...programHowToItems],
       renderDropdownItems: () => (
@@ -140,21 +145,19 @@ const RegistryNav: React.FC = () => {
       title: 'Trade',
       href: '/storefront',
     },
+    {
+      title: 'Activity',
+      href: '/stats/activity',
+    },
   ];
 
   // TODO: only v4MenuItems when marketplace is launched in PROD
   const menuItems: HeaderMenuItem[] = isMAINNET ? legacyMenuItems : v4MenuItems;
 
-  if (chainId) {
-    if (nctBasket) {
-      menuItems.unshift({
-        title: 'NCT',
-        href: '/baskets/eco.uC.NCT',
-      });
-    }
-    menuItems.push({
-      title: 'Activity',
-      href: '/stats/activity',
+  if (nctBasket) {
+    menuItems.unshift({
+      title: 'NCT',
+      href: '/baskets/eco.uC.NCT',
     });
   }
 

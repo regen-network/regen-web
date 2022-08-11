@@ -65,32 +65,33 @@ const ProjectLocation: React.FC = () => {
 
   async function saveValues(values: ProjectLocationFormValues): Promise<void> {
     const metadata = { ...projectData?.projectById?.metadata, ...values };
-    const feature = values['schema:location'];
-    let addressId = projectData?.projectById?.addressId;
-    // if there's a current address associated with project, update it, otherwise create a new one
-    if (!addressId) {
-      const { data: addressData } = await createAddress({
-        variables: {
-          input: {
-            address: {
-              feature,
-            },
-          },
-        },
-      });
-      addressId = addressData?.createAddress?.address?.id;
-    } else {
-      await updateAddress({
-        variables: {
-          input: {
-            id: addressId,
-            addressPatch: {
-              feature,
-            },
-          },
-        },
-      });
-    }
+    // TODO: Do we need to store addresses anymore? Commented out because the update mutation was failing.
+    // const feature = values['schema:location'];
+    // let addressId = projectData?.projectById?.addressId;
+    // // if there's a current address associated with project, update it, otherwise create a new one
+    // if (!addressId) {
+    //   const { data: addressData } = await createAddress({
+    //     variables: {
+    //       input: {
+    //         address: {
+    //           feature,
+    //         },
+    //       },
+    //     },
+    //   });
+    //   addressId = addressData?.createAddress?.address?.id;
+    // } else {
+    //   await updateAddress({
+    //     variables: {
+    //       input: {
+    //         id: addressId,
+    //         addressPatch: {
+    //           feature,
+    //         },
+    //       },
+    //     },
+    //   });
+    // }
 
     await updateProject({
       variables: {
@@ -98,7 +99,7 @@ const ProjectLocation: React.FC = () => {
           id: projectId,
           projectPatch: {
             metadata,
-            addressId,
+            // addressId, TODO: Do we need to store addresses anymore? Commented out because the update mutation was failing.
           },
         },
       },

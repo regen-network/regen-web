@@ -18,6 +18,6 @@ export interface PurchaseInfo {
   projectType?: string;
   sellInfo?: {
     pricePerTon: string;
-    creditsAvailable: string;
+    creditsAvailable: number;
   };
 }

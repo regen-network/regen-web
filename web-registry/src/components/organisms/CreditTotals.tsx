@@ -5,7 +5,7 @@ import { makeStyles } from '@mui/styles';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { getBatchesWithSupply } from '../../lib/ecocredit/api';
-import type { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
+import { BatchInfoWithSupply } from '../../types/ledger/ecocredit';
 import { Statistic } from '../molecules';
 
 interface CreditTotalData {
@@ -53,9 +53,11 @@ const CreditTotals: React.FC = () => {
       let created = 0;
 
       batches.forEach(batch => {
-        tradeable += parseNumber(batch.tradable_supply);
-        retired += parseNumber(batch.retired_supply);
-        created += parseNumber(batch.total_amount);
+        tradeable += parseNumber(batch.tradableSupply);
+        retired += parseNumber(batch.retiredSupply);
+        created += parseNumber(
+          batch.tradableSupply + batch.retiredSupply + batch.cancelledAmount,
+        );
       });
 
       return {

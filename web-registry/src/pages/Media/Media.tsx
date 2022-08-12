@@ -58,7 +58,7 @@ const Media = (): JSX.Element => {
     values['regen:videoURL'] = getURLInitialValue(metadata['regen:videoURL']);
 
     if (isSimpleMediaFormValues(values, creditClassId)) {
-      values['regen:creditText'] = metadata['regen:creditText'] || '';
+      values['schema:creditText'] = metadata['schema:creditText'] || '';
     } else {
       values['regen:landStewardPhoto'] = getURLInitialValue(
         metadata['regen:landStewardPhoto'],

@@ -1,3 +1,4 @@
+import React from 'react';
 import { CardMedia, styled, SxProps } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from '@mui/styles';
@@ -27,6 +28,7 @@ export interface MediaCardProps extends OptimizeImageProps {
   backgroundGradient?: boolean;
   imageClassName?: string;
   titleOverwrite?: boolean;
+  truncateTitle?: boolean;
   sx?: SxProps<Theme>;
 }
 
@@ -65,6 +67,7 @@ export default function MediaCard({
   backgroundGradient = true,
   imageClassName,
   titleOverwrite = true,
+  truncateTitle,
   imageStorageBaseUrl,
   apiServerUrl,
   sx = [],
@@ -139,13 +142,20 @@ export default function MediaCard({
           variant={titleVariant}
           mobileVariant={titleOverwrite ? 'h6' : undefined}
           as="div"
-          sx={theme => ({
-            p: {
-              xs: theme.spacing(4, 4.5, 0.8),
-              sm: theme.spacing(4.5, 5.25, 0.8),
+          sx={[
+            theme => ({
+              p: {
+                xs: theme.spacing(4, 4.5, 0.8),
+                sm: theme.spacing(4.5, 5.25, 0.8),
+              },
+              borderTop: `1px solid ${theme.palette.grey[100]}`,
+            }),
+            !!truncateTitle && {
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
             },
-            borderTop: `1px solid ${theme.palette.grey[100]}`,
-          })}
+          ]}
         >
           {parseText(name)}
         </Title>

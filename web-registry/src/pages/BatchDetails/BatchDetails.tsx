@@ -8,7 +8,7 @@ import Section from 'web-components/lib/components/section';
 import { Title } from 'web-components/lib/components/typography';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-import { useProjectsByMetadataQuery } from 'generated/graphql';
+import { useProjectByOnChainIdQuery } from 'generated/graphql';
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { getBatchWithSupplyForDenom } from 'lib/ecocredit/api';
 import { getMetadata } from 'lib/metadata-graph';
@@ -31,7 +31,7 @@ export const BatchDetails: React.FC = () => {
   const walletContext = useWallet();
   const accountAddress = walletContext.wallet?.address;
   const { credits: userEcocredits } = useEcocredits(accountAddress);
-  const isUserBatch = userEcocredits.some(c => c.batch_denom === batchDenom);
+  const isUserBatch = userEcocredits.some(c => c.denom === batchDenom);
 
   useEffect(() => {
     const fetch = async (): Promise<void> => {
@@ -54,21 +54,19 @@ export const BatchDetails: React.FC = () => {
     fetch();
   }, [batchDenom]);
 
-  const vcsProjectId = metadata?.['regen:vcsProjectId'];
+  const onChainId = batch?.projectId || '';
   const {
     data: offchainData,
     loading: dbLoading,
     error,
-  } = useProjectsByMetadataQuery({
-    skip: !vcsProjectId,
+  } = useProjectByOnChainIdQuery({
+    skip: !onChainId,
     variables: {
-      metadata: {
-        'regen:vcsProjectId': vcsProjectId,
-      },
+      onChainId,
     },
   });
 
-  const project = offchainData?.allProjects?.nodes?.[0];
+  const project = offchainData?.projectByOnChainId;
 
   if (ledgerLoading || dbLoading) return <Loading />;
 
@@ -104,8 +102,8 @@ export const BatchDetails: React.FC = () => {
           <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
             <BatchInfoGrid
               batch={batch}
-              projectHandle={project?.handle}
-              projectName={project?.metadata?.['schema:name']}
+              projectOnChainId={onChainId}
+              projectName={project?.metadata?.['schema:name'] || onChainId}
               sx={{ py: 10, borderBottom: 1, borderColor: 'grey.100' }}
             />
             <Title variant="h5" sx={{ mt: 10, mb: 8 }}>

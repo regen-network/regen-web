@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import Grid from '@mui/material/Grid';
 import { DefaultTheme as Theme, makeStyles, withStyles } from '@mui/styles';
@@ -305,7 +305,8 @@ export default function LedgerModal({
           hash: txHash,
         })
         .then(setTxRes)
-        .catch(console.error); // eslint-disable-line no-console
+        // eslint-disable-next-line no-console
+        .catch(console.error);
     }
   }, [txClient, txHash]);
 

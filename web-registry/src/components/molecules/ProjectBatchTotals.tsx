@@ -34,16 +34,16 @@ export function ProjectBatchTotals({
       <GridItem>
         <LabeledNumber
           label="Credits Tradable"
-          number={totals.tradable_supply}
+          number={totals.tradableSupply}
         />
       </GridItem>
       <GridItem>
-        <LabeledNumber label="Credits Retired" number={totals.retired_supply} />
+        <LabeledNumber label="Credits Retired" number={totals.retiredSupply} />
       </GridItem>
       <GridItem>
         <LabeledNumber
           label="Credits Cancelled"
-          number={totals.amount_cancelled}
+          number={totals.cancelledAmount}
         />
       </GridItem>
     </Grid>

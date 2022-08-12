@@ -1,7 +1,6 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 import { Box, SxProps } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import { uniq } from 'lodash';
 
 import { Center, Flex } from 'web-components/lib/components/box';
 import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
@@ -12,9 +11,10 @@ import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
-import { useWallet } from 'lib/wallet';
-
-import { useQueryListClasses } from 'hooks';
+import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
+import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
+import useQueryIfIssuer from 'hooks/useQueryIfIssuer';
+import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
 const MyProjects = React.lazy(() => import('./MyProjects'));
@@ -38,16 +38,12 @@ const sxs = {
 
 const Dashboard = (): JSX.Element => {
   const theme = useTheme();
-  const [isIssuer, setIsIssuer] = useState(false);
-  const onChainClasses = useQueryListClasses();
-  const { wallet } = useWallet();
-
-  useEffect(() => {
-    const issuers = uniq(onChainClasses?.classes?.map(cc => cc.issuers).flat());
-    const isAnIssuer =
-      !!wallet?.address && issuers.indexOf(wallet.address) > -1;
-    setIsIssuer(isAnIssuer);
-  }, [onChainClasses, wallet]);
+  const isIssuer = useQueryIfIssuer();
+  const isCreditClassCreator = useQueryIfCreditClassCreator();
+  const isCreditClassAdmin = useQueryIfCreditClassAdmin();
+  const isProjectAdmin = useQueryIfProjectAdmin();
+  const projectTabHidden = !(isIssuer || isProjectAdmin);
+  const creditClassTabHidden = !(isCreditClassCreator || isCreditClassAdmin);
 
   // TODO: We should handle these as nested routes, converting this to an
   // <Outlet> layout component if we think we'll need to route to a page
@@ -68,11 +64,11 @@ const Dashboard = (): JSX.Element => {
     {
       label: 'Projects',
       icon: <ProjectPageIcon />,
-      hidden: !isIssuer,
+      hidden: projectTabHidden,
       content: (
         <LazyLoad>
           <Flex sx={sxs.padTop}>
-            <MyProjects />
+            <MyProjects isIssuer={isIssuer} isProjectAdmin={isProjectAdmin} />
           </Flex>
         </LazyLoad>
       ),
@@ -80,11 +76,14 @@ const Dashboard = (): JSX.Element => {
     {
       label: 'Credit Classes',
       icon: <CreditClassIcon sx={{ opacity: '70%' }} />,
-      hidden: !isIssuer,
+      hidden: creditClassTabHidden,
       content: (
         <LazyLoad>
           <Flex sx={sxs.padTop}>
-            <MyCreditClasses />
+            <MyCreditClasses
+              isCreditClassCreator={isCreditClassCreator}
+              isCreditClassAdmin={isCreditClassAdmin}
+            />
           </Flex>
         </LazyLoad>
       ),

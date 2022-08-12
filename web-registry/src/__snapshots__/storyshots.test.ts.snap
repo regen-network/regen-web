@@ -4,7 +4,11 @@ exports[`Storyshots Action Action 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -30,7 +34,11 @@ exports[`Storyshots Action Action Long Description 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -56,7 +64,11 @@ exports[`Storyshots Blog Post Blog Post 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -82,7 +94,11 @@ exports[`Storyshots Buttons Combined 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -108,7 +124,11 @@ exports[`Storyshots Buttons Contained Button 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -134,7 +154,11 @@ exports[`Storyshots Buttons Edit Button 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -160,7 +184,11 @@ exports[`Storyshots Buttons Expand Button 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -186,7 +214,11 @@ exports[`Storyshots Buttons Next Button 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -212,7 +244,11 @@ exports[`Storyshots Buttons Outlined Button 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -238,7 +274,11 @@ exports[`Storyshots Buttons Prev Button 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -264,7 +304,11 @@ exports[`Storyshots Buttons Table Action Buttons 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -290,7 +334,11 @@ exports[`Storyshots Buttons Text Button 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -316,7 +364,11 @@ exports[`Storyshots Cards Glance Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -342,7 +394,11 @@ exports[`Storyshots Cards Green Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -368,7 +424,11 @@ exports[`Storyshots Cards Green Top Icon Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -394,7 +454,11 @@ exports[`Storyshots Cards Image Action Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -420,7 +484,11 @@ exports[`Storyshots Cards Impact Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -446,7 +514,11 @@ exports[`Storyshots Cards Map Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -472,7 +544,11 @@ exports[`Storyshots Cards Monitored Impact Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -498,7 +574,11 @@ exports[`Storyshots Cards On Boarding Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -524,7 +604,11 @@ exports[`Storyshots Cards Overview Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -550,7 +634,11 @@ exports[`Storyshots Cards Overview Cards Group 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -576,7 +664,11 @@ exports[`Storyshots Cards Project Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -602,7 +694,11 @@ exports[`Storyshots Cards Project Top Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -628,7 +724,11 @@ exports[`Storyshots Cards Purchased Credits Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -654,7 +754,41 @@ exports[`Storyshots Cards Resources Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Cards Review Card 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -680,7 +814,11 @@ exports[`Storyshots Cards Step Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -706,7 +844,11 @@ exports[`Storyshots Cards/Create Card Create Credit Class Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -732,7 +874,11 @@ exports[`Storyshots Cards/Create Card Create Project Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -758,7 +904,11 @@ exports[`Storyshots Cards/Create Card First Credit Class Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -784,7 +934,11 @@ exports[`Storyshots Cards/Create Card First Project Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -810,7 +964,11 @@ exports[`Storyshots Cards/Create Card No Title Or Icon 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -836,7 +994,11 @@ exports[`Storyshots Cards/Create Card With Title And Icon 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -862,7 +1024,11 @@ exports[`Storyshots Cards/ReviewCard Item Display 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -888,7 +1054,11 @@ exports[`Storyshots Cards/ReviewCard Photo 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -914,7 +1084,11 @@ exports[`Storyshots Cards/ReviewCard Review Card 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -940,7 +1114,11 @@ exports[`Storyshots Cards/ReviewCard Review Card Base 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -966,7 +1144,11 @@ exports[`Storyshots Certificate Certificate 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -992,7 +1174,11 @@ exports[`Storyshots Charts Bar Chart 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1018,7 +1204,11 @@ exports[`Storyshots Credits Credit Details 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1044,7 +1234,11 @@ exports[`Storyshots Credits Credits Gauge 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1070,7 +1264,11 @@ exports[`Storyshots Document Document 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1096,7 +1294,11 @@ exports[`Storyshots FAQ Category 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1122,7 +1324,11 @@ exports[`Storyshots FAQ Faq 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1148,7 +1354,11 @@ exports[`Storyshots FAQ Navigation 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1174,7 +1384,11 @@ exports[`Storyshots FAQ Question 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1200,7 +1414,11 @@ exports[`Storyshots Footers Fixed Footer 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1226,7 +1444,11 @@ exports[`Storyshots Footers Save Footer 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1252,7 +1474,11 @@ exports[`Storyshots Footers Switch Footer 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1278,7 +1504,11 @@ exports[`Storyshots Forms Basket Put Form 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1304,7 +1534,11 @@ exports[`Storyshots Forms Basket Take Form 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1330,7 +1564,11 @@ exports[`Storyshots Forms Credit Batch Recipients Form 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1356,7 +1594,11 @@ exports[`Storyshots Forms Credit Retire Form 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1382,7 +1624,11 @@ exports[`Storyshots Forms Credit Send Form 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1408,7 +1654,11 @@ exports[`Storyshots Forms Login Form 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1434,7 +1684,11 @@ exports[`Storyshots Forms Sign Up Form 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1460,7 +1714,11 @@ exports[`Storyshots Forms User Profile 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1486,7 +1744,11 @@ exports[`Storyshots Icons All Icons 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1512,7 +1774,11 @@ exports[`Storyshots Image Grid Image Grid 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1538,7 +1804,11 @@ exports[`Storyshots Image Image Default Quality 100 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1564,7 +1834,11 @@ exports[`Storyshots Image Item Image Item 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1590,7 +1864,11 @@ exports[`Storyshots Image Original Image 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1616,7 +1894,11 @@ exports[`Storyshots Inputs Date Pick Field 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1642,7 +1924,11 @@ exports[`Storyshots Inputs Roles Input 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1668,7 +1954,11 @@ exports[`Storyshots Inputs Toggle 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1694,7 +1984,11 @@ exports[`Storyshots Loading Loading Spinner 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1720,7 +2014,11 @@ exports[`Storyshots Map Map 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1746,7 +2044,11 @@ exports[`Storyshots Modal Basket Put Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1772,7 +2074,41 @@ exports[`Storyshots Modal Basket Take Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Modal Confirm Modal 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1798,7 +2134,11 @@ exports[`Storyshots Modal Create Sell Order Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1824,7 +2164,11 @@ exports[`Storyshots Modal Credit Retire Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1850,7 +2194,11 @@ exports[`Storyshots Modal Credit Send Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1876,7 +2224,11 @@ exports[`Storyshots Modal Crop Round Image Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1902,7 +2254,11 @@ exports[`Storyshots Modal Crop Square Image Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1928,7 +2284,11 @@ exports[`Storyshots Modal Ledger Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1954,7 +2314,11 @@ exports[`Storyshots Modal Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -1980,7 +2344,11 @@ exports[`Storyshots Modal Processing Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2006,7 +2374,11 @@ exports[`Storyshots Modal Tx Error Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2032,7 +2404,11 @@ exports[`Storyshots Modal Tx Successful Modal 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2058,7 +2434,11 @@ exports[`Storyshots Party Party Address 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2084,7 +2464,11 @@ exports[`Storyshots Place Project Place Info 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2110,7 +2494,11 @@ exports[`Storyshots ReadMore Read More 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2136,7 +2524,11 @@ exports[`Storyshots Registry/Molecules/Scrollable Codebox Scrollable Codebox 1`]
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2162,7 +2554,11 @@ exports[`Storyshots Registry/Organisms/Credit Class Form Create Credit Class For
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2188,7 +2584,11 @@ exports[`Storyshots Registry/Organisms/Credit Class Form Credit Class Finished 1
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2214,7 +2614,11 @@ exports[`Storyshots Registry/Organisms/Credit Class Form Credit Class Form 1`] =
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2240,7 +2644,11 @@ exports[`Storyshots Registry/Organisms/Credit Class Form Credit Class Review 1`]
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2266,7 +2674,11 @@ exports[`Storyshots Registry/Organisms/MediaForm Media Form 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2292,7 +2704,11 @@ exports[`Storyshots Registry/Organisms/MediaForm Media Form Legacy 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2318,7 +2734,11 @@ exports[`Storyshots Registry/Organisms/Project Metadata Form Project Metadata Fo
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2344,7 +2764,11 @@ exports[`Storyshots Registry/Templates/Multi Step Template Multi Step Template 1
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2370,7 +2794,11 @@ exports[`Storyshots Sliders Project Media 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2396,7 +2824,11 @@ exports[`Storyshots Sliders Project Media With Map 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2422,7 +2854,11 @@ exports[`Storyshots Sliders Protected Species 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2448,7 +2884,11 @@ exports[`Storyshots Table Actions Table 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2474,7 +2914,11 @@ exports[`Storyshots Table Documentation Table 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2500,7 +2944,11 @@ exports[`Storyshots Table Table Pagination 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2526,7 +2974,11 @@ exports[`Storyshots Tabs Icon Tabs 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2552,7 +3004,11 @@ exports[`Storyshots Tabs Mrv Tabs 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2578,7 +3034,11 @@ exports[`Storyshots Text Layouts Labeled Detail 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2604,7 +3064,11 @@ exports[`Storyshots Text Layouts Labeled Number 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2630,7 +3094,11 @@ exports[`Storyshots Text Layouts Title Description 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2656,7 +3124,11 @@ exports[`Storyshots Timeline New Timeline 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2682,7 +3154,11 @@ exports[`Storyshots Timeline Timeline 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2708,7 +3184,11 @@ exports[`Storyshots Timeline Timeline Item 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2734,7 +3214,11 @@ exports[`Storyshots Tooltip Info 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2760,7 +3244,11 @@ exports[`Storyshots Tooltip Main Title 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2786,7 +3274,11 @@ exports[`Storyshots Typography Body 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2812,7 +3304,11 @@ exports[`Storyshots Typography Label 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2838,7 +3334,11 @@ exports[`Storyshots Typography Subtitle 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2864,7 +3364,11 @@ exports[`Storyshots Typography Title 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2890,7 +3394,11 @@ exports[`Storyshots User Big User Avatar 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2916,7 +3424,11 @@ exports[`Storyshots User Column User Info 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2942,7 +3454,11 @@ exports[`Storyshots User Fallback User Avatar 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2968,7 +3484,11 @@ exports[`Storyshots User Medium User Avatar 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -2994,7 +3514,11 @@ exports[`Storyshots User User Avatar With Link 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -3020,7 +3544,11 @@ exports[`Storyshots User User Info 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >
@@ -3046,7 +3574,11 @@ exports[`Storyshots User With Title 1`] = `
 <MemoryRouter
   initialEntries={
     Array [
-      "/",
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
     ]
   }
 >

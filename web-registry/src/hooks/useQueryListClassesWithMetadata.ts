@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
-import { QueryClassesResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
-import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/types';
+import {
+  ClassInfo,
+  QueryClassesResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { CreditClassMetadataLD } from 'generated/json-ld';
-import { getMetadataFromUint8Array } from 'lib/metadata-graph';
 
+import { getMetadata } from '../lib/metadata-graph';
 import useQueryListClasses from './useQueryListClasses';
 
 interface ClassInfoWithMetadata extends ClassInfo {
@@ -27,9 +29,7 @@ export default function useQueryListClassesWithMetadata(): ClassInfoWithMetadata
           async (creditClass: ClassInfoWithMetadata) => {
             if (!creditClass?.metadata?.length) return creditClass;
             try {
-              const metadataJson = await getMetadataFromUint8Array(
-                creditClass.metadata,
-              );
+              const metadataJson = await getMetadata(creditClass.metadata);
               return {
                 ...creditClass,
                 metadataJson,
@@ -37,7 +37,7 @@ export default function useQueryListClassesWithMetadata(): ClassInfoWithMetadata
             } catch (e) {
               // eslint-disable-next-line no-console
               console.error(
-                `Metadata not found for class ${creditClass.classId}:\n`,
+                `Metadata not found for class ${creditClass.id}:\n`,
                 e,
               );
               return creditClass;

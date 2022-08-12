@@ -27,6 +27,7 @@ declare namespace ValidationReport {
   }
 }
 
+// eslint-disable-next-line no-redeclare
 declare class ValidationReport {
   constructor(resultQuads: Quad[], options: ValidationReport.Options);
   term: BlankNode | NamedNode;

@@ -63,15 +63,23 @@ export function getValidationSchemaFields(addressPrefix: string): ReturnType {
                 : false,
             ),
           tradableAmount: Yup.number()
-            .required(invalidAmount)
+            .required(requiredMessage)
             .positive()
             .integer()
-            .min(1, invalidAmount),
+            .min(1, invalidAmount)
+            .when('withRetire', {
+              is: true,
+              then: Yup.number()
+                .required(requiredMessage)
+                .positive()
+                .integer()
+                .min(0, invalidAmount),
+            }),
           withRetire: Yup.boolean().required(),
           retiredAmount: Yup.number().when('withRetire', {
             is: true,
             then: Yup.number()
-              .required()
+              .required(requiredMessage)
               .positive()
               .integer()
               .min(1, invalidAmount),
@@ -89,7 +97,7 @@ export function getValidationSchema(
   return Yup.object().shape(getValidationSchemaFields(addressPrefix));
 }
 
-export const recipientInitialValues = {
+const recipientInitialValues = {
   recipient: '',
   tradableAmount: 0,
   withRetire: false,

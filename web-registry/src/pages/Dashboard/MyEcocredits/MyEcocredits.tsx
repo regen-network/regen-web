@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
-import AvailableCreditsIcon from 'web-components/lib/components/icons/AvailableCreditsIcon';
+import AvailableCreditsIconAlt from 'web-components/lib/components/icons/AvailableCreditsIconAlt';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import {
   BasketPutModal,
@@ -49,7 +50,9 @@ import useCreditRetireSubmit from './hooks/useCreditRetireSubmit';
 import useCreditSendSubmit from './hooks/useCreditSendSubmit';
 import useOpenTakeModal from './hooks/useOpenTakeModal';
 import useUpdateCreditBaskets from './hooks/useUpdateCreditBaskets';
+import { useUpdateTxModalTitle } from './hooks/useUpdateTxModalTitle';
 import {
+  CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_SHORT,
   CREATE_SELL_ORDER_TITLE,
 } from './MyEcocredits.contants';
@@ -80,6 +83,7 @@ export const MyEcocredits = (): JSX.Element => {
   const [txModalHeader, setTxModalHeader] = useState<string | undefined>();
   const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
+  const navigate = useNavigate();
 
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
@@ -92,6 +96,13 @@ export const MyEcocredits = (): JSX.Element => {
     setTxButtonTitle(undefined);
     setDeliverTxResponse(undefined);
     setError(undefined);
+  };
+
+  const onButtonClick = (): void => {
+    handleTxModalClose();
+    if (txButtonTitle === CREATE_SELL_ORDER_BUTTON) {
+      navigate('/storefront');
+    }
   };
 
   const handleError = (): void => {
@@ -127,6 +138,7 @@ export const MyEcocredits = (): JSX.Element => {
     baskets,
   );
 
+  useUpdateTxModalTitle({ setTxModalTitle, deliverTxResponse });
   useUpdateCreditBaskets({ basketsWithClasses, credits, setCreditBaskets });
 
   const openTakeModal = useOpenTakeModal({
@@ -182,9 +194,10 @@ export const MyEcocredits = (): JSX.Element => {
   });
 
   const createSellOrderSubmit = useCreateSellOrderSubmit({
+    accountAddress,
+    signAndBroadcast,
     setCardItems,
     setTxModalHeader,
-    setTxModalTitle,
     setSellOrderCreateOpen,
     setTxButtonTitle,
   });
@@ -202,10 +215,10 @@ export const MyEcocredits = (): JSX.Element => {
         credits={credits}
         basketTokens={basketTokens}
         renderCreditActionButtons={
-          credits.findIndex(c => Number(c.tradable_amount) > 0) > -1
+          credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1
             ? (i: number) => {
                 // No CTA available without tradable credit for given credit batch
-                if (Number(credits[i].tradable_amount) <= 0) {
+                if (Number(credits[i]?.balance?.tradableAmount) <= 0) {
                   return undefined;
                 }
                 const buttons = [
@@ -218,7 +231,7 @@ export const MyEcocredits = (): JSX.Element => {
                   //   onClick: () => console.log(`TODO sell credit ${i}`),
                   // },
                   {
-                    icon: <AvailableCreditsIcon sx={sxs.arrow} />,
+                    icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
                     label: CREATE_SELL_ORDER_SHORT,
                     onClick: () => setSellOrderCreateOpen(i),
                   },
@@ -288,9 +301,9 @@ export const MyEcocredits = (): JSX.Element => {
       {creditSendOpen > -1 && !!accountAddress && (
         <CreditSendModal
           sender={accountAddress}
-          batchDenom={credits[creditSendOpen].batch_denom}
+          batchDenom={credits[creditSendOpen].denom}
           availableTradableAmount={Number(
-            credits[creditSendOpen].tradable_amount,
+            credits[creditSendOpen].balance?.tradableAmount,
           )}
           mapboxToken={mapboxToken}
           open={creditSendOpen > -1}
@@ -309,9 +322,9 @@ export const MyEcocredits = (): JSX.Element => {
               .filter(v => v.label && v.value) as Option[]
           }
           availableTradableAmount={Number(
-            credits[basketPutOpen].tradable_amount,
+            credits[basketPutOpen].balance?.tradableAmount,
           )}
-          batchDenom={credits[basketPutOpen].batch_denom}
+          batchDenom={credits[basketPutOpen].denom}
           open={basketPutOpen > -1}
           onClose={() => setBasketPutOpen(-1)}
           onSubmit={basketPutSubmit}
@@ -319,9 +332,9 @@ export const MyEcocredits = (): JSX.Element => {
       )}
       {creditRetireOpen > -1 && !!accountAddress && (
         <CreditRetireModal
-          batchDenom={credits[creditRetireOpen].batch_denom}
+          batchDenom={credits[creditRetireOpen].denom}
           availableTradableAmount={Number(
-            credits[creditRetireOpen].tradable_amount,
+            credits[creditRetireOpen].balance?.tradableAmount,
           )}
           mapboxToken={mapboxToken}
           open={creditRetireOpen > -1}
@@ -350,8 +363,8 @@ export const MyEcocredits = (): JSX.Element => {
         <CreateSellOrderModal
           batchDenoms={[
             {
-              label: credits[sellOrderCreateOpen].batch_denom,
-              value: credits[sellOrderCreateOpen].batch_denom,
+              label: credits[sellOrderCreateOpen].denom ?? '0',
+              value: credits[sellOrderCreateOpen].denom ?? '0',
             },
             ...getOtherSellOrderBatchDenomOptions({
               credits,
@@ -370,7 +383,7 @@ export const MyEcocredits = (): JSX.Element => {
         open={!deliverTxResponse && isProcessingModalOpen}
         onClose={() => setIsProcessingModalOpen(false)}
       />
-      {!error && txHash && cardItems && txModalTitle && (
+      {!error && txHash && cardItems && (txModalTitle || txModalHeader) && (
         <TxSuccessfulModal
           open={!error && (!!txModalTitle || !!deliverTxResponse)}
           onClose={handleTxModalClose}
@@ -381,19 +394,20 @@ export const MyEcocredits = (): JSX.Element => {
           buttonTitle={txButtonTitle}
           cardItems={cardItems}
           linkComponent={Link}
-          onViewPortfolio={handleTxModalClose}
+          onButtonClick={onButtonClick}
         />
       )}
-      {error && txModalTitle && (
+      {error && (txModalTitle || txModalHeader) && (
         <TxErrorModal
           error={error}
           open={!!error && (!!txModalTitle || !!deliverTxResponse)}
           onClose={handleTxModalClose}
           txHash={txHash || ''}
           txHashUrl={txHashUrl}
-          cardTitle={txModalTitle}
+          cardTitle={txModalTitle ?? ''}
+          buttonTitle={txButtonTitle}
           linkComponent={Link}
-          onViewPortfolio={handleTxModalClose}
+          onButtonClick={onButtonClick}
         />
       )}
     </>

@@ -1,5 +1,6 @@
 fragment moreProjectFields on Project {
   handle
+  onChainId
   metadata
   creditClassByCreditClassId {
     uri

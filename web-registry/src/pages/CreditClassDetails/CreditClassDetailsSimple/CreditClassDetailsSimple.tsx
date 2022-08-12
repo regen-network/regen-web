@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
+import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { startCase } from 'lodash';
 
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
@@ -13,7 +14,7 @@ import {
   ApprovedMethodologies,
   CreditClassMetadataLD,
 } from 'generated/json-ld';
-import { ClassInfo } from 'types/ledger/ecocredit';
+import { getAccountUrl } from 'lib/block-explorer';
 
 import { Link } from 'components/atoms';
 import { AccountLink } from 'components/atoms/AccountLink';
@@ -23,6 +24,7 @@ import { CreditBatches, MoreProjectsSection } from 'components/organisms';
 interface CreditDetailsProps {
   dbClass: CreditClassByOnChainIdQuery['creditClassByOnChainId'];
   onChainClass: ClassInfo;
+  issuers?: string[];
   metadata?: CreditClassMetadataLD;
 }
 
@@ -107,6 +109,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) => ({
 const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   dbClass,
   onChainClass,
+  issuers,
   metadata,
 }) => {
   const styles = useStyles();
@@ -114,6 +117,16 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
   const sectoralScopes = metadata?.['regen:sectoralScope'];
   const verificationMethod = metadata?.['regen:verificationMethod'];
   const sourceRegistry = metadata?.['regen:sourceRegistry'];
+
+  const getCreditType = (creditTypeAbbrev: string): string => {
+    // TODO: add credit types as they come online, or fetch from ledger somehow
+    return (
+      {
+        // eslint-disable-next-line prettier/prettier
+        C: 'Carbon',
+      }[creditTypeAbbrev] || creditTypeAbbrev
+    );
+  };
 
   const Projects: React.FC = () => {
     const projects = dbClass?.projectsByCreditClassId?.nodes;
@@ -195,7 +208,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 credit class
               </Label>
               <Title variant="h1">
-                {metadata?.['schema:name']} ({onChainClass.class_id})
+                {metadata?.['schema:name']} ({onChainClass.id})
               </Title>
             </Box>
             {metadata?.['schema:description'] && (
@@ -214,7 +227,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 label="credit type"
                 data={
                   <Body size="xl" sx={{ mr: 1 }}>
-                    {startCase(onChainClass.credit_type.name)}
+                    {getCreditType(onChainClass.creditTypeAbbrev)}
                   </Body>
                 }
               />
@@ -295,7 +308,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                 </Label>
                 <AccountLink
                   className={styles.link}
-                  address={onChainClass.admin || onChainClass.designer || ''}
+                  address={onChainClass.admin}
                 />
               </div>
               <div className={styles.sidebarItemMargin}>
@@ -303,11 +316,12 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
                   issuers
                 </Label>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  {onChainClass?.issuers?.map((issuer: string) => (
+                  {issuers?.map((issuer: string) => (
                     <AccountLink
                       key={issuer}
-                      className={styles.link}
                       address={issuer}
+                      className={styles.link}
+                      href={getAccountUrl(issuer)}
                     />
                   ))}
                 </Box>
@@ -318,10 +332,7 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
       </EcocreditsSection>
       <Projects />
       <div className="topo-background-alternate">
-        <CreditBatches
-          creditClassId={onChainClass.class_id}
-          titleAlign="left"
-        />
+        <CreditBatches creditClassId={onChainClass.id} titleAlign="left" />
       </div>
     </Box>
   );

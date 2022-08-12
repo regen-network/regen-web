@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { cloneDeep, merge } from 'lodash';
 
 import { ProjectMetadataValues } from '../../../components/organisms';
@@ -22,6 +23,7 @@ export const useProjectMetadataSubmit = ({
   projectId,
   updateProject,
 }: Props): useProjectMetadataSubmitReturnedType => {
+  const navigate = useNavigate();
   const projectMetadataSubmit = useCallback(
     async function submit(values: ProjectMetadataValues): Promise<void> {
       const parsedMetaData = JSON.parse(values.metadata);
@@ -39,12 +41,13 @@ export const useProjectMetadataSubmit = ({
             },
           },
         });
+        navigate(`/project-pages/${projectId}/review`);
       } catch (e) {
         // TODO: Should we display the error banner here?
         // https://github.com/regen-network/regen-registry/issues/554
       }
     },
-    [project, projectId, updateProject],
+    [navigate, project?.metadata, projectId, updateProject],
   );
 
   return projectMetadataSubmit;

@@ -32,6 +32,7 @@ export const countries: { [key: string]: string } = {
   BY: 'Belarus',
   BZ: 'Belize',
   CA: 'Canada',
+  CD: 'Democratic Republic of the Congo',
   CF: 'Central African Republic',
   CG: 'Congo',
   CH: 'Switzerland',

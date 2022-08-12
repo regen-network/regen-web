@@ -5,6 +5,7 @@ query walletByAddr($addr: String!) {
     projectsByWalletId {
       nodes {
         id
+        onChainId
         handle
         metadata
       }

@@ -70,7 +70,7 @@ export interface MetaRetireFormValues {
   country: string;
   stateProvince?: string;
   postalCode?: string;
-  retirementLocation?: string;
+  retirementJurisdiction?: string;
 }
 
 export interface RetireFormValues extends MetaRetireFormValues {
@@ -121,9 +121,9 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
     const { country, stateProvince, postalCode } = item;
 
     useEffect(() => {
-      const retirementLocationName = `${arrayPrefix}retirementLocation`;
+      const retirementJurisdictionName = `${arrayPrefix}retirementJurisdiction`;
 
-      const setRetirementLocation = async ({
+      const setRetirementJurisdiction = async ({
         country,
         stateProvince,
         postalCode,
@@ -135,7 +135,7 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
             postalCode,
           });
 
-          setFieldValue(retirementLocationName, isoString || country);
+          setFieldValue(retirementJurisdictionName, isoString || country);
           if (geocodingError) setGeocodingError(null);
         } catch (err) {
           // initially this effect may fail mainly because the accessToken
@@ -147,10 +147,10 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
       };
 
       if (stateProvince || country || postalCode) {
-        setRetirementLocation({ country, stateProvince, postalCode });
+        setRetirementJurisdiction({ country, stateProvince, postalCode });
       }
       if (!country) {
-        setFieldValue(retirementLocationName, null);
+        setFieldValue(retirementJurisdictionName, null);
       }
     }, [
       country,

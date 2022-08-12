@@ -3,12 +3,14 @@ import { useTheme } from '@mui/styles';
 
 import Banner, { BannerBaseProps } from './';
 
+export const DEFAULT_DURATION = 5000;
+
 export default function ErrorBanner({
   text,
-  duration = 5000,
+  duration = DEFAULT_DURATION,
 }: BannerBaseProps): JSX.Element {
   const theme = useTheme();
   return (
-    <Banner text={text} duration={duration} color={theme.palette.error.light} />
+    <Banner text={text} duration={duration} color={theme.palette.error.dark} />
   );
 }

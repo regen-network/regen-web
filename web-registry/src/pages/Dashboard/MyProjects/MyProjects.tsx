@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
@@ -14,7 +14,15 @@ import {
 import { getProjectPageBaseData } from 'lib/rdf';
 import { useWallet } from 'lib/wallet';
 
-const MyProjects = (): JSX.Element => {
+interface MyProjectsProps {
+  isIssuer: boolean;
+  isProjectAdmin: boolean;
+}
+
+const MyProjects = ({
+  isIssuer,
+  isProjectAdmin,
+}: MyProjectsProps): JSX.Element => {
   const [error, setError] = useState<string | null>(null);
   const { wallet } = useWallet();
   const navigate = useNavigate();
@@ -80,24 +88,27 @@ const MyProjects = (): JSX.Element => {
   return (
     <>
       <Grid container spacing={8}>
-        <Grid item xs={12} md={6} lg={4}>
-          <CreateProjectCard
-            isFirstProject={isFirstProject}
-            onClick={submitCreateProject}
-          />
-        </Grid>
-        {/* TODO: ProjectCards used below temporarily. Will probably be a new variation for this purpose */}
-        {projects?.map((project, i) => (
-          <Grid key={i} item xs={12} md={6} lg={4}>
-            <ProjectCard
-              name={project?.handle || project?.id}
-              imgSrc={''}
-              place="TODO"
-              area={0}
-              areaUnit="ha"
+        {isIssuer && (
+          <Grid item xs={12} md={6} lg={4}>
+            <CreateProjectCard
+              isFirstProject={isFirstProject}
+              onClick={submitCreateProject}
             />
           </Grid>
-        ))}
+        )}
+        {/* TODO: ProjectCards used below temporarily. Will probably be a new variation for this purpose */}
+        {isProjectAdmin &&
+          projects?.map((project, i) => (
+            <Grid key={i} item xs={12} md={6} lg={4}>
+              <ProjectCard
+                name={project?.handle || project?.id}
+                imgSrc={''}
+                place="TODO"
+                area={0}
+                areaUnit="ha"
+              />
+            </Grid>
+          ))}
       </Grid>
       {error && <ErrorBanner text={error} />}
     </>

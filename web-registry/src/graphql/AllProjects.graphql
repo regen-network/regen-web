@@ -2,9 +2,11 @@ query AllProjects {
   allProjects {
     nodes {
       id
+      handle
       metadata
       creditClassByCreditClassId {
         id
+        onChainId
         methodologyByMethodologyId {
           id
           methodologyVersionsById {
@@ -22,6 +24,7 @@ query AllProjects {
             createdAt
             name
             version
+            metadata
           }
         }
       }

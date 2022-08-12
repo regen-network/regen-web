@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
@@ -10,7 +10,7 @@ import NotFound from 'web-components/lib/components/not-found';
 import { useMultiStep } from 'components/templates/MultiStepTemplate';
 
 import formModel from '../form-model';
-import useCreateBatch from '../useCreateBatch';
+import useCreateBatchSubmit from '../hooks/useCreateBatchSubmit';
 import CreditBasics, { CreditBasicsFormValues } from './CreditBasics';
 import Recipients, { RecipientsFormValues } from './Recipients';
 import Result from './Result';
@@ -55,17 +55,15 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     error: submitError,
     createBatch,
     closeSubmitModal,
-  } = useCreateBatch();
+  } = useCreateBatchSubmit();
 
   const currentValidationSchema = isReviewStep
     ? Yup.object(formModel.validationSchemaFields) // all fields
     : formModel.validationSchema[activeStep];
 
-  const [creditClassSelected, setCreditClassSelected] =
-    React.useState<Option>();
-  const [projectSelected, setProjectSelected] = React.useState<Option>();
+  const [projectOptionSelected, setProjectOptionSelected] = useState<Option>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (submitStatus === 'success') handleSuccess();
     if (submitStatus === 'error') handleError();
   }, [submitStatus, handleSuccess, handleError]);
@@ -78,10 +76,9 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
       createBatch(values);
     } else {
       let dataDisplay;
-      if (creditClassSelected && projectSelected) {
+      if (projectOptionSelected) {
         dataDisplay = {
-          creditClass: creditClassSelected,
-          project: projectSelected,
+          project: projectOptionSelected,
         };
       }
       handleSaveNext(values, dataDisplay);
@@ -94,10 +91,7 @@ export default function CreateBatchMultiStepForm(): React.ReactElement {
     switch (activeStep) {
       case 0:
         return (
-          <CreditBasics
-            saveCreditClassSelected={setCreditClassSelected}
-            saveProjectSelected={setProjectSelected}
-          />
+          <CreditBasics saveProjectOptionSelected={setProjectOptionSelected} />
         );
       case 1:
         return <Recipients />;

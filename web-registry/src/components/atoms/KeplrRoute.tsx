@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@mui/material';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 
@@ -17,12 +18,12 @@ const KeplrRoute = ({ component: Component }: Props): JSX.Element => {
   const displayErrorBanner = !connected && loaded;
 
   return (
-    <>
+    <Box sx={{ minHeight: 600 }}>
       {connected && <Component />}
       {displayErrorBanner && (
         <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
       )}
-    </>
+    </Box>
   );
 };
 

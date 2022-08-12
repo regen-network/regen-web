@@ -1,5 +1,5 @@
 import React from 'react';
-import { Theme } from '@mui/material';
+import { Theme, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { TextFieldProps } from 'formik-mui';
 
@@ -32,21 +32,26 @@ interface StyleProps {
 
 export default function SelectTextField({
   options,
+  disabled,
   ...props
 }: SelectTextFieldProps): JSX.Element {
   const {
     field: { value },
   } = props;
   const styles = useStyles({ default: !value });
+  const theme = useTheme();
 
   return (
     <TextField
       {...props}
+      disabled={disabled}
       className={styles.root}
       select
       SelectProps={{
         native: true,
-        IconComponent: DropdownIcon,
+        IconComponent: disabled
+          ? () => <DropdownIcon color={theme.palette.grey['400']} />
+          : DropdownIcon,
       }}
     >
       {options ? (

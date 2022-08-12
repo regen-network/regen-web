@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { Body, Label, Subtitle, Title } from '../../components/typography';
 
 export default {

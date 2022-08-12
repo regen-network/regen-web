@@ -9,9 +9,11 @@ import {
   creditClassBaseValues,
 } from 'components/organisms/CreditClassForms';
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
+import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
 
 export const CreateCreditClass = (): JSX.Element => {
   const { wallet } = useWallet();
+  const isCreditClassCreator = useQueryIfCreditClassCreator();
   const formValues: CreditClassValues = {
     ...creditClassBaseValues,
     admin: wallet?.address || '',
@@ -21,6 +23,10 @@ export const CreateCreditClass = (): JSX.Element => {
   function handleSubmit(values: CreditClassValues): void {
     // eslint-disable-next-line
     console.log('handleSubmit', values);
+  }
+
+  if (!isCreditClassCreator) {
+    return <></>;
   }
 
   return (

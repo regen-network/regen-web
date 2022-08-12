@@ -1,18 +1,11 @@
-import React from 'react';
-import { Box, Link } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import React, { useEffect } from 'react';
+import { Link } from '@mui/material';
 import { useFormikContext } from 'formik';
 
-import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
-import OnBoardingCard from 'web-components/lib/components/cards/OnBoardingCard';
-import EditIcon from 'web-components/lib/components/icons/EditIcon';
+import { ReviewCard } from 'web-components/lib/components/cards/ReviewCard/ReviewCard';
+import { ItemDisplay } from 'web-components/lib/components/cards/ReviewCard/ReviewCard.ItemDisplay';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
-import {
-  Body,
-  Label,
-  Subtitle,
-} from 'web-components/lib/components/typography';
-import { Theme } from 'web-components/lib/theme/muiTheme';
+import { Body, Subtitle } from 'web-components/lib/components/typography';
 import { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 import {
   formatDate,
@@ -27,28 +20,16 @@ import { RecipientFormValues } from './Recipients';
 
 // TODO: Only covers case C01
 
-const useStyles = makeStyles((theme: Theme) => ({
-  infoCard: {
-    marginBottom: theme.spacing(0),
-  },
-  recipientsCard: {
-    marginTop: theme.spacing(5),
-    marginBottom: theme.spacing(0),
-  },
-}));
-
 export default function Review(): JSX.Element {
   const { values, validateForm, isValid } =
     useFormikContext<CreateBatchFormValues>();
   const { dataDisplay, handleResetReview } = useMultiStep();
 
-  // validate form on mount
-  React.useEffect(() => {
+  useEffect(() => {
     validateForm();
   }, [validateForm]);
 
-  // check isValid change to reset in case is not valid
-  React.useEffect(() => {
+  useEffect(() => {
     if (!isValid) handleResetReview();
   }, [handleResetReview, isValid]);
 
@@ -81,39 +62,24 @@ function CreditBatchInfo({
   data,
   dataDisplay,
 }: CreditBatchInfoProps): JSX.Element {
-  const styles = useStyles();
   const { handleActiveStep } = useMultiStep();
   const metadata = data.metadata as VCSBatchMetadataLD;
 
   return (
-    <OnBoardingCard className={styles.infoCard}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Label size="sm">Credit batch info</Label>
-        <EditButton onClick={() => handleActiveStep(0)} />
-      </Box>
-      <ItemDisplay
-        name={'Credit Class'}
-        value={dataDisplay?.creditClass?.label || data.classId}
-      />
-      <ItemDisplay
-        name={'Project'}
-        value={dataDisplay?.project?.label || metadata['regen:vcsProjectId']}
-      />
-      <ItemDisplay
-        name={'Start and end date'}
-        value={`${formatDate(data.startDate)} - ${formatDate(data.endDate)}`}
-      />
-      <ItemDisplay
-        name={'VCS retirement serial number'}
-        value={metadata['regen:vcsRetirementSerialNumber']}
-      />
+    <ReviewCard
+      title="Credit Batch Info"
+      onEditClick={() => handleActiveStep(0)}
+      sx={{ mt: [8, 10] }}
+    >
+      <ItemDisplay name={'Project'}>
+        {dataDisplay?.project?.label || data.projectId}
+      </ItemDisplay>
+      <ItemDisplay name={'Start and end date'}>
+        {`${formatDate(data.startDate)} - ${formatDate(data.endDate)}`}
+      </ItemDisplay>
+      <ItemDisplay name={'VCS retirement serial number'}>
+        {metadata['regen:vcsRetirementSerialNumber']}
+      </ItemDisplay>
       {metadata['regen:additionalCertifications']?.map((cert, index) => (
         <AdditionalCertificationDisplay
           key={`additional-certification-${index}`}
@@ -126,7 +92,7 @@ function CreditBatchInfo({
           }
         />
       ))}
-    </OnBoardingCard>
+    </ReviewCard>
   );
 }
 
@@ -136,60 +102,32 @@ type RecipientInfoProps = {
 };
 
 function RecipientInfo({ data, index }: RecipientInfoProps): JSX.Element {
-  const styles = useStyles();
   const { handleActiveStep } = useMultiStep();
   return (
-    <OnBoardingCard className={styles.recipientsCard}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <Label size="sm">Recipient {index}</Label>
-        <EditButton onClick={() => handleActiveStep(1)} />
-      </Box>
-      <ItemDisplay name={'Recipient address'} value={data.recipient} />
-      <ItemDisplay
-        name={'Amount tradable'}
-        value={getFormattedNumber(data.tradableAmount)}
-      />
+    <ReviewCard
+      title={`Recipient ${index}`}
+      onEditClick={() => handleActiveStep(1)}
+    >
+      <ItemDisplay name={'Recipient address'}>{data.recipient}</ItemDisplay>
+      <ItemDisplay name={'Amount tradable'}>
+        {getFormattedNumber(data.tradableAmount)}
+      </ItemDisplay>
       {data.withRetire && (
         <>
-          <ItemDisplay
-            name={'Amount retired'}
-            value={getFormattedNumber(data.retiredAmount)}
-          />
+          <ItemDisplay name={'Amount retired'}>
+            {getFormattedNumber(data.retiredAmount)}
+          </ItemDisplay>
           {data.note && (
-            <ItemDisplay name={'Retirement note'} value={data.note} />
+            <ItemDisplay name={'Retirement note'}>{data.note}</ItemDisplay>
           )}
-          {data.retirementLocation && (
-            <ItemDisplay
-              name={'Retirement location'}
-              value={data.retirementLocation}
-            />
+          {data.retirementJurisdiction && (
+            <ItemDisplay name={'Retirement location'}>
+              {data.retirementJurisdiction}
+            </ItemDisplay>
           )}
         </>
       )}
-    </OnBoardingCard>
-  );
-}
-
-type ItemDisplayProps = {
-  name: string;
-  value: string | number;
-};
-
-function ItemDisplay({ name, value }: ItemDisplayProps): JSX.Element {
-  return (
-    <>
-      <Subtitle size="lg" sx={{ mt: 9, mb: 2 }}>
-        {name}
-      </Subtitle>
-      <Body size="lg">{value}</Body>
-    </>
+    </ReviewCard>
   );
 }
 
@@ -226,28 +164,5 @@ function AdditionalCertificationDisplay({
         </>
       )}
     </>
-  );
-}
-
-interface ButtonProps {
-  onClick: () => void;
-}
-
-function EditButton({ onClick }: ButtonProps): JSX.Element {
-  return (
-    <OutlinedButton
-      size="small"
-      sx={{
-        border: 'none !important',
-        maxWidth: '100px',
-        alignSelf: 'flex-end',
-      }}
-      onClick={onClick}
-      startIcon={<EditIcon sx={{ height: 13, width: 13 }} />}
-    >
-      <Label size="sm" sx={{ color: 'info.dark' }}>
-        Edit
-      </Label>
-    </OutlinedButton>
   );
 }

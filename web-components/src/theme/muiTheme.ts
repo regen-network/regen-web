@@ -32,15 +32,24 @@ const regenTheme = createTheme({
     },
     secondary: {
       main: '#4FB573',
-      light: '#DCF0E3',
       dark: '#7BC796',
       contrastText: '#B9E1C7',
+      light: '#DCF0E3',
+    },
+    warning: {
+      main: '#FFC432',
+      dark: '#FFD365',
+      contrastText: '#FFE7AD',
+      light: '#FFF3D6',
     },
     info: {
       dark: '#545555',
       main: '#8f8f8f',
       light: '#EFEFEF',
       contrastText: '#b0ddc0',
+    },
+    orange: {
+      contrastText: '#FBDBB6',
     },
     grey: {
       50: '#FAFAFA',
@@ -53,7 +62,9 @@ const regenTheme = createTheme({
     },
     error: {
       main: '#DE4526',
-      light: '#E6735C',
+      dark: '#E6735C',
+      contrastText: '#F2B5A8',
+      light: '#F8DAD4',
     },
   },
   spacing: (factor: number) => `${0.25 * factor}rem`,

@@ -57,6 +57,7 @@ export default function NumberTextField({
         {...props}
         type="number"
         inputProps={{ step: increment, lang: 'en' }}
+        customInputProps={{ min, max }}
       />
       {arrows && (
         <Grid container className={classes.arrows}>

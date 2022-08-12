@@ -11,7 +11,6 @@ const TxErrorModal: React.FC<Props> = props => {
   return (
     <TxModal
       icon={<BrokenLinkIcon sx={{ pb: 4.5 }} />}
-      title="Sorry, your transaction was not successful."
       cardItems={[
         {
           label: 'error',
@@ -21,6 +20,7 @@ const TxErrorModal: React.FC<Props> = props => {
           color: 'error.main',
         },
       ]}
+      title="Sorry, your transaction was not successful."
       {...props}
     />
   );

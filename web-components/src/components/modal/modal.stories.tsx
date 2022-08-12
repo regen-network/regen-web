@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Avatar, Button, Card, CardMedia, Link } from '@mui/material';
-import Long from 'long';
 
 import Modal from '.';
 import { BasketPutModal } from './BasketPutModal';
 import { BasketTakeModal } from './BasketTakeModal';
+import { ConfirmModal } from './ConfirmModal';
 import { CreateSellOrderModal } from './CreateSellOrderModal';
 import { CreditRetireModal } from './CreditRetireModal';
 import { CreditSendModal } from './CreditSendModal';
@@ -200,12 +200,31 @@ export const cropRoundImageModal = (): JSX.Element => (
 export const processingModal = (): JSX.Element => (
   <ProcessingModal open={true} onClose={() => {}} />
 );
+export const confirmModal = (): JSX.Element => (
+  <ConfirmModal
+    open={true}
+    onClose={() => {}}
+    linkComponent={Link}
+    onConfirm={() => alert('confirmed!')}
+    onConfirmTitle="Yes, cancel sell order"
+    onCancelTitle="WHOOPS, EXIT"
+    title="Are you sure would you like to cancel this sell order?"
+    cardItems={[
+      { label: 'sell order id:', value: { name: '233' } },
+      { label: 'quantity:', value: { name: 1000 } },
+      {
+        label: 'batch denom:',
+        value: { name: 'C01-20190101-20201010-003', url: '/' },
+      },
+    ]}
+  />
+);
 export const txSuccessfulModal = (): JSX.Element => (
   <TxSuccessfulModal
     open={true}
     onClose={() => {}}
     linkComponent={Link}
-    onViewPortfolio={() => alert('view on portofolio')}
+    onButtonClick={() => alert('view on portofolio')}
     cardTitle="Put in basket"
     txHash="3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
     txHashUrl="https://redwood.regen.aneka.io/txs/3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
@@ -220,7 +239,7 @@ export const txErrorModal = (): JSX.Element => (
     open={true}
     onClose={() => {}}
     linkComponent={Link}
-    onViewPortfolio={() => alert('view on portofolio')}
+    onButtonClick={() => alert('view on portofolio')}
     cardTitle="Put in basket"
     txHash="3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
     txHashUrl="https://redwood.regen.aneka.io/txs/3F7EFAA3BBD0F4109094FEDA0D06B7E2C4C57A4720D591A1FACD42FC7E2C2583"
@@ -268,8 +287,8 @@ export const basketTakeModal = (): JSX.Element => (
     accountAddress="123xyz"
     basketDisplayDenom="eco.C.rNCT"
     basket={{
-      id: new Long(1),
-      $type: 'regen.ecocredit.basket.v1.Basket',
+      curator: 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4',
+      $type: 'regen.ecocredit.basket.v1.BasketInfo',
       name: 'rNCT',
       basketDenom: 'eco.uC.rNCT',
       creditTypeAbbrev: 'C',

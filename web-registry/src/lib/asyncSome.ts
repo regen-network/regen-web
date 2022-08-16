@@ -5,9 +5,9 @@
  * This is useful when you want to avoid making extra
  * unnecessary async requests.
  */
-export const asyncSome = async (
-  arr: any[],
-  predicate: (arg: any) => {},
+export const asyncSome = async <T>(
+  arr: T[],
+  predicate: (arg: T) => {},
 ): Promise<boolean> => {
   for (let e of arr) {
     if (await predicate(e)) return true;

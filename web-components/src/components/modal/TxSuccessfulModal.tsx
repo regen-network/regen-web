@@ -6,8 +6,8 @@ const TxSuccessfulModal: React.FC<TxModalProps & { title?: string }> =
   props => {
     return (
       <TxModal
-        title={props?.title ?? 'Congrats! Your transaction was successful.'}
         {...props}
+        title={props?.title ?? 'Congrats! Your transaction was successful.'}
       />
     );
   };

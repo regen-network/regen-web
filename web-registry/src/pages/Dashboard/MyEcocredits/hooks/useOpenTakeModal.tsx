@@ -20,13 +20,14 @@ const useOpenTakeModal = ({
 }: Props): ReturnType => {
   const openTakeModal = useCallback(
     (rowIndex: number): void => {
-      const selectedBasketDenom =
-        basketsWithClasses?.[rowIndex]?.basket?.basketDenom;
-      if (selectedBasketDenom) {
-        const selectedBasketTokens = basketTokens.find(
-          bt => bt.basket.basketDenom === selectedBasketDenom,
-        );
-        setBasketTakeTokens(selectedBasketTokens);
+      const selectedBasketDenom = basketTokens?.[rowIndex]?.basket?.basketDenom;
+
+      const selectedBasketTokenWithClass = basketsWithClasses.find(
+        bt => bt?.basket?.basketDenom === selectedBasketDenom,
+      );
+
+      if (selectedBasketTokenWithClass) {
+        setBasketTakeTokens(basketTokens?.[rowIndex]);
       }
     },
     [basketTokens, basketsWithClasses, setBasketTakeTokens],

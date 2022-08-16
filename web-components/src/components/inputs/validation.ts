@@ -46,7 +46,10 @@ export function validateAmount(
   availableTradableAmount: number,
   amount?: number,
   customInsufficientCredits?: string,
+  zeroAllowed?: boolean,
 ): string | undefined {
+  if (zeroAllowed && (amount === 0 || (amount && Math.sign(amount) === 0)))
+    return;
   if (!amount) {
     return requiredMessage;
   } else if (Math.sign(amount) !== 1) {

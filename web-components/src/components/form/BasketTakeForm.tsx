@@ -1,7 +1,7 @@
 import React from 'react';
 import { Collapse } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { Basket } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/types';
+import { BasketInfo } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
 import { Field, Form, Formik, FormikErrors } from 'formik';
 
 import type { Theme } from '../../theme/muiTheme';
@@ -29,7 +29,7 @@ import Submit from './Submit';
  *    amount: must not be empty
  *    basket_denom: must be a valid batch denomination
  *  if retire_on_take is true:
- *    retirement_location: must be a valid location
+ *    retirement_jurisdiction: must be a valid location
  */
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -44,7 +44,7 @@ export interface MsgTakeValues {
   basketDenom: string;
   amount: string;
   retireOnTake: boolean;
-  retirementLocation?: string;
+  retirementJurisdiction?: string;
   retirementNote?: string;
 }
 
@@ -54,7 +54,7 @@ interface CreditTakeFormValues extends MetaRetireFormValues {
 }
 
 export interface BasketTakeProps extends BottomCreditRetireFieldsProps {
-  basket: Basket;
+  basket: BasketInfo;
   basketDisplayDenom: string;
   accountAddress: string;
   balance: number;
@@ -83,7 +83,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
     note: '',
     country: 'US',
     stateProvince: '',
-    retirementLocation: undefined,
+    retirementJurisdiction: undefined,
   };
 
   const validateHandler = (
@@ -118,7 +118,7 @@ const BasketTakeForm: React.FC<FormProps> = ({
       basketDenom: basket.basketDenom,
       amount: (values.amount * Math.pow(10, basket.exponent)).toString(),
       retireOnTake: !!values.retireOnTake,
-      retirementLocation: values.retirementLocation,
+      retirementJurisdiction: values.retirementJurisdiction,
       retirementNote: values?.note,
     };
 

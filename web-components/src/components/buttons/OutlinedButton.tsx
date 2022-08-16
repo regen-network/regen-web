@@ -14,6 +14,7 @@ const OutlinedButton = styled(Button)(({ theme }) => ({
   '&:disabled': {
     color: theme.palette.grey[100],
     background: theme.palette.grey[50],
+    borderImageSource: 'none',
     borderColor: theme.palette.grey[100],
   },
 }));

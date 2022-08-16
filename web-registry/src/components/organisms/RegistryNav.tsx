@@ -15,9 +15,10 @@ import { NavLink } from 'web-components/lib/components/header/NavLink';
 import { UserMenuItem } from 'web-components/lib/components/header/UserMenuItem';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { useMoreProjectsQuery } from 'generated/graphql';
+
 import DefaultAvatar from '../../assets/avatar.png';
 import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
-import { useMoreProjectsQuery } from '../../generated/graphql';
 import { chainId, nctBasket } from '../../lib/ledger';
 import { useWallet } from '../../lib/wallet';
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
@@ -30,8 +31,10 @@ const RegistryNav: React.FC = () => {
   const desktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-  const fullWidthRegExp = /projects\/[a-z-]+/;
+  const fullWidthRegExp: RegExp = /projects\/[a-z-]+/;
   const { data: projectsData } = useMoreProjectsQuery();
+  // TODO: this feature flag can be deleted when marketplace is launched in PROD
+  const isMAINNET = chainId === 'regen-1';
 
   //  each custom dropdown still needs to be passed `dropdownItems` to render
   //  correctly on mobile, so I declare here to avoid duplicate code
@@ -91,7 +94,7 @@ const RegistryNav: React.FC = () => {
     'The Mai Ndombe REDD+ Project': 'Mai Ndombe',
   };
 
-  const menuItems: HeaderMenuItem[] = [
+  const legacyMenuItems: HeaderMenuItem[] = [
     {
       title: 'Projects',
       dropdownItems: projectsData?.allProjects?.nodes?.map(p => ({
@@ -103,6 +106,10 @@ const RegistryNav: React.FC = () => {
         href: `/projects/${p?.handle}`,
         linkComponent: RegistryNavLink,
       })),
+    },
+    {
+      title: 'Activity',
+      href: '/stats/activity',
     },
     {
       title: 'Program',
@@ -128,18 +135,28 @@ const RegistryNav: React.FC = () => {
     },
   ];
 
-  if (chainId) {
-    let start = 1;
-    if (nctBasket) {
-      menuItems.unshift({
-        title: 'NCT',
-        href: '/baskets/eco.uC.NCT',
-      });
-      start = 2;
-    }
-    menuItems.splice(start, 0, {
+  const v4MenuItems: HeaderMenuItem[] = [
+    {
+      title: 'Projects',
+      href: '/projects',
+    },
+    {
+      title: 'Trade',
+      href: '/storefront',
+    },
+    {
       title: 'Activity',
       href: '/stats/activity',
+    },
+  ];
+
+  // TODO: only v4MenuItems when marketplace is launched in PROD
+  const menuItems: HeaderMenuItem[] = isMAINNET ? legacyMenuItems : v4MenuItems;
+
+  if (nctBasket) {
+    menuItems.unshift({
+      title: 'NCT',
+      href: '/baskets/eco.uC.NCT',
     });
   }
 

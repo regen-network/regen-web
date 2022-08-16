@@ -1,47 +1,31 @@
-import React from 'react';
+import { useState } from 'react';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import {
-  MsgCreateBatch,
-  MsgCreateBatch_BatchIssuance,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
+import { MsgCreateBatch } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/v1/types';
 
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
 import { useLedger } from 'ledger';
-import {
-  generateIri,
-  IriFromMetadataSuccess,
-  stringToUint8Array,
-} from 'lib/metadata-graph';
+import { generateIri, IriFromMetadataSuccess } from 'lib/metadata-graph';
 
 import { useMsgClient } from 'hooks';
 
-import { CreateBatchFormValues } from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
-
-// TODO - Deprecated
-// `projectLocation` won't be needed anymore starting from v4.0
-// https://github.com/regen-network/regen-registry/issues/968
-// right now `projectLocation` is hardcoded to 'US' in MsgCreateBatch.fromPartial
-// This case has not been implemented because the data source changes with the update to
-// ecocredits v1, where the information is already part of the project entity in the ledger.
+import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 
 // TODO
 // Right now, just case "C01" (aka. VCS)
 
 function prepareMetadata(
+  projectId: string,
   partialMetadata: Partial<VCSBatchMetadataLD>,
 ): VCSBatchMetadataLD | undefined {
-  const projectIdRaw = partialMetadata['regen:vcsProjectId'];
   const retirementSerialNumber =
     partialMetadata['regen:vcsRetirementSerialNumber'];
 
   const additionalCertifications =
     partialMetadata['regen:additionalCertifications'];
 
-  if (!projectIdRaw || !retirementSerialNumber) return;
-
-  const projectId =
-    typeof projectIdRaw === 'number' ? projectIdRaw : parseInt(projectIdRaw);
+  if (!projectId || !retirementSerialNumber) return;
 
   const metadata: VCSBatchMetadataLD = {
     '@context': {
@@ -64,6 +48,7 @@ async function prepareMsg(
 ): Promise<Partial<MsgCreateBatch> | undefined> {
   // First, complete the metadata
   const metadata: VCSBatchMetadataLD | undefined = prepareMetadata(
+    data.projectId,
     data.metadata as Partial<VCSBatchMetadataLD>,
   );
   if (!metadata) return;
@@ -78,32 +63,28 @@ async function prepareMsg(
     throw new Error(err as string);
   }
 
-  // finally, build de Msg DTO
-  const issuance: MsgCreateBatch_BatchIssuance[] = data.recipients.map(
-    recipient => {
-      const issuanceRecipient: Partial<MsgCreateBatch_BatchIssuance> = {
-        recipient: recipient.recipient,
-        tradableAmount: recipient.tradableAmount.toString(),
-        retiredAmount: '0',
-      };
-      if (recipient.withRetire && recipient.retiredAmount > 0) {
-        issuanceRecipient.retiredAmount = recipient.retiredAmount.toString();
-        issuanceRecipient.retirementLocation = recipient.retirementLocation;
-      }
-      return issuanceRecipient as MsgCreateBatch_BatchIssuance;
-    },
-  );
+  // finally, build de Msg for Tx
+  const issuance: BatchIssuance[] = data.recipients.map(recipient => {
+    let issuanceRecipient: Partial<BatchIssuance> = {
+      recipient: recipient.recipient,
+      tradableAmount: recipient.tradableAmount.toString(),
+      retiredAmount: '0',
+    };
+    if (recipient.withRetire && recipient.retiredAmount > 0) {
+      issuanceRecipient.retiredAmount = recipient.retiredAmount.toString();
+      issuanceRecipient.retirementJurisdiction =
+        recipient.retirementJurisdiction;
+    }
+    return issuanceRecipient as BatchIssuance;
+  });
 
   return MsgCreateBatch.fromPartial({
     issuer,
-    classId: data.classId,
+    projectId: data.projectId,
     issuance: issuance,
-    metadata: stringToUint8Array(iriResponse.iri),
+    metadata: iriResponse.iri,
     startDate: new Date(data.startDate as Date),
     endDate: new Date(data.endDate as Date),
-    // TODO - Deprecated - Hardcoded projectLocation (see comment above)
-    // projectLocation won't be needed anymore starting from v4.0
-    projectLocation: 'US',
   });
 }
 
@@ -126,15 +107,14 @@ type ReturnType = {
   closeSubmitModal: () => void;
 };
 
-export default function useCreateBatch(): ReturnType {
+export default function useCreateBatchSubmit(): ReturnType {
   const { api } = useLedger();
   const { wallet, signAndBroadcast, deliverTxResponse, error, setError } =
     useMsgClient(handleTxQueued, handleTxDelivered, handleError);
   const accountAddress = wallet?.address;
 
-  const [status, setStatus] = React.useState<SubmissionStatus>('idle');
-  const [isSubmitModalOpen, setIsSubmitModalOpen] =
-    React.useState<boolean>(false);
+  const [status, setStatus] = useState<SubmissionStatus>('idle');
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState<boolean>(false);
 
   function handleTxQueued(): void {
     setStatus('broadcast');

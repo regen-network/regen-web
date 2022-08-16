@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   QueryClassesResponse,
   QueryClientImpl,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { useLedger } from '../ledger';
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { MultiStepTemplate } from 'components/templates/MultiStepTemplate';
 
-import CreateBatchMultiStepForm from './CreateBatchMultiStepForm';
+import CreateBatchMultiStepForm from './CreateBatchMultiStepForm/CreateBatchMultiStepForm';
 import formModel from './form-model';
 
 /**

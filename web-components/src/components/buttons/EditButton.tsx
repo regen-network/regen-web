@@ -1,11 +1,8 @@
-import { SxProps } from '@mui/material';
+import React from 'react';
 
 import OutlinedButton from '../buttons/OutlinedButton';
 import EditIcon from '../icons/EditIcon';
 import { Label } from '../typography';
-import { TextButton } from './TextButton';
-
-import { Theme } from '~/theme/muiTheme';
 
 interface ButtonProps {
   onClick: () => void;
@@ -28,32 +25,5 @@ function EditButton({ onClick }: ButtonProps): JSX.Element {
     </OutlinedButton>
   );
 }
-
-export const EditButton2 = ({
-  onClick,
-  sx = [],
-}: {
-  onClick: () => void;
-  sx?: SxProps<Theme>;
-}): JSX.Element => {
-  return (
-    <TextButton
-      sx={[
-        {
-          color: 'info.dark',
-          maxWidth: '100px',
-          display: 'flex',
-          flexWrap: 'nowrap',
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
-      textSize="sm"
-      onClick={onClick}
-      startIcon={<EditIcon sx={{ height: 13 }} />}
-    >
-      Edit
-    </TextButton>
-  );
-};
 
 export { EditButton };

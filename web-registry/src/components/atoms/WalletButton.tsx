@@ -5,10 +5,9 @@ import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import { chainId } from 'lib/ledger';
-import { useWallet } from 'lib/wallet';
-
-import Keplr from 'assets/keplr.png';
+import Keplr from '../../assets/keplr.png';
+import { chainId } from '../../lib/ledger';
+import { useWallet } from '../../lib/wallet';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

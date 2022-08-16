@@ -38,7 +38,18 @@ const LocationField: React.FC<Props> = ({
   placeholder,
   transformValue,
   triggerOnChange,
-  types = ['address'],
+  // https://docs.mapbox.com/api/search/geocoding/#data-types
+  types = [
+    'country',
+    'region',
+    'postcode',
+    'district',
+    'place',
+    'locality',
+    'neighborhood',
+    'address',
+    'poi',
+  ],
   token: accessToken,
   ...fieldProps
 }) => {
@@ -73,7 +84,7 @@ const LocationField: React.FC<Props> = ({
             onSelect={() => form.setFieldTouched(field.name, true)}
             onChange={({ target: { value } }) => {
               handleChange(value);
-              if (value.length > 1) {
+              if (value.length >= 1) {
                 const isCoordinates =
                   /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/.test(
                     value,

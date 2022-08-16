@@ -45,8 +45,6 @@ const Dashboard = (): JSX.Element => {
   const projectTabHidden = !isIssuer || !isProjectAdmin;
   const creditClassTabHidden = !isCreditClassCreator || !isCreditClassAdmin;
 
-  console.log('isIssuer', isIssuer);
-
   // TODO: We should handle these as nested routes, converting this to an
   // <Outlet> layout component if we think we'll need to route to a page
   // directly. See:

@@ -63,12 +63,14 @@ const getProjectDisplayData = async (
           console.error(error);
         }
       }
-      const sellOrdersNormalized = sellOrders.map(sellOrder => {
-        return {
-          ...sellOrder,
-          id: String(sellOrder.id),
-        };
-      });
+      const sellOrdersNormalized = sellOrders
+        .filter(sellOrder => sellOrder?.batchDenom?.startsWith(project.id))
+        .map(sellOrder => {
+          return {
+            ...sellOrder,
+            id: String(sellOrder.id),
+          };
+        });
 
       return {
         id: project.id,

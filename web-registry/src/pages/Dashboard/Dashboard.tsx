@@ -13,7 +13,7 @@ import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
 import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
-import useQueryIfIssuer from 'hooks/useQueryIfIssuer';
+import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
@@ -42,8 +42,8 @@ const Dashboard = (): JSX.Element => {
   const isCreditClassCreator = useQueryIfCreditClassCreator();
   const isCreditClassAdmin = useQueryIfCreditClassAdmin();
   const isProjectAdmin = useQueryIfProjectAdmin();
-  const projectTabHidden = !(isIssuer || isProjectAdmin);
-  const creditClassTabHidden = !(isCreditClassCreator || isCreditClassAdmin);
+  const projectTabHidden = !isIssuer || !isProjectAdmin;
+  const creditClassTabHidden = !isCreditClassCreator || !isCreditClassAdmin;
 
   // TODO: We should handle these as nested routes, converting this to an
   // <Outlet> layout component if we think we'll need to route to a page

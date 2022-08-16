@@ -37,7 +37,7 @@ const useCreateSellOrderSubmit = ({
   setTxButtonTitle,
   setSellOrderCreateOpen,
 }: Props): ReturnType => {
-  const basketPutSubmit = useCallback(
+  const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
 
@@ -104,7 +104,7 @@ const useCreateSellOrderSubmit = ({
     ],
   );
 
-  return basketPutSubmit;
+  return createSellOrderSubmit;
 };
 
 export default useCreateSellOrderSubmit;

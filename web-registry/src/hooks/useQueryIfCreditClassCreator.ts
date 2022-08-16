@@ -5,27 +5,27 @@ import { queryParams } from 'lib/ecocredit/api';
 import { useWallet } from '../lib/wallet';
 
 export function useQueryIfCreditClassCreator(): boolean {
-  const [isCreator, setCreator] = useState(false);
+  const [isCreator, setIsCreator] = useState(false);
   const { wallet } = useWallet();
   useEffect(() => {
     const queryIfCreator = async (): Promise<void> => {
       if (!wallet?.address) {
-        setCreator(false);
+        setIsCreator(false);
       } else {
         try {
           const result = await queryParams();
           const allowlistEnabled = result.params?.allowlistEnabled;
           if (allowlistEnabled) {
-            const isCreator =
+            const _isCreator =
               result.params?.allowedClassCreators.includes(wallet.address) ===
               true;
-            setCreator(isCreator);
+            setIsCreator(_isCreator);
           } else {
             // if the allowlist is not enabled, anyone can create a credit class
-            setCreator(true);
+            setIsCreator(true);
           }
         } catch (err) {
-          setCreator(false);
+          setIsCreator(false);
         }
       }
     };

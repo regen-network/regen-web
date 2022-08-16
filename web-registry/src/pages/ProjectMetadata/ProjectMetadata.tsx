@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { omit } from 'lodash';
 
 import {
@@ -12,6 +12,7 @@ import {
   useUpdateProjectByIdMutation,
 } from '../../generated/graphql';
 import { ProjectMetadataLD } from '../../generated/json-ld';
+import { isVCSCreditClass } from '../../lib/ecocredit/api';
 import { getProjectShapeIri } from '../../lib/rdf';
 import { useProjectEditContext } from '../ProjectEdit';
 import { useProjectMetadataSave } from './hooks/useProjectMetadataSave';
@@ -21,6 +22,7 @@ import { ProjectMetadataSelectedForm } from './ProjectMetadata.SelectedForm';
 
 export const ProjectMetadata: React.FC = () => {
   const { projectId } = useParams();
+  const navigate = useNavigate();
   const { isEdit } = useProjectEditContext();
   const [updateProject] = useUpdateProjectByIdMutation();
   const { data } = useProjectByIdQuery({
@@ -29,8 +31,9 @@ export const ProjectMetadata: React.FC = () => {
   });
   const project = data?.projectById;
   const creditClassId = project?.creditClassByCreditClassId?.onChainId;
-  const isVCS = creditClassId === 'C01';
+  const isVCS = !!creditClassId && isVCSCreditClass(creditClassId);
   let metadata: Partial<ProjectMetadataLD> | undefined;
+  const editPath = `/project-pages/${projectId}`;
 
   const { data: graphData } = useShaclGraphByUriQuery({
     skip: !project,
@@ -57,6 +60,8 @@ export const ProjectMetadata: React.FC = () => {
         metadata={metadata}
         graphData={graphData}
         isVCS={isVCS}
+        onNext={() => navigate(`${editPath}/review`)}
+        onPrev={() => navigate(`${editPath}/media`)}
       />
     </EditFormTemplate>
   ) : (
@@ -70,6 +75,8 @@ export const ProjectMetadata: React.FC = () => {
         metadata={metadata}
         graphData={graphData}
         isVCS={isVCS}
+        onNext={() => navigate(`${editPath}/review`)}
+        onPrev={() => navigate(`${editPath}/media`)}
       />
     </OnboardingFormTemplate>
   );

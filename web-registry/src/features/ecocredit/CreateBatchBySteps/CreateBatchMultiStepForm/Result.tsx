@@ -17,6 +17,52 @@ import { getAccountUrl, getHashUrl } from 'lib/block-explorer';
 
 import { Link } from 'components/atoms';
 
+function parseSuccessResponseLog(
+  responseLogEvents: [any],
+): Omit<SuccessProps, 'txHash'> {
+  // get the batch denom from the `EventCreateBatch` event log
+  let batchDenom = '';
+  try {
+    const eventCreateBatch =
+      responseLogEvents &&
+      responseLogEvents.find((event: any) =>
+        event.type.includes('.EventCreateBatch'),
+      );
+
+    const batchDenomRaw =
+      eventCreateBatch &&
+      eventCreateBatch.attributes?.find(
+        (obj: any) => obj.key === 'batch_denom',
+      );
+
+    batchDenom = batchDenomRaw.value.replace(/"/g, '');
+  } catch (err) {}
+
+  // get the recipients from the `EventTransfer` event log
+  let recipients = [];
+  try {
+    const eventTransfer =
+      responseLogEvents &&
+      responseLogEvents.find((event: any) =>
+        event.type.includes('.EventTransfer'),
+      );
+
+    const recipientsLog =
+      eventTransfer &&
+      eventTransfer.attributes?.filter((obj: any) => obj.key === 'recipient');
+
+    recipients = recipientsLog.map(({ value }: { value: string }) => {
+      const recipientAddress = value.replace(/"/g, '');
+      return {
+        name: truncate(recipientAddress),
+        url: getAccountUrl(recipientAddress),
+      };
+    });
+  } catch (err) {}
+
+  return { batchDenom, recipients };
+}
+
 type ResultProps = {
   response?: DeliverTxResponse;
   error?: string;
@@ -26,48 +72,63 @@ export default function Result({
   response,
   error,
 }: ResultProps): React.ReactElement {
+  const [responseProcessed, setResponseProcessed] = React.useState<
+    SuccessProps | string
+  >();
+
+  // if response, check if false "success" response because `unauthorized` error
+  // if we can parse rawLog, then we assume it is a success response
+  // if fails parsing rawLog, is because it is already a string with the error message
+  React.useEffect(() => {
+    if (!response) return;
+
+    try {
+      // Parsing the response, specifically the content in the key `rawLog`
+      // is an array with a single element, and this is an object with a single key `events`
+      const responseLog = response.rawLog && JSON.parse(response.rawLog);
+      const responseLogEvents: [any] = responseLog && responseLog[0].events;
+      const { batchDenom, recipients } =
+        parseSuccessResponseLog(responseLogEvents);
+
+      setResponseProcessed({
+        batchDenom,
+        recipients,
+        txHash: response.transactionHash,
+      });
+    } catch (e) {
+      setResponseProcessed(response.rawLog);
+    }
+  }, [response]);
+
   if (error) return <ErrorResult error={error} />;
-  return response ? <SuccessResult response={response} /> : <div />;
+
+  if (typeof responseProcessed === 'string')
+    return <ErrorResult error={responseProcessed} />;
+
+  return response ? (
+    <SuccessResult
+      batchDenom={responseProcessed?.batchDenom || ''}
+      recipients={responseProcessed?.recipients || []}
+      txHash={responseProcessed?.txHash || ''}
+    />
+  ) : (
+    <div />
+  );
 }
 
+type Recipient = { name: string; url: string };
+
 type SuccessProps = {
-  response: DeliverTxResponse;
+  batchDenom: string;
+  recipients: Recipient[] | [];
+  txHash: string;
 };
 
-const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
-  // Parsing the response...
-  const responseLog = response?.rawLog && JSON.parse(response?.rawLog);
-  const responseLogEvents = responseLog && responseLog[0].events;
-
-  const eventCreateBatch =
-    responseLogEvents &&
-    responseLogEvents.find((event: any) =>
-      event.type.includes('.EventCreateBatch'),
-    );
-
-  const receiveBatchDenom =
-    eventCreateBatch &&
-    eventCreateBatch.attributes?.find((obj: any) => obj.key === 'batch_denom');
-
-  const eventReceive =
-    responseLogEvents &&
-    responseLogEvents.find((event: any) =>
-      event.type.includes('.EventReceive'),
-    );
-
-  const recipientsLog =
-    eventReceive &&
-    eventReceive.attributes?.filter((obj: any) => obj.key === 'recipient');
-  const recipients = recipientsLog.map(({ value }: { value: string }) => {
-    const recipientAddress = value.replace(/"/g, '');
-    return {
-      name: truncate(recipientAddress),
-      url: getAccountUrl(recipientAddress),
-    };
-  });
-
-  const batchDenom = receiveBatchDenom.value.replace(/"/g, '');
-
+const SuccessResult = ({
+  batchDenom,
+  recipients,
+  txHash,
+}: SuccessProps): React.ReactElement => {
   return (
     <>
       <OnBoardingCard>
@@ -81,14 +142,14 @@ const SuccessResult = ({ response }: SuccessProps): React.ReactElement => {
           linkComponent={Link}
         />
         <CardItemList
-          label={`recipient${recipients.length > 1 ? 's' : ''}`}
-          values={recipients}
+          label={`recipient${(recipients && recipients.length) > 1 ? 's' : ''}`}
+          values={recipients || []}
         />
         <CardItem
           label="hash"
           value={{
-            name: truncate(response?.transactionHash),
-            url: getHashUrl(response?.transactionHash),
+            name: truncate(txHash),
+            url: getHashUrl(txHash),
           }}
           linkComponent={Link}
         />
@@ -165,16 +226,19 @@ const CardItemList: React.FC<CardItemListProps> = ({ label, values }) => {
         {label}
       </Label>
       <Subtitle size="lg" mobileSize="sm" color={'info.dark'}>
-        {values.map((item, index) => (
-          <Link
-            key={`card-item-link-${index}`}
-            sx={{ color: 'secondary.main' }}
-            href={item.url}
-          >
-            {item.name}
-            {values.length > index + 1 && ', '}
-          </Link>
-        ))}
+        {!values.length
+          ? '-'
+          : values.map((item, index) => (
+              <Link
+                key={`card-item-link-${index}`}
+                sx={{ color: 'secondary.main' }}
+                href={item.url}
+                target="_blank"
+              >
+                {item.name}
+                {values.length > index + 1 && ', '}
+              </Link>
+            ))}
       </Subtitle>
     </Box>
   );

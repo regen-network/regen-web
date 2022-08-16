@@ -68,6 +68,7 @@ fragment creditVintageFields on CreditVintage {
 
 query ProjectByHandle($handle: String!) {
   projectByHandle(handle: $handle) {
+    onChainId
     eventsByProjectId(orderBy: DATE_ASC) {
       nodes {
         date

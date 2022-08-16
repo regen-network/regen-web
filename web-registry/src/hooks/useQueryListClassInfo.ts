@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import {
-  QueryClassInfoResponse,
+  QueryClassResponse,
   QueryClientImpl,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/query';
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { useLedger } from '../ledger';
 
 // is a wrapper for a batch of requests
 export default function useQueryListClassInfo(
   classes?: string[],
-): QueryClassInfoResponse[] | undefined {
+): QueryClassResponse[] | undefined {
   const { api } = useLedger();
   const [queryClient, setQueryClient] = useState<QueryClientImpl>();
-  const [dataList, setDataList] = useState<QueryClassInfoResponse[]>();
+  const [dataList, setDataList] = useState<QueryClassResponse[]>();
 
   useEffect(() => {
     if (!api?.queryClient) return;
@@ -28,9 +28,7 @@ export default function useQueryListClassInfo(
       classes: string[],
     ): Promise<void> {
       Promise.all(
-        classes.map(
-          async (classId: string) => await client.ClassInfo({ classId }),
-        ),
+        classes.map(async (classId: string) => await client.Class({ classId })),
       ).then(setDataList);
     }
 

@@ -41,19 +41,16 @@ interface LinkProps extends LinkItem {
 
 type LinkComponentProp = React.FC<LinkProps>;
 
-interface Props extends TxModalProps {
-  icon?: JSX.Element;
-  title: string;
-}
-
 export interface TxModalProps extends RegenModalProps {
-  onViewPortfolio: () => void;
+  onButtonClick: () => void;
   cardTitle: string;
   buttonTitle?: string;
   cardItems?: Item[];
   linkComponent: LinkComponentProp;
   txHash: string;
   txHashUrl: string;
+  icon?: JSX.Element;
+  title?: string;
 }
 
 interface CardItemProps extends Item {
@@ -90,13 +87,13 @@ export const CardItem: React.FC<CardItemProps> = ({
   );
 };
 
-const TxModal: React.FC<Props> = ({
+const TxModal: React.FC<TxModalProps> = ({
   icon,
   title,
   buttonTitle = 'view your portfolio',
   open,
   onClose,
-  onViewPortfolio,
+  onButtonClick,
   cardTitle,
   cardItems,
   txHash,
@@ -143,7 +140,7 @@ const TxModal: React.FC<Props> = ({
       </Card>
       <OutlinedButton
         sx={{ fontSize: { xs: 12, sm: 18 } }}
-        onClick={onViewPortfolio}
+        onClick={onButtonClick}
       >
         {buttonTitle}
       </OutlinedButton>

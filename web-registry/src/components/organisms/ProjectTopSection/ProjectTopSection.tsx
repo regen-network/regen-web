@@ -9,7 +9,6 @@ import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
-import { ProjectByHandleQuery } from '../../../generated/graphql';
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { qudtUnit, qudtUnitMap } from '../../../lib/rdf';
@@ -33,7 +32,7 @@ function ProjectTopSection({
   isGISFile,
   batchData,
 }: {
-  data?: ProjectByHandleQuery;
+  data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
   geojson?: any;
   isGISFile?: boolean;
   batchData?: {
@@ -46,7 +45,7 @@ function ProjectTopSection({
   const imageStorageBaseUrl = process.env.REACT_APP_IMAGE_STORAGE_BASE_URL;
   const apiServerUrl = process.env.REACT_APP_API_URI;
 
-  const project = data?.projectByHandle;
+  const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
   const metadata = project?.metadata;
 
   const registry = project?.partyByRegistryId;

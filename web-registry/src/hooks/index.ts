@@ -1,5 +1,4 @@
 export { default as useBankQuery } from './useBankQuery';
-export { default as useBasketDetails } from './useBasketDetails';
 export { default as useBasketQuery } from './useBasketQuery';
 export { default as useBasketsWithClasses } from './useBasketsWithClasses';
 export { default as useBasketTokens } from './useBasketTokens';

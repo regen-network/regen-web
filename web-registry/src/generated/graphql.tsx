@@ -5264,6 +5264,16 @@ export type DeleteProjectByIdInput = {
   id: Scalars['UUID'];
 };
 
+/** All input for the `deleteProjectByOnChainId` mutation. */
+export type DeleteProjectByOnChainIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  onChainId: Scalars['String'];
+};
+
 /** All input for the `deleteProject` mutation. */
 export type DeleteProjectInput = {
   /**
@@ -6160,6 +6170,29 @@ export type GetUserFirstOrganizationPayloadOrganizationEdgeArgs = {
   orderBy?: Maybe<Array<OrganizationsOrderBy>>;
 };
 
+/** All input for the `getWalletByAddr` mutation. */
+export type GetWalletByAddrInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  addr?: Maybe<Scalars['String']>;
+};
+
+/** The output of our `getWalletByAddr` mutation. */
+export type GetWalletByAddrPayload = {
+  __typename?: 'GetWalletByAddrPayload';
+  /**
+   * The exact same `clientMutationId` that was provided in the mutation input,
+   * unchanged and unused. May be used by a client to track mutations.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  walletId?: Maybe<Scalars['UUID']>;
+  /** Our root query field type. Allows us to run any query from our mutation payload. */
+  query?: Maybe<Query>;
+};
+
 /** All input for the `getWalletContactEmail` mutation. */
 export type GetWalletContactEmailInput = {
   /**
@@ -6865,6 +6898,8 @@ export type Mutation = {
   updateProjectById?: Maybe<UpdateProjectPayload>;
   /** Updates a single `Project` using a unique key and a patch. */
   updateProjectByHandle?: Maybe<UpdateProjectPayload>;
+  /** Updates a single `Project` using a unique key and a patch. */
+  updateProjectByOnChainId?: Maybe<UpdateProjectPayload>;
   /** Updates a single `ProjectBroker` using its globally unique id and a patch. */
   updateProjectBroker?: Maybe<UpdateProjectBrokerPayload>;
   /** Updates a single `ProjectBroker` using a unique key and a patch. */
@@ -6995,6 +7030,8 @@ export type Mutation = {
   deleteProjectById?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `Project` using a unique key. */
   deleteProjectByHandle?: Maybe<DeleteProjectPayload>;
+  /** Deletes a single `Project` using a unique key. */
+  deleteProjectByOnChainId?: Maybe<DeleteProjectPayload>;
   /** Deletes a single `ProjectBroker` using its globally unique id. */
   deleteProjectBroker?: Maybe<DeleteProjectBrokerPayload>;
   /** Deletes a single `ProjectBroker` using a unique key. */
@@ -7039,6 +7076,7 @@ export type Mutation = {
   getCurrentAccount?: Maybe<GetCurrentAccountPayload>;
   getCurrentAddrs?: Maybe<GetCurrentAddrsPayload>;
   getUserFirstOrganization?: Maybe<GetUserFirstOrganizationPayload>;
+  getWalletByAddr?: Maybe<GetWalletByAddrPayload>;
   getWalletContactEmail?: Maybe<GetWalletContactEmailPayload>;
   isAdmin?: Maybe<IsAdminPayload>;
   issueCredits?: Maybe<IssueCreditsPayload>;
@@ -7412,6 +7450,11 @@ export type MutationUpdateProjectByHandleArgs = {
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationUpdateProjectByOnChainIdArgs = {
+  input: UpdateProjectByOnChainIdInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationUpdateProjectBrokerArgs = {
   input: UpdateProjectBrokerInput;
 };
@@ -7737,6 +7780,11 @@ export type MutationDeleteProjectByHandleArgs = {
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
+export type MutationDeleteProjectByOnChainIdArgs = {
+  input: DeleteProjectByOnChainIdInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
 export type MutationDeleteProjectBrokerArgs = {
   input: DeleteProjectBrokerInput;
 };
@@ -7859,6 +7907,11 @@ export type MutationGetCurrentAddrsArgs = {
 /** The root mutation type which contains root level fields which mutate data. */
 export type MutationGetUserFirstOrganizationArgs = {
   input: GetUserFirstOrganizationInput;
+};
+
+/** The root mutation type which contains root level fields which mutate data. */
+export type MutationGetWalletByAddrArgs = {
+  input: GetWalletByAddrInput;
 };
 
 /** The root mutation type which contains root level fields which mutate data. */
@@ -12975,6 +13028,7 @@ export type Project = Node & {
   issuerId?: Maybe<Scalars['UUID']>;
   resellerId?: Maybe<Scalars['UUID']>;
   walletId?: Maybe<Scalars['UUID']>;
+  onChainId?: Maybe<Scalars['String']>;
   /** Reads a single `Party` that is related to this `Project`. */
   partyByDeveloperId?: Maybe<Party>;
   /** Reads a single `Party` that is related to this `Project`. */
@@ -13311,6 +13365,8 @@ export type ProjectCondition = {
   resellerId?: Maybe<Scalars['UUID']>;
   /** Checks for equality with the object’s `walletId` field. */
   walletId?: Maybe<Scalars['UUID']>;
+  /** Checks for equality with the object’s `onChainId` field. */
+  onChainId?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `CreditClass` values, with data from `CreditVintage`. */
@@ -13426,6 +13482,7 @@ export type ProjectInput = {
   issuerId?: Maybe<Scalars['UUID']>;
   resellerId?: Maybe<Scalars['UUID']>;
   walletId?: Maybe<Scalars['UUID']>;
+  onChainId?: Maybe<Scalars['String']>;
 };
 
 /** A connection to a list of `Party` values, with data from `CreditVintage`. */
@@ -13567,6 +13624,7 @@ export type ProjectPatch = {
   issuerId?: Maybe<Scalars['UUID']>;
   resellerId?: Maybe<Scalars['UUID']>;
   walletId?: Maybe<Scalars['UUID']>;
+  onChainId?: Maybe<Scalars['String']>;
 };
 
 export enum ProjectState {
@@ -13763,6 +13821,8 @@ export enum ProjectsOrderBy {
   ResellerIdDesc = 'RESELLER_ID_DESC',
   WalletIdAsc = 'WALLET_ID_ASC',
   WalletIdDesc = 'WALLET_ID_DESC',
+  OnChainIdAsc = 'ON_CHAIN_ID_ASC',
+  OnChainIdDesc = 'ON_CHAIN_ID_DESC',
   PrimaryKeyAsc = 'PRIMARY_KEY_ASC',
   PrimaryKeyDesc = 'PRIMARY_KEY_DESC',
 }
@@ -14214,6 +14274,7 @@ export type Query = Node & {
   partyByWalletId?: Maybe<Party>;
   projectById?: Maybe<Project>;
   projectByHandle?: Maybe<Project>;
+  projectByOnChainId?: Maybe<Project>;
   projectBrokerById?: Maybe<ProjectBroker>;
   purchaseById?: Maybe<Purchase>;
   retirementById?: Maybe<Retirement>;
@@ -14229,6 +14290,8 @@ export type Query = Node & {
   getAvailableCredits?: Maybe<Scalars['BigFloat']>;
   getCurrentUser?: Maybe<Scalars['String']>;
   getCurrentUserId?: Maybe<Scalars['UUID']>;
+  /** Reads and enables pagination through a set of `Wallet`. */
+  getWalletByAddress?: Maybe<WalletsConnection>;
   /** Reads a single `Account` using its globally unique `ID`. */
   account?: Maybe<Account>;
   /** Reads a single `AccountBalance` using its globally unique `ID`. */
@@ -14726,6 +14789,11 @@ export type QueryProjectByHandleArgs = {
 };
 
 /** The root query type which gives access points into the data universe. */
+export type QueryProjectByOnChainIdArgs = {
+  onChainId: Scalars['String'];
+};
+
+/** The root query type which gives access points into the data universe. */
 export type QueryProjectBrokerByIdArgs = {
   id: Scalars['UUID'];
 };
@@ -14789,6 +14857,16 @@ export type QueryWalletByAddrArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryGetAvailableCreditsArgs = {
   vintageId?: Maybe<Scalars['UUID']>;
+};
+
+/** The root query type which gives access points into the data universe. */
+export type QueryGetWalletByAddressArgs = {
+  walletAddress?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['Cursor']>;
+  after?: Maybe<Scalars['Cursor']>;
 };
 
 /** The root query type which gives access points into the data universe. */
@@ -16565,6 +16643,18 @@ export type UpdateProjectByIdInput = {
   /** An object where the defined keys will be set on the `Project` being updated. */
   projectPatch: ProjectPatch;
   id: Scalars['UUID'];
+};
+
+/** All input for the `updateProjectByOnChainId` mutation. */
+export type UpdateProjectByOnChainIdInput = {
+  /**
+   * An arbitrary string value with no semantic meaning. Will be included in the
+   * payload verbatim. May be used to track mutations by the client.
+   */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** An object where the defined keys will be set on the `Project` being updated. */
+  projectPatch: ProjectPatch;
+  onChainId: Scalars['String'];
 };
 
 /** All input for the `updateProject` mutation. */
@@ -20075,9 +20165,15 @@ export type AllProjectsQuery = { __typename?: 'Query' } & {
     { __typename?: 'ProjectsConnection' } & {
       nodes: Array<
         Maybe<
-          { __typename?: 'Project' } & Pick<Project, 'id' | 'metadata'> & {
+          { __typename?: 'Project' } & Pick<
+            Project,
+            'id' | 'handle' | 'metadata'
+          > & {
               creditClassByCreditClassId?: Maybe<
-                { __typename?: 'CreditClass' } & Pick<CreditClass, 'id'> & {
+                { __typename?: 'CreditClass' } & Pick<
+                  CreditClass,
+                  'id' | 'onChainId'
+                > & {
                     methodologyByMethodologyId?: Maybe<
                       { __typename?: 'Methodology' } & Pick<
                         Methodology,
@@ -20104,7 +20200,7 @@ export type AllProjectsQuery = { __typename?: 'Query' } & {
                         Maybe<
                           { __typename?: 'CreditClassVersion' } & Pick<
                             CreditClassVersion,
-                            'id' | 'createdAt' | 'name' | 'version'
+                            'id' | 'createdAt' | 'name' | 'version' | 'metadata'
                           >
                         >
                       >;
@@ -20407,7 +20503,7 @@ export type WalletByAddrQuery = { __typename?: 'Query' } & {
             Maybe<
               { __typename?: 'Project' } & Pick<
                 Project,
-                'id' | 'handle' | 'metadata'
+                'id' | 'onChainId' | 'handle' | 'metadata'
               >
             >
           >;
@@ -20418,7 +20514,7 @@ export type WalletByAddrQuery = { __typename?: 'Query' } & {
 
 export type MoreProjectFieldsFragment = { __typename?: 'Project' } & Pick<
   Project,
-  'handle' | 'metadata'
+  'handle' | 'onChainId' | 'metadata'
 > & {
     creditClassByCreditClassId?: Maybe<
       { __typename?: 'CreditClass' } & Pick<CreditClass, 'uri'>
@@ -20518,7 +20614,7 @@ export type ProjectByHandleQueryVariables = Exact<{
 
 export type ProjectByHandleQuery = { __typename?: 'Query' } & {
   projectByHandle?: Maybe<
-    { __typename?: 'Project' } & Pick<Project, 'metadata'> & {
+    { __typename?: 'Project' } & Pick<Project, 'onChainId' | 'metadata'> & {
         eventsByProjectId: { __typename?: 'EventsConnection' } & {
           nodes: Array<
             Maybe<
@@ -20631,6 +20727,7 @@ export type ProjectByIdQuery = { __typename?: 'Query' } & {
       | 'landOwnerId'
       | 'stewardId'
       | 'addressId'
+      | 'onChainId'
     > & {
         partyByDeveloperId?: Maybe<
           { __typename?: 'Party' } & PartyFieldsFragment
@@ -20663,6 +20760,111 @@ export type ProjectByIdQuery = { __typename?: 'Query' } & {
               };
             }
         >;
+      }
+  >;
+};
+
+export type ProjectByOnChainIdQueryVariables = Exact<{
+  onChainId: Scalars['String'];
+}>;
+
+export type ProjectByOnChainIdQuery = { __typename?: 'Query' } & {
+  projectByOnChainId?: Maybe<
+    { __typename?: 'Project' } & Pick<Project, 'metadata'> & {
+        eventsByProjectId: { __typename?: 'EventsConnection' } & {
+          nodes: Array<
+            Maybe<
+              { __typename?: 'Event' } & Pick<
+                Event,
+                'date' | 'summary' | 'description'
+              > & {
+                  creditVintageByEventId?: Maybe<
+                    {
+                      __typename?: 'CreditVintage';
+                    } & CreditVintageFieldsFragment
+                  >;
+                }
+            >
+          >;
+        };
+        partyByRegistryId?: Maybe<
+          { __typename?: 'Party' } & Pick<Party, 'name'> & {
+              organizationByPartyId?: Maybe<
+                { __typename?: 'Organization' } & Pick<Organization, 'website'>
+              >;
+            }
+        >;
+        creditClassByCreditClassId?: Maybe<
+          { __typename?: 'CreditClass' } & Pick<
+            CreditClass,
+            'standard' | 'onChainId'
+          > & {
+              creditClassVersionsById: {
+                __typename?: 'CreditClassVersionsConnection';
+              } & {
+                nodes: Array<
+                  Maybe<
+                    { __typename?: 'CreditClassVersion' } & Pick<
+                      CreditClassVersion,
+                      'name' | 'metadata'
+                    >
+                  >
+                >;
+              };
+              methodologyByMethodologyId?: Maybe<
+                { __typename?: 'Methodology' } & {
+                  methodologyVersionsById: {
+                    __typename?: 'MethodologyVersionsConnection';
+                  } & {
+                    nodes: Array<
+                      Maybe<
+                        { __typename?: 'MethodologyVersion' } & Pick<
+                          MethodologyVersion,
+                          'name' | 'metadata'
+                        >
+                      >
+                    >;
+                  };
+                }
+              >;
+            }
+        >;
+        partyByDeveloperId?: Maybe<
+          { __typename?: 'Party' } & PartyFieldsFragment
+        >;
+        partyByStewardId?: Maybe<
+          { __typename?: 'Party' } & PartyFieldsFragment
+        >;
+        partyByLandOwnerId?: Maybe<
+          { __typename?: 'Party' } & PartyFieldsFragment
+        >;
+        partyByIssuerId?: Maybe<{ __typename?: 'Party' } & PartyFieldsFragment>;
+        partyByResellerId?: Maybe<
+          { __typename?: 'Party' } & PartyFieldsFragment
+        >;
+        documentsByProjectId: { __typename?: 'DocumentsConnection' } & {
+          nodes: Array<
+            Maybe<
+              { __typename?: 'Document' } & Pick<
+                Document,
+                'name' | 'type' | 'date' | 'url'
+              > & {
+                  eventByEventId?: Maybe<
+                    { __typename?: 'Event' } & Pick<
+                      Event,
+                      'date' | 'summary' | 'description'
+                    > & {
+                        creditVintageByEventId?: Maybe<
+                          {
+                            __typename?: 'CreditVintage';
+                          } & CreditVintageFieldsFragment
+                        >;
+                      }
+                  >;
+                }
+            >
+          >;
+        };
       }
   >;
 };
@@ -21065,6 +21267,7 @@ export const ProjectFragmentDoc = gql`
 export const MoreProjectFieldsFragmentDoc = gql`
   fragment moreProjectFields on Project {
     handle
+    onChainId
     metadata
     creditClassByCreditClassId {
       uri
@@ -21495,9 +21698,11 @@ export const AllProjectsDocument = gql`
     allProjects {
       nodes {
         id
+        handle
         metadata
         creditClassByCreditClassId {
           id
+          onChainId
           methodologyByMethodologyId {
             id
             methodologyVersionsById {
@@ -21515,6 +21720,7 @@ export const AllProjectsDocument = gql`
               createdAt
               name
               version
+              metadata
             }
           }
         }
@@ -22378,6 +22584,7 @@ export const WalletByAddrDocument = gql`
       projectsByWalletId {
         nodes {
           id
+          onChainId
           handle
           metadata
         }
@@ -22499,6 +22706,7 @@ export type MoreProjectsQueryResult = Apollo.QueryResult<
 export const ProjectByHandleDocument = gql`
   query ProjectByHandle($handle: String!) {
     projectByHandle(handle: $handle) {
+      onChainId
       eventsByProjectId(orderBy: DATE_ASC) {
         nodes {
           date
@@ -22630,6 +22838,7 @@ export const ProjectByIdDocument = gql`
       landOwnerId
       stewardId
       addressId
+      onChainId
       partyByDeveloperId {
         ...partyFields
       }
@@ -22705,6 +22914,131 @@ export type ProjectByIdLazyQueryHookResult = ReturnType<
 export type ProjectByIdQueryResult = Apollo.QueryResult<
   ProjectByIdQuery,
   ProjectByIdQueryVariables
+>;
+export const ProjectByOnChainIdDocument = gql`
+  query ProjectByOnChainId($onChainId: String!) {
+    projectByOnChainId(onChainId: $onChainId) {
+      eventsByProjectId(orderBy: DATE_ASC) {
+        nodes {
+          date
+          summary
+          description
+          creditVintageByEventId {
+            ...creditVintageFields
+          }
+        }
+      }
+      metadata
+      partyByRegistryId {
+        name
+        organizationByPartyId {
+          website
+        }
+      }
+      creditClassByCreditClassId {
+        standard
+        onChainId
+        creditClassVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+          nodes {
+            name
+            metadata
+          }
+        }
+        methodologyByMethodologyId {
+          methodologyVersionsById(orderBy: CREATED_AT_DESC, first: 1) {
+            nodes {
+              name
+              metadata
+            }
+          }
+        }
+      }
+      partyByDeveloperId {
+        ...partyFields
+      }
+      partyByStewardId {
+        ...partyFields
+      }
+      partyByLandOwnerId {
+        ...partyFields
+      }
+      partyByIssuerId {
+        ...partyFields
+      }
+      partyByResellerId {
+        ...partyFields
+      }
+      documentsByProjectId {
+        nodes {
+          name
+          type
+          date
+          url
+          eventByEventId {
+            date
+            summary
+            description
+            creditVintageByEventId {
+              ...creditVintageFields
+            }
+          }
+        }
+      }
+    }
+  }
+  ${CreditVintageFieldsFragmentDoc}
+  ${PartyFieldsFragmentDoc}
+`;
+
+/**
+ * __useProjectByOnChainIdQuery__
+ *
+ * To run a query within a React component, call `useProjectByOnChainIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectByOnChainIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectByOnChainIdQuery({
+ *   variables: {
+ *      onChainId: // value for 'onChainId'
+ *   },
+ * });
+ */
+export function useProjectByOnChainIdQuery(
+  baseOptions: Apollo.QueryHookOptions<
+    ProjectByOnChainIdQuery,
+    ProjectByOnChainIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<
+    ProjectByOnChainIdQuery,
+    ProjectByOnChainIdQueryVariables
+  >(ProjectByOnChainIdDocument, options);
+}
+export function useProjectByOnChainIdLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    ProjectByOnChainIdQuery,
+    ProjectByOnChainIdQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    ProjectByOnChainIdQuery,
+    ProjectByOnChainIdQueryVariables
+  >(ProjectByOnChainIdDocument, options);
+}
+export type ProjectByOnChainIdQueryHookResult = ReturnType<
+  typeof useProjectByOnChainIdQuery
+>;
+export type ProjectByOnChainIdLazyQueryHookResult = ReturnType<
+  typeof useProjectByOnChainIdLazyQuery
+>;
+export type ProjectByOnChainIdQueryResult = Apollo.QueryResult<
+  ProjectByOnChainIdQuery,
+  ProjectByOnChainIdQueryVariables
 >;
 export const ProjectsByMetadataDocument = gql`
   query ProjectsByMetadata($metadata: JSON) {

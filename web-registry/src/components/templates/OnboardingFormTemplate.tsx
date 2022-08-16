@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 
+import { Loading } from 'web-components/lib/components/loading';
 import OnBoardingSection from 'web-components/lib/components/section/OnBoardingSection';
 
 import { PlanStepper } from '../molecules';
@@ -8,12 +9,13 @@ import { PlanStepper } from '../molecules';
 type Props = {
   title: string;
   activeStep: number;
+  loading?: boolean;
   saveAndExit?: () => Promise<void>;
 };
 
 const OnboardingFormTemplate: React.FC<Props> = props => {
   return (
-    <>
+    <Box sx={{ bgcolor: 'grey.50' }}>
       <PlanStepper activeStep={props.activeStep} />
       <OnBoardingSection
         title={props.title}
@@ -25,9 +27,13 @@ const OnboardingFormTemplate: React.FC<Props> = props => {
         // onLinkClick={props.saveAndExit}
         // exampleProjectUrl="/projects/wilmot"
       >
-        <Box minHeight="50vh">{props.children}</Box>
+        {props.loading ? (
+          <Loading />
+        ) : (
+          <Box minHeight="50vh">{props.children}</Box>
+        )}
       </OnBoardingSection>
-    </>
+    </Box>
   );
 };
 

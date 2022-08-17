@@ -98,7 +98,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
     if (onSubmit && selectedSellOrder) {
       const fullValues: BuyCreditsValues = {
         ...values,
-        price: parseInt(selectedSellOrder.askAmount) * Math.pow(10, 6),
+        price: parseInt(selectedSellOrder.askAmount),
         batchDenom: selectedSellOrder.batchDenom,
         sellOrderId: selectedSellOrder.id,
         country: retirementAction === 'autoretire' ? country : '',

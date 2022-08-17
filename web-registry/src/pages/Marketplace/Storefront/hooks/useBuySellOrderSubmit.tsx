@@ -9,6 +9,7 @@ import { getFormattedNumber } from 'web-components/lib/utils/format';
 import { UseStateSetter } from 'types/react/use-state';
 
 import { BuyCreditsValues } from 'components/organisms';
+import { microToDenom } from 'components/organisms/BuyCreditsModal/BuyCreditsModal.utils';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
@@ -19,6 +20,7 @@ import {
 
 type Props = {
   accountAddress?: string;
+  buttonTitle?: string;
   signAndBroadcast: SignAndBroadcastType;
   setCardItems: UseStateSetter<Item[] | undefined>;
   setTxModalTitle: UseStateSetter<string>;
@@ -37,6 +39,7 @@ const useBuySellOrderSubmit = ({
   setTxModalTitle,
   setTxButtonTitle,
   setSelectedSellOrder,
+  buttonTitle,
 }: Props): ReturnType => {
   const buySellOrderSubmit = useCallback(
     async (values: BuyCreditsValues): Promise<void> => {
@@ -54,7 +57,6 @@ const useBuySellOrderSubmit = ({
         askDenom,
         postalCode,
       } = values;
-      // const disableAutoRetire = retirementAction === 'manual'; // TODO: is this right?
       const isTradeable = retirementAction === 'manual';
       const stateProvinceValue = stateProvince ? `-${stateProvince}` : '';
       const postalCodeValue = stateProvince ? ` ${postalCode}` : '';
@@ -80,7 +82,7 @@ const useBuySellOrderSubmit = ({
         memo: retirementNote,
       };
 
-      signAndBroadcast(
+      await signAndBroadcast(
         tx,
         () => setSelectedSellOrder && setSelectedSellOrder(null),
       );
@@ -90,7 +92,7 @@ const useBuySellOrderSubmit = ({
           {
             label: 'total purchase price',
             value: {
-              name: String((price / Math.pow(10, 6)) * creditCount),
+              name: String(microToDenom(price) * creditCount),
               icon: (
                 <Box
                   sx={{
@@ -115,17 +117,18 @@ const useBuySellOrderSubmit = ({
         ]);
         setTxModalHeader(BUY_SELL_ORDER_HEADER);
         setTxModalTitle(BUY_SELL_ORDER_TITLE);
-        setTxButtonTitle(BUY_SELL_ORDER_BUTTON); // see portfolio? TODO
+        setTxButtonTitle(buttonTitle || BUY_SELL_ORDER_BUTTON);
       }
     },
     [
-      setCardItems,
-      setTxModalTitle,
-      setTxModalHeader,
-      setSelectedSellOrder,
-      setTxButtonTitle,
       accountAddress,
       signAndBroadcast,
+      setSelectedSellOrder,
+      setCardItems,
+      setTxModalHeader,
+      setTxModalTitle,
+      setTxButtonTitle,
+      buttonTitle,
     ],
   );
 

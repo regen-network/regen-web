@@ -5979,6 +5979,11 @@
   resolved "https://registry.yarnpkg.com/@types/is-function/-/is-function-1.0.1.tgz#2d024eace950c836d9e3335a66b97960ae41d022"
   integrity sha512-A79HEEiwXTFtfY+Bcbo58M2GRYzCr9itHWzbzHVFNEYCcoU/MMGwYYf721gBrnhpj1s6RGVVha/IgNFnR0Iw/Q==
 
+"@types/iso-3166-2@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/iso-3166-2/-/iso-3166-2-1.0.0.tgz#98a7b6e505c031e83c5aac13c9c49f9d9f6ca234"
+  integrity sha512-DYDyoRyPyxBeI9bYoTXLfsOZH12m1anrWEj9LU5Sl9rgsJ4soJMYf/7byozM+64Smn6/a1i079eQLGuPykwaHQ==
+
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.4.tgz#8467d4b3c087805d63580480890791277ce35c44"
@@ -17393,6 +17398,11 @@ isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
+
+iso-3166-2@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/iso-3166-2/-/iso-3166-2-1.0.0.tgz#20c5cda527b56bfc7409c6802d9bff0119086131"
+  integrity sha512-xLAazfKZzwlsg/Zz/GQGQk3jJez5/2ORrjD3TjSuqz/arMht/xTK49c0GOE3afO/gEd9tHtBVVlfBla01unUng==
 
 isobject@^2.0.0:
   version "2.1.0"

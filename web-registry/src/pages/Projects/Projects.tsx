@@ -6,15 +6,17 @@ import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ec
 
 import { Flex } from 'web-components/lib/components/box';
 import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
+import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectTextFieldBase';
 import { Loading } from 'web-components/lib/components/loading';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
+import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 
 import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit';
-import { BuyCreditsModal, BuyCreditsValues } from 'components/organisms';
+import { BuyCreditsModal } from 'components/organisms';
 
 import { Link } from '../../components/atoms';
 import useEcocreditQuery from '../../hooks/useEcocreditQuery';
@@ -43,7 +45,6 @@ export const Projects: React.FC = () => {
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
-  // const [bannerError, setBannerError] = useState(''); // TODO setting up for #1055
   const { data, loading } = useEcocreditQuery<QueryProjectsResponse>({
     query: 'projects',
     params: {},
@@ -79,7 +80,10 @@ export const Projects: React.FC = () => {
   };
 
   const handleTxModalClose = (): void => {
+    setCardItems(undefined);
     setTxModalTitle('');
+    setTxModalHeader('');
+    setDeliverTxResponse(undefined);
     setError(undefined);
   };
 
@@ -91,7 +95,11 @@ export const Projects: React.FC = () => {
   const handleTxDelivered = async (
     _deliverTxResponse: DeliverTxResponse,
   ): Promise<void> => {
-    console.log('_deliverTxResponse', _deliverTxResponse);
+    closeProcessingModal();
+  };
+
+  const onTxSuccessButtonClick = (): void => {
+    handleTxModalClose();
   };
 
   const {
@@ -191,6 +199,19 @@ export const Projects: React.FC = () => {
         open={isProcessingModalOpen}
         onClose={closeProcessingModal}
       />
+      <TxSuccessfulModal
+        open={!!txHash && !error}
+        onClose={handleTxModalClose}
+        txHash={txHash ?? ''}
+        txHashUrl={txHashUrl}
+        title={txModalHeader}
+        cardTitle={txModalTitle}
+        buttonTitle={txButtonTitle}
+        cardItems={cardItems}
+        linkComponent={Link}
+        onButtonClick={onTxSuccessButtonClick}
+        icon={<CelebrateIcon sx={{ width: '85px', height: '106px' }} />}
+      />
       {error && txModalTitle && (
         <TxErrorModal
           error={error}
@@ -204,7 +225,6 @@ export const Projects: React.FC = () => {
           buttonTitle="close"
         />
       )}
-      {/* {bannerError && <ErrorBanner text={bannerError} />} TODO #1055 */}
     </Flex>
   );
 };

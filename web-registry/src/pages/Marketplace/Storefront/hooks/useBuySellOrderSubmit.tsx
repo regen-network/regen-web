@@ -54,20 +54,20 @@ const useBuySellOrderSubmit = ({
         askDenom,
         postalCode,
       } = values;
-      const disableAutoRetire = retirementAction === 'manual'; // TODO: is this right?
+      // const disableAutoRetire = retirementAction === 'manual'; // TODO: is this right?
+      const isTradeable = retirementAction === 'manual';
       const stateProvinceValue = stateProvince ? `-${stateProvince}` : '';
       const postalCodeValue = stateProvince ? ` ${postalCode}` : '';
 
-      console.log(values);
       const msg = MsgBuyDirect.fromPartial({
         buyer: accountAddress,
         orders: [
           {
             sellOrderId: sellOrderId,
             bidPrice: { amount: String(price), denom: askDenom },
-            disableAutoRetire,
+            disableAutoRetire: isTradeable,
             quantity: String(creditCount),
-            retirementJurisdiction: disableAutoRetire
+            retirementJurisdiction: isTradeable
               ? ''
               : `${country}${stateProvinceValue}${postalCodeValue}`,
           },
@@ -109,13 +109,13 @@ const useBuySellOrderSubmit = ({
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
-            label: disableAutoRetire ? 'NUMBER OF CREDITS' : 'amount retired',
+            label: isTradeable ? 'NUMBER OF CREDITS' : 'amount retired',
             value: { name: getFormattedNumber(creditCount) },
           },
         ]);
         setTxModalHeader(BUY_SELL_ORDER_HEADER);
         setTxModalTitle(BUY_SELL_ORDER_TITLE);
-        setTxButtonTitle(BUY_SELL_ORDER_BUTTON);
+        setTxButtonTitle(BUY_SELL_ORDER_BUTTON); // see portfolio? TODO
       }
     },
     [

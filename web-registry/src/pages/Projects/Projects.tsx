@@ -96,6 +96,7 @@ export const Projects: React.FC = () => {
     _deliverTxResponse: DeliverTxResponse,
   ): Promise<void> => {
     closeProcessingModal();
+    closeBuyModal();
   };
 
   const onTxSuccessButtonClick = (): void => {

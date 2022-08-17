@@ -69,7 +69,16 @@ export const normalizeSellOrders = ({
 }: NormalizedSellOrderProps): NormalizedSellOrder[] =>
   sellOrders.map(
     (
-      { askAmount, askDenom, batchDenom, id, quantity, seller, expiration },
+      {
+        askAmount,
+        askDenom,
+        batchDenom,
+        id,
+        quantity,
+        seller,
+        expiration,
+        disableAutoRetire,
+      },
       index,
     ) => {
       const currentBatch = batchInfos?.[index]?.batch;
@@ -93,7 +102,7 @@ export const normalizeSellOrders = ({
             : projectsInfosByHandleMap.get(projectId)?.classIdUrl ?? null,
         },
         status: 'Partially filled',
-        askAmount,
+        askAmount: (parseInt(askAmount) / Math.pow(10, 6)).toString(),
         askDenom,
         amountAvailable: quantity,
         amountSold: undefined,
@@ -101,6 +110,7 @@ export const normalizeSellOrders = ({
         batchStartDate: isLoading ? undefined : currentBatch?.startDate ?? null,
         batchEndDate: isLoading ? undefined : currentBatch?.endDate ?? null,
         seller,
+        disableAutoRetire,
       };
     },
   );

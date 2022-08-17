@@ -155,6 +155,7 @@ export const MyEcocredits = (): JSX.Element => {
     setBasketTakeTokens,
     setCardItems,
     setTxModalTitle,
+    setTxModalHeader,
     signAndBroadcast,
   });
 
@@ -165,6 +166,7 @@ export const MyEcocredits = (): JSX.Element => {
     credits,
     setCardItems,
     setCreditSendOpen,
+    setTxModalHeader,
     setTxModalTitle,
     signAndBroadcast,
   });
@@ -179,6 +181,7 @@ export const MyEcocredits = (): JSX.Element => {
     setBasketPutOpen,
     setBasketTakeTokens,
     setCardItems,
+    setTxModalHeader,
     setTxModalTitle,
     signAndBroadcast,
   });
@@ -190,6 +193,7 @@ export const MyEcocredits = (): JSX.Element => {
     credits,
     setCardItems,
     setCreditRetireOpen,
+    setTxModalHeader,
     setTxModalTitle,
     signAndBroadcast,
   });

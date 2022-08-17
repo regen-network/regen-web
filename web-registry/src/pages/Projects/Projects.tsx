@@ -32,6 +32,7 @@ import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
   sortOptions,
+  VIEW_ECOCREDITS,
 } from './Projects.config';
 
 export const Projects: React.FC = () => {
@@ -101,6 +102,7 @@ export const Projects: React.FC = () => {
 
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
+    navigate('/ecocredits/dashboard');
   };
 
   const {
@@ -122,6 +124,7 @@ export const Projects: React.FC = () => {
     setTxButtonTitle,
     setTxModalHeader,
     setTxModalTitle,
+    buttonTitle: VIEW_ECOCREDITS,
   });
 
   if (loading) return <Loading />;

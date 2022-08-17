@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Link } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
 import Grid from '@mui/material/Grid';
 import cx from 'clsx';
-import { Field, Form, Formik } from 'formik';
+import { Field, Form, Formik, useFormikContext } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
 import Card from 'web-components/lib/components/cards/Card';
@@ -35,10 +35,7 @@ import { SellOrderInfoNormalized } from 'pages/Projects/hooks/useProjectsSellOrd
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
-import {
-  getSellOrderInfoLabel,
-  getSellOrderLabel,
-} from './BuyCreditsModal.utils';
+import { formatDenom, getSellOrderLabel } from './BuyCreditsModal.utils';
 
 export interface Credits {
   purchased: number;
@@ -64,15 +61,15 @@ interface BuyCreditsModalProps extends RegenModalProps {
 }
 
 export interface BuyCreditsValues {
-  retirementNote: string;
-  stateProvince: string;
+  retirementNote?: string;
+  stateProvince?: string;
   country: string;
-  postalCode: string;
-  retirementAction: string;
+  postalCode?: string;
+  retirementAction?: string;
   creditCount: number;
   price: number;
-  askDenom: string;
-  batchDenom: string;
+  askDenom?: string;
+  batchDenom?: string;
   sellOrderId: string;
 }
 
@@ -88,39 +85,31 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 }) => {
   const styles = useBuyCreditsModalStyles();
   const theme = useTheme();
+  const [selectedSellOrder, setSelectedSellOrder] =
+    useState<SellOrderInfoNormalized | null>(null);
 
   const submit = async (values: BuyCreditsValues): Promise<void> => {
-    const selectedSellOrder = project?.sellOrders?.find(
-      sellOrder => sellOrder.id === values.sellOrderId,
-    );
+    const { country, postalCode, stateProvince, retirementAction } = values;
 
     if (onSubmit && selectedSellOrder) {
       const fullValues: BuyCreditsValues = {
         ...values,
-        price: parseInt(selectedSellOrder.askAmount),
+        price: parseInt(selectedSellOrder.askAmount) * Math.pow(10, 6),
         batchDenom: selectedSellOrder.batchDenom,
         sellOrderId: selectedSellOrder.id,
+        country: retirementAction === 'autoretire' ? country : '',
+        postalCode: retirementAction === 'autoretire' ? postalCode : '',
+        stateProvince: retirementAction === 'autoretire' ? stateProvince : '',
       };
       onSubmit(fullValues);
     }
   };
 
   const getOptions = (): Option[] => {
-    // sell order table case
-    if (initialValues?.sellOrderId) {
-      return [
-        {
-          label: getSellOrderLabel(initialValues),
-          value: initialValues?.sellOrderId,
-        },
-      ];
-    }
-
-    // projects with multiple orders
     if (project?.sellOrders?.length) {
       const sellOrderOptions = project?.sellOrders.map(sellOrder => {
         return {
-          label: getSellOrderInfoLabel(sellOrder),
+          label: getSellOrderLabel(sellOrder),
           value: sellOrder.id,
         };
       });
@@ -128,6 +117,26 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
     }
 
     return [];
+  };
+
+  const SetSelectedSellOrder = (): JSX.Element => {
+    const { values, setFieldValue } = useFormikContext<BuyCreditsValues>();
+    if (selectedSellOrder?.id !== values.sellOrderId) {
+      const _selectedSellOrder = project?.sellOrders?.find(
+        sellOrder => sellOrder.id === values?.sellOrderId,
+      );
+      if (_selectedSellOrder) {
+        setSelectedSellOrder(_selectedSellOrder);
+        if (
+          _selectedSellOrder.disableAutoRetire &&
+          values.retirementAction !== 'manual'
+        ) {
+          setFieldValue('retirementAction', 'manual');
+        }
+      }
+    }
+
+    return <></>;
   };
 
   return (
@@ -182,9 +191,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           }}
         >
           {({ values, submitForm, isValid, isSubmitting, submitCount }) => {
-            const selectedSellOrder = project?.sellOrders?.find(
-              sellOrder => sellOrder.id === values?.sellOrderId,
-            );
             return (
               <div>
                 <Form translate="yes">
@@ -198,71 +204,78 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     sx={{ mb: theme.spacing(10.5) }}
                     disabled={!!initialValues?.sellOrderId}
                   />
-                  <div className={styles.field}>
-                    <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                      Amount of credits
-                    </Title>
-                    <Body
-                      size="md"
-                      mobileSize="md"
-                      sx={{
-                        color: 'primary.contrastText',
-                        fontWeight: 700,
-                        mb: 3,
-                      }}
-                    >
-                      {`${selectedSellOrder?.askAmount} REGEN/per credit `}
-                    </Body>
-                    <Body
-                      size="md"
-                      sx={{ color: 'primary.light', fontWeight: 700, mb: 3 }}
-                    >
-                      Batch denom:{' '}
-                      <Body
-                        sx={{ fontWeight: 'normal', display: 'inline-block' }}
-                      >
-                        {selectedSellOrder?.batchDenom}
-                      </Body>
-                    </Body>
-                    <div className={styles.creditWidget}>
-                      <div className={styles.marginRight}>
-                        <Field
-                          className={cx(styles.creditInput)}
-                          component={NumberTextField}
-                          name="creditCount"
-                          min={1}
-                          max={selectedSellOrder?.quantity}
-                        />
-                      </div>
-                      <Title variant="h6" sx={{ mr: 4 }}>
-                        =
+                  <SetSelectedSellOrder />
+                  <Collapse in={!!selectedSellOrder}>
+                    <div className={styles.field}>
+                      <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
+                        Amount of credits
                       </Title>
-                      <div
-                        className={cx(styles.flexColumn, styles.marginRight)}
+                      <Body
+                        size="md"
+                        mobileSize="md"
+                        sx={{
+                          color: 'primary.contrastText',
+                          fontWeight: 700,
+                          mb: 3,
+                        }}
                       >
-                        <Box
-                          sx={{
-                            display: 'flex',
-                            alignItems: 'baseline',
-                            flexWrap: 'wrap',
-                          }}
+                        {`${selectedSellOrder?.askAmount} ${formatDenom(
+                          selectedSellOrder?.askDenom || '',
+                        )}`}
+                      </Body>
+                      <Body
+                        size="md"
+                        sx={{ color: 'primary.light', fontWeight: 700, mb: 3 }}
+                      >
+                        Batch denom:{' '}
+                        <Body
+                          sx={{ fontWeight: 'normal', display: 'inline-block' }}
                         >
-                          <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
-                            <RegenTokenIcon className={styles.regenIcon} />
-                            <Title variant="h4" sx={{ mr: 1.5 }}>
-                              {values.creditCount *
-                                ((selectedSellOrder?.askAmount &&
-                                  parseInt(selectedSellOrder.askAmount)) ||
-                                  0) || '-'}
-                            </Title>
+                          {selectedSellOrder?.batchDenom}
+                        </Body>
+                      </Body>
+                      <div className={styles.creditWidget}>
+                        <div className={styles.marginRight}>
+                          <Field
+                            className={cx(styles.creditInput)}
+                            component={NumberTextField}
+                            name="creditCount"
+                            min={1}
+                            max={selectedSellOrder?.quantity}
+                          />
+                        </div>
+                        <Title variant="h6" sx={{ mr: 4 }}>
+                          =
+                        </Title>
+                        <div
+                          className={cx(styles.flexColumn, styles.marginRight)}
+                        >
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'baseline',
+                              flexWrap: 'wrap',
+                            }}
+                          >
+                            <Box
+                              sx={{ display: 'flex', alignItems: 'baseline' }}
+                            >
+                              <RegenTokenIcon className={styles.regenIcon} />
+                              <Title variant="h4" sx={{ mr: 1.5 }}>
+                                {values.creditCount *
+                                  ((selectedSellOrder?.askAmount &&
+                                    parseInt(selectedSellOrder.askAmount)) ||
+                                    0) || '-'}
+                              </Title>
+                            </Box>
+                            <Label size="sm" sx={{ color: 'info.dark' }}>
+                              {'REGEN'}
+                            </Label>
                           </Box>
-                          <Label size="sm" sx={{ color: 'info.dark' }}>
-                            {'REGEN'}
-                          </Label>
-                        </Box>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Collapse>
                   <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                     Retirement of credits
                   </Title>

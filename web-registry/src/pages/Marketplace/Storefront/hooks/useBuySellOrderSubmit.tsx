@@ -54,7 +54,7 @@ const useBuySellOrderSubmit = ({
         askDenom,
         postalCode,
       } = values;
-      const disableAutoRetire = retirementAction === 'manual';
+      const disableAutoRetire = retirementAction === 'manual'; // TODO: is this right?
       const stateProvinceValue = stateProvince ? `-${stateProvince}` : '';
       const postalCodeValue = stateProvince ? ` ${postalCode}` : '';
 
@@ -90,7 +90,7 @@ const useBuySellOrderSubmit = ({
           {
             label: 'total purchase price',
             value: {
-              name: String(price * creditCount),
+              name: String((price / Math.pow(10, 6)) * creditCount),
               icon: (
                 <Box
                   sx={{

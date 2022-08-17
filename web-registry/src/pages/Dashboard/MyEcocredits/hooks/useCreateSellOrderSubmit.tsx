@@ -42,13 +42,14 @@ const useCreateSellOrderSubmit = ({
       if (!accountAddress) return Promise.reject();
 
       const { amount, batchDenom, price, disableAutoRetire } = values;
+      const normalizedPrice = price ? price * Math.pow(10, 6) : '';
       const msg = MsgSell.fromPartial({
         seller: accountAddress,
         orders: [
           {
             batchDenom,
             quantity: String(amount),
-            askPrice: { denom: PRICE_DENOM, amount: String(price) },
+            askPrice: { denom: PRICE_DENOM, amount: String(normalizedPrice) },
             disableAutoRetire,
           },
         ],

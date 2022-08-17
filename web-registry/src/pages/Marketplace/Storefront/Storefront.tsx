@@ -154,22 +154,26 @@ export const Storefront = (): JSX.Element => {
     askDenom,
     batchDenom,
     id: orderId,
+    project,
+    seller,
+    amountAvailable,
+    disableAutoRetire,
   } = normalizedSellOrders[selectedSellOrder ?? 0] ?? {};
 
-  const initalValues = useMemo(
+  const initialValues = useMemo(
     () => ({
       creditCount: 1,
       retirementNote: '',
       stateProvince: '',
-      country: '',
+      country: 'US',
       postalCode: '',
-      retirementAction: 'autoretire',
-      price: Number(askAmount),
+      retirementAction: disableAutoRetire ? 'manual' : 'autoretire',
+      price: parseInt(askAmount),
       askDenom: askDenom,
       batchDenom: batchDenom,
       sellOrderId: orderId,
     }),
-    [askAmount, askDenom, batchDenom, orderId],
+    [askAmount, askDenom, batchDenom, disableAutoRetire, orderId],
   );
 
   return (
@@ -225,9 +229,20 @@ export const Storefront = (): JSX.Element => {
         onClose={() => setSelectedSellOrder(null)}
         onSubmit={buySellOrderSubmit}
         project={{
-          id: selectedSellOrder?.toString() ?? '',
+          id: project?.id ?? '',
+          sellOrders: [
+            {
+              id: orderId,
+              askAmount,
+              askDenom,
+              batchDenom,
+              seller,
+              quantity: amountAvailable,
+              disableAutoRetire,
+            },
+          ],
         }}
-        initialValues={initalValues}
+        initialValues={initialValues}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

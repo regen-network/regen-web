@@ -4,6 +4,7 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 
 import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
 import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
+import { formatNumber } from 'web-components/lib/utils/format';
 
 import { getMetadata } from 'lib/metadata-graph';
 
@@ -14,7 +15,8 @@ type Props = {
   sellOrders?: SellOrderInfo[];
 };
 
-export interface SellOrderInfoNormalized extends Omit<SellOrderInfo, 'id'> {
+export interface SellOrderInfoNormalized
+  extends Omit<SellOrderInfo, 'id' | '$type'> {
   id: string;
 }
 
@@ -53,7 +55,15 @@ const getProjectDisplayData = async (
 ): Promise<ProjectWithOrderData[]> => {
   const projectsWithOrderData = await Promise.all(
     projects?.map(async project => {
-      const purchaseInfo = getPurchaseInfo(project.id, sellOrders);
+      const sellOrdersNormalized = sellOrders
+        .filter(sellOrder => sellOrder?.batchDenom?.startsWith(project.id))
+        .map(sellOrder => {
+          return {
+            ...sellOrder,
+            id: String(sellOrder.id),
+          };
+        });
+      const purchaseInfo = getPurchaseInfo(sellOrdersNormalized);
       let metadata;
       if (project.metadata.length) {
         try {
@@ -63,14 +73,6 @@ const getProjectDisplayData = async (
           console.error(error);
         }
       }
-      const sellOrdersNormalized = sellOrders
-        .filter(sellOrder => sellOrder?.batchDenom?.startsWith(project.id))
-        .map(sellOrder => {
-          return {
-            ...sellOrder,
-            id: String(sellOrder.id),
-          };
-        });
 
       return {
         id: project.id,
@@ -93,13 +95,9 @@ const getProjectDisplayData = async (
 };
 
 const getPurchaseInfo = (
-  projectId: string,
-  sellOrders: SellOrderInfo[],
+  sellOrders: SellOrderInfoNormalized[],
 ): PurchaseInfo => {
-  const ordersForThisProject = sellOrders.filter(order =>
-    order.batchDenom.startsWith(projectId),
-  );
-  if (!ordersForThisProject.length)
+  if (!sellOrders.length)
     return {
       sellInfo: {
         pricePerTon: `-`,
@@ -107,15 +105,15 @@ const getPurchaseInfo = (
       },
     };
 
-  const creditsAvailable = ordersForThisProject
+  const creditsAvailable = sellOrders
     .map(order => parseInt(order.quantity))
     .reduce((total, quantity) => total + quantity, 0);
 
-  const prices = ordersForThisProject
+  const prices = sellOrders
     .map(order => parseInt(order.askAmount))
     .sort((a, b) => a - b);
-  const priceMin = prices?.[0];
-  const priceMax = prices?.[prices.length - 1];
+  const priceMin = formatNumber(prices?.[0]);
+  const priceMax = formatNumber(prices?.[prices.length - 1]);
 
   return {
     sellInfo: {

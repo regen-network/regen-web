@@ -1,26 +1,17 @@
 import { SellOrderInfoNormalized } from 'pages/Projects/hooks/useProjectsSellOrders';
 
-import { BuyCreditsValues } from './BuyCreditsModal';
-
-export const getSellOrderLabel = (sellOrder: BuyCreditsValues): string => {
-  const { sellOrderId, price, askDenom = '', creditCount } = sellOrder;
-  return formatLabel(sellOrderId, price, askDenom, creditCount);
-};
-
-export const getSellOrderInfoLabel = (
+export const getSellOrderLabel = (
   sellOrder: SellOrderInfoNormalized,
 ): string => {
-  const { id, askAmount, askDenom = '', quantity } = sellOrder;
-  return formatLabel(id, askAmount, askDenom, quantity);
+  const { id, askAmount, askDenom = '', quantity } = { ...sellOrder };
+  const denom = formatDenom(askDenom);
+  return `${id} (${askAmount} ${denom}/credit: ${quantity} credit(s) available)`;
 };
 
-const formatLabel = (
-  sellOrderId: string,
-  price: string | number,
-  askDenom: string,
-  creditCount: string | number,
-): string => {
-  return `${sellOrderId} (${price} ${askDenom
-    .substring(1)
-    .toUpperCase()}/credit: ${creditCount} credit(s) available)`;
+/**
+ * Convert Cosmos-style micro denom (starting with u) to natural denom.
+ * Example uregen -> REGEN
+ */
+export const formatDenom = (askDenom: string): string => {
+  return askDenom.substring(1).toUpperCase();
 };

@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Grid, SxProps } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
 
 import { Theme } from '../../theme/muiTheme';
-import { getISOString } from '../../utils/locationStandard';
-import ErrorBanner from '../banner/ErrorBanner';
 import AmountField from '../inputs/AmountField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import LocationCountryField from '../inputs/LocationCountryField';
@@ -15,6 +13,35 @@ import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import { Body, Title } from '../typography';
 import Submit from './Submit';
+
+// Util function to prepare jurisdiction ISO code
+
+type LocationType = {
+  country: string;
+  stateProvince?: string;
+  postalCode?: string;
+};
+
+const getJurisdiction = ({
+  country,
+  stateProvince,
+  postalCode,
+}: LocationType): string => {
+  let jurisdiction = country;
+
+  // TODO - text fields allow whitespace strings..
+  const _postalCode = postalCode?.trim();
+
+  if (stateProvince && !_postalCode) {
+    jurisdiction = stateProvince;
+  }
+
+  if (stateProvince && _postalCode) {
+    jurisdiction = `${stateProvince} ${_postalCode}`;
+  }
+
+  return jurisdiction;
+};
 
 /**
  * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).
@@ -29,7 +56,10 @@ import Submit from './Submit';
  *    credits: must not be empty (MsgRetire.RetireCredits)
  *      - batch_denom: must be a valid batch denomination
  *      - amount: must be positive (aka retiredAmount)
- *    location: must be a valid location
+ *    jurisdiction: valid iso-3166 code, 3 options:
+ *      | country code: iso-3166-1
+ *      | subdivision code: iso-3166-2
+ *      | subdivision code with postal code: `${iso-3166-2} ${postalCode}`
  */
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -99,20 +129,12 @@ export interface BottomCreditRetireFieldsProps {
   arrayIndex?: number;
 }
 
-type LocationType = {
-  country: string;
-  stateProvince?: string;
-  postalCode?: string;
-};
-
 export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
   ({ mapboxToken, arrayPrefix = '', arrayIndex }) => {
     const styles = useStyles();
     const { values, setFieldValue } = useFormikContext<
       RetireFormValues | RetireFormValuesArray
     >();
-    const [geocodingError, setGeocodingError] = useState<string | null>(null);
-
     const item =
       typeof arrayIndex === 'number'
         ? (values as RetireFormValuesArray).recipients[arrayIndex]
@@ -123,35 +145,17 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
     useEffect(() => {
       const retirementJurisdictionName = `${arrayPrefix}retirementJurisdiction`;
 
-      const setRetirementJurisdiction = async ({
+      if (!country) {
+        setFieldValue(retirementJurisdictionName, null);
+        return;
+      }
+
+      const jurisdiction = getJurisdiction({
         country,
         stateProvince,
         postalCode,
-      }: LocationType): Promise<void> => {
-        try {
-          const isoString = await getISOString(mapboxToken, {
-            countryKey: country,
-            stateProvince,
-            postalCode,
-          });
-
-          setFieldValue(retirementJurisdictionName, isoString || country);
-          if (geocodingError) setGeocodingError(null);
-        } catch (err) {
-          // initially this effect may fail mainly because the accessToken
-          // (mapboxToken) is not set in the environment variables.
-          setGeocodingError(
-            (err as string) || 'Geocoding service not available',
-          );
-        }
-      };
-
-      if (stateProvince || country || postalCode) {
-        setRetirementJurisdiction({ country, stateProvince, postalCode });
-      }
-      if (!country) {
-        setFieldValue(retirementJurisdictionName, null);
-      }
+      });
+      setFieldValue(retirementJurisdictionName, jurisdiction);
     }, [
       country,
       stateProvince,
@@ -159,9 +163,10 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
       setFieldValue,
       mapboxToken,
       arrayPrefix,
-      geocodingError,
-      setGeocodingError,
     ]);
+
+    // eslint-disable-next-line no-console
+    console.log('values', values);
 
     // showNotesField
     // When in the same form we have a set of credit retirement (for example,
@@ -173,7 +178,6 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
 
     return (
       <>
-        {geocodingError && <ErrorBanner text={geocodingError} />}
         {showNotesField && (
           <>
             <Title variant="h5" sx={sxs.title}>

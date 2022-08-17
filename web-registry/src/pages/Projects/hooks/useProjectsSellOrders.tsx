@@ -8,6 +8,8 @@ import { formatNumber } from 'web-components/lib/utils/format';
 
 import { getMetadata } from 'lib/metadata-graph';
 
+import { microToDenom } from 'components/organisms/BuyCreditsModal/BuyCreditsModal.utils';
+
 import DefaultProject from 'assets/default-project.jpg';
 
 type Props = {
@@ -110,7 +112,7 @@ const getPurchaseInfo = (
     .reduce((total, quantity) => total + quantity, 0);
 
   const prices = sellOrders
-    .map(order => parseInt(order.askAmount))
+    .map(order => microToDenom(order.askAmount))
     .sort((a, b) => a - b);
   const priceMin = formatNumber(prices?.[0]);
   const priceMax = formatNumber(prices?.[prices.length - 1]);

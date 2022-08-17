@@ -35,7 +35,11 @@ import { SellOrderInfoNormalized } from 'pages/Projects/hooks/useProjectsSellOrd
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
-import { formatDenom, getSellOrderLabel } from './BuyCreditsModal.utils';
+import {
+  formatDenomText,
+  getSellOrderLabel,
+  microToDenom,
+} from './BuyCreditsModal.utils';
 
 export interface Credits {
   purchased: number;
@@ -133,6 +137,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
         ) {
           setFieldValue('retirementAction', 'manual');
         }
+      } else {
+        setSelectedSellOrder(null);
       }
     }
 
@@ -219,7 +225,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           mb: 3,
                         }}
                       >
-                        {`${selectedSellOrder?.askAmount} ${formatDenom(
+                        {`${microToDenom(
+                          selectedSellOrder?.askAmount || '',
+                        )} ${formatDenomText(
                           selectedSellOrder?.askDenom || '',
                         )}`}
                       </Body>
@@ -264,7 +272,9 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                               <Title variant="h4" sx={{ mr: 1.5 }}>
                                 {values.creditCount *
                                   ((selectedSellOrder?.askAmount &&
-                                    parseInt(selectedSellOrder.askAmount)) ||
+                                    microToDenom(
+                                      selectedSellOrder.askAmount,
+                                    )) ||
                                     0) || '-'}
                               </Title>
                             </Box>

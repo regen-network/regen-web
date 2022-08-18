@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Link } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import Collapse from '@mui/material/Collapse';
 import Grid from '@mui/material/Grid';
 import cx from 'clsx';
-import { Field, Form, Formik, useFormikContext } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import { RadioGroup } from 'formik-mui';
 
 import Card from 'web-components/lib/components/cards/Card';
@@ -40,6 +40,7 @@ import { ISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
 import { getSellOrderLabel } from './BuyCreditsModal.utils';
+import { useSetSelectedSellOrder } from './hooks/useSetSelectedSellOrder';
 
 export interface Credits {
   purchased: number;
@@ -52,16 +53,18 @@ interface BuyCreditsModalProps extends RegenModalProps {
   onTxQueued?: (txBytes: Uint8Array) => void;
   onSubmit?: (values: any) => Promise<void>;
   initialValues?: BuyCreditsValues;
-  project: {
-    id: string;
-    name?: string | null;
-    image?: string;
-    creditDenom?: string;
-    credits?: Credits;
-    sellOrders?: ISellOrderInfo[];
-  };
+  project: BuyCreditsProject;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
+}
+
+export interface BuyCreditsProject {
+  id: string;
+  name?: string | null;
+  image?: string;
+  creditDenom?: string;
+  credits?: Credits;
+  sellOrders?: ISellOrderInfo[];
 }
 
 export interface BuyCreditsValues {
@@ -89,8 +92,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 }) => {
   const styles = useBuyCreditsModalStyles();
   const theme = useTheme();
-  const [selectedSellOrder, setSelectedSellOrder] =
-    useState<ISellOrderInfo | null>(null);
+  const { selectedSellOrder, SetSelectedSellOrderElement } =
+    useSetSelectedSellOrder(project);
 
   const submit = async (values: BuyCreditsValues): Promise<void> => {
     const { country, postalCode, stateProvince, retirementAction } = values;
@@ -121,28 +124,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
     }
 
     return [];
-  };
-
-  const SetSelectedSellOrder = (): JSX.Element => {
-    const { values, setFieldValue } = useFormikContext<BuyCreditsValues>();
-    if (selectedSellOrder?.id !== values.sellOrderId) {
-      const _selectedSellOrder = project?.sellOrders?.find(
-        sellOrder => sellOrder.id === values?.sellOrderId,
-      );
-      if (_selectedSellOrder) {
-        setSelectedSellOrder(_selectedSellOrder);
-        if (
-          _selectedSellOrder.disableAutoRetire &&
-          values.retirementAction !== 'manual'
-        ) {
-          setFieldValue('retirementAction', 'manual');
-        }
-      } else {
-        setSelectedSellOrder(null);
-      }
-    }
-
-    return <></>;
   };
 
   return (
@@ -217,7 +198,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                     sx={{ mb: theme.spacing(10.5) }}
                     disabled={!!initialValues?.sellOrderId}
                   />
-                  <SetSelectedSellOrder />
+                  <SetSelectedSellOrderElement />
                   <Collapse in={!!selectedSellOrder}>
                     <div className={styles.field}>
                       <Title variant="h5" sx={{ mb: 2, mr: 2 }}>

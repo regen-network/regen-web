@@ -49,3 +49,33 @@ export const getISOString = async (
   // If country-only, mapbox returns lowercase ('us'), so need toUppercase here for ledger
   return Promise.resolve(placeCode?.toUpperCase());
 };
+
+// Util function to prepare jurisdiction ISO code
+// based on package iso-3166-2
+
+type LocationType = {
+  country: string;
+  stateProvince?: string;
+  postalCode?: string;
+};
+
+export const getJurisdictionIsoCode = ({
+  country, // US
+  stateProvince, // US-CO
+  postalCode,
+}: LocationType): string => {
+  let jurisdiction = country;
+
+  // TODO - text fields allow whitespace strings..
+  const _postalCode = postalCode?.trim();
+
+  if (stateProvince && !_postalCode) {
+    jurisdiction = stateProvince;
+  }
+
+  if (stateProvince && _postalCode) {
+    jurisdiction = `${stateProvince} ${_postalCode}`;
+  }
+
+  return jurisdiction;
+};

@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
 
 import { Theme } from '../../theme/muiTheme';
+import { getJurisdictionIsoCode } from '../../utils/locationStandard';
 import AmountField from '../inputs/AmountField';
 import ControlledTextField from '../inputs/ControlledTextField';
 import LocationCountryField from '../inputs/LocationCountryField';
@@ -13,35 +14,6 @@ import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import { Body, Title } from '../typography';
 import Submit from './Submit';
-
-// Util function to prepare jurisdiction ISO code
-
-type LocationType = {
-  country: string;
-  stateProvince?: string;
-  postalCode?: string;
-};
-
-const getJurisdiction = ({
-  country,
-  stateProvince,
-  postalCode,
-}: LocationType): string => {
-  let jurisdiction = country;
-
-  // TODO - text fields allow whitespace strings..
-  const _postalCode = postalCode?.trim();
-
-  if (stateProvince && !_postalCode) {
-    jurisdiction = stateProvince;
-  }
-
-  if (stateProvince && _postalCode) {
-    jurisdiction = `${stateProvince} ${_postalCode}`;
-  }
-
-  return jurisdiction;
-};
 
 /**
  * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).
@@ -150,11 +122,12 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
         return;
       }
 
-      const jurisdiction = getJurisdiction({
+      const jurisdiction = getJurisdictionIsoCode({
         country,
         stateProvince,
         postalCode,
       });
+
       setFieldValue(retirementJurisdictionName, jurisdiction);
     }, [
       country,
@@ -164,9 +137,6 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
       mapboxToken,
       arrayPrefix,
     ]);
-
-    // eslint-disable-next-line no-console
-    console.log('values', values);
 
     // showNotesField
     // When in the same form we have a set of credit retirement (for example,

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { asyncSome } from 'lib/asyncSome';
+
 import { queryClassIssuers } from '../lib/ecocredit/api';
 import { useWallet } from '../lib/wallet';
 import useQueryListClasses from './useQueryListClasses';
@@ -7,7 +9,7 @@ import useQueryListClasses from './useQueryListClasses';
 /**
  * Simply returns if user's wallet address was found in an on-chain credit class issuer list
  *  */
-export default function useQueryIfIssuer(): boolean {
+function useQueryIfIssuer(): boolean {
   const [isIssuer, setIsIssuer] = useState(false);
   const { wallet } = useWallet();
   const onChainClasses = useQueryListClasses();
@@ -18,15 +20,20 @@ export default function useQueryIfIssuer(): boolean {
         setIsIssuer(false);
         return;
       }
-      const result = onChainClasses?.classes?.some(async creditClass => {
-        const { issuers } = await queryClassIssuers(creditClass.id);
-        return issuers?.includes(wallet.address);
-      });
-      setIsIssuer(result);
+      const foundOne = await asyncSome(
+        onChainClasses?.classes,
+        async creditClass => {
+          const { issuers } = await queryClassIssuers(creditClass.id);
+          return issuers?.includes(wallet.address);
+        },
+      );
+
+      setIsIssuer(foundOne);
     };
 
     queryIfIssuer();
   }, [onChainClasses?.classes, wallet?.address]);
-
   return isIssuer;
 }
+
+export { useQueryIfIssuer };

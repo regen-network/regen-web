@@ -18,9 +18,7 @@ import ControlledTextField from 'web-components/lib/components/inputs/Controlled
 import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
 import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
-import SelectTextField, {
-  Option,
-} from 'web-components/lib/components/inputs/SelectTextField';
+import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
@@ -39,7 +37,7 @@ import { ISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
-import { getSellOrderLabel } from './BuyCreditsModal.utils';
+import { getOptions, handleBuyCreditsSubmit } from './BuyCreditsModal.utils';
 import { useSetSelectedSellOrder } from './hooks/useSetSelectedSellOrder';
 
 export interface Credits {
@@ -51,7 +49,7 @@ interface BuyCreditsModalProps extends RegenModalProps {
   open: boolean;
   onClose: () => void;
   onTxQueued?: (txBytes: Uint8Array) => void;
-  onSubmit?: (values: any) => Promise<void>;
+  onSubmit?: (values: BuyCreditsValues) => Promise<void>;
   initialValues?: BuyCreditsValues;
   project: BuyCreditsProject;
   apiServerUrl?: string;
@@ -94,37 +92,6 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   const theme = useTheme();
   const { selectedSellOrder, SetSelectedSellOrderElement } =
     useSetSelectedSellOrder(project);
-
-  const submit = async (values: BuyCreditsValues): Promise<void> => {
-    const { country, postalCode, stateProvince, retirementAction } = values;
-
-    if (onSubmit && selectedSellOrder) {
-      const fullValues: BuyCreditsValues = {
-        ...values,
-        price: Number(selectedSellOrder.askAmount),
-        batchDenom: selectedSellOrder.batchDenom,
-        sellOrderId: selectedSellOrder.id,
-        country: retirementAction === 'autoretire' ? country : '',
-        postalCode: retirementAction === 'autoretire' ? postalCode : '',
-        stateProvince: retirementAction === 'autoretire' ? stateProvince : '',
-      };
-      onSubmit(fullValues);
-    }
-  };
-
-  const getOptions = (): Option[] => {
-    if (project?.sellOrders?.length) {
-      const sellOrderOptions = project?.sellOrders.map(sellOrder => {
-        return {
-          label: getSellOrderLabel(sellOrder),
-          value: sellOrder.id,
-        };
-      });
-      return [{ label: 'Choose a sell order', value: '' }, ...sellOrderOptions];
-    }
-
-    return [];
-  };
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -170,7 +137,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             try {
-              await submit(values);
+              await handleBuyCreditsSubmit(values, onSubmit, selectedSellOrder);
               setSubmitting(false);
             } catch (e) {
               setSubmitting(false);
@@ -194,7 +161,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   <Field
                     name="sellOrderId"
                     component={SelectTextField}
-                    options={getOptions()}
+                    options={getOptions(project)}
                     sx={{ mb: theme.spacing(10.5) }}
                     disabled={!!initialValues?.sellOrderId}
                   />

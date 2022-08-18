@@ -8,11 +8,12 @@ import { BuyCreditsProject, BuyCreditsValues } from '../..';
 export const useSetSelectedSellOrder = (
   project: BuyCreditsProject,
 ): {
-  selectedSellOrder: ISellOrderInfo | null;
+  selectedSellOrder: ISellOrderInfo | undefined;
   SetSelectedSellOrderElement: React.FC;
 } => {
-  const [selectedSellOrder, setSelectedSellOrder] =
-    useState<ISellOrderInfo | null>(null);
+  const [selectedSellOrder, setSelectedSellOrder] = useState<
+    ISellOrderInfo | undefined
+  >(undefined);
 
   const SetSelectedSellOrderElement: React.FC = () => {
     const { values, setFieldValue } = useFormikContext<BuyCreditsValues>();
@@ -30,7 +31,7 @@ export const useSetSelectedSellOrder = (
             setFieldValue('retirementAction', 'manual');
           }
         } else {
-          setSelectedSellOrder(null);
+          setSelectedSellOrder(undefined);
         }
       }
     }, [setFieldValue, values.retirementAction, values.sellOrderId]);

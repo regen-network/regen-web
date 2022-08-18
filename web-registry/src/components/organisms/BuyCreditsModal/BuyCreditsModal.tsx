@@ -31,15 +31,15 @@ import {
   Title,
 } from 'web-components/lib/components/typography';
 
+import {
+  formatDenomText,
+  microToDenom,
+} from 'pages/Marketplace/Marketplace.utils';
 import { ISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
-import {
-  formatDenomText,
-  getSellOrderLabel,
-  microToDenom,
-} from './BuyCreditsModal.utils';
+import { getSellOrderLabel } from './BuyCreditsModal.utils';
 
 export interface Credits {
   purchased: number;
@@ -196,7 +196,14 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
             }
           }}
         >
-          {({ values, submitForm, isValid, isSubmitting, submitCount }) => {
+          {({
+            values,
+            submitForm,
+            isValid,
+            isSubmitting,
+            status,
+            submitCount,
+          }) => {
             return (
               <div>
                 <Form translate="yes">
@@ -302,7 +309,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       checked={values['retirementAction'] === 'autoretire'}
                       label="Auto-retire credits"
                       description="These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
-                      disabled={!!selectedSellOrder?.disableAutoRetire} // TODO
+                      disabled={!!selectedSellOrder?.disableAutoRetire}
                     />
                     <Field
                       className={styles.toggle}
@@ -374,7 +381,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                 <Submit
                   isSubmitting={isSubmitting}
                   onClose={onClose}
-                  // status={status} TODO
+                  status={status}
                   isValid={isValid}
                   submitCount={submitCount}
                   submitForm={submitForm}

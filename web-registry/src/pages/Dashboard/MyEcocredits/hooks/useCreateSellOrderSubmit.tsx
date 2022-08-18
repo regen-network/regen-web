@@ -9,6 +9,7 @@ import { getFormattedNumber } from 'web-components/lib/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
 
+import { denomToMicro } from 'pages/Marketplace/Marketplace.utils';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
@@ -40,16 +41,16 @@ const useCreateSellOrderSubmit = ({
   const basketPutSubmit = useCallback(
     async (values: CreateSellOrderFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
-
       const { amount, batchDenom, price, disableAutoRetire } = values;
-      const normalizedPrice = price ? price * Math.pow(10, 6) : '';
+
+      const priceInMicro = price ? denomToMicro(price) : ''; // convert to udenom
       const msg = MsgSell.fromPartial({
         seller: accountAddress,
         orders: [
           {
             batchDenom,
             quantity: String(amount),
-            askPrice: { denom: PRICE_DENOM, amount: String(normalizedPrice) },
+            askPrice: { denom: PRICE_DENOM, amount: String(priceInMicro) },
             disableAutoRetire,
           },
         ],

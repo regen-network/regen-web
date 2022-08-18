@@ -8,8 +8,8 @@ import { getFormattedNumber } from 'web-components/lib/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
 
+import { microToDenom } from 'pages/Marketplace/Marketplace.utils';
 import { BuyCreditsValues } from 'components/organisms';
-import { microToDenom } from 'components/organisms/BuyCreditsModal/BuyCreditsModal.utils';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {

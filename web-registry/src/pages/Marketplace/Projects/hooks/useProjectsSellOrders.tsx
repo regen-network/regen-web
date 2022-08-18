@@ -7,7 +7,7 @@ import { formatNumber } from 'web-components/lib/utils/format';
 
 import { getMetadata } from 'lib/metadata-graph';
 
-import { microToDenom } from 'components/organisms/BuyCreditsModal/BuyCreditsModal.utils';
+import { microToDenom } from 'pages/Marketplace/Marketplace.utils';
 
 import { ISellOrderInfo, ProjectWithOrderData } from '../Projects.types';
 

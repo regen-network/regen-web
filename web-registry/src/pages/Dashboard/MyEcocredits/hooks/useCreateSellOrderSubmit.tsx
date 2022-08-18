@@ -43,7 +43,8 @@ const useCreateSellOrderSubmit = ({
       if (!accountAddress) return Promise.reject();
       const { amount, batchDenom, price, disableAutoRetire } = values;
 
-      const priceInMicro = price ? denomToMicro(price) : ''; // convert to udenom
+      // convert to udenom
+      const priceInMicro = price ? denomToMicro(price) : ''; // TODO: When other currencies, check for micro denom before converting
       const msg = MsgSell.fromPartial({
         seller: accountAddress,
         orders: [

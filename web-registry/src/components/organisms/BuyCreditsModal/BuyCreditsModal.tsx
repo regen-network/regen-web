@@ -71,7 +71,7 @@ export interface BuyCreditsValues {
   postalCode?: string;
   retirementAction?: string;
   creditCount: number;
-  price: number;
+  price?: number;
   askDenom?: string;
   batchDenom?: string;
   sellOrderId: string;
@@ -98,7 +98,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
     if (onSubmit && selectedSellOrder) {
       const fullValues: BuyCreditsValues = {
         ...values,
-        price: parseInt(selectedSellOrder.askAmount),
+        price: Number(selectedSellOrder.askAmount),
         batchDenom: selectedSellOrder.batchDenom,
         sellOrderId: selectedSellOrder.id,
         country: retirementAction === 'autoretire' ? country : '',

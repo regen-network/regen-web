@@ -10,8 +10,9 @@ export const formatDenomText = (askDenom: string): string => {
  * Convert Cosmos-style micro denom amount to readable full-denom amount
  * Example 7000000 uregen -> 7 REGEN
  */
-export const microToDenom = (amount: string | number): number => {
-  const price = typeof amount === 'string' ? parseInt(amount) : amount;
+export const microToDenom = (amount?: string | number): number => {
+  if (!amount) return 0;
+  const price = typeof amount === 'string' ? Number(amount) : amount;
   return price / Math.pow(10, 6);
 };
 
@@ -19,7 +20,8 @@ export const microToDenom = (amount: string | number): number => {
  * Convert readable full-denom amount to micro denom amount
  * Example 8 REGEN -> 8000000 uregen
  */
-export const denomToMicro = (amount: string | number): number => {
-  const price = typeof amount === 'string' ? parseInt(amount) : amount;
+export const denomToMicro = (amount?: string | number): number => {
+  if (!amount) return 0;
+  const price = typeof amount === 'string' ? Number(amount) : amount;
   return price * Math.pow(10, 6);
 };

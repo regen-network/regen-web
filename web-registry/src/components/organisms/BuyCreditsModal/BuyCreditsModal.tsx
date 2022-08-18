@@ -229,7 +229,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                           selectedSellOrder?.askAmount || '',
                         )} ${formatDenomText(
                           selectedSellOrder?.askDenom || '',
-                        )}`}
+                        )}/credit`}
                       </Body>
                       <Body
                         size="md"

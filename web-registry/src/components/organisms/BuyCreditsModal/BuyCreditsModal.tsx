@@ -200,7 +200,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       <div className={styles.creditWidget}>
                         <div className={styles.marginRight}>
                           <Field
-                            className={cx(styles.creditInput)}
+                            className={styles.creditInput}
                             component={NumberTextField}
                             name="creditCount"
                             min={1}
@@ -226,11 +226,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                               <RegenTokenIcon className={styles.regenIcon} />
                               <Title variant="h4" sx={{ mr: 1.5 }}>
                                 {values.creditCount *
-                                  ((selectedSellOrder?.askAmount &&
-                                    microToDenom(
-                                      selectedSellOrder.askAmount,
-                                    )) ||
-                                    0) || '-'}
+                                  microToDenom(selectedSellOrder?.askAmount) ||
+                                  '-'}
                               </Title>
                             </Box>
                             <Label size="sm" sx={{ color: 'info.dark' }}>

@@ -22,16 +22,14 @@ export const useSetSelectedSellOrder = (
         const _selectedSellOrder = project?.sellOrders?.find(
           sellOrder => sellOrder.id === values?.sellOrderId,
         );
-        if (_selectedSellOrder) {
-          setSelectedSellOrder(_selectedSellOrder);
-          if (
-            _selectedSellOrder.disableAutoRetire &&
-            values.retirementAction !== 'manual'
-          ) {
-            setFieldValue('retirementAction', 'manual');
-          }
-        } else {
-          setSelectedSellOrder(undefined);
+
+        setSelectedSellOrder(_selectedSellOrder);
+
+        if (
+          _selectedSellOrder?.disableAutoRetire &&
+          values.retirementAction !== 'manual'
+        ) {
+          setFieldValue('retirementAction', 'manual');
         }
       }
     }, [setFieldValue, values.retirementAction, values.sellOrderId]);

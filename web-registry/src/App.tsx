@@ -50,7 +50,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const OrganizationProfile = lazy(() => import('./pages/OrganizationProfile'));
 const PostPurchase = lazy(() => import('./pages/PostPurchase'));
 const Project = lazy(() => import('./pages/Project'));
-const Projects = lazy(() => import('./pages/Projects'));
+const Projects = lazy(() => import('./pages/Marketplace/Projects'));
 const ProjectCreate = lazy(() => import('./pages/ProjectCreate'));
 const ProjectFinished = lazy(() => import('./pages/ProjectFinished'));
 const ProjectList = lazy(() => import('./pages/ProjectList'));

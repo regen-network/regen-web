@@ -31,6 +31,7 @@ import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
 import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 import {
   BUY_SELL_ORDER_ACTION,
+  BUY_SELL_ORDER_BUTTON,
   CANCEL_SELL_ORDER_ACTION,
 } from './Storefront.constants';
 import {
@@ -135,6 +136,7 @@ export const Storefront = (): JSX.Element => {
     setTxButtonTitle,
     setTxModalHeader,
     setTxModalTitle,
+    buttonTitle: BUY_SELL_ORDER_BUTTON,
   });
 
   const cancelSellOrderSubmit = useCancelSellOrderSubmit({

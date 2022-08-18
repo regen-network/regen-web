@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
 import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
 import { formatNumber } from 'web-components/lib/utils/format';
 
@@ -10,22 +9,14 @@ import { getMetadata } from 'lib/metadata-graph';
 
 import { microToDenom } from 'components/organisms/BuyCreditsModal/BuyCreditsModal.utils';
 
+import { ISellOrderInfo, ProjectWithOrderData } from '../Projects.types';
+
 import DefaultProject from 'assets/default-project.jpg';
 
 type Props = {
   projects?: ProjectInfo[];
   sellOrders?: SellOrderInfo[];
 };
-
-export interface SellOrderInfoNormalized
-  extends Omit<SellOrderInfo, 'id' | '$type'> {
-  id: string;
-}
-
-export interface ProjectWithOrderData extends ProjectCardProps {
-  id: string;
-  sellOrders: SellOrderInfoNormalized[];
-}
 
 export const useProjectsSellOrders = ({
   projects,
@@ -96,9 +87,7 @@ const getProjectDisplayData = async (
   return projectsWithOrderData;
 };
 
-const getPurchaseInfo = (
-  sellOrders: SellOrderInfoNormalized[],
-): PurchaseInfo => {
+const getPurchaseInfo = (sellOrders: ISellOrderInfo[]): PurchaseInfo => {
   if (!sellOrders.length)
     return {
       sellInfo: {

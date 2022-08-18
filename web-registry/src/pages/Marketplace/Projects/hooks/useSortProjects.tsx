@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ProjectWithOrderData } from './useProjectsSellOrders';
+import { ProjectWithOrderData } from '../Projects.types';
 
 type Props = {
   projects: ProjectWithOrderData[];

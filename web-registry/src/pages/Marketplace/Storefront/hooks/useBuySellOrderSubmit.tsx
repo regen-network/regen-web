@@ -13,14 +13,14 @@ import { microToDenom } from 'components/organisms/BuyCreditsModal/BuyCreditsMod
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
-  BUY_SELL_ORDER_BUTTON,
   BUY_SELL_ORDER_HEADER,
   BUY_SELL_ORDER_TITLE,
 } from '../Storefront.constants';
 
 type Props = {
   accountAddress?: string;
-  buttonTitle?: string;
+  buttonTitle: string;
+  modalTitle?: string;
   signAndBroadcast: SignAndBroadcastType;
   setCardItems: UseStateSetter<Item[] | undefined>;
   setTxModalTitle: UseStateSetter<string>;
@@ -117,7 +117,7 @@ const useBuySellOrderSubmit = ({
         ]);
         setTxModalHeader(BUY_SELL_ORDER_HEADER);
         setTxModalTitle(BUY_SELL_ORDER_TITLE);
-        setTxButtonTitle(buttonTitle || BUY_SELL_ORDER_BUTTON);
+        setTxButtonTitle(buttonTitle);
       }
     },
     [

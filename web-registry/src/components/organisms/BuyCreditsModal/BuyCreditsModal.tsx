@@ -31,7 +31,7 @@ import {
   Title,
 } from 'web-components/lib/components/typography';
 
-import { SellOrderInfoNormalized } from 'pages/Projects/hooks/useProjectsSellOrders';
+import { ISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
@@ -58,7 +58,7 @@ interface BuyCreditsModalProps extends RegenModalProps {
     image?: string;
     creditDenom?: string;
     credits?: Credits;
-    sellOrders?: SellOrderInfoNormalized[];
+    sellOrders?: ISellOrderInfo[];
   };
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
@@ -90,7 +90,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   const styles = useBuyCreditsModalStyles();
   const theme = useTheme();
   const [selectedSellOrder, setSelectedSellOrder] =
-    useState<SellOrderInfoNormalized | null>(null);
+    useState<ISellOrderInfo | null>(null);
 
   const submit = async (values: BuyCreditsValues): Promise<void> => {
     const { country, postalCode, stateProvince, retirementAction } = values;

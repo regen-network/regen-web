@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Box, CardMedia, useMediaQuery } from '@mui/material';
 import { makeStyles, useTheme } from '@mui/styles';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import { Loading } from 'web-components/lib/components/loading';
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
@@ -155,6 +157,11 @@ const Home: React.FC = () => {
               classes={{ root: styles.projectCards }}
             />
           </Section>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 30 }}>
+            <Link to="/projects">
+              <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
+            </Link>
+          </Box>
         </div>
       )}
 

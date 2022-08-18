@@ -114,8 +114,8 @@ export const getEcocreditsForAccount = async (
 
     // filter out undefined values
     return credits.filter(
-      credit => credit !== undefined,
-    ) as BatchInfoWithBalance[];
+      (credit): credit is BatchInfoWithBalance => credit !== undefined,
+    );
   } catch (err) {
     throw new Error(`Could not get ecocredits for account ${account}, ${err}`);
   }

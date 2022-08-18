@@ -5,6 +5,7 @@ import {
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { AllProjectsQuery } from '../../../generated/graphql';
+import { microToDenom } from '../Marketplace.utils';
 import { NormalizedSellOrder } from './Storefront.types';
 
 /* normalizeprojectsInfosByHandleMap */
@@ -102,7 +103,7 @@ export const normalizeSellOrders = ({
             : projectsInfosByHandleMap.get(projectId)?.classIdUrl ?? null,
         },
         status: 'Partially filled',
-        askAmount: (parseInt(askAmount) / Math.pow(10, 6)).toString(),
+        askAmount: microToDenom(askAmount).toString(),
         askDenom,
         amountAvailable: quantity,
         amountSold: undefined,

@@ -20,7 +20,6 @@ import {
 type Props = {
   accountAddress?: string;
   buttonTitle: string;
-  modalTitle?: string;
   signAndBroadcast: SignAndBroadcastType;
   setCardItems: UseStateSetter<Item[] | undefined>;
   setTxModalTitle: UseStateSetter<string>;

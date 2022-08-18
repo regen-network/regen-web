@@ -7,8 +7,8 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { microToDenom } from 'lib/denom.utils';
 
-import { microToDenom } from 'pages/Marketplace/Marketplace.utils';
 import { BuyCreditsValues } from 'components/organisms';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 

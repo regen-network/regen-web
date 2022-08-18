@@ -7,7 +7,7 @@ import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIc
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
-import { microToDenom } from 'pages/Marketplace/Marketplace.utils';
+import { microToDenom } from 'lib/denom.utils';
 
 import { ReactComponent as USDCIcon } from '../../../assets/svgs/usdc.svg';
 import { getAccountUrl } from '../../../lib/block-explorer';

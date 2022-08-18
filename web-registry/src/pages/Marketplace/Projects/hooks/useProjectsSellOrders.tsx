@@ -5,9 +5,8 @@ import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1
 import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
 import { formatNumber } from 'web-components/lib/utils/format';
 
+import { microToDenom } from 'lib/denom.utils';
 import { getMetadata } from 'lib/metadata-graph';
-
-import { microToDenom } from 'pages/Marketplace/Marketplace.utils';
 
 import { ISellOrderInfo, ProjectWithOrderData } from '../Projects.types';
 

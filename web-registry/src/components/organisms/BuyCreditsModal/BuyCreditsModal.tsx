@@ -29,10 +29,8 @@ import {
   Title,
 } from 'web-components/lib/components/typography';
 
-import {
-  formatDenomText,
-  microToDenom,
-} from 'pages/Marketplace/Marketplace.utils';
+import { formatDenomText, microToDenom } from 'lib/denom.utils';
+
 import { ISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';

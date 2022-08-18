@@ -1,9 +1,7 @@
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
-import {
-  formatDenomText,
-  microToDenom,
-} from 'pages/Marketplace/Marketplace.utils';
+import { formatDenomText, microToDenom } from 'lib/denom.utils';
+
 import { ISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
 
 import { BuyCreditsProject, BuyCreditsValues } from '..';

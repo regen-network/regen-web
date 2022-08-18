@@ -8,8 +8,8 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { denomToMicro } from 'lib/denom.utils';
 
-import { denomToMicro } from 'pages/Marketplace/Marketplace.utils';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {

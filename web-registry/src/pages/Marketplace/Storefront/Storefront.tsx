@@ -26,6 +26,7 @@ import useMsgClient from 'hooks/useMsgClient';
 import useQueryListBatchInfo from 'hooks/useQueryListBatchInfo';
 import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
+import { microToDenom } from '../Marketplace.utils';
 import useBuySellOrderSubmit from './hooks/useBuySellOrderSubmit';
 import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
 import { useResetErrorBanner } from './hooks/useResetErrorBanner';
@@ -170,7 +171,7 @@ export const Storefront = (): JSX.Element => {
       country: 'US',
       postalCode: '',
       retirementAction: disableAutoRetire ? 'manual' : 'autoretire',
-      price: parseInt(askAmount),
+      price: microToDenom(askAmount),
       askDenom: askDenom,
       batchDenom: batchDenom,
       sellOrderId: orderId,

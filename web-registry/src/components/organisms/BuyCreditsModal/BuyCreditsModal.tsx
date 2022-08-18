@@ -242,7 +242,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         size="md"
                         sx={{ color: 'primary.light', fontWeight: 700, mb: 3 }}
                       >
-                        Batch denom:{' '}
+                        {'Batch denom: '}
                         <Body
                           sx={{ fontWeight: 'normal', display: 'inline-block' }}
                         >

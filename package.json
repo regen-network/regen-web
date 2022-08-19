@@ -31,6 +31,7 @@
     "format-and-fix": "lerna run format-and-fix",
     "storybook": "lerna run storybook --stream",
     "test": "lerna run --scope web-registry test --stream",
+    "test-components": "lerna run --scope web-components test --stream",
     "start": "lerna run --scope web-registry start --stream",
     "start-www": "lerna run --scope web-www start --stream",
     "start-auth": "lerna run --scope web-auth start --stream",

@@ -6,11 +6,21 @@
     "jsx": "react-jsx",
     "noEmitOnError": true,
     "outDir": "lib",
-    "paths": {
-      "~/*": ["src/*"]
-    },
     "rootDir": "src",
-    "module": "esnext"
+    "module": "esnext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
 }

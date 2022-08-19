@@ -63,17 +63,25 @@ export const getJurisdictionIsoCode = ({
   stateProvince, // US-CO
   postalCode,
 }: LocationType): string => {
+  const validCountry = iso3166.country(country);
+
+  if (!validCountry) return '';
+
   let jurisdiction = country;
+
+  if (!stateProvince) return jurisdiction;
+
+  const validSubdivision = iso3166.subdivision(stateProvince);
+
+  if (!validSubdivision) return jurisdiction;
 
   // TODO - text fields allow whitespace strings..
   const _postalCode = postalCode?.trim();
 
-  if (stateProvince && !_postalCode) {
-    jurisdiction = stateProvince;
-  }
-
-  if (stateProvince && _postalCode) {
+  if (_postalCode) {
     jurisdiction = `${stateProvince} ${_postalCode}`;
+  } else {
+    jurisdiction = stateProvince as string;
   }
 
   return jurisdiction;

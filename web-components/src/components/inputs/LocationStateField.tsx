@@ -31,7 +31,7 @@ const LocationStateField: React.FC<FieldProps> = ({
 
     const countrySubdivisions = iso3166.country(country);
 
-    const options = Object.keys(countrySubdivisions?.sub || {})
+    const options: Option[] = Object.keys(countrySubdivisions?.sub || {})
       .map(isoCode => ({
         value: isoCode,
         label: `${countrySubdivisions?.sub[isoCode].name} (${isoCode}, ${countrySubdivisions?.sub[isoCode].type})`,
@@ -50,7 +50,7 @@ const LocationStateField: React.FC<FieldProps> = ({
       setFieldValue(name, '');
     }
 
-    (options as Option[]).unshift({
+    options.unshift({
       value: '',
       label: 'Please choose a state',
     });

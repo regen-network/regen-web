@@ -128,9 +128,6 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
         postalCode,
       });
 
-      // eslint-disable-next-line no-console
-      console.log(jurisdiction);
-
       setFieldValue(retirementJurisdictionName, jurisdiction);
     }, [
       country,

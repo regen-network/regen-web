@@ -2,6 +2,8 @@ import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder from '@mapbox/mapbox-sdk/services/geocoding';
 import iso3166 from 'iso-3166-2';
 
+const POSTAL_CODE_MAX_LENGTH = 64;
+
 /**
  * Fetches from mapbox to compose a proper ISO 3166-2 standard location string
  */
@@ -53,40 +55,27 @@ export const getISOString = async (
 // based on package iso-3166-2
 
 type LocationType = {
-  country: string;
-  stateProvince?: string;
+  country: string; // iso 3166-1 alpha 2 (ie. US)
+  stateProvince?: string; // iso 3166-2 (ie. US-CO)
   postalCode?: string;
 };
 
 export const getJurisdictionIsoCode = ({
-  country, // US
-  stateProvince, // US-CO
+  country,
+  stateProvince,
   postalCode,
 }: LocationType): string => {
-  let jurisdiction = '';
-
   // check iso country
-  const validCountry = iso3166.country(country);
-  if (!validCountry) return jurisdiction;
-
-  jurisdiction = country;
-
-  // check subdivision exists
-  if (!stateProvince) return jurisdiction;
-
-  // check iso subdivision
-  const validSubdivision = iso3166.subdivision(stateProvince);
-  if (!validSubdivision) return jurisdiction;
-
+  if (!iso3166.country(country)) throw new Error(`Invalid country: ${country}`);
+  // check subdivision exists, also iso subdivision (failing search is an empty object)
+  if (!stateProvince || !iso3166.subdivision(stateProvince)?.code)
+    return country;
   // TODO - text fields allow whitespace strings..
+  // The trim must be done before the check, since an empty string
+  // returns false, but a string with whitespace returns true.
   const _postalCode = postalCode?.trim();
-
-  // check postal code exists
-  if (_postalCode) {
-    jurisdiction = `${stateProvince} ${_postalCode}`;
-  } else {
-    jurisdiction = stateProvince as string;
-  }
-
-  return jurisdiction;
+  // check postal code exists and valid length
+  if (!_postalCode || _postalCode.length > POSTAL_CODE_MAX_LENGTH)
+    return stateProvince;
+  return `${stateProvince} ${_postalCode}`;
 };

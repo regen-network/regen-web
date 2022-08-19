@@ -1,7 +1,6 @@
 import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder from '@mapbox/mapbox-sdk/services/geocoding';
-
-import { countries } from './countries';
+import iso3166 from 'iso-3166-2';
 
 /**
  * Fetches from mapbox to compose a proper ISO 3166-2 standard location string
@@ -29,7 +28,7 @@ export const getISOString = async (
   await geocoderService
     .forwardGeocode({
       mode: 'mapbox.places',
-      query: `${countries[countryKey]}+${stateProvince}`,
+      query: `${iso3166.data[countryKey].name}+${stateProvince}`,
       types: ['country', 'region'],
     })
     .send()

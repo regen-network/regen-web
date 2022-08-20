@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "remove-previous-files": "shx rm -rf ./lib/* ./tsconfig.tsbuildinfo",
-    "copy-assets": "cp ./theme/fonts.css ./lib/theme/fonts.css && cp -R ./theme/assets ./lib/theme/",
+    "copy-assets": "cp ./src/theme/fonts.css ./lib/theme/fonts.css && cp -R ./src/theme/assets ./lib/theme/",
     "watch": "yarn remove-previous-files && tsc --watch && yarn copy-assets",
     "build": "yarn remove-previous-files && tsc && yarn copy-assets",
     "lint": "eslint ./src  -c .eslintrc.js --max-warnings 0 --ext .ts,.tsx",

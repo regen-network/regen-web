@@ -4,12 +4,12 @@ import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
+import type { Theme } from 'src/theme/muiTheme';
+
 import { parseText } from '../../utils/textParser';
 import { Image, OptimizeImageProps } from '../image';
 import { Label, Title } from '../typography';
 import Card from './Card';
-
-import type { Theme } from '~/theme/muiTheme';
 
 export interface MediaCardProps extends OptimizeImageProps {
   children?: any;

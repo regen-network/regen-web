@@ -15,5 +15,5 @@ const Template: ComponentStory<typeof EmptyState> = args => (
 export const Default = Template.bind({});
 Default.args = {
   message: 'No sell orders found',
-  icon: <EmptyCartIcon sx={{ fontSize: 84, fill: 'none' }} />,
+  icon: <EmptyCartIcon sx={{ fontSize: 84, fill: 'none', color: '#8F8F8F' }} />,
 };

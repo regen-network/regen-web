@@ -55,6 +55,7 @@ import {
   CREATE_SELL_ORDER_BUTTON,
   CREATE_SELL_ORDER_SHORT,
   CREATE_SELL_ORDER_TITLE,
+  ERROR_BUTTON,
 } from './MyEcocredits.contants';
 import {
   getAvailableAmountByBatch,
@@ -100,7 +101,7 @@ export const MyEcocredits = (): JSX.Element => {
 
   const onButtonClick = (): void => {
     handleTxModalClose();
-    if (txButtonTitle === CREATE_SELL_ORDER_BUTTON) {
+    if (txButtonTitle === CREATE_SELL_ORDER_BUTTON && !error) {
       navigate('/storefront');
     }
   };
@@ -397,19 +398,17 @@ export const MyEcocredits = (): JSX.Element => {
           onButtonClick={onButtonClick}
         />
       )}
-      {error && (txModalTitle || txModalHeader) && (
-        <TxErrorModal
-          error={error}
-          open={!!error && (!!txModalTitle || !!deliverTxResponse)}
-          onClose={handleTxModalClose}
-          txHash={txHash || ''}
-          txHashUrl={txHashUrl}
-          cardTitle={txModalTitle ?? ''}
-          buttonTitle={txButtonTitle}
-          linkComponent={Link}
-          onButtonClick={onButtonClick}
-        />
-      )}
+      <TxErrorModal
+        error={error ?? ''}
+        open={!!error}
+        onClose={handleTxModalClose}
+        txHash={txHash || ''}
+        txHashUrl={txHashUrl}
+        cardTitle={txModalTitle ?? ''}
+        buttonTitle={ERROR_BUTTON}
+        linkComponent={Link}
+        onButtonClick={onButtonClick}
+      />
     </>
   );
 };

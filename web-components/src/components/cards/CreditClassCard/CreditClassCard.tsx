@@ -58,7 +58,11 @@ const CreditClassCard = ({
           )}
         />
         <CardContent>
-          <Subtitle size="xs" color="info.main" sx={{ fontWeight: 800, mb: 3 }}>
+          <Subtitle
+            size="xs"
+            color="info.main"
+            sx={{ fontWeight: 800, mb: 3, letterSpacing: '1px', mt: [0, 2.5] }}
+          >
             {'CREDIT CLASS'}
           </Subtitle>
           <Title variant="h5" mobileVariant="h6" as="div" sx={{ mb: 2 }}>

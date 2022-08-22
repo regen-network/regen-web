@@ -18,10 +18,12 @@ const LocationCountryField: React.FC<FieldProps> = ({
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
-    const countriesWithEmpty = Object.keys(iso3166.data).map(key => ({
-      value: key,
-      label: iso3166.data[key].name,
-    }));
+    const countriesWithEmpty = Object.keys(iso3166.data)
+      .map(key => ({
+        value: key,
+        label: iso3166.data[key].name,
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label));
     countriesWithEmpty.unshift({ value: '', label: 'Please choose a country' });
     setOptions(countriesWithEmpty);
   }, []);

@@ -2,11 +2,11 @@ import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/
 
 import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
 
-export interface ISellOrderInfo extends Omit<SellOrderInfo, 'id' | '$type'> {
+export interface UISellOrderInfo extends Omit<SellOrderInfo, 'id' | '$type'> {
   id: string;
 }
 
 export interface ProjectWithOrderData extends ProjectCardProps {
   id: string;
-  sellOrders: ISellOrderInfo[];
+  sellOrders: UISellOrderInfo[];
 }

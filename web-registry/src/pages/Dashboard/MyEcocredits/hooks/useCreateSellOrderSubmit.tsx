@@ -44,14 +44,14 @@ const useCreateSellOrderSubmit = ({
       const { amount, batchDenom, price, disableAutoRetire } = values;
 
       // convert to udenom
-      const priceInMicro = price ? denomToMicro(price) : ''; // TODO: When other currencies, check for micro denom before converting
+      const priceInMicro = price ? String(denomToMicro(price)) : ''; // TODO: When other currencies, check for micro denom before converting
       const msg = MsgSell.fromPartial({
         seller: accountAddress,
         orders: [
           {
             batchDenom,
             quantity: String(amount),
-            askPrice: { denom: PRICE_DENOM, amount: String(priceInMicro) },
+            askPrice: { denom: PRICE_DENOM, amount: priceInMicro },
             disableAutoRetire,
           },
         ],

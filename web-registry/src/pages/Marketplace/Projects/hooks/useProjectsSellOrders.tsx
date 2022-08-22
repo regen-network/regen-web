@@ -8,7 +8,7 @@ import { formatNumber } from 'web-components/lib/utils/format';
 import { microToDenom } from 'lib/denom.utils';
 import { getMetadata } from 'lib/metadata-graph';
 
-import { ISellOrderInfo, ProjectWithOrderData } from '../Projects.types';
+import { ProjectWithOrderData, UISellOrderInfo } from '../Projects.types';
 
 import DefaultProject from 'assets/default-project.jpg';
 
@@ -86,7 +86,7 @@ const getProjectDisplayData = async (
   return projectsWithOrderData;
 };
 
-const getPurchaseInfo = (sellOrders: ISellOrderInfo[]): PurchaseInfo => {
+const getPurchaseInfo = (sellOrders: UISellOrderInfo[]): PurchaseInfo => {
   if (!sellOrders.length)
     return {
       sellInfo: {
@@ -102,8 +102,8 @@ const getPurchaseInfo = (sellOrders: ISellOrderInfo[]): PurchaseInfo => {
   const prices = sellOrders
     .map(order => microToDenom(order.askAmount))
     .sort((a, b) => a - b);
-  const priceMin = formatNumber(prices?.[0]);
-  const priceMax = formatNumber(prices?.[prices.length - 1]);
+  const priceMin = formatNumber(prices?.[0], 2);
+  const priceMax = formatNumber(prices?.[prices.length - 1], 2);
 
   return {
     sellInfo: {

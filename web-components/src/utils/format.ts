@@ -58,10 +58,16 @@ export function formatDate(
   return dayjs(date).format(format);
 }
 
-export function formatNumber(num: number | string | undefined): string {
+export function formatNumber(
+  num: number | string | undefined,
+  maximumFractionDigits?: number,
+): string {
   if (!num) return '-';
   if (typeof num === 'string') num = parseFloat(num);
-  return num > 0 ? Math.floor(num).toLocaleString() : '-';
+  if (!maximumFractionDigits) num = Math.floor(num);
+  return num > 0
+    ? num.toLocaleString(undefined, { maximumFractionDigits })
+    : '-';
 }
 
 export function formatDuration(seconds: number): string {

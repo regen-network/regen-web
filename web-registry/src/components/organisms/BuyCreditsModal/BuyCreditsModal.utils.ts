@@ -2,11 +2,11 @@ import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
 import { formatDenomText, microToDenom } from 'lib/denom.utils';
 
-import { ISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
+import { UISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
 
 import { BuyCreditsProject, BuyCreditsValues } from '..';
 
-export const getSellOrderLabel = (sellOrder: ISellOrderInfo): string => {
+export const getSellOrderLabel = (sellOrder: UISellOrderInfo): string => {
   const { id, askAmount, askDenom = '', quantity } = { ...sellOrder };
   const denom = formatDenomText(askDenom);
   const price = microToDenom(askAmount);
@@ -14,25 +14,25 @@ export const getSellOrderLabel = (sellOrder: ISellOrderInfo): string => {
 };
 
 export const getOptions = (project: BuyCreditsProject): Option[] => {
-  if (project?.sellOrders?.length) {
-    const sellOrderOptions = project?.sellOrders.map(sellOrder => {
-      return {
-        label: getSellOrderLabel(sellOrder),
-        value: sellOrder.id,
-      };
-    });
-    return [{ label: 'Choose a sell order', value: '' }, ...sellOrderOptions];
-  }
+  if (!project?.sellOrders?.length) return [];
 
-  return [];
+  const sellOrderOptions = project?.sellOrders.map(sellOrder => {
+    return {
+      label: getSellOrderLabel(sellOrder),
+      value: sellOrder.id,
+    };
+  });
+  return [{ label: 'Choose a sell order', value: '' }, ...sellOrderOptions];
 };
 
 export const handleBuyCreditsSubmit = async (
   values: BuyCreditsValues,
   onSubmit?: (values: BuyCreditsValues) => Promise<void>,
-  selectedSellOrder?: ISellOrderInfo,
+  selectedSellOrder?: UISellOrderInfo,
 ): Promise<void> => {
-  if (!onSubmit || !selectedSellOrder) return Promise.reject();
+  if (!onSubmit || !selectedSellOrder) {
+    throw new Error('onSubmit and selectedSellOrder are required');
+  }
   const { country, postalCode, stateProvince, retirementAction } = values;
 
   const fullValues: BuyCreditsValues = {

@@ -31,7 +31,7 @@ import {
 
 import { formatDenomText, microToDenom } from 'lib/denom.utils';
 
-import { ISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
+import { UISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
@@ -60,7 +60,7 @@ export interface BuyCreditsProject {
   image?: string;
   creditDenom?: string;
   credits?: Credits;
-  sellOrders?: ISellOrderInfo[];
+  sellOrders?: UISellOrderInfo[];
 }
 
 export interface BuyCreditsValues {

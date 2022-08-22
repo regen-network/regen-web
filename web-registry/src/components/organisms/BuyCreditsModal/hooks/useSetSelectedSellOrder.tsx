@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useFormikContext } from 'formik';
 
-import { ISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
+import { UISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
 
 import { BuyCreditsProject, BuyCreditsValues } from '../..';
 
 export const useSetSelectedSellOrder = (
   project: BuyCreditsProject,
 ): {
-  selectedSellOrder: ISellOrderInfo | undefined;
+  selectedSellOrder: UISellOrderInfo | undefined;
   SetSelectedSellOrderElement: React.FC;
 } => {
   const [selectedSellOrder, setSelectedSellOrder] = useState<
-    ISellOrderInfo | undefined
+    UISellOrderInfo | undefined
   >(undefined);
 
   const SetSelectedSellOrderElement: React.FC = () => {

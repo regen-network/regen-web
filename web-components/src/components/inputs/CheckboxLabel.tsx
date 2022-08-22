@@ -26,6 +26,8 @@ export default function CheckboxLabel({
   } = props;
   const fieldError = getIn(errors, name);
   const showError = getIn(touched, name) && !!fieldError;
+  const isLabelStringOrNumber =
+    typeof label === 'string' || typeof label === 'number';
 
   return (
     <>
@@ -42,7 +44,7 @@ export default function CheckboxLabel({
             disabled={disabled}
           />
         }
-        label={<Subtitle>{label}</Subtitle>}
+        label={isLabelStringOrNumber ? <Subtitle>{label}</Subtitle> : label}
       />
       {showError && (
         <FormHelperText error={showError}>{fieldError}</FormHelperText>

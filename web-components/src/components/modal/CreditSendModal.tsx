@@ -6,7 +6,7 @@ import { FormModalTemplate } from './FormModalTemplate';
 
 interface CreditSendModalProps extends RegenModalProps, CreditSendProps {}
 
-export const title = 'Send';
+export const CREDIT_SEND_TITLE = 'Send';
 
 const CreditSendModal: React.FC<CreditSendModalProps> = ({
   sender,
@@ -17,7 +17,7 @@ const CreditSendModal: React.FC<CreditSendModalProps> = ({
   onSubmit,
   onClose,
 }) => (
-  <FormModalTemplate title={title} open={open} onClose={onClose}>
+  <FormModalTemplate title={CREDIT_SEND_TITLE} open={open} onClose={onClose}>
     <CreditSendForm
       sender={sender}
       batchDenom={batchDenom}

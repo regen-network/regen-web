@@ -6,7 +6,7 @@ import { FormModalTemplate } from './FormModalTemplate';
 
 interface BasketPutModalProps extends RegenModalProps, BasketPutProps {}
 
-export const title = 'Put in basket';
+export const BASKET_PUT_TITLE = 'Put in basket';
 
 const BasketPutModal: React.FC<BasketPutModalProps> = ({
   basketOptions,
@@ -16,7 +16,7 @@ const BasketPutModal: React.FC<BasketPutModalProps> = ({
   onClose,
   onSubmit,
 }) => (
-  <FormModalTemplate title={title} open={open} onClose={onClose}>
+  <FormModalTemplate title={BASKET_PUT_TITLE} open={open} onClose={onClose}>
     <BasketPutForm
       basketOptions={basketOptions}
       batchDenom={batchDenom}

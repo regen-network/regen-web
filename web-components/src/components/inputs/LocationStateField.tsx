@@ -34,7 +34,7 @@ const LocationStateField: React.FC<FieldProps> = ({
     const options: Option[] = Object.keys(countrySubdivisions?.sub || {})
       .map(isoCode => ({
         value: isoCode,
-        label: `${countrySubdivisions?.sub[isoCode].name} (${isoCode}, ${countrySubdivisions?.sub[isoCode].type})`,
+        label: `${countrySubdivisions?.sub[isoCode].name} (${countrySubdivisions?.sub[isoCode].type})`,
       }))
       .sort((a, b) => a.label.localeCompare(b.label));
 

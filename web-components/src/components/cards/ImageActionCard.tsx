@@ -3,12 +3,12 @@ import { CardContent, useTheme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
+import { Theme } from 'src/theme/muiTheme';
+
 import { parseText } from '../../utils/textParser';
 import OutlinedButton from '../buttons/OutlinedButton';
 import MediaCard from '../cards/MediaCard';
 import { Body, Title } from '../typography';
-
-import { Theme } from '~/theme/muiTheme';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {

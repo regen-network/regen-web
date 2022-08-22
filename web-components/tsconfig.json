@@ -5,22 +5,17 @@
     "declaration": true,
     "jsx": "react-jsx",
     "noEmitOnError": true,
+    "types": ["node", "jest"],
     "outDir": "lib",
     "rootDir": "src",
     "module": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "target": "es6"
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["**/*.test.*", "node_modules"]
 }

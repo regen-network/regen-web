@@ -11,6 +11,8 @@ import type { UseStateSetter } from 'types/react/use-state';
 import type { BasketTokens } from 'hooks/useBasketTokens';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
+import { PUT_HEADER } from '../MyEcocredits.contants';
+
 type Props = {
   accountAddress?: string;
   baskets?: QueryBasketsResponse;
@@ -22,6 +24,7 @@ type Props = {
   setBasketPutOpen: UseStateSetter<number>;
   setBasketTakeTokens: UseStateSetter<BasketTokens | undefined>;
   setCardItems: UseStateSetter<Item[] | undefined>;
+  setTxModalHeader: UseStateSetter<string | undefined>;
   setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
@@ -36,6 +39,7 @@ const useBasketPutSubmit = ({
   signAndBroadcast,
   setBasketPutOpen,
   setCardItems,
+  setTxModalHeader,
   setTxModalTitle,
 }: Props): ReturnType => {
   const basketPutSubmit = useCallback(
@@ -66,6 +70,7 @@ const useBasketPutSubmit = ({
             value: { name: amount },
           },
         ]);
+        setTxModalHeader(PUT_HEADER);
         setTxModalTitle(basketPutTitle);
       }
     },
@@ -77,6 +82,7 @@ const useBasketPutSubmit = ({
       credits,
       setBasketPutOpen,
       setCardItems,
+      setTxModalHeader,
       setTxModalTitle,
       signAndBroadcast,
     ],

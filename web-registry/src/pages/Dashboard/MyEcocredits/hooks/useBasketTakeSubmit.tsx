@@ -10,6 +10,8 @@ import type { UseStateSetter } from 'types/react/use-state';
 import type { BasketTokens } from 'hooks/useBasketTokens';
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
+import { TAKE_HEADER } from '../MyEcocredits.contants';
+
 type Props = {
   accountAddress?: string;
   baskets?: QueryBasketsResponse;
@@ -17,6 +19,7 @@ type Props = {
   signAndBroadcast: SignAndBroadcastType;
   setBasketTakeTokens: UseStateSetter<BasketTokens | undefined>;
   setCardItems: UseStateSetter<Item[] | undefined>;
+  setTxModalHeader: UseStateSetter<string | undefined>;
   setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
@@ -29,6 +32,7 @@ const useBasketTakeSubmit = ({
   signAndBroadcast,
   setBasketTakeTokens,
   setCardItems,
+  setTxModalHeader,
   setTxModalTitle,
 }: Props): ReturnType => {
   const basketTakeSubmit = useCallback(
@@ -67,6 +71,7 @@ const useBasketTakeSubmit = ({
             value: { name: parseInt(amount) / Math.pow(10, basket.exponent) },
           },
         ]);
+        setTxModalHeader(TAKE_HEADER);
         setTxModalTitle(basketTakeTitle);
       }
     },
@@ -76,6 +81,7 @@ const useBasketTakeSubmit = ({
       baskets?.basketsInfo,
       setBasketTakeTokens,
       setCardItems,
+      setTxModalHeader,
       setTxModalTitle,
       signAndBroadcast,
     ],

@@ -3,6 +3,7 @@ import { Box, SxProps } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
 import { Center, Flex } from 'web-components/lib/components/box';
+import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatchIcon';
 import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
@@ -15,6 +16,8 @@ import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
 import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
+
+import MyCreditBatches from './MyCreditBatches';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
 const MyProjects = React.lazy(() => import('./MyProjects'));
@@ -84,6 +87,18 @@ const Dashboard = (): JSX.Element => {
               isCreditClassCreator={isCreditClassCreator}
               isCreditClassAdmin={isCreditClassAdmin}
             />
+          </Flex>
+        </LazyLoad>
+      ),
+    },
+    {
+      label: 'Credit Batches',
+      icon: <CreditBatchIcon sx={{ color: 'secondary.main' }} />,
+      hidden: creditClassTabHidden,
+      content: (
+        <LazyLoad>
+          <Flex sx={sxs.padTop}>
+            <MyCreditBatches />
           </Flex>
         </LazyLoad>
       ),

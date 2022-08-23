@@ -3,9 +3,13 @@ import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
-import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
 
 import { getMetadata } from 'lib/metadata-graph';
+
+import {
+  getPurchaseInfo,
+  sortProjectsBySellOrdersAvailability,
+} from './useProjectsSellOrders.utils';
 
 import DefaultProject from 'assets/default-project.jpg';
 
@@ -52,18 +56,7 @@ const getProjectDisplayData = async (
 ): Promise<ProjectWithOrderData[]> => {
   const projectsWithOrderData = await Promise.all(
     projects
-      ?.sort((projectA, projectB) => {
-        const ordersForProjectA = sellOrders.filter(order =>
-          order.batchDenom.startsWith(projectA?.id),
-        );
-        const ordersForProjectB = sellOrders.filter(order =>
-          order.batchDenom.startsWith(projectB?.id),
-        );
-
-        if (ordersForProjectA && !ordersForProjectB) return 1;
-        if (!ordersForProjectA && ordersForProjectB) return -1;
-        return 0;
-      })
+      .sort(sortProjectsBySellOrdersAvailability(sellOrders))
       .slice(0, limit)
       .map(async project => {
         const purchaseInfo = getPurchaseInfo(project.id, sellOrders);
@@ -95,37 +88,4 @@ const getProjectDisplayData = async (
       }),
   );
   return projectsWithOrderData;
-};
-
-const getPurchaseInfo = (
-  projectId: string,
-  sellOrders: SellOrderInfo[],
-): PurchaseInfo => {
-  const ordersForThisProject = sellOrders.filter(order =>
-    order.batchDenom.startsWith(projectId),
-  );
-  if (!ordersForThisProject.length)
-    return {
-      sellInfo: {
-        pricePerTon: `-`,
-        creditsAvailable: 0,
-      },
-    };
-
-  const creditsAvailable = ordersForThisProject
-    .map(order => parseInt(order.quantity))
-    .reduce((total, quantity) => total + quantity, 0);
-
-  const prices = ordersForThisProject
-    .map(order => parseInt(order.askAmount))
-    .sort((a, b) => a - b);
-  const priceMin = prices?.[0];
-  const priceMax = prices?.[prices.length - 1];
-
-  return {
-    sellInfo: {
-      pricePerTon: `${priceMin}-${priceMax}`,
-      creditsAvailable,
-    },
-  };
 };

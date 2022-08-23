@@ -8,21 +8,21 @@ import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
 import AvailableCreditsIconAlt from 'web-components/lib/components/icons/AvailableCreditsIconAlt';
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 import {
+  BASKET_PUT_TITLE,
   BasketPutModal,
-  title as basketPutTitle,
 } from 'web-components/lib/components/modal/BasketPutModal';
 import {
+  BASKET_TAKE_TITLE,
   BasketTakeModal,
-  title as basketTakeTitle,
 } from 'web-components/lib/components/modal/BasketTakeModal';
 import { CreateSellOrderModal } from 'web-components/lib/components/modal/CreateSellOrderModal';
 import {
+  CREDIT_RETIRE_TITLE,
   CreditRetireModal,
-  title as creditRetireTitle,
 } from 'web-components/lib/components/modal/CreditRetireModal';
 import {
+  CREDIT_SEND_TITLE,
   CreditSendModal,
-  title as creditSendTitle,
 } from 'web-components/lib/components/modal/CreditSendModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
@@ -150,21 +150,23 @@ export const MyEcocredits = (): JSX.Element => {
 
   const basketTakeSubmit = useBasketTakeSubmit({
     accountAddress,
-    basketTakeTitle,
+    basketTakeTitle: BASKET_TAKE_TITLE,
     baskets,
     setBasketTakeTokens,
     setCardItems,
     setTxModalTitle,
+    setTxModalHeader,
     signAndBroadcast,
   });
 
   const creditSendSubmit = useCreditSendSubmit({
     accountAddress,
     creditSendOpen,
-    creditSendTitle,
+    creditSendTitle: CREDIT_SEND_TITLE,
     credits,
     setCardItems,
     setCreditSendOpen,
+    setTxModalHeader,
     setTxModalTitle,
     signAndBroadcast,
   });
@@ -173,12 +175,13 @@ export const MyEcocredits = (): JSX.Element => {
     accountAddress,
     baskets,
     basketPutOpen,
-    basketPutTitle,
-    basketTakeTitle,
+    basketPutTitle: BASKET_PUT_TITLE,
+    basketTakeTitle: BASKET_TAKE_TITLE,
     credits,
     setBasketPutOpen,
     setBasketTakeTokens,
     setCardItems,
+    setTxModalHeader,
     setTxModalTitle,
     signAndBroadcast,
   });
@@ -186,10 +189,11 @@ export const MyEcocredits = (): JSX.Element => {
   const creditRetireSubmit = useCreditRetireSubmit({
     accountAddress,
     creditRetireOpen,
-    creditRetireTitle,
+    creditRetireTitle: CREDIT_RETIRE_TITLE,
     credits,
     setCardItems,
     setCreditRetireOpen,
+    setTxModalHeader,
     setTxModalTitle,
     signAndBroadcast,
   });
@@ -244,7 +248,7 @@ export const MyEcocredits = (): JSX.Element => {
                         direction="next"
                       />
                     ),
-                    label: creditSendTitle,
+                    label: CREDIT_SEND_TITLE,
                     onClick: () => setCreditSendOpen(i),
                   },
                   {
@@ -255,7 +259,7 @@ export const MyEcocredits = (): JSX.Element => {
                         direction="down"
                       />
                     ),
-                    label: creditRetireTitle,
+                    label: CREDIT_RETIRE_TITLE,
                     onClick: () => setCreditRetireOpen(i),
                   },
                 ];
@@ -266,7 +270,7 @@ export const MyEcocredits = (): JSX.Element => {
                   buttons.splice(1, 0, {
                     // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
                     icon: <PutInBasket />,
-                    label: basketPutTitle,
+                    label: BASKET_PUT_TITLE,
                     onClick: () => setBasketPutOpen(i),
                   });
                 }
@@ -280,7 +284,7 @@ export const MyEcocredits = (): JSX.Element => {
             buttons={[
               {
                 icon: <TakeFromBasket />,
-                label: basketTakeTitle,
+                label: BASKET_TAKE_TITLE,
                 onClick: () => openTakeModal(i),
               },
               // This will be handled from osmosis

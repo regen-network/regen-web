@@ -87,29 +87,35 @@ export const getEcocreditsForAccount = async (
 ): Promise<BatchInfoWithBalance[]> => {
   try {
     const batches = await queryEcoBatches();
-    const credits = await Promise.all(
+    const credits: (BatchInfoWithBalance | undefined)[] = await Promise.all(
       batches.map(async batch => {
-        const credits = await queryEcoBalance(batch.denom, account);
-        const classId = getClassIdForBatch(batch);
-        const project = await getProject(batch.projectId);
-        return {
-          ...batch,
-          ...credits,
-          classId,
-          projectLocation: project.project?.jurisdiction,
-        };
+        const queryBalance = await queryEcoBalance(batch.denom, account);
+        const balance = queryBalance?.balance;
+        const hasBalance =
+          Number(balance?.tradableAmount) > 0 ||
+          Number(balance?.escrowedAmount) > 0 ||
+          Number(balance?.retiredAmount) > 0;
+
+        // filter out batches that don't have any credits
+        if (hasBalance) {
+          const classId = getClassIdForBatch(batch);
+          const project = await getProject(batch.projectId);
+          return {
+            ...batch,
+            ...queryBalance,
+            classId,
+            projectLocation: project.project?.jurisdiction,
+          };
+        } else {
+          return undefined;
+        }
       }),
     );
 
-    // filter out batches that don't have any credits
-    return credits.filter(credit => {
-      const { balance } = credit;
-      return (
-        Number(balance?.tradableAmount) > 0 ||
-        Number(balance?.escrowedAmount) > 0 ||
-        Number(balance?.retiredAmount) > 0
-      );
-    });
+    // filter out undefined values
+    return credits.filter(
+      (credit): credit is BatchInfoWithBalance => credit !== undefined,
+    );
   } catch (err) {
     throw new Error(`Could not get ecocredits for account ${account}, ${err}`);
   }

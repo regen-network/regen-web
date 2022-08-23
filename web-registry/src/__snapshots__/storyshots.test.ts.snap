@@ -1020,6 +1020,36 @@ exports[`Storyshots Cards/Create Card With Title And Icon 1`] = `
 </MemoryRouter>
 `;
 
+exports[`Storyshots Cards/CreditClassCard Default 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
 exports[`Storyshots Cards/ReviewCard Item Display 1`] = `
 <MemoryRouter
   initialEntries={
@@ -1261,6 +1291,36 @@ exports[`Storyshots Credits Credits Gauge 1`] = `
 `;
 
 exports[`Storyshots Document Document 1`] = `
+<MemoryRouter
+  initialEntries={
+    Array [
+      Object {
+        "pathname": "/",
+        "search": "",
+        "state": undefined,
+      },
+    ]
+  }
+>
+  <Routes>
+    <Route
+      element={
+        <RouterLogger>
+          <RegenThemeProvider
+            injectFonts={true}
+          >
+            <CssBaseline />
+            <Unknown />
+          </RegenThemeProvider>
+        </RouterLogger>
+      }
+      path="/"
+    />
+  </Routes>
+</MemoryRouter>
+`;
+
+exports[`Storyshots Dummy Default 1`] = `
 <MemoryRouter
   initialEntries={
     Array [

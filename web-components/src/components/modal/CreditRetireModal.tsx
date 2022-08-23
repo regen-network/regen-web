@@ -6,7 +6,7 @@ import { FormModalTemplate } from './FormModalTemplate';
 
 interface CreditRetireModalProps extends RegenModalProps, CreditRetireProps {}
 
-export const title = 'Retire';
+export const CREDIT_RETIRE_TITLE = 'Retire';
 
 const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
   batchDenom,
@@ -16,7 +16,7 @@ const CreditRetireModal: React.FC<CreditRetireModalProps> = ({
   onClose,
   onSubmit,
 }) => (
-  <FormModalTemplate title={title} open={open} onClose={onClose}>
+  <FormModalTemplate title={CREDIT_RETIRE_TITLE} open={open} onClose={onClose}>
     <CreditRetireForm
       availableTradableAmount={availableTradableAmount}
       batchDenom={batchDenom}

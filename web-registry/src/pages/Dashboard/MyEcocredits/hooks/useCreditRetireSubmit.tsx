@@ -9,6 +9,8 @@ import type { UseStateSetter } from 'types/react/use-state';
 
 import type { SignAndBroadcastType } from 'hooks/useMsgClient';
 
+import { RETIRE_HEADER } from '../MyEcocredits.contants';
+
 type Props = {
   accountAddress?: string;
   credits: BatchInfoWithBalance[];
@@ -17,6 +19,7 @@ type Props = {
   signAndBroadcast: SignAndBroadcastType;
   setCreditRetireOpen: UseStateSetter<number>;
   setCardItems: UseStateSetter<Item[] | undefined>;
+  setTxModalHeader: UseStateSetter<string | undefined>;
   setTxModalTitle: UseStateSetter<string | undefined>;
 };
 
@@ -30,6 +33,7 @@ const useCreditRetireSubmit = ({
   signAndBroadcast,
   setCreditRetireOpen,
   setCardItems,
+  setTxModalHeader,
   setTxModalTitle,
 }: Props): ReturnType => {
   const creditRetireSubmit = useCallback(
@@ -66,6 +70,7 @@ const useCreditRetireSubmit = ({
             value: { name: amount },
           },
         ]);
+        setTxModalHeader(RETIRE_HEADER);
         setTxModalTitle(creditRetireTitle);
       }
     },
@@ -76,6 +81,7 @@ const useCreditRetireSubmit = ({
       credits,
       setCardItems,
       setCreditRetireOpen,
+      setTxModalHeader,
       setTxModalTitle,
       signAndBroadcast,
     ],

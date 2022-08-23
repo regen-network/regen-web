@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import ReactGA from 'react-ga';
+import { useLocation } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 import 'clientjs';
@@ -54,21 +56,32 @@ function isCookiesEnabled(): boolean {
   );
 }
 
-export function init(): void {
-  if (process.env.NODE_ENV === 'production') {
-    if (
-      Cookies.get(
-        COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED,
-      ) === undefined
-    ) {
-      Cookies.set(
-        COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED,
-        'false',
-      );
-    }
+export function useGoogleAnalyticsInit(): void {
+  const location = useLocation();
+  const [initialized, setInitialized] = useState(false);
 
-    initializeGA();
-  }
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production') {
+      if (
+        Cookies.get(
+          COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED,
+        ) === undefined
+      ) {
+        Cookies.set(
+          COOKIE_GATSBY_PLUGIN_GOOGLE_ANALYTICS_GDPR_COOKIES_ENABLED,
+          'false',
+        );
+      }
+      initializeGA();
+      setInitialized(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (initialized) {
+      ReactGA.pageview(location.pathname + location.search);
+    }
+  }, [initialized, location]);
 }
 
 function isGARunningInCorrectMode(): boolean {

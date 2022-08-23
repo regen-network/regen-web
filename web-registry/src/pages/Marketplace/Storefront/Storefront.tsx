@@ -19,6 +19,7 @@ import { useAllProjectsQuery } from 'generated/graphql';
 import { getHashUrl } from 'lib/block-explorer';
 
 import { Link } from 'components/atoms';
+import WithLoader from 'components/atoms/WithLoader';
 import { BuyCreditsModal } from 'components/organisms';
 import SellOrdersTable from 'components/organisms/SellOrdersTable/SellOrdersTable';
 import useEcocreditQuery from 'hooks/useEcocreditQuery';
@@ -179,45 +180,52 @@ export const Storefront = (): JSX.Element => {
           Sell orders
         </Title>
         <Box sx={{ paddingBottom: '150px' }}>
-          <SellOrdersTable
-            sellOrders={normalizedSellOrders}
-            renderActionButtonsFunc={(i: number) => {
-              const isOwnSellOrder =
-                normalizedSellOrders[i]?.seller === accountAddress;
+          <WithLoader isLoading={sellOrders === undefined}>
+            <SellOrdersTable
+              sellOrders={normalizedSellOrders}
+              renderActionButtonsFunc={(i: number) => {
+                const isOwnSellOrder =
+                  normalizedSellOrders[i]?.seller === accountAddress;
 
-              return isOwnSellOrder ? (
-                <TableActionButtons
-                  buttons={[
-                    {
-                      label: CANCEL_SELL_ORDER_ACTION,
-                      onClick: () => {
-                        setSelectedAction('cancel');
-                        setSelectedSellOrder(i);
-                      },
-                    },
-                  ]}
-                  sx={{ width: '100%' }}
-                />
-              ) : (
-                <OutlinedButton
-                  startIcon={
-                    <CreditsIcon color={theme.palette.secondary.main} />
-                  }
-                  size="small"
-                  onClick={() => {
-                    if (accountAddress) {
-                      setSelectedAction('buy');
-                      setSelectedSellOrder(i);
-                    } else {
-                      setDisplayErrorBanner(true);
-                    }
-                  }}
-                >
-                  {BUY_SELL_ORDER_ACTION}
-                </OutlinedButton>
-              );
-            }}
-          />
+                return (
+                  <>
+                    {isOwnSellOrder && (
+                      <TableActionButtons
+                        buttons={[
+                          {
+                            label: CANCEL_SELL_ORDER_ACTION,
+                            onClick: () => {
+                              setSelectedAction('cancel');
+                              setSelectedSellOrder(i);
+                            },
+                          },
+                        ]}
+                        sx={{ width: '100%' }}
+                      />
+                    )}
+                    {!isOwnSellOrder && (
+                      <OutlinedButton
+                        startIcon={
+                          <CreditsIcon color={theme.palette.secondary.main} />
+                        }
+                        size="small"
+                        onClick={() => {
+                          if (accountAddress) {
+                            setSelectedAction('buy');
+                            setSelectedSellOrder(i);
+                          } else {
+                            setDisplayErrorBanner(true);
+                          }
+                        }}
+                      >
+                        {BUY_SELL_ORDER_ACTION}
+                      </OutlinedButton>
+                    )}
+                  </>
+                );
+              }}
+            />
+          </WithLoader>
         </Box>
       </Section>
       <BuyCreditsModal

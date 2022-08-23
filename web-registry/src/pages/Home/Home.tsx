@@ -56,7 +56,10 @@ const Home: React.FC = () => {
   });
   const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
-  const projects = ecocreditData?.projects;
+  const projects = useMemo(
+    () => ecocreditData?.projects?.filter(project => project.metadata),
+    [ecocreditData?.projects],
+  );
 
   const projectsWithOrderData = useProjectsSellOrders({
     projects,

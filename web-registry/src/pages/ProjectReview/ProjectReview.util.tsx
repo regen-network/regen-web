@@ -1,7 +1,7 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { GeocodeFeature } from '@mapbox/mapbox-sdk/services/geocoding';
+import iso3166 from 'iso-3166-2';
 
-import { countries } from 'web-components/lib/utils/countries';
 import { getISOString } from 'web-components/lib/utils/locationStandard';
 
 import {
@@ -80,8 +80,10 @@ export const getJurisdiction = async (
 };
 
 const getCountryKey = (country: string): string => {
-  const foundKey = Object.keys(countries).find(key => {
-    return countries[key].toLowerCase() === country.trim().toLowerCase();
+  const foundKey = Object.keys(iso3166.data).find(key => {
+    return (
+      iso3166.data[key].name.toLowerCase() === country.trim().toLowerCase()
+    );
   });
   if (foundKey) return foundKey;
   return '';

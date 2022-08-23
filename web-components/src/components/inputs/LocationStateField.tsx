@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Field, useFormikContext } from 'formik';
+import iso3166 from 'iso-3166-2';
 
 import SelectTextField, { Option } from './SelectTextField';
 
@@ -22,26 +22,6 @@ const LocationStateField: React.FC<FieldProps> = ({
   const [stateOptions, setStateOptions] = useState<Option[]>([]);
   const { setFieldValue } = useFormikContext();
 
-  const searchState = async (
-    countryId: string,
-  ): Promise<Option[] | [] | void> => {
-    const resp = await axios({
-      url:
-        'https://geodata.solutions/api/api.php?type=getStates&countryId=' +
-        countryId,
-      method: 'POST',
-    });
-    const respOK = resp && resp.status === 200;
-    if (respOK) {
-      const data = await resp.data;
-      const options = Object.keys(data.result).map(key => ({
-        value: key.replace(/\"/g, ''),
-        label: data.result[key],
-      }));
-      return options;
-    }
-  };
-
   useEffect(() => {
     if (country === '') {
       // reset options when country no longer has a selected element
@@ -49,26 +29,34 @@ const LocationStateField: React.FC<FieldProps> = ({
       return;
     }
 
-    searchState(country).then(options => {
-      if (!options || !Array.isArray(options)) return;
+    const countrySubdivisions = iso3166.country(country);
 
-      // first, check initial selection (selected/persisted) or default empty value
-      if (
-        initialSelection &&
-        options.some(opt => opt.value === initialSelection)
-      ) {
-        setFieldValue(name, initialSelection);
-      } else {
-        (options as Option[]).unshift({
-          value: '',
-          label: 'Please choose a state',
-        });
-        setFieldValue(name, '');
-      }
+    const options: Option[] = Object.keys(countrySubdivisions?.sub || {})
+      .map(isoCode => ({
+        value: isoCode,
+        label: `${countrySubdivisions?.sub[isoCode].name} (${countrySubdivisions?.sub[isoCode].type})`,
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label));
 
-      // finaly, set options
-      setStateOptions(options);
+    if (!options || !Array.isArray(options)) return;
+
+    // first, check initial selection (selected/persisted) or default empty value
+    if (
+      initialSelection &&
+      options.some(opt => opt.value === initialSelection)
+    ) {
+      setFieldValue(name, initialSelection);
+    } else {
+      setFieldValue(name, '');
+    }
+
+    options.unshift({
+      value: '',
+      label: 'Please choose a state',
     });
+
+    // finaly, set options
+    setStateOptions(options);
   }, [country, setFieldValue, name, initialSelection]);
 
   return (

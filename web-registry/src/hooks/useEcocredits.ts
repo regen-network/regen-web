@@ -13,8 +13,10 @@ export default function useEcocredits(address?: string): {
   const [isLoadingCredits, setIsLoadingCredits] = useState(true);
 
   const fetchCredits = useCallback(async (): Promise<void> => {
-    if (!address) return;
-    setIsLoadingCredits(true);
+    if (!address) {
+      setIsLoadingCredits(false);
+      return;
+    }
 
     try {
       const credits = await getEcocreditsForAccount(address);

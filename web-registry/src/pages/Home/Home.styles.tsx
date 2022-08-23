@@ -2,12 +2,7 @@ import { makeStyles } from '@mui/styles';
 
 export const useHomeStyles = makeStyles(theme => ({
   section: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(22.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(17.75),
-    },
+    paddingBottom: theme.spacing(16.25),
   },
   title: {
     marginBottom: theme.spacing(8.75),

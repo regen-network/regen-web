@@ -1350,38 +1350,6 @@ exports[`Storyshots Dummy Default 1`] = `
 </MemoryRouter>
 `;
 
-<<<<<<< HEAD
-=======
-exports[`Storyshots Dummy Default 1`] = `
-<MemoryRouter
-  initialEntries={
-    Array [
-      Object {
-        "pathname": "/",
-        "search": "",
-        "state": undefined,
-      },
-    ]
-  }
->
-  <Routes>
-    <Route
-      element={
-        <RouterLogger>
-          <RegenThemeProvider
-            injectFonts={true}
-          >
-            <CssBaseline />
-            <Unknown />
-          </RegenThemeProvider>
-        </RouterLogger>
-      }
-      path="/"
-    />
-  </Routes>
-</MemoryRouter>
-`;
-
 exports[`Storyshots EmptyState Default 1`] = `
 <MemoryRouter
   initialEntries={
@@ -1412,7 +1380,6 @@ exports[`Storyshots EmptyState Default 1`] = `
 </MemoryRouter>
 `;
 
->>>>>>> 11f609ef (feat: add empty state for sell orders table (#1142))
 exports[`Storyshots FAQ Category 1`] = `
 <MemoryRouter
   initialEntries={

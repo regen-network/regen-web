@@ -1,3 +1,5 @@
+import EmptyState from 'web-components/lib/components/empty-state';
+import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
@@ -16,13 +18,26 @@ const SellOrdersTable = ({
   sellOrders,
   renderActionButtonsFunc = i => void 0,
 }: Props): JSX.Element => {
+  const hasSellOrders = sellOrders.length > 0;
   return (
-    <ActionsTable
-      tableLabel="Sell orders"
-      headerRows={SELL_ORDERS_ROW}
-      rows={sellOrders.map(sellOrder => getSellOrdersTableRow({ sellOrder }))}
-      renderActionButtons={renderActionButtonsFunc}
-    />
+    <>
+      {hasSellOrders && (
+        <ActionsTable
+          tableLabel="Sell orders"
+          headerRows={SELL_ORDERS_ROW}
+          rows={sellOrders.map(sellOrder =>
+            getSellOrdersTableRow({ sellOrder }),
+          )}
+          renderActionButtons={renderActionButtonsFunc}
+        />
+      )}
+      {!hasSellOrders && (
+        <EmptyState
+          message={'No sell orders found'}
+          icon={<EmptyCartIcon sx={{ fontSize: 84, fill: 'none' }} />}
+        />
+      )}
+    </>
   );
 };
 

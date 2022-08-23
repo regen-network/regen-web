@@ -61,11 +61,12 @@ const Home: React.FC = () => {
   const projectsWithOrderData = useProjectsSellOrders({
     projects,
     sellOrders,
+    limit: FEATURE_PROJECTS_COUNT,
   });
   const sortedProjects = useSortProjects({
     projects: projectsWithOrderData,
     sort: PROJECTS_SORT,
-  }).slice(0, FEATURE_PROJECTS_COUNT);
+  });
 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 

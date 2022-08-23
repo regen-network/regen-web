@@ -1,7 +1,7 @@
 import { SxProps } from '@mui/material';
 import SvgIcon from '@mui/material/SvgIcon';
 
-import { Theme } from '~/theme/muiTheme';
+import { Theme } from 'src/theme/muiTheme';
 
 interface IconProps {
   sx?: SxProps<Theme>;

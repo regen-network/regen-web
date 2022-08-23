@@ -2,11 +2,11 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Box, SxProps } from '@mui/material';
 
+import type { Theme } from 'src/theme/muiTheme';
+
 import { BlockContent, SanityBlockOr } from '../block-content';
 import { Body, Title } from '../typography';
 import { TextSize } from '../typography/sizing';
-
-import { Theme } from '~/theme/muiTheme';
 
 type Props = {
   title: string;

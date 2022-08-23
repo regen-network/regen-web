@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, SxProps } from '@mui/material';
 
+import type { Theme } from 'src/theme/muiTheme';
+
 import { BlockContent, SanityBlockOr } from '../block-content';
 import OutlinedButton from '../buttons/OutlinedButton';
 import { Body, Title } from '../typography';
 import Card from './Card';
-
-import type { Theme } from '~/theme/muiTheme';
 
 const GreenTopIconCard: React.FC<{
   title: string;

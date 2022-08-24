@@ -9,6 +9,7 @@ import {
   DeepPartial,
   QueryBalanceRequest,
   QueryBalanceResponse,
+  QueryBalancesResponse,
   QueryBatchesByClassRequest,
   QueryBatchesByClassResponse,
   QueryBatchesByProjectRequest,
@@ -87,10 +88,13 @@ export const getEcocreditsForAccount = async (
 ): Promise<BatchInfoWithBalance[]> => {
   try {
     const batches = await queryEcoBatches();
+    const balancesResponse = await queryEcoBalances(account);
     const credits: (BatchInfoWithBalance | undefined)[] = await Promise.all(
       batches.map(async batch => {
-        const queryBalance = await queryEcoBalance(batch.denom, account);
-        const balance = queryBalance?.balance;
+        const balance = balancesResponse?.balances.find(
+          balance => balance.batchDenom === batch.denom,
+        );
+
         const hasBalance =
           Number(balance?.tradableAmount) > 0 ||
           Number(balance?.escrowedAmount) > 0 ||
@@ -102,7 +106,7 @@ export const getEcocreditsForAccount = async (
           const project = await getProject(batch.projectId);
           return {
             ...batch,
-            ...queryBalance,
+            balance,
             classId,
             projectLocation: project.project?.jurisdiction,
           };
@@ -283,16 +287,15 @@ export const queryEcoBatchSupply = async (
   }
 };
 
-const queryEcoBalance = async (
-  batchDenom: string,
+const queryEcoBalances = async (
   address: string,
-): Promise<QueryBalanceResponse> => {
+): Promise<QueryBalancesResponse> => {
   const client = await getQueryClient();
   try {
-    return client.Balance({ address, batchDenom });
+    return client.Balances({ address });
   } catch (err) {
     throw new Error(
-      `Error fetching account ecocredits for batch ${batchDenom}, address ${address}, err: ${err}`,
+      `Error fetching account ecocredits for address ${address}, err: ${err}`,
     );
   }
 };

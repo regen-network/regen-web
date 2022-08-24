@@ -2,6 +2,8 @@ import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder from '@mapbox/mapbox-sdk/services/geocoding';
 import iso3166 from 'iso-3166-2';
 
+import { Option } from '../components/inputs/SelectTextField';
+
 const POSTAL_CODE_MAX_LENGTH = 64;
 
 /**
@@ -79,3 +81,30 @@ export const getJurisdictionIsoCode = ({
     return stateProvince;
   return `${stateProvince} ${_postalCode}`;
 };
+
+/**
+ *
+ */
+
+const COUNTRY_OPTION_PLACEHOLDER: Option = {
+  value: '',
+  label: 'Please choose a country',
+};
+
+export function getCountryOptions(): Option[] {
+  const countries = Object.keys(iso3166.data)
+    .map(key => ({
+      value: key,
+      label: iso3166.data[key].name,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+  const countryUS = countries.find(country => country.value === 'US');
+  const otherCountries = countries.filter(country => country.value !== 'US');
+
+  let options = [COUNTRY_OPTION_PLACEHOLDER];
+  if (countryUS) options.push(countryUS);
+  options.push(...otherCountries);
+
+  return options;
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import {
   Box,
   styled,
@@ -32,6 +32,8 @@ const BorderLeft = styled('div')(({ theme }) => ({
   borderLeft: `1px solid ${theme.palette.info.light}`,
 }));
 
+export const DEFAULT_ROWS_PER_PAGE = 5;
+
 /** `i` represents the index of the current row in the data set - ie it can be
  * used in the parent component to access that row's data. ex.
  * ```ts
@@ -40,15 +42,22 @@ const BorderLeft = styled('div')(({ theme }) => ({
  *  */
 export type RenderActionButtonsFunc = (i: number) => React.ReactNode;
 
+export type OnActionTableChangeParams = {
+  page: number;
+  rowsPerPage: number;
+  offset: number;
+};
+
 const ActionsTable: React.FC<{
   tableLabel: string;
   headerRows: React.ReactNode[];
   rows: React.ReactNode[][];
   renderActionButtons?: RenderActionButtonsFunc;
-}> = ({ tableLabel, headerRows, rows, renderActionButtons }) => {
+  onTableChange?: Dispatch<SetStateAction<OnActionTableChangeParams>>;
+}> = ({ tableLabel, headerRows, rows, renderActionButtons, onTableChange }) => {
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(DEFAULT_ROWS_PER_PAGE);
   const [displayRows, setDisplayRows] = useState<React.ReactNode[][]>(rows);
   // const [order, setOrder] = useState<Order>('desc');
   // const [orderBy, setOrderBy] = useState<keyof TableCredits>('start_date');
@@ -164,14 +173,24 @@ const ActionsTable: React.FC<{
                   rowsPerPageOptions={[5, 10]}
                   rowsPerPage={rowsPerPage}
                   onChangeRowsPerPage={e => {
-                    setRowsPerPage(parseInt(e.target.value, 10));
+                    const newRowsPerPage = parseInt(e.target.value, 10);
+                    setRowsPerPage(newRowsPerPage);
                     setOffset(0);
+                    onTableChange &&
+                      onTableChange({
+                        page,
+                        rowsPerPage: newRowsPerPage,
+                        offset: 0,
+                      });
                   }}
                   count={rows.length}
                   page={page}
                   onPageChange={(_, newPage) => {
+                    const offset = newPage * rowsPerPage;
                     setPage(newPage);
-                    setOffset(newPage * rowsPerPage);
+                    setOffset(offset);
+                    onTableChange &&
+                      onTableChange({ page: newPage, rowsPerPage, offset });
                   }}
                 />
               </TableRow>

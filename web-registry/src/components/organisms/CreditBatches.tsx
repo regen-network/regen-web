@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
 import Section from 'web-components/lib/components/section';
-import { ActionsTable } from 'web-components/lib/components/table/ActionsTable';
+import {
+  ActionsTable,
+  OnActionTableChangeParams,
+} from 'web-components/lib/components/table/ActionsTable';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncateHash } from 'web-components/lib/utils/truncate';
@@ -21,6 +24,7 @@ interface CreditBatchProps {
   creditClassId?: string | null;
   projectPage?: boolean;
   creditBatches?: BatchInfoWithSupply[];
+  onTableChange?: Dispatch<SetStateAction<OnActionTableChangeParams>>;
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 
@@ -98,6 +102,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   projectPage = false,
   creditBatches,
   titleAlign = 'center',
+  onTableChange,
 }) => {
   const styles = useStyles();
   const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
@@ -135,6 +140,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           {headCell.label}
         </Box>
       ))}
+      onTableChange={onTableChange}
       rows={batches.map(batch =>
         /* eslint-disable react/jsx-key */
         [

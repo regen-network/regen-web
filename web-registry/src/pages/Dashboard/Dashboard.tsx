@@ -61,11 +61,7 @@ const Dashboard = (): JSX.Element => {
       icon: (
         <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
       ),
-      content: (
-        <LazyLoad>
-          <MyEcocredits />
-        </LazyLoad>
-      ),
+      content: <LazyLoad>{<MyEcocredits />}</LazyLoad>,
     },
     {
       label: 'Projects',
@@ -99,7 +95,7 @@ const Dashboard = (): JSX.Element => {
       icon: (
         <CreditBatchIcon sx={{ color: 'secondary.dark', opacity: '70%' }} />
       ),
-      hidden: creditClassTabHidden,
+      hidden: !isIssuer,
       content: (
         <LazyLoad>
           <Flex sx={sxs.padTop}>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useTheme } from '@mui/styles';
 import { Box } from '@mui/system';
 import { QueryBatchesByIssuerResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
@@ -6,7 +7,13 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import EmptyState from 'web-components/lib/components/empty-state';
 import { CreditBatchLightIcon } from 'web-components/lib/components/icons/CreditBatchLightIcon';
 import PlusIcon from 'web-components/lib/components/icons/PlusIcon';
+import {
+  DEFAULT_ROWS_PER_PAGE,
+  OnActionTableChangeParams,
+} from 'web-components/lib/components/table/ActionsTable';
 import { Title } from 'web-components/lib/components/typography';
+
+import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 
 import WithLoader from 'components/atoms/WithLoader';
 import { CreditBatches } from 'components/organisms';
@@ -23,12 +30,19 @@ export const MyCreditBatches = ({
   address,
 }: MyCreditBatchesProps): JSX.Element => {
   const theme = useTheme();
+  const [paginationParams, setPaginationParams] =
+    useState<OnActionTableChangeParams>({
+      page: 0,
+      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
+      offset: 0,
+    });
   const batchesResponse = useEcocreditQuery<QueryBatchesByIssuerResponse>({
     params: { issuer: address },
     query: 'batchesByIssuer',
   });
   const batchesWithSupply = useBatchesWithSupply({
     batches: batchesResponse?.data?.batches,
+    paginationParams,
   });
   const hasNoBatches = batchesWithSupply && batchesWithSupply?.length === 0;
 
@@ -64,7 +78,11 @@ export const MyCreditBatches = ({
               create credit batch
             </OutlinedButton>
           </Box>
-          <CreditBatches creditBatches={batchesWithSupply} projectPage />
+          <CreditBatches
+            creditBatches={batchesWithSupply}
+            onTableChange={setPaginationParams}
+            projectPage
+          />
         </>
       </WithLoader>
       {hasNoBatches && (

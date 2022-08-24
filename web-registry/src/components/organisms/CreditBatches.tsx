@@ -15,6 +15,7 @@ import { getBatchesWithSupply } from 'lib/ecocredit/api';
 import { ledgerRESTUri } from 'lib/ledger';
 
 import { AccountLink, Link } from 'components/atoms';
+import WithLoader from 'components/atoms/WithLoader';
 
 interface CreditBatchProps {
   creditClassId?: string | null;
@@ -144,9 +145,11 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             {truncateHash(batch.txhash)}
           </Link>,
-          <Link key="classId" href={`/credit-classes/${batch.classId}`}>
-            {batch.classId}
-          </Link>,
+          <WithLoader isLoading={!batch.classId}>
+            <Link key="classId" href={`/credit-classes/${batch.classId}`}>
+              {batch.classId}
+            </Link>
+          </WithLoader>,
           <Link
             className={styles.noWrap}
             href={`/credit-batches/${batch.denom}`}
@@ -154,18 +157,26 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             {batch.denom}
           </Link>,
           <AccountLink address={batch.issuer} />,
-          <>{formatNumber(batch.tradableSupply)}</>,
-          <>{formatNumber(batch.retiredSupply)}</>,
-          <>{formatNumber(batch.cancelledAmount)}</>,
+          <WithLoader isLoading={!batch.tradableSupply}>
+            <Box>{formatNumber(batch.tradableSupply)}</Box>
+          </WithLoader>,
+          <WithLoader isLoading={!batch.retiredSupply}>
+            <Box>{formatNumber(batch.retiredSupply)}</Box>
+          </WithLoader>,
+          <WithLoader isLoading={!batch.cancelledAmount}>
+            <Box>{formatNumber(batch.cancelledAmount)}</Box>
+          </WithLoader>,
           <Box className={styles.noWrap}>
             {formatDate(batch.startDate as Date, undefined, true)}
           </Box>,
           <Box className={styles.noWrap}>
             {formatDate(batch.endDate as Date, undefined, true)}
           </Box>,
-          <Box key="projectLocation" className={styles.noWrap}>
-            {batch.projectLocation}
-          </Box>,
+          <WithLoader isLoading={!batch.projectLocation}>
+            <Box key="projectLocation" className={styles.noWrap}>
+              {batch.projectLocation}
+            </Box>
+          </WithLoader>,
         ].filter(item => {
           return (
             !(creditClassId && item?.key === 'classId') &&

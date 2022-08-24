@@ -12,6 +12,8 @@ import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
+import { useWallet } from 'lib/wallet';
+
 import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
 import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
@@ -45,6 +47,7 @@ const Dashboard = (): JSX.Element => {
   const isCreditClassCreator = useQueryIfCreditClassCreator();
   const isCreditClassAdmin = useQueryIfCreditClassAdmin();
   const isProjectAdmin = useQueryIfProjectAdmin();
+  const walletContext = useWallet();
   const projectTabHidden = !isIssuer || !isProjectAdmin;
   const creditClassTabHidden = !isCreditClassCreator || !isCreditClassAdmin;
 
@@ -100,7 +103,7 @@ const Dashboard = (): JSX.Element => {
       content: (
         <LazyLoad>
           <Flex sx={sxs.padTop}>
-            <MyCreditBatches />
+            <MyCreditBatches address={walletContext?.wallet?.address} />
           </Flex>
         </LazyLoad>
       ),

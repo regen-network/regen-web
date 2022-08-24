@@ -12,6 +12,8 @@ import {
   QueryBalancesResponse,
   QueryBatchesByClassRequest,
   QueryBatchesByClassResponse,
+  QueryBatchesByIssuerRequest,
+  QueryBatchesByIssuerResponse,
   QueryBatchesByProjectRequest,
   QueryBatchesByProjectResponse,
   QueryBatchRequest,
@@ -412,6 +414,11 @@ type BatchesByProjectParams = {
   params: DeepPartial<QueryBatchesByProjectRequest>;
 };
 
+type BatchesByIssuerParams = {
+  query: 'batchesByIssuer';
+  params: DeepPartial<QueryBatchesByIssuerRequest>;
+};
+
 type ClassInfoParams = {
   query: 'classInfo';
   params: DeepPartial<QueryBatchRequest>;
@@ -447,6 +454,7 @@ export type EcocreditQueryProps =
   | BatchInfoParams
   | BatchesParams
   | BatchesByProjectParams
+  | BatchesByIssuerParams
   | ClassInfoParams
   | ClassesParams
   | CreditTypesParams
@@ -461,6 +469,7 @@ export type EcocreditQueryResponse =
   | QueryBatchResponse
   | QueryBatchesByClassResponse
   | QueryBatchesByProjectResponse
+  | QueryBatchesByIssuerResponse
   | QueryClassResponse
   | QueryClassesResponse
   | QueryCreditTypesResponse
@@ -517,16 +526,16 @@ export const queryBatchInfo = async ({
   }
 };
 
-// Batches
+// BatchesByClass
 
-interface QueryBatchesProps extends EcocreditQueryClientProps {
+interface QueryBatchesByClassProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBatchesByClassRequest>;
 }
 
 export const queryBatchesByClass = async ({
   client,
   request,
-}: QueryBatchesProps): Promise<QueryBatchesByClassResponse> => {
+}: QueryBatchesByClassProps): Promise<QueryBatchesByClassResponse> => {
   try {
     return await client.BatchesByClass({
       classId: request.classId,
@@ -537,6 +546,29 @@ export const queryBatchesByClass = async ({
     );
   }
 };
+
+// BatchesByIssuer
+
+interface QueryBatchesByIssuerProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QueryBatchesByIssuerRequest>;
+}
+
+export const queryBatchesByIssuer = async ({
+  client,
+  request,
+}: QueryBatchesByIssuerProps): Promise<QueryBatchesByIssuerResponse> => {
+  try {
+    return await client.BatchesByIssuer({
+      issuer: request.issuer,
+    });
+  } catch (err) {
+    throw new Error(
+      `Error in the Batches by issuer query of the ledger ecocredit module: ${err}`,
+    );
+  }
+};
+
+// BatchesByProject
 
 interface QueryBatchesByProjectProps extends EcocreditQueryClientProps {
   request: DeepPartial<QueryBatchesByProjectRequest>;

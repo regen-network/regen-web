@@ -35,7 +35,6 @@ import useMedia from './hooks/useMedia';
 import useOtherProjects from './hooks/useOtherProjects';
 import useSeo from './hooks/useSeo';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
-import { MoreInfo } from './ProjectDetails.MoreInfo';
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';
@@ -55,7 +54,6 @@ function ProjectDetails(): JSX.Element {
   const { projectId } = useParams();
 
   // Page mode (info/Tx)
-  const isInfoMode = !(chainId && testProject.creditPrice);
   const isTxMode =
     chainId && (testProject.creditPrice || testProject.stripePrice);
 
@@ -223,8 +221,6 @@ function ProjectDetails(): JSX.Element {
           {...issuanceModalData}
         />
       )}
-
-      {isInfoMode && <MoreInfo />}
 
       {isTxMode && (
         <TransactionModals

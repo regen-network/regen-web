@@ -279,4 +279,5 @@ const DocumentationTable: React.FC<DocumentationTableProps> = ({
   );
 };
 
-export { Document, DocumentationTable, DocumentRowData };
+export { DocumentationTable };
+export type { Document, DocumentRowData };

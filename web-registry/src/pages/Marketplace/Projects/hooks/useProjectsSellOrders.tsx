@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
 import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
-import { formatNumber } from 'web-components/lib/utils/format';
 
 import { microToDenom } from 'lib/denom.utils';
 import { getMetadata } from 'lib/metadata-graph';
@@ -12,14 +12,21 @@ import { ProjectWithOrderData, UISellOrderInfo } from '../Projects.types';
 
 import DefaultProject from 'assets/default-project.jpg';
 
+import {
+  getPurchaseInfo,
+  sortProjectsBySellOrdersAvailability,
+} from './useProjectsSellOrders.utils';
+
 type Props = {
   projects?: ProjectInfo[];
   sellOrders?: SellOrderInfo[];
+  limit?: number;
 };
 
 export const useProjectsSellOrders = ({
   projects,
   sellOrders,
+  limit,
 }: Props): ProjectWithOrderData[] => {
   const [projectsWithOrders, setProjectsWithOrders] = useState<
     ProjectWithOrderData[]
@@ -31,12 +38,13 @@ export const useProjectsSellOrders = ({
         const _projectsWithOrders = await getProjectDisplayData(
           projects,
           sellOrders,
+          limit ?? projects.length,
         );
         setProjectsWithOrders(_projectsWithOrders);
       }
     };
     normalize();
-  }, [projects, sellOrders]);
+  }, [projects, sellOrders, limit]);
 
   return projectsWithOrders;
 };
@@ -44,18 +52,22 @@ export const useProjectsSellOrders = ({
 const getProjectDisplayData = async (
   projects: ProjectInfo[],
   sellOrders: SellOrderInfo[],
+  limit: number,
 ): Promise<ProjectWithOrderData[]> => {
   const projectsWithOrderData = await Promise.all(
-    projects?.map(async project => {
+    projects?
+    .sort(sortProjectsBySellOrdersAvailability(sellOrders))
+    .slice(0, limit)
+    .map(async (project: ProjectInfo) => {
       const sellOrdersNormalized = sellOrders
-        .filter(sellOrder => sellOrder?.batchDenom?.startsWith(project.id))
-        .map(sellOrder => {
-          return {
-            ...sellOrder,
-            id: String(sellOrder.id),
-          };
-        });
-      const purchaseInfo = getPurchaseInfo(sellOrdersNormalized);
+      .filter(sellOrder => sellOrder?.batchDenom?.startsWith(project.id))
+      .map(sellOrder => {
+        return {
+          ...sellOrder,
+          id: String(sellOrder.id),
+        };
+      });
+      const purchaseInfo = getPurchaseInfo(project.id, sellOrders);
       let metadata;
       if (project.metadata.length) {
         try {
@@ -84,31 +96,4 @@ const getProjectDisplayData = async (
     }),
   );
   return projectsWithOrderData;
-};
-
-const getPurchaseInfo = (sellOrders: UISellOrderInfo[]): PurchaseInfo => {
-  if (!sellOrders.length)
-    return {
-      sellInfo: {
-        pricePerTon: `-`,
-        creditsAvailable: 0,
-      },
-    };
-
-  const creditsAvailable = sellOrders
-    .map(order => parseInt(order.quantity))
-    .reduce((total, quantity) => total + quantity, 0);
-
-  const prices = sellOrders
-    .map(order => microToDenom(order.askAmount))
-    .sort((a, b) => a - b);
-  const priceMin = formatNumber(prices?.[0], 2);
-  const priceMax = formatNumber(prices?.[prices.length - 1], 2);
-
-  return {
-    sellInfo: {
-      pricePerTon: `${priceMin}-${priceMax}`,
-      creditsAvailable,
-    },
-  };
 };

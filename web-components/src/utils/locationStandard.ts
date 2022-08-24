@@ -108,3 +108,28 @@ export function getCountryOptions(): Option[] {
 
   return options;
 }
+
+/**
+ *
+ */
+
+const COUNTRY_SUBDIVISION_OPTION_PLACEHOLDER: Option = {
+  value: '',
+  label: 'Please choose a state',
+};
+
+export function getCountrySubdivisionOptions(country: string): Option[] {
+  const countrySubdivisions = iso3166.country(country);
+
+  const options: Option[] = Object.keys(countrySubdivisions?.sub || {})
+    .map(isoCode => ({
+      value: isoCode,
+      label: `${countrySubdivisions?.sub[isoCode].name} (${countrySubdivisions?.sub[isoCode].type})`,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+  if (options.length > 0)
+    options.unshift(COUNTRY_SUBDIVISION_OPTION_PLACEHOLDER);
+
+  return options;
+}

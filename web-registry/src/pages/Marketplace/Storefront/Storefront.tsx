@@ -180,7 +180,10 @@ export const Storefront = (): JSX.Element => {
           Sell orders
         </Title>
         <Box sx={{ paddingBottom: '150px' }}>
-          <WithLoader isLoading={sellOrders === undefined}>
+          <WithLoader
+            isLoading={sellOrders === undefined}
+            sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+          >
             <SellOrdersTable
               sellOrders={normalizedSellOrders}
               renderActionButtonsFunc={(i: number) => {

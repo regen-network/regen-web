@@ -35,42 +35,61 @@ export const useBatchesWithSupply = ({
   useEffect(() => {
     let ignore = false;
     const addSupplyToBatches = async (): Promise<void> => {
-      if (batches && paginationParams) {
-        const batchesWithDefaultSupply: BatchInfoWithSupply[] = batches.map(
-          batch => ({
-            ...batch,
-            cancelledAmount: '',
-            retiredSupply: '',
-            tradableSupply: '',
-          }),
-        );
-
+      if (batches && batchesWithSupply && paginationParams) {
         const { offset, rowsPerPage } = paginationParams;
-
         const displayedBatches = batches.slice(offset, offset + rowsPerPage);
-        const newBatchesWithData = await addDataToBatch(displayedBatches);
-        setBatchesWithSupply([
-          ...batchesWithDefaultSupply.slice(0, offset),
-          ...newBatchesWithData,
-          ...batchesWithDefaultSupply.slice(
-            offset + rowsPerPage,
-            batchesWithDefaultSupply.length,
-          ),
-        ]);
+        try {
+          const newBatchesWithData = await addDataToBatch(displayedBatches);
+          if (!ignore) {
+            setBatchesWithSupply([
+              ...batchesWithSupply.slice(0, offset),
+              ...newBatchesWithData,
+              ...batchesWithSupply.slice(
+                offset + rowsPerPage,
+                batchesWithSupply.length,
+              ),
+            ]);
+          }
+        } catch {
+          // eslint-disable-next-line no-console
+          console.error('error while fetching batch supply');
+        }
       } else if (batches) {
-        const batchesWithSupply = await addDataToBatch(batches);
-        if (!ignore) {
-          setBatchesWithSupply(batchesWithSupply);
+        try {
+          const batchesWithSupply = await addDataToBatch(batches);
+          if (!ignore) {
+            setBatchesWithSupply(batchesWithSupply);
+          }
+        } catch {
+          // eslint-disable-next-line no-console
+          console.error('error while fetching batch supply');
         }
       }
     };
 
-    addSupplyToBatches();
+    let shouldFetch = false;
+
+    if (paginationParams && batchesWithSupply) {
+      const { offset, rowsPerPage } = paginationParams;
+      const displayedBatches = batchesWithSupply.slice(
+        offset,
+        offset + rowsPerPage,
+      );
+      shouldFetch = displayedBatches.some(batch => batch.tradableSupply === '');
+    } else if (batchesWithSupply) {
+      shouldFetch = batchesWithSupply.some(
+        batch => batch.tradableSupply === '',
+      );
+    }
+
+    if (shouldFetch) {
+      addSupplyToBatches();
+    }
 
     return () => {
       ignore = true;
     };
-  }, [batches, paginationParams]);
+  }, [batches, batchesWithSupply, paginationParams]);
 
   return batchesWithSupply;
 };

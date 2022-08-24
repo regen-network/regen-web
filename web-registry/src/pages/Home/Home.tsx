@@ -1,68 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Box, CardMedia, useMediaQuery } from '@mui/material';
-import { makeStyles, useTheme } from '@mui/styles';
+import { useTheme } from '@mui/styles';
+import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { Loading } from 'web-components/lib/components/loading';
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import { Body, Title } from 'web-components/lib/components/typography';
 
+import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
+import { useSortProjects } from 'pages/Projects/hooks/useSortProjects';
+import {
+  API_URI,
+  IMAGE_STORAGE_BASE_URL,
+} from 'pages/Projects/Projects.config';
+import WithLoader from 'components/atoms/WithLoader';
+import { useEcocreditQuery } from 'hooks';
+import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
+
 import topographyImg from '../../assets/background-contour-1.jpg';
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
 import { BackgroundImgSection, HeroAction } from '../../components/molecules';
-import {
-  CreditBatches,
-  CreditClassCards,
-  ProjectCards,
-} from '../../components/organisms';
-import { useMoreProjectsQuery } from '../../generated/graphql';
+import { CreditBatches, CreditClassCards } from '../../components/organisms';
 import {
   useAllCreditClassQuery,
   useAllHomePageQuery,
 } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
-
-const useStyles = makeStyles(theme => ({
-  section: {
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(22.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingBottom: theme.spacing(17.75),
-    },
-  },
-  title: {
-    marginBottom: theme.spacing(8.75),
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(8),
-    },
-  },
-  projectCards: {
-    [theme.breakpoints.down('md')]: {
-      width: '100vw',
-      marginLeft: theme.spacing(-8),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginLeft: theme.spacing(-4),
-    },
-  },
-  bottomSectionWidth: {
-    maxWidth: theme.spacing(200),
-  },
-  bottomSection: {
-    display: 'flex',
-    justifyContent: 'center',
-    paddingBottom: theme.spacing(17.75),
-  },
-}));
+import { FEATURE_PROJECTS_COUNT, PROJECTS_SORT } from './Home.constants';
+import { useHomeStyles } from './Home.styles';
 
 const Home: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>('');
+  const navigate = useNavigate();
 
-  const styles = useStyles();
+  const styles = useHomeStyles();
   const theme = useTheme();
 
   const { data, loading: loadingSanity } = useAllHomePageQuery({ client });
@@ -71,7 +49,27 @@ const Home: React.FC = () => {
   const heroSection = content?.heroSection;
 
   const creditClassesContent = creditClassData?.allCreditClass;
-  const { data: projectsData } = useMoreProjectsQuery();
+
+  const { data: ecocreditData } = useEcocreditQuery<QueryProjectsResponse>({
+    query: 'projects',
+    params: {},
+  });
+  const { sellOrdersResponse } = useQuerySellOrders();
+  const sellOrders = sellOrdersResponse?.sellOrders;
+  const projects = useMemo(
+    () => ecocreditData?.projects?.filter(project => project.metadata),
+    [ecocreditData?.projects],
+  );
+
+  const projectsWithOrderData = useProjectsSellOrders({
+    projects,
+    sellOrders,
+    limit: FEATURE_PROJECTS_COUNT,
+  });
+  const sortedProjects = useSortProjects({
+    projects: projectsWithOrderData,
+    sort: PROJECTS_SORT,
+  });
 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -143,18 +141,52 @@ const Home: React.FC = () => {
         </Box>
       </BackgroundImgSection>
 
-      {projectsData?.allProjects?.nodes && (
+      {sortedProjects && (
         <div id="projects">
           <Section
             title="Featured Projects"
             titleAlign="center"
             classes={{ root: styles.section, title: styles.title }}
           >
-            <ProjectCards
-              projects={projectsData?.allProjects?.nodes}
-              classes={{ root: styles.projectCards }}
-            />
+            <WithLoader
+              isLoading={sortedProjects?.length === 0}
+              sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+            >
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 338px))',
+                  gridGap: '1.125rem',
+                  flex: 1,
+                  justifyContent: 'center',
+                }}
+              >
+                {sortedProjects?.map(project => (
+                  <Box key={project?.id}>
+                    <ProjectCard
+                      name={project?.name}
+                      imgSrc={project?.imgSrc}
+                      place={project?.place}
+                      area={project?.area}
+                      areaUnit={project?.areaUnit}
+                      // onButtonClick={() => {}} TODO #1055
+                      purchaseInfo={project.purchaseInfo}
+                      onClick={() => navigate(`/projects/${project.id}`)}
+                      imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                      apiServerUrl={API_URI}
+                      truncateTitle={true}
+                      sx={{ width: 338, height: 479 }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+            </WithLoader>
           </Section>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 30 }}>
+            <Link to="/projects">
+              <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
+            </Link>
+          </Box>
         </div>
       )}
 

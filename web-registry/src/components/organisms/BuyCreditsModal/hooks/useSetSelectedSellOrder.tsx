@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useFormikContext } from 'formik';
 
-import { UISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
+import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 
 import { BuyCreditsProject, BuyCreditsValues } from '../..';
 
@@ -26,10 +26,10 @@ export const useSetSelectedSellOrder = (
         setSelectedSellOrder(_selectedSellOrder);
 
         if (
-          _selectedSellOrder?.disableAutoRetire &&
-          values.retirementAction !== 'manual'
+          !_selectedSellOrder?.disableAutoRetire &&
+          values.retirementAction !== 'autoretire'
         ) {
-          setFieldValue('retirementAction', 'manual');
+          setFieldValue('retirementAction', 'autoretire');
         }
       }
     }, [setFieldValue, values.retirementAction, values.sellOrderId]);

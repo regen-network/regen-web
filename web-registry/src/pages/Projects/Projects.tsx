@@ -18,11 +18,11 @@ import { Body, Subtitle } from 'web-components/lib/components/typography';
 import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit';
 import { BuyCreditsModal } from 'components/organisms';
 
-import { Link } from '../../../components/atoms';
-import useEcocreditQuery from '../../../hooks/useEcocreditQuery';
-import useMsgClient from '../../../hooks/useMsgClient';
-import { useQuerySellOrders } from '../../../hooks/useQuerySellOrders';
-import { getHashUrl } from '../../../lib/block-explorer';
+import { Link } from '../../components/atoms';
+import useEcocreditQuery from '../../hooks/useEcocreditQuery';
+import useMsgClient from '../../hooks/useMsgClient';
+import { useQuerySellOrders } from '../../hooks/useQuerySellOrders';
+import { getHashUrl } from '../../lib/block-explorer';
 import { useProjectsSellOrders } from './hooks/useProjectsSellOrders';
 import { useSortProjects } from './hooks/useSortProjects';
 import {

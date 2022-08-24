@@ -2,7 +2,7 @@ import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
 import { formatDenomText, microToDenom } from 'lib/denom.utils';
 
-import { UISellOrderInfo } from 'pages/Marketplace/Projects/Projects.types';
+import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 
 import { BuyCreditsProject, BuyCreditsValues } from '..';
 

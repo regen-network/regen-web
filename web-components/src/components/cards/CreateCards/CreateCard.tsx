@@ -1,10 +1,10 @@
 import { SxProps } from '@mui/material';
 
+import { Theme } from 'src/theme/muiTheme';
+
 import OutlinedButton from '../../buttons/OutlinedButton';
 import { Title } from '../../typography';
 import Card from '../Card';
-
-import { Theme } from '~/theme/muiTheme';
 
 export interface CreateCardProps {
   sx?: SxProps<Theme>;

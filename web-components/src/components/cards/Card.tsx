@@ -1,6 +1,6 @@
 import { Card as MuiCard, SxProps } from '@mui/material';
 
-import type { Theme } from '~/theme/muiTheme';
+import type { Theme } from 'src/theme/muiTheme';
 
 export function Card({
   children,

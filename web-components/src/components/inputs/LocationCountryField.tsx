@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Field } from 'formik';
+import iso3166 from 'iso-3166-2';
 
-import { countries } from '../../utils/countries';
 import SelectTextField, { Option } from './SelectTextField';
 
 interface FieldProps {
@@ -18,10 +18,12 @@ const LocationCountryField: React.FC<FieldProps> = ({
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
-    const countriesWithEmpty = Object.keys(countries).map(key => ({
-      value: key,
-      label: countries[key],
-    }));
+    const countriesWithEmpty = Object.keys(iso3166.data)
+      .map(key => ({
+        value: key,
+        label: iso3166.data[key].name,
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label));
     countriesWithEmpty.unshift({ value: '', label: 'Please choose a country' });
     setOptions(countriesWithEmpty);
   }, []);

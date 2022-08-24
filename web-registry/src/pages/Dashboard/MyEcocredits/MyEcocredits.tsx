@@ -33,6 +33,7 @@ import type { Theme } from 'web-components/lib/theme/muiTheme';
 import { getHashUrl } from 'lib/block-explorer';
 
 import { Link } from 'components/atoms';
+import WithLoader from 'components/atoms/WithLoader';
 import { Portfolio } from 'components/organisms/Portfolio';
 import {
   useBasketsWithClasses,
@@ -131,7 +132,8 @@ export const MyEcocredits = (): JSX.Element => {
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const accountAddress = wallet?.address;
-  const { credits, fetchCredits } = useEcocredits(accountAddress);
+  const { credits, fetchCredits, isLoadingCredits } =
+    useEcocredits(accountAddress);
   const basketsWithClasses = useBasketsWithClasses(baskets);
   const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   const { basketTokens, fetchBasketTokens } = useBasketTokens(
@@ -216,93 +218,98 @@ export const MyEcocredits = (): JSX.Element => {
 
   return (
     <>
-      <Portfolio
-        credits={credits}
-        basketTokens={basketTokens}
-        renderCreditActionButtons={
-          credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1
-            ? (i: number) => {
-                // No CTA available without tradable credit for given credit batch
-                if (Number(credits[i]?.balance?.tradableAmount) <= 0) {
-                  return undefined;
-                }
-                const buttons = [
-                  // Disabling for now until the marketplace is
-                  // released on regen-ledger
-                  // {
-                  //   icon: <Sell />,
-                  //   label: 'Sell',
-                  //   // eslint-disable-next-line no-console
-                  //   onClick: () => console.log(`TODO sell credit ${i}`),
-                  // },
-                  {
-                    icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
-                    label: CREATE_SELL_ORDER_SHORT,
-                    onClick: () => setSellOrderCreateOpen(i),
-                  },
-                  {
-                    icon: (
-                      <ArrowDownIcon
-                        sx={sxs.arrow}
-                        color={theme.palette.secondary.main}
-                        direction="next"
-                      />
-                    ),
-                    label: CREDIT_SEND_TITLE,
-                    onClick: () => setCreditSendOpen(i),
-                  },
-                  {
-                    icon: (
-                      <ArrowDownIcon
-                        sx={sxs.arrow}
-                        color={theme.palette.secondary.main}
-                        direction="down"
-                      />
-                    ),
-                    label: CREDIT_RETIRE_TITLE,
-                    onClick: () => setCreditRetireOpen(i),
-                  },
-                ];
+      <WithLoader
+        isLoading={isLoadingCredits}
+        sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+      >
+        <Portfolio
+          credits={credits}
+          basketTokens={basketTokens}
+          renderCreditActionButtons={
+            credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1
+              ? (i: number) => {
+                  // No CTA available without tradable credit for given credit batch
+                  if (Number(credits[i]?.balance?.tradableAmount) <= 0) {
+                    return undefined;
+                  }
+                  const buttons = [
+                    // Disabling for now until the marketplace is
+                    // released on regen-ledger
+                    // {
+                    //   icon: <Sell />,
+                    //   label: 'Sell',
+                    //   // eslint-disable-next-line no-console
+                    //   onClick: () => console.log(`TODO sell credit ${i}`),
+                    // },
+                    {
+                      icon: <AvailableCreditsIconAlt sx={sxs.arrow} />,
+                      label: CREATE_SELL_ORDER_SHORT,
+                      onClick: () => setSellOrderCreateOpen(i),
+                    },
+                    {
+                      icon: (
+                        <ArrowDownIcon
+                          sx={sxs.arrow}
+                          color={theme.palette.secondary.main}
+                          direction="next"
+                        />
+                      ),
+                      label: CREDIT_SEND_TITLE,
+                      onClick: () => setCreditSendOpen(i),
+                    },
+                    {
+                      icon: (
+                        <ArrowDownIcon
+                          sx={sxs.arrow}
+                          color={theme.palette.secondary.main}
+                          direction="down"
+                        />
+                      ),
+                      label: CREDIT_RETIRE_TITLE,
+                      onClick: () => setCreditRetireOpen(i),
+                    },
+                  ];
 
-                // Only add ability to put credits into basket
-                // if there's at least one basket that accepts those credits
-                if (creditBaskets[i] && creditBaskets[i].length > 0) {
-                  buttons.splice(1, 0, {
-                    // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
-                    icon: <PutInBasket />,
-                    label: BASKET_PUT_TITLE,
-                    onClick: () => setBasketPutOpen(i),
-                  });
+                  // Only add ability to put credits into basket
+                  // if there's at least one basket that accepts those credits
+                  if (creditBaskets[i] && creditBaskets[i].length > 0) {
+                    buttons.splice(1, 0, {
+                      // buttons.splice(2, 0, { TODO: Replace once we had 'Sell'
+                      icon: <PutInBasket />,
+                      label: BASKET_PUT_TITLE,
+                      onClick: () => setBasketPutOpen(i),
+                    });
+                  }
+                  return <TableActionButtons buttons={buttons} />;
                 }
-                return <TableActionButtons buttons={buttons} />;
-              }
-            : // Hide full CTA column if no credits tradable for all credit batches
-              undefined
-        }
-        renderBasketActionButtons={(i: number) => (
-          <TableActionButtons
-            buttons={[
-              {
-                icon: <TakeFromBasket />,
-                label: BASKET_TAKE_TITLE,
-                onClick: () => openTakeModal(i),
-              },
-              // This will be handled from osmosis
-              // so hiding these for now
-              // {
-              //   icon: <WithdrawIBC />,
-              //   label: 'Withdraw (IBC)',
-              //   onClick: () => `TODO withdraw ${i}`,
-              // },
-              // {
-              //   icon: <DepositIBC />,
-              //   label: 'Deposit (IBC)',
-              //   onClick: () => `TODO deposit ${i}`,
-              // },
-            ]}
-          />
-        )}
-      />
+              : // Hide full CTA column if no credits tradable for all credit batches
+                undefined
+          }
+          renderBasketActionButtons={(i: number) => (
+            <TableActionButtons
+              buttons={[
+                {
+                  icon: <TakeFromBasket />,
+                  label: BASKET_TAKE_TITLE,
+                  onClick: () => openTakeModal(i),
+                },
+                // This will be handled from osmosis
+                // so hiding these for now
+                // {
+                //   icon: <WithdrawIBC />,
+                //   label: 'Withdraw (IBC)',
+                //   onClick: () => `TODO withdraw ${i}`,
+                // },
+                // {
+                //   icon: <DepositIBC />,
+                //   label: 'Deposit (IBC)',
+                //   onClick: () => `TODO deposit ${i}`,
+                // },
+              ]}
+            />
+          )}
+        />
+      </WithLoader>
       {creditSendOpen > -1 && !!accountAddress && (
         <CreditSendModal
           sender={accountAddress}

@@ -16,6 +16,7 @@ import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIc
 import { Image } from 'web-components/lib/components/image';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
+import SelectFieldFallback from 'web-components/lib/components/inputs/SelectFieldFallback';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
@@ -296,7 +297,14 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         sm={6}
                         className={styles.stateCountryTextField}
                       >
-                        <Suspense fallback={() => {}}>
+                        <Suspense
+                          fallback={
+                            <SelectFieldFallback
+                              label="Country"
+                              name="country"
+                            />
+                          }
+                        >
                           <LocationCountryField />
                         </Suspense>
                       </Grid>
@@ -306,7 +314,14 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         sm={6}
                         className={styles.stateCountryTextField}
                       >
-                        <Suspense fallback={() => {}}>
+                        <Suspense
+                          fallback={
+                            <SelectFieldFallback
+                              label="State / Region"
+                              name="state"
+                            />
+                          }
+                        >
                           <LocationStateField
                             country={values.country}
                             optional

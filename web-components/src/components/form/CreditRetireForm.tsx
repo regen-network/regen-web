@@ -7,6 +7,7 @@ import { Theme } from '../../theme/muiTheme';
 import { getJurisdictionIsoCode } from '../../utils/locationStandard';
 import AmountField from '../inputs/AmountField';
 import ControlledTextField from '../inputs/ControlledTextField';
+import SelectFieldFallback from '../inputs/SelectFieldFallback';
 import TextField from '../inputs/TextField';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
@@ -177,12 +178,27 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
         </Body>
         <Grid container className={styles.stateCountryGrid}>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <Suspense fallback={() => {}}>
+            <Suspense
+              fallback={
+                <SelectFieldFallback
+                  label="Country"
+                  name={`${arrayPrefix}country`}
+                />
+              }
+            >
               <LocationCountryField name={`${arrayPrefix}country`} />
             </Suspense>
           </Grid>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <Suspense fallback={() => {}}>
+            <Suspense
+              fallback={
+                <SelectFieldFallback
+                  label="State / Region"
+                  name={`${arrayPrefix}stateProvince`}
+                  optional={!postalCode}
+                />
+              }
+            >
               <LocationStateField
                 country={country}
                 optional={!postalCode}

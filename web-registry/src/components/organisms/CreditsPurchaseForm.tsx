@@ -14,6 +14,7 @@ import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFoote
 import Submit from 'web-components/lib/components/form/Submit';
 import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
+import SelectFieldFallback from 'web-components/lib/components/inputs/SelectFieldFallback';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import {
   invalidEmailMessage,
@@ -394,7 +395,11 @@ function CreditsPurchaseForm({
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <Suspense fallback={() => {}}>
+                    <Suspense
+                      fallback={
+                        <SelectFieldFallback label="Country" name="country" />
+                      }
+                    >
                       <LocationCountryField />
                     </Suspense>
                   </Grid>
@@ -404,7 +409,14 @@ function CreditsPurchaseForm({
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <Suspense fallback={() => {}}>
+                    <Suspense
+                      fallback={
+                        <SelectFieldFallback
+                          label="State / Region"
+                          name="state"
+                        />
+                      }
+                    >
                       <LocationStateField
                         name="state"
                         country={values.country}

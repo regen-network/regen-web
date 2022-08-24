@@ -1,11 +1,11 @@
 import React from 'react';
 import { SxProps } from '@mui/material';
 
+import type { Theme } from 'src/theme/muiTheme';
+
 import { FlexCol } from '../box';
 import { Label } from '../typography';
 import type { LabelSize } from '../typography/sizing';
-
-import type { Theme } from '~/theme/muiTheme';
 
 /** Grey label over child elements */
 export const LabeledDetail: React.FC<{

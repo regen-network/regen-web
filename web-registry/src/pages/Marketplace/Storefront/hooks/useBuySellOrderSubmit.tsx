@@ -5,6 +5,7 @@ import { MsgBuyDirect } from '@regen-network/api/lib/generated/regen/ecocredit/m
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
+import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandard';
 
 import { UseStateSetter } from 'types/react/use-state';
 
@@ -55,8 +56,6 @@ const useBuySellOrderSubmit = ({
         postalCode,
       } = values;
       const disableAutoRetire = retirementAction === 'manual';
-      const stateProvinceValue = stateProvince ? `-${stateProvince}` : '';
-      const postalCodeValue = stateProvince ? ` ${postalCode}` : '';
 
       const msg = MsgBuyDirect.fromPartial({
         buyer: accountAddress,
@@ -68,7 +67,11 @@ const useBuySellOrderSubmit = ({
             quantity: String(creditCount),
             retirementJurisdiction: disableAutoRetire
               ? ''
-              : `${country}${stateProvinceValue}${postalCodeValue}`,
+              : getJurisdictionIsoCode({
+                  country,
+                  stateProvince,
+                  postalCode,
+                }),
           },
         ],
       });

@@ -15,6 +15,7 @@ import CloseIcon from './CloseIcon';
 import CoBenefitsIcon from './CoBenefitsIcon';
 import CountingIcon from './CountingIcon';
 import { CreditBatchIcon } from './CreditBatchIcon';
+import { CreditBatchLightIcon } from './CreditBatchLightIcon';
 import { CreditClassIcon } from './CreditClassIcon';
 import CreditsIcon from './CreditsIcon';
 import CurrentCreditsIcon from './CurrentCreditsIcon';
@@ -126,6 +127,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon
       icon={<CreditBatchIcon sx={{ color: '#4FB573' }} />}
       label="CreditBatchIcon"
+    />
+    <LabeledIcon
+      icon={<CreditBatchLightIcon sx={{ color: 'info.main' }} />}
+      label="CreditBatchLightIcon"
     />
     <LabeledIcon
       icon={<CreditsIcon color="green" sx={{ height: 25 }} />}

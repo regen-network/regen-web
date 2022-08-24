@@ -93,7 +93,9 @@ const Dashboard = (): JSX.Element => {
     },
     {
       label: 'Credit Batches',
-      icon: <CreditBatchIcon sx={{ color: 'secondary.main' }} />,
+      icon: (
+        <CreditBatchIcon sx={{ color: 'secondary.dark', opacity: '70%' }} />
+      ),
       hidden: creditClassTabHidden,
       content: (
         <LazyLoad>

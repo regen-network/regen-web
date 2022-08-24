@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { ProjectCardProps } from 'web-components/lib/components/cards/ProjectCard';
-
 import { getMetadata } from 'lib/metadata-graph';
 
+import { ProjectWithOrderData } from '../Projects.types';
 import {
   getPurchaseInfo,
   sortProjectsBySellOrdersAvailability,
@@ -45,10 +44,6 @@ export const useProjectsSellOrders = ({
   return projectsWithOrders;
 };
 
-export interface ProjectWithOrderData extends ProjectCardProps {
-  id: string;
-}
-
 const getProjectDisplayData = async (
   projects: ProjectInfo[],
   sellOrders: SellOrderInfo[],
@@ -58,7 +53,15 @@ const getProjectDisplayData = async (
     projects
       .sort(sortProjectsBySellOrdersAvailability(sellOrders))
       .slice(0, limit)
-      .map(async project => {
+      .map(async (project: ProjectInfo) => {
+        const sellOrdersNormalized = sellOrders
+          .filter(sellOrder => sellOrder?.batchDenom?.startsWith(project.id))
+          .map(sellOrder => {
+            return {
+              ...sellOrder,
+              id: String(sellOrder.id),
+            };
+          });
         const purchaseInfo = getPurchaseInfo(project.id, sellOrders);
         let metadata;
         if (project.metadata.length) {
@@ -84,6 +87,7 @@ const getProjectDisplayData = async (
             metadata?.['regen:projectSize']?.['qudt:unit']?.['@value'] || '',
           purchaseInfo,
           href: `/projects/${project.id}`,
+          sellOrders: sellOrdersNormalized,
         } as ProjectWithOrderData;
       }),
   );

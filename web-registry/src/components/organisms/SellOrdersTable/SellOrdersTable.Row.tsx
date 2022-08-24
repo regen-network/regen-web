@@ -7,6 +7,8 @@ import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIc
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncate } from 'web-components/lib/utils/truncate';
 
+import { microToDenom } from 'lib/denom.utils';
+
 import { ReactComponent as USDCIcon } from '../../../assets/svgs/usdc.svg';
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';
@@ -41,7 +43,7 @@ const getSellOrdersTableRow = ({
       {askDenom === 'usdc' && <USDCIcon />}
       {askDenom === 'uregen' && <RegenTokenIcon />}
     </Box>
-    {`${formatNumber(askAmount)}`}
+    {`${formatNumber(microToDenom(askAmount))}`}
   </Box>,
   <Box>{formatNumber(amountAvailable)}</Box>,
   <WithLoader isLoading={project?.classIdUrl === undefined}>

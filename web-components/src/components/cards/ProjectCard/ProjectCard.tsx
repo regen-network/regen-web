@@ -219,7 +219,10 @@ export function ProjectCard({
                     </Box>
                   </Box>
                   <OutlinedButton
-                    onClick={onButtonClick}
+                    onClick={event => {
+                      event.stopPropagation();
+                      onButtonClick && onButtonClick();
+                    }}
                     size="small"
                     startIcon={
                       <CurrentCreditsIcon height="18px" width="18px" />

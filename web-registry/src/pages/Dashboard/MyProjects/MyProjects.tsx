@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Grid } from '@mui/material';
 
-import ErrorBanner from 'web-components/lib/components//banner/ErrorBanner';
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CreateProjectCard } from 'web-components/lib/components/cards/CreateCards/CreateProjectCard';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 

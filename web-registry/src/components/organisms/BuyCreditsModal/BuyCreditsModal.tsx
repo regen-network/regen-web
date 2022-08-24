@@ -250,18 +250,18 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       type="radio"
                       value="autoretire"
                       checked={values['retirementAction'] === 'autoretire'}
-                      label="Auto-retire credits"
+                      label="Auto-retire credits" // Retire credits now
                       description="These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
-                      disabled={!!selectedSellOrder?.disableAutoRetire}
                     />
                     <Field
                       className={styles.toggle}
                       component={Toggle}
                       type="radio"
                       value="manual"
-                      checked={values['retirementAction'] === 'manual'}
-                      label="Retire credits manually"
+                      checked={values['retirementAction'] === 'manual'} // if disableAutoRetire, this is an option
+                      label="Retire credits manually" // Allow retirement later
                       description="These credits will be a tradeable asset. They can be retired later via Regen Registry."
+                      disabled={!selectedSellOrder?.disableAutoRetire} // if disableAutoRetire is false, this is disabled
                     />
                   </Field>
                   <Collapse in={values['retirementAction'] === 'autoretire'}>

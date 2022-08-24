@@ -169,13 +169,13 @@ export const Storefront = (): JSX.Element => {
       stateProvince: '',
       country: 'US',
       postalCode: '',
-      retirementAction: disableAutoRetire ? 'manual' : 'autoretire',
+      retirementAction: 'autoretire',
       price: Number(askAmount),
       askDenom: askDenom,
       batchDenom: batchDenom,
       sellOrderId: orderId,
     }),
-    [askAmount, askDenom, batchDenom, disableAutoRetire, orderId],
+    [askAmount, askDenom, batchDenom, orderId],
   );
 
   return (

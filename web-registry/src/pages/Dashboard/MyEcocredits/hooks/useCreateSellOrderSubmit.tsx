@@ -8,6 +8,7 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { getFormattedNumber } from 'web-components/lib/utils/format';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { denomToMicro } from 'lib/denom.utils';
 
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
@@ -40,15 +41,17 @@ const useCreateSellOrderSubmit = ({
   const createSellOrderSubmit = useCallback(
     async (values: CreateSellOrderFormValues): Promise<void> => {
       if (!accountAddress) return Promise.reject();
-
       const { amount, batchDenom, price, disableAutoRetire } = values;
+
+      // convert to udenom
+      const priceInMicro = price ? String(denomToMicro(price)) : ''; // TODO: When other currencies, check for micro denom before converting
       const msg = MsgSell.fromPartial({
         seller: accountAddress,
         orders: [
           {
             batchDenom,
             quantity: String(amount),
-            askPrice: { denom: PRICE_DENOM, amount: String(price) },
+            askPrice: { denom: PRICE_DENOM, amount: priceInMicro },
             disableAutoRetire,
           },
         ],

@@ -15,6 +15,7 @@ export const invalidVCSID: string = `Please enter a valid VCS Project ID`;
 export const invalidJSON: string = 'Please enter valid JSON-LD';
 export const invalidAddress: string = 'Invalid address';
 export const invalidRegenAddress: string = 'Invalid regen address';
+export const MAX_FRACTION_DIGITS: number = 6; // useful for conversion to micro udenom (BigInt)
 
 export const numericOnlyRE = /^\d*$/gm;
 
@@ -77,4 +78,19 @@ export function isValidAddress(value: string, prefix?: string): boolean {
   } catch (error) {
     return false;
   }
+}
+
+export function validatePrice(
+  price?: number,
+  maximumFractionDigits?: number,
+): string | undefined {
+  if (!price) {
+    return requiredMessage;
+  }
+  const priceDecimalPlaces = price?.toString().split(/\.|,/)?.[1]?.length;
+  maximumFractionDigits = maximumFractionDigits || MAX_FRACTION_DIGITS;
+  if (!!priceDecimalPlaces && priceDecimalPlaces > maximumFractionDigits) {
+    return `Maximum ${maximumFractionDigits} decimal places`;
+  }
+  return;
 }

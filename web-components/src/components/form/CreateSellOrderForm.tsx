@@ -6,7 +6,11 @@ import AmountField from '../inputs/AmountField';
 import CheckboxLabel from '../inputs/CheckboxLabel';
 import NumberTextField from '../inputs/NumberTextField';
 import SelectTextField, { Option } from '../inputs/SelectTextField';
-import { requiredMessage, validateAmount } from '../inputs/validation';
+import {
+  requiredMessage,
+  validateAmount,
+  validatePrice,
+} from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import { Label, Subtitle } from '../typography';
 import Submit from './Submit';
@@ -55,14 +59,14 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
     if (!values.batchDenom) {
       errors.batchDenom = requiredMessage;
     }
-    if (!values.price) {
-      errors.price = requiredMessage;
-    }
     const errAmount = validateAmount(
       availableAmountByBatch[values.batchDenom ?? ''],
       values.amount,
     );
     if (errAmount) errors.amount = errAmount;
+
+    const errPrice = validatePrice(values.price);
+    if (errPrice) errors.price = errPrice;
 
     return errors;
   };

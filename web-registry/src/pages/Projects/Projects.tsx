@@ -6,11 +6,17 @@ import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ec
 
 import { Flex } from 'web-components/lib/components/box';
 import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
+import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
 import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectTextFieldBase';
 import { Loading } from 'web-components/lib/components/loading';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
+import { Item } from 'web-components/lib/components/modal/TxModal';
+import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
+
+import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit';
+import { BuyCreditsModal } from 'components/organisms';
 
 import { Link } from '../../components/atoms';
 import useEcocreditQuery from '../../hooks/useEcocreditQuery';
@@ -23,14 +29,21 @@ import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
   sortOptions,
+  VIEW_ECOCREDITS,
 } from './Projects.config';
+import { ProjectWithOrderData } from './Projects.types';
 
 export const Projects: React.FC = () => {
   const navigate = useNavigate();
   const [sort, setSort] = useState<string>(sortOptions[0].value);
-  const [txModalTitle, setTxModalTitle] = useState<string | undefined>();
-  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState(false);
-  // const [bannerError, setBannerError] = useState(''); // TODO setting up for #1055
+  const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
+  const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
+  const [txModalTitle, setTxModalTitle] = useState<string>('');
+  const [txButtonTitle, setTxButtonTitle] = useState<string>('');
+  const [txModalHeader, setTxModalHeader] = useState<string>('');
+  const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
+  const [selectedProject, setSelectedProject] =
+    useState<ProjectWithOrderData | null>(null);
   const { data, loading } = useEcocreditQuery<QueryProjectsResponse>({
     query: 'projects',
     params: {},
@@ -52,36 +65,65 @@ export const Projects: React.FC = () => {
     sort,
   });
 
-  const closeSubmitModal = (): void => setIsSubmitModalOpen(false);
+  const closeBuyModal = (): void => setIsBuyModalOpen(false);
+
+  const closeProcessingModal = (): void => setIsProcessingModalOpen(false);
+
+  const openBuyModal = (project: ProjectWithOrderData): void => {
+    setSelectedProject(project);
+    setIsBuyModalOpen(true);
+  };
 
   const handleTxQueued = (): void => {
-    setIsSubmitModalOpen(true);
+    setIsProcessingModalOpen(true);
   };
 
   const handleTxModalClose = (): void => {
-    setTxModalTitle(undefined);
+    setCardItems(undefined);
+    setTxModalTitle('');
+    setTxModalHeader('');
+    setDeliverTxResponse(undefined);
     setError(undefined);
   };
 
   const handleError = (): void => {
-    closeSubmitModal();
+    closeProcessingModal();
     setTxModalTitle('Buy Credits Error');
   };
 
   const handleTxDelivered = async (
     _deliverTxResponse: DeliverTxResponse,
   ): Promise<void> => {
-    // console.log('_deliverTxResponse', _deliverTxResponse); TODO #1055
+    closeProcessingModal();
+    closeBuyModal();
   };
 
-  const { error, setError, deliverTxResponse } = useMsgClient(
-    handleTxQueued,
-    handleTxDelivered,
-    handleError,
-  );
+  const onTxSuccessButtonClick = (): void => {
+    handleTxModalClose();
+    navigate('/ecocredits/dashboard');
+  };
 
+  const {
+    signAndBroadcast,
+    setDeliverTxResponse,
+    wallet,
+    deliverTxResponse,
+    error,
+    setError,
+  } = useMsgClient(handleTxQueued, handleTxDelivered, handleError);
+  const accountAddress = wallet?.address;
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
+
+  const buySellOrderSubmit = useBuySellOrderSubmit({
+    accountAddress,
+    signAndBroadcast,
+    setCardItems,
+    setTxButtonTitle,
+    setTxModalHeader,
+    setTxModalTitle,
+    buttonTitle: VIEW_ECOCREDITS,
+  });
 
   if (loading) return <Loading />;
   return (
@@ -102,10 +144,9 @@ export const Projects: React.FC = () => {
           gridGap: '1.125rem',
           flex: 1,
           justifyContent: 'center',
-          '& :first-child': { gridColumn: '1 / -1' },
         }}
       >
-        <Flex flex={1}>
+        <Flex flex={1} sx={{ gridColumn: '1 / -1' }}>
           <Flex
             justifyContent="space-between"
             alignItems="center"
@@ -136,7 +177,7 @@ export const Projects: React.FC = () => {
               place={project?.place}
               area={project?.area}
               areaUnit={project?.areaUnit}
-              // onButtonClick={() => {}} TODO #1055
+              onButtonClick={() => openBuyModal(project)}
               purchaseInfo={project.purchaseInfo}
               onClick={() => navigate(`/projects/${project.id}`)}
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
@@ -147,7 +188,32 @@ export const Projects: React.FC = () => {
           </Box>
         ))}
       </Box>
-      <ProcessingModal open={isSubmitModalOpen} onClose={closeSubmitModal} />
+      <BuyCreditsModal
+        open={isBuyModalOpen}
+        onClose={closeBuyModal}
+        onSubmit={buySellOrderSubmit}
+        project={{
+          id: selectedProject?.id.toString() ?? '',
+          sellOrders: selectedProject?.sellOrders,
+        }}
+      />
+      <ProcessingModal
+        open={isProcessingModalOpen}
+        onClose={closeProcessingModal}
+      />
+      <TxSuccessfulModal
+        open={!!txHash && !error}
+        onClose={handleTxModalClose}
+        txHash={txHash ?? ''}
+        txHashUrl={txHashUrl}
+        title={txModalHeader}
+        cardTitle={txModalTitle}
+        buttonTitle={txButtonTitle}
+        cardItems={cardItems}
+        linkComponent={Link}
+        onButtonClick={onTxSuccessButtonClick}
+        icon={<CelebrateIcon sx={{ width: '85px', height: '106px' }} />}
+      />
       {error && txModalTitle && (
         <TxErrorModal
           error={error}
@@ -161,7 +227,6 @@ export const Projects: React.FC = () => {
           buttonTitle="close"
         />
       )}
-      {/* {bannerError && <ErrorBanner text={bannerError} />} TODO #1055 */}
     </Flex>
   );
 };

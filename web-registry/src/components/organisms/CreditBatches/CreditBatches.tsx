@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import { makeStyles } from '@mui/styles';
 import cx from 'clsx';
 
 import Section from 'web-components/lib/components/section';
@@ -8,7 +7,6 @@ import {
   ActionsTable,
   OnActionTableChangeParams,
 } from 'web-components/lib/components/table/ActionsTable';
-import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncateHash } from 'web-components/lib/utils/truncate';
 
@@ -20,9 +18,12 @@ import { ledgerRESTUri } from 'lib/ledger';
 import { AccountLink, Link } from 'components/atoms';
 import WithLoader from 'components/atoms/WithLoader';
 
+import { useCreditBatchesStyles } from './CreditBatches.styles';
+
 interface CreditBatchProps {
   creditClassId?: string | null;
-  projectPage?: boolean;
+  filteredColumns?: string[];
+  withSection?: boolean;
   creditBatches?: BatchInfoWithSupply[];
   onTableChange?: Dispatch<SetStateAction<OnActionTableChangeParams>>;
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
@@ -63,72 +64,39 @@ const headCells: HeadCell[] = [
   { id: 'projectLocation', numeric: false, label: 'project location' },
 ];
 
-const useStyles = makeStyles((theme: Theme) => ({
-  section: {
-    [theme.breakpoints.up('md')]: {
-      paddingBottom: theme.spacing(22.25),
-    },
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(17.5),
-      paddingBottom: theme.spacing(17.5),
-    },
-  },
-  title: {
-    paddingBottom: theme.spacing(7.5),
-  },
-  tableBorder: {
-    border: `1px solid ${theme.palette.info.light}`,
-    borderRadius: 8,
-  },
-  wrap: {
-    whiteSpace: 'normal',
-    '& span': {
-      width: 138,
-    },
-  },
-  noWrap: {
-    whiteSpace: 'nowrap',
-  },
-  grey: {
-    color: theme.palette.info.main,
-  },
-  tableBody: {
-    backgroundColor: theme.palette.primary.main,
-  },
-}));
-
 const CreditBatches: React.FC<CreditBatchProps> = ({
   creditClassId,
-  projectPage = false,
+  filteredColumns,
+  withSection = false,
   creditBatches,
   titleAlign = 'center',
   onTableChange,
 }) => {
-  const styles = useStyles();
+  const styles = useCreditBatchesStyles();
   const [batches, setBatches] = useState<BatchInfoWithSupply[]>([]);
   let columnsToShow = [...headCells];
 
   useEffect(() => {
     if (!ledgerRESTUri) return;
-    if (!projectPage) {
+    if (creditBatches) {
+      setBatches(creditBatches);
+    } else {
       getBatchesWithSupply(creditClassId)
         .then(sortableBatches => {
           setBatches(sortableBatches.data);
         })
         .catch(console.error); // eslint-disable-line no-console
-    } else if (creditBatches) {
-      setBatches(creditBatches);
     }
-  }, [projectPage, creditClassId, creditBatches]);
+  }, [creditClassId, creditBatches]);
 
   // We hide the classId column if creditClassId provided (redundant)
   if (creditClassId) {
     columnsToShow = headCells.filter((hc: HeadCell) => hc.id !== 'classId');
   }
   // Ditto for project location on project page
-  if (projectPage) {
+  if (filteredColumns) {
     columnsToShow = columnsToShow.filter(
-      (hc: HeadCell) => hc.id !== 'projectLocation',
+      (hc: HeadCell) => !filteredColumns.includes(hc.id),
     );
   }
 
@@ -151,7 +119,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           >
             {truncateHash(batch.txhash)}
           </Link>,
-          <WithLoader isLoading={!batch.classId}>
+          <WithLoader isLoading={!batch.classId} variant="skeleton">
             <Link key="classId" href={`/credit-classes/${batch.classId}`}>
               {batch.classId}
             </Link>
@@ -163,13 +131,13 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
             {batch.denom}
           </Link>,
           <AccountLink address={batch.issuer} />,
-          <WithLoader isLoading={!batch.tradableSupply}>
+          <WithLoader isLoading={!batch.tradableSupply} variant="skeleton">
             <Box>{formatNumber(batch.tradableSupply)}</Box>
           </WithLoader>,
-          <WithLoader isLoading={!batch.retiredSupply}>
+          <WithLoader isLoading={!batch.retiredSupply} variant="skeleton">
             <Box>{formatNumber(batch.retiredSupply)}</Box>
           </WithLoader>,
-          <WithLoader isLoading={!batch.cancelledAmount}>
+          <WithLoader isLoading={!batch.cancelledAmount} variant="skeleton">
             <Box>{formatNumber(batch.cancelledAmount)}</Box>
           </WithLoader>,
           <Box className={styles.noWrap}>
@@ -178,7 +146,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
           <Box className={styles.noWrap}>
             {formatDate(batch.endDate as Date, undefined, true)}
           </Box>,
-          <WithLoader isLoading={!batch.projectLocation}>
+          <WithLoader isLoading={!batch.projectLocation} variant="skeleton">
             <Box key="projectLocation" className={styles.noWrap}>
               {batch.projectLocation}
             </Box>
@@ -186,7 +154,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
         ].filter(item => {
           return (
             !(creditClassId && item?.key === 'classId') &&
-            !(projectPage && item?.key === 'projectLocation')
+            !filteredColumns?.includes(String(item?.key))
           );
         }),
       )}
@@ -195,9 +163,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
   );
 
   return ledgerRESTUri && batches.length > 0 ? (
-    projectPage ? (
-      table
-    ) : (
+    withSection ? (
       <Section
         classes={{ root: styles.section, title: styles.title }}
         title="Credit Batches"
@@ -206,6 +172,8 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
       >
         {table}
       </Section>
+    ) : (
+      table
     )
   ) : null;
 };

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/styles';
 import { Box } from '@mui/system';
 import { QueryBatchesByIssuerResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
@@ -72,16 +73,17 @@ export const MyCreditBatches = ({
             >
               Successfully issues credit batches
             </Title>
-            <OutlinedButton
-              startIcon={<PlusIcon color={theme.palette.secondary.main} />}
-            >
-              create credit batch
-            </OutlinedButton>
+            <Link to="/ecocredits/create-batch">
+              <OutlinedButton
+                startIcon={<PlusIcon color={theme.palette.secondary.main} />}
+              >
+                create credit batch
+              </OutlinedButton>
+            </Link>
           </Box>
           <CreditBatches
             creditBatches={batchesWithSupply}
             onTableChange={setPaginationParams}
-            projectPage
           />
         </>
       </WithLoader>
@@ -93,11 +95,13 @@ export const MyCreditBatches = ({
           }
           sx={{ backgroundColor: 'info.light' }}
         >
-          <OutlinedButton
-            startIcon={<PlusIcon color={theme.palette.secondary.main} />}
-          >
-            create credit batch
-          </OutlinedButton>
+          <Link to="/ecocredits/create-batch">
+            <OutlinedButton
+              startIcon={<PlusIcon color={theme.palette.secondary.main} />}
+            >
+              create credit batch
+            </OutlinedButton>
+          </Link>
         </EmptyState>
       )}
     </Box>

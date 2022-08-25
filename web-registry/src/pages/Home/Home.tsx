@@ -192,7 +192,7 @@ const Home: React.FC = () => {
       )}
 
       <CardMedia image={topographyImg}>
-        <CreditBatches />
+        <CreditBatches withSection />
       </CardMedia>
 
       {creditClassesContent && (

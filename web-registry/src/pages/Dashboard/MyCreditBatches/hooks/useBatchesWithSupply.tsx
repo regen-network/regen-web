@@ -19,6 +19,7 @@ export const useBatchesWithSupply = ({
     BatchInfoWithSupply[] | undefined
   >();
   useEffect(() => {
+    // Initialize batches with empty supply to render components consuming data right away
     if (batches && !batchesWithSupply) {
       const batchesWithDefaultSupply: BatchInfoWithSupply[] = batches.map(
         batch => ({
@@ -33,14 +34,19 @@ export const useBatchesWithSupply = ({
   }, [batches, batchesWithSupply]);
 
   useEffect(() => {
+    // this variable is used to prevent race condition
     let ignore = false;
     const addSupplyToBatches = async (): Promise<void> => {
+      // Fetch one page of batches
       if (batches && batchesWithSupply && paginationParams) {
         const { offset, rowsPerPage } = paginationParams;
+        // current page batches
         const displayedBatches = batches.slice(offset, offset + rowsPerPage);
         try {
+          // add supply to page batches
           const newBatchesWithData = await addDataToBatch(displayedBatches);
           if (!ignore) {
+            // merge new batches into state variable
             setBatchesWithSupply([
               ...batchesWithSupply.slice(0, offset),
               ...newBatchesWithData,
@@ -52,9 +58,10 @@ export const useBatchesWithSupply = ({
           }
         } catch {
           // eslint-disable-next-line no-console
-          console.error('error while fetching batch supply');
+          console.error('error while fetching batch supply with pagination');
         }
       } else if (batches) {
+        // Fetch all batches
         try {
           const batchesWithSupply = await addDataToBatch(batches);
           if (!ignore) {
@@ -70,6 +77,7 @@ export const useBatchesWithSupply = ({
     let shouldFetch = false;
 
     if (paginationParams && batchesWithSupply) {
+      // Fetch only one page of batches if current page at least one row without supply
       const { offset, rowsPerPage } = paginationParams;
       const displayedBatches = batchesWithSupply.slice(
         offset,
@@ -77,6 +85,7 @@ export const useBatchesWithSupply = ({
       );
       shouldFetch = displayedBatches.some(batch => batch.tradableSupply === '');
     } else if (batchesWithSupply) {
+      // Fetch only all batches if at least one row without supply
       shouldFetch = batchesWithSupply.some(
         batch => batch.tradableSupply === '',
       );

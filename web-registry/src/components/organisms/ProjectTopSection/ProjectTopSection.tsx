@@ -293,7 +293,7 @@ function ProjectTopSection({
           <CreditBatches
             creditClassId={project?.creditClassByCreditClassId?.onChainId}
             creditBatches={batchData.batches}
-            projectPage
+            filteredColumns={['projectLocation']}
           />
         </Box>
       )}

@@ -14,8 +14,6 @@ import {
 } from 'web-components/lib/components/table/ActionsTable';
 import { Title } from 'web-components/lib/components/typography';
 
-import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
-
 import WithLoader from 'components/atoms/WithLoader';
 import { CreditBatches } from 'components/organisms';
 import { useEcocreditQuery } from 'hooks';

@@ -10,6 +10,7 @@ import {
   EcocreditQueryResponse,
   // queries
   queryBalance,
+  queryBatches,
   queryBatchesByClass,
   queryBatchesByIssuer,
   queryBatchesByProject,
@@ -60,6 +61,11 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
   );
 
   const batches = useCallback(
+    (client, params) => queryBatches({ client, request: params }),
+    [],
+  );
+
+  const batchesByClass = useCallback(
     (client, params) => queryBatchesByClass({ client, request: params }),
     [],
   );
@@ -122,6 +128,9 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
       case 'batches':
         response = batches(client, params);
         break;
+      case 'batchesByClass':
+        response = batchesByClass(client, params);
+        break;
       case 'batchesByProject':
         response = batchesByProject(client, params);
         break;
@@ -172,6 +181,7 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     balance,
     batchInfo,
     batches,
+    batchesByClass,
     classInfo,
     classes,
     creditTypes,

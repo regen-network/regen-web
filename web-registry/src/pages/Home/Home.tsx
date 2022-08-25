@@ -2,7 +2,10 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Box, CardMedia, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/styles';
-import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import {
+  QueryBatchesResponse,
+  QueryProjectsResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
@@ -10,8 +13,13 @@ import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { Loading } from 'web-components/lib/components/loading';
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
+import {
+  DEFAULT_ROWS_PER_PAGE,
+  OnActionTableChangeParams,
+} from 'web-components/lib/components/table/ActionsTable';
 import { Body, Title } from 'web-components/lib/components/typography';
 
+import { useBatchesWithSupply } from 'pages/Dashboard/MyCreditBatches/hooks/useBatchesWithSupply';
 import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { useSortProjects } from 'pages/Projects/hooks/useSortProjects';
 import {
@@ -43,6 +51,8 @@ const Home: React.FC = () => {
   const styles = useHomeStyles();
   const theme = useTheme();
 
+  // Featured projects fetching
+
   const { data, loading: loadingSanity } = useAllHomePageQuery({ client });
   const { data: creditClassData } = useAllCreditClassQuery({ client });
   const content = data?.allHomePage?.[0];
@@ -70,6 +80,22 @@ const Home: React.FC = () => {
   const sortedProjects = useSortProjects({
     projects: projectsWithOrderData,
     sort: PROJECTS_SORT,
+  });
+
+  // Credit batches fetching
+  const [paginationParams, setPaginationParams] =
+    useState<OnActionTableChangeParams>({
+      page: 0,
+      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
+      offset: 0,
+    });
+  const batchesResponse = useEcocreditQuery<QueryBatchesResponse>({
+    params: {},
+    query: 'batches',
+  });
+  const batchesWithSupply = useBatchesWithSupply({
+    batches: batchesResponse?.data?.batches,
+    paginationParams,
   });
 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
@@ -192,7 +218,11 @@ const Home: React.FC = () => {
       )}
 
       <CardMedia image={topographyImg}>
-        <CreditBatches withSection />
+        <CreditBatches
+          creditBatches={batchesWithSupply}
+          onTableChange={setPaginationParams}
+          withSection
+        />
       </CardMedia>
 
       {creditClassesContent && (

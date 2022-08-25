@@ -16,6 +16,8 @@ import {
   QueryBatchesByIssuerResponse,
   QueryBatchesByProjectRequest,
   QueryBatchesByProjectResponse,
+  QueryBatchesRequest,
+  QueryBatchesResponse,
   QueryBatchRequest,
   QueryBatchResponse,
   QueryClassesRequest,
@@ -406,6 +408,11 @@ type BatchInfoParams = {
 
 type BatchesParams = {
   query: 'batches';
+  params: DeepPartial<QueryBatchesRequest>;
+};
+
+type BatchesByClassParams = {
+  query: 'batchesByClass';
   params: DeepPartial<QueryBatchesByClassRequest>;
 };
 
@@ -453,6 +460,7 @@ export type EcocreditQueryProps =
   | BalanceParams
   | BatchInfoParams
   | BatchesParams
+  | BatchesByClassParams
   | BatchesByProjectParams
   | BatchesByIssuerParams
   | ClassInfoParams
@@ -467,6 +475,7 @@ export type EcocreditQueryProps =
 export type EcocreditQueryResponse =
   | QueryBalanceResponse
   | QueryBatchResponse
+  | QueryBatchesResponse
   | QueryBatchesByClassResponse
   | QueryBatchesByProjectResponse
   | QueryBatchesByIssuerResponse
@@ -526,6 +535,25 @@ export const queryBatchInfo = async ({
   }
 };
 
+// Batches
+
+interface QueryBatchesProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QueryBatchesRequest>;
+}
+
+export const queryBatches = async ({
+  client,
+  request,
+}: QueryBatchesProps): Promise<QueryBatchesResponse> => {
+  try {
+    return await client.Batches({ pagination: request?.pagination });
+  } catch (err) {
+    throw new Error(
+      `Error in the Batches query of the ledger ecocredit module: ${err}`,
+    );
+  }
+};
+
 // BatchesByClass
 
 interface QueryBatchesByClassProps extends EcocreditQueryClientProps {
@@ -542,7 +570,7 @@ export const queryBatchesByClass = async ({
     });
   } catch (err) {
     throw new Error(
-      `Error in the Batches query of the ledger ecocredit module: ${err}`,
+      `Error in the BatchesByClass query of the ledger ecocredit module: ${err}`,
     );
   }
 };

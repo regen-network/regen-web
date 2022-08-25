@@ -12,6 +12,8 @@ import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import { Body, Title } from 'web-components/lib/components/typography';
 
+import { useMoreProjectsQuery } from 'generated/graphql';
+
 import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { useSortProjects } from 'pages/Projects/hooks/useSortProjects';
 import {
@@ -26,7 +28,11 @@ import topographyImg from '../../assets/background-contour-1.jpg';
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
 import { BackgroundImgSection, HeroAction } from '../../components/molecules';
-import { CreditBatches, CreditClassCards } from '../../components/organisms';
+import {
+  CreditBatches,
+  CreditClassCards,
+  ProjectCards,
+} from '../../components/organisms';
 import {
   useAllCreditClassQuery,
   useAllHomePageQuery,
@@ -61,15 +67,17 @@ const Home: React.FC = () => {
     [ecocreditData?.projects],
   );
 
-  const projectsWithOrderData = useProjectsSellOrders({
-    projects,
-    sellOrders,
-    limit: FEATURE_PROJECTS_COUNT,
-  });
+  const { projectsWithOrderData, loading: loadingProjects } =
+    useProjectsSellOrders({
+      projects,
+      sellOrders,
+      limit: FEATURE_PROJECTS_COUNT,
+    });
   const sortedProjects = useSortProjects({
     projects: projectsWithOrderData,
     sort: PROJECTS_SORT,
   });
+  const { data: projectsData } = useMoreProjectsQuery();
 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -141,15 +149,22 @@ const Home: React.FC = () => {
         </Box>
       </BackgroundImgSection>
 
-      {sortedProjects && (
-        <div id="projects">
-          <Section
-            title="Featured Projects"
-            titleAlign="center"
-            classes={{ root: styles.section, title: styles.title }}
-          >
+      <div id="projects">
+        <Section
+          title="Featured Projects"
+          titleAlign="center"
+          classes={{ root: styles.section, title: styles.title }}
+        >
+          {sortedProjects?.length === 0 ? (
+            projectsData?.allProjects?.nodes && (
+              <ProjectCards
+                projects={projectsData?.allProjects?.nodes}
+                classes={{ root: styles.projectCards }}
+              />
+            )
+          ) : (
             <WithLoader
-              isLoading={sortedProjects?.length === 0}
+              isLoading={loadingProjects}
               sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
             >
               <Box
@@ -181,14 +196,14 @@ const Home: React.FC = () => {
                 ))}
               </Box>
             </WithLoader>
-          </Section>
-          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 30 }}>
-            <Link to="/projects">
-              <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
-            </Link>
-          </Box>
-        </div>
-      )}
+          )}
+        </Section>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 30 }}>
+          <Link to="/projects">
+            <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
+          </Link>
+        </Box>
+      </div>
 
       <CardMedia image={topographyImg}>
         <CreditBatches />

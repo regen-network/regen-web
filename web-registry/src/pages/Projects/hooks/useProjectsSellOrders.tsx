@@ -22,10 +22,14 @@ export const useProjectsSellOrders = ({
   projects,
   sellOrders,
   limit,
-}: Props): ProjectWithOrderData[] => {
-  const [projectsWithOrders, setProjectsWithOrders] = useState<
+}: Props): {
+  projectsWithOrderData: ProjectWithOrderData[];
+  loading: boolean;
+} => {
+  const [projectsWithOrderData, setProjectsWithOrderData] = useState<
     ProjectWithOrderData[]
   >([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const normalize = async (): Promise<void> => {
@@ -35,13 +39,14 @@ export const useProjectsSellOrders = ({
           sellOrders,
           limit ?? projects.length,
         );
-        setProjectsWithOrders(_projectsWithOrders);
+        setProjectsWithOrderData(_projectsWithOrders);
+        setLoading(false);
       }
     };
     normalize();
   }, [projects, sellOrders, limit]);
 
-  return projectsWithOrders;
+  return { projectsWithOrderData, loading };
 };
 
 const getProjectDisplayData = async (

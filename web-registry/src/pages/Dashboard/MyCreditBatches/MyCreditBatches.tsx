@@ -41,14 +41,19 @@ export const MyCreditBatches = ({
           <Box
             sx={{
               display: 'flex',
+              flexDirection: ['column', 'row'],
               justifyContent: 'space-between',
-              alignItems: 'center',
+              alignItems: ['flex-start', 'center'],
               mb: 10.5,
             }}
           >
             <Title
               variant="h6"
-              sx={{ textTransform: 'uppercase', color: 'info.dark' }}
+              sx={{
+                textTransform: 'uppercase',
+                color: 'info.dark',
+                mb: [3.5, 0],
+              }}
             >
               Successfully issues credit batches
             </Title>

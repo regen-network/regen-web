@@ -12,8 +12,6 @@ import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import { Body, Title } from 'web-components/lib/components/typography';
 
-import { useMoreProjectsQuery } from 'generated/graphql';
-
 import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { useSortProjects } from 'pages/Projects/hooks/useSortProjects';
 import {
@@ -28,11 +26,7 @@ import topographyImg from '../../assets/background-contour-1.jpg';
 import horsesImg from '../../assets/horses-grazing.png';
 import { SanityButton } from '../../components/atoms';
 import { BackgroundImgSection, HeroAction } from '../../components/molecules';
-import {
-  CreditBatches,
-  CreditClassCards,
-  ProjectCards,
-} from '../../components/organisms';
+import { CreditBatches, CreditClassCards } from '../../components/organisms';
 import {
   useAllCreditClassQuery,
   useAllHomePageQuery,
@@ -77,7 +71,6 @@ const Home: React.FC = () => {
     projects: projectsWithOrderData,
     sort: PROJECTS_SORT,
   });
-  const { data: projectsData } = useMoreProjectsQuery();
 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -155,48 +148,39 @@ const Home: React.FC = () => {
           titleAlign="center"
           classes={{ root: styles.section, title: styles.title }}
         >
-          {sortedProjects?.length === 0 ? (
-            projectsData?.allProjects?.nodes && (
-              <ProjectCards
-                projects={projectsData?.allProjects?.nodes}
-                classes={{ root: styles.projectCards }}
-              />
-            )
-          ) : (
-            <WithLoader
-              isLoading={loadingProjects}
-              sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+          <WithLoader
+            isLoading={loadingProjects}
+            sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+          >
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 338px))',
+                gridGap: '1.125rem',
+                flex: 1,
+                justifyContent: 'center',
+              }}
             >
-              <Box
-                sx={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 338px))',
-                  gridGap: '1.125rem',
-                  flex: 1,
-                  justifyContent: 'center',
-                }}
-              >
-                {sortedProjects?.map(project => (
-                  <Box key={project?.id}>
-                    <ProjectCard
-                      name={project?.name}
-                      imgSrc={project?.imgSrc}
-                      place={project?.place}
-                      area={project?.area}
-                      areaUnit={project?.areaUnit}
-                      // onButtonClick={() => {}} TODO #1055
-                      purchaseInfo={project.purchaseInfo}
-                      onClick={() => navigate(`/projects/${project.id}`)}
-                      imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
-                      apiServerUrl={API_URI}
-                      truncateTitle={true}
-                      sx={{ width: 338, height: 479 }}
-                    />
-                  </Box>
-                ))}
-              </Box>
-            </WithLoader>
-          )}
+              {sortedProjects?.map(project => (
+                <Box key={project?.id}>
+                  <ProjectCard
+                    name={project?.name}
+                    imgSrc={project?.imgSrc}
+                    place={project?.place}
+                    area={project?.area}
+                    areaUnit={project?.areaUnit}
+                    // onButtonClick={() => {}} TODO #1055
+                    purchaseInfo={project.purchaseInfo}
+                    onClick={() => navigate(`/projects/${project.id}`)}
+                    imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                    apiServerUrl={API_URI}
+                    truncateTitle={true}
+                    sx={{ width: 338, height: 479 }}
+                  />
+                </Box>
+              ))}
+            </Box>
+          </WithLoader>
         </Section>
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 30 }}>
           <Link to="/projects">

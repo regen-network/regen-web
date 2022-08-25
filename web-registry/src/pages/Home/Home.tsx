@@ -142,52 +142,54 @@ const Home: React.FC = () => {
         </Box>
       </BackgroundImgSection>
 
-      <div id="projects">
-        <Section
-          title="Featured Projects"
-          titleAlign="center"
-          classes={{ root: styles.section, title: styles.title }}
-        >
-          <WithLoader
-            isLoading={loadingProjects}
-            sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+      {sortedProjects && (
+        <div id="projects">
+          <Section
+            title="Featured Projects"
+            titleAlign="center"
+            classes={{ root: styles.section, title: styles.title }}
           >
-            <Box
-              sx={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 338px))',
-                gridGap: '1.125rem',
-                flex: 1,
-                justifyContent: 'center',
-              }}
+            <WithLoader
+              isLoading={loadingProjects}
+              sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
             >
-              {sortedProjects?.map(project => (
-                <Box key={project?.id}>
-                  <ProjectCard
-                    name={project?.name}
-                    imgSrc={project?.imgSrc}
-                    place={project?.place}
-                    area={project?.area}
-                    areaUnit={project?.areaUnit}
-                    // onButtonClick={() => {}} TODO #1055
-                    purchaseInfo={project.purchaseInfo}
-                    onClick={() => navigate(`/projects/${project.id}`)}
-                    imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
-                    apiServerUrl={API_URI}
-                    truncateTitle={true}
-                    sx={{ width: 338, height: 479 }}
-                  />
-                </Box>
-              ))}
-            </Box>
-          </WithLoader>
-        </Section>
-        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 30 }}>
-          <Link to="/projects">
-            <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
-          </Link>
-        </Box>
-      </div>
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 338px))',
+                  gridGap: '1.125rem',
+                  flex: 1,
+                  justifyContent: 'center',
+                }}
+              >
+                {sortedProjects?.map(project => (
+                  <Box key={project?.id}>
+                    <ProjectCard
+                      name={project?.name}
+                      imgSrc={project?.imgSrc}
+                      place={project?.place}
+                      area={project?.area}
+                      areaUnit={project?.areaUnit}
+                      // onButtonClick={() => {}} TODO #1055
+                      purchaseInfo={project.purchaseInfo}
+                      onClick={() => navigate(`/projects/${project.id}`)}
+                      imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                      apiServerUrl={API_URI}
+                      truncateTitle={true}
+                      sx={{ width: 338, height: 479 }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+            </WithLoader>
+          </Section>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 30 }}>
+            <Link to="/projects">
+              <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
+            </Link>
+          </Box>
+        </div>
+      )}
 
       <CardMedia image={topographyImg}>
         <CreditBatches />

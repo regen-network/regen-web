@@ -51,10 +51,11 @@ export const Projects: React.FC = () => {
   const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
   const projects = data?.projects;
-  const projectsWithOrderData = useProjectsSellOrders({
-    projects,
-    sellOrders,
-  });
+  const { projectsWithOrderData, loading: loadingOrders } =
+    useProjectsSellOrders({
+      projects,
+      sellOrders,
+    });
 
   const handleSort = (event: SelectChangeEvent<unknown>): void => {
     setSort(event.target.value as string);
@@ -125,7 +126,7 @@ export const Projects: React.FC = () => {
     buttonTitle: VIEW_ECOCREDITS,
   });
 
-  if (loading) return <Loading />;
+  if (loading || loadingOrders) return <Loading />;
   return (
     <Flex
       sx={{

@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import cx from 'clsx';
 
@@ -11,6 +11,7 @@ import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncateHash } from 'web-components/lib/utils/truncate';
 
 import type { BatchInfoWithSupply } from 'types/ledger/ecocredit';
+import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
 import { getBatchesWithSupply } from 'lib/ecocredit/api';
 import { ledgerRESTUri } from 'lib/ledger';
@@ -25,7 +26,7 @@ interface CreditBatchProps {
   filteredColumns?: string[];
   withSection?: boolean;
   creditBatches?: BatchInfoWithSupply[];
-  onTableChange?: Dispatch<SetStateAction<OnActionTableChangeParams>>;
+  onTableChange?: UseStateSetter<OnActionTableChangeParams>;
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 

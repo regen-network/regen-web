@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ProjectWithOrderData } from './useProjectsSellOrders';
+import { ProjectWithOrderData } from '../Projects.types';
 
 type Props = {
   projects: ProjectWithOrderData[];
@@ -29,11 +29,13 @@ const sortProjects = (
 ): ProjectWithOrderData[] => {
   switch (sort) {
     case 'price-ascending':
-      return projects.sort(comparePriceAscending);
+      return projects.sort(comparePriceAscending).sort(compareCreditsAvailable);
     case 'price-descending':
       return projects.sort(comparePriceDescending);
     case 'credits-ascending':
-      return projects.sort(compareQuantityAscending);
+      return projects
+        .sort(compareQuantityAscending)
+        .sort(compareCreditsAvailable);
     case 'credits-descending':
       return projects.sort(compareQuantityDescending);
     default:
@@ -48,12 +50,8 @@ function comparePriceAscending(
 ): number {
   const { lowA, lowB } = getPriceExtremes(a, b);
 
-  if (lowA > lowB) {
-    return 1; // sort a after b
-  }
-  if (lowA < lowB || lowA === 0) {
-    return -1; // sort a before b
-  }
+  if (lowA > lowB) return 1; // sort a after b
+  if (lowA < lowB) return -1; // sort a before b
   return 0;
 }
 
@@ -64,12 +62,8 @@ function comparePriceDescending(
 ): number {
   const { highA, highB } = getPriceExtremes(a, b);
 
-  if (highA < highB || highA === 0) {
-    return 1; // sort a after b
-  }
-  if (highA > highB) {
-    return -1; // sort a before b
-  }
+  if (highA < highB) return 1; // sort a after b
+  if (highA > highB) return -1; // sort a before b
   return 0;
 }
 
@@ -80,10 +74,10 @@ function compareQuantityAscending(
 ): number {
   const { aCredits, bCredits } = getQuantities(a, b);
 
-  if (aCredits > bCredits || bCredits === 0) {
+  if (aCredits > bCredits) {
     return 1; // sort a after b
   }
-  if (aCredits < bCredits || aCredits === 0) {
+  if (aCredits < bCredits) {
     return -1; // sort a before b
   }
   return 0;
@@ -128,7 +122,9 @@ function getExtreme(
 ): number {
   const prices = project.purchaseInfo?.sellInfo?.pricePerTon?.split('-');
   const index = highOrLow === 'high' ? 1 : 0;
-  const extreme = (prices?.[index] && parseInt(String(prices[index]))) || 0;
+  const extreme = prices?.[index]
+    ? Number(prices[index]?.replace(/[^0-9.-]+/g, '')) // remove non-digit or dot characters
+    : 0;
   return extreme;
 }
 
@@ -142,4 +138,14 @@ function getQuantities(
   const aCredits = a.purchaseInfo?.sellInfo?.creditsAvailable || 0;
   const bCredits = b.purchaseInfo?.sellInfo?.creditsAvailable || 0;
   return { aCredits, bCredits };
+}
+
+function compareCreditsAvailable(
+  a: ProjectWithOrderData,
+  b: ProjectWithOrderData,
+): number {
+  const { aCredits, bCredits } = getQuantities(a, b);
+  if (aCredits === 0) return 1;
+  if (bCredits === 0) return -1;
+  return 0;
 }

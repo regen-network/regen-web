@@ -23,6 +23,7 @@ export type NormalizedSellOrder = {
   batchStartDate?: Date | null;
   batchEndDate?: Date | null;
   seller: string;
+  disableAutoRetire: boolean;
 };
 
 export type SellOrderActions = 'buy' | 'cancel' | 'change';

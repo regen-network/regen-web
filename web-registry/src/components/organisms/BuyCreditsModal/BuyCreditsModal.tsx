@@ -29,10 +29,14 @@ import {
   Title,
 } from 'web-components/lib/components/typography';
 
-import { useWallet } from '../../../lib/wallet';
+import { formatDenomText, microToDenom } from 'lib/denom.utils';
+
+import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
-import { getSellOrderLabel } from './BuyCreditsModal.utils';
+import { getOptions, handleBuyCreditsSubmit } from './BuyCreditsModal.utils';
+import { useSetSelectedSellOrder } from './hooks/useSetSelectedSellOrder';
 
 export interface Credits {
   purchased: number;
@@ -43,29 +47,32 @@ interface BuyCreditsModalProps extends RegenModalProps {
   open: boolean;
   onClose: () => void;
   onTxQueued?: (txBytes: Uint8Array) => void;
-  onSubmit?: (values: any) => Promise<void>;
+  onSubmit?: (values: BuyCreditsValues) => Promise<void>;
   initialValues?: BuyCreditsValues;
-  project: {
-    id: string;
-    name?: string | null;
-    image?: string;
-    creditDenom?: string;
-    credits?: Credits;
-  };
+  project: BuyCreditsProject;
   apiServerUrl?: string;
   imageStorageBaseUrl?: string;
 }
 
+export interface BuyCreditsProject {
+  id: string;
+  name?: string | null;
+  image?: string;
+  creditDenom?: string;
+  credits?: Credits;
+  sellOrders?: UISellOrderInfo[];
+}
+
 export interface BuyCreditsValues {
-  retirementNote: string;
-  stateProvince: string;
+  retirementNote?: string;
+  stateProvince?: string;
   country: string;
-  postalCode: string;
-  retirementAction: string;
+  postalCode?: string;
+  retirementAction?: string;
   creditCount: number;
-  price: number;
-  askDenom: string;
-  batchDenom: string;
+  price?: number;
+  askDenom?: string;
+  batchDenom?: string;
   sellOrderId: string;
 }
 
@@ -81,19 +88,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
 }) => {
   const styles = useBuyCreditsModalStyles();
   const theme = useTheme();
-  const walletContext = useWallet();
-
-  const submit = async (values: BuyCreditsValues): Promise<void> => {
-    const recipient = 'regen18hj7m3skrsrr8lfvwqh66r7zruzdvp6ylwxrx4'; // test account
-    const amount = values.creditCount;
-    if (onSubmit) {
-      onSubmit(values);
-    } else if (walletContext.signSend && walletContext.broadcast) {
-      const txBytes = await walletContext.signSend(amount, recipient);
-      onTxQueued && onTxQueued(txBytes);
-      onClose();
-    }
-  };
+  const { selectedSellOrder, SetSelectedSellOrderElement } =
+    useSetSelectedSellOrder(project);
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -139,14 +135,21 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
           onSubmit={async (values, { setSubmitting }) => {
             setSubmitting(true);
             try {
-              await submit(values);
+              await handleBuyCreditsSubmit(values, onSubmit, selectedSellOrder);
               setSubmitting(false);
             } catch (e) {
               setSubmitting(false);
             }
           }}
         >
-          {({ values, submitForm, isValid, isSubmitting, submitCount }) => {
+          {({
+            values,
+            submitForm,
+            isValid,
+            isSubmitting,
+            status,
+            submitCount,
+          }) => {
             return (
               <div>
                 <Form translate="yes">
@@ -156,77 +159,83 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                   <Field
                     name="sellOrderId"
                     component={SelectTextField}
-                    options={[
-                      {
-                        label: getSellOrderLabel(initialValues),
-                        value: initialValues?.sellOrderId,
-                      },
-                    ]}
+                    options={getOptions(project)}
                     sx={{ mb: theme.spacing(10.5) }}
-                    disabled
+                    disabled={!!initialValues?.sellOrderId}
                   />
-                  <div className={styles.field}>
-                    <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
-                      Amount of credits
-                    </Title>
-                    <Body
-                      size="md"
-                      mobileSize="md"
-                      sx={{
-                        color: 'primary.contrastText',
-                        fontWeight: 700,
-                        mb: 3,
-                      }}
-                    >
-                      {`${initialValues?.price} REGEN/per credit `}
-                    </Body>
-                    <Body
-                      size="md"
-                      sx={{ color: 'primary.light', fontWeight: 700, mb: 3 }}
-                    >
-                      Batch denom:{' '}
-                      <Body
-                        sx={{ fontWeight: 'normal', display: 'inline-block' }}
-                      >
-                        {initialValues?.batchDenom}
-                      </Body>
-                    </Body>
-                    <div className={styles.creditWidget}>
-                      <div className={styles.marginRight}>
-                        <Field
-                          className={cx(styles.creditInput)}
-                          component={NumberTextField}
-                          name="creditCount"
-                          min={1}
-                          max={initialValues?.creditCount}
-                        />
-                      </div>
-                      <Title variant="h6" sx={{ mr: 4 }}>
-                        =
+                  <SetSelectedSellOrderElement />
+                  <Collapse in={!!selectedSellOrder}>
+                    <div className={styles.field}>
+                      <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
+                        Amount of credits
                       </Title>
-                      <div
-                        className={cx(styles.flexColumn, styles.marginRight)}
+                      <Body
+                        size="md"
+                        mobileSize="md"
+                        sx={{
+                          color: 'primary.contrastText',
+                          fontWeight: 700,
+                          mb: 3,
+                        }}
                       >
-                        <Box
-                          sx={{
-                            display: 'flex',
-                            alignItems: 'baseline',
-                            flexWrap: 'wrap',
-                          }}
+                        {`${microToDenom(
+                          selectedSellOrder?.askAmount || '',
+                        )} ${formatDenomText(
+                          selectedSellOrder?.askDenom || '',
+                        )}/credit`}
+                      </Body>
+                      <Body
+                        size="md"
+                        sx={{ color: 'primary.light', fontWeight: 700, mb: 3 }}
+                      >
+                        {'Batch denom: '}
+                        <Body
+                          sx={{ fontWeight: 'normal', display: 'inline-block' }}
                         >
-                          <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
-                            <RegenTokenIcon className={styles.regenIcon} />
-                            <Title variant="h4" sx={{ mr: 1.5 }}>
-                              {values.creditCount * (initialValues?.price ?? 0)}
-                            </Title>
+                          {selectedSellOrder?.batchDenom}
+                        </Body>
+                      </Body>
+                      <div className={styles.creditWidget}>
+                        <div className={styles.marginRight}>
+                          <Field
+                            className={styles.creditInput}
+                            component={NumberTextField}
+                            name="creditCount"
+                            min={1}
+                            max={selectedSellOrder?.quantity}
+                          />
+                        </div>
+                        <Title variant="h6" sx={{ mr: 4 }}>
+                          =
+                        </Title>
+                        <div
+                          className={cx(styles.flexColumn, styles.marginRight)}
+                        >
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              alignItems: 'baseline',
+                              flexWrap: 'wrap',
+                            }}
+                          >
+                            <Box
+                              sx={{ display: 'flex', alignItems: 'baseline' }}
+                            >
+                              <RegenTokenIcon className={styles.regenIcon} />
+                              <Title variant="h4" sx={{ mr: 1.5 }}>
+                                {values.creditCount *
+                                  microToDenom(selectedSellOrder?.askAmount) ||
+                                  '-'}
+                              </Title>
+                            </Box>
+                            <Label size="sm" sx={{ color: 'info.dark' }}>
+                              {'REGEN'}
+                            </Label>
                           </Box>
-                          <Label size="sm" sx={{ color: 'info.dark' }}>
-                            {'REGEN'}
-                          </Label>
-                        </Box>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Collapse>
                   <Title variant="h5" sx={{ mb: 2, mr: 2 }}>
                     Retirement of credits
                   </Title>
@@ -241,7 +250,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       type="radio"
                       value="autoretire"
                       checked={values['retirementAction'] === 'autoretire'}
-                      label="Auto-retire credits"
+                      label="Auto-retire credits" // Retire credits now
                       description="These credits will be retired upon purchase and will not be tradeable. Retirement is permanent and non-reversible."
                     />
                     <Field
@@ -249,9 +258,10 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                       component={Toggle}
                       type="radio"
                       value="manual"
-                      checked={values['retirementAction'] === 'manual'}
-                      label="Retire credits manually"
+                      checked={values['retirementAction'] === 'manual'} // if disableAutoRetire, this is an option
+                      label="Retire credits manually" // Allow retirement later
                       description="These credits will be a tradeable asset. They can be retired later via Regen Registry."
+                      disabled={!selectedSellOrder?.disableAutoRetire} // if disableAutoRetire is false, this is disabled
                     />
                   </Field>
                   <Collapse in={values['retirementAction'] === 'autoretire'}>
@@ -314,7 +324,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                 <Submit
                   isSubmitting={isSubmitting}
                   onClose={onClose}
-                  // status={status} TODO
+                  status={status}
                   isValid={isValid}
                   submitCount={submitCount}
                   submitForm={submitForm}

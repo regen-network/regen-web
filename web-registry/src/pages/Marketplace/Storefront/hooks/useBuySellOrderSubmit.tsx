@@ -8,24 +8,25 @@ import { getFormattedNumber } from 'web-components/lib/utils/format';
 import { getJurisdictionIsoCode } from 'web-components/lib/utils/locationStandard';
 
 import { UseStateSetter } from 'types/react/use-state';
+import { microToDenom } from 'lib/denom.utils';
 
 import { BuyCreditsValues } from 'components/organisms';
 import { SignAndBroadcastType } from 'hooks/useMsgClient';
 
 import {
-  BUY_SELL_ORDER_BUTTON,
   BUY_SELL_ORDER_HEADER,
   BUY_SELL_ORDER_TITLE,
 } from '../Storefront.constants';
 
 type Props = {
   accountAddress?: string;
+  buttonTitle: string;
   signAndBroadcast: SignAndBroadcastType;
   setCardItems: UseStateSetter<Item[] | undefined>;
   setTxModalTitle: UseStateSetter<string>;
   setTxModalHeader: UseStateSetter<string>;
   setTxButtonTitle: UseStateSetter<string>;
-  setSelectedSellOrder: UseStateSetter<number | null>;
+  setSelectedSellOrder?: UseStateSetter<number | null>;
 };
 
 type ReturnType = (values: BuyCreditsValues) => Promise<void>;
@@ -38,6 +39,7 @@ const useBuySellOrderSubmit = ({
   setTxModalTitle,
   setTxButtonTitle,
   setSelectedSellOrder,
+  buttonTitle,
 }: Props): ReturnType => {
   const buySellOrderSubmit = useCallback(
     async (values: BuyCreditsValues): Promise<void> => {
@@ -55,7 +57,7 @@ const useBuySellOrderSubmit = ({
         askDenom,
         postalCode,
       } = values;
-      const disableAutoRetire = retirementAction === 'manual';
+      const isTradeable = retirementAction === 'manual';
 
       const msg = MsgBuyDirect.fromPartial({
         buyer: accountAddress,
@@ -63,9 +65,9 @@ const useBuySellOrderSubmit = ({
           {
             sellOrderId: sellOrderId,
             bidPrice: { amount: String(price), denom: askDenom },
-            disableAutoRetire,
+            disableAutoRetire: isTradeable,
             quantity: String(creditCount),
-            retirementJurisdiction: disableAutoRetire
+            retirementJurisdiction: isTradeable
               ? ''
               : getJurisdictionIsoCode({
                   country,
@@ -82,14 +84,17 @@ const useBuySellOrderSubmit = ({
         memo: retirementNote,
       };
 
-      signAndBroadcast(tx, () => setSelectedSellOrder(null));
+      await signAndBroadcast(
+        tx,
+        () => setSelectedSellOrder && setSelectedSellOrder(null),
+      );
 
       if (batchDenom && creditCount) {
         setCardItems([
           {
             label: 'total purchase price',
             value: {
-              name: String(price * creditCount),
+              name: String(microToDenom(price) * creditCount),
               icon: (
                 <Box
                   sx={{
@@ -108,23 +113,24 @@ const useBuySellOrderSubmit = ({
             value: { name: batchDenom, url: `/credit-batches/${batchDenom}` },
           },
           {
-            label: disableAutoRetire ? 'NUMBER OF CREDITS' : 'amount retired',
+            label: isTradeable ? 'NUMBER OF CREDITS' : 'amount retired',
             value: { name: getFormattedNumber(creditCount) },
           },
         ]);
         setTxModalHeader(BUY_SELL_ORDER_HEADER);
         setTxModalTitle(BUY_SELL_ORDER_TITLE);
-        setTxButtonTitle(BUY_SELL_ORDER_BUTTON);
+        setTxButtonTitle(buttonTitle);
       }
     },
     [
-      setCardItems,
-      setTxModalTitle,
-      setTxModalHeader,
-      setSelectedSellOrder,
-      setTxButtonTitle,
       accountAddress,
       signAndBroadcast,
+      setSelectedSellOrder,
+      setCardItems,
+      setTxModalHeader,
+      setTxModalTitle,
+      setTxButtonTitle,
+      buttonTitle,
     ],
   );
 

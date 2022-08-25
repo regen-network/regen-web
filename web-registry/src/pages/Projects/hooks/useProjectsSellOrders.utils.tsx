@@ -2,6 +2,9 @@ import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/
 import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
+import { formatNumber } from 'web-components/lib/utils/format';
+
+import { microToDenom } from 'lib/denom.utils';
 
 export const getPurchaseInfo = (
   projectId: string,
@@ -10,23 +13,24 @@ export const getPurchaseInfo = (
   const ordersForThisProject = sellOrders.filter(order =>
     order.batchDenom.startsWith(projectId),
   );
-  if (!ordersForThisProject.length)
+  if (!ordersForThisProject.length) {
     return {
       sellInfo: {
         pricePerTon: `-`,
         creditsAvailable: 0,
       },
     };
+  }
 
   const creditsAvailable = ordersForThisProject
     .map(order => parseInt(order.quantity))
     .reduce((total, quantity) => total + quantity, 0);
 
   const prices = ordersForThisProject
-    .map(order => parseInt(order.askAmount))
+    .map(order => microToDenom(order.askAmount))
     .sort((a, b) => a - b);
-  const priceMin = prices?.[0];
-  const priceMax = prices?.[prices.length - 1];
+  const priceMin = formatNumber(prices?.[0], 2);
+  const priceMax = formatNumber(prices?.[prices.length - 1], 2);
 
   return {
     sellInfo: {

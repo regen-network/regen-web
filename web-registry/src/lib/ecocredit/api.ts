@@ -5,10 +5,12 @@ import {
   ServiceClientImpl,
 } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import {
+  BatchBalanceInfo,
   BatchInfo,
   DeepPartial,
   QueryBalanceRequest,
   QueryBalanceResponse,
+  QueryBalancesRequest,
   QueryBalancesResponse,
   QueryBatchesByClassRequest,
   QueryBatchesByClassResponse,
@@ -40,6 +42,8 @@ import {
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import axios from 'axios';
 import { uniq } from 'lodash';
+
+import { OnActionTableChangeParams } from 'web-components/lib/components/table/ActionsTable';
 
 import { connect as connectToApi } from '../../ledger';
 import type {
@@ -87,45 +91,71 @@ export const getBatchesTotal = async (
   }
 };
 
-export const getEcocreditsForAccount = async (
-  account: string,
-): Promise<BatchInfoWithBalance[]> => {
+type GetCreditsWithDataParams = {
+  balances: BatchBalanceInfo[];
+  batches: BatchInfo[];
+};
+
+const getCreditsWithData = async ({
+  balances,
+  batches,
+}: GetCreditsWithDataParams): Promise<BatchInfoWithBalance[]> => {
+  const credits: (BatchInfoWithBalance | undefined)[] = await Promise.all(
+    balances.map(async balance => {
+      const batch = batches.find(batch => batch.denom === balance.batchDenom);
+
+      if (!batch) return undefined;
+
+      const classId = await getClassIdForBatch(batch);
+      const project = await getProject(batch?.projectId);
+
+      return {
+        ...batch,
+        balance,
+        classId,
+        projectLocation: project.project?.jurisdiction,
+      };
+    }),
+  );
+
+  return credits.filter(
+    (credit): credit is BatchInfoWithBalance => credit !== undefined,
+  );
+};
+
+type GetEcocreditsForAccountParams = {
+  address: string;
+  loadedCredits: BatchInfoWithBalance[];
+  paginationParams?: OnActionTableChangeParams;
+  balances?: BatchBalanceInfo[];
+  batches?: BatchInfo[];
+};
+
+export const getEcocreditsForAccount = async ({
+  address,
+  balances = [],
+  batches = [],
+  loadedCredits,
+  paginationParams,
+}: GetEcocreditsForAccountParams): Promise<BatchInfoWithBalance[]> => {
   try {
-    const batches = await queryEcoBatches();
-    const balancesResponse = await queryEcoBalances(account);
-    const credits: (BatchInfoWithBalance | undefined)[] = await Promise.all(
-      batches.map(async batch => {
-        const balance = balancesResponse?.balances.find(
-          balance => balance.batchDenom === batch.denom,
-        );
-
-        const hasBalance =
-          Number(balance?.tradableAmount) > 0 ||
-          Number(balance?.escrowedAmount) > 0 ||
-          Number(balance?.retiredAmount) > 0;
-
-        // filter out batches that don't have any credits
-        if (hasBalance) {
-          const classId = getClassIdForBatch(batch);
-          const project = await getProject(batch.projectId);
-          return {
-            ...batch,
-            balance,
-            classId,
-            projectLocation: project.project?.jurisdiction,
-          };
-        } else {
-          return undefined;
-        }
-      }),
-    );
-
-    // filter out undefined values
-    return credits.filter(
-      (credit): credit is BatchInfoWithBalance => credit !== undefined,
-    );
+    if (paginationParams) {
+      const { offset, rowsPerPage } = paginationParams;
+      const displayedBalances = balances.slice(offset, offset + rowsPerPage);
+      const displayedCredits = await getCreditsWithData({
+        balances: displayedBalances,
+        batches,
+      });
+      return [
+        ...loadedCredits.slice(0, offset),
+        ...displayedCredits,
+        ...loadedCredits.slice(offset + rowsPerPage, loadedCredits.length),
+      ];
+    } else {
+      return await getCreditsWithData({ balances, batches });
+    }
   } catch (err) {
-    throw new Error(`Could not get ecocredits for account ${account}, ${err}`);
+    throw new Error(`Could not get ecocredits for account ${address}, ${err}`);
   }
 };
 
@@ -291,19 +321,6 @@ export const queryEcoBatchSupply = async (
   }
 };
 
-const queryEcoBalances = async (
-  address: string,
-): Promise<QueryBalancesResponse> => {
-  const client = await getQueryClient();
-  try {
-    return client.Balances({ address });
-  } catch (err) {
-    throw new Error(
-      `Error fetching account ecocredits for address ${address}, err: ${err}`,
-    );
-  }
-};
-
 export const getTxsByEvent = async (
   request: DeepPartial<GetTxsEventRequest>,
 ): Promise<GetTxsEventResponse> => {
@@ -401,6 +418,11 @@ type BalanceParams = {
   params: DeepPartial<QueryBalanceRequest>;
 };
 
+type BalancesParams = {
+  query: 'balances';
+  params: DeepPartial<QueryBalancesRequest>;
+};
+
 type BatchInfoParams = {
   query: 'batchInfo';
   params: DeepPartial<QueryBatchRequest>;
@@ -458,6 +480,7 @@ type ProjectParams = {
 
 export type EcocreditQueryProps =
   | BalanceParams
+  | BalancesParams
   | BatchInfoParams
   | BatchesParams
   | BatchesByClassParams
@@ -474,6 +497,7 @@ export type EcocreditQueryProps =
 
 export type EcocreditQueryResponse =
   | QueryBalanceResponse
+  | QueryBalancesResponse
   | QueryBatchResponse
   | QueryBatchesResponse
   | QueryBatchesByClassResponse
@@ -510,6 +534,27 @@ export const queryBalance = async ({
   } catch (err) {
     throw new Error(
       `Error in the Balance query of the ledger ecocredit module: ${err}`,
+    );
+  }
+};
+
+// Balances
+
+interface QueryBalancesProps extends EcocreditQueryClientProps {
+  request: DeepPartial<QueryBalancesRequest>;
+}
+
+export const queryBalances = async ({
+  client,
+  request,
+}: QueryBalancesProps): Promise<QueryBalancesResponse> => {
+  try {
+    return await client.Balances({
+      address: request.address,
+    });
+  } catch (err) {
+    throw new Error(
+      `Error in the Balances query of the ledger ecocredit module: ${err}`,
     );
   }
 };

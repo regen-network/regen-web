@@ -18,6 +18,7 @@ export const useBatchesWithSupply = ({
   const [batchesWithSupply, setBatchesWithSupply] = useState<
     BatchInfoWithSupply[] | undefined
   >();
+
   useEffect(() => {
     // Initialize batches with empty supply to render components consuming data right away
     if (batches && !batchesWithSupply) {
@@ -77,7 +78,7 @@ export const useBatchesWithSupply = ({
     let shouldFetch = false;
 
     if (paginationParams && batchesWithSupply) {
-      // Fetch only one page of batches if current page at least one row without supply
+      // Fetch only one page of batches if current page has at least one row without supply
       const { offset, rowsPerPage } = paginationParams;
       const displayedBatches = batchesWithSupply.slice(
         offset,
@@ -85,7 +86,7 @@ export const useBatchesWithSupply = ({
       );
       shouldFetch = displayedBatches.some(batch => batch.tradableSupply === '');
     } else if (batchesWithSupply) {
-      // Fetch only all batches if at least one row without supply
+      // Fetch all batches if at least one row without supply
       shouldFetch = batchesWithSupply.some(
         batch => batch.tradableSupply === '',
       );

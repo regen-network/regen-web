@@ -15,7 +15,7 @@ export const EcocreditsByAccount = (): JSX.Element => {
   const baskets = useQueryBaskets();
 
   const { accountAddress } = useParams<{ accountAddress: string }>();
-  const { credits } = useEcocredits(accountAddress);
+  const { credits } = useEcocredits({ address: accountAddress });
   const { basketTokens } = useBasketTokens(accountAddress, baskets);
 
   return (

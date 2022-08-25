@@ -61,11 +61,12 @@ const Home: React.FC = () => {
     [ecocreditData?.projects],
   );
 
-  const projectsWithOrderData = useProjectsSellOrders({
-    projects,
-    sellOrders,
-    limit: FEATURE_PROJECTS_COUNT,
-  });
+  const { projectsWithOrderData, loading: loadingProjects } =
+    useProjectsSellOrders({
+      projects,
+      sellOrders,
+      limit: FEATURE_PROJECTS_COUNT,
+    });
   const sortedProjects = useSortProjects({
     projects: projectsWithOrderData,
     sort: PROJECTS_SORT,
@@ -149,7 +150,7 @@ const Home: React.FC = () => {
             classes={{ root: styles.section, title: styles.title }}
           >
             <WithLoader
-              isLoading={sortedProjects?.length === 0}
+              isLoading={loadingProjects}
               sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
             >
               <Box

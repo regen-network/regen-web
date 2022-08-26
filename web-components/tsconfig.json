@@ -8,7 +8,7 @@
     "types": ["node", "jest"],
     "outDir": "lib",
     "rootDir": "src",
-    "module": "esnext",
+    "module": "commonjs",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,

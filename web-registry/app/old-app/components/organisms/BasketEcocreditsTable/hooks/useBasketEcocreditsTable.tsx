@@ -5,7 +5,7 @@ import {
   QueryProjectResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { CreditBatch } from '../../../../components/organisms';
+import { CreditBatch } from '../..';
 import useQueryListBatchInfo from '../../../../hooks/useQueryListBatchInfo';
 import useQueryListProjectInfo from '../../../../hooks/useQueryListProjectInfo';
 

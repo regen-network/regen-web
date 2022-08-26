@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { OAuthError, useAuth0 } from '@auth0/auth0-react';
 import { createBrowserHistory } from 'history';
 
@@ -92,7 +92,7 @@ const App: React.FC = (): JSX.Element => {
   }
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <>
       <GoogleAnalytics />
       <ScrollToTop />
       <div>
@@ -287,7 +287,7 @@ const App: React.FC = (): JSX.Element => {
           <AppFooter />
         </footer>
       </div>
-    </BrowserRouter>
+    </>
   );
 };
 

@@ -8,7 +8,7 @@ import { QueryClassResponse } from '@regen-network/api/lib/generated/regen/ecocr
 
 import { formatDuration } from 'web-components/lib/utils/format';
 
-import { BasketOverviewProps } from '../../../../components/organisms';
+import { BasketOverviewProps } from '../..';
 import useBankQuery from '../../../../hooks/useBankQuery';
 import useBasketQuery from '../../../../hooks/useBasketQuery';
 import useQueryListClassInfo from '../../../../hooks/useQueryListClassInfo';

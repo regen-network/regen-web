@@ -15,6 +15,9 @@
     "@mui/styles": "^5.1.0",
     "@rdfjs/parser-jsonld": "^1.2.1",
     "@regen-network/api": "^0.3.0",
+    "@remix-run/node": "^1.7.0",
+    "@remix-run/react": "^1.7.0",
+    "@remix-run/serve": "^1.7.0",
     "@stripe/stripe-js": "^1.5.0",
     "@types/auth0-js": "^9.14.5",
     "@types/clientjs": "^0.1.0",
@@ -52,13 +55,14 @@
     "lint-fix": "eslint ./src --fix -c .eslintrc.js --ext .ts,.tsx",
     "format": "prettier --write --loglevel warn './src/**/*.{ts,tsx,json,md,css}'",
     "format-and-fix": "yarn format && yarn lint-fix",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "test-update-snapshot": "react-scripts test --updateSnapshot",
     "graphql:codegen": "graphql-codegen --config codegen.yml",
     "graphql:codegen-sanity": "graphql-codegen --config sanity-codegen.yml",
-    "analyze": "source-map-explorer 'build/static/js/*.js'"
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
+    "build": "remix build",
+    "dev": "remix dev",
+    "start": "remix-serve build"
   },
   "browserslist": {
     "production": [
@@ -74,6 +78,7 @@
   },
   "devDependencies": {
     "@keplr-wallet/types": "^0.9.0",
+    "@remix-run/dev": "^1.7.0",
     "@storybook/addon-storyshots": "^6.3.12",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",

@@ -4,7 +4,7 @@ import { Box } from '@mui/material';
 
 import { Label } from 'web-components/lib/components/typography';
 
-import { LinkWithArrow } from '../atoms';
+import { LinkWithArrow } from '.';
 
 interface Props {
   label: string;

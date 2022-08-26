@@ -7,7 +7,7 @@ import { formatDate } from 'web-components/lib/utils/format';
 
 import { VCSProjectMetadataLD } from '../../generated/json-ld';
 import { LinkWithArrow, LinkWithArrowProps } from '../atoms';
-import { LineItemLabelAbove, LineItemLabelAboveProps } from '../molecules';
+import { LineItemLabelAbove, LineItemLabelAboveProps } from '.';
 
 export interface MetadataProps {
   metadata?: VCSProjectMetadataLD;

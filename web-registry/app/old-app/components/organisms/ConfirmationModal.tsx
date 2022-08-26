@@ -9,7 +9,7 @@ import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
 import CowIllustration from '../../assets/cow-illustration.png';
-import CarbonCreditFruit from '../../assets/svgs/carbon-credit-fruit.svg';
+import { CarbonCreditFruit } from '../../assets/svgs/components';
 
 interface Props extends RegenModalProps {
   data?: DeliverTxResponse;

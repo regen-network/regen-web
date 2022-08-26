@@ -15,7 +15,7 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { parseText } from 'web-components/lib/utils/textParser';
 
-import topoImg from '../../../assets/background-contour-2.svg';
+import topoImg from '../../../assets/background-contour-1.jpg';
 import forestImg from '../../../assets/forest-token.png';
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { LinkWithArrow } from '../../atoms/LinkWithArrow';
@@ -159,7 +159,7 @@ const SectionContainer = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   borderBottom: `1px solid ${theme.palette.grey[100]}`,
   backgroundColor: theme.palette.grey[50],
-  backgroundImage: `url(${topoImg})`,
+  backgroundImage: `url(${topo1m`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
 }));

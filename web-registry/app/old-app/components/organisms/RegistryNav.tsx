@@ -18,10 +18,10 @@ import { Theme } from 'web-components/lib/theme/muiTheme';
 import { useMoreProjectsQuery } from 'generated/graphql';
 
 import DefaultAvatar from '../../assets/avatar.png';
-import { ReactComponent as Cow } from '../../assets/svgs/green-cow.svg';
 import { chainId, nctBasket } from '../../lib/ledger';
 import { useWallet } from '../../lib/wallet';
 import { RegistryIconLink, RegistryNavLink, WalletButton } from '../atoms';
+import { GreenCow } from '../../assets/svgs/components';
 
 const RegistryNav: React.FC = () => {
   const navigate = useNavigate();
@@ -45,14 +45,14 @@ const RegistryNav: React.FC = () => {
       linkComponent: RegistryNavLink,
       title: 'Carbon<i>Plus</i> Grasslands credit class',
       href: '/credit-classes/carbonplus-grasslands',
-      svg: Cow /* , right: () => <PeerReviewed /> */,
+      svg: GreenCow /* , right: () => <PeerReviewed /> */,
     },
     {
       pathname,
       linkComponent: RegistryNavLink,
       title: 'Carbon<i>Plus</i> Grasslands methodology',
       href: '/methodologies/carbonplus-grasslands',
-      svg: Cow,
+      svg: GreenCow,
       /* right: () => <PeerReviewed />, */
     },
   ];

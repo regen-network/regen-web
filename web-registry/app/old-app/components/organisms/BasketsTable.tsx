@@ -7,9 +7,9 @@ import {
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatNumber } from 'web-components/lib/utils/format';
 
-import { ReactComponent as BasketIcon } from '../../assets/svgs/rNCT.svg';
 import { BasketTokens } from '../../hooks/useBasketTokens';
 import { NoCredits } from '../molecules';
+import { RNct } from '../../assets/svgs/components';
 
 type BasketTableProps = {
   basketTokens: BasketTokens[];
@@ -47,7 +47,7 @@ export const BasketsTable: React.FC<BasketTableProps> = ({
         return [
           <Grid container wrap="nowrap">
             <Grid item>
-              <BasketIcon />
+              <RNct />
             </Grid>
             <Grid
               item

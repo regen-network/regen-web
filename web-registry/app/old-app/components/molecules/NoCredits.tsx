@@ -3,8 +3,7 @@ import { Box } from '@mui/material';
 
 import { StyledTableContainer } from 'web-components/lib/components/table';
 import { Title } from 'web-components/lib/components/typography';
-
-import { ReactComponent as CloudData } from '../../assets/svgs/cloud-data.svg';
+import { CloudData } from '../../assets/svgs/components';
 
 const NoCredits: React.FC<{ title: string }> = ({ title }) => {
   return (

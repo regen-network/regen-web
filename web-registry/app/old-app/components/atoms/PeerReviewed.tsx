@@ -2,8 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 
 import { Label } from 'web-components/lib/components/typography';
-
-import { ReactComponent as Ribbon } from '../../assets/svgs/yellow-ribbon.svg';
+import { YellowRibbon } from '../../assets/svgs/components';
 
 /**
  * Icon with yellow ribbon and 'Peer Reviewed' label
@@ -12,7 +11,7 @@ const PeerReviewed: React.FC = () => {
   return (
     <Box display="flex" flexWrap="nowrap" alignItems="center">
       <Box mr={1.5}>
-        <Ribbon />
+        <YellowRibbon />
       </Box>
       <Label
         color="info.main"

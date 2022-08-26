@@ -9,11 +9,11 @@ import { truncate } from 'web-components/lib/utils/truncate';
 
 import { microToDenom } from 'lib/denom.utils';
 
-import { ReactComponent as USDCIcon } from '../../../assets/svgs/usdc.svg';
 import { getAccountUrl } from '../../../lib/block-explorer';
 import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';
 import { Link } from '../../atoms';
 import WithLoader from '../../atoms/WithLoader';
+import { Usdc } from '../../../assets/svgs/components';
 
 type Props = {
   sellOrder: NormalizedSellOrder;
@@ -40,7 +40,7 @@ const getSellOrdersTableRow = ({
   </WithLoader>,
   <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
     <Box sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
-      {askDenom === 'usdc' && <USDCIcon />}
+      {askDenom === 'usdc' && <Usdc />}
       {askDenom === 'uregen' && <RegenTokenIcon />}
     </Box>
     {`${formatNumber(microToDenom(askAmount))}`}

@@ -3,15 +3,29 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
-    "rootDir": "src",
     "outDir": "build",
     "resolveJsonModule": true,
     "allowJs": true,
     "jsx": "react-jsx",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "ES2019"],
+    "esModuleInterop": true,
     "module": "esnext",
+    "moduleResolution": "node",
+    "target": "ES2019",
     "noEmit": true,
-    "baseUrl": "./src"
+    "baseUrl": "./app",
+    "paths": {
+      "~/*": ["./app/*"],
+      "lib/*": ["old-app/lib/*"],
+      "features/*": ["old-app/features/*"],
+      "components/*": ["old-app/components/*"],
+      "pages/*": ["old-app/pages/*"],
+      "hooks": ["old-app/hooks/index"],
+      "hooks/*": ["old-app/hooks/*"],
+      "assets/*": ["old-app/assets/*"],
+      "generated/*": ["old-app/generated/*"],
+      "ledger": ["old-app/ledger"]
+    }
   },
   "include": [
     "src",

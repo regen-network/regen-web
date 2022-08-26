@@ -12,7 +12,6 @@ import App from './App';
 import { LedgerProvider } from './ledger';
 import { WalletProvider } from './lib/wallet';
 import * as serviceWorker from './serviceWorker';
-// import history from './lib/history';
 
 const config = {
   domain:

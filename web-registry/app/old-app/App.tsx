@@ -1,18 +1,34 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { OAuthError, useAuth0 } from '@auth0/auth0-react';
+import { IntercomProvider } from 'react-use-intercom';
+import { Auth0Provider, OAuthError, useAuth0 } from '@auth0/auth0-react';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { createBrowserHistory } from 'history';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
+import ThemeProvider from 'web-components/lib/theme/RegenThemeProvider';
 
+import { AuthApolloProvider } from './apollo';
 import { KeplrRoute, ProtectedRoute, ScrollToTop } from './components/atoms';
 import PageLoader from './components/atoms/PageLoader';
 import { AppFooter, RegistryNav } from './components/organisms';
+import { LedgerProvider } from './ledger';
 import isAdmin from './lib/admin';
 import { useGoogleAnalyticsInit } from './lib/ga';
+import { WalletProvider } from './lib/wallet';
 import { ProjectMetadata } from './pages/ProjectMetadata/ProjectMetadata';
 
 import './App.css';
+
+const config = {
+  domain:
+    process.env.REACT_APP_AUTH0_DOMAIN || 'regen-network-registry.auth0.com',
+  clientId:
+    process.env.REACT_APP_AUTH0_CLIENT_ID || 'rEuc1WLPAQVXZ7gJrWg4AL9EhWMHmLu8',
+  returnTo: window.location.origin || 'http://localhost:3000/',
+  audience: 'https://regen-registry-server.herokuapp.com/',
+};
 
 const Additionality = lazy(() => import('./pages/Additionality'));
 const Admin = lazy(() => import('./pages/Admin'));
@@ -68,6 +84,7 @@ const CreateBatch = lazy(() => import('./pages/CreateBatch'));
 const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 
 export const history = createBrowserHistory();
+const intercomId = process.env.REACT_APP_INTERCOM_APP_ID || '';
 
 const GoogleAnalytics: React.FC = (): JSX.Element => {
   useGoogleAnalyticsInit();
@@ -92,202 +109,270 @@ const App: React.FC = (): JSX.Element => {
   }
 
   return (
-    <>
-      <GoogleAnalytics />
-      <ScrollToTop />
-      <div>
-        <RegistryNav />
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="verify-email" element={<VerifyEmail />} />
-            <Route path="add" element={<Additionality />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="certificate" element={<CertificatePage />} />
-            <Route path="projects/wilmot/admin" element={<Seller />} />
-            <Route path="buyers" element={<BuyersPage />} />
-            <Route path="create-methodology" element={<CreateMethodology />} />
-            <Route
-              // TODO: thould this route be moved to /credit-classes?
-              path="create-credit-class"
-              element={<CreateCreditClassInfo />}
-            />
-            <Route path="land-stewards" element={<LandStewards />} />
-            <Route
-              path="methodology-review-process"
-              element={<MethodologyReviewProcess />}
-            />
-            <Route path="projects" element={<Projects />} />
-            <Route path="projects/:projectId" element={<Project />} />
-            <Route
-              path="post-purchase/:projectId/:walletId/:name"
-              element={<PostPurchase />}
-            />
-            <Route
-              path="ecocredits/dashboard"
-              element={<KeplrRoute component={Dashboard} />}
-            />
-            <Route
-              path="ecocredits/accounts/:accountAddress"
-              element={<EcocreditsByAccount />}
-            />
-            <Route
-              path="ecocredits/create-batch"
-              element={<KeplrRoute component={CreateBatch} />}
-            />
-            <Route path="baskets/:basketDenom" element={<BasketDetails />} />
-            <Route
-              path="credit-batches/:batchDenom"
-              element={<BatchDetails />}
-            />
-            <Route
-              path="user-profile"
-              element={<ProtectedRoute component={UserProfile} />}
-            />
-            <Route
-              path="organization-profile"
-              element={<ProtectedRoute component={OrganizationProfile} />}
-            />
-            <Route
-              path="project-list"
-              element={<ProtectedRoute component={ProjectList} />}
-            />
-            <Route path="project-pages">
-              <Route path=":projectId" element={<ProjectCreate />}>
-                <Route
-                  path="choose-credit-class"
-                  element={<KeplrRoute component={ChooseCreditClassPage} />}
-                />
-                <Route
-                  path="basic-info"
-                  element={<KeplrRoute component={BasicInfo} />}
-                />
-                <Route
-                  path="location"
-                  element={<KeplrRoute component={ProjectLocation} />}
-                />
-                <Route
-                  path="story"
-                  element={<KeplrRoute component={Story} />}
-                />
-                <Route
-                  path="description"
-                  element={<KeplrRoute component={Description} />}
-                />
-                <Route
-                  path="media"
-                  element={<KeplrRoute component={Media} />}
-                />
-                <Route
-                  path="metadata"
-                  element={<KeplrRoute component={ProjectMetadata} />}
-                />
-                <Route
-                  path="roles"
-                  element={<KeplrRoute component={Roles} />}
-                />
-                <Route
-                  path="entity-display"
-                  element={<KeplrRoute component={EntityDisplay} />}
-                />
-                <Route
-                  path="review"
-                  element={<KeplrRoute component={ProjectReview} />}
-                />
-                <Route
-                  path="finished"
-                  element={<KeplrRoute component={ProjectFinished} />}
-                />
-                <Route
-                  path="edit"
-                  element={<KeplrRoute component={ProjectEdit} />}
-                >
-                  <Route
-                    path="basic-info"
-                    element={<KeplrRoute component={BasicInfo} />}
-                  />
-                  <Route
-                    path="location"
-                    element={<KeplrRoute component={ProjectLocation} />}
-                  />
-                  <Route
-                    path="story"
-                    element={<KeplrRoute component={Story} />}
-                  />
-                  <Route
-                    path="media"
-                    element={<KeplrRoute component={Media} />}
-                  />
-                  <Route
-                    path="roles"
-                    element={<KeplrRoute component={Roles} />}
-                  />
-                  <Route
-                    path="entity-display"
-                    element={<KeplrRoute component={EntityDisplay} />}
-                  />
-                </Route>
-              </Route>
-            </Route>
-            <Route path="admin" element={<Admin />} />
-            {isAdmin(user) && (
-              <>
-                <Route path="admin/credits">
-                  <Route
-                    path="create-and-transfer"
-                    element={
-                      <ProtectedRoute component={BuyerCreditsTransfer} />
-                    }
-                  />
-                  <Route
-                    path="issue"
-                    element={<ProtectedRoute component={CreditsIssue} />}
-                  />
-                  <Route
-                    path="transfer"
-                    element={<ProtectedRoute component={CreditsTransfer} />}
-                  />
-                  <Route
-                    path="retire"
-                    element={<ProtectedRoute component={CreditsRetire} />}
-                  />
-                </Route>
-                <Route
-                  path="admin/buyer/create"
-                  element={<ProtectedRoute component={BuyerCreate} />}
-                />
-              </>
-            )}
-            <Route
-              path="methodologies/:methodologyId"
-              element={<MethodologyDetails />}
-            />
-            <Route path="credit-classes">
-              {/* TODO: Index route is same as /create-credit-class for now */}
-              <Route index element={<CreateCreditClassInfo />} />
-              <Route path=":creditClassId" element={<CreditClassDetails />} />
-              <Route
-                path="create"
-                element={<KeplrRoute component={CreateCreditClass} />}
-              />
-            </Route>
-            {/* <Route
+    <Auth0Provider
+      domain={config.domain}
+      clientId={config.clientId}
+      redirectUri={window.location.origin}
+      // onRedirectCallback={onRedirectCallback}
+      // returnTo={config.returnTo}
+      useRefreshTokens={true}
+      audience={config.audience}
+      cacheLocation="localstorage"
+    >
+      <AuthApolloProvider>
+        <IntercomProvider appId={intercomId} autoBoot>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <WalletProvider>
+              <LedgerProvider>
+                <ThemeProvider injectFonts>
+                  <GoogleAnalytics />
+                  <ScrollToTop />
+                  <div>
+                    <RegistryNav />
+                    <Suspense fallback={<PageLoader />}>
+                      <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="verify-email" element={<VerifyEmail />} />
+                        <Route path="add" element={<Additionality />} />
+                        <Route path="signup" element={<Signup />} />
+                        <Route
+                          path="certificate"
+                          element={<CertificatePage />}
+                        />
+                        <Route
+                          path="projects/wilmot/admin"
+                          element={<Seller />}
+                        />
+                        <Route path="buyers" element={<BuyersPage />} />
+                        <Route
+                          path="create-methodology"
+                          element={<CreateMethodology />}
+                        />
+                        <Route
+                          // TODO: thould this route be moved to /credit-classes?
+                          path="create-credit-class"
+                          element={<CreateCreditClassInfo />}
+                        />
+                        <Route
+                          path="land-stewards"
+                          element={<LandStewards />}
+                        />
+                        <Route
+                          path="methodology-review-process"
+                          element={<MethodologyReviewProcess />}
+                        />
+                        <Route path="projects" element={<Projects />} />
+                        <Route
+                          path="projects/:projectId"
+                          element={<Project />}
+                        />
+                        <Route
+                          path="post-purchase/:projectId/:walletId/:name"
+                          element={<PostPurchase />}
+                        />
+                        <Route
+                          path="ecocredits/dashboard"
+                          element={<KeplrRoute component={Dashboard} />}
+                        />
+                        <Route
+                          path="ecocredits/accounts/:accountAddress"
+                          element={<EcocreditsByAccount />}
+                        />
+                        <Route
+                          path="ecocredits/create-batch"
+                          element={<KeplrRoute component={CreateBatch} />}
+                        />
+                        <Route
+                          path="baskets/:basketDenom"
+                          element={<BasketDetails />}
+                        />
+                        <Route
+                          path="credit-batches/:batchDenom"
+                          element={<BatchDetails />}
+                        />
+                        <Route
+                          path="user-profile"
+                          element={<ProtectedRoute component={UserProfile} />}
+                        />
+                        <Route
+                          path="organization-profile"
+                          element={
+                            <ProtectedRoute component={OrganizationProfile} />
+                          }
+                        />
+                        <Route
+                          path="project-list"
+                          element={<ProtectedRoute component={ProjectList} />}
+                        />
+                        <Route path="project-pages">
+                          <Route path=":projectId" element={<ProjectCreate />}>
+                            <Route
+                              path="choose-credit-class"
+                              element={
+                                <KeplrRoute component={ChooseCreditClassPage} />
+                              }
+                            />
+                            <Route
+                              path="basic-info"
+                              element={<KeplrRoute component={BasicInfo} />}
+                            />
+                            <Route
+                              path="location"
+                              element={
+                                <KeplrRoute component={ProjectLocation} />
+                              }
+                            />
+                            <Route
+                              path="story"
+                              element={<KeplrRoute component={Story} />}
+                            />
+                            <Route
+                              path="description"
+                              element={<KeplrRoute component={Description} />}
+                            />
+                            <Route
+                              path="media"
+                              element={<KeplrRoute component={Media} />}
+                            />
+                            <Route
+                              path="metadata"
+                              element={
+                                <KeplrRoute component={ProjectMetadata} />
+                              }
+                            />
+                            <Route
+                              path="roles"
+                              element={<KeplrRoute component={Roles} />}
+                            />
+                            <Route
+                              path="entity-display"
+                              element={<KeplrRoute component={EntityDisplay} />}
+                            />
+                            <Route
+                              path="review"
+                              element={<KeplrRoute component={ProjectReview} />}
+                            />
+                            <Route
+                              path="finished"
+                              element={
+                                <KeplrRoute component={ProjectFinished} />
+                              }
+                            />
+                            <Route
+                              path="edit"
+                              element={<KeplrRoute component={ProjectEdit} />}
+                            >
+                              <Route
+                                path="basic-info"
+                                element={<KeplrRoute component={BasicInfo} />}
+                              />
+                              <Route
+                                path="location"
+                                element={
+                                  <KeplrRoute component={ProjectLocation} />
+                                }
+                              />
+                              <Route
+                                path="story"
+                                element={<KeplrRoute component={Story} />}
+                              />
+                              <Route
+                                path="media"
+                                element={<KeplrRoute component={Media} />}
+                              />
+                              <Route
+                                path="roles"
+                                element={<KeplrRoute component={Roles} />}
+                              />
+                              <Route
+                                path="entity-display"
+                                element={
+                                  <KeplrRoute component={EntityDisplay} />
+                                }
+                              />
+                            </Route>
+                          </Route>
+                        </Route>
+                        <Route path="admin" element={<Admin />} />
+                        {isAdmin(user) && (
+                          <>
+                            <Route path="admin/credits">
+                              <Route
+                                path="create-and-transfer"
+                                element={
+                                  <ProtectedRoute
+                                    component={BuyerCreditsTransfer}
+                                  />
+                                }
+                              />
+                              <Route
+                                path="issue"
+                                element={
+                                  <ProtectedRoute component={CreditsIssue} />
+                                }
+                              />
+                              <Route
+                                path="transfer"
+                                element={
+                                  <ProtectedRoute component={CreditsTransfer} />
+                                }
+                              />
+                              <Route
+                                path="retire"
+                                element={
+                                  <ProtectedRoute component={CreditsRetire} />
+                                }
+                              />
+                            </Route>
+                            <Route
+                              path="admin/buyer/create"
+                              element={
+                                <ProtectedRoute component={BuyerCreate} />
+                              }
+                            />
+                          </>
+                        )}
+                        <Route
+                          path="methodologies/:methodologyId"
+                          element={<MethodologyDetails />}
+                        />
+                        <Route path="credit-classes">
+                          {/* TODO: Index route is same as /create-credit-class for now */}
+                          <Route index element={<CreateCreditClassInfo />} />
+                          <Route
+                            path=":creditClassId"
+                            element={<CreditClassDetails />}
+                          />
+                          <Route
+                            path="create"
+                            element={
+                              <KeplrRoute component={CreateCreditClass} />
+                            }
+                          />
+                        </Route>
+                        {/* <Route
               path="credit-classes/:creditClassId/*"
               element={<CreditClassDetails />}
             /> */}
-            <Route path="stats/activity" element={<Activity />} />
-            <Route>
-              <Route path="storefront" element={<Storefront />} />
-            </Route>
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Suspense>
-        <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
-        <footer>
-          <AppFooter />
-        </footer>
-      </div>
-    </>
+                        <Route path="stats/activity" element={<Activity />} />
+                        <Route>
+                          <Route path="storefront" element={<Storefront />} />
+                        </Route>
+                        <Route path="*" element={<NotFoundPage />} />
+                      </Routes>
+                    </Suspense>
+                    <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
+                    <footer>
+                      <AppFooter />
+                    </footer>
+                  </div>
+                </ThemeProvider>
+              </LedgerProvider>
+            </WalletProvider>
+          </LocalizationProvider>
+        </IntercomProvider>
+      </AuthApolloProvider>
+    </Auth0Provider>
   );
 };
 

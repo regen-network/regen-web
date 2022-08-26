@@ -5,12 +5,11 @@ import { BatchIssuance } from '@regen-network/api/lib/generated/regen/ecocredit/
 
 import type { VCSBatchMetadataLD } from 'web-components/lib/types/rdf/C01-verified-carbon-standard-batch';
 
-import { useLedger } from 'ledger';
 import { generateIri, IriFromMetadataSuccess } from 'lib/metadata-graph';
 
-import { useMsgClient } from 'hooks';
-
 import { CreateBatchFormValues } from '../CreateBatchMultiStepForm/CreateBatchMultiStepForm';
+import useMsgClient from 'hooks/useMsgClient';
+import { useLedger } from 'ledger';
 
 // TODO
 // Right now, just case "C01" (aka. VCS)

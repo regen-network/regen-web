@@ -159,7 +159,7 @@ const SectionContainer = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   borderBottom: `1px solid ${theme.palette.grey[100]}`,
   backgroundColor: theme.palette.grey[50],
-  backgroundImage: `url(${topo1m`,
+  backgroundImage: `url(${topoImg})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
 }));

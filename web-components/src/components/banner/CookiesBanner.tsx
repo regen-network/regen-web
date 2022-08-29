@@ -11,6 +11,7 @@ import { Body } from '../typography';
 
 interface CookiesBannerProps {
   privacyUrl: string;
+  TOSUrl: string;
 }
 
 const rejectCookieName: string = 'cookies-rejected';
@@ -45,6 +46,7 @@ function setCookie(name: string, cookieValue: string): void {
 
 export default function CookiesBanner({
   privacyUrl,
+  TOSUrl,
 }: CookiesBannerProps): JSX.Element | null {
   const [visible, setVisible] = useState(false);
 
@@ -106,6 +108,10 @@ export default function CookiesBanner({
               using this site, you accept our use of{' '}
               <Link href={privacyUrl} color="secondary.main">
                 cookies policy
+              </Link>
+              {' '}and agree to our{' '}
+              <Link href={TOSUrl} color="secondary.main">
+                platform terms of service
               </Link>
               .
             </Body>

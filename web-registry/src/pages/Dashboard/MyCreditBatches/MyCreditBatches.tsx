@@ -6,7 +6,7 @@ import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton
 import EmptyState from 'web-components/lib/components/empty-state';
 import { CreditBatchLightIcon } from 'web-components/lib/components/icons/CreditBatchLightIcon';
 import PlusIcon from 'web-components/lib/components/icons/PlusIcon';
-import { Label, Title } from 'web-components/lib/components/typography';
+import { Label } from 'web-components/lib/components/typography';
 
 import WithLoader from 'components/atoms/WithLoader';
 import { CreditBatches } from 'components/organisms';

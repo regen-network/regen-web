@@ -2,7 +2,6 @@ import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/
 import {
   BatchInfo,
   ProjectInfo,
-  QueryBatchResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { AllProjectsQuery } from '../../../generated/graphql';

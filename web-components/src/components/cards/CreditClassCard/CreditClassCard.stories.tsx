@@ -17,5 +17,4 @@ Default.args = {
   description:
     'This credit class provides a vehicle for nature based Verified Carbon Units (VCUs) to enter the blockchain space via issuance on Regen Ledger. ',
   imgSrc: '/coorong.png',
-  href: '#',
 };

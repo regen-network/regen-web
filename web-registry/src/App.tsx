@@ -138,10 +138,7 @@ const App: React.FC = (): JSX.Element => {
             <Route path="certificate" element={<CertificatePage />} />
             <Route path="projects/wilmot/admin" element={<Seller />} />
             <Route path="buyers" element={<BuyersPage />} />
-            <Route
-              path="create-methodology"
-              element={<CreateMethodology />}
-            />
+            <Route path="create-methodology" element={<CreateMethodology />} />
             <Route
               // TODO: thould this route be moved to /credit-classes?
               path="create-credit-class"

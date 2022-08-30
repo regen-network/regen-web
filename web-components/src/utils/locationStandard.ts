@@ -83,8 +83,13 @@ export const getJurisdictionIsoCode = ({
 };
 
 /**
- *
+ * Utility function to obtain the list of country options according
+ * to the iso-3166-2 package, for the selector type input.
+ * By default it is initialized with the selection in US. It also places
+ * the default country as the first option in the list, after the placeholder.
  */
+
+const DEFAULT_COUNTRY = 'US';
 
 const COUNTRY_OPTION_PLACEHOLDER: Option = {
   value: '',
@@ -99,18 +104,24 @@ export function getCountryOptions(): Option[] {
     }))
     .sort((a, b) => a.label.localeCompare(b.label));
 
-  const countryUS = countries.find(country => country.value === 'US');
-  const otherCountries = countries.filter(country => country.value !== 'US');
+  const defaultCountry = countries.find(
+    country => country.value === DEFAULT_COUNTRY,
+  );
+  const otherCountries = countries.filter(
+    country => country.value !== DEFAULT_COUNTRY,
+  );
 
   let options = [COUNTRY_OPTION_PLACEHOLDER];
-  if (countryUS) options.push(countryUS);
+  if (defaultCountry) options.push(defaultCountry);
   options.push(...otherCountries);
 
   return options;
 }
 
 /**
- *
+ * Utility function to obtain the list of options of the subdivisions
+ * (aka. state/region) corresponding to a country, according to the
+ * iso-3166-2 package, for the selector type input.
  */
 
 const COUNTRY_SUBDIVISION_OPTION_PLACEHOLDER: Option = {

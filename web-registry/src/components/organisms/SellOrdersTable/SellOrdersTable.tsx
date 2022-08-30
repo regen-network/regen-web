@@ -2,8 +2,8 @@ import EmptyState from 'web-components/lib/components/empty-state';
 import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
 import {
   ActionsTable,
-  TablePaginationParams,
   RenderActionButtonsFunc,
+  TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 
 import { UseStateSetter } from 'types/react/use-state';

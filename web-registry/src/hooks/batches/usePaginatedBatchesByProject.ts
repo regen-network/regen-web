@@ -1,8 +1,5 @@
 import { useState } from 'react';
-import {
-  QueryBatchesByIssuerResponse,
-  QueryBatchesByProjectResponse,
-} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { QueryBatchesByProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import {
   DEFAULT_ROWS_PER_PAGE,

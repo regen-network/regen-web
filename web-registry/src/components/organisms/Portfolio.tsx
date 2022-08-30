@@ -2,8 +2,8 @@ import React from 'react';
 import { Box, SxProps } from '@mui/material';
 
 import {
-  TablePaginationParams,
   RenderActionButtonsFunc,
+  TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 import { Label } from 'web-components/lib/components/typography';
 

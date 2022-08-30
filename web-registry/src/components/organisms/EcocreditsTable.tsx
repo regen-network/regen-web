@@ -3,8 +3,8 @@ import { Box, styled } from '@mui/material';
 
 import {
   ActionsTable,
-  TablePaginationParams,
   RenderActionButtonsFunc,
+  TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 

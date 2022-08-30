@@ -7,7 +7,7 @@ import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
-import { OnActionTableChangeParams } from 'web-components/lib/components/table/ActionsTable';
+import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
 
 import { UseStateSetter } from 'types/react/use-state';
@@ -43,7 +43,7 @@ function ProjectTopSection({
     batches?: BatchInfoWithSupply[];
     totals?: BatchTotalsForProject;
   };
-  setPaginationParams: UseStateSetter<OnActionTableChangeParams>;
+  setPaginationParams: UseStateSetter<TablePaginationParams>;
 }): JSX.Element {
   const styles = useProjectTopSectionStyles();
 

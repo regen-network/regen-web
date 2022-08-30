@@ -42,7 +42,7 @@ export const DEFAULT_ROWS_PER_PAGE = 5;
  *  */
 export type RenderActionButtonsFunc = (i: number) => React.ReactNode;
 
-export type OnActionTableChangeParams = {
+export type TablePaginationParams = {
   page: number;
   rowsPerPage: number;
   offset: number;
@@ -53,7 +53,7 @@ const ActionsTable: React.FC<{
   headerRows: React.ReactNode[];
   rows: React.ReactNode[][];
   renderActionButtons?: RenderActionButtonsFunc;
-  onTableChange?: Dispatch<SetStateAction<OnActionTableChangeParams>>;
+  onTableChange?: Dispatch<SetStateAction<TablePaginationParams>>;
 }> = ({ tableLabel, headerRows, rows, renderActionButtons, onTableChange }) => {
   const [page, setPage] = useState(0);
   const [offset, setOffset] = useState(0);

@@ -2,7 +2,7 @@ import EmptyState from 'web-components/lib/components/empty-state';
 import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
 import {
   ActionsTable,
-  OnActionTableChangeParams,
+  TablePaginationParams,
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 
@@ -15,7 +15,7 @@ import getSellOrdersTableRow from './SellOrdersTable.Row';
 type Props = {
   sellOrders: NormalizedSellOrder[];
   renderActionButtonsFunc?: RenderActionButtonsFunc;
-  onTableChange?: UseStateSetter<OnActionTableChangeParams>;
+  onTableChange?: UseStateSetter<TablePaginationParams>;
 };
 
 const SellOrdersTable = ({

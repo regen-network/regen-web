@@ -31,7 +31,6 @@ import {
   ProjectTopSection,
 } from '../../organisms';
 import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
-import useBatches from './hooks/useBatches';
 import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
 import useIssuanceModal from './hooks/useIssuanceModal';

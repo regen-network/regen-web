@@ -43,7 +43,7 @@ import {
 import axios from 'axios';
 import { uniq } from 'lodash';
 
-import { OnActionTableChangeParams } from 'web-components/lib/components/table/ActionsTable';
+import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
 import { connect as connectToApi } from '../../ledger';
 import type {
@@ -126,7 +126,7 @@ const getCreditsWithData = async ({
 type GetEcocreditsForAccountParams = {
   address: string;
   loadedCredits: BatchInfoWithBalance[];
-  paginationParams?: OnActionTableChangeParams;
+  paginationParams?: TablePaginationParams;
   balances?: BatchBalanceInfo[];
   batches?: BatchInfo[];
 };

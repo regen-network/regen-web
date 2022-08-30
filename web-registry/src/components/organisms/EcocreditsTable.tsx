@@ -3,7 +3,7 @@ import { Box, styled } from '@mui/material';
 
 import {
   ActionsTable,
-  OnActionTableChangeParams,
+  TablePaginationParams,
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
@@ -27,7 +27,7 @@ const BreakText = styled('div')({
 type EcocreditsTableProps = {
   credits?: BatchInfoWithBalance[];
   renderActionButtons?: RenderActionButtonsFunc;
-  onTableChange?: UseStateSetter<OnActionTableChangeParams>;
+  onTableChange?: UseStateSetter<TablePaginationParams>;
 };
 
 export const EcocreditsTable: React.FC<EcocreditsTableProps> = ({

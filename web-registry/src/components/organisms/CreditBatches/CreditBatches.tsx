@@ -5,7 +5,7 @@ import cx from 'clsx';
 import Section from 'web-components/lib/components/section';
 import {
   ActionsTable,
-  OnActionTableChangeParams,
+  TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
 import { truncateHash } from 'web-components/lib/utils/truncate';
@@ -26,7 +26,7 @@ interface CreditBatchProps {
   filteredColumns?: string[];
   withSection?: boolean;
   creditBatches?: BatchInfoWithSupply[];
-  onTableChange?: UseStateSetter<OnActionTableChangeParams>;
+  onTableChange?: UseStateSetter<TablePaginationParams>;
   titleAlign?: 'left' | 'right' | 'inherit' | 'center' | 'justify' | undefined;
 }
 

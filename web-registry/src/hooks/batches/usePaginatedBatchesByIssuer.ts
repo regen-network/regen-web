@@ -3,7 +3,7 @@ import { QueryBatchesByIssuerResponse } from '@regen-network/api/lib/generated/r
 
 import {
   DEFAULT_ROWS_PER_PAGE,
-  OnActionTableChangeParams,
+  TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
@@ -19,10 +19,10 @@ export const usePaginatedBatchesByIssuer = ({
   address,
 }: Props): {
   batchesWithSupply: BatchInfoWithSupply[] | undefined;
-  setPaginationParams: UseStateSetter<OnActionTableChangeParams>;
+  setPaginationParams: UseStateSetter<TablePaginationParams>;
 } => {
   const [paginationParams, setPaginationParams] =
-    useState<OnActionTableChangeParams>({
+    useState<TablePaginationParams>({
       page: 0,
       rowsPerPage: DEFAULT_ROWS_PER_PAGE,
       offset: 0,

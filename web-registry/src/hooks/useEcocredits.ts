@@ -5,7 +5,7 @@ import {
   QueryBatchesResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { OnActionTableChangeParams } from 'web-components/lib/components/table/ActionsTable';
+import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
 import type { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { getEcocreditsForAccount } from 'lib/ecocredit/api';
@@ -15,7 +15,7 @@ import useEcocreditQuery from './useEcocreditQuery';
 
 type Props = {
   address?: string;
-  paginationParams?: OnActionTableChangeParams;
+  paginationParams?: TablePaginationParams;
 };
 
 export default function useEcocredits({ address, paginationParams }: Props): {

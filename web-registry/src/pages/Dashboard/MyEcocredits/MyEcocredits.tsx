@@ -30,7 +30,7 @@ import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import {
   DEFAULT_ROWS_PER_PAGE,
-  OnActionTableChangeParams,
+  TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
@@ -92,7 +92,7 @@ export const MyEcocredits = (): JSX.Element => {
   const navigate = useNavigate();
 
   const [paginationParams, setPaginationParams] =
-    useState<OnActionTableChangeParams>({
+    useState<TablePaginationParams>({
       page: 0,
       rowsPerPage: DEFAULT_ROWS_PER_PAGE,
       offset: 0,

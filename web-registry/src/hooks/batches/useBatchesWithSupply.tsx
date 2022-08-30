@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { BatchInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
-import { OnActionTableChangeParams } from 'web-components/lib/components/table/ActionsTable';
+import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 
 import { BatchInfoWithSupply } from 'types/ledger/ecocredit';
 import { addDataToBatch } from 'lib/ecocredit/api';
 
 type Props = {
   batches?: BatchInfo[];
-  paginationParams?: OnActionTableChangeParams;
+  paginationParams?: TablePaginationParams;
 };
 
 export const useBatchesWithSupply = ({

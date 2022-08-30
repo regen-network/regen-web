@@ -18,7 +18,7 @@ import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccess
 import Section from 'web-components/lib/components/section';
 import {
   DEFAULT_ROWS_PER_PAGE,
-  OnActionTableChangeParams,
+  TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
 import { Title } from 'web-components/lib/components/typography';
 
@@ -55,7 +55,7 @@ import {
 
 export const Storefront = (): JSX.Element => {
   const [paginationParams, setPaginationParams] =
-    useState<OnActionTableChangeParams>({
+    useState<TablePaginationParams>({
       page: 0,
       rowsPerPage: DEFAULT_ROWS_PER_PAGE,
       offset: 0,

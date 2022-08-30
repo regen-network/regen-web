@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, SxProps } from '@mui/material';
 
 import {
-  OnActionTableChangeParams,
+  TablePaginationParams,
   RenderActionButtonsFunc,
 } from 'web-components/lib/components/table/ActionsTable';
 import { Label } from 'web-components/lib/components/typography';
@@ -19,7 +19,7 @@ export interface PortfolioProps {
   basketTokens: BasketTokens[];
   renderCreditActionButtons?: RenderActionButtonsFunc;
   renderBasketActionButtons?: RenderActionButtonsFunc;
-  onTableChange?: UseStateSetter<OnActionTableChangeParams>;
+  onTableChange?: UseStateSetter<TablePaginationParams>;
 }
 
 const sxs = {

@@ -2,7 +2,7 @@ export const BUY_CREDITS_MODAL_DEFAULT_VALUES = {
   creditCount: 1,
   retirementNote: '',
   stateProvince: '',
-  country: '',
+  country: 'US',
   postalCode: '',
   retirementAction: 'autoretire',
   price: 0,

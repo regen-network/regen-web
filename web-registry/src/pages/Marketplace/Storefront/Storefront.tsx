@@ -32,6 +32,7 @@ import useCancelSellOrderSubmit from './hooks/useCancelSellOrderSubmit';
 import { useResetErrorBanner } from './hooks/useResetErrorBanner';
 import {
   BUY_SELL_ORDER_ACTION,
+  BUY_SELL_ORDER_BUTTON,
   CANCEL_SELL_ORDER_ACTION,
 } from './Storefront.constants';
 import {
@@ -136,6 +137,7 @@ export const Storefront = (): JSX.Element => {
     setTxButtonTitle,
     setTxModalHeader,
     setTxModalTitle,
+    buttonTitle: BUY_SELL_ORDER_BUTTON,
   });
 
   const cancelSellOrderSubmit = useCancelSellOrderSubmit({
@@ -155,14 +157,18 @@ export const Storefront = (): JSX.Element => {
     askDenom,
     batchDenom,
     id: orderId,
+    project,
+    seller,
+    amountAvailable,
+    disableAutoRetire,
   } = normalizedSellOrders[selectedSellOrder ?? 0] ?? {};
 
-  const initalValues = useMemo(
+  const initialValues = useMemo(
     () => ({
       creditCount: 1,
       retirementNote: '',
       stateProvince: '',
-      country: '',
+      country: 'US',
       postalCode: '',
       retirementAction: 'autoretire',
       price: Number(askAmount),
@@ -236,9 +242,20 @@ export const Storefront = (): JSX.Element => {
         onClose={() => setSelectedSellOrder(null)}
         onSubmit={buySellOrderSubmit}
         project={{
-          id: selectedSellOrder?.toString() ?? '',
+          id: project?.id ?? '',
+          sellOrders: [
+            {
+              id: orderId,
+              askAmount,
+              askDenom,
+              batchDenom,
+              seller,
+              quantity: amountAvailable,
+              disableAutoRetire,
+            },
+          ],
         }}
-        initialValues={initalValues}
+        initialValues={initialValues}
       />
       <ProcessingModal
         open={isProcessingModalOpen}

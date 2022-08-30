@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import {
   BrowserRouter,
   createRoutesFromChildren,
@@ -12,6 +12,7 @@ import { OAuthError, useAuth0 } from '@auth0/auth0-react';
 import * as Sentry from '@sentry/react';
 import { BrowserTracing } from '@sentry/tracing';
 import { createBrowserHistory } from 'history';
+import { useAnalytics } from 'use-analytics';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
 
@@ -108,9 +109,24 @@ const GoogleAnalytics: React.FC = (): JSX.Element => {
   return <></>;
 };
 
+const AmplitudeAnalytics: React.FC = (): JSX.Element => {
+  const location = useLocation();
+  const analytics = useAnalytics();
+  useEffect(() => {
+    // send page view whenever react-router location changes
+    analytics.page();
+  }, [location, analytics]);
+  return <></>;
+};
+
 const App: React.FC = (): JSX.Element => {
   const { user, isLoading, error } = useAuth0();
   const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes);
+  const { plugins } = useAnalytics();
+  // user opt-in
+  plugins.enable(['amplitude']).then(() => {
+    console.log('amplitude enabled');
+  });
 
   if (isLoading) {
     return <div></div>;
@@ -129,6 +145,7 @@ const App: React.FC = (): JSX.Element => {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <GoogleAnalytics />
+      <AmplitudeAnalytics />
       <ScrollToTop />
       <MobileSupportModal />
       <div>

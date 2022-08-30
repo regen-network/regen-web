@@ -66,11 +66,11 @@ const getQueryClient = async (): Promise<QueryClientImpl> => {
   return new QueryClientImpl(api.queryClient);
 };
 
-export const getBatchesTotal = async (
+export const getBatchesTotal = (
   batches: BatchInfoWithSupply[],
-): Promise<{
+): {
   totals: BatchTotalsForProject;
-}> => {
+} => {
   try {
     const totals = batches.reduce(
       (acc, batch) => {

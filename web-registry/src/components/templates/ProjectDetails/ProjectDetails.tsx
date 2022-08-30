@@ -1,15 +1,23 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Box, Skeleton } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
+import Section from 'web-components/lib/components/section';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+
+import {
+  API_URI,
+  IMAGE_STORAGE_BASE_URL,
+} from 'pages/Projects/Projects.config';
+import WithLoader from 'components/atoms/WithLoader';
 
 import {
   useProjectByHandleQuery,
@@ -22,7 +30,7 @@ import { useLedger } from '../../../ledger';
 import { chainId } from '../../../lib/ledger';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 import {
-  MoreProjectsSection,
+  // MoreProjectsSection,
   ProjectImpactSection,
   ProjectTopSection,
 } from '../../organisms';
@@ -37,7 +45,7 @@ import useSeo from './hooks/useSeo';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
-import { getMediaBoxStyles } from './ProjectDetails.styles';
+import { getMediaBoxStyles, useSectionStyles } from './ProjectDetails.styles';
 import { TransactionModals } from './ProjectDetails.TransactionModals';
 
 interface Project {
@@ -52,6 +60,8 @@ const testProject: Project = {};
 function ProjectDetails(): JSX.Element {
   const theme = useTheme<Theme>();
   const { projectId } = useParams();
+  const navigate = useNavigate();
+  const styles = useSectionStyles();
 
   // Page mode (info/Tx)
   const isTxMode =
@@ -207,9 +217,58 @@ function ProjectDetails(): JSX.Element {
         />
       )}
 
-      {otherProjects && otherProjects.length > 0 && (
+      {/* {otherProjects && otherProjects.length > 0 && (
         <div className="topo-background-alternate">
           <MoreProjectsSection projects={otherProjects} />
+        </div>
+      )} */}
+
+      {otherProjects && (
+        <div id="projects">
+          <Section
+            title="More Projects"
+            titleAlign="center"
+            classes={{ root: styles.section, title: styles.title }}
+          >
+            <WithLoader
+              isLoading={otherProjects?.length === 0}
+              sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+            >
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 338px))',
+                  gridGap: '1.125rem',
+                  flex: 1,
+                  justifyContent: 'center',
+                }}
+              >
+                {otherProjects?.map(project => (
+                  <Box key={project?.id}>
+                    <ProjectCard
+                      name={project?.name}
+                      imgSrc={project?.imgSrc}
+                      place={project?.place}
+                      area={project?.area}
+                      areaUnit={project?.areaUnit}
+                      // onButtonClick={() => {}} TODO #1055
+                      purchaseInfo={project.purchaseInfo}
+                      onClick={() => navigate(`/projects/${project.id}`)}
+                      imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
+                      apiServerUrl={API_URI}
+                      truncateTitle={true}
+                      sx={{ width: 338, height: 479 }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+            </WithLoader>
+          </Section>
+          {/* <Box sx={{ display: 'flex', justifyContent: 'center', mb: 30 }}>
+            <Link to="/projects">
+              <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
+            </Link>
+          </Box> */}
         </div>
       )}
 

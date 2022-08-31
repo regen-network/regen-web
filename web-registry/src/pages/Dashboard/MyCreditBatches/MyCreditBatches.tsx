@@ -53,15 +53,15 @@ export const MyCreditBatches = ({
                 mb: [3.5, 0],
               }}
             >
-              Successfully issues credit batches
+              Successfully issued credit batches
             </Label>
-            <Link to="/ecocredits/create-batch">
-              <OutlinedButton
-                startIcon={<PlusIcon color={theme.palette.secondary.main} />}
-              >
-                create credit batch
-              </OutlinedButton>
-            </Link>
+            <OutlinedButton
+              startIcon={<PlusIcon color={theme.palette.secondary.main} />}
+              component={Link}
+              to="/ecocredits/create-batch"
+            >
+              create credit batch
+            </OutlinedButton>
           </Box>
           <CreditBatches
             creditBatches={batchesWithSupply}
@@ -77,13 +77,13 @@ export const MyCreditBatches = ({
           }
           sx={{ backgroundColor: 'info.light' }}
         >
-          <Link to="/ecocredits/create-batch">
-            <OutlinedButton
-              startIcon={<PlusIcon color={theme.palette.secondary.main} />}
-            >
-              create credit batch
-            </OutlinedButton>
-          </Link>
+          <OutlinedButton
+            startIcon={<PlusIcon color={theme.palette.secondary.main} />}
+            component={Link}
+            to="/ecocredits/create-batch"
+          >
+            create credit batch
+          </OutlinedButton>
         </EmptyState>
       )}
     </Box>

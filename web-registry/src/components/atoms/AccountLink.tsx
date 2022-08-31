@@ -23,7 +23,7 @@ export const AccountLink = ({
   children,
   ...linkProps
 }: AccountLinkProps): JSX.Element => {
-  const isRegen = address.startsWith('regen');
+  const isRegen = address?.startsWith('regen') ?? false;
   const content = !!children ? children : truncate(address);
   if (!isRegen) {
     return (

@@ -7,7 +7,10 @@ import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
 import ReadMore from 'web-components/lib/components/read-more';
 import Section from 'web-components/lib/components/section';
+import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 import { Body, Label, Title } from 'web-components/lib/components/typography';
+
+import { UseStateSetter } from 'types/react/use-state';
 
 import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
@@ -20,7 +23,7 @@ import {
 } from '../../../types/ledger/ecocredit';
 import { ProjectTopLink } from '../../atoms';
 import { AdditionalProjectMetadata, ProjectBatchTotals } from '../../molecules';
-import { CreditBatches } from '..';
+import { CreditBatches } from '../CreditBatches/CreditBatches';
 import {
   ProjectTopSectionQuoteMark,
   useProjectTopSectionStyles,
@@ -31,6 +34,7 @@ function ProjectTopSection({
   geojson,
   isGISFile,
   batchData,
+  setPaginationParams,
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
   geojson?: any;
@@ -39,6 +43,7 @@ function ProjectTopSection({
     batches?: BatchInfoWithSupply[];
     totals?: BatchTotalsForProject;
   };
+  setPaginationParams: UseStateSetter<TablePaginationParams>;
 }): JSX.Element {
   const styles = useProjectTopSectionStyles();
 
@@ -293,7 +298,8 @@ function ProjectTopSection({
           <CreditBatches
             creditClassId={project?.creditClassByCreditClassId?.onChainId}
             creditBatches={batchData.batches}
-            projectPage
+            filteredColumns={['projectLocation']}
+            onTableChange={setPaginationParams}
           />
         </Box>
       )}

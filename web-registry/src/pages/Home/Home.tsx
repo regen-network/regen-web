@@ -20,6 +20,7 @@ import {
 } from 'pages/Projects/Projects.config';
 import WithLoader from 'components/atoms/WithLoader';
 import { useEcocreditQuery } from 'hooks';
+import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
 import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
 import topographyImg from '../../assets/background-contour-1.jpg';
@@ -42,6 +43,8 @@ const Home: React.FC = () => {
 
   const styles = useHomeStyles();
   const theme = useTheme();
+
+  // Featured projects fetching
 
   const { data, loading: loadingSanity } = useAllHomePageQuery({ client });
   const { data: creditClassData } = useAllCreditClassQuery({ client });
@@ -71,6 +74,8 @@ const Home: React.FC = () => {
     projects: projectsWithOrderData,
     sort: PROJECTS_SORT,
   });
+
+  const { batchesWithSupply, setPaginationParams } = usePaginatedBatches();
 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -192,7 +197,11 @@ const Home: React.FC = () => {
       )}
 
       <CardMedia image={topographyImg}>
-        <CreditBatches />
+        <CreditBatches
+          creditBatches={batchesWithSupply}
+          onTableChange={setPaginationParams}
+          withSection
+        />
       </CardMedia>
 
       {creditClassesContent && (

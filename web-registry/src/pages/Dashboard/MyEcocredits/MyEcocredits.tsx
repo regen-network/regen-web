@@ -28,6 +28,10 @@ import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingM
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
+import {
+  DEFAULT_ROWS_PER_PAGE,
+  TablePaginationParams,
+} from 'web-components/lib/components/table/ActionsTable';
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { getHashUrl } from 'lib/block-explorer';
@@ -87,6 +91,13 @@ export const MyEcocredits = (): JSX.Element => {
   const [txButtonTitle, setTxButtonTitle] = useState<string | undefined>();
   const navigate = useNavigate();
 
+  const [paginationParams, setPaginationParams] =
+    useState<TablePaginationParams>({
+      page: 0,
+      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
+      offset: 0,
+    });
+
   const handleTxQueued = (): void => {
     setIsProcessingModalOpen(true);
   };
@@ -132,8 +143,10 @@ export const MyEcocredits = (): JSX.Element => {
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
   const accountAddress = wallet?.address;
-  const { credits, fetchCredits, isLoadingCredits } =
-    useEcocredits(accountAddress);
+  const { credits, fetchCredits, isLoadingCredits } = useEcocredits({
+    address: accountAddress,
+    paginationParams,
+  });
   const basketsWithClasses = useBasketsWithClasses(baskets);
   const mapboxToken = process.env.REACT_APP_MAPBOX_TOKEN || '';
   const { basketTokens, fetchBasketTokens } = useBasketTokens(
@@ -225,6 +238,7 @@ export const MyEcocredits = (): JSX.Element => {
         <Portfolio
           credits={credits}
           basketTokens={basketTokens}
+          onTableChange={setPaginationParams}
           renderCreditActionButtons={
             credits.findIndex(c => Number(c.balance?.tradableAmount) > 0) > -1
               ? (i: number) => {

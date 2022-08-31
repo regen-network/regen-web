@@ -186,13 +186,13 @@ export function ProjectCard({
                         {'PRICE PER TON'}
                       </Subtitle>
                       <Box sx={{ display: 'flex' }}>
-                        <RegenTokenIcon />
+                        {purchaseInfo?.sellInfo.denomLogo}
                         <Body
                           size="md"
                           mobileSize="sm"
                           sx={{
                             fontWeight: 700,
-                            ml: 2,
+                            ml: purchaseInfo?.sellInfo.denomLogo ? 2 : 0,
                             color: 'primary.contrastText',
                           }}
                         >

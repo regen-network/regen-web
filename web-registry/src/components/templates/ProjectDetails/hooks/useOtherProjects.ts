@@ -16,25 +16,45 @@ export default function useOtherProjects(
     query: 'projects',
     params: {},
   });
+
   const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
+
   const projects = useMemo(
-    () =>
-      ecocreditData?.projects?.filter(
-        project => project.metadata && project.id !== projectId,
-      ),
+    () => ecocreditData?.projects?.filter(project => project.id !== projectId),
     [ecocreditData?.projects, projectId],
   );
 
-  const projectsSelection = useMemo(
-    () => _.shuffle(projects).slice(0, PROJECTS_LIMIT),
-    [projects],
-  );
-
   const { projectsWithOrderData } = useProjectsSellOrders({
-    projects: projectsSelection,
+    projects,
     sellOrders,
   });
 
-  return projectsWithOrderData;
+  const projectsWithSellOrders = useMemo(
+    () =>
+      projectsWithOrderData.filter(project => project.sellOrders.length > 0),
+    [projectsWithOrderData],
+  );
+
+  const projectsSelected = useMemo(() => {
+    const _projectsSelected = [];
+    if (projectsWithSellOrders.length > 0) {
+      _projectsSelected.push(
+        ..._.shuffle(projectsWithSellOrders).slice(0, PROJECTS_LIMIT),
+      );
+    }
+
+    if (_projectsSelected.length < PROJECTS_LIMIT) {
+      _projectsSelected.push(
+        ..._.shuffle(projectsWithOrderData).slice(
+          0,
+          PROJECTS_LIMIT - _projectsSelected.length,
+        ),
+      );
+    }
+
+    return _projectsSelected;
+  }, [projectsWithSellOrders, projectsWithOrderData]);
+
+  return projectsSelected;
 }

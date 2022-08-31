@@ -37,19 +37,30 @@ export default function useOtherProjects(
   );
 
   const projectsSelected = useMemo(() => {
-    const _projectsSelected = [];
+    const _projectsSelected: ProjectWithOrderData[] = [];
+    // first, selection of projects with sell orders
     if (projectsWithSellOrders.length > 0) {
       _projectsSelected.push(
         ..._.shuffle(projectsWithSellOrders).slice(0, PROJECTS_LIMIT),
       );
     }
 
+    // if no selection of projects with sell orders
+    if (_projectsSelected.length === 0)
+      return _.shuffle(projectsWithOrderData).slice(0, PROJECTS_LIMIT);
+
+    // if selection is more than necessary
+    if (_projectsSelected.length > PROJECTS_LIMIT)
+      return _.shuffle(_projectsSelected).slice(0, PROJECTS_LIMIT);
+
+    // if there are projects in the selection, but they are not enough for the limit
     if (_projectsSelected.length < PROJECTS_LIMIT) {
+      const numProjects = PROJECTS_LIMIT - _projectsSelected.length;
+      const additionalProjects = projectsWithOrderData.filter(
+        p1 => !_projectsSelected.some(p2 => p1.id === p2.id),
+      );
       _projectsSelected.push(
-        ..._.shuffle(projectsWithOrderData).slice(
-          0,
-          PROJECTS_LIMIT - _projectsSelected.length,
-        ),
+        ..._.shuffle(additionalProjects).slice(0, numProjects),
       );
     }
 

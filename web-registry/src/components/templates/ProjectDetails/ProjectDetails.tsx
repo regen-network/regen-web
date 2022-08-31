@@ -29,11 +29,7 @@ import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
 import { useLedger } from '../../../ledger';
 import { chainId } from '../../../lib/ledger';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
-import {
-  // MoreProjectsSection,
-  ProjectImpactSection,
-  ProjectTopSection,
-} from '../../organisms';
+import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
 import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
 import useBatches from './hooks/useBatches';
 import useGeojson from './hooks/useGeojson';
@@ -217,12 +213,6 @@ function ProjectDetails(): JSX.Element {
         />
       )}
 
-      {/* {otherProjects && otherProjects.length > 0 && (
-        <div className="topo-background-alternate">
-          <MoreProjectsSection projects={otherProjects} />
-        </div>
-      )} */}
-
       {otherProjects && (
         <div id="projects">
           <Section
@@ -264,11 +254,6 @@ function ProjectDetails(): JSX.Element {
               </Box>
             </WithLoader>
           </Section>
-          {/* <Box sx={{ display: 'flex', justifyContent: 'center', mb: 30 }}>
-            <Link to="/projects">
-              <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
-            </Link>
-          </Box> */}
         </div>
       )}
 

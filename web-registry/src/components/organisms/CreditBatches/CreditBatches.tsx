@@ -81,7 +81,7 @@ const CreditBatches: React.FC<CreditBatchProps> = ({
     if (!ledgerRESTUri) return;
     if (creditBatches) {
       setBatches(creditBatches);
-    } else {
+    } else if (creditClassId) {
       getBatchesWithSupply(creditClassId)
         .then(sortableBatches => {
           setBatches(sortableBatches.data);

@@ -1,4 +1,11 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import {
   Box,
   styled,
@@ -91,6 +98,31 @@ const ActionsTable: React.FC<{
   //   );
   // };
 
+  const onChangeRowsPerPage = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const newRowsPerPage = parseInt(e.target.value, 10);
+      setRowsPerPage(newRowsPerPage);
+      setOffset(0);
+      onTableChange &&
+        onTableChange({
+          page,
+          rowsPerPage: newRowsPerPage,
+          offset: 0,
+        });
+    },
+    [onTableChange, page],
+  );
+
+  const onPageChange = useCallback(
+    (_: unknown, newPage: number) => {
+      const offset = newPage * rowsPerPage;
+      setPage(newPage);
+      setOffset(offset);
+      onTableChange && onTableChange({ page: newPage, rowsPerPage, offset });
+    },
+    [onTableChange, rowsPerPage],
+  );
+
   return (
     <Box
       sx={{
@@ -172,26 +204,10 @@ const ActionsTable: React.FC<{
                 <TablePagination
                   rowsPerPageOptions={[5, 10]}
                   rowsPerPage={rowsPerPage}
-                  onChangeRowsPerPage={e => {
-                    const newRowsPerPage = parseInt(e.target.value, 10);
-                    setRowsPerPage(newRowsPerPage);
-                    setOffset(0);
-                    onTableChange &&
-                      onTableChange({
-                        page,
-                        rowsPerPage: newRowsPerPage,
-                        offset: 0,
-                      });
-                  }}
+                  onChangeRowsPerPage={onChangeRowsPerPage}
                   count={rows.length}
                   page={page}
-                  onPageChange={(_, newPage) => {
-                    const offset = newPage * rowsPerPage;
-                    setPage(newPage);
-                    setOffset(offset);
-                    onTableChange &&
-                      onTableChange({ page: newPage, rowsPerPage, offset });
-                  }}
+                  onPageChange={onPageChange}
                 />
               </TableRow>
             </TableFooter>

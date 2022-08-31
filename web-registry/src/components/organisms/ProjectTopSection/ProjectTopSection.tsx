@@ -148,13 +148,6 @@ function ProjectTopSection({
                   }
                 />
               )}
-              {registry && (
-                <ProjectTopLink
-                  label="registry"
-                  name={registry.name}
-                  url={registry.organizationByPartyId?.website}
-                />
-              )}
             </Box>
           </Box>
           {/* Used to prevent layout shift */}
@@ -196,7 +189,7 @@ function ProjectTopSection({
                 />
               }
               imgSrc={getSanityImgSrc(creditClassSanity?.image)}
-              sx={{ mt: 20, mb: 8 }}
+              sx={{ mt: [8, 20], mb: [2, 8] }}
             />
           </Link>
           {isVCSProject && <AdditionalProjectMetadata metadata={metadata} />}

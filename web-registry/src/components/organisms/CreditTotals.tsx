@@ -53,11 +53,12 @@ const CreditTotals: React.FC = () => {
       let created = 0;
 
       batches.forEach(batch => {
-        tradeable += parseNumber(batch.tradableSupply);
-        retired += parseNumber(batch.retiredSupply);
-        created += parseNumber(
-          batch.tradableSupply + batch.retiredSupply + batch.cancelledAmount,
-        );
+        const batchTradable = parseNumber(batch.tradableSupply);
+        const batchRetired = parseNumber(batch.retiredSupply);
+        const batchCancelled = parseNumber(batch.cancelledAmount);
+        tradeable += batchTradable;
+        retired += batchRetired;
+        created += batchTradable + batchRetired + batchCancelled;
       });
 
       return {

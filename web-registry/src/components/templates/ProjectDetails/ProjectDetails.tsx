@@ -13,7 +13,10 @@ import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { getBatchesTotal } from 'lib/ecocredit/api';
+
 import WithLoader from 'components/atoms/WithLoader';
+import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
 
 import {
   useProjectByHandleQuery,
@@ -27,7 +30,6 @@ import { chainId } from '../../../lib/ledger';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
 import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
 import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
-import useBatches from './hooks/useBatches';
 import useGeojson from './hooks/useGeojson';
 import useImpact from './hooks/useImpact';
 import useIssuanceModal from './hooks/useIssuanceModal';
@@ -107,9 +109,9 @@ function ProjectDetails(): JSX.Element {
   const managementActions =
     offChainProjectMetadata?.['regen:landManagementActions']?.['@list'];
 
-  const { batchData, batchTotals } = useBatches({
-    projectId: onChainProjectId,
-  });
+  const { batchesWithSupply, setPaginationParams } =
+    usePaginatedBatchesByProject({ projectId: String(onChainProjectId) });
+  const { totals: batchesTotal } = getBatchesTotal(batchesWithSupply ?? []);
 
   // with project query
   const projectEvents = project?.eventsByProjectId?.nodes;
@@ -179,9 +181,10 @@ function ProjectDetails(): JSX.Element {
       <ProjectTopSection
         data={data}
         batchData={{
-          batches: batchData,
-          totals: batchTotals,
+          batches: batchesWithSupply,
+          totals: batchesTotal,
         }}
+        setPaginationParams={setPaginationParams}
         geojson={geojson}
         isGISFile={isGISFile}
       />

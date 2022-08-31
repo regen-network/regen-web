@@ -35,7 +35,7 @@ const getSellOrdersTableRow = ({
 }: Props): React.ReactNode[] => [
   <Link href={`/marketplace/sell-order/${id}`}>{id}</Link>,
   <Box sx={{ color: 'info.main' }}>{dayjs(expiration).fromNow()}</Box>,
-  <WithLoader isLoading={project?.name === undefined}>
+  <WithLoader isLoading={project?.name === undefined} variant="skeleton">
     <Link href={`/projects/${project?.id}}`}>{project?.name}</Link>
   </WithLoader>,
   <Box sx={{ fontWeight: 700, display: 'flex', alignItems: 'center' }}>
@@ -46,7 +46,7 @@ const getSellOrdersTableRow = ({
     {`${formatNumber(microToDenom(askAmount))}`}
   </Box>,
   <Box>{formatNumber(amountAvailable)}</Box>,
-  <WithLoader isLoading={project?.classIdUrl === undefined}>
+  <WithLoader isLoading={project?.classIdUrl === undefined} variant="skeleton">
     <Link href={`/credit-classes/${project?.classIdUrl}`}>
       {project?.classIdName && ReactHtmlParser(project?.classIdName)}
     </Link>
@@ -64,12 +64,12 @@ const getSellOrdersTableRow = ({
   >
     {batchDenom}
   </Link>,
-  <WithLoader isLoading={batchStartDate === undefined}>
+  <WithLoader isLoading={batchStartDate === undefined} variant="skeleton">
     <Box sx={{ color: 'info.main' }}>
       {batchStartDate ? formatDate(batchStartDate) : ''}
     </Box>
   </WithLoader>,
-  <WithLoader isLoading={batchEndDate === undefined}>
+  <WithLoader isLoading={batchEndDate === undefined} variant="skeleton">
     <Box sx={{ color: 'info.main' }}>
       {batchEndDate ? formatDate(batchEndDate) : ''}
     </Box>

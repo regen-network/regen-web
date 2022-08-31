@@ -332,7 +332,11 @@ const CreditClassDetailsSimple: React.FC<CreditDetailsProps> = ({
       </EcocreditsSection>
       <Projects />
       <div className="topo-background-alternate">
-        <CreditBatches creditClassId={onChainClass.id} titleAlign="left" />
+        <CreditBatches
+          creditClassId={onChainClass.id}
+          titleAlign="left"
+          withSection
+        />
       </div>
     </Box>
   );

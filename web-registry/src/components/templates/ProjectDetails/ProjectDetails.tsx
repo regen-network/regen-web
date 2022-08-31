@@ -13,10 +13,6 @@ import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
-import {
-  API_URI,
-  IMAGE_STORAGE_BASE_URL,
-} from 'pages/Projects/Projects.config';
 import WithLoader from 'components/atoms/WithLoader';
 
 import {
@@ -38,6 +34,7 @@ import useIssuanceModal from './hooks/useIssuanceModal';
 import useMedia from './hooks/useMedia';
 import useOtherProjects from './hooks/useOtherProjects';
 import useSeo from './hooks/useSeo';
+import { API_URI, IMAGE_STORAGE_BASE_URL } from './ProjectDetails.config';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';

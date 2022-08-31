@@ -3,6 +3,7 @@ import { Box, SxProps } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
 import { Center, Flex } from 'web-components/lib/components/box';
+import { CreditBatchIcon } from 'web-components/lib/components/icons/CreditBatchIcon';
 import { CreditClassIcon } from 'web-components/lib/components/icons/CreditClassIcon';
 import CreditsIcon from 'web-components/lib/components/icons/CreditsIcon';
 import { ProjectPageIcon } from 'web-components/lib/components/icons/ProjectPageIcon';
@@ -11,10 +12,14 @@ import Section from 'web-components/lib/components/section';
 import { IconTabProps } from 'web-components/lib/components/tabs/IconTab';
 import { IconTabs } from 'web-components/lib/components/tabs/IconTabs';
 
+import { useWallet } from 'lib/wallet';
+
 import { useQueryIfCreditClassAdmin } from 'hooks/useQueryIfCreditClassAdmin';
 import { useQueryIfCreditClassCreator } from 'hooks/useQueryIfCreditClassCreator';
 import { useQueryIfIssuer } from 'hooks/useQueryIfIssuer';
 import { useQueryIfProjectAdmin } from 'hooks/useQueryIfProjectAdmin';
+
+import MyCreditBatches from './MyCreditBatches';
 
 const MyEcocredits = React.lazy(() => import('./MyEcocredits'));
 const MyProjects = React.lazy(() => import('./MyProjects'));
@@ -42,6 +47,7 @@ const Dashboard = (): JSX.Element => {
   const isCreditClassCreator = useQueryIfCreditClassCreator();
   const isCreditClassAdmin = useQueryIfCreditClassAdmin();
   const isProjectAdmin = useQueryIfProjectAdmin();
+  const walletContext = useWallet();
   const projectTabHidden = !isIssuer || !isProjectAdmin;
   const creditClassTabHidden = !isCreditClassCreator || !isCreditClassAdmin;
 
@@ -55,11 +61,7 @@ const Dashboard = (): JSX.Element => {
       icon: (
         <CreditsIcon color={theme.palette.secondary.main} fontSize="small" />
       ),
-      content: (
-        <LazyLoad>
-          <MyEcocredits />
-        </LazyLoad>
-      ),
+      content: <LazyLoad>{<MyEcocredits />}</LazyLoad>,
     },
     {
       label: 'Projects',
@@ -84,6 +86,20 @@ const Dashboard = (): JSX.Element => {
               isCreditClassCreator={isCreditClassCreator}
               isCreditClassAdmin={isCreditClassAdmin}
             />
+          </Flex>
+        </LazyLoad>
+      ),
+    },
+    {
+      label: 'Credit Batches',
+      icon: (
+        <CreditBatchIcon sx={{ color: 'secondary.dark', opacity: '70%' }} />
+      ),
+      hidden: !isIssuer,
+      content: (
+        <LazyLoad>
+          <Flex sx={sxs.padTop}>
+            <MyCreditBatches address={walletContext?.wallet?.address} />
           </Flex>
         </LazyLoad>
       ),

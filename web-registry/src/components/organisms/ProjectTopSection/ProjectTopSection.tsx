@@ -63,7 +63,6 @@ function ProjectTopSection({
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
   const metadata = project?.metadata;
 
-  const registry = project?.partyByRegistryId;
   const videoURL = metadata?.['regen:videoURL']?.['@value'];
   const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
   const area =

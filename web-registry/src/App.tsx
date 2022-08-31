@@ -282,7 +282,10 @@ const App: React.FC = (): JSX.Element => {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
-        <CookiesBanner privacyUrl="https://www.regen.network/privacy-policy/" />
+        <CookiesBanner
+          privacyUrl="https://www.regen.network/privacy-policy/"
+          TOSUrl="https://www.regen.network/terms-service/"
+        />
         <footer>
           <AppFooter />
         </footer>

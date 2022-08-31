@@ -1,5 +1,4 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
-import { ProjectInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { PurchaseInfo } from 'web-components/lib/components/cards/ProjectCard/ProjectCard.types';
 import { formatNumber } from 'web-components/lib/utils/format';
@@ -39,18 +38,3 @@ export const getPurchaseInfo = (
     },
   };
 };
-
-export const sortProjectsBySellOrdersAvailability =
-  (sellOrders: SellOrderInfo[]) =>
-  (projectA: ProjectInfo, projectB: ProjectInfo) => {
-    const ordersForProjectA = sellOrders.filter(order =>
-      order.batchDenom.startsWith(projectA?.id),
-    );
-    const ordersForProjectB = sellOrders.filter(order =>
-      order.batchDenom.startsWith(projectB?.id),
-    );
-
-    if (ordersForProjectA && !ordersForProjectB) return 1;
-    if (!ordersForProjectA && ordersForProjectB) return -1;
-    return 0;
-  };

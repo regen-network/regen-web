@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { SxProps } from '@mui/material';
@@ -12,9 +13,8 @@ import iso3166 from 'iso-3166-2';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
 import Submit from 'web-components/lib/components/form/Submit';
 import CheckboxLabel from 'web-components/lib/components/inputs/CheckboxLabel';
-import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
-import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
+import SelectFieldFallback from 'web-components/lib/components/inputs/SelectFieldFallback';
 import TextField from 'web-components/lib/components/inputs/TextField';
 import {
   invalidEmailMessage,
@@ -23,6 +23,13 @@ import {
 } from 'web-components/lib/components/inputs/validation';
 import { Body, Title } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
+
+const LocationCountryField = lazy(
+  () => import('web-components/lib/components/inputs/LocationCountryField'),
+);
+const LocationStateField = lazy(
+  () => import('web-components/lib/components/inputs/LocationStateField'),
+);
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY || '');
 
@@ -388,7 +395,13 @@ function CreditsPurchaseForm({
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <LocationCountryField />
+                    <Suspense
+                      fallback={
+                        <SelectFieldFallback label="Country" name="country" />
+                      }
+                    >
+                      <LocationCountryField />
+                    </Suspense>
                   </Grid>
                   <Grid
                     item
@@ -396,7 +409,19 @@ function CreditsPurchaseForm({
                     sm={6}
                     className={classes.stateCountryTextField}
                   >
-                    <LocationStateField name="state" country={values.country} />
+                    <Suspense
+                      fallback={
+                        <SelectFieldFallback
+                          label="State / Region"
+                          name="state"
+                        />
+                      }
+                    >
+                      <LocationStateField
+                        name="state"
+                        country={values.country}
+                      />
+                    </Suspense>
                   </Grid>
                 </Grid>
 

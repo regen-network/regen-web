@@ -165,10 +165,17 @@ export const getEcocreditTxs = async (): Promise<TxResponse[]> => {
   // we must send separate requests for each message action type:
   return Promise.all(
     Object.values(ECOCREDIT_MESSAGE_TYPES).map(async msgType => {
-      const response = await getTxsByEvent({
-        events: [`${messageActionEquals}'${msgType.message}'`],
-      });
-      allTxs = [...allTxs, ...response.txResponses];
+      try {
+        const response = await getTxsByEvent({
+          events: [`${messageActionEquals}'${msgType.message}'`],
+        });
+        if (response?.txResponses) {
+          allTxs = [...allTxs, ...response.txResponses];
+        }
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.error(err);
+      }
     }),
   ).then(() => {
     return allTxs;

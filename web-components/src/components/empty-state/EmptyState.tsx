@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import { Box, SxProps } from '@mui/material';
 
 import { Theme } from '../../theme/muiTheme';
@@ -7,11 +8,17 @@ export interface Props {
   message: string;
   icon?: JSX.Element;
   sx?: SxProps<Theme>;
+  children?: ReactElement;
 }
 
 /* Placeholder component that hold best practices.
 To be used as a starter to create new components  */
-const EmptyState = ({ message, icon, sx = [] }: Props): JSX.Element => (
+const EmptyState = ({
+  message,
+  icon,
+  children,
+  sx = [],
+}: Props): JSX.Element => (
   <Box
     sx={[
       {
@@ -21,12 +28,13 @@ const EmptyState = ({ message, icon, sx = [] }: Props): JSX.Element => (
         justifyContent: 'center',
         border: '1px solid',
         borderColor: 'grey.100',
-        height: 245,
         width: '100%',
         borderRadius: '8px',
         backgroundColor: 'primary.main',
         textAlign: 'center',
-        p: 3,
+        pt: [8.5, 9],
+        px: 8.5,
+        pb: [15, 10.5],
       },
       ...(Array.isArray(sx) ? sx : [sx]),
     ]}
@@ -35,6 +43,7 @@ const EmptyState = ({ message, icon, sx = [] }: Props): JSX.Element => (
     <Title variant="h4" mobileVariant="h5" as="p">
       {message}
     </Title>
+    {children && <Box sx={{ mt: 8 }}>{children}</Box>}
   </Box>
 );
 

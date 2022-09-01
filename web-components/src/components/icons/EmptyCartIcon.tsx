@@ -2,12 +2,15 @@ import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 
 interface IconProps extends SvgIconProps {}
 
-export default function EmptyCartIcon({ ...props }: IconProps): JSX.Element {
+export default function EmptyCartIcon({
+  sx = [],
+  ...props
+}: IconProps): JSX.Element {
   return (
     <SvgIcon
-      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 98 84"
+      sx={[{ fill: 'none' }, ...(Array.isArray(sx) ? sx : [sx])]}
       {...props}
     >
       <path

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Box, SelectChangeEvent } from '@mui/material';
 import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useQuery } from '@tanstack/react-query';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Flex } from 'web-components/lib/components/box';
 import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
@@ -10,6 +11,11 @@ import { Loading } from 'web-components/lib/components/loading';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow';
+import {
+  fetchSimplePrice,
+  GECKO_REGEN_ID,
+  GECKO_USD_CURRENCY,
+} from 'lib/coingecko';
 
 import useEcocreditQuery from '../../hooks/useEcocreditQuery';
 import { useQuerySellOrders } from '../../hooks/useQuerySellOrders';
@@ -31,6 +37,9 @@ export const Projects: React.FC = () => {
     query: 'projects',
     params: {},
   });
+  const regenPriceQuery = useQuery(['regenPrice'], () =>
+    fetchSimplePrice({ ids: GECKO_REGEN_ID, vsCurrencies: GECKO_USD_CURRENCY }),
+  );
   const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
   const projects = data?.projects;
@@ -38,6 +47,7 @@ export const Projects: React.FC = () => {
     useProjectsSellOrders({
       projects,
       sellOrders,
+      regenPrice: regenPriceQuery?.data?.regen?.usd,
     });
 
   const handleSort = (event: SelectChangeEvent<unknown>): void => {

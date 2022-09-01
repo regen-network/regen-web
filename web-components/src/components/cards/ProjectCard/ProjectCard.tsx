@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, SxProps, Theme, useTheme } from '@mui/material';
 import clsx from 'clsx';
 
@@ -6,11 +6,11 @@ import { formatStandardInfo } from '../../../utils/format';
 import OutlinedButton from '../../buttons/OutlinedButton';
 import BreadcrumbIcon from '../../icons/BreadcrumbIcon';
 import CurrentCreditsIcon from '../../icons/CurrentCreditsIcon';
-import { RegenTokenIcon } from '../../icons/RegenTokenIcon';
 import ProjectPlaceInfo from '../../place/ProjectPlaceInfo';
 import { Body, Subtitle } from '../../typography';
 import UserInfo, { User } from '../../user/UserInfo';
 import MediaCard, { MediaCardProps } from '../MediaCard';
+import { ERROR_CARD_PRICE } from './ProjectCard.constants';
 import { PurchaseDetails } from './ProjectCard.PurchaseDetails';
 import { useProjectCardStyles } from './ProjectCard.styles';
 import { PurchaseInfo } from './ProjectCard.types';
@@ -65,6 +65,7 @@ export function ProjectCard({
     purchaseInfo?.vintageMetadata?.[
       'http://regen.network/additionalCertifications'
     ]?.['@list'];
+  const pricePerTon = purchaseInfo?.sellInfo?.pricePerTon;
 
   return (
     <MediaCard
@@ -193,10 +194,12 @@ export function ProjectCard({
                           sx={{
                             fontWeight: 700,
                             ml: purchaseInfo?.sellInfo.denomLogo ? 2 : 0,
-                            color: 'primary.contrastText',
+                            color: pricePerTon
+                              ? 'primary.contrastText'
+                              : 'error.dark',
                           }}
                         >
-                          {purchaseInfo.sellInfo.pricePerTon}
+                          {pricePerTon ? pricePerTon : ERROR_CARD_PRICE}
                         </Body>
                       </Box>
                     </Box>

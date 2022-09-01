@@ -45,12 +45,13 @@ export const getPurchaseInfo = ({
     .sort((a, b) => a - b);
   const priceMin = prices?.[0];
   const priceMax = prices?.[prices.length - 1];
-  const priceMinDisplayed = priceMin ? formatNumber(priceMin, 2) : '';
-  const priceMaxDisplayed = priceMax ? formatNumber(priceMax, 2) : '';
+  const priceMinDisplayed = priceMin > 0 ? formatNumber(priceMin, 2) : '';
+  const priceMaxDisplayed = priceMax > 0 ? formatNumber(priceMax, 2) : '';
+  const hasPrice = priceMinDisplayed !== '' && priceMaxDisplayed !== '';
 
   return {
     sellInfo: {
-      pricePerTon: `$${priceMinDisplayed}-${priceMaxDisplayed}`,
+      pricePerTon: hasPrice ? `$${priceMinDisplayed}-${priceMaxDisplayed}` : '',
       creditsAvailable,
     },
   };

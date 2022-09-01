@@ -11,6 +11,7 @@ export type FetchSimplePriceResponse = {
 
 export const GECKO_REGEN_ID = 'regen';
 export const GECKO_USD_CURRENCY = 'USD';
+const COINGECO_API_URL = 'https://api.coingecko.com/api/v3/';
 
 export const fetchSimplePrice = async ({
   ids,
@@ -18,7 +19,7 @@ export const fetchSimplePrice = async ({
 }: FetchSimplePriceParams): Promise<FetchSimplePriceResponse> => {
   const result: AxiosResponse<FetchSimplePriceResponse> = await axios
     .get<FetchSimplePriceResponse>(
-      `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`,
+      `${COINGECO_API_URL}/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`,
     )
     .then(response => {
       return response;

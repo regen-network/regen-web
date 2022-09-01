@@ -10,7 +10,10 @@ import {
   EcocreditQueryResponse,
   // queries
   queryBalance,
+  queryBalances,
+  queryBatches,
   queryBatchesByClass,
+  queryBatchesByIssuer,
   queryBatchesByProject,
   queryBatchInfo,
   queryClasses,
@@ -53,18 +56,33 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     [],
   );
 
+  const balances = useCallback(
+    (client, params) => queryBalances({ client, request: params }),
+    [],
+  );
+
   const batchInfo = useCallback(
     (client, params) => queryBatchInfo({ client, request: params }),
     [],
   );
 
   const batches = useCallback(
+    (client, params) => queryBatches({ client, request: params }),
+    [],
+  );
+
+  const batchesByClass = useCallback(
     (client, params) => queryBatchesByClass({ client, request: params }),
     [],
   );
 
   const batchesByProject = useCallback(
     (client, params) => queryBatchesByProject({ client, request: params }),
+    [],
+  );
+
+  const batchesByIssuer = useCallback(
+    (client, params) => queryBatchesByIssuer({ client, request: params }),
     [],
   );
 
@@ -110,14 +128,23 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
       case 'balance':
         response = balance(client, params);
         break;
+      case 'balances':
+        response = balances(client, params);
+        break;
       case 'batchInfo':
         response = batchInfo(client, params);
         break;
       case 'batches':
         response = batches(client, params);
         break;
+      case 'batchesByClass':
+        response = batchesByClass(client, params);
+        break;
       case 'batchesByProject':
         response = batchesByProject(client, params);
+        break;
+      case 'batchesByIssuer':
+        response = batchesByIssuer(client, params);
         break;
       case 'classInfo':
         response = classInfo(client, params);
@@ -161,8 +188,10 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     loading,
     error,
     balance,
+    balances,
     batchInfo,
     batches,
+    batchesByClass,
     classInfo,
     classes,
     creditTypes,
@@ -170,6 +199,7 @@ export default function useEcocreditQuery<T extends EcocreditQueryResponse>({
     projectsByAdmin,
     project,
     batchesByProject,
+    batchesByIssuer,
   ]);
 
   return { data, loading, error };

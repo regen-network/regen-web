@@ -3,7 +3,10 @@ import EmptyCartIcon from 'web-components/lib/components/icons/EmptyCartIcon';
 import {
   ActionsTable,
   RenderActionButtonsFunc,
+  TablePaginationParams,
 } from 'web-components/lib/components/table/ActionsTable';
+
+import { UseStateSetter } from 'types/react/use-state';
 
 import { NormalizedSellOrder } from '../../../pages/Marketplace/Storefront/Storefront.types';
 import { SELL_ORDERS_ROW } from './SellOrdersTable.config';
@@ -12,11 +15,13 @@ import getSellOrdersTableRow from './SellOrdersTable.Row';
 type Props = {
   sellOrders: NormalizedSellOrder[];
   renderActionButtonsFunc?: RenderActionButtonsFunc;
+  onTableChange?: UseStateSetter<TablePaginationParams>;
 };
 
 const SellOrdersTable = ({
   sellOrders,
   renderActionButtonsFunc = i => void 0,
+  onTableChange,
 }: Props): JSX.Element => {
   const hasSellOrders = sellOrders.length > 0;
   return (
@@ -29,6 +34,7 @@ const SellOrdersTable = ({
             getSellOrdersTableRow({ sellOrder }),
           )}
           renderActionButtons={renderActionButtonsFunc}
+          onTableChange={onTableChange}
         />
       )}
       {!hasSellOrders && (

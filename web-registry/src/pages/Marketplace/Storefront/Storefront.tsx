@@ -1,6 +1,9 @@
 import { useMemo, useState } from 'react';
 import { Box, useTheme } from '@mui/material';
-import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import {
+  BatchInfo,
+  QueryProjectsResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
@@ -13,6 +16,10 @@ import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 import Section from 'web-components/lib/components/section';
+import {
+  DEFAULT_ROWS_PER_PAGE,
+  TablePaginationParams,
+} from 'web-components/lib/components/table/ActionsTable';
 import { Title } from 'web-components/lib/components/typography';
 
 import { useAllProjectsQuery } from 'generated/graphql';
@@ -40,16 +47,38 @@ import {
   normalizeSellOrders,
 } from './Storefront.normalizer';
 import { SellOrderActions } from './Storefront.types';
-import { getCancelCardItems, sortByExpirationDate } from './Storefront.utils';
+import {
+  getCancelCardItems,
+  sortByExpirationDate,
+  updateBatchInfosMap,
+} from './Storefront.utils';
 
 export const Storefront = (): JSX.Element => {
+  const [paginationParams, setPaginationParams] =
+    useState<TablePaginationParams>({
+      page: 0,
+      rowsPerPage: DEFAULT_ROWS_PER_PAGE,
+      offset: 0,
+    });
+  const { offset, rowsPerPage } = paginationParams;
   const { sellOrdersResponse, refetchSellOrders } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
+
   const batchDenoms = useMemo(
-    () => sellOrders?.map(sellOrder => sellOrder.batchDenom),
-    [sellOrders],
+    () =>
+      sellOrders
+        ?.slice(offset, offset + rowsPerPage)
+        .map(sellOrder => sellOrder.batchDenom),
+    [sellOrders, offset, rowsPerPage],
   );
-  const batchInfos = useQueryListBatchInfo(batchDenoms);
+  const [batchInfosMap] = useState(new Map<string, BatchInfo>());
+  const newBatchDenoms = useMemo(
+    () => batchDenoms?.filter(batchDenom => !batchInfosMap.has(batchDenom)),
+    [batchDenoms, batchInfosMap],
+  );
+  const batchInfoResponses = useQueryListBatchInfo(newBatchDenoms);
+  const batchInfos = updateBatchInfosMap({ batchInfosMap, batchInfoResponses });
+
   // offchain stored Projects
   const { data: offChainProjectData } = useAllProjectsQuery();
 
@@ -192,6 +221,7 @@ export const Storefront = (): JSX.Element => {
           >
             <SellOrdersTable
               sellOrders={normalizedSellOrders}
+              onTableChange={setPaginationParams}
               renderActionButtonsFunc={(i: number) => {
                 const isOwnSellOrder =
                   normalizedSellOrders[i]?.seller === accountAddress;

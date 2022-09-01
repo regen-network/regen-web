@@ -1,3 +1,8 @@
+import {
+  BatchInfo,
+  QueryBatchResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+
 import { Item } from 'web-components/lib/components/modal/ConfirmModal';
 
 import { NormalizedSellOrder } from './Storefront.types';
@@ -28,3 +33,21 @@ export const getCancelCardItems = ({
     },
   },
 ];
+
+type UpdateBatchInfosMapParams = {
+  batchInfosMap: Map<string, BatchInfo>;
+  batchInfoResponses?: QueryBatchResponse[] | undefined;
+};
+
+export const updateBatchInfosMap = ({
+  batchInfosMap,
+  batchInfoResponses,
+}: UpdateBatchInfosMapParams): BatchInfo[] => {
+  batchInfoResponses?.forEach(({ batch }) => {
+    if (batch) {
+      batchInfosMap.set(batch?.denom, batch);
+    }
+  });
+
+  return Array.from(batchInfosMap?.values());
+};

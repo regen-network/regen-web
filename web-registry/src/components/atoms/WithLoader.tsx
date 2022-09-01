@@ -1,17 +1,29 @@
 import React from 'react';
-import { Box, CircularProgress, SxProps, Theme } from '@mui/material';
+import { Box, CircularProgress, Skeleton, SxProps, Theme } from '@mui/material';
+
+type Variant = 'circular' | 'skeleton';
 
 type Props = {
   isLoading: boolean;
   children: JSX.Element;
+  variant?: Variant;
   sx?: SxProps<Theme>;
 };
 
-const WithLoader = ({ isLoading, children, sx }: Props): JSX.Element => {
+const WithLoader = ({
+  isLoading,
+  children,
+  variant = 'circular',
+  sx,
+}: Props): JSX.Element => {
+  const isCircular = variant === 'circular';
+  const isSkeleton = variant === 'skeleton';
+
   if (isLoading) {
     return (
       <Box sx={sx}>
-        <CircularProgress color="secondary" />
+        {isCircular && <CircularProgress color="secondary" />}
+        {isSkeleton && <Skeleton />}
       </Box>
     );
   }

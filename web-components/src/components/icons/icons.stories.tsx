@@ -14,6 +14,8 @@ import CheckIcon from './CheckIcon';
 import CloseIcon from './CloseIcon';
 import CoBenefitsIcon from './CoBenefitsIcon';
 import CountingIcon from './CountingIcon';
+import { CreditBatchIcon } from './CreditBatchIcon';
+import { CreditBatchLightIcon } from './CreditBatchLightIcon';
 import { CreditClassIcon } from './CreditClassIcon';
 import CreditsIcon from './CreditsIcon';
 import CurrentCreditsIcon from './CurrentCreditsIcon';
@@ -21,6 +23,7 @@ import DocumentIcon from './DocumentIcon';
 import DropdownIcon from './DropdownIcon';
 import EditIcon from './EditIcon';
 import EmailIcon from './EmailIcon';
+import EmptyCartIcon from './EmptyCartIcon';
 import EyeIcon from './EyeIcon';
 import FarmerIcon from './FarmerIcon';
 import { HorizontalDotsIcon } from './HorizontalDotsIcon';
@@ -122,6 +125,14 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<CoBenefitsIcon />} label="CoBenefitsIcon" />
     <LabeledIcon icon={<CountingIcon />} label="CountingIcon" />
     <LabeledIcon
+      icon={<CreditBatchIcon sx={{ color: '#4FB573' }} />}
+      label="CreditBatchIcon"
+    />
+    <LabeledIcon
+      icon={<CreditBatchLightIcon sx={{ color: 'info.main' }} />}
+      label="CreditBatchLightIcon"
+    />
+    <LabeledIcon
       icon={<CreditsIcon color="green" sx={{ height: 25 }} />}
       label="CreditsIcon"
     />
@@ -138,6 +149,10 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<DropdownIcon />} label="DropdownIcon" />
     <LabeledIcon icon={<EditIcon />} label="EditIcon" />
     <LabeledIcon icon={<EmailIcon color="grey" />} label="EmailIcon" />
+    <LabeledIcon
+      icon={<EmptyCartIcon sx={{ color: 'info.main' }} />}
+      label="EmptyCardIcon"
+    />
     <LabeledIcon icon={<EyeIcon />} label="EyeIcon" />
     <LabeledIcon icon={<FacebookIcon color="blue" />} label="FacebookIcon" />
     <LabeledIcon icon={<FarmerIcon />} label="FarmerIcon" />

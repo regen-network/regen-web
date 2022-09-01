@@ -1,7 +1,7 @@
 import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 import {
+  BatchInfo,
   ProjectInfo,
-  QueryBatchResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { AllProjectsQuery } from '../../../generated/graphql';
@@ -55,7 +55,7 @@ export const normalizeProjectsInfosByHandleMap = ({
 
 type NormalizedSellOrderProps = {
   sellOrders?: SellOrderInfo[];
-  batchInfos?: QueryBatchResponse[];
+  batchInfos: BatchInfo[];
   projectsInfosByHandleMap: Map<
     string,
     { name: string; classIdName: string; classIdUrl: string }
@@ -68,20 +68,19 @@ export const normalizeSellOrders = ({
   projectsInfosByHandleMap,
 }: NormalizedSellOrderProps): NormalizedSellOrder[] =>
   sellOrders.map(
-    (
-      {
-        askAmount,
-        askDenom,
-        batchDenom,
-        id,
-        quantity,
-        seller,
-        expiration,
-        disableAutoRetire,
-      },
-      index,
-    ) => {
-      const currentBatch = batchInfos?.[index]?.batch;
+    ({
+      askAmount,
+      askDenom,
+      batchDenom,
+      id,
+      quantity,
+      seller,
+      expiration,
+      disableAutoRetire,
+    }) => {
+      const currentBatch = batchInfos?.find(
+        batch => batch?.denom === batchDenom,
+      );
       const projectId = currentBatch?.projectId ?? '';
       const isLoading =
         currentBatch === undefined || projectsInfosByHandleMap.size === 0;

@@ -2,6 +2,8 @@ import MapboxClient from '@mapbox/mapbox-sdk';
 import mbxGeocoder from '@mapbox/mapbox-sdk/services/geocoding';
 import iso3166 from 'iso-3166-2';
 
+import { Option } from '../components/inputs/SelectTextField';
+
 const POSTAL_CODE_MAX_LENGTH = 64;
 
 /**
@@ -79,3 +81,66 @@ export const getJurisdictionIsoCode = ({
     return stateProvince;
   return `${stateProvince} ${_postalCode}`;
 };
+
+/**
+ * Utility function to obtain the list of country options according
+ * to the iso-3166-2 package, for the selector type input.
+ * By default it is initialized with the selection in US. It also places
+ * the default country as the first option in the list, after the placeholder.
+ */
+
+const DEFAULT_COUNTRY = 'US';
+
+const COUNTRY_OPTION_PLACEHOLDER: Option = {
+  value: '',
+  label: 'Please choose a country',
+};
+
+export function getCountryOptions(): Option[] {
+  const countries = Object.keys(iso3166.data)
+    .map(key => ({
+      value: key,
+      label: iso3166.data[key].name,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+  const defaultCountry = countries.find(
+    country => country.value === DEFAULT_COUNTRY,
+  );
+  const otherCountries = countries.filter(
+    country => country.value !== DEFAULT_COUNTRY,
+  );
+
+  let options = [COUNTRY_OPTION_PLACEHOLDER];
+  if (defaultCountry) options.push(defaultCountry);
+  options.push(...otherCountries);
+
+  return options;
+}
+
+/**
+ * Utility function to obtain the list of options of the subdivisions
+ * (aka. state/region) corresponding to a country, according to the
+ * iso-3166-2 package, for the selector type input.
+ */
+
+const COUNTRY_SUBDIVISION_OPTION_PLACEHOLDER: Option = {
+  value: '',
+  label: 'Please choose a state',
+};
+
+export function getCountrySubdivisionOptions(country: string): Option[] {
+  const countrySubdivisions = iso3166.country(country);
+
+  const options: Option[] = Object.keys(countrySubdivisions?.sub || {})
+    .map(isoCode => ({
+      value: isoCode,
+      label: `${countrySubdivisions?.sub[isoCode].name} (${countrySubdivisions?.sub[isoCode].type})`,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
+
+  if (options.length > 0)
+    options.unshift(COUNTRY_SUBDIVISION_OPTION_PLACEHOLDER);
+
+  return options;
+}

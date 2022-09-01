@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { Grid, SxProps } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Field, Form, Formik, FormikErrors, useFormikContext } from 'formik';
@@ -7,13 +7,17 @@ import { Theme } from '../../theme/muiTheme';
 import { getJurisdictionIsoCode } from '../../utils/locationStandard';
 import AmountField from '../inputs/AmountField';
 import ControlledTextField from '../inputs/ControlledTextField';
-import LocationCountryField from '../inputs/LocationCountryField';
-import LocationStateField from '../inputs/LocationStateField';
+import SelectFieldFallback from '../inputs/SelectFieldFallback';
 import TextField from '../inputs/TextField';
 import { requiredMessage, validateAmount } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
 import { Body, Title } from '../typography';
 import Submit from './Submit';
+
+const LocationCountryField = lazy(
+  () => import('../inputs/LocationCountryField'),
+);
+const LocationStateField = lazy(() => import('../inputs/LocationStateField'));
 
 /**
  * This form is closely related to the form for send/transfer ecocredits (<CreditSendForm />).
@@ -174,15 +178,34 @@ export const BottomCreditRetireFields: React.FC<BottomCreditRetireFieldsProps> =
         </Body>
         <Grid container className={styles.stateCountryGrid}>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <LocationCountryField name={`${arrayPrefix}country`} />
+            <Suspense
+              fallback={
+                <SelectFieldFallback
+                  label="Country"
+                  name={`${arrayPrefix}country`}
+                />
+              }
+            >
+              <LocationCountryField name={`${arrayPrefix}country`} />
+            </Suspense>
           </Grid>
           <Grid item xs={12} sm={6} className={styles.stateCountryTextField}>
-            <LocationStateField
-              country={country}
-              optional={!postalCode}
-              name={`${arrayPrefix}stateProvince`}
-              initialSelection={stateProvince}
-            />
+            <Suspense
+              fallback={
+                <SelectFieldFallback
+                  label="State / Region"
+                  name={`${arrayPrefix}stateProvince`}
+                  optional={!postalCode}
+                />
+              }
+            >
+              <LocationStateField
+                country={country}
+                optional={!postalCode}
+                name={`${arrayPrefix}stateProvince`}
+                initialSelection={stateProvince}
+              />
+            </Suspense>
           </Grid>
         </Grid>
         <Field

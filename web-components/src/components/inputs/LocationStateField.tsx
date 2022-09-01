@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Field, useFormikContext } from 'formik';
-import iso3166 from 'iso-3166-2';
 
+import { getCountrySubdivisionOptions } from '../../utils/locationStandard';
 import SelectTextField, { Option } from './SelectTextField';
 
 interface FieldProps {
@@ -23,39 +23,12 @@ const LocationStateField: React.FC<FieldProps> = ({
   const { setFieldValue } = useFormikContext();
 
   useEffect(() => {
-    if (country === '') {
-      // reset options when country no longer has a selected element
-      setStateOptions([]);
-      return;
-    }
+    const options = getCountrySubdivisionOptions(country);
+    const isValidSelection: boolean =
+      !!initialSelection &&
+      options.some((opt: Option) => opt.value === initialSelection);
 
-    const countrySubdivisions = iso3166.country(country);
-
-    const options: Option[] = Object.keys(countrySubdivisions?.sub || {})
-      .map(isoCode => ({
-        value: isoCode,
-        label: `${countrySubdivisions?.sub[isoCode].name} (${countrySubdivisions?.sub[isoCode].type})`,
-      }))
-      .sort((a, b) => a.label.localeCompare(b.label));
-
-    if (!options || !Array.isArray(options)) return;
-
-    // first, check initial selection (selected/persisted) or default empty value
-    if (
-      initialSelection &&
-      options.some(opt => opt.value === initialSelection)
-    ) {
-      setFieldValue(name, initialSelection);
-    } else {
-      setFieldValue(name, '');
-    }
-
-    options.unshift({
-      value: '',
-      label: 'Please choose a state',
-    });
-
-    // finaly, set options
+    setFieldValue(name, isValidSelection ? initialSelection : '');
     setStateOptions(options);
   }, [country, setFieldValue, name, initialSelection]);
 

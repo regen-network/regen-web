@@ -1,5 +1,5 @@
 import { Link, SxProps } from '@mui/material';
-import { truncate } from 'lodash';
+import truncate from 'lodash/truncate';
 
 import { FlexCol } from 'web-components/lib/components/box';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { startCase } from 'lodash';
+import startCase from 'lodash/startCase';
 
 import type { Option } from 'web-components/lib/components/inputs/SelectTextField';
 

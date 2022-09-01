@@ -41,7 +41,7 @@ import {
   QuerySupplyResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import axios from 'axios';
-import { uniq } from 'lodash';
+import uniq from 'lodash/uniq';
 
 import { TablePaginationParams } from 'web-components/lib/components/table/ActionsTable';
 

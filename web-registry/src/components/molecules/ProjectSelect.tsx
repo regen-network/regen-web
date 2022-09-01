@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Field, useFormikContext } from 'formik';
-import { startCase } from 'lodash';
+import startCase from 'lodash/startCase';
 
 import SelectTextField, {
   Option,

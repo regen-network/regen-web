@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
 import { ClassInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
-import { startCase } from 'lodash';
+import startCase from 'lodash/startCase';
 
 import SmallArrowIcon from 'web-components/lib/components/icons/SmallArrowIcon';
 import ReadMore from 'web-components/lib/components/read-more';

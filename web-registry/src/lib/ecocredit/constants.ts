@@ -20,14 +20,24 @@ import {
   MsgUpdateClassIssuers,
   MsgUpdateClassMetadata,
 } from '@regen-network/api/lib/generated/regen/ecocredit/v1/tx';
+import {
+  MsgCancel as MsgCancelAlpha,
+  MsgCreateBatch as MsgCreateBatchAlpha,
+  MsgCreateClass as MsgCreateClassAlpha,
+  MsgRetire as MsgRetireAlpha,
+  MsgSend as MsgSendAlpha,
+  MsgUpdateClassAdmin as MsgUpdateClassAdminAlpha,
+  MsgUpdateClassIssuers as MsgUpdateClassIssuersAlpha,
+  MsgUpdateClassMetadata as MsgUpdateClassMetadataAlpha,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
 
 export const messageActionEquals = 'message.action=';
 
 /* An allowlist of event and/or message types we query for in Activity table */
 export const ECOCREDIT_MESSAGE_TYPES = {
-  SEND: {
-    message: `/${MsgSend.$type}`,
-    readable: 'send',
+  CANCEL: {
+    message: `/${MsgCancel.$type}`,
+    readable: 'cancel',
   },
   CREATE_BATCH: {
     message: `/${MsgCreateBatch.$type}`,
@@ -41,9 +51,9 @@ export const ECOCREDIT_MESSAGE_TYPES = {
     message: `/${MsgRetire.$type}`,
     readable: 'retire',
   },
-  CANCEL: {
-    message: `/${MsgCancel.$type}`,
-    readable: 'cancel',
+  SEND: {
+    message: `/${MsgSend.$type}`,
+    readable: 'send',
   },
   UPDATE_CLASS_ADMIN: {
     message: `/${MsgUpdateClassAdmin.$type}`,
@@ -55,6 +65,38 @@ export const ECOCREDIT_MESSAGE_TYPES = {
   },
   UPDATE_CLASS_META: {
     message: `/${MsgUpdateClassMetadata.$type}`,
+    readable: 'update class metadata',
+  },
+  CANCEL_ALPHA: {
+    message: `/${MsgCancelAlpha.$type}`,
+    readable: 'cancel',
+  },
+  CREATE_BATCH_ALPHA: {
+    message: `/${MsgCreateBatchAlpha.$type}`,
+    readable: 'create batch',
+  },
+  CREATE_CLASS_ALPHA: {
+    message: `/${MsgCreateClassAlpha.$type}`,
+    readable: 'create class',
+  },
+  RETIRE_ALPHA: {
+    message: `/${MsgRetireAlpha.$type}`,
+    readable: 'retire',
+  },
+  SEND_ALPHA: {
+    message: `/${MsgSendAlpha.$type}`,
+    readable: 'send',
+  },
+  UPDATE_CLASS_ADMIN_ALPHA: {
+    message: `/${MsgUpdateClassAdminAlpha.$type}`,
+    readable: 'update class admin',
+  },
+  UPDATE_CLASS_ISSUERS_ALPHA: {
+    message: `/${MsgUpdateClassIssuersAlpha.$type}`,
+    readable: 'update class issuers',
+  },
+  UPDATE_CLASS_META_ALPHA: {
+    message: `/${MsgUpdateClassMetadataAlpha.$type}`,
     readable: 'update class metadata',
   },
   CREATE_BASKET: {

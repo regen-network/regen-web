@@ -10,9 +10,7 @@ export default function useMoreProjects(
   projectId: string,
 ): ProjectWithOrderData[] {
   // get normalized projects with sell order data
-  const { projectsWithOrderData } = useProjectsWithOrders({
-    limit: PROJECTS_LIMIT,
-  });
+  const { projectsWithOrderData } = useProjectsWithOrders({});
 
   // discard the current project
   const otherProjects = useMemo(() => {

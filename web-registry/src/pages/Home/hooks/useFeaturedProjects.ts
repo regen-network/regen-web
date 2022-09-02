@@ -8,8 +8,10 @@ export function useFeaturedProjects(): {
   featuredProjects: ProjectWithOrderData[];
   loading: boolean;
 } {
+  // get normalized projects with sell order data
   const { projectsWithOrderData, loading } = useProjectsWithOrders({
     limit: FEATURE_PROJECTS_COUNT,
+    metadata: true, // to discard projects without metadata prop
   });
 
   const sortedProjects = useSortProjects({

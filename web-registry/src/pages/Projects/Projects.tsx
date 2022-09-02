@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { Box, SelectChangeEvent } from '@mui/material';
-import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { Flex } from 'web-components/lib/components/box';
 import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
@@ -19,12 +18,9 @@ import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySell
 import { BuyCreditsModal } from 'components/organisms';
 
 import { Link } from '../../components/atoms';
-import useEcocreditQuery from '../../hooks/useEcocreditQuery';
 import useMsgClient from '../../hooks/useMsgClient';
-import { useQuerySellOrders } from '../../hooks/useQuerySellOrders';
 import { getHashUrl } from '../../lib/block-explorer';
-import { useProjectsSellOrders } from './hooks/useProjectsSellOrders';
-import { useSortProjects } from './hooks/useSortProjects';
+import { useProjects } from './hooks/useProjects';
 import {
   API_URI,
   IMAGE_STORAGE_BASE_URL,
@@ -44,27 +40,12 @@ export const Projects: React.FC = () => {
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
   const [selectedProject, setSelectedProject] =
     useState<ProjectWithOrderData | null>(null);
-  const { data, loading } = useEcocreditQuery<QueryProjectsResponse>({
-    query: 'projects',
-    params: {},
-  });
-  const { sellOrdersResponse } = useQuerySellOrders();
-  const sellOrders = sellOrdersResponse?.sellOrders;
-  const projects = data?.projects;
-  const { projectsWithOrderData, loading: loadingOrders } =
-    useProjectsSellOrders({
-      projects,
-      sellOrders,
-    });
+
+  const { projects, loading } = useProjects(sort);
 
   const handleSort = (event: SelectChangeEvent<unknown>): void => {
     setSort(event.target.value as string);
   };
-
-  const sortedProjects = useSortProjects({
-    projects: projectsWithOrderData,
-    sort,
-  });
 
   const closeBuyModal = (): void => setIsBuyModalOpen(false);
 
@@ -126,7 +107,7 @@ export const Projects: React.FC = () => {
     buttonTitle: VIEW_ECOCREDITS,
   });
 
-  if (loading || loadingOrders) return <Loading />;
+  if (loading) return <Loading />;
   return (
     <Flex
       sx={{
@@ -136,15 +117,17 @@ export const Projects: React.FC = () => {
         px: [6, 8.75],
         pt: 8.75,
         pb: 25,
+        justifyContent: 'center',
       }}
     >
       <Box
         sx={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 338px))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
           gridGap: '1.125rem',
           flex: 1,
           justifyContent: 'center',
+          maxWidth: '1700px',
         }}
       >
         <Flex flex={1} sx={{ gridColumn: '1 / -1' }}>
@@ -156,7 +139,7 @@ export const Projects: React.FC = () => {
           >
             <Flex>
               <Subtitle size="lg">Projects</Subtitle>
-              <Body size="lg"> ({projectsWithOrderData.length})</Body>
+              <Body size="lg"> ({projects.length})</Body>
             </Flex>
             <Flex alignItems="center" sx={{ width: ['60%', 'auto'] }}>
               <Box sx={{ width: [0, 63], visibility: ['hidden', 'visible'] }}>
@@ -170,7 +153,7 @@ export const Projects: React.FC = () => {
             </Flex>
           </Flex>
         </Flex>
-        {sortedProjects?.map(project => (
+        {projects?.map(project => (
           <Box key={project?.id}>
             <ProjectCard
               name={project?.name}
@@ -184,7 +167,7 @@ export const Projects: React.FC = () => {
               imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
               apiServerUrl={API_URI}
               truncateTitle={true}
-              sx={{ width: 338, height: 479 }}
+              sx={{ width: 400, height: 479 }}
             />
           </Box>
         ))}

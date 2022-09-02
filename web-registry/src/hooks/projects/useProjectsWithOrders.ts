@@ -10,6 +10,7 @@ import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
 interface ProjectsWithOrdersProps {
   limit?: number;
+  metadata?: boolean; // to discard projects without metadata prop
 }
 
 /**
@@ -17,23 +18,32 @@ interface ProjectsWithOrdersProps {
  */
 export function useProjectsWithOrders({
   limit,
+  metadata = false,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
-  const { data: ecocreditData } = useEcocreditQuery<QueryProjectsResponse>({
-    query: 'projects',
-    params: {},
-  });
+  const { data, loading: loadingProjects } =
+    useEcocreditQuery<QueryProjectsResponse>({
+      query: 'projects',
+      params: {},
+    });
+  const projects = data?.projects;
+
   const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
 
-  // discard projects without metadata
-  const projects = useMemo(
-    () => ecocreditData?.projects?.filter(project => project.metadata),
-    [ecocreditData?.projects],
+  const projectsWithMetadata = useMemo(
+    () => projects?.filter(project => project.metadata),
+    [projects],
   );
 
-  return useProjectsSellOrders({
-    projects,
-    sellOrders,
-    limit,
-  });
+  const { projectsWithOrderData, loading: loadingWithOrders } =
+    useProjectsSellOrders({
+      projects: metadata ? projectsWithMetadata : projects,
+      sellOrders,
+      limit,
+    });
+
+  return {
+    projectsWithOrderData,
+    loading: loadingProjects || loadingWithOrders,
+  };
 }

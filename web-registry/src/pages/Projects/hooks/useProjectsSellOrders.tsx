@@ -15,14 +15,16 @@ type Props = {
   limit?: number;
 };
 
+export interface ProjectsSellOrders {
+  projectsWithOrderData: ProjectWithOrderData[];
+  loading: boolean;
+}
+
 export const useProjectsSellOrders = ({
   projects,
   sellOrders,
   limit,
-}: Props): {
-  projectsWithOrderData: ProjectWithOrderData[];
-  loading: boolean;
-} => {
+}: Props): ProjectsSellOrders => {
   const [projectsWithOrderData, setProjectsWithOrderData] = useState<
     ProjectWithOrderData[]
   >([]);

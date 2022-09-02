@@ -1,5 +1,4 @@
 import { SxProps } from '@mui/material';
-import { makeStyles } from '@mui/styles';
 
 import type { Theme } from 'web-components/lib/theme/muiTheme';
 
@@ -13,15 +12,3 @@ export const getMediaBoxStyles = (theme: Theme): SxProps<Theme> => ({
     xl: theme.spacing(118),
   },
 });
-
-export const useSectionStyles = makeStyles(theme => ({
-  section: {
-    paddingBottom: theme.spacing(16.25),
-  },
-  title: {
-    marginBottom: theme.spacing(8.75),
-    [theme.breakpoints.down('sm')]: {
-      marginBottom: theme.spacing(8),
-    },
-  },
-}));

@@ -257,7 +257,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                                   })}
                                 </Title>
                               </Box>
-                              <Label size="sm" sx={{ color: 'info.dark' }}>
+                              <Label size="sm" color="info.dark">
                                 {'REGEN'}
                               </Label>
                             </Box>

@@ -52,7 +52,7 @@ export const getCreditCountValidation =
   (creditAvailable: number) => (creditCount: number) => {
     let error;
     if (creditCount > creditAvailable) {
-      error = `The amount of credits must be lower or equal than the max credit(s) available (${creditAvailable}).`;
+      error = `Must be less than or equal to the max credit(s) available (${creditAvailable}).`;
     }
     return error;
   };

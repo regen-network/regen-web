@@ -182,7 +182,7 @@ const CreditSendForm: React.FC<FormProps> = ({
             </>
           )}
 
-          <AgreeErpaCheckbox />
+          <AgreeErpaCheckbox sx={{ mt: values.withRetire ? 10 : 6 }} />
 
           <Submit
             isSubmitting={isSubmitting}

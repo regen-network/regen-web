@@ -1,17 +1,16 @@
+import { SxProps, Theme } from '@mui/material';
 import { Field } from 'formik';
 
 import { Subtitle } from '../typography';
 import CheckboxLabel from './CheckboxLabel';
 
-interface AgreeCheckboxProps {
+interface Props {
   name: string;
   label: JSX.Element;
+  sx?: SxProps<Theme>;
 }
 
-const AgreeCheckbox: React.FC<AgreeCheckboxProps> = ({
-  name,
-  label,
-}: AgreeCheckboxProps) => {
+const AgreeCheckbox: React.FC<Props> = ({ name, label, sx }: Props) => {
   return (
     <Field
       component={CheckboxLabel}
@@ -22,6 +21,7 @@ const AgreeCheckbox: React.FC<AgreeCheckboxProps> = ({
           {label}
         </Subtitle>
       }
+      sx={sx}
     />
   );
 };

@@ -1,12 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { Box, CardMedia, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
-import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
-import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import { Loading } from 'web-components/lib/components/loading';
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
@@ -14,11 +11,6 @@ import { Body, Title } from 'web-components/lib/components/typography';
 
 import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { useSortProjects } from 'pages/Projects/hooks/useSortProjects';
-import {
-  API_URI,
-  IMAGE_STORAGE_BASE_URL,
-} from 'pages/Projects/Projects.config';
-import WithLoader from 'components/atoms/WithLoader';
 import { useEcocreditQuery } from 'hooks';
 import { usePaginatedBatches } from 'hooks/batches/usePaginatedBatches';
 import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
@@ -34,12 +26,12 @@ import {
 } from '../../generated/sanity-graphql';
 import { client } from '../../sanity';
 import { FEATURE_PROJECTS_COUNT, PROJECTS_SORT } from './Home.constants';
+import { FeaturedProjects } from './Home.FeaturedProjects';
 import { useHomeStyles } from './Home.styles';
 
 const Home: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [modalLink, setModalLink] = useState<string>('');
-  const navigate = useNavigate();
 
   const styles = useHomeStyles();
   const theme = useTheme();
@@ -147,54 +139,7 @@ const Home: React.FC = () => {
         </Box>
       </BackgroundImgSection>
 
-      {sortedProjects && (
-        <div id="projects">
-          <Section
-            title="Featured Projects"
-            titleAlign="center"
-            classes={{ root: styles.section, title: styles.title }}
-          >
-            <WithLoader
-              isLoading={loadingProjects}
-              sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-            >
-              <Box
-                sx={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 338px))',
-                  gridGap: '1.125rem',
-                  flex: 1,
-                  justifyContent: 'center',
-                }}
-              >
-                {sortedProjects?.map(project => (
-                  <Box key={project?.id}>
-                    <ProjectCard
-                      name={project?.name}
-                      imgSrc={project?.imgSrc}
-                      place={project?.place}
-                      area={project?.area}
-                      areaUnit={project?.areaUnit}
-                      // onButtonClick={() => {}} TODO #1055
-                      purchaseInfo={project.purchaseInfo}
-                      onClick={() => navigate(`/projects/${project.id}`)}
-                      imageStorageBaseUrl={IMAGE_STORAGE_BASE_URL}
-                      apiServerUrl={API_URI}
-                      truncateTitle={true}
-                      sx={{ width: 338, height: 479 }}
-                    />
-                  </Box>
-                ))}
-              </Box>
-            </WithLoader>
-          </Section>
-          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 30 }}>
-            <Link to="/projects">
-              <ContainedButton>{'DISCOVER PROJECTS'}</ContainedButton>
-            </Link>
-          </Box>
-        </div>
-      )}
+      <FeaturedProjects projects={sortedProjects} isLoading={loadingProjects} />
 
       <CardMedia image={topographyImg}>
         <CreditBatches

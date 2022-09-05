@@ -1,8 +1,8 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, SelectChangeEvent } from '@mui/material';
 import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { Flex } from 'web-components/lib/components/box';
 import { ProjectCard } from 'web-components/lib/components/cards/ProjectCard';
@@ -10,12 +10,13 @@ import SelectTextFieldBase from 'web-components/lib/components/inputs/SelectText
 import { Loading } from 'web-components/lib/components/loading';
 import { Body, Subtitle } from 'web-components/lib/components/typography';
 
-import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow';
 import {
   fetchSimplePrice,
   GECKO_REGEN_ID,
   GECKO_USD_CURRENCY,
 } from 'lib/coingecko';
+
+import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow';
 
 import useEcocreditQuery from '../../hooks/useEcocreditQuery';
 import { useQuerySellOrders } from '../../hooks/useQuerySellOrders';

@@ -12,7 +12,6 @@ import { RadioGroup } from 'formik-mui';
 import Card from 'web-components/lib/components/cards/Card';
 import Submit from 'web-components/lib/components/form/Submit';
 import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
-import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Image } from 'web-components/lib/components/image';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
@@ -23,7 +22,6 @@ import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 import {
   Body,
-  Label,
   Subtitle,
   Title,
 } from 'web-components/lib/components/typography';
@@ -31,6 +29,8 @@ import {
 import { formatDenomText, microToDenom } from 'lib/denom.utils';
 
 import { UISellOrderInfo } from 'pages/Projects/Projects.types';
+import DenomIcon from 'components/molecules/DenomIcon';
+import DenomLabel from 'components/molecules/DenomLabel';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
@@ -241,25 +241,23 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                               sx={{
                                 display: 'flex',
                                 alignItems: 'baseline',
-                                flexWrap: 'wrap',
                               }}
                             >
-                              <Box
-                                sx={{ display: 'flex', alignItems: 'baseline' }}
-                              >
-                                <RegenTokenIcon className={styles.regenIcon} />
-                                <Title variant="h4" sx={{ mr: 1.5 }}>
-                                  {amountToSpend({
-                                    askAmount: Number(
-                                      selectedSellOrder?.askAmount,
-                                    ),
-                                    creditCount: values?.creditCount,
-                                  })}
-                                </Title>
-                              </Box>
-                              <Label size="sm" color="info.dark">
-                                {'REGEN'}
-                              </Label>
+                              <DenomIcon
+                                denom={selectedSellOrder?.askDenom ?? ''}
+                                sx={{ mr: 1.5, mt: 1, alignSelf: 'flex-start' }}
+                                iconSx={{ height: 26 }}
+                              />
+                              <Title variant="h4" sx={{ mr: 1.5 }}>
+                                {values.creditCount *
+                                  microToDenom(selectedSellOrder?.askAmount) ||
+                                  '-'}
+                              </Title>
+                              <DenomLabel
+                                denom={selectedSellOrder?.askDenom ?? ''}
+                                size="sm"
+                                sx={{ color: 'info.dark' }}
+                              />
                             </Box>
                           </div>
                         </Box>

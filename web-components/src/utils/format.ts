@@ -58,15 +58,25 @@ export function formatDate(
   return dayjs(date).format(format);
 }
 
-export function formatNumber(
-  num: number | string | undefined,
-  maximumFractionDigits?: number,
-): string {
+type FormatNumberParams = {
+  num: number | string | undefined;
+  minimumFractionDigits?: number;
+  maximumFractionDigits?: number;
+};
+
+export function formatNumber({
+  num,
+  maximumFractionDigits,
+  minimumFractionDigits,
+}: FormatNumberParams): string {
   if (!num) return '-';
   if (typeof num === 'string') num = parseFloat(num);
-  if (!maximumFractionDigits) num = Math.floor(num);
+  if (!maximumFractionDigits && !minimumFractionDigits) num = Math.floor(num);
   return num > 0
-    ? num.toLocaleString(undefined, { maximumFractionDigits })
+    ? num.toLocaleString(undefined, {
+        maximumFractionDigits,
+        minimumFractionDigits,
+      })
     : '-';
 }
 

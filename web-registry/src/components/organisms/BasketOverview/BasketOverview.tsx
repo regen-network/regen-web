@@ -90,7 +90,10 @@ export const BasketOverview: React.FC<BasketOverviewProps> = ({
                 rowSpacing={1}
                 columnSpacing={{ xs: 1, sm: 2, md: 3 }}
               >
-                <Item label="total amount" data={formatNumber(totalAmount)} />
+                <Item
+                  label="total amount"
+                  data={formatNumber({ num: totalAmount })}
+                />
                 <Item
                   label="curator"
                   data={curator.name}

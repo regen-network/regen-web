@@ -44,10 +44,10 @@ export const sortProjectsBySellOrdersAvailability =
   (sellOrders: SellOrderInfo[]) =>
   (projectA: ProjectInfo, projectB: ProjectInfo) => {
     const ordersForProjectA = sellOrders.filter(order =>
-      order.batchDenom.startsWith(projectA?.id),
+      order.batchDenom.startsWith(`${projectA?.id}-`),
     );
     const ordersForProjectB = sellOrders.filter(order =>
-      order.batchDenom.startsWith(projectB?.id),
+      order.batchDenom.startsWith(`${projectB?.id}-`),
     );
 
     if (ordersForProjectA && !ordersForProjectB) return 1;

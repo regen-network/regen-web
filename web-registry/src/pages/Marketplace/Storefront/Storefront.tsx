@@ -204,6 +204,7 @@ export const Storefront = (): JSX.Element => {
       askDenom: askDenom,
       batchDenom: batchDenom,
       sellOrderId: orderId,
+      agreeErpa: false,
     }),
     [askAmount, askDenom, batchDenom, orderId],
   );

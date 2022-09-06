@@ -61,9 +61,3 @@
 
 [build.environment]
   NODE_OPTIONS = "--max_old_space_size=4096"
-
-[[redirects]]
-  from = "https://registry.regen.network"
-  to = "https://app.regen.network"
-  status = 301
-  force = true

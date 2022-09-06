@@ -1,4 +1,10 @@
 import { Box, SxProps, Theme } from '@mui/material';
+import {
+  AXELAR_USDC_DENOM,
+  EEUR_DENOM,
+  GRAVITY_USDC_DENOM,
+  REGEN_DENOM,
+} from 'config/allowedDenoms';
 
 import AxlUsdcIcon from 'web-components/lib/components/icons/coins/AxlUsdcIcon';
 import EeurIcon from 'web-components/lib/components/icons/coins/EeurIcon';
@@ -14,10 +20,10 @@ export interface Props {
 const DenomIcon = ({ denom, sx = [], iconSx = [] }: Props): JSX.Element => {
   return (
     <Box sx={[...(Array.isArray(sx) ? sx : [sx])]}>
-      {denom === 'ugusdc' && <GravUsdcIcon sx={iconSx} />}
-      {denom === 'uaxlusdc' && <AxlUsdcIcon sx={iconSx} />}
-      {denom === 'ueeur' && <EeurIcon sx={iconSx} />}
-      {denom === 'uregen' && <RegenTokenIcon sx={iconSx} />}
+      {denom === GRAVITY_USDC_DENOM && <GravUsdcIcon sx={iconSx} />}
+      {denom === AXELAR_USDC_DENOM && <AxlUsdcIcon sx={iconSx} />}
+      {denom === EEUR_DENOM && <EeurIcon sx={iconSx} />}
+      {denom === REGEN_DENOM && <RegenTokenIcon sx={iconSx} />}
     </Box>
   );
 };

@@ -3,8 +3,13 @@ import {
   QueryClientImpl,
   QuerySellOrdersResponse,
 } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import uniq from 'lodash/uniq';
+
+import { queryDenomTraceByHashes } from 'lib/ibc/transfer/api';
 
 import { useLedger } from '../ledger';
+
+const IBC_DENOM_PREFIX = 'ibc/';
 
 export const useQuerySellOrders = function (): {
   sellOrdersResponse: QuerySellOrdersResponse | undefined;
@@ -32,7 +37,39 @@ export const useQuerySellOrders = function (): {
     if (!queryClient) return;
 
     async function fetchData(client: QueryClientImpl): Promise<void> {
-      await client.SellOrders({}).then(setSellOrdersResponse);
+      // Fetching all sell orders
+      const sellOrdersResponse = await client.SellOrders({});
+      const { sellOrders } = sellOrdersResponse;
+
+      // Find sell orders that have ibc askDenom and gather their hash
+      const ibcDenomHashes = uniq(
+        sellOrders
+          .filter(sellOrder => sellOrder.askDenom.includes(IBC_DENOM_PREFIX))
+          .map(sellOrder => sellOrder.askDenom.replace(IBC_DENOM_PREFIX, '')),
+      );
+
+      // Call DenomTrace on each ibc denom hash
+      const denomTraces = await queryDenomTraceByHashes({
+        hashes: ibcDenomHashes,
+      });
+
+      // Update sell orders by replacing ibc denoms with base denom from DenomTrace if needed
+      const sellOrdersWithBaseDenom = sellOrders.map(sellOrder => {
+        const denomTrace = denomTraces.find(denomTrace =>
+          sellOrder.askDenom.includes(denomTrace.hash),
+        );
+
+        return {
+          ...sellOrder,
+          askDenom: denomTrace ? denomTrace.baseDenom : sellOrder.askDenom,
+        };
+      });
+
+      // Set updated response
+      setSellOrdersResponse({
+        ...sellOrdersResponse,
+        sellOrders: sellOrdersWithBaseDenom,
+      });
     }
 
     fetchData(queryClient);

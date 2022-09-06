@@ -30,6 +30,7 @@ import {
   QueryClientImpl,
   QueryCreditTypesRequest,
   QueryCreditTypesResponse,
+  QueryParamsRequest,
   QueryParamsResponse,
   QueryProjectRequest,
   QueryProjectResponse,
@@ -75,14 +76,14 @@ export const getBatchesTotal = (
     const totals = batches.reduce(
       (acc, batch) => {
         acc.cancelledAmount += Number(batch?.cancelledAmount ?? 0);
-        acc.retiredSupply += Number(batch?.retiredSupply ?? 0);
-        acc.tradableSupply += Number(batch?.tradableSupply ?? 0);
+        acc.retiredAmount += Number(batch?.retiredAmount ?? 0);
+        acc.tradableAmount += Number(batch?.tradableAmount ?? 0);
         return acc;
       },
       {
         cancelledAmount: 0,
-        retiredSupply: 0,
-        tradableSupply: 0,
+        retiredAmount: 0,
+        tradableAmount: 0,
       },
     );
     return { totals };
@@ -470,6 +471,11 @@ type CreditTypesParams = {
   params: DeepPartial<QueryCreditTypesRequest>;
 };
 
+type ParamsParams = {
+  query: 'params';
+  params: DeepPartial<QueryParamsRequest>;
+};
+
 type ProjectsParams = {
   query: 'projects';
   params: DeepPartial<QueryProjectsRequest>;
@@ -495,6 +501,7 @@ export type EcocreditQueryProps =
   | BatchesByIssuerParams
   | ClassInfoParams
   | ClassesParams
+  | ParamsParams
   | CreditTypesParams
   | ProjectsParams
   | ProjectsByAdminParams
@@ -513,6 +520,7 @@ export type EcocreditQueryResponse =
   | QueryClassResponse
   | QueryClassesResponse
   | QueryCreditTypesResponse
+  | QueryParamsResponse
   | QueryProjectsResponse
   | QueryProjectsByAdminResponse
   | QueryProjectResponse;
@@ -787,10 +795,16 @@ export const queryProject = async ({
 
 // Params
 
-export const queryParams = async (): Promise<QueryParamsResponse> => {
+interface QueryParamsProps {
+  request?: DeepPartial<QueryParamsRequest>;
+}
+
+export const queryParams = async ({
+  request = {},
+}: QueryParamsProps): Promise<QueryParamsResponse> => {
   const client = await getQueryClient();
   try {
-    return await client.Params({});
+    return await client.Params(request);
   } catch (err) {
     throw new Error(
       `Error in the Params query of the ledger ecocredit module: ${err}`,

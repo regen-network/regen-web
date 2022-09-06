@@ -18,6 +18,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
 export interface Option {
   value: string;
   label: string;
+  disabled?: boolean;
+  selected?: boolean;
 }
 
 export interface SelectTextFieldProps
@@ -56,7 +58,12 @@ export default function SelectTextField({
     >
       {options ? (
         options.map(option => (
-          <option key={option.value} value={option.value}>
+          <option
+            key={option.value}
+            value={option.value}
+            disabled={option.disabled}
+            selected={option.selected}
+          >
             {option.label}
           </option>
         ))

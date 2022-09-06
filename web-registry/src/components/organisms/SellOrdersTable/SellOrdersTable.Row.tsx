@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Box } from '@mui/material';
-import dayjs from 'dayjs';
 
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { formatDate, formatNumber } from 'web-components/lib/utils/format';
@@ -27,14 +26,12 @@ const getSellOrdersTableRow = ({
     id,
     amountAvailable,
     seller,
-    expiration,
     batchStartDate,
     batchEndDate,
     project,
   },
 }: Props): React.ReactNode[] => [
   <Link href={`/marketplace/sell-order/${id}`}>{id}</Link>,
-  <Box sx={{ color: 'info.main' }}>{dayjs(expiration).fromNow()}</Box>,
   <WithLoader isLoading={project?.name === undefined} variant="skeleton">
     <Link href={`/projects/${project?.id}}`}>{project?.name}</Link>
   </WithLoader>,

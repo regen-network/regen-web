@@ -7,12 +7,12 @@ import { Item } from 'web-components/lib/components/modal/ConfirmModal';
 
 import { NormalizedSellOrder } from './Storefront.types';
 
-export const sortByExpirationDate = (
+export const sortBySellOrderId = (
   sellOrderA: NormalizedSellOrder,
   sellOrderB: NormalizedSellOrder,
 ): number => {
-  if (sellOrderA.expiration && sellOrderB.expiration) {
-    return sellOrderA.expiration > sellOrderB.expiration ? -1 : 1;
+  if (sellOrderA.id && sellOrderB.id) {
+    return Number(sellOrderA.id) > Number(sellOrderB.id) ? 1 : -1;
   }
 
   return 0;

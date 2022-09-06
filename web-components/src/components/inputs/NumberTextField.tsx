@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'absolute',
     right: 0,
     top: 0,
-    height: '100%',
+    height: 60,
     cursor: 'pointer',
     width: theme.spacing(6.5),
   },

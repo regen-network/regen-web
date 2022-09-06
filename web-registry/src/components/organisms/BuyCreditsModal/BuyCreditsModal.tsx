@@ -34,7 +34,12 @@ import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
-import { getOptions, handleBuyCreditsSubmit } from './BuyCreditsModal.utils';
+import {
+  amountToSpend,
+  getCreditCountValidation,
+  getOptions,
+  handleBuyCreditsSubmit,
+} from './BuyCreditsModal.utils';
 import { useSetSelectedSellOrder } from './hooks/useSetSelectedSellOrder';
 
 const LocationCountryField = lazy(
@@ -150,6 +155,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
         >
           {({
             values,
+            errors,
+            touched,
             submitForm,
             isValid,
             isSubmitting,
@@ -209,36 +216,53 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                             name="creditCount"
                             min={1}
                             max={selectedSellOrder?.quantity}
+                            validate={getCreditCountValidation(
+                              Number(selectedSellOrder?.quantity),
+                            )}
                           />
                         </div>
-                        <Title variant="h6" sx={{ mr: 4 }}>
-                          =
-                        </Title>
-                        <div
-                          className={cx(styles.flexColumn, styles.marginRight)}
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            height: 60,
+                          }}
                         >
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              alignItems: 'baseline',
-                              flexWrap: 'wrap',
-                            }}
+                          <Title variant="h6" sx={{ mr: 4 }}>
+                            =
+                          </Title>
+                          <div
+                            className={cx(
+                              styles.flexColumn,
+                              styles.marginRight,
+                            )}
                           >
                             <Box
-                              sx={{ display: 'flex', alignItems: 'baseline' }}
+                              sx={{
+                                display: 'flex',
+                                alignItems: 'baseline',
+                                flexWrap: 'wrap',
+                              }}
                             >
-                              <RegenTokenIcon className={styles.regenIcon} />
-                              <Title variant="h4" sx={{ mr: 1.5 }}>
-                                {values.creditCount *
-                                  microToDenom(selectedSellOrder?.askAmount) ||
-                                  '-'}
-                              </Title>
+                              <Box
+                                sx={{ display: 'flex', alignItems: 'baseline' }}
+                              >
+                                <RegenTokenIcon className={styles.regenIcon} />
+                                <Title variant="h4" sx={{ mr: 1.5 }}>
+                                  {amountToSpend({
+                                    askAmount: Number(
+                                      selectedSellOrder?.askAmount,
+                                    ),
+                                    creditCount: values?.creditCount,
+                                  })}
+                                </Title>
+                              </Box>
+                              <Label size="sm" color="info.dark">
+                                {'REGEN'}
+                              </Label>
                             </Box>
-                            <Label size="sm" sx={{ color: 'info.dark' }}>
-                              {'REGEN'}
-                            </Label>
-                          </Box>
-                        </div>
+                          </div>
+                        </Box>
                       </div>
                     </div>
                   </Collapse>

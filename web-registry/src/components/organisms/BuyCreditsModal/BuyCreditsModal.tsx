@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import { Link } from 'react-router-dom';
 import { Box, useTheme } from '@mui/material';
@@ -15,9 +15,8 @@ import InfoIcon from 'web-components/lib/components/icons/InfoIcon';
 import { RegenTokenIcon } from 'web-components/lib/components/icons/RegenTokenIcon';
 import { Image } from 'web-components/lib/components/image';
 import ControlledTextField from 'web-components/lib/components/inputs/ControlledTextField';
-import LocationCountryField from 'web-components/lib/components/inputs/LocationCountryField';
-import LocationStateField from 'web-components/lib/components/inputs/LocationStateField';
 import NumberTextField from 'web-components/lib/components/inputs/NumberTextField';
+import SelectFieldFallback from 'web-components/lib/components/inputs/SelectFieldFallback';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
@@ -35,8 +34,20 @@ import { UISellOrderInfo } from 'pages/Projects/Projects.types';
 
 import { BUY_CREDITS_MODAL_DEFAULT_VALUES } from './BuyCreditsModal.constants';
 import { useBuyCreditsModalStyles } from './BuyCreditsModal.styles';
-import { getOptions, handleBuyCreditsSubmit } from './BuyCreditsModal.utils';
+import {
+  amountToSpend,
+  getCreditCountValidation,
+  getOptions,
+  handleBuyCreditsSubmit,
+} from './BuyCreditsModal.utils';
 import { useSetSelectedSellOrder } from './hooks/useSetSelectedSellOrder';
+
+const LocationCountryField = lazy(
+  () => import('web-components/lib/components/inputs/LocationCountryField'),
+);
+const LocationStateField = lazy(
+  () => import('web-components/lib/components/inputs/LocationStateField'),
+);
 
 export interface Credits {
   purchased: number;
@@ -144,6 +155,8 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
         >
           {({
             values,
+            errors,
+            touched,
             submitForm,
             isValid,
             isSubmitting,
@@ -203,36 +216,53 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                             name="creditCount"
                             min={1}
                             max={selectedSellOrder?.quantity}
+                            validate={getCreditCountValidation(
+                              Number(selectedSellOrder?.quantity),
+                            )}
                           />
                         </div>
-                        <Title variant="h6" sx={{ mr: 4 }}>
-                          =
-                        </Title>
-                        <div
-                          className={cx(styles.flexColumn, styles.marginRight)}
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            height: 60,
+                          }}
                         >
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              alignItems: 'baseline',
-                              flexWrap: 'wrap',
-                            }}
+                          <Title variant="h6" sx={{ mr: 4 }}>
+                            =
+                          </Title>
+                          <div
+                            className={cx(
+                              styles.flexColumn,
+                              styles.marginRight,
+                            )}
                           >
                             <Box
-                              sx={{ display: 'flex', alignItems: 'baseline' }}
+                              sx={{
+                                display: 'flex',
+                                alignItems: 'baseline',
+                                flexWrap: 'wrap',
+                              }}
                             >
-                              <RegenTokenIcon className={styles.regenIcon} />
-                              <Title variant="h4" sx={{ mr: 1.5 }}>
-                                {values.creditCount *
-                                  microToDenom(selectedSellOrder?.askAmount) ||
-                                  '-'}
-                              </Title>
+                              <Box
+                                sx={{ display: 'flex', alignItems: 'baseline' }}
+                              >
+                                <RegenTokenIcon className={styles.regenIcon} />
+                                <Title variant="h4" sx={{ mr: 1.5 }}>
+                                  {amountToSpend({
+                                    askAmount: Number(
+                                      selectedSellOrder?.askAmount,
+                                    ),
+                                    creditCount: values?.creditCount,
+                                  })}
+                                </Title>
+                              </Box>
+                              <Label size="sm" color="info.dark">
+                                {'REGEN'}
+                              </Label>
                             </Box>
-                            <Label size="sm" sx={{ color: 'info.dark' }}>
-                              {'REGEN'}
-                            </Label>
-                          </Box>
-                        </div>
+                          </div>
+                        </Box>
                       </div>
                     </div>
                   </Collapse>
@@ -301,7 +331,16 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         sm={6}
                         className={styles.stateCountryTextField}
                       >
-                        <LocationCountryField />
+                        <Suspense
+                          fallback={
+                            <SelectFieldFallback
+                              label="Country"
+                              name="country"
+                            />
+                          }
+                        >
+                          <LocationCountryField />
+                        </Suspense>
                       </Grid>
                       <Grid
                         item
@@ -309,7 +348,19 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
                         sm={6}
                         className={styles.stateCountryTextField}
                       >
-                        <LocationStateField country={values.country} optional />
+                        <Suspense
+                          fallback={
+                            <SelectFieldFallback
+                              label="State / Region"
+                              name="state"
+                            />
+                          }
+                        >
+                          <LocationStateField
+                            country={values.country}
+                            optional
+                          />
+                        </Suspense>
                       </Grid>
                     </Grid>
                     <Field

@@ -1,4 +1,5 @@
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import { formatNumber } from 'web-components/lib/utils/format';
 
 import { formatDenomText, microToDenom } from 'lib/denom.utils';
 
@@ -46,3 +47,23 @@ export const handleBuyCreditsSubmit = async (
   };
   await onSubmit(fullValues);
 };
+
+export const getCreditCountValidation =
+  (creditAvailable: number) => (creditCount: number) => {
+    let error;
+    if (creditCount > creditAvailable) {
+      error = `Must be less than or equal to the max credit(s) available (${creditAvailable}).`;
+    }
+    return error;
+  };
+
+type AmountToSpendParams = {
+  creditCount: number;
+  askAmount: number;
+};
+
+export const amountToSpend = ({
+  creditCount,
+  askAmount,
+}: AmountToSpendParams): String =>
+  formatNumber(creditCount * microToDenom(askAmount), 2) ?? '-';

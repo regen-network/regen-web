@@ -70,6 +70,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       fontWeight: 'bold',
       color: theme.palette.primary.light,
       position: props.errors ? 'absolute' : 'inherit',
+      lineHeight: Object.keys(props.form.errors).length > 0 ? 1.3 : 1.66,
       bottom: 0,
       [theme.breakpoints.up('sm')]: {
         fontSize: theme.spacing(3.5),
@@ -177,7 +178,11 @@ export default function RegenTextField({
   customInputProps = {},
   ...props
 }: RegenTextFieldProps): JSX.Element {
-  const styles = useStyles({ ...props, errors, optional: !!optional });
+  const styles = useStyles({
+    ...props,
+    errors,
+    optional: !!optional,
+  });
   const baseClasses = [styles.root, props.className];
   const defaultClasses = [styles.default, ...baseClasses];
   const rootClasses = defaultStyle

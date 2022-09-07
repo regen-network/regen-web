@@ -20,7 +20,7 @@ import NumberTextField from 'web-components/lib/components/inputs/NumberTextFiel
 import SelectFieldFallback from 'web-components/lib/components/inputs/SelectFieldFallback';
 import SelectTextField from 'web-components/lib/components/inputs/SelectTextField';
 import Toggle from 'web-components/lib/components/inputs/Toggle';
-import { requiredMessage } from 'web-components/lib/components/inputs/validation';
+import { requirementAgreement } from 'web-components/lib/components/inputs/validation';
 import Modal, { RegenModalProps } from 'web-components/lib/components/modal';
 import Tooltip from 'web-components/lib/components/tooltip/InfoTooltip';
 import {
@@ -110,7 +110,7 @@ const BuyCreditsModal: React.FC<BuyCreditsModalProps> = ({
   ): FormikErrors<BuyCreditsValues> => {
     let errors: FormikErrors<BuyCreditsValues> = {};
 
-    if (!values.agreeErpa) errors.agreeErpa = requiredMessage;
+    if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
 
     return errors;
   };

@@ -10,6 +10,7 @@ import TextField from '../inputs/TextField';
 import {
   insufficientCredits,
   requiredMessage,
+  requirementAgreement,
   validateAmount,
 } from '../inputs/validation';
 import { RegenModalProps } from '../modal';
@@ -126,7 +127,7 @@ const CreditSendForm: React.FC<FormProps> = ({
       }
     }
 
-    if (!values.agreeErpa) errors.agreeErpa = requiredMessage;
+    if (!values.agreeErpa) errors.agreeErpa = requirementAgreement;
 
     return errors;
   };

@@ -1,16 +1,15 @@
-import ReactHtmlParser from 'react-html-parser';
 import { Box, Card, CardContent, CardMedia, SxProps } from '@mui/material';
 
 import { Theme } from '../../../theme/muiTheme';
+import { parseText } from '../../../utils/textParser';
 import { Image, OptimizeImageProps } from '../../image';
 import { Body, Subtitle, Title } from '../../typography';
 import { useCreditClassCardStyles } from './CreditClassCard.styles';
 
 export interface Props extends OptimizeImageProps {
-  title: string;
-  description: string;
+  title: string | JSX.Element;
+  description: string | JSX.Element;
   imgSrc: string;
-  href?: string;
   sx?: SxProps<Theme>;
 }
 
@@ -20,17 +19,12 @@ const CreditClassCard = ({
   imgSrc,
   apiServerUrl,
   imageStorageBaseUrl,
-  href,
   sx = [],
 }: Props): JSX.Element => {
   const classes = useCreditClassCardStyles({});
 
   return (
     <Box
-      component="a"
-      href={href}
-      target="_blank"
-      rel="noreferrer"
       sx={[
         { display: 'block', width: '100%', maxWidth: 658 },
         ...(Array.isArray(sx) ? sx : [sx]),
@@ -66,10 +60,10 @@ const CreditClassCard = ({
             {'CREDIT CLASS'}
           </Subtitle>
           <Title variant="h5" mobileVariant="h6" as="div" sx={{ mb: 2 }}>
-            {ReactHtmlParser(title)}
+            {parseText(title)}
           </Title>
           <Body size="sm" mobileSize="xs">
-            {description}
+            {parseText(description)}
           </Body>
         </CardContent>
       </Card>

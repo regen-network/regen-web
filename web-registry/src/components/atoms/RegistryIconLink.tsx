@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 
-import RegistryIcon from 'web-components/lib/components/icons/RegistryIcon';
+import RegenMarketIcon from 'web-components/lib/components/icons/RegenMarketIcon';
 
 const useStyles = makeStyles(theme => {
   const { pxToRem } = theme.typography;
@@ -24,7 +24,7 @@ export const RegistryIconLink: React.FC<{ color: string }> = ({ color }) => {
   const styles = useStyles();
   return (
     <Link to="/">
-      <RegistryIcon className={styles.icon} color={color} />
+      <RegenMarketIcon className={styles.icon} color={color} />
     </Link>
   );
 };

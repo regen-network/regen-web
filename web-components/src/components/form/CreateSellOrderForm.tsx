@@ -112,13 +112,13 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
               min={0.0}
               arrows={false}
               errors={errors}
-              sx={{ maxWidth: '238px' }}
+              sx={{ maxWidth: 239.5 }}
             />
             <Field
               name="askDenom"
               component={SelectTextField}
               options={allowedDenoms}
-              sx={{ maxWidth: '238px' }}
+              sx={{ maxWidth: 239.5 }}
             />
           </Box>
           <AmountField

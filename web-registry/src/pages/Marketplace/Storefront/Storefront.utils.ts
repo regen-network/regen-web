@@ -12,7 +12,7 @@ export const sortBySellOrderId = (
   sellOrderB: NormalizedSellOrder,
 ): number => {
   if (sellOrderA.id && sellOrderB.id) {
-    return Number(sellOrderA.id) > Number(sellOrderB.id) ? 1 : -1;
+    return Number(sellOrderA.id) < Number(sellOrderB.id) ? 1 : -1;
   }
 
   return 0;

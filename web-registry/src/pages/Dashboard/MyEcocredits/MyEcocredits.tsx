@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SxProps, useTheme } from '@mui/material';
 import { QueryBasketResponse } from '@regen-network/api/lib/generated/regen/ecocredit/basket/v1/query';
-import { QueryParamsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { QueryAllowedDenomsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
 
 import { TableActionButtons } from 'web-components/lib/components/buttons/TableActionButtons';
 import ArrowDownIcon from 'web-components/lib/components/icons/ArrowDownIcon';
@@ -43,12 +43,12 @@ import { Portfolio } from 'components/organisms/Portfolio';
 import {
   useBasketsWithClasses,
   useBasketTokens,
-  useEcocreditQuery,
   useEcocredits,
   useMsgClient,
   useQueryBaskets,
 } from 'hooks';
 import type { BasketTokens } from 'hooks/useBasketTokens';
+import useMarketplaceQuery from 'hooks/useMarketplaceQuery';
 
 import useBasketPutSubmit from './hooks/useBasketPutSubmit';
 import useBasketTakeSubmit from './hooks/useBasketTakeSubmit';
@@ -150,12 +150,14 @@ export const MyEcocredits = (): JSX.Element => {
     address: accountAddress,
     paginationParams,
   });
-  const paramsResponse = useEcocreditQuery<QueryParamsResponse>({
-    query: 'params',
-    params: {},
-  });
+  const allowedDenomsResponse = useMarketplaceQuery<QueryAllowedDenomsResponse>(
+    {
+      query: 'allowedDenoms',
+      params: {},
+    },
+  );
   const allowedDenomOptions = getDenomAllowedOptions({
-    allowedDenoms: paramsResponse?.data?.allowedDenoms,
+    allowedDenoms: allowedDenomsResponse?.data?.allowedDenoms,
   });
 
   const basketsWithClasses = useBasketsWithClasses(baskets);

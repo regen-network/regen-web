@@ -1,4 +1,4 @@
-import { AllowedDenomInfo } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { AllowedDenom } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/state';
 
 import { Option } from 'web-components/lib/components/inputs/SelectTextField';
 
@@ -41,7 +41,7 @@ export const getAvailableAmountByBatch = ({
   );
 
 type GetDenomAllowedOptionsParams = {
-  allowedDenoms?: AllowedDenomInfo[];
+  allowedDenoms?: AllowedDenom[];
 };
 
 export const getDenomAllowedOptions = ({
@@ -49,8 +49,8 @@ export const getDenomAllowedOptions = ({
 }: GetDenomAllowedOptionsParams): Option[] => {
   const allowedDenomsOptions: Option[] =
     allowedDenoms?.map(denom => ({
-      label: denom.bankDenom,
-      value: denom.displayDenom,
+      label: denom.displayDenom,
+      value: denom.bankDenom,
     })) ?? [];
   allowedDenomsOptions.unshift({
     label: 'Choose denom',

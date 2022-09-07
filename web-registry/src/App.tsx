@@ -95,7 +95,7 @@ Sentry.init({
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production
   tracesSampleRate: 1.0,
-  environment: process.env.SENTRY_ENVIRONMENT || 'development',
+  environment: process.env.REACT_APP_SENTRY_ENVIRONMENT || 'development',
 });
 
 export const history = createBrowserHistory();

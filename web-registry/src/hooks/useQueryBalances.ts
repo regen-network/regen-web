@@ -41,9 +41,12 @@ export default function useQueryBalances({ address }: Params): {
 
   useEffect(() => {
     if (!api?.queryClient) return;
+    if (queryClient) return;
+    setQueryClient(new QueryClientImpl(api.queryClient));
+  }, [api?.queryClient, queryClient]);
 
-    const queryClient: QueryClientImpl = new QueryClientImpl(api.queryClient);
-    setQueryClient(queryClient);
+  useEffect(() => {
+    if (!queryClient) return;
 
     if (address) {
       fetchBalances()
@@ -51,7 +54,7 @@ export default function useQueryBalances({ address }: Params): {
         /* eslint-disable */
         .catch(console.error);
     }
-  }, [api?.queryClient, address]);
+  }, [queryClient, address]);
 
   return { balancesResponse, fetchBalances };
 }

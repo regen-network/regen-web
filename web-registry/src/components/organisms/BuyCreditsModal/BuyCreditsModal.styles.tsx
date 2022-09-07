@@ -74,7 +74,6 @@ export const useBuyCreditsModalStyles = makeStyles(theme => ({
   },
   creditWidget: {
     display: 'flex',
-    alignItems: 'center',
   },
   regenIcon: {
     height: theme.typography.pxToRem(26),

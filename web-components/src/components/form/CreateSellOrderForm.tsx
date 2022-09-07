@@ -79,7 +79,15 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
       validate={validateHandler}
       onSubmit={onSubmit}
     >
-      {({ values, submitForm, isSubmitting, isValid, submitCount, status }) => (
+      {({
+        values,
+        errors,
+        submitForm,
+        isSubmitting,
+        isValid,
+        submitCount,
+        status,
+      }) => (
         <Form>
           <Field
             name="batchDenom"
@@ -103,6 +111,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
               increment={0.1}
               min={0.0}
               arrows={false}
+              errors={errors}
               sx={{ maxWidth: '238px' }}
             />
             <Field

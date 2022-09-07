@@ -108,8 +108,8 @@ export default function CookiesBanner({
               using this site, you accept our use of{' '}
               <Link href={privacyUrl} color="secondary.main">
                 cookies policy
-              </Link>
-              {' '}and agree to our{' '}
+              </Link>{' '}
+              and agree to our{' '}
               <Link href={TOSUrl} color="secondary.main">
                 platform terms of service
               </Link>

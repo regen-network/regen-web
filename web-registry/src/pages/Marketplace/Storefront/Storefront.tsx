@@ -49,7 +49,7 @@ import {
 import { SellOrderActions } from './Storefront.types';
 import {
   getCancelCardItems,
-  sortByExpirationDate,
+  sortBySellOrderId,
   updateBatchInfosMap,
 } from './Storefront.utils';
 
@@ -119,7 +119,7 @@ export const Storefront = (): JSX.Element => {
         batchInfos,
         sellOrders,
         projectsInfosByHandleMap,
-      }).sort(sortByExpirationDate),
+      }).sort(sortBySellOrderId),
     [batchInfos, sellOrders, projectsInfosByHandleMap],
   );
 

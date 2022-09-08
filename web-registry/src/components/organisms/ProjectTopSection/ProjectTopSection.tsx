@@ -1,7 +1,10 @@
 import LazyLoad from 'react-lazyload';
+import { Link } from 'react-router-dom';
 import { Box, Grid, Skeleton } from '@mui/material';
 import cx from 'clsx';
 
+import { BlockContent } from 'web-components/lib/components/block-content';
+import CreditClassCard from 'web-components/lib/components/cards/CreditClassCard';
 import GlanceCard from 'web-components/lib/components/cards/GlanceCard';
 import ProjectTopCard from 'web-components/lib/components/cards/ProjectTopCard';
 import ProjectPlaceInfo from 'web-components/lib/components/place/ProjectPlaceInfo';
@@ -12,7 +15,12 @@ import { Body, Label, Title } from 'web-components/lib/components/typography';
 
 import { UseStateSetter } from 'types/react/use-state';
 
-import { useSdgByIriQuery } from '../../../generated/sanity-graphql';
+import { findSanityCreditClass } from 'components/templates/ProjectDetails/ProjectDetails.utils';
+
+import {
+  AllCreditClassQuery,
+  useSdgByIriQuery,
+} from '../../../generated/sanity-graphql';
 import { getSanityImgSrc } from '../../../lib/imgSrc';
 import { qudtUnit, qudtUnitMap } from '../../../lib/rdf';
 import { getDisplayParty, getParty } from '../../../lib/transform';
@@ -31,12 +39,14 @@ import {
 
 function ProjectTopSection({
   data,
+  sanityCreditClassData,
   geojson,
   isGISFile,
   batchData,
   setPaginationParams,
 }: {
   data?: any; // TODO: when all project are onchain, this can be ProjectByOnChainIdQuery
+  sanityCreditClassData?: AllCreditClassQuery;
   geojson?: any;
   isGISFile?: boolean;
   batchData?: {
@@ -53,7 +63,6 @@ function ProjectTopSection({
   const project = data?.projectByOnChainId || data?.projectByHandle; // TODO: eventually just projectByOnChainId
   const metadata = project?.metadata;
 
-  const registry = project?.partyByRegistryId;
   const videoURL = metadata?.['regen:videoURL']?.['@value'];
   const landStewardPhoto = metadata?.['regen:landStewardPhoto']?.['@value'];
   const area =
@@ -87,6 +96,14 @@ function ProjectTopSection({
     title: s.title || '',
     imageUrl: getSanityImgSrc(s.image),
   }));
+
+  const creditClassSanity = findSanityCreditClass({
+    sanityCreditClassData,
+    creditClassIdOrUrl:
+      creditClass?.onChainId ??
+      creditClassVersion?.metadata?.['http://schema.org/url']?.['@value'],
+  });
+
   return (
     <Section classes={{ root: styles.section }}>
       <Grid container>
@@ -109,27 +126,6 @@ function ProjectTopSection({
               }}
             >
               {!metadata && <Skeleton variant="text" height={124} />}
-              {creditClass && creditClassVersion && (
-                <>
-                  <ProjectTopLink
-                    label="credit class"
-                    name={creditClassVersion.name}
-                    url={
-                      isVCSProject
-                        ? `/credit-classes/${creditClass?.onChainId}`
-                        : creditClassVersion?.metadata?.[
-                            'http://schema.org/url'
-                          ]?.['@value']
-                    }
-                    creditClassId={
-                      creditClassVersion?.metadata?.[
-                        'http://regen.network/creditClassId'
-                      ]
-                    }
-                    target="_self"
-                  />
-                </>
-              )}
               {!isVCSProject && (
                 <ProjectTopLink
                   label="offset generation method"
@@ -149,13 +145,6 @@ function ProjectTopSection({
                       '@value'
                     ]
                   }
-                />
-              )}
-              {registry && (
-                <ProjectTopLink
-                  label="registry"
-                  name={registry.name}
-                  url={registry.organizationByPartyId?.website}
                 />
               )}
             </Box>
@@ -190,6 +179,18 @@ function ProjectTopSection({
               {primaryDescription}
             </Body>
           )}
+          <Link to={`/credit-classes/${creditClassSanity?.path}`}>
+            <CreditClassCard
+              title={<BlockContent content={creditClassSanity?.nameRaw} />}
+              description={
+                <BlockContent
+                  content={creditClassSanity?.shortDescriptionRaw}
+                />
+              }
+              imgSrc={getSanityImgSrc(creditClassSanity?.image)}
+              sx={{ mt: [8, 20], mb: [2, 8] }}
+            />
+          </Link>
           {isVCSProject && <AdditionalProjectMetadata metadata={metadata} />}
           <LazyLoad offset={50}>
             {videoURL &&

@@ -35,7 +35,7 @@ import useIssuanceModal from './hooks/useIssuanceModal';
 import useMedia from './hooks/useMedia';
 import useSeo from './hooks/useSeo';
 import { ManagementActions } from './ProjectDetails.ManagementActions';
-import { MoreProjects } from './ProjectDetails.MoreProjects';
+import { MemoizedMoreProjects as MoreProjects } from './ProjectDetails.MoreProjects';
 import { ProjectDocumentation } from './ProjectDetails.ProjectDocumentation';
 import { ProjectTimeline } from './ProjectDetails.ProjectTimeline';
 import { getMediaBoxStyles } from './ProjectDetails.styles';

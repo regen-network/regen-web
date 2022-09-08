@@ -1,5 +1,9 @@
-import { useMemo } from 'react';
-import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { SellOrderInfo } from '@regen-network/api/lib/generated/regen/ecocredit/marketplace/v1/query';
+import {
+  ProjectInfo,
+  QueryProjectsResponse,
+} from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import shuffle from 'lodash/shuffle';
 
 import {
   ProjectsSellOrders,
@@ -8,9 +12,39 @@ import {
 import useEcocreditQuery from 'hooks/useEcocreditQuery';
 import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
+const hasMetadata = (project: ProjectInfo): boolean => !!project.metadata;
+
+const hasSellOrders = (
+  project: ProjectInfo,
+  sellOrders: SellOrderInfo[],
+): boolean =>
+  sellOrders.some(sellOrder => sellOrder?.batchDenom?.startsWith(project.id));
+
+const prioritizeWithSellOrders = (
+  projects: ProjectInfo[],
+  sellOrders: SellOrderInfo[],
+  limit?: number,
+): ProjectInfo[] => {
+  const projectsWithOrders = projects.filter(projs =>
+    hasSellOrders(projs, sellOrders),
+  );
+  if (!limit || projectsWithOrders.length >= limit) return projectsWithOrders;
+
+  const numProjects = limit - projectsWithOrders.length;
+  const additionalProjects = projects.filter(
+    p1 => !projectsWithOrders.some(p2 => p1.id === p2.id),
+  );
+  return [...projectsWithOrders, ...additionalProjects.slice(0, numProjects)];
+};
+
+const isOtherProject = (project: ProjectInfo, projectId: string): boolean =>
+  project.id !== projectId;
+
 interface ProjectsWithOrdersProps {
   limit?: number;
   metadata?: boolean; // to discard projects without metadata prop
+  random?: boolean; // to shuffle the projects (along with limit allows a random subselection)
+  projectId?: string; // to discard an specific project
 }
 
 /**
@@ -19,6 +53,8 @@ interface ProjectsWithOrdersProps {
 export function useProjectsWithOrders({
   limit,
   metadata = false,
+  random = false,
+  projectId,
 }: ProjectsWithOrdersProps): ProjectsSellOrders {
   const { data, loading: loadingProjects } =
     useEcocreditQuery<QueryProjectsResponse>({
@@ -30,17 +66,33 @@ export function useProjectsWithOrders({
   const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
 
-  const projectsWithMetadata = useMemo(
-    () => projects?.filter(project => project.metadata),
-    [projects],
-  );
-
   const { projectsWithOrderData, loading: loadingWithOrders } =
     useProjectsSellOrders({
-      projects: metadata ? projectsWithMetadata : projects,
+      projects: selectProjects(projects, sellOrders),
       sellOrders,
       limit,
     });
+
+  function selectProjects(
+    _projects: ProjectInfo[] | undefined,
+    sellOrders: SellOrderInfo[] | undefined,
+  ): ProjectInfo[] | undefined {
+    if (!_projects || !sellOrders) return;
+
+    if (projectId)
+      _projects = _projects.filter(proj => isOtherProject(proj, projectId));
+
+    if (random)
+      return prioritizeWithSellOrders(
+        shuffle(_projects).filter(hasMetadata),
+        sellOrders,
+        limit,
+      );
+
+    if (metadata) return _projects.filter(hasMetadata);
+
+    return _projects;
+  }
 
   return {
     projectsWithOrderData,

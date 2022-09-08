@@ -1,3 +1,4 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 
@@ -15,3 +16,5 @@ export function MoreProjects(): JSX.Element {
     </Box>
   );
 }
+
+export const MemoizedMoreProjects = React.memo(MoreProjects);

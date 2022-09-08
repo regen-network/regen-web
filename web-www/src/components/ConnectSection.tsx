@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Link } from '@mui/material';
+import { Box, Container, Grid, Link } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
@@ -29,7 +29,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     lineHeight: '150%',
     margin: '0 auto',
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(18),
+      paddingBottom: theme.spacing(14),
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5),
@@ -86,11 +86,11 @@ const IconLabel = ({
             transitionTimingFunction: 'ease-in-out',
             width: {
               xs: theme.spacing(15),
-              tablet: theme.spacing(30),
+              tablet: 80,
             },
             height: {
               xs: theme.spacing(15),
-              tablet: theme.spacing(30),
+              tablet: 80,
             },
             ':hover': {
               bgcolor: 'secondary.light',
@@ -109,16 +109,6 @@ const IconLabel = ({
           {icon}
         </Box>
       </Link>
-      <Title
-        color="primary"
-        align="center"
-        sx={{
-          fontSize: theme => [14, 16, theme.typography.h4.fontSize],
-          pt: [1.5, 5.25],
-        }}
-      >
-        {label}
-      </Title>
       {subLabel && (
         <Body
           size="lg"
@@ -158,19 +148,21 @@ const ConnectSection = ({
       titleClassName={clsx(titleClassName, classes.title)}
       titleVariant={titleVariant}
     >
-      <Grid container spacing={4} justifyContent="center" rowGap={8}>
-        {icons.map((item, i) => (
-          <Grid item xs={4} md={2} className={itemClassName} key={i}>
-            <IconLabel
-              href={item.href}
-              icon={item.icon}
-              small={item.small}
-              label={item.label}
-              subLabel={item.subLabel}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      <Container sx={{ maxWidth: 780 }}>
+        <Grid container spacing={4} justifyContent="center" rowGap={8}>
+          {icons.map((item, i) => (
+            <Grid item xs={4} md={3} className={itemClassName} key={i}>
+              <IconLabel
+                href={item.href}
+                icon={item.icon}
+                small={item.small}
+                label={item.label}
+                subLabel={item.subLabel}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </BackgroundSection>
   );
 };

@@ -1,11 +1,11 @@
 import React from 'react';
-import { Box, Container, Grid, Link } from '@mui/material';
+import { Box, Grid, Link } from '@mui/material';
 import { Variant } from '@mui/material/styles/createTypography';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 import { FluidObject } from 'gatsby-image';
 
-import { Body, Title } from 'web-components/lib/components/typography';
+import { Body } from 'web-components/lib/components/typography';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import BackgroundSection from './BackgroundSection';

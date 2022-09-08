@@ -29,7 +29,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     lineHeight: '150%',
     margin: '0 auto',
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(14),
+      paddingBottom: theme.spacing(8),
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5),
@@ -148,21 +148,25 @@ const ConnectSection = ({
       titleClassName={clsx(titleClassName, classes.title)}
       titleVariant={titleVariant}
     >
-      <Container sx={{ maxWidth: 780 }}>
-        <Grid container spacing={4} justifyContent="center" rowGap={8}>
-          {icons.map((item, i) => (
-            <Grid item xs={4} md={3} className={itemClassName} key={i}>
-              <IconLabel
-                href={item.href}
-                icon={item.icon}
-                small={item.small}
-                label={item.label}
-                subLabel={item.subLabel}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+      <Grid
+        container
+        spacing={4}
+        justifyContent="center"
+        rowGap={8}
+        sx={{ maxWidth: 740, margin: '0 auto' }}
+      >
+        {icons.map((item, i) => (
+          <Grid item xs={4} md={3} className={itemClassName} key={i}>
+            <IconLabel
+              href={item.href}
+              icon={item.icon}
+              small={item.small}
+              label={item.label}
+              subLabel={item.subLabel}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </BackgroundSection>
   );
 };

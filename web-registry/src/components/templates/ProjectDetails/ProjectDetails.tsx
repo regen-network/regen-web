@@ -11,6 +11,7 @@ import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
+import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
@@ -25,6 +26,7 @@ import useQueryMetadataGraph from '../../../hooks/useQueryMetadataGraph';
 import { useLedger } from '../../../ledger';
 import { chainId } from '../../../lib/ledger';
 import { NotFoundPage } from '../../../pages/NotFound/NotFound';
+import { client as sanityClient } from '../../../sanity';
 import { ProjectImpactSection, ProjectTopSection } from '../../organisms';
 import { Credits } from '../../organisms/BuyCreditsModal/BuyCreditsModal';
 import useGeojson from './hooks/useGeojson';
@@ -51,6 +53,9 @@ const testProject: Project = {};
 function ProjectDetails(): JSX.Element {
   const theme = useTheme<Theme>();
   const { projectId } = useParams();
+  const { data: sanityCreditClassData } = useAllCreditClassQuery({
+    client: sanityClient,
+  });
 
   // Page mode (info/Tx)
   const isTxMode =
@@ -173,6 +178,7 @@ function ProjectDetails(): JSX.Element {
 
       <ProjectTopSection
         data={data}
+        sanityCreditClassData={sanityCreditClassData}
         batchData={{
           batches: batchesWithSupply,
           totals: batchesTotal,

@@ -62,19 +62,19 @@ const MarketingNav: React.FC<{ location: PageProps['location'] }> = ({
   const howToItems: HeaderDropdownItemProps[] = [
     // {
     //   title: 'Create a Credit Class',
-    //   href: 'https://registry.regen.network/create-credit-class/',
+    //   href: 'https://app.regen.network/create-credit-class/',
     //   linkComponent: NavLink,
     // },
     {
       pathname,
       title: 'Create a Methodology',
-      href: 'https://registry.regen.network/create-methodology/',
+      href: 'https://app.regen.network/create-methodology/',
       linkComponent: NavLink,
     },
     {
       pathname,
       title: 'Methodology Review Process',
-      href: 'https://registry.regen.network/methodology-review-process/',
+      href: 'https://app.regen.network/methodology-review-process/',
       linkComponent: NavLink,
     },
   ];
@@ -83,14 +83,14 @@ const MarketingNav: React.FC<{ location: PageProps['location'] }> = ({
     {
       pathname,
       title: 'Buyers',
-      href: 'https://registry.regen.network/buyers/',
+      href: 'https://app.regen.network/buyers/',
       svg: BuyersIcon,
       linkComponent: NavLink,
     },
     {
       pathname,
       title: 'Land Stewards',
-      href: 'https://registry.regen.network/land-stewards/',
+      href: 'https://app.regen.network/land-stewards/',
       svg: LandStewardsIcon,
       linkComponent: NavLink,
     },
@@ -124,7 +124,7 @@ const MarketingNav: React.FC<{ location: PageProps['location'] }> = ({
     {
       pathname,
       title: 'Registry Homepage',
-      href: 'https://registry.regen.network/',
+      href: 'https://app.regen.network/',
       linkComponent: NavLink,
     },
     ...standardItems,

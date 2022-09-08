@@ -20,7 +20,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
       paddingBottom: theme.spacing(17.75),
     },
     [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(22.5),
+      paddingBottom: theme.spacing(28.5),
     },
   },
   title: {
@@ -28,12 +28,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     color: theme.palette.primary.main,
     lineHeight: '150%',
     margin: '0 auto',
-    [theme.breakpoints.up('sm')]: {
-      paddingBottom: theme.spacing(8),
-    },
     [theme.breakpoints.down('sm')]: {
       fontSize: theme.spacing(5),
       paddingBottom: theme.spacing(12.5),
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(10),
     },
   },
 }));

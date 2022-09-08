@@ -1,6 +1,16 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter,
+  createRoutesFromChildren,
+  matchRoutes,
+  Route,
+  Routes,
+  useLocation,
+  useNavigationType,
+} from 'react-router-dom';
 import { OAuthError, useAuth0 } from '@auth0/auth0-react';
+import * as Sentry from '@sentry/react';
+import { BrowserTracing } from '@sentry/tracing';
 import { createBrowserHistory } from 'history';
 
 import CookiesBanner from 'web-components/lib/components/banner/CookiesBanner';
@@ -67,6 +77,27 @@ const Activity = lazy(() => import('./pages/Activity'));
 const CreateBatch = lazy(() => import('./pages/CreateBatch'));
 const Storefront = lazy(() => import('./pages/Marketplace/Storefront'));
 
+Sentry.init({
+  dsn: 'https://f5279ac3b8724af88ffb4cdfad92a2d4@o1377530.ingest.sentry.io/6688446',
+  integrations: [
+    new BrowserTracing({
+      routingInstrumentation: Sentry.reactRouterV6Instrumentation(
+        React.useEffect,
+        useLocation,
+        useNavigationType,
+        createRoutesFromChildren,
+        matchRoutes,
+      ),
+    }),
+  ],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+  environment: process.env.SENTRY_ENVIRONMENT || 'development',
+});
+
 export const history = createBrowserHistory();
 
 const GoogleAnalytics: React.FC = (): JSX.Element => {
@@ -76,6 +107,7 @@ const GoogleAnalytics: React.FC = (): JSX.Element => {
 
 const App: React.FC = (): JSX.Element => {
   const { user, isLoading, error } = useAuth0();
+  const SentryRoutes = Sentry.withSentryReactRouterV6Routing(Routes);
 
   if (isLoading) {
     return <div></div>;
@@ -98,7 +130,7 @@ const App: React.FC = (): JSX.Element => {
       <div>
         <RegistryNav />
         <Suspense fallback={<PageLoader />}>
-          <Routes>
+          <SentryRoutes>
             <Route path="/" element={<Home />} />
             <Route path="verify-email" element={<VerifyEmail />} />
             <Route path="add" element={<Additionality />} />
@@ -280,7 +312,7 @@ const App: React.FC = (): JSX.Element => {
               <Route path="storefront" element={<Storefront />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+          </SentryRoutes>
         </Suspense>
         <CookiesBanner
           privacyUrl="https://www.regen.network/privacy-policy/"

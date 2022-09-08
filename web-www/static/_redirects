@@ -1,10 +1,10 @@
-/registry/*  https://registry.regen.network/:splat 301!
+/registry/*  https://app.regen.network/:splat 301!
 
 /rainforestfoundation.html  /case-studies/  200
 /faq.html  /faq/  200
-/farmers_signup.html  https://registry.regen.network/land-stewards  301!
-/land-stewards  https://registry.regen.network/land-stewards  301!
-/buyers  https://registry.regen.network/buyers  301!
+/farmers_signup.html  https://app.regen.network/land-stewards  301!
+/land-stewards  https://app.regen.network/land-stewards  301!
+/buyers  https://app.regen.network/buyers  301!
 /team.html#partners  /partners/  200
 /openteam.html  /partners/  200
 /media.html  /media/  200

@@ -18,6 +18,8 @@ const StickyBar = ({ sx = [], children }: Props): JSX.Element => {
           py: [3.5, 7.5],
           px: [7, 38.5],
           boxShadow: 7,
+          backgroundColor: 'primary.main',
+          zIndex: 1,
         },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}

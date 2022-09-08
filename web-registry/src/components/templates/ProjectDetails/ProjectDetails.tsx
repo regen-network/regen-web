@@ -1,20 +1,28 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Skeleton } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
+import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
+import CurrentCreditsIcon from 'web-components/lib/components/icons/CurrentCreditsIcon';
 import IssuanceModal from 'web-components/lib/components/modal/IssuanceModal';
 import SEO from 'web-components/lib/components/seo';
 import ProjectMedia from 'web-components/lib/components/sliders/ProjectMedia';
+import { StickyBar } from 'web-components/lib/components/sticky-bar/StickyBar';
 import { Theme } from 'web-components/lib/theme/muiTheme';
 
 import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 
+import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow';
+import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
+import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
+import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
 import {
   useProjectByHandleQuery,
@@ -56,6 +64,8 @@ function ProjectDetails(): JSX.Element {
   const { data: sanityCreditClassData } = useAllCreditClassQuery({
     client: sanityClient,
   });
+  const [selectedProject, setSelectedProject] =
+    useState<ProjectWithOrderData | null>(null);
 
   // Page mode (info/Tx)
   const isTxMode =
@@ -147,6 +157,19 @@ function ProjectDetails(): JSX.Element {
     viewOnLedger,
   } = useIssuanceModal(data);
 
+  const { sellOrdersResponse } = useQuerySellOrders();
+  const sellOrders = sellOrdersResponse?.sellOrders;
+  const projects = useMemo(
+    () => (onChainProject ? [onChainProject] : undefined),
+    [onChainProject],
+  );
+
+  const { projectsWithOrderData, loading: loadingProjects } =
+    useProjectsSellOrders({
+      projects: projects,
+      sellOrders,
+    });
+
   if (!isLoading && !project) return <NotFoundPage />;
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
@@ -175,6 +198,21 @@ function ProjectDetails(): JSX.Element {
           />
         </Box>
       )}
+
+      <StickyBar>
+        <Box
+          sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}
+        >
+          <OutlinedButton sx={{ mr: 5 }}>{'SELL'}</OutlinedButton>
+          <ContainedButton
+            startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
+            onClick={() => setSelectedProject(projectsWithOrderData[0])}
+            disabled={loadingProjects}
+          >
+            {'BUY CREDITS'}
+          </ContainedButton>
+        </Box>
+      </StickyBar>
 
       <ProjectTopSection
         data={data}
@@ -231,6 +269,8 @@ function ProjectDetails(): JSX.Element {
           creditDenom={creditClassDenom || creditClassName}
         />
       )}
+
+      <BuySellOrderFlow selectedProject={selectedProject} />
     </Box>
   );
 }

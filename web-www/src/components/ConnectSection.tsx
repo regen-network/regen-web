@@ -78,6 +78,8 @@ const IconLabel = ({
         <Box
           sx={theme => ({
             bgcolor: 'secondary.main',
+            background:
+              'linear-gradient(201.8deg, #4FB573 14.67%, #B9E1C7 97.14%);',
             borderRadius: '50%',
             transitionDuration: '200ms',
             transitionProperty: 'color, background-color',

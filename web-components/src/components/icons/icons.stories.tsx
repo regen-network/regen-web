@@ -153,7 +153,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<EmailIcon color="grey" />} label="EmailIcon" />
     <LabeledIcon
       icon={<EmptyCartIcon sx={{ color: 'info.main' }} />}
-      label="EmptyCardIcon"
+      label="EmptyCartIcon"
     />
     <LabeledIcon icon={<EyeIcon />} label="EyeIcon" />
     <LabeledIcon icon={<FacebookIcon color="blue" />} label="FacebookIcon" />
@@ -181,7 +181,7 @@ export const allIcons = (): JSX.Element => (
     <LabeledIcon icon={<RegenLedgerIcon />} label="RegenLedgerIcon" />
     <LabeledIcon icon={<RegenLogoIcon color="grey" />} label="RegenLogoIcon" />
     <LabeledIcon
-      icon={<RegenMarketIcon color="grey" />}
+      icon={<RegenMarketIcon sx={{ fontSize: 64 }} />}
       label="RegenMarketIcon"
     />
     <LabeledIcon icon={<RegenTokenIcon />} label="RegenTokenIcon" />

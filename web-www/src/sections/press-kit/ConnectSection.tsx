@@ -98,7 +98,7 @@ const PressKitConnectSection = (): JSX.Element => {
       ),
       href: 'https://discord.gg/BDcBJu3',
       label: 'Discord community',
-      small: true,
+      smallSvg: true,
     },
     {
       icon: (
@@ -109,7 +109,7 @@ const PressKitConnectSection = (): JSX.Element => {
       ),
       href: 'https://www.youtube.com/channel/UCICD2WukTY0MbQdQ9Quew3g',
       label: 'Youtube',
-      small: true,
+      smallSvg: true,
     },
     {
       icon: (
@@ -150,11 +150,12 @@ const PressKitConnectSection = (): JSX.Element => {
       ),
       href: 'http://newsletter.regen.network/',
       label: 'Sign up for our newsletter',
-      small: true,
+      smallSvg: true,
     },
   ];
   return (
     <ConnectSection
+      isCompact
       itemClassName={styles.item}
       header={data?.connectSectionHeader || ''}
       background={background as any}

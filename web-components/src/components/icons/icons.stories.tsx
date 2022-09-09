@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 
-import { FlexCol } from '../box';
+import { Flex } from '../box';
 import AccountabilityIcon from './AccountabilityIcon';
 import ArrowDownIcon from './ArrowDownIcon';
 import AvailableCreditsIcon from './AvailableCreditsIcon';
@@ -82,7 +82,8 @@ function LabeledIcon(props: {
 }): JSX.Element {
   return (
     <Grid item sm={3} md={2} lg={1.5} sx={{ border: 1, borderRadius: 3 }}>
-      <FlexCol
+      <Flex
+        col
         sx={{
           justifyContent: 'flex-end',
           alignItems: 'center',
@@ -93,7 +94,7 @@ function LabeledIcon(props: {
       >
         <div>{props.icon}</div>
         <div>{props.label}</div>
-      </FlexCol>
+      </Flex>
     </Grid>
   );
 }

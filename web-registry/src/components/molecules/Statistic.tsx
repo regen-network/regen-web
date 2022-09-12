@@ -55,7 +55,7 @@ const Statistic: React.FC<StatisticProps> = ({ label, count, arrow }) => {
             />
           </Box>
         )}
-        <Title variant="h3">{formatNumber(count)}</Title>
+        <Title variant="h3">{formatNumber({ num: count })}</Title>
       </Box>
     </Box>
   );

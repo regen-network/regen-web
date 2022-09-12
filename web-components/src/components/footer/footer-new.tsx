@@ -4,6 +4,7 @@ import { Box, Grid, Link, List, ListItem } from '@mui/material';
 import { useTheme } from '@mui/styles';
 
 import { HeaderLogoLink } from '../header/HeaderLogoLink';
+import CoinGeckoIcon from '../icons/CoinGeckoIcon';
 import Section from '../section';
 import { Body, Label } from '../typography';
 import { SocialLinks } from './SocialLinks';
@@ -159,7 +160,16 @@ const Footer: React.FC<{
             </Body>
           </Grid>
           <Grid item>
-            <Body size="sm">© 2021 Regen Network Development, Inc</Body>
+            <Body styleLinks={false} color="primary" size="sm" sx={{ mr: 1.5 }}>
+              <LinkComponent
+                href={'https://www.coingecko.com/'}
+                target="_blank"
+                rel="noreferrer"
+                sx={{ display: 'flex' }}
+              >
+                data provided by <CoinGeckoIcon sx={{ width: 80 }} />
+              </LinkComponent>
+            </Body>
           </Grid>
         </Grid>
       </Section>

@@ -66,4 +66,8 @@ export const amountToSpend = ({
   creditCount,
   askAmount,
 }: AmountToSpendParams): String =>
-  formatNumber(creditCount * microToDenom(askAmount), 2) ?? '-';
+  formatNumber({
+    num: creditCount * microToDenom(askAmount),
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }) ?? '-';

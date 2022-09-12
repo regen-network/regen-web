@@ -28,7 +28,6 @@ const prioritizeWithSellOrders = (
   const projectsWithOrders = projects.filter(projs =>
     hasSellOrders(projs, sellOrders),
   );
-  // if (!limit || projectsWithOrders.length >= limit) return projectsWithOrders;
 
   // if there is a limit, check if there are already enough projects in the
   // `projectsWithOrders` subselect

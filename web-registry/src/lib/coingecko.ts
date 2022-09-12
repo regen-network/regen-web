@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 type FetchSimplePriceParams = {
   ids: string;
@@ -17,13 +17,9 @@ export const fetchSimplePrice = async ({
   ids,
   vsCurrencies,
 }: FetchSimplePriceParams): Promise<FetchSimplePriceResponse> => {
-  const result: AxiosResponse<FetchSimplePriceResponse> = await axios
-    .get<FetchSimplePriceResponse>(
-      `${COINGECKO_API_URL}/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`,
-    )
-    .then(response => {
-      return response;
-    });
+  const result = await axios.get<FetchSimplePriceResponse>(
+    `${COINGECKO_API_URL}/simple/price?ids=${ids}&vs_currencies=${vsCurrencies}`,
+  );
 
   return result.data;
 };

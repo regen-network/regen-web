@@ -18,7 +18,7 @@ export default function CoinGeckoIcon({
           {'.cls-1{fill:#fff}.cls-4{fill:#8bc53f}.cls-6{fill:#58595b}'}
         </style>
       </defs>
-      <title>{'coingecko_full vector (white font)'}</title>
+      <title>{'Coingecko'}</title>
       <g id="Coin_Gecko_Vector_Text" data-name="Coin Gecko Vector Text">
         <path
           className="cls-1"

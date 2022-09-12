@@ -63,10 +63,11 @@ export const BasketsTable: React.FC<BasketTableProps> = ({
             </Grid>
           </Grid>,
           row.balance?.balance?.amount
-            ? formatNumber(
-                parseInt(row.balance?.balance?.amount) /
+            ? formatNumber({
+                num:
+                  parseInt(row.balance?.balance?.amount) /
                   Math.pow(10, row.basket.exponent),
-              )
+              })
             : 0,
         ];
         /* eslint-enable react/jsx-key */

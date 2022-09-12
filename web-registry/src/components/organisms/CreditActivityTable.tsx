@@ -193,7 +193,7 @@ const CreditActivityTable: React.FC = () => {
                         </Label>
                       </StyledTableCell>
                       <StyledTableCell>
-                        {formatNumber(tx.height)}
+                        {formatNumber({ num: tx.height })}
                       </StyledTableCell>
                       <StyledTableCell>
                         <OutlinedButton>view transaction</OutlinedButton>

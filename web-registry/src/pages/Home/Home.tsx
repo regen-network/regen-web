@@ -2,12 +2,19 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Box, CardMedia, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { QueryProjectsResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
+import { useQuery } from '@tanstack/react-query';
 
 import { BlockContent } from 'web-components/lib/components/block-content';
 import { Loading } from 'web-components/lib/components/loading';
 import Modal from 'web-components/lib/components/modal';
 import Section from 'web-components/lib/components/section';
 import { Body, Title } from 'web-components/lib/components/typography';
+
+import {
+  fetchSimplePrice,
+  GECKO_REGEN_ID,
+  GECKO_USD_CURRENCY,
+} from 'lib/coingecko';
 
 import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { useSortProjects } from 'pages/Projects/hooks/useSortProjects';
@@ -40,6 +47,10 @@ const Home: React.FC = () => {
 
   const { data, loading: loadingSanity } = useAllHomePageQuery({ client });
   const { data: creditClassData } = useAllCreditClassQuery({ client });
+  const regenPriceQuery = useQuery(['regenPrice'], () =>
+    fetchSimplePrice({ ids: GECKO_REGEN_ID, vsCurrencies: GECKO_USD_CURRENCY }),
+  );
+
   const content = data?.allHomePage?.[0];
   const heroSection = content?.heroSection;
 
@@ -51,6 +62,7 @@ const Home: React.FC = () => {
   });
   const { sellOrdersResponse } = useQuerySellOrders();
   const sellOrders = sellOrdersResponse?.sellOrders;
+
   const projects = useMemo(
     () => ecocreditData?.projects?.filter(project => project.metadata),
     [ecocreditData?.projects],
@@ -60,6 +72,7 @@ const Home: React.FC = () => {
     useProjectsSellOrders({
       projects,
       sellOrders,
+      regenPrice: regenPriceQuery?.data?.regen?.usd,
       limit: FEATURE_PROJECTS_COUNT,
     });
   const sortedProjects = useSortProjects({

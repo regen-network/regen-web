@@ -174,7 +174,8 @@ const ConnectSection = ({
                 icon={item.icon}
                 smallSvg={item.smallSvg}
                 label={item.label}
-                subLabel={!isCompact ? item.subLabel : undefined}
+                isCompact={isCompact}
+                subLabel={item.subLabel}
               />
             </Grid>
           ))}

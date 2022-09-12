@@ -4,8 +4,6 @@ import { Box } from '@mui/material';
 import ProjectCard from 'web-components/lib/components/cards/ProjectCard';
 import Section from 'web-components/lib/components/section';
 
-import { UseStateSetter } from 'types/react/use-state';
-
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import WithLoader from 'components/atoms/WithLoader';
 
@@ -16,7 +14,7 @@ interface Props {
   projects: ProjectWithOrderData[];
   title?: string;
   titleAlign?: 'center' | 'left';
-  onButtonClick?: UseStateSetter<ProjectWithOrderData | null>;
+  onButtonClick?: ({ project }: { project: ProjectWithOrderData }) => void;
 }
 
 export function ProjectCardsSection({

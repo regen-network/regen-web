@@ -45,7 +45,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
   const [options, setOptions] = useState<Option[]>([]);
 
   const initialValues = {
-    batchDenom: batchDenoms[0].value,
+    batchDenom: batchDenoms[0]?.value ?? '',
     price: undefined,
     amount: undefined,
     disableAutoRetire: false,
@@ -94,6 +94,7 @@ const CreateSellOrderForm: React.FC<FormProps> = ({
             label="Batch denom"
             component={SelectTextField}
             options={options}
+            disabled={options.length === 1}
             sx={{ mb: 10.5 }}
           />
           <Box

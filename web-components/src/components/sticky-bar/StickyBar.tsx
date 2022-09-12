@@ -12,8 +12,8 @@ const StickyBar = ({ sx = [], children }: Props): JSX.Element => {
     <Box
       sx={[
         {
-          position: 'sticky',
-          top: 0,
+          position: 'fixed',
+          bottom: 0,
           width: '100%',
           py: [3.5, 7.5],
           px: [7, 38.5],

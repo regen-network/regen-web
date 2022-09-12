@@ -2,45 +2,45 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 
-import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import { CelebrateIcon } from 'web-components/lib/components/icons/CelebrateIcon';
+import { Option } from 'web-components/lib/components/inputs/SelectTextField';
+import { CreateSellOrderModal } from 'web-components/lib/components/modal/CreateSellOrderModal';
 import { ProcessingModal } from 'web-components/lib/components/modal/ProcessingModal';
 import { TxErrorModal } from 'web-components/lib/components/modal/TxErrorModal';
 import { Item } from 'web-components/lib/components/modal/TxModal';
 import { TxSuccessfulModal } from 'web-components/lib/components/modal/TxSuccessfulModal';
 
+import { BatchInfoWithBalance } from 'types/ledger/ecocredit';
 import { UseStateSetter } from 'types/react/use-state';
 import { getHashUrl } from 'lib/block-explorer';
 
-import useBuySellOrderSubmit from 'pages/Marketplace/Storefront/hooks/useBuySellOrderSubmit';
-import { VIEW_ECOCREDITS } from 'pages/Projects/Projects.config';
-import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
+import useCreateSellOrderSubmit from 'pages/Dashboard/MyEcocredits/hooks/useCreateSellOrderSubmit';
+import { CREATE_SELL_ORDER_TITLE } from 'pages/Dashboard/MyEcocredits/MyEcocredits.contants';
+import { getAvailableAmountByBatch } from 'pages/Dashboard/MyEcocredits/MyEcocredits.utils';
 import { Link } from 'components/atoms';
-import { BuyCreditsModal } from 'components/organisms';
 import { useMsgClient } from 'hooks';
 
 type Props = {
   isFlowStarted: boolean;
   setIsFlowStarted: UseStateSetter<boolean>;
-  selectedProject: ProjectWithOrderData | null;
+  credits?: BatchInfoWithBalance[];
 };
 
-export const BuySellOrderFlow = ({
-  selectedProject,
+export const CreateSellOrderFlow = ({
   isFlowStarted,
   setIsFlowStarted,
+  credits = [],
 }: Props): JSX.Element => {
-  const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
+  const [isCreateSellOrderOpen, setIsCreateSellOrderOpen] = useState(false);
   const [isProcessingModalOpen, setIsProcessingModalOpen] = useState(false);
   const [txModalTitle, setTxModalTitle] = useState<string>('');
-  const [txButtonTitle, setTxButtonTitle] = useState<string>('');
-  const [txModalHeader, setTxModalHeader] = useState<string>('');
+  const [txButtonTitle, setTxButtonTitle] = useState<string>();
+  const [txModalHeader, setTxModalHeader] = useState<string>();
   const [cardItems, setCardItems] = useState<Item[] | undefined>(undefined);
-  const [displayErrorBanner, setDisplayErrorBanner] = useState(false);
   const navigate = useNavigate();
 
-  const closeBuyModal = (): void => {
-    setIsBuyModalOpen(false);
+  const closeCreateModal = (): void => {
+    setIsCreateSellOrderOpen(false);
     setIsFlowStarted(false);
   };
   const closeProcessingModal = (): void => setIsProcessingModalOpen(false);
@@ -64,12 +64,20 @@ export const BuySellOrderFlow = ({
     _deliverTxResponse: DeliverTxResponse,
   ): Promise<void> => {
     closeProcessingModal();
-    closeBuyModal();
+    closeCreateModal();
   };
   const onTxSuccessButtonClick = (): void => {
     handleTxModalClose();
     navigate('/ecocredits/dashboard');
   };
+
+  const onTxBroadcast = (): void => setIsCreateSellOrderOpen(false);
+
+  useEffect(() => {
+    if (isFlowStarted) {
+      setIsCreateSellOrderOpen(true);
+    }
+  }, [isFlowStarted]);
 
   const {
     signAndBroadcast,
@@ -83,34 +91,30 @@ export const BuySellOrderFlow = ({
   const txHash = deliverTxResponse?.transactionHash;
   const txHashUrl = getHashUrl(txHash);
 
-  const buySellOrderSubmit = useBuySellOrderSubmit({
+  const sellableBatchDenomsOption: Option[] = credits.map(credit => ({
+    label: credit.denom,
+    value: credit.denom,
+  }));
+
+  const createSellOrderSubmit = useCreateSellOrderSubmit({
     accountAddress,
     signAndBroadcast,
     setCardItems,
-    setTxButtonTitle,
     setTxModalHeader,
-    setTxModalTitle,
-    buttonTitle: VIEW_ECOCREDITS,
+    setTxButtonTitle,
+    onTxBroadcast,
   });
-
-  useEffect(() => {
-    if (isFlowStarted && selectedProject && accountAddress) {
-      setIsBuyModalOpen(true);
-    } else if (selectedProject && isFlowStarted && !accountAddress) {
-      setDisplayErrorBanner(true);
-    }
-  }, [selectedProject, isFlowStarted, accountAddress]);
 
   return (
     <>
-      <BuyCreditsModal
-        open={isBuyModalOpen}
-        onClose={closeBuyModal}
-        onSubmit={buySellOrderSubmit}
-        project={{
-          id: selectedProject?.id.toString() ?? '',
-          sellOrders: selectedProject?.sellOrders,
-        }}
+      <CreateSellOrderModal
+        batchDenoms={sellableBatchDenomsOption}
+        sellDenom={'REGEN'}
+        availableAmountByBatch={getAvailableAmountByBatch({ credits })}
+        open={isCreateSellOrderOpen}
+        onClose={closeCreateModal}
+        onSubmit={createSellOrderSubmit}
+        title={CREATE_SELL_ORDER_TITLE}
       />
       <ProcessingModal
         open={isProcessingModalOpen}
@@ -140,9 +144,6 @@ export const BuySellOrderFlow = ({
         onButtonClick={handleTxModalClose}
         buttonTitle="close"
       />
-      {displayErrorBanner && (
-        <ErrorBanner text="Please connect to Keplr to use Regen Ledger features" />
-      )}
     </>
   );
 };

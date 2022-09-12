@@ -5,6 +5,7 @@ import { useTheme } from '@mui/styles';
 import { ServiceClientImpl } from '@regen-network/api/lib/generated/cosmos/tx/v1beta1/service';
 import { QueryProjectResponse } from '@regen-network/api/lib/generated/regen/ecocredit/v1/query';
 
+import ErrorBanner from 'web-components/lib/components/banner/ErrorBanner';
 import ContainedButton from 'web-components/lib/components/buttons/ContainedButton';
 import OutlinedButton from 'web-components/lib/components/buttons/OutlinedButton';
 import { CreditPrice } from 'web-components/lib/components/fixed-footer/BuyFooter';
@@ -19,9 +20,11 @@ import { useAllCreditClassQuery } from 'generated/sanity-graphql';
 import { getBatchesTotal } from 'lib/ecocredit/api';
 
 import { BuySellOrderFlow } from 'features/marketplace/BuySellOrderFlow';
+import { CreateSellOrderFlow } from 'features/marketplace/CreateSellOrderFlow';
 import { useProjectsSellOrders } from 'pages/Projects/hooks/useProjectsSellOrders';
 import { ProjectWithOrderData } from 'pages/Projects/Projects.types';
 import { usePaginatedBatchesByProject } from 'hooks/batches/usePaginatedBatchesByProject';
+import useEcocreditsByProject from 'hooks/useEcocreditsByProject';
 import { useQuerySellOrders } from 'hooks/useQuerySellOrders';
 
 import {
@@ -61,11 +64,12 @@ const testProject: Project = {};
 function ProjectDetails(): JSX.Element {
   const theme = useTheme<Theme>();
   const { projectId } = useParams();
+  const { wallet } = useLedger();
   const { data: sanityCreditClassData } = useAllCreditClassQuery({
     client: sanityClient,
   });
-  const [selectedProject, setSelectedProject] =
-    useState<ProjectWithOrderData | null>(null);
+  const [isBuyFlowStarted, setIsBuyFlowStarted] = useState(false);
+  const [isSellFlowStarted, setIsSellFlowStarted] = useState(false);
 
   // Page mode (info/Tx)
   const isTxMode =
@@ -170,6 +174,14 @@ function ProjectDetails(): JSX.Element {
       sellOrders,
     });
 
+  const { credits, isLoadingCredits } = useEcocreditsByProject({
+    address: wallet?.address,
+    projectId: projectsWithOrderData[0]?.id,
+  });
+
+  const isErrorBannerActive =
+    (isBuyFlowStarted || isSellFlowStarted) && !wallet?.address;
+
   if (!isLoading && !project) return <NotFoundPage />;
   return (
     <Box sx={{ backgroundColor: 'primary.main' }}>
@@ -203,11 +215,21 @@ function ProjectDetails(): JSX.Element {
         <Box
           sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}
         >
-          <OutlinedButton sx={{ mr: 5 }}>{'SELL'}</OutlinedButton>
+          <OutlinedButton
+            startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
+            onClick={() => setIsSellFlowStarted(true)}
+            disabled={isLoadingCredits || credits.length === 0}
+            sx={{ mr: 5 }}
+          >
+            {'SELL'}
+          </OutlinedButton>
           <ContainedButton
             startIcon={<CurrentCreditsIcon height="18px" width="18px" />}
-            onClick={() => setSelectedProject(projectsWithOrderData[0])}
-            disabled={loadingProjects}
+            onClick={() => setIsBuyFlowStarted(true)}
+            disabled={
+              loadingProjects ||
+              projectsWithOrderData[0]?.sellOrders.length === 0
+            }
           >
             {'BUY CREDITS'}
           </ContainedButton>
@@ -270,7 +292,19 @@ function ProjectDetails(): JSX.Element {
         />
       )}
 
-      <BuySellOrderFlow selectedProject={selectedProject} />
+      <BuySellOrderFlow
+        isFlowStarted={isBuyFlowStarted}
+        setIsFlowStarted={setIsBuyFlowStarted}
+        selectedProject={projectsWithOrderData[0]}
+      />
+      <CreateSellOrderFlow
+        isFlowStarted={isSellFlowStarted}
+        setIsFlowStarted={setIsSellFlowStarted}
+        credits={credits}
+      />
+      {isErrorBannerActive && (
+        <ErrorBanner text="Please install Keplr extension to use Regen Ledger features" />
+      )}
     </Box>
   );
 }

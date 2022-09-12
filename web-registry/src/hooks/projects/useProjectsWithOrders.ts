@@ -28,12 +28,27 @@ const prioritizeWithSellOrders = (
   const projectsWithOrders = projects.filter(projs =>
     hasSellOrders(projs, sellOrders),
   );
-  if (!limit || projectsWithOrders.length >= limit) return projectsWithOrders;
+  // if (!limit || projectsWithOrders.length >= limit) return projectsWithOrders;
 
-  const numProjects = limit - projectsWithOrders.length;
+  // if there is a limit, check if there are already enough projects in the
+  // `projectsWithOrders` subselect
+  if (limit && projectsWithOrders.length >= limit) return projectsWithOrders;
+
+  // if there are no limits, or there are not enough projects with the previous
+  // subselect of `projectsWithOrders`
+  // then we additionally make the subselection of the projects that do not
+  // present sell orders
   const additionalProjects = projects.filter(
     p1 => !projectsWithOrders.some(p2 => p1.id === p2.id),
   );
+
+  // finally we return the two subsets, first with sell orders and then without
+  // sell orders.
+
+  if (!limit) return [...projectsWithOrders, ...additionalProjects];
+
+  // If there is a limit then it is applied from the beginning
+  const numProjects = limit - projectsWithOrders.length;
   return [...projectsWithOrders, ...additionalProjects.slice(0, numProjects)];
 };
 
